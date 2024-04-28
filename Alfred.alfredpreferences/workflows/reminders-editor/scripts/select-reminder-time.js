@@ -10,9 +10,6 @@ const dateChoices = [
 	{ title: "next Thursday", inDays: "Thursday" },
 	{ title: "in 2 weeks", inDays: 14 },
 ];
-
-/** @type {Intl.DateTimeFormatOptions} */
-const format = { weekday: "short", day: "numeric", month: "long" };
 const lang = "en-GB";
 
 //───────────────────────────────────────────────────────────────────────────
@@ -27,30 +24,31 @@ function daysUntilNext(weekday) {
 	return daysUntil;
 }
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const query = (argv[0] || "").trim();
-
+function run() {
 	const alfredArray = dateChoices.map(
 		(/** @type {AlfredItem&{inDays: number|string}} */ choice) => {
-			choice.variables = { selectedDueDate: choice.title }; // label for notification
-			choice.valid = Boolean(query); // only valid with query
 			const inDays =
 				typeof choice.inDays === "number" ? choice.inDays : daysUntilNext(choice.inDays);
-			choice.arg = inDays;
 
 			// display date for subtitle
 			const date = new Date();
 			date.setDate(date.getDate() + inDays);
-			choice.subtitle = date.toLocaleDateString(lang, format);
+			choice.subtitle = "🗓️ " + date.toLocaleDateString(lang, {
+				weekday: "short",
+				day: "numeric",
+				month: "long",
+			});
 
+			choice.variables = {
+				selectedDate: choice.title, // label for Alfred
+				inDays: inDays, // used as argument in next script
+			};
+
+			choice.arg = ""; // empty for next keyword input
 			return choice;
 		},
 	);
 
-	return JSON.stringify({
-		variables: { reminderText: query },
-		items: alfredArray,
-	});
+	return JSON.stringify({ items: alfredArray });
 }

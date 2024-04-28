@@ -67,15 +67,29 @@ function run(argv) {
 
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
-	const response = JSON.parse(httpRequest(apiURL));
+	const response = httpRequest(apiURL);
+	// GUARD
+	if (!response) {
+		return JSON.stringify({
+			items: [
+				{
+					title: "⚠️ GitHub API not responsive.",
+					subtitle: "No network connection or API rate limit. In the later case, try again later.",
+					valid: false,
+				},
+			],
+		});
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
 
 	/** @type {AlfredItem[]} */
-	const repos = response.items
-		.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
+	const repos = JSON.parse(response)
+		.items.filter((/** @type {GithubRepo} */ repo) => !(repo.fork || repo.archived))
 		.map((/** @type {GithubRepo} */ repo) => {
 			// calculate relative date
 			// INFO pushed_at refers to commits only https://github.com/orgs/community/discussions/24442
