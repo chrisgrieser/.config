@@ -129,17 +129,6 @@ function gC {
 	git commit -m "$@" || return 1
 }
 
-# completions for them
-_gc() {
-	[[ $CURRENT -ne 2 ]] && return # only complete first word
-	local cc=("fix" "feat" "chore" "docs" "style" "refactor" "perf"
-		"test" "build" "ci" "revert" "improv" "break")
-	local expl && _description -V conventional-commit expl 'Conventional Commit Keyword'
-	compadd "${expl[@]}" -P'"' -S':' -- "${cc[@]}"
-}
-compdef _gc gc
-compdef _gc gC
-
 #───────────────────────────────────────────────────────────────────────────────
 # SMART AMEND & FIXUP
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
