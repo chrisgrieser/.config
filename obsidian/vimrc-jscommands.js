@@ -39,6 +39,14 @@ function toggleLineNumbers() {
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
 }
 
+
+// biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
+function hideNotices() {
+	// @ts-expect-error
+	// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+	for (const el of activeDocument.body.getElementsByClassName("notice")) el.hide();
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: used by vimrc plugin
