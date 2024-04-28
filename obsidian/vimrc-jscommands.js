@@ -101,3 +101,13 @@ function cycleThemes() {
 	const nextTheme = installedThemes[indexOfNextTheme] || "";
 	app.customCss.setTheme(nextTheme);
 }
+
+function openDynamicHighlightsSettings() {
+	const setting = view.app.setting;
+	setting.open();
+	setting.openTabById("obsidian-dynamic-highlights");
+	// edit first highlight item
+	setting.activeTab.containerEl.find(".highlighter-container").find(".mod-cta").click();
+	// focus query input
+	setting.activeTab.containerEl.find(".query-wrapper").find("input").setSelectionRange(0, 0);
+}
