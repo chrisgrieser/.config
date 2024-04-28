@@ -6,22 +6,23 @@ local u = require("config.utils")
 ---@type table<string, string>
 local lspToMasonMap = {
 	autotools_ls = "autotools-language-server", -- LSP for Makefiles
+	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
+	emmet_language_server = "emmet-language-server", -- css/html completions
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	ruff_lsp = "ruff-lsp", -- python linter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
+	tsserver = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter
 	yamlls = "yaml-language-server",
-	tsserver = "typescript-language-server",
 }
 
 --------------------------------------------------------------------------------
@@ -148,6 +149,15 @@ serverConfigs.stylelint_lsp = {
 	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
 		stylelintplus = { autoFixOnFormat = true },
+	},
+}
+
+
+-- DOCS https://github.com/olrtg/emmet-language-server#neovim
+serverConfigs.emmet_language_server = {
+	filetypes = { "html", "css", "scss" },
+	init_options = {
+		showSuggestionsAsSnippets = true, -- so it works with luasnip
 	},
 }
 
