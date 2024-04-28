@@ -1019,7 +1019,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>obsidian://slurp?url={query}</string>
+				<string>obsidian://slurp?vault=phd-data-analysis&amp;url={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
