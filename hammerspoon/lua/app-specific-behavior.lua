@@ -22,9 +22,10 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
 
 	local action = eventType == aw.launched and "pause" or "play"
-	print("🎵 Spotify: " .. action)
 	local binary = env.homebrewPrefix .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
+
+	print("🎵 Spotify: " .. action)
 end):start()
 
 --------------------------------------------------------------------------------

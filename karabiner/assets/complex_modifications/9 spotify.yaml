@@ -25,7 +25,7 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback previous
-              osascript -e 'display notification "⏮️ Previous with title "Spotify"'
+              osascript -e 'display notification "⏮️ Previous" with title "Spotify"'
       - type: basic
         from: { key_code: f8 }
         to:
@@ -38,8 +38,8 @@ rules:
               fi
               osascript -e 'display notification "⏯️ Play/Pause" with title "Spotify"'
 
-              -- enable "repeat all"
-              repeat_state=$(spotify_player get key playback | yq ".item.repeat_state")
+              # enable "repeat all"
+              repeat_state=$(spotify_player get key playback | yq ".repeat_state")
               if [[ $repeat_state == "off" ]]; then
                 spotify_player playback repeat
                 spotify_player playback repeat
