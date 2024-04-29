@@ -74,21 +74,6 @@ async function updatePlugins() {
 	}, 1000);
 }
 
-function openPluginDirectory() {
-	const app = view.app;
-	app.openWithDefaultApp(app.vault.configDir + "/plugins");
-}
-
-function openSnippetDirectory() {
-	const app = view.app;
-	app.openWithDefaultApp(app.vault.configDir + "/snippets");
-}
-
-function installPluginsFromPluginBrowser() {
-	const app = view.app;
-	app.workspace.protocolHandlers.get("show-plugin")({ id: " " });
-}
-
 function cycleThemes() {
 	const app = view.app;
 	const currentTheme = app.customCss.theme;

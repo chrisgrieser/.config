@@ -1,8 +1,8 @@
 {
   "jscommand": {
     "body": [
-      "exmap ${1:ex-command-name} jscommand { ${3:one-line-of-js} }",
-      "nnoremap ${2:keymap} :${1:ex-command-name}"
+      "exmap ${1:ex-command-name} jscommand { ${2:one-line-of-js} }",
+      "nnoremap ${3:keymap} :${1:ex-command-name}"
     ],
     "prefix": "jscommand"
   },
@@ -15,8 +15,8 @@
   },
   "obcommand": {
     "body": [
-      "exmap ${1:ex-command-name} obcommand ${3:command-id}",
-      "nnoremap ${2:keymap} :${1:ex-command-name}"
+      "exmap ${1:ex-command-name} obcommand ${2:command-id}",
+      "nnoremap ${3:keymap} :${1:ex-command-name}"
     ],
     "prefix": "obcommand"
   }
