@@ -71,13 +71,13 @@ end):start()
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us") -- remove leftover tabs
+
 	u.runWithDelays(1, function()
-		local zoom = u.app("zoom.us")
-		if not zoom or zoom:findWindow("Update") then return end
-		local secondWin = zoom:findWindow("^Zoom$") or zoom:findWindow("^Login$")
-		-- zoom always has an invisible, title-less third window running, thus three
-		if not secondWin or #M.wf_zoom:getWindows() < 3 then return end
-		secondWin:close()
+		local videoWin = u.app("zoom.us")
+		if not videoWin or videoWin:findWindow("Update") then return end
+		local stateWin = videoWin:findWindow("^Zoom$") or videoWin:findWindow("^Login$")
+
+		if stateWin then stateWin:close() end
 	end)
 end)
 
