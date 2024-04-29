@@ -292,14 +292,14 @@ exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
 
 "───────────────────────────────────────────────────────────────────────────────
-" PLUGIN-RELATED BINDINGS
+" PLUGIN- AND SETTING-RELATED BINDINGS
 
 exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
 
 " open [p]lugin [d]irectory
 exmap openPluginDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/plugins'); }
-nnoremap ,ps :openPluginDir
+nnoremap ,pd :openPluginDir
 
 " open [s]nippet directory
 exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/snippets'); }
@@ -320,6 +320,10 @@ nnoremap ,ph :openDynamicHighlightsSettings
 " Cycle Themes
 exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
 nnoremap ,pc :cycleThemes
+
+" Open this vimrc file
+exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
+nnoremap <C-,> :openVimrc
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
