@@ -156,14 +156,14 @@ keymap("n", "Q", function() require("funcs.comment").appendCommentAtEoL() end, {
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move Line Down" })
-keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move Line Up" })
-keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move Char Right" })
-keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move Char Left" })
-keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move Selection down", silent = true })
-keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move Selection up", silent = true })
-keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move Selection right" })
-keymap("x", "<Left>", [["zdh"zPgvhoho]], { desc = "⬅ Move Selection left" })
+keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" })
+keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
+keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
+keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
+keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
+keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", silent = true })
+keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
+keymap("x", "<left>", [["zdh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
 

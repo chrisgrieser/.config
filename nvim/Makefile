@@ -4,19 +4,26 @@
 # prints total length of config
 lines:
 	echo ;\
-	find . -name "*.lua" | xargs wc -l | sort -r
+	find . -name "*.lua" | xargs wc -l | sort --reverse
 
-# prints remote repo of all installed plugins as markdown links
+# updates README.md with current list of installed plugins
+# INFO uses macOS' `sed` and `open`
 plugins:
+	nvim_readme="$$HOME/.config/nvim/README.md" ; \
+	last_line_before_plugins="## All installed plugins" ; \
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
+	\
+	sed -i '' -n "1,/$$last_line_before_plugins/p" "$$nvim_readme" ; \
+	\
 	cd "$$location_of_installed_plugins" ; \
-	grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config | \
-		sed 's/.git$$//' | \
-		cut -c20- | \
-		sed -E 's|(.*)|- [\1](https://github.com/\1)|' | \
-		sort -i
+	grep --only-matching --no-filename --max-count=1 "url = .*" ./*/.git/config | \
+		sed 's/.git$$//' | cut -c7- | \
+		sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' | \
+		sort --ignore-case >> "$$nvim_readme" ; \
+	\
+	open "$$nvim_readme"
 
-# runs minimal config for debugging purposes
+# runs minimal config for debugging purposes with neovide
 debug:
 	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
 	neovide ./debug/test.lua -- -u ./debug/repro.lua
