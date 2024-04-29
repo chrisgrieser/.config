@@ -70,7 +70,7 @@ function s {
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
-
+	selected=$(echo "$selected" | head -n1) # only take first line, in case line contains `\n`
 	file_path=$(echo "$selected" | cut -d':' -f1)
 	ln=$(echo "$selected" | cut -d':' -f2)
 	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
