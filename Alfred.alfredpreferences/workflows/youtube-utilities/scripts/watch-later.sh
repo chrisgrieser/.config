@@ -2,6 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
+# browser app set in `.zshenv`
 url=$(osascript -e "tell application \"$BROWSER_APP\" to return URL of active tab of front window")
 
 # GUARD
@@ -20,13 +21,12 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # CREATE ICON FILE
-youtube_id=$(echo "$url" | cut -d "=" -f2)
+youtube_id=$(echo "$url" | cut -d"=" -f2)
 title=$(
-	curl -s "$url" |
-		grep -o "<title>[^<]*" |
-		cut -d'>' -f2- |
-		tr "/:" "--" |
-		sed -e 's/ - YouTube//' -e 's/amp;//g'
+	curl --silent "$url" |
+		grep --only-matching "<title>[^<]*" | cut -d'>' -f2- | # get title key
+		tr "/:" "--" | # remove unsafe chars
+		sed -e 's/ - YouTube//' -e 's/amp;//g' # cleanup
 )
 
 destination="$youtube_link_folder/$title.url"
