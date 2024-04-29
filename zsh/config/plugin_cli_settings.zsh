@@ -44,7 +44,7 @@ export GH_NO_UPDATE_NOTIFIER=1
 
 # DOCS https://fx.wtf/configuration
 export FX_SHOW_SIZE=true
-export FX_THEME=6
+export FX_THEME=3 # fx --themes
 
 #───────────────────────────────────────────────────────────────────────────────
 
