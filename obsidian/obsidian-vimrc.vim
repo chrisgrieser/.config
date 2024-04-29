@@ -298,16 +298,20 @@ exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
 
 " open [p]lugin [d]irectory
-exmap openPluginDirectory jsfile Meta/vimrc-jscommands.js { openPluginDirectory() }
-nnoremap ,pd :openPluginDirectory
+exmap openPluginDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/plugins'); }
+nnoremap ,ps :openPluginDir
 
 " open [s]nippet directory
-exmap openSnippetDirectory jsfile Meta/vimrc-jscommands.js { openSnippetDirectory() }
-nnoremap ,ps :openSnippetDirectory
+exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/snippets'); }
+nnoremap ,ps :openSnippetDir
 
 " [i] install [p]lugins
-exmap installPluginsFromPluginBrowser jsfile Meta/vimrc-jscommands.js { installPluginsFromPluginBrowser() }
-nnoremap ,pi :installPluginsFromPluginBrowser
+exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
+nnoremap ,pi :installPlugins
+
+" open trash
+exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
+nnoremap ,t :openTrash
 
 " dynamic [h]ighlights settings
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jscommands.js { openDynamicHighlightsSettings() }
