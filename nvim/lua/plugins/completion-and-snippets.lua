@@ -130,11 +130,22 @@ local function cmpconfig()
 				local maxLength = 50
 				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
+				-- distinguish emmet snippets
+				local ft = vim.bo[entry.context.bufnr].filetype
+				local isEmmet = entry.source.name == "nvim_lsp"
+					and item.kind == "Snippet"
+					and ft == "css"
+
 				-- set icons
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
-				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-				item.menu = sourceIcons[entry.source.name] .. " "
+				if isEmmet then
+					item.menu = ""
+					item.kind = ""
+				else
+					item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
+					item.menu = sourceIcons[entry.source.name] .. " "
+				end
 
 				return item
 			end,
