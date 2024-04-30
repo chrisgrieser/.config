@@ -74,12 +74,8 @@ export NODE_REPL_HISTORY=""
 export npm_config_fund=false
 export npm_config_update_notifier=false # updating via homebrew
 
-# temporary fix for hanging at "sill: idealTree build"
-function npm_temp_ssl_fix {
-	export npm_config_strict_ssl=false
-	echo "Proper Fix"
-	echo "reinstalling brew package \`openssl@3\` *and* \`ca-certificates\`."
-	echo "the latter adds the symlink target for the openssl certificate"
-}
+# FIX for hanging at "sill: idealTree build"
+# temporary: export npm_config_strict_ssl=false
+# permanent: brew reinstall openssl@3 ca-certificates
 
 #───────────────────────────────────────────────────────────────────────────────

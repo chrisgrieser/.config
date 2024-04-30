@@ -1,6 +1,0 @@
-# DOCS http://docs.bpython-interpreter.org/configuration.html
-#───────────────────────────────────────────────────────────────────────────────
-
-[general]
-hist_length = 0
-autocomplete_mode = "fuzzy"

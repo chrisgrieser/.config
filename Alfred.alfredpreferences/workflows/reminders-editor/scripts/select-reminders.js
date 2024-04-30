@@ -38,20 +38,23 @@ function run() {
 	// PERF query filters directly for completed reminders
 	const completedArg = showCompleted ? "--include-completed" : "";
 	const shellCmd = `reminders show "${list}" ${completedArg} --format="json"`;
+
+	const today = new Date();
+	today.setHours(23, 59, 59, 0); // to include reminders later that day
+
 	/** @type {reminderObj[]} */
 	const responseJson = JSON.parse(app.doShellScript(shellCmd));
 	const remindersFiltered = responseJson.filter((rem) => {
-		const dueDate = new Date(rem.dueDate);
-		const today = new Date();
-		today.setHours(23, 59, 0, 0); // to include reminders later that day
+		const dueDate = rem.dueDate && new Date(rem.dueDate);
+		const noDueDate = rem.dueDate === undefined;
 		const openAndDueBeforeToday = !rem.isCompleted && dueDate < today;
-		const completedAndDueToday = rem.isCompleted && isToday(dueDate);
-		return openAndDueBeforeToday || completedAndDueToday;
+		const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
+		return openAndDueBeforeToday || completedAndDueToday || noDueDate;
 	});
 
 	/** @type {AlfredItem[]} */
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, externalId, isCompleted } = rem;
+		const { title, notes, externalId, isCompleted, dueDate } = rem;
 		const body = notes || "";
 		const displayBody = body.trim().replace(/\n+/g, " · ");
 		const content = title + "\n" + body;
@@ -59,7 +62,8 @@ function run() {
 		const [url] = content.match(urlRegex) || [];
 		let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
 		if (url && !isCompleted) urlSubtitle += " and mark as completed";
-		const emoji = isCompleted ? "☑️ " : "";
+		let emoji = isCompleted ? "☑️ " : "";
+		if (!dueDate) emoji += "❌🗓️ "; // indicator for missing due date
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
