@@ -111,11 +111,12 @@ end
 
 ---select layout depending on number of screens, and prevent concurrent runs
 local function selectLayout()
+	local maxSecsBetweenLayoutingAttempts = 5 -- CONFIG
 	if M.isLayouting then return end
 	M.isLayouting = true
 	local layout = env.isProjector() and movieLayout or workLayout
 	layout()
-	u.runWithDelays(4, function() M.isLayouting = false end)
+	u.runWithDelays(maxSecsBetweenLayoutingAttempts, function() M.isLayouting = false end)
 end
 
 --------------------------------------------------------------------------------
@@ -128,8 +129,8 @@ M.caff_displayCount = hs.screen.watcher
 
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
-		if u.betweenTime(21, 7) and not env.isProjector() then
-			u.runWithDelays(3, hs.caffeinate.systemSleep)
+		if u.betweenTime(22, 7) and not env.isProjector() and not env.isAtOffice then
+			wu.iMacDisplay:setBrightness(0)
 			u.runWithDelays(4, u.closeAllTheThings)
 		end
 	end)

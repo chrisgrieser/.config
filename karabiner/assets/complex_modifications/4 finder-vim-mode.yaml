@@ -647,30 +647,13 @@ rules:
         to:
           - { key_code: i, modifiers: [command, option] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # v = view options
+      # v = open first (removable) volume
       - type: basic
         from: { key_code: v }
         to_if_alone:
-          - { key_code: j, modifiers: [command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # V = preview options
-      - type: basic
-        from: { key_code: v, modifiers: { mandatory: [shift] } }
-        to_if_alone:
           - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Show Preview Options" of menu "View" of menu bar 1
-                end tell'
+              open "$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ö (de) / ; (en) = toggle grouping
-      - type: basic
-        from: { key_code: semicolon } # ö in German
-        to_if_alone:
-          - { key_code: "0", modifiers: [command, control] }
-        # No keyboard-specific condition needed, since it's the same key
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      - type: basic
       # u = undo
       - type: basic
         from: { key_code: u }
@@ -1296,11 +1279,13 @@ rules:
       - type: basic
         from: { key_code: n, modifiers: { mandatory: [control] } }
         to:
-          - key_code: return_or_enter
-          - { key_code: "c", modifiers: [command] }
-          - key_code: escape
-          - shell_command:
-              osascript -e 'display notification "✅ Filename copied" with title "Finder Vim Mode"'
+          - shell_command: |
+              SEL=$(osascript -e 'tell application "Finder"
+                display notification "✅ Filename copied" with title "Finder Vim Mode"
+                set sel to (item 1 of (get selection) as text)
+                return POSIX path of sel
+              end tell')
+              basename "$SEL" | pbcopy
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-t: copy git-relative path
       - type: basic
