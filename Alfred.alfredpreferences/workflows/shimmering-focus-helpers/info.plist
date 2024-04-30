@@ -283,7 +283,34 @@
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>main</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>main</string>
+						<string>main</string>
+					</array>
+					<array>
+						<string>insider-release</string>
+						<string>insider-release</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Branch to use</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>branch_to_use</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

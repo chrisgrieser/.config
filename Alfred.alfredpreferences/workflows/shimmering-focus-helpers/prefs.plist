@@ -2,9 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>local_repo_css_path</key>
-	<string>~/Repos/shimmering-focus/source.css</string>
-	<key>local_repo_folder</key>
-	<string>~/Repos</string>
+	<key>branch_to_use</key>
+	<string>insider-release</string>
 </dict>
 </plist>

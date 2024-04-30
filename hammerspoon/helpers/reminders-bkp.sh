@@ -1,14 +1,23 @@
 #!/usr/bin/env zsh
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # CONFIG
 list_name="Tasks"
-
+max_number_of_bkps=60
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO $DATA_DIR defined in .zshenv
-today=$(date +"%Y-%m-%d")
-backup_location="${DATA_DIR}/Backups/Reminders/${today}.json"
+timestamp=$(date +"%Y-%m-%d_%H-%M")
+bkp_destination="$DATA_DIR/Backups/Reminders"
+backup_file="$bkp_destination/${timestamp}.json"
 
-reminders show "$list_name" --format=json --due-date="today" >>"$backup_location"
-reminders show "$list_name" --format=json --due-date="yesterday" >>"$backup_location"
+mkdir -p "$bkp_destination"
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+reminders show "$list_name" --format=json --due-date="today" >>"$backup_file"
+reminders show "$list_name" --format=json --due-date="yesterday" >>"$backup_file"
+
+#───────────────────────────────────────────────────────────────────────────────
+# restrict number of backups
+cd "$bkp_destination" || return 1
+actual_number=$((max_number_of_bkps + 1))
+# shellcheck disable=2012
+ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
