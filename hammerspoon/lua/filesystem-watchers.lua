@@ -27,11 +27,6 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
 
-		-- FIX Brave downloads being hidden https://community.brave.com/t/all-downloads-are-showing-as-hidden-on-mac/508032
-		-- if not fileName:find("^%.") then
-		-- 	hs.execute(("ls -lO %q | grep -q 'hidden' && chflags nohidden %q"):format(filep, filep))
-		-- end
-
 		-- 1. AUTO-REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
 			u.runWithDelays(3, function() os.remove(filep) end)
@@ -71,6 +66,9 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 		elseif fileName == "devdocs.json" then
 			os.rename(filep, browserSettings .. "devdocs-settings.json")
 			print("➡️ DevDocs Settings backup")
+		elseif fileName:find("stylus%-.*%.json") then
+			os.rename(filep, browserSettings .. "stylus.json")
+			print("➡️ Stylus Settings backup")
 		end
 	end
 end):start()

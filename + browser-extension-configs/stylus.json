@@ -1,0 +1,156 @@
+[
+  {
+    "settings": {
+      "openEditInWindow": true,
+      "openEditInWindow.popup": true,
+      "windowPosition": {},
+      "show-badge": true,
+      "disableAll": false,
+      "exposeIframes": false,
+      "exposeStyleName": false,
+      "newStyleAsUsercss": false,
+      "styleViaASS": false,
+      "styleViaXhr": false,
+      "patchCsp": false,
+      "urlInstaller": true,
+      "config.autosave": true,
+      "schemeSwitcher.enabled": "system",
+      "schemeSwitcher.nightStart": "18:00",
+      "schemeSwitcher.nightEnd": "06:00",
+      "popup.enabledFirst": true,
+      "popup.stylesFirst": true,
+      "popup.autoResort": false,
+      "popup.borders": false,
+      "popup.findSort": "w",
+      "manage.onlyEnabled": false,
+      "manage.onlyLocal": false,
+      "manage.onlyUsercss": false,
+      "manage.onlyEnabled.invert": false,
+      "manage.onlyLocal.invert": false,
+      "manage.onlyUsercss.invert": false,
+      "manage.actions.expanded": true,
+      "manage.backup.expanded": true,
+      "manage.filters.expanded": true,
+      "manage.minColumnWidth": 750,
+      "manage.newUI": true,
+      "manage.newUI.favicons": true,
+      "manage.newUI.faviconsGray": false,
+      "manage.newUI.targets": 3,
+      "manage.newUI.sort": "title,asc",
+      "manage.searchMode": "meta",
+      "editor.options": {},
+      "editor.toc.expanded": false,
+      "editor.options.expanded": true,
+      "editor.lint.expanded": true,
+      "editor.publish.expanded": true,
+      "editor.lineWrapping": true,
+      "editor.smartIndent": true,
+      "editor.indentWithTabs": true,
+      "editor.tabSize": 4,
+      "editor.keyMap": "vim",
+      "editor.theme": "default",
+      "editor.beautify": {
+        "selector_separator_newline": true,
+        "newline_before_open_brace": false,
+        "newline_after_open_brace": true,
+        "newline_between_properties": true,
+        "newline_before_close_brace": true,
+        "newline_between_rules": false,
+        "preserve_newlines": true,
+        "end_with_newline": false,
+        "indent_conditional": true,
+        "indent_mozdoc": true,
+        "space_around_combinator": true,
+        "space_around_cmp": false
+      },
+      "editor.beautify.hotkey": "",
+      "editor.lintDelay": 300,
+      "editor.linter": "stylelint",
+      "editor.lintReportDelay": 500,
+      "editor.matchHighlight": "token",
+      "editor.autoCloseBrackets": true,
+      "editor.autocompleteOnTyping": true,
+      "editor.contextDelete": false,
+      "editor.selectByTokens": true,
+      "editor.arrowKeysTraverse": true,
+      "editor.appliesToLineWidget": true,
+      "editor.autosaveDraft": 10,
+      "editor.livePreview": true,
+      "editor.targetsFirst": true,
+      "editor.colorpicker": true,
+      "editor.colorpicker.hexUppercase": false,
+      "editor.colorpicker.hotkey": "",
+      "editor.colorpicker.color": "",
+      "editor.colorpicker.maxHeight": 300,
+      "hotkey._execute_browser_action": "",
+      "hotkey.openManage": "",
+      "hotkey.styleDisableAll": "",
+      "sync.enabled": "google",
+      "iconset": -1,
+      "badgeDisabled": "#8B0000",
+      "badgeNormal": "#006666",
+      "headerWidth.edit": 260,
+      "headerWidth.install": 260,
+      "headerWidth.manage": 260,
+      "popupWidth": 246,
+      "popupWidthMax": 280,
+      "updateInterval": 24,
+      "updateOnlyEnabled": true
+    },
+    "order": {
+      "main": [],
+      "prio": []
+    }
+  },
+  {
+    "enabled": true,
+    "installDate": 1714482701413,
+    "name": "Google Search",
+    "sections": [
+      {
+        "code": "div:has(> #tools_1),\nstyle + div > div[role=\"navigation\"],\nstyle + div:has(> div[role=\"navigation\"]) {\n    display: none\n}\n\n#grepper_add_answer_button {\n\tdisplay: none !important;\n}",
+        "urlPrefixes": [
+          "https://www.google.com/search"
+        ]
+      }
+    ],
+    "updateDate": 1714483678347,
+    "_id": "1419ca55-a7eb-4d3e-9136-3743e2a042d6",
+    "_rev": 1714483678347,
+    "id": 1
+  },
+  {
+    "enabled": true,
+    "installDate": 1714483748745,
+    "name": "MyAnimeList",
+    "sections": [
+      {
+        "code": "p[itemprop=\"description\"] {\n\tfont-size: 1.3em;\n}",
+        "urlPrefixes": [
+          "https://myanimelist.net/anime/"
+        ]
+      }
+    ],
+    "updateDate": 1714483815042,
+    "_id": "1997a147-25dd-42c0-8cb7-30af60b1326c",
+    "_rev": 1714483815043,
+    "id": 2
+  },
+  {
+    "enabled": true,
+    "installDate": 1714486578670,
+    "name": "Obsidian developer docs",
+    "sections": [
+      {
+        "code": "body .site-footer,\nbody .site-body-right-column .site-body-right-column-inner {\n\tdisplay: none;\n}\n\nbody .published-container {\n\t--sidebar-right-width: 0px;\n}",
+        "urlPrefixes": [
+          "https://docs.obsidian.md"
+        ]
+      }
+    ],
+    "updateDate": 1714486839498,
+    "_id": "8f85b535-fc91-4e26-a07e-cfc4c8d6d061",
+    "_rev": 1714486839498,
+    "id": 4
+  }
+]
