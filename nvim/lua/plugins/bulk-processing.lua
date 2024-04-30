@@ -57,9 +57,9 @@ return {
 	{ -- better macros
 		"chrisgrieser/nvim-recorder",
 		keys = {
-			{ "0", desc = " Start/Stop Recording" },
-			{ "9", desc = "/ Continue/Play" },
-			{ "8", desc = "/ Breakpoint" },
+			{ "0", desc = "  Start/Stop Recording" },
+			{ "9", desc = " /  Continue/Play" },
+			{ "8", desc = " /  Breakpoint" },
 		},
 		opts = {
 			clear = true,
@@ -74,7 +74,7 @@ return {
 				addBreakPoint = "8",
 			},
 			dapSharedKeymaps = true,
-			performanceOpts = { countThreshold = 10 },
+			performanceOpts = { countThreshold = 101 },
 		},
 		config = function(_, opts)
 			require("recorder").setup(opts)
