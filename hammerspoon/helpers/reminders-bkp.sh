@@ -6,9 +6,9 @@ max_number_of_bkps=60
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO $DATA_DIR defined in .zshenv
-timestamp=$(date +"%Y-%m-%d_%H-%M")
+isodate=$(date +"%Y-%m-%d")
 bkp_destination="$DATA_DIR/Backups/Reminders"
-backup_file="$bkp_destination/${timestamp}.json"
+backup_file="$bkp_destination/${isodate}.json"
 
 mkdir -p "$bkp_destination"
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
