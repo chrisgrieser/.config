@@ -191,6 +191,12 @@ function gu {
 	open "$url"
 }
 
+# new branch
+function new_branch {
+	git checkout -b "$1"
+	git push --set-upstream origin "$1"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 # uses `_gitlog` from magic-dashboard.zsh
