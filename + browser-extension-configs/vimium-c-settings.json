@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "3/25/2024, 4:06:07 PM",
-	"time": 1711379167795,
+	"@time": "4/30/2024, 5:20:59 PM",
+	"time": 1714490459910,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -126,7 +126,7 @@
 		"map t Vomnibar.activateTabSelection",
 		"",
 		"\" windows",
-		"map S moveTabToNewWindow",
+		"map <c-v> moveTabToNewWindow",
 		"map M joinTabs",
 		"map P moveTabToIncognito",
 		"",
