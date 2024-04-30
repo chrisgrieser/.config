@@ -119,7 +119,7 @@
         2
       ]
     },
-    "t\nto recent folder",
+    "t\nto recent folder\n\n\n^t rela",
     {
       "f": 2
     },
@@ -133,7 +133,7 @@
     },
     "i (I)\ninfo panel (window)",
     "o (O)\nopen folds (recursive)",
-    "p (P)\npaste (into file)\n\n\n⌃p path",
+    "p (P)\npaste (into file)\n\n\n⌃p abs",
     {
       "c": "#CCCCCC",
       "f": 2
@@ -179,14 +179,11 @@
     "a (A)\nselect all (only files)",
     "s (S)\nfollow (create) symlink",
     "d (D)\ntrash file (open trash)",
-    {
-      "n": true
-    },
     "f (F)\nfind mode (flatten dirs)",
     {
       "f": 2
     },
-    "gg (G)\nto top (bottom)\n\n\n^g gith.",
+    "gg (G)\nto top (bottom)\n\n\n^g gith",
     {
       "sm": "cherry",
       "fa": [
@@ -199,8 +196,7 @@
     },
     "h (H)\nparent dir (new win)\n\n\n⌃h back",
     {
-      "f": 2,
-      "n": true
+      "f": 2
     },
     "j (J)\ndown (6x)",
     {
@@ -208,14 +204,17 @@
     },
     "k (K)\nup <br>(6x)",
     {
-      "f": 1
+      "f": 1,
+      "fa": [
+        2
+      ]
     },
     "l (L)\nopen file (new win)\n\n\n⌃l forw",
-    "de:&nbspö,&nbspen:&nbsp;;\ntoggle grouping",
     {
       "c": "#CCCCCC",
       "f": 2
     },
+    "ö",
     "ä",
     "#",
     {
@@ -252,7 +251,7 @@
       "f": 2,
       "f2": 1
     },
-    "v (V)\n(pre)view options",
+    "v\nto 1st ejectable volume",
     {
       "f": 1,
       "fa": [
@@ -303,12 +302,6 @@
       "n": true
     },
     "↑\nsort by size",
-    {
-      "fa": [
-        3,
-        1
-      ]
-    },
     "end\nsort by tags"
   ],
   [

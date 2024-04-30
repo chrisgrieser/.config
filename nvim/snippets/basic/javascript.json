@@ -44,6 +44,10 @@
       "exclude (TypeScript)"
     ]
   },
+  "ec (export const)": {
+    "body": "export const ${1:CONSTANT}",
+    "prefix": "ec (export const)"
+  },
   "ef (export function)": {
     "body": [
       "export function ${1:name}($2) {",
