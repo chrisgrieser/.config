@@ -68,7 +68,7 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 # https://nodejs.org/api/repl.html#repl_environment_variable_options
 export NODE_REPL_HISTORY=""
 
-# INFO instead of writing npm config to ~/.npmrc, they can also be defined as shell
+# instead of writing npm config to `.npmrc`, can also be defined as shell
 # environment variables. Has to be lower-case though.
 # https://docs.npmjs.com/cli/v9/using-npm/config#environment-variables
 export npm_config_fund=false

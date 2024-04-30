@@ -238,12 +238,11 @@ rules:
         to:
           # FIX page reloading needed, since vimium is otherwise stuck
           - shell_command: |
-              source "$HOME/.zshenv" && open -a "$BROWSER_APP"
+              source "$HOME/.zshenv" # load $BROWSER_APP
               osascript -e "
                 tell application \"System Events\" to tell process \"$BROWSER_APP\"
                   set frontmost to true
                   click menu item \"Reopen Closed Tab\" of menu \"File\" of menu bar 1
-                  sleep 0.5
                   click menu item \"Reload This Page\" of menu \"View\" of menu bar 1
                 end tell"
           - *deactivate-leader
