@@ -188,7 +188,8 @@ M.aw_discord = aw.new(function(appName, eventType)
 	if not clipb then return end
 
 	if eventType == aw.launched or eventType == aw.launching then
-		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+		local uri = "discord://discord.com/channels/686053708261228577/700466324840775831"
+		u.runWithDelays(1, function() u.openLinkInBg(uri) end)
 	elseif eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$")
 		local hasObsidianURL = clipb:find("^obsidian://%S+$")

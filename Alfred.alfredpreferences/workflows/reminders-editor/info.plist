@@ -1204,7 +1204,7 @@
 				<key>subtext</key>
 				<string>🗓️ {var:selectedDate}</string>
 				<key>text</key>
-				<string>New Reminder "{query}"</string>
+				<string>New Reminder: "{query}"</string>
 				<key>withspace</key>
 				<false/>
 			</dict>

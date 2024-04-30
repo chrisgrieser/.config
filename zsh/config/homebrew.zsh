@@ -47,7 +47,7 @@ function update_cmdline_tools {
 	update=$(softwareupdate --list |
 		grep --only-matching --extended-regexp 'Command Line Tools.*$' |
 		head -n1)
-	if [[ -z "$update" ]] ; then
+	if [[ -z "$update" ]]; then
 		echo "No update of command line tools available."
 		return 0
 	fi
@@ -66,9 +66,9 @@ function update() {
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
+	# mas upgrade
 
 	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
-	# mas upgrade
 	mas_updates=$(mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade)
 	[[ -z "$mas_updates" ]] && echo "No MAS updates."
 
