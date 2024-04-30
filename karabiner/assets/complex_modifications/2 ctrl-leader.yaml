@@ -173,8 +173,8 @@ rules:
           - shell_command: |
               osascript -e '
                 tell application "Reminders" to activate
-                tell application "System Events" to tell process "Reminders" 
-                  click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1 
+                tell application "System Events" to tell process "Reminders"
+                  click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1
                 end tell'
           - *deactivate-leader
           - *remove-notice
@@ -236,12 +236,16 @@ rules:
         from: { key_code: b, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
+          # FIX page reloading needed, since vimium is otherwise stuck
           - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Brave Browser" 
-                  set frontmost to true 
-                  click menu item "Reopen Closed Tab" of menu "File" of menu bar 1 
-                end tell'
+              source "$HOME/.zshenv" && open -a "$BROWSER_APP"
+              osascript -e "
+                tell application \"System Events\" to tell process \"$BROWSER_APP\"
+                  set frontmost to true
+                  click menu item \"Reopen Closed Tab\" of menu \"File\" of menu bar 1
+                  sleep 0.5
+                  click menu item \"Reload This Page\" of menu \"View\" of menu bar 1
+                end tell"
           - *deactivate-leader
           - *remove-notice
 
