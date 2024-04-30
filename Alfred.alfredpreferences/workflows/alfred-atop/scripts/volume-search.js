@@ -1,16 +1,16 @@
 #!/usr/bin/env osascript -l JavaScript
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const app = Application.currentApplication();
-	app.includeStandardAdditions = true;
-
 	let rerunSecs = 4; // slow reruns as default
 
 	/** @type AlfredItem[] */
 	const volumes = app
-		.doShellScript("df -hY") // -h: human readable sizes, -Y: show filesystem format
+		.doShellScript("df -HY") // -H: human readable sizes (base10), -Y: filesystem format
 		.split("\r")
 		.filter((line) => line.includes(" /Volumes/"))
 		.map((vol) => {
@@ -19,7 +19,7 @@ function run() {
 
 			const info = vol
 				.split(/\s+/)
-				.map((value) => value.replaceAll("unavailable", "…").replace(/([GT])i/, "$1B"));
+				.map((value) => value.replaceAll("unavailable", "…").replace(/([GTMk])/, "$1b"));
 
 			const [_, format, total, used, available, share] = info;
 			const path = info.slice(9).join(" ");
