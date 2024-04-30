@@ -27,7 +27,10 @@ cd "$LOCAL_REPOS" || return 1
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history
 branch_to_use=${branch_to_use:-main} # default value: "main"
-git clone --branch="$branch_to_use" --depth=2 --filter="blob:none" "$remote_ssh"
+if ! git clone --branch="$branch_to_use" --depth=2 --filter="blob:none" "$remote_ssh" >&2; then
+	osascript -e 'display notification "Could not clone." with title "Error"'
+	return 1
+fi
 
 # switch to symlink for each vault (from perma-repos)
 echo "$theme_folders" | while read -r theme_file; do

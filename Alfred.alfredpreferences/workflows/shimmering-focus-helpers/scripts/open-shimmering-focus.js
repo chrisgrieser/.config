@@ -12,7 +12,9 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-const alfredMatcher = (/** @type {string} */ str) => str.replace(/[-()_:.]/g, " ") + " " + str + " ";
+const alfredMatcher = (/** @type {string} */ str) =>
+	str.replace(/[-()_:.]/g, " ") + " " + str + " ";
+
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
 //───────────────────────────────────────────────────────────────────────────
@@ -23,14 +25,24 @@ function run() {
 	const localRepos = app.doShellScript('source "$HOME/.zshenv" && echo "$LOCAL_REPOS"');
 	const sfPath = localRepos + "/shimmering-focus/theme.css";
 
-	// GUARD Repo needs to be cloned
+	//───────────────────────────────────────────────────────────────────────────
+	// REPO NEEDS TO BE CLONED
+
 	if (!fileExists(sfPath)) {
+		const branch = $.getenv("branch_to_use");
 		return JSON.stringify({
-			items: [{ title: "Clone the Repo", arg: "clone" }],
+			items: [
+				{
+					title: "Clone the Repo",
+					subtitle: `Branch: ${branch}`,
+					arg: "clone",
+				},
+			],
 		});
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
+	// SELECT NAVIGATION MARKER
 
 	let lineNum = 0;
 	const navigationMarkers = readFile(sfPath)
@@ -39,7 +51,7 @@ function run() {
 			lineNum++;
 
 			// GUARD line is not marker
-			if (!(line.startsWith("/* <") || line.startsWith("  - # <<"))) return {};
+			if (!line.startsWith("/* <") && !line.startsWith("  - # <<")) return {};
 
 			const name = line
 				.replace(/ \*\/$/, "") // comment-ending
