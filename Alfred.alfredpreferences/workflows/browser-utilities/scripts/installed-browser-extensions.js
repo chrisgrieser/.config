@@ -20,10 +20,13 @@ function readFile(path) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const browserDefaultsPath = argv[0];
+function run() {
+	// CONFIG
+	const browserDefaultsPath = app.doShellScript(
+		'source $HOME/.zshenv ; echo "$BROWSER_DEFAULTS_PATH"',
+	);
+
 	const extensionFolder =
 		app.pathTo("home folder") +
 		`/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
@@ -50,13 +53,17 @@ function run(argv) {
 			}
 
 			// determine options path
-			const optionsPath = manifest.options_ui?.page || manifest.options_page || "";
-			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
-			const localFolder = extensionFolder + "/" + id;
-			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
+			let optionsPath = manifest.options_ui?.page || manifest.options_page || "";
+
+			// SPECIAL Stylus
+			if (name === "Stylus") optionsPath = "manage.html";
 
 			// SPECIAL anchor for AdGuard, directly go to user rules
 			const anchor = name === "AdGuard AdBlocker" ? "#user-filter" : "";
+
+			const optionsUrl = `chrome-extension://${id}/${optionsPath}${anchor}`;
+			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
+			const localFolder = extensionFolder + "/" + id;
 
 			// emoji/icon
 			const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
