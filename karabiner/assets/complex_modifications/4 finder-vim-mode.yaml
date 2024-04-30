@@ -575,7 +575,7 @@ rules:
         to_if_alone:
           - { key_code: v, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
-      # P = paste text into file
+      # P = paste (append) text into file
       - type: basic
         from: { key_code: p, modifiers: { mandatory: [shift] } }
         to:
@@ -652,7 +652,13 @@ rules:
         from: { key_code: v }
         to_if_alone:
           - shell_command: |
-              open "$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')"
+              # alternative: tell application "Finder" to return name of (first disk whose ejectable is true)
+              first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+              if [[ -n $first_volume ]] ; then
+                open "$first_volume"
+              else
+                osascript -e 'display notification "No ejectable volumes found." with title "Finder Vim Mode"'
+              fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
       - type: basic
@@ -820,10 +826,8 @@ rules:
         from: { key_code: period }
         to:
           - { key_code: period, modifiers: [command, shift] }
-          - shell_command:
-              afplay
-              '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf'
-              &
+          - shell_command: |
+              afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/facetime/multiway_leave.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # Navigation
@@ -832,34 +836,30 @@ rules:
         from: { key_code: o }
         to_if_alone:
           - key_code: right_arrow
-          - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf"
-              & # codespell-ignore
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: o, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: right_arrow, modifiers: [option] }
-          - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf"
-              & # codespell-ignore
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # c = close/collapse fold (C: do it recursively)
       - type: basic
         from: { key_code: c }
         to_if_alone:
           - key_code: left_arrow
-          - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf"
-              & # codespell-ignore
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
         from: { key_code: c, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
-          - shell_command: afplay
-              "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf"
-              & # codespell-ignore
+          - shell_command: |
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # <C-h> = History Back
       - type: basic
@@ -883,37 +883,6 @@ rules:
                 tell application "System Events" to tell process "Finder"
                   click menu item "Forward" of menu "Go" of menu bar 1
                 end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # F = Flatten directories
-      - type: basic
-        from: { key_code: f, modifiers: { mandatory: [shift] } }
-        to:
-          - shell_command: |
-              selectedFiles=$(osascript -e '
-                tell application "Finder" to set selectedFiles to (every item of (get selection))
-                set out to ""
-                repeat with theFile in selectedFiles
-                  set out to out & (POSIX path of (theFile as text)) & linefeed
-                end repeat
-                return out
-              ')
-              [[ -z "$selectedFiles" ]] && return 1
-
-              parent_dir=$(dirname "$(echo "$selectedFiles" | head -n1)")
-
-              echo "$selectedFiles" | while read -r item; do
-                [[ ! -d "$item" ]] && continue
-                # `mv -n` ensures no file is overwritten, and `rmdir` ensures
-                # only empty directories are removed
-                find "$item" -mindepth 1 -print0 -not -type d |
-                  xargs -0 -I {} mv -n "{}" "$parent_dir"
-                find "$item" -print0 -type d | xargs -0 rmdir
-              done
-
-              current_vol=$(osascript -e 'output volume of (get volume settings)')
-              [[ "$current_vol" == "missing value" ]] && current_vol=30
-              vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
-              afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
       # FIND MODE

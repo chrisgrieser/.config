@@ -1,8 +1,8 @@
 [
   {
     "settings": {
-      "openEditInWindow": true,
-      "openEditInWindow.popup": true,
+      "openEditInWindow": false,
+      "openEditInWindow.popup": false,
       "windowPosition": {},
       "show-badge": true,
       "disableAll": false,
@@ -39,15 +39,15 @@
       "manage.newUI.sort": "title,asc",
       "manage.searchMode": "meta",
       "editor.options": {},
-      "editor.toc.expanded": false,
+      "editor.toc.expanded": true,
       "editor.options.expanded": true,
       "editor.lint.expanded": true,
       "editor.publish.expanded": true,
       "editor.lineWrapping": true,
       "editor.smartIndent": true,
-      "editor.indentWithTabs": true,
+      "editor.indentWithTabs": false,
       "editor.tabSize": 4,
-      "editor.keyMap": "vim",
+      "editor.keyMap": "default",
       "editor.theme": "default",
       "editor.beautify": {
         "selector_separator_newline": true,
@@ -65,11 +65,11 @@
       },
       "editor.beautify.hotkey": "",
       "editor.lintDelay": 300,
-      "editor.linter": "stylelint",
+      "editor.linter": "csslint",
       "editor.lintReportDelay": 500,
       "editor.matchHighlight": "token",
       "editor.autoCloseBrackets": true,
-      "editor.autocompleteOnTyping": true,
+      "editor.autocompleteOnTyping": false,
       "editor.contextDelete": false,
       "editor.selectByTokens": true,
       "editor.arrowKeysTraverse": true,
@@ -89,35 +89,18 @@
       "iconset": -1,
       "badgeDisabled": "#8B0000",
       "badgeNormal": "#006666",
-      "headerWidth.edit": 260,
-      "headerWidth.install": 260,
-      "headerWidth.manage": 260,
+      "headerWidth.edit": 280,
+      "headerWidth.install": 280,
+      "headerWidth.manage": 280,
       "popupWidth": 246,
       "popupWidthMax": 280,
       "updateInterval": 24,
-      "updateOnlyEnabled": true
+      "updateOnlyEnabled": false
     },
     "order": {
       "main": [],
       "prio": []
     }
-  },
-  {
-    "enabled": true,
-    "installDate": 1714482701413,
-    "name": "Google Search",
-    "sections": [
-      {
-        "code": "div:has(> #tools_1),\nstyle + div > div[role=\"navigation\"],\nstyle + div:has(> div[role=\"navigation\"]) {\n    display: none\n}\n\n#grepper_add_answer_button {\n\tdisplay: none !important;\n}",
-        "urlPrefixes": [
-          "https://www.google.com/search"
-        ]
-      }
-    ],
-    "updateDate": 1714483678347,
-    "_id": "1419ca55-a7eb-4d3e-9136-3743e2a042d6",
-    "_rev": 1714483678347,
-    "id": 1
   },
   {
     "enabled": true,
@@ -138,6 +121,23 @@
   },
   {
     "enabled": true,
+    "installDate": 1714482701413,
+    "name": "Google Search",
+    "sections": [
+      {
+        "code": "div:has(> #tools_1),\nstyle + div > div[role=\"navigation\"],\nstyle + div:has(> div[role=\"navigation\"]) {\n    display: none\n}\n\n#grepper_add_answer_button {\n\tdisplay: none !important;\n}",
+        "urlPrefixes": [
+          "https://www.google.com/search"
+        ]
+      }
+    ],
+    "updateDate": 1714483678347,
+    "_id": "1419ca55-a7eb-4d3e-9136-3743e2a042d6",
+    "_rev": 1714483678347,
+    "id": 3
+  },
+  {
+    "enabled": true,
     "installDate": 1714486578670,
     "name": "Obsidian developer docs",
     "sections": [
@@ -150,7 +150,7 @@
     ],
     "updateDate": 1714486839498,
     "_id": "8f85b535-fc91-4e26-a07e-cfc4c8d6d061",
-    "_rev": 1714486839498,
+    "_rev": 1714514779169,
     "id": 4
   }
 ]
