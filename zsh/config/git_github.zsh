@@ -191,7 +191,6 @@ function gu {
 	open "$url"
 }
 
-# new branch
 function new_branch {
 	[[ -z "$1" ]] && print "\e[1;33mNo branch name provided.\e[0m" && return 1
 	git checkout -b "$1"
