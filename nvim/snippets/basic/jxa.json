@@ -65,6 +65,22 @@
     "body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));",
     "prefix": "file exists"
   },
+  "file1 is older than file2": {
+    "body": [
+      "/**",
+      " * @param {string} path1",
+      " * @param {string} path2",
+      " * @return {boolean}",
+      " */",
+      "function fileOlderThan(path1, path2) {",
+      "\tconst file1 = Application(\"System Events\").aliases[path1];",
+      "\tif (!file1.exists()) return false;",
+      "\tconst file2 = Application(\"System Events\").aliases[path2];",
+      "\treturn file1.modificationDate() < file2.modificationDate();",
+      "}"
+    ],
+    "prefix": "file1 is older than file2"
+  },
   "front app (process)": {
     "body": [
       "const frontAppName = Application(\"System Events\").processes.whose({ frontmost: true })[0];"
