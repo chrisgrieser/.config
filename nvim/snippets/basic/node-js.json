@@ -1,7 +1,7 @@
 {
-  "home dir": {
+  "home dir (node)": {
     "body": "os.homedir()",
-    "prefix": "home dir"
+    "prefix": "home dir (node)"
   },
   "os (module)": {
     "body": "import * as os from \"os\";",
