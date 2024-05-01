@@ -19,7 +19,8 @@ function browserTab() {
 	// biome-ignore format: long
 	const chromiumVariants = [ "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc" ];
 	const webkitVariants = ["Safari", "Webkit"];
-	let title, url;
+	let title
+	let url;
 	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
 		// @ts-expect-error
 		url = frontmostApp.windows[0].activeTab.url();
