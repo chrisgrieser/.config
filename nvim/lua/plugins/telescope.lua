@@ -1,13 +1,9 @@
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
-
 --------------------------------------------------------------------------------
--- MAPPINGS
 
--- default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/942fe5faef47b21241e970551eba407bc10d9547/lua/telescope/mappings.lua#L133
 local keymappings_I = {
 	["?"] = "which_key",
-
 	["<Tab>"] = "move_selection_worse",
 	["<D-up>"] = "move_to_top",
 	["<D-down>"] = "move_to_bottom",
@@ -20,8 +16,8 @@ local keymappings_I = {
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
-
 	["<D-a>"] = "toggle_all",
+
 	["<M-CR>"] = { -- mapping consistent with fzf-multi-select
 		function(prompt_bufnr)
 			require("telescope.actions").toggle_selection(prompt_bufnr)
@@ -38,7 +34,6 @@ local keymappings_I = {
 		type = "action",
 		opts = { desc = " Send to Quickfix" },
 	},
-
 	["<D-l>"] = {
 		function(prompt_bufnr)
 			local path = require("telescope.actions.state").get_selected_entry().value
@@ -75,7 +70,7 @@ local keymappings_I = {
 }
 
 -- add j/k/q to mappings if normal mode
-local normalModeOnly = {
+local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 	["j"] = "move_selection_worse",
 	["k"] = "move_selection_better",
 	["q"] = {
@@ -84,38 +79,7 @@ local normalModeOnly = {
 		type = "action",
 		opts = { nowait = true, desc = "close" },
 	},
-}
-local keymappings_N = vim.tbl_extend("force", keymappings_I, normalModeOnly)
-
--- toggle `--hidden` & `--no-ignore` for the `find_files` picker
-local function toggleHiddenAndIgnore(prompt_bufnr)
-	local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-	local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-
-	-- hidden status not stored, but title is, so we determine the previous state via title
-	local prevTitle = current_picker.prompt_title
-	local ignoreHidden = not prevTitle:find("hidden")
-
-	local title = "Find Files: " .. vim.fs.basename(cwd)
-	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
-	local currentQuery = require("telescope.actions.state").get_current_line()
-	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
-
-	require("telescope.actions").close(prompt_bufnr)
-	require("telescope.builtin").find_files {
-		default_text = currentQuery,
-		prompt_title = title,
-		hidden = ignoreHidden,
-		no_ignore = ignoreHidden,
-		cwd = cwd,
-		-- prevent these becoming visible through `--no-ignore`
-		-- stylua: ignore
-		file_ignore_patterns = {
-			"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
-			unpack(existingFileIgnores), -- must be last for all items to be unpacked
-		},
-	}
-end
+})
 
 --------------------------------------------------------------------------------
 -- Nicer Display of file paths https://github.com/nvim-telescope/telescope.nvim/issues/2014
@@ -141,7 +105,6 @@ end
 local function projectName() return vim.fs.basename(vim.loop.cwd() or "") end
 
 --------------------------------------------------------------------------------
-
 -- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
 -- Also, we are using document symbols here since Treesitter apparently does not
@@ -270,7 +233,39 @@ local function telescopeConfig()
 
 				mappings = {
 					i = {
-						["<C-h>"] = { toggleHiddenAndIgnore, type = "action" },
+						["<C-h>"] = {
+							function(prompt_bufnr)
+								local current_picker =
+									require("telescope.actions.state").get_current_picker(prompt_bufnr)
+								local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+
+								-- hidden status not stored, but title is, so we determine the previous state via title
+								local prevTitle = current_picker.prompt_title
+								local ignoreHidden = not prevTitle:find("hidden")
+
+								local title = "Find Files: " .. vim.fs.basename(cwd)
+								if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+								local currentQuery = require("telescope.actions.state").get_current_line()
+								local existingFileIgnores = require("telescope.config").values.file_ignore_patterns
+									or {}
+
+								require("telescope.actions").close(prompt_bufnr)
+								require("telescope.builtin").find_files {
+									default_text = currentQuery,
+									prompt_title = title,
+									hidden = ignoreHidden,
+									no_ignore = ignoreHidden,
+									cwd = cwd,
+									-- stylua: ignore
+									file_ignore_patterns = {
+										"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
+										unpack(existingFileIgnores), -- must be last for all items to be unpacked
+									},
+								}
+							end,
+							type = "action",
+							opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
+						},
 						["<D-p>"] = {
 							function(prompt_bufnr)
 								require("telescope.actions.layout").cycle_layout_next(prompt_bufnr)
@@ -386,9 +381,7 @@ local function telescopeConfig()
 			},
 			highlights = {
 				prompt_prefix = " ",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 20 } },
-				},
+				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 				mappings = {
 					i = {
 						-- copy value of highlight instead of sending a message
@@ -413,27 +406,21 @@ local function telescopeConfig()
 				include_declaration = false,
 				include_current_line = false,
 				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
+				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_definitions = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
 				show_line = false,
 				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
+				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_type_definitions = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
 				show_line = false,
 				initial_mode = "normal",
-				layout_config = {
-					horizontal = { preview_width = { 0.7, min = 30 } },
-				},
+				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_dynamic_workspace_symbols = { -- dynamic = updates results on typing
 				prompt_prefix = "󰒕 ",
