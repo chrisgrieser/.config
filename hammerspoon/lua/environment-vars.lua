@@ -19,7 +19,6 @@ end
 
 M.mastodonApp = "Mona"
 M.browserApp = readZshEnv("BROWSER_APP")
-M.browserDefaultsPath = readZshEnv("BROWSER_DEFAULTS_PATH")
 
 M.transBgApps = {
 	"neovide",
