@@ -40,6 +40,7 @@ M.videoAndAudioApps = {
 	"Jellyfin",
 	"Tageschau",
 	"Crunchyroll",
+	"Steam",
 }
 
 --------------------------------------------------------------------------------

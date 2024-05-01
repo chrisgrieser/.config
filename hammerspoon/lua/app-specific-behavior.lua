@@ -184,13 +184,13 @@ M.wf_mimestream = wf.new("Mimestream")
 M.aw_discord = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
-	local clipb = hs.pasteboard.getContents()
-	if not clipb then return end
-
 	if eventType == aw.launched or eventType == aw.launching then
-		local uri = "discord://discord.com/channels/686053708261228577/700466324840775831"
-		u.runWithDelays(1, function() u.openLinkInBg(uri) end)
-	elseif eventType == aw.activated then
+		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+	end
+
+	local clipb = hs.pasteboard.getContents()
+
+	if clipb and eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$")
 		local hasObsidianURL = clipb:find("^obsidian://%S+$")
 		local isTweet = clipb:find("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
@@ -198,7 +198,7 @@ M.aw_discord = aw.new(function(appName, eventType)
 		if (hasURL or hasObsidianURL) and not (isTweet or isToot) then
 			hs.pasteboard.setContents("<" .. clipb .. ">")
 		end
-	elseif eventType == aw.deactivated then
+	elseif clipb and eventType == aw.deactivated then
 		local hasEnclosedURL = clipb:find("^<https?:%S+>$")
 		local hasEnclosedObsidianURL = clipb:find("^<obsidian:%S+>$")
 		if hasEnclosedURL or hasEnclosedObsidianURL then

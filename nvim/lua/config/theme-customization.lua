@@ -99,7 +99,7 @@ local function themeModifications()
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		updateHl("@keyword.return", "guifg=#fd4283")
-		revertedTodoComments()
+		if mode == "dark" then revertedTodoComments() end
 	elseif theme == "dracula" then
 		boldLualineA()
 		revertedTodoComments()
