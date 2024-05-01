@@ -235,10 +235,12 @@ nnoremap _ mzo<Esc>`z
 nnoremap + <C-a>
 nnoremap ü <C-x>
 
-" basically ts-comment-string, i.e. using the appropriate comment syntax when in
-" a code block
-" exmap contextualComment obcommand contextual-comments:advanced-comments
-" nnoremap qq :contextualComment
+" JS Comments
+nunmap q
+exmap toggleJsLineComment jsfile Meta/vimrc-jscommands.js { toggleJsLineComment() }
+nnoremap qq :toggleJsLineComment
+exmap appendJsComment jsfile Meta/vimrc-jscommands.js { appendJsComment() }
+nnoremap Q :appendJsComment
 
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status

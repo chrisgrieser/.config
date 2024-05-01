@@ -8,11 +8,13 @@ declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
 declare type Editor = {
 	exec(action: string): void;
 	getCursor(): EditorPosition;
+	setCursor(pos: EditorPosition | number, ch?: number): void;
 	wordAt(EditorPosition): EditorRange;
 	getValue(): string;
 	setValue(value: string): void;
 	getFoldOffsets(): number[];
 	getLine(line: number): string;
+	setLine(line: number, text: string): void;
 	replaceSelection(value: string): void;
 	setSelection(anchor: EditorPosition, head: EditorPosition): void;
 	getSelection(): string;
