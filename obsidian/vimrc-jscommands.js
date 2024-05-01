@@ -54,6 +54,26 @@ function inspectWordCount() {
 	new Notice(`Characters: ${charCount} \nWords: ${wordCount}`);
 }
 
+function toggleJsLineComment() {
+	const cursor = editor.getCursor();
+	const text = editor.getLine(cursor.line);
+
+	const [_, indent, comment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
+	const updatedText = comment ? indent + textWithoutComment : indent + "// " + textWithoutComment;
+	cursor.ch = comment ? cursor.ch - 3 : cursor.ch - 2;
+
+	editor.setLine(cursor.line, updatedText);
+	editor.setCursor(cursor);
+}
+
+function appendJsComment() {
+	const cursor = editor.getCursor();
+	const text = editor.getLine(cursor.line);
+	const updatedText = text + " // ";
+	editor.setLine(cursor.line, updatedText);
+	editor.setCursor(cursor.line, updatedText.length);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 async function updatePlugins() {
