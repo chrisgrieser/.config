@@ -26,24 +26,24 @@ function alfredMatcher(str) {
  * @property {string} url
  * @property {"url"|"folder"} type
  * @property {bookmark[]?} children
+ * @property {string?} breadcrumbs // additional property for this workflow
  */
 
 //──────────────────────────────────────────────────────────────────────────────
 
 /**
  * @param {bookmark} item
- * @param {bookmark[]=} acc
+ * @param {bookmark[]} acc
+ * @param {string} breadcrumbs
  * @return {bookmark[]} flattened
  */
-function recursivelyGetBookmarks(item, acc) {
-	if (!acc) acc = [];
-	console.log("⭕ acc:", acc.length);
+function recursivelyGetBookmarks(item, acc, breadcrumbs) {
 	if (item.type === "url") {
+		item.breadcrumbs = breadcrumbs;
 		acc.push(item);
-	} else if (item.type === "folder" && item.children) {
-		for (const child of item.children) {
-			const childBookmarks = recursivelyGetBookmarks(child, acc);
-			acc.push(...childBookmarks);
+	} else if (item.type === "folder") {
+		for (const child of item.children || []) {
+			acc = recursivelyGetBookmarks(child, acc, breadcrumbs + "/" + item.name);
 		}
 	}
 	return acc;
@@ -58,19 +58,18 @@ function run() {
 
 	/** @type {bookmark[]} */
 	let allBookmarks = [];
-	// for (const key in bookmarkJson) {
-	// 	const bms = recursivelyGetBookmarks(bookmarkJson[key]);
-	// 	allBookmarks = allBookmarks.concat(bms);
-	// }
-	allBookmarks = recursivelyGetBookmarks(bookmarkJson.bookmark_bar);
+	for (const key in bookmarkJson) {
+		const bms = recursivelyGetBookmarks(bookmarkJson[key], [], "");
+		allBookmarks = allBookmarks.concat(bms);
+	}
 
 	const bookmarks = allBookmarks.map((bookmark) => {
-		const { name, url } = bookmark;
+		const { name, url, breadcrumbs } = bookmark;
 
 		return {
 			title: name,
 			match: alfredMatcher(name),
-			subtitle: url,
+			subtitle: breadcrumbs || "?",
 			arg: url,
 		};
 	});

@@ -325,6 +325,7 @@ return {
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰸢 message" },
 			{"<leader>lt", function() require("chainsaw").timeLog() end, desc = "󰸢 time" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰸢 debugger" },
+			{"<leader>ls", function() require("chainsaw").stacktraceLog() end, desc = "󰸢 stacktrace" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
