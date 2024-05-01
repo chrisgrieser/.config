@@ -20,7 +20,14 @@ declare type Editor = {
 	getSelection(): string;
 	getRange(from: EditorPosition, to: EditorPosition): string;
 	offsetToPos(offset: number): EditorPosition;
+	// biome-ignore lint/suspicious/noExplicitAny: code mirror instance, mostly for vim mode
+	cm: any;
 };
+
+//──────────────────────────────────────────────────────────────────────────────
+
+// biome-ignore lint/suspicious/noExplicitAny: Electron window
+declare const activeWindow: any;
 
 declare const selection: EditorSelection;
 

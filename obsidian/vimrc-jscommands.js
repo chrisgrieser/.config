@@ -60,7 +60,7 @@ function toggleJsLineComment() {
 
 	const [_, indent, comment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
 	const updatedText = comment ? indent + textWithoutComment : indent + "// " + textWithoutComment;
-	cursor.ch = comment ? cursor.ch - 3 : cursor.ch - 2;
+	cursor.ch = comment ? cursor.ch - 3 : cursor.ch + 3;
 
 	editor.setLine(cursor.line, updatedText);
 	editor.setCursor(cursor);
@@ -72,6 +72,7 @@ function appendJsComment() {
 	const updatedText = text + " // ";
 	editor.setLine(cursor.line, updatedText);
 	editor.setCursor(cursor.line, updatedText.length);
+	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
