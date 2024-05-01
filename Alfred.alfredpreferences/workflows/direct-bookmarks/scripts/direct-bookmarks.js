@@ -23,7 +23,7 @@ function writeToFile(filepath, text) {
  * @property {string} name
  * @property {string} url
  * @property {"url"|"folder"} type
- * @property {bookmark[]?} children
+ * @property {bookmark[]?} children // only for folders
  * @property {string?} breadcrumbs // additional property for this workflow
  */
 
@@ -68,12 +68,16 @@ function ensureCacheFolderExists() {
 	}
 }
 
-/** @param {string} path1 @param {string} path2 */
-function olderThan(path1, path2) {
+/**
+ * @param {string} path1
+ * @param {string} path2
+ * @return {boolean}
+ */
+function fileOlderThan(path1, path2) {
 	const file1 = Application("System Events").aliases[path1];
-	if (!file1.exists()) return true;
+	if (!file1.exists()) return false;
 	const file2 = Application("System Events").aliases[path2];
-	return file1.modificationDate() > file2.modificationDate();
+	return file1.modificationDate() < file2.modificationDate();
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -88,10 +92,9 @@ function run(argv) {
 	const home = app.pathTo("home folder");
 	const browserDefaultsPath = $.getenv("browser_defaults_path");
 	const bookmarkPath = `${home}/Library/Application Support/${browserDefaultsPath}/Default/Bookmarks`;
-
 	let bookmarks;
-	if (olderThan(bookmarkPath, cachePath)) {
-		console.log("⭕ beep 🔵");
+
+	if (fileOlderThan(bookmarkPath, cachePath)) {
 		bookmarks = JSON.parse(readFile(cachePath));
 	} else {
 		const bookmarkJson = JSON.parse(readFile(bookmarkPath)).roots;
@@ -106,7 +109,7 @@ function run(argv) {
 		bookmarks = allBookmarks.map((bookmark) => {
 			const { name, url, breadcrumbs } = bookmark;
 			const matcher = alfredMatcher(name) + alfredMatcher(breadcrumbs || "");
-			const subtitle = (breadcrumbs || "").replace(/^Bookmarks\//, "") + "    " + url;
+			const subtitle = (breadcrumbs || "").replace(/^Bookmarks\//, "") + "     " + url;
 
 			return {
 				title: name,
@@ -121,7 +124,6 @@ function run(argv) {
 
 	//───────────────────────────────────────────────────────────────────────────
 	// MATCHING BEHAVIOR
-
 	const queryRegex = new RegExp("\\b" + query, "i");
 	bookmarks = bookmarks.filter((/** @type {{matchStr: string}} */ bookmark) =>
 		bookmark.matchStr.match(queryRegex),
