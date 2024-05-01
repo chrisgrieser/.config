@@ -96,7 +96,7 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 	local prevTitle = current_picker.prompt_title
 	local ignoreHidden = not prevTitle:find("hidden")
 
-	local title = vim.fs.basename(cwd)
+	local title = "Find Files: " .. vim.fs.basename(cwd)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
@@ -109,13 +109,9 @@ local function toggleHiddenAndIgnore(prompt_bufnr)
 		no_ignore = ignoreHidden,
 		cwd = cwd,
 		-- prevent these becoming visible through `--no-ignore`
+		-- stylua: ignore
 		file_ignore_patterns = {
-			"node_modules",
-			".venv",
-			"typings",
-			"%.DS_Store$",
-			"%.git/",
-			"%.app/",
+			"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
 			unpack(existingFileIgnores), -- must be last for all items to be unpacked
 		},
 	}
@@ -215,12 +211,20 @@ local function telescopeConfig()
 			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
 			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 			default_mappings = { i = keymappings_I, n = keymappings_N },
+			cycle_layout_list = {
+				"horizontal",
+				{
+					previewer = false,
+					layout_strategy = "horizontal",
+					layout_config = { horizontal = { width = 0.55, height = 0.6 } },
+				},
+			},
 			layout_strategy = "horizontal",
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
-					height = { 0.75, min = 13 },
+					height = { 0.6, min = 13 },
 					width = 0.99,
 					preview_cutoff = 70,
 					preview_width = { 0.55, min = 30 },
@@ -261,9 +265,19 @@ local function telescopeConfig()
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = false,
+				previewer = false,
+				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
+
 				mappings = {
 					i = {
 						["<C-h>"] = { toggleHiddenAndIgnore, type = "action" },
+						["<D-p>"] = {
+							function(prompt_bufnr)
+								require("telescope.actions.layout").cycle_layout_next(prompt_bufnr)
+							end,
+							type = "action",
+							opts = { desc = " Toggle Preview" },
+						},
 					},
 				},
 			},
@@ -272,9 +286,7 @@ local function telescopeConfig()
 				path_display = filenameFirst,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 				previewer = false,
-				layout_config = {
-					horizontal = { anchor = "W", width = 0.5, height = 0.55 },
-				},
+				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
 			},
 			live_grep = {
 				prompt_prefix = " ",
@@ -597,7 +609,7 @@ return {
 				function()
 					require("telescope.builtin").symbols {
 						sources = { "nerd", "math" },
-						layout_config = { horizontal = { width = 0.35, height = 0.55 } },
+						layout_config = { horizontal = { width = 0.35 } },
 					}
 				end,
 				desc = " Icon Picker",
