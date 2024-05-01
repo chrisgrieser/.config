@@ -6,12 +6,11 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 # source files. Therefore for this to work, the version of less provided by
 # homebrew is needed (v.633).
 export PAGER="$HOMEBREW_PREFIX/bin/less"
-export LESSKEYIN="$ZDOTDIR/lesskey"
+export LESSKEYIN="$HOME/.config/less/lesskey"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # Affects filetype-coloring in eza, fd, and completion menus
-# Can generate via: https://github.com/sharkdp/vivid
 # DOCS https://github.com/eza-community/eza/blob/main/man/eza_colors.5.md
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
 grey="38;5;247"

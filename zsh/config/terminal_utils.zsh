@@ -125,7 +125,9 @@ function hs() {
 function p {
 	local filetype_info
 	filetype_info=$(file --mime "$1")
-	if [[ "$filetype_info" =~ text || "$filetype_info" =~ json ]]; then
+	if [[ "$filetype_info" =~ json ]] ; then
+		fx "$1"
+	elif [[ "$filetype_info" =~ text ]]; then
 		bat "$1"
 	elif [[ "$filetype_info" =~ image ]]; then
 		qlmanage -p "$1" &>/dev/null

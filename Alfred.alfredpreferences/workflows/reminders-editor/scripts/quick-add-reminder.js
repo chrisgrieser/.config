@@ -28,14 +28,14 @@ function browserTab() {
 	let title;
 	let url;
 	if (browserType === "chromium") {
-		// @ts-ignore
+		// @ts-expect-error
 		url = frontmostApp.windows[0].activeTab.url();
-		// @ts-ignore
+		// @ts-expect-error
 		title = frontmostApp.windows[0].activeTab.name();
 	} else if (browserType === "webkit") {
-		// @ts-ignore
+		// @ts-expect-error
 		url = frontmostApp.documents[0].url();
-		// @ts-ignore
+		// @ts-expect-error
 		title = frontmostApp.documents[0].name();
 	} else {
 		return { url: "", title: "" };

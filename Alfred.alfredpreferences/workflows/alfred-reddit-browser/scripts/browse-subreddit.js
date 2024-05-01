@@ -38,7 +38,7 @@ function ensureCacheFolderExists() {
 function cacheIsOutdated(path) {
 	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold")) || 15;
 	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
-	// @ts-ignore
+	// @ts-expect-error
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - cacheObj.creationDate()) / 1000 / 60;
@@ -51,9 +51,9 @@ function cacheIsOutdated(path) {
  * @returns {boolean} firstPathOlderThanSecond
  */
 function olderThan(firstPath, secondPath) {
-	// @ts-ignore
+	// @ts-expect-error
 	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();
-	// @ts-ignore
+	// @ts-expect-error
 	const secondMdate = +Application("System Events").aliases[secondPath].modificationDate();
 	const firstPathOlderThanSecond = firstMdate - secondMdate < 0;
 	return firstPathOlderThanSecond;

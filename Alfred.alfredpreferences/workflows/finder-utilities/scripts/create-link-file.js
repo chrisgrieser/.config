@@ -21,14 +21,14 @@ function browserTab() {
 	const webkitVariants = ["Safari", "Webkit"];
 	let title, url;
 	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-ignore
+		// @ts-expect-error
 		url = frontmostApp.windows[0].activeTab.url();
-		// @ts-ignore
+		// @ts-expect-error
 		title = frontmostApp.windows[0].activeTab.name();
 	} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-ignore
+		// @ts-expect-error
 		url = frontmostApp.documents[0].url();
-		// @ts-ignore
+		// @ts-expect-error
 		title = frontmostApp.documents[0].name();
 	} else {
 		app.displayNotification("", {
