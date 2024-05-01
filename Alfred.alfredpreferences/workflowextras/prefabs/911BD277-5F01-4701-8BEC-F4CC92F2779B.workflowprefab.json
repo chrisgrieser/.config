@@ -3,11 +3,41 @@
   "data" : {
     "items" : [
       {
+        "workflowobjecttype" : "alfred.workflow.output.notification",
+        "uid" : "AFED0E33-75E1-4758-B56C-A62502CCE859",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "onlyshowifquerypopulated" : true,
+          "title" : "📋 Copied",
+          "lastpathcomponent" : false,
+          "removeextension" : false,
+          "text" : "{query}"
+        },
+        "colorindex" : 0,
+        "ypos" : 120,
+        "xpos" : 405
+      },
+      {
+        "workflowobjecttype" : "alfred.workflow.output.clipboard",
+        "uid" : "CD785071-3342-416F-A2AF-E4FA1F325FEE",
+        "note" : "",
+        "workflowobjectconfig" : {
+          "ignoredynamicplaceholders" : false,
+          "transient" : false,
+          "clipboardtext" : "{query}",
+          "autopaste" : false
+        },
+        "colorindex" : 0,
+        "ypos" : 120,
+        "xpos" : 255
+      },
+      {
         "workflowobjecttype" : "alfred.workflow.input.scriptfilter",
-        "uid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "uid" : "97DFF7CB-FC8A-40CF-B43C-34DECC5F60E2",
         "note" : "",
         "workflowobjectconfig" : {
           "argumenttrimmode" : 0,
+          "keyword" : "{var:keyword}",
           "scriptargtype" : 1,
           "escaping" : 0,
           "queuedelayimmediatelyinitially" : true,
@@ -21,7 +51,7 @@
           "argumenttreatemptyqueryasnil" : true,
           "subtext" : "",
           "alfredfiltersresultsmatchmode" : 2,
-          "scriptfile" : "search.js",
+          "scriptfile" : ".\/scripts\/PLACEHOLDER.js",
           "alfredfiltersresults" : true,
           "queuedelaycustom" : 3,
           "withspace" : true
@@ -32,7 +62,7 @@
       },
       {
         "workflowobjecttype" : "alfred.workflow.action.openurl",
-        "uid" : "1F9DE80F-EADB-45C4-9330-4CF3C7303B1A",
+        "uid" : "F8227DCE-75EA-491A-AD20-85810B532B15",
         "note" : "",
         "workflowobjectconfig" : {
           "skipqueryencode" : false,
@@ -43,61 +73,32 @@
         },
         "colorindex" : 0,
         "ypos" : 5,
-        "xpos" : 265
-      },
-      {
-        "workflowobjecttype" : "alfred.workflow.output.clipboard",
-        "uid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
-        "note" : "",
-        "workflowobjectconfig" : {
-          "ignoredynamicplaceholders" : false,
-          "transient" : false,
-          "clipboardtext" : "{query}",
-          "autopaste" : false
-        },
-        "colorindex" : 0,
-        "ypos" : 120,
-        "xpos" : 265
-      },
-      {
-        "workflowobjecttype" : "alfred.workflow.output.notification",
-        "uid" : "4822D031-44C8-45D3-B41C-480AB71A6A4D",
-        "note" : "",
-        "workflowobjectconfig" : {
-          "onlyshowifquerypopulated" : true,
-          "title" : "📋 Copied",
-          "lastpathcomponent" : false,
-          "removeextension" : false,
-          "text" : "{query}"
-        },
-        "colorindex" : 0,
-        "ypos" : 120,
-        "xpos" : 415
+        "xpos" : 255
       }
     ],
     "connections" : [
       {
-        "sourceuid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "sourceuid" : "97DFF7CB-FC8A-40CF-B43C-34DECC5F60E2",
         "config" : {
-          "destinationuid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
+          "destinationuid" : "CD785071-3342-416F-A2AF-E4FA1F325FEE",
           "modifiers" : 524288,
           "modifiersubtext" : "⌥: Copy URL",
           "vitoclose" : false
         }
       },
       {
-        "sourceuid" : "0B36E439-3149-4BE3-986A-CE4912F167E2",
+        "sourceuid" : "CD785071-3342-416F-A2AF-E4FA1F325FEE",
         "config" : {
-          "destinationuid" : "4822D031-44C8-45D3-B41C-480AB71A6A4D",
+          "destinationuid" : "AFED0E33-75E1-4758-B56C-A62502CCE859",
           "modifiers" : 0,
           "modifiersubtext" : "",
           "vitoclose" : false
         }
       },
       {
-        "sourceuid" : "736A4AD0-8321-4674-AC0B-64B3EE145FDA",
+        "sourceuid" : "97DFF7CB-FC8A-40CF-B43C-34DECC5F60E2",
         "config" : {
-          "destinationuid" : "1F9DE80F-EADB-45C4-9330-4CF3C7303B1A",
+          "destinationuid" : "F8227DCE-75EA-491A-AD20-85810B532B15",
           "modifiers" : 0,
           "modifiersubtext" : "",
           "vitoclose" : false
