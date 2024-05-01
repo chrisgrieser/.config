@@ -69,7 +69,7 @@ function s {
 				--preview 'bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
-	[[ -z "$selected" ]] && return 0 # aborted
+	[[ -z "$selected" ]] && return 0        # aborted
 	selected=$(echo "$selected" | head -n1) # only take first line, in case line contains `\n`
 	file_path=$(echo "$selected" | cut -d':' -f1)
 	ln=$(echo "$selected" | cut -d':' -f2)
@@ -123,9 +123,11 @@ function hs() {
 
 # file previewer
 function p {
-	if [[ $(file --mime "$1") =~ text ]] ; then
+	local filetype_info
+	filetype_info=$(file --mime "$1")
+	if [[ "$filetype_info" =~ text || "$filetype_info" =~ json ]]; then
 		bat "$1"
-	elif [[ $(file --mime "$1") =~ image ]] ; then
+	elif [[ "$filetype_info" =~ image ]]; then
 		qlmanage -p "$1" &>/dev/null
 	else
 		file "$1"
