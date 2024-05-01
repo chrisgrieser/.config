@@ -144,9 +144,9 @@ nnoremap <CR> :altBuffer
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
-" <Esc> clears highlights & notices (cannot combine excommands, therefore
-" combining them to a mapping first)
-exmap clearNotices jsfile {}
+" <Esc> clears highlights & notices 
+" (cannot combine excommands, therefore combining them to a mapping first)
+exmap clearNotices jsfile Meta/vimrc-jscommands.js { clearNotices() }
 nmap &c& :clearNotices
 nmap &n& :nohl
 nmap <Esc> &c&&n&

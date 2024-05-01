@@ -37,7 +37,6 @@ function toggleLineNumbers() {
 }
 
 function clearNotices() {
-	// @ts-expect-error `activeDocument` available via vimrc plugin
 	const allNotices = activeDocument.body.getElementsByClassName("notice");
 	for (const el of allNotices) {
 		el.hide();

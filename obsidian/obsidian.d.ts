@@ -29,6 +29,9 @@ declare type Editor = {
 // biome-ignore lint/suspicious/noExplicitAny: Electron window
 declare const activeWindow: any;
 
+// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
+declare const activeDocument: any;
+
 declare const selection: EditorSelection;
 
 declare const editor: Editor;
