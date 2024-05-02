@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "4/30/2024, 5:20:59 PM",
-	"time": 1714490459910,
+	"@time": "5/2/2024, 1:52:12 PM",
+	"time": 1714650732893,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
-		"chromium": 123
+		"chromium": 124
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -13,6 +13,10 @@
 		{
 			"passKeys": "j k ",
 			"pattern": "^https:\\/\\/www\\.google(?:.(?!&tbm=isch))*$"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://excalidraw.com/"
 		},
 		{
 			"passKeys": "/ ? ",
@@ -31,24 +35,16 @@
 			"pattern": ":https://www.inoreader.com/"
 		},
 		{
+			"passKeys": "s ",
+			"pattern": ":https://www.mankier.com/"
+		},
+		{
 			"passKeys": "? ",
 			"pattern": ":https://www.reddit.com/"
 		},
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
 			"pattern": ":https://www.youtube.com/"
-		},
-		{
-			"passKeys": "",
-			"pattern": ":https://excalidraw.com/"
-		},
-		{
-			"passKeys": "s ",
-			"pattern": ":https://www.mankier.com/"
-		},
-		{
-			"passKeys": "",
-			"pattern": ":https://haxplore.com/"
 		}
 	],
 	"extAllowList": [
@@ -97,12 +93,10 @@
 		"",
 		"\" Link Mode",
 		"map f LinkHints.activate",
-		"map F LinkHints.activateOpenInNewForegroundTab",
 		"map b LinkHints.activateOpenInNewTab",
 		"map yf LinkHints.activateCopyLinkUrl",
 		"map yi LinkHints.activateCopyImage",
 		"map yd LinkHints.activateDownloadImage",
-		"map yh LinkHints.activateHover showURL",
 		"",
 		"\" Tabs",
 		"map q closeTabsOnLeft",
@@ -126,9 +120,10 @@
 		"map t Vomnibar.activateTabSelection",
 		"",
 		"\" windows",
-		"map <c-v> moveTabToNewWindow",
 		"map M joinTabs",
 		"map P moveTabToIncognito",
+		"\" due to my window tiling, this is effectively creating a split window, thus same mapping as in nvim",
+		"map <c-v> moveTabToNewWindow",
 		"",
 		"\" Scrolling",
 		"map j scrollDown",
@@ -149,10 +144,6 @@
 		"map H goPrevious",
 		"map L goNext",
 		"",
-		"\" Marks",
-		"map ä Marks.activate swap",
-		"map Ä Marks.activateCreate swap",
-		"",
 		"\" Interaction",
 		"map c Vomnibar.activateEditUrl",
 		"map gu goUp",
@@ -160,8 +151,10 @@
 		"map p togglePinTab",
 		"map o openCopiedUrlInNewTab",
 		"map r reload",
-		"map R reload hard",
 		"map gs toggleViewSource",
+		"\" auto-closed by duplicate-tab-closer, ",
+		"\" except for \"Fast Duplicate Tab Closer\", smart enough (most of the time)",
+		"map yt duplicateTab",
 		"",
 		"\" Copy URLs",
 		"map yy copyCurrentUrl",
@@ -172,7 +165,7 @@
 		"",
 		"\" copy links of all tabs",
 		"map yw copyWindowInfo format=\"${url}\"",
-		"map ya copyWindowInfo format=\"${title}_${url}\"",
+		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
 		"",
 		"\" Help",
 		"map ? showHelp",
