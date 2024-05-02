@@ -237,9 +237,6 @@ local autoCd = {
 		"info.plist", -- Alfred workflows
 		".project-root", -- manual marker file
 	},
-	siblingOfRoot = {
-		-- 	".obsidian",
-	},
 	parentOfRoot = {
 		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- iCloud
@@ -259,15 +256,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local childOfRoot = fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
 		if childOfRoot then table.insert(roots, fs.dirname(childOfRoot)) end
 
-		-- 2. siblingOfRoot
-		local siblingOfRoot = fs.find(autoCd.siblingOfRoot, { upward = true, path = bufPath })[1]
-		if siblingOfRoot then
-			local parentOfRoot = fs.dirname(siblingOfRoot)
-			local rootBase = bufPath:sub(#parentOfRoot + 1, -1):match("^(/.-)/")
-			table.insert(roots, parentOfRoot .. rootBase)
-		end
-
-		-- 3. parentOfRoot
+		-- 2. parentOfRoot
 		for dir in fs.parents(bufPath) do
 			local parent = fs.dirname(dir)
 			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, fs.basename(parent))
@@ -309,6 +298,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufname)))
 			for _, oldfile in pairs(vim.v.oldfiles) do
 				if fileExists(oldfile) then
+					-- vim.cmd.edit can still fail, as the fileExistence check
+					-- apparently sometimes uses a cache, where the file still exists
 					local success = pcall(vim.cmd.edit, oldfile)
 					if success then return end
 				end
