@@ -13,7 +13,7 @@ function o() {
 	selected=$(
 		# shellcheck disable=2016
 		fd --type=file --type=symlink --color=always | fzf \
-			--select-1 --ansi --query="$1" --info=inline --header-first \
+			--select-1 --ansi --query="$*" --info=inline --header-first \
 			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right --scheme=path --tiebreak=length,end \
 			--delimiter="/" --with-nth=-2.. --nth=-2.. \
@@ -59,10 +59,9 @@ compdef _o o
 
 # search pwd via `rg`, open selection in the editor at the line
 function s {
-	local input="$*"
 	local selected file_path ln
 	selected=$(
-		rg "$input" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
+		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
 			--no-config --ignore-file="$HOME/.config/fd/ignore" |
 			fzf --ansi --preview-window="65%" \
 				--delimiter=":" --nth=1,3 --with-nth=1,2 \
