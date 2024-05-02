@@ -146,7 +146,7 @@ local function moveCursorToValue(content)
 		local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
 		local line = vim.api.nvim_get_current_line()
 		local _, valuePos = line:find("[:=] ? %S") -- find value
-		local _, _, fieldPos = line:find("@.-()%w+$")
+		local _, _, fieldPos = line:find("@.-()%w+$") -- laudocs or jsdocs
 		local gotoPos = fieldPos or valuePos
 		if rowBefore ~= rowAfter and gotoPos then
 			vim.api.nvim_win_set_cursor(0, { rowAfter, gotoPos - 1 })
