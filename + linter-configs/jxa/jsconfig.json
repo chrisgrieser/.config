@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"checkJs": true, // enable typescript support in JXA files
 		"target": "es2022", // JXA is compliant with most of ECMAScript: https://github.com/JXA-Cookbook/JXA-Cookbook/wiki/ES6-Features-in-JXA
+		"module": "es2022",
 
 		// SOURCE strictest tsconfig 2.0.0 https://github.com/tsconfig/bases/blob/main/bases/strictest.json
 		"strict": true,
