@@ -9,14 +9,8 @@ export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/repos"
 
-# for my configs
-export BROWSER_DEFAULTS_PATH="BraveSoftware/Brave-Browser"
-export BROWSER_APP="Brave Browser" # not using "$BROWSER" since reserved variable
-
 # settings
 export EDITOR="nvim"
-export CODE_FONT="JetBrainsMonoNL NF"
-export NEOVIDE_TITLE_HIDDEN=1
 
 #───────────────────────────────────────────────────────────────────────────────
 

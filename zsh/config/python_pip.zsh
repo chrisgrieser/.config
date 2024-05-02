@@ -6,7 +6,7 @@
 function pip {
 	if [[ "$1" == "install" ]]; then
 		if [[ ! "$(command which python3)" =~ /\.venv/ || -z "$VIRTUAL_ENV" ]]; then
-			printf "\033[1;33mNot in a virtual environment. Aborting.\033[0m "
+			printf "\e[1;33mNot in a virtual environment. Aborting.\e[0m "
 			return
 		fi
 	fi
@@ -16,7 +16,6 @@ function pip {
 alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
-alias py="python3"
 alias v="toggle_venv"
 
 #───────────────────────────────────────────────────────────────────────────────

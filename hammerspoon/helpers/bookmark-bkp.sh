@@ -2,15 +2,16 @@
 
 # CONFIG
 max_number_of_bkps=30
+browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO $DATA_DIR and $BROWSER_… defined in .zshenv
+# INFO $DATA_DIR defined in .zshenv
 isodate=$(date '+%Y-%m-%d')
 bkp_destination="$DATA_DIR/Backups/Browser Bookmarks"
-backup_file="$bkp_destination/$BROWSER_APP Bookmarks_$isodate"
+backup_file="$bkp_destination/Browser Bookmarks_$isodate"
 
 mkdir -p "$bkp_destination"
-cp -f "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Bookmarks" "$backup_file"
+cp -f "$browser_setting/Default/Bookmarks" "$backup_file"
 
 #───────────────────────────────────────────────────────────────────────────────
 # restrict number of backups

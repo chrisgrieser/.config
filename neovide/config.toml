@@ -1,8 +1,11 @@
 # DOCS https://neovide.dev/config-file.html#available-settings
 
-# INFO setting frame to "none" fixes title appearing, but has some bugs with
-# nvim ---remote, so using "buttonless" instead https://neovide.dev/command-line-reference.html#frame
 frame = "buttonless"
+no-multigrid = true # FIX transparency issues for scrollbar
 
-# FIX transparency issues for scrollbar
-no-multigrid = true
+# BUG these are not in effect, thus setting them in `Neovide_Helper`
+title-hidden = true
+tabs = false
+
+[font]
+normal = "JetBrainsMonoNL NF"
