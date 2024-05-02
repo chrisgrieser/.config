@@ -194,13 +194,6 @@ function run() {
 		};
 	});
 
-	// 6. MERGE BOTH LISTS & SORT SHORTER PACKAGE NAMES ON TOP
-	// (as packages with short names like `sd` are otherwise hard to find.)
-	const allPackages = [...casks, ...formulas].sort(
-		(/** @type{AlfredItem} */ a, /** @type{AlfredItem} */ b) => {
-			return a.title.length - b.title.length;
-		},
-	);
 
 	return JSON.stringify({
 		items: allPackages,
