@@ -6,6 +6,3 @@ no-multigrid = true # FIX transparency issues for scrollbar
 # BUG these are not in effect, thus setting them in `Neovide_Helper`
 title-hidden = true
 tabs = false
-
-[font]
-normal = "JetBrainsMonoNL NF"

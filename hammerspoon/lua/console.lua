@@ -1,8 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local env = require("lua.environment-vars")
 local u = require("lua.utils")
-
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
@@ -10,7 +8,7 @@ local aw = hs.application.watcher
 
 -- CONFIG
 -- CONSOLE APPEARANCE
-local baseFont = { name = env.codeFont, size = 22 }
+local baseFont = { name = "JetBrainsMonoNL NF", size = 22 }
 
 local function red(isDark)
 	if isDark then return { red = 1, green = 0, blue = 0 } end

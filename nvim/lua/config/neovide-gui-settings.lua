@@ -25,7 +25,8 @@ else
 end
 
 vim.opt.linespace = -2 -- less line height
-vim.opt.guifont = vim.env.CODE_FONT .. ":h" .. fontSize
+local font = "JetBrainsMonoNL NF"
+vim.opt.guifont = font .. ":h" .. fontSize
 
 --------------------------------------------------------------------------------
 
