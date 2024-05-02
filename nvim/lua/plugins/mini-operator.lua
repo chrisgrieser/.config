@@ -136,6 +136,25 @@ local function lineTransform(ft, line)
 	return line
 end
 
+-- ensures the cursor stays in the same column after duplication
+-- HACK needs to work with `defer_fn`, since the transformer function is
+-- called only before the multiplication operation
+local function moveCursorToValue(content)
+	local rowBefore = vim.api.nvim_win_get_cursor(0)[1]
+
+	vim.defer_fn(function()
+		local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
+		local line = vim.api.nvim_get_current_line()
+		local _, valuePos = line:find("[:=] ? %S") -- find value
+		local _, _, fieldPos = line:find("@.-()%w+$")
+		local gotoPos = fieldPos or valuePos
+		if rowBefore ~= rowAfter and gotoPos then
+			vim.api.nvim_win_set_cursor(0, { rowAfter, gotoPos - 1 })
+		end
+	end, 1)
+	return content.lines
+end
+
 local function filetypeSpecificMultiply()
 	autocmd("FileType", {
 		pattern = { "css", "javascript", "typescript", "lua", "sh", "python" },
@@ -145,6 +164,7 @@ local function filetypeSpecificMultiply()
 			vim.b["minioperators_config"] = {
 				multiply = {
 					func = function(content)
+						moveCursorToValue(content)
 						content.lines[1] = lineTransform(ft, content.lines[1])
 						return content.lines
 					end,
@@ -172,7 +192,7 @@ return {
 	},
 	opts = {
 		replace = { prefix = "", reindent_linewise = false }, -- substitute
-		multiply = { prefix = "w" }, -- duplicate
+		multiply = { prefix = "w", func = moveCursorToValue }, -- duplicate
 		exchange = { prefix = "sx", reindent_linewise = false },
 		sort = { prefix = "sy" },
 		evaluate = { prefix = "#", func = luaEval },
@@ -186,7 +206,7 @@ return {
 		require("mini.operators").setup(opts)
 
 		-- Do not set `substitute` mapping for visual mode, since we use `s` for
-		-- `surround` there.
+		-- `surround` there, and `p` effectively already substitutes
 		require("mini.operators").make_mappings(
 			"replace",
 			{ textobject = "s", line = "ss", selection = "" }

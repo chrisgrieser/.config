@@ -209,57 +209,6 @@ function M.betterTilde()
 	end
 end
 
-local referenceNotif
-function M.gotoNextLspReferenceInFile()
-	local params = require("vim.lsp.util").make_position_params()
-	params.context = { includeDeclaration = true }
-
-	vim.lsp.buf_request(0, "textDocument/references", params, function(err, results, _, _)
-		if err then
-			vim.notify(err.message, vim.log.levels.ERROR)
-			return
-		end
-		local resultsInFile = vim.tbl_filter(
-			function(result) return result.uri == vim.uri_from_bufnr(0) end,
-			results
-		)
-		if #resultsInFile < 2 then
-			vim.notify("Already at sole reference (in this file).", vim.log.levels.WARN)
-			return
-		end
-
-		---@param result {range: lsp.Range}
-		local function getPositions(result)
-			local line = result.range.start.line + 1
-			local colStart = result.range.start.character
-			local colEnd = result.range["end"].character
-			return line, colStart, colEnd
-		end
-
-		-- determine index of current cursor-position in list of results
-		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
-		local idx = 0
-		repeat
-			idx = idx + 1
-			local nextLine, nextColStart, nextColEnd = getPositions(resultsInFile[idx])
-			local isAtPos = curLine == nextLine and curCol >= nextColStart and curCol <= nextColEnd
-		until isAtPos
-
-		local nextIdx = math.fmod(idx, #resultsInFile) + 1 -- fmod = lua's modulo
-		local targetLine, targetCol, _ = getPositions(resultsInFile[nextIdx])
-		vim.api.nvim_win_set_cursor(0, { targetLine, targetCol })
-
-		referenceNotif = vim.notify(("%s/%s"):format(nextIdx, #resultsInFile), vim.log.levels.INFO, {
-			title = "LSP reference in file",
-			replace = referenceNotif and referenceNotif.id, -- required nvim-notify
-			hide_from_history = referenceNotif ~= nil,
-			animate = false,
-		})
-	end)
-end
-
---------------------------------------------------------------------------------
-
 function M.gotoProject()
 	-- CONFIG
 	local projectFolder = vim.env.LOCAL_REPOS
