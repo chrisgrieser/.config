@@ -204,6 +204,15 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      - description: "[S]team"
+        type: basic
+        from: { key_code: s, modifiers: { mandatory: [shift] } }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'Steam'
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[q] Script Editor"
         type: basic
         from: { key_code: q }
