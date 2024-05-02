@@ -209,6 +209,7 @@ function M.betterTilde()
 	end
 end
 
+local referenceNotif
 function M.gotoNextLspReferenceInFile()
 	local params = require("vim.lsp.util").make_position_params()
 	params.context = { includeDeclaration = true }
@@ -247,6 +248,13 @@ function M.gotoNextLspReferenceInFile()
 		local nextIdx = math.fmod(idx, #resultsInFile) + 1 -- fmod = lua's modulo
 		local targetLine, targetCol, _ = getPositions(resultsInFile[nextIdx])
 		vim.api.nvim_win_set_cursor(0, { targetLine, targetCol })
+
+		referenceNotif = vim.notify(("%s/%s"):format(nextIdx, #resultsInFile), vim.log.levels.INFO, {
+			title = "LSP reference in file",
+			replace = referenceNotif and referenceNotif.id, -- required nvim-notify
+			hide_from_history = referenceNotif ~= nil,
+			animate = false,
+		})
 	end)
 end
 
@@ -288,6 +296,9 @@ function M.gotoProject()
 	end
 end
 
+--------------------------------------------------------------------------------
+
+local changedFileNotif
 function M.gotoChangedFiles()
 	local funcName = "Changed Files"
 	local currentFile = vim.api.nvim_buf_get_name(0)
@@ -360,9 +371,11 @@ function M.gotoChangedFiles()
 	end
 	local msg = table.concat(listOfChangedFiles, "\n")
 
-	vim.g.changedFilesNotif = vim.notify(msg, vim.log.levels.INFO, {
+	changedFileNotif = vim.notify(msg, vim.log.levels.INFO, {
 		title = funcName,
-		replace = vim.g.changedFilesNotif and vim.g.changedFilesNotif.id,
+		replace = changedFileNotif and changedFileNotif.id,
+		hide_from_history = changedFileNotif ~= nil,
+		animate = false,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", icon .. ".*") end)
