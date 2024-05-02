@@ -14,16 +14,15 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	-- "binhtran432k/dracula.nvim",
-	"fynnfluegge/monet.nvim",
 	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	"sainnhe/gruvbox-material",
+	-- "binhtran432k/dracula.nvim",
+	-- "fynnfluegge/monet.nvim",
 	-- "scottmckendry/cyberdream.nvim",
 	-- "maxmx03/fluoromachine.nvim",
 	-- { "rose-pine/neovim", name = "rose-pine-moon" },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
-	-- { "navarasu/onedark.nvim", opts = { style = "warm" } },
-	-- "sainnhe/gruvbox-material",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
 

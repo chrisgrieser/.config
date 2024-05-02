@@ -46,9 +46,9 @@ end
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
-local function isWeekend()
+local function isWorkweek()
 	local weekday = tostring(os.date("%a"))
-	return weekday == "Sat" or weekday == "Sun"
+	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
 local function workLayout()
@@ -62,7 +62,7 @@ local function workLayout()
 
 	-- CONFIG
 	local toOpen = { "Discord", "Mimestream" }
-	if isWeekend() then table.insert(toOpen, "Slack") end
+	if isWorkweek() then table.insert(toOpen, "Slack") end
 
 	u.openApps { env.mastodonApp, "AlfredExtraPane" }
 	u.openApps(toOpen)
