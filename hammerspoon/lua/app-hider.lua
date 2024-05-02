@@ -19,6 +19,7 @@ local config = {
 	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "Shottr" },
 	appsNotToHide = {
 		"Espanso",
+		"Steam",
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
@@ -38,7 +39,6 @@ local function unHideAll()
 	end
 end
 
--- hide other apps, except twitter, Zoom, or PiP apps
 ---@param appObj hs.application the app not to hide
 local function hideOthers(appObj)
 	-- GUARD current app having no window
@@ -84,11 +84,6 @@ M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
 	end
 end):start()
-
--- FIX that Hammerspoon console does not trigger application-deactivated
-M.wf_hsConsoleHider = wf.new("Hammerspoon"):subscribe(wf.windowUnfocused, function(win)
-	if win:title() == "Hammerspoon Console" then hs.application("Hammerspoon"):hide() end
-end)
 
 -- also trigger on minimization and on window reszing
 M.transBgAppWindowFilter = wf.new(config.transBgApps)
