@@ -77,4 +77,49 @@ M.aw_jkHotkeys = aw.new(function(appName, eventType)
 end):start()
 
 --------------------------------------------------------------------------------
+-- BOOKMARKS SYNCED TO CHROME BOOKMARKS
+-- (so Alfred can pick up the Bookmarks without extra keyword)
+
+local appSupport = os.getenv("HOME") .. "/Library/Application Support/"
+local config = {
+	sourceProfile = appSupport .. env.browserDefaultsPath,
+	sourceBookmarks = appSupport .. env.browserDefaultsPath .. "/Default/Bookmarks",
+	chromeProfile = appSupport .. "Google/Chrome/",
+}
+
+---@param flags? {rootChanged: boolean}[]
+local function syncBookmarks(flags)
+	-- GUARD prevent recursive trigger when called from file-watcher
+	local noArg = flags == nil
+	local firstChange = flags and flags[1].rootChanged
+	if not firstChange and not noArg then return end
+
+	local bookmarks = hs.json.read(config.sourceBookmarks)
+	if not bookmarks then return end
+	hs.fs.mkdir(config.chromeProfile)
+	local success =
+		hs.json.write(bookmarks, config.chromeProfile .. "/Default/Bookmarks", false, true)
+	if not success then
+		u.notify("🔖⚠️ Bookmarks not correctly synced.")
+		return
+	end
+
+	local localState = u.readFile(config.sourceProfile .. "/Local State")
+	if not localState then return end
+	u.writeToFile(config.chromeProfile .. "/Local State", localState, false)
+
+	-- TODO recently, it appears that every 10 min the watcher is triggered for
+	-- some reason. To avoid spam in the hammerspoon console, not logging this
+	-- here.
+	-- print("🔖 Bookmarks synced to Chrome Bookmarks")
+end
+
+-- sync on system start & when bookmarks are changed
+if u.isSystemStart() then syncBookmarks() end
+
+M.pathw_bookmarks = hs.pathwatcher
+	.new(config.sourceBookmarks, function(_, flags) syncBookmarks(flags) end)
+	:start()
+
+--------------------------------------------------------------------------------
 return M

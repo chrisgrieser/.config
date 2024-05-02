@@ -92,7 +92,7 @@
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Weekly Date Inserter</string>
 	<key>objects</key>

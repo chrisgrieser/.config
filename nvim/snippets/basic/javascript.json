@@ -86,13 +86,13 @@
     ],
     "prefix": "for (key, value)"
   },
-  "for .. in (object-key)": {
+  "for .. in (key)": {
     "body": [
       "for (const ${1:key} in ${2:object}) {",
       "\t$0",
       "}"
     ],
-    "prefix": "for .. in (object-key)"
+    "prefix": "for .. in (key)"
   },
   "for .. of (array)": {
     "body": [
