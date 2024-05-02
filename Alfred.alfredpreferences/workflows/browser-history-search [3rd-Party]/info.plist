@@ -957,8 +957,6 @@ Pressing `CMD` to enter `Other Actions...`:
 			<string>date_format</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>4.1.4</string>
 	<key>webaddress</key>

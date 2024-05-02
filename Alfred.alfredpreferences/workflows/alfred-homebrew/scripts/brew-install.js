@@ -41,7 +41,7 @@ function cacheIsOutdated(path) {
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeDays = (+new Date() - cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	const cacheAgeDays = (+new Date() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
 	const cacheAgeThresholdDays = 7;
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
@@ -76,8 +76,6 @@ function httpRequest(url) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const timelogStart = +new Date();
-
 	// 1. MAIN DATA (already cached by homebrew)
 	// DOCS https://formulae.brew.sh/docs/api/ & https://docs.brew.sh/Querying-Brew
 	// these files contain the API response of casks and formulas as payload; they
@@ -93,12 +91,14 @@ function run() {
 
 	// 2. LOCAL INSTALLATION DATA (determined live every run)
 	// PERF `ls` quicker than `brew list` or the API
-	const installedBrews = app
+	const installedPackages = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
 
 	// 3. DOWNLOAD COUNTS (cached by me)
 	// DOCS https://formulae.brew.sh/analytics/
+	// INFO not using Alfred's caching mechanism, since the installed packages
+	// should be determined more frequently
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	if (cacheIsOutdated(cask90d)) {
@@ -113,7 +113,7 @@ function run() {
 		writeToFile(formula90d, formulaDownloads);
 	}
 	const caskDownloads = JSON.parse(readFile(cask90d)).formulae;
-	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not .casks
+	const formulaDownloads = JSON.parse(readFile(formula90d)).formulae; // SIC not `.casks`
 
 	// 4. ICONS
 	const caskIcon = "🛢️ ";
@@ -122,14 +122,13 @@ function run() {
 	const installedIcon = "✅ ";
 	const deprecatedIcon = "⚠️ ";
 
-	//───────────────────────────────────────────────────────────────────────────
-
+	// 5. CREATE ALFRED ITEMS
 	/** @type{AlfredItem[]} */
 	const casks = casksData.map((/** @type {Cask} */ cask) => {
 		const name = cask.token;
 
 		let icons = "";
-		if (installedBrews.includes(name)) icons += " " + installedIcon;
+		if (installedPackages.includes(name)) icons += " " + installedIcon;
 		if (cask.deprecated) icons += `   ${deprecatedIcon}[deprecated]`;
 
 		const downloads = caskDownloads[name] ? `${caskDownloads[name][0].count}↓` : "";
@@ -161,7 +160,7 @@ function run() {
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
 		let icons = "";
-		if (installedBrews.includes(name)) icons += " " + installedIcon;
+		if (installedPackages.includes(name)) icons += " " + installedIcon;
 		if (formula.deprecated) icons += `   ${deprecatedIcon}deprecated`;
 
 		const caveatText = formula.caveats || "";
@@ -195,16 +194,18 @@ function run() {
 		};
 	});
 
-	const duration = (+new Date() - timelogStart) / 1000;
-	console.log(`Total: ${formulas.length} formulas, ${casks.length} casks (${duration}s)`);
+	// 6. MERGE BOTH LISTS & SORT SHORTER PACKAGE NAMES ON TOP
+	// (as packages with short names like `sd` are otherwise hard to find.)
+	const allPackages = [...casks, ...formulas].sort(
+		(/** @type{AlfredItem} */ a, /** @type{AlfredItem} */ b) => {
+			return a.title.length - b.title.length;
+		},
+	);
 
-	// PERF merging via spread operator performs slightly faster than
-	// concatenation with the number array elements cp.
-	// https://javascript.plainenglish.io/efficiently-merging-arrays-in-javascript-32993788a8b2
 	return JSON.stringify({
-		items: [...casks, ...formulas],
+		items: allPackages,
 		cache: {
-			seconds: 3600 * 3,
+			seconds: 3600, // update regularly for correct identification of installed packages
 			loosereload: true,
 		},
 	});

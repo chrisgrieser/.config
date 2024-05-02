@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>bookmark_keyword</key>
-	<string>äääääää</string>
 	<key>brave</key>
 	<true/>
 	<key>chrome</key>
@@ -12,7 +10,5 @@
 	<string>%d.%m </string>
 	<key>history_keyword</key>
 	<string>hh</string>
-	<key>show_favicon</key>
-	<true/>
 </dict>
 </plist>
