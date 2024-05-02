@@ -20,3 +20,4 @@
 - checkout whether `lsp_workspace_symbols` now finally works in lua
 - <https://github.com/monkoose/neocodeium>
 - built-in comment support
+- `vim.fs.root`

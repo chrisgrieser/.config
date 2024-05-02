@@ -4,5 +4,7 @@
 <dict>
 	<key>chromeProfile</key>
 	<string>Default</string>
+	<key>indexChrome</key>
+	<true/>
 </dict>
 </plist>
