@@ -32,6 +32,7 @@ brew "pandoc"
 brew "pass"
 brew "pinentry-mac"
 brew "ripgrep"
+brew "sd"
 brew "spotify_player"
 brew "starship"
 brew "tesseract"
@@ -76,6 +77,7 @@ cask "steam"
 cask "transmission"
 cask "wezterm"
 cask "zoom"
+mas "Calendars", id: 608834326
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898

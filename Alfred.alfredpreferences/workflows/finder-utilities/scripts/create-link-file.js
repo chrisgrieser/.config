@@ -18,7 +18,7 @@ function browserTab() {
 	// biome-ignore format: long
 	const chromiumVariants = [ "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc" ];
 	const webkitVariants = ["Safari", "Webkit"];
-	let title
+	let title;
 	let url;
 	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
 		// @ts-expect-error
@@ -40,12 +40,11 @@ function browserTab() {
 	return { url: url, title: title };
 }
 
-/** @param {string} url */
+/** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestString;
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -55,19 +54,21 @@ function httpRequest(url) {
 function run(argv) {
 	let url = argv[0];
 	let title;
-	if (!url) {
-		url = browserTab().url;
-		title = browserTab().title;
-	} else {
+	if (url) {
 		const siteContent = httpRequest(url);
 		try {
 			title = siteContent
 				.split("\n")
-				.filter((/** @type {string[]} */ line) => line.includes("title="))[0]
+				.filter((line) => line.includes("title="))[0]
 				.split("=")[1];
 		} catch (_error) {
 			title = "Untitled";
 		}
+	} else {
+		const tab = browserTab();
+		if (!tab) return;
+		url = tab.url;
+		title = tab.title;
 	}
 	const safeTitle = title
 		.replaceAll("/", "-")
@@ -87,4 +88,5 @@ IconIndex=0`;
 	writeToFile(linkFilePath, urlFileContent);
 	Application("Finder").activate();
 	Application("Finder").reveal(Path(linkFilePath));
+	return;
 }
