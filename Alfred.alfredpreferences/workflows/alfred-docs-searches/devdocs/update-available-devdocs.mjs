@@ -7,8 +7,7 @@ const aliases = {
 	// alises added on top of the ones from devdocs
 	hammerspoon: "hs",
 
-	// devdocs aliases
-	// Scroll down at for a list of aliases https://devdocs.io/help
+	// devdocs aliases https://devdocs.io/help#aliases
 	angular: "ng",
 	"angular.js": "ng",
 	"backbone.js": "bb",
@@ -82,16 +81,16 @@ async function run() {
 	const numberOfPopups = 40;
 
 	/** @type {string[]} */
-	let newXmlLines = [];
+	const newXmlLines = [];
 	for (let i = 1; i <= numberOfPopups; i++) {
 		const label = i === 1 ? "Enabled devdocs" : "";
 		const number = i.toString().padStart(2, "0");
 
-		newXmlLines = newXmlLines.concat([
+		newXmlLines.push(
 			"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>pairs</key> <array>",
 			...infoPlistPopup,
 			`</array> </dict> <key>description</key> <string></string> <key>label</key> <string>${label}</string> <key>type</key> <string>popupbutton</string> <key>variable</key> <string>keyword_${number}</string> </dict>`,
-		]);
+		);
 	}
 
 	const start = xmlLines.indexOf("\t<key>userconfigurationconfig</key>") + 2;

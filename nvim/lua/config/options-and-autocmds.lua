@@ -306,14 +306,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 			if fileExists(bufname) or isSpecialBuffer or isNewBuffer or conformTempBuf then return end
 
 			-- open last existing oldfile
+			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufname)))
 			for _, oldfile in pairs(vim.v.oldfiles) do
 				if fileExists(oldfile) then
-					vim.cmd.edit(oldfile)
-					vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufname)))
-					return
+					local success = pcall(vim.cmd.edit, oldfile)
+					if success then return end
 				end
 			end
-		end, 500)
+		end, 300)
 	end,
 })
 
