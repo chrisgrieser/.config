@@ -113,7 +113,7 @@ function M.autoTile(winSrc)
 	M.bringAllWinsToFront()
 
 	M.autoTileInProgress = true
-	u.runWithDelays(0.1, function() M.autoTileInProgress = false end)
+	u.runWithDelays(0.2, function() M.autoTileInProgress = false end)
 	local pos = {}
 
 	if #wins == 0 and u.isFront("Finder") then
@@ -170,7 +170,7 @@ function M.autoTile(winSrc)
 	end
 	if existingPositions == #pos and #wins == #pos then return end
 
-	for i = 1, #wins, 1 do
+	for i = 1, #pos, 1 do
 		M.moveResize(wins[i], pos[i])
 	end
 end

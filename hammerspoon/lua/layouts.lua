@@ -14,7 +14,7 @@ local c = hs.caffeinate.watcher
 local function dockSwitcher(dockToUse)
 	hs.osascript.applescript(([[
 		tell application id "com.runningwithcrayons.Alfred"
-			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "%s"	
+			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "%s"
 		end tell
 	]]):format(dockToUse))
 end
@@ -46,6 +46,11 @@ end
 --------------------------------------------------------------------------------
 -- LAYOUTS
 
+local function isWeekend()
+	local weekday = tostring(os.date("%a"))
+	return weekday == "Sat" or weekday == "Sun"
+end
+
 local function workLayout()
 	-- screen & visuals
 	darkmode.autoSwitch()
@@ -56,22 +61,12 @@ local function workLayout()
 	u.closeAllTheThings()
 
 	-- CONFIG
-	local toOpen = {
-		env.mastodonApp,
-		"AlfredExtraPane",
-		"Discord",
-		"Mimestream",
-		"Slack",
-	}
-	local resize = {
-		"Discord",
-		"Mimestream",
-		"Slack",
-	}
+	local toOpen = { "Discord", "Mimestream" }
+	if isWeekend() then table.insert(toOpen, "Slack") end
 
-	-- open & pseudo-maximize
+	u.openApps { env.mastodonApp, "AlfredExtraPane" }
 	u.openApps(toOpen)
-	for _, appName in pairs(resize) do
+	for _, appName in pairs(toOpen) do
 		u.whenAppWinAvailable(appName, function()
 			local win = app(appName):mainWindow()
 			wu.moveResize(win, wu.pseudoMax)

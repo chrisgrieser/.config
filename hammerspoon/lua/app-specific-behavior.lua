@@ -144,7 +144,7 @@ M.wf_scripteditor = wf
 		if newWin:title() == "Open" then
 			hs.osascript.applescript('tell application "Script Editor" to make new document')
 
-		-- auto-paste and format content; resize window
+		-- auto-paste, format, and resize window
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.center)
 			local clipb = hs.pasteboard.getContents()
@@ -170,7 +170,7 @@ M.wf_scripteditor = wf
 --------------------------------------------------------------------------------
 -- MIMESTREAM
 
--- move new window
+-- resize new windows
 M.wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter({ rejectTitles = { "^Software Update$" } })
 	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
@@ -180,28 +180,25 @@ M.wf_mimestream = wf.new("Mimestream")
 
 -- when focused, enclose URL in clipboard with <>
 -- when unfocused, removes <> from URL in clipboard
--- on launch, open #off-topic in OMG Discord-server
+-- on launch, open a specific channel rather than the friends view
 M.aw_discord = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
 	if eventType == aw.launched or eventType == aw.launching then
-		u.openLinkInBg("discord://discord.com/channels/686053708261228577/700466324840775831")
+		local channelUri = "discord://discord.com/channels/1231936600204902481/1231936600674668604"
+		u.openLinkInBg(channelUri)
+		return
 	end
 
 	local clipb = hs.pasteboard.getContents()
-
 	if clipb and eventType == aw.activated then
-		local hasURL = clipb:find("^https?:%S+$")
-		local hasObsidianURL = clipb:find("^obsidian://%S+$")
-		local isTweet = clipb:find("^https?://twitter%.com") -- for tweets, the previews are actually useful since they show the full content
-		local isToot = clipb:find("^https?://mastodon%.*") -- same for toots
-		if (hasURL or hasObsidianURL) and not (isTweet or isToot) then
-			hs.pasteboard.setContents("<" .. clipb .. ">")
-		end
+		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
+		-- for tweets, the previews are actually useful since they show the full content
+		local isTweet = clipb:find("^https?://twitter%.com") or clipb:find("^https?://mastodon%.*")
+		if hasURL and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif clipb and eventType == aw.deactivated then
-		local hasEnclosedURL = clipb:find("^<https?:%S+>$")
-		local hasEnclosedObsidianURL = clipb:find("^<obsidian:%S+>$")
-		if hasEnclosedURL or hasEnclosedObsidianURL then
+		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
+		if hasEnclosedURL then
 			clipb = clipb:sub(2, -2) -- remove first & last character
 			hs.pasteboard.setContents(clipb)
 		end
