@@ -123,7 +123,7 @@ function run() {
 	const deprecatedIcon = "⚠️ ";
 
 	// 5. CREATE ALFRED ITEMS
-	/** @type{AlfredItem[]} */
+	/** @type{AlfredItem&{downloads:number}[]} */
 	const casks = casksData.map((/** @type {Cask} */ cask) => {
 		const name = cask.token;
 
@@ -141,6 +141,7 @@ function run() {
 			subtitle: [caskIcon, downloads, sep, desc].join(""),
 			arg: `--cask ${name}`,
 			quicklookurl: cask.homepage,
+			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
@@ -156,7 +157,7 @@ function run() {
 		};
 	});
 
-	/** @type{AlfredItem[]} */
+	/** @type{AlfredItem&{downloads:number}[]} */
 	const formulas = formulaData.map((/** @type {Formula} */ formula) => {
 		const name = formula.name;
 		let icons = "";
@@ -175,6 +176,7 @@ function run() {
 			subtitle: [formulaIcon, caveats, downloads, sep, desc].join(""),
 			arg: `--formula ${name}`,
 			quicklookurl: formula.homepage,
+			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
 			text: {
 				largetype: caveatText,
 				copy: caveatText,
@@ -194,6 +196,17 @@ function run() {
 		};
 	});
 
+	// 6. MERGE BOTH LISTS
+	// & move shorter package names top (short names like `sd` are ranked further down otherwise)
+	// & sort by download count as secondary criteria
+	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
+		const titleLengthDiff = a.title.length - b.title.length;
+		if (titleLengthDiff !== 0) return titleLengthDiff;
+		const downloadCountDiff =
+			Number.parseInt(b.downloads.replaceAll(",", "")) -
+			Number.parseFloat(a.downloads.replaceAll(",", ""));
+		return downloadCountDiff;
+	});
 
 	return JSON.stringify({
 		items: allPackages,

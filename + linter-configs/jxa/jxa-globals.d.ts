@@ -132,7 +132,7 @@ declare const Application: {
 	(
 		name: "System Events",
 	): MacAppObj & {
-		aliases: Record<string, FinderItem> // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
+		aliases: Record<string, FinderItem>; // hashmap of all paths, e.g. .aliases["/some/path/file.txt"]
 		keystroke(key: string, modifiers?: { using: string[] });
 		keyCode(keycode: number, modifiers?: { using: string[] });
 		// biome-ignore lint/suspicious/noExplicitAny: later
@@ -193,7 +193,7 @@ declare const Application: {
 			| "Microsoft Edge"
 			| "Arc",
 	): MacAppObj & {
-		documents: { url(): string; name(): string }[];
+		windows: { activeTab: { url(): string; name(): string; }; }[];
 	};
 	(name: string): MacAppObj;
 };
