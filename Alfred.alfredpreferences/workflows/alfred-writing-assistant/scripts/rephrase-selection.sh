@@ -60,8 +60,13 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
-text=$(osascript -l JavaScript -e "JSON.parse('$response').choices[0].message.content")
-# text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
+# get the response and unescape it, without using dependencies 💀
+# requires OpenAI response to be prettified JSON
+text=$(
+	echo "$response" |
+		sed -n '/"content": /,/},/p' | sed '$d' |                        # for multi-line responses
+		sed -e 's/^[[:space:]]*"content": "//' -e 's/\"/"/g' -e 's/"$//' # get content-value
+)
 
 if [[ "$output_type" == "plain" ]]; then
 	echo "$text"
