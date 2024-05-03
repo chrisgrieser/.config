@@ -141,3 +141,4 @@ matches:
   - { trigger: Leibe, replace: Liebe, propagate_case: true, word: true }
   - { trigger: wuold, replace: would, propagate_case: true, word: true }
   - { trigger: somewaht, replace: somewhat, propagate_case: true, word: true }
+  - { trigger: amke, replace: make, propagate_case: true, word: true }
