@@ -4,7 +4,6 @@
 export ZDOTDIR="$HOME/.config/zsh"
 
 # DIRECTORIES
-export WD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 # API KEYS 
@@ -13,14 +12,12 @@ export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 [[ -f "$DATA_DIR/private dotfiles/api-keys.sh" ]] && source "$DATA_DIR/private dotfiles/api-keys.sh"
 
 # NEOVIM
-export PATH="$HOME/.local/share/nvim/mason/bin":$PATH # so packages managed by mason are generally available
 export EDITOR="nvim"
+export PATH="$HOME/.local/share/nvim/mason/bin":$PATH # so packages managed by mason are generally available
 
 # PANDOC
 # (workaround since pandoc does not allow default data-dirs)
-function pandoc() {
-	command pandoc --data-dir="$HOME/.config/pandoc" "$@"
-}
+function pandoc() { command pandoc --data-dir="$HOME/.config/pandoc" "$@"; }
 
 # PASS
 # (set here to be accessible by the Alfred workflow `Pass`)

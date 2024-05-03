@@ -11,7 +11,7 @@ commit_msg="build: improved release action"
 function actions_in_repo {
 	# update release action
 	rm -v ./.github/workflows/alfred-workflow-release.yml
-	cp -v "$WD/alfred-workflow-release.yml" ./.github/workflows
+	cp -v ./alfred-workflow-release.yml ./.github/workflows
 }
 
 #───────────────────────────────────────────────────────────────────────────────

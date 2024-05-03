@@ -1,11 +1,19 @@
-# DOCS https://blog.meain.io/2023/navigating-around-in-shell/
-# DOCS https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
+# DOCS 
+# https://blog.meain.io/2023/navigating-around-in-shell/
+# https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
+
+# CONFIG
+wd="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+local_repos="$HOME/repos"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # OPTIONS
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
 setopt CHASE_LINKS # follow symlinks when they are cd target
-export CDPATH="$HOME/repos:$WD"
+export CDPATH="$local_repos:$wd"
 
 # POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
@@ -84,16 +92,12 @@ compdef _gr gr
 #───────────────────────────────────────────────────────────────────────────────
 # CYCLE THROUGH DIRECTORIES
 
-function get_nth_line_from {
-	to_open="$(echo "$2" | sed -n "${1}p")"
-}
-
 function _grappling_hook {
 	# CONFIG one location per line
-	# 1. read from csv, 2. remove .password-store, add WD
+	# 1. read from csv, 2. remove .password-store, 3. add wd
 	local locations
 	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
-	locations="$WD"$'\n'"$(echo "$locations" | grep -v ".password-store")"
+	locations="$wd"$'\n'"$(echo "$locations" | grep -v ".password-store")"
 
 	local to_open locations_count dir
 	to_open=$(echo "$locations" | sed -n "1p")
