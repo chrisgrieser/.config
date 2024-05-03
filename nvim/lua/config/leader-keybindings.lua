@@ -51,7 +51,7 @@ end, { desc = " :InspectTree" })
 keymap("n", "<leader>ib", function()
 	local out = {
 		"filetype: " .. bo.filetype,
-		"buftype: " .. bo.buftype,
+		"buftype: " .. (bo.buftype == "" and '""' or bo.buftype),
 		"cwd: " .. (vim.loop.cwd() or "n/a"),
 		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
 	}
@@ -78,10 +78,7 @@ keymap(
 
 keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
-	line = line:gsub(
-		"[\"']",
-		function(quote) return (quote == [["]] and [[']] or [["]]) end
-	)
+	line = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(line)
 end, { desc = " Switch Quotes in current line." })
 
