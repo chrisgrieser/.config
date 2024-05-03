@@ -60,6 +60,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2E601445-90B1-4564-BF5E-03D2B9830210</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>3D363FE9-8085-4930-B367-E0EFC46EB62E</key>
 		<array>
 			<dict>
@@ -125,6 +138,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<array>
 			<dict>
@@ -170,6 +196,19 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘⏎: Save</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -225,6 +264,27 @@
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
+				<string>alt="Pasted image .*?" </string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>alt="Showcase" </string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
 				<string>!\[(.*?)\]\((.*?)\)</string>
 				<key>regexcaseinsensitive</key>
 				<false/>
@@ -243,23 +303,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>alt="Pasted image .*?" </string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>alt="Showcase" </string>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.current</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
+			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -287,15 +341,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Encode URL</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
+			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -323,27 +383,6 @@
 			<string>74FC629B-C07E-49AC-9A18-82A5844CC79F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Encode URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -377,27 +416,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Decode URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -419,6 +437,27 @@
 			<string>3D363FE9-8085-4930-B367-E0EFC46EB62E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Decode URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -455,6 +494,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Dedent Indentation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -478,21 +538,90 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>autopaste</key>
 				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>name</key>
-				<string>Dedent Indentation</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>clipboard</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Edit Clipboard Content</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2E601445-90B1-4564-BF5E-03D2B9830210</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>behaviour</key>
+				<integer>1</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string>⌘⏎: Save</string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{clipboard}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -564,6 +693,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
+		<key>2E601445-90B1-4564-BF5E-03D2B9830210</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>525</real>
+		</dict>
 		<key>3D363FE9-8085-4930-B367-E0EFC46EB62E</key>
 		<dict>
 			<key>colorindex</key>
@@ -624,6 +762,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>90</real>
 		</dict>
+		<key>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>get clipboard</string>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>555</real>
+		</dict>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<dict>
 			<key>colorindex</key>
@@ -662,6 +811,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>215</real>
 		</dict>
+		<key>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>edit</string>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>525</real>
+		</dict>
 		<key>E99A3FBF-B036-4D0F-8E6C-90DDAA444F97</key>
 		<dict>
 			<key>colorindex</key>
@@ -672,6 +832,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>345</real>
 			<key>ypos</key>
 			<real>215</real>
+		</dict>
+		<key>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>copy</string>
+			<key>xpos</key>
+			<real>490</real>
+			<key>ypos</key>
+			<real>525</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
