@@ -36,7 +36,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold")) || 15;
+	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
 	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
