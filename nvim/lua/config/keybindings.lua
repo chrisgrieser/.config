@@ -45,7 +45,12 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 -- quickfix
-keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+keymap("n", "gq", function()
+	local success = pcall(vim.cmd.cnext)
+	if success then return end
+	vim.cmd.cfirst()
+	vim.notify("Wrapped")
+end, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
 
