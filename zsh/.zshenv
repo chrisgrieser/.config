@@ -10,6 +10,7 @@ export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export LOCAL_REPOS="$HOME/repos"
 
 # settings
+export BROWSER_APP="Brave Browser" # not using "$BROWSER" since reserved variable
 export EDITOR="nvim"
 
 #───────────────────────────────────────────────────────────────────────────────
