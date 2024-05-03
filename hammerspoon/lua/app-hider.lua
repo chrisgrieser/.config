@@ -16,7 +16,7 @@ local wf = hs.window.filter
 
 local config = {
 	transBgApps = env.transBgApps,
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "Shottr" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA" },
 	appsNotToHide = {
 		"Espanso",
 		"Steam",
@@ -25,7 +25,6 @@ local config = {
 		"CleanShot X",
 		env.mastodonApp,
 		"Alfred",
-		"Shottr",
 	},
 }
 --------------------------------------------------------------------------------
