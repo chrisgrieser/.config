@@ -24,7 +24,6 @@ function readFile(path) {
 function run() {
 	// CONFIG
 	const browserDefaultsPath = $.getenv("browser_defaults_path");
-
 	const extensionFolder =
 		app.pathTo("home folder") +
 		`/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
