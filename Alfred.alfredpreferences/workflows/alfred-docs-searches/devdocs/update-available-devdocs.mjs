@@ -9,38 +9,36 @@ const aliases = {
 
 	// devdocs aliases https://devdocs.io/help#aliases
 	angular: "ng",
-	"angular.js": "ng",
-	"backbone.js": "bb",
-	"c++": "cpp",
+	angularjs: "ng", // removed `.`
+	backbone: "bb", // removed `.js`
 	coffeescript: "cs",
 	crystal: "cr",
 	elixir: "ex",
 	javascript: "js",
 	julia: "jl",
 	jquery: "$",
-	"knockout.js": "ko",
+	knockout: "ko", // removed `.js`
 	kubernetes: "k8s",
 	less: "ls",
 	lodash: "_",
-	löve: "love",
 	marionette: "mn",
 	markdown: "md",
 	matplotlib: "mpl",
 	modernizr: "mdr",
-	"moment.js": "mt",
+	moment: "mt", // removed `.js`
 	openjdk: "java",
 	nginx: "ngx",
 	numpy: "np",
 	pandas: "pd",
 	postgresql: "pg",
 	python: "py",
-	"ruby.on.rails": "ror",
+	rails: "ror", // ruby.on.rails -> tails
 	ruby: "rb",
 	rust: "rs",
 	sass: "scss",
 	tensorflow: "tf",
 	typescript: "ts",
-	"underscore.js": "_",
+	underscore: "_", // removed `.js`
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -64,8 +62,8 @@ async function run() {
 		allLangs[keyword] = lang.slug;
 
 		// xml -> info.plist
-		const keywordInfo = keyword !== id ? ` (keyword: ${keyword})` : "";
-		const line = `<array> <string>${id}${keywordInfo}</string> <string>${keyword}</string> </array>`;
+		const label = keyword !== id ? `${id} (keyword: ${keyword})` : id;
+		const line = `<array> <string>${label}</string> <string>${keyword}</string> </array>`;
 		infoPlistPopup.push(line);
 	}
 

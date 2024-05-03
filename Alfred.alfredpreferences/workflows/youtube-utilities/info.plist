@@ -149,7 +149,7 @@
 				<key>concurrently</key>
 				<true/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
