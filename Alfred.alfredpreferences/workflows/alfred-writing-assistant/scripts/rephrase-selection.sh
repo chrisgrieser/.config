@@ -7,13 +7,7 @@ model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
 
 #───────────────────────────────────────────────────────────────────────────────
 
-selection=$(echo "$*" | tr "\n" " ")
-echo "⭕ selection: $selection" >&2
-cache="$alfred_workflow_cache"
-mkdir -p "$cache"
-
-# use Alfred definition of API key, or use the OPENAI_API_KEY
-# environment variable from .zshenv
+# API KEY
 apikey=$alfred_apikey
 [[ -z "$apikey" ]] && apikey="$OPENAI_API_KEY" # defined in .zshenv
 
@@ -23,16 +17,27 @@ if [[ -z "$apikey" ]]; then
 	exit 1
 fi
 
-# WARN `$prompt` is reserved variable in zsh
-# also, escape quotes in prompt for JSON
+#───────────────────────────────────────────────────────────────────────────────
+# CONSTRUCT PROMPT
+
+selection="$*"
+cache="$alfred_workflow_cache"
+mkdir -p "$cache"
+
+# `$prompt` is reserved variable in zsh, thus using `$the_prompt`
+# also, escape quotes and line breaks in prompt for JSON
+selection=${selection//
+/\\\\n}
 the_prompt=$(echo "$static_prompt $selection" | sed -e 's/"/\\"/g')
 
+#───────────────────────────────────────────────────────────────────────────────
+
+# OPENAI API CALL
 # workaround, as oepnAI requires temp between 0 and 1, but ALfred's number
 # slider only allows full integers
 temp=$(echo "scale = 1; $temperature / 10" | bc)
 [[ $temp -lt 1 ]] && temp="0$temp" # add leading zero required by OpenAI API
 
-# OPENAI API CALL
 # DOCS https://platform.openai.com/docs/api-reference/making-requests
 response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
@@ -40,26 +45,30 @@ response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completion
 	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
 
 # log the response to stderr (= visible in Alfred debug log, but not elsewhere)
+echo "OpenAI response:" >&2
 echo "$response" >&2
 
 # GUARD
 if [[ -z "$response" ]]; then
 	echo "ERROR: Timeout, no response by OpenAI API."
+	exit 1
 elif [[ "$response" =~ "error" || "$response" =~ "ERROR" ]]; then
 	# doing this avoids jq dependency
 	echo -n "ERROR: $(echo "$response" | grep '"message"' | cut -d'"' -f4)"
 	exit 1
-else
-	text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
+text=$(osascript -l JavaScript -e "JSON.parse('$response').choices[0].message.content")
+# text=$(echo "$response" | grep '"content"' | cut -d'"' -f4)
+
 if [[ "$output_type" == "plain" ]]; then
-	echo -n "$text"
+	echo "$text"
 	exit 0
 fi
 
+# MARKUP via git-diff
 echo "$selection" >"$cache/selection.txt"
 echo "$text" >"$cache/rephrased.txt"
 
