@@ -7,7 +7,8 @@ model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
 
 #───────────────────────────────────────────────────────────────────────────────
 
-selection="$*"
+selection=$(echo "$*" | tr "\n" " ")
+echo "⭕ selection: $selection" >&2
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
 

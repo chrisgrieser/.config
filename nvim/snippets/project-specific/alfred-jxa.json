@@ -93,6 +93,10 @@
     ],
     "prefix": "Script Filter (Alfred): doShellScript"
   },
+  "cache (Script Filter)": {
+    "body": "cache: { seconds: 600, loosereload: true },",
+    "prefix": "cache (Script Filter)"
+  },
   "cache (ensure folder)": {
     "body": [
       "function ensureCacheFolderExists() {",

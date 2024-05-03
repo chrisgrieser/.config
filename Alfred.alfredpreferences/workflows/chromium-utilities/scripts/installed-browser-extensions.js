@@ -18,15 +18,34 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
+//──────────────────────────────────────────────────────────────────────────────
+
+// CONFIG
+/** @type {Record<string, string>} */
+const specialAnchors = {
+	"AdGuard AdBlocker": "#user-filter",
+	// biome-ignore lint/style/useNamingConvention: not set by me
+	Violentmonkey: "#scripts",
+};
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// CONFIG
 	const browserDefaultsPath = $.getenv("browser_defaults_path");
 	const extensionFolder =
 		app.pathTo("home folder") +
 		`/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
+
+	// GUARD
+	if (!fileExists(extensionFolder)) {
+		const browserName = browserDefaultsPath.split("/")[1];
+		return JSON.stringify({
+			items: [{ title: `No extensions found for ${browserName}.` }],
+		});
+	}
 
 	const extensions = app
 		.doShellScript(`find "${extensionFolder}" -name "manifest.json"`)
@@ -56,7 +75,7 @@ function run() {
 			if (name === "Stylus") optionsPath = "manage.html";
 
 			// SPECIAL anchor for AdGuard, directly go to user rules
-			const anchor = name === "AdGuard AdBlocker" ? "#user-filter" : "";
+			const anchor = specialAnchors[name] || "";
 
 			const optionsUrl = `chrome-extension://${id}/${optionsPath}${anchor}`;
 			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
@@ -72,7 +91,7 @@ function run() {
 				match: alfredMatcher(name),
 				icon: { path: iconPath },
 				valid: optionsPath !== "",
-				arg: optionsUrl + anchor,
+				arg: optionsUrl,
 				uid: id,
 				mods: {
 					alt: { arg: webstoreUrl },
@@ -81,5 +100,8 @@ function run() {
 				},
 			};
 		});
-	return JSON.stringify({ items: extensions });
+	return JSON.stringify({
+		items: extensions,
+		cache: { seconds: 600, loosereload: true },
+	});
 }
