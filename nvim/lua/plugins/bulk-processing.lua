@@ -78,7 +78,11 @@ return {
 		},
 		config = function(_, opts)
 			require("recorder").setup(opts)
-			u.addToLuaLine("winbar", "lualine_z", require("recorder").recordingStatus)
+			u.addToLuaLine(
+				"winbar",
+				"lualine_z",
+				{ require("recorder").recordingStatus, color = "Error" }
+			)
 			u.addToLuaLine("sections", "lualine_y", require("recorder").displaySlots)
 		end,
 	},
