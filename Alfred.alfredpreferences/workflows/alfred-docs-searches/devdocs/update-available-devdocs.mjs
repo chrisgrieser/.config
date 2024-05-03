@@ -7,6 +7,7 @@ const aliases = {
 	// alises added on top of the ones from devdocs
 	hammerspoon: "hs",
 
+	// PENDING https://github.com/freeCodeCamp/devdocs/issues/2210
 	// devdocs aliases https://devdocs.io/help#aliases
 	angular: "ng",
 	angularjs: "ng", // removed `.`

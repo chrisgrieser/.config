@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # CONFIG
 log_location="$DATA_DIR/Backups/backups-to-external-drives.log"
 
@@ -55,7 +56,7 @@ function backup() {
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-# CONTENT TO BACKUP
+# CONFIG CONTENT TO BACKUP
 
 # - WARN each command has to sync to individual folders, since otherwise the
 # `--delete` option will override the previous contents
@@ -93,18 +94,3 @@ echo "completed: $(date '+%H:%M')" >>"$log_location"
 
 # at backup destination
 echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
-
-# Reminders.app for next backup in 14 days
-# (idempotent, due to multiple backup disks)
-osascript -e '
-	set today to (current date)
-	set inTwoWeeks to today + 14 * (60 * 60 * 24)
-	tell application "Reminders"
-		set theList to (default list)
-		set backupReminders to (reminders of theList where name is "Backup" and completed is false and due date is greater than today)
-		if (count of backupReminders) is 0 then
-			tell theList to make new reminder with properties {name:"Backup", allday due date:inTwoWeeks}
-		end if
-		quit
-	end tell
-' &>/dev/null
