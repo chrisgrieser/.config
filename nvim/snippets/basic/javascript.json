@@ -343,6 +343,10 @@
     "body": "/** @type {${1:string}} */",
     "prefix": "type (JSDoc)"
   },
+  "type: Record (JSDoc)": {
+    "body": "/** @type {Record<string, string>} */",
+    "prefix": "type: Record (JSDoc)"
+  },
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",
     "prefix": "unique items"
