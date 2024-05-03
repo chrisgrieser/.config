@@ -11,7 +11,7 @@ fi
 
 # GUARD only via interval or when browser (de)activates
 if [[ "$SENDER" == "front_app_switched" ]]; then
-	[[ "$INFO" == "$BROWSER_APP" || "$deactivated_app" == "$BROWSER_APP" ]] || return 0
+	[[ "$INFO" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
 fi
 
 # GUARD dependencies or API key missing
@@ -25,7 +25,7 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 # when triggered due to opening in browser, wait so notification opened is marked as read
-[[ "$SENDER" == "front_app_switched" && "$INFO" == "$BROWSER_APP" ]] && sleep 5
+[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 5
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -292,13 +292,13 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
 				<string>:dock</string>
 				<key>subtext</key>
-				<string>Add a divider to the current dock</string>
+				<string>Add divider to current dock</string>
 				<key>text</key>
-				<string>Add Divider</string>
+				<string>Dock</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -354,9 +354,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>00A6D518-2A93-46B2-8362-89BFB8CF6EAE</key>
 		<dict>
 			<key>xpos</key>
-			<real>200</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>440</real>
 		</dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
@@ -434,7 +434,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>35</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>440</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

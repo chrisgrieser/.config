@@ -231,14 +231,13 @@ function M.closeFinderWins()
 end
 
 function M.closeAllTheThings()
-	M.closeFinderWins()
-
 	-- close fullscreen wins
 	for _, win in pairs(hs.window.allWindows()) do
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
-	-- close browser tabs and various apps
+	-- close browser tabs, finder wins and video apps
+	M.closeFinderWins()
 	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps(env.videoAndAudioApps)
 end

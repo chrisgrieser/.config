@@ -13,14 +13,16 @@ local function fileIsDownloaded(filepath)
 	local fileExists, msg = pcall(hs.fs.xattr.get, filepath, "com.apple.quarantine")
 	return fileExists and msg ~= nil
 end
-
 --------------------------------------------------------------------------------
 
 -- CONFIG
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
+local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
 
-M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
+--------------------------------------------------------------------------------
+
+M.pathw_fileHub = pathw(fileHub, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, filep in pairs(paths) do
@@ -70,20 +72,13 @@ M.pathw_fileHub = pathw(env.fileHub, function(paths, _)
 			os.rename(filep, browserSettings .. "stylus.json")
 			print("➡️ Stylus Settings backup")
 		end
-	end
-end):start()
 
---------------------------------------------------------------------------------
--- AUTO-INSTALL OBSIDIAN ALPHA
-
-M.pathw_ObsiAlpha = pathw(env.fileHub, function(files)
-	for _, file in pairs(files) do
+		-- 4. AUTO-INSTALL OBSIDIAN ALPHA
 		-- needs delay and `.crdownload` check, since the renaming is sometimes
 		-- not picked up by hammerspoon
-		if not (file:match("%.crdownload$") or file:match("%.asar%.gz$")) then return end
-
-		u.runWithDelays(0.5, function()
-			hs.execute([[cd "]] .. env.fileHub .. [[" || exit 1
+		if filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
+			u.runWithDelays(0.5, function()
+				hs.execute([[cd "]] .. fileHub .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
@@ -94,9 +89,10 @@ M.pathw_ObsiAlpha = pathw(env.fileHub, function(files)
 				sleep 0.2
 				open -a "Obsidian"
 			]])
-			-- close the created tab
-			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
-		end)
+				-- close the created tab
+				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
+			end)
+		end
 	end
 end):start()
 

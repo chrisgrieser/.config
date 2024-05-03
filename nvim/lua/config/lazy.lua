@@ -21,7 +21,7 @@ require("lazy").setup("plugins", {
 
 	-- for repos matching <patterns>, use local repos if one exists in <path>
 	dev = {
-		path = os.getenv("HOME") .. "/Repos",
+		path = os.getenv("HOME") .. "/repos",
 		patterns = { "chrisgrieser" },
 		fallback = true,
 	},
