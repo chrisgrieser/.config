@@ -664,21 +664,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>25</string>
-				<key>placeholder</key>
-				<string>25</string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>25</integer>
+				<key>markercount</key>
+				<integer>20</integer>
+				<key>maxvalue</key>
+				<integer>100</integer>
+				<key>minvalue</key>
+				<integer>5</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Between 5 - 100.</string>
+			<string>Number of posts to show per subreddit</string>
 			<key>label</key>
-			<string>Number of Pages</string>
+			<string>Posts</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>pages_to_request</string>
 		</dict>
@@ -690,12 +694,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Hide Stickied Posts</string>
+				<string>Hide</string>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Filtering</string>
+			<string>Stickied Posts</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -704,21 +708,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>0</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>0</integer>
+				<key>markercount</key>
+				<integer>6</integer>
+				<key>maxvalue</key>
+				<integer>100</integer>
+				<key>minvalue</key>
+				<integer>0</integer>
+				<key>onlystoponmarkers</key>
 				<false/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Minimum score of posts to display, posts with a score below that number are not shown.</string>
+			<string>Minimum score of posts to display, posts with a score below that number are not shown. Use "0" to show all posts.</string>
 			<key>label</key>
 			<string>Minimum Upvotes</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>min_upvotes</string>
 		</dict>
@@ -760,12 +768,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Save Reading Position</string>
+				<string>Save</string>
 			</dict>
 			<key>description</key>
 			<string>Upon visiting a link, move the item and all items above it to the bottom.</string>
 			<key>label</key>
-			<string>Reading</string>
+			<string>Reading Position</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -775,31 +783,46 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>Use old reddit</string>
+				<string>www.reddit.com</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>www.reddit.com</string>
+						<string>www.reddit.com</string>
+					</array>
+					<array>
+						<string>new.reddit.com</string>
+						<string>new.reddit.com</string>
+					</array>
+					<array>
+						<string>old.reddit.com</string>
+						<string>old.reddit.com</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Redirect to old.reddit.com as reddit frontend.</string>
+			<string>Redirect to an alternative reddit frontend.</string>
 			<key>label</key>
-			<string></string>
+			<string>Frontend</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>use_old_reddit</string>
+			<string>reddit_frontend</string>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>15</string>
-				<key>placeholder</key>
-				<string>20</string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>20</integer>
+				<key>markercount</key>
+				<integer>12</integer>
+				<key>maxvalue</key>
+				<integer>60</integer>
+				<key>minvalue</key>
+				<integer>5</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
@@ -807,7 +830,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>label</key>
 			<string>Refresh Internal</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>cache_age_threshold</string>
 		</dict>
@@ -891,7 +914,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.1</string>
+	<string>1.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

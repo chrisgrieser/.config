@@ -23,9 +23,7 @@ function readFile(path) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// CONFIG
-	const browserDefaultsPath = app.doShellScript(
-		'source $HOME/.zshenv ; echo "$BROWSER_DEFAULTS_PATH"',
-	);
+	const browserDefaultsPath = $.getenv("browser_defaults_path");
 
 	const extensionFolder =
 		app.pathTo("home folder") +

@@ -4,16 +4,16 @@
 <dict>
 	<key>add_hackernews</key>
 	<true/>
-	<key>cache_age_threshold</key>
-	<string>20</string>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hide_stickied</key>
 	<true/>
 	<key>min_upvotes</key>
-	<string>5</string>
+	<integer>5</integer>
 	<key>pages_to_request</key>
-	<string>50</string>
+	<integer>50</integer>
+	<key>reddit_frontend</key>
+	<string>new.reddit.com</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>

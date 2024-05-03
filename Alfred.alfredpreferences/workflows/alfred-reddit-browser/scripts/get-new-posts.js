@@ -2,18 +2,17 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 function getSettings() {
-	const minUpvotesSetting = Number.parseInt($.getenv("min_upvotes")) || 0;
-	const pagesToRequest = Number.parseInt($.getenv("pages_to_request")) || 25;
 	return {
-		minUpvotes: Math.max(minUpvotesSetting, 0), // minimum of 0
-		useOldReddit: $.getenv("use_old_reddit") === "1" ? "old" : "www",
+		minUpvotes: Number.parseInt($.getenv("min_upvotes")),
+		redditFrontend: $.getenv("reddit_frontend"),
 		hnFrontendUrl: $.getenv("hackernews_frontend_url"),
 		iconFolder: $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data"),
 		sortType: $.getenv("sort_type") || "hot",
 		hideStickied: $.getenv("hide_stickied") === "1",
-		pagesToRequest: Math.min(Math.max(pagesToRequest, 5), 100),
+		pagesToRequest: Number.parseInt($.getenv("pages_to_request")),
 	};
 }
 
@@ -165,7 +164,7 @@ function getRedditPosts(subredditName, oldItems) {
 			if (item.score < opts.minUpvotes) return acc;
 			if (item.stickied && opts.hideStickied) return acc;
 
-			const commentUrl = `https://${opts.useOldReddit}.reddit.com${item.permalink}`;
+			const commentUrl = `https://${opts.redditFrontend}${item.permalink}`;
 			const isOnReddit = item.domain.includes("redd.it") || item.domain.startsWith("self.");
 			const externalUrl = isOnReddit ? "" : item.url;
 			let postTypeIcon = "";
