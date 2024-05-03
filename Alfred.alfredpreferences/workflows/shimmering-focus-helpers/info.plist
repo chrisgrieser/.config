@@ -288,6 +288,27 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>~/repos</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/local-repos</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Local Repos Folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>local_repos</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>main</string>
 				<key>pairs</key>
 				<array>

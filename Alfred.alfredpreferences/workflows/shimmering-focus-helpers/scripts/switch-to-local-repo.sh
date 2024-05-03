@@ -11,15 +11,9 @@ theme_folders=$(grep --ignore-case "vault" "$HOME/.config/perma-repos.csv" |
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD $LOCAL_REPOS unset
-if [[ -z "$LOCAL_REPOS" ]]; then
-	# shellcheck disable=2016 # on purpose
-	osascript -e 'display notification "$LOCAL_REPOS not set in .zshenv" with title "Error"'
-	return 1
-fi
-
-[[ ! -d "$LOCAL_REPOS" ]] && mkdir -p "$LOCAL_REPOS"
-cd "$LOCAL_REPOS" || return 1
+# shellcheck disable=2154 # Alfred var
+[[ ! -d "$local_repos" ]] && mkdir -p "$local_repos"
+cd "$local_repos" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
@@ -34,7 +28,7 @@ fi
 
 # switch to symlink for each vault (from perma-repos)
 echo "$theme_folders" | while read -r theme_file; do
-	ln -sf "$LOCAL_REPOS/shimmering-focus/theme.css" "$theme_file"
+	ln -sf "$local_repos/shimmering-focus/theme.css" "$theme_file"
 done
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -46,4 +40,4 @@ osascript -e '
 '
 
 # install dependencies
-cd "$LOCAL_REPOS/shimmering-focus/" && npm install
+cd "$local_repos/shimmering-focus/" && npm install

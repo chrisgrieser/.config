@@ -175,6 +175,8 @@ function run(argv) {
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
 				<string>Search Amazon with suggestions</string>
 				<key>title</key>
@@ -348,7 +350,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.5</string>
+	<string>2024.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>

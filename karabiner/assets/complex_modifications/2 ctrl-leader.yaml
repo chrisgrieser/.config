@@ -222,7 +222,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[m]ail (Mimestream)"
+      - description: "[m]ail"
         type: basic
         from: { key_code: m }
         conditions: [*leader-active]
@@ -236,7 +236,7 @@ rules:
         from: { key_code: b }
         conditions: [*leader-active]
         to:
-          - shell_command: source "$HOME/.zshenv" && open -a "$BROWSER_APP"
+          - shell_command: open -a "Brave Browser"
           - *deactivate-leader
           - *remove-notice
 
@@ -247,13 +247,12 @@ rules:
         to:
           # FIX page reloading needed, since vimium is otherwise stuck
           - shell_command: |
-              source "$HOME/.zshenv" # load $BROWSER_APP
-              osascript -e "
-                tell application \"System Events\" to tell process \"$BROWSER_APP\"
+              osascript -e '
+                tell application "System Events" to tell process "Brave Browser"
                   set frontmost to true
-                  click menu item \"Reopen Closed Tab\" of menu \"File\" of menu bar 1
-                  click menu item \"Reload This Page\" of menu \"View\" of menu bar 1
-                end tell"
+                  click menu item "Reopen Closed Tab" of menu "File" of menu bar 1
+                  click menu item "Reload This Page" of menu "View" of menu bar 1
+                end tell'
           - *deactivate-leader
           - *remove-notice
 

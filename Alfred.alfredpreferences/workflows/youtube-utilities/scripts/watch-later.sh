@@ -1,12 +1,10 @@
 #!/bin/zsh
-#───────────────────────────────────────────────────────────────────────────────
 
 # cannot use JXA to get browser URL, since sometimes a PWA is frontmost
-# browser app set in `.zshenv`
-url=$(osascript -e "tell application \"$BROWSER_APP\" to return URL of active tab of front window")
+# shellcheck disable=2154 # $browser_app set in Alfred settings
+url=$(osascript -e "tell application \"$browser_app\" to return URL of active tab of front window")
 
 # GUARD
-# shellcheck disable=SC2154
 if [[ -z "$url" ]]; then
 	echo -n "❌ Tab could not be retrieved."
 	return 1
@@ -25,8 +23,8 @@ youtube_id=$(echo "$url" | cut -d"=" -f2)
 title=$(
 	curl --silent "$url" |
 		grep --only-matching "<title>[^<]*" | cut -d'>' -f2- | # get title key
-		tr "/:" "--" | # remove unsafe chars
-		sed -e 's/ - YouTube//' -e 's/amp;//g' # cleanup
+		tr "/:" "--" |                                         # remove unsafe chars
+		sed -e 's/ - YouTube//' -e 's/amp;//g'                 # cleanup
 )
 
 destination="$youtube_link_folder/$title.url"

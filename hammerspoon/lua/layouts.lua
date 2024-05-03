@@ -25,9 +25,7 @@ local function setHigherBrightnessDuringDay()
 	if noBrightnessSensor then return end
 
 	local target
-	if env.isProjector() then
-		target = 0
-	elseif ambient > 120 then
+	if ambient > 120 then
 		target = 1
 	elseif ambient > 90 then
 		target = 0.9
@@ -43,27 +41,22 @@ local function setHigherBrightnessDuringDay()
 	wu.iMacDisplay:setBrightness(target)
 end
 
---------------------------------------------------------------------------------
--- LAYOUTS
-
 local function isWorkweek()
 	local weekday = tostring(os.date("%a"))
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
+--------------------------------------------------------------------------------
+-- LAYOUTS
+
 local function workLayout()
-	-- screen & visuals
 	darkmode.autoSwitch()
 	visuals.updateHoleCover()
-	dockSwitcher("work")
-
 	setHigherBrightnessDuringDay()
+	dockSwitcher("work")
 	u.closeAllTheThings()
 
-	-- CONFIG
-	local toOpen = { "Discord", "Mimestream" }
-	if isWorkweek() then table.insert(toOpen, "Slack") end
-
+	local toOpen = { "Discord", "Mimestream", isWorkweek() and "Slack" or nil }
 	u.openApps { env.mastodonApp, "AlfredExtraPane" }
 	u.openApps(toOpen)
 	for _, appName in pairs(toOpen) do
@@ -72,22 +65,19 @@ local function workLayout()
 			wu.moveResize(win, wu.pseudoMax)
 		end)
 	end
+	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 
-	-- finish
-	u.whenAppWinAvailable("Discord", function()
-		app("Mimestream"):activate()
-		print("🔲 Loaded WorkLayout")
-	end)
+	print("🔲 Loaded WorkLayout")
 end
 
 local function movieLayout()
-	dockSwitcher(env.isAtMother and "mother-movie" or "movie") -- different PWAs due to not being M1 device
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.setDarkMode("dark")
 	visuals.updateHoleCover()
+	dockSwitcher("movie")
+	u.closeFinderWins()
 
 	u.openApps { "YouTube", "BetterTouchTool" }
-	u.closeFinderWins()
 	u.quitApps {
 		"Slack",
 		"Discord",
@@ -138,8 +128,8 @@ hs.hotkey.bind(u.hyper, "home", selectLayout)
 if u.isSystemStart() then
 	selectLayout()
 
-	-- sync reminders
-	hs.application.open("Reminders")
+	-- force sync reminders quickly
+	u.openApps("Reminders")
 	u.runWithDelays(6, function() u.quitApps("Reminders") end)
 end
 

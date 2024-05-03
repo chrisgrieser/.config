@@ -5,7 +5,7 @@
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
 setopt CHASE_LINKS # follow symlinks when they are cd target
-export CDPATH="$LOCAL_REPOS:$WD"
+export CDPATH="$HOME/repos:$WD"
 
 # POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
