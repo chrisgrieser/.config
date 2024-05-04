@@ -18,11 +18,11 @@ end
 -- CONFIG
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-local fileHub = home .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+local desktop = home .. "/Desktop"
 
 --------------------------------------------------------------------------------
 
-M.pathw_fileHub = pathw(fileHub, function(paths, _)
+M.pathw_fileHub = pathw(desktop, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, filep in pairs(paths) do
@@ -78,7 +78,7 @@ M.pathw_fileHub = pathw(fileHub, function(paths, _)
 		-- not picked up by hammerspoon
 		if filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
 			u.runWithDelays(0.5, function()
-				hs.execute([[cd "]] .. fileHub .. [[" || exit 1
+				hs.execute([[cd "]] .. desktop .. [[" || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"

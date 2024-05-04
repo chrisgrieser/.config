@@ -178,7 +178,7 @@ sudo tmutil disable # disable automatic backups
 defaults write com.apple.Safari IncludeDevelopMenu -bool true            # Enable Develop menu & Inspector
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true # full URL in address bar
 defaults write com.apple.Safari HomePage -string "about:blank"           # faster loading
-defaults write com.apple.Safari DownloadsPath -string "$WD"              # Download path
+defaults write com.apple.Safari DownloadsPath -string "$HOME/Desktop"    # Download path
 
 #───────────────────────────────────────────────────────────────────────────────
 # enable "displays have separated spaces" (required for tiling apps)

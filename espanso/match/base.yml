@@ -16,13 +16,6 @@ matches:
     replace: https://www.paypal.me/ChrisGrieser
   - trigger: "!name"
     replace: Christopher Grieser
-  #─────────────────────────────────────────────────────────────────────────────
-  - trigger: "!wd"
-    replace: "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-  - trigger: "!path"
-    replace: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH"
-  - trigger: "!null"
-    replace: "&>/dev/null;"
   #───────────────────────────────────────────────────────────────────────────
   - trigger: "!bug"
     replace: >-

@@ -104,7 +104,7 @@ return {
 	automatically_reload_config = true,
 
 	-- Start/Close
-	default_cwd = wt.home_dir .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/",
+	default_cwd = wt.home_dir .. "/Desktop",
 	window_close_confirmation = "NeverPrompt",
 	quit_when_all_windows_are_closed = true,
 
