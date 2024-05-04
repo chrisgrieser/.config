@@ -4,7 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-wd="$HOME/Library/Mobile Documents/com~apple~CloudDocs/File Hub"
+wd="$HOME/Desktop"
 local_repos="$HOME/repos"
 
 #───────────────────────────────────────────────────────────────────────────────

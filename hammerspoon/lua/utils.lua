@@ -221,7 +221,7 @@ function M.quitApps(appNames)
 end
 
 function M.closeFinderWins()
-	M.runWithDelays({ 0, 3, 5 }, function()
+	M.runWithDelays({ 0, 3 }, function()
 		local finder = hs.application("Finder")
 		if not finder then return end
 		for _, win in ipairs(finder:allWindows()) do
@@ -237,8 +237,8 @@ function M.closeAllTheThings()
 	end
 
 	-- close browser tabs, finder wins and video apps
+	hs.application(env.browserApp):mainWindow():close()
 	M.closeFinderWins()
-	M.closeTabsContaining(".") -- closes all tabs, since all URLs include `.`
 	M.quitApps(env.videoAndAudioApps)
 end
 

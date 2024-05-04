@@ -62,12 +62,12 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 ".config" = " "
 "main-vault" = "󱉽 "
 "phd-data-analysis" = "󰆼 "
-"~/Library/Mobile Documents/com~apple~CloudDocs/File Hub" = "/󰀶 "
-"~/Library/Mobile Documents/com~apple~CloudDocs" = "/ "
+"~/Desktop" = "/󰀶 "
+"Library/Mobile Documents/com~apple~CloudDocs" = " "
 
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
-command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name 'Icon?' | wc -l"
+command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
 when = "true" # always show
 symbol = " "
 format = '[$symbol$output]($style) '

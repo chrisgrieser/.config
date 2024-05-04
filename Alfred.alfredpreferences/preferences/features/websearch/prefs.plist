@@ -81,6 +81,17 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
+		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>us</string>
+			<key>text</key>
+			<string>User Scripts: {query}</string>
+			<key>url</key>
+			<string>https://www.userscript.zone/search?source=index&amp;q={query}</string>
+		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
 			<key>enabled</key>

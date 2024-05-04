@@ -47,7 +47,6 @@ typings/**/*.pyi
 
 # Alfred workflows
 info.plist
-prefs.plist
 jsconfig.json
 alfred.d.ts
 jxa-globals.d.ts
