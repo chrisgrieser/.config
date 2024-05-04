@@ -697,6 +697,8 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>edit</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

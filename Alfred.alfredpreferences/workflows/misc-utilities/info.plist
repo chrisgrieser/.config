@@ -60,19 +60,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>58DC7C3B-3563-455A-A942-24B2B2F283E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>25653873-BA08-495C-9634-85EDC4DE03F5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>5C877087-012F-4C14-9B4D-369466813350</key>
 		<array>
 			<dict>
@@ -372,64 +359,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>Application("System Events")
-  .applicationProcesses.byName("NotificationCenter")
-  .windows[0]
-  .groups[0]
-  .scrollAreas[0]
-  .uiElements[0]
-  .groups()
-  .map(banner =&gt; banner.actions().slice(-1)[0])
-  .forEach(banner =&gt; banner.perform())</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>7</integer>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Uninstall with AppCleaner</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>25653873-BA08-495C-9634-85EDC4DE03F5</string>
+			<string>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
+				<key>sourcefile</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>25</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>9</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>58DC7C3B-3563-455A-A942-24B2B2F283E9</string>
+			<string>F7331471-4575-4686-BB12-FD49331C261C</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -476,38 +437,44 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>acceptsurls</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>name</key>
-				<string>Uninstall with AppCleaner</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</string>
+			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
-				<key>sourcefile</key>
-				<string></string>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Add to Busycal</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>F7331471-4575-4686-BB12-FD49331C261C</string>
+			<string>5C877087-012F-4C14-9B4D-369466813350</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -570,42 +537,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>acceptsfiles</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
+				<key>acceptsmulti</key>
 				<integer>0</integer>
-				<key>keyword</key>
-				<string>cal</string>
-				<key>subtext</key>
-				<string>{query}</string>
-				<key>text</key>
-				<string>Add to Busycal</string>
-				<key>withspace</key>
+				<key>acceptstext</key>
 				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Add as Event to BusyCal</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>5C877087-012F-4C14-9B4D-369466813350</string>
+			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -670,27 +616,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Add as Event to BusyCal</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -886,15 +811,6 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>25653873-BA08-495C-9634-85EDC4DE03F5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>800</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
 		<key>2CF3A219-5210-4AA2-AC7F-0B13E5C28FAE</key>
 		<dict>
 			<key>colorindex</key>
@@ -920,25 +836,14 @@
 			<key>ypos</key>
 			<real>590</real>
 		</dict>
-		<key>58DC7C3B-3563-455A-A942-24B2B2F283E9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Close Notification</string>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
 		<key>5C877087-012F-4C14-9B4D-369466813350</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>265</real>
 		</dict>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<dict>
@@ -985,18 +890,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>265</real>
 		</dict>
 		<key>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>140</real>
 		</dict>
 		<key>A2960A81-02AB-485E-AF91-AEF7B502D533</key>
 		<dict>
@@ -1054,7 +959,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>750</real>
 		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
@@ -1090,18 +995,18 @@
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>390</real>
 		</dict>
 		<key>F7331471-4575-4686-BB12-FD49331C261C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>800</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>140</real>
 		</dict>
 		<key>FDBFF042-F69F-40B2-81FA-362687A7835C</key>
 		<dict>
@@ -1110,7 +1015,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>750</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -7,26 +7,26 @@ local u = require("lua.utils")
 local config = {
 	syncIntervalMins = 30,
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
-	repos = {},
 }
+
+--------------------------------------------------------------------------------
+-- get repos from perma-repos.csv
+M.reposToSync = {}
+M.syncedRepos = {}
+M.task_sync = {}
+
 for line in io.lines(config.permaReposPath) do
 	local name, location, icon, _ = line:match("^(.-),(.-),(.-),(.-)$")
 	if not (name and location and icon) then return end
-	table.insert(config.repos, {
+	table.insert(M.reposToSync, {
 		name = name,
 		location = location,
 		icon = icon,
 	})
 end
 
---------------------------------------------------------------------------------
--- REPO SYNC JOBS
-
 ---@param msg string
 local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
-
-M.syncedRepos = {}
-M.task_sync = {}
 
 ---@async
 ---@param repo { name: string, icon: string, location: string }
@@ -54,7 +54,7 @@ end
 ---@return string[] reposStillSyncing
 local function repoSyncsInProgress()
 	local reposStillSyncing = {}
-	for _, repo in pairs(config.repos) do
+	for _, repo in pairs(M.reposToSync) do
 		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
 		if isStillSyncing then table.insert(reposStillSyncing, repo.icon) end
 	end
@@ -70,7 +70,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 		return
 	end
 
-	for _, repo in pairs(config.repos) do
+	for _, repo in pairs(M.reposToSync) do
 		repoSync(repo)
 	end
 
@@ -96,9 +96,7 @@ if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
-	.doEvery(config.syncIntervalMins * 60, function()
-		if u.screenIsUnlocked() then syncAllGitRepos(false) end
-	end)
+	.doEvery(config.syncIntervalMins * 60, function() syncAllGitRepos(false) end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
