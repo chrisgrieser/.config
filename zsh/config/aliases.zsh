@@ -16,6 +16,8 @@ alias grep='grep --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
+alias l='eza --all --long --time-style=relative --no-user \
+	--smart-group --no-quotes --git-ignore --sort=newest'
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character

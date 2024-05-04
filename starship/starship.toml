@@ -59,11 +59,12 @@ style = "fg:cyan bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
+"Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 ".config" = " "
 "main-vault" = "󱉽 "
-"phd-data-analysis" = "󰆼 "
-"~/Desktop" = "/󰀶 "
-"Library/Mobile Documents/com~apple~CloudDocs" = " "
+"phd-data-analysis" = "󰙨 "
+"~/Desktop" = "/ "
+"~" = "/ "
 
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
