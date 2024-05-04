@@ -76,6 +76,22 @@ function appendJsComment() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+function copyAbsolutePath() {
+	const relPath = view.file.path;
+	const vautlPath = view.app.vault.adapter.getBasePath();
+	const absPath = vautlPath + "/" + relPath;
+	new Notice("Copied:\n" + absPath);
+	navigator.clipboard.writeText(absPath);
+}
+
+function copyFilename() {
+	const filename = view.file.name;
+	new Notice("Copied:\n" + filename);
+	navigator.clipboard.writeText(filename);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 async function updatePlugins() {
 	const app = view.app;
 
