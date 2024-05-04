@@ -24,16 +24,15 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
-" Paste link into selection/cword
-vnoremap ,cp :pasteinto
-nnoremap ,cp :pasteinto
-
-" Copy Path/Name
+" Copy Path
 exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyAbsolutePath() }
-nnoremap <C-p> :copyAbsolutePath
+noremap <C-p> :copyAbsolutePath
+inoremap <C-p> :copyAbsolutePath
 
+" Copy Name
 exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyFilename() }
-nnoremap <C-n> :copyFilename
+noremap <C-n> :copyFilename
+inoremap <C-n> :copyAbsolutePath
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION

@@ -727,8 +727,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>source "$HOME/.zshenv" # source $WD
-osascript -l JavaScript  "$WD"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
