@@ -1,6 +1,20 @@
 // INFO these are globally available in jsfiles used by the Obsidian vimrc plugin
 // see https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
 
+// biome-ignore lint/suspicious/noExplicitAny: Electron window
+declare const activeWindow: any;
+// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
+declare const activeDocument: any;
+declare const selection: EditorSelection;
+declare const editor: Editor;
+declare const view: View;
+
+//──────────────────────────────────────────────────────────────────────────────
+
+declare class Notice {
+	constructor(msg: string, duration?: number);
+}
+
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
@@ -24,20 +38,11 @@ declare type Editor = {
 	cm: any;
 };
 
-//──────────────────────────────────────────────────────────────────────────────
-
-// biome-ignore lint/suspicious/noExplicitAny: Electron window
-declare const activeWindow: any;
-
-// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
-declare const activeDocument: any;
-
-declare const selection: EditorSelection;
-
-declare const editor: Editor;
-
-declare const view: {
-	editor: Editor;
+declare type View = {
+	file: {
+		path: string;
+		name: string;
+	};
 	app: {
 		customCss: {
 			theme: string;
@@ -55,6 +60,7 @@ declare const view: {
 			getConfig(key: string): boolean | string | number;
 			setConfig(key: string, value: boolean | string | number): void;
 			configDir: string;
+			adapter: { getBasePath(): string };
 		};
 		plugins: {
 			checkForUpdates(): Promise<void>;
@@ -68,7 +74,3 @@ declare const view: {
 		};
 	};
 };
-
-declare class Notice {
-	constructor(msg: string, duration?: number);
-}

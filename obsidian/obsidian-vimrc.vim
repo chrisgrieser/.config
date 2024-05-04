@@ -28,6 +28,13 @@ vnoremap p P
 vnoremap ,cp :pasteinto
 nnoremap ,cp :pasteinto
 
+" Copy Path/Name
+exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyAbsolutePath() }
+nnoremap <C-p> :copyAbsolutePath
+
+exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyFilename() }
+nnoremap <C-n> :copyFilename
+
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
 
