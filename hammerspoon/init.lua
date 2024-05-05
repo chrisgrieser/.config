@@ -5,8 +5,11 @@ G = {} -- persist from garbage collector
 ---@param module string module to load
 local function safeRequire(module)
 	local success, M = pcall(require, module)
-	G[module:sub(5)] = M -- protect timers from garbage collector
-	if not success then hs.alert("⚠️ Error loading " .. module) end
+	G[module:sub(5)] = M
+	if not success then
+		hs.alert.show(M, 5)
+		print(M)
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -38,8 +41,8 @@ safeRequire("lua.filesystem-watchers")
 safeRequire("lua.repo-auto-sync")
 safeRequire("lua.hardware-periphery")
 safeRequire("lua.pageup-pagedown-scroll")
-safeRequire("lua.weather-reminder")
 safeRequire("lua.vertical-split")
+safeRequire("lua.weather-reminder")
 
 -- app-specific
 safeRequire("lua.app-specific-behavior")

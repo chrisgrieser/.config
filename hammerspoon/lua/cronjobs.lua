@@ -6,6 +6,15 @@ local wu = require("lua.window-utils")
 local c = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 
+-- force reminders sync on startup
+if u.isSystemStart() then
+	u.openApps("Reminders")
+	u.app("Reminders"):hide()
+	u.runWithDelays(6, function() u.quitApps("Reminders") end)
+end
+
+--------------------------------------------------------------------------------
+
 -- keep the iMac display brightness low when projector is connected
 M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
