@@ -104,7 +104,9 @@ rules:
       ignore:
         - after-comment
   selector-attribute-quotes: always
-  selector-class-pattern: null # when doing themes, you mostly do not decide on class names
+  selector-class-pattern:
+    - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
+    - {}
   selector-id-pattern:
     - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
     - {}
@@ -123,5 +125,6 @@ rules:
   color-no-hex: true
   declaration-no-important: true
   font-weight-notation: numeric
-  no-unknown-custom-properties: [true, {severity: error}] # equivalent to "no undeclared variables" in other linters
   max-nesting-depth: 3
+  no-unknown-custom-properties: [true, {severity: error}] # equivalent to "no undeclared variables" in other linters
+  selector-nested-pattern: ["&", {splitList: true, message: "Nested selectors should include a &."}]

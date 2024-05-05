@@ -2,6 +2,19 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- breadcrumbs for winbar
+		"SmiteshP/nvim-navic",
+		opts = {
+			lsp = {
+				auto_attach = true,
+				preference = { "pyright", "tsserver" },
+			},
+			icons = { Object = "󰆧 " },
+			separator = "  ",
+			depth_limit = 7,
+			depth_limit_indicator = "…",
+		},
+	},
 	{ -- display inlay hints from LSP
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()
