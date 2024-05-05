@@ -43,6 +43,8 @@ function clearNotices() {
 	}
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+
 function inspectWordCount() {
 	const text = editor
 		.getValue()
@@ -52,6 +54,19 @@ function inspectWordCount() {
 	const wordCount = text.split(/\s+/).length;
 	new Notice(`Characters: ${charCount} \nWords: ${wordCount}`);
 }
+
+function inspectVersions() {
+	const { electron, chrome, node } = process.versions;
+	const onlyMajorMinor = (/** @type {string} */ version) => version.replace(/(.\d+\.\d+).*/, "$1");
+	const lines = [
+		`Electron: ${onlyMajorMinor(electron)}`,
+		`Chrome: ${onlyMajorMinor(chrome)}`,
+		`Node: ${onlyMajorMinor(node)}`,
+	];
+	new Notice(lines.join("\n"), 5000);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
 
 function toggleJsLineComment() {
 	const cursor = editor.getCursor();
@@ -80,14 +95,20 @@ function copyAbsolutePath() {
 	const relPath = view.file.path;
 	const vautlPath = view.app.vault.adapter.getBasePath();
 	const absPath = vautlPath + "/" + relPath;
-	new Notice("Copied:\n" + absPath);
 	navigator.clipboard.writeText(absPath);
+	new Notice("Copied:\n" + absPath);
+}
+
+function copyRelativePath() {
+	const relPath = view.file.path;
+	navigator.clipboard.writeText(relPath);
+	new Notice("Copied:\n" + relPath);
 }
 
 function copyFilename() {
 	const filename = view.file.name;
-	new Notice("Copied:\n" + filename);
 	navigator.clipboard.writeText(filename);
+	new Notice("Copied:\n" + filename);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
