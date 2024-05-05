@@ -4,6 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
+		event = "LspAttach",
 		opts = {
 			lsp = {
 				auto_attach = true,
@@ -11,7 +12,7 @@ return {
 			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",
-			depth_limit = 7,
+			depth_limit = 6,
 			depth_limit_indicator = "…",
 		},
 	},

@@ -43,7 +43,7 @@ return {
 				blame = {
 					hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 72,
+					maxMsgLen = 60,
 				},
 			},
 		},
