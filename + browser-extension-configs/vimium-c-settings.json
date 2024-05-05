@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/4/2024, 1:41:06 PM",
-	"time": 1714822866801,
+	"@time": "5/5/2024, 12:09:36 PM",
+	"time": 1714903776176,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -93,6 +93,7 @@
 		"",
 		"\" Link Mode",
 		"map f LinkHints.activate",
+		"map F LinkHints.activateWithQueue",
 		"map b LinkHints.activateOpenInNewTab",
 		"map yf LinkHints.activateCopyLinkUrl",
 		"map yi LinkHints.activateCopyImage",

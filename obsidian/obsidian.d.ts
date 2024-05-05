@@ -8,6 +8,7 @@ declare const activeDocument: any;
 declare const selection: EditorSelection;
 declare const editor: Editor;
 declare const view: View;
+declare const process: { versions: Record<string, string> };
 
 //──────────────────────────────────────────────────────────────────────────────
 

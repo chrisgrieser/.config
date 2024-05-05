@@ -24,15 +24,22 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
-" Copy Path
+"───────────────────────────────────────────────────────────────────────────────
+
+" Copy Absolute Path
 exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyAbsolutePath() }
 noremap <C-p> :copyAbsolutePath
 inoremap <C-p> :copyAbsolutePath
 
+" Copy Relative Path
+exmap copyRelativePath jsfile Meta/vimrc-jscommands.js { copyRelativePath() }
+noremap <C-t> :copyRelativePath
+inoremap <C-t> :copyRelativePath
+
 " Copy Name
 exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyFilename() }
 noremap <C-n> :copyFilename
-inoremap <C-n> :copyAbsolutePath
+inoremap <C-n> :copyFilename
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
@@ -150,7 +157,7 @@ nnoremap <CR> :altBuffer
 " Find Mode (by mirroring American keyboard layout on German keyboard layout)
 nnoremap - /
 
-" <Esc> clears highlights & notices 
+" <Esc> clears highlights & notices
 " (cannot combine excommands, therefore combining them to a mapping first)
 exmap clearNotices jsfile Meta/vimrc-jscommands.js { clearNotices() }
 nmap &c& :clearNotices
@@ -298,6 +305,10 @@ nnoremap ,r :addYamlKey
 " [i]nspect [w]ord count
 exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
+
+" [i]nspect [v]ersions
+exmap inspectVersions jsfile Meta/vimrc-jscommands.js { inspectVersions() }
+nnoremap ,iv :inspectVersions
 
 "───────────────────────────────────────────────────────────────────────────────
 " PLUGIN- AND SETTING-RELATED BINDINGS
