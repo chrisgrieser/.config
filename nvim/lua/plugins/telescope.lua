@@ -1,5 +1,6 @@
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
+local function projectName() return vim.fs.basename(vim.loop.cwd() or "") end
 --------------------------------------------------------------------------------
 
 local keymappings_I = {
@@ -82,29 +83,6 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 })
 
 --------------------------------------------------------------------------------
--- Nicer Display of file paths https://github.com/nvim-telescope/telescope.nvim/issues/2014
-
--- color parent as comment
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "TelescopeResults",
-	callback = function(ctx)
-		vim.api.nvim_buf_call(ctx.buf, function() vim.fn.matchadd("Comment", "\t\t.*$") end)
-	end,
-})
-
----@param path string
----@return string
-local function filenameFirst(_, path)
-	local tail = vim.fs.basename(path)
-	local parent = vim.fs.dirname(path)
-	if parent == "." then return tail end
-	local parentDisplay = #parent > 25 and vim.fs.basename(parent) or parent
-	return string.format("%s\t\t%s", tail, parentDisplay) -- parent colored via autocmd above
-end
-
-local function projectName() return vim.fs.basename(vim.loop.cwd() or "") end
-
---------------------------------------------------------------------------------
 -- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
 -- Also, we are using document symbols here since Treesitter apparently does not
@@ -163,7 +141,9 @@ vim.api.nvim_create_autocmd("FileType", {
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			path_display = { "tail" },
+			path_display = {
+				filename_first = { reverse_directories = false },
+			},
 			history = { path = vim.g.syncedData .. "/telescope_history" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",

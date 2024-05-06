@@ -6,6 +6,8 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
 		opts = {
+			highlight = true,
+			lazy_update_context = true,
 			lsp = {
 				auto_attach = true,
 				preference = { "pyright", "tsserver" },
@@ -14,6 +16,38 @@ return {
 			separator = "  ",
 			depth_limit = 6,
 			depth_limit_indicator = "…",
+		},
+		keys = {
+			{ -- copy breadcrumbs
+				"<D-b>",
+				function()
+					local rawdata = require("nvim-navic").get_data()
+					if not rawdata then return end
+					local breadcrumbs = ""
+					for _, v in pairs(rawdata) do
+						breadcrumbs = breadcrumbs .. v.name .. "."
+					end
+					breadcrumbs = breadcrumbs:sub(1, -2):gsub(".%[", "[")
+					vim.fn.setreg("+", breadcrumbs)
+					u.notify("Copied", breadcrumbs)
+				end,
+				desc = "󰒕 Copy Breadcrumbs",
+			},
+			{ -- go up to parent
+				"gk",
+				function()
+					if not require("nvim-navic").is_available() then return end
+					local symbolPath = require("nvim-navic").get_data()
+					local parent = symbolPath[#symbolPath - 1]
+					if not parent then
+						vim.notify("Already at the highest parent.")
+						return
+					end
+					local pos = parent.scope.start
+					vim.api.nvim_win_set_cursor(0, { pos.line, pos.character })
+				end,
+				desc = "󰒕 Go Up to Parent",
+			},
 		},
 	},
 	{ -- display inlay hints from LSP
