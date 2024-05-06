@@ -1,10 +1,7 @@
 #!/usr/bin/env zsh
 
-echo "🕓 Uptime"
-echo "──────────────────"
+echo "## Uptime"
 uptime | cut -d "," -f 1,2 | cut -c 11-
-echo 
-echo 
-echo "🆙 Last 10 Reboots"
-echo "──────────────────"
-last reboot | head -n10 | tr -s " " | cut -d" " -f3-
+echo
+echo "## Last 10 Reboots"
+last reboot | head -n10 | sed -e 's/^/- /' -e 's/ time/:/' | tr -s " "

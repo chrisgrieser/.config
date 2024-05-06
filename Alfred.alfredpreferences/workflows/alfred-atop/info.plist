@@ -354,7 +354,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
+				<string>388BC499-DDF4-4188-B4F3-48EA712AAC8D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -884,35 +884,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -932,18 +903,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
+				<string></string>
+				<key>inputfile</key>
+				<string></string>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.text</string>
+			<key>uid</key>
+			<string>388BC499-DDF4-4188-B4F3-48EA712AAC8D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>networkQuality</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -1373,6 +1377,15 @@ Display mounted volumes directly via `vol`.
 			<key>ypos</key>
 			<real>1360</real>
 		</dict>
+		<key>388BC499-DDF4-4188-B4F3-48EA712AAC8D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>930</real>
+			<key>ypos</key>
+			<real>695</real>
+		</dict>
 		<key>40C6D3F7-B5AB-4C45-A3ED-7926B186E25F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1430,15 +1443,6 @@ Display mounted volumes directly via `vol`.
 			<real>595</real>
 			<key>ypos</key>
 			<real>970</real>
-		</dict>
-		<key>71E5C349-2F9F-4DB1-907E-EF118FA9C6B7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>930</real>
-			<key>ypos</key>
-			<real>695</real>
 		</dict>
 		<key>80995D89-9285-4E5C-8728-25576BF43113</key>
 		<dict>

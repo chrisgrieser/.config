@@ -344,7 +344,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</string>
+				<string>891D1197-07C0-437E-BF55-98BD13959806</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1377,31 +1377,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
+				<key>behaviour</key>
+				<integer>2</integer>
+				<key>fontmode</key>
 				<integer>0</integer>
-				<key>backgroundcolor</key>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
 				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
+				<key>inputfile</key>
 				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.userinterface.text</string>
 			<key>uid</key>
-			<string>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</string>
+			<string>891D1197-07C0-437E-BF55-98BD13959806</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1411,12 +1415,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>tell application "System Events" to set frontAppProcess to first application process whose frontmost is true# Tell the *process* to count its windows and return its front window's name.tell frontAppProcess	if (count of windows) &gt; 0 then		set window_name to name of front window	end ifend tell
-
-set the clipboard to window_name
-
-# direct return for displaying in Alfred
-window_name</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1895,6 +1894,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>891D1197-07C0-437E-BF55-98BD13959806</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>1110</real>
+			<key>ypos</key>
+			<real>890</real>
+		</dict>
 		<key>90992717-5795-4AC4-87C0-32EFADFFCA3B</key>
 		<dict>
 			<key>colorindex</key>
@@ -1941,15 +1949,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>480</real>
-		</dict>
-		<key>B886D589-EE74-45B0-AD7C-B73DAE7C88F3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>1110</real>
-			<key>ypos</key>
-			<real>890</real>
 		</dict>
 		<key>BC47E2C7-23EE-41BE-A060-FDA17224E6C0</key>
 		<dict>
@@ -37170,7 +37169,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.3.0</string>
+	<string>2.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
