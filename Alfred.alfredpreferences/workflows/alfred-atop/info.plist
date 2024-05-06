@@ -945,7 +945,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>scripts/speedtext.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
