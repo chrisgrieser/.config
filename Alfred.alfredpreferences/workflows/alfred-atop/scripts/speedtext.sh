@@ -1,2 +1,4 @@
 #!/usr/bin/env zsh
-scripts/uptime-and-reboots.sh
+ne | tr "
+" "%" | sed -e 's/==== SUMMARY ====/# Summary/' -e 's/%/
+- /g' | sed '$d'
