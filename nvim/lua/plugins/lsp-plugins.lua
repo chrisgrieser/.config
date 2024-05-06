@@ -32,7 +32,7 @@ return {
 			lazy_update_context = false,
 			lsp = {
 				auto_attach = true,
-				preference = { "pyright", "tsserver" },
+				preference = { "based_pyright", "tsserver" },
 			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",

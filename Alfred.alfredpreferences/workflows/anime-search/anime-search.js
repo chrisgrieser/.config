@@ -18,6 +18,21 @@ function shortenSeason(title) {
 	return title.replace(/ Season (\d+)$/, " S$1");
 }
 
+/** @typedef {Object} MalEntry
+ * @property {number} mal_id
+ * @property {string} title
+ * @property {string} title_english
+ * @property {string} url
+ * @property {string} status
+ * @property {string[]} title_synonyms
+ * @property {number} year
+ * @property {number} score
+ * @property {number} episodes
+ * @property {{name: string}[]} genres
+ * @property {{name: string}[]} themes
+ * @property {{name: string}[]} demographics
+ */
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -45,10 +60,9 @@ function run(argv) {
 	}
 
 	/** @type AlfredItem[] */
-	// @ts-expect-error
-	const animeTitles = response.data.map((anime) => {
+	const animeTitles = response.data.map((/** @type {MalEntry} */ anime) => {
 		// biome-ignore format: annoyingly long list
-		let { title, title_english, title_synonyms, year, status, episodes, score, genres, themes, synopsis, url, studios, demographics } = anime;
+		const { title, title_english, title_synonyms, year, status, episodes, score, genres, themes, demographics, url } = anime;
 
 		const titleEng = shortenSeason(title_english || title);
 		const yearInfo = year && !titleEng.match(/\d{4}/) ? `(${year})` : "";
@@ -61,28 +75,19 @@ function run(argv) {
 
 		const titleJapMax = 40; // CONFIG
 		let titleJap = shortenSeason(title_english ? title : title_synonyms[0]);
+		if (titleJap === titleEng) titleJap = ""; // skip identical titles
 		titleJap =
 			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
 
-		episodes = episodes && "📺 " + episodes.toString();
-		score = score && "⭐ " + score.toFixed(1).toString();
-		genres =
-			genres && "📚 " + genres.map((/** @type {{ name: string }}*/ genre) => genre.name).join(", ");
-		themes =
-			themes && "🎨 " + themes.map((/** @type {{ name: string }}*/ theme) => theme.name).join(", ");
-		studios =
-			studios[0] && "🎦 " + studios[0].name.replace(/(studio|animation|production)s?/gi, "").trim();
-		demographics =
-			demographics[0] &&
-			"👤 " + demographics.map((/** @type {{ name: string }}*/ d) => d.name).join(", ");
+		const episodesStr = episodes && "📺 " + episodes.toString();
+		const scoreStr = score && "⭐ " + score.toFixed(1).toString();
 
-		const subtitle = [episodes, score, demographics, studios, titleJap, genres]
-			.filter((component) => component?.match(/\w/)) // not emojiy only
+		const genreInfo =
+			"[" + [...demographics, ...genres, ...themes].map((genre) => genre.name).join(", ") + "]";
+
+		const subtitle = [episodesStr, scoreStr, titleJap, genreInfo]
+			.filter((component) => (component || "").match(/\w/)) // not emojiy only
 			.join("  ");
-
-		const summary = [titleEng, titleJap, studios, demographics, genres, themes, "\n", synopsis]
-			.filter((component) => component?.match(/\w/)) // not emojiy only
-			.join("\n");
 
 		return {
 			title: displayText,
@@ -91,7 +96,6 @@ function run(argv) {
 			quicklookurl: url,
 			mods: {
 				cmd: { arg: titleJap, valid: Boolean(titleJap) },
-				shift: { arg: summary },
 			},
 		};
 	});
