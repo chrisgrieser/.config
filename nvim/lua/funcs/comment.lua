@@ -83,8 +83,8 @@ function M.docstring()
 		vim.cmd.startinsert { bang = true }
 		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
 		vim.defer_fn(require("cmp").complete, 200)
-		vim.defer_fn(function() require("cmp").confirm { select = true } end, 500)
-		vim.defer_fn(vim.api.nvim_del_current_line, 1000) -- remove `---comment`
+		vim.defer_fn(function() require("cmp").confirm { select = true } end, 400)
+		vim.defer_fn(vim.api.nvim_del_current_line, 8000) -- remove `---comment`
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
