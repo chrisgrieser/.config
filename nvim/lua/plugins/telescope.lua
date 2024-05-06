@@ -196,7 +196,6 @@ local function telescopeConfig()
 		pickers = {
 			find_files = {
 				prompt_prefix = "󰝰 ",
-				path_display = filenameFirst,
 				tiebreak = function(a, b, _)
 					-- prioritze recently modified files
 					local a_stats = vim.loop.fs_stat(a.ordinal)
@@ -258,7 +257,13 @@ local function telescopeConfig()
 			},
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
-				path_display = filenameFirst,
+				path_display = function(_, path)
+					local tail = require("telescope.utils").path_tail(path)
+					local parent = vim.fs.basename(vim.fs.dirname(path))
+					local text = tail .. "  " .. parent
+					local highlights = { { { #tail + 1, #text }, "Comment" } }
+					return text, highlights
+				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 				previewer = false,
 				layout_config = { horizontal = { width = 0.55, height = 0.6 } },

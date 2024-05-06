@@ -65,7 +65,7 @@ return {
 	},
 	{ -- rainbow brackets
 		"hiphish/rainbow-delimiters.nvim",
-		event = "BufReadPost", -- later does not load on first buffer
+		event = "UIEnter", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		main = "rainbow-delimiters.setup",
 		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
