@@ -5,8 +5,28 @@ return {
 	{ -- breadcrumbs for winbar
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
+		init = function()
+			-- FIX for missing highlight
+			u.colorschemeMod("NavicIconsArray", { link = "NavicIconsEnumMember" })
+			u.addToLuaLine(
+				"winbar",
+				"lualine_b",
+				{
+					"navic",
+					color_correction = "dynamic", -- for highlight = enabled
+					padding = { left = 1, right = 0 },
+				}
+			)
+
+			-- spacer, so the winbar does not shift content down
+			u.addToLuaLine(
+				"winbar",
+				"lualine_b",
+				{ function() return " " end, padding = { left = 0, right = 0 } }
+			)
+		end,
 		opts = {
-			highlight = true,
+			highlight = true, -- use colored icons
 			lazy_update_context = true,
 			lsp = {
 				auto_attach = true,
