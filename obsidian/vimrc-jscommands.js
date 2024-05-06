@@ -92,9 +92,7 @@ function appendJsComment() {
 //──────────────────────────────────────────────────────────────────────────────
 
 function copyAbsolutePath() {
-	const relPath = view.file.path;
-	const vautlPath = view.app.vault.adapter.getBasePath();
-	const absPath = vautlPath + "/" + relPath;
+	const absPath = view.app.vault.adapter.getFullPath(view.file.path);
 	navigator.clipboard.writeText(absPath);
 	new Notice("Copied:\n" + absPath);
 }

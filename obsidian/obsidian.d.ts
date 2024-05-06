@@ -61,7 +61,9 @@ declare type View = {
 			getConfig(key: string): boolean | string | number;
 			setConfig(key: string, value: boolean | string | number): void;
 			configDir: string;
-			adapter: { getBasePath(): string };
+			adapter: {
+				getFullPath(path: string): string;
+			};
 		};
 		plugins: {
 			checkForUpdates(): Promise<void>;
