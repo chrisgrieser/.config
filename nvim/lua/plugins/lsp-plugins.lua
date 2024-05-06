@@ -6,28 +6,30 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
 		init = function()
-			-- FIX for missing highlight
-			u.colorschemeMod("NavicIconsArray", { link = "NavicIconsEnumMember" })
 			u.addToLuaLine(
 				"winbar",
 				"lualine_b",
-				{
-					"navic",
-					color_correction = "dynamic", -- for highlight = enabled
-					padding = { left = 1, right = 0 },
-				}
+				{ "navic", section_separators = { left = "▒░", right = "" } }
 			)
-
-			-- spacer, so the winbar does not shift content down
+			-- HACK spacer, so the winbar does not shift content down
 			u.addToLuaLine(
 				"winbar",
-				"lualine_b",
+				"lualine_c",
 				{ function() return " " end, padding = { left = 0, right = 0 } }
 			)
+
+			-- lazy-update, if buffer is large
+			vim.api.nvim_create_autocmd("BufReadPost", {
+				callback = function()
+					local bufferIsLarge = vim.api.nvim_buf_line_count(0) > 2000
+					vim.b["navic_lazy_update_context"] = bufferIsLarge
+				end,
+			})
+
+			vim.g.navic_silence = false
 		end,
 		opts = {
-			highlight = true, -- use colored icons
-			lazy_update_context = true,
+			lazy_update_context = false,
 			lsp = {
 				auto_attach = true,
 				preference = { "pyright", "tsserver" },

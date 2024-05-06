@@ -26,7 +26,7 @@ require("lazy").setup("plugins", {
 		fallback = true,
 	},
 	-- colorschemes to use during installation
-	install = { colorscheme = { "tokyonight", "dawnfox", "habamax" } },
+	install = { colorscheme = { "tokyonight", "habamax" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
