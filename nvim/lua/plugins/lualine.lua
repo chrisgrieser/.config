@@ -64,12 +64,7 @@ local lualineConfig = {
 				padding = { left = 0, right = 1 },
 			},
 		},
-		lualine_b = {
-			"navic",
-		},
 		lualine_c = {
-			-- spacer, so the winbar does not shift content down
-			{ function() return " " end, padding = { left = 0, right = 0 } },
 			-- using lualine's tab display, cause it looks better than vim's
 			{
 				"tabs",
@@ -156,7 +151,6 @@ lualineConfig.inactive_winbar = lualineConfig.winbar
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,

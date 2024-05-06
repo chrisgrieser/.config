@@ -141,7 +141,7 @@ function run() {
 			subtitle: [caskIcon, downloads, sep, desc].join(""),
 			arg: `--cask ${name}`,
 			quicklookurl: cask.homepage,
-			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
+			downloads: Number.parseInt(downloads.replace(/,/g, "")), // only for sorting
 			mods: {
 				// PERF quicker to pass here than to call `brew home` on brew-id
 				cmd: {
@@ -176,7 +176,7 @@ function run() {
 			subtitle: [formulaIcon, caveats, downloads, sep, desc].join(""),
 			arg: `--formula ${name}`,
 			quicklookurl: formula.homepage,
-			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
+			downloads: Number.parseInt(downloads.replace(/,/g, "")), // only for sorting
 			text: {
 				largetype: caveatText,
 				copy: caveatText,
@@ -202,9 +202,7 @@ function run() {
 	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
 		const titleLengthDiff = a.title.length - b.title.length;
 		if (titleLengthDiff !== 0) return titleLengthDiff;
-		const downloadCountDiff =
-			Number.parseInt(b.downloads.replaceAll(",", "")) -
-			Number.parseFloat(a.downloads.replaceAll(",", ""));
+		const downloadCountDiff = (b.downloads || 0) - (a.downloads || 0);
 		return downloadCountDiff;
 	});
 
