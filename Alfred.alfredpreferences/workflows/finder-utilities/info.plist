@@ -1720,7 +1720,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>Copy</string>
+			<string>Copy to…</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1865,7 +1865,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>Move</string>
+			<string>Move to…</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
