@@ -18,7 +18,7 @@ function run() {
 
 			const info = vol
 				.split(/\s+/)
-				.map((value) => value.replaceAll("unavailable", "…").replace(/([GTMk])/, "$1b"));
+				.map((value) => value.replaceAll("unavailable", "…").replace(/(\d[GTMk]$)/, "$1b"));
 
 			const [_, format, total, used, available, share] = info;
 			const path = info.slice(9).join(" ");
