@@ -32,7 +32,7 @@ function _dump() {
 	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
 
 	# shellcheck disable=2010
-	ls "$HOME/Library/Application Support/$BROWSER_DEFAULTS_PATH/Default/Extensions/" |
+	ls "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Extensions/" |
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		>"$dump_path/browser-extensions.txt"
 

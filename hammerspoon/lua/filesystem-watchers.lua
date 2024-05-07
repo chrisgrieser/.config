@@ -4,6 +4,14 @@ local pathw = hs.pathwatcher.new
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
+--------------------------------------------------------------------------------
+
+-- CONFIG
+local browserSettings = home .. "/.config/+ browser-extension-configs/"
+local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
+local desktopPath = home .. "/Desktop"
+
+--------------------------------------------------------------------------------
 
 ---INFO this works as only downloaded files get quarantined.
 ---Ensures that files created locally do not trigger the actions.
@@ -13,16 +21,8 @@ local function fileIsDownloaded(filepath)
 	local fileExists, msg = pcall(hs.fs.xattr.get, filepath, "com.apple.quarantine")
 	return fileExists and msg ~= nil
 end
---------------------------------------------------------------------------------
 
--- CONFIG
-local browserSettings = home .. "/.config/+ browser-extension-configs/"
-local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-local desktop = home .. "/Desktop"
-
---------------------------------------------------------------------------------
-
-M.pathw_fileHub = pathw(desktop, function(paths, _)
+M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, filep in pairs(paths) do
@@ -78,7 +78,7 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 		-- not picked up by hammerspoon
 		if filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
 			u.runWithDelays(0.5, function()
-				hs.execute([[cd "]] .. desktop .. [[" || exit 1
+				hs.execute(([[cd %q || exit 1
 				test -f obsidian-*.*.*.asar.gz || exit 1
 				killall Obsidian
 				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
@@ -88,7 +88,7 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 				while pgrep -xq "Obsidian" ; do sleep 0.1; done
 				sleep 0.2
 				open -a "Obsidian"
-			]])
+			]]):format(desktopPath))
 				-- close the created tab
 				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 			end)

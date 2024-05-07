@@ -69,7 +69,7 @@ backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 while read -r line; do
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	basename="$(basename "$repo_path")"
-	backup "$repo_path/" "./Homefolder/$basename"
+	backup "$repo_path/" "./perma-repos/$basename"
 done <"$HOME/.config/perma-repos.csv"
 
 #───────────────────────────────────────────────────────────────────────────────
