@@ -237,8 +237,7 @@ function M.closeAllTheThings()
 	end
 
 	-- close browser tabs, finder wins and video apps
-	local browser = hs.application(env.browserApp)
-	if browser and browser:mainWindow() then browser:mainWindow():close() end
+	M.closeTabsContaining(".") -- close any tab
 	M.closeFinderWins()
 	M.quitApps(env.videoAndAudioApps)
 end

@@ -96,7 +96,10 @@ if u.isSystemStart() then syncAllGitRepos(true) end
 
 -- 2. every x minutes
 M.timer_repoSync = hs.timer
-	.doEvery(config.syncIntervalMins * 60, function() syncAllGitRepos(false) end)
+	.doEvery(config.syncIntervalMins * 60, function()
+		local idleMins = hs.host.idleTime() / 60
+		if idleMins < config.syncIntervalMins then syncAllGitRepos(false) end
+	end)
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
@@ -108,12 +111,14 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if M.recentlyTriggered or env.isProjector() then return end
 	M.recentlyTriggered = true
 
-	local lockOrSleep = event == c.screensDidLock
-		or event == c.screensDidSleep
+	if
+		event == c.screensDidLock
 		or event == c.screensDidUnlock
 		or event == c.systemDidWake
 		or event == c.screensDidWake
-	if lockOrSleep then syncAllGitRepos(true) end
+	then
+		syncAllGitRepos(true)
+	end
 	u.runWithDelays(3, function() M.recentlyTriggered = false end)
 end):start()
 
