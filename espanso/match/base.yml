@@ -24,6 +24,9 @@ matches:
       I need to investigate the issue. 
       (Also, I don't have the time to look into it right now, so a bug report
       will make sure that I can keep track of it.)
+  - trigger: "!freeze"
+    replace: "setTimeout(() => { debugger }, 5000)"
+    label: "Freeze (DevTools)"
   #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
     replace: "{{todayISO}}"

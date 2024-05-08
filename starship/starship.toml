@@ -81,7 +81,7 @@ style = "fg:yellow bg:black bold"
 style = 'fg:yellow bold bg:black'
 
 [git_commit] # checkout
-style = "fg:purple bg:black"
+style = "fg:purple bg:black bold"
 only_detached = true
 format = "[󰘬 $hash]($style) "
 
