@@ -123,6 +123,9 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_rec
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
+exmap propertySearch obcommand obsidian-another-quick-switcher:search-command_property-search
+nnoremap gO :propertySearch
+
 " :bnext/bprev
 exmap goBack obcommand app:go-back
 exmap goForward obcommand app:go-forward
