@@ -16,6 +16,7 @@ rules:
   color-no-hex: true
   comment-empty-line-before: null
   selector-class-pattern: null # class names usually not defined by me
+  no-descending-specificity: [true, { ignore: [selectors-within-list] }]
   custom-property-empty-line-before: never
   declaration-empty-line-before: never
   declaration-no-important: true
