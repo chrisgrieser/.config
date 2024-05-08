@@ -55,17 +55,6 @@ function inspectWordCount() {
 	new Notice(`Characters: ${charCount} \nWords: ${wordCount}`);
 }
 
-function inspectVersions() {
-	const { electron, chrome, node } = process.versions;
-	const onlyMajorMinor = (/** @type {string} */ version) => version.replace(/(.\d+\.\d+).*/, "$1");
-	const lines = [
-		`Electron: ${onlyMajorMinor(electron)}`,
-		`Chrome: ${onlyMajorMinor(chrome)}`,
-		`Node: ${onlyMajorMinor(node)}`,
-	];
-	new Notice(lines.join("\n"), 5000);
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 function toggleJsLineComment() {

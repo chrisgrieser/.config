@@ -5,3 +5,7 @@
 sleep 1
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 sketchybar --trigger repo-files-update
+
+# Delete empty folders (use `.gitkeep` to keep them)
+# excluding espanso folder, because espanso recreates it & posts notification for that
+find . -type d -empty -not -path "./espanso/match/packages" -delete

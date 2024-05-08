@@ -15,9 +15,16 @@ end
 
 --------------------------------------------------------------------------------
 
--- keep the iMac display brightness low when projector is connected
+-- turn off iMac display when
 M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
+
+	-- 1. screensaver starts at night
+	if event == c.screensaverDidStart and u.betweenTime(22, 7) and not env.isProjector() then
+		wu.iMacDisplay:setBrightness(0)
+	end
+
+	-- 2. screen activity while projector connected 
 	if
 		event == c.screensaverDidStop
 		or event == c.screensaverDidStart
