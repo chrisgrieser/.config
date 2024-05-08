@@ -19,8 +19,8 @@ keymap(
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
-keymap({ "n", "x" }, "H", "0^") -- `0` ensures fully scrolling to the left on long, indented lines
-keymap("o", "H", "^")
+-- (not mapping in op-pending, since there are custom textobjects for each LjkJK)
+keymap({ "n", "x", "o" }, "H", "^")
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
 keymap({ "n", "x" }, "j", "gj") -- gj to work with wrapped lines as well
 keymap({ "n", "x" }, "k", "gk")
@@ -47,9 +47,10 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 -- quickfix
 keymap("n", "gq", function()
 	local success = pcall(vim.cmd.cnext)
-	if success then return end
-	vim.cmd.cfirst()
-	vim.notify("Wrapped")
+	if not success then
+		vim.cmd.cfirst()
+		vim.notify("Wrapped")
+	end
 end, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
@@ -172,16 +173,6 @@ keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { desc = "<BS> does not leave cmdline", expr = true })
-
--- CMDWIN (`:q` or `<C-f>` in cmdline)
-vim.api.nvim_create_autocmd("CmdWinEnter", {
-	callback = function()
-		vim.bo.ft = "lua" -- syntax highlighting
-		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
-		-- overwrite the global `<CR>` overwrite
-		vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, desc = "Confirm Cmdline under cursor" })
-	end,
-})
 
 -- INSERT MODE
 keymap({ "i", "c" }, "<C-a>", "<Home>")
