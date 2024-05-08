@@ -68,7 +68,17 @@ return {
 		event = "BufReadPost", -- later does not load on first buffer
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		main = "rainbow-delimiters.setup",
-		init = function() u.colorschemeMod("RainbowDelimiterRed", { fg = "#7e8a95" }) end,
+		opts = {
+			-- remove aggressive red
+			highlight = {
+				"RainbowDelimiterYellow",
+				"RainbowDelimiterBlue",
+				"RainbowDelimiterOrange",
+				"RainbowDelimiterGreen",
+				"RainbowDelimiterViolet",
+				"RainbowDelimiterCyan",
+			},
+		},
 	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
