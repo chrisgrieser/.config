@@ -477,6 +477,7 @@ nnoremap wm yt]p
 " Emulate vim folding command
 exmap togglefold obcommand editor:toggle-fold
 nnoremap za :togglefold
+nnoremap ^ :togglefold
 nnoremap zo :togglefold
 nnoremap zc :togglefold
 

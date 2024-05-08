@@ -43,8 +43,6 @@ function clearNotices() {
 	}
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
 function inspectWordCount() {
 	const text = editor
 		.getValue()
