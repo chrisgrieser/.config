@@ -309,6 +309,10 @@ nnoremap ,r :addYamlKey
 exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
 
+" [i]nspect chrome [v]ersion
+exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
+nnoremap ,iv :inspectChromeVersion
+
 "───────────────────────────────────────────────────────────────────────────────
 " PLUGIN- AND SETTING-RELATED BINDINGS
 
