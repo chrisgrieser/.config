@@ -306,10 +306,6 @@ nnoremap ,r :addYamlKey
 exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
 
-" [i]nspect [v]ersions
-exmap inspectVersions jsfile Meta/vimrc-jscommands.js { inspectVersions() }
-nnoremap ,iv :inspectVersions
-
 "───────────────────────────────────────────────────────────────────────────────
 " PLUGIN- AND SETTING-RELATED BINDINGS
 
