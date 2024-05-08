@@ -14,7 +14,8 @@ rules:
   color-function-notation: [modern, { ignore: [with-var-inside] }]
   color-named: never
   color-no-hex: true
-  comment-empty-line-before: null # does not work well with comment decorators
+  comment-empty-line-before: null
+  selector-class-pattern: null # class names usually not defined by me
   custom-property-empty-line-before: never
   declaration-empty-line-before: never
   declaration-no-important: true
