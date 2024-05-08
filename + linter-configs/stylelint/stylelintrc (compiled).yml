@@ -68,7 +68,7 @@ rules:
   at-rule-no-vendor-prefix: true
   color-function-notation: [modern, {ignore: [with-var-inside]}]
   color-hex-length: short
-  comment-empty-line-before: null # does not work well with comment decorators
+  comment-empty-line-before: null
   comment-whitespace-inside: always
   custom-property-empty-line-before: never
   custom-media-pattern:
@@ -104,9 +104,7 @@ rules:
       ignore:
         - after-comment
   selector-attribute-quotes: always
-  selector-class-pattern:
-    - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
-    - {}
+  selector-class-pattern: null # class names usually not defined by me
   selector-id-pattern:
     - ^([a-z][a-z0-9]*)(-[a-z0-9]+)*$
     - {}
