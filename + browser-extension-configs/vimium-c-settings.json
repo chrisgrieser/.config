@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/5/2024, 12:09:36 PM",
-	"time": 1714903776176,
+	"@time": "5/8/2024, 7:49:57 PM",
+	"time": 1715190597000,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -13,6 +13,10 @@
 		{
 			"passKeys": "j k ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
+		},
+		{
+			"passKeys": "N f n ",
+			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
 			"passKeys": "",
@@ -43,7 +47,7 @@
 			"pattern": ":https://www.reddit.com/"
 		},
 		{
-			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? j k l ",
+			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
 			"pattern": ":https://www.youtube.com/"
 		}
 	],
