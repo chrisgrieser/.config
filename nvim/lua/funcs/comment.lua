@@ -121,7 +121,6 @@ end
 --------------------------------------------------------------------------------
 
 function M.addCommentBelow()
-	
 	local comStr = getCommentstr()
 	if not comStr then return end
 end
