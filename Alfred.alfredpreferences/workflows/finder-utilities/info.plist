@@ -12,16 +12,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>20E0075C-3017-466B-9CF0-FB04449C0CB1</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Remove Tag '{var:tag_to_search}'</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>06732C2D-88EF-48DF-81E5-A21235C6E96A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -89,19 +79,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>20E0075C-3017-466B-9CF0-FB04449C0CB1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FFC42B20-8DB1-4234-9917-12D9E1656CC1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -428,19 +405,6 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Move to Front Finder Window</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1230,41 +1194,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>soundname</key>
-				<string>Tink</string>
-				<key>systemsound</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.playsound</string>
-			<key>uid</key>
-			<string>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>new_tags</key>
-					<string>{var:tag_to_search}</string>
-					<key>recursive</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.tags.remove</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>20E0075C-3017-466B-9CF0-FB04449C0CB1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1284,27 +1213,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>2839F7DC-68C1-483F-BC90-1A0A504CF70C</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:tag_to_search}</string>
-				<key>title</key>
-				<string>🏷️ Tag removed</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>FFC42B20-8DB1-4234-9917-12D9E1656CC1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1352,6 +1260,21 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>0194E157-0701-47CC-996A-E69B0F976319</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>06732C2D-88EF-48DF-81E5-A21235C6E96A</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1452,21 +1375,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>06732C2D-88EF-48DF-81E5-A21235C6E96A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -1496,9 +1404,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>1315</real>
+			<real>1190</real>
 		</dict>
 		<key>08389D62-E55B-43D3-80A1-D99149535F3C</key>
 		<dict>
@@ -1539,15 +1447,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>825</real>
 			<key>ypos</key>
 			<real>350</real>
-		</dict>
-		<key>20E0075C-3017-466B-9CF0-FB04449C0CB1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>1190</real>
 		</dict>
 		<key>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</key>
 		<dict>
@@ -1828,7 +1727,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>480</real>
+			<real>485</real>
 			<key>ypos</key>
 			<real>1315</real>
 		</dict>
@@ -1852,15 +1751,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>95</real>
 		</dict>
-		<key>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>970</real>
-			<key>ypos</key>
-			<real>1190</real>
-		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1878,15 +1768,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>340</real>
 			<key>ypos</key>
 			<real>400</real>
-		</dict>
-		<key>FFC42B20-8DB1-4234-9917-12D9E1656CC1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>825</real>
-			<key>ypos</key>
-			<real>1190</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -7,8 +7,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	// try out all the different casings
-	const clean = str.replace(/[-()_/[\]]/g, " ");
-	const squeezed = str.replace(/[-_]/g, "");
+	const clean = str.replace(/[.-()_/[\]]/g, " ");
+	const squeezed = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	const kebabCase = str.replace(/[ _]/g, "-");
 	const snakeCase = str.replace(/[ -]/g, "_");
@@ -20,12 +20,14 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
+	const exportHomebrewPath = "PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH";
+
 	const dirtyFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
 
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		.doShellScript(
-			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
+			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
 			fd --type=file --type=symlink --hidden --absolute-path \
 			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude="*.plist"`,
 		)
@@ -47,8 +49,9 @@ function run() {
 
 			// type-icon
 			let type = "";
-			if (name.startsWith(".z")) type = "zsh"; // .zshenv, .zshrc, .zprofile
-			else if (name.endsWith("akefile")) type = "make";
+			if (name.startsWith(".z"))
+				type = "zsh"; // .zshenv, .zshrc, .zprofile
+			else if (name === "Makefile") type = "make";
 			else if (name.startsWith(".")) type = "cfg";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian-vimrc.vim") type = "obsidian";
@@ -85,7 +88,7 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
 		.doShellScript(
-			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; cd "${dotfileFolder}" ;
+			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
 			fd --absolute-path --type=directory --hidden`,
 		)
 		.split("\r")
@@ -109,6 +112,9 @@ function run() {
 
 	return JSON.stringify({
 		items: [...fileArray, ...folderArray],
-		cache: { seconds: 120 }, // quick for newly created files
+		cache: {
+			seconds: 60 * 2, // quick for newly created files
+			loosereload: true,
+		},
 	});
 }

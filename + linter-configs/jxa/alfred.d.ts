@@ -29,7 +29,7 @@ declare class AlfredItem {
 	uid?: string;
 	autocomplete?: string;
 	quicklookurl?: string;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	// biome-ignore lint/suspicious/noExplicitAny: that's the type
 	variables?: Record<string, any>;
 	icon?: {
 		type?: "fileicon" | "filetype" | "";
