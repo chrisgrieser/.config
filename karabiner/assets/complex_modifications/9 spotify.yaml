@@ -4,7 +4,6 @@ title: Spotify Control
 rules:
   - description: Spotify Media Controls
     manipulators:
-
       - type: basic
         from: { key_code: f3 }
         to:
