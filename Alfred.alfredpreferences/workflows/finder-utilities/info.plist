@@ -123,19 +123,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EF11B1CF-FE50-4578-AE30-F89D6BD8390D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<array>
 			<dict>
@@ -298,19 +285,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F77CBF99-913B-4E23-B45A-1330ABD690FC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<array>
 			<dict>
@@ -454,19 +428,6 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Move to Front Finder Window</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F77CBF99-913B-4E23-B45A-1330ABD690FC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1248,64 +1209,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:tag_to_search}</string>
-				<key>title</key>
-				<string>🏷️ Tag added</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array/>
-				<key>name</key>
-				<string>Add Tag</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>942D4032-DF12-435D-AF6E-B89AEBF9791E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>new_tags</key>
-					<string>{var:tag_to_search}</string>
-					<key>recursive</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.tags.add</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>F77CBF99-913B-4E23-B45A-1330ABD690FC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>soundname</key>
 				<string>Tink</string>
 				<key>systemsound</key>
@@ -1666,15 +1569,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1190</real>
 		</dict>
-		<key>2B2CC8D8-AB33-455A-BDF2-333C1C7C656F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>820</real>
-			<key>ypos</key>
-			<real>1015</real>
-		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1840,15 +1734,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>1190</real>
 		</dict>
-		<key>942D4032-DF12-435D-AF6E-B89AEBF9791E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1015</real>
-		</dict>
 		<key>9536809F-DBBD-4982-90BC-427C6D115A14</key>
 		<dict>
 			<key>colorindex</key>
@@ -1984,15 +1869,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>245</real>
-		</dict>
-		<key>F77CBF99-913B-4E23-B45A-1330ABD690FC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>670</real>
-			<key>ypos</key>
-			<real>1015</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
