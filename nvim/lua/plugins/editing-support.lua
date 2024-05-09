@@ -73,9 +73,11 @@ return {
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local ok, cmp = pcall(require, "cmp")
 			if ok then
-				cmp.event:on("confirm_done", function()
+				local onConfirmDone = require("nvim-autopairs.completion.cmp").on_confirm_done()
+				
+				cmp.event:on("confirm_done", function(evt)
 					if vim.bo.filetype == "css" then return end -- FIX completion broken for CSS
-					require("nvim-autopairs.completion.cmp").on_confirm_done()
+					onConfirmDone(evt)
 				end)
 			end
 

@@ -46,25 +46,27 @@ function run() {
 	let lineNum = 0;
 	const navigationMarkers = readFile(sfPath)
 		.split("\n")
-		.map((line) => {
+		.reduce((/** @type {AlfredItem[]} */ acc, line) => {
 			lineNum++;
 
 			// GUARD line is not marker
-			if (!line.startsWith("/* <") && !line.startsWith("  - # <<")) return {};
+			if (!line.startsWith("/* <") && !line.startsWith("  - # <<")) return acc;
 
 			const name = line
 				.replace(/ \*\/$/, "") // comment-ending
 				.replace(/^\/\* *<+ ?/, "") // comment-beginning
 				.replace(/^ {2}- # ?<+ ?/, ""); // YAML-comment
 
-			return {
+			name.toString
+			acc.push({
 				title: name,
-				subtitle: lineNum,
+				subtitle: lineNum.toString(),
 				match: alfredMatcher(name),
 				uid: name, // not lineNum, since the lineNum can change
 				arg: lineNum,
-			};
-		});
+			});
+			return acc;
+		}, []);
 
 	return JSON.stringify({ items: navigationMarkers });
 }
