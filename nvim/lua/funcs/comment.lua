@@ -2,16 +2,23 @@ local M = {}
 
 ---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
+
+
+---@return string?
+local function getCommentstr()
+	if vim.bo.commentstring == "" then
+		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
+		return
+	end
+	return vim.bo.commentstring
+end
 --------------------------------------------------------------------------------
 
 -- appends a horizontal line, with the language's comment syntax,
 -- correctly indented and padded
 function M.commentHr()
-	local comStr = vim.bo.commentstring
-	if comStr == "" then
-		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
-		return
-	end
+	local comStr = getCommentstr()
+	if not comStr then return end
 
 	local isOnBlank = vim.api.nvim_get_current_line() == ""
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
@@ -51,15 +58,16 @@ function M.commentHr()
 end
 
 function M.duplicateLineAsComment()
+	local comStr = getCommentstr()
+	if not comStr then return end
+
 	local ln, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 	local indent, content = curLine:match("^(%s*)(.*)")
-	local commentedLine = indent .. vim.bo.commentstring:format(content)
+	local commentedLine = indent .. comStr:format(content)
 	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
 	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
 end
-
---------------------------------------------------------------------------------
 
 -- simplified implementation of neogen.nvim
 -- * requires nvim-treesitter-textobjects
@@ -110,17 +118,22 @@ function M.docstring()
 	end
 end
 
-function M.appendCommentAtEoL()
-	local comStr = vim.bo.commentstring -- uses `%s` as placeholder for cursor
-	if comStr == "" then
-		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
-		return
-	end
+--------------------------------------------------------------------------------
 
+function M.addCommentBelow()
+	
+	local comStr = getCommentstr()
+	if not comStr then return end
+end
+
+function M.appendCommentAtEoL()
+	-- get base values
+	local comStr = getCommentstr()
+	if not comStr then return end
 	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
+	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 	local line = vim.api.nvim_get_current_line()
 	local emptyLine = line == ""
-	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- if empty line, add indent of first non-blank line after cursor
 	local indent = ""
@@ -134,9 +147,11 @@ function M.appendCommentAtEoL()
 	end
 	local newLine = emptyLine and indent or line .. " "
 
+	-- write line
 	comStr = comStr:gsub("%%s", ""):gsub(" $", "") .. " "
 	vim.api.nvim_set_current_line(newLine .. comStr)
 
+	-- move cursor
 	if placeHolderAtEnd then
 		vim.cmd.startinsert { bang = true }
 	else
