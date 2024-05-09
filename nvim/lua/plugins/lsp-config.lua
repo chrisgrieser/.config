@@ -339,9 +339,9 @@ return {
 			capabilities.textDocument.foldingRange =
 				{ dynamicRegistration = false, lineFoldingOnly = true }
 
-			for lsp, serverConfig in pairs(serverConfigs) do
+			for lspName, serverConfig in pairs(serverConfigs) do
 				serverConfig.capabilities = capabilities
-				require("lspconfig")[lsp].setup(serverConfig)
+				require("lspconfig")[lspName].setup(serverConfig)
 			end
 		end,
 	},
