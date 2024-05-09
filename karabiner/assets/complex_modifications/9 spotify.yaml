@@ -4,27 +4,31 @@ title: Spotify Control
 rules:
   - description: Spotify Media Controls
     manipulators:
+
       - type: basic
         from: { key_code: f3 }
         to:
           - shell_command: |
               open "https://open.spotify.com/"
+
       - type: basic
         from: { key_code: f4 }
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player like
               info=$(spotify_player get key playback)
               artist=$(echo $info | yq ".item.artists[0].name")
               song=$(echo $info | yq ".item.name")
               osascript -e "display notification \"$artist – $song\" with title \"💚 Liked\""
+              spotify_player like
+
       - type: basic
         from: { key_code: f7 }
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback previous
+
       - type: basic
         from: { key_code: f8 }
         to:
