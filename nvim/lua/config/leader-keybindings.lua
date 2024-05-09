@@ -1,7 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-local bo = vim.bo
-local cmd = vim.cmd
-
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
 
@@ -16,13 +13,6 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
--- view internal directories
-keymap(
-	"n",
-	"<leader>pv",
-	function() vim.fn.system { "open", vim.o.viewdir } end,
-	{ desc = " View Dir" }
-)
 keymap(
 	"n",
 	"<leader>pd",
@@ -40,25 +30,12 @@ keymap("n", "<leader>lc", function()
 	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
-keymap("n", "<leader>ih", cmd.Inspect, { desc = " Highlights under Cursor" })
-keymap("n", "<leader>il", cmd.LspInfo, { desc = "󰒕 :LspInfo" })
+keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
 keymap("n", "<leader>it", function()
 	-- setting command to always open in the right, regardless of `splitright`
 	vim.treesitter.inspect_tree { command = "vertical botright new" }
 end, { desc = " :InspectTree" })
-
-keymap("n", "<leader>ib", function()
-	local out = {
-		"filetype: " .. bo.filetype,
-		"buftype: " .. (bo.buftype == "" and '""' or bo.buftype),
-		"cwd: " .. (vim.loop.cwd() or "n/a"),
-		("indent: %s (%s)"):format(bo.expandtab and "spaces" or "tabs", bo.tabstop),
-	}
-	local ok, node = pcall(vim.treesitter.get_node)
-	if ok and node then table.insert(out, "node: " .. node:type()) end
-	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
-end, { desc = "󰽙 Buffer Info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -94,10 +71,10 @@ end, { desc = "󰅍 yank matching lines" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
-	bo.expandtab = use == "spaces"
-	bo.shiftwidth = 2
-	bo.tabstop = 3
-	cmd.retab { bang = true }
+	vim.bo.expandtab = use == "spaces"
+	vim.bo.shiftwidth = 2
+	vim.bo.tabstop = 3
+	vim.cmd.retab { bang = true }
 	u.notify("Indent", "Now using " .. use)
 end
 keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
@@ -109,7 +86,7 @@ keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "�
 keymap(
 	"n",
 	"<leader>ur",
-	function() cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
+	function() vim.cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
 	{ desc = "󰛒 Redo All" }
 )
 
@@ -121,7 +98,7 @@ autocmd("BufReadPost", {
 keymap("n", "<leader>uo", function()
 	local now = os.time()
 	local secsPassed = now - vim.b.timeOpened
-	cmd.earlier(tostring(secsPassed) .. "s")
+	vim.cmd.earlier(tostring(secsPassed) .. "s")
 end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
@@ -137,9 +114,6 @@ local function codeActionFilter(action)
 		-- stylua: ignore
 		lua = (title:find("in the workspace") or title:find("on this line")
 			or title:find("defined global") or title:find("Change to parameter")) ~= nil,
-		css = (
-			title:find("^Disable .+ for entire file: ") or title:find("^Disable .+ rule inline: ")
-		) ~= nil,
 		markdown = title == "Create a Table of Contents",
 		python = title == "Ruff: Fix All", -- done via formatting
 		javascript = title == "Move to a new file", -- annoyance since always moved to top
