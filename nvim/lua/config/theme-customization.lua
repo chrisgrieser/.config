@@ -51,8 +51,8 @@ local function customHighlights()
 	-- trailing spaces more visible
 	linkHl("Whitespace", "NonText")
 
-	-- FIX themes missing italics in markdown
-	linkHl("@markup.italic.markdown_inline", "Italic")
+	-- FIX themes markdown italics missing in many themes
+	overwriteHl("@markup.italic.markdown_inline", { italic = true })
 
 	-- de-emphasize commit messaages between 50 and 72 chars
 	linkHl("@comment.warning.gitcommit", "WarningMsg")
