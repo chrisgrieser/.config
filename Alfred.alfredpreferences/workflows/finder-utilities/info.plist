@@ -1421,8 +1421,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>search file hub</string>
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
@@ -1472,8 +1470,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>check for files in file hub</string>
 			<key>xpos</key>
 			<real>285</real>
 			<key>ypos</key>
@@ -1745,7 +1741,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>Alfred front</string>
+			<string>Alfred frontmost</string>
 			<key>xpos</key>
 			<real>191</real>
 			<key>ypos</key>
@@ -1806,9 +1802,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Finder Tag Search</string>
+			<string>Tag to use for the tag search.</string>
 			<key>label</key>
-			<string>Finder Tag</string>
+			<string>Finder tag</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1848,9 +1844,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>This setting is purely aesthetic</string>
+			<string>Color of the tag. (This setting is purely aesthetic.)</string>
 			<key>label</key>
-			<string>Color of the Tag</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
