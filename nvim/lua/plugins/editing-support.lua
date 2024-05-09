@@ -75,7 +75,7 @@ return {
 			if ok then
 				local onConfirmDone = require("nvim-autopairs.completion.cmp").on_confirm_done()
 				cmp.event:on("confirm_done", function(evt)
-					if vim.bo.filetype == "css" then return end -- FIX completion broken for CSS
+					if vim.bo.filetype == "css" then return end -- FIX autopairs broken for CSS
 					onConfirmDone(evt)
 				end)
 			end

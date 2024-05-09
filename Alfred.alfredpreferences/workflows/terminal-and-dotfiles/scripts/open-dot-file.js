@@ -7,7 +7,7 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	// try out all the different casings
-	const clean = str.replace(/[.-()_/[\]]/g, " ");
+	const clean = str.replace(/[-.()_/[\]]/g, " ");
 	const squeezed = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	const kebabCase = str.replace(/[ _]/g, "-");
@@ -29,7 +29,7 @@ function run() {
 		.doShellScript(
 			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
 			fd --type=file --type=symlink --hidden --absolute-path \
-			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude="*.plist"`,
+			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude=".*.plist"`,
 		)
 		.split("\r")
 		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet

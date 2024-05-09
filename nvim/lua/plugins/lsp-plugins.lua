@@ -103,10 +103,7 @@ return {
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre",
 		opts = {
-			-- FIX no "Loading…" 
-			-- PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/24
-			-- request_pending_text = false, 
-
+			request_pending_text = false, -- remove "loading…" 
 			hl = { link = "Comment" },
 			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },
