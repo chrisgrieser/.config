@@ -150,7 +150,9 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
 keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
 keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = " Function Docstring" })
-keymap("n", "Q", function() require("funcs.comment").appendCommentAtEoL() end, { desc = " Append Comment" })
+keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { desc = " Append Comment" })
+keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = " Comment Below" })
+keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = " Comment Above" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------

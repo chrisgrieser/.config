@@ -3,11 +3,10 @@ local M = {}
 ---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
-
 ---@return string?
 local function getCommentstr()
 	if vim.bo.commentstring == "" then
-		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN)
+		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN, { title = "Comment" })
 		return
 	end
 	return vim.bo.commentstring
@@ -61,21 +60,28 @@ function M.duplicateLineAsComment()
 	local comStr = getCommentstr()
 	if not comStr then return end
 
-	local ln, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local curLine = vim.api.nvim_get_current_line()
 	local indent, content = curLine:match("^(%s*)(.*)")
 	local commentedLine = indent .. comStr:format(content)
-	vim.api.nvim_buf_set_lines(0, ln - 1, ln, false, { commentedLine, curLine })
-	vim.api.nvim_win_set_cursor(0, { ln + 1, col })
+	vim.api.nvim_buf_set_lines(0, lnum - 1, lnum, false, { commentedLine, curLine })
+	vim.api.nvim_win_set_cursor(0, { lnum + 1, col })
 end
 
 -- simplified implementation of neogen.nvim
--- * requires nvim-treesitter-textobjects
--- * lsp usually provides better prefills for docstrings
+-- (reason: lsp usually provides better prefills for docstrings)
 function M.docstring()
-	local ft = vim.bo.filetype
+	if not vim.cmd.TSTextobjectGotoPreviousStart then
+		vim.notify(
+			"nvim-treesitter-textobjects not installed.",
+			vim.log.levels.WARN,
+			{ title = "Docstring" }
+		)
+		return
+	end
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
+	local ft = vim.bo.filetype
 	local indent = vim.api.nvim_get_current_line():match("^%s*")
 	local ln = vim.api.nvim_win_get_cursor(0)[1]
 
@@ -120,17 +126,23 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.addCommentBelow()
-	local comStr = getCommentstr()
-	if not comStr then return end
-end
-
-function M.appendCommentAtEoL()
+---@param where "eol" | "above" | "below"
+function M.addComment(where)
 	-- get base values
 	local comStr = getCommentstr()
 	if not comStr then return end
-	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
+
+	-- above/below: add empty line and move to it
+	if where == "above" or where == "below" then
+		if where == "above" then lnum = lnum - 1 end
+		vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { "" })
+		lnum = lnum + 1
+		vim.api.nvim_win_set_cursor(0, { lnum, 0 })
+	end
+
+	-- determine comment behavior
+	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
 	local line = vim.api.nvim_get_current_line()
 	local emptyLine = line == ""
 

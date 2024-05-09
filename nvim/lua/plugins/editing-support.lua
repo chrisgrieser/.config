@@ -71,11 +71,13 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
-			-- local ok, cmp = pcall(require, "cmp")
-			-- if ok then
-			-- 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			-- 	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-			-- end
+			local ok, cmp = pcall(require, "cmp")
+			if ok then
+				cmp.event:on("confirm_done", function()
+					if vim.bo.filetype == "css" then return end -- FIX completion broken for CSS
+					require("nvim-autopairs.completion.cmp").on_confirm_done()
+				end)
+			end
 
 			-- CUSTOM RULES
 			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
