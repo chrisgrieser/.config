@@ -33,11 +33,8 @@ done
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# loop back to open file
-# (dependencies only needed later and therefore installed afterwards)
-osascript -e '
-	tell application id "com.runningwithcrayons.Alfred" to run trigger "loop" in workflow "de.chris-grieser.shimmering-focus"
-'
+# Open file
+open "$local_repos/shimmering-focus/theme.css"
 
-# install dependencies
+# install dependencies in the background
 cd "$local_repos/shimmering-focus/" && npm install
