@@ -127,7 +127,7 @@ matches:
   - { trigger: yb, replace: by, word: true, propagate_case: true }
   - { trigger: ym, replace: my, propagate_case: true, word: true }
   - { trigger: yuo, replace: you, propagate_case: true, word: true }
-  - { triggers: ["url", "Url"], replace: URL, word: true }
+  - { trigger: "Url", replace: URL, word: true }
   - { triggers: [aht, hta], replace: hat, propagate_case: true, word: true }
   - { triggers: [definitly, definetly, definetely], replace: definitely, propagate_case: true }
   - { triggers: [isntead, instread], replace: instead, propagate_case: true, word: true }
