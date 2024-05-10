@@ -62,7 +62,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 ".config" = " "
 "main-vault" = "󱉽 "
-"phd-data-analysis" = "󰙨 "
+"phd-data-analysis" = " "
 "~/Desktop" = "/ "
 "~" = "/ "
 
