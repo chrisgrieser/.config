@@ -153,14 +153,20 @@ function openDynamicHighlightsSettings() {
 
 /** @param {"load"|"save"} mode @param {string} workspaceName */
 async function workspace(mode, workspaceName) {
-	const internalPlugins = view.app.internalPlugins;
-	await internalPlugins.plugins.workspaces.enable();
-	const workspacePlugin = internalPlugins.getEnabledPluginById("workspaces");
+	const workspacePlugin = view.app.internalPlugins.plugins.workspaces;
+	await workspacePlugin.enable();
 
-	if (mode === "load") workspacePlugin.loadWorkspace(workspaceName); 
-	else if (mode === "save") workspacePlugin.saveWorkspace(workspaceName);
+	if (mode === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
+	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
-	await internalPlugins.plugins.workspaces.disable();
+	await workspacePlugin.disable();
 	new Notice(`Workspace ${workspaceName} ${mode === "load" ? "loaded" : "saved"}.`);
 }
-
+function moveItem(e, t, n) {
+	var i = e[YG],
+		r = i ? i.items : this.items,
+		o = r.indexOf(e);
+	r.remove(e);
+	var a = t ? t.items : this.items;
+	-1 !== o && o < n && r === a && n--, a.splice(n, 0, e), (e[YG] = t), this._onItemsChanged(!0);
+}

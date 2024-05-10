@@ -38,6 +38,15 @@ return {
 	{ -- when searching, search count is shown next to the cursor
 		"kevinhwang91/nvim-hlslens",
 		-- loaded by snippet in opts-and-autocmds.lua
+		init = function()
+			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
+			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+				callback = function()
+					local bg = u.getHighlightValue("IncSearch", "bg")
+					vim.api.nvim_set_hl(0, "HLSearchReversed", { fg = bg })
+				end,
+			})
+		end,
 		opts = {
 			nearest_only = true,
 			override_lens = function(render, posList, nearest, idx, _)
@@ -53,17 +62,6 @@ return {
 				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
 			end,
 		},
-		config = function(_, opts)
-			require("hlslens").setup(opts)
-
-			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function()
-					local reversed = u.getHighlightValue("IncSearch", "bg")
-					vim.api.nvim_set_hl(0, "HLSearchReversed", { fg = reversed })
-				end,
-			})
-		end,
 	},
 	{ -- rainbow brackets
 		"hiphish/rainbow-delimiters.nvim",

@@ -76,14 +76,14 @@ declare type View = {
 			activeTab: any;
 		};
 		internalPlugins: {
-			// biome-ignore lint/suspicious/noExplicitAny: too long…
-			getEnabledPluginById(id: string): any;
 			plugins: {
 				workspaces: {
 					disable(): Promise<void>;
 					enable(): Promise<void>;
-					// biome-ignore lint/suspicious/noExplicitAny: too long…
-					workspaces: Record<string, any>;
+					instance: {
+						loadWorkspace(name: string): void;
+						saveWorkspace(name: string): void;
+					}
 				};
 			};
 		}

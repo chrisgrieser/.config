@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/8/2024, 7:49:57 PM",
-	"time": 1715190597000,
+	"@time": "5/10/2024, 9:38:23 PM",
+	"time": 1715369903615,
 	"environment": {
 		"extension": "1.99.994",
 		"platform": "mac",
@@ -49,6 +49,10 @@
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
 			"pattern": ":https://www.youtube.com/"
+		},
+		{
+			"passKeys": "? ",
+			"pattern": ":https://devdocs.io/"
 		}
 	],
 	"extAllowList": [
@@ -91,7 +95,8 @@
 		"",
 		"\" Find",
 		"unmap -",
-		"map - enterFindMode selected",
+		"map - enterFindMode",
+		"map / enterFindMode",
 		"map n performFind",
 		"map N performBackwardsFind",
 		"",
