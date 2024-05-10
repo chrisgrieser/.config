@@ -2,6 +2,25 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- global search & replace
+		"MagicDuck/grug-far.nvim",
+		keys = {
+			{ "<leader>fg", vim.cmd.GrugFar, desc = " Search & Replace Globally" },
+		},
+		opts = {
+			-- extra args that you always want to pass to rg
+			-- like for example if you always want context lines around matches
+			extraRgArgs = "",
+
+			disableBufferLineNumbers = false, -- wrong way round
+			keymaps = {
+				replace = "<D-enter>",
+				qflist = "<D-s>",
+				gotoLocation = "<enter>",
+				close = "q",
+			},
+		},
+	},
 	{ -- Multi Cursor
 		"mg979/vim-visual-multi",
 		keys = {

@@ -93,7 +93,7 @@ function sr {
 #───────────────────────────────────────────────────────────────────────────────
 
 # shellcheck disable=2164
-function cake { mkdir -p "$1" && cd "$1"; } # change-make dir
+function cake { mkdir -p "$1" && cd "$1"; } 
 
 function topen { touch "$1" && open "$1"; }
 
