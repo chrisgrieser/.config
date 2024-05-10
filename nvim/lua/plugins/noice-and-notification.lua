@@ -65,7 +65,7 @@ local routes = {
 	},
 
 	-- code actions
-	-- { filter = { event = "notify", find = "No code actions available" }, skip = true },
+	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },

@@ -40,7 +40,7 @@ end
 ---@param hlgroup string
 ---@param modification table
 function M.colorschemeMod(hlgroup, modification)
-	vim.api.nvim_create_autocmd("ColorScheme", {
+	vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
 	})
 end
