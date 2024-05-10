@@ -4,14 +4,12 @@ local u = require("config.utils")
 return {
 	{ -- global search & replace
 		"MagicDuck/grug-far.nvim",
+		external_dependencies = "rg",
 		keys = {
 			{ "<leader>fg", vim.cmd.GrugFar, desc = " Search & Replace Globally" },
 		},
 		opts = {
-			-- extra args that you always want to pass to rg
-			-- like for example if you always want context lines around matches
-			extraRgArgs = "",
-
+			extraRgArgs = "--trim", -- for example to always display context lines around matches
 			disableBufferLineNumbers = false, -- wrong way round
 			keymaps = {
 				replace = "<D-enter>",
