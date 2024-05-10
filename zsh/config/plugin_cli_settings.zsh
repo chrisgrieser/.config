@@ -1,5 +1,5 @@
 # point config paths to `.config`
-export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgrep-config"
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/config"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # macOS currently ships less v.581, which lacks the ability to read lesskey

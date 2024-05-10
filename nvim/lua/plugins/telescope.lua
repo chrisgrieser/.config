@@ -82,6 +82,44 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 	},
 })
 
+local togglePreviewAction = {
+	function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
+	type = "action",
+	opts = { desc = " Toggle Preview" },
+}
+
+local toggleHiddenAction = {
+	function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+
+		-- hidden status not stored, but title is, so we determine the previous state via title
+		local prevTitle = current_picker.prompt_title
+		local ignoreHidden = not prevTitle:find("hidden")
+
+		local title = "Find Files: " .. vim.fs.basename(cwd)
+		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+		local currentQuery = require("telescope.actions.state").get_current_line()
+		local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
+
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			default_text = currentQuery,
+			prompt_title = title,
+			hidden = ignoreHidden,
+			no_ignore = ignoreHidden,
+			cwd = cwd,
+									-- stylua: ignore
+									file_ignore_patterns = {
+										"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
+										unpack(existingFileIgnores), -- must be last for all items to be unpacked
+									},
+		}
+	end,
+	type = "action",
+	opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
+}
+
 --------------------------------------------------------------------------------
 -- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
@@ -141,9 +179,7 @@ vim.api.nvim_create_autocmd("FileType", {
 local function telescopeConfig()
 	require("telescope").setup {
 		defaults = {
-			path_display = {
-				filename_first = { reverse_directories = false },
-			},
+			path_display = { "tail" },
 			history = { path = vim.g.syncedData .. "/telescope_history" },
 			selection_caret = "󰜋 ",
 			multi_icon = "󰒆 ",
@@ -187,8 +223,7 @@ local function telescopeConfig()
 				"--vimgrep",
 				"--smart-case",
 				"--trim",
-				-- inherit global ignore file from `fd`
-				("--ignore-file=" .. os.getenv("HOME") .. "/.config/fd/ignore"),
+				("--ignore-file=" .. os.getenv("HOME") .. "/.config/rg/ignore"),
 			},
 			-- stylua: ignore
 			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip", "%.pdf", "%.icns", "%.jpe?g" },
@@ -196,77 +231,39 @@ local function telescopeConfig()
 		pickers = {
 			find_files = {
 				prompt_prefix = "󰝰 ",
-				tiebreak = function(a, b, _)
-					-- prioritze recently modified files
-					local a_stats = vim.loop.fs_stat(a.ordinal)
-					local b_stats = vim.loop.fs_stat(b.ordinal)
-					if not (a_stats and b_stats) then return false end
-					return a_stats.mtime.sec > b_stats.mtime.sec
-				end,
+				path_display = { "filename_first" },
 				-- FIX using the default fd command from telescope is somewhat buggy,
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = false,
-				previewer = false,
 				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
 
+				previewer = false,
 				mappings = {
 					i = {
-						["<C-h>"] = {
-							function(prompt_bufnr)
-								local current_picker =
-									require("telescope.actions.state").get_current_picker(prompt_bufnr)
-								local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
-
-								-- hidden status not stored, but title is, so we determine the previous state via title
-								local prevTitle = current_picker.prompt_title
-								local ignoreHidden = not prevTitle:find("hidden")
-
-								local title = "Find Files: " .. vim.fs.basename(cwd)
-								if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
-								local currentQuery = require("telescope.actions.state").get_current_line()
-								local existingFileIgnores = require("telescope.config").values.file_ignore_patterns
-									or {}
-
-								require("telescope.actions").close(prompt_bufnr)
-								require("telescope.builtin").find_files {
-									default_text = currentQuery,
-									prompt_title = title,
-									hidden = ignoreHidden,
-									no_ignore = ignoreHidden,
-									cwd = cwd,
-									-- stylua: ignore
-									file_ignore_patterns = {
-										"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
-										unpack(existingFileIgnores), -- must be last for all items to be unpacked
-									},
-								}
-							end,
-							type = "action",
-							opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
-						},
-						["<D-p>"] = {
-							function(prompt_bufnr)
-								require("telescope.actions.layout").cycle_layout_next(prompt_bufnr)
-							end,
-							type = "action",
-							opts = { desc = " Toggle Preview" },
-						},
+						["<D-p>"] = togglePreviewAction,
+						["<C-h>"] = toggleHiddenAction,
 					},
 				},
 			},
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
+					-- approximation of the project name
+					local project = path:gsub("/Users/%w+", ""):gsub("/repos", ""):match("/(.-)/")
+
 					local tail = require("telescope.utils").path_tail(path)
-					local project = path:gsub("/Users/%w+/", ""):match("(..-)/")
 					local text = tail .. "  " .. project
+
 					local highlights = { { { #tail + 1, #text }, "Comment" } }
 					return text, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
-				previewer = false,
 				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
+				previewer = false,
+				mappings = {
+					i = { ["<D-p>"] = togglePreviewAction },
+				},
 			},
 			live_grep = {
 				prompt_prefix = " ",
