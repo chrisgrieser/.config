@@ -41,25 +41,15 @@ M.task_sync = {}
 local function repoSync(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
 	M.task_sync[repo.name] = hs.task
-		.new(syncScriptPath, function(exitCode, _, stdErr)
+		.new(syncScriptPath, function(exitCode, stdout, stderr)
 			if exitCode == 0 then
 				table.insert(M.syncedRepos, repo)
 			else
-				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.name, stdErr)
+				local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
+				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.name, output)
 				print(msg)
 				notify(msg)
 			end
-		end)
-		:start()
-end
-
-M.syncDotFiles = function()
-	local syncScriptPath = "/Users/chrisgrieser/.config/.sync-this-repo.sh"
-	hs.task
-		.new(syncScriptPath, function(exitCode, stdOut, stdErr)
-			print("⭕ exitCode: ", exitCode)
-			print("⭕ stdOut: ", stdOut)
-			print("⭕ stdErr: ", stdErr)
 		end)
 		:start()
 end
@@ -68,7 +58,7 @@ end
 ---@return string stillSyncingIcons
 local function repoSyncsInProgress()
 	local stillSyncingIcons = ""
-	for _, repo in pairs(M.reposToSync) do
+	for _, repo in pairs(config.reposToSync) do
 		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
 		if isStillSyncing then stillSyncingIcons = stillSyncingIcons .. repo.icon end
 	end
