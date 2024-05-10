@@ -57,15 +57,15 @@ local routes = {
 	-----------------------------------------------------------------------------
 	-- SKIP
 
-	-- FIX LSP bugs?
-	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
-	{
-		filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" },
-		skip = true,
-	},
+	-- LSP bugs?
+	-- { filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
+	-- {
+	-- 	filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" },
+	-- 	skip = true,
+	-- },
 
 	-- code actions
-	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+	-- { filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
