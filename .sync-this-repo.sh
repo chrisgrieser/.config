@@ -15,7 +15,7 @@ while true; do
 	git add --all && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" 2>&1 || exit 1
 	sleep 0.5 # prevent "Cannot rebase on multiple branches"
 	git pull && git push && exit 0
-	sleep 2
+	sleep 1
 	i=$((i + 1))
 	[[ $i -gt 3 ]] && exit 1
 done
