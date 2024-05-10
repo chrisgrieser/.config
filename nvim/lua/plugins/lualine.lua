@@ -40,23 +40,13 @@ end
 
 --------------------------------------------------------------------------------
 
--- Never show tabline, since we are showing it ourself on the winbar.
--- Cannot place the component in the tabline, since when empty, vim places its
--- ugly tabline there instead.
-vim.opt.showtabline = 0
-
 local lualineConfig = {
-	winbar = {
+	tabline = {
 		lualine_a = {
 			{ -- clock if window is maximized
 				"datetime",
 				style = " %H:%M:%S",
-				cond = function()
-					local maximized = vim.o.columns > 120
-					local x, y = unpack(vim.api.nvim_win_get_position(0))
-					local isTopLeftWin = x == 0 and y == 0
-					return maximized and isTopLeftWin
-				end,
+				cond = function() return vim.o.columns > 120 end,
 				fmt = function(time)
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
 					return timeWithBlinkingColon
@@ -65,8 +55,11 @@ local lualineConfig = {
 			},
 		},
 		lualine_c = {
-			-- using lualine's tab display, cause it looks better than vim's
-			{
+			{ -- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
+				function() return " " end,
+				padding = { left = 0, right = 0 },
+			},
+			{ -- using lualine's tab display, cause it looks better than vim's
 				"tabs",
 				mode = 1,
 				cond = function() return vim.fn.tabpagenr("$") > 1 end,
@@ -135,8 +128,8 @@ local lualineConfig = {
 	options = {
 		globalstatus = true,
 		always_divide_middle = false,
-		section_separators = { left = "", right = "" },
-		component_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: ple-
+		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: ple-
+		component_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
@@ -145,12 +138,11 @@ local lualineConfig = {
 	},
 }
 
--- always use winbar
-lualineConfig.inactive_winbar = lualineConfig.winbar
 --------------------------------------------------------------------------------
 
 return {
 	"nvim-lualine/lualine.nvim",
+	lazy = false, -- load quicker for no flashing
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,

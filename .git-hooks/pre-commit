@@ -2,16 +2,14 @@
 # vim: filetype=sh
 
 # CONFIG
-max_file_size_mb=9
+max_file_size_mb=5
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # safeguard against accidental pushing of large files
-# INFO excluding "better dictionary", since it has large files
-large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M)
+large_files=$(find . -not -path "**/.git/**" -size +${max_file_size_mb}M | grep -v "modules/main.js")
 if [[ -n "$large_files" ]]; then
 	echo "Large file(s) found. Aborting commit."
-	# shellcheck disable=2001
 	echo "$large_files" | sed 's/^/- /'
 	exit 2
 fi

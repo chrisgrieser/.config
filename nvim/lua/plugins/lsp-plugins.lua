@@ -7,15 +7,9 @@ return {
 		event = "LspAttach",
 		init = function()
 			u.addToLuaLine(
-				"winbar",
+				"tabline",
 				"lualine_b",
 				{ "navic", section_separators = { left = "▒░", right = "" } }
-			)
-			-- HACK spacer, so the winbar does not shift content down
-			u.addToLuaLine(
-				"winbar",
-				"lualine_c",
-				{ function() return " " end, padding = { left = 0, right = 0 } }
 			)
 
 			-- lazy-update, if buffer is large
@@ -103,7 +97,7 @@ return {
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre",
 		opts = {
-			request_pending_text = false, -- remove "loading…" 
+			request_pending_text = false, -- remove "loading…"
 			hl = { link = "Comment" },
 			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },

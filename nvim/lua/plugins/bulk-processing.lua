@@ -9,12 +9,10 @@ return {
 			{ "<leader>fg", vim.cmd.GrugFar, desc = " Search & Replace Globally" },
 		},
 		opts = {
-			extraRgArgs = "--trim", -- for example to always display context lines around matches
-			disableBufferLineNumbers = false, -- wrong way round
+			extraRgArgs = "", -- for example to always display context lines around matches
 			keymaps = {
 				replace = "<D-enter>",
 				qflist = "<D-s>",
-				gotoLocation = "<enter>",
 				close = "q",
 			},
 		},
@@ -35,8 +33,8 @@ return {
 				-- Enter Visual-Multi-Mode
 				["Find Under"] = "<D-j>", -- select word under cursor
 				["Visual Add"] = "<D-j>",
-				["Reselect Last"] = "gV",
 				["Select All"] = "<D-a>",
+				["Reselect Last"] = "gV",
 				["Visual All"] = "<D-a>",
 
 				-- Visual-Multi-Mode Mappings
