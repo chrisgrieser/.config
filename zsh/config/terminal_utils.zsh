@@ -75,6 +75,17 @@ function s {
 	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
 }
 
+# search and replace via `rg`
+function sr {
+	local search="$1"
+	local replace="$2"
+	shift 2
+	for file in "$@"; do
+		new_content=$(rg "$search" --replace="$replace" --passthrough \
+			--no-line-number --no-config "$file")
+		echo "$new_content" >"$file"
+	done
+}
 #───────────────────────────────────────────────────────────────────────────────
 
 # nicer & explorable tree view
@@ -124,7 +135,7 @@ function hs() {
 function p {
 	local filetype_info
 	filetype_info=$(file --mime "$1")
-	if [[ "$filetype_info" =~ json ]] ; then
+	if [[ "$filetype_info" =~ json ]]; then
 		fx "$1"
 	elif [[ "$filetype_info" =~ text ]]; then
 		bat "$1"
