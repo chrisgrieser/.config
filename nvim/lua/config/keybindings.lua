@@ -191,7 +191,12 @@ keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 --------------------------------------------------------------------------------
 -- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
-keymap({ "n", "x", "i" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical Split" })
+keymap(
+	{ "n", "x", "i" },
+	"<C-v>",
+	"<cmd>vertical leftabove split<CR>",
+	{ desc = " Vertical Split" }
+)
 keymap({ "n", "x", "i" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal Split" })
 
 local delta = 5

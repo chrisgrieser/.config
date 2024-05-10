@@ -60,9 +60,13 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
+
+# the four perma-repos
 ".config" = " "
 "main-vault" = "󱉽 "
 "phd-data-analysis" = " "
+".password-store" = " "
+
 "~/Desktop" = "/ "
 "~" = "/ "
 
