@@ -35,7 +35,18 @@
 			</dict>
 		</array>
 		<key>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>321BD266-1E62-4C75-A792-85239F1268B0</key>
 		<array>
 			<dict>
@@ -229,6 +240,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6836847D-31EB-4678-86AD-60D91852740C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>90992717-5795-4AC4-87C0-32EFADFFCA3B</key>
 		<array>
 			<dict>
@@ -391,16 +415,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6836847D-31EB-4678-86AD-60D91852740C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1569,29 +1583,43 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>on run argv 
-	set id to (system attribute "alfred_workflow_bundleid") 
-	tell application id "com.runningwithcrayons.Alfred" to reload workflow id
-	return id 
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{var:alfred_workflow_cache}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
+			<string>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>🔁 Cache reloaded</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6836847D-31EB-4678-86AD-60D91852740C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1617,23 +1645,25 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>🔁 Cache reloaded</string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/reload-cache.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>6836847D-31EB-4678-86AD-60D91852740C</string>
+			<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1687,12 +1717,11 @@ A few common languages have short-hands noted in the popup selection, such as
     + &lt;kbd&gt;⏎&lt;/kbd&gt;: Preview (technically: Pre-listen)
     + &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy sound path
 - Get the Uniform Type Identifier (UTI) of a selected file via the [Universal
-  Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/)
+  Action](https://www.alfredapp.com/help/workflows/triggers/universal-actions/).
 
-### Reload Caches
-The search indexes that are *not* from DevDocs are cached. In case of a recent
-change to a documentation site, you can manually trigger refreshing the cache
-via the Alfred keyword `:docs-reload`.
+## Reload Caches
+In case of a recent change to a documentation site, you can manually trigger 
+refreshing the cache via the Alfred keyword `:docs-reload`.
 
 
 ---
@@ -1733,10 +1762,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
+			<key>note</key>
+			<string>delete Alfred cache (non-devdocs)</string>
 			<key>xpos</key>
-			<real>925</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>1155</real>
+			<real>1175</real>
 		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
@@ -1852,9 +1883,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>1275</real>
+			<real>1175</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1884,6 +1915,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>600</real>
+		</dict>
+		<key>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete custom workflow cache (devdocs)</string>
+			<key>xpos</key>
+			<real>955</real>
+			<key>ypos</key>
+			<real>1175</real>
 		</dict>
 		<key>88975C56-9B03-4991-A91F-B7F567C18E64</key>
 		<dict>
@@ -2022,9 +2064,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>730</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>1195</real>
+			<real>1175</real>
 		</dict>
 		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
 		<dict>
@@ -37169,7 +37211,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.3.1</string>
+	<string>2.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

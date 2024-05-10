@@ -75,8 +75,9 @@ function readFile(path) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	ensureCacheFolderExists();
 	const keyword = $.getenv("alfred_workflow_keyword");
+
+	ensureCacheFolderExists();
 	const mapCache = $.getenv("alfred_workflow_cache") + "/keyword-slug-map.json";
 	if (cacheIsOutdated(mapCache)) {
 		const mapUrl =
@@ -84,7 +85,7 @@ function run() {
 		writeToFile(mapCache, httpRequest(mapUrl));
 	}
 
-	const keywordLanguageMap = JSON.parse(httpRequest(mapUrl));
+	const keywordLanguageMap = JSON.parse(readFile(mapCache));
 	const language = keywordLanguageMap[keyword];
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -113,10 +114,7 @@ function run() {
 				arg: url,
 				uid: url,
 			};
-
-			// icon defaults to devdocs icon
-			if (iconExists) item.icon = { path: iconpath };
-
+			if (iconExists) item.icon = { path: iconpath }; // icon defaults to devdocs icon
 			return item;
 		});
 
