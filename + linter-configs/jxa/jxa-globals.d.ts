@@ -157,6 +157,7 @@ declare const Application: {
 		exists(path: PathObj): boolean;
 		open(path: PathObj): void;
 		reveal(path: PathObj): void;
+		delete(path: PathObj): void; // can delete folders, even non-empty ones
 		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
 		select(path: PathObj | PathObj[]): void;
 		selection(): PathObj[];
@@ -193,7 +194,7 @@ declare const Application: {
 			| "Microsoft Edge"
 			| "Arc",
 	): MacAppObj & {
-		windows: { activeTab: { url(): string; name(): string; }; }[];
+		windows: { activeTab: { url(): string; name(): string } }[];
 	};
 	(name: string): MacAppObj;
 };

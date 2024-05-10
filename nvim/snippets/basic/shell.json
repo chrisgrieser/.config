@@ -112,6 +112,14 @@
     "description": "for loop in list",
     "prefix": "for .. in"
   },
+  "for each file": {
+    "body": [
+      "for filename in *.txt; do",
+      "\techo \"$filename\"",
+      "done"
+    ],
+    "prefix": "for each file"
+  },
   "for each line (read)": {
     "body": [
       "while read -r line; do",
