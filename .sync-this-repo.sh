@@ -15,7 +15,7 @@ commit_msg="$device_name ($files_changed)"
 # 2: pre-commit hook failed
 i=0
 while true; do
-	git add -A && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" 2>&1
+	git add --all && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" 2>&1
 	[[ $? -eq 2 ]] && exit 2 # pre-commit failed
 	sleep 0.5                # prevent "Cannot rebase on multiple branches"
 	git pull && git push && exit 0
