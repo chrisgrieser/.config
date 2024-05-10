@@ -16,7 +16,7 @@ opt.spell = false
 opt.spellfile = { vim.g.dictionaryPath }
 opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
-opt.splitright = false -- vsplit right instead of left
+opt.splitright = true -- split right instead of left
 opt.splitbelow = true -- split down instead of up
 
 opt.cursorline = true

@@ -31,11 +31,7 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰘳 Copy last command" })
 
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
-
-keymap("n", "<leader>it", function()
-	-- setting command to always open in the right, regardless of `splitright`
-	vim.treesitter.inspect_tree { command = "vertical botright new" }
-end, { desc = " :InspectTree" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
@@ -46,12 +42,6 @@ keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left(3), { desc = " :s cwo
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left(3), { desc = " :s for selection" })
 keymap("x", "<leader>fv", ":s ///gI" .. left(4), { desc = " :s inside visual" })
 keymap("n", "<leader>fd", ":global // d _" .. left(5), { desc = " delete matching lines" })
-keymap(
-	"n",
-	"<leader>fg",
-	function() require("funcs.nano-plugins").globalSubstitute() end,
-	{ desc = " global substitute" }
-)
 
 keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
