@@ -81,8 +81,7 @@ function run() {
 	if (cacheIsOutdated(mapCache)) {
 		const mapUrl =
 			"https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/keyword-slug-map.json";
-		writeFile(mapCache, httpRequest(mapUrl));
-		httpRequest(mapUrl)
+		writeToFile(mapCache, httpRequest(mapUrl));
 	}
 
 	const keywordLanguageMap = JSON.parse(httpRequest(mapUrl));
