@@ -75,7 +75,10 @@ function s {
 	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # search and replace via `rg`
+# usage: sr "search" "replace" file1 file2 file3
 function sr {
 	local search="$1"
 	local replace="$2"
@@ -86,18 +89,8 @@ function sr {
 		echo "$new_content" >"$file"
 	done
 }
-#───────────────────────────────────────────────────────────────────────────────
 
-# nicer & explorable tree view
-function _tree {
-	eza --tree --level="$1" --color=always --icons=always --git-ignore \
-		--no-quotes --hyperlink |
-		sed '1d' | less
-}
-alias tree='_tree 2'
-alias treee='_tree 3'
-alias treeee='_tree 4'
-alias treeeee='_tree 5'
+#───────────────────────────────────────────────────────────────────────────────
 
 # shellcheck disable=2164
 function cake { mkdir -p "$1" && cd "$1"; } # change-make dir

@@ -34,49 +34,95 @@ function camelCaseMatch(str) {
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache Dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheAgeThresholdDays = 7;
+	const cacheObj = Application("System Events").aliases[path];
+	if (!cacheObj.exists()) return true;
+	const cacheAgeDays = (+new Date() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	return cacheAgeDays > cacheAgeThresholdDays;
+}
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	ensureCacheFolderExists();
 	const keyword = $.getenv("alfred_workflow_keyword");
-	const mapUrl =
-		"https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/keyword-slug-map.json";
+	const mapCache = $.getenv("alfred_workflow_cache") + "/keyword-slug-map.json";
+	if (cacheIsOutdated(mapCache)) {
+		const mapUrl =
+			"https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/keyword-slug-map.json";
+		writeFile(mapCache, httpRequest(mapUrl));
+		httpRequest(mapUrl)
+	}
+
 	const keywordLanguageMap = JSON.parse(httpRequest(mapUrl));
 	const language = keywordLanguageMap[keyword];
 
-	const iconpath = `./devdocs/icons/${keyword}.png`;
-	const iconExists = fileExists(iconpath);
+	//───────────────────────────────────────────────────────────────────────────
 
-	const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
-	/** @type {DevDocsIndex} */
-	const response = JSON.parse(httpRequest(indexUrl));
+	// INFO using custom cache mechanism, since Alfred's cache does not work with
+	// multiple keywords: https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
+	const langIndexCache = `${$.getenv("alfred_workflow_cache")}/${language}.json`;
 
-	const items = response.entries.map((entry) => {
-		const url = `https://devdocs.io/${language}/${entry.path}`;
+	if (cacheIsOutdated(langIndexCache)) {
+		const iconpath = `./devdocs/icons/${keyword}.png`;
+		const iconExists = fileExists(iconpath);
 
-		/** @type{AlfredItem} */
-		const item = {
-			title: entry.name,
-			subtitle: entry.type,
-			match: camelCaseMatch(entry.name),
-			quicklookurl: url,
-			arg: url,
-			uid: url,
-		};
+		const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
+		/** @type {DevDocsIndex} */
+		const response = JSON.parse(httpRequest(indexUrl));
 
-		// icon defaults to devdocs icon
-		if (iconExists) item.icon = { path: iconpath };
+		const entries = response.entries.map((entry) => {
+			const url = `https://devdocs.io/${language}/${entry.path}`;
 
-		return item;
-	});
+			/** @type{AlfredItem} */
+			const item = {
+				title: entry.name,
+				subtitle: entry.type,
+				match: camelCaseMatch(entry.name),
+				quicklookurl: url,
+				arg: url,
+				uid: url,
+			};
 
-	return JSON.stringify({
-		items: items,
-		// BUG cannot use Alfred cache, since it would cache results for different keywords
-		// PENDING https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/
-		// cache: {
-		// 	seconds: 3600 * 24,
-		// 	loosereload: true,
-		// },
-	});
+			// icon defaults to devdocs icon
+			if (iconExists) item.icon = { path: iconpath };
+
+			return item;
+		});
+
+		writeToFile(langIndexCache, JSON.stringify({ items: entries }));
+	}
+
+	return readFile(langIndexCache);
 }
