@@ -188,12 +188,6 @@ end, { desc = "correctly indented i", expr = true })
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 
--- TERMINAL MODE
--- (also relevant for REPLs such as iron.nvim)
-keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
-
 --------------------------------------------------------------------------------
 -- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })

@@ -259,8 +259,8 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
 					local tail = require("telescope.utils").path_tail(path)
-					local parent = vim.fs.basename(vim.fs.dirname(path))
-					local text = tail .. "  " .. parent
+					local project = path:gsub("/Users/%w+/", ""):match("(..-)/")
+					local text = tail .. "  " .. project
 					local highlights = { { { #tail + 1, #text }, "Comment" } }
 					return text, highlights
 				end,
