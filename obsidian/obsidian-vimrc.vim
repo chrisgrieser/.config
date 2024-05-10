@@ -286,6 +286,12 @@ nnoremap ,l :toggleDevtools
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
+" Workspace
+exmap loadWorkspace jsfile Meta/vimrc-jscommands.js { workspace('load', 'Basic') }
+nnoremap ,w :loadWorkspace
+exmap saveWorkspace jsfile Meta/vimrc-jscommands.js { workspace('save', 'Basic') }
+nnoremap ,W :saveWorkspace
+
 "───────────────────────────────────────────────────────────────────────────────
 " OBSIDIAN-SPECIFIC LEADER BINDINGS
 

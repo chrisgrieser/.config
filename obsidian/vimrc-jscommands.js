@@ -148,3 +148,19 @@ function openDynamicHighlightsSettings() {
 		input.setSelectionRange(1, 1); // move cursor to 2nd position
 	}, 100);
 }
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/** @param {"load"|"save"} mode @param {string} workspaceName */
+async function workspace(mode, workspaceName) {
+	const internalPlugins = view.app.internalPlugins;
+	await internalPlugins.plugins.workspaces.enable();
+	const workspacePlugin = internalPlugins.getEnabledPluginById("workspaces");
+
+	if (mode === "load") workspacePlugin.loadWorkspace(workspaceName); 
+	else if (mode === "save") workspacePlugin.saveWorkspace(workspaceName);
+
+	await internalPlugins.plugins.workspaces.disable();
+	new Notice(`Workspace ${workspaceName} ${mode === "load" ? "loaded" : "saved"}.`);
+}
+

@@ -75,5 +75,17 @@ declare type View = {
 			// biome-ignore lint/suspicious/noExplicitAny: too long…
 			activeTab: any;
 		};
+		internalPlugins: {
+			// biome-ignore lint/suspicious/noExplicitAny: too long…
+			getEnabledPluginById(id: string): any;
+			plugins: {
+				workspaces: {
+					disable(): Promise<void>;
+					enable(): Promise<void>;
+					// biome-ignore lint/suspicious/noExplicitAny: too long…
+					workspaces: Record<string, any>;
+				};
+			};
+		}
 	};
 };
