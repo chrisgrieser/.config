@@ -2,41 +2,44 @@ local M = {} -- persist from garbage collector
 
 local env = require("lua.environment-vars")
 local u = require("lua.utils")
---------------------------------------------------------------------------------
 
+---@param msg string
+local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
+
+--------------------------------------------------------------------------------
+-- CONFIG
 local config = {
 	syncIntervalMins = 30,
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
+	reposToSync = {},
 }
 
---------------------------------------------------------------------------------
 -- get repos from perma-repos.csv
-M.reposToSync = {}
-M.syncedRepos = {}
-M.task_sync = {}
-
 for line in io.lines(config.permaReposPath) do
 	local name, location, icon, _ = line:match("^(.-),(.-),(.-),(.-)$")
 	if not (name and location and icon) then return end
-	table.insert(M.reposToSync, {
+	table.insert(config.reposToSync, {
 		name = name,
 		location = location,
 		icon = icon,
 	})
 end
 
----@param msg string
-local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
+--------------------------------------------------------------------------------
+-- SYNC IMPLEMENTATION
+
+---@alias Repo { name: string, icon: string, location: string }
+
+---@type Repo[]
+M.syncedRepos = {}
+
+---@type table<string, hs.task>
+M.task_sync = {}
 
 ---@async
----@param repo { name: string, icon: string, location: string }
+---@param repo Repo
 local function repoSync(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
-	local syncScriptExists = hs.fs.attributes(syncScriptPath) ~= nil
-	if not syncScriptExists then
-		notify(("⚠️️ %s %s: missing .sync-this-repo.sh"):format(repo.icon, repo.name))
-		return
-	end
 	M.task_sync[repo.name] = hs.task
 		.new(syncScriptPath, function(exitCode, _, stdErr)
 			if exitCode == 0 then
@@ -50,39 +53,48 @@ local function repoSync(repo)
 		:start()
 end
 
+M.syncDotFiles = function()
+	local syncScriptPath = "/Users/chrisgrieser/.config/.sync-this-repo.sh"
+	hs.task
+		.new(syncScriptPath, function(exitCode, stdOut, stdErr)
+			print("⭕ exitCode: ", exitCode)
+			print("⭕ stdOut: ", stdOut)
+			print("⭕ stdErr: ", stdErr)
+		end)
+		:start()
+end
+
 ---@nodiscard
----@return string[] reposStillSyncing
+---@return string stillSyncingIcons
 local function repoSyncsInProgress()
-	local reposStillSyncing = {}
+	local stillSyncingIcons = ""
 	for _, repo in pairs(M.reposToSync) do
 		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
-		if isStillSyncing then table.insert(reposStillSyncing, repo.icon) end
+		if isStillSyncing then stillSyncingIcons = stillSyncingIcons .. repo.icon end
 	end
-	return reposStillSyncing
+	return stillSyncingIcons
 end
 
 ---@async
 ---@param notifyOnSuccess boolean set to false for regularly occurring syncs
 local function syncAllGitRepos(notifyOnSuccess)
-	local reposStillSyncing = repoSyncsInProgress()
-	if #reposStillSyncing > 0 then
-		u.notify("🔁 Sync still in progress: " .. table.concat(reposStillSyncing))
+	if repoSyncsInProgress() ~= "" then
+		u.notify("🔁 Sync still in progress: " .. repoSyncsInProgress())
 		return
 	end
 
-	for _, repo in pairs(M.reposToSync) do
+	for _, repo in pairs(config.reposToSync) do
 		repoSync(repo)
 	end
 
 	M.timer_AllSyncs = hs.timer
-		.waitUntil(function() return #(repoSyncsInProgress()) == 0 end, function()
+		.waitUntil(function() return repoSyncsInProgress() == "" end, function()
 			if #M.syncedRepos > 0 then
 				local syncedIcons = hs.fnutils.map(M.syncedRepos, function(r) return r.icon end) or {}
 				local msg = "🔁 Sync done: " .. table.concat(syncedIcons)
 				print(msg)
 				if notifyOnSuccess then notify(msg) end
 			end
-
 			M.syncedRepos = {} -- reset
 		end)
 		:start()
@@ -121,14 +133,6 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	end
 	u.runWithDelays(3, function() M.recentlyTriggered = false end)
 end):start()
-
--- 5. Every morning at 8:00, when at home
--- (safety redundancy to ensure sync when leaving for the office)
-if env.isAtHome then
-	M.timer_morningSync = hs.timer
-		.doAt("08:00", "01d", function() syncAllGitRepos(false) end)
-		:start()
-end
 
 --------------------------------------------------------------------------------
 return M
