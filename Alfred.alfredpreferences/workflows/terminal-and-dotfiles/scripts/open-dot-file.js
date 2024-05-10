@@ -29,7 +29,7 @@ function run() {
 		.doShellScript(
 			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
 			fd --type=file --type=symlink --hidden --absolute-path \
-			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude=".*.plist"`,
+			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude="*.plist"`,
 		)
 		.split("\r")
 		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
