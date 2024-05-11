@@ -336,7 +336,8 @@ rules:
         to:
           - shell_command: |
               killall Finder
-              osascript -e 'display notification "🔁 Restarting Finder…" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "🔁 Restarting Finder…"
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
           - *remove-insert-notice
           - *leave-insert-mode
@@ -540,15 +541,17 @@ rules:
         from: { key_code: z } # y = z in German Keyboard
         to_if_alone:
           - { key_code: c, modifiers: [command] }
-          - shell_command:
-              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: "y" }
         to:
           - { key_code: c, modifiers: [command] }
-          - shell_command:
-              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # Y = yank (copy) file *content*
       - type: basic
@@ -558,7 +561,8 @@ rules:
               export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when copying
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               cat "$selection" | pbcopy
-              osascript -e 'display notification "✅ File content copied" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ File content copied"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
@@ -567,7 +571,8 @@ rules:
               export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when copying
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               cat "$selection" | pbcopy
-              osascript -e 'display notification "✅ File content copied" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ File content copied"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # p = paste file
       - type: basic
@@ -583,7 +588,8 @@ rules:
               export LC_CTYPE="en_US.UTF-8" # fixes encoding issue when pasting
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
               pbpaste >> "$selection"
-              osascript -e 'display notification "✅ Text appended to file" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ Text appended to file"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
       # r = replicate (duplicate)
       - type: basic
@@ -657,7 +663,8 @@ rules:
               if [[ -n $first_volume ]] ; then
                 open "$first_volume"
               else
-                osascript -e 'display notification "No ejectable volumes found." with title "Finder Vim Mode"'
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "Finder Vim Mode" --message "No ejectable volume found."
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
@@ -1080,8 +1087,9 @@ rules:
             modifiers: [command]
           - *end-move
           - *remove-move-notice
-          - shell_command:
-              osascript -e 'display notification "✅ File(s) copied" with title "Finder Vim Mode"'
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "✅ File(s) copied"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
@@ -1111,7 +1119,8 @@ rules:
           - { key_code: "up_arrow", modifiers: [option] } # go to top
           - shell_command: |
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
-              osascript -e 'display notification "⬇️ Sort by name" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "⬇️ Sort by name"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by modification date
         from: { key_code: "left_arrow" }
@@ -1121,6 +1130,8 @@ rules:
           - shell_command: |
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/end_record.caf" &
               osascript -e 'display notification "⬅️ Sort by modification date" with title "Finder Vim Mode"'
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "⬅️ Sort by modification date"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic # by size
         from: { key_code: "up_arrow" }
