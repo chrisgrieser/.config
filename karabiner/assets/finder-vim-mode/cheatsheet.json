@@ -50,22 +50,28 @@
     {
       "c": "#CCCCCC",
       "a": 5,
-      "f": 4
+      "f": 4,
+      "fa": [
+        3
+      ]
     },
     "^",
     {
       "c": "#a6d1ff",
-      "f": 2
+      "f": 1,
+      "fa": [
+        3
+      ]
     },
-    "1\ntoggle tag #1",
-    "2\ntoggle tag #2",
-    "3\ntoggle tag #3",
-    "4\ntoggle tag #4",
-    "5\ntoggle tag #5",
-    "6\ntoggle tag #6",
-    "7\ntoggle tag #7",
-    "8\ntoggle tag #8",
-    "9\ntoggle tag #9",
+    "1\ntoggle tag&nbsp#1",
+    "2\ntag #2",
+    "3\ntag #3",
+    "4\ntag #4",
+    "5\ntag #5",
+    "6\ntag #6",
+    "7\ntag #7",
+    "8\ntag #8",
+    "9\ntag #9",
     "0\nremove all tags",
     {
       "c": "#ffb896"
@@ -73,7 +79,10 @@
     "de: ?\n:help",
     {
       "c": "#CCCCCC",
-      "f": 4
+      "f": 4,
+      "fa": [
+        3
+      ]
     },
     "`",
     {
@@ -103,40 +112,25 @@
     {
       "c": "#c7a6ff",
       "fa": [
-        2
+        3
       ]
     },
     "q (Q)\nmenu (restart Finder)",
     "w (W)\nclose (reopen) win",
     "e\nclose other wins",
-    {
-      "f": 2
-    },
     "r\nreplicate",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
     "t\nto recent folder\n\n\n^t rela",
-    {
-      "f": 2
-    },
-    "z\nzip",
+    "z\nzip selection",
     "u (U)\nundo (redo)",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
     "i (I)\ninfo panel (window)",
     "o (O)\nopen folds (recursive)",
     "p (P)\npaste (into file)\n\n\n⌃p abs",
     {
       "c": "#CCCCCC",
-      "f": 2
+      "f": 2,
+      "fa": [
+        3
+      ]
     },
     "ü",
     "+",
@@ -173,46 +167,27 @@
       "c": "#c7a6ff",
       "f": 1,
       "fa": [
-        2
+        3
       ]
     },
     "a (A)\nselect all (only files)",
     "s (S)\nfollow (create) symlink",
     "d (D)\ntrash file (open trash)",
-    "f (F)\nfind mode (flatten dirs)",
-    {
-      "f": 2
-    },
+    "f\nfind (like in vim)",
     "gg (G)\nto top (bottom)\n\n\n^g gith",
     {
-      "sm": "cherry",
-      "fa": [
-        0,
-        1,
-        0,
-        0,
-        1
-      ]
+      "sm": "cherry"
     },
     "h (H)\nparent dir (new win)\n\n\n⌃h back",
-    {
-      "f": 2
-    },
     "j (J)\ndown (6x)",
-    {
-      "f": 2
-    },
     "k (K)\nup <br>(6x)",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
     "l (L)\nopen file (new win)\n\n\n⌃l forw",
     {
       "c": "#CCCCCC",
-      "f": 2
+      "f": 2,
+      "fa": [
+        3
+      ]
     },
     "ö",
     "ä",
@@ -234,55 +209,33 @@
     {
       "c": "#CCCCCC",
       "a": 5,
-      "f": 2
+      "f": 2,
+      "fa": [
+        3
+      ]
     },
     ">",
     {
       "c": "#c7a6ff",
       "f": 1,
       "fa": [
-        2
+        3
       ]
     },
     "y (Y)\ncopy file (content)",
     "x (X)\ncross-move (copy)",
     "c (C)\nclose folds  (recursive)",
-    {
-      "f": 2,
-      "f2": 1
-    },
-    "v\nto 1st ejectable volume",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
+    "v\ngoto 1st ejectable volume",
     "b\ntoggle  \"bkp\" suffix",
-    {
-      "f": 2
-    },
     "n (N)\nnew file (dir)\n\n\n⌃n name",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
     "m (M)\nmove (to new dir)",
-    {
-      "f": 2
-    },
     ",\nrestart iCloud",
-    {
-      "f": 1,
-      "fa": [
-        2
-      ]
-    },
     ".\ntoggle hidden files",
     {
-      "c": "#ffb896"
+      "c": "#ffb896",
+      "fa": [
+        2
+      ]
     },
     "en: ?<br>:help\nde:&nbsp–,&nbspen:&nbsp/ Search",
     {
@@ -295,13 +248,18 @@
     {
       "c": "#90d98b",
       "a": 5,
-      "f": 2,
+      "f": 1,
       "fa": [
-        3
+        4
       ],
       "n": true
     },
     "↑\nsort by size",
+    {
+      "fa": [
+        3
+      ]
+    },
     "end\nsort by tags"
   ],
   [
@@ -338,9 +296,9 @@
     {
       "c": "#90d98b",
       "a": 5,
-      "f": 2,
+      "f": 1,
       "fa": [
-        3
+        4
       ]
     },
     "←\nsort by modified",
