@@ -29,7 +29,7 @@ opt.breakindent = true -- indent wrapped lines
 opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
-opt.iskeyword:append("-") -- treat "-" as word character, useful for kebab-case variables
+opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
