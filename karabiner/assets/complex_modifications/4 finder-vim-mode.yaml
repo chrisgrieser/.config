@@ -1271,7 +1271,7 @@ rules:
           - shell_command: |
               sleep 0.1 # wait for clipboard
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Absolute path copid" --message "$(pbpaste)"
+                  --title "✅ Absolute path copied" --message "$(pbpaste)"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # ctrl-n: copy filename
       - type: basic
