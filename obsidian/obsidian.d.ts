@@ -14,6 +14,7 @@ declare const process: { versions: Record<string, string> };
 
 declare class Notice {
 	constructor(msg: string, duration?: number);
+	setMessage(msg: string): void;
 }
 
 declare type EditorPosition = { ch: number; line: number };

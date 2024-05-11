@@ -292,6 +292,10 @@ nnoremap ,w :loadWorkspace
 exmap saveWorkspace jsfile Meta/vimrc-jscommands.js { workspace('save', 'Basic') }
 nnoremap ,W :saveWorkspace
 
+" Freeze Interface
+exmap freezeInterface jsfile Meta/vimrc-jscommands.js { freezeInterface() }
+nnoremap ,F :freezeInterface
+
 "───────────────────────────────────────────────────────────────────────────────
 " OBSIDIAN-SPECIFIC LEADER BINDINGS
 
