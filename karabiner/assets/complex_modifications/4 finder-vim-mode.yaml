@@ -752,7 +752,11 @@ rules:
                 end repeat
                 return out
               ')
-              [[ -z "$selectedFiles" ]] && return 1
+              if [[ -z "$selectedFiles" ]] ; then
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "Finder Vim Mode" --message "⚠️ No selection."
+                exit 1
+              fi
 
               echo "$selectedFiles" | sed -e 's|/$||' -e '/^$/d' | while read -r file; do
                 lastFourChars=$(echo "$file" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
@@ -1279,7 +1283,7 @@ rules:
                 return POSIX path of sel
               end tell')
               filename=$(basename "$SEL")
-              echo "$filename" | pbcopy
+              echo -n "$filename" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ Filename copied" --message "$filename"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -1303,7 +1307,7 @@ rules:
               root_length=${#root}
               rel_path=$(echo "$SEL" | cut -c$((root_length + 2))-)
 
-              echo "$rel_path" | pbcopy
+              echo -n "$rel_path" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "✅ git-relative path copied" --message "$rel_path"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
