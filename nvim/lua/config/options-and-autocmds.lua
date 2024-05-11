@@ -1,5 +1,4 @@
 local opt = vim.opt
-local fs = vim.fs
 local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 
@@ -30,7 +29,7 @@ opt.breakindent = true -- indent wrapped lines
 opt.shortmess:append("sSI") -- reduce info in :messages
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
-opt.iskeyword:append("-") -- treat "-" word character, useful for kebab-case variables
+opt.iskeyword:append("-") -- treat "-" as word character, useful for kebab-case variables
 opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
@@ -84,15 +83,15 @@ vim.filetype.add {
 opt.undodir = vim.g.syncedData .. "/undo"
 opt.viewdir = vim.g.syncedData .. "/view"
 opt.shadafile = vim.g.syncedData .. "/main.shada"
-opt.swapfile = false -- don't help and only create useless files and notifications
+opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 -- automatically cleanup dirs to prevent bloating.
--- once a week, on first FocusLost, delete files older than 30/60 days.
+-- once a week, on first FocusLost, delete files older than 30 days.
 autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") == "Mon" then
-			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+30d", "-delete" }
 			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
 		end
 	end,
@@ -253,13 +252,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 		-- 1. childOfRoot
 		local roots = {}
-		local childOfRoot = fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
-		if childOfRoot then table.insert(roots, fs.dirname(childOfRoot)) end
+		local childOfRoot = vim.fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
+		if childOfRoot then table.insert(roots, vim.fs.dirname(childOfRoot)) end
 
 		-- 2. parentOfRoot
-		for dir in fs.parents(bufPath) do
-			local parent = fs.dirname(dir)
-			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, fs.basename(parent))
+		for dir in vim.fs.parents(bufPath) do
+			local parent = vim.fs.dirname(dir)
+			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, vim.fs.basename(parent))
 			if isParentOfRoot then
 				table.insert(roots, dir)
 				break
@@ -380,7 +379,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			local lines = vim.split(file:read("*a"), "\n")
 			file:close()
 
-			-- overwrite so it's idempotent, since `Filetype` event is sometimes triggered twice
+			-- overwrite so it's idempotent, since `FileType` event is sometimes triggered twice
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 			vim.api.nvim_win_set_cursor(0, { #lines, 0 })
 		end, 1)
