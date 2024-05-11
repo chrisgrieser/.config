@@ -6,7 +6,7 @@ alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
-alias mergetool="git mergetool"
+alias cherry='git cherry-pick'
 alias reset='git reset'
 alias push='git push'
 alias pull='git pull --tags'

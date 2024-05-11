@@ -12,25 +12,17 @@ return {
 				{ "navic", section_separators = { left = "▒░", right = "" } }
 			)
 
-			-- lazy-update, if buffer is large
-			vim.api.nvim_create_autocmd("BufReadPost", {
-				callback = function()
-					local bufferIsLarge = vim.api.nvim_buf_line_count(0) > 2000
-					vim.b["navic_lazy_update_context"] = bufferIsLarge
-				end,
-			})
-
 			vim.g.navic_silence = false
 		end,
 		opts = {
-			lazy_update_context = false,
+			lazy_update_context = true,
 			lsp = {
 				auto_attach = true,
 				preference = { "based_pyright", "tsserver" },
 			},
 			icons = { Object = "󰆧 " },
 			separator = "  ",
-			depth_limit = 6,
+			depth_limit = 7,
 			depth_limit_indicator = "…",
 		},
 		keys = {

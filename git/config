@@ -67,16 +67,6 @@
 	conflictStyle = zdiff3 ; shows original version in middle ; https://ductile.systems/zdiff3/
 
 ;───────────────────────────────────────────────────────────────────────────────
-
-; MERGE TOOL
-[merge]
-	; DOCS https://neovim.io/doc/user/diff.html;dp
-	tool = nvim
-[mergetool "nvim"]
-	; SOURCE https://smittie.de/posts/git-mergetool/
-	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
-
-;───────────────────────────────────────────────────────────────────────────────
 ; SETUP FOR DELTA
 
 [core]
