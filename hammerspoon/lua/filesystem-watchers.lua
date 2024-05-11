@@ -50,21 +50,15 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
 			print("➡️ Violentmonkey backup")
 			u.app(env.browserApp):activate() -- window created by auto-unzipping
-		elseif fileName == "ublacklist-settings.json" then
-			os.rename(filep, browserSettings .. fileName)
-			print("➡️ ublacklist backup")
 		elseif fileName:find("vimium_c.*%.json") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
 			print("➡️ Vimium-C backup")
-		elseif fileName:find("adg_ext_settings_.*%.json") then
-			os.rename(filep, browserSettings .. "adguard-settings.json")
+		elseif fileName:find("my%-ublock%-backup_.*%.txt") then
+			os.rename(filep, browserSettings .. "ublock-settings.json")
 			print("➡️ AdGuard backup")
 		elseif fileName:find("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
 			print("➡️ SponsorBlockConfig backup")
-		elseif fileName:find("Inoreader Feeds .*%.xml") then
-			os.rename(filep, browserSettings .. "Inoreader Feeds.opml")
-			print("➡️ Inoreader backup")
 		elseif fileName == "devdocs.json" then
 			os.rename(filep, browserSettings .. "devdocs-settings.json")
 			print("➡️ DevDocs Settings backup")
