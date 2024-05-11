@@ -44,14 +44,7 @@ fi
 archive_name="${repos_count} Repos – ${isodate}.zip"
 zip -r --quiet "../$archive_name" . || return 1
 
-#───────────────────────────────────────────────────────────────────────────────
-# restrict number of backups
-cd "$backup_location" || return 1
-actual_number=$((max_number_of_bkps + 1))
-# shellcheck disable=2012
-ls -t | tail -n +$actual_number | tr '\n' '\0' | xargs -0 rm
-
 # confirm and remove leftover folders
-rm -rf "$backup_location/temp"
 print "\e[1;32mArchived $repos_count repos.\e[0m"
 open -R "$backup_location/$archive_name"
+rm -rf "$backup_location/temp"
