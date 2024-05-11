@@ -116,6 +116,26 @@ async function updatePlugins() {
 	}, 1000);
 }
 
+function freezeInterface() {
+	const delay = 4; // CONFIG
+	const freezeNotice = new Notice(`⚠ Will freeze Obsidian in ${delay}s`, (delay - 0.2) * 1000);
+	// @ts-expect-error
+	electronWindow.openDevTools(); // devtools open needed for the debugger to work
+
+	let passSecs = 0;
+	const timer = setInterval(() => {
+		const timePassed = (delay - passSecs).toFixed(1);
+		freezeNotice.setMessage(`⚠ Will freeze Obsidian in ${timePassed}s`);
+		passSecs += 0.1;
+	}, 100);
+
+	setTimeout(() => {
+		// biome-ignore lint/suspicious/noDebugger: actual feature
+		debugger;
+		clearInterval(timer);
+	}, delay * 1000);
+}
+
 function cycleThemes() {
 	const app = view.app;
 	const currentTheme = app.customCss.theme;
