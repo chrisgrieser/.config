@@ -160,13 +160,5 @@ async function workspace(mode, workspaceName) {
 	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
 	await workspacePlugin.disable();
-	new Notice(`Workspace ${workspaceName} ${mode === "load" ? "loaded" : "saved"}.`);
-}
-function moveItem(e, t, n) {
-	var i = e[YG],
-		r = i ? i.items : this.items,
-		o = r.indexOf(e);
-	r.remove(e);
-	var a = t ? t.items : this.items;
-	-1 !== o && o < n && r === a && n--, a.splice(n, 0, e), (e[YG] = t), this._onItemsChanged(!0);
+	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
 }
