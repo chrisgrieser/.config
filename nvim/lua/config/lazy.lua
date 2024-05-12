@@ -86,7 +86,6 @@ keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 -- goto plugin config, replaces telescope-lazy-plugins.nvim
-local pathOfThisFile = debug.getinfo(1).source:sub(2)
 keymap("n", "g,", function()
 	vim.ui.select(require("lazy").plugins(), {
 		prompt = "󰣖 Select Plugin:",
@@ -94,11 +93,14 @@ keymap("n", "g,", function()
 	}, function(plugin)
 		if not plugin then return end
 		if plugin[1] == "folke/lazy.nvim" then
-			vim.notify("⭕ plugin: " .. vim.inspect(plugin))
-		local module = plugin._.module:gsub("%.", "/")
-		local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
-		local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
-		vim.cmd(("edit +/%q %s"):format(repo, filepath))
+			local pathOfThisFile = debug.getinfo(1).source:sub(2)
+			vim.cmd.edit(pathOfThisFile)
+		else
+			local module = plugin._.module:gsub("%.", "/")
+			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
+			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
+			vim.cmd(("edit +/%q %s"):format(repo, filepath))
+		end
 	end)
 end, { desc = "󰣖 Goto Plugin Config" })
 
