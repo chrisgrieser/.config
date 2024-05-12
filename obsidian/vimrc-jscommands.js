@@ -203,12 +203,12 @@ function smartMerge() {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
-	const nextCleaned = nextLine
+	const nextLineCleaned = nextLine
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
 		.trim(); // justIndent
-	const mergedLine = curLine + " " + nextCleaned;
+	const mergedLine = curLine + " " + nextLineCleaned;
 
 	const prevCursor = editor.getCursor(); // prevent cursor from moving
 	editor.replaceRange(mergedLine, { line: lnum, ch: 0 }, { line: lnum + 1, ch: nextLine.length });
@@ -230,11 +230,11 @@ function copyPathSegment(segment) {
 function toggleLowercaseTitleCase() {
 	const cursor = editor.getCursor();
 	const { from, to } = editor.wordAt(cursor);
-	const cursorWord = editor.getRange(from, to);
-	
-	if (cursorWord[0] === cursorWord[0].toUpperCase()) cursorWord[0] = cursorWord[0].toLowerCase();
-	else cursorWord[0] = cursorWord[0].toUpperCase();
-	const newWord = cursorWord[0].toUpperCase() + cursorWord.slice(1).toLowerCase();
+	const word = editor.getRange(from, to);
+
+	const newFirstChar =
+		word[0] === word[0].toUpperCase() ? word[0].toLowerCase() : word[0].toUpperCase();
+	const newWord = newFirstChar + word.slice(1).toLowerCase();
 
 	editor.replaceRange(newWord, from, to);
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
@@ -272,4 +272,19 @@ function consoleLogFromWordUnderCursor() {
 
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+}
+
+function openNextLink() {
+	const offset = editor.posToOffset(editor.getCursor());
+	const textAfterCursor = editor.getValue().slice(offset);
+
+	const [url] = textAfterCursor.match(/\bhttps?:\/\/\S+/) || [];
+	if (url) activeWindow.open(url);
+
+	const [_, link, anchor, alias] = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+)?\]\]/) || [];
+	if (file) {
+		const app = view.app;
+		c link
+		app.workspace.getLeaf().openFile(app.vault.getFileByPath(file));
+	}
 }

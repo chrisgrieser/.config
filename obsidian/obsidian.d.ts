@@ -20,6 +20,7 @@ declare class Notice {
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
+declare type TFile = object;
 
 declare type Editor = {
 	exec(action: string): void;
@@ -38,6 +39,7 @@ declare type Editor = {
 	getSelection(): string;
 	getRange(from: EditorPosition, to: EditorPosition): string;
 	offsetToPos(offset: number): EditorPosition;
+	posToOffset(pos: EditorPosition): number;
 	// biome-ignore lint/suspicious/noExplicitAny: code mirror instance, mostly for vim mode
 	cm: any;
 };
@@ -58,6 +60,9 @@ declare type View = {
 			protocolHandlers: {
 				get(protocol: string): ({ id: string }) => void;
 			};
+			getLeaf(): {
+				openFile(file: TFile): void;
+			};
 		};
 		openWithDefaultApp(path: string): void;
 		vault: {
@@ -67,6 +72,7 @@ declare type View = {
 			adapter: {
 				getFullPath(path: string): string;
 			};
+			getFileByPath(path: string): TFile;
 		};
 		plugins: {
 			checkForUpdates(): Promise<void>;
