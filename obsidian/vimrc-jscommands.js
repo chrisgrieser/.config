@@ -240,6 +240,54 @@ function toggleLowercaseTitleCase() {
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
 
+// forward looking `gx`
+async function openNextLink() {
+	const delayForRememberCursorPlugin = 300; // CONFIG
+	const offset = editor.posToOffset(editor.getCursor());
+	const textAfterCursor = editor.getValue().slice(offset);
+
+	const urlMatch = textAfterCursor.match(/\bhttps?:\/\/\S+/);
+	const [url] = urlMatch || [];
+	const urlOffset = urlMatch?.index || -1;
+
+	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
+	const [_, wikilink, anchor] = wikilinkMatch || [];
+	const wikilinkOffset = wikilinkMatch?.index || -1;
+
+	if (url && urlOffset < wikilinkOffset) {
+		activeWindow.open(url);
+		return;
+	}
+	if (!wikilink) {
+		new Notice("No link found.");
+		return;
+	}
+
+	// Wikilink
+	const app = view.app;
+	const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
+	if (!tfile) {
+		new Notice("Could not find link: " + wikilink);
+		return;
+	}
+	await app.workspace.getLeaf().openFile(tfile);
+	if (!anchor) return;
+
+	// goto heading/block-id in opened file
+	const anchorName = anchor.slice(1);
+	const targetFileCache = app.metadataCache.getFileCache(tfile);
+	const targetAnchor = anchor.startsWith("#")
+		? targetFileCache.headings.find((a) => a.heading === anchorName)
+		: targetFileCache.blocks[anchorName];
+	if (targetAnchor) {
+		setTimeout(
+			() => editor.setCursor(targetAnchor.position.start, 0),
+			delayForRememberCursorPlugin,
+		);
+	} else {
+		new Notice(`Could not find "${anchor}"`);
+	}
+}
 //──────────────────────────────────────────────────────────────────────────────
 
 function toggleJsLineComment() {
@@ -272,34 +320,4 @@ function consoleLogFromWordUnderCursor() {
 
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
-}
-
-async function openNextLink() {
-	const offset = editor.posToOffset(editor.getCursor());
-	const textAfterCursor = editor.getValue().slice(offset);
-
-	const urlMatch = textAfterCursor.match(/\bhttps?:\/\/\S+/);
-	const [url] = urlMatch || [];
-	const urlOffset = urlMatch?.index || -1;
-
-	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
-	const [_, wikilink, anchor] = wikilinkMatch || [];
-	const wikilinkOffset = wikilinkMatch?.index || -1;
-
-	if (url && urlOffset < wikilinkOffset) {
-		if (url) activeWindow.open(url);
-	} else if (wikilink) {
-		const app = view.app;
-		const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
-		if (!tfile) {
-			new Notice("Could not find link: " + wikilink);
-			return;
-		}
-		await app.workspace.getLeaf().openFile(tfile);
-		if (anchor) {
-			const headings = app.metadataCache.getFileCache(tfile).headings;
-		}
-	} else {
-		new Notice("No link found.");
-	}
 }
