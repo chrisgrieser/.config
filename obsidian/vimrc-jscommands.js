@@ -86,7 +86,7 @@ function appendJsComment() {
 	const updatedText = text + " // ";
 	editor.setLine(cursor.line, updatedText);
 	editor.setCursor(cursor.line, updatedText.length);
-	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm);
+	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -197,20 +197,18 @@ async function workspace(mode, workspaceName) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// Jump to next/prev Heading
 
 /** @param {"next"|"prev"} which */
 function gotoHeading(which) {
-	const re
+	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
-
-	const currentLnum = editor.getCursor().line;
+	let currentLnum = editor.getCursor().line;
+	if (which === "prev") currentLnum = reverseLnum(currentLnum);
 	const allLines = editor.getValue().split("\n");
 	if (which === "prev") allLines.reverse();
 	const linesBelow = allLines.slice(currentLnum + 1);
 	const linesAbove = allLines.slice(0, currentLnum);
 
-	// if next heading not found, wrap around, if still not found, do nothing
 	let headingLnum = linesBelow.findIndex((line) => line.match(/^#+ /));
 	if (headingLnum > -1) headingLnum += currentLnum + 1; // account for previous slicing
 
@@ -218,8 +216,38 @@ function gotoHeading(which) {
 	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(/^#+ /));
 
 	if (headingLnum === -1) {
-		new Notice(`No ${which} heading found.`);
-		return;
+		new Notice("No heading found.");
+	} else {
+		if (which === "prev") headingLnum = reverseLnum(headingLnum);
+		editor.setCursor(headingLnum, 0);
 	}
-	editor.setCursor(headingLnum, 0);
+}
+
+/** @param {"above"|"below"} where */
+function smartInsertBlank(where) {
+	const lnum = editor.getCursor().line;
+	const curLine = editor.getLine(lnum);
+	let [indentAndText] = curLine.match(/^\s*[-*+] /) || // unordered list
+		curLine.match(/^\s*>+ /) || // blockquote
+		curLine.match(/^\s*\d+[.)] /) || // ordered list
+		curLine.match(/^\s*/) || [""]; // just indent
+
+	// increment ordered list
+	const [orderedList] = indentAndText.match(/\d+/) || [];
+	if (orderedList) {
+		const inrecremented = (Number.parseInt(orderedList) + 1).toString();
+		indentAndText = indentAndText.replace(/\d+/, inrecremented);
+	}
+
+	const targetLine = where === "above" ? lnum : lnum + 1;
+	editor.replaceRange(indentAndText + "\n", { line: targetLine, ch: 0 });
+
+	editor.setCursor(targetLine, indentAndText.length);
+	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
+}
+
+function smartMerge() {
+	const lnum = editor.getCursor().line;
+	const curLine = editor.getLine(lnum);
+	const nextLine = editor.getLine(lnum + 1);
 }

@@ -32,7 +32,8 @@ declare type Editor = {
 	getFoldOffsets(): number[];
 	getLine(line: number): string;
 	setLine(line: number, text: string): void;
-	replaceSelection(value: string): void;
+	replaceSelection(replacement: string): void;
+	replaceRange(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string);
 	setSelection(anchor: EditorPosition, head: EditorPosition): void;
 	getSelection(): string;
 	getRange(from: EditorPosition, to: EditorPosition): string;
@@ -85,9 +86,9 @@ declare type View = {
 					instance: {
 						loadWorkspace(name: string): void;
 						saveWorkspace(name: string): void;
-					}
+					};
 				};
 			};
-		}
+		};
 	};
 };
