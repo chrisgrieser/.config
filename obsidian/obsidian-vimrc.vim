@@ -229,19 +229,13 @@ onoremap <Space> iw
 nnoremap <S-Space> "_daw
 
 " [M]erge Lines
-" the merge from Code Editor Shortcuts plugin is smarter than just using `J`
-" since it removes stuff like list prefixes
-exmap mergeLines obcommand obsidian-editor-shortcuts:joinLines
-nnoremap M :mergeLines
+nnoremap M J
 
-" Make o and O respect context (requires Code Editor Shortcuts Plugin)
-exmap blankAbove obcommand obsidian-editor-shortcuts:insertLineAbove
-nmap &a& :blankAbove
-nmap O &a&i
-
-exmap blankBelow obcommand obsidian-editor-shortcuts:insertLineBelow
-nmap &b& :blankBelow
-nmap o &b&i
+" Make o and O respecting context (e.g. list or blockquote)
+exmap blankBelow jsfile Meta/vimrc-jscommands.js { smartInsertBlank("below") }
+nnoremap o :blankBelow
+exmap blankAbove jsfile Meta/vimrc-jscommands.js { smartInsertBlank("above") }
+nnoremap O :blankAbove
 
 " Add Blank Line above/below
 nnoremap = mzO<Esc>`z
