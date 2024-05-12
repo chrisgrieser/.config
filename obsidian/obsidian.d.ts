@@ -52,7 +52,13 @@ declare type View = {
 	app: {
 		metadataCache: {
 			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
-			getFileCache(file: TFile): { headings: object[] };
+			getFileCache(file: TFile): {
+				headings: {
+					heading: string;
+					position: { start: EditorPosition };
+				}[];
+				blocks: Record<string, { position: { start: EditorPosition } }>;
+			};
 		};
 		customCss: {
 			theme: string;
