@@ -198,6 +198,7 @@ function smartInsertBlank(where) {
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
 }
 
+// merge lines, but remove indentation, lists, and blockquotes
 function smartMerge() {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
