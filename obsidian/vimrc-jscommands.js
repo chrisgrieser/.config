@@ -44,13 +44,26 @@ function clearNotices() {
 }
 
 function inspectWordCount() {
-	const text = editor
-		.getValue()
-		.replace(/^---\n.*?\n---\n/s, "") // remove yaml frontmatter
-		.trim();
-	const charCount = text.length;
-	const wordCount = text.split(/\s+/).length;
-	new Notice(`Characters: ${charCount} \nWords: ${wordCount}`);
+	const rawText = editor.getValue();
+	const textNoFrontmatter = rawText.replace(/^---\n.*?\n---\n/s, "").trim();
+
+	const charCount = textNoFrontmatter.length;
+	const charNoSpacesCount = textNoFrontmatter.replace(/%s+/g, "").length;
+	const wordCount = textNoFrontmatter.split(/\s+/).length;
+
+	const { line, ch } = editor.getCursor();
+	const lineCount = editor.lineCount();
+	const columnLength = editor.getLine(line).length;
+
+	const msg = [
+		`Chars: ${charCount}`,
+		`Chars (no spaces): ${charNoSpacesCount}`,
+		`Words: ${wordCount}`,
+		"",
+		`Line: ${line + 1}/${lineCount}`,
+		`Column: ${ch + 1}/${columnLength}`,
+	].join("\n");
+	new Notice(msg, 7000);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -185,3 +198,28 @@ async function workspace(mode, workspaceName) {
 
 //──────────────────────────────────────────────────────────────────────────────
 // Jump to next/prev Heading
+
+/** @param {"next"|"prev"} which */
+function gotoHeading(which) {
+	const re
+
+
+	const currentLnum = editor.getCursor().line;
+	const allLines = editor.getValue().split("\n");
+	if (which === "prev") allLines.reverse();
+	const linesBelow = allLines.slice(currentLnum + 1);
+	const linesAbove = allLines.slice(0, currentLnum);
+
+	// if next heading not found, wrap around, if still not found, do nothing
+	let headingLnum = linesBelow.findIndex((line) => line.match(/^#+ /));
+	if (headingLnum > -1) headingLnum += currentLnum + 1; // account for previous slicing
+
+	// wrap around if next heading not found
+	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(/^#+ /));
+
+	if (headingLnum === -1) {
+		new Notice(`No ${which} heading found.`);
+		return;
+	}
+	editor.setCursor(headingLnum, 0);
+}

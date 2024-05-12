@@ -79,10 +79,10 @@ nnoremap ga :acceptSuggestion
 vnoremap ga :acceptSuggestion
 
 " next/prev heading
-exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
-exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
-nnoremap <C-j> :nextHeading
-nnoremap <C-k> :prevHeading
+exmap gotoNextHeading jsfile Meta/vimrc-jscommands.js { gotoHeading("next") }
+nnoremap <C-j> :gotoNextHeading
+exmap gotoPrevHeading jsfile Meta/vimrc-jscommands.js { gotoHeading("prev") }
+nnoremap <C-k> :gotoPrevHeading
 
 " [m]atch parenthesis
 nnoremap m %

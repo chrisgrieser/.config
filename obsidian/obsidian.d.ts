@@ -26,6 +26,7 @@ declare type Editor = {
 	getCursor(): EditorPosition;
 	setCursor(pos: EditorPosition | number, ch?: number): void;
 	wordAt(EditorPosition): EditorRange;
+	lineCount(): number;
 	getValue(): string;
 	setValue(value: string): void;
 	getFoldOffsets(): number[];
