@@ -274,17 +274,32 @@ function consoleLogFromWordUnderCursor() {
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
 
-function openNextLink() {
+async function openNextLink() {
 	const offset = editor.posToOffset(editor.getCursor());
 	const textAfterCursor = editor.getValue().slice(offset);
 
-	const [url] = textAfterCursor.match(/\bhttps?:\/\/\S+/) || [];
-	if (url) activeWindow.open(url);
+	const urlMatch = textAfterCursor.match(/\bhttps?:\/\/\S+/);
+	const [url] = urlMatch || [];
+	const urlOffset = urlMatch?.index || -1;
 
-	const [_, link, anchor, alias] = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+)?\]\]/) || [];
-	if (file) {
+	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
+	const [_, wikilink, anchor] = wikilinkMatch || [];
+	const wikilinkOffset = wikilinkMatch?.index || -1;
+
+	if (url && urlOffset < wikilinkOffset) {
+		if (url) activeWindow.open(url);
+	} else if (wikilink) {
 		const app = view.app;
-		c link
-		app.workspace.getLeaf().openFile(app.vault.getFileByPath(file));
+		const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
+		if (!tfile) {
+			new Notice("Could not find link: " + wikilink);
+			return;
+		}
+		await app.workspace.getLeaf().openFile(tfile);
+		if (anchor) {
+			const headings = app.metadataCache.getFileCache(tfile).headings;
+		}
+	} else {
+		new Notice("No link found.");
 	}
 }

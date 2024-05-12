@@ -50,6 +50,10 @@ declare type View = {
 		name: string;
 	};
 	app: {
+		metadataCache: {
+			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
+			getFileCache(file: TFile): { headings: object[] };
+		};
 		customCss: {
 			theme: string;
 			themes: Record<string, string>;
@@ -61,7 +65,7 @@ declare type View = {
 				get(protocol: string): ({ id: string }) => void;
 			};
 			getLeaf(): {
-				openFile(file: TFile): void;
+				openFile(file: TFile): Promise<void>;
 			};
 		};
 		openWithDefaultApp(path: string): void;
