@@ -87,8 +87,7 @@ async function updatePlugins() {
 function freezeInterface() {
 	const delay = 4; // CONFIG
 	const freezeNotice = new Notice(`⚠ Will freeze Obsidian in ${delay}s`, (delay - 0.2) * 1000);
-	// @ts-expect-error
-	electronWindow.openDevTools(); // devtools open needed for the debugger to work
+	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 
 	let passSecs = 0;
 	const timer = setInterval(() => {
@@ -98,7 +97,7 @@ function freezeInterface() {
 	}, 100);
 
 	setTimeout(() => {
-		// biome-ignore lint/suspicious/noDebugger: actual feature
+		// biome-ignore lint/suspicious/noDebugger: intentional here
 		debugger;
 		clearInterval(timer);
 	}, delay * 1000);
@@ -133,7 +132,7 @@ function openDynamicHighlightsSettings() {
 		const input = setting.activeTab.containerEl.find(".query-wrapper").find("input");
 		input.focus();
 		input.scrollLeft = 0; // scroll to start
-		input.setSelectionRange(1, 1); // move cursor to 2nd position
+		input.setSelectionRange(0, 0); // move cursor to start
 	}, 100);
 }
 
@@ -186,7 +185,7 @@ function smartInsertBlank(where) {
 		curLine.match(/^\s*/) || [""]; // just indent
 
 	// increment ordered list
-	const [orderedList] = indentAndText.match(/\d+/) || [];
+	const orderedList = indentAndText.match(/\d+/)?.[0];
 	if (orderedList) {
 		const inrecremented = (Number.parseInt(orderedList) + 1).toString();
 		indentAndText = indentAndText.replace(/\d+/, inrecremented);
@@ -243,18 +242,20 @@ function toggleLowercaseTitleCase() {
 // forward looking `gx`
 async function openNextLink() {
 	const delayForRememberCursorPlugin = 300; // CONFIG
+
 	const offset = editor.posToOffset(editor.getCursor());
 	const textAfterCursor = editor.getValue().slice(offset);
 
-	const urlMatch = textAfterCursor.match(/\bhttps?:\/\/\S+/);
-	const [url] = urlMatch || [];
+	const urlMatch = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+/);
+	const url = urlMatch?.[0];
 	const urlOffset = urlMatch?.index || -1;
 
 	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
 	const [_, wikilink, anchor] = wikilinkMatch || [];
 	const wikilinkOffset = wikilinkMatch?.index || -1;
 
-	if (url && urlOffset < wikilinkOffset) {
+	const urlCloserThanWikilink = url && urlOffset < wikilinkOffset;
+	if (urlCloserThanWikilink) {
 		activeWindow.open(url);
 		return;
 	}
@@ -263,7 +264,7 @@ async function openNextLink() {
 		return;
 	}
 
-	// Wikilink
+	// open wikilink
 	const app = view.app;
 	const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
 	if (!tfile) {

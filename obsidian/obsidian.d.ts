@@ -1,14 +1,18 @@
 // INFO these are globally available in jsfiles used by the Obsidian vimrc plugin
 // see https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
 
-// biome-ignore lint/suspicious/noExplicitAny: Electron window
-declare const activeWindow: any;
-// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
-declare const activeDocument: any;
+// Obsidian vimrc
 declare const selection: EditorSelection;
 declare const editor: Editor;
 declare const view: View;
+
+// electron
 declare const process: { versions: Record<string, string> };
+declare const electronWindow: { openDevTools(): void };
+// biome-ignore lint/suspicious/noExplicitAny: Electron DOM
+declare const activeDocument: any;
+// biome-ignore lint/suspicious/noExplicitAny: Electron window
+declare const activeWindow: any;
 
 //──────────────────────────────────────────────────────────────────────────────
 

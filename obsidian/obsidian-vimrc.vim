@@ -209,10 +209,6 @@ nnoremap ,ur 1000<C-r>
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jscommands.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase
 
-" split line
-vnoremap ,s gq
-nnoremap ,s gqq
-
 " do not move to the right on toggling case
 nnoremap ~ ~h
 
