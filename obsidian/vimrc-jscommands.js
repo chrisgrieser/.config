@@ -182,3 +182,6 @@ async function workspace(mode, workspaceName) {
 	await workspacePlugin.disable();
 	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
 }
+
+//──────────────────────────────────────────────────────────────────────────────
+// Jump to next/prev Heading

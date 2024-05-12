@@ -80,10 +80,9 @@ function run() {
 	const subredditCache = `${cachePath}/${subredditName}.json`;
 
 	let posts;
-	if (
-		!cacheIsOutdated(subredditCache) &&
-		olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)
-	) {
+	const refreshIntervalPassed = cacheIsOutdated(subredditCache)
+	const userPrefsUnchanged = olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)
+	if (!refreshIntervalPassed && userPrefsUnchanged) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
 			variables: { cacheWasUpdated: "false" }, // Alfred vars always strings
@@ -91,6 +90,8 @@ function run() {
 			items: posts,
 		});
 	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// HACK IMPORT SUBREDDIT-LOADING-FUNCTIONS
 	// biome-ignore lint/security/noGlobalEval: JXA import hack
