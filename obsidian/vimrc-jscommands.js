@@ -66,51 +66,6 @@ function inspectWordCount() {
 	new Notice(msg, 7000);
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
-function toggleJsLineComment() {
-	const cursor = editor.getCursor();
-	const text = editor.getLine(cursor.line);
-
-	const [_, indent, comment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
-	const updatedText = comment ? indent + textWithoutComment : indent + "// " + textWithoutComment;
-	cursor.ch = comment ? cursor.ch - 3 : cursor.ch + 3;
-
-	editor.setLine(cursor.line, updatedText);
-	editor.setCursor(cursor);
-}
-
-function appendJsComment() {
-	const cursor = editor.getCursor();
-	const text = editor.getLine(cursor.line);
-	const updatedText = text + " // ";
-	editor.setLine(cursor.line, updatedText);
-	editor.setCursor(cursor.line, updatedText.length);
-	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
-function copyAbsolutePath() {
-	const absPath = view.app.vault.adapter.getFullPath(view.file.path);
-	navigator.clipboard.writeText(absPath);
-	new Notice("Copied:\n" + absPath);
-}
-
-function copyRelativePath() {
-	const relPath = view.file.path;
-	navigator.clipboard.writeText(relPath);
-	new Notice("Copied:\n" + relPath);
-}
-
-function copyFilename() {
-	const filename = view.file.name;
-	navigator.clipboard.writeText(filename);
-	new Notice("Copied:\n" + filename);
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 async function updatePlugins() {
 	const app = view.app;
 
@@ -182,8 +137,6 @@ function openDynamicHighlightsSettings() {
 	}, 100);
 }
 
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @param {"load"|"save"} mode @param {string} workspaceName */
 async function workspace(mode, workspaceName) {
 	const workspacePlugin = view.app.internalPlugins.plugins.workspaces;
@@ -250,4 +203,73 @@ function smartMerge() {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
+	const nextCleaned = nextLine
+		.replace(/^\s*[-*+] /, "") // unordered list
+		.replace(/^\s*>+ /, "") // blockquote
+		.replace(/^\s*\d+[.)] /, "") // ordered list
+		.trim(); // justIndent
+	const mergedLine = curLine + " " + nextCleaned;
+
+	const prevCursor = editor.getCursor(); // prevent cursor from moving
+	editor.replaceRange(mergedLine, { line: lnum, ch: 0 }, { line: lnum + 1, ch: nextLine.length });
+	editor.setCursor(prevCursor);
+}
+
+/** @param {"absolute"|"relative"|"filename"} segment */
+function copyPathSegment(segment) {
+	const toCopy =
+		segment === "absolute"
+			? view.app.vault.adapter.getFullPath(view.file.path)
+			: segment === "relative"
+				? view.file.path
+				: view.file.name;
+	navigator.clipboard.writeText(toCopy);
+	new Notice("Copied:\n" + toCopy);
+}
+
+function toggleLowercaseTitleCase() {
+	const cursor = editor.getCursor();
+	const { from, to } = editor.wordAt(cursor);
+	const cursorWord = editor.getRange(from, to);
+	
+	if (cursorWord[0] === cursorWord[0].toUpperCase()) cursorWord[0] = cursorWord[0].toLowerCase();
+	else cursorWord[0] = cursorWord[0].toUpperCase();
+	const newWord = cursorWord[0].toUpperCase() + cursorWord.slice(1).toLowerCase();
+
+	editor.replaceRange(newWord, from, to);
+	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
+function toggleJsLineComment() {
+	const cursor = editor.getCursor();
+	const text = editor.getLine(cursor.line);
+
+	const [_, indent, comment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
+	const updatedText = comment ? indent + textWithoutComment : indent + "// " + textWithoutComment;
+	cursor.ch = comment ? cursor.ch - 3 : cursor.ch + 3;
+
+	editor.setLine(cursor.line, updatedText);
+	editor.setCursor(cursor);
+}
+
+function appendJsComment() {
+	const cursor = editor.getCursor();
+	const text = editor.getLine(cursor.line);
+	const updatedText = text + " // ";
+	editor.setLine(cursor.line, updatedText);
+	editor.setCursor(cursor.line, updatedText.length);
+	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
+}
+
+function consoleLogFromWordUnderCursor() {
+	const cursor = editor.getCursor();
+	const cursorWordRange = editor.wordAt(cursor);
+	const cursorWord = editor.getRange(cursorWordRange.from, cursorWordRange.to);
+	const [indent] = editor.getLine(cursor.line).match(/^\s*/) || [""];
+	const logLine = indent + `console.log(${cursorWord});`;
+
+	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
+	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }

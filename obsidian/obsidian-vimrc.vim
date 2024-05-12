@@ -26,18 +26,15 @@ vnoremap p P
 
 "───────────────────────────────────────────────────────────────────────────────
 
-" Copy Absolute Path
-exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyAbsolutePath() }
+" Copy Path segments
+exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyPathSegment("absolute") }
+exmap copyRelativePath jsfile Meta/vimrc-jscommands.js { copyPathSegment("relative") }
+exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyPathSegment("filename") }
+
 noremap <C-p> :copyAbsolutePath
 inoremap <C-p> :copyAbsolutePath
-
-" Copy Relative Path
-exmap copyRelativePath jsfile Meta/vimrc-jscommands.js { copyRelativePath() }
 noremap <C-t> :copyRelativePath
 inoremap <C-t> :copyRelativePath
-
-" Copy Name
-exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyFilename() }
 noremap <C-n> :copyFilename
 inoremap <C-n> :copyFilename
 
@@ -211,13 +208,13 @@ nnoremap U <C-r>
 " redo all
 nnoremap ,ur 1000<C-r>
 
+" toggle lowercase/titlecase
+exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jscommands.js { toggleLowercaseTitleCase() }
+nnoremap < :toggleLowercaseTitleCase
+
 " split line
 vnoremap ,s gq
 nnoremap ,s gqq
-
-" case switch via Code Editor Shortcuts Plugin
-exmap caseSwitch obcommand obsidian-editor-shortcuts:toggleCase
-nnoremap < :caseSwitch
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
@@ -228,10 +225,11 @@ vnoremap <Space> "_c
 onoremap <Space> iw
 nnoremap <S-Space> "_daw
 
-" [M]erge Lines
-nnoremap M J
+" [M]erge Lines (removing list or blockquote)
+exmap smartMerge jsfile Meta/vimrc-jscommands.js { smartMerge() }
+nnoremap M :smartMerge
 
-" Make o and O respecting context (e.g. list or blockquote)
+" o and O (respecting list or blockquote)
 exmap blankBelow jsfile Meta/vimrc-jscommands.js { smartInsertBlank("below") }
 nnoremap o :blankBelow
 exmap blankAbove jsfile Meta/vimrc-jscommands.js { smartInsertBlank("above") }
@@ -272,9 +270,13 @@ exmap fileRecovery obcommand file-recovery:open
 nnoremap ,ut :fileRecovery
 nnoremap ,gd :fileRecovery
 
-" Open Console
+" Open DevTools
 exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
-nnoremap ,l :toggleDevtools
+nnoremap ,d :toggleDevtools
+
+" Log Variable
+exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jscommands.js { consoleLogFromWordUnderCursor() }
+nnoremap ,ll :consoleLogFromWordUnderCursor
 
 " Enhance URL with title
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
