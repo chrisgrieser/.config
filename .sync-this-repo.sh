@@ -9,12 +9,12 @@ files_changed="$(git status --porcelain | wc -l | tr -d ' ')"
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 commit_msg="$device_name ($files_changed)"
 
-# loop git add-commit-pull-push, since when between add and push files have been
-# changed, the push will fail
+git add --all && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" || exit 1
+
+# loop, since when between add and push files have been changed, push will fail
 i=0
+sleep 0.5
 while true; do
-	git add --all && git commit -m "$commit_msg" --author="🤖 automated<cron@job>" || exit 1
-	sleep 0.5 # prevent "Cannot rebase on multiple branches"
 	git pull && git push && exit 0
 	sleep 1
 	i=$((i + 1))
