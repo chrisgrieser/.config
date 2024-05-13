@@ -44,26 +44,20 @@ function clearNotices() {
 }
 
 function inspectWordCount() {
-	const rawText = editor.getValue();
-	const textNoFrontmatter = rawText.replace(/^---\n.*?\n---\n/s, "").trim();
-
+	const textNoFrontmatter = editor
+		.getValue()
+		.replace(/^---\n.*?\n---\n/s, "")
+		.trim();
 	const charCount = textNoFrontmatter.length;
 	const charNoSpacesCount = textNoFrontmatter.replace(/%s+/g, "").length;
 	const wordCount = textNoFrontmatter.split(/\s+/).length;
-
-	const { line, ch } = editor.getCursor();
-	const lineCount = editor.lineCount();
-	const columnLength = editor.getLine(line).length;
 
 	const msg = [
 		`Chars: ${charCount}`,
 		`Chars (no spaces): ${charNoSpacesCount}`,
 		`Words: ${wordCount}`,
-		"",
-		`Line: ${line + 1}/${lineCount}`,
-		`Column: ${ch + 1}/${columnLength}`,
 	].join("\n");
-	new Notice(msg, 7000);
+	new Notice(msg, 5000);
 }
 
 async function updatePlugins() {
@@ -144,7 +138,6 @@ async function workspace(mode, workspaceName) {
 	if (mode === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
 	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
-	await workspacePlugin.disable();
 	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
 }
 
@@ -292,9 +285,18 @@ async function openNextLink() {
 }
 
 /** @param {string} vaultRelPath */
-function openRandomNoteIn(vaultRelPath) {
+async function openRandomNoteIn(vaultRelPath) {
 	const app = view.app;
-	const files = app.vault.getMarkdownFiles().filter((file) => file.path.startsWith(vaultRelPath));
+	const files = app.vault
+		.getMarkdownFiles()
+		.filter((file) => file.path.startsWith(vaultRelPath + "/"));
+	if (files.length === 0) {
+		new Notice("No notes in " + vaultRelPath);
+		return;
+	}
+	const randomIndex = Math.floor(Math.random() * files.length);
+	const randomFile = files[randomIndex];
+	await app.workspace.getLeaf().openFile(randomFile);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
