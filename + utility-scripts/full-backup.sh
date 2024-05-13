@@ -84,7 +84,7 @@ else
 	print "\033[1;31m$errors\033[0m"
 fi
 
-osascript -e 'display notification "" with title "Backup finished." sound name "Blow"'
+"$ZDOTDIR/notificator" --title "Terminal" --message "Backup finished." --sound "Blow"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOG BACKUP ACTIVITY

@@ -59,20 +59,17 @@ compdef _o o
 
 # search pwd via `rg`, open selection in the editor at the line
 function s {
-	local selected file_path ln
+	local selected
 	selected=$(
 		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --ignore-file="$HOME/.config/fd/ignore" |
+			--no-config --ignore-file="$HOME/.config/rg/ignore" |
 			fzf --ansi --preview-window="65%" \
 				--delimiter=":" --nth=1,3 --with-nth=1,2 \
+				--bind="enter:execute(open {1} --env=LINE={2})" \
 				--preview 'bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
 				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0        # aborted
-	selected=$(echo "$selected" | head -n1) # only take first line, in case line contains `\n`
-	file_path=$(echo "$selected" | cut -d':' -f1)
-	ln=$(echo "$selected" | cut -d':' -f2)
-	open "$file_path" --env=LINE="$ln" # this is the only macOS-specific part
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -2,7 +2,13 @@
 # shellcheck disable=2154 # alfred vars
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARDS
+function notify {
+	./notificator --title "PDF Summarizer" --message "$1"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# GUARD
 file_path="$1"
 if [[ ! -f "$file_path" ]]; then
 	echo "No file selected."
@@ -22,7 +28,7 @@ if [[ "$CHATPDF_API_KEY" == ".zshenv" ]]; then
 	# shellcheck disable=1091
 	source "$HOME/.zshenv"
 	if [[ -z "$CHATPDF_API_KEY" ]]; then
-		echo -n "There is no ChatPDF API key in the .zshenv"
+		echo "There is no ChatPDF API key in the .zshenv"
 		return 1
 	fi
 fi
@@ -31,14 +37,14 @@ fi
 # chatpdf API request
 # DOCS https://www.chatpdf.com/docs/api/backend
 
-osascript -e 'display notification "🔼 Uploading pdf…" with title "PDF Summarizer"'
+notify "🔼 Uploading pdf…"
 
 sourceId=$(curl -X POST "https://api.chatpdf.com/v1/sources/add-file" \
 	-H "x-api-key: $CHATPDF_API_KEY" \
 	-F "file=@$file_path" |
 	cut -d'"' -f4)
 
-osascript -e 'display notification "🤖 Requesting Summary…" with title "PDF Summarizer"'
+notify "🤖 Requesting Summary…"
 
 # make prompt safe for JSON
 the_prompt="$(echo -n "$the_prompt" | tr "\n" " " | sed 's/"/\\"/g')"
@@ -65,7 +71,7 @@ if [[ "$copy_to_clipboard" == "1" ]]; then
 	# if *only* clipboard is used as output method, there is no implicit indication
 	# that we are done, so we should send a notification
 	if [[ "$alfred_large_type" != "1" && "$save_as_file" != "1" ]]; then
-		osascript -e 'display notification "📋 Copied to clipboard." with title "PDF Summarizer"'
+		notify "📋 Copied to clipboard."
 	fi
 fi
 

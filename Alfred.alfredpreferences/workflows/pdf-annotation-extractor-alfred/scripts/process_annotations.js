@@ -77,50 +77,56 @@ function toTitleCase(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** to make pdfannots and pdfannots2json compatible with the format required by this script
- * @param {Pdfannots2jsonOutput[]|PdfannotsOutput[]} nonStandardizedAnnos
- * @param {boolean} usePdfAnnots
+ * @param {PdfannotsOutput[]} rawAnnos
  * @returns {Annotation[]}
  */
-function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
-	/** @type {Annotation[]} */
-	let out;
+function pdfAnnotsAdapter(rawAnnos) {
+	/** @type {Record<string, "Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough">} */
+	const typeMap = {
+		text: "Free Comment",
+		strike: "Strikethrough",
+		highlight: "Highlight",
+		underline: "Underline",
+		image: "Image",
+	};
 
-	if (usePdfAnnots) {
-		out = nonStandardizedAnnos.map((/** @type {PdfannotsOutput} */a) => {
-			const quote = a.text;
-			const comment = a.contents;
-			const type = a.type === "text" ? "Free Comment" : a.type;
+	return rawAnnos.map((a) => {
+		const quote = a.text;
+		const comment = a.contents;
+		const type = typeMap[a.type];
 
-			// in case the page numbers have names like "image 1" instead of integers
-			const page =
-				typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
+		// in case the page numbers have names like "image 1" instead of integers
+		const page =
+			typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
 
-			/** @type {Annotation} */
-			const converted = { ...a, quote, comment, type, page };
-			return converted
-		});
-	} else {
-		out = nonStandardizedAnnos.map((a) => {
-			const quote = a.annotatedText;
+		return { ...a, quote, comment, type, page };
+	});
+}
 
-			// in case the page numbers have names like "image 1" instead of integers
-			const page =
-				typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
+/** to make pdfannots and pdfannots2json compatible with the format required by this script
+ * @param {Pdfannots2jsonOutput[]} rawAnnos
+ * @returns {Annotation[]}
+ */
+function pdfAnnots2JsonAdapter(rawAnnos) {
+	/** @type {Record<string, "Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough">} */
+	const typeMap = {
+		text: "Free Comment",
+		strike: "Strikethrough",
+		highlight: "Highlight",
+		underline: "Underline",
+		image: "Image",
+	};
 
-			/** @type {Record<string, "Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough">} */
-			const typeMap = {
-				text: "Free Comment",
-				strike: "Strikethrough",
-				highlight: "Highlight",
-				underline: "Underline",
-				image: "Image",
-			};
-			const type = typeMap[a.type];
+	return rawAnnos.map((a) => {
+		const quote = a.annotatedText;
+		const type = typeMap[a.type];
 
-			return { ...a, type, quote, page };
-		});
-	}
-	return out;
+		// in case the page numbers have names like "image 1" instead of integers
+		const page =
+			typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
+
+		return { ...a, type, quote, page };
+	});
 }
 
 /**
@@ -596,7 +602,7 @@ function run(argv) {
 
 	// process input
 	let annos = JSON.parse(rawAnnotations);
-	annos = adapterForInput(annos, usePdfannots);
+	annos = usePdfannots ? pdfAnnotsAdapter(annos) : pdfAnnots2JsonAdapter(annos);
 	annos = insertPageNumber(annos, metadata?.firstPage || 1);
 	annos = cleanQuoteKey(annos);
 
