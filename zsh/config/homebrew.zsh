@@ -77,7 +77,7 @@ function update() {
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
 	_dump
-	osascript -e 'display notification "Finished Update." with title "🍺 Homebrew" sound name "Blow"'
+	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Finished Update." --sound "Blow"
 }
 
 function listall() {

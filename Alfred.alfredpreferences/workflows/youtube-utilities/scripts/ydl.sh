@@ -14,7 +14,7 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # DOWNLOAD
-osascript -e 'display notification "" with title "⏳ Starting Download…"'
+./notificator --title "yt-dlp" --message "⏳ Starting Download…"
 msg=$(cd "$download_location" && yt-dlp --quiet "$url")
 success=$?
 
