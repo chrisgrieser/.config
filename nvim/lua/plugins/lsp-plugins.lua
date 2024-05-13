@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{ -- breadcrumbs for winbar
+	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
 		init = function()

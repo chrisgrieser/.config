@@ -94,7 +94,7 @@ return {
 		config = function(_, opts)
 			require("recorder").setup(opts)
 			u.addToLuaLine(
-				"winbar",
+				"tabline",
 				"lualine_z",
 				{ require("recorder").recordingStatus, color = "Error" }
 			)
