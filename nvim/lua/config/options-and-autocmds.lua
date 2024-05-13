@@ -86,12 +86,12 @@ opt.shadafile = vim.g.syncedData .. "/main.shada"
 opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 -- automatically cleanup dirs to prevent bloating.
--- once a week, on first FocusLost, delete files older than 30 days.
+-- once a week, on first FocusLost, delete files older than 30/60 days.
 autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") == "Mon" then
-			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+30d", "-delete" }
+			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
 			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
 		end
 	end,

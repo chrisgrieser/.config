@@ -249,11 +249,11 @@ async function openNextLink() {
 
 	const urlMatch = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+/);
 	const url = urlMatch?.[0];
-	const urlOffset = urlMatch?.index || -1;
+	const urlOffset = urlMatch?.index ?? -1;
 
 	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
 	const [_, wikilink, anchor] = wikilinkMatch || [];
-	const wikilinkOffset = wikilinkMatch?.index || -1;
+	const wikilinkOffset = wikilinkMatch?.index ?? -1;
 
 	const urlCloserThanWikilink = url && urlOffset < wikilinkOffset;
 	if (urlCloserThanWikilink) {

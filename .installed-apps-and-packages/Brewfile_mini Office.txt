@@ -11,16 +11,16 @@ brew "ddgr"
 brew "eza"
 brew "fd"
 brew "fortune"
+brew "node"
+brew "fx"
 brew "fzf"
 brew "gh"
 brew "git-delta"
-brew "jless"
 brew "less"
 brew "mackup"
 brew "macos-trash"
 brew "mas"
 brew "neovim"
-brew "node"
 brew "pandoc"
 brew "pass"
 brew "pinentry-mac"
@@ -65,4 +65,3 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
-mas "Pixelmator Pro", id: 1289583905
