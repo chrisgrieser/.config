@@ -390,13 +390,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:
-      # toggle inbox
+      # toggle member list (right sidebar)
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
-          - { key_code: i, modifiers: [command] }
+          - { key_code: u, modifiers: [command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      # next server
+      # cycle through server server
       - type: basic
         from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
         to:
@@ -419,7 +419,7 @@ rules:
         to:
           - { key_code: up_arrow, modifiers: [shift, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      # go to next [u]nread
+      # go to next [u]nread notification
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [command] } }
         to:
