@@ -4,29 +4,29 @@ local u = require("config.utils")
 -- https://github.com/huggingface/llm-ls
 -- https://github.com/sourcegraph/sg.nvim
 -- https://github.com/Bryley/neoai.nvim
+-- https://github.com/supermaven-inc/supermaven-nvim/
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"supermaven-inc/supermaven-nvim",
-		opts = {
-			keymaps = {
-				accept_suggestion = "<Tab>",
-				clear_suggestion = "<C-]>",
-			},
-			ignore_filetypes = {
-				TelescopePrompt = false,
-				DressingInput = false,
-				text = false, -- `pass` passwords are plaintext and should not be sent
-			},
-			color = {
-				suggestion_color = "#ffffff",
-				cterm = 244,
-			},
-		},
-	},
-	{
-		-- AI Ghost-Text Suggestions
+	-- {
+	-- 	"supermaven-inc/supermaven-nvim",
+	-- 	enabled = false,
+	-- 	event = "InsertEnter",
+	-- 	cmd = "SupermavenUseFree",
+	-- 	opts = {
+	-- 		keymaps = { accept_suggestion = "<D-s>" },
+	-- 		ignore_filetypes = {
+	-- 			TelescopePrompt = false,
+	-- 			DressingInput = false,
+	-- 			text = false, -- `pass` passwords are plaintext
+	-- 		},
+	-- 		color = {
+	-- 			suggestion_color = "#000000",
+	-- 			cterm = 244,
+	-- 		},
+	-- 	},
+	-- },
+	{ -- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
 		build = function()
@@ -79,7 +79,7 @@ return {
 			vim.g.codeium_filetypes = {
 				TelescopePrompt = false,
 				DressingInput = false,
-				text = false, -- `pass` passwords are plaintext and should not be sent
+				text = false, -- `pass` passwords are plaintext
 			}
 			vim.g.codeium_disable_bindings = 1
 		end,
