@@ -3,8 +3,6 @@ set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 alfred_root="$PWD"
-echo "⭕ alfred_root: $alfred_root" >&2
-
 
 while read -r line; do
 	name=$(echo "$line" | cut -d, -f1)
@@ -12,7 +10,7 @@ while read -r line; do
 	icon=$(echo "$line" | cut -d, -f3)
 	cd "$repo_path"
 	if [[ -n "$(git status --porcelain)" ]]; then
-		"$alfred_root/notificator" --title "Pre-Shutdown Sync…" --message "$icon $name"
+		"$alfred_root/notificator" --title "Pre-Shutdown Sync…" --message "$name $icon"
 		zsh ".sync-this-repo.sh" &>/dev/null
 	fi
 	if [[ -n "$(git status --porcelain)" ]]; then

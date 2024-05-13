@@ -1,23 +1,16 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
-ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** write to file via c-bridge
- * @param {string} filepath
- * @param {string} text
- */
+/** @param {string} filepath @param {string} text */
 function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
-/**
- * @param {string} str
- * @returns {string}
- */
+/** @param {string} str @returns {string} */
 function toTitleCase(str) {
 	const smallWords =
 		/\b(and|because|but|for|neither|nor|only|over|per|some|that|than|the|upon|vs?\.?|versus|via|when|with(out)?|yet)\b/i;
@@ -140,7 +133,7 @@ function insertPageNumber(annotations, pageNo) {
  * leading "_" are still extracted (though the "_" is removed)
  * @param {Annotation[]} annotations
  * @param {string} filename
- * @param {string} citekey - only to be passed to jsonToMd of the underlines
+ * @param {string=} citekey - only to be passed to jsonToMd of the underlines
  * @returns {Annotation[]}
  */
 function processUnderlines(annotations, filename, citekey) {
@@ -182,13 +175,14 @@ function processUnderlines(annotations, filename, citekey) {
 
 /**
  * @param {Annotation[]} annotations
- * @param {string} citekey
+ * @param {string=} citekey
  * @returns {string}
  */
 function jsonToMd(annotations, citekey) {
 	let firstItem = true;
 	const formattedAnnos = annotations.map((a) => {
-		let comment, output;
+		let comment;
+		let output;
 		let annotationTag = "";
 
 		// uncommented highlights or underlines
@@ -207,13 +201,14 @@ function jsonToMd(annotations, citekey) {
 			}
 		}
 
-		// Citation: Pandoc if citekey
+		// Pandoc Citation if citekey, otherwise just page number
 		const reference = citekey ? `[@${citekey}, p. ${a.page}]` : `(p. ${a.page})`;
 
 		// type specific output
 		switch (a.type) {
 			case "Highlight":
-			case "Underline": // highlights/underlines = bullet points
+			case "Underline": {
+				// highlights/underlines = bullet points
 				if (comment) {
 					// ordered list, if comments starts with numbering
 					const numberRegex = /^\d+[.)] ?/;
@@ -229,22 +224,29 @@ function jsonToMd(annotations, citekey) {
 					output = `- ${annotationTag}"${a.quote}" ${reference}`;
 				}
 				break;
-			case "Free Comment": // free comments = block quote (my comments)
+			}
+			case "Free Comment": {
+				// free comments = block quote (my comments)
 				comment = comment.replaceAll("\n", "\n> ");
 				output = `> ${annotationTag}${comment} ${reference}`;
 				break;
-			case "Heading":
+			}
+			case "Heading": {
 				// ensure no leading line break when heading is first item
 				if (firstItem) output = comment;
 				else output = "\n" + comment;
 				break;
-			case "Question Callout": // blockquoted comment
+			}
+			case "Question Callout": {
+				// blockquoted comment
 				comment = comment.replaceAll("\n", "\n> ");
 				output = `> [!QUESTION]\n> ${comment}\n`;
 				break;
-			case "Image":
+			}
+			case "Image": {
 				output = `\n![[${a.image}]]\n`;
 				break;
+			}
 			default:
 		}
 		firstItem = false;
@@ -366,7 +368,7 @@ function transformTag4yaml(annotations, keywords) {
 	});
 
 	// Merge & Save both
-	if (newKeywords.length) {
+	if (newKeywords.length > 0) {
 		newKeywords = [...new Set(newKeywords)].map((keyword) => keyword.trim().replaceAll(" ", "-"));
 		tagsForYaml = newKeywords.join(", ") + ", ";
 	}
@@ -381,7 +383,7 @@ function transformTag4yaml(annotations, keywords) {
 /**
  * @param {string} citekey
  * @param {string} rawEntry
- * @returns {entryMetadata}
+ * @returns {entryMetadata|undefined}
  */
 function extractMetadata(citekey, rawEntry) {
 	let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
@@ -447,7 +449,8 @@ function extractMetadata(citekey, rawEntry) {
 
 	// prompt for page number if needed
 	if (data.firstPage === -999) {
-		let response, validInput;
+		let response;
+		let validInput;
 		do {
 			response = app.displayDialog(
 				"BibTeX Entry has no page numbers.\n\nEnter true page number of FIRST pdf page:",
@@ -491,7 +494,7 @@ function openFile(filepath) {
 
 /**
  * @param {string} annos
- * @param {entryMetadata} metad
+ * @param {entryMetadata?} metad
  * @param {string} outputPath
  * @param {string} filename
  */
@@ -581,4 +584,5 @@ function run(argv) {
 	annos = jsonToMd(annos, citekey);
 
 	writeNote(annos, metadata, outPath, filename);
+	return;
 }
