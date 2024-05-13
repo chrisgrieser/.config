@@ -287,9 +287,10 @@ async function openNextLink() {
 /** @param {string} vaultRelPath */
 async function openRandomNoteIn(vaultRelPath) {
 	const app = view.app;
+	const currentFile = view.file.path;
 	const files = app.vault
 		.getMarkdownFiles()
-		.filter((file) => file.path.startsWith(vaultRelPath + "/"));
+		.filter((f) => f.path.startsWith(vaultRelPath.replace(/\*$/, "/")) && f.path !== currentFile);
 	if (files.length === 0) {
 		new Notice("No notes in " + vaultRelPath);
 		return;
