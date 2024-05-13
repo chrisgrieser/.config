@@ -123,8 +123,8 @@ nnoremap gO :propertySearch
 " :bnext/bprev
 exmap goBack obcommand app:go-back
 exmap goForward obcommand app:go-forward
-nnoremap <BS> :goBack
-nnoremap <S-BS> :goForward
+noremap <BS> :goBack
+noremap <S-BS> :goForward
 
 " Close
 exmap closeWindow obcommand workspace:close-window
@@ -146,11 +146,11 @@ nnoremap <C-w>o :closeOthers
 
 " Alt Buffer (emulates `:buffer #`)
 exmap altBuffer obcommand grappling-hook:alternate-note
-nnoremap <CR> :altBuffer
+noremap <CR> :altBuffer
 
 " Random File
 exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data") }
-nnoremap <C-Tab> :openRandomDataFile
+noremap <C-Tab> :openRandomDataFile
 
 "───────────────────────────────────────────────────────────────────────────────
 " SEARCH

@@ -364,7 +364,7 @@
 				<key>keyword</key>
 				<string>shutdown</string>
 				<key>subtext</key>
-				<string>run dotfiles &amp; vault sync before</string>
+				<string>sync all perma-repos before</string>
 				<key>text</key>
 				<string>Shutdown</string>
 				<key>withspace</key>
