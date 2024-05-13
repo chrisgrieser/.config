@@ -65,7 +65,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 ".config" = " "
 "main-vault" = "󱉽 "
 "phd-data-analysis" = " "
-".password-store" = " "
+".password-store" = " "
 
 "~/Desktop" = "/ "
 "~" = "/ "

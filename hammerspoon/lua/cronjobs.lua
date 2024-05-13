@@ -9,7 +9,7 @@ local c = hs.caffeinate.watcher
 -- force reminders sync on startup
 if u.isSystemStart() then
 	u.openApps("Reminders")
-	u.app("Reminders"):hide()
+	u.whenAppWinAvailable("Reminders", function() u.app("Reminders"):hide() end)
 	u.runWithDelays(6, function() u.quitApps("Reminders") end)
 end
 
@@ -24,7 +24,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 		wu.iMacDisplay:setBrightness(0)
 	end
 
-	-- 2. screen activity while projector connected 
+	-- 2. screen activity while projector connected
 	if
 		event == c.screensaverDidStop
 		or event == c.screensaverDidStart
