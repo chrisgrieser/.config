@@ -269,10 +269,14 @@ end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		-- do not trigger for `d` or yanks to temp-register `z`
-		if vim.v.event.operator ~= "y" or vim.v.event.regname == "z" then return end
-		-- FIX for vim-visual-multi
-		if vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions then return end
+		if
+			vim.v.event.operator ~= "y" -- don't trigger for `d`
+			or vim.v.event.regname == "z" -- temp register
+			or not cursorPreYank
+			or (vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions) -- FIX for vim-visual-multi
+		then
+			return
+		end
 
 		vim.api.nvim_win_set_cursor(0, cursorPreYank)
 	end,
