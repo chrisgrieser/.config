@@ -242,23 +242,24 @@ async function openNextLink() {
 
 	const urlMatch = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+/);
 	const url = urlMatch?.[0];
-	const urlOffset = urlMatch?.index ?? -1;
+	const urlOffset = urlMatch?.index || -1;
 
 	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
 	const [_, wikilink, anchor] = wikilinkMatch || [];
-	const wikilinkOffset = wikilinkMatch?.index ?? -1;
+	const wikilinkOffset = wikilinkMatch?.index || -1;
 
-	const urlCloserThanWikilink = url && urlOffset < wikilinkOffset;
-	if (urlCloserThanWikilink) {
-		activeWindow.open(url);
-		return;
-	}
-	if (!wikilink) {
+	// 1: no link of any kind
+	if (!wikilink && !url) {
 		new Notice("No link found.");
 		return;
 	}
+	// 2: open url
+	if ((url && !wikilink) || urlOffset < wikilinkOffset) {
+		activeWindow.open(url);
+		return;
+	}
 
-	// open wikilink
+	// 3a: open wikilink
 	const app = view.app;
 	const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
 	if (!tfile) {
@@ -266,9 +267,9 @@ async function openNextLink() {
 		return;
 	}
 	await app.workspace.getLeaf().openFile(tfile);
-	if (!anchor) return;
 
-	// goto heading/block-id in opened file
+	// 3b: wikilink has anchor: goto heading/block-id in opened file
+	if (!anchor) return;
 	const anchorName = anchor.slice(1);
 	const targetFileCache = app.metadataCache.getFileCache(tfile);
 	const targetAnchor = anchor.startsWith("#")
