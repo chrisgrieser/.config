@@ -289,6 +289,10 @@ nnoremap ,W :saveWorkspace
 exmap freezeInterface jsfile Meta/vimrc-jscommands.js { freezeInterface() }
 nnoremap ,F :freezeInterface
 
+" Toggle `dataviewjs` and `js` codeblocks
+exmap toggleDataviewAndJsCodeblock jsfile Meta/vimrc-jscommands.js { toggleDataviewAndJsCodeblock() }
+nnoremap ,v :toggleDataviewAndJsCodeblock
+
 "───────────────────────────────────────────────────────────────────────────────
 " OBSIDIAN-SPECIFIC LEADER BINDINGS
 
