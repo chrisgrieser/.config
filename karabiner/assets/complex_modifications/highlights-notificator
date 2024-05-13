@@ -1,5 +1,4 @@
 #!/bin/zsh
-# vim: filetype=sh
 
 ####################################################
 ### Created by Vítor Galvão                      ###
@@ -11,20 +10,20 @@
 
 #───────────────────────────────────────────────────────────────────────────────
 # CONFIG
-readonly bundle_id="de.chris-grieser.terminal-zsh-notificator"
-readonly name="Terminal"
-readonly icon="/System/Applications/Utilities/Terminal.app/Contents/Resources/Terminal.icns"
+readonly bundle_id="de.chris-grieser.highlights-notificator"
+readonly name="Highlights"
+readonly icon="/Applications/Highlights.app/Contents/Resources/AppIcon.icns"
 readonly app_location="$HOME/.cache/notificators"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # Helpers
 function show_notification {
-	/usr/bin/open "${app}" --args "${notificator_message}" "${notificator_title}" "${notificator_subtitle}" "${notificator_sound}"
+  /usr/bin/open "${app}" --args "${notificator_message}" "${notificator_title}" "${notificator_subtitle}" "${notificator_sound}"
 }
 
 function usage {
-	echo "
+  echo "
     Trigger macOS notifications with icon.
 
     Usage:
@@ -41,49 +40,51 @@ function usage {
 
 # Options
 args=()
-while [[ "${1}" ]]; do
-	case "${1}" in
-	-h | --help)
-		usage
-		exit 0
-		;;
-	-m | --message)
-		readonly notificator_message="${2}"
-		shift
-		;;
-	-t | --title)
-		readonly notificator_title="${2}"
-		shift
-		;;
-	-s | --subtitle)
-		readonly notificator_subtitle="${2}"
-		shift
-		;;
-	-p | --sound)
-		readonly notificator_sound="${2}"
-		shift
-		;;
-	--)
-		shift
-		args+=("${@}")
-		break
-		;;
-	-*)
-		echo "Unrecognised option: ${1}"
-		exit 1
-		;;
-	*)
-		args+=("${1}")
-		;;
-	esac
-	shift
+while [[ "${1}" ]]
+do
+  case "${1}" in
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    -m | --message)
+      readonly notificator_message="${2}"
+      shift
+      ;;
+    -t | --title)
+      readonly notificator_title="${2}"
+      shift
+      ;;
+    -s | --subtitle)
+      readonly notificator_subtitle="${2}"
+      shift
+      ;;
+    -p | --sound)
+      readonly notificator_sound="${2}"
+      shift
+      ;;
+    --)
+      shift
+      args+=("${@}")
+      break
+      ;;
+    -*)
+      echo "Unrecognised option: ${1}"
+      exit 1
+      ;;
+    *)
+      args+=("${1}")
+      ;;
+  esac
+  shift
 done
 set -- "${args[@]}"
 
 # Check for required arguments
-if [[ -z "${notificator_message}" ]]; then
-	echo 'A message is mandatory! Aborting…' >&2
-	exit 1
+if [[ -z "${notificator_message}" ]]
+then
+  echo 'A message is mandatory! Aborting…' >&2
+  exit 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -92,25 +93,29 @@ readonly app="$app_location/Notificator for ${name}.app"
 readonly plist="${app}/Contents/Info.plist"
 
 # Exit early if Notificator exists and was modified fewer than 30 days ago
-if [[ "$(/bin/date -r "${app}" +%s)" -gt "$(/bin/date -v -30d +%s)" ]]; then
-	show_notification
-	exit 0
+if [[ "$(/bin/date -r "${app}" +%s)" -gt "$(/bin/date -v -30d +%s)" ]]
+then
+  show_notification
+  exit 0
 fi
 
 # Pre-build checks
-if [[ -z "${bundle_id}" ]]; then
-	echo "Workflow is missing the bundle identifier! Aborting…" >&2
-	exit 1
+if [[ -z "${bundle_id}" ]]
+then
+  echo "Workflow is missing the bundle identifier! Aborting…" >&2
+  exit 1
 fi
 
-if [[ -z "${name}" ]]; then
-	echo "Workflow is missing the name! Aborting…" >&2
-	exit 1
+if [[ -z "${name}" ]]
+then
+  echo "Workflow is missing the name! Aborting…" >&2
+  exit 1
 fi
 
-if [[ ! -f "${icon}" ]]; then
-	echo "Workflow is missing the icon! Aborting…" >&2
-	exit 1
+if [[ ! -f "${icon}" ]]
+then
+  echo "Workflow is missing the icon! Aborting…" >&2
+  exit 1
 fi
 
 # Build Notificator
@@ -149,7 +154,7 @@ readonly jxa_script='
 
 [[ -d "${app}" ]] && /bin/rm -r "${app}"
 /bin/mkdir -p "${app_location}"
-/usr/bin/osacompile -l JavaScript -o "${app}" -e "${jxa_script}" 2>/dev/null
+/usr/bin/osacompile -l JavaScript -o "${app}" -e "${jxa_script}" 2> /dev/null
 
 # Modify Notificator
 /usr/libexec/PlistBuddy -c "add :CFBundleIdentifier string ${bundle_id}.notificator" "${plist}"

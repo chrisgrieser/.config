@@ -170,42 +170,9 @@ rules:
         to:
           - { key_code: i, modifiers: [command, control] }
           - { key_code: "7", modifiers: [command, control] } # purple borders
-          - shell_command:
-              "osascript -e 'display notification \"Tool\" with title \"Image \U0001F5BC️\"'"
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-      # Red Underline Tool
-      - type: basic
-        from: { key_code: u, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: u
-            modifiers: [command, control]
-          - key_code: "1"
-            modifiers: [command, control]
-          - shell_command:
-              "osascript -e 'display notification \"Tool\" with title \"Underline \U0001F58D️\"'"
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-      # Comment Tool
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: n
-            modifiers: [command, control]
-          - key_code: "3" # yellow
-            modifiers: [command, control]
-          - shell_command:
-              "osascript -e 'display notification \"Tool\" with title \"Comment \U0001F5E3️\"'"
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
-      # Yellow Highlight Tool
-      - type: basic
-        from: { key_code: z, modifiers: { mandatory: [command] } } # z and y switched on German keyboard
-        to:
-          - { key_code: h, modifiers: [command, control] }
-          - { key_code: "3", modifiers: [command, control] }
-          - shell_command:
-              "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+                  --message "Tool: Image 🖼️"
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Rename

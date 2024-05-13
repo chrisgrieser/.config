@@ -61,7 +61,11 @@ rules:
                 end repeat
                 return out
               ')
-              [[ -z "$selectedFiles" ]] && return 1
+              if [[ -z "$selectedFiles" ]] ; then
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "Finder Vim Mode" --message "⚠️ No selection."
+                exit 1
+              fi
 
               echo "$selectedFiles" | sed -e 's|/$||' -e '/^$/d' | while read -r file; do
                 filepathNoExt=$(echo "$file" | rev | cut -d. -f2- | rev)
@@ -91,15 +95,13 @@ rules:
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)')
-              # bash expansion does not work in karabiner
-              ext=$(echo "$selection" | rev | cut -d. -f1 | rev)
-
-              if [[ "$ext" != "zip" ]]; then
-                display notification "" with title "⚠️ File not a zip file." subtitle "Finder Vim Mode"
-                return 1
+              ext=$(echo "$selection" | rev | cut -d. -f1 | rev) # bash expansion does not work in karabiner
+              if [[ "$ext" == "zip" ]]; then
+                open -a "Betterzip" "$selection"
+              else
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "Finder Vim Mode" --message "⚠️ File not a zip file."
               fi
-
-              open -a "Betterzip" "$selection"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.apple\.finder$]

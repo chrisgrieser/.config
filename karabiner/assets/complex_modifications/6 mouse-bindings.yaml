@@ -48,11 +48,15 @@ rules:
         to_if_alone:
           - { key_code: "n", modifiers: [control, command] }
           - { key_code: "3", modifiers: [control, command] }
-          - shell_command: osascript -e 'display notification "Tool" with title "Comment ✏️ "'
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+                  --title "Highlights" --message "Comment ✏️"
         to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
-          - shell_command: osascript -e 'display notification "Tool" with title "Underline 🖍️"'
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+                  --title "Highlights" --message "Underline 🖍️"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -85,8 +89,9 @@ rules:
         to_if_alone:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
-          - shell_command:
-              "osascript -e 'display notification \"Tool\" with title \"Yellow Highlight \U0001F7E8\"'"
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+                  --message "Tool: Highlight 🟨"
         to_if_held_down:
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
