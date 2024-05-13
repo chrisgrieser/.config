@@ -41,8 +41,8 @@ ZSH_HIGHLIGHT_REGEXP+=(
 #───────────────────────────────────────────────────────────────────────────────
 # STAGING
 alias gaa='git add --all'
-alias restore='git restore'
 alias unadd='git restore --staged'
+function restore { git restore "$@"; } # using function, so custom completions apply
 
 # without argument, run interactively via fzf to toggle staged/unstaged
 # with argument, stage the file(s). Modified completions allow for quicker selection.
@@ -84,7 +84,6 @@ _change_git_files() {
 }
 compdef _change_git_files ga
 compdef _change_git_files gd
-compdef _change_git_files unadd
 compdef _change_git_files restore
 
 #───────────────────────────────────────────────────────────────────────────────

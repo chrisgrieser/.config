@@ -22,7 +22,7 @@ cd "$local_repos" || return 1
 # new commit without parent, effectively destroying git history
 branch_to_use=${branch_to_use:-main} # default value: "main"
 if ! git clone --branch="$branch_to_use" --depth=2 --filter="blob:none" "$remote_ssh" >&2; then
-	osascript -e 'display notification "Could not clone." with title "Error"'
+	echo -n "❌ Could not clone."
 	return 1
 fi
 

@@ -59,17 +59,16 @@ compdef _o o
 
 # search pwd via `rg`, open selection in the editor at the line
 function s {
-	local selected
-	selected=$(
-		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --ignore-file="$HOME/.config/rg/ignore" |
-			fzf --ansi --preview-window="65%" \
-				--delimiter=":" --nth=1,3 --with-nth=1,2 \
-				--bind="enter:execute(open {1} --env=LINE={2})" \
-				--preview 'bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
-				--height="100%" #required for wezterm's `pane:is_alt_screen_active()`
-	)
-	[[ -z "$selected" ]] && return 0        # aborted
+	# --height="100%" required for for wezterm's `pane:is_alt_screen_active()`
+	rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
+		--no-config --ignore-file="$HOME/.config/rg/ignore" |
+		fzf --ansi --preview-window="65%" \
+			--delimiter=":" --nth=1,3 --with-nth=1,2 \
+			--bind="enter:execute(open {1} --env=LINE={2})" \
+			--preview='bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
+			--preview-window="top,border-down" \
+			--height="100%" ||
+		true # so it always exist 0
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -90,7 +89,7 @@ function sr {
 #───────────────────────────────────────────────────────────────────────────────
 
 # shellcheck disable=2164
-function cake { mkdir -p "$1" && cd "$1"; } 
+function cake { mkdir -p "$1" && cd "$1"; }
 
 function topen { touch "$1" && open "$1"; }
 

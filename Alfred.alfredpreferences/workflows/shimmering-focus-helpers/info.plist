@@ -9,7 +9,18 @@
 	<key>connections</key>
 	<dict>
 		<key>769DBB7A-060F-4CCA-A806-0AAA1149D60B</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A7C44EFE-9B0B-420B-BEC0-819DFD6AC6B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7F5B9DEA-0CE4-4402-804D-7E24157C08B1</key>
 		<array>
 			<dict>
@@ -72,6 +83,27 @@
 	<string>Shimmering Focus Development</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A7C44EFE-9B0B-420B-BEC0-819DFD6AC6B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -238,7 +270,7 @@
 			<key>note</key>
 			<string>clone &amp; switch to local repo</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>475</real>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
@@ -250,6 +282,17 @@
 			<real>195</real>
 			<key>ypos</key>
 			<real>125</real>
+		</dict>
+		<key>A7C44EFE-9B0B-420B-BEC0-819DFD6AC6B1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>could not clone</string>
+			<key>xpos</key>
+			<real>640</real>
+			<key>ypos</key>
+			<real>60</real>
 		</dict>
 		<key>D430A6F9-293F-49FE-9E66-A091FB56677B</key>
 		<dict>
