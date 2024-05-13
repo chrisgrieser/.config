@@ -116,8 +116,8 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if
 		event == c.screensDidLock
 		or event == c.screensDidUnlock
-		or event == c.systemDidWake
 		or event == c.screensDidWake
+		or event == c.systemDidWake
 	then
 		syncAllGitRepos(true)
 	end
