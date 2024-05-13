@@ -100,14 +100,6 @@ rules:
           - { key_code: d, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) ReadKit: Sidebar"
-    manipulators:
-      - type: basic
-        from: { key_code: "1", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: s, modifiers: [control, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [app\.readkit\.universal] }]
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
       # cmd+l = Show in Finder
@@ -157,11 +149,12 @@ rules:
           - key_code: "2"
             modifiers: [command]
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
-        to: [{ key_code: t, modifiers: [command, option] }]
+        to:
+          - { key_code: t, modifiers: [command, option] }
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
       # Image Tool
@@ -172,9 +165,9 @@ rules:
           - { key_code: "7", modifiers: [command, control] } # purple borders
           - shell_command: |
               "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
-                  --message "Tool: Image 🖼️"
+                  --title "Highlights" --message "Image 🖼️"
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Rename
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [control] } }
@@ -201,11 +194,10 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
-              sleep 0.5
-              if pgrep -xq "neovide" || pgrep -xq "nvim"; then
-                osascript -e 'display notification "" with title "⚔️ Force killing nvim…"'
-                killall -9 nvim neovide
-              fi
+              sleep 1
+              # force kill if stuck
+              pgrep -xq "neovide" && killall -9 neovide
+              pgrep -xq "nvim" && killall -9 nvim
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────

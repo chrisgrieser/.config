@@ -91,7 +91,7 @@ rules:
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
-                  --message "Tool: Highlight 🟨"
+                  --title "Highlights" --message "Highlight 🟨"
         to_if_held_down:
           - shell_command:
               osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger

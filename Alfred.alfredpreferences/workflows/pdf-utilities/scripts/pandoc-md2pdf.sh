@@ -6,7 +6,5 @@
 INPUT="$*"
 OUTPUT="${INPUT%.*}_CG.pdf"
 
-osascript -e 'display notification "" with title "⏳ Running pandoc…"'
-
 pandoc "$INPUT" --output="$OUTPUT" --defaults="md2pdf" 2>&1 &&
 	open -R "$OUTPUT"

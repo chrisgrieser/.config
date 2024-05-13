@@ -21,7 +21,7 @@ local lspToMasonMap = {
 	taplo = "taplo", -- toml lsp
 	tsserver = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
-	vale_ls = "vale-ls", -- natural language linter
+	vale_ls = "vale-ls", -- natural language linter, used for markdown
 	yamlls = "yaml-language-server",
 }
 
@@ -54,25 +54,23 @@ end
 serverConfigs.bashls = {
 	settings = {
 		bashIde = {
-			shellcheckArguments = "--shell=bash",
-
 			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 			-- disable shellcheck via LSP to avoid double-diagnostics
 			shellcheckPath = "",
+
+			shellcheckArguments = "--shell=bash",
 		},
 	},
 }
 
 -- HACK use efm to use shellcheck with zsh files
--- EFM: Shell
 serverConfigs.efm = {
 	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
 	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
 }
 
-local efmDependencies = {
-	"shellcheck", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-}
+ -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+local efmDependencies = { "shellcheck" }
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -90,12 +88,12 @@ serverConfigs.lua_ls = {
 			},
 			diagnostics = {
 				globals = { "vim" }, -- when contributing to nvim plugins missing a `.luarc.json`
-				disable = { "trailing-space" }, -- formatter already does that
+				disable = { "trailing-space" }, -- formatter already handles that
 			},
 			hint = { -- inlay hints
 				enable = true,
 				setType = true,
-				arrayIndex = "Disable",
+				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
@@ -111,10 +109,11 @@ serverConfigs.lua_ls = {
 serverConfigs.ruff_lsp = {
 	init_options = {
 		settings = {
-			organizeImports = false, -- when "I" ruleset is added, then included in "fixAll"
+			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
+	-- disable in favor of pyright's hover info
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
@@ -144,7 +143,6 @@ serverConfigs.cssls = {
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
--- INFO still requires LSP installed via npm (not working with stylelint from mason)
 serverConfigs.stylelint_lsp = {
 	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
@@ -157,7 +155,7 @@ serverConfigs.stylelint_lsp = {
 serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 	init_options = {
-		showSuggestionsAsSnippets = true, -- so it works with luasnip
+		showSuggestionsAsSnippets = true, -- so it works with LuaSnip
 	},
 }
 
@@ -191,14 +189,14 @@ serverConfigs.tsserver = {
 		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 	},
 	on_attach = function(client)
-		-- Disable formatting in favor of biome
+		-- disable formatting in favor of biome
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
 serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
 
--- SIC needs to be enabled, can be removed with nvim 0.10 support for dynamic config
+-- SIC needs to be enabled this way, can be removed with nvim 0.10 support for dynamic config
 serverConfigs.biome = {
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = true
@@ -209,8 +207,8 @@ serverConfigs.biome = {
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
--- Disable formatting in favor of biome
 serverConfigs.jsonls = {
+	-- Disable formatting in favor of biome
 	init_options = {
 		provideFormatter = false,
 		documentRangeFormattingProvider = false,
@@ -236,7 +234,7 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
--- since reading external file with the method described in docs does not work
+-- HACK since reading external file with the method described in ltex-docs does not work
 local function getDictWords()
 	local dictfile = vim.g.dictionaryPath
 	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
@@ -290,7 +288,7 @@ serverConfigs.ltex = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
-		-- Disable in Obsidian, as there is not .ltexignore
+		-- Disable in Obsidian vaults (HACK as there is no `.ltexignore`)
 		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
 		if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(ltex.id) end
 	end,
@@ -333,7 +331,7 @@ return {
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 
-			-- Enable snippets-completion (nvim-cmp) and folding (nvim-ufo)
+			-- Enable completion (nvim-cmp) and folding (nvim-ufo)
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities.textDocument.foldingRange =
