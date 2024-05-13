@@ -10,4 +10,5 @@ revealIfExistent "$DATA_DIR/vim-data"
 revealIfExistent "$DATA_DIR/Backups"
 revealIfExistent "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/PDFs"
 
+# open spotlight settings
 open "x-apple.systempreferences:com.apple.preference.speech"
