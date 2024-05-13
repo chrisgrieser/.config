@@ -8,6 +8,24 @@ local u = require("config.utils")
 
 return {
 	{
+		"supermaven-inc/supermaven-nvim",
+		opts = {
+			keymaps = {
+				accept_suggestion = "<Tab>",
+				clear_suggestion = "<C-]>",
+			},
+			ignore_filetypes = {
+				TelescopePrompt = false,
+				DressingInput = false,
+				text = false, -- `pass` passwords are plaintext and should not be sent
+			},
+			color = {
+				suggestion_color = "#ffffff",
+				cterm = 244,
+			},
+		},
+	},
+	{
 		-- AI Ghost-Text Suggestions
 		"Exafunction/codeium.vim",
 		event = "InsertEnter",
