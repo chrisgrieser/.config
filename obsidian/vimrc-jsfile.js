@@ -112,6 +112,15 @@ function cycleThemes() {
 	app.customCss.setTheme(nextTheme);
 }
 
+function openAppearanceSettings() {
+	const setting = view.app.setting;
+	setting.open();
+	setting.openTabById("appearance");
+
+	// scroll fully down
+	setting.activeTab.containerEl.scrollTop = setting.activeTab.containerEl.scrollHeight;
+}
+
 function openDynamicHighlightsSettings() {
 	const setting = view.app.setting;
 	setting.open();
