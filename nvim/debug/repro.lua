@@ -1,5 +1,13 @@
 local plugins = {
 	{
+		"chrisgrieser/nvim-recorder",
+		event = "BufRead",
+		opts = {
+			mapping = {
+				startStopRecording = "m",
+				playMacro = "M",
+			},
+		},
 	},
 }
 
@@ -22,5 +30,5 @@ require("lazy").setup(plugins)
 -- basic appearance settings to not be annoyed
 vim.opt.swapfile = false -- disable prompt when things crash
 vim.cmd.colorscheme("habamax")
-vim.opt.guifont = vim.env.CODE_FONT .. ":h26"
+vim.opt.guifont = "JetBrainsMonoNL NF" .. ":h26"
 vim.opt.signcolumn = "yes:1"
