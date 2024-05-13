@@ -28,7 +28,7 @@ function toTitleCase(str) {
 // TYPES
 /** JSON signature of annotations expected by this script
  * @typedef {Object} Annotation
- * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"remove"} type – of the annotation
+ * @property {"Highlight"|"Underline"|"Free Comment"|"Image"|"Heading"|"Question Callout"|"Strikethrough"|"remove"} type – of the annotation
  * @property {number} page - page number where the annotation is located
  * @property {string=} pageStr - page number as string, so it can represent page ranges
  * @property {string=} comment - user-written comment for the annotation
@@ -37,7 +37,31 @@ function toTitleCase(str) {
  * @property {string=} image - filename of image file
  */
 
-/** @typedef {Object} entryMetadata
+/** https://github.com/mgmeyers/pdfannots2json#sample-output
+ * @typedef {Object} Pdfannots2jsonOutput
+ * @property {string} annotatedText
+ * @property {string} comment
+ * @property {string} color
+ * @property {string} colorCategory
+ * @property {string} date
+ * @property {string} id
+ * @property {string} imagePath
+ * @property {string} ocrText
+ * @property {number|string} page // string in case of stuff like "image 1"
+ * @property {"image"|"highlight"|"underline"|"strike"|"text"} type
+ * @property {number} x
+ * @property {number} y
+ */
+
+/**
+ * @typedef {Object} PdfannotsOutput
+ * @property {string} text
+ * @property {string} contents
+ * @property {number|string} page // string in case of stuff like "image 1"
+ * @property {"image"|"highlight"|"underline"|"strike"|"text"} type
+ */
+
+/** @typedef {Object} EntryMetadata
  * @property {string} title
  * @property {string} ptype
  * @property {string} author
@@ -53,7 +77,7 @@ function toTitleCase(str) {
 //──────────────────────────────────────────────────────────────────────────────
 
 /** to make pdfannots and pdfannots2json compatible with the format required by this script
- * @param {object[]} nonStandardizedAnnos
+ * @param {Pdfannots2jsonOutput[]|PdfannotsOutput[]} nonStandardizedAnnos
  * @param {boolean} usePdfAnnots
  * @returns {Annotation[]}
  */
@@ -62,23 +86,28 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 	let out;
 
 	if (usePdfAnnots) {
-		out = nonStandardizedAnnos.map((a) => {
-			a.quote = a.text;
-			a.comment = a.contents;
-			if (a.type === "text") a.type = "Free Comment";
+		out = nonStandardizedAnnos.map((/** @type {PdfannotsOutput} */a) => {
+			const quote = a.text;
+			const comment = a.contents;
+			const type = a.type === "text" ? "Free Comment" : a.type;
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof a.page === "string") a.page = Number.parseInt(a.page.match(/\d+/)[0]);
-			return a;
+			const page =
+				typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
+
+			/** @type {Annotation} */
+			const converted = { ...a, quote, comment, type, page };
+			return converted
 		});
 	} else {
-		// https://github.com/mgmeyers/pdfannots2json#sample-output
 		out = nonStandardizedAnnos.map((a) => {
-			a.quote = a.annotatedText;
+			const quote = a.annotatedText;
 
 			// in case the page numbers have names like "image 1" instead of integers
-			if (typeof a.page === "string") a.page = Number.parseInt(a.page.match(/\d+/)[0]);
+			const page =
+				typeof a.page === "string" ? Number.parseInt(a.page.match(/\d+/)?.[0] || "0") : a.page;
 
+			/** @type {Record<string, "Highlight"|"Underline"|"Free Comment"|"Image"|"Strikethrough">} */
 			const typeMap = {
 				text: "Free Comment",
 				strike: "Strikethrough",
@@ -86,8 +115,9 @@ function adapterForInput(nonStandardizedAnnos, usePdfAnnots) {
 				underline: "Underline",
 				image: "Image",
 			};
-			a.type = typeMap[a.type] || a.type;
-			return a;
+			const type = typeMap[a.type];
+
+			return { ...a, type, quote, page };
 		});
 	}
 	return out;
@@ -383,7 +413,7 @@ function transformTag4yaml(annotations, keywords) {
 /**
  * @param {string} citekey
  * @param {string} rawEntry
- * @returns {entryMetadata|undefined}
+ * @returns {EntryMetadata|undefined}
  */
 function extractMetadata(citekey, rawEntry) {
 	let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
@@ -407,7 +437,7 @@ function extractMetadata(citekey, rawEntry) {
 	}
 
 	// parse BibTeX entry
-	/* @type {entryMetadata} */
+	/* @type {EntryMetadata} */
 	const data = {
 		title: "",
 		ptype: "",
@@ -494,7 +524,7 @@ function openFile(filepath) {
 
 /**
  * @param {string} annos
- * @param {entryMetadata?} metad
+ * @param {EntryMetadata|undefined} metad
  * @param {string} outputPath
  * @param {string} filename
  */
