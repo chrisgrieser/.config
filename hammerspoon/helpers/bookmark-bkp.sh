@@ -8,7 +8,7 @@ browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
 # INFO $DATA_DIR defined in .zshenv
 isodate=$(date '+%Y-%m-%d')
 bkp_destination="$DATA_DIR/Backups/Browser Bookmarks"
-backup_file="$bkp_destination/Browser Bookmarks_$isodate"
+backup_file="$bkp_destination/$isodate.json"
 
 mkdir -p "$bkp_destination"
 cp -f "$browser_setting/Default/Bookmarks" "$backup_file"
