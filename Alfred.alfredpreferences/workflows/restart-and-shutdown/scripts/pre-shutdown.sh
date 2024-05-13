@@ -5,6 +5,7 @@ set -e
 alfred_root="$PWD"
 echo "⭕ alfred_root: $alfred_root" >&2
 
+
 while read -r line; do
 	name=$(echo "$line" | cut -d, -f1)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
