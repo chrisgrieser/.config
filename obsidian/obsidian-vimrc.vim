@@ -334,6 +334,10 @@ nnoremap ,pd :openPluginDir
 exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/snippets'); }
 nnoremap ,ps :openSnippetDir
 
+" open [a]ppearance settings
+exmap openAppearanceSettings jsfile Meta/vimrc-jsfile.js { openAppearanceSettings() }
+nnoremap ,pa :openAppearanceSettings
+
 " [i] install [p]lugins
 exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
 nnoremap ,pi :installPlugins
