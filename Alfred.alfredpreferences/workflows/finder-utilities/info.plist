@@ -1605,7 +1605,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
 			<real>400</real>
 		</dict>
