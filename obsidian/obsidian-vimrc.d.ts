@@ -1,12 +1,16 @@
-// INFO these are globally available in jsfiles used by the Obsidian vimrc plugin
-// see https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
-
-// Obsidian vimrc
+// OBSIDIAN VIMRC GLOBALS
+// these are globally available in jsfiles used by the Obsidian vimrc plugin
+// https://github.com/esm7/obsidian-vimrc-support?tab=readme-ov-file#jscommand---jsfunction
 declare const selection: EditorSelection;
 declare const editor: Editor;
 declare const view: View;
 
-// electron
+declare class Notice {
+	constructor(msg: string, duration?: number);
+	setMessage(msg: string): void;
+}
+
+// ELECTRON GLOBALS
 declare const process: { versions: Record<string, string> };
 declare const electronWindow: { openDevTools(): void };
 // biome-ignore lint/suspicious/noExplicitAny: Electron DOM
@@ -16,11 +20,8 @@ declare const activeWindow: any;
 
 //──────────────────────────────────────────────────────────────────────────────
 
-declare class Notice {
-	constructor(msg: string, duration?: number);
-	setMessage(msg: string): void;
-}
-
+// INFO importing `obsidian.d.ts` somehow breaks the typings, thus manually
+// declaring everything we need here 💀
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
@@ -61,7 +62,9 @@ declare type View = {
 					heading: string;
 					position: { start: EditorPosition };
 				}[];
-				blocks: Record<string, { position: { start: EditorPosition } }>;
+				blocks: Record<string, {
+					position: { start: EditorPosition };
+				}>;
 			};
 		};
 		customCss: {

@@ -27,9 +27,9 @@ vnoremap p P
 "───────────────────────────────────────────────────────────────────────────────
 
 " Copy Path segments
-exmap copyAbsolutePath jsfile Meta/vimrc-jscommands.js { copyPathSegment("absolute") }
-exmap copyRelativePath jsfile Meta/vimrc-jscommands.js { copyPathSegment("relative") }
-exmap copyFilename jsfile Meta/vimrc-jscommands.js { copyPathSegment("filename") }
+exmap copyAbsolutePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("absolute") }
+exmap copyRelativePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("relative") }
+exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
 
 noremap <C-p> :copyAbsolutePath
 inoremap <C-p> :copyAbsolutePath
@@ -76,9 +76,9 @@ nnoremap ga :acceptSuggestion
 vnoremap ga :acceptSuggestion
 
 " next/prev heading
-exmap gotoNextHeading jsfile Meta/vimrc-jscommands.js { gotoHeading("next") }
+exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("next") }
 nnoremap <C-j> :gotoNextHeading
-exmap gotoPrevHeading jsfile Meta/vimrc-jscommands.js { gotoHeading("prev") }
+exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("prev") }
 nnoremap <C-k> :gotoPrevHeading
 
 " [m]atch parenthesis
@@ -93,7 +93,7 @@ exmap gotoScene obcommand longform:longform-jump-to-scene
 nnoremap gp :gotoScene
 
 " [g]oto definition / link (shukuchi makes it forward-seeking)
-exmap openNextLink jsfile Meta/vimrc-jscommands.js { openNextLink() }
+exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink() }
 nnoremap gx :openNextLink
 nnoremap gd :openNextLink
 
@@ -149,8 +149,8 @@ exmap altBuffer obcommand grappling-hook:alternate-note
 nnoremap <CR> :altBuffer
 
 " Random File
-exmap openDataFile jsfile Meta/vimrc-jscommands.js { openRandomNoteIn("Data") }
-nnoremap <C-Tab> :openDataFile
+exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data") }
+nnoremap <C-Tab> :openRandomDataFile
 
 "───────────────────────────────────────────────────────────────────────────────
 " SEARCH
@@ -160,7 +160,7 @@ nnoremap - /
 
 " <Esc> clears highlights & notices
 " (cannot combine excommands, therefore combining them to a mapping first)
-exmap clearNotices jsfile Meta/vimrc-jscommands.js { clearNotices() }
+exmap clearNotices jsfile Meta/vimrc-jsfile.js { clearNotices() }
 nmap &c& :clearNotices
 nmap &n& :nohl
 nmap <Esc> &c&&n&
@@ -210,7 +210,7 @@ nnoremap U <C-r>
 nnoremap ,ur 1000<C-r>
 
 " toggle lowercase/titlecase
-exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jscommands.js { toggleLowercaseTitleCase() }
+exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase
 
 " do not move to the right on toggling case
@@ -223,13 +223,13 @@ onoremap <Space> iw
 nnoremap <S-Space> "_daw
 
 " [M]erge Lines (removing list or blockquote)
-exmap smartMerge jsfile Meta/vimrc-jscommands.js { smartMerge() }
+exmap smartMerge jsfile Meta/vimrc-jsfile.js { smartMerge() }
 nnoremap M :smartMerge
 
 " o and O (respecting list or blockquote)
-exmap blankBelow jsfile Meta/vimrc-jscommands.js { smartInsertBlank("below") }
+exmap blankBelow jsfile Meta/vimrc-jsfile.js { smartInsertBlank("below") }
 nnoremap o :blankBelow
-exmap blankAbove jsfile Meta/vimrc-jscommands.js { smartInsertBlank("above") }
+exmap blankAbove jsfile Meta/vimrc-jsfile.js { smartInsertBlank("above") }
 nnoremap O :blankAbove
 
 " Add Blank Line above/below
@@ -242,9 +242,9 @@ nnoremap ü <C-x>
 
 " JS Comments
 nunmap q
-exmap toggleJsLineComment jsfile Meta/vimrc-jscommands.js { toggleJsLineComment() }
+exmap toggleJsLineComment jsfile Meta/vimrc-jsfile.js { toggleJsLineComment() }
 nnoremap qq :toggleJsLineComment
-exmap appendJsComment jsfile Meta/vimrc-jscommands.js { appendJsComment() }
+exmap appendJsComment jsfile Meta/vimrc-jsfile.js { appendJsComment() }
 nnoremap Q :appendJsComment
 
 " markdown tasks
@@ -272,7 +272,7 @@ exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
 nnoremap ,d :toggleDevtools
 
 " Log Variable
-exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jscommands.js { consoleLogFromWordUnderCursor() }
+exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
 nnoremap ,ll :consoleLogFromWordUnderCursor
 
 " Enhance URL with title
@@ -280,17 +280,17 @@ exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-ti
 nnoremap ,cc :enhanceUrlWithTitle
 
 " Workspace
-exmap loadWorkspace jsfile Meta/vimrc-jscommands.js { workspace('load', 'Basic') }
+exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace('load', 'Basic') }
 nnoremap ,w :loadWorkspace
-exmap saveWorkspace jsfile Meta/vimrc-jscommands.js { workspace('save', 'Basic') }
+exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace('save', 'Basic') }
 nnoremap ,W :saveWorkspace
 
 " Freeze Interface
-exmap freezeInterface jsfile Meta/vimrc-jscommands.js { freezeInterface() }
+exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface
 
 " Toggle `dataviewjs` and `js` codeblocks
-exmap toggleDataviewAndJsCodeblock jsfile Meta/vimrc-jscommands.js { toggleDataviewAndJsCodeblock() }
+exmap toggleDataviewAndJsCodeblock jsfile Meta/vimrc-jsfile.js { toggleDataviewAndJsCodeblock() }
 nnoremap ,v :toggleDataviewAndJsCodeblock
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -309,11 +309,11 @@ exmap addProperty obcommand markdown:add-metadata-property
 nnoremap ,y :addProperty
 
 " set "[r]ead: true" property
-exmap addYamlKey jsfile Meta/vimrc-jscommands.js { addYamlKey("read", true) }
+exmap addYamlKey jsfile Meta/vimrc-jsfile.js { addYamlKey("read", true) }
 nnoremap ,r :addYamlKey
 
 " [i]nspect [w]ord count
-exmap inspectWordCount jsfile Meta/vimrc-jscommands.js { inspectWordCount() }
+exmap inspectWordCount jsfile Meta/vimrc-jsfile.js { inspectWordCount() }
 nnoremap ,iw :inspectWordCount
 
 " [i]nspect chrome [v]ersion
@@ -323,7 +323,7 @@ nnoremap ,iv :inspectChromeVersion
 "───────────────────────────────────────────────────────────────────────────────
 " PLUGIN- AND SETTING-RELATED BINDINGS
 
-exmap updatePlugins jsfile Meta/vimrc-jscommands.js { updatePlugins() }
+exmap updatePlugins jsfile Meta/vimrc-jsfile.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
 
 " open [p]lugin [d]irectory
@@ -343,11 +343,11 @@ exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
 nnoremap ,t :openTrash
 
 " dynamic [h]ighlights settings
-exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jscommands.js { openDynamicHighlightsSettings() }
+exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
 nnoremap ,ph :openDynamicHighlightsSettings
 
 " Cycle Themes
-exmap cycleThemes jsfile Meta/vimrc-jscommands.js { cycleThemes() }
+exmap cycleThemes jsfile Meta/vimrc-jsfile.js { cycleThemes() }
 nnoremap ,pc :cycleThemes
 
 " Open this vimrc file
@@ -505,7 +505,7 @@ nnoremap zr :unfoldall
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck
 
-exmap toggleLineNumbers jsfile Meta/vimrc-jscommands.js { toggleLineNumbers() }
+exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers
 
 " [O]ption: [d]iagnostics

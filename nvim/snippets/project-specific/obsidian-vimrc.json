@@ -8,7 +8,7 @@
   },
   "jsfile": {
     "body": [
-      "exmap ${1:func-name} jsfile Meta/vimrc-jscommands.js { ${1:func-name}() }",
+      "exmap ${1:func-name} jsfile Meta/vimrc-jsfile.js { ${1:func-name}() }",
       "nnoremap ${2:keymap} :${1:func-name}"
     ],
     "prefix": "jsfile"
