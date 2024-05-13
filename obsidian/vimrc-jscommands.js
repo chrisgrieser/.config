@@ -290,6 +290,13 @@ async function openNextLink() {
 		new Notice(`Could not find "${anchor}"`);
 	}
 }
+
+/** @param {string} vaultRelPath */
+function openRandomNoteIn(vaultRelPath) {
+	const app = view.app;
+	const files = app.vault.getMarkdownFiles().filter((file) => file.path.startsWith(vaultRelPath));
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 function toggleJsLineComment() {

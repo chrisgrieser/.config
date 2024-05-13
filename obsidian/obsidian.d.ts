@@ -24,7 +24,7 @@ declare class Notice {
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
-declare type TFile = object;
+declare type TFile = { path: string; name: string };
 
 declare type Editor = {
 	exec(action: string): void;
@@ -87,6 +87,7 @@ declare type View = {
 				getFullPath(path: string): string;
 			};
 			getFileByPath(path: string): TFile;
+			getMarkdownFiles(): TFile[];
 		};
 		plugins: {
 			checkForUpdates(): Promise<void>;
