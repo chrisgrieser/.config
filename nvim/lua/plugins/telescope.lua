@@ -250,7 +250,10 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
 					-- approximation of the project name
-					local project = path:gsub("/Users/%w+", ""):gsub("/repos", ""):match("/(.-)/")
+					local project = path
+						:gsub(vim.pesc(vim.g.localRepos), "")
+						:gsub("/Users/%w+", "")
+						:match("/(.-)/")
 
 					local tail = require("telescope.utils").path_tail(path)
 					local text = tail .. "  " .. project
