@@ -391,17 +391,17 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string>cat ./scripts/chrome-internal-pages.json</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>installed-browser-extensions.js</string>
+				<string>./scripts/select-settings-page.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Chrome Internal Pages</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -700,16 +700,16 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Google Chrome</string>
+				<string>chrome</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Chrome</string>
-						<string>Google Chrome</string>
+						<string>chrome</string>
 					</array>
 					<array>
 						<string>Brave Browser</string>
-						<string>Brave Browser</string>
+						<string>brave</string>
 					</array>
 				</array>
 			</dict>

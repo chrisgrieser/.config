@@ -1,0 +1,14 @@
+[
+	{ "title": "⚙️ Settings", "arg": "chrome://settings/" },
+	{ "title": "🚀 Get Started", "arg": "chrome://settings/getStarted/" },
+	{ "title": "🎨 Appearance", "arg": "chrome://settings/appearance/" },
+	{ "title": "📝 Autofill", "arg": "chrome://settings/autofill" },
+	{ "title": "🔒 Privacy", "arg": "chrome://settings/privacy" },
+	{ "title": "🔍 Search", "arg": "chrome://settings/search/" },
+	{ "title": "⚙️ Extensions", "arg": "chrome://extensions/" },
+	{ "title": "⌨️ Extension Keyboard Shortcuts", "arg": "chrome://extensions/shortcuts/" },
+	{ "title": "⬇️ Downloads", "arg": "chrome://downloads/" },
+	{ "title": "🔖 Bookmarks", "arg": "chrome://bookmarks/" },
+	{ "title": "🧪 Flags", "arg": "chrome://flags/" },
+	{ "title": "🕟 History", "arg": "chrome://history/" }
+]

@@ -22,26 +22,31 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// CONFIG
 /** @type {Record<string, string>} */
 const specialAnchors = {
 	"AdGuard AdBlocker": "#user-filter",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Violentmonkey: "#scripts",
+	"uBlock Origin": "#1p-filters.html",
+};
+
+/** @type {Record<string, string>} */
+const browserPathMap = {
+	brave: "BraveSoftware/Brave-Browser",
+	chrome: "Google/Chrome",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const browserDefaultsPath = $.getenv("browser_defaults_path");
+	const defaultsPath = browserPathMap[$.getenv("browser")];
 	const extensionFolder =
-		app.pathTo("home folder") +
-		`/Library/Application Support/${browserDefaultsPath}/Default/Extensions`;
+		app.pathTo("home folder") + `/Library/Application Support/${defaultsPath}/Default/Extensions`;
 
 	// GUARD
 	if (!fileExists(extensionFolder)) {
-		const browserName = browserDefaultsPath.split("/")[1];
+		const browserName = defaultsPath.split("/")[1];
 		return JSON.stringify({
 			items: [{ title: `No extensions found for ${browserName}.` }],
 		});
