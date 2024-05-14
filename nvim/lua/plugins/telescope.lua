@@ -592,7 +592,7 @@ return {
 		dependencies = "nvim-telescope/telescope.nvim",
 		keys = {
 			{
-				"<D-ö>",
+				"<C-.>",
 				mode = { "n", "i" },
 				function()
 					require("telescope.builtin").symbols {
