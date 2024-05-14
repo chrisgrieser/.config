@@ -20,6 +20,7 @@ return {
 				"javascript", -- some wrong indentation when using `o`
 				"typescript",
 				"gitrebase",
+				"lua",
 				"yaml", -- wrong indentation in list continuation
 			},
 		},
