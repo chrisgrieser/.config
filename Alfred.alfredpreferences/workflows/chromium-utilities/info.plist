@@ -700,12 +700,16 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>BraveSoftware/Brave-Browser</string>
+				<string>Google Chrome</string>
 				<key>pairs</key>
 				<array>
 					<array>
+						<string>Google Chrome</string>
+						<string>Google Chrome</string>
+					</array>
+					<array>
 						<string>Brave Browser</string>
-						<string>BraveSoftware/Brave-Browser</string>
+						<string>Brave Browser</string>
 					</array>
 				</array>
 			</dict>
@@ -716,7 +720,7 @@
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>browser_defaults_path</string>
+			<string>browser</string>
 		</dict>
 	</array>
 	<key>version</key>
