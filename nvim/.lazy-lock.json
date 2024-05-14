@@ -65,7 +65,7 @@
   "symbol-usage.nvim": { "branch": "main", "commit": "555f0ca3688835ce95efde132f7336c1a6d63375" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
-  "telescope.nvim": { "branch": "master", "commit": "29fddf76bc3b75224f8a974f15139627ffb435d5" },
+  "telescope.nvim": { "branch": "master", "commit": "6f6bb8065567b56c42e283b06e8a1c670c0092a1" },
   "treesj": { "branch": "main", "commit": "e1e82ab4237619d342c7102c9f13d4b9833bfd39" },
   "vim-matchup": { "branch": "master", "commit": "2d660e4aa7c566014c667af2cda0458043527902" },
   "vim-visual-multi": { "branch": "master", "commit": "b84a6d42c1c10678928b0bf8327f378c8bc8af5a" },
