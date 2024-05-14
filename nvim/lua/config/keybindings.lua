@@ -231,13 +231,6 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if not winClosed and moreThanOneBuffer then vim.cmd.bdelete() end
 end, { desc = "󰽙 :close / :bdelete" })
 
-keymap(
-	"n",
-	"gp",
-	function() require("funcs.nano-plugins").gotoProject() end,
-	{ desc = " Goto Project" }
-)
-
 -- mac-specific
 keymap(
 	{ "n", "x" },
