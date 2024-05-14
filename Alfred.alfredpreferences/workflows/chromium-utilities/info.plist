@@ -129,19 +129,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CCE7F564-6403-4269-AE2A-CC28F9795807</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BC0956CC-9233-46F1-B5C4-05798BC54EDE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</key>
 		<array>
 			<dict>
@@ -519,50 +506,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Re-Install bypass-paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CCE7F564-6403-4269-AE2A-CC28F9795807</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/install-bypass-paywall.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BC0956CC-9233-46F1-B5C4-05798BC54EDE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>out_format</key>
@@ -741,15 +684,6 @@
 			<key>ypos</key>
 			<real>155</real>
 		</dict>
-		<key>BC0956CC-9233-46F1-B5C4-05798BC54EDE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>630</real>
-			<key>ypos</key>
-			<real>425</real>
-		</dict>
 		<key>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</key>
 		<dict>
 			<key>colorindex</key>
@@ -778,17 +712,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>270</real>
-		</dict>
-		<key>CCE7F564-6403-4269-AE2A-CC28F9795807</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>install bypass paywall</string>
-			<key>xpos</key>
-			<real>460</real>
-			<key>ypos</key>
-			<real>425</real>
 		</dict>
 		<key>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</key>
 		<dict>
