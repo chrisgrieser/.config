@@ -817,16 +817,16 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>chrome</string>
+				<string>Google Chrome</string>
 				<key>pairs</key>
 				<array>
 					<array>
 						<string>Google Chrome</string>
-						<string>chrome</string>
+						<string>Google Chrome</string>
 					</array>
 					<array>
 						<string>Brave Browser</string>
-						<string>brave</string>
+						<string>Brave Browser</string>
 					</array>
 				</array>
 			</dict>

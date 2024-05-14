@@ -1,0 +1,21 @@
+{
+	"extensionPath": {
+		"Google Chrome": "~/Library/Application Support/Google/Chrome/Default/Extensions",
+		"Brave Browser": "~/Library/Application Support/BraveSoftware/Brave-Browser/Default/Extensions"
+	},
+	"appIcon": {
+		"Google Chrome": "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+		"Brave Browser": "/Applications/Brave Browser.app/Contents/Resources/app.icns"
+	},
+	"settingsPages": {
+		"Chrome": [],
+		"Brave": [
+			{ "title": "⌨️ Brave Shortcuts", "arg": "brave://settings/system/shortcuts" },
+			{ "title": "🔰 Brave Shields", "arg": "brave://settings/shields" },
+			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
+			{ "title": "📖 Brave Help & Tips", "arg": "brave://settings/braveHelpTips" },
+			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
+			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" }
+		]
+	}
+}
