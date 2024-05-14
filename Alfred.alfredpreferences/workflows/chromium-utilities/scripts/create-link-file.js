@@ -10,36 +10,6 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
-function browserTab() {
-	const frontmostAppName = Application("System Events")
-		.applicationProcesses.where({ frontmost: true })
-		.name()[0];
-	const frontmostApp = Application(frontmostAppName);
-	// biome-ignore format: long
-	const chromiumVariants = [ "Google Chrome", "Chromium", "Opera", "Vivaldi", "Brave Browser", "Microsoft Edge", "Arc" ];
-	const webkitVariants = ["Safari", "Webkit"];
-	let title;
-	let url;
-	if (chromiumVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-expect-error
-		url = frontmostApp.windows[0].activeTab.url();
-		// @ts-expect-error
-		title = frontmostApp.windows[0].activeTab.name();
-	} else if (webkitVariants.some((appName) => frontmostAppName.startsWith(appName))) {
-		// @ts-expect-error
-		url = frontmostApp.documents[0].url();
-		// @ts-expect-error
-		title = frontmostApp.documents[0].name();
-	} else {
-		app.displayNotification("", {
-			withTitle: "You need a supported browser as your frontmost app",
-			subtitle: "",
-		});
-		return;
-	}
-	return { url: url, title: title };
-}
-
 /** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
@@ -53,6 +23,8 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	let url = argv[0];
+	const finder = Application("Finder");
+
 	let title;
 	if (url) {
 		const siteContent = httpRequest(url);
@@ -78,15 +50,15 @@ function run(argv) {
 		.slice(0, 50)
 		.trim();
 
-	const baseFolder = $.getenv("base_folder");
-	const linkFilePath = `${baseFolder}/${safeTitle}.url`;
+	const targetFolder =
+		decodeURIComponent(finder.insertionLocation()?.url()?.slice(7) || "") ||
+		app.pathTo("home folder") + "/Desktop";
+	const linkFilePath = `${targetFolder}/${safeTitle}.url`;
 
-	const urlFileContent = `[InternetShortcut]
-URL=${url}
-IconIndex=0`;
-
+	const urlFileContent = ["[InternetShortcut]", `URL=${url}`, "IconIndex=0"].join("\n");
 	writeToFile(linkFilePath, urlFileContent);
-	Application("Finder").activate();
-	Application("Finder").reveal(Path(linkFilePath));
+
+	finder.activate();
+	finder.reveal(Path(linkFilePath));
 	return;
 }
