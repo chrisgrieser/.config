@@ -114,7 +114,7 @@ local toggleHiddenAction = {
 				"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
 				unpack(existingFileIgnores), -- must be last for all items to be unpacked
 			},
-}
+		}
 	end,
 	type = "action",
 	opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
@@ -444,6 +444,10 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
+
+		-- FIX goto-definition broken in commit after
+		commit = "29fddf76bc3b75224f8a974f15139627ffb435d5",
+
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {
