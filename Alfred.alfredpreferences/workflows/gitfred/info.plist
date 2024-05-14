@@ -665,7 +665,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search my GitHub issues</string>
+				<string>Search my GitHub PRs</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -915,7 +915,7 @@
 				<key>subtext</key>
 				<string>100 most recently starred repos</string>
 				<key>title</key>
-				<string>⭐️ GitHub Starred Repos</string>
+				<string>⭐️ Search my GitHub stars</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1053,7 +1053,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search my GitHub Projects</string>
+				<string>Search my GitHub repos</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1847,7 +1847,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.7</string>
+	<string>1.0.8</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
