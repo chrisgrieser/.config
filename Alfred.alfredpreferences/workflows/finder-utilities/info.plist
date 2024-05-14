@@ -211,6 +211,19 @@
 		</array>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<array/>
+		<key>8214A9F2-FD38-462A-A192-254B3D5D6763</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>825E4C6C-5562-42DF-84D1-29924B3329EF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<array>
 			<dict>
@@ -264,11 +277,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>2C272408-6E94-42D8-A422-55105AC2158C</string>
+				<string>8214A9F2-FD38-462A-A192-254B3D5D6763</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -885,6 +908,19 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>8214A9F2-FD38-462A-A192-254B3D5D6763</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -920,17 +956,36 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>o</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>825E4C6C-5562-42DF-84D1-29924B3329EF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
 				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
-			<string>2C272408-6E94-42D8-A422-55105AC2158C</string>
+			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1350,6 +1405,15 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
+		<key>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>715</real>
+		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1389,15 +1453,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<real>175</real>
 			<key>ypos</key>
 			<real>1190</real>
-		</dict>
-		<key>2C272408-6E94-42D8-A422-55105AC2158C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>370</real>
-			<key>ypos</key>
-			<real>570</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1504,6 +1559,26 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
+		<key>8214A9F2-FD38-462A-A192-254B3D5D6763</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
+		<key>825E4C6C-5562-42DF-84D1-29924B3329EF</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>this ensures folders are opened in the current window instead of new window</string>
+			<key>xpos</key>
+			<real>525</real>
+			<key>ypos</key>
+			<real>570</real>
+		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1511,7 +1586,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
@@ -1636,7 +1711,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>530</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>

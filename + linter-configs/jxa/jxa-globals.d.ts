@@ -77,7 +77,7 @@ declare class FinderItem {
 	nameExtension(): string;
 	kind(): string;
 	size(): number;
-	url(): string; // file-url, contains file-path
+	url(): string; // file-uri, contains file-path by using `.slice(7)` and `decodeURIComponent`
 	properties(): object; // inspect all properties
 	exists(): boolean;
 }
