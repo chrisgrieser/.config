@@ -31,7 +31,8 @@ const specialAnchors = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const browser = $.getenv("browser");
-	const extensionPath = JSON.parse(readFile("./data/browser-vars.json")).extensionPath[browser];
+	const browserVars = JSON.parse(readFile("./data/browser-vars.json"));
+	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, app.pathTo("home folder"));
 
 	// GUARD
 	const extensionManifests = app

@@ -155,42 +155,6 @@ function M.betterTilde()
 	end
 end
 
-function M.gotoProject()
-	-- CONFIG
-	local projectFolder = vim.g.localRepos
-
-	---@param folder string
-	local function browseProject(folder)
-		require("telescope.builtin").find_files {
-			prompt_title = "Project: " .. vim.fs.basename(folder),
-			cwd = folder,
-		}
-	end
-
-	local handler = vim.loop.fs_scandir(projectFolder)
-	if not handler then return end
-	local folders = {}
-	repeat
-		local file, type = vim.loop.fs_scandir_next(handler)
-		if type == "directory" then table.insert(folders, projectFolder .. "/" .. file) end
-	until not file
-
-	-- GUARD
-	if #folders == 0 then
-		notify("", "No projects found.", "warn")
-	elseif #folders == 1 then
-		browseProject(folders[1])
-	else
-		vim.ui.select(folders, {
-			prompt = " Select project:",
-			format_item = function(folder) return vim.fs.basename(folder) end,
-			kind = "project-selector",
-		}, function(selection)
-			if selection then browseProject(selection) end
-		end)
-	end
-end
-
 --------------------------------------------------------------------------------
 
 local changedFileNotif

@@ -84,13 +84,13 @@ nnoremap <C-k> :gotoPrevHeading
 " [m]atch parenthesis
 nnoremap m %
 
-" [g]oto [s]ymbol (via "Another Quick Switcher" Plugin)
+" [g]oto [s]ymbol (using Another Quick Switcher)
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading
 
-" [g]oto [p]roject chapters
+" [g]oto [w]riting
 exmap gotoScene obcommand longform:longform-jump-to-scene
-nnoremap gp :gotoScene
+nnoremap gw :gotoScene
 
 " like vim's gx (if not standing on link, seek forward)
 exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink("current-tab") }
