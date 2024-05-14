@@ -8,10 +8,11 @@ files_changed="$(git status --porcelain | wc -l | tr -d ' ')"
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 commit_msg="$device_name ($files_changed)"
 
-[[ $files_changed -gt 0 ]] &&
+if [[ $files_changed -gt 0 ]]; then
 	git add --all &&
-	git commit -m "$commit_msg" --author="🤖 automated<cron@job>" ||
-	exit 1
+		git commit -m "$commit_msg" --author="🤖 automated<cron@job>" ||
+		exit 1
+fi
 
 # loop git add-commit-pull-push, since when between add and push files have been
 # changed, the push will fail
