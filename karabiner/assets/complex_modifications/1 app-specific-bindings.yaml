@@ -275,8 +275,8 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
+  # DOCS https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
   - description: "(Apps) Slack"
-    # https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
     manipulators:
       # go to next unread message
       - type: basic
@@ -319,9 +319,9 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
   #─────────────────────────────────────────────────────────────────────────────
+  # REQUIRED compatibility mode to recognize Alfred as frontmost app
   - description: "(Apps) Alfred: Select with <Tab>"
     manipulators:
-      # REQUIRED compatibility mode to recognize Alfred as frontmost app
       - type: basic
         from: { key_code: tab }
         to:

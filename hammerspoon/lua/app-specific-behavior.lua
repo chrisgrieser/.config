@@ -171,10 +171,15 @@ M.wf_scripteditor = wf
 --------------------------------------------------------------------------------
 -- MIMESTREAM
 
--- resize new windows
+-- 1st window = mail-list window => pseudo-maximized for more space
+-- 2nd window = message-composing window => centered for narrower line length
 M.wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter({ rejectTitles = { "^Software Update$" } })
-	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
+	:subscribe(wf.windowCreated, function(newWin)
+		local winCount = #u.app("Mimestream"):allWindows()
+		local newSize = winCount > 1 and wu.center or wu.pseudoMax
+		wu.moveResize(newWin, newSize)
+	end)
 
 --------------------------------------------------------------------------------
 -- DISCORD
