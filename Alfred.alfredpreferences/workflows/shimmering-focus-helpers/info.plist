@@ -86,27 +86,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Error</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A7C44EFE-9B0B-420B-BEC0-819DFD6AC6B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -145,6 +124,27 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>D430A6F9-293F-49FE-9E66-A091FB56677B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A7C44EFE-9B0B-420B-BEC0-819DFD6AC6B1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -290,7 +290,7 @@
 			<key>note</key>
 			<string>could not clone</string>
 			<key>xpos</key>
-			<real>640</real>
+			<real>635</real>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
