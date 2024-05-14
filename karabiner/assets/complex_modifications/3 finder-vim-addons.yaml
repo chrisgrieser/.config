@@ -1,9 +1,39 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
-# INFO this file has to come before finder-vim-mode.yaml itself
+# INFO this file has to come alphabetically before `finder-vim-mode.yaml` itself
+#───────────────────────────────────────────────────────────────────────────────
+anchors:
+  - conditions:
+      - &finder-app
+        type: frontmost_application_if
+        bundle_identifiers: [^com\.apple\.finder$]
+      - &is-German-keyboard
+        type: input_source_if
+        input_sources: [language: ^de$]
+      - &not-insert-mode
+        type: variable_unless
+        name: FINDER_INSERT_MODE
+        value: true
+      - &not-find-mode
+        type: variable_unless
+        name: FINDER_FIND_MODE
+        value: true
+      - &no-menu-open
+        type: variable_unless
+        name: FINDER_MENU_ACTIVE
+        value: true
+  - to:
+      - &leave-insert-mode
+        set_variable:
+          name: FINDER_INSERT_MODE
+          value: false
+      - &remove-insert-notice
+        set_notification_message:
+          id: insert-notice
+          text: ""
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "Finder Vim Addons for Alfred"
+  - description: "Finder Vim Addons for Alfred (assuming Alfred Compatibility Mode)"
     manipulators:
       # FIX for <Esc> -> f18 binding
       # Alfred Custom Clipboard Search & screenshot history (cleanshot)
@@ -11,40 +41,22 @@ rules:
         from: { key_code: escape }
         to_if_alone:
           - key_code: f18
-          - set_variable:
-              name: FINDER_INSERT_MODE
-              value: true
-          - set_variable:
-              name: FINDER_ALFRED_ACTIVE
-              value: true
+          # on focus loss, renaming is aborted automatically
+          - *leave-insert-mode
+          - *remove-insert-notice
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_ALFRED_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
-      # abort Alfred Clipboard
+      # overwrite `-` search with my own Alfred-based search
       - type: basic
-        from: { key_code: escape }
-        to_if_alone:
-          - key_code: f18
-          - set_variable:
-              name: FINDER_INSERT_MODE
-              value: false
-          - set_variable:
-              name: FINDER_ALFRED_ACTIVE
-              value: false
-              # INFO no idea why, but setting a conditions here breaks this rule.
-              # Maybe due to recursion. But by placing this rule last, it only
-              # gets triggered if the other one does not get triggered before,
-              # which also works
-        to_if_held_down:
-          - shell_command: open "cleanshot://open-history"
+        from: { key_code: slash }
+        to:
+          - shell_command:
+              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
+              "find-in-current-win" in workflow "de.chris-grieser.finder"'
+          # on focus loss, renaming is aborted automatically
+          - *leave-insert-mode
+          - *remove-insert-notice
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Vim Extra keys"
     manipulators:
@@ -80,15 +92,7 @@ rules:
                 mv -n "$file" "$newName"
               done
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_FIND_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # Z (German): Open in Betterzip
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
@@ -102,14 +106,4 @@ rules:
                 "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "Finder Vim Mode" --message "⚠️ File not a zip file."
               fi
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.apple\.finder$]
-          - type: variable_unless
-            name: FINDER_FIND_MODE
-            value: true
-          - type: variable_unless
-            name: FINDER_INSERT_MODE
-            value: true
-          - type: input_source_if
-            input_sources: [language: ^de$]
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *is-German-keyboard]

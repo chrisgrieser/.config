@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>299EF805-FDE0-402C-9560-796E6A95380C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B1C1C78A-2961-4080-9046-A0709328817A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<array>
 			<dict>
@@ -154,6 +167,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>9D522271-342F-4100-BA21-67CFB786FBCA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E73E7791-5447-4A1B-8671-7F4DA4CA5418</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>299EF805-FDE0-402C-9560-796E6A95380C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -534,6 +560,68 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>out_format</key>
+					<string>json</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>299EF805-FDE0-402C-9560-796E6A95380C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>link</string>
+				<key>subtext</key>
+				<string>from current Browser Tab</string>
+				<key>text</key>
+				<string>Create Link File</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E73E7791-5447-4A1B-8671-7F4DA4CA5418</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B1C1C78A-2961-4080-9046-A0709328817A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -549,6 +637,15 @@
 			<real>455</real>
 			<key>ypos</key>
 			<real>30</real>
+		</dict>
+		<key>299EF805-FDE0-402C-9560-796E6A95380C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>2A235ABB-A752-4BA6-8E00-11B868895742</key>
 		<dict>
@@ -614,6 +711,15 @@
 			<real>805</real>
 			<key>ypos</key>
 			<real>385</real>
+		</dict>
+		<key>B1C1C78A-2961-4080-9046-A0709328817A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>790</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
 		<dict>
@@ -692,6 +798,17 @@
 			<real>625</real>
 			<key>ypos</key>
 			<real>275</real>
+		</dict>
+		<key>E73E7791-5447-4A1B-8671-7F4DA4CA5418</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>create link file from current browser</string>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
