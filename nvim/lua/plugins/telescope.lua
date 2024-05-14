@@ -109,12 +109,12 @@ local toggleHiddenAction = {
 			hidden = ignoreHidden,
 			no_ignore = ignoreHidden,
 			cwd = cwd,
-									-- stylua: ignore
-									file_ignore_patterns = {
-										"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
-										unpack(existingFileIgnores), -- must be last for all items to be unpacked
-									},
-		}
+			-- stylua: ignore
+			file_ignore_patterns = {
+				"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
+				unpack(existingFileIgnores), -- must be last for all items to be unpacked
+			},
+}
 	end,
 	type = "action",
 	opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
@@ -577,7 +577,7 @@ return {
 				mode = { "n", "i" },
 				function()
 					require("telescope.builtin").symbols {
-						sources = { "nerd", "math" },
+						sources = { "nerd", "math", "emoji" },
 						layout_config = { horizontal = { width = 0.35 } },
 					}
 				end,

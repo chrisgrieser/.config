@@ -116,8 +116,7 @@ function openAppearanceSettings() {
 	const setting = view.app.setting;
 	setting.open();
 	setting.openTabById("appearance");
-
-	// scroll fully down
+	// scroll fully down to access snippets more quickly
 	setting.activeTab.containerEl.scrollTop = setting.activeTab.containerEl.scrollHeight;
 }
 
@@ -249,24 +248,16 @@ async function openNextLink() {
 	const offset = editor.posToOffset(editor.getCursor());
 	const textAfterCursor = editor.getValue().slice(offset);
 
-	const urlMatch = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+/);
-	const url = urlMatch?.[0];
-	const urlOffset = urlMatch?.index || -1;
-
-	const wikilinkMatch = textAfterCursor.match(/\[\[(.+?)([#^].+?)?(\|.+?)?\]\]/);
-	const [_, wikilink, anchor] = wikilinkMatch || [];
-	const wikilinkOffset = wikilinkMatch?.index || -1;
+	const linkOffset = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]/)?.index;
 
 	// 1: no link of any kind
-	if (!wikilink && !url) {
+	if (!linkOffset) {
 		new Notice("No link found.");
 		return;
 	}
-	// 2: open url
-	if ((url && !wikilink) || urlOffset < wikilinkOffset) {
-		activeWindow.open(url);
-		return;
-	}
+
+	// 2. forward-seeking link
+	editor.setCursor(editor.posToOffset({ line: editor.getCursor().line, ch: linkOffset }));
 
 	// 3a: open wikilink
 	const app = view.app;
