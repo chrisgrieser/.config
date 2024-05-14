@@ -15,19 +15,17 @@ function readFile(path) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const allBrowsers = "./data/all-chromium-browser-settings.json";
-	const allSettings = JSON.parse(readFile(allBrowsers));
 	const browser = $.getenv("browser");
+	const browserVars = JSON.parse(readFile("./data/browser-vars.json"));
 
-	if (browser !== "chrome") {
-		const browserSpecific = `./data/${browser}-specific-settings.json`;
-		const specificSettings = JSON.parse(readFile(browserSpecific));
-		allSettings.push(...specificSettings);
-	}
+	const allSettings = JSON.parse(readFile("./data/all-chromium-browser-settings.json"));
+	allSettings.push(...browserVars.settingsPages[browser]);
+	const iconPath = browserVars.appIcon[browser];
 
 	// add uid to all items, so Alfred remembers their selection
 	for (const page of allSettings) {
 		page.uid = page.arg;
+		page.icon = { path: iconPath };
 	}
 
 	return JSON.stringify({ items: allSettings });
