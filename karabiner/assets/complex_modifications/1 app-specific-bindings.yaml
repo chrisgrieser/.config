@@ -349,6 +349,19 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Discord"
     manipulators:
+      # HACK Due to a Discord bug where back/forth in navigation history is not
+      # assignable, assingin my preferred bindings to mouse4 and mouse5,
+      # since these work 💀
+      - type: basic
+        from: { key_code: "h", modifiers: { mandatory: [control] } }
+        to:
+          - pointing_button: "button4"
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
+      - type: basic
+        from: { key_code: "l", modifiers: { mandatory: [control] } }
+        to:
+          - pointing_button: "button5"
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # toggle member list (right sidebar)
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
