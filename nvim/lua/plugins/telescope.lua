@@ -463,10 +463,6 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
-
-		-- FIX https://github.com/nvim-telescope/telescope.nvim/issues/3100
-		commit = "29fddf76bc3b75224f8a974f15139627ffb435d5",
-
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {
