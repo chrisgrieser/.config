@@ -55,7 +55,17 @@ local keymappings_I = {
 			u.notify("Copied", fullpath)
 		end,
 		type = "action",
-		opts = { desc = "󰅍 Copy path" },
+		opts = { desc = "󰅍 Copy absolute path" },
+	},
+	["<C-t>"] = {
+		function(prompt_bufnr)
+			local relPath = require("telescope.actions.state").get_selected_entry().value
+			require("telescope.actions").close(prompt_bufnr)
+			vim.fn.setreg("+", relPath)
+			u.notify("Copied", relPath)
+		end,
+		type = "action",
+		opts = { desc = "󰅍 Copy relative path" },
 	},
 	["<C-n>"] = {
 		function(prompt_bufnr)
@@ -177,6 +187,14 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 local function telescopeConfig()
+	local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+	if vim.g.borderStyle == "double" then
+		borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+	end
+	if vim.g.borderStyle == "rounded" then
+		borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+	end
+
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
@@ -186,9 +204,7 @@ local function telescopeConfig()
 			results_title = false,
 			dynamic_preview_title = true,
 			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
-			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-			-- { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-			-- { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+			borderchars = borderChars,
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			cycle_layout_list = {
 				"horizontal",
@@ -251,9 +267,9 @@ local function telescopeConfig()
 				path_display = function(_, path)
 					-- approximation of the project name
 					local project = path
-						:gsub(vim.pesc(vim.g.localRepos), "")
-						:gsub("/Users/%w+", "")
-						:match("/(.-)/")
+						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
+						:gsub("/Users/%w+", "") -- remove home dir
+						:match("/(.-)/") -- highest parent
 
 					local tail = require("telescope.utils").path_tail(path)
 					local text = tail .. "  " .. project
@@ -448,7 +464,7 @@ return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 
-		-- FIX goto-definition broken in commit after
+		-- FIX https://github.com/nvim-telescope/telescope.nvim/issues/3100
 		commit = "29fddf76bc3b75224f8a974f15139627ffb435d5",
 
 		cmd = "Telescope",
