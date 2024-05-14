@@ -242,47 +242,43 @@ function toggleLowercaseTitleCase() {
 }
 
 // forward looking `gx`
-async function openNextLink() {
-	const delayForRememberCursorPlugin = 300; // CONFIG
-
-	const offset = editor.posToOffset(editor.getCursor());
-	const textAfterCursor = editor.getValue().slice(offset);
-
-	const linkOffset = textAfterCursor.match(/(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]/)?.index;
-
-	// 1: no link of any kind
-	if (!linkOffset) {
-		new Notice("No link found.");
-		return;
+function openNextLink() {
+	function getLinkRange(/** @type {string} */ text) {
+		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(\)/;
+		const linkMatch = text.match(linkRegex);
+		if (!linkMatch) return { start: 0, end: 0 };
+		const start = linkMatch.index || 0;
+		const end = start + linkMatch[0].length;
+		return { start, end };
 	}
 
-	// 2. forward-seeking link
-	editor.setCursor(editor.posToOffset({ line: editor.getCursor().line, ch: linkOffset }));
+	// check if cursor is on a link
+	const cursor = editor.getCursor();
+	const fullLine = editor.getLine(cursor.line);
+	let linkStart;
+	let linkEnd;
+	let posInLine = 0;
+	do {
+		const { start, end } = getLinkRange(fullLine.slice(posInLine));
+		linkStart = start;
+		linkEnd = end;
+		posInLine += end;
+	} while (cursor.ch <= linkEnd || !linkEnd);
+	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
 
-	// 3a: open wikilink
-	const app = view.app;
-	const tfile = app.metadataCache.getFirstLinkpathDest(wikilink, view.file.path);
-	if (!tfile) {
-		new Notice("Could not find link: " + wikilink);
-		return;
+	// if not, look forward for a link
+	if (!cursorIsOnLink) {
+		const offset = editor.posToOffset(cursor);
+		const textAfterCursor = editor.getValue().slice(offset);
+		const linkAfterCursor = getLinkRange(textAfterCursor);
+		if (!linkAfterCursor) {
+			new Notice("No link found.");
+			return;
+		}
+		editor.setCursor(editor.offsetToPos(offset + linkAfterCursor.start + 1));
 	}
-	await app.workspace.getLeaf().openFile(tfile);
 
-	// 3b: wikilink has anchor: goto heading/block-id in opened file
-	if (!anchor) return;
-	const anchorName = anchor.slice(1);
-	const targetFileCache = app.metadataCache.getFileCache(tfile);
-	const targetAnchor = anchor.startsWith("#")
-		? targetFileCache.headings.find((a) => a.heading === anchorName)
-		: targetFileCache.blocks[anchorName];
-	if (targetAnchor) {
-		setTimeout(
-			() => editor.setCursor(targetAnchor.position.start, 0),
-			delayForRememberCursorPlugin,
-		);
-	} else {
-		new Notice(`Could not find "${anchor}"`);
-	}
+	view.app.commands.executeCommandById("editor:follow-link");
 }
 
 /** @param {string} vaultRelPath */
