@@ -242,11 +242,12 @@ function toggleLowercaseTitleCase() {
 }
 
 // forward looking `gx`
-function openNextLink() {
+/** @param {"current-tab"|"new-tab"} where */
+function openNextLink(where) {
 	function getLinkRange(/** @type {string} */ text) {
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(\)/;
 		const linkMatch = text.match(linkRegex);
-		if (!linkMatch) return { start: 0, end: 0 };
+		if (!linkMatch) return { start: -1, end: -1 };
 		const start = linkMatch.index || 0;
 		const end = start + linkMatch[0].length;
 		return { start, end };
@@ -262,23 +263,26 @@ function openNextLink() {
 		const { start, end } = getLinkRange(fullLine.slice(posInLine));
 		linkStart = start;
 		linkEnd = end;
-		posInLine += end;
-	} while (cursor.ch <= linkEnd || !linkEnd);
+		if (end > 0) posInLine += end;
+	} while (linkEnd > 0 && linkEnd < cursor.ch);
 	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
 
 	// if not, look forward for a link
 	if (!cursorIsOnLink) {
 		const offset = editor.posToOffset(cursor);
 		const textAfterCursor = editor.getValue().slice(offset);
-		const linkAfterCursor = getLinkRange(textAfterCursor);
-		if (!linkAfterCursor) {
+		const linkAfterCursorOffset = getLinkRange(textAfterCursor).start;
+		if (linkAfterCursorOffset === -1) {
 			new Notice("No link found.");
 			return;
 		}
-		editor.setCursor(editor.offsetToPos(offset + linkAfterCursor.start + 1));
+		const linkPosition = editor.offsetToPos(offset + linkAfterCursorOffset);
+		linkPosition.ch++;
+		editor.setCursor(linkPosition);
 	}
 
-	view.app.commands.executeCommandById("editor:follow-link");
+	const commandId = where === "new-tab" ? "editor:open-link-in-new-leaf" : "editor:follow-link";
+	view.app.commands.executeCommandById(commandId);
 }
 
 /** @param {string} vaultRelPath */
@@ -298,7 +302,8 @@ async function openRandomNoteIn(vaultRelPath) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// stuff for dataviewjs / templaterjs
+// STUFF FOR DATAVIEWJS
+
 function toggleJsLineComment() {
 	const cursor = editor.getCursor();
 	const text = editor.getLine(cursor.line);

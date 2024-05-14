@@ -92,10 +92,12 @@ nnoremap gs :gotoHeading
 exmap gotoScene obcommand longform:longform-jump-to-scene
 nnoremap gp :gotoScene
 
-" [g]oto definition / link (shukuchi makes it forward-seeking)
-exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink() }
+" like vim's gx (if not standing on link, seek forward)
+exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink("current-tab") }
 nnoremap gx :openNextLink
-nnoremap gd :openNextLink
+
+exmap openNextLinkInNewTab jsfile Meta/vimrc-jsfile.js { openNextLink("new-tab") }
+nnoremap gX :openNextLinkInNewTab
 
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin

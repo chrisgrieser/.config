@@ -354,11 +354,13 @@ rules:
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
           - shell_command: |
-              osascript -e '
+              current_win=$(osascript -e '
                 tell application "Finder"
                   if ((count Finder windows) is 0) then return
                   return POSIX path of (insertion location as alias)
-                end tell' > /tmp/finder-vim-mode-last-closed-window
+                end tell
+              ')
+              echo -n "$current_win" > /tmp/finder-vim-mode-last-closed-window
               osascript -e 'tell application "Finder" to close window 1'
           - *remove-insert-notice
           - *leave-insert-mode
