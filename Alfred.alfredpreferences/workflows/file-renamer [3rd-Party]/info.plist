@@ -80,19 +80,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8088FEA7-A8E5-44A3-9EBA-7A90FE1B9C23</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2D996A5F-76DB-4596-BAC7-C918B0EFD902</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A6B5E6E1-D926-4D07-A505-6821DDD8AD23</key>
 		<array>
 			<dict>
@@ -434,21 +421,6 @@ echo -n "${newFullPath}"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>rename</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>8088FEA7-A8E5-44A3-9EBA-7A90FE1B9C23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -489,17 +461,6 @@ Press &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; at any state to reope
 			<real>215</real>
 			<key>ypos</key>
 			<real>150</real>
-		</dict>
-		<key>8088FEA7-A8E5-44A3-9EBA-7A90FE1B9C23</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>to be copypasted after update of the rename workflow</string>
-			<key>xpos</key>
-			<real>115</real>
-			<key>ypos</key>
-			<real>255</real>
 		</dict>
 		<key>947A1C83-3935-488B-BBBC-A01B072DD9A0</key>
 		<dict>
