@@ -55,6 +55,9 @@ declare type View = {
 		name: string;
 	};
 	app: {
+		commands: {
+			executeCommandById(id: string): void;
+		};
 		metadataCache: {
 			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
 			getFileCache(file: TFile): {
@@ -62,9 +65,7 @@ declare type View = {
 					heading: string;
 					position: { start: EditorPosition };
 				}[];
-				blocks: Record<string, {
-					position: { start: EditorPosition };
-				}>;
+				blocks: Record<string, { position: { start: EditorPosition } }>;
 			};
 		};
 		customCss: {
