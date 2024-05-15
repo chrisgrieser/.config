@@ -21,12 +21,10 @@
 		]
 	},
 
-	// unused functions in vimrc jsfile
 	"linter" : {
 		"rules": {
-			"correctness": {
-				"noUnusedVariables": "off"
-			}
+			"correctness": { "noUnusedVariables": "off" }, // unused functions in vimrc jsfile
+			"suspicious": { "noDebugger": "off" } // intentional for freeze command
 		}
 	},
 

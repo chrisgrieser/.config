@@ -19,18 +19,19 @@ end
 --------------------------------------------------------------------------------
 
 function M.openAlfredPref()
-	local parentFolder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-	if not parentFolder:find("Alfred%.alfredpreferences") then
+	local bufPath = vim.api.nvim_buf_get_name(0)
+	local workflowId = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
+	if not workflowId then
 		notify("", "Not in an Alfred directory.", "warn")
 		return
 	end
-	-- URI seems more reliable than JXA when called via nvim https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local workflowId = parentFolder:match("Alfred%.alfredpreferences/workflows/([^/]+)")
+
+	-- using JXA and URI for redundancy, as both are not 100% reliable
+	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
+	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowId .. ")"
+	vim.fn.system { "osascript", "-l", "JavaScript", "-e", jxa }
 	vim.fn.system { "open", uri }
-	-- in case the right workflow is already open, Alfred is not focused.
-	-- Therefore manually focusing in addition to that here as well.
-	vim.fn.system { "open", "-a", "Alfred Preferences" }
 end
 
 --- open the next regex at https://regex101.com/
@@ -165,17 +166,18 @@ function M.gotoChangedFiles()
 	local pwd = vim.loop.cwd() or ""
 
 	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
-	vim.fn.system("git ls-files --others --exclude-standard | xargs git add --intent-to-add")
+	vim.fn.system(
+		"git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &>/dev/null"
+	)
 	local numstat = vim.trim(vim.fn.system { "git", "diff", "--numstat" })
 	local numstatLines = vim.split(numstat, "\n")
-	local error = vim.v.shell_error ~= 0
 
 	-- GUARD
-	if error then
-		notify(funcName, "No changes found.", "warn")
+	if vim.v.shell_error ~= 0 then
+		notify(funcName, "Not in git repo", "warn")
 		return
 	elseif numstat == "" then
-		notify(funcName, "Not in git repo", "warn")
+		notify(funcName, "No changes found.", "info")
 		return
 	end
 
@@ -202,7 +204,7 @@ function M.gotoChangedFiles()
 
 	-- GUARD
 	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
-		notify(funcName, "Already at sole changed file.", "info")
+		notify(funcName, "Already at sole changed file in this working directory.", "info")
 		return
 	end
 
@@ -219,7 +221,7 @@ function M.gotoChangedFiles()
 	local nextFile = changedFiles[nextFileIndex]
 	vim.cmd.edit(nextFile.absPath)
 
-	-- notification,
+	-- Notification
 	if not package.loaded["notify"] then return end
 	local icon = "" -- CONFIG
 	local listOfChangedFiles = {}
@@ -233,8 +235,8 @@ function M.gotoChangedFiles()
 	changedFileNotif = vim.notify(msg, vim.log.levels.INFO, {
 		title = funcName,
 		replace = changedFileNotif and changedFileNotif.id,
-		hide_from_history = changedFileNotif ~= nil,
 		animate = false,
+		hide_from_history = changedFileNotif ~= nil, -- keep only first in history
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", icon .. ".*") end)

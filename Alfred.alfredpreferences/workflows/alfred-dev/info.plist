@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2599F7AA-72EF-4424-B3C9-BD7526BE79EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<array/>
 		<key>33A07916-23BF-4B16-A845-62D0B6C7DB14</key>
@@ -91,7 +104,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CC2CBA46-235A-476F-851B-0E956CD05CBC</string>
+				<string>33A07916-23BF-4B16-A845-62D0B6C7DB14</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -227,19 +240,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>CC2CBA46-235A-476F-851B-0E956CD05CBC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>33A07916-23BF-4B16-A845-62D0B6C7DB14</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D08B3C11-6C2B-492A-ABE0-9ECC93D911C1</key>
 		<array>
 			<dict>
@@ -266,6 +266,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
+		<array/>
 		<key>E0702454-559E-4671-A5A8-A5C5560B9268</key>
 		<array>
 			<dict>
@@ -312,7 +314,6 @@
 				<integer>102</integer>
 				<key>script</key>
 				<string># disown, since this script itself is a child process of Alfred
-
 nohup ./scripts/restart-alfred.sh
 disown</string>
 				<key>scriptargtype</key>
@@ -730,6 +731,64 @@ disown</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>36</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>↩</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2599F7AA-72EF-4424-B3C9-BD7526BE79EE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-alfred-workflow.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -985,7 +1044,7 @@ disown</string>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
-				<string>{query}</string>
+				<string>{query:trim}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -998,30 +1057,11 @@ disown</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>CC2CBA46-235A-476F-851B-0E956CD05CBC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string>---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>1C54A9EF-33FF-4391-A2AA-B1A21ABA6BE7</key>
@@ -1031,18 +1071,29 @@ disown</string>
 			<key>note</key>
 			<string>get workflow path</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>635</real>
 		</dict>
 		<key>1ED0BF1E-0B7B-44CA-9800-02C3A363F8D2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>925</real>
+		</dict>
+		<key>2599F7AA-72EF-4424-B3C9-BD7526BE79EE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>goto last workflow</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>495</real>
 		</dict>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<dict>
@@ -1058,9 +1109,9 @@ disown</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>925</real>
 		</dict>
 		<key>43143E26-0CD1-43FB-B13D-74E8AB0411EF</key>
 		<dict>
@@ -1105,9 +1156,9 @@ disown</string>
 			<key>note</key>
 			<string>copy workflow path</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>925</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
@@ -1143,18 +1194,18 @@ disown</string>
 			<key>note</key>
 			<string>get workflow path</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>925</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>780</real>
 		</dict>
 		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
 		<dict>
@@ -1170,9 +1221,9 @@ disown</string>
 			<key>note</key>
 			<string>msg when not in Alfred directory</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>780</real>
 		</dict>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<dict>
@@ -1181,9 +1232,9 @@ disown</string>
 			<key>note</key>
 			<string>Workflow: Alfred Prefs → Finder</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>635</real>
 		</dict>
 		<key>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</key>
 		<dict>
@@ -1199,17 +1250,6 @@ disown</string>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
-		<key>CC2CBA46-235A-476F-851B-0E956CD05CBC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>355</real>
-			<key>ypos</key>
-			<real>905</real>
-		</dict>
 		<key>D08B3C11-6C2B-492A-ABE0-9ECC93D911C1</key>
 		<dict>
 			<key>colorindex</key>
@@ -1217,9 +1257,9 @@ disown</string>
 			<key>note</key>
 			<string>Workflow: Finder → Alfred Prefs</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>780</real>
 		</dict>
 		<key>D614A191-BB33-4C78-A471-BC471BD46506</key>
 		<dict>
@@ -1228,9 +1268,18 @@ disown</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>355</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>665</real>
+		</dict>
+		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>495</real>
 		</dict>
 		<key>E0702454-559E-4671-A5A8-A5C5560B9268</key>
 		<dict>
@@ -1255,9 +1304,9 @@ disown</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>635</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

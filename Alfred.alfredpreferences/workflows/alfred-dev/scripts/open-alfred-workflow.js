@@ -1,14 +1,12 @@
 #!/usr/bin/env osascript -l JavaScript
-function finderFrontWindow() {
-	const posixPath = finderWindow => $.NSURL.alloc.initWithString(finderWindow.target.url()).fileSystemRepresentation;
-	return posixPath(Application("Finder").finderWindows[0]);
-}
 
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const winPath = finderFrontWindow();
-	if (!winPath.includes("Alfred.alfredpreferences/workflows")) return "Not in Alfred directory.";
+	const finder = Application("Finder");
+	const finderWinPath = decodeURIComponent(finder.insertionLocation().url().slice(7));
 
-	const workflowId = winPath.match(/Alfred\.alfredpreferences\/workflows\/([^/]+)/)[1];
+	const workflowId = finderWinPath.match(/Alfred\.alfredpreferences\/workflows\/([^/]+)/)?.[1];
+	if (!workflowId) return "Not in Alfred directory.";
 
 	Application("com.runningwithcrayons.Alfred").revealWorkflow(workflowId);
 	return;

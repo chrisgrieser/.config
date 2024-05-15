@@ -79,22 +79,11 @@ async function updatePlugins() {
 }
 
 function freezeInterface() {
-	const delay = 4; // CONFIG
-	const freezeNotice = new Notice(`⚠ Will freeze Obsidian in ${delay}s`, (delay - 0.2) * 1000);
+	const delaySecs = 4; // CONFIG
+	new Notice(`⚠ Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
-
-	let passSecs = 0;
-	const timer = setInterval(() => {
-		const timePassed = (delay - passSecs).toFixed(1);
-		freezeNotice.setMessage(`⚠ Will freeze Obsidian in ${timePassed}s`);
-		passSecs += 0.1;
-	}, 100);
-
-	setTimeout(() => {
-		// biome-ignore lint/suspicious/noDebugger: intentional here
-		debugger;
-		clearInterval(timer);
-	}, delay * 1000);
+	// biome-ignore format: ugly
+	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
 }
 
 function cycleThemes() {

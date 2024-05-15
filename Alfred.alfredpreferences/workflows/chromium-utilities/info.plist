@@ -12,20 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C56343EE-3B55-46B4-928B-53277D5E63E8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>299EF805-FDE0-402C-9560-796E6A95380C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B1C1C78A-2961-4080-9046-A0709328817A</string>
+				<string>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -90,20 +77,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C56343EE-3B55-46B4-928B-53277D5E63E8</key>
+		<key>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -121,52 +95,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>31853D4F-3AE9-42E3-B553-89F48EFF2F96</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>2A235ABB-A752-4BA6-8E00-11B868895742</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>9D522271-342F-4100-BA21-67CFB786FBCA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E73E7791-5447-4A1B-8671-7F4DA4CA5418</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>299EF805-FDE0-402C-9560-796E6A95380C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -217,7 +145,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ch</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -237,7 +165,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Installed Chrome Extensions</string>
+				<string>Search installed Chromium extensions</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -249,63 +177,6 @@
 			<string>64E7E716-0427-41F0-844C-90D39ACC9152</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>C56343EE-3B55-46B4-928B-53277D5E63E8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Switch to Safari</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F170814-90DD-485E-A861-757A4FD92606</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string>com.apple.Safari</string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -325,27 +196,6 @@
 			<string>B7B82F1A-97F8-490C-B4A4-5589FA869579</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://archive.is/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>31853D4F-3AE9-42E3-B553-89F48EFF2F96</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -392,7 +242,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>ch</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -412,7 +262,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Chrome Internal Pages</string>
+				<string>Search special browser pages</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -429,77 +279,20 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>paywall</string>
+				<string>sw</string>
 				<key>subtext</key>
 				<string>Current Browser Tab</string>
 				<key>text</key>
-				<string>Skip Paywall</string>
+				<string>Switch to Safari</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>B420E59A-1B4A-418D-B29E-35104387F051</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://spaywall.com/news/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2A235ABB-A752-4BA6-8E00-11B868895742</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.smry.ai/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9D522271-342F-4100-BA21-67CFB786FBCA</string>
+			<string>1F170814-90DD-485E-A861-757A4FD92606</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -508,66 +301,47 @@
 			<dict>
 				<key>tasksettings</key>
 				<dict>
-					<key>out_format</key>
-					<string>json</string>
+					<key>custom_browser</key>
+					<string>{var:browser}</string>
+					<key>popup_browser</key>
+					<string>custom</string>
 				</dict>
 				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+				<string>com.alfredapp.automation.extras/web-browsers/chromium-browsers/chromium.tabs.current</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>299EF805-FDE0-402C-9560-796E6A95380C</string>
+			<string>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>link</string>
-				<key>subtext</key>
-				<string>from current Browser Tab</string>
-				<key>text</key>
-				<string>Create Link File</string>
-				<key>withspace</key>
+				<key>browser</key>
+				<string>com.apple.Safari</string>
+				<key>skipqueryencode</key>
 				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E73E7791-5447-4A1B-8671-7F4DA4CA5418</string>
+			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B1C1C78A-2961-4080-9046-A0709328817A</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
@@ -577,36 +351,9 @@
 			<key>note</key>
 			<string>Switch to Safari</string>
 			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
 			<real>30</real>
-		</dict>
-		<key>299EF805-FDE0-402C-9560-796E6A95380C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>620</real>
 			<key>ypos</key>
-			<real>600</real>
-		</dict>
-		<key>2A235ABB-A752-4BA6-8E00-11B868895742</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
-		<key>31853D4F-3AE9-42E3-B553-89F48EFF2F96</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>805</real>
-			<key>ypos</key>
-			<real>160</real>
+			<real>455</real>
 		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
@@ -646,34 +393,14 @@
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>9D522271-342F-4100-BA21-67CFB786FBCA</key>
+		<key>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>8</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>390</real>
-		</dict>
-		<key>B1C1C78A-2961-4080-9046-A0709328817A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
-		<key>B420E59A-1B4A-418D-B29E-35104387F051</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>try to skip paywall</string>
-			<key>xpos</key>
-			<real>460</real>
-			<key>ypos</key>
-			<real>275</real>
+			<real>455</real>
 		</dict>
 		<key>B7B82F1A-97F8-490C-B4A4-5589FA869579</key>
 		<dict>
@@ -689,18 +416,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>805</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>C56343EE-3B55-46B4-928B-53277D5E63E8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>620</real>
-			<key>ypos</key>
-			<real>30</real>
+			<real>455</real>
 		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
@@ -713,29 +431,30 @@
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
-		<key>CE014993-DDE8-4A34-A31A-CEB9AC1C3E62</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>625</real>
-			<key>ypos</key>
-			<real>275</real>
-		</dict>
-		<key>E73E7791-5447-4A1B-8671-7F4DA4CA5418</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>create link file from current browser</string>
-			<key>xpos</key>
-			<real>460</real>
-			<key>ypos</key>
-			<real>600</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>ch</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -764,7 +483,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

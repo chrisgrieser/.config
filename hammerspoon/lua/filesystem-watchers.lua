@@ -48,23 +48,19 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			-- needs to be zipped again, since browser auto-opens all zip files
 			-- stylua: ignore
 			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
-			print("➡️ Violentmonkey backup")
 			u.app(env.browserApp):activate() -- window created by auto-unzipping
+		elseif fileName == "ublacklist-settings.json" then
+			os.rename(filep, browserSettings .. fileName)
 		elseif fileName:find("vimium_c.*%.json") then
 			os.rename(filep, browserSettings .. "vimium-c-settings.json")
-			print("➡️ Vimium-C backup")
 		elseif fileName:find("my%-ublock%-backup_.*%.txt") then
 			os.rename(filep, browserSettings .. "ublock-settings.json")
-			print("➡️ AdGuard backup")
 		elseif fileName:find("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
-			print("➡️ SponsorBlockConfig backup")
 		elseif fileName == "devdocs.json" then
 			os.rename(filep, browserSettings .. "devdocs-settings.json")
-			print("➡️ DevDocs Settings backup")
 		elseif fileName:find("stylus%-.*%.json") then
 			os.rename(filep, browserSettings .. "stylus.json")
-			print("➡️ Stylus Settings backup")
 		end
 
 		-- 4. AUTO-INSTALL OBSIDIAN ALPHA
@@ -72,18 +68,18 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 		-- not picked up by hammerspoon
 		if filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
 			u.runWithDelays(0.5, function()
-				hs.execute(([[cd %q || exit 1
-				test -f obsidian-*.*.*.asar.gz || exit 1
-				killall Obsidian
-				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
-				cd "$HOME/Library/Application Support/obsidian/"
-				rm obsidian-*.*.*.asar
-				gunzip obsidian-*.*.*.asar.gz
-				while pgrep -xq "Obsidian" ; do sleep 0.1; done
-				sleep 0.2
-				open -a "Obsidian"
-			]]):format(desktopPath))
-				-- close the created tab
+				hs.execute(([[
+					cd %q || exit 1
+					test -f obsidian-*.*.*.asar.gz || exit 1
+					killall Obsidian
+					mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
+					cd "$HOME/Library/Application Support/obsidian/"
+					rm obsidian-*.*.*.asar
+					gunzip obsidian-*.*.*.asar.gz
+					while pgrep -xq "Obsidian" ; do sleep 0.1; done
+					sleep 0.2
+					open -a "Obsidian"
+				]]):format(desktopPath))
 				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 			end)
 		end
