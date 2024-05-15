@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # CONFIG
-log_location="$DATA_DIR/Backups/backups-to-external-drives.log"
+logpath_on_mac="$DATA_DIR/Backups/backups-to-external-drives.log"
 
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE VOLUME
@@ -29,14 +29,13 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE BACKUP DESTINATION
 
-# determine backup folder at destination
 device_name="$(scutil --get ComputerName)"
 backup_dest="$volume_name/Backup_$device_name"
 mkdir -p "$backup_dest"
 cd "$backup_dest" || return 1
 
 # Log (on the Mac)
-echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >>"$log_location"
+echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >>"$logpath_on_mac"
 
 #───────────────────────────────────────────────────────────────────────────────
 # HELPER FUNCTION
@@ -61,11 +60,14 @@ function backup() {
 # - WARN each command has to sync to individual folders, since otherwise the
 # `--delete` option will override the previous contents
 # - WARN paths NEEDS TO END WITH A SLASH to sync folder contents
-backup "$HOME/Applications/" ./Homefolder/Applications # user applications have PWAs
-backup "$HOME/RomComs/" ./Homefolder/RomComs
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
+backup "$HOME/RomComs/" ./Homefolder/RomComs
 
-# also backup all perma-repos
+# need to be backed from Home directory, as iCloud only has symlinks
+backup "$HOME/Desktop/" ./Homefolder/Desktop
+backup "$HOME/Documents/" ./Homefolder/Documents
+
+# also backup all PERMA-REPOS
 while read -r line; do
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	basename="$(basename "$repo_path")"
@@ -73,24 +75,17 @@ while read -r line; do
 done <"$HOME/.config/perma-repos.csv"
 
 #───────────────────────────────────────────────────────────────────────────────
-# BACKUP COMPLETED MESSAGE
+# LOG & NOTIFY
 
 echo
 print "\033[1;34m─────────────────────────────────────────────────────────────────────────────\033[0m"
 echo
 if [[ -z "$errors" ]]; then
+	echo "completed: $(date '+%H:%M')" >>"$logpath_on_mac" 
+	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>"$backup_dest/last_backup.log"
 	print "\033[1;32mBackup on $volume_name completed.\033[0m"
+	"$ZDOTDIR/notificator" --title "Backup" --message "✅ complete" --sound "Blow"
 else
 	print "\033[1;31m$errors\033[0m"
+	"$ZDOTDIR/notificator" --title "Backup" --message "⚠️ Errors occurred." --sound "Basso"
 fi
-
-"$ZDOTDIR/notificator" --title "Terminal" --message "Backup finished." --sound "Blow"
-
-#───────────────────────────────────────────────────────────────────────────────
-# LOG BACKUP ACTIVITY
-
-# on Mac
-echo "completed: $(date '+%H:%M')" >>"$log_location"
-
-# at backup destination
-echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>last_backup.log
