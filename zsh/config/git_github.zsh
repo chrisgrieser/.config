@@ -245,7 +245,7 @@ function gli {
 #───────────────────────────────────────────────────────────────────────────────
 
 function clone {
-	# WARN depth < 2 ensures that amending a shallow commit does not result in a
+	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=15 "$1" --no-single-branch --no-tags # get branches, but not tags
 	cd "$(basename "$1" .git)" || return 1
