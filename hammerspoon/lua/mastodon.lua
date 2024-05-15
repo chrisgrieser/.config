@@ -4,7 +4,6 @@ local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
-local mastodonApp = require("lua.environment-vars").mastodonApp
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
@@ -16,36 +15,34 @@ local c = hs.caffeinate.watcher
 -- necessary as auto-refreshing has subtle bugs in pretty much any app I tried
 -- (not fully scrolling up, etc.)
 local function scrollUp()
-	local masto = app(mastodonApp)
-	if not masto or not u.screenIsUnlocked() or masto:isFrontmost() then return end
+	local mona = app("Mona")
+	if not mona or not u.screenIsUnlocked() or mona:isFrontmost() then return end
 
-	keystroke({ "cmd" }, "left", 1, masto) -- go back
-	keystroke({ "cmd" }, "1", 1, masto) -- go to home tab
-
-	local modifiers = mastodonApp == "Mona" and { "cmd" } or { "cmd", "shift" }
-	keystroke(modifiers, "R", 1, masto) -- refresh/reload
+	keystroke({ "cmd" }, "left", 1, mona) -- go back
+	keystroke({ "cmd" }, "1", 1, mona) -- go to home tab
+	keystroke({ "cmd" }, "R", 1, mona) -- refresh/reload
 
 	u.runWithDelays({ 1, 3, 7 }, function() -- wait for posts to load
-		if not masto:isFrontmost() then -- do not interrupt when currently reading
-			keystroke({ "cmd" }, "up", 1, masto) -- scroll up
+		if not mona:isFrontmost() then -- do not interrupt when currently reading
+			keystroke({ "cmd" }, "up", 1, mona) -- scroll up
 		end
 	end)
 end
 
 local function closeMediaWindow()
-	local masto = app(mastodonApp)
-	if not masto then return end
-	local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
+	local mona = app("Mona")
+	if not mona then return end
+	local mediaWin = mona:findWindow("Media") or mona:findWindow("Image")
 	if not mediaWin then return end
 
 	-- using keystroke, too, since closing the window does not work reliably
-	keystroke({ "cmd" }, "w", 1, masto)
+	keystroke({ "cmd" }, "w", 1, mona)
 	mediaWin:close()
 end
 
 -- move the ticker-app window to the left side of the screen
 local function winToTheSide()
-	local masto = app(mastodonApp)
+	local masto = app("Mona")
 	if not masto or u.isFront("Alfred") then return end
 
 	if masto:isHidden() then masto:unhide() end
@@ -64,7 +61,7 @@ end
 ---@param referenceWin hs.window|nil
 local function showHideTickerApp(referenceWin)
 	-- GUARD
-	local masto = app(mastodonApp)
+	local masto = app("Mona")
 	if not masto or not referenceWin then return end
 	local loginWin = referenceWin:title() == "Login"
 	local screenshotOverlay = referenceWin:title() == "" or u.isFront("CleanShot X")
@@ -89,37 +86,35 @@ hs.hotkey.bind({}, "home", scrollUp)
 
 -- Mona's autoscroll does not work reliably, therefore scrolling ourselves.
 -- Only scrolling when not idle, to not prevent the machine going to sleep.
-if mastodonApp == "Mona" then
-	local scrollEveryMins = 5 -- CONFIG
-	M.timer_regularScroll = hs.timer
-		.doEvery(scrollEveryMins * 60, function()
-			if hs.host.idleTime() < 120 then scrollUp() end
-		end)
-		:start()
-end
+local scrollEveryMins = 5 -- CONFIG
+M.timer_regularScroll = hs.timer
+	.doEvery(scrollEveryMins * 60, function()
+		if hs.host.idleTime() < 120 then scrollUp() end
+	end)
+	:start()
 
 M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
 	-- move scroll up
-	if appName == mastodonApp and (event == aw.launched or event == aw.activated) then
-		u.whenAppWinAvailable(mastodonApp, function()
+	if appName == "Mona" and (event == aw.launched or event == aw.activated) then
+		u.whenAppWinAvailable("Mona", function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()
 
 			-- focus media window if there is one
-			local mediaWindow = masto:findWindow("Media") or masto:findWindow(mastodonApp)
+			local mediaWindow = masto:findWindow("Media") or masto:findWindow("Mona")
 			if mediaWindow then mediaWindow:focus() end
 		end)
 
 		-- auto-close media windows and scroll up when deactivating
-	elseif appName == mastodonApp and event == aw.deactivated then
+	elseif appName == "Mona" and event == aw.deactivated then
 		closeMediaWindow()
 		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
 		-- raise when switching window to other app
-	elseif (event == aw.activated or event == aw.launched) and appName ~= mastodonApp then
+	elseif (event == aw.activated or event == aw.launched) and appName ~= "Mona" then
 		showHideTickerApp(hs.window.focusedWindow())
 	end
 end):start()

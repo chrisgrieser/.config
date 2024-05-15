@@ -6,6 +6,8 @@
 
 # useless stuff inside pseudo-apps
 **/*.app/*
+
+# Pixalmator container files
 **/*.pxd/*
 
 # git isn't ignored by default?!
@@ -32,9 +34,9 @@ package.json
 package-lock.json
 versions.json
 manifest.json
+jsconfig.json
 tsconfig.json
 esbuild.config.mjs
-biome.json
 biome.jsonc
 
 # python
@@ -46,7 +48,7 @@ typings/**/*.pyi
 
 # Alfred workflows
 info.plist
-jsconfig.json
+prefs.plist
 alfred.d.ts
 jxa-globals.d.ts
 

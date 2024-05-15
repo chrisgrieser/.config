@@ -86,7 +86,7 @@ anchors:
       - &move-notice
         set_notification_message:
           id: move-notice
-          text: "✂️  Move active"
+          text: "✂️ Move active"
       - &start-move
         set_variable:
           name: FINDER_MOVE_ACTIVE
@@ -896,29 +896,31 @@ rules:
           - shell_command: |
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # <C-h> = History Back
+      # <C-h>/<C-l> = History back/forward
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to_if_alone:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Back" of menu "Go" of menu bar 1
-                end tell'
-          # going back aborts searching / renames
-          - key_code: escape
+          - { key_code: semicolon, modifiers: [command] }
+          - *leave-insert-mode # going back aborts searching / renames
+        conditions: [*finder-app, *not-find-mode, *is-German-keyboard]
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [control] } }
+        to_if_alone:
+          - { key_code: open_bracket, modifiers: [command] }
           - *leave-insert-mode
-        conditions: [*finder-app, *not-find-mode]
-      # <C-l> = History Forward
+        conditions: [*finder-app, *not-find-mode, *not-German-keyboard]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell process "Finder"
-                  click menu item "Forward" of menu "Go" of menu bar 1
-                end tell'
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+        to_if_alone:
+          - { key_code: quote, modifiers: [command] }
+          - *leave-insert-mode
+        conditions: [*finder-app, *not-find-mode, *is-German-keyboard]
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [control] } }
+        to_if_alone:
+          - { key_code: close_bracket, modifiers: [command] }
+          - *leave-insert-mode
+        conditions: [*finder-app, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # FIND MODE
       # Enter/Exit

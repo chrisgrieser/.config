@@ -117,7 +117,7 @@ function M.closeTabsContaining(urlPart)
 				end repeat
 			end repeat
 		end tell
-	]]):format(env.browserApp, urlPart)
+	]]):format("Brave Browser", urlPart)
 	hs.osascript.applescript(applescript)
 end
 

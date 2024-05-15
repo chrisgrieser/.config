@@ -2,11 +2,9 @@ local M = {}
 --------------------------------------------------------------------------------
 -- APPS
 
-M.mastodonApp = "Mona"
-M.browserApp = "Brave Browser"
-
 M.transBgApps = {
 	"neovide",
+	"Neovide",
 	"Obsidian",
 	"wezterm-gui",
 	"WezTerm",

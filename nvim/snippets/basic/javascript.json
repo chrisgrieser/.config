@@ -242,10 +242,6 @@
     "body": "replace(/${1:regexp}/, \"$2\")",
     "prefix": "replace"
   },
-  "replace /gm": {
-    "body": "replace(/${1:regexp}/gm, \"$2\")",
-    "prefix": "replace /gm"
-  },
   "safe title": {
     "body": [
       "const safeTitle = ${1:title}",

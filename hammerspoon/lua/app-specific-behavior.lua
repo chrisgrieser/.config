@@ -117,7 +117,7 @@ M.aw_fallthrough = aw.new(function(appName, event)
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
-	local fallThroughApps = { "Transmission", env.mastodonApp }
+	local fallThroughApps = { "Transmission", "Mona" }
 	u.runWithDelays({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()
