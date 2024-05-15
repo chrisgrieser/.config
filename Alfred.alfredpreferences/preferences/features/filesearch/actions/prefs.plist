@@ -22,11 +22,15 @@
 		<true/>
 		<key>alfred.action.openwith</key>
 		<true/>
+		<key>alfred.action.recent</key>
+		<true/>
 		<key>alfred.action.showaslargetype</key>
 		<true/>
 		<key>alfred.action.text.copyasplaintext</key>
 		<true/>
 		<key>alfred.action.text.openindictionary</key>
+		<true/>
+		<key>alfred.action.text.pasteasplaintext</key>
 		<true/>
 		<key>alfred.action.text.saveassnippet</key>
 		<true/>

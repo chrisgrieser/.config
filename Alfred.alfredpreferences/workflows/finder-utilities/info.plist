@@ -835,6 +835,42 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>library</string>
+				<key>subtext</key>
+				<string>~/Library/</string>
+				<key>text</key>
+				<string>Library</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A74651BD-9EA3-438E-9558-5E7EF6F14A75</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>1E0AF587-F6D4-4507-8EA6-AB792A4C118A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1038,42 +1074,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A74651BD-9EA3-438E-9558-5E7EF6F14A75</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>1E0AF587-F6D4-4507-8EA6-AB792A4C118A</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1388,7 +1388,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
@@ -1406,9 +1406,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>780</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>430</real>
 		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
@@ -1540,7 +1540,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>570</real>
 		</dict>
@@ -1551,7 +1551,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>this ensures folders are opened in the current window instead of new window</string>
 			<key>xpos</key>
-			<real>525</real>
+			<real>535</real>
 			<key>ypos</key>
 			<real>570</real>
 		</dict>
@@ -1562,7 +1562,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>380</real>
+			<real>390</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
@@ -1600,9 +1600,9 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>625</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>780</real>
+			<real>430</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>
@@ -1687,7 +1687,7 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>530</real>
+			<real>540</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
