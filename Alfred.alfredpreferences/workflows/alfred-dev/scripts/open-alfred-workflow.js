@@ -1,13 +1,22 @@
 #!/usr/bin/env osascript -l JavaScript
+ObjC.import("stdlib");
+const app = Application.currentApplication();
+app.includeStandardAdditions = true;
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const finder = Application("Finder");
-	const finderWinPath = decodeURIComponent(finder.insertionLocation().url().slice(7));
-
-	const workflowId = finderWinPath.match(/Alfred\.alfredpreferences\/workflows\/([^/]+)/)?.[1];
-	if (!workflowId) return "Not in Alfred directory.";
-
-	Application("com.runningwithcrayons.Alfred").revealWorkflow(workflowId);
-	return;
+	// https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
+	const historyFile = app.pathTo("home folder") + "/Library/Application Support/Alfred/history.json";
+	const navHistory = JSON.parse(readFile(historyFile)).preferences.workflows;
+	const idOfLastWorkflow = navHistory[1];
+	Application("com.runningwithcrayons.Alfred").revealWorkflow(idOfLastWorkflow)
 }
