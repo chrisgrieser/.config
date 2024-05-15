@@ -167,12 +167,11 @@ nmap &c& :clearNotices
 nmap &n& :nohl
 nmap <Esc> &c&&n&
 
-" Another Quick Switcher ripgrep-search
-" somewhat close to Telescope's livegrep
+" Another Quick Switcher ripgrep-search (somewhat close to Telescope's livegrep)
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 nnoremap gl :liveGrep
 
-" Obsidian builtin Search & replace
+" Obsidian's builtin search & replace
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
 nnoremap ,fs :searchReplace
@@ -263,13 +262,8 @@ nnoremap qw :insertHr
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
-" (the weird mappings are due to mirroring my nvim-mappings)
 
-exmap fileRecovery obcommand file-recovery:open
-nnoremap ,ut :fileRecovery
-nnoremap ,gd :fileRecovery
-
-" Open DevTools
+" [d]evTools
 exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
 nnoremap ,d :toggleDevtools
 
@@ -277,7 +271,7 @@ nnoremap ,d :toggleDevtools
 exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
 nnoremap ,ll :consoleLogFromWordUnderCursor
 
-" Enhance URL with title
+" Enhance URL with title (same hotkey as Code Acton invim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
