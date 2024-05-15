@@ -1,11 +1,8 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-title: "Mouse Click Trickery"
+title: "Mouse Bindings"
 rules:
-  # this basically emulations the "Right-Click Open Link in new Background tab"
-  # Chrome extension. Only done for a brief duration, so holding the right mouse
-  # button still works for mouse gestues. Also, Rocker Gesture (Left) is
-  # restricted by this (right works though).
-  - description: "(Mouse) Right-Click (briefly): Open link in new background tab"
+  # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
+  - description: "(Mouse) 2 (briefly): Open link in new background tab"
     manipulators:
       - type: basic
         from: { pointing_button: button2 }
@@ -98,17 +95,6 @@ rules:
               "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
-      # Archive in Mimestream
-      - type: basic
-        from: { pointing_button: button5 }
-        to_if_alone:
-          - key_code: e
-        to_if_held_down:
-          - shell_command:
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
-              "search-selection" in workflow "de.chris-grieser.ddgr"'
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Fallback behavior: Close Window
       - type: basic
         from: { pointing_button: button5 }

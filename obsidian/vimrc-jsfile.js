@@ -86,7 +86,7 @@ function freezeInterface() {
 	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
 }
 
-function cycleThemes() {
+function cycleColorscheme() {
 	const app = view.app;
 	const currentTheme = app.customCss.theme;
 	const installedThemes = Object.keys(app.customCss.themes);
@@ -274,13 +274,21 @@ function openNextLink(where) {
 	view.app.commands.executeCommandById(commandId);
 }
 
-/** @param {string} vaultRelPath */
-async function openRandomNoteIn(vaultRelPath) {
+/**
+ * @param {string} vaultRelPath
+ * @param {string} frontmatterKey
+ * @param {string|number|boolean} frontmatterValue
+ */
+async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) {
 	const app = view.app;
 	const currentFile = view.file.path;
-	const files = app.vault
-		.getMarkdownFiles()
-		.filter((f) => f.path.startsWith(vaultRelPath.replace(/\*$/, "/")) && f.path !== currentFile);
+	const files = app.vault.getMarkdownFiles().filter((f) => {
+		const inFolder = f.path.startsWith(vaultRelPath.replace(/\$/, "/"));
+		const notCurrent = f.path !== currentFile;
+		const hasProperty = 
+			app.metadataCache.getFileCache(f).frontmatter?.[frontmatterKey] === frontmatterValue;
+		return inFolder && notCurrent && hasProperty;
+	});
 	if (files.length === 0) {
 		new Notice("No notes in " + vaultRelPath);
 		return;
