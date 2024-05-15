@@ -15,7 +15,8 @@
 			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
 			{ "title": "📖 Brave Help & Tips", "arg": "brave://settings/braveHelpTips" },
 			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
-			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" }
+			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
+			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" }
 		]
 	}
 }
