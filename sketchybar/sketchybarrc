@@ -3,15 +3,15 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-plugin_dir="$(dirname "$0")" # plugins in same folder as this rc file
+plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
 
 # open Stats
 i=0
 while ! pgrep -xq "Stats"; do
 	open -a "Stats"
-	sleep 0.5
+	sleep 2
 	i=$((i + 1))
-	[[ $i -gt 20 ]] && break
+	[[ $i -gt 4 ]] && break
 done
 
 # switch colors depending on dark mode
