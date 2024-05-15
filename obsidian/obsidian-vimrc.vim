@@ -1,10 +1,9 @@
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER
 
-" equivalent to `let mapleader = ,`
-" can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior:
-" https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
+" Equivalent to `let mapleader = ,`.
+" Can't set leaders in Obsidian vim, so the key just has to be used consistently.
+" However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -64,16 +63,13 @@ nnoremap <C-l> <C-i>
 
 " Language tools: next/prev/accept suggestion
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
-nnoremap ge :nextSuggestion
-vnoremap ge :nextSuggestion
+noremap ge :nextSuggestion
 
 exmap prevSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-previous-suggestion
-nnoremap gE :prevSuggestion
-vnoremap gE :prevSuggestion
+noremap gE :prevSuggestion
 
 exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-nnoremap ga :acceptSuggestion
-vnoremap ga :acceptSuggestion
+noremap ga :acceptSuggestion
 
 " next/prev heading
 exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("next") }
@@ -151,7 +147,7 @@ exmap altBuffer obcommand grappling-hook:alternate-note
 noremap <CR> :altBuffer
 
 " Random File
-exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data") }
+exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data", "read", false) }
 noremap <C-Tab> :openRandomDataFile
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -210,20 +206,20 @@ nnoremap U <C-r>
 " redo all
 nnoremap ,ur 1000<C-r>
 
-" toggle lowercase/titlecase
+" toggle lowercase/Titlecase
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase
 
 " do not move to the right on toggling case
 nnoremap ~ ~h
 
-" Change Word/Selection
+" Change word/selection
 nnoremap <Space> "_ciw
 vnoremap <Space> "_c
 onoremap <Space> iw
 nnoremap <S-Space> "_daw
 
-" [M]erge Lines (removing list or blockquote)
+" [M]erge lines (removing list or blockquote)
 exmap smartMerge jsfile Meta/vimrc-jsfile.js { smartMerge() }
 nnoremap M :smartMerge
 
@@ -255,7 +251,6 @@ nnoremap ,x :checkList
 " blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote
-nnoremap ,> :toggleBlockquote
 
 exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
 nnoremap qw :insertHr
@@ -267,18 +262,18 @@ nnoremap qw :insertHr
 exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
 nnoremap ,d :toggleDevtools
 
-" Log Variable
+" [L]og Variable
 exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
 nnoremap ,ll :consoleLogFromWordUnderCursor
 
-" Enhance URL with title (same hotkey as Code Acton invim)
+" Enhance URL with title (same hotkey as [c]ode action in nvim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
 
 " Workspace
-exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace('load', 'Basic') }
+exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
 nnoremap ,w :loadWorkspace
-exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace('save', 'Basic') }
+exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
 nnoremap ,W :saveWorkspace
 
 " Freeze Interface
@@ -288,9 +283,6 @@ nnoremap ,F :freezeInterface
 " Toggle `dataviewjs` and `js` codeblocks
 exmap toggleDataviewAndJsCodeblock jsfile Meta/vimrc-jsfile.js { toggleDataviewAndJsCodeblock() }
 nnoremap ,v :toggleDataviewAndJsCodeblock
-
-"───────────────────────────────────────────────────────────────────────────────
-" OBSIDIAN-SPECIFIC LEADER BINDINGS
 
 " Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
@@ -346,9 +338,9 @@ nnoremap ,t :openTrash
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
 nnoremap ,ph :openDynamicHighlightsSettings
 
-" Cycle Themes
-exmap cycleThemes jsfile Meta/vimrc-jsfile.js { cycleThemes() }
-nnoremap ,pc :cycleThemes
+" Cycle Colorscheme
+exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
+nnoremap ,pc :cycleColorscheme
 
 " Open this vimrc file
 exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
@@ -501,17 +493,13 @@ nnoremap zr :unfoldall
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 
-" [O]ption: [s]pellcheck
-exmap spellcheck obcommand editor:toggle-spellcheck
-nnoremap ,os :spellcheck
-
+" [O]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers
 
 " [O]ption: [d]iagnostics
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
 nnoremap ,od :enableDiagnostics
-
 exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
 nnoremap ,oD :disableDiagnostics
 

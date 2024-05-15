@@ -66,6 +66,7 @@ declare type View = {
 					position: { start: EditorPosition };
 				}[];
 				blocks: Record<string, { position: { start: EditorPosition } }>;
+				frontmatter: Record<string, string | number | boolean>;
 			};
 		};
 		customCss: {
