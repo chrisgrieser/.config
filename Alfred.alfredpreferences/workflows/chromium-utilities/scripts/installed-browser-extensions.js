@@ -94,8 +94,5 @@ function run() {
 			},
 		};
 	});
-	return JSON.stringify({
-		items: extensions,
-		cache: { seconds: 600, loosereload: true },
-	});
+	return JSON.stringify({ items: extensions });
 }

@@ -6,9 +6,8 @@ app.includeStandardAdditions = true;
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const finderWinPath = decodeURIComponent(
-		Application("Finder").insertionLocation().url().slice(7),
-	);
+	const finder = Application("Finder");
+	const finderWinPath = decodeURIComponent(finder.insertionLocation().url().slice(7));
 
 	const itemsInWindow = app
 		.doShellScript(`find "${finderWinPath}" -maxdepth 1 -mindepth 1`)

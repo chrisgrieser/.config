@@ -115,7 +115,7 @@ nnoremap Ö ,
 " FILE-, TAB- AND WINDOW-NAVIGATION
 
 " [g]oto [o]pen file (= Quick Switcher)
-exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_recent-search
+exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_main-search
 nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 

@@ -87,6 +87,13 @@
     ],
     "prefix": "front app (process)"
   },
+  "front window path (Finder)": {
+    "body": [
+      "const finder = Application(\"Finder\");",
+      "const finderWinPath = decodeURIComponent(finder.insertionLocation().url().slice(7));"
+    ],
+    "prefix": "front window path (Finder)"
+  },
   "front window title": {
     "body": [
       "const frontWinName = Application(\"System Events\").processes.whose({ frontmost: true })[0].windows[0].name();"
@@ -202,17 +209,6 @@
   "shebang": {
     "body": "#!/usr/bin/env osascript -l JavaScript",
     "prefix": "shebang"
-  },
-  "window path (Finder)": {
-    "body": [
-      "/** @return {string|null} */",
-      "function finderFrontWindow(){",
-      "\tconst win = Application(\"Finder\").finderWindows[0]",
-      "\tif (!win) return null;",
-      "\treturn $.NSURL.alloc.initWithString(win.target.url()).fileSystemRepresentation;",
-      "}"
-    ],
-    "prefix": "window path (Finder)"
   },
   "write to file": {
     "body": [
