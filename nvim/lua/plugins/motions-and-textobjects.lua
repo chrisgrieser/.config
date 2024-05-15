@@ -54,12 +54,6 @@ return {
 				desc = " Hover Peek Function",
 			},
 			{
-				"q",
-				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
-				mode = "o", -- only operator-pending to not conflict with commenting selection
-				desc = "󱡔  single comment textobj",
-			},
-			{
 				"dq",
 				function()
 					local cursor = vim.api.nvim_win_get_cursor(0)
@@ -74,7 +68,7 @@ return {
 				function()
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					u.normal("d")
-					local comStr = vim.bo.commentstring:format("")
+					local comStr = vim.bo.commentstring:format(""):gsub("%s*$", " ")
 					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
 					vim.api.nvim_set_current_line(line .. " " .. comStr)
 					vim.cmd.startinsert { bang = true }

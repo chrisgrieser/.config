@@ -116,8 +116,6 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
 		end
-
-		-- emphasize returns
 		updateHl("@keyword.return", "gui=bold")
 
 		-- FIX python highlighting issues
@@ -128,7 +126,7 @@ local function themeModifications()
 		local commentColor = u.getHighlightValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
-		overwriteHl("RainbowDelimiterRed", { fg = "#7e8a95" })
+		overwriteHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
