@@ -74,7 +74,7 @@ anchors:
       - &find-notice
         set_notification_message:
           id: find-notice
-          text: "\U0001F50D FIND"
+          text: "🔎 FIND"
       - &remove-find-notice
         set_notification_message:
           id: find-notice
@@ -356,12 +356,12 @@ rules:
           - shell_command: |
               current_win=$(osascript -e '
                 tell application "Finder"
-                  if ((count Finder windows) is 0) then return
-                  return POSIX path of (insertion location as alias)
-                end tell
-              ')
-              echo -n "$current_win" > /tmp/finder-vim-mode-last-closed-window
-              osascript -e 'tell application "Finder" to close window 1'
+                  if (count Finder windows) is 0 then return
+                  set pathToBeClosed to (POSIX path of (insertion location as alias))
+                  close window 1
+                  return pathToBeClosed
+                end tell')
+              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -374,25 +374,28 @@ rules:
         from: { key_code: w }
         to:
           - shell_command: |
-              osascript -e '
+              current_win=$(osascript -e '
                 tell application "Finder"
-                  if ((count Finder windows) is 0) then return
-                  return POSIX path of (insertion location as alias)
-                end tell' > /tmp/finder-vim-mode-last-closed-window
-              osascript -e 'tell application "Finder" to close window 1'
+                  if (count Finder windows) is 0 then return
+                  set pathToBeClosed to (POSIX path of (insertion location as alias))
+                  close window 1
+                  return pathToBeClosed
+                end tell')
+              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # W = re-open window
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: open "$(cat "/tmp/finder-vim-mode-last-closed-window")"
+          - shell_command: |
+              open "$(cat "/tmp/finder-vim-mode-last-closed-window")"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # e = close all other windows (:only)
       - type: basic
         from: { key_code: e }
         to:
           - shell_command: |
-              osascript -e '
+              current_win=$(osascript -e '
                 tell application "Finder"
                   repeat while Finder window 2 exists
                     if ((count Finder windows) is 2) then
@@ -401,7 +404,8 @@ rules:
                     close Finder window 2
                   end repeat
                   return winPath
-                end tell' > /tmp/finder-vim-mode-last-closed-window
+                end tell')
+              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
       - type: basic
@@ -671,6 +675,16 @@ rules:
           - shell_command: |
               # alternative: tell application "Finder" to return name of (first disk whose ejectable is true)
               first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+              osascript -e '
+                tell application "Finder" 
+                  set firstVol to (first disk whose ejectable is true) 
+                  if (count Finder windows) is 0 then 
+                    open firstVol 
+                  else 
+                    set target of front Finder window to firstVol 
+                  end if 
+                end tell
+              '
               if [[ -n $first_volume ]] ; then
                 open "$first_volume"
               else

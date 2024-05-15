@@ -77,7 +77,7 @@ function update() {
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
 	_dump
-	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Finished Update." --sound "Blow"
+	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
 }
 
 function listall() {
