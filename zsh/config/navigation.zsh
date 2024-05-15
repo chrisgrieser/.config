@@ -104,7 +104,7 @@ compdef _gr gr
 
 function _grappling_hook {
 	# CONFIG one location per line
-	# 1. read from csv, 2. remove .password-store, 3. add wd
+	# 1. read from csv, 2. remove .password-store, 3. add Desktop
 	local locations
 	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
 	locations="$wd"$'\n'"$(echo "$locations" | grep -v ".password-store")"
