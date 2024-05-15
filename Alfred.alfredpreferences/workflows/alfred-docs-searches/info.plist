@@ -35,18 +35,7 @@
 			</dict>
 		</array>
 		<key>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>321BD266-1E62-4C75-A792-85239F1268B0</key>
 		<array>
 			<dict>
@@ -191,6 +180,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6836847D-31EB-4678-86AD-60D91852740C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>83CD654E-E996-4DD4-A3C4-64496B9D2CD4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<array>
 			<dict>
@@ -244,7 +246,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6836847D-31EB-4678-86AD-60D91852740C</string>
+				<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -414,7 +416,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
+				<string>6836847D-31EB-4678-86AD-60D91852740C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1586,7 +1588,7 @@
 				<key>tasksettings</key>
 				<dict>
 					<key>target_path</key>
-					<string>{var:alfred_workflow_cache}</string>
+					<string>{const:alfred_workflow_cache}</string>
 					<key>use_finder</key>
 					<false/>
 				</dict>
@@ -1631,7 +1633,7 @@
 				<key>subtext</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Reload caches (of non-DevDocs)</string>
+				<string>Reload all caches</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -1765,9 +1767,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete Alfred cache (non-devdocs)</string>
 			<key>xpos</key>
-			<real>805</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1145</real>
 		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
@@ -1883,9 +1885,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>1110</real>
+			<real>820</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1145</real>
 		</dict>
 		<key>70C4F79D-D608-41A7-B2FF-723F59D79DDF</key>
 		<dict>
@@ -1923,9 +1925,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete custom workflow cache (devdocs)</string>
 			<key>xpos</key>
-			<real>955</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1145</real>
 		</dict>
 		<key>88975C56-9B03-4991-A91F-B7F567C18E64</key>
 		<dict>
@@ -2044,7 +2046,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>1110</real>
+			<real>1115</real>
 			<key>ypos</key>
 			<real>1015</real>
 		</dict>
@@ -2064,9 +2066,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
-			<real>650</real>
+			<real>670</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1145</real>
 		</dict>
 		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
 		<dict>
@@ -37211,7 +37213,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.0</string>
+	<string>2.4.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

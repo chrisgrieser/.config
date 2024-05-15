@@ -21,7 +21,9 @@ cd "$local_repos" || return 1
 # WARN depth=2 ensures that amending a shallow commit does not result in a
 # new commit without parent, effectively destroying git history
 branch_to_use=${branch_to_use:-main} # default value: "main"
-if ! git clone --branch="$branch_to_use" --depth=2 --filter="blob:none" "$remote_ssh" >&2; then
+git clone --branch="$branch_to_use" --depth=2 --filter="blob:none" "$remote_ssh" >&2
+clone_success=$?
+if [[ $clone_success -ne 0 ]]; then
 	echo -n "❌ Could not clone."
 	return 1
 fi
