@@ -15,7 +15,7 @@ cd "$local_repo_folder" || return 1
 if [[ $clone_depth == "0" ]]; then
 	git clone "$url" --no-single-branch --no-tags # get branches, but not tags
 else
-	# WARN depth=2 ensures that amending a shallow commit does not result in a
+	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth == "1" ]] && clone_depth=2
 
