@@ -673,24 +673,23 @@ rules:
         from: { key_code: v }
         to_if_alone:
           - shell_command: |
-              # alternative: tell application "Finder" to return name of (first disk whose ejectable is true)
-              first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
-              osascript -e '
-                tell application "Finder" 
-                  set firstVol to (first disk whose ejectable is true) 
-                  if (count Finder windows) is 0 then 
-                    open firstVol 
-                  else 
-                    set target of front Finder window to firstVol 
-                  end if 
+              error=$(osascript -e '
+                tell application "Finder"
+                  try
+                    set firstVol to (first disk whose ejectable is true)
+                  on error
+                    return "No ejectable disk found."
+                  end try
+                  if (count Finder windows) is 0 then
+                    open firstVol
+                  else
+                    set target of front Finder window to firstVol
+                  end if
+                  return ""
                 end tell
-              '
-              if [[ -n $first_volume ]] ; then
-                open "$first_volume"
-              else
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "No ejectable volume found."
-              fi
+              ')
+              [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "No ejectable volume found."
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
       - type: basic

@@ -1,4 +1,4 @@
-# DOCS 
+# DOCS
 # https://blog.meain.io/2023/navigating-around-in-shell/
 # https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,6 +64,16 @@ function ..a {
 	cd "$workflow_folder_path" || return 1
 }
 
+# open first ejectable volume
+function vol {
+	first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+	if [[ -d "$first_volume" ]]; then
+		open "$first_volume"
+	else
+		print "\e[1;33mEjectable volumes found.\e[0m"
+	fi
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
 # - the list from `dirs` is already populated by zsh-autocomplete, so we do not
@@ -74,7 +84,7 @@ function ..a {
 function gr {
 	local goto="$*"
 	[[ -z "$*" ]] && goto=$(dirs -p | sed -n '2p') # no arg: goto last (1st line = current)
-	goto="${goto/#\~/$HOME}"                    # resolve ~
+	goto="${goto/#\~/$HOME}"
 	cd "$goto" || return 1
 }
 _gr() {
