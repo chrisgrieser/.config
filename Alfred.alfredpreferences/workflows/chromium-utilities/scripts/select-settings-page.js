@@ -21,10 +21,11 @@ function run() {
 	const allSettings = JSON.parse(readFile("./data/all-chromium-browser-settings.json"));
 	allSettings.push(...browserVars.settingsPages[browser]);
 	const iconPath = browserVars.appIcon[browser];
+	const uri = browserVars.uri[browser];
 
-	// add uid to all items, so Alfred remembers their selection
 	for (const page of allSettings) {
-		page.uid = page.arg;
+		page.arg = page.arg.replace(/^chrome:\/\//, uri);
+		page.uid = page.arg; // uid = Alfred remembers their selection
 		page.icon = { path: iconPath };
 	}
 

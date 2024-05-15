@@ -195,6 +195,8 @@ local function telescopeConfig()
 		borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 	end
 
+	local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
+
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },
@@ -208,11 +210,7 @@ local function telescopeConfig()
 			default_mappings = { i = keymappings_I, n = keymappings_N },
 			cycle_layout_list = {
 				"horizontal",
-				{
-					previewer = false,
-					layout_strategy = "horizontal",
-					layout_config = { horizontal = { width = 0.55, height = 0.6 } },
-				},
+				{ previewer = false, layout_strategy = "horizontal", layout_config = smallLayout },
 			},
 			layout_strategy = "horizontal",
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
@@ -242,7 +240,10 @@ local function telescopeConfig()
 				("--ignore-file=" .. os.getenv("HOME") .. "/.config/rg/ignore"),
 			},
 			-- stylua: ignore
-			file_ignore_patterns = { "%.png$", "%.svg", "%.gif", "%.zip", "%.pdf", "%.icns", "%.jpe?g" },
+			file_ignore_patterns = {
+				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g", -- images
+				"%.zip", "%.pdf", -- misc
+			},
 		},
 		pickers = {
 			find_files = {
@@ -252,8 +253,9 @@ local function telescopeConfig()
 				-- e.g. not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				follow = false,
-				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
 
+				-- use small layout, toggle via <D-p>
+				layout_config = smallLayout,
 				previewer = false,
 				mappings = {
 					i = {
@@ -278,7 +280,9 @@ local function telescopeConfig()
 					return text, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
-				layout_config = { horizontal = { width = 0.55, height = 0.6 } },
+
+				-- use small layout, toggle via <D-p>
+				layout_config = smallLayout,
 				previewer = false,
 				mappings = {
 					i = { ["<D-p>"] = togglePreviewAction },

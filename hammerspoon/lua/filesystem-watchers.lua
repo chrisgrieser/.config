@@ -48,7 +48,7 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			-- needs to be zipped again, since browser auto-opens all zip files
 			-- stylua: ignore
 			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
-			u.app(env.browserApp):activate() -- window created by auto-unzipping
+			u.app("Brave Browser"):activate() -- window created by auto-unzipping
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
 		elseif fileName:find("vimium_c.*%.json") then

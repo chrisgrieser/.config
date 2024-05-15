@@ -51,7 +51,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", env.mastodonApp }
+	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona" }
 	if
 		not win
 		or not (win:application())
@@ -190,7 +190,7 @@ M.wf_appsOnMouseScreen = wf.new({
 	"espanso",
 	"BusyCal",
 	"Alfred Preferences",
-	env.browserApp,
+	"Brave Browser",
 	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
 	local mouseScreen = hs.mouse.getCurrentScreen()

@@ -8,8 +8,8 @@
 		"Brave Browser": "/Applications/Brave Browser.app/Contents/Resources/app.icns"
 	},
 	"settingsPages": {
-		"Chrome": [],
-		"Brave": [
+		"Google Chrome": [],
+		"Brave Browser": [
 			{ "title": "⌨️ Brave Shortcuts", "arg": "brave://settings/system/shortcuts" },
 			{ "title": "🔰 Brave Shields", "arg": "brave://settings/shields" },
 			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
@@ -18,5 +18,9 @@
 			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
 			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" }
 		]
+	},
+	"uri": {
+		"Google Chrome": "chrome://",
+		"Brave Browser": "brave://"
 	}
 }

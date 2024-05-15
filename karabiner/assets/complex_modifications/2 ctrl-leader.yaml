@@ -409,7 +409,7 @@ rules:
         from: { key_code: period }
         conditions: [*leader-active]
         to:
-          # INFO delay to avoid sending double-ctrl, which triggers Alfred
+          # delay so no double-ctrl is sent which triggers Alfred
           - { key_code: vk_none, hold_down_milliseconds: 200 }
           - { key_code: spacebar, modifiers: [control, command] }
           - *deactivate-leader

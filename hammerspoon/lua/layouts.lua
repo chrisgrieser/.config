@@ -57,8 +57,8 @@ local function workLayout()
 	u.closeAllTheThings()
 
 	local toOpen = { "Discord", "Mimestream", isWorkweek() and "Slack" or nil }
-	u.openApps { env.mastodonApp, "AlfredExtraPane" }
 	u.openApps(toOpen)
+	u.openApps { "Mona", "AlfredExtraPane" }
 	for _, appName in pairs(toOpen) do
 		u.whenAppWinAvailable(appName, function()
 			local win = app(appName):mainWindow()
@@ -76,6 +76,8 @@ local function movieLayout()
 	visuals.updateHoleCover()
 	dockSwitcher("movie")
 	u.closeFinderWins()
+	-- hide all files
+	hs.execute("defaults write com.apple.Finder AppleShowAllFiles false && killall Finder")
 
 	u.openApps { "YouTube", "BetterTouchTool" }
 	u.quitApps {
@@ -88,7 +90,7 @@ local function movieLayout()
 		"WezTerm",
 		"Mimestream",
 		"Neovide",
-		env.mastodonApp,
+		"Mona",
 		"Reminders",
 	}
 	print("🔲 Loaded MovieModeLayout")

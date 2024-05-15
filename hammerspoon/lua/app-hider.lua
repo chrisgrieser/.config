@@ -23,7 +23,7 @@ local config = {
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
-		env.mastodonApp,
+		"Mona",
 		"Alfred",
 	},
 }
@@ -91,7 +91,7 @@ M.transBgAppWindowFilter = wf.new(config.transBgApps)
 
 -- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
 M.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", env.browserApp }
+	local autoTileApps = { "Finder", "Brave Browser" }
 	if
 		eventType == aw.deactivated
 		and hs.fnutils.contains(autoTileApps, appName)

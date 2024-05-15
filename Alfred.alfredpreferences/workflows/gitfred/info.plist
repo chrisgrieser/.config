@@ -1788,13 +1788,13 @@ end run</string>
 				<key>defaultvalue</key>
 				<integer>5</integer>
 				<key>markercount</key>
-				<integer>10</integer>
+				<integer>11</integer>
 				<key>maxvalue</key>
 				<integer>50</integer>
 				<key>minvalue</key>
 				<integer>0</integer>
 				<key>onlystoponmarkers</key>
-				<false/>
+				<true/>
 				<key>showmarkers</key>
 				<true/>
 			</dict>
@@ -1847,7 +1847,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.8</string>
+	<string>1.0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
