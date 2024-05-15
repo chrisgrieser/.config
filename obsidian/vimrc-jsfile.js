@@ -79,8 +79,8 @@ async function updatePlugins() {
 }
 
 function freezeInterface() {
-	const delaySecs = 4; // CONFIG
-	new Notice(`⚠ Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
+	const delaySecs = 4;
+	new Notice(`Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 	// biome-ignore format: ugly
 	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
@@ -235,9 +235,10 @@ function toggleLowercaseTitleCase() {
 function openNextLink(where) {
 	function getLinkRange(/** @type {string} */ text) {
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(\)/;
+		//        ^         (    url / obsidian URI   )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
-		if (!linkMatch) return { start: -1, end: -1 };
-		const start = linkMatch.index || 0;
+		if (!linkMatch?.index) return { start: -1, end: -1 };
+		const start = linkMatch.index;
 		const end = start + linkMatch[0].length;
 		return { start, end };
 	}
@@ -256,7 +257,7 @@ function openNextLink(where) {
 	} while (linkEnd > 0 && linkEnd < cursor.ch);
 	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
 
-	// if not, look forward for a link
+	// if not, seek forwards for a link
 	if (!cursorIsOnLink) {
 		const offset = editor.posToOffset(cursor);
 		const textAfterCursor = editor.getValue().slice(offset);
@@ -280,17 +281,21 @@ function openNextLink(where) {
  * @param {string|number|boolean} frontmatterValue
  */
 async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) {
+	vaultRelPath = vaultRelPath
+		.replace(/\/*$/, "/") // ensure `/` at end
+		.replace(/^\/$/, ""); // mark vault root always true for `startsWith`
 	const app = view.app;
 	const currentFile = view.file.path;
+
 	const files = app.vault.getMarkdownFiles().filter((f) => {
-		const inFolder = f.path.startsWith(vaultRelPath.replace(/\$/, "/"));
+		const inFolder = f.path.startsWith(vaultRelPath);
 		const notCurrent = f.path !== currentFile;
-		const hasProperty = 
-			app.metadataCache.getFileCache(f).frontmatter?.[frontmatterKey] === frontmatterValue;
+		const frontmatterCache = app.metadataCache.getFileCache(f).frontmatter;
+		const hasProperty = frontmatterCache?.[frontmatterKey] === frontmatterValue;
 		return inFolder && notCurrent && hasProperty;
 	});
 	if (files.length === 0) {
-		new Notice("No notes in " + vaultRelPath);
+		new Notice(`No notes in ${vaultRelPath} with ${frontmatterKey}: ${frontmatterValue}.`);
 		return;
 	}
 	const randomIndex = Math.floor(Math.random() * files.length);
@@ -326,7 +331,7 @@ function consoleLogFromWordUnderCursor() {
 	const cursor = editor.getCursor();
 	const cursorWordRange = editor.wordAt(cursor);
 	const cursorWord = editor.getRange(cursorWordRange.from, cursorWordRange.to);
-	const [indent] = editor.getLine(cursor.line).match(/^\s*/) || [""];
+	const indent = editor.getLine(cursor.line).match(/^\s*/)?.[0] || "";
 	const logLine = indent + `console.log(${cursorWord});`;
 
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
