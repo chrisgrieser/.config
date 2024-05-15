@@ -76,6 +76,7 @@ function readFile(path) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
+	console.log("keyword:", keyword);
 
 	ensureCacheFolderExists();
 	const mapCache = $.getenv("alfred_workflow_cache") + "/keyword-slug-map.json";
@@ -99,6 +100,8 @@ function run() {
 		const iconExists = fileExists(iconpath);
 
 		const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
+		console.log("indexUrl:", indexUrl);
+
 		/** @type {DevDocsIndex} */
 		const response = JSON.parse(httpRequest(indexUrl));
 
