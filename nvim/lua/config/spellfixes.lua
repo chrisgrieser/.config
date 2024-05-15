@@ -11,6 +11,7 @@ local spellfixes = {
 	brwoser = "browser",
 	cant = "can't",
 	choer = "chore",
+	chroe = "chore",
 	cleitn = "client",
 	curosr = "cursor",
 	defualt = "default",

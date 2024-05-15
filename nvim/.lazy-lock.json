@@ -15,7 +15,7 @@
   "eyeliner.nvim": { "branch": "main", "commit": "c540d58bf52aa979d4cca639c60387ae0c0ccf88" },
   "gitsigns.nvim": { "branch": "main", "commit": "805610a9393fa231f2c2b49cb521bfa413fadb3d" },
   "grug-far.nvim": { "branch": "main", "commit": "c93e9baf69d4f65f44f61671e646ee11b31b5611" },
-  "gruvbox-material": { "branch": "master", "commit": "80331fbbec9ba18590a17bc6b7d277d96c05c2b6" },
+  "gruvbox-material": { "branch": "master", "commit": "5256b758ef8274e33ae847b17188bf8623cf33e0" },
   "guess-indent.nvim": { "branch": "main", "commit": "b8ae749fce17aa4c267eec80a6984130b94f80b2" },
   "headlines.nvim": { "branch": "master", "commit": "618ef1b2502c565c82254ef7d5b04402194d9ce3" },
   "indent-blankline.nvim": { "branch": "master", "commit": "3d08501caef2329aba5121b753e903904088f7e6" },
