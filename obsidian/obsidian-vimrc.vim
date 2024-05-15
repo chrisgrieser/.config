@@ -444,8 +444,8 @@ nnoremap sm vt]P
 unmap w
 nunmap w
 
-exmap duplicate obcommand obsidian-editor-shortcuts:duplicateLine
-nnoremap ww :duplicate
+exmap duplicateLine jsfile Meta/vimrc-jsfile.js { duplicateLine() }
+nnoremap ww :duplicateLine
 
 nnoremap W y$$p
 nnoremap wj yjjp

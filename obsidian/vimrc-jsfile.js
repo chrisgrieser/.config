@@ -217,6 +217,15 @@ function copyPathSegment(segment) {
 	new Notice("Copied:\n" + toCopy);
 }
 
+/** as opposed to simply using `yyp`, this does not fill the register.
+ * In addition, the cursor position (column) is preserved. */
+function duplicateLine() {
+	const cursor = editor.getCursor();
+	const line = editor.getLine(cursor.line);
+	editor.replaceRange(line + "\n", { line: cursor.line + 1, ch: 0 });
+	editor.setCursor(cursor.line + 1, cursor.ch);
+}
+
 function toggleLowercaseTitleCase() {
 	const cursor = editor.getCursor();
 	const { from, to } = editor.wordAt(cursor);
@@ -276,14 +285,14 @@ function openNextLink(where) {
 }
 
 /**
- * @param {string} vaultRelPath
+ * @param {string} vaultRelPath (just `/` for vault root)
  * @param {string} frontmatterKey
  * @param {string|number|boolean} frontmatterValue
  */
 async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) {
 	vaultRelPath = vaultRelPath
 		.replace(/\/*$/, "/") // ensure `/` at end
-		.replace(/^\/$/, ""); // mark vault root always true for `startsWith`
+		.replace(/^\/$/, ""); // make vault root always true for `startsWith`
 	const app = view.app;
 	const currentFile = view.file.path;
 

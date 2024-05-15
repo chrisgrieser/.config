@@ -41,7 +41,6 @@ local function dapConfig()
 		if dapStatus == "" then return "" end
 		return "  " .. dapStatus
 	end)
-	require("config.theme-customization").reloadTheming()
 end
 
 ---PENDING https://github.com/mfussenegger/nvim-dap/issues/792
