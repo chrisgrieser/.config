@@ -26,18 +26,17 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---
 	if #changedFiles > 1 then
 		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
-	vim.notify(msg, vim.log.levels.INFO, {
-		title = "Renamed with LSP",
-		on_open = function(win)
-			local buf = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
-		end,
-	})
+	vim.notify(msg, vim.log.levels.INFO, { title = "Renamed with LSP" })
 end
 
+-- -----------------------------------------------------------------------------
+-- other lsp settings
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
+
+-- globally enable by default
+vim.lsp.inlay_hint.enable(true)
 
 --------------------------------------------------------------------------------
 
@@ -70,7 +69,7 @@ for type, icon in pairs(diagnosticTypes) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
----@param diag Diagnostic
+---@param diag vim.Diagnostic
 ---@return string
 local function diagMsgFormat(diag)
 	local msg = diag.message
@@ -82,7 +81,7 @@ local function diagMsgFormat(diag)
 	return msg
 end
 
----@param diag Diagnostic
+---@param diag vim.Diagnostic
 ---@param mode "virtual_text"|"float"
 ---@return string displayedText
 ---@return string? highlight_group
@@ -112,7 +111,7 @@ vim.diagnostic.config {
 		max_width = 70,
 		header = false,
 		prefix = function(_, _, total)
-			if total == 1 then return "" end
+			if total == 1 then return "", "" end
 			return "• ", "NonText"
 		end,
 		format = diagMsgFormat,

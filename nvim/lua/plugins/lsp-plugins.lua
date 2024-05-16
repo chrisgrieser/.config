@@ -60,7 +60,7 @@ return {
 	},
 	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
-		event = "BufReadPre",
+		event = "LspAttach",
 		opts = {
 			request_pending_text = false, -- remove "loading…"
 			hl = { link = "Comment" },
@@ -116,7 +116,6 @@ return {
 			noice = true, -- render via noice.nvim
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@variable.parameter", -- highlight group
-			hint_inline = function() return vim.lsp.inlay_hint ~= nil end,
 			floating_window = false,
 			always_trigger = true,
 			bind = true, -- This is mandatory, otherwise border config won't get registered.
