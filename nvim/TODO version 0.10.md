@@ -1,2 +1,0 @@
-- `vim.fn.getregion()`
-- `vim.fs.root`
