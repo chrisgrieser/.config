@@ -11,7 +11,10 @@ return {
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
-			filetypes = { text = false }, -- `pass` passwords are plaintext
+			filetypes = {
+				text = false, -- `pass` passwords are plaintext
+				DressingInput = false,
+			},
 			silent = true,
 		},
 		keys = {
