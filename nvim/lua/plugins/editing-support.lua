@@ -1,56 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-local function updateMultiplyText(content)
-	-- IF LINEWISE, TRANSFORM 1ST LNE
-	if content.submode == "V" then
-		local line = content.lines[1]
-		local ft = vim.bo.filetype
-
-		if ft == "css" then
-			if line:find("top:") then
-				line = line:gsub("top:", "bottom:")
-			elseif line:find("bottom:") then
-				line = line:gsub("bottom:", "top:")
-			end
-			if line:find("right:") then
-				line = line:gsub("right:", "left:")
-			elseif line:find("left:") then
-				line = line:gsub("left:", "right:")
-			end
-		elseif ft == "javascript" or ft == "typescript" then
-			if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
-		elseif ft == "lua" then
-			if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
-		elseif ft == "sh" then
-			if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
-		elseif ft == "python" then
-			if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
-		end
-
-		content.lines[1] = line
-	end
-
-	-- REMEMBER CURSOR COLUMN
-	-- HACK needs to work with `defer_fn`, since the transformer function is
-	-- called only before multiplication
-	local rowBefore = vim.api.nvim_win_get_cursor(0)[1]
-	vim.defer_fn(function()
-		local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
-		local line = vim.api.nvim_get_current_line()
-		local _, valuePos = line:find("[:=] ? %S") -- find value
-		local _, _, fieldPos = line:find("@.-()%w+$") -- luadoc or jsdoc
-		local gotoPos = fieldPos or valuePos
-		if rowBefore ~= rowAfter and gotoPos then
-			vim.api.nvim_win_set_cursor(0, { rowAfter, gotoPos - 1 })
-		end
-	end, 1)
-
-	return content.lines
-end
-
--- -----------------------------------------------------------------------------
-
 return {
 	{
 		"echasnovski/mini.operators",
@@ -64,13 +14,6 @@ return {
 			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
 			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 		},
-		opts = {
-			replace = { prefix = "", reindent_linewise = true }, -- substitute
-			multiply = { prefix = "w", func = updateMultiplyText }, -- duplicate
-			exchange = { prefix = "sx", reindent_linewise = true },
-			sort = { prefix = "sy" },
-			evaluate = { prefix = "" }, -- disable
-		},
 		config = function(_, opts)
 			require("mini.operators").setup(opts)
 
@@ -81,6 +24,64 @@ return {
 				{ textobject = "s", line = "ss", selection = "" }
 			)
 		end,
+		opts = {
+			evaluate = { prefix = "" }, -- disable
+			replace = { prefix = "", reindent_linewise = true },
+			exchange = { prefix = "sx", reindent_linewise = true },
+			sort = { prefix = "sy" },
+			multiply = {
+				prefix = "w",
+				func = function(content)
+					-- IF LINEWISE, TRANSFORM 1ST LNE
+					if content.submode == "V" then
+						local line = content.lines[1]
+						local ft = vim.bo.filetype
+
+						if ft == "css" then
+							if line:find("top:") then
+								line = line:gsub("top:", "bottom:")
+							elseif line:find("bottom:") then
+								line = line:gsub("bottom:", "top:")
+							end
+							if line:find("right:") then
+								line = line:gsub("right:", "left:")
+							elseif line:find("left:") then
+								line = line:gsub("left:", "right:")
+							end
+						elseif ft == "javascript" or ft == "typescript" then
+							if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
+						elseif ft == "lua" then
+							if line:find("^%s*if.+then%s*$") then
+								line = line:gsub("^(%s*)if", "%1elseif")
+							end
+						elseif ft == "sh" then
+							if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
+						elseif ft == "python" then
+							if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
+						end
+
+						content.lines[1] = line
+					end
+
+					-- REMEMBER CURSOR COLUMN
+					-- HACK needs to work with `defer_fn`, since the transformer function is
+					-- called only before multiplication
+					local rowBefore = vim.api.nvim_win_get_cursor(0)[1]
+					vim.defer_fn(function()
+						local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
+						local line = vim.api.nvim_get_current_line()
+						local _, valuePos = line:find("[:=] ? %S") -- find value
+						local _, _, fieldPos = line:find("@.-()%w+$") -- luadoc or jsdoc
+						local gotoPos = fieldPos or valuePos
+						if rowBefore ~= rowAfter and gotoPos then
+							vim.api.nvim_win_set_cursor(0, { rowAfter, gotoPos - 1 })
+						end
+					end, 1)
+
+					return content.lines
+				end,
+			},
+		},
 	},
 	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",
@@ -110,9 +111,8 @@ return {
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				-- `dsl` -> delete surrounding call
-				-- (includes `:` for lua methods and css pseudo-classes)
 				["l"] = {
-					find = "[%w.:]+%b()",
+					find = "[%w.:]+%b()", -- includes `:` for lua methods and css pseudo-classes
 					delete = "([%w.:]+%()().-(%))()",
 				},
 				["R"] = { -- wikilink
@@ -212,15 +212,6 @@ return {
 					:use_key(":"),
 			}
 		end,
-	},
-	{ -- auto-convert string and f/template string
-		"chrisgrieser/nvim-puppeteer",
-		ft = { "python", "javascript", "typescript", "lua" },
-		cmd = "PuppeteerToggle",
-		init = function() vim.g.puppeteer_disable_filetypes = {} end,
-		keys = {
-			{ "<leader>op", vim.cmd.PuppeteerToggle, desc = "󰅳 Puppeteer" },
-		},
 	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",
