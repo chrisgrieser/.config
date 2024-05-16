@@ -69,7 +69,7 @@ local function formattingFunc(bufnr)
 	-- GUARD
 	if not bufnr then bufnr = 0 end
 	local bufname = vim.api.nvim_buf_get_name(bufnr)
-	local fileExists = vim.loop.fs_stat(bufname) ~= nil
+	local fileExists = vim.uv.fs_stat(bufname) ~= nil
 	local valid = vim.api.nvim_buf_is_valid(bufnr)
 	local specialBuffer = vim.bo[bufnr].buftype ~= ""
 	if specialBuffer or not fileExists or not valid then return end

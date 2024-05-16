@@ -10,7 +10,7 @@ local function hasAltFile(altBufnr)
 	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
-	local altFileExists = vim.loop.fs_stat(a.nvim_buf_get_name(altBufnr)) ~= nil
+	local altFileExists = vim.uv.fs_stat(a.nvim_buf_get_name(altBufnr)) ~= nil
 
 	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altFileExists
 end
@@ -21,7 +21,7 @@ end
 local function altOldfile()
 	local curPath = a.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
-		if vim.loop.fs_stat(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
+		if vim.uv.fs_stat(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
 			return path
 		end
 	end

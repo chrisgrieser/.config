@@ -9,13 +9,4 @@ u.ftAbbr("!=", "~=")
 u.ftAbbr("!==", "~=")
 u.ftAbbr("===", "==")
 
--- shorthands
-u.ftAbbr("tree", "then return end")
-
-vim.opt_local.comments = {
-	":---", -- luadoc
-	":-- *", -- lists in comments
-	":--",
-}
-
 --------------------------------------------------------------------------------

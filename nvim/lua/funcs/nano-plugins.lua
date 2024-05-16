@@ -30,7 +30,7 @@ function M.openAlfredPref()
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
 	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowId .. ")"
-	vim.fn.system { "osascript", "-l", "JavaScript", "-e", jxa }
+	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
 	vim.ui.open(uri)
 end
 
@@ -67,14 +67,14 @@ function M.openAtRegex101()
 		lang,
 		(replace and "&subst=" .. replace or "")
 	)
-	vim.fn.system { "open", url }
+	vim.system { "open", url }
 end
 
 -- simple task selector from makefile
 function M.selectMake()
 	-- GUARD
-	local makefile = vim.loop.cwd() .. "/Makefile"
-	local fileExists = vim.loop.fs_stat(makefile)
+	local makefile = vim.uv.cwd() .. "/Makefile"
+	local fileExists = vim.uv.fs_stat(makefile)
 	if not fileExists then
 		notify("", "Makefile not found", "warn")
 		return
@@ -162,14 +162,14 @@ local changedFileNotif
 function M.gotoChangedFiles()
 	local funcName = "Changed Files"
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	local gitroot = vim.trim(vim.fn.system { "git", "rev-parse", "--show-toplevel" })
-	local pwd = vim.loop.cwd() or ""
+	local gitroot = vim.trim(vim.system { "git", "rev-parse", "--show-toplevel" })
+	local pwd = vim.uv.cwd() or ""
 
 	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
-	vim.fn.system(
+	vim.system(
 		"git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &>/dev/null"
 	)
-	local numstat = vim.trim(vim.fn.system { "git", "diff", "--numstat" })
+	local numstat = vim.trim(vim.system { "git", "diff", "--numstat" })
 	local numstatLines = vim.split(numstat, "\n")
 
 	-- GUARD

@@ -2,7 +2,7 @@
 vim.defer_fn(function()
 	if vim.fn.argc() > 0 then return end
 	for _, file in ipairs(vim.v.oldfiles) do
-		if vim.loop.fs_stat(file) and not file:find("/COMMIT_EDITMSG$") then
+		if vim.uv.fs_stat(file) and not file:find("/COMMIT_EDITMSG$") then
 			vim.cmd.edit(file)
 			return
 		end

@@ -49,11 +49,6 @@ local function cmpconfig()
 	local compare = require("cmp.config.compare")
 
 	cmp.setup {
-		-- TODO can remove in nvim 0.10
-		snippet = {
-			expand = function(args) require("luasnip").lsp_expand(args.body) end,
-		},
-
 		view = {
 			entries = { follow_cursor = true },
 		},
@@ -106,19 +101,14 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- cmd+j: Jump to next location
 			["<D-j>"] = cmp.mapping(function(_)
-				-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#api-2
-				if require("luasnip").locally_jumpable(1) then
-					require("luasnip").jump(1)
-				else
-					u.notify("Luasnip", "No more jumps.", "warn")
+				if vim.snippet.active({ direction = 1 }) then
+					vim.snippet.jump(1)
 				end
 			end, { "i", "s" }),
 			-- cmd+shift+j: prev location
 			["<D-J>"] = cmp.mapping(function(_)
-				if require("luasnip").locally_jumpable(-1) then
-					require("luasnip").jump(-1)
-				else
-					u.notify("Luasnip", "No more jumps.", "warn")
+				if vim.snippet.active({ direction = -1 }) then
+					vim.snippet.jump(-1)
 				end
 			end, { "i", "s" }),
 		},
