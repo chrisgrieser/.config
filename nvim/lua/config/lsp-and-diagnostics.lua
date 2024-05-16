@@ -35,9 +35,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 	border = vim.g.borderStyle,
 })
 
--- globally enable by default
-vim.lsp.inlay_hint.enable(true)
-
 --------------------------------------------------------------------------------
 
 -- INFO this needs to be disabled for noice.nvim
