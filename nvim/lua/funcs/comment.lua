@@ -40,17 +40,10 @@ function M.commentHr()
 	-- construct hr
 	local hrChar = comStr:find("%-") and "-" or "─"
 	local hr = hrChar:rep(hrLength)
-	local hrWithComment = comStr:format(hr)
-
-	local formatterWantPadding = { "python", "css", "scss" }
-	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
-		hrWithComment = hrWithComment:gsub(" ", hrChar)
-	end
-
-	local fullLine = indent .. hrWithComment
+	local fullLine = indent .. comStr:format(hr)
 	if vim.bo.ft == "markdown" then fullLine = "---" end
 
-	-- append Lines & move
+	-- append lines & move
 	local linesToAppend = isOnBlank and { fullLine, "" } or { "", fullLine, "" }
 	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, linesToAppend)
 	vim.api.nvim_win_set_cursor(0, { startLn + #linesToAppend - 1, #indent })

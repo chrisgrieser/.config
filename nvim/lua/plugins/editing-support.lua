@@ -7,17 +7,6 @@ return {
 		event = "BufReadPre",
 		opts = { override_editorconfig = false },
 	},
-	{ -- comment
-		"numToStr/Comment.nvim",
-		keys = {
-			{ "q", mode = { "n", "x" }, desc = " Comment Operator" },
-		},
-		opts = {
-			opleader = { line = "q", block = "<Nop>" },
-			toggler = { line = "qq", block = "<Nop>" },
-			extra = { eol = "<Nop>", above = "<Nop>", below = "<Nop>" },
-		},
-	},
 	{ -- surround
 		"kylechui/nvim-surround",
 		keys = {
