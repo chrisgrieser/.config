@@ -11,6 +11,7 @@ local function getCommentstr()
 	end
 	return vim.bo.commentstring
 end
+
 --------------------------------------------------------------------------------
 
 -- appends a horizontal line, with the language's comment syntax,
@@ -18,8 +19,6 @@ end
 function M.commentHr()
 	local comStr = getCommentstr()
 	if not comStr then return end
-
-	local isOnBlank = vim.api.nvim_get_current_line() == ""
 	local startLn = vim.api.nvim_win_get_cursor(0)[1]
 
 	-- determine indent
@@ -40,13 +39,18 @@ function M.commentHr()
 	-- construct hr
 	local hrChar = comStr:find("%-") and "-" or "─"
 	local hr = hrChar:rep(hrLength)
-	local fullLine = indent .. comStr:format(hr)
-	if vim.bo.ft == "markdown" then fullLine = "---" end
+	local hrWithComment = comStr:format(hr)
+
+	-- filetype-specific padding
+	local formatterWantPadding = { "python", "css", "scss" }
+	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
+		hrWithComment = hrWithComment:gsub(" ", hrChar)
+	end
+	local fullLine = indent .. hrWithComment
 
 	-- append lines & move
-	local linesToAppend = isOnBlank and { fullLine, "" } or { "", fullLine, "" }
-	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, linesToAppend)
-	vim.api.nvim_win_set_cursor(0, { startLn + #linesToAppend - 1, #indent })
+	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine, "" })
+	vim.api.nvim_win_set_cursor(0, { startLn + 1, #indent })
 end
 
 function M.duplicateLineAsComment()
@@ -64,14 +68,6 @@ end
 -- simplified implementation of neogen.nvim
 -- (reason: lsp usually provides better prefills for docstrings)
 function M.docstring()
-	if not vim.cmd.TSTextobjectGotoPreviousStart then
-		vim.notify(
-			"nvim-treesitter-textobjects not installed.",
-			vim.log.levels.WARN,
-			{ title = "Docstring" }
-		)
-		return
-	end
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
 	local ft = vim.bo.filetype
