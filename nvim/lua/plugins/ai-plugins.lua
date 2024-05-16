@@ -6,14 +6,14 @@
 --------------------------------------------------------------------------------
 
 return {
-	{ -- lua alternative to the official codeium.vim plugin -- official: https://github.com/Exafunction/codeium.vim
+	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
 			filetypes = {
-				text = false, -- `pass` passwords are plaintext
 				DressingInput = false,
+				text = false, -- `pass` passwords are plaintext
 			},
 			silent = true,
 		},

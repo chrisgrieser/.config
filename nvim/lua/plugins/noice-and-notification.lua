@@ -129,7 +129,7 @@ return {
 				popup = {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
-					win_options = { scrolloff = 8, wrap = true },
+					win_options = { scrolloff = 8, wrap = true, concealcursor = "nv" },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},
 				split = {
@@ -156,7 +156,7 @@ return {
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
-				signature = { enabled = false }, 
+				signature = { enabled = false }, -- using lsp_signature.nvim instead
 
 				-- ENABLE features
 				override = {

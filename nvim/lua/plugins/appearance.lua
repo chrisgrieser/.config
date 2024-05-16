@@ -32,6 +32,7 @@ return {
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
+				marks = { enable = false }, -- do not create mark mappings
 				quickfix = { enable = true, signs = { "·", ":", "󰇙" } },
 			},
 		},
