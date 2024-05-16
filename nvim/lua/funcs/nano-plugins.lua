@@ -31,7 +31,7 @@ function M.openAlfredPref()
 	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
 	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowId .. ")"
 	vim.fn.system { "osascript", "-l", "JavaScript", "-e", jxa }
-	vim.fn.system { "open", uri }
+	vim.ui.open(uri)
 end
 
 --- open the next regex at https://regex101.com/

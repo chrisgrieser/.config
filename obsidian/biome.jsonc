@@ -3,7 +3,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 {
-	"extends": [ "../biome.jsonc" ],
+	"extends": ["../biome.jsonc"],
 
 	"javascript": {
 		"globals": [
@@ -21,7 +21,7 @@
 		]
 	},
 
-	"linter" : {
+	"linter": {
 		"rules": {
 			"correctness": { "noUnusedVariables": "off" }, // unused functions in vimrc jsfile
 			"suspicious": { "noDebugger": "off" } // intentional for freeze command

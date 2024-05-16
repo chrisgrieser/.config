@@ -13,12 +13,10 @@ keymap(
 	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
 )
 
-keymap(
-	"n",
-	"<leader>pd",
-	function() vim.fn.system { "open", vim.fn.stdpath("data") } end,
-	{ desc = " Package Dirs" }
-)
+keymap("n", "<leader>pd", function()
+	local pluginPath = vim.fn.stdpath("data") ---@cast pluginPath string
+	vim.fn.system { "open", pluginPath }
+end, { desc = " Package Dirs" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
@@ -152,17 +150,22 @@ keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 keymap("n", "<leader>ol", function()
 	u.notify("LSP", "Restarting…", "trace")
 	vim.cmd.LspRestart()
-end, { desc = "󰒕 LspRestart" })
+end, { desc = "󰒕 :LspRestart" })
+
+keymap("n", "<leader>oh", function()
+	local isEnabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
+	vim.lsp.inlay_hint.enable(not isEnabled, { bufnr = 0 })
+end, { desc = "󰒕 Inlay Hints" })
 
 keymap("n", "<leader>od", function()
-	local change = vim.diagnostic.is_disabled(0) and "enable" or "disable"
-	vim.diagnostic[change](0)
+	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
+	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = " Diagnostics" })
 
 keymap(
 	"n",
 	"<leader>oc",
-	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 1 or 0 end,
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
 
