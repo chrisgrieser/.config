@@ -3,7 +3,7 @@
 -- Add notification & writeall to renaming
 -- PENDING https://github.com/neovim/neovim/pull/26616
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
-vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config) ---@diagnostic disable-line: duplicate-set-field
+vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
 	if err or not result then return end
 
@@ -45,9 +45,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
--- change severity level
--- PENDING https://github.com/biomejs/biome/discussions/2242
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config) ---@diagnostic disable-line: duplicate-set-field
+local function changeSeverityToInfo(err, result, ctx, config)
 	result.diagnostics = vim.tbl_map(function(diag)
 		if
 			(diag.source == "biome" and diag.code == "lint/suspicious/noConsoleLog")
@@ -59,6 +57,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx,
 	end, result.diagnostics)
 	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
 end
+vim.lsp.handlers["textDocument/publishDiagnostics"] = changeSeverityToInfo
 
 ---@param diag vim.Diagnostic
 ---@return string displayedText
@@ -88,8 +87,8 @@ vim.diagnostic.config {
 		max_width = 70,
 		header = "",
 		prefix = function(_, _, total)
-			if total == 1 then return "", "" end
-			return "• ", "Comment"
+			local bullet = total > 1 and "• " or ""
+			return bullet, "Comment"
 		end,
 		suffix = function(diag) return addCodeAndSourceAsSuffix(diag), "Comment" end,
 	},
