@@ -1,5 +1,2 @@
 - `vim.fn.getregion()`
 - `vim.fs.root`
-- diagnostic config 
-	- icons
-	- inlay hint

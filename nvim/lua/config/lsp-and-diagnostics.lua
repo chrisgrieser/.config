@@ -31,6 +31,7 @@ end
 
 -- -----------------------------------------------------------------------------
 -- other lsp settings
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
@@ -59,59 +60,37 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx,
 	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
 end
 
--- Signs
-local diagnosticTypes = { Error = "", Warn = "▲", Info = "●", Hint = "" }
-for type, icon in pairs(diagnosticTypes) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 ---@param diag vim.Diagnostic
----@return string
-local function diagMsgFormat(diag)
-	local msg = diag.message
-	if diag.source == "typos" then
-		msg = msg:gsub("should be", "󰁔"):gsub("`", "")
-	elseif diag.source == "Lua Diagnostics." then
-		msg = msg:gsub("%.$", "")
-	end
-	return msg
-end
-
----@param diag vim.Diagnostic
----@param mode "virtual_text"|"float"
 ---@return string displayedText
----@return string? highlight_group
-local function diagSourceAsSuffix(diag, mode)
-	if not (diag.source or diag.code) then return "" end
-	local source = (diag.source or ""):gsub(" ?%.$", "") -- trailing dot for lua_ls
+local function addCodeAndSourceAsSuffix(diag)
+	local source = (diag.source or ""):gsub(" ?%.$", "") -- rm trailing dot for lua_ls
 	local rule = diag.code and ": " .. diag.code or ""
-
-	if mode == "virtual_text" then
-		return (" (%s%s)"):format(source, rule)
-	elseif mode == "float" then
-		return (" %s%s"):format(source, rule), "Comment"
-	end
-	return ""
+	return (" (%s%s)"):format(source, rule)
 end
 
 vim.diagnostic.config {
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "▲",
+			[vim.diagnostic.severity.INFO] = "●",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+	},
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
 		spacing = 1,
-		format = diagMsgFormat,
-		suffix = function(diag) return diagSourceAsSuffix(diag, "virtual_text") end,
+		suffix = addCodeAndSourceAsSuffix,
 	},
 	float = {
 		severity_sort = true,
 		border = vim.g.borderStyle,
 		max_width = 70,
-		header = false,
+		header = "",
 		prefix = function(_, _, total)
 			if total == 1 then return "", "" end
-			return "• ", "NonText"
+			return "• ", "Comment"
 		end,
-		format = diagMsgFormat,
-		suffix = function(diag) return diagSourceAsSuffix(diag, "float") end,
+		suffix = function(diag) return addCodeAndSourceAsSuffix(diag), "Comment" end,
 	},
 }
