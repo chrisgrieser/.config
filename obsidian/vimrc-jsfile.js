@@ -346,16 +346,3 @@ function consoleLogFromWordUnderCursor() {
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
-
-// useful for syntax highlighting
-function toggleDataviewAndJsCodeblock() {
-	const text = editor.getValue();
-	const hasDataviewJs = text.match(/^```dataviewjs$/m);
-	const newText = hasDataviewJs
-		? text.replace(/^```dataviewjs$/gm, "```js")
-		: text.replace(/^```js$/gm, "```dataviewjs");
-
-	const cursor = editor.getCursor();
-	editor.setValue(newText);
-	editor.setCursor(cursor); // since `setValue` moves the cursor
-}

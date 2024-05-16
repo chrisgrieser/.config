@@ -280,10 +280,6 @@ nnoremap ,W :saveWorkspace
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface
 
-" Toggle `dataviewjs` and `js` codeblocks
-exmap toggleDataviewAndJsCodeblock jsfile Meta/vimrc-jsfile.js { toggleDataviewAndJsCodeblock() }
-nnoremap ,v :toggleDataviewAndJsCodeblock
-
 " Critic Markup: accept all
 exmap acceptAll obcommand commentator:commentator-accept-all-suggestions
 nnoremap ,a :acceptAll
