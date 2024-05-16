@@ -79,6 +79,7 @@ rules:
         conditions:
           - type: frontmost_application_if
             file_paths: ["/Google Docs.app/"]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
       # sidebar
@@ -98,6 +99,17 @@ rules:
         from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
         to:
           - { key_code: d, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # cmd+shift+. -> goto dotfiles (`~/.config/`)
+      - type: basic
+        from: { key_code: period, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "Finder" 
+                  set dotfiles to (path to home folder as string) & ".config" 
+                  set target of front Finder window to dotfiles 
+                end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"

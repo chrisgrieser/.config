@@ -134,7 +134,29 @@ M.keys = {
 
 	-----------------------------------------------------------------------------
 
-	-- MODES
+	-- HINT MODE (= Quick Select) -- https://wezfurlong.org/wezterm/quickselect.html
+	{ key = "h", mods = "CMD", action = act.QuickSelect },
+
+	{ -- cmd+y -> copy f[u]ll line
+		key = "u",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = { "^.*[A-Za-z].*$" }, -- line with at least a letter
+			label = "Copy Full Line",
+		},
+	},
+	{ -- cmd+o -> copy [o]ption (e.g. from a man page)
+		key = "o",
+		mods = "CMD",
+		action = act.QuickSelectArgs {
+			patterns = { "--[\\w=-]+", "(?<= )-\\w" }, -- long option, short option
+			label = "Copy Shell Option",
+		},
+	},
+
+	-----------------------------------------------------------------------------
+
+	-- OTHER MODES
 	-- Search
 	{ key = "f", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 
@@ -142,19 +164,10 @@ M.keys = {
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
 	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "y", mods = "CMD", action = act.ActivateCopyMode },
+	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
 
-	-- Quick Select (= Hint Mode) -- https://wezfurlong.org/wezterm/quickselect.html
-	{ key = "u", mods = "CMD", action = act.QuickSelect },
+	-----------------------------------------------------------------------------
 
-	{ -- cmd+o -> copy [o]ption (e.g. from a man page)
-		key = "o",
-		mods = "CMD",
-		action = act.QuickSelectArgs {
-			patterns = { "--[\\w=-]+", "-\\w" }, -- long option, short option
-			label = "Copy Shell Option",
-		},
-	},
 	{ -- cmd+, -> open the config file
 		key = ",",
 		mods = "CMD",
