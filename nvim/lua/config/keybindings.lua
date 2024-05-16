@@ -148,8 +148,15 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 -- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
 keymap("n", "qq", "gcc", { desc = " Comment Line", remap = true })
-keymap({ "n", "x" }, "q", "gc", { desc = " Comment Operator", remap = true })
 keymap("o", "u", "gc", { desc = " Comment Text Object", remap = true })
+keymap("x", "q", "gc", { desc = " Comment Operator", remap = true })
+keymap(
+	"n",
+	"q",
+	-- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
+	function() return require("vim._comment").operator() end,
+	{ desc = " Comment Operator", expr = true }
+)
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
