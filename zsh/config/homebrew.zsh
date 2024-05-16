@@ -18,6 +18,14 @@ alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+function recent_updates() {
+	_print-section "Recently updated Formulae"
+	brew list -t --formulae | head -n5
+
+	_print-section "Recently updated Casks"
+	brew list -t --casks | head -n5
+}
+
 function _print-section() {
 	echo
 	print "\e[1;34m$1\e[0m"

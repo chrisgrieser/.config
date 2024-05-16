@@ -22,7 +22,6 @@ return {
 				show_exact_scope = true,
 			},
 			indent = { char = "│", tab_char = "│" },
-			exclude = { filetypes = { "undotree" } },
 		},
 	},
 	{ -- scrollbar with information
@@ -33,7 +32,7 @@ return {
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false }, -- do not create mark mappings
-				quickfix = { enable = true, signs = { "·", ":", "󰇙" } },
+				quickfix = { enable = true },
 			},
 		},
 	},

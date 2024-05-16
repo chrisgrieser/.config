@@ -26,7 +26,7 @@ require("lazy").setup("plugins", {
 		fallback = true,
 	},
 	-- colorschemes to use during installation
-	install = { colorscheme = { "tokyonight", "habamax" } },
+	install = { colorscheme = { "default" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
@@ -50,7 +50,7 @@ require("lazy").setup("plugins", {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
 			disabled_plugins = {
-				"rplugin", -- comment out for `:UpdateRemotePlugins` (e.g. magma.nvim)
+				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
 				"matchparen",
 				"matchit",
 				"netrwPlugin",
