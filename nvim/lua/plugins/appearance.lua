@@ -96,7 +96,7 @@ return {
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
 		keys = {
-			{ "g#", vim.cmd.CccPick, desc = " Color Picker" },
+			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
 		ft = { "css", "scss", "sh", "lua" },
 		config = function()

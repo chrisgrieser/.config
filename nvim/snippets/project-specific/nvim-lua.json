@@ -1,6 +1,6 @@
 {
   "@cast (LuaDoc)": {
-    "body": "---@cast ${1:var} ${2:type}",
+    "body": "---@cast ${1:varname} ${2:string}",
     "prefix": "@cast (LuaDoc)"
   },
   "autocmd": {
