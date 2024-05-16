@@ -1,7 +1,5 @@
 - `vim.fn.getregion()`
-- <https://github.com/monkoose/neocodeium>
 - `vim.fs.root`
-- inlay hints setup: <https://www.reddit.com/r/neovim/comments/16tmzkh/comment/k2gpy16/?context=3>
 - diagnostic config 
 	- icons
 	- inlay hint

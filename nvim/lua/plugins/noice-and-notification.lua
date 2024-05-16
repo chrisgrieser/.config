@@ -16,7 +16,7 @@ end
 local routes = {
 	{ -- REDIRECT TO POPUP
 		filter = {
-			min_height = 8,
+			min_height = 10,
 			["not"] = {
 				cond = function(msg)
 					local title = (msg.opts and msg.opts.title) or ""
@@ -156,7 +156,7 @@ return {
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
 				progress = { enabled = false }, -- replaced with nvim-dr-lsp, since less intrusive
-				signature = { enabled = false }, -- replaced with lsp_signature.nvim
+				signature = { enabled = false }, 
 
 				-- ENABLE features
 				override = {

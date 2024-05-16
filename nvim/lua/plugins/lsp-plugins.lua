@@ -58,7 +58,29 @@ return {
 			},
 		},
 	},
-	{ -- display inlay hints from at end of line
+	{ -- signature hints
+		"ray-x/lsp_signature.nvim",
+		event = "BufReadPre",
+		keys = {
+			{ -- better signature view
+				"<D-g>",
+				function() require("lsp_signature").toggle_float_win() end,
+				mode = { "i", "n", "v" },
+				desc = "󰏪 LSP Signature",
+			},
+		},
+		dependencies = "folke/noice.nvim",
+		opts = {
+			noice = true, -- render via noice.nvim
+			hint_prefix = "󰏪 ",
+			hint_scheme = "@variable.parameter", -- highlight group
+			floating_window = false,
+			always_trigger = true,
+			bind = true, -- This is mandatory, otherwise border config won't get registered.
+			handler_opts = { border = vim.g.borderStyle },
+		},
+	},
+	{ -- display inlay hints from at EoL, not in the text
 		"lvimuser/lsp-inlayhints.nvim",
 		init = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -74,7 +96,7 @@ return {
 			inlay_hints = {
 				labels_separator = "",
 				parameter_hints = {
-					prefix = " ?? ",
+					prefix = " 󰁍 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},

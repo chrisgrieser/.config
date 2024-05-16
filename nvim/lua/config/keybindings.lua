@@ -193,9 +193,6 @@ end, { desc = "correctly indented i", expr = true })
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 
--- LSP Signature
-keymap({ "n", "i", "x" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰒕 LSP Signature" })
-
 --------------------------------------------------------------------------------
 -- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
