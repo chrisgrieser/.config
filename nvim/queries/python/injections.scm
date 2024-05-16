@@ -1,4 +1,8 @@
 ;extends
+
+; SOURCE https://github.com/Dronakurl/injectme.nvim
+;───────────────────────────────────────────────────────────────────────────────
+
 ;rst_for_docstring
 ; (function_definition
 ;   (block
