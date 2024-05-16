@@ -21,3 +21,4 @@
 - <https://github.com/monkoose/neocodeium>
 - built-in comment support
 - `vim.fs.root`
+- https://gpanders.com/blog/whats-new-in-neovim-0.10/
