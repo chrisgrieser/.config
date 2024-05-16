@@ -52,14 +52,13 @@ local function filetypeSpecificEval()
 
 				local lines = table.concat(inputLines, "\n")
 				local shellCmd = repl .. ' "' .. lines:gsub('"', '\\"') .. '"'
-				local evaluatedOut = vim.system(shellCmd):gsub("\n$", "")
+				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
 				u.notify("Eval", evaluatedOut)
 				return originalLines -- do not modify original lines
 			end
 
 			-- DOCS https://github.com/echasnovski/mini.operators/blob/main/doc/mini-operators.txt#L214
 			local conf = { evaluate = { func = evalFunc } }
-			---@diagnostic disable-next-line: inject-field
 			vim.b.minioperators_config = vim.b.minioperators_config
 					and vim.tbl_deep_extend("force", conf, vim.b.minioperators_config)
 				or conf

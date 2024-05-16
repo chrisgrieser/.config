@@ -67,7 +67,7 @@ function M.openAtRegex101()
 		lang,
 		(replace and "&subst=" .. replace or "")
 	)
-	vim.system { "open", url }
+	vim.ui.open(url)
 end
 
 -- simple task selector from makefile
@@ -112,7 +112,6 @@ end
 -- Increment or toggle if cursorword is true/false. Simplified implementation
 -- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
 function M.toggleOrIncrement()
-	-- CONFIG
 	local bool = {
 		["true"] = "false",
 		["True"] = "False", -- python
@@ -135,7 +134,6 @@ function M.betterTilde()
 	local toggleSigns = {
 		["'"] = '"',
 		["+"] = "-",
-		["!"] = "=", -- for != and ==
 		["("] = ")",
 		["["] = "]",
 		["{"] = "}",
@@ -161,25 +159,28 @@ end
 local changedFileNotif
 function M.gotoChangedFiles()
 	local funcName = "Changed Files"
-	local currentFile = vim.api.nvim_buf_get_name(0)
-	local gitroot = vim.trim(vim.system { "git", "rev-parse", "--show-toplevel" })
-	local pwd = vim.uv.cwd() or ""
 
 	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
-	vim.system(
-		"git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &>/dev/null"
+	vim.fn.system(
+		"git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {}"
 	)
-	local numstat = vim.trim(vim.system { "git", "diff", "--numstat" })
+	local gitResponse = vim.system({ "git", "diff", "--numstat" }):wait()
+	local numstat = vim.trim(gitResponse.stdout)
 	local numstatLines = vim.split(numstat, "\n")
 
 	-- GUARD
-	if vim.v.shell_error ~= 0 then
+	if gitResponse.code ~= 0 then
 		notify(funcName, "Not in git repo", "warn")
 		return
 	elseif numstat == "" then
 		notify(funcName, "No changes found.", "info")
 		return
 	end
+
+	-- parameters
+	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
+	local pwd = vim.uv.cwd() or ""
+	local currentFile = vim.api.nvim_buf_get_name(0)
 
 	-- Changed Files, sorted by most changes
 	local changedFiles = {}
@@ -204,7 +205,7 @@ function M.gotoChangedFiles()
 
 	-- GUARD
 	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
-		notify(funcName, "Already at sole changed file in this working directory.", "info")
+		notify(funcName, "Already at only changed file.", "info")
 		return
 	end
 
@@ -223,10 +224,10 @@ function M.gotoChangedFiles()
 
 	-- Notification
 	if not package.loaded["notify"] then return end
-	local icon = "" -- CONFIG
+	local currentFileIcon = ""
 	local listOfChangedFiles = {}
 	for i = 1, #changedFiles do
-		local prefix = (i == nextFileIndex and icon or "·") .. " "
+		local prefix = (i == nextFileIndex and currentFileIcon or "·") .. " "
 		local path = changedFiles[i].relPath
 		table.insert(listOfChangedFiles, prefix .. path)
 	end
@@ -239,7 +240,10 @@ function M.gotoChangedFiles()
 		hide_from_history = changedFileNotif ~= nil, -- keep only first in history
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", icon .. ".*") end)
+			vim.api.nvim_buf_call(
+				bufnr,
+				function() vim.fn.matchadd("Title", currentFileIcon .. ".*") end
+			)
 		end,
 	})
 end
