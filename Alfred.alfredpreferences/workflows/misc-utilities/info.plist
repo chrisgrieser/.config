@@ -841,6 +841,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>bkp||backups</string>
+				<key>subtext</key>
+				<string>iCloud Drive/Dotfolder/Backups</string>
+				<key>text</key>
+				<string>Backups</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -856,42 +892,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>FDBFF042-F69F-40B2-81FA-362687A7835C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -928,9 +928,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>775</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>670</real>
 		</dict>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
@@ -1132,9 +1132,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>590</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>670</real>
 		</dict>
 		<key>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</key>
 		<dict>
