@@ -218,7 +218,7 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
-			-- INFO removing `noautocmd` results in weird cursor movement
+			-- `noautocmd` prevents weird cursor movement
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
 			b.saveQueued = false
 		end, debounce)
@@ -236,38 +236,26 @@ local autoCd = {
 		".project-root", -- manual marker file
 	},
 	parentOfRoot = {
-		".config", -- my dotfiles
+		".config", 
 		"com~apple~CloudDocs", -- iCloud
 	},
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
-		-- GUARD
 		local bufPath = ctx.file
-		local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
+		local specialBuffer = vim.api.nvim_get_option_value("buftype", { buf = ctx.buf }) ~= ""
 		local exists = vim.uv.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
-		-- 1. childOfRoot
-		local roots = {}
-		local childOfRoot = vim.fs.find(autoCd.childOfRoot, { upward = true, path = bufPath })[1]
-		if childOfRoot then table.insert(roots, vim.fs.dirname(childOfRoot)) end
+		local root = vim.fs.root(0, function (name, path)
+			local dirHasChildMarker = vim.tbl_contains(autoCd.childOfRoot, name)
+			local parentName = vim.fs.basename(vim.fs.dirname(path))
+			local dirHasParentMarker = vim.tbl_contains(autoCd.parentOfRoot, parentName)
+			return dirHasChildMarker or dirHasParentMarker
+		end)
 
-		-- 2. parentOfRoot
-		for dir in vim.fs.parents(bufPath) do
-			local parent = vim.fs.dirname(dir)
-			local isParentOfRoot = vim.tbl_contains(autoCd.parentOfRoot, vim.fs.basename(parent))
-			if isParentOfRoot then
-				table.insert(roots, dir)
-				break
-			end
-		end
-
-		-- get deepest of all matches
-		table.sort(roots, function(a, b) return #a > #b end)
-
-		if #roots > 0 and vim.uv.cwd() ~= roots[1] then vim.uv.chdir(roots[1]) end
+		if root then vim.uv.chdir(root) end
 	end,
 })
 
@@ -275,32 +263,25 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- AUTO-CLOSE BUFFERS whose files do not exist anymore
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
-	-- INFO also trigger on `QuickFixCmdPost`, in case a make command deletes file
+	-- INFO also trigger on `QuickFixCmdPost`, in case a `make` command deletes file
 	callback = function(ctx)
 		local bufnr = ctx.buf
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
-
 			local function fileExists(bufpath) return vim.uv.fs_stat(bufpath) ~= nil end
 
 			-- check if buffer was deleted
-			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			local bufPath = ctx.file
 			local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
-			local isNewBuffer = bufname == ""
-			-- prevent the temporary buffers from conform.nvim's "injected"
-			-- formatter to be closed by this (filename is like "README.md.5.lua")
-			local conformTempBuf = bufname:find("%.md%.%d+%.%l+$")
-			if fileExists(bufname) or isSpecialBuffer or isNewBuffer or conformTempBuf then return end
+			local isNewBuffer = bufPath == ""
+			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
+			if fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then return end
 
 			-- open last existing oldfile
-			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufname)))
+			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufPath)))
 			for _, oldfile in pairs(vim.v.oldfiles) do
-				if fileExists(oldfile) then
-					-- vim.cmd.edit can still fail, as the fileExistence check
-					-- apparently sometimes uses a cache, where the file still exists
-					local success = pcall(vim.cmd.edit, oldfile)
-					if success then return end
-				end
+				local success = pcall(vim.cmd.edit, oldfile)
+				if success then return end
 			end
 		end, 300)
 	end,
@@ -356,7 +337,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- GUARD
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 			local fileStats = vim.uv.fs_stat(ctx.file)
-			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
+			local specialBuffer = vim.api.nvim_get_option_value("buftype", { buf = ctx.buf }) ~= ""
 			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
 			if specialBuffer or terminalBufEditedInNvim or not fileStats then return end
 
