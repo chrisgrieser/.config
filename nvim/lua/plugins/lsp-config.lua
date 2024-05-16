@@ -1,6 +1,10 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- DOCS List of all server configs https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+
+--------------------------------------------------------------------------------
+
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
@@ -69,7 +73,7 @@ serverConfigs.efm = {
 	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
 }
 
- -- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+-- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 local efmDependencies = { "shellcheck" }
 
 --------------------------------------------------------------------------------
@@ -150,7 +154,6 @@ serverConfigs.stylelint_lsp = {
 	},
 }
 
-
 -- DOCS https://github.com/olrtg/emmet-language-server#neovim
 serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
@@ -225,6 +228,7 @@ serverConfigs.yamlls = {
 				proseWrap = "always",
 			},
 		},
+		redhat = { telemetry = { enabled = false } },
 	},
 	-- SIC needs enabling via setting *and* via capabilities to work.
 	-- Probably fixed with nvim 0.10 supporting dynamic config changes

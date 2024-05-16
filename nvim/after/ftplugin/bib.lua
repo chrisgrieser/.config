@@ -26,12 +26,10 @@ end, { buffer = true })
 ---checks a .bib file for duplicate citekeys and reports them via `vim.notify`
 ---when any are found. Does nothing, if there are no duplicate citekeys.
 ---@param bufnr? number when not provided, uses the current buffer
-local function checkForDuplicateCitekeys(bufnr)
-	if not bufnr then bufnr = 0 end
-
+local function checkForDuplicateCitekeys()
 	local duplCitekeys = ""
 	local citekeyCount = {}
-	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
 
 	for _, line in pairs(lines) do
 		local citekey = line:match("^@.-{(.*),")
