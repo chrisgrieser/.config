@@ -210,6 +210,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<array>
 			<dict>
@@ -849,6 +862,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>library</string>
+				<key>subtext</key>
+				<string>~/Library/</string>
+				<key>text</key>
+				<string>Library</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -874,6 +923,15 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>03667EF4-50FD-408A-9399-0D917C10A799</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>755</real>
+			<key>ypos</key>
+			<real>750</real>
+		</dict>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
 			<key>colorindex</key>
@@ -1068,6 +1126,15 @@
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>750</real>
 		</dict>
 		<key>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</key>
 		<dict>

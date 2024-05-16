@@ -6,6 +6,9 @@ return {
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",
 		opts = true,
+		keys = {
+			{ "<leader>of", function() vim.opt.scrolloff = 13 end, desc = "⇓ Fix Scrolloff" },
+		},
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
