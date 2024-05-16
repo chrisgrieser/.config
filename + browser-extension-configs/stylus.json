@@ -1,13 +1,13 @@
 [
   {
     "settings": {
-      "openEditInWindow": true,
+      "openEditInWindow": false,
       "openEditInWindow.popup": true,
       "windowPosition": {
-        "height": 1080,
-        "left": 959,
-        "top": 0,
-        "width": 961
+        "left": 0,
+        "top": 540,
+        "width": 1920,
+        "height": 540
       },
       "show-badge": false,
       "disableAll": false,
@@ -162,7 +162,7 @@
           "type": "checkbox",
           "label": "DarkMode for MAL",
           "name": "DarkMode",
-          "value": null,
+          "value": "0",
           "default": "1",
           "options": null
         },
@@ -182,7 +182,7 @@
     "updateUrl": "https://userstyles.world/api/style/7708.user.css",
     "originalDigest": "b2f1cd303845ac78cc565b2f213705fee5803769",
     "_id": "505200d3-1efb-4162-8b22-3d10d98ca267",
-    "_rev": 1714596392398,
+    "_rev": 1714991494082,
     "url": "https://userstyles.world/style/7708",
     "installationUrl": "https://userstyles.world/style/7708",
     "id": 5
@@ -206,31 +206,19 @@
   },
   {
     "enabled": true,
-    "installDate": 1714847458902,
+    "installDate": 1715886543722,
+    "name": "neovim.io - May 2024",
     "sections": [
       {
-        "code": ""
+        "code": "@media (min-width: 40em) {\n   .toc {\n      left: 75%;\n   }\n   .golden-grid {\n      grid-template-columns: 70% auto;\n   }\n}",
+        "urlPrefixes": [
+          "https://neovim.io/doc/"
+        ]
       }
     ],
-    "sourceCode": "/* ==UserStyle==\n@name         Hacker News - Simpel\n@namespace    USO Archive\n@author       Ronsen\n@description  Narrow and readable Hacker News.\n@version      20240113.06.18\n@license      NONE\n@preprocessor uso\n==/UserStyle== */\n@-moz-document url-prefix(\"https://news.ycombinator.com\") {\nbody {\n\t  max-width: 700px;\n\t  margin: 0 auto;\n\t  background-color: #333;\n\t}\n\n\ttd {\n\t  padding: 2px;\n\t  line-height: 1.4em;\n\t}\n\n\ttd.title {\n\t  font-size: 11pt;\n\t}\n\n\t.subtext {\n\t  font-size: 10pt;\n\t}\n\n\t.comment {\n\t  font-size: 11pt;\n  }\n  \n  pre {\n  \tfont-size: 10pt;\n  }\n  \n  \n\n\n\n  .toptext {\n  \tfont-size: 11pt;\n  \tcolor: #000;\n\t}\n\n.comhead {\n  \t  font-size: 10pt;\n  }\n}\n",
-    "updateUrl": "https://cdn.jsdelivr.net/gh/uso-archive/data@flomaster/data/usercss/272122.user.css",
-    "usercssData": {
-      "name": "Hacker News - Simpel",
-      "namespace": "USO Archive",
-      "author": "Ronsen",
-      "description": "Narrow and readable Hacker News.",
-      "version": "20240113.06.18",
-      "license": "NONE",
-      "preprocessor": "uso"
-    },
-    "author": "Ronsen",
-    "description": "Narrow and readable Hacker News.",
-    "name": "Hacker News - Simpel",
-    "originalDigest": "0f3b902e8d8bf500d0c3f837b27887911181ff40",
-    "_id": "923e676e-8a7f-4687-b6c8-5ad6bdb23c92",
-    "_rev": 1714847526390,
-    "url": "https://uso.kkx.one/style/272122",
-    "installationUrl": "https://uso.kkx.one/style/272122",
-    "id": 19
+    "updateDate": 1715886543723,
+    "_id": "2b70ca47-efc9-4e69-9653-e0fd996c7fd9",
+    "_rev": 1715886543723,
+    "id": 21
   }
 ]
