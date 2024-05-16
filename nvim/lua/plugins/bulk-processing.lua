@@ -11,7 +11,7 @@ return {
 		opts = {
 			extraRgArgs = "", -- for example to always display context lines around matches
 			keymaps = {
-				replace = "<D-enter>",
+				replace = "<Enter>",
 				qflist = "<D-s>",
 				close = "q",
 			},

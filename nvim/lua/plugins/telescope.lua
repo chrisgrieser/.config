@@ -1,6 +1,6 @@
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
-local function projectName() return vim.fs.basename(vim.loop.cwd() or "") end
+local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
 
 local keymappings_I = {
@@ -39,7 +39,7 @@ local keymappings_I = {
 		function(prompt_bufnr)
 			local path = require("telescope.actions.state").get_selected_entry().value
 			require("telescope.actions").close(prompt_bufnr)
-			vim.fn.system { "open", "-R", path }
+			vim.system { "open", "-R", path }
 		end,
 		type = "action",
 		opts = { desc = "󰀶 Reveal File" },
@@ -47,7 +47,7 @@ local keymappings_I = {
 	["<C-p>"] = {
 		function(prompt_bufnr)
 			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-			local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 			local relPath = require("telescope.actions.state").get_selected_entry().value
 			local fullpath = cwd .. "/" .. relPath
 			require("telescope.actions").close(prompt_bufnr)
@@ -101,7 +101,7 @@ local togglePreviewAction = {
 local toggleHiddenAction = {
 	function(prompt_bufnr)
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = tostring(current_picker.cwd or vim.loop.cwd()) -- cwd only set if passed as opt
+		local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
 		-- hidden status not stored, but title is, so we determine the previous state via title
 		local prevTitle = current_picker.prompt_title
@@ -502,7 +502,7 @@ return {
 					local scorer = require("telescope").extensions["fzf"].native_fzf_sorter()
 					local mySorter = {}
 					setmetatable(mySorter, { __index = scorer })
-					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.loop.cwd() + 2)
+					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2)
 
 					---@param prompt string
 					---@param relPath string the ordinal from telescope
@@ -514,7 +514,7 @@ return {
 						if relPath == curBufRelPath then return 1 end
 
 						-- prioritze recently modified
-						local stat = vim.loop.fs_stat(relPath)
+						local stat = vim.uv.fs_stat(relPath)
 						if not stat then return 1 end
 						local now = os.time()
 						local ageYears = (now - stat.mtime.sec) / 60 / 60 / 24 / 365
@@ -573,7 +573,7 @@ return {
 					local builtins = {
 						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
 						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
-						"elflord", "desert", "delek", "default", "darkblue", "blue", "morning",
+						"elflord", "desert", "delek", "darkblue", "blue", "morning",
 					}
 					local original = vim.fn.getcompletion
 

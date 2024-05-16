@@ -33,10 +33,10 @@ return {
 			-- symlink to enable syncing of API key
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
 			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
-			local fileExists = vim.loop.fs_stat(symLinkTo) ~= nil
+			local fileExists = vim.uv.fs_stat(symLinkTo) ~= nil
 			if not fileExists then
 				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
-				vim.loop.fs_symlink(symLinkFrom, symLinkTo)
+				vim.uv.fs_symlink(symLinkFrom, symLinkTo)
 			end
 
 			-- FIX accumulated leftover binaries https://github.com/Exafunction/codeium.vim/issues/200

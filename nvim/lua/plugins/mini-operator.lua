@@ -52,7 +52,7 @@ local function filetypeSpecificEval()
 
 				local lines = table.concat(inputLines, "\n")
 				local shellCmd = repl .. ' "' .. lines:gsub('"', '\\"') .. '"'
-				local evaluatedOut = vim.fn.system(shellCmd):gsub("\n$", "")
+				local evaluatedOut = vim.system(shellCmd):gsub("\n$", "")
 				u.notify("Eval", evaluatedOut)
 				return originalLines -- do not modify original lines
 			end
@@ -80,7 +80,7 @@ local function luaEval(content)
 		local lines = table.concat(content.lines, "\n"):gsub('"', '\\"')
 		-- stylua: ignore
 		local hsApplescript = ('tell application "Hammerspoon" to execute lua code "hs.alert(hs.inspect(%s))"'):format(lines)
-		vim.fn.system { "osascript", "-e", hsApplescript }
+		vim.system { "osascript", "-e", hsApplescript }
 	else
 		local output = MiniOperators.default_evaluate_func(content)
 		u.notify("Eval", table.concat(output, "\n"))

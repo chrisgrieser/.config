@@ -58,6 +58,33 @@ return {
 			},
 		},
 	},
+	{ -- display inlay hints from at end of line
+		"lvimuser/lsp-inlayhints.nvim",
+		init = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					if not (args.data and args.data.client_id) then return end
+					local bufnr = args.buf
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					require("lsp-inlayhints").on_attach(client, bufnr)
+				end,
+			})
+		end,
+		opts = {
+			inlay_hints = {
+				labels_separator = "",
+				parameter_hints = {
+					prefix = " ?? ",
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+				type_hints = {
+					remove_colon_start = true,
+					remove_colon_end = true,
+				},
+			},
+		},
+	},
 	{ -- CodeLens, but also for languages not supporting it
 		"Wansmer/symbol-usage.nvim",
 		event = "LspAttach",
@@ -99,28 +126,6 @@ return {
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
 			})
 		end,
-	},
-	{ -- signature hints
-		"ray-x/lsp_signature.nvim",
-		event = "BufReadPre",
-		keys = {
-			{ -- better signature view
-				"<D-g>",
-				function() require("lsp_signature").toggle_float_win() end,
-				mode = { "i", "n", "v" },
-				desc = "󰏪 LSP Signature",
-			},
-		},
-		dependencies = "folke/noice.nvim",
-		opts = {
-			noice = true, -- render via noice.nvim
-			hint_prefix = "󰏪 ",
-			hint_scheme = "@variable.parameter", -- highlight group
-			floating_window = false,
-			always_trigger = true,
-			bind = true, -- This is mandatory, otherwise border config won't get registered.
-			handler_opts = { border = vim.g.borderStyle },
-		},
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",

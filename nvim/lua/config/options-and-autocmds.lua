@@ -91,8 +91,8 @@ autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") == "Mon" then
-			vim.fn.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
-			vim.fn.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
+			vim.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+			vim.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
 		end
 	end,
 })
@@ -246,7 +246,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		-- GUARD
 		local bufPath = ctx.file
 		local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
-		local exists = vim.loop.fs_stat(bufPath) ~= nil
+		local exists = vim.uv.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
 		-- 1. childOfRoot
@@ -267,7 +267,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		-- get deepest of all matches
 		table.sort(roots, function(a, b) return #a > #b end)
 
-		if #roots > 0 and vim.loop.cwd() ~= roots[1] then vim.loop.chdir(roots[1]) end
+		if #roots > 0 and vim.uv.cwd() ~= roots[1] then vim.uv.chdir(roots[1]) end
 	end,
 })
 
@@ -281,7 +281,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 
-			local function fileExists(bufpath) return vim.loop.fs_stat(bufpath) ~= nil end
+			local function fileExists(bufpath) return vim.uv.fs_stat(bufpath) ~= nil end
 
 			-- check if buffer was deleted
 			local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -355,7 +355,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.defer_fn(function()
 			-- GUARD
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local fileStats = vim.loop.fs_stat(ctx.file)
+			local fileStats = vim.uv.fs_stat(ctx.file)
 			local specialBuffer = vim.api.nvim_buf_get_option(ctx.buf, "buftype") ~= ""
 			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
 			if specialBuffer or terminalBufEditedInNvim or not fileStats then return end
@@ -363,7 +363,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			local ft = ctx.match
 			local ext = skeletons[ft]
 			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-			local noSkeleton = vim.loop.fs_stat(skeletonFile) == nil
+			local noSkeleton = vim.uv.fs_stat(skeletonFile) == nil
 			if noSkeleton then
 				u.notify("Skeleton", "Skeleton file not found.", "error")
 				return

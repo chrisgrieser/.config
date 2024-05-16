@@ -12,8 +12,8 @@ vim.opt_local.formatoptions:append("r") -- `<CR>` in insert mode
 
 -- set virtual environment for other plugins to use, if it exists
 vim.defer_fn(function()
-	local venv = (vim.loop.cwd() or "") .. "/.venv"
-	if vim.loop.fs_stat(venv) then vim.env.VIRTUAL_ENV = venv end
+	local venv = (vim.uv.cwd() or "") .. "/.venv"
+	if vim.uv.fs_stat(venv) then vim.env.VIRTUAL_ENV = venv end
 end, 1)
 
 --------------------------------------------------------------------------------

@@ -233,7 +233,7 @@ return {
 					if foundURL then
 						u.normal('"zy')
 						local url = vim.fn.getreg("z")
-						vim.fn.system { "open", url }
+						vim.ui.open(url)
 					end
 				end,
 				desc = "󰌹 Smart URL Opener",

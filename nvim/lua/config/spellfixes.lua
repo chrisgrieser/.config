@@ -62,5 +62,5 @@ local spellfixes = {
 }
 
 for wrong, correct in pairs(spellfixes) do
-	vim.cmd.inoreabbrev(wrong .. " " .. correct)
+	vim.keymap.set("ia", wrong, correct)
 end

@@ -148,7 +148,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 -- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
 keymap("n", "qq", "gcc", { desc = " Comment Line", remap = true })
-keymap({ "n", "x" }, "q", "gc", { desc = " Comment Operator", remap = true })
+keymap({ "n", "x" }, "q", "gc", { desc = " Comment Operator", noremap = true })
 keymap("o", "u", "gc", { desc = " Comment Text Object", remap = true })
 
 -- stylua: ignore start
@@ -192,6 +192,9 @@ end, { desc = "correctly indented i", expr = true })
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
+
+-- LSP Signature
+keymap({ "n", "i", "x" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰒕 LSP Signature" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS

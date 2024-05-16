@@ -199,14 +199,6 @@ serverConfigs.tsserver = {
 }
 serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
 
--- SIC needs to be enabled this way, can be removed with nvim 0.10 support for dynamic config
-serverConfigs.biome = {
-	on_attach = function(client)
-		client.server_capabilities.documentFormattingProvider = true
-		client.server_capabilities.documentRangeFormattingProvider = true
-	end,
-}
-
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
@@ -228,11 +220,7 @@ serverConfigs.yamlls = {
 				proseWrap = "always",
 			},
 		},
-		redhat = { telemetry = { enabled = false } },
 	},
-	-- SIC needs enabling via setting *and* via capabilities to work.
-	-- Probably fixed with nvim 0.10 supporting dynamic config changes
-	on_attach = function(client) client.server_capabilities.documentFormattingProvider = true end,
 }
 
 --------------------------------------------------------------------------------
@@ -241,7 +229,7 @@ serverConfigs.yamlls = {
 -- HACK since reading external file with the method described in ltex-docs does not work
 local function getDictWords()
 	local dictfile = vim.g.dictionaryPath
-	local fileDoesNotExist = vim.loop.fs_stat(dictfile) == nil
+	local fileDoesNotExist = vim.uv.fs_stat(dictfile) == nil
 	if fileDoesNotExist then return {} end
 	local words = {}
 	for word in io.lines(dictfile) do

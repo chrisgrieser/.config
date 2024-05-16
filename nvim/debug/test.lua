@@ -1,4 +1,4 @@
-local out = vim.fn.system("echo foobar")
+local out = vim.system("echo foobar")
 vim.notify("⭕ out: " .. tostring(out))
 
 

@@ -14,9 +14,7 @@ function M.notify(title, msg, level)
 end
 
 function M.ftAbbr(lhs, rhs)
-	-- TODO update on nvim 0.10
-	-- vim.keymap.set("ia", lhs, rhs, { buffer = true })
-	vim.cmd.inoreabbrev(("<buffer> %s %s"):format(lhs, rhs))
+	vim.keymap.set("ia", lhs, rhs, { buffer = true })
 end
 
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
@@ -45,12 +43,10 @@ function M.colorschemeMod(hlgroup, modification)
 	})
 end
 
----@alias vimMode "n"|"v"|"x"|"i"|"o"|"c"|"t"
-
 ---set up subkey for the <leader> key (if whichkey is loaded)
 ---@param key string
 ---@param label string
----@param modes? vimMode|vimMode[]
+---@param modes string|string[]
 function M.leaderSubkey(key, label, modes)
 	vim.defer_fn(function()
 		local ok, whichkey = pcall(require, "which-key")
@@ -86,7 +82,7 @@ function M.addToLuaLine(whichBar, whichSection, component, whereInSection)
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
----@param modes vimMode|vimMode[]
+---@param modes string|string[]
 ---@param lhs string
 ---@param rhs string|function
 ---@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean }
