@@ -56,7 +56,7 @@ keymap("n", "<D-r>", function()
 	-- create github-html via pandoc
 	vim.cmd("silent! update")
 	local input = vim.api.nvim_buf_get_name(0)
-	vim.system ({
+	vim.system({
 		"pandoc",
 		-- rebasing paths, so images are available at output location
 		"--from=gfm+rebase_relative_paths",

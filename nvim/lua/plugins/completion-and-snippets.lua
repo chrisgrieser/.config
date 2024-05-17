@@ -30,13 +30,11 @@ local defaultSources = {
 		max_item_count = 4, -- since searching all buffers results in many results
 	},
 	{ name = "path" },
-	{ name = "emoji" },
 }
 
 local sourceIcons = {
 	buffer = "󰽙",
 	cmdline = "󰘳",
-	emoji = "󰞅",
 	luasnip = "",
 	nvim_lsp = "󰒕",
 	path = "",
@@ -181,7 +179,6 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
 			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine

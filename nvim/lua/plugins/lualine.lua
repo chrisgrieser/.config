@@ -1,4 +1,5 @@
 local bo = vim.bo
+local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local function irregularWhitespace()
@@ -64,7 +65,7 @@ local lualineConfig = {
 			{ -- recording status
 				function() return ("󰻂 Recording to [%s]…"):format(vim.fn.reg_recording()) end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = "Error", -- for the Red, not as it's an actual error
+				color = function() return { fg = u.getHighlightValue("Error", "fg") } end,
 			},
 		},
 	},

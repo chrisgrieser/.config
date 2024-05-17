@@ -15,7 +15,7 @@ keymap(
 
 keymap("n", "<leader>pd", function()
 	local pluginPath = vim.fn.stdpath("data") ---@cast pluginPath string
-	vim.system { "open", pluginPath }
+	vim.ui.open(pluginPath)
 end, { desc = " Package Dirs" })
 
 --------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ keymap(
 
 -- save open time for each buffer
 autocmd("BufReadPost", {
-	callback = function() vim.b["timeOpened"] = os.time() end,
+	callback = function() vim.b.timeOpened = os.time() end,
 })
 
 keymap("n", "<leader>uo", function()
