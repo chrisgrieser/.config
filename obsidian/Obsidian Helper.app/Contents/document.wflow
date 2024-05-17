@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>521.1</string>
+	<string>523</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -54,7 +54,7 @@
 					<string>//──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovide Helper";
+const markdownApp = "Neovide";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -66,7 +66,6 @@ const markdownApp = "Neovide Helper";
 /** based on https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
  * @param {PathObject[]} argv input for automator is an array of macOS path objects.
  */
-// rome-ignore lint/correctness/noUnusedVariables: run
 function run(argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
@@ -89,7 +88,9 @@ function run(argv) {
 
 	// CONDITIONS FOR DECIDING WHERE TO OPEN
 	const firstFile = pathArray[0];
-	const isFileInObsidianVault = Object.values(vaults).some((vault) =&gt; firstFile.startsWith(vault.path));
+	const isFileInObsidianVault = Object.values(vaults).some((vault) =&gt;
+		firstFile.startsWith(vault.path),
+	);
 	const obsidianIsFrontmost = Application("Obsidian").frontmost();
 	const isInHiddenFolder = firstFile.includes("/.");
 
@@ -111,8 +112,7 @@ function run(argv) {
 		const quotedPathArray = `'${pathArray.join("' '")}'`;
 		app.doShellScript(`open -a '${markdownApp}' ${quotedPathArray}`);
 	}
-}
-</string>
+}</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunJavaScript</string>
