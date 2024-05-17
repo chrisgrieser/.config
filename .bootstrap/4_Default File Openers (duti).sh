@@ -39,7 +39,7 @@ duti -s "$videoplayerID" mkv all
 duti -s "$videoplayerID" m4a all
 
 # code
-editorID="com.apple.automator.Neovide-Helper"
+editorID="com.neovide.neovide"
 duti -s "$editorID" json all
 duti -s "$editorID" jsonc all
 duti -s "$editorID" pyi all

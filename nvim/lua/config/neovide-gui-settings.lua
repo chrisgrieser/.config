@@ -9,43 +9,26 @@ local isAtMother = host:find("Mother")
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
-local fontSize
 if isAtMother then
-	fontSize = 22.3
 	g.neovide_padding_top = 4
 	g.neovide_padding_left = 6
 elseif isAtOffice then
-	fontSize = 25.5
 	g.neovide_padding_top = 0
 	g.neovide_padding_left = 4
 else
-	fontSize = 24.5
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end
 
-vim.opt.linespace = -2 -- less line height
-local font = "JetBrainsMonoNL NF"
-vim.opt.guifont = font .. ":h" .. fontSize
-
---------------------------------------------------------------------------------
-
 -- CMD & ALT Keys
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-
--- false, so {@~ etc can be used (<M-CR> still works though)
-g.neovide_input_macos_alt_is_meta = false
+g.neovide_input_macos_option_key_is_meta = "both" -- so `{@~` etc. can be used
 
 -- Appearance
 g.neovide_remember_window_size = true
 g.neovide_transparency = 0.91
 g.neovide_refresh_rate = isAtMother and 30 or 50
-
--- These have no effect with multi-grid turned off, and multi-grid has problems
--- with satellite.nvim currently.
--- g.neovide_scroll_animation_length = 0.03 -- amount of smooth scrolling
--- g.neovide_floating_shadow = true
--- g.neovide_floating_z_height = 20 -- amount of shadow
+vim.opt.linespace = -2 -- less line height
 
 --------------------------------------------------------------------------------
 -- CURSOR

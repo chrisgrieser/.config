@@ -23,24 +23,3 @@ if [[ "$FRONT_APP" != "neovide" ]]; then
 	open -a "$FRONT_APP"
 	return
 fi
-
-#───────────────────────────────────────────────────────────────────────────────
-# SPECIAL RESTART FOR NEOVIDE
-
-# kill
-nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
-
-# wait until dead
-i=0
-while pgrep -xq "neovide" || pgrep -xq "nvim"; do
-	sleep 0.1
-	i=$((i + 1))
-	if [[ $i -eq 15 ]]; then
-		echo -n "Could not quit neovide." # Alfred notification
-		return 1
-	fi
-done
-
-# Restart
-sleep 0.1
-open -a "Neovide Helper" # via helper ensures `--title-hidden`
