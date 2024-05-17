@@ -91,14 +91,5 @@ return {
 			dapSharedKeymaps = true,
 			performanceOpts = { countThreshold = 101 },
 		},
-		config = function(_, opts)
-			require("recorder").setup(opts)
-			u.addToLuaLine(
-				"tabline",
-				"lualine_z",
-				{ require("recorder").recordingStatus, color = "Error" }
-			)
-			u.addToLuaLine("sections", "lualine_y", require("recorder").displaySlots)
-		end,
 	},
 }
