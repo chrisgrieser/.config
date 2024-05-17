@@ -57,8 +57,8 @@ local function customHighlights()
 	-- de-emphasize commit messages between 50 and 72 chars
 	linkHl("@comment.warning.gitcommit", "WarningMsg")
 
-	-- injections as code blocks
-	linkHl("@injection.content", "CursorColumn")
+	-- injections as code blocks (for yaml injections)
+	-- linkHl("@yaml-injection", "ColorColumn")
 
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =
