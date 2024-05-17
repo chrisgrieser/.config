@@ -62,7 +62,7 @@ local lualineConfig = {
 		},
 		lualine_y = {
 			{ -- recording status
-				function() return "󰻂 Recording to " .. vim.fn.reg_recording() .. "…" end,
+				function() return ("󰻂 Recording to [%s]…"):format(vim.fn.reg_recording()) end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 				color = "Error", -- for the Red, not as it's an actual error
 			},

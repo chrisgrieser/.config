@@ -46,13 +46,13 @@ rules:
           - { key_code: "n", modifiers: [control, command] }
           - { key_code: "3", modifiers: [control, command] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+              "$HOME/.config/karabiner/assets/complex_modifications/assets/highlights-notificator" \
                   --title "Highlights" --message "Comment ✏️"
         to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+              "$HOME/.config/karabiner/assets/complex_modifications/assets/highlights-notificator" \
                   --title "Highlights" --message "Underline 🖍️"
         conditions:
           - type: frontmost_application_if
@@ -87,7 +87,7 @@ rules:
           - { key_code: h, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
-              "$HOME/.config/karabiner/assets/complex_modifications/highlights-notificator" \
+              "$HOME/.config/karabiner/assets/complex_modifications/assets/highlights-notificator" \
                   --title "Highlights" --message "Highlight 🟨"
         to_if_held_down:
           - shell_command:

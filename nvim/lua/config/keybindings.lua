@@ -258,6 +258,27 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
+-- MACROS
+-- 1. start/stop with just one keypress
+-- 2. add notification of recorded macro
+local register = "r"
+local key = "0"
+keymap("n", key, function()
+	local isRecording = vim.fn.reg_recording() ~= ""
+	if isRecording then
+		u.normal("q")
+		local recording = vim.fn.getreg(register):gsub(key .. "$", "")
+		vim.fn.setreg(register, recording) -- as the key itself is recorded
+		u.notify("Recorded", vim.fn.keytrans(recording), "trace")
+	else
+		u.normal("q" .. register)
+	end
+end, { desc = "󰕧 Start/Stop Recording" })
+
+vim.fn.setreg(register, "") -- start with empty register, to avoid accidents
+keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
+
+--------------------------------------------------------------------------------
 -- CLIPBOARD
 
 -- sticky yank operations
@@ -302,7 +323,7 @@ keymap("x", "p", "P")
 
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(fn.getreg("+"))
-	fn.setreg("+", regContent, "v") 
+	fn.setreg("+", regContent, "v")
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
