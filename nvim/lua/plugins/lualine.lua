@@ -59,11 +59,6 @@ local lualineConfig = {
 				function() return " " end,
 				padding = { left = 0, right = 0 },
 			},
-			{ -- using lualine's tab display, cause it looks better than vim's
-				"tabs",
-				mode = 1,
-				cond = function() return vim.fn.tabpagenr("$") > 1 end,
-			},
 		},
 	},
 	sections = {

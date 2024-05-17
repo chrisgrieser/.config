@@ -236,7 +236,7 @@ local autoCd = {
 		".project-root", -- manual marker file
 	},
 	parentOfRoot = {
-		".config", 
+		".config",
 		"com~apple~CloudDocs", -- iCloud
 	},
 }
@@ -248,7 +248,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local exists = vim.uv.fs_stat(bufPath) ~= nil
 		if specialBuffer or not exists then return end
 
-		local root = vim.fs.root(0, function (name, path)
+		local root = vim.fs.root(0, function(name, path)
 			local dirHasChildMarker = vim.tbl_contains(autoCd.childOfRoot, name)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCd.parentOfRoot, parentName)
@@ -275,7 +275,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 			local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
 			local isNewBuffer = bufPath == ""
 			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
-			if fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then return end
+			if fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
+				return
+			end
 
 			-- open last existing oldfile
 			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufPath)))

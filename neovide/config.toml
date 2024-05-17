@@ -1,8 +1,10 @@
 # DOCS https://neovide.dev/config-file.html#available-settings
 
 frame = "buttonless"
-no-multigrid = false # FIX transparency issues for scrollbar
-
-# BUG these are not in effect, thus setting them in `Neovide_Helper`
+no-multigrid = true
 title-hidden = true
-tabs = false
+tabs = false # BUG not in effect, thus setting them in `Neovide_Helper`
+
+[font]
+normal = ["JetBrainsMonoNL NF"]
+size = 24.5

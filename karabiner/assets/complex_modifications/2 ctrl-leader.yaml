@@ -183,14 +183,7 @@ rules:
         from: { key_code: "n" }
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              if pgrep -xq "neovide" ; then
-                # nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>NeovideFocus<CR>"
-                osascript -e 'tell application "Neovide" to activate'
-              else
-                # opening via Helper, since this passes `--title-hidden`
-                open -a "Neovide Helper"
-              fi
+          - shell_command: open -a "Neovide"
           - *deactivate-leader
           - *remove-notice
 
