@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 
 FRONT_APP=$(osascript -e 'tell application "System Events" to return name of first process whose frontmost is true')
+
 if [[ "$FRONT_APP" == "neovide" ]]; then
-	echo -n "Could not find frontmost app" # Alfred notification
+	# using wqall so changes are saved
+	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
 else
 	killall "$FRONT_APP"
 fi
-
 
 # wait for 2.0 secs
 i=0
@@ -22,7 +23,6 @@ done
 #───────────────────────────────────────────────────────────────────────────────
 
 [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
-sleep 0.2
 open -a "$FRONT_APP"
 sleep 0.2
 open -a "$FRONT_APP"

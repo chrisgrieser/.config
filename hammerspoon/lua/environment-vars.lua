@@ -4,7 +4,6 @@ local M = {}
 
 M.transBgApps = {
 	"neovide",
-	"Neovide",
 	"Obsidian",
 	"wezterm-gui",
 	"WezTerm",

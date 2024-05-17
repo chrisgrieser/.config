@@ -206,10 +206,6 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall<CR>"
-              sleep 1
-              # force kill if stuck
-              pgrep -xq "neovide" && killall -9 neovide
-              pgrep -xq "nvim" && killall -9 nvim
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
