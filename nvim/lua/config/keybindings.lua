@@ -46,15 +46,10 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 -- quickfix
-keymap("n", "gq", function()
-	local success = pcall(vim.cmd.cnext)
-	if not success then
-		vim.cmd.cfirst()
-		vim.notify("Wrapped")
-	end
-end, { desc = " Next Quickfix" })
+keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix List" })
+keymap("n", "g<C-q>", vim.cmd.cfirst, { desc = " 1st Quickfix" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -256,7 +251,7 @@ keymap(
 -- MULTI-CURSOR REPLACEMENT
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
 keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
--- `remap`, as it requires nvim's `*`
+-- `remap`, as it requires nvim's visual star
 keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------

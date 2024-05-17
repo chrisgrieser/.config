@@ -99,15 +99,11 @@ local function cmpconfig()
 			end, { "i", "s" }),
 			-- cmd+j: Jump to next location
 			["<D-j>"] = cmp.mapping(function(_)
-				if vim.snippet.active({ direction = 1 }) then
-					vim.snippet.jump(1)
-				end
+				if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 			end, { "i", "s" }),
 			-- cmd+shift+j: prev location
 			["<D-J>"] = cmp.mapping(function(_)
-				if vim.snippet.active({ direction = -1 }) then
-					vim.snippet.jump(-1)
-				end
+				if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
 			end, { "i", "s" }),
 		},
 		formatting = {
