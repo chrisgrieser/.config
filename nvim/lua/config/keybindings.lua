@@ -257,7 +257,7 @@ keymap(
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
 keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
 -- `remap`, as it requires nvim's `*`
-keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
+keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
 -- MACROS
@@ -271,7 +271,7 @@ keymap("n", key, function()
 		u.normal("q")
 		local recording = vim.fn.getreg(register):gsub(key .. "$", "")
 		vim.fn.setreg(register, recording) -- as the key itself is recorded
-		u.notify("Recorded", vim.fn.keytrans(recording), "trace")
+		if recording ~= "" then u.notify("Recorded", vim.fn.keytrans(recording), "trace") end
 	else
 		u.normal("q" .. register)
 	end

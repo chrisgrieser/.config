@@ -73,21 +73,6 @@ function s {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# search and replace via `rg`
-# usage: sr "search" "replace" file1 file2 file3
-function sr {
-	local search="$1"
-	local replace="$2"
-	shift 2
-	for file in "$@"; do
-		new_content=$(rg "$search" --replace="$replace" --passthrough \
-			--no-line-number --no-config "$file")
-		echo "$new_content" >"$file"
-	done
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # shellcheck disable=2164
 function cake { mkdir -p "$1" && cd "$1"; }
 
