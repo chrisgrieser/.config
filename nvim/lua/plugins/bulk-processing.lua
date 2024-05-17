@@ -11,7 +11,7 @@ return {
 		opts = {
 			extraRgArgs = "", -- for example to always display context lines around matches
 			keymaps = {
-				replace = "<Enter>",
+				replace = "<D-Enter>",
 				qflist = "<D-s>",
 				close = "q",
 			},
@@ -67,29 +67,6 @@ return {
 			{"<leader>fE", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
 			{"<leader>fF", function() require("refactoring").refactor("Extract Function To File") end, mode = "x", desc = "󱗘 Extract Func to File" },
 			-- stylua: ignore end
-		},
-	},
-	{ -- better macros
-		"chrisgrieser/nvim-recorder",
-		keys = {
-			{ "0", desc = "  Start/Stop Recording" },
-			{ "9", desc = " /  Continue/Play" },
-			{ "8", desc = " /  Breakpoint" },
-		},
-		opts = {
-			clear = true,
-			logLevel = vim.log.levels.TRACE,
-			mapping = {
-				startStopRecording = "0",
-				playMacro = "9",
-				switchSlot = "<C-0>",
-				editMacro = "c0",
-				yankMacro = "y0",
-				deleteAllMacros = "d0",
-				addBreakPoint = "8",
-			},
-			dapSharedKeymaps = true,
-			performanceOpts = { countThreshold = 101 },
 		},
 	},
 }
