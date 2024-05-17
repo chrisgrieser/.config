@@ -28,6 +28,7 @@ keymap("n", "<leader>lc", function()
 	u.notify("Copied", lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
+keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under Cursor" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 

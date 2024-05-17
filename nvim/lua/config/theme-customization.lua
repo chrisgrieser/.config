@@ -54,8 +54,11 @@ local function customHighlights()
 	-- FIX themes markdown italics missing in many themes
 	overwriteHl("@markup.italic.markdown_inline", { italic = true })
 
-	-- de-emphasize commit messaages between 50 and 72 chars
+	-- de-emphasize commit messages between 50 and 72 chars
 	linkHl("@comment.warning.gitcommit", "WarningMsg")
+
+	-- injections as code blocks
+	linkHl("@injection.content", "CursorColumn")
 
 	-----------------------------------------------------------------------------
 	local hasNoUpdatedTreesitterHls =

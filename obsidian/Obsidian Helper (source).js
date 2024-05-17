@@ -1,7 +1,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovide Helper";
+const markdownApp = "Neovide";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -13,7 +13,6 @@ const markdownApp = "Neovide Helper";
 /** based on https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
  * @param {PathObject[]} argv input for automator is an array of macOS path objects.
  */
-// biome-ignore lint/correctness/noUnusedVariables: run
 function run(argv) {
 	const app = Application.currentApplication();
 	app.includeStandardAdditions = true;
