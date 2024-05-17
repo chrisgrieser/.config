@@ -108,7 +108,6 @@ return {
 	},
 	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
-		opts = { lookForwardBig = 50 },
 		keys = {
 			-- stylua: ignore start
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󱡔 inner subword" },
