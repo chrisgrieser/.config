@@ -14,8 +14,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	"sainnhe/gruvbox-material",
+	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- "sainnhe/gruvbox-material",
 	-- "binhtran432k/dracula.nvim",
 	-- "fynnfluegge/monet.nvim",
 	-- "scottmckendry/cyberdream.nvim",
