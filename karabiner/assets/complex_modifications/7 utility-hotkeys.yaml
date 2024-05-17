@@ -21,7 +21,7 @@ rules:
         to:
           - key_code: right_command
         to_if_alone:
-          - { key_code: e, modifiers: [control] }
+          - { key_code: e, modifiers: [control], lazy: true }
       # cmd-j → Expand Word
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [command] } }
