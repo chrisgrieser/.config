@@ -1,7 +1,7 @@
 # DOCS https://neovide.dev/config-file.html#available-settings
 
 frame = "buttonless"
-no-multigrid = true # FIX transparency issues for scrollbar
+no-multigrid = false # FIX transparency issues for scrollbar
 
 # BUG these are not in effect, thus setting them in `Neovide_Helper`
 title-hidden = true
