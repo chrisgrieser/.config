@@ -198,8 +198,8 @@ rules:
   #─────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide"
     manipulators:
-      # ⌘Q to Quit
-      # INFO explicitly remapping cmd+q ensures that cursor position and changes are saved.
+      # cmd+q to Quit with saving
+      # PENDING https://github.com/neovide/neovide/issues/2558
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:

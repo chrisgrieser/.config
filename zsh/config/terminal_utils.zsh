@@ -59,16 +59,17 @@ compdef _o o
 
 # search pwd via `rg`, open selection in the editor at the line
 function s {
-	# --height="100%" required for for wezterm's `pane:is_alt_screen_active()`
+	# not opening via `neovide` due to https://github.com/neovide/neovide/issues/1586
+
 	rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
 		--no-config --ignore-file="$HOME/.config/rg/ignore" |
-		fzf --ansi --preview-window="65%" \
+		fzf --ansi \
 			--delimiter=":" --nth=1,3 --with-nth=1,2 \
-			--bind="enter:execute(open {1} --env=LINE={2})" \
+			--bind='enter:execute(open {1} && nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>{2}<CR>")' \
 			--preview='bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
-			--preview-window="top,border-down" \
-			--height="100%" ||
-		true # so it always exist 0
+			--preview-window="65%,top,border-down" \
+			--height="100%" # required for for wezterm's `pane:is_alt_screen_active()`
+	true # so it always exits 0
 }
 
 #───────────────────────────────────────────────────────────────────────────────
