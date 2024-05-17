@@ -22,6 +22,7 @@ local function dapConfig()
 
 	--[[ lualine components ]]
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
+	if not breakpointHl then return end
 	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
 	u.addToLuaLine("sections", "lualine_y", {
 		color = { fg = breakpointFg },
@@ -85,9 +86,13 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			-- INFO toggling breakpoints and "Continue" command done via nvim-recorder
-			-- stylua: ignore
-			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear All Breakpoints" },
+			{ "7", function() require("dap").continue() end, desc = " Continue" },
+			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle Breakpoint" },
+			{
+				"<leader>dc",
+				function() require("dap").clear_breakpoints() end,
+				desc = " Clear All Breakpoints",
+			},
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
