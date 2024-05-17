@@ -27,6 +27,22 @@ local keymappings_I = {
 		type = "action",
 		opts = { desc = "󰒆 Multi-Select" },
 	},
+
+	["<D-u>"] = {
+		function(prompt_bufnr)
+			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+			local parent_dir = vim.fs.dirname(cwd)
+
+			require("telescope.actions").close(prompt_bufnr)
+			require("telescope.builtin").find_files {
+				prompt_title = vim.fs.basename(parent_dir),
+				cwd = parent_dir,
+			}
+		end,
+		type = "action",
+		opts = { desc = " CWD up" },
+	},
 	["<D-s>"] = {
 		function(prompt_bufnr)
 			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
