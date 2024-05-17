@@ -41,7 +41,6 @@
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
   "nvim-notify": { "branch": "master", "commit": "5371f4bfc1f6d3adf4fe9d62cd3a9d44356bfd15" },
   "nvim-origami": { "branch": "main", "commit": "efa1fab4a8ffbc290812d1ac46458619320213ac" },
-  "nvim-recorder": { "branch": "main", "commit": "e5446bc8181e83e1281e5e417eb09b7bc843806a" },
   "nvim-rulebook": { "branch": "main", "commit": "64a6e38245758102b80c9529d2a6b9393e7d7523" },
   "nvim-scissors": { "branch": "main", "commit": "db2dae01d1d1e823e141b01dad010d3c95715ace" },
   "nvim-spider": { "branch": "main", "commit": "76819082ef964db1f67f92454e18ad28ae34b37b" },
@@ -66,6 +65,5 @@
   "telescope.nvim": { "branch": "master", "commit": "96610122a40f0bb4ce2e452c6d2429bf093d6700" },
   "treesj": { "branch": "main", "commit": "e1e82ab4237619d342c7102c9f13d4b9833bfd39" },
   "vim-matchup": { "branch": "master", "commit": "2d660e4aa7c566014c667af2cda0458043527902" },
-  "vim-visual-multi": { "branch": "master", "commit": "b84a6d42c1c10678928b0bf8327f378c8bc8af5a" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

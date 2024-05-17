@@ -2,11 +2,6 @@
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
-# CONFIG
-model="gpt-3.5-turbo" # https://platform.openai.com/docs/models/gpt-3
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # API KEY
 apikey=$alfred_apikey
 [[ -z "$apikey" ]] && apikey="$OPENAI_API_KEY" # defined in .zshenv

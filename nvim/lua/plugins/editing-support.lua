@@ -96,6 +96,13 @@ return {
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
 			{ "ds", desc = "󰅪 Delete Surround Operator" },
 			{ "cs", desc = "󰅪 Change Surround Operator" },
+			{
+				"<D-t>",
+				"${}<Left>" .. '<Esc>cs"`a',
+				mode = "i",
+				remap = true,
+				desc = "$󰘦 Template string & change quotes",
+			},
 		},
 		opts = {
 			move_cursor = false,

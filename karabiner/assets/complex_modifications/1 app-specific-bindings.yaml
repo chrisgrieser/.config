@@ -176,7 +176,7 @@ rules:
           - { key_code: i, modifiers: [command, control] }
           - { key_code: "7", modifiers: [command, control] } # purple borders
           - shell_command: |
-              "$HOME/.config/karabiner/assets/complex_modifications/assets/highlights-notificator" \
+              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Image 🖼️"
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }

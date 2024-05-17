@@ -77,7 +77,7 @@ rules:
         from: { key_code: o, modifiers: *hyper }
         to:
           - { key_code: right_arrow, modifiers: [option] }
-      # delete word (use ⌘J from utility hotkeys for changing a word)
+      # delete word
       - type: basic
         from: { key_code: spacebar, modifiers: *hyper }
         to:
@@ -85,3 +85,9 @@ rules:
           - { key_code: delete_or_backspace, modifiers: [option] } # delete word
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
+      # change word
+      - type: basic
+        from: { key_code: c, modifiers: *hyper }
+        to:
+          - { key_code: right_arrow, modifiers: [option] }
+          - { key_code: left_arrow, modifiers: [shift, option] }

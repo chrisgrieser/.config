@@ -76,7 +76,7 @@ local function cmpconfig()
 			["<PageDown>"] = cmp.mapping.scroll_docs(4),
 			["<C-e>"] = cmp.mapping.abort(),
 
-			-- manually triggering to only include LSP, useful for typed yaml/json/css
+			-- manually triggering to only include LSP, useful for yaml/json/css
 			["<D-c>"] = cmp.mapping.complete {
 				config = { sources = cmp.config.sources { { name = "nvim_lsp" } } },
 			},
