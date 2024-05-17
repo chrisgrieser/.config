@@ -22,7 +22,7 @@ end
 
 -- CMD & ALT Keys
 g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-g.neovide_input_macos_option_key_is_meta = "both" -- so `{@~` etc. can be used
+g.neovide_input_macos_option_key_is_meta = "none" -- so `{@~` etc. can be used
 
 -- Appearance
 g.neovide_remember_window_size = true

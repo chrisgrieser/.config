@@ -13,6 +13,7 @@ return {
 		opts = {
 			filetypes = {
 				DressingInput = false,
+				["grug-far"] = false,
 				text = false, -- `pass` passwords are plaintext
 			},
 			silent = true,

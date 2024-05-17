@@ -300,7 +300,6 @@ end, { expr = true, desc = "dd" })
 -- paste without switching with register
 keymap("x", "p", "P")
 
--- always paste characterwise when in insert mode
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(fn.getreg("+"))
 	fn.setreg("+", regContent, "v") 
