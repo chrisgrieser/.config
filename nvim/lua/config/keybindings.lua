@@ -131,7 +131,6 @@ end
 -- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
-keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 --------------------------------------------------------------------------------
@@ -250,9 +249,9 @@ keymap(
 --------------------------------------------------------------------------------
 -- MULTI-CURSOR REPLACEMENT
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
-keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
+keymap("n", "<D-j>", '*<C-o>"_cgn', { desc = "󰆿 Multi-Edit" })
 -- `remap`, as it requires nvim's visual star
-keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true })
+keymap("x", "<D-j>", '*<C-o>"_cgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
 -- MACROS

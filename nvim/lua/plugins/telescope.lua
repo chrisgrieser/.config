@@ -154,7 +154,9 @@ local toggleHiddenAction = {
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		local ft = ctx.match
-		if ft == "markdown" then return end
+		-- special keymaps in ftplugins
+		if ft == "markdown" or ft == "bib" then return end
+
 		local symbolFilter = {
 			yaml = { "object", "array" },
 			json = "module",
@@ -292,7 +294,7 @@ local function telescopeConfig()
 					local tail = require("telescope.utils").path_tail(path)
 					local text = tail .. "  " .. project
 
-					local highlights = { { { #tail + 1, #text }, "Comment" } }
+					local highlights = { { { #tail + 1, #text }, "TelescopeResultComment" } }
 					return text, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },

@@ -25,7 +25,6 @@ end, { buffer = true })
 
 ---checks a .bib file for duplicate citekeys and reports them via `vim.notify`
 ---when any are found. Does nothing, if there are no duplicate citekeys.
----@param bufnr? number when not provided, uses the current buffer
 local function checkForDuplicateCitekeys()
 	local duplCitekeys = ""
 	local citekeyCount = {}
