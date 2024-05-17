@@ -14,9 +14,10 @@ rules:
         # optional modifiers, so accidental `shift+caps` does not trigger actual capslock
         from: { key_code: caps_lock, modifiers: { optional: [shift, control, option, command] } }
         to_if_alone:
-          - key_code: escape
+          - { key_code: escape, lazy: true }
         to:
-          - { key_code: right_command, modifiers: [control, option] }
+          - { key_code: right_command, modifiers: [control, option], lazy: true }
+      #─────────────────────────────────────────────────────────────────────────────
       # Map Esc to F18 (clipboard / screenshot history)
       - type: basic
         from: { key_code: escape }

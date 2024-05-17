@@ -34,10 +34,9 @@ rules:
     manipulators:
       - type: basic
         from: { key_code: left_control }
+        conditions: [*leader-inactive]
         to:
           - key_code: left_control
-        conditions:
-          - *leader-inactive
         to_if_alone:
           - *activate-leader
           - *set-notice

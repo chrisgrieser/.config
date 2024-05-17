@@ -17,7 +17,6 @@ end
 
 hs.autoLaunch(true)
 hs.menuIcon(false)
-hs.allowAppleScript(true) -- allow external control (via nvim)
 hs.automaticallyCheckForUpdates(true)
 hs.window.animationDuration = 0 -- quicker animations
 
