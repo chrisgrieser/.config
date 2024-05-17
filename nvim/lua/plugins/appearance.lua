@@ -83,7 +83,7 @@ return {
 	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
-		ft = "markdown",
+		ft = { "markdown", "yaml" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		opts = {
 			markdown = {
@@ -91,7 +91,24 @@ return {
 				bullets = false,
 				dash_string = "─",
 			},
+			yaml = {
+				codeblock_highlight = "CodeBlock",
+			},
 		},
+		config = function(_, opts)
+			-- add background to injections, see `ftplugn/yaml/injections.scm`
+			opts.yaml.query = vim.treesitter.query.parse(
+				"yaml",
+				[[
+					(block_mapping_pair
+					key: (flow_node) @_run (#any-of? @_run "run" "shell_command")
+					value: (block_node
+								(block_scalar) @codeblock
+								(#offset! @codeblock 1 0 1 0)))
+				]]
+			)
+			require("headlines").setup(opts)
+		end,
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
