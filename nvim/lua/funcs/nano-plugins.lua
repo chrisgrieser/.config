@@ -158,6 +158,7 @@ end
 
 local changedFileNotif
 function M.gotoChangedFiles()
+	local maxFiles = 10
 	local funcName = "Changed Files"
 
 	-- Calculate numstat (`--intent-to-add` so new files show up in `--numstat`)
@@ -183,6 +184,7 @@ function M.gotoChangedFiles()
 	local currentFile = vim.api.nvim_buf_get_name(0)
 
 	-- Changed Files, sorted by most changes
+	---@type {relPath: string, absPath: string, changes: number}[]
 	local changedFiles = {}
 	for _, line in pairs(numstatLines) do
 		local added, deleted, file = line:match("(%d+)%s+(%d+)%s+(.+)")
@@ -202,6 +204,7 @@ function M.gotoChangedFiles()
 		end
 	end
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
+	changedFiles = vim.list_slice(changedFiles, 1, maxFiles)
 
 	-- GUARD
 	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
@@ -227,9 +230,9 @@ function M.gotoChangedFiles()
 	local currentFileIcon = ""
 	local listOfChangedFiles = {}
 	for i = 1, #changedFiles do
-		local prefix = (i == nextFileIndex and currentFileIcon or "·") .. " "
+		local prefix = (i == nextFileIndex and currentFileIcon or " ")
 		local path = changedFiles[i].relPath
-		table.insert(listOfChangedFiles, prefix .. path)
+		table.insert(listOfChangedFiles, prefix .. " " .. path)
 	end
 	local msg = table.concat(listOfChangedFiles, "\n")
 

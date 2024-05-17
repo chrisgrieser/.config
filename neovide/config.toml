@@ -3,7 +3,7 @@
 frame = "buttonless"
 no-multigrid = true
 title-hidden = true
-tabs = false # BUG not in effect, thus setting them in `Neovide_Helper`
+tabs = false
 
 [font]
 normal = ["JetBrainsMonoNL NF"]

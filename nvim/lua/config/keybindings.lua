@@ -180,7 +180,6 @@ keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" 
 keymap("x", "<left>", [["zdh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
-
 -- COMMAND MODE
 keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
@@ -304,7 +303,7 @@ keymap("x", "p", "P")
 -- always paste characterwise when in insert mode
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(fn.getreg("+"))
-	fn.setreg("+", regContent, "v") ---@diagnostic disable-line: param-type-mismatch
+	fn.setreg("+", regContent, "v") 
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
