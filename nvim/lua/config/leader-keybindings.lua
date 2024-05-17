@@ -45,7 +45,7 @@ keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
 	line = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(line)
-end, { desc = " Switch Quotes in current line." })
+end, { desc = " Switch quotes in line" })
 
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other

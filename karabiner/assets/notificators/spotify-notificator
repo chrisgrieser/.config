@@ -12,7 +12,7 @@
 # CONFIG
 readonly bundle_id="de.chris-grieser.spotify-notificator"
 readonly name="Spotify"
-readonly icon="$HOME/.config/karabiner/assets/complex_modifications/Spotify.icns"
+readonly icon="$HOME/.config/karabiner/assets/notificators/Spotify.icns"
 readonly app_location="$HOME/.cache/notificators"
 
 #───────────────────────────────────────────────────────────────────────────────

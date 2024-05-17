@@ -22,18 +22,6 @@ rules:
           - key_code: right_command
         to_if_alone:
           - { key_code: e, modifiers: [control], lazy: true }
-      # cmd-j → Expand Word
-      - type: basic
-        from: { key_code: j, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: right_arrow, modifiers: [option] }
-          - { key_code: left_arrow, modifiers: [shift, option] }
-        conditions:
-          - type: frontmost_application_unless
-            file_paths:
-              - ^/Applications/Obsidian\.app # interfered with vim mode
-              - "[Nn]eovide" # using multi-cursor plugin here instead
-              - Finder\.app # not useful in Finder, also prevents `cmd+j` for view settings
       # cmd+e: inline cod[e] (backticks)
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command] } }

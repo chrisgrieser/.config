@@ -18,7 +18,7 @@ rules:
               info=$(spotify_player get key playback)
               artist=$(echo $info | yq ".item.artists[0].name")
               song=$(echo $info | yq ".item.name")
-              "$HOME/.config/karabiner/assets/complex_modifications/assets/spotify-notificator" \
+              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                   --title "Spotify" --message "💚 $artist – $song"
               spotify_player like
 

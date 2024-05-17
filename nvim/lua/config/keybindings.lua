@@ -20,7 +20,8 @@ keymap(
 
 -- HJKL behaves like hjkl, but bigger distance
 -- (not mapping in op-pending, since there are custom textobjects for each LjkJK)
-keymap({ "n", "x", "o" }, "H", "^")
+keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
+keymap("o", "H", "^")
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
 keymap({ "n", "x" }, "j", "gj") -- gj to work with wrapped lines as well
 keymap({ "n", "x" }, "k", "gk")
@@ -115,11 +116,6 @@ keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no sel
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
--- cmd+T: template string
-keymap("n", "<D-t>", "bi${<Esc>ea}<Esc>", { desc = "$󰘦 Template String" })
-keymap("x", "<D-t>", "<Esc>`<i${<Esc>`>la}<Esc>", { desc = "$󰘦 Template String" })
-keymap("i", "<D-t>", "${}<Left>", { desc = "$󰘦 Template String" })
-
 -- regex
 keymap(
 	"n",
@@ -149,9 +145,8 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
 keymap("n", "qq", "gcc", { desc = " Comment Line", remap = true })
 keymap("o", "u", "gc", { desc = " Comment Text Object", remap = true })
-keymap("x", "q", "gc", { desc = " Comment Operator", remap = true })
 keymap(
-	"n",
+	{ "n", "x" },
 	"q",
 	-- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 	function() return require("vim._comment").operator() end,
@@ -256,6 +251,13 @@ keymap(
 	function() require("funcs.nano-plugins").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
 )
+
+--------------------------------------------------------------------------------
+-- MULTI-CURSOR REPLACEMENT
+-- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
+keymap("n", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit" })
+-- `remap`, as it requires nvim's `*`
+keymap("x", "<D-j>", "*<C-o>cgn", { desc = "󰆿 Multi-Edit", remap = true, unique = false })
 
 --------------------------------------------------------------------------------
 -- MACROS

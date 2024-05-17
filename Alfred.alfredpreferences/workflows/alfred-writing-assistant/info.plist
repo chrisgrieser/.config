@@ -676,6 +676,62 @@ DOUBLE CLICK TO EDIT</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>plain</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Plain</string>
+						<string>plain</string>
+					</array>
+					<array>
+						<string>Markdown Highlight &amp; Strikethrough</string>
+						<string>markdown</string>
+					</array>
+					<array>
+						<string>Critic Markup</string>
+						<string>critic-markup</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Markup type of the output</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>output_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>gpt-3.5-turbo</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>GPT-3.5 Turbo</string>
+						<string>gpt-3.5-turbo</string>
+					</array>
+					<array>
+						<string>GPT-4o</string>
+						<string>gpt-4o</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>OpenAI Model. "GPT-4o" is better, but also more expensive. See https://platform.openai.com/docs/models/gpt-3</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>openai_model</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>100</string>
 				<key>placeholder</key>
 				<string>1337</string>
@@ -739,39 +795,9 @@ DOUBLE CLICK TO EDIT</string>
 			<key>variable</key>
 			<string>static_prompt</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>plain</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>Plain</string>
-						<string>plain</string>
-					</array>
-					<array>
-						<string>Markdown Highlight &amp; Strikethrough</string>
-						<string>markdown</string>
-					</array>
-					<array>
-						<string>Critic Markup</string>
-						<string>critic-markup</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>Markup type of the output</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>output_type</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.2</string>
+	<string>1.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
