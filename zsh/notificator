@@ -92,7 +92,7 @@ readonly app="$app_location/Notificator for ${name}.app"
 readonly plist="${app}/Contents/Info.plist"
 
 # Exit early if Notificator exists and was modified fewer than 30 days ago
-if [[ "$(/bin/date -r "${app}" +%s)" -gt "$(/bin/date -v -30d +%s)" ]]; then
+if [[ -e "${app}" && "$(/bin/date -r "${app}" +%s)" -gt "$(/bin/date -v -30d +%s)" ]]; then
 	show_notification
 	exit 0
 fi

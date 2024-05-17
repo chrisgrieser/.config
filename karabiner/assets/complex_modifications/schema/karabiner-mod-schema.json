@@ -566,6 +566,9 @@
 				"shell_command": {
 					"type": "string"
 				},
+				"lazy": {
+					"type": "boolean"
+				},
 				"software_function": {
 					"$ref": "#/definitions/SoftwareFunction"
 				},
