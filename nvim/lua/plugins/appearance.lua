@@ -10,6 +10,19 @@ return {
 			{ "<leader>of", function() vim.opt.scrolloff = 13 end, desc = "⇓ Fix Scrolloff" },
 		},
 	},
+	-- {
+	-- 	"nvimdev/indentmini.nvim",
+	-- 	lazy = false,
+	-- 	init = function()
+	-- 		vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
+	-- 			callback = function()
+	-- 				vim.api.nvim_set_hl(0, "IndentLine", { link = "NonText" })
+	-- 				vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "Comment" })
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- 	opts = {},
+	-- },
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
@@ -70,7 +83,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		main = "rainbow-delimiters.setup",
 		opts = {
-			-- remove aggressive red
+			-- remove aggressive red from the list
 			highlight = {
 				"RainbowDelimiterYellow",
 				"RainbowDelimiterBlue",
