@@ -294,7 +294,7 @@ local function telescopeConfig()
 					local tail = require("telescope.utils").path_tail(path)
 					local text = tail .. "  " .. project
 
-					local highlights = { { { #tail + 1, #text }, "TelescopeResultComment" } }
+					local highlights = { { { #tail + 1, #text }, "TelescopeResultsComment" } }
 					return text, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
