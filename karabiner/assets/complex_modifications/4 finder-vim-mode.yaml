@@ -349,7 +349,6 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # WINDOWS
-      # closing win should end insert, menu, and find mode, but not cancel move
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [command] } }
         to:
@@ -361,7 +360,10 @@ rules:
                   close window 1
                   return pathToBeClosed
                 end tell')
-              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
+              [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
+          # closing win should end insert, menu, and find mode, but not cancel move
+          # since cmd+w can be called from various modes, it should thus also
+          # end all those modes 
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -369,7 +371,7 @@ rules:
           - *remove-find-notice
           - *leave-find-mode
         conditions: [*finder-app]
-      # w (or cmd+w) = close window/tab
+      # w = close window/tab
       - type: basic
         from: { key_code: w }
         to:
@@ -381,14 +383,14 @@ rules:
                   close window 1
                   return pathToBeClosed
                 end tell')
-              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
+              [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # W = re-open window
       - type: basic
         from: { key_code: w, modifiers: { mandatory: [shift] } }
         to:
           - shell_command: |
-              open "$(cat "/tmp/finder-vim-mode-last-closed-window")"
+              open "$(cat "$HOME/.cache/finder-vim-mode/last-closed-window")"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # e = close all other windows (:only)
       - type: basic
@@ -405,7 +407,7 @@ rules:
                   end repeat
                   return winPath
                 end tell')
-              [[ -n "$current_win" ]] && echo -n "$current_win" >/tmp/finder-vim-mode-last-closed-window
+              [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
       - type: basic

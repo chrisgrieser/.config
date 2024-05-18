@@ -87,9 +87,9 @@ function sr {
 	local replace="$2"
 	shift 2
 	for file in "$@"; do
-		new_content=$(rg "$search" --replace="$replace" --passthrough \
-			--no-line-number --no-config "$file")
-		print -r "$new_content" >"$file"
+		rg "$search" --replace="$replace" --passthrough \
+			--no-line-number --no-config "$file" >/tmp/rgpipe &&
+			mv /tmp/rgpipe "$file"
 	done
 }
 
