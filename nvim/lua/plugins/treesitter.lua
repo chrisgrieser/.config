@@ -28,9 +28,6 @@ return {
 			enable = true,
 			enable_quotes = true,
 		},
-		endwise = {
-			enable = true,
-		},
 		textobjects = {
 			move = { -- move to next function
 				enable = true,
