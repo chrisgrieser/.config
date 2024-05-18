@@ -357,9 +357,9 @@
     "description": "A case command first expands word, and tries to match it against each pattern in turn.",
     "prefix": "switch case"
   },
-  "ternary": {
+  "ternaryy": {
     "body": "$([[ \"$${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")",
-    "prefix": "ternary"
+    "prefix": "ternaryy"
   },
   "then": {
     "body": "then\n\t$0\nfi",
