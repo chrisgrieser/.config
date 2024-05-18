@@ -9,7 +9,7 @@ alias gI='gh issue list --state=closed'
 alias cherry='git cherry-pick'
 alias reset='git reset'
 alias push='git push'
-alias pull='git pull --tags'
+alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 
@@ -160,6 +160,7 @@ function gM {
 		return 1
 	fi
 	git commit --amend --no-verify
+	echo
 	git status
 }
 
@@ -201,7 +202,7 @@ function new_branch {
 
 function gl {
 	if [[ -z "$1" ]]; then
-		_gitlog --max-count=15
+		_gitlog --max-count=15 # default 15
 	elif [[ "$1" =~ ^[0-9]+$ ]]; then
 		_gitlog --max-count="$1"
 	else

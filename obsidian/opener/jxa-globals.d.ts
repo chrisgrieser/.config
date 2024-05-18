@@ -1,0 +1,1 @@
+/Users/chrisgrieser/.config/+ linter-configs/jxa/jxa-globals.d.ts
