@@ -10,6 +10,7 @@ return {
 			{ "<leader>of", function() vim.opt.scrolloff = 13 end, desc = "⇓ Fix Scrolloff" },
 		},
 	},
+	-- PENDING https://github.com/nvimdev/indentmini.nvim/issues/15
 	-- {
 	-- 	"nvimdev/indentmini.nvim",
 	-- 	lazy = false,
