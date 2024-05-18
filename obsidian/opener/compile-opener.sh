@@ -9,10 +9,9 @@ readonly jxa_script="./obsidian-opener.js"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-
 /bin/mkdir -p "$(basename "${app}")"
 [[ -d "${app}" ]] && /bin/rm -r "${app}"
-/usr/bin/osacompile -l JavaScript -o "${app}" "${jxa_script}" 2>/dev/null
+/usr/bin/osacompile -l JavaScript -o "${app}" "${jxa_script}"
 
 /bin/cp "$icon" "${app}/Contents/Resources/applet.icns"
 
