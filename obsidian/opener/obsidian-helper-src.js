@@ -1,28 +1,26 @@
-// CONFIG: default markdown app, if markdown file is not located in a Vault
-const markdownApp = "Neovide";
-
-ObjC.import("Foundation");
-const args = $.NSProcessInfo.processInfo.arguments;
-const argv = [];
-const argc = args.count;
-for (let i = 1; i < argc; i++) {
-	// argv[0] is the applet itself
-	argv.push(args.objectAtIndex(i).js);
-}
+// SOURCE https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const app = Application.currentApplication();
-app.includeStandardAdditions = true;
 
-// GUARD: OPENED WITHOUT FILE
-if (argv.length === 0) {
-	app.displayNotification(`${argv.length}`, {
-		withTitle: "info",
-	});
-} else {
-	// turn pathobjects into strings
+// CONFIG: default markdown app, if markdown file is not located in a Vault
+const markdownApp = "Neovide";
+
+
+/** @param {PathObj[]} argv input for automator is an array of macOS path objects. */
+// biome-ignore lint/correctness/noUnusedVariables: <explanation>
+function run(argv) {
+	const app = Application.currentApplication();
+	app.includeStandardAdditions = true;
 	const pathArray = argv.map((pathObj) => pathObj.toString());
+
+	// GUARD opened without file
+	if (argv.length === 0) {
+		app.displayNotification("Set it as the default app for markdown files", {
+			withTitle: "The Obsidian Opener cannot start by itself.",
+		});
+		return;
+	}
 
 	// GET VAULTS
 	const obsidianJsonFilePath =

@@ -78,23 +78,6 @@ return {
 			end,
 		},
 	},
-	{ -- rainbow brackets
-		"hiphish/rainbow-delimiters.nvim",
-		event = "BufReadPost", -- later does not load on first buffer
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		main = "rainbow-delimiters.setup",
-		opts = {
-			-- remove aggressive red from the list
-			highlight = {
-				"RainbowDelimiterYellow",
-				"RainbowDelimiterBlue",
-				"RainbowDelimiterOrange",
-				"RainbowDelimiterGreen",
-				"RainbowDelimiterViolet",
-				"RainbowDelimiterCyan",
-			},
-		},
-	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
 		ft = { "markdown", "yaml" },
