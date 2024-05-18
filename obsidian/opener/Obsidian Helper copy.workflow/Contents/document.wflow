@@ -1,125 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>AMApplicationBuild</key>
-	<string>523</string>
-	<key>AMApplicationVersion</key>
-	<string>2.10</string>
-	<key>AMDocumentVersion</key>
-	<string>2</string>
-	<key>actions</key>
-	<array>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>1.0</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>source</key>
-					<dict/>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Run JavaScript.action</string>
-				<key>ActionName</key>
-				<string>Run JavaScript</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>source</key>
-					<string>//──────────────────────────────────────────────────────────────────────────────// CONFIG: default markdown app, if markdown file is not located in a Vaultconst markdownApp = "Neovide";//──────────────────────────────────────────────────────────────────────────────// DOCS: https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html/** @typedef {Object} PathObject * @property {{(): string}} toString *//** based on https://forum.obsidian.md/t/make-obsidian-a-default-app-for-markdown-files-on-macos/22260 * @param {PathObject[]} argv input for automator is an array of macOS path objects. */function run(argv) {	const app = Application.currentApplication();	app.includeStandardAdditions = true;	// GUARD: OPENED WITHOUT FILE	if (argv.length === 0) {		app.displayNotification("Set it as the default app for markdown files", {			withTitle: "The Obsidian Opener cannot start by itself.",		});		return;	}	// turn pathobjects into strings	const pathArray = argv.map((pathObj) =&gt; pathObj.toString());	// GET VAULTS	const obsidianJsonFilePath =		app.pathTo("home folder") + "/Library/Application Support/obsidian/obsidian.json";	const vaults = JSON.parse(app.read(obsidianJsonFilePath)).vaults;	// CONDITIONS FOR DECIDING WHERE TO OPEN	const firstFile = pathArray[0];	const isFileInObsidianVault = Object.values(vaults).some((vault) =&gt;		firstFile.startsWith(vault.path),	);	const obsidianIsFrontmost = Application("Obsidian").frontmost();	const isInHiddenFolder = firstFile.includes("/.");	// Hidden Folder means '.obsidian' or '.trash', which cannot be opened in Obsidian	// When Obsidian is frontmost, it means the "Open in default app" command was	// used, for which we also do not open right in Obsidian again	const openInObsidian = isFileInObsidianVault &amp;&amp; !isInHiddenFolder &amp;&amp; !obsidianIsFrontmost;	// OPENING	if (openInObsidian) {		app.openLocation("obsidian://open?path=" + encodeURIComponent(firstFile));		if (pathArray.length &gt; 1) {			app.displayNotification("opening: " + firstFile, {				withTitle: "Obsidian can only open one file at a time.",			});		}	} else {		// opens *all* selected files if they are not in Obsidian		const quotedPathArray = `'${pathArray.join("' '")}'`;		app.doShellScript(`open -a '${markdownApp}' ${quotedPathArray}`);	}}</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.RunJavaScript</string>
-				<key>CFBundleVersion</key>
-				<string>1.0</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<false/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>RunJavaScriptAction</string>
-				<key>InputUUID</key>
-				<string>10C6C9D4-F2FD-47D8-95CE-F58F9EAA3251</string>
-				<key>Keywords</key>
-				<array>
-					<string>Run</string>
-					<string>JavaScript</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>B766CD21-A749-4DC7-96E4-D20EF5328643</string>
-				<key>UUID</key>
-				<string>5416CD58-735A-4EA2-BEE6-08C8CD9571BC</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string>function run(input, parameters) {
-	
-	// Your script goes here
-
-	return input;
-}</string>
-						<key>name</key>
-						<string>source</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<integer>1</integer>
-				<key>location</key>
-				<string>251.500000:315.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Run JavaScript.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<integer>1</integer>
-		</dict>
-	</array>
-	<key>connectors</key>
-	<dict/>
-	<key>workflowMetaData</key>
-	<dict>
-		<key>workflowTypeIdentifier</key>
-		<string>com.apple.Automator.application</string>
-	</dict>
-</dict>
-</plist>
