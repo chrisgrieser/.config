@@ -2,16 +2,12 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
-# get deactivated_app
+# GUARD only trigger on deactivation or activation of browser
 if [[ "$SENDER" = "front_app_switched" ]]; then
-	data="/tmp/sketchybar_front_app2"
+	data="$HOME/.cache/sketchybar/front_app2"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
-fi
-
-# GUARD only via interval or when browser (de)activates
-if [[ "$SENDER" == "front_app_switched" ]]; then
-	[[ "$INFO" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
+	[[ "$INFO" != "Brave Browser" && "$deactivated_app" != "Brave Browser" ]] && return 0
 fi
 
 # GUARD dependencies or API key missing

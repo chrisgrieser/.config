@@ -5,9 +5,9 @@ list_name="Tasks"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD only trigger on deactivation of of Reminders
+# GUARD only trigger on deactivation of Reminders or BusyCal
 if [[ "$SENDER" = "front_app_switched" ]]; then
-	data="/tmp/sketchybar_front_app1"
+	data="$HOME/.cache/sketchybar/front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
 	[[ "$deactivated_app" != "Reminders" && "$deactivated_app" != "BusyCal" ]] && return 0
