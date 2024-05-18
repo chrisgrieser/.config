@@ -1,14 +1,12 @@
 // CONFIG: default markdown app, if markdown file is not located in a Vault
 const markdownApp = "Neovide";
 
-//──────────────────────────────────────────────────────────────────────────────
-
-// Build argv/argc in a way that can be used from the applet inside the app bundle
 ObjC.import("Foundation");
 const args = $.NSProcessInfo.processInfo.arguments;
 const argv = [];
 const argc = args.count;
-for (let i = 0; i < argc; i++) {
+for (let i = 1; i < argc; i++) {
+	// argv[0] is the applet itself
 	argv.push(args.objectAtIndex(i).js);
 }
 
@@ -19,8 +17,8 @@ app.includeStandardAdditions = true;
 
 // GUARD: OPENED WITHOUT FILE
 if (argv.length === 0) {
-	app.displayNotification("Set it as the default app for markdown files", {
-		withTitle: "The Obsidian Opener cannot start by itself.",
+	app.displayNotification(`${argv.length}`, {
+		withTitle: "info",
 	});
 } else {
 	// turn pathobjects into strings
@@ -43,8 +41,6 @@ if (argv.length === 0) {
 	// When Obsidian is frontmost, it means the "Open in default app" command was
 	// used, for which we also do not open right in Obsidian again
 	const openInObsidian = isFileInObsidianVault && !isInHiddenFolder && !obsidianIsFrontmost;
-
-	//──────────────────────────────────────────────────────────────────────────────
 
 	// OPENING
 	if (openInObsidian) {

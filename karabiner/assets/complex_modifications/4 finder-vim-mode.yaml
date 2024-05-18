@@ -363,7 +363,7 @@ rules:
               [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
           # closing win should end insert, menu, and find mode, but not cancel move
           # since cmd+w can be called from various modes, it should thus also
-          # end all those modes 
+          # end all those modes
           - *remove-insert-notice
           - *leave-insert-mode
           - *remove-menu-notice
@@ -1302,7 +1302,7 @@ rules:
                 return POSIX path of sel
               end tell')
               filename=$(basename "$SEL")
-              echo -n "$filename" | pbcopy
+              printf "$filename" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ Filename copied" --message "$filename"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -1326,7 +1326,7 @@ rules:
               root_length=${#root}
               rel_path=$(echo "$SEL" | cut -c$((root_length + 2))-)
 
-              echo -n "$rel_path" | pbcopy
+              printf "$rel_path" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "✅ git-relative path copied" --message "$rel_path"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -1360,7 +1360,7 @@ rules:
               PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
 
               URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-              echo -n "$URL" | pbcopy
+              printf "$URL" | pbcopy
               open "$URL"
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ GitHub URL copied" --message "$URL"
