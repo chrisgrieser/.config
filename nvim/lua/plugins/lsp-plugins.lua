@@ -86,7 +86,7 @@ return {
 			{
 				"<leader>oh",
 				function() require("lsp-inlayhints").toggle() end,
-				desc = "󰒕 Toggle Inlay Hints",
+				desc = "󰒕 Inlay Hints",
 			},
 		},
 		opts = {

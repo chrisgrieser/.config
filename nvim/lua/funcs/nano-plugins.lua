@@ -158,8 +158,8 @@ end
 
 local changedFileNotif
 function M.gotoChangedFiles()
-	local maxFiles = 10
-	local funcName = "Changed Files"
+	local maxFiles = 6 -- CONFIG
+	local funcName = "Goto Changed Files"
 
 	-- Calculate numstat
 	-- (`--intent-to-add` so new files show up in `--numstat`)
@@ -224,14 +224,31 @@ function M.gotoChangedFiles()
 	local nextFile = changedFiles[nextFileIndex]
 	vim.cmd.edit(nextFile.absPath)
 
-	-- Notification
-	if not package.loaded["notify"] then return end
+	-----------------------------------------------------------------------------
+	-- NOTIFICATION
+
+	-- GUARD
+	local notifyInstalled, notifyNvim = pcall(require, "notify")
+	if not notifyInstalled then return end
+
+	-- get width defined by user for nvim-notify to avoid overflow/wrapped lines
+	-- INFO max_width can be number, nil, or function, see https://github.com/chrisgrieser/nvim-tinygit/issues/6#issuecomment-1999537606
+	local _, notifyConfig = notifyNvim.instance()
+	local width = 50
+	if notifyConfig and notifyConfig.max_width then
+		local max_width = type(notifyConfig.max_width) == "number" and notifyConfig.max_width
+			or notifyConfig.max_width()
+		width = max_width - 9 -- padding, border, prefix & space, ellipsis
+	end
+
 	local currentFileIcon = ""
 	local listOfChangedFiles = {}
 	for i = 1, #changedFiles do
-		local prefix = (i == nextFileIndex and currentFileIcon or " ")
+		local prefix = (i == nextFileIndex and currentFileIcon or "·")
 		local path = changedFiles[i].relPath
-		table.insert(listOfChangedFiles, prefix .. " " .. path)
+		-- +2 for prefix + space
+		local displayPath = #path + 2 > width and "…" .. path:sub(-1 - width) or path
+		table.insert(listOfChangedFiles, prefix .. " " .. displayPath)
 	end
 	local msg = table.concat(listOfChangedFiles, "\n")
 
