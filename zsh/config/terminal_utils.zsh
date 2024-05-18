@@ -80,6 +80,19 @@ function s {
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# SEARCH AND REPLACE VIA `RG`
+# usage: sr "search" "replace" file1 file2 file3
+function sr {
+	local search="$1"
+	local replace="$2"
+	shift 2
+	for file in "$@"; do
+		new_content=$(rg "$search" --replace="$replace" --passthrough \
+			--no-line-number --no-config "$file")
+		print -r "$new_content" >"$file"
+	done
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # fzf history search
 # simplified version of https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
