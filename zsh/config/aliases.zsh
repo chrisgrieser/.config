@@ -33,6 +33,9 @@ alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in 
 alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
 alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 
+function cake { mkdir -p "$1" && cd "$1" || return 1; }
+function topen { touch "$1" && open "$1"; }
+
 #───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)
 alias -g G='| rg'

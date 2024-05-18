@@ -161,7 +161,7 @@ function M.gotoChangedFiles()
 	local maxFiles = 10
 	local funcName = "Changed Files"
 
-	-- Calculate numstat 
+	-- Calculate numstat
 	-- (`--intent-to-add` so new files show up in `--numstat`)
 	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait()
 	local gitResponse = vim.system({ "git", "diff", "--numstat" }):wait()
