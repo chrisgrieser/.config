@@ -3,7 +3,7 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "cdmill/neomodern.nvim" },
+	"cdmill/neomodern.nvim",
 	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- "sainnhe/everforest",
 	-- {
@@ -14,14 +14,11 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	{ "cdmill/neomodern.nvim", name = "coffeecat" },
+	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
 	-- "sainnhe/gruvbox-material",
 	-- "binhtran432k/dracula.nvim",
 	-- "fynnfluegge/monet.nvim",
-	-- "scottmckendry/cyberdream.nvim",
-	-- "maxmx03/fluoromachine.nvim",
-	-- { "rose-pine/neovim", name = "rose-pine-moon" },
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },

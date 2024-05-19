@@ -191,13 +191,8 @@ keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
 --------------------------------------------------------------------------------
 -- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
-keymap(
-	{ "n", "x", "i" },
-	"<C-v>",
-	"<cmd>vertical leftabove split<CR>",
-	{ desc = " Vertical Split" }
-)
-keymap({ "n", "x", "i" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal Split" })
+keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical Split" })
+keymap({ "n", "x" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal Split" })
 
 local delta = 5
 keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
@@ -264,8 +259,8 @@ keymap("n", key, function()
 	if isRecording then
 		u.normal("q")
 		local recording = vim.fn.getreg(register):sub(1, -(#key + 1)) -- as the key itself is recorded
-		vim.fn.setreg(register, recording) 
-		u.notify("Recorded", vim.fn.keytrans(recording), "trace") 
+		vim.fn.setreg(register, recording)
+		u.notify("Recorded", vim.fn.keytrans(recording), "trace")
 	else
 		u.normal("q" .. register)
 	end
@@ -276,30 +271,16 @@ keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
+keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = " Paste" }) -- "<C-g>u" adds undopoint
 
 -- sticky yank operations
-local cursorPreYank
-keymap({ "n", "x" }, "y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y"
-end, { desc = "󰅍 Sticky Yank", expr = true })
-keymap("n", "Y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y$"
-end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
+local mark = "z" -- where to store cursor position
+keymap({ "n", "x" }, "y", "m" .. mark .. "y", { desc = "󰅍 Sticky Yank" })
+keymap("n", "Y", "m" .. mark .. "y$", { desc = "󰅍 Sticky Yank", unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		if
-			vim.v.event.operator ~= "y" -- don't trigger for `d`
-			or vim.v.event.regname == "z" -- temp register
-			or not cursorPreYank
-			or (vim.b["VM_Selection"] and vim.b["VM_Selection"].Regions) -- FIX for vim-visual-multi
-		then
-			return
-		end
-
-		vim.api.nvim_win_set_cursor(0, cursorPreYank)
+		if vim.v.event.operator == "y" then vim.cmd("silent! normal! `" .. mark) end
 	end,
 })
 
@@ -307,25 +288,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-
--- do not clutter the register if blank line is deleted
+keymap("x", "p", "P") -- paste without switching with register
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
 end, { expr = true, desc = "dd" })
 
--- paste without switching with register
-keymap("x", "p", "P")
-
-keymap("i", "<D-v>", function()
-	local regContent = vim.trim(fn.getreg("+"))
-	fn.setreg("+", regContent, "v")
-	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
-end, { desc = " Paste charwise", expr = true })
-
 --------------------------------------------------------------------------------
 -- QUITTING
-keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = "Quit App" })
+keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = ":wqall" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },

@@ -11,14 +11,11 @@
 ├── after
 │  └── ftplugin # filetype-specific configs
 ├── queries # modifications of treesitter queries
-├── mac-helper # opener for neovide on macOS
-├── snippets # VS-Code-style for portability
+├── snippets
 │  ├── basic
 │  └── project-specific
-└── templates # skeleton files
+└── templates
 ```
-
----
 
 ## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)

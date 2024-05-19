@@ -54,13 +54,14 @@ return {
 				desc = " Hover Peek Function",
 			},
 			{
+				"q",
+				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
+				mode = "o", -- only operator-pending to not conflict with commenting selection
+				desc = "󱡔 single comment",
+			},
+			{
 				"dq",
-				function()
-					local cursor = vim.api.nvim_win_get_cursor(0)
-					vim.cmd.TSTextobjectSelect("@comment.outer")
-					u.normal("d")
-					vim.api.nvim_win_set_cursor(0, cursor)
-				end,
+				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
 				desc = " Sticky Delete Comment",
 			},
 			{
