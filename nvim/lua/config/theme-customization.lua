@@ -1,6 +1,5 @@
 local M = {}
 
-local fn = vim.fn
 local g = vim.g
 local u = require("config.utils")
 --------------------------------------------------------------------------------

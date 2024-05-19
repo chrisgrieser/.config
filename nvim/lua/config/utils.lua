@@ -103,6 +103,12 @@ M.textobjRemaps = {
 	z = "'", -- [z]ingle quote
 	e = "`", -- t[e]mplate string / inline cod[e]
 }
+M.extraTextobjMaps = {
+	func = "f",
+	call = "l",
+	wikilink = "R",
+	condition = "o",
+}
 
 --------------------------------------------------------------------------------
 return M

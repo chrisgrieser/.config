@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
@@ -136,17 +137,21 @@ return {
 			},
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
-				-- `dsl` -> delete surrounding call
-				["l"] = {
+				[textObjMaps.call] = {
 					find = "[%w.:_]+%b()", -- includes `:` for lua methods and css pseudo-classes
 					delete = "([%w.:_]+%()().-(%))()",
 				},
-				-- `dsf` -> delete surrounding call
-				["f"] = { 
-					find = "function",
-					delete = "([%w.:_]+%()().-(%))()",
+				[textObjMaps.func] = {
+					-- only one-line lua functions
+					find = "function ?[%w_]* ?%b().- end",
+					delete = "(function ?[%w_]* ?%b() ?)().-( end)()",
 				},
-				["R"] = { -- wikilink
+				[textObjMaps.condition] = {
+					-- only one-line lua conditionals
+					find = "if .- then .- end",
+					delete = "(if .- then )().-( end)()",
+				},
+				[textObjMaps.wikilink] = {
 					find = "%[%[.-%]%]",
 					add = { "[[", "]]" },
 					delete = "(%[%[)().-(%]%])()",
