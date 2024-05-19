@@ -88,9 +88,7 @@ return {
 				bullets = false,
 				dash_string = "─",
 			},
-			yaml = {
-				codeblock_highlight = "CodeBlock",
-			},
+			yaml = { codeblock_highlight = "CodeBlock" },
 		},
 		config = function(_, opts)
 			-- add background to injections, see `ftplugn/yaml/injections.scm`
@@ -111,17 +109,18 @@ return {
 		"uga-rosa/ccc.nvim",
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
+			-- CAVEAT This textobj is not forward-seeking
+			{ "#", "<Plug>(ccc-select-color)", mode = { "x", "o" }, desc = "󱡔 color" },
 		},
 		ft = { "css", "scss", "sh", "lua" },
-		config = function()
+		config = function(spec)
 			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
 				highlighter = {
 					auto_enable = true,
+					filetypes = spec.ft, -- uses lazy.nvim's ft spec
 					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
-					lsp = true,
-					filetypes = { "css", "scss", "sh", "lua" },
 				},
 				pickers = {
 					ccc.picker.hex,
@@ -129,7 +128,7 @@ return {
 					ccc.picker.css_hsl,
 					ccc.picker.ansi_escape { meaning1 = "bright" },
 				},
-				alpha_show = "hide", -- needed when highlighter.lsp is set to true
+				alpha_show = "auto", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
 				inputs = { ccc.input.hsl },
 				outputs = {
