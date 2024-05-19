@@ -76,8 +76,13 @@ function update() {
 	# mas upgrade
 
 	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
-	mas_updates=$(mas outdated | grep -v "Highlights" | cut -f1 -d" " | xargs mas upgrade)
-	[[ -z "$mas_updates" ]] && echo "No MAS updates."
+	local mas_updates
+	mas_updates=$(mas outdated | grep -v "Highlights")
+	if [[ -z "$mas_updates" ]]; then
+		echo "No MAS updates."
+	else
+		echo "$mas_updates" | cut -f1 -d" " | xargs mas upgrade
+	fi
 
 	_print-section "Finish up"
 	# sketchybar needs restart for new persmission
