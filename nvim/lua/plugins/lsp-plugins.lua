@@ -36,8 +36,7 @@ return {
 						breadcrumbs = breadcrumbs .. v.name .. "."
 					end
 					breadcrumbs = breadcrumbs:sub(1, -2):gsub(".%[", "[")
-					vim.fn.setreg("+", breadcrumbs)
-					u.notify("Copied", breadcrumbs)
+					u.copyAndNotify(breadcrumbs)
 				end,
 				desc = "󰒕 Copy Breadcrumbs",
 			},
@@ -140,7 +139,6 @@ return {
 				vim.lsp.protocol.SymbolKind.Interface,
 				vim.lsp.protocol.SymbolKind.Constructor,
 				vim.lsp.protocol.SymbolKind.Method,
-				vim.lsp.protocol.SymbolKind.Interface,
 				vim.lsp.protocol.SymbolKind.Object,
 				vim.lsp.protocol.SymbolKind.Array,
 				vim.lsp.protocol.SymbolKind.Key,

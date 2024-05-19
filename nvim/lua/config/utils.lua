@@ -13,6 +13,11 @@ function M.notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
+function M.copyAndNotify(text)
+	vim.fn.setreg("+", text)
+	vim.notify(text, vim.log.levels.INFO, { title = "Copied" })
+end
+
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
 ---@param key "fg"|"bg"

@@ -2,27 +2,25 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 local function dapConfig()
-	--[[ Sign-Icons & Highlights ]]
-	local sign = vim.fn.sign_define
+	-- SIGN-ICONS & HIGHLIGHTS
 	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
 	vim.api.nvim_set_hl(0, "DapPause", { bg = hintBg })
 	local infoBg = u.getHighlightValue("DiagnosticVirtualTextInfo", "bg")
 	vim.api.nvim_set_hl(0, "DapBreak", { bg = infoBg })
 
-	sign("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapPause" })
-	sign("DapBreakpoint", { text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" })
-	sign("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+	vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapPause" })
+	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
-	--[[ auto-open/close the dap-ui ]]
+	-- AUTO-OPEN/CLOSE THE DAP-UI
 	local listener = require("dap").listeners.before
 	listener.attach.dapui_config = function() require("dapui").open() end
 	listener.launch.dapui_config = function() require("dapui").open() end
 	listener.event_terminated.dapui_config = function() require("dapui").close() end
 	listener.event_exited.dapui_config = function() require("dapui").close() end
 
-	--[[ lualine components ]]
-	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl
-	if not breakpointHl then return end
+	-- LUALINE COMPONENTS
+	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl or "DiagnosticInfo"
 	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
 	u.addToLuaLine("sections", "lualine_y", {
 		color = { fg = breakpointFg },
@@ -44,7 +42,6 @@ local function dapConfig()
 	end)
 end
 
----PENDING https://github.com/mfussenegger/nvim-dap/issues/792
 ---@param dir "next"|"prev"
 local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
@@ -88,6 +85,8 @@ return {
 		keys = {
 			{ "7", function() require("dap").continue() end, desc = " Continue" },
 			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle Breakpoint" },
+			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
+			{ "gB", function() gotoBreakpoint("prev") end, desc = " Previous Breakpoint" },
 			{
 				"<leader>dc",
 				function() require("dap").clear_breakpoints() end,
@@ -95,8 +94,6 @@ return {
 			},
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
-			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
-			{ "gB", function() gotoBreakpoint("prev") end, desc = " Previous Breakpoint" },
 		},
 		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,

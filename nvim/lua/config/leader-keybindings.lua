@@ -24,8 +24,7 @@ end, { desc = " Package Dirs" })
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^lua[ =]*", "")
-	vim.fn.setreg("+", lastCommand)
-	u.notify("Copied", lastCommand)
+	u.copyAndNotify(lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under Cursor" })

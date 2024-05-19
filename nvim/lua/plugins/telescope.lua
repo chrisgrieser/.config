@@ -3,15 +3,10 @@ local telescope = vim.cmd.Telescope
 
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 
-local function copyAndNotify(text)
-	vim.fn.setreg("+", text)
-	vim.notify(text, vim.log.levels.INFO, { title = "Copid" })
-end
-
 local function copyValue(prompt_bufnr)
 	local value = require("telescope.actions.state").get_selected_entry().value
 	require("telescope.actions").close(prompt_bufnr)
-	copyAndNotify(value)
+	u.copyAndNotify(value)
 end
 --------------------------------------------------------------------------------
 
@@ -82,17 +77,13 @@ local fileListActions = {
 			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 			local fullpath = cwd .. "/" .. relPath
 			require("telescope.actions").close(prompt_bufnr)
-			copyAndNotify(fullpath)
+			u.copyAndNotify(fullpath)
 		end,
 		type = "action",
 		opts = { desc = "󰅍 Copy absolute path" },
 	},
 	["<C-t>"] = {
-		function(prompt_bufnr)
-			local relPath = require("telescope.actions.state").get_selected_entry().value
-			require("telescope.actions").close(prompt_bufnr)
-			copyAndNotify(relPath)
-		end,
+		copyValue,
 		type = "action",
 		opts = { desc = "󰅍 Copy relative path" },
 	},
@@ -100,10 +91,15 @@ local fileListActions = {
 		function(prompt_bufnr)
 			local relPath = require("telescope.actions.state").get_selected_entry().value
 			require("telescope.actions").close(prompt_bufnr)
-			copyAndNotify(vim.fs.basename(relPath))
+			u.copyAndNotify(vim.fs.basename(relPath))
 		end,
 		type = "action",
-		opts = { desc = "󰅍 Copy name" },
+		opts = { desc = "󰅍 Copy filename" },
+	},
+	["<D-p>"] = {
+		function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
+		type = "action",
+		opts = { desc = " Toggle Preview" },
 	},
 }
 
@@ -119,42 +115,38 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 	},
 })
 
-local togglePreviewAction = {
-	function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
-	type = "action",
-	opts = { desc = " Toggle Preview" },
-}
-
 local toggleHiddenAction = {
-	function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+	["<C-h>"] = {
+		function(prompt_bufnr)
+			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
-		-- hidden status not stored, but title is, so we determine the previous state via title
-		local prevTitle = current_picker.prompt_title
-		local ignoreHidden = not prevTitle:find("hidden")
+			-- hidden status not stored, but title is, so we determine the previous state via title
+			local prevTitle = current_picker.prompt_title
+			local ignoreHidden = not prevTitle:find("hidden")
 
-		local title = "Find Files: " .. vim.fs.basename(cwd)
-		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
-		local currentQuery = require("telescope.actions.state").get_current_line()
-		local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
+			local title = "Find Files: " .. vim.fs.basename(cwd)
+			if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+			local currentQuery = require("telescope.actions.state").get_current_line()
+			local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
 
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			default_text = currentQuery,
-			prompt_title = title,
-			hidden = ignoreHidden,
-			no_ignore = ignoreHidden,
-			cwd = cwd,
+			require("telescope.actions").close(prompt_bufnr)
+			require("telescope.builtin").find_files {
+				default_text = currentQuery,
+				prompt_title = title,
+				hidden = ignoreHidden,
+				no_ignore = ignoreHidden,
+				cwd = cwd,
 			-- stylua: ignore
 			file_ignore_patterns = {
 				"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
 				unpack(existingFileIgnores), -- must be last for all items to be unpacked
 			},
-		}
-	end,
-	type = "action",
-	opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
+			}
+		end,
+		type = "action",
+		opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -174,8 +166,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			toml = "object",
 		}
 		local filter = symbolFilter[ft]
-		local desc
-		local symbolSearch
+		local desc, symbolSearch
 
 		if filter then
 			symbolSearch = function()
@@ -287,10 +278,7 @@ local function telescopeConfig()
 				layout_config = smallLayout,
 				previewer = false,
 				mappings = {
-					i = {
-						["<D-p>"] = togglePreviewAction,
-						["<C-h>"] = toggleHiddenAction,
-					},
+					i = vim.tbl_extend("force", fileListActions, toggleHiddenAction),
 				},
 			},
 			oldfiles = {
@@ -314,7 +302,7 @@ local function telescopeConfig()
 				layout_config = smallLayout,
 				previewer = false,
 				mappings = {
-					i = { ["<D-p>"] = togglePreviewAction },
+					i = fileListActions,
 				},
 			},
 			live_grep = {
@@ -380,11 +368,7 @@ local function telescopeConfig()
 				mappings = {
 					i = {
 						["<C-r>"] = "git_reset_soft",
-						["<C-h>"] = function(prompt_bufnr)
-							local hash = require("telescope.actions.state").get_selected_entry().value
-							require("telescope.actions").close(prompt_bufnr)
-							copyAndNotify(hash)
-						end,
+						["<C-h>"] = copyValue,
 					},
 				},
 			},
@@ -425,17 +409,13 @@ local function telescopeConfig()
 								local out = {}
 								if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
 								if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-								copyAndNotify(table.concat(out, "\n"))
+								u.copyAndNotify(table.concat(out, "\n"))
 							end,
 							type = "action",
 							opts = { desc = " Copy Value" },
 						},
 						["<D-CR>"] = {
-							function(prompt_bufnr)
-								local hlName = require("telescope.actions.state").get_selected_entry().value
-								require("telescope.actions").close(prompt_bufnr)
-								copyAndNotify(hlName)
-							end,
+							copyValue,
 							type = "action",
 							opts = { desc = " Copy Name" },
 						},
@@ -470,8 +450,8 @@ local function telescopeConfig()
 				fname_width = 0, -- can see name in preview title
 				symbol_width = 30,
 				file_ignore_patterns = {
-					"node_modules", -- ts/js
-					".local", -- neodev.nvim
+					"node_modules",
+					".local", -- nvim runtime
 					"homebrew", -- nvim runtime
 					"typings", -- pyright types
 					".venv", -- python
