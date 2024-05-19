@@ -1,14 +1,15 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- add space
 vim.bo.commentstring = "// %s" 
 
+--------------------------------------------------------------------------------
+
 -- fix my habits
-u.ftAbbr("cosnt", "const")
-u.ftAbbr("local", "const")
-u.ftAbbr("--", "//")
-u.ftAbbr("~=", "!==")
-u.ftAbbr("elseif", "else if")
+local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+
+abbr("cosnt", "const")
+abbr("local", "const")
+abbr("--", "//")
+abbr("~=", "!==")
+abbr("elseif", "else if")
 
 --------------------------------------------------------------------------------

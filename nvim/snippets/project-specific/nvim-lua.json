@@ -3,6 +3,10 @@
     "body": "---@cast ${1:varname} ${2:string}",
     "prefix": "@cast (LuaDoc)"
   },
+  "abbreviate (function)": {
+    "body": "local function abbr(lhs, rhs) vim.keymap.set(\"ia\", lhs, rhs, { buffer = true }) end",
+    "prefix": "abbreviate (function)"
+  },
   "autocmd": {
     "body": [
       "vim.api.nvim_create_autocmd(\"${1:event}\", {",

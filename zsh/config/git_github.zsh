@@ -12,6 +12,7 @@ alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
+alias undo='git reset --mixed HEAD@{1}'
 
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release`

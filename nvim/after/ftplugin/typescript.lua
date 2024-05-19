@@ -1,17 +1,16 @@
-local u = require("config.utils")
+-- fix my habits
+local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+
+abbr("cosnt", "const")
+abbr("local", "const")
+abbr("--", "//")
+abbr("~=", "!==")
+abbr("elseif", "else if")
+
 --------------------------------------------------------------------------------
 
 -- add space
-vim.bo.commentstring = "// %s" 
-
--- fix my habits
-u.ftAbbr("cosnt", "const")
-u.ftAbbr("local", "const")
-u.ftAbbr("--", "//")
-u.ftAbbr("~=", "!==")
-u.ftAbbr("elseif", "else if")
-
---------------------------------------------------------------------------------
+vim.bo.commentstring = "// %s"
 
 -- set errorformat to tsc, but keep `make` as makeprg
 local maker = vim.o.makeprg

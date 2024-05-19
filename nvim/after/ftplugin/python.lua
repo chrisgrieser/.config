@@ -18,13 +18,13 @@ end, 1)
 
 --------------------------------------------------------------------------------
 -- fix habits
+local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
 
-local ftAbbr = require("config.utils").ftAbbr
-ftAbbr("true", "True")
-ftAbbr("false", "False")
-ftAbbr("//", "#")
-ftAbbr("--", "#")
-ftAbbr("null", "None")
-ftAbbr("nil", "None")
-ftAbbr("none", "None")
-ftAbbr("trim", "strip")
+abbr("true", "True")
+abbr("false", "False")
+abbr("//", "#")
+abbr("--", "#")
+abbr("null", "None")
+abbr("nil", "None")
+abbr("none", "None")
+abbr("trim", "strip")
