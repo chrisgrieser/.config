@@ -263,9 +263,9 @@ keymap("n", key, function()
 	local isRecording = vim.fn.reg_recording() ~= ""
 	if isRecording then
 		u.normal("q")
-		local recording = vim.fn.getreg(register):sub(1, -(#key + 1))
-		vim.fn.setreg(register, recording) -- as the key itself is recorded
-		if recording ~= "" then u.notify("Recorded", vim.fn.keytrans(recording), "trace") end
+		local recording = vim.fn.getreg(register):sub(1, -(#key + 1)) -- as the key itself is recorded
+		vim.fn.setreg(register, recording) 
+		u.notify("Recorded", vim.fn.keytrans(recording), "trace") 
 	else
 		u.normal("q" .. register)
 	end

@@ -2,7 +2,6 @@ local M = {}
 
 local fn = vim.fn
 local g = vim.g
-
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
@@ -28,34 +27,24 @@ local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, cha
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	-- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
-	clearHl("@lsp.type.comment")
+	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+	overwriteHl(
+		"@string.special.url.comment",
+		{ fg = u.getHighlightValue("Comment", "fg"), underline = true }
+	)
+	overwriteHl("MatchParen", { reverse = true }) -- stand out more
+	linkHl("Whitespace", "NonText") -- trailing spaces more visible
+	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
 
-	-- better url look
-	local commentColor = u.getHighlightValue("Comment", "fg")
-	overwriteHl("@string.special.url.comment", { fg = commentColor, underline = true })
-
-	-- make `MatchParen` stand out more
-	overwriteHl("MatchParen", { reverse = true })
-
-	-- use underlines instead of undercurls for diagnostics
+	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
-	-- underdotted for spell issues (used only for git commit messages though)
+	-- Spelling: underlines instead of undercurls (used only for commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
-
-	-- trailing spaces more visible
-	linkHl("Whitespace", "NonText")
-
-	-- FIX themes markdown italics missing in many themes
-	overwriteHl("@markup.italic.markdown_inline", { italic = true })
-
-	-- de-emphasize commit messages between 50 and 72 chars
-	linkHl("@comment.warning.gitcommit", "WarningMsg")
 end
 
 local function themeModifications()
@@ -86,9 +75,9 @@ local function themeModifications()
 	-----------------------------------------------------------------------------
 
 	if theme == "tokyonight" then
-		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
+		local yellow = mode == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. statuslineYellow)
+			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. yellow)
 			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
