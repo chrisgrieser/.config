@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0B30D248-604D-4DDF-9C4E-943748691AEC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5139B068-40DC-4144-8628-D12881903579</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>10797BFB-ECCC-404B-9A55-B91951068BC9</key>
 		<array>
 			<dict>
@@ -47,8 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5139B068-40DC-4144-8628-D12881903579</key>
-		<array/>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<array>
 			<dict>
@@ -288,50 +273,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>test</string>
-				<key>subtext</key>
-				<string>test ddgr</string>
-				<key>text</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0B30D248-604D-4DDF-9C4E-943748691AEC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-first-ddg-page.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5139B068-40DC-4144-8628-D12881903579</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>searcher</key>
@@ -411,7 +352,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/copy-first-link.sh</string>
+				<string>./scripts/get-first-ddg-page.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -424,9 +365,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Requires `ddgr`.
-
----
+	<string>---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -440,13 +379,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
-		<key>0B30D248-604D-4DDF-9C4E-943748691AEC</key>
-		<dict>
-			<key>xpos</key>
-			<real>630</real>
-			<key>ypos</key>
-			<real>305</real>
-		</dict>
 		<key>10797BFB-ECCC-404B-9A55-B91951068BC9</key>
 		<dict>
 			<key>colorindex</key>
@@ -455,13 +387,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>190</real>
-		</dict>
-		<key>5139B068-40DC-4144-8628-D12881903579</key>
-		<dict>
-			<key>xpos</key>
-			<real>810</real>
-			<key>ypos</key>
-			<real>305</real>
 		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
@@ -582,25 +507,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>region</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>--noua</string>
-			</dict>
-			<key>description</key>
-			<string>Disable User Agent. Adding/Removing `--noua` sometimes fixes errors.</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>noua</string>
 		</dict>
 	</array>
 	<key>version</key>
