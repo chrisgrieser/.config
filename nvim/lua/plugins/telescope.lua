@@ -48,7 +48,7 @@ local keymappings_I = {
 			}
 		end,
 		type = "action",
-		opts = { desc = " CWD up" },
+		opts = { desc = " cwd up" },
 	},
 	["<D-s>"] = {
 		function(prompt_bufnr)
@@ -58,9 +58,14 @@ local keymappings_I = {
 		type = "action",
 		opts = { desc = " Send to Quickfix" },
 	},
-}
+	["<D-p>"] = {
+		function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
+		type = "action",
+		opts = { desc = " Toggle Preview" },
+	},
 
-local fileListActions = {
+	["<C-t>"] = { copyValue, type = "action", opts = { desc = "󰅍 Copy relative path" } },
+	["<C-c>"] = { copyValue, type = "action", opts = { desc = "󰅍 Copy value" } },
 	["<D-l>"] = {
 		function(prompt_bufnr)
 			local path = require("telescope.actions.state").get_selected_entry().value
@@ -82,11 +87,6 @@ local fileListActions = {
 		type = "action",
 		opts = { desc = "󰅍 Copy absolute path" },
 	},
-	["<C-t>"] = {
-		copyValue,
-		type = "action",
-		opts = { desc = "󰅍 Copy relative path" },
-	},
 	["<C-n>"] = {
 		function(prompt_bufnr)
 			local relPath = require("telescope.actions.state").get_selected_entry().value
@@ -95,11 +95,6 @@ local fileListActions = {
 		end,
 		type = "action",
 		opts = { desc = "󰅍 Copy filename" },
-	},
-	["<D-p>"] = {
-		function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
-		type = "action",
-		opts = { desc = " Toggle Preview" },
 	},
 }
 
@@ -116,40 +111,37 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 })
 
 local toggleHiddenAction = {
-	["<C-h>"] = {
-		function(prompt_bufnr)
-			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+	function(prompt_bufnr)
+		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+		local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
-			-- hidden status not stored, but title is, so we determine the previous state via title
-			local prevTitle = current_picker.prompt_title
-			local ignoreHidden = not prevTitle:find("hidden")
+		-- hidden status not stored, but title is, so we determine the previous state via title
+		local prevTitle = current_picker.prompt_title
+		local ignoreHidden = not prevTitle:find("hidden")
 
-			local title = "Find Files: " .. vim.fs.basename(cwd)
-			if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
-			local currentQuery = require("telescope.actions.state").get_current_line()
-			local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
+		local title = "Find Files: " .. vim.fs.basename(cwd)
+		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+		local currentQuery = require("telescope.actions.state").get_current_line()
+		local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
 
-			require("telescope.actions").close(prompt_bufnr)
-			require("telescope.builtin").find_files {
-				default_text = currentQuery,
-				prompt_title = title,
-				hidden = ignoreHidden,
-				no_ignore = ignoreHidden,
-				cwd = cwd,
-			-- stylua: ignore
-			file_ignore_patterns = {
-				"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
-				unpack(existingFileIgnores), -- must be last for all items to be unpacked
-			},
-			}
-		end,
-		type = "action",
-		opts = { desc = "󰈉 Toggle --hidden & --no-ignore" },
-	},
+		require("telescope.actions").close(prompt_bufnr)
+		require("telescope.builtin").find_files {
+			default_text = currentQuery,
+			prompt_title = title,
+			hidden = ignoreHidden,
+			no_ignore = ignoreHidden,
+			cwd = cwd,
+		-- stylua: ignore
+		file_ignore_patterns = {
+			"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
+			unpack(existingFileIgnores), -- must be last for all items to be unpacked
+		},
+		}
+	end,
+	type = "action",
+	opts = { desc = "󰈉 Toggle hidden" },
 }
 
---------------------------------------------------------------------------------
 -- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
 -- Also, we are using document symbols here since Treesitter apparently does not
@@ -269,27 +261,25 @@ local function telescopeConfig()
 			find_files = {
 				prompt_prefix = "󰝰 ",
 				path_display = { "filename_first" },
-				-- FIX using the default fd command from telescope is somewhat buggy,
-				-- e.g. not respecting `~/.config/fd/ignore`
+				-- FIX telescope not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
-				follow = false,
+				mappings = {
+					i = {
+						["<C-h>"] = toggleHiddenAction,
+					},
+				},
 
 				-- use small layout, toggle via <D-p>
 				layout_config = smallLayout,
 				previewer = false,
-				mappings = {
-					i = vim.tbl_extend("force", fileListActions, toggleHiddenAction),
-				},
 			},
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
-					-- approximation of the project name
 					local project = path
 						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
 						:gsub("/Users/%w+", "") -- remove home dir
 						:match("/(.-)/") -- highest parent
-
 					local tail = require("telescope.utils").path_tail(path)
 					local text = tail .. "  " .. project
 
@@ -301,9 +291,6 @@ local function telescopeConfig()
 				-- use small layout, toggle via <D-p>
 				layout_config = smallLayout,
 				previewer = false,
-				mappings = {
-					i = fileListActions,
-				},
 			},
 			live_grep = {
 				prompt_prefix = " ",
@@ -368,7 +355,6 @@ local function telescopeConfig()
 				mappings = {
 					i = {
 						["<C-r>"] = "git_reset_soft",
-						["<C-h>"] = copyValue,
 					},
 				},
 			},
@@ -413,11 +399,6 @@ local function telescopeConfig()
 							end,
 							type = "action",
 							opts = { desc = " Copy Value" },
-						},
-						["<D-CR>"] = {
-							copyValue,
-							type = "action",
-							opts = { desc = " Copy Name" },
 						},
 					},
 				},
