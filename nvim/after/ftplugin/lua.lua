@@ -10,10 +10,10 @@ abbr("===", "==")
 
 --------------------------------------------------------------------------------
 
--- Run to EoL
-vim.keymap.set("n", "R", function()
+-- Put to EoL in cmdline
+vim.keymap.set("n", "<leader>r", function()
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.api.nvim_win_get_cursor(0)[2]
-	local toEol = vim.trim(line:sub(col))
+	local toEol = vim.trim(line:sub(col + 1))
 	return ":lua = " .. toEol
-end, { buffer = true, expr = true, desc = " Run to EoL" })
+end, { buffer = true, expr = true, desc = " Put to EoL in cmdline" })

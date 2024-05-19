@@ -20,6 +20,7 @@ local keymappings_I = {
 	["<Esc>"] = "close",
 
 	["<C-v>"] = "select_vertical",
+	["<C-s>"] = "select_horizontal",
 	["<PageDown>"] = "preview_scrolling_down",
 	["<PageUp>"] = "preview_scrolling_up",
 	["<Up>"] = "cycle_history_prev",
