@@ -128,7 +128,7 @@ return {
 					ccc.picker.css_hsl,
 					ccc.picker.ansi_escape { meaning1 = "bright" },
 				},
-				alpha_show = "auto", -- needed when highlighter.lsp is set to true
+				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
 				inputs = { ccc.input.hsl },
 				outputs = {
