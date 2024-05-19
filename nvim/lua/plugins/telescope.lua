@@ -1,6 +1,18 @@
 local u = require("config.utils")
 local telescope = vim.cmd.Telescope
+
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
+
+local function copyAndNotify(text)
+	vim.fn.setreg("+", text)
+	vim.notify(text, vim.log.levels.INFO, { title = "Copid" })
+end
+
+local function copyValue(prompt_bufnr)
+	local value = require("telescope.actions.state").get_selected_entry().value
+	require("telescope.actions").close(prompt_bufnr)
+	copyAndNotify(value)
+end
 --------------------------------------------------------------------------------
 
 local keymappings_I = {
@@ -51,6 +63,9 @@ local keymappings_I = {
 		type = "action",
 		opts = { desc = " Send to Quickfix" },
 	},
+}
+
+local fileListActions = {
 	["<D-l>"] = {
 		function(prompt_bufnr)
 			local path = require("telescope.actions.state").get_selected_entry().value
@@ -62,13 +77,12 @@ local keymappings_I = {
 	},
 	["<C-p>"] = {
 		function(prompt_bufnr)
+			local relPath = require("telescope.actions.state").get_selected_entry().value
 			local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
 			local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
-			local relPath = require("telescope.actions.state").get_selected_entry().value
 			local fullpath = cwd .. "/" .. relPath
 			require("telescope.actions").close(prompt_bufnr)
-			vim.fn.setreg("+", fullpath)
-			u.notify("Copied", fullpath)
+			copyAndNotify(fullpath)
 		end,
 		type = "action",
 		opts = { desc = "󰅍 Copy absolute path" },
@@ -77,8 +91,7 @@ local keymappings_I = {
 		function(prompt_bufnr)
 			local relPath = require("telescope.actions.state").get_selected_entry().value
 			require("telescope.actions").close(prompt_bufnr)
-			vim.fn.setreg("+", relPath)
-			u.notify("Copied", relPath)
+			copyAndNotify(relPath)
 		end,
 		type = "action",
 		opts = { desc = "󰅍 Copy relative path" },
@@ -86,10 +99,8 @@ local keymappings_I = {
 	["<C-n>"] = {
 		function(prompt_bufnr)
 			local relPath = require("telescope.actions.state").get_selected_entry().value
-			local name = vim.fs.basename(relPath)
 			require("telescope.actions").close(prompt_bufnr)
-			vim.fn.setreg("+", name)
-			u.notify("Copied", name)
+			copyAndNotify(vim.fs.basename(relPath))
 		end,
 		type = "action",
 		opts = { desc = "󰅍 Copy name" },
@@ -346,8 +357,8 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				prompt_title = "Git Log",
 				layout_config = { horizontal = { preview_width = 0.5 } },
-				-- add commit time (%cr) & `--all`, double `\t` for highlighting
-				git_command = { "git", "log", "--all", "--pretty=%h %s\t\t%cr", "--", "." },
+				-- add commit time (%cr) & `--all`
+				git_command = { "git", "log", "--all", "--pretty=%h %s %cr", "--", "." },
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					dyn_title = function(_, entry) return entry.value end, -- hash as title
 					get_command = function(entry, status)
@@ -372,8 +383,7 @@ local function telescopeConfig()
 						["<C-h>"] = function(prompt_bufnr)
 							local hash = require("telescope.actions.state").get_selected_entry().value
 							require("telescope.actions").close(prompt_bufnr)
-							vim.fn.setreg("+", hash)
-							u.notify("Hash Copied", hash)
+							copyAndNotify(hash)
 						end,
 					},
 				},
@@ -381,7 +391,7 @@ local function telescopeConfig()
 			git_bcommits = {
 				prompt_prefix = "󰊢 ",
 				layout_config = { horizontal = { height = 0.99 } },
-				git_command = { "git", "log", "--pretty=%h %s\t%cr" }, -- add commit time (%cr)
+				git_command = { "git", "log", "--pretty=%h %s %cr" }, -- add commit time (%cr)
 			},
 			git_branches = {
 				prompt_prefix = " ",
@@ -407,18 +417,28 @@ local function telescopeConfig()
 				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 				mappings = {
 					i = {
-						-- copy value of highlight instead of sending a message
-						["<CR>"] = function(prompt_bufnr)
-							local hlName = require("telescope.actions.state").get_selected_entry().value
-							require("telescope.actions").close(prompt_bufnr)
-							local value = vim.api.nvim_get_hl(0, { name = hlName })
-							local out = { hlName }
-							if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
-							if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-							local str = table.concat(out, "\n")
-							vim.fn.setreg("+", str)
-							u.notify("Copied", str)
-						end,
+						["<CR>"] = {
+							function(prompt_bufnr)
+								local hlName = require("telescope.actions.state").get_selected_entry().value
+								require("telescope.actions").close(prompt_bufnr)
+								local value = vim.api.nvim_get_hl(0, { name = hlName })
+								local out = {}
+								if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+								if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+								copyAndNotify(table.concat(out, "\n"))
+							end,
+							type = "action",
+							opts = { desc = " Copy Value" },
+						},
+						["<D-CR>"] = {
+							function(prompt_bufnr)
+								local hlName = require("telescope.actions.state").get_selected_entry().value
+								require("telescope.actions").close(prompt_bufnr)
+								copyAndNotify(hlName)
+							end,
+							type = "action",
+							opts = { desc = " Copy Name" },
+						},
 					},
 				},
 			},
@@ -591,7 +611,8 @@ return {
 					local builtins = {
 						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
 						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
-						"elflord", "desert", "delek", "darkblue", "blue", "morning",
+						"elflord", "desert", "delek", "darkblue", "blue", "morning", "vim",
+						"habamax", "retrobox", "sorbet", "zaibatsu", "wildcharm"
 					}
 					local original = vim.fn.getcompletion
 
