@@ -92,6 +92,8 @@ local function themeModifications()
 		end
 	end
 
+	-----------------------------------------------------------------------------
+
 	if theme == "tokyonight" then
 		local statuslineYellow = mode == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
@@ -106,13 +108,14 @@ local function themeModifications()
 	elseif theme == "neomodern" and mode == "light" then
 		revertedTodoComments()
 		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
-		overwriteHl("NonText", { fg = "#c0c0c5"})
+		overwriteHl("NonText", { fg = "#b5b5bb"})
 		overwriteHl("IblIndent", { fg = "#d8d8db"})
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_a_" .. v, "guifg=#ffffff")
 		end
-		overwriteHl("NotifyINFOIcon", { fg = "#a9ff68"})
-		overwriteHl("NotifyINFOTitle", {})
+		overwriteHl("NotifyINFOIcon", { fg = "#00ddc1"})
+		overwriteHl("NotifyINFOTitle", { fg = "#00ddc1"})
+		overwriteHl("@lsp.mod.readonly", { fg = "#ec9403"})
 	elseif theme == "dracula" then
 		boldLualineA()
 		revertedTodoComments()
