@@ -5,7 +5,6 @@
 
 local spellfixes = {
 	THe = "The",
-	repalce = "replace",
 	ahve = "have",
 	awiat = "await",
 	brwoser = "browser",
@@ -40,6 +39,7 @@ local spellfixes = {
 	onyl = "only",
 	ot = "to",
 	remtoe = "remote",
+	repalce = "replace",
 	reponse = "response",
 	retrun = "return",
 	retunr = "return",

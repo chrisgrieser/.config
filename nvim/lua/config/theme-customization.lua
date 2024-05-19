@@ -113,8 +113,8 @@ local function themeModifications()
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_a_" .. v, "guifg=#ffffff")
 		end
-		overwriteHl("NotifyINFOIcon", { fg = "#00ddc1"})
-		overwriteHl("NotifyINFOTitle", { fg = "#00ddc1"})
+		overwriteHl("NotifyINFOIcon", { fg = "#00b9a2"})
+		overwriteHl("NotifyINFOTitle", { fg = "#00b9a2"})
 		overwriteHl("@lsp.mod.readonly", { fg = "#ec9403"})
 	elseif theme == "dracula" then
 		boldLualineA()

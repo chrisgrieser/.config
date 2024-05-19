@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
 # INFO IF SELECTION IS…
-# file path: reveal it in file explorer
-# directory path: open it
+# file path: reveal it in Finder.app
+# directory path: open it in Finder.app
 # url(s): open all urls in Browser
 # email: send to that address
-# some other text: google it & open first duckduckgo hit
+# some other text: google it
 # empty: do nothing
 #───────────────────────────────────────────────────────────────────────────────
 

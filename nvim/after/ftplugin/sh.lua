@@ -1,11 +1,12 @@
-local u = require("config.utils")
+-- fix my habits
+local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+
+abbr("//", "#")
+abbr("--", "#")
+abbr("delay", "sleep")
+abbr("const", "local")
+
 --------------------------------------------------------------------------------
 
--- fix my habits
-u.ftAbbr("//", "#")
-u.ftAbbr("--", "#")
-u.ftAbbr("delay", "sleep")
-u.ftAbbr("const", "local")
-
--- FIX some shell-filetypes like zsh override makeprg
+-- fix some shell-filetypes like zsh override makeprg
 vim.opt_local.makeprg = "make --silent --warn-undefined-variables"

@@ -4,5 +4,7 @@
 <dict>
 	<key>delay_ms</key>
 	<string>120</string>
+	<key>openai_model</key>
+	<string>gpt-4o</string>
 </dict>
 </plist>

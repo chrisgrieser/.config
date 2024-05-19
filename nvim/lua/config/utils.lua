@@ -13,10 +13,6 @@ function M.notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
-function M.ftAbbr(lhs, rhs)
-	vim.keymap.set("ia", lhs, rhs, { buffer = true })
-end
-
 ---https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
 ---@param name string name of highlight group
 ---@param key "fg"|"bg"
