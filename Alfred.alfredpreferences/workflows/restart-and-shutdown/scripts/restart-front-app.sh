@@ -22,6 +22,7 @@ done
 
 # RESTART
 [[ "$FRONT_APP" == "wezterm-gui" ]] && FRONT_APP="WezTerm"
+sleep 0.2
 open -a "$FRONT_APP"
 sleep 0.2
 open -a "$FRONT_APP" # redundancy to fix sometimes not switching

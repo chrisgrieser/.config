@@ -223,7 +223,7 @@ function gli {
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf --ansi --no-sort --track \
-				--header-first --header="↵  Checkout   ^H Copy Hash   ^R Rebase   ^S Diff Stats" \
+				--header-first --header="↵ Checkout   ^H Hash   ^R Rebase   ^S Stats" \
 				--expect="ctrl-h,ctrl-r,ctrl-s" --with-nth=2.. --preview-window=55% \
 				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
@@ -234,12 +234,12 @@ function gli {
 	hash=$(echo "$selected" | sed '1d' | cut -d' ' -f1)
 
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
-		git show --stat "$hash^"
-	elif [[ "$key_pressed" == "ctrl-s" ]]; then
 		echo -n "$hash" | pbcopy
 		print "\e[1;33m$hash\e[0m copied."
+	elif [[ "$key_pressed" == "ctrl-s" ]]; then
+		git show --stat "$hash"
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		git rebase -i "$hash^"
+		git rebase --interactive "$hash^"
 		_separator && _gitlog "$hash^..HEAD" # confirm result
 	else
 		git checkout "$hash"

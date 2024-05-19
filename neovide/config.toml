@@ -6,5 +6,5 @@ title-hidden = true
 tabs = false
 
 [font]
-normal = ["JetBrainsMonoNL NF"]
+normal = ["JetBrainsMonoNL NF", "Monaco"]
 size = 24.5
