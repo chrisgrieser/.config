@@ -118,8 +118,8 @@ return {
 	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
 
 	-- FONT
-	-- some nerdfont icons requires a space after them to be properly sized
 	font = wt.font {
+		-- some nerdfont icons requires a space after them to be properly sized
 		family = "Iosevka Term",
 		weight = "Medium",
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures

@@ -56,21 +56,6 @@ local function customHighlights()
 
 	-- de-emphasize commit messages between 50 and 72 chars
 	linkHl("@comment.warning.gitcommit", "WarningMsg")
-
-	-- injections as code blocks (for yaml injections)
-	-- linkHl("@yaml-injection", "ColorColumn")
-
-	-----------------------------------------------------------------------------
-	local hasNoUpdatedTreesitterHls =
-		vim.tbl_isempty(vim.api.nvim_get_hl(0, { name = "@comment.todo" }))
-	if hasNoUpdatedTreesitterHls then
-		linkHl("@comment.error", "@text.danger")
-		linkHl("@comment.warning", "@text.warning")
-		linkHl("@comment.note", "@text.note")
-		linkHl("@comment.todo", "@text.todo")
-		linkHl("@markup.link.url", "@text.uri")
-		linkHl("@variable.parameter", "@parameter")
-	end
 end
 
 local function themeModifications()
@@ -85,10 +70,16 @@ local function themeModifications()
 			updateHl("lualine_a_" .. v, "gui=bold")
 		end
 	end
+	-- INFO
 	local function revertedTodoComments()
-		for _, type in pairs { "todo", "error", "warning", "note" } do
+		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
+		local textColor = mode == "dark" and "#000000" or "#ffffff"
+		for type, altType in pairs(types) do
 			local fg = u.getHighlightValue("@comment." .. type, "fg")
-			if fg ~= "#000000" then overwriteHl("@comment." .. type, { bg = fg, fg = "#000000" }) end
+				or u.getHighlightValue("Diagnostic" .. altType, "fg")
+			if fg and fg ~= textColor then
+				overwriteHl("@comment." .. type, { bg = fg, fg = textColor })
+			end
 		end
 	end
 
@@ -106,16 +97,19 @@ local function themeModifications()
 		updateHl("@keyword.return", "guifg=#fd4283")
 		if mode == "dark" then revertedTodoComments() end
 	elseif theme == "neomodern" and mode == "light" then
-		revertedTodoComments()
+		vim.defer_fn(revertedTodoComments, 1)
 		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
-		overwriteHl("NonText", { fg = "#b5b5bb"})
-		overwriteHl("IblIndent", { fg = "#d8d8db"})
+		overwriteHl("NonText", { fg = "#b5b5bb" })
+		overwriteHl("IblIndent", { fg = "#d8d8db" })
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_a_" .. v, "guifg=#ffffff")
 		end
-		overwriteHl("NotifyINFOIcon", { fg = "#00b9a2"})
-		overwriteHl("NotifyINFOTitle", { fg = "#00b9a2"})
-		overwriteHl("@lsp.mod.readonly", { fg = "#ec9403"})
+		overwriteHl("NotifyINFOIcon", { fg = "#00b9a2" })
+		overwriteHl("NotifyINFOTitle", { fg = "#00b9a2" })
+		-- higher contrast
+		overwriteHl("@lsp.mod.readonly", { fg = "#ec9403" })
+		overwriteHl("@keyword", { fg = "#9255e6" })
+		overwriteHl("@keyword.conditional", { fg = "#9255e6" })
 	elseif theme == "dracula" then
 		boldLualineA()
 		revertedTodoComments()
