@@ -174,7 +174,7 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		customHighlights()
-		vim.defer_fn(themeModifications, 100)
+		themeModifications()
 	end,
 })
 
@@ -193,7 +193,8 @@ end
 function M.reloadTheming() themeModifications() end
 
 -- initialize theme on startup
-local isDarkMode = fn.system([[defaults read -g AppleInterfaceStyle]]):find("Dark")
+local isDarkMode =
+	vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:find("Dark")
 M.setThemeMode(isDarkMode and "dark" or "light")
 
 --------------------------------------------------------------------------------

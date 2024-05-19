@@ -1,7 +1,3 @@
-local api = vim.api
-local cmd = vim.cmd
-local fn = vim.fn
-
 local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
@@ -67,8 +63,8 @@ keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { d
 
 -- Delete trailing character
 keymap("n", "X", function()
-	local line = api.nvim_get_current_line():gsub("%s+$", "")
-	api.nvim_set_current_line(line:sub(1, -2))
+	local updatedLine = vim.api.nvim_get_current_line():gsub("%s+$", ""):sub(1, -2)
+	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
 -- WHITESPACE & INDENTATION
@@ -180,7 +176,7 @@ end, { desc = "<BS> does not leave cmdline", expr = true })
 keymap({ "i", "c" }, "<C-a>", "<Home>")
 keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("n", "i", function()
-	if api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
+	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
 end, { desc = "correctly indented i", expr = true })
 
@@ -230,7 +226,7 @@ end, { desc = "󰽙 :close / :bdelete" })
 keymap(
 	{ "n", "x" },
 	"<D-l>",
-	function() fn.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
+	function() vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
 	{ desc = "󰀶 Reveal in Finder" }
 )
 
@@ -280,7 +276,10 @@ keymap("n", "Y", "m" .. mark .. "y$", { desc = "󰅍 Sticky Yank", unique = fals
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		if vim.v.event.operator == "y" then vim.cmd("silent! normal! `" .. mark) end
+		-- `z` is used as temporary register for keymaps, thus needs to be ignored
+		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" then
+			vim.cmd("silent! normal! `" .. mark)
+		end
 	end,
 })
 
@@ -301,7 +300,7 @@ keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = ":wqall" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
-		vim.keymap.set("n", "q", cmd.close, { buffer = true, nowait = true, desc = "Close" })
+		vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Close" })
 	end,
 })
 
