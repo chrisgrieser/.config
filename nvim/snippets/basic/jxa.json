@@ -173,6 +173,15 @@
     ],
     "prefix": "read file"
   },
+  "run (JXA)": {
+    "body": [
+      "// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
+      "function run() {",
+      "\t$0",
+      "}"
+    ],
+    "prefix": "run (JXA)"
+  },
   "running apps array": {
     "body": "Application(\"System Events\").applicationProcesses.where({ backgroundOnly: false }).displayedName();",
     "prefix": "running apps array"
