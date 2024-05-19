@@ -11,13 +11,6 @@
     "body": "---@type ${1:string}",
     "prefix": "@type (LuaDoc)"
   },
-  "continue": {
-    "body": [
-      "goto continue",
-      "::continue::"
-    ],
-    "prefix": "continue"
-  },
   "count occurences in string": {
     "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
     "prefix": "count occurences in string"

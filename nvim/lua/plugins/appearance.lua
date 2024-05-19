@@ -10,20 +10,6 @@ return {
 			{ "<leader>of", function() vim.opt.scrolloff = 13 end, desc = "⇓ Fix Scrolloff" },
 		},
 	},
-	-- PENDING https://github.com/nvimdev/indentmini.nvim/issues/15
-	-- {
-	-- 	"nvimdev/indentmini.nvim",
-	-- 	lazy = false,
-	-- 	init = function()
-	-- 		vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
-	-- 			callback = function()
-	-- 				vim.api.nvim_set_hl(0, "IndentLine", { link = "NonText" })
-	-- 				vim.api.nvim_set_hl(0, "IndentLineCurrent", { link = "Comment" })
-	-- 			end,
-	-- 		})
-	-- 	end,
-	-- 	opts = {},
-	-- },
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
@@ -126,7 +112,6 @@ return {
 					ccc.picker.hex,
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					ccc.picker.ansi_escape { meaning1 = "bright" },
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
@@ -150,13 +135,11 @@ return {
 		"stevearc/dressing.nvim",
 		init = function()
 			-- lazy load triggers
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.select = function(...)
+			vim.ui.select = function(...) ---@diagnostic disable-line: duplicate-set-field
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.select(...)
 			end
-			---@diagnostic disable-next-line: duplicate-set-field
-			vim.ui.input = function(...)
+			vim.ui.input = function(...) ---@diagnostic disable-line: duplicate-set-field
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
@@ -182,7 +165,7 @@ return {
 				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
-					show_numbers = false,
+					show_numbers = true,
 					border = vim.g.borderStyle,
 					relative = "editor",
 					max_width = 80,
@@ -192,14 +175,14 @@ return {
 				},
 				telescope = {
 					layout_config = {
-						horizontal = { width = { 0.8, max = 75 }, height = 0.55 },
+						horizontal = { width = { 0.7, max = 75 }, height = 0.6 },
 					},
 				},
 				get_config = function(opts)
 					-- for simple selections, use builtin selector instead of telescope
 					if opts.kind == "codeaction" or opts.kind == "rule_selection" then
 						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
-					elseif opts.kind == "make-selector" or opts.kind == "project-selector" then
+					elseif opts.kind == "make-selector" then
 						return { backend = { "builtin" } }
 					end
 				end,
