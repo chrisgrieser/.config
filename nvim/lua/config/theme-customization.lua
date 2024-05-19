@@ -103,6 +103,16 @@ local function themeModifications()
 
 		updateHl("@keyword.return", "guifg=#fd4283")
 		if mode == "dark" then revertedTodoComments() end
+	elseif theme == "neomodern" and mode == "light" then
+		revertedTodoComments()
+		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
+		overwriteHl("NonText", { fg = "#c0c0c5"})
+		overwriteHl("IblIndent", { fg = "#d8d8db"})
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "guifg=#ffffff")
+		end
+		overwriteHl("NotifyINFOIcon", { fg = "#a9ff68"})
+		overwriteHl("NotifyINFOTitle", {})
 	elseif theme == "dracula" then
 		boldLualineA()
 		revertedTodoComments()
