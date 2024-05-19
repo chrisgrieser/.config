@@ -36,8 +36,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	let cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
-	if (cacheAgeThresholdMins < 1) cacheAgeThresholdMins = 1; // prevent 0 or negative numbers
+	const cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeMins = (+new Date() - +cacheObj.creationDate()) / 1000 / 60;
@@ -50,9 +49,12 @@ function cacheIsOutdated(path) {
  * @returns {boolean} firstPathOlderThanSecond
  */
 function olderThan(firstPath, secondPath) {
-	const firstMdate = +Application("System Events").aliases[firstPath].modificationDate();
-	const secondMdate = +Application("System Events").aliases[secondPath].modificationDate();
-	const firstPathOlderThanSecond = firstMdate - secondMdate < 0;
+	const firstItem = Application("System Events").aliases[firstPath];
+	if (!firstItem.exists()) return true;
+	const secondItem = Application("System Events").aliases[secondPath];
+	if (!secondItem.exists()) return false;
+	const firstPathOlderThanSecond =
+		+firstItem.modificationDate() - +secondItem.modificationDate() < 0;
 	return firstPathOlderThanSecond;
 }
 
@@ -80,8 +82,8 @@ function run() {
 	const subredditCache = `${cachePath}/${subredditName}.json`;
 
 	let posts;
-	const refreshIntervalPassed = cacheIsOutdated(subredditCache)
-	const userPrefsUnchanged = olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache)
+	const refreshIntervalPassed = cacheIsOutdated(subredditCache);
+	const userPrefsUnchanged = olderThan(`${pathOfThisWorkflow}/prefs.plist`, subredditCache);
 	if (!refreshIntervalPassed && userPrefsUnchanged) {
 		posts = JSON.parse(readFile(subredditCache));
 		return JSON.stringify({
