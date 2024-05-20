@@ -57,7 +57,7 @@ return {
 			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
-				mode = "o", -- only operator-pending to not conflict with commenting selection
+				mode = "o", -- only operator-pending to not conflict with selection-commenting
 				desc = "󱡔 single comment",
 			},
 			{
@@ -70,9 +70,9 @@ return {
 				function()
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					u.normal("d")
-					local comStr = vim.bo.commentstring:format(""):gsub("%s*$", " ")
+					local comStr = vim.trim(vim.bo.commentstring:format(""))
 					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-					vim.api.nvim_set_current_line(line .. " " .. comStr)
+					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
 					vim.cmd.startinsert { bang = true }
 				end,
 				desc = " Change Comment",
