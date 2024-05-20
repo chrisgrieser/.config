@@ -111,37 +111,35 @@ local keymappings_N = vim.tbl_extend("force", keymappings_I, {
 	},
 })
 
-local toggleHiddenAction = {
-	function(prompt_bufnr)
-		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-		local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+local function toggleHiddenAction(prompt_bufnr)
+	local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
-		-- hidden status not stored, but title is, so we determine the previous state via title
-		local prevTitle = current_picker.prompt_title
-		local ignoreHidden = not prevTitle:find("hidden")
+	-- hidden status not stored, but title is, so we determine the previous state via title
+	local prevTitle = current_picker.prompt_title
+	local ignoreHidden = not prevTitle:find("hidden")
 
-		local title = "Find Files: " .. vim.fs.basename(cwd)
-		if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
-		local currentQuery = require("telescope.actions.state").get_current_line()
-		local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
+	local title = "Find Files: " .. vim.fs.basename(cwd)
+	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
+	local currentQuery = require("telescope.actions.state").get_current_line()
 
-		require("telescope.actions").close(prompt_bufnr)
-		require("telescope.builtin").find_files {
-			default_text = currentQuery,
-			prompt_title = title,
-			hidden = ignoreHidden,
-			no_ignore = ignoreHidden,
-			cwd = cwd,
-		-- stylua: ignore
-		file_ignore_patterns = {
-			"node_modules", ".venv", "typings", "%.DS_Store$", "%.git/", "%.app/",
-			unpack(existingFileIgnores), -- must be last for all items to be unpacked
-		},
-		}
-	end,
-	type = "action",
-	opts = { desc = "󰈉 Toggle hidden" },
-}
+	require("telescope.actions").close(prompt_bufnr)
+	require("telescope.builtin").find_files {
+		default_text = currentQuery,
+		prompt_title = title,
+		hidden = ignoreHidden,
+		no_ignore = ignoreHidden,
+		cwd = cwd,
+	}
+end
+
+local hlName = require("telescope.actions.state").get_selected_entry().value
+							require("telescope.actions").close(prompt_bufnr)
+							local value = vim.api.nvim_get_hl(0, { name = hlName })
+							local out = {}
+							if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+							if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+							u.copyAndNotify(table.concat(out, "\n"))
 
 -- FILETYPE-SPECIFIC SYMBOL-SEARCH
 -- (mostly for filetypes that do not know functions)
@@ -254,8 +252,15 @@ local function telescopeConfig()
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
-				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g", -- images
-				"%.zip", "%.pdf", -- misc
+				-- filetypes
+				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
+				"%.zip", "%.pdf",
+				-- special directories
+				"%.DS_Store$", "%.app/", -- macOS apps
+				"%.git/", "node_modules",
+				".local", "homebrew", -- nvim runtime
+				"typings", ".venv", -- python
+				"EmmyLua.spoon", -- Hammerspoon
 			},
 		},
 		pickers = {
@@ -388,19 +393,15 @@ local function telescopeConfig()
 				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 				mappings = {
 					i = {
-						["<CR>"] = {
-							function(prompt_bufnr)
-								local hlName = require("telescope.actions.state").get_selected_entry().value
-								require("telescope.actions").close(prompt_bufnr)
-								local value = vim.api.nvim_get_hl(0, { name = hlName })
-								local out = {}
-								if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
-								if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-								u.copyAndNotify(table.concat(out, "\n"))
-							end,
-							type = "action",
-							opts = { desc = " Copy Value" },
-						},
+						["<CR>"] = function(prompt_bufnr) ---copy color value
+							local hlName = require("telescope.actions.state").get_selected_entry().value
+							require("telescope.actions").close(prompt_bufnr)
+							local value = vim.api.nvim_get_hl(0, { name = hlName })
+							local out = {}
+							if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+							if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+							u.copyAndNotify(table.concat(out, "\n"))
+						end,
 					},
 				},
 			},
@@ -431,14 +432,6 @@ local function telescopeConfig()
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title
 				symbol_width = 30,
-				file_ignore_patterns = {
-					"node_modules",
-					".local", -- nvim runtime
-					"homebrew", -- nvim runtime
-					"typings", -- pyright types
-					".venv", -- python
-					"EmmyLua.spoon", -- Hammerspoon
-				},
 			},
 			spell_suggest = {
 				initial_mode = "normal",
