@@ -161,9 +161,8 @@ function M.gotoChangedFiles()
 	local maxFiles = 6 -- CONFIG
 	local funcName = "Goto Changed Files"
 
-	-- Calculate numstat
-	-- (`--intent-to-add` so new files show up in `--numstat`)
-	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait()
+	-- get numstat
+	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait() -- so new files show up in `--numstat`
 	local gitResponse = vim.system({ "git", "diff", "--numstat" }):wait()
 	local numstat = vim.trim(gitResponse.stdout)
 	local numstatLines = vim.split(numstat, "\n")
@@ -194,11 +193,7 @@ function M.gotoChangedFiles()
 
 			-- only add if in pwd, useful for monorepos
 			if vim.startswith(absPath, pwd) then
-				table.insert(changedFiles, {
-					relPath = relPath,
-					absPath = absPath,
-					changes = changes,
-				})
+				table.insert(changedFiles, { relPath = relPath, absPath = absPath, changes = changes })
 			end
 		end
 	end
@@ -215,7 +210,7 @@ function M.gotoChangedFiles()
 	local nextFileIndex
 	for i = 1, #changedFiles do
 		if changedFiles[i].absPath == currentFile then
-			nextFileIndex = math.fmod(i, #changedFiles) + 1 -- fmod = lua's modulo
+			nextFileIndex = math.fmod(i, #changedFiles) + 1 -- `fmod` = lua's modulo
 			break
 		end
 	end

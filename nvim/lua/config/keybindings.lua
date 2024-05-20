@@ -42,9 +42,14 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 -- quickfix
-keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+keymap("n", "gq", function()
+	local success = pcall(vim.cmd.cnext)
+	if not success then
+		vim.cmd.cfirst()
+		vim.notify("Wrapped")
+	end
+end, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "g<C-q>", vim.cmd.cfirst, { desc = " 1st Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
 
 --------------------------------------------------------------------------------
@@ -179,6 +184,9 @@ keymap("n", "i", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
 end, { desc = "correctly indented i", expr = true })
+
+-- LSP signature
+keymap({ "i", "n", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
