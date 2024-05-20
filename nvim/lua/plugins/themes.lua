@@ -44,16 +44,13 @@ vim.g.darkTheme = getName(darkThemes[1])
 
 --------------------------------------------------------------------------------
 
--- merge tables
-local allThemes = vim.list_extend(darkThemes, lightThemes)
+local allThemes = vim.iter(vim.list_extend(darkThemes, lightThemes))
+	:map(function(theme)
+		local themeObj = type(theme) == "string" and { theme } or theme
+		themeObj.lazy = false -- ensure themes are never lazy-loaded https://github.com/folke/lazy.nvim#-colorschemes
+		themeObj.priority = 1000
+		return themeObj
+	end)
+	:totable()
 
--- ensure themes are never lazy-loaded https://github.com/folke/lazy.nvim#-colorschemes
-allThemes = vim.tbl_map(function(theme)
-	local themeObj = type(theme) == "string" and { theme } or theme
-	themeObj.lazy = false
-	themeObj.priority = 1000
-	return themeObj
-end, allThemes)
-
--- return for lazy.nvim
-return allThemes
+return allThemes -- return for lazy.nvim

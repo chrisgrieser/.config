@@ -34,15 +34,15 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			-- dependencies of plugins (via lazy.nvim)
-			local plugins = require("lazy").plugins()
-			local deps = vim.tbl_map(function(plugin) return plugin.mason_dependencies end, plugins)
-			deps = vim.tbl_flatten(vim.tbl_values(deps))
-			table.sort(deps)
-			deps = vim.fn.uniq(deps)
+			local pluginDeps = vim.iter(require("lazy").plugins())
+				:map(function(plugin) return plugin.mason_dependencies end)
+				:flatten()
+				:totable()
+			table.sort(pluginDeps)
+			vim.fn.uniq(pluginDeps)
 
 			require("mason-tool-installer").setup {
-				ensure_installed = deps,
+				ensure_installed = pluginDeps,
 				run_on_start = false, -- manually, since otherwise not working with lazy-loading
 			}
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)

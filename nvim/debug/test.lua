@@ -1,7 +1,6 @@
--- BOB
-
-vim.notify("test", vim.log.levels.INFO, {
-	title = "test",
-	animate = false,
-	on_open = function(winnr) vim.api.nvim_win_set_width(winnr, 80) end,
-})
+local usedWithinMins = 15 -- CONFIG
+local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+	:filter(function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end)
+	:map(function(buf) return buf.bufnr end)
+	:totable()
+vim.notify("⭕ recentBufs: " .. vim.inspect(recentBufs))
