@@ -242,19 +242,13 @@ local autoCd = {
 }
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function(ctx)
-		local bufPath = ctx.file
-		local specialBuffer = vim.api.nvim_get_option_value("buftype", { buf = ctx.buf }) ~= ""
-		local exists = vim.uv.fs_stat(bufPath) ~= nil
-		if specialBuffer or not exists then return end
-
+	callback = function()
 		local root = vim.fs.root(0, function(name, path)
 			local dirHasChildMarker = vim.tbl_contains(autoCd.childOfRoot, name)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCd.parentOfRoot, parentName)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
-
 		if root then vim.uv.chdir(root) end
 	end,
 })

@@ -31,6 +31,18 @@ keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under Cursor
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 
+keymap("n", "<leader>ib", function()
+	local out = {
+		"filetype: " .. vim.bo.filetype,
+		"buftype: " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
+		"cwd: " .. (vim.uv.cwd() or "n/a"),
+		("indent: %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
+	}
+	local ok, node = pcall(vim.treesitter.get_node)
+	if ok and node then table.insert(out, "node: " .. node:type()) end
+	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
+end, { desc = "󰽙 Buffer Info" })
+
 --------------------------------------------------------------------------------
 -- REFACTORING
 local function left(num) return ("<Left>"):rep(num) end
