@@ -10,7 +10,13 @@ return {
 			u.addToLuaLine("tabline", "lualine_b", {
 				"navic",
 				section_separators = { left = "▒░", right = "" },
-				cond = function() return vim.fn.mode():find("i") == nil end,
+				cond = function()
+					local ok, lspSignature = pcall(require, "lsp_signature")
+					if not ok then return false end
+					local insertMode = vim.fn.mode():find("i") ~= nil
+					local hasSig = lspSignature.status_line().label ~= ""
+					return not (insertMode and hasSig)
+				end,
 			})
 		end,
 		opts = {
@@ -57,23 +63,27 @@ return {
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
 		keys = {
-			-- stylua: ignore
-			{ "<D-g>", function() require("lsp_signature").toggle_key() end, desc = "󰒕 LSP signature" },
+			{
+				"<D-g>",
+				function() require("lsp_signature").toggle_float_win() end,
+				mode = { "n", "v", "i" },
+				desc = "󰒕 LSP signature",
+			},
 		},
 		opts = {
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@variable.parameter", -- highlight group
 			floating_window = false,
 			always_trigger = true,
-			auto_close_after = 3000,
-			bind = true, -- needed for border config
 			handler_opts = { border = vim.g.borderStyle },
+			auto_close_after = 3000,
 		},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
-			u.addToLuaLine("tabline", "lualine_b", {
+			u.addToLuaLine("winbar", "lualine_b", {
 				function()
-					local sig = require("lsp_signature").status_line(200)
+					local width = vim.o.columns
+					local sig = require("lsp_signature").status_line(width)
 					local start = sig.range.start
 					local stop = sig.range["end"]
 					local label = sig.label:sub(1, start - 1)
