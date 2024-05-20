@@ -54,12 +54,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 local function changeSeverityToInfo(err, result, ctx, config)
 	result.diagnostics = vim.tbl_map(function(diag)
-		if
-			(diag.source == "biome" and diag.code == "lint/suspicious/noConsoleLog")
-			or (diag.source == "stylelintplus" and diag.code == "declaration-no-important")
-		then
-			diag.severity = vim.diagnostic.severity.HINT
-		end
+		local consoleLog = diag.source == "biome" and diag.code == "no-console"
+		local important = diag.source == "stylelintplus" and diag.code == "declaration-no-important"
+		if consoleLog or important then diag.severity = vim.diagnostic.severity.HINT end
 		return diag
 	end, result.diagnostics)
 	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
