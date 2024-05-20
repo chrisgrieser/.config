@@ -38,6 +38,7 @@ local sourceIcons = {
 	luasnip = "",
 	nvim_lsp = "󰒕",
 	path = "",
+	emmet = "",
 }
 
 --------------------------------------------------------------------------------
@@ -119,22 +120,15 @@ local function cmpconfig()
 				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
 				-- distinguish emmet snippets
-				local ft = vim.bo[entry.context.bufnr].filetype
 				local isEmmet = entry.source.name == "nvim_lsp"
 					and item.kind == "Snippet"
-					and ft == "css"
+					and vim.bo[entry.context.bufnr].filetype == "css"
+				if isEmmet then entry.source.name = "emmet" end
 
-				-- set icons
 				-- stylua: ignore
 				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
-				if isEmmet then
-					item.menu = ""
-					item.kind = ""
-				else
-					item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-					item.menu = sourceIcons[entry.source.name] .. " "
-				end
-
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
+				item.menu = sourceIcons[entry.source.name] .. " "
 				return item
 			end,
 		},
