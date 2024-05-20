@@ -173,7 +173,6 @@ return {
 	{ -- autopair brackets/quotes
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			-- add brackets to cmp completions, e.g. "function" -> "function()"
 			local ok, cmp = pcall(require, "cmp")
@@ -379,6 +378,7 @@ return {
 	{
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
+		cmd = "Chainsaw",
 		opts = {
 			marker = "⭕",
 			logStatements = {

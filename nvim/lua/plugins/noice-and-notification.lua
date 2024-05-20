@@ -90,12 +90,17 @@ return {
 				pattern = "noice",
 				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
-
-			-- slightly darker cmdline
 			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
 		end,
 		keys = {
-			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
+			{
+				"<Esc>",
+				function()
+					vim.snippet.stop()
+					vim.cmd.NoiceDismiss()
+				end,
+				desc = "󰎟 Clear Notifications & Snippet",
+			},
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
 		},

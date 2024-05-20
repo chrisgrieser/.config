@@ -267,7 +267,6 @@ keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
-keymap("i", "<D-v>", "<C-g>u<C-r><C-o>+", { desc = " Paste" }) -- "<C-g>u" adds undopoint
 
 -- sticky yank operations
 local mark = "z" -- where to store cursor position
@@ -288,10 +287,17 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P") -- paste without switching with register
+
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
 end, { expr = true, desc = "dd" })
+
+keymap("i", "<D-v>", function()
+	local regContent = vim.trim(vim.fn.getreg("+"))
+	vim.fn.setreg("+", regContent, "v")
+	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
+end, { desc = " Paste charwise", expr = true })
 
 --------------------------------------------------------------------------------
 -- QUITTING

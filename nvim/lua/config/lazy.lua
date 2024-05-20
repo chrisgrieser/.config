@@ -26,7 +26,7 @@ require("lazy").setup("plugins", {
 		fallback = true,
 	},
 	-- colorschemes to use during installation
-	install = { colorscheme = { "default" } },
+	install = { colorscheme = { "tokyonight", "dawnfox", "default" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
@@ -42,10 +42,7 @@ require("lazy").setup("plugins", {
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { notify = false },
 	readme = { enabled = false },
-	custom_keys = {
-		["<localleader>l"] = false,
-		["<localleader>t"] = false,
-	},
+	custom_keys = { ["<localleader>l"] = false, ["<localleader>t"] = false },
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
