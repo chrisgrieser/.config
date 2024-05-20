@@ -163,12 +163,12 @@ return {
 				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
-					show_numbers = true,
+					show_numbers = false,
 					border = vim.g.borderStyle,
 					relative = "editor",
 					max_width = 80,
 					min_width = 20,
-					max_height = 20,
+					max_height = 12,
 					min_height = 3,
 				},
 				telescope = {
