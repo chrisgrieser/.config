@@ -56,11 +56,16 @@ return {
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
+		keys = {
+			-- stylua: ignore
+			{ "<D-g>", function() require("lsp_signature").toggle_key() end, desc = "󰒕 LSP signature" },
+		},
 		opts = {
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@variable.parameter", -- highlight group
 			floating_window = false,
 			always_trigger = true,
+			auto_close_after = 3000,
 			bind = true, -- needed for border config
 			handler_opts = { border = vim.g.borderStyle },
 		},

@@ -93,8 +93,8 @@ keymap("n", "g,", function()
 			local pathOfThisFile = debug.getinfo(1).source:sub(2)
 			vim.cmd.edit(pathOfThisFile)
 		else
-			local module = plugin._.module:gsub("%.", "/")
-			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
+			local module = (plugin._.super and plugin._.super._.module or plugin._.module)
+			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module:gsub("%.", "/") .. ".lua"
 			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
 			vim.cmd(("edit +/%q %s"):format(repo, filepath))
 		end
@@ -103,6 +103,7 @@ end, { desc = "󰣖 Goto Plugin Config" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS
+
 local function checkForPluginUpdates()
 	if not require("lazy.status").has_updates() then return end
 	local threshold = 20
