@@ -1,6 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
--- some comment here
+
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
@@ -20,7 +20,6 @@ return {
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
-			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Repo URL" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit" },
 			-- stylua: ignore end
@@ -29,7 +28,7 @@ return {
 			commitMsg = {
 				conventionalCommits = { enforce = true },
 				spellcheck = true,
-				keepAbortedMsgSecs = 300,
+				keepAbortedMsgSecs = 60 * 10,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
@@ -43,7 +42,7 @@ return {
 				blame = {
 					hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 60,
+					maxMsgLen = 55,
 				},
 			},
 		},
@@ -64,7 +63,7 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Sel." },
 			-- stylua: ignore start
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
 			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Git Deletions Inline" },
