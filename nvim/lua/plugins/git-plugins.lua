@@ -22,7 +22,7 @@ return {
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, desc = " Repo URL" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
-			{ "<leader>uc", function() require("tinygit").undoLastCommit() end, desc = "󰊢 Undo Last Commit" },
+			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit" },
 			-- stylua: ignore end
 		},
 		opts = {
@@ -64,10 +64,10 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Sel" },
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			-- stylua: ignore start
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
-			{ "<leader>gv", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 View Deletions Inline" },
+			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Git Deletions Inline" },
 			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
