@@ -15,7 +15,7 @@ local defaultSources = {
 		option = {
 			-- show completions from all buffers used within the last x minutes
 			get_bufnrs = function()
-				local usedWithinMins = 10 -- CONFIG
+				local usedWithinMins = 15 -- CONFIG
 				local allBufs = vim.fn.getbufinfo { buflisted = 1 }
 				local recentBufs = vim.tbl_filter(
 					function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end,
@@ -76,22 +76,26 @@ local function cmpconfig()
 
 			-- manually triggering to only include LSP, useful for yaml/json/css
 			["<D-c>"] = cmp.mapping.complete {
-				config = { sources = cmp.config.sources { { name = "nvim_lsp" } } },
+				config = {
+					sources = cmp.config.sources {
+						{ name = "nvim_lsp" },
+					},
+				},
 			},
 
 			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
-				-- FIX lag when using `Insert` in css
-				local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 				if cmp.visible() then
+					-- FIX lag when using `Insert` in css
+					local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 					cmp.select_next_item { behavior = cmp.SelectBehavior[behavior] }
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
-				local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 				if cmp.visible() then
+					local behavior = vim.bo.ft == "css" and "Select" or "Insert"
 					cmp.select_prev_item { behavior = cmp.SelectBehavior[behavior] }
 				else
 					fallback()
@@ -190,14 +194,11 @@ return {
 			})
 		end,
 		opts = {
-			-- live updating of snippets
-			update_events = { "TextChanged", "TextChangedI" },
 			-- disable auto-reload, since already done by scissors
 			fs_event_providers = { autocmd = false, libuv = false },
 		},
 		config = function(_, opts)
 			require("luasnip").setup(opts)
-			-- DOCS https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code
 			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
 		end,
 	},

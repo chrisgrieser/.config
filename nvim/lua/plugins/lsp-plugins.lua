@@ -118,7 +118,7 @@ return {
 		event = "LspAttach",
 		opts = {
 			request_pending_text = false, -- remove "loading…"
-			hl = { link = "Comment" },
+			hl = { link = "LspInlayHint" },
 			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
@@ -141,9 +141,6 @@ return {
 				vim.lsp.protocol.SymbolKind.Method,
 				vim.lsp.protocol.SymbolKind.Object,
 				vim.lsp.protocol.SymbolKind.Array,
-				vim.lsp.protocol.SymbolKind.Key,
-				vim.lsp.protocol.SymbolKind.Constant,
-				vim.lsp.protocol.SymbolKind.Variable,
 			},
 		},
 	},
