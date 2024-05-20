@@ -10,7 +10,7 @@ return {
 			{"<C-t>", function() require("genghis").copyRelativePath() end, desc = " Copy relative path" },
 			{"<C-n>", function() require("genghis").copyFilename() end, desc = " Copy filename" },
 			{"<C-r>", function() require("genghis").renameFile() end, desc = " Rename file" },
-			{"<D-m>", function() require("genghis").moveToFolderInCwd() end, desc = " Move file" },
+			{"<D-M>", function() require("genghis").moveToFolderInCwd() end, desc = " Move file" },
 			{"<leader>x", function() require("genghis").chmodx() end, desc = " chmod +x" },
 			{"<C-d>", function() require("genghis").duplicateFile() end, desc = " Duplicate file" },
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = " Move file to trash" },
