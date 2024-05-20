@@ -489,6 +489,10 @@ nnoremap zr :unfoldall
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 
+" [O]ption: [s]pellcheck
+exmap spellcheck obcommand editor:toggle-spellcheck
+nnoremap ,os :spellcheck
+
 " [O]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers

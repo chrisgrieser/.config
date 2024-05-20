@@ -6,13 +6,12 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
 		init = function()
-			u.addToLuaLine(
-				"tabline",
-				"lualine_b",
-				{ "navic", section_separators = { left = "▒░", right = "" } }
-			)
-
 			vim.g.navic_silence = false
+			u.addToLuaLine("tabline", "lualine_b", {
+				"navic",
+				section_separators = { left = "▒░", right = "" },
+				cond = function() return vim.fn.mode():find("i") == nil end,
+			})
 		end,
 		opts = {
 			lazy_update_context = true,
@@ -43,41 +42,43 @@ return {
 			{ -- go up to parent
 				"gk",
 				function()
-					if not require("nvim-navic").is_available() then return end
 					local symbolPath = require("nvim-navic").get_data()
+					if not symbolPath then return end
 					local parent = symbolPath[#symbolPath - 1]
-					if not parent then
-						vim.notify("Already at the highest parent.")
-						return
-					end
+					if not parent then return end
 					local pos = parent.scope.start
 					vim.api.nvim_win_set_cursor(0, { pos.line, pos.character })
 				end,
-				desc = "󰒕 Go Up to Parent",
+				desc = "󰒕 Go up to parent",
 			},
 		},
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
-		keys = {
-			{ -- better signature view
-				"<D-g>",
-				function() require("lsp_signature").toggle_float_win() end,
-				mode = { "i", "n", "v" },
-				desc = "󰏪 LSP Signature",
-			},
-		},
-		dependencies = "folke/noice.nvim",
 		opts = {
-			noice = true, -- render via noice.nvim
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@variable.parameter", -- highlight group
 			floating_window = false,
 			always_trigger = true,
-			bind = true, -- This is mandatory, otherwise border config won't get registered.
+			bind = true, -- needed for border config
 			handler_opts = { border = vim.g.borderStyle },
 		},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+			u.addToLuaLine("tabline", "lualine_b", {
+				function()
+					local sig = require("lsp_signature").status_line(200)
+					local start = sig.range.start
+					local stop = sig.range["end"]
+					local label = sig.label:sub(1, start - 1)
+						.. sig.label:sub(start, stop):upper()
+						.. sig.label:sub(stop + 1, -1)
+					return opts.hint_prefix .. label
+				end,
+				cond = function() return vim.fn.mode():find("i") ~= nil end,
+			})
+		end,
 	},
 	{ -- display inlay hints from at EoL, not in the text
 		"lvimuser/lsp-inlayhints.nvim",
@@ -106,9 +107,8 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					if not (args.data and args.data.client_id) then return end
-					local bufnr = args.buf
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					require("lsp-inlayhints").on_attach(client, bufnr)
+					require("lsp-inlayhints").on_attach(client, args.buf)
 				end,
 			})
 		end,
@@ -148,7 +148,6 @@ return {
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
 		config = function()
-			u.addToLuaLine("sections", "lualine_x", require("dr-lsp").lspProgress)
 			u.addToLuaLine("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
