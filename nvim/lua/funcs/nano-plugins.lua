@@ -16,6 +16,10 @@ local function notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
+---@nodiscard
+---@param path string
+local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
+
 --------------------------------------------------------------------------------
 
 function M.openAlfredPref()
@@ -74,8 +78,7 @@ end
 function M.selectMake()
 	-- GUARD
 	local makefile = vim.uv.cwd() .. "/Makefile"
-	local fileExists = vim.uv.fs_stat(makefile)
-	if not fileExists then
+	if not fileExists(makefile) then
 		notify("", "Makefile not found", "warn")
 		return
 	end
@@ -83,11 +86,11 @@ function M.selectMake()
 	local recipes = {}
 	for line in io.lines(makefile) do
 		local recipe = line:match("^[%w_-]+")
-		if recipe then table.insert(recipes, recipe) end
+		local isRelease = line:find("^release") -- release script require input, which only works in terminal
+		if recipe and not isRelease then
+			table.insert(recipes, recipe)
+		end
 	end
-
-	-- release script require version number input, which does only work in the terminal
-	recipes = vim.tbl_filter(function(rec) return rec ~= "release" end, recipes)
 
 	vim.ui.select(recipes, {
 		prompt = " make",

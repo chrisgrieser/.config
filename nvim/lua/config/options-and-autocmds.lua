@@ -262,21 +262,20 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
 		local bufnr = ctx.buf
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
-			local function fileExists(bufpath) return vim.uv.fs_stat(bufpath) ~= nil end
 
 			-- check if buffer was deleted
 			local bufPath = ctx.file
 			local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
 			local isNewBuffer = bufPath == ""
 			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
-			if fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
+			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
 				return
 			end
 
 			-- open last existing oldfile
 			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufPath)))
 			for _, oldfile in pairs(vim.v.oldfiles) do
-				if fileExists(oldfile) then
+				if u.fileExists(oldfile) then
 					local success = pcall(vim.cmd.edit, oldfile)
 					if success then return end
 				end
@@ -334,21 +333,19 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.defer_fn(function()
 			-- GUARD
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local fileStats = vim.uv.fs_stat(ctx.file)
 			local specialBuffer = vim.api.nvim_get_option_value("buftype", { buf = ctx.buf }) ~= ""
 			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
-			if specialBuffer or terminalBufEditedInNvim or not fileStats then return end
+			if specialBuffer or terminalBufEditedInNvim or not u.fileExists(ctx.file) then return end
 
 			local ft = ctx.match
 			local ext = skeletons[ft]
 			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-			local noSkeleton = vim.uv.fs_stat(skeletonFile) == nil
-			if noSkeleton then
+			if not u.fileExists(skeletonFile) then
 				u.notify("Skeleton", "Skeleton file not found.", "error")
 				return
 			end
 
-			local fileIsEmpty = fileStats.size < 4 -- account for linebreaks
+			local fileIsEmpty = vim.uv.fs_stat(ctx.file).size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 
 			-- read file

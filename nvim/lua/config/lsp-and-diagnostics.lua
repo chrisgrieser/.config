@@ -11,9 +11,10 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	vim.cmd.wall()
 
 	local changes = result.changes or result.documentChanges or {}
-	local changedFiles = vim.tbl_keys(changes)
-	changedFiles = vim.tbl_filter(function(file) return #changes[file] > 0 end, changedFiles)
-	changedFiles = vim.tbl_map(function(file) return "- " .. vim.fs.basename(file) end, changedFiles)
+	local changedFiles = vim.iter(vim.tbl_keys(changes))
+		:filter(function(file) return #changes[file] > 0 end)
+		:map(function(file) return "- " .. vim.fs.basename(file) end)
+		:totable()
 
 	local changeCount = 0
 	for _, change in pairs(changes) do
