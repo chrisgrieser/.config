@@ -1,6 +1,6 @@
 -- `%` not actually a comment character, just convention of some programs
 -- https://tex.stackexchange.com/questions/261261/are-comments-discouraged-in-a-bibtex-file
-vim.bo.commentstring = '% %s'
+vim.bo.commentstring = "% %s"
 vim.opt_local.formatoptions:append { r = true }
 
 --------------------------------------------------------------------------------
@@ -9,8 +9,10 @@ vim.opt_local.formatoptions:append { r = true }
 -- function to search the buffer for citekeys
 vim.keymap.set("n", "gs", function()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-	local citekeyLines = vim.tbl_filter(function(line) return line:find("^@") end, lines)
-	local citekeys = vim.tbl_map(function(line) return line:match("^@.*{(.*),") end, citekeyLines)
+	local citekeys = vim.iter(lines)
+		:filter(function(line) return line:find("^@") end)
+		:map(function(line) return line:match("^@.*{(.*),") end)
+		:totable()
 	vim.ui.select(citekeys, {
 		prompt = "Select citekey:",
 		format_item = function(citekey) return "@" .. citekey end,

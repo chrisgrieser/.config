@@ -228,11 +228,9 @@ serverConfigs.yamlls = {
 
 -- HACK since reading external file with the method described in ltex-docs does not work
 local function getDictWords()
-	local dictfile = vim.g.dictionaryPath
-	local fileDoesNotExist = vim.uv.fs_stat(dictfile) == nil
-	if fileDoesNotExist then return {} end
 	local words = {}
-	for word in io.lines(dictfile) do
+	if not u.fileExists(vim.g.dictionaryPath) then return {} end
+	for word in io.lines(vim.g.dictionaryPath) do
 		table.insert(words, word)
 	end
 	return words

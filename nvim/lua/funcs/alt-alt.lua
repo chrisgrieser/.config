@@ -1,5 +1,10 @@
 local M = {}
 local a = vim.api
+
+---@nodiscard
+---@param path string
+local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
+
 --------------------------------------------------------------------------------
 
 ---@param altBufnr integer
@@ -7,10 +12,10 @@ local a = vim.api
 local function hasAltFile(altBufnr)
 	if altBufnr < 0 then return false end
 	local valid = a.nvim_buf_is_valid(altBufnr)
-	local nonSpecial = a.nvim_buf_get_option(altBufnr, "buftype") == ""
+	local nonSpecial = a.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
-	local altFileExists = vim.uv.fs_stat(a.nvim_buf_get_name(altBufnr)) ~= nil
+	local altFileExists = fileExists(a.nvim_buf_get_name(altBufnr))
 
 	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altFileExists
 end
@@ -21,7 +26,7 @@ end
 local function altOldfile()
 	local curPath = a.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
-		if vim.uv.fs_stat(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
+		if fileExists(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
 			return path
 		end
 	end
@@ -35,7 +40,7 @@ function M.altFileStatus(maxDisplayLen)
 	-- some statusline plugins convert their input into strings
 	if type(maxDisplayLen) ~= "number" then maxDisplayLen = 25 end
 
-	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+	local altBufNr = vim.fn.bufnr("#") 
 	local altOld = altOldfile()
 	local name, icon
 
@@ -45,7 +50,7 @@ function M.altFileStatus(maxDisplayLen)
 		name = altFile ~= "" and altFile or "[No Name]"
 		-- icon
 		local ext = altFile:match("%w+$")
-		local altBufFt = a.nvim_buf_get_option(altBufNr, "filetype") ---@diagnostic disable-line: param-type-mismatch
+		local altBufFt = a.nvim_get_option_value("filetype", { buf = altBufNr }) 
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		icon = ok and devicons.get_icon(altFile, ext or altBufFt) or "#"
 
@@ -76,7 +81,7 @@ end
 function M.gotoAltBuffer()
 	if vim.bo.buftype ~= "" then return end -- deactivate if in a special buffer
 
-	local altBufNr = vim.fn.bufnr("#") ---@diagnostic disable-line: param-type-mismatch
+	local altBufNr = vim.fn.bufnr("#") 
 	local altOld = altOldfile()
 
 	if hasAltFile(altBufNr) then

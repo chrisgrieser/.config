@@ -35,10 +35,10 @@ return {
 		},
 		-- symlink the codium config to enable syncing of API key
 		build = function()
+			local u = require("config.utils")
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
 			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
-			local fileExists = vim.uv.fs_stat(symLinkTo) ~= nil
-			if not fileExists then
+			if not u.fileExists(symLinkFrom) then
 				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
 				vim.uv.fs_symlink(symLinkFrom, symLinkTo)
 			end

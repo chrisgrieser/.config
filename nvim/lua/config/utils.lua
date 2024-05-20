@@ -5,6 +5,10 @@ local M = {}
 ---@param cmdStr string
 function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
 
+---@nodiscard
+---@param path string
+function M.fileExists(path) return vim.uv.fs_stat(path) ~= nil end
+
 ---@param msg string
 ---@param title string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"

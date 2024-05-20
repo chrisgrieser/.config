@@ -36,10 +36,12 @@ local autoIndentFt = {
 ---@nodiscard
 local function listConformFormatters(formattersByFt)
 	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected" }
-	local formatters = vim.tbl_flatten(vim.tbl_values(formattersByFt))
-	formatters = vim.tbl_filter(function(f) return not vim.tbl_contains(notClis, f) end, formatters)
+	local formatters = vim.iter(vim.tbl_values(formattersByFt))
+		:flatten()
+		:filter(function(ft) return not vim.tbl_contains(notClis, ft) end)
+		:totable()
 	table.sort(formatters)
-	return vim.fn.uniq(formatters)
+	return vim.fn.uniq(formatters) ---@diagnostic disable-line: return-type-mismatch
 end
 
 local conformOpts = {
@@ -68,8 +70,7 @@ local conformOpts = {
 local function formattingFunc(bufnr)
 	-- GUARD
 	if not bufnr then bufnr = 0 end
-	local bufname = vim.api.nvim_buf_get_name(bufnr)
-	local fileExists = vim.uv.fs_stat(bufname) ~= nil
+	local fileExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(bufnr)) ~= nil
 	local valid = vim.api.nvim_buf_is_valid(bufnr)
 	local specialBuffer = vim.bo[bufnr].buftype ~= ""
 	if specialBuffer or not fileExists or not valid then return end
@@ -93,7 +94,7 @@ local function formattingFunc(bufnr)
 			vim.defer_fn(function()
 				if i <= #actions then
 					vim.lsp.buf.code_action {
-						context = { only = { actions[i] } },
+						context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 						apply = true,
 					}
 				else
@@ -107,7 +108,7 @@ local function formattingFunc(bufnr)
 	require("conform").format({ lsp_fallback = useLsp }, function()
 		if ft == "python" then
 			vim.lsp.buf.code_action {
-				context = { only = { "source.fixAll.ruff" } },
+				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 				apply = true,
 			}
 		end
