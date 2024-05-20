@@ -323,9 +323,10 @@ return {
 				"gr",
 				function()
 					-- HACK add open buffers to oldfiles
-					local listedBufs = vim.fn.getbufinfo { buflisted = 1 }
-					local bufPaths = vim.tbl_map(function(buf) return buf.name end, listedBufs)
-					vim.list_extend(vim.v.oldfiles, bufPaths)
+					local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+						:map(function(buf) return buf.name end)
+						:totable()
+					vim.list_extend(vim.v.oldfiles, openBufs)
 					telescope("oldfiles")
 				end,
 				desc = " Recent Files",
@@ -369,8 +370,7 @@ return {
 					}
 					local original = vim.fn.getcompletion
 
-					---@diagnostic disable-next-line: duplicate-set-field
-					vim.fn.getcompletion = function()
+					vim.fn.getcompletion = function() ---@diagnostic disable-line: duplicate-set-field
 						return vim.tbl_filter(
 							function(color) return not vim.tbl_contains(builtins, color) end,
 							original("", "color")

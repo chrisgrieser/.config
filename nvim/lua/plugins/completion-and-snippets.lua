@@ -16,13 +16,11 @@ local defaultSources = {
 			-- show completions from all buffers used within the last x minutes
 			get_bufnrs = function()
 				local usedWithinMins = 15 -- CONFIG
-				local allBufs = vim.fn.getbufinfo { buflisted = 1 }
-				local recentBufs = vim.tbl_filter(
-					function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end,
-					allBufs
-				)
-				local bufnrs = vim.tbl_map(function(buf) return buf.bufnr end, recentBufs)
-				return bufnrs
+				local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+					:filter(function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end)
+					:map(function(buf) return buf.bufnr end)
+					:totable()
+				return recentBufs
 			end,
 			max_indexed_line_length = 100, -- no long lines (e.g. base64-encoded things)
 		},
