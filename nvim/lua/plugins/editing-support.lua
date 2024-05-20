@@ -22,7 +22,7 @@ return {
 			},
 		},
 	},
-	{
+	{ -- substitute & duplicate operator
 		"echasnovski/mini.operators",
 		keys = {
 			{ "s", desc = "󰅪 Substitute Operator" }, -- in visual mode, `s` surrounds
