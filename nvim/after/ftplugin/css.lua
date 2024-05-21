@@ -17,8 +17,9 @@ end, { buffer = true, desc = " Toggle !important", nowait = true })
 
 -- HACK workaround for `opt.exrc` not working with neovide
 vim.defer_fn(function()
-	local cwd = vim.uv.cwd()
-	if not cwd then return end
-	local configPath = cwd .. "/.nvim.lua"
+	local exrc = vim.fs.normalize("~/repos/shimmering-focus/.nvim.lua")
+	if vim.uv.cwd() == vim.fs.dirname(exrc) then
+		vim.opt.exrc = true
+	end
 	if u.fileExists(configPath) then vim.cmd.source(configPath) end
 end, 200)

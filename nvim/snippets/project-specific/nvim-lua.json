@@ -67,15 +67,6 @@
     "body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
     "prefix": "keymap (multi-mode)"
   },
-  "leave visual mode": {
-    "body": [
-      "local function leaveVisualMode()",
-      "\tlocal escKey = vim.api.nvim_replace_termcodes(\"<Esc>\", false, true, true)",
-      "\tvim.api.nvim_feedkeys(escKey, \"nx\", false)",
-      "end"
-    ],
-    "prefix": "leave visual mode"
-  },
   "plugin spec (lazy.nvim)": {
     "body": [
       "{",
