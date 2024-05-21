@@ -378,7 +378,7 @@ rules:
           - shell_command: |
               current_win=$(osascript -e '
                 tell application "Finder"
-                  if (count Finder windows) is 0 then return
+                  if (count Finder windows) is 0 then return ""
                   set pathToBeClosed to (POSIX path of (insertion location as alias))
                   close window 1
                   return pathToBeClosed
