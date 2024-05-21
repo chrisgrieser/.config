@@ -139,7 +139,7 @@ return {
 			implementation = { enabled = false },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
-				return (" 󰈿 %s"):format(symbol.references)
+				return (" 󰈿 %s "):format(symbol.references)
 			end,
 			disable = {
 				filetypes = { "css", "scss" },

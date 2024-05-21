@@ -106,6 +106,7 @@ end
 ---close all tabs which contain urlPart
 ---@param urlPart string
 function M.closeTabsContaining(urlPart)
+	local browser = "Brave Browser"
 	local applescript = ([[
 		tell application %q
 			set window_list to every window
@@ -117,7 +118,7 @@ function M.closeTabsContaining(urlPart)
 				end repeat
 			end repeat
 		end tell
-	]]):format("Brave Browser", urlPart)
+	]]):format(browser, urlPart)
 	hs.osascript.applescript(applescript)
 end
 

@@ -52,16 +52,23 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
-local function changeSeverityToInfo(err, result, ctx, config)
+local function changeSeverity(err, result, ctx, config)
 	result.diagnostics = vim.tbl_map(function(diag)
 		local consoleLog = diag.source == "biome" and diag.code == "no-console"
-		local important = diag.source == "stylelintplus" and diag.code == "declaration-no-important"
-		if consoleLog or important then diag.severity = vim.diagnostic.severity.HINT end
+		local cssImportant = diag.source == "stylelintplus" and diag.code == "declaration-no-important"
+		local tsWarnCode = { 6133, 2304 }
+		local tsWarn = diag.source == "typescript" and vim.tbl_contains(tsWarnCode, diag.code)
+
+		if consoleLog or cssImportant then
+			diag.severity = vim.diagnostic.severity.HINT
+		elseif tsWarn then
+			diag.severity = vim.diagnostic.severity.WARN
+		end
 		return diag
 	end, result.diagnostics)
 	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
 end
-vim.lsp.handlers["textDocument/publishDiagnostics"] = changeSeverityToInfo
+vim.lsp.handlers["textDocument/publishDiagnostics"] = changeSeverity
 
 ---@param diag vim.Diagnostic
 ---@return string displayedText

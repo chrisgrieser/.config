@@ -176,7 +176,9 @@ M.wf_scripteditor = wf
 M.wf_mimestream = wf.new("Mimestream")
 	:setOverrideFilter({ rejectTitles = { "^Software Update$" } })
 	:subscribe(wf.windowCreated, function(newWin)
-		local winCount = #u.app("Mimestream"):allWindows()
+		local mimestream = u.app("Mimestream")
+		if not mimestream then return end
+		local winCount = #mimestream:allWindows()
 		local newSize = winCount > 1 and wu.center or wu.pseudoMax
 		wu.moveResize(newWin, newSize)
 	end)
@@ -184,23 +186,23 @@ M.wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 -- DISCORD
 
--- when focused, enclose URL in clipboard with <>
--- when unfocused, removes <> from URL in clipboard
--- on launch, open a specific channel rather than the friends view
 M.aw_discord = aw.new(function(appName, eventType)
 	if appName ~= "Discord" then return end
 
+	-- on launch, open a specific channel rather than the friends view
 	if eventType == aw.launched or eventType == aw.launching then
 		local channelUri = "discord://discord.com/channels/1231936600204902481/1231936600674668604"
 		u.openLinkInBg(channelUri)
 		return
 	end
 
+	-- when focused, enclose URL in clipboard with <>
+	-- when unfocused, removes <> from URL in clipboard
 	local clipb = hs.pasteboard.getContents()
 	if clipb and eventType == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
 		-- for tweets, the previews are actually useful since they show the full content
-		local isTweet = clipb:find("^https?://twitter%.com") or clipb:find("^https?://mastodon%.*")
+		local isTweet = clipb:find("^https?://x%.com") or clipb:find("^https?://mastodon%.*")
 		if hasURL and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif clipb and eventType == aw.deactivated then
 		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
