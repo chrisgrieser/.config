@@ -12,7 +12,7 @@ return {
 				section_separators = { left = "▒░", right = "" },
 				cond = function()
 					local ok, lspSignature = pcall(require, "lsp_signature")
-					if not ok then return false end
+					if not ok then return true end
 					local insertMode = vim.fn.mode():find("i") ~= nil
 					local hasSig = lspSignature.status_line().label ~= ""
 					return not (insertMode and hasSig)

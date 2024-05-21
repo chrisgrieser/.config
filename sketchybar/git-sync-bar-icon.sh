@@ -17,14 +17,15 @@ while read -r line; do
 	letter=$(echo "$line" | cut -d, -f4)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	changes=$(git -C "$repo_path" status --porcelain)
-	change_count=$(echo "$changes" | wc -l | tr -d " ")
+	change_count=$(echo -n "$changes" | wc -l | tr -d " ")
 
 	if [[ "$changes" =~ index.lock ]] ; then # lockfile
 		all_changes="$all_changes🔒$letter "
-	elif [[ $changes -ne 0 ]] ; then
+	elif [[ $change_count -ne 0 ]] ; then
 		all_changes="$all_changes$change_count$letter "
 	fi
 done <"$perma_repos_path"
+
 
 # INFO set early, since `git fetch` requires time and the icons should update quicker
 # If there are behinds, icons will appear a few seconds later which isn't a
