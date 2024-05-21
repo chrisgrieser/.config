@@ -68,14 +68,13 @@ async function updatePlugins() {
 
 	// Click "Update All" Button
 	setTimeout(() => {
-		// timeout to avoid race condition still happening somehow
 		const updateCount = Object.keys(app.plugins.updates).length;
 		if (updateCount > 0) {
 			app.setting.open();
 			app.setting.openTabById("community-plugins");
 			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
 		}
-	}, 1000);
+	}, 1000); // timeout to avoid race condition still happening somehow
 }
 
 function freezeInterface() {
@@ -83,6 +82,7 @@ function freezeInterface() {
 	new Notice(`Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
 
+	// biome-ignore format: ugly
 	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
 }
 
@@ -218,15 +218,6 @@ function copyPathSegment(segment) {
 	new Notice("Copied:\n" + toCopy);
 }
 
-/** as opposed to simply using `yyp`, this does not fill the register.
- * In addition, the cursor position (column) is preserved. */
-function duplicateLine() {
-	const cursor = editor.getCursor();
-	const line = editor.getLine(cursor.line);
-	editor.replaceRange(line + "\n", { line: cursor.line + 1, ch: 0 });
-	editor.setCursor(cursor.line + 1, cursor.ch);
-}
-
 function toggleLowercaseTitleCase() {
 	const cursor = editor.getCursor();
 	const { from, to } = editor.wordAt(cursor);
@@ -293,7 +284,7 @@ function openNextLink(where) {
 async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) {
 	vaultRelPath = vaultRelPath
 		.replace(/\/*$/, "/") // ensure `/` at end
-		.replace(/^\/$/, ""); // make vault root always true for `startsWith`
+		.replace(/^\/$/, ""); // make vault-root always true for `startsWith`
 	const app = view.app;
 	const currentFile = view.file.path;
 
@@ -305,7 +296,7 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 		return inFolder && notCurrent && hasProperty;
 	});
 	if (files.length === 0) {
-		new Notice(`No notes in ${vaultRelPath} with ${frontmatterKey}: ${frontmatterValue}.`);
+		new Notice(`No notes in "${vaultRelPath}" with "${frontmatterKey}: ${frontmatterValue}".`);
 		return;
 	}
 	const randomIndex = Math.floor(Math.random() * files.length);

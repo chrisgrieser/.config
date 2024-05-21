@@ -55,7 +55,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 local function changeSeverity(err, result, ctx, config)
 	result.diagnostics = vim.tbl_map(function(diag)
 		local consoleLog = diag.source == "biome" and diag.code == "no-console"
-		local cssImportant = diag.source == "stylelintplus" and diag.code == "declaration-no-important"
+		local cssImportant = diag.source == "stylelintplus"
+			and diag.code == "declaration-no-important"
 		local tsWarnCode = { 6133, 2304 }
 		local tsWarn = diag.source == "typescript" and vim.tbl_contains(tsWarnCode, diag.code)
 

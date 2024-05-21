@@ -440,10 +440,9 @@ nnoremap sm vt]P
 unmap w
 nunmap w
 
-exmap duplicateLine jsfile Meta/vimrc-jsfile.js { duplicateLine() }
-nnoremap ww :duplicateLine
-
+nnoremap ww yyp
 nnoremap W y$$p
+
 nnoremap wj yjjp
 nnoremap wim yiWp
 nnoremap wam yaWp
