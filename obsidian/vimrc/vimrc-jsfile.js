@@ -82,7 +82,7 @@ function freezeInterface() {
 	const delaySecs = 4;
 	new Notice(`Will freeze Obsidian in ${delaySecs}s`, delaySecs * 1000);
 	electronWindow.openDevTools(); // devtools need to be open for debugger to work
-	// biome-ignore format: ugly
+
 	setTimeout(() => { debugger }, delaySecs * 1000 + 200)
 }
 
@@ -136,6 +136,7 @@ async function workspace(mode, workspaceName) {
 	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
 	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
+	setTimeout(() => workspacePlugin.disable(), 3000);
 }
 
 //──────────────────────────────────────────────────────────────────────────────

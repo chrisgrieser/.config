@@ -1,5 +1,5 @@
 # SHORTHANDS
-alias q=' exit' # INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
+alias q=' exit'     # INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
@@ -21,9 +21,9 @@ alias l='eza --all --long --time-style=relative --no-user \
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
-} 
+}
 function bat { # dark-mode aware
-	local theme # list themes via `bat --list-themes`
+	local theme   # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
 }
@@ -35,6 +35,7 @@ alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
+function prose { scp "$1" prose.sh:/; } # https://pico.sh/prose#publish-your-posts-with-one-command
 
 #───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)
@@ -43,7 +44,7 @@ alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
 alias -g J='| fx'
-alias -g C='| pbcopy ; echo "Copied."' 
+alias -g C='| pbcopy ; echo "Copied."'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
