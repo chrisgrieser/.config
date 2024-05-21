@@ -14,10 +14,5 @@ if not vim.uv.fs_stat(lazypath) then
 	vim.system({ "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }):wait()
 end
 vim.opt.runtimepath:prepend(lazypath)
+
 require("lazy").setup(plugins)
-
---------------------------------------------------------------------------------
-
--- basic appearance settings to not be annoyed
-vim.opt.swapfile = false -- disable prompt when things crash
-vim.opt.guifont = "JetBrainsMonoNL NF" .. ":h26"
