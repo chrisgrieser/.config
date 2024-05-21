@@ -374,12 +374,12 @@ return {
 						"elflord", "desert", "delek", "darkblue", "blue", "morning", "vim",
 						"habamax", "retrobox", "sorbet", "zaibatsu", "wildcharm"
 					}
-					local original = vim.fn.getcompletion
+					local originalFunc = vim.fn.getcompletion
 
 					vim.fn.getcompletion = function() ---@diagnostic disable-line: duplicate-set-field
 						return vim.tbl_filter(
 							function(color) return not vim.tbl_contains(builtins, color) end,
-							original("", "color")
+							originalFunc("", "color")
 						)
 					end
 

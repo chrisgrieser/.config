@@ -3,8 +3,8 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	"cdmill/neomodern.nvim",
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- "cdmill/neomodern.nvim",
 	-- "sainnhe/everforest",
 	-- {
 	-- 	"marko-cerovac/material.nvim",
