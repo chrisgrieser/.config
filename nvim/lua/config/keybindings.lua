@@ -241,7 +241,7 @@ keymap(
 -- MULTI-CURSOR REPLACEMENT
 -- https://www.reddit.com/r/neovim/comments/173y1dv/comment/k47kqb3/?context=3
 keymap("n", "<D-j>", '*<C-o>"_cgn', { desc = "󰆿 Multi-Edit" })
--- `remap`, as it requires nvim's visual star
+-- `remap` because it requires nvim's visual star
 keymap("x", "<D-j>", '*<C-o>"_cgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------

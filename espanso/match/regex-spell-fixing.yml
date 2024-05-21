@@ -12,7 +12,8 @@ matches:
       - name: CapitalCased
         type: shell
         params:
-          cmd: "echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE"
+          cmd: |
+            echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE
           shell: sh
 
   # "…ign" -> "…ing"
