@@ -1,4 +1,4 @@
-local keymaps = require("config.telescope-keymaps")
+local keymaps = require("funcs.telescope-keymaps")
 local telescope = vim.cmd.Telescope
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
@@ -343,19 +343,25 @@ return {
 			{
 				"gL",
 				function()
-					local word
-					if vim.fn.mode() == "n" then
-						word = vim.fn.expand("<cword>")
-					else
-						require("config.utils").normal('"zy')
-						word = vim.trim(vim.fn.getreg("z"))
-					end
 					require("telescope.builtin").live_grep {
-						default_text = word,
+						default_text = vim.fn.expand("<cword>"),
 						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
 				desc = " Grep cword",
+			},
+			{
+				"gL",
+				function()
+					require("config.utils").normal('"zy')
+					local sel = vim.trim(vim.fn.getreg("z"))
+					require("telescope.builtin").live_grep {
+						default_text = sel,
+						prompt_title = "Live Grep: " .. projectName(),
+					}
+				end,
+				mode = "x",
+				desc = " Grep selection",
 			},
 			{
 				"<leader>pc",

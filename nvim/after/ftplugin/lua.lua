@@ -17,3 +17,12 @@ vim.keymap.set("n", "<leader>r", function()
 	local toEol = vim.trim(line:sub(col + 1))
 	return ":lua = " .. toEol
 end, { buffer = true, expr = true, desc = " Put to EoL in cmdline" })
+
+vim.keymap.set("x", "<leader>r", function()
+	require("config.utils").leaveVisualMode()
+	local pos = vim.region(0, "'<", "'>", "v", true)
+	local row = vim.tbl_keys(pos)[1]
+	local start, stop = unpack(vim.tbl_values(pos)[1])
+	local sel = vim.api.nvim_buf_get_text(0, row, start, row, stop, {})[1]
+	return ":lua = " .. sel
+end, { buffer = true, expr = true, desc = " Put Selection in cmdline" })

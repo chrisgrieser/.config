@@ -34,6 +34,11 @@ function M.getHighlightValue(name, key)
 	return ("#%06x"):format(value)
 end
 
+function M.leaveVisualMode()
+	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
+	vim.api.nvim_feedkeys(escKey, "nx", false)
+end
+
 --------------------------------------------------------------------------------
 
 ---Creates autocommand triggered by Colorscheme change, that modifies a
