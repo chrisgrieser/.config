@@ -355,11 +355,12 @@ rules:
           - shell_command: |
               current_win=$(osascript -e '
                 tell application "Finder"
-                  if (count Finder windows) is 0 then return
+                  if (count Finder windows) is 0 then return ""
                   set pathToBeClosed to (POSIX path of (insertion location as alias))
                   close window 1
                   return pathToBeClosed
                 end tell')
+              mkdir -p "$HOME/.cache/finder-vim-mode"
               [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
           # closing win should end insert, menu, and find mode, but not cancel move
           # since cmd+w can be called from various modes, it should thus also
@@ -378,11 +379,13 @@ rules:
           - shell_command: |
               current_win=$(osascript -e '
                 tell application "Finder"
+                  activate
                   if (count Finder windows) is 0 then return ""
                   set pathToBeClosed to (POSIX path of (insertion location as alias))
                   close window 1
                   return pathToBeClosed
                 end tell')
+              mkdir -p "$HOME/.cache/finder-vim-mode"
               [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # W = re-open window
@@ -399,6 +402,7 @@ rules:
           - shell_command: |
               current_win=$(osascript -e '
                 tell application "Finder"
+                  set winPath to ""
                   repeat while Finder window 2 exists
                     if ((count Finder windows) is 2) then
                       set winPath to POSIX path of (target of window 2 as alias)
@@ -407,6 +411,7 @@ rules:
                   end repeat
                   return winPath
                 end tell')
+              mkdir -p "$HOME/.cache/finder-vim-mode"
               [[ -n "$current_win" ]] && echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # <BS> = cycle windows (:bnext)
