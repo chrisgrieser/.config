@@ -80,10 +80,9 @@ return {
 		},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
-			u.addToLuaLine("winbar", "lualine_b", {
+			u.addToLuaLine("tabline", "lualine_b", {
 				function()
-					local width = vim.o.columns
-					local sig = require("lsp_signature").status_line(width)
+					local sig = require("lsp_signature").status_line()
 					local start = sig.range.start
 					local stop = sig.range["end"]
 					local label = sig.label:sub(1, start - 1)
@@ -137,7 +136,7 @@ return {
 			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
-			implementation = { enabled = true },
+			implementation = { enabled = false },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
 				return (" 󰈿 %s"):format(symbol.references)

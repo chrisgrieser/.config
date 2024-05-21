@@ -5,9 +5,7 @@ local u = require("config.utils")
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
-	-- CONFIG
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2 }
-
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2 } -- CONFIG
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
 	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.shiftwidth
@@ -33,7 +31,7 @@ local function quickfixCounter()
 		.title -- prettify telescope's title output
 		:gsub("^Live Grep: .-%((.+)%)", "%1")
 		:gsub("^Find Files: .-%((.+)%)", "%1")
-		:gsub("^Find Word %((.-)%) %(.-%)", "%1")
+		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
@@ -56,14 +54,12 @@ local lualineConfig = {
 			},
 		},
 		lualine_c = {
-			{ -- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
-				function() return " " end,
-				padding = { left = 0, right = 0 },
-			},
+			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
+			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
 		lualine_y = {
 			{ -- recording status
-				function() return ("󰻂 Recording to [%s]…"):format(vim.fn.reg_recording()) end,
+				function() return ("雷Recording to [%s]…"):format(vim.fn.reg_recording()) end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 				color = function() return { fg = u.getHighlightValue("Error", "fg") } end,
 			},
@@ -121,11 +117,7 @@ local lualineConfig = {
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
-			{ -- neovim icon
-				function() return "" end,
-				cond = function() return vim.fn.has("gui_running") == 1 end, -- glyph not supported by wezterm yet
-				padding = { left = 0, right = 1 },
-			},
+			{ function() return "" end, padding = { left = 0, right = 1 } },
 		},
 	},
 	options = {
@@ -145,7 +137,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- load quicker for no flashing
+	lazy = "UIEnter", -- load quicker for no flashing
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,
