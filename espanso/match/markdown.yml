@@ -14,30 +14,24 @@ matches:
       - name: dedentedCode
         type: shell
         params:
-          # LC_CTYPE: fix encoding issues
-          # awk: remove trailing blank lines
-          # python3: remove indentation
           cmd: |
-            export LC_CTYPE="en_US.UTF-8"
+            export LC_CTYPE="en_US.UTF-8" # fix encoding issues
             pbpaste | 
-              awk "NF {p=1} p" | 
-              python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"
+              awk "NF {p=1} p" | # remove trailing blank lines
+              python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))" # dedent
   - trigger: LLL
-    replace: "[$|$]({{url}})"
+    replace: "$|$]({{url}})"
     label: Markdown Link
     vars:
       - name: url
         type: shell
         params:
           # only pastes clipboard content if it's a URL
-          cmd: '[[ "$(pbpaste)" =~ ^http.* ]] && pbpaste || echo ""'
-  #─────────────────────────────────────────────────────────────────────────────
+          cmd: |
+            [[ "$(pbpaste)" =~ ^\<?http.* ]] && pbpaste || echo ""
   - trigger: "!table"
     replace: |
       ::: {custom-style="Table Caption"}
       Table $|$:
       :::
     label: Pandoc Table Caption
-  - trigger: "!img"
-    replace: '<img width=60% alt="" src="$|$">'
-    label: HTML Image

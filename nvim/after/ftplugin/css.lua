@@ -11,7 +11,8 @@ vim.keymap.set("n", "<leader>i", function()
 	vim.api.nvim_set_current_line(line)
 end, { buffer = true, desc = " Toggle !important", nowait = true })
 
--- HACK workaround for `opt.exrc` not working with neovide
+-- workaround for `opt.exrc` not working with neovide
+-- for security reasons, restricted to `~/repos/shimmering-focus`
 vim.defer_fn(function()
 	local u = require("config.utils")
 	local exrc = vim.fs.normalize("~/repos/shimmering-focus/.nvim.lua")
