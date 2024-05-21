@@ -17,7 +17,8 @@ while read -r line; do
 	letter=$(echo "$line" | cut -d, -f4)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	changes=$(git -C "$repo_path" status --porcelain)
-	change_count=$(echo -n "$changes" | wc -l | tr -d " ")
+	change_count=0 # to account for empty changes adding one blank line
+	[[ -n "$changes" ]] && change_count=$(echo "$changes" | wc -l | tr -d " ")
 
 	if [[ "$changes" =~ index.lock ]] ; then # lockfile
 		all_changes="$all_changes🔒$letter "
