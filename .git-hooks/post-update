@@ -6,3 +6,4 @@
 sleep 1
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 sketchybar --trigger repo-files-update
+echo "foobar"
