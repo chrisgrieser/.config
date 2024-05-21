@@ -8,6 +8,5 @@
 find . -type d -empty -not -path "./espanso/match/packages" -delete
 
 # Update Counter in Sketchybar
-sleep 1
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 sketchybar --trigger repo-files-update
