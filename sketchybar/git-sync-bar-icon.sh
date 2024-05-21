@@ -7,12 +7,12 @@ function set_sketchybar {
 	sketchybar --set "$NAME" icon="$icon" label="$all_changes"
 }
 
+perma_repos_path="$HOME/.config/perma-repos.csv"
+all_changes=""
+
 #───────────────────────────────────────────────────────────────────────────────
 
-all_changes=""
-perma_repos_path="$HOME/.config/perma-repos.csv"
-
-# commits ahead
+# COMMITS AHEAD
 while read -r line; do
 	letter=$(echo "$line" | cut -d, -f4)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
@@ -33,7 +33,9 @@ done <"$perma_repos_path"
 # problem. But if there are no behinds, the outdated label will disappear quicker.
 set_sketchybar
 
-# commits behind
+#───────────────────────────────────────────────────────────────────────────────
+
+# COMMITS BEHIND
 while read -r line; do
 	letter=$(echo "$line" | cut -d, -f4)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
