@@ -7,84 +7,80 @@
 	"contributes": {
 		"snippets": [
 			{
-				"language": ["all", "plaintext"],
-				"path": "./global.json"
+				"language": ["all"],
+				"path": "./all.json"
 			},
 			{
 				"language": ["make"],
-				"path": "./basic/makefile.json"
+				"path": "./make.json"
 			},
 			{
 				"language": ["markdown"],
-				"path": "./basic/markdown.json"
+				"path": "./markdown.json"
 			},
 			{
 				"language": ["python"],
-				"path": "./basic/python.json"
+				"path": "./python.json"
 			},
 			{
 				"language": ["css", "scss"],
-				"path": "./basic/css.json"
+				"path": "./css.json"
 			},
 			{
-				"language": ["bash", "zsh", "fish", "sh", "make"],
-				"path": "./basic/shell.json"
+				"language": ["sh", "make"],
+				"path": "./sh.json"
 			},
 			{
 				"language": ["lua"],
-				"path": "./basic/lua.json"
+				"path": "./lua.json"
 			},
 			{
 				"language": ["applescript"],
-				"path": "./basic/applescript.json"
+				"path": "./applescript.json"
 			},
 			{
 				"language": ["bib"],
-				"path": "./basic/bibtex.json"
+				"path": "./bib.json"
 			},
 			{
 				"language": ["javascript", "typescript"],
-				"path": "./basic/javascript.json"
+				"path": "./javascript.json"
 			},
 			{
 				"language": ["javascript", "typescript"],
-				"path": "./basic/node-js.json"
+				"path": "./node-js.json"
 			},
 			{
 				"language": ["javascript"],
-				"path": "./basic/jxa.json"
+				"path": "./jxa.json"
 			},
 			{
 				"language": ["yaml"],
-				"path": "./basic/yaml.json"
+				"path": "./yaml.json"
 			},
 			{
 				"language": ["yaml"],
-				"path": "./project-specific/karabiner-modifications.json"
+				"path": "./karabiner-modifications.json"
 			},
 			{
 				"language": ["toml"],
-				"path": "./project-specific/typos-toml.json"
+				"path": "./typos-toml.json"
 			},
 			{
 				"language": ["lua"],
-				"path": "./project-specific/nvim-lua.json"
+				"path": "./nvim-lua.json"
 			},
 			{
 				"language": ["vim"],
-				"path": "./project-specific/obsidian-vimrc.json"
-			},
-			{
-				"language": ["typescript"],
-				"path": "./project-specific/obsidian-plugin-dev.json"
+				"path": "./obsidian-vimrc.json"
 			},
 			{
 				"language": ["javascript"],
-				"path": "./project-specific/alfred-jxa.json"
+				"path": "./alfred-jxa.json"
 			},
 			{
 				"language": ["applescript"],
-				"path": "./project-specific/alfred-applescript.json"
+				"path": "./alfred-applescript.json"
 			}
 		]
 	},
