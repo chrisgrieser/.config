@@ -13,24 +13,17 @@ return {
 		opts = {
 			filetypes = {
 				DressingInput = false,
-				["grug-far"] = false,
 				text = false, -- `pass` passwords are plaintext
 			},
 			silent = true,
 		},
 		keys = {
-			{
-				"<D-s>",
-				function() require("neocodeium").accept() end,
-				mode = "i",
-				desc = "󰚩 Accept full suggestion",
-			},
-			{
-				"<D-S>",
-				function() require("neocodeium").accept_line() end,
-				mode = "i",
-				desc = "󰚩 Accept line",
-			},
+			-- stylua: ignore start
+			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
+			{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
+			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
+			{ "<D-D>", function() require("neocodeium").cycle(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
+			-- stylua: ignore end
 			{ "<leader>oa", "<cmd>NeoCodeium toggle<CR>", desc = "󰚩 Codium Suggestions" },
 		},
 		-- symlink the codium config to enable syncing of API key

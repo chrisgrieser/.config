@@ -1,14 +1,14 @@
-.PHONY: lines plugins debug
+.PHONY: count-lines update-plugins debug
 #───────────────────────────────────────────────────────────────────────────────
 
 # prints total length of config
-lines:
+count-lines:
 	echo ;\
 	find . -name "*.lua" | xargs wc -l | sort --reverse
 
 # updates README.md with current list of installed plugins
 # INFO uses macOS' `sed` and `open`
-plugins:
+update-plugins:
 	nvim_readme="$$HOME/.config/nvim/README.md" ; \
 	last_line_before_plugins="## All installed plugins" ; \
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
