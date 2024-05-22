@@ -193,9 +193,7 @@ end
 function M.reloadTheming() themeModifications() end
 
 -- initialize theme on startup
-local isDarkMode =
-	vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:find("Dark")
-M.setThemeMode(isDarkMode and "dark" or "light")
+M.setThemeMode(vim.o.background)
 
 --------------------------------------------------------------------------------
 return M
