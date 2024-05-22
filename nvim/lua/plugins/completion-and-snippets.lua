@@ -198,8 +198,16 @@ return {
 	{
 		"garymjr/nvim-snippets",
 		opts = {
-			create_autocmd = true,
-			-- extended_filestypes = {},
+			-- PENDING https://github.com/garymjr/nvim-snippets/issues/5
+			extended_filetypes = {
+				make = { "sh" },
+				typescript = { "javascript", "node-js" },
+				javascript = { "jxa", "node-js", "alfred-jxa" },
+				lua = { "nvim-lua" },
+				vim = { "obsidian-vimrc" },
+				toml = { "typos-toml" },
+				yaml = { "karabiner-modifications" },
+			},
 		},
 	},
 	{ -- snippet management
