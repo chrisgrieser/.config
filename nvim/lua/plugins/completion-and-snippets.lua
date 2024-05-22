@@ -74,6 +74,7 @@ local function cmpconfig()
 					buffer = "󰽙",
 					cmdline = "󰘳",
 					luasnip = "",
+					snippets = "",
 					nvim_lsp = "󰒕",
 					path = "",
 					emmet = "",
@@ -117,12 +118,13 @@ local function cmpconfig()
 				if isEmmet then entry.source.name = "emmet" end
 
 				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-				item.menu = sourceIcons[entry.source.name] .. " "
+				item.menu = (sourceIcons[entry.source.name] or "") .. " "
 				return item
 			end,
 		},
 		sources = cmp.config.sources {
-			{ name = "luasnip" },
+			-- { name = "luasnip" },
+			{ name = "snippets" },
 			{
 				name = "nvim_lsp",
 				entry_filter = function(entry, _)
@@ -186,34 +188,42 @@ return {
 	{ -- Completion Engine + Sources
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
-		config = cmpconfig,
 		dependencies = {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
-			"L3MON4D3/LuaSnip", -- snippet engine
-			"saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+			"garymjr/nvim-snippets",
+			-- "L3MON4D3/LuaSnip", -- snippet engine
+			-- "saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
 		},
+		config = cmpconfig,
 	},
-	{ -- Snippet Engine
-		"L3MON4D3/LuaSnip",
-		init = function()
-			-- copy system clipboard to regular register, required for VSCode
-			-- snippets with `$CLIPBOARD`
-			vim.api.nvim_create_autocmd("FocusGained", {
-				callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
-			})
-		end,
+	{
+		"garymjr/nvim-snippets",
+		lazy = false,
 		opts = {
-			-- disable auto-reload, since already done by scissors
-			fs_event_providers = { autocmd = false, libuv = false },
+			create_autocmd = true,
 		},
-		config = function(_, opts)
-			require("luasnip").setup(opts)
-			require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
-		end,
 	},
+	-- { -- Snippet Engine
+	-- 	"L3MON4D3/LuaSnip",
+	-- 	init = function()
+	-- 		-- copy system clipboard to regular register, required for VSCode
+	-- 		-- snippets with `$CLIPBOARD`
+	-- 		vim.api.nvim_create_autocmd("FocusGained", {
+	-- 			callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
+	-- 		})
+	-- 	end,
+	-- 	opts = {
+	-- 		-- disable auto-reload, since already done by scissors
+	-- 		fs_event_providers = { autocmd = false, libuv = false },
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("luasnip").setup(opts)
+	-- 		require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
+	-- 	end,
+	-- },
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
