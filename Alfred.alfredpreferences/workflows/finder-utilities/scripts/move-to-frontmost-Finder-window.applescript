@@ -7,6 +7,8 @@ on run argv
 	set itemPath to item 1 of argv
 
 	tell application "Finder"
+		activate
+
 		if ((count Finder windows) = 0) then return "No Window open"
 		set targetFolder to (target of Finder window 1 as alias)
 
