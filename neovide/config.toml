@@ -4,6 +4,7 @@ frame = "buttonless"
 no-multigrid = true
 title-hidden = true
 tabs = false
+theme = "auto"
 
 [font]
 normal = ["JetBrainsMonoNL NF", "Monaco"]
