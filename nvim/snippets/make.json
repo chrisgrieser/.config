@@ -4,9 +4,12 @@
     "description": "in case a CLI needs to be run",
     "prefix": "PATH (export)"
   },
-  "PHONY": {
+  "PHONY + .PHONY": {
     "body": ".PHONY: ${task1} ${task2}",
-    "prefix": "PHONY"
+    "prefix": [
+      "PHONY",
+      ".PHONY"
+    ]
   },
   "all tasks": {
     "body": "all: | ${1:task1} ${2:task2}",
