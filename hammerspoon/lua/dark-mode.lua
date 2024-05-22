@@ -1,9 +1,9 @@
 local M = {}
 
 local console = require("lua.console")
+local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local visuals = require("lua.visuals")
-local env = require("lua.environment-vars")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
@@ -27,10 +27,10 @@ function M.setDarkMode(toMode)
 
 	-- neovim
 	-- stylua: ignore
-	local nvimLuaCmd = ([[<cmd>lua require('config.theme-customization').setThemeMode('%s')<CR>]]):format(toMode)
+	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateTheme()<CR>]]
 	hs.execute(
 		u.exportPath
-			.. ([[nvim --server "/tmp/nvim_server.pipe" --remote-send "%s"]]):format(nvimLuaCmd)
+			.. ([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd)
 	)
 
 	-- Highlights PDF background

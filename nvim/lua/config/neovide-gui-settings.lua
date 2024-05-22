@@ -28,6 +28,7 @@ g.neovide_input_use_logo = true -- enable `cmd` key on macOS
 g.neovide_input_macos_option_key_is_meta = "none" -- so `{@~` etc. can be used
 
 -- Appearance
+g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
 g.neovide_remember_window_size = true
 g.neovide_hide_mouse_when_typing = true
 g.neovide_transparency = 0.92

@@ -4,6 +4,8 @@ frame = "buttonless"
 no-multigrid = true
 title-hidden = true
 tabs = false
+
+# BUG currently (v.0.13) ignored, needs to be set via `vim.g.neovide_theme`
 theme = "auto"
 
 [font]
