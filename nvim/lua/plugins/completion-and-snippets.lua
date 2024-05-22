@@ -1,46 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
-local defaultSources = {
-	{ name = "luasnip" },
-	{
-		name = "nvim_lsp",
-		entry_filter = function(entry, _)
-			-- using cmp-buffer for this
-			return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
-		end,
-	},
-	{
-		name = "buffer",
-		option = {
-			-- show completions from all buffers used within the last x minutes
-			get_bufnrs = function()
-				local usedWithinMins = 15 -- CONFIG
-				local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
-					:filter(function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end)
-					:map(function(buf) return buf.bufnr end)
-					:totable()
-				return recentBufs
-			end,
-			max_indexed_line_length = 100, -- no long lines (e.g. base64-encoded things)
-		},
-		keyword_length = 3,
-		max_item_count = 4, -- since searching all buffers results in many results
-	},
-	{ name = "path" },
-}
-
-local sourceIcons = {
-	buffer = "󰽙",
-	cmdline = "󰘳",
-	luasnip = "",
-	nvim_lsp = "󰒕",
-	path = "",
-	emmet = "",
-}
-
---------------------------------------------------------------------------------
-
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -82,7 +42,6 @@ local function cmpconfig()
 				},
 			},
 
-			-- Next item, or trigger completion, or insert normal tab
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					-- FIX lag when using `Insert` in css
@@ -100,11 +59,9 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-			-- next location
 			["<D-j>"] = cmp.mapping(function(_)
 				if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 			end, { "i", "s" }),
-			-- prev location
 			["<D-J>"] = cmp.mapping(function(_)
 				if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
 			end, { "i", "s" }),
@@ -112,9 +69,45 @@ local function cmpconfig()
 		formatting = {
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
+				local maxLength = 50
+				local sourceIcons = {
+					buffer = "󰽙",
+					cmdline = "󰘳",
+					luasnip = "",
+					nvim_lsp = "󰒕",
+					path = "",
+					emmet = "",
+				}
+				local kindIcons = {
+					Text = "",
+					Method = "󰆧",
+					Function = "󰊕",
+					Constructor = "",
+					Field = "󰇽",
+					Variable = "󰂡",
+					Class = "󰠱",
+					Interface = "",
+					Module = "",
+					Property = "󰜢",
+					Unit = "",
+					Value = "󰎠",
+					Enum = "",
+					Keyword = "󰌋",
+					Snippet = "󰅱",
+					Color = "󰏘",
+					File = "󰈙",
+					Reference = "",
+					Folder = "󰉋",
+					EnumMember = "",
+					Constant = "󰏿",
+					Struct = "",
+					Event = "",
+					Operator = "󰆕",
+					TypeParameter = "󰅲",
+				}
+
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				local maxLength = 50
 				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
 
 				-- distinguish emmet snippets
@@ -123,14 +116,41 @@ local function cmpconfig()
 					and vim.bo[entry.context.bufnr].filetype == "css"
 				if isEmmet then entry.source.name = "emmet" end
 
-				-- stylua: ignore
-				local kindIcons = { Text = "", Method = "󰆧", Function = "󰊕", Constructor = "", Field = "󰇽", Variable = "󰂡", Class = "󰠱", Interface = "", Module = "", Property = "󰜢", Unit = "", Value = "󰎠", Enum = "", Keyword = "󰌋", Snippet = "󰅱", Color = "󰏘", File = "󰈙", Reference = "", Folder = "󰉋", EnumMember = "", Constant = "󰏿", Struct = "", Event = "", Operator = "󰆕", TypeParameter = "󰅲" }
 				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
 				item.menu = sourceIcons[entry.source.name] .. " "
 				return item
 			end,
 		},
-		sources = cmp.config.sources(defaultSources),
+		sources = cmp.config.sources {
+			{ name = "luasnip" },
+			{
+				name = "nvim_lsp",
+				entry_filter = function(entry, _)
+					-- using cmp-buffer for this
+					return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+				end,
+			},
+			{
+				name = "buffer",
+				option = {
+					-- show completions from all buffers used within the last x minutes
+					get_bufnrs = function()
+						local usedWithinMins = 15 -- CONFIG
+						local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+							:filter(
+								function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end
+							)
+							:map(function(buf) return buf.bufnr end)
+							:totable()
+						return recentBufs
+					end,
+					max_indexed_line_length = 100, -- no long lines (e.g. base64-encoded things)
+				},
+				keyword_length = 3,
+				max_item_count = 4, -- since searching all buffers results in many results
+			},
+			{ name = "path" },
+		},
 	}
 
 	-----------------------------------------------------------------------------
@@ -161,7 +181,6 @@ local function cmpconfig()
 end
 
 --------------------------------------------------------------------------------
-
 
 return {
 	{ -- Completion Engine + Sources
