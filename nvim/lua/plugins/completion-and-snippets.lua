@@ -73,7 +73,6 @@ local function cmpconfig()
 				local sourceIcons = {
 					buffer = "󰽙",
 					cmdline = "󰘳",
-					luasnip = "",
 					snippets = "",
 					nvim_lsp = "󰒕",
 					path = "",
@@ -123,7 +122,6 @@ local function cmpconfig()
 			end,
 		},
 		sources = cmp.config.sources {
-			-- { name = "luasnip" },
 			{ name = "snippets" },
 			{
 				name = "nvim_lsp",
@@ -193,37 +191,17 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp", -- LSP input
-			"garymjr/nvim-snippets",
-			-- "L3MON4D3/LuaSnip", -- snippet engine
-			-- "saadparwaiz1/cmp_luasnip", -- adapter for snippet engine
+			"garymjr/nvim-snippets", -- custom snippets
 		},
 		config = cmpconfig,
 	},
 	{
 		"garymjr/nvim-snippets",
-		lazy = false,
 		opts = {
 			create_autocmd = true,
+			-- extended_filestypes = {},
 		},
 	},
-	-- { -- Snippet Engine
-	-- 	"L3MON4D3/LuaSnip",
-	-- 	init = function()
-	-- 		-- copy system clipboard to regular register, required for VSCode
-	-- 		-- snippets with `$CLIPBOARD`
-	-- 		vim.api.nvim_create_autocmd("FocusGained", {
-	-- 			callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
-	-- 		})
-	-- 	end,
-	-- 	opts = {
-	-- 		-- disable auto-reload, since already done by scissors
-	-- 		fs_event_providers = { autocmd = false, libuv = false },
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("luasnip").setup(opts)
-	-- 		require("luasnip.loaders.from_vscode").lazy_load { paths = "./snippets" }
-	-- 	end,
-	-- },
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",

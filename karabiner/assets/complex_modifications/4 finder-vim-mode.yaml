@@ -762,26 +762,27 @@ rules:
       - type: basic
         from: { key_code: b }
         to:
-          # INFO if the selection is a symlink, "selection as alias" returns the
-          # path of the target, while "selection as text" returns the path of
-          # the symlink (which is desired here)
           - shell_command: |
+              # if the selection is a symlink, "selection as alias" returns the
+              # path of the target, while "selection as text" returns the path of
+              # the symlink (which is desired here)
               selectedFiles=$(osascript -e '
-                tell application "Finder" to set selectedFiles to (every item of (get selection))
                 set out to ""
+                tell application "Finder" to set selectedFiles to (every item of (get selection))
                 repeat with theFile in selectedFiles
                   set out to out & (POSIX path of (theFile as text)) & linefeed
                 end repeat
                 return out
-              ')
+              ' | sed -e 's|/$||')
               if [[ -z "$selectedFiles" ]] ; then
                 "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "Finder Vim Mode" --message "⚠️ No selection."
                 exit 1
               fi
 
-              echo "$selectedFiles" | sed -e 's|/$||' -e '/^$/d' | while read -r file; do
-                lastFourChars=$(echo "$file" | rev | cut -c-4 | rev) # bash expansion does not work in karabiner
+              echo "$selectedFiles" | while read -r file; do
+                # bash expansion does not work in karabiner
+                lastFourChars=$(echo "$file" | rev | cut -c-4 | rev) 
                 if [[ "$lastFourChars" == "-bkp" ]]; then
                   newName=$(echo "$file" | rev | cut -c5- | rev)
                 else
@@ -796,16 +797,25 @@ rules:
         from: { key_code: s }
         to:
           - shell_command: |
-              sel=$(osascript -e 'tell application "Finder" to return POSIX path of (selection as text)')
-              if [[ -f "$sel" ]] ; then
-                  ln -sf "$sel" "${sel}-symlink"
-                  open -R "${sel}-symlink"
-              elif [[ -d "$sel" ]] ; then
-                  # cannot use bash expansion here, therefore rev & cut
-                  sel="$(echo "$sel" | rev | cut -c2- | rev)"
-                  ln -sf "$sel" "${sel}-symlink"
-                  open -R "${sel}-symlink"
+              selectedFiles=$(osascript -e '
+                set out to ""
+                tell application "Finder" to set selectedFiles to (every item of (get selection))
+                repeat with theFile in selectedFiles
+                  set out to out & (POSIX path of (theFile as text)) & linefeed
+                end repeat
+                return out
+              ' | sed -e 's|/$||')
+              if [[ -z "$selectedFiles" ]] ; then
+                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "Finder Vim Mode" --message "⚠️ No selection."
+                exit 1
               fi
+              echo "$selectedFiles" | while read -r file; do
+                ln -sf "$file" "${file}-symlink"
+              done
+              first_symlink="$(echo "$selectedFiles" | head -n1)-symlink"
+              open -R "$first_symlink"
+              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" & # codespell-ignore
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # S = follow symlink (or alias)
       - type: basic
