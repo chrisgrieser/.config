@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		external_dependencies = { "node", "python3.12", "yq" },
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		opts = {
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705

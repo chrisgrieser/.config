@@ -57,7 +57,7 @@ local routes = {
 	-----------------------------------------------------------------------------
 	-- SKIP
 
-	-- LSP bugs?
+	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 	{
 		filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" },

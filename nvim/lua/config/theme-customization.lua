@@ -34,14 +34,14 @@ local function customHighlights()
 	overwriteHl("MatchParen", { reverse = true }) -- stand out more
 	linkHl("Whitespace", "NonText") -- trailing spaces more visible
 	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
-	overwriteHl("SnippetTabstop", { underline = true })
+	overwriteHl("SnippetTabstop", { bold = true })
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
-	-- Spelling: underlines instead of undercurls (used only for commit messages though)
+	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
