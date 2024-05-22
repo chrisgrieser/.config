@@ -24,7 +24,7 @@ require("lazy").setup("plugins", {
 		fallback = true, -- … and if not, fallback to fetching from GitHub
 	},
 	-- colorschemes to use during installation
-	install = { colorscheme = { "tokyonight", "dawnfox", "default" } },
+	install = { colorscheme = { "tokyonight", "default" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
@@ -123,7 +123,7 @@ local function checkForDuplicateKeys()
 	local function isMode(lazyKey, mode)
 		if not lazyKey.mode then return mode == "n" end
 		if type(lazyKey.mode) == "string" then return lazyKey.mode == mode end
-		if type(lazyKey.mode) == "table" then return vim.tbl_contains(lazyKey.mode, mode) end
+		if type(lazyKey.mode) == "table" then return vim.tbl_contains(lazyKey.mode, mode) end ---@diagnostic disable-line: param-type-mismatch
 		return false
 	end
 
@@ -131,23 +131,24 @@ local function checkForDuplicateKeys()
 	for _, mode in ipairs(modes) do
 		allKeys[mode] = {}
 	end
-	for _, plugin in ipairs(require("lazy").plugins()) do
-		local globalKeys = vim.tbl_filter(function(key) return key.ft == nil end, plugin.keys or {})
-
-		for _, lazyKey in ipairs(globalKeys) do
-			for _, mode in ipairs(modes) do
-				local lhs = lazyKey[1] or lazyKey
-				if isMode(lazyKey, mode) then
-					if vim.tbl_contains(allKeys[mode], lhs) then
-						notify("Lazy", ("Duplicate %smap: %s"):format(mode, lhs), "warn")
-					else
-						table.insert(allKeys[mode], lhs)
+	vim.iter(require("lazy").plugins()):each(function(plugin)
+		vim
+			.iter(plugin.keys or {})
+			:filter(function(key) return key.ft == nil end) -- not ft-specific keys
+			:each(function(lazyKey)
+				local lhs = lazyKey[1] or lazyKey -- keys can be just a string
+				for _, mode in ipairs(modes) do
+					if isMode(lazyKey, mode) then
+						if vim.tbl_contains(allKeys[mode], lhs) then
+							notify("Lazy", ("Duplicate %smap: %s"):format(mode, lhs), "warn")
+						else
+							table.insert(allKeys[mode], lhs)
+						end
 					end
 				end
-			end
-		end
-	end
+			end)
+	end)
 end
 
 vim.defer_fn(checkForPluginUpdates, 10000)
-vim.defer_fn(checkForDuplicateKeys, 5000)
+vim.defer_fn(checkForDuplicateKeys, 4000)
