@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- KEYMAPS
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
-keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy" })
+keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 -- goto plugin config, replaces telescope-lazy-plugins.nvim

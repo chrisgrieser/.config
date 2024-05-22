@@ -16,7 +16,7 @@ keymap(
 keymap("n", "<leader>pd", function()
 	local pluginPath = vim.fn.stdpath("data") ---@cast pluginPath string
 	vim.ui.open(pluginPath)
-end, { desc = " Package Dirs" })
+end, { desc = " Open Package Directory" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
@@ -85,9 +85,12 @@ keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "�
 keymap(
 	"n",
 	"<leader>ur",
-	function() vim.cmd("silent later " .. tostring(vim.opt.undolevels:get())) end,
+	function() vim.cmd.later(vim.opt.undolevels:get()) end,
 	{ desc = "󰛒 Redo All" }
 )
+
+keymap("n", "<leader>u1", function() vim.cmd.earlier("1h") end, { desc = "󰜊 Undo 1h" })
+keymap("n", "<leader>u8", function() vim.cmd.earlier("8h") end, { desc = "󰜊 Undo 8h" })
 
 -- save open time for each buffer
 autocmd("BufReadPost", {

@@ -3,6 +3,7 @@ local M = {}
 -- APPS
 
 M.transBgApps = {
+	"Neovide",
 	"neovide",
 	"Obsidian",
 	"wezterm-gui",

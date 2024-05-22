@@ -8,10 +8,10 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- INFO - REASONS FOR ALL THIS APP HIDING
+-- INFO REASONS FOR ALL THIS APP HIDING
 -- 1) My workflow where I only have one display and one Space, but
 -- still want to enjoy wallpapers visible through transparent apps.
--- 2) Apps should not cover up the sketchybar that I only have in the top right
+-- 2) Apps should not cover up the sketchybar which I only have in the top right
 -- corner.
 
 local config = {
@@ -40,10 +40,10 @@ end
 
 ---@param appObj hs.application the app not to hide
 local function hideOthers(appObj)
-	-- GUARD current app having no window
+	-- GUARD
 	if
 		not appObj
-		or not appObj:mainWindow()
+		or not appObj:mainWindow() -- windowless app
 		or not appObj:isFrontmost() -- check if win switched in meantime
 	then
 		return

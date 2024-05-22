@@ -280,7 +280,7 @@ return {
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰈿 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
-			{ "<leader>ph", function() telescope("highlights") end, desc = " Highlights" },
+			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
@@ -385,7 +385,7 @@ return {
 
 					telescope("colorscheme")
 				end,
-				desc = " Colorschemes",
+				desc = " Preview Colorschemes",
 			},
 		},
 	},

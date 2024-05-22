@@ -50,9 +50,9 @@ keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickf
 --------------------------------------------------------------------------------
 -- EDITING
 
--- Undo
-keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
-keymap("n", "U", "<cmd>silent redo<CR>zv")
+-- Undo text states, not changes https://vim.fandom.com/wiki/Using_undo_branches
+keymap("n", "u", "g-", { desc = "󰜊 Undo (text state)" })
+keymap("n", "U", "g+", { desc = "󰛒 Redo (text state)" })
 
 -- emulate some basic commands from `vim-abolish`
 keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
@@ -249,12 +249,12 @@ keymap("x", "<D-j>", '*<C-o>"_cgn', { desc = "󰆿 Multi-Edit", remap = true })
 -- 1. start/stop with just one keypress
 -- 2. add notification of recorded macro
 local register = "r"
-local key = "0"
-keymap("n", key, function()
+local toggleKey = "0"
+keymap("n", toggleKey, function()
 	local isRecording = vim.fn.reg_recording() ~= ""
 	if isRecording then
 		u.normal("q")
-		local recording = vim.fn.getreg(register):sub(1, -(#key + 1)) -- as the key itself is recorded
+		local recording = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
 		vim.fn.setreg(register, recording)
 		u.notify("Recorded", vim.fn.keytrans(recording), "trace")
 	else
