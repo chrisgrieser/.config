@@ -88,7 +88,7 @@ function M.addToLuaLine(whichBar, whichSection, component, whereInSection)
 	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
 
 	-- Theming needs to be re-applied, since the lualine-styling can change
-	require("config.theme-customization").reloadTheming()
+	require("config.theme-customization").themeModifications()
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/

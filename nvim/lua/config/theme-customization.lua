@@ -1,6 +1,5 @@
 local M = {}
 
-local g = vim.g
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
@@ -47,11 +46,10 @@ local function customHighlights()
 	end
 end
 
-local function themeModifications()
+function M.themeModifications()
 	local mode = vim.o.background
-	local theme = g.colors_name
-	-- some themes do not set g.colors_name
-	if not theme then theme = mode == "light" and g.lightTheme or g.darkTheme end
+	local theme = mode == "light" and vim.g.lightTheme or vim.g.darkTheme
+
 	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
 	local function boldLualineA()
@@ -174,26 +172,22 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		customHighlights()
-		themeModifications()
+		M.themeModifications()
 	end,
 })
 
----exported for remote control via hammerspoon
----@param mode "dark"|"light"
-function M.setThemeMode(mode)
-	vim.opt.background = mode
-	local targetTheme = mode == "dark" and g.darkTheme or g.lightTheme
-	vim.cmd.highlight("clear") -- needs to be set before colorscheme https://github.com/folke/lazy.nvim/issues/40
+-- for triggering via hammerspoon
+function M.updateTheme()
+	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
+	vim.cmd.highlight("clear") -- fixes some issues when switching themes
 	vim.cmd.colorscheme(targetTheme)
 end
 
--- INFO on adding new lualine elements, the lualine highlights are set again,
--- resulting in a loss of its styling. Therefore, the theme customizations have
--- to be applied again.
-function M.reloadTheming() themeModifications() end
-
 -- initialize theme on startup
-M.setThemeMode(vim.o.background)
+-- (darkmode not detected via `vim.o.background`, as neovide does not set it in time)
+local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+local targetTheme = macOSMode.stdout:find("Dark") and vim.g.darkTheme or vim.g.lightTheme
+vim.cmd.colorscheme(targetTheme)
 
 --------------------------------------------------------------------------------
 return M
