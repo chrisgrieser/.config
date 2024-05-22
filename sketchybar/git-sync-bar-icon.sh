@@ -21,7 +21,7 @@ while read -r line; do
 	[[ -n "$changes" ]] && change_count=$(echo "$changes" | wc -l | tr -d " ")
 
 	if [[ "$changes" =~ index.lock ]] ; then # lockfile
-		all_changes="$all_changes🔒$letter "
+		all_changes="$all_changes $letter "
 	elif [[ $change_count -ne 0 ]] ; then
 		all_changes="$all_changes$change_count$letter "
 	fi
