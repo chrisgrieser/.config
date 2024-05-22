@@ -21,7 +21,8 @@
 --hyperlink-format=default
 
 # colors
---colors=match:fg:yellow
+--colors=match:fg:magenta
 --colors=match:style:bold
---colors=path:fg:blue
+--colors=path:fg:cyan
 --colors=path:style:bold
+--colors=line:fg:green
