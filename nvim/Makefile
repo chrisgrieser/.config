@@ -7,13 +7,12 @@ count-lines:
 	find . -name "*.lua" | xargs wc -l | sort --reverse
 
 # updates README.md with current list of installed plugins
-# INFO uses macOS' `sed` and `open`
 update-plugins:
 	nvim_readme="$$HOME/.config/nvim/README.md" ; \
 	last_line_before_plugins="## All installed plugins" ; \
 	location_of_installed_plugins="$$HOME/.local/share/nvim/lazy" ; \
 	\
-	sed -i '' -n "1,/$$last_line_before_plugins/p" "$$nvim_readme" ; \
+	sed -i -e -n "1,/$$last_line_before_plugins/p" "$$nvim_readme" ; \
 	\
 	cd "$$location_of_installed_plugins" ; \
 	grep --only-matching --no-filename --max-count=1 "url = .*" ./*/.git/config | \
@@ -21,9 +20,9 @@ update-plugins:
 		sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' | \
 		sort --ignore-case >> "$$nvim_readme" ; \
 	\
-	open "$$nvim_readme"
+	[[ "$(uname)" == "Darwin" ]] && open "$$nvim_readme"
 
 # runs minimal config for debugging purposes with neovide
 debug:
 	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
-	neovide ./debug/test.lua -- -u ./debug/repro.lua
+	neovide ./debug/test.lua -- -u ./debug/repro.lua &>/dev/null
