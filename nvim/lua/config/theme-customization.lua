@@ -33,8 +33,7 @@ local function customHighlights()
 	overwriteHl("MatchParen", { reverse = true }) -- stand out more
 	linkHl("Whitespace", "NonText") -- trailing spaces more visible
 	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
-
-	overwriteHl("SnippetTabstop", { bg = u.getHighlightValue("Fo", "bg") })
+	overwriteHl("SnippetTabstop", { bg = u.getHighlightValue("Folded", "bg") })
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
