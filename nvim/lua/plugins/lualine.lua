@@ -37,13 +37,6 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
-vim.api.nvim_create_autocmd("TabNew", {
-	callback = function()
-		local moreThanOneTab = vim.fn.tabpagenr("$") > 1
-		vim.notify("⭕ moreThanOneTab: " .. tostring(moreThanOneTab))
-	end,
-})
-
 --------------------------------------------------------------------------------
 
 local lualineConfig = {

@@ -8,6 +8,20 @@ local isAtOffice = (host:find("eduroam") or host:find("tu%-berlin")) ~= nil
 local isAtMother = host:find("Mother")
 --------------------------------------------------------------------------------
 
+-- FIX neovide ignoring `tabs = false` on consecutive opening of new files
+-- https://github.com/neovide/neovide/issues/2585
+vim.api.nvim_create_autocmd("TabNew", {
+	callback = function(ctx)
+		vim.defer_fn(function()
+			if not (vim.fn.tabpagenr("$") > 1 and vim.bo.buftype == "") then return end
+			vim.cmd.tabclose()
+			vim.defer_fn(function() vim.cmd.edit(ctx.file) end, 1)
+		end, 1)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- SIZE & FONT
 if isAtMother then
 	g.neovide_scale_factor = 1.05
