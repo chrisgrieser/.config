@@ -12,7 +12,6 @@ alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
 alias make='make --silent --warn-undefined-variables'
-alias grep='grep --color'
 alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
@@ -32,6 +31,7 @@ function bat { # dark-mode aware
 alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
 alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
 alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
+alias sync='zsh ./.sync-this-repo.sh'
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
