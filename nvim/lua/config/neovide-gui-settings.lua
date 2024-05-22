@@ -1,19 +1,19 @@
 -- DOCS https://neovide.dev/configuration.html
 --------------------------------------------------------------------------------
-if not vim.g.neovide then return end -- GUARD
+if not vim.g.neovide then return end
 
 local g = vim.g
 local host = vim.uv.os_gethostname()
-local isAtOffice = (host:find("eduroam") or host:find("tu%-berlin")) ~= nil
+local isAtOffice = host:find("eduroam") or host:find("fak1")
 local isAtMother = host:find("Mother")
 --------------------------------------------------------------------------------
 
 -- FIX neovide ignoring `tabs = false` on consecutive opening of new files
 -- https://github.com/neovide/neovide/issues/2585
-vim.api.nvim_create_autocmd("TabNew", {
+vim.api.nvim_create_autocmd("TabNewEntered", {
 	callback = function(ctx)
 		vim.defer_fn(function()
-			if not (vim.fn.tabpagenr("$") > 1 and vim.bo.buftype == "") then return end
+			if vim.fn.tabpagenr("$") == 1 or vim.bo.buftype ~= "" then return end
 			vim.cmd.tabclose()
 			vim.defer_fn(function() vim.cmd.edit(ctx.file) end, 1)
 		end, 1)
@@ -38,8 +38,8 @@ else
 end
 
 -- CMD & ALT Keys
-g.neovide_input_use_logo = true -- enable `cmd` key on macOS
-g.neovide_input_macos_option_key_is_meta = "none" -- so `{@~` etc. can be used
+g.neovide_input_use_logo = true -- enable, so `cmd` on macOS can be used
+g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. can be used
 
 -- Appearance
 g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
