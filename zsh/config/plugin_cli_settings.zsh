@@ -4,7 +4,7 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # macOS currently ships less v.581, which lacks the ability to read lesskey
 # source files. Therefore for this to work, the version of less provided by
-# homebrew is needed (v.633).
+# homebrew is needed.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$HOME/.config/less/lesskey"
 
@@ -22,9 +22,9 @@ export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 [[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
 
-#───────────────────────────────────────────────────────────────────────────────
-
 export GREP_OPTIONS="--color=auto"
+# macOS' `grep` does not support `GREP_COLORS`
+export GREP_COLOR='01;35' # matches in bold+magenta
 
 #───────────────────────────────────────────────────────────────────────────────
 
