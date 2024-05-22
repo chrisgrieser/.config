@@ -18,18 +18,17 @@ require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
 
-	-- for repos matching <patterns>, use local repos if one exists in <path>
 	dev = {
-		path = vim.g.localRepos,
-		patterns = { "chrisgrieser" },
-		fallback = true,
+		patterns = { "chrisgrieser" }, -- for repos matching `patterns` …
+		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
+		fallback = true, -- … and if not, fallback to fetching from GitHub
 	},
 	-- colorschemes to use during installation
 	install = { colorscheme = { "tokyonight", "dawnfox", "default" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
-		pills = true,
+		pills = false,
 		size = { width = 0.85, height = 0.85 },
 		backdrop = 70, -- 0-100 opacity
 	},
@@ -70,8 +69,12 @@ require("lazy.view.config").keys.details = "<Tab>"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
-		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
-		vim.keymap.set("n", "gi", [[/#<CR>o``]], opts)
+		vim.keymap.set(
+			"n",
+			"gi",
+			[[/#<CR>o``]],
+			{ buffer = true, remap = true, desc = "󰒲 Open next issue" }
+		)
 	end,
 })
 
@@ -120,7 +123,7 @@ local function checkForDuplicateKeys()
 	local function isMode(lazyKey, mode)
 		if not lazyKey.mode then return mode == "n" end
 		if type(lazyKey.mode) == "string" then return lazyKey.mode == mode end
-		if type(lazyKey.mode) == "table" then return vim.tbl_contains(lazyKey.mode, mode) end ---@diagnostic disable-line: param-type-mismatch
+		if type(lazyKey.mode) == "table" then return vim.tbl_contains(lazyKey.mode, mode) end
 		return false
 	end
 
