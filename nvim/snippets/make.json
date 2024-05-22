@@ -6,10 +6,7 @@
   },
   "PHONY": {
     "body": ".PHONY: ${task1} ${task2}",
-    "prefix": [
-      ".PHONY",
-      "PHONY"
-    ]
+    "prefix": "PHONY"
   },
   "all tasks": {
     "body": "all: | ${1:task1} ${2:task2}",
