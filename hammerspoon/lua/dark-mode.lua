@@ -26,12 +26,8 @@ function M.setDarkMode(toMode)
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- neovim
-	-- stylua: ignore
-	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateTheme()<CR>]]
-	hs.execute(
-		u.exportPath
-			.. ([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd)
-	)
+	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
+	hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd))
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then

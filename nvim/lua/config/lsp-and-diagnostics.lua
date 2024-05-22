@@ -74,9 +74,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = changeSeverity
 ---@param diag vim.Diagnostic
 ---@return string displayedText
 local function addCodeAndSourceAsSuffix(diag)
-	local source = (diag.source or ""):gsub(" ?%.$", "") -- rm trailing dot for lua_ls
-	local rule = diag.code and ": " .. diag.code or ""
-	return (" (%s%s)"):format(source, rule)
+	if not diag.source then return "" end
+	local source = diag.source:gsub(" ?%.$", "") -- rm trailing dot for lua_ls
+	local code = diag.code and ": " .. diag.code or ""
+	return (" (%s%s)"):format(source, code)
 end
 
 vim.diagnostic.config {
