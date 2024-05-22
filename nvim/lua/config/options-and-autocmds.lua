@@ -240,7 +240,6 @@ local autoCd = {
 		"com~apple~CloudDocs", -- iCloud
 	},
 }
-
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
 		local root = vim.fs.root(ctx.buf, function(name, path)
@@ -256,16 +255,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --------------------------------------------------------------------------------
 
 -- AUTO-CLOSE BUFFERS whose files do not exist anymore
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "QuickFixCmdPost" }, {
-	-- INFO also trigger on `QuickFixCmdPost`, in case a `make` command deletes file
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
-		local bufnr = ctx.buf
 		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 
 			-- check if buffer was deleted
 			local bufPath = ctx.file
-			local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
+			local isSpecialBuffer = vim.bo[ctx.buf].buftype ~= ""
 			local isNewBuffer = bufPath == ""
 			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
 			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
@@ -333,17 +330,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.defer_fn(function()
 			-- GUARD
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local specialBuffer = vim.api.nvim_get_option_value("buftype", { buf = ctx.buf }) ~= ""
 			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
-			if specialBuffer or terminalBufEditedInNvim or not u.fileExists(ctx.file) then return end
+			if terminalBufEditedInNvim or not u.fileExists(ctx.file) then return end
 
 			local ft = ctx.match
 			local ext = skeletons[ft]
 			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-			if not u.fileExists(skeletonFile) then
-				u.notify("Skeleton", "Skeleton file not found.", "error")
-				return
-			end
+			if not u.fileExists(skeletonFile) then return end
 
 			local fileIsEmpty = vim.uv.fs_stat(ctx.file).size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
