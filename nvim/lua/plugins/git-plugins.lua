@@ -66,7 +66,7 @@ return {
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Sel." },
 			-- stylua: ignore start
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
-			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Git Deletions Inline" },
+			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Deletions Inline" },
 			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
 			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
@@ -77,6 +77,7 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
+			attach_to_untracked = true,
 			max_file_length = 12000, -- lines
 			-- deletions greater than one line will show a count to assess the size
 			-- (digits are actually nerdfont numbers to achieve smaller size)
@@ -87,7 +88,6 @@ return {
 				topdelete = { show_count = true },
 				changedelete = { show_count = true },
 			},
-			attach_to_untracked = true,
 		},
 	},
 }

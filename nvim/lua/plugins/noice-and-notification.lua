@@ -14,7 +14,8 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	{ -- REDIRECT TO POPUP
+	-- REDIRECT TO POPUP
+	{
 		filter = {
 			min_height = 10,
 			["not"] = {
@@ -37,7 +38,11 @@ local routes = {
 	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
-	-- unneeded info on search patterns
+	-- undo/redo text state
+	{ filter = { event = "msg_show", find = "^%d+ changes?; before #%d+" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^%d+ changes?; after #%d+" }, view = "mini" },
+
+	-- search pattern not found
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
 	-- Word added to spellfile via `zg`
