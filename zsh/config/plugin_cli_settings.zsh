@@ -24,6 +24,10 @@ export EZA_ICONS_AUTO=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
+export GREP_OPTIONS="--color=auto"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
