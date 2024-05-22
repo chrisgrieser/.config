@@ -38,12 +38,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
-	-- undo/redo text state
-	{ filter = { event = "msg_show", find = "^%d+ changes?; before #%d+" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "^%d+ changes?; after #%d+" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "^%d+ %w+ lines?; after #%d+" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "^%d+ %w+ lines?; before #%d+" }, view = "mini" },
-
 	-- search pattern not found
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 

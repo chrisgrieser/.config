@@ -176,8 +176,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
--- for triggering via hammerspoon
-function M.updateTheme()
+-- for triggering via hammerspoon, as triggering via `OptionSet` autocmd does
+-- not work reliabely for whatever reason
+function M.updateColorscheme()
 	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
 	vim.cmd.highlight("clear") -- fixes some issues when switching themes
 	vim.cmd.colorscheme(targetTheme)

@@ -9,7 +9,7 @@ for _, name in ipairs { "config", "data", "state", "cache" } do
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
+if vim.uv.fs_stat(lazypath) == nil then
 	local lazyrepo = "https://github.com/folke/lazy.nvim"
 	vim.system({ "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }):wait()
 end

@@ -5,8 +5,7 @@ local notify = require("config.utils").notify
 -- BOOTSTRAP LAZY.NVIM
 -- https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local lazyIsInstalled = vim.uv.fs_stat(lazypath) ~= nil
-if not lazyIsInstalled then
+if vim.uv.fs_stat(lazypath) == nil then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	vim.system({ "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }):wait()
 end
@@ -30,7 +29,7 @@ require("lazy").setup("plugins", {
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
-		pills = false,
+		pills = true,
 		size = { width = 0.85, height = 0.85 },
 		backdrop = 70, -- 0-100 opacity
 	},
