@@ -54,6 +54,10 @@
     "filetype": "lua",
     "prefix": "defer"
   },
+  "keymap": {
+    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:description}\" })",
+    "prefix": "keymap"
+  },
   "keymap (buffer)": {
     "body": "vim.keymap.set(\"n\", \"${1:lhs}\", \"${2:rhs}\", { buffer = true, desc = \"${3:description}\" })",
     "prefix": "keymap (buffer)"
@@ -61,10 +65,6 @@
   "keymap (multi-mode)": {
     "body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
     "prefix": "keymap (multi-mode)"
-  },
-  "kkkkkeymap": {
-    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:description}\" })",
-    "prefix": "kkkkkeymap"
   },
   "plugin spec (lazy.nvim)": {
     "body": [
