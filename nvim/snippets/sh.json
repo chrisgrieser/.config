@@ -1,4 +1,292 @@
 {
+  "8-bit ansi color": {
+    "body": "\\e[38;5;${1:color}m",
+    "description": "https://i.stack.imgur.com/KTSQa.png",
+    "prefix": "8-bit ansi color"
+  },
+  "PATH (export)": {
+    "body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH",
+    "description": "Extends PATH in a way that homebrew installed CLIs are recognized in ARM and Intel Macs.",
+    "prefix": "PATH (export)"
+  },
+  "ansi": {
+    "body": "\\e[1;38;5;${1:code}m",
+    "prefix": "ansi"
+  },
+  "awk (get field)": {
+    "body": "awk '{ print $${1:1} }'",
+    "description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used.",
+    "prefix": "awk (field)"
+  },
+  "black": {
+    "body": "\\e[1;30m",
+    "prefix": "black"
+  },
+  "blue": {
+    "body": "\\e[1;34m",
+    "prefix": "blue"
+  },
+  "blue print": {
+    "body": "print \"\\e[1;34m$0\\e[0m\"",
+    "prefix": "blue print"
+  },
+  "check device name": {
+    "body": "scutil --get ComputerName | grep -q \"$0\"",
+    "prefix": "device name"
+  },
+  "check if dark mode (macOS)": {
+    "body": "defaults read -g AppleInterfaceStyle &>/dev/null; && echo 'isDark'",
+    "prefix": "check if dark mode (macOS)"
+  },
+  "check if in git repo": {
+    "body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print \"\\e[1;33mfile is not ins a git repository.\\e[0m\" && return 1 ; fi",
+    "prefix": "check if in git repo"
+  },
+  "check if process is running": {
+    "body": "pgrep -xq \"${1:process}\" && $0",
+    "prefix": "check if process is running"
+  },
+  "check if sudo user": {
+    "body": "sudo -nv && ${1:some_sudo_action}",
+    "prefix": "check if sudo user"
+  },
+  "cyan": {
+    "body": "\\e[1;36m",
+    "prefix": "cyan"
+  },
+  "directory of script": {
+    "body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\"",
+    "prefix": "directory of this script"
+  },
+  "elseif": {
+    "body": "elif [[ ${1:condition} ]]; then\n\t${0}",
+    "description": "Add an elseif to an if statement.",
+    "prefix": "elseif"
+  },
+  "extension": {
+    "body": "ext=${${1:file_name}##*.}",
+    "prefix": "get extension"
+  },
+  "filename": {
+    "body": "file_name=$(basename \"$${1:file_path}\")",
+    "prefix": "filename"
+  },
+  "filename w/o ext": {
+    "body": "${1:file_name}=${${1:file_name}%.*}",
+    "prefix": "filename w/o ext"
+  },
+  "find & xargs": {
+    "body": "find . -print0 | xargs -0 -I '{}'",
+    "prefix": "find & xargs"
+  },
+  "find -exec": {
+    "body": "find . $0 -exec open '{}' \\;",
+    "prefix": "find -exec"
+  },
+  "for .. in": {
+    "body": "for ${1:VAR} in ${0:LIST}\ndo\n\techo \"\\$${1:VAR}\"\ndone\n",
+    "description": "for loop in list",
+    "prefix": "for .. in"
+  },
+  "for each file": {
+    "body": [
+      "for filename in *.txt; do",
+      "\techo \"$filename\"",
+      "done"
+    ],
+    "prefix": "for each file"
+  },
+  "function": {
+    "body": "function ${1:name} {\n\t${0}\n}",
+    "prefix": "function"
+  },
+  "get nth line from string": {
+    "body": "line=$(echo \"\\$${1:str}\" | sed -n \"${2:n}p\")",
+    "prefix": "get nth line from string"
+  },
+  "goto git root": {
+    "body": "cd \"$(git rev-parse --show-toplevel)\"",
+    "prefix": "goto git root"
+  },
+  "gray": {
+    "body": "\\e[0;38;5;245m",
+    "description": "Gray that is readable in dark and light mode.",
+    "prefix": "gray"
+  },
+  "gray + grey": {
+    "body": "\\e[1;38;5;247m",
+    "prefix": [
+      "gray",
+      "grey"
+    ]
+  },
+  "green": {
+    "body": "\\e[1;32m",
+    "prefix": "green"
+  },
+  "i++": {
+    "body": "((${1:i}++))",
+    "prefix": "i++"
+  },
+  "i--": {
+    "body": "((${1:i}--))",
+    "prefix": "i--"
+  },
+  "if (short)": {
+    "body": "[[ \"$${1:var}\" ]] && $0",
+    "prefix": "if (short)"
+  },
+  "if .. then": {
+    "body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi",
+    "prefix": "if .. then"
+  },
+  "if .. then .. else": {
+    "body": [
+      "if [[ \"$${1:cond}\" ]]; then",
+      "\t$0",
+      "else",
+      "\t",
+      "fi"
+    ],
+    "prefix": "if .. then .. else"
+  },
+  "input (stdin or $1)": {
+    "body": [
+      "if [[ $# -eq 0 ]]; then",
+      "\tinput=$(< /dev/stdin)",
+      "else",
+      "\tinput=\"$1\"",
+      "fi"
+    ],
+    "description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`.",
+    "prefix": "input (stdin or $1)"
+  },
+  "lazy load cli": {
+    "body": [
+      "function ${1:cli} {",
+      "\tunfunction \"\\$0\"",
+      "\t$0",
+      "\t\\$0 \"$@\"",
+      "}"
+    ],
+    "prefix": "lazy load cli"
+  },
+  "magenta": {
+    "body": "\\e[1;35m",
+    "prefix": [
+      "magenta",
+      "purple"
+    ]
+  },
+  "notify (msg)": {
+    "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
+    "prefix": "notify (msg)"
+  },
+  "null (pipe)": {
+    "body": "&>/dev/null",
+    "prefix": "null (pipe)"
+  },
+  "osascript jxa (run script)": {
+    "body": "osascript -l JavaScript \"${1:file}\"",
+    "prefix": [
+      "jxa (run script)",
+      "osascript -l JavaScript"
+    ]
+  },
+  "plist: extract key": {
+    "body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1",
+    "prefix": "plist: extract key"
+  },
+  "progress bar": {
+    "body": [
+      "for _ in {1..100}; do",
+      "\tprintf \"🬋\"",
+      "\tsleep 0.5",
+      "done"
+    ],
+    "prefix": "progress bar"
+  },
+  "quicklook": {
+    "body": "qlmanage -p \"${1:filepath}\"",
+    "description": "QuickLook the file. MacOS only.",
+    "prefix": "quicklook"
+  },
+  "red": {
+    "body": "\\e[1;31m",
+    "prefix": "red"
+  },
+  "redirect to stderr": {
+    "body": ">&2",
+    "prefix": "redirect to stderr"
+  },
+  "reset color": {
+    "body": "\\e[0m",
+    "prefix": "reset color"
+  },
+  "resolve home": {
+    "body": "${1:path}=\"${${1:path}/#\\~/\\$HOME}\"",
+    "prefix": "resolve home"
+  },
+  "restart app": {
+    "body": [
+      "killall \"${1:app_name}\"",
+      "while pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
+      "open -a \"${1:app_name}\""
+    ],
+    "description": "safely restart app, avoiding race condition",
+    "prefix": "restart app"
+  },
+  "revert colors": {
+    "body": "\\e[7m",
+    "prefix": "revert colors"
+  },
+  "safe sourcing": {
+    "body": "[[ -f \"${1:filepath}\" ]] && source \"${1:filepath}\"",
+    "description": "Ensures script does not fail when sourced file does not exist.",
+    "prefix": "source (safe)"
+  },
+  "sed": {
+    "body": "sed 's/$0//'",
+    "prefix": "sed"
+  },
+  "shebang": {
+    "body": "#!/usr/bin/env zsh",
+    "prefix": "shebang"
+  },
+  "stderr (merge with stdout)": {
+    "body": "2>&1",
+    "prefix": "stderr (merge with stdout)"
+  },
+  "stdin": {
+    "body": "stdin=$(< /dev/stdin)",
+    "description": "$(cat) also works. See https://stackoverflow.com/questions/32363887/in-a-bash-function-how-do-i-get-stdin-into-a-variable",
+    "prefix": "stdin"
+  },
+  "stdout is to a terminal": {
+    "body": "[[ -t true ]]",
+    "prefix": "stdout is to a terminal"
+  },
+  "suppress stderr": {
+    "body": "2>/dev/null",
+    "prefix": "suppress stderr"
+  },
+  "switch case": {
+    "body": [
+      "case $${1:var} in",
+      "\"one\" | \"two\")",
+      "\techo \"foo\"",
+      "\t;;",
+      "\"three\")",
+      "\techo \"bar\"",
+      "\t;;",
+      "*)",
+      "\techo \"default\"",
+      "\t;;",
+      "esac"
+    ],
+    "description": "A case command first expands word, and tries to match it against each pattern in turn.",
+    "prefix": "switch case"
+  },
   "then": {
     "body": "then\n\t$0\nfi",
     "prefix": "then .. fi"
@@ -17,10 +305,6 @@
   "urlEncode": {
     "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",
     "prefix": "urlEncode"
-  },
-  "var++": {
-    "body": "=$((${1:i} + 1))",
-    "prefix": "++"
   },
   "wait until app running": {
     "body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
