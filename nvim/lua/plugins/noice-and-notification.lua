@@ -161,7 +161,7 @@ return {
 
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
-				progress = { enabled = true },
+				progress = { enabled = false },
 				signature = { enabled = false }, -- using lsp_signature.nvim instead
 
 				-- ENABLE features
