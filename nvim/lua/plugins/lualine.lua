@@ -2,23 +2,20 @@ local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- lightweight replacement for fidget.nvim
 local progressText = ""
+local function lspProgress() return progressText end
 
 vim.api.nvim_create_autocmd("LspProgress", {
 	callback = function(ctx)
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
 		local progress = ctx.data.params.value ---@type {percentage: number, title: string, kind: string, message: string}
-		local msg = progress.title .. " " .. (progress.message or "")
-
-		if progress.kind == "end" then
-			progressText = ""
-		else
-			progressText = clientName .. " " .. msg
-		end
+		local firstWord = vim.split(progress.title, " ")[1]:lower() -- shorter for statusline
+		local icon = ""
+		local text = table.concat({ icon, clientName, firstWord, progress.message or "" }, " ")
+		progressText = progress.kind == "end" and "" or text
 	end,
 })
-
-local function lspProgress() return progressText end
 
 --------------------------------------------------------------------------------
 

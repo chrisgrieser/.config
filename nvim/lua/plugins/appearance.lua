@@ -101,10 +101,11 @@ return {
 			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
-				highlighter = {
+				highlighter = { 
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
-					max_byte = 1.5 * 1024 * 1024, -- 1.5 Mb
+					max_byte = 200 * 1024, -- 200kb
+					update_insert = false,
 				},
 				pickers = {
 					ccc.picker.hex,
