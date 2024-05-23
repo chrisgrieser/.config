@@ -166,6 +166,7 @@ return {
 				require("dr-lsp").lspCount,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
 			})
+			u.addToLuaLine("sections", "lualine_x", require("dr-lsp").lspProgress)
 		end,
 	},
 	{ -- add ignore-comments & lookup rules
