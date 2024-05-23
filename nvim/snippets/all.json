@@ -1,38 +1,38 @@
 {
   "BUG": {
-    "body": "$LINE_COMMENT BUG",
+    "body": "${LINE_COMMENT}BUG",
     "prefix": "BUG"
   },
   "CAVEAT": {
-    "body": "$LINE_COMMENT CAVEAT",
+    "body": "${LINE_COMMENT}CAVEAT",
     "prefix": "CAVEAT"
   },
   "CONFIG": {
-    "body": "$LINE_COMMENT CONFIG ",
+    "body": "${LINE_COMMENT}CONFIG ",
     "prefix": "CONFIG"
   },
   "DOCS": {
-    "body": "$LINE_COMMENT $0DOCS",
+    "body": "${LINE_COMMENT}DOCS $CLIPBOARD",
     "prefix": "DOCS"
   },
   "EXAMPLE": {
-    "body": "$LINE_COMMENT EXAMPLE ",
+    "body": "${LINE_COMMENT}EXAMPLE ",
     "prefix": "EXAMPLE"
   },
   "FIX": {
-    "body": "$LINE_COMMENT FIX",
+    "body": "${LINE_COMMENT}FIX",
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "$LINE_COMMENT GUARD ",
+    "body": "${LINE_COMMENT}GUARD ",
     "prefix": "GUARD"
   },
   "HACK": {
-    "body": "$LINE_COMMENT HACK",
+    "body": "${LINE_COMMENT}HACK",
     "prefix": "HACK"
   },
   "INFO": {
-    "body": "$LINE_COMMENT INFO",
+    "body": "${LINE_COMMENT}INFO",
     "prefix": "INFO"
   },
   "Lorem Ipsum Sentence": {
@@ -40,31 +40,31 @@
     "prefix": "lorem sentence"
   },
   "PENDING": {
-    "body": "$LINE_COMMENT PENDING ",
+    "body": "${LINE_COMMENT}PENDING ",
     "prefix": "PENDING"
   },
   "PERF": {
-    "body": "$LINE_COMMENT PERF",
+    "body": "${LINE_COMMENT}PERF",
     "prefix": "PERF"
   },
   "REQUIRED": {
-    "body": "$LINE_COMMENT REQUIRED ",
+    "body": "${LINE_COMMENT}REQUIRED ",
     "prefix": "REQUIRED"
   },
   "SOURCE": {
-    "body": "$LINE_COMMENT SOURCE ",
+    "body": "${LINE_COMMENT}SOURCE ",
     "prefix": "SOURCE"
   },
   "TEST": {
-    "body": "$LINE_COMMENT TEST",
+    "body": "${LINE_COMMENT}TEST",
     "prefix": "TEST"
   },
   "TODO": {
-    "body": "$LINE_COMMENT TODO ",
+    "body": "${LINE_COMMENT}TODO ",
     "prefix": "TODO"
   },
   "VALIDATE": {
-    "body": "$LINE_COMMENT VALIDATE",
+    "body": "${LINE_COMMENT}VALIDATE",
     "prefix": "VALIDATE"
   },
   "backspace": {
