@@ -33,8 +33,8 @@ local function cmpconfig()
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true },
-			["<PageUp>"] = cmp.mapping.scroll_docs(-4),
-			["<PageDown>"] = cmp.mapping.scroll_docs(4),
+			["<PageUp>"] = cmp.mapping.scroll_docs(-5),
+			["<PageDown>"] = cmp.mapping.scroll_docs(5),
 			["<C-e>"] = cmp.mapping.abort(),
 
 			-- manually triggering to only include LSP, useful for yaml/json/css

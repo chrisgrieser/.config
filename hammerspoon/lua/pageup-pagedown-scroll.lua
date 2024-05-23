@@ -13,9 +13,12 @@ local perAppSettings = {
 	defaultScrollDistance = 30,
 	Highlights = 50,
 	Discord = false, -- not working in Discord
-	neovide = false, -- uses pageup/pagedown for mappings
-	WezTerm = false, -- uses pageup/pagedown for mappings
-	Alfred = false, -- uses pageup/pagedown grid view
+
+	-- uses pageup/pagedown for mappings
+	Neovide = false,
+	neovide = false,
+	WezTerm = false,
+	Alfred = false,
 }
 
 --------------------------------------------------------------------------------

@@ -37,6 +37,19 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
+local function lspProgress()
+	local msgs = {}
+	for _, client in ipairs(vim.lsp.get_clients{ bufnr = 0 }) do
+		local progress = vim.inspect(client.progress)
+		if client.progress ~= nil then
+			table.insert(msgs, client.progress:peek())
+		end
+	end
+	return table.concat(msgs, "")
+end
+
+
+
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
@@ -122,6 +135,7 @@ local lualineConfig = {
 				fmt = function(str) return str .. " 󰌑" end,
 			},
 			{ irregularWhitespace },
+			{ lspProgress },
 		},
 		lualine_y = {
 			{ "diff" },

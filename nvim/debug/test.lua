@@ -1,2 +1,4 @@
-local snipPath = "/Users/chrisgrieser/.config/nvim/snippets/lua.json"
-require("snippets.utils").reload_file(snipPath)
+local client = vim.lsp.get_clients({ bufnr = 0 })[1]
+vim.notify("⭕ client: " .. vim.inspect(client))
+local progress = client.messages.progress
+vim.notify("⭕ progress: " .. vim.inspect(progress))
