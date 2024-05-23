@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 -- INFO
--- manually edited /opt/homebrew/Cellar/neovim/0.10.0/share/nvim/runtime/lua/vim/snippet.lua
+-- manually patched `/opt/homebrew/Cellar/neovim/0.10.0/share/nvim/runtime/lua/vim/snippet.lua`
 -- to support LINE_COMMENT and CLIPBOARD
 
 local function cmpconfig()
