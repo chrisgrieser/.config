@@ -1,12 +1,3 @@
-local random = math.random
-math.randomseed(os.time()) -- Seed the random number generator
-
-local function uuid()
-    local template ='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-    return string.gsub(template, '[xy]', function (c)
-        local v = (c == 'x') and random(0, 0xf) or random(8, 0xb)
-        return string.format('%x', v)
-    end)
-end
-
-vim.notify(uuid()) -- Example usage
+local tz = tostring(os.date("%z"))
+local tz_with_colon = tz:sub(1, 3) .. ':' .. tz:sub(4)
+vim.notify("⭕ tz_with_colon: " .. tostring(tz_with_colon))
