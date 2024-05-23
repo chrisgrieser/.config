@@ -129,6 +129,7 @@ local lualineConfig = {
 			{ quickfixCounter },
 		},
 		lualine_x = {
+			{ lspProgress },
 			{
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
@@ -139,7 +140,6 @@ local lualineConfig = {
 				fmt = function(str) return str .. " 󰌑" end,
 			},
 			{ irregularWhitespace },
-			{ lspProgress },
 		},
 		lualine_y = {
 			{ "diff" },
