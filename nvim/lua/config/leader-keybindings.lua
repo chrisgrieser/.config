@@ -142,7 +142,7 @@ end, { desc = "󰒕 Diagnostic Hover" })
 --------------------------------------------------------------------------------
 
 -- Append to / delete from EoL
-local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}", "`" }
+local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}", "`", ":" }
 for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
 end

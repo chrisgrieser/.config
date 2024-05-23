@@ -12,7 +12,7 @@
     "prefix": "CONFIG"
   },
   "DOCS": {
-    "body": "${LINE_COMMENT}DOCS $CLIPBOARDf",
+    "body": "${LINE_COMMENT}DOCS $CLIPBOARD",
     "prefix": "DOCS"
   },
   "EXAMPLE": {
