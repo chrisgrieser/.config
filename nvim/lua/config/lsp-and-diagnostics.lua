@@ -1,5 +1,3 @@
--- LSP SETTINGS
-
 -- Add notification & writeall to renaming
 -- PENDING https://github.com/neovim/neovim/pull/26616
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
@@ -36,14 +34,9 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	})
 end
 
--- -----------------------------------------------------------------------------
--- other lsp settings
-
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
-
---------------------------------------------------------------------------------
 
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] =
