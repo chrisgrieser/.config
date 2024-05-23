@@ -125,7 +125,7 @@ return {
 					["q"] = ccc.mapping.quit,
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
-					["o"] = ccc.mapping.toggle_output_mode, -- = convert color
+					["o"] = ccc.mapping.toggle_output_mode, -- = change output format
 				},
 			}
 		end,
