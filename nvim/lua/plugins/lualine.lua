@@ -2,6 +2,26 @@ local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+local progressText = ""
+
+vim.api.nvim_create_autocmd("LspProgress", {
+	callback = function(ctx)
+		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+		local progress = ctx.data.params.value ---@type {percentage: number, title: string, kind: string, message: string}
+		local msg = progress.title .. " " .. (progress.message or "")
+
+		if progress.kind == "end" then
+			progressText = ""
+		else
+			progressText = clientName .. " " .. msg
+		end
+	end,
+})
+
+local function lspProgress() return progressText end
+
+--------------------------------------------------------------------------------
+
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
@@ -36,19 +56,6 @@ local function quickfixCounter()
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
-
-local function lspProgress()
-	local msgs = {}
-	for _, client in ipairs(vim.lsp.get_clients{ bufnr = 0 }) do
-		local progress = vim.inspect(client.progress)
-		if client.progress ~= nil then
-			table.insert(msgs, client.progress:peek())
-		end
-	end
-	return table.concat(msgs, "")
-end
-
-
 
 --------------------------------------------------------------------------------
 
@@ -156,8 +163,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	-- event = "UIEnter", -- load quicker for no flashing
-	lazy = false,
+	event = "UIEnter", -- load quicker for no flashing
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,
