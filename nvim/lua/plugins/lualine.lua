@@ -40,6 +40,17 @@ end
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
+	options = {
+		globalstatus = true,
+		always_divide_middle = false,
+		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`
+		component_separators = { left = "", right = "" },
+		-- stylua: ignore
+		ignore_focus = {
+			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
+			"checkhealth", "noice", "lazy", "mason", "qf",
+		},
+	},
 	tabline = {
 		lualine_a = {
 			{ -- clock if window is maximized
@@ -72,7 +83,7 @@ local lualineConfig = {
 	},
 	sections = {
 		lualine_a = {
-			{
+			{ -- branch, but only if not on main or master
 				"branch",
 				cond = function()
 					if bo.buftype ~= "" then return false end
@@ -125,24 +136,14 @@ local lualineConfig = {
 			{ function() return "" end, padding = { left = 0, right = 1 } },
 		},
 	},
-	options = {
-		globalstatus = true,
-		always_divide_middle = false,
-		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: ple-
-		component_separators = { left = "", right = "" },
-		-- stylua: ignore
-		ignore_focus = {
-			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
-			"checkhealth", "noice", "lazy", "mason", "qf",
-		},
-	},
 }
 
 --------------------------------------------------------------------------------
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = "UIEnter", -- load quicker for no flashing
+	-- event = "UIEnter", -- load quicker for no flashing
+	lazy = false,
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,

@@ -262,6 +262,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F331457B-145C-45FE-97F4-7EE24D9CEB9A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>98776993-F46B-4069-BBDE-8CAA032AB403</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>FDBFF042-F69F-40B2-81FA-362687A7835C</key>
 		<array>
 			<dict>
@@ -289,23 +302,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -g "hammerspoon://sync-repos"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>url</key>
-				<string>tel://{query}</string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>429CEC89-9C82-432F-900F-A22DDDF7964A</string>
+			<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -331,6 +346,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>tel://{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>429CEC89-9C82-432F-900F-A22DDDF7964A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -348,29 +384,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -g "hammerspoon://sync-repos"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DC943639-4DB9-44BA-B722-273F16EEED36</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -434,27 +447,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>hs</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Reload Hammerspoon</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D88BB74F-D9A5-44A0-B5C9-A637572735B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -477,43 +469,58 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>cal</string>
+				<string>hs</string>
 				<key>subtext</key>
-				<string>{query}</string>
+				<string></string>
 				<key>text</key>
-				<string>Add to Busycal</string>
+				<string>🔁 Reload Hammerspoon</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>5C877087-012F-4C14-9B4D-369466813350</string>
+			<string>D88BB74F-D9A5-44A0-B5C9-A637572735B1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>acceptstext</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>acceptsurls</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/{query}</string>
+				<key>name</key>
+				<string>Open with TextEdit</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<string>F331457B-145C-45FE-97F4-7EE24D9CEB9A</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/TextEdit.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>98776993-F46B-4069-BBDE-8CAA032AB403</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -576,21 +583,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>name</key>
-				<string>Add to Calendar (BusyCal)</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
+			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Add to Busycal</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5C877087-012F-4C14-9B4D-369466813350</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -641,64 +669,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>link</string>
-				<key>subtext</key>
-				<string>from current Browser Tab</string>
-				<key>text</key>
-				<string>Create Link File</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>03BC9713-12DC-4573-82A2-D3E72094B209</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>out_format</key>
-					<string>json</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
+				<key>acceptsfiles</key>
 				<false/>
-				<key>escaping</key>
+				<key>acceptsmulti</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Add to Calendar (BusyCal)</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</string>
+			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -717,48 +704,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🛒 Added to Shopping List</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>0AF9FB4C-7ED1-4B99-9B0D-550B9FD73B2E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Add to shopping list: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>93776F8A-CF4E-4A33-A222-621DFF193536</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -784,6 +729,48 @@
 			<string>43E23DEE-9CD4-4887-A9EE-796131D55BBA</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Add to shopping list: "{query}"</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>93776F8A-CF4E-4A33-A222-621DFF193536</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🛒 Added to Shopping List</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0AF9FB4C-7ED1-4B99-9B0D-550B9FD73B2E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -821,6 +808,68 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>out_format</key>
+					<string>json</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>link</string>
+				<key>subtext</key>
+				<string>from current Browser Tab</string>
+				<key>text</key>
+				<string>Create Link File</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>03BC9713-12DC-4573-82A2-D3E72094B209</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -842,37 +891,22 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>bkp||backups</string>
+				<string>catch</string>
 				<key>subtext</key>
-				<string>iCloud Drive/Dotfolder/Backups</string>
+				<string>Catch.app</string>
 				<key>text</key>
-				<string>Backups</string>
+				<string>Add Torrent Feed</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
+			<string>FDBFF042-F69F-40B2-81FA-362687A7835C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -900,21 +934,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>catch</string>
+				<string>bkp||backups</string>
 				<key>subtext</key>
-				<string>Catch.app</string>
+				<string>iCloud Drive/Dotfolder/Backups</string>
 				<key>text</key>
-				<string>Add Torrent Feed</string>
+				<string>Backups</string>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FDBFF042-F69F-40B2-81FA-362687A7835C</string>
+			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -930,7 +979,7 @@
 			<key>xpos</key>
 			<real>775</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>790</real>
 		</dict>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
@@ -941,7 +990,7 @@
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>625</real>
 		</dict>
 		<key>0AF9FB4C-7ED1-4B99-9B0D-550B9FD73B2E</key>
 		<dict>
@@ -1000,7 +1049,7 @@
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>385</real>
 		</dict>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<dict>
@@ -1042,6 +1091,15 @@
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>98776993-F46B-4069-BBDE-8CAA032AB403</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>805</real>
+			<key>ypos</key>
+			<real>260</real>
+		</dict>
 		<key>9F084A08-61CC-4FFE-B826-D1C94F206A5A</key>
 		<dict>
 			<key>colorindex</key>
@@ -1049,7 +1107,7 @@
 			<key>xpos</key>
 			<real>810</real>
 			<key>ypos</key>
-			<real>265</real>
+			<real>385</real>
 		</dict>
 		<key>A0A81E9B-5271-49A6-8A0C-4DE3F26CEDA9</key>
 		<dict>
@@ -1087,7 +1145,7 @@
 			<key>xpos</key>
 			<real>940</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>625</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -1105,7 +1163,7 @@
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>625</real>
 		</dict>
 		<key>D88BB74F-D9A5-44A0-B5C9-A637572735B1</key>
 		<dict>
@@ -1134,7 +1192,7 @@
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>790</real>
 		</dict>
 		<key>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</key>
 		<dict>
@@ -1181,7 +1239,16 @@
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>510</real>
+		</dict>
+		<key>F331457B-145C-45FE-97F4-7EE24D9CEB9A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>260</real>
 		</dict>
 		<key>F7331471-4575-4686-BB12-FD49331C261C</key>
 		<dict>
