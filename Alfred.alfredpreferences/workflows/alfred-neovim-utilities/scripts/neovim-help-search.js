@@ -5,9 +5,11 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	return [clean, str].join(" ") + " ";
+function camelCaseMatch(str) {
+	const subwords = str.replace(/[-_./]/g, " ");
+	const fullword = str.replace(/[-_./]/g, "");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
 
 /** @param {string} url @return {string} */
@@ -43,7 +45,7 @@ function run() {
 			}
 
 			// matcher improvements
-			let matcher = alfredMatcher(name) + " " + site + " " + alfredMatcher(synonyms);
+			let matcher = camelCaseMatch(name) + site + camelCaseMatch(synonyms);
 			if (name.startsWith("vim.")) matcher += " " + name.slice(4);
 			if (site === "builtin") matcher += " fn";
 

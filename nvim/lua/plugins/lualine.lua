@@ -9,7 +9,7 @@ local function lspProgress() return progressText end
 vim.api.nvim_create_autocmd("LspProgress", {
 	callback = function(ctx)
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-		local progress = ctx.data.params.value ---@type {percentage: number, title: string, kind: string, message: string}
+		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
 		if not (progress and progress.title) then return end
 		local firstWord = vim.split(progress.title, " ")[1]:lower() -- shorter for statusline
 		local icon = ""
