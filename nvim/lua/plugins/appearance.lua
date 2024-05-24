@@ -99,9 +99,14 @@ return {
 		ft = { "css", "scss", "sh", "lua" },
 		config = function(spec)
 			local ccc = require("ccc")
+
+			-- do not color short hex codes like #123222
+			-- SOURCE https://github.com/uga-rosa/ccc.nvim/discussions/77#discussioncomment-5916995
+			ccc.picker.hex.pattern = { [=[\v%(^|[^[:keyword:]])\zs#(\x\x)(\x\x)(\x\x)>]=] }
+
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
-				highlighter = { 
+				highlighter = {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
 					max_byte = 200 * 1024, -- 200kb

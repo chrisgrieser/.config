@@ -171,6 +171,8 @@ nnoremap gl :liveGrep
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
 nnoremap ,fs :searchReplace
+vnoremap ,ff y:searchReplace
+vnoremap ,fs y:searchReplace
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING

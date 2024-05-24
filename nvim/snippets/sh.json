@@ -8,6 +8,11 @@
     "body": "\\$([[ \"${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")",
     "prefix": "ternary"
   },
+  "vim modeline": {
+    "body": "# vim: filetype=${1:sh}",
+    "description": "this snippet should neither be at the top nor bottom of this JSON, so vim does not try to read the modeline itself.",
+    "prefix": "vim modeline"
+  },
   "default value": {
     "body": "\\${${1:var}:-${2:default_value}}",
     "prefix": "default value"
@@ -57,22 +62,10 @@
     "description": "Extends PATH in a way that homebrew installed CLIs are recognized in ARM and Intel Macs.",
     "prefix": "PATH (export)"
   },
-  "ansi": {
-    "body": "\\e[1;38;5;${1:code}m",
-    "prefix": "ansi"
-  },
   "awk (get field)": {
     "body": "awk '{ print $${1:1} }'",
     "description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used.",
     "prefix": "awk (field)"
-  },
-  "black": {
-    "body": "\\e[1;30m",
-    "prefix": "black"
-  },
-  "blue": {
-    "body": "\\e[1;34m",
-    "prefix": "blue"
   },
   "blue print": {
     "body": "print \"\\e[1;34m$0\\e[0m\"",
@@ -97,10 +90,6 @@
   "check if sudo user": {
     "body": "sudo -nv && ${1:some_sudo_action}",
     "prefix": "check if sudo user"
-  },
-  "cyan": {
-    "body": "\\e[1;36m",
-    "prefix": "cyan"
   },
   "directory of script": {
     "body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\"",
@@ -152,26 +141,6 @@
     "body": "line=$(echo \"\\$${1:str}\" | sed -n \"${2:n}p\")",
     "prefix": "get nth line from string"
   },
-  "goto git root": {
-    "body": "cd \"$(git rev-parse --show-toplevel)\"",
-    "prefix": "goto git root"
-  },
-  "gray": {
-    "body": "\\e[0;38;5;245m",
-    "description": "Gray that is readable in dark and light mode.",
-    "prefix": "gray"
-  },
-  "gray + grey": {
-    "body": "\\e[1;38;5;247m",
-    "prefix": [
-      "gray",
-      "grey"
-    ]
-  },
-  "green": {
-    "body": "\\e[1;32m",
-    "prefix": "green"
-  },
   "i++": {
     "body": "((${1:i}++))",
     "prefix": "i++"
@@ -204,13 +173,6 @@
     ],
     "description": "reads either from STDIN or $1. stdin may have unescaped newlines, which have to be removed, e.g. via `tr -d '\n'`.",
     "prefix": "input (stdin or $1)"
-  },
-  "magenta": {
-    "body": "\\e[1;35m",
-    "prefix": [
-      "magenta",
-      "purple"
-    ]
   },
   "notify (msg)": {
     "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
@@ -245,17 +207,9 @@
     "description": "QuickLook the file. MacOS only.",
     "prefix": "quicklook"
   },
-  "red": {
-    "body": "\\e[1;31m",
-    "prefix": "red"
-  },
   "redirect to stderr": {
     "body": ">&2",
     "prefix": "redirect to stderr"
-  },
-  "reset color": {
-    "body": "\\e[0m",
-    "prefix": "reset color"
   },
   "resolve home": {
     "body": "${1:path}=\"${${1:path}/#\\~/\\$HOME}\"",
@@ -270,18 +224,9 @@
     "description": "safely restart app, avoiding race condition",
     "prefix": "restart app"
   },
-  "revert colors": {
-    "body": "\\e[7m",
-    "prefix": "revert colors"
-  },
-  "safe sourcing": {
-    "body": "[[ -f \"${1:filepath}\" ]] && source \"${1:filepath}\"",
-    "description": "Ensures script does not fail when sourced file does not exist.",
-    "prefix": "source (safe)"
-  },
-  "sed": {
+  "sed substitution": {
     "body": "sed 's/$0//'",
-    "prefix": "sed"
+    "prefix": "sed substitution"
   },
   "shebang": {
     "body": "#!/usr/bin/env zsh",
@@ -353,16 +298,8 @@
     "description": "A while loop by condition.",
     "prefix": "while"
   },
-  "white": {
-    "body": "\\e[1;37m",
-    "prefix": "white"
-  },
   "xargs (for each line)": {
     "body": "xargs -I {} ${1:some_cmd} '{}'",
     "prefix": "xargs (for each line)"
-  },
-  "yellow": {
-    "body": "\\e[1;33m",
-    "prefix": "yellow"
   }
 }

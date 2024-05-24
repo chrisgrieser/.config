@@ -1,0 +1,57 @@
+{
+  "reset color": {
+    "body": "\\e[0m",
+    "prefix": "reset color"
+  },
+  "revert colors": {
+    "body": "\\e[7m",
+    "prefix": "revert colors"
+  },
+  "yellow": {
+    "body": "\\e[1;33m",
+    "prefix": "yellow"
+  },
+  "white": {
+    "body": "\\e[1;37m",
+    "prefix": "white"
+  },
+  "ansi": {
+    "body": "\\e[1;38;5;${1:code}m",
+    "prefix": "ansi"
+  },
+  "black": {
+    "body": "\\e[1;30m",
+    "prefix": "black"
+  },
+  "blue": {
+    "body": "\\e[1;34m",
+    "prefix": "blue"
+  },
+  "cyan": {
+    "body": "\\e[1;36m",
+    "prefix": "cyan"
+  },
+  "green": {
+    "body": "\\e[1;32m",
+    "prefix": "green"
+  },
+  "red": {
+    "body": "\\e[1;31m",
+    "prefix": "red"
+  },
+  "magenta": {
+    "body": "\\e[1;35m",
+    "prefix": [
+      "magenta",
+      "purple"
+    ]
+  },
+  "gray + grey": {
+    "body": "\\e[1;38;5;247m",
+    "description": "Gray that is readable in dark and light mode.",
+    "prefix": [
+      "gray",
+      "grey"
+    ]
+  }
+}
