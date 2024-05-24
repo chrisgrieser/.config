@@ -14,11 +14,11 @@
     ]
   },
   "Get Alfred Env": {
-    "body": "$.getenv(\"${1:envVar}\");",
+    "body": "\\$.getenv(\"${1:envVar}\");",
     "prefix": "Get Alfred Env"
   },
   "Get Alfred Env (Safe)": {
-    "body": "$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;",
+    "body": "\\$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;",
     "prefix": "Get Alfred Env (Safe)"
   },
   "Modifiers (Script Filter)": {
@@ -36,9 +36,9 @@
     "body": [
       "/** @param {string} url @return {string} */",
       "function httpRequest(url) {",
-      "\tconst queryURL = $.NSURL.URLWithString(url);",
-      "\tconst data = $.NSData.dataWithContentsOfURL(queryURL);",
-      "\treturn $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;",
+      "\tconst queryURL = \\$.NSURL.URLWithString(url);",
+      "\tconst data = \\$.NSData.dataWithContentsOfURL(queryURL);",
+      "\treturn \\$.NSString.alloc.initWithDataEncoding(data, \\$.NSUTF8StringEncoding).js;",
       "}",
       "",
       "//──────────────────────────────────────────────────────────────────────────────",
@@ -102,10 +102,10 @@
     "body": [
       "function ensureCacheFolderExists() {",
       "\tconst finder = Application(\"Finder\");",
-      "\tconst cacheDir = $.getenv(\"alfred_workflow_cache\");",
+      "\tconst cacheDir = \\$.getenv(\"alfred_workflow_cache\");",
       "\tif (!finder.exists(Path(cacheDir))) {",
       "\t\tconsole.log(\"Cache Dir does not exist and is created.\");",
-      "\t\tconst cacheDirBasename = $.getenv(\"alfred_workflow_bundleid\");",
+      "\t\tconst cacheDirBasename = \\$.getenv(\"alfred_workflow_bundleid\");",
       "\t\tconst cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);",
       "\t\tfinder.make({",
       "\t\t\tnew: \"folder\",",
@@ -141,7 +141,7 @@
     "prefix": "matcher (simple)"
   },
   "reload Alfred workflow": {
-    "body": "Application(\"com.runningwithcrayons.Alfred\").reloadWorkflow($.getenv(\"alfred_workflow_bundleid\"))",
+    "body": "Application(\"com.runningwithcrayons.Alfred\").reloadWorkflow(\\$.getenv(\"alfred_workflow_bundleid\"))",
     "prefix": "reload Alfred workflow"
   }
 }

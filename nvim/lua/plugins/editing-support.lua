@@ -194,8 +194,9 @@ return {
 			local negLookahead = require("nvim-autopairs.conds").not_after_regex
 
 			require("nvim-autopairs").add_rules {
+				-- autopair <> for keymaps like `<C-d>` & html-tags
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
-				rule("<", ">", { "vim", "html", "xml" }), -- keymaps & tags
+				rule("<", ">", { "vim", "html", "xml" }), 
 
 				-- css: auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
