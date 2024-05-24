@@ -64,7 +64,7 @@ function _list_files_here {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
 		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "%s \033[1;30m...\033[0m" "$shortened"
+		printf "%s   \033[1;30m...\033[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi

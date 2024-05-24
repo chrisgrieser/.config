@@ -74,7 +74,7 @@ local function movieLayout()
 	wu.iMacDisplay:setBrightness(0)
 	darkmode.setDarkMode("dark")
 	visuals.updateHoleCover()
-	dockSwitcher("movie")
+	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
 	-- hide all files
 	hs.execute("defaults write com.apple.Finder AppleShowAllFiles false && killall Finder")
