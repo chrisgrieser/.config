@@ -10,11 +10,11 @@ M.usb_externalDrive = hs.usb.watcher
 	.new(function(device)
 		local name = device.productName
 		local ignore = {
-			"Integrated RGB Camera", -- Docking Station in the office
-			"USB 10/100/1000 LAN", -- Docking Station in the office
-			"T27hv-20", -- Docking Station in the office
 			"CHERRY Wireless Device", -- Mouse at mother
 			"SP 150", -- RICOH printer
+			"Integrated RGB Camera", -- Docking Station in the office
+			"USB 10/100/1000 LAN", -- ^
+			"T27hv-20", -- ^
 		}
 		if hs.fnutils.contains(ignore, name) or device.eventType ~= "added" then return end
 
@@ -30,13 +30,15 @@ M.usb_externalDrive = hs.usb.watcher
 			hs.application.open("WezTerm")
 		else
 			-- search for mounted volumes, since the usb-watcher does not report it to us
-			u.runWithDelays({ 1, 3 }, function()
-				local stdout, success =
-					hs.execute([[df | grep --only-matching --max-count=1 " /Volumes/.*" | cut -c2-]])
-				if not success or not stdout then return end
-				local path = stdout:gsub("\n$", "")
-				hs.open(path)
-			end)
+			u.runWithDelays(
+				{ 1, 3 },
+				function()
+					hs.execute([[
+						df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}' | 
+							xargs -I {} open {}
+					]])
+				end
+			)
 		end
 	end)
 	:start()
