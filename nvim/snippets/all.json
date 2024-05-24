@@ -40,7 +40,7 @@
     "prefix": "lorem sentence"
   },
   "PENDING": {
-    "body": "${LINE_COMMENT} PENDING ",
+    "body": "${LINE_COMMENT} PENDING ${CLIPBOARD}",
     "prefix": "PENDING"
   },
   "PERF": {
