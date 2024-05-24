@@ -197,19 +197,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D88BB74F-D9A5-44A0-B5C9-A637572735B1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2CF3A219-5210-4AA2-AC7F-0B13E5C28FAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</key>
 		<array>
 			<dict>
@@ -447,84 +434,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>hammerspoon://hs-reload</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>2CF3A219-5210-4AA2-AC7F-0B13E5C28FAE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>hs</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>🔁 Reload Hammerspoon</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D88BB74F-D9A5-44A0-B5C9-A637572735B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open with TextEdit</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>F331457B-145C-45FE-97F4-7EE24D9CEB9A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>/System/Applications/TextEdit.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>98776993-F46B-4069-BBDE-8CAA032AB403</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -583,44 +492,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>acceptstext</key>
 				<false/>
-				<key>skipvarencode</key>
+				<key>acceptsurls</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>busycalevent://new/{query}</string>
+				<key>name</key>
+				<string>Open with TextEdit</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<string>F331457B-145C-45FE-97F4-7EE24D9CEB9A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>cal</string>
-				<key>subtext</key>
-				<string>{query}</string>
-				<key>text</key>
-				<string>Add to Busycal</string>
-				<key>withspace</key>
-				<true/>
+				<key>openwith</key>
+				<string>/System/Applications/TextEdit.app</string>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>5C877087-012F-4C14-9B4D-369466813350</string>
+			<string>98776993-F46B-4069-BBDE-8CAA032AB403</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -669,21 +572,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>name</key>
-				<string>Add to Calendar (BusyCal)</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>busycalevent://new/{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
+			<string>9F084A08-61CC-4FFE-B826-D1C94F206A5A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>subtext</key>
+				<string>{query}</string>
+				<key>text</key>
+				<string>Add to Busycal</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5C877087-012F-4C14-9B4D-369466813350</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -808,6 +732,47 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Add to Calendar (BusyCal)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>ED6732E3-D32A-4D0D-835B-815CF2FD8DAF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>openRemindersAfterwards</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>7345CB62-7C65-488B-824C-5E4192230491</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -864,26 +829,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>03BC9713-12DC-4573-82A2-D3E72094B209</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>openRemindersAfterwards</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>7345CB62-7C65-488B-824C-5E4192230491</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -999,7 +944,7 @@
 			<key>xpos</key>
 			<real>460</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>475</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
@@ -1008,7 +953,7 @@
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>395</real>
 		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
@@ -1016,15 +961,6 @@
 			<real>610</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>2CF3A219-5210-4AA2-AC7F-0B13E5C28FAE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>145</real>
 		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
@@ -1040,7 +976,7 @@
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>475</real>
 		</dict>
 		<key>5C877087-012F-4C14-9B4D-369466813350</key>
 		<dict>
@@ -1058,7 +994,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>540</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -1069,7 +1005,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>165</real>
 		</dict>
 		<key>93776F8A-CF4E-4A33-A222-621DFF193536</key>
 		<dict>
@@ -1080,7 +1016,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>475</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -1089,7 +1025,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>165</real>
 		</dict>
 		<key>98776993-F46B-4069-BBDE-8CAA032AB403</key>
 		<dict>
@@ -1127,7 +1063,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>325</real>
 		</dict>
 		<key>A77889B5-8A18-4C74-8057-356CF8CAFEDF</key>
 		<dict>
@@ -1136,7 +1072,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>480</real>
 		</dict>
 		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
 		<dict>
@@ -1154,7 +1090,7 @@
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>325</real>
 		</dict>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<dict>
@@ -1164,17 +1100,6 @@
 			<real>770</real>
 			<key>ypos</key>
 			<real>625</real>
-		</dict>
-		<key>D88BB74F-D9A5-44A0-B5C9-A637572735B1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>reload Hammerspoon</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>145</real>
 		</dict>
 		<key>DC943639-4DB9-44BA-B722-273F16EEED36</key>
 		<dict>
@@ -1201,7 +1126,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>635</real>
 		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
@@ -1219,7 +1144,7 @@
 			<key>xpos</key>
 			<real>260</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>505</real>
 		</dict>
 		<key>E9FF31BC-709C-4387-975A-0B1410418161</key>
 		<dict>
@@ -1268,7 +1193,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>635</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

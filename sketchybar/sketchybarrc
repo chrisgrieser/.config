@@ -73,7 +73,7 @@ sketchybar \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
-	--set "Stats,CombinedModules" width=250 \
+	--set "Stats,CombinedModules" width=220 \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \

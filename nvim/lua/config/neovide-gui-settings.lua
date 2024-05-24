@@ -3,9 +3,7 @@
 if not vim.g.neovide then return end
 
 local g = vim.g
-local host = vim.uv.os_gethostname()
-local isAtOffice = host:find("eduroam") or host:find("fak1")
-local isAtMother = host:find("Mother")
+local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- FIX neovide ignoring `tabs = false` on consecutive opening of new files
@@ -23,6 +21,10 @@ vim.api.nvim_create_autocmd("TabNewEntered", {
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
+local host = vim.uv.os_gethostname()
+local isAtOffice = host:find("eduroam") or host:find("fak1")
+local isAtMother = host:find("Mother")
+
 if isAtMother then
 	g.neovide_scale_factor = 0.9
 	g.neovide_padding_top = 4
@@ -36,6 +38,21 @@ else
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end
+
+--------------------------------------------------------------------------------
+
+-- cmd+ / cmd- to change zoom
+local scaleNotify
+local function setNeovideScaleFactor(delta)
+	g.neovide_scale_factor = g.neovide_scale_factor + delta
+	scaleNotify = vim.notify("Scale Factor: " .. g.neovide_scale_factor, vim.log.levels.INFO, {
+		replace = scaleNotify and scaleNotify.id,
+	})
+end
+keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end, { desc = "Zoom +" })
+keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end, { desc = "Zoom -" })
+
+--------------------------------------------------------------------------------
 
 -- CMD & ALT Keys
 g.neovide_input_use_logo = true -- enable, so `cmd` on macOS can be used

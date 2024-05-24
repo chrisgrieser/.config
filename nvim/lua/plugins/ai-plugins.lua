@@ -13,6 +13,7 @@ return {
 		opts = {
 			filetypes = {
 				DressingInput = false,
+				noice = false, -- sometimes triggered in error-buffers
 				text = false, -- `pass` passwords are plaintext
 			},
 			silent = true,
@@ -20,7 +21,6 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-			{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
 			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
 			{ "<D-D>", function() require("neocodeium").cycle(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
 			-- stylua: ignore end
