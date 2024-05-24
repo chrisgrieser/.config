@@ -127,9 +127,9 @@
     "body": [
       "/** @param {string} url @return {string} */",
       "function httpRequest(url) {",
-      "\tconst queryURL = $.NSURL.URLWithString(url);",
-      "\tconst data = $.NSData.dataWithContentsOfURL(queryURL);",
-      "\treturn $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;",
+      "\tconst queryURL = \\$.NSURL.URLWithString(url);",
+      "\tconst data = \\$.NSData.dataWithContentsOfURL(queryURL);",
+      "\treturn \\$.NSString.alloc.initWithDataEncoding(data, \\$.NSUTF8StringEncoding).js;",
       "}"
     ],
     "description": "http request via c-bridge",
@@ -166,8 +166,8 @@
     "body": [
       "/** @param {string} path */",
       "function readFile(path) {",
-      "\tconst data = $.NSFileManager.defaultManager.contentsAtPath(path);",
-      "\tconst str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);",
+      "\tconst data = \\$.NSFileManager.defaultManager.contentsAtPath(path);",
+      "\tconst str = \\$.NSString.alloc.initWithDataEncoding(data, \\$.NSUTF8StringEncoding);",
       "\treturn ObjC.unwrap(str);",
       "}"
     ],
@@ -202,9 +202,9 @@
       "",
       "/** @param {string} path */",
       "function copyPathToClipboard(path) {",
-      "\tconst pasteboard = $.NSPasteboard.generalPasteboard;",
+      "\tconst pasteboard = \\$.NSPasteboard.generalPasteboard;",
       "\tpasteboard.clearContents;",
-      "\tconst success = pasteboard.setPropertyListForType($([path]), $.NSFilenamesPboardType);",
+      "\tconst success = pasteboard.setPropertyListForType(\\$([path]), \\$.NSFilenamesPboardType);",
       "\treturn success;",
       "}"
     ],
@@ -223,8 +223,8 @@
     "body": [
       "/** @param {string} filepath @param {string} text */",
       "function writeToFile(filepath, text) {",
-      "\tconst str = $.NSString.alloc.initWithUTF8String(text);",
-      "\tstr.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);",
+      "\tconst str = \\$.NSString.alloc.initWithUTF8String(text);",
+      "\tstr.writeToFileAtomicallyEncodingError(filepath, true, \\$.NSUTF8StringEncoding, null);",
       "}"
     ],
     "prefix": "write to file"

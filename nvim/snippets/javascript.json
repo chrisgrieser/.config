@@ -118,42 +118,6 @@
     ],
     "prefix": "function"
   },
-  "human-readable relative date (func)": {
-    "body": [
-      "function humanRelativeDate(isoDateStr) {",
-      "\tconst deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;",
-      "\t/** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"|\"second\"} */",
-      "\tlet unit;",
-      "\tlet delta;",
-      "\tif (deltaSecs < 60) {",
-      "\t\tunit = \"second\";",
-      "\t\tdelta = Math.ceil(deltaSecs);",
-      "\t} else if (deltaSecs < 60 * 60) {",
-      "\t\tunit = \"minute\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60);",
-      "\t} else if (deltaSecs < 60 * 60 * 24) {",
-      "\t\tunit = \"hour\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60);",
-      "\t} else if (deltaSecs < 60 * 60 * 24 * 7) {",
-      "\t\tunit = \"day\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24);",
-      "\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {",
-      "\t\tunit = \"week\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);",
-      "\t} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {",
-      "\t\tunit = \"month\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);",
-      "\t} else {",
-      "\t\tunit = \"year\";",
-      "\t\tdelta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);",
-      "\t}",
-      "\tconst formatter = new Intl.RelativeTimeFormat(\"en\", { style: \"narrow\", numeric: \"auto\" });",
-      "\tconst str = formatter.format(-delta, unit);",
-      "\treturn str.replace(/m(?= ago$)/, \"min\"); // \"m\" -> \"min\" (more distinguishable from \"month\")",
-      "}"
-    ],
-    "prefix": "human-readable relative date (func)"
-  },
   "if ..": {
     "body": [
       "if (${1:condition}) {",
@@ -241,17 +205,6 @@
   "replace": {
     "body": "replace(/${1:regexp}/, \"$2\")",
     "prefix": "replace"
-  },
-  "safe title": {
-    "body": [
-      "const safeTitle = ${1:title}",
-      "\t.replaceAll(\"/\", \"-\")",
-      "\t.replace(/[\\\\$€§*#?!:;.,`\"'’‘„“”«»’{}]/g, \"\")",
-      "\t.replaceAll(\"&\", \"and\")",
-      "\t.replace(/ {2,}/g, \" \")",
-      "\t.slice(0, 50);"
-    ],
-    "prefix": "safe title"
   },
   "sort ( () => {} )": {
     "body": [
@@ -346,9 +299,5 @@
   "unique items": {
     "body": "${1:arr} = [...new Set(${2:arr})];",
     "prefix": "unique items"
-  },
-  "uuid": {
-    "body": "crypto.randomUUID();",
-    "prefix": "uuid"
   }
 }
