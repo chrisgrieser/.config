@@ -7,6 +7,7 @@ list_name="Tasks"
 
 # GUARD only trigger on deactivation of Reminders or BusyCal
 if [[ "$SENDER" = "front_app_switched" ]]; then
+	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app1"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"

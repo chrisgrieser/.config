@@ -123,11 +123,10 @@
       "function camelCaseMatch(str) {",
       "\tconst subwords = str.replace(/[-_./]/g, \" \");",
       "\tconst fullword = str.replace(/[-_./]/g, \"\");",
-      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" $1\");",
+      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\\\$1\");",
       "\treturn [subwords, camelCaseSeparated, fullword, str].join(\" \") + \" \";",
       "}"
     ],
-    "description": "Make Alfred Match CamelCase Results. https://www.alfredapp.com/help/workflows/inputs/script-filter/json/",
     "prefix": "matcher (CamelCase)"
   },
   "matcher (simple)": {

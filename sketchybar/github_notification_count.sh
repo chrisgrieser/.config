@@ -4,6 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 
 # GUARD only trigger on deactivation or activation of browser
 if [[ "$SENDER" = "front_app_switched" ]]; then
+	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app2"
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
