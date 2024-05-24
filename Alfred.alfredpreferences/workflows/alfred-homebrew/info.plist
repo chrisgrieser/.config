@@ -57,6 +57,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5C042B83-60B9-41CA-85D5-FA8294534C5B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<array>
 			<dict>
@@ -86,7 +99,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<string>CFA88D9F-D566-43E2-A3B6-377B032BC133</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -125,11 +138,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
+		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+				<string>5C042B83-60B9-41CA-85D5-FA8294534C5B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -148,21 +161,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
+		<key>CFA88D9F-D566-43E2-A3B6-377B032BC133</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3F95A285-6177-405E-B2B0-518A7C0276F2</string>
-				<key>modifiers</key>
-				<integer>131072</integer>
-				<key>modifiersubtext</key>
-				<string>⇧: brew info</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
+				<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -239,12 +242,46 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>brew install {query}</string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.terminalcommand</string>
 			<key>uid</key>
 			<string>EDA21286-4E28-4304-A9DB-0BA74AB2C370</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>brew install {query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>CFA88D9F-D566-43E2-A3B6-377B032BC133</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>brew reinstall {query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5C042B83-60B9-41CA-85D5-FA8294534C5B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -279,42 +316,42 @@
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>bf</string>
+				<string>br</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
-				<false/>
+				<true/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string></string>
+				<string>osascript -l JavaScript ./scripts/brew-uninstall.js "no_mac_app_store"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/brew-fonts.js</string>
+				<string></string>
 				<key>subtext</key>
-				<string>homebrew-cask-fonts</string>
+				<string></string>
 				<key>title</key>
-				<string>&gt; brew install '{query}'</string>
+				<string>&gt; brew reinstall '{query}'</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>CD40AB53-70F2-460D-BF34-1DF77F46FB38</string>
+			<string>CE590292-EEA5-4025-A89B-42AE38188503</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -357,6 +394,55 @@
 			<string>F01BF271-72C7-44BA-9382-E133D8529E6D</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>bu</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/brew-uninstall.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>&gt; brew uninstall '{query}'</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0BAF56E8-B65A-478A-B848-F09FFE73A12B</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -413,70 +499,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>br</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string>osascript -l JavaScript ./scripts/brew-uninstall.js "no_mac_app_store"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew reinstall '{query}'</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>CE590292-EEA5-4025-A89B-42AE38188503</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew reinstall {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>A98EAA76-0074-4CAD-9A09-48949FC126DB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string>/System/Volumes/Data/Applications/AppCleaner.app</string>
 				<key>sourcefile</key>
@@ -488,70 +510,6 @@
 			<string>802369B2-358A-46C9-9516-940B8E3E7940</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>bu</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/brew-uninstall.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>&gt; brew uninstall '{query}'</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0BAF56E8-B65A-478A-B848-F09FFE73A12B</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>brew uninstall {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -585,22 +543,43 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>brew uninstall {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Requirements
 - [Homebrew](https://brew.sh/)
-- Optional: [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane) for previews of package homepages.
+- Optional:
+  [AlfredExtraPane](https://github.com/mr-pennyworth/alfred-extra-pane) for
+  previews of package homepages.
 
 ## Usage
 - Search for a Homebrew package via the `bi` keyword.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses the terminal app you have configured [in your Alfred settings](https://www.alfredapp.com/help/features/terminal/).)
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses
+	  the terminal app you have configured [in your Alfred
+	  settings](https://www.alfredapp.com/help/features/terminal/).)
 	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
 	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
 	+ The download counts refer to the number of downloads per 90 days.
 - Reinstall a package already installed on your system via the `br` keyword (`brew reinstall`).
-- Uninstall a package via the `bu` keyword (`brew uninstall`). Optionally use the `--zap` option for a clean uninstallation.
-- Search and install fonts available in the [Homebrew font tap](https://github.com/Homebrew/homebrew-cask-fonts) via the `bf` keyword (`brew install font-…`).
+	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
+- Uninstall a package via the `bu` keyword (`brew uninstall`). 
+	+ Optionally use the `--zap` option for a clean uninstallation.
+	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Large Text.
 
 ---
 
@@ -616,16 +595,16 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>785</real>
+			<real>300</real>
 		</dict>
 		<key>0D984FC5-A902-42FB-80F8-A9D0310C86BB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>250</real>
 		</dict>
 		<key>0F3F996A-3FC8-4FBD-990C-9D54C43DD642</key>
 		<dict>
@@ -634,18 +613,18 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>note</key>
 			<string>brew uninstall</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>625</real>
 		</dict>
 		<key>2468D124-88C6-438D-B2C6-627ADEEEC31D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>130</real>
 		</dict>
 		<key>3F95A285-6177-405E-B2B0-518A7C0276F2</key>
 		<dict>
@@ -654,18 +633,27 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>note</key>
 			<string>brew info</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>365</real>
+		</dict>
+		<key>5C042B83-60B9-41CA-85D5-FA8294534C5B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>100</real>
 		</dict>
 		<key>72B78E7D-69B1-4E83-AB9B-26507DE2C33E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>215</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>580</real>
 		</dict>
 		<key>72D18DBC-72FF-40AA-B367-D4C148AEC3A6</key>
 		<dict>
@@ -683,40 +671,18 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>515</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>365</real>
 		</dict>
 		<key>802369B2-358A-46C9-9516-940B8E3E7940</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
-			<real>665</real>
-		</dict>
-		<key>A98EAA76-0074-4CAD-9A09-48949FC126DB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>brew reinstall</string>
-			<key>xpos</key>
-			<real>370</real>
-			<key>ypos</key>
-			<real>535</real>
-		</dict>
-		<key>CD40AB53-70F2-460D-BF34-1DF77F46FB38</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>install from homebrew-cask-fonts</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>235</real>
+			<real>505</real>
 		</dict>
 		<key>CE590292-EEA5-4025-A89B-42AE38188503</key>
 		<dict>
@@ -727,16 +693,23 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>160</real>
+		</dict>
+		<key>CFA88D9F-D566-43E2-A3B6-377B032BC133</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>45</real>
 		</dict>
 		<key>EDA21286-4E28-4304-A9DB-0BA74AB2C370</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>brew install</string>
 			<key>xpos</key>
-			<real>370</real>
+			<real>425</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -745,9 +718,9 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>515</real>
+			<real>570</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>250</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -792,7 +765,7 @@ Created by [Chris Grieser](https://chris-grieser.de/)</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.2</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
