@@ -31,6 +31,10 @@
 				"path": "./sh.json"
 			},
 			{
+				"language": ["sh", "make"],
+				"path": "./ansi-color-codes.json"
+			},
+			{
 				"language": ["lua"],
 				"path": "./lua.json"
 			},

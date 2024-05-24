@@ -1,5 +1,5 @@
 ;extends
-; EXTENDING COMMENTS TAGS https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm
+; extending comments tags https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm
 ; DOCS https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
 ;───────────────────────────────────────────────────────────────────────────────
 

@@ -1,10 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- INFO
--- manually patched `/opt/homebrew/Cellar/neovim/0.10.0/share/nvim/runtime/lua/vim/snippet.lua`
--- to support LINE_COMMENT and CLIPBOARD
-
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -204,7 +200,8 @@ return {
 		opts = {
 			-- PENDING https://github.com/garymjr/nvim-snippets/issues/5
 			extended_filetypes = {
-				make = { "sh" },
+				make = { "sh", "ansi-color-codes" },
+				sh = { "ansi-color-codes" },
 				typescript = { "javascript", "node-js" },
 				javascript = { "jxa", "node-js", "alfred-jxa" },
 				lua = { "nvim-lua" },
