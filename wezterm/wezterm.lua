@@ -28,6 +28,7 @@ local darkOpacity = 0.91
 
 local keymaps = require("wezterm-keymaps")
 local theme = require("theme-utils")
+
 local wt = require("wezterm")
 local act = wt.action
 
@@ -98,7 +99,7 @@ end)
 --------------------------------------------------------------------------------
 -- SETTINGS
 
-return {
+local config = {
 	-- Meta
 	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
@@ -187,3 +188,5 @@ return {
 	send_composed_key_when_right_alt_is_pressed = true,
 	use_dead_keys = true, -- do not expect another key after `^~`
 }
+
+return config

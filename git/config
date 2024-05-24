@@ -29,6 +29,7 @@
 	defaultBranch = main
 [url "git@github.com:"]
 	insteadOf = "https://github.com/" ; automatically use SSH instead of HTTPS for remotes
+	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
 
 [pull]
 	rebase = true ; rebase changes instead of merging
