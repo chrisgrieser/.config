@@ -117,7 +117,7 @@ M.caff_displayCount = hs.screen.watcher
 		-- If at night switching back to one display, put iMac display to sleep
 		-- (this triggers when the projector is turned off before going to sleep)
 		if u.betweenTime(22, 7) and not env.isProjector() and not env.isAtOffice then
-			wu.iMacDisplay:setBrightness(0)
+			u.runWithDelays({ 0, 2, 4 }, function() wu.iMacDisplay:setBrightness(0) end)
 			u.runWithDelays(4, u.closeAllTheThings)
 		end
 	end)
