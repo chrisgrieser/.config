@@ -90,7 +90,7 @@ function run() {
 			mods: {
 				alt: { arg: webstoreUrl },
 				cmd: { arg: webstoreUrl },
-				fn: { arg: localFolder },
+				shift: { arg: localFolder },
 			},
 		};
 	});

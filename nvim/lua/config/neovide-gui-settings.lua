@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("TabNewEntered", {
 
 -- SIZE & FONT
 if isAtMother then
-	g.neovide_scale_factor = 1.05
+	g.neovide_scale_factor = 0.9
 	g.neovide_padding_top = 4
 	g.neovide_padding_left = 6
 elseif isAtOffice then

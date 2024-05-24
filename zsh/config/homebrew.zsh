@@ -55,7 +55,7 @@ function update_cmdline_tools {
 		grep --only-matching --extended-regexp 'Command Line Tools.*$' |
 		head -n1)
 	if [[ -z "$update" ]]; then
-		echo "No update of command line tools available."
+		echo "No update for command line tools available."
 		return 0
 	fi
 	softwareupdate --install "$update"
