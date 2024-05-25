@@ -372,9 +372,9 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [command, shift, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      # [o]pen url in above message
+      # open [u]rl in above message
       - type: basic
-        from: { key_code: o, modifiers: { mandatory: [command] } }
+        from: { key_code: u, modifiers: { mandatory: [command, shift] } }
         to:
           - key_code: tab
           - { key_code: vk_none, hold_down_milliseconds: 50 }

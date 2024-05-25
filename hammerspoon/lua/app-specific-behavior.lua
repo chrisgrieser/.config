@@ -15,6 +15,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 		or (env.isAtOffice or env.isProjector())
 		or not (hs.fnutils.contains(env.videoAndAudioApps, appName))
 		or not (eventType == aw.launched or eventType == aw.terminated)
+		or u.betweenTime(22, 7)
 	then
 		return
 	end
