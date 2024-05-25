@@ -116,7 +116,7 @@ nnoremap go :quickSwitcher
 nnoremap gr :quickSwitcher
 
 exmap propertySearch obcommand obsidian-another-quick-switcher:search-command_property-search
-nnoremap gO :propertySearch
+nnoremap gp :propertySearch
 
 " :bnext/bprev
 exmap goBack obcommand app:go-back
