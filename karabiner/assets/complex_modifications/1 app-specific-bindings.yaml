@@ -47,39 +47,6 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Google Docs PWA"
-    manipulators:
-      # Search Help Menu (= Command Palette)
-      - type: basic
-        from: { key_code: p, modifiers: { mandatory: [command] } }
-        to:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.US$ }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - { key_code: slash, modifiers: [option] }
-        to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
-        conditions:
-          - type: frontmost_application_if
-            file_paths: ["/Google Docs.app/"]
-      # Comment
-      - type: basic
-        from: { key_code: k, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: m
-            modifiers: [command, option]
-        conditions:
-          - type: frontmost_application_if
-            file_paths: ["/Google Docs.app/"]
-      # Footnote
-      - type: basic
-        from: { key_code: non_us_backslash, modifiers: { mandatory: [command] } }
-        to:
-          - key_code: f
-            modifiers: [command, option]
-        conditions:
-          - type: frontmost_application_if
-            file_paths: ["/Google Docs.app/"]
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
       # sidebar
@@ -487,11 +454,10 @@ rules:
         to:
           - shell_command: |
               osascript -l JavaScript -e '
-                const se = Application("Script Editor");
-                const currentDoc = se.documents()[0]
+                const currentDoc = Application("Script Editor").documents()[0]
                 const currentLang = currentDoc.language().name();
                 const otherLang = currentLang === "AppleScript" ? "JavaScript" : "AppleScript";
-                const otherLangObj = se.languages.byName(otherLang);
+                const otherLangObj = Application("Script Editor").languages.byName(otherLang);
                 currentDoc.language = otherLangObj;
                 currentDoc.checkSyntax();
               '
@@ -510,7 +476,7 @@ rules:
         to:
           - { key_code: t, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
-      # Quick event creation with Time-Parsing instead of normal event
+      # Quick event with NLP instead of normal event creation
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [command] } }
         to:
@@ -539,7 +505,7 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Cleanshot"
+  - description: "(Apps) CleanShot X"
     manipulators:
       # INFO https://cleanshot.com/docs/api
       # ⌘⇧4 (screenshot button): tap to screenshot, hold to annotate last screenshot
@@ -556,6 +522,11 @@ rules:
               fi
         to_if_held_down:
           - shell_command: open -g "cleanshot://record-screen"
+      - type: basic
+        from: { key_code: "f6" }
+        to_if_alone:
+          - shell_command: |
+              screencapture -ic # capture area to clipboard
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator/Preview: Export"
     manipulators:

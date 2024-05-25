@@ -79,7 +79,7 @@ local function movieLayout()
 	-- hide all files
 	hs.execute("defaults write com.apple.Finder AppleShowAllFiles false && killall Finder")
 
-	u.openApps { "YouTube", "BetterTouchTool" }
+	u.openApps { "YouTube", env.isAtHome and"BetterTouchTool" or nil }
 	u.quitApps {
 		"Slack",
 		"Discord",
