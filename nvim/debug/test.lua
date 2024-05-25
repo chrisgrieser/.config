@@ -1,3 +1,3 @@
 
-local a = vim.split("a,b,c", " ")[1]
+local a = 7 % 3
 vim.notify("⭕ a: " .. tostring(a))
