@@ -5,12 +5,10 @@
 	<key>scope</key>
 	<array>
 		<string>~/Applications</string>
+		<string>~/Desktop</string>
+		<string>~/Documents</string>
 		<string>~/Downloads</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dokumente</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/File Hub</string>
-		<string>~/Library/Mobile Documents/com~apple~CloudDocs/Images</string>
+		<string>~/Library/Mobile Documents/com~apple~CloudDocs</string>
 	</array>
 </dict>
 </plist>
