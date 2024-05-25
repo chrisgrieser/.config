@@ -369,7 +369,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>chrome extension search</string>
+			<string>chromium extension search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -416,7 +416,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
@@ -425,7 +425,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>chrome internal page search</string>
+			<string>chromium internal page search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

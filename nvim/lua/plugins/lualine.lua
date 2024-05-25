@@ -169,7 +169,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter", -- load quicker for no flashing
+	event = "UIEnter", -- load quicker to prevent flickering
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,

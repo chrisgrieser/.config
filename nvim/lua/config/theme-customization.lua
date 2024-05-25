@@ -149,7 +149,6 @@ function M.themeModifications()
 		end
 	elseif theme == "kanagawa" then
 		boldLualineA()
-		overwriteHl("TreesitterContext", { bg = "#363648" })
 
 		-- transparent sign column
 		clearHl("SignColumn")
@@ -177,10 +176,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- for triggering via hammerspoon, as triggering via `OptionSet` autocmd does
--- not work reliabely for whatever reason
+-- not work reliabely due to some colorschemes setting the background themselves
+-- with different timings
 function M.updateColorscheme()
 	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
-	vim.cmd.highlight("clear") -- fixes some issues when switching themes
+	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
 	vim.cmd.colorscheme(targetTheme)
 end
 
