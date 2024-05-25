@@ -28,10 +28,6 @@
     ],
     "prefix": "autocmd (Filetype)"
   },
-  "check if file exists": {
-    "body": "local fileExists = vim.loop.fs_stat(\"${1:filepath}\") ~= nil",
-    "prefix": "check if file exists"
-  },
   "dedent": {
     "body": [
       "---@param lines string[]",

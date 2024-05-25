@@ -35,8 +35,7 @@ function run(argv) {
 	/** @type{AlfredItem[]} */
 	const formulas = app
 		// slower than `ls -1 "$(brew --prefix)/Caskroom"'`, but
-		// --installed-on-request relevant (homebrew API does have data on
-		// `--installed-on-request`, but not on leaves)
+		// --installed-on-request is relevant
 		.doShellScript("brew leaves --installed-on-request")
 		.split("\r")
 		.map((name) => {
@@ -53,8 +52,7 @@ function run(argv) {
 	if (!isBrewReinstall && includeMacAppStoreSetting) {
 		/** @type{AlfredItem[]} */
 		const appStoreApps = app
-			// using `mdfind` avoids dependency on `mas`
-			.doShellScript("mdfind kMDItemAppStoreHasReceipt=1")
+			.doShellScript("mdfind kMDItemAppStoreHasReceipt=1") // `mdfind` avoids dependency on `mas`
 			.split("\r")
 			.map((appPath) => {
 				const appName = appPath.split("/")[2];
