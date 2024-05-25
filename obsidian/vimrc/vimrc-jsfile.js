@@ -170,8 +170,9 @@ function gotoHeading(which) {
 function smartInsertBlank(where) {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
-	let [indentAndText] = curLine.match(/^\s*[-*+] /) || // unordered list
-		curLine.match(/^\s*>+ /) || // blockquote
+	let [indentAndText] = curLine.match(/^\s*>+ /) || // blockquote
+		curLine.match(/^\s*- \[[x ]\] /) || // task
+		curLine.match(/^\s*[-*+] /) || // unordered list
 		curLine.match(/^\s*\d+[.)] /) || // ordered list
 		curLine.match(/^\s*/) || [""]; // just indent
 
@@ -195,6 +196,7 @@ function smartMerge() {
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
 	const nextLineCleaned = nextLine
+		.replace(/^\s*- /, "") // unordered list
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
