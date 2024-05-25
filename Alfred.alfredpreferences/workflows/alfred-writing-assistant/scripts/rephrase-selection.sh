@@ -37,7 +37,7 @@ temp=$(echo "scale = 1; $temperature / 10" | bc)
 response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
 	-H "Authorization: Bearer $apikey" \
-	-d "{ \"model\": \"$model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
+	-d "{ \"model\": \"$openai_model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
 
 # log the response to stderr (= visible in Alfred debug log, but not elsewhere)
 echo "OpenAI response:" >&2
