@@ -196,7 +196,7 @@ function smartMerge() {
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
 	const nextLineCleaned = nextLine
-		.replace(/^\s*- /, "") // unordered list
+		.replace(/^\s*- \[[x ]\] /, "") // task
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
