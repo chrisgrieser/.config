@@ -118,9 +118,11 @@ function M.themeModifications()
 		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
 		overwriteHl("VertSplit", { fg = "#b29b84" })
 		overwriteHl("Operator", { fg = "#846a52" })
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
-		end
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
+			end
+		end, 1)
 		updateHl("@keyword.return", "gui=bold")
 
 		-- FIX python highlighting issues

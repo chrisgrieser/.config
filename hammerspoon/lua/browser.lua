@@ -84,7 +84,9 @@ local chromeBookmarks = os.getenv("HOME")
 	.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
 local function touchSymlink()
-	-- `-h` touches the symlink itself instead of its target
+	-- `-h` touches the symlink itself instead of its target. 
+	-- The pathwatcher *trigger* is triggered by changes of the target, while
+	-- this function touches the symlink itself.
 	hs.execute(("touch -h %q"):format(chromeBookmarks))
 end
 
