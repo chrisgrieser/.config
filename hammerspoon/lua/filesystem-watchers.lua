@@ -84,20 +84,4 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 end):start()
 
 --------------------------------------------------------------------------------
-
--- CONFIG
-local iconPath = "./app-icons/"
-local iconMap = {
-	Neovide = "Neovide.icns",
-	Mimestream = "Mail.icns",
-	Obsidian = "Obsidian.icns",
-	WezTerm = ".icns",
-}
-
-M.pathw_appIcons = pathw("/Applications", function(paths, _)
-	for _, filep in pairs(paths) do
-	end
-end)
-
---------------------------------------------------------------------------------
 return M
