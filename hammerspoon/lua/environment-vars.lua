@@ -12,6 +12,7 @@ M.transBgApps = {
 
 M.videoAndAudioApps = {
 	"IINA",
+	"Animeflix",
 	"YouTube",
 	"zoom.us",
 	"FaceTime",

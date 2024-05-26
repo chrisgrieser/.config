@@ -8,18 +8,21 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
+		<key>047B3E39-B26C-4566-9BA5-2C8106D3C6E9</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
+				<string>4936F119-1518-48BC-8DAF-E8388D2FD1A5</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Save layout</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
@@ -30,8 +33,31 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Save current layout</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>71149DFC-88DE-4E74-9FDA-F9336F759485</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4936F119-1518-48BC-8DAF-E8388D2FD1A5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -62,6 +88,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>67D5112C-3E28-4F59-81D9-8595E6616490</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7D6BAD11-5565-439D-9910-03CD2024E486</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>047B3E39-B26C-4566-9BA5-2C8106D3C6E9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -123,6 +162,41 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>load-dock-layout</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>77B5FCE8-9806-4520-937D-6512E72DC3E8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>silent</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>67D5112C-3E28-4F59-81D9-8595E6616490</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -130,15 +204,38 @@
 				<key>variables</key>
 				<dict>
 					<key>mode</key>
-					<string>save</string>
+					<string>load</string>
 				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
+			<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/dock_switcher.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -192,25 +289,22 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>argument</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/dock_switcher.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>mode</key>
+					<string>save</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</string>
+			<string>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -236,67 +330,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>load</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>C6A030D1-AA68-4B34-A73D-E32764229096</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>load-dock-layout</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>77B5FCE8-9806-4520-937D-6512E72DC3E8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>silent</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>67D5112C-3E28-4F59-81D9-8595E6616490</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>:dock</string>
+				<string>:dock_newlayout</string>
 				<key>subtext</key>
-				<string>Add divider to current dock</string>
+				<string>Save current layout as a new layout</string>
 				<key>text</key>
 				<string>Dock</string>
 				<key>withspace</key>
@@ -305,7 +344,49 @@
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</string>
+			<string>7D6BAD11-5565-439D-9910-03CD2024E486</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/save_new_layout.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4936F119-1518-48BC-8DAF-E8388D2FD1A5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>"{query}"</string>
+				<key>text</key>
+				<string>Name of new layout</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>047B3E39-B26C-4566-9BA5-2C8106D3C6E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -332,6 +413,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>:dock_dividver</string>
+				<key>subtext</key>
+				<string>Add divider to current dock</string>
+				<key>text</key>
+				<string>Dock</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -353,10 +455,21 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<dict>
 		<key>00A6D518-2A93-46B2-8362-89BFB8CF6EAE</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>495</real>
+		</dict>
+		<key>047B3E39-B26C-4566-9BA5-2C8106D3C6E9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>15B1A722-85AB-4042-B9F7-B755D027674F</key>
 		<dict>
@@ -365,7 +478,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>215</real>
 		</dict>
 		<key>1CCD5F8D-0F96-4DBC-9F96-6151F8F1AC83</key>
 		<dict>
@@ -374,7 +487,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>215</real>
+		</dict>
+		<key>4936F119-1518-48BC-8DAF-E8388D2FD1A5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>350</real>
+			<key>ypos</key>
+			<real>375</real>
 		</dict>
 		<key>67D5112C-3E28-4F59-81D9-8595E6616490</key>
 		<dict>
@@ -383,27 +505,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>silent</string>
 			<key>xpos</key>
-			<real>180</real>
+			<real>275</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>60</real>
 		</dict>
 		<key>71149DFC-88DE-4E74-9FDA-F9336F759485</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>465</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>325</real>
 		</dict>
 		<key>77B5FCE8-9806-4520-937D-6512E72DC3E8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
+			<real>130</real>
+			<key>ypos</key>
+			<real>30</real>
+		</dict>
+		<key>7D6BAD11-5565-439D-9910-03CD2024E486</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>375</real>
 		</dict>
 		<key>C6A030D1-AA68-4B34-A73D-E32764229096</key>
 		<dict>
@@ -414,7 +545,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>215</real>
 		</dict>
 		<key>DFFAF151-97DD-46A4-9BBA-121DBBB5F800</key>
 		<dict>
@@ -425,16 +556,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>115</real>
+			<real>285</real>
 		</dict>
 		<key>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</key>
 		<dict>
-			<key>note</key>
-			<string>add divider</string>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>495</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
