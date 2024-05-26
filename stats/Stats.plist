@@ -33,7 +33,7 @@
 	<key>CPU_notifications_totalLoad_state</key>
 	<true/>
 	<key>CPU_notifications_totalLoad_value</key>
-	<integer>97</integer>
+	<integer>90</integer>
 	<key>CPU_pieChart_position</key>
 	<integer>3</integer>
 	<key>CPU_processes</key>
@@ -123,11 +123,11 @@
 	<key>LaunchAtLoginNext</key>
 	<true/>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
-	<string>{1000, 671}</string>
+	<string>{800, 448}</string>
 	<key>NSStatusItem Preferred Position CPU_bar_chart</key>
 	<integer>417</integer>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>258</real>
+	<real>267</real>
 	<key>NSStatusItem Preferred Position Network_network_chart</key>
 	<integer>307</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>
@@ -148,7 +148,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>440 149 1000 671 0 0 1680 945 </string>
+	<string>560 474 800 448 0 0 1920 1080 </string>
 	<key>Network_label_position</key>
 	<integer>3</integer>
 	<key>Network_networkChart_position</key>
@@ -278,7 +278,7 @@
 	<key>update-interval</key>
 	<string>Silent</string>
 	<key>updater_check_ts</key>
-	<integer>1716575807</integer>
+	<integer>1716727176</integer>
 	<key>version</key>
 	<string>2.10.14</string>
 </dict>

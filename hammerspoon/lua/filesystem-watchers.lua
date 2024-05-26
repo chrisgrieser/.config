@@ -1,7 +1,6 @@
 local M = {}
 
 local pathw = hs.pathwatcher.new
-local env = require("lua.environment-vars")
 local u = require("lua.utils")
 local home = os.getenv("HOME")
 --------------------------------------------------------------------------------
@@ -10,8 +9,6 @@ local home = os.getenv("HOME")
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 local desktopPath = home .. "/Desktop"
-
---------------------------------------------------------------------------------
 
 ---INFO this works as only downloaded files get quarantined.
 ---Ensures that files created locally do not trigger the actions.
@@ -85,6 +82,22 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 		end
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+
+-- CONFIG
+local iconPath = "./app-icons/"
+local iconMap = {
+	Neovide = "Neovide.icns",
+	Mimestream = "Mail.icns",
+	Obsidian = "Obsidian.icns",
+	WezTerm = ".icns",
+}
+
+M.pathw_appIcons = pathw("/Applications", function(paths, _)
+	for _, filep in pairs(paths) do
+	end
+end)
 
 --------------------------------------------------------------------------------
 return M
