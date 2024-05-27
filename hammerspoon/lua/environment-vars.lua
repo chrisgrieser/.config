@@ -29,11 +29,10 @@ M.videoAndAudioApps = {
 --------------------------------------------------------------------------------
 -- DEVICE
 
-local deviceName = hs.host.localizedName():gsub(".- ", "", 1)
-
-M.isAtOffice = (deviceName:find("[Mm]ini") or deviceName:find("eduroam")) ~= nil
-M.isAtHome = (deviceName:find("iMac") and deviceName:find("Home")) ~= nil
-M.isAtMother = deviceName:find("Mother") ~= nil
+local device = hs.host.localizedName()
+M.isAtOffice = (device:find("[Mm]ini") or device:find("eduroam")) ~= nil
+M.isAtHome = (device:find("iMac") and device:find("Home")) ~= nil
+M.isAtMother = device:find("Mother") ~= nil
 
 ---not static variable, since projector connection can change during runtime
 ---@nodiscard
