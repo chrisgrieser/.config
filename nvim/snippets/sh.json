@@ -1,62 +1,4 @@
 {
-  "substitute": {
-    "body": "\\${${1:var}//${2:search}/${3:replace}}",
-    "description": "one slash for single substitution, two for global",
-    "prefix": "substitute (expansion)"
-  },
-  "ternary": {
-    "body": "\\$([[ \"${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")",
-    "prefix": "ternary"
-  },
-  "vim modeline": {
-    "body": "# vim: filetype=${1:sh}",
-    "description": "this snippet should neither be at the top nor bottom of this JSON, so vim does not try to read the modeline itself.",
-    "prefix": "vim modeline"
-  },
-  "default value": {
-    "body": "\\${${1:var}:-${2:default_value}}",
-    "prefix": "default value"
-  },
-  "check if installed": {
-    "body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\e[1;33m${1:cli} not installed.\\e[0m\" && return 1; fi\n$0",
-    "description": "https://stackoverflow.com/a/26759734/22114136",
-    "prefix": "check if installed"
-  },
-  "colored print": {
-    "body": [
-      "# print color if stdout is a terminal",
-      "function colored_print {",
-      "\tlocal color=\\${2:-\\\\033[1;35m}",
-      "\tlocal msg=\"\\$1\"",
-      "\tif [[ -t true ]]; then",
-      "\t\tprint \"\\$color\\$msg\\033[0m\"",
-      "\telse",
-      "\t\tprint \"\\$msg\"",
-      "\tfi",
-      "}"
-    ],
-    "prefix": "colored print"
-  },
-  "for each line (read)": {
-    "body": [
-      "while read -r line; do",
-      "\techo \"\\$line\"$0",
-      "done <\"\\$${1:input_file}\""
-    ],
-    "prefix": "for each line (read)"
-  },
-  "slice": {
-    "body": "${1:var}=\"${${1:var}:${2:from}:${3:to}}\"",
-    "prefix": "slice"
-  },
-  "if (short)": {
-    "body": "[[ \"$${1:var}\" ]] && $0",
-    "prefix": "if (short)"
-  },
-  "notify (var)": {
-    "body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\"",
-    "prefix": "notify (var)"
-  },
   "PATH (export)": {
     "body": "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:\\$PATH",
     "description": "Extends PATH in a way that homebrew installed CLIs are recognized in ARM and Intel Macs.",
@@ -83,6 +25,11 @@
     "body": "if ! git rev-parse --is-inside-work-tree &>/dev/null ; then print \"\\e[1;33mfile is not ins a git repository.\\e[0m\" && return 1 ; fi",
     "prefix": "check if in git repo"
   },
+  "check if installed": {
+    "body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\e[1;33m${1:cli} not installed.\\e[0m\" && return 1; fi\n$0",
+    "description": "https://stackoverflow.com/a/26759734/22114136",
+    "prefix": "check if installed"
+  },
   "check if process is running": {
     "body": "pgrep -xq \"${1:process}\" && $0",
     "prefix": "check if process is running"
@@ -90,6 +37,25 @@
   "check if sudo user": {
     "body": "sudo -nv && ${1:some_sudo_action}",
     "prefix": "check if sudo user"
+  },
+  "colored print": {
+    "body": [
+      "# print color if stdout is a terminal",
+      "function colored_print {",
+      "\tlocal color=\\${2:-\\\\033[1;35m}",
+      "\tlocal msg=\"\\$1\"",
+      "\tif [[ -t true ]]; then",
+      "\t\tprint \"\\$color\\$msg\\033[0m\"",
+      "\telse",
+      "\t\tprint \"\\$msg\"",
+      "\tfi",
+      "}"
+    ],
+    "prefix": "colored print"
+  },
+  "default value": {
+    "body": "\\${${1:var}:-${2:default_value}}",
+    "prefix": "default value"
   },
   "directory of script": {
     "body": "\"$(dirname \"$(readlink -f \"\\$0\")\")\"",
@@ -133,6 +99,14 @@
     ],
     "prefix": "for each file"
   },
+  "for each line (read)": {
+    "body": [
+      "while read -r line; do",
+      "\techo \"\\$line\"$0",
+      "done <\"\\$${1:input_file}\""
+    ],
+    "prefix": "for each line (read)"
+  },
   "function": {
     "body": "function ${1:name} {\n\t${0}\n}",
     "prefix": "function"
@@ -148,6 +122,10 @@
   "i--": {
     "body": "((${1:i}--))",
     "prefix": "i--"
+  },
+  "if (short)": {
+    "body": "[[ \"$${1:var}\" ]] && $0",
+    "prefix": "if (short)"
   },
   "if .. then": {
     "body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi",
@@ -177,6 +155,10 @@
   "notify (msg)": {
     "body": "osascript -e 'display notification \"\" with title \"${1:msg}\"'",
     "prefix": "notify (msg)"
+  },
+  "notify (var)": {
+    "body": "osascript -e \"display notification \\\"\\\" with title \\\"$${1:var}\\\"\"",
+    "prefix": "notify (var)"
   },
   "null (pipe)": {
     "body": "&>/dev/null",
@@ -232,6 +214,10 @@
     "body": "#!/usr/bin/env zsh",
     "prefix": "shebang"
   },
+  "slice": {
+    "body": "${1:var}=\"${${1:var}:${2:from}:${3:to}}\"",
+    "prefix": "slice"
+  },
   "stderr (merge with stdout)": {
     "body": "2>&1",
     "prefix": "stderr (merge with stdout)"
@@ -244,6 +230,11 @@
   "stdout is to a terminal": {
     "body": "[[ -t true ]]",
     "prefix": "stdout is to a terminal"
+  },
+  "substitute": {
+    "body": "\\${${1:var}//${2:search}/${3:replace}}",
+    "description": "one slash for single substitution, two for global",
+    "prefix": "substitute (expansion)"
   },
   "suppress stderr": {
     "body": "2>/dev/null",
@@ -266,12 +257,16 @@
     "description": "A case command first expands word, and tries to match it against each pattern in turn.",
     "prefix": "switch case"
   },
+  "ternary": {
+    "body": "\\$([[ \"${1:cond}\" ]] && echo \"${2:value1}\" || echo \"${3:value2}\")",
+    "prefix": "ternary"
+  },
   "then": {
     "body": "then\n\t$0\nfi",
     "prefix": "then .. fi"
   },
-  "today (ISO date)": {
-    "body": "${1:now}=$(date +\"%Y-%m-%d %H:%M:%S\")",
+  "today (ISO date) + now": {
+    "body": "${1:now}=\\$(date +\"%Y-%m-%d %H:%M:%S\")",
     "prefix": [
       "today (ISO date)",
       "now"
@@ -284,6 +279,11 @@
   "urlEncode": {
     "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",
     "prefix": "urlEncode"
+  },
+  "vim modeline": {
+    "body": "# vim: filetype=${1:sh}",
+    "description": "this snippet should neither be at the top nor bottom of this JSON, so vim does not try to read the modeline itself.",
+    "prefix": "vim modeline"
   },
   "wait until app running": {
     "body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
