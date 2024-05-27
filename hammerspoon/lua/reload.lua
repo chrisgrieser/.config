@@ -3,7 +3,7 @@ local u = require("lua.utils")
 
 local reloadIndicator = "/tmp/hs-is-reloading"
 
--- `hammerspoon://hs-reload` for reloading via Makefile or Alfred
+-- `hammerspoon://hs-reload` for reloading via Makefile
 hs.urlevent.bind("hs-reload", function()
 	hs.execute("touch " .. reloadIndicator)
 	u.runWithDelays(0.15, hs.reload)

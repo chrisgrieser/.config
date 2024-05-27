@@ -39,10 +39,8 @@ M.isAtMother = deviceName:find("Mother") ~= nil
 ---@nodiscard
 ---@return boolean
 function M.isProjector()
-	local mainDisplayName = hs.screen.primaryScreen():name()
-	local projectorHelmholtz = mainDisplayName == "ViewSonic PJ"
-	local tvLeuthinger = mainDisplayName == "TV_MONITOR"
-	return projectorHelmholtz or tvLeuthinger
+	if M.isAtOffice then return false end
+	return #(hs.screen.allScreens()) > 1
 end
 
 --------------------------------------------------------------------------------
