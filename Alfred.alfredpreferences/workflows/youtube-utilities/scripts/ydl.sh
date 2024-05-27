@@ -14,7 +14,7 @@ fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # DOWNLOAD
-./notificator --title "yt-dlp" --message "⏳ Starting Download…"
+./notificator --title "yt-dlp" --message "⏳ Starting Download…" --subtitle "$url"
 msg=$(cd "$download_location" && yt-dlp --quiet "$url")
 success=$?
 

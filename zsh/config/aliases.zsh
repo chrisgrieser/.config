@@ -3,7 +3,6 @@ alias q=' exit'     # INFO leading space to ignore it in history due to `HIST_IG
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
-alias ydl="yt-dlp"
 alias m="make"
 
 # DEFAULTS
@@ -12,15 +11,15 @@ alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
 alias make='make --silent --warn-undefined-variables'
-alias mkdir='mkdir -p' # create intermediate directories
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
-alias l='eza --all --long --time-style=relative --no-user \
+alias l='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --git-ignore --sort=newest'
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
 }
+
 function bat { # dark-mode aware
 	local theme   # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "Dracula" || echo "Monokai Extended Light")"
@@ -28,14 +27,13 @@ function bat { # dark-mode aware
 }
 
 # UTILS
-alias size="du -sh . ./* ./.* | sort -rh | sed 's/\\.\\///'" # size of files in current directory
-alias bkp='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
-alias bkp-repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
-alias sync='zsh ./.sync-this-repo.sh'
+alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
+alias bkp_full='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
+alias bkp_repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
+alias sync_repo='zsh ./.sync-this-repo.sh'
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
-function prose { scp "$1" prose.sh:/; } # https://pico.sh/prose#publish-your-posts-with-one-command
 
 #───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)
