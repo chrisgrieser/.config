@@ -187,7 +187,7 @@ function M.updateColorscheme()
 end
 
 -- initialize theme on startup
--- (darkmode not detected via `vim.o.background`, as neovide does not set it in time)
+-- (darkmode not detected via `vim.o.background`, as Neovide does not set it in time)
 local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
 local targetTheme = macOSMode.stdout:find("Dark") and vim.g.darkTheme or vim.g.lightTheme
 vim.cmd.colorscheme(targetTheme)
