@@ -83,7 +83,7 @@ keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- [O]pen new scope / brace
--- (remap needed to trigger auto-pairing plugin)
+-- (`remap` needed to trigger auto-pairing plugin)
 keymap("n", "<D-o>", "a{<CR>", { desc = " Open new scope", remap = true })
 keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 
