@@ -42,6 +42,7 @@ while pgrep -xq "$front_app"; do
 		return 1
 	fi
 done
+sleep 0.2
 
 # restart
 [[ "$front_app" == "wezterm-gui" ]] && front_app="WezTerm"
