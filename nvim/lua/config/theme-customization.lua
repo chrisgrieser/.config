@@ -113,6 +113,8 @@ function M.themeModifications()
 		linkHl("Number", "@field")
 		overwriteHl("@keyword.return", { fg = "#5e9fff", bold = true })
 	elseif theme == "dawnfox" then
+		overwriteHl("@markup.italic.markdown_inline", { italic = true })
+
 		overwriteHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
 		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
