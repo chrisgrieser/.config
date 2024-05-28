@@ -47,21 +47,33 @@ echo "$response" >&2
 if [[ -z "$response" ]]; then
 	echo "ERROR: Timeout, no response by OpenAI API."
 	exit 1
-elif [[ "$response" =~ "error" || "$response" =~ "ERROR" ]]; then
-	# doing this avoids jq dependency
-	echo -n "ERROR: $(echo "$response" | grep '"message"' | cut -d'"' -f4)"
+elif [[ "$response" =~ '"error"' || "$response" =~ '"ERROR"' ]]; then
+	error_msg=$(echo "$response" | grep '"message"' | cut -d'"' -f4)
+	echo -n "ERROR: $error_msg"
 	exit 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
+# GET THE CONTENT
+# only with shell builtins to avoid jq dependency
 
-# get the response and unescape it, without using dependencies 💀
-# requires OpenAI response to be prettified JSON
-text=$(
-	echo "$response" |
-		sed -n '/"content": /,/},/p' | sed '$d' |                        # for multi-line responses
-		sed -e 's/^[[:space:]]*"content": "//' -e 's/\"/"/g' -e 's/"$//' # get content-value
-)
+if [[ $(echo "$response" | wc -l) -gt 1 ]]; then
+	# unminified response -> multi-line
+	text=$(
+		echo "$response" |
+			sed -n '/"content": /,/},/p' | sed '$d' |          # for multi-line responses
+			sed -e 's/^[[:space:]]*"content": "//' -e 's/"$//' # get content-value
+	)
+else
+	# minified response -> single line
+	text=$(echo "$response" | grep --only-matching '"content":.*",' | cut -d'"' -f4)
+fi
+
+# unescape quotes
+# shellcheck disable=2001
+text="$(echo "$text" | sed -e 's/\\"/"/g')"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$output_type" == "plain" ]]; then
 	echo "$text"
