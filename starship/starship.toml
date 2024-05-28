@@ -64,7 +64,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 # the four perma-repos
 ".config" = " "
 "main-vault" = "󱉽 "
-"phd-data-analysis" = " "
+"phd-data-analysis" = " "
 ".password-store" = " "
 
 "~/Desktop" = "/ "
@@ -169,6 +169,6 @@ style = "bold yellow"
 format = '  [${symbol} $version]($style)'
 version_format = "$major.$minor"
 # disabled detecting via extensions; detect only via `package.json` or
-# `node_modules` to avoid false positives
+# `node_modules` to avoid false positives for stuff like Alfred workflows
 detect_extensions = []
 not_capable_style = "ft:white bg:red"
