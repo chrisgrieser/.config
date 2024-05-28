@@ -5,7 +5,6 @@ list_name="Tasks"
 max_number_of_bkps=60
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO $DATA_DIR defined in .zshenv
 isodate=$(date +"%Y-%m-%d")
 bkp_destination="$DATA_DIR/Backups/Reminders"
 backup_file="$bkp_destination/${isodate}.json"

@@ -12,7 +12,7 @@ opt.showmatch = true -- when closing a bracket, briefly flash the matching one
 opt.matchtime = 1 -- duration of that flashing n deci-seconds
 
 opt.spell = false
-opt.spellfile = { vim.g.dictionaryPath }
+opt.spellfile = { vim.g.linterConfigs .. "/spellfile-vim-ltex.add" } -- has to be `.add`
 opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
 opt.splitright = true -- split right instead of left

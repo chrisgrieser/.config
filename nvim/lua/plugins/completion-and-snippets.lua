@@ -135,11 +135,9 @@ local function cmpconfig()
 				option = {
 					-- show completions from all buffers used within the last x minutes
 					get_bufnrs = function()
-						local usedWithinMins = 15 -- CONFIG
+						local mins = 15 -- CONFIG
 						local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
-							:filter(
-								function(buf) return os.time() - buf.lastused < usedWithinMins * 60 end
-							)
+							:filter(function(buf) return os.time() - buf.lastused < mins * 60 end)
 							:map(function(buf) return buf.bufnr end)
 							:totable()
 						return recentBufs
@@ -190,26 +188,10 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp", -- LSP input
-			"garymjr/nvim-snippets", -- custom snippets
+			"hrsh7th/cmp-nvim-lsp",
+			{ "garymjr/nvim-snippets", opts = true }, -- custom snippets
 		},
 		config = cmpconfig,
-	},
-	{
-		"garymjr/nvim-snippets",
-		opts = {
-			-- PENDING https://github.com/garymjr/nvim-snippets/issues/5
-			extended_filetypes = {
-				make = { "sh", "ansi-color-codes" },
-				sh = { "ansi-color-codes" },
-				typescript = { "javascript", "node-js" },
-				javascript = { "jxa", "node-js", "alfred-jxa" },
-				lua = { "nvim-lua" },
-				vim = { "obsidian-vimrc" },
-				toml = { "typos-toml" },
-				yaml = { "karabiner-modifications" },
-			},
-		},
 	},
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
@@ -231,7 +213,7 @@ return {
 		},
 		opts = {
 			editSnippetPopup = {
-				height = 0.45, -- between 0-1
+				height = 0.5, -- between 0-1
 				width = 0.7,
 				border = vim.g.borderStyle,
 				keymaps = {
