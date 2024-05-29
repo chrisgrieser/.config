@@ -15,13 +15,6 @@ rules:
         to:
           - key_code: delete_forward
       #─────────────────────────────────────────────────────────────────────────
-      # r-cmd (tap) -> ctrl-e
-      - type: basic
-        from: { key_code: right_command }
-        to:
-          - key_code: right_command
-        to_if_alone:
-          - { key_code: e, modifiers: [control], lazy: true }
       # cmd+e: inline cod[e] (backticks)
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command] } }

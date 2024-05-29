@@ -67,6 +67,14 @@ rules:
         from: { key_code: l, modifiers: *hyper }
         to:
           - key_code: right_arrow
+      - type: basic
+        from: { key_code: p, modifiers: *hyper }
+        to:
+          - { key_code: e, modifiers: [control] }
+      - type: basic
+        from: { key_code: u, modifiers: *hyper }
+        to:
+          - { key_code: a, modifiers: [control] }
       # word to the left
       - type: basic
         from: { key_code: i, modifiers: *hyper }
