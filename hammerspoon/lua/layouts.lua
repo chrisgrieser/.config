@@ -7,7 +7,7 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 local c = hs.caffeinate.watcher
-local videoAppWatcherForSpotify = require("lua.app-specific-behavior").aw_spotify
+local videoAppWatcherForSpotify = require("lua.spotify").aw_spotify
 --------------------------------------------------------------------------------
 -- HELPERS
 
