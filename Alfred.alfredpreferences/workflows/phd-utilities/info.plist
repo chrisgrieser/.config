@@ -278,27 +278,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>tn</string>
-				<key>subtext</key>
-				<string>for PhD data collection</string>
-				<key>text</key>
-				<string>Technews: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>tasksettings</key>
 				<dict/>
 				<key>taskuid</key>
@@ -350,6 +329,27 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tn</string>
+				<key>subtext</key>
+				<string>for PhD data collection</string>
+				<key>text</key>
+				<string>Technews: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -472,9 +472,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>65</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>360</real>
 		</dict>
 		<key>9AF5FC82-E4A2-42CC-804B-A39ABE37D2D6</key>
 		<dict>

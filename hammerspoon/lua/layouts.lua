@@ -20,7 +20,7 @@ local function dockSwitcher(dockToUse)
 	]]):format(dockToUse))
 end
 
-local function setHigherBrightnessDuringDay()
+local function autoSetBrightness()
 	local ambient = hs.brightness.ambient()
 	local noBrightnessSensor = ambient == -1
 	if noBrightnessSensor then return end
@@ -42,6 +42,8 @@ local function setHigherBrightnessDuringDay()
 	wu.iMacDisplay:setBrightness(target)
 end
 
+local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
+
 local function isWorkweek()
 	local weekday = tostring(os.date("%a"))
 	return weekday ~= "Sat" and weekday ~= "Sun"
@@ -51,12 +53,15 @@ end
 -- LAYOUTS
 
 local function workLayout()
-	videoAppWatcherForSpotify:stop()
+	(u.betweenTime(22, 7) and darkenDisplay or autoSetBrightness)()
 	darkmode.autoSwitch()
 	visuals.updateHoleCover()
-	setHigherBrightnessDuringDay()
 	dockSwitcher("work")
+
+	-- prevent the automatic quitting of audio-apps to trigger starting spotify
+	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
+	videoAppWatcherForSpotify:start()
 
 	local toOpen = { "Discord", "Mimestream", isWorkweek() and "Slack" or nil }
 	u.openApps(toOpen)
@@ -69,12 +74,11 @@ local function workLayout()
 	end
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 
-	videoAppWatcherForSpotify:start()
 	print("🔲 Loaded WorkLayout")
 end
 
 local function movieLayout()
-	wu.iMacDisplay:setBrightness(0)
+	darkenDisplay()
 	darkmode.setDarkMode("dark")
 	visuals.updateHoleCover()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
@@ -82,7 +86,7 @@ local function movieLayout()
 	-- hide all files
 	hs.execute("defaults write com.apple.Finder AppleShowAllFiles false && killall Finder")
 
-	u.openApps { "YouTube", env.isAtHome and"BetterTouchTool" or nil }
+	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {
 		"Slack",
 		"Discord",
@@ -99,43 +103,30 @@ local function movieLayout()
 	print("🔲 Loaded MovieModeLayout")
 end
 
----select layout depending on number of screens, and prevent concurrent runs
-local function selectLayout()
-	local maxSecsBetweenLayoutingAttempts = 5 -- CONFIG
-	if M.isLayouting then return end
-	M.isLayouting = true
-	local layout = env.isProjector() and movieLayout or workLayout
-	layout()
-	u.runWithDelays(maxSecsBetweenLayoutingAttempts, function() M.isLayouting = false end)
-end
-
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
--- 1. Change of screen numbers
-M.caff_displayCount = hs.screen.watcher
-	.new(function()
-		u.runWithDelays(0.5, selectLayout) -- delay for recognizing screens
+---select layout depending on number of screens, and prevent concurrent runs
+local function autoSetLayout()
+	if M.isLayouting then return end
+	M.isLayouting = true
+	(env.isProjector() and movieLayout or workLayout)()
+	u.runWithDelays(3, function() M.isLayouting = false end)
+end
 
-		-- If at night switching back to one display, put iMac display to sleep
-		-- (this triggers when the projector is turned off before going to sleep)
-		if u.betweenTime(22, 7) and not env.isProjector() and not env.isAtOffice then
-			u.runWithDelays({ 0, 2, 4 }, function() wu.iMacDisplay:setBrightness(0) end)
-			u.runWithDelays(4, u.closeAllTheThings)
-		end
-	end)
-	:start()
+-- 1. Change of screen numbers
+M.displayCountWatcher = hs.screen.watcher.new(autoSetLayout):start()
 
 -- 2. Hotkey
-hs.hotkey.bind(u.hyper, "home", selectLayout)
+hs.hotkey.bind(u.hyper, "home", autoSetLayout)
 
 -- 3. Systemstart
-if u.isSystemStart() then selectLayout() end
+if u.isSystemStart() then autoSetLayout() end
 
 -- 4. Waking when not in the office
 M.caff_unlock = c.new(function(event)
 	if event == c.systemDidWake or (event == c.screensDidUnlock and not env.isAtOffice) then
-		u.runWithDelays(0.5, selectLayout)
+		u.runWithDelays(0.5, autoSetLayout)
 	end
 end):start()
 
