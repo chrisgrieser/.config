@@ -6,7 +6,6 @@ local ftToFormatter = {
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
-	sh = { "shfmt", "shellcheck" },
 	bib = { "bibtex-tidy" },
 	css = { "squeeze_blanks" }, -- since the css formatter does not support that
 }
@@ -19,6 +18,7 @@ local lspFormatFt = {
 	"toml",
 	"yaml",
 	"html",
+	"sh",
 	"python",
 	"css",
 }

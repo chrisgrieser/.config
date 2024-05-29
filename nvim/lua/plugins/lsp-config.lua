@@ -59,22 +59,40 @@ serverConfigs.bashls = {
 	settings = {
 		bashIde = {
 			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			-- disable shellcheck via LSP to avoid double-diagnostics
-			shellcheckPath = "",
-
 			shellcheckArguments = "--shell=bash",
 		},
 	},
 }
 
--- HACK use efm to use shellcheck with zsh files
-serverConfigs.efm = {
-	cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
-	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
+local extraDependencies = {
+	"shfmt", -- used by bashls for formatting
+	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 }
 
--- PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-local efmDependencies = { "shellcheck" }
+-- HACK use efm to force shellcheck to work with zsh files
+-- DOCS https://github.com/mattn/efm-langserver#example-for-configyaml
+-- DOCS https://github.com/mattn/efm-langserver/blob/master/schema.md
+serverConfigs.efm = {
+	-- cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
+	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
+	settings = {
+		rootMarkers = { ".git/" },
+		languages = {
+			sh = {
+				{
+					lintSource = "shellcheck",
+					lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
+					lintStdin = true,
+					lintFormats = {
+						"-:%l:%c: %trror: %m [SC%n]",
+						"-:%l:%c: %tarning: %m [SC%n]",
+						"-:%l:%c: %tote: %m [SC%n]",
+					},
+				},
+			},
+		},
+	},
+}
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -314,7 +332,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		mason_dependencies = vim.list_extend(efmDependencies, vim.tbl_values(lspToMasonMap)),
+		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		dependencies = {
 			"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
 			opts = { library = { plugins = false } }, -- too slow with all my plugins

@@ -34,6 +34,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	})
 end
 
+--------------------------------------------------------------------------------
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
@@ -41,6 +43,33 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- INFO this needs to be disabled for noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] =
 -- vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.myBorderStyle })
+
+--------------------------------------------------------------------------------
+
+-- :LspCapabilities
+-- no arg: all LSPs attached to current buffer
+-- one arg: name of the LSP
+vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
+	local filter = ctx.args == "" and { bufnr = 0 } or { name = ctx.args }
+	local clients = vim.lsp.get_clients(filter)
+	local clientInfo = vim.tbl_map(
+		function(client) return client.name .. "\n" .. vim.inspect(client) end,
+		clients
+	)
+	local msg = table.concat(clientInfo, "\n\n")
+	vim.notify(msg)
+end, {
+	nargs = "?",
+	complete = function()
+		local clients = vim.tbl_map(
+			function(client) return client.name end,
+			vim.lsp.get_clients()
+		)
+		table.sort(clients)
+		vim.fn.uniq(clients)
+		return clients
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS

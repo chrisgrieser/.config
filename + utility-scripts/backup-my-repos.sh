@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # INFO
 # - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive.
 # - Requires `yq`.

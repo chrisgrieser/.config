@@ -11,6 +11,10 @@
     "body": "---@type ${1:string}",
     "prefix": "@type (LuaDoc)"
   },
+  "Record (type)": {
+    "body": "---@type table<string, string>",
+    "prefix": "Record (type)"
+  },
   "count occurences in string": {
     "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
     "prefix": "count occurences in string"
