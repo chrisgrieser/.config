@@ -1,130 +1,83 @@
-<!-- LTeX: enabled=false -->
-# nvim-dr-lsp 👨‍⚕️👩‍⚕️
-<!-- LTeX: enabled=true -->
-<a href="https://dotfyle.com/plugins/chrisgrieser/nvim-dr-lsp">
-<img alt="badge" src="https://dotfyle.com/plugins/chrisgrieser/nvim-dr-lsp/shield"/></a>
+## Config structure
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 1" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat"/></a>
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 2" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
+<a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
-`D`efinitions and `R`eferences utility for the LSP.
-
-Lightweight plugin that highlights definitions and references of the word under
-the cursor and displays their count in the statusline.
-
-![Showcase](https://github.com/chrisgrieser/nvim-dr-lsp/assets/73286100/8c6600c8-b16d-434f-8bdb-47b4a9dab7cb)
-
-<!-- toc -->
-
-- [Statusline Component](#statusline-component)
-- [Installation](#installation)
-- [Highlights of definitions and references](#highlights-of-definitions-and-references)
-- [Definition and reference count in the statusbar](#definition-and-reference-count-in-the-statusbar)
-- [Similar Plugins](#similar-plugins)
-- [Credits](#credits)
-
-<!-- tocstop -->
-
-## Installation
-The plugin requires at least nvim 0.10.
-
-```lua
--- lazy.nvim
-{ "chrisgrieser/nvim-dr-lsp" },
-
--- packer
-use { "chrisgrieser/nvim-dr-lsp" }
+```bash
+├── lua
+│  ├── config # keybindings, options, …
+│  ├── funcs # utility functions & personal plugins
+│  └── plugins # plugins & their configs
+├── after
+│  └── ftplugin # filetype-specific configs
+├── queries # modifications of treesitter queries
+├── snippets
+│  ├── basic
+│  └── project-specific
+└── templates
 ```
 
-There is no `.setup` call for this plugin. Just add the components to your
-statusline.
-
-## Highlights of definitions and references
-- Definitions are under-dashed, references are under-dotted.
-- These are set up automatically for you as soon as the buffer is attached to an
-  LSP client.
-- To disable the highlights feature, set `vim.g.dr_lsp_no_highlight = true`
-  before loading the plugin.
-
-## Definition and reference count in the statusbar
-
-Definitions and references **inside** current buffer:
-
-```text
-LSP: 2D 6R
-```
-
-Definitions or references **outside** current buffer:
-
-```text
-LSP: 1(2)D 4(10)R
-```
-
-- 1 definition in the current buffer
-- 2 definitions in the workspace
-- 4 references in the current buffer
-- 10 definitions in the workspace
-
-```lua
--- adding the component to lualine.nvim
-{
-	sections = {
-		lualine_c = {
-			{ require("dr-lsp").lspCount },
-		},
-	}
-}
-```
-
-There are no built-in options to format the components, since formatting can
-already be done with most statusline plugins. With `Lualine`, for example, you can
-use the [`fmt` option](https://github.com/nvim-lualine/lualine.nvim#global-options):
-
-```lua
-lualine_c = {
-	{ 
-		require("dr-lsp").lspCount, 
-		-- remove the letters from the component
-		fmt = function(str) return str:gsub("[RD]", "") end,
-	},
-},
-```
-
-Alternatively, `require("dr-lsp").lspCountTable()` returns the `lspCount`
-information as lua table for custom formatting:
-
-```lua
-{
-	file = {
-		definitions = 1,
-		references = 4,
-	},
-	workspace = {
-		definitions = 2,
-		references = 10,
-	},
-}
-```
-
-## Similar Plugins
-- [LSP-Lens](https://github.com/VidocqH/lsp-lens.nvim)
-- [action-hints.nvim](https://github.com/roobert/action-hints.nvim)
-- [symbol-usage.nvim](https://github.com/Wansmer/symbol-usage.nvim)
-
-<!-- vale Google.FirstPerson = NO -->
-## Credits
-In my day job, I am a sociologist studying the social mechanisms underlying the
-digital economy. For my PhD project, I investigate the governance of the app
-economy and how software ecosystems manage the tension between innovation and
-compatibility. If you are interested in this subject, feel free to get in touch.
-
-- [Academic Website](https://chris-grieser.de/)
-- [Mastodon](https://pkm.social/@pseudometa)
-- [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
-- [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
-
-<a href='https://ko-fi.com/Y8Y86SQ91' target='_blank'>
-<img
-	height='36'
-	style='border:0px;height:36px;'
-	src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3'
-	border='0'
-	alt='Buy Me a Coffee at ko-fi.com'
-/></a>
+## All installed plugins
+- [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
+- [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
+- [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
+- [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
+- [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
+- [chrisgrieser/nvim-origami](https://github.com/chrisgrieser/nvim-origami)
+- [chrisgrieser/nvim-rulebook](https://github.com/chrisgrieser/nvim-rulebook)
+- [chrisgrieser/nvim-scissors](https://github.com/chrisgrieser/nvim-scissors)
+- [chrisgrieser/nvim-spider](https://github.com/chrisgrieser/nvim-spider)
+- [chrisgrieser/nvim-tinygit](https://github.com/chrisgrieser/nvim-tinygit)
+- [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)
+- [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
+- [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
+- [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
+- [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
+- [folke/noice.nvim](https://github.com/folke/noice.nvim)
+- [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
+- [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
+- [garymjr/nvim-snippets](https://github.com/garymjr/nvim-snippets)
+- [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+- [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)
+- [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
+- [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)
+- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [jbyuki/one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)
+- [jinh0/eyeliner.nvim](https://github.com/jinh0/eyeliner.nvim)
+- [kevinhwang91/nvim-hlslens](https://github.com/kevinhwang91/nvim-hlslens)
+- [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
+- [kevinhwang91/promise-async](https://github.com/kevinhwang91/promise-async)
+- [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
+- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [lewis6991/satellite.nvim](https://github.com/lewis6991/satellite.nvim)
+- [lukas-reineke/headlines.nvim](https://github.com/lukas-reineke/headlines.nvim)
+- [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+- [lvimuser/lsp-inlayhints.nvim](https://github.com/lvimuser/lsp-inlayhints.nvim)
+- [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
+- [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
+- [monkoose/neocodeium](https://github.com/monkoose/neocodeium)
+- [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
+- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
+- [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+- [nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+- [nvim-telescope/telescope-symbols.nvim](https://github.com/nvim-telescope/telescope-symbols.nvim)
+- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
+- [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
+- [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
+- [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
+- [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
+- [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
+- [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
+- [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
+- [Wansmer/sibling-swap.nvim](https://github.com/Wansmer/sibling-swap.nvim)
+- [Wansmer/symbol-usage.nvim](https://github.com/Wansmer/symbol-usage.nvim)
+- [Wansmer/treesj](https://github.com/Wansmer/treesj)
+- [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
+- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+- [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)

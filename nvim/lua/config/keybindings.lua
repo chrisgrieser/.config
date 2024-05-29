@@ -223,6 +223,15 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bdelete) end
 end, { desc = "󰽙 :close / :bdelete" })
 
+keymap({ "n", "x", "i" }, "<D-N>", function()
+	vim.ui.input({ prompt = "Scratch File Extension" }, function(ext)
+		if not ext then return end
+		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
+		vim.cmd.edit(filepath)
+		vim.cmd.write(filepath)
+	end)
+end, { desc = "󰽙 Scratch File on Desktop" })
+
 -- mac-specific
 keymap(
 	{ "n", "x" },

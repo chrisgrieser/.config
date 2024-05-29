@@ -16,7 +16,7 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	ruff_lsp = "ruff-lsp", -- python linter
+	ruff_lsp = "ruff-lsp", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
 	tsserver = "typescript-language-server",
@@ -71,7 +71,7 @@ serverConfigs.bashls = {
 serverConfigs.efm = {
 	filetypes = { "sh" },
 
-	-- cleanup useless empty folder created by efm, since we use the inline config below
+	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 
 	settings = {
