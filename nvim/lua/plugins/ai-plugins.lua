@@ -14,7 +14,7 @@ return {
 			filetypes = {
 				DressingInput = false,
 				noice = false, -- sometimes triggered in error-buffers
-				text = false, -- `pass` passwords are plaintext
+				text = false, -- `pass` passwords editing filetype is plaintext
 			},
 			silent = true,
 		},
@@ -30,7 +30,7 @@ return {
 		build = function()
 			local u = require("config.utils")
 			local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
-			local symLinkTo = os.getenv("HOME") .. "/.codeium/config.json"
+			local symLinkTo = vim.fs.normalize("~/.codeium/config.json")
 			if not u.fileExists(symLinkFrom) then
 				pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
 				vim.uv.fs_symlink(symLinkFrom, symLinkTo)

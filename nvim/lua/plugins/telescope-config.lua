@@ -54,7 +54,7 @@ local function telescopeConfig()
 				"--vimgrep",
 				"--smart-case",
 				"--trim",
-				("--ignore-file=" .. os.getenv("HOME") .. "/.config/rg/ignore"),
+				("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
@@ -100,7 +100,6 @@ local function telescopeConfig()
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 
-				-- use small layout, toggle via <D-p>
 				layout_config = smallLayout,
 				previewer = false,
 			},

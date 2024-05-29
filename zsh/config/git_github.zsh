@@ -17,9 +17,6 @@ alias undo='git reset --mixed HEAD@{1}'
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release` in my repos
 
-
-cat foo | grep "foobar"
-
 # remove untracked files & undo all changes
 alias grh='git clean -df && git reset --hard'
 

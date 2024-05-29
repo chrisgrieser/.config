@@ -1,10 +1,6 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
--- DOCS List of all server configs https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
-
---------------------------------------------------------------------------------
-
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
@@ -54,29 +50,31 @@ end
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
--- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
-serverConfigs.bashls = {
-	settings = {
-		bashIde = {
-			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			shellcheckArguments = "--shell=bash",
-		},
-	},
-}
-
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 }
 
--- HACK use efm to force shellcheck to work with zsh files
--- DOCS https://github.com/mattn/efm-langserver#example-for-configyaml
--- DOCS https://github.com/mattn/efm-langserver/blob/master/schema.md
-serverConfigs.efm = {
-	-- cmd = { "efm-langserver", "-c", vim.g.linterConfigs .. "/efm.yaml" },
-	filetypes = { "zsh", "sh" }, -- limit to filestypes needed
+-- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
+serverConfigs.bashls = {
 	settings = {
-		rootMarkers = { ".git/" },
+		bashIde = {
+			-- will work with https://github.com/bash-lsp/bash-language-server/issues/1064
+			shellcheckArguments = "--shell=bash",
+		},
+	},
+}
+
+-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
+-- since doing so with shellcheck does not work
+-- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
+serverConfigs.efm = {
+	filetypes = { "sh" },
+
+	-- cleanup useless empty folder created by efm, since we use the inline config below
+	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
+
+	settings = {
 		languages = {
 			sh = {
 				{
@@ -176,7 +174,7 @@ serverConfigs.stylelint_lsp = {
 serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 	init_options = {
-		showSuggestionsAsSnippets = true, -- so it works with LuaSnip
+		showSuggestionsAsSnippets = true, 
 	},
 }
 

@@ -15,9 +15,9 @@ end, 1)
 vim.g.mapleader = ","
 vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"|"solid"|"none"
 
-vim.g.linterConfigs = os.getenv("HOME") .. "/.config/+ linter-configs/"
+vim.g.linterConfigs = vim.fs.normalize("~/.config/+ linter-configs/")
 vim.g.syncedData = vim.env.DATA_DIR .. "/vim-data/"
-vim.g.localRepos = os.getenv("HOME") .. "/repos"
+vim.g.localRepos = vim.fs.normalize("~/repos")
 
 --------------------------------------------------------------------------------
 
