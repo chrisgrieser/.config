@@ -70,19 +70,10 @@ end):start()
 --------------------------------------------------------------------------------
 -- ZOOM
 
--- close first window, when second is open
 -- don't leave browser tab behind when opening zoom
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
 	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us") -- remove leftover tabs
-
-	u.runWithDelays(1, function()
-		local videoWin = u.app("zoom.us")
-		if not videoWin or videoWin:findWindow("Update") then return end
-		local stateWin = videoWin:findWindow("^Zoom$") or videoWin:findWindow("^Login$")
-
-		if stateWin then stateWin:close() end
-	end)
 end)
 
 --------------------------------------------------------------------------------
