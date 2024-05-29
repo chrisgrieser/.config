@@ -46,6 +46,7 @@ safeRequire("lua.weather-reminder")
 -- app-specific
 safeRequire("lua.app-specific-behavior")
 safeRequire("lua.browser")
+safeRequire("lua.spotify")
 safeRequire("lua.mastodon")
 
 -- reload function (should come last)
