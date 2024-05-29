@@ -21,7 +21,7 @@
   "mini.operators": { "branch": "main", "commit": "ccc67955124dde0ba20cdcb37ea30ff1646da574" },
   "neocodeium": { "branch": "main", "commit": "4a46f6438bcdb21c562f83036bce75c719834072" },
   "neodev.nvim": { "branch": "main", "commit": "ce9a2e8eaba5649b553529c5498acb43a6c317cd" },
-  "noice.nvim": { "branch": "main", "commit": "2f5b0e866ecef2f6163af1b2189d4a5ea18b8dfa" },
+  "noice.nvim": { "branch": "main", "commit": "69c6ad5c1f1c0777125d0275f9871d8609cb0521" },
   "nui.nvim": { "branch": "main", "commit": "b1b3dcd6ed8f355c78bad3d395ff645be5f8b6ae" },
   "nvim-autopairs": { "branch": "master", "commit": "c15de7e7981f1111642e7e53799e1211d4606cb9" },
   "nvim-chainsaw": { "branch": "main", "commit": "7765c121c709f0eef2badb06a26cf299d0f4b7be" },
