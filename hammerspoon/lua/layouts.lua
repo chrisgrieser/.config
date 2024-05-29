@@ -7,6 +7,7 @@ local visuals = require("lua.visuals")
 local wu = require("lua.window-utils")
 local app = require("lua.utils").app
 local c = hs.caffeinate.watcher
+local videoAppWatcherForSpotify = require("lua.app-specific-behavior").aw_spotify
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -50,6 +51,7 @@ end
 -- LAYOUTS
 
 local function workLayout()
+	videoAppWatcherForSpotify:stop()
 	darkmode.autoSwitch()
 	visuals.updateHoleCover()
 	setHigherBrightnessDuringDay()
@@ -67,6 +69,7 @@ local function workLayout()
 	end
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 
+	videoAppWatcherForSpotify:start()
 	print("🔲 Loaded WorkLayout")
 end
 
