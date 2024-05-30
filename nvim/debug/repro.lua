@@ -1,5 +1,5 @@
 local plugins = {
-	{},
+	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 }
 
 --------------------------------------------------------------------------------
@@ -16,3 +16,7 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup(plugins)
+
+--------------------------------------------------------------------------------
+
+vim.cmd("colorscheme tokyonight-moon")
