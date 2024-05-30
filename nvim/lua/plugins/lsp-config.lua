@@ -174,7 +174,7 @@ serverConfigs.stylelint_lsp = {
 serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 	init_options = {
-		showSuggestionsAsSnippets = true, 
+		showSuggestionsAsSnippets = true,
 	},
 }
 
@@ -322,6 +322,13 @@ serverConfigs.vale_ls = {
 
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
 	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
+
+	on_attach = function(vale, bufnr)
+		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
+		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
+		if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(vale.id) end
+		vim.defer_fn(function() vim.diagnostic.reset(nil, bufnr) end, 600)
+	end,
 }
 
 --------------------------------------------------------------------------------
