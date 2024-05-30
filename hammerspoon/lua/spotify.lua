@@ -11,7 +11,6 @@ M.aw_spotify = aw.new(function(appName, eventType)
 		not u.screenIsUnlocked()
 		or not (env.isAtHome)
 		or env.isProjector()
-		or u.betweenTime(22, 7)
 		or not (hs.fnutils.contains(env.videoAndAudioApps, appName))
 		or not (eventType == aw.launched or eventType == aw.terminated)
 	then
@@ -24,7 +23,9 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	local homebrewPrefix = env.isAtMother and "/usr/local" or "/opt/homebrew"
 	local binary = homebrewPrefix .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
-end):start()
+end)
+
+M.aw_spotify:start()
 
 --------------------------------------------------------------------------------
 return M
