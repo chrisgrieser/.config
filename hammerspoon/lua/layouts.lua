@@ -84,8 +84,8 @@ local function movieLayout()
 	visuals.updateHoleCover()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
-	-- hide all files
-	hs.execute("defaults write com.apple.Finder AppleShowAllFiles false && killall Finder")
+	-- turn off showing hidden files
+	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {

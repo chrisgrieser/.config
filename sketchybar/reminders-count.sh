@@ -12,7 +12,6 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
 	[[ "$deactivated_app" != "Reminders" && "$deactivated_app" != "BusyCal" ]] && return 0
-	osascript -e "display notification \"⭕ deactivated_app\" with title \"$deactivated_app\""
 fi
 
 # GUARD

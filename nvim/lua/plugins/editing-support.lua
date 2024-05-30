@@ -384,7 +384,7 @@ return {
 			logStatements = {
 				objectLog = {
 					-- repurposing objectLog for debugging via AppleScript notification
-					sh = [[osascript -e "display notification \"%s %s\" with title \"$%s\""]],
+					sh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 
 					-- hammerspoon
 					lua = [[print("%s %s: " .. hs.inspect(%s))]],
