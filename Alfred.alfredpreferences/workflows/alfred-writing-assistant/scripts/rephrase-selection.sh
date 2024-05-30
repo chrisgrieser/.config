@@ -28,7 +28,7 @@ the_prompt=$(echo "$static_prompt $selection" | sed -e 's/"/\\"/g')
 #───────────────────────────────────────────────────────────────────────────────
 
 # OPENAI API CALL
-# workaround, as oepnAI requires temp between 0 and 1, but ALfred's number
+# workaround, as openAI requires temp between 0 and 1, but ALfred's number
 # slider only allows full integers
 temp=$(echo "scale = 1; $temperature / 10" | bc)
 [[ $temp -lt 1 ]] && temp="0$temp" # add leading zero required by OpenAI API
@@ -39,44 +39,34 @@ response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completion
 	-H "Authorization: Bearer $apikey" \
 	-d "{ \"model\": \"$openai_model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
 
-# log the response to stderr (= visible in Alfred debug log, but not elsewhere)
-echo "OpenAI response:" >&2
-echo "$response" >&2
-
-echo "$response" >"$cache/response.json"
-	osascript -l JavaScript -e "JSON.parse($.responseText).choices[0].message.content"
-
-# GUARD
 if [[ -z "$response" ]]; then
 	echo "ERROR: Timeout, no response by OpenAI API."
-	exit 1
-elif [[ "$response" =~ '"error"' || "$response" =~ '"ERROR"' ]]; then
-	error_msg=$(echo "$response" | grep '"message"' | cut -d'"' -f4)
-	echo -n "ERROR: $error_msg"
 	exit 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # GET THE CONTENT
-# only with shell builtins to avoid jq dependency
+# via JXA to avoid `jq` dependency
 
-if [[ $(echo "$response" | wc -l) -gt 1 ]]; then
-	# unminified response -> multi-line
-	text=$(
-		echo "$response" |
-			sed -n '/"content": /,/},/p' | sed '$d' |          # for multi-line responses
-			sed -e 's/^[[:space:]]*"content": "//' -e 's/"$//' # get content-value
-	)
-else
-	# minified response -> single line
-	text=$(echo "$response" | grep --only-matching '"content":.*",' | cut -d'"' -f4)
+echo "$response" >"$cache/response.json"
+text=$(osascript -l JavaScript -e '
+	ObjC.import("stdlib");
+	const path = $.getenv("alfred_workflow_cache") + "/response.json";
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	const text = ObjC.unwrap(str);
+	const response = JSON.parse(text);
+	const content = response?.choices?.[0].message?.content || "";
+	content; // direct return
+')
+
+if [[ -z "$text" ]]; then
+	echo "ERROR: OpenAI response: $response"
+	exit 1
 fi
 
-# unescape quotes
-# shellcheck disable=2001
-text="$(echo "$text" | sed -e 's/\\"/"/g')"
-
 #───────────────────────────────────────────────────────────────────────────────
+# OUTPUT
 
 if [[ "$output_type" == "plain" ]]; then
 	echo "$text"
