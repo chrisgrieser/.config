@@ -90,10 +90,7 @@ function cycleColorscheme() {
 	const app = view.app;
 	const currentTheme = app.customCss.theme;
 	const installedThemes = Object.keys(app.customCss.themes);
-	if (installedThemes.length === 0) {
-		new Notice("Cannot cycle themes since no community theme is installed.");
-		return;
-	}
+	if (installedThemes.length === 0) return;
 	installedThemes.push(""); // "" = default theme
 
 	const indexOfNextTheme = (installedThemes.indexOf(currentTheme) + 1) % installedThemes.length;
