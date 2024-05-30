@@ -43,6 +43,9 @@ response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completion
 echo "OpenAI response:" >&2
 echo "$response" >&2
 
+echo "$response" >"$cache/response.json"
+	osascript -l JavaScript -e "JSON.parse($.responseText).choices[0].message.content"
+
 # GUARD
 if [[ -z "$response" ]]; then
 	echo "ERROR: Timeout, no response by OpenAI API."
