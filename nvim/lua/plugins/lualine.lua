@@ -67,6 +67,7 @@ end
 
 local lualineConfig = {
 	options = {
+		refresh = { statusline = 700 },
 		globalstatus = true,
 		always_divide_middle = false,
 		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`

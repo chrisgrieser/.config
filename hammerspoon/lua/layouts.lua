@@ -59,7 +59,7 @@ local function workLayout()
 	dockSwitcher("work")
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
-	videoAppWatcherForSpotify:stop()
+	videoAppWatcherForSpotify:stop() 
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
 
@@ -73,6 +73,7 @@ local function workLayout()
 		end)
 	end
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
+	hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
 
 	print("🔲 Loaded WorkLayout")
 end
