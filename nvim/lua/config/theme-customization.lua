@@ -81,6 +81,10 @@ function M.themeModifications()
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
+		-- FIX bold and italic having white color, notable in lazy window
+		overwriteHl("Bold", { bold = true })
+		overwriteHl("Italic", { italic = true })
+
 		updateHl("@keyword.return", "guifg=#fd4283")
 		if mode == "dark" then revertedTodoComments() end
 	elseif theme == "neomodern" then

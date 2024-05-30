@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end
 		local firstWord = vim.split(progress.title, " ")[1]:lower() -- shorter for statusline
 		local msg = progress.message or ""
+		if vim.startswith(msg, "file://") then msg = "" end
 
 		local text = table.concat({ icons[idx], clientName, firstWord, msg }, " ")
 		progressText = progress.kind == "end" and "" or text
