@@ -242,24 +242,23 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
--- HACK since reading external file with the method described in ltex-docs does not work
-local function getDictWords()
-	local words = {}
-	local dictPath = vim.g.linterConfigs .. "/spellfile-vim-ltex.add"
-	if not u.fileExists(dictPath) then return {} end
-	for word in io.lines(dictPath) do
-		table.insert(words, word)
-	end
-	return words
-end
-
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
-	filetypes = { "markdown" },
+	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
-			dictionary = { ["en-US"] = getDictWords() },
+			dictionary = {
+				-- HACK since reading external file with the method described in ltex-docs does not work
+				["en-US"] = (function()
+					local words = {}
+					if not u.fileExists(vim.g.dictionaryFile) then return {} end
+					for word in io.lines(vim.g.dictionaryFile) do
+						table.insert(words, word)
+					end
+					return words
+				end)(),
+			},
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
@@ -280,7 +279,7 @@ serverConfigs.ltex = {
 		},
 	},
 	on_attach = function(ltex, bufnr)
-		-- have `zg` update ltex dictionary file as well as vim's spellfile
+		-- have `zg` update ltex' dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
 			if vim.fn.mode() == "n" then
@@ -311,6 +310,8 @@ serverConfigs.typos_lsp = {
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
 serverConfigs.vale_ls = {
+	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
+
 	init_options = {
 		configPath = vim.g.linterConfigs .. "/vale/vale.ini",
 		installVale = true,
