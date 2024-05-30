@@ -25,4 +25,4 @@ update-plugins:
 # runs minimal config for debugging purposes with neovide
 debug:
 	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$$PATH ; \
-	neovide ./debug/test.lua -- -u ./debug/repro.lua &>/dev/null
+	neovide --no-tabs ./debug/test.lua -- -u ./debug/repro.lua &>/dev/null
