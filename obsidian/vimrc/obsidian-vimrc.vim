@@ -104,7 +104,7 @@ exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote
 
 " go to last change (HACK, only works to jump to the last location)
-nnoremap g, u<C-r>
+nnoremap g; u<C-r>
 
 " repeat f/t
 nnoremap ö ;
@@ -115,11 +115,11 @@ nnoremap Ö ,
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_main-search
-nnoremap go :quickSwitcher
-nnoremap gr :quickSwitcher
+noremap go :quickSwitcher
+noremap gr :quickSwitcher
 
 exmap propertySearch obcommand obsidian-another-quick-switcher:search-command_property-search
-nnoremap gp :propertySearch
+noremap gp :propertySearch
 
 " :bnext/bprev
 exmap goBack obcommand app:go-back
@@ -133,8 +133,8 @@ nnoremap ZZ :closeWindow
 
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
-nnoremap <C-w>v :splitVertical
-nnoremap <C-v> :splitVertical
+noremap <C-w>v :splitVertical
+noremap <C-v> :splitVertical
 
 " Tabs
 exmap nextTab obcommand workspace:next-tab
