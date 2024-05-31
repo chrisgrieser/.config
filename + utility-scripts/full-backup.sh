@@ -7,9 +7,9 @@ logpath_on_mac="$DATA_DIR/Backups/backups-to-external-drives.log"
 
 echo "Searching for Volume… "
 for _ in {1..100}; do
-	volume_name="$(df -h | grep -io "\s/Volumes/.*" | cut -c2-)"
+	volume_name="$(df | grep --only-matching "\s/Volumes/.*" | cut -c2-)"
 	if [[ $(echo "$volume_name" | wc -l) -gt 1 ]]; then
-		print "\033[1;33mMore than one volume connected.\033[0m"
+		print "\e[1;33mMore than one volume connected.\e[0m"
 		return 1
 	elif [[ -n "$volume_name" ]]; then
 		break
@@ -20,10 +20,10 @@ done
 echo
 
 if [[ -z "$volume_name" ]]; then
-	print "\033[1;33mTimeout, no volume found.\033[0m"
+	print "\e[1;33mTimeout, no volume found.\e[0m"
 	return 1
 else
-	print "\033[1;34mBackup volume: $volume_name\033[0m"
+	print "\e[1;34mBackup volume: $volume_name\e[0m"
 	print "\e[1;38;5;247m─────────────────────────────────────────────────────────────────────────────"
 fi
 

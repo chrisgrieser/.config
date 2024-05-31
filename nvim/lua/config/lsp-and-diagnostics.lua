@@ -1,5 +1,4 @@
 -- Add notification & writeall to renaming
--- PENDING https://github.com/neovim/neovim/pull/26616
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -8,12 +7,12 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	vim.cmd.wall()
 
+	-- count changes
 	local changes = result.changes or result.documentChanges or {}
 	local changedFiles = vim.iter(vim.tbl_keys(changes))
 		:filter(function(file) return #changes[file] > 0 end)
-		:map(function(file) return "- " .. vim.fs.basename(file) end)
+		:map(function(file) return "• " .. vim.fs.basename(file) end)
 		:totable()
-
 	local changeCount = 0
 	for _, change in pairs(changes) do
 		changeCount = changeCount + #(change.edits or change)
@@ -25,13 +24,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then
 		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
-	vim.notify(msg, vim.log.levels.INFO, {
-		on_open = function(win)
-			local bufnr = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_set_option_value("filetype", "markdown", { buf = bufnr })
-		end,
-		title = "Renamed with LSP",
-	})
+	vim.notify(msg, vim.log.levels.INFO, { title = "Renamed with LSP" })
 end
 
 --------------------------------------------------------------------------------
@@ -61,10 +54,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 end, {
 	nargs = "?",
 	complete = function()
-		local clients = vim.tbl_map(
-			function(client) return client.name end,
-			vim.lsp.get_clients()
-		)
+		local clients = vim.tbl_map(function(client) return client.name end, vim.lsp.get_clients())
 		table.sort(clients)
 		vim.fn.uniq(clients)
 		return clients
