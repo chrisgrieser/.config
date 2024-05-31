@@ -8,8 +8,14 @@ local function dapConfig()
 	local infoBg = u.getHighlightValue("DiagnosticVirtualTextInfo", "bg")
 	vim.api.nvim_set_hl(0, "DapBreak", { bg = infoBg })
 
-	vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticHint", linehl = "DapPause" })
-	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" })
+	vim.fn.sign_define(
+		"DapStopped",
+		{ text = "", texthl = "DiagnosticHint", linehl = "DapPause" }
+	)
+	vim.fn.sign_define(
+		"DapBreakpoint",
+		{ text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" }
+	)
 	vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
 
 	-- AUTO-OPEN/CLOSE THE DAP-UI
