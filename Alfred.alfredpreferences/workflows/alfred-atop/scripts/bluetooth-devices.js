@@ -19,6 +19,7 @@ const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	let deviceArr = [];
+	/** @type {Record<string, any>} */
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
 	if (allDevices.device_connected) {
