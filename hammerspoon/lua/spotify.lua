@@ -9,7 +9,7 @@ local aw = hs.application.watcher
 M.aw_spotify = aw.new(function(appName, eventType)
 	if
 		not u.screenIsUnlocked()
-		or not (env.isAtHome)
+		or not env.isAtHome
 		or env.isProjector()
 		or not (hs.fnutils.contains(env.videoAndAudioApps, appName))
 		or not (eventType == aw.launched or eventType == aw.terminated)

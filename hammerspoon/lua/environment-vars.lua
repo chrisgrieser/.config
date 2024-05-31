@@ -12,14 +12,14 @@ M.transBgApps = {
 
 M.videoAndAudioApps = {
 	"IINA",
-	"Animeflix",
-	"YouTube",
 	"zoom.us",
 	"FaceTime",
 	"Netflix",
+	"Animeflix",
+	"YouTube",
 	"Prime Video",
 	"Jellyfin",
-	"Tageschau",
+	"Tagesschau",
 	"Crunchyroll",
 	"TikTok",
 	"Twitch",

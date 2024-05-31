@@ -12,6 +12,7 @@ local darkThemes = {
 	"Tinacious Design (Dark)",
 }
 local lightThemes = {
+	"Tomorrow (light) (terminal.sexy)",
 	"seoulbones_light",
 	"Atelier Lakeside Light (base16)",
 	"Solar Flare Light (base16)",
