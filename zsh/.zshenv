@@ -12,6 +12,7 @@ export EDITOR="nvim"
 # workaround since pandoc does not allow default data-dirs
 function pandoc() { command pandoc --data-dir="$HOME/.config/pandoc" "$@"; }
 
-export PASSWORD_STORE_CLIP_TIME=60 # set here to be accessible by the Alfred workflow for `pass`
+# `pass` config set here to be accessible in the Terminal as well as Alfred
+export PASSWORD_STORE_CLIP_TIME=60 
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
