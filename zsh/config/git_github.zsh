@@ -7,18 +7,18 @@ alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 
 alias cherry='git cherry-pick'
-alias reset='git reset'
+alias reflog='git reflog'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
-alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
-alias undo='git reset --mixed HEAD@{1}'
 
+alias reset='git reset'
+alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
+
+alias undo='git reset --mixed HEAD@{1}'
+alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias pr='gh pr create --web --fill'
 alias rel='make --silent release' # personal convention to have `make release` in my repos
-
-# remove untracked files & undo all changes
-alias grh='git clean -df && git reset --hard'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -61,7 +61,7 @@ function ga {
 	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
 	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
 	local style
-	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "--dark" || echo "--light")
+	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "--dark" || echo "--light")
 	selection=$(
 		eval "$git_status_cmd" | fzf \
 			--ansi --nth=2.. --track \
@@ -218,7 +218,7 @@ function gli {
 
 	local hash key_pressed selected style
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
-	style=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo --dark || echo --light)
+	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)
 
 	selected=$(
 		_gitlog --no-graph --color=always |
@@ -264,7 +264,7 @@ function delete_forks_with_no_open_prs {
 	my_forks=$(gh repo list --fork | cut -f1)
 	while read -r pr; do
 		my_forks=$(echo "$my_forks" | grep -v "$pr")
-	done <<<"$my_prs"
+	done <<< "$my_prs"
 
 	forks_with_no_prs="$my_forks"
 	[[ -z "$forks_with_no_prs" ]] && print "\e[1;33mNo forks to delete.\e[0m" && return 0
@@ -286,8 +286,8 @@ function pickaxe {
 # search for [g]it [d]eleted [f]ile
 function gdf {
 	# GUARD
-	if ! command -v fzf &>/dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v bat &>/dev/null; then echo "bat not installed." && return 1; fi
+	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
+	if ! command -v bat &> /dev/null; then echo "bat not installed." && return 1; fi
 	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
 
