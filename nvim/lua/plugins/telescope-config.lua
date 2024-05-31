@@ -62,10 +62,10 @@ local function telescopeConfig()
 				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
 				"%.zip", "%.pdf",
 				-- special directories
-				"%.git/", "node_modules",
+				"%.git/", 
 				"%.DS_Store$", "%.app/", -- macOS apps
 				".local", "homebrew", -- nvim runtime
-				"typings", ".venv", -- python
+				".venv", -- python
 				"EmmyLua.spoon", -- Hammerspoon
 			},
 		},
@@ -229,6 +229,7 @@ local function telescopeConfig()
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title
 				symbol_width = 30,
+				file_ignore_patterns = { "node_modules", "typings" },
 			},
 			spell_suggest = {
 				initial_mode = "normal",
