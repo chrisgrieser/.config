@@ -23,6 +23,7 @@ nnoremap x "_dl
 vnoremap p P
 
 " paste url into selection/cword
+" macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 noremap <M-k> :pasteinto
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -513,12 +514,9 @@ nnoremap ,oa :toggleAiCompletion
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS
 
+" macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 " insert mode: accept suggestion
 " normal mode: format
-" HACK `<C-ü>` remapped to cmd-s via Karabiner, since cmd-s (<M-s>) does not
-" trigger reliably in normal mode.
-" INFO not mapping via Obsidian hotkeys, so we have have the distinction between
-" normal and insert mode, like in nvim
 exmap acceptGhostText obcommand copilot-auto-completion:accept
 inoremap <M-s> :acceptGhostText
 
