@@ -9,6 +9,15 @@ local function cmpconfig()
 		view = {
 			entries = { follow_cursor = true },
 		},
+		performance = {
+			-- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
+			debounce = 30,
+			throttle = 15,
+			fetching_timeout = 300,
+			confirm_resolve_timeout = 40,
+			async_budget = 0.5,
+			max_view_entries = 100,
+		},
 		window = {
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
