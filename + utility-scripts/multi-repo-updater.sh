@@ -49,4 +49,4 @@ while read -r repo; do
 	git add --all && git commit -m "$commit_msg" && git push
 	cd ..
 	rm -rf "$repo"
-done <<<"$repos_to_update"
+done <<< "$repos_to_update"

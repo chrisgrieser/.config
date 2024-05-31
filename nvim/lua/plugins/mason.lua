@@ -45,6 +45,9 @@ return {
 			table.sort(pluginDeps)
 			vim.fn.uniq(pluginDeps)
 
+			-- GUARD errors in lazy-plugin-specs from causing all packages to be uninstalled
+			if #pluginDeps < 10 then return end
+
 			require("mason-tool-installer").setup {
 				ensure_installed = pluginDeps,
 				run_on_start = false, -- manually, since otherwise not working with lazy-loading

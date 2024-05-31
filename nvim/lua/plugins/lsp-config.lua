@@ -56,8 +56,10 @@ local extraDependencies = {
 serverConfigs.bashls = {
 	settings = {
 		bashIde = {
+			shellcheckPath = "", -- disable while using efm
 			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 			shellcheckArguments = "--shell=bash",
+			shfmt = { spaceRedirects = true },
 		},
 	},
 }
@@ -182,7 +184,7 @@ serverConfigs.emmet_language_server = {
 serverConfigs.tsserver = {
 	settings = {
 		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
-		-- (Biome works only on single-file and so already check for unintended re-declarations.)
+		-- (biome works only on single-file and so already check for unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 
 		typescript = {
@@ -196,7 +198,7 @@ serverConfigs.tsserver = {
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
-			-- even without formatting still relevant for `organizeImports`
+			-- even w/o formatting still relevant for `organizeImports` code action
 			format = { convertTabsToSpaces = false },
 		},
 
