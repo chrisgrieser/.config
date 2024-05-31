@@ -1,6 +1,10 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		init = function()
+			-- so mason packages are available before loading mason itself
+			vim.env.PATH = vim.env.PATH .. ":" .. vim.fn.stdpath("data") .. "/mason/bin"
+		end,
 		external_dependencies = { "node", "python3.12", "yq" },
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },

@@ -5,7 +5,6 @@ local u = require("config.utils")
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 local lspToMasonMap = {
-	autotools_ls = "autotools-language-server", -- LSP for Makefiles
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json linter/formatter
@@ -24,8 +23,6 @@ local lspToMasonMap = {
 	vale_ls = "vale-ls", -- natural language linter, used for markdown
 	yamlls = "yaml-language-server",
 }
-
---------------------------------------------------------------------------------
 
 ---@class (exact) lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
 ---@field autostart? boolean
@@ -59,14 +56,14 @@ local extraDependencies = {
 serverConfigs.bashls = {
 	settings = {
 		bashIde = {
-			-- will work with https://github.com/bash-lsp/bash-language-server/issues/1064
+			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 			shellcheckArguments = "--shell=bash",
 		},
 	},
 }
 
 -- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
--- since doing so with shellcheck does not work
+-- since doing so with bash-lsp does not work
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 serverConfigs.efm = {
 	filetypes = { "sh" },
