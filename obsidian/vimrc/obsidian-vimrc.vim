@@ -22,6 +22,9 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
+" paste url into selection/cword
+noremap <M-k> :pasteinto
+
 "───────────────────────────────────────────────────────────────────────────────
 
 " Copy Path segments
@@ -517,7 +520,7 @@ nnoremap ,oa :toggleAiCompletion
 " INFO not mapping via Obsidian hotkeys, so we have have the distinction between
 " normal and insert mode, like in nvim
 exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <C-ü> :acceptGhostText
+inoremap <M-s> :acceptGhostText
 
 exmap lint obcommand obsidian-linter:lint-file
-nnoremap <C-ü> :lint
+nnoremap <M-s> :lint

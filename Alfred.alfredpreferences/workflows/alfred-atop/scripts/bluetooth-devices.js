@@ -9,7 +9,6 @@ else if (rerunSecs > 5) rerunSecs = 5;
 
 const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) => t.trim());
 
-//──────────────────────────────────────────────────────────────────────────────
 // TODO assess whether `ObjC.import("IOBluetooth")` is useful
 // https://github.com/bosha/alfred-blueman-workflow/blob/master/src/bt_manager.jxa
 
@@ -19,7 +18,6 @@ const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	let deviceArr = [];
-	/** @type {Record<string, any>} */
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
 	if (allDevices.device_connected) {
@@ -58,6 +56,7 @@ function run() {
 
 	// INFO `ioreg` only includes Apple keyboards, mice, and trackpads, but does
 	// have battery data for them which is missing from the `system_profiler` output.
+	/** @type {Record<string, any>} */
 	const applePeriphery = {};
 	let applePeriData = app.doShellScript(
 		"ioreg -rak BatteryPercent | sed 's/data>/string>/' | plutil -convert json - -o - || true",
@@ -83,13 +82,14 @@ function run() {
 		const batteryLow = batteryLevel < 20 ? "⚠️" : "";
 		const battery = batteryLevel > -1 ? `${batteryLow}${batteryLevel}%` : "";
 		const connected = device.connected ? "🟢 " : "🔴 ";
-		const distance = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
+		const rssi = device.device_rssi ? ` rssi: ${device.device_rssi}` : "";
 		const name = device.device_name;
 		if (excludedDevices.includes(name)) return {};
 		const type = device.device_minorType;
 
 		// icon
 		let category = "";
+		/** @type {Record<string, string>} */
 		const typeIcons = {
 			keyboard: "⌨️",
 			mouse: "🖱️",
@@ -99,11 +99,11 @@ function run() {
 			headset: "🎧",
 		};
 		if (type) category = typeIcons[type.toLowerCase()];
-		else if (name.toLowerCase().includes("phone")) category = "📱";
+		else if (name.match(/tablet|ipad|phone/i)) category = "📱";
 
 		return {
 			title: `${name} ${category}`,
-			subtitle: connected + battery + distance,
+			subtitle: connected + battery + rssi,
 			arg: device.device_address,
 		};
 	});
