@@ -161,7 +161,7 @@
     "prefix": "notify (var)"
   },
   "null (pipe)": {
-    "body": "&>/dev/null",
+    "body": "&> /dev/null",
     "prefix": "null (pipe)"
   },
   "osascript jxa (run script)": {

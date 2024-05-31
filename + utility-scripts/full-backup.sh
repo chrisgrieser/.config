@@ -34,7 +34,7 @@ device_name="$(scutil --get ComputerName)"
 backup_dest="$volume_name/Backup_$device_name"
 mkdir -p "$backup_dest"
 cd "$backup_dest" || return 1
-echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >>"$logpath_on_mac"
+echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >> "$logpath_on_mac"
 
 #───────────────────────────────────────────────────────────────────────────────
 # HELPER FUNCTION
@@ -76,15 +76,15 @@ while read -r line; do
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 	basename="$(basename "$repo_path")"
 	backup "$repo_path/" "./perma-repos/$basename"
-done <"$HOME/.config/perma-repos.csv"
+done < "$HOME/.config/perma-repos.csv"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
 
 echo
 if [[ -z "$errors" ]]; then
-	echo "completed: $(date '+%H:%M')" >>"$logpath_on_mac"
-	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >>"$backup_dest/last_backup.log"
+	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
+	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> "$backup_dest/last_backup.log"
 	print "\033[1;32mBackup on $volume_name completed.\033[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "✅ complete" --sound "Blow"
 else

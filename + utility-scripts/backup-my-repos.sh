@@ -16,7 +16,7 @@ max_number_of_bkps=4
 
 # GUARD prerequisites
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-if ! command -v yq &>/dev/null; then printf "\e[1;33myq not installed.\e[0m" && return 1; fi
+if ! command -v yq &> /dev/null; then printf "\e[1;33myq not installed.\e[0m" && return 1; fi
 mkdir -p "$backup_location/temp"
 cd "$backup_location/temp" || return 1
 

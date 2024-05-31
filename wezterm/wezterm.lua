@@ -3,21 +3,21 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"cyberpunk",
 	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
 	"ChallengerDeep",
-	"cyberpunk",
 	"Afterglow (Gogh)",
 	"duckbones",
 	"Tinacious Design (Dark)",
 }
 local lightThemes = {
-	"Ivory Light (terminal.sexy)",
-	"Solar Flare Light (base16)",
+	"seoulbones_light",
 	"Atelier Lakeside Light (base16)",
+	"Solar Flare Light (base16)",
+	"Ivory Light (terminal.sexy)",
 	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
-	"seoulbones_light",
 }
 
 local lightOpacity = 0.94
