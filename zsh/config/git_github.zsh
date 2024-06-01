@@ -18,7 +18,7 @@ alias grh='git clean -df && git reset --hard' # remove untracked files & undo al
 alias undo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias pr='gh pr create --web --fill'
-alias rel='make --silent release' # personal convention to have `make release` in my repos
+alias rel='just release' # `just` task runner
 
 #───────────────────────────────────────────────────────────────────────────────
 

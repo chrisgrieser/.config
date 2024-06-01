@@ -18,6 +18,7 @@ end
 
 --------------------------------------------------------------------------------
 
+--- open the current workflow for the Alfred app
 function M.openAlfredPref()
 	local bufPath = vim.api.nvim_buf_get_name(0)
 	local workflowId = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
@@ -70,10 +71,10 @@ function M.openAtRegex101()
 	vim.ui.open(url)
 end
 
----If recipe ends with `_quickfix`, populates the quickfix list.
----@param first any
+---If recipe ends with `_quickfix`, populates the quickfix list, otherwise post
+---to notification (`vim.notify`).
+---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
-	---@param recipe? string
 	local function run(recipe)
 		if not recipe then return end
 		if vim.endswith(recipe, "_quickfix") then
@@ -102,7 +103,7 @@ function M.justRecipe(first)
 	end
 
 	vim.ui.select(recipes, {
-		prompt = "  Just recipes",
+		prompt = " Just recipes",
 		kind = "just-recipes",
 		format_item = function(recipe)
 			if vim.endswith(recipe, "_quickfix") then recipe = recipe .. " (↪ quickfix)" end

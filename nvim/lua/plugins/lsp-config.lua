@@ -70,6 +70,10 @@ serverConfigs.bashls = {
 serverConfigs.efm = {
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
+	init_options = { documentFormatting = true },
+	root_dir = function ()
+		return vim.fs.root({"Justfile"})
+	end,
 
 	settings = {
 		languages = {
@@ -88,12 +92,10 @@ serverConfigs.efm = {
 			just = {
 				{
 					lintSource = "just",
-					lintCommand = "just --unstable --fmt --check",
+					lintCommand = 'just --summary --justfile="${INPUT}"',
 					lintStdin = false,
 					lintFormats = {
-						"-:%l:%c: %trror: %m [SC%n]",
-						"-:%l:%c: %tarning: %m [SC%n]",
-						"-:%l:%c: %tote: %m [SC%n]",
+						"%trror: %m",
 					},
 				},
 			},
