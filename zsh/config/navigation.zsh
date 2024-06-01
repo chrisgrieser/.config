@@ -36,7 +36,7 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 # FINDER window
 function ..f {
-	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)' 2>/dev/null)
+	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)' 2> /dev/null)
 	if [[ ! -d "$finder_dir" ]]; then
 		print "\e[1;33mNo Finder window found.\e[0m"
 		return 1
@@ -92,7 +92,9 @@ _gr() {
 
 	# turn lines into array
 	local -a folders=()
-	while IFS='' read -r dir; do folders+=("$dir"); done < <(dirs -p | sed '1d')
+	while IFS='' read -r dir; do
+		folders+=("$dir")
+	done < <(dirs -p | sed '1d')
 
 	local expl && _description -V recent-folders expl 'Recent Folders'
 	compadd "${expl[@]}" -Q -- "${folders[@]}"
