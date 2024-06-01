@@ -28,17 +28,17 @@
     },
     "search" : {
       "backgroundSelected" : "#0080ADFF",
-      "paddingHorizontal" : 8,
+      "paddingHorizontal" : 7,
       "spacing" : 3,
       "text" : {
-        "size" : 45,
+        "size" : 57,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
       "roundness" : 9,
-      "paddingVertical" : 8
+      "paddingVertical" : 5
     },
     "window" : {
       "color" : "#454545FF",
