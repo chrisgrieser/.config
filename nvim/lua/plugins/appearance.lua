@@ -2,6 +2,16 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	-- PENDING https://github.com/nvim-tree/nvim-web-devicons/pull/468
+	{ -- Nerdfont filetype icons
+		"nvim-tree/nvim-web-devicons",
+		opts = {
+			override_by_filename = {
+				justfile = { icon = "", color = "#7f7f7f", name = "Justfile" },
+				[".justfile"] = { icon = "", color = "#7f7f7f", name = "Justfile" },
+			},
+		},
+	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",

@@ -5,6 +5,7 @@ set -e # safe mode
 
 # CONFIG
 github_username="chrisgrieser"
+# repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="alfred|shimmering-obsidian|gitfred"
 commit_msg="build: improved release action"
 

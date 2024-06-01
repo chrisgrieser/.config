@@ -11,6 +11,10 @@
 				"path": "./all.json"
 			},
 			{
+				"language": ["just"],
+				"path": "./basic/justfile.json"
+			},
+			{
 				"language": ["markdown"],
 				"path": "./basic/markdown.json"
 			},

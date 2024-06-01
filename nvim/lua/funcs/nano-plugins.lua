@@ -72,9 +72,12 @@ function M.openAtRegex101()
 end
 
 ---If recipe ends with `_quickfix`, populates the quickfix list, otherwise post
----to notification (`vim.notify`).
+---to notification via `vim.notify`.
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
+	-- CONFIG
+	local ignore = "release" -- since it requires user input
+
 	local function run(recipe)
 		if not recipe then return end
 		if vim.endswith(recipe, "_quickfix") then
@@ -91,12 +94,12 @@ function M.justRecipe(first)
 	end
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
-	vim.notify("⭕ result.stdout: " .. tostring(result.stdout))
 	if result.code ~= 0 then
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local recipes = vim.split(result.stdout, " ")
+	local recipes = vim.split(vim.trim(result.stdout), " ")
+	recipes = vim.tbl_filter(function(r) return r ~= ignore end, recipes)
 
 	if first then
 		run(recipes[1])

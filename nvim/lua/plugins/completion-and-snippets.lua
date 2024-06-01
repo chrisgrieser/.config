@@ -194,13 +194,23 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"garymjr/nvim-snippets",
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp",
-			{ "garymjr/nvim-snippets", opts = true }, -- custom snippets
 		},
 		config = cmpconfig,
+	},
+	{ -- custom snippets
+		"garymjr/nvim-snippets",
+		opts = true,
+		init = function()
+			-- copy system clipboard to vim, required for snippets with `$CLIPBOARD`
+			vim.api.nvim_create_autocmd("FocusGained", {
+				callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
+			})
+		end,
 	},
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
