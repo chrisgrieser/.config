@@ -17,7 +17,7 @@
 └── templates
 ```
 
-## All installed plugins
+##  All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)

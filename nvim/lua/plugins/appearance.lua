@@ -41,7 +41,7 @@ return {
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
-				marks = { enable = false }, -- do not create mark mappings
+				marks = { enable = false }, -- prevents not creating mark mappings
 				quickfix = { enable = true },
 			},
 		},
@@ -82,12 +82,11 @@ return {
 			markdown = {
 				fat_headlines = false,
 				bullets = false,
-				dash_string = "─",
 			},
 			yaml = { codeblock_highlight = "CodeBlock" },
 		},
 		config = function(_, opts)
-			-- add background to injections, see `ftplugn/yaml/injections.scm`
+			-- add background to injections, see `ftplugin/yaml/injections.scm`
 			opts.yaml.query = vim.treesitter.query.parse(
 				"yaml",
 				[[
@@ -119,10 +118,10 @@ return {
 					update_insert = false,
 				},
 				pickers = {
-					ccc.picker.hex_long, -- to not pick up #123 as hex code
+					ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					ccc.picker.ansi_escape { meaning1 = "bright" },
+					ccc.picker.ansi_escape(),
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
