@@ -147,13 +147,18 @@ for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
 end
 
--- MAKE
-keymap("n", "<leader>m", "<cmd>update | lmake<CR>", { desc = " Make" })
+-- JUST
+keymap(
+	"n",
+	"<leader>m",
+	function() require("funcs.nano-plugins").justRecipe("first") end,
+	{ desc = " 1st Just recipe" }
+)
 keymap(
 	"n",
 	"<leader>M",
-	function() require("funcs.nano-plugins").selectJustRecipe() end,
-	{ desc = " Select Make" }
+	function() require("funcs.nano-plugins").justRecipe() end,
+	{ desc = " Just recipes" }
 )
 
 --------------------------------------------------------------------------------

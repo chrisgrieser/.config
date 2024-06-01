@@ -16,10 +16,6 @@ local function notify(title, msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
 end
 
----@nodiscard
----@param path string
-local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
-
 --------------------------------------------------------------------------------
 
 function M.openAlfredPref()
@@ -74,37 +70,45 @@ function M.openAtRegex101()
 	vim.ui.open(url)
 end
 
-function M.selectJustRecipe()
-	-- GUARD
-	local justFile = vim.fs.find(
-		function(name) return name:lower():find("^%.?justfile$") ~= nil end,
-		{ type = "file" }
-	)[1]
-	if not justFile then
-		notify("", "Justfile not found", "warn")
+---If recipe ends with `_quickfix`, populates the quickfix list.
+---@param first any
+function M.justRecipe(first)
+	---@param recipe? string
+	local function run(recipe)
+		if not recipe then return end
+		if vim.endswith(recipe, "_quickfix") then
+			vim.opt_local.makeprg = "just"
+			vim.cmd.make(recipe)
+			pcall(vim.cmd.cfirst)
+		else
+			local result = vim.system({ "just", recipe }):wait()
+			local out = vim.trim((result.stdout or "") .. (result.stderr or ""))
+			local severity = result.code == 0 and "INFO" or "ERROR"
+			vim.notify(out, vim.log.levels[severity], { title = "Just" })
+		end
+		vim.cmd.checktime() -- reload buffer
+	end
+
+	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
+	if result.code ~= 0 then
+		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local summary = vim.system({ "just", "--summary", "--unsorted" }):wait().stdout or ""
-	local recipes = vim.split(summary, " ")
+	local recipes = vim.split(result.stdout, " ")
+
+	if first then
+		run(recipes[1])
+		return
+	end
 
 	vim.ui.select(recipes, {
-		prompt = "  just recipes",
+		prompt = "  Just recipes",
 		kind = "just-recipes",
 		format_item = function(recipe)
 			if vim.endswith(recipe, "_quickfix") then recipe = recipe .. " (↪ quickfix)" end
 			return recipe
 		end,
-	}, function(recipe)
-		if not recipe then return end
-		vim.cmd.update { mods = { silent = true } }
-		if vim.endswith(recipe, "_quickfix") then
-			vim.cmd.make(recipe) -- populate global quickfix list if recipe ends with `_quickfix`
-			pcall(vim.cmd.cfirst)
-		else
-			vim.cmd.lmake(recipe)
-		end
-		vim.cmd.checktime() -- reload buffer
-	end)
+	}, run)
 end
 
 -- Increment or toggle if cursorword is true/false. Simplified implementation

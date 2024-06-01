@@ -35,8 +35,6 @@ opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
-opt.makeprg = "just"
-
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
