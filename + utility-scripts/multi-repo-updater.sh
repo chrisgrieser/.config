@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
-# set -e
+set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
@@ -20,16 +20,16 @@ repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" 
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
-print "\e[1;34mCommit message:\e[0m"
-echo "$commit_msg"
-echo
 print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update"
+echo
+print "\e[1;34mCommit message:\e[0m"
+echo "$commit_msg"
 echo
 print "\e[1;34mActions:\e[0m"
 declare -f actions_in_repo | bat --language=sh
 echo
-print "\e[1;34mProceed? (y/n)\e[0m"
+print "\e[1;35mProceed? (y/n)\e[0m"
 read -rk pressed
 if [[ "$pressed" != "y" ]]; then
 	echo "Aborted."

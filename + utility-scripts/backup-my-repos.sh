@@ -1,34 +1,27 @@
 #!/usr/bin/env zsh
+export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 # INFO
 # - Backup all PUBLIC NON-FORK repos owned by the specified github user as zip archive.
 # - Requires `yq`.
 # - Due to github API restrictions, only a maximum of 100 repos are downloaded.
-#   (TODO use `gh` instead to work around restrictions & `yq` dependency?)
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-github_username="chrisgrieser"
-repo_to_ignore=".config" # excluded, since dotfiles are already existing locally
 backup_location="$DATA_DIR/Backups/My Repos"
 max_number_of_bkps=4
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD prerequisites
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-if ! command -v yq &> /dev/null; then printf "\e[1;33myq not installed.\e[0m" && return 1; fi
-mkdir -p "$backup_location/temp"
-cd "$backup_location/temp" || return 1
-
-#───────────────────────────────────────────────────────────────────────────────
+# get all repos
+repos=$(gh repo list --limit=200 --no-archived --source --json=" nameWithOwner" --jq=".[].nameWithOwner")
+repos_count=$(echo "$repos" | wc -l | tr -d " ")
+if [[ repos_count -ge 100 ]]; then
+	print "\e[1;33mMore than 100 repos. Unclear whether GitHub API allows for so many listings, so need to manually check that all repos are included.\e[0m"
+fi
 
 # download repos
-apiURL="https://api.github.com/users/${github_username}/repos?per_page=100"
-repos=$(curl -s "$apiURL" |
-	yq "filter(.fork == false) | filter(.archived == false) | filter(.name != \"$repo_to_ignore\") | map(.full_name)" --prettyPrint |
-	cut -c3-)
-repos_count=$(echo "$repos" | wc -l | tr -d " ")
-
+mkdir -p "$backup_location/temp"
+cd "$backup_location/temp" || return 1
 i=0
 echo "$repos" | while read -r repo; do
 	i=$((i + 1))
@@ -39,9 +32,6 @@ done
 
 # archive them
 isodate=$(date +%Y-%m-%d)
-if [[ repos_count -ge 100 ]]; then
-	print "\e[1;33mGitHub API only allows up to 100 repos to be downloaded, backup is therefore incomplete.\e[0m"
-fi
 archive_name="${repos_count} Repos – ${isodate}.zip"
 zip -r --quiet "../$archive_name" . || return 1
 
