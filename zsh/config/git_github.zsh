@@ -5,18 +5,17 @@ alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
+alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
 alias reflog='git reflog'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
-
 alias reset='git reset'
-alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
-
 alias undo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
+
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
 
@@ -100,10 +99,12 @@ function _stageAllIfNoStagedChanges {
 # - if the is clean after committing, pull-push
 function gc {
 	_stageAllIfNoStagedChanges
+
+	# without arg, just open in editor
 	if [[ -z "$1" ]]; then
 		git commit
 		return
-	fi # without arg, just open in editor
+	fi
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
@@ -120,10 +121,11 @@ function gc {
 
 function gC {
 	_stageAllIfNoStagedChanges
+	# without arg, just open in editor
 	if [[ -z "$1" ]]; then
 		git commit
 		return
-	fi # without arg, just open in editor
+	fi
 
 	printf "\e[1;34mCommit: \e[0m"
 	git commit -m "$@" || return 1
