@@ -74,41 +74,36 @@ function M.openAtRegex101()
 	vim.ui.open(url)
 end
 
--- simple task selector from makefile
-function M.selectMake()
+function M.selectJustRecipe()
 	-- GUARD
-	local makefile = vim.uv.cwd() .. "/Makefile"
-	if not fileExists(makefile) then
-		notify("", "Makefile not found", "warn")
+	local justFile = vim.fs.find(
+		function(name) return name:lower():find("^%.?justfile$") ~= nil end,
+		{ type = "file" }
+	)[1]
+	if not justFile then
+		notify("", "Justfile not found", "warn")
 		return
 	end
-
-	local recipes = {}
-	for line in io.lines(makefile) do
-		local recipe = line:match("^[%w_-]+")
-		local isRelease = line:find("^release") -- release script require input, which only works in terminal
-		if recipe and not isRelease then
-			table.insert(recipes, recipe)
-		end
-	end
+	local summary = vim.system({ "just", "--summary", "--unsorted" }):wait().stdout or ""
+	local recipes = vim.split(summary, " ")
 
 	vim.ui.select(recipes, {
-		prompt = " make",
-		kind = "make-selector",
+		prompt = "  just recipes",
+		kind = "just-recipes",
 		format_item = function(recipe)
-			if recipe:find("tsc") then recipe = recipe .. " (↪ quickfix)" end
+			if vim.endswith(recipe, "_quickfix") then recipe = recipe .. " (↪ quickfix)" end
 			return recipe
 		end,
-	}, function(selection)
-		if not selection then return end
-		vim.cmd.update()
-		if selection:find("tsc") then
-			vim.cmd.make(selection) -- populate global quickfix list if check with `tsc`
+	}, function(recipe)
+		if not recipe then return end
+		vim.cmd.update { mods = { silent = true } }
+		if vim.endswith(recipe, "_quickfix") then
+			vim.cmd.make(recipe) -- populate global quickfix list if recipe ends with `_quickfix`
 			pcall(vim.cmd.cfirst)
 		else
-			vim.cmd.lmake(selection)
+			vim.cmd.lmake(recipe)
 		end
-		vim.cmd.checktime() -- reload buffer in case file is formatter
+		vim.cmd.checktime() -- reload buffer
 	end)
 end
 

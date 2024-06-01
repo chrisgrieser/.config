@@ -8,7 +8,7 @@ count-lines:
 #───────────────────────────────────────────────────────────────────────────────
 # updates README.md with current list of installed plugins
 
-nvim_readme := "$HOME/.config/nvim/README.md"
+vim_readme := "$HOME/.config/nvim/README.md"
 last_line_before_plugins := "## All installed plugins"
 location_of_installed_plugins := "$HOME/.local/share/nvim/lazy"
 

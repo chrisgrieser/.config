@@ -152,7 +152,7 @@ keymap("n", "<leader>m", "<cmd>update | lmake<CR>", { desc = " Make" })
 keymap(
 	"n",
 	"<leader>M",
-	function() require("funcs.nano-plugins").selectMake() end,
+	function() require("funcs.nano-plugins").selectJustRecipe() end,
 	{ desc = " Select Make" }
 )
 
