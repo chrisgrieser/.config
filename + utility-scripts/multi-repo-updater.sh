@@ -9,38 +9,39 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 commit_msg="build: switch to \`just\` as task runner"
 
 function actions_in_repo {
-	sed -i -e 's/Makefile/Justfile/' .rsync-exclude
-	rm Makefile
-	cp "$HOME/Desktop/Justfile" .
+	echo "foobar"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" \
 	--jq=".[].name | select(test(\"$repo_names\"))")
+repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
-print "\e[1;34mCommit Message:\e[0m"
+print "\e[1;34mCommit message:\e[0m"
 echo "$commit_msg"
 echo
-print "\e[1;34mRepos to Update:\e[0m"
+print "\e[1;34mRepos to update ($repo_count):\e[0m"
 echo "$repos_to_update"
 echo
-print "\e[1;34mAction:\e[0m"
+print "\e[1;34mActions:\e[0m"
 declare -f actions_in_repo
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
-if [[ "$(read -rks)" != "y" ]]; then
+read -rks pressed
+if [[ "$pressed" != "y" ]]; then
 	echo "Aborted."
 	return 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # clone each repo, do the replacements, and git add/commit/push
+i=1
 while read -r repo; do
 	echo
-	echo "-----------------------------------------------------"
-	print "\e[1;34mUpdating $repo…\e[0m"
+	echo "──────────────────────────────────────────────────────────────"
+	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
 	git clone --depth=2 "git@github.com:$github_username/$repo"
 	cd "$repo" || return 1
 
@@ -49,4 +50,5 @@ while read -r repo; do
 	git add --all && git commit -m "$commit_msg" && git push
 	cd ..
 	rm -rf "$repo"
+	((i++))
 done <<< "$repos_to_update"
