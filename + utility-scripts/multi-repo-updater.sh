@@ -7,11 +7,10 @@ if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" &&
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
-commit_msg="ci: remove stylua action & update PR template"
+commit_msg="ci: prevent unnecessary panvimdoc runs"
 
 function actions_in_repo {
-	[[ -e .github/workflows/stylua.yml ]] && rm .github/workflows/stylua.yml
-	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/PULL_REQUEST_TEMPLATE.md
+	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -31,7 +30,7 @@ print "\e[1;34mActions:\e[0m"
 declare -f actions_in_repo
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
-read -rks pressed
+read -rk pressed
 if [[ "$pressed" != "y" ]]; then
 	echo "Aborted."
 	return 1
@@ -49,7 +48,9 @@ while read -r repo; do
 
 	actions_in_repo
 
-	git add --all && git commit -m "$commit_msg" && git push
+	git add --all && echo &&
+		git commit -m "$commit_msg" && echo &&
+		git push
 	cd ..
 	rm -rf "$repo"
 	((i++))

@@ -16,7 +16,7 @@
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 27,
+        "size" : 26,
         "colorSelected" : "#590907FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
@@ -31,14 +31,14 @@
       "paddingHorizontal" : 8,
       "spacing" : 3,
       "text" : {
-        "size" : 61,
+        "size" : 45,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
       "roundness" : 9,
-      "paddingVertical" : 6
+      "paddingVertical" : 8
     },
     "window" : {
       "color" : "#454545FF",
