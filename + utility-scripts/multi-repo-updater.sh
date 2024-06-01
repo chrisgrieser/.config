@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
-set -e # safe mode
+# set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
@@ -10,7 +10,7 @@ repo_names="nvim"
 commit_msg="ci: remove stylua action & update PR template"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
+	[[ -e .github/workflows/stylua.yml ]] && rm .github/workflows/stylua.yml
 	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/PULL_REQUEST_TEMPLATE.md
 }
 
