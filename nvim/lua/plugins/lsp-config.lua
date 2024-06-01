@@ -67,43 +67,45 @@ serverConfigs.bashls = {
 -- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
 -- since doing so with bash-lsp does not work
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
-serverConfigs.efm = {
-	-- cleanup useless empty folder efm creates on startup
-	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
-	init_options = { documentFormatting = true },
-	root_dir = function ()
-		return vim.fs.root({"Justfile"})
-	end,
 
-	settings = {
-		languages = {
-			sh = {
-				{
-					lintSource = "shellcheck",
-					lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
-					lintStdin = true,
-					lintFormats = {
-						"-:%l:%c: %trror: %m [SC%n]",
-						"-:%l:%c: %tarning: %m [SC%n]",
-						"-:%l:%c: %tote: %m [SC%n]",
-					},
-				},
+local efmTools = {
+	sh = {
+		{
+			lintSource = "shellcheck",
+			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
+			lintStdin = true,
+			lintFormats = {
+				"-:%l:%c: %trror: %m [SC%n]",
+				"-:%l:%c: %tarning: %m [SC%n]",
+				"-:%l:%c: %tote: %m [SC%n]",
 			},
-			just = {
-				{
-					lintSource = "just",
-					lintCommand = 'just --summary --justfile="${INPUT}"',
-					lintStdin = false,
-					lintFormats = {
-						"%trror: %m",
-					},
-				},
+		},
+	},
+	just = {
+		{
+			lintSource = "just",
+			lintCommand = 'just --summary --justfile="${INPUT}"',
+			lintStdin = false,
+			lintFormats = {
+				"%Aerror: %m",
+				"%C  ——▶ %f:%l:%c%Z",
+				"%terror: %m",
+				"%tarning: %m",
 			},
 		},
 	},
 }
 
-serverConfigs.efm.filetypes = vim.tbl_keys(serverConfigs.efm.settings.languages)
+serverConfigs.efm = {
+	root_dir = function() return vim.fs.root(0, { "Justfile", ".git" }) end,
+
+	filetypes = vim.tbl_keys(efmTools),
+	settings = { languages = efmTools },
+	init_options = { documentFormatting = true },
+
+	-- cleanup useless empty folder efm creates on startup
+	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
+}
 
 --------------------------------------------------------------------------------
 -- LUA

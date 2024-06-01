@@ -1,0 +1,4 @@
+set quiet := true
+
+lines:
+    find . -type f -name "*.zsh" -or -name ".zsh*" | xargs wc -l | sort -r
