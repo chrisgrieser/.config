@@ -5,14 +5,13 @@ set -e # safe mode
 
 # CONFIG
 github_username="chrisgrieser"
-# repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="alfred|shimmering-obsidian|gitfred"
-commit_msg="build: improved release action"
+commit_msg="build: switch to \`just\` as task runner"
 
 function actions_in_repo {
-	# update release action
-	rm -v ./.github/workflows/alfred-workflow-release.yml
-	cp -v ./alfred-workflow-release.yml ./.github/workflows
+	sed -i -e 's/Makefile/Justfile/' .rsync-exclude
+	rm Makefile
+	cp "$HOME/Desktop/Justfile" .
 }
 
 #───────────────────────────────────────────────────────────────────────────────
