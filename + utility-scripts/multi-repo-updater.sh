@@ -7,7 +7,7 @@ if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" &&
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
-commit_msg="ci: allow \`improv\` as commit keyword"
+commit_msg="ci: allow \`improv\` as commit type in PRs"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/semantic-pr-title.yml" ./.github/workflows/semantic-pr-title.yml
