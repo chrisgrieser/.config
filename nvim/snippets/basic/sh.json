@@ -194,7 +194,7 @@
     "prefix": "redirect to stderr"
   },
   "resolve home": {
-    "body": "${1:path}=\"${${1:path}/#\\~/\\$HOME}\"",
+    "body": "${1:path}=\"\\${${1:path}/#\\~/\\$HOME}\"",
     "prefix": "resolve home"
   },
   "restart app": {

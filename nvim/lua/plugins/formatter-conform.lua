@@ -8,6 +8,7 @@ local ftToFormatter = {
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	bib = { "bibtex-tidy" },
 	css = { "squeeze_blanks" }, -- since the css formatter does not support that
+	just = { "just", "squeeze_blanks" },
 }
 -- use formatting from the LSP
 local lspFormatFt = {
@@ -35,7 +36,7 @@ local autoIndentFt = {
 ---@return string[]
 ---@nodiscard
 local function listConformFormatters(formattersByFt)
-	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected" }
+	local notClis = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected", "just" }
 	local formatters = vim.iter(vim.tbl_values(formattersByFt))
 		:flatten()
 		:filter(function(ft) return not vim.tbl_contains(notClis, ft) end)

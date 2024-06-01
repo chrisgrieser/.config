@@ -32,7 +32,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2 } -- CONFIG
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 } -- CONFIG
+
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
 	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.shiftwidth

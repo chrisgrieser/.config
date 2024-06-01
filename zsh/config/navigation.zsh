@@ -90,10 +90,11 @@ function gr {
 _gr() {
 	[[ $CURRENT -ne 2 ]] && return # only complete first word
 
-	# turn lines into array
+	# get existing dirs
 	local -a folders=()
-	while IFS='' read -r dir; do
-		folders+=("$dir")
+	while IFS='' read -r dir; do # turn lines into array
+		expanded_dir="${dir/#\~/$HOME}"
+		[[ -d "$expanded_dir" ]] && folders+=("$dir")
 	done < <(dirs -p | sed '1d')
 
 	local expl && _description -V recent-folders expl 'Recent Folders'
