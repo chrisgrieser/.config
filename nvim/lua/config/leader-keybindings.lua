@@ -150,13 +150,13 @@ end
 -- JUST
 keymap(
 	"n",
-	"<leader>m",
+	"<leader>j",
 	function() require("funcs.nano-plugins").justRecipe("first") end,
 	{ desc = " 1st Just recipe" }
 )
 keymap(
 	"n",
-	"<leader>M",
+	"<leader>J",
 	function() require("funcs.nano-plugins").justRecipe() end,
 	{ desc = " Just recipes" }
 )

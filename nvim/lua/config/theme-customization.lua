@@ -85,8 +85,9 @@ function M.themeModifications()
 		overwriteHl("Bold", { bold = true })
 		overwriteHl("Italic", { italic = true })
 
-		updateHl("@keyword.return", "guifg=#fd4283")
+		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
 		if mode == "dark" then revertedTodoComments() end
+		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
 	elseif theme == "neomodern" then
 		revertedTodoComments()
 		linkHl("@lsp.type.parameter", "Changed")
