@@ -46,6 +46,7 @@ export GH_NO_UPDATE_NOTIFIER=1
 export FX_SHOW_SIZE=true
 export FX_THEME=3 # fx --themes
 
+export JUST_COMMAND_COLOR="blue"
 #───────────────────────────────────────────────────────────────────────────────
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)

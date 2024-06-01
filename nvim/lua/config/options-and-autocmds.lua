@@ -35,7 +35,7 @@ opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
 opt.timeoutlen = 666 -- also affects duration until which-key is shown
 
-opt.makeprg = "make --silent --warn-undefined-variables"
+opt.makeprg = "just"
 
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
@@ -230,10 +230,10 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 -- (simplified version of project.nvim)
 local autoCd = {
 	childOfRoot = {
-		"Makefile",
+		"Justfile",
+		".Justfile",
 		".git",
 		"info.plist", -- Alfred workflows
-		".project-root", -- manual marker file
 	},
 	parentOfRoot = {
 		".config",
@@ -319,7 +319,7 @@ local skeletons = {
 	python = "py",
 	applescript = "applescript",
 	javascript = "js",
-	make = "make",
+	just = "just",
 	sh = "zsh",
 	toml = "toml",
 }
