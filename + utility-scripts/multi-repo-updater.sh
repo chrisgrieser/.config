@@ -10,8 +10,8 @@ repo_names="nvim"
 commit_msg="ci: remove stylua action & update PR template"
 
 function actions_in_repo {
-	rm .github/workflows/stylua.yml
-	cp "$HOME/Desktop/pull_request_template.md" ./.github/PULL_REQUEST_TEMPLATE.md
+	cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
+	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/PULL_REQUEST_TEMPLATE.md
 }
 
 #───────────────────────────────────────────────────────────────────────────────
