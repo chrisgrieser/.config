@@ -3,14 +3,13 @@ alias q=' exit'     # INFO leading space to ignore it in history due to `HIST_IG
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
-alias m="make"
+alias j="just"
 
 # DEFAULTS
 alias mv='mv -vi'
 alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
-alias make='make --silent --warn-undefined-variables'
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias l='eza --all --long --time-style=relative --no-user --total-size \
