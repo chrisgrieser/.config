@@ -101,7 +101,6 @@ serverConfigs.efm = {
 
 	filetypes = vim.tbl_keys(efmTools),
 	settings = { languages = efmTools },
-	init_options = { documentFormatting = true },
 
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
