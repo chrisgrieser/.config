@@ -103,17 +103,9 @@ function M.justRecipe(first)
 
 	if first then
 		run(recipes[1])
-		return
+	else
+		vim.ui.select(recipes, { prompt = " Just recipes", kind = "just-recipes" }, run)
 	end
-
-	vim.ui.select(recipes, {
-		prompt = " Just recipes",
-		kind = "just-recipes",
-		format_item = function(recipe)
-			if vim.endswith(recipe, "_quickfix") then recipe = recipe .. " (↪ quickfix)" end
-			return recipe
-		end,
-	}, run)
 end
 
 -- Increment or toggle if cursorword is true/false. Simplified implementation
