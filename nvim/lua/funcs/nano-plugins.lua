@@ -91,6 +91,7 @@ function M.justRecipe(first)
 	end
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
+	vim.notify("⭕ result.stdout: " .. tostring(result.stdout))
 	if result.code ~= 0 then
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return

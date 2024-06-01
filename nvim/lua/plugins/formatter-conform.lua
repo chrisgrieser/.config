@@ -42,7 +42,7 @@ local function listConformFormatters(formattersByFt)
 		:filter(function(ft) return not vim.tbl_contains(notClis, ft) end)
 		:totable()
 	table.sort(formatters)
-	vim.fn.uniq(formatters) 
+	vim.fn.uniq(formatters)
 	return formatters
 end
 
