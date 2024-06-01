@@ -1,0 +1,6 @@
+{
+  "quiet": {
+    "body": "set quiet := true",
+    "prefix": "quiet"
+  }
+}

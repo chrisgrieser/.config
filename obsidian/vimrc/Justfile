@@ -1,0 +1,2 @@
+@run:
+    open "obsidian://advanced-uri?vault=main-vault&commandid=app%253Areload"

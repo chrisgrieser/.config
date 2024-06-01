@@ -51,7 +51,7 @@ function run() {
 			let type = "";
 			if (name.startsWith(".z"))
 				type = "zsh"; // .zshenv, .zshrc, .zprofile
-			else if (name === "Makefile") type = "make";
+			else if (name === "Justfile") type = "justfile";
 			else if (name.startsWith(".")) type = "cfg";
 			else if (!name.includes(".")) type = "blank";
 			else if (name === "obsidian-vimrc.vim") type = "obsidian";

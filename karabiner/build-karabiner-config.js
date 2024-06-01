@@ -65,6 +65,6 @@ function run() {
 	const lintStatus = app.doShellScript(
 		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
 	);
-	const msg = lintStatus.includes("ok") ? " Build Success" : "󱎘 Config Invalid";
-	return msg; // notify via makefile output
+	const msg = lintStatus.includes("ok") ? " Karabiner reloaded" : "󱎘 Karabiner config invalid";
+	return msg; // notify via justfile output
 }

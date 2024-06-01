@@ -87,8 +87,8 @@ local efmTools = {
 			lintCommand = 'just --summary --justfile="${INPUT}"',
 			lintStdin = false,
 			lintFormats = {
-				"%Aerror: %m",
-				"%C  ——▶ %f:%l:%c%Z",
+				"%Aerror: %m", -- multiline part 1
+				"%C  ——▶ %f:%l:%c%Z", -- multiline part 2
 				"%terror: %m",
 				"%tarning: %m",
 			},
