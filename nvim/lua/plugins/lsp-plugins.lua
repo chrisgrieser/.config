@@ -7,17 +7,11 @@ return {
 		event = "LspAttach",
 		init = function()
 			vim.g.navic_silence = false
-			u.addToLuaLine("tabline", "lualine_b", {
-				"navic",
-				section_separators = { left = "▒░", right = "" },
-				cond = function()
-					local ok, lspSignature = pcall(require, "lsp_signature")
-					if not ok then return true end
-					local insertMode = vim.fn.mode():find("i") ~= nil
-					local hasSig = lspSignature.status_line().label ~= ""
-					return not (insertMode and hasSig)
-				end,
-			})
+			u.addToLuaLine(
+				"tabline",
+				"lualine_b",
+				{ "navic", section_separators = { left = "▒░", right = "" } }
+			)
 		end,
 		opts = {
 			lazy_update_context = true,
@@ -78,21 +72,6 @@ return {
 			handler_opts = { border = vim.g.borderStyle },
 			auto_close_after = 3000,
 		},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-			u.addToLuaLine("tabline", "lualine_b", {
-				function()
-					local sig = require("lsp_signature").status_line()
-					local start = sig.range.start
-					local stop = sig.range["end"]
-					local label = sig.label:sub(1, start - 1)
-						.. sig.label:sub(start, stop):upper()
-						.. sig.label:sub(stop + 1, -1)
-					return opts.hint_prefix .. label
-				end,
-				cond = function() return vim.fn.mode():find("i") ~= nil end,
-			})
-		end,
 	},
 	{ -- display inlay hints from at EoL, not in the text
 		"lvimuser/lsp-inlayhints.nvim",
@@ -107,11 +86,12 @@ return {
 			inlay_hints = {
 				labels_separator = "",
 				parameter_hints = {
-					prefix = " 󰁍 ",
+					prefix = " 󰏪 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},
 				type_hints = {
+					prefix = " 󰜁 ",
 					remove_colon_start = true,
 					remove_colon_end = true,
 				},

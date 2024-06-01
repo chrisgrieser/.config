@@ -219,7 +219,7 @@ local function telescopeConfig()
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_type_definitions = {
-				prompt_prefix = "󰈿 ",
+				prompt_prefix = "󰜁 ",
 				trim_text = true,
 				show_line = false,
 				initial_mode = "normal",
@@ -278,7 +278,7 @@ return {
 				desc = "󰒕 Workspace Symbols",
 			},
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
-			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰈿 Type Definitions" },
+			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
