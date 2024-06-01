@@ -80,15 +80,20 @@ function s {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# SEARCH AND REPLACE VIA `RG`
+# SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
 function sr {
 	local search="$1"
 	local replace="$2"
 	shift 2
-	for file in "$@"; do
-		rg "$search" --replace="$replace" --passthrough \
-			--no-line-number --no-config "$file" >/tmp/rgpipe &&
+
+	local files
+	files=$(rg "$search" --files-with-matches --case-sensitive --no-config "$@")
+	[[ -z "$files" ]] && return 1
+
+	echo "$files" | while read -r file; do
+		rg "$search" --case-sensitive --replace="$replace" --passthrough \
+			--no-line-number --no-config "$file" > /tmp/rgpipe &&
 			mv /tmp/rgpipe "$file"
 	done
 }
@@ -129,7 +134,7 @@ function p {
 	elif [[ "$filetype_info" =~ text ]]; then
 		bat "$1"
 	elif [[ "$filetype_info" =~ image ]]; then
-		qlmanage -p "$1" &>/dev/null
+		qlmanage -p "$1" &> /dev/null
 	else
 		file "$1"
 	fi
@@ -141,7 +146,7 @@ function p {
 function iq {
 	# Read stdin into a temp file if data is provided via stdin
 	if [[ ! -t 0 ]]; then
-		cat >"$(mktemp)"
+		cat > "$(mktemp)"
 	else
 		file="$1"
 	fi

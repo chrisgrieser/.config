@@ -103,7 +103,7 @@
     "body": [
       "while read -r line; do",
       "\techo \"\\$line\"$0",
-      "done <\"\\$${1:input_file}\""
+      "done < \"\\$${1:input_file}\""
     ],
     "prefix": "for each line (read)"
   },

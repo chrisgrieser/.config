@@ -100,10 +100,6 @@ return {
 		config = function(spec)
 			local ccc = require("ccc")
 
-			-- FIX do not color short hex codes like #123 https://github.com/uga-rosa/ccc.nvim/discussions/77#discussioncomment-5916995
-			-- PENDING https://github.com/uga-rosa/ccc.nvim/issues/119
-			ccc.picker.hex.pattern = { [=[\v%(^|[^[:keyword:]])\zs#(\x\x)(\x\x)(\x\x)>]=] }
-
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
 				highlighter = {
@@ -113,7 +109,7 @@ return {
 					update_insert = false,
 				},
 				pickers = {
-					ccc.picker.hex,
+					ccc.picker.hex_long, -- to not pick up #123 as hex code
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
 					ccc.picker.ansi_escape { meaning1 = "bright" },
