@@ -5,11 +5,13 @@ set -e # safe mode
 
 # CONFIG
 github_username="chrisgrieser"
-repo_names="alfred|shimmering-obsidian|gitfred"
-commit_msg="build: switch to \`just\` as task runner"
+# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="nvim"
+commit_msg="ci: remove stylua action & update PR template"
 
 function actions_in_repo {
-	echo "foobar"
+	rm .github/workflows/stylua.yml
+	cp "$HOME/Desktop/pull_request_template.md" ./.github/PULL_REQUEST_TEMPLATE.md
 }
 
 #───────────────────────────────────────────────────────────────────────────────
