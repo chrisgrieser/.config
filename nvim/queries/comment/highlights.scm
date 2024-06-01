@@ -8,7 +8,7 @@
 ; CONFIG: foo PENDING: foo
 
 ; original tags:
-; FOOBAR TEST ERROR
+; FOOFOO TEST ERROR
 ; NOTE XXX PERF DOCS
 ; BUG TODO HACK
 ; BUG: foobaz
