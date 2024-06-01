@@ -9,4 +9,4 @@ abbr("const", "local")
 --------------------------------------------------------------------------------
 
 -- fix some shell-filetypes like zsh override makeprg
-vim.opt_local.makeprg = "make --silent --warn-undefined-variables"
+vim.opt_local.makeprg = "just"

@@ -183,7 +183,7 @@ return {
 					-- for simple selections, use builtin selector instead of telescope
 					if opts.kind == "codeaction" or opts.kind == "rule_selection" then
 						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
-					elseif opts.kind == "make-selector" then
+					elseif opts.kind == "just-recipes" then
 						return { backend = { "builtin" } }
 					end
 				end,

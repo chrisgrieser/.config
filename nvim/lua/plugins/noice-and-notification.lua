@@ -72,8 +72,8 @@ local routes = {
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 
-	-- :make
-	{ filter = { event = "msg_show", find = "^:!make" }, skip = true },
+	-- :make / `just`
+	{ filter = { event = "msg_show", find = "^:!just" }, skip = true },
 	{ filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
 
 	-- E211 no longer needed, since auto-closing deleted buffers

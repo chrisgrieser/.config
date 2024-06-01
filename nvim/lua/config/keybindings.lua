@@ -217,7 +217,7 @@ keymap(
 )
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
-	vim.cmd("silent! update")
+	vim.cmd.update { mods = { silent = true } }
 	local winClosed = pcall(vim.cmd.close)
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bdelete) end

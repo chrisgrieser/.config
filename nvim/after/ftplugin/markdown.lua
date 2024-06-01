@@ -54,7 +54,7 @@ keymap("n", "<D-r>", function()
 	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
 
 	-- create github-html via pandoc
-	vim.cmd("silent! update")
+	vim.cmd.update { mods = { silent = true } }
 	local input = vim.api.nvim_buf_get_name(0)
 	vim.system({
 		"pandoc",

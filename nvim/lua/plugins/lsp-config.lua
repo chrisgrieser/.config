@@ -68,8 +68,6 @@ serverConfigs.bashls = {
 -- since doing so with bash-lsp does not work
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 serverConfigs.efm = {
-	filetypes = { "sh" },
-
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 
@@ -87,9 +85,23 @@ serverConfigs.efm = {
 					},
 				},
 			},
+			just = {
+				{
+					lintSource = "just",
+					lintCommand = "just --unstable --fmt --check",
+					lintStdin = false,
+					lintFormats = {
+						"-:%l:%c: %trror: %m [SC%n]",
+						"-:%l:%c: %tarning: %m [SC%n]",
+						"-:%l:%c: %tote: %m [SC%n]",
+					},
+				},
+			},
 		},
 	},
 }
+
+serverConfigs.efm.filetypes = vim.tbl_keys(serverConfigs.efm.settings.languages)
 
 --------------------------------------------------------------------------------
 -- LUA
