@@ -11,10 +11,6 @@
 				"path": "./all.json"
 			},
 			{
-				"language": ["make"],
-				"path": "./basic/make.json"
-			},
-			{
 				"language": ["markdown"],
 				"path": "./basic/markdown.json"
 			},
@@ -27,7 +23,7 @@
 				"path": "./basic/css.json"
 			},
 			{
-				"language": ["sh", "make"],
+				"language": ["sh", "just"],
 				"path": "./basic/sh.json"
 			},
 			{
