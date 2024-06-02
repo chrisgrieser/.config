@@ -281,6 +281,7 @@ keymap("n", toggleKey, function()
 	if isRecording then
 		u.normal("q")
 		local recording = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
+		if recording == "" then return end
 		vim.fn.setreg(register, recording)
 		u.notify("Recorded", vim.fn.keytrans(recording), "trace")
 	else
