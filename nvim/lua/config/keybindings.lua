@@ -212,8 +212,15 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
-	function() require("funcs.nano-plugins").gotoChangedFiles() end,
-	{ desc = "󰽙 Goto File with most changes" }
+	function() require("funcs.git-jumper").gotoChangedFiles() end,
+	{ desc = "󰊢 Goto Changed File" }
+)
+
+keymap(
+	{ "n", "x" },
+	"g<CR>",
+	function() require("funcs.git-jumper").gotoLastCommittedChangeInFile() end,
+	{ desc = "󰊢 Goto last committed change in file" }
 )
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
