@@ -106,6 +106,7 @@ local bufsByLastAccess
 local bufNavNotify
 local timeoutTimer
 local lastAccessTimeout = 2000
+local maxBufs = 10
 
 ---@param dir "next"|"prev"
 function M.bufferByLastUsed(dir)
@@ -117,6 +118,7 @@ function M.bufferByLastUsed(dir)
 	if not bufsByLastAccess then
 		bufsByLastAccess = vim.fn.getbufinfo { buflisted = 1 }
 		table.sort(bufsByLastAccess, function(a, b) return a.lastused > b.lastused end)
+		bufsByLastAccess = vim.list_slice(bufsByLastAccess, 1, maxBufs)
 	end
 	if #bufsByLastAccess < 2 then
 		bufsByLastAccess = nil

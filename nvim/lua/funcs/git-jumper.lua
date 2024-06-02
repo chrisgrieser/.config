@@ -143,7 +143,7 @@ function M.gotoLastCommittedChangeInFile()
 		notify("File has not last committed change.", "warn")
 		return
 	end
-	vim.notify(result.stdout:match("@@.-@@"), vim.log.levels.INFO, { title = "Diff line" })
+	-- vim.notify(result.stdout:match("@@.-@@"))
 
 	-- INFO meaning of the `@@` lines: https://stackoverflow.com/a/31615728/22114136
 	local changedInLastCommit = vim.iter(vim.split(result.stdout, "\n"))
