@@ -15,6 +15,10 @@
 				"path": "./basic/justfile.json"
 			},
 			{
+				"language": ["query"],
+				"path": "./basic/scm.json"
+			},
+			{
 				"language": ["markdown"],
 				"path": "./basic/markdown.json"
 			},

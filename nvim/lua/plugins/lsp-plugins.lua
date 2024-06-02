@@ -2,6 +2,10 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- nvim lua typings
+		"folke/lazydev.nvim",
+		ft = "lua",
+	},
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
