@@ -1,13 +1,13 @@
 local M = {} -- persist from garbage collector
 
-local darkmode = require("lua.dark-mode")
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
-local visuals = require("lua.visuals")
-local wu = require("lua.window-utils")
-local app = require("lua.utils").app
+local darkmode = require("modules.dark-mode")
+local env = require("modules.environment-vars")
+local u = require("modules.utils")
+local visuals = require("modules.visuals")
+local wu = require("modules.window-utils")
+local app = require("modules.utils").app
 local c = hs.caffeinate.watcher
-local videoAppWatcherForSpotify = require("lua.spotify").aw_spotify
+local videoAppWatcherForSpotify = require("modules.spotify").aw_spotify
 --------------------------------------------------------------------------------
 -- HELPERS
 

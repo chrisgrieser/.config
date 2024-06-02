@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local u = require("lua.utils")
+local u = require("modules.utils")
 --------------------------------------------------------------------------------
 -- USB WATCHER
 

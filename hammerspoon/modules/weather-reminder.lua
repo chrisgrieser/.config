@@ -2,8 +2,8 @@
 --------------------------------------------------------------------------------
 local M = {} -- persist from garbage collector
 
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
+local env = require("modules.environment-vars")
+local u = require("modules.utils")
 --------------------------------------------------------------------------------
 
 local config = {

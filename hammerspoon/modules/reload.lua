@@ -1,4 +1,4 @@
-local u = require("lua.utils")
+local u = require("modules.utils")
 --------------------------------------------------------------------------------
 
 local reloadIndicator = "/tmp/hs-is-reloading"

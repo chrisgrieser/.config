@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local u = require("lua.utils")
+local u = require("modules.utils")
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher

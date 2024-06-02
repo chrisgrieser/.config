@@ -24,30 +24,30 @@ hs.window.animationDuration = 0 -- quicker animations
 -- LOAD MODULES
 
 -- appearance
-safeRequire("lua.console")
-safeRequire("lua.visuals")
-safeRequire("lua.dark-mode")
+safeRequire("modules.console")
+safeRequire("modules.visuals")
+safeRequire("modules.dark-mode")
 
 -- window management
-safeRequire("lua.window-utils")
-safeRequire("lua.layouts")
-safeRequire("lua.app-hider")
-safeRequire("lua.auto-quitter")
+safeRequire("modules.window-utils")
+safeRequire("modules.layouts")
+safeRequire("modules.app-hider")
+safeRequire("modules.auto-quitter")
 
 -- system
-safeRequire("lua.cronjobs")
-safeRequire("lua.filesystem-watchers")
-safeRequire("lua.repo-auto-sync")
-safeRequire("lua.hardware-periphery")
-safeRequire("lua.pageup-pagedown-scroll")
-safeRequire("lua.vertical-split")
-safeRequire("lua.weather-reminder")
+safeRequire("modules.cronjobs")
+safeRequire("modules.filesystem-watchers")
+safeRequire("modules.repo-auto-sync")
+safeRequire("modules.hardware-periphery")
+safeRequire("modules.pageup-pagedown-scroll")
+safeRequire("modules.vertical-split")
+safeRequire("modules.weather-reminder")
 
 -- app-specific
-safeRequire("lua.app-specific-behavior")
-safeRequire("lua.browser")
-safeRequire("lua.spotify")
-safeRequire("lua.mastodon")
+safeRequire("modules.app-specific-behavior")
+safeRequire("modules.browser")
+safeRequire("modules.spotify")
+safeRequire("modules.mastodon")
 
 -- reload function (should come last)
-safeRequire("lua.reload")
+safeRequire("modules.reload")

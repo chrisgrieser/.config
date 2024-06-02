@@ -1,9 +1,9 @@
 local M = {}
 
-local console = require("lua.console")
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
-local visuals = require("lua.visuals")
+local console = require("modules.console")
+local env = require("modules.environment-vars")
+local u = require("modules.utils")
+local visuals = require("modules.visuals")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:

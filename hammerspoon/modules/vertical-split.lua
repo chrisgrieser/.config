@@ -78,7 +78,7 @@ end
 
 --------------------------------------------------------------------------------
 
-hs.hotkey.bind(require("lua.utils").hyper, "V", function()
+hs.hotkey.bind(require("modules.utils").hyper, "V", function()
 	if M.vsplitWins then
 		endSplit()
 	else
