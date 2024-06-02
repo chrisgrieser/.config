@@ -3,268 +3,388 @@
 		{
 			"title": "About",
 			"icon": { "path": "icons/about.png" },
-			"arg": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension"
+			"arg": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension",
+			"uid": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension"
 		},
 		{
 			"title": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess"
 		},
 		{
 			"title": "Accessibility",
 			"subtitle": "Security",
 			"icon": { "path": "icons/security.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility",
+			"uid": "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
 		},
 		{
-			"title": "Accounts",
+			"title": "Internet Accounts",
 			"icon": { "path": "icons/accounts.png" },
-			"arg": "x-apple.systempreferences:com.apple.Internet-Accounts-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Internet-Accounts-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Internet-Accounts-Settings.extension"
 		},
 		{
 			"title": "Appearance",
 			"icon": { "path": "icons/appearance.png" },
-			"arg": "x-apple.systempreferences:com.apple.Appearance-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Appearance-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Appearance-Settings.extension"
 		},
 		{
 			"title": "Apple ID",
 			"icon": { "path": "icons/apple-id.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane"
+			"arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane",
+			"uid": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane"
 		},
 		{
-			"title": "Automation",
-			"icon": { "path": "icons/security.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation"
+			"title": "Battery",
+			"icon": { "path": "icons/battery.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.battery",
+			"uid": "x-apple.systempreferences:com.apple.preference.battery"
 		},
 		{
 			"title": "Bluetooth",
 			"icon": { "path": "icons/bluetooth.png" },
-			"arg": "x-apple.systempreferences:com.apple.BluetoothSettings"
+			"arg": "x-apple.systempreferences:com.apple.BluetoothSettings",
+			"uid": "x-apple.systempreferences:com.apple.BluetoothSettings"
 		},
 		{
 			"title": "Configuration Profiles",
 			"icon": { "path": "icons/profiles.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles"
+			"arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles",
+			"uid": "x-apple.systempreferences:com.apple.preferences.configurationprofiles"
 		},
 		{
 			"title": "Control Center",
 			"icon": { "path": "icons/control-center.png" },
-			"arg": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension"
+		},
+		{
+			"title": "Family",
+			"icon": { "path": "icons/family.png" },
+			"arg": "x-apple.systempreferences:com.apple.preferences.FamilySharingPrefPane",
+			"uid": "x-apple.systempreferences:com.apple.preferences.FamilySharingPrefPane"
 		},
 		{
 			"title": "Date & Time",
 			"icon": { "path": "icons/date-time.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.datetime"
+			"arg": "x-apple.systempreferences:com.apple.preference.datetime",
+			"uid": "x-apple.systempreferences:com.apple.preference.datetime"
 		},
 		{
 			"title": "Desktop & Dock",
 			"icon": { "path": "icons/dock.png" },
-			"arg": "x-apple.systempreferences:com.apple.Desktop-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Desktop-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Desktop-Settings.extension"
 		},
 		{
 			"title": "Displays",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/display.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display"
 		},
 		{
 			"title": "Displays",
 			"icon": { "path": "icons/display.png" },
-			"arg": "x-apple.systempreferences:com.apple.Displays-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Displays-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Displays-Settings.extension"
 		},
 		{
 			"title": "Extensions",
 			"icon": { "path": "icons/extensions.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.extensions"
+			"arg": "x-apple.systempreferences:com.apple.preferences.extensions",
+			"uid": "x-apple.systempreferences:com.apple.preferences.extensions"
 		},
 		{
 			"title": "Focus",
 			"icon": { "path": "icons/focus.png" },
-			"arg": "x-apple.systempreferences:com.apple.Focus-Settings.extension"
-		},
-		{
-			"title": "Full Disk Access",
-			"icon": { "path": "icons/drive.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+			"arg": "x-apple.systempreferences:com.apple.Focus-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Focus-Settings.extension"
 		},
 		{
 			"title": "Game Controller",
 			"icon": { "path": "icons/gamepad.png" },
-			"arg": "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension"
+		},
+		{
+			"title": "Game Center",
+			"icon": { "path": "icons/game-center.png" },
+			"arg": "x-apple.systempreferences:com.apple.Game-Center-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Game-Center-Settings.extension"
+		},
+		{
+			"title": "iCloud",
+			"icon": { "path": "icons/icloud.png" },
+			"arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane?iCloud",
+			"uid": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane?iCloud"
 		},
 		{
 			"title": "General",
 			"icon": { "path": "icons/general.png" },
-			"arg": "x-apple.systempreferences:com.apple.systempreferences.GeneralSettings"
+			"arg": "x-apple.systempreferences:com.apple.systempreferences.GeneralSettings",
+			"uid": "x-apple.systempreferences:com.apple.systempreferences.GeneralSettings"
 		},
 		{
 			"title": "Keyboard",
 			"icon": { "path": "icons/keyboard.png" },
-			"arg": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension"
 		},
 		{
 			"title": "Keyboard",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/keyboard.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Keyboard"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Keyboard",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Keyboard"
+		},
+		{
+			"title": "Keyboard Shortcuts",
+			"icon": { "path": "icons/keyboard.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.keyboard?Shortcuts",
+			"uid": "x-apple.systempreferences:com.apple.preference.keyboard?Shortcuts"
 		},
 		{
 			"title": "Language & Region",
 			"icon": { "path": "icons/language.png" },
-			"arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Localization-Settings.extension"
 		},
 		{
 			"title": "Lock-Screen-Settings",
 			"icon": { "path": "icons/lock.png" },
-			"arg": "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"
 		},
 		{
 			"title": "Login Items",
 			"icon": { "path": "icons/login-items.png" },
-			"arg": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension"
 		},
 		{
 			"title": "Mouse",
 			"icon": { "path": "icons/mouse.png" },
-			"arg": "x-apple.systempreferences:com.apple.Mouse-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Mouse-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Mouse-Settings.extension"
 		},
 		{
 			"title": "Mouse",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/mouse.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse"
 		},
 		{
 			"title": "Network",
 			"icon": { "path": "icons/network.png" },
-			"arg": "x-apple.systempreferences:com.apple.Network-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Network-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Network-Settings.extension"
 		},
 		{
 			"title": "Notifications",
 			"icon": { "path": "icons/notifications.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.notifications"
+			"arg": "x-apple.systempreferences:com.apple.preference.notifications",
+			"uid": "x-apple.systempreferences:com.apple.preference.notifications"
 		},
 		{
 			"title": "Touch ID & Password",
 			"icon": { "path": "icons/touch-id.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.password"
+			"arg": "x-apple.systempreferences:com.apple.preferences.password",
+			"uid": "x-apple.systempreferences:com.apple.preferences.password"
 		},
 		{
 			"title": "Passwords",
 			"icon": { "path": "icons/password.png" },
-			"arg": "x-apple.systempreferences:com.apple.Passwords-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Passwords-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Passwords-Settings.extension"
 		},
 		{
 			"title": "Printers & Scanners",
 			"icon": { "path": "icons/printer.png" },
-			"arg": "x-apple.systempreferences:com.apple.Print-Scan-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Print-Scan-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Print-Scan-Settings.extension"
 		},
 		{
 			"title": "Screen Saver",
 			"icon": { "path": "icons/screen-saver.png" },
-			"arg": "x-apple.systempreferences:com.apple.ScreenSaver-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.ScreenSaver-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.ScreenSaver-Settings.extension"
 		},
 		{
 			"title": "Screen Time",
 			"icon": { "path": "icons/screen-time.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.screentime"
+			"arg": "x-apple.systempreferences:com.apple.preference.screentime",
+			"uid": "x-apple.systempreferences:com.apple.preference.screentime"
 		},
 		{
 			"title": "Privacy & Security",
 			"icon": { "path": "icons/security.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.security"
+			"arg": "x-apple.systempreferences:com.apple.preference.security",
+			"uid": "x-apple.systempreferences:com.apple.preference.security"
+		},
+		{
+			"title": "Automation",
+			"subtitle": "Privacy & Security",
+			"icon": { "path": "icons/security.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation",
+			"uid": "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation"
+		},
+		{
+			"title": "Full Disk Access",
+			"subtitle": "Privacy & Security",
+			"icon": { "path": "icons/drive.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles",
+			"uid": "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+		},
+		{
+			"title": "File Vault",
+			"subtitle": "Privacy & Security",
+			"icon": { "path": "icons/drive.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.security?FileVault",
+			"uid": "x-apple.systempreferences:com.apple.preference.security?FileVault"
+		},
+		{
+			"title": "Location",
+			"subtitle": "Privacy & Security",
+			"icon": { "path": "icons/security.png" },
+			"arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices",
+			"uid": "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices"
 		},
 		{
 			"title": "Sharing",
 			"icon": { "path": "icons/sharing.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.sharing"
+			"arg": "x-apple.systempreferences:com.apple.preferences.sharing",
+			"uid": "x-apple.systempreferences:com.apple.preferences.sharing"
+		},
+		{
+			"title": "Internet Sharing",
+			"icon": { "path": "icons/sharing.png" },
+			"arg": "x-apple.systempreferences:com.apple.preferences.sharing?Internet",
+			"uid": "x-apple.systempreferences:com.apple.preferences.sharing?Internet"
+		},
+		{
+			"title": "Printer Sharing",
+			"icon": { "path": "icons/sharing.png" },
+			"arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_PrinterSharing",
+			"uid": "x-apple.systempreferences:com.apple.preferences.sharing?Services_PrinterSharing"
 		},
 		{
 			"title": "Software Update",
 			"icon": { "path": "icons/software-update.png" },
-			"arg": "x-apple.systempreferences:com.apple.preferences.softwareupdate"
+			"arg": "x-apple.systempreferences:com.apple.preferences.softwareupdate",
+			"uid": "x-apple.systempreferences:com.apple.preferences.softwareupdate"
+		},
+		{
+			"title": "Time Machine",
+			"icon": { "path": "icons/time-machine.png" },
+			"arg": "x-apple.systempreferences:com.apple.Time-Machine-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Time-Machine-Settings.extension"
+		},
+		{
+			"title": "VPN",
+			"icon": { "path": "icons/vpn.png" },
+			"arg": "x-apple.systempreferences:com.apple.NetworkExtensionSettingsUI.NESettingsUIExtension",
+			"uid": "x-apple.systempreferences:com.apple.NetworkExtensionSettingsUI.NESettingsUIExtension"
+		},
+		{
+			"title": "Wallet & Apple Pay",
+			"icon": { "path": "icons/wallet.png" },
+			"arg": "x-apple.systempreferences:com.apple.WalletSettingsExtension",
+			"uid": "x-apple.systempreferences:com.apple.WalletSettingsExtension"
 		},
 		{
 			"title": "Sound",
 			"icon": { "path": "icons/sound.png" },
-			"arg": "x-apple.systempreferences:com.apple.Sound-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Sound-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Sound-Settings.extension"
 		},
 		{
 			"title": "Siri & Spotlight",
 			"icon": { "path": "icons/siri.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.speech"
+			"arg": "x-apple.systempreferences:com.apple.preference.speech",
+			"uid": "x-apple.systempreferences:com.apple.preference.speech"
 		},
 		{
 			"title": "Startup Disk",
 			"icon": { "path": "icons/disk.png" },
-			"arg": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension"
 		},
 		{
 			"title": "Storage",
 			"icon": { "path": "icons/disk.png" },
-			"arg": "x-apple.systempreferences:com.apple.settings.Storage"
+			"arg": "x-apple.systempreferences:com.apple.settings.Storage",
+			"uid": "x-apple.systempreferences:com.apple.settings.Storage"
 		},
 		{
 			"title": "Trackpad",
 			"icon": { "path": "icons/trackpad.png" },
-			"arg": "x-apple.systempreferences:com.apple.Trackpad-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Trackpad-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Trackpad-Settings.extension"
 		},
 		{
 			"title": "Users & Groups",
 			"icon": { "path": "icons/users.png" },
-			"arg": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension"
 		},
 		{
 			"title": "Wallpaper",
 			"icon": { "path": "icons/wallpaper.png" },
-			"arg": "x-apple.systempreferences:com.apple.Wallpaper-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.Wallpaper-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.Wallpaper-Settings.extension"
 		},
 		{
 			"title": "Hearing",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Hearing"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Hearing",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Hearing"
 		},
 		{
 			"title": "Captions",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Captioning"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Captioning",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Captioning"
 		},
 		{
 			"title": "Descriptions",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Media_Descriptions"
-		},
-		{
-			"title": "Switch Control",
-			"subtitle": "Accessibility",
-			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Switch"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Media_Descriptions",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Media_Descriptions"
 		},
 		{
 			"title": "VoiceOver",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_VoiceOver"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_VoiceOver",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_VoiceOver"
 		},
 		{
 			"title": "Zoom",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/accessibility.png" },
-			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Zoom"
+			"arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Zoom",
+			"uid": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Zoom"
 		},
 		{
 			"title": "AirDrop & Handoff",
 			"subtitle": "Accessibility",
 			"icon": { "path": "icons/airdrop.png" },
-			"arg": "x-apple.systempreferences:com.apple.AirDrop-Handoff-Settings.extension"
+			"arg": "x-apple.systempreferences:com.apple.AirDrop-Handoff-Settings.extension",
+			"uid": "x-apple.systempreferences:com.apple.AirDrop-Handoff-Settings.extension"
 		},
 		{
 			"title": "Wi-Fi",
 			"icon": { "path": "icons/network.png" },
-			"arg": "x-apple.systempreferences:com.apple.wifi-settings-extension"
+			"arg": "x-apple.systempreferences:com.apple.wifi-settings-extension",
+			"uid": "x-apple.systempreferences:com.apple.wifi-settings-extension"
 		}
 	]
 }
