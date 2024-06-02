@@ -12,7 +12,7 @@ return {
 			u.colorschemeMod("EyelinerSecondary", { underline = true })
 		end,
 	},
-	{ -- better % (highlighting, matches across lines, match quotes)
+	{ -- better % (highlighting, match across lines, match quotes, etc.)
 		"andymass/vim-matchup",
 		event = "VimEnter", -- cannot load on keys due to highlights
 		keys = {
