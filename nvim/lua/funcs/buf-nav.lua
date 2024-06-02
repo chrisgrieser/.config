@@ -1,6 +1,14 @@
 local M = {}
 local api = vim.api
 
+local pluginName = "Buf Nav"
+local function notify(msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+end
+
+--------------------------------------------------------------------------------
+
 ---@nodiscard
 ---@param path string
 local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
@@ -89,27 +97,79 @@ function M.gotoAltBuffer()
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		vim.notify(
-			"No Alt File and not Oldfile available.",
-			vim.log.levels.WARN,
-			{ title = "AltAlt" }
-		)
+		notify("No Alt File and not Oldfile available.", "warn")
 	end
 end
 
 --------------------------------------------------------------------------------
 
+local bufsByLastAccess
+local bufNavNotify
+
 ---@param dir "next"|"prev"
 function M.bufferByLastUsed(dir)
-	local bufs = vim.fn.getbufinfo { buflisted = 1 }
-	table.sort(bufs, function(a, b) return a.lastused > b.lastused end)
+	-- timeout required, as switching to buffer always makes it the last accessed one
+	local lastAccessTimeout = 1000
+	if not bufsByLastAccess then
+		bufsByLastAccess = vim.fn.getbufinfo { buflisted = 1 }
+		table.sort(bufsByLastAccess, function(a, b) return a.lastused > b.lastused end)
+		vim.defer_fn(function() bufsByLastAccess = nil end, lastAccessTimeout)
+	end
+	if #bufsByLastAccess < 2 then
+		bufsByLastAccess = nil
+		notify("Only one buffer open.", "warn")
+		return
+	end
 
 	local currentBuf = vim.api.nvim_buf_get_name(0)
-	local currentBufIdx = vim.iter(bufs):find(function(buf) return buf.name == currentBuf end).bufnr
-	vim.notify("⭕ currentBufIdx: " .. vim.inspect(currentBufIdx))
+	local currentBufIdx
+	for i = 1, #bufsByLastAccess do
+		if bufsByLastAccess[i].name == currentBuf then
+			currentBufIdx = i
+			break
+		end
+	end
+	local nextBufIdx
+	if dir == "prev" then
+		nextBufIdx = currentBufIdx - 1
+		if nextBufIdx < 1 then nextBufIdx = #bufsByLastAccess end
+	else
+		nextBufIdx = currentBufIdx + 1
+		if nextBufIdx > #bufsByLastAccess then nextBufIdx = 1 end
+	end
 
-	local bufNames = vim.iter(bufs):map(function(buf) return buf.name end):totable()
-	vim.notify("⭕ bufNames: " .. vim.inspect(bufNames))
+	vim.cmd.edit(bufsByLastAccess[nextBufIdx].name)
+
+	-----------------------------------------------------------------------------
+
+	local notifyInstalled, _ = pcall(require, "notify")
+	if not notifyInstalled then return end
+
+	local currentFileIcon = ""
+	local bufNames = vim.iter(bufsByLastAccess)
+		:map(function(buf)
+			if buf.name == currentBuf then
+				return currentFileIcon .. " " .. vim.fs.basename(buf.name)
+			else
+				return "- " .. vim.fs.basename(buf.name)
+			end
+		end)
+		:join("\n")
+	vim.notify("⭕ bufNames: " .. tostring(bufNames))
+
+	bufNavNotify = vim.notify(vim.inspect(bufNames), vim.log.levels.INFO, {
+		title = pluginName,
+		animate = false,
+		replace = bufNavNotify and bufNavNotify.id,
+		hide_from_history = bufNavNotify ~= nil, -- keep only first in history
+		on_open = function(win)
+			local bufnr = vim.api.nvim_win_get_buf(win)
+			vim.api.nvim_buf_call(
+				bufnr,
+				function() vim.fn.matchadd("Title", currentFileIcon .. ".*") end
+			)
+		end,
+	})
 end
 
 --------------------------------------------------------------------------------
