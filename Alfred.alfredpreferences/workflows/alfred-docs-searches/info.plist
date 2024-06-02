@@ -229,6 +229,29 @@
 				<true/>
 			</dict>
 		</array>
+		<key>73A7B71E-71A0-4C0D-A135-B163627350F8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<array>
 			<dict>
@@ -720,7 +743,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/wezterm-docs-search.js</string>
+				<string>./scripts/manual-docs-searches/wezterm-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -849,7 +872,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/biome-docs-search.js</string>
+				<string>./scripts/manual-docs-searches/biome-docs-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -976,7 +999,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/ruff-rules.js</string>
+				<string>./scripts/manual-docs-searches/ruff-rules.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1114,7 +1137,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/shellcheck-wiki.js</string>
+				<string>./scripts/manual-docs-searches/shellcheck-wiki.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1252,7 +1275,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/pandoc-docs.js</string>
+				<string>./scripts/manual-docs-searches/pandoc-docs.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1373,7 +1396,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/can-i-use.js</string>
+				<string>./scripts/manual-docs-searches/can-i-use.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1482,6 +1505,55 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>just</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/manual-docs-searches/just-docs.js</string>
+				<key>subtext</key>
+				<string>task runner</string>
+				<key>title</key>
+				<string>Just</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>73A7B71E-71A0-4C0D-A135-B163627350F8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1497,7 +1569,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-manpage-sections.js</string>
+				<string>./scripts/manual-docs-searches/search-manpage-sections.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1511,6 +1583,25 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>F912A4EE-E269-4F06-87C3-7A08275A3D4F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1546,7 +1637,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-man-pages.js</string>
+				<string>./scripts/manual-docs-searches/search-man-pages.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1560,25 +1651,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1907,6 +1979,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
+		<key>73A7B71E-71A0-4C0D-A135-B163627350F8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>900</real>
+		</dict>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
 			<key>colorindex</key>
@@ -2030,7 +2111,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>1015</real>
 		</dict>
 		<key>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</key>
 		<dict>
@@ -2077,7 +2158,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>1015</real>
 		</dict>
 		<key>FC4A9CCB-0458-42DE-9CFE-4110B7E0CADF</key>
 		<dict>
