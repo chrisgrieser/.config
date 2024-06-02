@@ -6,6 +6,7 @@ local pluginName = "Git Jumper"
 local config = {
 	gotoChangedFiles = {
 		maxFiles = 5,
+		currentFileIcon = "",
 	},
 	gotoLastCommittedChangeInFile = {
 		highlightDurationMs = 2000,
@@ -26,7 +27,7 @@ end
 
 local changedFileNotif
 function M.gotoChangedFiles()
-	local funcName = "Goto Changed Files"
+	local opts = config.gotoChangedFiles
 
 	-- get numstat
 	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait() -- so new files show up in `--numstat`
@@ -65,7 +66,7 @@ function M.gotoChangedFiles()
 		end
 	end
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
-	changedFiles = vim.list_slice(changedFiles, 1, config.gotoChangedFiles.maxFiles)
+	changedFiles = vim.list_slice(changedFiles, 1, opts.maxFiles)
 
 	-- GUARD
 	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
@@ -103,10 +104,9 @@ function M.gotoChangedFiles()
 		width = max_width - 9 -- padding, border, prefix & space, ellipsis
 	end
 
-	local currentFileIcon = ""
 	local listOfChangedFiles = {}
 	for i = 1, #changedFiles do
-		local prefix = (i == nextFileIndex and currentFileIcon or "·")
+		local prefix = (i == nextFileIndex and opts.currentFileIcon or "·")
 		local path = changedFiles[i].relPath
 		-- +2 for prefix + space
 		local displayPath = #path + 2 > width and "…" .. path:sub(-1 - width) or path
@@ -115,15 +115,15 @@ function M.gotoChangedFiles()
 	local msg = table.concat(listOfChangedFiles, "\n")
 
 	changedFileNotif = vim.notify(msg, vim.log.levels.INFO, {
-		title = funcName,
+		title = pluginName,
 		replace = changedFileNotif and changedFileNotif.id,
 		animate = false,
-		hide_from_history = changedFileNotif ~= nil, -- keep only first in history
+		hide_from_history = true,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_call(
 				bufnr,
-				function() vim.fn.matchadd("Title", currentFileIcon .. ".*") end
+				function() vim.fn.matchadd("Title", opts.currentFileIcon .. ".*") end
 			)
 		end,
 	})
@@ -150,7 +150,9 @@ function M.gotoLastCommittedChangeInFile()
 		:filter(function(line) return vim.startswith(line, "@@ ") end)
 		:map(function(line)
 			local start, length = line:match("%+(%d+),(%d+)")
-			if not start then start, length = line:match("%+(%d+)"), 0 end
+			if not start then
+				start, length = line:match("%+(%d+)"), 0
+			end
 			return { start = tonumber(start), length = tonumber(length) }
 		end)
 		:totable()
