@@ -168,7 +168,8 @@ local function cmpconfig()
 	cmp.setup.filetype("lua", {
 		enabled = function()
 			local line = vim.api.nvim_get_current_line()
-			return not line:find("%s%-%-?$") and not line:find("^%-%-?$")
+			local doubleDashLine = line:find("%s%-%-?$") or line:find("^%-%-?$")
+			return not doubleDashLine
 		end,
 	})
 

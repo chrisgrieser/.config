@@ -4,14 +4,14 @@ local u = require("config.utils")
 return {
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
+		commit = "766931a",
 		ft = "lua",
 		opts = {
-			library = { vim.env.LAZY .. "/luvit-meta/library" },
+			library = { vim.fn.stdpath("data") .. "/lazy/luvit-meta/library" },
 		},
 	},
-	-- `vim.uv` typings.
-	-- (not as dependency, since they never need to be loaded)
-	{ "Bilal2453/luvit-meta" },
+	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
+	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",

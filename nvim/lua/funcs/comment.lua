@@ -81,13 +81,12 @@ function M.docstring()
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
 		-- PENDING https://github.com/LuaLS/lua-language-server/issues/2517
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "---" })
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "--" })
 		vim.api.nvim_win_set_cursor(0, { ln, 0 })
-		vim.cmd.startinsert { bang = true }
 		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
-		vim.defer_fn(require("cmp").complete, 200)
-		vim.defer_fn(function() require("cmp").confirm { select = true } end, 400)
-		vim.defer_fn(vim.api.nvim_del_current_line, 8000) -- remove `---comment`
+		vim.defer_fn(function() vim.cmd.startinsert { bang = true } end, 200)
+		-- vim.defer_fn(require("cmp").complete, 400)
+		-- vim.defer_fn(function() require("cmp").confirm { select = true } end, 600)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

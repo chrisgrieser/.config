@@ -198,14 +198,23 @@ keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
 keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 -- BUFFERS & FILES
-keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
-keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
-
+keymap(
+	"n",
+	"<BS>",
+	function() require("funcs.buf-nav").bufferByLastUsed("prev") end,
+	{ desc = "󰽙 Prev Buffer" }
+)
+keymap(
+	"n",
+	"<S-BS>",
+	function() require("funcs.buf-nav").bufferByLastUsed("next") end,
+	{ desc = "󰽙 Next Buffer" }
+)
 keymap(
 	{ "n", "x" },
 	"<CR>",
-	function() require("funcs.alt-alt").gotoAltBuffer() end,
+	function() require("funcs.buf-nav").gotoAltBuffer() end,
 	{ desc = "󰽙 Alt Buffer" }
 )
 
