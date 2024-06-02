@@ -4,8 +4,16 @@ local M = {}
 local pluginName = "Git Jumper"
 
 local config = {
-	maxChangedFiles = 5,
+	gotoChangedFiles = {
+		maxFiles = 5,
+	},
+	gotoLastCommittedChangeInFile = {
+		highlightDurationMs = 2000,
+		highlightGroup = "DiffText",
+	},
 }
+
+--------------------------------------------------------------------------------
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -57,7 +65,7 @@ function M.gotoChangedFiles()
 		end
 	end
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
-	changedFiles = vim.list_slice(changedFiles, 1, config.maxChangedFiles)
+	changedFiles = vim.list_slice(changedFiles, 1, config.gotoChangedFiles.maxFiles)
 
 	-- GUARD
 	if #changedFiles == 1 and changedFiles[1].absPath == currentFile then
@@ -122,33 +130,44 @@ function M.gotoChangedFiles()
 end
 
 function M.gotoLastCommittedChangeInFile()
+	local opts = config.gotoLastCommittedChangeInFile
 	local file = vim.api.nvim_buf_get_name(0)
-	local cmd = {
-		"git",
-		"--no-pager",
-		"log",
-		"--max-count=1",
-		"--patch",
-		"--unified=0",
-		"--format=",
-		"--",
-		file,
-	}
+
+	-- stylua: ignore
+	local cmd = { "git", "--no-pager", "log", "--max-count=1", "--patch", "--unified=0", "--format=", "--", file }
 	local result = vim.system(cmd):wait()
 	if result.code ~= 0 then
 		notify(result.stderr or "", "error")
 		return
 	elseif result.stdout == "" then
-		notify(r, "warn")
+		notify("File has not last committed change.", "warn")
 		return
 	end
-	local changedLines = vim.iter(vim.split(result.stdout, "\n"))
-		:filter(function(line) return vim.startswith(line, "@@ ") end)
-		:map(function(line) return vim.trim(line:sub(3)) end)
-		:totable()
 
 	-- INFO meaning of the `@@` lines: https://stackoverflow.com/a/31615728/22114136
-	vim.notify("⭕ changedLines: " .. vim.inspect(changedLines))
+	local changedInLastCommit = vim.iter(vim.split(result.stdout, "\n"))
+		:filter(function(line) return vim.startswith(line, "@@ ") end)
+		:map(function(line)
+			local start, length = line:match("%+(%d+),(%d+)") or line:match("%+(%d+)")
+			vim.notify("⭕ length: " .. tostring(length))
+			vim.notify("⭕ start: " .. tostring(start))
+			return { start = tonumber(start), length = tonumber(length) }
+		end)
+		:totable()
+	local firstChange = changedInLastCommit[1]
+	vim.notify("⭕ firstChange: " .. vim.inspect(firstChange))
+
+	-- goto beginning of first last change
+	vim.api.nvim_win_set_cursor(0, { firstChange.start, 0 })
+
+	-- highlight changed lines
+	local ns = vim.api.nvim_create_namespace("lastCommittedChange")
+	local changeEnd = firstChange.start + firstChange.length
+	vim.highlight.range(0, ns, opts.highlightGroup, { firstChange.start, 0 }, { changeEnd, -1 })
+	vim.defer_fn(
+		function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end,
+		opts.highlightDurationMs
+	)
 end
 
 --------------------------------------------------------------------------------

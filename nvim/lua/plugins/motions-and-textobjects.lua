@@ -238,6 +238,20 @@ return {
 				end,
 				desc = "󰌹 Smart URL Opener",
 			},
+			{
+				"<D-U>",
+				function()
+					local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
+					local urlLine = vim.iter(vim.api.nvim_buf_get_lines(0, 0, -1, false))
+						:find(function(line) return line:match(urlPattern) end)
+					if not urlLine then
+						u.notify("", "No URL found in file.", "warn")
+						return
+					end
+					vim.ui.open(urlLine:match(urlPattern))
+				end,
+				desc = "󰌹 Open First URL in File",
+			},
 		},
 	},
 }
