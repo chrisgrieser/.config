@@ -143,7 +143,7 @@ function M.gotoLastCommittedChangeInFile()
 		notify("File has not last committed change.", "warn")
 		return
 	end
-	vim.notify(result.stdout, vim.log.levels.INFO, { title = "Diff" })
+	vim.notify(result.stdout:match("@@.-@@"), vim.log.levels.INFO, { title = "Diff line" })
 
 	-- INFO meaning of the `@@` lines: https://stackoverflow.com/a/31615728/22114136
 	local changedInLastCommit = vim.iter(vim.split(result.stdout, "\n"))
@@ -164,7 +164,7 @@ function M.gotoLastCommittedChangeInFile()
 	-- highlight changed lines
 	local ns = vim.api.nvim_create_namespace("lastCommittedChange")
 	local changeEnd = firstChange.start + firstChange.length
-	vim.highlight.range(0, ns, opts.highlightGroup, { firstChange.start, 0 }, { changeEnd, -1 })
+	vim.highlight.range(0, ns, opts.highlightGroup, { firstChange.start - 1, 0 }, { changeEnd, 0 })
 	vim.defer_fn(
 		function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end,
 		opts.highlightDurationMs

@@ -95,7 +95,9 @@ keymap("n", "g,", function()
 			local pathOfThisFile = debug.getinfo(1).source:sub(2)
 			vim.cmd.edit(pathOfThisFile)
 		else
-			local module = (plugin._.super and plugin._.super._.module or plugin._.module)
+			local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
+				or plugin._.module
+
 			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module:gsub("%.", "/") .. ".lua"
 			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
 			vim.cmd(("edit +/%q %s"):format(repo, filepath))

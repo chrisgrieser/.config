@@ -4,12 +4,8 @@ local u = require("config.utils")
 return {
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
-		enabled = false,
 		ft = "lua",
-		-- commit = "766931a",
 		opts = {
-			-- for commit 766931a
-			-- library = { vim.fn.stdpath("data") .. "/lazy/luvit-meta/library" },
 			library = { "luvit-meta/library" },
 		},
 	},
