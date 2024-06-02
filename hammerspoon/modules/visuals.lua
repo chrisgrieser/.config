@@ -1,8 +1,8 @@
 local M = {}
 
-local env = require("lua.environment-vars")
-local u = require("lua.utils")
-local wu = require("lua.window-utils")
+local env = require("modules.environment-vars")
+local u = require("modules.utils")
+local wu = require("modules.window-utils")
 --------------------------------------------------------------------------------
 
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html

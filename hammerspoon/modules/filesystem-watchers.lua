@@ -1,7 +1,7 @@
 local M = {}
 
 local pathw = hs.pathwatcher.new
-local u = require("lua.utils")
+local u = require("modules.utils")
 local home = os.getenv("HOME")
 --------------------------------------------------------------------------------
 

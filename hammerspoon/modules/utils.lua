@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local env = require("lua.environment-vars")
+local env = require("modules.environment-vars")
 --------------------------------------------------------------------------------
 
 -- bound to capslock via Karabiner elements
