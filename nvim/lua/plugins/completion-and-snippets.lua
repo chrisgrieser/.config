@@ -7,7 +7,7 @@ local function cmpconfig()
 
 	cmp.setup {
 		view = {
-			entries = { follow_cursor = true },
+			entries = { follow_cursor = true }, ---@diagnostic disable-line: missing-fields
 		},
 		performance = {
 			-- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
@@ -22,7 +22,7 @@ local function cmpconfig()
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
 		},
-		sorting = {
+		sorting = { ---@diagnostic disable-line: missing-fields
 			comparators = {
 				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
 				-- compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
@@ -75,7 +75,7 @@ local function cmpconfig()
 				if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
 			end, { "i", "s" }),
 		},
-		formatting = {
+		formatting = { ---@diagnostic disable-line: missing-fields
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
 				local maxLength = 50

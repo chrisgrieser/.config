@@ -8,6 +8,6 @@ local function overwriteFile(filePath, str)
 	file:close()
 end
 
-vim.uv.fs_mkdir("./debug/ffff", 493)
+vim.fn.mkdir("./debug/ffff/aaaa/bla.txt", "p")
 
 overwriteFile("./debug/ffff/test.txt", "hello")

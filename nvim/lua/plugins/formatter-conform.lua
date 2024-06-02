@@ -1,7 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
-
--- use formatting from conform.nvim
+-- CONFIG 
+-- formatting from conform.nvim
 local ftToFormatter = {
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 	lua = { "stylua" },
@@ -11,7 +11,7 @@ local ftToFormatter = {
 	just = { "just", "squeeze_blanks" },
 	query = { "format-queries" },
 }
--- use formatting from the LSP
+-- formatting from the LSP
 local lspFormatFt = {
 	"javascript",
 	"typescript",
@@ -25,21 +25,19 @@ local lspFormatFt = {
 	"css",
 }
 
--- use auto-indenting as poor man's formatter
+-- auto-indenting as poor man's formatter
 local autoIndentFt = {
-	"query",
 	"applescript",
 }
 
 --------------------------------------------------------------------------------
 
----@param formattersByFt object[]
 ---@return string[]
 ---@nodiscard
-local function listConformFormatters(formattersByFt)
+local function listConformFormatters()
 	local notClis =
 		{ "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected", "just", "format-queries" }
-	local formatters = vim.iter(vim.tbl_values(formattersByFt))
+	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
 		:flatten()
 		:filter(function(ft) return not vim.tbl_contains(notClis, ft) end)
 		:totable()
@@ -125,7 +123,7 @@ return {
 	-- Formatter integration
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
-	mason_dependencies = listConformFormatters(ftToFormatter),
+	mason_dependencies = listConformFormatters(),
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
