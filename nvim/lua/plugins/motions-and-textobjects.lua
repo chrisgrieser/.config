@@ -210,8 +210,8 @@ return {
 
 					-- highlight yanked text
 					local ns = vim.api.nvim_create_namespace("ysi")
-					vim.highlight.range(0, ns, "IncSearch", { startLn, 0 }, { startLn, -1 })
-					vim.highlight.range(0, ns, "IncSearch", { endLn, 0 }, { endLn, -1 })
+					vim.highlight.range(0, ns, "IncSearch", { startLn, 0 }, { startLn + 1, 0 })
+					vim.highlight.range(0, ns, "IncSearch", { endLn, 0 }, { endLn + 1, 0 })
 					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 1000)
 				end,
 				desc = "󰅍 Yank surrounding indent",
