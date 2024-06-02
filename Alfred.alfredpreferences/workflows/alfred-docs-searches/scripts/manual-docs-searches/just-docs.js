@@ -33,7 +33,7 @@ function run() {
 
 			return {
 				title: title.trim(),
-				subtitle: number,
+				subtitle: number.slice(0, -1),
 				arg: url,
 				quicklookurl: url,
 				uid: url,
@@ -42,6 +42,6 @@ function run() {
 
 	return JSON.stringify({
 		items: sitesArr,
-		//cache: { seconds: 3600 * 24 * 7 },
+		cache: { seconds: 3600 * 24 * 7 },
 	});
 }

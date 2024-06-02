@@ -2915,9 +2915,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
-
-https://apple.stackexchange.com/questions/365857/create-system-preferences-url-to-privacy-files-and-folders-in-10-15-catalina/372303#372303</string>
+	<string></string>
 	<key>uidata</key>
 	<dict>
 		<key>0608C0AA-05B8-4CE2-BF9D-929EC1D23ED0</key>
@@ -3597,9 +3595,31 @@ https://apple.stackexchange.com/questions/365857/create-system-preferences-url-t
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
+			</dict>
+			<key>description</key>
+			<string>Ignore settings containing certain words, one per line, case-insensitive. For example, "dis" will make this workflow ignore "Full Disk Access" and "Display", since both contain "dis".</string>
+			<key>label</key>
+			<string>Ignore Settings</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>ignored_settings</string>
+		</dict>
+	</array>
 	<key>version</key>
-	<string>2022.1</string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/system-settings-workflow/</string>
 </dict>

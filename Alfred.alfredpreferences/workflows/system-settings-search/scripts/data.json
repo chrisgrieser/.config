@@ -1,0 +1,222 @@
+[
+	{
+		"title": "Security",
+		"icon": "security.png",
+		"uri": "x-apple.systempreferences:com.apple.preference.security"
+	},
+	{
+		"title": "About",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.SystemProfiler.AboutExtension"
+	},
+	{
+		"title": "Accessibility",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"
+	},
+	{
+		"title": "Appearance",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Appearance-Settings.extension"
+	},
+	{
+		"title": "Full Disk Access",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+	},
+	{
+		"title": "Apple ID",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane"
+	},
+	{
+		"title": "Automation",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation"
+	},
+	{
+		"title": "Universal Access",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.universalaccess"
+	},
+	{
+		"title": "Bluetooth",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.BluetoothSettings"
+	},
+	{
+		"title": "Keyboard",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.universalaccess?Keyboard"
+	},
+	{
+		"title": "Date & Time",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.datetime"
+	},
+	{
+		"title": "Mouse",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse"
+	},
+	{
+		"title": "Desktop & Dock",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Desktop-Settings.extension"
+	},
+	{
+		"title": "Displays (Accessibility)",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display"
+	},
+	{
+		"title": "Displays",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Displays-Settings.extension"
+	},
+	{
+		"title": "Extensions",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.extensions"
+	},
+	{
+		"title": "Focus",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Focus-Settings.extension"
+	},
+	{
+		"title": "General",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.systempreferences.GeneralSettings"
+	},
+	{
+		"title": "Keyboard",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension"
+	},
+	{
+		"title": "Language & Region",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Localization-Settings.extension"
+	},
+	{
+		"title": "Lock-Screen-Settings",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"
+	},
+	{
+		"title": "Login Items",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.LoginItems-Settings.extension"
+	},
+	{
+		"title": "Mouse",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Mouse-Settings.extension"
+	},
+	{
+		"title": "Network",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Network-Settings.extension"
+	},
+	{
+		"title": "Notifications",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.notifications"
+	},
+	{
+		"title": "Passwords",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Passwords-Settings.extension"
+	},
+	{
+		"title": "Print & Scan",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Print-Scan-Settings.extension"
+	},
+	{
+		"title": "Screen Saver",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.ScreenSaver-Settings.extension"
+	},
+	{
+		"title": "Speech",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.speech"
+	},
+	{
+		"title": "Software Update",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.softwareupdate"
+	},
+	{
+		"title": "Sound",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Sound-Settings.extension"
+	},
+	{
+		"title": "Storage",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.settings.Storage"
+	},
+	{
+		"title": "Trackpad",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Trackpad-Settings.extension"
+	},
+	{
+		"title": "Users & Groups",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension"
+	},
+	{
+		"title": "Wallpaper",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Wallpaper-Settings.extension"
+	},
+	{
+		"title": "Wi-Fi",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.wifi-settings-extension"
+	},
+	{
+		"title": "Control Center",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension"
+	},
+	{
+		"title": "App Store",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.password"
+	},
+	{
+		"title": "Screen Time",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preference.screentime"
+	},
+	{
+		"title": "Sharing",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.sharing"
+	},
+	{
+		"title": "Game Controller",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension"
+	},
+	{
+		"title": "Accounts",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Internet-Accounts-Settings.extension"
+	},
+	{
+		"title": "Configuration Profiles",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.preferences.configurationprofiles"
+	},
+	{
+		"title": "Startup Disk",
+		"icon": ".png",
+		"uri": "x-apple.systempreferences:com.apple.Startup-Disk-Settings.extension"
+	}
+]
