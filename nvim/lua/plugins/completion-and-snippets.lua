@@ -78,7 +78,7 @@ local function cmpconfig()
 		formatting = { ---@diagnostic disable-line: missing-fields
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
-				local maxLength = 50
+				local maxLength = 40
 				local sourceIcons = {
 					buffer = "󰽙",
 					cmdline = "󰘳",
@@ -117,7 +117,9 @@ local function cmpconfig()
 
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				if #item.abbr > maxLength then item.abbr = item.abbr:sub(1, maxLength) .. "…" end
+				if #item.abbr > maxLength then
+					item.abbr = (item.abbr or ""):sub(1, maxLength) .. "…"
+				end
 
 				-- distinguish emmet snippets
 				local isEmmet = entry.source.name == "nvim_lsp"
@@ -166,7 +168,7 @@ local function cmpconfig()
 	cmp.setup.filetype("lua", {
 		enabled = function()
 			local line = vim.api.nvim_get_current_line()
-			return not (line:find("%s%-%-?$") or line:find("^%-%-?$"))
+			return not line:find("%s%-%-?$") and not line:find("^%-%-?$")
 		end,
 	})
 

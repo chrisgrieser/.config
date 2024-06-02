@@ -6,12 +6,12 @@ if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" &&
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
-commit_msg="ci: add \`nvim-typecheck\` action"
+commit_msg="ci: fix \`stylua\` action"
 
 set -e
 
 function actions_in_repo {
-	cp "$HOME/Desktop/nvim-typecheck.yml" ./.github/workflows/nvim-typecheck.yml
+	cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────
