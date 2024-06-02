@@ -1,4 +1,6 @@
-;extends
+; extends
+
+; format-ignore
 
 ; SOURCE https://github.com/Dronakurl/injectme.nvim
 ; INFO injected languages require the TS parser name, not the vim filetype name,
