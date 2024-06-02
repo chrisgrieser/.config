@@ -135,7 +135,7 @@ local lualineConfig = {
 			{ "filename", file_status = false, shortening_target = 30 },
 		},
 		lualine_b = {
-			{ require("funcs.alt-alt").altFileStatus },
+			{ require("funcs.buf-nav").altFileStatus },
 		},
 		lualine_c = {
 			{ quickfixCounter },
