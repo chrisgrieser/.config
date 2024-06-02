@@ -143,19 +143,18 @@ function M.gotoLastCommittedChangeInFile()
 		notify("File has not last committed change.", "warn")
 		return
 	end
+	-- vim.notify(result.stdout, vim.log.levels.INFO, { title = "Diff" })
 
 	-- INFO meaning of the `@@` lines: https://stackoverflow.com/a/31615728/22114136
 	local changedInLastCommit = vim.iter(vim.split(result.stdout, "\n"))
 		:filter(function(line) return vim.startswith(line, "@@ ") end)
 		:map(function(line)
-			local start, length = line:match("%+(%d+),(%d+)") or line:match("%+(%d+)")
-			vim.notify("⭕ length: " .. tostring(length))
-			vim.notify("⭕ start: " .. tostring(start))
+			local start, length = line:match("%+(%d+),(%d+)")
+			if not start then start, length = line:match("%+(%d+)"), 0 end
 			return { start = tonumber(start), length = tonumber(length) }
 		end)
 		:totable()
 	local firstChange = changedInLastCommit[1]
-	vim.notify("⭕ firstChange: " .. vim.inspect(firstChange))
 
 	-- goto beginning of first last change
 	vim.api.nvim_win_set_cursor(0, { firstChange.start, 0 })

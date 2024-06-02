@@ -1,16 +1,17 @@
 #!/usr/bin/env zsh
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
-set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
-commit_msg="ci: allow \`improv\` as commit type in PRs"
+commit_msg="ci: add \`nvim-typecheck\` action"
+
+set -e
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/semantic-pr-title.yml" ./.github/workflows/semantic-pr-title.yml
+	cp "$HOME/Desktop/nvim-typecheck.yml" ./.github/workflows/nvim-typecheck.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -29,7 +30,7 @@ echo
 print "\e[1;34mActions:\e[0m"
 declare -f actions_in_repo | bat --language=sh
 echo
-print "\e[1;35mProceed? (y/n)\e[0m"
+print "\e[1;34mProceed? (y/n)\e[0m"
 read -rk pressed
 if [[ "$pressed" != "y" ]]; then
 	echo "Aborted."
