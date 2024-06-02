@@ -1,5 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	commit = "5aadae3f543ad9f83d5c2eb209d85f3ee26587ab",
 	event = "VeryLazy",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",

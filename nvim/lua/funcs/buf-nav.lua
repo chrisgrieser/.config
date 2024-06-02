@@ -88,16 +88,16 @@ end
 function M.gotoAltBuffer()
 	if vim.bo.buftype ~= "" then return end -- deactivate if in a special buffer
 
-	local altBufNr = vim.fn.bufnr("#")
-	local altOld = altOldfile()
-
-	if hasAltFile(altBufNr) then
+	if hasAltFile(vim.fn.bufnr("#")) then
 		vim.cmd.buffer("#")
-	elseif altOld then
-		vim.cmd.edit(altOld)
-	else
-		notify("No Alt File and not Oldfile available.", "warn")
+		return
 	end
+	local altOld = altOldfile()
+	if altOld then
+		vim.cmd.edit(altOld)
+		return
+	end
+	notify("No Alt-File or Oldfile available.", "warn")
 end
 
 --------------------------------------------------------------------------------

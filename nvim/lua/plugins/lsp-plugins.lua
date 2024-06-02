@@ -4,6 +4,7 @@ local u = require("config.utils")
 return {
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
+		enabled = false,
 		ft = "lua",
 		-- commit = "766931a",
 		opts = {
