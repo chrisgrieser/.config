@@ -5,7 +5,14 @@ return {
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
 		ft = "lua",
+		opts = {
+			library = { vim.env.LAZY .. "/luvit-meta/library" },
+		},
 	},
+	-- `vim.uv` typings.
+	-- (not as dependency, since they never need to be loaded)
+	{ "Bilal2453/luvit-meta" },
+	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
@@ -106,6 +113,7 @@ return {
 				callback = function(args)
 					if not (args.data and args.data.client_id) then return end
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					if not client then return end
 					require("lsp-inlayhints").on_attach(client, args.buf)
 				end,
 			})
