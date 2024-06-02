@@ -7,7 +7,9 @@ return {
 		commit = "766931a",
 		ft = "lua",
 		opts = {
+			-- for commit 766931a
 			library = { vim.fn.stdpath("data") .. "/lazy/luvit-meta/library" },
+			-- library = { "luvit-meta/library" },
 		},
 	},
 	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
