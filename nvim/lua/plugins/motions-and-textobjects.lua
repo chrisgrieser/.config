@@ -27,6 +27,7 @@ return {
 	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
+		opts = { consistentOperatorPending = true },
 		keys = {
 			{
 				"e",
