@@ -120,10 +120,7 @@ opt.titlelen = 0 -- 0 = do not shorten title
 opt.titlestring = "%{getcwd()}"
 
 -- issue commands (via nvim server https://neovim.io/doc/user/remote.html)
-if vim.g.neovide then
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- FIX server sometimes not properly shut down
-	vim.defer_fn(function() vim.fn.serverstart("/tmp/nvim_server.pipe") end, 400)
-end
+if vim.g.neovide then vim.fn.serverstart("/tmp/nvim_server.pipe") end
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
@@ -134,22 +131,9 @@ autocmd("TextYankPost", {
 })
 
 --------------------------------------------------------------------------------
--- SEARCH & SUBSTITUTION
-
+-- SEARCH
 opt.ignorecase = true
 opt.smartcase = true
-opt.inccommand = "split" -- preview incremental commands like `:substitute`
-
--- make `:substitute` also notify how many changes were made
--- works, as `CmdlineLeave` is triggered before the execution of the command
-autocmd("CmdlineLeave", {
-	callback = function(ctx)
-		if not ctx.match == ":" then return end
-		local cmdline = vim.fn.getcmdline()
-		local isSubstitution = cmdline:find("s ?/.+/.-/%a*$")
-		if isSubstitution then vim.cmd(cmdline .. "ne") end
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- CMDLINE

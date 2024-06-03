@@ -3,7 +3,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
-	win = {
+	window = {
 		width = 50,
 		border = vim.g.borderStyle,
 	},
@@ -12,8 +12,7 @@ local config = {
 		abort = "q",
 	},
 	regexOptions = {
-		pcre2 = true, -- enables lookarounds and backreferences, but slightly slower
-		multiline = false, -- does not affect `.` (see rg's manpage on `--multiline`)
+		pcre2 = true, -- enables lookarounds and backreferences, but slower performance
 		-- By default, rg treats `$1a` as the named capture group "1a". When set
 		-- to `true`, this behavior is disabled and `$1a` is the first capture
 		-- followed by the letter "a" (see rg's manpage on `--replace`).
@@ -31,11 +30,6 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "rg substitute" })
 end
 
--- jackpotbb
--- cc
--- XXXXXXXXXXXX
--- XXXXXXXXXXXX
-
 ---@param rgBuf integer temporary rg buffer
 ---@param targetBuf integer buffer where the output will be written
 local function executeSubstitution(rgBuf, targetBuf)
@@ -52,7 +46,6 @@ local function executeSubstitution(rgBuf, targetBuf)
 			toSearch,
 			"--count",
 			"--no-config",
-			config.regexOptions.multiline and "--multiline" or nil,
 			config.regexOptions.pcre2 and "--pcre2" or nil,
 			"--",
 			file,
@@ -69,10 +62,8 @@ local function executeSubstitution(rgBuf, targetBuf)
 		"rg",
 		toSearch,
 		"--replace=" .. toReplace,
-		"--passthrough",
-		"--no-line-number",
+		"--line-number",
 		"--no-config",
-		config.regexOptions.multiline and "--multiline" or nil,
 		config.regexOptions.pcre2 and "--pcre2" or nil,
 		"--",
 		file,
@@ -83,8 +74,12 @@ local function executeSubstitution(rgBuf, targetBuf)
 	end
 
 	-- update
-	local newLines = vim.split(rgResult.stdout, "\n")
-	vim.api.nvim_buf_set_lines(targetBuf, 0, -1, false, newLines)
+	local newLines = vim.split(vim.trim(rgResult.stdout), "\n")
+	for _, repl in pairs(newLines) do
+		local lineStr, newLine = repl:match("^(%d+):(.*)")
+		local lnum = assert(tonumber(lineStr))
+		vim.api.nvim_buf_set_lines(targetBuf, lnum - 1, lnum, false, { newLine })
+	end
 end
 
 ---@param ns number
@@ -105,12 +100,10 @@ local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
 		"--column",
 		"--only-matching",
 		"--no-config",
-		config.regexOptions.multiline and "--multiline" or nil,
 		config.regexOptions.pcre2 and "--pcre2" or nil,
 		"--",
 		file,
 	}):wait()
-	-- TODO parse `--json` output for better handling of `--multiline`
 	if rgResult.code ~= 0 then return end
 
 	local viewportStart = vim.fn.line("w0", targetWin)
@@ -118,7 +111,7 @@ local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
 
 	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
 	vim.iter(matches)
-		:filter(function(match) -- PERF only matches in viewport
+		:filter(function(match) -- PERF update only matches in viewport
 			local line = tonumber(match:match("^(%d+):"))
 			return (line >= viewportStart) and (line <= viewportEnd)
 		end)
@@ -134,6 +127,7 @@ end
 function M.rgSubstitute()
 	local targetBuf = vim.api.nvim_get_current_buf()
 	local targetWin = vim.api.nvim_get_current_win()
+	local augroup = vim.api.nvim_create_augroup("rg-substitute", { clear = true })
 
 	-- CREATE & PREFILL TEMP RG-BUFFER
 	local searchPrefill
@@ -153,11 +147,11 @@ function M.rgSubstitute()
 	local winnr = vim.api.nvim_open_win(rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 5,
-		col = math.floor((vim.api.nvim_win_get_width(0) - config.win.width) / 2),
-		width = config.win.width,
+		col = math.floor((vim.api.nvim_win_get_width(0) - config.window.width) / 2),
+		width = config.window.width,
 		height = 2,
 		style = "minimal",
-		border = config.win.border,
+		border = config.window.border,
 		title = "  rg substitute ",
 		title_pos = "center",
 	})
@@ -181,18 +175,27 @@ function M.rgSubstitute()
 	local matchHls = vim.api.nvim_create_namespace("rg-substitute-match-hls")
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		buffer = rgBuf,
-		group = vim.api.nvim_create_augroup("rg-substitute", { clear = true }),
+		group = augroup,
 		callback = function() highlightMatches(matchHls, rgBuf, targetBuf, targetWin) end,
 	})
 
-	-- KEYMAPS
+	-- POPUP CLOSING
 	local function closeRgWin()
-		vim.api.nvim_win_close(winnr, true)
-		vim.api.nvim_buf_delete(rgBuf, { force = true })
+		if vim.api.nvim_win_is_valid(winnr) then vim.api.nvim_win_close(winnr, true) end
+		if vim.api.nvim_buf_is_valid(rgBuf) then vim.api.nvim_buf_delete(rgBuf, { force = true }) end
 		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 		vim.api.nvim_buf_clear_namespace(0, matchHls, 0, -1)
 	end
+	-- also close the popup on leaving buffer, ensures there is not leftover
+	-- buffer when user closes popup in a different way, such as `:close`.
+	vim.api.nvim_create_autocmd("BufLeave", {
+		buffer = rgBuf,
+		group = augroup,
+		once = true,
+		callback = closeRgWin,
+	})
 
+	-- KEYMAPS
 	vim.keymap.set({ "n", "x" }, config.keymaps.abort, closeRgWin, { buffer = rgBuf, nowait = true })
 	vim.keymap.set({ "n", "x" }, config.keymaps.confirm, function()
 		executeSubstitution(rgBuf, targetBuf)
@@ -202,8 +205,3 @@ end
 
 --------------------------------------------------------------------------------
 return M
-
-
-
-
-
