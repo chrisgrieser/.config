@@ -304,7 +304,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		-- `z` is used as temporary register for keymaps, thus needs to be ignored
 		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" then
-			vim.cmd("silent! normal! `" .. mark)
+			local preYank = vim.api.nvim_buf_get_mark(0, mark)
+			vim.api.nvim_win_set_cursor(0, preYank)
 		end
 	end,
 })

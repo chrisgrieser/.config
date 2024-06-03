@@ -162,7 +162,11 @@ function M.bufferByLastUsed(dir)
 			local prefix = nextBufName == buf.name and currentFileIcon or "•"
 			return prefix .. " " .. vim.fs.basename(buf.name)
 		end)
-		:rev() -- so most recent is on top
+		:rev()
+
+	local first = bufsDisplay:pop()
+	
+	
 		:totable()
 	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
