@@ -105,8 +105,8 @@ end
 local bufsByLastAccess
 local bufNavNotify
 local timeoutTimer
-local lastAccessTimeout = 2000
-local maxBufs = 10
+local lastAccessTimeout = 3000
+local maxBufs =  7
 
 ---@param dir "next"|"prev"
 function M.bufferByLastUsed(dir)
@@ -158,6 +158,7 @@ function M.bufferByLastUsed(dir)
 			local prefix = nextBufName == buf.name and currentFileIcon or "•"
 			return prefix .. " " .. vim.fs.basename(buf.name)
 		end)
+		:rev()
 		:join("\n")
 
 	bufNavNotify = vim.notify(bufNames, vim.log.levels.INFO, {
