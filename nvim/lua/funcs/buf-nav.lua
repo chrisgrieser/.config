@@ -108,20 +108,26 @@ end
 local bufsByLastAccess
 local bufNavNotify
 local timeoutTimer
-local lastAccessTimeout = 3000
-local maxBufs = 7
+
+local config = {
+	timeout = 3000,
+	maxBufAgeMins = 15,
+}
 
 ---@param dir "next"|"prev"
 function M.bufferByLastUsed(dir)
 	-- GET BUFFERS SORTED BY LAST ACCESS
 	-- timeout required, as switching to buffer always makes it the last accessed one
 	if timeoutTimer then timeoutTimer:stop() end
-	timeoutTimer = vim.defer_fn(function() bufsByLastAccess = nil end, lastAccessTimeout)
+	timeoutTimer = vim.defer_fn(function() bufsByLastAccess = nil end, config.timeout)
 
 	if not bufsByLastAccess then
-		bufsByLastAccess = vim.fn.getbufinfo { buflisted = 1 }
+		---@type {name: string, lastused: number}[]
+		bufsByLastAccess = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+			:filter(function(buf) return (os.time() - buf.lastused) < config.maxBufAgeMins * 60 end)
+			:totable()
 		table.sort(bufsByLastAccess, function(a, b) return a.lastused > b.lastused end)
-		bufsByLastAccess = vim.list_slice(bufsByLastAccess, 1, maxBufs)
+		bufsByLastAccess = vim.list_slice(bufsByLastAccess, 1, config.maxBufs)
 	end
 	if #bufsByLastAccess < 2 then
 		bufsByLastAccess = nil
@@ -155,32 +161,26 @@ function M.bufferByLastUsed(dir)
 	local notifyInstalled, _ = pcall(require, "notify")
 	if not notifyInstalled then return end
 
-	local currentFileIcon = ""
-	local bufsDisplay = vim
-		.iter(bufsByLastAccess)
+	local curBufIcon = ""
+	local bufsDisplay = vim.iter(bufsByLastAccess)
 		:map(function(buf)
-			local prefix = nextBufName == buf.name and currentFileIcon or "•"
+			local prefix = nextBufName == buf.name and curBufIcon or "•"
 			return prefix .. " " .. vim.fs.basename(buf.name)
 		end)
 		:rev()
-
-	local first = bufsDisplay:pop()
-	
-	
 		:totable()
 	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
 	bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
+		timeout = config.timeout,
 		title = pluginName,
 		animate = false,
+		stages = "no_animation",
 		hide_from_history = true,
 		replace = bufNavNotify and bufNavNotify.id,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_call(
-				bufnr,
-				function() vim.fn.matchadd("Title", currentFileIcon .. ".*") end
-			)
+			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", curBufIcon .. ".*") end)
 		end,
 	})
 end

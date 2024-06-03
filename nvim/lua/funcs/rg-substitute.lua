@@ -3,8 +3,8 @@ local M = {}
 
 local defaultConfig = {
 	window = {
-		width = 50,
-		border = vim.g.borderStyle,
+		width = 35,
+		border = "single",
 	},
 	keymaps = {
 		confirm = "<CR>",
@@ -146,8 +146,8 @@ function M.rgSubstitute()
 	-- CREATE WINDOW
 	local winnr = vim.api.nvim_open_win(rgBuf, true, {
 		relative = "win",
-		row = vim.api.nvim_win_get_height(0) - 5,
-		col = math.floor((vim.api.nvim_win_get_width(0) - config.window.width) / 2),
+		row = vim.api.nvim_win_get_height(0) - 4,
+		col = vim.api.nvim_win_get_width(0) - config.window.width - 2,
 		width = config.window.width,
 		height = 2,
 		style = "minimal",
