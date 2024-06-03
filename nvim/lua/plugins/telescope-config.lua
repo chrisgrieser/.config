@@ -197,9 +197,7 @@ local function telescopeConfig()
 				prompt_prefix = " ",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 				mappings = {
-					i = {
-						["<CR>"] = keymaps.copyColorValue,
-					},
+					i = { ["<CR>"] = keymaps.copyColorValue },
 				},
 			},
 			lsp_references = {
