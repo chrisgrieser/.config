@@ -3,6 +3,11 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"chrisgrieser/nvim-alt-substitute",
+		opts = { regexFlavor = "rg" },
+		event = "CmdlineEnter",
+	},
 	{ -- refactoring utilities
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
@@ -196,7 +201,7 @@ return {
 			require("nvim-autopairs").add_rules {
 				-- autopair <> for keymaps like `<C-d>` & html-tags
 				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
-				rule("<", ">", { "vim", "html", "xml" }), 
+				rule("<", ">", { "vim", "html", "xml" }),
 
 				-- css: auto-add trailing semicolon, but only for declarations
 				-- (which are at the end of the line and have no text afterwards)
