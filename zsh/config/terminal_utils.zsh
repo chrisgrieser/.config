@@ -62,7 +62,7 @@ function s {
 	local selected file line
 	selected=$(
 		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --ignore-file="$HOME/.config/rg/ignore" |
+			--no-config --smart-case --ignore-file="$HOME/.config/rg/ignore" |
 			fzf --ansi --select-1 \
 				--delimiter=":" --nth=1 --with-nth=1,2 \
 				--preview='bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
@@ -83,8 +83,16 @@ function s {
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
 function sr {
+	if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+		open "https://docs.rs/regex/1.*/regex/#syntax"
+		return 0
+	fi
+
 	local search="$1"
-	local replace="$2"
+	local replace
+	# HACK deal with annoying named capture groups (see `man rg` on `--replace`)
+	# shellcheck disable=2001
+	replace=$(echo "$2" | sed 's/\$\([[:digit:]]\)/${\1}/g')
 	shift 2
 
 	local files
