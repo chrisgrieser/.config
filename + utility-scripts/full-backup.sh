@@ -86,7 +86,7 @@ if [[ -z "$errors" ]]; then
 	echo "completed: $(date '+%H:%M')" >> "$logpath_on_mac"
 	echo "Backup: $(date '+%Y-%m-%d %H:%M')" >> "$backup_dest/last_backup.log"
 	print "\033[1;32mBackup on $volume_name completed.\033[0m"
-	"$ZDOTDIR/notificator" --title "Backup" --message "✅ complete" --sound "Blow"
+	"$ZDOTDIR/notificator" --title "Backup" --message "✅ completed." --sound "Blow"
 else
 	print "\033[1;31m$errors\033[0m"
 	"$ZDOTDIR/notificator" --title "Backup" --message "⚠️ Errors occurred." --sound "Basso"
