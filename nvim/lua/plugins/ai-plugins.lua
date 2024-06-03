@@ -15,6 +15,7 @@ return {
 				DressingInput = false,
 				noice = false, -- sometimes triggered in error-buffers
 				text = false, -- `pass` passwords editing filetype is plaintext
+				regex = false, -- rg-substitute buffer
 			},
 			silent = true,
 		},
