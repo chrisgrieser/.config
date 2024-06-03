@@ -6,12 +6,14 @@ if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" &&
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
-commit_msg="ci: fix version number in auto-generated vimdoc"
+commit_msg="ci: fix vimdoc filename"
 
 set -e
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
+	plugin_name=$(basename "$PWD" | cut -d"-" -f2-)
+	sed -i '' "s/__plugin-name__/$plugin_name/" ./.github/workflows/panvimdoc.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────
