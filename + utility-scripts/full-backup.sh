@@ -6,7 +6,8 @@ logpath_on_mac="$DATA_DIR/Backups/backups-to-external-drives.log"
 # DETERMINE VOLUME
 
 echo "Searching for Volume… "
-for _ in {1..100}; do
+spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+for i in {1..200}; do
 	volume_name="$(df | grep --only-matching "\s/Volumes/.*" | cut -c2-)"
 	if [[ $(echo "$volume_name" | wc -l) -gt 1 ]]; then
 		print "\e[1;33mMore than one volume connected.\e[0m"
@@ -14,8 +15,9 @@ for _ in {1..100}; do
 	elif [[ -n "$volume_name" ]]; then
 		break
 	fi
-	printf "🬋"
-	sleep 0.5
+	pos=$((i % ${#spinner}))
+	printf "\r%s" "${spinner:$pos:1}"
+	sleep 0.2
 done
 echo
 

@@ -221,10 +221,10 @@
   "spinner": {
     "body": [
       "# spinner with 20s timeout",
+      "spinner=\"⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏\"",
       "for i in {1..100}; do",
-      "\tspinner=\"⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏\"",
-      "\tpos=$((i % ${#spinner}))",
-      "\tprintf \"\\r%s\" \"${spinner:$pos:1}\"",
+      "\tpos=\\$((i % \\${#spinner}))",
+      "\tprintf \"\\r%s\" \"\\${spinner:\\$pos:1}\"",
       "\tsleep 0.2",
       "done",
       "printf \"\\r\" # remove spinner"

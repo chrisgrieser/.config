@@ -8,11 +8,11 @@ return {
 		ft = "gitrebase", -- so ftplugin is loaded
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit({ pushIfClean = false}) end, desc = "󰊢 Smart-Commit & Push", nowait = true },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
 			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
-			{ "<leader>gf", function() require("tinygit").fixupCommit({ autoRebase = true }) end, desc = "󰊢 Fixup & Rebase" },
+			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & Rebase" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-No-Edit & F-Push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend Only Msg & F-Push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
@@ -28,7 +28,7 @@ return {
 			commitMsg = {
 				conventionalCommits = { enforce = true },
 				spellcheck = true,
-				keepAbortedMsgSecs = 60 * 10,
+				keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
