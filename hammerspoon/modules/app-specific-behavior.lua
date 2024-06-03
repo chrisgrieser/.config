@@ -45,10 +45,20 @@ end):start()
 --------------------------------------------------------------------------------
 -- ZOOM
 
--- don't leave browser tab behind when opening zoom
-M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function()
+M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us") -- remove leftover tabs
+
+	-- close 2nd zoom window when joining a meeting
+	if newWin:title() == "Zoom Meeting" then
+		u.runWithDelays(1, function()
+			local zoom = newWin:application()
+			if not zoom or zoom:findWindow("Update") then return end
+			local baseWin = zoom:findWindow("^Zoom$")
+
+			if baseWin then baseWin:close() end
+		end)
+	end
 end)
 
 --------------------------------------------------------------------------------
