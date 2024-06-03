@@ -11,11 +11,18 @@ local config = {
 		confirm = "<CR>",
 		abort = "q",
 	},
-	multiline = false,
+	regexOptions = {
+		pcre2 = true, -- lookarounds and backreferences, but slower
+		multiline = false, -- does not affect `.`, see `man rg` on `--multiline`
+		-- By default, rg treats `$1a` as the named capture group "1a". When set
+		-- to `true`, this behavior is disabled and `$1a` is the first capture
+		-- followed by the letter "a".
+		simpleCaptureGroups = true,
+	},
 }
 
--- XXXaaaaaa..
--- XXXaaaaaa..
+-- XXXbb
+-- XXXcc
 -- XXXaaaaaa..
 -- XXXaaaaaa..
 
@@ -26,7 +33,7 @@ local function executeSubstitution(rgBuf, targetBuf)
 	local file = vim.api.nvim_buf_get_name(targetBuf)
 
 	-- HACK deal with annoying named capture groups (see `man rg` on `--replace`)
-	toReplace = toReplace:gsub("%$(%d+)", "${%1}")
+	if config.simpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
 	local rgResult = vim.system({
 		"rg",
@@ -35,11 +42,15 @@ local function executeSubstitution(rgBuf, targetBuf)
 		"--passthrough",
 		"--no-line-number",
 		"--no-config",
-		config.multiline and "--multiline" or nil,
+		config.regexOptions.multiline and "--multiline" or nil,
+		config.regexOptions.pcre2 and "--pcre2" or nil,
 		"--",
 		file,
 	}):wait()
-	assert(rgResult.code == 0, "rg failed: " .. rgResult.stderr)
+	if rgResult.code ~= 0 then
+		vim.notify(rgResult.stderr, vim.log.levels.ERROR, { title = "rg substitute" })
+		return
+	end
 
 	-- update
 	local newLines = vim.split(rgResult.stdout, "\n")
@@ -61,8 +72,12 @@ function M.rgSubstitute()
 	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { searchPrefill, "" })
 	-- adds syntax highlighting via treesitter `regex` parser
 	vim.api.nvim_set_option_value("filetype", "regex", { buf = rgBuf })
+	vim.api.nvim_buf_set_name(rgBuf, "rg substitute")
 
 	-- create window
+	local footer = ""
+	if config.regexOptions.multiline then footer = footer .. " (multiline)" end
+	if config.regexOptions.pcre2 then footer = footer .. " (multiline)" end
 	local winnr = vim.api.nvim_open_win(rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 5,
@@ -73,6 +88,7 @@ function M.rgSubstitute()
 		border = config.win.border,
 		title = "  rg substitute ",
 		title_pos = "center",
+		footer = footer,
 	})
 	vim.api.nvim_set_option_value("signcolumn", "no", { win = winnr })
 	vim.api.nvim_set_option_value("number", false, { win = winnr })
@@ -80,19 +96,30 @@ function M.rgSubstitute()
 	vim.api.nvim_set_option_value("scrolloff", 0, { win = winnr })
 	vim.cmd.startinsert { bang = true }
 
+	-- virtual text
+	local ns = vim.api.nvim_create_namespace("rg-substitute")
+	vim.api.nvim_buf_set_extmark(rgBuf, ns, 0, 0, {
+		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
+		virt_text_pos = "right_align",
+	})
+	vim.api.nvim_buf_set_extmark(rgBuf, ns, 1, 0, {
+		virt_text = { { "Replace", "DiagnosticVirtualTextInfo" } },
+		virt_text_pos = "right_align",
+	})
+
 	-- keymaps
-	local function close()
+	local function closeRgWin()
 		vim.api.nvim_win_close(winnr, true)
 		vim.api.nvim_buf_delete(rgBuf, { force = true })
+		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 	end
 
-	vim.keymap.set({ "n", "x" }, config.keymaps.abort, close, { buffer = rgBuf, nowait = true })
+	vim.keymap.set({ "n", "x" }, config.keymaps.abort, closeRgWin, { buffer = rgBuf, nowait = true })
 	vim.keymap.set({ "n", "x" }, config.keymaps.confirm, function()
 		executeSubstitution(rgBuf, targetBuf)
-		close()
+		closeRgWin()
 	end, { buffer = rgBuf, nowait = true })
 end
 
 --------------------------------------------------------------------------------
 return M
-
