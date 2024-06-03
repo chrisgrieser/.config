@@ -1,4 +1,5 @@
 local M = {}
+-- DOCS https://docs.rs/regex/1.*/regex/#syntax
 --------------------------------------------------------------------------------
 
 local config = {
@@ -10,12 +11,13 @@ local config = {
 		confirm = "<CR>",
 		abort = "q",
 	},
+	multiline = false,
 }
 
--- XXXaaaaaa
--- XXXaaaaaa
--- XXXaaaaaa
--- XXXaaaaaa
+-- XXXaaaaaa..
+-- XXXaaaaaa..
+-- XXXaaaaaa..
+-- XXXaaaaaa..
 
 ---@param rgBuf integer temporary rg buffer
 ---@param targetBuf integer buffer where the output will be written
@@ -33,6 +35,7 @@ local function executeSubstitution(rgBuf, targetBuf)
 		"--passthrough",
 		"--no-line-number",
 		"--no-config",
+		config.multiline and "--multiline" or nil,
 		"--",
 		file,
 	}):wait()
@@ -92,8 +95,4 @@ end
 
 --------------------------------------------------------------------------------
 return M
-
-
-
-
 
