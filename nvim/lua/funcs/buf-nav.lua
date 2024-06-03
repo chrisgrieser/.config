@@ -106,7 +106,7 @@ local bufsByLastAccess
 local bufNavNotify
 local timeoutTimer
 local lastAccessTimeout = 3000
-local maxBufs =  7
+local maxBufs = 7
 
 ---@param dir "next"|"prev"
 function M.bufferByLastUsed(dir)
@@ -153,15 +153,17 @@ function M.bufferByLastUsed(dir)
 	if not notifyInstalled then return end
 
 	local currentFileIcon = ""
-	local bufNames = vim.iter(bufsByLastAccess)
+	local bufsDisplay = vim
+		.iter(bufsByLastAccess)
 		:map(function(buf)
 			local prefix = nextBufName == buf.name and currentFileIcon or "•"
 			return prefix .. " " .. vim.fs.basename(buf.name)
 		end)
-		:rev()
-		:join("\n")
+		:rev() -- so most recent is on top
+		:totable()
+	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
-	bufNavNotify = vim.notify(bufNames, vim.log.levels.INFO, {
+	bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
 		title = pluginName,
 		animate = false,
 		hide_from_history = true,
