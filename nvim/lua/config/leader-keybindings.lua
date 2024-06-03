@@ -27,9 +27,8 @@ keymap("n", "<leader>lc", function()
 	u.copyAndNotify(lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
-keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under Cursor" })
+keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 
 keymap("n", "<leader>ib", function()
 	local out = {
@@ -44,8 +43,6 @@ end, { desc = "󰽙 Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-local function left(num) return ("<Left>"):rep(num) end
-
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap(
 	{ "n", "x" },
@@ -53,14 +50,7 @@ keymap(
 	function() require("funcs.rg-substitute").rgSubstitute() end,
 	{ desc = " rg substitute" }
 )
-keymap("x", "<leader>fv", ":s ///gI" .. left(4), { desc = " :s inside visual" })
-keymap("n", "<leader>fd", ":global // d" .. left(3), { desc = " delete matching lines" })
-
-keymap("n", "<leader>fq", function()
-	local line = vim.api.nvim_get_current_line()
-	line = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
-	vim.api.nvim_set_current_line(line)
-end, { desc = " Switch quotes in line" })
+keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other

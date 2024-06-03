@@ -1,8 +1,7 @@
 local M = {}
--- DOCS https://docs.rs/regex/1.*/regex/#syntax
 --------------------------------------------------------------------------------
 
-local config = {
+local defaultConfig = {
 	window = {
 		width = 50,
 		border = vim.g.borderStyle,
@@ -12,14 +11,18 @@ local config = {
 		abort = "q",
 	},
 	regexOptions = {
-		pcre2 = true, -- enables lookarounds and backreferences, but slower performance
+		-- enables lookarounds and backreferences, but slower performance
+		pcre2 = true,
 		-- By default, rg treats `$1a` as the named capture group "1a". When set
-		-- to `true`, this behavior is disabled and `$1a` is the first capture
-		-- followed by the letter "a" (see rg's manpage on `--replace`).
+		-- to `true`, that behavior is disabled and `$1a` is the first capture
+		-- followed by the letter "a". (See also rg's manpage on `--replace`.)
 		simpleCaptureGroups = true,
 	},
 	notificationOnSuccess = true,
+	prefillCursorwordInNormalMode = true,
 }
+
+local config = defaultConfig
 
 --------------------------------------------------------------------------------
 
@@ -35,21 +38,14 @@ end
 local function executeSubstitution(rgBuf, targetBuf)
 	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(rgBuf, 0, -1, false))
 	local file = vim.api.nvim_buf_get_name(targetBuf)
+	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
 
 	-- HACK deal with annoying named capture groups (see `man rg` on `--replace`)
 	if config.simpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
 	-- notify on count
 	if config.notificationOnSuccess then
-		local out = vim.system({
-			"rg",
-			toSearch,
-			"--count",
-			"--no-config",
-			config.regexOptions.pcre2 and "--pcre2" or nil,
-			"--",
-			file,
-		}):wait()
+		local out = vim.system({ "rg", toSearch, "--count", "--no-config", pcre2, "--", file }):wait()
 		if out.code == 0 then
 			local count = tonumber(vim.trim(out.stdout))
 			local pluralS = count == 1 and "" or "s"
@@ -64,7 +60,7 @@ local function executeSubstitution(rgBuf, targetBuf)
 		"--replace=" .. toReplace,
 		"--line-number",
 		"--no-config",
-		config.regexOptions.pcre2 and "--pcre2" or nil,
+		pcre2,
 		"--",
 		file,
 	}):wait()
@@ -73,7 +69,9 @@ local function executeSubstitution(rgBuf, targetBuf)
 		return
 	end
 
-	-- update
+	-- update lines
+	-- (only change individual lines as opposed to whole buffer, as this
+	-- preserves folds and marks as much as possible)
 	local newLines = vim.split(vim.trim(rgResult.stdout), "\n")
 	for _, repl in pairs(newLines) do
 		local lineStr, newLine = repl:match("^(%d+):(.*)")
@@ -130,15 +128,17 @@ function M.rgSubstitute()
 	local augroup = vim.api.nvim_create_augroup("rg-substitute", { clear = true })
 
 	-- CREATE & PREFILL TEMP RG-BUFFER
-	local searchPrefill
-	if vim.fn.mode() == "n" then
-		searchPrefill = vim.fn.expand("<cword>")
-	else
+	local prefill
+	local mode = vim.fn.mode()
+	if mode == "n" and config.prefillCursorwordInNormalMode then
+		prefill = vim.fn.expand("<cword>")
+	elseif mode:find("[Vv]") then
 		vim.cmd.normal { '"zy', bang = true }
-		searchPrefill = vim.fn.getreg("z")
+		prefill = vim.fn.getreg("z")
+		prefill = prefill:gsub("[\n\r].*", "") -- only 1st line
 	end
 	local rgBuf = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { searchPrefill, "" })
+	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { prefill, "" })
 	-- adds syntax highlighting via treesitter `regex` parser
 	vim.api.nvim_set_option_value("filetype", "regex", { buf = rgBuf })
 	vim.api.nvim_buf_set_name(rgBuf, "rg substitute")
@@ -162,29 +162,29 @@ function M.rgSubstitute()
 	vim.cmd.startinsert { bang = true }
 
 	-- VIRTUAL TEXT & HIGHLIGHTS
-	local ns = vim.api.nvim_create_namespace("rg-substitute-virttext")
-	vim.api.nvim_buf_set_extmark(rgBuf, ns, 0, 0, {
+	local virtTextNs = vim.api.nvim_create_namespace("rg-substitute-virttext")
+	vim.api.nvim_buf_set_extmark(rgBuf, virtTextNs, 0, 0, {
 		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
 		virt_text_pos = "right_align",
 	})
-	vim.api.nvim_buf_set_extmark(rgBuf, ns, 1, 0, {
+	vim.api.nvim_buf_set_extmark(rgBuf, virtTextNs, 1, 0, {
 		virt_text = { { "Replace", "DiagnosticVirtualTextInfo" } },
 		virt_text_pos = "right_align",
 	})
 
-	local matchHls = vim.api.nvim_create_namespace("rg-substitute-match-hls")
+	local matchHlNs = vim.api.nvim_create_namespace("rg-substitute-match-hls")
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		buffer = rgBuf,
 		group = augroup,
-		callback = function() highlightMatches(matchHls, rgBuf, targetBuf, targetWin) end,
+		callback = function() highlightMatches(matchHlNs, rgBuf, targetBuf, targetWin) end,
 	})
 
 	-- POPUP CLOSING
 	local function closeRgWin()
 		if vim.api.nvim_win_is_valid(winnr) then vim.api.nvim_win_close(winnr, true) end
 		if vim.api.nvim_buf_is_valid(rgBuf) then vim.api.nvim_buf_delete(rgBuf, { force = true }) end
-		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-		vim.api.nvim_buf_clear_namespace(0, matchHls, 0, -1)
+		vim.api.nvim_buf_clear_namespace(0, virtTextNs, 0, -1)
+		vim.api.nvim_buf_clear_namespace(0, matchHlNs, 0, -1)
 	end
 	-- also close the popup on leaving buffer, ensures there is not leftover
 	-- buffer when user closes popup in a different way, such as `:close`.
