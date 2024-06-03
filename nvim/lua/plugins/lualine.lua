@@ -92,11 +92,6 @@ local lualineConfig = {
 				end,
 				padding = { left = 0, right = 1 },
 			},
-			{ -- using lualine's tab display, cause it looks better than vim's
-				"tabs",
-				mode = 1,
-				cond = function() return vim.fn.tabpagenr("$") > 1 end,
-			},
 		},
 		lualine_c = {
 			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
@@ -172,7 +167,8 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter", -- load quicker to prevent flickering
+	lazy = false,
+	-- event = "UIEnter", -- load quicker to prevent flickering
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,
