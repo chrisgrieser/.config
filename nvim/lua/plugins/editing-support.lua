@@ -3,11 +3,6 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"chrisgrieser/nvim-alt-substitute",
-		opts = { regexFlavor = "rg" },
-		event = "CmdlineEnter",
-	},
 	{ -- refactoring utilities
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },

@@ -47,6 +47,12 @@ end, { desc = "󰽙 Buffer Info" })
 local function left(num) return ("<Left>"):rep(num) end
 
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
+keymap(
+	{ "n", "x" },
+	"<leader>fr",
+	function() require("funcs.rg-substitute").rgSubstitute() end,
+	{ desc = " rg substitute" }
+)
 keymap("n", "<leader>fs", ":%s /<C-r><C-w>//gI" .. left(3), { desc = " :s cword" })
 keymap("x", "<leader>fs", '"zy:% s/<C-r>z//gI' .. left(3), { desc = " :s for selection" })
 keymap("x", "<leader>fv", ":s ///gI" .. left(4), { desc = " :s inside visual" })
