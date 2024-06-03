@@ -19,12 +19,22 @@ local config = {
 		-- followed by the letter "a" (see rg's manpage on `--replace`).
 		simpleCaptureGroups = true,
 	},
+	notificationOnSuccess = true,
 }
 
+--------------------------------------------------------------------------------
+
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "rg substitute" })
+end
+
 -- jackpotbb
--- XXXcc
--- XXXaaaaaa..
--- XXXaaaaaa..
+-- cc
+-- XXXXXXXXXXXX
+-- XXXXXXXXXXXX
 
 ---@param rgBuf integer temporary rg buffer
 ---@param targetBuf integer buffer where the output will be written
@@ -35,6 +45,26 @@ local function executeSubstitution(rgBuf, targetBuf)
 	-- HACK deal with annoying named capture groups (see `man rg` on `--replace`)
 	if config.simpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
+	-- notify on count
+	if config.notificationOnSuccess then
+		local out = vim.system({
+			"rg",
+			toSearch,
+			"--count",
+			"--no-config",
+			config.regexOptions.multiline and "--multiline" or nil,
+			config.regexOptions.pcre2 and "--pcre2" or nil,
+			"--",
+			file,
+		}):wait()
+		if out.code == 0 then
+			local count = tonumber(vim.trim(out.stdout))
+			local pluralS = count == 1 and "" or "s"
+			notify(("Replaced %s occurrence%s."):format(count, pluralS))
+		end
+	end
+
+	-- substitute
 	local rgResult = vim.system({
 		"rg",
 		toSearch,
@@ -48,7 +78,7 @@ local function executeSubstitution(rgBuf, targetBuf)
 		file,
 	}):wait()
 	if rgResult.code ~= 0 then
-		vim.notify(rgResult.stderr, vim.log.levels.ERROR, { title = "rg substitute" })
+		notify(rgResult.stderr, "error")
 		return
 	end
 
@@ -60,8 +90,12 @@ end
 ---@param ns number
 ---@param rgBuf number
 ---@param targetBuf number
-local function highlightMatches(ns, rgBuf, targetBuf)
+---@param targetWin number
+local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
+	vim.api.nvim_buf_clear_namespace(targetBuf, ns, 0, -1)
+
 	local toSearch = vim.api.nvim_buf_get_lines(rgBuf, 0, -1, false)[1]
+	if toSearch == "" then return end
 	local file = vim.api.nvim_buf_get_name(targetBuf)
 
 	local rgResult = vim.system({
@@ -79,18 +113,27 @@ local function highlightMatches(ns, rgBuf, targetBuf)
 	-- TODO parse `--json` output for better handling of `--multiline`
 	if rgResult.code ~= 0 then return end
 
-	local matches = vim.split(rgResult.stdout, "\n")
-	for _, match in pairs(matches) do
-		local lineStr, colStr, text = unpack(vim.split(match, ":"))
-		local line = tonumber(lineStr)
-		local startCol = tonumber(colStr)
-		local endCol = startCol + #text
-		vim.highlight.range(targetBuf, ns, "IncSearch", { line, startCol }, { line, endCol })
-	end
+	local viewportStart = vim.fn.line("w0", targetWin)
+	local viewportEnd = vim.fn.line("w$", targetWin)
+
+	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
+	vim.iter(matches)
+		:filter(function(match) -- PERF only matches in viewport
+			local line = tonumber(match:match("^(%d+):"))
+			return (line >= viewportStart) and (line <= viewportEnd)
+		end)
+		:each(function(match)
+			local lineStr, colStr, text = unpack(vim.split(match, ":"))
+			local line = tonumber(lineStr) - 1
+			local startCol = tonumber(colStr) - 1
+			local endCol = startCol + #text
+			vim.highlight.range(targetBuf, ns, "IncSearch", { line, startCol }, { line, endCol })
+		end)
 end
 
 function M.rgSubstitute()
 	local targetBuf = vim.api.nvim_get_current_buf()
+	local targetWin = vim.api.nvim_get_current_win()
 
 	-- CREATE & PREFILL TEMP RG-BUFFER
 	local searchPrefill
@@ -139,7 +182,7 @@ function M.rgSubstitute()
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		buffer = rgBuf,
 		group = vim.api.nvim_create_augroup("rg-substitute", { clear = true }),
-		callback = highlightMatches(matchHls, rgBuf, targetBuf),
+		callback = function() highlightMatches(matchHls, rgBuf, targetBuf, targetWin) end,
 	})
 
 	-- KEYMAPS
@@ -147,6 +190,7 @@ function M.rgSubstitute()
 		vim.api.nvim_win_close(winnr, true)
 		vim.api.nvim_buf_delete(rgBuf, { force = true })
 		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+		vim.api.nvim_buf_clear_namespace(0, matchHls, 0, -1)
 	end
 
 	vim.keymap.set({ "n", "x" }, config.keymaps.abort, closeRgWin, { buffer = rgBuf, nowait = true })
@@ -158,3 +202,8 @@ end
 
 --------------------------------------------------------------------------------
 return M
+
+
+
+
+

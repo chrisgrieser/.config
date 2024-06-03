@@ -3,6 +3,9 @@ local api = vim.api
 --------------------------------------------------------------------------------
 
 local pluginName = "Buf Nav"
+
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
