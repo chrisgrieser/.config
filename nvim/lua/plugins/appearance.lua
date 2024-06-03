@@ -111,6 +111,7 @@ return {
 
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
+				highlight_mode = "background",
 				highlighter = {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
@@ -136,7 +137,7 @@ return {
 					["q"] = ccc.mapping.quit,
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
-					["o"] = ccc.mapping.toggle_output_mode, -- = change output format
+					["o"] = ccc.mapping.cycle_output_mode, -- = change output format
 				},
 			}
 		end,

@@ -11,7 +11,7 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.center = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.centerThird = { x = 0.34, y = 0, w = 0.66, h = 1 }
+M.narrow = { x = 0.184, y = 0, w = 0.45, h = 1 }
 
 -- negative x to hide useless sidebar
 if env.isAtMother then
@@ -203,18 +203,12 @@ end)
 -- HOTKEY ACTIONS
 
 local function controlSpaceAction()
-	local curWin = hs.window.focusedWindow()
+	local currentWin = hs.window.focusedWindow()
+	local centeredWinApps = { "Finder", "Script Editor", "Reminders" }
+	local baseSize = u.isFront(centeredWinApps) and M.center or M.pseudoMax
+	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 
-	local pos
-	if u.isFront { "Finder", "Script Editor", "Reminders" } then
-		pos = M.checkSize(curWin, M.center) and M.maximized or M.center
-	elseif u.isFront("System Settings") then
-		pos = M.centerThird
-	else
-		pos = M.checkSize(curWin, M.pseudoMax) and M.maximized or M.pseudoMax
-	end
-
-	M.moveResize(curWin, pos)
+	M.moveResize(currentWin, newSize)
 end
 
 local function moveWinToNextDisplay()

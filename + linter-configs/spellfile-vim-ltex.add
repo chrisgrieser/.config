@@ -44,6 +44,7 @@ Statusline
 Strikethrough
 Strikethroughs
 Subword
+subword
 TODO
 Tabstops
 Treesitter
@@ -211,3 +212,4 @@ zsh
 ⌘L
 ⌘Y
 ⌘fn⏎
+Nano
