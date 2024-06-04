@@ -1,47 +1,15 @@
 {
-  ",,bash (Codeblock)": {
+  "Misc": {
+    "body": "Miscellaneous",
+    "prefix": "Misc"
+  },
+  "bash (Codeblock)": {
     "body": [
       "```bash",
       "$CLIPBOARD$0",
       "```"
     ],
-    "prefix": ",,bash (Codeblock)"
-  },
-  ",,js (Codeblock)": {
-    "body": [
-      "```js",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": ",,js (Codeblock)"
-  },
-  ",,lua (Codeblock)": {
-    "body": [
-      "```lua",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": ",,lua (Codeblock)"
-  },
-  ",,py (Codeblock)": {
-    "body": [
-      "```py",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": ",,py (Codeblock)"
-  },
-  ",,ts (Codeblock)": {
-    "body": [
-      "```ts",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": ",,ts (Codeblock)"
-  },
-  "Misc": {
-    "body": "Miscellaneous",
-    "prefix": "Misc"
+    "prefix": "bash (Codeblock)"
   },
   "caution (callout)": {
     "body": [
@@ -94,10 +62,26 @@
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
     "prefix": "insert toc"
   },
+  "js (Codeblock)": {
+    "body": [
+      "```js",
+      "$CLIPBOARD$0",
+      "```"
+    ],
+    "prefix": "js (Codeblock)"
+  },
   "kbd": {
     "body": "<kbd>$0</kbd>",
     "description": "HTML tag for keys",
     "prefix": "kbd"
+  },
+  "lua (Codeblock)": {
+    "body": [
+      "```lua",
+      "$CLIPBOARD$0",
+      "```"
+    ],
+    "prefix": "lua (Codeblock)"
   },
   "note (GitHub callout)": {
     "body": [
@@ -109,6 +93,14 @@
       "info (callout)",
       "note (callout)"
     ]
+  },
+  "py (Codeblock)": {
+    "body": [
+      "```py",
+      "$CLIPBOARD$0",
+      "```"
+    ],
+    "prefix": "py (Codeblock)"
   },
   "tip (callout)": {
     "body": [
@@ -131,6 +123,14 @@
       "```"
     ],
     "prefix": "tree"
+  },
+  "ts (Codeblock)": {
+    "body": [
+      "```ts",
+      "$CLIPBOARD$0",
+      "```"
+    ],
+    "prefix": "ts (Codeblock)"
   },
   "warning (callout)": {
     "body": [
