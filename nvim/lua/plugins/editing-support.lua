@@ -3,6 +3,23 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"chrisgrieser/nvim-rip-substitute",
+		keys = {
+			{
+				"<leader>fs",
+				function() require("rip-substitute").sub() end,
+				mode = { "n", "x" },
+				desc = " rip substitute",
+			},
+		},
+		opts = {
+			window = {
+				width = 35,
+				border = vim.g.borderStyle,
+			},
+		},
+	},
 	{ -- refactoring utilities
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
