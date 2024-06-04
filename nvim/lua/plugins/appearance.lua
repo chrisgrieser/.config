@@ -12,29 +12,6 @@ return {
 			},
 		},
 	},
-	{ -- visual jump history when jumping
-		"lewis6991/whatthejump.nvim",
-		keys = {
-			{
-				"<C-h>",
-				function()
-					require("whatthejump").show_jumps(false)
-					return "<C-o>"
-				end,
-				expr = true,
-				desc = "󱋿 Jump back",
-			},
-			{
-				"<C-l>",
-				function()
-					require("whatthejump").show_jumps(true)
-					return "<C-i>"
-				end,
-				expr = true,
-				desc = "󱋿 Jump forward",
-			},
-		},
-	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",

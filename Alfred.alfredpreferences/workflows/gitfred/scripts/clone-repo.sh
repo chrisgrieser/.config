@@ -39,9 +39,10 @@ if [[ "$restore_mtime" == "1" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# FORK ON CLONE (if owner)
+# FORK ON CLONE (if not owner)
 
-if [[ "$ownerOfRepo" != "1" && "$fork_on_clone" == "1" ]]; then
+# INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
+if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi
 
 	gh repo fork --remote=false
