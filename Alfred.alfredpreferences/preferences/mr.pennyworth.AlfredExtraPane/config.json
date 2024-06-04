@@ -2,7 +2,7 @@
 	{
 		"workflowUID": "*",
 		"alignment": {
-			"horizontal": { "placement": "right", "width": 420, "minHeight": 750 }
+			"horizontal": { "placement": "right", "width": 420, "minHeight": 700 }
 		}
 	}
 ]
