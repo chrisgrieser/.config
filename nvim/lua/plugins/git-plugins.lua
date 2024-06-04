@@ -20,6 +20,7 @@ return {
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
+			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub Repo URL" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit/Amend" },
 			-- stylua: ignore end
