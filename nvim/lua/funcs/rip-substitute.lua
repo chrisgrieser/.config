@@ -260,7 +260,6 @@ function M.ripSubstitute()
 		if vim.api.nvim_buf_is_valid(state.rgBuf) then
 			vim.api.nvim_buf_delete(state.rgBuf, { force = true })
 		end
-		vim.api.nvim_buf_clear_namespace(0, state.labelNs, 0, -1)
 		vim.api.nvim_buf_clear_namespace(0, state.matchHlNs, 0, -1)
 	end
 	-- also close the popup on leaving buffer, ensures there is not leftover
@@ -268,7 +267,6 @@ function M.ripSubstitute()
 	vim.api.nvim_create_autocmd("BufLeave", {
 		buffer = state.rgBuf,
 		group = augroup,
-		once = true,
 		callback = closeRgWin,
 	})
 
