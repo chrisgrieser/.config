@@ -1376,7 +1376,7 @@ end run</string>
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `ghn`. (Requires that you export a `$GITHUB_TOKEN` set in your `.zshenv`.)
+- Directly open your GitHub notification via `ghn`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
@@ -1484,7 +1484,7 @@ end run</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>note</key>
-			<string>shallow clone to local repo folder</string>
+			<string>clone</string>
 			<key>xpos</key>
 			<real>820</real>
 			<key>ypos</key>
@@ -1818,7 +1818,7 @@ end run</string>
 				<string>fork when not owner</string>
 			</dict>
 			<key>description</key>
-			<string>When cloning a repository that you do not own, also create a fork an prepare the repo for e PR. (Requires the `gh` cli.)</string>
+			<string>When cloning a repository that you do not own, also create a fork and prepare the repo for e PR. (Requires the `gh` cli.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1845,9 +1845,30 @@ end run</string>
 			<key>variable</key>
 			<string>restore_mtime</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>ghp_…</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>GitHub Token. If empty, will fallback to $GITHUB_TOKEN exported in .zshenv. (Only needed for showing notifications via `ghn`.)</string>
+			<key>label</key>
+			<string>Notifications</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>github_token_from_alfred_prefs</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.9</string>
+	<string>1.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
