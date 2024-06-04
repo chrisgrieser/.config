@@ -3,7 +3,7 @@
     "result" : {
       "textSpacing" : 9,
       "subtext" : {
-        "size" : 19,
+        "size" : 18,
         "colorSelected" : "#DB290CFF",
         "font" : "Lucida Grande",
         "color" : "#00D5FFFF"
@@ -16,7 +16,7 @@
       },
       "backgroundSelected" : "#FFBB00FF",
       "text" : {
-        "size" : 26,
+        "size" : 25,
         "colorSelected" : "#590907FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
@@ -24,14 +24,14 @@
       "iconPaddingHorizontal" : 8,
       "roundness" : 7,
       "paddingVertical" : 7,
-      "iconSize" : 56
+      "iconSize" : 54
     },
     "search" : {
       "backgroundSelected" : "#0080ADFF",
       "paddingHorizontal" : 7,
       "spacing" : 3,
       "text" : {
-        "size" : 57,
+        "size" : 53,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
@@ -43,7 +43,7 @@
     "window" : {
       "color" : "#454545FF",
       "paddingHorizontal" : 12,
-      "width" : 1020,
+      "width" : 971,
       "borderPadding" : 4,
       "borderColor" : "#4141417F",
       "blur" : 0,
