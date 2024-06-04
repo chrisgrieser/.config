@@ -44,12 +44,6 @@ end, { desc = "󰽙 Buffer Info" })
 -- REFACTORING
 
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
-keymap(
-	{ "n", "x" },
-	"<leader>fs",
-	function() require("funcs.rip-substitute").ripSubstitute() end,
-	{ desc = " rip substitute" }
-)
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
 keymap("n", "<leader>fy", function()
