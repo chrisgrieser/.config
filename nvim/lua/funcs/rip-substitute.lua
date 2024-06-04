@@ -1,6 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+---@class ripSubstituteConfig
 local defaultConfig = {
 	window = {
 		width = 35,
@@ -57,11 +58,20 @@ local function runRipgrep(parameters)
 	return vim.system(rgCmd):wait()
 end
 
+---@return string
+---@return string
+local function getSearchAndReplace()
+	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
+	if config.regexOptions.autoBraceSimpleCaptureGroups then
+		toReplace = toReplace:gsub("%$(%d+)", "${%1}")
+	end
+	return toSearch, toReplace
+end
+
 --------------------------------------------------------------------------------
 
 local function executeSubstitution()
-	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
-	if config.autoBraceSimpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
+	local toSearch, toReplace = getSearchAndReplace()
 
 	-- notify on count
 	if config.notificationOnSuccess then
@@ -93,69 +103,62 @@ end
 
 local function highlightMatches()
 	vim.api.nvim_buf_clear_namespace(state.targetBuf, state.matchHlNs, 0, -1)
-	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
+	local toSearch, toReplace = getSearchAndReplace()
 	if toSearch == "" then return end
 
-	-- PERF Filters `rgResult` by only showing lines in the viewport of the `targetWin`
-	---@param rgStdout string
-	---@return Iter
-	local function viewportLines(rgStdout)
-		local rgLines = vim.split(vim.trim(rgStdout), "\n")
+	---@param rgResult vim.SystemCompleted
+	---@return Iter containing { lnum: number, startCol: number, text: string }
+	local function viewportLines(rgResult)
+		if rgResult.code ~= 0 then return {} end
+		local rgLines = vim.split(vim.trim(rgResult.stdout), "\n")
 		local viewportStart = vim.fn.line("w0", state.targetWin)
 		local viewportEnd = vim.fn.line("w$", state.targetWin)
-		return vim.iter(rgLines):filter(function(line)
-			local lnum = tonumber(line:match("^(%d+):"))
-			return (lnum >= viewportStart) and (lnum <= viewportEnd)
-		end)
+		local iter = vim.iter(rgLines)
+			-- PERF only lines in the viewport of the `targetWin`
+			:filter(function(line)
+				local lnum = tonumber(line:match("^(%d+):"))
+				return (lnum >= viewportStart) and (lnum <= viewportEnd)
+			end)
+			:map(function(line)
+				local lnumStr, colStr, text = line:match("^(%d+):(%d+):(.*)")
+				return {
+					lnum = tonumber(lnumStr) - 1,
+					startCol = tonumber(colStr) - 1,
+					text = text,
+				}
+			end)
+		return iter
 	end
 
-	-- only highlight search matches
-	if toReplace == "" then
-		local rgResult = runRipgrep { toSearch, "--line-number", "--column", "--only-matching" }
-		if rgResult.code ~= 0 then return end
-		viewportLines(rgResult.stdout):each(function(match)
-			local lnumStr, colStr, text = match:match("^(%d+):(%d+):(.*)")
-			local lnum = tonumber(lnumStr) - 1
-			local startCol = tonumber(colStr) - 1
-			local endCol = startCol + #text
-			vim.highlight.range(
-				state.targetBuf,
-				state.matchHlNs,
-				"IncSearch",
-				{ lnum, startCol },
-				{ lnum, endCol }
-			)
-		end)
-	else
-		local rgResult =
-			runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", "--column" }
-		if rgResult.code ~= 0 then return end
-		viewportLines(rgResult.stdout):each(function(repl)
-			local lnumStr, colStr, text = repl:match("^(%d+):(%d+):(.*)")
-			local lnum = tonumber(lnumStr) - 1
-			local startCol = tonumber(colStr) - 1
-			text = text:sub(startCol + 1) .. (" "):rep(startCol)
-			vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
-				virt_text = { { text, "Normal" } },
-				virt_text_pos = "overlay",
-				hl_mode = "combine",
-			})
-		end)
-		rgResult =
-			runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", "--column" }
-		if rgResult.code ~= 0 then return end
-		viewportLines(rgResult.stdout):each(function(repl)
-			local lnumStr, colStr, text = repl:match("^(%d+):(%d+):(.*)")
-			local lnum = tonumber(lnumStr) - 1
-			local startCol = tonumber(colStr) - 1
-			text = text:sub(startCol + 1) .. (" "):rep(startCol)
-			vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
-				virt_text = { { text, "IncSearch" } },
-				virt_text_pos = "overlay",
-				hl_mode = "combine",
-			})
-		end)
-	end
+	-- highlight search matches
+	local rgResult = runRipgrep { toSearch, "--line-number", "--column", "--only-matching" }
+	viewportLines(rgResult):each(function(match)
+		local lnumStr, colStr, text = match:match("^(%d+):(%d+):(.*)")
+		local lnum = tonumber(lnumStr) - 1
+		local startCol = tonumber(colStr) - 1
+		local endCol = startCol + #text
+		vim.highlight.range(
+			state.targetBuf,
+			state.matchHlNs,
+			toReplace == "" and "IncSearch" or "LspInlayHint",
+			{ lnum, startCol },
+			{ lnum, endCol }
+		)
+	end)
+
+	-- insert replacements as virtual text
+	if toReplace == "" then return end
+	local args =
+		{ toSearch, "--replace=" .. toReplace, "--line-number", "--column", "--only-matching" }
+	viewportLines(runRipgrep(args)):each(function(repl)
+		local lnumStr, colStr, text = repl:match("^(%d+):(%d+):(.*)")
+		local lnum = tonumber(lnumStr) - 1
+		local startCol = tonumber(colStr) - 1
+		vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
+			virt_text = { { text, "IncSearch" } },
+			virt_text_pos = "inline",
+		})
+	end)
 end
 
 local function setRgBufLabels()
@@ -212,12 +215,13 @@ function M.ripSubstitute()
 	-- adds syntax highlighting via treesitter `regex` parser
 	vim.api.nvim_set_option_value("filetype", "regex", { buf = state.rgBuf })
 	vim.api.nvim_buf_set_name(state.rgBuf, "rip substitute")
+	local scrollbarOffset = 3
 
 	-- CREATE WINDOW
 	local rgWin = vim.api.nvim_open_win(state.rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 4,
-		col = vim.api.nvim_win_get_width(0) - config.window.width - 2,
+		col = vim.api.nvim_win_get_width(0) - config.window.width - scrollbarOffset - 2,
 		width = config.window.width,
 		height = 2,
 		style = "minimal",
