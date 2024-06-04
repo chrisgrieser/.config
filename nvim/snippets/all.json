@@ -136,5 +136,9 @@
   "today (ISO date) *insert*": {
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
     "prefix": "today ISO date INSERT"
+  },
+  "vim modeline": {
+    "body": "# vim: filetype=${1:sh}",
+    "prefix": "vim modeline"
   }
 }

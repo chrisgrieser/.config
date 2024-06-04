@@ -357,6 +357,10 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
+		dependencies = {
+			"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
+			opts = { library = { plugins = false } }, -- too slow with all my plugins
+		},
 		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
