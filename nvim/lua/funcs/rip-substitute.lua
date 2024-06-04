@@ -84,12 +84,6 @@ local function executeSubstitution(rgBuf, targetBuf)
 	end
 end
 
---- fff
---- fff
---- fff
---- fffffff
---- fff
-
 ---@param ns number
 ---@param rgBuf number
 ---@param targetBuf number

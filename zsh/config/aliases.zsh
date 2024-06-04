@@ -13,7 +13,7 @@ alias rm='rm -I'
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias l='eza --all --long --time-style=relative --no-user --total-size \
-	--smart-group --no-quotes --git-ignore --sort=newest'
+	--smart-group --no-quotes --sort=newest'
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
