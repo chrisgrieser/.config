@@ -20,7 +20,7 @@ local defaultConfig = {
 	},
 	prefill = {
 		normal = "cursorword", -- "cursorword"|false
-		visual = "selectionFirstLine",-- "selectionFirstLine"|false
+		visual = "selectionFirstLine", -- "selectionFirstLine"|false
 	},
 	notificationOnSuccess = true,
 }
@@ -130,16 +130,17 @@ function M.ripSubstitute()
 	local targetWin = vim.api.nvim_get_current_win()
 	local augroup = vim.api.nvim_create_augroup("rip-substitute", { clear = true })
 
-	-- CREATE & PREFILL TEMP RG-BUFFER
+	-- PREFILL
 	local prefill
 	local mode = vim.fn.mode()
 	if mode == "n" and config.prefill.normal == "cursorword" then
 		prefill = vim.fn.expand("<cword>")
-	elseif mode:find("[Vv]") and config.prefill.visual == "fi" then
+	elseif mode:find("[Vv]") and config.prefill.visual == "selectionFirstLine" then
 		vim.cmd.normal { '"zy', bang = true }
-		prefill = vim.fn.getreg("z")
-		prefill = prefill:gsub("[\n\r].*", "") -- only 1st line
+		prefill = vim.fn.getreg("z"):gsub("[\n\r].*", "")
 	end
+
+	-- CREATE RG-BUFFER
 	local rgBuf = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { prefill, "" })
 	-- adds syntax highlighting via treesitter `regex` parser
@@ -158,10 +159,17 @@ function M.ripSubstitute()
 		title = "  rip substitute ",
 		title_pos = "center",
 	})
-	vim.api.nvim_set_option_value("signcolumn", "no", { win = winnr })
-	vim.api.nvim_set_option_value("number", false, { win = winnr })
-	vim.api.nvim_set_option_value("sidescrolloff", 0, { win = winnr })
-	vim.api.nvim_set_option_value("scrolloff", 0, { win = winnr })
+	local winOpts = {
+		list = true,
+		listchars = "multispace:·,tab:▸▸",
+		signcolumn = "no",
+		number = false,
+		sidescrolloff = 0,
+		scrolloff = 0,
+	}
+	for key, value in pairs(winOpts) do
+		vim.api.nvim_set_option_value(key, value, { win = winnr })
+	end
 	vim.cmd.startinsert { bang = true }
 
 	-- VIRTUAL TEXT & HIGHLIGHTS

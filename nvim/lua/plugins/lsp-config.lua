@@ -256,6 +256,18 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
+local function getDictionary()
+	local words = {}
+	if not u.fileExists(vim.g.dictionaryFile) then
+		vim.notify("Dictionary file not found: " .. vim.g.dictionaryFile, vim.log.levels.WARN)
+		return {}
+	end
+	for word in io.lines(vim.g.dictionaryFile) do
+		table.insert(words, word)
+	end
+	return words
+end
+
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
 	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
@@ -264,14 +276,7 @@ serverConfigs.ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
 				-- HACK since reading external file with the method described in ltex-docs does not work
-				["en-US"] = (function()
-					local words = {}
-					if not u.fileExists(vim.g.dictionaryFile) then return {} end
-					for word in io.lines(vim.g.dictionaryFile) do
-						table.insert(words, word)
-					end
-					return words
-				end)(),
+				["en-US"] = getDictionary(),
 			},
 			disabledRules = {
 				["en-US"] = {
