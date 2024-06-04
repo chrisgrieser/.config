@@ -47,8 +47,8 @@ keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap(
 	{ "n", "x" },
 	"<leader>fs",
-	function() require("funcs.rg-substitute").rgSubstitute() end,
-	{ desc = " rg substitute" }
+	function() require("funcs.rip-substitute").ripSubstitute() end,
+	{ desc = " rip substitute" }
 )
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
