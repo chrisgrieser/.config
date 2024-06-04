@@ -118,6 +118,29 @@ local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
 		end)
 end
 
+---@param ns number
+---@param rgBuf number
+local function setRgBufLabels(ns, rgBuf)
+	vim.api.nvim_buf_clear_namespace(rgBuf, ns, 0, -1)
+	vim.api.nvim_buf_set_extmark(rgBuf, ns, 0, 0, {
+		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
+		virt_text_pos = "right_align",
+	})
+	vim.api.nvim_buf_set_extmark(rgBuf, ns, 1, 0, {
+		virt_text = { { "Replace", "DiagnosticVirtualTextInfo" } },
+		virt_text_pos = "right_align",
+	})
+end
+
+-- ensure buffer has only 2 lines
+---@param rgBuf number
+local function removeExtraLines(rgBuf)
+	local lines = vim.api.nvim_buf_get_lines(rgBuf, 0, -1, true)
+	local linesTo
+	if #lines == 1 then return end
+	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, true, {lines[1], lines[2]})
+end
+
 function M.ripSubstitute()
 	local targetBuf = vim.api.nvim_get_current_buf()
 	local targetWin = vim.api.nvim_get_current_win()
@@ -168,20 +191,17 @@ function M.ripSubstitute()
 
 	-- VIRTUAL TEXT & HIGHLIGHTS
 	local virtTextNs = vim.api.nvim_create_namespace("rip-substitute-virttext")
-	vim.api.nvim_buf_set_extmark(rgBuf, virtTextNs, 0, 0, {
-		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
-		virt_text_pos = "right_align",
-	})
-	vim.api.nvim_buf_set_extmark(rgBuf, virtTextNs, 1, 0, {
-		virt_text = { { "Replace", "DiagnosticVirtualTextInfo" } },
-		virt_text_pos = "right_align",
-	})
-
 	local matchHlNs = vim.api.nvim_create_namespace("rip-substitute-match-hls")
+
+	setRgBufLabels(virtTextNs, rgBuf)
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		buffer = rgBuf,
 		group = augroup,
-		callback = function() highlightMatches(matchHlNs, rgBuf, targetBuf, targetWin) end,
+		callback = function()
+			highlightMatches(matchHlNs, rgBuf, targetBuf, targetWin)
+			setRgBufLabels(virtTextNs, rgBuf) -- in case user changes line count
+			removeExtraLines(rgBuf)
+		end,
 	})
 
 	-- POPUP CLOSING
