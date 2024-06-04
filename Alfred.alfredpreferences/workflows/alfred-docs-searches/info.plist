@@ -235,9 +235,9 @@
 				<key>destinationuid</key>
 				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -245,9 +245,9 @@
 				<key>destinationuid</key>
 				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -37291,7 +37291,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.5.1</string>
+	<string>2.5.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
