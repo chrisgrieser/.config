@@ -30,6 +30,17 @@ local config = defaultConfig
 
 --------------------------------------------------------------------------------
 
+---@class (exact) ripSubstituteState
+---@field rgBuf number
+---@field targetBuf number
+---@field targetWin number
+---@field targetFile string
+---@field virtTextNs number
+---@field matchHlNs number
+local state = {}
+
+--------------------------------------------------------------------------------
+
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
@@ -38,26 +49,24 @@ local function notify(msg, level)
 end
 
 ---@param parameters string[]
----@param file string
 ---@return vim.SystemCompleted
-local function runRipgrep(parameters, file)
+local function runRipgrep(parameters)
 	local rgCmd = vim.list_extend({ "rg", "--no-config" }, parameters)
-	vim.list_extend(rgCmd, { "--", file })
+	vim.list_extend(rgCmd, { "--", state.targetFile })
 	return vim.system(rgCmd):wait()
 end
 
----@param rgBuf integer temporary rg buffer
----@param targetBuf integer buffer where the output will be written
-local function executeSubstitution(rgBuf, targetBuf)
-	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(rgBuf, 0, -1, false))
-	local file = vim.api.nvim_buf_get_name(targetBuf)
+--------------------------------------------------------------------------------
+
+local function executeSubstitution()
+	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
 	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
 
 	if config.autoBraceSimpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
 	-- notify on count
 	if config.notificationOnSuccess then
-		local out = runRipgrep({ toSearch, "--count-matches", pcre2 }, file)
+		local out = runRipgrep { toSearch, "--count-matches", pcre2 }
 		if out.code == 0 then
 			local count = tonumber(vim.trim(out.stdout))
 			local pluralS = count == 1 and "" or "s"
@@ -66,84 +75,99 @@ local function executeSubstitution(rgBuf, targetBuf)
 	end
 
 	-- substitute
-	local rgResult =
-		runRipgrep({ toSearch, "--replace=" .. toReplace, "--line-number", pcre2 }, file)
+	local rgResult = runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", pcre2 }
 	if rgResult.code ~= 0 then
 		notify(rgResult.stderr, "error")
 		return
 	end
 
-	-- update lines
+	-- UPDATE LINES
 	-- (only change individual lines as opposed to whole buffer, as this
 	-- preserves folds and marks as much as possible)
 	local newLines = vim.split(vim.trim(rgResult.stdout), "\n")
 	for _, repl in pairs(newLines) do
 		local lineStr, newLine = repl:match("^(%d+):(.*)")
 		local lnum = assert(tonumber(lineStr))
-		vim.api.nvim_buf_set_lines(targetBuf, lnum - 1, lnum, false, { newLine })
+		vim.api.nvim_buf_set_lines(state.targetBuf, lnum - 1, lnum, false, { newLine })
 	end
 end
 
----@param ns number
----@param rgBuf number
----@param targetBuf number
----@param targetWin number
-local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
-	vim.api.nvim_buf_clear_namespace(targetBuf, ns, 0, -1)
-
-	local toSearch = vim.api.nvim_buf_get_lines(rgBuf, 0, -1, false)[1]
+local function highlightMatches()
+	vim.api.nvim_buf_clear_namespace(state.rgBuf, state.matchHlNs, 0, -1)
+	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
 	if toSearch == "" then return end
-	local file = vim.api.nvim_buf_get_name(targetBuf)
+
+	local viewportStart = vim.fn.line("w0", state.targetWin)
+	local viewportEnd = vim.fn.line("w$", state.targetWin)
 	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
 
-	local rgResult =
-		runRipgrep({ toSearch, "--line-number", "--column", "--only-matching", pcre2 }, file)
-	if rgResult.code ~= 0 then return end
+	-- only highlight search matches
+	if toReplace == "" then
+		local rgResult =
+			runRipgrep { toSearch, "--line-number", "--column", "--only-matching", pcre2 }
+		if rgResult.code ~= 0 then return end
+		local matches = vim.split(vim.trim(rgResult.stdout), "\n")
 
-	local viewportStart = vim.fn.line("w0", targetWin)
-	local viewportEnd = vim.fn.line("w$", targetWin)
-
-	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
-	vim.iter(matches)
-		:filter(function(match) -- PERF update only matches in viewport
-			local line = tonumber(match:match("^(%d+):"))
-			return (line >= viewportStart) and (line <= viewportEnd)
-		end)
-		:each(function(match)
-			local lineStr, colStr, text = unpack(vim.split(match, ":"))
-			local line = tonumber(lineStr) - 1
-			local startCol = tonumber(colStr) - 1
-			local endCol = startCol + #text
-			vim.highlight.range(targetBuf, ns, "IncSearch", { line, startCol }, { line, endCol })
-		end)
+		vim.iter(matches)
+			:filter(function(match) -- PERF update only matches in viewport
+				local line = tonumber(match:match("^(%d+):"))
+				return (line >= viewportStart) and (line <= viewportEnd)
+			end)
+			:each(function(match)
+				local lineStr, colStr, text = unpack(vim.split(match, ":"))
+				local line = tonumber(lineStr) - 1
+				local startCol = tonumber(colStr) - 1
+				local endCol = startCol + #text
+				vim.highlight.range(
+					state.targetBuf,
+					state.matchHlNs,
+					"IncSearch",
+					{ line, startCol },
+					{ line, endCol }
+				)
+			end)
+	else
+		local rgResult =
+			runRipgrep { toSearch, "--line-number", "--column", "--only-matching", pcre2 }
+		if rgResult.code ~= 0 then return end
+		local replacements = vim.split(vim.trim(rgResult.stdout), "\n")
+	end
 end
 
----@param ns number
----@param rgBuf number
-local function setRgBufLabels(ns, rgBuf)
-	vim.api.nvim_buf_clear_namespace(rgBuf, ns, 0, -1)
-	vim.api.nvim_buf_set_extmark(rgBuf, ns, 0, 0, {
+local function setRgBufLabels()
+	vim.api.nvim_buf_clear_namespace(state.rgBuf, state.virtTextNs, 0, -1)
+	vim.api.nvim_buf_set_extmark(state.rgBuf, state.virtTextNs, 0, 0, {
 		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
 		virt_text_pos = "right_align",
 	})
-	vim.api.nvim_buf_set_extmark(rgBuf, ns, 1, 0, {
+	vim.api.nvim_buf_set_extmark(state.rgBuf, state.virtTextNs, 1, 0, {
 		virt_text = { { "Replace", "DiagnosticVirtualTextInfo" } },
 		virt_text_pos = "right_align",
 	})
 end
 
 -- ensure buffer has only 2 lines
----@param rgBuf number
-local function removeExtraLines(rgBuf)
-	local lines = vim.api.nvim_buf_get_lines(rgBuf, 0, -1, true)
-	local linesTo
-	if #lines == 1 then return end
-	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, true, {lines[1], lines[2]})
+local function removeExtraLines()
+	local lines = vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, true)
+	if #lines == 1 then
+		lines[2] = ""
+	elseif #lines > 2 then
+		if lines[1] == "" then table.remove(lines, 1) end
+		if lines[3] and lines[2] == "" then table.remove(lines, 2) end
+	end
+	vim.api.nvim_buf_set_lines(state.rgBuf, 0, -1, true, { lines[1], lines[2] })
+	vim.cmd.normal { "zb", bang = true } -- enforce scroll position
 end
 
 function M.ripSubstitute()
-	local targetBuf = vim.api.nvim_get_current_buf()
-	local targetWin = vim.api.nvim_get_current_win()
+	state = {
+		targetBuf = vim.api.nvim_get_current_buf(),
+		targetWin = vim.api.nvim_get_current_win(),
+		virtTextNs = vim.api.nvim_create_namespace("rip-substitute-virttext"),
+		matchHlNs = vim.api.nvim_create_namespace("rip-substitute-match-hls"),
+		targetFile = vim.api.nvim_buf_get_name(0),
+	}
+
 	local augroup = vim.api.nvim_create_augroup("rip-substitute", { clear = true })
 
 	-- PREFILL
@@ -158,14 +182,14 @@ function M.ripSubstitute()
 	prefill = prefill:gsub("[.(){}[%]*+?^$]", [[\%1]]) -- escape special chars
 
 	-- CREATE RG-BUFFER
-	local rgBuf = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { prefill, "" })
+	state.rgBuf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(state.rgBuf, 0, -1, false, { prefill, "" })
 	-- adds syntax highlighting via treesitter `regex` parser
-	vim.api.nvim_set_option_value("filetype", "regex", { buf = rgBuf })
-	vim.api.nvim_buf_set_name(rgBuf, "rip substitute")
+	vim.api.nvim_set_option_value("filetype", "regex", { buf = state.rgBuf })
+	vim.api.nvim_buf_set_name(state.rgBuf, "rip substitute")
 
 	-- CREATE WINDOW
-	local winnr = vim.api.nvim_open_win(rgBuf, true, {
+	local rgWin = vim.api.nvim_open_win(state.rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 4,
 		col = vim.api.nvim_win_get_width(0) - config.window.width - 2,
@@ -185,47 +209,54 @@ function M.ripSubstitute()
 		scrolloff = 0,
 	}
 	for key, value in pairs(winOpts) do
-		vim.api.nvim_set_option_value(key, value, { win = winnr })
+		vim.api.nvim_set_option_value(key, value, { win = rgWin })
 	end
+	vim.defer_fn(function ()
+					
+	end, )
 	vim.cmd.startinsert { bang = true }
 
 	-- VIRTUAL TEXT & HIGHLIGHTS
-	local virtTextNs = vim.api.nvim_create_namespace("rip-substitute-virttext")
-	local matchHlNs = vim.api.nvim_create_namespace("rip-substitute-match-hls")
-
-	setRgBufLabels(virtTextNs, rgBuf)
+	setRgBufLabels()
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
-		buffer = rgBuf,
+		buffer = state.rgBuf,
 		group = augroup,
 		callback = function()
-			highlightMatches(matchHlNs, rgBuf, targetBuf, targetWin)
-			setRgBufLabels(virtTextNs, rgBuf) -- in case user changes line count
-			removeExtraLines(rgBuf)
+			removeExtraLines()
+			highlightMatches()
+			setRgBufLabels()
 		end,
 	})
 
 	-- POPUP CLOSING
 	local function closeRgWin()
-		if vim.api.nvim_win_is_valid(winnr) then vim.api.nvim_win_close(winnr, true) end
-		if vim.api.nvim_buf_is_valid(rgBuf) then vim.api.nvim_buf_delete(rgBuf, { force = true }) end
-		vim.api.nvim_buf_clear_namespace(0, virtTextNs, 0, -1)
-		vim.api.nvim_buf_clear_namespace(0, matchHlNs, 0, -1)
+		if vim.api.nvim_win_is_valid(rgWin) then vim.api.nvim_win_close(rgWin, true) end
+		if vim.api.nvim_buf_is_valid(state.rgBuf) then
+			vim.api.nvim_buf_delete(state.rgBuf, { force = true })
+		end
+		vim.api.nvim_buf_clear_namespace(0, state.virtTextNs, 0, -1)
+		vim.api.nvim_buf_clear_namespace(0, state.matchHlNs, 0, -1)
 	end
 	-- also close the popup on leaving buffer, ensures there is not leftover
 	-- buffer when user closes popup in a different way, such as `:close`.
 	vim.api.nvim_create_autocmd("BufLeave", {
-		buffer = rgBuf,
+		buffer = state.rgBuf,
 		group = augroup,
 		once = true,
 		callback = closeRgWin,
 	})
 
 	-- KEYMAPS
-	vim.keymap.set({ "n", "x" }, config.keymaps.abort, closeRgWin, { buffer = rgBuf, nowait = true })
+	vim.keymap.set(
+		{ "n", "x" },
+		config.keymaps.abort,
+		closeRgWin,
+		{ buffer = state.rgBuf, nowait = true }
+	)
 	vim.keymap.set({ "n", "x" }, config.keymaps.confirm, function()
-		executeSubstitution(rgBuf, targetBuf)
+		executeSubstitution()
 		closeRgWin()
-	end, { buffer = rgBuf, nowait = true })
+	end, { buffer = state.rgBuf, nowait = true })
 end
 
 --------------------------------------------------------------------------------
