@@ -293,11 +293,6 @@
     "body": "osascript -l JavaScript -e \"encodeURIComponent('${1:text}')\"",
     "prefix": "urlEncode"
   },
-  "vim modeline": {
-    "body": "# vim: filetype=${1:sh}",
-    "description": "this snippet should neither be at the top nor bottom of this JSON, so vim does not try to read the modeline itself.",
-    "prefix": "vim modeline"
-  },
   "wait until app running": {
     "body": "while ! pgrep -xq \"${1:app_name}\"; do sleep 0.1; done",
     "prefix": "wait until app running"

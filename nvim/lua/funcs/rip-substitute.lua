@@ -134,12 +134,13 @@ local function highlightMatches()
 	local rgArgs = { toSearch, "--line-number", "--column", "--only-matching" }
 	onEachRgResultInViewport(rgArgs, function(result)
 		local endCol = result.col + #result.text
-		vim.highlight.range(
+		vim.api.nvim_buf_add_highlight(
 			state.targetBuf,
 			state.matchHlNs,
 			toReplace == "" and "IncSearch" or "LspInlayHint",
-			{ result.lnum, result.col },
-			{ result.lnum, endCol }
+			result.lnum,
+			result.col,
+			endCol
 		)
 	end)
 
@@ -215,7 +216,10 @@ function M.ripSubstitute()
 	local scrollbarOffset = 3
 
 	-- CREATE WINDOW
-	local footerStr = ("%s: Confirm   %s: Abort"):format(config.keymaps.confirm, config.keymaps.abort)
+	local footerStr = ("%s: Confirm   %s: Abort"):format(
+		config.keymaps.confirm,
+		config.keymaps.abort
+	)
 	local rgWin = vim.api.nvim_open_win(state.rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 4,
