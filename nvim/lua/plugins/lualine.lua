@@ -77,7 +77,7 @@ local lualineConfig = {
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
-			"checkhealth", "noice", "lazy", "mason", "qf",
+			"checkhealth", "noice", "lazy", "mason", "qf", "regex"
 		},
 	},
 	tabline = {
@@ -168,7 +168,6 @@ local lualineConfig = {
 return {
 	"nvim-lualine/lualine.nvim",
 	lazy = false,
-	-- event = "UIEnter", -- load quicker to prevent flickering
 	dependencies = "nvim-tree/nvim-web-devicons",
 	external_dependencies = "git",
 	opts = lualineConfig,

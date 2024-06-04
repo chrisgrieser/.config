@@ -70,7 +70,7 @@ vim.opt.linespace = -2 -- less line height
 --------------------------------------------------------------------------------
 -- CURSOR
 vim.opt.guicursor = {
-	"i-ci-c:ver25", -- INFO with noice.nvim, guicursor does not apply to the cmdline https://github.com/folke/noice.nvim/issues/552
+	"i-ci-c:ver25",
 	"n-sm:block",
 	"r-cr-o-v:hor10",
 	"a:blinkwait200-blinkoff350-blinkon550",
