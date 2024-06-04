@@ -52,6 +52,7 @@ end
 ---@return vim.SystemCompleted
 local function runRipgrep(parameters)
 	local rgCmd = vim.list_extend({ "rg", "--no-config" }, parameters)
+	if config.regexOptions.pcre2 then table.insert(rgCmd, "--pcre2") end
 	vim.list_extend(rgCmd, { "--", state.targetFile })
 	return vim.system(rgCmd):wait()
 end
@@ -60,13 +61,11 @@ end
 
 local function executeSubstitution()
 	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
-	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
-
 	if config.autoBraceSimpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
 	-- notify on count
 	if config.notificationOnSuccess then
-		local out = runRipgrep { toSearch, "--count-matches", pcre2 }
+		local out = runRipgrep { toSearch, "--count-matches" }
 		if out.code == 0 then
 			local count = tonumber(vim.trim(out.stdout))
 			local pluralS = count == 1 and "" or "s"
@@ -75,7 +74,7 @@ local function executeSubstitution()
 	end
 
 	-- substitute
-	local rgResult = runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", pcre2 }
+	local rgResult = runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number" }
 	if rgResult.code ~= 0 then
 		notify(rgResult.stderr, "error")
 		return
@@ -84,8 +83,8 @@ local function executeSubstitution()
 	-- UPDATE LINES
 	-- (only change individual lines as opposed to whole buffer, as this
 	-- preserves folds and marks as much as possible)
-	local newLines = vim.split(vim.trim(rgResult.stdout), "\n")
-	for _, repl in pairs(newLines) do
+	local replacements = vim.split(vim.trim(rgResult.stdout), "\n")
+	for _, repl in pairs(replacements) do
 		local lineStr, newLine = repl:match("^(%d+):(.*)")
 		local lnum = assert(tonumber(lineStr))
 		vim.api.nvim_buf_set_lines(state.targetBuf, lnum - 1, lnum, false, { newLine })
@@ -93,44 +92,54 @@ local function executeSubstitution()
 end
 
 local function highlightMatches()
-	vim.api.nvim_buf_clear_namespace(state.rgBuf, state.matchHlNs, 0, -1)
+	vim.api.nvim_buf_clear_namespace(state.targetBuf, state.matchHlNs, 0, -1)
 	local toSearch, toReplace = unpack(vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, false))
 	if toSearch == "" then return end
 
-	local viewportStart = vim.fn.line("w0", state.targetWin)
-	local viewportEnd = vim.fn.line("w$", state.targetWin)
-	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
+	-- PERF Filters `rgResult` by only showing lines in the viewport of the `targetWin`
+	---@param rgStdout string
+	---@return Iter
+	local function viewportLines(rgStdout)
+		local rgLines = vim.split(vim.trim(rgStdout), "\n")
+		local viewportStart = vim.fn.line("w0", state.targetWin)
+		local viewportEnd = vim.fn.line("w$", state.targetWin)
+		return vim.iter(rgLines):filter(function(line)
+			local lnum = tonumber(line:match("^(%d+):"))
+			return (lnum >= viewportStart) and (lnum <= viewportEnd)
+		end)
+	end
 
 	-- only highlight search matches
 	if toReplace == "" then
-		local rgResult =
-			runRipgrep { toSearch, "--line-number", "--column", "--only-matching", pcre2 }
+		local rgResult = runRipgrep { toSearch, "--line-number", "--column", "--only-matching" }
 		if rgResult.code ~= 0 then return end
-		local matches = vim.split(vim.trim(rgResult.stdout), "\n")
 
-		vim.iter(matches)
-			:filter(function(match) -- PERF update only matches in viewport
-				local line = tonumber(match:match("^(%d+):"))
-				return (line >= viewportStart) and (line <= viewportEnd)
-			end)
-			:each(function(match)
-				local lineStr, colStr, text = unpack(vim.split(match, ":"))
-				local line = tonumber(lineStr) - 1
-				local startCol = tonumber(colStr) - 1
-				local endCol = startCol + #text
-				vim.highlight.range(
-					state.targetBuf,
-					state.matchHlNs,
-					"IncSearch",
-					{ line, startCol },
-					{ line, endCol }
-				)
-			end)
+		viewportLines(rgResult.stdout):each(function(match)
+			local lnumStr, colStr, text = match:match("^(%d+):(%d+):(.*)")
+			local lnum = tonumber(lnumStr) - 1
+			local startCol = tonumber(colStr) - 1
+			local endCol = startCol + #text
+			vim.highlight.range(
+				state.targetBuf,
+				state.matchHlNs,
+				"IncSearch",
+				{ lnum, startCol },
+				{ lnum, endCol }
+			)
+		end)
 	else
 		local rgResult =
-			runRipgrep { toSearch, "--line-number", "--column", "--only-matching", pcre2 }
+			runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", "--column" }
 		if rgResult.code ~= 0 then return end
-		local replacements = vim.split(vim.trim(rgResult.stdout), "\n")
+		viewportLines(rgResult.stdout):each(function(repl)
+			local lnumStr, colStr, newLine = repl:match("^(%d+):(%d+):(.*)")
+			local lnum = tonumber(lnumStr) - 1
+			local startCol = tonumber(colStr) - 1
+			vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
+				virt_text = { { newLine, "IncSearch" } },
+				virt_text_pos = "overlay",
+			})
+		end)
 	end
 end
 
@@ -149,6 +158,7 @@ end
 -- ensure buffer has only 2 lines
 local function removeExtraLines()
 	local lines = vim.api.nvim_buf_get_lines(state.rgBuf, 0, -1, true)
+	if #lines == 2 then return end
 	if #lines == 1 then
 		lines[2] = ""
 	elseif #lines > 2 then
@@ -211,10 +221,7 @@ function M.ripSubstitute()
 	for key, value in pairs(winOpts) do
 		vim.api.nvim_set_option_value(key, value, { win = rgWin })
 	end
-	vim.defer_fn(function ()
-					
-	end, )
-	vim.cmd.startinsert { bang = true }
+	vim.defer_fn(function() vim.cmd.startinsert { bang = true } end, 1)
 
 	-- VIRTUAL TEXT & HIGHLIGHTS
 	setRgBufLabels()
