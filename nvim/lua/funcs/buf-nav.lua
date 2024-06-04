@@ -160,7 +160,7 @@ function M.bufferByLastUsed(dir)
 	-----------------------------------------------------------------------------
 	-- DISPLAY BUFFER-LIST
 
-	local notifyInstalled, nvimNotify = pcall(require, "notify")
+	local notifyInstalled, _ = pcall(require, "notify")
 	if not notifyInstalled then return end
 
 	local curBufIcon = ""
@@ -173,7 +173,8 @@ function M.bufferByLastUsed(dir)
 		:totable()
 	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
-	state.bufNavNotify = nvimNotify.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
+	---@diagnostic disable-next-line: assign-type-mismatch
+	state.bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
 		timeout = config.timeout,
 		title = pluginName,
 		animate = false,
