@@ -150,29 +150,6 @@ function p {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# interactive yq
-function iq {
-	# Read stdin into a temp file if data is provided via stdin
-	if [[ ! -t 0 ]]; then
-		cat > "$(mktemp)"
-	else
-		file="$1"
-	fi
-
-	selection=$(
-		yq --colors --output-format=yaml "." "$file" | fzf \
-			--query="." --ansi --no-separator --inline-info --disabled \
-			--header-first --header=" ↵ Copy-print query    ⌥ ↵ Copy-print line" \
-			--bind="change:reload(yq --colors --output-format=yaml {q} '$file')" \
-			--bind="enter:print-query,alt-enter:accept"
-	)
-	[[ -z "$selection" ]] && return 0
-	echo -n "$selection" | pbcopy
-	print "\e[1;32mCopied:\e[0m $selection"
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # copy result of last command
 function lr() {
 	to_copy=$(eval "$(history -n -1)")

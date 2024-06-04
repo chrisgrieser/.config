@@ -1,26 +1,24 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2154 # Alfred variable
+# shellcheck disable=2154 # Alfred variables
 
-# delete existing reminder
 msg=$(reminders delete "$reminder_list" "$id")
 echo "$msg" >&2 # log msg in Alfred console
+msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow")
+echo "$msg" >&2
+echo -n "$title" # pass for notification
 
-# create new reminder for tomorrow
-# using reminders CLI does not allow for alldayDueDate, therefore using JXA version
-# PENDING https://github.com/keith/reminders-cli/issues/79
-# msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow")
-osascript -l JavaScript -e "
-	const tomorrow = new Date();
-	tomorrow.setDate(tomorrow.getDate() + 1);
-	const rem = Application('Reminders');
-	const newReminder = rem.Reminder({
-		name: '$title',
-		body: '$body',
-		alldayDueDate: tomorrow,
-	});
-	rem.lists.byName('$reminder_list').reminders.push(newReminder);
-	rem.quit();
-" &>/dev/null
+#───────────────────────────────────────────────────────────────────────────────
+# JXA for adding a reminder (not used since slower)
 
-# pass for notification
-echo -n "$title"
+# osascript -l JavaScript -e "
+# 	const tomorrow = new ;
+# 	tomorrow.setDate(tomorrow.getDate() + 1);
+# 	const rem = Application('Reminders');
+# 	const newReminder = rem.Reminder({
+# 		name: '$title',
+# 		body: '$body',
+# 		alldayDueDate: tomorrow,
+# 	});
+# 	rem.lists.byName('$reminder_list').reminders.push(newReminder);
+# 	rem.quit();
+# " &> /dev/null

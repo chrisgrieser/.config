@@ -27,11 +27,9 @@ function bat { # dark-mode aware
 
 # UTILS
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
-alias bkp_full='zsh "$HOME/.config/+ utility-scripts/full-backup.sh"'
-alias bkp_repos='zsh "$HOME/.config/+ utility-scripts/backup-my-repos.sh"'
 alias sync_repo='zsh ./.sync-this-repo.sh'
 
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+export PATH="$HOME/.config/+ utility-scripts/":$PATH
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
