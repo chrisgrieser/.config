@@ -17,7 +17,6 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 	}
 	extraOpts = extraOpts || "";
 	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
-	console.log("⭕ curlRequest:", curlRequest);
 	const response = app.doShellScript(curlRequest);
 	return response;
 }
@@ -66,7 +65,6 @@ function run() {
 	const githubToken =
 		$.getenv("github_token_from_alfred_prefs") ||
 		app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN").trim();
-	console.log("⭕ githubToken:", JSON.stringify(githubToken));
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 
