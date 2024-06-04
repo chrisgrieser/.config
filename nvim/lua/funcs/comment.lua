@@ -41,9 +41,11 @@ function M.commentHr()
 	local hr = hrChar:rep(hrLength)
 	local hrWithComment = comStr:format(hr)
 
-	-- filetype-specific padding
+	-- filetype-specific
 	local formatterWantPadding = { "python", "css", "scss" }
-	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
+	if vim.bo.filetype == "markdown" then
+		hrWithComment = "---"
+	elseif not vim.tbl_contains(formatterWantPadding, vim.bo.filetype) then
 		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end
 	local fullLine = indent .. hrWithComment

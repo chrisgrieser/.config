@@ -14,7 +14,7 @@ return {
 			},
 		},
 		opts = {
-			window = {
+			popupWin = {
 				width = 35,
 				border = vim.g.borderStyle,
 			},
