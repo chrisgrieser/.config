@@ -215,7 +215,7 @@ function M.ripSubstitute()
 	local scrollbarOffset = 3
 
 	-- CREATE WINDOW
-	local footerStr = ("%s: Confirm, %s: Abort"):format(config.keymaps.confirm, config.keymaps.abort)
+	local footerStr = ("%s: Confirm   %s: Abort"):format(config.keymaps.confirm, config.keymaps.abort)
 	local rgWin = vim.api.nvim_open_win(state.rgBuf, true, {
 		relative = "win",
 		row = vim.api.nvim_win_get_height(0) - 4,
