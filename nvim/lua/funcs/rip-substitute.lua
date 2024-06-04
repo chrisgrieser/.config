@@ -14,9 +14,10 @@ local defaultConfig = {
 		-- enables lookarounds and backreferences, but slower performance
 		pcre2 = true,
 		-- By default, rg treats `$1a` as the named capture group "1a". When set
-		-- to `true`, that behavior is disabled and `$1a` is the first capture
-		-- followed by the letter "a". (See also rg's manpage on `--replace`.)
-		simpleCaptureGroups = true,
+		-- to `true`, and `$1a` is automatically changed to `${1}a` to ensure the
+		-- capture group is correctly determined. Disable this setting, if you
+		-- plan an using named capture groups.
+		autoBraceSimpleCaptureGroups = true,
 	},
 	prefill = {
 		normal = "cursorword", -- "cursorword"|false
@@ -52,12 +53,11 @@ local function executeSubstitution(rgBuf, targetBuf)
 	local file = vim.api.nvim_buf_get_name(targetBuf)
 	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
 
-	-- HACK deal with annoying named capture groups (see `man rg` on `--replace`)
-	if config.simpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
+	if config.autoBraceSimpleCaptureGroups then toReplace = toReplace:gsub("%$(%d+)", "${%1}") end
 
 	-- notify on count
 	if config.notificationOnSuccess then
-		local out = runRipgrep({ toSearch, "--count", pcre2 }, file)
+		local out = runRipgrep({ toSearch, "--count-matches", pcre2 }, file)
 		if out.code == 0 then
 			local count = tonumber(vim.trim(out.stdout))
 			local pluralS = count == 1 and "" or "s"
@@ -83,6 +83,12 @@ local function executeSubstitution(rgBuf, targetBuf)
 		vim.api.nvim_buf_set_lines(targetBuf, lnum - 1, lnum, false, { newLine })
 	end
 end
+
+--- fff
+--- fff
+--- fff
+--- fffffff
+--- fff
 
 ---@param ns number
 ---@param rgBuf number
