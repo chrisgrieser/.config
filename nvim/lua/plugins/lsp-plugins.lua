@@ -2,6 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	-- BUG for some reason, makes `ltex` ignore its own config when enabled…
 	-- TODO enable once more stable and not adding false positives everywhere
 	-- { -- nvim lua typings
 	-- 	"folke/lazydev.nvim",
