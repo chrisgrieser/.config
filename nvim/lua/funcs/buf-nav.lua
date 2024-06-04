@@ -105,9 +105,11 @@ end
 
 --------------------------------------------------------------------------------
 
-local bufsByLastAccess
-local bufNavNotify
-local timeoutTimer
+---@class (exact) bufNavState
+---@field bufsByLastAccess table[]
+---@field bufNavNotify { id: number }
+---@field timeoutTimer table
+local state = {}
 
 local config = {
 	timeout = 3000,
@@ -118,19 +120,19 @@ local config = {
 function M.bufferByLastUsed(dir)
 	-- GET BUFFERS SORTED BY LAST ACCESS
 	-- timeout required, as switching to buffer always makes it the last accessed one
-	if timeoutTimer then timeoutTimer:stop() end
-	timeoutTimer = vim.defer_fn(function() bufsByLastAccess = nil end, config.timeout)
+	if state.timeoutTimer then state.timeoutTimer:stop() end
+	state.timeoutTimer = vim.defer_fn(function() state.bufsByLastAccess = nil end, config.timeout)
 
-	if not bufsByLastAccess then
+	if not state.bufsByLastAccess then
 		---@type {name: string, lastused: number}[]
-		bufsByLastAccess = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+		state.bufsByLastAccess = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
 			:filter(function(buf) return (os.time() - buf.lastused) < config.maxBufAgeMins * 60 end)
 			:totable()
-		table.sort(bufsByLastAccess, function(a, b) return a.lastused > b.lastused end)
-		bufsByLastAccess = vim.list_slice(bufsByLastAccess, 1, config.maxBufs)
+		table.sort(state.bufsByLastAccess, function(a, b) return a.lastused > b.lastused end)
+		state.bufsByLastAccess = vim.list_slice(state.bufsByLastAccess, 1, config.maxBufs)
 	end
-	if #bufsByLastAccess < 2 then
-		bufsByLastAccess = nil
+	if #state.bufsByLastAccess < 2 then
+		state.bufsByLastAccess = nil
 		notify("Only one buffer open.", "warn")
 		return
 	end
@@ -138,8 +140,8 @@ function M.bufferByLastUsed(dir)
 	-- DETERMINE NEXT BUFFER
 	local currentBuf = vim.api.nvim_buf_get_name(0)
 	local currentBufIdx
-	for i = 1, #bufsByLastAccess do
-		if bufsByLastAccess[i].name == currentBuf then
+	for i = 1, #state.bufsByLastAccess do
+		if state.bufsByLastAccess[i].name == currentBuf then
 			currentBufIdx = i
 			break
 		end
@@ -147,22 +149,22 @@ function M.bufferByLastUsed(dir)
 	local nextBufIdx
 	if dir == "prev" then
 		nextBufIdx = currentBufIdx - 1
-		if nextBufIdx < 1 then nextBufIdx = #bufsByLastAccess end
+		if nextBufIdx < 1 then nextBufIdx = #state.bufsByLastAccess end
 	else
 		nextBufIdx = currentBufIdx + 1
-		if nextBufIdx > #bufsByLastAccess then nextBufIdx = 1 end
+		if nextBufIdx > #state.bufsByLastAccess then nextBufIdx = 1 end
 	end
-	local nextBufName = bufsByLastAccess[nextBufIdx].name
+	local nextBufName = state.bufsByLastAccess[nextBufIdx].name
 	vim.cmd.edit(nextBufName)
 
 	-----------------------------------------------------------------------------
 	-- DISPLAY BUFFER-LIST
 
-	local notifyInstalled, _ = pcall(require, "notify")
+	local notifyInstalled, nvimNotify = pcall(require, "notify")
 	if not notifyInstalled then return end
 
 	local curBufIcon = ""
-	local bufsDisplay = vim.iter(bufsByLastAccess)
+	local bufsDisplay = vim.iter(state.bufsByLastAccess)
 		:map(function(buf)
 			local prefix = nextBufName == buf.name and curBufIcon or "•"
 			return prefix .. " " .. vim.fs.basename(buf.name)
@@ -171,13 +173,13 @@ function M.bufferByLastUsed(dir)
 		:totable()
 	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
-	bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
+	state.bufNavNotify = nvimNotify.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
 		timeout = config.timeout,
 		title = pluginName,
 		animate = false,
 		stages = "no_animation",
 		hide_from_history = true,
-		replace = bufNavNotify and bufNavNotify.id,
+		replace = state.bufNavNotify and state.bufNavNotify.id,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
 			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", curBufIcon .. ".*") end)

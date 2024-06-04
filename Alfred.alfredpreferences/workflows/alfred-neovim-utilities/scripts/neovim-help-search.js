@@ -6,10 +6,14 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function camelCaseMatch(str) {
-	const subwords = str.replace(/[-_./]/g, " ");
-	const fullword = str.replace(/[-_./]/g, "");
+	const subwords = str.replace(/[-_.]/g, " ");
+	const fullword = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+
+	// so "setext" matches "nvim_buf_set_extmark()"
+	const partialFullword = str.replace(/^nvim_(win|buf)_/, "").replace(/[-_.]/g, "");
+
+	return [subwords, camelCaseSeparated, fullword, partialFullword, str].join(" ") + " ";
 }
 
 /** @param {string} url @return {string} */
@@ -46,7 +50,6 @@ function run() {
 
 			// matcher improvements
 			let matcher = camelCaseMatch(name) + site + camelCaseMatch(synonyms);
-			if (name.startsWith("vim.")) matcher += " " + name.slice(4);
 			if (site === "builtin") matcher += " fn";
 
 			return {
