@@ -68,12 +68,6 @@ local function cmpconfig()
 					fallback()
 				end
 			end, { "i", "s" }),
-			["<D-j>"] = cmp.mapping(function()
-				if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
-			end, { "i", "s" }),
-			["<D-J>"] = cmp.mapping(function()
-				if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
-			end, { "i", "s" }),
 		},
 		formatting = { ---@diagnostic disable-line: missing-fields
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
