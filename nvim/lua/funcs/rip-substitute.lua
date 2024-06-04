@@ -113,7 +113,6 @@ local function highlightMatches()
 	if toReplace == "" then
 		local rgResult = runRipgrep { toSearch, "--line-number", "--column", "--only-matching" }
 		if rgResult.code ~= 0 then return end
-
 		viewportLines(rgResult.stdout):each(function(match)
 			local lnumStr, colStr, text = match:match("^(%d+):(%d+):(.*)")
 			local lnum = tonumber(lnumStr) - 1
@@ -132,12 +131,28 @@ local function highlightMatches()
 			runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", "--column" }
 		if rgResult.code ~= 0 then return end
 		viewportLines(rgResult.stdout):each(function(repl)
-			local lnumStr, colStr, newLine = repl:match("^(%d+):(%d+):(.*)")
+			local lnumStr, colStr, text = repl:match("^(%d+):(%d+):(.*)")
 			local lnum = tonumber(lnumStr) - 1
 			local startCol = tonumber(colStr) - 1
+			text = text:sub(startCol + 1) .. (" "):rep(startCol)
 			vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
-				virt_text = { { newLine, "IncSearch" } },
+				virt_text = { { text, "Normal" } },
 				virt_text_pos = "overlay",
+				hl_mode = "combine",
+			})
+		end)
+		rgResult =
+			runRipgrep { toSearch, "--replace=" .. toReplace, "--line-number", "--column" }
+		if rgResult.code ~= 0 then return end
+		viewportLines(rgResult.stdout):each(function(repl)
+			local lnumStr, colStr, text = repl:match("^(%d+):(%d+):(.*)")
+			local lnum = tonumber(lnumStr) - 1
+			local startCol = tonumber(colStr) - 1
+			text = text:sub(startCol + 1) .. (" "):rep(startCol)
+			vim.api.nvim_buf_set_extmark(state.targetBuf, state.matchHlNs, lnum, startCol, {
+				virt_text = { { text, "IncSearch" } },
+				virt_text_pos = "overlay",
+				hl_mode = "combine",
 			})
 		end)
 	end
@@ -209,6 +224,7 @@ function M.ripSubstitute()
 		border = config.window.border,
 		title = "  rip substitute ",
 		title_pos = "center",
+		zindex = 1, -- below nvim-notify
 	})
 	local winOpts = {
 		list = true,
