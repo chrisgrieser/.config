@@ -36,6 +36,15 @@ local function notify(msg, level)
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "rg substitute" })
 end
 
+---@param parameters string[]
+---@param file string
+---@return vim.SystemCompleted
+local function runRipgrep(parameters, file)
+	local rgCmd = vim.list_extend({ "rg", "--no-config" }, parameters)
+	vim.list_extend(rgCmd, { "--", file })
+	return vim.system(rgCmd):wait()
+end
+
 ---@param rgBuf integer temporary rg buffer
 ---@param targetBuf integer buffer where the output will be written
 local function executeSubstitution(rgBuf, targetBuf)
@@ -48,7 +57,7 @@ local function executeSubstitution(rgBuf, targetBuf)
 
 	-- notify on count
 	if config.notificationOnSuccess then
-		local out = vim.system({ "rg", toSearch, "--count", "--no-config", pcre2, "--", file }):wait()
+		local out = runRipgrep({ toSearch, "--count", pcre2 }, file)
 		if out.code == 0 then
 			local count = tonumber(vim.trim(out.stdout))
 			local pluralS = count == 1 and "" or "s"
@@ -57,16 +66,8 @@ local function executeSubstitution(rgBuf, targetBuf)
 	end
 
 	-- substitute
-	local rgResult = vim.system({
-		"rg",
-		toSearch,
-		"--replace=" .. toReplace,
-		"--line-number",
-		"--no-config",
-		pcre2,
-		"--",
-		file,
-	}):wait()
+	local rgResult =
+		runRipgrep({ toSearch, "--replace=" .. toReplace, "--line-number", pcre2 }, file)
 	if rgResult.code ~= 0 then
 		notify(rgResult.stderr, "error")
 		return
@@ -93,18 +94,10 @@ local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
 	local toSearch = vim.api.nvim_buf_get_lines(rgBuf, 0, -1, false)[1]
 	if toSearch == "" then return end
 	local file = vim.api.nvim_buf_get_name(targetBuf)
+	local pcre2 = config.regexOptions.pcre2 and "--pcre2" or nil
 
-	local rgResult = vim.system({
-		"rg",
-		toSearch,
-		"--line-number",
-		"--column",
-		"--only-matching",
-		"--no-config",
-		config.regexOptions.pcre2 and "--pcre2" or nil,
-		"--",
-		file,
-	}):wait()
+	local rgResult =
+		runRipgrep({ toSearch, "--line-number", "--column", "--only-matching", pcre2 }, file)
 	if rgResult.code ~= 0 then return end
 
 	local viewportStart = vim.fn.line("w0", targetWin)
@@ -131,7 +124,7 @@ function M.ripSubstitute()
 	local augroup = vim.api.nvim_create_augroup("rip-substitute", { clear = true })
 
 	-- PREFILL
-	local prefill
+	local prefill = ""
 	local mode = vim.fn.mode()
 	if mode == "n" and config.prefill.normal == "cursorword" then
 		prefill = vim.fn.expand("<cword>")
@@ -139,6 +132,7 @@ function M.ripSubstitute()
 		vim.cmd.normal { '"zy', bang = true }
 		prefill = vim.fn.getreg("z"):gsub("[\n\r].*", "")
 	end
+	prefill = prefill:gsub("[.(){}[%]*+?^$]", [[\%1]]) -- escape special chars
 
 	-- CREATE RG-BUFFER
 	local rgBuf = vim.api.nvim_create_buf(false, true)

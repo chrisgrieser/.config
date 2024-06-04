@@ -176,7 +176,7 @@ keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
 keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
 keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", silent = true })
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
-keymap("x", "<left>", [["zdh"zpgvhoho]], { desc = "⬅ Move selection left" })
+keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE

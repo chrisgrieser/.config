@@ -1360,23 +1360,29 @@ end run</string>
 	<string>## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the releases page instead.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
+	  releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. Optionally, creates a fork on GitHub with the `gh` cli and prepares the repo for a PR.
-- Search your 100 most recently starred repos via the keyword `gst`.
-	+ The same modifiers apply as for the public repo search.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the
+	  Terminal. Optionally, creates a fork on GitHub with the `gh` cli and
+	  prepares the repo for a PR.
 - Quick access the repositories you own via `gmy`.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in Finder. Otherwise, open the repo's GitHub page.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
+	  Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo link.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the Terminal. If the repo is already locally available on your device, just open the repository in the Terminal.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the
+	  Terminal. If the repo is already locally available on your device, just
+	  open the repository in the Terminal.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `ghn`.
+- Directly open your GitHub notification via `ghn`. 
+	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
+	  to notifications.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
@@ -1868,7 +1874,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.1.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
