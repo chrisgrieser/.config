@@ -18,8 +18,11 @@ local defaultConfig = {
 		-- followed by the letter "a". (See also rg's manpage on `--replace`.)
 		simpleCaptureGroups = true,
 	},
+	prefill = {
+		normal = "cursorword", -- "cursorword"|false
+		visual = "selectionFirstLine",-- "selectionFirstLine"|false
+	},
 	notificationOnSuccess = true,
-	prefillCursorwordInNormalMode = true,
 }
 
 local config = defaultConfig
@@ -122,17 +125,17 @@ local function highlightMatches(ns, rgBuf, targetBuf, targetWin)
 		end)
 end
 
-function M.rgSubstitute()
+function M.ripSubstitute()
 	local targetBuf = vim.api.nvim_get_current_buf()
 	local targetWin = vim.api.nvim_get_current_win()
-	local augroup = vim.api.nvim_create_augroup("rg-substitute", { clear = true })
+	local augroup = vim.api.nvim_create_augroup("rip-substitute", { clear = true })
 
 	-- CREATE & PREFILL TEMP RG-BUFFER
 	local prefill
 	local mode = vim.fn.mode()
-	if mode == "n" and config.prefillCursorwordInNormalMode then
+	if mode == "n" and config.prefill.normal == "cursorword" then
 		prefill = vim.fn.expand("<cword>")
-	elseif mode:find("[Vv]") then
+	elseif mode:find("[Vv]") and config.prefill.visual == "fi" then
 		vim.cmd.normal { '"zy', bang = true }
 		prefill = vim.fn.getreg("z")
 		prefill = prefill:gsub("[\n\r].*", "") -- only 1st line
@@ -141,7 +144,7 @@ function M.rgSubstitute()
 	vim.api.nvim_buf_set_lines(rgBuf, 0, -1, false, { prefill, "" })
 	-- adds syntax highlighting via treesitter `regex` parser
 	vim.api.nvim_set_option_value("filetype", "regex", { buf = rgBuf })
-	vim.api.nvim_buf_set_name(rgBuf, "rg substitute")
+	vim.api.nvim_buf_set_name(rgBuf, "rip substitute")
 
 	-- CREATE WINDOW
 	local winnr = vim.api.nvim_open_win(rgBuf, true, {
@@ -152,7 +155,7 @@ function M.rgSubstitute()
 		height = 2,
 		style = "minimal",
 		border = config.window.border,
-		title = "  rg substitute ",
+		title = "  rip substitute ",
 		title_pos = "center",
 	})
 	vim.api.nvim_set_option_value("signcolumn", "no", { win = winnr })
@@ -162,7 +165,7 @@ function M.rgSubstitute()
 	vim.cmd.startinsert { bang = true }
 
 	-- VIRTUAL TEXT & HIGHLIGHTS
-	local virtTextNs = vim.api.nvim_create_namespace("rg-substitute-virttext")
+	local virtTextNs = vim.api.nvim_create_namespace("rip-substitute-virttext")
 	vim.api.nvim_buf_set_extmark(rgBuf, virtTextNs, 0, 0, {
 		virt_text = { { " Search", "DiagnosticVirtualTextInfo" } },
 		virt_text_pos = "right_align",
@@ -172,7 +175,7 @@ function M.rgSubstitute()
 		virt_text_pos = "right_align",
 	})
 
-	local matchHlNs = vim.api.nvim_create_namespace("rg-substitute-match-hls")
+	local matchHlNs = vim.api.nvim_create_namespace("rip-substitute-match-hls")
 	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		buffer = rgBuf,
 		group = augroup,
