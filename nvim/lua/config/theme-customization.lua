@@ -115,7 +115,7 @@ function M.themeModifications()
 			overwriteHl("IblIndent", { fg = "#393734" })
 		end
 	elseif theme == "dracula" then
-		boldLualineA()
+		vim.defer_fn(boldLualineA, 1)
 		revertedTodoComments()
 		clearHl("Constant")
 		linkHl("Boolean", "Special")

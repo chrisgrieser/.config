@@ -56,8 +56,8 @@ function run() {
 	// FETCH REMOTE REPOS
 
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-	const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
-	const scriptFilterArr = JSON.parse(httpRequest(apiURL))
+	const response = httpRequest(`https://api.github.com/users/${username}/repos?per_page=100`);
+	const scriptFilterArr = JSON.parse(response || [])
 		.filter((/** @type {GithubRepo} */ repo) => !repo.archived)
 		.sort(
 			(
@@ -84,8 +84,8 @@ function run() {
 			const terminalActionDesc = repo.local
 				? "Open in Terminal"
 				: shallowClone
-				  ? `Shallow Clone (depth ${cloneDepth})`
-				  : "Clone";
+					? `Shallow Clone (depth ${cloneDepth})`
+					: "Clone";
 
 			// open in terminal when local, clone when not
 			const terminalArg = repo.local?.path || repo.html_url;
@@ -131,6 +131,10 @@ function run() {
 			};
 			return alfredItem;
 		});
+
+	if (scriptFilterArr.length === 0) {
+		scriptFilterArr.push({ title: "No response from GitHub", valid: false });
+	}
 
 	return JSON.stringify({
 		items: scriptFilterArr,

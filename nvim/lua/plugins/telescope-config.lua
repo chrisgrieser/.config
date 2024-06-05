@@ -233,9 +233,9 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
-			lsp_dynamic_workspace_symbols = { -- dynamic = updates results on typing
+			lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
 				prompt_prefix = "󰒕 ",
-				fname_width = 0, -- can see name in preview title
+				fname_width = 0, -- can see name in preview title already
 				symbol_width = 30,
 				file_ignore_patterns = { "node_modules", "typings" },
 			},
@@ -248,7 +248,7 @@ local function telescopeConfig()
 			},
 			colorscheme = {
 				enable_preview = true,
-				ignore_builtins = true, -- PENDING my PR
+				ignore_builtins = true,
 				prompt_prefix = " ",
 				layout_config = {
 					horizontal = {
@@ -267,8 +267,6 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
-		dev = true,
-		branch = "dev",
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {
@@ -377,6 +375,7 @@ return {
 			{
 				"<leader>pc",
 				function()
+					-- PENDING https://github.com/nvim-telescope/telescope.nvim/pull/3155
 					-- HACK remove built-in colorschemes from selection
 					-- stylua: ignore
 					local builtins = {
