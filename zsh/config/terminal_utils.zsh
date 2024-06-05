@@ -100,7 +100,7 @@ function sr {
 	[[ -z "$files" ]] && return 1
 
 	echo "$files" | while read -r file; do
-		rg "$search" --case-sensitive --replace="$replace" --passthrough \
+		rg "$search" --pcre2 --case-sensitive --replace="$replace" --passthrough \
 			--no-line-number --no-config "$file" > /tmp/rgpipe &&
 			mv /tmp/rgpipe "$file"
 	done

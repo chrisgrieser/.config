@@ -5,6 +5,7 @@
 [default.extend-words]
 noice = "noice" # plugin name
 iy = "iy" # keymap
+caf = "caf" # `.caf` file extension
 
 # ignore these files
 # INFO (needs glob due to conform.nvim appending stuff for temporary file)
