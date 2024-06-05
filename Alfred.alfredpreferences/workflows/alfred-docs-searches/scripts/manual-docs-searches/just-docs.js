@@ -4,6 +4,8 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+const htmlRegex = /<a href="(.*?)".*?><strong.*?>(.*?)<\/strong>(.*?)<\/a>/i;
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -26,8 +28,7 @@ function run() {
 		.split('<li class="chapter-item expanded ">')
 		.slice(1)
 		.map((item) => {
-			const [_, urlSegment, number, title] =
-				item.match(/<a href="(.*)"><strong.*?>(.*)<\/strong>(.*)<\/a>/i) || [];
+			const [_, urlSegment, number, title] = item.match(htmlRegex) || [];
 			if (!urlSegment) return {};
 			const url = baseURL + urlSegment;
 
