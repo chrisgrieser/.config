@@ -88,7 +88,9 @@ function M.justRecipe(first)
 			local result = vim.system({ "just", recipe }):wait()
 			local out = vim.trim((result.stdout or "") .. (result.stderr or ""))
 			local severity = result.code == 0 and "INFO" or "ERROR"
-			vim.notify(out, vim.log.levels[severity], { title = "Just: " .. recipe })
+			if out ~= "" then
+				vim.notify(out, vim.log.levels[severity], { title = "Just: " .. recipe })
+			end
 		end
 		vim.cmd.checktime() -- reload buffer
 	end

@@ -17,24 +17,24 @@
 └── templates
 ```
 
-##  All installed plugins
+## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
+- [binhtran432k/dracula.nvim](https://github.com/binhtran432k/dracula.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
 - [chrisgrieser/nvim-origami](https://github.com/chrisgrieser/nvim-origami)
+- [chrisgrieser/nvim-rip-substitute](https://github.com/chrisgrieser/nvim-rip-substitute)
 - [chrisgrieser/nvim-rulebook](https://github.com/chrisgrieser/nvim-rulebook)
 - [chrisgrieser/nvim-scissors](https://github.com/chrisgrieser/nvim-scissors)
 - [chrisgrieser/nvim-spider](https://github.com/chrisgrieser/nvim-spider)
 - [chrisgrieser/nvim-tinygit](https://github.com/chrisgrieser/nvim-tinygit)
 - [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)
 - [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
-- [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 - [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
 - [folke/noice.nvim](https://github.com/folke/noice.nvim)
-- [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 - [garymjr/nvim-snippets](https://github.com/garymjr/nvim-snippets)
 - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -70,6 +70,7 @@
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
+- [rose-pine/neovim](https://github.com/rose-pine/neovim)
 - [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)

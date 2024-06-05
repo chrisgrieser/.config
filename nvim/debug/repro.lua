@@ -1,5 +1,33 @@
 local plugins = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	{
+		"williamboman/mason.nvim",
+		dependencies = { "williamboman/mason.nvim", opts = true },
+		config = function()
+			require("mason-tool-installer").setup {
+				ensure_installed = { "lua-language-server", "ltex-ls" },
+				run_on_start = true,
+			}
+			vim.cmd.MasonToolsInstall()
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		enabled = false,
+		dependencies = "folke/neodev.nvim",
+		config = function()
+			require("lspconfig").lua_ls.setup {}
+			require("lspconfig").ltex.setup {
+				settings = {
+					ltex = {
+						language = "en-US",
+						dictionary = {
+							["en-US"] = "Neovim",
+						},
+					},
+				},
+			}
+		end,
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -18,5 +46,3 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup(plugins)
 
 --------------------------------------------------------------------------------
-
-vim.cmd("colorscheme tokyonight-moon")
