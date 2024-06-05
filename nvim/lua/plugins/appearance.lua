@@ -7,8 +7,8 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		opts = {
 			override_by_filename = {
-				justfile = { icon = "", color = "#7f7f7f", name = "Justfile" },
-				[".justfile"] = { icon = "", color = "#7f7f7f", name = "Justfile" },
+				justfile = { icon = "", color = "#7f7f7f" },
+				[".justfile"] = { icon = "", color = "#7f7f7f" },
 			},
 		},
 	},

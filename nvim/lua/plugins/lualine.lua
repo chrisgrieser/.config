@@ -33,7 +33,7 @@ local function irregularWhitespace()
 	if bo.buftype ~= "" then return "" end
 
 	-- CONFIG
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 } 
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 }
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
