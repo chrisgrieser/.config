@@ -22,15 +22,19 @@ function M.copyAndNotify(text)
 	vim.notify(text, vim.log.levels.INFO, { title = "Copied" })
 end
 
----https://www.reddit.com/r/neovim/comments/oxddk9/comment/h7maerh/
----@param name string name of highlight group
----@param key "fg"|"bg"
+---@param hlName string name of highlight group
+---@param key "fg"|"bg"|"bold"
 ---@nodiscard
 ---@return string|nil the value, or nil if hlgroup or key is not available
-function M.getHighlightValue(name, key)
-	local hl = vim.api.nvim_get_hl(0, { name = name })
+function M.getHighlightValue(hlName, key)
+	local hl
+	repeat
+		-- follow linked highlights
+		hl = vim.api.nvim_get_hl(0, { name = hlName })
+		hlName = hl.link
+	until not hl.link
 	local value = hl[key]
-	if not value then return end
+	assert(value, ("No %q highlight group %q"):format(key, hlName))
 	return ("#%06x"):format(value)
 end
 

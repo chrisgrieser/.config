@@ -112,7 +112,7 @@ end
 local state = {}
 
 local config = {
-	timeout = 3000,
+	timeout = 4000,
 	maxBufAgeMins = 15,
 }
 
@@ -167,8 +167,9 @@ function M.bufferByLastUsed(dir)
 	local bufsDisplay = vim.iter(state.bufsByLastAccess)
 		:map(function(buf)
 			local prefix = nextBufName == buf.name and curBufIcon or "•"
-			local minsAgo = math.floor((os.time() - buf.lastused) / 60)
-			return ("%s %s (%s mins)"):format(prefix, vim.fs.basename(buf.name), minsAgo)
+			local minsAgo = math.ceil((os.time() - buf.lastused) / 60)
+			local minStr = minsAgo == 0 and "" or tostring(minsAgo)
+			return ("%s %s (%s mins)"):format(prefix, vim.fs.basename(buf.name), minStr)
 		end)
 		:rev()
 		:totable()

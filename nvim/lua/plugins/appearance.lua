@@ -50,11 +50,10 @@ return {
 		"kevinhwang91/nvim-hlslens",
 		-- loaded by snippet in opts-and-autocmds.lua
 		init = function()
-			-- cannot use my utility, as the value of IncSearch needs to be retrieved dynamically
 			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 				callback = function()
 					local bg = u.getHighlightValue("IncSearch", "bg")
-					vim.api.nvim_set_hl(0, "HLSearchReversed", { fg = bg })
+					vim.api.nvim_set_hl(0, "IncSearchReversed", { fg = bg })
 				end,
 			})
 		end,
@@ -66,9 +65,9 @@ return {
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
 					{ " ", "Padding-Ignore" },
-					{ "", "HLSearchReversed" },
-					{ text, "HlSearchLensNear" },
-					{ "", "HLSearchReversed" },
+					{ "", "IncSearchReversed" },
+					{ text, "IncSearch" },
+					{ "", "IncSearchReversed" },
 				}
 				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
 			end,
