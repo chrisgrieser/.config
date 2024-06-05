@@ -57,7 +57,6 @@ function M.themeModifications()
 			updateHl("lualine_a_" .. v, "gui=bold")
 		end
 	end
-	-- INFO
 	local function revertedTodoComments()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
 		local textColor = mode == "dark" and "#000000" or "#ffffff"
@@ -88,6 +87,17 @@ function M.themeModifications()
 		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
 		if mode == "dark" then revertedTodoComments() end
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
+	elseif theme == "monet" then
+		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
+		overwriteHl("Folded", { bg = "#313548" })
+		updateHl("String", "gui=none") -- no italics
+		overwriteHl("Visual", { bg = "#2a454e" }) -- no bold
+		updateHl("TelescopeSelection", "gui=none") -- no bold
+		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
+		end
+		updateHl("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "rose-pine" and mode == "light" then
 		revertedTodoComments()
 		overwriteHl("IblIndent", { fg = "#dbc7b3" })
