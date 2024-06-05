@@ -179,10 +179,11 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
-		dev = true,
-		branch = "dev",
 		opts = {
-			render = "wrapped-compact", -- best for shorter max_width
+			-- PENDING https://github.com/rcarriga/nvim-notify/pull/277
+			-- render = "wrapped-compact", 
+			render = require("funcs.TEMP-wrapped-compact"),
+
 			max_width = math.floor(vim.o.columns * 0.5),
 			minimum_width = 15,
 			top_down = false,
