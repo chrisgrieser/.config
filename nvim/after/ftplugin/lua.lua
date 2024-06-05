@@ -26,3 +26,15 @@ vim.keymap.set("x", "<leader>r", function()
 	local sel = vim.api.nvim_buf_get_text(0, row, start, row, stop, {})[1]
 	return ":lua = " .. sel
 end, { buffer = true, expr = true, desc = " Put Selection in cmdline" })
+
+--------------------------------------------------------------------------------
+-- REQUIRE MODULE FROM CWD
+
+local u = require("config.utils")
+local keymap = require("config.utils").uniqueKeymap
+
+vim.keymap.set("n", "<leader>cr", function()
+	local pattern = "local"
+	local rgResult = vim.system({ "rg", "--no-config", "--trim", pattern }):wait()
+	assert(rgResult, rgResult.stderr)
+end, { buffer = true, desc = " require module from cwd" })

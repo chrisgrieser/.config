@@ -3,7 +3,15 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		opts = {
+			variant = "dawn",
+			styles = { italic = false },
+		},
+	},
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- "cdmill/neomodern.nvim",
 	-- "sainnhe/everforest",
 	-- {
@@ -14,10 +22,18 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- {
+	-- 	"rose-pine/neovim",
+	-- 	name = "rose-pine",
+	-- 	opts = {
+	-- 		variant = "moon",
+	-- 		styles = { italic = false },
+	-- 	},
+	-- },
+	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
 	-- "sainnhe/gruvbox-material",
-	-- "binhtran432k/dracula.nvim",
+	"binhtran432k/dracula.nvim",
 	-- "fynnfluegge/monet.nvim",
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
