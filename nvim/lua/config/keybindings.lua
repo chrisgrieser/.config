@@ -296,7 +296,6 @@ keymap("n", toggleKey, function()
 		vim.fn.setreg(register, macro)
 		u.notify("Recorded", vim.fn.keytrans(macro), "trace")
 	end
-
 	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 		.. (notRecording and "begin_record.caf" or "end_record.caf")
 	vim.system { "afplay", sound } -- macOS only
