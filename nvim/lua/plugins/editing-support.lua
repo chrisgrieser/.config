@@ -11,19 +11,23 @@ return {
 			bs = { space = "balance" },
 			cr = { autoclose = true },
 			fastwarp = { enable = false },
+			space = { enable = true },
+			space2 = { enable = true },
 
 			-- SIC custom keys need to be "appended" to the opts as a list?!
-			{ "<", ">", ft = { "vim", "lua", "html" } },
-			-- { "if ", "()", ft = { "javascript", "typescript" } },
+			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
+			{ "*", "*", ft = { "markdown" } }, -- italics
+			{ "__", "__", ft = { "markdown" } }, -- bold
+			{ "(", "):", ft = { "gitcommit" } }, -- scope for commit messages
+			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
 		},
 		config = function(_, opts)
-			require("ultimate-autopair").setup(opts)
-			vim.api.nvim_create_autocmd("RecordingEnter", {
-				callback = function() require("ultimate-autopair").disable() end,
-			})
-			vim.api.nvim_create_autocmd("RecordingLeave", {
-				callback = function() require("ultimate-autopair").enable() end,
-			})
+			local autopair = require("ultimate-autopair")
+			autopair.setup(opts)
+
+			-- disable during macro
+			vim.api.nvim_create_autocmd("RecordingEnter", { callback = autopair.disable })
+			vim.api.nvim_create_autocmd("RecordingLeave", { callback = autopair.enable })
 		end,
 	},
 	{ -- better `:substitute`
