@@ -1,6 +1,8 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+-- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
@@ -67,7 +69,7 @@ serverConfigs.bashls = {
 -- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
 -- since doing so with bash-lsp does not work
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
-
+-- DOCS https://github.com/creativenull/efmls-configs-nvim/tree/main/lua/efmls-configs/linters
 local efmTools = {
 	sh = {
 		{
@@ -79,6 +81,7 @@ local efmTools = {
 				"-:%l:%c: %tarning: %m [SC%n]",
 				"-:%l:%c: %tote: %m [SC%n]",
 			},
+			rootMarkers = { ".git" },
 		},
 	},
 	just = {
@@ -92,12 +95,19 @@ local efmTools = {
 				"%terror: %m",
 				"%tarning: %m",
 			},
+			rootMarkers = { "Justfile" },
 		},
 	},
 }
 
 serverConfigs.efm = {
-	root_dir = function() return vim.fs.root(0, { "Justfile", ".git" }) end,
+	root_dir = function()
+		local markers = vim.iter(vim.tbl_values(efmTools))
+			:map(function(lang) return lang[1].rootMarkers end)
+			:flatten()
+			:totable()
+		return vim.fs.root(0, markers)
+	end,
 
 	filetypes = vim.tbl_keys(efmTools),
 	settings = { languages = efmTools },
@@ -357,10 +367,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		-- dependencies = {
-		-- 	"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
-		-- 	opts = { library = { plugins = false } }, -- too slow with all my plugins
-		-- },
 		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle

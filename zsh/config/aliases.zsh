@@ -30,6 +30,7 @@ alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in 
 alias sync_repo='zsh ./.sync-this-repo.sh'
 
 export PATH="$HOME/.config/+ utility-scripts/":$PATH
+function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
