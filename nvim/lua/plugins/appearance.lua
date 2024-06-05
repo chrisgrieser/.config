@@ -143,6 +143,8 @@ return {
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
+		dev = true,
+		branch = "dev",
 		init = function()
 			-- lazy load triggers
 			vim.ui.select = function(...) ---@diagnostic disable-line: duplicate-set-field

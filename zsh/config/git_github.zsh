@@ -179,7 +179,7 @@ function unshallow {
 }
 
 function remote_info {
-	git branch --all --verbose --verbose # 2x verbose shows tracked remote branches
+	git --no-pager branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
 	git remote --verbose
 	echo
