@@ -24,6 +24,7 @@ return {
 				"yaml", -- wrong indentation in list continuation
 			},
 		},
+		-- plugins
 		matchup = {
 			enable = true,
 			enable_quotes = true,
