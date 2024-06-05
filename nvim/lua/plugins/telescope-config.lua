@@ -248,6 +248,7 @@ local function telescopeConfig()
 			},
 			colorscheme = {
 				enable_preview = true,
+				ignore_builtins = true, -- PENDING my PR
 				prompt_prefix = " ",
 				layout_config = {
 					horizontal = {
@@ -266,6 +267,8 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
+		dev = true,
+		branch = "dev",
 		cmd = "Telescope",
 		external_dependencies = { "fd", "rg" },
 		dependencies = {

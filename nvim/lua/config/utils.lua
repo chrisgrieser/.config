@@ -34,7 +34,10 @@ function M.getHighlightValue(hlName, key)
 		hlName = hl.link
 	until not hl.link
 	local value = hl[key]
-	assert(value, ("No %q highlight group %q"):format(key, hlName))
+	if not value then
+		vim.notify_once(("No %q highlight group %q"):format(key, hlName), vim.log.levels.WARN)
+		return nil
+	end
 	return ("#%06x"):format(value)
 end
 
