@@ -89,9 +89,12 @@ function M.themeModifications()
 		if mode == "dark" then revertedTodoComments() end
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
 	elseif theme == "rose-pine" and mode == "light" then
+		revertedTodoComments()
 		overwriteHl("IblIndent", { fg = "#dbc7b3" })
 		overwriteHl("diffAdded", { fg = "#2aa64c" })
 		overwriteHl("diffRemoved", { fg = "#c32f32" })
+		overwriteHl("Comment", { fg = "#9492aa" })
+		updateHl("LspInlayHint", "blend=none")
 	elseif theme == "neomodern" then
 		revertedTodoComments()
 		linkHl("@lsp.type.parameter", "Changed")

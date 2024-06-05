@@ -4,13 +4,13 @@ local u = require("config.utils")
 return {
 	-- BUG for some reason, makes `ltex` ignore its own config when enabled…
 	-- TODO enable once more stable and not adding false positives everywhere
-	-- { -- nvim lua typings
-	-- 	"folke/lazydev.nvim",
-	-- 	ft = "lua",
-	-- 	opts = { library = { "luvit-meta/library" } },
-	-- },
-	-- -- `vim.uv` typings (not as dependency, since they never need to be loaded)
-	-- { "Bilal2453/luvit-meta", lazy = true },
+	{ -- nvim lua typings
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = { library = { "luvit-meta/library" } },
+	},
+	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
+	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
