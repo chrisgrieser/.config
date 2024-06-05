@@ -86,7 +86,14 @@ return {
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
-				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
+				callback = function(ctx)
+					highlightsInStacktrace(ctx.buf)
+					-- do not let noice override my versions of the mappings
+					vim.defer_fn(function()
+						pcall(vim.keymap.del, "n", "K", { buffer = ctx.buf })
+						pcall(vim.keymap.del, "n", "gx", { buffer = ctx.buf })
+					end, 1)
+				end,
 			})
 			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
 		end,

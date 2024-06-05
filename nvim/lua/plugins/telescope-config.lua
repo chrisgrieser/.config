@@ -15,7 +15,10 @@ local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopePrompt",
-	callback = function() vim.opt_local.sidescrolloff = 1 end,
+	callback = function()
+		vim.opt_local.sidescrolloff = 1
+		vim.opt_local.list = true
+	end,
 })
 
 --------------------------------------------------------------------------------
@@ -69,7 +72,7 @@ local function telescopeConfig()
 				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
 				"%.zip", "%.pdf",
 				-- special directories
-				"%.git/", 
+				"%.git/",
 				"%.DS_Store$", "%.app/", -- macOS apps
 				".local", "homebrew", -- nvim runtime
 				".venv", -- python

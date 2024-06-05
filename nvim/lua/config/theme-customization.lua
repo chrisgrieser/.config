@@ -88,6 +88,8 @@ function M.themeModifications()
 		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
 		if mode == "dark" then revertedTodoComments() end
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
+	elseif theme == "rose-pine" and mode == "light" then
+		overwriteHl("IblIndent", { fg = "#dbc7b3" })
 	elseif theme == "neomodern" then
 		revertedTodoComments()
 		linkHl("@lsp.type.parameter", "Changed")
