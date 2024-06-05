@@ -168,7 +168,7 @@ function M.bufferByLastUsed(dir)
 		:map(function(buf)
 			local prefix = nextBufName == buf.name and curBufIcon or "•"
 			local minsAgo = math.floor((os.time() - buf.lastused) / 60)
-			return (" "):format(prefix,vim.fs.basename(buf.name)
+			return ("%s %s (%s mins)"):format(prefix, vim.fs.basename(buf.name), minsAgo)
 		end)
 		:rev()
 		:totable()

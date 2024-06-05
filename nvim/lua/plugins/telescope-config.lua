@@ -3,17 +3,24 @@ local telescope = vim.cmd.Telescope
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
 
+local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+if vim.g.borderStyle == "double" then
+	borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+end
+if vim.g.borderStyle == "rounded" then
+	borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+end
+
+local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopePrompt",
+	callback = function() vim.opt_local.sidescrolloff = 1 end,
+})
+
+--------------------------------------------------------------------------------
+
 local function telescopeConfig()
-	local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-	if vim.g.borderStyle == "double" then
-		borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-	end
-	if vim.g.borderStyle == "rounded" then
-		borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-	end
-
-	local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
-
 	require("telescope").setup {
 		defaults = {
 			path_display = { "tail" },

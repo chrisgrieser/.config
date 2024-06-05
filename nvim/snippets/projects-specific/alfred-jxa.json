@@ -117,17 +117,17 @@
     ],
     "prefix": "cache (ensure folder)"
   },
-  "matcher (CamelCase)": {
+  "matcher (camelCase)": {
     "body": [
       "/** @param {string} str */",
       "function camelCaseMatch(str) {",
       "\tconst subwords = str.replace(/[-_./]/g, \" \");",
       "\tconst fullword = str.replace(/[-_./]/g, \"\");",
-      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\\\$1\");",
+      "\tconst camelCaseSeparated = str.replace(/([A-Z])/g, \" \\$1\");",
       "\treturn [subwords, camelCaseSeparated, fullword, str].join(\" \") + \" \";",
       "}"
     ],
-    "prefix": "matcher (CamelCase)"
+    "prefix": "matcher (camelCase)"
   },
   "matcher (simple)": {
     "body": [
