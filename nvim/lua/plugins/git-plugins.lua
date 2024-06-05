@@ -69,7 +69,7 @@ return {
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
 			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Deletions Inline" },
 			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
-			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, desc = "󰊢 Reset Hunk" },
+			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, mode = { "n", "x" }, desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
 			{ "<leader>ob", function() require("gitsigns").toggle_current_line_blame() end, desc = "󰊢 Git Blame"},
 			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
