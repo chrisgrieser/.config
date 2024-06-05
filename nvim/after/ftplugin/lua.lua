@@ -9,6 +9,7 @@ abbr("const", "local")
 abbr("fi", "end")
 abbr("!=", "~=")
 abbr("!==", "~=")
+abbr("=~", "~=") -- shell uses `=~`
 abbr("===", "==")
 
 --------------------------------------------------------------------------------
@@ -38,16 +39,24 @@ vim.keymap.set("n", "<leader>cr", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.\w*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()
-	assert(rgResult.code == 0, rgResult.stderr)
+	assert(rgResult.code == 0, rgResult.signal)
 	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
+	table.sort(matches)
+	local uniqMatches = vim.fn.uniq(matches)
 
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "TelescopeResults",
 		once = true,
-		callback = function() vim.bo.filetype = "lua" end,
+		callback = function(ctx)
+			vim.api.nvim_set_option_value("filetype", "lua", { buf = ctx.buf })
+			-- make discernible as the results are now colored
+			local ns = vim.api.nvim_create_namespace("telescope-import")
+			vim.api.nvim_win_set_hl_ns(0, ns)
+			vim.api.nvim_set_hl(ns, "TelescopeMatching", { reverse = true })
+		end,
 	})
 
-	vim.ui.select(vim.fn.uniq(matches), { prompt = " require" }, function(selection)
+	vim.ui.select(uniqMatches, { prompt = " require" }, function(selection)
 		if not selection then return end
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { selection })
