@@ -179,6 +179,8 @@ return {
 	},
 	{
 		"rcarriga/nvim-notify",
+		dev = true,
+		branch = "dev",
 		opts = {
 			render = "wrapped-compact", -- best for shorter max_width
 			max_width = math.floor(vim.o.columns * 0.5),
