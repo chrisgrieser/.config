@@ -5,6 +5,7 @@
 
 local spellfixes = {
 	THe = "The",
+	tehn = "then",
 	ahve = "have",
 	awiat = "await",
 	brwoser = "browser",
