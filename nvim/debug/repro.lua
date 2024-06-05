@@ -1,6 +1,6 @@
 local plugins = {
 	{
-		"williamboman/mason.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = { "williamboman/mason.nvim", opts = true },
 		config = function()
 			require("mason-tool-installer").setup {
@@ -12,7 +12,6 @@ local plugins = {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		enabled = false,
 		dependencies = "folke/neodev.nvim",
 		config = function()
 			require("lspconfig").lua_ls.setup {}

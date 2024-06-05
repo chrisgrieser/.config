@@ -19,6 +19,11 @@ return {
 			},
 			silent = true,
 		},
+		init = function()
+			-- while recording, disable codium
+			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
+			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
+		end,
 		keys = {
 			-- stylua: ignore start
 			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },

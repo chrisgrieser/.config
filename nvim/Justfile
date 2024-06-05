@@ -20,8 +20,8 @@ update-plugins:
         sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' | \
         sort --ignore-case >> {{ nvim_readme }}
 
-    [[ "$(uname)" == "Darwin" ]] && open {{ nvim_readme }} &> /dev/null
+    [[ "$(uname)" == "Darwin" ]] && open {{ nvim_readme }}
 
 # runs minimal config for debugging purposes with neovide
 debug:
-    neovide --no-tabs ./debug/test.lua -- -u ./debug/repro.lua &>/dev/null
+    neovide --no-tabs ./debug/test.md -- -u ./debug/repro.lua &>/dev/null

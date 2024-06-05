@@ -7,3 +7,5 @@ vim.notify(msg, vim.log.levels.INFO, {
 vim.notify(msg, vim.log.levels.INFO, {
 	timeout = false,
 })
+
+

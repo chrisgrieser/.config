@@ -44,7 +44,6 @@ return {
 				:totable()
 			table.sort(pluginDeps)
 			vim.fn.uniq(pluginDeps)
-			vim.notify("⭕ pluginDeps: " .. vim.inspect(pluginDeps))
 
 			-- GUARD errors in lazy-plugin-specs from causing all packages to be uninstalled
 			if #pluginDeps < 10 then return end
