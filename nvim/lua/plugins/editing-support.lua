@@ -2,20 +2,29 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
-local function test()
-	local f = { "one", "insert", "insert", "two", "three" }
-	-- ( fooffsf )
-end
-
 return {
 	{
 		"altermo/ultimate-autopair.nvim",
-		-- enabled = false,
-		branch = "v0.6", --recommended as each new version will have breaking changes
+		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
 		opts = {
-			--Config goes here
+			bs = { space = "balance" },
+			cr = { autoclose = true },
+			fastwarp = { enable = false },
+
+			-- SIC custom keys need to be "appended" to the opts as a list?!
+			{ "<", ">", ft = { "vim", "lua", "html" } },
+			-- { "if ", "()", ft = { "javascript", "typescript" } },
 		},
+		config = function(_, opts)
+			require("ultimate-autopair").setup(opts)
+			vim.api.nvim_create_autocmd("RecordingEnter", {
+				callback = function() require("ultimate-autopair").disable() end,
+			})
+			vim.api.nvim_create_autocmd("RecordingLeave", {
+				callback = function() require("ultimate-autopair").enable() end,
+			})
+		end,
 	},
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
