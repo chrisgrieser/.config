@@ -2,8 +2,22 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
+local function test()
+	local f = { "one", "insert", "insert", "two", "three" }
+	-- ( fooffsf )
+end
+
 return {
 	{
+		"altermo/ultimate-autopair.nvim",
+		-- enabled = false,
+		branch = "v0.6", --recommended as each new version will have breaking changes
+		event = { "InsertEnter", "CmdlineEnter" },
+		opts = {
+			--Config goes here
+		},
+	},
+	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
 		keys = {
 			{
@@ -186,85 +200,6 @@ return {
 				},
 			},
 		},
-	},
-	{ -- autopair brackets/quotes
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			-- add brackets to cmp completions, e.g. "function" -> "function()"
-			local ok, cmp = pcall(require, "cmp")
-			if ok then
-				local onConfirmDone = require("nvim-autopairs.completion.cmp").on_confirm_done()
-				cmp.event:on("confirm_done", function(evt)
-					if vim.bo.filetype == "css" then return end -- FIX autopairs broken for CSS
-					onConfirmDone(evt)
-				end)
-			end
-
-			-- CUSTOM RULES
-			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
-			require("nvim-autopairs").setup { check_ts = true } -- use treesitter for custom rules
-
-			local rule = require("nvim-autopairs.rule")
-			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-			local isNotNodeType = require("nvim-autopairs.ts-conds").is_not_ts_node
-			local negLookahead = require("nvim-autopairs.conds").not_after_regex
-
-			require("nvim-autopairs").add_rules {
-				-- autopair <> for keymaps like `<C-d>` & html-tags
-				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
-				rule("<", ">", { "vim", "html", "xml" }),
-
-				-- css: auto-add trailing semicolon, but only for declarations
-				-- (which are at the end of the line and have no text afterwards)
-				rule(":", ";", "css"):with_pair(negLookahead(".", 1)),
-
-				-- auto-add trailing comma inside objects/arrays
-				rule([[^%s*[:=%w]$]], ",", { "javascript", "typescript", "lua", "python" })
-					:use_regex(true)
-					:with_pair(negLookahead(".+")) -- neg. cond has to come first
-					:with_pair(isNodeType { "table_constructor", "field", "object", "dictionary" })
-					:with_del(function() return false end)
-					:with_move(function(opts) return opts.char == "," end),
-
-				-- git commit with scope auto-append `(` to `(): `
-				rule("^%a+%(%)", ": ", "gitcommit")
-					:use_regex(true)
-					:with_pair(negLookahead(".+"))
-					:with_pair(isNotNodeType("message"))
-					:with_move(function(opts) return opts.char == ":" end),
-
-				-- add brackets to if/else in js/ts
-				rule("^%s*if $", "()", { "javascript", "typescript" })
-					:use_regex(true)
-					:with_del(function() return false end)
-					:set_end_pair_length(1), -- only move one char to the side
-				rule("^%s*else if $", "()", { "javascript", "typescript" })
-					:use_regex(true)
-					:with_del(function() return false end)
-					:set_end_pair_length(1),
-				rule("^%s*} ?else if $", "() {", { "javascript", "typescript" })
-					:use_regex(true)
-					:with_del(function() return false end)
-					:set_end_pair_length(3),
-
-				-- add colon to if/else in python
-				rule("^%s*e?l?if$", ":", "python")
-					:use_regex(true)
-					:with_del(function() return false end)
-					:with_pair(isNotNodeType("string_content")), -- no docstrings
-				rule("^%s*else$", ":", "python")
-					:use_regex(true)
-					:with_del(function() return false end)
-					:with_pair(isNotNodeType("string_content")), -- no docstrings
-				rule("", ":", "python") -- automatically move past colons
-					:with_move(function(opts) return opts.char == ":" end)
-					:with_pair(function() return false end)
-					:with_del(function() return false end)
-					:with_cr(function() return false end)
-					:use_key(":"),
-			}
-		end,
 	},
 	{ -- swapping of sibling nodes
 		"Wansmer/sibling-swap.nvim",

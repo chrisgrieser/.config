@@ -12,7 +12,7 @@ location_of_installed_plugins := "$HOME/.local/share/nvim/lazy"
 
 # updates README.md with current list of installed plugins
 update-plugins:
-    sed -i -e -n "1,/{{ last_line_before_plugins }}/p" {{ nvim_readme }}
+    sed -i '' -n "1,/{{ last_line_before_plugins }}/p" {{ nvim_readme }}
 
     grep --only-matching --no-filename --max-count=1 "url = .*" \
         {{ location_of_installed_plugins }}/*/.git/config | \

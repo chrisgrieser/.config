@@ -21,6 +21,7 @@ return {
 		},
 		init = function()
 			-- while recording, disable codium
+			-- PENDING https://github.com/monkoose/neocodeium/issues/11
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 		end,
@@ -31,7 +32,16 @@ return {
 			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
 			{ "<D-D>", function() require("neocodeium").cycle(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
 			-- stylua: ignore end
-			{ "<leader>oa", "<cmd>NeoCodeium toggle<CR>", desc = "󰚩 Codium Suggestions" },
+			{
+				"<leader>oa",
+				function()
+					vim.cmd.NeoCodeium("toggle")
+					local on = require("neocodeium.options").options.enabled
+					require("config.utils").notify("NeoCodeium", on and "enabled" or "disabled", "info")
+				end,
+				"<cmd>NeoCodeium toggle<CR>",
+				desc = "󰚩 NeoCodeium Suggestions",
+			},
 		},
 		-- symlink the codium config to enable syncing of API key
 		build = function()
