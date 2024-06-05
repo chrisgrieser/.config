@@ -21,7 +21,6 @@ return {
 		},
 		init = function()
 			-- while recording, disable codium
-			-- PENDING https://github.com/monkoose/neocodeium/issues/11
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 		end,
