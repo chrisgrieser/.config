@@ -18,7 +18,7 @@ return {
 			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
-			{ "(", "):", ft = { "gitcommit" } }, -- scope for commit messages
+			{ "(", "): ", ft = { "gitcommit" } }, -- scope for commit messages
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
 		},
 		config = function(_, opts)
