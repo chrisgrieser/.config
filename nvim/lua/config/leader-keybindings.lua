@@ -6,12 +6,8 @@ local keymap = require("config.utils").uniqueKeymap
 -- META
 
 local pathOfThisFile = debug.getinfo(1).source:sub(2)
-keymap(
-	"n",
-	"<D-;>",
-	function() vim.cmd.edit(pathOfThisFile) end,
-	{ desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile) }
-)
+local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
+keymap("n", "<D-;>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
 keymap("n", "<leader>pd", function()
 	local pluginPath = vim.fn.stdpath("data") ---@cast pluginPath string

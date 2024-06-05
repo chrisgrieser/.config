@@ -90,6 +90,8 @@ function M.themeModifications()
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
 	elseif theme == "rose-pine" and mode == "light" then
 		overwriteHl("IblIndent", { fg = "#dbc7b3" })
+		overwriteHl("diffAdded", { fg = "#2aa64c" })
+		overwriteHl("diffRemoved", { fg = "#c32f32" })
 	elseif theme == "neomodern" then
 		revertedTodoComments()
 		linkHl("@lsp.type.parameter", "Changed")
