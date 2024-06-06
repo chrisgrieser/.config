@@ -9,7 +9,7 @@ local u = require("config.utils")
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
-	biome = "biome", -- ts/js/json linter/formatter
+	biome = "biome", -- ts/js/json/css linter/formatter
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completions
@@ -170,13 +170,7 @@ serverConfigs.ruff_lsp = {
 serverConfigs.cssls = {
 	settings = {
 		css = {
-			format = {
-				enable = true,
-				-- BUG this config is being ignored. Leaving in case of css-lsp-update
-				preserveNewLines = true,
-				maxPreserveNewLines = 2,
-				spaceAroundSelectorSeparator = true,
-			},
+			format = { enable = false }, -- using `biome` instead
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
 				duplicateProperties = "warning",
@@ -225,6 +219,9 @@ serverConfigs.tsserver = {
 			},
 			-- even w/o formatting still relevant for `organizeImports` code action
 			format = { convertTabsToSpaces = false },
+
+			-- compatible with `biome`
+			preferences = { importModuleSpecifierEnding = "js" },
 		},
 
 		-- enable checking javascript without a `jsconfig.json`
@@ -238,6 +235,10 @@ serverConfigs.tsserver = {
 	end,
 }
 serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
+
+serverConfigs.biome = {
+	filetypes = { "javascript", "typescript", "json", "jsonc", "css" },
+}
 
 --------------------------------------------------------------------------------
 
