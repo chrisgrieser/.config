@@ -219,9 +219,6 @@ serverConfigs.tsserver = {
 			},
 			-- even w/o formatting still relevant for `organizeImports` code action
 			format = { convertTabsToSpaces = false },
-
-			-- compatible with `biome`
-			preferences = { importModuleSpecifierEnding = "js" },
 		},
 
 		-- enable checking javascript without a `jsconfig.json`
