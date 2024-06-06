@@ -13,6 +13,7 @@ ignore_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | cut -c2- |
 set -e
 
 # get all repos
+# only non-forked, non-archived repos
 repos=$(gh repo list --limit=200 --no-archived --source --json="nameWithOwner" --jq=".[].nameWithOwner" |
 	grep --extended-regexp --invert-match "$ignore_repos")
 repos_count=$(echo "$repos" | wc -l | tr -d " ")

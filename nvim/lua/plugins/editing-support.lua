@@ -183,7 +183,7 @@ return {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				[textObjMaps.call] = {
 					find = "[%w.:_]+%b()", -- includes `:` for lua methods and css pseudo-classes
-					delete = "([%w.:_]+%()().-(%))()",
+					delete = "([%w.:_]+%()().*(%))()",
 				},
 				[textObjMaps.func] = {
 					-- only one-line lua functions
