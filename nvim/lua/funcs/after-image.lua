@@ -1,13 +1,13 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-local config = {
-	signText = "▓",
+local defaultConfig = {
+	signText = "",
 	signHighlight = "DiagnosticSignHint",
 	signPriority = 5, -- 6 is the priority of GitSigns, and we want to be lower
 	numberHighlight = "DiagnosticSignHint",
-	moveToFirstChangeOnShowingSigns = true,
 }
+local config = defaultConfig
 
 local ns = vim.api.nvim_create_namespace("after-image-signs")
 --------------------------------------------------------------------------------
@@ -20,17 +20,20 @@ local function notify(msg, level)
 end
 
 --------------------------------------------------------------------------------
+
+---@nodiscard
+---@param silent? "silent"
 ---@return {start: number, length: number}[]?
-local function getLinesChangedInLastCommit()
+local function getLinesChangedInLastCommit(silent)
 	local file = vim.api.nvim_buf_get_name(0)
 	-- stylua: ignore
-	local cmd = { "git", "--no-pager", "log", "--max-count=1", "--patch", "--unified=0", "--format=", "--", file }
+	local cmd = { "git", "log", "--max-count=1", "--patch", "--unified=0", "--format=", "--", file }
 	local result = vim.system(cmd):wait()
 	if result.code ~= 0 then
-		notify(result.stderr or "", "error")
+		if not silent then notify(result.stderr or "", "error") end
 		return
 	elseif result.stdout == "" then
-		notify("File has not last committed change.", "warn")
+		if not silent then notify("File has not last committed change.", "warn") end
 		return
 	end
 	-- INFO meaning of the `@@` lines: https://stackoverflow.com/a/31615728/22114136
@@ -47,25 +50,25 @@ local function getLinesChangedInLastCommit()
 	return linesChanged
 end
 
-function M.toggleSigns()
+---@param bufnr? number
+---@param silent? "silent"
+function M.toggleSigns(bufnr, silent)
+	bufnr = bufnr or 0
+
 	-- disable
-	if vim.b.afterImage_showSigns then
+	if vim.b[bufnr].afterImage_showSigns then
 		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-		vim.b.afterImage_showSigns = false
+		vim.b[bufnr].afterImage_showSigns = false
 		return
 	end
 
 	-- enable
-	local changes = getLinesChangedInLastCommit()
+	local changes = getLinesChangedInLastCommit(silent)
 	if not changes then return end
-	vim.b.afterImage_showSigns = true
-
-	if config.moveToFirstChangeOnShowingSigns then
-		vim.api.nvim_win_set_cursor(0, { changes[1].start, 0 })
-	end
+	vim.b[bufnr].afterImage_showSigns = true
 
 	for _, change in ipairs(changes) do
-		vim.api.nvim_buf_set_extmark(0, ns, change.start - 1, 0, {
+		vim.api.nvim_buf_set_extmark(bufnr, ns, change.start - 1, 0, {
 			end_row = change.start + change.length - 1,
 			sign_text = config.signText,
 			sign_hl_group = config.signHighlight,
