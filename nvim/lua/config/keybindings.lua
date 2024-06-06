@@ -180,7 +180,7 @@ keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
-end, { desc = "<BS> does not leave cmdline", expr = true })
+end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 -- INSERT MODE
 keymap({ "i", "c" }, "<C-a>", "<Home>")
@@ -351,5 +351,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-

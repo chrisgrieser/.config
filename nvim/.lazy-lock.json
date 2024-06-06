@@ -32,7 +32,7 @@
   "nvim-dr-lsp": { "branch": "main", "commit": "69173673505c958c5fb1c64d8bb841ee6a937cb9" },
   "nvim-genghis": { "branch": "main", "commit": "7055134943460d962b4909b43b4c3cd5f011c153" },
   "nvim-hlslens": { "branch": "main", "commit": "3e8fceb2b030100857ee72741a8f48c9a1d8595e" },
-  "nvim-lspconfig": { "branch": "master", "commit": "d1ab6b6051976b04948e127b0f302a465b1394d6" },
+  "nvim-lspconfig": { "branch": "master", "commit": "e8e71e3dca27631e8a8486a8ab0f7e68c01b6bf7" },
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
   "nvim-notify": { "branch": "master", "commit": "d333b6f167900f6d9d42a59005d82919830626bf" },
   "nvim-origami": { "branch": "main", "commit": "c824f470e0c177707822c37b13087ab1dd7ddf91" },
@@ -63,5 +63,5 @@
   "treesj": { "branch": "main", "commit": "f98deb33805485b56a8d44d1a27d16874af00d7f" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "5de8b5bdb882d2a95dd7458c3b5c18ee0754bd38" },
   "vim-matchup": { "branch": "master", "commit": "1535a769d5dca851fe7d41b0be95f7c7203a4bef" },
-  "which-key.nvim": { "branch": "main", "commit": "91a0c870ecf700cc01aa7259449e442d856eaf68" }
+  "which-key.nvim": { "branch": "main", "commit": "bac74db3f3333f2fe8b498423e8680f7e1b36a88" }
 }

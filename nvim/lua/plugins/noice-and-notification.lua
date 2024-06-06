@@ -112,12 +112,8 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
-				view = "cmdline", -- cmdline|cmdline_popup
 				format = {
-					search_down = { icon = "  ", view = "cmdline" }, -- FIX needs to be set explicitly
-					cmdline = { view = "cmdline_popup" },
-					lua = { view = "cmdline_popup" },
-					help = { view = "cmdline_popup" },
+					search_down = { icon = "  ", view = "cmdline" },
 				},
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
@@ -181,7 +177,7 @@ return {
 		"rcarriga/nvim-notify",
 		opts = {
 			-- PENDING https://github.com/rcarriga/nvim-notify/pull/277
-			-- render = "wrapped-compact", 
+			-- render = "wrapped-compact",
 			render = require("funcs.TEMP-wrapped-compact"),
 
 			max_width = math.floor(vim.o.columns * 0.5),

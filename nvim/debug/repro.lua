@@ -1,34 +1,16 @@
 local plugins = {
 	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim", opts = true },
-		config = function()
-			require("mason-tool-installer").setup {
-				ensure_installed = { "lua-language-server", "ltex-ls" },
-				run_on_start = true,
-			}
-			vim.cmd.MasonToolsInstall()
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim",
-		config = function()
-			require("lspconfig").lua_ls.setup {}
-			require("lspconfig").ltex.setup {
-				settings = {
-					ltex = {
-						language = "en-US",
-						dictionary = {
-							["en-US"] = "Neovim",
-						},
-					},
-				},
-			}
-		end,
+		"folke/noice.nvim",
+		dependencies = "MunifTanjim/nui.nvim",
+		opts = {
+			presets = { command_palette = true },
+		},
 	},
 }
 
+vim.keymap.set("c", "<BS>", function()
+	if vim.fn.getcmdline() ~= "" then return "<BS>" end
+end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 
 for _, name in ipairs { "config", "data", "state", "cache" } do
