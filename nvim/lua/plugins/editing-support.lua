@@ -2,6 +2,7 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
+-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 return {
 	{
 		"altermo/ultimate-autopair.nvim",
@@ -16,6 +17,7 @@ return {
 			fastwarp = { enable = false },
 			space = { enable = true },
 			space2 = { enable = true },
+			extensions = { tsnode = false }, -- slightly buggy sometimes
 
 			-- SIC custom keys need to be "appended" to the opts as a list?!
 			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
