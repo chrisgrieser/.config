@@ -22,7 +22,7 @@ local function cmpconfig()
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
 		},
-		sorting = { 
+		sorting = { ---@diagnostic disable-line: missing-fields
 			comparators = {
 				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
 				-- compare functions https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
@@ -35,7 +35,6 @@ local function cmpconfig()
 				compare.length,
 				compare.order,
 			},
-			priority_weight = 2,
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true },
