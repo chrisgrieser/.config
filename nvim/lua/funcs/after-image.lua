@@ -1,15 +1,31 @@
 local M = {}
+local ns = vim.api.nvim_create_namespace("after-image-signs")
 --------------------------------------------------------------------------------
 
+---@class AfterImageConfig
 local defaultConfig = {
 	signText = "",
-	signHighlight = "DiagnosticSignHint",
+	signHighlight = "DiagnosticSignInfo",
 	signPriority = 5, -- 6 is the priority of GitSigns, and we want to be lower
-	numberHighlight = "DiagnosticSignHint",
+	numberHighlight = "DiagnosticSignInfo",
+	autoEnableOnBufferEnter = false,
 }
 local config = defaultConfig
 
-local ns = vim.api.nvim_create_namespace("after-image-signs")
+---@param userConfig? AfterImageConfig
+M.setup = function(userConfig)
+	config = vim.tbl_deep_extend("force", defaultConfig, userConfig or {})
+
+	if config.autoEnableOnBufferEnter then
+		vim.api.nvim_create_autocmd("BufReadPost", {
+			group = vim.api.nvim_create_augroup("after-image", {}),
+			callback = function(ctx) M.toggleSigns(ctx.buf, "silent") end,
+		})
+		-- current buffer
+		vim.defer_fn(function() M.toggleSigns(0, "silent") end, 1)
+	end
+end
+
 --------------------------------------------------------------------------------
 
 ---@param msg string
@@ -18,8 +34,6 @@ local function notify(msg, level)
 	if not level then level = "info" end
 	vim.notify(msg, vim.log.levels[level:upper()], { title = "Git" })
 end
-
---------------------------------------------------------------------------------
 
 ---@nodiscard
 ---@param silent? "silent"
