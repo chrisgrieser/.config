@@ -106,6 +106,7 @@ function M.themeModifications()
 		overwriteHl("Comment", { fg = "#9492aa" })
 		updateHl("LspInlayHint", "blend=none")
 		linkHl("Conceal", "NonText")
+		overwriteHl("NonText", { fg = "#8682ba" })
 		overwriteHl("Bold", { bold = true })
 	elseif theme == "neomodern" then
 		revertedTodoComments()

@@ -93,9 +93,3 @@ rules:
           - { key_code: delete_or_backspace, modifiers: [option] } # delete word
           - key_code: delete_or_backspace # delete the space
           - key_code: right_arrow # go to next word
-      # change word
-      - type: basic
-        from: { key_code: c, modifiers: *hyper }
-        to:
-          - { key_code: right_arrow, modifiers: [option] }
-          - { key_code: left_arrow, modifiers: [shift, option] }
