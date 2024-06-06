@@ -59,6 +59,9 @@ local routes = {
 	-----------------------------------------------------------------------------
 	-- SKIP
 
+	-- supermaven, -- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/18
+	{ filter = { event = "msg_show", find = "Supermaven Free Tier is running." }, skip = true },
+
 	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 	{

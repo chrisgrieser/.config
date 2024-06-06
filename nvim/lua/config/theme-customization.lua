@@ -198,8 +198,8 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
-		customHighlights()
 		M.themeModifications()
+		customHighlights() -- after modifications, so the dependent colors work
 	end,
 })
 
@@ -210,6 +210,7 @@ function M.updateColorscheme()
 	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
 	vim.cmd.colorscheme(targetTheme)
+	vim.notify("⭕ beep 🔵")
 end
 
 -- initialize theme on startup
