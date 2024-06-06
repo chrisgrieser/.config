@@ -111,17 +111,18 @@ hs.urlevent.bind("sync-repos", function() syncAllGitRepos(true) end)
 local c = hs.caffeinate.watcher
 M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	if M.recentlyTriggered or env.isProjector() then return end
-	M.recentlyTriggered = true
 
 	if
 		event == c.screensDidLock
 		or event == c.screensDidUnlock
 		or event == c.screensDidWake
+		or event == c.screensaverWillStop
 		or event == c.systemDidWake
 	then
 		syncAllGitRepos(true)
+		M.recentlyTriggered = true
+		u.runWithDelays(3, function() M.recentlyTriggered = false end)
 	end
-	u.runWithDelays(3, function() M.recentlyTriggered = false end)
 end):start()
 
 --------------------------------------------------------------------------------
