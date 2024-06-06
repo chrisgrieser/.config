@@ -17,7 +17,7 @@ return {
 			fastwarp = { enable = false },
 			space = { enable = true },
 			space2 = { enable = true },
-			extensions = { tsnode = false }, -- slightly buggy sometimes
+			-- extensions = { tsnode = false }, -- slightly buggy sometimes
 
 			-- SIC custom keys need to be "appended" to the opts as a list?!
 			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags

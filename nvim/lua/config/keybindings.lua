@@ -234,18 +234,24 @@ keymap(
 	{ desc = "󰊢 Goto Changed File" }
 )
 
+--------------------------------------------------------------------------------
+-- AFTER IMAGE
 keymap(
 	{ "n", "x" },
 	"g<CR>",
 	function() require("funcs.after-image").gotoNext() end,
-	{ desc = "󰊢 Goto last committed change in file" }
+	{ desc = " Goto next hunk of last commit" }
 )
-keymap(
-	{ "n", "x" },
-	"<leader>ol",
-	function() require("funcs.after-image").toggleSigns() end,
-	{ desc = "󰋚 Toggle After Image Signs" }
-)
+
+-- enable signs on reading a buffer
+local function enableAfterImage(ctx) require("funcs.after-image").toggleSigns(ctx.buf, "silent") end
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = enableAfterImage,
+})
+-- enable on startup
+vim.defer_fn(function() enableAfterImage { buf = 0 } end, 1)
+
+--------------------------------------------------------------------------------
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd.update { mods = { silent = true } }

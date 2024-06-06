@@ -26,9 +26,9 @@ return {
 		opts = {
 			keymaps = { accept_suggestion = "<D-s>" },
 			ignore_filetypes = {
+				gitcommit = true,
 				DressingInput = true,
-				noice = true, -- sometimes triggered in error-buffers
-				text = true, -- `pass` passwords editing filetype is plaintext
+				text = true, -- `pass`' filetype when editing passwords
 				regex = true, -- rg-substitute buffer
 			},
 		},
@@ -38,51 +38,4 @@ return {
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
 		end,
 	},
-
-	-- { -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
-	-- 	"monkoose/neocodeium",
-	-- 	event = "InsertEnter",
-	-- 	cmd = "NeoCodeium",
-	-- 	opts = {
-	-- 		filetypes = {
-	-- 			DressingInput = false,
-	-- 			noice = false, -- sometimes triggered in error-buffers
-	-- 			text = false, -- `pass` passwords editing filetype is plaintext
-	-- 			regex = false, -- rg-substitute buffer
-	-- 		},
-	-- 		silent = true,
-	-- 	},
-	-- 	init = function()
-	-- 		-- disable while recording
-	-- 		vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
-	-- 		vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
-	-- 	end,
-	-- 	keys = {
-	-- 		-- stylua: ignore start
-	-- 		{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-	-- 		{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
-	-- 		{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
-	-- 		-- stylua: ignore end
-	-- 		{
-	-- 			"<leader>oa",
-	-- 			function()
-	-- 				vim.cmd.NeoCodeium("toggle")
-	-- 				local on = require("neocodeium.options").options.enabled
-	-- 				require("config.utils").notify("NeoCodeium", on and "enabled" or "disabled", "info")
-	-- 			end,
-	-- 			"<cmd>NeoCodeium toggle<CR>",
-	-- 			desc = "󰚩 NeoCodeium Suggestions",
-	-- 		},
-	-- 	},
-	-- 	-- symlink the codium config to enable syncing of API key
-	-- 	build = function()
-	-- 		local u = require("config.utils")
-	-- 		local symLinkFrom = vim.env.DATA_DIR .. "/private dotfiles/codium-api-key.json"
-	-- 		local symLinkTo = vim.fs.normalize("~/.codeium/config.json")
-	-- 		if not u.fileExists(symLinkFrom) then
-	-- 			pcall(vim.fn.mkdir, vim.fs.dirname(symLinkTo))
-	-- 			vim.uv.fs_symlink(symLinkFrom, symLinkTo)
-	-- 		end
-	-- 	end,
-	-- },
 }
