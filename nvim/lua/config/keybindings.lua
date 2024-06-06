@@ -237,8 +237,14 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"g<CR>",
-	function() require("funcs.after-image").addSigns() end,
+	function() require("funcs.after-image").gotoNext() end,
 	{ desc = "󰊢 Goto last committed change in file" }
+)
+keymap(
+	{ "n", "x" },
+	"<leader>ol",
+	function() require("funcs.after-image").toggleSigns() end,
+	{ desc = "󰋚 Toggle After Image Signs" }
 )
 
 keymap({ "n", "x", "i" }, "<D-w>", function()

@@ -127,7 +127,7 @@ local function cmpconfig()
 			end,
 		},
 		sources = cmp.config.sources {
-			{ name = "snippets", priority = 100 },
+			{ name = "snippets", priority = 10 },
 			{
 				name = "nvim_lsp",
 				entry_filter = function(entry, _)
