@@ -6,8 +6,37 @@
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"supermaven-inc/supermaven-nvim",
+		event = "InsertEnter",
+		keys = {
+			"<D-s>",
+			"<D-f>",
+			{
+				"<leader>oa",
+				function() vim.cmd.SupermavenToggle() end,
+				"<cmd>NeoCodeium toggle<CR>",
+				desc = "󰚩 NeoCodeium Suggestions",
+			},
+		},
+		opts = {
+			disable_keymaps = false,
+			keymaps = {
+				accept_suggestion = "<D-s>",
+				clear_suggestion = "<D-f>",
+			},
+			ignore_filetypes = {
+				DressingInput = false,
+				noice = false, -- sometimes triggered in error-buffers
+				text = false, -- `pass` passwords editing filetype is plaintext
+				regex = false, -- rg-substitute buffer
+			},
+		},
+	},
+
 	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
+		enabled = false,
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
@@ -29,7 +58,7 @@ return {
 			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
 			{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
 			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
-			{ "<D-D>", function() require("neocodeium").cycle(-1) end, mode = "i", desc = "󰚩 Prev suggestion" },
+			{ "<D-f>", function() require("neocodeium").clear() end, mode = "i", desc = "󰚩 Clear" },
 			-- stylua: ignore end
 			{
 				"<leader>oa",
