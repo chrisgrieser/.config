@@ -2,10 +2,14 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
-	highlightDurationMs = 2000,
-	highlightGroup = "DiffText",
+	sign = "󰋚",
+	numberHighlight = "DiagnosticSignHint",
+	signHighlight = "DiagnosticSignHint",
+	lineHighlight = "DiagnosticVirtualTextHint",
+	moveToFirstOnShowingSigns = true,
 }
 
+local ns = vim.api.nvim_create_namespace("after-image-signs")
 --------------------------------------------------------------------------------
 
 ---@param msg string
@@ -16,7 +20,6 @@ local function notify(msg, level)
 end
 
 --------------------------------------------------------------------------------
-
 ---@return {start: number, length: number}[]?
 local function getLinesChangedInLastCommit()
 	local file = vim.api.nvim_buf_get_name(0)
@@ -44,30 +47,38 @@ local function getLinesChangedInLastCommit()
 	return linesChanged
 end
 
-function M.addSigns()
+function M.toggleSigns()
+	-- disable
+	if vim.b.afterImage_showSigns then
+		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+		vim.b.afterImage_showSigns = false
+		return
+	end
+
+	-- enable
 	local changes = getLinesChangedInLastCommit()
 	if not changes then return end
+	vim.b.afterImage_showSigns = true
+
+	if config.moveToFirstOnShowingSigns then
+		vim.api.nvim_win_set_cursor(0, { changes[1].start, 0 })
+	end
+
 	for _, change in ipairs(changes) do
-		vim.sign_place(0, "GitSigns", "GitSignsChange", 0, { lnum = change.start, priority = 10 })
+		local hunk = vim.api.nvim_buf_set_extmark(0, ns, change.start - 1, 0, {
+			end_row = change.start + change.length - 1,
+			sign_text = config.sign,
+			sign_hl_group = config.signHighlight,
+			number_hl_group = config.numberHighlight,
+			line_hl_group = config.lineHighlight,
+			hl_mode = "combine",
+		})
 	end
 end
 
-function M.gotoLastCommittedChangeInFile()
-	local changes = getLinesChangedInLastCommit()
-	if not changes then return end
-	local firstChange = changes[1]
-
-	-- goto beginning of first last change
-	vim.api.nvim_win_set_cursor(0, { firstChange.start, 0 })
-
-	-- highlight changed lines
-	local ns = vim.api.nvim_create_namespace("lastCommittedChange")
-	local changeEnd = firstChange.start + firstChange.length
-	vim.highlight.range(0, ns, config.highlightGroup, { firstChange.start - 1, 0 }, { changeEnd, 0 })
-	vim.defer_fn(
-		function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end,
-		config.highlightDurationMs
-	)
+function M.gotoNext()
+	local hunksInNs = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
+	vim.notify("⭕ hunks: " .. vim.inspect(hunksInNs))
 end
 
 --------------------------------------------------------------------------------
