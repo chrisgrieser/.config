@@ -211,33 +211,33 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 keymap(
 	"n",
 	"<BS>",
-	function() require("funcs.buf-nav").bufferByLastUsed("prev") end,
+	function() require("funcs.magnet").bufferByLastUsed("prev") end,
 	{ desc = "󰽙 Prev Buffer" }
 )
 keymap(
 	"n",
 	"<S-BS>",
-	function() require("funcs.buf-nav").bufferByLastUsed("next") end,
+	function() require("funcs.magnet").bufferByLastUsed("next") end,
 	{ desc = "󰽙 Next Buffer" }
 )
 keymap(
 	{ "n", "x" },
 	"<CR>",
-	function() require("funcs.buf-nav").gotoAltBuffer() end,
+	function() require("funcs.magnet").gotoAltBuffer() end,
 	{ desc = "󰽙 Alt Buffer" }
 )
 
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
-	function() require("funcs.git-jumper").gotoChangedFiles() end,
+	function() require("funcs.magnet").gotoChangedFiles() end,
 	{ desc = "󰊢 Goto Changed File" }
 )
 
 keymap(
 	{ "n", "x" },
 	"g<CR>",
-	function() require("funcs.git-jumper").gotoLastCommittedChangeInFile() end,
+	function() require("funcs.after-image").addSigns() end,
 	{ desc = "󰊢 Goto last committed change in file" }
 )
 
