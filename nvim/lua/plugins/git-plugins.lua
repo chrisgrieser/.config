@@ -76,6 +76,24 @@ return {
 			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
 			{ "gh", function() require("gitsigns").select_hunk() end, mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" }, -- stylua: ignore end
 			-- stylua: ignore end
+			{
+				"<leader>op",
+				function()
+					if vim.b.gitsigns_previous_changes then
+						require("gitsigns").reset_base()
+						u.notify("GitSigns", "Reset Base")
+						return
+					end
+					local file = vim.api.nvim_buf_get_name(0)
+					local gitArgs = { "git", "log", "-1", "--format=%h", "--", file }
+					local out = vim.system(gitArgs):wait()
+					local lastCommitToFile = vim.trim(out)
+					require("gitsigns").change_base(vim.trim(lastCommitToFile.stdout) .. "^")
+					vim.b.gitsigns_previous_changes = true
+					u.notify("GitSigns", ("Changed base to %s^"):format(lastCommitToFile .. "^"))
+				end,
+				desc = "󰊢 Previous/Present Changes",
+			},
 		},
 		opts = {
 			attach_to_untracked = true,
