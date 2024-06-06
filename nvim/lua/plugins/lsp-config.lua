@@ -326,7 +326,7 @@ serverConfigs.ltex = {
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp#settings
 serverConfigs.typos_lsp = {
-	init_options = { diagnosticSeverity = "information" },
+	init_options = { diagnosticSeverity = "warning" },
 }
 
 -- VALE
