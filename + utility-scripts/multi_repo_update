@@ -12,13 +12,16 @@ commit_msg="ci: better triggering of panvimdoc workflow"
 set -e
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
-	plugin_name=$(basename "$PWD" | cut -d"-" -f2-)
-	sed -i '' "s/__plugin-name__/$plugin_name/" ./.github/workflows/panvimdoc.yml
+	echo "test"
 }
+
+# cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
+# plugin_name=$(basename "$PWD" | cut -d"-" -f2-)
+# sed -i '' "s/__plugin-name__/$plugin_name/" ./.github/workflows/panvimdoc.yml
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# only non-forked, non-archived repos
 repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" \
 	--jq=".[].name | select(test(\"$repo_names\"))")
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
