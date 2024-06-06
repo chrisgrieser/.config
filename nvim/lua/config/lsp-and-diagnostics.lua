@@ -44,13 +44,15 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- one arg: name of the LSP
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local filter = ctx.args == "" and { bufnr = 0 } or { name = ctx.args }
-	local clients = vim.lsp.get_clients(filter)
-	local clientInfo = vim.tbl_map(
-		function(client) return client.name .. "\n" .. vim.inspect(client) end,
-		clients
-	)
-	local msg = table.concat(clientInfo, "\n\n")
-	vim.notify(msg)
+	local clientInfo = vim.iter(vim.lsp.get_clients(filter))
+		:map(function(client) return client.name .. "\n" .. vim.inspect(client) end)
+		:join("\n\n")
+	vim.api.nvim_create_autocmd("FileType", {
+		once = true,
+		pattern = "noice",
+		command = "set filetype=lua", -- syntax highlighting
+	})
+	vim.notify(clientInfo)
 end, {
 	nargs = "?",
 	complete = function()
@@ -95,8 +97,7 @@ vim.diagnostic.config {
 		},
 	},
 	virtual_text = {
-		severity = { min = vim.diagnostic.severity.INFO }, -- leave out hints
-		spacing = 1,
+		severity = { min = vim.diagnostic.severity.WARN }, -- leave out hints & info
 		suffix = addCodeAndSourceAsSuffix,
 	},
 	float = {
