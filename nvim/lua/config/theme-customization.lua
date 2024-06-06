@@ -210,7 +210,6 @@ function M.updateColorscheme()
 	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
 	vim.cmd.colorscheme(targetTheme)
-	vim.notify("⭕ beep 🔵")
 end
 
 -- initialize theme on startup

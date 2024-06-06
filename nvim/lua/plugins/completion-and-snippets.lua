@@ -22,19 +22,20 @@ local function cmpconfig()
 			completion = { border = vim.g.borderStyle, scrolloff = 2 },
 			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
 		},
-		sorting = { ---@diagnostic disable-line: missing-fields
+		sorting = { 
 			comparators = {
 				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
-				-- compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
+				-- compare functions https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
 				compare.offset,
 				compare.recently_used, -- higher
 				compare.score,
-				compare.exact, -- lower
 				compare.kind, -- higher (prioritize snippets)
+				compare.exact, -- lower
 				compare.locality,
 				compare.length,
 				compare.order,
 			},
+			priority_weight = 2,
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<CR>"] = cmp.mapping.confirm { select = true },
@@ -127,7 +128,7 @@ local function cmpconfig()
 			end,
 		},
 		sources = cmp.config.sources {
-			{ name = "snippets" },
+			{ name = "snippets", priority = 100 },
 			{
 				name = "nvim_lsp",
 				entry_filter = function(entry, _)

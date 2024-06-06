@@ -63,3 +63,5 @@ vim.keymap.set("n", "<leader>cr", function()
 		u.normal("j==")
 	end)
 end, { buffer = true, desc = " require module from cwd" })
+
+--------------------------------------------------------------------------------
