@@ -298,9 +298,10 @@ keymap("n", toggleKey, function()
 	else
 		u.normal("q")
 		local macro = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
-		if macro == "" then return end
-		vim.fn.setreg(register, macro)
-		u.notify("Recorded", vim.fn.keytrans(macro), "trace")
+		if macro ~= "" then
+			vim.fn.setreg(register, macro)
+			u.notify("Recorded", vim.fn.keytrans(macro), "trace")
+		end
 	end
 	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 		.. (notRecording and "begin_record.caf" or "end_record.caf")

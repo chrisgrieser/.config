@@ -2,11 +2,11 @@ local M = {}
 --------------------------------------------------------------------------------
 
 local config = {
-	sign = "󰋚",
-	numberHighlight = "DiagnosticSignHint",
+	signText = "▓",
 	signHighlight = "DiagnosticSignHint",
-	lineHighlight = "DiagnosticVirtualTextHint",
-	moveToFirstOnShowingSigns = true,
+	signPriority = 5, -- 6 is the priority of GitSigns, and we want to be lower
+	numberHighlight = "DiagnosticSignHint",
+	moveToFirstChangeOnShowingSigns = true,
 }
 
 local ns = vim.api.nvim_create_namespace("after-image-signs")
@@ -60,25 +60,45 @@ function M.toggleSigns()
 	if not changes then return end
 	vim.b.afterImage_showSigns = true
 
-	if config.moveToFirstOnShowingSigns then
+	if config.moveToFirstChangeOnShowingSigns then
 		vim.api.nvim_win_set_cursor(0, { changes[1].start, 0 })
 	end
 
 	for _, change in ipairs(changes) do
-		local hunk = vim.api.nvim_buf_set_extmark(0, ns, change.start - 1, 0, {
+		vim.api.nvim_buf_set_extmark(0, ns, change.start - 1, 0, {
 			end_row = change.start + change.length - 1,
-			sign_text = config.sign,
+			sign_text = config.signText,
 			sign_hl_group = config.signHighlight,
 			number_hl_group = config.numberHighlight,
-			line_hl_group = config.lineHighlight,
-			hl_mode = "combine",
+			priority = config.signPriority,
 		})
 	end
 end
 
 function M.gotoNext()
-	local hunksInNs = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
-	vim.notify("⭕ hunks: " .. vim.inspect(hunksInNs))
+	local hunkStartLnums
+	if vim.b.afterImage_showSigns then
+		-- get from signs, as they move with changes in buffer
+		hunkStartLnums = vim.tbl_map(
+			function(extmark) return extmark[2] + 1 end,
+			vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, {})
+		)
+	else
+		-- get from git itself (less accurate)
+		hunkStartLnums = vim.tbl_map(
+			function(change) return change.start end,
+			getLinesChangedInLastCommit() or {}
+		)
+	end
+	if #hunkStartLnums == 0 then
+		notify("No hunks found.", "warn")
+		return
+	end
+
+	local currentLnum = vim.api.nvim_win_get_cursor(0)[1]
+	local nextLnum = vim.iter(hunkStartLnums):find(function(lnum) return lnum > currentLnum end)
+		or hunkStartLnums[1] -- wrap to first hunk
+	vim.api.nvim_win_set_cursor(0, { nextLnum, 0 })
 end
 
 --------------------------------------------------------------------------------

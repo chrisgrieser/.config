@@ -10,6 +10,7 @@ return {
 	{
 		"supermaven-inc/supermaven-nvim",
 		build = "SupermavenUseFree", -- needs to be run once to set the API key
+		cmd = "SupermavenStop", -- when starting a recoding before the plugin is loaded
 		event = "InsertEnter",
 		keys = {
 			{ "<D-s>", mode = "i" },
@@ -33,8 +34,8 @@ return {
 		},
 		init = function()
 			-- disable while recording
-			vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStart" })
-			vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStop" })
+			vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
+			vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
 		end,
 	},
 
