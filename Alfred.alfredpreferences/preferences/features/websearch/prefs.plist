@@ -70,17 +70,6 @@
 			<key>url</key>
 			<string>https://chat.openai.com?q={query}</string>
 		</dict>
-		<key>9A8A5D68-CFCD-4834-A82F-D1866C708FF3</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>tt</string>
-			<key>text</key>
-			<string>Linguee: {query}</string>
-			<key>url</key>
-			<string>https://www.linguee.com/english-german/search?query={query}</string>
-		</dict>
 		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
 		<dict>
 			<key>enabled</key>

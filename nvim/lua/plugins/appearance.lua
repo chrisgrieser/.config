@@ -86,6 +86,7 @@ return {
 		},
 		config = function(_, opts)
 			-- add background to injections, see `ftplugin/yaml/injections.scm`
+			-- related BUG https://github.com/lukas-reineke/headlines.nvim/issues/85
 			opts.yaml.query = vim.treesitter.query.parse(
 				"yaml",
 				[[
@@ -94,7 +95,7 @@ return {
 						(#any-of? @_run "run" "shell_command" "cmd")
 						value: (block_node
 							(block_scalar) @codeblock
-							(#offset! @codeblock 1 0 1 0)))
+							(#offset! @codeblock 1 1 1 0)))
 				]]
 			)
 			require("headlines").setup(opts)
