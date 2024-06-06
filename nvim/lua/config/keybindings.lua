@@ -235,23 +235,6 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
--- AFTER IMAGE
-keymap(
-	{ "n", "x" },
-	"g<CR>",
-	function() require("funcs.after-image").gotoNext() end,
-	{ desc = " Goto next hunk of last commit" }
-)
-keymap(
-	{ "n", "x" },
-	"<leader>oi",
-	function() require("funcs.after-image").toggleSigns() end,
-	{ desc = " After image sign" }
-)
-
-require("funcs.after-image").setup { autoEnableOnBufferEnter = true }
-
---------------------------------------------------------------------------------
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd.update { mods = { silent = true } }
@@ -354,7 +337,6 @@ end, { desc = " Paste charwise", expr = true })
 
 --------------------------------------------------------------------------------
 -- QUITTING
-keymap({ "n", "x" }, "<MiddleMouse>", vim.cmd.wqall, { desc = ":wqall" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
