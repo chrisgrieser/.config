@@ -7,7 +7,6 @@ local ftToFormatter = {
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	bib = { "bibtex-tidy" },
-	css = { "squeeze_blanks" }, -- since the css formatter does not support that
 	just = { "just", "squeeze_blanks" },
 	query = { "format-queries" },
 }
@@ -19,7 +18,6 @@ local lspFormatFt = {
 	"jsonc",
 	"toml",
 	"yaml",
-	"html",
 	"sh",
 	"python",
 	"css",

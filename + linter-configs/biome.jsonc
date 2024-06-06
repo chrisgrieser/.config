@@ -1,14 +1,13 @@
 // DOCS https://biomejs.dev/reference/configuration/
+//──────────────────────────────────────────────────────────────────────────────
 {
-	// use the schema from the local biome package installed via Mason
-	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json",
-
 	"linter": {
 		"rules": {
 			"all": true,
 			"nursery": {
 				"all": true,
-				"noConsole": "off"
+				"noConsole": "off",
+				"noUnknownProperty": "off" // css variables, TODO buggy, investigate later
 			},
 			"suspicious": {
 				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
@@ -20,12 +19,15 @@
 			"style": {
 				"useBlockStatements": "off", // do not require braces for one-line-if statements
 				"useTemplate": "off", // too strict, simple concatenations are fine
-				"noParameterAssign": "off", // often useful
-				"useNamingConvention": { "level": "warn", "options": { "strictCase": false } }
+				"noParameterAssign": "off", // often useful to do so
+				"useNamingConvention": { "level": "info", "options": { "strictCase": false } }
 			}
 		}
 	},
-
+	"css": { // opt-in at biome 1.8
+		"linter": { "enabled": true },
+		"formatter": { "enabled": true }
+	},
 	"javascript": {
 		// JXA variables
 		"globals": ["ObjC", "Application", "delay", "Path", "$"]
@@ -39,5 +41,8 @@
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
-	}
+	},
+
+	// use the schema from the local biome package installed via Mason
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }
