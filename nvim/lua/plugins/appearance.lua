@@ -90,10 +90,11 @@ return {
 				"yaml",
 				[[
 					(block_mapping_pair
-					key: (flow_node) @_run (#any-of? @_run "run" "shell_command" "cmd")
-					value: (block_node
-								(block_scalar) @codeblock
-								(#offset! @codeblock 1 0 1 0)))
+						key: (flow_node) @_run
+						(#any-of? @_run "run" "shell_command" "cmd")
+						value: (block_node
+							(block_scalar) @codeblock
+							(#offset! @codeblock 1 0 1 0)))
 				]]
 			)
 			require("headlines").setup(opts)
