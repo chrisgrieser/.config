@@ -9,8 +9,7 @@
 return {
 	{
 		"supermaven-inc/supermaven-nvim",
-		build = "SupermavenUseFree", -- needs to be run once to set the API key
-		cmd = "SupermavenStop", -- when starting a recoding before the plugin is loaded
+		build = ":SupermavenUseFree", -- needs to be run once to set the API key
 		event = "InsertEnter",
 		keys = {
 			{ "<D-s>", mode = "i" },
@@ -32,7 +31,12 @@ return {
 				regex = true, -- rg-substitute buffer
 			},
 		},
-		init = function()
+		config = function(_, opts)
+			require("supermaven-nvim").setup(opts)
+
+			-- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
+			require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
+
 			-- disable while recording
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
