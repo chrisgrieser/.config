@@ -8,7 +8,10 @@ return {
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
 		opts = {
-			bs = { space = "balance" },
+			bs = {
+				space = "balance",
+				cmap = false, -- keep my `<BS>` mapping for the cmdline
+			},
 			cr = { autoclose = true },
 			fastwarp = { enable = false },
 			space = { enable = true },

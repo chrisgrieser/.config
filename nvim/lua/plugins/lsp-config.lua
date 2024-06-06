@@ -233,10 +233,6 @@ serverConfigs.tsserver = {
 }
 serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
 
-serverConfigs.biome = {
-	filetypes = { "javascript", "typescript", "json", "jsonc", "css" },
-}
-
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
