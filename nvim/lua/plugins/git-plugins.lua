@@ -84,13 +84,16 @@ return {
 						u.notify("GitSigns", "Reset Base")
 						return
 					end
+
 					local file = vim.api.nvim_buf_get_name(0)
 					local gitArgs = { "git", "log", "-1", "--format=%h", "--", file }
 					local out = vim.system(gitArgs):wait()
-					local lastCommitToFile = vim.trim(out)
-					require("gitsigns").change_base(vim.trim(lastCommitToFile.stdout) .. "^")
+					assert(out.code == 0, "git log failed")
+
+					local lastCommitToFile = vim.trim(out.stdout) .. "^"
+					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsigns_previous_changes = true
-					u.notify("GitSigns", ("Changed base to %s^"):format(lastCommitToFile .. "^"))
+					u.notify("GitSigns", "Changed base to " .. lastCommitToFile)
 				end,
 				desc = "󰊢 Previous/Present Changes",
 			},

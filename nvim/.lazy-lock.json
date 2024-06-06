@@ -55,7 +55,7 @@
   "satellite.nvim": { "branch": "main", "commit": "40eb89743e3439c66192abfc31eb3280622a5d3c" },
   "scrollEOF.nvim": { "branch": "master", "commit": "38fd5880021e90c15dc61fa325f714bd8077f0a6" },
   "sibling-swap.nvim": { "branch": "main", "commit": "0a96720cea3df545d2b389b73d83f25cdd5957ec" },
-  "supermaven-nvim": { "branch": "main", "commit": "ef3bd1a6b6f722857f2f88d929dd4ac875655611" },
+  "supermaven-nvim": { "branch": "feature/exposing-suggestion-group", "commit": "bd41ba180a81353a8b04a7de70119005b819fd2c" },
   "symbol-usage.nvim": { "branch": "main", "commit": "70ed17636d336a8770eda9d078982decae4e8df8" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
