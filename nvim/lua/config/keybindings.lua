@@ -240,16 +240,16 @@ keymap(
 	{ "n", "x" },
 	"g<CR>",
 	function() require("funcs.after-image").gotoNext() end,
-	{ desc = " Goto next hunk of last commit" }
+	{ desc = " Goto next hunk of last commit" }
+)
+keymap(
+	{ "n", "x" },
+	"<leader>oi",
+	function() require("funcs.after-image").toggleSigns() end,
+	{ desc = " After image sign" }
 )
 
--- enable signs on reading a buffer
-local function enableAfterImage(ctx) require("funcs.after-image").toggleSigns(ctx.buf, "silent") end
-vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = enableAfterImage,
-})
--- enable on startup
-vim.defer_fn(function() enableAfterImage { buf = 0 } end, 1)
+require("funcs.after-image").setup { autoEnableOnBufferEnter = true }
 
 --------------------------------------------------------------------------------
 
