@@ -12,10 +12,11 @@ echo "$*" | pbcopy # bkp copy
 # shellcheck disable=2154 # Alfred variables
 msg=$(reminders edit "$reminder_list" "$id" "$title" --notes="$body")
 success=$?
+echo "⭕ id: $id" >&2
 echo "$msg" >&2 # log msg in Alfred console
 
 if [[ "$success" -ne 0 ]]; then
 	echo -n "⚠️ Not saved! Text copied to clipboard."
 else
-	echo -n "$title"
+	echo -n "💾 $msg"
 fi

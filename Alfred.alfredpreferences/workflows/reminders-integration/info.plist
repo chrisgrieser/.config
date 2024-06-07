@@ -518,7 +518,7 @@
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>⎋: Cancel   ⏎: Save Changes   ⇧⏎: Insert Line Break</string>
+				<string>⎋: Cancel   ⏎: Changes   ⇧⏎: Insert Line Break</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>
