@@ -3,14 +3,10 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		opts = { variant = "dawn", styles = { italic = false } },
-	},
+	"sainnhe/everforest",
+	-- { "rose-pine/neovim", name = "rose-pine", opts = { variant = "dawn", styles = { italic = false } }, },
 	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- "cdmill/neomodern.nvim",
-	-- "sainnhe/everforest",
 	-- {
 	-- 	"marko-cerovac/material.nvim",
 	-- 	init = function() vim.g.material_style = "lighter" end,
