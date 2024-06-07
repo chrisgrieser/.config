@@ -1,7 +1,7 @@
 local u = require("config.utils")
 --------------------------------------------------------------------------------
-
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+--------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
@@ -168,9 +168,11 @@ serverConfigs.ruff_lsp = {
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
+	-- later, using `biome` instead (this key overrides `settings.format.enable = true`)
+	init_options = { provideFormatter = true },
+
 	settings = {
 		css = {
-			format = { enable = false }, -- using `biome` instead
 			lint = {
 				vendorPrefix = "ignore", -- needed for scrollbars
 				duplicateProperties = "warning",
