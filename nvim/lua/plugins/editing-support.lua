@@ -2,6 +2,7 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
+-- local a = (){}
 return {
 	{
 		"altermo/ultimate-autopair.nvim",
@@ -14,10 +15,9 @@ return {
 				cmap = false, -- keep my `<BS>` mapping for the cmdline
 			},
 			fastwarp = {
-				map = "<D-f>",
+				map = "<C-f>",
 				hopout = true,
 				nocursormove = false,
-				multi = true,
 			},
 			cr = { autoclose = true },
 			space = { enable = true },
