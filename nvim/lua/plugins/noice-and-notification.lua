@@ -115,8 +115,8 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
-				-- BUG both, view and format.search_down.view need to be set to
-				-- `cmdline` to work
+				-- BUG both, `view` and `format.search_down.view` need to be set to
+				-- `cmdline` to work https://github.com/folke/noice.nvim/issues/841
 				view = "cmdline_popup",
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },

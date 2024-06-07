@@ -13,7 +13,6 @@ local plugins = {
 			-- 	view = "cmdline",
 			-- 	format = {
 			-- 		search_down = { view = "cmdline" },
-			-- 		cmdline = { view = "cmdline_popup" },
 			-- 	},
 			-- },
 		},
