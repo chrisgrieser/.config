@@ -19,6 +19,8 @@ local plugins = {
 	},
 }
 
+vim.fn.serverstart("/tmp/nvim_debug.pipe")
+
 --------------------------------------------------------------------------------
 
 for _, name in ipairs { "config", "data", "state", "cache" } do
