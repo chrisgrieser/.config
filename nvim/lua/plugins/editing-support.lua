@@ -14,7 +14,7 @@ return {
 				cmap = false, -- keep my `<BS>` mapping for the cmdline
 			},
 			fastwarp = {
-				map = "<Tab>",
+				map = "<D-f>",
 				hopout = true,
 				nocursormove = false,
 			},
