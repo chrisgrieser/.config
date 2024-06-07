@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>42C41A4F-88AF-4C08-96EB-36A308971BF3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>221025C2-26B2-4105-B171-A62E18219FBD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Vítor Galvão</string>
@@ -32,27 +45,6 @@
 	<string>Amazon Suggest</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.amazon.{var:top_level_domain}/s?k={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0B28D7B8-4E25-48F3-8533-0C6E3FA1A138</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -193,6 +185,40 @@ function run(argv) {
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Search Amazon with Suggestions for '{query}'</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>42C41A4F-88AF-4C08-96EB-36A308971BF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.amazon.{var:top_level_domain}/s?k={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>0B28D7B8-4E25-48F3-8533-0C6E3FA1A138</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -209,18 +235,27 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 			<key>note</key>
 			<string>To change Amazon store, edit the Workflow’s Configuration.</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>35</real>
 		</dict>
 		<key>221025C2-26B2-4105-B171-A62E18219FBD</key>
 		<dict>
 			<key>note</key>
 			<string>Set your keyword via the "Configure workflow..." button.</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>35</real>
+		</dict>
+		<key>42C41A4F-88AF-4C08-96EB-36A308971BF3</key>
+		<dict>
+			<key>note</key>
+			<string>Optionally set it as a Fallback Search in Features → Default Results</string>
+			<key>xpos</key>
+			<real>50</real>
+			<key>ypos</key>
+			<real>35</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -350,7 +385,7 @@ Set a specific Amazon store to search in the [Workflow’s Configuration](https:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2024.1</string>
+	<string>2024.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/amazon-suggest-workflow/</string>
 </dict>

@@ -21,6 +21,7 @@ local spellfixes = {
 	dwon = "down",
 	esle = "else",
 	fales = "false",
+	fasle = "false",
 	fiel = "file",
 	flase = "false",
 	fo = "of",
