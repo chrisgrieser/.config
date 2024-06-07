@@ -178,6 +178,12 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- COMMAND MODE
 keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+keymap(
+	"c",
+	"<D-c>",
+	function() u.copyAndNotify(vim.fn.getcmdline()) end,
+	{ desc = " Copy Line" }
+)
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
@@ -338,7 +344,7 @@ end, { desc = " Paste charwise", expr = true })
 --------------------------------------------------------------------------------
 -- QUITTING
 
--- `cmd-q` remapped to `ZZ` via Karabiner 
+-- `cmd-q` remapped to `ZZ` via Karabiner
 -- PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", vim.cmd.wqall, { desc = " Quit" })
 

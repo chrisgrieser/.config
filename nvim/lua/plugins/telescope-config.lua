@@ -331,7 +331,7 @@ return {
 			{
 				"gr",
 				function()
-					-- HACK add open buffers to oldfiles
+					-- add open buffers to oldfiles
 					local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
 						:map(function(buf) return buf.name end)
 						:totable()

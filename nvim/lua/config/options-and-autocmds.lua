@@ -135,7 +135,9 @@ autocmd("TextYankPost", {
 -- (`pbpaste` and `pbcopy` are macOS clis, adapt if on other OS.)
 autocmd("FocusLost", {
 	callback = function()
-		local trimmed = vim.system({ "pbpaste" }):wait().stdout:gsub("\n$", "")
+		local systemCb = vim.system({ "pbpaste" }):wait().stdout or ""
+		if systemCb ~= vim.fn.getreg("+") then return end
+		local trimmed = systemCb:gsub("\n$", "")
 		if not trimmed:find("\n") then trimmed = vim.trim(trimmed) end
 		vim.system({ "pbcopy" }, { stdin = trimmed })
 	end,

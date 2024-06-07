@@ -138,7 +138,8 @@ function M.copyColorValue(prompt_bufnr)
 	local out = {}
 	if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
 	if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-	u.copyAndNotify(table.concat(out, "\n"))
+	if value.link then table.insert(out, "link: " .. value.link) end
+	if #out > 0 then u.copyAndNotify(table.concat(out, "\n")) end
 end
 
 --------------------------------------------------------------------------------
