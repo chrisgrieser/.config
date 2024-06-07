@@ -1,10 +1,8 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154 # Alfred variables
 
-msg=$(reminders delete "$reminder_list" "$id")
-echo "$msg" >&2 # log msg in Alfred console
-msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow")
-echo "$msg" >&2
+reminders delete "$reminder_list" "$id"
+reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow"
 echo -n "$title" # pass for notification
 
 #───────────────────────────────────────────────────────────────────────────────

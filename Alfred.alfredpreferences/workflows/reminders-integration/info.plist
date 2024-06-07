@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.reminders-integration</string>
+	<string>de.chris-grieser.reminders-companion</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -461,7 +461,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Reminders Integration</string>
+	<string>Reminders Companion</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -474,9 +474,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{query}</string>
+				<string></string>
 				<key>title</key>
-				<string>💾 Reminder saved</string>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
