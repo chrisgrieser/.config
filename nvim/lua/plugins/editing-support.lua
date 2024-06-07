@@ -14,8 +14,9 @@ return {
 				cmap = false, -- keep my `<BS>` mapping for the cmdline
 			},
 			fastwarp = {
-				hopout = true,
 				map = "<Tab>",
+				hopout = true,
+				nocursormove = false,
 			},
 			cr = { autoclose = true },
 			space = { enable = true },

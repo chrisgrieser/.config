@@ -12,8 +12,8 @@ local darkThemes = {
 	"Tinacious Design (Dark)",
 }
 local lightThemes = {
-	"Bluloco Zsh Light (Gogh)",
 	"seoulbones_light",
+	"Bluloco Zsh Light (Gogh)",
 	"Atelier Lakeside Light (base16)",
 	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
