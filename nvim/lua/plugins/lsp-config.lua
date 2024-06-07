@@ -11,7 +11,6 @@ local lspToMasonMap = {
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
 	cssls = "css-lsp",
-	css_variables = "css-variables-language-server",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completions
 	jsonls = "json-lsp",
@@ -181,12 +180,6 @@ serverConfigs.cssls = {
 			},
 		},
 	},
-}
-
-serverConfigs.css_variables = {
-	-- adds custom root markers for Obsidian snippet folders. However, checkign
-	-- for `.git` to ignore attachting the the shimmering-focus repo
-	root_dir = function() return vim.fs.root(0, { ".project-root" }) end,
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
