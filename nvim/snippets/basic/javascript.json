@@ -35,15 +35,6 @@
       "repeat until"
     ]
   },
-  "don't check file (TypeScript)": {
-    "body": "// @ts-nocheck",
-    "description": "instructs TypeScript to ignore the whole file",
-    "prefix": [
-      "nocheck (TypeScript)",
-      "ts-nocheck",
-      "exclude (TypeScript)"
-    ]
-  },
   "ec (export const)": {
     "body": "export const ${1:CONSTANT}",
     "prefix": "ec (export const)"
@@ -140,6 +131,13 @@
     "body": "// biome-ignore format: ${1:explanation}",
     "description": "Ignores the next block of code.",
     "prefix": "ignore (biome formatter)"
+  },
+  "ignore file (TypeScript) + nocheck (TypeScript)": {
+    "body": "// @ts-nocheck",
+    "prefix": [
+      "ignore file (TypeScript)",
+      "nocheck (TypeScript)"
+    ]
   },
   "map ( () => {} )": {
     "body": [
