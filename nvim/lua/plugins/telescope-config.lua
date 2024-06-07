@@ -15,7 +15,7 @@ local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
 
 local specialDirs = {
 	"%.git/",
-	"%.DS_Store$",
+	"%.DS_Store$", -- macOS Finder
 	"%.app/", -- macOS apps
 	".local",
 	"homebrew", -- for nvim runtime
@@ -83,6 +83,7 @@ local function telescopeConfig()
 				-- filetypes
 				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
 				"%.zip", "%.pdf",
+				unpack(specialDirs), -- needs to be last for correct unpacking
 			},
 		},
 		pickers = {
@@ -399,10 +400,10 @@ return {
 					}
 					local originalFunc = vim.fn.getcompletion
 
-					vim.fn.getcompletion = function() ---@diagnostic disable-line: duplicate-set-field
+					vim.fn.getcompletion = function() 
 						return vim.tbl_filter(
 							function(color) return not vim.tbl_contains(builtins, color) end,
-							originalFunc("", "color")
+							originalFunc("", "color") ---@diagnostic disable-line: redundant-parameter
 						)
 					end
 
