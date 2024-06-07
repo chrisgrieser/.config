@@ -476,7 +476,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>{query}</string>
+				<string>💾 Updated {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -518,7 +518,7 @@
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>⎋: Cancel   ⏎: Changes   ⇧⏎: Insert Line Break</string>
+				<string>⎋: Cancel   ⏎: Changes   ⇧⏎: Insert Line Break   1st line: title   remaining lines: notes</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>

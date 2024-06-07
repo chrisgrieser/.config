@@ -22,9 +22,11 @@ Hints.style("font-family: Arial; font-size: 12px;");
 //──────────────────────────────────────────────────────────────────────────────
 // IGNORE LIST
 
-// unmap `jk` on google for web search navigator (vimium-like controls for google only)
-unmap("j", /google/);
+unmap("j", /google/); // websearch navigator
 unmap("k", /google/);
+unmap("c", /google/); // Grepper
+
+unmap("f", /crunchyroll/); // BetterTouchTool Double-Click Hack
 
 // unmap("?", /github.com/); // cheatsheet for github shortcuts
 // unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
