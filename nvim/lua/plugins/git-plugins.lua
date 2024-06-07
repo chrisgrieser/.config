@@ -1,4 +1,12 @@
 local u = require("config.utils")
+
+-- Needs to be triggered manually, since lualine updates the git diff
+-- component only on BufEnter.
+local function updateLualineDiff()
+	if package.loaded["lualine"] then
+		require("lualine.components.diff.git_diff").update_diff_args()
+	end
+end
 --------------------------------------------------------------------------------
 
 return {
@@ -63,13 +71,35 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
+			{
+				"ga",
+				function()
+					local range = nil
+					if vim.fn.mode() == "V" then
+						u.normal("V") -- leave visual mode so <> marks are set
+						local startLn = vim.api.nvim_buf_get_mark(0, "<")[1]
+						local endLn = vim.api.nvim_buf_get_mark(0, ">")[1]
+						range = { startLn, endLn }
+					end
+					require("gitsigns").stage_hunk(range, nil, updateLualineDiff)
+				end,
+				mode = { "n", "x" },
+				desc = "󰊢 Stage Hunk/Selection",
+			},
+			{
+				"<leader>uh",
+				function() require("gitsigns").reset_hunk(nil, nil, updateLualineDiff) end,
+				mode = { "n", "x" },
+				desc = "󰊢 Reset Hunk",
+			},
+			{
+				"<leader>ua",
+				function() require("gitsigns").undo_stage_hunk(nil, nil, updateLualineDiff) end,
+				desc = "󰊢 Unstage Last Stage",
+			},
 			-- stylua: ignore start
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
 			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Deletions Inline" },
-			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
-			{ "<leader>uh", function() require("gitsigns").reset_hunk() end, mode = { "n", "x" }, desc = "󰊢 Reset Hunk" },
 			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
 			{ "<leader>ob", function() require("gitsigns").toggle_current_line_blame() end, desc = "󰊢 Git Blame"},
 			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },

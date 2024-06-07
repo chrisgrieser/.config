@@ -13,6 +13,18 @@ end
 
 local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
 
+local specialDirs = {
+	"%.git/",
+	"%.DS_Store$",
+	"%.app/", -- macOS apps
+	".local",
+	"homebrew", -- for nvim runtime
+	".venv", -- python
+	"EmmyLua.spoon", -- Hammerspoon
+}
+
+--------------------------------------------------------------------------------
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopePrompt",
 	callback = function()
@@ -71,12 +83,6 @@ local function telescopeConfig()
 				-- filetypes
 				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
 				"%.zip", "%.pdf",
-				-- special directories
-				"%.git/",
-				"%.DS_Store$", "%.app/", -- macOS apps
-				".local", "homebrew", -- nvim runtime
-				".venv", -- python
-				"EmmyLua.spoon", -- Hammerspoon
 			},
 		},
 		pickers = {
@@ -218,6 +224,7 @@ local function telescopeConfig()
 				include_current_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
+				file_ignore_patterns = specialDirs
 			},
 			lsp_definitions = {
 				prompt_prefix = "󰈿 ",
@@ -225,6 +232,7 @@ local function telescopeConfig()
 				show_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
+				file_ignore_patterns = specialDirs
 			},
 			lsp_type_definitions = {
 				prompt_prefix = "󰜁 ",
@@ -232,12 +240,17 @@ local function telescopeConfig()
 				show_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
+				file_ignore_patterns = specialDirs
 			},
 			lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title already
 				symbol_width = 30,
-				file_ignore_patterns = { "node_modules", "typings" },
+				file_ignore_patterns = {
+					"node_modules", -- js/ts
+					"typings", -- python
+					unpack(specialDirs), -- needs to be last for correct unpacking
+				},
 			},
 			spell_suggest = {
 				initial_mode = "normal",
