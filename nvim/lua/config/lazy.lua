@@ -69,12 +69,8 @@ require("lazy.view.config").keys.details = "<Tab>"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lazy",
 	callback = function()
-		vim.keymap.set(
-			"n",
-			"gi",
-			[[/#<CR>o``]],
-			{ buffer = true, remap = true, desc = "󰒲 Open next issue" }
-		)
+		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
+		vim.keymap.set("n", "gi", "/#<CR>o``", opts)
 	end,
 })
 
