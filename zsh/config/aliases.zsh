@@ -43,6 +43,7 @@ alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
 alias -g J='| fx'
 alias -g C='| pbcopy ; echo "Copied."'
+alias -g P='pbpaste'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
@@ -51,5 +52,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=(' P$' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

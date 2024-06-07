@@ -130,6 +130,17 @@ autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
+-- copying stuff from neovim to other apps should trim the trailing newline vim
+-- adds for linewise selections. Also, if it's one line, remove the indent.
+-- (`pbpaste` and `pbcopy` are macOS clis, adapt if on other OS.)
+autocmd("FocusLost", {
+	callback = function()
+		local trimmed = vim.system({ "pbpaste" }):wait().stdout:gsub("\n$", "")
+		if not trimmed:find("\n") then trimmed = vim.trim(trimmed) end
+		vim.system({ "pbcopy" }, { stdin = trimmed })
+	end,
+})
+
 --------------------------------------------------------------------------------
 -- SEARCH
 

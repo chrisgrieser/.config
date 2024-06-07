@@ -70,12 +70,12 @@ function s {
 				--height="100%" # required for for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0
-
-	# not opening via `neovide` PENDING https://github.com/neovide/neovide/issues/1586
 	file=$(echo "$selected" | cut -d: -f1)
 	line=$(echo "$selected" | cut -d: -f2)
+
+	# not opening via `neovide` cli, PENDING https://github.com/neovide/neovide/issues/1586
 	open "$file"
-	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$line<CR>"
+	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>$((line + 1))<CR>"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
