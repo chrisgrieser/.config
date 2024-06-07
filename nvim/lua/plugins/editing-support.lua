@@ -13,8 +13,11 @@ return {
 				space = "balance",
 				cmap = false, -- keep my `<BS>` mapping for the cmdline
 			},
+			fastwarp = {
+				hopout = true,
+				map = "<Tab>",
+			},
 			cr = { autoclose = true },
-			fastwarp = { enable = false },
 			space = { enable = true },
 			space2 = { enable = true },
 			-- extensions = { tsnode = false }, -- slightly buggy sometimes

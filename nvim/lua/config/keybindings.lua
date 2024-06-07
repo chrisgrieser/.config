@@ -69,8 +69,8 @@ keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
-keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
+-- keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
+-- keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
 keymap("n", "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then

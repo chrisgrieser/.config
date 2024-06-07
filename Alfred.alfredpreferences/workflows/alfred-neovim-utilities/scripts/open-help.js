@@ -34,19 +34,13 @@ function run(argv) {
 		return;
 	}
 
-	// try out branches "main" and "master"
-	const main = `https://api.github.com/repos/${repo}/git/trees/main?recursive=1`;
-	const master = `https://api.github.com/repos/${repo}/git/trees/master?recursive=1`;
-	let branch = "main";
-	let repoFiles = JSON.parse(httpRequest(main));
-	if (repoFiles.message === "Not Found") {
-		repoFiles = JSON.parse(httpRequest(master));
-		branch = "master";
-		if (repoFiles.message === "Not Found") return "Default Branch neither 'master' nor 'main'.";
-	}
+	// get file list
+	const branch = JSON.parse(httpRequest(`https://api.github.com/repos/${repo}`)).default_branch;
+	const worktreeUrl = `https://api.github.com/repos/${repo}/git/trees/${branch}?recursive=1`;
+	const repoFiles = JSON.parse(httpRequest(worktreeUrl)).tree
 
 	// find the doc file
-	const docFile = repoFiles.tree.find((/** @type {{ path: string; }} */ file) => {
+	const docFile = repoFiles.find((/** @type {{ path: string; }} */ file) => {
 		const isDoc = file.path.startsWith("doc/") && file.path.endsWith(".txt");
 		const isChangelog = file.path.includes("change");
 		const otherCruff = repo === "nvim-telescope/telescope.nvim" && file.path.endsWith("secret.txt");
