@@ -3,14 +3,23 @@ local plugins = {
 		"folke/noice.nvim",
 		dependencies = "MunifTanjim/nui.nvim",
 		opts = {
-			presets = { command_palette = true },
+			cmdline = {
+				view = "cmdline_popup",
+				format = {
+					search_down = { view = "cmdline" },
+				},
+			},
+			-- cmdline = {
+			-- 	view = "cmdline",
+			-- 	format = {
+			-- 		search_down = { view = "cmdline" },
+			-- 		cmdline = { view = "cmdline_popup" },
+			-- 	},
+			-- },
 		},
 	},
 }
 
-vim.keymap.set("c", "<BS>", function()
-	if vim.fn.getcmdline() ~= "" then return "<BS>" end
-end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 
 for _, name in ipairs { "config", "data", "state", "cache" } do

@@ -244,7 +244,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	vim.ui.input({ prompt = "Scratch File Extension" }, function(ext)
+	vim.ui.input({ prompt = " Extension for Scratch File" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
 		vim.cmd.edit(filepath)
