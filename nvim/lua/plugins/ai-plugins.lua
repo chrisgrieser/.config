@@ -8,10 +8,12 @@
 
 return {
 	{
-		"AlejandroSuero/supermaven-nvim",
+		"supermaven-inc/supermaven-nvim",
+		-- "AlejandroSuero/supermaven-nvim",
+		-- branch = "feature/exposing-suggestion-group",
+
 		build = ":SupermavenUseFree", -- needs to be run once to set the API key
 		event = "InsertEnter",
-		branch = "feature/exposing-suggestion-group",
 		keys = {
 			{ "<D-s>", mode = "i" },
 			{
@@ -37,10 +39,7 @@ return {
 			require("supermaven-nvim").setup(opts)
 
 			-- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
-			-- https://github.com/AlejandroSuero/supermaven-nvim/tree/feature/exposing-suggestion-group
-			-- require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
-
-			-- f ff fff
+			require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
 
 			-- disable while recording
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
