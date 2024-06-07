@@ -46,10 +46,9 @@ keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickf
 --------------------------------------------------------------------------------
 -- EDITING
 
--- Undo time, not changes https://vim.fandom.com/wiki/Using_undo_branches
--- (using `earlier 1` instead of `g+` to silence the keymap)
-keymap("n", "u", "<cmd>silent earlier 1<CR>zv")
-keymap("n", "U", "<cmd>silent later 1<CR>zv")
+-- Undo
+keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
+keymap("n", "U", "<cmd>silent redo<CR>zv")
 
 -- emulate some basic commands from `vim-abolish`
 keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
