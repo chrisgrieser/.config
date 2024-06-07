@@ -34,6 +34,7 @@ local function customHighlights()
 	linkHl("Whitespace", "NonText") -- trailing spaces more visible
 	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
 	overwriteHl("SnippetTabstop", { bg = u.getHighlightValue("Folded", "bg") })
+	linkHl("@character.printf", "SpecialChar") -- missing in many themes
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
