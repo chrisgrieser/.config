@@ -67,8 +67,8 @@ end, { desc = "󱎘 Delete char at EoL" })
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
-keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent selection" })
-keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent selection" })
+keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
 keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
