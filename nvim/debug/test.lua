@@ -1,3 +1,6 @@
-require("lualine.components.diff.git_diff").update_diff_args()
+local msg = "Hello."
 
-local a = ("foobar %s"):format("ff")
+vim.notify(msg, vim.log.levels.INFO, {
+	title = "Lorem ipsum dolor sit amet, officia excepteur",
+	timeout = false,
+})
