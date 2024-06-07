@@ -34,6 +34,7 @@
   "nvim-navic": { "branch": "master", "commit": "8649f694d3e76ee10c19255dece6411c29206a54" },
   "nvim-notify": { "branch": "master", "commit": "d333b6f167900f6d9d42a59005d82919830626bf" },
   "nvim-origami": { "branch": "main", "commit": "c824f470e0c177707822c37b13087ab1dd7ddf91" },
+  "nvim-rip-substitute": { "branch": "main", "commit": "410f014d93c6b8fe9cec12d18d7af7de3db07f7c" },
   "nvim-rulebook": { "branch": "main", "commit": "0085a9cab9e7fbce4717ddaf36dbab7f6d0ca41a" },
   "nvim-scissors": { "branch": "main", "commit": "6fba9a0036d97d5ff2fa874f148b5f2f3fcd280f" },
   "nvim-snippets": { "branch": "main", "commit": "cff37a199a92f3c3cd52bb1593a7d01669b35d23" },
