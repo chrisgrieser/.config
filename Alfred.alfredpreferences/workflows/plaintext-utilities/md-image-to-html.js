@@ -11,5 +11,6 @@ function run(argv) {
 	const htmlImg = mdImageLink
 		.replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" width=70% src="$2">')
 		.replace(/alt="Pasted image .*?" /g, 'alt="Showcase" ');
-	return '<p align="center">' + htmlImg + "</p>";
+	// return '<p align="center">' + htmlImg + "</p>";
+	return htmlImg;
 }

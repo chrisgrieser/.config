@@ -284,6 +284,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -307,15 +322,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Encode URL</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
+			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -343,27 +364,6 @@
 			<string>74FC629B-C07E-49AC-9A18-82A5844CC79F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Encode URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -397,27 +397,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Decode URL</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -439,6 +418,27 @@
 			<string>3D363FE9-8085-4930-B367-E0EFC46EB62E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Decode URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>ACEFCAB6-39BB-471F-BAC1-324B1B72BC1C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -475,6 +475,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Dedent Indentation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -498,23 +519,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
+				<key>autopaste</key>
 				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>name</key>
-				<string>Dedent Indentation</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -557,25 +576,6 @@
 			<string>47760D9D-8CD4-4A91-A50B-94235D0D5A0B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
