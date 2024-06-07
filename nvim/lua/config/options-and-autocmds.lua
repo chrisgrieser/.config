@@ -120,7 +120,10 @@ opt.titlelen = 0 -- 0 = do not shorten title
 opt.titlestring = "%{getcwd()}"
 
 -- issue commands via nvim server
-if vim.g.neovide then vim.fn.serverstart("/tmp/nvim_server.pipe") end
+if vim.g.neovide then
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- in case of crash server still there
+	vim.fn.serverstart("/tmp/nvim_server.pipe")
+end
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
