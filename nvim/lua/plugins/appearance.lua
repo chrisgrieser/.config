@@ -28,6 +28,7 @@ return {
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
 		opts = {
+			zindex = 1, -- below most stuff
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
