@@ -1,8 +1,9 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
-	callback = function()
+	callback = function(ctx)
 		vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
-			buffer = 0,
+			buffer = ctx.buf,
+			group = vim.api.nvim_create_augroup("AutoComma", {}),
 			callback = function()
 				local node = vim.treesitter.get_node()
 				if not (node and node:type() == "table_constructor") then return end
@@ -10,7 +11,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				local currentLine = vim.api.nvim_get_current_line()
 				local emptyLine = currentLine:find("^%s*$")
 				local alreadyHasComma = currentLine:find(",%s*$")
-				if not emptyLine and alreadyHasComma then return end
+				local isComment = currentLine:find("%-%-")
+				if isComment or alreadyHasComma or emptyLine then return end
 
 				vim.api.nvim_set_current_line(currentLine .. ",")
 			end,

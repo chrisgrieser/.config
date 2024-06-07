@@ -17,27 +17,33 @@ return {
 				map = "<D-f>",
 				hopout = true,
 				nocursormove = false,
+				multi = true,
 			},
 			cr = { autoclose = true },
 			space = { enable = true },
 			space2 = { enable = true },
-			-- extensions = { tsnode = false }, -- slightly buggy sometimes
+			extensions = {
+				cond = { -- global conditions
+					-- `f` contains builtin conditions https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
+					cond = function(f) return not f.in_macro() end,
+				},
+			},
 
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
-			{ "(", "): ", ft = { "gitcommit" } }, -- scope for commit messages
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
+			{ -- scope for commit messages
+				"(",
+				"): ",
+				ft = { "gitcommit" },
+				cond = function(_)
+					local isFirstWord = vim.api.nvim_get_current_line():find(" ") == nil
+					return isFirstWord
+				end,
+			},
 		},
-		config = function(_, opts)
-			local autopair = require("ultimate-autopair")
-			autopair.setup(opts)
-
-			-- disable during macro
-			vim.api.nvim_create_autocmd("RecordingEnter", { callback = autopair.disable })
-			vim.api.nvim_create_autocmd("RecordingLeave", { callback = autopair.enable })
-		end,
 	},
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",

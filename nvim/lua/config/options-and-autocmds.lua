@@ -314,7 +314,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 
--- SKELETIONS (TEMPLATES)
+-- SKELETONS (TEMPLATES)
 -- filetype -> extension
 local skeletons = {
 	python = "py",
@@ -356,3 +356,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+
+require("funcs.auto-comma") -- TODO
