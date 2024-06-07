@@ -9,10 +9,19 @@ export LC_CTYPE="$LANG"
 title=$(echo "$*" | head -n1)
 body=$(echo "$*" | tail -n +2)
 
-# HACK since `reminders edit` does not work reliably
-msg()reminders delete "$reminder_list" "$id"
+# HACK since `reminders edit` does not work reliably, we work around it by
+# deleting and then re-creating the reminder
 
-reminders add "$reminder_list" "$title" --notes="$body" --due-date="today"
+msg=$(reminders delete "$reminder_list" "$id")
+echo "msg: $msg" >&2
 
-echo "$*" | pbcopy # bkp
-echo -n "Updated $title"
+if [[ -n "$body" ]] ; then # empty body causes error
+	msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="today")
+else
+	msg=$(reminders add "$reminder_list" "$title" --due-date="today")
+fi
+echo "msg: $msg" >&2
+
+#───────────────────────────────────────────────────────────────────────────────
+
+echo -n "$title" # pass for notification
