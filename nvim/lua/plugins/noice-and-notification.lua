@@ -115,8 +115,14 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
+				-- BUG both, view and format.search_down.view need to be set to
+				-- `cmdline` to work
+				view = "cmdline_popup",
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
+					cmdline = { view = "cmdline_popup" },
+					lua = { view = "cmdline_popup" },
+					help = { view = "cmdline_popup" },
 				},
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua

@@ -2,12 +2,12 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
--- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 return {
 	{
 		"altermo/ultimate-autopair.nvim",
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
+		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 		opts = {
 			bs = {
 				space = "balance",
@@ -19,7 +19,7 @@ return {
 			space2 = { enable = true },
 			-- extensions = { tsnode = false }, -- slightly buggy sometimes
 
-			-- SIC custom keys need to be "appended" to the opts as a list?!
+			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
