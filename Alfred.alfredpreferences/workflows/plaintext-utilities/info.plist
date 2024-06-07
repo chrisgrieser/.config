@@ -8,19 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>054338EE-32F9-474D-AC80-A933C886D6A7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D60A0ABA-E10A-4B8D-8363-BC2DCA228200</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>06EAC267-0AB1-438B-8BAC-D258752286BB</key>
 		<array>
 			<dict>
@@ -38,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>47024990-837B-4095-9F25-9905FDB9E7BB</string>
+				<string>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -86,11 +73,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>47024990-837B-4095-9F25-9905FDB9E7BB</key>
+		<key>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
+				<string>74FC629B-C07E-49AC-9A18-82A5844CC79F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -99,11 +86,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>64CBE3CE-C747-46CB-8D59-78A5B788E7D5</key>
+		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>74FC629B-C07E-49AC-9A18-82A5844CC79F</string>
+				<string>D60A0ABA-E10A-4B8D-8363-BC2DCA228200</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -253,6 +240,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>md-image-to-html.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -270,48 +280,6 @@
 			<string>1D749935-6E08-436A-A643-FC0CDB4941FE</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>!\[(.*?)\]\((.*?)\)</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>&lt;img alt="$1" width=70% src="$2"&gt;</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>47024990-837B-4095-9F25-9905FDB9E7BB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>alt="Pasted image .*?" </string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>alt="Showcase" </string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>054338EE-32F9-474D-AC80-A933C886D6A7</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -689,17 +657,6 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>054338EE-32F9-474D-AC80-A933C886D6A7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>proper alt-text</string>
-			<key>xpos</key>
-			<real>305</real>
-			<key>ypos</key>
-			<real>45</real>
-		</dict>
 		<key>06EAC267-0AB1-438B-8BAC-D258752286BB</key>
 		<dict>
 			<key>colorindex</key>
@@ -747,17 +704,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>250</real>
 		</dict>
-		<key>47024990-837B-4095-9F25-9905FDB9E7BB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>md → html</string>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>45</real>
-		</dict>
 		<key>47760D9D-8CD4-4A91-A50B-94235D0D5A0B</key>
 		<dict>
 			<key>colorindex</key>
@@ -786,6 +732,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>135</real>
+		</dict>
+		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>74FC629B-C07E-49AC-9A18-82A5844CC79F</key>
 		<dict>
