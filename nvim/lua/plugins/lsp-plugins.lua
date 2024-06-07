@@ -66,7 +66,6 @@ return {
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
-		enabled = false,
 		keys = {
 			{
 				"<D-g>",
