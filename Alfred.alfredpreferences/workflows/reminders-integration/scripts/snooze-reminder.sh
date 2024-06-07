@@ -8,9 +8,9 @@ msg=$(reminders delete "$reminder_list" "$id")
 echo "msg: $msg" >&2
 
 if [[ -n "$body" ]] ; then # empty body causes error
-	msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="today")
+	msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow")
 else
-	msg=$(reminders add "$reminder_list" "$title" --due-date="today")
+	msg=$(reminders add "$reminder_list" "$title" --due-date="tomorrow")
 fi
 echo "msg: $msg" >&2
 
