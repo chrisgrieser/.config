@@ -81,6 +81,7 @@ function M.justRecipe(first)
 	}
 
 	local function run(recipe)
+		vim.cmd.update()
 		if not recipe then return end
 		if vim.endswith(recipe, "_quickfix") then
 			vim.opt_local.makeprg = "just"
@@ -105,10 +106,10 @@ function M.justRecipe(first)
 	local recipes = vim.split(vim.trim(result.stdout), " ")
 	recipes = vim.tbl_filter(function(r) return r ~= config.ignoreRecipe end, recipes)
 
-
 	if first then
 		run(recipes[1])
 	else
+		if config.skipFirstInSelection and #recipes > 0 then table.remove(recipes, 1) end
 		vim.ui.select(recipes, { prompt = " Just recipes", kind = "just-recipes" }, run)
 	end
 end
