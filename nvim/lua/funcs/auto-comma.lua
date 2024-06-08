@@ -12,8 +12,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				local emptyLine = currentLine:find("^%s*$")
 				local alreadyHasComma = currentLine:find(",%s*$")
 				local isComment = currentLine:find("%-%-")
-				local hasBraceAtEnd = currentLine:find("[{}]%s*$")
-				if isComment or alreadyHasComma or emptyLine or hasBraceAtEnd then return end
+				local isOneLineTable = currentLine:find("%b{}")
+				if isComment or alreadyHasComma or emptyLine or isOneLineTable then return end
 
 				vim.api.nvim_set_current_line(currentLine .. ",")
 			end,
