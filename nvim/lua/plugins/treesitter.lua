@@ -3,6 +3,10 @@ return {
 	event = "VeryLazy",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
+	init = function ()
+		-- use bash parser for zsh files
+		vim.treesitter.language.register("bash", "zsh")
+	end,
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not
 		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)

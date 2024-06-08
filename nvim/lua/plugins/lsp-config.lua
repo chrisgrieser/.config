@@ -71,7 +71,7 @@ serverConfigs.bashls = {
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 -- DOCS https://github.com/creativenull/efmls-configs-nvim/tree/main/lua/efmls-configs/linters
 local efmTools = {
-	sh = {
+	zsh = {
 		{
 			lintSource = "shellcheck",
 			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
