@@ -9,9 +9,10 @@ vim.api.nvim_create_autocmd("FileType", {
 				local node = vim.treesitter.get_node()
 				if not (node and node:type() == "table_constructor") then return end
 
-				local currentLine = vim.api.nvim_get_current_line()
-				local isFirstNonWhitespaceNonComma = currentLine:find("^%s*[^,%s{}]$")
-				if isFirstNonWhitespaceNonComma then vim.api.nvim_set_current_line(currentLine .. ",") end
+				local line = vim.api.nvim_get_current_line()
+				if line:find("^%s*[^,%s{}-]$") then
+					vim.api.nvim_set_current_line(line .. ",")
+				end
 			end,
 		})
 	end,
