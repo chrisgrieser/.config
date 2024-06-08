@@ -4,11 +4,11 @@ local u = require("config.utils")
 return {
 	-- -- BUG for some reason, makes `ltex` ignore its own config when enabled…
 	-- -- TODO enable once more stable and not adding false positives everywhere
-	-- -- { -- nvim lua typings
-	-- -- 	"folke/lazydev.nvim",
-	-- -- 	ft = "lua",
-	-- -- 	opts = { library = { "luvit-meta/library" } },
-	-- -- },
+	-- { -- nvim lua typings
+	-- 	"folke/lazydev.nvim",
+	-- 	ft = "lua",
+	-- 	opts = { library = { "luvit-meta/library" } },
+	-- },
 	-- -- `vim.uv` typings (not as dependency, since they never need to be loaded)
 	-- { "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
@@ -17,19 +17,16 @@ return {
 		event = "LspAttach",
 		init = function()
 			vim.g.navic_silence = false
-			u.addToLuaLine(
-				"tabline",
-				"lualine_b",
-				{ "navic", section_separators = { left = "▒░", right = "" } }
-			)
+			local component = { "navic", section_separators = { left = "▒░", right = "" } }
+			u.addToLuaLine("tabline", "lualine_b", component)
 		end,
 		opts = {
 			lazy_update_context = true,
 			lsp = {
 				auto_attach = true,
-				preference = { "basedpyright", "tsserver" },
+				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
 			},
-			icons = { Object = "󰆧 " },
+			icons = { Object = "󰠲 " },
 			separator = "  ",
 			depth_limit = 7,
 			depth_limit_indicator = "…",

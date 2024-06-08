@@ -1,15 +1,12 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154 # Alfred variables
 
-reminders delete "$reminder_list" "$id"
-echo "msg: $msg" >&2
-
-if [[ -n "$body" ]] ; then # empty body causes error
-	msg=$(reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow")
+reminders delete "$reminder_list" "$id" &> /dev/null
+if [[ -n "$body" ]]; then # empty body causes error
+	reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow" &> /dev/null
 else
-	msg=$(reminders add "$reminder_list" "$title" --due-date="tomorrow")
+	reminders add "$reminder_list" "$title" --due-date="tomorrow" &> /dev/null
 fi
-echo "msg: $msg" >&2
 
 echo -n "$title" # pass for notification
 

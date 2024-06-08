@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "lua",
 	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype ~= "" then return end
 		vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 			buffer = ctx.buf,
 			group = vim.api.nvim_create_augroup("AutoComma", {}),

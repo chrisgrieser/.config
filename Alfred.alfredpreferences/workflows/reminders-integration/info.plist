@@ -48,18 +48,7 @@
 			</dict>
 		</array>
 		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6AF6B99B-5890-4B45-A5F3-BD79885C420E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<array>
 			<dict>
@@ -282,16 +271,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6AF6B99B-5890-4B45-A5F3-BD79885C420E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -342,16 +321,6 @@
 		</array>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6AF6B99B-5890-4B45-A5F3-BD79885C420E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
@@ -776,29 +745,6 @@
 			<string>24171BD8-30B6-4DB8-B641-21B03AAE49EA</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf" &amp;</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6AF6B99B-5890-4B45-A5F3-BD79885C420E</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1411,17 +1357,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>720</real>
-		</dict>
-		<key>6AF6B99B-5890-4B45-A5F3-BD79885C420E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>sound</string>
-			<key>xpos</key>
-			<real>1170</real>
-			<key>ypos</key>
-			<real>290</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
