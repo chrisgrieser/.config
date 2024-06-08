@@ -49,8 +49,6 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 		elseif fileName == "ublacklist-settings.json" then
 			os.rename(filep, browserSettings .. fileName)
 		elseif fileName:find("vimium_c.*%.json") then
-			os.rename(filep, browserSettings .. "vimium-c-settings.json")
-		elseif fileName:find("my%-ublock%-backup_.*%.txt") then
 			os.rename(filep, browserSettings .. "ublock-settings.json")
 		elseif fileName:find("SponsorBlockConfig_.*%.json") then
 			os.rename(filep, browserSettings .. "SponsorBlock-settings.json")
