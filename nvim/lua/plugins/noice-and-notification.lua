@@ -184,7 +184,7 @@ return {
 			-- render = "wrapped-compact",
 			render = require("funcs.TEMP-wrapped-compact"),
 
-			max_width = math.floor(vim.o.columns * 0.5),
+			max_width = math.floor(vim.o.columns * 0.45),
 			minimum_width = 15,
 			top_down = false,
 			level = vim.log.levels.TRACE, -- minimum severity
