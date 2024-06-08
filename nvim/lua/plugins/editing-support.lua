@@ -16,7 +16,7 @@ return {
 			fastwarp = {
 				map = "<D-f>",
 				hopout = true,
-				nocursormove = false,
+				nocursormove = true,
 				multiline = true,
 			},
 			cr = { autoclose = true },
