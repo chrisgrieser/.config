@@ -10,9 +10,14 @@ const { Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExc
 // SETTINGS
 
 // DOCS https://github.com/brookhong/Surfingkeys#edit-your-own-settings
-settings.richHintsForKeystroke = 400; // like whichkey, value is delay till shown
+settings.richHintsForKeystroke = 500; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
-settings.startToShowEmoji = 0; // length of chars to show emojis (acemode)
+settings.enableEmojiInsertion = true;
+settings.startToShowEmoji = 1; // length of chars to show emojis (acemode)
+settings.modeAfterYank = "normal";
+
+settings.caseSensitive = false;
+settings.smartCase = true;
 
 Hints.style("font-family: Arial; font-size: 12px;");
 
@@ -37,7 +42,7 @@ unmap("?", /devdocs\.io/);
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// HJKL SCROLL MOVEMENTS
+// HJKL: SCROLL MOVEMENTS
 settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
@@ -46,9 +51,11 @@ map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
+map("gr", "ox"); // [g]o to [r]ecent item from history
+
 //──────────────────────────────────────────────────────────────────────────────
 
-// WASD TAB MOVEMENTS
+// WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
 map("m", "x"); // close tab
 mapkey("s", "Copy URL & close tab", async () => {
@@ -74,15 +81,16 @@ settings.tabsThreshold = 1;
 //──────────────────────────────────────────────────────────────────────────────
 
 // WINDOW
-map("<C-v>", "W"); // move tab to new window (vsplit with Hammerspoon)
+map("<Ctrl-v>", "W"); // move tab to new window (= vsplit with Hammerspoon)
 map("M", ";gw"); // merge all windows
-
 
 // Links
 map("F", "C"); // Open Hint in new tab
 map("c", ";U"); // Edit current URL
 
-// yank & clipboard
+//──────────────────────────────────────────────────────────────────────────────
+
+// YANK & CLIPBOARD
 map("o", "cc"); // open URL from clipboard or selection
 map("yf", "ya"); // yank a link
 map("ye", "yv"); // yank text of an element
@@ -102,10 +110,13 @@ mapkey("yg", "Copy GitHub Link", () => {
 	}
 });
 
+//──────────────────────────────────────────────────────────────────────────────
+
 // find
 map("-", "/");
 
 // Misc
+map("P", "oi"); // private window (incognito)
 map("gi", "I"); // enter insert field
 map("i", "p"); // disable for one key
 map("p", "<Alt-p>"); // pin (INFO needs to be after mapping `i` to prevent recursion)
