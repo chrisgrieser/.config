@@ -92,19 +92,20 @@ return {
 				mode = { "n", "x" },
 				desc = "󰊢 Reset Hunk",
 			},
-			{
-				"<leader>ua",
-				function() require("gitsigns").undo_stage_hunk(nil, nil, updateLualineDiff) end,
-				desc = "󰊢 Unstage Last Stage",
-			},
 			-- stylua: ignore start
 			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
-			{ "<leader>og", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Deletions Inline" },
-			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
-			{ "<leader>ob", function() require("gitsigns").toggle_current_line_blame() end, desc = "󰊢 Git Blame"},
-			{ "gh", function() require("gitsigns").next_hunk { foldopen = true } end, desc = "󰊢 Next Hunk" },
-			{ "gH", function() require("gitsigns").prev_hunk { foldopen = true } end, desc = "󰊢 Previous Hunk" },
+			{ "gh", function() require("gitsigns").next_hunk() end, desc = "󰊢 Next Hunk" },
+			{ "gH", function() require("gitsigns").prev_hunk() end, desc = "󰊢 Previous Hunk" },
 			{ "gh", function() require("gitsigns").select_hunk() end, mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" }, -- stylua: ignore end
+			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = " Blame Line" }, -- stylua: ignore end
+
+			-- undo,
+			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
+			{ "<leader>uA", function() require("gitsigns").reset_buffer_index() end, desc = "󰊢 Unstage Buffer" },
+			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
+
+			{ "<leader>oi", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Inline Deletions" },
+			{ "<leader>o?", function() require("gitsigns").toggle_current_line_blame() end, desc = " Git Blame"},
 			-- stylua: ignore end
 			{
 				"<leader>op",
