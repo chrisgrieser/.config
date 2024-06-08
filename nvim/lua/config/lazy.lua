@@ -80,21 +80,42 @@ keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
+local pluginTypeIcons = {
+	["editing-support"] = " ",
+	["appearance"] = " ",
+	["lsp-plugins"] = "󰒕 ",
+	["ai-pluins"] = "󰚩 ",
+	["git-plugins"] = "󰊢",
+	["debugger-dap"] = " ",
+	["completion-and-snippets"] = " ",
+	["lazy.nvim"] = "󰒲 ",
+}
+
 -- goto plugin config, replaces telescope-lazy-plugins.nvim
 keymap("n", "g,", function()
+	local specRoot = require("lazy.core.config").options.spec.import
+	local function getModule(plugin)
+		local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
+			or plugin._.module
+		if not module then return "lazy.nvim" end
+		return module:sub(#specRoot + 1)
+	end
+
 	vim.ui.select(require("lazy").plugins(), {
 		prompt = "󰣖 Select Plugin:",
-		format_item = function(plugin) return vim.fs.basename(plugin[1]) end,
+		format_item = function(plugin)
+			local module = getModule(plugin):gsub("%..*", "")
+			vim.notify("👾 module: " .. tostring(module))
+			return (pluginTypeIcons[module] or "") .. vim.fs.basename(plugin[1])
+		end,
 	}, function(plugin)
 		if not plugin then return end
 		if plugin[1] == "folke/lazy.nvim" then
 			local pathOfThisFile = debug.getinfo(1).source:sub(2)
 			vim.cmd.edit(pathOfThisFile)
 		else
-			local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
-				or plugin._.module
-
-			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module:gsub("%.", "/") .. ".lua"
+			local module = getModule(plugin):gsub("%.", "/")
+			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
 			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
 			vim.cmd(("edit +/%q %s"):format(repo, filepath))
 		end

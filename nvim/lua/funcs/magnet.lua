@@ -1,11 +1,10 @@
 local M = {}
-local api = vim.api
 --------------------------------------------------------------------------------
 
 local config = {
 	currentFileIcon = "",
 	bufferByLastUsed = {
-		timeoutSecs = 4,
+		timeoutSecs = 3,
 		maxBufAgeMins = 15,
 	},
 	gotoChangedFiles = {
@@ -33,11 +32,11 @@ local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
 ---@return boolean
 local function hasAltFile(altBufnr)
 	if altBufnr < 0 then return false end
-	local valid = api.nvim_buf_is_valid(altBufnr)
-	local nonSpecial = api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
+	local valid = vim.api.nvim_buf_is_valid(altBufnr)
+	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
-	local altFileExists = fileExists(api.nvim_buf_get_name(altBufnr))
+	local altFileExists = fileExists(vim.api.nvim_buf_get_name(altBufnr))
 
 	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altFileExists
 end
@@ -46,7 +45,7 @@ end
 ---@nodiscard
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
 local function altOldfile()
-	local curPath = api.nvim_buf_get_name(0)
+	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
 		if fileExists(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
 			return path
@@ -67,17 +66,17 @@ function M.altFileStatus(maxDisplayLen)
 	local name, icon
 
 	if hasAltFile(altBufNr) then
-		local altPath = api.nvim_buf_get_name(altBufNr)
+		local altPath = vim.api.nvim_buf_get_name(altBufNr)
 		local altFile = vim.fs.basename(altPath)
 		name = altFile ~= "" and altFile or "[No Name]"
 		-- icon
 		local ext = altFile:match("%w+$")
-		local altBufFt = api.nvim_get_option_value("filetype", { buf = altBufNr })
+		local altBufFt = vim.api.nvim_get_option_value("filetype", { buf = altBufNr })
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		icon = ok and devicons.get_icon(altFile, ext or altBufFt) or "#"
 
 		-- name: consider if alt and current file have same basename
-		local curFile = vim.fs.basename(api.nvim_buf_get_name(0))
+		local curFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
 		local currentAndAltWithSameBasename = curFile == altFile
 		if currentAndAltWithSameBasename then
 			local altParent = vim.fs.basename(vim.fs.dirname(altPath))
@@ -130,7 +129,8 @@ function M.bufferByLastUsed(dir)
 	-- GET BUFFERS SORTED BY LAST ACCESS
 	-- timeout required, as switching to buffer always makes it the last accessed one
 	if state.timeoutTimer then state.timeoutTimer:stop() end
-	state.timeoutTimer = vim.defer_fn(function() state.bufsByLastAccess = nil end, opts.timeoutSecs)
+	local timeoutMs = opts.timeoutSecs * 1000
+	state.timeoutTimer = vim.defer_fn(function() state.bufsByLastAccess = nil end, timeoutMs)
 
 	if not state.bufsByLastAccess then
 		---@type {name: string, lastused: number}[]
@@ -176,8 +176,9 @@ function M.bufferByLastUsed(dir)
 		:map(function(buf)
 			local prefix = nextBufName == buf.name and config.currentFileIcon or "•"
 			local minsAgo = math.ceil((os.time() - buf.lastused) / 60)
-			local minStr = minsAgo == 0 and "" or tostring(minsAgo)
-			return ("%s %s (%s mins)"):format(prefix, vim.fs.basename(buf.name), minStr)
+			local name = vim.fs.basename(buf.name)
+			if minsAgo < 2 then return prefix .. " " .. name end
+			return ("%s %s (%s mins)"):format(prefix, name, minsAgo)
 		end)
 		:rev()
 		:totable()
@@ -193,10 +194,10 @@ function M.bufferByLastUsed(dir)
 		replace = state.bufNavNotify and state.bufNavNotify.id,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_call(
-				bufnr,
-				function() vim.fn.matchadd("Title", config.currentFileIcon .. ".*") end
-			)
+			vim.api.nvim_buf_call(bufnr, function()
+				vim.fn.matchadd("Title", config.currentFileIcon .. ".*")
+				vim.fn.matchadd("Comment", [[ (\d+ mins)]])
+			end)
 		end,
 	})
 end
