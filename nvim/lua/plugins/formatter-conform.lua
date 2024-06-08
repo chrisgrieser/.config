@@ -104,6 +104,7 @@ local function formattingFunc(bufnr)
 			}
 		end
 	end)
+	vim.cmd.update { bang = true }
 end
 
 --------------------------------------------------------------------------------
