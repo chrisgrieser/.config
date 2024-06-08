@@ -97,7 +97,7 @@ return {
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
-		ft = { "css", "scss", "sh", "lua" },
+		ft = { "css", "scss", "sh", "zsh", "lua" },
 		config = function(spec)
 			local ccc = require("ccc")
 

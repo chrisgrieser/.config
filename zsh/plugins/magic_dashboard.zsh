@@ -39,7 +39,7 @@ function _gitlog {
 				-e 's/tag: /  /g' \
 				-e 's/ -> /   /g' \
 				-e 's/\* /· /' \
-				-Ee $'s/ (release):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
+				-Ee $'s/ (release|bump):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
 				-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
@@ -118,7 +118,7 @@ function _magic_dashboard {
 	fi
 
 	# show dashboard
-	if git rev-parse --is-inside-work-tree &>/dev/null; then
+	if git rev-parse --is-inside-work-tree &> /dev/null; then
 		local max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 		_gitlog --max-count="$max_gitlog_lines"
 		_separator
@@ -148,7 +148,7 @@ function _magic_enter {
 
 # WRAPPER FOR THE ACCEPT-LINE ZLE WIDGET (RUN WHEN PRESSING ENTER)
 # If the wrapper already exists don't redefine it
-type _magic_enter_accept_line &>/dev/null && return
+type _magic_enter_accept_line &> /dev/null && return
 
 widget_name="accept-line" # need to put into variable so `shfmt` does not break it
 
