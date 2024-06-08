@@ -9,13 +9,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				if not (node and node:type() == "table_constructor") then return end
 
 				local currentLine = vim.api.nvim_get_current_line()
-				local emptyLine = currentLine:find("^%s*$")
-				local alreadyHasComma = currentLine:find(",%s*$")
-				local isComment = currentLine:find("%-%-")
-				local isOneLineTable = currentLine:find("%b{}")
-				if isComment or alreadyHasComma or emptyLine or isOneLineTable then return end
-
-				vim.api.nvim_set_current_line(currentLine .. ",")
+				local isFirstNonWhitespace = currentLine:find("^%s*%S$")
+				if isFirstNonWhitespace then vim.api.nvim_set_current_line(currentLine .. ",") end
 			end,
 		})
 	end,

@@ -112,6 +112,7 @@ return {
 					if vim.b.gitsigns_previous_changes then
 						require("gitsigns").reset_base()
 						u.notify("GitSigns", "Reset Base")
+						vim.b.gitsigns_previous_changes = false
 						return
 					end
 
@@ -141,5 +142,16 @@ return {
 				changedelete = { show_count = true },
 			},
 		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
+
+			u.addToLuaLine(
+				"tabline",
+				"lualine_x",
+				function() 
+					if vim.b.gitsigns_previous_changes
+				end
+			)
+		end,
 	},
 }

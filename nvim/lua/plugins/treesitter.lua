@@ -15,7 +15,7 @@ return {
 		highlight = {
 			enable = true,
 			-- disable on large files to prevent lag
-			disable = function(_, buf) return vim.api.nvim_buf_line_count(buf) > 8000 end,
+			disable = function(_, buf) return vim.api.nvim_buf_line_count(buf) > 5000 end,
 		},
 		indent = {
 			enable = true,
@@ -37,15 +37,11 @@ return {
 			move = { -- move to next function
 				enable = true,
 				set_jumps = true,
-				disable = { "markdown" }, -- using heading-jumping there
 			},
 			select = { -- textobj definitions
 				enable = true,
 				lookahead = true,
 				include_surrounding_whitespace = false,
-				-- markdown does not know most treesitter objects anyway, so disabling
-				-- there to be able to map other things
-				disable = { "markdown" },
 			},
 			lsp_interop = {
 				enable = true,
