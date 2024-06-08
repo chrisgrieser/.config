@@ -13,6 +13,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration, only used for shellcheck in zsh files
 	emmet_language_server = "emmet-language-server", -- css/html completions
+	css_variables = "css-variables-language-server",
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -59,8 +60,7 @@ serverConfigs.bashls = {
 	settings = {
 		bashIde = {
 			shellcheckPath = "", -- disable while using efm
-			-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			shellcheckArguments = "--shell=bash",
+			shellcheckArguments = "--shell=bash", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 			shfmt = { spaceRedirects = true },
 		},
 	},
@@ -180,6 +180,14 @@ serverConfigs.cssls = {
 			},
 		},
 	},
+}
+
+serverConfigs.css_variables = {
+	root_dir = function()
+		-- Add custom root markers for Obsidian snippet folders.
+		local markers = { ".project-root", ".git" }
+		return vim.fs.root(0, markers)
+	end,
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
