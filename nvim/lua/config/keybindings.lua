@@ -72,20 +72,24 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
 keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
+-- Snippets
+keymap("s", "<Tab>", function() vim.snippet.jump(1) end, { desc = "next placeholder" })
+keymap("s", "<S-Tab>", function() vim.snippet.jump(-1) end, { desc = "prev placeholder" })
+
 keymap("n", "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
 		vim.snippet.jump(1)
 	else
-		u.normal(">>")
+		return ">>"
 	end
-end, { desc = "󰉶 indent / next placeholder" })
+end, { desc = "󰉶 indent / next placeholder", expr = true })
 keymap("n", "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
 		vim.snippet.jump(-1)
 	else
-		u.normal("<<")
+		return "<<"
 	end
-end, { desc = "󰉵 outdent line / prev placeholder" })
+end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })

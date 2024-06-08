@@ -89,12 +89,13 @@ function M.themeModifications()
 		if mode == "dark" then revertedTodoComments() end
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
 	elseif theme == "everforest" then
+		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
 		updateHl("ErrorMsg", "gui=none") -- remove underline
 		overwriteHl("Red", { fg = "#cf7e7d" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c8b789" })
 		local commentColor = u.getHighlightValue("Comment", "fg")
-		overwriteHl("DiagnosticUnnecessary", { fg = commentColor, underline = true })
+		overwriteHl("DiagnosticUnnecessary", { fg = commentColor, underdashed = true })
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "monet" then
 		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
