@@ -1,9 +1,4 @@
 {
-	"DOCS": [
-		"https://code.visualstudio.com/api/language-extensions/snippet-guide",
-		"https://code.visualstudio.com/docs/editor/userdefinedsnippets",
-		"https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#vs-code"
-	],
 	"contributes": {
 		"snippets": [
 			{
@@ -31,11 +26,11 @@
 				"path": "./basic/css.json"
 			},
 			{
-				"language": ["sh", "just"],
+				"language": ["sh", "zsh", "just"],
 				"path": "./basic/sh.json"
 			},
 			{
-				"language": ["sh", "make"],
+				"language": ["sh", "zsh", "just"],
 				"path": "./basic/ansi-color-codes.json"
 			},
 			{

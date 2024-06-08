@@ -2,9 +2,6 @@
 # shellcheck disable=2154 # Alfred variables
 
 reminders delete "$reminder_list" "$id"
-reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow"
-
-msg=$(reminders delete "$reminder_list" "$id")
 echo "msg: $msg" >&2
 
 if [[ -n "$body" ]] ; then # empty body causes error

@@ -59,7 +59,6 @@ map("yt", "yT"); // duplicate tab in background
 
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
-map("p", "<Alt-p>"); // pin
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -86,10 +85,11 @@ map("-", "/");
 // Misc
 map("gi", "I"); // enter insert field
 map("i", "p"); // disable for one key
+map("p", "<Alt-p>"); // pin (INFO needs to be after mapping `i` to prevent recursion)
 map(",", ";e"); // Settings
 
 //──────────────────────────────────────────────────────────────────────────────
-// Insert Mode & ACE editor
+// INSERT MODE / ACE EDITOR
 
 aceVimMap("<CR>", ":wq"); // save and close
 aceVimMap("q", ":q!"); // abort
