@@ -48,8 +48,7 @@ local function winToTheSide()
 	if masto:isHidden() then masto:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	-- Ivory's main window is called "Home", Mona's the username
-	local win = masto:findWindow("Home") or masto:findWindow("pseudometa")
+	local win = masto:findWindow("Mona")
 	if win then
 		win:setFrame(wu.toTheSide)
 		win:raise()
@@ -58,7 +57,7 @@ end
 
 -- SHOW if referenceWin is pseudo-maximized or centered
 -- HIDE referenceWin belonging to app with transparent background is maximized
----@param referenceWin hs.window|nil
+---@param referenceWin hs.window
 local function showHideTickerApp(referenceWin)
 	-- GUARD
 	local masto = app("Mona")
@@ -81,11 +80,8 @@ end
 --------------------------------------------------------------------------------
 -- TRIGGERS
 
--- scroll
-hs.hotkey.bind({}, "home", scrollUp)
-
 -- Mona's autoscroll does not work reliably, therefore scrolling ourselves.
--- Only scrolling when not idle, to not prevent the machine going to sleep.
+-- Only scrolling when not idle, to not prevent the machine form going to sleep.
 local scrollEveryMins = 5 -- CONFIG
 M.timer_regularScroll = hs.timer
 	.doEvery(scrollEveryMins * 60, function()
@@ -96,24 +92,23 @@ M.timer_regularScroll = hs.timer
 M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
-	-- move scroll up
+	-- move & scroll up
 	if appName == "Mona" and (event == aw.launched or event == aw.activated) then
 		u.whenAppWinAvailable("Mona", function()
 			winToTheSide()
 			scrollUp()
 			wu.bringAllWinsToFront()
 
-			-- focus media window if there is one
-			local mediaWindow = masto:findWindow("Media") or masto:findWindow("Mona")
+			local mediaWindow = masto:findWindow("Media") or masto:findWindow("Compose")
 			if mediaWindow then mediaWindow:focus() end
 		end)
 
-		-- auto-close media windows and scroll up when deactivating
+	-- auto-close media windows and scroll up when deactivating
 	elseif appName == "Mona" and event == aw.deactivated then
 		closeMediaWindow()
 		u.runWithDelays(1.5, scrollUp) -- deferred, so multiple links can be clicked
 
-		-- raise when switching window to other app
+	-- raise when switching window to other app
 	elseif (event == aw.activated or event == aw.launched) and appName ~= "Mona" then
 		showHideTickerApp(hs.window.focusedWindow())
 	end

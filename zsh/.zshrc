@@ -1,4 +1,3 @@
-# vim: filetype=sh
 CONFIG_FILES=(
 	keybindings_and_vim_mode # must be loaded before starship, so vi-prompt is set correctly
 	load_plugins
@@ -25,6 +24,3 @@ for filename in "${CONFIG_FILES[@]}"; do
 	# shellcheck disable=1090
 	source "$ZDOTDIR/config/$filename.zsh"
 done
-
-# remove last login message that some terminals leave https://stackoverflow.com/a/69915614
-[[ "$TERM_PROGRAM" == "WezTerm" ]] || printf '\33c\e[3J'

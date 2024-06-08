@@ -89,6 +89,7 @@ function M.themeModifications()
 		if mode == "dark" then revertedTodoComments() end
 		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
 	elseif theme == "everforest" then
+		updateHl("ErrorMsg", "gui=none") -- remove underline
 		overwriteHl("Red", { fg = "#cf7e7d" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c8b789" })

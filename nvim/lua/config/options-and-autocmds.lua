@@ -65,13 +65,8 @@ autocmd("FileType", {
 -- FILETYPES
 
 vim.filetype.add {
-	extension = {
-		zsh = "sh",
-		sh = "sh", -- force sh-files with zsh-shebang to still get `sh` as filetype
-	},
-	filename = {
-		[".ignore"] = "gitignore", -- ignore files for fd/rg
-	},
+	-- ignore files for fd/rg
+	filename = { [".ignore"] = "gitignore" },
 }
 
 --------------------------------------------------------------------------------
@@ -88,10 +83,9 @@ opt.swapfile = false -- doesn't help and only creates useless files and notifica
 autocmd("FocusLost", {
 	once = true,
 	callback = function()
-		if os.date("%a") == "Mon" then
-			vim.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
-			vim.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
-		end
+		if os.date("%a") ~= "Mon" then return end
+		vim.system { "find", opt.viewdir:get(), "-mtime", "+60d", "-delete" }
+		vim.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
 	end,
 })
 
