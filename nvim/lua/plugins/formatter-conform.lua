@@ -1,6 +1,4 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
--- CONFIG 
+-- CONFIG
 -- formatting from conform.nvim
 local ftToFormatter = {
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
@@ -19,13 +17,9 @@ local lspFormatFt = {
 	"toml",
 	"yaml",
 	"sh",
+	"zsh",
 	"python",
 	"css",
-}
-
--- auto-indenting as poor man's formatter
-local autoIndentFt = {
-	"applescript",
 }
 
 --------------------------------------------------------------------------------
@@ -78,9 +72,6 @@ local function formattingFunc(bufnr)
 	-- parameters
 	local ft = vim.bo[bufnr].filetype
 	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "always" or false
-
-	-- PENDING https://github.com/stevearc/conform.nvim/issues/255
-	if vim.tbl_contains(autoIndentFt, ft) then u.normal("gg=G``") end
 
 	-- typescript: organize imports before
 	if ft == "typescript" then
