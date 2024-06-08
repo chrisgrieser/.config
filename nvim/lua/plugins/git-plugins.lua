@@ -86,33 +86,41 @@ return {
 				mode = { "n", "x" },
 				desc = "󰊢 Stage Hunk/Selection",
 			},
+			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{ "gh", "<cmd>Gitsigns next_hunk<CR>", desc = "󰊢 Next Hunk" },
+			{ "gH", "<cmd>Gitsigns prev_hunk<CR>", desc = "󰊢 Previous Hunk" },
+			{
+				"gh",
+				"<cmd>Gitsigns select_hunk<CR>",
+				mode = { "o", "x" },
+				desc = "󱡔 󰊢 Hunk textobj",
+			},
+			{
+				"<leader>g?",
+				function() require("gitsigns").blame_line { full = true } end,
+				desc = " Blame Line",
+			},
+
+			-- UNDO
+			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
+			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰊢 Unstage Buffer" },
+			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			{
 				"<leader>uh",
 				function() require("gitsigns").reset_hunk(nil, nil, updateLualineDiff) end,
 				mode = { "n", "x" },
 				desc = "󰊢 Reset Hunk",
 			},
-			-- stylua: ignore start
-			{ "gA", function() require("gitsigns").stage_buffer() end, desc = "󰊢 Add Buffer" },
-			{ "gh", function() require("gitsigns").next_hunk() end, desc = "󰊢 Next Hunk" },
-			{ "gH", function() require("gitsigns").prev_hunk() end, desc = "󰊢 Previous Hunk" },
-			{ "gh", function() require("gitsigns").select_hunk() end, mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" }, -- stylua: ignore end
-			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = " Blame Line" }, -- stylua: ignore end
 
-			-- undo,
-			{ "<leader>ua", function() require("gitsigns").undo_stage_hunk() end, desc = "󰊢 Unstage Last Stage" },
-			{ "<leader>uA", function() require("gitsigns").reset_buffer_index() end, desc = "󰊢 Unstage Buffer" },
-			{ "<leader>ub", function() require("gitsigns").reset_buffer() end, desc = "󰊢 Reset Buffer" },
-
-			{ "<leader>oi", function() require("gitsigns").toggle_deleted() end, desc = "󰊢 Inline Deletions" },
-			{ "<leader>o?", function() require("gitsigns").toggle_current_line_blame() end, desc = " Git Blame"},
-			-- stylua: ignore end
+			-- OPTIONS
+			{ "<leader>oi", "<cmd>Gitsigns toggle_deleted<CR>", desc = "󰊢 Inline Deletions" },
+			{ "<leader>o?", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = " Git Blame" },
 			{
 				"<leader>op",
 				function()
 					if vim.b.gitsigns_previous_changes then
 						require("gitsigns").reset_base()
-						u.notify("GitSigns", "Reset Base")
+						u.notify("Gitsigns", "Reset Base")
 						vim.b.gitsigns_previous_changes = false
 						return
 					end
@@ -121,11 +129,10 @@ return {
 					local gitArgs = { "git", "log", "-1", "--format=%h", "--", file }
 					local out = vim.system(gitArgs):wait()
 					assert(out.code == 0, "git log failed")
-
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsigns_previous_changes = true
-					u.notify("GitSigns", "Changed base to " .. lastCommitToFile)
+					u.notify("Gitsigns", "Changed base to " .. lastCommitToFile)
 				end,
 				desc = "󰊢 Previous/Present Changes",
 			},

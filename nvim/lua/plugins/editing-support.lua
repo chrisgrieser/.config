@@ -54,18 +54,11 @@ return {
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
 		keys = {
-			{
-				"<leader>fs",
-				function() require("rip-substitute").sub() end,
-				mode = { "n", "x" },
-				desc = " rip substitute",
-			},
+			-- stylua: ignore
+			{ "<leader>fs", function() require("rip-substitute").sub() end, mode = { "n", "x" }, desc = " rip substitute" },
 		},
 		opts = {
-			popupWin = {
-				width = 40,
-				border = vim.g.borderStyle,
-			},
+			popupWin = { width = 45, border = vim.g.borderStyle },
 		},
 	},
 	{ -- refactoring utilities

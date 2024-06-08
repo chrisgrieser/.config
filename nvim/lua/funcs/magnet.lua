@@ -5,7 +5,7 @@ local api = vim.api
 local config = {
 	currentFileIcon = "",
 	bufferByLastUsed = {
-		timeout = 4000,
+		timeoutSecs = 4,
 		maxBufAgeMins = 15,
 	},
 	gotoChangedFiles = {
@@ -15,7 +15,6 @@ local config = {
 local pluginName = "Magnet"
 
 --------------------------------------------------------------------------------
-
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -131,7 +130,7 @@ function M.bufferByLastUsed(dir)
 	-- GET BUFFERS SORTED BY LAST ACCESS
 	-- timeout required, as switching to buffer always makes it the last accessed one
 	if state.timeoutTimer then state.timeoutTimer:stop() end
-	state.timeoutTimer = vim.defer_fn(function() state.bufsByLastAccess = nil end, config.timeout)
+	state.timeoutTimer = vim.defer_fn(function() state.bufsByLastAccess = nil end, opts.timeoutSecs)
 
 	if not state.bufsByLastAccess then
 		---@type {name: string, lastused: number}[]
@@ -194,7 +193,10 @@ function M.bufferByLastUsed(dir)
 		replace = state.bufNavNotify and state.bufNavNotify.id,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
-			vim.api.nvim_buf_call(bufnr, function() vim.fn.matchadd("Title", config.currentFileIcon .. ".*") end)
+			vim.api.nvim_buf_call(
+				bufnr,
+				function() vim.fn.matchadd("Title", config.currentFileIcon .. ".*") end
+			)
 		end,
 	})
 end
