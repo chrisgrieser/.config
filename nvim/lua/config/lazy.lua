@@ -47,8 +47,16 @@ require("lazy").setup("plugins", {
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
 				-- stylua: ignore
-				"matchparen", "matchit", "netrwPlugin", "man", "tutor",
-				"health", "tohtml", "gzip", "zipPlugin", "tarPlugin",
+				"matchparen",
+				"matchit",
+				"netrwPlugin",
+				"man",
+				"tutor",
+				"health",
+				"tohtml",
+				"gzip",
+				"zipPlugin",
+				"tarPlugin",
 			},
 		},
 	},
@@ -102,6 +110,12 @@ keymap("n", "g,", function()
 		if not module then return "lazy.nvim" end
 		return module:sub(#specRoot + 2)
 	end
+
+	vim.api.nvim_create_autocmd("FileType", {
+		once = true,
+		pattern = "TelescopeResults",
+		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
+	})
 
 	vim.ui.select(require("lazy").plugins(), {
 		prompt = "󰣖 Select Plugin:",
