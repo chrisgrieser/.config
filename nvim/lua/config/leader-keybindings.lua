@@ -33,6 +33,8 @@ keymap("n", "<leader>ib", function()
 		"cwd: " .. (vim.uv.cwd() or "n/a"):gsub("/Users/%w+", "~"),
 		("indent: %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
 	}
+	local ok, node = pcall(vim.treesitter.get_node)
+	if ok and node then table.insert(out, "node: " .. node:type()) end
 	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
 end, { desc = "󰽙 Buffer Info" })
 

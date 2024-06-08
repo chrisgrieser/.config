@@ -26,15 +26,16 @@ unmap("j", /google/); // websearch navigator
 unmap("k", /google/);
 unmap("c", /google/); // Grepper
 
-unmap("f", /crunchyroll/); // BetterTouchTool Double-Click Hack
+unmap("f", /crunchyroll/);
+unmap("n", /crunchyroll/);
+unmap("N", /crunchyroll/);
 
-// unmap("?", /github.com/); // cheatsheet for github shortcuts
-// unmap("?", /reddit.com/); // cheatsheet for reddit shortcuts
+// have site-specific cheatsheets
+unmap("?", /github\.com/);
+unmap("?", /reddit\.com/);
+unmap("?", /devdocs\.io/);
 
 //──────────────────────────────────────────────────────────────────────────────
-// Mappings
-
-// Navigation & History
 
 // HJKL SCROLL MOVEMENTS
 settings.scrollStepSize = 300;
@@ -45,10 +46,16 @@ map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
+//──────────────────────────────────────────────────────────────────────────────
+
 // WASD TAB MOVEMENTS
 map("w", "x"); // close tab
 map("m", "x"); // close tab
-map("s", "x"); // TODO yank & close
+mapkey("s", "Copy URL & close tab", async () => {
+	const url = window.location.href;
+	await navigator.clipboard.writeText(url);
+	window.close();
+});
 map("a", "E"); // goto tab right
 map("d", "R"); // goto tab left
 map("A", "<<"); // move tab to the left
@@ -60,24 +67,40 @@ map("yt", "yT"); // duplicate tab in background
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
 
-//──────────────────────────────────────────────────────────────────────────────
-
-map("<C-v>", "W"); // move tab to new window (vsplit with Hammerspoon)
-map("M", ";gw"); // merge all windows
-
 map("t", "T"); // choose tab via hint
 // higher than this threshold, fuzzy find instead -> 1 -> always use fuzzy finder
 settings.tabsThreshold = 1;
 
+//──────────────────────────────────────────────────────────────────────────────
+
+// WINDOW
+map("<C-v>", "W"); // move tab to new window (vsplit with Hammerspoon)
+map("M", ";gw"); // merge all windows
+
+
 // Links
 map("F", "C"); // Open Hint in new tab
-map("yf", "ya"); // yank a link
-map("ge", ";U"); // Edit current URL
+map("c", ";U"); // Edit current URL
 
 // yank & clipboard
+map("o", "cc"); // open URL from clipboard or selection
+map("yf", "ya"); // yank a link
 map("ye", "yv"); // yank text of an element
 map("yw", "yY"); // yank all tabs in window
-map("o", "cc"); // open URL from clipboard or selection
+mapkey("ym", "Copy Markdown Link", () => {
+	const mdLink = `[${document.title}](${window.location.href})`;
+	navigator.clipboard.writeText(mdLink);
+});
+mapkey("yg", "Copy GitHub Link", () => {
+	const url = window.location.href;
+	if (url.startsWith("https://github.com/")) {
+		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+		if (!repo) return;
+		navigator.clipboard.writeText(repo);
+	} else {
+		alert("Not at GitHub.");
+	}
+});
 
 // find
 map("-", "/");
