@@ -46,16 +46,9 @@ require("lazy").setup("plugins", {
 			-- Disable unused builtin plugins from neovim
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
-				"matchparen",
-				"matchit",
-				"netrwPlugin",
-				"man",
-				"tutor",
-				"health",
-				"tohtml",
-				"gzip",
-				"zipPlugin",
-				"tarPlugin",
+				-- stylua: ignore
+				"matchparen", "matchit", "netrwPlugin", "man", "tutor",
+				"health", "tohtml", "gzip", "zipPlugin", "tarPlugin",
 			},
 		},
 	},
@@ -81,14 +74,23 @@ keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 local pluginTypeIcons = {
-	["editing-support"] = " ",
+	["editing-support"] = "󰏫 ",
 	["appearance"] = " ",
 	["lsp-plugins"] = "󰒕 ",
-	["ai-pluins"] = "󰚩 ",
-	["git-plugins"] = "󰊢",
+	["lsp-config"] = "󰒕 ",
+	["ai-plugins"] = "󰚩 ",
+	["git-plugins"] = "󰊢 ",
 	["debugger-dap"] = " ",
+	["treesitter"] = " ",
+	["formatter-conform"] = "󰉿 ",
 	["completion-and-snippets"] = " ",
 	["lazy.nvim"] = "󰒲 ",
+	["themes"] = " ",
+	["noice-and-notification"] = "󰎟 ",
+	["folding"] = "󰘖 ",
+	["mason"] = " ",
+	["motions-and-textobjects"] = "󱡔 ",
+	["telescope-config"] = "󰭎 ",
 }
 
 -- goto plugin config, replaces telescope-lazy-plugins.nvim
@@ -98,15 +100,14 @@ keymap("n", "g,", function()
 		local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
 			or plugin._.module
 		if not module then return "lazy.nvim" end
-		return module:sub(#specRoot + 1)
+		return module:sub(#specRoot + 2)
 	end
 
 	vim.ui.select(require("lazy").plugins(), {
 		prompt = "󰣖 Select Plugin:",
 		format_item = function(plugin)
-			local module = getModule(plugin):gsub("%..*", "")
-			vim.notify("👾 module: " .. tostring(module))
-			return (pluginTypeIcons[module] or "") .. vim.fs.basename(plugin[1])
+			local icon = pluginTypeIcons[getModule(plugin)] or "󰣖 "
+			return icon .. vim.fs.basename(plugin[1])
 		end,
 	}, function(plugin)
 		if not plugin then return end
@@ -115,12 +116,12 @@ keymap("n", "g,", function()
 			vim.cmd.edit(pathOfThisFile)
 		else
 			local module = getModule(plugin):gsub("%.", "/")
-			local filepath = vim.fn.stdpath("config") .. "/lua/" .. module .. ".lua"
+			local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
 			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
 			vim.cmd(("edit +/%q %s"):format(repo, filepath))
 		end
 	end)
-end, { desc = "󰣖 Goto Plugin Config" })
+end, { desc = "󰒲 Goto Plugin Config" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS

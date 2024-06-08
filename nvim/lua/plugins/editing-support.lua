@@ -59,6 +59,7 @@ return {
 		},
 		opts = {
 			popupWin = { width = 45, border = vim.g.borderStyle },
+			prefill = { normal = "treesitterNode" },
 		},
 	},
 	{ -- refactoring utilities

@@ -291,7 +291,7 @@ return {
 		end,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
-			{ "g.", function() telescope("resume") end, desc = " Continue" },
+			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
 			{
 				"gw",
 				function() telescope("lsp_dynamic_workspace_symbols") end,
@@ -301,10 +301,10 @@ return {
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
-			{ "<leader>gs", function() telescope("git_status") end, desc = " Status" },
-			{ "<leader>gl", function() telescope("git_commits") end, desc = " Log" },
-			{ "<leader>gL", function() telescope("git_bcommits") end, desc = " Buffer Commits" },
-			{ "<leader>gb", function() telescope("git_branches") end, desc = " Branches" },
+			{ "<leader>gs", function() telescope("git_status") end, desc = "󰭎 Status" },
+			{ "<leader>gl", function() telescope("git_commits") end, desc = "󰭎 Log" },
+			{ "<leader>gL", function() telescope("git_bcommits") end, desc = "󰭎 Buffer Commits" },
+			{ "<leader>gb", function() telescope("git_branches") end, desc = "󰭎 Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
 				"go",
@@ -337,7 +337,7 @@ return {
 						sorter = mySorter,
 					}
 				end,
-				desc = " Open File",
+				desc = "󰭎 Open File",
 			},
 			{
 				"gr",
@@ -349,7 +349,7 @@ return {
 					vim.list_extend(vim.v.oldfiles, openBufs)
 					telescope("oldfiles")
 				end,
-				desc = " Recent Files",
+				desc = "󰭎 Recent Files",
 			},
 			{
 				"gl",
@@ -358,7 +358,7 @@ return {
 						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
-				desc = " Live-Grep",
+				desc = "󰭎 Live-Grep",
 			},
 			{
 				"gL",
@@ -368,7 +368,7 @@ return {
 						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
-				desc = " Grep cword",
+				desc = "󰭎 Grep cword",
 			},
 			{
 				"gL",
@@ -381,7 +381,7 @@ return {
 					}
 				end,
 				mode = "x",
-				desc = " Grep selection",
+				desc = "󰭎 Grep selection",
 			},
 			{
 				"<leader>pc",
@@ -423,7 +423,7 @@ return {
 						layout_config = { horizontal = { width = 0.35 } },
 					}
 				end,
-				desc = " Icon Picker",
+				desc = "󰭎 Icon Picker",
 			},
 		},
 	},
