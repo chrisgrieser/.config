@@ -57,6 +57,7 @@ local extraDependencies = {
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 serverConfigs.bashls = {
+	filetypes = { "sh", "zsh", "bash" }, -- for to work in other shells
 	settings = {
 		bashIde = {
 			shellcheckPath = "", -- disable while using efm

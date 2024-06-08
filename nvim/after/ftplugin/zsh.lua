@@ -7,6 +7,3 @@ abbr("delay", "sleep")
 abbr("const", "local")
 
 --------------------------------------------------------------------------------
-
--- fix some shell-filetypes like zsh override makeprg
-vim.opt_local.makeprg = "just"
