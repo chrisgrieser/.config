@@ -204,3 +204,4 @@ fixups
 viewport
 cursorline
 diffview
+Justfile
