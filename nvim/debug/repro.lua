@@ -1,28 +1,28 @@
 local plugins = {
+	-- { "folke/lazydev.nvim", ft = "lua", opts = true },
 	{
-		"folke/noice.nvim",
-		dependencies = "MunifTanjim/nui.nvim",
-		opts = {
-			cmdline = {
-				view = "cmdline_popup",
-				format = {
-					search_down = { view = "cmdline" },
+		"neovim/nvim-lspconfig",
+		dependencies = "folke/neodev.nvim",
+		config = function()
+			require("lspconfig").lua_ls.setup {}
+			require("lspconfig").ltex.setup {
+				settings = {
+					ltex = { dictionary = { ["en-US"] = "Neovim" } },
 				},
-			},
-			-- cmdline = {
-			-- 	view = "cmdline",
-			-- 	format = {
-			-- 		search_down = { view = "cmdline" },
-			-- 	},
-			-- },
+			}
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim", opts = true },
+		opts = {
+			ensure_installed = { "lua-language-server", "ltex-ls" },
+			run_on_start = true,
 		},
 	},
 }
 
-vim.fn.serverstart("/tmp/nvim_debug.pipe")
-
 --------------------------------------------------------------------------------
-
 for _, name in ipairs { "config", "data", "state", "cache" } do
 	vim.env[("XDG_%s_HOME"):format(name:upper())] = "/tmp/nvim-debug/" .. name
 end

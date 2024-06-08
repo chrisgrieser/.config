@@ -245,12 +245,33 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://archive.is/{query}</string>
+				<string>https://www.google.com/search?q={query}+%28site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com&amp;tbs=cdr%3A1%2Ccd_min%3A7%2F1%2F2008%2Ccd_max%3A1%2F1%2F2017&amp;tbm=nws</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
+			<string>D53A0E7D-850C-4408-B359-3B06044A2B53</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tn</string>
+				<key>subtext</key>
+				<string>for PhD data collection</string>
+				<key>text</key>
+				<string>Technews: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -266,12 +287,60 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://www.google.com/search?q={query}+%28site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com&amp;tbs=cdr%3A1%2Ccd_min%3A7%2F1%2F2008%2Ccd_max%3A1%2F1%2F2017&amp;tbm=nws</string>
+				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com)&amp;tbm=nws</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D53A0E7D-850C-4408-B359-3B06044A2B53</string>
+			<string>9AF5FC82-E4A2-42CC-804B-A39ABE37D2D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:search_logfile}</string>
+				<key>filetext</key>
+				<string>- {isodate:yyyy-MM-dd HH:mm}: {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://archive.is/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -335,48 +404,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>tn</string>
-				<key>subtext</key>
-				<string>for PhD data collection</string>
-				<key>text</key>
-				<string>Technews: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com)&amp;tbm=nws</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>9AF5FC82-E4A2-42CC-804B-A39ABE37D2D6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -395,33 +422,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>{var:search_logfile}</string>
-				<key>filetext</key>
-				<string>- {isodate:yyyy-MM-dd HH:mm}: {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -434,9 +434,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>520</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>20</real>
 		</dict>
 		<key>34D06877-D7F7-4591-B8B4-E6D3ABB5C332</key>
 		<dict>
@@ -445,27 +445,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>close the browser tab</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>20</real>
 		</dict>
 		<key>5F0950F7-E1AC-422C-8F2E-82518BF9F068</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>200</real>
+			<real>510</real>
 		</dict>
 		<key>6935998C-ACB6-4719-94AE-24E7616DB283</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>740</real>
 		</dict>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<dict>
@@ -474,7 +474,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>300</real>
 		</dict>
 		<key>9AF5FC82-E4A2-42CC-804B-A39ABE37D2D6</key>
 		<dict>
@@ -485,34 +485,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>300</real>
 		</dict>
 		<key>BDEB1461-F077-4DDB-92C1-1A15067325D1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>220</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>20</real>
 		</dict>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>660</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>625</real>
 		</dict>
 		<key>D37D24AA-2684-4983-94DF-C099102D3C28</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>625</real>
 		</dict>
 		<key>D53A0E7D-850C-4408-B359-3B06044A2B53</key>
 		<dict>
@@ -523,7 +523,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>170</real>
 		</dict>
 		<key>EDCF7445-7018-43F6-A236-C9766D2A4F07</key>
 		<dict>
@@ -532,9 +532,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>Slurp</string>
 			<key>xpos</key>
-			<real>65</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>70</real>
+			<real>20</real>
 		</dict>
 		<key>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</key>
 		<dict>
@@ -543,9 +543,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>try to skip paywall</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>35</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>625</real>
 		</dict>
 		<key>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</key>
 		<dict>
@@ -556,7 +556,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>435</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
