@@ -146,11 +146,14 @@ return {
 			require("gitsigns").setup(opts)
 
 			u.addToLuaLine(
-				"tabline",
-				"lualine_x",
-				function() 
-					if vim.b.gitsigns_previous_changes
-				end
+				"sections",
+				"lualine_y", -- same section as diff count
+				{
+					function() return "" end,
+					cond = function() return vim.b.gitsigns_previous_changes end,
+					color = function() return { fg = u.getHighlightValue("Boolean", "fg") } end,
+				},
+				"before"
 			)
 		end,
 	},

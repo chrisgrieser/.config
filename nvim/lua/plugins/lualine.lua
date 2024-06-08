@@ -116,7 +116,7 @@ local lualineConfig = {
 					return curBranch ~= "main" and curBranch ~= "master"
 				end,
 			},
-			{ -- VENV indicator
+			{ -- .venv indicator
 				function() return "󱥒" end,
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 				padding = { left = 1, right = 0 },

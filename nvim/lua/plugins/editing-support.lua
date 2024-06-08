@@ -4,10 +4,10 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 
 return {
 	{
+		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 		"altermo/ultimate-autopair.nvim",
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
-		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 		opts = {
 			bs = {
 				space = "balance",
@@ -24,16 +24,22 @@ return {
 			space2 = { enable = true },
 			extensions = {
 				cond = { -- global conditions
-					-- `f` contains builtin conditions https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
-					cond = function(f) return not f.in_macro() end,
+					-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
+					cond = function(builtinConds) return not builtinConds.in_macro() end,
 				},
 			},
 
 			-- SIC custom keys need to be "appended" to the opts as a list
-			{ "<", ">", ft = { "vim", "lua", "html" } }, -- keymaps & tags
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
+			{ "<", ">", ft = { "vim" } },
+			{ -- keymaps like `<C-a>`
+				"<",
+				">",
+				ft = { "lua" },
+				cond = function(builtinsConds) return builtinsConds.in_string() end,
+			},
 			{ -- scope for commit messages
 				"(",
 				"): ",
@@ -262,7 +268,7 @@ return {
 		},
 		config = function(_, opts)
 			local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }
-			local curleyLessIfStatementJoin = {
+			local joinWithoutCurly = {
 				-- remove curly brackets in js when joining if statements https://github.com/Wansmer/treesj/issues/150
 				statement_block = {
 					join = {
@@ -289,8 +295,8 @@ return {
 				rst = { paragraph = gww }, -- python docstrings (when rsg is injected)
 				comment = { source = gww, element = gww }, -- comments in any language
 				jsdoc = { source = gww, description = gww },
-				javascript = curleyLessIfStatementJoin,
-				typescript = curleyLessIfStatementJoin,
+				javascript = joinWithoutCurly,
+				typescript = joinWithoutCurly,
 			}
 			require("treesj").setup(opts)
 		end,
@@ -360,7 +366,7 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
 		opts = {
-			marker = "⭕",
+			marker = "👾",
 			logStatements = {
 				objectLog = {
 					-- repurposing objectLog for debugging via AppleScript notification

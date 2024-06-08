@@ -225,7 +225,6 @@ local function telescopeConfig()
 				include_current_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
-				file_ignore_patterns = specialDirs
 			},
 			lsp_definitions = {
 				prompt_prefix = "󰈿 ",
@@ -233,7 +232,6 @@ local function telescopeConfig()
 				show_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
-				file_ignore_patterns = specialDirs
 			},
 			lsp_type_definitions = {
 				prompt_prefix = "󰜁 ",
@@ -241,7 +239,6 @@ local function telescopeConfig()
 				show_line = false,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
-				file_ignore_patterns = specialDirs
 			},
 			lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
 				prompt_prefix = "󰒕 ",
@@ -400,7 +397,7 @@ return {
 					}
 					local originalFunc = vim.fn.getcompletion
 
-					vim.fn.getcompletion = function() 
+					vim.fn.getcompletion = function() ---@diagnostic disable-line: duplicate-set-field
 						return vim.tbl_filter(
 							function(color) return not vim.tbl_contains(builtins, color) end,
 							originalFunc("", "color") ---@diagnostic disable-line: redundant-parameter
@@ -419,7 +416,7 @@ return {
 		keys = {
 			{
 				"<C-.>",
-				mode = { "n", "i" },
+				mode = "i",
 				function()
 					require("telescope.builtin").symbols {
 						sources = { "nerd", "math", "emoji" },
