@@ -1,5 +1,2 @@
-local it = vim.iter({ 3, 6, 9, 12 })
-vim.notify("⭕ it: " .. vim.inspect(it:totable()))
-local f = it:find(6)
-vim.notify("⭕ it: " .. vim.inspect(it:totable()))
-vim.notify("⭕ f: " .. vim.inspect(f))
+local p = require("lazy.core.config").options.spec.import
+vim.notify("👾 p: " .. vim.inspect(p))
