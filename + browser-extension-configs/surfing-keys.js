@@ -14,37 +14,54 @@ const banner = api.Front.showBanner;
 settings.richHintsForKeystroke = 500; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
 settings.enableEmojiInsertion = true;
-settings.startToShowEmoji = 1; // length of chars to show emojis (acemode)
-settings.modeAfterYank = "normal";
+settings.modeAfterYank = "normal"; // = leave visual mode after yanking
 
 settings.caseSensitive = false;
 settings.smartCase = true;
 
-Hints.style("font-family: Arial; font-size: 12px;");
-
 // disable surfingkey's pdf viewer
 // chrome.storage.local.set({ noPdfViewer: 1 });
 
+settings.startToShowEmoji = 0;
+api.iunmap(":", /github\.com/); // disable emojis on GitHub, since they already have them
+
 //──────────────────────────────────────────────────────────────────────────────
 // THEME
+
+Hints.style("font-family: Arial; font-size: 12px;");
+
+// cssclasses: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/ui/frontend.css
 settings.theme = `
-    #sk_status, #sk_find {
-        font-size: 20pt;
-    }
+   #sk_status, #sk_find {
+      font-size: 1.2rem;
+   }
+	#sk_banner {
+		top: unset !important;
+		left: unset !important;
+		width: unset !important;
+		right: 0.7rem;
+		bottom: 0.7rem;
+		height: 1.2rem;
+		font-size: 1rem;
+		border-radius: 8px !important;
+		border-top-style: solid !important;
+	}
 }`;
 
 //──────────────────────────────────────────────────────────────────────────────
 // IGNORE LIST
 
-unmap("j", /google/); // websearch navigator
+// websearch navigator
+unmap("j", /google/);
 unmap("k", /google/);
 unmap("c", /google/); // Grepper
 
-unmap("f", /crunchyroll/);
+// for BetterTouchTool Mappings
+unmap("f", /crunchyroll|animeflix/);
 unmap("n", /crunchyroll/);
 unmap("N", /crunchyroll/);
 
-// have site-specific cheatsheets
+// site-specific cheatsheets
 unmap("?", /github\.com/);
 unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
@@ -125,6 +142,9 @@ mapkey("yg", "Copy GitHub Link", async () => {
 
 // find
 map("-", "/");
+map("n", "n<Esc>"); // do not enter visual mode when searching https://github.com/brookhong/Surfingkeys/issues/1928
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // Misc
 map("P", "oi"); // private window (incognito)
