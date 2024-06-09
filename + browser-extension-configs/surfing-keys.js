@@ -1,10 +1,10 @@
 // @ts-nocheck
 // DOCS https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 // EXAMPLE configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
+// DEFAULT mappings: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Hints, imap, map, mapkey, unmap, aceVimMap } = api;
-
+const { Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -101,7 +101,7 @@ map("yt", "yT"); // duplicate tab in background
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
 
-mapkey("t", "Choose a tab", () => api.Front.openOmnibar({ type: "Tabs" }));
+mapkey("t", "Choose a tab", () => Front.openOmnibar({ type: "Tabs" }));
 settings.tabsMRUOrder = false;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -140,9 +140,14 @@ mapkey("yg", "Copy GitHub Link", async () => {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// find
+// FIND
 map("-", "/");
-map("n", "n<Esc>"); // do not enter visual mode when searching https://github.com/brookhong/Surfingkeys/issues/1928
+
+// do not enter visual mode when searching https://github.com/brookhong/Surfingkeys/issues/1928
+mapkey("n", "Find Next", () => {
+	api.Visual.next(false);
+	// api.Visual.feedkeys("n<Esc>");
+});
 
 //──────────────────────────────────────────────────────────────────────────────
 
