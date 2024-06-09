@@ -16,7 +16,6 @@ vim.g.mapleader = ","
 vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"|"solid"|"none"
 
 vim.g.linterConfigs = vim.fs.normalize("~/.config/+ linter-configs/")
-vim.g.dictionaryFile = vim.g.linterConfigs .. "/spellfile-vim-ltex.add"
 vim.g.syncedData = vim.env.DATA_DIR .. "/vim-data/"
 vim.g.localRepos = vim.fs.normalize("~/repos")
 

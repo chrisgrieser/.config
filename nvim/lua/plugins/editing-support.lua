@@ -28,6 +28,9 @@ return {
 					cond = function(builtinConds) return not builtinConds.in_macro() end,
 				},
 			},
+			config_internal_pairs = {
+				{ "'", "'", nft = { "md" } }, -- mostly used as apostroph in markdown
+			},
 
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics

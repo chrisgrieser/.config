@@ -13,12 +13,13 @@ return {
 	},
 	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
 	{ "Bilal2453/luvit-meta", lazy = true },
+	-----------------------------------------------------------------------------
 	{
 		"ravibrock/spellwarn.nvim",
 		ft = { "markdown" },
 		keys = { "zg" },
 		opts = {
-			event = { "TextChanged", "TextChangedI", "BufEnter" },
+			event = { "TextChanged", "TextChangedI", "BufEnter", "FileType" },
 			ft_default = false,
 			ft_config = {},
 			prefix = "",
