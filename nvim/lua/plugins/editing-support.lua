@@ -17,7 +17,7 @@ return {
 				map = "<D-f>",
 				hopout = true,
 				nocursormove = true,
-				multiline = true,
+				multiline = false,
 			},
 			cr = { autoclose = true },
 			space = { enable = true },
@@ -29,7 +29,7 @@ return {
 				},
 			},
 			config_internal_pairs = {
-				{ "'", "'", nft = { "md" } }, -- mostly used as apostroph in markdown
+				{ "'", "'", nft = { "markdown" } }, -- disable in markdown, since used as apostroph
 			},
 
 			-- SIC custom keys need to be "appended" to the opts as a list
@@ -63,6 +63,7 @@ return {
 		opts = {
 			popupWin = { width = 45, border = vim.g.borderStyle },
 			prefill = { normal = "treesitterNode" },
+			incrementalPreview = { replacementDisplay = "overlay" },
 		},
 	},
 	{ -- refactoring utilities
