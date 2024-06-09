@@ -1,10 +1,11 @@
 // @ts-nocheck
+// DOCS https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 // EXAMPLE configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore format: unwieldy
-// biome-ignore lint/correctness/noUnusedVariables: just to list them all
-const { Hints, imap, imapkey, map, mapkey, removeSearchAlias, unmap, unmapAllExcept, vmapkey, vunmap, aceVimMap } = api;
+const { Hints, imap, map, mapkey, unmap, aceVimMap } = api;
+
+const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
 // SETTINGS
@@ -23,6 +24,14 @@ Hints.style("font-family: Arial; font-size: 12px;");
 
 // disable surfingkey's pdf viewer
 // chrome.storage.local.set({ noPdfViewer: 1 });
+
+//──────────────────────────────────────────────────────────────────────────────
+// THEME
+settings.theme = `
+    #sk_status, #sk_find {
+        font-size: 20pt;
+    }
+}`;
 
 //──────────────────────────────────────────────────────────────────────────────
 // IGNORE LIST
@@ -61,6 +70,7 @@ map("m", "x"); // close tab
 mapkey("s", "Copy URL & close tab", async () => {
 	const url = window.location.href;
 	await navigator.clipboard.writeText(url);
+	banner("Copied: " + url);
 	window.close();
 });
 map("a", "E"); // goto tab right
@@ -74,9 +84,8 @@ map("yt", "yT"); // duplicate tab in background
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
 
-map("t", "T"); // choose tab via hint
-// higher than this threshold, fuzzy find instead -> 1 -> always use fuzzy finder
-settings.tabsThreshold = 1;
+mapkey("t", "Choose a tab", () => api.Front.openOmnibar({ type: "Tabs" }));
+settings.tabsMRUOrder = false;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -95,18 +104,20 @@ map("o", "cc"); // open URL from clipboard or selection
 map("yf", "ya"); // yank a link
 map("ye", "yv"); // yank text of an element
 map("yw", "yY"); // yank all tabs in window
-mapkey("ym", "Copy Markdown Link", () => {
+mapkey("ym", "Copy Markdown Link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
-	navigator.clipboard.writeText(mdLink);
+	await navigator.clipboard.writeText(mdLink);
+	banner("Copied: " + mdLink);
 });
-mapkey("yg", "Copy GitHub Link", () => {
+mapkey("yg", "Copy GitHub Link", async () => {
 	const url = window.location.href;
 	if (url.startsWith("https://github.com/")) {
 		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
 		if (!repo) return;
-		navigator.clipboard.writeText(repo);
+		await navigator.clipboard.writeText(repo);
+		banner("Copied: " + repo);
 	} else {
-		alert("Not at GitHub.");
+		banner("Not at GitHub.");
 	}
 });
 
