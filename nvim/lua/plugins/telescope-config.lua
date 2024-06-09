@@ -22,6 +22,25 @@ local specialDirs = {
 	"EmmyLua.spoon", -- Hammerspoon
 }
 
+-- FILETYPE-SPECIFIC SYMBOL-SEARCH
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(ctx)
+		local symbolFilter = {
+			yaml = { "object", "array" },
+			json = "module",
+			toml = "object",
+			markdown = "string", -- string = headings in markdown files
+		}
+		local filter = symbolFilter[ctx.match]
+		if not filter then return end
+
+		vim.keymap.set("n", "gs", function()
+			local opts = { prompt_prefix = "󰒕 ", symbols = filter }
+			require("telescope.builtin").lsp_document_symbols(opts)
+		end, { desc = "󰒕 Symbols", buffer = ctx.buf })
+	end,
+})
+
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -216,6 +235,14 @@ local function telescopeConfig()
 					i = { ["<CR>"] = keymaps.copyColorValue },
 				},
 			},
+			lsp_document_symbols = {
+				prompt_prefix = "󰒕 ",
+				-- stylua: ignore
+				ignore_symbols = {
+					"variable", "constant", "number", "package", "string",
+					"object", "array", "boolean", "property",
+				},
+			},
 			lsp_references = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
@@ -292,6 +319,7 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
+			{ "gs", function() telescope("lsp_document_symbols") end, desc = "󰒕 Symbols" },
 			-- stylua: ignore
 			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
