@@ -1,10 +1,11 @@
-// Add globals surfing-keys.js
+// Add globals for surfing-keys
 //──────────────────────────────────────────────────────────────────────────────
 
 {
 	"extends": ["../biome.jsonc"],
 
 	"javascript": {
+		// https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md#frontshoweditor
 		"globals": [
 			"api",
 			"chrome",
@@ -14,6 +15,7 @@
 
 	"linter": {
 		"rules": {
+			// not useful here
 			"nursery": { "useTopLevelRegex": "off" }
 		}
 	},

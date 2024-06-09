@@ -17,11 +17,11 @@ matches:
   #───────────────────────────────────────────────────────────────────────────
   - trigger: "!bug"
     replace: >
-      Could you open a bug report at the GitHub repo?  Reason being that the bug report forms asks for
-      various information  I need to investigate the issue.  (Also, I don't have the time to look into it
+      Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for
+      various information. I need to investigate the issue. (Also, I don't have the time to look into it
       right now, so a bug report will make sure that I can keep track of it.)
   - triggers: ["!freeze", "!debugger"]
-    replace: "setTimeout(() => { debugger }, 5000)"
+    replace: "setTimeout(() => { debugger }, 1000 * 1$|$)"
     label: "Freeze (DevTools)"
   #───────────────────────────────────────────────────────────────────────────
   - trigger: "!iso"
