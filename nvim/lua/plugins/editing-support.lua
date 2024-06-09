@@ -64,6 +64,7 @@ return {
 			popupWin = { width = 45, border = vim.g.borderStyle },
 			prefill = { normal = "treesitterNode" },
 			incrementalPreview = { replacementDisplay = "overlay" },
+			editingBehavior = { autoCaptureGroups = true },
 		},
 	},
 	{ -- refactoring utilities

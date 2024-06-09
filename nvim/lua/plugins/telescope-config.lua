@@ -292,11 +292,8 @@ return {
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
-			{
-				"gw",
-				function() telescope("lsp_dynamic_workspace_symbols") end,
-				desc = "󰒕 Workspace Symbols",
-			},
+			-- stylua: ignore
+			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },

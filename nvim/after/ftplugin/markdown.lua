@@ -101,16 +101,6 @@ end, { desc = " Preview", buffer = true })
 keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading", buffer = true, silent = true })
 keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading", buffer = true, silent = true })
 
-keymap("n", "gs", function()
-	local headings = vim.iter(vim.api.nvim_buf_get_lines(0, 0, -1, false))
-		:filter(function(line) return line:find("^#+ ") end)
-		:totable()
-	vim.ui.select(headings, { prompt = " Select Heading:" }, function(heading)
-		if not heading then return end
-		vim.fn.search(heading, "w")
-	end)
-end, { desc = " Headings", buffer = true })
-
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
