@@ -1,5 +1,6 @@
 -- INFO potential AI plugins:
 -- https://github.com/huggingface/llm-ls
+-- https://github.com/SilasMarvin/lsp-ai
 -- https://github.com/sourcegraph/sg.nvim
 -- https://github.com/Bryley/neoai.nvim
 -- https://github.com/supermaven-inc/supermaven-nvim/
@@ -9,9 +10,6 @@
 return {
 	{
 		"supermaven-inc/supermaven-nvim",
-		-- "AlejandroSuero/supermaven-nvim",
-		-- branch = "feature/exposing-suggestion-group",
-
 		build = ":SupermavenUseFree", -- needs to be run once to set the API key
 		event = "InsertEnter",
 		keys = {

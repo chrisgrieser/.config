@@ -2,12 +2,18 @@ local plugins = {
 	-- { "folke/lazydev.nvim", ft = "lua", opts = true },
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = "folke/neodev.nvim",
+		-- dependencies = "folke/neodev.nvim",
 		config = function()
-			require("lspconfig").lua_ls.setup {}
+			-- require("lspconfig").lua_ls.setup {}
 			require("lspconfig").ltex.setup {
 				settings = {
-					ltex = { dictionary = { ["en-US"] = "Neovim" } },
+					ltex = {
+						dictionary = { ["en-US"] = "mistke" },
+						diagnosticSeverity = {
+							MORFOLOGIK_RULE_EN_US = "hint",
+							default = "info",
+						},
+					},
 				},
 			}
 		end,
