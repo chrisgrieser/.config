@@ -53,17 +53,14 @@ local function cmpconfig()
 
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					-- FIX lag when using `Insert` in css
-					local behavior = vim.bo.ft == "css" and "Select" or "Insert"
-					cmp.select_next_item { behavior = cmp.SelectBehavior[behavior] }
+					cmp.select_next_item()
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					local behavior = vim.bo.ft == "css" and "Select" or "Insert"
-					cmp.select_prev_item { behavior = cmp.SelectBehavior[behavior] }
+					cmp.select_prev_item()
 				else
 					fallback()
 				end
@@ -192,22 +189,12 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"garymjr/nvim-snippets",
+			{ "garymjr/nvim-snippets", opts = true },
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 		},
 		config = cmpconfig,
-	},
-	{ -- custom snippets
-		"garymjr/nvim-snippets",
-		opts = true,
-		init = function()
-			-- copy system clipboard to vim, required for snippets with `$CLIPBOARD`
-			vim.api.nvim_create_autocmd("FocusGained", {
-				callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
-			})
-		end,
 	},
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
@@ -215,17 +202,9 @@ return {
 		external_dependencies = "yq",
 		init = function() u.leaderSubkey("n", " Snippets", { "n", "x" }) end,
 		keys = {
-			{
-				"<leader>nn",
-				function() require("scissors").editSnippet() end,
-				desc = " Edit snippet",
-			},
-			{
-				"<leader>na",
-				function() require("scissors").addNewSnippet() end,
-				mode = { "n", "x" },
-				desc = " Add new snippet",
-			},
+			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = " Edit" },
+			-- stylua: ignore
+			{ "<leader>na", function() require("scissors").addNewSnippet() end, mode = { "n", "x" }, desc = " Add" },
 		},
 		opts = {
 			editSnippetPopup = {
