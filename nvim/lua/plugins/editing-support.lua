@@ -22,11 +22,10 @@ return {
 			cr = { autoclose = true },
 			space = { enable = true },
 			space2 = { enable = true },
-			extensions = {
-				cond = { -- global conditions
-					-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
-					cond = function(builtinConds) return not builtinConds.in_macro() end,
-				},
+			extensions = { -- = global
+				-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
+				cond = { cond = function(builtinConds) return not builtinConds.in_macro() end },
+				filetype = { nft = { "regex" } }, -- `regex` is used by `rip-substitute`
 			},
 			config_internal_pairs = {
 				{ "'", "'", nft = { "markdown" } }, -- disable in markdown, since used as apostroph
@@ -37,21 +36,11 @@ return {
 			{ "__", "__", ft = { "markdown" } }, -- bold
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
 			{ "<", ">", ft = { "vim" } },
-			{ -- keymaps like `<C-a>`
-				"<",
-				">",
-				ft = { "lua" },
-				cond = function(builtinsConds) return builtinsConds.in_string() end,
-			},
-			{ -- scope for commit messages
-				"(",
-				"): ",
-				ft = { "gitcommit" },
-				cond = function(_)
-					local isFirstWord = vim.api.nvim_get_current_line():find(" ") == nil
-					return isFirstWord
-				end,
-			},
+			-- keymaps like `<C-a>`
+			{ "<", ">", ft = { "lua" }, cond = function(cond) return cond.in_string() end },
+			-- scope (= only first word) for commit messages
+			-- stylua: ignore
+			{ "(", "): ", ft = { "gitcommit" }, cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end },
 		},
 	},
 	{ -- better `:substitute`
