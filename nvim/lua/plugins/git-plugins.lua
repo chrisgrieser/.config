@@ -42,8 +42,8 @@ return {
 			historySearch = {
 				autoUnshallowIfNeeded = true,
 				diffPopup = {
-					width = 0.9,
-					height = 0.9,
+					width = 0.8,
+					height = 0.8,
 					border = vim.g.borderStyle,
 				},
 			},
