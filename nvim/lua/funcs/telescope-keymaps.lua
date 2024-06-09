@@ -152,12 +152,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		local ft = ctx.match
 		-- special keymaps in ftplugins
-		if ft == "markdown" or ft == "bib" then return end
+		if ft == "bib" then return end
 
 		local symbolFilter = {
 			yaml = { "object", "array" },
 			json = "module",
 			toml = "object",
+			markdown = "string", -- string = headings in markdown files
 		}
 		local filter = symbolFilter[ft]
 		local desc, symbolSearch
@@ -170,17 +171,6 @@ vim.api.nvim_create_autocmd("FileType", {
 				}
 			end
 			desc = " Sections"
-		elseif ft == "lua" then
-			-- in lua, use treesitter, since it skips anonymous functions
-			symbolSearch = function()
-				require("telescope.builtin").treesitter {
-					show_line = false,
-					prompt_prefix = " ",
-					symbols = { "function", "method", "class", "struct" },
-					symbol_highlights = { ["function"] = "Function", ["method"] = "@method" },
-				}
-			end
-			desc = " Symbols"
 		else
 			symbolSearch = function()
 				require("telescope.builtin").lsp_document_symbols {

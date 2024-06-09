@@ -275,26 +275,53 @@ serverConfigs.ltex = {
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
+			dictionary = {
+				-- HACK since reading external file with the method described in ltex-docs does not work
+				["en-US"] = (function()
+					local words = {}
+					local spellfile = vim.g.linterConfigs .. "/spellfile.add"
+					if not u.fileExists(spellfile) then return {} end
+					for word in io.lines(spellfile) do
+						table.insert(words, word)
+					end
+					return words
+				end)(),
+			},
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"MORFOLOGIK_RULE_EN_US", -- spelling (done via spellwarn.nvim)
 				},
 			},
 			diagnosticSeverity = {
 				default = "info",
+				MORFOLOGIK_RULE_EN_US = "hint",
 			},
 			additionalRules = {
 				enablePickyRules = true,
 				mothersTongue = "de-DE",
 			},
 			markdown = {
-				nodes = { Link = "dummy" }, -- don't link text
+				nodes = { Link = "dummy" }, -- don't check link text
 			},
 		},
 	},
 	on_attach = function(ltex, bufnr)
+		-- have `zg` update ltex' dictionary file as well as vim's spellfile
+		vim.keymap.set({ "n", "x" }, "zg", function()
+			local word
+			if vim.fn.mode() == "n" then
+				word = vim.fn.expand("<cword>")
+				u.normal("zg")
+			else
+				u.normal('zggv"zy')
+				word = vim.fn.getreg("z")
+			end
+			local ltexSettings = ltex.config.settings
+			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
+		end, { desc = "󰓆 Add Word", buffer = bufnr })
+
 		-- Disable in Obsidian vaults (HACK as there is no `.ltexignore`)
 		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
 		if #obsiDir > 0 then vim.lsp.buf_detach_client(bufnr, ltex.id) end

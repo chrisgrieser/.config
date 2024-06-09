@@ -14,29 +14,6 @@ return {
 	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
 	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
-	{
-		"ravibrock/spellwarn.nvim",
-		ft = { "markdown" },
-		keys = { "zg" },
-		opts = {
-			event = { "TextChanged", "TextChangedI", "BufEnter", "FileType" },
-			ft_default = false,
-			ft_config = {},
-			prefix = "",
-		},
-		config = function(spec, opts)
-			-- turn on spellcheck only the the filetypes listed in `ft`
-			for _, ft in pairs(spec.ft) do
-				opts.ft_config[ft] = true
-			end
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = spec.ft,
-				callback = function() vim.opt_local.spell = true end,
-			})
-			require("spellwarn").setup(opts)
-		end,
-	},
-	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
