@@ -205,3 +205,10 @@ viewport
 cursorline
 diffview
 Justfile
+#istkae
+LSPs
+toc
+tocstop
+QoL
+linters
+spellwarn
