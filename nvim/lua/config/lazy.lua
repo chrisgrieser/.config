@@ -30,7 +30,7 @@ require("lazy").setup("plugins", {
 		border = vim.g.borderStyle,
 		pills = false,
 		size = { width = 0.85, height = 0.85 },
-		backdrop = 70, -- 0-100 opacity
+		backdrop = 50, -- 0-100 opacity
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates

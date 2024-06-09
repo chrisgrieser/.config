@@ -11,7 +11,7 @@ local lspToMasonMap = {
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
 	cssls = "css-lsp",
-	efm = "efm", -- linter integration, only used for shellcheck in zsh files
+	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html completions
 	css_variables = "css-variables-language-server",
 	jsonls = "json-lsp",
@@ -93,10 +93,8 @@ local efmTools = {
 			lintFormats = {
 				"%Aerror: %m", -- multiline part 1
 				"%C  ——▶ %f:%l:%c%Z", -- multiline part 2
-				"%terror: %m",
-				"%tarning: %m",
 			},
-			rootMarkers = { "Justfile" },
+			rootMarkers = { "Justfile", ".justfile" },
 		},
 	},
 }
