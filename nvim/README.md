@@ -19,8 +19,8 @@
 
 ## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
+- [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim),
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
-- [binhtran432k/dracula.nvim](https://github.com/binhtran432k/dracula.nvim)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
@@ -35,6 +35,7 @@
 - [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 - [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
 - [folke/noice.nvim](https://github.com/folke/noice.nvim)
+- [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 - [garymjr/nvim-snippets](https://github.com/garymjr/nvim-snippets)
 - [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -55,7 +56,6 @@
 - [lvimuser/lsp-inlayhints.nvim](https://github.com/lvimuser/lsp-inlayhints.nvim)
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
-- [monkoose/neocodeium](https://github.com/monkoose/neocodeium)
 - [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
@@ -70,10 +70,11 @@
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
-- [rose-pine/neovim](https://github.com/rose-pine/neovim)
+- [sainnhe/everforest](https://github.com/sainnhe/everforest)
 - [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
+- [supermaven-inc/supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
 - [Wansmer/sibling-swap.nvim](https://github.com/Wansmer/sibling-swap.nvim)
@@ -81,4 +82,3 @@
 - [Wansmer/treesj](https://github.com/Wansmer/treesj)
 - [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
 - [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
-- [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)

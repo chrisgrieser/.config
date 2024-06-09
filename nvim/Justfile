@@ -1,5 +1,7 @@
 set quiet := true
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # prints total length of config
 count-lines:
     find . -name "*.lua" | xargs wc -l | sort --reverse
@@ -12,16 +14,24 @@ location_of_installed_plugins := "$HOME/.local/share/nvim/lazy"
 
 # updates README.md with current list of installed plugins
 update-plugins:
+    #!/usr/bin/env zsh
     sed -i '' -n "1,/{{ last_line_before_plugins }}/p" {{ nvim_readme }}
 
     grep --only-matching --no-filename --max-count=1 "url = .*" \
-        {{ location_of_installed_plugins }}/*/.git/config | \
-        sed 's/.git$//' | cut -c7- | \
-        sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' | \
+        {{ location_of_installed_plugins }}/*/.git/config |
+        sed 's/.git$//' | cut -c7- |
+        sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' |
         sort --ignore-case >> {{ nvim_readme }}
 
-    [[ "$(uname)" == "Darwin" ]] && open {{ nvim_readme }}
+    [[ "$OSTYPE" =~ "darwin" ]] && open {{ nvim_readme }}
 
+#───────────────────────────────────────────────────────────────────────────────
 # runs minimal config for debugging purposes with neovide
+
+debugFile := env_var("HOME") + "/Desktop/scratch.md"
+
+# debugFile := "./debug/test.lua"
+
 debug:
-    neovide --no-tabs ./debug/test.lua -- -u ./debug/repro.lua -c'sleep 200ms|bdelete' &>/dev/null
+    # `bdelete` to FIX https://github.com/neovide/neovide/issues/2609
+    neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 200ms|bdelete' &>/dev/null
