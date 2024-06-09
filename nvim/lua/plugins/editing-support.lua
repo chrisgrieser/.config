@@ -263,7 +263,7 @@ return {
 		opts = {
 			use_default_keymaps = false,
 			cursor_behavior = "start",
-			max_join_length = 160,
+			max_join_length = 200,
 		},
 		config = function(_, opts)
 			local gww = { both = { fallback = function() vim.cmd("normal! gww") end } }

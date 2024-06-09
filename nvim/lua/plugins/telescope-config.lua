@@ -162,14 +162,7 @@ local function telescopeConfig()
 					get_command = function(_, status)
 						local width = vim.api.nvim_win_get_width(status.preview_win)
 						local statArgs = ("%s,%s,25"):format(width, math.floor(width / 2))
-						local cmd = {
-							"git diff ",
-							"--color=always",
-							"--compact-summary",
-							"--stat=" .. statArgs,
-							"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
-						}
-						return table.concat(cmd, " ")
+						return { "git", "diff", "--color=always", "--stat=" .. statArgs }
 					end,
 				},
 			},
