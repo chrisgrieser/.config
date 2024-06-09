@@ -1,8 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - trigger: "... "
-    replace: "… "
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
@@ -18,13 +16,11 @@ matches:
     replace: Christopher Grieser
   #───────────────────────────────────────────────────────────────────────────
   - trigger: "!bug"
-    replace: >-
-      Could you open a bug report at the GitHub repo? 
-      Reason being that the bug report forms asks for various information 
-      I need to investigate the issue. 
-      (Also, I don't have the time to look into it right now, so a bug report
-      will make sure that I can keep track of it.)
-  - trigger: "!freeze"
+    replace: >
+      Could you open a bug report at the GitHub repo?  Reason being that the bug report forms asks for
+      various information  I need to investigate the issue.  (Also, I don't have the time to look into it
+      right now, so a bug report will make sure that I can keep track of it.)
+  - triggers: ["!freeze", "!debugger"]
     replace: "setTimeout(() => { debugger }, 5000)"
     label: "Freeze (DevTools)"
   #───────────────────────────────────────────────────────────────────────────
@@ -51,6 +47,15 @@ matches:
         params:
           format: "%d.%m.%Y"
   #─────────────────────────────────────────────────────────────────────────────
+  - trigger: "!openai"
+    replace: "{{apikey}}"
+    label: get OpenAI API key
+    vars:
+      - name: apikey
+        type: shell
+        params:
+          cmd: "source $HOME/.zshenv && echo -n $OPENAI_API_KEY"
+  #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!version"
     replace: "macOS {{version}} ({{architecture}})"
     vars:
@@ -62,49 +67,21 @@ matches:
         type: shell
         params:
           cmd: "uname -p"
-  - trigger: "!openai"
-    replace: "{{apikey}}"
-    label: get OpenAI API key
-    vars:
-      - name: apikey
-        type: shell
-        params:
-          cmd: "source $HOME/.zshenv && echo -n $OPENAI_API_KEY"
   - trigger: "!nversion"
-    replace: |-
-      ```
-      {{neovimVersion}}
-      macOS {{OSversion}} ({{architecture}})
-      ```
+    replace: "{{neovimVersion}}"
     vars:
-      - name: OSversion
-        type: shell
-        params:
-          cmd: "sw_vers -productVersion"
-      - name: architecture
-        type: shell
-        params:
-          cmd: "uname -p"
       - name: neovimVersion
         type: shell
         params:
-          cmd: "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n3"
+          cmd:
+            "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head
+            -n1"
   - trigger: "!oversion"
-    replace: |-
-      ```
-      Obsidian {{obsiVersion}}
-      macOS {{OSversion}} ({{architecture}})
-      ```
+    replace: "Obsidian {{obsiVersion}}"
     vars:
-      - name: OSversion
-        type: shell
-        params:
-          cmd: "sw_vers -productVersion"
-      - name: architecture
-        type: shell
-        params:
-          cmd: "uname -p"
       - name: obsiVersion
         type: shell
         params:
-          cmd: 'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"." -f1-3 | cut -d"-" -f2'
+          cmd:
+            'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"."
+            -f1-3 | cut -d"-" -f2'
