@@ -316,7 +316,7 @@ return {
 			},
 			hidden = { "<Plug>", "^:lua ", "<cmd>" },
 			key_labels = {
-				["<CR>"] = "↵",
+				["<CR>"] = "⏎",
 				["<BS>"] = "⌫",
 				["<space>"] = "󱁐",
 				["<Tab>"] = "󰌒",

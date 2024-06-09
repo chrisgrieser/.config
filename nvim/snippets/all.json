@@ -125,9 +125,9 @@
     "body": "⇧",
     "prefix": "shift"
   },
-  "space": {
-    "body": "␣",
-    "prefix": "space"
+  "space (underbracket)": {
+    "body": "⎵",
+    "prefix": "space (underbracket)"
   },
   "tab": {
     "body": "↹ ",
