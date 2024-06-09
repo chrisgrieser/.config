@@ -18,7 +18,6 @@ local specialDirs = {
 	"%.DS_Store$", -- macOS Finder
 	"%.app/", -- macOS apps
 	".local",
-	"homebrew", -- for nvim runtime
 	".venv", -- python
 	"EmmyLua.spoon", -- Hammerspoon
 }
@@ -247,6 +246,7 @@ local function telescopeConfig()
 				file_ignore_patterns = {
 					"node_modules", -- js/ts
 					"typings", -- python
+					"homebrew", -- for nvim runtime
 					unpack(specialDirs), -- needs to be last for correct unpacking
 				},
 			},

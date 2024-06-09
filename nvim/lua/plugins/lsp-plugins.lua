@@ -2,14 +2,17 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	-- -- PENDING https://github.com/folke/lazydev.nvim/issues/29
-	-- { -- nvim lua typings
-	-- 	"folke/lazydev.nvim",
-	-- 	ft = "lua",
-	-- 	opts = { library = { "luvit-meta/library" } },
-	-- },
-	-- -- `vim.uv` typings (not as dependency, since they never need to be loaded)
-	-- { "Bilal2453/luvit-meta", lazy = true },
+	{ -- nvim lua typings
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
+	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",

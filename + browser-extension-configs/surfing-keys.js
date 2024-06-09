@@ -143,12 +143,6 @@ mapkey("yg", "Copy GitHub Link", async () => {
 // FIND
 map("-", "/");
 
-// do not enter visual mode when searching https://github.com/brookhong/Surfingkeys/issues/1928
-mapkey("n", "Find Next", () => {
-	api.Visual.next(false);
-	// api.Visual.feedkeys("n<Esc>");
-});
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // Misc
