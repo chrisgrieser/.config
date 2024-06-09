@@ -186,7 +186,7 @@ function M.bufferByLastUsed(dir)
 
 	---@diagnostic disable-next-line: assign-type-mismatch
 	state.bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
-		timeout = opts.timeout,
+		timeout = timeoutMs,
 		title = pluginName,
 		animate = false,
 		stages = "no_animation",
