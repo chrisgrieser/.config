@@ -7,6 +7,5 @@ vale/styles
 # these are usually ignored as boileterplate in `fd/ignore`, but these one's
 # here I actually change sometimes
 !pyproject.toml
-!biome.json
 !biome.jsonc
 !jxa/**
