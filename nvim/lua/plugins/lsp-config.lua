@@ -34,9 +34,9 @@ local lspToMasonMap = {
 ---@field filetypes? string[]
 ---@field handlers? table <string, function>
 ---@field init_options? table <string, string|table|boolean>
----@field on_attach? function(client, bufnr)
----@field on_new_config? function(new_config, root_dir)
----@field root_dir? function(filename, bufnr)
+---@field on_attach? fun(client: vim.lsp.Client, bufnr: number)
+---@field on_new_config? fun(new_config, root_dir)
+---@field root_dir? fun(filename: string, bufnr: number)
 ---@field settings? table <string, table>
 ---@field single_file_support? boolean
 ---@field cmd_env? table<string, string>
@@ -295,18 +295,18 @@ serverConfigs.ltex = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
+					-- "MORFOLOGIK_RULE_EN_US", -- spelling (done via spellwarn.nvim)
 				},
 			},
 			diagnosticSeverity = {
 				default = "info",
-				MORFOLOGIK_RULE_EN_US = "hint", -- spelling
 			},
 			additionalRules = {
 				enablePickyRules = true,
 				mothersTongue = "de-DE",
 			},
 			markdown = {
-				nodes = { Link = "dummy" }, -- don't spellcheck link text
+				nodes = { Link = "dummy" }, -- don't link text
 			},
 		},
 	},
@@ -328,7 +328,7 @@ serverConfigs.ltex = {
 
 		-- Disable in Obsidian vaults (HACK as there is no `.ltexignore`)
 		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-		if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(ltex.id) end
+		if #obsiDir > 0 then vim.lsp.buf_detach_client(0, ltex.id) end
 	end,
 }
 
@@ -370,10 +370,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		dependencies = {
-			"folke/neodev.nvim", -- loading as dependency ensures it's loaded before lua_ls
-			opts = { library = { plugins = false } }, -- too slow with all my plugins
-		},
 		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
