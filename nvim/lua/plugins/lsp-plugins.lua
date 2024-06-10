@@ -33,11 +33,35 @@ return {
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)
 
+			-- FIX background color for `opts.highlight = true`
 			-- stylua: ignore
-			local navicHls = { "NavicIconsFile", "NavicIconsModule", "NavicIconsNamespace", "NavicIconsPackage", "NavicIconsClass", "NavicIconsMethod", "NavicIconsProperty", "NavicIconsField", "NavicIconsConstructor", "NavicIconsEnum", "NavicIconsInterface", "NavicIconsFunction", "NavicIconsVariable", "NavicIconsConstant", "NavicIconsString", "NavicIconsNumber", "NavicIconsBoolean", "NavicIconsArray", "NavicIconsObject", "NavicIconsKey", "NavicIconsNull", "NavicIconsEnumMember", "NavicIconsStruct", "NavicIconsEvent", "NavicIconsOperator", "NavicIconsTypeParameter", "NavicText", "NavicSeparator", }
-			for _, hl in ipairs(navicHls) do
-				vim.api.nvim_set_hl(0, hl, { link = "Comment" })
-			end
+			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text", "NavicSeparator" }
+			local lualineHl = vim.api.nvim_get_hl(0, { name = "lualine_b_inactive" })
+			local bg = lualineHl.bg and ("#%06x"):format(lualineHl.bg)
+			vim.defer_fn(function()
+				for _, hlName in ipairs(navicHls) do
+					local orgHl = hlName
+					local hl
+					repeat
+						-- follow linked highlights
+						hl = vim.api.nvim_get_hl(0, { name = hlName })
+						hlName = hl.link
+					until not hl.link
+					vim.api.nvim_set_hl(0, orgHl, { fg = hl.fg, bg = bg })
+				end
+				-- for _, hl in ipairs(navicHls) do
+				-- 	local prevHl = vim.api.nvim_get_hl(0, { name = hl })
+				-- 	local fg = prevHl.fg and ("#%06x"):format(prevHl.fg)
+				-- 	vim.api.nvim_set_hl(0, hl, { fg = fg, bg = bg })
+				-- end
+			end, 1)
+			-- local bg = u.getHighlightValue("lualine_b_inactive", "bg")
+			-- vim.defer_fn(function()
+			-- 	for _, hl in ipairs(navicHls) do
+			-- 		local fg = u.getHighlightValue(hl, "fg")
+			-- 		vim.api.nvim_set_hl(0, hl, { fg = fg, bg = bg })
+			-- 	end
+			-- end, 1)
 
 			-- local component = { "navic", section_separators = { left = "▒░", right = "" } }
 			u.addToLuaLine("tabline", "lualine_b", { "navic" })
@@ -138,7 +162,7 @@ return {
 			hl = { link = "Comment" },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
-				if not (symbol.references > 100) then return "++" end
+				if symbol.references > 100 then return "++" end
 				return tostring(symbol.references)
 					:gsub("0", "") -- there is no numeric 0 nerdfont icon
 					:gsub("1", "󰬺")

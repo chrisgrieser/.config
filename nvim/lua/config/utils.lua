@@ -35,7 +35,7 @@ function M.getHighlightValue(hlName, key)
 	until not hl.link
 	local value = hl[key]
 	if not value then
-		vim.notify(("No %q highlight group %q"):format(key, hlName), vim.log.levels.WARN)
+		vim.notify(("No %s available for highlight group %q"):format(key, hlName), vim.log.levels.WARN)
 		return nil
 	end
 	return ("#%06x"):format(value)
