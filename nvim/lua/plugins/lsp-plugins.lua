@@ -150,7 +150,7 @@ return {
 				if not (symbol.references and symbol.references > 0) then return "" end
 				if symbol.references > 100 then return "++" end
 				return tostring(symbol.references)
-					:gsub("0", "") -- there is no numeric 0 nerdfont icon
+					:gsub("0", "") -- there is no numeric 0 nerdfont icon, so using dot
 					:gsub("1", "󰬺")
 					:gsub("2", "󰬻")
 					:gsub("3", "󰬼")

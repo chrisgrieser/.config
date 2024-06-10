@@ -4,7 +4,7 @@
 // DEFAULT mappings: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
+const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -152,7 +152,7 @@ map("-", "/");
 // Misc
 map("P", "oi"); // private window (incognito)
 map("gi", "I"); // enter insert field
-map("i", "p"); // disable for one key
+map("i", "passthrough", () => Normal.PassThrough(500));
 map("p", "<Alt-p>"); // pin (INFO needs to be after mapping `i` to prevent recursion)
 map(",", ";e"); // Settings
 
