@@ -40,10 +40,7 @@ local function cmpconfig()
 			["<CR>"] = cmp.mapping.confirm { select = true },
 			["<PageUp>"] = cmp.mapping.scroll_docs(-5),
 			["<PageDown>"] = cmp.mapping.scroll_docs(5),
-			["<Esc>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then cmp.abort() end
-				fallback()
-			end),
+			["<C-e>"] = cmp.mapping.abort(),
 
 			-- manually triggering to only include LSP, useful for yaml/json/css
 			["<D-c>"] = cmp.mapping.complete {

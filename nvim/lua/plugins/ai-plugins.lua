@@ -7,23 +7,13 @@
 -- https://github.com/monkoose/neocodeium
 --------------------------------------------------------------------------------
 
--- Lorem ipsum dolor sit amet
-
-
 return {
 	{
 		"supermaven-inc/supermaven-nvim",
 		build = ":SupermavenUseFree", -- needs to be run once to set the API key
 		event = "InsertEnter",
 		keys = {
-			{
-				"<D-s>",
-				mode = "i",
-				function()
-					require("supermaven-nvim.completion_preview").on_accept_suggestion()
-					vim.cmd.normal { args = { "<C-g>u" }, bang = true } -- add undo point
-				end,
-			},
+			{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
 			{
 				"<leader>oa",
 				function()
@@ -34,7 +24,10 @@ return {
 			},
 		},
 		opts = {
-			-- keymaps = { accept_suggestion = "<D-s>" },
+			keymaps = {
+				accept_suggestion = "<D-s>",
+				accept_word = "<D-S>",
+			},
 			ignore_filetypes = {
 				gitcommit = true,
 				DressingInput = true,
