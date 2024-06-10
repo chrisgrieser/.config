@@ -347,7 +347,7 @@ end, { desc = " Paste charwise", expr = true })
 
 -- `cmd-q` remapped to `ZZ` via Karabiner
 -- PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "ZZ", vim.cmd.wqall, { desc = " Quit" })
+keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },

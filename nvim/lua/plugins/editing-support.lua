@@ -22,25 +22,40 @@ return {
 			cr = { autoclose = true },
 			space = { enable = true },
 			space2 = { enable = true },
-			extensions = { -- = global
+
+			-- global settings
+			extensions = {
 				-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
 				cond = { cond = function(builtinConds) return not builtinConds.in_macro() end },
 				filetype = { nft = { "regex" } }, -- `regex` is used by `rip-substitute`
 			},
+
 			config_internal_pairs = {
 				{ "'", "'", nft = { "markdown" } }, -- disable in markdown, since used as apostroph
 			},
-
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
+			{ "[=[", "]=]", ft = { "lua" } }, -- special escape
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
-			{ "<", ">", ft = { "vim" } },
-			-- keymaps like `<C-a>`
-			{ "<", ">", ft = { "lua" }, cond = function(cond) return cond.in_string() end },
 			-- scope (= only first word) for commit messages
 			-- stylua: ignore
 			{ "(", "): ", ft = { "gitcommit" }, cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end },
+
+			-- keymaps like `<C-a>`
+			{ "<", ">", ft = { "vim" } },
+			{
+				"<",
+				">",
+				ft = { "lua" },
+				cond = function(cond) return cond.in_string() end,
+				-- cond = function(_)
+				-- 	-- workaround, since using `in_string` trigger often bugs
+				-- 	local col = vim.api.nvim_win_get_cursor(0)[2]
+				-- 	local charBefore = vim.api.nvim_get_current_line():sub(col - 1, col - 1)
+				-- 	return charBefore:find([=[["']]=])
+				-- end,
+			},
 		},
 	},
 	{ -- better `:substitute`

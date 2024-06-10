@@ -34,6 +34,11 @@ end, { buffer = true, expr = true, desc = " Put Selection in cmdline" })
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
 
+vim.api.nvim_create_user_command("", function ()
+
+end, )
+
+
 -- lightweight version of telescope-import.nvim import (just for lua)
 vim.keymap.set("n", "<leader>cr", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.\w*)?]]
