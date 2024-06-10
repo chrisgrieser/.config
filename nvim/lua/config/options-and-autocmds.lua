@@ -354,6 +354,7 @@ vim.api.nvim_create_autocmd("FileType", {
 local ns = vim.api.nvim_create_namespace("quickfix_signs")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
+		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 		
 	local qf = vim.fn.getqflist()[1]
 

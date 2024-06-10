@@ -44,17 +44,18 @@ return {
 
 			-- keymaps like `<C-a>`
 			{ "<", ">", ft = { "vim" } },
+			-- PENDING https://github.com/altermo/ultimate-autopair.nvim/issues/88
+			-- { "<", ">", ft = { "lua" }, cond = function(fn) return not fn.in_string() end },
 			{
 				"<",
 				">",
 				ft = { "lua" },
-				cond = function(cond) return cond.in_string() end,
-				-- cond = function(_)
-				-- 	-- workaround, since using `in_string` trigger often bugs
-				-- 	local col = vim.api.nvim_win_get_cursor(0)[2]
-				-- 	local charBefore = vim.api.nvim_get_current_line():sub(col - 1, col - 1)
-				-- 	return charBefore:find([=[["']]=])
-				-- end,
+				cond = function(_)
+					-- workaround, since using `in_string` trigger often bugs
+					local col = vim.api.nvim_win_get_cursor(0)[2]
+					local charBefore = vim.api.nvim_get_current_line():sub(col, col)
+					return charBefore:find([=[["']]=])
+				end,
 			},
 		},
 	},
@@ -97,23 +98,13 @@ return {
 			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
 			{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
 			{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
+			{ "<leader>e", mode = { "n", "x" }, desc = " Eval" },
 			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
 			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
 			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
-			{ "sY", "sy$", desc = "󰅪 Sort to EoL", remap = true },
 		},
-		config = function(_, opts)
-			require("mini.operators").setup(opts)
-
-			-- Do not set `substitute` mapping for visual mode, since we use `s` for
-			-- `surround` there, and `p` effectively already substitutes
-			require("mini.operators").make_mappings(
-				"replace",
-				{ textobject = "s", line = "ss", selection = "" }
-			)
-		end,
 		opts = {
-			evaluate = { prefix = "" }, -- disable
+			evaluate = { prefix = "<leader>e" },
 			replace = { prefix = "", reindent_linewise = true },
 			exchange = { prefix = "sx", reindent_linewise = true },
 			sort = { prefix = "sy" },
@@ -170,6 +161,16 @@ return {
 				end,
 			},
 		},
+		config = function(_, opts)
+			require("mini.operators").setup(opts)
+
+			-- Do not set `substitute` mapping for visual mode, since we use `s` for
+			-- `surround` there, and `p` effectively already substitutes
+			require("mini.operators").make_mappings(
+				"replace",
+				{ textobject = "s", line = "ss", selection = "" }
+			)
+		end,
 	},
 	{ -- automatically set correct indent for file
 		"nmac427/guess-indent.nvim",

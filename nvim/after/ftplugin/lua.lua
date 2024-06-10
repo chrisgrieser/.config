@@ -14,30 +14,27 @@ abbr("===", "==")
 
 --------------------------------------------------------------------------------
 
--- Put to EoL in cmdline
-vim.keymap.set("n", "<leader>r", function()
+-- Mini-Repl
+-- as opposed to `:lua =`, uses `vim.notify` for better output
+vim.keymap.set("n", "<leader>e", function()
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.api.nvim_win_get_cursor(0)[2]
 	local toEol = vim.trim(line:sub(col + 1))
-	return ":lua = " .. toEol
-end, { buffer = true, expr = true, desc = " Put to EoL in cmdline" })
+	local result = vim.inspect(luaeval(toEol))
+	return vim.notify(vim.inspect((toEol)))
+end, { buffer = true, desc = " Eval to EoL" })
 
-vim.keymap.set("x", "<leader>r", function()
+vim.keymap.set("x", "<leader>e", function()
 	u.leaveVisualMode()
 	local pos = vim.region(0, "'<", "'>", "v", true)
 	local row = vim.tbl_keys(pos)[1]
 	local start, stop = unpack(vim.tbl_values(pos)[1])
 	local sel = vim.api.nvim_buf_get_text(0, row, start, row, stop, {})[1]
-	return ":lua = " .. sel
-end, { buffer = true, expr = true, desc = " Put Selection in cmdline" })
+	return vim.notify(vim.inspect(sel))
+end, { buffer = true, expr = true, desc = " Eval Selection" })
 
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
-
-vim.api.nvim_create_user_command("", function ()
-
-end, )
-
 
 -- lightweight version of telescope-import.nvim import (just for lua)
 vim.keymap.set("n", "<leader>cr", function()
