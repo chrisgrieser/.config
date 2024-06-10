@@ -3,11 +3,11 @@
 # workaround will simply copy the preferences without symlinks
 function _mackup {
 	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
-	ln -sf "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
+	ln -sfh "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
 
 	mackup "$1" --force && mackup uninstall --force
 
-	rm "$HOME/.mackup" "$HOME/.mackup.cfg"
+	rm -v "$HOME/.mackup" "$HOME/.mackup.cfg"
 }
 function saveprefs { _mackup backup; }
 function loadprefs { _mackup restore; }

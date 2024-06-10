@@ -63,7 +63,7 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
-		hs.execute(u.exportPath .. "mackup backup --force && mackup uninstall --force", true)
+		hs.execute("saveprefs", true)
 
 		M.task_bookmarksBackup = hs.task
 			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
