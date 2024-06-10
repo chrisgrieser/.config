@@ -20,8 +20,7 @@ vim.keymap.set("n", "<leader>e", function()
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.api.nvim_win_get_cursor(0)[2]
 	local toEol = vim.trim(line:sub(col + 1))
-	local result = vim.inspect(vim.fn.luaeval(toEol))
-	return vim.notify(result)
+	return vim.notify(vim.inspect(vim.fn.luaeval(toEol)))
 end, { buffer = true, desc = " Eval to EoL" })
 
 vim.keymap.set("x", "<leader>e", function()
@@ -30,9 +29,8 @@ vim.keymap.set("x", "<leader>e", function()
 	local row = vim.tbl_keys(pos)[1]
 	local start, stop = unpack(vim.tbl_values(pos)[1])
 	local sel = vim.api.nvim_buf_get_text(0, row, start, row, stop, {})[1]
-	local result = vim.inspect(vim.fn.luaeval(sel))
-	return vim.notify(result)
-end, { buffer = true, expr = true, desc = " Eval Selection" })
+	return vim.notify(vim.inspect(vim.fn.luaeval(sel)))
+end, { buffer = true, desc = " Eval Selection" })
 
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD

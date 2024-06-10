@@ -33,7 +33,7 @@ return {
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)
 
-			-- FIX background color for `opts.highlight = true` 
+			-- FIX background color for `opts.highlight = true`
 			-- PENDING https://github.com/SmiteshP/nvim-navic/issues/146
 			-- stylua: ignore
 			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text", "Separator" }
@@ -41,13 +41,13 @@ return {
 			local bg = lualineHl.bg and ("#%06x"):format(lualineHl.bg)
 			for _, hlName in ipairs(navicHls) do
 				hlName = "Navic" .. hlName
-				local orgHl = hlName
+				local hlToFollow = hlName
 				local hl
 				repeat -- follow linked highlights
-					hl = vim.api.nvim_get_hl(0, { name = hlName })
-					hlName = hl.link
+					hl = vim.api.nvim_get_hl(0, { name = hlToFollow })
+					hlToFollow = hl.link
 				until not hl.link
-				vim.api.nvim_set_hl(0, orgHl, { fg = hl.fg, bg = bg })
+				vim.api.nvim_set_hl(0, hlName, { fg = hl.fg, bg = bg })
 			end
 
 			u.addToLuaLine("tabline", "lualine_b", { "navic" })
@@ -161,9 +161,6 @@ return {
 					:gsub("8", "󰭁")
 					:gsub("9", "󰭂")
 			end,
-			disable = {
-				filetypes = { "css", "scss" },
-			},
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 			kinds = {
 				vim.lsp.protocol.SymbolKind.Module,

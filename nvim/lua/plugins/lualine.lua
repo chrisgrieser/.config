@@ -13,16 +13,14 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		if not (progress and progress.title) then return end
 
 		local icons = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" }
-		local idx = 2
+		local idx = math.floor(#icons / 2)
 		if progress.percentage == 0 then idx = 1 end
 		if progress.percentage and progress.percentage > 0 then
 			idx = math.ceil(progress.percentage / 100 * #icons)
 		end
-		local firstWord = vim.split(progress.title, " ")[1]:lower() -- shorter for statusline
-		local msg = progress.message or ""
-		if vim.startswith(msg, "file://") then msg = "" end
+		local firstWord = vim.split(progress.title, " ")[1]:lower() 
 
-		local text = table.concat({ icons[idx], clientName, firstWord, msg }, " ")
+		local text = ("%s %s %s"):format(clientName, firstWord, icons[idx])
 		progressText = progress.kind == "end" and "" or text
 	end,
 })

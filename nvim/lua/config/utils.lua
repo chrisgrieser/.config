@@ -34,11 +34,12 @@ function M.getHighlightValue(hlName, key)
 		hlName = hl.link
 	until not hl.link
 	local value = hl[key]
-	if not value then
-		vim.notify(("No %s available for highlight group %q"):format(key, hlName), vim.log.levels.WARN)
-		return nil
+	if value then
+		return ("#%06x"):format(value)
+	else
+		local msg = ("No %s available for highlight group %q"):format(key, hlName)
+		M.notify("getHighlightValue", msg, "warn")
 	end
-	return ("#%06x"):format(value)
 end
 
 function M.leaveVisualMode()
