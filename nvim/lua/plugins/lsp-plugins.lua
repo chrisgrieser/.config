@@ -37,7 +37,7 @@ return {
 			-- PENDING https://github.com/SmiteshP/nvim-navic/issues/146
 			-- stylua: ignore
 			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text", "Separator" }
-			local lualineHl = vim.api.nvim_get_hl(0, { name = "lualine_b_inactive" })
+			local lualineHl = vim.api.nvim_get_hl(0, { name = "lualine_b_normal" })
 			local bg = lualineHl.bg and ("#%06x"):format(lualineHl.bg)
 			for _, hlName in ipairs(navicHls) do
 				hlName = "Navic" .. hlName
@@ -50,7 +50,7 @@ return {
 				vim.api.nvim_set_hl(0, hlName, { fg = hl.fg, bg = bg })
 			end
 
-			u.addToLuaLine("tabline", "lualine_b", { "navic" })
+			u.addToLuaLine("tabline", "lualine_b", { "navic", padding = { left = 1, right = 1 } })
 		end,
 		keys = {
 			{ -- copy breadcrumbs
