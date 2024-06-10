@@ -39,9 +39,9 @@ local function irregularWhitespace()
 	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, bo.ft)
 
 	if spacesInsteadOfTabs or differentSpaceAmount then
-		return "󱁐 " .. tostring(bo.shiftwidth)
+		return "󱁐 " .. bo.shiftwidth
 	elseif tabsInsteadOfSpaces then
-		return "󰌒 " .. tostring(bo.shiftwidth)
+		return "󰌒 " .. bo.shiftwidth
 	end
 	return ""
 end
