@@ -222,10 +222,18 @@ rules:
             bundle_identifiers: [^com.brave.Browser.app.*] # PWAs
         to:
           - { key_code: w, modifiers: [command] }
+      # dev tools
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
           - { key_code: c, modifiers: [option, command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      # surfing-keys <S-Space> -> <C-ü>
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+        to:
+          - { key_code: open_bracket, modifiers: [control] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────

@@ -27,6 +27,7 @@ return {
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
+		init = function() u.colorschemeMod("SatelliteQuickfix", { link = "DiagnosticSignInfo" }) end,
 		opts = {
 			zindex = 1, -- below most stuff
 			winblend = 10, -- little transparency, hard to see in many themes otherwise

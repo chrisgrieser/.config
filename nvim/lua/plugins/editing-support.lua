@@ -98,13 +98,12 @@ return {
 			{ "w", mode = { "n", "x" }, desc = "󰅪 Multiply Operator" },
 			{ "sy", mode = { "n", "x" }, desc = "󰅪 Sort Operator" },
 			{ "sx", mode = { "n", "x" }, desc = "󰅪 Exchange Operator" },
-			{ "<leader>e", mode = { "n", "x" }, desc = " Eval" },
 			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
 			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
 			{ "sX", "sx$", desc = "󰅪 Exchange to EoL", remap = true },
 		},
 		opts = {
-			evaluate = { prefix = "<leader>e" },
+			evaluate = { prefix = "" }, -- disable
 			replace = { prefix = "", reindent_linewise = true },
 			exchange = { prefix = "sx", reindent_linewise = true },
 			sort = { prefix = "sy" },

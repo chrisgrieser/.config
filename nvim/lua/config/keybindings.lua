@@ -38,10 +38,10 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 -- quickfix
-keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
-keymap("n", "g1", vim.cmd.cfirst, { desc = " First Quickfix" })
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
+keymap("n", "gq", vim.cmd.cnext, { desc = " Next Quickfix" })
+keymap("n", "g1", vim.cmd.cfirst, { desc = " First Quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -69,25 +69,24 @@ keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent line" })
-keymap("i", "<Tab>", "<C-t>", { desc = "󰉵 indent line" })
 
--- Snippets
-keymap("s", "<Tab>", function() vim.snippet.jump(1) end, { desc = "next placeholder" })
-keymap("s", "<S-Tab>", function() vim.snippet.jump(-1) end, { desc = "prev placeholder" })
-
-keymap("n", "<Tab>", function()
+-- SNIPPETS
+keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
 		vim.snippet.jump(1)
 	else
-		return ">>"
+		local mode = vim.fn.mode()
+		if mode == "s" then return end
+		return mode == "n" and ">>" or "<C-t>"
 	end
 end, { desc = "󰉶 indent / next placeholder", expr = true })
-keymap("n", "<S-Tab>", function()
+keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
 		vim.snippet.jump(-1)
 	else
-		return "<<"
+		local mode = vim.fn.mode()
+		if mode == "s" then return end
+		return mode == "n" and "<<" or "<C-d>"
 	end
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
 
