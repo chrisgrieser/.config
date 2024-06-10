@@ -22,13 +22,12 @@ settings.smartCase = true;
 // disable surfingkey's pdf viewer
 // chrome.storage.local.set({ noPdfViewer: 1 });
 
-settings.startToShowEmoji = 0;
-api.iunmap(":", /github\.com/); // disable emojis on GitHub, since they already have them
+settings.startToShowEmoji = 1;
 
 //──────────────────────────────────────────────────────────────────────────────
 // THEME
 
-Hints.style("font-family: Arial; font-size: 12px;");
+Hints.style("font-family: Arial; font-size: 15px;");
 
 // cssclasses: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/ui/frontend.css
 settings.theme = `
@@ -65,6 +64,11 @@ unmap("N", /crunchyroll/);
 unmap("?", /github\.com/);
 unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
+
+// disable emojis on GitHub, since they already have them
+if (document.origin === "https://github.com") {
+	settings.enableEmojiInsertion = false;
+}
 
 //──────────────────────────────────────────────────────────────────────────────
 
