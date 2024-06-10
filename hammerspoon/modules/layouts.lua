@@ -87,7 +87,7 @@ local function movieLayout()
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 
-	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
+	u.openApps { "YouTube", env.isAtHome and "Multitouch" or nil }
 	u.quitApps {
 		"Slack",
 		"Discord",
