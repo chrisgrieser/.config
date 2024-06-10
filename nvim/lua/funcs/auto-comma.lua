@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("FileType", {
 				if not (node and node:type() == "table_constructor") then return end
 
 				local line = vim.api.nvim_get_current_line()
-				if line:find("^%s*[^,%s{}-]$") then
+				if line:find("^%s*[^,%s{}-]$") or line:find("^%s*{}$") then
 					vim.api.nvim_set_current_line(line .. ",")
 				end
 			end,

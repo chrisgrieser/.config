@@ -17,11 +17,6 @@ return {
 	{ -- breadcrumbs for tabline
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
-		init = function()
-			vim.g.navic_silence = false
-			local component = { "navic", section_separators = { left = "▒░", right = "" } }
-			u.addToLuaLine("tabline", "lualine_b", component)
-		end,
 		opts = {
 			lazy_update_context = true,
 			lsp = {
@@ -31,8 +26,22 @@ return {
 			icons = { Object = "󰠲 " },
 			separator = "  ",
 			depth_limit = 7,
+			highlight = true,
 			depth_limit_indicator = "…",
 		},
+		config = function(_, opts)
+			vim.g.navic_silence = false
+			require("nvim-navic").setup(opts)
+
+			-- stylua: ignore
+			local navicHls = { "NavicIconsFile", "NavicIconsModule", "NavicIconsNamespace", "NavicIconsPackage", "NavicIconsClass", "NavicIconsMethod", "NavicIconsProperty", "NavicIconsField", "NavicIconsConstructor", "NavicIconsEnum", "NavicIconsInterface", "NavicIconsFunction", "NavicIconsVariable", "NavicIconsConstant", "NavicIconsString", "NavicIconsNumber", "NavicIconsBoolean", "NavicIconsArray", "NavicIconsObject", "NavicIconsKey", "NavicIconsNull", "NavicIconsEnumMember", "NavicIconsStruct", "NavicIconsEvent", "NavicIconsOperator", "NavicIconsTypeParameter", "NavicText", "NavicSeparator", }
+			for _, hl in ipairs(navicHls) do
+				vim.api.nvim_set_hl(0, hl, { link = "Comment" })
+			end
+
+			-- local component = { "navic", section_separators = { left = "▒░", right = "" } }
+			u.addToLuaLine("tabline", "lualine_b", { "navic" })
+		end,
 		keys = {
 			{ -- copy breadcrumbs
 				"<D-b>",
@@ -129,8 +138,9 @@ return {
 			hl = { link = "Comment" },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
+				if not (symbol.references > 100) then return "++" end
 				return tostring(symbol.references)
-					:gsub("0", "") -- SIC there is no numeric 0 nerdfont icon
+					:gsub("0", "") -- there is no numeric 0 nerdfont icon
 					:gsub("1", "󰬺")
 					:gsub("2", "󰬻")
 					:gsub("3", "󰬼")
