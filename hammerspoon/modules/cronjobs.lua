@@ -63,7 +63,8 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
-		hs.execute("saveprefs_mackup", true)
+		local _, success = hs.execute("saveprefs_mackup", true)
+		u.notify(success and "✅ mackup saved" or "⚠️ mackup failed")
 
 		M.task_bookmarksBackup = hs.task
 			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
