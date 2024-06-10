@@ -5,12 +5,14 @@ function _mackup {
 	ln -sf "$HOME/.config/mackup/mackup.cfg" "$HOME/.mackup.cfg"
 	ln -sfh "$HOME/.config/mackup/custom-app-configs" "$HOME/.mackup"
 
+	# path needs to be added so it can be called via Hammerspoon
+	export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 	mackup "$1" --force && mackup uninstall --force
 
 	rm -v "$HOME/.mackup" "$HOME/.mackup.cfg"
 }
-function saveprefs { _mackup backup; }
-function loadprefs { _mackup restore; }
+function saveprefs_mackup { _mackup backup; }
+function loadprefs_mackup { _mackup restore; }
 
 #───────────────────────────────────────────────────────────────────────────────
 
