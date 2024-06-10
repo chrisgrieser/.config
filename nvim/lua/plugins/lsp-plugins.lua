@@ -24,7 +24,7 @@ return {
 				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
 			},
 			icons = { Object = "󰠲 " },
-			separator = "  ",
+			separator = " ",
 			depth_limit = 7,
 			highlight = true,
 			depth_limit_indicator = "…",
@@ -33,37 +33,23 @@ return {
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)
 
-			-- FIX background color for `opts.highlight = true`
+			-- FIX background color for `opts.highlight = true` 
+			-- PENDING https://github.com/SmiteshP/nvim-navic/issues/146
 			-- stylua: ignore
-			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text", "NavicSeparator" }
+			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text", "Separator" }
 			local lualineHl = vim.api.nvim_get_hl(0, { name = "lualine_b_inactive" })
 			local bg = lualineHl.bg and ("#%06x"):format(lualineHl.bg)
-			vim.defer_fn(function()
-				for _, hlName in ipairs(navicHls) do
-					local orgHl = hlName
-					local hl
-					repeat
-						-- follow linked highlights
-						hl = vim.api.nvim_get_hl(0, { name = hlName })
-						hlName = hl.link
-					until not hl.link
-					vim.api.nvim_set_hl(0, orgHl, { fg = hl.fg, bg = bg })
-				end
-				-- for _, hl in ipairs(navicHls) do
-				-- 	local prevHl = vim.api.nvim_get_hl(0, { name = hl })
-				-- 	local fg = prevHl.fg and ("#%06x"):format(prevHl.fg)
-				-- 	vim.api.nvim_set_hl(0, hl, { fg = fg, bg = bg })
-				-- end
-			end, 1)
-			-- local bg = u.getHighlightValue("lualine_b_inactive", "bg")
-			-- vim.defer_fn(function()
-			-- 	for _, hl in ipairs(navicHls) do
-			-- 		local fg = u.getHighlightValue(hl, "fg")
-			-- 		vim.api.nvim_set_hl(0, hl, { fg = fg, bg = bg })
-			-- 	end
-			-- end, 1)
+			for _, hlName in ipairs(navicHls) do
+				hlName = "Navic" .. hlName
+				local orgHl = hlName
+				local hl
+				repeat -- follow linked highlights
+					hl = vim.api.nvim_get_hl(0, { name = hlName })
+					hlName = hl.link
+				until not hl.link
+				vim.api.nvim_set_hl(0, orgHl, { fg = hl.fg, bg = bg })
+			end
 
-			-- local component = { "navic", section_separators = { left = "▒░", right = "" } }
 			u.addToLuaLine("tabline", "lualine_b", { "navic" })
 		end,
 		keys = {
