@@ -44,19 +44,16 @@ return {
 
 			-- keymaps like `<C-a>`
 			{ "<", ">", ft = { "vim" } },
-			{ "<", ">", ft = { "lua" }, cond = function(fn) return fn.in_string() end },
-			-- PENDING https://github.com/altermo/ultimate-autopair.nvim/issues/88
-			-- {
-			-- 	"<",
-			-- 	">",
-			-- 	ft = { "lua" },
-			-- 	cond = function(_)
-			-- 		-- workaround, since using `in_string` trigger often bugs
-			-- 		local col = vim.api.nvim_win_get_cursor(0)[2]
-			-- 		local charBefore = vim.api.nvim_get_current_line():sub(col, col)
-			-- 		return charBefore:find([=[["']]=])
-			-- 	end,
-			-- },
+			{
+				"<",
+				">",
+				ft = { "lua" },
+				cond = function(fn)
+					return fn.in_string()
+						-- PENDING https://github.com/altermo/ultimate-autopair.nvim/issues/88
+						and not vim.endswith(vim.api.nvim_buf_get_name(0), "/ftplugin/lua.lua")
+				end,
+			},
 		},
 	},
 	{ -- better `:substitute`

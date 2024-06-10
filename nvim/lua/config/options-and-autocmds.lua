@@ -19,7 +19,7 @@ opt.splitright = true -- split right instead of left
 opt.splitbelow = true -- split down instead of up
 
 opt.cursorline = true
-opt.signcolumn = "yes:1" -- static width
+opt.signcolumn = "yes:1" 
 
 opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1" -- one more than textwidth
