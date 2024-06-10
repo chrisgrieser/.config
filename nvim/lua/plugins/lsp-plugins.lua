@@ -122,14 +122,24 @@ return {
 		event = "LspAttach",
 		opts = {
 			request_pending_text = false, -- remove "loading…"
-			hl = { link = "LspInlayHint" },
-			vt_position = "end_of_line",
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
+			vt_position = "signcolumn", -- |"end_of_line"
+			hl = { link = "Comment" },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
-				return (" 󰈿 %s "):format(symbol.references)
+				return tostring(symbol.references)
+					:gsub("0", "") -- SIC there is no numeric 0 nerdfont icon
+					:gsub("1", "󰬺")
+					:gsub("2", "󰬻")
+					:gsub("3", "󰬼")
+					:gsub("4", "󰬽")
+					:gsub("5", "󰬾")
+					:gsub("6", "󰬿")
+					:gsub("7", "󰭀")
+					:gsub("8", "󰭁")
+					:gsub("9", "󰭂")
 			end,
 			disable = {
 				filetypes = { "css", "scss" },

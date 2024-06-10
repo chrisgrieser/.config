@@ -163,7 +163,7 @@ aceVimMap("<CR>", ":wq"); // save and close
 aceVimMap("q", ":q!"); // abort
 
 aceVimMap("<Space>", "ciw");
-aceVimMap("<Ctrl-ü>", "daw"); // needs remap via Karabiner
+// INFO <S-Space> remapped in Karabiner
 aceVimMap("H", "0");
 aceVimMap("L", "$");
 aceVimMap("j", "gj");

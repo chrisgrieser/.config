@@ -229,11 +229,13 @@ rules:
           - { key_code: c, modifiers: [option, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-      # surfing-keys <S-Space> -> <C-ü>
+      # surfing-keys <S-Space> -> daw
       - type: basic
         from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
         to:
-          - { key_code: open_bracket, modifiers: [control] }
+          - { key_code: d }
+          - { key_code: a }
+          - { key_code: w }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
