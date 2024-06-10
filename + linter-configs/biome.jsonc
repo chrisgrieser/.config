@@ -6,11 +6,11 @@
 			"all": true,
 			"nursery": {
 				"all": true,
-				"noConsole": "off",
-				"noUnknownProperty": "off" // css variables, TODO buggy, investigate later
+				"noUnknownProperty": "off", // css variables, TODO buggy, investigate later
+				"useTopLevelRegex": "info"
 			},
 			"suspicious": {
-				"noConsoleLog": "off" // JXA does not allow `console.info`, so we need `console.log`
+				"noConsoleLog": "info" // JXA does not allow `console.info`, so we need `console.log`
 			},
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "off", // sometimes useful
