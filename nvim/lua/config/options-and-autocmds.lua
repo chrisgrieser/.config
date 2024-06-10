@@ -351,14 +351,17 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
-local ns = vim.api.nvim_create_namespace("quickfix_signs")
+-- add signs to the quickfix list
+local quickfix_ns = vim.api.nvim_create_namespace("quickfix_signs")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
-		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
-		
-	local qf = vim.fn.getqflist()[1]
-
-	local qfBuffers = vim.tbl_map(function(item) return item.bufnr end, qf.items)
+		vim.api.nvim_buf_clear_namespace(0, quickfix_ns, 0, -1)
+		for _, qf in pairs(vim.fn.getqflist()) do
+			vim.api.nvim_buf_set_extmark(qf.bufnr, quickfix_ns, qf.lnum - 1, qf.col - 1, {
+				sign_text = "",
+				sign_hl_group = "DiagnosticSignInfo",
+			})
+		end
 	end,
 })
 
