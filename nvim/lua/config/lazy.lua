@@ -99,6 +99,7 @@ local pluginTypeIcons = {
 	["mason"] = " ",
 	["motions-and-textobjects"] = "󱡔 ",
 	["telescope-config"] = "󰭎 ",
+	["lualine"] = "󰇘 ",
 }
 
 -- goto plugin config, replaces telescope-lazy-plugins.nvim

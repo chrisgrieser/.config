@@ -351,4 +351,16 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
+local ns = vim.api.nvim_create_namespace("quickfix_signs")
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	callback = function()
+		
+	local qf = vim.fn.getqflist()[1]
+
+	local qfBuffers = vim.tbl_map(function(item) return item.bufnr end, qf.items)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 require("funcs.auto-comma") -- TODO
