@@ -18,7 +18,7 @@ return {
 		"SmiteshP/nvim-navic",
 		event = "LspAttach",
 		opts = {
-			lazy_update_context = true,
+			lazy_update_context = false,
 			lsp = {
 				auto_attach = true,
 				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
@@ -58,7 +58,7 @@ return {
 			require("nvim-navic").setup(opts)
 
 			u.addToLuaLine("tabline", "lualine_b", { "navic", padding = { left = 1, right = 0 } })
-			-- FIX dummy component to fix blank space https://github.com/SmiteshP/nvim-navic/issues/115
+			-- FIX use this dummy component to remove blank space https://github.com/SmiteshP/nvim-navic/issues/115
 			u.addToLuaLine("tabline", "lualine_b", {
 				function() return " " end,
 				cond = function() return #(require("nvim-navic").get_data() or {}) > 0 end,
@@ -102,7 +102,7 @@ return {
 				"<D-g>",
 				function() require("lsp_signature").toggle_float_win() end,
 				mode = { "n", "v", "i" },
-				desc = "󰒕 LSP signature",
+				desc = "󰏪 LSP signature",
 			},
 		},
 		opts = {
@@ -157,7 +157,7 @@ return {
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
-			vt_position = "signcolumn", -- |"end_of_line"
+			vt_position = "signcolumn", -- not eol, to not conflict with inlay hints
 			hl = { link = "Comment" },
 			text_format = function(symbol)
 				if not (symbol.references and symbol.references > 0) then return "" end
