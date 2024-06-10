@@ -48,11 +48,11 @@ settings.theme = `
 }`;
 
 //──────────────────────────────────────────────────────────────────────────────
-// IGNORE LIST
+// SITE-SPECIFIC SETTINGS
 
-// websearch navigator
-unmap("j", /google/);
-unmap("k", /google/);
+// Google extensions
+unmap("j", /google/); // websearch navigator
+unmap("k", /google/); // websearch navigator
 unmap("c", /google/); // Grepper
 
 // for BetterTouchTool Mappings
@@ -66,9 +66,18 @@ unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
 
 // disable emojis on GitHub, since they already have them
-if (document.origin === "https://github.com") {
-	settings.enableEmojiInsertion = false;
-}
+if (document.origin === "https://github.com") settings.enableEmojiInsertion = false;
+
+mapkey(
+	"gu",
+	"go up to subreddit",
+	() => {
+		const redditRegex = /https:\/\/(new|old|www)\.reddit\.com\/r\/\w+/;
+		const subredditUrl = window.location.href.match(redditRegex)[0];
+		if (subredditUrl) window.location.href = subredditUrl;
+	},
+	{ domain: /reddit\.com/ },
+);
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -106,7 +115,6 @@ map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
 
 mapkey("t", "Choose a tab", () => Front.openOmnibar({ type: "Tabs" }));
-settings.tabsMRUOrder = false;
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -152,7 +160,7 @@ map("-", "/");
 // Misc
 map("P", "oi"); // private window (incognito)
 map("gi", "I"); // enter insert field
-map("i", "passthrough", () => Normal.PassThrough(500));
+mapkey("i", "Passthrough", () => Normal.PassThrough(500));
 map("p", "<Alt-p>"); // pin (INFO needs to be after mapping `i` to prevent recursion)
 map(",", ";e"); // Settings
 
@@ -183,6 +191,6 @@ aceVimMap("aq", 'a"');
 aceVimMap("ie", "i`");
 aceVimMap("ae", "a`");
 
-imap("<Ctrl-a>", "<Ctrl-f>"); // boL
+imap("<Ctrl-a>", "<Ctrl-f>"); // BoL
 
 //──────────────────────────────────────────────────────────────────────────────
