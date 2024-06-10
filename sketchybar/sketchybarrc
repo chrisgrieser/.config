@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# vim: filetype=sh
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
@@ -24,12 +23,14 @@ else
 fi
 
 # HACK using popup for second row. the popup only refers to the clock item to
-# anchor it to the leftmost item, it actually has nothing to do with the clock
+# anchor it to the leftmost item, it does not actually do anything with the clock
 first_row="left"
 second_row="popup.clock"
 
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
+
+statswidth=250
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
@@ -73,7 +74,7 @@ sketchybar \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
-	--set "Stats,CombinedModules" width=235 \
+	--set "Stats,CombinedModules" width=$statswidth \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon.padding_right=3 \
