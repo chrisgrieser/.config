@@ -89,10 +89,6 @@ rules:
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Highlight 🟨"
-        to_if_held_down:
-          - shell_command:
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
-              "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Mimestream: Archive
@@ -100,10 +96,6 @@ rules:
         from: { pointing_button: button5 }
         to_if_alone:
           - key_code: e
-        to_if_held_down:
-          - shell_command:
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
-              "search-selection" in workflow "de.chris-grieser.ddgr"'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
       # Fallback behavior: Close Window
@@ -111,24 +103,6 @@ rules:
         from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: w, modifiers: [command] }
-        to_if_held_down:
-          - shell_command:
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
-              "search-selection" in workflow "de.chris-grieser.ddgr"'
-  #─────────────────────────────────────────────────────────────────────
-  - description: "(Mouse) 1+2 (simultaneously): Dictionary Lookup"
-    manipulators:
-      - type: basic
-        from:
-          simultaneous:
-            - pointing_button: button1
-            - pointing_button: button2
-        to:
-          - pointing_button: button1 # in case it's not the front window
-          - { key_code: d, modifiers: [control, command] }
-        conditions:
-          # conflicts for some reason with space+dragging in the Canvas plugin
-          - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
   - description: "(Mouse) 6: Cmd+Tab"
