@@ -24,7 +24,8 @@
 	"linter": {
 		"rules": {
 			"correctness": { "noUnusedVariables": "off" }, // unused functions in vimrc jsfile
-			"suspicious": { "noDebugger": "off" } // intentional for freeze command
+			"suspicious": { "noDebugger": "off" }, // intentional for freeze command
+			"nursery": { "useTopLevelRegex": "off" } // not useful here
 		}
 	},
 
