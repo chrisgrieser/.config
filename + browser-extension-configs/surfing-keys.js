@@ -7,7 +7,8 @@
 // - example configs https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap, removeSearchAlias } = api;
+// biome-ignore format: too long
+const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -157,14 +158,16 @@ mapkey("ym", "Copy Markdown Link", async () => {
 map("P", "oi"); // private window (incognito)
 map("p", "<Alt-p>");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
-map(",", ";e"); // Settings
+
+mapkey(",", "Open Surfingkey Settings", () => {
+	const filePath = "/Users/chrisgrieser/.config/+ browser-extension-configs/surfing-keys.js";
+});
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
 map("-", "/");
 
-
-
+vmapkey("s", "Google Selection", () => searchSelectedWith("https://www.google.com/search?q="));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -197,6 +200,6 @@ imap("<Ctrl-a>", "<Ctrl-f>"); // BoL
 
 //──────────────────────────────────────────────────────────────────────────────
 
-//for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
-//	removeSearchAlias(alias);
-//}
+for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
+	removeSearchAlias(alias);
+}
