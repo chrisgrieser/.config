@@ -22,8 +22,12 @@ settings.smartCase = true;
 // disable surfingkey's pdf viewer
 // chrome.storage.local.set({ noPdfViewer: 1 });
 
+//──────────────────────────────────────────────────────────────────────────────
+// EMOJIS
+
 settings.enableEmojiInsertion = true;
 settings.startToShowEmoji = 1;
+if (window.location.host === "github.com") settings.enableEmojiInsertion = false;
 
 //──────────────────────────────────────────────────────────────────────────────
 // THEME
@@ -64,9 +68,6 @@ unmap("N", /crunchyroll/);
 unmap("?", /github\.com/);
 unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
-
-// disable emojis on GitHub, since they already have them
-if (window.location.host === "github.com") settings.enableEmojiInsertion = false;
 
 mapkey(
 	"gu",
@@ -111,7 +112,12 @@ map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
-map("gr", "ox"); // [g]o to [r]ecent item from history
+mapkey("gr", "Recent sites", () =>
+	Front.openOmnibar({
+		// type: "RecentlyClosed",
+		type: "History",
+	}),
+);
 
 //──────────────────────────────────────────────────────────────────────────────
 
