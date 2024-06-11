@@ -149,6 +149,7 @@ return {
 				topdelete = { show_count = true },
 				changedelete = { show_count = true },
 			},
+			sign_priority = 1000,
 		},
 		config = function(_, opts)
 			require("gitsigns").setup(opts)

@@ -19,7 +19,7 @@ opt.splitright = true -- split right instead of left
 opt.splitbelow = true -- split down instead of up
 
 opt.cursorline = true
-opt.signcolumn = "yes:1" 
+opt.signcolumn = "yes:1"
 
 opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 opt.colorcolumn = "+1" -- one more than textwidth
@@ -360,7 +360,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			vim.api.nvim_buf_set_extmark(qf.bufnr, quickfix_ns, qf.lnum - 1, qf.col - 1, {
 				sign_text = "",
 				sign_hl_group = "DiagnosticSignInfo",
-				priority = 10, -- Gitsigns uses 6, we want to be above
+				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})
 		end
 	end,
