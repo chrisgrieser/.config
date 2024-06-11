@@ -91,10 +91,7 @@ local efmTools = {
 			lintSource = "just",
 			lintCommand = 'just --summary --justfile="${INPUT}"',
 			lintStdin = false,
-			lintFormats = {
-				"%Aerror: %m", -- multiline part 1
-				"%C  ——▶ %f:%l:%c%Z", -- multiline part 2
-			},
+			lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
 			rootMarkers = { "Justfile", ".justfile" },
 		},
 	},
@@ -105,11 +102,12 @@ local efmTools = {
 			lintCommand = '[[ ${INPUT} =~ ".github/workflows/" ]] && actionlint -no-color -oneline -stdin-filename ${INPUT} -',
 			lintStdin = true,
 			lintFormats = {
-				"%f:%l:%c: %m",
 				-- actionlint integrates shellcheck, which are following three
 				"%f:%l:%c: %.%#: SC%n:%trror:%m",
 				"%f:%l:%c: %.%#: SC%n:%tarning:%m",
 				"%f:%l:%c: %.%#: SC%n:%tnfo:%m",
+				-- actionlint's own errors
+				"%f:%l:%c: %m",
 			},
 			requireMarker = true,
 			rootMarkers = { ".github/" },
@@ -364,17 +362,16 @@ serverConfigs.vale_ls = {
 		syncOnStartup = false,
 	},
 
-	-- just needs any root directory to work, we are providing the config already
-	root_dir = function() return os.getenv("HOME") end,
-
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
 	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
 
 	on_attach = function(vale, bufnr)
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
 		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-		if not vim.tbl_isempty(obsiDir) then vim.cmd.LspStop(vale.id) end
-		vim.defer_fn(function() vim.diagnostic.reset(nil, bufnr) end, 600)
+		if not vim.tbl_isempty(obsiDir) then
+			vim.cmd.LspStop(vale.id)
+			vim.diagnostic.reset(nil, bufnr)
+		end
 	end,
 }
 

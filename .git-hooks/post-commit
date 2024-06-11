@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# vim: filetype=sh
 # INFO using post-commit, as there is no post-push hook
 
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
