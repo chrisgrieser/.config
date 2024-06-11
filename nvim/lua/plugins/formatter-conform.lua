@@ -104,7 +104,6 @@ local function formattingFunc(bufnr)
 			}
 		end
 	end)
-	vim.cmd.update { bang = true }
 end
 
 --------------------------------------------------------------------------------
@@ -118,9 +117,9 @@ return {
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
 
-		-- vim.api.nvim_create_autocmd("FocusLost", {
-		-- 	callback = function(ctx) formattingFunc(ctx.buf) end,
-		-- })
+		vim.api.nvim_create_autocmd("FocusLost", {
+			callback = function(ctx) formattingFunc(ctx.buf) end,
+		})
 	end,
 	keys = {
 		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },

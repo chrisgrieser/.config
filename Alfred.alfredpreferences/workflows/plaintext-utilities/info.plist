@@ -323,7 +323,7 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsfiles</key>
-				<false/>
+				<true/>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>acceptstext</key>
@@ -423,7 +423,7 @@
 			<key>config</key>
 			<dict>
 				<key>acceptsfiles</key>
-				<false/>
+				<true/>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>acceptstext</key>
