@@ -53,6 +53,7 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"actionlint",
 }
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
@@ -95,6 +96,23 @@ local efmTools = {
 				"%C  ——▶ %f:%l:%c%Z", -- multiline part 2
 			},
 			rootMarkers = { "Justfile", ".justfile" },
+		},
+	},
+	yaml = {
+		{
+			lintSource = "actionlint",
+			-- condition ensures that issue templates are not linted
+			lintCommand = '[[ ${INPUT} =~ ".github/workflows/" ]] && actionlint -no-color -oneline -stdin-filename ${INPUT} -',
+			lintStdin = true,
+			lintFormats = {
+				"%f:%l:%c: %m",
+				-- actionlint integrates shellcheck, which are following three
+				"%f:%l:%c: %.%#: SC%n:%trror:%m",
+				"%f:%l:%c: %.%#: SC%n:%tarning:%m",
+				"%f:%l:%c: %.%#: SC%n:%tnfo:%m",
+			},
+			requireMarker = true,
+			rootMarkers = { ".github/" },
 		},
 	},
 }
