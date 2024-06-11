@@ -28,6 +28,7 @@ return {
 			depth_limit = 7,
 			highlight = true,
 			depth_limit_indicator = "…",
+			format_text = function(text) return text:gsub("\t", "") end, -- FIX tabs in breadcrumbs
 		},
 		init = function()
 			-- FIX background color for `opts.highlight = true`
@@ -159,8 +160,15 @@ return {
 			implementation = { enabled = false },
 			vt_position = "signcolumn", -- not eol, to not conflict with inlay hints
 			hl = { link = "Comment" },
+			disable = {
+				filetypes = { "css" },
+				lsp = {},
+			},
 			text_format = function(symbol)
-				if not (symbol.references and symbol.references > 0) then return "" end
+				if not symbol.references then return "" end
+				if symbol.references == 0 or (symbol.references < 2 and vim.bo.filetype == "css") then
+					return
+				end
 				if symbol.references > 100 then return "++" end
 				return tostring(symbol.references)
 					:gsub("0", "") -- there is no numeric 0 nerdfont icon, so using dot

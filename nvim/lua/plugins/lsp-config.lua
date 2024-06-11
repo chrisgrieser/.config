@@ -167,8 +167,8 @@ serverConfigs.ruff_lsp = {
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
 serverConfigs.cssls = {
-	-- later, using `biome` instead (this key overrides `settings.format.enable = true`)
-	init_options = { provideFormatter = true },
+	-- using `biome` instead (this key overrides `settings.format.enable = true`)
+	init_options = { provideFormatter = false },
 
 	settings = {
 		css = {
