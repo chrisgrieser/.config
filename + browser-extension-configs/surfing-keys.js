@@ -1,10 +1,11 @@
 // @ts-nocheck
 // DOCS https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
+// DOCS https://github.com/brookhong/Surfingkeys/wiki/FAQ
 // EXAMPLE configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 // DEFAULT mappings: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
+const { Normal, Hints, Front, imap, map, mapkey, unmap, iunmap, aceVimMap } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -13,7 +14,6 @@ const banner = api.Front.showBanner;
 // DOCS https://github.com/brookhong/Surfingkeys#edit-your-own-settings
 settings.richHintsForKeystroke = 500; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
-settings.enableEmojiInsertion = true;
 settings.modeAfterYank = "normal"; // = leave visual mode after yanking
 
 settings.caseSensitive = false;
@@ -22,6 +22,7 @@ settings.smartCase = true;
 // disable surfingkey's pdf viewer
 // chrome.storage.local.set({ noPdfViewer: 1 });
 
+settings.enableEmojiInsertion = true;
 settings.startToShowEmoji = 1;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -66,7 +67,9 @@ unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
 
 // disable emojis on GitHub, since they already have them
-if (document.origin === "https://github.com") settings.enableEmojiInsertion = false;
+//if (document.origin === "https://github.com") settings.enableEmojiInsertion = false;
+// iunmap(":", /github\.com/);
+// unmap(":", /github\.com/);
 
 mapkey(
 	"gu",
