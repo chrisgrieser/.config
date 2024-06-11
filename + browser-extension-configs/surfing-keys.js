@@ -1,8 +1,10 @@
 // @ts-nocheck
-// DOCS https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
-// DOCS https://github.com/brookhong/Surfingkeys/wiki/FAQ
-// EXAMPLE configs: https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
-// DEFAULT mappings: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
+
+// DOCS
+// - API https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
+// - FAQ https://github.com/brookhong/Surfingkeys/wiki/FAQ
+// - default mappings https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
+// - example configs https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
 const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
@@ -32,7 +34,7 @@ if (window.location.host === "github.com") settings.enableEmojiInsertion = false
 //──────────────────────────────────────────────────────────────────────────────
 // THEME
 
-Hints.style("font-family: Arial; font-size: 15px;");
+Hints.style("font-family: Helvetica; font-size: 14px;");
 
 // cssclasses: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/ui/frontend.css
 settings.theme = `
@@ -175,9 +177,8 @@ map("-", "/");
 
 // Misc
 map("P", "oi"); // private window (incognito)
-map("gi", "I"); // enter insert field
-mapkey("i", "Passthrough", () => Normal.PassThrough(500));
-map("p", "<Alt-p>"); // pin (INFO needs to be after mapping `i` to prevent recursion)
+map("p", "<Alt-p>"); 
+mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 map(",", ";e"); // Settings
 
 //──────────────────────────────────────────────────────────────────────────────
