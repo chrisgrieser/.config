@@ -14,7 +14,7 @@ const banner = api.Front.showBanner;
 // SETTINGS
 
 // DOCS https://github.com/brookhong/Surfingkeys#edit-your-own-settings
-settings.richHintsForKeystroke = 500; // like whichkey, value is delay till shown
+settings.richHintsForKeystroke = 600; // like whichkey, value is delay till shown
 settings.hintShiftNonActive = true; // vimium-like: holding shift while pressing hint opens in bg tab
 settings.modeAfterYank = "normal"; // = leave visual mode after yanking
 
@@ -121,8 +121,6 @@ mapkey("gr", "Recent sites", () =>
 	}),
 );
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
 map("m", "x"); // close tab
@@ -145,8 +143,6 @@ map("e", "gx$"); // close tabs on right
 
 mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // WINDOW
 map("<Ctrl-v>", "W"); // move tab to new window (= vsplit with Hammerspoon)
 map("M", ";gw"); // merge all windows
@@ -154,8 +150,6 @@ map("M", ";gw"); // merge all windows
 // Links
 map("F", "C"); // Open Hint in new tab
 map("c", ";U"); // Edit current URL
-
-//──────────────────────────────────────────────────────────────────────────────
 
 // YANK & CLIPBOARD
 map("o", "cc"); // open URL from clipboard or selection
@@ -168,22 +162,19 @@ mapkey("ym", "Copy Markdown Link", async () => {
 	banner("Copied: " + mdLink);
 });
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // FIND
 map("-", "/");
 
-//──────────────────────────────────────────────────────────────────────────────
 
-// Misc
+// MISC
 map("P", "oi"); // private window (incognito)
 map("p", "<Alt-p>"); 
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 map(",", ";e"); // Settings
 
 //──────────────────────────────────────────────────────────────────────────────
-// INSERT MODE / ACE EDITOR
 
+// INSERT MODE / ACE EDITOR
 aceVimMap("<CR>", ":wq"); // save and close
 aceVimMap("q", ":q!"); // abort
 
