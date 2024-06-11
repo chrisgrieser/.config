@@ -84,8 +84,7 @@ mapkey("yg", "Copy GitHub Link", async () => {
 		return;
 	}
 	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
-	if (!repo) return;
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/);
 	await navigator.clipboard.writeText(repo);
 	banner("Copied: " + repo);
 });
@@ -95,7 +94,7 @@ mapkey("gI", "Open GitHub issues", () => {
 		return;
 	}
 	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/);
 	window.location.href = `https://github.com/${repo}/issues`;
 });
 
@@ -158,10 +157,6 @@ mapkey("ym", "Copy Markdown Link", async () => {
 map("P", "oi"); // private window (incognito)
 map("p", "<Alt-p>");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
-
-mapkey(",", "Open Surfingkey Settings", () => {
-	const filePath = "/Users/chrisgrieser/.config/+ browser-extension-configs/surfing-keys.js";
-});
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
