@@ -36,7 +36,7 @@ rules:
         from: { key_code: "9", modifiers: *hyper }
         to:
           - shell_command: |
-              osascript -e '
+              osascript -l JavaScript -e '
                 Application("System Events")
                   .applicationProcesses.byName("NotificationCenter")
                   .windows[0]
