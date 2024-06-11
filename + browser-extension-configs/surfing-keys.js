@@ -5,7 +5,7 @@
 // DEFAULT mappings: https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Normal, Hints, Front, imap, map, mapkey, unmap, iunmap, aceVimMap } = api;
+const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -58,7 +58,6 @@ unmap("c", /google/); // Grepper
 
 // for BetterTouchTool Mappings
 unmap("f", /crunchyroll|animeflix/);
-unmap("n", /crunchyroll/);
 unmap("N", /crunchyroll/);
 
 // site-specific cheatsheets
@@ -67,9 +66,7 @@ unmap("?", /reddit\.com/);
 unmap("?", /devdocs\.io/);
 
 // disable emojis on GitHub, since they already have them
-//if (document.origin === "https://github.com") settings.enableEmojiInsertion = false;
-// iunmap(":", /github\.com/);
-// unmap(":", /github\.com/);
+if (window.location.host === "github.com") settings.enableEmojiInsertion = false;
 
 mapkey(
 	"gu",
@@ -81,6 +78,27 @@ mapkey(
 	},
 	{ domain: /reddit\.com/ },
 );
+
+mapkey("yg", "Copy GitHub Link", async () => {
+	if (window.location.host !== "github.com") {
+		banner("Not at GitHub.");
+		return;
+	}
+	const url = window.location.href;
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+	if (!repo) return;
+	await navigator.clipboard.writeText(repo);
+	banner("Copied: " + repo);
+});
+mapkey("gI", "Open GitHub issues", () => {
+	if (window.location.host !== "github.com") {
+		banner("Not at GitHub.");
+		return;
+	}
+	const url = window.location.href;
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+	window.location.href = `https://github.com/${repo}/issues`;
+});
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -117,7 +135,7 @@ map("yt", "yT"); // duplicate tab in background
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
 
-mapkey("t", "Choose a tab", () => Front.openOmnibar({ type: "Tabs" }));
+mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -140,17 +158,6 @@ mapkey("ym", "Copy Markdown Link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
 	await navigator.clipboard.writeText(mdLink);
 	banner("Copied: " + mdLink);
-});
-mapkey("yg", "Copy GitHub Link", async () => {
-	const url = window.location.href;
-	if (url.startsWith("https://github.com/")) {
-		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
-		if (!repo) return;
-		await navigator.clipboard.writeText(repo);
-		banner("Copied: " + repo);
-	} else {
-		banner("Not at GitHub.");
-	}
 });
 
 //──────────────────────────────────────────────────────────────────────────────
