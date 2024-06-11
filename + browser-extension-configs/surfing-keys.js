@@ -7,7 +7,7 @@
 // - example configs https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
-const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap } = api;
+const { Normal, Hints, Front, imap, map, mapkey, unmap, aceVimMap, removeSearchAlias } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -66,11 +66,6 @@ unmap("c", /google/); // Grepper
 unmap("f", /crunchyroll|animeflix/);
 unmap("N", /crunchyroll/);
 
-// site-specific cheatsheets
-unmap("?", /github\.com/);
-unmap("?", /reddit\.com/);
-unmap("?", /devdocs\.io/);
-
 mapkey(
 	"gu",
 	"go up to subreddit",
@@ -114,12 +109,8 @@ map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
-mapkey("gr", "Recent sites", () =>
-	Front.openOmnibar({
-		// type: "RecentlyClosed",
-		type: "History",
-	}),
-);
+// alt type: "History"
+mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
@@ -162,15 +153,18 @@ mapkey("ym", "Copy Markdown Link", async () => {
 	banner("Copied: " + mdLink);
 });
 
-// FIND
+// MISC
+map("P", "oi"); // private window (incognito)
+map("p", "<Alt-p>");
+mapkey("i", "Passthrough", () => Normal.PassThrough(600));
+map(",", ";e"); // Settings
+
+//──────────────────────────────────────────────────────────────────────────────
+// VISUAL MODE
 map("-", "/");
 
 
-// MISC
-map("P", "oi"); // private window (incognito)
-map("p", "<Alt-p>"); 
-mapkey("i", "Passthrough", () => Normal.PassThrough(600));
-map(",", ";e"); // Settings
+
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -202,3 +196,7 @@ aceVimMap("ae", "a`");
 imap("<Ctrl-a>", "<Ctrl-f>"); // BoL
 
 //──────────────────────────────────────────────────────────────────────────────
+
+//for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
+//	removeSearchAlias(alias);
+//}
