@@ -45,6 +45,7 @@ local spellfixes = {
 	reponse = "response",
 	retrun = "return",
 	retunr = "return",
+	locla = "local",
 	seperate = "separate",
 	seperator = "separator",
 	seperators = "separators",

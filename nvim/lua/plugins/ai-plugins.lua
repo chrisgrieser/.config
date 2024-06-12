@@ -14,6 +14,7 @@ return {
 		event = "InsertEnter",
 		keys = {
 			{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
+			{ "<D-S>", mode = "i", desc = "󰚩 Accept Word" },
 			{
 				"<leader>oa",
 				function()
@@ -24,6 +25,7 @@ return {
 			},
 		},
 		opts = {
+			disable_keymaps = false,
 			keymaps = {
 				accept_suggestion = "<D-s>",
 				accept_word = "<D-S>",
@@ -32,9 +34,10 @@ return {
 				gitcommit = true,
 				DressingInput = true,
 				text = true, -- `pass`' filetype when editing passwords
-				regex = true, -- rg-substitute buffer
+				["rip-substitute"] = true,
 			},
-			color = { suggestion_group = "NonText" },
+			color = { suggestion_group = "NonText" }, -- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
+			disable_inline_completion = false, -- disables cmp integration
 		},
 		config = function(_, opts)
 			require("supermaven-nvim").setup(opts)
