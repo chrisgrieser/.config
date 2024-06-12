@@ -110,7 +110,7 @@ map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
 // alt type: "History"|"RecentlyClosed"
-mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "History" }));
+mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab

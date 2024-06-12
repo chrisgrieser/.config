@@ -158,14 +158,12 @@ return {
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
-			vt_position = "signcolumn", -- not eol, to not conflict with inlay hints
+			vt_position = "signcolumn",
 			hl = { link = "Comment" },
-			disable = { lsp = { "cssls" } },
+			disable = { lsp = { "cssls" } }, -- PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/61
 			text_format = function(symbol)
-				if not symbol.references then return "" end
-				if symbol.references == 0 or (symbol.references < 2 and vim.bo.filetype == "css") then
-					return
-				end
+				if not symbol.references or symbol.references == 0 then return end
+				if symbol.references < 2 and vim.bo.filetype == "css" then return end
 				if symbol.references > 100 then return "++" end
 
 				local refs = tostring(symbol.references)

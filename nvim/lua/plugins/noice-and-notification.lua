@@ -181,24 +181,24 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		opts = {
-			-- PENDING https://github.com/rcarriga/nvim-notify/pull/277
+			-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
 			-- render = "wrapped-minimal",
 			render = require("funcs.TEMP-wrapped-minimal"),
 
 			max_width = math.floor(vim.o.columns * 0.45),
 			minimum_width = 20,
 			top_down = false,
-			level = vim.log.levels.TRACE, -- minimum severity
+			level = 0, -- minimum severity, 0 = show all
 			stages = "slide",
-			icons = { ERROR = "", WARN = "", INFO = "", TRACE = "", DEBUG = "" },
+			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "" },
 			on_open = function(win, record)
 				if not vim.api.nvim_win_is_valid(win) then return end
 
-				-- put title into border
+				-- put title into border PENDING https://github.com/rcarriga/nvim-notify/issues/279
 				local opts = { border = vim.g.borderStyle }
 				local hasTitle = record.title[1] and record.title[1] ~= ""
 				if hasTitle then
-					local title = " " .. record.title[1] .. " "
+					local title = (" %s %s "):format(record.icon or "", record.title[1])
 					local titleHl = ("Notify%sTitle"):format(record.level)
 					opts.title = { { title, titleHl } }
 					opts.title_pos = "left"

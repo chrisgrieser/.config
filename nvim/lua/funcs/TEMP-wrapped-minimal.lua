@@ -1,4 +1,5 @@
--- Like `minimal`, but wrapped text.
+-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
+-- Like `minimal`, but wrapped.
 --------------------------------------------------------------------------------
 
 ---@param line string
@@ -46,7 +47,7 @@ return function(bufnr, notif, highlights, config)
 		priority = 50,
 	})
 
-	-- padding to the left/right
+	-- add padding to the left/right
 	for ln = 1, #message do
 		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
 			virt_text = { { " ", highlights.body } },
