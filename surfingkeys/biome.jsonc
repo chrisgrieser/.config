@@ -11,8 +11,7 @@
 
 	"linter": {
 		"rules": {
-			"nursery": { "useTopLevelRegex": "off" }, // not useful here
-			"style": { "useNamingConvention": "off" } // mostly not set by me
+			"nursery": { "useTopLevelRegex": "off" } // not useful here
 		}
 	},
 
