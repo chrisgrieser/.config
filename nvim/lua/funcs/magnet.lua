@@ -5,7 +5,7 @@ local config = {
 	currentFileIcon = "",
 	bufferByLastUsed = {
 		timeoutSecs = 3,
-		maxBufAgeMins = 15,
+		maxBufAgeMins = 10,
 	},
 	gotoChangedFiles = {
 		maxFiles = 5,
