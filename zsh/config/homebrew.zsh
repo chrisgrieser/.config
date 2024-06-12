@@ -18,16 +18,20 @@ alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# $1: count of formulae/casks to list, default 6
 function recent_updates() {
-	_print-section "Recently updated Formulae"
-	brew list -t --formulae | head -n5
+	local count=${1:-6}
+	_print-section "Recently updated Formulae" "no_newline_before"
+	brew list -t --formulae | head -n"$count" | rs
 
 	_print-section "Recently updated Casks"
-	brew list -t --casks | head -n5
+	brew list -t --casks | head -n"$count" | rs
 }
 
+# $1: title
+# $2: whether to add a newline before
 function _print-section() {
-	echo
+	[[ -z "$2" ]] && echo
 	print "\e[1;34m$1\e[0m"
 	_separator
 }
@@ -41,7 +45,7 @@ function _dump() {
 	# shellcheck disable=2010
 	ls "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Extensions/" |
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
-		>"$dump_path/browser-extensions.txt"
+		> "$dump_path/browser-extensions.txt"
 
 	echo
 	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
@@ -62,7 +66,7 @@ function update_cmdline_tools {
 }
 
 function update() {
-	_print-section "Homebrew"
+	_print-section "Homebrew" "no_newline_before"
 	brew update
 	brew upgrade
 	brew cleanup
@@ -94,7 +98,7 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info & doctor"
+	_print-section "brew info & doctor" "no_newline_before"
 	brew info
 	brew doctor
 
