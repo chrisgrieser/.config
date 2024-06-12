@@ -36,7 +36,6 @@ versions.json
 manifest.json
 jsconfig.json
 tsconfig.json
-esbuild.config.mjs
 biome.jsonc
 
 # python
