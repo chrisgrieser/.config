@@ -3,3 +3,5 @@ vim.notify(msg, vim.log.levels.INFO, {
 	title = "Lorem ipsum",
 	timeout = false,
 })
+
+vim.treesitter.start(0, "mardown")
