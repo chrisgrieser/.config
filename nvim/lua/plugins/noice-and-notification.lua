@@ -29,6 +29,8 @@ local routes = {
 		},
 		view = "popup",
 	},
+	-- output from `:Inspect`
+	{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
 
 	-----------------------------------------------------------------------------
 	-- REDIRECT TO MINI
@@ -181,21 +183,24 @@ return {
 		opts = {
 			-- PENDING https://github.com/rcarriga/nvim-notify/pull/277
 			-- render = "wrapped-compact",
-			render = require("funcs.TEMP-wrapped-compact"),
+			render = require("funcs.TEMP-wrapped-minimal"),
 
 			max_width = math.floor(vim.o.columns * 0.45),
-			minimum_width = 15,
+			minimum_width = 20,
 			top_down = false,
 			level = vim.log.levels.TRACE, -- minimum severity
 			stages = "slide",
-			icons = { ERROR = "", WARN = "▲", INFO = "●", TRACE = "", DEBUG = "" },
-			on_open = function(win)
-				-- set borderstyle
+			on_open = function(win, record)
 				if not vim.api.nvim_win_is_valid(win) then return end
-				vim.api.nvim_win_set_config(win, { border = vim.g.borderStyle })
 
-				local bufnr = vim.api.nvim_win_get_buf(win)
-				highlightsInStacktrace(bufnr)
+				-- title into border
+				vim.api.nvim_win_set_config(win, {
+					title = (" %s  %s "):format(record.icon, record.title[1]),
+					title_pos = "left",
+					border = vim.g.borderStyle,
+				})
+
+				highlightsInStacktrace(vim.api.nvim_win_get_buf(win))
 			end,
 		},
 	},

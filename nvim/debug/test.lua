@@ -1,7 +1,5 @@
-local out = ""
-local s = vim.split(out, "\n")
-vim.notify("👾 s: " .. vim.inspect(s))
-
-for _, file in ipairs(vim.split(out, "\n")) do
-	vim.notify(file)
-end
+local msg = "Lorem ipsum dolor sit amet, officia excepteur. Lorem ipsum dolor sit amet, officia excepteur"
+vim.notify(msg, vim.log.levels.INFO, {
+	title = "Lorem ipsum",
+	timeout = false,
+})
