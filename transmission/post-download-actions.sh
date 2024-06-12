@@ -1,20 +1,24 @@
 #!/usr/bin/env zsh
 # DOCS https://github.com/transmission/transmission/blob/main/docs/Scripts.md#scripts
+# TEST torrents: https://webtorrent.io/free-torrents
 #───────────────────────────────────────────────────────────────────────────────
 
-cd "$TR_TORRENT_DIR" || return 1
+# DELETE CLUTTER & UNNEST SINGLE FILE
 
-# delete clutter
+cd "$TR_TORRENT_DIR" || return 1 # $TR_TORRENT_DIR is where the downloads are stored
 find -E . -regex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
 find . -type d -empty -delete                  # e.g. `Image` folders now empty
 find . -type d -name "Sample" -exec rm -r {} + # Folders with content not accept `-delete`
 
-# if single file, unnest it
 sleep 1
-files_in_folder=$(find . -depth 1 | wc -l | tr -d " ")
+# transmission does not store the downloaded file in a variable, we determine it
+# by checking for a folder last modified in the last minute
+last_folder="$(find . -mindepth 1 -type d -mtime -1m | head -n1)"
+
+files_in_folder=$(find "$last_folder" -depth 1 | wc -l | tr -d " ")
 if [[ $files_in_folder -eq 1 ]]; then
-	mv ./* /..
-	rmdir "$TR_TORRENT_DIR"
+	mv "$last_folder"/* "$TR_TORRENT_DIR"
+	rmdir "$last_folder"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
