@@ -115,7 +115,6 @@ return {
 		opts = {
 			routes = routes,
 			cmdline = {
-				view = "cmdline_popup",
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
 				},
