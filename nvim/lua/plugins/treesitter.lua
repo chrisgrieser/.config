@@ -14,7 +14,7 @@ return {
 
 		highlight = {
 			enable = true,
-			-- disable on large files to prevent lag
+			-- disable on large files
 			disable = function(_, buf) return vim.api.nvim_buf_line_count(buf) > 5000 end,
 		},
 		indent = {
