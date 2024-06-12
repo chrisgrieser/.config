@@ -294,6 +294,8 @@ keymap("n", toggleKey, function()
 		if macro ~= "" then
 			vim.fn.setreg(register, macro)
 			u.notify("Recorded", vim.fn.keytrans(macro), "trace")
+		else
+			u.notify("Recording", "Aborted.", "trace")
 		end
 	end
 	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
