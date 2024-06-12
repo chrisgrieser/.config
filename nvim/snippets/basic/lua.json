@@ -72,17 +72,6 @@
     "filetype": "lua",
     "prefix": "if .. then .. else"
   },
-  "ignore (stylua)": {
-    "body": "-- stylua: ignore",
-    "prefix": "ignore (stylua)"
-  },
-  "ignore start/end (stylua)": {
-    "body": [
-      "-- stylua: ignore start",
-      "-- stylua: ignore end"
-    ],
-    "prefix": "ignore start/end (stylua)"
-  },
   "import module": {
     "body": "local ${1:name} = require(\"${2:module}.${1:name}\")",
     "filetype": "lua",
