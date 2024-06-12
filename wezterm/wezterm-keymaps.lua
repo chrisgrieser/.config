@@ -85,9 +85,6 @@ M.keys = {
 		end),
 	},
 
-	-- INFO using the mapping from the terminal_keybindings.zsh
-	-- undo (ctrl-z set in terminal keybindings)
-	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
 	{ -- for adding inline code to a commit, hotkey consistent with GitHub
 		key = "e",
 		mods = "CMD",
@@ -97,8 +94,11 @@ M.keys = {
 			act.SendKey { key = "LeftArrow" },
 		},
 	},
-	-- Grappling-hook
+	-- REMAP: Grappling Hook (cannot use `bindkey` for `<D-CR>`)
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
+
+	-- REMAP: VI MODE (cannot use `bindkey` for `<S-Space>`)
+	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 
 	{ -- insert line-break https://unix.stackexchange.com/a/80820
 		key = "Enter",

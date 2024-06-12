@@ -75,18 +75,16 @@ keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
 		vim.snippet.jump(1)
 	else
-		local mode = vim.fn.mode()
-		if mode == "s" then return end
-		return mode == "n" and ">>" or "<C-t>"
+		local fallback = { n = ">>", i = "<C-t>" }
+		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉶 indent / next placeholder", expr = true })
 keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
 		vim.snippet.jump(-1)
 	else
-		local mode = vim.fn.mode()
-		if mode == "s" then return end
-		return mode == "n" and "<<" or "<C-d>"
+		local fallback = { n = "<<", i = "<C-d>" }
+		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
 
