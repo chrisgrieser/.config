@@ -200,6 +200,14 @@ return {
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
+		opts = {
+			suppressFormatter = {
+				-- use `biome` instead of `prettier`
+				javascript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
+				typescript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
+				css = { location = "prevLine", ignoreBlock = "/* biome-ignore format: expl */" },
+			},
+		},
 		keys = {
 			{
 				"<leader>cl",
@@ -215,6 +223,12 @@ return {
 				"<leader>cy",
 				function() require("rulebook").yankDiagnosticCode() end,
 				desc = "󰅍 Yank Diagnostic Code",
+			},
+			{
+				"<leader>cf",
+				function() require("rulebook").suppressFormatter() end,
+				mode = { "n", "x" },
+				desc = "󰉿 Suppress Formatter",
 			},
 		},
 	},
