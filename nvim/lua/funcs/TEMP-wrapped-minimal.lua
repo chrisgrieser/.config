@@ -1,5 +1,4 @@
--- PENDING https://github.com/rcarriga/nvim-notify/pull/277
--- WRAPS TEXT AND ADDS SOME PADDING.
+-- Like `minimal`, but wrapped text.
 --------------------------------------------------------------------------------
 
 ---@param line string
@@ -52,12 +51,10 @@ return function(bufnr, notif, highlights, config)
 		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
 			virt_text = { { " ", highlights.body } },
 			virt_text_pos = "inline",
-			strict = false,
 		})
 		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
 			virt_text = { { " ", highlights.body } },
 			virt_text_pos = "right_align",
-			strict = false,
 		})
 	end
 end

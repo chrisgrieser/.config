@@ -169,9 +169,10 @@ return {
 				if symbol.references > 100 then return "++" end
 
 				local refs = tostring(symbol.references)
-				local altDigits = "󰬺󰬻󰬼󰬽󰬾󰬿󰭀󰭁󰭂" -- there is no numeric `0` nerdfont icon, so using dot
-				for i = 1, #altDigits do
-					refs = refs:gsub(tostring(i), altDigits:sub(i, i))
+				local altDigits = -- there is no numeric `0` nerdfont icon, so using dot
+					{ "", "󰬺", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂" }
+				for i = 0, #altDigits - 1 do
+					refs = refs:gsub(tostring(i), altDigits[i + 1])
 				end
 				return refs
 			end,
