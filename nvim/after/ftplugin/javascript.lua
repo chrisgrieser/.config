@@ -1,5 +1,4 @@
--- add space
-vim.bo.commentstring = "// %s" 
+vim.bo.commentstring = "// %s" -- add space
 
 --------------------------------------------------------------------------------
 

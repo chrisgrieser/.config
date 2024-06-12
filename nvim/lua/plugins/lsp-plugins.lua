@@ -160,27 +160,20 @@ return {
 			implementation = { enabled = false },
 			vt_position = "signcolumn", -- not eol, to not conflict with inlay hints
 			hl = { link = "Comment" },
-			disable = {
-				filetypes = { "css" },
-				lsp = {},
-			},
+			disable = { lsp = { "cssls" } },
 			text_format = function(symbol)
 				if not symbol.references then return "" end
 				if symbol.references == 0 or (symbol.references < 2 and vim.bo.filetype == "css") then
 					return
 				end
 				if symbol.references > 100 then return "++" end
-				return tostring(symbol.references)
-					:gsub("0", "") -- there is no numeric 0 nerdfont icon, so using dot
-					:gsub("1", "󰬺")
-					:gsub("2", "󰬻")
-					:gsub("3", "󰬼")
-					:gsub("4", "󰬽")
-					:gsub("5", "󰬾")
-					:gsub("6", "󰬿")
-					:gsub("7", "󰭀")
-					:gsub("8", "󰭁")
-					:gsub("9", "󰭂")
+
+				local refs = tostring(symbol.references)
+				local altDigits = "󰬺󰬻󰬼󰬽󰬾󰬿󰭀󰭁󰭂" -- there is no numeric `0` nerdfont icon, so using dot
+				for i = 1, #altDigits do
+					refs = refs:gsub(tostring(i), altDigits:sub(i, i))
+				end
+				return refs
 			end,
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 			kinds = {

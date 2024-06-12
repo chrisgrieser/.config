@@ -109,8 +109,8 @@ map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
 
-// alt type: "History"
-mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
+// alt type: "History"|"RecentlyClosed"
+mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "History" }));
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
@@ -158,6 +158,9 @@ map("P", "oi"); // private window (incognito)
 map("p", "<Alt-p>");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 
+// HACK open config via hammerspoon, as browser is sandboxed
+mapkey(",", "Open Surfingkeys config", () => window.open("hammerspoon://open-surfingkeys-config"));
+
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
 map("-", "/");
@@ -172,13 +175,13 @@ aceVimMap("q", ":q!"); // abort
 
 aceVimMap("<Space>", "ciw");
 // INFO <S-Space> remapped in Karabiner
-aceVimMap("H", "0");
-aceVimMap("L", "$");
+aceVimMap("H", "g0");
+aceVimMap("L", "g$");
 aceVimMap("j", "gj");
 aceVimMap("k", "gk");
 aceVimMap("U", "<C-r>");
-aceVimMap("J", "6j");
-aceVimMap("K", "6k");
+aceVimMap("J", "4j");
+aceVimMap("K", "4k");
 aceVimMap("M", "gJ"); // mapping `to` gJ instead of `J` to prevent recursion, as there is no `noremap`
 
 // text objects

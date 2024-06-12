@@ -17,6 +17,6 @@ sleep "$delay"
 
 # clear the clipboard only if it is currently in the clipboard
 if [[ "$pw" == "$(pbpaste)" ]]; then
-	pbcopy </dev/null
+	pbcopy < /dev/null
 	echo -n "cleared" # triggers Alfred notification
 fi
