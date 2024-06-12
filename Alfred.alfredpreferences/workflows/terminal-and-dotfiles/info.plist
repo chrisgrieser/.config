@@ -34,6 +34,47 @@
 				<false/>
 			</dict>
 		</array>
+		<key>8E088C69-2526-44C0-84E4-C383FCEF9E87</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A8561B30-E381-49D7-A9BD-976225EE2961</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>EDFA5327-1B5C-4E14-B4B8-9B293E201B1F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A8561B30-E381-49D7-A9BD-976225EE2961</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B6137047-A967-4328-9B9B-2B004A88ACD9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8E088C69-2526-44C0-84E4-C383FCEF9E87</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -145,6 +186,97 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/finder.windows.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>A8561B30-E381-49D7-A9BD-976225EE2961</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>18</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>1</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B6137047-A967-4328-9B9B-2B004A88ACD9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:focusedapp}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>com.apple.finder</string>
+						<key>outputlabel</key>
+						<string>Finder</string>
+						<key>uid</key>
+						<string>EDFA5327-1B5C-4E14-B4B8-9B293E201B1F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>8E088C69-2526-44C0-84E4-C383FCEF9E87</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -177,12 +309,42 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>8E088C69-2526-44C0-84E4-C383FCEF9E87</key>
+		<dict>
+			<key>note</key>
+			<string>frontapp</string>
+			<key>xpos</key>
+			<real>214</real>
+			<key>ypos</key>
+			<real>450</real>
+		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>A8561B30-E381-49D7-A9BD-976225EE2961</key>
+		<dict>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
+		<key>B6137047-A967-4328-9B9B-2B004A88ACD9</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
+		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
+		<dict>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>420</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

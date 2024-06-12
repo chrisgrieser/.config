@@ -94,7 +94,7 @@ _gr() {
 	local -a folders=()
 	while IFS='' read -r dir; do # turn lines into array
 		expanded_dir="${dir/#\~/$HOME}"
-		[[ -d "$expanded_dir" ]] && folders+=("$dir")
+		[[ -d "$expanded_dir" ]] && folders+=("\"$dir\"")
 	done < <(dirs -p | sed '1d')
 
 	local expl && _description -V recent-folders expl 'Recent Folders'
