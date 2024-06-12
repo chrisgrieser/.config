@@ -180,8 +180,7 @@ aceVimMap("<CR>", ":wq"); // save and close
 aceVimMap("q", ":q!"); // abort
 
 aceVimMap("<Space>", "ciw");
-aceVimMap("<Shift-Space>", "daw");
-// INFO <S-Space> remapped in Karabiner
+// INFO <S-Space> needs to be remapped in Karabiner
 aceVimMap("H", "g0");
 aceVimMap("L", "g$");
 aceVimMap("j", "gj");
@@ -201,7 +200,7 @@ aceVimMap("aq", 'a"');
 aceVimMap("ie", "i`");
 aceVimMap("ae", "a`");
 
-imap("<Ctrl-a>", "<Ctrl-f>"); // BoL
+imap("<Ctrl-f>", "<Ctrl-i>"); // forward text to vim editor (conistent with terminal)
 
 //──────────────────────────────────────────────────────────────────────────────
 

@@ -186,11 +186,10 @@ return {
 			render = require("funcs.TEMP-wrapped-minimal"),
 
 			max_width = math.floor(vim.o.columns * 0.45),
-			minimum_width = 20,
+			minimum_width = 25, -- wider for title in border
 			top_down = false,
 			level = 0, -- minimum severity, 0 = show all
 			stages = "slide",
-			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "" },
 			on_open = function(win, record)
 				if not vim.api.nvim_win_is_valid(win) then return end
 
@@ -198,7 +197,7 @@ return {
 				local opts = { border = vim.g.borderStyle }
 				local hasTitle = record.title[1] and record.title[1] ~= ""
 				if hasTitle then
-					local title = (" %s %s "):format(record.icon or "", record.title[1])
+					local title = " " .. record.title[1] .. " "
 					local titleHl = ("Notify%sTitle"):format(record.level)
 					opts.title = { { title, titleHl } }
 					opts.title_pos = "left"
