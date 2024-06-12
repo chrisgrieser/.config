@@ -18,9 +18,9 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		if progress.percentage and progress.percentage > 0 then
 			idx = math.ceil(progress.percentage / 100 * #icons)
 		end
-		local firstWord = vim.split(progress.title, " ")[1]:lower() 
+		local firstWord = vim.split(progress.title, " ")[1]:lower()
 
-		local text = ("%s %s %s"):format(clientName, firstWord, icons[idx])
+		local text = ("%s %s %s"):format(icons[idx], clientName, firstWord)
 		progressText = progress.kind == "end" and "" or text
 	end,
 })
@@ -68,7 +68,7 @@ end
 
 local lualineConfig = {
 	options = {
-		refresh = { statusline = 700 },
+		refresh = { statusline = 500 },
 		globalstatus = true,
 		always_divide_middle = false,
 		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`

@@ -26,7 +26,6 @@ function M.openAlfredPref()
 		notify("", "Not in an Alfred directory.", "warn")
 		return
 	end
-
 	-- using JXA and URI for redundancy, as both are not 100% reliable
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
@@ -76,14 +75,15 @@ end
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
-		ignoreRecipe = "release", -- since it requires user input
+		ignoreRecipe = { "release" }, -- since it requires user input
 		skipFirstInSelection = true,
+		useQuickfix = { "check_tsc" },
 	}
 
 	local function run(recipe)
 		vim.cmd.update()
 		if not recipe then return end
-		if vim.endswith(recipe, "_quickfix") then
+		if vim.tbl_contains(config.useQuickfix, recipe) then
 			vim.opt_local.makeprg = "just"
 			vim.cmd.make(recipe)
 			pcall(vim.cmd.cfirst)
@@ -104,13 +104,16 @@ function M.justRecipe(first)
 		return
 	end
 	local recipes = vim.split(vim.trim(result.stdout), " ")
-	recipes = vim.tbl_filter(function(r) return r ~= config.ignoreRecipe end, recipes)
+	recipes = vim.tbl_filter(
+		function(r) return not vim.tbl_contains(config.ignoreRecipe, r) end,
+		recipes
+	)
 
 	if first then
 		run(recipes[1])
 	else
-		if config.skipFirstInSelection and #recipes > 0 then table.remove(recipes, 1) end
-		vim.ui.select(recipes, { prompt = " Just recipes", kind = "just-recipes" }, run)
+		if config.skipFirstInSelection and #recipes > 2 then table.remove(recipes, 1) end
+		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "just-recipes" }, run)
 	end
 end
 

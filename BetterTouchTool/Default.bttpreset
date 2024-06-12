@@ -181,7 +181,7 @@
     "BSTSnapAreaDefaultShowPictogram" : false,
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "C575FEBA-BC1A-4947-85CE-C5047DFA1043",
+  "BTTPresetUUID" : "363C871A-118E-4D19-8CBF-C6CEB81D8BF1",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.G",
@@ -192,6 +192,58 @@
       },
       "BTTTriggers" : [
 
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "com.brave.Browser.app.cgpipnlpgbhbgbhidmilehpjbpbbhddd",
+      "BTTAppName" : "Animeflix",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "Animeflix",
+      "BTTTriggers" : [
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1718174012.3448911,
+          "BTTTriggerType" : 1100,
+          "BTTTriggerTypeDescriptionReadOnly" : "Double Leftclick",
+          "BTTTriggerTypeDescription" : "click to focus+pause, click to unpause, f for fullscreen",
+          "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+          "BTTUUID" : "2554E437-EBEA-4AB5-A75E-56698116A999",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1718174175.828547,
+              "BTTTriggerParentUUID" : "2554E437-EBEA-4AB5-A75E-56698116A999",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+              "BTTUUID" : "3E3171CD-E591-4BFC-A2E6-F47741238FBB",
+              "BTTLayoutIndependentActionChar" : "f",
+              "BTTShortcutToSend" : "3",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 0
+            },
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1718174175.8285599,
+              "BTTTriggerParentUUID" : "2554E437-EBEA-4AB5-A75E-56698116A999",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+              "BTTUUID" : "CD826AC0-D4B5-4EDE-BE29-B91FF4A6E694",
+              "BTTPredefinedActionType" : 421,
+              "BTTPredefinedActionName" : "Left Click - Without Modifier Keys",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 1
+            }
+          ],
+          "BTTGestureNotes" : "click to focus+pause, click to unpause, f for fullscreen"
+        }
       ]
     },
     {

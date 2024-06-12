@@ -91,9 +91,7 @@ local function telescopeConfig()
 				-- FIX telescope not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = {
-					i = {
-						["<C-h>"] = keymaps.toggleHidden,
-					},
+					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
 
 				-- use small layout, toggle via <D-p>
@@ -172,9 +170,7 @@ local function telescopeConfig()
 					end,
 				},
 				mappings = {
-					i = {
-						["<C-r>"] = "git_reset_soft",
-					},
+					i = { ["<C-r>"] = "git_reset_soft" },
 				},
 			},
 			git_bcommits = {
@@ -189,10 +185,7 @@ local function telescopeConfig()
 				previewer = false,
 				layout_config = { horizontal = { height = 0.4, width = 0.7 } },
 				mappings = {
-					n = {
-						["<D-n>"] = "git_create_branch",
-						["<C-r>"] = "git_rename_branch",
-					},
+					n = { ["<D-n>"] = "git_create_branch", ["<C-r>"] = "git_rename_branch" },
 				},
 			},
 			keymaps = {
