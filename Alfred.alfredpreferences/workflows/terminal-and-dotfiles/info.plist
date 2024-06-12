@@ -34,26 +34,36 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8E088C69-2526-44C0-84E4-C383FCEF9E87</key>
+		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A8561B30-E381-49D7-A9BD-976225EE2961</string>
+				<string>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
-				<string>EDFA5327-1B5C-4E14-B4B8-9B293E201B1F</string>
+				<string>52A23456-F831-47B7-9BA3-F69FA9D761D0</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>A8561B30-E381-49D7-A9BD-976225EE2961</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E118FF31-5A15-4BE3-AF18-16A037503F55</string>
+				<string>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -66,7 +76,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8E088C69-2526-44C0-84E4-C383FCEF9E87</string>
+				<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -202,17 +212,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/finder.windows.current</string>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>get-cwd.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A8561B30-E381-49D7-A9BD-976225EE2961</string>
+			<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -226,11 +244,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>18</integer>
+				<integer>17</integer>
 				<key>hotmod</key>
 				<integer>1835008</integer>
 				<key>hotstring</key>
-				<string>1</string>
+				<string>T</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -252,28 +270,49 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>1</integer>
 						<key>matchstring</key>
-						<string>com.apple.finder</string>
+						<string></string>
 						<key>outputlabel</key>
-						<string>Finder</string>
+						<string>cwd found</string>
 						<key>uid</key>
-						<string>EDFA5327-1B5C-4E14-B4B8-9B293E201B1F</string>
+						<string>52A23456-F831-47B7-9BA3-F69FA9D761D0</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>not found</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>8E088C69-2526-44C0-84E4-C383FCEF9E87</string>
+			<string>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>No cwd found</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -309,12 +348,21 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>8E088C69-2526-44C0-84E4-C383FCEF9E87</key>
+		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
-			<key>note</key>
-			<string>frontapp</string>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>214</real>
+			<real>195</real>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
+		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>360</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
@@ -325,26 +373,34 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>A8561B30-E381-49D7-A9BD-976225EE2961</key>
-		<dict>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>420</real>
-		</dict>
 		<key>B6137047-A967-4328-9B9B-2B004A88ACD9</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>open cwd in terminal</string>
 			<key>xpos</key>
-			<real>45</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
+		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>470</real>
+			<key>ypos</key>
+			<real>495</real>
+		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>505</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>375</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

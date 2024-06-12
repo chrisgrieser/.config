@@ -392,11 +392,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>13</integer>
+				<integer>14</integer>
 				<key>hotmod</key>
 				<integer>1835008</integer>
 				<key>hotstring</key>
-				<string>W</string>
+				<string>E</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>

@@ -34,27 +34,6 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 #───────────────────────────────────────────────────────────────────────────────
 # GOTO active location of various apps (all mac-only)
 
-# FINDER window
-function ..f {
-	finder_dir=$(osascript -e 'tell application "Finder" to return POSIX path of (insertion location as alias)' 2> /dev/null)
-	if [[ ! -d "$finder_dir" ]]; then
-		print "\e[1;33mNo Finder window found.\e[0m"
-		return 1
-	fi
-	cd "$finder_dir" || return 1
-}
-
-# NVIM cwd
-function ..n {
-	if ! pgrep -qx "neovide"; then
-		print "\e[1;33mNeovide not running.\e[0m"
-		return 1
-	fi
-	# INFO requires `vim.opt.titlestring = "%{getcwd()}"` in nvim config
-	nvim_cwd=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
-	cd "$nvim_cwd" || return 1
-}
-
 # ALFRED workflow
 function ..a {
 	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
