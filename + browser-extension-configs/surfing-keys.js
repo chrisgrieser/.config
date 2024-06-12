@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // DOCS
 // - API https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 // - FAQ https://github.com/brookhong/Surfingkeys/wiki/FAQ
@@ -8,7 +6,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore format: too long
-const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith } = api;
+const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith, RUNTIME } = api;
 const banner = api.Front.showBanner;
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -21,9 +19,6 @@ settings.modeAfterYank = "normal"; // = leave visual mode after yanking
 
 settings.caseSensitive = false;
 settings.smartCase = true;
-
-// disable surfingkey's pdf viewer
-// chrome.storage.local.set({ noPdfViewer: 1 });
 
 //──────────────────────────────────────────────────────────────────────────────
 // EMOJIS
@@ -65,14 +60,14 @@ unmap("c", /google/); // Grepper
 
 // for BetterTouchTool Mappings
 unmap("f", /crunchyroll|animeflix/);
-unmap("N", /crunchyroll/);
+unmap("N", /crunchyroll|animeflix/);
 
 mapkey(
 	"gu",
 	"go up to subreddit",
 	() => {
 		const redditRegex = /https:\/\/(new|old|www)\.reddit\.com\/r\/\w+/;
-		const subredditUrl = window.location.href.match(redditRegex)[0];
+		const subredditUrl = window.location.href.match(redditRegex)?.[0];
 		if (subredditUrl) window.location.href = subredditUrl;
 	},
 	{ domain: /reddit\.com/ },
@@ -84,7 +79,7 @@ mapkey("yg", "Copy GitHub Link", async () => {
 		return;
 	}
 	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/);
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
 	await navigator.clipboard.writeText(repo);
 	banner("Copied: " + repo);
 });
@@ -94,7 +89,7 @@ mapkey("gI", "Open GitHub issues", () => {
 		return;
 	}
 	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/);
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
 	window.location.href = `https://github.com/${repo}/issues`;
 });
 
@@ -104,13 +99,12 @@ mapkey("gI", "Open GitHub issues", () => {
 settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
+map("z", "cs", null, "Change Scroll target");
+
 map("h", "S"); // History Back/Forward
 map("l", "D");
 map("H", "[["); // Next/Prev Page
 map("L", "]]");
-
-// alt type: "History"|"RecentlyClosed"
-mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
@@ -131,6 +125,10 @@ map("yt", "yT"); // duplicate tab in background
 
 map("q", "gx0"); // close tabs on left
 map("e", "gx$"); // close tabs on right
+
+// quick switcher
+// type: "History"|"RecentlyClosed"
+mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
 
 mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
@@ -160,8 +158,8 @@ mapkey("ym", "Copy Markdown Link", async () => {
 });
 
 // MISC
-// map("P", "oi"); // private window (incognito)
-// map("p", "<Alt-p>");
+mapkey("P", "Incognito window", () => RUNTIME("openIncognito", { url: window.location.href }));
+map("p", "<Alt-p>", null, "pin");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 
 // HACK open config via hammerspoon, as browser is sandboxed

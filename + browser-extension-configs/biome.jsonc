@@ -6,17 +6,13 @@
 
 	"javascript": {
 		// https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md#frontshoweditor
-		"globals": [
-			"api",
-			"chrome",
-			"settings"
-		]
+		"globals": ["api", "chrome", "settings"]
 	},
 
 	"linter": {
 		"rules": {
-			// not useful here
-			"nursery": { "useTopLevelRegex": "off" }
+			"nursery": { "useTopLevelRegex": "off" }, // not useful here
+			"style": { "useNamingConvention": "off" } // mostly not set by me
 		}
 	},
 

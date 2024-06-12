@@ -1,4 +1,4 @@
 set quiet := true
 
-release:
-	zsh ./release.sh
+reload:
+    echo "Done."
