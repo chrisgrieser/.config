@@ -77,7 +77,7 @@ function M.justRecipe(first)
 	local config = {
 		ignoreRecipe = { "release" }, -- since it requires user input
 		skipFirstInSelection = true,
-		useQuickfix = { "check_tsc" },
+		useQuickfix = { "check-tsc" },
 	}
 
 	local function run(recipe)
