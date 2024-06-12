@@ -1,27 +1,14 @@
 local plugins = {
 	{
 		"neovim/nvim-lspconfig",
-		-- dependencies = "folke/neodev.nvim",
-		config = function()
-			-- require("lspconfig").lua_ls.setup {}
-			require("lspconfig").ltex.setup {
-				settings = {
-					ltex = {
-						dictionary = { ["en-US"] = "mistke" },
-						diagnosticSeverity = {
-							MORFOLOGIK_RULE_EN_US = "hint",
-							default = "info",
-						},
-					},
-				},
-			}
-		end,
+		config = function() require("lspconfig").lua_ls.setup {} end,
 	},
+	{ "folke/lazydev.nvim", ft = "lua", opts = true },
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = { "williamboman/mason.nvim", opts = true },
 		opts = {
-			ensure_installed = { "lua-language-server", "ltex-ls" },
+			ensure_installed = { "lua-language-server" },
 			run_on_start = true,
 		},
 	},

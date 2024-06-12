@@ -19,8 +19,9 @@
 
 ## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
-- [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim),
+- [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
+- [Bilal2453/luvit-meta](https://github.com/Bilal2453/luvit-meta)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-dr-lsp](https://github.com/chrisgrieser/nvim-dr-lsp)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
@@ -32,8 +33,9 @@
 - [chrisgrieser/nvim-tinygit](https://github.com/chrisgrieser/nvim-tinygit)
 - [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)
 - [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
+- [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
-- [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
+- [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim)
 - [folke/noice.nvim](https://github.com/folke/noice.nvim)
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
@@ -70,7 +72,6 @@
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
-- [sainnhe/everforest](https://github.com/sainnhe/everforest)
 - [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)

@@ -135,18 +135,24 @@ map("e", "gx$"); // close tabs on right
 mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
 // WINDOW
-map("<Ctrl-v>", "W"); // move tab to new window (= vsplit with Hammerspoon)
-map("M", ";gw"); // merge all windows
+map("<Ctrl-v>", "W", null, "Move to new Window (split via Hammerspoon)");
+map("M", ";gw", null, "Merge Windows");
 
 // Links
 map("F", "C"); // Open Hint in new tab
 map("c", ";U"); // Edit current URL
 
 // YANK & CLIPBOARD
-map("o", "cc"); // open URL from clipboard or selection
-map("yf", "ya"); // yank a link
-map("ye", "yv"); // yank text of an element
-map("yw", "yY"); // yank all tabs in window
+mapkey("o", "Open from clipboard", async () => {
+	const clipb = await navigator.clipboard.readText();
+	if (clipb.startsWith("http")) window.open(clipb);
+	else banner("Not a URL");
+});
+
+map("yf", "ya", null, "Yank Link (via Hint)");
+map("yc", "yq", null, "Yank Codeblock");
+map("ye", "yv", null, "Yank Element");
+map("yw", "yY", null, "Yank all tabs in window");
 mapkey("ym", "Copy Markdown Link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
 	await navigator.clipboard.writeText(mdLink);
@@ -154,8 +160,8 @@ mapkey("ym", "Copy Markdown Link", async () => {
 });
 
 // MISC
-map("P", "oi"); // private window (incognito)
-map("p", "<Alt-p>");
+// map("P", "oi"); // private window (incognito)
+// map("p", "<Alt-p>");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 
 // HACK open config via hammerspoon, as browser is sandboxed
@@ -174,6 +180,7 @@ aceVimMap("<CR>", ":wq"); // save and close
 aceVimMap("q", ":q!"); // abort
 
 aceVimMap("<Space>", "ciw");
+aceVimMap("<Shift-Space>", "daw");
 // INFO <S-Space> remapped in Karabiner
 aceVimMap("H", "g0");
 aceVimMap("L", "g$");
