@@ -228,6 +228,7 @@ function toggleLowercaseTitleCase() {
 
 	editor.replaceRange(newWord, from, to);
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+	fsfsf
 }
 
 // forward looking `gx`
