@@ -68,7 +68,7 @@
 			<key>text</key>
 			<string>ChatGPT: {query}</string>
 			<key>url</key>
-			<string>https://chat.openai.com?q={query}</string>
+			<string>https://chatgpt.com?q={query}</string>
 		</dict>
 		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
 		<dict>
