@@ -186,6 +186,8 @@ function remote_info {
 	printf "\e[1;34mgh default repo:\e[0m " && gh repo set-default --view
 }
 
+cat foo | grep "defiend"
+
 # Github Url: open & copy url
 function gu {
 	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |

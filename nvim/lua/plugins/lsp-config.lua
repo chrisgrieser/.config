@@ -75,7 +75,7 @@ serverConfigs.bashls = {
 local efmTools = {
 	zsh = {
 		{
-			lintSource = "shellcheck",
+			-- lintSource = "shellcheck",
 			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
 			lintStdin = true,
 			lintFormats = {
