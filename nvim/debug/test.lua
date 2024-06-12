@@ -6,3 +6,4 @@ vim.notify(msg, vim.log.levels.INFO, {
 })
 
 vim.fn.matchadd("ErrorMsg", "\\s*local")
+-- test: fffff
