@@ -71,7 +71,8 @@ function _list_files_here {
 }
 
 function _gitstatus {
-	git add --intent-to-add --all # so new files show up in `git diff`
+	# so git picks up new files
+	git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &>/dev/null
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		local max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}
