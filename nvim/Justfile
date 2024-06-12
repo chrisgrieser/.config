@@ -28,9 +28,7 @@ update-plugins:
 #───────────────────────────────────────────────────────────────────────────────
 # runs minimal config for debugging purposes with neovide
 
-debugFile := env_var("HOME") + "/Desktop/scratch.md"
-
-# debugFile := "./debug/test.lua"
+debugFile := "./debug/test.lua"
 
 debug:
     # `bdelete` to FIX https://github.com/neovide/neovide/issues/2609

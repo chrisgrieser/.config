@@ -214,15 +214,7 @@ rules:
           - shell_command: open 'chrome://extensions/'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-      # FIX cmd+q on PWAs should not quit Brave itself
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com.brave.Browser.app.*] # PWAs
-        to:
-          - { key_code: w, modifiers: [command] }
-      # dev tools
+      # dev tools -> element picker
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
@@ -230,14 +222,14 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
       # surfing-keys <S-Space> -> daw
-      - type: basic
-        from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-        to:
-          - { key_code: d }
-          - { key_code: a }
-          - { key_code: w }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+      # - type: basic
+      #   from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
+      #   to:
+      #     - { key_code: d }
+      #     - { key_code: a }
+      #     - { key_code: w }
+      #   conditions:
+      #     - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Obsidian"
     manipulators:

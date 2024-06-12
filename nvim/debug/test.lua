@@ -4,4 +4,3 @@ vim.notify(msg, vim.log.levels.INFO, {
 	timeout = false,
 })
 
-vim.treesitter.start(0, "mardown")
