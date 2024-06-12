@@ -96,13 +96,6 @@ local lualineConfig = {
 			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
-		lualine_y = {
-			{ -- recording status
-				function() return ("雷Recording to [%s]…"):format(vim.fn.reg_recording()) end,
-				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = function() return { fg = u.getHighlightValue("Error", "fg") } end,
-			},
-		},
 	},
 	sections = {
 		lualine_a = {
@@ -135,6 +128,11 @@ local lualineConfig = {
 			{ quickfixCounter },
 		},
 		lualine_x = {
+			{ -- recording status
+				function() return "雷Recording to…" end,
+				cond = function() return vim.fn.reg_recording() ~= "" end,
+				color = function() return { fg = u.getHighlightValue("Error", "fg") } end,
+			},
 			{ lspProgress },
 			{
 				"diagnostics",
