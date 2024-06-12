@@ -27,7 +27,7 @@ return {
 			extensions = {
 				-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
 				cond = { cond = function(builtinConds) return not builtinConds.in_macro() end },
-				filetype = { nft = { "regex" } }, -- `regex` is used by `rip-substitute`
+				filetype = { nft = { "rip-substitute" } },
 			},
 
 			config_internal_pairs = {
@@ -36,7 +36,7 @@ return {
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
-			{ "[=[", "]=]", ft = { "lua" } }, -- special escape
+			{ "[=[", "]=]", ft = { "lua" } }, -- escape for `[[]]` inside strings
 			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
 			-- scope (= only first word) for commit messages
 			-- stylua: ignore
