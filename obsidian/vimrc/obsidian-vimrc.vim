@@ -286,10 +286,10 @@ exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface
 
 " Critic Markup: accept all
-exmap acceptSuggestions jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
-nnoremap ,a :acceptSuggestions
-exmap rejectSuggestions jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
-nnoremap ,r :rejectSuggestions
+exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
+nnoremap ,a :acceptSuggestionsInLine
+exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrusInLine("reject") }
+nnoremap ,r :rejectSuggestionsInLine
 
 " Add [y]aml property
 exmap addProperty obcommand markdown:add-metadata-property
