@@ -38,6 +38,7 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
@@ -54,7 +55,7 @@ function cacheIsOutdated(path) {
 	const cacheAgeThresholdDays = 7;
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeDays = (+new Date() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	const cacheAgeDays = (Date.now() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
 
@@ -76,6 +77,7 @@ function readFile(path) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
+	// biome-ignore lint/suspicious/noConsoleLog: intentional
 	console.log("keyword:", keyword);
 
 	ensureCacheFolderExists();
@@ -100,6 +102,7 @@ function run() {
 		const iconExists = fileExists(iconpath);
 
 		const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("indexUrl:", indexUrl);
 
 		/** @type {DevDocsIndex} */
