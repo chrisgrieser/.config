@@ -616,13 +616,13 @@
 For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
 
 ## Commands
-- `:h`: Searches the neovim [online :help](https://neovim.io/doc/). 
+- `:h`: Searches the Neovim [online :help](https://neovim.io/doc/). 
 	+ Groups synonyms together, for example, `:w` and `:write` both get one
 	  item.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the respective help.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the help URL to the clipboard.
 - `vp`: Searches [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)
-  for neovim plugins. Mnemonic: `[v]im [p]lugins`.
+  for Neovim plugins. Mnemonic: `[v]im [p]lugins`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the GitHub repo.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the `:help` in the browser (vimdoc converted to HTML).
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the GitHub URL to the clipboard.
@@ -632,8 +632,8 @@ For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.c
 	+ In addition, &lt;kbd&gt;fn⏎&lt;/kbd&gt;: Open the local directory of the plugin in Finder.
 - `mason`: Search for tools available via [mason.nvim](https://github.com/williamboman/mason.nvim).
 - `:old`: Displays and searches your `:oldfiles`. Opens them in the system's
-  default editor for the respective filetype. (To open them directly in neovim,
-  you need a neovim GUI with `Open With…` capability, such as
+  default editor for the respective filetype. (To open them directly in Neovim,
+  you need a Neovim GUI with `Open With…` capability, such as
   [Neovide](http://neovide.dev).)
 
 ## Bug reports, feature requests or just leave a star?
