@@ -6,5 +6,7 @@
 	<string>vim</string>
 	<key>old_search</key>
 	<string>old</string>
+	<key>plugin_search</key>
+	<string>nv</string>
 </dict>
 </plist>

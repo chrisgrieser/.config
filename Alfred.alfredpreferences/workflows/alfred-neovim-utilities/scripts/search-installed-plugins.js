@@ -20,27 +20,29 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const gitEnding = /\.git$/;
+const githubUrlStart = /https?:\/\/github.com\//;
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const pluginLocation = $.getenv("plugin_installation_path");
+	const pluginInstallPath = $.getenv("plugin_installation_path");
 	const masonLocation = $.getenv("mason_installation_path");
 
-	/** @type {AlfredItem|{}[]} */
+	/** @type {AlfredItem[]} */
 	let pluginArray = [];
 	let masonArray = [];
 
-	if (pluginLocation && fileExists(pluginLocation)) {
+	if (pluginInstallPath && fileExists(pluginInstallPath)) {
+		const shellCmd = `cd "${pluginInstallPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`;
 		pluginArray = app
-			.doShellScript(
-				`cd "${pluginLocation}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
-			)
+			.doShellScript(shellCmd)
 			.split("\r")
 			.map((remote) => {
-				const url = remote.replace(/\.git$/, "");
-				const repo = url.replace(/https?:\/\/github.com\//, "");
+				const url = remote.replace(gitEnding, "");
+				const repo = url.replace(githubUrlStart, "");
 				const [owner, name] = repo.split("/");
 				const installPath = $.getenv("plugin_installation_path") + "/" + name;
 

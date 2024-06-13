@@ -3,9 +3,9 @@
 
 reminders delete "$reminder_list" "$id" &> /dev/null
 if [[ -n "$body" ]]; then # empty body causes error
-	reminders add "$reminder_list" "$title" --notes="$body" --due-date="tomorrow" &> /dev/null
+	reminders add "$reminder_list" --notes="$body" --due-date="tomorrow" -- "$title" &> /dev/null
 else
-	reminders add "$reminder_list" "$title" --due-date="tomorrow" &> /dev/null
+	reminders add "$reminder_list" --due-date="tomorrow" -- "$title" &> /dev/null
 fi
 
 echo -n "$title" # pass for notification

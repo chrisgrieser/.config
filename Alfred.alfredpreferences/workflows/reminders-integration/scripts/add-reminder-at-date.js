@@ -7,7 +7,7 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const reminderText = argv[0].trim();
+	const remTitle = argv[0].trim();
 	const list = $.getenv("reminder_list");
 
 	const inDays = $.getenv("inDays");
@@ -15,6 +15,6 @@ function run(argv) {
 	dueDate.setDate(dueDate.getDate() + Number.parseInt(inDays));
 	const isoDate = dueDate.toISOString().slice(0, 10);
 
-	app.doShellScript(`reminders add "${list}" "${reminderText}" --due-date="${isoDate}"`);
-	return reminderText; // Alfred notification
+	app.doShellScript(`reminders add "${list}" --due-date="${isoDate}" -- "${remTitle}"`);
+	return remTitle; // Alfred notification
 }

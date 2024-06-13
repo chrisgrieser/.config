@@ -19,6 +19,10 @@ function httpRequest(url) {
 	return requestStr;
 }
 
+const mdLinkRegex = /\[(.+?)\]\((.+?)\) - (.*)/;
+
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO Searching awesome-neovim instead of neovimcraft or dotfyle, since the
@@ -29,15 +33,18 @@ function httpRequest(url) {
 function run() {
 	// determine local plugins
 	const pluginInstallPath = $.getenv("plugin_installation_path");
-	const installedPlugins = app
-		.doShellScript(
-			`cd "${pluginInstallPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`,
-		)
-		.split("\r")
-		.map((remote) => {
-			const ownerAndName = remote.split("/").slice(3, 5).join("/").slice(0, -4);
-			return ownerAndName;
-		});
+	/** @type {string[]} */
+	let installedPlugins = [];
+	if (fileExists(pluginInstallPath)) {
+		const shellCmd = `cd "${pluginInstallPath}" && grep --only-matching --no-filename --max-count=1 "http.*" ./*/.git/config`;
+		installedPlugins = app
+			.doShellScript(shellCmd)
+			.split("\r")
+			.map((remote) => {
+				const ownerAndName = remote.split("/").slice(3, 5).join("/").slice(0, -4);
+				return ownerAndName;
+			});
+	}
 
 	// awesome-neovim list
 	const awesomeNeovimList =
@@ -49,7 +56,6 @@ function run() {
 		.map((/** @type {string} */ line) => {
 			if (!line.startsWith("- [") || !line.includes("/")) return {};
 
-			const mdLinkRegex = /\[(.+?)\]\((.+?)\) - (.*)/;
 			const [_, repo, url, desc] = line.match(mdLinkRegex) || [];
 			if (!repo || !url) return {};
 			const [author, name] = repo.split("/") || [];

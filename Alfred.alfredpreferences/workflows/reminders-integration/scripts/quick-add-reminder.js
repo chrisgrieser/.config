@@ -75,8 +75,9 @@ function run(argv) {
 	}
 
 	const args = ["reminders", "add", `"${remList}"`, "--due-date=today"];
+	if (remBody) args.push(`--notes="${remBody}"`); // empty string in `--notes` causes error
+	args.push(remBody);
 	args.push("--", `"${remTitle}"`);
-	console.log('👾 args.join(" "):', args.join(" "));
 	app.doShellScript(args.join(" "));
 
 	// Pass for Alfred notification
