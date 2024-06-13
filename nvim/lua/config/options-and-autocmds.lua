@@ -248,36 +248,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
---------------------------------------------------------------------------------
-
--- AUTO-CLOSE BUFFERS whose files do not exist anymore
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	callback = function(ctx)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-
-			-- check if buffer was deleted
-			local bufPath = ctx.file
-			local isSpecialBuffer = vim.bo[ctx.buf].buftype ~= ""
-			local isNewBuffer = bufPath == ""
-			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
-			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
-				return
-			end
-
-			-- open last existing oldfile
-			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufPath)))
-			for _, oldfile in pairs(vim.v.oldfiles) do
-				if u.fileExists(oldfile) then
-					local success = pcall(vim.cmd.edit, oldfile)
-					if success then return end
-				end
-			end
-		end, 300)
-	end,
-})
-
---------------------------------------------------------------------------------
 
 -- AUTO-NOHL
 -- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
