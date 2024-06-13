@@ -207,9 +207,8 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 -- (simplified version of project.nvim)
 local autoCd = {
 	childOfRoot = {
-		"Justfile",
-		".Justfile",
 		".git",
+		"Justfile",
 		"info.plist", -- Alfred workflows
 	},
 	parentOfRoot = {
@@ -242,7 +241,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer then return end
 
 			local msg = ("%q does not exist anymore."):format(vim.fs.basename(bufPath))
-			vim.notify(msg, vim.log.levels.WARN, { timeout = false })
+			vim.notify_once(msg, vim.log.levels.WARN, { timeout = false })
 			vim.api.nvim_create_autocmd("BufLeave", {
 				buffer = ctx.buf,
 				once = true,
