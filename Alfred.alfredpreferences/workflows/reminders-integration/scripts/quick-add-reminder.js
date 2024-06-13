@@ -49,28 +49,33 @@ function browserTab() {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const isBrowser = frontBrowser() !== "no browser";
-
 	const keywordUsed = Boolean(argv[0]);
-	let input = "";
+	let remTitle = "";
+	let remBody = "";
+	const remList = $.getenv("rem_list");
+
 	if (keywordUsed) {
-		input = argv[0] || "";
+		remTitle = argv[0] || "";
 	} else {
 		// get selected text
 		app.setTheClipboardTo(""); // empty clipboard in case of no selection
 		Application("System Events").keystroke("c", { using: ["command down"] });
 		delay(0.1);
-		input = app.theClipboard().toString();
+		remTitle = app.theClipboard().toString();
 	}
 
 	// GUARD
-	if (!input && !isBrowser) return "";
+	if (!remTitle && !isBrowser) return "";
 
-	// add reminder for today
-	const { url, title } = browserTab();
-	const body = isBrowser && !keywordUsed ? url : "";
-	const list = $.getenv("reminder_list");
-	app.doShellScript(`reminders add "${list}" "${input || title}" --due-date="today" ${body}`);
+	// add rem for today
+	if (isBrowser) {
+		const { url, title } = browserTab();
+		remBody = url;
+		remTitle = title;
+	}
+
+	app.doShellScript(`rems add "${remList}" "${remTitle}" --due-date="today" ${remBody}`);
 
 	// Pass for Alfred notification
-	return input;
+	return remTitle;
 }
