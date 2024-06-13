@@ -3,9 +3,9 @@ local u = require("config.utils")
 -- Needs to be triggered manually, since lualine updates the git diff
 -- component only on BufEnter.
 local function updateLualineDiff()
-	if package.loaded["lualine"] then
-		require("lualine.components.diff.git_diff").update_diff_args()
-	end
+	if not package.loaded["lualine"] then return end
+	require("lualine.components.diff.git_diff").update_diff_args()
+	require("lualine").refresh()
 end
 --------------------------------------------------------------------------------
 
