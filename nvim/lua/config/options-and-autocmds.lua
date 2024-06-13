@@ -139,26 +139,12 @@ autocmd("FocusLost", {
 })
 
 --------------------------------------------------------------------------------
--- SEARCH
+-- SEARCH & CMDLINE
 
 opt.ignorecase = true
 opt.smartcase = true
-
---------------------------------------------------------------------------------
--- CMDLINE
 opt.cmdheight = 0 -- also auto-set by noice
 opt.history = 400 -- reduce noise for command history search
-
--- if last command was line-jump, remove it from history to reduce noise
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-	callback = function(ctx)
-		if not ctx.match == ":" then return end
-		vim.defer_fn(function()
-			local lineJump = vim.fn.histget(":", -1):match("^%d+$")
-			if lineJump then vim.fn.histdel(":", -1) end
-		end, 100)
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
@@ -250,30 +236,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- AUTO-CLOSE BUFFERS whose files do not exist anymore
+-- show info when current buffer does not exist anymore
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-
-			-- check if buffer was deleted
 			local bufPath = ctx.file
 			local isSpecialBuffer = vim.bo[ctx.buf].buftype ~= ""
 			local isNewBuffer = bufPath == ""
-			local conformNvimTempBuf = bufPath:find("%.md%.%d+%.%l+$")
-			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer or conformNvimTempBuf then
-				return
-			end
+			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer then return end
 
-			-- open last existing oldfile
-			vim.notify(("%q does not exist anymore."):format(vim.fs.basename(bufPath)))
-			for _, oldfile in pairs(vim.v.oldfiles) do
-				if u.fileExists(oldfile) then
-					local success = pcall(vim.cmd.edit, oldfile)
-					if success then return end
-				end
-			end
-		end, 300)
+			local msg = ("%q does not exist anymore."):format(vim.fs.basename(bufPath))
+			vim.notify(msg, vim.log.levels.WARN, { timeout = false })
+			vim.api.nvim_create_autocmd("BufLeave", {
+				buffer = ctx.buf,
+				once = true,
+				callback = require("notify").dismiss, ---@diagnostic disable-line: missing-parameter
+			})
+		end, 100)
 	end,
 })
 

@@ -52,7 +52,7 @@ function run(argv) {
 	const keywordUsed = Boolean(argv[0]);
 	let remTitle = "";
 	let remBody = "";
-	const remList = $.getenv("rem_list");
+	const remList = $.getenv("reminder_list");
 
 	if (keywordUsed) {
 		remTitle = argv[0] || "";
@@ -68,13 +68,16 @@ function run(argv) {
 	if (!remTitle && !isBrowser) return "";
 
 	// add rem for today
-	if (isBrowser) {
+	if (isBrowser && !keywordUsed) {
 		const { url, title } = browserTab();
 		remBody = url;
 		remTitle = title;
 	}
 
-	app.doShellScript(`rems add "${remList}" "${remTitle}" --due-date="today" ${remBody}`);
+	const args = ["reminders", "add", `"${remList}"`, "--due-date=today"];
+	args.push("--", `"${remTitle}"`);
+	console.log('👾 args.join(" "):', args.join(" "));
+	app.doShellScript(args.join(" "));
 
 	// Pass for Alfred notification
 	return remTitle;

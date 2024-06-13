@@ -63,8 +63,13 @@ return {
 			{ "<leader>fs", function() require("rip-substitute").sub() end, mode = { "n", "x" }, desc = " rip substitute" },
 		},
 		opts = {
-			popupWin = { border = vim.g.borderStyle },
-			editingBehavior = { autoCaptureGroups = true },
+			popupWin = {
+				border = vim.g.borderStyle,
+				hideSearchReplaceLabels = true,
+			},
+			editingBehavior = {
+				autoCaptureGroups = true,
+			},
 		},
 	},
 	{ -- refactoring utilities
