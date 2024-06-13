@@ -30,7 +30,7 @@ second_row="popup.clock"
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
 
-statswidth=250
+statswidth=240
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
