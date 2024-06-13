@@ -76,6 +76,9 @@ local routes = {
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+
+	-- E211 no longer needed, since auto-closing deleted buffers
+	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -178,15 +181,16 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		opts = {
-			-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
-			-- render = "wrapped-minimal",
-			render = require("funcs.TEMP-wrapped-minimal"),
-
 			max_width = math.floor(vim.o.columns * 0.45),
 			minimum_width = 25, -- wider for title in border
 			top_down = false,
 			level = 0, -- minimum severity, 0 = show all
 			stages = "slide",
+			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "" },
+
+			-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
+			-- render = "wrapped-minimal",
+			render = require("funcs.TEMP-wrapped-minimal"),
 			on_open = function(win, record)
 				if not vim.api.nvim_win_is_valid(win) then return end
 
