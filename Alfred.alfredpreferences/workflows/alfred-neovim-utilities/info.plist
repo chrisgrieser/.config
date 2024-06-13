@@ -612,10 +612,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Preview Pane
-For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
-
-## Commands
+	<string>## Commands
 - `:h`: Searches the Neovim [online :help](https://neovim.io/doc/). 
 	+ Groups synonyms together, for example, `:w` and `:write` both get one
 	  item.
@@ -635,6 +632,9 @@ For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.c
   default editor for the respective filetype. (To open them directly in Neovim,
   you need a Neovim GUI with `Open With…` capability, such as
   [Neovide](http://neovide.dev).)
+
+## Preview Pane
+For the preview pane, install [mr-pennyworth/alfred-extra-pane](https://github.com/mr-pennyworth/alfred-extra-pane).
 
 ## Bug reports, feature requests or just leave a star?
 ➡️ [GitHub Repo](https://github.com/chrisgrieser/alfred-neovim-utilities/)
@@ -947,7 +947,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.3.0</string>
+	<string>2.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
