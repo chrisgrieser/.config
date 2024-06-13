@@ -67,9 +67,8 @@ return {
 				border = vim.g.borderStyle,
 				hideSearchReplaceLabels = true,
 			},
-			editingBehavior = {
-				autoCaptureGroups = true,
-			},
+			keymaps = { insertModeConfirm = "<CR>" },
+			editingBehavior = { autoCaptureGroups = true },
 		},
 	},
 	{ -- refactoring utilities

@@ -245,7 +245,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 
 			-- notify
 			local msg = ("%q does not exist anymore."):format(vim.fs.basename(bufPath))
-			vim.notify_once(msg, vim.log.levels.WARN, { timeout = false })
+			vim.notify(msg, vim.log.levels.WARN, { timeout = false })
 			vim.api.nvim_create_autocmd("BufLeave", {
 				buffer = ctx.buf,
 				once = true,
