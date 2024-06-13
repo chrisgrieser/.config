@@ -61,6 +61,7 @@ local spellfixes = {
 	treu = "true",
 	ture = "true",
 	verison = "version",
+	verisons = "versions",
 	woudl = "would",
 }
 

@@ -4,6 +4,9 @@
 // - needs to be run from repo root
 // - updates which devdocs are available, and also updates the versions of the
 //   devdocs used (automatically switches to the latest version)
+// WARN
+// This overwrites all available workflow configuration, so changes needs to
+// be added here manually, such as the field for using specific devdocs versions.
 //──────────────────────────────────────────────────────────────────────────────
 // biome-ignore lint/correctness/noNodejsModules: unsure how to fix this
 import fs from "node:fs";
@@ -53,6 +56,11 @@ const aliases = {
 
 const slugRegex = /~.*/;
 
+// add extra line for workflow versions, since it's overridden further below
+const extraWorkflowConfig = [
+	"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>required</key> <false/> <key>trim</key> <true/> <key>verticalsize</key> <integer>3</integer> </dict> <key>description</key> <string>one per line; see to the right for explanations</string> <key>label</key> <string>pinned devdocs versions</string> <key>type</key> <string>textarea</string> <key>variable</key> <string>select_versions</string> </dict>",
+];
+
 async function run() {
 	const response = await fetch("https://devdocs.io/docs.json");
 	const json = await response.json();
@@ -98,6 +106,7 @@ async function run() {
 			`</array> </dict> <key>description</key> <string></string> <key>label</key> <string>${label}</string> <key>type</key> <string>popupbutton</string> <key>variable</key> <string>keyword_${number}</string> </dict>`,
 		);
 	}
+	newXmlLines.push(...extraWorkflowConfig);
 
 	const start = xmlLines.indexOf("\t<key>userconfigurationconfig</key>") + 2;
 	const end = xmlLines.indexOf("\t</array>", start);
