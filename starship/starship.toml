@@ -47,7 +47,7 @@ format = "[$symbol]($style)"
 when = '[[ "$PWD" =~ "$HOME/repos/" ]]'
 style = "fg:cyan bg:black bold"
 command = 'echo "󰔽"'                    # output trimmed, so spaces must be added at `format`
-format = '[ $output  ]($style)'         # extra space for proper nerdfont sizing
+format = '[ $output ]($style)'          # extra space for proper nerdfont sizing
 
 [directory]
 truncation_length = 2
