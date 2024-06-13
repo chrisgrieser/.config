@@ -26,6 +26,7 @@ bindkey -M viins '…' insert-last-word
 
 autoload -U edit-command-line && zle -N edit-command-line
 bindkey -M viins '^F' edit-command-line
+bindkey -M vicmd '^F' edit-command-line
 
 # alt+arrow to move between words (emulating macOS default behavior)
 bindkey -M viins "^[[1;3D" backward-word
@@ -37,7 +38,7 @@ bindkey -M viins "^E" end-of-line
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
 bindkey -v
-export KEYTIMEOUT=1 # no delay when pressing <Esc>
+export KEYTIMEOUT=1                        # no delay when pressing <Esc>
 bindkey -M viins '^?' backward-delete-char # FIX backspace
 
 # CURSOR SHAPE # https://unix.stackexchange.com/a/614203

@@ -16,9 +16,9 @@ body=$(echo "$*" | tail -n +2)
 
 reminders delete "$reminder_list" "$id" &> /dev/null
 if [[ -n "$body" ]]; then # empty body causes error
-	reminders add "$reminder_list" "$title" --notes="$body" --due-date="today" &> /dev/null
+	reminders add "$reminder_list" --notes="$body" --due-date="today" -- "$title" &> /dev/null
 else
-	reminders add "$reminder_list" "$title" --due-date="today" &> /dev/null
+	reminders add "$reminder_list" --due-date="today" -- "$title" &> /dev/null
 fi
 
 echo -n "$title" # pass for notification
