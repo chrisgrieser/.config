@@ -159,7 +159,7 @@ function M.themeModifications()
 			for _, v in pairs(vimModes) do
 				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
 			end
-		end, 1)
+		end, 100)
 		updateHl("@keyword.return", "gui=bold")
 
 		-- FIX python highlighting issues

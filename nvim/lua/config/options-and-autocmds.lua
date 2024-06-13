@@ -49,9 +49,7 @@ opt.shiftwidth = 3
 opt.shiftround = true
 opt.smartindent = true
 
--- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do). Therefore
--- needs to be set via autocommand.
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's overwritten by ftplugins having the `o` option (which many do). Therefore needs to be set via autocommand.
 autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match ~= "markdown" then
