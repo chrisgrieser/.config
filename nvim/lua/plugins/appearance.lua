@@ -147,31 +147,6 @@ return {
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(...)
 			end
-
-			-- dynamically resize input field
-			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("DressingInputWidth", {}),
-				pattern = "DressingInput",
-				callback = function(ctx)
-					local win = vim.api.nvim_get_current_win()
-					local startWidth = vim.api.nvim_win_get_width(win)
-					local winOpts = vim.api.nvim_win_get_config(win)
-					local padding = 2
-					vim.api.nvim_create_autocmd({ "TextChangedI", "TextChanged" }, {
-						buffer = ctx.buf,
-						callback = function()
-							local lineLength = #vim.api.nvim_get_current_line() + padding
-							local newWidth = math.max(startWidth, lineLength)
-							vim.api.nvim_win_set_config(win, {
-								relative = winOpts.relative,
-								row = winOpts.row,
-								col = math.floor((vim.o.columns - newWidth) / 2),
-								width = newWidth,
-							})
-						end,
-					})
-				end,
-			})
 		end,
 		keys = {
 			{ "<Tab>", "j", ft = "DressingSelect" },
