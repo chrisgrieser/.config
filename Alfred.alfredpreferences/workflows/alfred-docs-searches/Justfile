@@ -1,2 +1,6 @@
-@update:
-    node ./devdocs/update-available-devdocs.mjs && echo "Devdocs updated."
+@update-devdocs-available:
+    node ./devdocs/update-available-devdocs.mjs 
+    echo "Available Devdocs updated."
+
+    # this part is done via GitHub action, so we do not need the file here
+    rm .github/keyword-slug-map.json
