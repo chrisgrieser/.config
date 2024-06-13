@@ -210,8 +210,11 @@ autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 			vim.api.nvim_buf_call(bufnr, function()
-				-- `noautocmd` prevents weird cursor movement
-				vim.cmd.update { mods = { silent = true, lockmarks = true, noautocmd = true } }
+				vim.cmd.update {
+					bang = true,
+					-- `noautocmd` prevents weird cursor movement
+					mods = { silent = true, lockmarks = true, noautocmd = true },
+				}
 			end)
 			b.saveQueued = false
 		end, debounce)
