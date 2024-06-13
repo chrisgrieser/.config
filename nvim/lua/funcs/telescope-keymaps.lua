@@ -120,6 +120,7 @@ function M.toggleHidden(prompt_bufnr)
 	local title = "Find Files: " .. vim.fs.basename(cwd)
 	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
+	local existingFileIgnores = require("telescope.config").values.file_ignore_patterns or {}
 
 	require("telescope.actions").close(prompt_bufnr)
 	require("telescope.builtin").find_files {
@@ -128,6 +129,14 @@ function M.toggleHidden(prompt_bufnr)
 		hidden = ignoreHidden,
 		no_ignore = ignoreHidden,
 		cwd = cwd,
+		file_ignore_patterns = {
+			"node_modules",
+			".venv",
+			"typings",
+			"%.DS_Store$",
+			"%.git/",
+			unpack(existingFileIgnores), -- must be last for all items to be unpacked
+		},
 	}
 end
 
