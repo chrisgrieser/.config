@@ -47,7 +47,7 @@
     "BTTSavedMousePosition" : "{-827.37890625, 543.6171875}",
     "BSTDontShowSnapAreasWhileModMoving" : 0,
     "BTTDrawingAreaHeight" : 626,
-    "BTTNumberOfStarts" : 1497,
+    "BTTNumberOfStarts" : 1500,
     "BTTTouchBarHapticFeedback" : 0,
     "BTTStageManagerLeftSnappingAreaIncreasePercentage" : 0.125,
     "showKeyboardTab" : true,
@@ -181,8 +181,16 @@
     "BSTSnapAreaDefaultShowPictogram" : false,
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "363C871A-118E-4D19-8CBF-C6CEB81D8BF1",
+  "BTTPresetUUID" : "98A6E992-252A-4CEE-9428-5D14AC36E059",
   "BTTPresetContent" : [
+    {
+      "BTTAppBundleIdentifier" : "BT.L",
+      "BTTAppName" : "Recently Used",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTTriggers" : [
+
+      ]
+    },
     {
       "BTTAppBundleIdentifier" : "BT.G",
       "BTTAppName" : "Global",
@@ -190,6 +198,14 @@
       "BTTAppSpecificSettings" : {
         "BTTDisableGlobalTriggers" : false
       },
+      "BTTTriggers" : [
+
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "com.apple.finder",
+      "BTTAppName" : "Finder",
+      "BTTAppAutoInvertIcon" : 1,
       "BTTTriggers" : [
 
       ]
@@ -244,14 +260,6 @@
           ],
           "BTTGestureNotes" : "click to focus+pause, click to unpause, f for fullscreen"
         }
-      ]
-    },
-    {
-      "BTTAppBundleIdentifier" : "BT.L",
-      "BTTAppName" : "Recently Used",
-      "BTTAppAutoInvertIcon" : 1,
-      "BTTTriggers" : [
-
       ]
     }
   ],
