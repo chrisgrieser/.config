@@ -89,19 +89,33 @@ function run() {
 	}
 
 	const keywordLanguageMap = JSON.parse(readFile(mapCache));
-	const language = keywordLanguageMap[keyword];
+	let languageSlug = keywordLanguageMap[keyword];
+
+	// PINNED VERSIONS
+	const pinnedVersions = $.getenv("select_versions")
+		.split("\n")
+		.map((line) => {
+			const [usedVersion, pinnedVersion] = line.split(":");
+			return { used: usedVersion.trim(), pinned: pinnedVersion.trim() };
+		});
+	const replacement = pinnedVersions.find((version) => version.used === languageSlug);
+	if (replacement) {
+		// biome-ignore lint/suspicious/noConsoleLog: <explanation>
+		console.log("Pinned version found.");
+		languageSlug = replacement.pinned;
+	}
 
 	//───────────────────────────────────────────────────────────────────────────
 
 	// INFO using custom cache mechanism, since Alfred's cache does not work with
 	// multiple keywords: https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
-	const langIndexCache = `${$.getenv("alfred_workflow_cache")}/${language}.json`;
+	const langIndexCache = `${$.getenv("alfred_workflow_cache")}/${languageSlug}.json`;
 
 	if (cacheIsOutdated(langIndexCache)) {
 		const iconpath = `./devdocs/icons/${keyword}.png`;
 		const iconExists = fileExists(iconpath);
 
-		const indexUrl = `https://documents.devdocs.io/${language}/index.json`;
+		const indexUrl = `https://documents.devdocs.io/${languageSlug}/index.json`;
 		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("indexUrl:", indexUrl);
 
@@ -109,7 +123,7 @@ function run() {
 		const response = JSON.parse(httpRequest(indexUrl));
 
 		const entries = response.entries.map((entry) => {
-			const url = `https://devdocs.io/${language}/${entry.path}`;
+			const url = `https://devdocs.io/${languageSlug}/${entry.path}`;
 
 			/** @type{AlfredItem} */
 			const item = {
