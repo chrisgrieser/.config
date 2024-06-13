@@ -240,6 +240,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 			local isNewBuffer = bufPath == ""
 			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer then return end
 
+			-- prevent modification
+			vim.bo[ctx.buf].modifiable = false
+
+			-- notify
 			local msg = ("%q does not exist anymore."):format(vim.fs.basename(bufPath))
 			vim.notify_once(msg, vim.log.levels.WARN, { timeout = false })
 			vim.api.nvim_create_autocmd("BufLeave", {
