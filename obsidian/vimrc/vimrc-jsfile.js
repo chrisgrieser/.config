@@ -302,18 +302,19 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 	const randomFile = files[randomIndex];
 	await app.workspace.getLeaf().openFile(randomFile);
 }
-
-/** @param {"accept"|"reject"} action */
-function highlightsAndStrikthrus(action) {
-	const line = editor.getCursor().line;
-	let updatedText = editor.getLine(line);
-
-	if (action === "accept") {
-		updatedText = updatedText.replace(/==/g, "").replace(/~~.*?~~/g, "");
-	} else if (action === "reject") {
-		updatedText = updatedText.replace(/~~/g, "").replace(/~~.*?~~/g, "");
-	}
-	editor.setLine(line, updatedText);
+/** For use with the "Rephraser" form the "Writing Assistant" Alfred workflow,
+ * which sends text to OpenAI, and returns the diff in form of highlights
+ * (additions) and strikethroughs (deletions).
+ * @param {"accept"|"reject"} action
+ */
+function highlightsAndStrikthrusInLine(action) {
+	const lnum = editor.getCursor().line;
+	const lineText = editor.getLine(lnum);
+	const updatedLine =
+		action === "accept"
+			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
+			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
+	editor.setLine(lnum, updatedLine);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
