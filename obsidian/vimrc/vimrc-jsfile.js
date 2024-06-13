@@ -303,6 +303,19 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 	await app.workspace.getLeaf().openFile(randomFile);
 }
 
+/** @param {"accept"|"reject"} action */
+function highlightsAndStrikthrus(action) {
+	const line = editor.getCursor().line;
+	let updatedText = editor.getLine(line);
+
+	if (action === "accept") {
+		updatedText = updatedText.replace(/==/g, "").replace(/~~.*?~~/g, "");
+	} else if (action === "reject") {
+		updatedText = updatedText.replace(/~~/g, "").replace(/~~.*?~~/g, "");
+	}
+	editor.setLine(line, updatedText);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 // STUFF FOR DATAVIEWJS
 
