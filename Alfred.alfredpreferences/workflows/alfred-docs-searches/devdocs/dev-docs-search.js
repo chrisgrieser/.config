@@ -94,6 +94,7 @@ function run() {
 	// PINNED VERSIONS
 	const pinnedVersions = $.getenv("select_versions")
 		.split("\n")
+		.filter((line) => line.trim() !== "")
 		.map((line) => {
 			const [usedVersion, pinnedVersion] = line.split(":");
 			return { used: usedVersion.trim(), pinned: pinnedVersion.trim() };

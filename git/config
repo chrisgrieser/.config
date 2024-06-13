@@ -4,7 +4,7 @@
 
 ; conditionally change author https://git-scm.com/docs/git-config;_conditional_includes
 ; [includeIf "gitdir:~/.config/.git"]
-	; path = "~/.config/.gitconfig" 
+	; path = "~/.config/.gitconfig"
 
 ;───────────────────────────────────────────────────────────────────────────────
 
@@ -32,12 +32,12 @@
 	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
 
 [pull]
-	rebase = true ; rebase changes instead of merging
-	; ff = only ; https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+	ff = only ; do not create merge commits locally https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+	rebase = true ; always `pull --rebase` instead of merging
 [fetch]
 	prune = true ; automatically delete remote tracking branches that have been deleted
 [push]
-	autoSetupRemote = true ; create remote branch, if it doesn't exist
+	autoSetupRemote = true ; create remote branch if it doesn't exist yet
 
 [branch]
 	sort = -committerdate ; sort by recency, not by name
@@ -76,7 +76,7 @@
 	diffFilter = delta --color-only
 [delta]
 	tabs = 3 ; tabwidth
-	navigate = true ; use n and N to move between diff sections (requires LESSHISTFILE)
+	navigate = true ; use n and N to move between diff sections (requires $LESSHISTFILE)
 	hyperlinks = true
 
 ;────────────────────────────────────────────────────────────────────────────
