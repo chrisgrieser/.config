@@ -1,20 +1,20 @@
 #!/usr/bin/env zsh
-if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
-#───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 github_username="chrisgrieser"
 repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
-commit_msg="build: update build-and-release script"
-
-set -e
+commit_msg="build: minor fix for build-and-release script"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# GUARD
+if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
+set -e
 
 # only non-forked, non-archived repos
 repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" \
