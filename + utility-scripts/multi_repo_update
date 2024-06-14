@@ -1,23 +1,18 @@
 #!/usr/bin/env zsh
-# vim: filetype=sh
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 github_username="chrisgrieser"
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
-commit_msg="ci: better triggering of panvimdoc workflow"
+repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="nvim"
+commit_msg="build: update build-and-release script"
 
 set -e
 
 function actions_in_repo {
-	echo "test"
+	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
-
-# cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
-# plugin_name=$(basename "$PWD" | cut -d"-" -f2-)
-# sed -i '' "s/__plugin-name__/$plugin_name/" ./.github/workflows/panvimdoc.yml
 
 #───────────────────────────────────────────────────────────────────────────────
 
