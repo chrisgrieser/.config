@@ -5,6 +5,8 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 -- GENERAL
 
+opt.undofile = true -- enables persistent undo history
+
 opt.startofline = true -- motions like "G" also move to the first char
 opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
@@ -86,22 +88,6 @@ autocmd("FocusLost", {
 		vim.system { "find", opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
 	end,
 })
-
---------------------------------------------------------------------------------
--- UNDO
-
-opt.undofile = true -- enables persistent undo history
-
--- extra undo-points (= more fine-grained undos)
--- WARN insert mode mappings with `.` or `,` cause problems with typescript
-local triggerChars = { ";", '"', "'", "<Space>" }
-for _, char in pairs(triggerChars) do
-	vim.keymap.set("i", char, function()
-		if vim.bo.buftype ~= "" then return char end
-		return char .. "<C-g>u"
-		-- WARN requires `remap = true`, otherwise prevents abbreviations with them
-	end, { desc = "󰕌 Extra undopoint", remap = true, expr = true })
-end
 
 --------------------------------------------------------------------------------
 -- AUTOMATION (external control)
@@ -241,9 +227,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:filter(function(bufnr)
 				local bufPath = vim.api.nvim_buf_get_name(bufnr)
-				local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
-				local newBuf = bufPath == ""
-				return not (u.fileExists(bufPath) and not isSpecialBuffer and not newBuf)
+				local doesNotExist = vim.loop.fs_stat(bufPath) ~= nil
+				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
+				local notNewBuffer = bufPath == ""
+				return doesNotExist and notSpecialBuffer and notNewBuffer
 			end)
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
