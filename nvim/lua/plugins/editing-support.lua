@@ -15,6 +15,7 @@ return {
 			},
 			fastwarp = {
 				map = "<D-f>",
+				rmap = "<D-F>", -- backwards
 				hopout = true,
 				nocursormove = true,
 				multiline = false,
@@ -87,6 +88,12 @@ return {
 				function() require("refactoring").refactor("Extract Variable") end,
 				mode = "x",
 				desc = "󱗘 Extract Var",
+			},
+			{
+				"<leader>fE",
+				function() require("refactoring").refactor("Extract Function") end,
+				mode = "x",
+				desc = "󱗘 Extract Func",
 			},
 		},
 	},
