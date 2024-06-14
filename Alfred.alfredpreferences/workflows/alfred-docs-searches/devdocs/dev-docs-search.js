@@ -99,7 +99,7 @@ function run() {
 			const [usedVersion, pinnedVersion] = line.split(":");
 			return { used: usedVersion.trim(), pinned: pinnedVersion.trim() };
 		});
-	const replacement = pinnedVersions.find((version) => version.used === languageSlug);
+	const replacement = pinnedVersions.find((version) => version.used === keyword);
 	if (replacement) {
 		// biome-ignore lint/suspicious/noConsoleLog: <explanation>
 		console.log("Pinned version found.");
