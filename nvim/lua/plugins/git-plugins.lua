@@ -23,8 +23,8 @@ return {
 			{ "<leader>g<D-d>", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub Repo URL" },
-			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit/Amend" },
+			{ "g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
 		},
 		opts = {
@@ -36,8 +36,8 @@ return {
 			historySearch = {
 				autoUnshallowIfNeeded = true,
 				diffPopup = {
-					width = 0.8,
-					height = 0.8,
+					width = 0.9,
+					height = 0.9,
 					border = vim.g.borderStyle,
 				},
 			},

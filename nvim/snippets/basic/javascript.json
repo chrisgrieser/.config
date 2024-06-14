@@ -13,7 +13,7 @@
     "prefix": "argv (node)"
   },
   "cast (JSDoc)": {
-    "body": "/** @type {AlfredItem} */ (${1:variable})",
+    "body": "/** @type {${1:string}} */ (${2:bracketedVar})",
     "prefix": "cast (JSDoc)"
   },
   "class (JSDoc) + typedef (JSDoc)": {
