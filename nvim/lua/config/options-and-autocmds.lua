@@ -319,8 +319,6 @@ vim.api.nvim_create_autocmd("FileType", {
 local quickfix_ns = vim.api.nvim_create_namespace("quickfix_signs")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
-		vim.api.nvim_buf_clear_namespace(0, quickfix_ns, 0, -1)
-
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, quickfix_ns, qf.lnum - 1, qf.col - 1, {
 				sign_text = "",
@@ -328,11 +326,16 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})
 		end
+
+		local group = vim.api.nvim_create_augroup("quickfix_signs", { clear = true })
+		vim.api.nvim_buf_clear_namespace(0, quickfix_ns, 0, -1)
+
 		for _, qf in pairs(vim.fn.getqflist()) do
 			if vim.api.nvim_buf_is_loaded(qf.bufnr) then
 				setSigns(qf)
 			else
 				vim.api.nvim_create_autocmd("BufReadPost", {
+					group = group,
 					once = true,
 					buffer = qf.bufnr,
 					callback = function() setSigns(qf) end,
