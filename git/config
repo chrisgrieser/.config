@@ -32,8 +32,7 @@
 	insteadOf = "gh:" ; use `gh:owner/name` as shorthand
 
 [pull]
-	ff = only ; do not create merge commits locally https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
-	rebase = true ; always `pull --rebase` instead of merging
+	rebase = true ; always `pull --rebase` instead of merging https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
 [fetch]
 	prune = true ; automatically delete remote tracking branches that have been deleted
 [push]
