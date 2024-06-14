@@ -1,12 +1,5 @@
 local u = require("config.utils")
 
--- Needs to be triggered manually, since lualine updates the git diff
--- component only on BufEnter.
-local function updateLualineDiff()
-	if not package.loaded["lualine"] then return end
-	require("lualine.components.diff.git_diff").update_diff_args()
-	require("lualine").refresh()
-end
 --------------------------------------------------------------------------------
 
 return {
@@ -71,21 +64,9 @@ return {
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
 		keys = {
-			{
-				"ga",
-				function()
-					local range = nil
-					if vim.fn.mode() == "V" then
-						u.normal("V") -- leave visual mode so <> marks are set
-						local startLn = vim.api.nvim_buf_get_mark(0, "<")[1]
-						local endLn = vim.api.nvim_buf_get_mark(0, ">")[1]
-						range = { startLn, endLn }
-					end
-					require("gitsigns").stage_hunk(range, nil, updateLualineDiff)
-				end,
-				mode = { "n", "x" },
-				desc = "󰊢 Stage Hunk/Selection",
-			},
+			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
+			-- stylua: ignore start
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
 			{ "gh", "<cmd>Gitsigns next_hunk<CR>", desc = "󰊢 Next Hunk" },
 			{ "gH", "<cmd>Gitsigns prev_hunk<CR>", desc = "󰊢 Previous Hunk" },
@@ -107,7 +88,7 @@ return {
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
 			{
 				"<leader>uh",
-				function() require("gitsigns").reset_hunk(nil, nil, updateLualineDiff) end,
+				"<cmd>Gitsigns reset_hunk<CR>",
 				mode = { "n", "x" },
 				desc = "󰊢 Reset Hunk",
 			},
