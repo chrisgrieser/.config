@@ -44,6 +44,7 @@ vim.keymap.set("n", "<leader>cr", function()
 	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
 	table.sort(matches)
 	local uniqMatches = vim.fn.uniq(matches)
+	local isAtBlank = vim.api.nvim_get_current_line():match("^%s*$")
 
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "TelescopeResults",
@@ -59,9 +60,14 @@ vim.keymap.set("n", "<leader>cr", function()
 
 	vim.ui.select(uniqMatches, { prompt = " require" }, function(selection)
 		if not selection then return end
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { selection })
-		u.normal("j==")
+		if isAtBlank then
+			vim.api.nvim_set_current_line(selection)
+			u.normal("==")
+		else
+			local lnum = vim.api.nvim_win_get_cursor(0)[1]
+			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { selection })
+			u.normal("j==")
+		end
 	end)
 end, { buffer = true, desc = " require module from cwd" })
 
