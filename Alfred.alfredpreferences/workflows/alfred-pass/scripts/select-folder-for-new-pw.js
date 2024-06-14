@@ -8,7 +8,8 @@ app.includeStandardAdditions = true;
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const passwordStore =
-		app.doShellScript('source "$HOME/.zshenv" ; echo "$PASSWORD_STORE_DIR"') ||
+		// executing `zsh` instead of sourcing because https://github.com/chrisgrieser/alfred-pass/issues/4
+		app.doShellScript("exec zsh -c 'echo \"$PASSWORD_STORE_DIR\"'") ||
 		app.pathTo("home folder") + "/.password-store";
 
 	/** @type{AlfredItem[]} */
@@ -25,7 +26,7 @@ function run() {
 		});
 
 	// move root to the bottom of the list
-	passwordFolders.push(passwordFolders.shift());
+	passwordFolders.push(/** @type {AlfredItem} */ (passwordFolders.shift()));
 
 	return JSON.stringify({ items: passwordFolders });
 }

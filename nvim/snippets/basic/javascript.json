@@ -12,6 +12,10 @@
     "description": "Arguments from the command line. [0] is the node executable path, [1] the path of the file being executed, making [2] the first positional argument.",
     "prefix": "argv (node)"
   },
+  "cast (JSDoc)": {
+    "body": "/** @type {AlfredItem} */ (${1:variable})",
+    "prefix": "cast (JSDoc)"
+  },
   "class (JSDoc) + typedef (JSDoc)": {
     "body": [
       "/** @typedef {Object} ${1:name}",

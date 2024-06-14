@@ -20,6 +20,7 @@ return {
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
 			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
+			{ "<leader>g<D-d>", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub Repo URL" },
 			{ "<leader>g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
