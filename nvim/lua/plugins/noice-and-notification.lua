@@ -181,7 +181,7 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		opts = {
-			max_width = math.floor(vim.o.columns * 0.45),
+			max_width = math.floor(vim.o.columns * 0.5),
 			minimum_width = 25, -- wider for title in border
 			top_down = false,
 			level = 0, -- minimum severity, 0 = show all
