@@ -11,7 +11,7 @@ function run() {
 
 	/** @type{AlfredItem[]} */
 	const properties = app
-		.doShellScript(`pass show "${entryId}"`)
+		.doShellScript(`exec zsh -c 'pass show "${entryId}"'`)
 		.split("\r")
 		.slice(1) // first entry is password which can can already be accessed directly
 		.filter((line) => line.trim() !== "")
