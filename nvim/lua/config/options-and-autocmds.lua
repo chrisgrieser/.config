@@ -227,9 +227,9 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:filter(function(bufnr)
 				local bufPath = vim.api.nvim_buf_get_name(bufnr)
-				local doesNotExist = vim.loop.fs_stat(bufPath) ~= nil
-				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
-				local notNewBuffer = bufPath == ""
+				local doesNotExist = vim.loop.fs_stat(bufPath) == nil
+				local notSpecialBuffer = vim.bo[bufnr].buftype ~= ""
+				local notNewBuffer = bufPath ~= ""
 				return doesNotExist and notSpecialBuffer and notNewBuffer
 			end)
 			:each(function(bufnr)
