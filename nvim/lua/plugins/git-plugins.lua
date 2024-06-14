@@ -120,11 +120,12 @@ return {
 		},
 		opts = {
 			attach_to_untracked = true,
-			max_file_length = 12000, -- lines
+			max_file_length = 3000, -- lines
 			-- deletions greater than one line will show a count to assess the size
 			-- (digits are actually nerdfont numbers to achieve smaller size)
 			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
+			signs_staged_enable = false, -- TODO buggy, try enabling later
 			signs = {
 				delete = { show_count = true },
 				topdelete = { show_count = true },
