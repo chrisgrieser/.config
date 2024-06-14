@@ -1752,7 +1752,7 @@ A handful of documentation sites that are not included in DevDocs are made avail
 ---
 
 ## DevDocs
-Enabled the devdocs you want to use in the workflow configuration. The
+Enable the devdocs you want to use in the workflow configuration. The
 enabled devdocs are searched by using the name as keyword, for example `haskell
 foobar` to search the Haskell DevDocs for "foobar."
 
@@ -1763,14 +1763,10 @@ A few common languages have short-hands noted in the popup selection, such as
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the documentation site.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the URL of the documentation site to the clipboard.
 
-### Icons
-Search icons for specific documentation sites are provided by adding a file to
-the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
-
 ### Pinning specific versions
 1. In the workflow configuration, go to the `pinned devdocs versions` section.
    (Depending on your screen height, you might need to scroll down.)
-2. The replacements take the form `usedVersion:pinnedVersion`, one version
+2. The replacements take the form `alfred_keyword:pinned_version`, one version
    change per line. For example to pin the `node` and `python` versions:
 
    ```
@@ -1778,15 +1774,17 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
    ```
 
    ```
-   python~3.12:python~3.11
+   py:python~3.11
    ```
 
-3. The version the workflow currently uses is listed in [this json
-   file](https://github.com/chrisgrieser/alfred-docs-searches/blob/main/.github/keyword-slug-map.json).
-4. The versions available are listed under the key `slug` in [this json
+3. The versions available are listed under the key `slug` in [this json
    file](https://devdocs.io/docs.json).
-5. Afterward, reload the caches via the Alfred keyword `:docs-reload` once to
+4. Afterward, reload the caches via the Alfred keyword `:docs-reload` once to
    ensure the new versions are used.
+
+### Icons
+Search icons for specific documentation sites are provided by adding a file to
+the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 
 ## Extras
 
@@ -37657,7 +37655,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.7.3</string>
+	<string>2.7.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -230,28 +230,26 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- show info when current buffer does not exist anymore
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	callback = function(ctx)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local bufPath = ctx.file
-			local isSpecialBuffer = vim.bo[ctx.buf].buftype ~= ""
-			local isNewBuffer = bufPath == ""
-			if u.fileExists(bufPath) or isSpecialBuffer or isNewBuffer then return end
-
-			-- prevent modification
-			vim.bo[ctx.buf].modifiable = false
-
-			-- notify
-			local msg = ("%q does not exist anymore."):format(vim.fs.basename(bufPath))
-			vim.notify(msg, vim.log.levels.WARN, { timeout = false })
-			vim.api.nvim_create_autocmd("BufLeave", {
-				buffer = ctx.buf,
-				once = true,
-				callback = require("notify").dismiss, ---@diagnostic disable-line: missing-parameter
-			})
-		end, 100)
+-- Delete all non-existing buffers on `FocusGained`
+vim.api.nvim_create_autocmd("FocusGained", {
+	callback = function()
+		vim.iter(vim.api.nvim_list_bufs())
+			:filter(function(bufnr)
+				local valid = vim.api.nvim_buf_is_valid(bufnr)
+				local loaded = vim.api.nvim_buf_is_loaded(bufnr)
+				return valid and loaded
+			end)
+			:filter(function(bufnr)
+				local bufPath = vim.api.nvim_buf_get_name(bufnr)
+				local isSpecialBuffer = vim.bo[bufnr].buftype ~= ""
+				local newBuf = bufPath == ""
+				return not (u.fileExists(bufPath) and not isSpecialBuffer and not newBuf)
+			end)
+			:each(function(bufnr)
+				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+				u.notify(("%q does not exist anymore."):format(bufName), "warn")
+				vim.api.nvim_buf_delete(bufnr, { force = true })
+			end)
 	end,
 })
 
