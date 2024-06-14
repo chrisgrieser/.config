@@ -157,7 +157,7 @@ return {
 				insert_only = false, -- = enable normal mode
 				trim_prompt = true,
 				border = vim.g.borderStyle,
-				relative = "cursor",
+				relative = "editor",
 				title_pos = "left",
 				prefer_width = 45,
 				min_width = 0.4,
