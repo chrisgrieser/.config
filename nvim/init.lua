@@ -13,7 +13,7 @@ end, 1)
 
 -- CONFIG
 vim.g.mapleader = ","
-vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"|"solid"|"none"
+vim.g.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
 
 vim.g.linterConfigs = vim.fs.normalize("~/.config/+ linter-configs/")
 vim.g.syncedData = vim.env.DATA_DIR .. "/vim-data/"
