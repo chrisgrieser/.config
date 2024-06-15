@@ -1,7 +1,7 @@
 -- A bunch of commands that are too small to be published as plugins, but too
--- big to put in the main config, where they would crowd the actual
--- configuration. Every function is self-contained (except the helper
--- functions here), and should be binded to a keymap.
+-- big to put in the main config, where they would crowd the actual config.
+-- Every function is self-contained (except the helper functions here), and
+-- should be bound to a keymap.
 --------------------------------------------------------------------------------
 local M = {}
 
@@ -120,15 +120,21 @@ end
 -- Increment or toggle if cursorword is true/false. Simplified implementation
 -- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
 function M.toggleOrIncrement()
-	local bool = {
-		["true"] = "false",
-		["True"] = "False", -- python
-		["const"] = "let", -- js/ts
-	}
+	local ft = vim.bo.filetype
+	local toggles = { ["true"] = "false" }
+	if ft == "typescript" or ft == "javascript" then
+		toggles["const"] = "let"
+		toggles["&&"] = "||"
+	elseif ft == "python" then
+		toggles["true"] = nil
+		toggles["True"] = "False"
+	elseif ft == "lua" then
+		toggles["and"] = "or"
+	end
 
 	local cword = vim.fn.expand("<cword>")
 	local toggle
-	for word, opposite in pairs(bool) do
+	for word, opposite in pairs(toggles) do
 		if cword == word then toggle = opposite end
 		if cword == opposite then toggle = word end
 		if toggle then return "mzciw" .. toggle .. "<Esc>`z" end
