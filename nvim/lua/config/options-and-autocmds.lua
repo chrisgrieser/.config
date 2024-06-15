@@ -141,7 +141,7 @@ opt.conceallevel = 2
 opt.fillchars:append {
 	eob = " ",
 	fold = " ",
-	-- solid window separators
+	-- thick window separators
 	horiz = "▄",
 	vert = "█",
 	horizup = "█",
@@ -234,7 +234,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
-				u.notify(("%q does not exist anymore."):format(bufName), "warn")
+				u.notify("", ("%q does not exist anymore. Closing buffer."):format(bufName), "warn")
 				vim.api.nvim_buf_delete(bufnr, { force = true })
 			end)
 	end,
