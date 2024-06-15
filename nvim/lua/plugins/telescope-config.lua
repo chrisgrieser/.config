@@ -90,6 +90,7 @@ local function telescopeConfig()
 				path_display = { "filename_first" },
 				-- FIX telescope not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
+				find_command = { "rg", "--no-config", "--files", "--sortr=modified" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
@@ -338,7 +339,7 @@ return {
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						sorter = mySorter,
+						-- sorter = mySorter,
 					}
 				end,
 				desc = "󰭎 Open File",
