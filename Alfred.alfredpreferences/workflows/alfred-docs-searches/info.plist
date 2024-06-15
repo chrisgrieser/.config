@@ -537,7 +537,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>devdocs/dev-docs-search.js</string>
+				<string>scripts/devdocs/dev-docs-search.js</string>
 				<key>subtext</key>
 				<string>{var:keyword_01} {var:keyword_02} {var:keyword_03} {var:keyword_04} {var:keyword_05} {var:keyword_06} {var:keyword_07} {var:keyword_08} {var:keyword_09} {var:keyword_10} {var:keyword_11} {var:keyword_12} {var:keyword_13} {var:keyword_14} {var:keyword_15} {var:keyword_16} {var:keyword_17} {var:keyword_18} {var:keyword_19} {var:keyword_20} {var:keyword_21} {var:keyword_22} {var:keyword_23} {var:keyword_24} {var:keyword_25} {var:keyword_26} {var:keyword_27} {var:keyword_28} {var:keyword_29} {var:keyword_30} {var:keyword_31} {var:keyword_32} {var:keyword_33} {var:keyword_34} {var:keyword_35} {var:keyword_36} {var:keyword_37} {var:keyword_38} {var:keyword_39} {var:keyword_40}</string>
 				<key>title</key>
@@ -566,7 +566,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/appid.sh</string>
+				<string>./scripts/extra-utilities/appid.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -609,7 +609,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/appid.js</string>
+				<string>./scripts/extra-utilities/appid.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -694,7 +694,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/applescript-dictionaries.js</string>
+				<string>./scripts/extra-utilities/applescript-dictionaries.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1324,7 +1324,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sounds-preview.js</string>
+				<string>./scripts/extra-utilities/sounds-preview.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -1452,13 +1452,13 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/get-window-information.applescript</string>
+				<string>./scripts/extra-utilities/get-window-information.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1728,7 +1728,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/reload-cache.js</string>
+				<string>./scripts/extra-utilities/reload-cache.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>

@@ -1,8 +1,0 @@
-@update-devdocs-available:
-    node ./devdocs/update-available-devdocs.mjs 
-
-    # this part is done via GitHub action, so we do not need the file here
-    rm .github/keyword-slug-map.json
-
-    echo "Available Devdocs updated. Please run the GitHub action."
-    open "https://github.com/chrisgrieser/alfred-docs-searches/actions/workflows/update-available-devdocs.yml"

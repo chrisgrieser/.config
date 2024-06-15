@@ -234,7 +234,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
-				u.notify("", ("%q does not exist anymore. Closing buffer."):format(bufName), "warn")
+				u.notify(bufName, "File does not exist anymore. Buffer closed.", "warn")
 				vim.api.nvim_buf_delete(bufnr, { force = true })
 			end)
 	end,

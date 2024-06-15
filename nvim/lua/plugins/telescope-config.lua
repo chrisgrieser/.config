@@ -255,7 +255,7 @@ local function telescopeConfig()
 						height = 0.4,
 						width = 0.3,
 						anchor = "SE",
-						preview_width = 1, -- needs preview for live preview of the theme
+						preview_width = 1, -- needs previewer for live preview of the theme
 					},
 				},
 			},
@@ -309,6 +309,7 @@ return {
 			{ "<leader>gL", function() telescope("git_bcommits") end, desc = "󰭎 Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = "󰭎 Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
+			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
 			{
 				"go",
 				function()
@@ -385,31 +386,6 @@ return {
 				end,
 				mode = "x",
 				desc = "󰭎 Grep selection",
-			},
-			{
-				"<leader>pc",
-				function()
-					-- PENDING https://github.com/nvim-telescope/telescope.nvim/pull/3155
-					-- HACK remove built-in colorschemes from selection
-					-- stylua: ignore
-					local builtins = {
-						"zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
-						"pablo", "murphy", "lunaperche", "koehler", "industry", "evening",
-						"elflord", "desert", "delek", "darkblue", "blue", "morning", "vim",
-						"habamax", "retrobox", "sorbet", "zaibatsu", "wildcharm"
-					}
-					local originalFunc = vim.fn.getcompletion
-
-					vim.fn.getcompletion = function() ---@diagnostic disable-line: duplicate-set-field
-						return vim.tbl_filter(
-							function(color) return not vim.tbl_contains(builtins, color) end,
-							originalFunc("", "color") ---@diagnostic disable-line: redundant-parameter
-						)
-					end
-
-					telescope("colorscheme")
-				end,
-				desc = " Preview Colorschemes",
 			},
 		},
 	},
