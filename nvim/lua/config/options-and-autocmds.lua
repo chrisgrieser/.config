@@ -40,7 +40,7 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
-opt.sidescrolloff = 20
+opt.sidescrolloff = 15
 opt.scrolloff = 15
 
 -- mostly set by .editorconfig, therefore only fallback
@@ -228,7 +228,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			:filter(function(bufnr)
 				local bufPath = vim.api.nvim_buf_get_name(bufnr)
 				local doesNotExist = vim.loop.fs_stat(bufPath) == nil
-				local notSpecialBuffer = vim.bo[bufnr].buftype ~= ""
+				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
 				local notNewBuffer = bufPath ~= ""
 				return doesNotExist and notSpecialBuffer and notNewBuffer
 			end)
