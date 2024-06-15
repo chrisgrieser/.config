@@ -1,2 +1,3 @@
 local gitsigns = vim.b.gitsigns_status
-vim.notify("👾 gitsigns: " .. vim.inspect(gitsigns))
+local u = require("config.utils")
+u.notify("", "👾 gitsigns: " .. vim.inspect(gitsigns), "warn")

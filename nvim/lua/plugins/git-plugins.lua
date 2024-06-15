@@ -69,8 +69,8 @@ return {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "gh", "<cmd>Gitsigns nav_hunk('next')<CR>", desc = "󰊢 Next Hunk" },
-			{ "gH", "<cmd>Gitsigns nav_hunk('prev')<CR>", desc = "󰊢 Previous Hunk" },
+			{ "gh", "<cmd>Gitsigns nav_hunk next<CR>", desc = "󰊢 Next Hunk" },
+			{ "gH", "<cmd>Gitsigns nav_hunk prev<CR>", desc = "󰊢 Previous Hunk" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
 			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = " Blame Line" },
 
