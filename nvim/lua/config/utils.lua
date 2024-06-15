@@ -32,12 +32,12 @@ function M.getHighlightValue(hlName, key)
 		-- follow linked highlights
 		hl = vim.api.nvim_get_hl(0, { name = hlName })
 		hlName = hl.link
-	until not hl.link
+	until hl.link ~= nil
 	local value = hl[key]
 	if value then
 		return ("#%06x"):format(value)
 	else
-		local msg = ("No %s available for highlight group %q"):format(key, hlName)
+		local msg = ("No %q available for highlight group %q"):format(key, hlName)
 		M.notify("getHighlightValue", msg, "warn")
 	end
 end
