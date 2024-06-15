@@ -131,32 +131,31 @@ return {
 				},
 				{
 					func = function() return "+" .. vim.b.gitsigns_status_dict.added end,
-					cond = function() return vim.b.gitsigns_status_dict.added > 0 end,
-					fgColor = "GitSignsAdd",
+					-- cond = function() return vim.b.gitsigns_status_dict.added > 0 end,
+					fgColor = "diffAdded",
 				},
 				{
 					func = function() return "~" .. vim.b.gitsigns_status_dict.changed end,
-					cond = function() return vim.b.gitsigns_status_dict.changed > 0 end,
-					fgColor = "GitSignsChange",
+					-- cond = function() return vim.b.gitsigns_status_dict.changed > 0 end,
+					fgColor = "diffChanged",
 				},
 				{
 					func = function() return "~" .. vim.b.gitsigns_status_dict.table.removed end,
-					cond = function() return vim.b.gitsigns_status_dict.table.removed > 0 end,
-					fgColor = "GitSignsDelete",
+					-- cond = function() return vim.b.gitsigns_status_dict.table.removed > 0 end,
+					fgColor = "diffRemoved",
 				},
 			}
 			-- because we are inserting the items w/ `before` at the start of the section
 			components = vim.fn.reverse(components)
 
-			for _, component in ipairs(components) do
-				local color = u.getHighlightValue(component.fgColor, "fg")
+			for _, comp in ipairs(components) do
 				u.addToLuaLine(
 					"sections",
 					"lualine_y", -- same section as diff count
 					{
-						component.func,
-						color = { fg = color },
-						cond = component.cond,
+						comp.func,
+						color = comp.color and { fg = u.getHighlightValue(comp.fgColor, "fg") },
+						cond = comp.cond,
 						padding = { left = 1, right = 0 },
 					},
 					"before"

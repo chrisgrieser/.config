@@ -146,12 +146,12 @@ local lualineConfig = {
 			{ irregularWhitespace },
 		},
 		lualine_y = {
-		},
-		lualine_z = {
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.bo.buftype == "" end,
 			},
+		},
+		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
 			{ function() return "" end, padding = { left = 0, right = 1 } },
