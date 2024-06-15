@@ -76,9 +76,6 @@ local routes = {
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-
-	-- E211 no longer needed, since auto-closing deleted buffers
-	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
