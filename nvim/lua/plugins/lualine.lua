@@ -76,7 +76,7 @@ local lualineConfig = {
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
-			"checkhealth", "noice", "lazy", "mason", "qf", "regex"
+			"checkhealth", "noice", "mason", "qf", "regex"
 		},
 	},
 	tabline = {
