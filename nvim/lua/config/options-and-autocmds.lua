@@ -219,6 +219,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- Delete all non-existing buffers on `FocusGained`
 vim.api.nvim_create_autocmd("FocusGained", {
 	callback = function()
+		local closedBuffers = {}
 		vim.iter(vim.api.nvim_list_bufs())
 			:filter(function(bufnr)
 				local valid = vim.api.nvim_buf_is_valid(bufnr)
@@ -234,9 +235,14 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
-				u.notify("Buffer closed.", ("%q does not exist anymore."):format(bufName), "warn")
+				table.insert(closedBuffers, bufName)
 				vim.api.nvim_buf_delete(bufnr, { force = true })
 			end)
+
+		if #closedBuffers > 0 then
+			local text = "- " .. table.concat(closedBuffers, "\n- ")
+			u.notify("Buffers closed.", text)
+		end
 	end,
 })
 

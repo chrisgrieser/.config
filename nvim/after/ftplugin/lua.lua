@@ -20,16 +20,15 @@ vim.keymap.set("n", "<leader>e", function()
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.api.nvim_win_get_cursor(0)[2]
 	local toEol = vim.trim(line:sub(col + 1))
-	return vim.notify(vim.inspect(vim.fn.luaeval(toEol)))
+	vim.notify(vim.inspect(vim.fn.luaeval(toEol)))
 end, { buffer = true, desc = " Eval to EoL" })
 
 vim.keymap.set("x", "<leader>e", function()
 	u.leaveVisualMode()
-	local pos = vim.region(0, "'<", "'>", "v", true)
-	local row = vim.tbl_keys(pos)[1]
-	local start, stop = unpack(vim.tbl_values(pos)[1])
-	local sel = vim.api.nvim_buf_get_text(0, row, start, row, stop, {})[1]
-	return vim.notify(vim.inspect(vim.fn.luaeval(sel)))
+	local startLn, startCol = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+	local endLn, endCol = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+	local selection = vim.api.nvim_buf_get_text(0, startLn - 1, startCol, endLn - 1, endCol + 1, {})
+	vim.notify(vim.inspect(vim.fn.luaeval(sele)))
 end, { buffer = true, desc = " Eval Selection" })
 
 --------------------------------------------------------------------------------
