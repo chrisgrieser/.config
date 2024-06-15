@@ -84,7 +84,7 @@
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
-				<string>https:\/\/alfred\.app\/workflows\/(.+?)\/(.+?)/</string>
+				<string>https:\/\/alfred\.app\/workflows\/(.+?)\/(.+?)\/</string>
 				<key>regexcaseinsensitive</key>
 				<false/>
 				<key>regexmultiline</key>
@@ -150,6 +150,7 @@
 				<key>script</key>
 				<string>readonly cache_file="${alfred_workflow_cache}/gallery.json"
 readonly release_id_file="${alfred_workflow_cache}/release_id.txt"
+readonly cache_repo='alfredapp/gallery-cache'
 
 # Helper to show results and exit
 function show_data {
@@ -157,22 +158,15 @@ function show_data {
   exit 0
 }
 
-# Exit early if cache is recent
-[[ "$(date -r "${cache_file}" +%s)" -gt "$(date -v -2d +%s)" ]] &amp;&amp; show_data
-
 # Get latest release info
 mkdir -p "${alfred_workflow_cache}"
 
-readonly latest_release="$(curl --silent 'https://api.github.com/repos/alfredapp/gallery-cache/releases/latest')"
+readonly latest_release="$(curl --silent "https://api.github.com/repos/${cache_repo}/releases/latest")"
 readonly release_id="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["id"] }' "${latest_release}")"
 readonly download_url="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["assets"][0]["browser_download_url"] }' "${latest_release}")"
 
 # Exit early if release has not changed
-if [[ "${release_id}" == "$(&lt; "${release_id_file}")" ]]
-then
-  touch "${cache_file}" # Reset cache age
-  show_data
-fi
+[[ "${release_id}" == "$(&lt; "${release_id_file}")" ]] &amp;&amp; show_data
 
 # Download and update cache
 curl --silent --location "${download_url}" | tar --directory "${alfred_workflow_cache}" --extract
@@ -182,6 +176,8 @@ show_data</string>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
 				<string>Search Workflows on the Alfred Gallery</string>
 				<key>title</key>
@@ -251,11 +247,11 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 
 ![Searching for alfredapp workflows](images/about/gallery.png)
 
-* &lt;kbd&gt;↩&lt;/kbd&gt;: Open Gallery page in default browser.
-* &lt;kbd&gt;⌃&lt;/kbd&gt;: Show tags.
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;: Install workflow.
-* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;: Narrow search to creator’s name.
-* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; (or tap &lt;kbd&gt;⇧&lt;/kbd&gt;): Quick Look workflow’s Gallery page.</string>
+* &lt;kbd&gt;↩&lt;/kbd&gt; Open Gallery page in default browser.
+* &lt;kbd&gt;⌃&lt;/kbd&gt; Show tags.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Install workflow.
+* &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Narrow search to creator’s name.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt; (or tap &lt;kbd&gt;⇧&lt;/kbd&gt;) Quick Look workflow’s Gallery page.</string>
 	<key>uidata</key>
 	<dict>
 		<key>1944B7E1-9267-43A6-BEC7-761A44CF1A9D</key>
@@ -318,10 +314,8 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 			<string>gallery_search_keyword</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>2023.3</string>
+	<string>2024.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>
