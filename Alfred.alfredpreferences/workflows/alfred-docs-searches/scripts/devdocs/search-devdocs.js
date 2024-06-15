@@ -52,7 +52,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThresholdDays = 7;
+	const cacheAgeThresholdDays = 7; // CONFIG
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
 	const cacheAgeDays = (Date.now() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
@@ -83,9 +83,15 @@ function run() {
 	ensureCacheFolderExists();
 	const mapCache = $.getenv("alfred_workflow_cache") + "/keyword-slug-map.json";
 	if (cacheIsOutdated(mapCache)) {
-		const mapUrl =
-			"https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/keyword-slug-map.json";
+		const tree = "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main";
+
+		const mapUrl = tree + "/.github/keyword-slug-map.json";
 		writeToFile(mapCache, httpRequest(mapUrl));
+
+		// INFO self-update this workflow's `info.plist` to include newly
+		// available devdocs in the workflow configuration's selectors
+		const remoteInfoPlist = tree + "/info.plist";
+		writeToFile("./info.plist", httpRequest(remoteInfoPlist));
 	}
 
 	const keywordLanguageMap = JSON.parse(readFile(mapCache));
@@ -113,7 +119,7 @@ function run() {
 	const langIndexCache = `${$.getenv("alfred_workflow_cache")}/${languageSlug}.json`;
 
 	if (cacheIsOutdated(langIndexCache)) {
-		const iconpath = `./devdocs/icons/${keyword}.png`;
+		const iconpath = `./scripts/devdocs/icons/${keyword}.png`;
 		const iconExists = fileExists(iconpath);
 
 		const indexUrl = `https://documents.devdocs.io/${languageSlug}/index.json`;

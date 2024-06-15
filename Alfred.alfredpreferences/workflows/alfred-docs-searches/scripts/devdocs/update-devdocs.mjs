@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 //──────────────────────────────────────────────────────────────────────────────
 // INFO
-// - needs to be run from repo root
-// - updates which devdocs are available, and also updates the versions of the
-//   devdocs used (automatically switches to the latest version)
-// WARN
-// This overwrites all available workflow configuration, so changes needs to
-// be added here manually, such as the field for using specific devdocs versions.
+// - needs to be run from repo root: `node ./scripts/devdocs/update-devdocs.mjs`
+// - updates which devdocs are available, and also the versions of devdocs
+//   (automatically switches to the latest version)
+// - WARN this overwrites all available workflow configuration, so changes need
+//   to be added here manually, such as the field for using specific devdocs
+//   versions.
 //──────────────────────────────────────────────────────────────────────────────
 // biome-ignore lint/correctness/noNodejsModules: unsure how to fix this
 import fs from "node:fs";
@@ -14,7 +14,7 @@ import fs from "node:fs";
 
 /** @type {Record<string, string>} */
 const aliases = {
-	// alises added on top of the ones from devdocs
+	// aliases added on top of the ones from devdocs
 	hammerspoon: "hs",
 
 	// PENDING https://github.com/freeCodeCamp/devdocs/issues/2210

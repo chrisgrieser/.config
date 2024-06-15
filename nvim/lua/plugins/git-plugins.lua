@@ -69,6 +69,7 @@ return {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{ "g1", "<cmd>Gitsigns nav_hunk first<CR>", desc = "󰊢 1st Hunk" },
 			{ "gh", "<cmd>Gitsigns nav_hunk next<CR>", desc = "󰊢 Next Hunk" },
 			{ "gH", "<cmd>Gitsigns nav_hunk prev<CR>", desc = "󰊢 Previous Hunk" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
@@ -113,7 +114,7 @@ return {
 			-- (digits are actually nerdfont numbers to achieve smaller size)
 			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
-			signs_staged_enable = false, -- TODO buggy, try enabling later
+			signs_staged_enable = true, -- TODO buggy, try enabling later
 			signs = {
 				delete = { show_count = true },
 				topdelete = { show_count = true },
