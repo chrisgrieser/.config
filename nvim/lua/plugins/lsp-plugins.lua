@@ -26,34 +26,10 @@ return {
 			icons = { Object = "󰠲 " },
 			separator = " ",
 			depth_limit = 7,
-			highlight = true,
+			highlight = false,
 			depth_limit_indicator = "…",
 			format_text = function(text) return text:gsub("\t", "") end, -- FIX tabs in breadcrumbs
 		},
-		init = function()
-			-- FIX background color for `opts.highlight = true`
-			-- PENDING https://github.com/SmiteshP/nvim-navic/issues/146
-			-- stylua: ignore
-			local navicHls = { "IconsFile", "IconsModule", "IconsNamespace", "IconsPackage", "IconsClass", "IconsMethod", "IconsProperty", "IconsField", "IconsConstructor", "IconsEnum", "IconsInterface", "IconsFunction", "IconsVariable", "IconsConstant", "IconsString", "IconsNumber", "IconsBoolean", "IconsArray", "IconsObject", "IconsKey", "IconsNull", "IconsEnumMember", "IconsStruct", "IconsEvent", "IconsOperator", "IconsTypeParameter", "Text" }
-			local function fixBackground()
-				local lualineHl = vim.api.nvim_get_hl(0, { name = "lualine_b_normal" })
-				local bg = ("#%06x"):format(lualineHl.bg)
-				for _, hlName in ipairs(navicHls) do
-					hlName = "Navic" .. hlName
-					local hlToFollow = hlName
-					local hl
-					repeat -- follow linked highlights
-						hl = vim.api.nvim_get_hl(0, { name = hlToFollow })
-						hlToFollow = hl.link
-					until not hl.link
-					vim.api.nvim_set_hl(0, hlName, { fg = hl.fg, bg = bg })
-				end
-				vim.api.nvim_set_hl(0, "NavicSeparator", { link = "lualine_b_normal" })
-			end
-			vim.api.nvim_create_autocmd("ColorScheme", {
-				callback = function() vim.defer_fn(fixBackground, 1) end,
-			})
-		end,
 		config = function(_, opts)
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)

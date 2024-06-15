@@ -337,7 +337,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P") -- paste without switching with register
+keymap("x", "p", "P", { desc = "Paste without switching with register" })
+keymap("n", "<D-p>", '"2p', { desc = "Paste previous deletion" })
 
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
