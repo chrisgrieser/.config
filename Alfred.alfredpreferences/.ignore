@@ -5,7 +5,11 @@ resources
 themes
 workflowextras
 
+# reddit workflow
 subreddit_icons/*
+
+# images
+workflows/**/*.png
 
 # 3rd-party workflows, manually marked as such
 workflows/*\[3rd-Party\]

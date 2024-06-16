@@ -16,6 +16,7 @@ function alfredMatcher(str) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
@@ -26,7 +27,7 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		.doShellScript(
-			`${expPath} ; rg --files --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
+			`${expPath} ; rg --files --hidden --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
 		)
 		.split("\r")
 		.map((absPath) => {
@@ -107,7 +108,7 @@ function run() {
 	return JSON.stringify({
 		items: [...fileArray, ...folderArray],
 		cache: {
-			seconds: 60 * 2, // quick for newly created files
+			seconds: 60, // quick for newly created files
 			loosereload: true,
 		},
 	});

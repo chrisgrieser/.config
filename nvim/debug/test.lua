@@ -1,3 +1,14 @@
-local gitsigns = vim.b.gitsigns_status
-local u = require("config.utils")
-u.notify("", "👾 gitsigns: " .. vim.inspect(gitsigns), "warn")
+local M = {}
+--------------------------------------------------------------------------------
+
+setmetatable(M, {
+	__index = function(_, key)
+		return function(...)
+			local moduleToRedirectTo = "tinygit.commands"
+			require(moduleToRedirectTo)[key](...)
+		end
+	end,
+})
+
+--------------------------------------------------------------------------------
+return M
