@@ -37,7 +37,7 @@ end, { buffer = true, desc = " Eval Selection" })
 
 -- lightweight version of telescope-import.nvim import (just for lua)
 vim.keymap.set("n", "<leader>cr", function()
-	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.\w*)?]]
+	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()
 	assert(rgResult.code == 0, rgResult.signal)

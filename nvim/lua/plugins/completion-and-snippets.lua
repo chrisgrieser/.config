@@ -214,7 +214,7 @@ return {
 				keymaps = {
 					deleteSnippet = "<D-BS>",
 					openInFile = "<D-o>",
-					insertNextToken = "<D-t>",
+					insertNextPlaceholder = "<D-t>",
 				},
 			},
 			telescope = { alsoSearchSnippetBody = true },

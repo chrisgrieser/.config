@@ -63,7 +63,7 @@ return {
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
-		commit = "de18f6b", -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/1043
+		commit = "4a143f1", -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/1043
 
 		event = "VeryLazy",
 		opts = {
