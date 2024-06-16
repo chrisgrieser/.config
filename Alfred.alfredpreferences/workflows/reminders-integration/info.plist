@@ -443,9 +443,9 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>"{query}"</string>
 				<key>title</key>
-				<string>💾 Updated {query}</string>
+				<string>💾 Updated to</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
