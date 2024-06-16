@@ -27,7 +27,7 @@ local function custom_wrap(lines, max_width)
 			table.insert(wrapped_lines, nl:gsub("^%s+", "") .. right_pad)
 		end
 	end
-	wrapped_lines[1] = " " .. wrapped_lines[1]
+	if wrapped_lines[1] then wrapped_lines[1] = " " .. wrapped_lines[1] end
 	return wrapped_lines
 end
 
