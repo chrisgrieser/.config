@@ -206,7 +206,7 @@ function my_commits_today {
 	# shellcheck disable=2016
 	gh search commits --author="$username" --committer="$username" --json="repository,commit" \
 		--author-date="$(date '+%Y-%m-%d')" --sort=author-date --order=asc |
-		yq -P '.[] | (((.commit.committer.date |  sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))' |
+		yq -P '.[] | (((.commit.committer.date | sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))' |
 		sed -Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
 			-Ee $'s/(..:..) (.*) –/\e[0;38;5;245m\\1 \e[1;32m\\2/' \
 			-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g'

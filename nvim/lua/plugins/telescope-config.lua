@@ -71,6 +71,7 @@ local function telescopeConfig()
 			},
 			vimgrep_arguments = {
 				"rg",
+				"--no-config",
 				"--vimgrep",
 				"--smart-case",
 				"--trim",
@@ -92,6 +93,7 @@ local function telescopeConfig()
 				-- alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
 				find_command = {
 					"rg",
+					"--no-config",
 					"--files",
 					"--sortr=modified",
 					("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
