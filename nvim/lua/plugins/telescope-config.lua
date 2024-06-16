@@ -90,7 +90,6 @@ local function telescopeConfig()
 				path_display = { "filename_first" },
 				-- FIX telescope not respecting `~/.config/fd/ignore`
 				find_command = { "fd", "--type=file", "--type=symlink" },
-				find_command = { "rg", "--no-config", "--files", "--sortr=modified" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
@@ -314,6 +313,13 @@ return {
 			{
 				"go",
 				function()
+					-- INFO an alternative approach to achieve initial sorting is
+					-- using `rg` as the `find_command`: `rg --no-config --files --sortr=modified`
+					-- (fd itself does not have a `--sort` flag). However, that has
+					-- the downside of putting the current file on top of the list,
+					-- which is adds an unnecessary extra keypress. Also, handling
+					-- the ignore-file manually makes things more complicated.
+
 					-- SOURCE https://github.com/nvim-telescope/telescope.nvim/issues/2905
 					local scorer = require("telescope").extensions["fzf"].native_fzf_sorter()
 					local mySorter = {}
@@ -332,14 +338,16 @@ return {
 						-- prioritze recently modified
 						local stat = vim.uv.fs_stat(relPath)
 						if not stat then return 1 end
-						local now = os.time()
-						local ageYears = (now - stat.mtime.sec) / 60 / 60 / 24 / 365
+						-- convert to years ensures *most* values are between 0 and 1
+						-- older than a year, it does not matter much anyway, and we
+						-- just return 1 to put these files at the bottom of the list
+						local ageYears = (os.time() - stat.mtime.sec) / 60 / 60 / 24 / 365
 						return math.min(ageYears, 1)
 					end
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						-- sorter = mySorter,
+						sorter = mySorter,
 					}
 				end,
 				desc = "󰭎 Open File",
