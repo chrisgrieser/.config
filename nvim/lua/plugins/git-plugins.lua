@@ -29,6 +29,7 @@ return {
 		},
 		opts = {
 			commitMsg = {
+				commitPreview = false,
 				conventionalCommits = { enforce = true },
 				spellcheck = true,
 				keepAbortedMsgSecs = 60 * 10, -- 10 mins

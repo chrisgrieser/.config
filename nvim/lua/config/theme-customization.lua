@@ -31,6 +31,7 @@ local function customHighlights()
 		{ fg = u.getHighlightValue("Comment", "fg"), underline = true }
 	)
 	overwriteHl("MatchParen", { reverse = true }) -- stand out more
+
 	linkHl("Whitespace", "NonText") -- trailing spaces more visible
 	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
 	overwriteHl("SnippetTabstop", { bg = u.getHighlightValue("Folded", "bg") })
