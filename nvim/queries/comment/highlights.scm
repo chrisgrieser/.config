@@ -5,7 +5,7 @@
 
 ; added by me:
 ; CONFIG SIC PENDING CAVEAT DATA GUARD SOURCE REQUIRED VALIDATE EXAMPLE
-; CONFIG: foo PENDING: foo
+; CONFIG: foo PENDING: foo DEPRECATION
 
 ; original tags:
 ; FOOFOO TEST ERROR
@@ -23,9 +23,9 @@
 ((tag (name) @comment.note ":" @punctuation.delimiter)
  (#any-of? @comment.note "CONFIG" "SOURCE" "DATA" "EXAMPLE"))
 
-("text" @comment.warning (#any-of? @comment.warning "SIC" "CAVEAT"))
+("text" @comment.warning (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION"))
 ((tag (name) @comment.warning ":" @punctuation.delimiter)
- (#any-of? @comment.warning "SIC" "CAVEAT"))
+ (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION"))
 
 ;──────────────────────────────────────────────────────────────────────────────
 
