@@ -246,6 +246,18 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
 			u.notify("Buffers closed", text)
 		end
+
+		-- closing all buffers and thus ending up in empty buffer, re-open the first oldfile that exists
+		vim.defer_fn(function()
+			local emptyBuf = vim.api.nvim_buf_get_name(0) == ""
+			if not emptyBuf then return end
+			for _, file in ipairs(vim.v.oldfiles) do
+				if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
+					vim.cmd.edit(file)
+					return
+				end
+			end
+		end, 1)
 	end,
 })
 
