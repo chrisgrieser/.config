@@ -40,7 +40,7 @@ local function dapConfig()
 			local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
 			return breakpointIcon .. tostring(breakpointSum)
 		end,
-	})
+	}, "before")
 	u.addToLuaLine("tabline", "lualine_z", function()
 		local dapStatus = require("dap").status()
 		if dapStatus == "" then return "" end
