@@ -276,7 +276,6 @@ end
 return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
-		enabled = false,
 		cmd = "Telescope",
 		external_dependencies = "rg",
 		dependencies = {
