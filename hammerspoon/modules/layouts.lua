@@ -54,7 +54,7 @@ end
 
 local function workLayout()
 	(u.betweenTime(22, 7) and darkenDisplay or autoSetBrightness)()
-	darkmode.autoSwitch()
+	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustment
 	visuals.updateHoleCover()
 	dockSwitcher("work")
 

@@ -198,6 +198,7 @@ local autoCd = {
 		"info.plist", -- Alfred workflows
 	},
 	parentOfRoot = {
+		".obsidian", -- internal Obsi folder
 		".config",
 		"com~apple~CloudDocs", -- iCloud
 	},
