@@ -349,7 +349,7 @@ serverConfigs.ltex = {
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Warning" },
 	on_attach = function(typos, bufnr)
-		-- disable in gitcommits, since hashes there are mostly false positives
+		-- mostly false positives for hashes https://github.com/crate-ci/typos/issues/415
 		-- and we got ltex and spellcheck there already
 		if vim.bo[bufnr].filetype == "gitcommit" then vim.lsp.buf_detach_client(bufnr, typos.id) end
 	end,
