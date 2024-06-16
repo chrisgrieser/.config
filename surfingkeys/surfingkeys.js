@@ -24,7 +24,7 @@ settings.smartCase = true;
 // EMOJIS
 
 settings.enableEmojiInsertion = true;
-settings.startToShowEmoji = 1;
+settings.startToShowEmoji = 2;
 if (window.location.host === "github.com") settings.enableEmojiInsertion = false;
 
 //──────────────────────────────────────────────────────────────────────────────

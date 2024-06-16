@@ -348,6 +348,11 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Warning" },
+	on_attach = function(typos, bufnr)
+		-- disable in gitcommits, since hashes there are mostly false positives
+		-- and we got ltex and spellcheck there already
+		if vim.bo[bufnr].filetype == "gitcommit" then vim.lsp.buf_detach_client(bufnr, typos.id) end
+	end,
 }
 
 -- VALE
@@ -368,8 +373,8 @@ serverConfigs.vale_ls = {
 	on_attach = function(vale, bufnr)
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
 		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-		if not vim.tbl_isempty(obsiDir) then
-			vim.cmd.LspStop(vale.id)
+		if #obsiDir > 0 then
+			vim.lsp.buf_detach_client(bufnr, vale.id)
 			vim.diagnostic.reset(nil, bufnr)
 		end
 	end,

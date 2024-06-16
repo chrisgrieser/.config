@@ -135,8 +135,8 @@ return {
 			definition = { enabled = false },
 			implementation = { enabled = false },
 			vt_position = "signcolumn",
+			vt_priority = 5, -- below the gitsigns default 6
 			hl = { link = "Comment" },
-			disable = { lsp = { "cssls" } }, -- PENDING https://github.com/Wansmer/symbol-usage.nvim/issues/61
 			text_format = function(symbol)
 				if not symbol.references or symbol.references == 0 then return end
 				if symbol.references < 2 and vim.bo.filetype == "css" then return end
