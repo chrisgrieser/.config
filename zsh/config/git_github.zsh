@@ -199,13 +199,16 @@ function new_branch {
 	git push --set-upstream origin "$1"
 }
 
-function myCommitsToday {
+# CAVEAT date calculation is off, since time zones are not correctly handled
+function my_commits_today {
 	local username
 	username=$(gh api user --jq='.login')
-	gh search commits --author="$username" --json="repository,commit" \
-		--author-date="$(date '+%Y-%m-%d')" --sort=author-date |
-		yq -P '.[] | (.repository.name + " – " + .commit.message)' |
-		sed -Ee $'s/(.*) – (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\(.+\))?(!?):/\e[1;32m\1 \e[1;35m\2\e[1;36m\3\e[7;31m\4\e[0;38;5;245m:\e[0m/' \
+	# shellcheck disable=2016
+	gh search commits --author="$username" --committer="$username" --json="repository,commit" \
+		--author-date="$(date '+%Y-%m-%d')" --sort=author-date --order=asc |
+		yq -P '.[] | (((.commit.committer.date |  sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))' |
+		sed -Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
+			-Ee $'s/(..:..) (.*) –/\e[0;38;5;245m\\1 \e[1;32m\\2/' \
 			-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g'
 }
 
