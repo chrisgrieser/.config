@@ -7,21 +7,22 @@ function o() {
 	fi
 
 	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
-	local reload="reload(fd --hidden --no-ignore --exclude='/.git/' --exclude='node_modules' --exclude='.DS_Store' --type=file --type=symlink --color=always)"
+	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store')"
 
 	local selected
 	selected=$(
 		# shellcheck disable=2016
-		"$FZF_DEFAULT_COMMAND" --color=always | fzf \
-			--select-1 --ansi --query="$*" --info=inline --header-first \
-			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
-			--keep-right --scheme=path --tiebreak=length,end \
-			--delimiter="/" --with-nth=-2.. --nth=-2.. \
-			--bind="ctrl-h:$reload" --bind="zero:$reload" \
-			--expect="ctrl-p,ctrl-n,ctrl-d" \
-			--preview-window="55%" \
-			--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
-			--height="100%"
+		zsh -c "$FZF_DEFAULT_COMMAND" |
+			sed -Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' |
+			fzf --select-1 --ansi --query="$*" --info=inline --header-first \
+				--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
+				--keep-right --scheme=path --tiebreak=length,end \
+				--delimiter="/" --with-nth=-2.. --nth=-2.. \
+				--bind="ctrl-h:$reload" --bind="zero:$reload" \
+				--expect="ctrl-p,ctrl-n,ctrl-d" \
+				--preview-window="55%" \
+				--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
+				--height="100%"
 		# height of 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
@@ -48,7 +49,7 @@ _o() {
 	while IFS='' read -r file; do # turn lines into array
 		paths+=("$file")
 		names+=("$(basename "$file")")
-	done < <(fd --max-depth=3 --type=file --type=symlink)
+	done < <(zsh -c "$FZF_DEFAULT_COMMAND --max-depth=3")
 
 	local expl && _description -V files-in-pwd expl 'Files in PWD'
 	compadd "${expl[@]}" -d names -a paths

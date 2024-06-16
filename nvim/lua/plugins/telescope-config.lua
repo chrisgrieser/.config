@@ -275,7 +275,7 @@ return {
 	{ -- fuzzy finder
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		external_dependencies = { "fd", "rg" },
+		external_dependencies = "rg",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",

@@ -20,7 +20,7 @@ function which { # colorized & showing all
 }
 
 function bat { # dark-mode aware
-	local theme # list themes via `bat --list-themes`
+	local theme   # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
 }
@@ -52,6 +52,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=('^P' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold')
 
 #───────────────────────────────────────────────────────────────────────────────

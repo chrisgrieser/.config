@@ -342,7 +342,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, quickfix_ns, qf.lnum - 1, qf.col - 1, {
-				sign_text = "",
+				sign_text = "▸",
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})
