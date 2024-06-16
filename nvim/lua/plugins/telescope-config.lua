@@ -86,16 +86,23 @@ local function telescopeConfig()
 		},
 		pickers = {
 			find_files = {
+				-- INFO using `rg` instead of `fd` ensures that initially, the list
+				-- of files is sorted by recently modified files. (`fd` does not
+				-- have a `--sort` flag.)
+				-- alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
+				find_command = {
+					"rg",
+					"--files",
+					"--sortr=modified",
+					("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
+				},
+
 				prompt_prefix = "󰝰 ",
 				path_display = { "filename_first" },
-				-- FIX telescope not respecting `~/.config/fd/ignore`
-				find_command = { "fd", "--type=file", "--type=symlink" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
-
-				-- use small layout, toggle via <D-p>
-				layout_config = smallLayout,
+				layout_config = smallLayout, -- use small layout, toggle via <D-p>
 				previewer = false,
 			},
 			oldfiles = {
@@ -313,41 +320,13 @@ return {
 			{
 				"go",
 				function()
-					-- INFO an alternative approach to achieve initial sorting is
-					-- using `rg` as the `find_command`: `rg --no-config --files --sortr=modified`
-					-- (fd itself does not have a `--sort` flag). However, that has
-					-- the downside of putting the current file on top of the list,
-					-- which is adds an unnecessary extra keypress. Also, handling
-					-- the ignore-file manually makes things more complicated.
-
-					-- SOURCE https://github.com/nvim-telescope/telescope.nvim/issues/2905
-					local scorer = require("telescope").extensions["fzf"].native_fzf_sorter()
-					local mySorter = {}
-					setmetatable(mySorter, { __index = scorer })
-					local curBufRelPath = vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2)
-
-					---@param prompt string
-					---@param relPath string the ordinal from telescope
-					---@return number score number from 1 to 0. lower the number the better. -1 will filter out the entry though.
-					function mySorter:scoring_function(prompt, relPath)
-						-- only modify score when prompt is empty
-						if prompt ~= "" then return scorer.scoring_function(self, prompt, relPath) end
-						-- put current buffer to the bottom
-						if relPath == curBufRelPath then return 1 end
-
-						-- prioritze recently modified
-						local stat = vim.uv.fs_stat(relPath)
-						if not stat then return 1 end
-						-- convert to years ensures *most* values are between 0 and 1
-						-- older than a year, it does not matter much anyway, and we
-						-- just return 1 to put these files at the bottom of the list
-						local ageYears = (os.time() - stat.mtime.sec) / 60 / 60 / 24 / 365
-						return math.min(ageYears, 1)
-					end
+					-- ignore current file, since using the `rg` workaround puts it on top
+					local ignoresFiles = require("telescope.config").values.file_ignore_patterns or {}
+					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						sorter = mySorter,
+						file_ignore_patterns = { relPathCurrent, unpack(ignoresFiles) }, -- unpack must be last
 					}
 				end,
 				desc = "󰭎 Open File",

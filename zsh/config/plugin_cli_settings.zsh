@@ -28,8 +28,11 @@ export GREP_COLOR='01;35' # matches in bold+magenta
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# shellcheck disable=2016
+# using `rg` ensures that initially, the list of files is sorted by recently modified files.
+export FZF_DEFAULT_COMMAND='rg --no-config --files --sortr=modified --ignore-file="$HOME/.config/rg/ignore"'
+
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
-export FZF_DEFAULT_COMMAND='fd'
 export FZF_DEFAULT_OPTS='
 	--pointer=⟐ --prompt="❱ " --scrollbar=▐ --ellipsis=… --marker=" +"
 	--color=hl:206,header::reverse
@@ -44,7 +47,7 @@ export GH_NO_UPDATE_NOTIFIER=1
 
 # DOCS https://fx.wtf/configuration
 export FX_SHOW_SIZE=true
-export FX_THEME=3 # fx --themes
+export FX_THEME=3 # `fx --themes`
 
 export JUST_COMMAND_COLOR="blue"
 #───────────────────────────────────────────────────────────────────────────────
