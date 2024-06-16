@@ -40,8 +40,8 @@ opt.timeoutlen = 666 -- also affects duration until which-key is shown
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
-opt.sidescrolloff = 15
-opt.scrolloff = 15
+opt.sidescrolloff = 12
+opt.scrolloff = 12
 
 -- mostly set by .editorconfig, therefore only fallback
 opt.expandtab = false
@@ -240,9 +240,11 @@ vim.api.nvim_create_autocmd("FocusGained", {
 				vim.api.nvim_buf_delete(bufnr, { force = true })
 			end)
 
-		if #closedBuffers > 0 then
+		if #closedBuffers == 1 then
+			u.notify("Buffer closed", closedBuffers[1])
+		elseif #closedBuffers > 0 then
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
-			u.notify("Buffers closed.", text)
+			u.notify("Buffers closed", text)
 		end
 	end,
 })
