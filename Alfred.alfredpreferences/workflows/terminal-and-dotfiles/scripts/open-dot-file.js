@@ -83,14 +83,15 @@ function run() {
 
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
-		.doShellScript(`find "${dotfileFolder}" -type d -not -path ".git/*"`)
+		.doShellScript(
+			`find "${dotfileFolder}" -type d -not -path "**/.git/*" -not -path "**/workflows/*" `,
+		)
 		.split("\r")
-		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((/** @type {string} */ absPath) => {
-			const name = absPath.slice(0, -1).split("/").pop();
+			const name = absPath.split("/").pop();
 			if (!name) return {};
 			const relPath = absPath.slice(dotfileFolder.length);
-			const relativeParentFolder = relPath.slice(1, -name.length - 2) || "/";
+			const relativeParentFolder = relPath.slice(1, -name.length - 1) || "/";
 
 			return {
 				title: name,

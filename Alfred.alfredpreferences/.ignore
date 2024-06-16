@@ -1,6 +1,5 @@
 # Alfred config, but keep the workflows
 preferences
-preferences/**
 remote
 resources
 themes
