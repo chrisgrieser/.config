@@ -162,14 +162,16 @@ mapkey("P", "Incognito window", () => RUNTIME("openIncognito", { url: window.loc
 map("p", "<Alt-p>", null, "pin");
 mapkey("i", "Passthrough", () => Normal.PassThrough(600));
 
-// HACK open config via hammerspoon, as browser is sandboxed
+// HACK open config via hammerspoon, as browser is sandboxed and cannot open files
 mapkey(",", "Open Surfingkeys config", () => window.open("hammerspoon://open-surfingkeys-config"));
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
 map("-", "/");
 
-vmapkey("s", "Google Selection", () => searchSelectedWith("https://www.google.com/search?q="));
+vmapkey("s", "Search Selection with Google", () =>
+	searchSelectedWith("https://www.google.com/search?q="),
+);
 
 //──────────────────────────────────────────────────────────────────────────────
 
