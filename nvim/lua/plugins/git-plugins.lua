@@ -63,7 +63,22 @@ return {
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
+		commit = "de18f6b", -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/1043
+
 		event = "VeryLazy",
+		opts = {
+			-- signs_staged_enable = true, -- PENDING above
+
+			attach_to_untracked = true,
+			max_file_length = 3000, -- lines
+			-- stylua: ignore
+			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
+			signs = {
+				delete = { show_count = true },
+				topdelete = { show_count = true },
+				changedelete = { show_count = true },
+			},
+		},
 		keys = {
 			-- stylua: ignore start
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
@@ -105,20 +120,6 @@ return {
 					u.notify("Gitsigns", "Changed base to " .. lastCommitToFile)
 				end,
 				desc = "󰊢 Previous/Present Changes",
-			},
-		},
-		opts = {
-			attach_to_untracked = true,
-			max_file_length = 3000, -- lines
-			-- deletions greater than one line will show a count to assess the size
-			-- (digits are actually nerdfont numbers to achieve smaller size)
-			-- stylua: ignore
-			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
-			signs_staged_enable = true, -- TODO buggy, try enabling later
-			signs = {
-				delete = { show_count = true },
-				topdelete = { show_count = true },
-				changedelete = { show_count = true },
 			},
 		},
 		config = function(_, opts)
