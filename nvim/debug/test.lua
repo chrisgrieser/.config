@@ -10,5 +10,8 @@ setmetatable(M, {
 	end,
 })
 
+local str = "hello world"
+local _, count = str:gsub("search", "")
+
 --------------------------------------------------------------------------------
 return M
