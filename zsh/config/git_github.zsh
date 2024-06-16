@@ -199,6 +199,16 @@ function new_branch {
 	git push --set-upstream origin "$1"
 }
 
+function myCommitsToday {
+	local username
+	username=$(gh api user --jq='.login')
+	gh search commits --author="$username" --json="repository,commit" \
+		--author-date="$(date '+%Y-%m-%d')" --sort=author-date |
+		yq -P '.[] | (.repository.name + " – " + .commit.message)' |
+		sed -Ee $'s/(.*) – (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\(.+\))?(!?):/\e[1;32m\1 \e[1;35m\2\e[1;36m\3\e[7;31m\4\e[0;38;5;245m:\e[0m/' \
+			-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g'
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
 # uses `_gitlog` from magic-dashboard.zsh
