@@ -16,7 +16,7 @@
     "prefix": "Record (type)"
   },
   "count occurences in string": {
-    "body": "local count = select(2, ${1:str}:gsub(\"${2:find}\", \"\"))",
+    "body": "local _, count = ${1:str}:gsub(\"${2:find}\", \"\")",
     "prefix": "count occurences in string"
   },
   "export module": {
@@ -117,6 +117,18 @@
       "end"
     ],
     "prefix": "read file"
+  },
+  "redirect (metatable __index)": {
+    "body": [
+      "setmetatable(M, {",
+      "\t__index = function(_, key)",
+      "\t\treturn function(...)",
+      "\t\t\trequire(${1:moduleToRedirectTo})[key](...)",
+      "\t\tend",
+      "\tend,",
+      "})"
+    ],
+    "prefix": "redirect (metatable __index)"
   },
   "safe require": {
     "body": [
