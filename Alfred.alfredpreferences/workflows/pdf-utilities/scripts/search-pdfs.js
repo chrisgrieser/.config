@@ -7,28 +7,35 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeperated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeperated, str].join(" ");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [clean, camelCaseSeparated, str].join(" ");
 }
+
+//──────────────────────────────────────────────────────────────────────────────
 
 const folderToSearch = $.getenv("pdf_folder").replace(/^~/, app.pathTo("home folder"));
 
-// prettier-ignore
-const jsonArray = app.doShellScript(`cd '${folderToSearch}'; fd --type=file --absolute-path`)
-	.split("\r")
-	.map(fPath => {
-		const parts = fPath.split("/");
-		const name = parts.pop();
-		const relativeParentFolder = parts.pop();
+// biome-ignore lint/correctness/noUnusedVariables: Alfred run
+function run() {
+	// prettier-ignore
+	const jsonArray = app
+		.doShellScript(`find '${folderToSearch}' -type f -name '*.pdf'`)
+		.split("\r")
+		.map((fPath) => {
+			const parts = fPath.split("/");
+			const name = parts.pop() || "";
+			const relativeParentFolder = parts.pop();
+			const absPath = folderToSearch + "/" + fPath;
 
-		return {
-			title: name,
-			match: alfredMatcher(name),
-			subtitle: "▸ " + relativeParentFolder,
-			type: "file:skipcheck",
-			arg: fPath,
-			uid: fPath,
-		};
-	});
+			return {
+				title: name,
+				match: alfredMatcher(name),
+				subtitle: "▸ " + relativeParentFolder,
+				type: "file:skipcheck",
+				arg: absPath,
+				uid: absPath,
+			};
+		});
 
-JSON.stringify({ items: jsonArray });
+	return JSON.stringify({ items: jsonArray });
+}

@@ -20,19 +20,15 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
-	const exportHomebrewPath = "PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH";
-
+	const expPath = "PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH";
 	const dirtyFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
 
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		.doShellScript(
-			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
-			fd --type=file --type=symlink --hidden --absolute-path \
-			--exclude="**/Alfred.alfredpreferences/workflows/**/*.png" --exclude="*.plist"`,
+			`${expPath} ; rg --files --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
 		)
 		.split("\r")
-		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((absPath) => {
 			const name = absPath.split("/").pop();
 			if (!name) return {};
@@ -87,10 +83,7 @@ function run() {
 
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
-		.doShellScript(
-			`${exportHomebrewPath} ; cd "${dotfileFolder}" ;
-			fd --absolute-path --type=directory --hidden`,
-		)
+		.doShellScript(`find "${dotfileFolder}" -type d -not -path ".git/*"`)
 		.split("\r")
 		.reverse() // since often used files in `zsh` or `nvim` or further down the alphabet
 		.map((/** @type {string} */ absPath) => {
