@@ -5,7 +5,8 @@ local function highlightsInStacktrace(bufnr)
 	vim.defer_fn(function()
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		vim.api.nvim_buf_call(bufnr, function()
-			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- \ze: lookahead
+			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- files with error
+			vim.fn.matchadd("WarningMsg", [[[E\d\+]]) -- vim error codes
 		end)
 	end, 1)
 end
@@ -76,6 +77,9 @@ local routes = {
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+
+	-- E211 no longer needed, since auto-closing deleted buffers
+	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -125,7 +129,7 @@ return {
 				},
 				mini = {
 					timeout = 3000,
-					zindex = 10, -- lower, so it does not cover nvim-notify
+					zindex = 4, -- lower, so it does not cover nvim-notify (zindex 50)
 					position = { col = -3 }, -- to the left to avoid collision with scrollbar
 					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
@@ -156,15 +160,14 @@ return {
 				},
 				last = {
 					view = "popup",
-					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
 				},
 			},
 
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
-				progress = { enabled = false },
-				signature = { enabled = false }, -- using lsp_signature.nvim instead
+				progress = { enabled = false }, -- using my own statusline component instead
+				signature = { enabled = false }, -- using `lsp_signature.nvim` instead
 
 				-- ENABLE features
 				override = {
@@ -203,7 +206,8 @@ return {
 				end
 				vim.api.nvim_win_set_config(win, opts)
 
-				highlightsInStacktrace(vim.api.nvim_win_get_buf(win))
+				local bufnr = vim.api.nvim_win_get_buf(win)
+				highlightsInStacktrace(bufnr)
 			end,
 		},
 	},
