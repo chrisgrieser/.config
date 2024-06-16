@@ -12,7 +12,7 @@ function o() {
 	local selected
 	selected=$(
 		# shellcheck disable=2016
-		fd --type=file --type=symlink --color=always | fzf \
+		"$FZF_DEFAULT_COMMAND" --color=always | fzf \
 			--select-1 --ansi --query="$*" --info=inline --header-first \
 			--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 			--keep-right --scheme=path --tiebreak=length,end \
