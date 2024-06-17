@@ -19,24 +19,24 @@ return {
 				"<leader>oa",
 				function()
 					vim.cmd.SupermavenToggle()
-					vim.cmd.SupermavenStatus()
+					local text = require("supermaven-nvim.api").is_running() and "enabled" or "disabled"
+					require("config.utils").notify("󰚩 Supermaven", text)
 				end,
 				desc = "󰚩 Supermaven Suggestions",
 			},
 		},
 		opts = {
-			disable_keymaps = false,
 			keymaps = {
 				accept_suggestion = "<D-s>",
 				accept_word = "<D-S>",
 			},
+			log_level = "off", -- silence notifications
 			ignore_filetypes = {
 				gitcommit = true,
 				DressingInput = true,
 				text = true, -- `pass`' filetype when editing passwords
 				["rip-substitute"] = true,
 			},
-			color = { suggestion_group = "NonText" }, -- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
 			disable_inline_completion = false, -- disables cmp integration
 		},
 		config = function(_, opts)
