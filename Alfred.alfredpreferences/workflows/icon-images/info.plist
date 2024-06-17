@@ -467,27 +467,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-history</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>count</key>
 				<integer>1</integer>
 				<key>keychar</key>
@@ -503,6 +482,27 @@
 			<string>alfred.workflow.output.dispatchkeycombo</string>
 			<key>uid</key>
 			<string>48F436EA-DB23-49A0-AE6D-917AF25E9479</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://open-history</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -768,7 +768,7 @@
 			<key>note</key>
 			<string>annotate clipboard</string>
 			<key>xpos</key>
-			<real>40</real>
+			<real>35</real>
 			<key>ypos</key>
 			<real>810</real>
 		</dict>

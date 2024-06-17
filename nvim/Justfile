@@ -13,7 +13,7 @@ last_line_before_plugins := "## All installed plugins"
 location_of_installed_plugins := "$HOME/.local/share/nvim/lazy"
 
 # updates README.md with current list of installed plugins
-update-plugins:
+update-plugin-list:
     #!/usr/bin/env zsh
     sed -i '' -n "1,/{{ last_line_before_plugins }}/p" {{ nvim_readme }}
 
@@ -30,6 +30,6 @@ update-plugins:
 
 debugFile := "./debug/test.lua"
 
-debug:
+debug-instance:
     # `bdelete` to FIX https://github.com/neovide/neovide/issues/2609
     neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 200ms|bdelete' &>/dev/null

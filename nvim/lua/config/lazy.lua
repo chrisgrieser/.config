@@ -22,10 +22,8 @@ require("lazy").setup("plugins", {
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- … and if not, fallback to fetching from GitHub
 	},
-	git = {
-		log = { "--since=3 days ago" }, -- Lazy Log shows commits since last 3 days
-		-- log = { "-8" } -- default
-	},
+	-- Lazy Log shows commits since last 3 days
+	git = { log = { "--since=7 days ago" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
@@ -35,12 +33,19 @@ require("lazy").setup("plugins", {
 		custom_keys = {
 			["<localleader>l"] = false,
 			["<localleader>t"] = false,
-			["gx"] = { function(plugin) vim.ui.open(plugin.url) end, desc = "󰖟 Plugin repo" },
-			["gi"] = { function(plugin)
-				local issue = vim.api.nvim_get_current_line():match("#(%d+)")
-				vim.ui.open(plugin.url .. "/issues/" .. issue)
-			end, desc = " Open issue" },
-			["go"] = {
+			["gx"] = {
+				function(plugin) vim.ui.open(plugin.url:gsub("%.git$", "")) end,
+				desc = "󰖟 Plugin repo",
+			},
+			["gi"] = {
+				function(plugin)
+					local url = plugin.url:gsub("%.git$", "")
+					local issue = vim.api.nvim_get_current_line():match("#(%d+)")
+					vim.ui.open(url .. "/issues/" .. issue)
+				end,
+				desc = " Open issue",
+			},
+			["gp"] = {
 				function(plugin)
 					vim.cmd.close()
 					require("telescope.builtin").find_files {
@@ -48,7 +53,7 @@ require("lazy").setup("plugins", {
 						cwd = plugin.dir,
 					}
 				end,
-				desc = "󰭎 Open plugin code",
+				desc = "󰭎 Open code",
 			},
 		},
 	},
@@ -113,9 +118,10 @@ local pluginTypeIcons = {
 	["lualine"] = "󰇘 ",
 }
 
--- goto plugin config, replaces telescope-lazy-plugins.nvim
-keymap("n", "g,", function()
+---@param mode "browse" | "config"
+local function lazyPluginSearch(mode)
 	local specRoot = require("lazy.core.config").options.spec.import
+
 	local function getModule(plugin)
 		local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
 			or plugin._.module
@@ -123,6 +129,7 @@ keymap("n", "g,", function()
 		return module:sub(#specRoot + 2)
 	end
 
+	-- colored icons
 	vim.api.nvim_create_autocmd("FileType", {
 		once = true,
 		pattern = "TelescopeResults",
@@ -130,13 +137,17 @@ keymap("n", "g,", function()
 	})
 
 	vim.ui.select(require("lazy").plugins(), {
-		prompt = "󰣖 Select Plugin:",
+		prompt = mode == "browse" and "󰒲 Local Code" or "󰒲 Goto Config",
 		format_item = function(plugin)
 			local icon = pluginTypeIcons[getModule(plugin)] or "󰣖 "
 			return icon .. vim.fs.basename(plugin[1])
 		end,
 	}, function(plugin)
 		if not plugin then return end
+		if mode == "browse" then
+			require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
+			return
+		end
 		if plugin[1] == "folke/lazy.nvim" then
 			local pathOfThisFile = debug.getinfo(1).source:sub(2)
 			vim.cmd.edit(pathOfThisFile)
@@ -147,7 +158,10 @@ keymap("n", "g,", function()
 			vim.cmd(("edit +/%q %s"):format(repo, filepath))
 		end
 	end)
-end, { desc = "󰒲 Goto Plugin Config" })
+end
+
+keymap("n", "g,", function() lazyPluginSearch("config") end, { desc = "󰒲 Goto Plugin Config" })
+keymap("n", "gp", function() lazyPluginSearch("browse") end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS

@@ -70,6 +70,17 @@
 			<key>url</key>
 			<string>https://chatgpt.com?q={query}</string>
 		</dict>
+		<key>A60A3A72-DF83-430C-9ED0-4FF026EC0E5F</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>nf</string>
+			<key>text</key>
+			<string>Nerdfont</string>
+			<key>url</key>
+			<string>https://www.nerdfonts.com/cheat-sheet?q={query}</string>
+		</dict>
 		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
 		<dict>
 			<key>enabled</key>
@@ -170,5 +181,7 @@
 			<string>https://github.com/search?type=code&amp;q={query}</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>

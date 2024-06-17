@@ -24,6 +24,20 @@ local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, cha
 
 --------------------------------------------------------------------------------
 
+local function underlinesInBackdropFIX()
+	vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
+		group = vim.api.nvim_create_augroup("underlinesInBackdropFIX", { clear = true }),
+		callback = function(ctx)
+			if ctx.event == "WinEnter" then
+				-- WinEnter needs a delay so buftype changes set by plugins are picked up
+				vim.defer_fn(toggleHighlights, 1)
+			elseif ctx.event == "FileType" and ctx.match == "DressingInput" then
+				-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
+			end
+		end,
+	})
+end
+
 local function customHighlights()
 	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
 	overwriteHl(
