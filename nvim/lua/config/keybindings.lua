@@ -294,30 +294,15 @@ keymap("x", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
 -- MACROS
--- 1. start/stop with just one keypress
--- 2. add notification & sound for recording
+
 local register = "r"
 local toggleKey = "0"
-keymap("n", toggleKey, function()
-	local notRecording = vim.fn.reg_recording() == ""
-	if notRecording then
-		u.normal("q" .. register)
-	else
-		u.normal("q")
-		local macro = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
-		if macro ~= "" then
-			vim.fn.setreg(register, macro)
-			u.notify("Recorded", vim.fn.keytrans(macro), "trace")
-		else
-			u.notify("Recording", "Aborted.", "trace")
-		end
-	end
-	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-		.. (notRecording and "begin_record.caf" or "end_record.caf")
-	vim.system { "afplay", sound } -- macOS only
-end, { desc = "󰕧 Start/Stop Recording" })
-
-vim.fn.setreg(register, "") -- start with empty register
+keymap(
+	"n",
+	toggleKey,
+	function() require("funcs.nano-plugins").startStopRecording(toggleKey, register) end,
+	{ desc = "󰕧 Start/Stop Recording" }
+)
 keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
 
 --------------------------------------------------------------------------------

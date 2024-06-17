@@ -69,7 +69,8 @@ end
 
 -- simplified implementation of neogen.nvim
 -- (reason: lsp usually provides better prefills for docstrings)
-function M.docstring()
+
+function M.docstring(ffff)
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
 	local ft = vim.bo.filetype
@@ -82,13 +83,17 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "lua" then
-		-- PENDING https://github.com/LuaLS/lua-language-server/issues/2517
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "--" })
-		vim.api.nvim_win_set_cursor(0, { ln, 0 })
 		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
-		vim.defer_fn(function() vim.cmd.startinsert { bang = true } end, 200)
-		-- vim.defer_fn(require("cmp").complete, 400)
-		-- vim.defer_fn(function() require("cmp").confirm { select = true } end, 600)
+		-- PENDING https://github.com/LuaLS/lua-language-server/issues/2517
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "---" })
+		vim.api.nvim_win_set_cursor(0, { ln, 0 })
+		vim.cmd.startinsert { bang = true }
+		vim.defer_fn(function()
+			local lspSource = { sources = require("cmp").config.sources { { name = "nvim_lsp" } } }
+			require("cmp").complete { config = lspSource }
+			require("cmp").confirm { select = true }
+		end, 100)
+		-- vim.defer_fn(function() require("cmp").confirm { select = true } end, 800)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

@@ -77,7 +77,8 @@ return {
 		keys = {
 			{
 				"<D-g>",
-				function() require("lsp_signature").toggle_float_win() end,
+				-- function() require("lsp_signature").toggle_float_win() end,
+				vim.lsp.buf.signature_help,
 				mode = { "n", "v", "i" },
 				desc = "󰏪 LSP signature",
 			},
