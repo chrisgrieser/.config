@@ -69,8 +69,7 @@ end
 
 -- simplified implementation of neogen.nvim
 -- (reason: lsp usually provides better prefills for docstrings)
-
-function M.docstring(ffff)
+function M.docstring()
 	vim.cmd.TSTextobjectGotoPreviousStart("@function.outer")
 
 	local ft = vim.bo.filetype
@@ -93,7 +92,8 @@ function M.docstring(ffff)
 			require("cmp").complete { config = lspSource }
 			require("cmp").confirm { select = true }
 		end, 100)
-		-- vim.defer_fn(function() require("cmp").confirm { select = true } end, 800)
+		vim.defer_fn(function() require("config.utils").leaveVisualMode() end, 200)
+		vim.defer_fn(function() normal("dd$") end, 350)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
