@@ -55,9 +55,9 @@ local function quickfixCounter()
 	local fileCount = #vim.fn.uniq(qfBuffers) -- qf-Buffers are already sorted
 	local fileStr = fileCount > 1 and (" 「%s  」"):format(fileCount) or ""
 
-	qf.title = qf
-		.title -- prettify telescope's title output
-		:gsub("^Live Grep: .-%((.+)%)", "%1")
+	qf.title = qf -- prettify telescope's title output
+		.title
+		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes
 		:gsub("^Find Files: .-%((.+)%)", "%1")
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
@@ -72,7 +72,7 @@ local lualineConfig = {
 		refresh = { statusline = 500 },
 		globalstatus = true,
 		always_divide_middle = false,
-		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`
+		section_separators = { left = "▒", right = "▒" }, -- nerdfont-powerline icons prefix: `ple-`
 		component_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
