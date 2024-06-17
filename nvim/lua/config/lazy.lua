@@ -17,14 +17,15 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
-
 	dev = {
 		patterns = { "chrisgrieser" }, -- for repos matching `patterns` …
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- … and if not, fallback to fetching from GitHub
 	},
-	-- colorschemes to use during installation
-	install = { colorscheme = { "default" } },
+	git = {
+		log = { "--since=3 days ago" } -- Lazy Log shows commits since last 3 days
+		-- log = { "-8" } -- default
+	},
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
@@ -38,9 +39,17 @@ require("lazy").setup("plugins", {
 		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { notify = false },
+	change_detection = { enabled = false }, -- messes up writing config
 	readme = { enabled = false },
-	custom_keys = { ["<localleader>l"] = false, ["<localleader>t"] = false },
+	custom_keys = {
+		["<localleader>l"] = false,
+		["<localleader>t"] = false,
+		["gp"] = {
+
+		function (plugin)
+			
+		end, desc = "Browse plugin documentation" },
+	},
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim

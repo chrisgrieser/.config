@@ -34,8 +34,8 @@ export FZF_DEFAULT_COMMAND='rg --no-config --files --sortr=modified --ignore-fil
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
-	--pointer= --prompt=" " --scrollbar=▐ --ellipsis=… --marker=" +"
-	--color=hl:206,header::reverse
+	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker=" +"
+	--color=hl:208,pointer:206,marker:206
 	--scroll-off=5 --cycle --layout=reverse --height=90% --preview-window=border-left
 	--bind=tab:down,shift-tab:up
 	--bind=page-down:preview-page-down,page-up:preview-page-up
