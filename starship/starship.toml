@@ -4,7 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 format = """[\
-${custom.location_indicator}$directory${custom.folder_number}\
+$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state\
 $sudo$status\
@@ -18,6 +18,7 @@ ${custom.tokei_loc}\
 ${custom.alfred}\
 ${custom.venv_on}${custom.venv_off}\
 $python$nodejs\
+$time\
 """
 
 add_newline = false
@@ -27,7 +28,7 @@ add_newline = false
 [character]
 success_symbol = "[▓▒░](fg:black)"
 error_symbol = "[▓▒░](fg:red)"
-vimcmd_symbol = "[▓▒░](fg:blue)" # not working while using snippet to change cursor shape
+vimcmd_symbol = "[▓▒░](fg:blue)"
 
 [status] # exit code
 disabled = false
@@ -41,14 +42,6 @@ style = 'fg:yellow bg:black'
 symbol = "  "
 format = "[$symbol]($style)"
 
-# Indicate if in a subfolder of my local repo folder. Helps differentiating
-# between my local Alfred workflows and their respective repos.
-[custom.location_indicator]
-when = '[[ "$PWD" =~ "$HOME/repos/" ]]'
-style = "fg:cyan bg:black bold"
-command = 'echo "󰔽"'                    # output trimmed, so spaces must be added at `format`
-format = '[ $output ]($style)'          # extra space for proper nerdfont sizing
-
 [directory]
 truncation_length = 2
 truncation_symbol = "/"
@@ -59,7 +52,10 @@ style = "fg:cyan bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
+# General
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
+"~/Desktop" = "/ "
+"~" = "/ "
 
 # the four perma-repos
 ".config" = " "
@@ -67,14 +63,11 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "phd-data-analysis" = " "
 ".password-store" = " "
 
-"~/Desktop" = "/ "
-"~" = "/ "
-
 [custom.folder_number]
 description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
 when = "true" # always show
-symbol = " "
+symbol = " "
 format = '[$symbol$output]($style) '
 style = "fg:yellow bg:black bold"
 
@@ -130,12 +123,12 @@ format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\)) '
 [custom.tokei_loc]
 description = "Number of lines of code in the current project using tokei (for performance)."
 command = "tokei --compact --exclude='*.txt' --exclude='*.json' | tail -n2 | awk 'NR==1 {print $3}'"
-when = "[[ -f Makefile ]] || [[ -f info.plist ]] || [[ -d .git ]]"
+when = '[[ "$(dirname $PWD)" == "$HOME/repos" ]]' # only in my local repos folder
 format = '  [$output ]($style)'
 style = "blue"
 
 [cmd_duration]
-min_time = 2000
+min_time = 2500
 format = "[󰔟  $duration](bold cyan)"
 
 [time]
