@@ -1,14 +1,5 @@
 local M = {}
-
 local u = require("config.utils")
---------------------------------------------------------------------------------
-
----@param update string
-local function updateCursor(update) vim.opt.guicursor:append(update) end
-
----@param fromGroup string
----@param toGroup string
-local function linkHl(fromGroup, toGroup) vim.api.nvim_set_hl(0, fromGroup, { link = toGroup }) end
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
@@ -16,22 +7,19 @@ local function linkHl(fromGroup, toGroup) vim.api.nvim_set_hl(0, fromGroup, { li
 local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. changes) end
 
 ---@param hlgroup string
-local function clearHl(hlgroup) vim.api.nvim_set_hl(0, hlgroup, {}) end
-
----@param hlgroup string
----@param changes { link?: string, fg?: string, bg?: string, underline?: boolean, reverse?: boolean, underdashed?: boolean, underdotted?: boolean, underdouble?: boolean }
-local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
+---@param changes vim.api.keyset.highlight
+local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
-	overwriteHl("MatchParen", { reverse = true }) -- stand out more
+	setHl("@lsp.type.comment", {}) -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+	setHl("MatchParen", { reverse = true }) -- stand out more
 
-	linkHl("Whitespace", "NonText") -- trailing spaces more visible
-	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
-	overwriteHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
-	linkHl("@character.printf", "SpecialChar") -- missing in many themes
+	setHl("Whitespace", { link = "NonText" }) -- trailing spaces more visible
+	setHl("@comment.warning.gitcommit", { link = "WarningMsg" }) -- de-emphasize 50-72 chars
+	setHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
+	setHl("@character.printf", { link = "SpecialChar" }) -- missing in many themes
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
@@ -45,7 +33,7 @@ local function customHighlights()
 
 	-- Comments: color in grey and add underlines
 	local commentFg = u.getHlValue("Comment", "fg")
-	overwriteHl("@string.special.url.comment", { fg = commentFg, underline = true })
+	setHl("@string.special.url.comment", { fg = commentFg, underline = true })
 end
 
 function M.themeModifications()
@@ -66,7 +54,7 @@ function M.themeModifications()
 			local fg = u.getHlValue("@comment." .. type, "fg")
 				or u.getHlValue("Diagnostic" .. altType, "fg")
 			if fg and fg ~= textColor then
-				overwriteHl("@comment." .. type, { bg = fg, fg = textColor })
+				setHl("@comment." .. type, { bg = fg, fg = textColor })
 			end
 		end
 	end
@@ -82,98 +70,95 @@ function M.themeModifications()
 		updateHl("GitSignsChange", "guifg=#acaa62")
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
-		-- FIX bold and italic having white color, notable in lazy window
-		overwriteHl("Bold", { bold = true })
-		overwriteHl("Italic", { italic = true })
+		-- FIX bold and italic having white color, notably the lazy.nvim window
+		setHl("Bold", { bold = true })
+		setHl("Italic", { italic = true })
 
-		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
+		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		if mode == "dark" then revertedTodoComments() end
-		linkHl("TelescopeSelection", "Visual") -- sometimes not set when switching themes
+		setHl("TelescopeSelection", { link = "Visual" }) -- sometimes not set when switching themes
 	elseif theme == "everforest" then
-		overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
+		setHl("@keyword.return", { fg = "#fd4283", bold = true })
 		updateHl("ErrorMsg", "gui=none") -- remove underline
-		overwriteHl("Red", { fg = "#cf7e7d" })
-		overwriteHl("IblIndent", { fg = "#d2cdad" })
-		overwriteHl("NonText", { fg = "#c8b789" })
+		setHl("Red", { fg = "#cf7e7d" })
+		setHl("IblIndent", { fg = "#d2cdad" })
+		setHl("NonText", { fg = "#c8b789" })
 		local commentColor = u.getHlValue("Comment", "fg")
-		overwriteHl("DiagnosticUnnecessary", { fg = commentColor, underdashed = true })
-		overwriteHl("TSParameter", { fg = "#6f92b3" })
+		setHl("DiagnosticUnnecessary", { fg = commentColor, underdashed = true })
+		setHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "monet" then
-		overwriteHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
-		overwriteHl("Folded", { bg = "#313548" })
+		setHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
+		setHl("Folded", { bg = "#313548" })
 		updateHl("String", "gui=none") -- no italics
-		overwriteHl("Visual", { bg = "#2a454e" }) -- no bold
+		setHl("Visual", { bg = "#2a454e" }) -- no bold
 		updateHl("TelescopeSelection", "gui=none") -- no bold
-		overwriteHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
+		setHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
 	elseif theme == "rose-pine" and mode == "light" then
 		revertedTodoComments()
-		overwriteHl("IblIndent", { fg = "#dbc7b3" })
-		overwriteHl("diffAdded", { fg = "#78a991" })
-		overwriteHl("diffRemoved", { fg = "#d28884" })
-		overwriteHl("Comment", { fg = "#9492aa" })
+		setHl("IblIndent", { fg = "#dbc7b3" })
+		setHl("diffAdded", { fg = "#78a991" })
+		setHl("diffRemoved", { fg = "#d28884" })
+		setHl("Comment", { fg = "#9492aa" })
 		updateHl("LspInlayHint", "blend=none")
-		linkHl("Conceal", "NonText")
-		overwriteHl("NonText", { fg = "#8a87b5" })
-		overwriteHl("Bold", { bold = true })
+		setHl("Conceal", { link = "NonText" })
+		setHl("NonText", { fg = "#8a87b5" })
+		setHl("Bold", { bold = true })
 	elseif theme == "neomodern" then
 		revertedTodoComments()
-		linkHl("@lsp.type.parameter", "Changed")
+		setHl("@lsp.type.parameter", { link = "Changed" })
 		if mode == "light" then
-			overwriteHl("@keyword.return", { fg = "#fd4283", bold = true })
-			overwriteHl("NonText", { fg = "#b5b5bb" })
-			overwriteHl("IblIndent", { fg = "#d8d8db" })
+			setHl("@keyword.return", { fg = "#fd4283", bold = true })
+			setHl("NonText", { fg = "#b5b5bb" })
+			setHl("IblIndent", { fg = "#d8d8db" })
 			for _, v in pairs(vimModes) do
 				updateHl("lualine_a_" .. v, "guifg=#ffffff")
 			end
-			overwriteHl("NotifyINFOIcon", { fg = "#00b9a2" })
-			overwriteHl("NotifyINFOTitle", { fg = "#00b9a2" })
 
 			-- higher contrast
-			overwriteHl("@lsp.mod.readonly", { fg = "#ec9403" })
-			overwriteHl("@keyword", { fg = "#9255e6" })
-			overwriteHl("@keyword.conditional", { fg = "#9255e6" })
+			setHl("@lsp.mod.readonly", { fg = "#ec9403" })
+			setHl("@keyword", { fg = "#9255e6" })
+			setHl("@keyword.conditional", { fg = "#9255e6" })
 		else
-			overwriteHl("@keyword.return", { fg = "#de8c56", bold = true })
-			overwriteHl("NonText", { fg = "#57534f" })
-			overwriteHl("IblIndent", { fg = "#393734" })
+			setHl("@keyword.return", { fg = "#de8c56", bold = true })
+			setHl("NonText", { fg = "#57534f" })
+			setHl("IblIndent", { fg = "#393734" })
 		end
 	elseif theme == "dracula" then
 		vim.defer_fn(boldLualineA, 1)
 		revertedTodoComments()
-		clearHl("Constant")
-		linkHl("Boolean", "Special")
-		linkHl("Number", "@field")
-		overwriteHl("@keyword.return", { fg = "#5e9fff", bold = true })
+		setHl("Constant", {})
+		setHl("Boolean", { link = "Special" })
+		setHl("Number", { link = "@field" })
+		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
 	elseif theme == "dawnfox" then
-		overwriteHl("@markup.italic.markdown_inline", { italic = true })
+		setHl("@markup.italic.markdown_inline", { italic = true })
+		setHl("@namespace.builtin.lua", { fg = "#b96691" }) -- `vim` and `hs`
 
-		linkHl("@namespace.builtin.lua", "@keyword.import") -- `vim` and `hs`
-
-		overwriteHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
-		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
-		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
-		overwriteHl("VertSplit", { fg = "#b29b84" })
-		overwriteHl("Operator", { fg = "#846a52" })
+		setHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
+		setHl("ColorColumn", { bg = "#e9dfd2" })
+		setHl("VertSplit", { fg = "#b29b84" })
+		setHl("Operator", { fg = "#846a52" })
 		vim.defer_fn(function()
 			for _, v in pairs(vimModes) do
 				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
+				updateHl("lualine_y_diff_added_" .. v, "guifg=#477860")
 			end
 		end, 100)
 		updateHl("@keyword.return", "gui=bold")
 
 		-- FIX python highlighting issues
-		linkHl("@type.builtin.python", "Typedef")
-		linkHl("@string.documentation.python", "Typedef")
-		linkHl("@keyword.operator.python", "Operator")
+		setHl("@type.builtin.python", { link = "Typedef" })
+		setHl("@string.documentation.python", { link = "Typedef" })
+		setHl("@keyword.operator.python", { link = "Operator" })
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHlValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
-		overwriteHl("TSParameter", { fg = "#6f92b3" })
-		overwriteHl("@keyword.return", { fg = "#b577c8", bold = true })
+		setHl("TSParameter", { fg = "#6f92b3" })
+		setHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "material" and mode == "light" then
 		updateHl("@property", "guifg=#6c9798")
 		updateHl("@field", "guifg=#6c9798")
@@ -183,8 +168,8 @@ function M.themeModifications()
 		updateHl("NotifyINFOIcon", "guifg=#4eb400")
 
 		-- fix cursor being partially overwritten by the theme
-		updateCursor("r-cr-o-v:hor10")
-		updateCursor("a:blinkwait200-blinkoff500-blinkon700")
+		vim.opt.guicursor:append("r-cr-o-v:hor10")
+		vim.opt.guicursor:append("a:blinkwait200-blinkoff500-blinkon700")
 
 		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
 			updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
@@ -193,7 +178,7 @@ function M.themeModifications()
 		boldLualineA()
 
 		-- transparent sign column
-		clearHl("SignColumn")
+		setHl("SignColumn", {})
 		updateHl("GitSignsAdd", "guibg=none")
 		updateHl("GitSignsChange", "guibg=none")
 		updateHl("GitSignsDelete", "guibg=none")
@@ -202,8 +187,8 @@ function M.themeModifications()
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
 	elseif theme == "bluloco" then
-		updateCursor("i-ci-c:ver25")
-		updateCursor("o-v:hor10")
+		vim.opt.guicursor:append("i-ci-c:ver25")
+		vim.opt.guicursor:append("o-v:hor10")
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	end
 end

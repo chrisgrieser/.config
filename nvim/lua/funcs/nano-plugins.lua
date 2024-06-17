@@ -70,8 +70,6 @@ function M.openAtRegex101()
 	vim.ui.open(url)
 end
 
----If recipe ends with `_quickfix`, populates the quickfix list, otherwise post
----to notification via `vim.notify`.
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
@@ -166,6 +164,29 @@ function M.betterTilde()
 	else
 		normal("v~") -- (`v~` instead of `~h` so dot-repetition doesn't move cursor)
 	end
+end
+
+---1. start/stop with just one keypress
+---2. add notification & sound for recording
+---@param toggleKey string
+---@param register string
+function M.startStopRecording(toggleKey, register)
+	local notRecording = vim.fn.reg_recording() == ""
+	if notRecording then
+		normal("q" .. register)
+	else
+		normal("q")
+		local macro = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
+		if macro ~= "" then
+			vim.fn.setreg(register, macro)
+			notify("Recorded", vim.fn.keytrans(macro), "trace")
+		else
+			notify("Recording", "Aborted.", "trace")
+		end
+	end
+	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+		.. (notRecording and "begin_record.caf" or "end_record.caf")
+	vim.system { "afplay", sound } -- macOS only
 end
 
 --------------------------------------------------------------------------------
