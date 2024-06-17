@@ -26,7 +26,7 @@ function httpRequestWithHeaders(url, header, extraOpts) {
  * @return {string} relative date
  */
 function humanRelativeDate(isoDateStr) {
-	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
+	const deltaSecs = (Date.now() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -54,6 +54,7 @@ function humanRelativeDate(isoDateStr) {
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	const str = formatter.format(-delta, unit);
+	// biome-ignore lint/nursery/useTopLevelRegex: <explanation>
 	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
 }
 
@@ -129,7 +130,7 @@ function run() {
 		// biome-ignore lint/style/useNamingConvention: not by me
 		Issue: "🔵",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		Discussion: "🏛",
+		Discussion: "🗣️",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		CheckSuite: "🤖",
 		// biome-ignore lint/style/useNamingConvention: not by me
@@ -145,15 +146,15 @@ function run() {
 		comment: "💬",
 		assign: "➡",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		ci_activity: " ",
+		ci_activity: "⚙️",
 		invitation: "👥",
-		manual: "Ⓜ",
+		manual: "🫱",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		review_requested: "➡",
 		// biome-ignore lint/style/useNamingConvention: not by me
 		security_alert: "❗",
 		// biome-ignore lint/style/useNamingConvention: not by me
-		state_change: "✴",
+		state_change: "❇️",
 	};
 
 	/** @type AlfredItem[] */
