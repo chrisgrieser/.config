@@ -11,6 +11,6 @@
 	<key>process_keyword</key>
 	<string>ppp||kill</string>
 	<key>volume_keyword</key>
-	<string>vvv</string>
+	<string>vvv||vol</string>
 </dict>
 </plist>
