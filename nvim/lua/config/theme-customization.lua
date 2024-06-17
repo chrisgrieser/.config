@@ -151,6 +151,8 @@ function M.themeModifications()
 	elseif theme == "dawnfox" then
 		overwriteHl("@markup.italic.markdown_inline", { italic = true })
 
+		linkHl("@namespace.builtin.lua", "@keyword.import") -- `vim` and `hs`
+
 		overwriteHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
 		overwriteHl("ColorColumn", { bg = "#e9dfd2" })
 		overwriteHl("TreesitterContext", { bg = "#e6d9cb" })
