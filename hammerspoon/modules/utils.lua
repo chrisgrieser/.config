@@ -1,5 +1,4 @@
 local M = {} -- persist from garbage collector
-
 local env = require("modules.environment-vars")
 --------------------------------------------------------------------------------
 
@@ -19,16 +18,17 @@ M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PA
 function M.appHotkey(appName, modifier, key, action)
 	hs.hotkey.bind(modifier, key, function()
 		local frontApp = hs.application.frontmostApplication()
-		if frontApp:name() == appName then
+		if frontApp:name() ~= appName then
 			action()
 		else
+			-- passthrough
 			hs.eventtap.keyStroke(modifier, key, 1, frontApp)
 		end
 	end)
 end
 
----differentiate code to be run on reload and code to be run on startup.
----dependent on the setup in `reload.lua`
+---Differentiate code to be run on reload and code to be run on startup.
+---REQUIRED Dependent on the setup in `reload.lua`.
 ---@return boolean
 ---@nodiscard
 function M.isSystemStart()
@@ -62,10 +62,9 @@ end
 ---@param url string
 function M.openLinkInBg(url) hs.execute(("open -g %q"):format(url)) end
 
----write to file (overwriting)
 ---@param filePath string
 ---@param str string
----@param append boolean
+---@param append boolean append or overwrite
 function M.writeToFile(filePath, str, append)
 	local mode = append and "a" or "w"
 	local file, err = io.open(filePath, mode)
@@ -93,32 +92,32 @@ end
 ---@return boolean
 function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
----Repeat a function multiple times
+M.delayIdx = 1
+---Repeat a function multiple times Catching timers in table to avoid garbage
+---collection. To avoid collecting too many, only a certain number are kept.
 ---@param delaySecs number|number[]
----@param callbackFn function function to be run on delay(s)
+---@param callbackFn function
 function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
-		M[hs.host.uuid()] = hs.timer.doAfter(delay, callbackFn):start()
+		M[M.delayIdx] = hs.timer.doAfter(delay, callbackFn):start()
+		M.delayIdx = M.delayIdx + 1
+		if M.delayIdx > 30 then M.delayIdx = 1 end
 	end
 end
 
 ---close all tabs which contain urlPart
 ---@param urlPart string
 function M.closeTabsContaining(urlPart)
-	local browser = "Brave Browser"
-	local applescript = ([[
-		tell application %q
-			repeat with win in every window
-				set tab_list to every tab in win
-				repeat with the_tab in tab_list
-					set the_url to the url of the_tab
-					if the_url contains (%q) then close the_tab
-				end repeat
-			end repeat
+	hs.osascript.applescript(([[
+		tell application "Brave Browser"
+			repeat with win in (every window) 
+				repeat with theTab in (every tab in win) 
+					if the URL of theTab contains %q then close theTab 
+				end repeat 
+			end repeat 
 		end tell
-	]]):format(browser, urlPart)
-	hs.osascript.applescript(applescript)
+	]]):format(urlPart))
 end
 
 ---@nodiscard
@@ -211,8 +210,8 @@ function M.quitApps(appNames)
 	for _, name in pairs(appNames) do
 		local appObj = M.app(name)
 		if appObj then
-			if name == "WezTerm" or name == "wezterm-gui" then -- avoid confirmation
-				appObj:kill9()
+			if name == "WezTerm" or name == "wezterm-gui" then 
+				appObj:kill9() -- avoid confirmation
 			else
 				appObj:kill()
 			end
