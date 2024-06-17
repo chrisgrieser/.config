@@ -27,29 +27,31 @@ local function custom_wrap(lines, max_width)
 			table.insert(wrapped_lines, nl:gsub("^%s+", "") .. right_pad)
 		end
 	end
-	if wrapped_lines[1] then wrapped_lines[1] = " " .. wrapped_lines[1] end
+	wrapped_lines[1] = " " .. (wrapped_lines[1] or "")
 	return wrapped_lines
 end
 
 ---@param bufnr number
 ---@param notif notify.Record
----@param highlights notify.Highlights
+---@param highlight notify.Highlights
 ---@param config notify.Config
-return function(bufnr, notif, _, config)
-	local namespace = require("notify.render.base").namespace()
-	local message = custom_wrap(notif.message, config.max_width() or 80)
-
+return function(bufnr, notif, highlight, config)
+	local ns = require("notify.render.base").namespace()
+	local max_width = config.max_width() or 80
+	local message = custom_wrap(notif.message, max_width)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, message)
 
 	-- add padding to the left/right
 	for ln = 1, #message do
-		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
-			virt_text = { { " ", "None" } },
+		vim.api.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
+			virt_text = { { " ", highlight.body } },
 			virt_text_pos = "inline",
+			priority = 50,
 		})
-		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
-			virt_text = { { " ", "None" } },
+		vim.api.nvim_buf_set_extmark(bufnr, ns, ln, 0, {
+			virt_text = { { " ", highlight.body } },
 			virt_text_pos = "right_align",
+			priority = 50,
 		})
 	end
 end
