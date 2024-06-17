@@ -23,7 +23,7 @@ require("lazy").setup("plugins", {
 		fallback = true, -- … and if not, fallback to fetching from GitHub
 	},
 	git = {
-		log = { "--since=3 days ago" } -- Lazy Log shows commits since last 3 days
+		log = { "--since=3 days ago" }, -- Lazy Log shows commits since last 3 days
 		-- log = { "-8" } -- default
 	},
 	ui = {
@@ -32,6 +32,25 @@ require("lazy").setup("plugins", {
 		pills = false,
 		size = { width = 0.85, height = 0.85 },
 		backdrop = 50, -- 0-100 opacity
+		custom_keys = {
+			["<localleader>l"] = false,
+			["<localleader>t"] = false,
+			["gx"] = { function(plugin) vim.ui.open(plugin.url) end, desc = "󰖟 Plugin repo" },
+			["gi"] = { function(plugin)
+				local issue = vim.api.nvim_get_current_line():match("#(%d+)")
+				vim.ui.open(plugin.url .. "/issues/" .. issue)
+			end, desc = " Open issue" },
+			["go"] = {
+				function(plugin)
+					vim.cmd.close()
+					require("telescope.builtin").find_files {
+						prompt_title = plugin.name,
+						cwd = plugin.dir,
+					}
+				end,
+				desc = "󰭎 Open plugin code",
+			},
+		},
 	},
 	checker = {
 		enabled = true, -- automatically check for plugin updates
@@ -41,15 +60,6 @@ require("lazy").setup("plugins", {
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { enabled = false }, -- messes up writing config
 	readme = { enabled = false },
-	custom_keys = {
-		["<localleader>l"] = false,
-		["<localleader>t"] = false,
-		["gp"] = {
-
-		function (plugin)
-			
-		end, desc = "Browse plugin documentation" },
-	},
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
@@ -75,14 +85,6 @@ require("lazy").setup("plugins", {
 -- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
 require("lazy.view.config").keys.hover = "o"
 require("lazy.view.config").keys.details = "<Tab>"
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lazy",
-	callback = function()
-		local opts = { buffer = true, remap = true, desc = "󰒲 Open next issue" }
-		vim.keymap.set("n", "gi", "/#<CR>o``", opts)
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
