@@ -131,7 +131,7 @@ local lualineConfig = {
 			{ -- recording status
 				function() return "雷Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = function() return { fg = u.getHighlightValue("Error", "fg") } end,
+				color = function() return { fg = u.getHlValue("Error", "fg") } end,
 			},
 			{ lspProgress },
 			{

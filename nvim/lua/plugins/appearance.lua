@@ -44,7 +44,7 @@ return {
 		init = function()
 			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 				callback = function()
-					local bg = u.getHighlightValue("IncSearch", "bg")
+					local bg = u.getHlValue("IncSearch", "bg")
 					vim.api.nvim_set_hl(0, "IncSearchReversed", { fg = bg })
 				end,
 			})

@@ -26,7 +26,7 @@ end
 ---@param key "fg"|"bg"|"bold"
 ---@nodiscard
 ---@return string|nil the value, or nil if hlgroup or key is not available
-function M.getHighlightValue(hlName, key)
+function M.getHlValue(hlName, key)
 	local hl
 	repeat
 		-- follow linked highlights
