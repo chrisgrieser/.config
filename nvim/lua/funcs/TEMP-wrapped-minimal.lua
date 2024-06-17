@@ -32,29 +32,23 @@ local function custom_wrap(lines, max_width)
 end
 
 ---@param bufnr number
----@param notif object
----@param highlights object
----@param config object plugin config_obj
-return function(bufnr, notif, highlights, config)
+---@param notif notify.Record
+---@param highlights notify.Highlights
+---@param config notify.Config
+return function(bufnr, notif, _, config)
 	local namespace = require("notify.render.base").namespace()
 	local message = custom_wrap(notif.message, config.max_width() or 80)
 
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, message)
 
-	vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 1, {
-		hl_group = highlights.body,
-		end_line = #message,
-		priority = 50,
-	})
-
 	-- add padding to the left/right
 	for ln = 1, #message do
 		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
-			virt_text = { { " ", highlights.body } },
+			virt_text = { { " ", "None" } },
 			virt_text_pos = "inline",
 		})
 		vim.api.nvim_buf_set_extmark(bufnr, namespace, ln, 0, {
-			virt_text = { { " ", highlights.body } },
+			virt_text = { { " ", "None" } },
 			virt_text_pos = "right_align",
 		})
 	end

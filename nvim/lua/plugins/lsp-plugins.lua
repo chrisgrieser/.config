@@ -74,22 +74,11 @@ return {
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
-		keys = {
-			{
-				"<D-g>",
-				-- function() require("lsp_signature").toggle_float_win() end,
-				vim.lsp.buf.signature_help,
-				mode = { "n", "v", "i" },
-				desc = "󰏪 LSP signature",
-			},
-		},
 		opts = {
 			hint_prefix = "󰏪 ",
 			hint_scheme = "@variable.parameter", -- highlight group
 			floating_window = false,
 			always_trigger = true,
-			handler_opts = { border = vim.g.borderStyle },
-			auto_close_after = 3000,
 		},
 	},
 	{ -- display inlay hints from at EoL, not in the text

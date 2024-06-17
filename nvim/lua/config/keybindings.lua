@@ -200,6 +200,9 @@ keymap("n", "i", function()
 	return "i"
 end, { desc = "correctly indented i", expr = true })
 
+-- LSP Signature
+keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
@@ -215,6 +218,8 @@ keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
 keymap("n", "<C-down>", "<C-w>" .. delta .. "+")
 keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
 keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
+
+--------------------------------------------------------------------------------
 
 -- BUFFERS & FILES
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
@@ -250,8 +255,6 @@ keymap(
 	function() vim.cmd.edit(vim.v.oldfiles[2]) end,
 	{ desc = "󰽙 Reopen Last File" }
 )
-
---------------------------------------------------------------------------------
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd.update { mods = { silent = true } }
