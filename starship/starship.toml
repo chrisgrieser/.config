@@ -138,6 +138,12 @@ style = "blue"
 min_time = 2000
 format = "[󰔟  $duration](bold cyan)"
 
+[time]
+disabled = false
+format = " [$time]($style)"
+time_format = "%H:%M"
+style = "fg:247"
+
 [custom.alfred]
 description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"

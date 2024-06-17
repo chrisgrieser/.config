@@ -3,9 +3,9 @@ local u = require("config.utils")
 
 local function dapConfig()
 	-- SIGN-ICONS & HIGHLIGHTS
-	local hintBg = u.getHighlightValue("DiagnosticVirtualTextHint", "bg")
+	local hintBg = u.getHlValue("DiagnosticVirtualTextHint", "bg")
 	vim.api.nvim_set_hl(0, "DapPause", { bg = hintBg })
-	local infoBg = u.getHighlightValue("DiagnosticVirtualTextInfo", "bg")
+	local infoBg = u.getHlValue("DiagnosticVirtualTextInfo", "bg")
 	vim.api.nvim_set_hl(0, "DapBreak", { bg = infoBg })
 
 	vim.fn.sign_define(
@@ -27,7 +27,7 @@ local function dapConfig()
 
 	-- LUALINE COMPONENTS
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl or "DiagnosticInfo"
-	local breakpointFg = u.getHighlightValue(breakpointHl, "fg")
+	local breakpointFg = u.getHlValue(breakpointHl, "fg")
 	u.addToLuaLine("sections", "lualine_y", {
 		color = { fg = breakpointFg },
 		function()

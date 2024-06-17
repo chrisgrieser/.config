@@ -24,31 +24,13 @@ local function overwriteHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, cha
 
 --------------------------------------------------------------------------------
 
-local function underlinesInBackdropFIX()
-	vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
-		group = vim.api.nvim_create_augroup("underlinesInBackdropFIX", { clear = true }),
-		callback = function(ctx)
-			if ctx.event == "WinEnter" then
-				-- WinEnter needs a delay so buftype changes set by plugins are picked up
-				vim.defer_fn(toggleHighlights, 1)
-			elseif ctx.event == "FileType" and ctx.match == "DressingInput" then
-				-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
-			end
-		end,
-	})
-end
-
 local function customHighlights()
 	clearHl("@lsp.type.comment") -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
-	overwriteHl(
-		"@string.special.url.comment",
-		{ fg = u.getHighlightValue("Comment", "fg"), underline = true }
-	)
 	overwriteHl("MatchParen", { reverse = true }) -- stand out more
 
 	linkHl("Whitespace", "NonText") -- trailing spaces more visible
 	linkHl("@comment.warning.gitcommit", "WarningMsg") -- de-emphasize 50-72 chars
-	overwriteHl("SnippetTabstop", { bg = u.getHighlightValue("Folded", "bg") })
+	overwriteHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
 	linkHl("@character.printf", "SpecialChar") -- missing in many themes
 
 	-- Diagnostics: underlines instead of undercurls
@@ -60,6 +42,10 @@ local function customHighlights()
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
+
+	-- Comments: color in grey and add underlines
+	local commentFg = u.getHlValue("Comment", "fg")
+	overwriteHl("@string.special.url.comment", { fg = commentFg, underline = true })
 end
 
 function M.themeModifications()
@@ -77,8 +63,8 @@ function M.themeModifications()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
 		local textColor = mode == "dark" and "#000000" or "#ffffff"
 		for type, altType in pairs(types) do
-			local fg = u.getHighlightValue("@comment." .. type, "fg")
-				or u.getHighlightValue("Diagnostic" .. altType, "fg")
+			local fg = u.getHlValue("@comment." .. type, "fg")
+				or u.getHlValue("Diagnostic" .. altType, "fg")
 			if fg and fg ~= textColor then
 				overwriteHl("@comment." .. type, { bg = fg, fg = textColor })
 			end
@@ -109,7 +95,7 @@ function M.themeModifications()
 		overwriteHl("Red", { fg = "#cf7e7d" })
 		overwriteHl("IblIndent", { fg = "#d2cdad" })
 		overwriteHl("NonText", { fg = "#c8b789" })
-		local commentColor = u.getHighlightValue("Comment", "fg")
+		local commentColor = u.getHlValue("Comment", "fg")
 		overwriteHl("DiagnosticUnnecessary", { fg = commentColor, underdashed = true })
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 	elseif theme == "monet" then
@@ -182,7 +168,7 @@ function M.themeModifications()
 		linkHl("@string.documentation.python", "Typedef")
 		linkHl("@keyword.operator.python", "Operator")
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
-		local commentColor = u.getHighlightValue("Comment", "fg")
+		local commentColor = u.getHlValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		overwriteHl("TSParameter", { fg = "#6f92b3" })
 		overwriteHl("@keyword.return", { fg = "#b577c8", bold = true })
@@ -219,6 +205,28 @@ function M.themeModifications()
 		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
 	end
 end
+
+--------------------------------------------------------------------------------
+
+-- FIX: For plugins using backdrop-like effects, there is some winblend bug,
+-- which causes the underlines to be displayed in ugly red. We fix this by
+-- temporarily disabling the underline effects set by this plugin.
+local function toggleUnderlines()
+	local change = vim.bo.buftype == "" and "underline" or "none"
+	updateHl("@string.special.url.comment", "gui=" .. change)
+end
+vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
+	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
+	callback = function(ctx)
+		-- WinEnter needs a delay so buftype changes set by plugins are picked up
+		-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
+		if ctx.event == "WinEnter" then
+			vim.defer_fn(toggleUnderlines, 1)
+		elseif ctx.event == "FileType" and ctx.match == "DressingInput" then
+			toggleUnderlines()
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 
