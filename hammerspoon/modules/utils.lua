@@ -109,9 +109,8 @@ function M.closeTabsContaining(urlPart)
 	local browser = "Brave Browser"
 	local applescript = ([[
 		tell application %q
-			set window_list to every window
-			repeat with the_window in window_list
-				set tab_list to every tab in the_window
+			repeat with win in every window
+				set tab_list to every tab in win
 				repeat with the_tab in tab_list
 					set the_url to the url of the_tab
 					if the_url contains (%q) then close the_tab
