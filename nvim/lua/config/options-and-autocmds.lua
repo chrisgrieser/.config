@@ -1,5 +1,4 @@
 local opt = vim.opt
-local autocmd = vim.api.nvim_create_autocmd
 local u = require("config.utils")
 
 --------------------------------------------------------------------------------
@@ -52,7 +51,7 @@ opt.shiftround = true
 opt.smartindent = true
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's overwritten by ftplugins having the `o` option (which many do). Therefore needs to be set via autocommand.
-autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match ~= "markdown" then
 			vim.opt_local.formatoptions:remove("o")
@@ -80,7 +79,7 @@ opt.swapfile = false -- doesn't help and only creates useless files and notifica
 
 -- automatically cleanup dirs to prevent bloating.
 -- once a week, on first FocusLost, delete files older than 30/60 days.
-autocmd("FocusLost", {
+vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" then return end
@@ -107,14 +106,14 @@ end
 -- CLIPBOARD
 opt.clipboard = "unnamedplus"
 
-autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
 -- copying stuff from neovim to other apps should trim the trailing newline vim
 -- adds for linewise selections. Also, if it's one line, remove the indent.
 -- (`pbpaste` and `pbcopy` are macOS clis, adapt if on other OS.)
-autocmd("FocusLost", {
+vim.api.nvim_create_autocmd("FocusLost", {
 	callback = function()
 		local systemCb = vim.system({ "pbpaste" }):wait().stdout or ""
 		if systemCb ~= vim.fn.getreg("+") then return end
@@ -163,7 +162,7 @@ opt.listchars = {
 --------------------------------------------------------------------------------
 -- AUTO-SAVE
 opt.autowriteall = true
-autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
 		local bufnr = ctx.buf
 		local bo = vim.bo[bufnr]
