@@ -298,11 +298,15 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 local skeletons = {
 	python = {
 		filename = "general.py",
-		filepathGlob = "*.py",
+		filepathGlob = "**/*.py",
+	},
+	lua = {
+		filename = "module.lua",
+		filepathGlob = "**/*.lua",
 	},
 	applescript = {
 		filename = "general.applescript",
-		filepathGlob = "*.applescript",
+		filepathGlob = "**/*.applescript",
 	},
 	javascript = {
 		filename = "jxa.js",
@@ -310,15 +314,15 @@ local skeletons = {
 	},
 	just = {
 		filename = "justfile.just",
-		filepathGlob = "Justfile",
+		filepathGlob = "*/Justfile",
 	},
 	sh = {
 		filename = "general.zsh",
-		filepathGlob = "*.zsh",
+		filepathGlob = "**/*.zsh",
 	},
 	toml = {
 		filename = "typos.toml",
-		filepathGlob = "**/typos.toml",
+		filepathGlob = "**/.typos.toml",
 	},
 }
 
@@ -327,27 +331,25 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		vim.defer_fn(function()
 			-- GUARD
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local terminalBufEditedInNvim = ctx.file:find("^/private/tmp/.*.zsh")
-			if terminalBufEditedInNvim or not u.fileExists(ctx.file) then return end
-
-			local ft = ctx.match
-			local ext = skeletons[ft]
-			local skeletonFile = vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-			if not u.fileExists(skeletonFile) then return end
-
 			local fileIsEmpty = vim.uv.fs_stat(ctx.file).size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
+			local ft = ctx.match
+			local glob = skeletons[ft].filepathGlob
+			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)
+			if not matchesGlob then return end
 
-			-- read file
-			local file = io.open(skeletonFile, "r")
-			if not file then return end
-			local lines = vim.split(file:read("*a"), "\n")
-			file:close()
-
+			-- write template
+			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft].filename
+			local lines = {}
+			local cursorRow, cursorCol = 0, 0
+			for line in io.lines(skeletonFile) do
+				table.insert(lines, line)
+				cursorCol = line:find("%$0")
+				cursor[1] = cursor[1] + 1 -- line number
+			end
 			-- overwrite so it's idempotent, since `FileType` event is sometimes triggered twice
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-			vim.api.nvim_win_set_cursor(0, { #lines, 0 })
+			vim.api.nvim_win_set_cursor(0, cursor)
 		end, 1)
 	end,
 })

@@ -77,6 +77,33 @@ function M.themeModifications()
 		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		if mode == "dark" then revertedTodoComments() end
 		setHl("TelescopeSelection", { link = "Visual" }) -- sometimes not set when switching themes
+	elseif theme == "dawnfox" then
+		setHl("@markup.italic.markdown_inline", { italic = true })
+		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
+		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
+
+		setHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
+		setHl("ColorColumn", { bg = "#e9dfd2" })
+		setHl("VertSplit", { fg = "#b29b84" })
+		setHl("Operator", { fg = "#846a52" })
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
+				updateHl("lualine_y_diff_added_" .. v, "guifg=#477860")
+			end
+		end, 100)
+
+		-- FIX python highlighting issues
+		setHl("@type.builtin.python", { link = "Typedef" })
+		setHl("@string.documentation.python", { link = "Typedef" })
+		setHl("@keyword.operator.python", { link = "Operator" })
+	elseif theme == "dracula" then
+		vim.defer_fn(boldLualineA, 1)
+		revertedTodoComments()
+		setHl("Constant", {})
+		setHl("Boolean", { link = "Special" })
+		setHl("Number", { link = "@field" })
+		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
 	elseif theme == "everforest" then
 		setHl("@keyword.return", { fg = "#fd4283", bold = true })
 		updateHl("ErrorMsg", "gui=none") -- remove underline
@@ -127,33 +154,6 @@ function M.themeModifications()
 			setHl("NonText", { fg = "#57534f" })
 			setHl("IblIndent", { fg = "#393734" })
 		end
-	elseif theme == "dracula" then
-		vim.defer_fn(boldLualineA, 1)
-		revertedTodoComments()
-		setHl("Constant", {})
-		setHl("Boolean", { link = "Special" })
-		setHl("Number", { link = "@field" })
-		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
-	elseif theme == "dawnfox" then
-		setHl("@markup.italic.markdown_inline", { italic = true })
-		setHl("@namespace.builtin.lua", { fg = "#b96691" }) -- `vim` and `hs`
-
-		setHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
-		setHl("ColorColumn", { bg = "#e9dfd2" })
-		setHl("VertSplit", { fg = "#b29b84" })
-		setHl("Operator", { fg = "#846a52" })
-		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
-				updateHl("lualine_y_diff_added_" .. v, "guifg=#477860")
-			end
-		end, 100)
-		updateHl("@keyword.return", "gui=bold")
-
-		-- FIX python highlighting issues
-		setHl("@type.builtin.python", { link = "Typedef" })
-		setHl("@string.documentation.python", { link = "Typedef" })
-		setHl("@keyword.operator.python", { link = "Operator" })
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHlValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
