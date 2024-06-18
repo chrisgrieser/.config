@@ -294,39 +294,17 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 --------------------------------------------------------------------------------
 
 -- SKELETONS (TEMPLATES)
--- filetype -> extension
 local skeletons = {
-	python = {
-		filename = "general.py",
-		filepathGlob = "**/*.py",
-	},
-	lua = {
-		filename = "module.lua",
-		filepathGlob = "**/*.lua",
-	},
-	applescript = {
-		filename = "general.applescript",
-		filepathGlob = "**/*.applescript",
-	},
-	javascript = {
-		filename = "jxa.js",
-		filepathGlob = "**/Alfred.alfredpreferences/workflows/*.js",
-	},
-	just = {
-		filename = "justfile.just",
-		filepathGlob = "*/Justfile",
-	},
-	sh = {
-		filename = "general.zsh",
-		filepathGlob = "**/*.zsh",
-	},
-	toml = {
-		filename = "typos.toml",
-		filepathGlob = "**/.typos.toml",
-	},
+	python = { glob = "**/*.py", name = "general.py" },
+	lua = { glob = vim.g.localRepos .. "/**/*.lua", name = "module.lua" },
+	applescript = { glob = "**/*.applescript", name = "general.applescript" },
+	javascript = { glob = "**/Alfred.alfredpreferences/workflows/*.js", name = "jxa.js" },
+	just = { glob = "**/*Justfile", name = "justfile.just" },
+	sh = { glob = "**/*.sh", name = "general.zsh" },
+	toml = { glob = "**/*typos.toml", name = "typos.toml" },
 }
-
-vim.api.nvim_create_autocmd("FileType", {
+-- not `BufNewFile` as it doesn't trigger on files created outside vim
+vim.api.nvim_create_autocmd("FileType", { 
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
@@ -334,22 +312,28 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileIsEmpty = vim.uv.fs_stat(ctx.file).size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 			local ft = ctx.match
-			local glob = skeletons[ft].filepathGlob
+			local glob = skeletons[ft].glob
 			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)
 			if not matchesGlob then return end
 
-			-- write template
-			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft].filename
+			-- read template & look for cursor placeholder
+			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft].name
 			local lines = {}
-			local cursorRow, cursorCol = 0, 0
+			local cursor
+			local row = 1
 			for line in io.lines(skeletonFile) do
+				local placeholderPos = line:find("%$0")
+				if placeholderPos then
+					line = line:gsub("%$0", "")
+					cursor = { row, placeholderPos - 1 }
+				end
 				table.insert(lines, line)
-				cursorCol = line:find("%$0")
-				cursor[1] = cursor[1] + 1 -- line number
+				row = row + 1
 			end
+
 			-- overwrite so it's idempotent, since `FileType` event is sometimes triggered twice
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-			vim.api.nvim_win_set_cursor(0, cursor)
+			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
 		end, 1)
 	end,
 })
