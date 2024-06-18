@@ -135,7 +135,7 @@ format = "[󰔟  $duration](bold cyan)"
 disabled = false
 format = " [$time]($style)"
 time_format = "%H:%M"
-style = "fg:247"
+style = "fg:247" # grey
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"
