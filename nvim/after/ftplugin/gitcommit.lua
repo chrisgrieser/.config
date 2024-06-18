@@ -10,7 +10,8 @@ vim.keymap.set("n", "<Tab>", "A", { buffer = true })
 vim.keymap.set("n", "ge", "]s", { buffer = true })
 vim.keymap.set("n", "gE", "[s", { buffer = true })
 
--- condition ensures this isn't a DressingBuffer
+-- condition ensures this isn't a DressingInput buffer, which already has
+-- mappings of its own
 if vim.bo.buftype ~= "nofile" then
 	vim.keymap.set("n", "<CR>", vim.cmd.wq, { buffer = true, desc = "Confirm" })
 	-- quting with error code = aborting commit

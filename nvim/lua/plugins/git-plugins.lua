@@ -33,7 +33,7 @@ return {
 				conventionalCommits = { enforce = true },
 				spellcheck = true,
 				keepAbortedMsgSecs = 60 * 10, -- 10 mins
-				insertIssuesOnHash = { enabled = true, cycleIssuesKey = "<Tab>" },
+				insertIssuesOnHash = { enabled = true, next = "#" },
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
