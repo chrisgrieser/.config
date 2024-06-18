@@ -31,7 +31,7 @@ local function listConformFormatters()
 		{ "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected", "just", "format-queries" }
 	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
 		:flatten()
-		:filter(function(ft) return not vim.tbl_contains(notClis, ft) end)
+		:filter(function(f) return not vim.tbl_contains(notClis, f) end)
 		:totable()
 	table.sort(formatters)
 	vim.fn.uniq(formatters)
@@ -71,7 +71,7 @@ local function formattingFunc(bufnr)
 
 	-- parameters
 	local ft = vim.bo[bufnr].filetype
-	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "always" or false
+	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
 
 	-- typescript: organize imports before
 	if ft == "typescript" then
@@ -89,21 +89,22 @@ local function formattingFunc(bufnr)
 						apply = true,
 					}
 				else
-					require("conform").format { lsp_fallback = useLsp }
+					require("conform").format { lsp_format = useLsp }
 				end
 			end, i * 60)
 		end
-		return
+	else
+		require("conform").format({ lsp_fallback = useLsp }, function()
+			if ft == "python" then
+				vim.lsp.buf.code_action {
+					context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+					apply = true,
+				}
+			end
+		end)
 	end
 
-	require("conform").format({ lsp_fallback = useLsp }, function()
-		if ft == "python" then
-			vim.lsp.buf.code_action {
-				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-				apply = true,
-			}
-		end
-	end)
+	vim.cmd("silent! update!")
 end
 
 --------------------------------------------------------------------------------
@@ -113,6 +114,9 @@ return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
 	mason_dependencies = listConformFormatters(),
+	keys = {
+		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
+	},
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
@@ -121,7 +125,4 @@ return {
 			callback = function(ctx) formattingFunc(ctx.buf) end,
 		})
 	end,
-	keys = {
-		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
-	},
 }
