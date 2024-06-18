@@ -101,7 +101,7 @@ return {
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		},
-		init = function() u.leaderSubkey("d", " Debugger", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("d", " Debugger", { "n", "x" }) end,
 		config = dapConfig,
 	},
 	{
@@ -111,12 +111,12 @@ return {
 			{ "<leader>du", function() require("dapui").toggle() end, desc = "󱂬 dap-ui" },
 			{
 				"<leader>di",
-				function() require("dapui").float_element("repl", { enter = true }) end,
+				function() require("dapui").float_element("repl", { enter = true }) end, ---@diagnostic disable-line: missing-fields
 				desc = " REPL",
 			},
 			{
 				"<leader>dl",
-				function() require("dapui").float_element("breakpoints", { enter = true }) end,
+				function() require("dapui").float_element("breakpoints", { enter = true }) end, ---@diagnostic disable-line: missing-fields
 				desc = " List Breakpoints",
 			},
 			{
@@ -162,8 +162,8 @@ return {
 			require("dap").adapters.nlua = function(callback, config)
 				callback {
 					type = "server",
-					host = config.host or "127.0.0.1",
-					port = config.port or 8086,
+					host = config.host or "127.0.0.1", ---@diagnostic disable-line: undefined-field
+					port = config.port or 8086, ---@diagnostic disable-line: undefined-field
 				}
 			end
 		end,
@@ -189,7 +189,7 @@ return {
 			local debugpyPythonPath = require("mason-registry")
 				.get_package("debugpy")
 				:get_install_path() .. "/venv/bin/python3"
-			require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
+			require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" }) ---@diagnostic disable-line: missing-fields
 		end,
 	},
 }

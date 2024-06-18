@@ -2,6 +2,23 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
+---Set up subkey for the <leader> key
+---Accessed via `vim.g`, as this file's exports are used by lazy.nvim
+---@param key string
+---@param label string
+---@param modes string|string[]
+vim.g.whichkey_leader_subkey = function(key, label, modes)
+	local ok, whichkey = pcall(require, "which-key")
+	if not ok then return end
+	vim.defer_fn(function()
+		-- delayed, to ensure which-key was loaded
+		whichkey.register(
+			{ [key] = { name = " " .. label } },
+			{ prefix = "<leader>", mode = modes or "n" }
+		)
+	end, 1500)
+end
+
 return {
 	{ -- auto-pair
 		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
@@ -319,12 +336,6 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
-			-- FIX very weird bug where insert mode undo points (<C-g>u),
-			-- as well as vim-matchup's `<C-G>%` binding insert extra `1`s
-			-- after wrapping to the next line in insert mode. The `G` needs
-			-- to be uppercased to affect the right mapping.
-			triggers_blacklist = { i = { "<C-G>" } },
-
 			plugins = {
 				presets = { motions = false, g = false, z = false },
 				spelling = { enabled = false },
@@ -367,7 +378,7 @@ return {
 
 			-- leader prefixes normal+visual mode
 			whichkey.register({
-				c = { name = "  Code Action" },
+				c = { name = " 󰠠 Code Action" },
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })
@@ -378,7 +389,7 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
-		init = function() u.leaderSubkey("l", " Log", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("l", " Log", { "n", "x" }) end,
 		opts = {
 			marker = "👾",
 			logStatements = {

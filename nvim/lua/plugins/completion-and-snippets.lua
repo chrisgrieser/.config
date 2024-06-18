@@ -200,7 +200,7 @@ return {
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
 		external_dependencies = "yq",
-		init = function() u.leaderSubkey("n", " Snippets", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("n", " Snippets", { "n", "x" }) end,
 		keys = {
 			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = " Edit" },
 			-- stylua: ignore

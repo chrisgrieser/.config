@@ -61,21 +61,6 @@ function M.colorschemeMod(hlgroup, modification)
 	})
 end
 
----set up subkey for the <leader> key (if whichkey is loaded)
----@param key string
----@param label string
----@param modes string|string[]
-function M.leaderSubkey(key, label, modes)
-	vim.defer_fn(function()
-		local ok, whichkey = pcall(require, "which-key")
-		if not ok then return end
-		whichkey.register(
-			{ [key] = { name = " " .. label } },
-			{ prefix = "<leader>", mode = modes or "n" }
-		)
-	end, 1500)
-end
-
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
 ---@param modes string|string[]
 ---@param lhs string
