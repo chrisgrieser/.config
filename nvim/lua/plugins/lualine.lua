@@ -101,8 +101,8 @@ local lualineConfig = {
 		lualine_a = {
 			{
 				"branch",
-				-- only if not on main or master
 				cond = function()
+					-- only if not on main or master
 					if bo.buftype ~= "" then return false end
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
 					return curBranch ~= "main" and curBranch ~= "master"
@@ -155,7 +155,6 @@ local lualineConfig = {
 		lualine_z = {
 			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
 			{ "location" },
-			{ function() return "" end, padding = { left = 0, right = 1 } },
 		},
 	},
 }
