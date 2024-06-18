@@ -1,12 +1,18 @@
-function _G.myFunc(motionType)
+local M = {}
+--------------------------------------------------------------------------------
+
+---@param motionType? "line"|"char"|"block" set via usage of `g@`
+function M.luaevalOperator(motionType)
 	if motionType == nil then
-		vim.o.operatorfunc = "v:lua.myFunc"
+		vim.o.operatorfunc = "v:lua.require'chainsaw.log-commands'."
+		vim.o.operatorfunc = "v:lua."
 		return "g@"
 	end
 
 	-- `] and `[ contain the start and end of the selection
 	local startLn, startCol = unpack(vim.api.nvim_buf_get_mark(0, "["))
 	local endLn, endCol = unpack(vim.api.nvim_buf_get_mark(0, "]"))
+
 	if motionType == "char" then
 		local lines = vim.api.nvim_buf_get_text(0, startLn - 1, startCol, endLn - 1, endCol + 1, {})
 		local text = table.concat(lines, "\n")
@@ -25,4 +31,11 @@ function _G.myFunc(motionType)
 		vim.notify(out, vim.log.levels[result.code == 0 and "INFO" or "ERROR"])
 	end
 end
-vim.keymap.set("n", "gt", _G.myFunc, { expr = true })
+
+function M.luaEvalLine()
+	local line = vim.api.nvim_get_current_line()
+	vim.notify(vim.inspect(vim.fn.luaeval(line)))
+end
+
+--------------------------------------------------------------------------------
+return M
