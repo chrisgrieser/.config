@@ -14,8 +14,6 @@ abbr("===", "==")
 
 --------------------------------------------------------------------------------
 
--- Mini-Repl
--- as opposed to `:lua =`, uses `vim.notify` for better output
 vim.keymap.set(
 	"n",
 	"<leader>ee",
@@ -29,6 +27,13 @@ vim.keymap.set(
 	"<leader>e",
 	require("funcs.lua-eval").luaevalOperator,
 	{ buffer = true, expr = true, desc = " Eval Operator" }
+)
+
+vim.keymap.set(
+	"n",
+	"<leader>E",
+	"<leader>e$",
+	{ buffer = true, remap = true, desc = " Eval to EoL" }
 )
 
 --------------------------------------------------------------------------------

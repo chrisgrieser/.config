@@ -13,6 +13,32 @@ vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
 
+local function getModule(plugin)
+	local specRoot = require("lazy.core.config").options.spec.import
+	local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
+		or plugin._.module
+	if not module then return "lazy.nvim" end
+	return module:sub(#specRoot + 2)
+end
+
+---@param mode "browse" | "config"
+local function onPlugin(plugin, mode)
+	if mode == "browse" then
+		require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
+	elseif mode == "config" then
+		if plugin[1] == "folke/lazy.nvim" then
+			local pathOfThisFile = debug.getinfo(1).source:sub(2)
+			vim.cmd.edit(pathOfThisFile)
+		else
+			local specRoot = require("lazy.core.config").options.spec.import
+			local module = getModule(plugin):gsub("%.", "/")
+			local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
+			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
+			vim.cmd(("edit +/%q %s"):format(repo, filepath))
+		end
+	end
+end
+
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
@@ -20,16 +46,16 @@ require("lazy").setup("plugins", {
 	dev = {
 		patterns = { "chrisgrieser" }, -- for repos matching `patterns` …
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
-		fallback = true, -- … and if not, fallback to fetching from GitHub
+		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
-	-- Lazy Log shows commits since last 3 days
+	-- Lazy Log shows commits since last x days
 	git = { log = { "--since=7 days ago" } },
 	ui = {
 		wrap = true,
 		border = vim.g.borderStyle,
 		pills = false,
 		size = { width = 0.85, height = 0.85 },
-		backdrop = 50, -- 0-100 opacity
+		backdrop = 50, -- 0-100
 		custom_keys = {
 			["<localleader>l"] = false,
 			["<localleader>t"] = false,
@@ -48,12 +74,16 @@ require("lazy").setup("plugins", {
 			["gp"] = {
 				function(plugin)
 					vim.cmd.close()
-					require("telescope.builtin").find_files {
-						prompt_title = plugin.name,
-						cwd = plugin.dir,
-					}
+					onPlugin(plugin, "browse")
 				end,
 				desc = "󰭎 Open code",
+			},
+			["g,"] = {
+				function(plugin)
+					vim.cmd.close()
+					onPlugin(plugin, "config")
+				end,
+				desc = "󰣖 Goto plugin config",
 			},
 		},
 	},
@@ -120,15 +150,6 @@ local pluginTypeIcons = {
 
 ---@param mode "browse" | "config"
 local function lazyPluginSearch(mode)
-	local specRoot = require("lazy.core.config").options.spec.import
-
-	local function getModule(plugin)
-		local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
-			or plugin._.module
-		if not module then return "lazy.nvim" end
-		return module:sub(#specRoot + 2)
-	end
-
 	-- colored icons
 	vim.api.nvim_create_autocmd("FileType", {
 		once = true,
@@ -143,20 +164,7 @@ local function lazyPluginSearch(mode)
 			return icon .. vim.fs.basename(plugin[1])
 		end,
 	}, function(plugin)
-		if not plugin then return end
-		if mode == "browse" then
-			require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
-			return
-		end
-		if plugin[1] == "folke/lazy.nvim" then
-			local pathOfThisFile = debug.getinfo(1).source:sub(2)
-			vim.cmd.edit(pathOfThisFile)
-		else
-			local module = getModule(plugin):gsub("%.", "/")
-			local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
-			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
-			vim.cmd(("edit +/%q %s"):format(repo, filepath))
-		end
+		if plugin then onPlugin(plugin, mode) end
 	end)
 end
 
