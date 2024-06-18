@@ -500,7 +500,7 @@
 	<key>description</key>
 	<string>Search hundreds of documentation sites via DevDocs and other sources.</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Search ALL the docs!</string>
 	<key>objects</key>
