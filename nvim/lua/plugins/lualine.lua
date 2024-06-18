@@ -165,7 +165,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false,
+	lazy = false, -- load quickly, so UI doesn't lag
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 	init = function()
