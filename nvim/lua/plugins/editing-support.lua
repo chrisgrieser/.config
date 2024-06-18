@@ -366,7 +366,7 @@ return {
 
 			-- leader prefixes normal+visual mode
 			whichkey.register({
-				c = { name = " 󰠠 Code Action" },
+				c = { name = " 󰉁 Code Action" },
 				f = { name = " 󱗘 Refactor" },
 				g = { name = " 󰊢 Git" },
 			}, { prefix = "<leader>", mode = { "x", "n" } })

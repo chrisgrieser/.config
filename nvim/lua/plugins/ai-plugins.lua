@@ -34,10 +34,10 @@ return {
 			ignore_filetypes = {
 				gitcommit = true,
 				DressingInput = true,
+				TelescopePrompt = true,
 				text = true, -- `pass`' filetype when editing passwords
 				["rip-substitute"] = true,
 			},
-			disable_inline_completion = false, -- disables cmp integration
 		},
 		config = function(_, opts)
 			require("supermaven-nvim").setup(opts)

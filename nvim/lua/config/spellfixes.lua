@@ -1,11 +1,5 @@
---------------------------------------------------------------------------------
--- INFO if abbreviations are not working, probably something has been mapped to
--- `<Space>` in insert mode
------------------------------------------------------------------------------------
-
 local spellfixes = {
 	THe = "The",
-	tehn = "then",
 	ahve = "have",
 	awiat = "await",
 	brwoser = "browser",
@@ -15,8 +9,10 @@ local spellfixes = {
 	cleitn = "client",
 	curosr = "cursor",
 	defualt = "default",
+	dispaly = "display",
 	doesnt = "doesn't",
 	doestn = "doesn't",
+	eror = "error",
 	dont = "don't",
 	dwon = "down",
 	esle = "else",
@@ -30,6 +26,7 @@ local spellfixes = {
 	ignroe = "ignore",
 	keybaord = "keyboard",
 	lien = "line",
+	locla = "local",
 	markdwon = "markdown",
 	mcuh = "much",
 	mroe = "more",
@@ -45,7 +42,6 @@ local spellfixes = {
 	reponse = "response",
 	retrun = "return",
 	retunr = "return",
-	locla = "local",
 	seperate = "separate",
 	seperator = "separator",
 	seperators = "separators",
@@ -55,11 +51,13 @@ local spellfixes = {
 	surppress = "suppress",
 	surpress = "suppress",
 	teh = "the",
+	tehn = "then",
 	tempalte = "template",
 	ti = "it",
 	tiem = "item",
 	treu = "true",
 	ture = "true",
+	turee = "true",
 	verison = "version",
 	verisons = "versions",
 	woudl = "would",

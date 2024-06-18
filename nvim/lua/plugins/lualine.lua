@@ -71,7 +71,7 @@ local lualineConfig = {
 		refresh = { statusline = 500 },
 		globalstatus = true,
 		always_divide_middle = false,
-		section_separators = { left = "▒", right = "▒" }, -- nerdfont-powerline icons prefix: `ple-`
+		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`
 		component_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
