@@ -98,7 +98,7 @@ opt.titlestring = "%{getcwd()}"
 
 -- issue commands via nvim server
 if vim.g.neovide then
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- in case of crash server still there
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- in case of crash, the server is still there
 	vim.fn.serverstart("/tmp/nvim_server.pipe")
 end
 
@@ -110,9 +110,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
--- copying stuff from neovim to other apps should trim the trailing newline vim
--- adds for linewise selections. Also, if it's one line, remove the indent.
--- (`pbpaste` and `pbcopy` are macOS clis, adapt if on other OS.)
+-- copying stuff from neovim to other apps should trim the trailing newline that
+-- nvim adds for linewise selections. Also, if it's one line, remove the indent.
+-- (`pbpaste` and `pbcopy` are macOS CLIs, adapt if on other OS.)
 vim.api.nvim_create_autocmd("FocusLost", {
 	callback = function()
 		local systemCb = vim.system({ "pbpaste" }):wait().stdout or ""
@@ -295,13 +295,13 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 -- SKELETONS (TEMPLATES)
 local skeletons = {
-	python = { glob = "**/*.py", name = "general.py" },
-	lua = { glob = vim.g.localRepos .. "/**/*.lua", name = "module.lua" },
-	applescript = { glob = "**/*.applescript", name = "general.applescript" },
-	javascript = { glob = "**/Alfred.alfredpreferences/workflows/*.js", name = "jxa.js" },
-	just = { glob = "**/*Justfile", name = "justfile.just" },
-	sh = { glob = "**/*.sh", name = "general.zsh" },
-	toml = { glob = "**/*typos.toml", name = "typos.toml" },
+	python = { "**/*.py", "general.py" },
+	lua = { vim.g.localRepos .. "/**/*.lua", "module.lua" },
+	applescript = { "**/*.applescript", "general.applescript" },
+	javascript = { "**/Alfred.alfredpreferences/workflows/*.js", "jxa.js" },
+	just = { "**/*Justfile", "justfile.just" },
+	sh = { "**/*.sh", "general.zsh" },
+	toml = { "**/*typos.toml", "typos.toml" },
 }
 -- not `BufNewFile` as it doesn't trigger on files created outside vim
 vim.api.nvim_create_autocmd("FileType", { 
@@ -314,12 +314,12 @@ vim.api.nvim_create_autocmd("FileType", {
 			local fileIsEmpty = stats.size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 			local ft = ctx.match
-			local glob = skeletons[ft].glob
+			local glob = skeletons[ft][1]
 			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)
 			if not matchesGlob then return end
 
 			-- read template & look for cursor placeholder
-			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft].name
+			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft][2]
 			local lines = {}
 			local cursor
 			local row = 1
