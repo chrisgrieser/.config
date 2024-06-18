@@ -4,9 +4,6 @@ vim.opt_local.spelloptions = "camel"
 
 --------------------------------------------------------------------------------
 
-vim.keymap.set("i", "<Tab>", "<End>", { buffer = true })
-vim.keymap.set("n", "<Tab>", "A", { buffer = true })
-
 vim.keymap.set("n", "ge", "]s", { buffer = true })
 vim.keymap.set("n", "gE", "[s", { buffer = true })
 
