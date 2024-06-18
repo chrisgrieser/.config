@@ -34,9 +34,9 @@ return {
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)
 
-			u.addToLuaLine("tabline", "lualine_b", { "navic", padding = { left = 1, right = 0 } })
+			vim.g.lualine_add("tabline", "lualine_b", { "navic", padding = { left = 1, right = 0 } })
 			-- FIX use this dummy component to remove blank space https://github.com/SmiteshP/nvim-navic/issues/115
-			u.addToLuaLine("tabline", "lualine_b", {
+			vim.g.lualine_add("tabline", "lualine_b", {
 				function() return " " end,
 				cond = function() return #(require("nvim-navic").get_data() or {}) > 0 end,
 				padding = 0,
@@ -156,7 +156,7 @@ return {
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
 		config = function()
-			u.addToLuaLine("sections", "lualine_c", {
+			vim.g.lualine_add("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
 			})

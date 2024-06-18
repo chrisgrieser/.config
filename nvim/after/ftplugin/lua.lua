@@ -76,7 +76,6 @@ end, { buffer = true, desc = " require module from cwd" })
 -- auto-comma for tables
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 	buffer = 0,
-	group = vim.api.nvim_create_augroup("AutoComma", {}),
 	callback = function()
 		local node = vim.treesitter.get_node()
 		if not (node and node:type() == "table_constructor") then return end

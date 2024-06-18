@@ -1,7 +1,10 @@
---------------------------------------------------------------------------------
+function _G.myFunc(motion, b)
+	if motion == nil then
+		vim.o.operatorfunc = "v:lua.myFunc"
+		return "g@"
+	end
 
-local glob = "**/*.lua"
-local path = vim.fn.expand("%:p")
-local pattern = vim.glob.to_lpeg(glob):match(path)
+	print("motion:", motion, "b:", b)
+end
 
-vim.notify("👾 pattern: " .. vim.inspect(pattern))
+vim.keymap.set("n", "gt", _G.myFunc, { expr = true }) -- 1.
