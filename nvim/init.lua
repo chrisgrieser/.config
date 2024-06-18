@@ -1,3 +1,5 @@
+vim.opt.showtabline = 0 -- prevent tabline from flashing on startup
+
 -- If nvim was opened w/o argument, re-open the first oldfile that exists
 vim.defer_fn(function()
 	-- BUG https://github.com/neovide/neovide/issues/2629

@@ -80,7 +80,6 @@ local function telescopeConfig()
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
-				-- filetypes
 				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
 				"%.zip", "%.pdf",
 				unpack(specialDirs), -- needs to be last for correct unpacking
@@ -101,7 +100,7 @@ local function telescopeConfig()
 				},
 
 				prompt_prefix = "󰝰 ",
-				path_display = { "filename_first" },
+				path_display = { "filename_first", "smart" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
@@ -113,6 +112,7 @@ local function telescopeConfig()
 				path_display = function(_, path)
 					local project = path
 						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
+						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "") -- root in dotfiles
 						:gsub("/Users/%w+", "") -- remove home dir
 						:match("/(.-)/") -- highest parent
 					local tail = require("telescope.utils").path_tail(path)
