@@ -53,9 +53,7 @@ function M.themeModifications()
 		for type, altType in pairs(types) do
 			local fg = u.getHlValue("@comment." .. type, "fg")
 				or u.getHlValue("Diagnostic" .. altType, "fg")
-			if fg and fg ~= textColor then
-				setHl("@comment." .. type, { bg = fg, fg = textColor })
-			end
+			if fg and fg ~= textColor then setHl("@comment." .. type, { bg = fg, fg = textColor }) end
 		end
 	end
 
@@ -201,6 +199,7 @@ end
 local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@string.special.url.comment", "gui=" .. change)
+	updateHl("@string.special.url.html", "gui=" .. change)
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),

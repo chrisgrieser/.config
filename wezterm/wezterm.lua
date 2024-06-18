@@ -3,8 +3,8 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"cyberpunk",
 	"Kanagawa (Gogh)",
+	"cyberpunk",
 	"MaterialDesignColors",
 	"ChallengerDeep",
 	"Afterglow (Gogh)",

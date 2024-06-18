@@ -43,17 +43,17 @@ rules:
       - type: basic
         from: { pointing_button: button4 }
         to_if_alone:
-          - { key_code: "n", modifiers: [control, command] }
-          - { key_code: "3", modifiers: [control, command] }
-          - shell_command: |
-              "$HOME/.config/karabiner/assets/complex_modifications/assets/highlights-notificator" \
-                  --title "Highlights" --message "Comment ✏️"
-        to_if_held_down:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Underline 🖍️"
+        to_if_held_down:
+          - { key_code: "s", modifiers: [control, command] }
+          - { key_code: "1", modifiers: [control, command] }
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
+                  --title "Highlights" --message "Strikethrough ❌"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -89,6 +89,12 @@ rules:
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Highlight 🟨"
+        to_if_held_down:
+          - { key_code: n, modifiers: [command, control] }
+          - { key_code: "3", modifiers: [command, control] }
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
+                  --title "Highlights" --message "Comment ✏️"
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
       # Mimestream: Archive
