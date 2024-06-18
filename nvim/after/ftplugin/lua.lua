@@ -16,21 +16,20 @@ abbr("===", "==")
 
 -- Mini-Repl
 -- as opposed to `:lua =`, uses `vim.notify` for better output
-vim.keymap.set("n", "<leader>e", function()
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.api.nvim_win_get_cursor(0)[2]
-	local toEol = vim.trim(line:sub(col + 1))
-	vim.notify(vim.inspect(vim.fn.luaeval(toEol)))
-end, { buffer = true, desc = " Eval to EoL" })
+vim.keymap.set(
+	"n",
+	"<leader>ee",
+	function() require("funcs.lua-eval").luaEvalLine() end,
+	{ buffer = true, desc = " Eval Line" }
+)
+print("helblo")
 
-vim.keymap.set("x", "<leader>e", function()
-	u.leaveVisualMode()
-	local startLn, startCol = unpack(vim.api.nvim_buf_get_mark(0, "<"))
-	local endLn, endCol = unpack(vim.api.nvim_buf_get_mark(0, ">"))
-	local selection = vim.api.nvim_buf_get_text(0, startLn - 1, startCol, endLn - 1, endCol + 1, {})
-	local text = table.concat(selection, "\n")
-	vim.notify(vim.inspect(vim.fn.luaeval(text)))
-end, { buffer = true, desc = " Eval Selection" })
+vim.keymap.set(
+	"n",
+	"<leader>e",
+	function() require("funcs.lua-eval").luaevalOperator() end,
+	{ buffer = true, expr = true, desc = " Eval Operator" }
+)
 
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
