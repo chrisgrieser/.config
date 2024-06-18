@@ -309,7 +309,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		vim.defer_fn(function()
 			-- GUARD
-			local fileIsEmpty = vim.uv.fs_stat(ctx.file).size < 4 -- account for linebreaks
+			local stats = vim.loop.fs_stat(ctx.file)
+			if not stats then return end
+			local fileIsEmpty = stats.size < 4 -- account for linebreaks
 			if not fileIsEmpty then return end
 			local ft = ctx.match
 			local glob = skeletons[ft].glob

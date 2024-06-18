@@ -1,6 +1,7 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+local pluginName = "Magnet"
 local config = {
 	currentFileIcon = "",
 	bufferByLastUsed = {
@@ -10,8 +11,10 @@ local config = {
 	gotoChangedFiles = {
 		maxFiles = 5,
 	},
+	altFile = {
+		statusbarMaxDisplayLen = 25,
+	},
 }
-local pluginName = "Magnet"
 
 --------------------------------------------------------------------------------
 
@@ -55,12 +58,8 @@ local function altOldfile()
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
----@param maxDisplayLen? number
 ---@return string
-function M.altFileStatus(maxDisplayLen)
-	-- some statusline plugins convert their input into strings
-	if type(maxDisplayLen) ~= "number" then maxDisplayLen = 25 end
-
+function M.altFileStatus()
 	local altBufNr = vim.fn.bufnr("#")
 	local altOld = altOldfile()
 	local name, icon
@@ -86,14 +85,15 @@ function M.altFileStatus(maxDisplayLen)
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
 	else
-		return "–––"
+		return "???"
 	end
 
 	-- truncate
 	local nameNoExt = name:gsub("%.%w+$", "")
-	if #nameNoExt > maxDisplayLen then
+	local max = config.altFile.statusbarMaxDisplayLen
+	if #nameNoExt > max then
 		local ext = name:match("%.%w+$")
-		name = nameNoExt:sub(1, maxDisplayLen) .. "…" .. ext
+		name = nameNoExt:sub(1, max) .. "…" .. ext
 	end
 	return icon .. " " .. name
 end
@@ -169,8 +169,7 @@ function M.bufferByLastUsed(dir)
 	-----------------------------------------------------------------------------
 	-- DISPLAY BUFFER-LIST
 
-	local notifyInstalled, _ = pcall(require, "notify")
-	if not notifyInstalled then return end
+	if not package.loaded["notify"] then return end
 
 	local bufsDisplay = vim.iter(state.bufsByLastAccess)
 		:map(function(buf)
