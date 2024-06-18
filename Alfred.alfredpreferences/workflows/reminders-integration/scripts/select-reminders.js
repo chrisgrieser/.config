@@ -83,19 +83,17 @@ function run() {
 				remindersLeftNow: true.toString(),
 				remindersLeftLater: remindersFiltered.length - 1, // for deciding whether to loop back
 			},
-			// copy via cmd+c
-			text: { copy: content },
+			text: { copy: content }, // copy via cmd+c
 			mods: {
-				// open URL
 				cmd: {
+					// open URL
 					arg: url,
 					subtitle: urlSubtitle,
 					valid: Boolean(url),
 				},
-				// edit content
-				alt: { arg: content },
-				// toggle completed
+				alt: { arg: content }, // edit content
 				ctrl: {
+					// toggle completed
 					variables: {
 						showCompleted: (!showCompleted).toString(),
 					},

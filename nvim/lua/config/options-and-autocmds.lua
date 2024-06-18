@@ -296,12 +296,30 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 -- SKELETONS (TEMPLATES)
 -- filetype -> extension
 local skeletons = {
-	python = "py",
-	applescript = "applescript",
-	javascript = "js",
-	just = "just",
-	sh = "zsh",
-	toml = "toml",
+	python = {
+		filename = "general.py",
+		filepathGlob = "*.py",
+	},
+	applescript = {
+		filename = "general.applescript",
+		filepathGlob = "*.applescript",
+	},
+	javascript = {
+		filename = "jxa.js",
+		filepathGlob = "**/Alfred.alfredpreferences/workflows/*.js",
+	},
+	just = {
+		filename = "justfile.just",
+		filepathGlob = "Justfile",
+	},
+	sh = {
+		filename = "general.zsh",
+		filepathGlob = "*.zsh",
+	},
+	toml = {
+		filename = "typos.toml",
+		filepathGlob = "**/typos.toml",
+	},
 }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -365,7 +383,3 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		end
 	end,
 })
-
---------------------------------------------------------------------------------
-
-require("funcs.auto-comma") -- TODO
