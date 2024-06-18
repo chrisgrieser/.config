@@ -8,5 +8,3 @@ function _G.myFunc(motionType)
 end
 
 print("lllllbllbblll")
-
-
