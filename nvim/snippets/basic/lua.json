@@ -72,11 +72,6 @@
     "filetype": "lua",
     "prefix": "if .. then .. else"
   },
-  "import module": {
-    "body": "local ${1:name} = require(\"${2:module}.${1:name}\")",
-    "filetype": "lua",
-    "prefix": "import module"
-  },
   "nodiscard": {
     "body": "---@nodiscard",
     "description": "Luadoc Annotation that a function's return value should not be discarded. https://github.com/LuaLS/lua-language-server/wiki/Annotations#nodiscard",
