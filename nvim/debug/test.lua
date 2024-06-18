@@ -1,10 +1,3 @@
-function _G.myFunc(motionType)
-	if motionType == nil then
-		vim.o.operatorfunc = "v:lua.myFunc"
-		return "g@"
-	end
+vim.fn.matchadd("ErrorMsg", [[\vby \w+$]])
 
-	print(motionType)
-end
-
-print("lllllbllbblll")
+-- by blabla
