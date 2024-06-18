@@ -22,12 +22,12 @@ vim.keymap.set(
 	function() require("funcs.lua-eval").luaEvalLine() end,
 	{ buffer = true, desc = " Eval Line" }
 )
-print("helblo")
 
+-- INFO needs `expr` and rhs must not be wapped in a function
 vim.keymap.set(
 	"n",
 	"<leader>e",
-	function() require("funcs.lua-eval").luaevalOperator() end,
+	require("funcs.lua-eval").luaevalOperator,
 	{ buffer = true, expr = true, desc = " Eval Operator" }
 )
 

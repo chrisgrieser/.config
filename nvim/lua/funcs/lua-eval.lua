@@ -4,8 +4,9 @@ local M = {}
 ---@param motionType? "line"|"char"|"block" set via usage of `g@`
 function M.luaevalOperator(motionType)
 	if motionType == nil then
-		vim.o.operatorfunc = "v:lua.require'chainsaw.log-commands'."
-		vim.o.operatorfunc = "v:lua."
+		local thisModule = "funcs.lua-eval"
+		local thisFunc = "luaevalOperator"
+		vim.o.operatorfunc = ("v:lua.require'%s'.%s"):format(thisModule, thisFunc)
 		return "g@"
 	end
 
