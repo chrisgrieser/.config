@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -213,7 +210,6 @@ return {
 				border = vim.g.borderStyle,
 				keymaps = {
 					deleteSnippet = "<D-BS>",
-					openInFile = "<D-o>",
 					insertNextPlaceholder = "<D-t>",
 				},
 			},
