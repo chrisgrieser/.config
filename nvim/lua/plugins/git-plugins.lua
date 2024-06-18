@@ -53,8 +53,8 @@ return {
 		config = function(_, opts)
 			require("tinygit").setup(opts)
 
-			u.addToLuaLine("tabline", "lualine_x", require("tinygit.statusline").blame)
-			u.addToLuaLine(
+			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame)
+			vim.g.lualine_add(
 				"sections",
 				"lualine_y",
 				require("tinygit.statusline").branchState,
@@ -126,7 +126,7 @@ return {
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
 
-			u.addToLuaLine(
+			vim.g.lualine_add(
 				"sections",
 				"lualine_y", -- same section as diff count
 				{

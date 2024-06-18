@@ -1,4 +1,4 @@
 set quiet := true
 
-reload:
+reload:$0
     echo "Done."

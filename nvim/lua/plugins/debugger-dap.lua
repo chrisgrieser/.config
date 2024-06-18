@@ -28,7 +28,7 @@ local function dapConfig()
 	-- LUALINE COMPONENTS
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl or "DiagnosticInfo"
 	local breakpointFg = u.getHlValue(breakpointHl, "fg")
-	u.addToLuaLine("sections", "lualine_y", {
+	vim.g.lualine_add("sections", "lualine_y", {
 		color = { fg = breakpointFg },
 		function()
 			local breakpoints = require("dap.breakpoints").get()
@@ -41,7 +41,7 @@ local function dapConfig()
 			return breakpointIcon .. tostring(breakpointSum)
 		end,
 	}, "before")
-	u.addToLuaLine("tabline", "lualine_z", function()
+	vim.g.lualine_add("tabline", "lualine_z", function()
 		local dapStatus = require("dap").status()
 		if dapStatus == "" then return "" end
 		return "  " .. dapStatus

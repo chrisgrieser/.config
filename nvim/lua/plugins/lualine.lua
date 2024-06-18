@@ -2,6 +2,33 @@ local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
+
+---Adds a component to the lualine after lualine was already set up. Useful for
+---lazyloading.
+---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
+---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
+---@param component function|table the component forming the lualine
+---@param whereInSection? "before"|"after"
+vim.g.lualine_add = function(whichBar, whichSection, component, whereInSection)
+	local ok, lualine = pcall(require, "lualine")
+	if not ok then return end
+	local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
+
+	local componentObj = type(component) == "table" and component or { component }
+	if whereInSection == "before" then
+		table.insert(sectionConfig, 1, componentObj)
+	else
+		table.insert(sectionConfig, componentObj)
+	end
+	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
+
+	-- Theming needs to be re-applied, since the lualine-styling can change
+	require("config.theme-customization").themeModifications()
+end
+
+
+--------------------------------------------------------------------------------
+
 -- lightweight replacement for fidget.nvim
 local progressText = ""
 local function lspProgress() return progressText end
@@ -12,7 +39,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
 		if not (progress and progress.title) then return end
 
-		-- local icons = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" }
 		local icons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
 		local idx = math.floor(#icons / 2)
 		if progress.percentage == 0 then idx = 1 end
@@ -82,10 +108,10 @@ local lualineConfig = {
 	},
 	tabline = {
 		lualine_a = {
-			{ -- clock if window is maximized
+			{
 				"datetime",
 				style = " %H:%M:%S",
-				cond = function() return vim.o.columns > 120 end,
+				cond = function() return vim.o.columns > 120 end, -- if window is maximized
 				fmt = function(time)
 					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
 					return timeWithBlinkingColon
@@ -100,8 +126,9 @@ local lualineConfig = {
 	},
 	sections = {
 		lualine_a = {
-			{ -- branch, but only if not on main or master
+			{
 				"branch",
+				-- only if not on main or master
 				cond = function()
 					if bo.buftype ~= "" then return false end
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
