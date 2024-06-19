@@ -171,7 +171,7 @@ declare const Application: {
 		}): FinderItem;
 	};
 	(
-		name: "Alfred" | "com.runningwithcrayons.Alfred",
+		name: "com.runningwithcrayons.Alfred",
 	): MacAppObj & {
 		// biome-ignore lint/complexity/noBannedTypes: <explanation>
 		setConfiguration(envVar: string, options: Object): void;

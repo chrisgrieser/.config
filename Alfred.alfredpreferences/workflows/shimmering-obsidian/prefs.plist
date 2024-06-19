@@ -27,6 +27,6 @@
 	<key>template_note_path</key>
 	<string>/Meta/Templater/T Basic.md</string>
 	<key>vault_path</key>
-	<string>~/main-vault</string>
+	<string>~/phd-data-analysis</string>
 </dict>
 </plist>
