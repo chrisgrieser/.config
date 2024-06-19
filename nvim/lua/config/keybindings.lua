@@ -249,13 +249,6 @@ keymap(
 	{ desc = "󰊢 Goto Changed File" }
 )
 
-keymap(
-	{ "n", "x" },
-	"<D-T>", -- cmd-shift-t
-	function() vim.cmd.edit(vim.v.oldfiles[2]) end,
-	{ desc = "󰽙 Reopen Last File" }
-)
-
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd.update { mods = { silent = true } }
 	local winClosed = pcall(vim.cmd.close)
