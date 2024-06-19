@@ -56,7 +56,7 @@ return {
 				local lnum, col = unpack(posList[idx])
 				local text = ("%d/%d"):format(idx, #posList)
 				local chunks = {
-					{ " ", "Padding-Ignore" },
+					{ " ", "None" },
 					{ "", "IncSearchReversed" },
 					{ text, "IncSearch" },
 					{ "", "IncSearchReversed" },
@@ -154,7 +154,6 @@ return {
 		},
 		opts = {
 			input = {
-				insert_only = false, -- = enable normal mode
 				trim_prompt = true,
 				border = vim.g.borderStyle,
 				relative = "editor",
