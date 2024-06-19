@@ -48,9 +48,9 @@ require("lazy").setup("plugins", {
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
-	-- Lazy Log shows commits since last x days
-	git = { log = { "--since=7 days ago" } },
+	git = { log = { "--since=7 days ago" } }, -- Lazy log shows commits since last x days
 	ui = {
+		title = " 󰒲 lazy.nvim ",
 		wrap = true,
 		border = vim.g.borderStyle,
 		pills = false,
