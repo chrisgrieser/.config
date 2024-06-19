@@ -11,15 +11,13 @@ find . -type d -empty -delete                  # e.g. `Image` folders now empty
 find . -type d -name "Sample" -exec rm -r {} + # Folders with content not accept `-delete`
 
 sleep 1
-# transmission does not store the downloaded file in a variable, we determine it
-# by checking for a folder last modified in the last minute
-last_folder="$(find . -mindepth 1 -type d -mtime -1m | head -n1)"
 
-files_in_folder=$(find "$last_folder" -depth 1 | wc -l | tr -d " ")
-if [[ $files_in_folder -eq 1 ]]; then
-	mv "$last_folder"/* "$TR_TORRENT_DIR"
-	rmdir "$last_folder"
-fi
+# unnest folder, if only one file
+find . -mindepth 1 -type d | while read -r folder; do
+	files_in_folder=$(find "$folder" -depth 1 | wc -l | tr -d " ")
+	[[ $files_in_folder -eq 1 ]] && mv "$folder"/* "$TR_TORRENT_DIR"
+	rmdir "$folder" # only deletes empty folders
+done
 
 #───────────────────────────────────────────────────────────────────────────────
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
