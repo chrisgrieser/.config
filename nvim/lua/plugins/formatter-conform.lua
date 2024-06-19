@@ -73,28 +73,8 @@ local function formattingFunc(bufnr)
 	local ft = vim.bo[bufnr].filetype
 	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
 
-	-- typescript: organize imports before
-	if ft == "typescript" then
-		local actions = {
-			"source.fixAll.ts",
-			"source.addMissingImports.ts",
-			"source.removeUnusedImports.ts",
-			"source.organizeImports.biome",
-		}
-		for i = 1, #actions + 1 do
-			vim.defer_fn(function()
-				if i <= #actions then
-					vim.lsp.buf.code_action {
-						context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-						apply = true,
-					}
-				else
-					require("conform").format { lsp_format = useLsp }
-				end
-			end, i * 60)
-		end
-	else
-		require("conform").format({ lsp_fallback = useLsp }, function()
+	if ft ~= "typescript" then
+		require("conform").format({ lsp_format = useLsp }, function()
 			if ft == "python" then
 				vim.lsp.buf.code_action {
 					context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
@@ -102,8 +82,29 @@ local function formattingFunc(bufnr)
 				}
 			end
 		end)
+		vim.cmd("silent! update!")
+		return
 	end
 
+	-- TYPESCRIPT: ORGANIZE IMPORTS BEFORE
+	local actions = {
+		"source.fixAll.ts",
+		"source.addMissingImports.ts",
+		"source.removeUnusedImports.ts",
+		"source.organizeImports.biome",
+	}
+	for i = 1, #actions + 1 do
+		vim.defer_fn(function()
+			if i <= #actions then
+				vim.lsp.buf.code_action {
+					context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+					apply = true,
+				}
+			else
+				require("conform").format { lsp_format = useLsp }
+			end
+		end, i * 60)
+	end
 	vim.cmd("silent! update!")
 end
 

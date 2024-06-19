@@ -56,7 +56,6 @@ function run() {
 			match: camelCaseMatch(vaultName),
 			mods: {
 				alt: { arg: vaultPath },
-				cmd: { arg: vaultPath },
 				ctrl: { arg: vaultPath },
 				shift: { arg: vaultPath },
 			},
@@ -71,7 +70,6 @@ function run() {
 		icon: { path: "icons/settings.png" },
 		mods: {
 			alt: { valid: false, subtitle: "⛔️" },
-			cmd: { valid: false, subtitle: "⛔️" },
 			ctrl: { valid: false, subtitle: "⛔️" },
 			shift: { valid: false, subtitle: "⛔️" },
 		},
