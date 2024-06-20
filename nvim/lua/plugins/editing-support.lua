@@ -85,12 +85,14 @@ return {
 				border = vim.g.borderStyle,
 				hideSearchReplaceLabels = true,
 			},
+			prefill = {
+				startInReplaceLineIfPrefill = true,
+			},
 			keymaps = {
 				insertModeConfirm = "<CR>",
 			},
 			editingBehavior = {
 				autoCaptureGroups = true,
-				startInReplaceLine = true,
 			},
 		},
 	},
