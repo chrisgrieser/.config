@@ -1,7 +1,3 @@
-local keymap = require("config.utils").uniqueKeymap
-local notify = require("config.utils").notify
---------------------------------------------------------------------------------
-
 -- BOOTSTRAP LAZY.NVIM
 -- https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -12,6 +8,10 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
+-- HELPERS
+
+local keymap = require("config.utils").uniqueKeymap
+local notify = require("config.utils").notify
 
 local function getModule(plugin)
 	local specRoot = require("lazy.core.config").options.spec.import
@@ -39,6 +39,9 @@ local function onPlugin(plugin, mode)
 	end
 end
 
+--------------------------------------------------------------------------------
+-- LAZY WINDOW
+
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
@@ -49,6 +52,7 @@ require("lazy").setup("plugins", {
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
 	git = { log = { "--since=7 days ago" } }, -- Lazy log shows commits since last x days
+	install = { colorscheme = { "default" } }, -- colorschemes to use during installation
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
@@ -122,13 +126,14 @@ require("lazy.view.config").keys.hover = "o"
 require("lazy.view.config").keys.details = "<Tab>"
 
 --------------------------------------------------------------------------------
--- KEYMAPS
+-- KEYMAPS FOR NVIM TRIGGERING LAZY
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 local pluginTypeIcons = {
 	["editing-support"] = "󰏫 ",
+	["files-and-buffers"] = "󰞇 ",
 	["appearance"] = " ",
 	["lsp-plugins"] = "󰒕 ",
 	["lsp-config"] = "󰒕 ",
@@ -183,8 +188,6 @@ local function checkForPluginUpdates()
 end
 
 local function checkForDuplicateKeys()
-	local modes = { "n", "x", "o", "i" }
-
 	---@param lazyKey {mode?: string|table}
 	---@param mode string
 	---@return boolean
@@ -195,10 +198,12 @@ local function checkForDuplicateKeys()
 		return false
 	end
 
+	local modes = { "n", "x", "o", "i" }
 	local allKeys = {}
 	for _, mode in ipairs(modes) do
 		allKeys[mode] = {}
 	end
+
 	vim.iter(require("lazy").plugins()):each(function(plugin)
 		vim
 			.iter(plugin.keys or {})
