@@ -65,14 +65,11 @@ return {
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
-		commit = "4a143f1", -- PENDING https://github.com/lewis6991/gitsigns.nvim/issues/1043
-
 		event = "VeryLazy",
 		opts = {
-			-- signs_staged_enable = true, -- PENDING above
-
+			signs_staged_enable = true,
 			attach_to_untracked = true,
-			max_file_length = 3000, -- lines
+			max_file_length = 3000,
 			-- stylua: ignore
 			count_chars = { "", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", ["+"] = "󰿮" },
 			signs = {
@@ -90,7 +87,9 @@ return {
 			{ "gh", "<cmd>Gitsigns nav_hunk next<CR>", desc = "󰊢 Next Hunk" },
 			{ "gH", "<cmd>Gitsigns nav_hunk prev<CR>", desc = "󰊢 Previous Hunk" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
-			{ "<leader>g?", function() require("gitsigns").blame_line { full = true } end, desc = " Blame Line" },
+			{ "<leader>g?", function() require("gitsigns").blame_line { full = false } end, desc = " Blame Line" },
+			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
+			{ "q", vim.cmd.close, ft = "gitsigns.blame", desc = "Close" },
 
 			-- UNDO
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
