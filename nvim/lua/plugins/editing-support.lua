@@ -392,6 +392,7 @@ return {
 				},
 			},
 		},
+		cmd = "ChainSaw",
 		keys = {
 			-- stylua: ignore start
 			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰸢 variable" },
