@@ -2,8 +2,8 @@ return {
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
 		external_dependencies = "macos-trash",
+		cmd = "Genghis",
 		dependencies = "stevearc/dressing.nvim",
-		init = function() vim.g.genghis_disable_commands = true end,
 		keys = {
 			-- stylua: ignore start
 			{"<C-p>", function() require("genghis").copyFilepath() end, desc = "󰞇 Copy path" },
