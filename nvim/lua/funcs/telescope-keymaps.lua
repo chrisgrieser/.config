@@ -114,18 +114,15 @@ function M.toggleHidden(prompt_bufnr)
 	local prevTitle = current_picker.prompt_title
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local title = "Find Files: " .. vim.fs.basename(cwd)
-	local ignorePattern = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
+	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 	local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
-	table.insert(ignorePattern, relPathCurrent)
+	table.insert(ignore, relPathCurrent)
 	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
 
 	-- hidden status not stored, but title is, so we determine the previous state via title
 	local includeIgnoreHidden = not prevTitle:find("hidden")
 	if includeIgnoreHidden then
-		vim.list_extend(
-			ignorePattern,
-			{ "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" }
-		)
+		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
 		-- cannot simply toggle `hidden` since we are using `rg` as custom find command
 		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
 		title = title .. " (--hidden --no-ignore)"
@@ -137,7 +134,7 @@ function M.toggleHidden(prompt_bufnr)
 		prompt_title = title,
 		find_command = findCommand,
 		cwd = cwd,
-		file_ignore_patterns = ignorePattern,
+		file_ignore_patterns = ignore,
 	}
 end
 
