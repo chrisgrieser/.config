@@ -7,13 +7,14 @@ function o() {
 	fi
 
 	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
-	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store')"
+	local color=$'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g'
+	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --no-ignore-files \
+		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | sed -Ee '$color')"
 
 	local selected
 	selected=$(
 		# shellcheck disable=2016
-		zsh -c "$FZF_DEFAULT_COMMAND" |
-			sed -Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' |
+		zsh -c "$FZF_DEFAULT_COMMAND" | sed -Ee "$color" |
 			fzf --select-1 --ansi --query="$*" --info=inline --header-first \
 				--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
 				--keep-right --scheme=path --tiebreak=length,end \
