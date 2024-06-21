@@ -26,21 +26,16 @@ return {
 			icons = { Object = "󰠲 " },
 			separator = " ",
 			depth_limit = 7,
-			highlight = false,
+			highlight = false, -- sadly various bugs
 			depth_limit_indicator = "…",
-			format_text = function(text) return text:gsub("\t", "") end, -- FIX tabs in breadcrumbs
+			-- FIX tabs in breadcrumbs for css nesting
+			format_text = function(text) return text:gsub("\t", "") end,
 		},
 		config = function(_, opts)
 			vim.g.navic_silence = false
 			require("nvim-navic").setup(opts)
 
-			vim.g.lualine_add("tabline", "lualine_b", { "navic", padding = { left = 1, right = 0 } })
-			-- FIX use this dummy component to remove blank space https://github.com/SmiteshP/nvim-navic/issues/115
-			vim.g.lualine_add("tabline", "lualine_b", {
-				function() return " " end,
-				cond = function() return #(require("nvim-navic").get_data() or {}) > 0 end,
-				padding = 0,
-			})
+			vim.g.lualine_add("tabline", "lualine_b", { "navic" })
 		end,
 		keys = {
 			{ -- copy breadcrumbs

@@ -25,7 +25,6 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
 		finder.make({
@@ -41,7 +40,7 @@ function cacheIsOutdated(path) {
 	ensureCacheFolderExists();
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeDays = (+new Date() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
+	const cacheAgeDays = (Date.now() - +cacheObj.creationDate()) / 1000 / 60 / 60 / 24;
 	const cacheAgeThresholdDays = 7;
 	return cacheAgeDays > cacheAgeThresholdDays;
 }
@@ -94,15 +93,18 @@ function run() {
 	const installedPackages = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
+	// biome-ignore lint/suspicious/noConsoleLog: intentional
+	console.log("👾 installedPackages:", installedPackages.length);
 
-	// 3. DOWNLOAD COUNTS (cached by me)
+	// 3. DOWNLOAD COUNTS (cached by this workflow)
 	// DOCS https://formulae.brew.sh/analytics/
-	// INFO not using Alfred's caching mechanism, since the installed packages
-	// should be determined more frequently
+	// INFO separate from Alfred's caching mechanism, since the installed
+	// packages should be determined more frequently
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	if (cacheIsOutdated(cask90d)) {
-		console.log("Updating download count cache…");
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		console.log("Updating download count cache.");
 		const caskDownloads = httpRequest(
 			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
 		);
@@ -121,6 +123,9 @@ function run() {
 	const caveatIcon = "ℹ️ ";
 	const installedIcon = "✅ ";
 	const deprecatedIcon = "⚠️ ";
+
+	// biome-ignore lint/suspicious/noConsoleLog: intentional
+	console.log("Caches ready.");
 
 	// 5. CREATE ALFRED ITEMS
 	/** @type{AlfredItem&{downloads:number}[]} */
@@ -196,7 +201,7 @@ function run() {
 		};
 	});
 
-	// 6. MERGE BOTH LISTS
+	// 6. MERGE & SORT BOTH LISTS
 	// & move shorter package names top (short names like `sd` are ranked further down otherwise)
 	// & sort by download count as secondary criteria
 	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
