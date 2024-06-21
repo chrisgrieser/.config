@@ -1,0 +1,22 @@
+name: $0
+
+on:
+  schedule:
+    - cron: "15 2 2,15 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+#───────────────────────────────────────────────────────────────────────────────
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "Hello, world!"
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "PLACEHOLDER"

@@ -302,6 +302,7 @@ local skeletons = {
 	just = { "**/*Justfile", "justfile.just" },
 	sh = { "**/*.sh", "general.zsh" },
 	toml = { "**/*typos.toml", "typos.toml" },
+	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
 }
 -- not `BufNewFile` as it doesn't trigger on files created outside vim
 vim.api.nvim_create_autocmd("FileType", { 
