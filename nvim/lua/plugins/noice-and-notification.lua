@@ -6,7 +6,7 @@ local function highlightsInStacktrace(bufnr)
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 		vim.api.nvim_buf_call(bufnr, function()
 			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- files with error
-			vim.fn.matchadd("WarningMsg", [[[E\d\+]]) -- vim error codes
+			vim.fn.matchadd("WarningMsg", [[E\d\+]]) -- vim error codes
 		end)
 	end, 1)
 end

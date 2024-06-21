@@ -8,6 +8,7 @@ local ftToFormatter = {
 	just = { "just", "squeeze_blanks" },
 	query = { "format-queries" },
 }
+
 -- formatting from the LSP
 local lspFormatFt = {
 	"javascript",
@@ -21,9 +22,7 @@ local lspFormatFt = {
 	"python",
 	"css",
 }
-
---------------------------------------------------------------------------------
-
+vim.cmd("silent! update!")
 ---@return string[]
 ---@nodiscard
 local function listConformFormatters()
@@ -75,14 +74,15 @@ local function formattingFunc(bufnr)
 
 	if ft ~= "typescript" then
 		require("conform").format({ lsp_format = useLsp }, function()
+			-- PYTHON: FIXALL
 			if ft == "python" then
 				vim.lsp.buf.code_action {
 					context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 					apply = true,
 				}
 			end
+			vim.cmd("silent! update!")
 		end)
-		vim.cmd("silent! update!")
 		return
 	end
 
@@ -101,11 +101,13 @@ local function formattingFunc(bufnr)
 					apply = true,
 				}
 			else
-				require("conform").format { lsp_format = useLsp }
+				require("conform").format(
+					{ lsp_format = useLsp },
+					function() vim.cmd("silent! update!") end
+				)
 			end
 		end, i * 60)
 	end
-	vim.cmd("silent! update!")
 end
 
 --------------------------------------------------------------------------------
