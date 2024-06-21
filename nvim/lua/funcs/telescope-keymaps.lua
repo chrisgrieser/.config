@@ -115,18 +115,17 @@ function M.toggleHidden(prompt_bufnr)
 
 	-- hidden status not stored, but title is, so we determine the previous state via title
 	local prevTitle = current_picker.prompt_title
-	local ignoreHidden = not prevTitle:find("hidden")
-	local title = "Find Files: " .. vim.fs.basename(cwd)
-	if ignoreHidden then title = title .. " (--hidden --no-ignore)" end
 	local currentQuery = require("telescope.actions.state").get_current_line()
-
+	local title = "Find Files: " .. vim.fs.basename(cwd)
 	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
-	if ignoreHidden then
+
+	local includeIgnoreHidden = not prevTitle:find("hidden")
+	if includeIgnoreHidden then
 		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
 		-- cannot simply toggle `hidden` since we are using `rg` as custom find command
-		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-file" })
-		vim.notify("👾 findCommand: " .. vim.inspect(findCommand))
+		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
+		title = title .. " (--hidden --no-ignore)"
 	end
 
 	require("telescope.actions").close(prompt_bufnr)

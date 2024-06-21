@@ -100,7 +100,6 @@ local function telescopeConfig()
 				},
 
 				prompt_prefix = "󰝰 ",
-				path_display = { "filename_first" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
@@ -113,13 +112,12 @@ local function telescopeConfig()
 					local project = path
 						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
 						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "") -- root in dotfiles
-						:gsub("/Users/%w+", "") -- remove home dir
 						:match("/(.-)/") -- highest parent
-					local tail = require("telescope.utils").path_tail(path)
-					local text = tail .. "  " .. project
+					local tail = vim.fs.basename(path)
+					local out = tail .. "  " .. project
 
-					local highlights = { { { #tail + 1, #text }, "TelescopeResultsComment" } }
-					return text, highlights
+					local highlights = { { { #tail + 1, #out }, "TelescopeResultsComment" } }
+					return out, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 
@@ -324,12 +322,37 @@ return {
 				"go",
 				function()
 					-- ignore current file, since using the `rg` workaround puts it on top
-					local ignoresFiles = require("telescope.config").values.file_ignore_patterns or {}
+					local ignoresPattern =
+						vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
+					table.insert(ignoresPattern, relPathCurrent)
+
+					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
+					local gitInfo = {}
+					if gitDir.code == 0 then
+						local pathInGitDirLen = #vim.uv.cwd() - #vim.trim(gitDir.stdout)
+						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
+							or ""
+						vim.iter(vim.split(vim.trim(gitResult), "\n")):each(function(line)
+							local status = line:sub(1, 3)
+							local file = line:sub(4 + pathInGitDirLen)
+							gitInfo[file] = status
+						end)
+					end
+					vim.notify("👾 gitInfo: " .. vim.inspect(gitInfo))
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						file_ignore_patterns = { relPathCurrent, unpack(ignoresFiles) }, -- unpack must be last
+						file_ignore_patterns = ignoresPattern,
+						path_display = function(_, path)
+							local tail = vim.fs.basename(path)
+							local parent = vim.fs.dirname(path)
+							local gitIcon = gitInfo[path] or "   "
+							local out = gitIcon .. tail .. "  " .. parent
+
+							local highlights = { { { #out - #parent, #out }, "TelescopeResultsComment" } }
+							return out, highlights
+						end,
 					}
 				end,
 				desc = "󰭎 Open File",
