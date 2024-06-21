@@ -945,7 +945,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/speedtext.sh</string>
+				<string>scripts/speedtest.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1297,26 +1297,26 @@ List all available tools via `atop` and select one. Alternatively, you can also 
 
 ### Process Management
 Display processes directly via `top`. Append "parent" to the query to display only processes that have child processes.
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Kill the process.  
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Force kill the process.  
-- &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Kill all processes with the same name.  
-- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the app.  
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.  
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Kill the process.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Force kill the process.
+- &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Kill all processes with the same name.
+- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: If the process belongs to a regular app, restart the app.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the PID.
 
-**Meaning of the icons**  
+**Meaning of the icons**
 - `⭕`: process is owned by root.
 - `n⇣`: process is a parent of `n` child processes.
 - `↖ foobar`: process is a child of `foobar`.
 
 ### Bluetooth Devices
-Display paired Bluetooth devices directly via `blue`.  
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.  
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the device address.  
+Display paired Bluetooth devices directly via `blue`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: If `blueutil` is installed, toggle the connection state. Otherwise, open the bluetooth preferences.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the device address.
 
 ### Removable Volumes
-Display mounted volumes directly via `vol`.  
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the Volume in Finder.  
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Browse the Volume in the Terminal, [using the Terminal app you have configured in your Alfred preferences](https://www.alfredapp.com/help/features/terminal/).  
+Display mounted volumes directly via `vol`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the Volume in Finder.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Browse the Volume in the Terminal, [using the Terminal app you have configured in your Alfred preferences](https://www.alfredapp.com/help/features/terminal/).
 - &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Eject the Volume.
 
 
