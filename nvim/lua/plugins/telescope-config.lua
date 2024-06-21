@@ -25,10 +25,7 @@ local specialDirs = {
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "TelescopePrompt",
-	callback = function()
-		vim.opt_local.sidescrolloff = 1
-		vim.opt_local.list = true
-	end,
+	callback = function() vim.opt_local.sidescrolloff = 1 end,
 })
 
 --------------------------------------------------------------------------------
@@ -116,7 +113,7 @@ local function telescopeConfig()
 					local tail = vim.fs.basename(path)
 					local out = tail .. "  " .. project
 
-					local highlights = { { { #tail + 1, #out }, "TelescopeResultsComment" } }
+					local highlights = { { { #out - #project, #out }, "TelescopeResultsComment" } }
 					return out, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
@@ -273,19 +270,12 @@ end
 
 --------------------------------------------------------------------------------
 return {
-	{ -- fuzzy finder
+	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		external_dependencies = "rg",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		},
-		config = function()
-			telescopeConfig()
-			require("telescope").load_extension("fzf")
-		end,
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		config = telescopeConfig,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
@@ -296,7 +286,7 @@ return {
 						yaml = { "object", "array" },
 						json = "module",
 						toml = "object",
-						markdown = "string", -- string = headings in markdown files
+						markdown = "string", -- string -> headings in markdown files
 					}
 					-- stylua: ignore
 					local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
@@ -327,32 +317,36 @@ return {
 					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
 					table.insert(ignoresPattern, relPathCurrent)
 
+					-- add git info to file
 					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
 					local gitInfo = {}
 					if gitDir.code == 0 then
-						local pathInGitDirLen = #vim.uv.cwd() - #vim.trim(gitDir.stdout)
+						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
 						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
-							or ""
-						vim.iter(vim.split(vim.trim(gitResult), "\n")):each(function(line)
-							local status = line:sub(1, 3)
-							local file = line:sub(4 + pathInGitDirLen)
+						gitResult = (gitResult or ""):gsub("\n$", "")
+						vim.iter(vim.split(gitResult, "\n")):each(function(line)
+							local status = vim.trim(line:sub(1, 2)):sub(1, 1)
+							local file = line:sub(4 + pathInGitRoot)
 							gitInfo[file] = status
 						end)
 					end
-					vim.notify("👾 gitInfo: " .. vim.inspect(gitInfo))
+					local function pathDisplay(_, path)
+						local tail = vim.fs.basename(path)
+						local parent = vim.fs.dirname(path)
+						local gitIcon = gitInfo[path] or " "
+						local out = gitIcon .. " " .. tail .. "  " .. parent
+						local color = gitIcon == "A" and "diffAdded" or "diffChanged"
+						local highlights = {
+							{ { 0, #gitIcon }, color },
+							{ { #out - #parent, #out }, "TelescopeResultsComment" },
+						}
+						return out, highlights
+					end
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
 						file_ignore_patterns = ignoresPattern,
-						path_display = function(_, path)
-							local tail = vim.fs.basename(path)
-							local parent = vim.fs.dirname(path)
-							local gitIcon = gitInfo[path] or "   "
-							local out = gitIcon .. tail .. "  " .. parent
-
-							local highlights = { { { #out - #parent, #out }, "TelescopeResultsComment" } }
-							return out, highlights
-						end,
+						path_display = pathDisplay,
 					}
 				end,
 				desc = "󰭎 Open File",
