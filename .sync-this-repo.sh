@@ -18,7 +18,7 @@ fi
 # changed, the push will fail
 i=0
 while true; do
-	sleep 0.5 # prevent "Cannot rebase on multiple branches"
+	sleep 1 # prevent "Cannot rebase on multiple branches"
 	git pull && git push && exit 0
 	sleep 1
 	i=$((i + 1))
