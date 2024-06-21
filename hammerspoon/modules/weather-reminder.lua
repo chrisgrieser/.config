@@ -49,7 +49,7 @@ local function getOutsideTemp()
 		local outsideNowCoolerThanInside = outTemp < config.insideTemp
 			and not (M.prevOutTemp < config.insideTemp)
 		local outsideNowHotterThanInside = outTemp > config.insideTemp
-			and not (M.PrevOutTemp > config.insideTemp)
+			and not (M.prevOutTemp > config.insideTemp)
 		M.prevOutTemp = outTemp
 
 		if outsideNowCoolerThanInside then
