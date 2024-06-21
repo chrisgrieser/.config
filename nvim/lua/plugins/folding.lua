@@ -3,7 +3,6 @@ return {
 		"chrisgrieser/nvim-origami",
 		event = "BufReadPost", -- later will not save folds
 		opts = true,
-		cond = false,
 	},
 	{
 		"kevinhwang91/nvim-ufo",
