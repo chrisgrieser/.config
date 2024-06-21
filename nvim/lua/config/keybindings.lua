@@ -301,6 +301,8 @@ keymap(
 )
 keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
 
+vim.opt.number = true
+
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
