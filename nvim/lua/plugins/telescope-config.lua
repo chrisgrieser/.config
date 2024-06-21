@@ -110,6 +110,7 @@ local function telescopeConfig()
 						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
 						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "") -- root in dotfiles
 						:match("/(.-)/") -- highest parent
+						or ""
 					local tail = vim.fs.basename(path)
 					local out = tail .. "  " .. project
 
@@ -327,6 +328,7 @@ return {
 					local function pathDisplay(_, path)
 						local tail = vim.fs.basename(path)
 						local parent = vim.fs.dirname(path)
+						if parent == "." then parent = "" end
 						local gitIcon = gitInfo[path] or " "
 						local out = gitIcon .. " " .. tail .. "  " .. parent
 						local color = gitIcon == "M" and "diffChanged" or "diffAdded"

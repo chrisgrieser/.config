@@ -137,6 +137,7 @@ function M.toggleHidden(prompt_bufnr)
 		find_command = findCommand,
 		cwd = cwd,
 		file_ignore_patterns = ignore,
+		path_display = { "filename_first" }, -- cannot easily actual path_display
 	}
 end
 
