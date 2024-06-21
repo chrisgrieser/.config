@@ -1,13 +1,24 @@
 #!/usr/bin/env zsh
 # updates README.md with current list of installed plugins
 
-nvim_readme="$HOME/.config/nvim/README.md"
+# CONFIG
+nvim_readme="./nvim/README.md"
 last_line_before_plugins="## All installed plugins"
+lazy_lock="./nvim/.lazy-lock.json"
+lazy_specs_path="./nvim/lua/plugins"
 
-sed -i '' -n "1,/{{ last_line_before_plugins }}/p" {{ nvim_readme }}
+#───────────────────────────────────────────────────────────────────────────────
 
-grep --only-matching --no-filename --max-count=1 "url = .*" \
-	{{ location_of_installed_plugins }}/*/.git/config |
-	sed 's/.git$//' | cut -c7- |
-	sed -E 's|https://github.com/(.*/.*)|- [\1](&)|' |
-	sort --ignore-case nvim_readme }} >> {{
+# remove old lines
+# sed -i '' -n "1,/$last_line_before_plugins/p" "$nvim_readme"
+
+plugin_names=$(sed '1d;$d' "$lazy_lock" | cut -d'"' -f2)
+
+echo "$lines" | while read -r line; do
+	echo "$line"
+done
+	
+
+
+
+

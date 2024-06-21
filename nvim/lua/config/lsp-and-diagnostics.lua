@@ -4,9 +4,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
 	if err or not result then return end
 
-	-- save all
-	vim.cmd.wall()
-
 	-- count changes
 	local changes = result.changes or result.documentChanges or {}
 	local changedFiles = vim.iter(vim.tbl_keys(changes))
@@ -17,6 +14,9 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	for _, change in pairs(changes) do
 		changeCount = changeCount + #(change.edits or change)
 	end
+
+	-- save all, if more than one file changed
+	if #changedFiles > 1 then vim.cmd.wall() end
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
