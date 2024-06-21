@@ -319,7 +319,7 @@ return {
 						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
 						gitResult = (gitResult or ""):gsub("\n$", "")
 						vim.iter(vim.split(gitResult, "\n")):each(function(line)
-							local status = vim.trim(line:sub(1, 2)):sub(1, 1)
+							local status = line:sub(1, 2):match("%S")
 							local file = line:sub(4 + pathInGitRoot)
 							gitInfo[file] = status
 						end)
@@ -329,7 +329,7 @@ return {
 						local parent = vim.fs.dirname(path)
 						local gitIcon = gitInfo[path] or " "
 						local out = gitIcon .. " " .. tail .. "  " .. parent
-						local color = gitIcon == "A" and "diffAdded" or "diffChanged"
+						local color = gitIcon == "M" and "diffChanged" or "diffAdded"
 						local highlights = {
 							{ { 0, #gitIcon }, color },
 							{ { #out - #parent, #out }, "TelescopeResultsComment" },
