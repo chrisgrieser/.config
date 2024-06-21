@@ -55,6 +55,7 @@ while read -r repo; do
 		git push && echo
 
 	cd ..
+	sleep 0.5 # wait for git to finish
 	rm -rf "$repo"
 	((i++))
 done <<< "$repos_to_update"
