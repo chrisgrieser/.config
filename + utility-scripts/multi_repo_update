@@ -5,7 +5,7 @@ github_username="chrisgrieser"
 repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
 commit_msg="build: update Justfile"
-# set -e
+set -e
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/Justfile" ./Justfile
@@ -51,12 +51,10 @@ while read -r repo; do
 	actions_in_repo
 
 	git add --all && echo &&
-		git commit --amend &&
-		# git commit -m "$commit_msg" && echo &&
-		echo && git push && echo
+		git commit -m "$commit_msg" && echo &&
+		git push && echo
 
 	cd ..
-	sleep 0.5 # wait for git to finish
 	rm -rf "$repo"
 	((i++))
 done <<< "$repos_to_update"

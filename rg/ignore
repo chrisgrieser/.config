@@ -11,7 +11,7 @@
 **/*.pxd/*
 
 # git isn't ignored by default?!
-.git
+.git/
 
 # INFO files
 *INFO*

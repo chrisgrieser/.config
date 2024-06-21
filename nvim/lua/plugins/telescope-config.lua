@@ -100,7 +100,7 @@ local function telescopeConfig()
 				},
 
 				prompt_prefix = "󰝰 ",
-				path_display = { "filename_first", "smart" },
+				path_display = { "filename_first" },
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
