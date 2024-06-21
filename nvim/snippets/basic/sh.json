@@ -107,6 +107,14 @@
     ],
     "prefix": "for each line (read)"
   },
+  "for each line (variable)": {
+    "body": [
+      "echo \"\\$lines\" | while read -r line; do",
+      "\techo \"\\$line\"",
+      "done"
+    ],
+    "prefix": "for each line (variable)"
+  },
   "function": {
     "body": "function ${1:name} {\n\t${0}\n}",
     "prefix": "function"

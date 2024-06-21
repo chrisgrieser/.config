@@ -115,8 +115,6 @@ function M.toggleHidden(prompt_bufnr)
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local title = "Find Files: " .. vim.fs.basename(cwd)
 	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
-	local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
-	table.insert(ignore, relPathCurrent)
 	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
 
 	-- hidden status not stored, but title is, so we determine the previous state via title
@@ -127,6 +125,10 @@ function M.toggleHidden(prompt_bufnr)
 		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
 		title = title .. " (--hidden --no-ignore)"
 	end
+
+	-- ignore the existing current path due to using `rg --sortr=modified`
+	local relPathCurrent = table.remove(current_picker.file_ignore_patterns)
+	table.insert(ignore, relPathCurrent)
 
 	require("telescope.actions").close(prompt_bufnr)
 	require("telescope.builtin").find_files {

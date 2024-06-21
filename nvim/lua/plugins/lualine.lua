@@ -113,12 +113,18 @@ local lualineConfig = {
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 				padding = { left = 1, right = 0 },
 			},
-			{ "filetype", icon_only = true, colored = false, padding = { right = 0, left = 1 } },
-			{
+			{ -- filename + fileicon
 				"filename",
 				file_status = false,
 				shortening_target = 30,
-				padding = { right = 1, left = 0 },
+				fmt = function(name)
+					local ok, devicons = pcall(require, "nvim-web-devicons")
+					if not ok then return name end
+					local extension = name:match("%w+$")
+					local icon = devicons.get_icon(name, extension or vim.bo.ft)
+					if not icon then return name end
+					return icon .. " " .. name
+				end,
 			},
 		},
 		lualine_b = {
