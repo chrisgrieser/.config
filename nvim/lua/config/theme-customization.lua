@@ -66,6 +66,7 @@ function M.themeModifications()
 			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
+		updateHl("diffChanged", "guifg=" .. yellow)
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		-- FIX bold and italic having white color, notably the lazy.nvim window

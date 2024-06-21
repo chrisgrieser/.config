@@ -56,7 +56,6 @@
   "sibling-swap.nvim": { "branch": "main", "commit": "0a96720cea3df545d2b389b73d83f25cdd5957ec" },
   "supermaven-nvim": { "branch": "main", "commit": "ec7ae4c8190c96002aa466b1eb4a23aa51e24812" },
   "symbol-usage.nvim": { "branch": "main", "commit": "533846260d3d053aebbf224617cc5294c219a8b1" },
-  "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "f2bfde705ac752c52544d5cfa8b0aee0a766c1ed" },
   "tokyonight.nvim": { "branch": "main", "commit": "81c867c5f638597a82c82094dcb90ed42444dabc" },
