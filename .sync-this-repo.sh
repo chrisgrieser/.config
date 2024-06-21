@@ -17,10 +17,10 @@ fi
 # loop git add-commit-pull-push, since when between add and push files have been
 # changed, the push will fail
 i=0
+sleep 2 # prevent "Cannot rebase on multiple branches"
 while true; do
-	sleep 0.5 # prevent "Cannot rebase on multiple branches"
 	git pull && git push && exit 0
-	sleep 1
+	sleep 2
 	i=$((i + 1))
 	[[ $i -gt 3 ]] && exit 1
 done
