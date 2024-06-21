@@ -140,7 +140,7 @@ local function telescopeConfig()
 					},
 				},
 				layout_strategy = "vertical",
-				preview_title = "Unstaged Files",
+				preview_title = "Files not staged",
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					get_command = function(_, status)
 						local width = vim.api.nvim_win_get_width(status.preview_win)
@@ -177,11 +177,6 @@ local function telescopeConfig()
 				mappings = {
 					i = { ["<C-r>"] = "git_reset_soft" },
 				},
-			},
-			git_bcommits = {
-				prompt_prefix = "󰊢 ",
-				layout_config = { horizontal = { height = 0.99 } },
-				git_command = { "git", "log", "--pretty=%h %s %cr" }, -- add commit time (%cr)
 			},
 			git_branches = {
 				prompt_prefix = " ",
@@ -304,7 +299,6 @@ return {
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = "󰭎 Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = "󰭎 Log" },
-			{ "<leader>gL", function() telescope("git_bcommits") end, desc = "󰭎 Buffer Commits" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = "󰭎 Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
@@ -312,10 +306,10 @@ return {
 				"go",
 				function()
 					-- ignore current file, since using the `rg` workaround puts it on top
-					local ignoresPattern =
+					local ignorePattern =
 						vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2))
-					table.insert(ignoresPattern, relPathCurrent)
+					table.insert(ignorePattern, relPathCurrent)
 
 					-- add git info to file
 					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
@@ -345,7 +339,7 @@ return {
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						file_ignore_patterns = ignoresPattern,
+						file_ignore_patterns = ignorePattern,
 						path_display = pathDisplay,
 					}
 				end,
