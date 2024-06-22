@@ -1,6 +1,8 @@
 #compdef just
 
-# INFO 
+# INFO
+# - using the completions file from `/opt/homebrew/share/zsh/site-functions/_just`
+# - only modification is at line 149, moving variables down
 #───────────────────────────────────────────────────────────────────────────────
 
 autoload -U is-at-least
