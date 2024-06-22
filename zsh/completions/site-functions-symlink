@@ -1,0 +1,1 @@
+/opt/homebrew/share/zsh/site-functions
