@@ -5,7 +5,7 @@
 
 # DELETE CLUTTER & UNNEST SINGLE FILE
 
-cd "$TR_TORRENT_DIR" || return 1 # $TR_TORRENT_DIR is where the downloads are stored
+cd "$TR_TORRENT_DIR" || return 1 # $TR_TORRENT_DIR is where the downloads are placed
 find -E . -regex ".*\.(nfo|md|jpe?g|png|exe|txt)$" -delete
 find . -type d -empty -delete                  # e.g. `Image` folders now empty
 find . -type d -name "Sample" -exec rm -r {} + # Folders with content not accept `-delete`
@@ -21,6 +21,7 @@ done
 
 #───────────────────────────────────────────────────────────────────────────────
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
+# requires enabled remote access in transmission settings
 
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 if [[ ! -x "$(command -v transmission-remote)" ]]; then
