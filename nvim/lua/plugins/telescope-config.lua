@@ -114,7 +114,7 @@ local function telescopeConfig()
 					local tail = vim.fs.basename(path)
 					local out = tail .. "  " .. project
 
-					local highlights = { { { #out - #project, #out }, "TelescopeResultsComment" } }
+					local highlights = { { { #tail, #out }, "TelescopeResultsComment" } }
 					return out, highlights
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
@@ -270,8 +270,15 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		external_dependencies = "rg",
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-		config = telescopeConfig,
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- dependency
+			"nvim-tree/nvim-web-devicons", -- icons
+			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
+		},
+		config = function ()
+			telescopeConfig()
+			require("telescope").load_extension("zf-native")
+		end,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
@@ -313,17 +320,18 @@ return {
 					table.insert(ignorePattern, relPathCurrent)
 
 					-- add git info to file
-					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
 					local gitInfo = {}
-					if gitDir.code == 0 then
+					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
+					local inGitRepo = gitDir.code == 0
+					if inGitRepo then
 						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
 						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
-						gitResult = (gitResult or ""):gsub("\n$", "")
-						vim.iter(vim.split(gitResult, "\n")):each(function(line)
-							local status = line:sub(1, 2)
-							local file = line:sub(4 + pathInGitRoot)
+						local changes = vim.split((gitResult or ""):gsub("\n$", ""), "\n")
+						for _, change in ipairs(changes) do
+							local status = change:sub(1, 2)
+							local file = change:sub(4 + pathInGitRoot)
 							gitInfo[file] = status
-						end)
+						end
 					end
 					local function pathDisplay(_, path)
 						local tail = vim.fs.basename(path)
