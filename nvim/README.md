@@ -58,6 +58,7 @@
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
+- [natecraddock/telescope-zf-native.nvim](https://github.com/natecraddock/telescope-zf-native.nvim)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
