@@ -18,7 +18,7 @@ M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PA
 function M.appHotkey(appName, modifier, key, action)
 	hs.hotkey.bind(modifier, key, function()
 		local frontApp = hs.application.frontmostApplication()
-		if frontApp:name() ~= appName then
+		if frontApp:name() == appName then
 			action()
 		else
 			-- passthrough
