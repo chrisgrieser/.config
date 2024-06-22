@@ -42,8 +42,8 @@ export FZF_DEFAULT_OPTS='
 	--bind=alt-enter:toggle+down,ctrl-a:toggle-all
 '
 
-# updates managed via homebrew https://cli.github.com/manual/gh_help_environment
-export GH_NO_UPDATE_NOTIFIER=1
+# https://cli.github.com/manual/gh_help_environment
+export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 
 # DOCS https://fx.wtf/configuration
 export FX_SHOW_SIZE=true
