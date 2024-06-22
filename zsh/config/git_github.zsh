@@ -57,7 +57,7 @@ function ga {
 
 	local git_status_cmd="git -c core.quotePath=false -c status.color=always status --short --untracked-files"
 	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ; '
-	local add_or_unadd='then git restore --stage -- {2..} ; else git add -- {2..} ; fi'
+	local add_or_unadd='then git restore --staged -- {2..} ; else git add -- {2..} ; fi'
 	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
 	local style
 	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "--dark" || echo "--light")
@@ -208,12 +208,12 @@ function my_commits_today {
 	# shellcheck disable=2016
 	commits=$(gh search commits --author="$username" --committer="$username" --json="repository,commit" \
 		--author-date="$the_day" --sort=author-date --order=asc |
-		yq -P '.[] | (((.commit.committer.date | sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))') 
+		yq -P '.[] | (((.commit.committer.date | sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))')
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed -Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
-			-Ee $'s/(..:..) (.*) –/\e[0;38;5;245m\\1 \e[1;32m\\2/' \
-			-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g'
+		-Ee $'s/(..:..) (.*) –/\e[0;38;5;245m\\1 \e[1;32m\\2/' \
+		-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g'
 	print "\e[1;38;5;245m───── \e[1;34m$count commits\e[1;38;5;245m ─────\e[0m"
 }
 
@@ -344,7 +344,7 @@ checkout commit"
 	elif [[ "$decision" =~ checkout ]]; then
 		git checkout "$last_commit"
 	elif [[ "$decision" =~ restore ]]; then
-		git checkout "$last_commit" -- "$deleted_path"
+		git restore --source="$last_commit" -- "$deleted_path"
 		echo "File restored."
 		open -R "$deleted_path" # reveal in macOS Finder
 	elif [[ "$decision" =~ copy ]]; then
