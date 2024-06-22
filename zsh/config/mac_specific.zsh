@@ -83,6 +83,6 @@ function defaults_diff() {
 		# show context, so the domain can be identified
 		_separator
 		toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
-		grep -C20 "$toGrep" /tmp/after
+		grep -C10 "$toGrep" /tmp/after
 	fi
 }
