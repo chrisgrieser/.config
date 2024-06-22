@@ -8,7 +8,7 @@
 				"all": true,
 				"noConsole": "off",
 				"noUnknownProperty": "off", // css variables, TODO buggy, investigate later
-				"useTopLevelRegex": "info"
+				"useTopLevelRegex": "off" // not useful for JXA
 			},
 			"suspicious": {
 				"noConsoleLog": "info" // JXA does not allow `console.info`, so we need `console.log`
@@ -25,7 +25,8 @@
 			}
 		}
 	},
-	"css": { // opt-in at biome 1.8
+	"css": {
+		// opt-in at biome 1.8
 		"linter": { "enabled": true },
 		"formatter": { "enabled": true }
 	},
