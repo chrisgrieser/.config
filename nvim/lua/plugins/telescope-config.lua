@@ -320,22 +320,22 @@ return {
 						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
 						gitResult = (gitResult or ""):gsub("\n$", "")
 						vim.iter(vim.split(gitResult, "\n")):each(function(line)
-							local status = line:sub(1, 2):match("%S")
+							local status = line:sub(1, 2)
 							local file = line:sub(4 + pathInGitRoot)
 							gitInfo[file] = status
 						end)
 					end
 					local function pathDisplay(_, path)
 						local tail = vim.fs.basename(path)
-						local parent = vim.fs.dirname(path)
-						if parent == "." then parent = "" end
-						local gitIcon = gitInfo[path] or " "
-						local out = gitIcon .. " " .. tail .. "  " .. parent
-						local color = gitIcon == "M" and "diffChanged" or "diffAdded"
+						local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
+						local out = tail .. "  " .. parent
 						local highlights = {
-							{ { 0, #gitIcon }, color },
-							{ { #out - #parent, #out }, "TelescopeResultsComment" },
+							{ { #tail, #out }, "TelescopeResultsComment" },
 						}
+						if gitInfo[path] then
+							local color = gitInfo[path]:find("[MR]") and "diffChanged" or "diffAdded"
+							table.insert(highlights, { { 0, #tail }, color })
+						end
 						return out, highlights
 					end
 
