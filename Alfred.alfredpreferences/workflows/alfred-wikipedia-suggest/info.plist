@@ -197,20 +197,45 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>default</key>
 				<string>en</string>
 				<key>placeholder</key>
-				<string>en</string>
+				<string>en, de</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>The Language you want to search wikipedia in. Use the token from the wikipedia URL, e.g. "en" for the English Wikipedia or "de" for the German one.</string>
+			<string>The language you want to search Wikipedia in. Use the token from the Wikipedia URL, e.g., "en" for the English Wikipedia or "de" for the German one. Set multiple languages by separating them with a comma, for instance "en, de". Note that the more languages you select, the slower the search becomes.</string>
 			<key>label</key>
 			<string>Language Code</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>language_code</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>9</integer>
+				<key>markercount</key>
+				<integer>15</integer>
+				<key>maxvalue</key>
+				<integer>15</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>per language</string>
+			<key>label</key>
+			<string>Number of result</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>results_per_language</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -223,7 +248,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string>Yes</string>
 			</dict>
 			<key>description</key>
-			<string>Directly redirect to Wikiwand (an alternative Wikipedia Skin).</string>
+			<string>Directly redirect to Wikiwand, an alternative Wikipedia Skin.</string>
 			<key>label</key>
 			<string>Use Wikiwand</string>
 			<key>type</key>
