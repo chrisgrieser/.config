@@ -1,7 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-local pluginName = "Magnet"
 local config = {
 	currentFileIcon = "",
 	bufferByLastUsed = {
@@ -20,9 +19,12 @@ local config = {
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
-local function notify(msg, level)
+---@param extraOpts? table
+---@return { id: number }? -- nvim-notify notification record
+local function notify(msg, level, extraOpts)
 	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = pluginName })
+	local opts = vim.tbl_extend("force", { title = "Magnet" }, extraOpts or {})
+	return vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
 ---@nodiscard
@@ -38,7 +40,7 @@ local function hasAltFile(altBufnr)
 	local valid = vim.api.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird rare vim bug
+	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird vim bug
 	local altFileExists = fileExists(vim.api.nvim_buf_get_name(altBufnr))
 
 	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altFileExists
@@ -168,7 +170,7 @@ function M.bufferByLastUsed(dir)
 	vim.cmd.edit(nextBufName)
 
 	-----------------------------------------------------------------------------
-	-- DISPLAY BUFFER-LIST
+	-- NOTIFICATION: DISPLAY BUFFER-LIST
 
 	if not package.loaded["notify"] then return end
 
@@ -185,9 +187,8 @@ function M.bufferByLastUsed(dir)
 	table.insert(bufsDisplay, 1, table.remove(bufsDisplay)) -- move current buffer to top
 
 	---@diagnostic disable-next-line: assign-type-mismatch
-	state.bufNavNotify = vim.notify(table.concat(bufsDisplay, "\n"), vim.log.levels.INFO, {
+	state.bufNavNotify = notify(table.concat(bufsDisplay, "\n"), "info", {
 		timeout = timeoutMs,
-		title = pluginName,
 		animate = false,
 		stages = "no_animation",
 		hide_from_history = true,
@@ -206,24 +207,25 @@ end
 
 local changedFileNotif
 function M.gotoChangedFiles()
-	-- get numstat
-	local newFiles =
-		vim.system({ "git", "ls-files", "--others", "--exclude-standard" }):wait().stdout
-	if newFiles ~= "" then
-		for _, file in ipairs(vim.split(newFiles, "\n")) do
-			vim.system({ "git", "add", "--intent-to-add", "--", file }):wait()
-		end
+	-- include new files in diff stats
+	local gitLsResponse = vim.system({ "git", "ls-files", "--others", "--exclude-standard" }):wait()
+	if gitLsResponse.code ~= 0 then
+		notify("Not in git repo", "warn")
+		return
 	end
-	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait() -- so new files show up in `--numstat`
+	local stdout = vim.trim(gitLsResponse.stdout)
+	local newFiles = stdout ~= "" and vim.split(stdout, "\n") or {}
+	for _, file in ipairs(newFiles) do
+		vim.system({ "git", "add", "--intent-to-add", "--", file }):wait()
+	end
+
+	-- get numstat
 	local gitResponse = vim.system({ "git", "diff", "--numstat" }):wait()
 	local numstat = vim.trim(gitResponse.stdout)
 	local numstatLines = vim.split(numstat, "\n")
 
 	-- GUARD
-	if gitResponse.code ~= 0 then
-		notify("Not in git repo", "warn")
-		return
-	elseif numstat == "" then
+	if numstat == "" then
 		notify("No changes found.", "info")
 		return
 	end
@@ -298,8 +300,7 @@ function M.gotoChangedFiles()
 	end
 	local msg = table.concat(listOfChangedFiles, "\n")
 
-	changedFileNotif = vim.notify(msg, vim.log.levels.INFO, {
-		title = pluginName,
+	changedFileNotif = notify(msg, "info", {
 		replace = changedFileNotif and changedFileNotif.id,
 		animate = false,
 		hide_from_history = true,
