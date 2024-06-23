@@ -22,6 +22,7 @@ M.insertMode = {
 	["<Up>"] = "cycle_history_prev",
 	["<Down>"] = "cycle_history_next",
 	["<D-a>"] = "toggle_all",
+	["<D-s>"] = "smart_send_to_qflist",
 
 	["<M-CR>"] = { -- mapping consistent with fzf-multi-select
 		function(prompt_bufnr)
@@ -46,14 +47,6 @@ M.insertMode = {
 		end,
 		type = "action",
 		opts = { desc = " cwd up" },
-	},
-	["<D-s>"] = {
-		function(prompt_bufnr)
-			require("telescope.actions").smart_send_to_qflist(prompt_bufnr)
-			vim.cmd.cfirst()
-		end,
-		type = "action",
-		opts = { desc = " Send to Quickfix" },
 	},
 	["<D-p>"] = {
 		function(prompt_bufnr) require("telescope.actions.layout").cycle_layout_next(prompt_bufnr) end,
