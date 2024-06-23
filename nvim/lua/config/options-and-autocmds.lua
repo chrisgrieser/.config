@@ -197,8 +197,8 @@ local autoCd = {
 		"info.plist", -- Alfred workflows
 	},
 	parentOfRoot = {
-		".obsidian", -- internal Obsi folder
 		".config",
+		".obsidian", -- internal Obsidian folder
 		"com~apple~CloudDocs", -- iCloud
 	},
 }
@@ -295,12 +295,12 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 
 -- SKELETONS (TEMPLATES)
 local skeletons = {
-	python = { "**/*.py", "general.py" },
+	python = { "**/*.py", "template.py" },
 	lua = { vim.g.localRepos .. "/**/*.lua", "module.lua" },
-	applescript = { "**/*.applescript", "general.applescript" },
+	applescript = { "**/*.applescript", "template.applescript" },
 	javascript = { "**/Alfred.alfredpreferences/workflows/**/*.js", "jxa.js" },
 	just = { "**/*Justfile", "justfile.just" },
-	sh = { "**/*.sh", "general.zsh" },
+	sh = { "**/*.sh", "template.zsh" },
 	toml = { "**/*typos.toml", "typos.toml" },
 	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
 }
@@ -355,9 +355,14 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			})
 		end
 
+		-- move to 1st item (`pcall` as deleting the list also triggers `QuickFixCmdPost`)
+		pcall(vim.cmd.cfirst)
+
+		-- clear signs
 		local group = vim.api.nvim_create_augroup("quickfix_signs", { clear = true })
 		vim.api.nvim_buf_clear_namespace(0, quickfix_ns, 0, -1)
 
+		-- set signs
 		for _, qf in pairs(vim.fn.getqflist()) do
 			if vim.api.nvim_buf_is_loaded(qf.bufnr) then
 				setSigns(qf)

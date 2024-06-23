@@ -115,6 +115,7 @@ return {
 					ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
+					ccc.picker.css_name,
 					ccc.picker.ansi_escape(),
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
@@ -157,7 +158,6 @@ return {
 				trim_prompt = true,
 				border = vim.g.borderStyle,
 				relative = "editor",
-				title_pos = "left",
 				prefer_width = 45,
 				min_width = 0.4,
 				max_width = 0.8,
