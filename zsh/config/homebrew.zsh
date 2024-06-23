@@ -21,7 +21,7 @@ alias depending_on='brew uses --installed --recursive'
 # $1: count of formulae/casks to list, default 6
 function recent_updates() {
 	local count=${1:-6}
-	_print-section "Recently updated Formulae" "no_newline_before"
+	_print-section "Recently updated Formulae"
 	brew list -t --formulae | head -n"$count" | rs
 
 	_print-section "Recently updated Casks"
@@ -29,9 +29,7 @@ function recent_updates() {
 }
 
 # $1: title
-# $2: whether to add a newline before
 function _print-section() {
-	[[ -z "$2" ]] && echo
 	print "\e[1;34m$1\e[0m"
 	_separator
 }
@@ -66,7 +64,7 @@ function update_cmdline_tools {
 }
 
 function update() {
-	_print-section "Homebrew" "no_newline_before"
+	_print-section "Homebrew"
 	brew update
 	brew upgrade
 	brew cleanup
@@ -98,7 +96,7 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info & doctor" "no_newline_before"
+	_print-section "brew info & doctor"
 	brew info
 	brew doctor
 
