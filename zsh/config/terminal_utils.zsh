@@ -65,9 +65,8 @@ function s {
 	selected=$(
 		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
 			--no-config --smart-case --ignore-file="$HOME/.config/rg/ignore" |
-			fzf --ansi --select-1 \
-				--delimiter=":" --nth=1 --with-nth=1,2 \
-				--preview='bat {1} --color=always --style=header,numbers --highlight-line={2} --line-range={2}: ' \
+			fzf --ansi --select-1 --delimiter=":" \
+				--preview="bat {1} --no-config --color=always --highlight-line={2} --line-range={2}: " \
 				--preview-window="60%,top,border-down" \
 				--height="100%" # required for for wezterm's `pane:is_alt_screen_active()`
 	)
@@ -102,8 +101,8 @@ function sr {
 	[[ -z "$files" ]] && return 1
 
 	echo "$files" | while read -r file; do
-		rg "$search" --pcre2 --case-sensitive --replace="$replace" --passthrough \
-			--no-line-number --no-config "$file" > /tmp/rgpipe &&
+		rg --no-config "$search" --pcre2 --case-sensitive --replace="$replace" --passthrough \
+			--no-line-number "$file" > /tmp/rgpipe &&
 			mv /tmp/rgpipe "$file"
 	done
 }

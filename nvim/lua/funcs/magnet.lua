@@ -62,7 +62,8 @@ end
 function M.altFileStatus()
 	local altBufNr = vim.fn.bufnr("#")
 	local altOld = altOldfile()
-	local name, icon
+	local icon = "#"
+	local name
 
 	if hasAltFile(altBufNr) then
 		local altPath = vim.api.nvim_buf_get_name(altBufNr)
@@ -72,7 +73,7 @@ function M.altFileStatus()
 		local ext = altFile:match("%w+$")
 		local altBufFt = vim.api.nvim_get_option_value("filetype", { buf = altBufNr })
 		local ok, devicons = pcall(require, "nvim-web-devicons")
-		icon = ok and devicons.get_icon(altFile, ext or altBufFt) or "#"
+		if ok then icon = devicons.get_icon(altFile, ext) and devicons.get_icon(altFile, altBufFt) end
 
 		-- name: consider if alt and current file have same basename
 		local curFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -206,6 +207,13 @@ end
 local changedFileNotif
 function M.gotoChangedFiles()
 	-- get numstat
+	local newFiles =
+		vim.system({ "git", "ls-files", "--others", "--exclude-standard" }):wait().stdout
+	if newFiles ~= "" then
+		for _, file in ipairs(vim.split(newFiles, "\n")) do
+			vim.system({ "git", "add", "--intent-to-add", "--", file }):wait()
+		end
+	end
 	vim.system({ "git", "add", "--intent-to-add", "--all" }):wait() -- so new files show up in `--numstat`
 	local gitResponse = vim.system({ "git", "diff", "--numstat" }):wait()
 	local numstat = vim.trim(gitResponse.stdout)
