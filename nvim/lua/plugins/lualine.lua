@@ -121,7 +121,7 @@ local lualineConfig = {
 					local ok, devicons = pcall(require, "nvim-web-devicons")
 					if not ok then return name end
 					local extension = name:match("%w+$")
-					local icon = devicons.get_icon(name, extension or vim.bo.ft)
+					local icon = devicons.get_icon(name, extension) or devicons.get_icon(name, vim.bo.ft)
 					if not icon then return name end
 					return icon .. " " .. name
 				end,
