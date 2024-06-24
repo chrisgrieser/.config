@@ -8,7 +8,7 @@ local config = {
 		maxBufAgeMins = 10,
 	},
 	gotoChangedFiles = {
-		maxFiles = 5,
+		maxFiles = 4,
 	},
 	altFile = {
 		statusbarMaxDisplayLen = 25,
@@ -75,7 +75,7 @@ function M.altFileStatus()
 		local ext = altFile:match("%w+$")
 		local altBufFt = vim.api.nvim_get_option_value("filetype", { buf = altBufNr })
 		local ok, devicons = pcall(require, "nvim-web-devicons")
-		if ok then icon = devicons.get_icon(altFile, ext) and devicons.get_icon(altFile, altBufFt) end
+		if ok then icon = devicons.get_icon(altFile, ext) or devicons.get_icon(altFile, altBufFt) end
 
 		-- name: consider if alt and current file have same basename
 		local curFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
