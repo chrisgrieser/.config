@@ -3,7 +3,6 @@ vim.bo.commentstring = "; %s" -- add space
 
 -- for `:InspectTree`
 if vim.bo.buftype == "nofile" then
-	vim.opt_local.scrolloff = 10
 	vim.opt_local.listchars:append { lead = "│" }
 	vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true })
 end

@@ -48,7 +48,8 @@ local function winToTheSide()
 	if masto:isHidden() then masto:unhide() end
 
 	-- not using mainWindow to not unintentionally move Media or new-tweet window
-	local win = masto:findWindow("Mona")
+	local mastodonUsername = "pseudometa"
+	local win = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
 	if win then
 		win:setFrame(wu.toTheSide)
 		win:raise()

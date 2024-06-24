@@ -7,7 +7,7 @@ return {
 		event = "CursorMoved",
 		opts = true,
 		keys = {
-			{ "<leader>of", function() vim.opt.scrolloff = 13 end, desc = "⇓ Fix Scrolloff" },
+			{ "<leader>of", function() vim.opt.scrolloff = vim.g.baseScrolloff end, desc = "⇓ Fix Scrolloff" },
 		},
 	},
 	{ -- indentation guides

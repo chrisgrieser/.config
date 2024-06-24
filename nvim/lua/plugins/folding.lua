@@ -13,7 +13,7 @@ return {
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },
 			{ "zr", function()
 				require("ufo").openFoldsExceptKinds { "comment", "imports" }
-				vim.opt.scrolloff = 13 -- fix scrolloff setting sometimes being off
+				vim.opt.scrolloff = vim.g.baseScrolloff -- fix scrolloff setting sometimes being off
 			end, desc = "󱃄 Open All Regular Folds" },
 			{ "zR", function() require("ufo").openFoldsExceptKinds {} end, desc = "󱃄 Open All Folds" },
 			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󱃄 Close L1 Folds" },
