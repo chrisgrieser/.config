@@ -30,6 +30,7 @@ function recent_updates() {
 
 # $1: title
 function _print-section() {
+	echo
 	print "\e[1;34m$1\e[0m"
 	_separator
 }

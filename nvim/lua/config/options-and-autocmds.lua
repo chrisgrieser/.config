@@ -40,7 +40,8 @@ opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
 opt.sidescrolloff = 12
-opt.scrolloff = 12
+vim.g.baseScrolloff = 12 -- so scrolloff-changing function can use this
+opt.scrolloff = vim.g.baseScrolloff
 
 -- mostly set by .editorconfig, therefore only fallback
 opt.expandtab = false
@@ -305,7 +306,7 @@ local skeletons = {
 	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
 }
 -- not `BufNewFile` as it doesn't trigger on files created outside vim
-vim.api.nvim_create_autocmd("FileType", { 
+vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
