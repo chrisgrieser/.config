@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end
 		local firstWord = vim.split(progress.title, " ")[1]:lower()
 
-		local text = ("%s %s %s"):format(icons[idx], clientName, firstWord)
+		local text = table.concat({ icons[idx], clientName, firstWord }, " ")
 		progressText = progress.kind == "end" and "" or text
 	end,
 })
