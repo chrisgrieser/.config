@@ -3,7 +3,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 search_trigger: OFF
-search_shortcut: META+ALT+CTRL+X # = Hyper+X
 
 show_icon: false
 show_notifications: true
