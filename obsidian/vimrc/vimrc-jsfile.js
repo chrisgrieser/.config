@@ -317,6 +317,11 @@ function highlightsAndStrikthrusInLine(action) {
 	editor.setLine(lnum, updatedLine);
 }
 
+function lastLinkInFile() {
+	const lastOccurrence = editor.getValue().lastIndexOf("[[");
+	editor.setCursor(editor.offsetToPos(lastOccurrence));
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 // STUFF FOR DATAVIEWJS
 
@@ -324,9 +329,9 @@ function toggleJsLineComment() {
 	const cursor = editor.getCursor();
 	const text = editor.getLine(cursor.line);
 
-	const [_, indent, comment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
-	const updatedText = comment ? indent + textWithoutComment : indent + "// " + textWithoutComment;
-	cursor.ch = comment ? cursor.ch - 3 : cursor.ch + 3;
+	const [_, indent, hasComment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
+	const updatedText = indent + (hasComment ? " // " : "") + textWithoutComment;
+	cursor.ch += hasComment ? -3 : 3;
 
 	editor.setLine(cursor.line, updatedText);
 	editor.setCursor(cursor);
