@@ -44,6 +44,9 @@ end
 
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup("plugins", {
+	-- PENDING https://github.com/folke/lazy.nvim/issues/1548
+	rocks = { enabled = false },
+
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
 	dev = {
