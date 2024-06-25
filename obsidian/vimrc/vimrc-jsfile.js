@@ -45,17 +45,16 @@ function inspectWordCount() {
 	const add1000Sep = (/** @type {number} */ num) =>
 		num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-	const textNoFrontmatter = editor
+	const body = editor
 		.getValue()
 		.replace(/^---\n.*?\n---\n/s, "")
 		.trim();
-	const charCount = textNoFrontmatter.length;
-	const charNoSpacesCount = textNoFrontmatter.replace(/%s+/g, "").length;
-	const wordCount = textNoFrontmatter.split(/\s+/).length;
+	const charCount = body.length;
+	const charNoSpacesCount = body.replace(/\s+/g, "").length;
+	const wordCount = body.split(/\s+/).length;
 
 	const msg = [
-		`Chars: ${add1000Sep(charCount)}`,
-		`Chars (no spaces): ${add1000Sep(charNoSpacesCount)}`,
+		`Chars: ${add1000Sep(charCount)} (${add1000Sep(charNoSpacesCount)})`,
 		`Words: ${add1000Sep(wordCount)}`,
 	].join("\n");
 	new Notice(msg, 5000);
@@ -104,7 +103,8 @@ function openAppearanceSettings() {
 	setting.open();
 	setting.openTabById("appearance");
 	// scroll fully down to access snippets more quickly
-	setting.activeTab.containerEl.scrollTop = setting.activeTab.containerEl.scrollHeight;
+	const container = setting.activeTab.containerEl;
+	container.scrollTop = container.scrollHeight;
 }
 
 function openDynamicHighlightsSettings() {
@@ -236,7 +236,7 @@ function toggleLowercaseTitleCase() {
 function openNextLink(where) {
 	function getLinkRange(/** @type {string} */ text) {
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(\)/;
-		//        ^         (    url / obsidian URI   )( wikilink )(markdown link)
+		//                 (    url / obsidian URI    )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
 		if (!linkMatch?.index) return { start: -1, end: -1 };
 		const start = linkMatch.index;
@@ -318,7 +318,7 @@ function highlightsAndStrikthrusInLine(action) {
 	editor.setLine(lnum, updatedLine);
 }
 
-function lastLinkInFile() {
+function gotoLastLinkInFile() {
 	const lastOccurrence = editor.getValue().lastIndexOf("[[");
 	editor.setCursor(editor.offsetToPos(lastOccurrence));
 }

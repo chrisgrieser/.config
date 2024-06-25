@@ -2,7 +2,8 @@
 " LEADER
 
 " Can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
+" However, it needs to be unmapped, to not trigger default behavior: 
+" https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -14,7 +15,7 @@ set clipboard=unnamed
 " Y consistent with D and C to the end of line
 nnoremap Y y$
 
-" don't pollute the register (HACK since we can't map to `"_x` or `"_C`)
+" don't pollute the register (HACK since we can't map to `"_x` or `"_C` directly)
 nnoremap C "_c$
 nnoremap x "_dl
 " nnoremap c "_c " BUG not working with vimrc plugin
@@ -111,8 +112,8 @@ nnoremap ö ;
 nnoremap Ö ,
 
 " go to last link in file
-exmap lastLinkInFile jsfile Meta/vimrc-jsfile.js { lastLinkInFile() }
-nnoremap g. :lastLinkInFile
+exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
+nnoremap g. :gotoLastLinkInFile
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
