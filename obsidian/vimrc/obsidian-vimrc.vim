@@ -228,6 +228,9 @@ nnoremap <S-Space> "_daw
 exmap smartMerge jsfile Meta/vimrc-jsfile.js { smartMerge() }
 nnoremap M :smartMerge
 
+" [s]plit line
+nnoremap ,s i<CR><CR><Esc>
+
 " o and O (respecting list or blockquote)
 exmap blankBelow jsfile Meta/vimrc-jsfile.js { smartInsertBlank("below") }
 nnoremap o :blankBelow
@@ -285,7 +288,7 @@ nnoremap ,W :saveWorkspace
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface
 
-" Critic Markup: accept all
+" Rephraser: [a]ccept/[r]eject
 exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
 nnoremap ,a :acceptSuggestionsInLine
 exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrusInLine("reject") }
@@ -308,7 +311,7 @@ exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.
 nnoremap ,iv :inspectChromeVersion
 
 "───────────────────────────────────────────────────────────────────────────────
-" PLUGIN- AND SETTING-RELATED BINDINGS
+" META: PLUGIN- AND SETTING-RELATED BINDINGS
 
 exmap updatePlugins jsfile Meta/vimrc-jsfile.js { updatePlugins() }
 nnoremap ,pp :updatePlugins
@@ -343,7 +346,7 @@ nnoremap ,pc :cycleColorscheme
 
 " Open this vimrc file
 exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
-nnoremap <C-,> :openVimrc
+nnoremap g, :openVimrc
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE

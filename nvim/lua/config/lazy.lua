@@ -55,7 +55,6 @@ require("lazy").setup("plugins", {
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
 	git = { log = { "--since=7 days ago" } }, -- Lazy log shows commits since last x days
-	install = { colorscheme = { "default" } }, -- colorschemes to use during installation
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
@@ -105,19 +104,11 @@ require("lazy").setup("plugins", {
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
+			-- stylua: ignore
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
-				-- stylua: ignore
-				"matchparen",
-				"matchit",
-				"netrwPlugin",
-				"man",
-				"tutor",
-				"health",
-				"tohtml",
-				"gzip",
-				"zipPlugin",
-				"tarPlugin",
+				"matchparen", "matchit", "netrwPlugin", "man", "tutor", "health",
+				"tohtml", "gzip", "zipPlugin", "tarPlugin",
 			},
 		},
 	},
