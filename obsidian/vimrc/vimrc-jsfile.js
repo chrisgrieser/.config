@@ -38,12 +38,13 @@ function toggleLineNumbers() {
 
 function clearNotices() {
 	const allNotices = activeDocument.body.getElementsByClassName("notice");
-	for (const el of allNotices) {
-		el.hide();
-	}
+	for (const el of allNotices) el.hide();
 }
 
 function inspectWordCount() {
+	const add1000Sep = (/** @type {number} */ num) =>
+		num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 	const textNoFrontmatter = editor
 		.getValue()
 		.replace(/^---\n.*?\n---\n/s, "")
@@ -53,9 +54,9 @@ function inspectWordCount() {
 	const wordCount = textNoFrontmatter.split(/\s+/).length;
 
 	const msg = [
-		`Chars: ${charCount}`,
-		`Chars (no spaces): ${charNoSpacesCount}`,
-		`Words: ${wordCount}`,
+		`Chars: ${add1000Sep(charCount)}`,
+		`Chars (no spaces): ${add1000Sep(charNoSpacesCount)}`,
+		`Words: ${add1000Sep(wordCount)}`,
 	].join("\n");
 	new Notice(msg, 5000);
 }
@@ -327,9 +328,9 @@ function lastLinkInFile() {
 
 function toggleJsLineComment() {
 	const cursor = editor.getCursor();
-	const text = editor.getLine(cursor.line);
+	const lineText = editor.getLine(cursor.line);
 
-	const [_, indent, hasComment, textWithoutComment] = text.match(/^(\s*)(\/\/ )?(.*)/) || [];
+	const [_, indent, hasComment, textWithoutComment] = lineText.match(/^(\s*)(\/\/ )?(.*)/) || [];
 	const updatedText = indent + (hasComment ? " // " : "") + textWithoutComment;
 	cursor.ch += hasComment ? -3 : 3;
 
