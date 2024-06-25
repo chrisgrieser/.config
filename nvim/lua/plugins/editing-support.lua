@@ -49,7 +49,8 @@ return {
 			},
 
 			config_internal_pairs = {
-				{ "'", "'", nft = { "markdown" } }, -- disable in markdown, since used as apostroph
+				{ "'", "'", nft = { "markdown" } }, -- since used as apostroph
+				{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
 			},
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics
