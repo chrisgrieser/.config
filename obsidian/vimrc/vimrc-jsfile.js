@@ -112,8 +112,8 @@ function openDynamicHighlightsSettings() {
 	setting.open();
 	setting.openTabById("obsidian-dynamic-highlights");
 
+	// timeout to ensure highlight colors are loaded
 	setTimeout(() => {
-		// timeout to ensure highlight colors are loaded
 		// edit first custom highlight item
 		setting.activeTab.containerEl.find(".highlighter-container").find(".mod-cta").click();
 
