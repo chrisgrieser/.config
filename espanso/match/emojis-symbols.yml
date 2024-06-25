@@ -24,6 +24,10 @@ matches:
   #─────────────────────────────────────────────────────────────────────────────
   # macOS symbols
   - { triggers: ["!ctrl", "!control"], replace: ⌃ }
+  - { trigger: "!up", replace: ↑ }
+  - { trigger: "!down", replace: ↓ }
+  - { trigger: "!left", replace: ← }
+  - { trigger: "!right", replace: → }
   - { trigger: "!space", replace: ␣ }
   - { trigger: "!shift", replace: ⇧ }
   - { trigger: "!cmd", replace: ⌘ }
