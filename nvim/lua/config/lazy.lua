@@ -8,20 +8,6 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 --------------------------------------------------------------------------------
--- HELPERS
-
-local keymap = require("config.utils").uniqueKeymap
-local notify = require("config.utils").notify
-
-local function getModule(plugin)
-	local specRoot = require("lazy.core.config").options.spec.import
-	local module = (plugin._.super and not plugin._.super._.dep) and plugin._.super._.module
-		or plugin._.module
-	if not module then return "lazy.nvim" end
-	return module:sub(#specRoot + 2)
-end
-
---------------------------------------------------------------------------------
 -- LAZY WINDOW
 
 -- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
@@ -55,7 +41,7 @@ require("lazy").setup("plugins", {
 				function(plugin)
 					local url = plugin.url:gsub("%.git$", "")
 					local issue = vim.api.nvim_get_current_line():match("#(%d+)")
-					vim.ui.open(url .. "/issues/" .. issue)
+					if issue then vim.ui.open(url .. "/issues/" .. issue) end
 				end,
 				desc = " Open issue",
 			},
@@ -89,6 +75,9 @@ require("lazy.view.config").keys.details = "<Tab>"
 
 --------------------------------------------------------------------------------
 -- KEYMAPS FOR NVIM TRIGGERING LAZY
+local keymap = require("config.utils").uniqueKeymap
+local notify = require("config.utils").notify
+
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
@@ -124,43 +113,36 @@ keymap("n", "g,", function()
 	})
 	local specRoot = require("lazy.core.config").options.spec.import
 	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
-
-	local handler = vim.loop.fs_scandir(specPath)
+	local handler = vim.loop.fs_scandir(specPath) or nil
 	if not handler then return end
-	local specFiles = {}
+
+	local allPlugins = {}
 	repeat
-		local file, type = vim.loop.fs_scandir_next(handler)
-		if type == "file" then table.insert(specFiles, specPath .. "/" .. file) end
+		local file, kind = vim.loop.fs_scandir_next(handler)
+		if kind == "file" and file then
+			local moduleName = file:gsub("%.lua$", "")
+			local module = require(specRoot .. "." .. moduleName)
+			if type(module[1]) == "string" then module = { module } end
+			local plugins = vim.iter(module)
+				:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
+				:totable()
+			vim.list_extend(allPlugins, plugins)
+		end
 	until not file
 
 	vim.ui.select(allPlugins, {
 		prompt = "󰒲 Goto Config",
-		format_item = function(plugin) return plugin.name end,
+		format_item = function(plugin)
+			local icon = pluginTypeIcons[plugin.module] or "󰒓 "
+			return icon .. vim.fs.basename(plugin.repo)
+		end,
 	}, function(plugin)
 		if not plugin then return end
-
-		local module = getModule(plugin):gsub("%.", "/")
-		local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
-		local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
+		local filepath = specPath .. "/" .. plugin.module .. ".lua"
+		local repo = plugin.repo:gsub("/", "\\/") -- escape slashes for `:edit`
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 	end)
 end, { desc = "󰒲 Goto Plugin Config" })
-
-keymap("n", "gp", function()
-	-- colored icons
-	vim.api.nvim_create_autocmd("FileType", {
-		once = true,
-		pattern = "TelescopeResults",
-		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
-	})
-	vim.ui.select(require("lazy").plugins(), {
-		prompt = "󰒲 Local Code",
-		format_item = function(plugin) return plugin.name end,
-	}, function(plugin)
-		if not plugin then return end
-		require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
-	end)
-end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS
@@ -170,7 +152,7 @@ local function checkForPluginUpdates()
 	local threshold = 20
 	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
 	if numberOfUpdates < threshold then return end
-	notify("Lazy", ("󱧕 %s plugin updates"):format(numberOfUpdates))
+	notify("Lazy", ("󱧕 %d plugin updates"):format(numberOfUpdates))
 end
 
 local function checkForDuplicateKeys()
