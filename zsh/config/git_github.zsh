@@ -300,7 +300,7 @@ function pickaxe {
 	print "\e[1;36mgit checkout {hash}^\e[0m"
 	echo
 
-	_gitlog -G"$1" --regexp-ignore-case --follow
+	git log -G"$1" --regexp-ignore-case
 }
 
 # search for [g]it [d]eleted [f]ile

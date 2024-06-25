@@ -116,8 +116,9 @@ local lualineConfig = {
 			{ -- filename + fileicon
 				"filename",
 				file_status = false,
-				shortening_target = 30,
 				fmt = function(name)
+					local maxLength = 25
+					if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
 					local ok, devicons = pcall(require, "nvim-web-devicons")
 					if not ok then return name end
 					local extension = name:match("%w+$")

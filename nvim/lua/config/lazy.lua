@@ -21,24 +21,6 @@ local function getModule(plugin)
 	return module:sub(#specRoot + 2)
 end
 
----@param mode "browse" | "config"
-local function onPlugin(plugin, mode)
-	if mode == "browse" then
-		require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
-	elseif mode == "config" then
-		if plugin[1] == "folke/lazy.nvim" then
-			local pathOfThisFile = debug.getinfo(1).source:sub(2)
-			vim.cmd.edit(pathOfThisFile)
-		else
-			local specRoot = require("lazy.core.config").options.spec.import
-			local module = getModule(plugin):gsub("%.", "/")
-			local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
-			local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
-			vim.cmd(("edit +/%q %s"):format(repo, filepath))
-		end
-	end
-end
-
 --------------------------------------------------------------------------------
 -- LAZY WINDOW
 
@@ -76,20 +58,6 @@ require("lazy").setup("plugins", {
 					vim.ui.open(url .. "/issues/" .. issue)
 				end,
 				desc = " Open issue",
-			},
-			["gp"] = {
-				function(plugin)
-					vim.cmd.close()
-					onPlugin(plugin, "browse")
-				end,
-				desc = "󰭎 Open code",
-			},
-			["g,"] = {
-				function(plugin)
-					vim.cmd.close()
-					onPlugin(plugin, "config")
-				end,
-				desc = "󰣖 Goto plugin config",
 			},
 		},
 	},
@@ -147,28 +115,52 @@ local pluginTypeIcons = {
 	["lualine"] = "󰇘 ",
 }
 
----@param mode "browse" | "config"
-local function lazyPluginSearch(mode)
+keymap("n", "g,", function()
 	-- colored icons
 	vim.api.nvim_create_autocmd("FileType", {
 		once = true,
 		pattern = "TelescopeResults",
 		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
 	})
+	local specRoot = require("lazy.core.config").options.spec.import
+	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
 
-	vim.ui.select(require("lazy").plugins(), {
-		prompt = mode == "browse" and "󰒲 Local Code" or "󰒲 Goto Config",
-		format_item = function(plugin)
-			local icon = pluginTypeIcons[getModule(plugin)] or "󰣖 "
-			return icon .. vim.fs.basename(plugin[1])
-		end,
+	local handler = vim.loop.fs_scandir(specPath)
+	if not handler then return end
+	local specFiles = {}
+	repeat
+		local file, type = vim.loop.fs_scandir_next(handler)
+		if type == "file" then table.insert(specFiles, specPath .. "/" .. file) end
+	until not file
+
+	vim.ui.select(allPlugins, {
+		prompt = "󰒲 Goto Config",
+		format_item = function(plugin) return plugin.name end,
 	}, function(plugin)
-		if plugin then onPlugin(plugin, mode) end
-	end)
-end
+		if not plugin then return end
 
-keymap("n", "g,", function() lazyPluginSearch("config") end, { desc = "󰒲 Goto Plugin Config" })
-keymap("n", "gp", function() lazyPluginSearch("browse") end, { desc = "󰒲 Local Plugin Code" })
+		local module = getModule(plugin):gsub("%.", "/")
+		local filepath = vim.fn.stdpath("config") .. ("/lua/%s/%s.lua"):format(specRoot, module)
+		local repo = plugin[1]:gsub("/", "\\/") -- escape slashes for `:edit`
+		vim.cmd(("edit +/%q %s"):format(repo, filepath))
+	end)
+end, { desc = "󰒲 Goto Plugin Config" })
+
+keymap("n", "gp", function()
+	-- colored icons
+	vim.api.nvim_create_autocmd("FileType", {
+		once = true,
+		pattern = "TelescopeResults",
+		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
+	})
+	vim.ui.select(require("lazy").plugins(), {
+		prompt = "󰒲 Local Code",
+		format_item = function(plugin) return plugin.name end,
+	}, function(plugin)
+		if not plugin then return end
+		require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
+	end)
+end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS
