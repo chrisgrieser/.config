@@ -110,6 +110,10 @@ nnoremap g; u<C-r>
 nnoremap ö ;
 nnoremap Ö ,
 
+" go to last link in file
+exmap lastLinkInFile jsfile Meta/vimrc-jsfile.js { lastLinkInFile() }
+nnoremap g. :lastLinkInFile
+
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
 
