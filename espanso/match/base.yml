@@ -4,8 +4,6 @@ matches:
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!web"
     replace: https://chris-grieser.de/
-  - trigger: "!github"
-    replace: https://github.com/chrisgrieser
   - trigger: "!masto"
     replace: https://pkm.social/@pseudometa
   - triggers: ["!blog", "!vim"]
@@ -20,6 +18,14 @@ matches:
       Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for
       various information. I need to investigate the issue. (Also, I don't have the time to look into it
       right now, so a bug report will make sure that I can keep track of it.)
+  - trigger: "!github"
+    replace: >
+      For bug reports, feature requests, or questions about my plugins and workflows, please create an
+      issue in the corresponding GitHub repository. This email address is exclusively for academic
+      purposes or business inquiries.
+
+
+      *This is an automated message. Please do not reply to this email.*
   - triggers: ["!freeze", "!debugger"]
     replace: "setTimeout(() => { debugger }, 1000 * 1$|$)"
     label: "Freeze (DevTools)"
@@ -29,23 +35,20 @@ matches:
     vars:
       - name: todayISO
         type: date
-        params:
-          format: "%Y-%m-%d"
+        params: { format: "%Y-%m-%d" }
   - trigger: "!today"
     replace: "{{today}}"
     vars:
       - name: today
         type: date
-        params:
-          format: "%d.%m.%Y"
+        params: { format: "%d.%m.%Y" }
   - trigger: "!la"
     replace: "(last accessed: {{today}})"
     label: Last Accessed
     vars:
       - name: today
         type: date
-        params:
-          format: "%d.%m.%Y"
+        params: { format: "%d.%m.%Y" }
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!openai"
     replace: "{{apikey}}"
