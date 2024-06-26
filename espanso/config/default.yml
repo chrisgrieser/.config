@@ -3,6 +3,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 search_trigger: OFF
+search_shortcut: ""
 
 show_icon: false
 show_notifications: true
