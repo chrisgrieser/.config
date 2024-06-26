@@ -124,12 +124,12 @@ format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\)) '
 description = "Number of lines of code in the current project using tokei (for performance)."
 command = "tokei --compact --exclude='*.txt' --exclude='*.json' | tail -n2 | awk 'NR==1 {print $3}'"
 when = '[[ "$(dirname $PWD)" == "$HOME/repos" ]]' # only in my local repos folder
-format = '  [$output ]($style)'
+format = ' [$output ]($style)'
 style = "blue"
 
 [cmd_duration]
 min_time = 2500
-format = "[󰔟  $duration](bold cyan)"
+format = "[󰔟 $duration](bold cyan)"
 
 [time]
 disabled = false
