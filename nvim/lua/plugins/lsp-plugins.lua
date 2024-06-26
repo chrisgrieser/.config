@@ -9,9 +9,10 @@ return {
 			library = {
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
+			integrations = { cmp = false }, -- prevents loading cmp
 		},
 	},
-	-- `vim.uv` typings (not as dependency, since they never need to be loaded)
+	-- `vim.uv` typings (not as dependency, since it never needs to be loaded)
 	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
 	{ -- breadcrumbs for tabline
@@ -26,7 +27,7 @@ return {
 			icons = { Object = "󰠲 " },
 			separator = " ",
 			depth_limit = 7,
-			highlight = false, -- sadly various bugs
+			highlight = false, -- enabling has various bugs
 			depth_limit_indicator = "…",
 			-- FIX tabs in breadcrumbs for css nesting
 			format_text = function(text) return text:gsub("\t", "") end,

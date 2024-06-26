@@ -8,10 +8,10 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 ---@param label string
 ---@param modes string|string[]
 vim.g.whichkey_leader_subkey = function(key, label, modes)
-	local ok, whichkey = pcall(require, "which-key")
-	if not ok then return end
+	-- delayed, to ensure whichkey spec is loaded & not interfere with whichkey's lazy-loading
 	vim.defer_fn(function()
-		-- delayed, to ensure which-key was loaded
+		local ok, whichkey = pcall(require, "which-key")
+		if not ok then return end
 		whichkey.register(
 			{ [key] = { name = " " .. label } },
 			{ prefix = "<leader>", mode = modes or "n" }
@@ -78,8 +78,12 @@ return {
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
 		keys = {
-			-- stylua: ignore
-			{ "<leader>fs", function() require("rip-substitute").sub() end, mode = { "n", "x" }, desc = " rip substitute" },
+			{
+				"<leader>fs",
+				function() require("rip-substitute").sub() end,
+				mode = { "n", "x" },
+				desc = " rip substitute",
+			},
 		},
 		opts = {
 			popupWin = {
