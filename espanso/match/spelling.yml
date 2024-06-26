@@ -144,3 +144,4 @@ matches:
   - { trigger: somewaht, replace: somewhat, propagate_case: true, word: true }
   - { trigger: amke, replace: make, propagate_case: true, word: true }
   - { trigger: isnce, replace: since, propagate_case: true, word: true }
+  - { trigger: sidn, replace: sind, propagate_case: true, word: true }
