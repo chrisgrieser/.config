@@ -11,6 +11,10 @@
     "body": "$LINE_COMMENT CONFIG ",
     "prefix": "CONFIG"
   },
+  "DEPRECATION": {
+    "body": "$LINE_COMMENT DEPRECATION",
+    "prefix": "DEPRECATION"
+  },
   "DOCS": {
     "body": "$LINE_COMMENT DOCS $CLIPBOARD",
     "prefix": "DOCS (+url)"
