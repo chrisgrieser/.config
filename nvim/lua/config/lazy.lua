@@ -118,8 +118,8 @@ keymap("n", "g,", function()
 
 	local allPlugins = {}
 	repeat
-		local file, kind = vim.loop.fs_scandir_next(handler)
-		if kind == "file" and file then
+		local file, _ = vim.loop.fs_scandir_next(handler)
+		if file and vim.endswith(file, ".lua") then
 			local moduleName = file:gsub("%.lua$", "")
 			local module = require(specRoot .. "." .. moduleName)
 			if type(module[1]) == "string" then module = { module } end
