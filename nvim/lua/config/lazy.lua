@@ -15,7 +15,7 @@ require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
 	dev = {
-		patterns = { "" }, -- for repos matching `patterns` (`.` = all repos)…
+		patterns = { "nvim" }, -- for repos matching `patterns` (`nvim` = all nvim repos)…
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
@@ -54,7 +54,7 @@ require("lazy").setup("plugins", {
 		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { enabled = false }, -- messes up writing config
+	change_detection = { enabled = false }, -- messes up stuff when writing config with autosave
 	readme = { enabled = false },
 	performance = {
 		rtp = {
