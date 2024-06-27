@@ -24,7 +24,6 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
 		finder.make({
@@ -40,7 +39,7 @@ function cacheIsOutdated(path) {
 	const cacheAgeThresholdMins = Number.parseInt($.getenv("cache_age_threshold"));
 	const cacheObj = Application("System Events").aliases[path];
 	if (!cacheObj.exists()) return true;
-	const cacheAgeMins = (+new Date() - +cacheObj.creationDate()) / 1000 / 60;
+	const cacheAgeMins = (Date.now() - +cacheObj.creationDate()) / 1000 / 60;
 	return cacheAgeMins > cacheAgeThresholdMins;
 }
 
@@ -64,7 +63,7 @@ function olderThan(firstPath, secondPath) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
+	const subredditConfig = $.getenv("subreddits").trim().replace(/^\/?r\//gm, "");
 	const cachePath = $.getenv("alfred_workflow_cache");
 
 	// determine subreddit
@@ -105,10 +104,12 @@ function run() {
 
 	// request new posts from API
 	if (subredditName === "hackernews") {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("Writing new cache for hackernews");
 		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getHackernewsPosts(oldItems);
 	} else {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log("Writing new cache for r/" + subredditName);
 		// biome-ignore lint/correctness/noUndeclaredVariables: JXA import HACK
 		posts = getRedditPosts(subredditName, oldItems);
