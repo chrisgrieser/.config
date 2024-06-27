@@ -23,7 +23,6 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
 		finder.make({
@@ -45,6 +44,7 @@ function cacheAndReturnSubIcon(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return false;
 	}
@@ -64,6 +64,7 @@ function cacheAndReturnSubCount(subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return undefined;
 	}
@@ -89,7 +90,7 @@ function cacheAndReturnSubCount(subredditName) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
-	const subredditConfig = $.getenv("subreddits").trim().replace(/^r\//gm, "");
+	const subredditConfig = $.getenv("subreddits").trim().replace(/^\/?r\//gm, "");
 
 	const subreddits = subredditConfig.split("\n").map((subredditName) => {
 		let subtitle = "";
