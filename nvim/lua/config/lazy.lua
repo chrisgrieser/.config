@@ -15,7 +15,7 @@ require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
 	dev = {
-		patterns = { "chrisgrieser" }, -- for repos matching `patterns` …
+		patterns = { "" }, -- for repos matching `patterns` (`.` = all repos)…
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
@@ -28,8 +28,6 @@ require("lazy").setup("plugins", {
 		size = { width = 0.85, height = 0.85 },
 		backdrop = 50, -- 0-100
 		custom_keys = {
-			["<localleader>l"] = false,
-			["<localleader>t"] = false,
 			["gx"] = {
 				function(plugin) vim.ui.open(plugin.url:gsub("%.git$", "")) end,
 				desc = "󰖟 Plugin repo",
@@ -37,10 +35,16 @@ require("lazy").setup("plugins", {
 			["gi"] = {
 				function(plugin)
 					local url = plugin.url:gsub("%.git$", "")
-					local issue = vim.api.nvim_get_current_line():match("#(%d+)")
-					if issue then vim.ui.open(url .. "/issues/" .. issue) end
+					local line = vim.api.nvim_get_current_line()
+					local issue = line:match("#(%d+)")
+					local commit = line:match(("%x"):rep(6) .. "+")
+					if issue then
+						vim.ui.open(url .. "/issues/" .. issue)
+					elseif commit then
+						vim.ui.open(url .. "/commit/" .. commit)
+					end
 				end,
-				desc = " Open issue",
+				desc = " Open issue/commit",
 			},
 		},
 	},
@@ -67,7 +71,7 @@ require("lazy").setup("plugins", {
 
 -- KEYMAPS FOR LAZY UI
 -- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
-require("lazy.view.config").keys.hover = "o"
+require("lazy.view.config").keys.hover = "o" -- prevent Lazy overwriting `K`
 require("lazy.view.config").keys.details = "<Tab>"
 
 --------------------------------------------------------------------------------
