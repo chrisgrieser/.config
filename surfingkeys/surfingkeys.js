@@ -25,7 +25,8 @@ settings.smartCase = true;
 
 settings.enableEmojiInsertion = true;
 settings.startToShowEmoji = 2;
-if (window.location.host === "github.com") settings.enableEmojiInsertion = false;
+const alreadyHaveEmojis = ["github.com", "web.whatsapp.com", "web.telegram.org"];
+if (alreadyHaveEmojis.includes(window.location.host)) settings.enableEmojiInsertion = false;
 
 //──────────────────────────────────────────────────────────────────────────────
 // THEME
