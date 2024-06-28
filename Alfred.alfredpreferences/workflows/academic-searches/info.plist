@@ -44,29 +44,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1E0715A2-B8BC-459F-B957-6447B0E15A13</key>
 		<array>
 			<dict>
@@ -187,75 +164,12 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://libgen.rs/search.php?req={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>169FF168-1AE9-4A13-8CFC-58686EC8B546</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
 				<string>https://scite.ai/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>lib</string>
-				<key>subtext</key>
-				<string>Anna's Archive &amp; Libgen</string>
-				<key>text</key>
-				<string>Book Search {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://annas-archive.org/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -534,24 +448,6 @@ end tell
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
-		<key>0DEE71DF-8531-4E7F-BE3B-9D2898DBAF72</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>135</real>
-		</dict>
-		<key>169FF168-1AE9-4A13-8CFC-58686EC8B546</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>70</real>
-		</dict>
 		<key>1E0715A2-B8BC-459F-B957-6447B0E15A13</key>
 		<dict>
 			<key>colorindex</key>
@@ -562,15 +458,6 @@ end tell
 			<real>440</real>
 			<key>ypos</key>
 			<real>605</real>
-		</dict>
-		<key>237437F9-BE71-4AAD-AA03-BCD37D82DE1B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>185</real>
 		</dict>
 		<key>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</key>
 		<dict>
