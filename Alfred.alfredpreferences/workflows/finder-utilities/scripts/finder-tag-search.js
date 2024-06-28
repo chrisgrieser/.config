@@ -20,13 +20,14 @@ function run() {
 
 	const taggedFiles = tagged.split("\r").map((path) => {
 		const fileName = path.split("/").pop() || "";
-		const ext = fileName.split(".").pop() || "";
+		const [_, ext] = fileName.match(/\.(\w+)$/) || ["", "FOLDER"];
 		let parentFolder = path.split("/").slice(0, -1).join("/");
 		parentFolder = parentFolder
 			.replace(/\/Users\/\w+\/Library\/Mobile Documents\/com~apple~CloudDocs/, "☁️")
 			.replace(/\/Users\/\w+/, "~");
 
-		const iconToDisplay = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"].includes(ext)
+		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
+		const iconToDisplay = [...imageExtensions, "FOLDER"].includes(ext)
 			? { type: "fileicon", path: path }
 			: { path: path };
 
