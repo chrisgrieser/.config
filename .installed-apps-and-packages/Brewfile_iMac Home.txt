@@ -73,7 +73,6 @@ cask "steam"
 cask "transmission"
 cask "wezterm"
 cask "zoom"
-mas "Hidden Bar", id: 1452453066
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
