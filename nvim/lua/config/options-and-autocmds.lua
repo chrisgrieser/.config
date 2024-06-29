@@ -297,7 +297,7 @@ end, vim.api.nvim_create_namespace("auto_nohl"))
 -- SKELETONS (TEMPLATES)
 local skeletons = {
 	python = { "**/*.py", "template.py" },
-	lua = { vim.g.localRepos .. "/**/*.lua", "module.lua" },
+	lua = { vim.g.localRepos .. "/**/lua/**/*.lua", "module.lua" },
 	applescript = { "**/*.applescript", "template.applescript" },
 	javascript = { "**/Alfred.alfredpreferences/workflows/**/*.js", "jxa.js" },
 	just = { "**/*Justfile", "justfile.just" },

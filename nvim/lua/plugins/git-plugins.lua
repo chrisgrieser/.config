@@ -34,6 +34,7 @@ return {
 				spellcheck = true,
 				keepAbortedMsgSecs = 60 * 10, -- 10 mins
 				insertIssuesOnHash = { enabled = true, next = "#" },
+				openReferencedIssue = true,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
