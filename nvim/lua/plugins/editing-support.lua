@@ -77,6 +77,7 @@ return {
 	},
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
+		cmd = "RipSubstitute",
 		keys = {
 			{
 				"<leader>fs",
