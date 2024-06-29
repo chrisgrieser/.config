@@ -3,7 +3,7 @@ local spec = {
 		"chrisgrieser/nvim-rip-substitute",
 		opts = {},
 		keys = {
-			{ "gs", ":lua require('rip-substitute').sub()<CR>", mode = { "n", "x" } },
+			{ "gs", function() require("rip-substitute").sub() end, mode = { "n", "x" } },
 		},
 	},
 }
