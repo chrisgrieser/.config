@@ -1,16 +1,8 @@
--- BOOTSTRAP LAZY.NVIM
--- https://github.com/folke/lazy.nvim#-installation
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if vim.uv.fs_stat(lazypath) == nil then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	vim.system({ "git", "clone", "--filter=blob:none", lazyrepo, "--branch=stable", lazypath }):wait()
-end
-vim.opt.runtimepath:prepend(lazypath)
-
+-- BOOTSTRAP LAZY.NVIM https://lazy.folke.io/developers#bootstrap
+load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 --------------------------------------------------------------------------------
--- LAZY WINDOW
 
--- DOCS https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
+-- DOCS https://lazy.folke.io/configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
@@ -31,6 +23,16 @@ require("lazy").setup("plugins", {
 			["gx"] = {
 				function(plugin) vim.ui.open(plugin.url:gsub("%.git$", "")) end,
 				desc = "󰖟 Plugin repo",
+			},
+			["gp"] = {
+				function(plugin)
+					vim.cmd.close()
+					require("telescope.builtin").find_files {
+						prompt_title = plugin.name,
+						cwd = plugin.dir,
+					}
+				end,
+				desc = "󰒲 Local plugin code",
 			},
 			["gi"] = {
 				function(plugin)
@@ -114,12 +116,12 @@ keymap("n", "g,", function()
 	})
 	local specRoot = require("lazy.core.config").options.spec.import
 	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
-	local handler = vim.loop.fs_scandir(specPath) or nil
+	local handler = vim.uv.fs_scandir(specPath)
 	if not handler then return end
 
 	local allPlugins = {}
 	repeat
-		local file, _ = vim.loop.fs_scandir_next(handler)
+		local file, _ = vim.uv.fs_scandir_next(handler)
 		if file and vim.endswith(file, ".lua") then
 			local moduleName = file:gsub("%.lua$", "")
 			local module = require(specRoot .. "." .. moduleName)
@@ -144,6 +146,17 @@ keymap("n", "g,", function()
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 	end)
 end, { desc = "󰒲 Goto Plugin Config" })
+
+keymap("n", "gp", function()
+	vim.ui.select(
+		require("lazy").plugins(),
+		{ prompt = "󰒲 Local Code", format_item = function(plugin) return plugin.name end },
+		function(plugin)
+			if not plugin then return end
+			require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
+		end
+	)
+end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS

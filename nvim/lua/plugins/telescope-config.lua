@@ -100,6 +100,7 @@ local function telescopeConfig()
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
+				path_display = { "filename_first" },
 				layout_config = smallLayout, -- use small layout, toggle via <D-p>
 				previewer = false,
 			},
@@ -276,7 +277,7 @@ return {
 			"nvim-tree/nvim-web-devicons", -- icons
 			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
 		},
-		config = function ()
+		config = function()
 			telescopeConfig()
 			require("telescope").load_extension("zf-native")
 		end,
