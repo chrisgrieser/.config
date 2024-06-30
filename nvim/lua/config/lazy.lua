@@ -56,7 +56,7 @@ require("lazy").setup("plugins", {
 		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { enabled = false }, -- messes up stuff when writing config with autosave
+	change_detection = { enabled = true },
 	readme = { enabled = false },
 	performance = {
 		rtp = {
