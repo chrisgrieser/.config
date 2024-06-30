@@ -50,4 +50,4 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 --------------------------------------------------------------------------------
 
-safeRequire("funcs.eol-inlayhints")
+safeRequire("funcs.eol-lsphints")
