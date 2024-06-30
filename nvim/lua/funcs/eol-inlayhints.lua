@@ -4,7 +4,6 @@ local config = {
 		parameter = "󰏪 ",
 	},
 	label = {
-		separator = " ",
 		padding = 1,
 		marginLeft = 0,
 	},
@@ -17,10 +16,16 @@ local inlayHintNs = vim.api.nvim_create_namespace(pluginName)
 
 -- overwrite nvim's inlayhint handler
 vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
+	-- GUARD 
+	if not result then return end
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	if not client then return end
 	if err then
 		vim.notify(vim.inspect(err), vim.log.levels.ERROR)
 		return
 	end
+
+	-- clear existing hints
 	vim.api.nvim_buf_clear_namespace(ctx.bufnr, inlayHintNs, 0, -1)
 
 	-- Collect all hints for each line, so we can sort them by column in the loop
@@ -37,6 +42,7 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 		return acc
 	end)
 
+	-- add hints as extmarks for each line
 	for lnum, hints in pairs(hintLines) do
 		table.sort(hints, function(a, b) return a.col < b.col end)
 
@@ -45,13 +51,15 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 		-- hints of different types: prepend icons to individual label
 		local hintsAllTypes = vim.iter(hints):all(function(hint) return hint.kind == "Type" end)
 		local hintsAllParams = vim.iter(hints):all(function(hint) return hint.kind == "Parameter" end)
+		local allOfSameKind = hintsAllTypes or hintsAllParams
+		
 		local mergedLabels = vim.iter(hints)
 			:map(function(hint)
-				if hintsAllTypes or hintsAllParams then return hint.label end
-				local icon = hint.kind == 1 and config.icons.type or config.icons.parameter
+				if allOfSameKind then return hint.label end
+				local icon = hint.kind == "Type" and config.icons.type or config.icons.parameter
 				return icon .. hint.label
 			end)
-			:join(config.label.separator)
+			:join(allOfSameKind and ", " or " ")
 		if hintsAllTypes then mergedLabels = config.icons.type .. mergedLabels end
 		if hintsAllParams then mergedLabels = config.icons.parameter .. mergedLabels end
 
@@ -87,6 +95,9 @@ vim.api.nvim_create_autocmd("LspDetach", {
 })
 
 -- initialize in already open buffers
-vim.iter(vim.api.nvim_list_bufs())
-	:filter(function(bufnr) return vim.api.nvim_buf_is_loaded(bufnr) end)
-	:each(function(bufnr) vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end)
+for _, client in ipairs(vim.lsp.get_clients()) do
+	local buffers = vim.lsp.get_buffers_by_client_id(client.id)
+	for _, bufnr in ipairs(buffers) do
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
+end
