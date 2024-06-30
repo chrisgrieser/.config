@@ -42,6 +42,8 @@ safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 safeRequire("config.lsp-and-diagnostics")
 
+safeRequire("funcs.eol-inlayhints")
+
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
 	once = true,
