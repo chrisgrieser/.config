@@ -47,7 +47,3 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	once = true,
 	callback = function() safeRequire("config.spellfixes") end,
 })
-
---------------------------------------------------------------------------------
-
-safeRequire("funcs.eol-lsphints")

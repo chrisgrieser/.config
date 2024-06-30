@@ -313,8 +313,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- GUARD
 			local stats = vim.loop.fs_stat(ctx.file)
 			if not stats then return end
-			local fileIsEmpty = stats.size < 4 -- account for linebreaks
-			if not fileIsEmpty then return end
+			local fileNotEmpty = stats.size > 10 -- account for linebreaks etc.
+			if fileNotEmpty then return end
 			local ft = ctx.match
 			local glob = skeletons[ft][1]
 			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)

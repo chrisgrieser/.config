@@ -24,7 +24,7 @@
   "night-owl.nvim": { "branch": "main", "commit": "131641a516085c5b3cacc8022581902e9f2f14af" },
   "noice.nvim": { "branch": "main", "commit": "03c6a75661e68012e30b0ed81f050358b1e2233c" },
   "nui.nvim": { "branch": "main", "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1" },
-  "nvim-chainsaw": { "branch": "main", "commit": "7edcedda09e47f56b33f767a0fb3f369aadb44ca" },
+  "nvim-chainsaw": { "branch": "main", "commit": "4ade4b6a17981075cb6db7db24b0efd3b906ae78" },
   "nvim-cmp": { "branch": "main", "commit": "a110e12d0b58eefcf5b771f533fc2cf3050680ac" },
   "nvim-dap": { "branch": "master", "commit": "6f79b822997f2e8a789c6034e147d42bc6706770" },
   "nvim-dap-python": { "branch": "master", "commit": "d777c2b32ed39f61209c09bede28d7491621a631" },

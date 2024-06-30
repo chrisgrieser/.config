@@ -2,6 +2,11 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"chrisgrieser/nvim-eol-lsp-hints",
+		lazy = false,
+		-- event = "LspAttach",
+	},
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
 		ft = "lua",
