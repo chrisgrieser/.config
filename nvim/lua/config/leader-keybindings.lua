@@ -153,10 +153,16 @@ keymap(
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
+
 keymap("n", "<leader>ol", function()
 	u.notify("LSP", "Restarting…", "trace")
 	vim.cmd.LspRestart()
 end, { desc = "󰒕 :LspRestart" })
+
+keymap("n", "<leader>oh", function()
+	local isEnabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
+	vim.lsp.inlay_hint.enable(not isEnabled, { bufnr = 0 })
+end, { desc = "󰒕 Inlay Hints" })
 
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
