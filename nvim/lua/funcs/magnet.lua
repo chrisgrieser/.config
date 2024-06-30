@@ -188,6 +188,7 @@ function M.bufferByLastUsed(dir)
 
 	---@diagnostic disable-next-line: assign-type-mismatch
 	state.bufNavNotify = notify(table.concat(bufsDisplay, "\n"), "info", {
+		title = "Magnet: Last Used Buffers",
 		timeout = timeoutMs,
 		animate = false,
 		stages = "no_animation",
@@ -301,6 +302,7 @@ function M.gotoChangedFiles()
 	local msg = table.concat(listOfChangedFiles, "\n")
 
 	changedFileNotif = notify(msg, "info", {
+		title = "Magnet: Changed Files",
 		replace = changedFileNotif and changedFileNotif.id,
 		animate = false,
 		hide_from_history = true,
