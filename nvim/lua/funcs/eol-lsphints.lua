@@ -1,6 +1,6 @@
 local config = {
 	icons = {
-		type = " ",
+		type = "󰜁 ",
 		parameter = "󰏪 ",
 	},
 	label = {
@@ -16,7 +16,7 @@ local inlayHintNs = vim.api.nvim_create_namespace(pluginName)
 
 -- overwrite nvim's inlayhint handler
 vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
-	-- GUARD 
+	-- GUARD
 	if not result then return end
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
 	if not client then return end
@@ -35,7 +35,7 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 		local col = hint.position.character
 		local label = hint.label[1].value:gsub("^:", ""):gsub(":$", "")
 		-- 1: Type, 2: Parameter -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#inlayHintKind
-		local kind = hint.kind == 1 and "Type" or "Parameter" 
+		local kind = hint.kind == 1 and "Type" or "Parameter"
 
 		if not acc[lnum] then acc[lnum] = {} end
 		table.insert(acc[lnum], { label = label, col = col, kind = kind })
@@ -52,7 +52,7 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 		local hintsAllTypes = vim.iter(hints):all(function(hint) return hint.kind == "Type" end)
 		local hintsAllParams = vim.iter(hints):all(function(hint) return hint.kind == "Parameter" end)
 		local allOfSameKind = hintsAllTypes or hintsAllParams
-		
+
 		local mergedLabels = vim.iter(hints)
 			:map(function(hint)
 				if allOfSameKind then return hint.label end
@@ -95,9 +95,9 @@ vim.api.nvim_create_autocmd("LspDetach", {
 })
 
 -- initialize in already open buffers
-for _, client in ipairs(vim.lsp.get_clients()) do
+for _, client in pairs(vim.lsp.get_clients()) do
 	local buffers = vim.lsp.get_buffers_by_client_id(client.id)
-	for _, bufnr in ipairs(buffers) do
+	for _, bufnr in pairs(buffers) do
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 end
