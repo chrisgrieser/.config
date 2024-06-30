@@ -32,8 +32,8 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 	-- below. This ensures that the hints are displayed in the correct order.
 	local hintLines = vim.iter(result):fold({}, function(acc, hint)
 		local lnum = hint.position.line
-		local label = hint.label[1].value:gsub("^:", ""):gsub(":$", "")
 		local col = hint.position.character
+		local label = hint.label[1].value:gsub("^:", ""):gsub(":$", "")
 		-- 1: Type, 2: Parameter -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#inlayHintKind
 		local kind = hint.kind == 1 and "Type" or "Parameter" 
 
@@ -67,7 +67,7 @@ vim.lsp.handlers["textDocument/inlayHint"] = function(err, result, ctx, _)
 		local padding = (" "):rep(config.label.padding)
 		local marginLeft = (" "):rep(config.label.marginLeft)
 		local virtText = {
-			{ marginLeft, "Normal" },
+			{ marginLeft, "None" },
 			{ padding .. mergedLabels .. padding, "LspInlayHint" },
 		}
 
