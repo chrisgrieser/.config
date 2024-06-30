@@ -17,12 +17,12 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"binhtran432k/dracula.nvim",
 	-- "oxfist/night-owl.nvim",
 	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	{ "cdmill/neomodern.nvim", name = "coffeecat" },
+	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
-	-- "binhtran432k/dracula.nvim",
 	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },

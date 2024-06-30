@@ -2,7 +2,7 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- display type hints at eol, not in the middle of a line
 		"chrisgrieser/nvim-eol-lsp-hints",
 		event = "LspAttach",
 		opts = {},
