@@ -123,56 +123,24 @@ function M.themeModifications()
 			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
 		end
 		updateHl("GitSignsChange", "guifg=#acaa62")
-	elseif theme == "rose-pine" and mode == "light" then
-		revertedTodoComments()
-		setHl("IblIndent", { fg = "#dbc7b3" })
-		setHl("diffAdded", { fg = "#78a991" })
-		setHl("diffRemoved", { fg = "#d28884" })
-		setHl("Comment", { fg = "#9492aa" })
-		updateHl("LspInlayHint", "blend=none")
-		setHl("Conceal", { link = "NonText" })
-		setHl("NonText", { fg = "#8a87b5" })
-		setHl("Bold", { bold = true })
 	elseif theme == "neomodern" then
 		revertedTodoComments()
 		setHl("@lsp.type.parameter", { link = "Changed" })
-		if mode == "light" then
-			setHl("@keyword.return", { fg = "#fd4283", bold = true })
-			setHl("NonText", { fg = "#b5b5bb" })
-			setHl("IblIndent", { fg = "#d8d8db" })
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_a_" .. v, "guifg=#ffffff")
-			end
-
-			-- higher contrast
-			setHl("@lsp.mod.readonly", { fg = "#ec9403" })
-			setHl("@keyword", { fg = "#9255e6" })
-			setHl("@keyword.conditional", { fg = "#9255e6" })
-		else
-			setHl("@keyword.return", { fg = "#de8c56", bold = true })
-			setHl("NonText", { fg = "#57534f" })
-			setHl("IblIndent", { fg = "#393734" })
-		end
+		setHl("@keyword.return", { fg = "#de8c56", bold = true })
+		setHl("NonText", { fg = "#57534f" })
+		setHl("IblIndent", { fg = "#393734" })
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		local commentColor = u.getHlValue("Comment", "fg")
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		setHl("TSParameter", { fg = "#6f92b3" })
 		setHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "material" and mode == "light" then
+		boldLualineA()
+		revertedTodoComments()
 		updateHl("@property", "guifg=#6c9798")
-		updateHl("@field", "guifg=#6c9798")
 		updateHl("Comment", "guifg=#9cb4b5")
-		updateHl("NonText", "guifg=#9cb4b5")
-		updateHl("NotifyINFOTitle", "guifg=#4eb400")
-		updateHl("NotifyINFOIcon", "guifg=#4eb400")
-
-		-- fix cursor being partially overwritten by the theme
-		vim.opt.guicursor:append("r-cr-o-v:hor10")
-		vim.opt.guicursor:append("a:blinkwait200-blinkoff500-blinkon700")
-
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			updateHl("DiagnosticUnderline" .. type, "gui=underdouble cterm=underline")
-		end
+		updateHl("@variable.member", "guifg=#6c9798")
+		setHl("TelescopeMatching", { fg = "#de8c56" })
 	elseif theme == "kanagawa" then
 		boldLualineA()
 
@@ -186,9 +154,7 @@ function M.themeModifications()
 			updateHl("DiagnosticSign" .. type, "guibg=none")
 		end
 	elseif theme == "bluloco" then
-		vim.opt.guicursor:append("i-ci-c:ver25")
-		vim.opt.guicursor:append("o-v:hor10")
-		if mode == "dark" then updateHl("ColorColumn", "guibg=#2e3742") end
+		updateHl("ColorColumn", "guibg=#2e3742")
 	end
 end
 
@@ -221,7 +187,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		M.themeModifications()
-		customHighlights() -- after modifications, so the dependent colors work
+		vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 	end,
 })
 
