@@ -99,7 +99,9 @@ function M.themeModifications()
 	elseif theme == "dracula" then
 		vim.defer_fn(boldLualineA, 1)
 		revertedTodoComments()
+
 		setHl("Constant", {})
+		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
 		setHl("Boolean", { link = "Special" })
 		setHl("Number", { link = "@field" })
 		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
