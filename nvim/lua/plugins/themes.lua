@@ -3,18 +3,17 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 	-- "sainnhe/everforest",
-	-- { "rose-pine/neovim", name = "rose-pine", opts = { variant = "dawn", styles = { italic = false } }, },
-	{
-		"marko-cerovac/material.nvim",
-		init = function() vim.g.material_style = "lighter" end,
-		opts = {
-			lualine_style = "stealth",
-			contrast = { lsp_virtual_text = true },
-			plugins = { "gitsigns", "nvim-cmp", "telescope", "which-key" },
-		},
-	},
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- {
+	-- 	"marko-cerovac/material.nvim",
+	-- 	init = function() vim.g.material_style = "lighter" end,
+	-- 	opts = {
+	-- 		lualine_style = "stealth",
+	-- 		contrast = { lsp_virtual_text = true },
+	-- 		plugins = { "gitsigns", "nvim-cmp", "telescope", "noice" },
+	-- 	},
+	-- },
 }
 
 local darkThemes = {

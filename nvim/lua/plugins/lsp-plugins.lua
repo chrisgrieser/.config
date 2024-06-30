@@ -79,6 +79,7 @@ return {
 	},
 	{ -- display inlay hints from at EoL, not in the text
 		"lvimuser/lsp-inlayhints.nvim",
+		cond = false,
 		keys = {
 			{
 				"<leader>oh",
