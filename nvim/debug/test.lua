@@ -1,0 +1,1 @@
+require("funcs.eol-inlayhints")
