@@ -4,8 +4,8 @@ local u = require("config.utils")
 return {
 	{
 		"chrisgrieser/nvim-eol-lsp-hints",
-		lazy = false,
-		-- event = "LspAttach",
+		event = "LspAttach",
+		opts = {},
 	},
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",

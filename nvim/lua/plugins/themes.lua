@@ -17,10 +17,9 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"oxfist/night-owl.nvim",
+	-- "oxfist/night-owl.nvim",
 	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	-- { "rose-pine/neovim", name = "rose-pine", opts = { variant = "moon", styles = { italic = false } } },
-	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
+	{ "cdmill/neomodern.nvim", name = "coffeecat" },
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
 	-- "binhtran432k/dracula.nvim",
