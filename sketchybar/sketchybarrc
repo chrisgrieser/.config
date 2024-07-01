@@ -25,7 +25,7 @@ fi
 first_row="left"
 # HACK using popup for second row. The popup.{item} only refers to {item} to
 # anchor to it. Should be the leftmost item.
-second_row="popup.BusyCal Menu"
+second_row="popup.clock"
 
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
@@ -51,12 +51,12 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add alias "BusyCal Menu" $first_row \
-	--set "BusyCal Menu" padding_right=-10 y_offset=16 \
-	\
 	--add item clock $first_row \
-	--set clock update_freq=1 \
+	--set clock update_freq=1 background.padding_left=10 \
 	script="$plugin_dir/clock.sh" \
+	\
+	--add alias "BusyCal Menu" $first_row \
+	--set "BusyCal Menu" padding_right=0 padding_left=-15 y_offset=17 \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=1200 icon.y_offset=-1 drawing=false \
