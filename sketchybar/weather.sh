@@ -45,4 +45,4 @@ done
 [[ "$temperature" == "null" ]] && temperature="–"
 [[ "$icon" == "null" ]] && icon=""
 
-sketchybar --set "$NAME" icon="$icon" label="$temperature°"
+sketchybar --set "$NAME" icon="$icon" label="$temperature°" drawing=true
