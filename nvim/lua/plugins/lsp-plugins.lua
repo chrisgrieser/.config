@@ -34,8 +34,6 @@ return {
 			depth_limit = 7,
 			highlight = false, -- enabling has various bugs
 			depth_limit_indicator = "…",
-			-- FIX tabs in breadcrumbs for css nesting
-			format_text = function(text) return text:gsub("\t", "") end,
 		},
 		config = function(_, opts)
 			vim.g.navic_silence = false
