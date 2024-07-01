@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
 
 on alfred_script(shellCmd)
-	# LAUNCH WEZTERM IF NEEDED 
+	# LAUNCH WEZTERM IF NEEDED
 	# (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
@@ -16,7 +16,7 @@ on alfred_script(shellCmd)
 	delay 0.1 # ensure wezterm-gui is ready
 
 	# CREATE WINDOW IF NEEDED
-	tell application "System Events" to tell process "WezTerm" 
+	tell application "System Events" to tell process "WezTerm"
 		if (count of windows) is 0 then
 			set frontmost to true
 			click menu item "New Window" of menu "Shell" of menu bar 1
