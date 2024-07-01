@@ -100,6 +100,9 @@ function M.themeModifications()
 		vim.defer_fn(boldLualineA, 1)
 		revertedTodoComments()
 
+		setHl("@number", { fg = "#7ca2ff" })
+		setHl("@number.comment", { link = "@number" })
+
 		setHl("Constant", {})
 		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
 		setHl("Boolean", { link = "Special" })

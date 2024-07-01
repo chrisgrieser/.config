@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# vim: filetype=sh
 
 # CONFIG
 # ignores perma-repos since they are already locally backed up
