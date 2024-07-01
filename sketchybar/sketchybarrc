@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+#───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
 plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
@@ -70,6 +71,10 @@ sketchybar \
 	--subscribe reminders_count system_woke \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \
+	\
+	--add alias "BusyCal Menu,Item-0" $first_row \
+	alias.color="$font_color" \
+	--set "BusyCal Menu,Item-0" padding_left=-15 \
 	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
