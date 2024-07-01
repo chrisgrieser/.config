@@ -8,7 +8,7 @@ end
 -- KEYMAPS
 bufKeymap("n", "<CR>", "ZZ", { desc = "Confirm" })
 bufKeymap("n", "q", vim.cmd.cquit, { desc = "Abort" })
-bufKeymap("n", "<Tab>", "<C-a>", { desc = "Cycle Action" })
+bufKeymap("n", "<Tab>", vim.cmd.Cycle, { desc = "Cycle Action" }) -- `:Cycle` is vim ftplugin
 
 -- leave out auto-formatting via `==`, since buggy
 bufKeymap("n", "<Down>", [[<cmd>. move +1<CR>]], { desc = "󰜮 Move line down" })
