@@ -2,9 +2,12 @@
 reload:
     sketchybar --reload
 
-restart:
-    brew services restart sketchybar
-
 # used for aliases
 @list_menubar_items:
     sketchybar --query default_menu_items | sed '1d;$d' | cut -d'"' -f2
+
+@docs:
+    open "https://felixkratz.github.io/SketchyBar/config/bar"
+
+restart:
+    brew services restart sketchybar
