@@ -13,19 +13,19 @@ alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias reset='git reset'
+
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
+alias open_conflict='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
-
-alias conflict="git diff --name-only --diff-filter=U --relative"
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # issues numbers & git revs
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
-ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,9}|HEAD)((\^+|~)[0-9]*)?' 'fg=yellow')
+ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,9})((\^+|~)[0-9]*)?' 'fg=yellow')
 
 # commit messages longer than 50 chars: orange, longer than 72 chars: red
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|gC|git commit -m) ".{51,71}' 'fg=208') # 208 = orange
@@ -44,7 +44,7 @@ ZSH_HIGHLIGHT_REGEXP+=(
 # STAGING
 alias gaa='git add --all'
 alias unadd='git restore --staged'
-function restore { git restore "$@"; } # using function, so custom completions apply
+function restore { git restore "$@"; } # using function, so completions override works
 
 # without argument, run interactively via fzf to toggle staged/unstaged
 # with argument, stage the file(s). Modified completions allow for quicker selection.
@@ -71,10 +71,10 @@ function ga {
 	)
 
 	cd "$dir" || return 1
-	return 0 # no exiting 130
+	return 0 # no exit 130
 }
 
-# completions for running `ga` with argument
+# custom completions
 _change_git_files() {
 	local -a changed_files=()
 	while IFS='' read -r file; do # turn lines into array
@@ -221,7 +221,7 @@ function my_commits_today {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
-# uses `_gitlog` from magic-dashboard.zsh
+# uses `_gitlog` from `magic-dashboard.zsh`
 
 function gl {
 	if [[ -z "$1" ]]; then
@@ -235,7 +235,6 @@ function gl {
 
 # interactive
 function gli {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
 	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
 
 	local hash key_pressed selected style
@@ -278,9 +277,6 @@ function clone {
 }
 
 function delete_forks_with_no_open_prs {
-	if [[ ! -x "$(command -v fzf)" ]]; then print "\e[1;33mfzf not installed.\e[0m" && return 1; fi
-	if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
-
 	local my_prs my_forks
 	my_prs=$(gh search prs --author="@me" --state=open --json="repository" --jq=".[].repository.name")
 	my_forks=$(gh repo list --fork | cut -f1)
