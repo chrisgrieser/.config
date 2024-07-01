@@ -188,3 +188,23 @@ _lc() {
 	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
 }
 compdef _lc lc
+
+#───────────────────────────────────────────────────────────────────────────────
+# TRASH
+# requires a `trash` command
+
+# no arg = all files in folder will be deleted
+function d {
+	if [[ $# == 0 ]]; then
+		trash ./*(D) || return 1 # (D) makes the glob include dotfiles (zsh-specific)
+	else
+		trash "$@" || return 1
+	fi
+}
+
+# go up and delete current dir
+function ..d() {
+	trash "$PWD" || return 1
+	cd "$(dirname "$PWD")" || return 1
+}
+

@@ -142,7 +142,7 @@
     "prefix": "today ISO date INSERT"
   },
   "vim modeline": {
-    "body": "# vim: filetype=${1:sh}",
+    "body": "# vim: filetype=${1:zsh}",
     "prefix": "vim modeline"
   }
 }

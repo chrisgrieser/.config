@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+# read app and macOS system setting changes https://news.ycombinator.com/item?id=36982463
+#───────────────────────────────────────────────────────────────────────────────
+
+if [[ ! -f "/tmp/defaults-before" ]]; then
+	defaults read > /tmp/defaults-before
+	echo "Saved current \`defaults\` state. "
+	echo "1. Make changes."
+	echo "2. Then run \`prefs\` again for a diff of the changes."
+else
+	defaults read > /tmp/after
+	readonly changes
+	changes=$(
+		command diff /tmp/defaults-before /tmp/defaults-after |
+			grep -v "_DKThrottledActivityLast" |
+			grep -E "^(<|>)"
+	)
+	if [[ -z "$changes" ]]; then
+		echo "No changes found."
+		return 1
+	fi
+	echo "$changes"
+
+	# show context, so the domain can be identified
+	_separator
+	toGrep=$(echo "$changes" | tail -n1 | sed -e 's/^> *//')
+	grep -C10 "$toGrep" /tmp/defaults-after
+
+	rm -f /tmp/defaults-before /tmp/defaults-after
+fi
