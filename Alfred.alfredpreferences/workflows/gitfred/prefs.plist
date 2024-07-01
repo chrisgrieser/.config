@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>clone_depth</key>
-	<integer>10</integer>
+	<integer>15</integer>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_username</key>
