@@ -30,17 +30,19 @@ second_row="popup.BusyCal Menu"
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
 
+# PENDING
+# alias.cutoff https://github.com/FelixKratz/SketchyBar/issues/575
+
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
-# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/bar
+# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
 	--bar \
 	height=60 position="top" display="all" \
 	padding_left=0 margin=-5 color="$bg_color" \
 	\
 	--default \
-	updates="when_shown" drawing=true align="left" \
 	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" icon.padding_right=3 \
 	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
@@ -50,12 +52,11 @@ sketchybar \
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
 	--add alias "BusyCal Menu" $first_row \
-	--set "BusyCal Menu" padding_right=-20 y_offset=16 \
+	--set "BusyCal Menu" padding_right=-10 y_offset=16 \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
 	script="$plugin_dir/clock.sh" \
-	background.padding_left=8 \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=1200 icon.y_offset=-1 drawing=false \
@@ -79,7 +80,6 @@ sketchybar \
 	\
 	--add alias "Stats,CombinedModules" "$second_row" \
 	--set "Stats,CombinedModules" padding_right=-20 \
-	click_script="$plugin_dir/stats_click.applescript" \
 	\
 	--add item sync-indicator "$second_row" \
 	--set sync-indicator update_freq=300 icon="" drawing=false \
