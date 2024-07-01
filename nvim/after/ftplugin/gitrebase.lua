@@ -1,7 +1,7 @@
 vim.opt_local.listchars:remove("multispace")
 
 -- KEYMAPS
-vim.keymap.set("n", "<CR>", vim.cmd.wq, { desc = "Confirm", buffer = true })
+vim.keymap.set("n", "<CR>", "ZZ", { desc = "Confirm", buffer = true })
 vim.keymap.set("n", "q", vim.cmd.cquit, { desc = "Abort", buffer = true, nowait = true })
 vim.keymap.set("n", "<Tab>", "<C-a>", { desc = "Cycle Action", buffer = true, remap = true })
 vim.keymap.set("n", "<S-Tab>", "<C-x>", { desc = "Cycle Action", buffer = true, remap = true })

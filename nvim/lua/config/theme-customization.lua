@@ -103,6 +103,8 @@ function M.themeModifications()
 		setHl("@number", { fg = "#7ca2ff" })
 		setHl("@number.comment", { link = "@number" })
 
+		updateHl("LspInlayHint", "guibg=#323543")
+
 		setHl("Constant", {})
 		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
 		setHl("Boolean", { link = "Special" })
