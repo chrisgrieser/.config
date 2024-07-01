@@ -35,13 +35,8 @@ notification_count=$(curl -sL \
 	yq ". | length")
 
 if [[ $notification_count -eq 0 ]]; then
-	icon=""
-	label=""
-	pad=0
+	sketchybar --set "$NAME" drawing=false
 else
-	icon=""
-	label="$notification_count"
-	pad=15
+	sketchybar --set "$NAME" drawing=true label="$notification_count"
 fi
 
-sketchybar --set "$NAME" icon="$icon" label="$label" background.padding_right=$pad

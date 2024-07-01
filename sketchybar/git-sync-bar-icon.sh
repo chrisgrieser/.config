@@ -2,9 +2,11 @@
 export GIT_OPTIONAL_LOCKS=0
 
 function set_sketchybar {
-	icon=""
-	[[ -n "$all_changes" ]] && icon=""
-	sketchybar --set "$NAME" icon="$icon" label="$all_changes"
+	if [[ -z "$all_changes" ]] ; then
+		sketchybar --set "$NAME" drawing=false
+	else
+		sketchybar --set "$NAME" drawing=true label="$all_changes"
+	fi
 }
 
 perma_repos_path="$HOME/.config/perma-repos.csv"

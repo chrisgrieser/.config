@@ -34,12 +34,7 @@ reminder_count=$({
 	echo "$reminders_yesterday"
 } | grep --count "^\d\+: ")
 if [[ $reminder_count -eq 0 ]]; then
-	sketchybar --set "$NAME" label="$reminder_count" icon="$icon" icon.padding_right=$padding
-	reminder_count=""
-	icon=""
-	padding=0
+	sketchybar --set "$NAME" drawing=false
 else
-	icon=" "
-	padding=3
+	sketchybar --set "$NAME" drawing=true label="$reminder_count"
 fi
-sketchybar --set "$NAME" label="$reminder_count" icon="$icon" icon.padding_right=$padding

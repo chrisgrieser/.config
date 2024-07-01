@@ -30,8 +30,6 @@ second_row="popup.clock"
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
 
-statswidth=240
-
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
@@ -40,9 +38,10 @@ sketchybar \
 	--bar \
 	height="60" position="top" display="all" \
 	padding_left=0 padding_right=0 color="$bg_color" \
+	\
 	--default \
 	updates="when_shown" drawing="on" align="left" \
-	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" \
+	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" icon.padding_right=3 \
 	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
@@ -54,41 +53,39 @@ sketchybar \
 	background.padding_left=8 \
 	\
 	--add item weather $first_row \
-	--set weather update_freq=1200 \
+	--set weather update_freq=1200 icon.y_offset=-1 drawing=false \
 	script="$plugin_dir/weather.sh" \
-	icon.y_offset=-1 label.padding_left=3 \
+	\
+	--add alias "BusyCal Menu,Item-0" $first_row \
+	alias.color="$font_color" \
+	--set "BusyCal Menu,Item-0" padding_left=-10 padding_right=0 y_offset=17 \
 	\
 	--add item github_notif $first_row \
-	--set github_notif update_freq=300 \
-	script="$plugin_dir/github_notification_count.sh" \
+	--set github_notif update_freq=300 icon="" drawing=false script="$plugin_dir/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched \
 	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
-	--set reminders_count update_freq=3600 \
+	--set reminders_count update_freq=3600 icon=" " drawing=false \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \
 	\
-	--add alias "BusyCal Menu,Item-0" $first_row \
-	alias.color="$font_color" \
-	--set "BusyCal Menu,Item-0" padding_left=-15 \
-	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
-	--set "Stats,CombinedModules" width=$statswidth \
+	--set "Stats,CombinedModules" padding_right=-20 \
 	\
 	--add item sync-indicator $second_row \
-	--set sync-indicator update_freq=300 icon.padding_right=3 \
+	--set sync-indicator update_freq=300 icon="" drawing=false \
 	script="$plugin_dir/git-sync-bar-icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	--subscribe sync-indicator system_woke \
 	\
 	--add item package-updates $second_row \
-	--set package-updates update_freq=86400 \
+	--set package-updates update_freq=86400 icon=" " drawing=false \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
 	\
 	--update # needs to run at the end of config and should not be run in an item script
