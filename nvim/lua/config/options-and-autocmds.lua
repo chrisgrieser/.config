@@ -386,24 +386,16 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 -- simplified version of `git-conflict.nvim`
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
-		local conflictMarkerRegex = [[^\(<<<<<<<\|=======\|>>>>>>>\||||||||\).*]]
+		local currentFile = vim.api.nvim_buf_get_name(ctx.buf)
+		vim.system({ "git", "diff", "--check", "--", currentFile }, {}, function(out)
+			if out.code == 0 then return end -- no conflict markers
 
-		-- check is there is a conflict marker in the buffer
-		local vimReg = vim.regex(conflictMarkerRegex)
-		local linesCount = vim.api.nvim_buf_line_count(ctx.buf)
-		local lineWithConflict
-		for i = 0, linesCount - 1 do
-			local match = vimReg:match_line(ctx.buf, i)
-			if match then
-				lineWithConflict = i + 1
-				break
-			end
-		end
-		if not lineWithConflict then return end
+			local conflictLnum = out.stderr:match("(%d+): leftover conflict marker")
+			assert(conflictLnum, "pattern failed: " .. out.stderr)
 
-		-- move, highlight, no diagnostics
-		vim.api.nvim_win_set_cursor(0, { lineWithConflict, 0 })
-		vim.fn.matchadd("DiagnosticVirtualTextInfo", conflictMarkerRegex)
-		vim.diagnostic.enable(false, { bufnr = ctx.buf })
+			vim.api.nvim_win_set_cursor(0, { tonumber(conflictLnum), 0 })
+			vim.fn.matchadd("DiagnosticVirtualTextInfo", [[^\(<<<<<<<\|=======\|>>>>>>>\||||||||\).*]])
+			vim.diagnostic.enable(false, { bufnr = ctx.buf })
+		end)
 	end,
 })
