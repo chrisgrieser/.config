@@ -3,7 +3,8 @@
 
 // "run" function used by Alfred
 // when used as Script Filter, the returned value must be a stringified JSON object
-declare type AlfredRun = (argv: string[]) => string | undefined;
+// biome-ignore lint/suspicious/noConfusingVoidType: needed here for try optional return
+declare type AlfredRun = (argv: string[]) => void | string;
 
 declare class AlfredScriptFilter {
 	items: AlfredItem[];
