@@ -72,6 +72,9 @@ sketchybar \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \
 	\
+	--add alias "MeetingBar,Item-0" $first_row \
+	alias.color="$font_color" \
+	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
 	--set "Stats,CombinedModules" width=$statswidth \
