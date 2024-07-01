@@ -210,7 +210,7 @@ function M.quitApps(appNames)
 	for _, name in pairs(appNames) do
 		local appObj = M.app(name)
 		if appObj then
-			if name == "WezTerm" or name == "wezterm-gui" then 
+			if name == "WezTerm" or name == "wezterm-gui" then
 				appObj:kill9() -- avoid confirmation
 			else
 				appObj:kill()
