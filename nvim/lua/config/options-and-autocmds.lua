@@ -392,16 +392,24 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 			{ "git", "diff", "--check", "--", currentFile },
 			{},
 			vim.schedule_wrap(function(out)
-				local noConflicts = out.code == 0 and not out.stdout:find("leftover conflict marker")
-				if noConflicts then return end
+				local noConflicts = out.code == 0 or vim.trim(out.stdout) == ""
+				local noGitRepo = vim.startswith(out.stdout, "warning: Not a git repository")
+				if noConflicts or noGitRepo then return end
 
-				local conflictLnum = out.stdout:match("(%d+): leftover conflict marker")
-				if not conflictLnum then return end
+				local firstConflict
+				local ns = vim.api.nvim_create_namespace("conflictMarkers")
+				local lines = vim.split(out.stdout, "\n")
+				for _, line in ipairs(lines) do
+					local conflictLnum = line:match("(%d+): leftover conflict marker")
+					if conflictLnum then
+						local lnum = tonumber(conflictLnum) or 1
+						vim.api.nvim_buf_add_highlight(0, ns, "DiagnosticVirtualTextInfo", lnum, 0, -1)
+						if not firstConflict then firstConflict = lnum end
+					end
+				end
 
-				local conflictMarkerRegex = [[^\(<<<<<<<\|=======\|>>>>>>>\||||||||\).*]]
-				vim.fn.matchadd("DiagnosticVirtualTextInfo", conflictMarkerRegex)
+				vim.api.nvim_win_set_cursor(0, { firstConflict, 0 })
 				vim.diagnostic.enable(false, { bufnr = ctx.buf })
-				vim.api.nvim_win_set_cursor(0, { tonumber(conflictLnum), 0 })
 			end)
 		)
 	end,
