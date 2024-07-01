@@ -387,20 +387,21 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
-		local currentFile = vim.api.nvim_buf_get_name(ctx.buf)
+		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
+
 		vim.system(
-			{ "git", "diff", "--check", "--", currentFile },
+			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(ctx.buf) },
 			{},
 			vim.schedule_wrap(function(out)
 				local noConflicts = out.code == 0
 				local noGitRepo = vim.startswith(out.stdout, "warning: Not a git repository")
 				if noConflicts or noGitRepo then return end
 
-				local firstConflict
 				local ns = vim.api.nvim_create_namespace("conflictMarkers")
+				local firstConflict
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
 					local lnum = tonumber(conflictLnum)
-					vim.api.nvim_buf_add_highlight(ctx.buf, ns, "DiagnosticVirtualTextInfo", lnum - 1, 0, -1)
+					vim.api.nvim_buf_add_highlight(ctx.buf, ns, hlgroup, lnum - 1, 0, -1)
 					if not firstConflict then firstConflict = lnum end
 				end
 				if not firstConflict then return end

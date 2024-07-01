@@ -19,6 +19,8 @@ alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
 
+alias conflict="git diff --name-only --diff-filter=U --relative"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # issues numbers & git revs
