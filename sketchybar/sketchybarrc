@@ -40,12 +40,18 @@ sketchybar \
 	padding_left=0 padding_right=0 color="$bg_color" \
 	\
 	--default \
-	updates="when_shown" drawing="on" align="left" \
+	updates="when_shown" drawing=true align="left" \
 	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" icon.padding_right=3 \
 	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" \
+	\
+	`#─────────────────────────────────────────────────────────────────────────` \
+	\
+	--add alias "BusyCal Menu,Item-0" $first_row \
+	alias.color="$font_color" \
+	--set "BusyCal Menu,Item-0" padding_left=-10 padding_right=-10 y_offset=17 \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
@@ -56,12 +62,9 @@ sketchybar \
 	--set weather update_freq=1200 icon.y_offset=-1 drawing=false \
 	script="$plugin_dir/weather.sh" \
 	\
-	--add alias "BusyCal Menu,Item-0" $first_row \
-	alias.color="$font_color" \
-	--set "BusyCal Menu,Item-0" padding_left=-10 padding_right=0 y_offset=17 \
-	\
 	--add item github_notif $first_row \
-	--set github_notif update_freq=300 icon="" drawing=false script="$plugin_dir/github_notification_count.sh" \
+	--set github_notif update_freq=300 icon="" drawing=false \
+	script="$plugin_dir/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched \
 	--subscribe github_notif system_woke \
 	\
@@ -73,9 +76,12 @@ sketchybar \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count \
 	\
+	`#─────────────────────────────────────────────────────────────────────────` \
+	\
 	--add alias "Stats,CombinedModules" $second_row \
 	alias.color="$font_color" \
 	--set "Stats,CombinedModules" padding_right=-20 \
+	click_script="$plugin_dir/stats_click.applescript" \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=300 icon="" drawing=false \
@@ -85,7 +91,8 @@ sketchybar \
 	--subscribe sync-indicator system_woke \
 	\
 	--add item package-updates $second_row \
-	--set package-updates update_freq=86400 icon=" " drawing=false \
+	--set package-updates update_freq=86400 icon="" drawing=false \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
 	\
+	`#─────────────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script
