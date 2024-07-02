@@ -713,7 +713,7 @@ rules:
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # v = open first volume (in new window)
       - type: basic
-        from: { key_code: v, modifiers: { optional: [shift] } }
+        from: { key_code: v, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
               first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')

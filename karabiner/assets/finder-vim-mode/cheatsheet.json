@@ -225,7 +225,7 @@
     "y (Y)\ncopy file (content)",
     "x (X)\ncross-move (copy)",
     "c (C)\nclose folds  (recursive)",
-    "v\ngoto 1st ejectable volume",
+    "v (V)\n1st remo- vable vol. (new win)",
     "b\ntoggle  \"bkp\" suffix",
     "n (N)\nnew file (dir)\n\n\n⌃n name",
     "m (M)\nmove (to new dir)",
