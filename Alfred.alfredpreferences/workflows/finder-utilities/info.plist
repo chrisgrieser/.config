@@ -1332,15 +1332,29 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>if [[ -f "$1" ]]  ; then
+	open -R "$1"
+elif [[ -d "$1" ]] ; then
+	open "$1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>D3680E24-3C4B-4803-BF36-022909BBD0C1</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1648,6 +1662,8 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
+			<key>note</key>
+			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
