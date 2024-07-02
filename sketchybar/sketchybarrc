@@ -8,9 +8,9 @@ plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
 i=0
 while ! pgrep -xq "Stats"; do
 	open -a "Stats"
-	sleep 2
+	sleep 1.5
 	i=$((i + 1))
-	[[ $i -gt 4 ]] && break
+	[[ $i -gt 10 ]] && break
 done
 
 # switch colors depending on dark mode
@@ -36,7 +36,7 @@ system_font="Lucida Grande"
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
-# one big call to speed up reloading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
+# PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
 	--bar \
 	height=60 position="top" display="all" \
@@ -52,7 +52,7 @@ sketchybar \
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
 	--add alias "BusyCal Menu" $first_row \
-	--set "BusyCal Menu" padding_right=-10 y_offset=17 \
+	--set "BusyCal Menu" padding_right=-10 y_offset=16 \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 \
@@ -69,7 +69,7 @@ sketchybar \
 	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
-	--set reminders_count update_freq=3600 icon=" " drawing=false \
+	--set reminders_count update_freq=3600 icon="" drawing=false \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
@@ -78,8 +78,8 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add alias "Stats,CombinedModules" "$second_row" \
-	--set "Stats,CombinedModules" padding_right=-20 \
+	--add alias "Stats" "$second_row" \
+	--set "Stats" padding_right=-20 \
 	\
 	--add item sync-indicator "$second_row" \
 	--set sync-indicator update_freq=300 icon="" drawing=false \
