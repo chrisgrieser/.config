@@ -275,7 +275,7 @@ serverConfigs.yamlls = {
 		yaml = {
 			format = {
 				enable = true,
-				printWidth = 105,
+				printWidth = 100,
 				proseWrap = "always",
 			},
 		},
@@ -339,8 +339,8 @@ serverConfigs.ltex = {
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
 		-- Disable in Obsidian vaults (HACK as there is no `.ltexignore`)
-		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-		if #obsiDir > 0 then vim.lsp.buf_detach_client(bufnr, ltex.id) end
+		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
+		if obsiDir then vim.lsp.buf_detach_client(bufnr, ltex.id) end
 	end,
 }
 
@@ -372,8 +372,8 @@ serverConfigs.vale_ls = {
 
 	on_attach = function(vale, bufnr)
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
-		local obsiDir = vim.fs.find(".obsidian", { upward = true, type = "directory" })
-		if #obsiDir > 0 then
+		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
+		if obsiDir then
 			vim.lsp.buf_detach_client(bufnr, vale.id)
 			vim.diagnostic.reset(nil, bufnr)
 		end
