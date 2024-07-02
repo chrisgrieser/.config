@@ -102,7 +102,8 @@ local efmTools = {
 			lintCommand = '[[ ${INPUT} =~ ".github/workflows/" ]] && actionlint -no-color -oneline -stdin-filename ${INPUT} -',
 			lintStdin = true,
 			lintFormats = {
-				-- actionlint integrates shellcheck, which are following three
+				-- actionlint integrates shellcheck, which are the following three
+				-- (they must come before the actionlint's own errors)
 				"%f:%l:%c: %.%#: SC%n:%trror:%m",
 				"%f:%l:%c: %.%#: SC%n:%tarning:%m",
 				"%f:%l:%c: %.%#: SC%n:%tnfo:%m",
