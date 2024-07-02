@@ -1,20 +1,16 @@
-vim.opt_local.listchars:remove("multispace")
-vim.opt_local.spell = true
-vim.opt_local.spelloptions = "camel"
-
+local keymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 
-vim.keymap.set("i", "<Tab>", "<End>", { buffer = true })
-vim.keymap.set("n", "<Tab>", "A", { buffer = true })
+-- options
+vim.opt_local.listchars:remove("multispace")
 
-vim.keymap.set("n", "ge", "]s", { buffer = true })
-vim.keymap.set("n", "gE", "[s", { buffer = true })
+-- spelling
+vim.opt_local.spell = true
+vim.opt_local.spelloptions = "camel"
+keymap("n", "ge", "]s")
+keymap("n", "gE", "[s")
 
--- condition ensures this isn't a DressingInput buffer, which already has
--- mappings of its own
-if vim.bo.buftype ~= "nofile" then
-	vim.keymap.set("n", "<CR>", "ZZ", { buffer = true, desc = "Confirm" })
-	-- quting with error code = aborting commit
-	vim.keymap.set("n", "q", vim.cmd.cquit, { buffer = true, nowait = true, desc = "Abort" })
-end
-
+-- utility keymap
+keymap("i", "<Tab>", "<End>")
+keymap("n", "<CR>", "ZZ", { desc = "Confirm" })
+keymap("n", "q", vim.cmd.cquit, { desc = "Abort" }) -- quitting with error = aborting commit
