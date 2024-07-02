@@ -20,12 +20,20 @@ settings.modeAfterYank = "normal"; // = leave visual mode after yanking
 settings.caseSensitive = false;
 settings.smartCase = true;
 
+// disable surfingkey's pdf viewer
+chrome.storage.local.set({ noPdfViewer: 1 });
+
 //──────────────────────────────────────────────────────────────────────────────
 // EMOJIS
 
 settings.enableEmojiInsertion = true;
 settings.startToShowEmoji = 2;
-const alreadyHaveEmojis = ["github.com", "web.whatsapp.com", "web.telegram.org"];
+const alreadyHaveEmojis = [
+	"github.com", // already has emoji picker
+	"web.whatsapp.com",
+	"web.telegram.org",
+	"www.google.com", // also applies to google maps
+];
 if (alreadyHaveEmojis.includes(window.location.host)) settings.enableEmojiInsertion = false;
 
 //──────────────────────────────────────────────────────────────────────────────
