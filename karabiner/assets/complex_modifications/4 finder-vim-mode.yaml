@@ -711,6 +711,19 @@ rules:
                 end tell
               ")
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # v = open first volume (in new window)
+      - type: basic
+        from: { key_code: v, modifiers: { optional: [shift] } }
+        to_if_alone:
+          - shell_command: |
+              first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+              [[ -z "$first_volume" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "No ejectable volume found."
+              error=$(osascript -e "
+                set the_volume to (\"$first_volume\" as POSIX file)
+                tell application \"Finder\" to open the_volume 
+              ")
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
       - type: basic
         from: { key_code: u }
