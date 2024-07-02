@@ -17,9 +17,9 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"binhtran432k/dracula.nvim",
+	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- "binhtran432k/dracula.nvim",
 	-- "oxfist/night-owl.nvim",
-	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
