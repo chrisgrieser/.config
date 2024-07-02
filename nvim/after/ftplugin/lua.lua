@@ -1,9 +1,9 @@
 local u = require("config.utils")
+local keymap = require("config.utils").bufKeymap
+local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
-local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
-
 abbr("//", "--")
 abbr("const", "local")
 abbr("fi", "end")
@@ -14,33 +14,28 @@ abbr("===", "==")
 
 --------------------------------------------------------------------------------
 
-vim.keymap.set(
+keymap(
 	"n",
 	"<leader>ee",
 	function() require("funcs.lua-eval").luaEvalLine() end,
-	{ buffer = true, desc = " Eval Line" }
+	{ desc = " Eval Line" }
 )
 
 -- INFO needs `expr` and rhs must not be wapped in a function
-vim.keymap.set(
+keymap(
 	"n",
 	"<leader>e",
 	require("funcs.lua-eval").luaevalOperator,
-	{ buffer = true, expr = true, desc = " Eval Operator" }
+	{ expr = true, desc = " Eval Operator" }
 )
 
-vim.keymap.set(
-	"n",
-	"<leader>E",
-	"<leader>e$",
-	{ buffer = true, remap = true, desc = " Eval to EoL" }
-)
+keymap("n", "<leader>E", "<leader>e$", { remap = true, desc = " Eval to EoL" })
 
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
 
 -- lightweight version of telescope-import.nvim import (just for lua)
-vim.keymap.set("n", "<leader>cr", function()
+keymap("n", "<leader>cr", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()
@@ -73,7 +68,7 @@ vim.keymap.set("n", "<leader>cr", function()
 			u.normal("j==")
 		end
 	end)
-end, { buffer = true, desc = " require module from cwd" })
+end, { desc = " require module from cwd" })
 
 --------------------------------------------------------------------------------
 

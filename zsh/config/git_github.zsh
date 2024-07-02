@@ -16,7 +16,7 @@ alias reset='git reset'
 
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
-alias open_conflict='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
+alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner

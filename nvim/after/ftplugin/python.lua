@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
 -- python standard
@@ -20,9 +21,8 @@ vim.defer_fn(function()
 end, 1)
 
 --------------------------------------------------------------------------------
--- fix habits
-local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
-
+-- ABBREVIATIONS
+--
 abbr("true", "True")
 abbr("false", "False")
 abbr("//", "#")

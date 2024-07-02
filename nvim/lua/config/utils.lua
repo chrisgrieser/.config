@@ -72,6 +72,13 @@ function M.uniqueKeymap(modes, lhs, rhs, opts)
 	vim.keymap.set(modes, lhs, rhs, opts)
 end
 
+function M.bufKeymap(mode, key, cmd, opts)
+	opts = vim.tbl_extend("force", { buffer = true, silent = true, nowait = true }, opts or {})
+	vim.keymap.set(mode, key, cmd, opts)
+end
+
+function M.bufAbbrev(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+
 --------------------------------------------------------------------------------
 
 M.textobjRemaps = {

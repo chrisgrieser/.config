@@ -2,16 +2,14 @@ vim.bo.commentstring = "// %s" -- add space
 
 --------------------------------------------------------------------------------
 
--- fix my habits
-local function abbr(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+-- ABBREVIATIONS
+local abbr = require("config.utils").bufAbbrev
 
 abbr("cosnt", "const")
 abbr("local", "const")
 abbr("--", "//")
 abbr("~=", "!==")
 abbr("elseif", "else if")
-
--- quicker arrow function
-abbr("()", "() =>")
+abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------

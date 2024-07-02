@@ -1,9 +1,9 @@
 vim.bo.commentstring = "/* %s */"
 
 --------------------------------------------------------------------------------
+local keymap = require("config.utils").bufKeymap
 
--- toggle !important (useful for debugging selectors)
-vim.keymap.set("n", "<leader>i", function()
+keymap("n", "<leader>i", function()
 	local line = vim.api.nvim_get_current_line()
 	if line:find("!important") then
 		line = line:gsub(" ?!important", "")
@@ -11,4 +11,4 @@ vim.keymap.set("n", "<leader>i", function()
 		line = line:gsub(";?$", " !important;", 1)
 	end
 	vim.api.nvim_set_current_line(line)
-end, { buffer = true, desc = " Toggle !important", nowait = true })
+end, { desc = " Toggle !important" })
