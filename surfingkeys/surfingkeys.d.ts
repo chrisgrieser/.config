@@ -1,6 +1,9 @@
 // DOCS https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 declare const api: SurfingKeysAPI;
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+declare const chrome: any;
+
 declare type SurfingKeysAPI = {
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Normal: {
