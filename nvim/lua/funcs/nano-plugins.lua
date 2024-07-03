@@ -64,10 +64,12 @@ function M.openAtRegex101()
 	data.testString = ""
 
 	-- https://github.com/firasdib/Regex101/wiki/API#curl-3
+	local curlTimeoutSecs = 10
 	-- stylua: ignore
 	local response = vim.system({
 		"curl",
 		"--silent",
+		"--max-time", tostring(curlTimeoutSecs),
 		"--request", "POST",
 		"--header", "Expect:",
 		"--header", "Content-Type: application/json",
