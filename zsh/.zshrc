@@ -11,7 +11,6 @@ CONFIG_FILES=(
 	docs_man
 
 	git_github
-	jujustu
 	homebrew
 	python_pip
 
