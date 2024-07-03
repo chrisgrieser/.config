@@ -86,7 +86,7 @@ function run() {
 	const folderArray = app
 		.doShellScript(
 			`find "${dotfileFolder}" -type d \
-			-not -path "**/.git/*" -not -path "**/Alfred.alfredpreferences/workflows/*" \
+			-not -path "**/.git/*" -not -path "**/Alfred.alfredpreferences/*" \
 			-not -path "**/Spoons/*" -not -path "**/mackup/backups/*" `,
 		)
 		.split("\r")
