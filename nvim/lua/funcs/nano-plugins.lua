@@ -61,23 +61,19 @@ function M.openAtRegex101()
 		notify("", "Unsupported filetype.", "warn")
 		return
 	end
-	vim.notify("👾 data: " .. vim.inspect(data))
+	data.testString = ""
 
 	-- https://github.com/firasdib/Regex101/wiki/API#curl-3
+	-- stylua: ignore
 	local response = vim.system({
 		"curl",
 		"--silent",
-		"-X",
-		"Post",
-		"-H",
-		"Expect:",
-		"-H",
-		"Content-Type: application/json",
-		"-d",
-		vim.json.encode(data),
+		"--request", "POST",
+		"--header", "Expect:",
+		"--header", "Content-Type: application/json",
+		"--data", vim.json.encode(data),
 		"https://regex101.com/api/regex",
 	}):wait()
-	vim.notify("👾 response: " .. vim.inspect(response))
 
 	if response.code ~= 0 then
 		notify("Regex101", response.stderr, "error")
