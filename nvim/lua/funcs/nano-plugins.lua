@@ -36,38 +36,56 @@ end
 
 --- open the next regex at https://regex101.com/
 function M.openAtRegex101()
-	local lang = vim.bo.filetype
-	local text, pattern, replace, flags
+	local ft = vim.bo.filetype
+	local data = {}
 
-	if lang == "javascript" or lang == "typescript" then
+	if ft == "javascript" or ft == "typescript" then
 		vim.cmd.TSTextobjectSelect("@regex.outer")
 		normal('"zy')
+
+		data.regex, data.flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
+		data.substitution = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+		data.delimiter = "/"
+		data.flavor = "javascript"
+
 		vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
-		text = vim.fn.getreg("z")
-		pattern = text:match("/(.*)/")
-		flags = text:match("/.*/(%l*)") or "gm"
-		replace = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
-	elseif lang == "python" then
+	elseif ft == "python" then
 		normal('"zyi"vi"') -- yank & reselect inside quotes
-		pattern = vim.fn.getreg("z")
+
+		data.regex = vim.fn.getreg("z")
 		local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
-		flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g"
+		data.flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g"
+		data.delimiter = '"'
+		data.flavor = "python"
 	else
 		notify("", "Unsupported filetype.", "warn")
 		return
 	end
+	vim.notify("👾 data: " .. vim.inspect(data))
 
-	-- CAVEAT `+` is the only character that does not get escaped correctly
-	pattern = pattern:gsub("%+", "PLUS")
+	-- https://github.com/firasdib/Regex101/wiki/API#curl-3
+	local response = vim.system({
+		"curl",
+		"--silent",
+		"-X",
+		"Post",
+		"-H",
+		"Expect:",
+		"-H",
+		"Content-Type: application/json",
+		"-d",
+		vim.json.encode(data),
+		"https://regex101.com/api/regex",
+	}):wait()
+	vim.notify("👾 response: " .. vim.inspect(response))
 
-	-- DOCS https://github.com/firasdib/Regex101/wiki/FAQ#how-to-prefill-the-fields-on-the-interface-via-url
-	local url = ("https://regex101.com/?regex=%s&flags=%s&flavor=%s%s"):format(
-		pattern,
-		flags,
-		lang,
-		(replace and "&subst=" .. replace or "")
-	)
-	vim.ui.open(url)
+	if response.code ~= 0 then
+		notify("Regex101", response.stderr, "error")
+		return
+	end
+	local id = vim.json.decode(vim.trim(response.stdout)).permalinkFragment
+	local permalink = "https://regex101.com/r/" .. id
+	vim.ui.open(permalink)
 end
 
 ---@param first any -- if truthy, run first recipe
