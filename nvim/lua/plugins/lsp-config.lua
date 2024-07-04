@@ -376,7 +376,7 @@ serverConfigs.vale_ls = {
 		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
 		local nanoBlog = vim.uv.cwd():find("/nanotipsforvim%-blog")
 		if obsiDir or nanoBlog then
-			vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, vale.id) end, 100)
+			vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, vale.id) end, 400)
 		end
 	end,
 }

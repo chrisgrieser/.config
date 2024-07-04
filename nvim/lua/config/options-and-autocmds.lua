@@ -389,6 +389,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
 		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
 
+		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 		vim.system(
 			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(ctx.buf) },
 			{},
