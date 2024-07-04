@@ -108,9 +108,9 @@ local function telescopeConfig()
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
 					local project = path
-						:gsub(vim.pesc(vim.g.localRepos), "") -- root in localRepo root
-						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "") -- root in dotfiles
-						:gsub(vim.pesc(vim.fs.normalize("~")), "") -- root in home
+						:gsub(vim.pesc(vim.g.localRepos), "")
+						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "")
+						:gsub(vim.pesc(vim.fs.normalize("~")), "")
 						:match("/(.-)/") -- highest parent
 						or ""
 					local tail = vim.fs.basename(path)
@@ -138,8 +138,8 @@ local function telescopeConfig()
 					n = {
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
-						["<CR>"] = "git_staging_toggle",
-						["<D-CR>"] = "select_default", -- opens file
+						["<Space>"] = "git_staging_toggle",
+						["<CR>"] = "select_default", -- opens file
 					},
 				},
 				layout_strategy = "vertical",
@@ -157,28 +157,27 @@ local function telescopeConfig()
 				initial_mode = "normal",
 				prompt_title = "Git Log",
 				layout_config = { horizontal = { preview_width = 0.5 } },
-				-- add commit time (%cr) & `--all`
-				git_command = { "git", "log", "--all", "--pretty=%h %s %cr", "--", "." },
+				git_command = { "git", "log", "--all", "--format=%h %s %cr", "--", "." },
 				previewer = require("telescope.previewers").new_termopen_previewer {
 					dyn_title = function(_, entry) return entry.value end, -- hash as title
 					get_command = function(entry, status)
 						local hash = entry.value
 						local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
 						local statArgs = ("%s,%s,25"):format(previewWidth, math.floor(previewWidth / 2))
-						local previewFormat =
-							"%C(bold)%C(magenta)%s %n%C(reset)%C(cyan)%D%C(reset)%n%b%n%C(blue)%an %C(yellow)(%ch) %C(reset)"
-						local cmd = {
-							"git show " .. hash,
-							"--color=always",
-							"--stat=" .. statArgs,
-							("--format=%q"):format(previewFormat),
-							"| sed -e 's/^ //' -e '$d' ;", -- remove clutter
-						}
-						return table.concat(cmd, " ")
+						local previewFormat = "%C(bold)%C(magenta)%s%C(reset)%n"
+							.. "%C(cyan)%D%n"
+							.. "%C(blue)%an %C(yellow)(%ch)%n"
+							.. "%C(reset)%b"
+
+						return ("git show %s --color=always --stat=%s --format=%q | sed '$d'"):format(
+							hash,
+							statArgs,
+							previewFormat
+						)
 					end,
 				},
 				mappings = {
-					i = { ["<C-r>"] = "git_reset_soft" },
+					i = { ["<C-r>"] = "git_reset_mixed" },
 				},
 			},
 			git_branches = {
