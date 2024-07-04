@@ -374,9 +374,9 @@ serverConfigs.vale_ls = {
 	on_attach = function(vale, bufnr)
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
 		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
-		if obsiDir then
-			vim.lsp.buf_detach_client(bufnr, vale.id)
-			vim.diagnostic.reset(nil, bufnr)
+		local nanoBlog = vim.uv.cwd():find("/nanotipsforvim%-blog")
+		if obsiDir or nanoBlog then
+			vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, vale.id) end, 100)
 		end
 	end,
 }
