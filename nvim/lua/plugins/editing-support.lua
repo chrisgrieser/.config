@@ -203,6 +203,7 @@ return {
 				"<D-t>",
 				"${}<Left>" .. '<Esc>cs"`a',
 				mode = "i",
+				ft = { "javascript", "typescript" },
 				remap = true,
 				desc = "$󰘦 Template string & change quotes",
 			},
@@ -238,17 +239,13 @@ return {
 					find = "%[%[.-%]%]",
 					add = { "[[", "]]" },
 					delete = "(%[%[)().-(%]%])()",
-					change = {
-						target = "(%[%[)().-(%]%])()",
-					},
+					change = { target = "(%[%[)().-(%]%])()" },
 				},
 				["/"] = { -- regex
 					find = "/.-/",
 					add = { "/", "/" },
 					delete = "(/)().-(/)()",
-					change = {
-						target = "(/)().-(/)()",
-					},
+					change = { target = "(/)().-(/)()" },
 				},
 			},
 		},
@@ -261,7 +258,7 @@ return {
 			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			{ "Ä", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 			-- stylua: ignore end
-			{ "ä", '"zdawel"zph', ft = "markdown", desc = " Move Word Right" },
+			{ "ä", '"zdawel"zph', ft = "markdown", desc = "󰔰 Move Word Right" },
 			{ "Ä", '"zdawbh"zph', ft = "markdown", desc = "󰶢 Move Word Left" },
 		},
 		opts = {
