@@ -151,7 +151,7 @@ function M.toggleOrIncrement()
 	for word, opposite in pairs(toggles) do
 		if cword == word then toggle = opposite end
 		if cword == opposite then toggle = word end
-		if toggle then return "mzciw" .. toggle .. "<Esc>`z" end
+		if toggle then return 'mz"_ciw' .. toggle .. "<Esc>`z" end
 	end
 	return "<C-a>"
 end
