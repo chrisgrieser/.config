@@ -8,9 +8,9 @@ plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
 i=0
 while ! pgrep -xq "Stats"; do
 	open -a "Stats"
-	sleep 1.5
+	sleep 1
 	i=$((i + 1))
-	[[ $i -gt 10 ]] && break
+	[[ $i -gt 5 ]] && break
 done
 
 # switch colors depending on dark mode
@@ -30,9 +30,6 @@ second_row="popup.BusyCal Menu"
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
 
-# PENDING
-# alias.cutoff https://github.com/FelixKratz/SketchyBar/issues/575
-
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
@@ -43,33 +40,35 @@ sketchybar \
 	padding_left=0 margin=-5 color="$bg_color" \
 	\
 	--default \
+	updates="when_shown" drawing=false \
 	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" icon.padding_right=3 \
 	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
 	background.padding_right=10 label.padding_right=2 \
+	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" popup.padding_left=20 \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
 	--add alias "BusyCal Menu" $first_row \
-	--set "BusyCal Menu" padding_right=-10 y_offset=16 \
+	--set "BusyCal Menu" padding_right=-10 y_offset=16 drawing=true \
 	\
 	--add item clock $first_row \
-	--set clock update_freq=1 \
+	--set clock update_freq=1 drawing=true \
 	script="$plugin_dir/clock.sh" \
 	\
 	--add item weather $first_row \
-	--set weather update_freq=1200 icon.y_offset=-1 drawing=false \
+	--set weather update_freq=1200 icon.y_offset=-1 \
 	script="$plugin_dir/weather.sh" \
 	\
 	--add item github_notif $first_row \
-	--set github_notif update_freq=300 icon="" drawing=false \
+	--set github_notif update_freq=300 icon="" \
 	script="$plugin_dir/github_notification_count.sh" \
 	--subscribe github_notif front_app_switched \
 	--subscribe github_notif system_woke \
 	\
 	--add item reminders_count $first_row \
-	--set reminders_count update_freq=3600 icon="" drawing=false \
+	--set reminders_count update_freq=3600 icon="" \
 	script="$plugin_dir/reminders-count.sh" \
 	--subscribe reminders_count front_app_switched \
 	--subscribe reminders_count system_woke \
@@ -79,17 +78,17 @@ sketchybar \
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
 	--add alias "Stats" "$second_row" \
-	--set "Stats" padding_right=-20 \
+	--set "Stats" padding_right=-20 drawing=true \
 	\
 	--add item sync-indicator "$second_row" \
-	--set sync-indicator update_freq=300 icon="" drawing=false \
+	--set sync-indicator update_freq=300 icon="" \
 	script="$plugin_dir/git-sync-bar-icon.sh" \
+	--subscribe sync-indicator system_woke \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
-	--subscribe sync-indicator system_woke \
 	\
 	--add item package-updates "$second_row" \
-	--set package-updates update_freq=86400 icon="" drawing=false \
+	--set package-updates update_freq=86400 icon="" \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \

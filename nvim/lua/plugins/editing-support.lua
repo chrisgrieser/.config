@@ -63,16 +63,7 @@ return {
 
 			-- keymaps like `<C-a>`
 			{ "<", ">", ft = { "vim" } },
-			{
-				"<",
-				">",
-				ft = { "lua" },
-				cond = function(fn)
-					return fn.in_string()
-						-- PENDING https://github.com/altermo/ultimate-autopair.nvim/issues/88
-						and not vim.endswith(vim.api.nvim_buf_get_name(0), "/ftplugin/lua.lua")
-				end,
-			},
+			{ "<", ">", ft = { "lua" }, cond = function(fn) return fn.in_string() end },
 		},
 	},
 	{ -- better `:substitute`
@@ -270,7 +261,7 @@ return {
 			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
 			{ "Ä", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
 			-- stylua: ignore end
-			{ "ä", '"zdawel"zph', ft = "markdown", desc = "󰶢 Move Word Right" },
+			{ "ä", '"zdawel"zph', ft = "markdown", desc = " Move Word Right" },
 			{ "Ä", '"zdawbh"zph', ft = "markdown", desc = "󰶢 Move Word Left" },
 		},
 		opts = {
@@ -390,7 +381,7 @@ return {
 			marker = "👾",
 			logStatements = {
 				objectLog = {
-					-- repurposing objectLog for debugging via AppleScript notification
+					-- re-purposing `objectLog` for debugging via AppleScript notification
 					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 
 					-- hammerspoon
