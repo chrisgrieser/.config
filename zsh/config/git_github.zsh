@@ -67,7 +67,7 @@ function ga {
 		eval "$git_status_cmd" | fzf \
 			--ansi --nth=2.. --track \
 			--preview="$file_diff | delta $style --file-style=omit" \
-			--bind="enter:reload($check_staged $add_or_unadd ; $git_status_cmd)"
+			--bind="space:reload($check_staged $add_or_unadd ; $git_status_cmd)"
 	)
 
 	cd "$dir" || return 1
