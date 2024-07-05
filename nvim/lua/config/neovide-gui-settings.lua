@@ -63,7 +63,7 @@ g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is 
 g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 g.neovide_remember_window_size = true
 g.neovide_hide_mouse_when_typing = true
-g.neovide_transparency = 0.92
+g.neovide_transparency = 0.9
 g.neovide_refresh_rate = isAtMother and 25 or 50
 vim.opt.linespace = -2 -- less line height
 
