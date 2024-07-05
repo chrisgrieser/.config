@@ -72,7 +72,6 @@ return {
 	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
-		cond = false,
 		event = "BufReadPre",
 		opts = {
 			hint_prefix = "󰏪 ",

@@ -58,7 +58,7 @@ local routes = {
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
 	-- gitsigns
-	{ filter = { event = "notify", find = "Hunk %d+ of %d+" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
 
 	-----------------------------------------------------------------------------
 	-- SKIP
@@ -73,9 +73,6 @@ local routes = {
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-
-	-- E211 no longer needed, since auto-closing deleted buffers
-	-- { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -128,6 +125,7 @@ return {
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true, foldenable = true },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
+					format = { "{cmdline} ", "{message}" } -- leave out "{level}"
 				},
 				split = {
 					enter = true,
