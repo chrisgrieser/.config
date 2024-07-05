@@ -22,25 +22,35 @@ else
 	git clone "$url" --depth="$clone_depth" --no-single-branch --no-tags
 fi
 
+success=$?
+if [[ $success -ne 0 ]]; then
+	echo "ERROR: git clone failed."
+	exit 1
+fi
+
 # Open in terminal via Alfred
 echo -n "$local_repo_folder/$reponame"
 
-#───────────────────────────────────────────────────────────────────────────────
-# RESTORE MTIME
-
 cd "$reponame" || return 1
 
-# https://stackoverflow.com/a/36243002/22114136
+#───────────────────────────────────────────────────────────────────────────────
+
+# SWITCH TO DEFAULT BRANCH
+if [[ -n "$default_branch" ]]; then
+	# `git switch` fails silently if the branch does not exist
+	git switch "$default_branch" &> /dev/null
+fi
+
+# RESTORE MTIME
 if [[ "$restore_mtime" == "1" ]]; then
+	# https://stackoverflow.com/a/36243002/22114136
 	git ls-tree -r -t --full-name --name-only HEAD | while read -r file; do
 		timestamp=$(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 HEAD -- "$file")
 		touch -t "$timestamp" "$file"
 	done
 fi
 
-#───────────────────────────────────────────────────────────────────────────────
 # FORK ON CLONE (if not owner)
-
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
 if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi

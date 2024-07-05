@@ -27,8 +27,7 @@ alias rel='just release' # `just` task runner
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
 ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,9})((\^+|~)[0-9]*)?' 'fg=yellow')
 
-# commit messages longer than 50 chars: orange, longer than 72 chars: red
-ZSH_HIGHLIGHT_REGEXP+=('^(gc|gC|git commit -m) ".{51,71}' 'fg=208') # 208 = orange
+# commit message overlength
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|gC|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
 
 # inline code with backslashes
