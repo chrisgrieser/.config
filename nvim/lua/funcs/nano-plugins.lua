@@ -34,6 +34,7 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
+--- open the next regex at https://regex101.com/
 function M.openAtRegex101()
 	local ft = vim.bo.filetype
 	local data = {}
@@ -89,7 +90,6 @@ function M.openAtRegex101()
 	end)
 end
 
----requires `dressing.nvim` and optionally `telescope.nvim`
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
@@ -131,29 +131,7 @@ function M.justRecipe(first)
 		run(recipes[1])
 	else
 		if config.skipFirstInSelection and #recipes > 1 then table.remove(recipes, 1) end
-		vim.ui.select(recipes, {
-			prompt = "Just Recipes",
-			telescope = {
-				prompt_prefix = " ",
-				layout_config = {
-					horizontal = {
-						preview_width = 0.7,
-						height = 0.4,
-						width = 0.9,
-					},
-				},
-				previewer = require("telescope.previewers").new_buffer_previewer {
-					define_preview = function(self, entry)
-						local bufnr = self.state.bufnr
-						local recipe = entry.value
-						local out = vim.system({ "just", "--show=" .. recipe }):wait()
-						vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(out.stdout, "\n"))
-						vim.bo[bufnr].filetype = "bash"
-					end,
-					dyn_title = function(_, entry) return entry.value end,
-				},
-			},
-		}, run)
+		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "just-recipes" }, run)
 	end
 end
 
