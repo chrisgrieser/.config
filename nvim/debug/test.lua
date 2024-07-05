@@ -1,13 +1,1 @@
-local function toSmallCap(str)
-	local small = "󰫮󰫯󰫰󰫱󰫲󰫳󰫴󰫵󰫶󰫷󰫸󰫹󰫺󰫻󰫼󰫽󰫾󰫿󰬀󰬁󰬂󰬃󰬄󰬅󰬆󰬇"
-	local alphabet = "abcdefghijklmnopqrstuvwxyz"
-	for i = 1, #alphabet do
-		local lowerUpper = alphabet:sub(i, i) .. alphabet:sub(i, i):upper()
-		str = str:gsub("[" .. lowerUpper .. "]", small:sub(i, i))
-	end
-	return str
-end
-
-local input = "foobar"
-local output = toSmallCap(input)
-vim.notify("👾 output: " .. tostring(output))
+require("scissors.vscode-format.snippet-variables").createSnippetFile()
