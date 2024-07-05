@@ -73,7 +73,7 @@ local routes = {
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 	-- unneeded info on search patterns
-	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+	-- { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 
 	-- E211 no longer needed, since auto-closing deleted buffers
 	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
@@ -89,31 +89,20 @@ return {
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
-				callback = function(ctx)
-					highlightsInStacktrace(ctx.buf)
-					-- do not let noice override my versions of the mappings
-					vim.defer_fn(function()
-						pcall(vim.keymap.del, "n", "K", { buffer = ctx.buf })
-						pcall(vim.keymap.del, "n", "gx", { buffer = ctx.buf })
-					end, 1)
-				end,
+				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
 			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
 		end,
 		keys = {
-			{
-				"<Esc>",
-				function()
-					vim.snippet.stop()
-					vim.cmd.NoiceDismiss()
-				end,
-				desc = "󰎟 Clear Notifications & Snippet",
-			},
+			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
 		},
 		opts = {
 			routes = routes,
+			messages = {
+				view_search = "mini",
+			},
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
@@ -138,12 +127,12 @@ return {
 				popup = {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
-					win_options = { scrolloff = 8, wrap = true, concealcursor = "nv" },
+					win_options = { scrolloff = 8, wrap = true, foldenable = true },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},
 				split = {
 					enter = true,
-					size = "50%",
+					size = "60%",
 					win_options = { scrolloff = 6 },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},

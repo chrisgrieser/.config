@@ -201,6 +201,7 @@ local autoCd = {
 		".config",
 		".obsidian", -- internal Obsidian folder
 		"com~apple~CloudDocs", -- iCloud
+		"neovim" -- opt/homebrew/Cellar/neovim
 	},
 }
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -266,31 +267,25 @@ vim.api.nvim_create_autocmd("FocusGained", {
 
 -- AUTO-NOHL
 -- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
-vim.on_key(function(char)
-	local key = vim.fn.keytrans(char)
-	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
-	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
-	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
-
-	local searchStarted = (key == "/" or key == "?") and isNormalMode
-	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
-	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
-	if not (searchStarted or searchConfirmed or searchCancelled or isNormalMode) then return end
-	local searchMovement = vim.tbl_contains(searchMvKeys, key)
-	local hlSearchOn = vim.o.hlsearch
-
-	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
-		vim.opt.hlsearch = true
-	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
-		vim.opt.hlsearch = false
-	end
-
-	-- nvim-hlslens plugin
-	if searchConfirmed or searchMovement then
-		local installed, hlslens = pcall(require, "hlslens")
-		if installed then hlslens.start() end
-	end
-end, vim.api.nvim_create_namespace("auto_nohl"))
+-- vim.on_key(function(char)
+-- 	local key = vim.fn.keytrans(char)
+-- 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
+-- 	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
+-- 	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
+--
+-- 	local searchStarted = (key == "/" or key == "?") and isNormalMode
+-- 	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
+-- 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
+-- 	if not (searchStarted or searchConfirmed or searchCancelled or isNormalMode) then return end
+-- 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
+-- 	local hlSearchOn = vim.o.hlsearch
+--
+-- 	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
+-- 		vim.opt.hlsearch = true
+-- 	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
+-- 		vim.opt.hlsearch = false
+-- 	end
+-- end, vim.api.nvim_create_namespace("auto_nohl"))
 
 --------------------------------------------------------------------------------
 
