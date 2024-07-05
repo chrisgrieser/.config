@@ -9,5 +9,3 @@ set x to screenWidth - 50
 set y to 60
 
 tell application "System Events" to click at {x, y} -- click "Call" on the notice
-
-do shell script "STATUS=$(spt playback --status --format=%s) ; [[ \"$STATUS\" != \"⏸\" ]] && spt playback --toggle"
