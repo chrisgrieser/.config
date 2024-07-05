@@ -38,33 +38,6 @@ return {
 			},
 		},
 	},
-	{ -- when searching, search count is shown next to the cursor
-		"kevinhwang91/nvim-hlslens",
-		-- loaded by snippet in opts-and-autocmds.lua
-		init = function()
-			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-				callback = function()
-					local bg = u.getHlValue("IncSearch", "bg")
-					vim.api.nvim_set_hl(0, "IncSearchReversed", { fg = bg })
-				end,
-			})
-		end,
-		opts = {
-			nearest_only = true,
-			override_lens = function(render, posList, nearest, idx, _)
-				-- formats virtual text as a bubble
-				local lnum, col = unpack(posList[idx])
-				local text = ("%d/%d"):format(idx, #posList)
-				local chunks = {
-					{ " ", "None" },
-					{ "", "IncSearchReversed" },
-					{ text, "IncSearch" },
-					{ "", "IncSearchReversed" },
-				}
-				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
-			end,
-		},
-	},
 	{ -- emphasized headers & code blocks in markdown
 		"lukas-reineke/headlines.nvim",
 		ft = { "markdown", "yaml" },

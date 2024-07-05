@@ -133,6 +133,7 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{ quickfixCounter },
+			-- { "searchcount" },
 		},
 		lualine_x = {
 			{ -- recording status

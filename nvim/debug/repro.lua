@@ -1,10 +1,8 @@
 local spec = {
 	{
-		"chrisgrieser/nvim-rip-substitute",
-		opts = {},
-		keys = {
-			{ "gs", function() require("rip-substitute").sub() end, mode = { "n", "x" } },
-		},
+		"folke/noice.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		opts = true,
 	},
 }
 

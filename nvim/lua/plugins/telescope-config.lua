@@ -352,7 +352,7 @@ return {
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
-						file_ignore_patterns = ignorePattern,
+						file_ignore_patterns = {},
 						path_display = pathDisplay,
 					}
 				end,
