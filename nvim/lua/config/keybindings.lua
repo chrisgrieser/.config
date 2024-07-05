@@ -65,7 +65,7 @@ keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { d
 
 -- Delete trailing character
 keymap("n", "X", function()
-	local updatedLine = vim.api.nvim_get_current_line():gsub("%s+$", ""):sub(1, -2)
+	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
