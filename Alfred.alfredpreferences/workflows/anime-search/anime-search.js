@@ -52,6 +52,7 @@ function run(argv) {
 	const apiURL = `https://api.jikan.moe/v4/anime?limit=${resultsNumber}&q=`;
 	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
 	if (!response.data) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(JSON.stringify(response));
 		return JSON.stringify({ items: [{ title: "ERROR. See debugging log." }] });
 	}
