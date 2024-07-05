@@ -1915,25 +1915,6 @@ end run</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>fork when not owner</string>
-			</dict>
-			<key>description</key>
-			<string>When cloning a repository that you do not own, also create a fork and prepare the repo for e PR. (Requires the `gh` cli.)</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>fork_on_clone</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
 				<string>dev</string>
@@ -1943,13 +1924,32 @@ end run</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Branch: If this branch exists, will switch to it after cloning. Leave empty to disable.</string>
+			<string>working branch: If this branch exists, will switch to it after cloning. Leave empty to disable.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>default_branch</string>
+			<string>working_branch</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>fork when not owner</string>
+			</dict>
+			<key>description</key>
+			<string>When cloning a repository that you do not own, also create a fork, set upstream &amp; origin for a PR, and switch to the working branch (if set). Requires the `gh` cli.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>fork_on_clone</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1993,7 +1993,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.0</string>
+	<string>1.2.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

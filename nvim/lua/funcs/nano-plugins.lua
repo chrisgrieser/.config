@@ -34,7 +34,6 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
---- open the next regex at https://regex101.com/
 function M.openAtRegex101()
 	local ft = vim.bo.filetype
 	local data = {}
@@ -66,26 +65,31 @@ function M.openAtRegex101()
 	-- https://github.com/firasdib/Regex101/wiki/API#curl-3
 	local curlTimeoutSecs = 10
 	-- stylua: ignore
-	local response = vim.system({
+	local curlArgs = {
 		"curl",
 		"--silent",
 		"--max-time", tostring(curlTimeoutSecs),
-		"--request", "POST",
-		"--header", "Expect:",
-		"--header", "Content-Type: application/json",
+		"--request", "post",
+		"--header", "expect:",
+		"--header", "content-type: application/json",
 		"--data", vim.json.encode(data),
 		"https://regex101.com/api/regex",
-	}):wait()
-
-	if response.code ~= 0 then
-		notify("Regex101", response.stderr, "error")
-		return
-	end
-	local id = vim.json.decode(vim.trim(response.stdout)).permalinkFragment
-	local permalink = "https://regex101.com/r/" .. id
-	vim.ui.open(permalink)
+	}
+	vim.system(curlArgs, {}, function(out)
+		if out.code ~= 0 then
+			notify("regex101", "curl failed:\n" .. out.stderr, "error")
+			return
+		end
+		local response = vim.json.decode(out.stdout)
+		if response.error then
+			notify("regex101", "API error:\n" .. response.error, "error")
+			return
+		end
+		vim.ui.open("https://regex101.com/r/" .. response.permalinkFragment)
+	end)
 end
 
+---requires `dressing.nvim` and optionally `telescope.nvim`
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
@@ -127,7 +131,29 @@ function M.justRecipe(first)
 		run(recipes[1])
 	else
 		if config.skipFirstInSelection and #recipes > 1 then table.remove(recipes, 1) end
-		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "just-recipes" }, run)
+		vim.ui.select(recipes, {
+			prompt = "Just Recipes",
+			telescope = {
+				prompt_prefix = " ",
+				layout_config = {
+					horizontal = {
+						preview_width = 0.7,
+						height = 0.4,
+						width = 0.9,
+					},
+				},
+				previewer = require("telescope.previewers").new_buffer_previewer {
+					define_preview = function(self, entry)
+						local bufnr = self.state.bufnr
+						local recipe = entry.value
+						local out = vim.system({ "just", "--show=" .. recipe }):wait()
+						vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(out.stdout, "\n"))
+						vim.bo[bufnr].filetype = "bash"
+					end,
+					dyn_title = function(_, entry) return entry.value end,
+				},
+			},
+		}, run)
 	end
 end
 

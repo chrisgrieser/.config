@@ -36,9 +36,9 @@ cd "$reponame" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 
 # SWITCH TO DEFAULT BRANCH
-if [[ -n "$default_branch" ]]; then
+if [[ -n "$working_branch" ]]; then
 	# `git switch` fails silently if the branch does not exist
-	git switch "$default_branch" &> /dev/null
+	git switch "$working_branch" &> /dev/null
 fi
 
 # RESTORE MTIME
@@ -64,6 +64,8 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	gh repo set-default "$source_repo" # where `gh` sends PRs to
 
 	# switch to new branch
-	git config push.autoSetupRemote true
-	git checkout -b "dev"
+	if [[ -n "$working_branch" ]]; then
+		git config push.autoSetupRemote true
+		git checkout -b "$working_branch"
+	fi
 fi
