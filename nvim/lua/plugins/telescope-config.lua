@@ -183,11 +183,13 @@ local function telescopeConfig()
 			git_branches = {
 				prompt_prefix = " ",
 				show_remote_tracking_branches = true,
-				initial_mode = "normal",
 				previewer = false,
 				layout_config = { horizontal = { height = 0.4, width = 0.7 } },
 				mappings = {
-					n = { ["<D-n>"] = "git_create_branch", ["<C-r>"] = "git_rename_branch" },
+					i = {
+						["<D-n>"] = "git_create_branch",
+						["<C-r>"] = "git_rename_branch",
+					},
 				},
 			},
 			keymaps = {
