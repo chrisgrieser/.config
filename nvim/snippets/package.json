@@ -1,91 +1,146 @@
 {
-	"contributes": {
-		"snippets": [
-			{
-				"language": ["all"],
-				"path": "./all.json"
-			},
-			{
-				"language": ["just"],
-				"path": "./basic/justfile.json"
-			},
-			{
-				"language": ["query"],
-				"path": "./basic/scm.json"
-			},
-			{
-				"language": ["markdown"],
-				"path": "./basic/markdown.json"
-			},
-			{
-				"language": ["python"],
-				"path": "./basic/python.json"
-			},
-			{
-				"language": ["css", "scss"],
-				"path": "./basic/css.json"
-			},
-			{
-				"language": ["sh", "zsh", "just"],
-				"path": "./basic/sh.json"
-			},
-			{
-				"language": ["sh", "zsh", "just"],
-				"path": "./basic/ansi-color-codes.json"
-			},
-			{
-				"language": ["lua"],
-				"path": "./basic/lua.json"
-			},
-			{
-				"language": ["applescript"],
-				"path": "./basic/applescript.json"
-			},
-			{
-				"language": ["bib"],
-				"path": "./basic/bib.json"
-			},
-			{
-				"language": ["javascript", "typescript"],
-				"path": "./basic/javascript.json"
-			},
-			{
-				"language": ["javascript", "typescript"],
-				"path": "./basic/node-js.json"
-			},
-			{
-				"language": ["javascript"],
-				"path": "./basic/jxa.json"
-			},
-			{
-				"language": ["yaml"],
-				"path": "./basic/yaml.json"
-			},
-			{
-				"language": ["yaml"],
-				"path": "./projects-specific/karabiner-modifications.json"
-			},
-			{
-				"language": ["toml"],
-				"path": "./projects-specific/typos-toml.json"
-			},
-			{
-				"language": ["lua"],
-				"path": "./projects-specific/nvim-lua.json"
-			},
-			{
-				"language": ["vim"],
-				"path": "./projects-specific/obsidian-vimrc.json"
-			},
-			{
-				"language": ["javascript"],
-				"path": "./projects-specific/alfred-jxa.json"
-			},
-			{
-				"language": ["applescript"],
-				"path": "./projects-specific/alfred-applescript.json"
-			}
-		]
-	},
-	"name": "my-snippets"
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./all.json"
+      },
+      {
+        "language": [
+          "just"
+        ],
+        "path": "./basic/justfile.json"
+      },
+      {
+        "language": [
+          "query"
+        ],
+        "path": "./basic/scm.json"
+      },
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./basic/markdown.json"
+      },
+      {
+        "language": [
+          "python"
+        ],
+        "path": "./basic/python.json"
+      },
+      {
+        "language": [
+          "css",
+          "scss"
+        ],
+        "path": "./basic/css.json"
+      },
+      {
+        "language": [
+          "sh",
+          "zsh",
+          "just"
+        ],
+        "path": "./basic/sh.json"
+      },
+      {
+        "language": [
+          "sh",
+          "zsh",
+          "just"
+        ],
+        "path": "./basic/ansi-color-codes.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./basic/lua.json"
+      },
+      {
+        "language": [
+          "applescript"
+        ],
+        "path": "./basic/applescript.json"
+      },
+      {
+        "language": [
+          "bib"
+        ],
+        "path": "./basic/bib.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript"
+        ],
+        "path": "./basic/javascript.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript"
+        ],
+        "path": "./basic/node-js.json"
+      },
+      {
+        "language": [
+          "javascript"
+        ],
+        "path": "./basic/jxa.json"
+      },
+      {
+        "language": [
+          "yaml"
+        ],
+        "path": "./basic/yaml.json"
+      },
+      {
+        "language": [
+          "yaml"
+        ],
+        "path": "./projects-specific/karabiner-modifications.json"
+      },
+      {
+        "language": [
+          "toml"
+        ],
+        "path": "./projects-specific/typos-toml.json"
+      },
+      {
+        "language": [
+          "lua"
+        ],
+        "path": "./projects-specific/nvim-lua.json"
+      },
+      {
+        "language": [
+          "vim"
+        ],
+        "path": "./projects-specific/obsidian-vimrc.json"
+      },
+      {
+        "language": [
+          "javascript"
+        ],
+        "path": "./projects-specific/alfred-jxa.json"
+      },
+      {
+        "language": [
+          "applescript"
+        ],
+        "path": "./projects-specific/alfred-applescript.json"
+      },
+      {
+        "language": [
+          "scissors-snippet"
+        ],
+        "path": "./scissors-snippet.json"
+      }
+    ]
+  },
+  "name": "my-snippets"
 }
