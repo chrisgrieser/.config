@@ -164,7 +164,6 @@ return {
 				mappings = { n = { ["q"] = "Close" } },
 			},
 			select = {
-				backend = { "telescope", "builtin" },
 				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
@@ -182,7 +181,7 @@ return {
 					},
 				},
 				get_config = function(opts)
-					local useBuiltin = { "codeaction", "rule_selection" }
+					local useBuiltin = { "just-recipes", "codeaction", "rule_selection" }
 					if vim.tbl_contains(useBuiltin, opts.kind) then
 						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
 					end
