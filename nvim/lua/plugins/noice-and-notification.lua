@@ -1,5 +1,3 @@
-local u = require("config.utils")
-
 ---@param bufnr number
 local function highlightsInStacktrace(bufnr)
 	vim.defer_fn(function()
@@ -59,24 +57,25 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
+	-- gitsigns
+	{ filter = { event = "notify", find = "Hunk %d+ of %d+" }, view = "mini" },
+
 	-----------------------------------------------------------------------------
 	-- SKIP
 
 	-- FIX LSP bugs?
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
-	{
-		filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" },
-		skip = true,
-	},
+	-- stylua: ignore
+	{ filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" }, skip = true },
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 	-- unneeded info on search patterns
-	-- { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 
 	-- E211 no longer needed, since auto-closing deleted buffers
-	{ filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
+	-- { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -91,7 +90,6 @@ return {
 				pattern = "noice",
 				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
 			})
-			u.colorschemeMod("NoiceCmdline", { link = "NormalFloat" })
 		end,
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
@@ -100,9 +98,7 @@ return {
 		},
 		opts = {
 			routes = routes,
-			messages = {
-				view_search = "mini",
-			},
+			messages = { view_search = false },
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
@@ -112,6 +108,9 @@ return {
 			views = {
 				cmdline_popup = {
 					border = { style = vim.g.borderStyle },
+				},
+				cmdline = {
+					win_options = { winhighlight = { Normal = "NormalFloat" } },
 				},
 				mini = {
 					timeout = 3000,
