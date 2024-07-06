@@ -75,12 +75,6 @@ local function filenameAndIcon()
 	return icon .. " " .. name
 end
 
-local function searchcount()
-	if vim.v.hlsearch == 0 then return "" end
-	local count = vim.fn.searchcount()
-	return (" %s/%s"):format(count.current, count.total)
-end
-
 local function newlineCharIfNotUnix()
 	local format = vim.bo.fileformat
 	if format == "unix" then
@@ -146,7 +140,6 @@ local lualineConfig = {
 		},
 		lualine_c = {
 			{ quickfixCounter },
-			{ searchcount, color = "IncSearch" },
 		},
 		lualine_x = {
 			{ -- recording status

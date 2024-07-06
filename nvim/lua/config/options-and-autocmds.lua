@@ -264,9 +264,8 @@ vim.api.nvim_create_autocmd("FocusGained", {
 
 --------------------------------------------------------------------------------
 
--- AUTO-NOHL
--- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
-local countNs = vim.api.nvim_create_namespace("auto_nohl_count")
+-- AUTO-NOHL & INLINE SEARCH COUNT
+local countNs = vim.api.nvim_create_namespace("searchCounter")
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
@@ -280,19 +279,33 @@ vim.on_key(function(char)
 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
 	local hlSearchOn = vim.o.hlsearch
 
-	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
-		vim.opt.hlsearch = true
-		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+	vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
 
-		local row = vim.api.nvim_win_get_cursor(0)[1]
-		vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
-			virt_text = { { "aaaa   ", "DiagnosticVirtualTextInfo" } },
-			virt_text_pos = "right_align",
-		})
-	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
+	if (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
 		vim.opt.hlsearch = false
+	elseif searchMovement or searchConfirmed or searchStarted then
+		if not hlSearchOn then vim.opt.hlsearch = true end
+
+		vim.defer_fn(function()
+			local row = vim.api.nvim_win_get_cursor(0)[1]
+			local count = vim.fn.searchcount()
+			if count.total == 0 then return end
+			local text = (" %s/%s "):format(count.current, count.total)
+			local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth)) -- ffff
+			vim.notify("👾 line: " .. tostring(#line))
+			local scrollBarMargin = 4
+			local lineFull = #line + scrollBarMargin > vim.api.nvim_win_get_width(0)
+
+			local margin = { (" "):rep(lineFull and scrollBarMargin or 0), "None" }
+
+			vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
+				virt_text = { { text, "IncSearch" }, margin },
+				virt_text_pos = lineFull and "right_align" or "eol",
+				priority = 200,
+			})
+		end, 1)
 	end
-end, vim.api.nvim_create_namespace("auto_nohl"))
+end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
 --------------------------------------------------------------------------------
 
