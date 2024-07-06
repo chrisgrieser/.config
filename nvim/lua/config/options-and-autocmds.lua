@@ -317,47 +317,41 @@ local favicons = {
 	["slack.com"] = " ",
 	["reddit.com"] = " ",
 }
+local function addFavicons(ctx)
+	-- REQUIRED comment parser, `:TSInstall comment`
+	local hasCommentsParser, urlCommentsQuery =
+		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
+	if not hasCommentsParser then return end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function(ctx)
-		-- REQUIRED comment parser, `:TSInstall comment`
-		local hasCommentsParser, urlCommentsQuery =
-			pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-		if not hasCommentsParser then return end
+	local bufnr = ctx and ctx.buf or 0
+	local urlNodes = {}
 
-		local bufnr = ctx.buf
-		local urlNodes = {}
+	local faviconNs = vim.api.nvim_create_namespace("favicon")
+	vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
 
-		local faviconNs = vim.api.nvim_create_namespace("favicon")
-		-- vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
+	local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
+	if not hasParserForFt then return end
+	ltree:for_each_tree(function(tstree, _)
+		local allNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
+		for _, node in allNodes do
+			table.insert(urlNodes, node)
+		end
+	end)
+	vim.iter(urlNodes):each(function(node)
+		local nodeText = vim.treesitter.get_node_text(node, bufnr)
+		local host = nodeText:match("^https?://([^/]+)")
+		local icon = favicons[host]
+		if not icon then return end
 
-		local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
-		if not hasParserForFt then return end
-		ltree:for_each_tree(function(tstree, _)
-			local allNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
-			for _, node in allNodes do
-				table.insert(urlNodes, node)
-			end
-		end)
-		vim.notify("👾 beep 🟩")
-		vim.notify("👾 urlNodes: " .. tostring(#urlNodes))
-		vim.iter(urlNodes):each(function(node)
-			local nodeText = vim.treesitter.get_node_text(node, bufnr)
-			local host = nodeText:match("^https?://w?w?w?%.?(%w+)")
-			local icon = favicons[host]
-			if not icon then return end
-
-			vim.notify("👾 beep 🔵")
-			local startRow, startCol = vim.treesitter.get_node_range(node)
-			vim.notify("👾 startCol: " .. vim.inspect(startCol))
-			vim.notify("👾 startRow: " .. vim.inspect(startRow))
-			vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
-				virt_text = { { icon, "Comment" } },
-				virt_text_pos = "inline",
-			})
-		end)
-	end,
-})
+		local startRow, startCol = vim.treesitter.get_node_range(node)
+		vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
+			virt_text = { { icon, "Comment" } },
+			virt_text_pos = "inline",
+		})
+	end)
+end
+vim.api.nvim_create_autocmd("BufEnter", { callback = addFavicons })
+addFavicons()
 
 --------------------------------------------------------------------------------
 
