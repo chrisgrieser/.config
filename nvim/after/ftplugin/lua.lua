@@ -1,6 +1,7 @@
 local u = require("config.utils")
 local keymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
+local luaFtPluginGroup = vim.api.nvim_create_augroup("lua-ftplugin", { clear = true })
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
@@ -75,6 +76,7 @@ end, { desc = " require module from cwd" })
 -- auto-comma for tables
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 	buffer = 0,
+	group = luaFtPluginGroup,
 	callback = function()
 		local node = vim.treesitter.get_node()
 		if not (node and node:type() == "table_constructor") then return end
@@ -83,5 +85,46 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 		if line:find("^%s*[^,%s{}-]$") or line:find("^%s*{}$") then
 			vim.api.nvim_set_current_line(line .. ",")
 		end
+	end,
+})
+
+--------------------------------------------------------------------------------
+
+-- PERSONAL EXTRA DIAGNOSTICS
+-- PENDING https://github.com/LuaLS/lua-language-server/issues/2699
+
+vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "TextChanged" }, {
+	buffer = 0,
+	group = luaFtPluginGroup,
+	callback = function(ctx)
+		local name = "Personal Diagnostics"
+		local bufnr = ctx and ctx.buf or 0
+		local ns = vim.api.nvim_create_namespace(name)
+		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
+		vim.diagnostic.reset(ns, bufnr)
+
+		local diags = {}
+		local bufLines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+		for lnum = 1, #bufLines do
+			local line = bufLines[lnum]
+			local startCol, endCol = line:find([[".*" ?%+? ".*"]])
+			if not (startCol and endCol) then
+				startCol, endCol = line:find([['.*' ?%+? '.*']])
+			end
+			if startCol and endCol then
+				---@type vim.Diagnostic
+				local diag = {
+					lnum = lnum - 1,
+					col = startCol - 1,
+					end_col = endCol,
+					message = "Use `..` instead of `+` to concatenate strings in lua.",
+					severity = vim.diagnostic.severity.WARN,
+					source = name,
+				}
+				table.insert(diags, diag)
+			end
+		end
+		if #diags > 0 then vim.diagnostic.set(ns, bufnr, diags) end
 	end,
 })
