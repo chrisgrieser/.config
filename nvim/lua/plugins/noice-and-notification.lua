@@ -103,6 +103,10 @@ return {
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			views = {
+				messages = {
+					merge = false,
+					replace = false,
+				},
 				cmdline_popup = {
 					border = { style = vim.g.borderStyle },
 				},
@@ -125,7 +129,7 @@ return {
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true, foldenable = true },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
-					format = { "{cmdline} ", "{message}" } -- leave out "{level}"
+					format = { "{message}" } -- leave out "{level}"
 				},
 				split = {
 					enter = true,
@@ -139,11 +143,11 @@ return {
 					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
 					-- https://github.com/folke/noice.nvim#-formatting
-					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+					opts = { format = { "{title} ", "{message}" } },
 				},
 				last = {
 					view = "popup",
-					opts = { format = { "{title} ", "{cmdline} ", "{message}" } },
+					opts = { format = { "{title} ", "{message}" } },
 				},
 			},
 

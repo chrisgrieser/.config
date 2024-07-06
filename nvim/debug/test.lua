@@ -1,1 +1,2 @@
-require("scissors.vscode-format.snippet-variables").createSnippetFile()
+print("Hello World")
+print("Hello World 2")
