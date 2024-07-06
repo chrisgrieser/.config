@@ -52,8 +52,8 @@ keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickf
 -- EDITING
 
 -- Undo
-keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
-keymap("n", "U", "<cmd>silent redo<CR>zv")
+keymap("n", "u", "<cmd>silent undo<CR>") -- just to silence it
+keymap("n", "U", "<cmd>silent redo<CR>")
 keymap("i", "<D-z>", "<C-o>u", { desc = "󰜊 Undo" }) -- also needed for Alfred killring plugin
 
 -- emulate some basic commands from `vim-abolish`
