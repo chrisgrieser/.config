@@ -306,9 +306,10 @@ local favicons = {
 	["neovim.io"] = "",
 	["stackoverflow.com"] = "󰓌 ",
 	["youtube.com"] = " ",
-	["discord.com"] = " ",
+	["discord.com"] = "󰙯 ",
 	["slack.com"] = " ",
-	["reddit.com"] = " ",
+	["new.reddit.com"] = " ",
+	["www.reddit.com"] = " ",
 }
 local function addFavicons(ctx)
 	-- REQUIRED comment parser, `:TSInstall comment`
@@ -318,16 +319,16 @@ local function addFavicons(ctx)
 
 	local bufnr = ctx and ctx.buf or 0
 	local urlNodes = {}
+	local faviconNs = vim.api.nvim_create_namespace("favicon")
+	vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
 
 	vim.defer_fn(function() -- deferred, so treesitter parser is ready
-		local faviconNs = vim.api.nvim_create_namespace("favicon")
-		vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
-
 		local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
 		if not hasParserForFt then return end
+
 		ltree:for_each_tree(function(tstree, _)
-			local allNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
-			for _, node in allNodes do
+			local commentUrlNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
+			for _, node in commentUrlNodes do
 				table.insert(urlNodes, node)
 			end
 		end)
@@ -345,7 +346,10 @@ local function addFavicons(ctx)
 		end)
 	end, 1)
 end
-vim.api.nvim_create_autocmd("BufEnter", { callback = addFavicons })
+vim.api.nvim_create_autocmd(
+	{ "BufReadPost", "TextChanged", "InsertLeave" },
+	{ callback = addFavicons }
+)
 addFavicons()
 
 --------------------------------------------------------------------------------
