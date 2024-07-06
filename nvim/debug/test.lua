@@ -1,11 +1,24 @@
--- add favicons to links in comments
--- https://github.com/nvim-treesitter/nvim-treesitter#adding-queries
--- https://stackoverflow.com/questions/78714013/flutter-web-shows-a-gray-screen-in-hosting-only-without-any-error-in-debug-or-re
--- https://new.reddit.com/r/neovim/comments/1dw4ha2/remote_development/
--- https://discord.com/channels/686053708261228577/1056113012999720980
 
--- but not to urls elsewhere
-local myUrl = "https://github.com/nvim-treesitter/nvim-treesitter#adding-queries"
-local myUrl2 = "https://new.reddit.com/r/neovim/comments/1dw4ha2/remote_development/"
+local M = {}
+local inlayHintNs = vim.api.nvim_create_namespace("lspEndhints")
+--------------------------------------------------------------------------------
 
+---@param userConfig? LspEndhints.config
+function M.setup(userConfig)
+	require("lsp-endhints.config").setup(userConfig)
+	require("lsp-endhints.override-handler")(inlayHintNs)
+<<<<<<< HEAD
 
+	local config = require("eol-lsp-hints.config").config
+	if config.autoEnableHints then autoEnableHints() end
+||||||| parent of c36ed92 (refactor: auto-enable as separate module)
+
+	local config = require("lsp-endhints.config").config
+	if config.autoEnableHints then autoEnableHints() end
+=======
+	require("lsp-endhints.auto-enable")(inlayHintNs)
+>>>>>>> c36ed92 (refactor: auto-enable as separate module)
+end
+
+--------------------------------------------------------------------------------
+return M
