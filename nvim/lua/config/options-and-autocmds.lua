@@ -200,7 +200,7 @@ local autoCd = {
 		".config",
 		".obsidian", -- internal Obsidian folder
 		"com~apple~CloudDocs", -- iCloud
-		"neovim" -- opt/homebrew/Cellar/neovim
+		"Cellar", -- opt/homebrew/Cellar/neovim
 	},
 }
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -266,6 +266,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 
 -- AUTO-NOHL
 -- https://www.reddit.com/r/neovim/comments/zc720y/comment/iyvcdf0/?context=3
+local countNs = vim.api.nvim_create_namespace("auto_nohl_count")
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
@@ -281,14 +282,15 @@ vim.on_key(function(char)
 
 	if (searchMovement or searchConfirmed or searchStarted) and not hlSearchOn then
 		vim.opt.hlsearch = true
+		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+
+		local row = vim.api.nvim_win_get_cursor(0)[1]
+		vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
+			virt_text = { { "aaaa   ", "DiagnosticVirtualTextInfo" } },
+			virt_text_pos = "right_align",
+		})
 	elseif (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
 		vim.opt.hlsearch = false
-	end
-
-	-- nvim-hlslens plugin
-	if searchConfirmed or searchMovement then
-		local installed, hlslens = pcall(require, "hlslens")
-		if installed then hlslens.start() end
 	end
 end, vim.api.nvim_create_namespace("auto_nohl"))
 

@@ -1,4 +1,3 @@
-local bo = vim.bo
 local u = require("config.utils")
 --------------------------------------------------------------------------------
 
@@ -28,20 +27,20 @@ vim.api.nvim_create_autocmd("LspProgress", {
 --------------------------------------------------------------------------------
 
 local function irregularWhitespace()
-	if bo.buftype ~= "" then return "" end
+	if vim.bo.buftype ~= "" then return "" end
 
 	-- CONFIG
 	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 }
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-	local spacesInsteadOfTabs = bo.expandtab and not vim.tbl_contains(spaceFtsOnly, bo.ft)
-	local differentSpaceAmount = bo.expandtab and spaceFiletypes[bo.ft] ~= bo.shiftwidth
-	local tabsInsteadOfSpaces = not bo.expandtab and vim.tbl_contains(spaceFtsOnly, bo.ft)
+	local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
+	local differentSpaceAmount = vim.bo.expandtab and spaceFiletypes[vim.bo.ft] ~= vim.bo.shiftwidth
+	local tabsInsteadOfSpaces = not vim.bo.expandtab and vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
 
 	if spacesInsteadOfTabs or differentSpaceAmount then
-		return "󱁐 " .. bo.shiftwidth
+		return "󱁐 " .. vim.bo.shiftwidth
 	elseif tabsInsteadOfSpaces then
-		return "󰌒 " .. bo.shiftwidth
+		return "󰌒 " .. vim.bo.shiftwidth
 	end
 	return ""
 end
@@ -64,11 +63,39 @@ local function quickfixCounter()
 	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
+local function filenameAndIcon()
+	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+	local maxLength = 25 --CONFIG
+	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
+	local ok, devicons = pcall(require, "nvim-web-devicons")
+	if not ok then return name end
+	local extension = name:match("%w+$")
+	local icon = devicons.get_icon(name, extension) or devicons.get_icon(name, vim.vim.bo.ft)
+	if not icon then return name end
+	return icon .. " " .. name
+end
+
+local function searchcount()
+	if vim.v.hlsearch == 0 then return "" end
+	local count = vim.fn.searchcount()
+	return (" %s/%s"):format(count.current, count.total)
+end
+
+local function newlineCharIfNotUnix()
+	local format = vim.bo.fileformat
+	if format == "unix" then
+		return ""
+	elseif format == "mac" then
+		return "󰌑 "
+	elseif format == "dos" then
+		return "󰌑 "
+	end
+end
+
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
 	options = {
-		refresh = { statusline = 500 },
 		globalstatus = true,
 		always_divide_middle = false,
 		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`
@@ -103,9 +130,8 @@ local lualineConfig = {
 				"branch",
 				cond = function()
 					-- only if not on main or master
-					if bo.buftype ~= "" then return false end
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
-					return curBranch ~= "main" and curBranch ~= "master"
+					return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
 				end,
 			},
 			{ -- .venv indicator
@@ -113,26 +139,14 @@ local lualineConfig = {
 				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
 				padding = { left = 1, right = 0 },
 			},
-			{ -- filename + fileicon
-				"filename",
-				file_status = false,
-				fmt = function(name)
-					local maxLength = 25
-					if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
-					local ok, devicons = pcall(require, "nvim-web-devicons")
-					if not ok then return name end
-					local extension = name:match("%w+$")
-					local icon = devicons.get_icon(name, extension) or devicons.get_icon(name, vim.bo.ft)
-					if not icon then return name end
-					return icon .. " " .. name
-				end,
-			},
+			{ filenameAndIcon },
 		},
 		lualine_b = {
 			{ require("funcs.magnet").altFileStatus },
 		},
 		lualine_c = {
 			{ quickfixCounter },
+			{ searchcount, color = "IncSearch" },
 		},
 		lualine_x = {
 			{ -- recording status
@@ -145,11 +159,7 @@ local lualineConfig = {
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
-			{
-				"fileformat",
-				cond = function() return bo.fileformat ~= "unix" end,
-				fmt = function(str) return str .. " 󰌑" end,
-			},
+			{ newlineCharIfNotUnix },
 			{ irregularWhitespace },
 		},
 		lualine_y = {

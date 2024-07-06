@@ -53,13 +53,13 @@ end
 -- LAYOUTS
 
 local function workLayout()
-	(u.betweenTime(22, 7) and darkenDisplay or autoSetBrightness)()
+	(u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness)()
 	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustment
 	visuals.updateHoleCover()
 	dockSwitcher("work")
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
-	videoAppWatcherForSpotify:stop() 
+	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
 
@@ -110,9 +110,9 @@ end
 ---select layout depending on number of screens, and prevent concurrent runs
 local function autoSetLayout()
 	if M.isLayouting then return end
-	M.isLayouting = true
+	M.isLayouting = true;
 	(env.isProjector() and movieLayout or workLayout)()
-	u.runWithDelays(3, function() M.isLayouting = false end)
+	u.runWithDelays(4, function() M.isLayouting = false end)
 end
 
 -- 1. Change of screen numbers
