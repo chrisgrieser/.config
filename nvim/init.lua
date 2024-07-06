@@ -34,8 +34,9 @@ local function safeRequire(module)
 	end
 end
 
-safeRequire("config.options-and-autocmds") -- before lazy, so opts still work on plugin install
+safeRequire("config.options") -- before lazy, so opts still work on plugin install
 safeRequire("config.lazy")
+safeRequire("config.autocmds")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.theme-customization")
 safeRequire("config.keybindings")

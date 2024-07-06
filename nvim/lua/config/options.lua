@@ -62,14 +62,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
--- SEARCH & CMDLINE
-
-opt.ignorecase = true
-opt.smartcase = true
-opt.cmdheight = 0 -- also auto-set by noice
-opt.history = 400 -- reduce noise for command history search
-
---------------------------------------------------------------------------------
 -- FILETYPES
 
 vim.filetype.add {
@@ -98,7 +90,7 @@ vim.api.nvim_create_autocmd("FocusLost", {
 })
 
 --------------------------------------------------------------------------------
--- AUTOMATION
+-- AUTOMATION (external control)
 
 -- enable reading cwd via window title
 opt.title = true
@@ -119,6 +111,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
+--------------------------------------------------------------------------------
+-- SEARCH & CMDLINE
+
+opt.ignorecase = true
+opt.smartcase = true
+opt.cmdheight = 0 -- also auto-set by noice
+opt.history = 400 -- reduce noise for command history search
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
