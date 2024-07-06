@@ -167,14 +167,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 		local bufnr = ctx.buf
 		local bo = vim.bo[bufnr]
 		local b = vim.b[bufnr]
-		if
-			(b.saveQueued and ctx.event ~= "FocusLost")
-			or bo.buftype ~= ""
-			or bo.ft == "gitcommit"
-			or bo.readonly
-		then
-			return
-		end
+		if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
+		if b.saveQueued and ctx.event ~= "FocusLost" then return end
 
 		local debounce = ctx.event == "FocusLost" and 0 or 2000 -- save at once on focus loss
 		b.saveQueued = true
@@ -296,21 +290,13 @@ vim.on_key(function(char)
 			local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
 
 			vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
-				virt_text = {
-					{ "", "IncSearchRev" },
-					{ text, "IncSearch" },
-					{ "", "IncSearchRev" },
-					margin,
-				},
+				virt_text = { { text, "IncSearch" }, margin },
 				virt_text_pos = lineFull and "right_align" or "eol",
 				priority = 200, -- so it comes in front of lsp-endhints
 			})
 		end, 1)
 	end
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
-
-vim.api.nvim_set_hl(0, "IncSearchRev", { link = "IncSearch" })
-vim.api.nvim_set_hl(0, "IncSearchRev", { reverse = true })
 
 --------------------------------------------------------------------------------
 -- FAVICONS PREFIXES FOR URLS
@@ -333,29 +319,31 @@ local function addFavicons(ctx)
 	local bufnr = ctx and ctx.buf or 0
 	local urlNodes = {}
 
-	local faviconNs = vim.api.nvim_create_namespace("favicon")
-	vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
+	vim.defer_fn(function() -- deferred, so treesitter parser is ready
+		local faviconNs = vim.api.nvim_create_namespace("favicon")
+		vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
 
-	local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
-	if not hasParserForFt then return end
-	ltree:for_each_tree(function(tstree, _)
-		local allNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
-		for _, node in allNodes do
-			table.insert(urlNodes, node)
-		end
-	end)
-	vim.iter(urlNodes):each(function(node)
-		local nodeText = vim.treesitter.get_node_text(node, bufnr)
-		local host = nodeText:match("^https?://([^/]+)")
-		local icon = favicons[host]
-		if not icon then return end
+		local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
+		if not hasParserForFt then return end
+		ltree:for_each_tree(function(tstree, _)
+			local allNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
+			for _, node in allNodes do
+				table.insert(urlNodes, node)
+			end
+		end)
+		vim.iter(urlNodes):each(function(node)
+			local nodeText = vim.treesitter.get_node_text(node, bufnr)
+			local host = nodeText:match("^https?://([^/]+)")
+			local icon = favicons[host]
+			if not icon then return end
 
-		local startRow, startCol = vim.treesitter.get_node_range(node)
-		vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
-			virt_text = { { icon, "Comment" } },
-			virt_text_pos = "inline",
-		})
-	end)
+			local startRow, startCol = vim.treesitter.get_node_range(node)
+			vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
+				virt_text = { { icon, "Comment" } },
+				virt_text_pos = "inline",
+			})
+		end)
+	end, 1)
 end
 vim.api.nvim_create_autocmd("BufEnter", { callback = addFavicons })
 addFavicons()
