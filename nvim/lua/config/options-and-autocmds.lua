@@ -265,7 +265,6 @@ vim.api.nvim_create_autocmd("FocusGained", {
 --------------------------------------------------------------------------------
 
 -- AUTO-NOHL & INLINE SEARCH COUNT
-local countNs = vim.api.nvim_create_namespace("searchCounter")
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
@@ -279,6 +278,7 @@ vim.on_key(function(char)
 	local searchMovement = vim.tbl_contains(searchMvKeys, key)
 	local hlSearchOn = vim.o.hlsearch
 
+	local countNs = vim.api.nvim_create_namespace("searchCounter")
 	vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
 
 	if (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then

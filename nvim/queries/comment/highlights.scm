@@ -19,8 +19,3 @@
 ; CAVEAT: not working with special characters inside ``, see https://github.com/stsewd/tree-sitter-comment/issues/34
 ("text" @markup.raw.markdown_inline
   (#match? @markup.raw.markdown_inline "`.+`"))
-
-;───────────────────────────────────────────────────────────────────────────────
-; CONCEAL URLS
-((uri) @string.special.url
-  (#set! conceal ""))
