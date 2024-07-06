@@ -268,23 +268,22 @@ vim.api.nvim_create_autocmd("FocusGained", {
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
-	local searchMvKeys = { "n", "N", "*", "#" } -- works for RHS, therefore no need to consider remaps
 	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
-
 	local searchStarted = (key == "/" or key == "?") and isNormalMode
 	local searchConfirmed = (key == "<CR>" and isCmdlineSearch)
 	local searchCancelled = (key == "<Esc>" and isCmdlineSearch)
 	if not (searchStarted or searchConfirmed or searchCancelled or isNormalMode) then return end
-	local searchMovement = vim.tbl_contains(searchMvKeys, key)
-	local hlSearchOn = vim.o.hlsearch
+
+	-- works for RHS, therefore no need to consider remaps
+	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
 
 	local countNs = vim.api.nvim_create_namespace("searchCounter")
 	vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
 
-	if (searchCancelled or not searchMovement) and hlSearchOn and not searchConfirmed then
+	if (searchCancelled or not searchMovement) and not searchConfirmed then
 		vim.opt.hlsearch = false
 	elseif searchMovement or searchConfirmed or searchStarted then
-		if not hlSearchOn then vim.opt.hlsearch = true end
+		vim.opt.hlsearch = true
 
 		vim.defer_fn(function()
 			local row = vim.api.nvim_win_get_cursor(0)[1]
