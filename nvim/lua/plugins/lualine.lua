@@ -64,15 +64,15 @@ local function quickfixCounter()
 end
 
 local function filenameAndIcon()
-	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
 	local maxLength = 25 --CONFIG
-	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
+	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+	local display = #name < maxLength and name or vim.trim(name:sub(1, maxLength)) .. "…"
 	local ok, devicons = pcall(require, "nvim-web-devicons")
-	if not ok then return name end
+	if not ok then return display end
 	local extension = name:match("%w+$")
-	local icon = devicons.get_icon(name, extension) or devicons.get_icon(name, vim.vim.bo.ft)
-	if not icon then return name end
-	return icon .. " " .. name
+	local icon = devicons.get_icon(display, extension) or devicons.get_icon(display, vim.bo.ft)
+	if not icon then return display end
+	return icon .. " " .. display
 end
 
 local function newlineCharIfNotUnix()

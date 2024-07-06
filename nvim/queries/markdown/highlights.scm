@@ -1,12 +1,10 @@
 ; INFO This file is a copy of the treesitter markdown highlights, with the only
 ; change that conceal has been disabled for codeblocks. By not using `;extends`,
-; this file fully overrides the original `highlights.scm`. This is
-; necessary because there is currently no method of disabling only some conceals. 
-; https://www.reddit.com/r/neovim/comments/18luuzc/comment/ke3yd0o/
-
+; this file fully overrides the original `highlights.scm`. This is necessary
+; because there is currently no method of disabling only some conceals.
+; see: https://www.reddit.com/r/neovim/comments/18luuzc/comment/ke3yd0o/
 ; SOURCE https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/markdown/highlights.scm
 ;───────────────────────────────────────────────────────────────────────────────
-
 ;From MDeiml/tree-sitter-markdown & Helix
 (setext_heading
   (paragraph) @markup.heading.1
@@ -17,28 +15,22 @@
   (setext_h2_underline) @markup.heading.2)
 
 (atx_heading
-  (atx_h1_marker) @markup.heading.1
-  (inline) @markup.heading.1)
+  (atx_h1_marker)) @markup.heading.1
 
 (atx_heading
-  (atx_h2_marker) @markup.heading.2
-  (inline) @markup.heading.2)
+  (atx_h2_marker)) @markup.heading.2
 
 (atx_heading
-  (atx_h3_marker) @markup.heading.3
-  (inline) @markup.heading.3)
+  (atx_h3_marker)) @markup.heading.3
 
 (atx_heading
-  (atx_h4_marker) @markup.heading.4
-  (inline) @markup.heading.4)
+  (atx_h4_marker)) @markup.heading.4
 
 (atx_heading
-  (atx_h5_marker) @markup.heading.5
-  (inline) @markup.heading.5)
+  (atx_h5_marker)) @markup.heading.5
 
 (atx_heading
-  (atx_h6_marker) @markup.heading.6
-  (inline) @markup.heading.6)
+  (atx_h6_marker)) @markup.heading.6
 
 (info_string) @label
 
@@ -70,8 +62,8 @@
 ; (fenced_code_block
 ;   (info_string
 ;     (language) @label
-;     (#set! conceal "")))
-
+    (#set! conceal "")))
+    ;
 (link_destination) @markup.link.url
 
 [
@@ -119,6 +111,12 @@
 (task_list_marker_checked) @markup.list.checked
 
 ((block_quote) @markup.quote
+  (#set! "priority" 90))
+
+([
+  (plus_metadata)
+  (minus_metadata)
+] @keyword.directive
   (#set! "priority" 90))
 
 [
