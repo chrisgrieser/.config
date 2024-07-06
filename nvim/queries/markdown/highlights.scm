@@ -62,8 +62,7 @@
 ; (fenced_code_block
 ;   (info_string
 ;     (language) @label
-    (#set! conceal "")))
-    ;
+; (#set! conceal "")))
 (link_destination) @markup.link.url
 
 [

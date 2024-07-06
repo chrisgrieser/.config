@@ -127,9 +127,14 @@ return {
 				popup = {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
-					win_options = { scrolloff = 8, wrap = true, foldenable = true },
+					win_options = {
+						scrolloff = 8,
+						wrap = true,
+						foldenable = true,
+						concealcursor = "ncv",
+					},
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
-					format = { "{message}" } -- leave out "{level}"
+					format = { "{message}" }
 				},
 				split = {
 					enter = true,
