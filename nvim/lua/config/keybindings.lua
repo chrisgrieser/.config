@@ -79,7 +79,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
-		vim.snippet.jump(1)
+		return '<cmd>lua vim.snippet.jump(1)<CR>'
 	else
 		local fallback = { n = ">>", i = "<C-t>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
@@ -87,7 +87,7 @@ keymap({ "n", "i", "s" }, "<Tab>", function()
 end, { desc = "󰉶 indent / next placeholder", expr = true })
 keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
-		vim.snippet.jump(-1)
+		return '<cmd>lua vim.snippet.jump(-1)<CR>'
 	else
 		local fallback = { n = "<<", i = "<C-d>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
@@ -95,7 +95,7 @@ keymap({ "n", "i", "s" }, "<S-Tab>", function()
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
 
 -- automatically exit snippet mode on scroll
-vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
+-- vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
