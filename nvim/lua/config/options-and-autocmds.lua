@@ -190,7 +190,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 --------------------------------------------------------------------------------
 -- AUTO-CD TO PROJECT ROOT
 -- (simplified version of project.nvim)
-local autoCd = {
+local autoCdConfig = {
 	childOfRoot = {
 		".git",
 		"Justfile",
@@ -199,16 +199,16 @@ local autoCd = {
 	parentOfRoot = {
 		".config",
 		".obsidian", -- internal Obsidian folder
-		"com~apple~CloudDocs", -- iCloud
+		"com~apple~CloudDocs", -- macOS iCloud
 		"Cellar", -- opt/homebrew/Cellar/neovim
 	},
 }
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
 		local root = vim.fs.root(ctx.buf, function(name, path)
-			local dirHasChildMarker = vim.tbl_contains(autoCd.childOfRoot, name)
+			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
-			local dirHasParentMarker = vim.tbl_contains(autoCd.parentOfRoot, parentName)
+			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
 		if root then vim.uv.chdir(root) end
@@ -292,16 +292,14 @@ vim.on_key(function(char)
 			if count.total == 0 then return end
 			local text = (" %s/%s "):format(count.current, count.total)
 			local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth)) -- ffff
-			vim.notify("👾 line: " .. tostring(#line))
-			local scrollBarMargin = 4
-			local lineFull = #line + scrollBarMargin > vim.api.nvim_win_get_width(0)
-
-			local margin = { (" "):rep(lineFull and scrollBarMargin or 0), "None" }
+			local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
+			local lineFull = #line + signColumnPlusScrollbarWidth >= vim.api.nvim_win_get_width(0)
+			local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
 
 			vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
 				virt_text = { { text, "IncSearch" }, margin },
 				virt_text_pos = lineFull and "right_align" or "eol",
-				priority = 200,
+				priority = 200, -- so it comes in front of lsp-endhints
 			})
 		end, 1)
 	end

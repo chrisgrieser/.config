@@ -81,7 +81,7 @@ keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
 		vim.snippet.jump(1)
 	else
-		local fallback = { n = ">>", i = "<C-t>" }
+		local fallback = { n = ">>", i = "<C-t>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉶 indent / next placeholder", expr = true })
@@ -89,10 +89,13 @@ keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
 		vim.snippet.jump(-1)
 	else
-		local fallback = { n = "<<", i = "<C-d>" }
+		local fallback = { n = "<<", i = "<C-d>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
+
+-- automatically exit snippet mode on scroll
+vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
