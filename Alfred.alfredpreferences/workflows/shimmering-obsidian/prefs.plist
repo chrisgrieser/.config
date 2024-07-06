@@ -18,6 +18,8 @@
 	<string>Knowledge Base</string>
 	<key>open_after_appending</key>
 	<false/>
+	<key>open_note_in_new</key>
+	<string>window</string>
 	<key>scratchpad_append_prefix</key>
 	<string>- </string>
 	<key>scratchpad_note_path</key>
