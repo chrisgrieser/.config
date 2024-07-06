@@ -43,9 +43,9 @@ while true; do
 			-e 's/thunderstorm//' \
 			-e 's/sleet//'
 	)
-	[[ -n "$icon" || $i -gt 5 ]] && break
+	[[ -n "$icon" || $i -gt 3 ]] && break
 	i=$((i + 1))
-	sleep 3
+	sleep 2
 done
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -13,11 +13,11 @@ fi
 
 # GUARD dependencies or API key missing
 if ! command -v yq &>/dev/null; then
-	sketchybar --set "$NAME" icon=" " label="yq not found"
+	sketchybar --set "$NAME" label="yq not found" drawing=true
 	return 1
 elif [[ -z "$GITHUB_TOKEN" ]]; then
 	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
-	sketchybar --set "$NAME" icon=" " label="GITHUB_TOKEN not set"
+	sketchybar --set "$NAME" label="GITHUB_TOKEN not set" drawing=true
 	return 1
 fi
 

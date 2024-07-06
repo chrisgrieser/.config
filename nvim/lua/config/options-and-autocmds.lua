@@ -296,13 +296,21 @@ vim.on_key(function(char)
 			local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
 
 			vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
-				virt_text = { { text, "IncSearch" }, margin },
+				virt_text = {
+					{ "", "IncSearchRev" },
+					{ text, "IncSearch" },
+					{ "", "IncSearchRev" },
+					margin,
+				},
 				virt_text_pos = lineFull and "right_align" or "eol",
 				priority = 200, -- so it comes in front of lsp-endhints
 			})
 		end, 1)
 	end
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
+
+vim.api.nvim_set_hl(0, "IncSearchRev", { link = "IncSearch" })
+vim.api.nvim_set_hl(0, "IncSearchRev", { reverse = true })
 
 --------------------------------------------------------------------------------
 -- FAVICONS PREFIXES FOR URLS
