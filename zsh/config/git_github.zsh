@@ -213,9 +213,10 @@ function my_commits_today {
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed -Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
+		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/(..:..) ([^ ]*) –/\e[0;38;5;245m\\1 \e[1;34m\\2\e[0m/' \
 		-Ee $'s/`[^`]*`/\e[1;33m&\e[0m/g' \
-	-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
+		-Ee $'s/#[0-9]+/\e[1;31m&\e[0m/g'
 	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"
 }
 
