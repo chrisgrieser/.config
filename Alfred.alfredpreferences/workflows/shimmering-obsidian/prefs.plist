@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>append_prefix</key>
-	<string>- </string>
+	<string>- {isodate}: </string>
 	<key>backup_destination</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Obsidian Backups</string>
 	<key>h_lvl_ignore</key>
@@ -19,7 +19,7 @@
 	<key>open_after_appending</key>
 	<false/>
 	<key>scratchpad_append_prefix</key>
-	<string>- {date:short}: </string>
+	<string>- {isodate}: </string>
 	<key>scratchpad_note_path</key>
 	<string>Writing/Diss - Plattform-Governance/Diss Scratchpad.md</string>
 	<key>supercharged_icon_file</key>

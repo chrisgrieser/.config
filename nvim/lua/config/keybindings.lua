@@ -146,6 +146,7 @@ end
 -- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
+keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 
 --------------------------------------------------------------------------------
