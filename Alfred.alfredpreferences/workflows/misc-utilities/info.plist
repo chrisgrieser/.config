@@ -210,19 +210,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E50CDDFE-F36B-48D0-90F8-866722CB1D13</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4C5344FE-FF23-4A97-A91B-85DF724EE19B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<array>
 			<dict>
@@ -894,29 +881,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/show-stats.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4C5344FE-FF23-4A97-A91B-85DF724EE19B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -947,27 +911,6 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>stats</string>
-				<key>subtext</key>
-				<string>Stats.app</string>
-				<key>text</key>
-				<string>Show Stats Module</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E50CDDFE-F36B-48D0-90F8-866722CB1D13</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1036,15 +979,6 @@
 			<real>315</real>
 			<key>ypos</key>
 			<real>475</real>
-		</dict>
-		<key>4C5344FE-FF23-4A97-A91B-85DF724EE19B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>790</real>
 		</dict>
 		<key>5C877087-012F-4C14-9B4D-369466813350</key>
 		<dict>
@@ -1204,17 +1138,6 @@
 			<real>960</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>E50CDDFE-F36B-48D0-90F8-866722CB1D13</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>add feed</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>790</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>
