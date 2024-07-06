@@ -279,13 +279,15 @@ vim.on_key(function(char)
 	elseif searchMovement or searchConfirmed or searchStarted then
 		vim.opt.hlsearch = true
 
+		-- CONFIG
+		local signColumnPlusScrollbarWidth = 2 + 3
+
 		vim.defer_fn(function()
 			local row = vim.api.nvim_win_get_cursor(0)[1]
 			local count = vim.fn.searchcount()
 			if count.total == 0 then return end
 			local text = (" %s/%s "):format(count.current, count.total)
 			local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth)) -- ffff
-			local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
 			local lineFull = #line + signColumnPlusScrollbarWidth >= vim.api.nvim_win_get_width(0)
 			local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
 
@@ -300,31 +302,35 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
 --------------------------------------------------------------------------------
 -- FAVICONS PREFIXES FOR URLS
----@type table<string, string>
 local favicons = {
-	["github.com"] = " ",
-	["neovim.io"] = "",
-	["stackoverflow.com"] = "󰓌 ",
-	["youtube.com"] = " ",
-	["discord.com"] = "󰙯 ",
-	["slack.com"] = " ",
-	["new.reddit.com"] = " ",
-	["www.reddit.com"] = " ",
+	hlGroup = "Comment",
+	icons = {
+		["github.com"] = " ",
+		["neovim.io"] = "",
+		["stackoverflow.com"] = "󰓌 ",
+		["youtube.com"] = " ",
+		["discord.com"] = "󰙯 ",
+		["slack.com"] = " ",
+		["new.reddit.com"] = " ",
+		["www.reddit.com"] = " ",
+	},
 }
+
 local function addFavicons(ctx)
-	-- REQUIRED comment parser, `:TSInstall comment`
+	-- REQUIRED comment parser, `:TSInstall comment` AND parser for the current buffer
 	local hasCommentsParser, urlCommentsQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
 	if not hasCommentsParser then return end
 
 	local bufnr = ctx and ctx.buf or 0
 	local urlNodes = {}
-	local faviconNs = vim.api.nvim_create_namespace("favicon")
-	vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
 
 	vim.defer_fn(function() -- deferred, so treesitter parser is ready
 		local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
 		if not hasParserForFt then return end
+
+		local faviconNs = vim.api.nvim_create_namespace("favicon")
+		vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
 
 		ltree:for_each_tree(function(tstree, _)
 			local commentUrlNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
@@ -335,12 +341,12 @@ local function addFavicons(ctx)
 		vim.iter(urlNodes):each(function(node)
 			local nodeText = vim.treesitter.get_node_text(node, bufnr)
 			local host = nodeText:match("^https?://([^/]+)")
-			local icon = favicons[host]
+			local icon = favicons.icons[host]
 			if not icon then return end
 
 			local startRow, startCol = vim.treesitter.get_node_range(node)
 			vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
-				virt_text = { { icon, "Comment" } },
+				virt_text = { { icon, favicons.hlGroup } },
 				virt_text_pos = "inline",
 			})
 		end)
