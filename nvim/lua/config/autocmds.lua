@@ -141,69 +141,6 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
 --------------------------------------------------------------------------------
--- FAVICONS PREFIXES FOR URLS
-
--- REQUIRED
--- comment parser (`:TSInstall comment`)
--- active parser for the current buffer (e.g., in a lua buffer, the lua parser is required)
--- Recommended: Nerdfont icon
-
-local favicons = {
-	hlGroup = "Comment",
-	icons = {
-		["github.com"] = " ",
-		["neovim.io"] = "",
-		["stackoverflow.com"] = "󰓌 ",
-		["youtube.com"] = " ",
-		["discord.com"] = "󰙯 ",
-		["slack.com"] = " ",
-		["new.reddit.com"] = " ",
-		["www.reddit.com"] = " ",
-	},
-}
-
-local function addFavicons(ctx)
-	local hasCommentsParser, urlCommentsQuery =
-		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-	if not hasCommentsParser then return end
-
-	local bufnr = ctx and ctx.buf or 0
-	local urlNodes = {}
-	local faviconNs = vim.api.nvim_create_namespace("favicon")
-
-	vim.defer_fn(function() -- deferred, so treesitter parser is ready
-		local hasParserForFt, ltree = pcall(vim.treesitter.get_parser, bufnr)
-		if not hasParserForFt then return end
-
-		vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
-
-		ltree:for_each_tree(function(tstree, _)
-			local commentUrlNodes = urlCommentsQuery:iter_captures(tstree:root(), bufnr)
-			for _, node in commentUrlNodes do
-				table.insert(urlNodes, node)
-			end
-		end)
-		vim.iter(urlNodes):each(function(node)
-			local nodeText = vim.treesitter.get_node_text(node, bufnr)
-			local host = nodeText:match("^https?://([^/]+)")
-			local icon = favicons.icons[host]
-			if not icon then return end
-
-			local startRow, startCol = vim.treesitter.get_node_range(node)
-			vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
-				virt_text = { { icon, favicons.hlGroup } },
-				virt_text_pos = "inline",
-			})
-		end)
-	end, 1)
-end
-vim.api.nvim_create_autocmd(
-	{ "BufEnter", "TextChanged", "InsertLeave" },
-	{ callback = addFavicons }
-)
-addFavicons() -- initialize on current buffer
-
---------------------------------------------------------------------------------
 
 -- SKELETONS (TEMPLATES)
 local skeletons = {
@@ -255,7 +192,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- add signs to the quickfix list
+-- QUICKFIX LIST: ADD SIGNS
 local quickfix_ns = vim.api.nvim_create_namespace("quickfix_signs")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
