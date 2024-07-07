@@ -7,7 +7,7 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	// try out all the different casings
-	const clean = str.replace(/[-.()_/[\]]+/g, " ");
+	const clean = str.replace(/[-.()_/[\]]/g, " ");
 	const squeezed = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	const kebabCase = str.replace(/[ _]/g, "-");

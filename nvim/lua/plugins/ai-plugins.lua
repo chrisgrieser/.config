@@ -20,6 +20,7 @@ return {
 				regex = false, -- rg-substitute buffer
 			},
 			silent = true,
+			show_label = false, -- signcolumn label for number of suggestions
 		},
 		init = function()
 			-- disable while recording
@@ -28,8 +29,8 @@ return {
 		end,
 		keys = {
 			-- stylua: ignore start
-			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-			{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
+			{ "<D-s>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
+			{ "<D-S>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
 			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
 			-- stylua: ignore end
 			{

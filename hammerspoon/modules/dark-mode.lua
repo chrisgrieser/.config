@@ -26,8 +26,10 @@ function M.setDarkMode(toMode)
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- neovim
-	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
-	hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd))
+	if u.appRunning("Neovide") then
+		local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
+		hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd))
+	end
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
@@ -35,7 +37,7 @@ function M.setDarkMode(toMode)
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
-	-- hammerspoon
+	-- hammerspoon itself
 	console.setConsoleColors(toMode)
 	visuals.updateHoleCover()
 end

@@ -1,12 +1,10 @@
 # imported vim files
 after/**/applescript.vim
 after/**/log.vim
+after/ftplugin/github-markdown.css
 
 # snippets files (already using nvim-scissors for that)
 snippets/**
 
 # skeletons rarely touched
 templates/**
-
-# lazy.nvim
-.lazy-lock.json
