@@ -70,7 +70,7 @@ local function telescopeConfig()
 			vimgrep_arguments = {
 				"rg",
 				"--no-config",
-				-- "--sortr=modified",
+				"--sortr=modified", -- performance cost as it disables multithreaded
 				"--vimgrep",
 				"--smart-case",
 				"--trim",

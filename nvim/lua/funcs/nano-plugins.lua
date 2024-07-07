@@ -1,9 +1,9 @@
+local M = {}
+--------------------------------------------------------------------------------
 -- A bunch of commands that are too small to be published as plugins, but too
 -- big to put in the main config, where they would crowd the actual config.
--- Every function is self-contained (except the helper functions here), and
+-- Every function is self-contained (except the helper functions below), and
 -- should be bound to a keymap.
---------------------------------------------------------------------------------
-local M = {}
 
 ---@param cmd string
 local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
@@ -28,13 +28,14 @@ function M.openAlfredPref()
 	end
 	-- using JXA and URI for redundancy, as both are not 100% reliable
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
 	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowId .. ")"
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
+	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
 	vim.ui.open(uri)
 end
 
---- open the next regex at https://regex101.com/
+---open the next regex at https://regex101.com/
+---REQUIRED nvim-rip-substitute & nvim-treesitter-textobjects
 function M.openAtRegex101()
 	local ft = vim.bo.filetype
 	local data = {}
@@ -44,7 +45,7 @@ function M.openAtRegex101()
 		normal('"zy')
 
 		data.regex, data.flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
-		data.substitution = vim.api.nvim_get_current_line():match('replace ?%(/.*/.*, ?"(.-)"')
+		data.substitution = vim.api.nvim_get_current_line():match('%.replace ?%(/.*/.*, ?"(.-)"')
 		data.delimiter = "/"
 		data.flavor = "javascript"
 
@@ -63,31 +64,7 @@ function M.openAtRegex101()
 	end
 	data.testString = ""
 
-	-- https://github.com/firasdib/Regex101/wiki/API#curl-3
-	local curlTimeoutSecs = 10
-	-- stylua: ignore
-	local curlArgs = {
-		"curl",
-		"--silent",
-		"--max-time", tostring(curlTimeoutSecs),
-		"--request", "post",
-		"--header", "expect:",
-		"--header", "content-type: application/json",
-		"--data", vim.json.encode(data),
-		"https://regex101.com/api/regex",
-	}
-	vim.system(curlArgs, {}, function(out)
-		if out.code ~= 0 then
-			notify("regex101", "curl failed:\n" .. out.stderr, "error")
-			return
-		end
-		local response = vim.json.decode(out.stdout)
-		if response.error then
-			notify("regex101", "API error:\n" .. response.error, "error")
-			return
-		end
-		vim.ui.open("https://regex101.com/r/" .. response.permalinkFragment)
-	end)
+	require("rip-substitute.open-at-regex101").open(data)
 end
 
 ---@param first any -- if truthy, run first recipe
@@ -115,6 +92,7 @@ function M.justRecipe(first)
 		end
 		vim.cmd.checktime() -- reload buffer
 	end
+	-----------------------------------------------------------------------------
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
 	if result.code ~= 0 then

@@ -202,8 +202,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- not work reliabely due to some colorschemes setting the background themselves
 -- with different timings
 function M.updateColorscheme()
-	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
+	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
 	vim.cmd.colorscheme(targetTheme)
 end
 

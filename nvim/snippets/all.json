@@ -16,7 +16,7 @@
     "prefix": "DEPRECATION"
   },
   "DOCS (+url)": {
-    "body": "$LINE_COMMENT $0DOCS $CLIPBOARD",
+    "body": "$LINE_COMMENT DOCS $0$CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
   "EXAMPLE": {
@@ -44,7 +44,7 @@
     "prefix": "lorem sentence"
   },
   "PENDING (+url)": {
-    "body": "$LINE_COMMENT $0PENDING $CLIPBOARD",
+    "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
   "PERF": {
