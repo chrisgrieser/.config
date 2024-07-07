@@ -108,9 +108,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "TextChanged" }, {
 
 		for lnum = 1, #bufLines do
 			local line = bufLines[lnum]
-			local startCol, endCol = line:find([=[%+ ?["'].*["']]=])
+			local startCol, endCol = line:find([=[ %+ ["'].*["']]=])
 			if not (startCol and endCol) then
-				startCol, endCol = line:find([=[["'].*["'] ?%+]=])
+				startCol, endCol = line:find([=[["'].*["'] %+ ]=])
 			end
 			if startCol and endCol then
 				---@type vim.Diagnostic

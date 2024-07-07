@@ -15,8 +15,8 @@
     "body": "$LINE_COMMENT DEPRECATION",
     "prefix": "DEPRECATION"
   },
-  "DOCS": {
-    "body": "$LINE_COMMENT DOCS $CLIPBOARD",
+  "DOCS (+url)": {
+    "body": "$LINE_COMMENT $0DOCS $CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
   "EXAMPLE": {
@@ -43,8 +43,8 @@
     "body": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
     "prefix": "lorem sentence"
   },
-  "PENDING": {
-    "body": "$LINE_COMMENT PENDING $CLIPBOARD",
+  "PENDING (+url)": {
+    "body": "$LINE_COMMENT $0PENDING $CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
   "PERF": {

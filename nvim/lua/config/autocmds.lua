@@ -76,10 +76,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		if #closedBuffers == 0 then return end
 
 		if #closedBuffers == 1 then
-			u.notify(" Buffer closed", closedBuffers[1])
+			u.notify("󰅗 Buffer closed", closedBuffers[1])
 		else
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
-			u.notify(" Buffers closed", text)
+			u.notify("󰱝 Buffers closed", text)
 		end
 
 		-- closing all buffers and thus ending up in empty buffer, re-open the
