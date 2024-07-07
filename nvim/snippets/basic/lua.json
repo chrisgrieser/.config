@@ -109,7 +109,8 @@
       "\tlocal content = file:read(\"*a\")",
       "\tfile:close()",
       "\treturn content, true",
-      "end"
+      "end",
+      "22"
     ],
     "prefix": "read file"
   },
