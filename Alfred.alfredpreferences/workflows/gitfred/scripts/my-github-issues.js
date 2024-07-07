@@ -17,7 +17,9 @@ function alfredMatcher(str) {
 function run() {
 	const resultsNumber = 50; // api allows up to 100
 	const username = $.getenv("github_username");
-	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&per_page=${resultsNumber}`;
+
+	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
+	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=${resultsNumber}`;
 
 	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
@@ -27,19 +29,23 @@ function run() {
 			const title = item.title;
 			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
-			const open = item.state === "open"
-			const closed = item.state === "closed"
-			const reason = item.state_reason
+			const open = item.state === "open";
+			const closed = item.state === "closed";
+			const reason = item.state_reason;
+			const labels = item.labels.map((label) => `[${label.name}]`).join(" ");
 
+			const subtitle = [`#${item.number}`, repo, comments.toString(), labels]
+				.filter(Boolean)
+				.join("   ");
+
+			// icon
 			let icon = issueAuthor === username ? "✏️ " : "";
 			if (open && isPR) icon += "🟩 ";
 			else if (closed && isPR && merged) icon += "🟪 ";
 			else if (closed && isPR && !merged) icon += "🟥 ";
+			else if (open && !isPR) icon += "🟢 ";
 			else if (closed && reason === "not_planned") icon += "⚪ ";
 			else if (closed && reason === "completed") icon += "🟣 ";
-			else if (open && !isPR) icon += "🟢 ";
-
-			const labels = item.labels.map((label) => `[${label.name}]`).join(" ");
 
 			let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo) + " " + item.state;
 			if (isPR) matcher += " pr";
@@ -47,7 +53,7 @@ function run() {
 
 			return {
 				title: icon + title,
-				subtitle: `#${item.number}  ${repo}  ${comments}`,
+				subtitle: subtitle,
 				match: matcher,
 				arg: item.html_url,
 				quicklookurl: item.html_url,

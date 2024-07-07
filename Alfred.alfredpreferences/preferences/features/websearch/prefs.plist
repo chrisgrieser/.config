@@ -77,7 +77,7 @@
 			<key>keyword</key>
 			<string>nf</string>
 			<key>text</key>
-			<string>Nerdfont</string>
+			<string>Nerdfont: '{query}'</string>
 			<key>url</key>
 			<string>https://www.nerdfonts.com/cheat-sheet?q={query}</string>
 		</dict>

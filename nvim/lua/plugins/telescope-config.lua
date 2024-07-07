@@ -70,6 +70,7 @@ local function telescopeConfig()
 			vimgrep_arguments = {
 				"rg",
 				"--no-config",
+				-- "--sortr=modified",
 				"--vimgrep",
 				"--smart-case",
 				"--trim",
