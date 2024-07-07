@@ -7,3 +7,4 @@
 
 local snip = Snippets.loaded_snippets
 vim.notify("👾 snip: " .. vim.inspect(snip))
+
