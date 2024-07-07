@@ -26,6 +26,7 @@ opt.colorcolumn = "+1" -- one more than textwidth
 opt.wrap = false
 opt.breakindent = true -- indent wrapped lines
 
+opt.shortmess:append("I") -- no intro message
 opt.report = 9001 -- disable "x more/fewer lines" messages
 
 opt.iskeyword:append("-") -- treat `-` as word character, same as `_`

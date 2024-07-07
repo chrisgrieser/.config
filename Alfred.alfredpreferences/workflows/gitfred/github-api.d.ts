@@ -23,7 +23,9 @@ declare class GithubNotif {
 declare class GithubIssue {
 	title: string;
 	user: { login: string };
-	state: string;
+	state: "open" | "closed";
+	// biome-ignore lint/style/useNamingConvention: not_by_me
+	state_reason?: "not_planned" | "completed";
 	comments: number;
 	draft: boolean;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
@@ -41,6 +43,7 @@ declare class GithubIssue {
 	created_at: string;
 	// biome-ignore lint/style/useNamingConvention: not_by_me
 	updated_at: string;
+	labels: { name: string }[];
 }
 
 declare class GithubRepo {
