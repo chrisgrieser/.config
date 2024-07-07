@@ -1,6 +1,6 @@
 
 local path = "/Users/chrisgrieser/.config/nvim/snippets/basic/lua.json"
-require("snippets.utils").reload_file(path)
+-- require("snippets.utils").reload_file(path)
 
 --------------------------------------------------------------------------------
 
