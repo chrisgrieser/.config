@@ -15,9 +15,9 @@
     "body": "---@type table<string, string>",
     "prefix": "Record (type)"
   },
-  "count occurences in string": {
+  "count occurrences in string": {
     "body": "local _, count = ${1:str}:gsub(\"${2:find}\", \"\")",
-    "prefix": "count occurences in string"
+    "prefix": "count occurrences in string"
   },
   "export module": {
     "body": [
@@ -109,8 +109,7 @@
       "\tlocal content = file:read(\"*a\")",
       "\tfile:close()",
       "\treturn content, true",
-      "end",
-      "22"
+      "end"
     ],
     "prefix": "read file"
   },
