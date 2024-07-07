@@ -100,7 +100,6 @@
   },
   "read file": {
     "body": [
-      "-- fffff",
       "---@param filePath string",
       "---@return string? -- content or error message",
       "---@return boolean success",
