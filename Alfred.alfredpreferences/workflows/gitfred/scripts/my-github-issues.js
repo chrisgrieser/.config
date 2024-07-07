@@ -22,22 +22,24 @@ function run() {
 	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
 			const issueAuthor = item.user.login;
-			const authoredByMe = issueAuthor === username;
-
 			const isPR = Boolean(item.pull_request);
 			const merged = Boolean(item.pull_request?.merged_at);
 			const title = item.title;
 			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
+			const open = item.state === "open"
+			const closed = item.state === "closed"
+			const reason = item.state_reason
 
-			let icon = authoredByMe ? "🚩 " : "";
-			if (item.state === "open" && isPR) icon += "🟩 ";
-			else if (item.state === "closed" && isPR && merged) icon += "🟪 ";
-			else if (item.state === "closed" && isPR && !merged) icon += "🟥 ";
-			else if (item.state === "closed" && !isPR) icon += "🟣 ";
-			else if (item.state === "open" && !isPR) icon += "🟢 ";
-			if (title.toLowerCase().includes("request") || title.includes("FR")) icon += "🙏 ";
-			if (title.toLowerCase().includes("bug")) icon += "🪲 ";
+			let icon = issueAuthor === username ? "✏️ " : "";
+			if (open && isPR) icon += "🟩 ";
+			else if (closed && isPR && merged) icon += "🟪 ";
+			else if (closed && isPR && !merged) icon += "🟥 ";
+			else if (closed && reason === "not_planned") icon += "⚪ ";
+			else if (closed && reason === "completed") icon += "🟣 ";
+			else if (open && !isPR) icon += "🟢 ";
+
+			const labels = item.labels.map((label) => `[${label.name}]`).join(" ");
 
 			let matcher = alfredMatcher(item.title) + " " + alfredMatcher(repo) + " " + item.state;
 			if (isPR) matcher += " pr";
@@ -45,7 +47,7 @@ function run() {
 
 			return {
 				title: icon + title,
-				subtitle: `#${item.number}  ${repo}   ${comments}`,
+				subtitle: `#${item.number}  ${repo}  ${comments}`,
 				match: matcher,
 				arg: item.html_url,
 				quicklookurl: item.html_url,

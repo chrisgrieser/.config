@@ -115,7 +115,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>an</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -198,7 +198,13 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+- Search all anime listed in the myanimelist database via the keyword `an`.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open at myanimelist.net.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy the Japanese (romaji) title.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the myanimelist URL.
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -244,7 +250,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>an</string>
+				<key>placeholder</key>
+				<string>anime</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string>0.9</string>
 	<key>webaddress</key>
