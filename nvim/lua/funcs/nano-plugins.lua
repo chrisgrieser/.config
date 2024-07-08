@@ -191,4 +191,47 @@ function M.startStopRecording(toggleKey, register)
 end
 
 --------------------------------------------------------------------------------
+
+function M.gitChanges()
+	local out = vim.system({ "git", "diff", "--unified=0" }):wait()
+	if out.code ~= 0 then
+		notify("git", out.stderr, "error")
+		return
+	end
+	local changes = vim.split(out.stdout, "diff --git a/", { plain = true })
+	table.remove(changes, 1) -- first item is always an empty string
+
+	local hunks = vim.iter(changes)
+		:map(function(hunk)
+			local lines = vim.split(hunk, "\n")
+			local relPath = lines[3]:sub(7)
+			local lnum = tonumber(lines[5]:match("@@ %-(%d+)"))
+			return {
+				file = relPath,
+				lnum = lnum,
+				changes = vim.list_slice(lines, 6),
+			}
+		end)
+		:totable()
+
+	vim.ui.select(hunks, {
+		prompt = "Git Hunks",
+		format_item = function(item) return item.file .. ":" .. item.lnum end,
+		telescope = {
+			previewer = require("telescope.previewers").new_buffer_previewer {
+				define_preview = function(self, entry)
+					local bufnr = self.state.bufnr
+					local hunk = entry.value
+					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, hunk.changes)
+					vim.bo[bufnr].filetype = "diff"
+				end,
+			},
+		}
+	}, function (selection)
+		if not selection then return end
+		
+	end)
+end
+
+--------------------------------------------------------------------------------
 return M
