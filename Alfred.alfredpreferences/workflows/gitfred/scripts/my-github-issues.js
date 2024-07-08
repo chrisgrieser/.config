@@ -15,11 +15,10 @@ function alfredMatcher(str) {
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
-	const resultsNumber = 50; // api allows up to 100
 	const username = $.getenv("github_username");
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
-	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=${resultsNumber}`;
+	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
 
 	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
