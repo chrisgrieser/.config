@@ -193,7 +193,11 @@ end
 --------------------------------------------------------------------------------
 
 function M.gitChanges()
-	local out = vim.system({ "git", "diff" }):wait()
+	vim.cmd("silent! update")
+	-- CAVEAT for some reason, context=0 results in patches that are not valid.
+	-- Using context=1 seems to work, but has the downside of merging hunks that
+	-- are close to each other.
+	local out = vim.system({ "git", "-c", "diff.context=0", "diff" }):wait()
 	if out.code ~= 0 then
 		notify("git", out.stderr, "error")
 		return
@@ -207,11 +211,13 @@ function M.gitChanges()
 	-- stage only part of a file.
 	local hunks = {}
 	for _, file in ipairs(changesPerFile) do
+		-- severe diff header
 		file = "diff --git a/" .. file
 		local diffLines = vim.split(file, "\n")
 		local relPath = diffLines[3]:sub(7)
 		local diffHeader = table.concat(vim.list_slice(diffLines, 1, 4), "\n")
 
+		-- split output into hunks
 		local changesInFile = vim.list_slice(diffLines, 5)
 		local hunksInFile = {}
 		for _, line in ipairs(changesInFile) do
@@ -222,9 +228,10 @@ function M.gitChanges()
 			end
 		end
 
+		-- loop hunks
 		for _, hunk in ipairs(hunksInFile) do
 			local lnum = hunk:match("@@ %-(%d+)")
-			local patch = diffHeader .. "\n" .. hunk
+			local patch = diffHeader .. "\n" .. hunk .. "\n"
 			table.insert(hunks, {
 				file = relPath,
 				lnum = lnum,
@@ -235,7 +242,7 @@ function M.gitChanges()
 	end
 
 	-----------------------------------------------------------------------------
-
+	-- select from hunks & preview the hunk
 	vim.ui.select(hunks, {
 		prompt = "Git Hunks",
 		format_item = function(hunk) return hunk.display end,
@@ -258,12 +265,17 @@ function M.gitChanges()
 		if not hunk then return end
 
 		-- use `git apply` to stage only part of a file, see https://stackoverflow.com/a/66618356/22114136
-		local out2 = vim.system({ "git", "apply", "-", "--cached" }, { stdin = hunk.patch }):wait()
+		local out2 = vim.system(
+			{ "git", "apply", "--apply", "--cached", "--verbose", "-" },
+			{ stdin = hunk.patch }
+		):wait()
 		if out2.code ~= 0 then
-			notify("git", out.stderr, "error")
+			notify("git", out2.stderr, "error")
 			return
 		end
+
 		notify("git", "Staged hunk " .. hunk.display)
+		notify("git", hunk.patch, "trace")
 
 		-- call itself to continue staging
 		if #hunks > 1 then M.gitChanges() end
