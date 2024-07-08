@@ -193,7 +193,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.gitChanges()
-	local out = vim.system({ "git", "diff", "--unified=0" }):wait()
+	local out = vim.system({ "git", "diff" }):wait()
 	if out.code ~= 0 then
 		notify("git", out.stderr, "error")
 		return
@@ -209,27 +209,36 @@ function M.gitChanges()
 			return {
 				file = relPath,
 				lnum = lnum,
-				changes = vim.list_slice(lines, 6),
+				patch = hunk,
 			}
 		end)
 		:totable()
 
 	vim.ui.select(hunks, {
 		prompt = "Git Hunks",
-		format_item = function(item) return item.file .. ":" .. item.lnum end,
+		format_item = function(hunk) return hunk.file .. ":" .. hunk.lnum end,
 		telescope = {
 			previewer = require("telescope.previewers").new_buffer_previewer {
 				define_preview = function(self, entry)
 					local bufnr = self.state.bufnr
 					local hunk = entry.value
-					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, hunk.changes)
+					local display = vim.list_slice(vim.split(hunk.patch, "\n"), 5)
+					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, display)
 					vim.bo[bufnr].filetype = "diff"
 				end,
 			},
-		}
-	}, function (selection)
-		if not selection then return end
-		
+		},
+	}, function(hunk)
+		if not hunk then return end
+		-- https://stackoverflow.com/a/66618356/22114136
+		local out2 = vim.system({ "git", "apply", "-", "--cached" }, { stdin = hunk.patch }):wait()
+		if out2.code ~= 0 then
+			notify("git", out.stdout, "error")
+			return
+		end
+		notify("git", out2.stdout, "info")
+		-- call itself to continue staging
+		if #hunks > 1 then M.gitChanges() end
 	end)
 end
 
