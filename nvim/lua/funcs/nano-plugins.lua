@@ -193,7 +193,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.gitChanges()
-	local out = vim.system({ "git", "-c", "diff.context=0", "diff" }):wait()
+	local out = vim.system({ "git", "diff" }):wait()
 	if out.code ~= 0 then
 		notify("git", out.stderr, "error")
 		return
@@ -203,12 +203,14 @@ function M.gitChanges()
 
 	-- Loop through each file, and then through each hunk of that file. Construct
 	-- flattened list of hunks, each with their own diff header, so they work as
-	-- independent patches.
+	-- independent patches. Those patches in turn are needed for `git apply`
+	-- stage only part of a file.
 	local hunks = {}
 	for _, file in ipairs(changesPerFile) do
+		file = "diff --git a/" .. file
 		local diffLines = vim.split(file, "\n")
 		local relPath = diffLines[3]:sub(7)
-		local diffHeader = vim.list_slice(diffLines, 1, 4)
+		local diffHeader = table.concat(vim.list_slice(diffLines, 1, 4), "\n")
 
 		local changesInFile = vim.list_slice(diffLines, 5)
 		local hunksInFile = {}
@@ -221,14 +223,13 @@ function M.gitChanges()
 		end
 
 		for _, hunk in ipairs(hunksInFile) do
-			local lnum = hunk:match("@@ -(%d+),")
-			local patch = vim.deepcopy(diffHeader)
-			vim.list_extend(patch, hunk)
+			local lnum = hunk:match("@@ %-(%d+)")
+			local patch = diffHeader .. "\n" .. hunk
 			table.insert(hunks, {
 				file = relPath,
 				lnum = lnum,
 				display = vim.fs.basename(relPath) .. ":" .. lnum,
-				patch = vim.concat(patch, "\n"),
+				patch = patch,
 			})
 		end
 	end
@@ -247,14 +248,19 @@ function M.gitChanges()
 					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, display)
 					vim.bo[bufnr].filetype = "diff"
 				end,
+				dyn_title = function(_, entry)
+					local hunk = entry.value
+					return hunk.file .. ":" .. hunk.lnum
+				end,
 			},
 		},
 	}, function(hunk)
 		if not hunk then return end
+
 		-- use `git apply` to stage only part of a file, see https://stackoverflow.com/a/66618356/22114136
 		local out2 = vim.system({ "git", "apply", "-", "--cached" }, { stdin = hunk.patch }):wait()
 		if out2.code ~= 0 then
-			notify("git", out.stdout, "error")
+			notify("git", out.stderr, "error")
 			return
 		end
 		notify("git", "Staged hunk " .. hunk.display)
