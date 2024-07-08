@@ -109,6 +109,7 @@ keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- Merging
+-- fffff
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge up" })
 keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
 
