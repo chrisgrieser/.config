@@ -4,12 +4,10 @@
 <dict>
 	<key>clone_depth</key>
 	<integer>15</integer>
-	<key>default_branch</key>
-	<string>dev</string>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_username</key>
-	<string>chrisgrieser</string>
+	<string>learn2reid</string>
 	<key>keyword_personal_repos</key>
 	<string>gg</string>
 	<key>restore_mtime</key>

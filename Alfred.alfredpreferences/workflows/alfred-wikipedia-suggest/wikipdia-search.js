@@ -36,6 +36,7 @@ function run(argv) {
 			const suggestion = wikiItems[1][i];
 			const desc = wikiItems[2][i]; // often empty
 			let url = wikiItems[3][i];
+
 			if (useWikiwand) url = url.replace(/.*\/wiki\/(.+)/, `https://www.wikiwand.com/${lang}/$1`);
 
 			// only show languages if actually more than one
