@@ -28,6 +28,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function() vim.opt_local.sidescrolloff = 1 end,
 })
 
+require("funcs.telescope-backdrop").setup()
+
 --------------------------------------------------------------------------------
 
 local function telescopeConfig()
@@ -313,7 +315,12 @@ return {
 			{ "<leader>gl", function() telescope("git_commits") end, desc = "󰭎 Log" },
 			{ "<leader>gb", function() telescope("git_branches") end, desc = "󰭎 Branches" },
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
-			{ "<leader>pc", function() telescope("colorscheme") end, desc = " Colorschemes" },
+			{
+				"<leader>pc",
+				-- suppress autocmds to not use the backdrop
+				function() vim.cmd("noautocmd Telescope colorscheme") end,
+				desc = " Colorschemes",
+			},
 			{
 				"go",
 				function()
