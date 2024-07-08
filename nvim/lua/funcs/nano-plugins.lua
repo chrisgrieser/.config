@@ -193,30 +193,51 @@ end
 --------------------------------------------------------------------------------
 
 function M.gitChanges()
-	local out = vim.system({ "git", "diff" }):wait()
+	local out = vim.system({ "git", "-c", "diff.context=0", "diff" }):wait()
 	if out.code ~= 0 then
 		notify("git", out.stderr, "error")
 		return
 	end
-	local changes = vim.split(out.stdout, "diff --git a/", { plain = true })
-	table.remove(changes, 1) -- first item is always an empty string
+	local changesPerFile = vim.split(out.stdout, "diff --git a/", { plain = true })
+	table.remove(changesPerFile, 1) -- first item is always an empty string
 
-	local hunks = vim.iter(changes)
-		:map(function(hunk)
-			local lines = vim.split(hunk, "\n")
-			local relPath = lines[3]:sub(7)
-			local lnum = tonumber(lines[5]:match("@@ %-(%d+)"))
-			return {
+	-- Loop through each file, and then through each hunk of that file. Construct
+	-- flattened list of hunks, each with their own diff header, so they work as
+	-- independent patches.
+	local hunks = {}
+	for _, file in ipairs(changesPerFile) do
+		local diffLines = vim.split(file, "\n")
+		local relPath = diffLines[3]:sub(7)
+		local diffHeader = vim.list_slice(diffLines, 1, 4)
+
+		local changesInFile = vim.list_slice(diffLines, 5)
+		local hunksInFile = {}
+		for _, line in ipairs(changesInFile) do
+			if vim.startswith(line, "@@") then
+				table.insert(hunksInFile, line)
+			else
+				hunksInFile[#hunksInFile] = hunksInFile[#hunksInFile] .. "\n" .. line
+			end
+		end
+
+		for _, hunk in ipairs(hunksInFile) do
+			local lnum = hunk:match("@@ -(%d+),")
+			local patch = vim.deepcopy(diffHeader)
+			vim.list_extend(patch, hunk)
+			table.insert(hunks, {
 				file = relPath,
 				lnum = lnum,
-				patch = hunk,
-			}
-		end)
-		:totable()
+				display = vim.fs.basename(relPath) .. ":" .. lnum,
+				patch = vim.concat(patch, "\n"),
+			})
+		end
+	end
+
+	-----------------------------------------------------------------------------
 
 	vim.ui.select(hunks, {
 		prompt = "Git Hunks",
-		format_item = function(hunk) return hunk.file .. ":" .. hunk.lnum end,
+		format_item = function(hunk) return hunk.display end,
 		telescope = {
 			previewer = require("telescope.previewers").new_buffer_previewer {
 				define_preview = function(self, entry)
@@ -230,13 +251,14 @@ function M.gitChanges()
 		},
 	}, function(hunk)
 		if not hunk then return end
-		-- https://stackoverflow.com/a/66618356/22114136
+		-- use `git apply` to stage only part of a file, see https://stackoverflow.com/a/66618356/22114136
 		local out2 = vim.system({ "git", "apply", "-", "--cached" }, { stdin = hunk.patch }):wait()
 		if out2.code ~= 0 then
 			notify("git", out.stdout, "error")
 			return
 		end
-		notify("git", out2.stdout, "info")
+		notify("git", "Staged hunk " .. hunk.display)
+
 		-- call itself to continue staging
 		if #hunks > 1 then M.gitChanges() end
 	end)
