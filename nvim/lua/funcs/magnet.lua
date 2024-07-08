@@ -14,6 +14,7 @@ local config = {
 		statusbarMaxDisplayLen = 25,
 	},
 }
+local pluginName = " Magnet"
 
 --------------------------------------------------------------------------------
 
@@ -23,7 +24,7 @@ local config = {
 ---@return { id: number }? -- nvim-notify notification record
 local function notify(msg, level, extraOpts)
 	if not level then level = "info" end
-	local opts = vim.tbl_extend("force", { title = "Magnet" }, extraOpts or {})
+	local opts = vim.tbl_extend("force", { title = pluginName }, extraOpts or {})
 	return vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
@@ -188,7 +189,7 @@ function M.bufferByLastUsed(dir)
 
 	---@diagnostic disable-next-line: assign-type-mismatch
 	state.bufNavNotify = notify(table.concat(bufsDisplay, "\n"), "info", {
-		title = " Magnet: Last used",
+		title = pluginName .. ": Last used",
 		timeout = timeoutMs,
 		animate = false,
 		stages = "no_animation",
@@ -302,7 +303,7 @@ function M.gotoChangedFiles()
 	local msg = table.concat(listOfChangedFiles, "\n")
 
 	changedFileNotif = notify(msg, "info", {
-		title = " Magnet: Changed files",
+		title = pluginName .. ": Changed files",
 		replace = changedFileNotif and changedFileNotif.id,
 		animate = false,
 		hide_from_history = true,

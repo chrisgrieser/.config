@@ -121,11 +121,14 @@ function M.toggleOrIncrement()
 	if ft == "typescript" or ft == "javascript" then
 		toggles["const"] = "let"
 		toggles["&&"] = "||"
+		toggles["!=="] = "==="
 	elseif ft == "python" then
 		toggles["true"] = nil
 		toggles["True"] = "False"
+		toggles["!="] = "=="
 	elseif ft == "lua" then
 		toggles["and"] = "or"
+		toggles["~="] = "=="
 	end
 
 	local cword = vim.fn.expand("<cword>")
