@@ -1,0 +1,8 @@
+diff --git a/nvim/lua/funcs/nano-plugins.lua b/nvim/lua/funcs/nano-plugins.lua
+index 5e918af07..90c38bf2c 100644
+--- a/nvim/lua/funcs/nano-plugins.lua
++++ b/nvim/lua/funcs/nano-plugins.lua
+@@ -206 +206,2 @@ function M.gitChanges()
+-       -- independent patches.
++       -- independent patches. Those patches in turn are needed for `git apply`
++       -- stage only part of a file.
