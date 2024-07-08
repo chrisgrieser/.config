@@ -67,14 +67,7 @@ local function cmpconfig()
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
 				local maxLength = 40
-				local sourceIcons = {
-					buffer = "󰽙",
-					cmdline = "󰘳",
-					snippets = "",
-					nvim_lsp = "󰒕",
-					path = "",
-					emmet = "",
-				}
+				local sourceIcons = { buffer = "󰽙", snippets = "", nvim_lsp = "󰒕", emmet = "" }
 				local kindIcons = {
 					Text = "",
 					Method = "󰆧",
@@ -146,7 +139,6 @@ local function cmpconfig()
 				keyword_length = 3,
 				max_item_count = 4, -- since searching all buffers results in many results
 			},
-			{ name = "path" },
 		},
 	}
 
@@ -159,15 +151,6 @@ local function cmpconfig()
 			local doubleDashLine = line:find("%s%-%-?$") or line:find("^%-%-?$")
 			return not doubleDashLine
 		end,
-	})
-
-	-- COMMANDLINE
-	cmp.setup.cmdline(":", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources {
-			{ name = "path" },
-			{ name = "cmdline" },
-		},
 	})
 
 	cmp.setup.cmdline({ "/", "?" }, {
@@ -188,8 +171,6 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			{ "garymjr/nvim-snippets", opts = true },
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
 		},
 		config = cmpconfig,
 	},

@@ -194,10 +194,12 @@ end
 
 function M.gitChanges()
 	vim.cmd("silent! update")
+
 	-- CAVEAT for some reason, context=0 results in patches that are not valid.
 	-- Using context=1 seems to work, but has the downside of merging hunks that
-	-- are close to each other.
-	local out = vim.system({ "git", "-c", "diff.context=0", "diff" }):wait()
+	-- are only two line apart. Test it: here 0 fails, but 1 works:
+	-- `git -c diff.context=0 diff . | git apply --cached --verbose -`
+	local out = vim.system({ "git", "-c", "diff.context=1", "diff", "--diff-filter=M" }):wait()
 	if out.code ~= 0 then
 		notify("git", out.stderr, "error")
 		return
@@ -260,6 +262,17 @@ function M.gitChanges()
 					return hunk.file .. ":" .. hunk.lnum
 				end,
 			},
+			finder = require("telescope.finders").new_table {
+				results = hunks,
+				-- search for filenames, but also changed line contents
+				entry_maker = function(hunk)
+					local changeLines = vim.iter(vim.split(hunk.patch, "\n"))
+						:filter(function(line) return line:match("^[+-]") end)
+						:join("\n")
+					local matcher = hunk.file .. "\n" .. changeLines
+					return { value = hunk, display = hunk.display, ordinal = matcher }
+				end,
+			},
 		},
 	}, function(hunk)
 		if not hunk then return end
@@ -269,16 +282,13 @@ function M.gitChanges()
 			{ "git", "apply", "--apply", "--cached", "--verbose", "-" },
 			{ stdin = hunk.patch }
 		):wait()
+
 		if out2.code ~= 0 then
 			notify("git", out2.stderr, "error")
-			return
+		else
+			notify("git", "Staged hunk " .. hunk.display)
+			if #hunks > 1 then M.gitChanges() end -- call itself to continue staging
 		end
-
-		notify("git", "Staged hunk " .. hunk.display)
-		notify("git", hunk.patch, "trace")
-
-		-- call itself to continue staging
-		if #hunks > 1 then M.gitChanges() end
 	end)
 end
 
