@@ -20,9 +20,7 @@ local routes = {
 			["not"] = {
 				cond = function(msg)
 					local title = (msg.opts and msg.opts.title) or ""
-					return title:find("Commit Preview")
-						or title:find("tinygit")
-						or title:find("Changed Files")
+					return title:find("tinygit") or title:find("Magnet")
 				end,
 			},
 		},
@@ -103,12 +101,15 @@ return {
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 			views = {
-				messages = {
-					merge = false,
-					replace = false,
-				},
 				cmdline_popup = {
 					border = { style = vim.g.borderStyle },
+				},
+				cmdline_popupmenu = {
+					size = { max_height = 12 },
+					border = { padding = { 0, 1 } }, -- setting border style messes up automatic positioning
+					win_options = {
+						winhighlight = { Normal = "NormalFloat", FloatBorder = "NoicePopupmenuBorder" },
+					},
 				},
 				cmdline = {
 					win_options = { winhighlight = { Normal = "NormalFloat" } },
@@ -129,7 +130,7 @@ return {
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true, concealcursor = "ncv" },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
-					format = { "{message}" }
+					format = { "{message}" },
 				},
 				split = {
 					enter = true,
