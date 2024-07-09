@@ -45,6 +45,7 @@ declare type Editor = {
 	getRange(from: EditorPosition, to: EditorPosition): string;
 	offsetToPos(offset: number): EditorPosition;
 	posToOffset(pos: EditorPosition): number;
+	lastLine(): number;
 	// biome-ignore lint/suspicious/noExplicitAny: code mirror instance, mostly for vim mode
 	cm: any;
 };

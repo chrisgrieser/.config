@@ -182,8 +182,9 @@ function smartOpenLine(where) {
 	}
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
-	editor.get
-	editor.replaceRange(indentAndText + "\n", { line: targetLine, ch: 0 });
+	const atEof = editor.lastLine() === lnum && where === "below";
+	const extra = atEof ? "\n" : "";
+	editor.replaceRange(extra + indentAndText + "\n", { line: targetLine, ch: 0 });
 
 	editor.setCursor(targetLine, indentAndText.length);
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
