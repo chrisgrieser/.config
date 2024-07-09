@@ -62,7 +62,7 @@
 	stat = true
 [diff]
 	colorMoved = true ; moved lines colored different than added/removed
-   colorMovedWS = ignore-all-space
+   ; colorMovedWS = ignore-all-space
 	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
 	conflictStyle = zdiff3 ; shows original version in middle ; https://ductile.systems/zdiff3/
