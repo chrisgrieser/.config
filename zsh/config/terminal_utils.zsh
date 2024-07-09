@@ -26,7 +26,7 @@ function o() {
 		# height of 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0
-	open "$PWD/$selected"
+	open "$selected"
 }
 
 # completions for it
