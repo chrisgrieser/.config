@@ -6,11 +6,12 @@ return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		event = "VeryLazy", -- load for status line component
-		ft = "gitrebase", -- so ftplugin is loaded
+		branch = "dev",
 		keys = {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
+			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive Staging" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
 			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
 			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & Rebase" },
@@ -90,7 +91,7 @@ return {
 			{ "gh", "<cmd>Gitsigns nav_hunk next<CR>", desc = "󰊢 Next Hunk" },
 			{ "gH", "<cmd>Gitsigns nav_hunk prev<CR>", desc = "󰊢 Previous Hunk" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
-			{ "<leader>g?", function() require("gitsigns").blame_line { full = false } end, desc = " Blame Line" },
+			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame Line" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
 			{ "q", vim.cmd.close, ft = "gitsigns.blame", desc = "Close" },
 

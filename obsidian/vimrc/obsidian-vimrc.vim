@@ -237,10 +237,10 @@ nnoremap M :smartMerge
 nnoremap ,s i<CR><CR><Esc>
 
 " o and O (respecting list or blockquote)
-exmap blankBelow jsfile Meta/vimrc-jsfile.js { smartInsertBlank("below") }
-nnoremap o :blankBelow
-exmap blankAbove jsfile Meta/vimrc-jsfile.js { smartInsertBlank("above") }
-nnoremap O :blankAbove
+exmap openBelow jsfile Meta/vimrc-jsfile.js { smartOpenLine("below") }
+nnoremap o :openBelow
+exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
+nnoremap O :openAbove
 
 " Add Blank Line above/below
 nnoremap = mzO<Esc>`z

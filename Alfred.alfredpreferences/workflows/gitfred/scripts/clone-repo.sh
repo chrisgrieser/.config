@@ -66,6 +66,6 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	# switch to new branch
 	if [[ -n "$working_branch" ]]; then
 		git config push.autoSetupRemote true
-		git checkout -b "$working_branch"
+		git switch --create "$working_branch"
 	fi
 fi
