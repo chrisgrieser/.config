@@ -3,9 +3,16 @@ local u = require("config.utils")
 
 return {
 	{ -- fixes scrolloff at end of file
-		"plax-00/endscroll.nvim",
-		event = "WinScrolled",
+		"Aasim-A/scrollEOF.nvim",
+		event = "CursorMoved",
 		opts = true,
+		keys = {
+			{
+				"<leader>of",
+				function() vim.opt.scrolloff = vim.g.baseScrolloff end,
+				desc = "⇓ Fix Scrolloff",
+			},
+		},
 	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
