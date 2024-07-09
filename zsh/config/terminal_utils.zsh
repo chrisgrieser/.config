@@ -16,31 +16,16 @@ function o() {
 		# shellcheck disable=2016
 		zsh -c "$FZF_DEFAULT_COMMAND" | sed -Ee "$color" |
 			fzf --select-1 --ansi --query="$*" --info=inline --header-first \
-				--header="^H: --hidden  ^P: Copy Path  ^N: Copy Name  ^D: Goto Parent" \
+				--header="^H: --hidden" --bind="ctrl-h:$reload" \
 				--keep-right --scheme=path --tiebreak=length,end \
 				--delimiter="/" --with-nth=-2.. --nth=-2.. \
-				--bind="ctrl-h:$reload" --bind="zero:$reload" \
-				--expect="ctrl-p,ctrl-n,ctrl-d" \
+				--bind="zero:$reload" \
 				--preview-window="55%" \
 				--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 				--height="100%"
 		# height of 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
-	[[ -z "$selected" ]] && return 0 # aborted
-
-	key_pressed=$(echo "$selected" | head -n1)
-	file_path="$PWD/$(echo "$selected" | sed '1d')"
-
-	if [[ "$key_pressed" == "ctrl-d" ]]; then
-		parent_dir=$(dirname "$file_path")
-		cd "$parent_dir" || return 1
-	elif [[ "$key_pressed" == "ctrl-p" || "$key_pressed" == "ctrl-n" ]]; then
-		[[ "$key_pressed" == "ctrl-n" ]] && file_path=$(basename "$file_path")
-		echo -n "$file_path" | pbcopy
-		print "\e[1;32mCopied:\e[0m $file_path"
-	else
-		open "$file_path"
-	fi
+	[[ -n "$selected" ]] && open "$PWD$selected"
 }
 
 # completions for it
@@ -204,7 +189,5 @@ function d {
 
 # go up and delete current dir
 function ..d() {
-	trash "$PWD" || return 1
-	cd "$(dirname "$PWD")" || return 1
+	trash "$PWD" && cd "$(dirname "$PWD")" || return 1
 }
-
