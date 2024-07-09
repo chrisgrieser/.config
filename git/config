@@ -59,6 +59,7 @@
 	autoSquash = true
 	autoStash = true
 	missingCommitsCheck = error ; commits must be removed with `drop`, not by deleting a line
+	stat = true
 [diff]
 	colorMoved = true ; moved lines colored different than added/removed
    colorMovedWS = ignore-all-space
