@@ -149,15 +149,6 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
--- GIT
-keymap(
-	"n",
-	"<leader>ga",
-	function() require("funcs.nano-plugins").gitChanges() end,
-	{ desc = " Git Status" }
-)
-
---------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })

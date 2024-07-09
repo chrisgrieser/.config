@@ -41,37 +41,12 @@ ZSH_HIGHLIGHT_REGEXP+=(
 
 #───────────────────────────────────────────────────────────────────────────────
 # STAGING
+
 alias gaa='git add --all'
 alias unadd='git restore --staged'
-function restore { git restore "$@"; } # using function, so completions override works
-
-# without argument, run interactively via fzf to toggle staged/unstaged
-# with argument, stage the file(s). Modified completions allow for quicker selection.
-function ga {
-	if [[ -n "$1" ]]; then
-		git add "$@"
-		return 0
-	fi
-
-	local dir="$PWD"
-	cd "$(git rev-parse --show-toplevel)" || return 1
-
-	local git_status_cmd="git -c core.quotePath=false -c status.color=always status --short --untracked-files"
-	local check_staged='if git diff --cached --name-only | grep -q "^"{2..}"$" ; '
-	local add_or_unadd='then git restore --staged -- {2..} ; else git add -- {2..} ; fi'
-	local file_diff='{ git diff --color=always -- {2..} ; git diff --staged --color=always -- {2..} }'
-	local style
-	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "--dark" || echo "--light")
-	selection=$(
-		eval "$git_status_cmd" | fzf \
-			--ansi --nth=2.. --track \
-			--preview="$file_diff | delta $style --file-style=omit" \
-			--bind="space:reload($check_staged $add_or_unadd ; $git_status_cmd)"
-	)
-
-	cd "$dir" || return 1
-	return 0 # no exit 130
-}
+# using functions, so completions override works
+function ga { git add "$@"; }
+function restore { git restore "$@"; }
 
 # custom completions
 _change_git_files() {
