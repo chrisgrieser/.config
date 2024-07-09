@@ -6,12 +6,11 @@ return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
 		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"rcarriga/nvim-notify",
 			"stevearc/dressing.nvim",
+			"rcarriga/nvim-notify",
+			"nvim-telescope/telescope.nvim",
 		},
 		event = "VeryLazy", -- load for status line component
-		branch = "dev",
 		keys = {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
