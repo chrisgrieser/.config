@@ -1,6 +1,8 @@
-local hunk = "@@ -123,1 +999,3 @@"
-local _, lnum, size1, size2 = hunk:match("@@ %-(%d+),?(%d*) %+(%d+),?(%d*) @@")
-vim.notify("👾 size2: " .. tostring(size2))
-vim.notify("👾 size1: " .. tostring(size1))
-vim.notify("👾 lnum: " .. tostring(lnum))
+local ns = vim.api.nvim_create_namespace("test")
+vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+local lnum = 2
+
+vim.api.nvim_buf_set_extmark(0, ns, lnum, 0, {
+	line_hl_group = "DiffAdd",
+})
 
