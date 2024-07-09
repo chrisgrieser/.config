@@ -170,11 +170,6 @@ function gu {
 	open "$url"
 }
 
-function new_branch {
-	git checkout -b "$1"
-	git push --set-upstream origin "$1"
-}
-
 # CAVEAT date calculation is off, since time zones are not correctly handled
 function my_commits_today {
 	local username the_day commits count
@@ -220,8 +215,8 @@ function gli {
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf --ansi --no-sort --track \
-				--header-first --header="↵ Checkout   ^H Hash   ^R Rebase   ^S Stats" \
-				--expect="ctrl-h,ctrl-r,ctrl-s" --with-nth=2.. --preview-window=55% \
+				--header-first --header="↵ Checkout   ^H Hash   ^R Rebase" \
+				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
 				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
@@ -233,8 +228,6 @@ function gli {
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo -n "$hash" | pbcopy
 		print "\e[1;33m$hash\e[0m copied."
-	elif [[ "$key_pressed" == "ctrl-s" ]]; then
-		git show --stat "$hash"
 	elif [[ "$key_pressed" == "ctrl-r" ]]; then
 		git rebase --interactive "$hash^"
 		_separator && _gitlog "$hash^..HEAD" # confirm result
@@ -248,7 +241,7 @@ function gli {
 function clone {
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
-	git clone --depth=15 "$1" --no-single-branch --no-tags # get branches, but not tags
+	git clone --depth=15 "$1" --no-single-branch --no-tags
 	cd "$(basename "$1" .git)" || return 1
 }
 
@@ -266,16 +259,6 @@ function delete_forks_with_no_open_prs {
 	print -z "$(echo "$forks_with_no_prs" | sed 's/^/gh repo delete /')"
 }
 #───────────────────────────────────────────────────────────────────────────────
-
-# pickaxe entire repo history
-function pickaxe {
-	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
-	echo "Reminder: Mostly, these are deletion commits. Thus, the checkout target should usually be the parent commit:"
-	print "\e[1;36mgit checkout {hash}^\e[0m"
-	echo
-
-	git log -G"$1" --regexp-ignore-case
-}
 
 # search for [g]it [d]eleted [f]ile
 function gdf {
@@ -305,28 +288,25 @@ function gdf {
 	echo
 
 	# decision on how to act on file
-	choices="restore file
-copy to clipboard
-show file (bat)
-checkout commit"
+	choices="restore file\nshow file (bat) & copy\ncheckout commit"
 	decision=$(echo "$choices" |
-		fzf --bind="j:down,k:up" --no-sort --no-info --height="7" \
+		fzf --bind="j:down,k:up" --no-sort --no-info --height="6" \
 			--layout=reverse-list --header="j:↓  k:↑")
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
-	elif [[ "$decision" =~ checkout ]]; then
-		git checkout "$last_commit"
 	elif [[ "$decision" =~ restore ]]; then
 		git restore --source="$last_commit" -- "$deleted_path"
 		echo "File restored."
 		open -R "$deleted_path" # reveal in macOS Finder
-	elif [[ "$decision" =~ copy ]]; then
-		git show "$last_commit:$deleted_path" | pbcopy
-		echo "Content copied."
 	elif [[ "$decision" =~ show ]]; then
+		# show
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext" ||
 			git show "$last_commit:$deleted_path" | bat # unknown extension
+		# copy
+		git show "$last_commit:$deleted_path" | pbcopy
+	elif [[ "$decision" =~ checkout ]]; then
+		git checkout "$last_commit"
 	fi
 }

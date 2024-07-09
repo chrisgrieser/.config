@@ -165,7 +165,7 @@ function gotoHeading(which) {
 }
 
 /** @param {"above"|"below"} where */
-function smartInsertBlank(where) {
+function smartOpenLine(where) {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
 	let [indentAndText] = curLine.match(/^\s*>+ /) || // blockquote
@@ -182,6 +182,7 @@ function smartInsertBlank(where) {
 	}
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
+	editor.get
 	editor.replaceRange(indentAndText + "\n", { line: targetLine, ch: 0 });
 
 	editor.setCursor(targetLine, indentAndText.length);
