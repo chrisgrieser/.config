@@ -35,14 +35,13 @@ function M.setup()
 
 			-- close backdrop when the reference buffer is closed
 			vim.api.nvim_create_autocmd({ "WinClosed", "BufLeave" }, {
-				group = vim.api.nvim_create_augroup(backdropName, { clear = true }),
+				once = true,
 				buffer = telescopeBufnr,
 				callback = function()
 					if vim.api.nvim_win_is_valid(winnr) then vim.api.nvim_win_close(winnr, true) end
 					if vim.api.nvim_buf_is_valid(bufnr) then
 						vim.api.nvim_buf_delete(bufnr, { force = true })
 					end
-					return true -- deletes the autocmd on success
 				end,
 			})
 		end,

@@ -277,7 +277,7 @@ return {
 		cmd = "Telescope",
 		external_dependencies = "rg",
 		dependencies = {
-			"nvim-lua/plenary.nvim", -- dependency
+			"nvim-lua/plenary.nvim", 
 			"nvim-tree/nvim-web-devicons", -- icons
 			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
 		},
