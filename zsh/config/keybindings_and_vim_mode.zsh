@@ -23,6 +23,7 @@ bindkey -M viins '^U' _cut_buffer
 bindkey -M vicmd '^U' _cut_buffer
 
 bindkey -M viins '…' insert-last-word
+bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
 
 autoload -U edit-command-line && zle -N edit-command-line
 bindkey -M viins '^F' edit-command-line
