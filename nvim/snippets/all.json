@@ -56,7 +56,7 @@
     "prefix": "REQUIRED"
   },
   "SOURCE": {
-    "body": "$LINE_COMMENT SOURCE ",
+    "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
     "prefix": "SOURCE"
   },
   "TEST": {
