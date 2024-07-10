@@ -23,9 +23,11 @@ return {
 				highlight = "Comment",
 				show_start = false,
 				show_end = false,
-				show_exact_scope = true,
 			},
-			indent = { char = "│", tab_char = "│" },
+			indent = {
+				char = { "│", "╎" },
+				tab_char = { "│", "╎" },
+			},
 		},
 	},
 	{ -- scrollbar with information
@@ -33,7 +35,6 @@ return {
 		event = "VeryLazy",
 		init = function() u.colorschemeMod("SatelliteQuickfix", { link = "DiagnosticSignInfo" }) end,
 		opts = {
-			zindex = 1, -- below most stuff
 			winblend = 10, -- little transparency, hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },

@@ -22,7 +22,6 @@ end, 1)
 
 --------------------------------------------------------------------------------
 -- ABBREVIATIONS
---
 abbr("true", "True")
 abbr("false", "False")
 abbr("//", "#")
@@ -31,3 +30,22 @@ abbr("null", "None")
 abbr("nil", "None")
 abbr("none", "None")
 abbr("trim", "strip")
+
+--------------------------------------------------------------------------------
+
+---open the next regex at https://regex101.com/
+u.bufKeymap("n", "g/", function()
+	u.normal('"zyi"vi"') -- yank & reselect inside quotes
+
+	local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
+	local data = {
+		regex = vim.fn.getreg("z"),
+		flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g",
+		substitution = "", -- TODO
+		delimiter = '"',
+		flavor = "python",
+		testString = "",
+	}
+
+	require("rip-substitute.open-at-regex101").open(data)
+end, { desc = " Open in regex101" })

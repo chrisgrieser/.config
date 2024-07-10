@@ -34,39 +34,6 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
----open the next regex at https://regex101.com/
----REQUIRED nvim-rip-substitute & nvim-treesitter-textobjects
-function M.openAtRegex101()
-	local ft = vim.bo.filetype
-	local data = {}
-
-	if ft == "javascript" or ft == "typescript" then
-		vim.cmd.TSTextobjectSelect("@regex.outer")
-		normal('"zy')
-
-		data.regex, data.flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
-		data.substitution = vim.api.nvim_get_current_line():match('%.replace ?%(/.*/.*, ?"(.-)"')
-		data.delimiter = "/"
-		data.flavor = "javascript"
-
-		vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
-	elseif ft == "python" then
-		normal('"zyi"vi"') -- yank & reselect inside quotes
-
-		data.regex = vim.fn.getreg("z")
-		local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
-		data.flags = flagInLine and "g" .. flagInLine:gsub("D", "S"):lower() or "g"
-		data.delimiter = '"'
-		data.flavor = "python"
-	else
-		notify("", "Unsupported filetype.", "warn")
-		return
-	end
-	data.testString = ""
-
-	require("rip-substitute.open-at-regex101").open(data)
-end
-
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
@@ -99,7 +66,7 @@ function M.justRecipe(first)
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local recipes = vim.split(vim.trim(result.stdout), " ")
+	local recipes = vim.split(result.stdout, " ", { trimempty = true })
 	recipes = vim.tbl_filter(
 		function(r) return not vim.tbl_contains(config.ignoreRecipe, r) end,
 		recipes
@@ -117,12 +84,11 @@ end
 -- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
 function M.toggleOrIncrement()
 	local ft = vim.bo.filetype
-	local toggles = {
-		["true"] = "false",
-		["&&"] = "||",
-	}
+	local toggles = { ["true"] = "false" }
+
 	if ft == "typescript" or ft == "javascript" then
 		toggles["const"] = "let"
+		toggles["&&"] = "||"
 		toggles["!=="] = "==="
 	elseif ft == "python" then
 		toggles["true"] = nil
@@ -131,6 +97,8 @@ function M.toggleOrIncrement()
 	elseif ft == "lua" then
 		toggles["and"] = "or"
 		toggles["~="] = "=="
+	elseif ft == "zsh" then
+		toggles["&&"] = "||"
 	end
 
 	local cword = vim.fn.expand("<cword>")

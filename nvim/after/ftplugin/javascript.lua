@@ -1,4 +1,5 @@
 local u = require("config.utils")
+local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
 vim.bo.commentstring = "// %s" -- add space
@@ -7,12 +8,12 @@ vim.bo.commentstring = "// %s" -- add space
 
 -- ABBREVIATIONS
 
-u.abbr("cosnt", "const")
-u.abbr("local", "const")
-u.abbr("--", "//")
-u.abbr("~=", "!==")
-u.abbr("elseif", "else if")
-u.abbr("()", "() =>") -- quicker arrow function
+abbr("cosnt", "const")
+abbr("local", "const")
+abbr("--", "//")
+abbr("~=", "!==")
+abbr("elseif", "else if")
+abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
