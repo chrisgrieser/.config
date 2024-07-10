@@ -27,3 +27,6 @@ matches:
   # gif
   - trigger: "ggg"
     replace: "/gif "
+  # small text
+  - trigger: "!small"
+    replace: "-# "
