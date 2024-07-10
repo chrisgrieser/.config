@@ -8,7 +8,6 @@ alias gI='gh issue list --state=closed'
 alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
-alias reflog='git reflog'
 alias push='git push'
 alias pull='git pull'
 alias rebase='git rebase --interactive'
@@ -202,6 +201,12 @@ function gl {
 	else
 		_gitlog "$@"
 	fi
+}
+
+function reflog {
+	if [[ -z "$1" ]]; then
+		_gitlog --max-count=15 # default 15
+
 }
 
 # interactive

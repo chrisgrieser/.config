@@ -39,6 +39,7 @@ local spellfixes = {
 	ot = "to",
 	remtoe = "remote",
 	repalce = "replace",
+	fro = "for",
 	reponse = "response",
 	retrun = "return",
 	retunr = "return",
