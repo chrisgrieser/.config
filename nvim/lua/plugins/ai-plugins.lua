@@ -15,9 +15,10 @@ return {
 		opts = {
 			filetypes = {
 				DressingInput = false,
+				TelescopePrompt = false,
 				noice = false, -- sometimes triggered in error-buffers
 				text = false, -- `pass` passwords editing filetype is plaintext
-				regex = false, -- rg-substitute buffer
+				["rip-substitute"] = true,
 			},
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
