@@ -195,7 +195,7 @@ function my_commits_today {
 
 function gl {
 	if [[ -z "$1" ]]; then
-		_gitlog --max-count=15 # default 15
+		_gitlog --max-count=15 # default
 	elif [[ "$1" =~ ^[0-9]+$ ]]; then
 		_gitlog --max-count="$1"
 	else
@@ -205,8 +205,12 @@ function gl {
 
 function reflog {
 	if [[ -z "$1" ]]; then
-		_gitlog --max-count=15 # default 15
-
+		git --no-pager reflog --max-count=15 # default
+	elif [[ "$1" =~ ^[0-9]+$ ]]; then
+		git --no-pager reflog --max-count="$1"
+	else
+		git reflog "$@"
+	fi
 }
 
 # interactive

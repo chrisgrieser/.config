@@ -23,6 +23,10 @@ M.keys = {
 	{ key = "ö", mods = "CMD", action = act.CharSelect },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
+	-- INFO using the mapping from the terminal_keybindings.zsh
+	-- undo (ctrl-z set in terminal keybindings)
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+
 	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
