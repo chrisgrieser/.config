@@ -40,10 +40,7 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 -- quickfix
 keymap("n", "gq", function()
 	local ok = pcall(vim.cmd.cnext)
-	if not ok then
-		vim.cmd.cfirst()
-		u.notify("Quickfix", "Wrapped to first quickfix.", "trace")
-	end
+	if not ok then vim.cmd.cfirst() end
 end, { desc = " Next Quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
@@ -79,7 +76,7 @@ keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
-		return '<cmd>lua vim.snippet.jump(1)<CR>'
+		return "<cmd>lua vim.snippet.jump(1)<CR>"
 	else
 		local fallback = { n = ">>", i = "<C-t>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
@@ -87,7 +84,7 @@ keymap({ "n", "i", "s" }, "<Tab>", function()
 end, { desc = "󰉶 indent / next placeholder", expr = true })
 keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
-		return '<cmd>lua vim.snippet.jump(-1)<CR>'
+		return "<cmd>lua vim.snippet.jump(-1)<CR>"
 	else
 		local fallback = { n = "<<", i = "<C-d>", s = "<Tab>" }
 		return fallback[vim.fn.mode()]
