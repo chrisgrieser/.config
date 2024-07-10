@@ -20,6 +20,9 @@ require("lazy").setup("plugins", {
 		size = { width = 0.85, height = 0.85 },
 		backdrop = 50, -- 0-100
 		custom_keys = {
+			["<localleader>l"] = false,
+			["<localleader>t"] = false,
+			["<localleader>i"] = false,
 			["gx"] = {
 				function(plugin) vim.ui.open(plugin.url:gsub("%.git$", "")) end,
 				desc = "󰖟 Plugin repo",
