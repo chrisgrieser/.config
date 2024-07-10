@@ -4,26 +4,13 @@
 -- INFO only the first theme will be used
 local lightThemes = {
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
-	-- "sainnhe/everforest",
-	-- {
-	-- 	"marko-cerovac/material.nvim",
-	-- 	init = function() vim.g.material_style = "lighter" end,
-	-- 	opts = {
-	-- 		lualine_style = "stealth",
-	-- 		contrast = { lsp_virtual_text = true },
-	-- 		plugins = { "gitsigns", "nvim-cmp", "telescope", "noice" },
-	-- 	},
-	-- },
 }
 
 local darkThemes = {
-	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	"binhtran432k/dracula.nvim",
-	-- "oxfist/night-owl.nvim",
-	-- { "cdmill/neomodern.nvim", name = "coffeecat" },
+	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- "binhtran432k/dracula.nvim",
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
-	-- { "EdenEast/nightfox.nvim", name = "duskfox" },
 	-- "rebelot/kanagawa.nvim",
 	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
