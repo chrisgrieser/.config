@@ -5,5 +5,3 @@ local lnum = 2
 vim.api.nvim_buf_set_extmark(0, ns, lnum, 0, {
 	line_hl_group = "DiffAdd",
 })
-
-

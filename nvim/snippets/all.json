@@ -28,7 +28,7 @@
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "$LINE_COMMENT GUARD ",
+    "body": "$LINE_COMMENT GUARD  ffffffffffffffff",
     "prefix": "GUARD"
   },
   "HACK": {
