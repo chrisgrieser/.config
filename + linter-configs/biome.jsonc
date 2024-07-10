@@ -39,6 +39,10 @@
 		"indentStyle": "tab",
 		"formatWithErrors": true
 	},
+	"files": {
+		"ignore": [".obsidian/plugins/**/*"] // plugins in Obsidian vaults
+	},
+
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
