@@ -340,7 +340,10 @@ return {
 						local changes = vim.split(gitResult or "", "\n", { trimempty = true })
 						for _, change in ipairs(changes) do
 							local status = change:sub(1, 2)
-							local file = change:sub(4 + pathInGitRoot)
+							local file = change
+								:sub(4) -- remove status
+								:gsub(".* -> ", "") -- renamed file
+								:sub(pathInGitRoot) -- only relative path
 							gitInfo[file] = status
 						end
 					end

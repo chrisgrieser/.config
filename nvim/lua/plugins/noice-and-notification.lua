@@ -17,12 +17,10 @@ local routes = {
 	{
 		filter = {
 			min_height = 10,
-			["not"] = {
-				cond = function(msg)
-					local title = (msg.opts and msg.opts.title) or ""
-					return title:find("tinygit") or title:find("Magnet")
-				end,
-			},
+			cond = function(msg)
+				local title = (msg.opts and msg.opts.title) or ""
+				return not title:find("tinygit") and not title:find("Magnet")
+			end,
 		},
 		view = "popup",
 	},
@@ -90,6 +88,7 @@ return {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
+			{ "<D-8>", vim.cmd.NoiceErrors, mode = { "n", "x", "i" }, desc = "󰎟 Noice Errors" },
 		},
 		opts = {
 			routes = routes,
@@ -129,25 +128,26 @@ return {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true, concealcursor = "ncv" },
-					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>", "<D-8>" } },
 					format = { "{message}" },
 				},
 				split = {
 					enter = true,
 					size = "60%",
 					win_options = { scrolloff = 6 },
-					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>", "<D-8>" } },
 				},
 			},
 			commands = {
 				history = {
-					view = "split",
 					filter_opts = { reverse = true }, -- show newest entries first
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{message}" } },
 				},
 				last = {
-					view = "popup",
+					opts = { format = { "{title} ", "{message}" } },
+				},
+				errors = {
 					opts = { format = { "{title} ", "{message}" } },
 				},
 			},
