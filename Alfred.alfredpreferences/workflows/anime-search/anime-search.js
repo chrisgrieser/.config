@@ -8,8 +8,7 @@ app.includeStandardAdditions = true;
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestStr = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
-	return requestStr;
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 /** @param {string} title */
