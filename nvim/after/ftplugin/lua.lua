@@ -40,8 +40,8 @@ keymap("n", "<leader>cr", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()
-	assert(rgResult.code == 0, rgResult.signal)
-	local matches = vim.split(vim.trim(rgResult.stdout), "\n")
+	assert(rgResult.code == 0, rgResult.stderr)
+	local matches = vim.split(rgResult.stdout, "\n", { trimempty = true })
 	table.sort(matches)
 	local uniqMatches = vim.fn.uniq(matches)
 	local isAtBlank = vim.api.nvim_get_current_line():match("^%s*$")

@@ -277,7 +277,7 @@ return {
 		cmd = "Telescope",
 		external_dependencies = "rg",
 		dependencies = {
-			"nvim-lua/plenary.nvim", 
+			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- icons
 			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
 		},
@@ -317,7 +317,7 @@ return {
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
 				"<leader>pc",
-				-- suppress autocmds to not use the backdrop
+				-- noautocmds -> no backdrop -> colorscheme previewable
 				function() vim.cmd("noautocmd Telescope colorscheme") end,
 				desc = " Colorschemes",
 			},
@@ -337,7 +337,7 @@ return {
 					if inGitRepo then
 						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
 						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
-						local changes = vim.split((gitResult or ""):gsub("\n$", ""), "\n")
+						local changes = vim.split(gitResult or "", "\n", { trimempty = true })
 						for _, change in ipairs(changes) do
 							local status = change:sub(1, 2)
 							local file = change:sub(4 + pathInGitRoot)
