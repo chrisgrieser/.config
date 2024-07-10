@@ -236,8 +236,8 @@ function toggleLowercaseTitleCase() {
 // forward looking `gx`
 /** @param {"current-tab"|"new-tab"} where */
 function openNextLink(where) {
-	function getLinkRange(/** @type {string} */ text) {
-		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(\)/;
+	function rangeOfFirstLink(/** @type {string} */ text) {
+		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(.+?\)/;
 		//                 (    url / obsidian URI    )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
 		if (!linkMatch?.index) return { start: -1, end: -1 };
@@ -253,18 +253,18 @@ function openNextLink(where) {
 	let linkEnd;
 	let posInLine = 0;
 	do {
-		const { start, end } = getLinkRange(fullLine.slice(posInLine));
+		const { start, end } = rangeOfFirstLink(fullLine.slice(posInLine));
 		linkStart = start;
 		linkEnd = end;
 		if (end > 0) posInLine += end;
-	} while (linkEnd > 0 && linkEnd < cursor.ch);
+	} while (linkEnd > 0 && linkStart < cursor.ch);
 	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
 
 	// if not, seek forwards for a link
 	if (!cursorIsOnLink) {
 		const offset = editor.posToOffset(cursor);
 		const textAfterCursor = editor.getValue().slice(offset);
-		const linkAfterCursorOffset = getLinkRange(textAfterCursor).start;
+		const linkAfterCursorOffset = rangeOfFirstLink(textAfterCursor).start;
 		if (linkAfterCursorOffset === -1) {
 			new Notice("No link found.");
 			return;
