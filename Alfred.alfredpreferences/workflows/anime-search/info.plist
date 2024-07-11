@@ -71,7 +71,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Search animes listed in the myanimelist database.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>

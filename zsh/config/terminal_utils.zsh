@@ -29,6 +29,16 @@ function o() {
 	open "$selected"
 }
 
+# open last changed file in cwd
+function oo {
+	find . -type f -not -path "./.git/**" -print0 |
+		xargs -0 stat -f "%m %N" |
+		sort -rn |
+		sed -n "1p" |
+		cut -d" " -f2 |
+		xargs open
+}
+
 # completions for it
 _o() {
 	local -a paths=()
