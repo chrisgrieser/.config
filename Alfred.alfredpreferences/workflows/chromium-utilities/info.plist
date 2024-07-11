@@ -3,24 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.browser-tweaks</string>
+	<string>de.chris-grieser.chromium-extensions-internal-pages</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<array>
 			<dict>
@@ -77,19 +64,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<array>
 			<dict>
@@ -111,7 +85,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Chromium Utilities</string>
+	<string>Chromium Extensions &amp; Internal pages</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -275,68 +249,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sw</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Switch to Safari</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F170814-90DD-485E-A861-757A4FD92606</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>custom_browser</key>
-					<string>{var:browser}</string>
-					<key>popup_browser</key>
-					<string>custom</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/chromium-browsers/chromium.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string>com.apple.Safari</string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -344,17 +256,6 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>1F170814-90DD-485E-A861-757A4FD92606</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>Switch to Safari</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>455</real>
-		</dict>
 		<key>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</key>
 		<dict>
 			<key>colorindex</key>
@@ -393,15 +294,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
-		<key>7BB1922C-AC9E-4C95-9D9D-A2FF33E75698</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>455</real>
-		</dict>
 		<key>B7B82F1A-97F8-490C-B4A4-5589FA869579</key>
 		<dict>
 			<key>colorindex</key>
@@ -410,15 +302,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>155</real>
-		</dict>
-		<key>BFFDBA22-CF65-4C1A-BE4E-FE0B1FFC3E6B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>455</real>
 		</dict>
 		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
 		<dict>
