@@ -11,7 +11,7 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 -- NAVIGATION
 
 -- HJKL behaves like hjkl, but bigger distance
--- (not mapping in op-pending, since there are custom textobjects for each LjkJK)
+-- (not mapping in op-pending, since using custom textobjects for each of LjkJK)
 keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
 keymap("o", "H", "^")
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
@@ -327,8 +327,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = "Paste without switching with register" })
-keymap("n", "<D-p>", '"2p', { desc = "Paste previous deletion" })
+keymap("x", "p", "P", { desc = "Paste w/o switching with register" })
 
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end

@@ -3,20 +3,20 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"ChallengerDeep",
+	"Afterglow (Gogh)",
 	"Kanagawa (Gogh)",
 	"cyberpunk",
 	"MaterialDesignColors",
-	"ChallengerDeep",
-	"Afterglow (Gogh)",
 	"duckbones",
 	"Tinacious Design (Dark)",
 }
 local lightThemes = {
+	"Ivory Light (terminal.sexy)",
+	"seoulbones_light",
 	"Solar Flare Light (base16)",
 	"Atelier Lakeside Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
-	"Ivory Light (terminal.sexy)",
-	"seoulbones_light",
 	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
 }
@@ -54,7 +54,7 @@ local deviceConfig = {
 		winPos = { x = 620, y = 0, w = 2745 },
 	},
 	office = {
-		fontSize = 29,
+		fontSize = 29.7, -- .7 ensures correct box chars take full height (for starship prompt)
 		cellWidth = 0.9,
 		maxFps = 60,
 		winPos = { x = 375, y = -100, w = 1675 },
@@ -127,16 +127,18 @@ local config = {
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
 	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
+	line_height = 1.0,
 	font_size = deviceConfig[device].fontSize,
 	command_palette_font_size = deviceConfig[device].fontSize,
 	char_select_font_size = deviceConfig[device].fontSize, -- emoji picker
-	adjust_window_size_when_changing_font_size = false,
+	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = deviceConfig[device].maxFps,
+	adjust_window_size_when_changing_font_size = false,
 
 	-- remove titlebar, but keep macOS traffic lights. Doing so enables
 	-- some macOS window bar window-related functionality, like split commands

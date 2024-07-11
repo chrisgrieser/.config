@@ -5,7 +5,8 @@ local env = require("modules.environment-vars")
 -- bound to capslock via Karabiner elements
 M.hyper = { "cmd", "alt", "ctrl" }
 
--- add path for `hs.execute()`
+-- Add path for `hs.execute()`. (Especially on system start, hammerspoon
+-- sometimes does not correctly inherit the PATH from the shell.)
 M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 --------------------------------------------------------------------------------
@@ -92,7 +93,6 @@ end
 ---@return boolean
 function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
-M.delayIdx = 1
 ---Repeat a function multiple times Catching timers in table to avoid garbage
 ---collection. To avoid collecting too many, only a certain number are kept.
 ---@param delaySecs number|number[]
@@ -100,8 +100,8 @@ M.delayIdx = 1
 function M.runWithDelays(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
+		M.delayIdx = (M.delayIdx or 0) + 1
 		M[M.delayIdx] = hs.timer.doAfter(delay, callbackFn):start()
-		M.delayIdx = M.delayIdx + 1
 		if M.delayIdx > 30 then M.delayIdx = 1 end
 	end
 end
@@ -109,15 +109,16 @@ end
 ---close all tabs which contain urlPart
 ---@param urlPart string
 function M.closeTabsContaining(urlPart)
+	local browser = "Brave Browser"
 	hs.osascript.applescript(([[
-		tell application "Brave Browser"
+		tell application %q
 			repeat with win in (every window) 
 				repeat with theTab in (every tab in win) 
 					if the URL of theTab contains %q then close theTab 
 				end repeat 
 			end repeat 
 		end tell
-	]]):format(urlPart))
+	]]):format(browser, urlPart))
 end
 
 ---@nodiscard

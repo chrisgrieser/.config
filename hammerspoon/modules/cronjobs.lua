@@ -67,17 +67,17 @@ M.timer_nightlyMaintenance = hs.timer
 		u.notify(success and "✅ mackup saved" or "⚠️ mackup failed")
 
 		M.task_bookmarksBackup = hs.task
-			.new("./helpers/bookmark-bkp.sh", function(exitCode, _, stdErr)
-				local msg = exitCode == 0 and "✅ Bookmark Backup successful"
-					or "⚠️ Bookmark Backup failed: " .. stdErr
+			.new("./helpers/bookmark-bkp.sh", function(code, _, stderr)
+				local msg = code == 0 and "✅ Bookmark Backup successful"
+					or "⚠️ Bookmark Backup failed: " .. stderr
 				u.notify(msg)
 			end)
 			:start()
 
 		M.task_reminderBackup = hs.task
-			.new("./helpers/reminders-bkp.sh", function(exitCode, _, stdErr)
-				local msg = exitCode == 0 and "✅ Reminder Backup successful"
-					or "⚠️ Reminder Backup failed: " .. stdErr
+			.new("./helpers/reminders-bkp.sh", function(code, _, stderr)
+				local msg = code == 0 and "✅ Reminder Backup successful"
+					or "⚠️ Reminder Backup failed: " .. stderr
 				u.notify(msg)
 			end)
 			:start()
