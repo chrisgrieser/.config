@@ -15,7 +15,7 @@ end
 
 --------------------------------------------------------------------------------
 
--- turn off iMac display when
+-- turn off display
 M.caff_projectorScreensaver = c.new(function(event)
 	if env.isAtOffice then return end
 
@@ -32,7 +32,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 		or event == c.systemDidWake
 		or event == c.screensDidSleep
 	then
-		u.runWithDelays({ 0, 1, 3 }, function()
+		u.runWithDelays({ 0, 2 }, function()
 			if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
 		end)
 	end
@@ -87,8 +87,8 @@ M.timer_nightlyMaintenance = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
--- Between 0:00 and 7:00, check every 10 min if device has been idle for 30
--- minutes. If so, alert and wait for another minute. If still idle then, quit
+-- Between 0:00 and 7:00, check every x min if device has been idle for y
+-- minutes. If so, alert and wait for z secs. If still idle then, quit
 -- all video apps.
 local config = {
 	betweenHours = { 0, 7 },
