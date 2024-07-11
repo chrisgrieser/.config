@@ -15,7 +15,6 @@ M.videoAndAudioApps = {
 	"zoom.us",
 	"FaceTime",
 	"Netflix",
-	"Animeflix",
 	"YouTube",
 	"Prime Video",
 	"Jellyfin",
