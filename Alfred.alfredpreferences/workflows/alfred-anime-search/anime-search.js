@@ -25,12 +25,12 @@ function getStreamInfo(malId) {
 	const streaming = JSON.parse(streamingResponse).data.map((/** @type {{ name: string; }} */ a) =>
 		a.name.toLowerCase(),
 	);
-	let streamInfo = "";
-	if (streaming.includes("crunchyroll")) streamInfo += "C";
-	if (streaming.includes("netflix")) streamInfo += "N";
-	if (streaming.includes("hidive")) streamInfo += "H";
-	if (streamInfo) streamInfo += " 🛜";
-	return streamInfo;
+	const streamInfo = [];
+	if (streaming.includes("crunchyroll")) streamInfo.push("C");
+	if (streaming.includes("netflix")) streamInfo.push("N");
+	if (streaming.includes("hidive")) streamInfo.push("H");
+	if (streamInfo.length > 0) streamInfo.unshift("🛜");
+	return streamInfo.join(" ");
 }
 
 /** @typedef {Object} MalEntry

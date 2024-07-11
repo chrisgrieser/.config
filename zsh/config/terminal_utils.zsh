@@ -31,9 +31,9 @@ function o() {
 
 # open last changed file in cwd
 function oo {
-	find . -type f -not -path "./.git/**" -print0 |
+	find . -type file -maxdepth 4 -not -path "./.git/**" -print0 |
 		xargs -0 stat -f "%m %N" |
-		sort -rn |
+		sort --numeric --reverse |
 		sed -n "1p" |
 		cut -d" " -f2 |
 		xargs open
