@@ -7,10 +7,10 @@ local visuals = require("modules.visuals")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
--- - Neovim
--- - Highlights PDF appearance
--- - Sketchybar
--- - Hammerspoon Console
+-- * Neovim
+-- * Highlights PDF appearance
+-- * Sketchybar
+-- * Hammerspoon Console
 ---@param toMode "dark"|"light"|"toggle"
 function M.setDarkMode(toMode)
 	if toMode == "toggle" then toMode = u.isDarkMode() and "light" or "dark" end
@@ -26,10 +26,9 @@ function M.setDarkMode(toMode)
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- neovim
-	if u.appRunning("Neovide") then
-		local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
-		hs.execute(([[nvim --server "/tmp/nvim_server.pipe" --remote-send %q]]):format(nvimLuaCmd))
-	end
+	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
+	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
+	hs.execute(u.exportPath .. shellCmd)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then

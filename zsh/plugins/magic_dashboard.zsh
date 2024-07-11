@@ -3,7 +3,7 @@
 
 # draws a separator line with terminal width
 function _separator {
-	local sep_char="═" # ─ ═
+	local sep_char="─" # ─ ═
 	local sep=""
 	for ((i = 0; i < COLUMNS; i++)); do
 		sep="$sep$sep_char"
