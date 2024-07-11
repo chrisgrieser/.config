@@ -17,10 +17,10 @@ local lspFormatFt = {
 	"jsonc",
 	"toml",
 	"yaml",
-	"sh",
 	"zsh",
 	"python",
 	"css",
+	"scss",
 }
 vim.cmd("silent! update!")
 ---@return string[]
