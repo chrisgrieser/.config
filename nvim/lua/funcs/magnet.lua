@@ -11,7 +11,7 @@ local config = {
 		maxFiles = 4,
 	},
 	altFile = {
-		statusbarMaxDisplayLen = 25,
+		statusLineMaxDisplayLen = 25,
 	},
 }
 local pluginName = " Magnet"
@@ -93,13 +93,10 @@ function M.altFileStatus()
 	end
 
 	-- truncate
-	local nameNoExt = name:gsub("%.%w+$", "")
-	local max = config.altFile.statusbarMaxDisplayLen
-	if #nameNoExt > max then
-		local ext = name:match("%.%w+$")
-		name = nameNoExt:sub(1, max) .. "…" .. ext
-	end
-	return icon .. " " .. name
+	local maxLength = config.altFile.statusLineMaxDisplayLen
+	local display = #name < maxLength and name or vim.trim(name:sub(1, maxLength)) .. "…"
+	if not icon then return display end
+	return icon .. " " .. display
 end
 
 ---switch to alternate buffer/oldfile (in that priority)
