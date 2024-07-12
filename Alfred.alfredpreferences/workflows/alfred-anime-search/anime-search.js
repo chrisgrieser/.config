@@ -54,7 +54,6 @@ function getStreamInfo(malId) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const altSearchJap = $.getenv("alt_search_jap") === "1";
-	const altSearchSite = $.getenv("alt_search_site") || "";
 	const resultsNumber = 9; // alfred display maximum
 
 	const query = argv[0];
@@ -119,6 +118,7 @@ function run(argv) {
 			.join("  ");
 
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
+
 		return {
 			title: displayText,
 			subtitle: subtitle,
@@ -126,7 +126,7 @@ function run(argv) {
 			quicklookurl: url,
 			mods: {
 				cmd: { arg: titleJap, valid: Boolean(titleJap) },
-				shift: { arg: altSearchTitle, valid: Boolean(altSearchTitle) },
+				shift: { arg: altSearchTitle },
 			},
 		};
 	});

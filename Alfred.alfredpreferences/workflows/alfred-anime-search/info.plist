@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>04B72922-40FA-4EB0-AC8F-E3AFBD310B00</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1CD7085D-65B2-4B4F-835E-C2DB96C708F1</key>
 		<array>
 			<dict>
@@ -17,6 +30,16 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>04B72922-40FA-4EB0-AC8F-E3AFBD310B00</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Search on alternative site</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -96,6 +119,23 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:alt_search_url}{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>04B72922-40FA-4EB0-AC8F-E3AFBD310B00</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -203,6 +243,8 @@ Search all anime listed in the `myanimelist` database via the keyword `an`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open at myanimelist.net.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy the Japanese (romaji) title.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the `myanimelist` URL.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search for the title on an alternative site, such as a
+  streaming website.
 
 [Due to an API limitation](https://github.com/jikan-me/jikan-rest/issues/529),
 indicators of streaming services can only be shown for the first search result.
@@ -212,6 +254,13 @@ indicators of streaming services can only be shown for the first search result.
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>04B72922-40FA-4EB0-AC8F-E3AFBD310B00</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>110</real>
+		</dict>
 		<key>1CD7085D-65B2-4B4F-835E-C2DB96C708F1</key>
 		<dict>
 			<key>xpos</key>
@@ -238,14 +287,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>8AF259D4-1F82-4227-BC2A-C76D63F8EB23</key>
 		<dict>
 			<key>xpos</key>
-			<real>225</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
 		<key>E5C2943F-3313-4303-A60B-1DE042AB5EDE</key>
 		<dict>
-			<key>note</key>
-			<string>open MAL URL</string>
 			<key>xpos</key>
 			<real>350</real>
 			<key>ypos</key>
@@ -275,9 +322,49 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://www.crunchyroll.com/search?q=</string>
+				<key>placeholder</key>
+				<string>https://www.crunchyroll.com/search?q=</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>the full title is inserted at the end of the URL</string>
+			<key>label</key>
+			<string>Alternative Search Site</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>alt_search_url</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>insert Japanese title at "%s"</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>alt_search_jap</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.3</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
