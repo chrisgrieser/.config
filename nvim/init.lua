@@ -2,8 +2,6 @@ vim.opt.showtabline = 0 -- prevent tabline from flashing on startup
 
 -- If nvim was opened w/o argument, re-open the first oldfile that exists
 vim.defer_fn(function()
-	-- BUG https://github.com/neovide/neovide/issues/2629
-	if vim.fn.argc() > 0 then return end
 	for _, file in ipairs(vim.v.oldfiles) do
 		if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
 			vim.cmd.edit(file)
