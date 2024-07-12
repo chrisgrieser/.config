@@ -54,7 +54,6 @@ function humanRelativeDate(isoDateStr) {
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
 	const str = formatter.format(-delta, unit);
-	// biome-ignore lint/nursery/useTopLevelRegex: <explanation>
 	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
 }
 
