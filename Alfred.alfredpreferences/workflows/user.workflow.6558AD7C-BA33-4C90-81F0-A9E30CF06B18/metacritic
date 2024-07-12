@@ -1,0 +1,67 @@
+#!/usr/bin/osascript -l JavaScript
+
+// Helpers
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function scoreSentiment(score, negativeThreshold, positiveThreshold) {
+  if (!score) return "unrated"
+  if (score < negativeThreshold) return "negative"
+  if (score >= positiveThreshold) return "positive"
+  return "mixed"
+}
+
+function apiSearch(query) {
+  const task = $.NSTask.alloc.init
+  const stdout = $.NSPipe.pipe
+  const escapedQuery = encodeURIComponent(query)
+    .replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
+
+  task.executableURL = $.NSURL.fileURLWithPath("/usr/bin/curl")
+  task.arguments = ["--silent", `https://internal-prod.apigee.fandom.net/v1/xapi/composer/metacritic/pages/search/${escapedQuery}/web?&apiKey=1MOZgmNFxvmljaQR1X9KAij9Mo4xAY3u`]
+  task.standardOutput = stdout
+  task.launchAndReturnError(false)
+
+  const dataOut = stdout.fileHandleForReading.readDataToEndOfFileAndReturnError(false)
+  const stringOut = $.NSString.alloc.initWithDataEncoding(dataOut, $.NSUTF8StringEncoding).js
+
+  return JSON.parse(stringOut)
+}
+
+// Main
+function run(argv) {
+  const searchQuery = argv[0]
+  const negativeThreshold = parseInt(envVar("negative_threshold"))
+  const positiveThreshold = parseInt(envVar("positive_threshold"))
+  const entries = apiSearch(searchQuery)["components"][0]["data"]["items"]
+
+  if (entries.length === 0) return JSON.stringify({
+    items: [{
+      title: `No results found for “${searchQuery}”`,
+      valid: false
+    }]
+  })
+
+  const sfItems = entries.map(entry => {
+    const title = entry["title"]
+    const type = entry["type"] === "movie" ? "Movie" : (entry["type"] === "show" ? "TV Show" : "Game")
+    const year = entry["premiereYear"]
+    const score = entry["criticScoreSummary"]["score"]
+    const url = `https://metacritic.com${entry["criticScoreSummary"]["url"]}`
+    const description = entry["description"]
+
+    return {
+      title: title,
+      subtitle: `${score || "Unrated"} · ${type} · ${year}`,
+      arg: url,
+      icon: { path: `images/${scoreSentiment(score, negativeThreshold, positiveThreshold)}.png` },
+      mods: { alt: { subtitle: description } }
+    }
+  }).filter(item => item)
+
+  return JSON.stringify({ items: sfItems })
+}
