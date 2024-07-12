@@ -1,0 +1,143 @@
+#!/usr/bin/osascript -l JavaScript
+
+// Helpers
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function normaliseCase(text) {
+  switch (text) {
+    // Format
+    case "TV": return "TV"
+    case "TV_SHORT": return "TV Short"
+    case "MOVIE": return "Movie"
+    case "SPECIAL": return "Special"
+    case "OVA": return "OVA"
+    case "ONA": return "ONA"
+    case "MUSIC": return "Music"
+    case "MANGA": return "Manga"
+    case "NOVEL": return "Novel"
+    case "ONE_SHOT": return "One Shot"
+    // Status
+    case "FINISHED": return "Finished"
+    case "RELEASING": return "Releasing"
+    case "NOT_YET_RELEASED": return "Not Yet Released"
+    case "CANCELLED": return "Cancelled"
+    case "HIATUS": return "Hiatus"
+    // Default
+    default: return "Unknown Format"
+  }
+}
+
+function parseEpisodes(episodeCount, rawType) {
+  if (!episodeCount) return null
+
+  const episodeType = rawType === "anime" ? "episode" : "chapter"
+  const plural = episodeCount > 1 ? `${episodeType}s` : episodeType
+  return `${episodeCount} ${plural}`
+}
+
+function scoreSentiment(score, negativeThreshold, positiveThreshold) {
+  if (!score) return "unrated"
+  if (score < negativeThreshold) return "negative"
+  if (score >= positiveThreshold) return "positive"
+  return "mixed"
+}
+
+// Main
+function run(argv) {
+  // Constants
+  const searchQuery = argv[0]
+  const searchType = argv[1] // "anime" or "manga"
+  const maxResults = 9
+  const negativeThreshold = parseInt(envVar("negative_threshold"))
+  const positiveThreshold = parseInt(envVar("positive_threshold"))
+
+  // Negative threshold must be lower than positive threshold
+  if (negativeThreshold >= positiveThreshold) return JSON.stringify({ items: [{
+    title: "Negative Threshold Must Be Lower than Positive Threshold",
+    subtitle: "Fix the values in the configuration",
+    valid: false
+  }]})
+
+  // GraphQL query
+  const constructedQuery = `query ($search: String, $mediaType: MediaType, $page: Int, $perPage: Int) {
+    Page (page: $page, perPage: $perPage) {
+      media (search: $search, type: $mediaType, sort: [SEARCH_MATCH, POPULARITY_DESC, END_DATE_DESC, START_DATE_DESC]) {
+        id
+        title { english romaji }
+        description
+        coverImage { extraLarge }
+        meanScore
+        startDate { year }
+        endDate { year }
+        status
+        format
+        episodeCount: ${searchType === "anime" ? "episodes" : "chapters"}
+  }}}`.split("\n").map(line => line.trim()).join(" ")
+
+  // Make request
+  const task = $.NSTask.alloc.init
+  const stdout = $.NSPipe.pipe
+
+  task.executableURL = $.NSURL.fileURLWithPath("/usr/bin/curl")
+  task.arguments = [
+    "--request", "POST", "https://graphql.anilist.co",
+    "--header", "Content-Type: application/json",
+    "--data", JSON.stringify({
+      query: constructedQuery,
+      variables: { search: searchQuery, mediaType: searchType.toUpperCase(), page: 1, perPage: maxResults }
+    })
+  ]
+  task.standardOutput = stdout
+  task.launchAndReturnError(false)
+
+  const dataOut = stdout.fileHandleForReading.readDataToEndOfFileAndReturnError(false)
+  const stringOut = $.NSString.alloc.initWithDataEncoding(dataOut, $.NSUTF8StringEncoding).js
+
+  // Failed connection
+  if (stringOut.length === 0) return JSON.stringify({ items: [{
+    title: "Failed Connection",
+    subtitle: "Try again later",
+    valid: false
+  }]})
+
+  // Parse results
+  const mediaObj = JSON.parse(stringOut).data.Page.media
+
+  // No results
+  if (mediaObj.length === 0) return JSON.stringify({ items: [{
+    title: "No Results",
+    subtitle: `No ${searchType} found matching “${searchQuery}”`,
+    valid: false
+  }]})
+
+  const sfItems = mediaObj.map(item => {
+    const pageURL = `https://anilist.co/${searchType}/${item.id}`
+    const englishName = item.title.english
+    const romajiName = item.title.romaji
+    const name = englishName ? `${englishName} · ${romajiName}` : romajiName
+    const format = normaliseCase(item.format)
+    const status = normaliseCase(item.status)
+    const startDate = item.startDate.year
+    const score = item.meanScore
+    const episodes = parseEpisodes(item.episodeCount, searchType)
+    const subtitleInfo = [ score || "Unrated", status, format, startDate, episodes ]
+
+    return {
+      variables: { search_query: searchQuery },
+      uid: pageURL,
+      title: name,
+      subtitle: subtitleInfo.filter(info => info).join(" · "),
+      arg: pageURL,
+      quicklookurl: item.coverImage.extraLarge,
+      icon: { path: `images/${scoreSentiment(score, negativeThreshold, positiveThreshold)}.png` },
+      mods: { alt: { subtitle: item.description?.replace(/<.+?>/g, "") || "N/A" } }
+    }
+  })
+
+  return JSON.stringify({ skipknowledge: true, items: sfItems })
+}
