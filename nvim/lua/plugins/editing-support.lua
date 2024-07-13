@@ -3,7 +3,6 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 ---Set up subkey for the <leader> key
----Accessed via `vim.g`, as this file's exports are used by lazy.nvim
 ---@param key string
 ---@param label string
 ---@param modes? string|string[]
@@ -17,6 +16,41 @@ vim.g.whichkey_leader_subkey = function(key, label, modes)
 end
 
 return {
+	{ -- which-key
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			delay = 400,
+			spec = {
+				{ "<leader>i", group = "󱈄 Inspect" },
+				{ "<leader>o", group = " Options" },
+				{ "<leader>p", group = "󰏗 Packages" },
+				{ "<leader>u", group = "󰕌 Undo" },
+				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
+				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
+				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
+			},
+			win = {
+				border = vim.g.borderStyle,
+				width = 0.85,
+				col = 0.075,
+			},
+			layout = {
+				spacing = 1,
+				width = { max = 34 },
+				align = "left",
+			},
+			icons = {
+				rules = false, -- not using auto-added icons, since I set my own
+				group = "",
+				breadcrumb = "",
+				keys = { LeftMouse = "" },
+			},
+			plugins = {
+				presets = { motions = false, g = false, z = false },
+			},
+		},
+	},
 	{ -- auto-pair
 		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 		"altermo/ultimate-autopair.nvim",
@@ -312,37 +346,6 @@ return {
 			}
 			require("treesj").setup(opts)
 		end,
-	},
-	{ -- which-key
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		opts = {
-			delay = 400,
-			preset = "modern",
-			spec = {
-				{ "<leader>i", group = "󱡴 Inspect" },
-				{ "<leader>o", group = " Options" },
-				{ "<leader>p", group = "󰏗 Packages" },
-				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
-				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
-				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
-			},
-			win = {
-				border = vim.g.borderStyle,
-				padding = { 0, 1 },
-			},
-			expand = 1, -- expand groups when <= n mappings
-			layout = {
-				width = { min = 31, max = 34 },
-				spacing = 1,
-				align = "center",
-			},
-			icons = {
-				rules = false,
-				group = "+ ",
-			},
-		},
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
