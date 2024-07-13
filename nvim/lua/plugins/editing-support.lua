@@ -6,16 +6,13 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 ---Accessed via `vim.g`, as this file's exports are used by lazy.nvim
 ---@param key string
 ---@param label string
----@param modes string|string[]
+---@param modes? string|string[]
 vim.g.whichkey_leader_subkey = function(key, label, modes)
 	-- delayed, to ensure whichkey spec is loaded & not interfere with whichkey's lazy-loading
 	vim.defer_fn(function()
 		local ok, whichkey = pcall(require, "which-key")
 		if not ok then return end
-		whichkey.register(
-			{ [key] = { name = " " .. label } },
-			{ prefix = "<leader>", mode = modes or "n" }
-		)
+		whichkey.add { { "<leader>" .. key, group = label, mode = modes } }
 	end, 1500)
 end
 
@@ -320,56 +317,32 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
-			plugins = {
-				presets = { motions = false, g = false, z = false },
-				spelling = { enabled = false },
+			delay = 400,
+			preset = "modern",
+			spec = {
+				{ "<leader>i", group = "󱡴 Inspect" },
+				{ "<leader>o", group = " Options" },
+				{ "<leader>p", group = "󰏗 Packages" },
+				{ "<leader>u", group = "󰕌 Undo" },
+				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
+				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
+				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
 			},
-			hidden = { "<Plug>", "^:lua ", "<cmd>" },
-			key_labels = {
-				["<CR>"] = "⏎",
-				["<BS>"] = "⌫",
-				["<space>"] = "󱁐",
-				["<Tab>"] = "󰌒",
-				["<Esc>"] = "⎋",
+			win = {
+				border = vim.g.borderStyle,
+				padding = { 0, 1 },
 			},
-			window = {
-				border = { "", "─", "", "" }, -- only horizontal border to save space
-				padding = { 0, 0, 0, 0 },
-				margin = { 0, 0, 0, 0 },
-			},
-			popup_mappings = {
-				scroll_down = "<PageDown>",
-				scroll_up = "<PageUp>",
-			},
-			layout = { -- of the columns
-				height = { min = 5, max = 15 },
+			expand = 1, -- expand groups when <= n mappings
+			layout = {
 				width = { min = 31, max = 34 },
 				spacing = 1,
 				align = "center",
 			},
+			icons = {
+				rules = false,
+				group = "+ ",
+			},
 		},
-		config = function(_, opts)
-			local whichkey = require("which-key")
-			whichkey.setup(opts)
-
-			-- leader prefixes normal mode
-			whichkey.register({
-				u = { name = " 󰕌 Undo" },
-				o = { name = "  Options" },
-				p = { name = " 󰏗 Packages" },
-				i = { name = " 󱡴 Inspect" },
-			}, { prefix = "<leader>" })
-
-			-- leader prefixes normal+visual mode
-			whichkey.register({
-				c = { name = " 󰉁 Code Action" },
-				f = { name = " 󱗘 Refactor" },
-				g = { name = " 󰊢 Git" },
-			}, { prefix = "<leader>", mode = { "x", "n" } })
-
-			-- set by some plugins and unnecessarily clobbers whichkey
-			vim.keymap.set("o", "<LeftMouse>", "<Nop>")
-		end,
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
