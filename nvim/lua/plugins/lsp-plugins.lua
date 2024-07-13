@@ -118,6 +118,8 @@ return {
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
 		config = function()
+			vim.opt.updatetime = 250 -- time for `CursorHold` event
+
 			vim.g.lualine_add("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,

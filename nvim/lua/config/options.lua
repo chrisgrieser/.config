@@ -32,16 +32,13 @@ opt.report = 9001 -- disable "x more/fewer lines" messages
 opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
-opt.updatetime = 250 -- also affects cursorword symbols and lsp-hints
-opt.timeoutlen = 666 -- also affects duration until which-key is shown
-
 opt.autowriteall = true
 
 opt.pumwidth = 15 -- min width
 opt.pumheight = 12 -- max height
 
 opt.sidescrolloff = 12
-vim.g.baseScrolloff = 12 -- so scrolloff-changing function can use this
+vim.g.baseScrolloff = 12 -- so scrolloff-changing functions can use this
 opt.scrolloff = vim.g.baseScrolloff
 
 -- mostly set by .editorconfig, therefore only fallback
