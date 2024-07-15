@@ -261,6 +261,13 @@ rules:
           - { key_code: c, modifiers: [shift, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
+      # <D-s> -> <C-ü> remap (REQUIRED obsidian-vimrc.vim)
+      - type: basic
+        from: { key_code: s, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: open_bracket, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   # DOCS https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
   - description: "(Apps) Slack"
