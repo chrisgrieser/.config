@@ -66,7 +66,7 @@ function M.justRecipe(first)
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local recipes = vim.split(result.stdout, " ", { trimempty = true })
+	local recipes = vim.split(vim.trim(result.stdout), " ")
 	recipes = vim.tbl_filter(
 		function(r) return not vim.tbl_contains(config.ignoreRecipe, r) end,
 		recipes
