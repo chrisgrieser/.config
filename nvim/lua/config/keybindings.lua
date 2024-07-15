@@ -91,7 +91,7 @@ keymap({ "n", "i", "s" }, "<S-Tab>", function()
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
 
 -- automatically exit snippet mode on scroll
--- vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
+vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
@@ -151,13 +151,10 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
 keymap("n", "qq", "gcc", { desc = " Comment Line", remap = true })
 keymap("o", "u", "gc", { desc = " Comment Text Object", remap = true })
-keymap(
-	{ "n", "x" },
-	"q",
+keymap({ "n", "x" }, "q", function()
 	-- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
-	function() return require("vim._comment").operator() end,
-	{ desc = " Comment Operator", expr = true }
-)
+	return require("vim._comment").operator()
+end, { desc = " Comment Operator", expr = true })
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
