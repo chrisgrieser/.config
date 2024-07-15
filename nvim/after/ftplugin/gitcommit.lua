@@ -12,6 +12,7 @@ keymap("n", "gE", "[s")
 
 -- utility keymap
 keymap("i", "<Tab>", "<End>")
+keymap("n", "<Tab>", "A")
 
 -- condition prevents mapping `DressingInput`, which already has its own mappings
 if vim.bo.buftype ~= "nofile" then
