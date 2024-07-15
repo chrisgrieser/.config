@@ -520,11 +520,11 @@ nnoremap ,oa :toggleAiCompletion
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS
 
-" macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
+" macOS: cmd-key mappings do not work reliably, thus D-s in Karabiner to C-ü
 " insert mode: accept suggestion
 " normal mode: format
 exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <M-s> :acceptGhostText
+inoremap <C-ü> :acceptGhostText
 
 exmap lint obcommand obsidian-linter:lint-file
-nnoremap <M-s> :lint
+nnoremap <C-ü> :lint
