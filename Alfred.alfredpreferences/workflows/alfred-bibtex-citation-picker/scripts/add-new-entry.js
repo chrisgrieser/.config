@@ -76,7 +76,7 @@ function generateCitekey(authors, year) {
 
 /**
  * @param {string} input
- * @return {Record<string, any>} input
+ * @return {Record<string, any>|string} entryJson or error message
  */
 function inputToEntryJson(input) {
 	const entry = {};
@@ -115,6 +115,7 @@ function inputToEntryJson(input) {
 		entry.doi = doi[0];
 		entry.url = data.URL || doiURL;
 		entry.type = data.type.replace(/-?journal-?/, ""); // "journal-article" -> "article"
+		if (entry.type === "book-chapter") entry.type = "incollection";
 		entry.title = data.title;
 		if (entry.type === "article") {
 			entry.journal = data["container-title"];
@@ -184,8 +185,7 @@ function inputToEntryJson(input) {
  * @return {string} newEntryAsBibTex
  */
 function json2bibtex(entryJson, citekey) {
-	// biome-ignore lint/complexity/useLiteralKeys: ts demands
-	const firstLine = `@${entryJson["type"]}{${citekey},`;
+	const firstLine = `@${entryJson.type}{${citekey},`;
 	const keywordsLine = "\tkeywords = {},";
 	const lastLine = "}";
 	const propertyLines = [];
