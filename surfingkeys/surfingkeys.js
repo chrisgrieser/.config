@@ -9,6 +9,12 @@
 const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith, RUNTIME } = api;
 const banner = api.Front.showBanner;
 
+/** @param {string} text */
+function copyNotification(text) {
+	text = text.length > 50 ? text.slice(0, 50) + "…" : text;
+	banner("Copied: " + text);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 // SETTINGS
 
@@ -90,7 +96,7 @@ mapkey("yg", "Copy GitHub Link", async () => {
 	const url = window.location.href;
 	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
 	await navigator.clipboard.writeText(repo);
-	banner("Copied: " + repo);
+	copyNotification(repo);
 });
 mapkey("gI", "Open GitHub issues", () => {
 	if (window.location.host !== "github.com") {
@@ -121,7 +127,7 @@ map("m", "x"); // close tab
 mapkey("s", "Copy URL & close tab", async () => {
 	const url = window.location.href;
 	await navigator.clipboard.writeText(url);
-	banner("Copied: " + url);
+	copyNotification(url);
 	window.close();
 });
 map("a", "E"); // goto tab right
@@ -163,7 +169,14 @@ map("yw", "yY", null, "Yank all tabs in window");
 mapkey("ym", "Copy Markdown Link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
 	await navigator.clipboard.writeText(mdLink);
-	banner("Copied: " + mdLink);
+	copyNotification(mdLink);
+});
+
+mapkey("yy", "Copy Link", async () => {
+	// custom function for notification-shortening
+	const url = window.location.href;
+	await navigator.clipboard.writeText(url);
+	copyNotification(url);
 });
 
 // MISC
