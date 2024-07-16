@@ -67,7 +67,8 @@ local function cmpconfig()
 			fields = { "abbr", "menu", "kind" }, -- order of the fields
 			format = function(entry, item)
 				local maxLength = 40
-				local sourceIcons = { buffer = "󰽙", snippets = "", nvim_lsp = "󰒕", emmet = "" }
+				local sourceIcons =
+					{ buffer = "󰽙", snippets = "", nvim_lsp = "󰒕", emmet = "" }
 				local kindIcons = {
 					Text = "",
 					Method = "󰆧",
@@ -106,10 +107,9 @@ local function cmpconfig()
 				local isEmmet = entry.source.name == "nvim_lsp"
 					and item.kind == "Snippet"
 					and vim.bo[entry.context.bufnr].filetype == "css"
-				if isEmmet then entry.source.name = "emmet" end
 
 				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-				item.menu = (sourceIcons[entry.source.name] or "") .. " "
+				item.menu = (isEmmet and sourceIcons.emmet or sourceIcons[entry.source.name]) .. " "
 				return item
 			end,
 		},
