@@ -31,19 +31,19 @@
       "paddingHorizontal" : 7,
       "spacing" : 3,
       "text" : {
-        "size" : 57,
+        "size" : 48,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
         "color" : "#FDFDFDFF"
       },
       "background" : "#0000007F",
       "roundness" : 9,
-      "paddingVertical" : 5
+      "paddingVertical" : 10
     },
     "window" : {
       "color" : "#454545FF",
       "paddingHorizontal" : 12,
-      "width" : 971,
+      "width" : 985,
       "borderPadding" : 4,
       "borderColor" : "#4141417F",
       "blur" : 0,
