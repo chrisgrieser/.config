@@ -195,13 +195,14 @@ function smartMerge() {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
+	const curLineCleaned = curLine.replace(/ +$/, ""); // trim trailing spaces
 	const nextLineCleaned = nextLine
 		.replace(/^\s*- \[[x ]\] /, "") // task
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
 		.trim(); // justIndent
-	const mergedLine = curLine + " " + nextLineCleaned;
+	const mergedLine = curLineCleaned + " " + nextLineCleaned;
 
 	const prevCursor = editor.getCursor(); // prevent cursor from moving
 	editor.replaceRange(mergedLine, { line: lnum, ch: 0 }, { line: lnum + 1, ch: nextLine.length });
