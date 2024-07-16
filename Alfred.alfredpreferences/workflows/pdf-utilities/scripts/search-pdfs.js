@@ -1,8 +1,8 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -21,11 +21,10 @@ function run() {
 	const jsonArray = app
 		.doShellScript(`find '${folderToSearch}' -type f -name '*.pdf'`)
 		.split("\r")
-		.map((fPath) => {
-			const parts = fPath.split("/");
+		.map((absPath) => {
+			const parts = absPath.split("/");
 			const name = parts.pop() || "";
 			const relativeParentFolder = parts.pop();
-			const absPath = folderToSearch + "/" + fPath;
 
 			return {
 				title: name,
