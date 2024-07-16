@@ -173,7 +173,7 @@ nmap <Esc> &c&&n&
 
 " Another Quick Switcher ripgrep-search (somewhat close to Telescope's livegrep)
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
-nnoremap gl :liveGrep
+noremap gl :liveGrep
 
 " Obsidian's builtin search & replace
 exmap searchReplace obcommand editor:open-search-replace
