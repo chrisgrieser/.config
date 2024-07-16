@@ -5,11 +5,6 @@ local u = require("config.utils")
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
-		dependencies = {
-			"stevearc/dressing.nvim",
-			"rcarriga/nvim-notify",
-			"nvim-telescope/telescope.nvim",
-		},
 		event = "VeryLazy", -- load for status line component
 		keys = {
 			-- stylua: ignore start

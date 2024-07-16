@@ -7,7 +7,7 @@ return {
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		event = "VimEnter", -- needed for folds to load in time and comments closed
+		event = "UIEnter", -- needed for folds to load in time and comments closed
 		keys = {
 			-- stylua: ignore start
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },

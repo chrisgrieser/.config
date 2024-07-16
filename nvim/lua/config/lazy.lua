@@ -5,7 +5,7 @@ load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/ma
 -- DOCS https://lazy.folke.io/configuration
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
-	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make file hidden
+	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = {
 		patterns = { "nvim" }, -- for repos matching `patterns` (`nvim` = all nvim repos)…
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
@@ -68,7 +68,7 @@ require("lazy").setup("plugins", {
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
 				"matchparen", "matchit", "netrwPlugin", "man", "tutor", "health",
-				"tohtml", "gzip", "zipPlugin", "tarPlugin",
+				"tohtml", "gzip", "zipPlugin", "tarPlugin", "osc52"
 			},
 		},
 	},
