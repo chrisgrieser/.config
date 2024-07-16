@@ -36,7 +36,7 @@ return {
 				col = 0.075,
 			},
 			layout = {
-				spacing = 1,
+				spacing = 2,
 				width = { max = 34 },
 				align = "left",
 			},
