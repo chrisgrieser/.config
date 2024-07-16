@@ -10,7 +10,6 @@
   "autocmd": {
     "body": [
       "vim.api.nvim_create_autocmd(\"${1:event}\", {",
-      "\t-- fffffffffffff",
       "\tcallback = function()",
       "\t\t$0",
       "\tend,",
