@@ -98,18 +98,21 @@ vim.api.nvim_create_autocmd("FocusGained", {
 
 --------------------------------------------------------------------------------
 
----@param mode? "set"|"clear"
+---@param mode? "clear"
 local function searchCountIndicator(mode)
-	local countNs = vim.api.nvim_create_namespace("searchCounter")
-	vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
-	if mode == "clear" then return end
-
 	local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
+
+	local countNs = vim.api.nvim_create_namespace("searchCounter")
+	if mode == "clear" then
+		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+		return
+	end
+
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local count = vim.fn.searchcount()
 	if count.total == 0 then return end
-	local text = (" %s/%s "):format(count.current, count.total)
-	local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth)) -- ffff
+	local text = (" %d/%d "):format(count.current, count.total)
+	local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth))
 	local lineFull = #line + signColumnPlusScrollbarWidth >= vim.api.nvim_win_get_width(0)
 	local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
 
@@ -240,9 +243,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
 		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
 
-		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+		local bufnr = ctx.buf
+		if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
 		vim.system(
-			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(ctx.buf) },
+			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
 			{},
 			vim.schedule_wrap(function(out)
 				local noConflicts = out.code == 0
@@ -253,13 +258,13 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				local firstConflict
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
 					local lnum = tonumber(conflictLnum)
-					vim.api.nvim_buf_add_highlight(ctx.buf, ns, hlgroup, lnum - 1, 0, -1)
+					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum - 1, 0, -1)
 					if not firstConflict then firstConflict = lnum end
 				end
 				if not firstConflict then return end
 
 				vim.api.nvim_win_set_cursor(0, { firstConflict, 0 })
-				vim.diagnostic.enable(false, { bufnr = ctx.buf })
+				vim.diagnostic.enable(false, { bufnr = bufnr })
 				vim.notify_once("Conflict markers found.", nil, { title = "Git Conflicts" })
 			end)
 		)

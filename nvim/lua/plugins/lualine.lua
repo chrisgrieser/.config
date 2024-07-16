@@ -173,7 +173,7 @@ local lualineConfig = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VimEnter", -- not too late, so UI is there at once
+	lazy = false, -- early, so UI is there at once
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 	init = function()
