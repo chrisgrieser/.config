@@ -75,13 +75,13 @@ function M.themeModifications()
 
 		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		if mode == "dark" then revertedTodoComments() end
-		setHl("TelescopeSelection", { link = "Visual" }) -- sometimes not set when switching themes
+		-- sometimes not set when switching themes
+		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
 	elseif theme == "dawnfox" then
 		setHl("@markup.italic.markdown_inline", { italic = true })
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
 		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
 
-		setHl("@ibl.indent.char.1", { fg = "#e0cfbd" })
 		setHl("ColorColumn", { bg = "#e9dfd2" })
 		setHl("VertSplit", { fg = "#b29b84" })
 		setHl("Operator", { fg = "#846a52" })
@@ -91,6 +91,7 @@ function M.themeModifications()
 				updateHl("lualine_y_diff_added_" .. v, "guifg=#477860")
 			end
 		end, 100)
+		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#e0cfbd" }) end, 1)
 
 		-- FIX python highlighting issues
 		setHl("@type.builtin.python", { link = "Typedef" })
