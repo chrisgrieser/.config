@@ -181,7 +181,7 @@ rules:
               osascript -e '
                 tell application "Reminders" to activate
                 tell application "System Events" to tell process "Reminders"
-                  click menu item "Today" of menu of menu item "Go To" of menu "View" of menu bar 1
+                  click menu item "Tomorrow" of menu of menu item "Go To" of menu "View" of menu bar 1
                 end tell'
           - *deactivate-leader
           - *remove-notice
@@ -201,15 +201,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Slack'
-          - *deactivate-leader
-          - *remove-notice
-
-      - description: "[S]team"
-        type: basic
-        from: { key_code: s, modifiers: { mandatory: [shift] } }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Steam'
           - *deactivate-leader
           - *remove-notice
 
