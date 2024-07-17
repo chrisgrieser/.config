@@ -44,9 +44,15 @@ function run() {
 		});
 	}
 
-	const extensions = extensionManifests.map((manifestPath) => {
+	const extensions = extensionManifests.reduce((/** @type {AlfredItem[]} */ acc, manifestPath) => {
 		const root = manifestPath.slice(0, -13);
 		const id = root.replace(/.*Extensions\/(\w+)\/.*/, "$1");
+
+		// GUARD duplicates can occur due to leftover folders from previous
+		// extension versions
+		const isDuplicate = acc.find((item) => item.uid === id);
+		if (isDuplicate) return acc;
+
 		const manifest = JSON.parse(readFile(manifestPath));
 
 		// determine name
@@ -65,22 +71,28 @@ function run() {
 		// determine options path
 		let optionsPath = manifest.options_ui?.page || manifest.options_page || "";
 
-		// SPECIAL Stylus
+		// EXCEPTIONS
 		if (name === "Stylus") optionsPath = "manage.html";
-
-		// SPECIAL anchor for AdGuard, directly go to user rules
+		if (id === "bbojmeobdaicehcopocnfhaagefleiae") name = "OptiSearch";
 		const anchor = specialAnchors[name] || "";
 
+		// URLs
 		const optionsUrl = `chrome-extension://${id}/${optionsPath}${anchor}`;
 		const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
 		const localFolder = extensionPath + "/" + id;
 
 		// emoji/icon
 		const emoji = optionsPath ? "" : " 🚫"; // indicate no options available
-		const icon = manifest.icons["128"] || manifest.icons["64"] || manifest.icons["48"];
+		const icon =
+			manifest.icons["128"] ||
+			manifest.icons["64"] ||
+			manifest.icons["48"] ||
+			manifest.icons["32"] ||
+			manifest.icons["16"];
 		const iconPath = root + icon;
 
-		return {
+		/** @type {AlfredItem} */
+		const item = {
 			title: name + emoji,
 			match: alfredMatcher(name),
 			icon: { path: iconPath },
@@ -93,6 +105,9 @@ function run() {
 				shift: { arg: localFolder },
 			},
 		};
-	});
+
+		acc.push(item);
+		return acc;
+	}, []);
 	return JSON.stringify({ items: extensions });
 }
