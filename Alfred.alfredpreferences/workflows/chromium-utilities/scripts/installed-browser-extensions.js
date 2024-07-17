@@ -55,7 +55,7 @@ function run() {
 
 		const manifest = JSON.parse(readFile(manifestPath));
 
-		// determine name
+		// determine name (SIC can be in one of these many locations)
 		let name = manifest.name;
 		if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
 		if (name.startsWith("__MSG_")) {
