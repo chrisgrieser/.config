@@ -1,15 +1,14 @@
 # DOCS https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 #───────────────────────────────────────────────────────────────────────────────
 
-# is symlinked to the ignore file from `fd`
+# global ignore file
 --ignore-file=/Users/chrisgrieser/.config/rg/ignore
 
 # shorten long lines
-# --max-columns=85
-# --max-columns-preview
+--max-columns=85
+--max-columns-preview
 
 # shortened display
-# --no-line-number
 --trim
 
 # include hidden files, but not the git directory
