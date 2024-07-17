@@ -40,9 +40,9 @@ local autoCdConfig = {
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
 		local root = vim.fs.root(ctx.buf, function(name, path)
-			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
+			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
 		if root then vim.uv.chdir(root) end
@@ -199,13 +199,14 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 
 -- QUICKFIX LIST: ADD SIGNS
-local quickfix_ns = vim.api.nvim_create_namespace("quickfix_signs")
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
 		local sign = "" -- CONFIG
 
+		local ns = vim.api.nvim_create_namespace("quickfixSigns")
+
 		local function setSigns(qf)
-			vim.api.nvim_buf_set_extmark(qf.bufnr, quickfix_ns, qf.lnum - 1, qf.col - 1, {
+			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
 				sign_text = sign,
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
@@ -213,11 +214,11 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		end
 
 		-- move to 1st item
-		pcall(vim.cmd.cfirst) -- (`pcall` as deleting the list also triggers `QuickFixCmdPost`)
+		pcall(vim.cmd.cfirst) -- `pcall` as deleting the list also triggers `QuickFixCmdPost`
 
 		-- clear signs
-		local group = vim.api.nvim_create_augroup("quickfix_signs", { clear = true })
-		vim.api.nvim_buf_clear_namespace(0, quickfix_ns, 0, -1)
+		local group = vim.api.nvim_create_augroup("quickfixSigns", { clear = true })
+		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 
 		-- set signs
 		for _, qf in pairs(vim.fn.getqflist()) do
