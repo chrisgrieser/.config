@@ -181,10 +181,6 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- COMMAND MODE
 keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
-keymap("c", "<D-c>", function()
-	u.copyAndNotify(vim.fn.getcmdline())
-	return "<Esc>"
-end, { expr = true, desc = " Copy Line" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
@@ -198,7 +194,7 @@ keymap("n", "i", function()
 end, { desc = "correctly indented i", expr = true })
 
 -- LSP Signature
-keymap({ "n", "v", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
@@ -220,31 +216,13 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 -- BUFFERS & FILES
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
-keymap(
-	"n",
-	"<BS>",
-	function() require("funcs.magnet").bufferByLastUsed("prev") end,
-	{ desc = "󰽙 Prev Buffer" }
-)
-keymap(
-	"n",
-	"<S-BS>",
-	function() require("funcs.magnet").bufferByLastUsed("next") end,
-	{ desc = "󰽙 Next Buffer" }
-)
-keymap(
-	{ "n", "x" },
-	"<CR>",
-	function() require("funcs.magnet").gotoAltBuffer() end,
-	{ desc = "󰽙 Alt Buffer" }
-)
 
-keymap(
-	{ "n", "x" },
-	"<D-CR>",
-	function() require("funcs.magnet").gotoChangedFiles() end,
-	{ desc = "󰊢 Goto Changed File" }
-)
+-- stylua: ignore start
+keymap("n", "<BS>", function() require("funcs.magnet").bufferByLastUsed("prev") end, { desc = "󰽙 Prev Buffer" })
+keymap("n", "<S-BS>", function() require("funcs.magnet").bufferByLastUsed("next") end, { desc = "󰽙 Next Buffer" })
+keymap({ "n", "x" }, "<CR>", function() require("funcs.magnet").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
+keymap({ "n", "x" }, "<D-CR>", function() require("funcs.magnet").gotoChangedFiles() end, { desc = "󰊢 Goto Changed File" })
+-- stylua: ignore end
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd.update { mods = { silent = true } }

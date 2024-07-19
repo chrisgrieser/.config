@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>app.alfred.stephenc.venturaprefpanes</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>73D483F9-5F9F-4055-A2BD-3768B038E0B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A17C0120-C77B-4DD4-94A0-0F1925BFBD31</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A17C0120-C77B-4DD4-94A0-0F1925BFBD31</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>Stephen Christy</string>
+	<key>description</key>
+	<string>Opens listed Settings Pane</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Open macOS Settings Panes</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>A17C0120-C77B-4DD4-94A0-0F1925BFBD31</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Please wait....</string>
+				<key>script</key>
+				<string>./syset.sh</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_description}</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>73D483F9-5F9F-4055-A2BD-3768B038E0B4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Note 
+
+This workflow has been tested on macOS 14.4 and will not work on macOS versions prior to macOS 13. It is possible future changes (whether in macOS 14 or later) will stop this workflow working—either partially or fully.
+
+# Usage
+
+This workflow lists, in response to the user configurable `syset` keyword, various macOS System Preference panes (which are still called `Preference panes` even under macOS 14) to which there is programable access. When you select the relevant pane from the searchable list simply press &lt;kbd&gt;⏎&lt;/kbd&gt; to display the pane. Note that you can leave a space after the keyword and type the initial letter(s) of the pane you want in order quickly to jump to that pane.
+
+![Open macOS Settings Panes](Screenshot/Screenshot.png)
+
+From version 2.5 of the workflow Alfred learns from used items to bring them to the top of the list.
+
+# Note
+
+The `Mouse`, `Game Controller` and `VPN` panes will not appear unless and until you have connected to one of those relevant devices.
+
+
+# Acknowledgment
+
+I am indebted to comments on [this Github post](https://gist.github.com/rmcdongit/f66ff91e0dad78d4d6346a75ded4b751?permalink_comment_id=4258811) for enabling me to find identifiers for various Preference panes.
+
+---
+
+**Version 1.1** 26/10/2022: added two further panes (`General` and `Passwords`) and updated Placeholder Title and Placeholder Subtext in workflow.  
+**Version 1.2** 26/10/2022: updated name of workflow and improved workflow icon.  
+**Version 1.21** 27/10/2022: small correction to Placeholder Title in workflow.  
+**Version 1.3** 02/11/2022: added nine new panes (`About`, `Desktop &amp; Dock`, `Extensions`, `Family`, `Game Centre`, `Game Controllers`, `Mouse`, `Transfer or Reset`, and `VPN`) and icons (with credit to @vitorgalvao). Updates to this configuration file.  
+**Version 1.4** 23/12/2022: add new iCloud pane and added screenshot to User Configuration.  
+**Version 1.5** 05/01/2023: updated bundle identifier.  
+**Version 2.0** 09/03/2024: added a number of anchors to `Accessibility`, `Privacy &amp; Security` and `Sharing` panes. Minor updates to ReadMe.  
+**Version 2.5** 13/03/2024: re-written to use a script filter in order to make use of Alfred 5.5 caching. Alfred now also learns from used items to bring them to the top of the list. Updated ReadMe. `Transfer &amp; Reset` removed as not accessible. Added access to Software Update panel and Keyboard Shortcuts.  
+**Version 2.51** 25/03/2024: removed caching as not required.  
+**Version 2.52** 26/06/2024: added access to `General → AppleCare &amp; Warranty` pane (credit to @FireFingers21).</string>
+	<key>uidata</key>
+	<dict>
+		<key>73D483F9-5F9F-4055-A2BD-3768B038E0B4</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>A17C0120-C77B-4DD4-94A0-0F1925BFBD31</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>syset</string>
+				<key>placeholder</key>
+				<string>syset</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The default keyword to run this workflow is "syset". You can change it here.</string>
+			<key>label</key>
+			<string>Workflow keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>2.52</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
