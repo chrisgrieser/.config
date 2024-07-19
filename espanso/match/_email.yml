@@ -1,15 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - regex: "\\bvvv" # Signatures
+  # Greetings
+  - triggers: ["!mail", "!sm"]
+    replace: "Dear sir or madam,\n\n"
+  # Signatures
+  - regex: "\\bvvv"
     replace: |-
       $|$
 
       Viele Grüße
       Chris
-  # Greetings
-  - triggers: ["!mail", "!sm"]
-    replace: "Dear sir or madam,\n\n"
   - triggers: ["!mail", "!dh"]
     replace: |
       Sehr geehrte Damen und Herren,
@@ -18,7 +19,6 @@ matches:
 
       Mit freundlichen Grüßen
       Christopher Grieser
-  # Signatures
   - triggers: ["vvg", "!mail"]
     replace: |-
       $|$
