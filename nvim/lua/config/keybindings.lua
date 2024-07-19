@@ -281,18 +281,19 @@ keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
 
 -- sticky yank operations
 local cursorPreYank
-vim.keymap.set({ "n", "x" }, "y", function()
+keymap({ "n", "x" }, "y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
 end, { desc = "Sticky Yank", expr = true })
-vim.keymap.set("n", "Y", function()
+keymap("n", "Y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
-end, { desc = "Sticky Yank", expr = true })
+end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		if vim.v.event.operator == "y" and cursorPreYank then
+		-- `z` is used as temporary register for keymaps, thus needs to be ignored
+		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" and cursorPreYank then
 			vim.api.nvim_win_set_cursor(0, cursorPreYank)
 		end
 	end,
@@ -302,7 +303,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = "Paste w/o switching with register" })
+keymap("x", "p", "P", { desc = " Paste w/o switching with register" })
 
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
