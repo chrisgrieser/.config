@@ -33,7 +33,7 @@ return {
 			win = {
 				border = vim.g.borderStyle,
 				width = 0.85,
-				col = 0.075,
+				col = math.floor(vim.o.columns * 0.075),
 			},
 			layout = {
 				spacing = 2,
