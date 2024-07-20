@@ -52,9 +52,8 @@ M.timer_clock = hs.timer
 --------------------------------------------------------------------------------
 -- BACKUP / MAINTENANCE
 
--- 1. save macOS preferences via `mackup`
--- 2. bookmark backup
--- 3. reminder backup
+-- 1. bookmark backup
+-- 2. reminder backup
 M.timer_nightlyMaintenance = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
@@ -62,9 +61,6 @@ M.timer_nightlyMaintenance = hs.timer
 		-- GUARD
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
-
-		local _, success = hs.execute("saveprefs_mackup", true)
-		u.notify(success and "✅ mackup saved" or "⚠️ mackup failed")
 
 		M.task_bookmarksBackup = hs.task
 			.new("./helpers/bookmark-bkp.sh", function(code, _, stderr)
