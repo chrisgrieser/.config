@@ -61,19 +61,16 @@ local conformOpts = {
 }
 
 local function formattingFunc(bufnr)
-	-- GUARD
 	if not bufnr then bufnr = 0 end
 	local fileExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(bufnr)) ~= nil
 	local valid = vim.api.nvim_buf_is_valid(bufnr)
 	local specialBuffer = vim.bo[bufnr].buftype ~= ""
 	if specialBuffer or not fileExists or not valid then return end
 
-	-- parameters
 	local ft = vim.bo[bufnr].filetype
 	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
 
 	require("conform").format({ lsp_format = useLsp }, function()
-		-- PYTHON: FIXALL
 		if ft == "python" then
 			vim.lsp.buf.code_action {
 				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
@@ -82,8 +79,10 @@ local function formattingFunc(bufnr)
 		end
 		vim.cmd("silent! update!")
 	end)
+end
 
-	-- TYPESCRIPT: ORGANIZE IMPORTS BEFORE
+--- organize imports on before formatting
+local function typescriptFormatting()
 	local actions = {
 		"source.fixAll.ts",
 		"source.addMissingImports.ts",
@@ -98,10 +97,7 @@ local function formattingFunc(bufnr)
 					apply = true,
 				}
 			else
-				require("conform").format(
-					{ lsp_format = useLsp },
-					function() vim.cmd("silent! update!") end
-				)
+				require("conform").format({ lsp_format = "first" }, vim.cmd.update)
 			end
 		end, i * 60)
 	end
@@ -116,6 +112,13 @@ return {
 	mason_dependencies = listConformFormatters(),
 	keys = {
 		{ "<D-s>", formattingFunc, desc = "󰒕 Format & Save", mode = { "n", "x" } },
+		{
+			"<D-s>",
+			typescriptFormatting,
+			ft = "typescript",
+			desc = "󰒕 Format & Save",
+			mode = { "n", "x" },
+		},
 	},
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
@@ -123,7 +126,11 @@ return {
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 		vim.api.nvim_create_autocmd("FocusLost", {
-			callback = function(ctx) formattingFunc(ctx.buf) end,
+			callback = function(ctx)
+				local func = vim.bo[ctx.buf].ft == "typescript" and typescriptFormatting
+					or formattingFunc
+				func(ctx.buf)
+			end,
 		})
 	end,
 }
