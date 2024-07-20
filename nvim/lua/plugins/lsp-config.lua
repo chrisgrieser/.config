@@ -18,7 +18,7 @@ local lspToMasonMap = {
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
-	ruff_lsp = "ruff-lsp", -- python linter & formatter
+	ruff = "ruff", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
 	tsserver = "typescript-language-server",
@@ -165,8 +165,8 @@ serverConfigs.lua_ls = {
 --------------------------------------------------------------------------------
 -- PYTHON
 
--- DOCS https://github.com/astral-sh/ruff-lsp#settings
-serverConfigs.ruff_lsp = {
+-- DOCS https://docs.astral.sh/ruff/editors/settings/
+serverConfigs.ruff = {
 	init_options = {
 		settings = {
 			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
