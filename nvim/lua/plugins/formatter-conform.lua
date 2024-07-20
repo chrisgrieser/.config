@@ -72,19 +72,16 @@ local function formattingFunc(bufnr)
 	local ft = vim.bo[bufnr].filetype
 	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
 
-	if ft ~= "typescript" then
-		require("conform").format({ lsp_format = useLsp }, function()
-			-- PYTHON: FIXALL
-			if ft == "python" then
-				vim.lsp.buf.code_action {
-					context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-					apply = true,
-				}
-			end
-			vim.cmd("silent! update!")
-		end)
-		return
-	end
+	require("conform").format({ lsp_format = useLsp }, function()
+		-- PYTHON: FIXALL
+		if ft == "python" then
+			vim.lsp.buf.code_action {
+				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+				apply = true,
+			}
+		end
+		vim.cmd("silent! update!")
+	end)
 
 	-- TYPESCRIPT: ORGANIZE IMPORTS BEFORE
 	local actions = {
@@ -123,6 +120,7 @@ return {
 	config = function()
 		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
+		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 		vim.api.nvim_create_autocmd("FocusLost", {
 			callback = function(ctx) formattingFunc(ctx.buf) end,
