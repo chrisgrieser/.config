@@ -169,7 +169,7 @@ end
 
 -- FIX: For plugins using backdrop-like effects, there is some winblend bug,
 -- which causes the underlines to be displayed in ugly red. We fix this by
--- temporarily disabling the underline effects set by this plugin.
+-- temporarily disabling the underline effects set.
 local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@string.special.url.comment", "gui=" .. change)
@@ -181,10 +181,8 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	callback = function(ctx)
 		-- WinEnter needs a delay so buftype changes set by plugins are picked up
 		-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
-		if ctx.event == "WinEnter" then
+		if ctx.event == "WinEnter" or (ctx.event == "FileType" and ctx.match == "DressingInput") then
 			vim.defer_fn(toggleUnderlines, 1)
-		elseif ctx.event == "FileType" and ctx.match == "DressingInput" then
-			toggleUnderlines()
 		end
 	end,
 })

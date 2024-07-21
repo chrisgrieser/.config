@@ -43,7 +43,7 @@ return {
 			},
 		},
 	},
-	{ -- basically markdown live-preview
+	{ -- markdown live-preview
 		"MeanderingProgrammer/markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		main = "render-markdown",
@@ -78,7 +78,7 @@ return {
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
-		ft = { "css", "scss", "sh", "zsh", "lua" },
+		ft = { "css", "scss", "zsh", "lua" },
 		config = function(spec)
 			local ccc = require("ccc")
 
