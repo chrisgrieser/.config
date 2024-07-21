@@ -261,7 +261,7 @@ keymap(
 
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit" })
 -- `remap` because it requires nvim's visual star
-keymap("x", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit", remap = true })
+keymap("x", "<D-j>", '*Ncgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
 -- MACROS
