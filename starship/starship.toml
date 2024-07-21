@@ -32,9 +32,8 @@ vimcmd_symbol = "[](fg:cyan)"
 
 [status] # exit code
 disabled = false
-format = "[ $status $symbol]($style)"
+format = " [ $status]($style)"
 style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal theme
-symbol = ""
 
 [sudo]
 disabled = false
