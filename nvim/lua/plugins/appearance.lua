@@ -53,7 +53,7 @@ return {
 				"<leader>oc",
 				function() require("render-markdown").toggle() end,
 				ft = "markdown",
-				desc = " Markdown Render",
+				desc = " Markdown Render",
 			},
 		},
 		opts = {
@@ -61,7 +61,7 @@ return {
 			bullet = {
 				icons = { '•', '◦', '▪️', '▫️' },
 			},
-			pipe_table = { enabled = false }, -- sluggish
+			pipe_table = { enabled = false }, -- sluggish on bigger files
 			latex = { enabled = false }, -- unneeded
 			sign = { enabled = false },
 			code = {
@@ -100,7 +100,7 @@ return {
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
-				inputs = { ccc.input.hsl },
+				inputs = { ccc.input.hsl }, -- always use HSL-logic for input
 				outputs = {
 					ccc.output.css_hsl,
 					ccc.output.css_rgb,
