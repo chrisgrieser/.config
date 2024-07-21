@@ -121,7 +121,7 @@ opt.history = 400 -- reduce noise for command history search
 -- INVISIBLE CHARS
 
 opt.list = true
-opt.conceallevel = 2
+opt.conceallevel = 3
 
 opt.fillchars:append {
 	eob = " ",

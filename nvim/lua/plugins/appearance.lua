@@ -58,8 +58,19 @@ return {
 		},
 		opts = {
 			render_modes = { "n", "c", "i" },
-			bullet = { enabled = false },
+			bullet = {
+				icons = { '•', '◦', '▪️', '▫️' },
+			},
+			pipe_table = { enabled = false }, -- sluggish
+			latex = { enabled = false }, -- unneeded
 			sign = { enabled = false },
+			code = {
+				border = "thick",
+			},
+			win_options = {
+				-- toggling this plugin should also toggle conceallevel
+				conceallevel = { default = 0, rendered = 3 },
+			},
 		},
 	},
 	{ -- color previews & color picker
