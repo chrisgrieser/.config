@@ -43,15 +43,23 @@ return {
 			},
 		},
 	},
-	{ -- emphasized headers & code blocks in markdown
-		"lukas-reineke/headlines.nvim",
-		ft = { "markdown", "yaml" },
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {
-			markdown = {
-				fat_headlines = false,
-				bullets = false,
+	{ -- basically markdown live-preview
+		"MeanderingProgrammer/markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		main = "render-markdown",
+		ft = "markdown",
+		keys = {
+			{
+				"<leader>oc",
+				function() require("render-markdown").toggle() end,
+				ft = "markdown",
+				desc = " Markdown Render",
 			},
+		},
+		opts = {
+			render_modes = { "n", "c", "i" },
+			bullet = { enabled = false },
+			sign = { enabled = false },
 		},
 	},
 	{ -- color previews & color picker
