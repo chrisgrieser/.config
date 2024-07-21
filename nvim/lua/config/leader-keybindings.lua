@@ -172,7 +172,7 @@ end, { desc = " Diagnostics" })
 keymap(
 	"n",
 	"<leader>oc",
-	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
 
