@@ -16,7 +16,7 @@ function alfredMatcher(str) {
  * @return {string} relative date
  */
 function humanRelativeDate(isoDateStr) {
-	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
+	const deltaSecs = (Date.now() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
@@ -51,16 +51,15 @@ function humanRelativeDate(isoDateStr) {
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
-	const numberOfPrs = 100; // 100 is the maximum of API
 	const username = $.getenv("github_username");
-	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=${numberOfPrs}`;
+	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
 
 	const openPrs = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
 		(/** @type {GithubIssue} */ item) => {
-			const title = item.title;
 			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
 			const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
-			const draftIcon = item.draft ? "📝 " : "";
+			const icon = item.draft ? "⬜" : "🟩 ";
+
 			const subtitle = [
 				`#${item.number}`,
 				repo,
@@ -71,9 +70,9 @@ function run() {
 				.join("   ");
 
 			return {
-				title: draftIcon + title,
+				title: icon + item.title,
 				subtitle: subtitle,
-				match: alfredMatcher(title) + alfredMatcher(repo),
+				match: alfredMatcher(item.title) + alfredMatcher(repo),
 				arg: item.html_url,
 				quicklookurl: item.html_url,
 			};
