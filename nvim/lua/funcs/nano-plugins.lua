@@ -111,32 +111,6 @@ function M.toggleOrIncrement()
 	return "<C-a>"
 end
 
--- 1. in addition to toggling case of letters, also toggls some common characters
--- 2. does not move the cursor to the left, useful for vertical changes
-function M.betterTilde()
-	local toggleSigns = {
-		["'"] = '"',
-		["+"] = "-",
-		["("] = ")",
-		["["] = "]",
-		["{"] = "}",
-		["<"] = ">",
-	}
-	local col = vim.fn.col(".") -- fn.col correctly considers tab-indentation
-	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-
-	local changeTo
-	for left, right in pairs(toggleSigns) do
-		if charUnderCursor == left then changeTo = right end
-		if charUnderCursor == right then changeTo = left end
-	end
-	if changeTo then
-		normal("r" .. changeTo)
-	else
-		normal("v~") -- (`v~` instead of `~h` so dot-repetition doesn't move cursor)
-	end
-end
-
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string

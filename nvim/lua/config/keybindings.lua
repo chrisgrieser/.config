@@ -57,8 +57,6 @@ keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
 keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
 keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 
-keymap("n", "~", '<cmd>lua require("funcs.nano-plugins").betterTilde()<CR>', { desc = "better ~" })
-
 -- Delete trailing character
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
@@ -77,7 +75,7 @@ keymap({ "n", "i", "s" }, "<Tab>", function()
 	if vim.snippet.active { direction = 1 } then
 		return "<cmd>lua vim.snippet.jump(1)<CR>"
 	else
-		local fallback = { n = ">>", i = "<C-t>", s = "<Tab>" }
+		local fallback = { n = ">>", i = "<C-t>" }
 		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉶 indent / next placeholder", expr = true })
@@ -85,7 +83,7 @@ keymap({ "n", "i", "s" }, "<S-Tab>", function()
 	if vim.snippet.active { direction = -1 } then
 		return "<cmd>lua vim.snippet.jump(-1)<CR>"
 	else
-		local fallback = { n = "<<", i = "<C-d>", s = "<Tab>" }
+		local fallback = { n = "<<", i = "<C-d>" }
 		return fallback[vim.fn.mode()]
 	end
 end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
