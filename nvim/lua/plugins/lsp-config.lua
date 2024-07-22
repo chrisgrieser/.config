@@ -373,7 +373,7 @@ serverConfigs.vale_ls = {
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = false,
+		event = "UIEnter",
 		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
