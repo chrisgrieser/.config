@@ -5,7 +5,8 @@ local u = require("config.utils")
 
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
----@type table<string, string>
+
+---@enum (key) MyLspServers
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
@@ -27,12 +28,7 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 }
 
----FIX lspconfig.Config not accepting a function as `root_dir`
----PENDING https://github.com/neovim/nvim-lspconfig/pull/3243
----@class ClientConfig : lspconfig.Config
----@field root_dir? string|fun(filename: string, bufnr: number)
-
----@type table<string, ClientConfig>
+---@type table<MyLspServers, lspconfig.Config>
 local serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
