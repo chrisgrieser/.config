@@ -103,10 +103,8 @@ local function searchCountIndicator(mode)
 	local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
 
 	local countNs = vim.api.nvim_create_namespace("searchCounter")
-	if mode == "clear" then
-		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
-		return
-	end
+	vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+	if mode == "clear" then return end
 
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local count = vim.fn.searchcount()
@@ -136,10 +134,9 @@ vim.on_key(function(char)
 	-- works for RHS, therefore no need to consider remaps
 	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
 
-	searchCountIndicator("clear")
-
 	if (searchCancelled or not searchMovement) and not searchConfirmed then
 		vim.opt.hlsearch = false
+		searchCountIndicator("clear")
 	elseif searchMovement or searchConfirmed or searchStarted then
 		vim.opt.hlsearch = true
 		vim.defer_fn(searchCountIndicator, 1)
