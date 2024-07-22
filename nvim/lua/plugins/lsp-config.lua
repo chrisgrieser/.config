@@ -28,6 +28,7 @@ local lspToMasonMap = {
 }
 
 ---FIX lspconfig.Config not accepting a function as `root_dir`
+---PENDING https://github.com/neovim/nvim-lspconfig/pull/3243
 ---@class ClientConfig : lspconfig.Config
 ---@field root_dir? string|fun(filename: string, bufnr: number)
 
