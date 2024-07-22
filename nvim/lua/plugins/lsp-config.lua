@@ -6,7 +6,7 @@ local u = require("config.utils")
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 
----@enum (key) MyLspServers
+---@type table<string, string>
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
@@ -28,7 +28,7 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 }
 
----@type table<MyLspServers, lspconfig.Config>
+---@type table<string, lspconfig.Config>
 local serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
@@ -140,7 +140,7 @@ serverConfigs.lua_ls = {
 			hint = { -- inlay hints
 				enable = true,
 				setType = true,
-				arrayIndex = "Disable", -- too noisy
+				-- arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
