@@ -10,10 +10,10 @@ local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
+	css_variables = "css-variables-language-server",
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
-	emmet_language_server = "emmet-language-server", -- css/html completions
-	css_variables = "css-variables-language-server",
+	emmet_language_server = "emmet-language-server", -- css/html snippets
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -27,21 +27,11 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 }
 
----@class (exact) lspConfiguration see https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt#L46
----@field autostart? boolean
----@field capabilities? table <string, string|table|boolean|function>
----@field cmd? string[]
----@field filetypes? string[]
----@field handlers? table <string, function>
----@field init_options? table <string, string|table|boolean>
----@field on_attach? fun(client: vim.lsp.Client, bufnr: number)
----@field on_new_config? fun(new_config, root_dir)
----@field root_dir? fun(filename: string, bufnr: number)
----@field settings? table <string, table>
----@field single_file_support? boolean
----@field cmd_env? table<string, string>
+---FIX lspconfig.Config not accepting a function as `root_dir`
+---@class ClientConfig : lspconfig.Config
+---@field root_dir? string|fun(filename: string, bufnr: number)
 
----@type table<string, lspConfiguration>
+---@type table<string, ClientConfig>
 local serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
