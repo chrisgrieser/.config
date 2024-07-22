@@ -258,8 +258,7 @@ keymap(
 -- MULTI-CURSOR REPLACEMENT
 
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit" })
--- `remap` because it requires nvim's visual star
-keymap("x", "<D-j>", '*Ncgn', { desc = "󰆿 Multi-Edit", remap = true })
+keymap("x", "<D-j>", '"zy/<C-r>z<CR>N"_cgn', { desc = "󰆿 Multi-Edit" })
 
 --------------------------------------------------------------------------------
 -- MACROS

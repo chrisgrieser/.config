@@ -197,7 +197,7 @@ return {
 					local indentationFound = vim.fn.mode():find("V")
 					if not indentationFound then return end
 					u.normal("V") -- leave visual mode so <> marks are set
-					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky)
+					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
 
 					-- copy them into the + register
 					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
