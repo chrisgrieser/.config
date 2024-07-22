@@ -3,12 +3,12 @@ title: ⇪ Hyper
 anchors:
   - from:
       modifiers: &hyper
-        # INFO not using cmd+opt+ctrl+shift to avoid triggering system
-        # diagnosis via cmd+opt+ctrl+shift+.
+        # INFO not using `cmd+opt+ctrl+shift` to avoid triggering 
+        # system diagnosis via `cmd+opt+ctrl+shift+.`
         mandatory: [command, control, option]
   #─────────────────────────────────────────────────────────────────────────────
 rules:
-  - description: "*️⃣ ⇪ Capslock → Hyper/Esc"
+  - description: "⇪ Capslock → Hyper/Esc"
     manipulators:
       - type: basic
         # optional modifiers, so accidental `shift+caps` does not trigger actual capslock
@@ -18,15 +18,15 @@ rules:
         to:
           - { key_code: right_command, modifiers: [control, option], lazy: true }
       #─────────────────────────────────────────────────────────────────────────────
-      # Map Esc to F18 (clipboard / screenshot history)
+      # Map freed-up `Esc` to clipboard (Alfred) / screenshot history (CleanShot)
       - type: basic
         from: { key_code: escape }
         to_if_alone:
-          - key_code: f18
+          - key_code: f18 # clipboard history in Alfred
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
-        # INFO condition to avoid conflict with finder-vim-mode;
-        # mapping to f18 in Finder is done in `finder-vim-alfred-addon.yaml`
+        # INFO condition is to avoid conflict with finder-vim-mode
+        # (mapping to `F18` in Finder is done in `finder-vim-alfred-addon.yaml`)
         conditions:
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
   #─────────────────────────────────────────────────────────────────────────────
