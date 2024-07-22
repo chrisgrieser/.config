@@ -76,7 +76,7 @@ local routes = {
 return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		event = "VimEnter", -- earlier to catch notifications on startup
+		event = "UIEnter",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {

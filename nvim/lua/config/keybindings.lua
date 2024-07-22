@@ -177,8 +177,8 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE
-keymap("c", "<C-u>", "<C-e><C-u>") -- kill whole line
-keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+keymap("c", "<C-u>", "<C-e><C-u>", { desc = " Kill whole line" }) 
+keymap("c", "<D-v>", '<C-r>"', { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
