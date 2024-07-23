@@ -4,7 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 format = """[\
-$directory${custom.folder_number}\
+${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state\
 $sudo$status\
@@ -69,6 +69,14 @@ when = "true" # always show
 symbol = " "
 format = '[$symbol$output]($style)'
 style = "fg:yellow bg:black bold"
+
+# Indicate if in a subfolder of my local repo folder. Helps differentiating
+# between my local Alfred workflows and their respective repos.
+[custom.location_indicator]
+when = '[[ "$PWD" =~ "$HOME/repos/" ]]'
+style = "fg:cyan bg:black bold"
+command = 'echo "󰔽"'                    # output trimmed, so spaces must be added at `format`
+format = '[ $output  ]($style)'          # extra space for proper nerdfont sizing
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT
