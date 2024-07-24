@@ -1,4 +1,4 @@
--- BOOTSTRAP the plugin manager `lazy.nvim` https://lazy.folke.io/installation
+-- BOOTSTRAP https://lazy.folke.io/installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyLocallyAvailable = vim.uv.fs_stat(lazypath) ~= nil
 if not lazyLocallyAvailable then
@@ -178,14 +178,6 @@ end, { desc = "󰒲 Local Plugin Code" })
 --------------------------------------------------------------------------------
 -- CHECK FOR UPDATES AND DUPLICATE KEYS
 
-local function checkForPluginUpdates()
-	if not require("lazy.status").has_updates() then return end
-	local threshold = 20
-	local numberOfUpdates = tonumber(require("lazy.status").updates():match("%d+"))
-	if numberOfUpdates < threshold then return end
-	notify("Lazy", ("󱧕 %d plugin updates"):format(numberOfUpdates))
-end
-
 local function checkForDuplicateKeys()
 	---@param lazyKey {mode?: string|table}
 	---@param mode string
@@ -222,5 +214,4 @@ local function checkForDuplicateKeys()
 	end)
 end
 
-vim.defer_fn(checkForPluginUpdates, 10000)
 vim.defer_fn(checkForDuplicateKeys, 4000)
