@@ -27,7 +27,10 @@ require("lazy").setup("plugins", {
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
-	git = { log = { "--since=7 days ago" } }, -- Lazy log shows commits since last x days
+	git = {
+		log = { "--since=7 days ago" }, -- Lazy log shows commits since last x days
+		cooldown = 120, -- seconds before a plugin is updated again
+	}, 
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
@@ -68,11 +71,6 @@ require("lazy").setup("plugins", {
 				desc = " Open issue/commit",
 			},
 		},
-	},
-	checker = {
-		enabled = true, -- automatically check for plugin updates
-		notify = false, -- done on my own to use minimum condition for less noise
-		frequency = 60 * 60 * 24, -- = 1 day
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { enabled = true, notify = false },
