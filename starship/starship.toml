@@ -39,7 +39,7 @@ style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal
 disabled = false
 style = 'fg:yellow bg:black'
 symbol = " "
-format = "[$symbol ]($style)"
+format = "[ $symbol]($style)"
 
 [directory]
 truncation_length = 2
@@ -56,7 +56,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 "~/Desktop" = "/ "
 "~" = "/ "
 
-# the four perma-repos
+# my perma-repos
 ".config" = " "
 "main-vault" = "󱉽 "
 "phd-data-analysis" = " "
