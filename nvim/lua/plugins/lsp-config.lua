@@ -140,7 +140,7 @@ serverConfigs.lua_ls = {
 			hint = { -- inlay hints
 				enable = true,
 				setType = true,
-				-- arrayIndex = "Disable", -- too noisy
+				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834

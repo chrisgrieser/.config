@@ -113,7 +113,7 @@ local function telescopeConfig()
 					local project = path
 						:gsub(vim.pesc(vim.g.localRepos), "")
 						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "")
-						:gsub(vim.pesc(vim.fs.normalize("~")), "")
+						:gsub(vim.pesc(os.getenv("HOME") or ""), "")
 						:match("/(.-)/") -- highest parent
 						or ""
 					local tail = vim.fs.basename(path)
