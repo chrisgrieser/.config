@@ -59,7 +59,7 @@ return {
 		opts = {
 			render_modes = { "n", "c", "i" },
 			bullet = {
-				icons = { '•', '◦', '▪️', '▫️' },
+				icons = { "•", "◦", "▪️", "▫️" },
 			},
 			pipe_table = { enabled = false }, -- sluggish on bigger files
 			latex = { enabled = false }, -- unneeded
@@ -76,7 +76,7 @@ return {
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
-		ft = { "css", "scss", "zsh", "lua" },
+		ft = { "css", "scss", "zsh", "lua", "toml" },
 		config = function(spec)
 			local ccc = require("ccc")
 
@@ -94,7 +94,7 @@ return {
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
 					ccc.picker.css_name,
-					ccc.picker.ansi_escape(),
+					ccc.picker.ansi_escape({}, { meaning1 = "bold" }),
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
