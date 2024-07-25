@@ -42,22 +42,22 @@ if host:find("Mother") then device = "mother" end
 
 local deviceConfig = {
 	home = {
-		fontSize = 28,
-		cellWidth = 1,
+		fontSize = 26.3,
+		cellWidth = 0.92,
 		maxFps = 60,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
-	mother = {
-		fontSize = 26,
-		cellWidth = 1,
-		maxFps = 40,
-		winPos = { x = 620, y = 0, w = 2745 },
-	},
 	office = {
-		fontSize = 29.7, -- .7 ensures correct box chars take full height (for starship prompt)
-		cellWidth = 0.9,
+		fontSize = 29,
+		cellWidth = 0.8,
 		maxFps = 60,
 		winPos = { x = 375, y = -100, w = 1675 },
+	},
+	mother = {
+		fontSize = 26,
+		cellWidth = 0.9,
+		maxFps = 40,
+		winPos = { x = 620, y = 0, w = 2745 },
 	},
 }
 
@@ -121,17 +121,15 @@ local config = {
 
 	-- FONT
 	font = wt.font {
-		-- some nerdfont icons requires a space after them to be properly sized
-		family = "Iosevka Term",
+		family = "JetBrainsMonoNL NF",
 		weight = "Medium",
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
 	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
-	line_height = 1.0,
 	font_size = deviceConfig[device].fontSize,
 	command_palette_font_size = deviceConfig[device].fontSize,
 	char_select_font_size = deviceConfig[device].fontSize, -- emoji picker
-	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
+	custom_block_glyphs = true, -- don't use wezterm's box-chars replacements, since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),

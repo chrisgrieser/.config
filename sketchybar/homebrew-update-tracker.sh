@@ -8,3 +8,4 @@ if [[ $outdated -gt $threshold ]]; then
 else
 	sketchybar --set "$NAME" drawing=false
 fi
+

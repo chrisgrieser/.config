@@ -68,7 +68,7 @@ command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Stor
 when = "true" # always show
 symbol = " "
 format = '[$symbol$output]($style)'
-style = "fg:yellow bg:black bold"
+style = "fg:yellow bg:black"
 
 # Indicate if in a subfolder of my local repo folder. Helps differentiating
 # between my local Alfred workflows and their respective repos.
@@ -99,7 +99,7 @@ ignore_branches = ["main"]
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = ' [󰘬 ](fg:purple bg:black bold)'
+format = '[ 󰘬](fg:purple bg:black bold)'
 
 [git_status] # files
 stashed = '[ 󰜦  $count](fg:cyan bg:black)'
