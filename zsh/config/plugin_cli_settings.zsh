@@ -15,7 +15,7 @@ export LESSKEYIN="$HOME/.config/less/lesskey"
 # INFO does also accept specific files via glob, e.g. `README.md=4;33`,
 grey="38;5;247"
 file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey" # `.*=` affects dotfiles
-export LS_COLORS="di=1;34:ln=3;35:or=7;31:$file_colors"
+export LS_COLORS="di=0;34:ln=3;35:or=7;31:$file_colors"
 
 export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
 export EZA_STRICT=1

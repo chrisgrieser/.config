@@ -25,7 +25,7 @@ function _gitlog {
 	local the_log
 	the_log=$(
 		git --no-pager log --all --color $graph \
-			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)" "$@" |
+			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
 			sed -e 's/ seconds* ago)/s)/' \
 				-e 's/ minutes* ago)/m)/' \
 				-e 's/ hours* ago)/h)/' \
@@ -42,8 +42,8 @@ function _gitlog {
 				-Ee $'s/ (release|bump):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
-				-Ee $'s/`[^`]*`/\033[1;36m&\033[0m/g' \
-				-Ee $'s/#[0-9]+/\033[1;31m&\033[0m/g'
+				-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
+				-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g'
 	)
 	echo "$the_log"
 }
@@ -91,12 +91,12 @@ function _gitstatus {
 		fi
 		print "$diffs" | head -n"$max_gitstatus_lines" |
 			sed -e 's/ => / ⟹  /' \
-				-e $'s/\\(gone\\)/\033[1;31mD     \033[0m/' \
-				-e $'s/\\(new\\)/\033[1;32mN    \033[0m/' \
-				-e $'s/(\\(new .*\\))/\033[1;34m\\1\033[0m/' \
+				-e $'s/\\(gone\\)/\033[0;31mD     \033[0m/' \
+				-e $'s/\\(new\\)/\033[0;32mN    \033[0m/' \
+				-e $'s/(\\(new .*\\))/\033[0;34m\\1\033[0m/' \
 				-e 's/ Bin /    /' \
 				-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
-				-Ee $'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g' \
+				-Ee $'s|([^/+]*)(/)|\033[0;36m\\1\033[0;33m\\2\033[0m|g' \
 				-e $'s/^\\+/\033[1;35m \033[0m /' \
 				-e $'s/ \\|/ \033[1;30m│\033[0m/'
 		_separator
