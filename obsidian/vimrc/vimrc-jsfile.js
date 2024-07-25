@@ -238,9 +238,10 @@ function toggleLowercaseTitleCase() {
 /** @param {"current-tab"|"new-tab"} where */
 function openNextLink(where) {
 	function rangeOfFirstLink(/** @type {string} */ text) {
-		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.+?\]\(.+?\)/;
+		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.*?\]\(.+?\)/;
 		//                 (    url / obsidian URI    )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
+		console.log("👾 linkMatch:", linkMatch);
 		if (!linkMatch?.index) return { start: -1, end: -1 };
 		const start = linkMatch.index;
 		const end = start + linkMatch[0].length;
@@ -258,7 +259,7 @@ function openNextLink(where) {
 		linkStart = start;
 		linkEnd = end;
 		if (end > 0) posInLine += end;
-	} while (linkEnd > 0 && linkStart < cursor.ch);
+	} while (linkEnd > 0 && linkStart <= cursor.ch);
 	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
 
 	// if not, seek forwards for a link

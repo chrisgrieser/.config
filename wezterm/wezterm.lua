@@ -3,19 +3,19 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"ChallengerDeep",
-	"Afterglow (Gogh)",
+	"Tinacious Design (Dark)",
 	"Kanagawa (Gogh)",
+	"Afterglow (Gogh)",
+	"ChallengerDeep",
 	"cyberpunk",
 	"MaterialDesignColors",
 	"duckbones",
-	"Tinacious Design (Dark)",
 }
 local lightThemes = {
-	"Ivory Light (terminal.sexy)",
-	"seoulbones_light",
-	"Solar Flare Light (base16)",
 	"Atelier Lakeside Light (base16)",
+	"seoulbones_light",
+	"Ivory Light (terminal.sexy)",
+	"Solar Flare Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
 	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
@@ -43,18 +43,18 @@ if host:find("Mother") then device = "mother" end
 local deviceConfig = {
 	home = {
 		fontSize = 26.3,
-		cellWidth = 0.92,
+		cellWidth = 0.9,
 		maxFps = 60,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
 	office = {
-		fontSize = 29,
-		cellWidth = 0.8,
+		fontSize = 27,
+		cellWidth = 0.92,
 		maxFps = 60,
 		winPos = { x = 375, y = -100, w = 1675 },
 	},
 	mother = {
-		fontSize = 26,
+		fontSize = 24,
 		cellWidth = 0.9,
 		maxFps = 40,
 		winPos = { x = 620, y = 0, w = 2745 },
@@ -121,15 +121,15 @@ local config = {
 
 	-- FONT
 	font = wt.font {
-		family = "JetBrainsMonoNL NF",
+		family = "JetBrainsMono Nerd Font",
 		weight = "Medium",
-		harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	},
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
 	font_size = deviceConfig[device].fontSize,
 	command_palette_font_size = deviceConfig[device].fontSize,
 	char_select_font_size = deviceConfig[device].fontSize, -- emoji picker
-	custom_block_glyphs = true, -- don't use wezterm's box-chars replacements, since too thin
+	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
