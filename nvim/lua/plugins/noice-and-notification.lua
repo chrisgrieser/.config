@@ -115,8 +115,7 @@ return {
 				},
 				mini = {
 					timeout = 3000,
-					zindex = 4, -- lower, so it does not cover nvim-notify (zindex 50)
-					position = { col = -3 }, -- to the left to avoid collision with scrollbar
+					zindex = 45, -- lower than nvim-notify (50), higher than satellite-scrollbar (40)
 					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
 				hover = {

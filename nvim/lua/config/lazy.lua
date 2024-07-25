@@ -30,7 +30,7 @@ require("lazy").setup("plugins", {
 	git = {
 		log = { "--since=7 days ago" }, -- Lazy log shows commits since last x days
 		cooldown = 120, -- seconds before a plugin is updated again
-	}, 
+	},
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
@@ -71,6 +71,10 @@ require("lazy").setup("plugins", {
 				desc = " Open issue/commit",
 			},
 		},
+	},
+	checker = {
+		enabled = true, -- automatically check for plugin updates
+		frequency = 60 * 60 * 24 * 7, -- = 7 days
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
 	change_detection = { enabled = true, notify = false },
@@ -214,4 +218,4 @@ local function checkForDuplicateKeys()
 	end)
 end
 
-vim.defer_fn(checkForDuplicateKeys, 4000)
+vim.defer_fn(checkForDuplicateKeys, 5000)
