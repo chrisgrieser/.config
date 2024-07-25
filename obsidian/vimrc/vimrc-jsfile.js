@@ -241,8 +241,7 @@ function openNextLink(where) {
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.*?\]\(.+?\)/;
 		//                 (    url / obsidian URI    )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
-		console.log("👾 linkMatch:", linkMatch);
-		if (!linkMatch?.index) return { start: -1, end: -1 };
+		if (!linkMatch || linkMatch.index === undefined) return { start: -1, end: -1 };
 		const start = linkMatch.index;
 		const end = start + linkMatch[0].length;
 		return { start, end };
@@ -254,16 +253,16 @@ function openNextLink(where) {
 	let linkStart;
 	let linkEnd;
 	let posInLine = 0;
-	do {
+	while (true) {
 		const { start, end } = rangeOfFirstLink(fullLine.slice(posInLine));
+		if (start === -1 || start > cursor.ch) break
 		linkStart = start;
 		linkEnd = end;
-		if (end > 0) posInLine += end;
-	} while (linkEnd > 0 && linkStart <= cursor.ch);
-	const cursorIsOnLink = cursor.ch >= linkStart && cursor.ch <= linkEnd;
+		posInLine += end;
+	} 
 
 	// if not, seek forwards for a link
-	if (!cursorIsOnLink) {
+	if (linkStart === undefined) {
 		const offset = editor.posToOffset(cursor);
 		const textAfterCursor = editor.getValue().slice(offset);
 		const linkAfterCursorOffset = rangeOfFirstLink(textAfterCursor).start;
@@ -272,7 +271,7 @@ function openNextLink(where) {
 			return;
 		}
 		const linkPosition = editor.offsetToPos(offset + linkAfterCursorOffset);
-		linkPosition.ch++;
+		linkPosition.ch++; // Obsidian's "follow-link" command is off-by-one
 		editor.setCursor(linkPosition);
 	}
 

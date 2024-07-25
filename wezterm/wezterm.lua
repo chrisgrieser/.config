@@ -31,7 +31,6 @@ local keymaps = require("wezterm-keymaps")
 local theme = require("theme-utils")
 
 local wt = require("wezterm")
-local act = wt.action
 
 --------------------------------------------------------------------------------
 -- device specific config
@@ -169,7 +168,7 @@ local config = {
 		{ -- open link at normal leftclick & auto-copy selection if not a link
 			event = { Up = { streak = 1, button = "Left" } },
 			mods = "",
-			action = act.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
+			action = wt.action.CompleteSelectionOrOpenLinkAtMouseCursor("Clipboard"),
 		},
 	},
 
