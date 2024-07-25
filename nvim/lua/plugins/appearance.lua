@@ -35,7 +35,7 @@ return {
 		event = "VeryLazy",
 		init = function() u.colorschemeMod("SatelliteQuickfix", { link = "DiagnosticSignInfo" }) end,
 		opts = {
-			winblend = 10, -- little transparency, hard to see in many themes otherwise
+			winblend = 10, -- little transparency, since hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false }, -- prevents not creating mark mappings
@@ -64,9 +64,7 @@ return {
 			pipe_table = { enabled = false }, -- sluggish on bigger files
 			latex = { enabled = false }, -- unneeded
 			sign = { enabled = false },
-			code = {
-				border = "thick",
-			},
+			code = { border = "thick" },
 			win_options = {
 				-- toggling this plugin should also toggle conceallevel
 				conceallevel = { default = 0, rendered = 3 },
