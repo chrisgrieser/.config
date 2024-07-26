@@ -2,14 +2,12 @@
 
 # CONFIG
 github_username="chrisgrieser"
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
-commit_msg="ci: consistent spelling in auto-generation workflows"
+repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="nvim"
+commit_msg="build: preserve symlinks when building \`.alfredworkflow\`"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
-	plugin_name=$(basename "$PWD" | cut -d"-" -f2-)
-	sed -i '' "s/__plugin-name__/$plugin_name/" ./.github/workflows/panvimdoc.yml
+	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -87,31 +87,30 @@ style = 'fg:yellow bold bg:black'
 [git_commit] # checkout
 style = "fg:purple bg:black bold"
 only_detached = true
-format = " [󰘬 $hash]($style)"
+format = " [ $hash]($style)"
 
 [git_branch] # branch
 only_attached = true
-symbol = "󰘬 " # 
 style = "fg:purple bg:black bold"
-format = " [$symbol$branch]($style)"
+format = " [ $branch]($style)"
 ignore_branches = ["main"]
 
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = '[ 󰘬](fg:purple bg:black bold)'
+format = '[ ](fg:purple bg:black bold)'
 
 [git_status] # files
-stashed = '[ 󰜦  $count](fg:cyan bg:black)'
+stashed = '[ 󰜦 $count](fg:cyan bg:black)'
 untracked = '[ +$count](fg:green bg:black)'
 deleted = '[ -$count](fg:red bg:black)' # these are unstaged as well as stage deletion
 modified = '[ ~$count](fg:208 bg:black)'
-renamed = '[ 󰑕  $count](fg:blue bg:black)'
-staged = '[   $count](fg:green bg:black)'
-conflicted = '[   $count](fg:red bg:black)'
-diverged = '[ 󰃻 $count](fg:red bg:black)'
-ahead = '[ 󰶣 $count](fg:cyan bg:black)'
-behind = '[ 󰶡 $count](fg:yellow bg:black)'
+renamed = '[ 󰑕 $count](fg:blue bg:black)'
+staged = '[  $count](fg:green bg:black)'
+conflicted = '[  $count](fg:red bg:black)'
+diverged = '[ 󰃻$count](fg:red bg:black)'
+ahead = '[ 󰶣$count](fg:cyan bg:black)'
+behind = '[ 󰶡$count](fg:yellow bg:black)'
 style = 'bg:black'
 format = '[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)'
 
@@ -123,7 +122,6 @@ added_style = "fg:green bg:black"
 deleted_style = "fg:red bg:black"
 format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\))'
 
-#───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
 
@@ -149,7 +147,7 @@ description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
 os = "macos"
-format = '  [󰮤  $output]($style)'
+format = ' [󰮤 $output]($style)'
 style = "bold yellow"
 
 [python]
