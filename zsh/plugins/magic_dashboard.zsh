@@ -35,8 +35,8 @@ function _gitlog {
 				-e 's/grafted/ /' \
 				-e 's/origin\//󰞶  /g' \
 				-e 's/upstream\//  /g' \
-				-e 's/HEAD/󱍞 /g' \
-				-e 's/tag: /  /g' \
+				-e 's/HEAD/󱍞/g' \
+				-e 's/tag: / /g' \
 				-e 's/ -> /   /g' \
 				-e 's/\* /· /' \
 				-Ee $'s/ (release|bump):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
