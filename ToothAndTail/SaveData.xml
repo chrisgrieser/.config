@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SaveData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SaveDataVersion>3</SaveDataVersion>
+  <CommanderWorldPosition>15.67626953125,4,22.349853515625</CommanderWorldPosition>
+  <CampaignProgress>
+    <item key="BF_m01_Complete" value="True" />
+    <item key="BF_m02_Complete" value="True" />
+    <item key="BF_m03_Complete" value="False" />
+    <item key="BF_m04_Complete" value="False" />
+    <item key="BF_m05_Complete" value="False" />
+    <item key="BF_m06_Complete" value="False" />
+    <item key="HR_m01_Complete" value="False" />
+    <item key="HR_m02_Complete" value="False" />
+    <item key="HR_m03_Complete" value="False" />
+    <item key="HR_m04_Complete" value="False" />
+    <item key="HR_m05_Complete" value="False" />
+    <item key="HR_m06_Complete" value="False" />
+    <item key="QM_m01_Complete" value="False" />
+    <item key="QM_m02_Complete" value="False" />
+    <item key="QM_m03_Complete" value="False" />
+    <item key="QM_m04_Complete" value="False" />
+    <item key="QM_m05_Complete" value="False" />
+    <item key="QM_m06_Complete" value="False" />
+    <item key="AM_m01_Complete" value="False" />
+    <item key="AM_m02_Complete" value="False" />
+    <item key="AM_m03_Complete" value="False" />
+    <item key="AM_m04_Complete" value="False" />
+    <item key="AM_m05_Complete" value="False" />
+    <item key="AM_m06_Complete" value="False" />
+    <item key="BF_m01_Complete_Heroic" value="True" />
+    <item key="BF_m02_Complete_Heroic" value="True" />
+    <item key="BF_m03_Complete_Heroic" value="False" />
+    <item key="BF_m04_Complete_Heroic" value="False" />
+    <item key="BF_m05_Complete_Heroic" value="False" />
+    <item key="BF_m06_Complete_Heroic" value="False" />
+    <item key="HR_m01_Complete_Heroic" value="False" />
+    <item key="HR_m02_Complete_Heroic" value="False" />
+    <item key="HR_m03_Complete_Heroic" value="False" />
+    <item key="HR_m04_Complete_Heroic" value="False" />
+    <item key="HR_m05_Complete_Heroic" value="False" />
+    <item key="HR_m06_Complete_Heroic" value="False" />
+    <item key="QM_m01_Complete_Heroic" value="False" />
+    <item key="QM_m02_Complete_Heroic" value="False" />
+    <item key="QM_m03_Complete_Heroic" value="False" />
+    <item key="QM_m04_Complete_Heroic" value="False" />
+    <item key="QM_m05_Complete_Heroic" value="False" />
+    <item key="QM_m06_Complete_Heroic" value="False" />
+    <item key="AM_m01_Complete_Heroic" value="False" />
+    <item key="AM_m02_Complete_Heroic" value="False" />
+    <item key="AM_m03_Complete_Heroic" value="False" />
+    <item key="AM_m04_Complete_Heroic" value="False" />
+    <item key="AM_m05_Complete_Heroic" value="False" />
+    <item key="AM_m06_Complete_Heroic" value="False" />
+  </CampaignProgress>
+  <ConversationProgress>
+    <item key="HBF_BathroomFerret" value="False" />
+    <item key="HBF_BarMoleA" value="False" />
+    <item key="HBF_OfficePosterB" value="False" />
+    <item key="HBF_Trophy" value="True" />
+    <item key="HBF_ChildDesk" value="True" />
+    <item key="HBF_DistilleryPuddle" value="False" />
+    <item key="HBF_OfficeSquirrel" value="True" />
+    <item key="HBF_DistilleryWeaponsSign" value="False" />
+    <item key="HBF_DistillerySquirrelD" value="False" />
+    <item key="HBF_DoorDistillery" value="False" />
+    <item key="HBF_DistillerySquirrelC" value="False" />
+    <item key="HBF_WeaponsMole" value="False" />
+    <item key="HBF_WeaponsSquirrel" value="False" />
+    <item key="HBF_BarSquirrelA" value="False" />
+    <item key="HBF_BarFox" value="False" />
+    <item key="HBF_BarFerretC" value="False" />
+    <item key="HBF_BarMenu" value="False" />
+    <item key="HBF_PigB" value="False" />
+    <item key="HBF_BarBoarB" value="False" />
+    <item key="HBF_PigA" value="False" />
+    <item key="HBF_OrnTap" value="False" />
+    <item key="HBF_BarSquirrelD" value="False" />
+    <item key="HBF_DoorHall" value="False" />
+    <item key="HBF_BarChalkboardA" value="False" />
+    <item key="HBF_BarSquirrelC" value="False" />
+    <item key="HBF_OfficePhotoB" value="True" />
+    <item key="HBF_WeaponsCham" value="False" />
+    <item key="HBF_BarMoleB" value="False" />
+    <item key="HBF_DistillerySquirrelE" value="False" />
+    <item key="HBF_BarFerretA" value="False" />
+    <item key="HBF_DistillerySquirrelG" value="False" />
+    <item key="HBF_DistillerySquirrelB" value="False" />
+    <item key="HBF_BarMoleC" value="False" />
+    <item key="HBF_OfficePosterA" value="False" />
+    <item key="HBF_BarSquirrelB" value="False" />
+    <item key="HBF_BathroomMole" value="False" />
+    <item key="HBF_Oath" value="False" />
+    <item key="HBF_BarFerretB" value="False" />
+    <item key="HBF_PigCheckers" value="False" />
+    <item key="HBF_PigC" value="False" />
+    <item key="HBF_PigFireplace" value="False" />
+    <item key="HBF_DoorWeapons" value="False" />
+    <item key="HBF_PigGate" value="False" />
+    <item key="HBF_DistillerySquirrelF" value="False" />
+    <item key="HBF_BathroomSign" value="False" />
+    <item key="HBF_BathroomPhoto" value="False" />
+    <item key="HBF_BarLizardA" value="False" />
+    <item key="HBF_DoorPigPen" value="False" />
+    <item key="HBF_WeaponsFerret" value="False" />
+    <item key="HBF_BarPhotoA" value="False" />
+    <item key="HBF_BarBoarA" value="False" />
+  </ConversationProgress>
+  <ActiveHub>BELLAFIDE</ActiveHub>
+</SaveData>

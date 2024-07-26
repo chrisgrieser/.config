@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OptionsData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionsFileVersion>8</OptionsFileVersion>
+  <ContentRoot>content</ContentRoot>
+  <Graphics>
+    <Display>FULLSCREEN</Display>
+    <GraphicsQuality>HIGH</GraphicsQuality>
+    <CinematicQuality>HD</CinematicQuality>
+    <Vsync>true</Vsync>
+    <ResolutionWidth>1920</ResolutionWidth>
+    <ResolutionHeight>1080</ResolutionHeight>
+    <MapFogOfWarTransparency>0.15</MapFogOfWarTransparency>
+    <MapFogOfWarActive>false</MapFogOfWarActive>
+  </Graphics>
+  <Sound>
+    <VolumeMusic>0.3</VolumeMusic>
+    <VolumeSound>0.5</VolumeSound>
+    <MuteLobbyAmbientSounds>false</MuteLobbyAmbientSounds>
+  </Sound>
+  <Other>
+    <ModDirectories>
+      <string>content</string>
+    </ModDirectories>
+    <DesyncCheckInterval>400</DesyncCheckInterval>
+    <ControllerRumble>true</ControllerRumble>
+    <ScreenShake>true</ScreenShake>
+    <Blood>true</Blood>
+    <AutosaveReplays>false</AutosaveReplays>
+    <Controller1SharesKeyboard>true</Controller1SharesKeyboard>
+    <EnableCheats>false</EnableCheats>
+    <FirstTimeSeeingArena>true</FirstTimeSeeingArena>
+    <UsePS4Buttons>false</UsePS4Buttons>
+    <HideUnitPortraits>false</HideUnitPortraits>
+    <ActiveFlag />
+    <LanguageOverride />
+    <Subtitles>true</Subtitles>
+    <StreamerMode>false</StreamerMode>
+    <StoryModeMapType>Standard</StoryModeMapType>
+    <StoryModeDifficulty>1</StoryModeDifficulty>
+    <LockModUpload>false</LockModUpload>
+    <UseMods>true</UseMods>
+    <RevealVisualization>false</RevealVisualization>
+    <RichReplayData>true</RichReplayData>
+  </Other>
+  <Network>
+    <Region>Europe</Region>
+    <OfflineInputDelay>0</OfflineInputDelay>
+    <InputSendFrequency>1</InputSendFrequency>
+    <MaxInputsToSendPerPlayer>20</MaxInputsToSendPerPlayer>
+    <SendUnreliableNoDelay>false</SendUnreliableNoDelay>
+    <PreviousHoursShownOnLB>1</PreviousHoursShownOnLB>
+    <SilentPlayerIDs />
+    <InputDelay>6</InputDelay>
+    <IgnoreBuildNumber>false</IgnoreBuildNumber>
+  </Network>
+  <Debugging>
+    <LoggingLevel>INFO</LoggingLevel>
+    <LogCategories>
+      <Categories>ArenaEvents</Categories>
+      <Categories>SteamAPI</Categories>
+      <Categories>NetworkInterfaceLayer</Categories>
+      <Categories>CustomLobbyEvents</Categories>
+      <Categories>FMOD</Categories>
+    </LogCategories>
+    <ShowDeveloperText>false</ShowDeveloperText>
+    <FakeRedPlugs>false</FakeRedPlugs>
+    <UseWarpZone>false</UseWarpZone>
+    <GetAssetHash>false</GetAssetHash>
+    <SaveMinimapKey xsi:nil="true" />
+    <BotDeckOverride />
+  </Debugging>
+  <Bindings>
+    <Gamepad>
+      <item key="BuildStructure" value="A" />
+      <item key="SellStructure" value="B" />
+      <item key="WarpHome" value="X" />
+      <item key="RallyGroup1" value="LeftTrigger" />
+      <item key="RallyGroup2" value="RightTrigger" />
+      <item key="MoveUp" value="LeftThumbstickUp" />
+      <item key="MoveDown" value="LeftThumbstickDown" />
+      <item key="MoveRight" value="LeftThumbstickRight" />
+      <item key="MoveLeft" value="LeftThumbstickLeft" />
+      <item key="SelectStructureLeft" value="DPadLeft" />
+      <item key="SelectStructureRight" value="DPadRight" />
+      <item key="SelectStructureLeftAlt" value="LeftShoulder" />
+      <item key="SelectStructureRightAlt" value="RightShoulder" />
+      <item key="Pause" value="Start" />
+      <item key="ShowHelp" value="Back" />
+      <item key="ShowMissionHint" value="Y" />
+      <item key="ObserverSwitchFocus" value="A" />
+      <item key="ObserverToggleFocusLock" value="B" />
+      <item key="ObserverToggleVisibility" value="X" />
+      <item key="ObserverIncrementInfoView" value="RightShoulder" />
+      <item key="ReactionChatUp" value="DPadUp" />
+      <item key="ReactionChatLeft" value="DPadLeft" />
+      <item key="ReactionChatRight" value="DPadRight" />
+      <item key="ReactionChatDown" value="DPadDown" />
+    </Gamepad>
+    <Keyboard>
+      <item key="MoveUp" value="W" />
+      <item key="MoveDown" value="S" />
+      <item key="MoveRight" value="D" />
+      <item key="MoveLeft" value="A" />
+      <item key="MoveUpAlt" value="Up" />
+      <item key="MoveDownAlt" value="Down" />
+      <item key="MoveRightAlt" value="Right" />
+      <item key="MoveLeftAlt" value="Left" />
+      <item key="SelectStructureLeft" value="Q" />
+      <item key="SelectStructureRight" value="E" />
+      <item key="BuildStructure" value="Space" />
+      <item key="SellStructure" value="LeftShift" />
+      <item key="WarpHome" value="R" />
+      <item key="Pause" value="Escape" />
+      <item key="ShowHelp" value="F1" />
+      <item key="ShowMissionHint" value="Tab" />
+      <item key="ZoomIn" value="OemCloseBrackets" />
+      <item key="ZoomOut" value="OemOpenBrackets" />
+      <item key="ObserverSwitchFocus" value="Space" />
+      <item key="ObserverToggleFocusLock" value="Back" />
+      <item key="ObserverToggleVisibility" value="V" />
+      <item key="ObserverIncrementInfoView" value="Y" />
+      <item key="SelectUnit1" value="D1" />
+      <item key="SelectUnit2" value="D2" />
+      <item key="SelectUnit3" value="D3" />
+      <item key="SelectUnit4" value="D4" />
+      <item key="SelectUnit5" value="D5" />
+      <item key="SelectUnit6" value="D6" />
+      <item key="SelectUnit7" value="D7" />
+      <item key="SelectUnit8" value="D8" />
+      <item key="SelectUnit9" value="D9" />
+      <item key="SelectUnit0" value="D0" />
+      <item key="ReactionChatUp" value="Z" />
+      <item key="ReactionChatLeft" value="X" />
+      <item key="ReactionChatRight" value="C" />
+      <item key="ReactionChatDown" value="V" />
+    </Keyboard>
+    <Mouse>
+      <item key="RallyGroup1" value="LeftButton" />
+      <item key="RallyGroup2" value="RightButton" />
+      <item key="SelectStructureLeft" value="ScrollUp" />
+      <item key="SelectStructureRight" value="ScrollDown" />
+    </Mouse>
+  </Bindings>
+</OptionsData>

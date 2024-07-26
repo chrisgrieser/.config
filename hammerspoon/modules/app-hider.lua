@@ -16,10 +16,10 @@ local wf = hs.window.filter
 
 local config = {
 	transBgApps = env.transBgApps,
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "Steam" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA" },
+	disableHidingWhileActive = { "Steam" },
 	appsNotToHide = {
 		"Espanso",
-		"Steam",
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
@@ -31,6 +31,7 @@ local config = {
 
 -- unhide all apps
 local function unHideAll()
+	if u.appRunning(config.disableHidingWhileActive) then return end
 	local wins = hs.window.allWindows()
 	for _, win in pairs(wins) do
 		local app = win:application()
@@ -41,17 +42,9 @@ end
 ---@param appObj hs.application the app not to hide
 local function hideOthers(appObj)
 	-- GUARD
-	if
-		not appObj
-		or not appObj:mainWindow() -- windowless app
-		or not appObj:isFrontmost() -- check if win switched in meantime
-	then
-		return
-	end
-	local thisWin = appObj:mainWindow()
-	local thisAppName = appObj:name()
-
-	-- GUARD current window not being big enough
+	if u.appRunning(config.disableHidingWhileActive) then return end
+	local thisWin = appObj and appObj:mainWindow()
+	if not thisWin or not appObj:isFrontmost() then return end
 	if not (wu.checkSize(thisWin, wu.pseudoMax) or wu.checkSize(thisWin, wu.maximized)) then
 		return
 	end
@@ -63,7 +56,7 @@ local function hideOthers(appObj)
 			app
 			and not (app:findWindow("Picture in Picture"))
 			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
-			and not (app:name() == thisAppName)
+			and not (app:name() == appObj:name())
 		then
 			app:hide()
 		end
