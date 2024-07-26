@@ -75,7 +75,7 @@ unmap("c", /google/); // Grepper
 
 // for BetterTouchTool Mappings
 unmap("f", /crunchyroll|animeflix/);
-unmap("N", /crunchyroll|animeflix/);
+unmap("N", /crunchyroll|animeflix|youtube/);
 
 mapkey(
 	"gu",
