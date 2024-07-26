@@ -25,8 +25,8 @@ return {
 				show_end = false,
 			},
 			indent = {
-				char = { "│", "╎" },
-				tab_char = { "│", "╎" },
+				char = { "│", "┊" },
+				tab_char = { "│", "┊" },
 			},
 		},
 	},
@@ -94,7 +94,7 @@ return {
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
 					ccc.picker.css_name,
-					ccc.picker.ansi_escape({}, { meaning1 = "bold" }),
+					ccc.picker.ansi_escape({ blue = "#3165ff" }, { meaning1 = "bold" }),
 				},
 				alpha_show = "hide", -- needed when highlighter.lsp is set to true
 				recognize = { output = true }, -- automatically recognize color format under cursor
