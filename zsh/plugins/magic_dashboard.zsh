@@ -58,8 +58,8 @@ function _list_files_here {
 			--git-ignore --ignore-glob=".DS_Store|Icon?|.localized" \
 			--sort=age --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
-		# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
 	)
+	# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
@@ -72,7 +72,7 @@ function _list_files_here {
 
 function _gitstatus {
 	# so git picks up new files
-	git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &>/dev/null
+	git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &> /dev/null
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		local max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}

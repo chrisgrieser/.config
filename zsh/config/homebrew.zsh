@@ -46,7 +46,6 @@ function _dump() {
 		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
 		> "$dump_path/browser-extensions.txt"
 
-	echo
 	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
 }
 
@@ -77,7 +76,6 @@ function update() {
 
 	_print-section "Mac App Store"
 	# mas upgrade
-
 	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
 	local mas_updates
 	mas_updates=$(mas outdated | grep -v "Highlights")
