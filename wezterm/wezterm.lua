@@ -118,7 +118,7 @@ local config = {
 
 	-- FONT
 	font = wt.font {
-		family = "JetBrainsMono Nerd Font",
+		family = "JetBrainsMonoNL Nerd Font",
 		weight = "Medium",
 	},
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
