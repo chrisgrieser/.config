@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.pdf-summarizer</string>
+	<key>connections</key>
+	<dict>
+		<key>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D361B88F-34F2-4AA4-8855-EF65D1040682</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5CC96E33-CF43-44D2-8FC0-3EB4D7101FFD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AFC82776-97B5-46CE-9205-DF67E1780996</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string>Get summaries of your PDFs via ChatPDF with just one hotkey.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>PDF Summarizer</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/chat-pdf-summary.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>D361B88F-34F2-4AA4-8855-EF65D1040682</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+				<key>name</key>
+				<string>Summary of PDF</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>AFC82776-97B5-46CE-9205-DF67E1780996</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>5CC96E33-CF43-44D2-8FC0-3EB4D7101FFD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Get ChatPDF API key
+The ChatPDF API key is (currently) free for 5000 PDF pages / 500 requests per month.
+
+1. Go to https://www.chatpdf.com/
+2. Scroll to the very bottom of the page.
+3. In the footer, click `My Account`. You will be prompted to create an account if you do not have one yet.
+4. In `My Account`, expand the `Developer` settings. You will find your API key there:
+
+![how to find the API key](./how-to-get-api-key.png)
+
+---
+
+**Advanced Users**
+Instead of entering the API key directly, you can also enter ".zshenv" into the API key field. The workflow will then use the key exported as `CHATPDF_API_KEY` in your " `.zshenv`.
+
+---
+
+## Cite this software project
+
+If you want to mention this software project in an academic publication, please cite it as:
+
+`Grieser, C. (2023). PDF summarizer for Alfred [Computer software]. https://github.com/chrisgrieser/pdf-summarizer-alfred`
+  
+For other citation styles, use the following metadata:
+- [Citation File Format](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
+- [BibTeX](https://github.com/chrisgrieser/pdf-summarizer-alfred/blob/main/CITATION.cff)
+
+## Created by
+[Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>2521CCD5-BF7A-401F-84A7-7EBD1562E94C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>5CC96E33-CF43-44D2-8FC0-3EB4D7101FFD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>170</real>
+		</dict>
+		<key>AFC82776-97B5-46CE-9205-DF67E1780996</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+		<key>D361B88F-34F2-4AA4-8855-EF65D1040682</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>375</real>
+			<key>ypos</key>
+			<real>40</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>ChatPDF API Key</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>CHATPDF_API_KEY</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Copy to Clipboard</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Output</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>copy_to_clipboard</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Show Large Type</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>alfred_large_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Save as file</string>
+			</dict>
+			<key>description</key>
+			<string>The file will be saved in the same directory as the input PDF.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>save_as_file</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Summarize the PDF in 5 bullet points. Strive for variety. Ground your summary in the facts of the paper, and include references to specific pages in the paper. 
+
+Immediately start the summary, do not write anything else.</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Prompt</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>the_prompt</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>1.1.1</string>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

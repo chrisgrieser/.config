@@ -1,0 +1,6 @@
+### Changelog
+- **improv**: nicer notification icons
+- **build(changelog)**: fix bold not being applied to all cc-keywords
+- **build**: fix release action checkout depth
+- **build**: improved release action
+- **chore**: delete obsolete files

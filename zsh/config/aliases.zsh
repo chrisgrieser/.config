@@ -1,5 +1,5 @@
 # SHORTHANDS
-alias q=' exit'     # INFO leading space to ignore it in history due to `HIST_IGNORE_SPACE`
+alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
@@ -12,6 +12,7 @@ alias cp='cp -vi'
 alias rm='rm -I'
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
+alias zip='zip --recurse-paths --symlinks'
 alias l='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest'
 
