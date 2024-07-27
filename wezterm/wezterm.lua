@@ -11,7 +11,6 @@ local darkThemes = {
 	"duckbones",
 }
 local lightThemes = {
-	"Atelier Lakeside Light (base16)",
 	"seoulbones_light",
 	"Ivory Light (terminal.sexy)",
 	"Solar Flare Light (base16)",

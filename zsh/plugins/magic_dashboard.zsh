@@ -90,7 +90,7 @@ function _gitstatus {
 			diffs="$staged"
 		fi
 		print "$diffs" | head -n"$max_gitstatus_lines" |
-			sed -e 's/ => / ⟹  /' \
+			sed -e 's/ => /   /' \
 				-e $'s/\\(gone\\)/\033[0;31mD     \033[0m/' \
 				-e $'s/\\(new\\)/\033[0;32mN    \033[0m/' \
 				-e $'s/(\\(new .*\\))/\033[0;34m\\1\033[0m/' \
