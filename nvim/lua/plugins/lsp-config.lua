@@ -134,7 +134,6 @@ serverConfigs.lua_ls = {
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
-				globals = { "vim" }, -- when contributing to nvim plugins missing a `.luarc.json`
 				disable = { "trailing-space" }, -- formatter already handles that
 			},
 			hint = { -- inlay hints

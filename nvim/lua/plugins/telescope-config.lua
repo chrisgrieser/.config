@@ -110,11 +110,22 @@ local function telescopeConfig()
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
+					vim.iter({
+						vim.g.localRepos,
+						vim.fs.normalize("~/.config"),
+						os.getenv("HOME") or "",
+						vim.fn.stdpath("data") .. "/lazy",
+					}):each(function(root) path = path:gsub(vim.pesc(root), "") end)
+
 					local project = path
 						:gsub(vim.pesc(vim.g.localRepos), "")
 						:gsub(vim.pesc(vim.fs.normalize("~/.config")), "")
 						:gsub(vim.pesc(os.getenv("HOME") or ""), "")
-						:match("/(.-)/") -- highest parent
+						:gsub(vim.pesc(os.getenv("HOME") or ""), "")
+						-- /Users/chrisgrieser/.local/share/nvim/lazy/nvim-tinygit/lua/tinygit/shared/backdrop.lua
+						:match(
+							"/(.-)/"
+						) -- highest parent
 						or ""
 					local tail = vim.fs.basename(path)
 					local out = tail .. "  " .. project
