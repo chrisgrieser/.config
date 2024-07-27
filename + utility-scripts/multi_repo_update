@@ -4,7 +4,7 @@
 github_username="chrisgrieser"
 repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
-commit_msg="build: exclude config files"
+commit_msg="build: exclude more config files"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
@@ -60,10 +60,14 @@ while read -r repo; do
 	fi
 
 	cd ..
-	# rm -rf "$repo"
+	rm -rf "$repo"
 	((i++))
 done <<< "$repos_to_update"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 if [[ $errors -gt 0 ]]; then
 	print "\e[1;31m$errors errors occurred.\e[0m"
 fi
+
+"$ZDOTDIR/notificator" --title "🌐" --message "Multi-repo update finished." --sound "Blow"

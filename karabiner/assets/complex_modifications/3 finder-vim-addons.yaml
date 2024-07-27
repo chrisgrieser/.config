@@ -99,11 +99,6 @@ rules:
         to:
           - shell_command: |
               selection=$(osascript -e 'tell application "Finder" to return POSIX path of (item 1 of (get selection) as text)')
-              ext=$(echo "$selection" | rev | cut -d. -f1 | rev) # bash expansion does not work in karabiner
-              if [[ "$ext" == "zip" ]]; then
-                open -a "Betterzip" "$selection"
-              else
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "⚠️ File not a zip file."
-              fi
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *is-German-keyboard]
+              open -a "Betterzip" "$selection"
+        conditions:
+          [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open, *is-German-keyboard]

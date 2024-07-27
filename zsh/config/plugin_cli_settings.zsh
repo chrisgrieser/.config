@@ -20,11 +20,10 @@ export LS_COLORS="di=0;34:ln=3;35:or=7;31:$file_colors"
 export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
 export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && export EZA_ICON_SPACING=2
+export EZA_ICON_SPACING=1
 
 export GREP_OPTIONS="--color=auto"
-# macOS' `grep` does not support `GREP_COLORS`
-export GREP_COLOR='01;35' # matches in bold+magenta
+export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
 
 #───────────────────────────────────────────────────────────────────────────────
 

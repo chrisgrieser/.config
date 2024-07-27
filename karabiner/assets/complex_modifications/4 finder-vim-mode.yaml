@@ -862,7 +862,7 @@ rules:
               if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
                 cd "$SEL"
                 foldername=$(basename "$SEL")
-                zip -r "../$foldername.zip" .
+                zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
@@ -886,7 +886,7 @@ rules:
               if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
                 cd "$SEL"
                 foldername=$(basename "$SEL")
-                zip -r "../$foldername.zip" .
+                zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
