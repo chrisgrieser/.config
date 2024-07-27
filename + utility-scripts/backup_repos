@@ -43,9 +43,9 @@ cd "$backup_location" || return 1
 # shellcheck disable=2012
 ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
 
+rm -rf "$backup_location/temp"
 #───────────────────────────────────────────────────────────────────────────────
 
-# confirm and remove leftover folders
-rm -rf "$backup_location/temp"
+# notify
 print "\e[1;32mArchived $repos_count repos.\e[0m"
-open -R "$backup_location/$archive_name"
+"$ZDOTDIR/notificator" --title "🌐Repo Backup" --message "$repos_count repos archived." --sound "Blow"
