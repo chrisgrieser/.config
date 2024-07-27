@@ -2,8 +2,9 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyLocallyAvailable = vim.uv.fs_stat(lazypath) ~= nil
 if not lazyLocallyAvailable then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }):wait()
+	local repo = "https://github.com/folke/lazy.nvim.git"
+	local out =
+		vim.system({ "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }):wait()
 	if out.code ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -19,10 +20,11 @@ vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 
 -- DOCS https://lazy.folke.io/configuration
-require("lazy").setup("plugins", {
+require("lazy").setup {
+	spec = { import = "plugins" }, -- folder where plugin specs are stored
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-	dev = {
+	dev = { ---@diagnostic disable-line: assign-type-mismatch wrong diagnostic
 		patterns = { "nvim" }, -- for repos matching `patterns` (`nvim` = all nvim repos)…
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -90,7 +92,7 @@ require("lazy").setup("plugins", {
 			},
 		},
 	},
-})
+}
 
 -- KEYMAPS FOR LAZY UI
 -- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
