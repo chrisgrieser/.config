@@ -70,4 +70,4 @@ if [[ $errors -gt 0 ]]; then
 	print "\e[1;31m$errors errors occurred.\e[0m"
 fi
 
-"$ZDOTDIR/notificator" --title "🌐" --message "Multi-repo update finished." --sound "Blow"
+"$ZDOTDIR/notificator" --title "🌐Multi-repo update" --message "Update finished." --sound "Blow"
