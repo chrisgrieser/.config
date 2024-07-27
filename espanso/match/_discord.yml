@@ -24,9 +24,10 @@ matches:
   # send silent (no ping) messages
   - trigger: "zzz"
     replace: "@silent "
-  # gif
-  - trigger: "ggg"
-    replace: "/gif "
   # small text
   - trigger: "!small"
     replace: "-# "
+  # gif
+  - trigger: "ggg"
+    replace: "/gif "
+

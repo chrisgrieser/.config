@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   # Greetings
-  - triggers: ["!mail", "!sm"]
+  - trigger: "!mail"
     replace: "Dear sir or madam,\n\n"
   # Signatures
   - regex: "\\bvvv"
@@ -11,6 +11,13 @@ matches:
 
       Viele Grüße
       Chris
+  - trigger: "mfg"
+    replace: |-
+      $|$
+
+      Mit freundlichen Grüßen
+      Christopher Grieser
+    label: Mit freundlichen Grüßen
   - triggers: ["!mail", "!dh"]
     replace: |
       Sehr geehrte Damen und Herren,
@@ -26,13 +33,6 @@ matches:
       Viele Grüße
       Chris Grieser
     label: Viele Grüße (voller Name)
-  - triggers: ["mfg", "!mail"]
-    replace: |-
-      $|$
-
-      Mit freundlichen Grüßen
-      Christopher Grieser
-    label: Mit freundlichen Grüßen
   - trigger: "!mail"
     replace: |-
       $|$
@@ -40,10 +40,3 @@ matches:
       Kind Regards
       Chris Grieser
     label: Kind Regards
-  - trigger: "!mail"
-    replace: |-
-      $|$
-
-      Best
-      Chris
-    label: Best
