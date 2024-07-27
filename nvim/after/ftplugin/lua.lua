@@ -1,7 +1,6 @@
 local u = require("config.utils")
 local keymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
-local luaFtPluginGroup = vim.api.nvim_create_augroup("lua-ftplugin", { clear = true })
 --------------------------------------------------------------------------------
 
 -- habits from writing too much in other languages
@@ -12,25 +11,6 @@ abbr("!=", "~=")
 abbr("!==", "~=")
 abbr("=~", "~=") -- shell uses `=~`
 abbr("===", "==")
-
---------------------------------------------------------------------------------
-
-keymap(
-	"n",
-	"<leader>ee",
-	function() require("funcs.lua-eval").luaEvalLine() end,
-	{ desc = " Eval Line" }
-)
-
--- INFO needs `expr` and rhs must not be wapped in a function
-keymap(
-	"n",
-	"<leader>e",
-	require("funcs.lua-eval").luaevalOperator,
-	{ expr = true, desc = " Eval Operator" }
-)
-
-keymap("n", "<leader>E", "<leader>e$", { remap = true, desc = " Eval to EoL" })
 
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
@@ -76,7 +56,7 @@ end, { desc = " require module from cwd" })
 -- auto-comma for tables
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
 	buffer = 0,
-	group = luaFtPluginGroup,
+	group = vim.api.nvim_create_augroup("lua-autocomma", { clear = true }),
 	callback = function()
 		local node = vim.treesitter.get_node()
 		if not (node and node:type() == "table_constructor") then return end

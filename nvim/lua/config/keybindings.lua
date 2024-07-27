@@ -216,14 +216,14 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 
 -- stylua: ignore start
-keymap("n", "<BS>", function() require("funcs.magnet").bufferByLastUsed("prev") end, { desc = "󰽙 Prev Buffer" })
-keymap("n", "<S-BS>", function() require("funcs.magnet").bufferByLastUsed("next") end, { desc = "󰽙 Next Buffer" })
+keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
+keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 keymap({ "n", "x" }, "<CR>", function() require("funcs.magnet").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x" }, "<D-CR>", function() require("funcs.magnet").gotoChangedFiles() end, { desc = "󰊢 Goto Changed File" })
 -- stylua: ignore end
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
-	vim.cmd.update { mods = { silent = true } }
+	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bdelete) end
@@ -231,7 +231,7 @@ end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
 	vim.ui.input({ prompt = " Extension for Scratch File" }, function(ext)
-		if not ext then return end
+		if not ext or ext == "" then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
 		vim.cmd.edit(filepath)
 		vim.cmd.write(filepath)
@@ -290,7 +290,7 @@ end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		-- `z` is used as temporary register for keymaps, thus needs to be ignored
-		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" and cursorPreYank then
+		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" then
 			vim.api.nvim_win_set_cursor(0, cursorPreYank)
 		end
 	end,
