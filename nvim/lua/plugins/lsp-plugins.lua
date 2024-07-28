@@ -97,7 +97,7 @@ return {
 			text_format = function(symbol)
 				if not symbol.references or symbol.references == 0 then return end
 				if symbol.references < 2 and vim.bo.filetype == "css" then return end
-				if symbol.references > 100 then return "" end
+				if symbol.references > 99 then return "" end
 
 				local refs = tostring(symbol.references)
 				local altDigits =

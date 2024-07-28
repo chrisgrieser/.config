@@ -76,7 +76,7 @@ function M.justRecipe(first)
 		run(recipes[1])
 	else
 		if config.skipFirstInSelection and #recipes > 1 then table.remove(recipes, 1) end
-		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "just-recipes" }, run)
+		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 	end
 end
 
