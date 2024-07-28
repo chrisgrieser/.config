@@ -36,17 +36,11 @@ function _print-section() {
 }
 
 function _dump() {
-	local dump_path="$HOME/.config/.installed-apps-and-packages"
+	local brewfile_path="$HOME/.config/.installed-apps-and-packages"
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-	brew bundle dump --force --file "$dump_path/Brewfile_$device_name.txt"
-
-	# shellcheck disable=2010
-	ls "$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default/Extensions/" |
-		grep -v "Temp" | sed "s|^|https://chrome.google.com/webstore/detail/|" \
-		> "$dump_path/browser-extensions.txt"
-
-	print "\e[1;38;5;247mBrewfile & browser-extensions-list saved at \"$(basename "$dump_path")\".\e[0m"
+	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
+	print "\e[0;38;5;247mBrewfile saved at \"$(basename "$brewfile_path")\".\e[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

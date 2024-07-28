@@ -114,6 +114,10 @@
     "body": "·",
     "prefix": "middle dot"
   },
+  "no (❌)": {
+    "body": "❌ ",
+    "prefix": "no (❌)"
+  },
   "nonbreaking space": {
     "body": "&nbsp;",
     "prefix": "nonbreaking space"
@@ -144,5 +148,9 @@
   "vim modeline": {
     "body": "$LINE_COMMENT vim: set ${1:option}=${2:value}:",
     "prefix": "vim modeline"
+  },
+  "yes (✅)": {
+    "body": "✅ ",
+    "prefix": "yes (✅)"
   }
 }
