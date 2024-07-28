@@ -71,11 +71,14 @@ return {
 		},
 	},
 	{ -- signature hints
-		"ray-x/lsp_signature.nvim",
+		-- "ray-x/lsp_signature.nvim",
+		"chrisgrieser/lsp_signature.nvim", -- PENDING https://github.com/ray-x/lsp_signature.nvim/pull/334
+		branch = "patch-1",
+
 		event = "BufReadPre",
 		opts = {
-			hint_prefix = "󰏪 ",
-			hint_scheme = "@variable.parameter", -- highlight group
+			hint_prefix = " 󰏪 ",
+			hint_scheme = "Todo", -- highlight group, alt: @variable.parameter
 			floating_window = false,
 			always_trigger = true,
 		},

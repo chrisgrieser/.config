@@ -29,7 +29,7 @@ end
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("InsertEnter", {
-	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
+	callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,

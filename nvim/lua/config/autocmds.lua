@@ -112,7 +112,7 @@ local function searchCountIndicator(mode)
 	local text = (" %d/%d "):format(count.current, count.total)
 	local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth))
 	local lineFull = #line + signColumnPlusScrollbarWidth >= vim.api.nvim_win_get_width(0)
-	local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0), "None" }
+	local margin = { (" "):rep(lineFull and signColumnPlusScrollbarWidth or 0) }
 
 	vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
 		virt_text = { { text, "IncSearch" }, margin },
