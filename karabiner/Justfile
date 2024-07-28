@@ -1,2 +1,7 @@
-@reload_karabiner:
+set quiet := true
+
+reload_karabiner:
     osascript -l JavaScript ./build-karabiner-config.js
+
+browse_docs:
+    open "https://karabiner-elements.pqrs.org/docs/"

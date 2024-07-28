@@ -28,7 +28,7 @@ rules:
               - BetterTouchTool
               - Hammerspoon
               - "[Nn]eovide"
-              - "[Ff]actorio"
+              - "Terra Nil"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
