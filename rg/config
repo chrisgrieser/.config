@@ -5,7 +5,7 @@
 --ignore-file=/Users/chrisgrieser/.config/rg/ignore
 
 # shorten long lines
---max-columns=85
+--max-columns=200
 --max-columns-preview
 
 # shortened display

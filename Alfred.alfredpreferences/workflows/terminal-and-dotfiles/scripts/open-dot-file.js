@@ -27,7 +27,7 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		.doShellScript(
-			`${expPath} ; rg --files --hidden --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
+			`${expPath} ; rg --no-config --files --hidden --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
 		)
 		.split("\r")
 		.map((absPath) => {
@@ -109,9 +109,5 @@ function run() {
 
 	return JSON.stringify({
 		items: [...fileArray, ...folderArray],
-		cache: {
-			seconds: 60, // quick for newly created files
-			loosereload: true,
-		},
 	});
 }
