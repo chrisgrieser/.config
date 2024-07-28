@@ -6,7 +6,6 @@ logpath_on_mac="$DATA_DIR/Backups/backups-to-external-drives.log"
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE VOLUME
 
-echo "Searching for Volume… "
 spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 for i in {1..200}; do
 	volume_name="$(df | grep --only-matching "\s/Volumes/.*" | cut -c2-)"
@@ -17,11 +16,11 @@ for i in {1..200}; do
 		break
 	fi
 	pos=$((i % ${#spinner}))
-	printf "\r%s" "${spinner:$pos:1}"
+	printf "\rSearching for volume… %s" "${spinner:$pos:1}"
 	sleep 0.2
 done
-echo
 
+echo
 if [[ -z "$volume_name" ]]; then
 	print "\e[1;33mTimeout, no volume found.\e[0m"
 	return 1
@@ -64,8 +63,6 @@ function backup() {
 #───────────────────────────────────────────────────────────────────────────────
 # CONFIG CONTENT TO BACKUP
 
-# - WARN each command has to sync to individual folders, since otherwise the
-# `--delete` option will override the previous contents
 # - WARN paths NEEDS TO END WITH A SLASH to sync folder contents
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 backup "$HOME/RomComs/" ./Homefolder/RomComs
