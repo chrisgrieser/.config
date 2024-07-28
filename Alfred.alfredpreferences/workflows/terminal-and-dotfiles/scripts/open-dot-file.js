@@ -26,9 +26,11 @@ function run() {
 
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
-		.doShellScript(
-			`${expPath} ; rg --no-config --files --hidden --sortr=modified --ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}"`,
-		)
+		// `--follow` errors on broken symlinks, so we need to exit with `true`
+		.doShellScript(`${expPath} ; rg
+			--no-config --files --hidden --follow --sortr=modified \
+			--ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}" || true
+		`)
 		.split("\r")
 		.map((absPath) => {
 			const name = absPath.split("/").pop();
@@ -84,11 +86,12 @@ function run() {
 
 	/** @type{AlfredItem|{}[]} */
 	const folderArray = app
-		.doShellScript(
-			`find "${dotfileFolder}" -type d \
-			-not -path "**/.git/*" -not -path "**/Alfred.alfredpreferences/*" \
-			-not -path "**/Spoons/*" -not -path "**/mackup/backups/*" `,
-		)
+		.doShellScript(`
+			find "${dotfileFolder}" -type d \
+			-not -path "**/.git/*" \
+			-not -path "**/Alfred.alfredpreferences/*" \
+			-not -path "**/Spoons/*"
+		`)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
 			const name = absPath.split("/").pop();
@@ -109,5 +112,9 @@ function run() {
 
 	return JSON.stringify({
 		items: [...fileArray, ...folderArray],
+		cache: {
+			seconds: 15, // quick for newly created files
+			loosereload: true,
+		},
 	});
 }

@@ -75,6 +75,7 @@ local function telescopeConfig()
 				"--sortr=modified", -- performance cost as it disables multithreaded
 				"--vimgrep",
 				"--smart-case",
+				"--follow",
 				"--trim",
 				("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
 			},
@@ -94,6 +95,7 @@ local function telescopeConfig()
 				find_command = {
 					"rg",
 					"--no-config",
+					"--follow",
 					"--files",
 					"--sortr=modified",
 					("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
