@@ -15,7 +15,12 @@ keymap("n", "<leader>pd", function()
 end, { desc = " Open Package Directory" })
 
 --------------------------------------------------------------------------------
--- INSPECT
+-- CMDLINE
+
+vim.api.nvim_create_user_command("E", function(ctx)
+	local output = vim.fn.luaeval(ctx.args)
+	u.notify("Cmdline", vim.inspect(output), "trace")
+end, { desc = "execute cmdline (better `:lua=`)", nargs = "?" })
 
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
@@ -23,6 +28,8 @@ keymap("n", "<leader>lc", function()
 	u.copyAndNotify(lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
+--------------------------------------------------------------------------------
+-- INSPECT
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 

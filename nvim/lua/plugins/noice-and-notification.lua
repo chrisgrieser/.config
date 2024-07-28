@@ -77,6 +77,7 @@ return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
 		event = "UIEnter",
+		version = "4.4.7", -- PENDING https://github.com/folke/noice.nvim/issues/923
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {

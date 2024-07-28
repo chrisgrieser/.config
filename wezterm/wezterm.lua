@@ -11,10 +11,10 @@ local darkThemes = {
 	"duckbones",
 }
 local lightThemes = {
-	"seoulbones_light",
-	"Ivory Light (terminal.sexy)",
-	"Solar Flare Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
+	"Ivory Light (terminal.sexy)",
+	"seoulbones_light",
+	"Solar Flare Light (base16)",
 	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
 }
@@ -125,7 +125,6 @@ local config = {
 	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
 	font_size = deviceConfig[device].fontSize,
 	command_palette_font_size = deviceConfig[device].fontSize,
-	char_select_font_size = deviceConfig[device].fontSize, -- emoji picker
 	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
 
 	-- Appearance
