@@ -177,7 +177,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE
-keymap("c", "<C-u>", "<C-e><C-u>", { desc = " Kill whole line" }) 
+keymap("c", "<C-u>", "<C-e><C-u>", { desc = " Kill whole line" })
 keymap("c", "<D-v>", '<C-r>"', { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
@@ -326,3 +326,4 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Close" })
 	end,
 })
+--------------------------------------------------------------------------------

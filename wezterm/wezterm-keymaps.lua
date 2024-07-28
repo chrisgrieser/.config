@@ -1,14 +1,14 @@
+-- DOCS
 -- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 -- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 
+local M = {}
 local wt = require("wezterm")
 local act = wt.action
 local actFun = wt.action_callback
 local theme = require("theme-utils")
-
 --------------------------------------------------------------------------------
 
-local M = {}
 
 M.keys = {
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
@@ -20,7 +20,6 @@ M.keys = {
 	{ key = "-", mods = "CMD", action = act.DecreaseFontSize },
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
-	{ key = "ö", mods = "CMD", action = act.CharSelect },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
 	-- INFO using the mapping from the terminal_keybindings.zsh
@@ -49,8 +48,8 @@ M.keys = {
 			end
 		end),
 	},
-	-- HACK close next pane/tab (CAVEAT: due to race condition, impossible to close all others)
 	{
+		-- HACK close next pane/tab (CAVEAT: due to race condition, impossible to close all others?)
 		key = "w",
 		mods = "CMD|SHIFT",
 		action = wt.action_callback(function(win, pane)
