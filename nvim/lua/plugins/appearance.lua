@@ -163,7 +163,7 @@ return {
 					},
 				},
 				get_config = function(opts)
-					local useBuiltin = { "just-recipes", "codeaction", "rule_selection" }
+					local useBuiltin = { "plain", "codeaction", "rule_selection" }
 					if vim.tbl_contains(useBuiltin, opts.kind) then
 						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
 					end

@@ -37,7 +37,7 @@ style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal
 
 [sudo]
 disabled = false
-style = 'fg:yellow bg:black'
+style = 'fg:red bg:black'
 symbol = " "
 format = "[ $symbol]($style)"
 
@@ -53,8 +53,8 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 [directory.substitutions]
 # General
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
-"~/Desktop" = "/ "
-"~" = "/ "
+"~/Desktop" = "/󰇄 "
+"~" = "/󰟒 "
 
 # my perma-repos
 ".config" = " "
