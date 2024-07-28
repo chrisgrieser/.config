@@ -117,15 +117,19 @@ return {
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		init = function()
-			-- lazy load triggers
-			vim.ui.select = function(...) ---@diagnostic disable-line: duplicate-set-field
+			---@diagnostic disable: duplicate-set-field
+			vim.ui.select = function(items, opts, on_choice)
 				require("lazy").load { plugins = { "dressing.nvim" } }
-				return vim.ui.select(...)
+				return vim.ui.select(items, opts, on_choice)
 			end
-			vim.ui.input = function(...) ---@diagnostic disable-line: duplicate-set-field
+
+			---@param opts { prompt?: string, default?: any, completion?: string, highlight?: function }
+			---@param on_confirm function ((input|nil) -> ())
+			vim.ui.input = function(opts, on_confirm)
 				require("lazy").load { plugins = { "dressing.nvim" } }
-				return vim.ui.input(...)
+				return vim.ui.input(opts, on_confirm)
 			end
+			---@diagnostic enable: duplicate-set-field
 		end,
 		keys = {
 			{ "<Tab>", "j", ft = "DressingSelect" },

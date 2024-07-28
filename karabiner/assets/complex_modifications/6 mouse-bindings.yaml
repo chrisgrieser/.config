@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "Mouse Bindings"
 rules:
+  #─────────────────────────────────────────────────────────────────────────────
   # Emulates the "Right-Click Open Link in new Background tab" Chrome extension
   - description: "(Mouse) 2 (briefly): Open link in new background tab"
     manipulators:
@@ -22,13 +23,6 @@ rules:
         from: { pointing_button: button3 }
         to:
           - { key_code: q, modifiers: [command] }
-        conditions:
-          - type: frontmost_application_unless
-            file_paths:
-              - BetterTouchTool
-              - Hammerspoon
-              - "[Nn]eovide"
-              - "Terra Nil"
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 4 (bottom)"
     manipulators:
@@ -77,7 +71,6 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [md\.obsidian] }
       # INFO Fallback: keep button4 (= back button in browsers)
   #─────────────────────────────────────────────────────────────────────────────
-  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
       # Highlights: Yellow Highlight
@@ -96,7 +89,7 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Comment ✏️"
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
+          - { type: frontmost_application_if, bundle_identifiers: [^net.highlightsapp.universal$] }
       # Mimestream: Archive
       - type: basic
         from: { pointing_button: button5 }

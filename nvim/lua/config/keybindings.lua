@@ -110,8 +110,8 @@ keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
 keymap(
 	{ "n", "x" },
 	"+",
-	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
-	{ desc = " Increment/Toggle", expr = true }
+	function() require("funcs.nano-plugins").toggleOrIncrement() end,
+	{ desc = " Increment/Toggle"  }
 )
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = " Decrement" })
 
@@ -230,7 +230,8 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	vim.ui.input({ prompt = " Extension for Scratch File" }, function(ext)
+	local extensions = { "lua", "js", "sh", "applescript", "css", "json", "md" }
+	vim.ui.select(extensions, { prompt = " Extension for Scratch File" }, function(ext)
 		if not ext or ext == "" then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
 		vim.cmd.edit(filepath)
