@@ -27,7 +27,7 @@ function run() {
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = app
 		// `--follow` errors on broken symlinks, so we need to exit with `true`
-		.doShellScript(`${expPath} ; rg
+		.doShellScript(`${expPath} ; rg \
 			--no-config --files --hidden --follow --sortr=modified \
 			--ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}" || true
 		`)
