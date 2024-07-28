@@ -11,10 +11,10 @@ local darkThemes = {
 	"duckbones",
 }
 local lightThemes = {
+	"Solar Flare Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
 	"Ivory Light (terminal.sexy)",
 	"seoulbones_light",
-	"Solar Flare Light (base16)",
 	"Silk Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
 }

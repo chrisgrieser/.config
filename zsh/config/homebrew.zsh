@@ -102,6 +102,4 @@ function listall() {
 
 	_print-section "Mac App Store"
 	mas list
-
-	_dump
 }

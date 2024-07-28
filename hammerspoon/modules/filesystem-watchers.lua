@@ -1,8 +1,9 @@
 local M = {}
 
-local pathw = hs.pathwatcher.new
 local u = require("modules.utils")
+
 local home = os.getenv("HOME")
+local pathw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
 -- CONFIG
@@ -10,28 +11,22 @@ local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 local desktopPath = home .. "/Desktop"
 
----INFO this works as only downloaded files get quarantined.
----Ensures that files created locally do not trigger the actions.
----@param filepath string
----@return boolean whether the file exists
-local function fileIsDownloaded(filepath)
-	local fileExists, msg = pcall(hs.fs.xattr.get, filepath, "com.apple.quarantine")
-	return fileExists and msg ~= nil
-end
-
 M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, filep in pairs(paths) do
 		local fileName = filep:gsub(".*/", "")
 		local ext = fileName:gsub(".*%.", "")
+		-- INFO this works as only downloaded files get quarantined
+		local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
+		local isDownloaded = fileExists and msg ~= nil
 
 		-- 1. AUTO-REMOVE ALFREDWORKFLOWS & ICAL
-		if (ext == "alfredworkflow" or ext == "ics") and fileIsDownloaded(filep) then
+		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			u.runWithDelays(3, function() os.remove(filep) end)
 
 		-- 2. AUTO-ADD BIBTEX ENTRIES TO LIBRARY
-		elseif ext == "bib" and fileIsDownloaded(filep) then
+		elseif ext == "bib" and isDownloaded then
 			local bibEntry = u.readFile(filep)
 			if not bibEntry then return end
 			bibEntry = bibEntry:gsub("\n?$", "\n")
@@ -39,7 +34,7 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			hs.open(libraryPath)
 			os.remove(filep)
 
-		-- 3. BACKUP BROWSER SETTINGS
+		-- 3a. AUTO-FILE BACKUP BROWSER SETTINGS
 		elseif fileName == "violentmonkey" then
 			os.rename(filep, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
@@ -52,12 +47,17 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			os.rename(filep, browserSettings .. "ublock-settings.json")
 		elseif fileName:find("stylus%-.*%.json") then
 			os.rename(filep, browserSettings .. "stylus.json")
-		end
+
+		-- 3b. AUTO-FILE INOREADER FEEDS BACKUP
+		elseif fileName:find("Inoreader Feeds .*%.xml") then
+			local backupPath = home
+				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
+			os.rename(filep, backupPath)
 
 		-- 4. AUTO-INSTALL OBSIDIAN ALPHA
 		-- needs delay and `.crdownload` check, since the renaming is sometimes
 		-- not picked up by hammerspoon
-		if filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
+		elseif filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
 			u.runWithDelays(0.5, function()
 				hs.execute(([[
 					cd %q || exit 1
