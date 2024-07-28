@@ -91,6 +91,7 @@ M.timer_regularScroll = hs.timer
 	:start()
 
 M.aw_tickerWatcher = aw.new(function(appName, event, masto)
+	if u.appRunning("Steam") then return end
 	if appName == "CleanShot X" or appName == "Alfred" then return end
 
 	-- move & scroll up
