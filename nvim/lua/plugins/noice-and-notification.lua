@@ -97,6 +97,13 @@ return {
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
+					-- formatting for`:Eval`(custom `:lua=` replacement)
+					eval = {
+						pattern = "^:Eval%s+",
+						lang = "lua",
+						icon = "",
+						icon_hl_group = "@constant",
+					},
 				},
 			},
 			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua

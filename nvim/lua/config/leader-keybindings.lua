@@ -17,14 +17,17 @@ end, { desc = " Open Package Directory" })
 --------------------------------------------------------------------------------
 -- CMDLINE
 
-vim.api.nvim_create_user_command("E", function(ctx)
+-- better than `:lua`, since using `vim.notify`
+vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
 	u.notify("Cmdline", vim.inspect(output), "trace")
-end, { desc = "execute cmdline (better `:lua=`)", nargs = "?" })
+end, { desc = "Eval cmdline", nargs = "+" })
+
+keymap("n", "<leader>le", ":Eval ", { desc = " Eval cmdline" })
 
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
-	local lastCommand = vim.fn.getreg(":"):gsub("^lua[ =]*", "")
+	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	u.copyAndNotify(lastCommand)
 end, { desc = "󰘳 Copy last command" })
 
@@ -128,15 +131,10 @@ keymap(
 
 keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
-keymap("n", "<leader>ch", function()
-	vim.diagnostic.open_float()
-	vim.diagnostic.open_float() -- 2x = enter float
-end, { desc = "󰒕 Diagnostic Hover" })
-
 --------------------------------------------------------------------------------
 
 -- Append to / delete from EoL
-local trailChars = { ",", ";", ")", "'", '"', "|", "\\", "{", ".", "}", "`", ":" }
+local trailChars = { ",", "\\", "{" }
 for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
 end

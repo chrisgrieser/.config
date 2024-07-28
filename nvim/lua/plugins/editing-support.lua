@@ -44,7 +44,10 @@ return {
 				rules = false, -- not using auto-added icons, since I set my own
 				group = "",
 				breadcrumb = "",
-				keys = { LeftMouse = "" },
+				keys = {
+					LeftMouse = "",
+					Escape = "⎋",
+				},
 			},
 			plugins = {
 				presets = { motions = false, g = false, z = false },

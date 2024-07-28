@@ -36,12 +36,12 @@ end
 
 safeRequire("config.options") -- before lazy, so opts still work on plugin install
 safeRequire("config.lazy")
-safeRequire("config.autocmds")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.theme-customization")
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 safeRequire("config.lsp-and-diagnostics")
+safeRequire("config.autocmds")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
