@@ -20,7 +20,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
-			delay = 400,
+			delay = 500,
 			spec = {
 				{ "<leader>i", group = "󱈄 Inspect" },
 				{ "<leader>o", group = " Options" },
@@ -32,8 +32,8 @@ return {
 			},
 			win = {
 				border = vim.g.borderStyle,
-				width = 0.85,
-				col = math.floor(vim.o.columns * 0.075),
+				width = 0.9,
+				col = math.floor(vim.o.columns * 0.05),
 			},
 			layout = {
 				spacing = 2,
@@ -46,7 +46,7 @@ return {
 				breadcrumb = "",
 				keys = {
 					LeftMouse = "",
-					Escape = "⎋",
+					Esc = "⎋",
 				},
 			},
 			plugins = {
@@ -75,13 +75,6 @@ return {
 			space = { enable = true },
 			space2 = { enable = true },
 
-			-- global settings
-			extensions = {
-				-- https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/lua/ultimate-autopair/extension/cond.lua
-				cond = { cond = function(builtinConds) return not builtinConds.in_macro() end },
-				filetype = { nft = { "rip-substitute" } },
-			},
-
 			config_internal_pairs = {
 				{ "'", "'", nft = { "markdown" } }, -- since used as apostroph
 				{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
@@ -89,11 +82,14 @@ return {
 			-- SIC custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
-			{ "[=[", "]=]", ft = { "lua" } }, -- escape for `[[]]` inside strings
-			{ [[\"]], [[\"]], ft = { "sh", "json", "applescript" } }, -- escaped quote
-			-- scope (= only first word) for commit messages
-			-- stylua: ignore
-			{ "(", "): ", ft = { "gitcommit" }, cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end },
+			{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
+
+			{ -- scope (= only first word) for commit messages
+				"(",
+				"): ",
+				ft = { "gitcommit" },
+				cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end,
+			},
 
 			-- keymaps like `<C-a>`
 			{ "<", ">", ft = { "vim" } },

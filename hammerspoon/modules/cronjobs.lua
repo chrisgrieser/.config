@@ -50,11 +50,14 @@ M.timer_clock = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
--- BACKUP / MAINTENANCE
+-- NIGHTLY CRONJOBS
 
--- 1. bookmark backup
--- 2. reminder backup
-M.timer_nightlyMaintenance = hs.timer
+local jobs = {
+	"bookmark-bkp.sh",
+	"reminders-bkp.sh",
+	"save-browser-extension-list.sh",
+}
+M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
 
@@ -62,21 +65,16 @@ M.timer_nightlyMaintenance = hs.timer
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
-		M.task_bookmarksBackup = hs.task
-			.new("./helpers/bookmark-bkp.sh", function(code, _, stderr)
-				local msg = code == 0 and "✅ Bookmark Backup successful"
-					or "⚠️ Bookmark Backup failed: " .. stderr
-				u.notify(msg)
-			end)
-			:start()
+		local errors = 0
+		for _, script in pairs(jobs) do
+			M[script] = hs.task
+				.new("./cronjobs/" .. script, function(code) errors = errors + code end)
+				:start()
+		end
 
-		M.task_reminderBackup = hs.task
-			.new("./helpers/reminders-bkp.sh", function(code, _, stderr)
-				local msg = code == 0 and "✅ Reminder Backup successful"
-					or "⚠️ Reminder Backup failed: " .. stderr
-				u.notify(msg)
-			end)
-			:start()
+		u.notify(
+			errors == 0 and "✅ Cronjobs successful." or ("❌ %d Cronjobs failed."):format(errors)
+		)
 	end, true)
 	:start()
 
