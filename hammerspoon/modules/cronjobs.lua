@@ -61,7 +61,7 @@ M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
 
-		-- GUARD
+		-- only every other day
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end
 
