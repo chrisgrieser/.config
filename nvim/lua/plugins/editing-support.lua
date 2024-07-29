@@ -29,29 +29,35 @@ return {
 				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
 				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
 				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
-				{ -- not using `text_objects` here, since it's too crowded
+				{ -- not using `text_objects` preset, since it's too crowded
 					mode = "o",
 					{ "r", group = "rest of" },
 					{ "i", group = "inner" },
 					{ "a", group = "outer" },
 					{ "g", group = "special" },
-					{ "ip", desc = "Paragraph" },
-					{ "ap", desc = "Paragraph" },
-					{ "it", desc = "Tag" },
-					{ "at", desc = "Tag" },
-					{ "is", desc = "Sentence" },
-					{ "as", desc = "Sentence" },
-					{ "iw", desc = "word" },
-					{ "aw", desc = "word" },
+					{ "ip", desc = " Paragraph" },
+					{ "ap", desc = " Paragraph" },
+					{ "it", desc = " Tag" },
+					{ "at", desc = " Tag" },
+					{ "is", desc = " Sentence" },
+					{ "as", desc = " Sentence" },
+					{ "iw", desc = " word" },
+					{ "aw", desc = " word" },
 				},
 			},
 			plugins = {
-				presets = { motions = false, g = false, text_objects = false },
+				marks = false,
+				spelling = false,
+				presets = { motions = false, g = false, text_objects = false, z = false },
 			},
 			filter = function(map) return map.desc and map.desc ~= "" end,
 			replace = {
-				-- redundant for hints
-				desc = { { "outer ", "" }, { "inner ", "" } },
+				-- redundant for hints (frontier-pattern to keep "outer any…" mappings)
+				desc = {
+					{ " outer %f[^a ]", " " },
+					{ " inner %f[^a ]", " " },
+					{ " rest of ", " " },
+				},
 			},
 			win = {
 				border = vim.g.borderStyle,
@@ -69,7 +75,6 @@ return {
 			icons = {
 				mappings = false, -- not using auto-added icons, since I set my own
 				group = "",
-				breadcrumb = "",
 				separator = "│",
 			},
 			show_help = false,
