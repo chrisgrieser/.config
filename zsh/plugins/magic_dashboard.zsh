@@ -32,9 +32,9 @@ function _gitlog {
 				-e 's/ days* ago)/d)/' \
 				-e 's/ weeks* ago)/w)/' \
 				-e 's/ months* ago)/mo)/' \
-				-e 's/grafted/ /' \
+				-e 's/grafted/󰩫 /' \
 				-e 's/origin\//󰞶  /g' \
-				-e 's/upstream\//  /g' \
+				-e 's/upstream\//󰅧  /g' \
 				-e 's/HEAD/󱍞/g' \
 				-e 's/tag: / /g' \
 				-e 's/ -> /   /g' \

@@ -47,17 +47,17 @@ truncation_symbol = "/"
 truncate_to_repo = true
 read_only = "󰌾  "
 read_only_style = "fg:red bg:black"
-style = "fg:cyan bg:black"
+style = "fg:cyan bg:black bold"
 format = "[$path]($style) [$read_only]($read_only_style)"
 
 [directory.substitutions]
 # General
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 "~/Desktop" = "/󰇄 "
-"~" = "/󰟒 "
+"~" = "/ "
 
 # my perma-repos
-".config" = " "
+".config" = " "
 "main-vault" = "󱉽 "
 "phd-data-analysis" = " "
 ".password-store" = " "
@@ -75,8 +75,8 @@ style = "fg:yellow bg:black"
 [custom.location_indicator]
 when = '[[ "$PWD" =~ "$HOME/repos/" ]]'
 style = "fg:cyan bg:black"
-command = 'echo "󰔽"'                    # output trimmed, so spaces must be added at `format`
-format = '[ $output  ]($style)'          # extra space for proper nerdfont sizing
+command = 'echo "󰔽"'
+format = '[ $output ]($style)'
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT
