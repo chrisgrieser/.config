@@ -40,6 +40,7 @@ local function getOutsideTemp()
 		local weatherData = hs.json.decode(body) ---@type table|nil
 		if not weatherData then return end
 		local outTemp = weatherData.weather.temperature
+		if not outTemp then return end
 
 		-- first run has no value yet
 		if not M.prevOutTemp then
