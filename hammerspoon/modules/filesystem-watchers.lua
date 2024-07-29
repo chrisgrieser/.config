@@ -9,55 +9,66 @@ local pathw = hs.pathwatcher.new
 -- CONFIG
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-local desktopPath = home .. "/Desktop"
+local desktopPath = home .. "/Desktop/"
+local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 
 M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
-	for _, filep in pairs(paths) do
-		local fileName = filep:gsub(".*/", "")
-		local ext = fileName:gsub(".*%.", "")
-		-- INFO this works as only downloaded files get quarantined
-		local fileExists, msg = pcall(hs.fs.xattr.get, filep, "com.apple.quarantine")
-		local isDownloaded = fileExists and msg ~= nil
+	for _, path in pairs(paths) do
+		local name, ext = path:match(".*/(.+%.(.+))")
+		if not name then name = path:match(".*/(.+)") end -- for folders
 
-		-- 1. AUTO-REMOVE ALFREDWORKFLOWS & ICAL
+		-- INFO only downloaded files get quarantined
+		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
+		local isDownloaded = exists and msg ~= nil
+
+		-- 1. REMOVE ALFREDWORKFLOWS & ICAL (after they are opened by browser)
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			u.runWithDelays(3, function() os.remove(filep) end)
+			u.runWithDelays(3, function() os.remove(path) end)
 
-		-- 2. AUTO-ADD BIBTEX ENTRIES TO LIBRARY
+		-- 2. ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
-			local bibEntry = u.readFile(filep)
-			if not bibEntry then return end
-			bibEntry = bibEntry:gsub("\n?$", "\n")
-			u.writeToFile(libraryPath, bibEntry, true)
-			hs.open(libraryPath)
-			os.remove(filep)
+			local bibEntry = u.readFile(path)
+			if bibEntry then
+				bibEntry = bibEntry:gsub("\n?$", "\n")
+				u.writeToFile(libraryPath, bibEntry, true)
+				hs.open(libraryPath)
+				os.remove(path)
+			end
 
-		-- 3a. AUTO-FILE BACKUP BROWSER SETTINGS
-		elseif fileName == "violentmonkey" then
-			os.rename(filep, browserSettings .. "violentmonkey")
+		-- 3a. FILE BACKUP BROWSER SETTINGS
+		elseif name == "violentmonkey" then
+			os.rename(path, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
-			-- stylua: ignore
-			hs.execute("cd '" .. browserSettings .. "' && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey")
+			local shellCmd = ("cd %q && "):format(browserSettings)
+				.. "zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey"
+			hs.execute(shellCmd)
 			u.app("Brave Browser"):activate() -- window created by auto-unzipping
-		elseif fileName == "ublacklist-settings.json" then
-			os.rename(filep, browserSettings .. fileName)
-		elseif fileName:find("my%-ublock%-backup_.*%.txt") then
-			os.rename(filep, browserSettings .. "ublock-settings.json")
-		elseif fileName:find("stylus%-.*%.json") then
-			os.rename(filep, browserSettings .. "stylus.json")
+		elseif name == "ublacklist-settings.json" then
+			os.rename(path, browserSettings .. name)
+		elseif name:find("my%-ublock%-backup_.*%.txt") then
+			os.rename(path, browserSettings .. "ublock-settings.json")
+		elseif name:find("stylus%-.*%.json") then
+			os.rename(path, browserSettings .. "stylus.json")
 
-		-- 3b. AUTO-FILE INOREADER FEEDS BACKUP
-		elseif fileName:find("Inoreader Feeds .*%.xml") then
+		-- 3b. FILE INOREADER FEEDS BACKUP
+		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
-			os.rename(filep, backupPath)
+			os.rename(path, backupPath)
 
-		-- 4. AUTO-INSTALL OBSIDIAN ALPHA
+		-- 4. STEAM GAME SHORTCUTS
+		elseif name:find("%.app$") and not isDownloaded then
+			os.rename(path, gameFolder .. name)
+			-- open folders to copy icon
+			hs.open(gameFolder)
+			hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
+
+		-- 5. AUTO-INSTALL OBSIDIAN ALPHA
 		-- needs delay and `.crdownload` check, since the renaming is sometimes
 		-- not picked up by hammerspoon
-		elseif filep:match("%.crdownload$") or filep:match("%.asar%.gz$") then
+		elseif name:find("%.crdownload$") or (name:find("%.asar%.gz$") and isDownloaded) then
 			u.runWithDelays(0.5, function()
 				hs.execute(([[
 					cd %q || exit 1
