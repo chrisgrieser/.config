@@ -145,10 +145,11 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 
 --------------------------------------------------------------------------------
-
 -- SKELETONS (TEMPLATES)
----@type table<string, string[]> key = filetype, 1: glob, 2: template file
-local skeletons = {
+
+-- CONFIG
+local templateDir = vim.fn.stdpath("config") .. "/templates" 
+local skeletons = { ---@type table<string, string[]> key = filetype, 1: glob, 2: template file
 	python = { "**/*.py", "template.py" },
 	lua = { vim.g.localRepos .. "/**/lua/**/*.lua", "module.lua" },
 	applescript = { "**/*.applescript", "template.applescript" },
@@ -175,7 +176,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			if not matchesGlob then return end
 
 			-- read template & look for cursor placeholder
-			local skeletonFile = vim.fn.stdpath("config") .. "/templates/" .. skeletons[ft][2]
+			local skeletonFile = vim.fs.normalize(templateDir) .. "/" .. skeletons[ft][2]
 			local lines = {}
 			local cursor
 			local row = 1
@@ -256,15 +257,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				if noConflicts or notGitRepo then return end
 
 				local ns = vim.api.nvim_create_namespace("conflictMarkers")
-				local firstConflict
+				local firstConflictLn
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
 					local lnum = tonumber(conflictLnum)
 					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum - 1, 0, -1)
-					if not firstConflict then firstConflict = lnum end
+					if not firstConflictLn then firstConflictLn = lnum end
 				end
-				if not firstConflict then return end
+				if not firstConflictLn then return end
 
-				vim.api.nvim_win_set_cursor(0, { firstConflict, 0 })
+				vim.api.nvim_win_set_cursor(0, { firstConflictLn, 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
 				vim.notify_once("Conflict markers found.", nil, { title = "Git Conflicts" })
 			end)
