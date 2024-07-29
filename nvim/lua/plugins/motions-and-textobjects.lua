@@ -31,8 +31,14 @@ return {
 			{
 				"e",
 				"<cmd>lua require('spider').motion('e')<CR>",
-				mode = { "n", "o", "x" },
+				mode = { "n", "x" },
 				desc = "󱇫 Spider e",
+			},
+			{
+				"e",
+				"<cmd>lua require('spider').motion('e')<CR>",
+				mode = "o",
+				desc = "󱇫 End of subword",
 			},
 			{
 				"b",

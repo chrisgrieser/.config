@@ -7,7 +7,7 @@ function o() {
 	fi
 
 	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
-	local color=$'s|([^/+]*)(/)|\033[1;36m\\1\033[1;33m\\2\033[0m|g'
+	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
 	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --no-ignore-files \
 		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | sed -Ee '$color')"
 

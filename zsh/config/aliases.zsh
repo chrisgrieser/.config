@@ -13,8 +13,11 @@ alias rm='rm -I'
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias zip='zip --recurse-paths --symlinks'
+
+# EZA
 alias l='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest'
+alias tree='eza --tree --level=8 --no-quotes --icons=always --color=always | less'
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
