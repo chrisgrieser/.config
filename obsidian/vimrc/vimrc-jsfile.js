@@ -327,7 +327,7 @@ function gotoLastLinkInFile() {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// STUFF FOR DATAVIEWJS
+// STUFF FOR DATAVIEW_JS
 
 function toggleJsLineComment() {
 	const cursor = editor.getCursor();

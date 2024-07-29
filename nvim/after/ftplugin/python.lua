@@ -33,7 +33,7 @@ abbr("trim", "strip")
 
 --------------------------------------------------------------------------------
 
----open the next regex at https://regex101.com/
+-- open the next regex at https://regex101.com/
 u.bufKeymap("n", "g/", function()
 	u.normal('"zyi"vi"') -- yank & reselect inside quotes
 

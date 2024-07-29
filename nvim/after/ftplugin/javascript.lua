@@ -20,6 +20,11 @@ abbr("()", "() =>") -- quicker arrow function
 ---open the next regex at https://regex101.com/
 u.bufKeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.outer")
+	local notFound = vim.fn.mode():find("v")
+	if not notFound then
+		u.notify("Regex101", "No regex found")
+		return
+	end
 	u.normal('"zy')
 
 	local regex, flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
