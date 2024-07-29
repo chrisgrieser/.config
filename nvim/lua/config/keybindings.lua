@@ -221,7 +221,7 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 -- stylua: ignore start
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
-keymap({ "n", "x" }, "<CR>", function() require("funcs.magnet").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
+keymap({ "n", "x" }, "<CR>", function() require("funcs.alt-alt").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x" }, "<D-CR>", function() require("funcs.magnet").gotoChangedFiles() end, { desc = "󰊢 Goto Changed File" })
 -- stylua: ignore end
 

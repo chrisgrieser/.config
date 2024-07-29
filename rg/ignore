@@ -37,6 +37,7 @@ manifest.json
 jsconfig.json
 tsconfig.json
 biome.jsonc
+biome.json
 
 # python
 __init__.py
