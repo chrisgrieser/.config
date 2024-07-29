@@ -133,8 +133,10 @@ keymap(
 
 -- remapping of builtin text objects to use letters instead of punctuation
 for remap, original in pairs(u.textobjRemaps) do
-	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. original })
-	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. original })
+	local descr = original
+	if descr == "W" then descr = "WORD" end
+	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. descr })
+	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. descr })
 end
 
 -- special remaps

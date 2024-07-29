@@ -29,14 +29,39 @@ return {
 				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
 				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
 				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
+				{ -- not using `text_objects` here, since it's too crowded
+					mode = "o",
+					{ "r", group = "rest of" },
+					{ "i", group = "inner" },
+					{ "a", group = "outer" },
+					{ "g", group = "special" },
+					{ "ip", desc = "Paragraph" },
+					{ "ap", desc = "Paragraph" },
+					{ "it", desc = "Tag" },
+					{ "at", desc = "Tag" },
+					{ "is", desc = "Sentence" },
+					{ "as", desc = "Sentence" },
+					{ "iw", desc = "word" },
+					{ "aw", desc = "word" },
+				},
+			},
+			plugins = {
+				presets = { motions = false, g = false, text_objects = false },
+			},
+			filter = function(map) return map.desc and map.desc ~= "" end,
+			replace = {
+				-- redundant for hints
+				desc = { { "outer ", "" }, { "inner ", "" } },
 			},
 			win = {
 				border = vim.g.borderStyle,
 				width = 0.9,
+				height = { min = 10, max = 25 },
+				padding = { 1, 0 },
 				col = math.floor(vim.o.columns * 0.05),
 			},
 			layout = {
-				spacing = 2,
+				spacing = 1,
 				width = { max = 34 },
 				align = "left",
 			},
@@ -46,14 +71,8 @@ return {
 				group = "",
 				breadcrumb = "",
 				separator = "│",
-				keys = {
-					LeftMouse = "",
-					Esc = "⎋",
-				},
 			},
-			plugins = {
-				presets = { motions = false, g = false },
-			},
+			show_help = false,
 		},
 	},
 	{ -- auto-pair
