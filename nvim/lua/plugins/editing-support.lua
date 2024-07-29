@@ -40,17 +40,19 @@ return {
 				width = { max = 34 },
 				align = "left",
 			},
+			keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 			icons = {
-				rules = false, -- not using auto-added icons, since I set my own
+				mappings = false, -- not using auto-added icons, since I set my own
 				group = "",
 				breadcrumb = "",
+				separator = "│",
 				keys = {
 					LeftMouse = "",
 					Esc = "⎋",
 				},
 			},
 			plugins = {
-				presets = { motions = false, g = false, z = false },
+				presets = { motions = false, g = false },
 			},
 		},
 	},
