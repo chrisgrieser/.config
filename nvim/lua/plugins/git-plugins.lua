@@ -19,8 +19,8 @@ return {
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
 			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
-			{ "<leader>gD", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
-			{ "<leader>g<D-d>", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line History" },
+			{ "<leader>gh", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line History" },
+			{ "<leader>gH", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub Repo URL" },
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit/Amend" },
@@ -92,7 +92,7 @@ return {
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
 			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame Line" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
-			{ "q", vim.cmd.close, ft = "gitsigns.blame", desc = "Close" },
+			{ "q", vim.cmd.close, ft = "gitsigns.blame", desc = "Close", nowait = true },
 
 			-- UNDO
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
@@ -102,7 +102,6 @@ return {
 
 			-- OPTIONS
 			{ "<leader>oi", "<cmd>Gitsigns toggle_deleted<CR>", desc = "󰊢 Inline Deletions" },
-			{ "<leader>o?", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = " Git Blame" },
 			-- stylua: ignore end
 			{
 				"<leader>op",
