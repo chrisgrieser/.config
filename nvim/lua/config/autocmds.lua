@@ -97,6 +97,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 })
 
 --------------------------------------------------------------------------------
+-- AUTO-NOHL & INLINE SEARCH COUNT
 
 ---@param mode? "clear"
 local function searchCountIndicator(mode)
@@ -121,7 +122,7 @@ local function searchCountIndicator(mode)
 	})
 end
 
--- AUTO-NOHL & INLINE SEARCH COUNT
+-- without the `searchCountIndicator`, this function simply does `auto-nohl`
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
@@ -146,6 +147,7 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 --------------------------------------------------------------------------------
 
 -- SKELETONS (TEMPLATES)
+---@type table<string, string[]> key = filetype, 1: glob, 2: template file
 local skeletons = {
 	python = { "**/*.py", "template.py" },
 	lua = { vim.g.localRepos .. "/**/lua/**/*.lua", "module.lua" },
@@ -156,7 +158,8 @@ local skeletons = {
 	toml = { "**/*typos.toml", "typos.toml" },
 	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
 }
--- not `BufNewFile` as it doesn't trigger on files created outside vim
+
+-- `BufNewFile` doesn't trigger on files created outside vim, thus using `FileType`
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
@@ -164,7 +167,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- GUARD
 			local stats = vim.loop.fs_stat(ctx.file)
 			if not stats then return end
-			local fileNotEmpty = stats.size > 10 -- account for linebreaks etc.
+			local fileNotEmpty = stats.size > 10 -- account for single linebreaks etc.
 			if fileNotEmpty then return end
 			local ft = ctx.match
 			local glob = skeletons[ft][1]

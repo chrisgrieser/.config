@@ -39,5 +39,5 @@
   "syncInterval": 120,
   "syncSubscriptions": true,
   "updateInterval": 1440,
-  "version": "8.6.0"
+  "version": "8.9.2"
 }

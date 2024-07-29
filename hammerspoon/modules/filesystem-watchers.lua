@@ -16,8 +16,8 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, path in pairs(paths) do
-		local name, ext = path:match(".*/(.+%.(.+))")
-		if not name then name = path:match(".*/(.+)") end -- for folders
+		local name = path:match(".*/(.+)")
+		local ext = name:match("%.(.+)$")
 
 		-- INFO only downloaded files get quarantined
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")

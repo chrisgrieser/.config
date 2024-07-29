@@ -4,15 +4,16 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} str */
+/** Try out all different forms of casings
+ * @param {string} str
+ */
 function alfredMatcher(str) {
-	// try out all the different casings
 	const clean = str.replace(/[-.()_/[\]]/g, " ");
 	const squeezed = str.replace(/[-_.]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	const kebabCase = str.replace(/[ _]/g, "-");
-	const snakeCase = str.replace(/[ -]/g, "_");
-	return [clean, camelCaseSeparated, squeezed, str, kebabCase, snakeCase].join(" ");
+	const kebabCased = str.replace(/[ _]/g, "-");
+	const snakeCased = str.replace(/[ -]/g, "_");
+	return [str, clean, squeezed, camelCaseSeparated, kebabCased, snakeCased].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -21,19 +22,19 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
-	const expPath = "PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH";
-	const dirtyFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
-
-	// `--follow` errors on broken symlinks, so we need to exit with `true`
+	const modifiedFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
 	const rgOutput = app
 		.doShellScript(
-			`${expPath} ; rg --no-config --files --hidden --follow --sortr=modified \
+			// `--follow` errors on broken symlinks, so we need to end with `true`
+			`PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH ; \
+			rg --no-config --files --hidden --follow --sortr=modified \
 			--ignore-file=${dotfileFolder}/rg/ignore "${dotfileFolder}" 2>&1 || true`,
 		)
 		.split("\r");
 
-	// GUARD broken symlinks
-	if (rgOutput[0].endsWith("No such file or directory (os error 2)")) {
+	// GUARD
+	const hasBrokenSymlink = rgOutput[0].startsWith("No such file or directory (os error 2)");
+	if (hasBrokenSymlink) {
 		const [_, brokenLink] = rgOutput[0].match(/rg: (.+?): /) || [];
 		const relPath = brokenLink.slice(dotfileFolder.length + 1);
 		const alfredItem = {
@@ -51,13 +52,12 @@ function run() {
 		const relPath = absPath.slice(dotfileFolder.length + 1);
 		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
-		const isDirty = dirtyFiles.includes(relPath);
 
 		// emoji
 		let emoji = "";
 		if (relPath.includes("hammerspoon")) emoji += " 🟡";
 		else if (relPath.includes("nvim")) emoji += " 🔳";
-		if (isDirty) emoji += " Ⓜ️";
+		if (modifiedFiles.includes(relPath)) emoji += " ✴️";
 
 		// type-icon
 		let type = "";
@@ -89,7 +89,6 @@ function run() {
 			subtitle: "▸ " + relativeParentFolder,
 			icon: iconObj,
 			type: "file:skipcheck",
-			uid: absPath,
 			arg: absPath,
 		};
 		return item;
@@ -116,7 +115,6 @@ function run() {
 				match: alfredMatcher(name) + " folder",
 				icon: { type: "fileicon", path: absPath },
 				type: "file:skipcheck",
-				uid: absPath,
 				arg: absPath,
 			};
 		});
