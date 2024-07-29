@@ -105,16 +105,25 @@ return {
 				{ "'", "'", nft = { "markdown" } }, -- since used as apostroph
 				{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
 			},
-			-- SIC custom keys need to be "appended" to the opts as a list
+			-- INFO custom keys need to be "appended" to the opts as a list
 			{ "*", "*", ft = { "markdown" } }, -- italics
 			{ "__", "__", ft = { "markdown" } }, -- bold
 			{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
 
-			{ -- scope (= only first word) for commit messages
+			{ -- commit scope (= only first word) for commit messages
 				"(",
 				"): ",
 				ft = { "gitcommit" },
 				cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end,
+			},
+			{ -- auto-add comma to subtables
+				"{",
+				"},",
+				ft = { "lua" },
+				cond = function()
+					local node = vim.treesitter.get_node()
+					return node and node:type() == "table_constructor"
+				end,
 			},
 
 			-- keymaps like `<C-a>`

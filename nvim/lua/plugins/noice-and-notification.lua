@@ -101,7 +101,7 @@ return {
 					eval = {
 						pattern = "^:Eval%s+",
 						lang = "lua",
-						icon = "",
+						icon = "󰓗",
 						icon_hl_group = "@constant",
 					},
 				},
@@ -181,7 +181,7 @@ return {
 			top_down = false,
 			level = 0, -- minimum severity, 0 = show all
 			stages = "slide",
-			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "" },
+			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "󰓘" },
 
 			-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
 			-- render = "wrapped-minimal",

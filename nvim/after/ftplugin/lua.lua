@@ -54,16 +54,14 @@ end, { desc = " require module from cwd" })
 --------------------------------------------------------------------------------
 
 -- auto-comma for tables
-vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+vim.api.nvim_create_autocmd("TextChangedI", {
 	buffer = 0,
 	group = vim.api.nvim_create_augroup("lua-autocomma", { clear = true }),
 	callback = function()
 		local node = vim.treesitter.get_node()
-		if not (node and node:type() == "table_constructor") then return end
-
-		local line = vim.api.nvim_get_current_line()
-		if line:find("^%s*[^,%s{}-]$") or line:find("^%s*{}$") then
-			vim.api.nvim_set_current_line(line .. ",")
+		if node and node:type() == "table_constructor" then
+			local line = vim.api.nvim_get_current_line()
+			if line:find("^%s*[^,%s%-]$") then vim.api.nvim_set_current_line(line .. ",") end
 		end
 	end,
 })
