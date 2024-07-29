@@ -23,13 +23,13 @@ vim.api.nvim_create_user_command("Eval", function(ctx)
 	u.notify("Cmdline", vim.inspect(output), "trace")
 end, { desc = "Eval cmdline", nargs = "+" })
 
-keymap("n", "<leader>le", ":Eval ", { desc = " Eval cmdline" })
+keymap("n", "<leader>le", ":Eval ", { desc = "󰓗 Eval cmdline" })
 
 -- Copy Last Command
 keymap("n", "<leader>lc", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	u.copyAndNotify(lastCommand)
-end, { desc = "󰘳 Copy last command" })
+end, { desc = "󰓗 Copy last command" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
@@ -136,7 +136,7 @@ keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 -- Append to / delete from EoL
 local trailChars = { ",", "\\", "{", ")" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "which_key_ignore" })
+	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key))
 end
 
 -- JUST

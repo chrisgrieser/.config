@@ -44,7 +44,7 @@ local function dapConfig()
 	vim.g.lualine_add("tabline", "lualine_z", function()
 		local dapStatus = require("dap").status()
 		if dapStatus == "" then return "" end
-		return "  " .. dapStatus
+		return "󰃤  " .. dapStatus
 	end)
 end
 
@@ -89,7 +89,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			{ "7", function() require("dap").continue() end, desc = " Continue" },
+			{ "7", function() require("dap").continue() end, desc = "󰃤 Continue" },
 			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle Breakpoint" },
 			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
 			{ "gB", function() gotoBreakpoint("prev") end, desc = " Previous Breakpoint" },
@@ -101,7 +101,7 @@ return {
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		},
-		init = function() vim.g.whichkey_leader_subkey("d", " Debugger", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("d", "󰃤 Debugger", { "n", "x" }) end,
 		config = dapConfig,
 	},
 	{

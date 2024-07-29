@@ -203,7 +203,7 @@ keymap("n", "i", function()
 end, { desc = "correctly indented i", expr = true })
 
 -- LSP Signature
-keymap({ "n", "i" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "i", "x" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })

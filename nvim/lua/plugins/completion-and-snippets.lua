@@ -178,11 +178,11 @@ return {
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
 		external_dependencies = "yq",
-		init = function() vim.g.whichkey_leader_subkey("n", " Snippets", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("n", "󰩫 Snippets", { "n", "x" }) end,
 		keys = {
-			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = " Edit" },
+			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = "󰩫 Edit" },
 			-- stylua: ignore
-			{ "<leader>na", function() require("scissors").addNewSnippet() end, mode = { "n", "x" }, desc = " Add" },
+			{ "<leader>na", function() require("scissors").addNewSnippet() end, mode = { "n", "x" }, desc = "󰩫 Add" },
 		},
 		opts = {
 			editSnippetPopup = {
