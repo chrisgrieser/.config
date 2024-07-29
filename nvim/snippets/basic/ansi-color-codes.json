@@ -3,51 +3,63 @@
     "body": "\\e[0m",
     "prefix": " reset color"
   },
+  "bold": {
+    "body": "\\e[1m",
+    "prefix": " bold (ansi)"
+  },
+  "italic": {
+    "body": "\\e[3m",
+    "prefix": " italic (ansi)"
+  },
+  "underline": {
+    "body": "\\e[4m",
+    "prefix": " underline (ansi)"
+  },
   "revert colors": {
     "body": "\\e[7m",
     "prefix": " revert colors"
   },
   "yellow": {
-    "body": "\\e[1;33m",
+    "body": "\\e[0;33m",
     "prefix": " yellow"
   },
   "white": {
-    "body": "\\e[1;37m",
+    "body": "\\e[0;37m",
     "prefix": " white"
   },
   "ansi": {
-    "body": "\\e[1;38;5;${1:code}m",
+    "body": "\\e[0;38;5;${1:code}m",
     "prefix": " ansi"
   },
   "black": {
-    "body": "\\e[1;30m",
+    "body": "\\e[0;30m",
     "prefix": " black"
   },
   "blue": {
-    "body": "\\e[1;34m",
+    "body": "\\e[0;34m",
     "prefix": " blue"
   },
   "cyan": {
-    "body": "\\e[1;36m",
+    "body": "\\e[0;36m",
     "prefix": " cyan"
   },
   "green": {
-    "body": "\\e[1;32m",
+    "body": "\\e[0;32m",
     "prefix": " green"
   },
   "red": {
-    "body": "\\e[1;31m",
+    "body": "\\e[0;31m",
     "prefix": " red"
   },
   "magenta": {
-    "body": "\\e[1;35m",
+    "body": "\\e[0;35m",
     "prefix": [
       " magenta",
       " purple"
     ]
   },
   "gray + grey": {
-    "body": "\\e[1;38;5;247m",
+    "body": "\\e[0;38;5;247m",
     "description": "Gray that is readable in dark and light mode.",
     "prefix": [
       " gray",

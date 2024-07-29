@@ -95,7 +95,7 @@ return {
 					ccc.picker.css_hsl,
 					ccc.picker.css_name,
 					ccc.picker.ansi_escape(
-						{ black = "#767676", blue = "#3165ff" },
+						{ black = "#767676", blue = "#3165ff" }, -- lighter for readability
 						{ meaning1 = "bold" }
 					),
 				},

@@ -40,7 +40,7 @@ function _dump() {
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
-	print "\e[0;38;5;247mBrewfile saved at \"$(basename "$brewfile_path")\".\e[0m"
+	print "\e[0;38;5;247mBrewfile saved at \e[4m$(basename "$brewfile_path")\e[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -69,8 +69,7 @@ function update() {
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
-	# mas upgrade
-	# HACK -> PENDING https://github.com/mas-cli/mas/issues/512
+	# mas upgrade # HACK -> PENDING https://github.com/mas-cli/mas/issues/512
 	local mas_updates
 	mas_updates=$(mas outdated | grep -v "Highlights")
 	if [[ -z "$mas_updates" ]]; then
@@ -80,7 +79,7 @@ function update() {
 	fi
 
 	_print-section "Finish up"
-	# sketchybar needs restart for new persmission
+	# sketchybar restart for new persmission
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
