@@ -23,10 +23,10 @@ return {
 			delay = 500,
 			spec = {
 				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>o", group = " Options" },
+				{ "<leader>o", group = "󰒓 Options" },
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>c", group = "󰉁 Code Action", mode = { "n", "x" } },
+				{ "<leader>c", group = " Code Action", mode = { "n", "x" } },
 				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
 				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
 				{ -- not using `text_objects` preset, since it's too crowded
@@ -63,11 +63,11 @@ return {
 				border = vim.g.borderStyle,
 				width = 0.9,
 				height = { min = 10, max = 25 },
-				padding = { 1, 0 },
+				padding = { 1, 1 },
 				col = math.floor(vim.o.columns * 0.05),
 			},
 			layout = {
-				spacing = 1,
+				spacing = 2,
 				width = { max = 34 },
 				align = "left",
 			},
@@ -374,7 +374,7 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
-		init = function() vim.g.whichkey_leader_subkey("l", " Log", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("l", "󰐪 Log", { "n", "x" }) end,
 		opts = {
 			marker = "👾",
 			logStatements = {
@@ -399,7 +399,7 @@ return {
 			{"<leader>ls", function() require("chainsaw").stacktraceLog() end, desc = "󰸢 stacktrace" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰸢 assert" },
 
-			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰹝 remove logs" },
+			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
 			-- stylua: ignore end
 		},
 	},

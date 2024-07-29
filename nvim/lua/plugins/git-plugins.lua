@@ -8,7 +8,7 @@ return {
 		event = "VeryLazy", -- load for status line component
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push" },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
 			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive Staging" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
