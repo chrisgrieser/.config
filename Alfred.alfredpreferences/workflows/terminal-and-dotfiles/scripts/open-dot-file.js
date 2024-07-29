@@ -64,11 +64,9 @@ function run() {
 				iconObj.type = "fileicon";
 				iconObj.path = absPath;
 			} else if (isImageFile) {
-				// use image itself
-				iconObj.path = absPath;
+				iconObj.path = absPath; 
 			} else {
-				// use {extension}.png located in icon folder
-				iconObj.path = `./custom-filetype-icons/${type}.png`;
+				iconObj.path = `./custom-filetype-icons/${type}.png`; // use {ext}.png in icon folder
 			}
 
 			/** @type {AlfredItem} */
@@ -110,11 +108,5 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({
-		items: [...fileArray, ...folderArray],
-		cache: {
-			seconds: 15, // quick for newly created files
-			loosereload: true,
-		},
-	});
+	return JSON.stringify({ items: [ ...fileArray, ...folderArray ] });
 }
