@@ -29,11 +29,12 @@ keymap("n", "<leader>le", ":Eval ", { desc = "󰓗 Eval cmdline" })
 keymap("n", "<leader>lc", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	u.copyAndNotify(lastCommand)
-end, { desc = "󰓗 Copy last command" })
+end, { desc = "󰓗 Copy last cmdline" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
 keymap("n", "<leader>ib", function()

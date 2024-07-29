@@ -5,3 +5,6 @@ reload_karabiner:
 
 browse_docs:
     open "https://karabiner-elements.pqrs.org/docs/"
+
+keyboard_layout_editor:
+    open "http://www.keyboard-layout-editor.com/#/"
