@@ -58,12 +58,12 @@ return {
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
 				mode = "o", -- only operator-pending to not conflict with selection-commenting
-				desc = "󱡔 single comment",
+				desc = "󰆈 Single Comment",
 			},
 			{
 				"dq",
 				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
-				desc = " Sticky Delete Comment",
+				desc = "󰆈 Sticky Delete Comment",
 			},
 			{
 				"cq",
@@ -75,7 +75,7 @@ return {
 					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
 					vim.cmd.startinsert { bang = true }
 				end,
-				desc = " Change Comment",
+				desc = "󰆈 Change Comment",
 			},
 			{
 				"<C-j>",
@@ -123,8 +123,8 @@ return {
 			{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = { "x", "o" }, desc = "󱡔 entire buffer" },
 
 			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󱡔 near EoL" },
-			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󱡔 to next closing bracket" },
-			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = "󱡔 to next quote", nowait = true },
+			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󱡔 to next ])}" },
+			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = [[󱡔 to next quote "'`]], nowait = true },
 			{ "b", "<cmd>lua require('various-textobjs').anyBracket('inner')<CR>", mode = "o", desc = "󱡔 inner anyBracket" },
 			{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "󱡔 outer anyBracket" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = "󱡔 inner anyQuote" },
@@ -138,7 +138,7 @@ return {
 			{ "rg", "G", mode = "o", desc = "󱡔 rest of buffer" },
 
 			{ "ge", "<cmd>lua require('various-textobjs').diagnostic()<CR>", mode = { "x", "o" }, desc = "󱡔 diagnostic" },
-			{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = "󱡔 link" },
+			{ "L", "<cmd>lua require('various-textobjs').url()<CR>", mode = "o", desc = "󱡔 URL" },
 			{ "o", "<cmd>lua require('various-textobjs').column()<CR>", mode = "o", desc = "󱡔 column" },
 			{ "#", "<cmd>lua require('various-textobjs').cssColor('outer')<CR>", mode = { "x", "o" }, desc = "󱡔 outer color" },
 

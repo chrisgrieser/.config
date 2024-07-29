@@ -133,8 +133,7 @@ keymap(
 
 -- remapping of builtin text objects to use letters instead of punctuation
 for remap, original in pairs(u.textobjRemaps) do
-	local descr = original
-	if descr == "W" then descr = "WORD" end
+	local descr = original == "W" and "WORD" or original
 	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. descr })
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. descr })
 end
@@ -149,20 +148,20 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 -- COMMENTS
 
 -- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
-keymap("n", "qq", "gcc", { desc = " Comment Line", remap = true })
-keymap("o", "u", "gc", { desc = " Comment Text Object", remap = true })
+keymap("n", "qq", "gcc", { desc = "󰆈 Comment Line", remap = true })
+keymap("o", "u", "gc", { desc = "󰆈 Comment Text Object", remap = true })
 keymap({ "n", "x" }, "q", function()
 	-- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 	return require("vim._comment").operator()
-end, { desc = " Comment Operator", expr = true })
+end, { desc = "󰆈 Comment Operator", expr = true })
 
 -- stylua: ignore start
-keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = " Horizontal Divider" })
-keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = " Duplicate Line as Comment" })
-keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = " Function Docstring" })
-keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { desc = " Append Comment" })
-keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = " Comment Below" })
-keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = " Comment Above" })
+keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
+keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate Line as Comment" })
+keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = "󰆈 Function Docstring" })
+keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { desc = "󰆈 Append Comment" })
+keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
+keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
