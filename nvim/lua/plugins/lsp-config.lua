@@ -361,8 +361,9 @@ serverConfigs.vale_ls = {
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
 		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
 		local nanoBlog = vim.uv.cwd():find("/nanotipsforvim%-blog")
-		local iCloudDocs = vim.api.nvim_buf_get_name(bufnr):find("/Documents")
-		if obsiDir or nanoBlog then
+		local iCloudDocs =
+			vim.startswith(vim.api.nvim_buf_get_name(bufnr), os.getenv("HOME") .. "/Documents/")
+		if obsiDir or nanoBlog or iCloudDocs then
 			vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, vale.id) end, 400)
 		end
 	end,
