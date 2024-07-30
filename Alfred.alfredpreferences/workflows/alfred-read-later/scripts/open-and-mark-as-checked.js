@@ -33,7 +33,7 @@ function run(argv) {
 	writeToFile(readLaterFile, items.join("\n"));
 
 	// open URL
-	const onlyMarkAsRead = $.getenv("only_mark_as_read") === "true";
+	const onlyMarkAsRead = $.getenv("mark_as_read_only") === "true";
 	if (!onlyMarkAsRead) {
 		const url = selectedLine.split("](")[1].split(")")[0];
 		app.openLocation(url);

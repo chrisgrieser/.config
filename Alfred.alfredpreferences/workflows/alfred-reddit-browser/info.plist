@@ -878,7 +878,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>https://dstill.ai/hackernews/item/</string>
+				<string>https://news.ycombinator.com/item?id=</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -888,10 +888,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 					<array>
 						<string>ycombinato</string>
 						<string>https://news.ycombinato.com/item?id=</string>
-					</array>
-					<array>
-						<string>dstill.ai</string>
-						<string>https://dstill.ai/hackernews/item/</string>
 					</array>
 					<array>
 						<string>hckrnws</string>
