@@ -9,10 +9,6 @@
     "description": "Retrieve a field from the piped in string, with whitespace as the default field delimiter. `$n` means that the nth field will be used.",
     "prefix": "awk (field)"
   },
-  "print in blue": {
-    "body": "print \"\\e[1;34m$0\\e[0m\"",
-    "prefix": "print in blue"
-  },
   "check device name": {
     "body": "scutil --get ComputerName | grep -q \"$0\"",
     "prefix": "device name"
@@ -71,11 +67,6 @@
     "body": "find . $0 -exec open '{}' \\;",
     "prefix": "find -exec"
   },
-  "for .. in": {
-    "body": "for ${1:VAR} in ${0:LIST}\ndo\n\techo \"\\$${1:VAR}\"\ndone\n",
-    "description": "for loop in list",
-    "prefix": "for .. in"
-  },
   "for each file": {
     "body": [
       "for filename in *.txt; do",
@@ -99,6 +90,14 @@
       "done"
     ],
     "prefix": "for each line (variable)"
+  },
+  "for i ..": {
+    "body": [
+      "for ((i = 0; i <= ${1:\\$length}; i++)); do",
+      "   $0",
+      "done"
+    ],
+    "prefix": "for i .."
   },
   "function": {
     "body": "function ${1:name} {\n\t${0}\n}",
@@ -167,6 +166,10 @@
   "plist: extract key": {
     "body": "plutil -extract name.childkey xml1 -o - example.plist | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1",
     "prefix": "plist: extract key"
+  },
+  "print in blue": {
+    "body": "print \"\\e[1;34m$0\\e[0m\"",
+    "prefix": "print in blue"
   },
   "progress bar": {
     "body": [
