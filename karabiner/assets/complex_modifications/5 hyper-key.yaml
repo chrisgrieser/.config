@@ -3,7 +3,7 @@ title: ⇪ Hyper
 anchors:
   - from:
       modifiers: &hyper
-        # INFO not using `cmd+opt+ctrl+shift` to avoid triggering 
+        # INFO not using `cmd+opt+ctrl+shift` to avoid triggering
         # system diagnosis via `cmd+opt+ctrl+shift+.`
         mandatory: [command, control, option]
   #─────────────────────────────────────────────────────────────────────────────

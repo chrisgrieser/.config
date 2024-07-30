@@ -16,7 +16,7 @@ local function replace_cite(cite)
 		local full_reference = pandoc.utils.blocks_to_inlines(refs[citekey])
 
 		-- prefix citekey in front of the citation
-		local prefix = { "__" .. citekey .. "__" .. " – " }
+		local prefix = { "__" .. citekey .. "__: " }
 		return prefix .. full_reference
 	end
 end
