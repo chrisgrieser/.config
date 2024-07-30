@@ -62,7 +62,7 @@ return {
 				icons = { "•", "◦", "▪️", "▫️" },
 			},
 			heading = {
-				position = "inline", -- removes indentation
+				icons = {}, -- disables icons
 			},
 			code = {
 				border = "thick",
