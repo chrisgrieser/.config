@@ -15,7 +15,7 @@
   "lsp_signature.nvim": { "branch": "patch-1", "commit": "848e34c8ff11b2ac531fcb12d176d05f7efe418a" },
   "lualine.nvim": { "branch": "master", "commit": "544dd1583f9bb27b393f598475c89809c4d5e86b" },
   "luvit-meta": { "branch": "main", "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60" },
-  "markdown.nvim": { "branch": "main", "commit": "345596bb6ef2b0c0a145c59906c2e84dbddfbbd4" },
+  "markdown.nvim": { "branch": "main", "commit": "80938b29a510e50008ebc6ff768af058f39b0137" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "c5e07b8ff54187716334d585db34282e46fa2932" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "mini.operators": { "branch": "main", "commit": "7d30c0bc5baaa1f0d3a63dd18b35c8581bc164f4" },
