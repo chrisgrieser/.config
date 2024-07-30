@@ -51,7 +51,14 @@ function run() {
 	if (randomItemOrder) readLaterItems.sort(() => 0.5 - Math.random());
 
 	// "Add current browser tab" item
-	readLaterItems.unshift({ title: "🔖 Add current browser tab", arg: -1, subtitle: "" });
+	readLaterItems.unshift({
+		title: "🔖 Add current browser tab",
+		arg: -1,
+		subtitle: "",
+		mods: {
+			cmd: { valid: false, subtitle: "❌ Not possible." },
+		},
+	});
 
 	return JSON.stringify({ items: readLaterItems });
 }
