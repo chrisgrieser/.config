@@ -966,10 +966,8 @@
 			<dict>
 				<key>tasksettings</key>
 				<dict>
-					<key>custom_browser</key>
-					<string>{var:browser}</string>
 					<key>popup_browser</key>
-					<string>custom</string>
+					<string>Brave Browser</string>
 				</dict>
 				<key>taskuid</key>
 				<string>com.alfredapp.automation.extras/web-browsers/chromium-browsers/chromium.tabs.current</string>
@@ -1179,6 +1177,8 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
+			<key>note</key>
+			<string>Brave</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>

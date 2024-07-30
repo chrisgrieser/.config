@@ -19,7 +19,7 @@ fi
 first_row="left"
 # HACK using popup for second row. The popup.{item} only refers to {item} to
 # anchor to it. Should be the leftmost item.
-second_row="popup.BusyCal Menu,Item-0"
+second_row="popup.BusyCal Menu & Alarms,Item-0"
 
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
@@ -43,8 +43,8 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add alias "BusyCal Menu,Item-0" $first_row \
-	--set "BusyCal Menu,Item-0" padding_right=-10 y_offset=16 drawing=true \
+	--add alias "BusyCal Menu & Alarms,Item-0" $first_row \
+	--set "BusyCal Menu & Alarms,Item-0" padding_right=-10 y_offset=16 drawing=true \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 drawing=true \
