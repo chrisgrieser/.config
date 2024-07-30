@@ -93,8 +93,8 @@
   },
   "for i ..": {
     "body": [
-      "for ((i = 0; i <= ${1:\\$length}; i++)); do",
-      "   $0",
+      "for ((i = 0; i <= ${1:length}; i++)); do",
+      "   echo \\$i$0",
       "done"
     ],
     "prefix": "for i .."
