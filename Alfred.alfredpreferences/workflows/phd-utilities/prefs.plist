@@ -4,5 +4,9 @@
 <dict>
 	<key>search_logfile</key>
 	<string>~/phd-data-analysis/Method/🔍 Technews Search Log.md</string>
+	<key>slurp_list</key>
+	<string>Diss URLs</string>
+	<key>slurp_vault</key>
+	<string>phd-data-analysis</string>
 </dict>
 </plist>

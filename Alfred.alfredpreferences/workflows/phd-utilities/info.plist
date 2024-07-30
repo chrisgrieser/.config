@@ -153,6 +153,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>31</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>O</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+					<string>com.apple.Safari</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>EDCF7445-7018-43F6-A236-C9766D2A4F07</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict>
 					<key>allow_empty</key>
@@ -213,42 +249,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>31</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>O</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>EDCF7445-7018-43F6-A236-C9766D2A4F07</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -273,15 +273,15 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>keyword</key>
 				<string>slurp</string>
 				<key>subtext</key>
-				<string>All Diss URLs</string>
+				<string>All URLs in "{var:slurp_list}"</string>
 				<key>text</key>
 				<string>Slurp</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
@@ -481,9 +481,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<string></string>
 	<key>uidata</key>
 	<dict>
 		<key>176B3709-D464-44CD-82D0-AE82E3F8497F</key>
@@ -656,6 +654,48 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>search_logfile</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>URLs</string>
+				<key>placeholder</key>
+				<string>URLs</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Reminders list to slurp from</string>
+			<key>label</key>
+			<string>Slurp List</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>slurp_list</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>main-vault</string>
+				<key>placeholder</key>
+				<string>main-vault</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Obsidian Vault name to slurp into</string>
+			<key>label</key>
+			<string>Slurp Vault</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>slurp_vault</string>
 		</dict>
 	</array>
 	<key>version</key>
