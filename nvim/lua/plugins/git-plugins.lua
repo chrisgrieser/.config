@@ -52,6 +52,9 @@ return {
 					ignoreAuthors = { "🤖 automated" },
 					maxMsgLen = 50,
 				},
+				branchState = {
+					icons = { diverge = "󰞇 " },
+				},
 			},
 		},
 		config = function(_, opts)
