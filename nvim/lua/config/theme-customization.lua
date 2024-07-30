@@ -18,7 +18,6 @@ local function customHighlights()
 
 	setHl("Whitespace", { link = "NonText" }) -- trailing spaces more visible
 	setHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
-	setHl("@character.printf", { link = "SpecialChar" }) -- missing in many themes
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
@@ -30,7 +29,7 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- Comments: color in grey and add underlines
+	-- Comments: keep color and add underlines
 	local commentFg = u.getHlValue("Comment", "fg")
 	setHl("@string.special.url.comment", { fg = commentFg, underline = true })
 end
@@ -79,6 +78,8 @@ function M.themeModifications()
 	elseif theme == "dawnfox" then
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
 		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
+		setHl("@markup.italic", { italic = true }) -- FIX
+		setHl("@character.printf", { link = "SpecialChar" }) 
 		updateHl("@markup.raw", "gui=none") -- no italics
 
 		setHl("ColorColumn", { bg = "#e9dfd2" })

@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			end)
 			:filter(function(bufnr)
 				local bufPath = vim.api.nvim_buf_get_name(bufnr)
-				local doesNotExist = vim.loop.fs_stat(bufPath) == nil
+				local doesNotExist = vim.uv.fs_stat(bufPath) == nil
 				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
 				local notNewBuffer = bufPath ~= ""
 				return doesNotExist and notSpecialBuffer and notNewBuffer
@@ -82,8 +82,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			u.notify("󰱝 Buffers closed", text)
 		end
 
-		-- closing all buffers and thus ending up in empty buffer, re-open the
-		-- first oldfile that exists
+		-- If ending up in empty buffer, re-open the first oldfile that exists
 		vim.defer_fn(function()
 			if vim.api.nvim_buf_get_name(0) ~= "" then return end
 			for _, file in ipairs(vim.v.oldfiles) do
@@ -166,7 +165,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		vim.defer_fn(function()
 			-- GUARD
-			local stats = vim.loop.fs_stat(ctx.file)
+			local stats = vim.uv.fs_stat(ctx.file)
 			if not stats then return end
 			local fileNotEmpty = stats.size > 10 -- account for single linebreaks etc.
 			if fileNotEmpty then return end

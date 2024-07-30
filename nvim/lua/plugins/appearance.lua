@@ -57,14 +57,13 @@ return {
 			},
 		},
 		opts = {
-			render_modes = { "n", "c", "i" },
-			bullet = {
-				icons = { "•", "◦", "▪️", "▫️" },
-			},
+			render_modes = { "n", "c", "i", "v", "V" },
+			bullet = { icons = { "•", "◦", "▪️", "▫️" } },
+			heading = { icons = {} }, -- no replacements
+			code = { border = "thick" },
 			pipe_table = { enabled = false }, -- sluggish on bigger files
 			latex = { enabled = false }, -- unneeded
 			sign = { enabled = false },
-			code = { border = "thick" },
 			win_options = {
 				-- toggling this plugin should also toggle conceallevel
 				conceallevel = { default = 0, rendered = 3 },
