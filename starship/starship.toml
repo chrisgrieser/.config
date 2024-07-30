@@ -54,7 +54,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 # General
 "Library/Mobile Documents/com~apple~CloudDocs" = "󰀸 "
 "~/Desktop" = "/󰇄 "
-"~" = "/ "
+"~" = "/ "
 
 # my perma-repos
 ".config" = " "
