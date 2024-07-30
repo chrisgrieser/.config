@@ -147,17 +147,18 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 -- SKELETONS (TEMPLATES)
 
 -- CONFIG
-local templateDir = vim.fn.stdpath("config") .. "/templates" 
-local skeletons = { ---@type table<string, string[]> key = filetype, 1: glob, 2: template file
+---@type table<string, string[]> key = filetype, 1: glob, 2: template file, 3: new filetype
+local skeletons = {
 	python = { "**/*.py", "template.py" },
 	lua = { vim.g.localRepos .. "/**/lua/**/*.lua", "module.lua" },
 	applescript = { "**/*.applescript", "template.applescript" },
 	javascript = { "**/Alfred.alfredpreferences/workflows/**/*.js", "jxa.js" },
 	just = { "**/*Justfile", "justfile.just" },
-	sh = { "**/*.sh", "template.zsh" },
+	sh = { "**/*.sh", "template.zsh", "zsh" },
 	toml = { "**/*typos.toml", "typos.toml" },
 	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
 }
+local templateDir = vim.fn.stdpath("config") .. "/templates"
 
 -- `BufNewFile` doesn't trigger on files created outside vim, thus using `FileType`
 vim.api.nvim_create_autocmd("FileType", {
@@ -173,6 +174,9 @@ vim.api.nvim_create_autocmd("FileType", {
 			local glob = skeletons[ft][1]
 			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)
 			if not matchesGlob then return end
+
+			local newFt = skeletons[ft][3]
+			if newFt then vim.bo[ctx.buf].filetype = newFt end
 
 			-- read template & look for cursor placeholder
 			local skeletonFile = vim.fs.normalize(templateDir) .. "/" .. skeletons[ft][2]
