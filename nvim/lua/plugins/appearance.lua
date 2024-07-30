@@ -38,7 +38,7 @@ return {
 			winblend = 10, -- little transparency, since hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
-				marks = { enable = false }, -- prevents not creating mark mappings
+				marks = { enable = false }, -- prevents buggy mark mappings
 				quickfix = { enable = true },
 			},
 		},
@@ -58,11 +58,15 @@ return {
 		},
 		opts = {
 			render_modes = { "n", "c", "i", "v", "V" },
-			bullet = { icons = { "•", "◦", "▪️", "▫️" } },
-			heading = { icons = {} }, -- no replacements
-			code = { border = "thick" },
-			pipe_table = { enabled = false }, -- sluggish on bigger files
-			latex = { enabled = false }, -- unneeded
+			bullet = {
+				icons = { "•", "◦", "▪️", "▫️" },
+			},
+			heading = {
+				position = "inline",
+			},
+			code = {
+				border = "thick",
+			},
 			sign = { enabled = false },
 			win_options = {
 				-- toggling this plugin should also toggle conceallevel

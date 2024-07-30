@@ -33,8 +33,9 @@ function run(argv) {
 	writeToFile(readLaterFile, items.join("\n"));
 
 	// open URL
-	const url = selectedLine.split("](")[1].split(")")[0];
-	app.openLocation(url);
-
-	return null;
+	const onlyMarkAsRead = $.getenv("only_mark_as_read") === "true";
+	if (!onlyMarkAsRead) {
+		const url = selectedLine.split("](")[1].split(")")[0];
+		app.openLocation(url);
+	}
 }
