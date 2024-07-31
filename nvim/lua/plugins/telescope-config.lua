@@ -92,12 +92,7 @@ local function telescopeConfig()
 				-- of files is sorted by recently modified files. (`fd` does not
 				-- have a `--sort` flag.)
 				-- alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
-				find_command = {
-					"rg",
-					"--no-config",
-					"--follow",
-					"--files",
-					"--sortr=modified",
+				find_command = { "rg", "--no-config", "--follow", "--files", "--sortr=modified",
 					("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
 				},
 
