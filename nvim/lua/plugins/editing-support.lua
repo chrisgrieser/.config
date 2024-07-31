@@ -22,16 +22,13 @@ return {
 		keys = {
 			{
 				"<leader>?",
+				-- alternative: `:Telescope keymaps` with `only_buf = true`
 				function() require("which-key").show { global = false } end,
-				desc = "Buffer Local Keymaps (which-key)",
+				desc = "⌨️ Buffer Keymaps (which-key)",
 			},
 		},
 		opts = {
 			delay = 500,
-			triggers = {
-				{ "<auto>", mode = "nixsotc" },
-				{ "a", mode = { "n", "v" } },
-			},
 			spec = {
 				{ "<leader>", group = "󰓎 leader" },
 				{ "<leader>i", group = "󱈄 Inspect" },
