@@ -149,43 +149,37 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 -- CONFIG
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
-	["**/lua/*.lua"] = "module.lua",
 	[vim.g.localRepos .. "/**/lua/**/*.lua"] = "module.lua",
 	["**/lua/funcs/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.sh"] = "template.zsh",
 	["**/*.applescript"] = "template.applescript",
-	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 
 	["**/*Justfile"] = "justfile.just",
+	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 	["**/*typos.toml"] = "typos.toml",
 	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
 }
 
--- `BufNewFile` doesn't trigger on files created outside nvim
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+	-- `BufReadPost` for files created outside of nvim
 	callback = function(ctx)
-		vim.defer_fn(function()
-			-- GUARD
+		vim.defer_fn(function() -- defer, so new files are written
 			local stats = vim.uv.fs_stat(ctx.file)
 			if not stats or stats.size > 10 then return end -- 10 bytes for file metadata
-			local filename = ctx.file
-			vim.notify("👾 filename: " .. tostring(filename))
 
 			-- determine template from glob
-			local matchingGlob = vim.iter(globToTemplateMap):find(
-				function(glob) return vim.glob.to_lpeg(glob):match(filename) end
-			)
-			if not matchingGlob then return end
-			local ft = vim.bo.filetype
-			if not ft or not globToTemplateMap[ft] then return end
-			local templateFile = globToTemplateMap[matchingGlob]
+			local matchedGlob = vim.iter(globToTemplateMap):find(function(glob)
+				local globMatchesFilename = vim.glob.to_lpeg(glob):match(ctx.file)
+				return globMatchesFilename
+			end)
+			if not matchedGlob then return end
+			local templateFile = globToTemplateMap[matchedGlob]
 			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
-			vim.notify("👾 templatePath: " .. tostring(templatePath))
 
-			-- read template & look for cursor placeholder
-			local lines = {}
+			-- read template & move to cursor placeholder
+			local content = {}
 			local cursor
 			local row = 1
 			for line in io.lines(templatePath) do
@@ -194,14 +188,16 @@ vim.api.nvim_create_autocmd("FileType", {
 					line = line:gsub("%$0", "")
 					cursor = { row, placeholderPos - 1 }
 				end
-				table.insert(lines, line)
+				table.insert(content, line)
 				row = row + 1
 			end
-
-			-- write & set cursor
-			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+			vim.api.nvim_buf_set_lines(0, 0, -1, false, content)
 			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
-		end, 100)
+
+			-- if filetype changed due to template (e.g., applying `zsh` to `.sh` files)
+			local newFt = vim.filetype.match { buf = ctx.buf }
+			if vim.bo[ctx.buf].ft ~= newFt then vim.bo[ctx.buf].ft = newFt end
+		end, 50)
 	end,
 })
 
