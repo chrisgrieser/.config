@@ -99,11 +99,11 @@ return {
 					ccc.picker.css_hsl,
 					ccc.picker.css_name,
 					ccc.picker.ansi_escape(
-						{ black = "#767676", blue = "#3165ff" }, -- lighter for readability
+						{ black = "#767676", blue = "#3165ff" }, -- higher contrast
 						{ meaning1 = "bold" }
 					),
 				},
-				alpha_show = "hide", -- needed when highlighter.lsp is set to true
+				alpha_show = "hide", -- hide by default
 				recognize = { output = true }, -- automatically recognize color format under cursor
 				inputs = { ccc.input.hsl }, -- always use HSL-logic for input
 				outputs = {
@@ -111,12 +111,17 @@ return {
 					ccc.output.css_rgb,
 					ccc.output.hex,
 				},
+				disable_default_mappings = true,
 				mappings = {
+					["<CR>"] = ccc.mapping.complete,
 					["<Esc>"] = ccc.mapping.quit,
 					["q"] = ccc.mapping.quit,
+					["l"] = ccc.mapping.increase1,
+					["h"] = ccc.mapping.decrease1,
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
-					["o"] = ccc.mapping.cycle_output_mode, -- = change output format
+					["o"] = ccc.mapping.cycle_output_mode,
+					["a"] = ccc.mapping.toggle_alpha
 				},
 			}
 		end,
@@ -130,8 +135,6 @@ return {
 				return vim.ui.select(items, opts, on_choice)
 			end
 
-			---@param opts { prompt?: string, default?: any, completion?: string, highlight?: function }
-			---@param on_confirm function ((input|nil) -> ())
 			vim.ui.input = function(opts, on_confirm)
 				require("lazy").load { plugins = { "dressing.nvim" } }
 				return vim.ui.input(opts, on_confirm)

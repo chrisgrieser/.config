@@ -2,7 +2,8 @@ local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
----Set up subkey for the <leader> key
+---Set up subkey for the <leader> key. Used for plugin-specific bindings, so
+---they are cleanly grouped with the plugin config.
 ---@param key string
 ---@param label string
 ---@param modes? string|string[]
