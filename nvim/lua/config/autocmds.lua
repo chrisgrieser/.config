@@ -121,7 +121,7 @@ local function searchCountIndicator(mode)
 	})
 end
 
--- without the `searchCountIndicator`, this function simply does `auto-nohl`
+-- without the `searchCountIndicator`, this `on_key` simply does `auto-nohl`
 vim.on_key(function(char)
 	local key = vim.fn.keytrans(char)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
@@ -150,7 +150,8 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
 	[vim.g.localRepos .. "/**/lua/**/*.lua"] = "module.lua",
-	["**/lua/funcs/*.lua"] = "module.lua",
+	[vim.fn.stdpath("config") .. "/lua/funcs/*.lua"] = "module.lua",
+	["**/hammerspoon/modules/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.sh"] = "template.zsh",
