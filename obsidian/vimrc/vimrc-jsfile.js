@@ -256,19 +256,22 @@ function openNextLink(where) {
 	// check if cursor is on a link
 	const cursor = editor.getCursor();
 	const fullLine = editor.getLine(cursor.line);
-	let linkStart;
-	let linkEnd;
+	let linkStart = 0;
+	let linkEnd = 0;
 	let posInLine = 0;
+	let cursorIsOnLink = false;
 	while (true) {
 		const { start, end } = rangeOfFirstLink(fullLine.slice(posInLine));
-		if (start === -1 || start > cursor.ch) break
-		linkStart = start;
-		linkEnd = end;
+		if (start === -1) break; // no link left
+		linkStart += start;
+		linkEnd += end;
+		cursorIsOnLink = linkStart >= cursor.ch && linkEnd <= cursor.ch;
+		if (cursorIsOnLink) break;
 		posInLine += end;
-	} 
+	}
 
 	// if not, seek forwards for a link
-	if (linkStart === undefined) {
+	if (cursorIsOnLink) {
 		const offset = editor.posToOffset(cursor);
 		const textAfterCursor = editor.getValue().slice(offset);
 		const linkAfterCursorOffset = rangeOfFirstLink(textAfterCursor).start;
