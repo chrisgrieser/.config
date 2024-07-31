@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- Delete all non-existing buffers on `FocusGained`
+-- Close all non-existing buffers on `FocusGained`
 vim.api.nvim_create_autocmd("FocusGained", {
 	callback = function()
 		local closedBuffers = {}
@@ -168,10 +168,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 		vim.defer_fn(function() -- defer, so new files are written
 			local stats = vim.uv.fs_stat(ctx.file)
 			if not stats or stats.size > 10 then return end -- 10 bytes for file metadata
+			local filepath, bufnr = ctx.file, ctx.buf
 
 			-- determine template from glob
 			local matchedGlob = vim.iter(globToTemplateMap):find(function(glob)
-				local globMatchesFilename = vim.glob.to_lpeg(glob):match(ctx.file)
+				local globMatchesFilename = vim.glob.to_lpeg(glob):match(filepath)
 				return globMatchesFilename
 			end)
 			if not matchedGlob then return end
@@ -194,9 +195,9 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, content)
 			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
 
-			-- if filetype changed due to template (e.g., applying `zsh` to `.sh` files)
-			local newFt = vim.filetype.match { buf = ctx.buf }
-			if vim.bo[ctx.buf].ft ~= newFt then vim.bo[ctx.buf].ft = newFt end
+			-- adjust filetype if needed (e.g. applying a zsh template to .sh files)
+			local newFt = vim.filetype.match { buf = bufnr }
+			if vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
 		end, 50)
 	end,
 })

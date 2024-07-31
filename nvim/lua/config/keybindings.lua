@@ -218,9 +218,9 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 -- BUFFERS & FILES
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 
--- stylua: ignore start
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
+-- stylua: ignore start
 keymap({ "n", "x" }, "<CR>", function() require("funcs.alt-alt").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
 keymap({ "n", "x" }, "<D-CR>", function() require("funcs.magnet").gotoChangedFiles() end, { desc = "󰊢 Goto Changed File" })
 -- stylua: ignore end
@@ -229,7 +229,9 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bwipeout) end
+	if not winClosed and moreThanOneBuffer then
+		pcall(vim.api.nvim_buf_delete, 0, { force = true })
+	end
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
