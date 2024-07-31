@@ -7,11 +7,12 @@ local u = require("modules.utils")
 --------------------------------------------------------------------------------
 
 local config = {
-	activeInMonths = { "May", "Jun", "Jul", "Aug", "Sep" },
+	activeInMonths = { "Jun", "Jul", "Aug", "Sep" },
 	checkIntervalMins = 30,
 
 	-- INFO right-click on a location in Google Maps to get the latitude/longitude
-	-- roughly Berlin-Tegel (no precise location due to pricacy)
+	-- roughly Berlin-Tegel
+	-- WARN no precise location as this dotfile repo is public
 	latitude = 52,
 	longitude = 13,
 	insideTemp = 25,
