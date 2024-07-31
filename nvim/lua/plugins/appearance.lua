@@ -44,10 +44,36 @@ return {
 		},
 	},
 	{ -- markdown live-preview
-		"OXY2DEV/markview.nvim",
-		-- main = "render-markdown",
+		"MeanderingProgrammer/markdown.nvim",
+		main = "render-markdown",
+		-- alternative: markview.nvim (similar featureset, though bit buggy)
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = "markdown",
+		keys = {
+			{
+				"<leader>oc",
+				function() require("render-markdown").toggle() end,
+				ft = "markdown",
+				desc = " Markdown Render",
+			},
+		},
+		opts = {
+			render_modes = { "n", "c", "i", "v", "V" },
+			bullet = {
+				icons = { "•", "◦", "▪️", "▫️" },
+			},
+			heading = {
+				icons = {}, -- disables icons
+			},
+			code = {
+				border = "thick",
+			},
+			sign = { enabled = false },
+			win_options = {
+				-- toggling this plugin should also toggle conceallevel
+				conceallevel = { default = 0, rendered = 3 },
+			},
+		},
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
