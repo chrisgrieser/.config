@@ -31,7 +31,7 @@ return {
 		opts = {
 			delay = 500,
 			spec = {
-				{ "<leader>", group = "󰓎 leader" },
+				{ "<leader>", group = "󰓎 Leader" },
 				{ "<leader>i", group = "󱈄 Inspect" },
 				{ "<leader>o", group = "󰒓 Options" },
 				{ "<leader>p", group = "󰏗 Packages" },
@@ -349,7 +349,12 @@ return {
 		"Wansmer/treesj",
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-			{ "<leader>s", "gww", ft = { "markdown", "applescript" }, desc = "󰗈 Split line" },
+			{
+				"<leader>s",
+				"gww",
+				ft = { "markdown", "applescript", "plaintext" },
+				desc = "󰗈 Split line",
+			},
 		},
 		opts = {
 			use_default_keymaps = false,
@@ -395,14 +400,14 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkey_leader_subkey("l", "󰐪 Log", { "n", "x" }) end,
 		opts = {
-			marker = "👾",
+			marker = "🟣",
 			logStatements = {
 				objectLog = {
 					-- re-purposing `objectLog` for debugging via AppleScript notification
 					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 
 					-- hammerspoon
-					lua = [[print("%s %s: " .. hs.inspect(%s))]],
+					lua = 'print("%s %s: " .. hs.inspect(%s))',
 				},
 			},
 		},

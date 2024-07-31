@@ -107,6 +107,12 @@ function openAppearanceSettings() {
 	container.scrollTop = container.scrollHeight;
 }
 
+function openCommunityPluginsSettings() {
+	const setting = view.app.setting;
+	setting.open();
+	setting.openTabById("community-plugins");
+}
+
 function openDynamicHighlightsSettings() {
 	const setting = view.app.setting;
 	setting.open();

@@ -333,6 +333,10 @@ nnoremap ,ps :openSnippetDir
 exmap openAppearanceSettings jsfile Meta/vimrc-jsfile.js { openAppearanceSettings() }
 nnoremap ,pa :openAppearanceSettings
 
+" open community plugin settings
+exmap openCommunityPluginsSettings jsfile Meta/vimrc-jsfile.js { openCommunityPluginsSettings() }
+nnoremap ,pl :openCommunityPluginsSettings
+
 " [i] install [p]lugins
 exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
 nnoremap ,pi :installPlugins
