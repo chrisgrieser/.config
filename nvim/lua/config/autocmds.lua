@@ -147,43 +147,48 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 -- SKELETONS (TEMPLATES)
 
 -- CONFIG
----@type table<string, string[]> key = filetype, 1: glob, 2: template file, 3: new filetype
-local skeletons = {
-	python = { "**/*.py", "template.py" },
-	lua = { vim.g.localRepos .. "/**/lua/**/*.lua", "module.lua" },
-	applescript = { "**/*.applescript", "template.applescript" },
-	javascript = { "**/Alfred.alfredpreferences/workflows/**/*.js", "jxa.js" },
-	just = { "**/*Justfile", "justfile.just" },
-	sh = { "**/*.sh", "template.zsh", "zsh" },
-	toml = { "**/*typos.toml", "typos.toml" },
-	yaml = { "**/.github/workflows/**/*.y*ml", "github-action.yaml" },
-}
 local templateDir = vim.fn.stdpath("config") .. "/templates"
+local globToTemplateMap = {
+	["**/lua/*.lua"] = "module.lua",
+	[vim.g.localRepos .. "/**/lua/**/*.lua"] = "module.lua",
+	["**/lua/funcs/*.lua"] = "module.lua",
 
--- `BufNewFile` doesn't trigger on files created outside vim, thus using `FileType`
+	["**/*.py"] = "template.py",
+	["**/*.sh"] = "template.zsh",
+	["**/*.applescript"] = "template.applescript",
+	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
+
+	["**/*Justfile"] = "justfile.just",
+	["**/*typos.toml"] = "typos.toml",
+	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
+}
+
+-- `BufNewFile` doesn't trigger on files created outside nvim
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = vim.tbl_keys(skeletons),
 	callback = function(ctx)
 		vim.defer_fn(function()
 			-- GUARD
 			local stats = vim.uv.fs_stat(ctx.file)
-			if not stats then return end
-			local fileNotEmpty = stats.size > 10 -- account for single linebreaks etc.
-			if fileNotEmpty then return end
-			local ft = ctx.match
-			local glob = skeletons[ft][1]
-			local matchesGlob = vim.glob.to_lpeg(glob):match(ctx.file)
-			if not matchesGlob then return end
+			if not stats or stats.size > 10 then return end -- 10 bytes for file metadata
+			local filename = ctx.file
+			vim.notify("👾 filename: " .. tostring(filename))
 
-			local newFt = skeletons[ft][3]
-			if newFt then vim.bo[ctx.buf].filetype = newFt end
+			-- determine template from glob
+			local matchingGlob = vim.iter(globToTemplateMap):find(
+				function(glob) return vim.glob.to_lpeg(glob):match(filename) end
+			)
+			if not matchingGlob then return end
+			local ft = vim.bo.filetype
+			if not ft or not globToTemplateMap[ft] then return end
+			local templateFile = globToTemplateMap[matchingGlob]
+			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
+			vim.notify("👾 templatePath: " .. tostring(templatePath))
 
 			-- read template & look for cursor placeholder
-			local skeletonFile = vim.fs.normalize(templateDir) .. "/" .. skeletons[ft][2]
 			local lines = {}
 			local cursor
 			local row = 1
-			for line in io.lines(skeletonFile) do
+			for line in io.lines(templatePath) do
 				local placeholderPos = line:find("%$0")
 				if placeholderPos then
 					line = line:gsub("%$0", "")
@@ -193,25 +198,24 @@ vim.api.nvim_create_autocmd("FileType", {
 				row = row + 1
 			end
 
-			-- overwrite so it's idempotent, since `FileType` event is sometimes triggered twice
+			-- write & set cursor
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
-		end, 1)
+		end, 100)
 	end,
 })
 
 --------------------------------------------------------------------------------
 
 -- QUICKFIX LIST: ADD SIGNS
+local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
-		local sign = "" -- CONFIG
-
 		local ns = vim.api.nvim_create_namespace("quickfixSigns")
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
-				sign_text = sign,
+				sign_text = quickfixSign,
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})

@@ -229,7 +229,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bdelete) end
+	if not winClosed and moreThanOneBuffer then pcall(vim.cmd.bwipeout) end
 end, { desc = "󰽙 :close / :bdelete" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
