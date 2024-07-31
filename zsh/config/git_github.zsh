@@ -55,7 +55,7 @@ _change_git_files() {
 	done < <(git -c status.relativePaths=true status --porcelain --untracked-files | cut -c4-)
 
 	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
-	compadd "${expl[@]}" -- "${changed_files[@]}"
+	compadd "${expl[@]}" -Q -- "${changed_files[@]}"
 }
 compdef _change_git_files ga
 compdef _change_git_files gd
