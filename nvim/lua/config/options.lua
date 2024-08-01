@@ -103,11 +103,8 @@ end
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
--- vim.schedule(function() opt.clipboard = "unnamedplus" end)
-local timelogStart = os.time() -- 🟣
-opt.clipboard = "unnamedplus"
-local durationSecs = os.difftime(os.time(), timelogStart) -- 🟣
-vim.notify("🟣:", durationSecs, "s")
+-- deferred, since sometimes slow
+vim.schedule(function() opt.clipboard = "unnamedplus" end)
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
