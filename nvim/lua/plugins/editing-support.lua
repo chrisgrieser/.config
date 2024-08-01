@@ -154,7 +154,13 @@ return {
 				"<leader>fs",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
-				desc = " rip substitute",
+				desc = " rip-substitute",
+			},
+			{
+				"<leader>fc",
+				function() require("rip-substitute").rememberCursorWord() end,
+				mode = { "n", "x" },
+				desc = " remember cword (rip-sub)",
 			},
 		},
 		opts = {
