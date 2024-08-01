@@ -6,13 +6,12 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 ---they are cleanly grouped with the plugin config.
 ---@param key string
 ---@param label string
----@param modes? string|string[]
-vim.g.whichkey_leader_subkey = function(key, label, modes)
+vim.g.whichkey_leader_subkey = function(key, label)
 	-- delayed, to ensure whichkey spec is loaded & not interfere with whichkey's lazy-loading
 	vim.defer_fn(function()
 		local ok, whichkey = pcall(require, "which-key")
 		if not ok then return end
-		whichkey.add { { "<leader>" .. key, group = label, mode = modes } }
+		whichkey.add { { "<leader>" .. key, group = label, mode = { "n", "x" } } }
 	end, 1500)
 end
 
@@ -34,16 +33,19 @@ return {
 			},
 		},
 		opts = {
-			delay = 500,
+			delay = 400,
 			spec = {
-				{ "<leader>", group = "󰓎 Leader" },
-				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>o", group = "󰒓 Options" },
-				{ "<leader>p", group = "󰏗 Packages" },
-				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>c", group = " Code Action", mode = { "n", "x" } },
-				{ "<leader>f", group = "󱗘 Refactor", mode = { "n", "x" } },
-				{ "<leader>g", group = "󰊢 Git", mode = { "n", "x" } },
+				{
+					mode = { "n", "x" },
+					{ "<leader>", group = "󰓎 Leader" },
+					{ "<leader>i", group = "󱈄 Inspect" },
+					{ "<leader>o", group = "󰒓 Options" },
+					{ "<leader>p", group = "󰏗 Packages" },
+					{ "<leader>u", group = "󰕌 Undo" },
+					{ "<leader>c", group = " Code Action" },
+					{ "<leader>f", group = "󱗘 Refactor" },
+					{ "<leader>g", group = "󰊢 Git" },
+				},
 				{ -- not using `text_objects` preset, since it's too crowded
 					mode = "o",
 					{ "r", group = "rest of" },
@@ -409,7 +411,7 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
-		init = function() vim.g.whichkey_leader_subkey("l", "󰐪 Log", { "n", "x" }) end,
+		init = function() vim.g.whichkey_leader_subkey("l", "󰐪 Log") end,
 		opts = {
 			marker = "🟣",
 			logStatements = {

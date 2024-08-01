@@ -7,11 +7,9 @@ local aw = hs.application.watcher
 local now = os.time
 --------------------------------------------------------------------------------
 
----times after which apps should quit, in minutes
----(Apps not in this list will be ignored and never quit automatically).
----@class (exact) autoQuitterConfig
----@field thresholdMins table<string, integer>
----@field checkIntervalSecs integer
+---Times after which apps should quit. Apps not in this list will be ignored and
+---never quit automatically.
+---@type { thresholdMins: table<string, integer>, checkIntervalSecs: integer }
 local config = {
 	checkIntervalSecs = 30,
 	thresholdMins = {
