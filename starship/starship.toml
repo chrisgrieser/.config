@@ -114,13 +114,17 @@ behind = '[ 󰶡$count](fg:yellow bg:black)'
 style = 'bg:black'
 format = '[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)'
 
-# INFO putting a variable into a bracket ensures that the bracket content is
+# INFO putting a variable into round bracket ensures that the bracket content is
 # only shown when the variable is set.
 [git_metrics] # changed lines
 disabled = false
-added_style = "fg:green bg:black"
-deleted_style = "fg:red bg:black"
-format = '(\([(+$added)]($added_style)/[(-$deleted)]($deleted_style)\))'
+format = """\[
+([\\(](fg:blue bg:black)\
+[(+$added)](fg:green bg:black)\
+[/](fg:blue bg:black)\
+[(-$deleted)](fg:red bg:black)\
+[\\)](fg:blue bg:black))\
+"""
 
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE

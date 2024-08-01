@@ -5,11 +5,12 @@ local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
 
 ---@return string?
 local function getCommentstr()
-	if vim.bo.commentstring == "" then
+	local comStr = vim.bo.commentstring
+	if not comStr or comStr == "" then
 		vim.notify("No commentstring for " .. vim.bo.ft, vim.log.levels.WARN, { title = "Comment" })
 		return
 	end
-	return vim.bo.commentstring
+	return comStr
 end
 
 --------------------------------------------------------------------------------
@@ -36,19 +37,18 @@ function M.commentHr()
 	local textwidth = vim.o.textwidth > 0 and vim.o.textwidth or 80
 	local hrLength = textwidth - (indentLength + comStrLength)
 
-	-- construct hr
+	-- construct HR
 	local hrChar = comStr:find("%-") and "-" or "─"
 	local hr = hrChar:rep(hrLength)
 	local hrWithComment = comStr:format(hr)
 
-	-- filetype-specific
+	-- filetype-specific considerations
 	local formatterWantPadding = { "python", "css", "scss" }
-	if vim.bo.filetype == "markdown" then
-		hrWithComment = "---"
-	elseif not vim.tbl_contains(formatterWantPadding, vim.bo.filetype) then
+	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
 		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end
 	local fullLine = indent .. hrWithComment
+	if vim.bo.ft == "markdown" then fullLine = "---" end
 
 	-- append lines & move
 	vim.api.nvim_buf_set_lines(0, startLn, startLn, true, { fullLine, "" })
@@ -121,9 +121,8 @@ end
 
 --------------------------------------------------------------------------------
 
----@param where "eol" | "above" | "below"
+---@param where "eol"|"above"|"below"
 function M.addComment(where)
-	-- get base values
 	local comStr = getCommentstr()
 	if not comStr then return end
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
@@ -137,7 +136,7 @@ function M.addComment(where)
 	end
 
 	-- determine comment behavior
-	local placeHolderAtEnd = comStr:match("%%s$") ~= nil
+	local placeHolderAtEnd = comStr:find("%%s$") ~= nil
 	local line = vim.api.nvim_get_current_line()
 	local emptyLine = line == ""
 
