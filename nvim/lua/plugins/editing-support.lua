@@ -20,6 +20,11 @@ return {
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		init = function()
+			-- so they do not fill the whichkey overlay
+			vim.keymap.del({ "o", "x" }, "gc") 
+			vim.keymap.del("n", "gcc") 
+		end,
 		keys = {
 			{
 				"<leader>?",

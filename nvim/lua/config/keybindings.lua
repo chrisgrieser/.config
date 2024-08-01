@@ -139,10 +139,6 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
 --------------------------------------------------------------------------------
 -- COMMENTS
 -- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
-
--- needs `remap = true`, as those are nvim-keymaps (not vim-keymaps)
-vim.keymap.del({ "o", "x" }, "gc")
-vim.keymap.del("n", "gcc")
 keymap(
 	{ "n", "x" },
 	"q",
