@@ -27,6 +27,7 @@ brew "mas"
 brew "neovim"
 brew "pandoc"
 brew "pass"
+brew "pdfgrep"
 brew "pinentry-mac"
 brew "ripgrep"
 brew "spotify_player"
@@ -74,3 +75,4 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
+mas "WISO Steuer 2024", id: 6463142140
