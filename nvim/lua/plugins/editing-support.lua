@@ -295,6 +295,8 @@ return {
 				remap = true,
 				desc = "$󰘦 Template string & change quotes",
 			},
+			{ "'", "ysiw'", remap = true, desc = "Surround cword with '" },
+			{ '"', 'ysiw"', remap = true, desc = "Surround cword with '" },
 		},
 		opts = {
 			move_cursor = false,

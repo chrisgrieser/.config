@@ -67,6 +67,7 @@ return {
 			},
 			code = {
 				border = "thick",
+				position = "right",
 			},
 			sign = { enabled = false },
 			win_options = {
@@ -121,7 +122,7 @@ return {
 					["L"] = ccc.mapping.increase10,
 					["H"] = ccc.mapping.decrease10,
 					["o"] = ccc.mapping.cycle_output_mode,
-					["a"] = ccc.mapping.toggle_alpha
+					["a"] = ccc.mapping.toggle_alpha,
 				},
 			}
 		end,

@@ -9,10 +9,10 @@ local pathw = hs.pathwatcher.new
 -- CONFIG
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
 local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
-local desktopPath = home .. "/Desktop/"
+local desktop = home .. "/Desktop/"
 local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 
-M.pathw_fileHub = pathw(desktopPath, function(paths, _)
+M.pathw_fileHub = pathw(desktop, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, path in pairs(paths) do
@@ -37,7 +37,7 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 				os.remove(path)
 			end
 
-		-- 3a. FILE BACKUP BROWSER SETTINGS
+		-- 3. BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
 			os.rename(path, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
@@ -51,8 +51,6 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			os.rename(path, browserSettings .. "ublock-settings.json")
 		elseif name:find("stylus%-.*%.json") then
 			os.rename(path, browserSettings .. "stylus.json")
-
-		-- 3b. FILE INOREADER FEEDS BACKUP
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
@@ -65,7 +63,18 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 			hs.open(gameFolder)
 			hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
 
-		-- 5. AUTO-INSTALL OBSIDIAN ALPHA
+		-- 5. DATESTAMP SCANS FROM THE IPHONE
+		elseif name:find("Scanned Document.*.pdf") then
+			local dateStamp = os.date("%Y-%m-%d")
+			local counter = 1
+			local newName
+			repeat -- ensure file does not exist
+				newName = ("%s/Scanned_Document_%d %s.pdf"):format(desktop, counter, dateStamp)
+				counter = counter + 1
+			until hs.fs.attributes(newName) == nil
+			os.rename(path, newName)
+
+		-- 6. AUTO-INSTALL OBSIDIAN ALPHA
 		-- needs delay and `.crdownload` check, since the renaming is sometimes
 		-- not picked up by hammerspoon
 		elseif name:find("%.crdownload$") or (name:find("%.asar%.gz$") and isDownloaded) then
@@ -81,7 +90,7 @@ M.pathw_fileHub = pathw(desktopPath, function(paths, _)
 					while pgrep -xq "Obsidian" ; do sleep 0.1; done
 					sleep 0.2
 					open -a "Obsidian"
-				]]):format(desktopPath))
+				]]):format(desktop))
 				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 			end)
 		end
