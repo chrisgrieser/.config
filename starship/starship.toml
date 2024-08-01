@@ -37,7 +37,7 @@ style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal
 
 [sudo]
 disabled = false
-style = 'fg:red bg:black'
+style = 'fg:yellow bg:black'
 symbol = " "
 format = "[ $symbol]($style)"
 
@@ -115,15 +115,15 @@ style = 'bg:black'
 format = '[($ahead_behind$conflicted$stashed$staged$untracked$renamed$modified$deleted )]($style)'
 
 # INFO putting a variable into round bracket ensures that the bracket content is
-# only shown when the variable is set.
+# only shown when the variable is set. `bright-black` is effectively gray.
 [git_metrics] # changed lines
 disabled = false
-format = """\[
-([\\(](fg:blue bg:black)\
+format = """\
+([\\(](fg:bright-black bg:black)\
 [(+$added)](fg:green bg:black)\
-[/](fg:blue bg:black)\
+[/](fg:bright-black bg:black)\
 [(-$deleted)](fg:red bg:black)\
-[\\)](fg:blue bg:black))\
+[\\)](fg:bright-black bg:black))\
 """
 
 #───────────────────────────────────────────────────────────────────────────────
