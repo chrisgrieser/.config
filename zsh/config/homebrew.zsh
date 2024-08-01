@@ -35,14 +35,6 @@ function _print-section() {
 	_separator
 }
 
-function _dump() {
-	local brewfile_path="$HOME/.config/.installed-apps-and-packages"
-	local device_name
-	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
-	print "\e[0;38;5;247mBrewfile saved at \e[4m$(basename "$brewfile_path")\e[0m"
-}
-
 #───────────────────────────────────────────────────────────────────────────────
 
 function update_cmdline_tools {
@@ -79,11 +71,17 @@ function update() {
 	fi
 
 	_print-section "Finish up"
-	# sketchybar restart for new persmission
+	# sketchybar restart for new permission
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
-	_dump
+	# save brewfile
+	local brewfile_path="$HOME/.config/.installed-apps-and-packages"
+	local device_name
+	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
+	print "\e[0;38;5;247mBrewfile saved in \e[1m$(basename "$brewfile_path")\e[0m"
+
 	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
 }
 
@@ -94,8 +92,10 @@ function listall() {
 
 	_print-section "brew taps"
 	brew tap | rs
+
 	_print-section "brew leaves --installed-on-request"
 	brew leaves --installed-on-request | rs
+
 	_print-section "brew list --casks"
 	brew list --casks
 
