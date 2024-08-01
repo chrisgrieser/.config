@@ -1,6 +1,30 @@
 local u = require("config.utils")
+--------------------------------------------------------------------------------
+
+-- SYNC TERMINAL BACKGROUND
+-- SOURCE https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
+-- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
+if not vim.g.neovide then
+	local termBgModified = false
+	vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+		callback = function()
+			local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+			if normal.bg then
+				io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+				termBgModified = true
+			end
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("UILeave", {
+		callback = function()
+			if termBgModified then io.write("\027]111\027\\") end
+		end,
+	})
+end
 
 --------------------------------------------------------------------------------
+
 -- AUTO-SAVE
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
