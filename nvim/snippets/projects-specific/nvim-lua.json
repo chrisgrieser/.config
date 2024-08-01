@@ -80,6 +80,16 @@
     ],
     "prefix": "leave visual mode"
   },
+  "minimum version requirement": {
+    "body": [
+      "local version = vim.version()",
+      "if version.major == 0 and version.minor < ${2:10} then",
+      "\tvim.notify('\"${1:plugin_name}\" requires at least nvim 0.${2:10}.', vim.log.levels.WARN)",
+      "\treturn",
+      "end"
+    ],
+    "prefix": "minimum version requirement"
+  },
   "plugin spec (lazy.nvim)": {
     "body": [
       "{",
