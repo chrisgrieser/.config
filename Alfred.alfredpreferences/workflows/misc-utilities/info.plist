@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>37D0EFA1-4DBD-407C-B9B3-C5C96D81278C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F27A5E0-BF8F-44FD-8B4D-0871BF2B3C83</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<array>
 			<dict>
@@ -104,6 +117,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7F27A5E0-BF8F-44FD-8B4D-0871BF2B3C83</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A016D7F-EE9F-4196-8D43-474EA61F75A1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1000,6 +1026,71 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7F27A5E0-BF8F-44FD-8B4D-0871BF2B3C83</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>restarts Obsidian afterwards</string>
+				<key>text</key>
+				<string>Toggle Obsidian Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>37D0EFA1-4DBD-407C-B9B3-C5C96D81278C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🟪 Alpha</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1A016D7F-EE9F-4196-8D43-474EA61F75A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1043,12 +1134,26 @@
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
+		<key>1A016D7F-EE9F-4196-8D43-474EA61F75A1</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>945</real>
+		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>37D0EFA1-4DBD-407C-B9B3-C5C96D81278C</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>945</real>
 		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
@@ -1094,6 +1199,13 @@
 			<real>185</real>
 			<key>ypos</key>
 			<real>540</real>
+		</dict>
+		<key>7F27A5E0-BF8F-44FD-8B4D-0871BF2B3C83</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>945</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
