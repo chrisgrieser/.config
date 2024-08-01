@@ -40,19 +40,16 @@ if host:find("Mother") then device = "mother" end
 local deviceConfig = {
 	home = {
 		fontSize = 26.3,
-		cellWidth = 0.9,
 		maxFps = 60,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
 	office = {
-		fontSize = 27,
-		cellWidth = 0.92,
+		fontSize = 27.3,
 		maxFps = 60,
 		winPos = { x = 375, y = -100, w = 1675 },
 	},
 	mother = {
 		fontSize = 24,
-		cellWidth = 0.9,
 		maxFps = 40,
 		winPos = { x = 620, y = 0, w = 2745 },
 	},
@@ -122,7 +119,7 @@ local config = {
 		weight = "Medium",
 	},
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
-	cell_width = deviceConfig[device].cellWidth, -- effectively like letter-spacing
+	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = deviceConfig[device].fontSize,
 	command_palette_font_size = deviceConfig[device].fontSize,
 	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
