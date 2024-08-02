@@ -64,19 +64,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3F6D1856-6639-4F2D-B0F7-35E5ED4CE866</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -88,21 +75,6 @@
 	<string>Chromium Extensions &amp; Internal pages</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>73794C72-64EA-441F-BE9A-67FB5F1A885C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -139,7 +111,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search installed Chromium extensions</string>
+				<string>Search installed Chromium extensions &amp; settings</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -149,6 +121,21 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>64E7E716-0427-41F0-844C-90D39ACC9152</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>73794C72-64EA-441F-BE9A-67FB5F1A885C</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -178,55 +165,6 @@
 			<string>692B8788-C546-49E7-B8EC-A569E3DD97B0</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/select-settings-page.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search special browser pages</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C65CD77E-C2B3-4063-B045-C1954E7FE033</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -302,17 +240,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>305</real>
 			<key>ypos</key>
 			<real>155</real>
-		</dict>
-		<key>C65CD77E-C2B3-4063-B045-C1954E7FE033</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>chromium internal page search</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
