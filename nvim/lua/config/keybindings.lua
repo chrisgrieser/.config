@@ -57,6 +57,8 @@ keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
 keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
 keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
 
+keymap("n", "~", "v~", { desc = "󰬴 Toggle case w/o moving" })
+
 -- Delete trailing character
 keymap("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
@@ -124,9 +126,9 @@ keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 -- TEXTOBJECTS
 
 local textobjRemaps = {
-	{ "c", "}", "}", "curly" },
-	{ "r", "}", "]", "rectangular" },
-	{ "m", "W", "󰈭", "WORD" }, -- [m]assive word
+	{ "c", "}", "󱃖", "curly" },
+	{ "r", "}", "󰅪", "rectangular" },
+	{ "m", "W", "󰬞", "WORD" }, -- [m]assive word
 	{ "q", '"', "", "double" },
 	{ "z", "'", "", "single" }, -- [z]ingle quote
 	{ "e", "`", "", "backtick" }, -- t[e]mplate string / inline cod[e]
@@ -139,9 +141,9 @@ end
 
 -- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
-keymap("n", "<Space>", '"_ciw', { desc = "󰈭 change word" })
+keymap("n", "<Space>", '"_ciw', { desc = "󰬞 change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 change selection" })
-keymap("n", "<S-Space>", '"_daw', { desc = "󰈭 delete word" })
+keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
