@@ -67,7 +67,7 @@ return {
 			},
 			code = {
 				border = "thick",
-				position = "right",
+				position = "left",
 			},
 			sign = { enabled = false },
 			win_options = {
