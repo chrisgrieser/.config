@@ -48,16 +48,16 @@ return {
 					{ "i", group = "inner" },
 					{ "a", group = "outer" },
 					{ "g", group = "misc" },
-					{ "ip", desc = "¶ Paragraph" },
-					{ "ap", desc = "¶ Paragraph" },
-					{ "ib", desc = "󰅲 Brackets" },
-					{ "ab", desc = "󰅲 Brackets" },
-					{ "it", desc = " Tag" },
-					{ "at", desc = " Tag" },
-					{ "is", desc = "󱦹 Sentence" },
-					{ "as", desc = "󱦹 Sentence" },
-					{ "iw", desc = "󰈭 word" },
-					{ "aw", desc = "󰈭 word" },
+					{ "ip", desc = "¶ paragraph" },
+					{ "ap", desc = "¶ paragraph" },
+					{ "ib", desc = "󰅲 bracket" },
+					{ "ab", desc = "󰅲 bracket" },
+					{ "it", desc = " tag" },
+					{ "at", desc = " tag" },
+					{ "is", desc = "󰰢 sentence" },
+					{ "as", desc = "󰰢 sentence" },
+					{ "iw", desc = "󰬞 word" },
+					{ "aw", desc = "󰬞 word" },
 				},
 			},
 			plugins = {
@@ -130,15 +130,6 @@ return {
 				"): ",
 				ft = { "gitcommit" },
 				cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end,
-			},
-			{ -- auto-add comma to tables in tables
-				"{",
-				"},",
-				ft = { "lua" },
-				cond = function()
-					local node = vim.treesitter.get_node()
-					return node and node:type() == "table_constructor"
-				end,
 			},
 
 			-- for keymaps like `<C-a>`

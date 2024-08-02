@@ -29,10 +29,9 @@ return {
 				auto_attach = true,
 				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
 			},
-			icons = { Object = "󰠲 " },
+			icons = { Object = "⬟ " },
 			separator = " ",
 			depth_limit = 7,
-			highlight = false, -- enabling has various bugs
 			depth_limit_indicator = "…",
 		},
 		config = function(_, opts)
