@@ -92,8 +92,6 @@ function M.docstring()
 			require("cmp").complete { config = lspSource }
 			require("cmp").confirm { select = true }
 		end, 100)
-		vim.defer_fn(function() require("config.utils").leaveVisualMode() end, 200)
-		vim.defer_fn(function() normal("dd$") end, 350)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

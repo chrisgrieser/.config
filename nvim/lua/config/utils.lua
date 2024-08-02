@@ -42,11 +42,6 @@ function M.getHlValue(hlName, key)
 	end
 end
 
-function M.leaveVisualMode()
-	local escKey = vim.api.nvim_replace_termcodes("<Esc>", false, true, true)
-	vim.api.nvim_feedkeys(escKey, "nx", false)
-end
-
 --------------------------------------------------------------------------------
 
 ---Creates autocommand triggered by Colorscheme change, that modifies a
@@ -62,22 +57,30 @@ function M.colorschemeMod(hlgroup, modification)
 end
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
----@param modes string|string[]
+---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean }
-function M.uniqueKeymap(modes, lhs, rhs, opts)
+---@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean, silent: boolean }
+function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end
-	vim.keymap.set(modes, lhs, rhs, opts)
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-function M.bufKeymap(mode, key, cmd, opts)
+---sets `buffer`, `silent` and `nowait` to true
+---@param mode string|string[]
+---@param lhs string
+---@param rhs string|function
+---@param opts? { desc: string, remap: boolean }
+function M.bufKeymap(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("force", { buffer = true, silent = true, nowait = true }, opts or {})
-	vim.keymap.set(mode, key, cmd, opts)
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-function M.bufAbbrev(lhs, rhs) vim.keymap.set("ia", lhs, rhs, { buffer = true }) end
+
+---@param text string
+---@param replace string
+function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
 
 --------------------------------------------------------------------------------
 
