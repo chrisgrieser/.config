@@ -4,6 +4,11 @@
 list_name="Tasks"
 
 #───────────────────────────────────────────────────────────────────────────────
+# GUARD only when not on projector
+if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then 
+	sketchybar --set "$NAME" drawing=false
+	return 0
+fi
 
 # GUARD only trigger on deactivation of Reminders or BusyCal
 if [[ "$SENDER" = "front_app_switched" ]]; then
@@ -19,7 +24,6 @@ if ! command -v reminders &>/dev/null; then
 	sketchybar --set "$NAME" icon=" " label="reminders-cli not found"
 	return 1
 fi
-
 
 # wait for sync of reminders
 [[ "$SENDER" == "system_woke" ]] && sleep 5
