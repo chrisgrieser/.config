@@ -119,8 +119,11 @@ return {
 	{ -- lsp definitions & references count in the status line
 		"chrisgrieser/nvim-dr-lsp",
 		event = "LspAttach",
-		config = function()
+		opts = {},
+		config = function(_, opts)
 			vim.opt.updatetime = 250 -- time for `CursorHold` event
+
+			require("dr-lsp").setup(opts)
 
 			vim.g.lualine_add("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
