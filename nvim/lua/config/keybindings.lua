@@ -111,30 +111,37 @@ keymap(
 	{ "n", "x" },
 	"+",
 	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
-	{ desc = " Increment/Toggle", expr = true }
+	{ desc = "󰐖 Increment/Toggle", expr = true }
 )
-keymap({ "n", "x" }, "ü", "<C-x>", { desc = " Decrement" })
+keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- cmd+E: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no selection = word under cursor
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
-keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no selection = word under cursor
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
+keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
--- remapping of builtin text objects to use letters instead of punctuation
-for remap, original in pairs(u.textobjRemaps) do
-	local descr = original == "W" and "WORD" or original
-	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = "󱡔 inner " .. descr })
-	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = "󱡔 outer " .. descr })
+local textobjRemaps = {
+	{ "c", "}", "}", "curly" },
+	{ "r", "}", "]", "rectangular" },
+	{ "m", "W", "󰈭", "WORD" }, -- [m]assive word
+	{ "q", '"', "", "double" },
+	{ "z", "'", "", "single" }, -- [z]ingle quote
+	{ "e", "`", "", "backtick" }, -- t[e]mplate string / inline cod[e]
+}
+for _, value in pairs(textobjRemaps) do
+	local remap, original, icon, label = unpack(value)
+	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = icon .. " inner " .. label })
+	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
 
 -- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
-keymap("n", "<Space>", '"_ciw', { desc = "󱡔 change word" })
-keymap("x", "<Space>", '"_c', { desc = "󱡔 change selection" })
-keymap("n", "<S-Space>", '"_daw', { desc = "󱡔 delete word" })
+keymap("n", "<Space>", '"_ciw', { desc = "󰈭 change word" })
+keymap("x", "<Space>", '"_c', { desc = "󰒅 change selection" })
+keymap("n", "<S-Space>", '"_daw', { desc = "󰈭 delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS

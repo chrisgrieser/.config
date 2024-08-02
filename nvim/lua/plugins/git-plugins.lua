@@ -10,6 +10,7 @@ return {
 			-- stylua: ignore start
 			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
 			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
+			{ "gi", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive Staging" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
 			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
@@ -26,7 +27,6 @@ return {
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit/Amend" },
 			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash Push" },
 			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash Pop" },
-			{ "g#", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
 			-- stylua: ignore end
 		},
 		opts = {

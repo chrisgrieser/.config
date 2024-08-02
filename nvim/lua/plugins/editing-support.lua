@@ -1,4 +1,3 @@
-local u = require("config.utils")
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
@@ -49,14 +48,16 @@ return {
 					{ "i", group = "inner" },
 					{ "a", group = "outer" },
 					{ "g", group = "misc" },
-					{ "ip", desc = " Paragraph" },
-					{ "ap", desc = " Paragraph" },
-					{ "it", desc = " Tag" },
-					{ "at", desc = " Tag" },
-					{ "is", desc = " Sentence" },
-					{ "as", desc = " Sentence" },
-					{ "iw", desc = " word" },
-					{ "aw", desc = " word" },
+					{ "ip", desc = "¶ Paragraph" },
+					{ "ap", desc = "¶ Paragraph" },
+					{ "ib", desc = "󰅲 Brackets" },
+					{ "ab", desc = "󰅲 Brackets" },
+					{ "it", desc = " Tag" },
+					{ "at", desc = " Tag" },
+					{ "is", desc = "󱦹 Sentence" },
+					{ "as", desc = "󱦹 Sentence" },
+					{ "iw", desc = "󰈭 word" },
+					{ "aw", desc = "󰈭 word" },
 				},
 			},
 			plugins = {
@@ -148,18 +149,19 @@ return {
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
 		cmd = "RipSubstitute",
+		init = function() vim.g.whichkeyAddGroup("<leader>r", " rip-substitute") end,
 		keys = {
 			{
-				"<leader>fs",
+				"<leader>rr",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
-				desc = " rip-substitute",
+				desc = " substitute",
 			},
 			{
-				"<leader>fc",
+				"<leader>rc",
 				function() require("rip-substitute").rememberCursorWord() end,
 				mode = { "n", "x" },
-				desc = " remember cword (rip-sub)",
+				desc = " remember cword",
 			},
 		},
 		opts = {
@@ -279,15 +281,15 @@ return {
 	{ -- surround
 		"kylechui/nvim-surround",
 		keys = {
-			{ "ys", desc = "󰅪 Add Surround Operator" },
-			{ "s", mode = "x", desc = "󰅪 Add Surround Operator" },
+			{ "ys", desc = "󰅪 Add Surround Op." },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
-			{ "ds", desc = "󰅪 Delete Surround Operator" },
-			{ "cs", desc = "󰅪 Change Surround Operator" },
+			{ "s", mode = "x", desc = "󰅪 Add Surround Op." },
+			{ "ds", desc = "󰅪 Delete Surround Op." },
+			{ "cs", desc = "󰅪 Change Surround Op." },
 		},
 		opts = {
 			move_cursor = false,
-			aliases = u.textobjRemaps,
+			aliases = { c = "}", r = "]", m = "W", q = '"', z = "'", e = "`" },
 			keymaps = {
 				visual = "s",
 				normal_line = false,
