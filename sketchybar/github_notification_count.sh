@@ -2,6 +2,12 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
+# GUARD only when not on projector
+if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then 
+	sketchybar --set "$NAME" drawing=false
+	return 0
+fi
+
 # GUARD only trigger on deactivation or activation of browser
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
@@ -22,7 +28,7 @@ elif [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 # when triggered due to opening in browser, wait so notification opened is marked as read
-[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 5
+[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 4
 
 #───────────────────────────────────────────────────────────────────────────────
 

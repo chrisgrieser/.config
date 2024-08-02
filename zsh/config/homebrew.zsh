@@ -80,7 +80,7 @@ function update() {
 	local device_name
 	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
-	print "\e[0;38;5;247mBrewfile saved in \e[1m$(basename "$brewfile_path")\e[0m"
+	print "\e[0;38;5;247mBrewfile saved in \e[3m$(basename "$brewfile_path")\e[0m"
 
 	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
 }
