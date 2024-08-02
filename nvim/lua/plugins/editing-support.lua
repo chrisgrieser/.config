@@ -19,11 +19,8 @@ return {
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		init = function()
-			-- remove these nvim-builtin bindings so they do not fill the overlay
-			vim.keymap.del({ "o", "x" }, "gc")
-			vim.keymap.del("n", "gcc")
-		end,
+		-- remove binding so it does not interfere with `gc`
+		init = function() vim.keymap.del("n", "gcc") end,
 		keys = {
 			{
 				"<leader>?",
@@ -287,16 +284,6 @@ return {
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
 			{ "ds", desc = "󰅪 Delete Surround Operator" },
 			{ "cs", desc = "󰅪 Change Surround Operator" },
-			{
-				"<D-t>",
-				"${}<Left>" .. '<Esc>cs"`a',
-				mode = "i",
-				ft = { "javascript", "typescript" },
-				remap = true,
-				desc = "$󰘦 Template string & change quotes",
-			},
-			{ "'", "ysiw'", remap = true, desc = "Surround cword with '" },
-			{ '"', 'ysiw"', remap = true, desc = 'Surround cword with "' },
 		},
 		opts = {
 			move_cursor = false,

@@ -49,6 +49,8 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 			os.rename(path, browserSettings .. name)
 		elseif name:find("my%-ublock%-backup_.*%.txt") then
 			os.rename(path, browserSettings .. "ublock-settings.json")
+		elseif name:find(".*_adg_ext_settings_.*%.json") then
+			os.rename(path, browserSettings .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
 			os.rename(path, browserSettings .. "stylus.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
@@ -79,18 +81,17 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 		-- not picked up by hammerspoon
 		elseif name:find("%.crdownload$") or (name:find("%.asar%.gz$") and isDownloaded) then
 			u.runWithDelays(0.5, function()
-				hs.execute(([[
+				hs.execute(([=[
 					cd %q || exit 1
-					test -f obsidian-*.*.*.asar.gz || exit 1
-					killall Obsidian
+					[[ obsidian-*.*.*.asar.gz ]] || exit 1
 					mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
 					cd "$HOME/Library/Application Support/obsidian/"
 					rm obsidian-*.*.*.asar
 					gunzip obsidian-*.*.*.asar.gz
+					killall Obsidian
 					while pgrep -xq "Obsidian" ; do sleep 0.1; done
-					sleep 0.2
 					open -a "Obsidian"
-				]]):format(desktop))
+				]=]):format(desktop))
 				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 			end)
 		end

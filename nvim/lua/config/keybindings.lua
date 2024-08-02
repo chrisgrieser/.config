@@ -145,13 +145,8 @@ keymap(
 	function() return require("vim._comment").operator() end,
 	{ desc = "󰆈 Comment Operator", expr = true }
 )
-keymap(
-	"n",
-	"qq",
-	function() return require("vim._comment").operator() .. "_" end,
-	{ desc = "󰆈 Comment Line", expr = true }
-)
-keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text Object" })
+keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
+keymap("o", "u", "gc", { desc = "󰆈 Comment Text Object", remap = true })
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
@@ -161,6 +156,22 @@ keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { de
 keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
 keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
 -- stylua: ignore end
+
+--------------------------------------------------------------------------------
+-- surrounds
+keymap("i", "<D-t>", "${}<Left>", { desc = "{} Template String" })
+
+local surrounds = {
+	["("] = ")",
+	["["] = "]",
+	["{"] = "}",
+	["<"] = ">",
+	["'"] = "'",
+	["\""] = "\"",
+}
+vim.iter(surrounds):each(function ()
+	keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = '󰗅 cword with "' })
+end)
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
