@@ -240,8 +240,9 @@ function toggleLowercaseTitleCase() {
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
 
-// forward looking `gx`
-/** @param {"current-tab"|"new-tab"} where */
+/** forward looking `gx`
+ * @param {"current-tab"|"new-tab"} where
+ */
 function openNextLink(where) {
 	function rangeOfFirstLink(/** @type {string} */ text) {
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.*?\]\(.+?\)/;
