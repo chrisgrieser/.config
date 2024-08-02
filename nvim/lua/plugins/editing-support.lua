@@ -6,12 +6,12 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 ---they are cleanly grouped with the plugin config.
 ---@param key string
 ---@param label string
-vim.g.whichkey_leader_subkey = function(key, label)
+vim.g.whichkeyAddGroup = function(key, label)
 	-- delayed, to ensure whichkey spec is loaded & not interfere with whichkey's lazy-loading
 	vim.defer_fn(function()
 		local ok, whichkey = pcall(require, "which-key")
 		if not ok then return end
-		whichkey.add { { "<leader>" .. key, group = label, mode = { "n", "x" } } }
+		whichkey.add { { key, group = label, mode = { "n", "x" } } }
 	end, 1500)
 end
 
@@ -400,7 +400,7 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-chainsaw",
-		init = function() vim.g.whichkey_leader_subkey("l", "󰐪 Log") end,
+		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
 			marker = "🟣",
 			logStatements = {

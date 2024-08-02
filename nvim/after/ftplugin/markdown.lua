@@ -133,11 +133,11 @@ keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", bu
 keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = "  Link", buffer = true })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = "  Bold", buffer = true })
+keymap("n", "<D-b>", "mzbi**<Esc>ea**<Esc>`zll", { desc = "  Bold", buffer = true })
 keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = "  Bold", buffer = true })
 keymap("i", "<D-b>", "****<Left><Left>", { desc = "  Bold", buffer = true })
 
 -- cmd+i: italics
-keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = "  Italics", buffer = true })
+keymap("n", "<D-i>", "mzbi*<Esc>ea*<Esc>`zl", { desc = "  Italics", buffer = true })
 keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = "  Italics", buffer = true })
 keymap("i", "<D-i>", "**<Left>", { desc = "  Italics", buffer = true })

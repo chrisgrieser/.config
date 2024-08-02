@@ -101,7 +101,7 @@ return {
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		},
-		init = function() vim.g.whichkey_leader_subkey("d", "󰃤 Debugger") end,
+		init = function() vim.g.whichkeyAddGroup("<leader>d", "󰃤 Debugger") end,
 		config = dapConfig,
 	},
 	{

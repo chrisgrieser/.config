@@ -165,13 +165,17 @@ local surrounds = {
 	["("] = ")",
 	["["] = "]",
 	["{"] = "}",
-	["<"] = ">",
 	["'"] = "'",
-	["\""] = "\"",
+	['"'] = '"',
+	["`"] = "`",
 }
-vim.iter(surrounds):each(function ()
-	keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = '󰗅 cword with "' })
-end)
+for left, right in pairs(surrounds) do
+	local nmap = "mzbi" .. left .. "<Esc>ea" .. right .. "<Esc>`zl"
+	keymap("n", left, nmap, { desc = "󰗅 cword with " .. left .. right })
+
+	local vmap = "<Esc>`<i" .. left .. "<Esc>`>la" .. right .. "<Esc>"
+	keymap("x", left, vmap, { desc = "󰗅 selection with " .. left .. right })
+end
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
