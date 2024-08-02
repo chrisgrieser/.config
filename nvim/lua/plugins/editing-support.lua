@@ -77,7 +77,7 @@ return {
 			win = {
 				border = vim.g.borderStyle,
 				width = 0.9,
-				height = { min = 10, max = 25 },
+				height = { min = 5, max = 20 },
 				padding = { 1, 1 },
 				col = math.floor(vim.o.columns * 0.05),
 			},

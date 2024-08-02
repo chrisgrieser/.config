@@ -77,6 +77,9 @@ unmap("c", /google/); // Grepper
 unmap("f", /crunchyroll|animeflix/);
 unmap("N", /crunchyroll|animeflix|youtube/);
 
+// cheatsheets on those websites
+unmap("?", /github|reddit/)
+
 mapkey(
 	"gu",
 	"go up to subreddit",

@@ -23,8 +23,9 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
 
-		-- 1. REMOVE ALFREDWORKFLOWS & ICAL (after they are opened by browser)
+		-- 1. REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
+			-- delay, so auto-open from the browser is triggered first
 			u.runWithDelays(3, function() os.remove(path) end)
 
 		-- 2. ADD BIBTEX ENTRIES TO LIBRARY
@@ -77,23 +78,18 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 			os.rename(path, newName)
 
 		-- 6. AUTO-INSTALL OBSIDIAN ALPHA
-		-- needs delay and `.crdownload` check, since the renaming is sometimes
-		-- not picked up by hammerspoon
-		elseif name:find("%.crdownload$") or (name:find("%.asar%.gz$") and isDownloaded) then
-			u.runWithDelays(0.5, function()
-				hs.execute(([=[
-					cd %q || exit 1
-					test -f obsidian-*.*.*.asar.gz || exit 1
-					mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
-					cd "$HOME/Library/Application Support/obsidian/"
-					rm obsidian-*.*.*.asar
-					gunzip obsidian-*.*.*.asar.gz
-					killall Obsidian
-					while pgrep -xq "Obsidian" ; do sleep 0.1; done
-					open -a "Obsidian"
-				]=]):format(desktop))
-				u.closeTabsContaining("https://cdn.discordapp.com/attachments")
-			end)
+		elseif name:find("%.asar%.gz$") and isDownloaded then
+			hs.execute(([[
+				cd %q || exit 1
+				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
+				cd "$HOME/Library/Application Support/obsidian/"
+				rm obsidian-*.*.*.asar
+				gunzip obsidian-*.*.*.asar.gz
+				killall Obsidian
+				while pgrep -xq "Obsidian" ; do sleep 0.1; done
+				open -a "Obsidian"
+			]]):format(desktop))
+			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 		end
 	end
 end):start()
