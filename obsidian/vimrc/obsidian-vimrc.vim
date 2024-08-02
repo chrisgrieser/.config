@@ -81,7 +81,7 @@ nnoremap <C-j> :gotoNextHeading
 exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("prev") }
 nnoremap <C-k> :gotoPrevHeading
 
-" [m]atch parenthesis
+" [m]atch parenthesis, useful to go to next pandoc citations
 nnoremap m %
 
 " [g]oto [s]ymbol (using Another Quick Switcher)
@@ -221,7 +221,7 @@ exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitl
 nnoremap < :toggleLowercaseTitleCase
 
 " do not move to the right on toggling case
-nnoremap ~ ~h
+nnoremap ~ v~
 
 " Change word/selection
 nnoremap <Space> "_ciw
@@ -356,9 +356,6 @@ nnoremap ,pc :cycleColorscheme
 " Open this vimrc file
 exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
 nnoremap g, :openVimrc
-
-exmap hover jscommand { view.app.workspace.tryTrigger("hover-link"); }
-nnoremap ,h :hover
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
