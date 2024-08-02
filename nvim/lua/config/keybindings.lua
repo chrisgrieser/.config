@@ -1,4 +1,3 @@
-local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
@@ -105,8 +104,8 @@ keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- Merging
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge up" })
-keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge down" })
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge lin eup" })
+keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
 
 -- Increment/Decrement, or toggle true/false
 keymap(
@@ -118,9 +117,11 @@ keymap(
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- cmd+E: inline code
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) -- no selection = word under cursor
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Quote cword" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) 
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "{} Template String" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -165,26 +166,6 @@ keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { de
 keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
 keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
 -- stylua: ignore end
-
---------------------------------------------------------------------------------
--- surrounds
-keymap("i", "<D-t>", "${}<Left>", { desc = "{} Template String" })
-
-local surrounds = {
-	["("] = ")",
-	["["] = "]",
-	["{"] = "}",
-	["'"] = "'",
-	['"'] = '"',
-	["`"] = "`",
-}
-for left, right in pairs(surrounds) do
-	local nmap = "mzbi" .. left .. "<Esc>ea" .. right .. "<Esc>`zl"
-	keymap("n", left, nmap, { desc = "󰗅 cword with " .. left .. right })
-
-	local vmap = "<Esc>`<i" .. left .. "<Esc>`>la" .. right .. "<Esc>"
-	keymap("x", left, vmap, { desc = "󰗅 selection with " .. left .. right })
-end
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
