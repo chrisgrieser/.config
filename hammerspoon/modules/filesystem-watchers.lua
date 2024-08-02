@@ -83,7 +83,7 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 			u.runWithDelays(0.5, function()
 				hs.execute(([=[
 					cd %q || exit 1
-					[[ obsidian-*.*.*.asar.gz ]] || exit 1
+					test -f obsidian-*.*.*.asar.gz || exit 1
 					mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
 					cd "$HOME/Library/Application Support/obsidian/"
 					rm obsidian-*.*.*.asar
