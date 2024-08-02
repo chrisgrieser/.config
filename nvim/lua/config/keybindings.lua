@@ -108,7 +108,8 @@ keymap(
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- cmd+E: inline code
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Quote cword" })
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Double Quote cword" })
+keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Single Quote cword" })
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })

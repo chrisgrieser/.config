@@ -29,7 +29,7 @@ return {
 			},
 		},
 		opts = {
-			delay = 400,
+			delay = 250,
 			spec = {
 				{
 					mode = { "n", "x" },
@@ -395,7 +395,7 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
-			marker = "🟣",
+			marker = "🖨️",
 			logStatements = {
 				objectLog = {
 					-- re-purposing `objectLog` for debugging via AppleScript notification
@@ -403,6 +403,9 @@ return {
 
 					-- hammerspoon
 					lua = 'print("%s %s: " .. hs.inspect(%s))',
+				},
+				clearLog = {
+					lua = "hs.console.clearConsole()",
 				},
 			},
 		},
