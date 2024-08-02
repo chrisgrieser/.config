@@ -101,18 +101,7 @@
 			<key>text</key>
 			<string>Chrome Extension Store</string>
 			<key>url</key>
-			<string>https://chrome.google.com/webstore/search/{query}</string>
-		</dict>
-		<key>BD7467C7-4203-4E89-9F2A-D5B2A42CBFFA</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>CodeMate: {query}</string>
-			<key>url</key>
-			<string>https://codemate.bot/?q={query}</string>
+			<string>https://chromewebstore.google.com/search/{query}</string>
 		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>

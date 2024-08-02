@@ -11,7 +11,8 @@
 		"Google Chrome": [],
 		"Brave Browser": [
 			{ "title": "⌨️ Brave Shortcuts", "arg": "brave://settings/system/shortcuts" },
-			{ "title": "🔰 Brave Shields", "arg": "brave://settings/shields" },
+			{ "title": "🔰 Brave Shields (Adblock)", "arg": "brave://settings/shields" },
+			{ "title": "🔰 Brave Adblock Filters", "arg": "brave://settings/shields/filters" },
 			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
 			{ "title": "📖 Brave Help & Tips", "arg": "brave://settings/braveHelpTips" },
 			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
