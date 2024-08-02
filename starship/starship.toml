@@ -104,10 +104,10 @@ format = '[  ](fg:purple bg:black bold)'
 stashed = '[ 󰜦 $count](fg:cyan bg:black)'
 untracked = '[ +$count](fg:green bg:black)'
 deleted = '[ -$count](fg:red bg:black)' # these are unstaged as well as stage deletion
-modified = '[ ~$count](fg:208 bg:black)'
+modified = '[ ~$count](fg:208 bg:black)' # 208 = orange
 renamed = '[ 󰑕 $count](fg:blue bg:black)'
-staged = '[  $count](fg:green bg:black)'
-conflicted = '[  $count](fg:red bg:black)'
+staged = '[ 󰐖 $count](fg:green bg:black)'
+conflicted = '[  $count](fg:red bg:black)'
 diverged = '[ 󰞇 $count](fg:red bg:black bold)'
 ahead = '[ 󰶣$count](fg:cyan bg:black)'
 behind = '[ 󰶡$count](fg:yellow bg:black)'

@@ -119,25 +119,25 @@ keymap("n", "<leader>fi", function()
 	local line = vim.api.nvim_get_current_line()
 	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
 	vim.api.nvim_set_current_line(htmlImage)
-end, { desc = "  MD image to <img>", buffer = true })
+end, { desc = " MD image to <img>", buffer = true })
 
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
 -- cmd+u: markdown bullet
-keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = " Bullet List", buffer = true })
+keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List", buffer = true })
 
 -- cmd+k: markdown link
-keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = "  Link", buffer = true })
-keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = "  Link", buffer = true })
-keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = "  Link", buffer = true })
+keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link", buffer = true })
+keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link", buffer = true })
+keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link", buffer = true })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "mzbi**<Esc>ea**<Esc>`zll", { desc = "  Bold", buffer = true })
-keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = "  Bold", buffer = true })
-keymap("i", "<D-b>", "****<Left><Left>", { desc = "  Bold", buffer = true })
+keymap("n", "<D-b>", "mzbi**<Esc>ea**<Esc>`zll", { desc = " Bold", buffer = true })
+keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold", buffer = true })
+keymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold", buffer = true })
 
 -- cmd+i: italics
-keymap("n", "<D-i>", "mzbi*<Esc>ea*<Esc>`zl", { desc = "  Italics", buffer = true })
-keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = "  Italics", buffer = true })
-keymap("i", "<D-i>", "**<Left>", { desc = "  Italics", buffer = true })
+keymap("n", "<D-i>", "mzbi*<Esc>ea*<Esc>`zl", { desc = " Italics", buffer = true })
+keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics", buffer = true })
+keymap("i", "<D-i>", "**<Left>", { desc = " Italics", buffer = true })
