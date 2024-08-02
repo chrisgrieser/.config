@@ -357,6 +357,9 @@ nnoremap ,pc :cycleColorscheme
 exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
 nnoremap g, :openVimrc
 
+exmap hover jscommand { view.app.workspace.tryTrigger("hover-link"); }
+nnoremap ,h :hover
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 

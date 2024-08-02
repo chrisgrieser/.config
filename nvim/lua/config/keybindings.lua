@@ -68,26 +68,20 @@ end, { desc = "󱎘 Delete char at EoL" })
 keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
+keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
+keymap("n", "<S-Tab>", "<<>", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
+keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- SNIPPETS
-keymap({ "n", "i", "s" }, "<Tab>", function()
-	if vim.snippet.active { direction = 1 } then
-		return "<cmd>lua vim.snippet.jump(1)<CR>"
-	else
-		local fallback = { n = ">>", i = "<C-t>" }
-		return fallback[vim.fn.mode()]
-	end
-end, { desc = "󰉶 indent / next placeholder", expr = true })
-keymap({ "n", "i", "s" }, "<S-Tab>", function()
-	if vim.snippet.active { direction = -1 } then
-		return "<cmd>lua vim.snippet.jump(-1)<CR>"
-	else
-		local fallback = { n = "<<", i = "<C-d>" }
-		return fallback[vim.fn.mode()]
-	end
-end, { desc = "󰉵 outdent line / prev placeholder", expr = true })
+keymap({ "n", "i", "s" }, "<D-p>", function()
+	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
+end, { desc = "󰩫 next placeholder" })
+keymap({ "n", "i", "s" }, "<D-P>", function()
+	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
+end, { desc = "󰩫 prev placeholder" })
 
 -- automatically exit snippet mode on scroll
 vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
@@ -118,7 +112,7 @@ keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- cmd+E: inline code
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Quote cword" })
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" }) 
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline Code" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 keymap("i", "<D-t>", "${}<Left>", { desc = "{} Template String" })
