@@ -417,6 +417,7 @@ return {
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰐪 debugger" },
 			{"<leader>ls", function() require("chainsaw").stacktraceLog() end, desc = "󰐪 stacktrace" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰐪 assert" },
+			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪 clear" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰐪 󰅗 remove logs" },
 			-- stylua: ignore end
