@@ -79,9 +79,6 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
-keymap({ "n", "i", "s" }, "<D-P>", function()
-	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
-end, { desc = "󰩫 prev placeholder" })
 
 -- automatically exit snippet mode on scroll
 vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
