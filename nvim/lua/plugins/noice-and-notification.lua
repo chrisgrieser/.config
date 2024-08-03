@@ -25,6 +25,9 @@ local routes = {
 		view = "popup",
 	},
 
+	-- output from `:Inspect`, for easier copying
+	{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
+
 	-----------------------------------------------------------------------------
 	-- REDIRECT TO MINI
 
@@ -106,7 +109,7 @@ return {
 				cmdline_popup = {
 					border = { style = vim.g.borderStyle },
 				},
-				cmdline_popupmenu = {
+				cmdline_popupmenu = { -- the completions window
 					size = { max_height = 12 },
 					border = { padding = { 0, 1 } }, -- setting border style messes up automatic positioning
 					win_options = {
@@ -135,7 +138,7 @@ return {
 				},
 				split = {
 					enter = true,
-					size = "60%",
+					size = "65%",
 					win_options = { scrolloff = 6 },
 					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>", "<D-8>" } },
 				},

@@ -1,8 +1,7 @@
 local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
----Set up subkey for the <leader> key. Used for plugin-specific bindings, so
----they are cleanly grouped with the plugin config.
+---Set up plugin-specific groups cleanly with the plugin config.
 ---@param key string
 ---@param label string
 vim.g.whichkeyAddGroup = function(key, label)
@@ -25,7 +24,7 @@ return {
 				"<leader>?",
 				-- alternative: `:Telescope keymaps` with `only_buf = true`
 				function() require("which-key").show { global = false } end,
-				desc = "⌨️ Buffer Keymaps (which-key)",
+				desc = "⌨️ Buffer Keymaps",
 			},
 		},
 		opts = {
