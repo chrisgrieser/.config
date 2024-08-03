@@ -221,7 +221,7 @@ return {
 				desc = "󰅍 Yank surrounding indent",
 			},
 			{ -- indent last paste
-				"P",
+				"<p",
 				function()
 					require("various-textobjs").lastChange()
 					local changeFound = vim.fn.mode():find("v")
