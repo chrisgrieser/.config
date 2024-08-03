@@ -119,7 +119,7 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "{} Template String" })
 
 local textobjRemaps = {
 	{ "c", "}", "󱃖", "curly" },
-	{ "r", "}", "󰅪", "rectangular" },
+	{ "r", "]", "󰅪", "rectangular" },
 	{ "m", "W", "󰬞", "WORD" }, -- [m]assive word
 	{ "q", '"', "", "double" },
 	{ "z", "'", "", "single" }, -- [z]ingle quote

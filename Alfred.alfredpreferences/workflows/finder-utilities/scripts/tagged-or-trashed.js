@@ -22,7 +22,12 @@ function extensionToAlfredIcon(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const isTrashSearch = $.getenv("alfred_workflow_keyword") === $.getenv("trash_keyword");
+	// `alfred_workflow_keyword` is not set when triggered via hotkey
+	const keyword =
+		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
+		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
+
+	const isTrashSearch = keyword === $.getenv("trash_keyword");
 	const tagName = $.getenv("tag_to_search");
 
 	let shellCmd = `mdfind "kMDItemUserTags == ${tagName}"`; // https://www.alfredforum.com/topic/18041-advanced-search-using-tags-%C3%A0-la-finder/
@@ -35,11 +40,12 @@ function run() {
 
 	const results = app
 		.doShellScript(shellCmd)
+		.trim() // remove trailing newline from `doShellScript`
 		.split("\r")
 		.map((absPath) => {
 			const [_, parent, name] = absPath.match(/(.*)\/(.*)/) || [];
 
-			const parentDisplay = parent
+			const parentDisplay = isTrashSearch ? "" : parent
 				.replace(/\/Users\/\w+\/Library\/Mobile Documents\/com~apple~CloudDocs/, "☁️")
 				.replace(/\/Users\/\w+/, "~");
 			const emoji = isTrashSearch ? "" : $.getenv("tag_emoji");
