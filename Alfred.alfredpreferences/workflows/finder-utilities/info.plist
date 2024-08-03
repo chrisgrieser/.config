@@ -21,15 +21,35 @@
 				<false/>
 			</dict>
 		</array>
-		<key>0A9B471E-83C5-40EB-912A-374603BE51DC</key>
+		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+				<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Move to Front Finder Window</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -48,23 +68,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>64FEC427-2CB3-4EB1-8543-392E2319CBFC</string>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 				<key>modifiers</key>
-				<integer>8388608</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Move file somewhere</string>
+				<string>⌥: Reveal in Finder</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Delete</string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -74,18 +84,15 @@
 				<key>modifiersubtext</key>
 				<string>⌘: Move to Front Finder Window</string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
-		</array>
-		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+				<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌃: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -95,19 +102,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>36C13B5A-F503-434E-B676-6E5A37D6C96D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -168,8 +162,6 @@
 		</array>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<array/>
-		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
-		<array/>
 		<key>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</key>
 		<array>
 			<dict>
@@ -183,21 +175,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6F1C093C-A3E8-422A-A15A-2F466534C870</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A166CD55-3AEC-45B7-9C9F-98FD649E0258</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
-		<array/>
 		<key>8214A9F2-FD38-462A-A192-254B3D5D6763</key>
 		<array>
 			<dict>
@@ -254,11 +231,21 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Copy to Clipboard</string>
+				<string>⌃: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -269,16 +256,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Reveal in Finder</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -296,31 +273,8 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
@@ -332,60 +286,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
+		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>13B727F0-A58A-4C0C-ACB4-9EE69BD4DE07</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -398,7 +303,27 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0A9B471E-83C5-40EB-912A-374603BE51DC</string>
+				<string>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Reveal in Trash</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
@@ -410,9 +335,9 @@
 				<key>destinationuid</key>
 				<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌃: Copy to Clipboard</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -428,286 +353,6 @@
 	<string>Finder Tweaks</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>5CCD4941-B4C3-444A-8318-2DDBF741229A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>ℹ️ No file</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>3</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>F</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.runningwithcrayons.Alfred</string>
-						<key>outputlabel</key>
-						<string>yes</string>
-						<key>uid</key>
-						<string>13B727F0-A58A-4C0C-ACB4-9EE69BD4DE07</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>no</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/check-number-of-files.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>file-hub-cycle</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.move</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>64FEC427-2CB3-4EB1-8543-392E2319CBFC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>empty</string>
-						<key>outputlabel</key>
-						<string>empty</string>
-						<key>uid</key>
-						<string>60377B50-E48C-4CAD-BEC9-6B6FDF7155F9</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>has files</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>D32D490E-F78B-4733-A0EC-0672CD8A6E30</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/wd-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>file=$1
-
-mv -f "$file" "$HOME/.Trash/"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/delete.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>file-hub-cycle</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -760,44 +405,36 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>openwith</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>sourcefile</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.action.openfile</string>
 			<key>uid</key>
-			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>path</key>
 				<string></string>
-				<key>title</key>
-				<string>ℹ️ No Finder Window open</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
-			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
+			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -851,12 +488,102 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>0A9B471E-83C5-40EB-912A-374603BE51DC</string>
+			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>ℹ️ No Finder Window open</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:currentwin_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/find-in-current-window.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>find-in-current-win</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A166CD55-3AEC-45B7-9C9F-98FD649E0258</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -905,6 +632,115 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:basefolder_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/wd-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>open-base-folder</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>8214A9F2-FD38-462A-A192-254B3D5D6763</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>o</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>825E4C6C-5562-42DF-84D1-29924B3329EF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>tagged with '{var:tag_to_search}'</string>
+				<key>title</key>
+				<string>🏷️ No file</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -937,140 +773,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>1E0AF587-F6D4-4507-8EA6-AB792A4C118A</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/find-in-current-window.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string></string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>find-in-current-win</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>A166CD55-3AEC-45B7-9C9F-98FD649E0258</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>8214A9F2-FD38-462A-A192-254B3D5D6763</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>3</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>F</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>6F1C093C-A3E8-422A-A15A-2F466534C870</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>o</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>825E4C6C-5562-42DF-84D1-29924B3329EF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1121,79 +823,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>alfred.workflow.action.actioninalfred</string>
 			<key>uid</key>
 			<string>56CD69F0-DA3F-4EF1-809F-78543F4459A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>4A0117CB-9833-40BD-99BE-709292FBBA03</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.copy</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>66C5C99A-6C58-4566-8DC6-0CC9BE8E2C6E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>tagged with '{var:tag_to_search}'</string>
-				<key>title</key>
-				<string>🏷️ No file</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1405,6 +1034,58 @@ fi</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>2</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>D</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.apple.finder</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4A0117CB-9833-40BD-99BE-709292FBBA03</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>jumpto</key>
+				<string>alfred.action.copy</string>
+				<key>path</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.actioninalfred</string>
+			<key>uid</key>
+			<string>66C5C99A-6C58-4566-8DC6-0CC9BE8E2C6E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires `ripgrep`</string>
@@ -1413,357 +1094,267 @@ fi</string>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1105</real>
 		</dict>
 		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>2</integer>
+			<key>note</key>
+			<string>recent files in home</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>15</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>1325</real>
-		</dict>
-		<key>0A9B471E-83C5-40EB-912A-374603BE51DC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>595</real>
-			<key>ypos</key>
-			<real>545</real>
+			<real>1105</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>10</integer>
+			<key>note</key>
+			<string>base folder</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>430</real>
 		</dict>
 		<key>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>980</real>
-		</dict>
-		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>1040</real>
-			<key>ypos</key>
-			<real>310</real>
+			<real>140</real>
 		</dict>
 		<key>1E0AF587-F6D4-4507-8EA6-AB792A4C118A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>695</real>
-		</dict>
-		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>delete file</string>
-			<key>xpos</key>
-			<real>830</real>
-			<key>ypos</key>
-			<real>245</real>
+			<real>980</real>
 		</dict>
 		<key>27C718FF-91BB-4C68-B44E-75CC9EBBE46A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>490</real>
 			<key>ypos</key>
-			<real>1215</real>
+			<real>975</real>
 		</dict>
 		<key>2839F7DC-68C1-483F-BC90-1A0A504CF70C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>count tagged files</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>1325</real>
-		</dict>
-		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>285</real>
-			<key>ypos</key>
-			<real>130</real>
+			<real>1105</real>
 		</dict>
 		<key>36C13B5A-F503-434E-B676-6E5A37D6C96D</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>1330</real>
+			<real>1110</real>
 		</dict>
 		<key>4A0117CB-9833-40BD-99BE-709292FBBA03</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>11</integer>
 			<key>note</key>
 			<string>Copy to…</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1235</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
 			<real>1010</real>
-		</dict>
-		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>485</real>
 			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>64FEC427-2CB3-4EB1-8543-392E2319CBFC</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>830</real>
-			<key>ypos</key>
-			<real>135</real>
+			<real>1100</real>
 		</dict>
 		<key>66C5C99A-6C58-4566-8DC6-0CC9BE8E2C6E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1235</real>
 		</dict>
 		<key>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>1355</real>
-		</dict>
-		<key>6F1C093C-A3E8-422A-A15A-2F466534C870</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>Find in current window</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>835</real>
-		</dict>
-		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>60</real>
+			<real>1135</real>
 		</dict>
 		<key>8214A9F2-FD38-462A-A192-254B3D5D6763</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>reavel + open → ensures folder are opened in the same window, not a new one</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>530</real>
 		</dict>
 		<key>825E4C6C-5562-42DF-84D1-29924B3329EF</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
-			<key>note</key>
-			<string>this ensures folders are opened in the current window instead of new window</string>
 			<key>xpos</key>
-			<real>535</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>530</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>12</integer>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>390</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>390</real>
 		</dict>
 		<key>8FACCE6C-2228-4001-89AF-4953B84F95F7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1325</real>
+			<real>1105</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>11</integer>
 			<key>note</key>
 			<string>Move to…</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>1010</real>
+			<real>1100</real>
 		</dict>
 		<key>A166CD55-3AEC-45B7-9C9F-98FD649E0258</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>current window</string>
 			<key>xpos</key>
-			<real>200</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>290</real>
 		</dict>
 		<key>A74651BD-9EA3-438E-9558-5E7EF6F14A75</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>695</real>
-		</dict>
-		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>open Finder Dropdown</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>75</real>
+			<real>980</real>
 		</dict>
 		<key>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>1040</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>260</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>12</integer>
 			<key>note</key>
 			<string>move to front window</string>
 			<key>xpos</key>
-			<real>830</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>380</real>
-		</dict>
-		<key>D32D490E-F78B-4733-A0EC-0672CD8A6E30</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>420</real>
-			<key>ypos</key>
-			<real>150</real>
+			<real>260</real>
 		</dict>
 		<key>D3680E24-3C4B-4803-BF36-022909BBD0C1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>10</integer>
+			<integer>3</integer>
 			<key>note</key>
 			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>1450</real>
+			<real>1230</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>825</real>
+			<real>795</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>E8EDD4EE-AAE7-4018-945B-FF2F53BDD11C</key>
+		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>Alfred frontmost</string>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>191</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>95</real>
+			<real>140</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>trash</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>160</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>12</integer>
 			<key>xpos</key>
-			<real>540</real>
+			<real>945</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>390</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
