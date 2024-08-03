@@ -24,8 +24,6 @@ local routes = {
 		},
 		view = "popup",
 	},
-	-- output from `:Inspect`
-	{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
 
 	-----------------------------------------------------------------------------
 	-- REDIRECT TO MINI
@@ -66,10 +64,6 @@ local routes = {
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
-
-	-- unneeded info on search patterns
-	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-	{ filter = { event = "msg_show", find = "^/" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -149,14 +143,12 @@ return {
 			commands = {
 				history = {
 					filter_opts = { reverse = true }, -- show newest entries first
-					-- https://github.com/folke/noice.nvim#-formatting
-					opts = { format = { "{title} ", "{message}" } },
-					filter = {
-						["not"] = { find = "^/" }, -- skip search messages
-					},
+					opts = { format = { "{title} ", "{message}" } }, -- https://github.com/folke/noice.nvim#-formatting
+					filter = { ["not"] = { find = "^/" } }, -- skip search messages
 				},
 				last = {
 					opts = { format = { "{title} ", "{message}" } },
+					filter = { ["not"] = { find = "^/" } }, -- skip search messages
 				},
 				errors = {
 					opts = { format = { "{title} ", "{message}" } },
