@@ -10,20 +10,26 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ") + " ";
 }
 
+/** @param {string} path */
+function extensionToAlfredIcon(path) {
+	const ext = path.split(".").pop() || "";
+	const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
+	return imageExtensions.includes(ext) ? { path: path } : { path: path, type: "fileicon" };
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// CONFIG
-	const folderToSearch = app.pathTo("home folder");
-	const maxItems = 10;
-	// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-	const rgCmd =
+	const isBaseFolderSearch =
+		$.getenv("alfred_workflow_keyword") === $.getenv("base_folder_keyword");
+	const folderToSearch = isBaseFolderSearch ? $.getenv("base_folder") : app.pathTo("home folder");
+	const maxItems = isBaseFolderSearch ? -1 : 20;
+	const rgCmd = // INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		"rg --no-config --files --sortr=modified --glob='!/Library/' --glob='!*.photoslibrary'";
 
-	/** @type {AlfredItem[]} */
-	const recentlyChanged = app
+	const results = app
 		.doShellScript(`cd '${folderToSearch}' && ${rgCmd}`)
 		.split("\r")
 		.slice(0, maxItems)
@@ -31,17 +37,15 @@ function run() {
 			const [_, parent, name] = relPath.match(/(.*\/)(.*\/?)/) || [];
 			const absPath = folderToSearch + "/" + relPath;
 
-			/** @type {AlfredItem} */
-			const item = {
+			return {
 				title: name,
 				subtitle: parent.slice(0, -1),
 				arg: absPath,
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
-				icon: { type: "fileicon", path: absPath },
+				icon: extensionToAlfredIcon(absPath),
 			};
-			return item;
 		});
 
-	return JSON.stringify({ items: recentlyChanged });
+	return JSON.stringify({ items: results });
 }

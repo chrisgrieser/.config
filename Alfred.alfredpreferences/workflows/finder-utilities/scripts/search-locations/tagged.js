@@ -4,6 +4,23 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-_().:#;,[\]'"]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
+/** @param {string} path */
+function extensionToAlfredIcon(path) {
+	const ext = path.split(".").pop() || "";
+	const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
+	return imageExtensions.includes(ext)
+		? { path: path }
+		: { path: path, type: "fileicon" };
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -20,21 +37,16 @@ function run() {
 
 	const taggedFiles = tagged.split("\r").map((path) => {
 		const fileName = path.split("/").pop() || "";
-		const [_, ext] = fileName.match(/\.(\w+)$/) || ["", "FOLDER"];
 		let parentFolder = path.split("/").slice(0, -1).join("/");
 		parentFolder = parentFolder
 			.replace(/\/Users\/\w+\/Library\/Mobile Documents\/com~apple~CloudDocs/, "☁️")
 			.replace(/\/Users\/\w+/, "~");
 
-		const imageExtensions = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "pdf"];
-		const iconToDisplay = [...imageExtensions, "FOLDER"].includes(ext)
-			? { type: "fileicon", path: path }
-			: { path: path };
-
 		return {
 			title: fileName + " " + $.getenv("tag_emoji"),
 			subtitle: parentFolder,
-			icon: iconToDisplay,
+			icon: extensionToAlfredIcon(path),
+			match: alfredMatcher(fileName),
 			type: "file:skipcheck",
 			uid: path,
 			arg: path,
