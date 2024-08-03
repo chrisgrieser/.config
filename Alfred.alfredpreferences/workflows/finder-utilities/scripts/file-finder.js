@@ -17,29 +17,52 @@ function extensionToAlfredIcon(path) {
 	return imageExtensions.includes(ext) ? { path: path } : { path: path, type: "fileicon" };
 }
 
+/** @return {string} */
+function getFrontWin() {
+	let path;
+	try {
+		path = Application("Finder").insertionLocation().url().slice(7);
+	} catch (_error) {
+		return "";
+	}
+	return decodeURIComponent(path);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
+
+/** @type {Record<string, string>} */
+const rgLocations = {
+	[$.getenv("downloads_keyword")]: $.getenv("downloads_folder"),
+	[$.getenv("recent_keyword")]: app.pathTo("home folder"),
+	[$.getenv("frontwin_keyword")]: getFrontWin(),
+};
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const isBaseFolderSearch =
-		$.getenv("alfred_workflow_keyword") === $.getenv("base_folder_keyword");
-	const folderToSearch = isBaseFolderSearch ? $.getenv("base_folder") : app.pathTo("home folder");
-	const maxItems = isBaseFolderSearch ? -1 : 20;
 	const rgCmd = // INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		"rg --no-config --files --sortr=modified --glob='!/Library/' --glob='!*.photoslibrary'";
+	const rgFolder = rgLocations[$.getenv("alfred_workflow_keyword")];
+	console.log("🖨️ rgFolder:", rgFolder);
+
+	// GUARD no front window
+	if (rgFolder === "") {
+		return JSON.stringify({
+			items: [{ title: "No front window found", valid: false }],
+		});
+	}
 
 	const results = app
-		.doShellScript(`cd '${folderToSearch}' && ${rgCmd}`)
+		.doShellScript(`cd '${rgFolder}' && ${rgCmd}`)
 		.split("\r")
-		.slice(0, maxItems)
 		.map((relPath) => {
-			const [_, parent, name] = relPath.match(/(.*\/)(.*\/?)/) || [];
-			const absPath = folderToSearch + "/" + relPath;
+			const [name, ...parent] = relPath.split("/");
+			const absPath = rgFolder + "/" + relPath;
+			const parentDisplay = (parent || "").slice(0, -1);
 
 			return {
 				title: name,
-				subtitle: parent.slice(0, -1),
+				subtitle: parentDisplay,
 				arg: absPath,
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
