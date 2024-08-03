@@ -79,7 +79,7 @@ require("lazy").setup {
 		frequency = 60 * 60 * 24 * 7, -- = 7 days
 	},
 	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { enabled = true, notify = false },
+	change_detection = { enabled = false, notify = false }, -- to not auto-reload configs
 	readme = { enabled = false },
 	performance = {
 		rtp = {
