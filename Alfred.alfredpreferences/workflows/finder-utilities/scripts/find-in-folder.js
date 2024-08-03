@@ -41,9 +41,8 @@ const rgLocations = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const rgCmd = // INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-		"rg --no-config --files --sortr=modified --glob='!/Library/' --glob='!*.photoslibrary'";
+		"rg --no-config --files --sortr=modified --max-depth=4 --glob='!/Library/' --glob='!*.photoslibrary'";
 	const rgFolder = rgLocations[$.getenv("alfred_workflow_keyword")];
-	console.log("🖨️ rgFolder:", rgFolder);
 
 	// GUARD no front window
 	if (rgFolder === "") {
@@ -56,19 +55,26 @@ function run() {
 		.doShellScript(`cd '${rgFolder}' && ${rgCmd}`)
 		.split("\r")
 		.map((relPath) => {
-			const [name, ...parent] = relPath.split("/");
+			const name = relPath.split("/").pop() || "";
+			const parent = relPath.includes("/") ? relPath.split("/").slice(0, -2).join("/") : "";
 			const absPath = rgFolder + "/" + relPath;
-			const parentDisplay = (parent || "").slice(0, -1);
 
 			return {
 				title: name,
-				subtitle: parentDisplay,
+				subtitle: parent,
 				arg: absPath,
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
 				icon: extensionToAlfredIcon(absPath),
 			};
 		});
+
+	// GUARD no result found
+	if (results.length === 0) {
+		return JSON.stringify({
+			items: [{ title: `No file found in "${rgFolder}"`, valid: false }],
+		});
+	}
 
 	return JSON.stringify({ items: results });
 }
