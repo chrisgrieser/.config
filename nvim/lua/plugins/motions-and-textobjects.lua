@@ -16,7 +16,7 @@ return {
 		"andymass/vim-matchup",
 		event = "BufReadPost", -- cannot load on keys due to highlights
 		keys = {
-			{ "m", "<Plug>(matchup-%)", desc = "Goto Matching Bracket" },
+			{ "m", "<Plug>(matchup-%)", desc = "% Goto Matchup" },
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
@@ -221,7 +221,7 @@ return {
 				desc = "󰅍 Yank surrounding indent",
 			},
 			{ -- indent last paste
-				"<p",
+				"^",
 				function()
 					require("various-textobjs").lastChange()
 					local changeFound = vim.fn.mode():find("v")
