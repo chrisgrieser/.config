@@ -35,7 +35,7 @@ local routes = {
 	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
-	-- search pattern not found
+	-- search
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
 	-- Word added to spellfile via `zg`
@@ -69,6 +69,7 @@ local routes = {
 
 	-- unneeded info on search patterns
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+	{ filter = { event = "msg_show", find = "^/" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -150,7 +151,9 @@ return {
 					filter_opts = { reverse = true }, -- show newest entries first
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{message}" } },
-					filter = {}, -- shows everything
+					filter = {
+						["not"] = { find = "^/" }, -- skip search messages
+					},
 				},
 				last = {
 					opts = { format = { "{title} ", "{message}" } },

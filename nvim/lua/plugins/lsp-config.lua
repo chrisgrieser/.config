@@ -281,10 +281,12 @@ serverConfigs.ltex = {
 			dictionary = {
 				-- HACK since reading external file with the method described in ltex-docs does not work
 				["en-US"] = (function()
+					if not vim.uv.fs_stat(vim.o.spellfile) then
+						u.notify("ltex", "Spellfile not found: " .. vim.o.spellfile, "warn")
+						return {}
+					end
 					local words = {}
-					local spellfile = vim.g.linterConfigs .. "/spellfile.add"
-					if not u.fileExists(spellfile) then return {} end
-					for word in io.lines(spellfile) do
+					for word in io.lines(vim.o.spellfile) do
 						table.insert(words, word)
 					end
 					return words
@@ -374,7 +376,7 @@ serverConfigs.vale_ls = {
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "UIEnter",
+		event = "BufReadPre",
 		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
