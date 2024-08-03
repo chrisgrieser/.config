@@ -10,8 +10,9 @@ const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, remo
 const banner = api.Front.showBanner;
 
 /** @param {string} text */
-function copyNotification(text) {
-	text = text.length > 50 ? text.slice(0, 50) + "…" : text;
+async function copyAndNotify(text) {
+	await navigator.clipboard.writeText(text);
+	if (text.length > 50) text = text.slice(0, 50) + "…";
 	banner("Copied: " + text);
 }
 
@@ -74,11 +75,11 @@ unmap("k", /google/); // websearch navigator
 unmap("c", /google/); // Grepper
 
 // for BetterTouchTool Mappings
-unmap("f", /crunchyroll|animeflix/);
-unmap("N", /crunchyroll|animeflix|youtube/);
+unmap("f", /crunchyroll/);
+unmap("N", /crunchyroll|youtube/);
 
 // cheatsheets on those websites
-unmap("?", /github|reddit/)
+unmap("?", /github|reddit/);
 
 mapkey(
 	"gu",
@@ -98,8 +99,7 @@ mapkey("yg", "Copy GitHub Link", async () => {
 	}
 	const url = window.location.href;
 	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
-	await navigator.clipboard.writeText(repo);
-	copyNotification(repo);
+	await copyAndNotify(repo);
 });
 mapkey("gI", "Open GitHub issues", () => {
 	if (window.location.host !== "github.com") {
@@ -129,8 +129,7 @@ map("w", "x"); // close tab
 map("m", "x"); // close tab
 mapkey("s", "Copy URL & close tab", async () => {
 	const url = window.location.href;
-	await navigator.clipboard.writeText(url);
-	copyNotification(url);
+	await copyAndNotify(url);
 	window.close();
 });
 map("a", "E"); // goto tab right
@@ -169,17 +168,15 @@ map("yf", "ya", null, "Yank Link (via Hint)");
 map("yc", "yq", null, "Yank Codeblock");
 map("ye", "yv", null, "Yank Element");
 map("yw", "yY", null, "Yank all tabs in window");
+map("yi", ";di", null, "Download Image");
 mapkey("ym", "Copy Markdown Link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
-	await navigator.clipboard.writeText(mdLink);
-	copyNotification(mdLink);
+	await copyAndNotify(mdLink);
 });
 
 mapkey("yy", "Copy Link", async () => {
 	// custom function for notification-shortening
-	const url = window.location.href;
-	await navigator.clipboard.writeText(url);
-	copyNotification(url);
+	await copyAndNotify(window.location.href);
 });
 
 // MISC

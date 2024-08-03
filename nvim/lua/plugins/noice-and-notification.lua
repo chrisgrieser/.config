@@ -150,6 +150,7 @@ return {
 					filter_opts = { reverse = true }, -- show newest entries first
 					-- https://github.com/folke/noice.nvim#-formatting
 					opts = { format = { "{title} ", "{message}" } },
+					filter = {}, -- shows everything
 				},
 				last = {
 					opts = { format = { "{title} ", "{message}" } },
