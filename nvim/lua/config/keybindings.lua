@@ -86,8 +86,7 @@ vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
--- [O]pen new scope / brace
--- (`remap` needed to trigger auto-pairing plugin)
+-- [O]pen new scope / brace (`remap` to trigger auto-pairing plugin)
 keymap("n", "<D-o>", "a{<CR>", { desc = " Open new scope", remap = true })
 keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 

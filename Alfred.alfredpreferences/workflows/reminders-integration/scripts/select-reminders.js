@@ -64,7 +64,7 @@ function run() {
 		let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
 		if (url && !isCompleted) urlSubtitle += " and mark as completed";
 		let emoji = isCompleted ? "☑️ " : "";
-		if (!dueDate) emoji += "no 🗓️ "; // indicator for missing due date
+		if (!dueDate) emoji += "[no due date] "; // indicator for missing due date
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
@@ -91,7 +91,10 @@ function run() {
 					subtitle: urlSubtitle,
 					valid: Boolean(url),
 				},
-				alt: { arg: content }, // edit content
+				alt: {
+					// edit content
+					arg: content,
+				},
 				ctrl: {
 					// toggle completed
 					variables: {
