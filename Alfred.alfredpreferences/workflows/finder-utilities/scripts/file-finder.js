@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-_().:#;,[\]'"]/g, " ");
+	const clean = str.replace(/[-_#()[\].:;,'"`]/g, " ");
 	return [clean, str].join(" ") + " ";
 }
 
@@ -17,7 +17,7 @@ function extensionToAlfredIcon(path) {
 	return imageExtensions.includes(ext) ? { path: path } : { path: path, type: "fileicon" };
 }
 
-/** @return {string} */
+/** @return {string} path of the front Finder window, or `""` if there is no Finder window */
 function getFrontWin() {
 	try {
 		const path = Application("Finder").insertionLocation().url().slice(7, -1);
@@ -29,7 +29,7 @@ function getFrontWin() {
 
 /** Necessary, as this workflow requires unique keywords to determine which kind
  * of search to perform.
- * @return {boolean}
+ * @return {boolean} whether there are duplicates
  * */
 function hasDuplicateKeywords() {
 	const keywords = [
@@ -66,8 +66,8 @@ function run() {
 	// GUARD duplicated keywords
 	if (hasDuplicateKeywords()) {
 		const item = {
-			title: "⚠️ Duplicated keywords",
-			subttitle: "Use only unique keywords for each search.",
+			title: "⚠️ Duplicate keywords",
+			subtitle: "In the workflow configuration, use only unique keywords.",
 			valid: false,
 		};
 		return JSON.stringify({ items: [item] });
@@ -81,9 +81,9 @@ function run() {
 	// DETERMINE SHELL COMMAND
 	let shellCmd = "";
 	if (rgFolder) {
-		const maxDepth = Number.parseInt($.getenv("max_depth"));
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
+		const maxDepth = Number.parseInt($.getenv("max_depth"));
 		const rgCmd = `rg --no-config --files --sortr=modified --max-depth=${maxDepth} \
 			--glob='!/Library/' --glob='!*.photoslibrary' || true`;
 		shellCmd = `cd '${rgFolder}' && ${rgCmd}`;
@@ -98,14 +98,14 @@ function run() {
 	}
 	const stdout = app.doShellScript(shellCmd).trim();
 
-	// GUARD no result found
+	// GUARD no file found
 	if (stdout === "") {
 		const foldername = rgFolder
 			? "in " + rgFolder.split("/").pop()
 			: isTagSearch
-				? "tagged with " + tagName
+				? `tagged with "${tagName}"`
 				: "in Trash";
-		return JSON.stringify({ items: [{ title: `No file found ${foldername}`, valid: false }] });
+		return JSON.stringify({ items: [{ title: `No file found ${foldername}.`, valid: false }] });
 	}
 
 	// CREATE ALFRED ITEMS

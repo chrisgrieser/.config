@@ -7,9 +7,6 @@ vim.opt.swapfile = false -- doesn't help and only creates useless files and noti
 vim.opt.startofline = true -- motions like "G" also move to the first char
 vim.opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
-vim.opt.showmatch = true -- when closing a bracket, briefly flash the matching one
-vim.opt.matchtime = 1 -- duration of that flashing in deci-seconds
-
 vim.opt.spell = false
 vim.opt.spellfile = vim.g.linterConfigs .. "/spellfile.add" -- needs `.add` extension
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
