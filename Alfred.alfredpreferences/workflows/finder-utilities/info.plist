@@ -246,11 +246,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Quickly access recent files, or files in the current window, downloads folder, or trash.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Finder Tweaks</string>
+	<string>Finder Searches</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -285,7 +285,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-locations/in-folder.js</string>
+				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -329,7 +329,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/actions/open-or-reveal.sh</string>
+				<string>scripts/open-or-reveal.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -372,7 +372,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-locations/front-window.js</string>
+				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -439,7 +439,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-locations/in-folder.js</string>
+				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -473,7 +473,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/actions/move-to-frontmost-Finder-window.applescript</string>
+				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -537,7 +537,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-locations/tagged.js</string>
+				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
 				<string>{var:tag_to_search}</string>
 				<key>title</key>
@@ -592,7 +592,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/actions/copy-file.js</string>
+				<string>./scripts/copy-file.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -635,7 +635,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/search-locations/trash.js</string>
+				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
