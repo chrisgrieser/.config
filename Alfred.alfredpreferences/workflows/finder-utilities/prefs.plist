@@ -4,8 +4,14 @@
 <dict>
 	<key>downloads_folder</key>
 	<string>~/Desktop</string>
+	<key>downloads_keyword</key>
+	<string>/</string>
+	<key>frontwin_keyword</key>
+	<string>//</string>
 	<key>recent_keyword</key>
 	<string>gr</string>
+	<key>tag_keyword</key>
+	<string>wip</string>
 	<key>tag_to_search</key>
 	<string>WIP</string>
 </dict>

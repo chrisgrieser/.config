@@ -40,9 +40,11 @@ const rgLocations = {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const rgCmd = // INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-		"rg --no-config --files --sortr=modified --max-depth=4 --glob='!/Library/' --glob='!*.photoslibrary'";
-	const rgFolder = rgLocations[$.getenv("alfred_workflow_keyword")];
+	// `alfred_workflow_keyword` is not set when triggered via hotkey
+	const keyword =
+		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
+		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
+	const rgFolder = rgLocations[keyword];
 
 	// GUARD no front window
 	if (rgFolder === "") {
@@ -51,12 +53,18 @@ function run() {
 		});
 	}
 
+	const maxDepth = Number.parseInt($.getenv("max_depth"));
+	// `fd` does not allow to sort results by recency, thus using `rg` instead
+	const rgCmd = `rg --no-config --files --sortr=modified --max-depth=${maxDepth} \
+		--glob='!/Library/' --glob='!*.photoslibrary' || true`;
+
 	const results = app
 		.doShellScript(`cd '${rgFolder}' && ${rgCmd}`)
+		.trim() // remove trailing newline from `doShellScript`
 		.split("\r")
 		.map((relPath) => {
 			const name = relPath.split("/").pop() || "";
-			const parent = relPath.includes("/") ? relPath.split("/").slice(0, -2).join("/") : "";
+			const parent = relPath.includes("/") ? "/" + relPath.split("/").slice(0, -2).join("/") : "";
 			const absPath = rgFolder + "/" + relPath;
 
 			return {
@@ -71,8 +79,9 @@ function run() {
 
 	// GUARD no result found
 	if (results.length === 0) {
+		const foldername = rgFolder.split("/").pop();
 		return JSON.stringify({
-			items: [{ title: `No file found in "${rgFolder}"`, valid: false }],
+			items: [{ title: `No file found in "${foldername}"`, valid: false }],
 		});
 	}
 
