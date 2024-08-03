@@ -279,7 +279,8 @@ serverConfigs.ltex = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
-				-- HACK since reading external file with the method described in ltex-docs does not work
+				-- HACK since reading external file with the method described in ltex-docs[^1] does not work
+				-- [1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
 				["en-US"] = (function()
 					if not vim.uv.fs_stat(vim.o.spellfile) then
 						u.notify("ltex", "Spellfile not found: " .. vim.o.spellfile, "warn")
