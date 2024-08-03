@@ -144,7 +144,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D3680E24-3C4B-4803-BF36-022909BBD0C1</string>
+				<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -285,7 +285,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
+				<string>./scripts/find-in-folder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -320,29 +320,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/open-or-reveal.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D3680E24-3C4B-4803-BF36-022909BBD0C1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -372,7 +349,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
+				<string>./scripts/find-in-folder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -439,7 +416,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
+				<string>./scripts/find-in-folder.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -464,6 +441,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>ℹ️ No Finder Window open</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -483,27 +481,6 @@
 			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>ℹ️ No Finder Window open</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -537,7 +514,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
+				<string>./scripts/tagged-or-trashed.js</string>
 				<key>subtext</key>
 				<string>{var:tag_to_search}</string>
 				<key>title</key>
@@ -635,7 +612,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/file-finder.js</string>
+				<string>./scripts/tagged-or-trashed.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -692,7 +669,7 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>base folder</string>
+			<string>downloads folder</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -749,17 +726,6 @@
 			<key>ypos</key>
 			<real>335</real>
 		</dict>
-		<key>D3680E24-3C4B-4803-BF36-022909BBD0C1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>note</key>
-			<string>open if folder, reveal if file</string>
-			<key>xpos</key>
-			<real>710</real>
-			<key>ypos</key>
-			<real>130</real>
-		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
 			<key>colorindex</key>
@@ -776,7 +742,7 @@
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>635</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>
@@ -805,11 +771,11 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>recent</string>
+				<string>re</string>
 				<key>placeholder</key>
 				<string>recent</string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
@@ -847,7 +813,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>ff</string>
+				<string>fw</string>
 				<key>placeholder</key>
 				<string>front</string>
 				<key>required</key>
@@ -931,9 +897,9 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>mark</string>
+				<string>wip</string>
 				<key>placeholder</key>
-				<string>sometag</string>
+				<string>wip</string>
 				<key>required</key>
 				<true/>
 				<key>trim</key>
@@ -956,33 +922,41 @@
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>🟠 orange</string>
+						<string>🟠</string>
 						<string>🟠</string>
 					</array>
 					<array>
-						<string>🟡 yellow</string>
+						<string>🟡</string>
 						<string>🟡</string>
 					</array>
 					<array>
-						<string>🔵 blue</string>
+						<string>🔵</string>
 						<string>🔵</string>
 					</array>
 					<array>
-						<string>🟢 green</string>
+						<string>🟢</string>
 						<string>🟢</string>
 					</array>
 					<array>
-						<string>🔴 red</string>
+						<string>🔴</string>
 						<string>🔴</string>
 					</array>
 					<array>
-						<string>🟣 purple</string>
 						<string>🟣</string>
+						<string>🟣</string>
+					</array>
+					<array>
+						<string>⚪️</string>
+						<string>⚪️</string>
+					</array>
+					<array>
+						<string>⚫️</string>
+						<string>⚫️</string>
 					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Color of the tag (this setting is purely aesthetic).</string>
+			<string>Color of the tag. This setting is purely aesthetic so your search results match visually with the color of the tag you use.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
