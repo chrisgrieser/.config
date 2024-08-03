@@ -692,6 +692,118 @@ mv -f "$file" "$HOME/.Trash/"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>file-hub-cycle</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:recent_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/recently-changed-in-home.js</string>
+				<key>subtext</key>
+				<string>in home folder</string>
+				<key>title</key>
+				<string>Recently Changed</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>ℹ️ No Finder Window open</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -745,48 +857,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>0A9B471E-83C5-40EB-912A-374603BE51DC</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>file-hub-cycle</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>11D8554B-846B-40DD-9CA0-C73F5736472F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/move-to-frontmost-Finder-window.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -867,27 +937,6 @@ mv -f "$file" "$HOME/.Trash/"</string>
 			<string>1E0AF587-F6D4-4507-8EA6-AB792A4C118A</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>ℹ️ No Finder Window open</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BAE121DB-A4DB-45C3-9C13-DBB7886D8933</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1358,7 +1407,7 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>requires `ripgrep`</string>
 	<key>uidata</key>
 	<dict>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
@@ -1368,7 +1417,16 @@ fi</string>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1325</real>
+		</dict>
+		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>325</real>
 		</dict>
 		<key>06732C2D-88EF-48DF-81E5-A21235C6E96A</key>
 		<dict>
@@ -1377,7 +1435,7 @@ fi</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1325</real>
 		</dict>
 		<key>0A9B471E-83C5-40EB-912A-374603BE51DC</key>
 		<dict>
@@ -1386,7 +1444,7 @@ fi</string>
 			<key>xpos</key>
 			<real>595</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>545</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1404,7 +1462,7 @@ fi</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>980</real>
 		</dict>
 		<key>11D8554B-846B-40DD-9CA0-C73F5736472F</key>
 		<dict>
@@ -1422,7 +1480,7 @@ fi</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>695</real>
 		</dict>
 		<key>1F75DB1A-2934-4303-AFC0-03FB14B86AC0</key>
 		<dict>
@@ -1442,7 +1500,7 @@ fi</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>1215</real>
 		</dict>
 		<key>2839F7DC-68C1-483F-BC90-1A0A504CF70C</key>
 		<dict>
@@ -1453,7 +1511,7 @@ fi</string>
 			<key>xpos</key>
 			<real>175</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1325</real>
 		</dict>
 		<key>3437AEA1-E781-4F91-9F2E-42D89A4ECF6C</key>
 		<dict>
@@ -1471,7 +1529,7 @@ fi</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>1330</real>
 		</dict>
 		<key>4A0117CB-9833-40BD-99BE-709292FBBA03</key>
 		<dict>
@@ -1482,7 +1540,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>1150</real>
 		</dict>
 		<key>56CD69F0-DA3F-4EF1-809F-78543F4459A1</key>
 		<dict>
@@ -1491,7 +1549,7 @@ fi</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>1010</real>
 		</dict>
 		<key>5CCD4941-B4C3-444A-8318-2DDBF741229A</key>
 		<dict>
@@ -1518,7 +1576,7 @@ fi</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>1150</real>
 		</dict>
 		<key>6B6ADED7-8983-46EA-8C7D-2BCEB5043EE7</key>
 		<dict>
@@ -1527,7 +1585,7 @@ fi</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1355</real>
 		</dict>
 		<key>6F1C093C-A3E8-422A-A15A-2F466534C870</key>
 		<dict>
@@ -1538,7 +1596,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>835</real>
 		</dict>
 		<key>75EB64A7-C7B8-455C-A6E7-28745AF96CB9</key>
 		<dict>
@@ -1556,7 +1614,7 @@ fi</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>835</real>
 		</dict>
 		<key>825E4C6C-5562-42DF-84D1-29924B3329EF</key>
 		<dict>
@@ -1567,7 +1625,7 @@ fi</string>
 			<key>xpos</key>
 			<real>535</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>835</real>
 		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
@@ -1578,7 +1636,7 @@ fi</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>650</real>
 		</dict>
 		<key>8FACCE6C-2228-4001-89AF-4953B84F95F7</key>
 		<dict>
@@ -1587,7 +1645,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1060</real>
+			<real>1325</real>
 		</dict>
 		<key>993B0563-52D6-4547-B1D7-97E70FF55DB2</key>
 		<dict>
@@ -1598,7 +1656,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>1010</real>
 		</dict>
 		<key>A166CD55-3AEC-45B7-9C9F-98FD649E0258</key>
 		<dict>
@@ -1607,7 +1665,7 @@ fi</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>835</real>
 		</dict>
 		<key>A74651BD-9EA3-438E-9558-5E7EF6F14A75</key>
 		<dict>
@@ -1616,7 +1674,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>695</real>
 		</dict>
 		<key>B4D4D74C-56BC-4F3B-9840-A3CD979D396C</key>
 		<dict>
@@ -1667,7 +1725,7 @@ fi</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>1450</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
@@ -1696,7 +1754,7 @@ fi</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>515</real>
 		</dict>
 		<key>FBA872DF-C511-43B9-8018-C366115A078C</key>
 		<dict>
@@ -1705,11 +1763,32 @@ fi</string>
 			<key>xpos</key>
 			<real>540</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>650</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>recent</string>
+				<key>placeholder</key>
+				<string>recent</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>recently changed</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>recent_keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -1796,7 +1875,7 @@ fi</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
