@@ -28,6 +28,22 @@ function getFrontWin() {
 	return decodeURIComponent(path);
 }
 
+/** Necessary, as this workflow requires unique keywords to determine which kind
+ * of search to perform.
+ * @return {boolean}
+ * */
+function hasDuplicateKeywords() {
+	const keywords = [
+		$.getenv("downloads_keyword"),
+		$.getenv("recent_keyword"),
+		$.getenv("frontwin_keyword"),
+		$.getenv("tag_keyword"),
+		$.getenv("trash_keyword"),
+	];
+	const uniqueKeywords = [...new Set(keywords)];
+	return uniqueKeywords.length !== keywords.length;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {Record<string, string>} */
@@ -48,13 +64,19 @@ function run() {
 	const tagName = $.getenv("tag_to_search");
 	const isTagSearch = keyword === $.getenv("tag_keyword");
 
+	// GUARD duplicated keywords
 	if (hasDuplicateKeywords()) {
-		return JSON.stringify({ items: [{ title: "", valid: false }], });
+		const item = {
+			title: "⚠️ Duplicated keywords",
+			subttitle: "Use only unique keywords for each search.",
+			valid: false,
+		};
+		return JSON.stringify({ items: [item] });
 	}
 
 	// GUARD no front window
 	if (rgFolder === "") {
-		return JSON.stringify({ items: [{ title: "No front window found", valid: false }], });
+		return JSON.stringify({ items: [{ title: "⚠️ No front window found", valid: false }] });
 	}
 
 	// DETERMINE SHELL COMMAND
@@ -83,9 +105,7 @@ function run() {
 			: isTagSearch
 				? "tagged with " + tagName
 				: "in Trash";
-		return JSON.stringify({
-			items: [{ title: `No file found ${foldername}`, valid: false }],
-		});
+		return JSON.stringify({ items: [{ title: `No file found ${foldername}`, valid: false }] });
 	}
 
 	// CREATE ALFRED ITEMS

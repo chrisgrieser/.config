@@ -586,19 +586,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -613,6 +600,19 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>6DCEA464-F1BD-49D5-9251-E455ADD73073</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -699,6 +699,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>keyword_from_hotkey</key>
+					<string>{var:downloads_keyword}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>2F78B362-3AF3-4AD0-BEBF-22FECBEEBB77</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -737,70 +757,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>keyword_from_hotkey</key>
-					<string>{var:downloads_keyword}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>2F78B362-3AF3-4AD0-BEBF-22FECBEEBB77</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>FBA872DF-C511-43B9-8018-C366115A078C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/copy-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -881,6 +837,50 @@
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
 			<string>682E57FD-7381-4EB8-AB57-3FF7DFD1773F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>FBA872DF-C511-43B9-8018-C366115A078C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/copy-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1057,7 +1057,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>210</real>
 		</dict>
 		<key>22597717-6399-48C7-8B78-551AAD86DC01</key>
 		<dict>
@@ -1140,7 +1140,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>460</real>
 		</dict>
 		<key>9E6F8450-F918-43B2-B94C-531BB5805A92</key>
 		<dict>
@@ -1169,7 +1169,7 @@
 			<key>xpos</key>
 			<real>895</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>330</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1180,7 +1180,7 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>330</real>
 		</dict>
 		<key>D158A013-04D6-4B89-BAAC-9144298030DB</key>
 		<dict>
@@ -1198,14 +1198,14 @@
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>60</real>
+			<real>90</real>
 		</dict>
 		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>files in the trash cannot be opened, thus reveal them instead</string>
+			<string>files in the trash cannot be opened, thus revealing them instead</string>
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
@@ -1229,7 +1229,7 @@
 			<key>xpos</key>
 			<real>895</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>460</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
