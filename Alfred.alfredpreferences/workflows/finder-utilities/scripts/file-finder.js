@@ -19,13 +19,12 @@ function extensionToAlfredIcon(path) {
 
 /** @return {string} */
 function getFrontWin() {
-	let path;
 	try {
-		path = Application("Finder").insertionLocation().url().slice(7, -1);
+		const path = Application("Finder").insertionLocation().url().slice(7, -1);
+		return decodeURIComponent(path);
 	} catch (_error) {
 		return "";
 	}
-	return decodeURIComponent(path);
 }
 
 /** Necessary, as this workflow requires unique keywords to determine which kind
@@ -83,7 +82,8 @@ function run() {
 	let shellCmd = "";
 	if (rgFolder) {
 		const maxDepth = Number.parseInt($.getenv("max_depth"));
-		// `fd` does not allow to sort results by recency, thus using `rg` instead
+		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
+		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
 		const rgCmd = `rg --no-config --files --sortr=modified --max-depth=${maxDepth} \
 			--glob='!/Library/' --glob='!*.photoslibrary' || true`;
 		shellCmd = `cd '${rgFolder}' && ${rgCmd}`;
@@ -130,5 +130,7 @@ function run() {
 		};
 	});
 
+	// INFO do not use Alfred's caching mechanism, since it does not work with
+	// `alfred_workflow_keyword` https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
 	return JSON.stringify({ items: alfredItems });
 }

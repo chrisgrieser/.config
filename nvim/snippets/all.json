@@ -4,7 +4,7 @@
     "prefix": "BUG"
   },
   "CAVEAT": {
-    "body": "$LINE_COMMENT CAVEAT",
+    "body": "$LINE_COMMENT CAVEAT $0",
     "prefix": "CAVEAT"
   },
   "CONFIG": {
