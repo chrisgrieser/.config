@@ -38,21 +38,24 @@ function hasDuplicateKeywords() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {Record<string, {cmd: string; dir?: string; absPathOutput?: boolean;}>} */
+/** @type {Record<string, {cmd: string; dir?: string; absPathOutput?: boolean; dontDisplayParent?: boolean;}>} */
 const shellCmds = {
 	[$.getenv("recent_keyword")]: {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
-		cmd: 'cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary" || true',
+		cmd: 'cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary"',
 		dir: app.pathTo("home folder"),
 	},
 	[$.getenv("downloads_keyword")]: {
 		cmd: `ls -t "${$.getenv("downloads_folder")}"`,
 		dir: $.getenv("downloads_folder"),
+		dontDisplayParent: true,
 	},
 	[$.getenv("trash_keyword")]: {
-		cmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -depth 1',
+		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
+		cmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
+		dontDisplayParent: true,
 	},
 	[$.getenv("tag_keyword")]: {
 		cmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
@@ -60,6 +63,7 @@ const shellCmds = {
 	},
 	[$.getenv("frontwin_keyword")]: {
 		cmd: 'ls -t1 "%s"',
+		dontDisplayParent: true,
 	},
 };
 
@@ -77,7 +81,7 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
 
 	// EXECUTE SEARCH
-	let { cmd, dir, absPathOutput } = shellCmds[keyword];
+	let { cmd, dir, absPathOutput, dontDisplayParent } = shellCmds[keyword];
 	if (keyword === $.getenv("frontwin_keyword")) {
 		dir = getFrontWin();
 		if (dir === "") {
@@ -89,16 +93,22 @@ function run() {
 	if (stdout === "") return JSON.stringify({ items: [{ title: "No file found.", valid: false }] });
 
 	// CREATE ALFRED ITEMS
-	const maxFiles = Number.parseInt($.getenv("max_files"));
+	const maxFiles =
+		keyword === $.getenv("recent_keyword")
+			? Number.parseInt($.getenv("max_recent_files"))
+			: undefined;
 	const results = stdout
 		.split("\r")
-		.slice(0, maxFiles) // PERF
+		.slice(0, maxFiles)
 		.map((line) => {
 			const name = line.split("/").pop() || "";
 			const absPath = absPathOutput ? line : dir + "/" + line;
 
-			const parent = absPath.split("/").slice(0, -1).join("/");
-			const subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/Users\/\w+/, "~");
+			let subtitle = "";
+			if (!dontDisplayParent) {
+				const parent = absPath.split("/").slice(0, -1).join("/");
+				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/Users\/\w+/, "~");
+			}
 
 			const ext = name.split(".").pop() || "";
 			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];

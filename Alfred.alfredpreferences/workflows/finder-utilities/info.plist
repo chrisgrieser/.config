@@ -504,7 +504,7 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -539,11 +539,6 @@
 				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>find-in-current-win</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -622,7 +617,7 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
 				<key>argumenttrimmode</key>
@@ -1440,24 +1435,24 @@ to modify the respective hotkey</string>
 				<key>defaultvalue</key>
 				<integer>1000</integer>
 				<key>markercount</key>
-				<integer>5</integer>
+				<integer>9</integer>
 				<key>maxvalue</key>
-				<integer>100000</integer>
+				<integer>2000</integer>
 				<key>minvalue</key>
-				<integer>100</integer>
+				<integer>1</integer>
 				<key>onlystoponmarkers</key>
 				<true/>
 				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Higher values are slower</string>
+			<string>High value impacts performance</string>
 			<key>label</key>
-			<string>max files</string>
+			<string>Max recent files</string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
-			<string>max_files</string>
+			<string>max_recent_files</string>
 		</dict>
 	</array>
 	<key>version</key>

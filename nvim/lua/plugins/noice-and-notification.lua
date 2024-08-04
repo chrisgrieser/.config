@@ -160,6 +160,9 @@ return {
 					opts = { format = { "{title} ", "{message}" } },
 				},
 			},
+			notify = {
+				merge = true,
+			},
 
 			-- DISABLE features, since conflicts with existing plugins I prefer to use
 			lsp = {
