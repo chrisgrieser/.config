@@ -130,7 +130,7 @@ keymap(
 	{ desc = "󰒕 Code Action" }
 )
 
-keymap("n", "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
 
