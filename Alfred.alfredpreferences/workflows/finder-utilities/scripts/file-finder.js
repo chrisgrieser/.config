@@ -43,13 +43,43 @@ function hasDuplicateKeywords() {
 	return uniqueKeywords.length !== keywords.length;
 }
 
+/**
+ * @param {string} title
+ * @param {string=} subtitle
+ */
+function errorItem(title, subtitle) {
+	return JSON.stringify({
+		items: [{ title: title, subtitle: subtitle || "", valid: false }],
+	});
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {Record<string, string>} */
-const rgLocations = {
-	[$.getenv("downloads_keyword")]: $.getenv("downloads_folder"),
-	[$.getenv("recent_keyword")]: app.pathTo("home folder"),
-	[$.getenv("frontwin_keyword")]: getFrontWin(),
+const shellCmds = {
+	// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
+	// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
+	[$.getenv("recent_keyword")]: {
+		cmd: `cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary" || true`,
+		pathOutput: "relative",
+	},
+	[$.getenv("downloads_keyword")]: {
+		cmd: `ls -t "${$.getenv("downloads_folder")}"`,
+		pathOutput: "relative",
+	},
+	[$.getenv("trash_keyword")]: {
+		cmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -depth 1',
+		pathOutput: "absolute",
+	},
+	[$.getenv("tag_keyword")]: {
+		cmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
+		pathOutput: "absolute",
+	},
+	[$.getenv("frontwin_keyword")]: {
+		cmd: (function name() {
+			return 1;
+		})(),
+		pathOutput: "relative",
+	},
 };
 
 /** @type {AlfredRun} */
@@ -59,65 +89,59 @@ function run() {
 	const keyword =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
-	const rgFolder = rgLocations[keyword];
-	const tagName = $.getenv("tag_to_search");
+	const shellCmd = shellCmds[keyword];
 	const isTagSearch = keyword === $.getenv("tag_keyword");
 
 	// GUARD duplicated keywords
 	if (hasDuplicateKeywords()) {
-		const item = {
-			title: "⚠️ Duplicate keywords",
-			subtitle: "In the workflow configuration, use only unique keywords.",
-			valid: false,
-		};
-		return JSON.stringify({ items: [item] });
+		return errorItem(
+			"⚠️ Duplicate keywords",
+			"In the workflow configuration, use only unique keywords.",
+		);
 	}
-
-	// GUARD no front window
-	if (rgFolder === "") {
-		return JSON.stringify({ items: [{ title: "⚠️ No front window found", valid: false }] });
+	if (keyword === $.getenv("frontwin_keyword")) {
+		return errorItem("⚠️ No Finder window open.");
 	}
 
 	// DETERMINE SHELL COMMAND
-	let shellCmd = "";
-	if (rgFolder) {
-		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
-		const maxDepth = Number.parseInt($.getenv("max_depth"));
-		const rgCmd = `rg --no-config --files --follow --sortr=modified --max-depth=${maxDepth} \
-			--glob='!/Library/' --glob='!*.photoslibrary' || true`;
-		shellCmd = `cd '${rgFolder}' && ${rgCmd}`;
+	if (shellCmd) {
+		const rgCmd = `cd "$HOME" && rg --no-config --files --follow --sortr=modified --glob='!/Library/' --glob='!*.photoslibrary' || true`;
+		shellCmd = `cd '${shellCmd}' && ${rgCmd}`;
 	} else {
-		shellCmd = `mdfind "kMDItemUserTags == ${tagName}"`; // https://www.alfredforum.com/topic/18041-advanced-search-using-tags-%C3%A0-la-finder/
+		shellCmd = `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`; // https://www.alfredforum.com/topic/18041-advanced-search-using-tags-%C3%A0-la-finder/
 		if (!isTagSearch) {
 			const home = app.pathTo("home folder");
 			const normalTrash = home + "/.Trash";
 			const iCloudTrash = home + "/Library/Mobile Documents/.Trash";
-			shellCmd = `find "${normalTrash}" "${iCloudTrash}" -maxdepth 1 -mindepth 1`;
+			shellCmd = `find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1`;
 		}
 	}
 	const stdout = app.doShellScript(shellCmd).trim();
 
 	// GUARD no file found
 	if (stdout === "") {
-		const foldername = rgFolder
-			? "in " + rgFolder.split("/").pop()
+		const foldername = shellCmd
+			? "in " + shellCmd.split("/").pop()
 			: isTagSearch
-				? `tagged with "${tagName}"`
+				? `tagged with "${$.getenv("tag_to_search")}"`
 				: "in Trash";
 		return JSON.stringify({ items: [{ title: `No file found ${foldername}.`, valid: false }] });
+	}
+	// GUARD no front window
+	if (keyword === $.getenv("frontwin_keyword") && stdout === "ls: : No such file or directory") {
+		return JSON.stringify({ items: [{ title: "⚠️ No front window found", valid: false }] });
 	}
 
 	// CREATE ALFRED ITEMS
 	const alfredItems = stdout.split("\r").map((path) => {
 		const name = path.split("/").pop() || "";
 		let parent = path.includes("/") ? "/" + path.split("/").slice(0, -2).join("/") : "";
-		if (!rgFolder) {
+		if (!shellCmd) {
 			parent = isTagSearch
 				? parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/\/Users\/\w+/, "~")
 				: "";
 		}
-		const absPath = rgFolder ? rgFolder + "/" + path : path;
+		const absPath = shellCmd ? shellCmd + "/" + path : path;
 		const emoji = isTagSearch ? $.getenv("tag_emoji") : "";
 
 		return {

@@ -1515,31 +1515,6 @@ to modify the respective hotkey</string>
 			<key>variable</key>
 			<string>tag_emoji</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>defaultvalue</key>
-				<integer>5</integer>
-				<key>markercount</key>
-				<integer>9</integer>
-				<key>maxvalue</key>
-				<integer>10</integer>
-				<key>minvalue</key>
-				<integer>1</integer>
-				<key>onlystoponmarkers</key>
-				<true/>
-				<key>showmarkers</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>How many directories deep to search. High values will result in lags, especially when searching for recent files in the home folder.</string>
-			<key>label</key>
-			<string>max depth</string>
-			<key>type</key>
-			<string>slider</string>
-			<key>variable</key>
-			<string>max_depth</string>
-		</dict>
 	</array>
 	<key>version</key>
 	<string>0.9</string>
