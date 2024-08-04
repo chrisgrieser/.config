@@ -3,15 +3,6 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{ -- highlights for ftFT
-		"jinh0/eyeliner.nvim",
-		keys = { "f", "F", "t", "T" },
-		opts = { highlight_on_key = true, dim = false },
-		init = function()
-			u.colorschemeMod("EyelinerPrimary", { reverse = true })
-			u.colorschemeMod("EyelinerSecondary", { underline = true })
-		end,
-	},
 	{ -- better % (highlighting, match across lines, match quotes, etc.)
 		"andymass/vim-matchup",
 		event = "BufReadPost", -- cannot load on keys due to highlights

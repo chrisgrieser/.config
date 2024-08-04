@@ -39,10 +39,10 @@ local routes = {
 	-- search
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-	-- Word added to spellfile via `zg`
+	-- word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
-	{ -- Mason
+	{ -- mason.nvim
 		filter = {
 			event = "notify",
 			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
@@ -54,8 +54,9 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	-- gitsigns
+	-- gitsigns.nvim
 	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "No hunks" }, view = "mini" },
 
 	-----------------------------------------------------------------------------
 	-- SKIP
@@ -68,7 +69,7 @@ local routes = {
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
-	-- unneeded info on search patterns
+	-- unneeded info on search patterns, when pattern not found
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 }
 
