@@ -49,12 +49,10 @@ rules:
       # overwrite `-` search with my own Alfred-based search
       - type: basic
         from: { key_code: slash }
-        to:
-          - shell_command:
-              osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger
-              "find-in-current-win" in workflow "de.chris-grieser.finder"'
-          # on focus loss, renaming is aborted automatically
-          - *leave-insert-mode
+        to_if_alone:
+          - key_code: f
+            modifiers: [shift, command]
+          - *leave-insert-mode # on Alfred focus loss, renaming is aborted automatically
           - *remove-insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
   #─────────────────────────────────────────────────────────────────────────────
