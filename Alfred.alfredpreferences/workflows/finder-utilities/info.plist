@@ -316,19 +316,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D1962265-CBC1-43AD-AE06-6BF0941B4A0C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>61213842-CEAD-44BD-AC5F-73396741C832</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
 		<array>
 			<dict>
@@ -1025,60 +1012,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>path</key>
-				<string>~/Desktop</string>
-				<key>sortBy</key>
-				<integer>2</integer>
-				<key>sortDirection</key>
-				<integer>0</integer>
-				<key>sortFoldersAtTop</key>
-				<true/>
-				<key>sortOverride</key>
-				<true/>
-				<key>stackBrowserView</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinalfred</string>
-			<key>uid</key>
-			<string>61213842-CEAD-44BD-AC5F-73396741C832</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>20</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>3</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>D1962265-CBC1-43AD-AE06-6BF0941B4A0C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>requires `ripgrep`</string>
@@ -1161,13 +1094,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>175</real>
-		</dict>
-		<key>61213842-CEAD-44BD-AC5F-73396741C832</key>
-		<dict>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>770</real>
 		</dict>
 		<key>682E57FD-7381-4EB8-AB57-3FF7DFD1773F</key>
 		<dict>
@@ -1267,13 +1193,6 @@ to modify the respective hotkey</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>600</real>
-		</dict>
-		<key>D1962265-CBC1-43AD-AE06-6BF0941B4A0C</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>770</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
@@ -1514,6 +1433,31 @@ to modify the respective hotkey</string>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>tag_emoji</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>1000</integer>
+				<key>markercount</key>
+				<integer>5</integer>
+				<key>maxvalue</key>
+				<integer>100000</integer>
+				<key>minvalue</key>
+				<integer>100</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Higher values are slower</string>
+			<key>label</key>
+			<string>max files</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>max_files</string>
 		</dict>
 	</array>
 	<key>version</key>
