@@ -84,7 +84,7 @@ function run() {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
 		const maxDepth = Number.parseInt($.getenv("max_depth"));
-		const rgCmd = `rg --no-config --files --sortr=modified --max-depth=${maxDepth} \
+		const rgCmd = `rg --no-config --files --follow --sortr=modified --max-depth=${maxDepth} \
 			--glob='!/Library/' --glob='!*.photoslibrary' || true`;
 		shellCmd = `cd '${rgFolder}' && ${rgCmd}`;
 	} else {

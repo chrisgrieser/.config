@@ -146,7 +146,7 @@ local config = {
 		bottom = "0.3cell",
 	},
 	min_scroll_bar_height = "3cell",
-	scrollback_lines = 7000,
+	scrollback_lines = 10000,
 
 	-- Tabs
 	enable_tab_bar = true,
