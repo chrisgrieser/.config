@@ -139,16 +139,15 @@ return {
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
 		cmd = "RipSubstitute",
-		init = function() vim.g.whichkeyAddGroup("<leader>r", " rip-substitute") end,
 		keys = {
 			{
-				"<leader>rr",
+				"<leader>fs",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
 				desc = " substitute",
 			},
 			{
-				"<leader>rc",
+				"<leader>fc",
 				function() require("rip-substitute").rememberCursorWord() end,
 				mode = { "n", "x" },
 				desc = " remember cword",
