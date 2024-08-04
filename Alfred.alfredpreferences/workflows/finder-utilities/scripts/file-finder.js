@@ -55,94 +55,64 @@ function errorItem(title, subtitle) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @type {Record<string, {parent?: string|Function; cmd: string; outputType: "absolute" | "relative" | "name"}>} */
 const shellCmds = {
-	// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-	// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
 	[$.getenv("recent_keyword")]: {
-		cmd: `cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary" || true`,
-		pathOutput: "relative",
+		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
+		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
+		cmd: 'cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary" || true',
+		outputType: "relative",
+		parent: app.pathTo("home folder"),
 	},
 	[$.getenv("downloads_keyword")]: {
 		cmd: `ls -t "${$.getenv("downloads_folder")}"`,
-		pathOutput: "relative",
+		outputType: "name",
+		parent: $.getenv("downloads_folder"),
 	},
 	[$.getenv("trash_keyword")]: {
 		cmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -depth 1',
-		pathOutput: "absolute",
+		outputType: "absolute",
 	},
 	[$.getenv("tag_keyword")]: {
 		cmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
-		pathOutput: "absolute",
+		outputType: "absolute",
 	},
 	[$.getenv("frontwin_keyword")]: {
-		cmd: (function name() {
-			return 1;
-		})(),
-		pathOutput: "relative",
+		cmd: 'ls -t1 "%s"',
+		outputType: "name",
 	},
 };
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// `alfred_workflow_keyword` is not set when triggered via hotkey
-	const keyword =
-		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
-		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
-	const shellCmd = shellCmds[keyword];
-	const isTagSearch = keyword === $.getenv("tag_keyword");
-
-	// GUARD duplicated keywords
+	// DETERMINE KEYWORD
 	if (hasDuplicateKeywords()) {
 		return errorItem(
 			"⚠️ Duplicate keywords",
 			"In the workflow configuration, use only unique keywords.",
 		);
 	}
+	const keyword = // `alfred_workflow_keyword` is not set when triggered via hotkey
+		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
+		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
+
+	// EXECUTE SEARCH
+	let { cmd, outputType, parent } = shellCmds[keyword];
 	if (keyword === $.getenv("frontwin_keyword")) {
-		return errorItem("⚠️ No Finder window open.");
+		parent = getFrontWin();
+		if (parent === "") return errorItem("⚠️ No Finder window found.");
+		cmd = cmd.replace("%s", parent);
 	}
-
-	// DETERMINE SHELL COMMAND
-	if (shellCmd) {
-		const rgCmd = `cd "$HOME" && rg --no-config --files --follow --sortr=modified --glob='!/Library/' --glob='!*.photoslibrary' || true`;
-		shellCmd = `cd '${shellCmd}' && ${rgCmd}`;
-	} else {
-		shellCmd = `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`; // https://www.alfredforum.com/topic/18041-advanced-search-using-tags-%C3%A0-la-finder/
-		if (!isTagSearch) {
-			const home = app.pathTo("home folder");
-			const normalTrash = home + "/.Trash";
-			const iCloudTrash = home + "/Library/Mobile Documents/.Trash";
-			shellCmd = `find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1`;
-		}
-	}
-	const stdout = app.doShellScript(shellCmd).trim();
-
-	// GUARD no file found
-	if (stdout === "") {
-		const foldername = shellCmd
-			? "in " + shellCmd.split("/").pop()
-			: isTagSearch
-				? `tagged with "${$.getenv("tag_to_search")}"`
-				: "in Trash";
-		return JSON.stringify({ items: [{ title: `No file found ${foldername}.`, valid: false }] });
-	}
-	// GUARD no front window
-	if (keyword === $.getenv("frontwin_keyword") && stdout === "ls: : No such file or directory") {
-		return JSON.stringify({ items: [{ title: "⚠️ No front window found", valid: false }] });
-	}
+	const stdout = app.doShellScript(cmd).trim();
+	if (stdout === "") return errorItem("No file found.");
 
 	// CREATE ALFRED ITEMS
-	const alfredItems = stdout.split("\r").map((path) => {
-		const name = path.split("/").pop() || "";
-		let parent = path.includes("/") ? "/" + path.split("/").slice(0, -2).join("/") : "";
-		if (!shellCmd) {
-			parent = isTagSearch
-				? parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/\/Users\/\w+/, "~")
-				: "";
-		}
-		const absPath = shellCmd ? shellCmd + "/" + path : path;
-		const emoji = isTagSearch ? $.getenv("tag_emoji") : "";
+	const results = stdout.split("\r").map((line) => {
+		const name = outputType === "name" ? line : line.split("/").pop() || "";
+		let parent = line.includes("/") ? "/" + line.split("/").slice(0, -2).join("/") : "";
+		const absPath = outputType === "absolute" ? line : parent + "/" + name;
+		const emoji = keyword === $.getenv("tag_keyword") ? $.getenv("tag_emoji") : "";
 
 		return {
 			title: name + emoji,
@@ -156,5 +126,5 @@ function run() {
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
 	// `alfred_workflow_keyword` https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
-	return JSON.stringify({ items: alfredItems });
+	return JSON.stringify({ items: results });
 }
