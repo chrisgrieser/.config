@@ -1,7 +1,3 @@
-local o = {
-	one = 1,
-	two = 2,
-}
+local var = "foobar"
+vim.notify("🖨️ var: " .. type(var))
 
-vim.print("🖨️ o", o)
-vim.print("🖨️ beep")
