@@ -3,5 +3,5 @@ local o = {
 	two = 2,
 }
 
-vim.print(o)
-print("🖨️ beep")
+vim.print("🖨️ o", o)
+vim.print("🖨️ beep")
