@@ -18,7 +18,10 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		-- remove binding so it does not interfere with `gc`
-		init = function() vim.keymap.del("n", "gcc") end,
+		init = function()
+			vim.keymap.del("n", "gcc")
+			vim.keymap.del("o", "gc")
+		end,
 		keys = {
 			{
 				"<leader>?",

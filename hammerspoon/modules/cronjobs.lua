@@ -51,12 +51,7 @@ M.timer_clock = hs.timer
 
 --------------------------------------------------------------------------------
 -- NIGHTLY CRONJOBS
-
-local jobs = {
-	"bookmark-bkp.sh",
-	"reminders-bkp.sh",
-	"save-browser-extension-list.sh",
-}
+local cronjobDir = "./cronjobs" -- CONFIG
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
@@ -66,15 +61,15 @@ M.timer_nightlyCronjobs = hs.timer
 		if isSunTueThuSat then return end
 
 		local errors = 0
-		for _, script in pairs(jobs) do
-			M[script] = hs.task
-				.new("./cronjobs/" .. script, function(code) errors = errors + code end)
-				:start()
+		for file in hs.fs.dir(cronjobDir) do
+			if not file:find("^.%") then
+				M[cronjobDir .. file] = hs.task
+					.new(cronjobDir .. file, function(code) errors = errors + code end)
+					:start()
+			end
 		end
 
-		u.notify(
-			errors == 0 and "✅ Cronjobs successful." or ("❌ %d Cronjobs failed."):format(errors)
-		)
+		u.notify(errors == 0 and "✅ Cronjobs done." or ("❌ %d Cronjobs failed."):format(errors))
 	end, true)
 	:start()
 
