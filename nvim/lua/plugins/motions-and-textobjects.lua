@@ -3,6 +3,11 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"echasnovski/mini.jump",
+		keys = { "f", "F", "t", "T" },
+		opts = { silent = true },
+	},
 	{ -- better % (highlighting, match across lines, match quotes, etc.)
 		"andymass/vim-matchup",
 		event = "BufReadPost", -- cannot load on keys due to highlights
