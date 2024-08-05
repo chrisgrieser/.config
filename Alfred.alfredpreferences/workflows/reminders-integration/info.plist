@@ -8,19 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<array>
 			<dict>
@@ -310,7 +297,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</string>
+				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1097,11 +1084,11 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -1117,7 +1104,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
@@ -1125,7 +1112,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/select-reminder-time.js</string>
+				<string>scripts/select-date-for-reminder.js</string>
 				<key>subtext</key>
 				<string>🗓️ Add Reminder at…</string>
 				<key>title</key>
@@ -1141,25 +1128,6 @@
 			<string>91C4C097-7401-4742-A061-9BF771AD2D00</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>subtext</key>
-				<string>🗓️ {var:selectedDate}</string>
-				<key>text</key>
-				<string>New Reminder: "{query}"</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1195,23 +1163,12 @@ Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>061A8F9E-DB1D-423A-AE6A-323C54D06BF9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>input reminder text</string>
-			<key>xpos</key>
-			<real>225</real>
-			<key>ypos</key>
-			<real>1000</real>
-		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>225</real>
+			<real>210</real>
 			<key>ypos</key>
 			<real>865</real>
 		</dict>
@@ -1220,7 +1177,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>880</real>
 		</dict>
@@ -1276,7 +1233,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>425</real>
+			<real>360</real>
 			<key>ypos</key>
 			<real>885</real>
 		</dict>
@@ -1343,7 +1300,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
@@ -1381,7 +1338,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>605</real>
+			<real>455</real>
 			<key>ypos</key>
 			<real>1000</real>
 		</dict>
@@ -1452,9 +1409,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>add reminder</string>
+			<string>add at date</string>
 			<key>xpos</key>
-			<real>405</real>
+			<real>210</real>
 			<key>ypos</key>
 			<real>1000</real>
 		</dict>

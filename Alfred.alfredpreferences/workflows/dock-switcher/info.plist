@@ -135,19 +135,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>00A6D518-2A93-46B2-8362-89BFB8CF6EAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -390,50 +377,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'; killall Dock</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>00A6D518-2A93-46B2-8362-89BFB8CF6EAE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>:dock_dividver</string>
-				<key>subtext</key>
-				<string>Add divider to current dock</string>
-				<key>text</key>
-				<string>Dock</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -453,15 +396,6 @@ Load a dock layout from another app via this AppleScript:
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>00A6D518-2A93-46B2-8362-89BFB8CF6EAE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>495</real>
-		</dict>
 		<key>047B3E39-B26C-4566-9BA5-2C8106D3C6E9</key>
 		<dict>
 			<key>colorindex</key>
@@ -557,15 +491,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>215</real>
 			<key>ypos</key>
 			<real>285</real>
-		</dict>
-		<key>EB9F9CC5-F8F0-4670-90E5-D00BEC0A3075</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>495</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
