@@ -10,7 +10,7 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ") + " ";
 }
 
-/** @return {string} path of the front Finder window, or `""` if there is no Finder window */
+/** @return {string} path of front Finder window; `""` if there is no Finder window */
 function getFrontWin() {
 	try {
 		const path = Application("Finder").insertionLocation().url().slice(7, -1);
@@ -42,40 +42,44 @@ function errorItem(msg) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+
 const rgIgnoreFile =
 	$.getenv("alfred_preferences") +
 	"/workflows/" +
 	$.getenv("alfred_workflow_uid") +
 	"/scripts/rg-ignore";
 
-/** @type {Record<string, {cmd: string; dir?: string; absPathOutput?: boolean; dontDisplayParent?: boolean;}>} */
-const shellCmds = {
+/** @type {Record<string, {shellCmd: string; dir?: string; maxFiles?: number; absPathOutput?: boolean; depth?: number; prefix?: string}>} */
+const searchConfig = {
 	[$.getenv("recent_keyword")]: {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT As opposed to `fd`, `rg` does not give us folders, which is
 		// acceptable since this searches for recent files, and modification dates
 		// for folders are unintuitive (only affected by files one level deep).
-		cmd: `cd "$HOME" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
+		shellCmd: `cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		dir: app.pathTo("home folder"),
+		maxFiles: Number.parseInt($.getenv("max_recent_files")),
 	},
 	[$.getenv("downloads_keyword")]: {
-		cmd: `ls -t "${$.getenv("downloads_folder")}"`,
+		shellCmd: `ls -t "%s"`,
 		dir: $.getenv("downloads_folder"),
-		dontDisplayParent: true,
+		depth: 1,
 	},
 	[$.getenv("trash_keyword")]: {
 		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
-		cmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
+		shellCmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
-		dontDisplayParent: true,
+		depth: 1,
 	},
 	[$.getenv("tag_keyword")]: {
-		cmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
+		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
 		absPathOutput: true,
+		prefix: $.getenv("tag_prefix"),
 	},
 	[$.getenv("frontwin_keyword")]: {
-		cmd: 'ls -t "%s"',
-		dontDisplayParent: true,
+		shellCmd: `ls -t "%s"`,
+		dir: getFrontWin(),
+		depth: 1,
 	},
 };
 
@@ -89,20 +93,16 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
 
 	// EXECUTE SEARCH
-	let { cmd, dir, absPathOutput, dontDisplayParent } = shellCmds[keyword];
-	if (keyword === $.getenv("frontwin_keyword")) {
-		dir = getFrontWin();
-		if (dir === "") return errorItem("⚠️ No Finder window found.");
-		cmd = cmd.replace("%s", dir);
+	let { shellCmd, dir, absPathOutput, depth, maxFiles, prefix } = searchConfig[keyword];
+	prefix = prefix ? prefix + " " : "";
+	if (dir) shellCmd = shellCmd.replace("%s", dir);
+	if (keyword === $.getenv("frontwin_keyword") && dir === "") {
+		return errorItem("⚠️ No Finder window found.");
 	}
-	const stdout = app.doShellScript(cmd).trim();
-	if (stdout === "") return errorItem("No files found.");
+	const stdout = app.doShellScript(shellCmd).trim();
+	if (stdout === "") return errorItem("⚠️ No files found.");
 
 	// CREATE ALFRED ITEMS
-	const maxFiles =
-		keyword === $.getenv("recent_keyword")
-			? Number.parseInt($.getenv("max_recent_files"))
-			: undefined;
 	const results = stdout
 		.split("\r")
 		.slice(0, maxFiles)
@@ -111,29 +111,24 @@ function run() {
 			const absPath = absPathOutput ? line : dir + "/" + line;
 
 			let subtitle = "";
-			if (!dontDisplayParent) {
+			if (depth !== 1) {
 				const parent = absPath.split("/").slice(0, -1).join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/Users\/\w+/, "~");
 			}
 
 			const ext = name.split(".").pop() || "";
 			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
-			const icon = imageExt.includes(ext)
-				? { path: absPath, type: undefined }
-				: { path: absPath, type: "fileicon" };
-			const emoji = keyword === $.getenv("tag_keyword") ? $.getenv("tag_emoji") : "";
+			const icon = imageExt.includes(ext) ? { path: absPath } : { path: absPath, type: "fileicon" };
 
-			/** @type {AlfredItem} */
-			const item = {
-				title: name + emoji,
+			return {
+				title: prefix + name,
 				subtitle: subtitle,
 				arg: absPath,
+				quicklookurl: absPath,
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
 				icon: icon,
 			};
-
-			return item;
 		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
