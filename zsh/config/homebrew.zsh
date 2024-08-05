@@ -37,18 +37,6 @@ function _print-section() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function update_cmdline_tools {
-	local update
-	update=$(softwareupdate --list |
-		grep --only-matching --extended-regexp 'Command Line Tools.*$' |
-		head -n1)
-	if [[ -z "$update" ]]; then
-		echo "No update for command line tools available."
-		return 0
-	fi
-	softwareupdate --install "$update"
-}
-
 function update() {
 	_print-section "Homebrew"
 	brew update

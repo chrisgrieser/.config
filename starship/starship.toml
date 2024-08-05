@@ -25,10 +25,10 @@ add_newline = false
 
 #───────────────────────────────────────────────────────────────────────────────
 
-[character] # ▓▒░
-success_symbol = "[](fg:black)"
-error_symbol = "[](fg:red)"
-vimcmd_symbol = "[▓▒░](fg:cyan)"
+[character] # ▓▒░
+success_symbol = "[█](fg:black)"
+error_symbol = "[█](fg:red)"
+vimcmd_symbol = "[█](fg:black)[](fg:cyan)"
 
 [status] # exit code
 disabled = false
@@ -37,7 +37,7 @@ style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal
 
 [sudo]
 disabled = false
-style = 'fg:yellow bg:black'
+style = 'fg:208 bg:black'
 symbol = " "
 format = "[ $symbol]($style)"
 

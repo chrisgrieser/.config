@@ -3,13 +3,6 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"cbochs/portal.nvim",
-		keys = {
-			{ "<C-h>", "<cmd>Portal jumplist backward<CR>", desc = "󱋿 jump back" },
-			{ "<C-l>", "<cmd>Portal jumplist forward<CR>", desc = "󱋿 jump forward" },
-		},
-	},
 	{ -- better % (highlighting, match across lines, match quotes, etc.)
 		"andymass/vim-matchup",
 		event = "BufReadPost", -- cannot load on keys due to highlights
