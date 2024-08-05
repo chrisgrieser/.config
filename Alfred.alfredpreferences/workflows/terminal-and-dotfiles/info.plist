@@ -8,19 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>13E9CC1C-2703-45B4-B289-8589A710A651</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<array>
 			<dict>
@@ -163,42 +150,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<true/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Open in Neovide</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>02B76AB1-1681-455F-93FF-7399A17A1683</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string>~/.config/neovide/mac-helper/Neovide Helper.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>13E9CC1C-2703-45B4-B289-8589A710A651</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>path</key>
 				<string></string>
 			</dict>
@@ -321,24 +272,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>02B76AB1-1681-455F-93FF-7399A17A1683</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
-		<key>13E9CC1C-2703-45B4-B289-8589A710A651</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -355,7 +288,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>325</real>
 		</dict>
 		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
 		<dict>
@@ -364,7 +297,7 @@
 			<key>xpos</key>
 			<real>355</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>345</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -382,7 +315,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>345</real>
+			<real>325</real>
 		</dict>
 		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
 		<dict>
@@ -391,7 +324,7 @@
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>390</real>
 		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
@@ -400,7 +333,7 @@
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
