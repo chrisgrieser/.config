@@ -20,9 +20,9 @@ keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
 -- Jump history
--- keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
+keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
--- keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
+keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
 keymap("n", "-", "/")

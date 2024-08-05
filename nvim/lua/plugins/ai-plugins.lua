@@ -18,7 +18,7 @@ return {
 				TelescopePrompt = false,
 				noice = false, -- sometimes triggered in error-buffers
 				text = false, -- `pass` passwords editing filetype is plaintext
-				["rip-substitute"] = true,
+				["rip-substitute"] = false,
 			},
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
