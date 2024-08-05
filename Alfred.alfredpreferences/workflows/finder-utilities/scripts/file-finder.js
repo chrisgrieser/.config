@@ -36,6 +36,11 @@ function hasDuplicateKeywords() {
 	return uniqueKeywords.length !== keywords.length;
 }
 
+/** @param {string} msg */
+function errorItem(msg) {
+	return JSON.stringify({ items: [{ title: msg, valid: false }] });
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 const rgIgnoreFile =
 	$.getenv("alfred_preferences") +
@@ -47,8 +52,10 @@ const rgIgnoreFile =
 const shellCmds = {
 	[$.getenv("recent_keyword")]: {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
-		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
-		cmd: `cd "$HOME" && rg --no-config --files --sortr=modified --ignore-file="${rgIgnoreFile}"`,
+		// CAVEAT As opposed to `fd`, `rg` does not give us folders, which is
+		// acceptable since this searches for recent files, and modification dates
+		// for folders are unintuitive (only affected by files one level deep).
+		cmd: `cd "$HOME" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		dir: app.pathTo("home folder"),
 	},
 	[$.getenv("downloads_keyword")]: {
@@ -76,11 +83,7 @@ const shellCmds = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	// DETERMINE KEYWORD
-	if (hasDuplicateKeywords()) {
-		return JSON.stringify({
-			items: [{ title: "Duplicate keywords in workflow configuration", valid: false }],
-		});
-	}
+	if (hasDuplicateKeywords()) return errorItem("⚠️ Duplicate keywords in workflow configuration.");
 	const keyword = // `alfred_workflow_keyword` is not set when triggered via hotkey
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
@@ -89,13 +92,11 @@ function run() {
 	let { cmd, dir, absPathOutput, dontDisplayParent } = shellCmds[keyword];
 	if (keyword === $.getenv("frontwin_keyword")) {
 		dir = getFrontWin();
-		if (dir === "") {
-			return JSON.stringify({ items: [{ title: "⚠️ No Finder window found.", valid: false }] });
-		}
+		if (dir === "") return errorItem("⚠️ No Finder window found.");
 		cmd = cmd.replace("%s", dir);
 	}
 	const stdout = app.doShellScript(cmd).trim();
-	if (stdout === "") return JSON.stringify({ items: [{ title: "No file found.", valid: false }] });
+	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS
 	const maxFiles =
@@ -117,10 +118,13 @@ function run() {
 
 			const ext = name.split(".").pop() || "";
 			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
-			const icon = imageExt.includes(ext) ? { path: absPath } : { path: absPath, type: "fileicon" };
+			const icon = imageExt.includes(ext)
+				? { path: absPath, type: undefined }
+				: { path: absPath, type: "fileicon" };
 			const emoji = keyword === $.getenv("tag_keyword") ? $.getenv("tag_emoji") : "";
 
-			return {
+			/** @type {AlfredItem} */
+			const item = {
 				title: name + emoji,
 				subtitle: subtitle,
 				arg: absPath,
@@ -128,6 +132,8 @@ function run() {
 				match: alfredMatcher(name),
 				icon: icon,
 			};
+
+			return item;
 		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
