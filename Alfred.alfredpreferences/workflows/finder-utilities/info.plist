@@ -703,7 +703,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>ℹ️ No Finder Window open</string>
+				<string>ℹ️ No Finder window open</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1009,7 +1009,27 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>requires `ripgrep`</string>
+	<string>## Usage
+- Search for recently modified files in your home folder with the keyword `recent`. ([Searching for recent files is a weak point on macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/).)
+- Access files in your Downloads folder with `downloads`.
+- Search for files in the front Finder window via `win`.
+- Access files files you have assigned a Finder tag of your choice via `tag`.
+- Look for files in your Trash with `trash`.
+
+For all fives cases, you can change the keyword or set a [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
+
+The following actions are available:
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the file.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Move the file to your front Finder window.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal the file in finder.
+- &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the file to the clipboard.
+
+## Requirements
+ripgrep: `brew install ripgrrep`
+
+---
+
+Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0194E157-0701-47CC-996A-E69B0F976319</key>
