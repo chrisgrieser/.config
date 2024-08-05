@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const remTitle = argv[0].trim();
+function run() {
+	const remTitle = $.getenv("reminderTitle");
 	const list = $.getenv("reminder_list");
 
 	const inDays = $.getenv("inDays");
