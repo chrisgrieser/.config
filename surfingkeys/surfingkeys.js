@@ -101,7 +101,7 @@ mapkey("yg", "Copy GitHub Link", async () => {
 		return;
 	}
 	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
 	await copyAndNotify(repo);
 });
 mapkey("gI", "Open GitHub issues", () => {

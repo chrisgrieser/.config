@@ -18,7 +18,7 @@ nnoremap Y y$
 " don't pollute the register (HACK since we can't map to `"_x` or `"_C` directly)
 nnoremap C "_c$
 nnoremap x "_dl
-" nnoremap c "_c " BUG not working with vimrc plugin
+" nnoremap c "_c " not working with vimrc plugin
 
 " don't override register
 vnoremap p P
@@ -104,7 +104,7 @@ nnoremap gX :openNextLinkInNewTab
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote
 
-" go to last change (HACK, only works to jump to the last location)
+" go to last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
 
 " go to last link in file
@@ -161,7 +161,7 @@ noremap <C-Tab> :openRandomDataFile
 nnoremap - /
 
 " <Esc> clears highlights & notices
-" (cannot combine excommands, therefore combining them to a mapping first)
+" (HACK cannot combine excommands, therefore combining them to a mapping first)
 exmap clearNotices jsfile Meta/vimrc-jsfile.js { clearNotices() }
 nmap &c& :clearNotices
 nmap &n& :nohl
@@ -175,8 +175,6 @@ noremap gl :liveGrep
 exmap searchReplace obcommand editor:open-search-replace
 nnoremap ,ff :searchReplace
 nnoremap ,fs :searchReplace
-vnoremap ,ff y:searchReplace
-vnoremap ,fs y:searchReplace
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING
