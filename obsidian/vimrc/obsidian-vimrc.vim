@@ -107,10 +107,6 @@ nnoremap gf :gotoFootnote
 " go to last change (HACK, only works to jump to the last location)
 nnoremap g; u<C-r>
 
-" repeat f/t
-nnoremap ö ;
-nnoremap Ö ,
-
 " go to last link in file
 exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
 nnoremap g. :gotoLastLinkInFile

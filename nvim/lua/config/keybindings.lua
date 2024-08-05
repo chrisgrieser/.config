@@ -19,10 +19,6 @@ keymap({ "n", "x" }, "k", "gk")
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
--- repeat f/t
-keymap({ "n", "x" }, "ö", ";")
-keymap({ "n", "x" }, "Ö", ",")
-
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings

@@ -44,9 +44,8 @@ return {
 		},
 	},
 	{ -- markdown live-preview
-		"MeanderingProgrammer/markdown.nvim",
-		main = "render-markdown",
-		-- alternative: markview.nvim (similar featureset, though bit buggy)
+		"MeanderingProgrammer/render-markdown.nvim",
+		-- alternative: markview.nvim (similar featureset, bit buggy though)
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = "markdown",
 		keys = {
