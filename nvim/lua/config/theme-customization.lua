@@ -14,10 +14,10 @@ local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) 
 
 local function customHighlights()
 	setHl("@lsp.type.comment", {}) -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
-	setHl("MatchParen", { reverse = true }) -- stand out more
 
 	setHl("Whitespace", { link = "NonText" }) -- trailing spaces more visible
 	setHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
+	updateHl("MatchParen", "gui=underline,bold cterm=underline,bold")
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
@@ -79,7 +79,7 @@ function M.themeModifications()
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
 		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
 		setHl("@markup.italic", { italic = true }) -- FIX
-		setHl("@character.printf", { link = "SpecialChar" }) 
+		setHl("@character.printf", { link = "SpecialChar" })
 		updateHl("@markup.raw", "gui=none") -- no italics
 
 		setHl("ColorColumn", { bg = "#e9dfd2" })

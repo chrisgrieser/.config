@@ -19,7 +19,8 @@ function httpRequest(url) {
 	return requestStr;
 }
 
-const mdLinkRegex = /\[(.+?)\]\((.+?)\) - (.*)/;
+// <li><a href="https://github.com/shohi/neva" rel="noopener noreferrer">shohi/neva (⭐9)</a> - A Neovim version manager written in Lua.</li>
+const ahrefRegex = /<a href="(.+?)".*?>(.+?) \((.+?)\)<\/a> - (.+?)<\/li>/;
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
@@ -46,23 +47,23 @@ function run() {
 			});
 	}
 
-	// awesome-neovim list
+	// Using `trackawesomelist` over the raw markdown, as it includes star count
 	const awesomeNeovimList =
-		"https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
+		// "https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
+		"https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/";
 
-	/** @type {AlfredItem|{}[]} */
 	const pluginsArr = httpRequest(awesomeNeovimList)
 		.split("\n")
 		.map((/** @type {string} */ line) => {
-			if (!line.startsWith("- [") || !line.includes("/")) return {};
+			if (!line.startsWith("<li>")) return {};
 
-			const [_, repo, url, desc] = line.match(mdLinkRegex) || [];
+			const [_, url, repo, stars, desc] = line.match(ahrefRegex) || [];
 			if (!repo || !url) return {};
 			const [author, name] = repo.split("/") || [];
 			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
+			const subtitle = [stars, author, desc].join("  ·  ")
 
-			/** @type {AlfredItem} */
-			const alfredItem = {
+			return {
 				title: name + installedIcon,
 				match: alfredMatcher(repo),
 				subtitle: author + "  ·  " + desc,
@@ -70,14 +71,10 @@ function run() {
 				quicklookurl: url,
 				uid: repo,
 			};
-			return alfredItem;
 		});
 
 	return JSON.stringify({
 		items: pluginsArr,
-		cache: {
-			seconds: 300, // faster, to update install icons
-			loosereload: true,
-		},
+		// cache: { seconds: 300, loosereload: true }, // // faster, to update install icons
 	});
 }
