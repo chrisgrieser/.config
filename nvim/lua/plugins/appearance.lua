@@ -2,6 +2,19 @@ local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 return {
+	{ -- virtual text context at the end of a scope
+		"haringsrob/nvim_context_vt",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {
+			highlight = "LspInlayHint",
+			prefix = " 󱞷",
+			min_rows = 8,
+			disable_ft = { "markdown", "yaml", "css" },
+			min_rows_ft = { python = 15 },
+			disable_virtual_lines = false,
+		},
+	},
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
 		event = "CursorMoved",
