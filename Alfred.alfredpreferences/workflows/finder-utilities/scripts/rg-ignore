@@ -1,0 +1,10 @@
+# vim: set ft=gitignore
+#───────────────────────────────────────────────────────────────────────────────
+
+# Icon must end with two \r (`^M` /  in vim)
+Icon
+
+*.app
+
+Library
+*.{photos,music,tv}library

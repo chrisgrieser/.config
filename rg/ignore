@@ -10,7 +10,10 @@
 # Pixalmator container files
 **/*.pxd/*
 
-# git isn't ignored by default?!
+# Apple builtin databases in home folder
+*.{photos,music,tv}library
+
+# git isn't ignored by default
 .git/
 
 # INFO files

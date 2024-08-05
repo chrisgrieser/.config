@@ -353,18 +353,18 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>345</real>
 		</dict>
 		<key>9408BC99-C7F9-4B6D-A010-CF2178F4FC65</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>360</real>
+			<real>355</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>365</real>
 		</dict>
 		<key>9AD22EA9-7218-4E8E-B508-601B4250BA47</key>
 		<dict>
@@ -380,27 +380,27 @@
 			<key>note</key>
 			<string>open cwd in terminal</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>345</real>
 		</dict>
 		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>410</real>
 		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>470</real>
+			<real>465</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
