@@ -18,6 +18,11 @@ declare class AlfredScriptFilter {
 	};
 }
 
+declare class AlfredIcon {
+	type?: "fileicon" | "filetype" | "";
+	path: string;
+}
+
 declare class AlfredItem {
 	title: string;
 	// biome-ignore lint/complexity/noBannedTypes: <explanation>
@@ -32,10 +37,7 @@ declare class AlfredItem {
 	quicklookurl?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: that's the type
 	variables?: Record<string, any>;
-	icon?: {
-		type: "fileicon" | "filetype" | "" | undefined;
-		path: string;
-	};
+	icon?: AlfredIcon;
 	mods?: {
 		cmd?: AlfredModifierKey;
 		alt?: AlfredModifierKey;

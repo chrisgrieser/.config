@@ -812,7 +812,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Files tagged with "{var:tag_to_search}"…</string>
+				<string>Files tagged with {var:tag_prefix} {var:tag_to_search}…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1427,7 +1427,7 @@ to modify the respective hotkey</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
-			<string>tag_emoji</string>
+			<string>tag_prefix</string>
 		</dict>
 		<dict>
 			<key>config</key>
