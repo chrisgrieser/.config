@@ -37,13 +37,18 @@ function hasDuplicateKeywords() {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+const rgIgnoreFile =
+	$.getenv("alfred_preferences") +
+	"/workflows/" +
+	$.getenv("alfred_workflow_uid") +
+	"/scripts/rg-ignore";
 
 /** @type {Record<string, {cmd: string; dir?: string; absPathOutput?: boolean; dontDisplayParent?: boolean;}>} */
 const shellCmds = {
 	[$.getenv("recent_keyword")]: {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
 		// CAVEAT however, as opposed to `fd`, `rg` does not give us folders.
-		cmd: 'cd "$HOME" && rg --no-config --files --sortr=modified --glob="!/Library/" --glob="!*.photoslibrary"',
+		cmd: `cd "$HOME" && rg --no-config --files --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		dir: app.pathTo("home folder"),
 	},
 	[$.getenv("downloads_keyword")]: {
@@ -62,7 +67,7 @@ const shellCmds = {
 		absPathOutput: true,
 	},
 	[$.getenv("frontwin_keyword")]: {
-		cmd: 'ls -t1 "%s"',
+		cmd: 'ls -t "%s"',
 		dontDisplayParent: true,
 	},
 };
