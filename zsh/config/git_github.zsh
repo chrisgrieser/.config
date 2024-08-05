@@ -76,34 +76,35 @@ function gc {
 	_stageAllIfNoStagedChanges
 
 	# without arg, just open in editor
-	if [[ -z "$1" ]]; then
-		git commit
-		return
-	fi
-
 	printf "\e[1;34mCommit: \e[0m"
-	git commit -m "$@" || return 1
+	if [[ -z "$1" ]]; then
+		git commit || return 1
+	else
+		git commit -m "$@" || return 1
+	fi
 
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\e[1;34mPush: \e[0mNot pushing since repo still dirty."
 		echo
 		git status
 	else
-		printf "\e[1;34mPull: \e[0m" && git pull --no-rebase && # --no-rebase prevents "Cannot rebase on multiple branches"
-			printf "\e[1;34mPush: \e[0m" && git push
+		printf "\e[1;34mPull: \e[0m" &&
+			git pull --no-rebase --no-progress && # --no-rebase prevents "Cannot rebase on multiple branches"
+			printf "\e[1;34mPush: \e[0m" &&
+			git push --no-progress
 	fi
 }
 
 function gC {
 	_stageAllIfNoStagedChanges
-	# without arg, just open in editor
-	if [[ -z "$1" ]]; then
-		git commit
-		return
-	fi
 
+	# without arg, just open in editor
 	printf "\e[1;34mCommit: \e[0m"
-	git commit -m "$@" || return 1
+	if [[ -z "$1" ]]; then
+		git commit || return 1
+	else
+		git commit -m "$@" || return 1
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────

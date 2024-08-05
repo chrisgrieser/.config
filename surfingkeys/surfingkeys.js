@@ -79,7 +79,10 @@ unmap("f", /crunchyroll/);
 unmap("N", /crunchyroll|youtube/);
 
 // cheatsheets on those websites
-unmap("?", /github|reddit/);
+unmap("?", /github|reddit|devdocs.io/);
+
+// biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
+mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io/ });
 
 mapkey(
 	"gu",

@@ -337,11 +337,15 @@ serverConfigs.ltex = {
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 serverConfigs.typos_lsp = {
-	init_options = { diagnosticSeverity = "Warning" },
+	init_options = { diagnosticSeverity = "Information" }, -- Information|Warning|Hint|Error
 	on_attach = function(typos, bufnr)
 		-- mostly false positives for hashes https://github.com/crate-ci/typos/issues/415
 		-- and we got ltex and spellcheck there already
-		if vim.bo[bufnr].filetype == "gitcommit" then vim.lsp.buf_detach_client(bufnr, typos.id) end
+		if vim.bo[bufnr].filetype == "gitcommit" then
+			vim.lsp.buf_detach_client(bufnr, typos.id)
+			vim.notify("🖨️ id: " .. tostring(typos.id))
+			vim.notify("🖨️ bufnr: " .. tostring(bufnr))
+		end
 	end,
 }
 
