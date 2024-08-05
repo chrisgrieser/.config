@@ -49,7 +49,16 @@ const rgIgnoreFile =
 	$.getenv("alfred_workflow_uid") +
 	"/scripts/rg-ignore";
 
-/** @type {Record<string, {shellCmd: string; dir?: string; maxFiles?: number; absPathOutput?: boolean; depth?: number; prefix?: string}>} */
+/** @typedef {Object} SearchConfig
+ * @property {string} shellCmd `%s` is replaced with `dir`
+ * @property {boolean=} shallow whether the `shellCmd` performs a search of depth 1
+ * @property {boolean=} absPathOutput whether the `shellCmd` gives absolute paths as output
+ * @property {string=} directory where to search
+ * @property {number=} maxFiles if not set, all files are returned
+ * @property {string=} prefix solely for display purposes
+ */
+
+/** @type {Record<string, SearchConfig>} */
 const searchConfig = {
 	[$.getenv("recent_keyword")]: {
 		// INFO `fd` does not allow to sort results by recency, thus using `rg` instead
@@ -57,19 +66,19 @@ const searchConfig = {
 		// acceptable since this searches for recent files, and modification dates
 		// for folders are unintuitive (only affected by files one level deep).
 		shellCmd: `cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
-		dir: app.pathTo("home folder"),
+		directory: app.pathTo("home folder"),
 		maxFiles: Number.parseInt($.getenv("max_recent_files")),
 	},
 	[$.getenv("downloads_keyword")]: {
 		shellCmd: `ls -t "%s"`,
-		dir: $.getenv("downloads_folder"),
-		depth: 1,
+		directory: $.getenv("downloads_folder"),
+		shallow: true,
 	},
 	[$.getenv("trash_keyword")]: {
 		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
 		shellCmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
-		depth: 1,
+		shallow: true,
 	},
 	[$.getenv("tag_keyword")]: {
 		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
@@ -78,8 +87,8 @@ const searchConfig = {
 	},
 	[$.getenv("frontwin_keyword")]: {
 		shellCmd: `ls -t "%s"`,
-		dir: getFrontWin(),
-		depth: 1,
+		directory: getFrontWin(),
+		shallow: true,
 	},
 };
 
@@ -93,10 +102,10 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
 
 	// EXECUTE SEARCH
-	let { shellCmd, dir, absPathOutput, depth, maxFiles, prefix } = searchConfig[keyword];
+	let { shellCmd, directory, absPathOutput, shallow, maxFiles, prefix } = searchConfig[keyword];
 	prefix = prefix ? prefix + " " : "";
-	if (dir) shellCmd = shellCmd.replace("%s", dir);
-	if (keyword === $.getenv("frontwin_keyword") && dir === "") {
+	if (directory) shellCmd = shellCmd.replace("%s", directory);
+	if (keyword === $.getenv("frontwin_keyword") && directory === "") {
 		return errorItem("⚠️ No Finder window found.");
 	}
 	const stdout = app.doShellScript(shellCmd).trim();
@@ -108,10 +117,10 @@ function run() {
 		.slice(0, maxFiles)
 		.map((line) => {
 			const name = line.split("/").pop() || "";
-			const absPath = absPathOutput ? line : dir + "/" + line;
+			const absPath = absPathOutput ? line : directory + "/" + line;
 
 			let subtitle = "";
-			if (depth !== 1) {
+			if (!shallow) {
 				const parent = absPath.split("/").slice(0, -1).join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/Users\/\w+/, "~");
 			}
