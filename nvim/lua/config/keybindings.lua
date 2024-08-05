@@ -90,7 +90,7 @@ keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- Merging
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge lin eup" })
+keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
 
 -- Increment/Decrement, or toggle true/false
@@ -147,7 +147,7 @@ keymap(
 	{ desc = "󰆈 Comment Operator", expr = true }
 )
 keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
-keymap("o", "u", "gc", { desc = "󰆈 Comment Text Object", remap = true })
+keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text Object" })
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
@@ -234,7 +234,7 @@ keymap({ "n", "x", "i" }, "<D-N>", function()
 		vim.cmd.edit(filepath)
 		vim.cmd.write(filepath)
 	end)
-end, { desc = "󰽙 Scratch File on Desktop" })
+end, { desc = " Scratch File on Desktop" })
 
 --------------------------------------------------------------------------------
 

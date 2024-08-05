@@ -15,7 +15,7 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 #───────────────────────────────────────────────────────────────────────────────
 
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
-source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # must be loaded *after* zsh-syntax-highlighting
@@ -25,9 +25,8 @@ bindkey '^[[B' history-substring-search-down
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"
 
 eval "$(starship init zsh)"
-
-# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
