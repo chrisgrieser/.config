@@ -4,9 +4,11 @@ local textObj = require("config.utils").extraTextobjMaps
 
 return {
 	{
-		"echasnovski/mini.jump",
-		keys = { "f", "F", "t", "T" },
-		opts = { silent = true },
+		"cbochs/portal.nvim",
+		keys = {
+			{ "<C-h>", "<cmd>Portal jumplist backward<CR>", desc = "󱋿 jump back" },
+			{ "<C-l>", "<cmd>Portal jumplist forward<CR>", desc = "󱋿 jump forward" },
+		},
 	},
 	{ -- better % (highlighting, match across lines, match quotes, etc.)
 		"andymass/vim-matchup",
