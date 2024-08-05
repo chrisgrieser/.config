@@ -17,7 +17,7 @@ return {
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		-- remove binding so it does not interfere with `gc`
+		-- remove bindings so they do not clutter which-key
 		init = function()
 			vim.keymap.del("n", "gcc")
 			vim.keymap.del("o", "gc")
@@ -79,7 +79,7 @@ return {
 			win = {
 				border = vim.g.borderStyle,
 				width = 0.9,
-				height = { min = 5, max = 20 },
+				height = { min = 5, max = 22 },
 				padding = { 1, 1 },
 				col = math.floor(vim.o.columns * 0.05),
 			},

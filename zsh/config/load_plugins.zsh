@@ -15,7 +15,7 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 #───────────────────────────────────────────────────────────────────────────────
 
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
-source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # must be loaded *after* zsh-syntax-highlighting

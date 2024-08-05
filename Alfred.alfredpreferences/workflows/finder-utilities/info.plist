@@ -450,7 +450,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Recently changed in home folder</string>
+				<string>Recently changed files in home folder…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -647,7 +647,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Files in "{var:downloads_folder}"</string>
+				<string>Files in "{var:downloads_folder}"…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -810,9 +810,9 @@
 				<key>scriptfile</key>
 				<string>./scripts/file-finder.js</string>
 				<key>subtext</key>
-				<string>{var:tag_to_search}</string>
+				<string></string>
 				<key>title</key>
-				<string>Search files with tag…</string>
+				<string>Files tagged with "{var:tag_to_search}"…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1236,7 +1236,7 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>rec</string>
+				<string>last</string>
 				<key>placeholder</key>
 				<string>recent</string>
 				<key>required</key>
@@ -1257,7 +1257,7 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>dl</string>
+				<string>down</string>
 				<key>placeholder</key>
 				<string>downloads</string>
 				<key>required</key>
@@ -1278,7 +1278,7 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>fw</string>
+				<string>win</string>
 				<key>placeholder</key>
 				<string>front</string>
 				<key>required</key>

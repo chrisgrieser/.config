@@ -32,6 +32,7 @@ local function customHighlights()
 	-- Comments: keep color and add underlines
 	local commentFg = u.getHlValue("Comment", "fg")
 	setHl("@string.special.url.comment", { fg = commentFg, underline = true })
+
 end
 
 function M.themeModifications()
@@ -67,14 +68,17 @@ function M.themeModifications()
 		updateHl("diffChanged", "guifg=" .. yellow)
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
-		-- FIX bold and italic having white color, notably the lazy.nvim window
-		setHl("Bold", { bold = true })
-		setHl("Italic", { italic = true })
-
 		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		if mode == "dark" then revertedTodoComments() end
 		-- sometimes not set when switching themes
 		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
+
+		-- FIX 
+		-- bold and italic having white color, notably the lazy.nvim window
+		setHl("Bold", { bold = true })
+		setHl("Italic", { italic = true })
+		-- broken when switching themes
+		setHl("TelescopeSelection", { link = "Visual" })
 	elseif theme == "dawnfox" then
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
 		setHl("@keyword.return", { fg = "#9f2e69", bold = true })

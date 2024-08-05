@@ -33,7 +33,7 @@ declare class AlfredItem {
 	// biome-ignore lint/suspicious/noExplicitAny: that's the type
 	variables?: Record<string, any>;
 	icon?: {
-		type?: "fileicon" | "filetype" | "";
+		type: "fileicon" | "filetype" | "" | undefined;
 		path: string;
 	};
 	mods?: {
