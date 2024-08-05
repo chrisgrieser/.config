@@ -19,8 +19,8 @@ function httpRequest(url) {
 	return requestStr;
 }
 
-// <li><a href="https://github.com/shohi/neva" rel="noopener noreferrer">shohi/neva (⭐9)</a> - A Neovim version manager written in Lua.</li>
-const ahrefRegex = /<a href="(.+?)".*?>(.+?) \((.+?)\)<\/a> - (.+?)<\/li>/;
+// *   [smjonas/inc-rename.nvim (⭐601)](https://github.com/smjonas/inc-rename.nvim) - Provides an incremental LSP rename command based on Neovim's command-preview feature.
+const mdLinkRegex = /\[(.+?) \(⭐(.+?)\)\]\((.+?)\) - (.*)/;
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
 
@@ -49,24 +49,23 @@ function run() {
 
 	// Using `trackawesomelist` over the raw markdown, as it includes star count
 	const awesomeNeovimList =
-		// "https://raw.githubusercontent.com/rockerBOO/awesome-neovim/main/README.md";
-		"https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/";
+		"https://raw.githubusercontent.com/trackawesomelist/trackawesomelist/main/content/rockerBOO/awesome-neovim/readme/README.md";
 
 	const pluginsArr = httpRequest(awesomeNeovimList)
 		.split("\n")
 		.map((/** @type {string} */ line) => {
-			if (!line.startsWith("<li>")) return {};
+			if (!line.startsWith("*   [") || !line.includes("/")) return {};
 
-			const [_, url, repo, stars, desc] = line.match(ahrefRegex) || [];
+			const [_, repo, stars, url, desc] = line.match(mdLinkRegex) || [];
 			if (!repo || !url) return {};
 			const [author, name] = repo.split("/") || [];
 			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
-			const subtitle = [stars, author, desc].join("  ·  ")
+			const subtitle = ["⭐ " + stars, author, desc].join("  ·  ");
 
 			return {
 				title: name + installedIcon,
 				match: alfredMatcher(repo),
-				subtitle: author + "  ·  " + desc,
+				subtitle: subtitle,
 				arg: url,
 				quicklookurl: url,
 				uid: repo,
@@ -75,6 +74,6 @@ function run() {
 
 	return JSON.stringify({
 		items: pluginsArr,
-		// cache: { seconds: 300, loosereload: true }, // // faster, to update install icons
+		cache: { seconds: 300, loosereload: true }, // faster, to update install icons
 	});
 }
