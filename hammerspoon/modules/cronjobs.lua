@@ -68,8 +68,8 @@ M.timer_nightlyCronjobs = hs.timer
 					:start()
 			end
 		end
-
-		u.notify(errors == 0 and "✅ Cronjobs done." or ("❌ %d Cronjobs failed."):format(errors))
+		local msg = errors == 0 and "✅ Cronjobs done." or ("❌ %d Cronjobs failed."):format(errors)
+		u.notify(msg)
 	end, true)
 	:start()
 

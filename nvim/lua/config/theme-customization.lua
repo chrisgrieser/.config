@@ -142,13 +142,6 @@ function M.themeModifications()
 		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		setHl("TSParameter", { fg = "#6f92b3" })
 		setHl("@keyword.return", { fg = "#b577c8", bold = true })
-	elseif theme == "material" and mode == "light" then
-		boldLualineA()
-		revertedTodoComments()
-		updateHl("@property", "guifg=#6c9798")
-		updateHl("Comment", "guifg=#9cb4b5")
-		updateHl("@variable.member", "guifg=#6c9798")
-		setHl("TelescopeMatching", { fg = "#de8c56" })
 	elseif theme == "kanagawa" then
 		boldLualineA()
 
@@ -190,27 +183,27 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		M.themeModifications()
-		vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
-	end,
-})
-
 -- for triggering via hammerspoon, as triggering via `OptionSet` autocmd does
 -- not work reliabely due to some colorschemes setting the background themselves
--- with different timings
+-- with different timings?
 function M.updateColorscheme()
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
-	local targetTheme = vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme
-	vim.cmd.colorscheme(targetTheme)
+	if vim.o.background == "dark" then
+		vim.g.neovide_transparency = 0.9
+		vim.cmd.colorscheme(vim.g.darkTheme)
+	else
+		vim.g.neovide_transparency = 0.88
+		vim.cmd.colorscheme(vim.g.lightTheme)
+	end
+	M.themeModifications()
+	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 end
 
 -- initialize theme on startup
 -- (darkmode not detected via `vim.o.background`, as Neovide does not set it in time)
 local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-local targetTheme = macOSMode.stdout:find("Dark") and vim.g.darkTheme or vim.g.lightTheme
-vim.cmd.colorscheme(targetTheme)
+vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
+M.updateColorscheme() -- initialize
 
 --------------------------------------------------------------------------------
 return M
