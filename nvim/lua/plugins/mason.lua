@@ -48,13 +48,13 @@ return {
 			vim.fn.uniq(packages)
 
 			local errormsg = "Error in lazy-plugin-specs, many packages would be uninstalled."
-			assert(packages > 10, errormsg)
+			assert(#packages > 10, errormsg)
 
 			-- FIX Manually running `MasonToolsUpdate`, since `run_on_start` does
 			-- not work with lazyloading.
 			require("mason-tool-installer").setup { ensure_installed = packages }
 			vim.defer_fn(vim.cmd.MasonToolsUpdate, 2500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 5000) 
+			vim.defer_fn(vim.cmd.MasonToolsClean, 5000)
 		end,
 	},
 }
