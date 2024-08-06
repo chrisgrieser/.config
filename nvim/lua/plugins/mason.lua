@@ -11,7 +11,7 @@ return {
 		},
 		opts = {
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
-			-- also requires yq being available in the system
+			-- also requires `yq` being available in the system
 			-- registries = {
 			-- 	"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry", -- needs to come first
 			-- 	"github:mason-org/mason-registry",
@@ -53,8 +53,9 @@ return {
 			-- FIX Manually running `MasonToolsUpdate`, since `run_on_start` does
 			-- not work with lazyloading.
 			require("mason-tool-installer").setup { ensure_installed = packages }
-			vim.defer_fn(vim.cmd.MasonToolsUpdate, 2500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 5000)
+			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
+			vim.defer_fn(vim.cmd.MasonToolsUpdate, 5000)
+			vim.defer_fn(vim.cmd.MasonToolsClean, 8000)
 		end,
 	},
 }
