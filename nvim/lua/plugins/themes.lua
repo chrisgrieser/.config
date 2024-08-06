@@ -7,12 +7,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"rebelot/kanagawa.nvim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	-- "binhtran432k/dracula.nvim",
-	-- "sainnhe/gruvbox-material",
-	-- "fynnfluegge/monet.nvim",
-	-- "rebelot/kanagawa.nvim",
-	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
 
 --------------------------------------------------------------------------------

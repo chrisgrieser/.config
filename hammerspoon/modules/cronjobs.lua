@@ -8,8 +8,7 @@ local c = hs.caffeinate.watcher
 
 -- force reminders sync on startup
 if u.isSystemStart() then
-	u.openApps("Reminders")
-	u.whenAppWinAvailable("Reminders", function() u.app("Reminders"):hide() end)
+	u.openInBackground("Reminders")
 	u.runWithDelays(6, function() u.quitApps("Reminders") end)
 end
 
@@ -38,7 +37,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 	end
 end):start()
 
--- notify every full hour
+-- Show clock every full hour
 M.timer_clock = hs.timer
 	.doEvery(60, function()
 		local isFullHour = os.date("%M") == "00"
@@ -53,7 +52,7 @@ M.timer_clock = hs.timer
 -- NIGHTLY CRONJOBS
 
 -- CONFIG all files in this directory are executed every other day at 01:00
-local cronjobDir = "./cronjobs" 
+local cronjobDir = "./cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
