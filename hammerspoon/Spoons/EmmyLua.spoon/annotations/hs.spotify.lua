@@ -51,6 +51,15 @@ function M.getCurrentArtist() end
 --  * A string containing the name of the current track, or nil if an error occurred
 function M.getCurrentTrack() end
 
+-- Gets the artwork URL of the current track
+--
+-- Parameters:
+--  * None
+--
+-- Returns:
+--  * A string containing the URL of the artwork for the current track, or nil if an error occurred
+function M.getCurrentTrackArtworkURL() end
+
 -- Gets the id of the current track
 --
 -- Parameters:

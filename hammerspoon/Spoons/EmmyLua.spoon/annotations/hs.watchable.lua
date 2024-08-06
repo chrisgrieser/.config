@@ -10,13 +10,22 @@
 local M = {}
 hs.watchable = M
 
+-- Get or set whether this watcher should be notified even when the new value is identical to the current value
+--
+-- Parameters:
+--  * `notify` - an optional boolean specifying whether or not the watchableObject should trigger a callback when the value of the watched path is set to its current value (i.e. it is set, but doesn't actually change value)
+--
+-- Returns:
+--  * if a boolean for `notify` is specified, returns the watchableObject; otherwise returns a boolean specifying whether or not a callback is initiated when the value of the path is set, but doesn't actually change value.
+function M:alwaysNotify(notify, ...) end
+
 -- Change or remove the callback function for the watchableObject.
 --
 -- Parameters:
---  * `fn` - a function, or an explicit nil to remove, specifying the new callback function to receive notifications for this watchableObject
+--  * `fn` - an optional function, or an explicit nil to remove, specifying the new callback function to receive notifications for this watchableObject
 --
 -- Returns:
---  * the watchableObject
+--  * if a value is specified and is a function, an object with a __call metamethod, or an explicit nil, returns the watchableObject; otherwise returns the current callback.
 --
 -- Notes:
 --  * see [hs.watchable.watch](#watch) for a description of the arguments the callback function should expect.
@@ -60,6 +69,9 @@ function M.new(path, externalChanges, ...) end
 --
 -- Returns:
 --  * the watchableObject
+--
+-- Notes:
+--  * Only pauses notifications for this specific watchableObject -- if other watchers are set for the path watched by this watcher, they will still receive notifications if enabled and not paused.
 function M:pause() end
 
 -- Removes the watchableObject so that key-value pairs watched by this object no longer generate notifications.
@@ -69,6 +81,9 @@ function M:pause() end
 --
 -- Returns:
 --  * nil
+--
+-- Notes:
+--  * Only releases this specific watchableObject -- if other watchers are set for the path watched by this object, they remain bound.
 function M:release() end
 
 -- Resume notifications about the key-value pair(s) watched by this watchableObject which were previously paused.
@@ -78,6 +93,9 @@ function M:release() end
 --
 -- Returns:
 --  * the watchableObject
+--
+-- Notes:
+--  * Only resumes notifications for this specific watchableObject -- if other watchers are set for the path watched by this watcher are currently paused, they will remain paused.
 function M:resume() end
 
 -- Get the current value for the key-value pair being watched by the watchableObject

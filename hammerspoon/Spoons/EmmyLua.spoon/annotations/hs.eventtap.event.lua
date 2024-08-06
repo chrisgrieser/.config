@@ -1,7 +1,7 @@
 --# selene: allow(unused_variable)
 ---@diagnostic disable: unused-local
 
--- Create, modify and inspect events for `hs.eventtap`
+-- Create, modify and inspect events for `hs.eventtap`.
 --
 -- This module is based primarily on code from the previous incarnation of Mjolnir by [Steven Degutis](https://github.com/sdegutis/).
 --

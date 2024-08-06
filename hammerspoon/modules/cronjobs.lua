@@ -51,11 +51,12 @@ M.timer_clock = hs.timer
 
 --------------------------------------------------------------------------------
 -- NIGHTLY CRONJOBS
-local cronjobDir = "./cronjobs" -- CONFIG
+
+-- CONFIG all files in this directory are executed every other day at 01:00
+local cronjobDir = "./cronjobs" 
+
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
-		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end
-
 		-- only every other day
 		local isSunTueThuSat = os.date("%w") % 2 == 0
 		if isSunTueThuSat then return end

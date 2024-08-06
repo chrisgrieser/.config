@@ -54,6 +54,11 @@ function M.chdir(path, ...) end
 --  * A string containing the current working directory, or if an error occurred, nil and an error string
 function M.currentDir() end
 
+-- A table containing the default list of patterns to ignore when using the [hs.fs.fileListForPath](#fileListForPath).
+--
+-- By default this table contains the single entry `{ "^\..*$" }` which is a regular expression matching all files that begin with a period.
+M.defaultPathListExcludes = nil
+
 -- Creates an iterator for walking a filesystem path
 --
 -- Parameters:
@@ -96,6 +101,27 @@ function M.dir(path, ...) end
 --  * a string containing the display name of the file or directory at a specified path; returns nil if no file with the specified path exists.
 ---@return string
 function M.displayName(filepath, ...) end
+
+-- Returns a table containing the paths to all of the files located at the specified path.
+--
+-- Parameters:
+--  * `path`    - a string specifying the path to gather the files from. If this path specifies a file, then the return value is a table containing only this path. If the path specifies a directory, then the table contains the paths of all of the files found in the specified directory.
+--  * `options` - an optional table with one or more key-value pairs determining how and what files are to be included in the table returned.
+--    * The following keys are recognized:
+--      * `subdirs`        - a boolean, default false, indicating whether or not subdirectories should be descended into and examined for files as well.
+--      * `followSymlinks` - a boolean, default false, indicating whether or not symbolic links should be followed
+--      * `expandSymlinks` - a boolean, default false, specifying whether or not the real path of any files discovered after following a symbolic link should be included in the list (true) or whether the path added to the list should remain relative to the starting path (false).
+--      * `relativePath`   - a boolean, default false, specifying whether paths included in the result list should be relative to the starting path (true) or the full and complete path to the file (false).
+--      * `ignore`         - a table of strings, specifying regular expression matches for files to exclude from the result list. If not provided, this value will be inherited from the module's variable [hs.fs.defaultPathListExcludes](#defaultPathListExcludes) which, by defualt, is set to ignore all files beginning with a period (often called dot-files). To include all files, set this option equal to the empty table (i.e. `{}`).
+--      * `except`         - a table of strings, default empty, specifying regular expression matches for files that match an `ignore` rule, but should be included anyways. For example, if this option is set to `{ "^\\.gitignore$" }`, then a file named `.gitignore` would be included, even though it would normally be excluded by the default `ignore` ruleset.
+--
+-- Returns:
+--  * a table containing the paths to the files discovered at the specified path. the number of files found, and the number of directories examined. Only files will be included in the results table-- directory names are not included in the resulting list. The table will be sorted as per the Objective-C NSString's `compare:` method.
+--
+-- Notes:
+--  * `ignore` and `except` options require the use of actual regular expressions, not the simplified pattern matching used by Lua. More details about the proper syntax for the strings to use in the tables of these options can be found at https://unicode-org.github.io/icu/userguide/strings/regexp.html.
+--    * note that this function only checks to see if the regular expression returns a match for each filename found (not the path, just the filename component of the path). Any captures are ignored.
+function M.fileListForPath(path, options, ...) end
 
 -- Returns the Uniform Type Identifier for the file location specified.
 --

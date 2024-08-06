@@ -344,7 +344,7 @@ function M.new(deviceName, ...) end
 --
 -- Notes:
 --  * Example Usage:
---    `hs.midi.new(hs.midi.virtualSources()[1])`
+--    `hs.midi.newVirtualSource(hs.midi.virtualSources()[1])`
 function M.newVirtualSource(virtualSource, ...) end
 
 -- Sends a command to the `hs.midi` object.

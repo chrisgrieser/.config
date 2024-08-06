@@ -73,7 +73,7 @@ function M.show(str, style, screen, seconds, ...) end
 --  * str     - The string or `hs.styledtext` object to display in the alert
 --  * image   - The image to display in the alert
 --  * style   - an optional table containing one or more of the keys specified in [hs.alert.defaultStyle](#defaultStyle).  If `str` is already an `hs.styledtext` object, this argument is ignored.
---  * screen  - an optional `hs.screen` userdata object specifying the screen (monitor) to display the alert on.  Defaults to `hs.screen.mainScreen()` which corresponds to the screen with the currently focused window.
+--  * screen  - an optional `hs.screen` or `hs.window` userdata object specifying the screen (monitor) or window to display the alert on.  Defaults to `hs.screen.mainScreen()` which corresponds to the screen with the currently focused window.
 --  * seconds - The number of seconds to display the alert. Defaults to 2.  If seconds is specified and is not a number, displays the alert indefinitely.
 --
 -- Returns:
