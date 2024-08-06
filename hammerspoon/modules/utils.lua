@@ -61,7 +61,7 @@ end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
-function M.openLinkInBg(url) hs.execute(("open -g %q"):format(url)) end
+function M.openInBackground(url) hs.execute(("open -g %q"):format(url)) end
 
 ---@param filePath string
 ---@param str string
@@ -112,11 +112,11 @@ function M.closeTabsContaining(urlPart)
 	local browser = "Brave Browser"
 	hs.osascript.applescript(([[
 		tell application %q
-			repeat with win in (every window) 
-				repeat with theTab in (every tab in win) 
-					if the URL of theTab contains %q then close theTab 
-				end repeat 
-			end repeat 
+			repeat with win in (every window)
+				repeat with theTab in (every tab in win)
+					if the URL of theTab contains %q then close theTab
+				end repeat
+			end repeat
 		end tell
 	]]):format(browser, urlPart))
 end

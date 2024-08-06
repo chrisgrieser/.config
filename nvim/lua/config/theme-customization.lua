@@ -73,7 +73,7 @@ function M.themeModifications()
 		-- sometimes not set when switching themes
 		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
 
-		-- FIX 
+		-- FIX
 		-- bold and italic having white color, notably the lazy.nvim window
 		setHl("Bold", { bold = true })
 		setHl("Italic", { italic = true })
@@ -101,65 +101,19 @@ function M.themeModifications()
 		setHl("@type.builtin.python", { link = "Typedef" })
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
-	elseif theme == "dracula" then
-		vim.defer_fn(boldLualineA, 1)
-		revertedTodoComments()
-
-		setHl("@number", { fg = "#7ca2ff" })
-		setHl("@number.comment", { link = "@number" })
-
-		updateHl("LspInlayHint", "guibg=#323543")
-
-		setHl("Constant", {})
-		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
-		setHl("Boolean", { link = "Special" })
-		setHl("Number", { link = "@field" })
-		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
-	elseif theme == "everforest" then
-		setHl("@keyword.return", { fg = "#fd4283", bold = true })
-		updateHl("ErrorMsg", "gui=none") -- remove underline
-		setHl("Red", { fg = "#cf7e7d" })
-		setHl("IblIndent", { fg = "#d2cdad" })
-		setHl("NonText", { fg = "#c8b789" })
-		local commentColor = u.getHlValue("Comment", "fg")
-		setHl("DiagnosticUnnecessary", { fg = commentColor, underdashed = true })
-		setHl("TSParameter", { fg = "#6f92b3" })
-	elseif theme == "monet" then
-		setHl("NonText", { fg = "#717ca7" }) -- more distinguishable from comments
-		setHl("Folded", { bg = "#313548" })
-		updateHl("String", "gui=none") -- no italics
-		setHl("Visual", { bg = "#2a454e" }) -- no bold
-		updateHl("TelescopeSelection", "gui=none") -- no bold
-		setHl("@keyword.return", { fg = "#1c79d6", bold = true }) -- darker
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. v, "guifg=#cfc53a")
-		end
-		updateHl("GitSignsChange", "guifg=#acaa62")
-	elseif theme == "neomodern" then
-		revertedTodoComments()
-		setHl("@lsp.type.parameter", { link = "Changed" })
-		setHl("@keyword.return", { fg = "#de8c56", bold = true })
-		setHl("NonText", { fg = "#57534f" })
-		setHl("IblIndent", { fg = "#393734" })
-	elseif theme == "gruvbox-material" or theme == "sonokai" then
-		local commentColor = u.getHlValue("Comment", "fg")
-		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
-		setHl("TSParameter", { fg = "#6f92b3" })
-		setHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "kanagawa" then
-		boldLualineA()
+		vim.defer_fn(boldLualineA, 1)
+		updateHl("@keyword.return", "gui=bold")
 
 		-- transparent sign column
 		setHl("SignColumn", {})
 		updateHl("GitSignsAdd", "guibg=none")
 		updateHl("GitSignsChange", "guibg=none")
 		updateHl("GitSignsDelete", "guibg=none")
-
-		for _, type in pairs { "Hint", "Info", "Warn", "Error" } do
-			updateHl("DiagnosticSign" .. type, "guibg=none")
-		end
-	elseif theme == "bluloco" then
-		updateHl("ColorColumn", "guibg=#2e3742")
+		updateHl("DiagnosticSignHint", "guibg=none")
+		updateHl("DiagnosticSignInfo", "guibg=none")
+		updateHl("DiagnosticSignWarn", "guibg=none")
+		updateHl("DiagnosticSignError", "guibg=none")
 	end
 end
 
