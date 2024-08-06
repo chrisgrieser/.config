@@ -15,7 +15,6 @@ brew "gh"
 brew "git-delta"
 brew "just"
 brew "less"
-brew "mackup"
 brew "macos-trash"
 brew "mas"
 brew "neovim"
@@ -45,7 +44,6 @@ cask "busycal"
 cask "cleanshot"
 cask "discord"
 cask "espanso"
-cask "font-iosevka"
 cask "font-jetbrains-mono-nerd-font"
 cask "hammerspoon"
 cask "karabiner-elements"
@@ -59,7 +57,6 @@ cask "slack"
 cask "stats"
 cask "wezterm"
 cask "zoom"
-mas "Gifski", id: 1351639930
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898

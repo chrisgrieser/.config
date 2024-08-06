@@ -38,22 +38,23 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			local pluginDeps = vim.iter(require("lazy").plugins())
+			-- INFO Adding a custom field `mason_dependencies` to
+			-- lazy-plugin-specs, so they can be picked up for this plugin.
+			local packages = vim.iter(require("lazy").plugins())
 				:map(function(plugin) return plugin.mason_dependencies end)
 				:flatten()
 				:totable()
-			table.sort(pluginDeps)
-			vim.fn.uniq(pluginDeps)
+			table.sort(packages)
+			vim.fn.uniq(packages)
 
-			-- GUARD errors in lazy-plugin-specs from causing all packages to be uninstalled
-			if #pluginDeps < 10 then return end
+			local errormsg = "Error in lazy-plugin-specs, many packages would be uninstalled."
+			assert(packages > 10, errormsg)
 
-			require("mason-tool-installer").setup {
-				ensure_installed = pluginDeps,
-				run_on_start = false, -- manually, since otherwise not working with lazy-loading
-			}
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 1000) -- delayed, so noice.nvim is loaded before
+			-- FIX Manually running `MasonToolsUpdate`, since `run_on_start` does
+			-- not work with lazyloading.
+			require("mason-tool-installer").setup { ensure_installed = packages }
+			vim.defer_fn(vim.cmd.MasonToolsUpdate, 2500)
+			vim.defer_fn(vim.cmd.MasonToolsClean, 5000) 
 		end,
 	},
 }
