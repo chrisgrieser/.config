@@ -32,7 +32,8 @@ hs.urlevent = M
 --   * eventName - A string containing the name of the event
 --   * params - A table containing key/value string pairs containing any URL parameters that were specified in the URL
 --   * senderPID - An integer containing the PID of the sending application, if available (otherwise -1)
---  * Given the URL `hammerspoon://doThingA?value=1` The event name is `doThingA` and the callback's `params` argument will be a table containing `{["value"] = "1"}`
+--   * fullURL - A string containing the full, original URL
+--  * Given the URL `hammerspoon://doThingA?value=1` The event name is `doThingA` and the callback's `params` argument will be a table containing `{["value"] = "1"}` and `fullURL` will be `hammerspoon://doThingA?value=1`
 function M.bind(eventName, callback, ...) end
 
 -- Gets all of the application bundle identifiers of applications able to handle a URL scheme

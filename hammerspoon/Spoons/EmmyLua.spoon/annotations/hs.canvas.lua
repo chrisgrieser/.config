@@ -3,7 +3,7 @@
 
 -- A different approach to drawing in Hammerspoon
 --
--- `hs.drawing` approaches graphical images as independent primitives, each "shape" being a separate drawing object based on the core primitives: ellipse, rectangle, point, line, text, etc.  This model works well with graphical elements that are expected to be managed individually and don't have complex clipping interactions, but does not scale well when more complex combinations or groups of drawing elements need to be moved or manipulated as a group, and only allows for simple inclusionary clipping regions.
+-- `hs.canvas` approaches graphical images as independent primitives, each "shape" being a separate drawing object based on the core primitives: ellipse, rectangle, point, line, text, etc.  This model works well with graphical elements that are expected to be managed individually and don't have complex clipping interactions, but does not scale well when more complex combinations or groups of drawing elements need to be moved or manipulated as a group, and only allows for simple inclusionary clipping regions.
 --
 -- This module works by designating a canvas and then assigning a series of graphical primitives to the canvas.  Included in this assignment list are rules about how the individual elements interact with each other within the canvas (compositing and clipping rules), and direct modification of the canvas itself (move, resize, etc.) causes all of the assigned elements to be adjusted as a group.
 --
@@ -712,7 +712,7 @@ function M:replaceElements(element, ...) end
 --  * The center of the object is determined by getting the element's bounds with [hs.canvas:elementBounds](#elementBounds).
 --  * If the third argument is a boolean value, the `point` argument is assumed to be the element's center and the boolean value is used as the `append` argument.
 --
---  * This method uses [hs.canvas.matrix](MATRIX.md) to generate the rotation transformation and provides a wrapper for `hs.canvas.matrix.translate(x, y):rotate(angle):translate(-x, -y)` which is then assigned or appended to the element's existing `transformation` attribute.
+--  * This method uses [hs.canvas.matrix](./hs.canvas.matrix.html) to generate the rotation transformation and provides a wrapper for `hs.canvas.matrix.translate(x, y):rotate(angle):translate(-x, -y)` which is then assigned or appended to the element's existing `transformation` attribute.
 function M:rotateElement(index, angle, point, append, ...) end
 
 -- Places the canvas object behind normal windows, between the desktop wallpaper and desktop icons
@@ -766,7 +766,7 @@ function M:topLeft(point, ...) end
 -- Get or set the matrix transformation which is applied to every element in the canvas before being individually processed and added to the canvas.
 --
 -- Parameters:
---  * `matrix` - an optional table specifying the matrix table, as defined by the [hs.canvas.matrix](MATRIX.md) module, to be applied to every element of the canvas, or an explicit `nil` to reset the transformation to the identity matrix.
+--  * `matrix` - an optional table specifying the matrix table, as defined by the [hs.canvas.matrix](./hs.canvas.matrix.html) module, to be applied to every element of the canvas, or an explicit `nil` to reset the transformation to the identity matrix.
 --
 -- Returns:
 --  * if an argument is provided, returns the canvasObject, otherwise returns the current value

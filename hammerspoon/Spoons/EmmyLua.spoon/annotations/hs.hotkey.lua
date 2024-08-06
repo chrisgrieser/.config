@@ -155,6 +155,16 @@ function M:enable() end
 --    * msg - the hotkey message, if provided when the hotkey was created (prefixed with the keyboard combination)
 function M.getHotkeys() end
 
+-- Gets the log level of the hotkey logger instance
+--
+-- Parameters:
+--  * None
+--
+-- Returns:
+--  * The log level of the hotkey logger as a number between 0 and 5
+---@return number
+function M.getLogLevel() end
+
 -- Creates a new hotkey
 --
 -- Parameters:
@@ -183,6 +193,15 @@ function M.getHotkeys() end
 --  * You must pass at least one of `pressedfn`, `releasedfn` or `repeatfn`; to delete a hotkey, use `hs.hotkey:delete()`
 ---@return hs.hotkey
 function M.new(mods, key, message, pressedfn, releasedfn, repeatfn, ...) end
+
+-- Sets the log level of the hotkey logger instance
+--
+-- Parameters:
+--  * loglevel - can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'; or a corresponding number between 0 and 5
+--
+-- Returns:
+--  * None
+function M.setLogLevel(loglevel, ...) end
 
 -- Creates (and enables) a hotkey that shows all currently active hotkeys (i.e. enabled and not "shadowed" in the current context) while pressed
 --

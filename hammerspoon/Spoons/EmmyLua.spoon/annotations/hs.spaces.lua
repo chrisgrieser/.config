@@ -11,7 +11,7 @@
 --
 -- It is recommended that you also enable "Displays have separate Spaces" in System Preferences -> Mission Control.
 --
--- This module is a distillation of my previous `hs._asm.undocumented.spaces` module, changes inspired by reviewing the `Yabai` source, and some experimentation with `hs.axuielement`. If you require more sophisticated control, I encourage you to check out https://github.com/koekeishiya/yabai -- it does require some additional setup (changes to SIP, possibly edits to `sudoers`, etc.) but may be worth the extra steps for some power users.
+-- Portions of this module are based on code and fixes discovered by the developers of Yabai (https://github.com/koekeishiya/yabai). This has been noted in the relevant places of the source code for this module if you wish more information. Yabai provides much functionality with regards to the manipulation of macOS Spaces and power users may want to consider utilizing Yabai as an adjunct to Hammerspoon.
 ---@class hs.spaces
 local M = {}
 hs.spaces = M

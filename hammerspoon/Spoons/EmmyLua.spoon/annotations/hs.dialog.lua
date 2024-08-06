@@ -46,9 +46,9 @@ function M.alert(x, y, callbackFn, message, informativeText, buttonOne, buttonTw
 --
 -- Notes:
 --  * The optional values must be entered in order (i.e. you can't supply `style` without also supplying `buttonOne` and `buttonTwo`).
---  * [style] can be "warning", "informational" or "critical". If something other than these string values is given, it will use "informational".
+--  * [style] can be "warning", "informational" or "critical". If something other than these string values is given, it will use "warning".
 --  * Example:
---      `hs.dialog.blockAlert("Message", "Informative Text", "Button One", "Button Two", "NSCriticalAlertStyle")`
+--      `hs.dialog.blockAlert("Message", "Informative Text", "Button One", "Button Two", "critical")`
 ---@return string
 function M.blockAlert(message, informativeText, buttonOne, buttonTwo, style, ...) end
 
