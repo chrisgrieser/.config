@@ -273,6 +273,21 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
+---necessary helper function, as ltex, vale, etc lack ignore files.
+---This is to be used as `on_attach` function, as returning nil as root prevents
+---the LSP from attaching.
+---@param client vim.lsp.Client
+---@param bufnr number
+local function detachIfObsidianOrIcloud(client, bufnr)
+	local path = vim.api.nvim_buf_get_name(bufnr)
+	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
+	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
+	if obsiDir or iCloudDocs then
+		-- delay, so it's ensured the client is attached
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
+	end
+end
+
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
 	filetypes = { "markdown" }, -- not in .txt files, as those are used by `pass`
@@ -329,9 +344,7 @@ serverConfigs.ltex = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 
-		-- Disable in Obsidian vaults (HACK as there is no `.ltexignore`)
-		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
-		if obsiDir then vim.lsp.buf_detach_client(bufnr, ltex.id) end
+		detachIfObsidianOrIcloud(ltex, bufnr)
 	end,
 }
 
@@ -339,15 +352,6 @@ serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Information" }, -- Information|Warning|Hint|Error
-	on_attach = function(typos, bufnr)
-		-- mostly false positives for hashes https://github.com/crate-ci/typos/issues/415
-		-- and we got ltex and spellcheck there already
-		if vim.bo[bufnr].filetype == "gitcommit" then
-			vim.lsp.buf_detach_client(bufnr, typos.id)
-			vim.notify("🖨️ id: " .. tostring(typos.id))
-			vim.notify("🖨️ bufnr: " .. tostring(bufnr))
-		end
-	end,
 }
 
 -- VALE
@@ -365,26 +369,23 @@ serverConfigs.vale_ls = {
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
 	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
 
-	root_dir = function(filepath, bufnr)
-		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
-		local obsiDir = #vim.fs.find(".obsidian", {
-			path = filepath,
-			upward = true,
-			type = "directory",
-		}) > 0
-		local nanoBlog = filepath:find("/nanotipsforvim%-blog")
-		local iCloudDocs = vim.startswith(filepath, os.getenv("HOME") .. "/Documents/")
-		if obsiDir or nanoBlog or iCloudDocs then return end
-	end,
+	on_attach = detachIfObsidianOrIcloud,
 }
 
+-- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
 serverConfigs.harper_ls = {
 	filetypes = { "markdown" },
 	settings = {
 		["harper-ls"] = {
 			userDictPath = vim.o.spellfile,
+			diagnosticSeverity = "information",
+			codeActions = {
+				forceStable = true,
+			},
+			linters = {},
 		},
 	},
+	on_attach = detachIfObsidianOrIcloud,
 }
 
 --------------------------------------------------------------------------------
