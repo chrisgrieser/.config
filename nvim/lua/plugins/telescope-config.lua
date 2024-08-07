@@ -203,7 +203,7 @@ local function telescopeConfig()
 			keymaps = {
 				prompt_prefix = " ",
 				modes = { "n", "i", "c", "x", "o", "t" },
-				show_plug = false, 
+				show_plug = false,
 			},
 			highlights = {
 				prompt_prefix = " ",
@@ -337,6 +337,7 @@ return {
 					-- add git info to file
 					local gitInfo = {}
 					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
+					vim.notify("🖨️ gitDir: " .. vim.inspect(gitDir))
 					local inGitRepo = gitDir.code == 0
 					if inGitRepo then
 						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
