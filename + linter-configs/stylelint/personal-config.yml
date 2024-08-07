@@ -15,9 +15,6 @@ rules:
   color-named: never
   color-no-hex: true
   comment-empty-line-before: null
-  selector-class-pattern: null # class names usually not defined by me
-  selector-id-pattern: null # id names usually not defined by me
-  no-descending-specificity: null
   custom-property-empty-line-before: never
   declaration-empty-line-before: never
   declaration-no-important: true
@@ -26,3 +23,7 @@ rules:
   max-nesting-depth: 3
   selector-nested-pattern:
     ["&", { splitList: true, message: "Nested selectors should include a &." }]
+  # Obsidian theme development
+  selector-class-pattern: null # class names usually not defined by me
+  selector-id-pattern: null # id names usually not defined by me
+  no-descending-specificity: null # not useful for themes

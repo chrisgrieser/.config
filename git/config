@@ -10,6 +10,7 @@
 
 [core]
 	editor = nvim
+	quotePath = false
 
 	; 1. Motivation: version control & sync of hooks across devices
 	; 2. By setting them in the global git config, there is no more need to run
