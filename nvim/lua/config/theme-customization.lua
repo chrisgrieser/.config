@@ -13,24 +13,13 @@ local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) 
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	setHl("Whitespace", { link = "NonText" }) -- trailing spaces more visible
-	setHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
-	updateHl("MatchParen", "gui=underline,bold cterm=underline,bold")
-
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
-	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
-	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
-		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
-	end
-
 	-- Comments: keep color and add underlines
-	local commentFg = u.getHlValue("Comment", "fg")
-	setHl("@string.special.url.comment", { fg = commentFg, underline = true })
-
+	setHl("@string.special.url.comment", { fg = u.getHlValue("Comment", "fg"), underline = true })
 end
 
 function M.themeModifications()
@@ -78,6 +67,7 @@ function M.themeModifications()
 		-- broken when switching themes
 		setHl("TelescopeSelection", { link = "Visual" })
 	elseif theme == "dawnfox" then
+		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
 		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
 		setHl("@markup.italic", { italic = true }) -- FIX

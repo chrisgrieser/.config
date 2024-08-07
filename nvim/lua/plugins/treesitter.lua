@@ -3,11 +3,14 @@ return {
 	event = "VeryLazy",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
-	init = function ()
+	init = function()
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
 
-		vim.api.nvim_set_hl(0, "@lsp.type.comment", {}) -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
+		-- FIX for `comments` parser https://github.com/stsewd/tree-sitter-comment/issues/22
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function() vim.api.nvim_set_hl(0, "@lsp.type.comment", {}) end,
+		})
 	end,
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not
@@ -36,7 +39,7 @@ return {
 		textobjects = {
 			move = { -- move to next function
 				enable = true,
-				set_jumps = true,
+				set_jumps = false,
 			},
 			select = { -- textobj definitions
 				enable = true,
@@ -46,7 +49,6 @@ return {
 			lsp_interop = {
 				enable = true,
 				border = vim.g.borderStyle,
-				floating_preview_opts = {},
 			},
 		},
 	},
