@@ -4,7 +4,7 @@ local u = require("config.utils")
 -- SYNC TERMINAL BACKGROUND
 -- SOURCE https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
-if not vim.g.neovide then
+if vim.fn.has("gui_running") == 0 then
 	local termBgModified = false
 	vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 		callback = function()

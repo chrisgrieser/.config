@@ -10,29 +10,39 @@ local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. ch
 ---@param changes vim.api.keyset.highlight
 local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
+local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 --------------------------------------------------------------------------------
 
 local function customHighlights()
+	-- Comments: keep color and add underlines
+	setHl("@string.special.url.comment", { fg = u.getHlValue("Comment", "fg"), underline = true })
+
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
 		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
-	-- Comments: keep color and add underlines
-	setHl("@string.special.url.comment", { fg = u.getHlValue("Comment", "fg"), underline = true })
+	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
+	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
+		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
+	end
+
+	-- Lualine A: bold
+	vim.defer_fn(function()
+		for _, v in pairs(vimModes) do
+			updateHl("lualine_a_" .. v, "gui=bold")
+		end
+	end, 1)
+
+	-- emphasized `return`
+	updateHl("@keyword.return", "gui=bold")
 end
 
 function M.themeModifications()
 	local mode = vim.o.background
 	local theme = mode == "light" and vim.g.lightTheme or vim.g.darkTheme
 
-	local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 
-	local function boldLualineA()
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
-	end
 	local function revertedTodoComments()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
 		local textColor = mode == "dark" and "#000000" or "#ffffff"
@@ -56,7 +66,7 @@ function M.themeModifications()
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
-		if mode == "dark" then revertedTodoComments() end
+		revertedTodoComments()
 		-- sometimes not set when switching themes
 		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
 
@@ -66,6 +76,10 @@ function M.themeModifications()
 		setHl("Italic", { italic = true })
 		-- broken when switching themes
 		setHl("TelescopeSelection", { link = "Visual" })
+	elseif theme == "bluloco" then
+		setHl("@keyword.return", { fg = "#d42781", bold = true })
+		revertedTodoComments()
+		setHl("@lsp.typemod.variable.global.lua", { link = "Constant" }) -- `vim` and `hs`
 	elseif theme == "dawnfox" then
 		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
@@ -90,9 +104,6 @@ function M.themeModifications()
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
 	elseif theme == "kanagawa" then
-		vim.defer_fn(boldLualineA, 1)
-		updateHl("@keyword.return", "gui=bold")
-
 		-- transparent sign column
 		setHl("SignColumn", {})
 		updateHl("GitSignsAdd", "guibg=none")
