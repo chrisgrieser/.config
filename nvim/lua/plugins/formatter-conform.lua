@@ -20,9 +20,7 @@ local lspFormatFt = {
 	"zsh",
 	"python",
 	"css",
-	"scss",
 }
-vim.cmd("silent! update!")
 ---@return string[]
 ---@nodiscard
 local function listConformFormatters()

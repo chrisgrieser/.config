@@ -6,6 +6,8 @@ return {
 	init = function ()
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
+
+		vim.api.nvim_set_hl(0, "@lsp.type.comment", {}) -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
 	end,
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not

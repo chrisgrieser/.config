@@ -73,7 +73,6 @@ function M.bufKeymap(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-
 ---@param text string
 ---@param replace string
 function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end

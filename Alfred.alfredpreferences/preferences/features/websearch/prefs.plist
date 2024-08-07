@@ -37,6 +37,17 @@
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
 		</dict>
+		<key>61F594D9-D1EC-4E69-BCBB-5FE36128955E</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>down</string>
+			<key>text</key>
+			<string>Down for everyone or just me? → {query}</string>
+			<key>url</key>
+			<string>https://downforeveryoneorjustme.com/{query}</string>
+		</dict>
 		<key>7EEFE3C6-241D-4A58-B54F-876A851BDC32</key>
 		<dict>
 			<key>enabled</key>
