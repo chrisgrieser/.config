@@ -22,7 +22,7 @@ vim.opt.colorcolumn = "+1" -- one more than textwidth
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
 
-vim.opt.shortmess:append("I") -- no intro message
+vim.opt.shortmess:append("ISs") -- no intro message, no search count
 vim.opt.report = 9001 -- disable "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`

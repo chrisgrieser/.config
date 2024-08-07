@@ -110,6 +110,7 @@ keymap("n", "'", [[bi'<Esc>ea'<Esc>]], { desc = " ' surround cword" })
 keymap("n", "(", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 surround cword" })
 keymap("n", ")", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 surround cword" })
 keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline Code cword" })
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code selection" })
 
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
 keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template String" })
