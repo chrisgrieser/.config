@@ -335,21 +335,16 @@ return {
 					table.insert(ignorePattern, relPathCurrent)
 
 					-- add git info to file
-					local gitInfo = {}
+					local changedFilesInCwd = {}
 					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
-					vim.notify("🖨️ gitDir: " .. vim.inspect(gitDir))
 					local inGitRepo = gitDir.code == 0
 					if inGitRepo then
 						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
-						local gitResult = vim.system({ "git", "status", "--porcelain" }):wait().stdout
+						local gitResult = vim.system({ "git", "diff", "--name-only", "." }):wait().stdout
 						local changes = vim.split(gitResult or "", "\n", { trimempty = true })
 						for _, change in ipairs(changes) do
-							local status = change:sub(1, 2)
-							local file = change
-								:sub(4) -- remove status
-								:gsub(".* -> ", "") -- renamed file
-								:sub(pathInGitRoot) -- only relative path
-							gitInfo[file] = status
+							local file = change:sub(pathInGitRoot + 1) -- only relative path
+							table.insert(changedFilesInCwd, file)
 						end
 					end
 					local function pathDisplay(_, path)
@@ -359,9 +354,8 @@ return {
 						local highlights = {
 							{ { #tail, #out }, "TelescopeResultsComment" },
 						}
-						if gitInfo[path] then
-							local color = gitInfo[path]:find("[MR]") and "diffChanged" or "diffAdded"
-							table.insert(highlights, { { 0, #tail }, color })
+						if vim.tbl_contains(changedFilesInCwd, path) then
+							table.insert(highlights, { { 0, #tail }, "Changed" })
 						end
 						return out, highlights
 					end

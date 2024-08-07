@@ -68,6 +68,13 @@ function M.gotoChangedFiles()
 			end
 		end
 	end
+
+	-- GUARD in case of a monorepo, there can be changes outside the repo
+	if #changedFiles == 0 then
+		notify("No changes found in pwd.", "info") 
+		return
+	end
+
 	table.sort(changedFiles, function(a, b) return a.changes > b.changes end)
 	changedFiles = vim.list_slice(changedFiles, 1, config.maxFiles)
 
