@@ -374,15 +374,16 @@ serverConfigs.vale_ls = {
 
 -- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
 serverConfigs.harper_ls = {
-	filetypes = { "markdown" },
+	filetypes = { "markdown" }, -- not in other files, as too many false positives
 	settings = {
 		["harper-ls"] = {
 			userDictPath = vim.o.spellfile,
 			diagnosticSeverity = "information",
-			codeActions = {
-				forceStable = true,
+			linters = {
+				-- PENDING https://github.com/elijah-potter/harper/issues/104
+				spell_check = false,
+				sentence_capitalization = false,
 			},
-			linters = {},
 		},
 	},
 	on_attach = detachIfObsidianOrIcloud,
