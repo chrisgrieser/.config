@@ -15,6 +15,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html snippets
+	harper_ls = "harper-ls", -- natural language linter, used for markdown
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -274,7 +275,7 @@ serverConfigs.yamlls = {
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
 serverConfigs.ltex = {
-	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
+	filetypes = { "markdown" }, -- not in .txt files, as those are used by `pass`
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
@@ -364,16 +365,26 @@ serverConfigs.vale_ls = {
 	-- FIX https://github.com/errata-ai/vale-ls/issues/4
 	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
 
-	on_attach = function(vale, bufnr)
+	root_dir = function(filepath, bufnr)
 		-- Disable in Obsidian vaults (HACK as there is no `.valeignore`)
-		local obsiDir = #vim.fs.find(".obsidian", { upward = true, type = "directory" }) > 0
-		local nanoBlog = vim.uv.cwd():find("/nanotipsforvim%-blog")
-		local iCloudDocs =
-			vim.startswith(vim.api.nvim_buf_get_name(bufnr), os.getenv("HOME") .. "/Documents/")
-		if obsiDir or nanoBlog or iCloudDocs then
-			vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, vale.id) end, 400)
-		end
+		local obsiDir = #vim.fs.find(".obsidian", {
+			path = filepath,
+			upward = true,
+			type = "directory",
+		}) > 0
+		local nanoBlog = filepath:find("/nanotipsforvim%-blog")
+		local iCloudDocs = vim.startswith(filepath, os.getenv("HOME") .. "/Documents/")
+		if obsiDir or nanoBlog or iCloudDocs then return end
 	end,
+}
+
+serverConfigs.harper_ls = {
+	filetypes = { "markdown" },
+	settings = {
+		["harper-ls"] = {
+			userDictPath = vim.o.spellfile,
+		},
+	},
 }
 
 --------------------------------------------------------------------------------
