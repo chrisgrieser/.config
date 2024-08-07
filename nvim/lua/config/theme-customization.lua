@@ -13,8 +13,6 @@ local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) 
 --------------------------------------------------------------------------------
 
 local function customHighlights()
-	setHl("@lsp.type.comment", {}) -- FIX https://github.com/stsewd/tree-sitter-comment/issues/22
-
 	setHl("Whitespace", { link = "NonText" }) -- trailing spaces more visible
 	setHl("SnippetTabstop", { bg = u.getHlValue("Folded", "bg") })
 	updateHl("MatchParen", "gui=underline,bold cterm=underline,bold")
