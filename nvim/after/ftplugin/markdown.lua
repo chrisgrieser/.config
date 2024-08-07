@@ -130,7 +130,9 @@ keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
 -- cmd+b: bold
 keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
 keymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
+keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
 
 -- cmd+i: italics
 keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
 keymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
+keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
