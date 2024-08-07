@@ -15,7 +15,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	harper_ls = "harper-ls", -- natural language linter, used for markdown
+	-- harper_ls = "harper-ls", -- natural language linter, used for markdown
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -373,21 +373,21 @@ serverConfigs.vale_ls = {
 }
 
 -- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
-serverConfigs.harper_ls = {
-	filetypes = { "markdown" }, -- not in other files, as too many false positives
-	settings = {
-		["harper-ls"] = {
-			userDictPath = vim.o.spellfile,
-			diagnosticSeverity = "information",
-			linters = {
-				-- PENDING https://github.com/elijah-potter/harper/issues/104
-				spell_check = false,
-				sentence_capitalization = false,
-			},
-		},
-	},
-	on_attach = detachIfObsidianOrIcloud,
-}
+-- serverConfigs.harper_ls = {
+-- 	filetypes = { "markdown" }, -- not in other files, as too many false positives
+-- 	settings = {
+-- 		["harper-ls"] = {
+-- 			userDictPath = vim.o.spellfile,
+-- 			diagnosticSeverity = "information",
+-- 			linters = {
+-- 				-- PENDING https://github.com/elijah-potter/harper/issues/104
+-- 				spell_check = false,
+-- 				sentence_capitalization = false,
+-- 			},
+-- 		},
+-- 	},
+-- 	on_attach = detachIfObsidianOrIcloud,
+-- }
 
 --------------------------------------------------------------------------------
 
