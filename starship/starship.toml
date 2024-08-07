@@ -26,10 +26,9 @@ add_newline = false
 #───────────────────────────────────────────────────────────────────────────────
 
 [character] # ▓▒░
-success_symbol = "[ ](fg:black)"
-error_symbol = "[ ](fg:red)"
-vimcmd_symbol = "[ ](fg:cyan)"
-format = "[ ](bg:black)$symbol"
+success_symbol = "[ ](bg:black)[ ](fg:black)"
+error_symbol = "[ ](bg:red)[ ](fg:red)"
+vimcmd_symbol = "[ ](bg:black)[ ](fg:cyan)"
 
 [status] # exit code
 disabled = false
