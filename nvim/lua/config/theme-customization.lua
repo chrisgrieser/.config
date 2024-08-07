@@ -79,7 +79,8 @@ function M.themeModifications()
 	elseif theme == "bluloco" then
 		setHl("@keyword.return", { fg = "#d42781", bold = true })
 		revertedTodoComments()
-		setHl("@lsp.typemod.variable.global.lua", { link = "Constant" }) -- `vim` and `hs`
+		setHl("@lsp.typemod.variable.global.lua", { link = "@namespace" }) -- `vim` and `hs`
+		setHl("@lsp.typemod.variable.defaultLibrary.lua", { link = "@module.builtin" })
 	elseif theme == "dawnfox" then
 		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
@@ -145,13 +146,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 -- with different timings?
 function M.updateColorscheme()
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
-	if vim.o.background == "dark" then
-		vim.g.neovide_transparency = 0.9
-		vim.cmd.colorscheme(vim.g.darkTheme)
-	else
-		vim.g.neovide_transparency = 0.88
-		vim.cmd.colorscheme(vim.g.lightTheme)
-	end
+	vim.cmd.colorscheme(vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme)
 	M.themeModifications()
 	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 end

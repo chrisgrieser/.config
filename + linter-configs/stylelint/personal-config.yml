@@ -16,12 +16,13 @@ rules:
   color-no-hex: true
   comment-empty-line-before: null
   selector-class-pattern: null # class names usually not defined by me
-  no-descending-specificity: [true, { ignore: [selectors-within-list] }]
+  selector-id-pattern: null # id names usually not defined by me
+  no-descending-specificity: null
   custom-property-empty-line-before: never
   declaration-empty-line-before: never
   declaration-no-important: true
   font-weight-notation: numeric
   hue-degree-notation: number # compatible with ccc.nvim output
   max-nesting-depth: 3
-  no-unknown-custom-properties: [true, { severity: error }] # equivalent to "no undeclared variables" in other linters
-  selector-nested-pattern: ["&", { splitList: true, message: "Nested selectors should include a &." }]
+  selector-nested-pattern:
+    ["&", { splitList: true, message: "Nested selectors should include a &." }]

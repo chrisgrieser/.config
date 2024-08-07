@@ -282,11 +282,10 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
 	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
-	vim.notify("🖨️ beep 🔵")
 	if obsiDir or iCloudDocs then
-		vim.notify("🖨️ beep 🟩")
 		-- delay, so it's ensured the client is attached
 		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
+		vim.diagnostic.enable(false, { bufnr = 0 })
 	end
 end
 
