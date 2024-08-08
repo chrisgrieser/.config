@@ -32,7 +32,7 @@ local function customHighlights()
 		for _, v in pairs(vimModes) do
 			updateHl("lualine_a_" .. v, "gui=bold")
 		end
-	end, 1)
+	end, 100)
 
 	-- emphasized `return`
 	updateHl("@keyword.return", "gui=bold")

@@ -36,11 +36,11 @@ rules:
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               spotify_player playback play-pause
 
-              if [[ $? -eq 1 ]]; then
+              if [[ $? -ne 0 ]]; then
                 if scutil --get ComputerName | grep -q "Office"; then
                   if ! pgrep -qx spotifyd; then
                     spotifyd
-                    sleep 1
+                    sleep 0.5 # ensure spotifyd is running
                   fi
                   spotify_player connect --name "spotifyd"
                 fi
@@ -59,8 +59,11 @@ rules:
               spotify_player playback next
 
               if [[ $? -ne 0 ]]; then
-                if scutil --get ComputerName | grep -q "Office" ; then
-                  pgrep -qx spotifyd || spotifyd
+                if scutil --get ComputerName | grep -q "Office"; then
+                  if ! pgrep -qx spotifyd; then
+                    spotifyd
+                    sleep 0.2 # ensure spotifyd is running
+                  fi
                   spotify_player connect --name "spotifyd"
                 fi
                 spotify_player playback play
