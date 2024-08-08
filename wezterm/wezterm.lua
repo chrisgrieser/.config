@@ -34,7 +34,7 @@ local wt = require("wezterm")
 -- device specific config
 local host = wt.hostname()
 local device = "home"
-if host:find("mini") or host:find("eduroam") or host:find("fak1") then device = "office" end
+if host:find("mini") or host:find("eduroam") then device = "office" end
 if host:find("Mother") then device = "mother" end
 
 local deviceConfig = {
