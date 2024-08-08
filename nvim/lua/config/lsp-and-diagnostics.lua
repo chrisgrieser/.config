@@ -53,7 +53,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local filter = ctx.args == "" and { bufnr = 0 } or { name = ctx.args }
 	local clientInfo = vim.iter(vim.lsp.get_clients(filter))
-		:map(function(client) return client.name .. "\n" .. vim.inspect(client) end)
+		:map(function(client) return client.name:upper() .. "\n" .. vim.inspect(client) end)
 		:join("\n\n")
 	vim.api.nvim_create_autocmd("FileType", {
 		once = true,
