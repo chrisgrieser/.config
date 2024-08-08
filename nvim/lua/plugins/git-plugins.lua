@@ -30,6 +30,9 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
+			staging = {
+				moveToNextHunkOnStagingToggle = true,
+			},
 			commitMsg = {
 				commitPreview = true,
 				conventionalCommits = { enforce = true },
