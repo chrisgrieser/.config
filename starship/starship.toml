@@ -1,5 +1,4 @@
-# - DOCS https://starship.rs/config/
-# - Ansi color codes: https://i.stack.imgur.com/KTSQa.png
+# DOCS https://starship.rs/config/
 #───────────────────────────────────────────────────────────────────────────────
 
 format = """[\
