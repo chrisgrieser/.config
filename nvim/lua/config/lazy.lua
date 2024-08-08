@@ -9,7 +9,7 @@ if not lazyLocallyAvailable then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
 			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
+			{ "\nPress any key to exit…" },
 		}, true, {})
 		vim.fn.getchar()
 		os.exit(1)
@@ -49,18 +49,15 @@ require("lazy").setup {
 				desc = "󰖟 Plugin repo",
 			},
 			["gp"] = {
-				function(plugin)
+				function(plug)
 					vim.cmd.close()
-					require("telescope.builtin").find_files {
-						prompt_title = plugin.name,
-						cwd = plugin.dir,
-					}
+					require("telescope.builtin").find_files { prompt_title = plug.name, cwd = plug.dir }
 				end,
 				desc = "󰒲 Local plugin code",
 			},
 			["gi"] = {
-				function(plugin)
-					local url = plugin.url:gsub("%.git$", "")
+				function(plug)
+					local url = plug.url:gsub("%.git$", "")
 					local line = vim.api.nvim_get_current_line()
 					local issue = line:match("#(%d+)")
 					local commit = line:match(("%x"):rep(6) .. "+")
@@ -112,6 +109,7 @@ local pluginTypeIcons = {
 	["editing-support"] = "󰏫 ",
 	["files-and-buffers"] = "󰞇 ",
 	["appearance"] = " ",
+	["refactoring"] = "󱗘 ",
 	["lsp-plugins"] = "󰒕 ",
 	["lsp-config"] = "󰒕 ",
 	["ai-plugins"] = "󰚩 ",
@@ -127,7 +125,7 @@ local pluginTypeIcons = {
 	["mason"] = " ",
 	["motions-and-textobjects"] = "󱡔 ",
 	["telescope-config"] = "󰭎 ",
-	["lualine"] = "󰇘 ",
+	["lualine"] = " ",
 }
 
 keymap("n", "g,", function()
