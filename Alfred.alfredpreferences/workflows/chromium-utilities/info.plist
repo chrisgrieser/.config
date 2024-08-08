@@ -68,11 +68,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Open extension settings or special pages of Chrome (or any other Chromium-based browser)</string>
+	<string>Open extension settings or internal pages of Chrome (or any other Chromium-based browser)</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Chromium Extensions &amp; Internal pages</string>
+	<string>Chromium extensions &amp; internal pages</string>
 	<key>objects</key>
 	<array>
 		<dict>
