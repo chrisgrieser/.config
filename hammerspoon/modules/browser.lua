@@ -8,6 +8,7 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
+-- AUTO-TILING
 M.wf_browser = wf.new("Brave Browser")
 	:setOverrideFilter({
 		rejectTitles = {
@@ -30,7 +31,7 @@ M.wf_browser = wf.new("Brave Browser")
 	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_browser) end)
 	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
 
--- Automatically hide Browser has when no window
+-- AUTOMATICALLY HIDE WHEN NO WINDOW
 -- requires wider window-filter to not hide PiP windows etc
 M.wf_browserAll = wf.new("Brave Browser")
 	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
@@ -40,6 +41,16 @@ M.wf_browserAll = wf.new("Brave Browser")
 	end)
 
 --------------------------------------------------------------------------------
+-- AUTO-COPY on focus loss
+aw.new(function(appName, eventType, browserApp)
+	if eventType == aw.deactivated and appName == "Brave Browser" then
+		print("🖨️ beep 🔵")
+		hs.eventtap.keyStroke({ "cmd" }, "x", 0, hs.application("TextEdit"))
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+
 -- VIMIUM CURSOR HIDER
 -- Companion for Vimium-like browser extensions which are not able to hide the
 -- cursor properly

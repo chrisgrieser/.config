@@ -13,7 +13,7 @@ M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PA
 
 ---binds a hotkey for a specific application only
 ---@param appName string
----@param modifier string|string[]
+---@param modifier string[]
 ---@param key string
 ---@param action function
 function M.appHotkey(appName, modifier, key, action)
