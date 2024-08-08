@@ -1,13 +1,12 @@
 # - DOCS https://starship.rs/config/
 # - Ansi color codes: https://i.stack.imgur.com/KTSQa.png
-# - INFO some nerd font requires a space after them to be properly sized
 #───────────────────────────────────────────────────────────────────────────────
 
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
 $git_status$git_metrics$git_commit$git_state\
-$sudo$status\
+$sudo $status\
 ](bg:black)\
 $character\
 """
@@ -26,13 +25,13 @@ add_newline = false
 #───────────────────────────────────────────────────────────────────────────────
 
 [character] # ▓▒░
-success_symbol = "[ ](bg:black)[ ](fg:black)"
-error_symbol = "[ ](bg:red)[ ](fg:red)"
-vimcmd_symbol = "[ ](bg:black)[ ](fg:cyan)"
+success_symbol = "[ ](fg:black)"
+error_symbol = "[ ](fg:red)"
+vimcmd_symbol = "[ ](fg:cyan)"
 
 [status] # exit code
 disabled = false
-format = " [ $status]($style)"
+format = "[ $status ]($style)"
 style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal theme
 
 [sudo]
@@ -67,7 +66,7 @@ description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
 when = "true" # always show
 symbol = "󰝰 "
-format = '[$symbol$output]($style)'
+format = '[$symbol$output ]($style)'
 style = "fg:yellow bg:black"
 
 # Indicate if in a subfolder of my local repo folder. Helps differentiating

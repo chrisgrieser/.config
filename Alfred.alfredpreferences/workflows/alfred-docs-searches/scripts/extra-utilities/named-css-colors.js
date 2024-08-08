@@ -19,7 +19,7 @@ function run() {
 		$.getenv("alfred_preferences") +
 		"/workflows/" +
 		$.getenv("alfred_workflow_uid") +
-		"/data/named-css-colors.csv";
+		"/scripts/extra-utilities/named-css-colors.csv";
 
 	const colors = readFile(jsonPath)
 		.split("\n")
@@ -33,7 +33,7 @@ function run() {
 				subtitle: hex,
 				arg: name,
 				match: name + " " + baseColor,
-				icon: { path: `data/color-svgs/${name}.svg` },
+				icon: { path: `./scripts/extra-utilities/color-svgs/${name}.svg` },
 			};
 		});
 
