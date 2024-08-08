@@ -108,19 +108,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<array>
 			<dict>
@@ -210,7 +197,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
+				<string>093993C7-7C1F-4DEF-AD8F-D6BE78860096</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
@@ -638,7 +625,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Copied</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1077,7 +1064,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Copied</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1202,46 +1189,6 @@
 			<string>807968C5-83D0-4F80-8188-636A8D536DBE</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1912,24 +1859,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>945</real>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>514BC53D-EF72-4C3B-8CEF-84CB3A4097BB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>955</real>
-			<key>ypos</key>
-			<real>645</real>
-		</dict>
-		<key>55D10DD5-0F5E-48C4-A62C-1DD1393DE0B8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>1110</real>
-			<key>ypos</key>
-			<real>645</real>
 		</dict>
 		<key>582225D7-8F6C-468C-A212-86ACFA5F026C</key>
 		<dict>

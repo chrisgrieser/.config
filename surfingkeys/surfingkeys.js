@@ -120,7 +120,6 @@ mapkey("gI", "Open GitHub issues", () => {
 settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
-map("z", "cs", null, "Change Scroll target");
 
 map("h", "S"); // History Back/Forward
 map("l", "D");
