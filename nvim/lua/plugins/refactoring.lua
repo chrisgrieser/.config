@@ -2,27 +2,31 @@ return {
 	{ -- editable quickfix
 		"stevearc/quicker.nvim",
 		keys = {
-			{ "<leader>q", function() require("quicker").toggle() end, desc = " Toggle quickfix" },
+			{
+				"<leader>q",
+				function() require("quicker").toggle { focus = true } end,
+				desc = " Toggle quickfix",
+			},
 		},
 		opts = {
 			keys = {
 				{
 					"<Tab>",
 					function()
-						require("quicker").expand { before = 2, after = 2, add_to_existing = true }
+						require("quicker").expand()
+						vim.cmd.wincmd("+")
 					end,
 					desc = " Expand context",
 				},
 				{
 					"<S-Tab>",
-					function() require("quicker").collapse() end,
-					desc = " Collapse context",
+					function()
+						require("quicker").collapse()
+						vim.cmd.wincmd("-")
+					end,
+					desc = " Collapse",
 				},
-				{
-					"<CR>",
-					"<cmd>update|close<CR>",
-					desc = " Confirm changes",
-				},
+				{ "<CR>", "<cmd>update|close<CR>", desc = " Confirm changes" },
 			},
 			edit = { autosave = true },
 		},
