@@ -1,0 +1,3 @@
+[[keymaps]]
+command = "SwitchDevice"
+key_sequence = "d"

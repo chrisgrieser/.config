@@ -61,10 +61,8 @@ function run() {
 
 		// type-icon
 		let type = "";
-		if (name.startsWith(".z"))
-			type = "zsh"; // .zshenv, .zshrc, .zprofile
+		if (name.startsWith(".z")) type = "zsh";
 		else if (name === "Justfile") type = "justfile";
-		else if (name.startsWith(".")) type = "cfg";
 		else if (!name.includes(".")) type = "blank";
 		else if (name === "obsidian-vimrc.vim") type = "obsidian";
 		else type = name.split(".").pop() || ""; // default: extension

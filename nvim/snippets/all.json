@@ -146,8 +146,8 @@
     "prefix": "today ISO date INSERT"
   },
   "vim modeline": {
-    "body": "$LINE_COMMENT vim: set ${1:option}=${2:value}:",
-    "prefix": "vim modeline"
+    "body": "$LINE_COMMENT vim: ft=${1:filetype}",
+    "prefix": "vim modeline (filetype)"
   },
   "yes (✅)": {
     "body": "✅ ",
