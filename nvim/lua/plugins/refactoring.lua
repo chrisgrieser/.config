@@ -4,13 +4,13 @@ return {
 		keys = {
 			{
 				"<leader>q",
-				function() require("quicker").toggle { focus = true } end,
+				function() require("quicker").toggle { focus = true, height = 10 } end,
 				desc = " Toggle quickfix",
 			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-				callback = function() require("quicker").open { focus = true } end,
+				callback = function() require("quicker").open { focus = true, height = 10 } end,
 			})
 		end,
 		opts = {
@@ -19,7 +19,7 @@ return {
 					"<Tab>",
 					function()
 						require("quicker").expand()
-						vim.cmd.wincmd("10+") -- PENDING https://github.com/stevearc/quicker.nvim/issues/10
+						vim.api.nvim_win_set_height(0, 20)
 					end,
 					desc = " Expand context",
 				},
@@ -27,7 +27,7 @@ return {
 					"<S-Tab>",
 					function()
 						require("quicker").collapse()
-						vim.cmd.wincmd("10-")
+						vim.api.nvim_win_set_height(0, 10)
 					end,
 					desc = " Collapse",
 				},

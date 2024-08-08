@@ -539,7 +539,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>565</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>340</real>
 		</dict>
 		<key>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</key>
 		<dict>
@@ -550,14 +550,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>310</real>
 		</dict>
 		<key>4FFAD7DC-CAEC-4493-90E9-E941E1355540</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>415</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -570,7 +570,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>340</real>
 		</dict>
 		<key>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</key>
 		<dict>
@@ -579,7 +579,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>append browser link as Markdown task</string>
 			<key>xpos</key>
-			<real>675</real>
+			<real>690</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -588,7 +588,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>830</real>
+			<real>845</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -599,7 +599,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>265</real>
 		</dict>
 		<key>D223A211-45A1-481D-A981-9632A2E18CC5</key>
 		<dict>
@@ -608,14 +608,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>245</real>
 		</dict>
 		<key>E0C21F6A-AFB4-4763-8E80-06D3BAA3821F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>545</real>
+			<real>560</real>
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
@@ -626,14 +626,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>645</real>
 			<key>ypos</key>
-			<real>360</real>
+			<real>310</real>
 		</dict>
 		<key>EF0DA9FC-237E-4EC9-9942-B31BD0A6754F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>695</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -644,7 +644,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>340</real>
+			<real>290</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

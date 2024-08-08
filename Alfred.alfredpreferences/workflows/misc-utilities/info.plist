@@ -1441,7 +1441,7 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>625</real>
 		</dict>
@@ -1470,7 +1470,7 @@
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
-			<real>625</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>765</real>
 		</dict>
@@ -1481,7 +1481,7 @@
 			<key>note</key>
 			<string>Copy to…</string>
 			<key>xpos</key>
-			<real>630</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>1125</real>
 		</dict>
@@ -1568,7 +1568,7 @@
 			<key>note</key>
 			<string>Move to…</string>
 			<key>xpos</key>
-			<real>625</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>990</real>
 		</dict>
@@ -1698,7 +1698,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>615</real>
 			<key>ypos</key>
 			<real>505</real>
 		</dict>

@@ -1170,7 +1170,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>815</real>
 		</dict>
 		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
 		<dict>
@@ -1179,7 +1179,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>830</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1235,7 +1235,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>885</real>
+			<real>835</real>
 		</dict>
 		<key>3D08F342-404B-4C70-8AC6-5473E7CB855B</key>
 		<dict>
@@ -1302,18 +1302,19 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>705</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>quick add selection or browser tab</string>
+			<string>DOUBLE CLICK THIS
+to set a hotkey to quick add selected text or browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>720</real>
+			<real>645</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
@@ -1328,6 +1329,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>DOUBLE CLICK THIS
+to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1340,18 +1344,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>950</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>select date</string>
+			<string>quick add today at future date</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>950</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1398,11 +1402,11 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>quick add</string>
+			<string>quick add today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>815</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
@@ -1413,7 +1417,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>950</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1422,9 +1426,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>1170</real>
+			<real>1165</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>700</real>
 		</dict>
 		<key>E0980533-D7F3-4E31-94E7-3AF042478577</key>
 		<dict>
@@ -1483,7 +1487,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>for selecting a reminder</string>
+			<string>show reminders due today</string>
 			<key>label</key>
 			<string>Keywords</string>
 			<key>type</key>
@@ -1495,7 +1499,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>qq</string>
+				<string>today</string>
 				<key>placeholder</key>
 				<string>qq</string>
 				<key>required</key>
@@ -1504,7 +1508,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>for selecting adding a new reminder due today reminder</string>
+			<string>quick add a new reminder due today</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1516,7 +1520,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>qqq</string>
+				<string>atdate</string>
 				<key>placeholder</key>
 				<string>qqq</string>
 				<key>required</key>
@@ -1525,7 +1529,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>for adding a reminder due a specifc day</string>
+			<string>quick add a new reminder at a future date</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
