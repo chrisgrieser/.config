@@ -8,13 +8,18 @@ return {
 				desc = " Toggle quickfix",
 			},
 		},
+		init = function()
+			vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+				callback = function() require("quicker").open { focus = true } end,
+			})
+		end,
 		opts = {
 			keys = {
 				{
 					"<Tab>",
 					function()
 						require("quicker").expand()
-						vim.cmd.wincmd("+")
+						vim.cmd.wincmd("10+") -- PENDING https://github.com/stevearc/quicker.nvim/issues/10
 					end,
 					desc = " Expand context",
 				},
@@ -22,13 +27,14 @@ return {
 					"<S-Tab>",
 					function()
 						require("quicker").collapse()
-						vim.cmd.wincmd("-")
+						vim.cmd.wincmd("10-")
 					end,
 					desc = " Collapse",
 				},
-				{ "<CR>", "<cmd>update|close<CR>", desc = " Confirm changes" },
+				{ "<D-s>", "<cmd>update|close<CR>", desc = " Confirm changes" },
 			},
 			edit = { autosave = true },
+			max_filename_width = function() return 20 end,
 		},
 	},
 	{ -- better `:substitute`

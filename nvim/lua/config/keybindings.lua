@@ -213,10 +213,25 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
--- stylua: ignore start
-keymap({ "n", "x" }, "<CR>", function() require("funcs.alt-alt").gotoAltBuffer() end, { desc = "󰽙 Alt Buffer" })
-keymap({ "n", "x" }, "<D-CR>", function() require("funcs.magnet").gotoChangedFiles() end, { desc = "󰊢 Goto Changed File" })
--- stylua: ignore end
+
+keymap(
+	{ "n", "x" },
+	"<CR>",
+	function() require("funcs.alt-alt").gotoAltBuffer() end,
+	{ desc = "󰽙 Alt Buffer" }
+)
+-- restore the default behavior of `<CR>`, which is overridden by my mapping
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function() vim.keymap.set("n", "<CR>", "<CR>", { buffer = true }) end,
+})
+
+keymap(
+	{ "n", "x" },
+	"<D-CR>",
+	function() require("funcs.magnet").gotoChangedFiles() end,
+	{ desc = "󰊢 Goto Changed File" }
+)
 
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")

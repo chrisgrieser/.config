@@ -229,7 +229,10 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 --------------------------------------------------------------------------------
 
--- QUICKFIX LIST: ADD SIGNS
+-- QUICKFIX: Goto first item
+vim.api.nvim_create_autocmd("QuickFixCmdPost", { command = "cfirst" })
+
+-- QUICKFIX: Add signs
 local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
@@ -242,9 +245,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})
 		end
-
-		-- move to 1st item
-		pcall(vim.cmd.cfirst) -- `pcall` as deleting the list also triggers `QuickFixCmdPost`
 
 		-- clear signs
 		local group = vim.api.nvim_create_augroup("quickfixSigns", { clear = true })
