@@ -215,10 +215,6 @@ serverConfigs.emmet_language_server = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 serverConfigs.tsserver = {
 	settings = {
-		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
-		-- (biome works only on single-file and so already check for unintended re-declarations.)
-		diagnostics = { ignoredCodes = { 2451 } },
-
 		typescript = {
 			inlayHints = {
 				includeInlayEnumMemberValueHints = true,
@@ -230,7 +226,7 @@ serverConfigs.tsserver = {
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
-			-- even w/o formatting still relevant for `organizeImports` code action
+			-- even formatting disabled still relevant for `organizeImports` code action
 			format = { convertTabsToSpaces = false },
 		},
 
