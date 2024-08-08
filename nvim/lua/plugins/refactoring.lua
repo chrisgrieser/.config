@@ -1,40 +1,30 @@
+local qfHeight = 10
+
 return {
 	{ -- editable quickfix
 		"stevearc/quicker.nvim",
 		keys = {
 			{
 				"<leader>q",
-				function() require("quicker").toggle { focus = true, height = 10 } end,
+				function() require("quicker").toggle { focus = true, min_height = qfHeight } end,
 				desc = " Toggle quickfix",
 			},
 		},
 		init = function()
 			vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-				callback = function() require("quicker").open { focus = true, height = 10 } end,
+				callback = function() require("quicker").open { focus = true, min_height = qfHeight } end,
 			})
 		end,
 		opts = {
 			keys = {
-				{
-					"<Tab>",
-					function()
-						require("quicker").expand()
-						vim.api.nvim_win_set_height(0, 20)
-					end,
-					desc = " Expand context",
-				},
-				{
-					"<S-Tab>",
-					function()
-						require("quicker").collapse()
-						vim.api.nvim_win_set_height(0, 10)
-					end,
-					desc = " Collapse",
-				},
+				-- stylua: ignore start
+				{ "<Tab>", function() require("quicker").expand() ; vim.api.nvim_win_set_height(0, qfHeight * 2) end, desc = " Expand context" },
+				{ "<S-Tab>", function() require("quicker").collapse() ; vim.api.nvim_win_set_height(0, qfHeight) end, desc = " Collapse" },
 				{ "<D-s>", "<cmd>update|close<CR>", desc = " Confirm changes" },
+				-- stylua: ignore end
 			},
 			edit = { autosave = true },
-			max_filename_width = function() return 20 end,
+			max_filename_width = function() return 23 end,
 		},
 	},
 	{ -- better `:substitute`
@@ -50,7 +40,6 @@ return {
 			{
 				"<leader>fc",
 				function() require("rip-substitute").rememberCursorWord() end,
-				mode = { "n", "x" },
 				desc = " remember cword",
 			},
 		},
