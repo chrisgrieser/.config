@@ -21,3 +21,44 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                   --title "Spotify" --message "💚 $artist – $song"
               spotify_player like
+
+      - type: basic
+        from: { key_code: f7 }
+        to:
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              spotify_player playback previous
+
+      - type: basic
+        from: { key_code: f8 }
+        to:
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              spotify_player playback play-pause
+
+              if [[ $? -ne 0 ]]; then
+                if scutil --get ComputerName | grep -q "Office" ; then
+                  pgrep -qx spotifyd || spotifyd
+                  spotify_player connect --name "spotifyd"
+                fi
+                spotify_player playback play
+              fi
+
+              # enable "repeat all"
+              repeat_state=$(spotify_player get key playback | yq ".repeat_state")
+              [[ $repeat_state == "off" ]] && spotify_player playback repeat
+              [[ $repeat_state == "track" ]] && spotify_player playback repeat
+      - type: basic
+        from: { key_code: f9 }
+        to:
+          - shell_command: |
+              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+              spotify_player playback next
+
+              if [[ $? -ne 0 ]]; then
+                if scutil --get ComputerName | grep -q "Office" ; then
+                  pgrep -qx spotifyd || spotifyd
+                  spotify_player connect --name "spotifyd"
+                fi
+                spotify_player playback play
+              fi

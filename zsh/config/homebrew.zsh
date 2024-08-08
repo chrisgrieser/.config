@@ -78,6 +78,9 @@ function listall() {
 	brew info
 	brew doctor
 
+	_print-section "brew services list"
+	brew services list
+
 	_print-section "brew taps"
 	brew tap | rs
 

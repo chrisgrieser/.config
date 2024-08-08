@@ -132,7 +132,7 @@ serverConfigs.lua_ls = {
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- don't suggest common words as fallback
 				workspaceWord = false, -- already done by cmp-buffer
-				postfix = ".", -- useful for `table.insert` and the like
+				postfix = "..", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
 				disable = { "trailing-space" }, -- formatter already handles that
