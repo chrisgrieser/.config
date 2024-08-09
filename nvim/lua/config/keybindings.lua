@@ -65,10 +65,10 @@ keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
+keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
+keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- SNIPPETS
