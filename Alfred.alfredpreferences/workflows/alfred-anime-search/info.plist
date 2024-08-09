@@ -12,6 +12,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Open at alternative site</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -22,11 +32,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+				<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Open at alternative site</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -40,13 +50,41 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>399FFA57-165B-472A-AE9A-87BFF27728F8</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8AF259D4-1F82-4227-BC2A-C76D63F8EB23</string>
+				<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy MAL-URL</string>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>1F19551C-19DF-41B6-BB36-D3BED80FC88A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>675222A8-3740-4E18-B754-C2E21EDC1631</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>399FFA57-165B-472A-AE9A-87BFF27728F8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -64,11 +102,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8AF259D4-1F82-4227-BC2A-C76D63F8EB23</key>
+		<key>AC45C071-007E-491D-805B-4F6EC6B05E28</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+				<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -81,13 +132,42 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search animes listed in the myanimelist database.</string>
+	<string>Search animes listed in the myanimelist database, open at myanimelist or AniList.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
 	<string>Anime Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -100,7 +180,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/open-at-mal-or-anilist.js</string>
+				<string>./scripts/get-url-from-mal_id.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -114,23 +194,61 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>open</string>
+						<key>outputlabel</key>
+						<string>open</string>
+						<key>uid</key>
+						<string>1F19551C-19DF-41B6-BB36-D3BED80FC88A</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>copy</string>
+				<key>hideelse</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:alt_search_url}{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E5C2943F-3313-4303-A60B-1DE042AB5EDE</string>
+			<string>399FFA57-165B-472A-AE9A-87BFF27728F8</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -164,7 +282,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>anime-search.js</string>
+				<string>./scripts/anime-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
@@ -202,45 +320,15 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>8AF259D4-1F82-4227-BC2A-C76D63F8EB23</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
 Search all anime listed in the `myanimelist` database via the keyword `an`.
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open at myanimelist.net.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open at myanimelist.net or AniList.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Copy the Japanese (romaji) title.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the `myanimelist` URL.
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search for the title on an alternative site, such as a
   streaming website.
-
-[Due to an API limitation](https://github.com/jikan-me/jikan-rest/issues/529),
-indicators of streaming services can only be shown for the first search result.
 
 ---
 
@@ -252,42 +340,60 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>375</real>
+		</dict>
+		<key>399FFA57-165B-472A-AE9A-87BFF27728F8</key>
+		<dict>
+			<key>note</key>
+			<string>mode</string>
+			<key>xpos</key>
+			<real>497</real>
+			<key>ypos</key>
+			<real>300</real>
 		</dict>
 		<key>675222A8-3740-4E18-B754-C2E21EDC1631</key>
 		<dict>
+			<key>note</key>
+			<string>get URL from mal_id</string>
 			<key>xpos</key>
-			<real>350</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>280</real>
 		</dict>
 		<key>7E098A04-2A6D-4C5A-9968-3A4364A36654</key>
 		<dict>
 			<key>xpos</key>
-			<real>530</real>
+			<real>755</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>375</real>
 		</dict>
 		<key>8AABF91D-1E70-4809-955F-8DBAE86E3107</key>
 		<dict>
 			<key>xpos</key>
-			<real>350</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>375</real>
 		</dict>
-		<key>8AF259D4-1F82-4227-BC2A-C76D63F8EB23</key>
+		<key>AC45C071-007E-491D-805B-4F6EC6B05E28</key>
 		<dict>
 			<key>xpos</key>
-			<real>220</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>310</real>
 		</dict>
-		<key>E5C2943F-3313-4303-A60B-1DE042AB5EDE</key>
+		<key>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</key>
 		<dict>
 			<key>xpos</key>
-			<real>350</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>230</real>
+		</dict>
+		<key>CD83D622-02FC-4979-A30A-993E3F86605A</key>
+		<dict>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>200</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -317,6 +423,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>mal</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>myanimelist</string>
+						<string>mal</string>
+					</array>
+					<array>
+						<string>AniList</string>
+						<string>anilist</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>This setting only determines where to open the result, the search uses the myanimelist database regardless.</string>
+			<key>label</key>
+			<string>⏎ opens at</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>open_at</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>https://www.crunchyroll.com/search?q=</string>
 				<key>placeholder</key>
 				<string>https://www.crunchyroll.com/search?q=</string>
@@ -328,7 +460,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>the full title is inserted at the end of the URL</string>
 			<key>label</key>
-			<string>Alternative Search Site</string>
+			<string>Alternative search site</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -342,7 +474,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>insert Japanese title at "%s"</string>
+				<string>insert Japanese title</string>
 			</dict>
 			<key>description</key>
 			<string></string>
