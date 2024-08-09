@@ -45,7 +45,7 @@ local function createReminder(msg)
 	hs.osascript.javascript(([[
 		const rem = Application("Reminders");
 		const today = new Date();
-		const newReminder = rem.Reminder({ name: "%s", alldayDueDate: today });
+		const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
 		rem.defaultList().reminders.push(newReminder);
 		rem.quit();
 	]]):format(msg))

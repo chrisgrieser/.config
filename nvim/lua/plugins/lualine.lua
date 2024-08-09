@@ -60,7 +60,7 @@ local function quickfixCounter()
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (' %s/%s "%s"'):format(qf.idx, #qf.items, qf.title) .. fileStr
+	return (' %s/%s %q'):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
 local function filenameAndIcon()

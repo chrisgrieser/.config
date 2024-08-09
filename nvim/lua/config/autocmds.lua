@@ -190,7 +190,7 @@ local globToTemplateMap = {
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 	-- `BufReadPost` for files created outside of nvim
 	callback = function(ctx)
-		vim.defer_fn(function() -- defer, so new files are written
+		vim.defer_fn(function() -- defer, to ensure new files are written
 			local stats = vim.uv.fs_stat(ctx.file)
 			if not stats or stats.size > 10 then return end -- 10 bytes for file metadata
 			local filepath, bufnr = ctx.file, ctx.buf
@@ -223,14 +223,17 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			-- adjust filetype if needed (e.g. applying a zsh template to .sh files)
 			local newFt = vim.filetype.match { buf = bufnr }
 			if vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
-		end, 50)
+		end, 100)
 	end,
 })
 
 --------------------------------------------------------------------------------
 
 -- QUICKFIX: Goto first item
-vim.api.nvim_create_autocmd("QuickFixCmdPost", { command = "cfirst" })
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
+	callback = function() pcall(vim.cmd.cfirst) end, 
+})
 
 -- QUICKFIX: Add signs
 local quickfixSign = "" -- CONFIG
