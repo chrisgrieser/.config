@@ -233,7 +233,6 @@
       "\t\t$0",
       "\t\tbreak;",
       "\tdefault:",
-      "\t\tbreak;",
       "}"
     ],
     "prefix": "switch .. case"
