@@ -102,29 +102,30 @@ function run(argv) {
 
 		// ALT SEARCH & QUICKLOOK
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
-		const altSearchSubtitle = altSearchHostname
-			? `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`
-			: undefined;
+		const altSearchSubtitle = `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`;
 		const altSearchURL = $.getenv("alt_search_url") + encodeURIComponent(altSearchTitle);
 		const image = images.webp.large_image_url || images.jpg.large_image_url;
 
 		return {
 			title: displayText,
 			subtitle: subtitle,
-			arg: mal_id,
+			arg: mal_id, // will get URL from it
 			quicklookurl: image,
-			variables: { mode: "open" },
+			variables: { action: "open" },
 			mods: {
 				alt: {
-					variables: { mode: "open" },
+					arg: mal_id, // will get URL from it
+					variables: { action: "copy" },
 				},
 				cmd: {
 					arg: titleJap,
 					valid: Boolean(titleJap),
+					variables: { action: "copy" },
 				},
 				shift: {
 					arg: altSearchURL,
 					subtitle: altSearchSubtitle,
+					variables: { action: "open" },
 				},
 			},
 		};
