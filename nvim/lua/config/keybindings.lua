@@ -119,10 +119,10 @@ keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template String" })
 -- TEXTOBJECTS
 
 local textobjRemaps = {
-	{ "c", "}", "󱃖", "curly" },
-	{ "r", "]", "󰅪", "rectangular" },
+	{ "c", "}", "󱃖", "curly" }, -- [c]urly brace
+	{ "r", "]", "󰅪", "rectangular" }, -- [r]ectangular bracket
 	{ "m", "W", "󰬞", "WORD" }, -- [m]assive word
-	{ "q", '"', "", "double" },
+	{ "q", '"', "", "double" }, -- [q]uote
 	{ "z", "'", "", "single" }, -- [z]ingle quote
 	{ "e", "`", "", "backtick" }, -- t[e]mplate string / inline cod[e]
 }
