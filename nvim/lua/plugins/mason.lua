@@ -1,15 +1,18 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		init = function()
-			-- so mason packages are available before loading mason itself
-			vim.env.PATH = vim.env.PATH .. ":" .. vim.fn.stdpath("data") .. "/mason/bin"
-		end,
 		external_dependencies = { "node", "python3.12", "yq" },
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
+
+		-- so mason packages are available before loading mason itself
+		init = function()
+			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. ":" .. vim.env.PATH
+		end,
 		opts = {
+			PATH = "skip", -- since already adding manually above
+
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
 			-- also requires `yq` being available in the system
 			-- registries = {
@@ -50,8 +53,8 @@ return {
 			local errormsg = "Error in lazy-plugin-specs, many packages would be uninstalled."
 			assert(#packages > 10, errormsg)
 
-			-- FIX Manually running `MasonToolsUpdate`, since `run_on_start` does
-			-- not work with lazyloading.
+			-- FIX manually running `MasonToolsUpdate`, since `run_on_start` does
+			-- not work with lazy-loading.
 			require("mason-tool-installer").setup { ensure_installed = packages }
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 			vim.defer_fn(vim.cmd.MasonToolsUpdate, 5000)
