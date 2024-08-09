@@ -1146,6 +1146,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>bkp||backups</string>
+				<key>subtext</key>
+				<string>iCloud Drive/Dotfolder/Backups</string>
+				<key>text</key>
+				<string>Backups</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -1198,38 +1234,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>bkp||backups</string>
+				<string>library</string>
 				<key>subtext</key>
-				<string>iCloud Drive/Dotfolder/Backups</string>
+				<string>~/Library/</string>
 				<key>text</key>
-				<string>Backups</string>
+				<string>Library</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>DCBA8F7A-7D5F-4A48-977E-02DC5EA0BBF8</string>
+			<string>E0DF7030-2943-416D-BF96-8594A9D6B8D1</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>03667EF4-50FD-408A-9399-0D917C10A799</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1283,42 +1319,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E0DF7030-2943-416D-BF96-8594A9D6B8D1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1329,9 +1329,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>975</real>
 		</dict>
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
@@ -1367,9 +1367,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>855</real>
 		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
@@ -1396,16 +1396,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>855</real>
 		</dict>
 		<key>4052B872-BCA5-4596-BE0A-8751D4F562C8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1105</real>
 		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
@@ -1434,7 +1434,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>715</real>
 		</dict>
 		<key>5C877087-012F-4C14-9B4D-369466813350</key>
 		<dict>
@@ -1461,7 +1461,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>855</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -1492,7 +1492,7 @@
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>715</real>
 		</dict>
 		<key>92F2951A-71DC-46A7-BE1F-38E119AD1B8E</key>
 		<dict>
@@ -1581,7 +1581,7 @@
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>715</real>
 		</dict>
 		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
 		<dict>
@@ -1635,16 +1635,16 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>975</real>
 		</dict>
 		<key>DCF4EDD9-4527-4C52-AA3F-15E342FF8009</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>580</real>
 		</dict>
 		<key>DDA83EED-599F-404A-AE96-23C03A8F40AE</key>
 		<dict>
@@ -1662,10 +1662,12 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1135</real>
+			<real>1105</real>
 		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>note</key>
 			<string>click "call" button in notification</string>
 			<key>xpos</key>
@@ -1738,7 +1740,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>580</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

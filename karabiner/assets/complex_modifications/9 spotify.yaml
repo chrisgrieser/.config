@@ -34,37 +34,23 @@ rules:
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback play-pause
+              spotify_player playback play-pause && exit 0
 
-              if [[ $? -ne 0 ]]; then
-                if scutil --get ComputerName | grep -q "Office"; then
-                  if ! pgrep -qx spotifyd; then
-                    spotifyd
-                    sleep 0.5 # ensure spotifyd is running
-                  fi
-                  spotify_player connect --name "spotifyd"
-                fi
-                spotify_player playback play
+              if scutil --get ComputerName | grep -q "Office"; then
+                if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+                spotify_player connect --name "spotifyd"
               fi
+              spotify_player playback play
 
-              # enable "repeat all"
-              repeat_state=$(spotify_player get key playback | yq ".repeat_state")
-              [[ $repeat_state == "off" ]] && spotify_player playback repeat
-              [[ $repeat_state == "track" ]] && spotify_player playback repeat
       - type: basic
         from: { key_code: f9 }
         to:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-              spotify_player playback next
+              spotify_player playback next && exit 0
 
-              if [[ $? -ne 0 ]]; then
-                if scutil --get ComputerName | grep -q "Office"; then
-                  if ! pgrep -qx spotifyd; then
-                    spotifyd
-                    sleep 0.2 # ensure spotifyd is running
-                  fi
-                  spotify_player connect --name "spotifyd"
-                fi
-                spotify_player playback play
+              if scutil --get ComputerName | grep -q "Office"; then
+                if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+                spotify_player connect --name "spotifyd"
               fi
+              spotify_player playback play
