@@ -316,19 +316,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<array>
 			<dict>
@@ -363,7 +350,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</string>
+				<string>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -951,6 +938,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Open if folder, reveal if file. 
+# Needed as files in the trash cannot be opened.
+
+if [[ -f "$1" ]] ; then
+	open -R "$1"
+elif [[ -d "$1" ]] ; then
+	open "$1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -980,14 +997,6 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
@@ -1006,29 +1015,6 @@
 			<string>7B044726-677B-4792-A3E3-29ACE7900F6F</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1234,10 +1220,14 @@ to modify the respective hotkey</string>
 		</dict>
 		<key>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>note</key>
+			<string>open/reveal</string>
 			<key>xpos</key>
-			<real>720</real>
+			<real>745</real>
 			<key>ypos</key>
-			<real>660</real>
+			<real>600</real>
 		</dict>
 		<key>DC23B294-25E4-4CEA-841A-71546D15BD89</key>
 		<dict>
@@ -1247,17 +1237,6 @@ to modify the respective hotkey</string>
 			<real>745</real>
 			<key>ypos</key>
 			<real>90</real>
-		</dict>
-		<key>E39720F8-0017-4E21-8A8D-9C0A4C1160D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>files in the trash cannot be opened, thus revealing them instead</string>
-			<key>xpos</key>
-			<real>510</real>
-			<key>ypos</key>
-			<real>630</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>

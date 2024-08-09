@@ -17,21 +17,13 @@ function shortenSeason(title) {
 	return title.replace(/ Season (\d+)$/, " S$1");
 }
 
-/** @param {string} malId @return {string} */
-function getStreamInfo(malId) {
-	const streamingResponse = httpRequest(`https://api.jikan.moe/v4/anime/${malId}/streaming`);
-	if (!streamingResponse) return "";
-
-	const streaming = JSON.parse(streamingResponse).data.map((/** @type {{ name: string; }} */ a) =>
-		a.name.toLowerCase(),
-	);
-	const streamInfo = [];
-	if (streaming.includes("crunchyroll")) streamInfo.push("C");
-	if (streaming.includes("netflix")) streamInfo.push("N");
-	if (streaming.includes("hidive")) streamInfo.push("H");
-	if (streamInfo.length > 0) streamInfo.unshift("🛜");
-	return streamInfo.join(" ");
+/** @param {string} title @param {string} subtitle */
+function errorItem(title, subtitle) {
+	return JSON.stringify({ items: [{ title: title, subtitle: subtitle, valid: false }] });
 }
+
+// INFO streaming info not available via search API https://github.com/jikan-me/jikan-rest/issues/529
+// PERF not doing a separate call for performance reasons
 
 /** @typedef {Object} MalEntry
  * @property {number} mal_id
@@ -56,13 +48,11 @@ function run(argv) {
 	const altSearchJap = $.getenv("alt_search_jap") === "1";
 	const resultsNumber = 9; // alfred display maximum
 
+	const [_, altSearchHostname] =
+		$.getenv("alt_search_url").match(/https?:\/\/(?:www\.)?(\w+\.\w+)/) || [];
+
 	const query = argv[0];
-	// GUARD
-	if (!query) {
-		return JSON.stringify({
-			items: [{ title: "Search for an anime", subtitle: "Enter name of anime…" }],
-		});
-	}
+	if (!query) return errorItem("Search for anime", "Enter name of anime…");
 
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
@@ -71,19 +61,11 @@ function run(argv) {
 	if (!response.data) {
 		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(JSON.stringify(response));
-		return JSON.stringify({ items: [{ title: "ERROR. See debugging log." }] });
+		return errorItem("Unknown Error", "See debugging log.");
 	}
-	if (response.data.length === 0) {
-		return JSON.stringify({ items: [{ title: "No results found." }] });
-	}
+	if (response.data.length === 0) return errorItem("No Results", "");
 
-	// streaming info not available via search API, so we need to fetch it
-	// separately. For performance reasons, (and due to the API limit of 3
-	// requests per second) we only fetch the first one
-	// PENDING https://github.com/jikan-me/jikan-rest/issues/529
-	const idOfFirstResult = response.data[0].mal_id;
-	const streamInfo = getStreamInfo(idOfFirstResult);
-	let first = true;
+	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type AlfredItem[] */
 	const animeTitles = response.data.map((/** @type {MalEntry} */ anime) => {
@@ -111,13 +93,14 @@ function run(argv) {
 		const genreInfo =
 			"[" + [...demographics, ...genres, ...themes].map((genre) => genre.name).join(", ") + "]";
 
-		const stream = first ? streamInfo : "";
-		if (first) first = false;
-		const subtitle = [stream, episodesStr, scoreStr, titleJapDisplay, genreInfo]
+		const subtitle = [episodesStr, scoreStr, titleJapDisplay, genreInfo]
 			.filter((component) => (component || "").match(/\w/)) // not emojiy only
 			.join("  ");
 
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
+		const altSearchSubtitle = altSearchHostname
+			? `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`
+			: undefined;
 
 		return {
 			title: displayText,
@@ -125,8 +108,14 @@ function run(argv) {
 			arg: url,
 			quicklookurl: url,
 			mods: {
-				cmd: { arg: titleJap, valid: Boolean(titleJap) },
-				shift: { arg: altSearchTitle },
+				cmd: {
+					arg: titleJap,
+					valid: Boolean(titleJap),
+				},
+				shift: {
+					arg: altSearchTitle,
+					subtitle: altSearchSubtitle,
+				},
 			},
 		};
 	});
