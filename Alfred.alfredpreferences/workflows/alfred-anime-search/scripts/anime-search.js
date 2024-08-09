@@ -11,10 +11,16 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
-/** @param {string} title */
-function shortenSeason(title) {
-	if (!title) return "";
-	return title.replace(/ Season (\d+)$/, " S$1");
+/**
+ * @param {{title: string, type: string}[]} titles
+ * @param {string} type
+ * @param {string} fallbackType
+ * @return {string}
+ */
+function getTitle(titles, type, fallbackType) {
+	const foundTitle =
+		titles.find((t) => t.type === type) || titles.find((t) => t.type === fallbackType);
+	return foundTitle?.title.replace(/ Season (\d+)$/, " S$1") || "";
 }
 
 /** @param {string} title @param {string} subtitle */
@@ -24,20 +30,18 @@ function errorItem(title, subtitle) {
 
 // INFO streaming info not available via search API https://github.com/jikan-me/jikan-rest/issues/529
 // PERF not doing a separate call for performance reasons
-
 /** @typedef {Object} MalEntry
  * @property {number} mal_id
- * @property {string} title
- * @property {string} title_english
+ * @property {{title: string, type: string}[]} titles
  * @property {string} url
  * @property {string} status
- * @property {string[]} title_synonyms
  * @property {number} year
  * @property {number} score
  * @property {number} episodes
  * @property {{name: string}[]} genres
  * @property {{name: string}[]} themes
  * @property {{name: string}[]} demographics
+ * @property {{jpg: {large_image_url: string}, webp: {large_image_url: string}}} images
  */
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -45,15 +49,17 @@ function errorItem(title, subtitle) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const altSearchJap = $.getenv("alt_search_jap") === "1";
-	const resultsNumber = 9; // alfred display maximum
-
-	const [_, altSearchHostname] =
-		$.getenv("alt_search_url").match(/https?:\/\/(?:www\.)?(\w+\.\w+)/) || [];
-
+	// GUARD
 	const query = argv[0];
 	if (!query) return errorItem("Search for anime", "Enter name of anime…");
 
+	// PARAMETERS
+	const altSearchJap = $.getenv("alt_search_jap") === "1";
+	const resultsNumber = 9; // alfred display maximum
+	const [_, altSearchHostname] =
+		$.getenv("alt_search_url").match(/https?:\/\/(?:www\.)?(\w+\.\w+)/) || [];
+
+	// API REQUEST
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
 	const apiURL = `https://api.jikan.moe/v4/anime?limit=${resultsNumber}&q=`;
@@ -70,43 +76,42 @@ function run(argv) {
 	/** @type AlfredItem[] */
 	const animeTitles = response.data.map((/** @type {MalEntry} */ anime) => {
 		// biome-ignore format: annoyingly long list
-		const { title, title_english, title_synonyms, year, status, episodes, score, genres, themes, demographics, url } = anime;
+		const { titles, mal_id, year, status, episodes, score, genres, themes, demographics, images } = anime;
 
-		const titleEng = shortenSeason(title_english || title);
+		// TITLE
+		const titleEng = getTitle(titles, "English", "Default");
 		const yearInfo = year && !titleEng.match(/\d{4}/) ? `(${year})` : "";
-
 		let emoji = "";
 		if (status === "Currently Airing") emoji += "🎙️";
 		else if (status === "Not yet aired") emoji += "🗓️";
-
 		const displayText = [emoji, titleEng, yearInfo].filter(Boolean).join(" ");
 
+		// SUBTITLE
 		const titleJapMax = 40; // CONFIG
-		let titleJap = shortenSeason(title_english ? title : title_synonyms[0]);
+		let titleJap = getTitle(titles, "Default", "Synonym"); // default is romaji title
 		if (titleJap === titleEng) titleJap = ""; // skip identical titles
 		const titleJapDisplay =
 			"🇯🇵 " + (titleJap.length > titleJapMax ? titleJap.slice(0, titleJapMax) + "…" : titleJap);
-
 		const episodesStr = episodes && "📺 " + episodes.toString();
 		const scoreStr = score && "⭐ " + score.toFixed(1).toString();
-
 		const genreInfo =
 			"[" + [...demographics, ...genres, ...themes].map((genre) => genre.name).join(", ") + "]";
-
 		const subtitle = [episodesStr, scoreStr, titleJapDisplay, genreInfo]
 			.filter((component) => (component || "").match(/\w/)) // not emojiy only
 			.join("  ");
 
+		// ALT SEARCH & QUICKLOOK
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
 		const altSearchSubtitle = altSearchHostname
 			? `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`
 			: undefined;
+		const image = images.webp.large_image_url || images.jpg.large_image_url;
 
 		return {
 			title: displayText,
 			subtitle: subtitle,
-			arg: url,
-			quicklookurl: url,
+			arg: mal_id,
+			quicklookurl: image,
 			mods: {
 				cmd: {
 					arg: titleJap,
