@@ -1,5 +1,7 @@
 local qfHeight = 10
 
+--------------------------------------------------------------------------------
+
 return {
 	{ -- editable quickfix
 		"stevearc/quicker.nvim",
@@ -17,11 +19,23 @@ return {
 		end,
 		opts = {
 			keys = {
-				-- stylua: ignore start
-				{ "<Tab>", function() require("quicker").expand() ; vim.api.nvim_win_set_height(0, qfHeight * 2) end, desc = " Expand context" },
-				{ "<S-Tab>", function() require("quicker").collapse() ; vim.api.nvim_win_set_height(0, qfHeight) end, desc = " Collapse" },
+				{
+					"<Tab>",
+					function()
+						require("quicker").expand()
+						vim.api.nvim_win_set_height(0, math.floor(qfHeight * 2.5))
+					end,
+					desc = " Expand context",
+				},
+				{
+					"<S-Tab>",
+					function()
+						require("quicker").collapse()
+						vim.api.nvim_win_set_height(0, qfHeight)
+					end,
+					desc = " Collapse",
+				},
 				{ "<D-s>", "<cmd>update|close<CR>", desc = " Confirm changes" },
-				-- stylua: ignore end
 			},
 			edit = { autosave = true },
 			max_filename_width = function() return 23 end,

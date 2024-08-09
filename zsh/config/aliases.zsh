@@ -2,6 +2,7 @@
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
 alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
+alias spotify="spotify_player playback"
 alias j="just"
 
 # DEFAULTS
@@ -26,14 +27,6 @@ function bat { # dark-mode aware
 	local theme   # list themes via `bat --list-themes`
 	theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
-}
-
-function spotify {
-	if [[ -z "$1" ]] ; then
-		spotify_player
-	else
-		spotify_player playback "$@"
-	fi
 }
 
 # UTILS
