@@ -15,7 +15,7 @@ local videoAppWatcherForSpotify = require("modules.spotify").aw_spotify
 local function dockSwitcher(dockToUse)
 	hs.osascript.applescript(([[
 		tell application id "com.runningwithcrayons.Alfred"
-			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "%s"
+			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument %q
 		end tell
 	]]):format(dockToUse))
 end

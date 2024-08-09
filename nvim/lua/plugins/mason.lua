@@ -11,7 +11,7 @@ return {
 			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. ":" .. vim.env.PATH
 		end,
 		opts = {
-			PATH = "skip", -- since already adding manually above
+			PATH = "skip", -- since already adding to PATH above
 
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
 			-- also requires `yq` being available in the system

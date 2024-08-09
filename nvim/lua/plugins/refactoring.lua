@@ -12,18 +12,13 @@ return {
 				desc = " Toggle quickfix",
 			},
 		},
-		init = function()
-			vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-				callback = function() require("quicker").open { focus = true, min_height = qfHeight } end,
-			})
-		end,
 		opts = {
 			keys = {
 				{
 					"<Tab>",
 					function()
 						require("quicker").expand()
-						vim.api.nvim_win_set_height(0, math.floor(qfHeight * 2.5))
+						vim.api.nvim_win_set_height(0, math.floor(qfHeight * 2.2))
 					end,
 					desc = " Expand context",
 				},
