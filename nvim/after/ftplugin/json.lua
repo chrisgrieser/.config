@@ -1,3 +1,8 @@
 local keymap = require("config.utils").bufKeymap
 
-key
+keymap(
+	"n",
+	"<leader>fp",
+	"<cmd>%! yq --prettyPrint --output-format=json .<CR>",
+	{ desc = " Prettify Buffer" }
+)

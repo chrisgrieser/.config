@@ -2,7 +2,6 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
@@ -26,7 +25,7 @@ function run() {
 		.map((/** @type {{ path: string }} */ entry) => {
 			const subsite = entry.path.slice(5, -3);
 			const parts = subsite.split("/");
-			let displayTitle = parts.pop().replace(/[-_]/g, " ");
+			let displayTitle = (parts.pop() || "??").replace(/[-_]/g, " ");
 			displayTitle = displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1);
 			const category = parts.join("/");
 			const url = `${baseURL}/${subsite}`;

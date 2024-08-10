@@ -29,7 +29,7 @@ return {
 				auto_attach = true,
 				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
 			},
-			icons = { Object = "⬟ " },
+			icons = { Object = " " },
 			separator = " ",
 			depth_limit = 7,
 			depth_limit_indicator = "…",
