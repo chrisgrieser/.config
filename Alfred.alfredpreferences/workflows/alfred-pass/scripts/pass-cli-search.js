@@ -15,7 +15,7 @@ function run() {
 	// GUARD
 	if (!Application("Finder").exists(Path(passwordStore))) {
 		return JSON.stringify({
-			items: { title: "⚠️ Password Store not found.", subtitle: passwordStore, valid: false },
+			items: { title: "⚠️ Password store not found.", subtitle: passwordStore, valid: false },
 		});
 	}
 
@@ -47,7 +47,7 @@ function run() {
 	// new password
 	const disallowed = { subtitle: "🚫 Not possible for new password.", valid: false };
 	passwords.push({
-		title: "Create New Password",
+		title: "Create new password",
 		arg: "",
 		mods: {
 			cmd: disallowed,
