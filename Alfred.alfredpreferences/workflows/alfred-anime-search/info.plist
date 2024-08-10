@@ -384,6 +384,7 @@ Search all anime listed in the `myanimelist` database via the keyword `an`.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the myanimelist.net or AniList URL.
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search for the title on an alternative site, such as a
   streaming website.
+- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the hero image or `myanimelist` page of the entry.
 
 ---
 
