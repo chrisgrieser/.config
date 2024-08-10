@@ -13,6 +13,7 @@ function alfredMatcher(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	/** @type {string[]} */
 	let breadcrumbs = [];
 	const pandocDocsUrl = "https://pandoc.org/MANUAL.html";
 
@@ -26,7 +27,8 @@ function run() {
 		)
 		.map((htmlTag) => {
 			htmlTag = htmlTag.replaceAll("\r", "");
-			const [_, name, levelStr] = htmlTag.match(/id="(.*?)"\s*class="(.*?)"/);
+			const [_, name, levelStr] = htmlTag.match(/id="(.*?)"\s*class="(.*?)"/) || [];
+			if (!name || !levelStr) return {};
 			const url = `${pandocDocsUrl}#${name}`;
 
 			let displayName = name
@@ -36,7 +38,7 @@ function run() {
 				.replace(/\[$/, ""); // FIX brackets leftover in pandoc html
 
 			// construct breadcrumbs based on order of appearenace of headings
-			const lvl = levelStr.match(/\d/) ? Number.parseInt(levelStr.match(/\d/)[0]) : null;
+			const lvl = levelStr.match(/\d/) ? Number.parseInt(levelStr.match(/\d/)?.[0] || "0") : null;
 			if (lvl) {
 				// options do not get a section level
 				breadcrumbs[lvl - 1] = displayName; // set current level
@@ -65,6 +67,6 @@ function run() {
 
 	return JSON.stringify({
 		items: sectionsArr,
-		cache: { seconds: 1800 },
+		cache: { seconds: 3600 * 24 },
 	});
 }
