@@ -49,7 +49,7 @@
   "one-small-step-for-vimkind": { "branch": "main", "commit": "7ec237f828fafcbf9bf7675059a753a1bc114fdb" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
-  "quicker.nvim": { "branch": "master", "commit": "b6a3d2f6aed7882e8bea772f82ba80b5535157a9" },
+  "quicker.nvim": { "branch": "master", "commit": "7a64d4ea2b641cc8671443d0ff26de2924894c9f" },
   "refactoring.nvim": { "branch": "master", "commit": "c406fc5fb4d7ba5fce7b668637075fad6e75e9f8" },
   "render-markdown.nvim": { "branch": "main", "commit": "aff8d09a199b263f2373c842057c87b76369084f" },
   "satellite.nvim": { "branch": "main", "commit": "777ed56e1ef45ec808df701730b6597fc4fb0fbc" },
