@@ -97,6 +97,17 @@ rules:
                   set target of front Finder window to dotfiles
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # cmd+shift+r -> goto repos
+      - type: basic
+        from: { key_code: r, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "Finder"
+                  set dotfiles to (path to home folder as string) & "repos"
+                  set target of front Finder window to dotfiles
+                end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Highlights"
     manipulators:
