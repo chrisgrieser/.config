@@ -76,8 +76,10 @@ keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
 
--- automatically exit snippet mode on scroll
-vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
+vim.api.nvim_create_autocmd(
+	"WinScrolled",
+	{ callback = vim.snippet.stop, desc = "automatically exit snippet mode on scroll" }
+)
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
