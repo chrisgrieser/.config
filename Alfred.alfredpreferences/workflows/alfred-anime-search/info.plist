@@ -593,6 +593,44 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>non-shows (OVAs, movies, special)</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Exclude</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>exclude_nonshows</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>adult entries</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>exclude_nsfw</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>https://www.crunchyroll.com/search?q=</string>
 				<key>placeholder</key>
 				<string>https://www.crunchyroll.com/search?q=</string>
@@ -631,7 +669,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

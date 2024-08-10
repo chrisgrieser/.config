@@ -64,6 +64,7 @@ function run(argv) {
 	/** @type {string[]} */
 	const params = [];
 	if ($.getenv("exclude_nonshows") === "1") params.push("type=tv");
+	if ($.getenv("exclude_nsfw") === "1") params.push("sfw=true");
 
 	// API REQUEST
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
