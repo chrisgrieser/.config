@@ -4,5 +4,7 @@
 <dict>
 	<key>open_at</key>
 	<string>anilist</string>
+	<key>sorting</key>
+	<string>prioritize airing</string>
 </dict>
 </plist>
