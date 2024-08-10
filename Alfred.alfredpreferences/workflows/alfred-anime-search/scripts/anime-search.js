@@ -63,15 +63,16 @@ function run(argv) {
 	// API CALL PARAMETERS
 	/** @type {string[]} */
 	const params = [];
+	params.push("q=" + encodeURIComponent(query));
 	if ($.getenv("exclude_nonshows") === "1") params.push("type=tv");
 	if ($.getenv("exclude_nsfw") === "1") params.push("sfw=true");
 
 	// API REQUEST
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
 	// DOCS https://docs.api.jikan.moe/#tag/anime/operation/getAnimeSearch
-	const apiURL = `https://api.jikan.moe/v4/anime?${params.join("&")}&q=`;
+	const apiURL = "https://api.jikan.moe/v4/anime?" + params.join("&");
 	/** @type {{data: MalEntry[]}} */
-	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
+	const response = JSON.parse(httpRequest(apiURL));
 	if (!response.data) {
 		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(JSON.stringify(response));
