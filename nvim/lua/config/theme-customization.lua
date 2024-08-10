@@ -42,7 +42,6 @@ function M.themeModifications()
 	local mode = vim.o.background
 	local theme = mode == "light" and vim.g.lightTheme or vim.g.darkTheme
 
-
 	local function revertedTodoComments()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
 		local textColor = mode == "dark" and "#000000" or "#ffffff"
@@ -81,6 +80,7 @@ function M.themeModifications()
 		revertedTodoComments()
 		setHl("@lsp.typemod.variable.global.lua", { link = "@namespace" }) -- `vim` and `hs`
 		setHl("@lsp.typemod.variable.defaultLibrary.lua", { link = "@module.builtin" })
+		updateHl("Title", "gui=bold")
 	elseif theme == "dawnfox" then
 		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`

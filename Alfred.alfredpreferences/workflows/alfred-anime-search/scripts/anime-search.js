@@ -58,6 +58,7 @@ function run(argv) {
 	const resultsNumber = 9; // alfred display maximum
 	const [_, altSearchHostname] =
 		$.getenv("alt_search_url").match(/https?:\/\/(?:www\.)?(\w+\.\w+)/) || [];
+	const quicklookMal = $.getenv("quicklook_at") === "mal";
 
 	// API REQUEST
 	// INFO rate limit: 60 requests/minute https://docs.api.jikan.moe/#section/Information/Rate-Limiting
@@ -76,7 +77,7 @@ function run(argv) {
 	/** @type AlfredItem[] */
 	const animeTitles = response.data.map((/** @type {MalEntry} */ anime) => {
 		// biome-ignore format: annoyingly long list
-		const { titles, mal_id, year, status, episodes, score, genres, themes, demographics, images } = anime;
+		const { titles, mal_id, year, status, episodes, score, genres, themes, demographics, images, url } = anime;
 
 		// TITLE
 		const titleEng = getTitle(titles, "English", "Default");
@@ -100,17 +101,20 @@ function run(argv) {
 			.filter((component) => (component || "").match(/\w/)) // not emojiy only
 			.join("  ");
 
-		// ALT SEARCH & QUICKLOOK
+		// ALT SEARCH
 		const altSearchTitle = altSearchJap ? titleJap : titleEng;
 		const altSearchSubtitle = `⇧: Search for "${altSearchTitle}" at ${altSearchHostname}`;
 		const altSearchURL = $.getenv("alt_search_url") + encodeURIComponent(altSearchTitle);
+
+		// QUICKLOOK
 		const image = images.webp.large_image_url || images.jpg.large_image_url;
+		const quicklook = quicklookMal ? url : image;
 
 		return {
 			title: displayText,
 			subtitle: subtitle,
 			arg: mal_id, // will get URL from it
-			quicklookurl: image,
+			quicklookurl: quicklook, // also affects AlfredExtraPane
 			variables: { action: "open" },
 			mods: {
 				alt: {
