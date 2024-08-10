@@ -172,7 +172,7 @@ style = "bold red"
 
 [nodejs]
 style = "bold yellow"
-format = '  [${symbol} $version]($style)'
+format = ' [$symbol$version]($style)'
 version_format = "$major.$minor"
 # disabled detecting via extensions; detect only via `package.json` or
 # `node_modules` to avoid false positives for stuff like Alfred workflows
