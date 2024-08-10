@@ -541,6 +541,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>relevance</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>relevance</string>
+						<string>relevance</string>
+					</array>
+					<array>
+						<string>prioritze airing</string>
+						<string>prioritize airing</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Sorting</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>sorting</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>image</string>
 				<key>pairs</key>
 				<array>
@@ -555,7 +581,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>If installed, this affects what is previed with AlfredExtraPane.</string>
+			<string>If installed, this also affects what is previewed with AlfredExtraPane.</string>
 			<key>label</key>
 			<string>QuickLook</string>
 			<key>type</key>

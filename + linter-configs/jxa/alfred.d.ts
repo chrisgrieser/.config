@@ -56,7 +56,7 @@ declare class AlfredItem {
 declare class AlfredModifierKey {
 	title?: string | undefined;
 	subtitle?: string | undefined;
-	arg?: string | string[] | undefined;
+	arg?: string | string[] | number | undefined;
 	valid?: boolean | undefined;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	variables?: Record<string, any> | undefined;
