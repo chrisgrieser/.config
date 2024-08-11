@@ -18,12 +18,7 @@ fi
 selection="$*"
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
-
-# `$prompt` is reserved variable in zsh, thus using `$the_prompt`
-# also, escape quotes and line breaks in prompt for JSON
-selection=${selection//
-/\\\\n}
-the_prompt=$(echo "$static_prompt $selection" | sed -e 's/"/\\"/g')
+echo "$selection" > "$cache/selection.txt"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -37,7 +32,7 @@ temp=$(echo "scale = 1; $temperature / 10" | bc)
 response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
 	-H "Content-Type: application/json" \
 	-H "Authorization: Bearer $apikey" \
-	-d "{ \"model\": \"$openai_model\", \"messages\": [{\"role\": \"user\", \"content\": \"$the_prompt\"}], \"temperature\": $temp }")
+	-d "{ \"model\": \"$openai_model\", \"messages\": [{\"role\": \"user\", \"content\": \"$static_prompt $(cat "$cache/selection.txt")\"}], \"temperature\": $temp }")
 
 if [[ -z "$response" ]]; then
 	echo "ERROR: Timeout, no response by OpenAI API."
@@ -48,7 +43,7 @@ fi
 # GET THE CONTENT
 # via JXA to avoid `jq` dependency
 
-echo "$response" >"$cache/response.json"
+echo "$response" > "$cache/response.json"
 text=$(osascript -l JavaScript -e '
 	ObjC.import("stdlib");
 	const path = $.getenv("alfred_workflow_cache") + "/response.json";
@@ -61,7 +56,8 @@ text=$(osascript -l JavaScript -e '
 ')
 
 if [[ -z "$text" ]]; then
-	echo "ERROR: OpenAI response: $response"
+	echo "ERROR: Please open a GitHub issue, including the following response from the OpenAI API:"
+	echo "$response"
 	exit 1
 fi
 
@@ -74,8 +70,8 @@ if [[ "$output_type" == "plain" ]]; then
 fi
 
 # MARKUP via git-diff
-echo "$selection" >"$cache/selection.txt"
-echo "$text" >"$cache/rephrased.txt"
+echo "$selection" > "$cache/selection.txt"
+echo "$text" > "$cache/rephrased.txt"
 
 # https://unix.stackexchange.com/questions/677764/show-differences-in-strings
 diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
