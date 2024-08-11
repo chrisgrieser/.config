@@ -39,7 +39,7 @@ function _gitlog {
 				-e 's/tag: / /g' \
 				-e 's/ -> /   /g' \
 				-e 's/\* /· /' \
-				-Ee $'s/ (release|bump):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
+				-Ee $'s/ (release|bump|publish|init|bot):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
 				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
 				-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
@@ -49,7 +49,7 @@ function _gitlog {
 }
 
 function _list_files_here {
-	if [[ ! -x "$(command -v eza)" ]]; then print "\033[1;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
+	if [[ ! -x "$(command -v eza)" ]]; then print "\033[0;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
 	local eza_output
 	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
@@ -109,9 +109,9 @@ function _gitstatus {
 function _magic_dashboard {
 	# check if pwd still exists
 	if [[ ! -d "$PWD" ]]; then
-		printf '\033[1;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
+		printf '\033[0;33m"%s" has been moved or deleted.\033[0m\n' "$(basename "$PWD")"
 		if [[ -d "$OLDPWD" ]]; then
-			print '\033[1;33mMoving to last directory.\033[0m\n'
+			print '\033[0;33mMoving to last directory.\033[0m\n'
 			# shellcheck disable=2164
 			cd "$OLDPWD"
 		fi
