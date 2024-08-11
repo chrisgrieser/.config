@@ -80,7 +80,7 @@ return {
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
-		ft = { "css", "scss", "zsh", "lua", "toml" },
+		ft = { "css", "zsh", "lua", "toml" },
 		config = function(spec)
 			local ccc = require("ccc")
 
@@ -128,16 +128,16 @@ return {
 	},
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
-		init = function()
+		init = function(spec)
 			---@diagnostic disable: duplicate-set-field
-			vim.ui.select = function(items, opts, on_choice)
-				require("lazy").load { plugins = { "dressing.nvim" } }
-				return vim.ui.select(items, opts, on_choice)
+			vim.ui.select = function(...)
+				require("lazy").load { plugins = { spec.name } }
+				return vim.ui.select(...)
 			end
 
-			vim.ui.input = function(opts, on_confirm)
-				require("lazy").load { plugins = { "dressing.nvim" } }
-				return vim.ui.input(opts, on_confirm)
+			vim.ui.input = function(...)
+				require("lazy").load { plugins = { spec.name } }
+				return vim.ui.input(...)
 			end
 			---@diagnostic enable: duplicate-set-field
 		end,

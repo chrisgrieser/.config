@@ -349,7 +349,6 @@ return {
 	{ -- quick adding log statements
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
-		event = "VeryLazy",
 		opts = {
 			marker = "🖨️",
 			logStatements = {
