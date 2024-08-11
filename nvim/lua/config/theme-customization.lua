@@ -127,6 +127,7 @@ local function toggleUnderlines()
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
 	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)
+	updateHl("Underlined", "gui=" .. change)
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
