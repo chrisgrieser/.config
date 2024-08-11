@@ -1,77 +1,31 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
-
-# API KEY
-apikey=$alfred_apikey
-[[ -z "$apikey" ]] && apikey="$OPENAI_API_KEY" # defined in .zshenv
-
-# GUARD
-if [[ -z "$apikey" ]]; then
-	echo "⚠️ No API key found."
-	exit 1
-fi
-
-#───────────────────────────────────────────────────────────────────────────────
-# CONSTRUCT PROMPT
+# CALL OPENAI API via JXA, since it properly handles JSON without needing a dependency
 
 selection="$*"
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
-echo "$selection" > "$cache/selection.txt"
+rephrased=$(osascript -l JavaScript "./scripts/openai-request.js" "$selection")
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# OPENAI API CALL
-# workaround, as openAI requires temp between 0 and 1, but ALfred's number
-# slider only allows full integers
-temp=$(echo "scale = 1; $temperature / 10" | bc)
-[[ $temp -lt 1 ]] && temp="0$temp" # add leading zero required by OpenAI API
-
-# DOCS https://platform.openai.com/docs/api-reference/making-requests
-response=$(curl --silent --max-time 15 https://api.openai.com/v1/chat/completions \
-	-H "Content-Type: application/json" \
-	-H "Authorization: Bearer $apikey" \
-	-d "{ \"model\": \"$openai_model\", \"messages\": [{\"role\": \"user\", \"content\": \"$static_prompt $(cat "$cache/selection.txt")\"}], \"temperature\": $temp }")
-
-if [[ -z "$response" ]]; then
-	echo "ERROR: Timeout, no response by OpenAI API."
-	exit 1
-fi
-
-#───────────────────────────────────────────────────────────────────────────────
-# GET THE CONTENT
-# via JXA to avoid `jq` dependency
-
-echo "$response" > "$cache/response.json"
-text=$(osascript -l JavaScript -e '
-	ObjC.import("stdlib");
-	const path = $.getenv("alfred_workflow_cache") + "/response.json";
-	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-	const text = ObjC.unwrap(str);
-	const response = JSON.parse(text);
-	const content = response?.choices?.[0].message?.content || "";
-	content; // direct return
-')
-
-if [[ -z "$text" ]]; then
-	echo "ERROR: Please open a GitHub issue, including the following response from the OpenAI API:"
-	echo "$response"
-	exit 1
+# GUARD
+[[ -z "$rephrased" ]] && rephrased="ERROR: Unknown error."
+if [[ "$rephrased" =~ ^ERROR ]]; then
+	echo "$rephrased"
+	return 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # OUTPUT
 
 if [[ "$output_type" == "plain" ]]; then
-	echo "$text"
+	echo "$rephrased"
 	exit 0
 fi
 
 # MARKUP via git-diff
 echo "$selection" > "$cache/selection.txt"
-echo "$text" > "$cache/rephrased.txt"
+echo "$rephrased" > "$cache/rephrased.txt"
 
 # https://unix.stackexchange.com/questions/677764/show-differences-in-strings
 diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
