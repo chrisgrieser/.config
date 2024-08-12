@@ -16,8 +16,8 @@ rules:
           - shell_command: |
               export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               info=$(spotify_player get key playback)
-              artist=$(echo $info | yq ".item.artists[0].name")
-              song=$(echo $info | yq ".item.name")
+              artist=$(echo "$info" | yq ".item.artists[0].name")
+              song=$(echo "$info" | yq ".item.name")
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                   --title "Spotify" --message "💚 $artist – $song"
               spotify_player like
@@ -38,10 +38,11 @@ rules:
 
               if scutil --get ComputerName | grep -q "Office"; then
                 if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
-                spotify_player connect --name "spotifyd"
+                device="spotifyd"
               else
-                spotify_player connect --name "Wohnzimmer Echo"
+                device="Wohnzimmer Echo"
               fi
+              spotify_player connect --name "$device"
               spotify_player playback play
 
       - type: basic
@@ -53,8 +54,9 @@ rules:
 
               if scutil --get ComputerName | grep -q "Office"; then
                 if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
-                spotify_player connect --name "spotifyd"
+                device="spotifyd"
               else
-                spotify_player connect --name "Wohnzimmer Echo"
+                device="Wohnzimmer Echo"
               fi
+              spotify_player connect --name "$device"
               spotify_player playback play
