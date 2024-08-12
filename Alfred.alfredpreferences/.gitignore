@@ -1,7 +1,2 @@
 # ignore pycache folders from external workflows
 **/__pycache__/
-
-# Alfred workflow files stuff accidentally left over
-*.alfredworkflow
-workflows/**/assets/showcase*.png
-workflows/**/assets/showcase*.gif

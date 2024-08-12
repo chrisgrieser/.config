@@ -1,18 +1,12 @@
-# Alfred config, but keep the workflows
-preferences
-remote
-resources
-themes
-workflowextras
-
-# reddit workflow
-subreddit_icons/*
+# ignore all Alfred configs except the workflows
+/*
+!/workflows/
 
 # images
-workflows/**/*.png
+/workflows/**/*.png
 
 # 3rd-party workflows, manually marked as such
-workflows/*\[3rd-Party\]
+/workflows/*\[3rd-Party\]
 
 # these are symlinked multiple times, no need for them to crowd the results
 alfred.d.ts

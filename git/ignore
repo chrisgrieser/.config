@@ -2,13 +2,10 @@
 .DS_Store
 *.icloud
 
-# Icon must end with two \r (`^M` /  in vim)
-Icon
+# https://stackoverflow.com/questions/17556250/how-to-ignore-icon-in-git
+Icon[]
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# jujustu
-.jj
 
 # conform.nvim
 .conform.*
