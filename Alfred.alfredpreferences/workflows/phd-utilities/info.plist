@@ -21,6 +21,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE244078-4A21-445D-9C22-C75F66AB2237</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<array>
 			<dict>
@@ -137,7 +160,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>PhD Utilities</string>
+	<string>News Research</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -361,27 +384,54 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://archive.is/{query}</string>
+				<string>https://web.archive.org/web/*/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
+			<string>CE244078-4A21-445D-9C22-C75F66AB2237</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>wayback||archive</string>
+				<key>subtext</key>
+				<string>Wayback Machine &amp; archive.is</string>
+				<key>text</key>
+				<string>Search Archives: {query}</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</string>
+			<string>87415244-9890-4029-96CC-7E577B4387E9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://archive.is/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -403,6 +453,21 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>D37D24AA-2684-4983-94DF-C099102D3C28</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -476,20 +541,20 @@
 		<key>5F0950F7-E1AC-422C-8F2E-82518BF9F068</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>10</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>390</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>650</real>
 		</dict>
 		<key>6935998C-ACB6-4719-94AE-24E7616DB283</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>390</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>885</real>
 		</dict>
 		<key>6EAC9A2F-9B0C-44E2-A72F-C82992ADBE28</key>
 		<dict>
@@ -499,6 +564,17 @@
 			<real>220</real>
 			<key>ypos</key>
 			<real>165</real>
+		</dict>
+		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>tech news search</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>585</real>
 		</dict>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<dict>
@@ -540,23 +616,32 @@
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
+		<key>CE244078-4A21-445D-9C22-C75F66AB2237</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>530</real>
+		</dict>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>220</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>775</real>
 		</dict>
 		<key>D37D24AA-2684-4983-94DF-C099102D3C28</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>420</real>
+			<real>390</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>770</real>
 		</dict>
 		<key>EDCF7445-7018-43F6-A236-C9766D2A4F07</key>
 		<dict>
@@ -578,7 +663,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>775</real>
 		</dict>
 		<key>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</key>
 		<dict>
