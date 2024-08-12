@@ -51,7 +51,7 @@ const rgIgnoreFile =
 
 /** @typedef {Object} SearchConfig
  * @property {string} shellCmd `%s` is replaced with `dir`
- * @property {boolean=} shallow whether the `shellCmd` performs a search of depth 1
+ * @property {boolean=} shallowOutput whether the `shellCmd` performs a search of depth 1
  * @property {boolean=} absPathOutput whether the `shellCmd` gives absolute paths as output
  * @property {string=} directory where to search
  * @property {number=} maxFiles if not set, all files are returned
@@ -72,14 +72,14 @@ const searchConfig = {
 	[$.getenv("downloads_keyword")]: {
 		shellCmd: `ls -t "%s"`,
 		directory: $.getenv("downloads_folder"),
-		shallow: true,
+		shallowOutput: true,
 	},
 	[$.getenv("trash_keyword")]: {
 		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
 		// INFO not using `rg`, since it will not find folders
 		shellCmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
-		shallow: true,
+		shallowOutput: true,
 	},
 	[$.getenv("tag_keyword")]: {
 		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
@@ -89,9 +89,11 @@ const searchConfig = {
 	[$.getenv("frontwin_keyword")]: {
 		shellCmd: `ls -t "%s"`,
 		directory: getFrontWin(),
-		shallow: true,
+		shallowOutput: true,
 	},
 };
+
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -102,9 +104,11 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
 
-	// EXECUTE SEARCH
-	let { shellCmd, directory, absPathOutput, shallow, maxFiles, prefix } = searchConfig[keyword];
+	// PARAMETERS
+	let { shellCmd, directory, absPathOutput, shallowOutput, maxFiles, prefix } = searchConfig[keyword];
 	prefix = prefix ? prefix + " " : "";
+
+	// EXECUTE SEARCH
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
 	if (keyword === $.getenv("frontwin_keyword") && directory === "") {
 		return errorItem("⚠️ No Finder window found.");
@@ -121,7 +125,7 @@ function run() {
 			const absPath = absPathOutput ? line : directory + "/" + line;
 
 			let subtitle = "";
-			if (!shallow) {
+			if (!shallowOutput) {
 				const parent = absPath.split("/").slice(0, -1).join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁").replace(/\/Users\/\w+/, "~");
 			}
@@ -142,6 +146,6 @@ function run() {
 		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
-	// `alfred_workflow_keyword` https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
+	// the `alfred_workflow_keyword` environment variable https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
 	return JSON.stringify({ items: results });
 }
