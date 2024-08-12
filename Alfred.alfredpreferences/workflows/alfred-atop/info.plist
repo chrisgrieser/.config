@@ -1775,7 +1775,7 @@ Display mounted volumes directly via `vol`.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>comma-separated list of full device names to excluded</string>
+			<string>comma-separated list of full device names to be excluded</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
