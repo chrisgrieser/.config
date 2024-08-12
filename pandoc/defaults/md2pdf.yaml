@@ -19,19 +19,19 @@ variables:
   linestretch: 1.4 # = line-height
 
 # Reports
-verbosity: WARNING
 fail-if-warnings: true
-pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to WARNING
+verbosity: WARNING
+pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to `WARNING`
 metadata: { title: "DUMMY" } # suppress irrelevant warning if file has no h1
 
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL
 
 # Headings
+shift-heading-level-by: -1 # h1 -> title, h2 -> h1
 number-sections: false
 table-of-contents: false
 toc-depth: 3
-shift-heading-level-by: -1 # h1 -> title, h2 -> h1
 
 # Images
 resource-path: [., ./attachments]
