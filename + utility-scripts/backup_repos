@@ -28,7 +28,7 @@ i=0
 echo "$repos" | while read -r repo; do
 	((i++))
 	print "\e[1;34m$repo ($i/$repos_count)\e[0m"
-	git clone "git@github.com:$repo.git" # full clones, not shalow ones
+	git clone --no-progress "git@github.com:$repo.git"
 	echo
 done
 
@@ -37,14 +37,11 @@ isodate=$(date +%Y-%m-%d)
 archive_name="${repos_count} Repos – ${isodate}.zip"
 zip --recurse-paths --symlinks --quiet "../$archive_name" . || return 1
 
-#───────────────────────────────────────────────────────────────────────────────
 # restrict number of backups
 cd "$backup_location" || return 1
 # shellcheck disable=2012
 ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
-
 rm -rf "$backup_location/temp"
-#───────────────────────────────────────────────────────────────────────────────
 
 # notify
 print "\e[1;32mArchived $repos_count repos.\e[0m"
