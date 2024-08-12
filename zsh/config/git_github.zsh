@@ -8,8 +8,8 @@ alias gI='gh issue list --state=closed'
 alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
-alias push='git push --no-progress'
-alias pull='git pull --no-progress'
+alias push='git push'
+alias pull='git pull'
 alias rebase='git rebase --interactive'
 alias reset='git reset'
 
