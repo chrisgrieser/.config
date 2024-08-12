@@ -437,7 +437,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Recently changed files in home folder…</string>
+				<string>Recently changed files in home folder and iCloud…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1019,7 +1019,7 @@ fi</string>
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- Search for recently modified files in your home folder with the keyword `recent`. ([Searching for recent files is a weak point on macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/).)
+- Search for recently modified files in your home folder and iCloud documents with the keyword `recent`. ([Searching for recent files is a weak point on macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/).)
 - Access files in your Downloads folder with `downloads`.
 - Search for files in the front Finder window via `win`.
 - Access files files you have assigned a Finder tag of your choice via `tag`.
@@ -1057,7 +1057,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>recent files in home</string>
+			<string>recent files in Home and iCloud</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
