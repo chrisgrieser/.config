@@ -47,7 +47,7 @@ const rgIgnoreFile =
 	$.getenv("alfred_preferences") +
 	"/workflows/" +
 	$.getenv("alfred_workflow_uid") +
-	"/scripts/rg-ignore";
+	"/scripts/home-icloud-ignore-file";
 
 /** @typedef {Object} SearchConfig
  * @property {string} shellCmd `%s` is replaced with `dir`
@@ -76,6 +76,7 @@ const searchConfig = {
 	},
 	[$.getenv("trash_keyword")]: {
 		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
+		// INFO not using `rg`, since it will not find folders
 		shellCmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
 		shallow: true,
@@ -122,7 +123,7 @@ function run() {
 			let subtitle = "";
 			if (!shallow) {
 				const parent = absPath.split("/").slice(0, -1).join("/");
-				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁️").replace(/\/Users\/\w+/, "~");
+				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁").replace(/\/Users\/\w+/, "~");
 			}
 
 			const ext = name.split(".").pop() || "";

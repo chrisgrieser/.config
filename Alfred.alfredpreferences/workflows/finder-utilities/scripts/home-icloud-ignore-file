@@ -9,7 +9,7 @@ Icon[]
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# ignore everything in library, but include iCloud 
+# ignore everything in `Library` except the iCloud documents
 # needs to be written this convoluted way since git does not search ignored
 # directories https://stackoverflow.com/a/5285539/22114136
 /Library/*
