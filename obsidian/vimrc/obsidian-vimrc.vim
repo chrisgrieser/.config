@@ -324,8 +324,8 @@ exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.conf
 nnoremap ,ps :openSnippetDir
 
 " open [t]heme directory
-exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/themes'); }
-nnoremap ,pt :openSnippetDir
+exmap openThemeDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/themes'); }
+nnoremap ,pt :openThemeDir
 
 " open [a]ppearance settings
 exmap openAppearanceSettings jsfile Meta/vimrc-jsfile.js { openAppearanceSettings() }

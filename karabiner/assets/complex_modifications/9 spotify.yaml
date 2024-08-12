@@ -39,6 +39,8 @@ rules:
               if scutil --get ComputerName | grep -q "Office"; then
                 if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
                 spotify_player connect --name "spotifyd"
+              else
+                spotify_player connect --name "Wohnzimmer Echo"
               fi
               spotify_player playback play
 
@@ -52,5 +54,7 @@ rules:
               if scutil --get ComputerName | grep -q "Office"; then
                 if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
                 spotify_player connect --name "spotifyd"
+              else
+                spotify_player connect --name "Wohnzimmer Echo"
               fi
               spotify_player playback play
