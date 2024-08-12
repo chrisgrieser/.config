@@ -1,4 +1,4 @@
-local qfHeight = 10
+local qfHeight = 15
 
 --------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ return {
 					"<Tab>",
 					function()
 						require("quicker").expand()
-						vim.api.nvim_win_set_height(0, math.floor(qfHeight * 2.2))
+						vim.api.nvim_win_set_height(0, math.floor(qfHeight * 2))
 					end,
 					desc = " Expand context",
 				},
