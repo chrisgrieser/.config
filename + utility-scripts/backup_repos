@@ -10,9 +10,7 @@ ignore_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | cut -c2- |
 
 #───────────────────────────────────────────────────────────────────────────────
 
-set -e
-
-# get all repos
+# GET ALL REPOS
 # only non-forked, non-archived repos
 repos=$(gh repo list --limit=200 --no-archived --source --json="nameWithOwner" --jq=".[].nameWithOwner" |
 	grep --extended-regexp --invert-match "$ignore_repos")
@@ -21,7 +19,7 @@ if [[ repos_count -ge 100 ]]; then
 	print "\e[1;33mMore than 100 repos. Unclear whether GitHub API allows for so many listings, so need to manually check that all repos are included.\e[0m"
 fi
 
-# download repos
+# DOWNLOAD REPOS
 mkdir -p "$backup_location/temp"
 cd "$backup_location/temp" || return 1
 i=0
@@ -32,17 +30,18 @@ echo "$repos" | while read -r repo; do
 	echo
 done
 
-# archive them
+# ARCHIVE THEM
 isodate=$(date +%Y-%m-%d)
 archive_name="${repos_count} Repos – ${isodate}.zip"
 zip --recurse-paths --symlinks --quiet "../$archive_name" . || return 1
 
-# restrict number of backups
+# RESTRICT NUMBER OF BACKUPS
 cd "$backup_location" || return 1
 # shellcheck disable=2012
 ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
 rm -rf "$backup_location/temp"
 
-# notify
+# NOTIFY
 print "\e[1;32mArchived $repos_count repos.\e[0m"
-"$ZDOTDIR/notificator" --title "🌐Repo Backup" --message "$repos_count repos archived." --sound "Blow"
+"$ZDOTDIR/notificator" --title "🌐Repo Backup" \
+	--message "$repos_count repos archived." --sound "Blow"
