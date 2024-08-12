@@ -8,6 +8,7 @@
 # PDF-WRITER
 writer: pdf
 pdf-engine: weasyprint # `wkhtmltopdf` is deprecated, `prince` adds watermark
+template: empty # empty does not require an h1 to be present
 
 # https://pandoc.org/MANUAL.html#variables-for-html
 variables:
@@ -21,13 +22,13 @@ variables:
 verbosity: WARNING
 fail-if-warnings: true
 pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to WARNING
-metadata: { title: "foobar" } # suppress irrelevant warning if file has no h1
+metadata: { title: "DUMMY" } # suppress irrelevant warning if file has no h1
 
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL
 
 # Headings
-number-sections: true
+number-sections: false
 table-of-contents: false
 toc-depth: 3
 shift-heading-level-by: -1 # h1 -> title, h2 -> h1
@@ -36,5 +37,7 @@ shift-heading-level-by: -1 # h1 -> title, h2 -> h1
 resource-path: [., ./attachments]
 
 # MARKDOWN-READER https://pandoc.org/MANUAL.html#extensions
-reader: |
-  markdown+lists_without_preceding_blankline+mark+wikilinks_title_after_pipe+rebase_relative_paths
+reader: "markdown\
+  +lists_without_preceding_blankline\
+  +mark+wikilinks_title_after_pipe\
+  +rebase_relative_paths"
