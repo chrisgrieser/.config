@@ -13,7 +13,7 @@ const banner = api.Front.showBanner;
 async function copyAndNotify(text) {
 	await navigator.clipboard.writeText(text);
 	if (text.length > 50) text = text.slice(0, 50) + "…";
-	banner("Copied:\n" + text);
+	banner("Copied: " + text);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
