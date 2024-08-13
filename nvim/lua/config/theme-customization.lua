@@ -80,7 +80,8 @@ function M.themeModifications()
 		revertedTodoComments()
 		setHl("@lsp.typemod.variable.global.lua", { link = "@namespace" }) -- `vim` and `hs`
 		setHl("@lsp.typemod.variable.defaultLibrary.lua", { link = "@module.builtin" })
-		updateHl("Title", "gui=bold")
+		setHl("Title", { fg = "#7c84da", bold = true })
+		setHl("Conceal", { link = "NonText" })
 	elseif theme == "dawnfox" then
 		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
