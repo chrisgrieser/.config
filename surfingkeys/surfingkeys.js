@@ -13,7 +13,7 @@ const banner = api.Front.showBanner;
 async function copyAndNotify(text) {
 	await navigator.clipboard.writeText(text);
 	if (text.length > 50) text = text.slice(0, 50) + "…";
-	banner("Copied: " + text);
+	banner("Copied:\n" + text);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -135,11 +135,12 @@ mapkey("yy", "Copy Link", async () => {
 
 // MISC
 mapkey("P", "Incognito window", () => RUNTIME("openIncognito", { url: window.location.href }));
-map("p", "<Alt-p>", null, "pin");
-mapkey("i", "Passthrough", () => Normal.PassThrough(600));
+map("p", "<Alt-p>", null, "Pin Tab");
+mapkey("i", "Passthrough", () => Normal.PassThrough(1000));
+map("x", "<Alt-s>", null, "Start/Pause Surfingkeys");
 
 // HACK open config via hammerspoon, as browser is sandboxed and cannot open files
-mapkey(",", "Open Surfingkeys config", () => window.open("hammerspoon://open-surfingkeys-config"));
+mapkey(",", "Open Surfingkeys config", () => window.open("h"));
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
@@ -157,14 +158,13 @@ unmap("j", /google.com/); // websearch navigator
 unmap("k", /google.com/); // websearch navigator
 unmap("c", /google.com/); // Grepper
 
-// YouTube controls
-unmap("j", /youtube.com/);
-unmap("k", /youtube.com/);
-unmap("l", /youtube.com/);
+for (const key of ["j", "k", "l", "f", "i", "t", "N", "P"]) {
+	unmap(key, /youtube.com/);
+}
 
 // for BetterTouchTool Mappings
 unmap("f", /crunchyroll.com/);
-unmap("N", /(crunchyroll|youtube).com/);
+unmap("N", /crunchyroll.com/);
 
 // cheatsheets on those websites
 unmap("?", /(github|reddit|youtube).com|devdocs.io/);
@@ -213,9 +213,15 @@ mapkey(
 			banner("No timestamp found.");
 			return;
 		}
-		const [_, hh, mm, ss] = timestamp.match(/(\d+):(\d+):(\d+)/) || [];
-		const timeSecs = Number(timestamp.split(":")[0]) * 60 + Number(timestamp.split(":")[1]);
-		const url = window.location.href + "&t=" + timeSecs;
+
+		// calculate total seconds as youtube uses that
+		const time = timestamp.split(":");
+		const ss = Number.parseInt(time.pop() || "0");
+		const mm = Number.parseInt(time.pop() || "0");
+		const hh = Number.parseInt(time.pop() || "0");
+		const totalSecs = 3600 * hh + 60 * mm + ss;
+
+		const url = `${window.location.href}&t=${totalSecs}s`;
 		const mdTimestamp = `[${timestamp}](${url})`;
 		await copyAndNotify(mdTimestamp);
 	},
