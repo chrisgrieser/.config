@@ -67,54 +67,6 @@ settings.theme = `
 }`;
 
 //──────────────────────────────────────────────────────────────────────────────
-// SITE-SPECIFIC SETTINGS
-
-// Google extensions
-unmap("j", /google/); // websearch navigator
-unmap("k", /google/); // websearch navigator
-unmap("c", /google/); // Grepper
-
-// for BetterTouchTool Mappings
-unmap("f", /crunchyroll/);
-unmap("N", /crunchyroll|youtube/);
-
-// cheatsheets on those websites
-unmap("?", /github|reddit|devdocs.io/);
-
-// biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
-mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io/ });
-
-mapkey(
-	"gu",
-	"go up to subreddit",
-	() => {
-		const redditRegex = /https:\/\/(new|old|www)\.reddit\.com\/r\/\w+/;
-		const subredditUrl = window.location.href.match(redditRegex)?.[0];
-		if (subredditUrl) window.location.href = subredditUrl;
-	},
-	{ domain: /reddit\.com/ },
-);
-
-mapkey("yg", "Copy GitHub Link", async () => {
-	if (window.location.host !== "github.com") {
-		banner("Not at GitHub.");
-		return;
-	}
-	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
-	await copyAndNotify(repo);
-});
-mapkey("gI", "Open GitHub issues", () => {
-	if (window.location.host !== "github.com") {
-		banner("Not at GitHub.");
-		return;
-	}
-	const url = window.location.href;
-	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
-	window.location.href = `https://github.com/${repo}/issues`;
-});
-
-//──────────────────────────────────────────────────────────────────────────────
 
 // HJKL: SCROLL MOVEMENTS
 settings.scrollStepSize = 300;
@@ -195,6 +147,79 @@ map("-", "/");
 
 vmapkey("s", "Search Selection with Google", () =>
 	searchSelectedWith("https://www.google.com/search?q="),
+);
+
+//──────────────────────────────────────────────────────────────────────────────
+// SITE-SPECIFIC SETTINGS
+
+// Google extensions
+unmap("j", /google.com/); // websearch navigator
+unmap("k", /google.com/); // websearch navigator
+unmap("c", /google.com/); // Grepper
+
+// YouTube controls
+unmap("j", /youtube.com/);
+unmap("k", /youtube.com/);
+unmap("l", /youtube.com/);
+
+// for BetterTouchTool Mappings
+unmap("f", /crunchyroll.com/);
+unmap("N", /(crunchyroll|youtube).com/);
+
+// cheatsheets on those websites
+unmap("?", /(github|reddit|youtube).com|devdocs.io/);
+
+// biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
+mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io/ });
+
+mapkey(
+	"gu",
+	"go up to subreddit",
+	() => {
+		const redditRegex = /https:\/\/(new|old|www)\.reddit\.com\/r\/\w+/;
+		const subredditUrl = window.location.href.match(redditRegex)?.[0];
+		if (subredditUrl) window.location.href = subredditUrl;
+	},
+	{ domain: /reddit\.com/ },
+);
+
+mapkey(
+	"yg",
+	"Copy GitHub Link",
+	async () => {
+		const url = window.location.href;
+		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
+		await copyAndNotify(repo);
+	},
+	{ domain: /github\.com/ },
+);
+mapkey(
+	"gI",
+	"Open GitHub issues",
+	() => {
+		const url = window.location.href;
+		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
+		window.location.href = `https://github.com/${repo}/issues`;
+	},
+	{ domain: /github\.com/ },
+);
+
+mapkey(
+	"yt",
+	"Copy YouTube timestamp",
+	async () => {
+		const timestamp = document.querySelector(".ytp-time-current")?.innerHTML;
+		if (!timestamp) {
+			banner("No timestamp found.");
+			return;
+		}
+		const [_, hh, mm, ss] = timestamp.match(/(\d+):(\d+):(\d+)/) || [];
+		const timeSecs = Number(timestamp.split(":")[0]) * 60 + Number(timestamp.split(":")[1]);
+		const url = window.location.href + "&t=" + timeSecs;
+		const mdTimestamp = `[${timestamp}](${url})`;
+		await copyAndNotify(mdTimestamp);
+	},
+	{ domain: /youtube\.com/ },
 );
 
 //──────────────────────────────────────────────────────────────────────────────
