@@ -109,13 +109,6 @@ end):start()
 -- app-hotkeys
 u.appHotkey("Hammerspoon", { "cmd" }, "q", hs.closeConsole) -- prevent accidental quitting
 u.appHotkey("Hammerspoon", { "cmd" }, "k", hs.console.clearConsole)
-u.appHotkey("Hammerspoon", { "cmd", "shift" }, "c", function()
-	local consoleHistory = cons.getHistory()
-	if not consoleHistory then return end
-	local lastcommand = consoleHistory[#consoleHistory]
-	hs.pasteboard.setContents(lastcommand)
-	u.notify(("Copied: %q"):format(lastcommand))
-end)
 
 --------------------------------------------------------------------------------
 -- Separator the logs every day at midnight
