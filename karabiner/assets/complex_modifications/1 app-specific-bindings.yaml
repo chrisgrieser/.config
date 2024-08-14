@@ -20,6 +20,8 @@ rules:
               fi
               # global MacWhisper shortcut
               osascript -e 'tell application "System Events" to keystroke "w" using {command down, control down, option down}'
+              # userscript keybinding for copying youtube timestamp
+              osascript -e 'tell application "System Events" to keystroke "y" using {control down}'
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
