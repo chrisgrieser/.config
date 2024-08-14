@@ -36,37 +36,7 @@
 		},
 		"Anchor": {
 			"type": "object",
-			"additionalProperties": false,
-			"properties": {
-				"conditions": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AnchorCondition"
-					}
-				},
-				"to": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AnchorTo"
-					}
-				},
-				"from": {
-					"type": "object",
-					"items": {
-						"$ref": "#/definitions/PurpleFrom"
-					}
-				},
-				"description": {
-					"type": "string"
-				},
-				"manipulators": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AnchorManipulator"
-					}
-				}
-			},
-			"required": [],
+			"additionalProperties": true,
 			"title": "Anchor"
 		},
 		"AnchorCondition": {
