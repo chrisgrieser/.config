@@ -349,9 +349,9 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[W]hisper (MacWhisper)"
+      - description: "[M]acWhisper"
         type: basic
-        from: { key_code: w, modifiers: { mandatory: [shift] } }
+        from: { key_code: m, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'MacWhisper'
