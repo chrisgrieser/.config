@@ -159,7 +159,7 @@ unmap("j", /google.com/); // websearch navigator
 unmap("k", /google.com/); // websearch navigator
 unmap("c", /google.com/); // Grepper
 
-for (const key of ["j", "k", "l", "f", "i", "t", "N", "P"]) {
+for (const key of ["h", "j", "k", "l", "f", "i", "t", "N", "P"]) {
 	unmap(key, /youtube.com/);
 }
 
