@@ -1,6 +1,25 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "App-specific-Bindings"
+anchors:
+  - modifiers: &hyper [command, control, option]
+#───────────────────────────────────────────────────────────────────────────────
 rules:
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) MacWhisper"
+    manipulators:
+      # hyper+w to open whisper (if not running) and also starts the recording with
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: *hyper } }
+        to:
+          - shell_command: |
+              # start whisper if not running already
+              if ! pgrep -xq "MacWhisper" ; then
+                open -g -a "MacWhisper"
+                while ! pgrep -xq "MacWhisper"; do sleep 0.1; done
+              fi
+              # global MacWhisper shortcut
+              osascript -e 'tell application "System Events" to keystroke "w" using {command down, control down, option down}'
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
       # Toggle Sidebar
@@ -35,7 +54,7 @@ rules:
                 end tell'
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [ ^com\.microsoft\.Word$, ^com\.microsoft\.Powerpoint$ ]
+            bundle_identifiers: [^com\.microsoft\.Word$, ^com\.microsoft\.Powerpoint$]
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
         to:
@@ -53,7 +72,8 @@ rules:
                     click menu item "Comment" of menu "Insert" of menu bar 1
                   end tell
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
       # Toggle Sidebar MS Word
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
@@ -64,7 +84,8 @@ rules:
                   set frontmost to true
                   click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
@@ -123,7 +144,12 @@ rules:
           - key_code: down_arrow
           - key_code: return_or_enter
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            },
+          ]
       # Back & Forward
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
@@ -137,7 +163,12 @@ rules:
                   end tell
                 end tell'
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            },
+          ]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
@@ -150,7 +181,12 @@ rules:
                   end tell
                 end tell'
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            },
+          ]
       # Right Sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
@@ -158,14 +194,22 @@ rules:
           - key_code: "2"
             modifiers: [command]
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
+          - {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            }
       # Toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            },
+          ]
       # Image Tool
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [command] } }
@@ -176,7 +220,10 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Image 🖼️"
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^net\.highlightsapp\.universal$] }
+          - {
+              type: frontmost_application_if,
+              bundle_identifiers: [^net\.highlightsapp\.universal$],
+            }
       # Rename
       - type: basic
         from: { key_code: r, modifiers: { mandatory: [control] } }
@@ -332,13 +379,23 @@ rules:
         to:
           - { key_code: down_arrow }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^com\.runningwithcrayons\.Alfred$],
+            },
+          ]
       - type: basic
         from: { key_code: tab, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: up_arrow }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.runningwithcrayons\.Alfred$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^com\.runningwithcrayons\.Alfred$],
+            },
+          ]
       # Open Sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
@@ -477,7 +534,8 @@ rules:
           - { key_code: q, modifiers: [command] }
           - { key_code: vk_none, hold_down_milliseconds: 400 }
           - { key_code: delete_or_backspace, modifiers: [command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
       # toggle syntax (Javascript <-> Applescript)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [option] } }
@@ -491,7 +549,8 @@ rules:
                 currentDoc.language = otherLangObj;
                 currentDoc.checkSyntax();
               '
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) BusyCal"
     manipulators:
@@ -500,18 +559,21 @@ rules:
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: c, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
       # Quick event with NLP instead of normal event creation
       - type: basic
         from: { key_code: "n", modifiers: { mandatory: [command] } }
         to:
           - { key_code: "n", modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
