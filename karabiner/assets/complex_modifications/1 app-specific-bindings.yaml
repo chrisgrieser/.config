@@ -7,7 +7,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) MacWhisper"
     manipulators:
-      # hyper+w to open whisper (if not running) and also starts the recording with
+      # hyper+w to open whisper (if not running) and also starts the recording
       - type: basic
         from: { key_code: w, modifiers: { mandatory: *hyper } }
         to:
@@ -16,6 +16,7 @@ rules:
               if ! pgrep -xq "MacWhisper" ; then
                 open -g -a "MacWhisper"
                 while ! pgrep -xq "MacWhisper"; do sleep 0.1; done
+                sleep 0.2
               fi
               # global MacWhisper shortcut
               osascript -e 'tell application "System Events" to keystroke "w" using {command down, control down, option down}'
