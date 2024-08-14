@@ -141,7 +141,7 @@ mapkey("i", "Passthrough", () => Normal.PassThrough(1000));
 map("x", "<Alt-s>", null, "Start/Pause Surfingkeys");
 
 // HACK open config via hammerspoon, as browser is sandboxed and cannot open files
-mapkey(",", "Open Surfingkeys config", () => window.open("h"));
+mapkey(",", "Open Surfingkeys config", () => window.open("hammerspoon://open-surfingkeys-config"));
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
