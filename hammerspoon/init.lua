@@ -41,7 +41,6 @@ safeRequire("modules.repo-auto-sync")
 safeRequire("modules.hardware-periphery")
 safeRequire("modules.pageup-pagedown-scroll")
 safeRequire("modules.vertical-split")
-safeRequire("modules.weather-reminder")
 
 -- app-specific
 safeRequire("modules.app-specific-behavior")
