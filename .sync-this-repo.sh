@@ -6,22 +6,15 @@ cd "$(dirname "$0")" || exit 1 # go to location of this script, i.e. going into 
 
 # ADD & COMMIT
 files_changed="$(git status --porcelain | wc -l | tr -d ' ')"
-device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-commit_msg="$device_name ($files_changed)"
-
-# GUARD
-if [[ $files_changed -eq 0 && -z "$1" ]]; then
+if [[ $files_changed -eq 0 ]]; then
 	echo "No changes."
 	exit 0
 fi
 
-if [[ $files_changed -gt 0 ]]; then
-	git add --all
-	git commit --message="$commit_msg" --author="🤖 automated<cron@job>"
-fi
-if [[ -n "$1" ]]; then
-	git commit --no-verify --allow-empty --message="💾 Manual Snapshot"
-fi
+device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+commit_msg="$device_name ($files_changed)"
+git add --all
+git commit --message="$commit_msg" --author="🤖 automated<cron@job>"
 
 #───────────────────────────────────────────────────────────────────────────────
 # PULL & PUSH
