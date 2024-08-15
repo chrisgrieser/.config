@@ -71,7 +71,7 @@ function run() {
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
 		const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
-		const isImageFile = ["png", "icns"].includes(type);
+		const isImageFile = ["png", "icns", "webp"].includes(type);
 		if (useFileicon) {
 			iconObj.type = "fileicon";
 			iconObj.path = absPath;

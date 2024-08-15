@@ -25,6 +25,8 @@ export EZA_ICON_SPACING=1
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
 
+export CLICOLOR=1 # ls uses color by default
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # shellcheck disable=2016

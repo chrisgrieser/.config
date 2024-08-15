@@ -105,7 +105,8 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
 
 	// PARAMETERS
-	let { shellCmd, directory, absPathOutput, shallowOutput, maxFiles, prefix } = searchConfig[keyword];
+	let { shellCmd, directory, absPathOutput, shallowOutput, maxFiles, prefix } =
+		searchConfig[keyword];
 	prefix = prefix ? prefix + " " : "";
 
 	// EXECUTE SEARCH
@@ -131,7 +132,7 @@ function run() {
 			}
 
 			const ext = name.split(".").pop() || "";
-			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
+			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "webp"];
 			const icon = imageExt.includes(ext) ? { path: absPath } : { path: absPath, type: "fileicon" };
 
 			return {
