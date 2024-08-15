@@ -5,7 +5,7 @@
 	"runtime.version": "Lua 5.4",
 
 	"WARN": [
-		"Do not add `workspace.library` from the EmmyLua Docs here,",
+		"Do not add `workspace.library` for the EmmyLua Docs here,",
 		"since they break some LSP features. They are already automatically recognized",
 		"since they are included in the workspace."
 	]
