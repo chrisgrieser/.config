@@ -120,7 +120,7 @@ local function telescopeConfig()
 					}
 					vim.iter(roots):each(function(root) path = path:gsub(vim.pesc(root), "") end)
 
-					local project = path:match("/(.-)/") -- highest parent
+					local project = path:match("/(.-)/") or "" -- highest parent
 					local tail = vim.fs.basename(path)
 					local out = tail .. "  " .. project
 
