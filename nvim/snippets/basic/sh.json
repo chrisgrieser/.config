@@ -37,6 +37,20 @@
     "body": "sudo -nv && ${1:some_sudo_action}",
     "prefix": "check if sudo user"
   },
+  "confirmation prompt": {
+    "body": [
+      "# confirmation prompt",
+      "print \"\\e[1;34m$0Proceed? (y/n)\\e[0m\"",
+      "read -rk pressed",
+      "echo",
+      "if [[ \"\\$pressed\" != \"y\" ]]; then",
+      "\techo \"Aborted.\"",
+      "\treturn 1",
+      "fi",
+      "echo"
+    ],
+    "prefix": "confirmation prompt"
+  },
   "default value": {
     "body": "\\${${1:var}:-${2:default_value}}",
     "prefix": "default value"

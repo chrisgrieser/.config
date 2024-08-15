@@ -56,6 +56,16 @@ compdef _o o
 
 #───────────────────────────────────────────────────────────────────────────────
 
+# file finder
+# `fd` replacement using just `rg`
+function fd {
+	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
+	rg --no-config --files --binary --ignore-file="$HOME/.config/rg/ignore" |
+		rg --color=always "$1" | sed -Ee "$color"
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # search pwd via `rg`, open selection in the editor at the line
 function s {
 	local selected file line
@@ -80,12 +90,8 @@ function s {
 
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
+# DOCS "https://docs.rs/regex/1.*/regex/#syntax"
 function sr {
-	if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-		open "https://docs.rs/regex/1.*/regex/#syntax"
-		return 0
-	fi
-
 	local search="$1"
 	local replace
 	# HACK deal with annoying named capture groups (see `man rg` on `--replace`)
@@ -98,7 +104,7 @@ function sr {
 	[[ -z "$files" ]] && return 1
 
 	echo "$files" | while read -r file; do
-		rg --no-config "$search" --pcre2 --case-sensitive --replace="$replace" --passthrough \
+		rg --no-config "$search" --case-sensitive --replace="$replace" --passthrough \
 			--no-line-number "$file" > /tmp/rgpipe &&
 			mv /tmp/rgpipe "$file"
 	done
