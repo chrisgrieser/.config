@@ -47,7 +47,7 @@
     "BTTSavedMousePosition" : "{-827.37890625, 543.6171875}",
     "BSTDontShowSnapAreasWhileModMoving" : 0,
     "BTTDrawingAreaHeight" : 626,
-    "BTTNumberOfStarts" : 1512,
+    "BTTNumberOfStarts" : 1514,
     "BTTTouchBarHapticFeedback" : 0,
     "BTTStageManagerLeftSnappingAreaIncreasePercentage" : 0.125,
     "showKeyboardTab" : true,
@@ -181,39 +181,8 @@
     "BSTSnapAreaDefaultShowPictogram" : false,
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "4E1F5C6C-9E74-4AF0-B585-935F1D0E9964",
+  "BTTPresetUUID" : "AF8799B4-3819-4B35-9ED5-3F23A8202F92",
   "BTTPresetContent" : [
-    {
-      "BTTAppBundleIdentifier" : "com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml",
-      "BTTAppName" : "YouTube",
-      "BTTAppAutoInvertIcon" : 1,
-      "BTTAppProcessMatchMode" : 2,
-      "BTTAppProcessName" : "YouTube",
-      "BTTTriggers" : [
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378149.0028739,
-          "BTTTriggerType" : 102,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "go to home",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "BEC459D5-FCB4-4E0B-B369-11916CA95BCB",
-          "BTTPredefinedActionType" : 172,
-          "BTTPredefinedActionName" : "Run Apple Script (blocking)",
-          "BTTAdditionalActionData" : {
-            "BTTScriptType" : 0,
-            "BTTAppleScriptRunInBackground" : false,
-            "BTTTouchBarAppleScriptString" : "# requires vimium for gU\n\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n  key code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
-            "BTTTouchBarAppleScriptUsePath" : false
-          },
-          "BTTInlineAppleScript" : "# requires vimium for gU\n\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n  key code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 0,
-          "BTTGestureNotes" : "go to home"
-        }
-      ]
-    },
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser",
       "BTTAppName" : "Brave Browser",
@@ -221,6 +190,21 @@
       "BTTAppProcessMatchMode" : 2,
       "BTTAppProcessName" : "Brave Browser",
       "BTTTriggers" : [
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1718035469.202702,
+          "BTTTriggerType" : 173,
+          "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
+          "BTTTriggerTypeDescription" : "replaces \"Right Click open link in new Tab\" Chrome Extension",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "EBAD89DC-09B2-461D-BAFF-A6727D3E4186",
+          "BTTPredefinedActionType" : 2,
+          "BTTPredefinedActionName" : "CMD(⌘)+Click",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 4,
+          "BTTGestureNotes" : "replaces \"Right Click open link in new Tab\" Chrome Extension"
+        },
         {
           "BTTActionCategory" : 0,
           "BTTLastUpdatedAt" : 1723378079.8716431,
@@ -242,21 +226,6 @@
           "BTTEnabled2" : 1,
           "BTTOrder" : 3,
           "BTTGestureNotes" : "go to home"
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1718035469.202702,
-          "BTTTriggerType" : 173,
-          "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "replaces \"Right Click open link in new Tab\" Chrome Extension",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "EBAD89DC-09B2-461D-BAFF-A6727D3E4186",
-          "BTTPredefinedActionType" : 2,
-          "BTTPredefinedActionName" : "CMD(⌘)+Click",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 4,
-          "BTTGestureNotes" : "replaces \"Right Click open link in new Tab\" Chrome Extension"
         },
         {
           "BTTActionCategory" : 0,
@@ -314,118 +283,6 @@
             }
           ],
           "BTTGestureNotes" : "Next Video"
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.5081229,
-          "BTTTriggerType" : 105,
-          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Left",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "550EFF3B-A93E-4A2A-9676-4BA103405B6E",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 2,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1718035469.195951,
-              "BTTTriggerParentUUID" : "550EFF3B-A93E-4A2A-9676-4BA103405B6E",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "983A63B0-8ADE-4C03-A1D8-DAFB9C4723DF",
-              "BTTShortcutToSend" : "55,48",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 31
-            }
-          ]
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.508069,
-          "BTTTriggerType" : 114,
-          "BTTTriggerTypeDescriptionReadOnly" : "TipTap Right (1 Finger Fix)",
-          "BTTTriggerTypeDescription" : "Rewind",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "D392FC2B-3213-4224-A166-8A0C880CF5AE",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "124",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 10,
-          "BTTGestureNotes" : "Rewind",
-          "BTTTriggerConfig" : {
-            "BTTNoTouchTimeout" : 0,
-            "BTTHUDText" : "→"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.508105,
-          "BTTTriggerType" : 113,
-          "BTTTriggerTypeDescriptionReadOnly" : "TipTap Left (1 Finger Fix)",
-          "BTTTriggerTypeDescription" : "Forward",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "E3233F8C-FCD0-4989-A29F-A1A3372115FC",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "123",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 11,
-          "BTTGestureNotes" : "Forward",
-          "BTTTriggerConfig" : {
-            "BTTNoTouchTimeout" : 0,
-            "BTTHUDText" : "←"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.5080819,
-          "BTTTriggerType" : 163,
-          "BTTTriggerTypeDescription" : "3 Finger Double-Tap",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "577DF439-C51F-4528-9276-86FCD0F99E3E",
-          "BTTLayoutIndependentActionChar" : "w",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "55,13",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 7,
-          "BTTGestureNotes" : "3 Finger Double-Tap"
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.5081301,
-          "BTTTriggerType" : 102,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "Scroll up",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "88DFABDC-635E-4ADD-A5B0-CF5990CA8FFD",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 4,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1718035469.1966028,
-              "BTTTriggerParentUUID" : "88DFABDC-635E-4ADD-A5B0-CF5990CA8FFD",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "FB318421-F603-431D-BBC1-E48D8A133F3D",
-              "BTTShortcutToSend" : "55,126",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 1
-            }
-          ],
-          "BTTGestureNotes" : "Scroll up"
         },
         {
           "BTTActionCategory" : 0,
@@ -531,21 +388,6 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378146.508111,
-          "BTTTriggerType" : 173,
-          "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "done here instead of system settings so it is overridable",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "3C4B3F0D-11DD-441A-8A08-1BE9FF44D2C0",
-          "BTTPredefinedActionType" : 4,
-          "BTTPredefinedActionName" : "Right Click",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 3,
-          "BTTGestureNotes" : "done here instead of system settings so it is overridable"
-        },
-        {
-          "BTTActionCategory" : 0,
           "BTTLastUpdatedAt" : 1723378146.5080619,
           "BTTTriggerType" : 106,
           "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Right",
@@ -573,6 +415,106 @@
         },
         {
           "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.508069,
+          "BTTTriggerType" : 114,
+          "BTTTriggerTypeDescriptionReadOnly" : "TipTap Right (1 Finger Fix)",
+          "BTTTriggerTypeDescription" : "Rewind",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "D392FC2B-3213-4224-A166-8A0C880CF5AE",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "124",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 10,
+          "BTTGestureNotes" : "Rewind",
+          "BTTTriggerConfig" : {
+            "BTTNoTouchTimeout" : 0,
+            "BTTHUDText" : "→"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.508105,
+          "BTTTriggerType" : 113,
+          "BTTTriggerTypeDescriptionReadOnly" : "TipTap Left (1 Finger Fix)",
+          "BTTTriggerTypeDescription" : "Forward",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "E3233F8C-FCD0-4989-A29F-A1A3372115FC",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "123",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 11,
+          "BTTGestureNotes" : "Forward",
+          "BTTTriggerConfig" : {
+            "BTTNoTouchTimeout" : 0,
+            "BTTHUDText" : "←"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.5080819,
+          "BTTTriggerType" : 163,
+          "BTTTriggerTypeDescription" : "3 Finger Double-Tap",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "577DF439-C51F-4528-9276-86FCD0F99E3E",
+          "BTTLayoutIndependentActionChar" : "w",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "55,13",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 7,
+          "BTTGestureNotes" : "3 Finger Double-Tap"
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.5081301,
+          "BTTTriggerType" : 102,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
+          "BTTTriggerTypeDescription" : "Scroll up",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "88DFABDC-635E-4ADD-A5B0-CF5990CA8FFD",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 4,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1718035469.1966028,
+              "BTTTriggerParentUUID" : "88DFABDC-635E-4ADD-A5B0-CF5990CA8FFD",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "FB318421-F603-431D-BBC1-E48D8A133F3D",
+              "BTTShortcutToSend" : "55,126",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 1
+            }
+          ],
+          "BTTGestureNotes" : "Scroll up"
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.508111,
+          "BTTTriggerType" : 173,
+          "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
+          "BTTTriggerTypeDescription" : "done here instead of system settings so it is overridable",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "3C4B3F0D-11DD-441A-8A08-1BE9FF44D2C0",
+          "BTTPredefinedActionType" : 4,
+          "BTTPredefinedActionName" : "Right Click",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 3,
+          "BTTGestureNotes" : "done here instead of system settings so it is overridable"
+        },
+        {
+          "BTTActionCategory" : 0,
           "BTTLastUpdatedAt" : 1723378146.508117,
           "BTTTriggerType" : 160,
           "BTTTriggerTypeDescription" : "2 Finger Swipe Right",
@@ -585,6 +527,33 @@
           "BTTEnabled2" : 1,
           "BTTOrder" : 9,
           "BTTGestureNotes" : "2 Finger Swipe Right"
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378146.5081229,
+          "BTTTriggerType" : 105,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Left",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "550EFF3B-A93E-4A2A-9676-4BA103405B6E",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 2,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1718035469.195951,
+              "BTTTriggerParentUUID" : "550EFF3B-A93E-4A2A-9676-4BA103405B6E",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "983A63B0-8ADE-4C03-A1D8-DAFB9C4723DF",
+              "BTTShortcutToSend" : "55,48",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 31
+            }
+          ]
         },
         {
           "BTTActionCategory" : 0,
@@ -657,19 +626,19 @@
     },
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
-      "BTTAppName" : "Crunchyroll - Watch Popular Anime",
+      "BTTAppName" : "Crunchyroll",
       "BTTAppAutoInvertIcon" : 1,
       "BTTAppProcessMatchMode" : 2,
-      "BTTAppProcessName" : "Crunchyroll - Watch Popular Anime",
+      "BTTAppProcessName" : "Crunchyroll",
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723378094.335156,
+          "BTTLastUpdatedAt" : 1723749179.980237,
           "BTTTriggerType" : 1100,
           "BTTTriggerTypeDescriptionReadOnly" : "Double Leftclick",
           "BTTTriggerTypeDescription" : "click to focus+pause, click to unpause, f for fullscreen",
           "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
-          "BTTUUID" : "EFF354EF-575F-4849-B939-A5FECD5DD863",
+          "BTTUUID" : "F391B914-C4DF-4F16-9F8A-177CF234CC25",
           "BTTPredefinedActionType" : 366,
           "BTTPredefinedActionName" : "Empty Placeholder",
           "BTTEnabled" : 1,
@@ -678,11 +647,11 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723378094.3361259,
-              "BTTTriggerParentUUID" : "EFF354EF-575F-4849-B939-A5FECD5DD863",
+              "BTTLastUpdatedAt" : 1723749179.980979,
+              "BTTTriggerParentUUID" : "F391B914-C4DF-4F16-9F8A-177CF234CC25",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
-              "BTTUUID" : "2BD0868C-FEF0-420A-A422-A9E27D5CA3E8",
+              "BTTUUID" : "DBD6DDAA-A1C5-4254-83A8-82223FA29137",
               "BTTPredefinedActionType" : 54,
               "BTTPredefinedActionName" : "Double Click",
               "BTTEnabled" : 1,
@@ -691,11 +660,11 @@
             },
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723378094.3366961,
-              "BTTTriggerParentUUID" : "EFF354EF-575F-4849-B939-A5FECD5DD863",
+              "BTTLastUpdatedAt" : 1723749179.9812541,
+              "BTTTriggerParentUUID" : "F391B914-C4DF-4F16-9F8A-177CF234CC25",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
-              "BTTUUID" : "16D8E07D-A10B-4D67-AAB5-E10629C800C0",
+              "BTTUUID" : "B72446D3-0D17-4D72-A9D2-010184624DAB",
               "BTTLayoutIndependentActionChar" : "f",
               "BTTShortcutToSend" : "3",
               "BTTEnabled" : 1,
@@ -716,11 +685,34 @@
       ]
     },
     {
-      "BTTAppBundleIdentifier" : "com.apple.finder",
-      "BTTAppName" : "Finder",
+      "BTTAppBundleIdentifier" : "com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml",
+      "BTTAppName" : "YouTube",
       "BTTAppAutoInvertIcon" : 1,
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "YouTube",
       "BTTTriggers" : [
-
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723378149.0028739,
+          "BTTTriggerType" : 102,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
+          "BTTTriggerTypeDescription" : "go to home",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "BEC459D5-FCB4-4E0B-B369-11916CA95BCB",
+          "BTTPredefinedActionType" : 172,
+          "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+          "BTTAdditionalActionData" : {
+            "BTTScriptType" : 0,
+            "BTTAppleScriptRunInBackground" : false,
+            "BTTTouchBarAppleScriptString" : "# requires vimium for gU\n\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n  key code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
+            "BTTTouchBarAppleScriptUsePath" : false
+          },
+          "BTTInlineAppleScript" : "# requires vimium for gU\n\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n  key code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 0,
+          "BTTGestureNotes" : "go to home"
+        }
       ]
     }
   ],
