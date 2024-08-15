@@ -9,9 +9,11 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 commit_msg="$device_name ($files_changed)"
 
 if [[ $files_changed -gt 0 ]]; then
-	git add --all &&
-		git commit -m "$commit_msg" --author="🤖 automated<cron@job>" ||
-		exit 1
+	git add --all && git commit --message="$commit_msg" --author="🤖 automated<cron@job>"
+fi
+
+if [[ -n "$1" ]]; then
+	git commit --allow-empty --message="💾 Manual Snapshot"
 fi
 
 # loop git add-commit-pull-push, since when between add and push files have been
