@@ -19,6 +19,7 @@ alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | h
 
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
+alias ec='git commit --allow-empty --message="💾 Snapshot %(date +\"%Y-%m-%d %H:%M:%S\")"'
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -148,7 +149,7 @@ function gM {
 # undo shallow clones
 function unshallow {
 	git fetch --unshallow
-	git pull --no-progress --tags # undo --no-tags
+	git pull --tags # undo `git clone --no-tags`
 	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin

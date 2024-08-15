@@ -18,4 +18,5 @@ keymap("n", "<Tab>", "A")
 if vim.bo.buftype ~= "nofile" then
 	keymap("n", "<CR>", "ZZ", { desc = "Confirm" }) -- quitting with saving = committing
 	keymap("n", "q", vim.cmd.cquit, { desc = "Abort" }) -- quitting with error = aborting commit
+	vim.opt_local.colorcolumn = "73"
 end
