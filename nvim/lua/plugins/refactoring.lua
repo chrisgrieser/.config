@@ -44,12 +44,12 @@ return {
 				"<leader>fs",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
-				desc = " substitute",
+				desc = " substitute (rip-sub)",
 			},
 			{
 				"<leader>fc",
 				function() require("rip-substitute").rememberCursorWord() end,
-				desc = " remember cword",
+				desc = " remember cword (rip-sub)",
 			},
 		},
 		opts = {

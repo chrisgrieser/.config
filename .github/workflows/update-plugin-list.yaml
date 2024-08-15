@@ -18,6 +18,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Update plugin list
         run: |
           # config
@@ -36,6 +37,7 @@ jobs:
             sort --ignore-case | uniq |
             sed -E 's|.*|- [&](https://github.com/&)|' \
               >> "$nvim_readme"
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "chore: auto-update plugin list"
+          commit_message: "bot: auto-update plugin list"
