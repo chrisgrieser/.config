@@ -22,7 +22,10 @@
     "prefix": "check if in git repo"
   },
   "check if installed": {
-    "body": "if [[ ! -x \"$(command -v ${1:cli})\" ]]; then print \"\\e[0;33m${1:cli} not installed.\\e[0m\" && return 1; fi\n$0",
+    "body": [
+      "if [[ ! -x \"\\$(command -v ${1:cli})\" ]]; then print \"\\e[0;33m${1:cli} not installed.\\e[0m\" && return 1; fi",
+      "$0"
+    ],
     "description": "https://stackoverflow.com/a/26759734/22114136",
     "prefix": "check if installed"
   },
@@ -70,7 +73,7 @@
   "for each file": {
     "body": [
       "for filename in *.txt; do",
-      "\techo \"$filename\"",
+      "\techo \"\\$filename\"",
       "done"
     ],
     "prefix": "for each file"
