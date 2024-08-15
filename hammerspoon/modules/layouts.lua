@@ -13,11 +13,9 @@ local videoAppWatcherForSpotify = require("modules.spotify").aw_spotify
 
 ---@param dockToUse string
 local function dockSwitcher(dockToUse)
-	hs.osascript.applescript(([[
-		tell application id "com.runningwithcrayons.Alfred"
-			run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument %q
-		end tell
-	]]):format(dockToUse))
+	local alfredUri = "alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument="
+		.. dockToUse
+	u.openInBackground(alfredUri)
 end
 
 local function autoSetBrightness()
@@ -94,6 +92,7 @@ local function movieLayout()
 		"BusyCal",
 		"Alfred Preferences",
 		"Highlights",
+		"MacWhisper",
 		"Obsidian",
 		"WezTerm",
 		"Mimestream",
@@ -107,7 +106,7 @@ end
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
----select layout depending on number of screens, and prevent concurrent runs
+-- Select layout depending on number of screens, and prevent concurrent runs
 local function autoSetLayout()
 	if M.isLayouting then return end
 	M.isLayouting = true;
