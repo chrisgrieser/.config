@@ -44,6 +44,12 @@ function run() {
 				subtitle: dateStr + url,
 				arg: lineNo + 1,
 				quicklookurl: url,
+				variables: { mode: "open" },
+				mods: {
+					cmd: {
+						variables: { mode: "mark-as-read" },
+					},
+				},
 			};
 			return item;
 		});
@@ -53,8 +59,8 @@ function run() {
 	// "Add current browser tab" item
 	readLaterItems.unshift({
 		title: "🔖 Add current browser tab",
-		arg: -1,
 		subtitle: "",
+		variables: { mode: "add" },
 		mods: {
 			cmd: { valid: false, subtitle: "❌ Not possible." },
 		},

@@ -26,7 +26,7 @@ function getFrontWin() {
  * */
 function hasDuplicateKeywords() {
 	const keywords = [
-		$.getenv("downloads_keyword"),
+		$.getenv("custom_folder_keyword"),
 		$.getenv("recent_keyword"),
 		$.getenv("frontwin_keyword"),
 		$.getenv("tag_keyword"),
@@ -69,9 +69,9 @@ const searchConfig = {
 		directory: app.pathTo("home folder"),
 		maxFiles: Number.parseInt($.getenv("max_recent_files")),
 	},
-	[$.getenv("downloads_keyword")]: {
+	[$.getenv("custom_folder_keyword")]: {
 		shellCmd: `ls -t "%s"`,
-		directory: $.getenv("downloads_folder"),
+		directory: $.getenv("custom_folder"),
 		shallowOutput: true,
 	},
 	[$.getenv("trash_keyword")]: {
@@ -88,7 +88,7 @@ const searchConfig = {
 	},
 	[$.getenv("frontwin_keyword")]: {
 		shellCmd: `ls -t "%s"`,
-		directory: getFrontWin(),
+		directory: "%s", // inserted on runtime
 		shallowOutput: true,
 	},
 };
@@ -110,12 +110,13 @@ function run() {
 	prefix = prefix ? prefix + " " : "";
 
 	// EXECUTE SEARCH
-	if (directory) shellCmd = shellCmd.replace("%s", directory);
-	if (keyword === $.getenv("frontwin_keyword") && directory === "") {
-		return errorItem("⚠️ No Finder window found.");
+	if (keyword === $.getenv("frontwin_keyword")) {
+		directory = getFrontWin();
+		if (directory === "") return errorItem("⚠️ No Finder window found.");
 	}
+	if (directory) shellCmd = shellCmd.replace("%s", directory);
 	const stdout = app.doShellScript(shellCmd).trim();
-	if (stdout === "") return errorItem("⚠️ No files found.");
+	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS
 	const results = stdout
@@ -148,5 +149,6 @@ function run() {
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
 	// the `alfred_workflow_keyword` environment variable https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
+	// (Also, it would interfere with the results needing to be live.)
 	return JSON.stringify({ items: results });
 }
