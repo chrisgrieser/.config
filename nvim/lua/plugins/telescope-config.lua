@@ -72,7 +72,7 @@ local function telescopeConfig()
 			vimgrep_arguments = {
 				"rg",
 				"--no-config",
-				"--sortr=modified", -- performance cost as it disables multithreaded
+				"--sortr=modified", -- performance cost as it disables multithreading
 				"--vimgrep",
 				"--smart-case",
 				"--follow",
@@ -81,7 +81,7 @@ local function telescopeConfig()
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
-				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g",
+				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g", "%.webp", "%.icns",
 				"%.zip", "%.pdf",
 				unpack(specialDirs), -- needs to be last for correct unpacking
 			},
@@ -347,23 +347,22 @@ return {
 							table.insert(changedFilesInCwd, file)
 						end
 					end
-					local function pathDisplay(_, path)
-						local tail = vim.fs.basename(path)
-						local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
-						local out = tail .. "  " .. parent
-						local highlights = {
-							{ { #tail, #out }, "TelescopeResultsComment" },
-						}
-						if vim.tbl_contains(changedFilesInCwd, path) then
-							table.insert(highlights, { { 0, #tail }, "Changed" })
-						end
-						return out, highlights
-					end
 
 					require("telescope.builtin").find_files {
 						prompt_title = "Find Files: " .. projectName(),
 						file_ignore_patterns = ignorePattern,
-						path_display = pathDisplay,
+						path_display = function(_, path)
+							local tail = vim.fs.basename(path)
+							local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
+							local out = tail .. "  " .. parent
+							local highlights = {
+								{ { #tail, #out }, "TelescopeResultsComment" },
+							}
+							if vim.tbl_contains(changedFilesInCwd, path) then
+								table.insert(highlights, { { 0, #tail }, "Changed" })
+							end
+							return out, highlights
+						end,
 					}
 				end,
 				desc = "󰭎 Open File",

@@ -22,6 +22,7 @@ function writeToFile(filepath, text) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	const mode = $.getenv("mode");
 	const readLaterFile = $.getenv("read_later_file");
 	const items = readFile(readLaterFile).trim().split("\n");
 
@@ -33,9 +34,9 @@ function run(argv) {
 	writeToFile(readLaterFile, items.join("\n"));
 
 	// open URL
-	const onlyMarkAsRead = $.getenv("mark_as_read_only") === "true";
-	if (!onlyMarkAsRead) {
+	if (mode === "open") {
 		const url = selectedLine.split("](")[1].split(")")[0];
 		app.openLocation(url);
+	} else {
 	}
 }

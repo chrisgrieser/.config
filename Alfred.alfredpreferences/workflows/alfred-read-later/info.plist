@@ -8,26 +8,11 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>08D00025-B64B-4F4C-8C62-AB4A9816AECE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E2AAD1EB-112C-4EC9-BBEF-F423EE6411B5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>AF457F39-6CD4-46A0-A597-437FD15BD9C8</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>08D00025-B64B-4F4C-8C62-AB4A9816AECE</string>
+				<string>C979E492-28FD-4709-9B24-D8AA06C24476</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -49,7 +34,20 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7A5D2EC3-C602-4AF6-8499-2145433DF7D8</key>
+		<key>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9332AA79-714A-4D56-BD35-570C92624327</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AF569ED4-DB42-473C-BE9C-2E1078378D19</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -62,15 +60,17 @@
 				<false/>
 			</dict>
 		</array>
-		<key>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</key>
+		<key>C979E492-28FD-4709-9B24-D8AA06C24476</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9332AA79-714A-4D56-BD35-570C92624327</string>
+				<string>E2AAD1EB-112C-4EC9-BBEF-F423EE6411B5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>55FA8700-3E12-4EF2-88DC-0E80D3823F52</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -91,7 +91,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F5B18BEC-1B16-4F9C-980E-629EB65E2EFF</string>
+				<string>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -114,7 +114,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>7A5D2EC3-C602-4AF6-8499-2145433DF7D8</string>
+				<string>AF569ED4-DB42-473C-BE9C-2E1078378D19</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
@@ -140,19 +140,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F5B18BEC-1B16-4F9C-980E-629EB65E2EFF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -352,13 +339,13 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string></string>
+						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>-1</string>
+						<string>add</string>
 						<key>outputlabel</key>
 						<string>add</string>
 						<key>uid</key>
@@ -374,26 +361,6 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>CAE7F279-2541-4411-A7A9-00B2974FF7FC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mark_as_read_only</key>
-					<string>false</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>F5B18BEC-1B16-4F9C-980E-629EB65E2EFF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -446,48 +413,36 @@
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mark_as_read_only}</string>
+						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>true</string>
+						<string>mark-as-read</string>
 						<key>outputlabel</key>
-						<string></string>
+						<string>mark-as-read</string>
 						<key>uid</key>
-						<string>AF457F39-6CD4-46A0-A597-437FD15BD9C8</string>
+						<string>55FA8700-3E12-4EF2-88DC-0E80D3823F52</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>else</string>
+				<string>open</string>
 				<key>hideelse</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>08D00025-B64B-4F4C-8C62-AB4A9816AECE</string>
+			<string>C979E492-28FD-4709-9B24-D8AA06C24476</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>mark_as_read_only</key>
-					<string>true</string>
-				</dict>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>7A5D2EC3-C602-4AF6-8499-2145433DF7D8</string>
+			<string>AF569ED4-DB42-473C-BE9C-2E1078378D19</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -530,17 +485,6 @@ for previews of the items.
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>08D00025-B64B-4F4C-8C62-AB4A9816AECE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>mark as read only</string>
-			<key>xpos</key>
-			<real>565</real>
-			<key>ypos</key>
-			<real>340</real>
-		</dict>
 		<key>108AF0CF-D70A-4010-BC05-9C5F5F11B47B</key>
 		<dict>
 			<key>colorindex</key>
@@ -548,29 +492,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>mark as read (and open)</string>
 			<key>xpos</key>
-			<real>415</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>365</real>
 		</dict>
 		<key>4FFAD7DC-CAEC-4493-90E9-E941E1355540</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>415</real>
+			<real>405</real>
 			<key>ypos</key>
-			<real>130</real>
-		</dict>
-		<key>7A5D2EC3-C602-4AF6-8499-2145433DF7D8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>mark as read only</string>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>340</real>
+			<real>185</real>
 		</dict>
 		<key>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</key>
 		<dict>
@@ -579,25 +512,47 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>append browser link as Markdown task</string>
 			<key>xpos</key>
-			<real>690</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>200</real>
 		</dict>
 		<key>9332AA79-714A-4D56-BD35-570C92624327</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>845</real>
+			<real>835</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>200</real>
+		</dict>
+		<key>AF569ED4-DB42-473C-BE9C-2E1078378D19</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
+		<key>C979E492-28FD-4709-9B24-D8AA06C24476</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>mode === "mark-as-read"</string>
+			<key>xpos</key>
+			<real>555</real>
+			<key>ypos</key>
+			<real>395</real>
 		</dict>
 		<key>CAE7F279-2541-4411-A7A9-00B2974FF7FC</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
+			<key>note</key>
+			<string>mode</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>267</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -615,36 +570,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>550</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>205</real>
 		</dict>
 		<key>E2AAD1EB-112C-4EC9-BBEF-F423EE6411B5</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>5</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>365</real>
 		</dict>
 		<key>EF0DA9FC-237E-4EC9-9942-B31BD0A6754F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>695</real>
+			<real>685</real>
 			<key>ypos</key>
-			<real>25</real>
-		</dict>
-		<key>F5B18BEC-1B16-4F9C-980E-629EB65E2EFF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>290</real>
+			<real>80</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

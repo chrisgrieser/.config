@@ -732,7 +732,7 @@
 				<key>variables</key>
 				<dict>
 					<key>keyword_from_hotkey</key>
-					<string>{var:downloads_keyword}</string>
+					<string>{var:custom_folder_keyword}</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -1069,7 +1069,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>downloads folder</string>
+			<string>custom folder</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
@@ -1224,7 +1224,7 @@ to modify the respective hotkey</string>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>note</key>
-			<string>open/reveal</string>
+			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
 			<real>740</real>
 			<key>ypos</key>
@@ -1275,7 +1275,7 @@ to modify the respective hotkey</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>recently changed</string>
+			<string>recently changed in user home or iCloud</string>
 			<key>label</key>
 			<string>Keywords</string>
 			<key>type</key>
@@ -1287,22 +1287,22 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>down</string>
+				<string>desk</string>
 				<key>placeholder</key>
-				<string>downloads</string>
+				<string>desk</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>downloads</string>
+			<string>custom folder</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>downloads_keyword</string>
+			<string>custom_folder_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1371,22 +1371,22 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Downloads</string>
+				<string>~/Desktop</string>
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>~/Downloads</string>
+				<string>~/Desktop</string>
 				<key>required</key>
 				<true/>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Downloads folder</string>
+			<string>Custom folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>downloads_folder</string>
+			<string>custom_folder</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1476,7 +1476,7 @@ to modify the respective hotkey</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>High value impacts performance</string>
+			<string>Maximum for the recent file search. High value impacts performance.</string>
 			<key>label</key>
 			<string>Max recent files</string>
 			<key>type</key>
