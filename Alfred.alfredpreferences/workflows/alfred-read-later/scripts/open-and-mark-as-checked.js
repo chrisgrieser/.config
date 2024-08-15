@@ -37,6 +37,5 @@ function run(argv) {
 	if (mode === "open") {
 		const url = selectedLine.split("](")[1].split(")")[0];
 		app.openLocation(url);
-	} else {
 	}
 }
