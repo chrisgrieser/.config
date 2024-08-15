@@ -20,8 +20,8 @@ alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | h
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
 
-alias mark="git tag 'mark' ; echo 'Tagged current commit with \'mark\''"
-alias unmark='git tag -d "mark"'
+alias mark="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
+alias unmark="git tag -d 'mark'"
 
 #───────────────────────────────────────────────────────────────────────────────
 

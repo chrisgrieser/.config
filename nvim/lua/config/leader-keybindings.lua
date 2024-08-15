@@ -77,6 +77,12 @@ end
 keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
 keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
+keymap("n", "<leader>fq", function()
+	local line = vim.api.nvim_get_current_line()
+	local updatedLine = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
+	vim.api.nvim_set_current_line(updatedLine)
+end, { desc = " Switch quotes in line" })
+
 --------------------------------------------------------------------------------
 -- UNDO
 
