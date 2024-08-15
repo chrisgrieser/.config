@@ -34,6 +34,7 @@ echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -rk pressed
 if [[ "$pressed" != "y" ]]; then
+	echo
 	echo "Aborted."
 	return 1
 fi

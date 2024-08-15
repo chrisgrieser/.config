@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+# shellcheck disable=2012,2016
+
+# REQUIRED `webp`
+[[ -x "$(command -v cwebp)" ]] || brew install webp
+
+# confirmation prompt
+print "\e[1;34mWill convert all images to webp. Proceed? (y/n)\e[0m"
+read -rk pressed
+echo
+if [[ "$pressed" != "y" ]]; then
+	echo "Aborted."
+	return 1
+fi
+echo
+
+#───────────────────────────────────────────────────────────────────────────────
+
+setopt nonomatch # missing extensions do not throw error
+total=$(ls ./**/*.{png,jpeg,jpg} | wc -l | tr -d ' ')
+i=1
+for filename in **/*.{png,jpeg,jpg}; do
+	printf "\r\e[0;34m%s/%s\e[0m " "$i" "$total"
+	((i++))
+	cwebp -quiet "$filename" -o "${filename:r}.webp" && rm "$filename"
+done
+setopt nomatch
+
+#───────────────────────────────────────────────────────────────────────────────
+# for renaming references to png/jpeg files in markdown files
+# sr '\.(?:png|jpe?g)([|\]) ])' '.webp$1' ./**/*.md
+
+# CAVEAT also affects external links to images, check if there are any via
+# rg 'http:.*(png|jpe?g)'
