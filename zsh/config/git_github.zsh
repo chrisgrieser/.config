@@ -8,8 +8,8 @@ alias gI='gh issue list --state=closed'
 alias grh='git clean -df && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
-alias push='git push'
-alias pull='git pull'
+alias push='git push --no-progress'
+alias pull='git pull --no-progress'
 alias rebase='git rebase --interactive'
 alias reset='git reset'
 
@@ -127,7 +127,7 @@ function gf {
 # amend-no-edit
 function gm {
 	_stageAllIfNoStagedChanges
-	git commit --amend --no-edit
+	git commit --amend --no-edit --allow-empty
 	echo
 	git status
 }
@@ -138,7 +138,7 @@ function gM {
 		print "\e[1;33mStaged changes found.\e[0m"
 		return 1
 	fi
-	git commit --amend --no-verify
+	git commit --amend --no-verify --allow-empty
 	echo
 	git status
 }
@@ -148,7 +148,7 @@ function gM {
 # undo shallow clones
 function unshallow {
 	git fetch --unshallow
-	git pull --tags # undo --no-tags
+	git pull --no-progress --tags # undo --no-tags
 	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin

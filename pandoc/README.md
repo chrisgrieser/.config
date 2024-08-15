@@ -1,10 +1,12 @@
 ---
-aliases: null
-tags: 'pandoc, citation, coding'
-mdate: 2023-10-13T14:47
+aliases: 
+mdate: 2024-08-15T15:24
 similar:
-  - '[[Citation Styles]]'
-  - '[[Bibliography Creation]]'
+  - "[[Bibliography Tools]]"
+tags:
+  - pandoc
+  - citation
+  - coding
 ---
 
 > [!INFO]  
@@ -103,9 +105,9 @@ pandoc intermediate.json -t gfm -o output.md -s
 
 ## How Templating works
 > yeah, the pandoc docs aren't really good in explaining templates. For odt, pptx, and docs, pandoc calls templates "reference documents" (`--reference-doc`), where you style a docx (etc) document and when selected as reference for a docx output, the output gets styled the same way as that document.
-> 
+>
 > for *all* other output formats you need actual templates (`--template`), which depend on the output format (html template + css for html output, etc.). Most notoriously, for a PDF output, the type of template you need depends on the pdf-engine (`--pdf-engine`) you use are using, since pandoc does not directly convert to pdf, but converts to PDF via something like an "intermediate format". In most cases, it's either a html-based pdf-engine (e.g. `wkhtmltopdf`) in which case you need a html and css template (and need to know html and css for that), or a latex-based pdf-engine (e.g. `pdflatex`), in which case the template needs to be written in latex. And to make it even more complicated, in both cases, there are some variables for the templates (e.g., margins) **which** can be set in the yaml-metadata of the markdown document.
-> 
+>
 > So if you want PDF output, you either have to learn html/css, latex, or simply export to docx (and convert the docx to a pdf), with the latter being probably the easiest approach.
 
 **Summary**
@@ -165,6 +167,6 @@ geometry: "margin=2cm"
 
 **Why Lua Filters?**
 > Although traditional filters are very flexible, they have a couple of disadvantages. First, there is some overhead in writing JSON to stdout and reading it from stdin (twice, once on each side of the filter). Second, whether a filter will work will depend on details of the user's environment. A filter may require an interpreter for a certain programming language to be available, as well as a library for manipulating the pandoc AST in JSON form. One cannot simply provide a filter that can be used by anyone who has a certain version of the pandoc executable.
-> 
+>
 > Starting with version 2.0, pandoc makes it possible to write filters in Lua without any external dependencies at all. A Lua interpreter (version 5.3) and a Lua library for creating pandoc filters is built into the pandoc executable. Pandoc data types are marshaled to Lua directly, avoiding the overhead of writing JSON to stdout and reading it from stdin.
 - [Pandoc - Pandoc Lua Filters](https://pandoc.org/lua-filters.html)
