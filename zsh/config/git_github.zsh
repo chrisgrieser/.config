@@ -20,6 +20,9 @@ alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | h
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
 
+alias mark="git tag 'mark' ; echo 'Tagged current commit with \'mark\''"
+alias unmark='git tag -d "mark"'
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # issues numbers & git revs
@@ -141,11 +144,6 @@ function gM {
 	git commit --amend --no-verify --allow-empty
 	echo
 	git status
-}
-
-function snapshot {
-	git commit --allow-empty --no-verify --message="💾 snapshot $(date +"%Y-%m-%d %H:%M:%S")"
-	echo -n "$(git rev-parse --short HEAD)^" | pbcopy # copy snapshot commit's parent
 }
 
 #───────────────────────────────────────────────────────────────────────────────
