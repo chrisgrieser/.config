@@ -16,7 +16,6 @@ alias reset='git reset'
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
-alias snapshot='git commit --allow-empty --no-verify --message="💾 snapshot $(date +"%Y-%m-%d %H:%M:%S")"'
 
 alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
@@ -142,6 +141,11 @@ function gM {
 	git commit --amend --no-verify --allow-empty
 	echo
 	git status
+}
+
+function snapshot {
+	git commit --allow-empty --no-verify --message="💾 snapshot $(date +"%Y-%m-%d %H:%M:%S")"
+	echo -n "$(git rev-parse --short HEAD)^" | pbcopy # copy snapshot commit's parent
 }
 
 #───────────────────────────────────────────────────────────────────────────────
