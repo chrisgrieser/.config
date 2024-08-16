@@ -232,7 +232,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 -- QUICKFIX: Goto first item
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
-	callback = function() pcall(vim.cmd.cfirst) end, 
+	callback = function() pcall(vim.cmd.cfirst) end,
 })
 
 -- QUICKFIX: Add signs
