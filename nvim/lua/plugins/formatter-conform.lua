@@ -68,14 +68,14 @@ local function formattingFunc(bufnr)
 	local ft = vim.bo[bufnr].filetype
 	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
 
-	require("conform").format({ lsp_format = useLsp }, function()
+	require("conform").format({ lsp_format = useLsp }, function(_, did_edit)
 		if ft == "python" then
 			vim.lsp.buf.code_action {
 				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 				apply = true,
 			}
 		end
-		vim.cmd("silent! update!")
+		if did_edit then vim.cmd.update() end
 	end)
 end
 
@@ -95,7 +95,9 @@ local function typescriptFormatting()
 					apply = true,
 				}
 			else
-				require("conform").format({ lsp_format = "first" }, vim.cmd.update)
+				require("conform").format({ lsp_format = "first" }, function(_, did_edit)
+					if did_edit then vim.cmd.update() end
+				end)
 			end
 		end, i * 60)
 	end
