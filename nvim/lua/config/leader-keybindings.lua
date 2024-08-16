@@ -140,10 +140,10 @@ keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
 
--- Append to / delete from EoL
+-- Append to EoL
 local trailChars = { ",", "\\", "{", ")" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key))
+	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "∎ Add " .. key .. " to EoL"  })
 end
 
 -- JUST

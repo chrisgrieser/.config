@@ -201,8 +201,7 @@ nnoremap Ä "zdawEl"zpB
 
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
-nnoremap zl :contextMenu
-vnoremap zl :contextMenu
+noremap zl :contextMenu
 
 " undo/redo consistently on one key
 nnoremap U <C-r>
