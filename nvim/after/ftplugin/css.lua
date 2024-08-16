@@ -3,7 +3,7 @@ vim.bo.commentstring = "/* %s */"
 --------------------------------------------------------------------------------
 local keymap = require("config.utils").bufKeymap
 
-keymap("n", "<leader>i", function()
+keymap("n", "!", function()
 	local line = vim.api.nvim_get_current_line()
 	if line:find("!important") then
 		line = line:gsub(" ?!important", "")
