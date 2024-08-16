@@ -75,11 +75,8 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
-
-vim.api.nvim_create_autocmd(
-	"WinScrolled",
-	{ callback = vim.snippet.stop, desc = "automatically exit snippet mode on scroll" }
-)
+-- exit snippet on scroll
+vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
@@ -151,6 +148,7 @@ keymap(
 )
 keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
 keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text Object" })
+keymap("n", "guu", "guu") -- prevent `omap u` from overwriting `guu`
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
