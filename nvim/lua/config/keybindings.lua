@@ -236,11 +236,17 @@ keymap(
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
+	if winClosed then return end
+
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	if not winClosed and moreThanOneBuffer then
+	if moreThanOneBuffer then
+		-- force deleting (= :bwipeout) results in correctly set alt-file, but
+		-- also removed from the oldfiles, thus manually adding them there
+		local bufPath = vim.api.nvim_buf_get_name(0)
 		pcall(vim.api.nvim_buf_delete, 0, { force = true })
+		table.insert(vim.v.oldfiles, 1, bufPath)
 	end
-end, { desc = "󰽙 :close / :bdelete" })
+end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
 	local extensions = { "sh", "js", "css", "md", "lua" }
