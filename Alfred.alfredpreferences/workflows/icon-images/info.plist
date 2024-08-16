@@ -465,6 +465,7 @@
 				<integer>1</integer>
 				<key>filetypes</key>
 				<array>
+					<string>com.compuserve.gif</string>
 					<string>public.jpeg</string>
 					<string>public.png</string>
 				</array>
