@@ -180,6 +180,7 @@ local globToTemplateMap = {
 	["**/*.py"] = "template.py",
 	["**/*.sh"] = "template.zsh",
 	["**/*.applescript"] = "template.applescript",
+	["**/*.mjs"] = "node-module.mjs",
 
 	["**/*Justfile"] = "justfile.just",
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
@@ -220,7 +221,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			vim.api.nvim_buf_set_lines(0, 0, -1, false, content)
 			if cursor then vim.api.nvim_win_set_cursor(0, cursor) end
 
-			-- adjust filetype if needed (e.g. applying a zsh template to .sh files)
+			-- adjust filetype if needed (e.g. when applying a zsh template to .sh files)
 			local newFt = vim.filetype.match { buf = bufnr }
 			if vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
 		end, 100)

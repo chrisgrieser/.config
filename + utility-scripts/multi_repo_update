@@ -2,13 +2,13 @@
 
 # CONFIG
 github_username="chrisgrieser"
-repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
-# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-commit_msg="build: update release script"
+repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
+commit_msg="ci: bump release action steps versions"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.release.mjs" ./.release.mjs
+	cp -f "$HOME/Desktop/obsidian-plugin-release.yml" ./.github/workflows/obsidian-plugin-release.yml
 }
 
 #───────────────────────────────────────────────────────────────────────────────
