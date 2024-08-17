@@ -21,7 +21,7 @@ alias pr='gh pr create --web --fill'
 alias rel='just release' # `just` task runner
 
 alias mark="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
-alias unmark="git tag -d 'mark'"
+alias unmark="git tag --delete 'mark'"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -180,8 +180,8 @@ function my_commits_today {
 	if [[ -z "$1" ]]; then the_day="$(date '+%Y-%m-%d')"; else the_day="$(date -v "-${1}d" '+%Y-%m-%d')"; fi
 
 	# shellcheck disable=2016
-	commits=$(gh search commits --author="$username" --committer="$username" --json="repository,commit" \
-		--author-date="$the_day" --sort=author-date --order=asc |
+	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
+		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
 		yq -P '.[] | (((.commit.committer.date | sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))')
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
