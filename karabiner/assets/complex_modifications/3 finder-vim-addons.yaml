@@ -51,7 +51,7 @@ rules:
         from: { key_code: slash }
         to_if_alone:
           - key_code: f
-            modifiers: [shift, command]
+            modifiers: [control, command]
           - *leave-insert-mode # on Alfred focus loss, renaming is aborted automatically
           - *remove-insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]

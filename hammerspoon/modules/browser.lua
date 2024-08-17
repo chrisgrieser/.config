@@ -41,15 +41,6 @@ M.wf_browserAll = wf.new("Brave Browser")
 	end)
 
 --------------------------------------------------------------------------------
--- AUTO-COPY on focus loss
-aw.new(function(appName, eventType, browserApp)
-	if eventType == aw.deactivated and appName == "Brave Browser" then
-		print("🖨️ beep 🔵")
-		hs.eventtap.keyStroke({ "cmd" }, "x", 0, hs.application("TextEdit"))
-	end
-end):start()
-
---------------------------------------------------------------------------------
 
 -- VIMIUM CURSOR HIDER
 -- Companion for Vimium-like browser extensions which are not able to hide the
@@ -108,10 +99,7 @@ M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 --------------------------------------------------------------------------------
 
 -- HACK URI for triggering from surfingkeys itself
-hs.urlevent.bind(
-	"open-surfingkeys-config",
-	function() hs.open("../+ browser-extension-configs/surfing-keys.js") end
-)
+hs.urlevent.bind("open-surfingkeys-config", function() hs.open("../surfingkeys/surfingkeys.js") end)
 
 --------------------------------------------------------------------------------
 return M
