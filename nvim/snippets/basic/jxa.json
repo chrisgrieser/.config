@@ -217,7 +217,7 @@
   },
   "shebang": {
     "body": "#!/usr/bin/env osascript -l JavaScript",
-    "prefix": "shebang"
+    "prefix": "shebang (jxa)"
   },
   "write to file": {
     "body": [
