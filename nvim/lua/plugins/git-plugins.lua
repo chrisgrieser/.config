@@ -40,15 +40,13 @@ return {
 				spellcheck = true,
 				keepAbortedMsgSecs = 60 * 10, -- 10 mins
 				insertIssuesOnHash = { enabled = true, next = "#" },
+			},
+			push = {
 				openReferencedIssue = true,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,
-				diffPopup = {
-					width = 0.9,
-					height = 0.9,
-					border = vim.g.borderStyle,
-				},
+				diffPopup = { width = 0.9, height = 0.9, border = vim.g.borderStyle },
 			},
 			statusline = {
 				blame = {
