@@ -1,8 +1,9 @@
 name: $0
 
 on:
-  schedule:
-    - cron: "15 2 2,15 * *"
+  push:
+    branches: [main]
+    paths: [README.md]
   workflow_dispatch:
 
 permissions:
@@ -15,8 +16,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+
       - run: |
           echo "Hello, world!"
-      - uses: stefanzweifel/git-auto-commit-action@v4
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "PLACEHOLDER"
+          commit_message: "bot: PLACEHOLDER"
