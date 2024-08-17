@@ -321,7 +321,6 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = " Paste w/o switching with register" })
-keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky Paste at EoL" })
 
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end

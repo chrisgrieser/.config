@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
+#───────────────────────────────────────────────────────────────────────────────
+matches:
+  - { trigger: Cafe, replace: Café, propagate_case: true }
+  - { trigger: Diesntag, replace: Dienstag, propagate_case: true, word: true }
+  - { trigger: Leibe, replace: Liebe, propagate_case: true, word: true }
+  - { trigger: ahbe, replace: habe, propagate_case: true, word: true }
+  - { trigger: ahst, replace: hast, propagate_case: true, word: true }
+  - { trigger: algorithmsich, replace: algorithmisch }
+  - { trigger: auhc, replace: auch, propagate_case: true, word: true }
+  - { trigger: cih, replace: ich, word: true, propagate_case: true }
+  - { trigger: dei, replace: die, word: true, propagate_case: true }
+  - { trigger: eien, replace: eine, word: true, propagate_case: true }
+  - { trigger: einfahc, replace: einfach, propagate_case: true, word: true }
+  - { trigger: ejtzt, replace: jetzt, propagate_case: true, word: true }
+  - { trigger: english, replace: English }
+  - { trigger: forshcung, replace: forschung, propagate_case: true }
+  - { trigger: iwr, replace: wir, propagate_case: true, word: true }
+  - { trigger: lcih, replace: lich }
+  - { trigger: mcih, replace: mich }
+  - { trigger: mri, replace: mir, word: true }
+  - { trigger: mrogen, replace: morgen, propagate_case: true }
+  - { trigger: mti, replace: mit, word: true }
+  - { trigger: nciht, replace: nicht }
+  - { trigger: ncoh, replace: noch }
+  - { trigger: nru, replace: nur, word: true, propagate_case: true }
+  - { trigger: shcon, replace: schon }
+  - { trigger: sidn, replace: sind, propagate_case: true, word: true }
+  - { trigger: sosnt, replace: sonst, propagate_case: true }
+  - { trigger: sowei, replace: sowie, propagate_case: true, word: true }
+  - { trigger: technsich, replace: technisch, propagate_case: true }
+  - { trigger: theorei, replace: theorie, propagate_case: true }
