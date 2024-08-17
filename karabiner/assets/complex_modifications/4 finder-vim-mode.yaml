@@ -205,13 +205,15 @@ rules:
       - type: basic
         from: { key_code: hyphen, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
+          - shell_command:
+              qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *is-German-keyboard]
       # "?" on American keyboard
       - type: basic
         from: { key_code: slash, modifiers: { mandatory: [shift] } }
         to:
-          - shell_command: qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
+          - shell_command:
+              qlmanage -p "$HOME/.config/karabiner/assets/finder-vim-mode/cheatsheet.png"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *not-German-keyboard]
       #─────────────────────────────────────────────────────────────────────────
       # INSERT MODE
@@ -573,7 +575,8 @@ rules:
           - shell_command: |
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: "y" }
         to:
@@ -581,7 +584,8 @@ rules:
           - shell_command: |
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # Y = yank (copy) file *content*
       - type: basic
         from: { key_code: z, modifiers: { mandatory: [shift] } } # y = z in German Keyboard
@@ -592,7 +596,8 @@ rules:
               cat "$selection" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File content copied"
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *is-German-keyboard]
       - type: basic
         from: { key_code: y, modifiers: { mandatory: [shift] } }
         to:
@@ -602,7 +607,8 @@ rules:
               cat "$selection" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File content copied"
-        conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
       # p = paste file
       - type: basic
         from: { key_code: p }
@@ -647,10 +653,11 @@ rules:
                     end repeat
                     return ""
                   end if
-                end tell')
-                [[ -z $error ]] && exit 0
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "$error"
+                end tell
+              ')
+              [[ -z $error ]] && exit 0
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "$error"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # X = cross-copy (duplicate)
       - type: basic
@@ -1163,7 +1170,8 @@ rules:
           - shell_command: |
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ File(s) copied"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *not-German-keyboard]
       - type: basic
         from: { key_code: z } # y and z switched on German keyboard
         to:
@@ -1171,7 +1179,8 @@ rules:
             modifiers: [command]
           - *end-move
           - *remove-move-notice
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *is-German-keyboard]
+        conditions:
+          [*finder-app, *not-insert-mode, *not-find-mode, *move-active, *is-German-keyboard]
       - type: basic
         from:
           key_code: c

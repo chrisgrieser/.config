@@ -4,8 +4,8 @@
 
 matches:
   # INFO ignoring:
-  # "s" as 3rd letter to not trigger, e.g. "FRs"
-  # "J", "K", "V", "Z", or "M" as 2nd letter to not trigger stuff in Obsidian Vim Mode
+  # - "s" as 3rd letter to not trigger, e.g. "FRs"
+  # - "J", "K", "V", "Z", or "M" as 2nd letter to not trigger stuff in Obsidian Vim Mode
   - regex: "\\b(?P<one>[A-Z])(?P<two>[A-ILN-UW-Y])(?P<three>[a-rt-z])"
     replace: "{{CapitalCased}}"
     vars:
@@ -18,10 +18,5 @@ matches:
 
   # "…ign" -> "…ing"
   # (but not for words like "sign" or "ignore", where it is actually correct)
-  - regex: "(?P<letter>[a-rt-z])ign "
-    replace: "{{letter}}ing "
-
-  - regex: "n[#Ä]t "
-    replace: "n't "
-  - regex: "\\Bsich "
-    replace: "isch "
+  - regex: "(?P<letter>[a-rt-z])ign\\b"
+    replace: "{{letter}}ing"
