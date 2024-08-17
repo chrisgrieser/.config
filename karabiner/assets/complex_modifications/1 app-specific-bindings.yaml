@@ -1,22 +1,6 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 title: "App-specific bindings"
-anchors:
-  - modifiers: &hyper [command, control, option]
 rules:
-  #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) MacWhisper"
-    manipulators:
-      # recording also copies timestamp
-      - type: basic
-        from: { key_code: w, modifiers: { mandatory: *hyper } }
-        to:
-          # userscript: copy youtube timestamp
-          # using `z` as `z` and `y` are switched in German keyboard
-          - { key_code: z, modifiers: [control] }
-          - { key_code: vk_none, hold_down_milliseconds: 300 }
-          - { key_code: w, modifiers: *hyper } # pass through to MacWhisper
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
