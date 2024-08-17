@@ -38,6 +38,6 @@ jobs:
             sed -E 's|.*|- [&](https://github.com/&)|' \
               >> "$nvim_readme"
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "bot: auto-update plugin list"
