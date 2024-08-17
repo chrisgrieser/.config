@@ -356,18 +356,18 @@ rules:
         to:
           - shell_command: |
               current_win=$(osascript -e '
-                tell application "Finder" 
-                	activate 
-                	if (count Finder windows) is 0 then return "" 
-                	try 
-                		set pathToBeClosed to (POSIX path of (insertion location as alias)) 
-                		close window 1 
-                		return pathToBeClosed 
+                tell application "Finder"
+                	activate
+                	if (count Finder windows) is 0 then return ""
+                	try
+                		set pathToBeClosed to (POSIX path of (insertion location as alias))
+                		close window 1
+                		return pathToBeClosed
                 	on error # special folders without insertion location, like Smart Folders
-                		close window 1 
-                		return "" 
-                	end try 
-                end tell 
+                		close window 1
+                		return ""
+                	end try
+                end tell
               ')
               if [[ -n "$current_win" ]] ; then
                 mkdir -p "$HOME/.cache/finder-vim-mode"
@@ -389,18 +389,18 @@ rules:
         to:
           - shell_command: |
               current_win=$(osascript -e '
-                tell application "Finder" 
-                	activate 
-                	if (count Finder windows) is 0 then return "" 
-                	try 
-                		set pathToBeClosed to (POSIX path of (insertion location as alias)) 
-                		close window 1 
-                		return pathToBeClosed 
+                tell application "Finder"
+                	activate
+                	if (count Finder windows) is 0 then return ""
+                	try
+                		set pathToBeClosed to (POSIX path of (insertion location as alias))
+                		close window 1
+                		return pathToBeClosed
                 	on error # special folders without insertion location, like Smart Folders
-                		close window 1 
-                		return "" 
-                	end try 
-                end tell 
+                		close window 1
+                		return ""
+                	end try
+                end tell
               ')
               if [[ -n "$current_win" ]] ; then
                 mkdir -p "$HOME/.cache/finder-vim-mode"
@@ -639,20 +639,30 @@ rules:
           - shell_command: |
               error=$(osascript -e'
                 tell application "Finder"
-                  activate
-                  if (number of Finder windows is not 2) then
-                    beep
-                    return "⚠️ Not exactly two windows"
-                  else if (the selection is {}) then
-                    beep
-                    return "⚠️ No selection"
-                  else
-                    set otherWin to (target of Finder window 2 as alias)
-                    repeat with f in (selection as list)
-                      move f to otherWin
-                    end repeat
-                    return ""
-                  end if
+                	activate
+                	if (number of Finder windows is not 2) then
+                		beep
+                		return "⚠️ Not exactly two windows"
+                	else if (the selection is {}) then
+                		beep
+                		return "⚠️ No selection"
+                	else
+                		set otherWin to (target of Finder window 2 as alias)
+
+                		repeat with aFile in (selection as list)
+                      # AppleScript does not allow the "ask for confirmation" prompt if replacing, 
+                      # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
+                			try
+                				move aFile to otherWin without replacing
+                			on error
+                				set promptText to "An item named " & quoted form of (name of aFile as string) & "already exists in this location."
+                				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
+                				if response is "Replace" then move aFile to otherWin with replacing
+                			end try
+
+                		end repeat
+                		return ""
+                	end if
                 end tell
               ')
               [[ -z $error ]] && exit 0
@@ -728,7 +738,7 @@ rules:
                 --title "Finder Vim Mode" --message "No ejectable volume found."
               error=$(osascript -e "
                 set the_volume to (\"$first_volume\" as POSIX file)
-                tell application \"Finder\" to open the_volume 
+                tell application \"Finder\" to open the_volume
               ")
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # u = undo
