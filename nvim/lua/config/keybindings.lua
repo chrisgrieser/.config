@@ -327,6 +327,10 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true, desc = "dd" })
 
+-- better pasting
+keymap("n", "p", "]p", { desc = " Auto-indent paste" })
+keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
+
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(vim.fn.getreg("+"))
 	vim.fn.setreg("+", regContent, "v")

@@ -648,25 +648,22 @@ rules:
                 		return "⚠️ No selection"
                 	else
                 		set otherWin to (target of Finder window 2 as alias)
-
                 		repeat with aFile in (selection as list)
-                      # AppleScript does not allow the "ask for confirmation" prompt if replacing, 
+                      # AppleScript does not allow the "ask for confirmation" prompt if replacing,
                       # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
                 			try
                 				move aFile to otherWin without replacing
                 			on error
-                				set promptText to "An item named " & quoted form of (name of aFile as string) & "already exists in this location."
+                				set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location."
                 				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
                 				if response is "Replace" then move aFile to otherWin with replacing
                 			end try
-
                 		end repeat
                 		return ""
                 	end if
                 end tell
               ')
-              [[ -z $error ]] && exit 0
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+              [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # X = cross-copy (duplicate)
@@ -676,24 +673,32 @@ rules:
           - shell_command: |
               error=$(osascript -e'
                 tell application "Finder"
-                  activate
-                  if (number of Finder windows is not 2) then
-                    beep
-                    return "⚠️ Not exactly two windows"
-                  else if (the selection is {}) then
-                    beep
-                    return "⚠️ No selection"
-                  else
-                    set otherWin to (target of Finder window 2 as alias)
-                    repeat with f in (selection as list)
-                      duplicate f to otherWin
-                    end repeat
-                    return ""
-                  end if
-                end tell')
-                [[ -z $error ]] && exit 0
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "$error"
+                	activate
+                	if (number of Finder windows is not 2) then
+                		beep
+                		return "⚠️ Not exactly two windows"
+                	else if (the selection is {}) then
+                		beep
+                		return "⚠️ No selection"
+                	else
+                		set otherWin to (target of Finder window 2 as alias)
+                		repeat with aFile in (selection as list)
+                      # AppleScript does not allow the "ask for confirmation" prompt if replacing,
+                      # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
+                			try
+                				copy aFile to otherWin without replacing
+                			on error
+                				set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location."
+                				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
+                				if response is "Replace" then copy aFile to otherWin with replacing
+                			end try
+                		end repeat
+                		return ""
+                	end if
+                end tell
+              ')
+              [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                --title "Finder Vim Mode" --message "$error"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # i = Preview (information sidebar)
       - type: basic

@@ -71,7 +71,7 @@ function M.gotoChangedFiles()
 
 	-- GUARD in case of a monorepo, there can be changes outside the repo
 	if #changedFiles == 0 then
-		notify("No changes found in pwd.", "info") 
+		notify("No changes found in pwd.", "info")
 		return
 	end
 

@@ -68,7 +68,10 @@ keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "�
 
 keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
-	local updatedLine = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
+	local updatedLine = line:gsub(
+		"[\"']",
+		function(quote) return (quote == [["]] and [[']] or [["]]) end
+	)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
@@ -148,9 +151,9 @@ keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 --------------------------------------------------------------------------------
 
 -- Append to EoL
-local trailChars = { ",", "\\", "{", ")" }
+local trailChars = { ",", "\\", "{", ")", ";" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key), { desc = "∎ Add " .. key .. " to EoL"  })
+	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key))
 end
 
 -- JUST
