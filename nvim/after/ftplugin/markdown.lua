@@ -42,12 +42,12 @@ local function autocontinue(key)
 	return key
 end
 
-keymap("n", "o", function() return autocontinue("o") end, { buffer = true, expr = true })
-keymap("i", "<CR>", function() return autocontinue("<CR>") end, { buffer = true, expr = true })
+keymap("n", "o", function() return autocontinue("o") end, { expr = true })
+keymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- Markdown Preview (replaces markdown-preview.nvim)
-keymap("n", "<D-r>", function()
+keymap("n", "<leader>r", function()
 	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
 	local browser = "Brave Browser"
@@ -92,7 +92,7 @@ keymap("n", "<D-r>", function()
 		end tell
 	]]):format(browser, outputPath, url)
 	vim.system { "osascript", "-e", applescript }
-end, { desc = " Preview", buffer = true })
+end, { desc = " Preview" })
 
 --------------------------------------------------------------------------------
 -- HEADINGS

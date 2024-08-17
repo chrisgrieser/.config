@@ -32,6 +32,22 @@ keymap("n", "<leader>lc", function()
 end, { desc = "󰓗 Copy last cmdline" })
 
 --------------------------------------------------------------------------------
+-- RUN
+keymap("n", "<leader>r", function()
+	vim.cmd.update()
+	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
+
+	if vim.bo.filetype == "lua" then
+		vim.cmd.source()
+	elseif hasShebang then
+		vim.cmd("! chmod +x %")
+		vim.cmd("! %")
+	else
+		u.notify("run file", "no shebang", "warn")
+	end
+end, { desc = "󰜎 run file" })
+
+--------------------------------------------------------------------------------
 -- INSPECT
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
