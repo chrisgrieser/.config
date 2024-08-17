@@ -76,5 +76,4 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
-mas "Pixelmator Pro", id: 1289583905
 mas "WISO Steuer 2024", id: 6463142140

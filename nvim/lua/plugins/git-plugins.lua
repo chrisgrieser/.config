@@ -31,6 +31,7 @@ return {
 		},
 		opts = {
 			staging = {
+				contextSize = 2,
 				moveToNextHunkOnStagingToggle = true,
 			},
 			commitMsg = {
