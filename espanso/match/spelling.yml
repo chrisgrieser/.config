@@ -111,3 +111,4 @@ matches:
   - { replace: which, trigger: whcih, propagate_case: true, word: true }
   - { replace: would, triggers: [woudl, wuold], propagate_case: true, word: true }
   - { replace: you, triggers: [yuo, oyu], propagate_case: true, word: true }
+  - { replace: workflow, trigger: workflwo, propagate_case: true, word: true }

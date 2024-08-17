@@ -43,7 +43,7 @@ keymap("n", "<leader>r", function()
 		vim.cmd("! chmod +x %")
 		vim.cmd("! %")
 	else
-		u.notify("run file", "no shebang", "warn")
+		u.notify("run file", "File has no shebang.", "warn")
 	end
 end, { desc = "󰜎 run file" })
 
@@ -213,5 +213,3 @@ keymap(
 	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
-
---------------------------------------------------------------------------------
