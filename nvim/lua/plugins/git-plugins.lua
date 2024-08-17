@@ -42,7 +42,7 @@ return {
 				insertIssuesOnHash = { enabled = true, next = "#" },
 			},
 			push = {
-				openReferencedIssue = true,
+				openReferencedIssues = true,
 			},
 			historySearch = {
 				autoUnshallowIfNeeded = true,

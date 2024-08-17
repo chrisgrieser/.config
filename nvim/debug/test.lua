@@ -1,5 +1,8 @@
-local teststr = "foobar"
-local hello = { teststr:match("(foo)(bar)") }
-local one, two = unpack(hello)
-print("🖨️ one: ", one)
-print("🖨️ two: ", two)
+local s = [[
+	hello world from #Lua"
+	fix: 33
+	feat: 1111
+]]
+for w in string.gmatch(s, "#(%d+)") do
+  vim.notify(w)
+end
