@@ -2,6 +2,5 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # ignore these files
-# INFO (needs glob due to conform.nvim appending stuff for temporary file)
 [files]
-extend-exclude = ["*spelling.yml", "*lorem.yml"]
+extend-exclude = ["spelling.yml", "spelling-german.yml", "lorem.yml"]

@@ -36,13 +36,14 @@ return {
 				{
 					mode = { "n", "x" },
 					{ "<leader>", group = "󰓎 Leader" },
+					{ "<leader>c", group = " Code Action" },
+					{ "<leader>f", group = "󱗘 Refactor" },
+					{ "<leader>g", group = "󰊢 Git" },
 					{ "<leader>i", group = "󱈄 Inspect" },
 					{ "<leader>o", group = "󰒓 Options" },
 					{ "<leader>p", group = "󰏗 Packages" },
 					{ "<leader>u", group = "󰕌 Undo" },
-					{ "<leader>c", group = " Code Action" },
-					{ "<leader>f", group = "󱗘 Refactor" },
-					{ "<leader>g", group = "󰊢 Git" },
+					{ "<leader>y", group = "󰅍 Yank" },
 				},
 				{ -- not using `text_objects` preset, since it's too crowded
 					mode = "o",

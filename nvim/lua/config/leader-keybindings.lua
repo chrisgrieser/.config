@@ -55,17 +55,6 @@ end, { desc = "󰽙 Buffer Info" })
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
-keymap("n", "<leader>fy", function()
-	-- cannot use `:g // y` because it yanks lines one after the other
-	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
-		if not input then return end
-		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
-		vim.fn.setreg("+", table.concat(matchLines, "\n"))
-		u.notify("Copied", tostring(#matchLines) .. " lines")
-	end)
-end, { desc = "󰅍 yank matching lines" })
-
 ---@param use "spaces"|"tabs"
 local function retabber(use)
 	vim.bo.expandtab = use == "spaces"
@@ -82,6 +71,24 @@ keymap("n", "<leader>fq", function()
 	local updatedLine = line:gsub("[\"']", function(quote) return (quote == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
+
+--------------------------------------------------------------------------------
+-- YANK
+keymap("n", "<leader>yl", function()
+	-- cannot use `:g // y` because it yanks lines one after the other
+	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
+		if not input then return end
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
+		vim.fn.setreg("+", table.concat(matchLines, "\n"))
+		u.notify("Copied", tostring(#matchLines) .. " lines")
+	end)
+end, { desc = "󰗈 matching lines" })
+
+vim.fn.setreg("a", "")
+keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 yank-append to [a]" })
+keymap("n", "<leader>yd", [["Ad]], { desc = " delete-append to [a]" })
+keymap("n", "<leader>yp", [["ap<cmd>let @a=''<CR>]], { desc = " paste from [a]" })
 
 --------------------------------------------------------------------------------
 -- UNDO
