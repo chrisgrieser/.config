@@ -62,6 +62,7 @@ return {
 			},
 			keymaps = {
 				insertModeConfirm = "<CR>",
+				toggleFixedStrings = "F",
 			},
 			editingBehavior = {
 				autoCaptureGroups = true,

@@ -119,19 +119,27 @@ mapkey("o", "Open from clipboard", async () => {
 	else banner("Not a URL");
 });
 
-map("yf", "ya", null, "Yank Link (via Hint)");
-map("yc", "yq", null, "Yank Codeblock");
-map("ye", "yv", null, "Yank Element");
+map("yf", "ya", null, "Yank link (via hint)");
+map("yc", "yq", null, "Yank codeblock");
+map("ye", "yv", null, "Yank element");
 map("yw", "yY", null, "Yank all tabs in window");
 map("yi", ";di", null, "Download Image");
-mapkey("ym", "Copy Markdown Link", async () => {
+mapkey("ym", "Copy markdown link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
 	await copyAndNotify(mdLink);
 });
 
-mapkey("yy", "Copy Link", async () => {
-	// custom function for notification-shortening
-	await copyAndNotify(window.location.href);
+// custom function for notification-shortening
+mapkey("yy", "Copy link", async () => await copyAndNotify(window.location.href));
+
+mapkey("yq", "Copy selection as quote", async () => {
+	const selection = window.getSelection()?.toString();
+	if (!selection) return;
+	const mdBlockquote = selection.replace(/^/gm, "> ");
+	const url = window.location.href;
+	const cleanTitle = document.title.replace(/\|.*/, "");
+	const quote = `${mdBlockquote}\n> [${cleanTitle}](${url})`;
+	await copyAndNotify(quote);
 });
 
 // MISC
