@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
+  - { regex: "n[#Ä]t ", replace: "n't " }
   - { replace: " to ", trigger: " ot " }
   - { replace: "'d ", trigger: "#d " }
   - { replace: "'s ", trigger: "#s " }
@@ -10,11 +11,11 @@ matches:
   - { replace: "isn't", trigger: "isnt", word: true }
   - { replace: "… ", trigger: "... " }
   - { replace: American, trigger: american }
-  - { replace: Japanese, trigger: japanese }
   - { replace: BibTeX, trigger: Bibtex, word: true }
   - { replace: English, trigger: english }
   - { replace: German, trigger: german }
   - { replace: GitHub, trigger: Github, word: true } # only fix when capitalized, to not affect urls
+  - { replace: Japanese, trigger: japanese }
   - { replace: URL, trigger: Url, word: true }
   - { replace: YouTube, trigger: Youtube, word: true } # only fix when capitalized, to not affect urls
   - { replace: achieve, trigger: acheive, propagate_case: true, word: true }
@@ -35,7 +36,7 @@ matches:
   - { replace: don't, trigger: dont, word: true }
   - { replace: down, trigger: dwon }
   - { replace: else, trigger: esle, word: true }
-  - { replace: file, trigger: fiel}
+  - { replace: file, trigger: fiel }
   - { replace: find, trigger: fidn, propagate_case: true, word: true }
   - { replace: for, trigger: fro, propagate_case: true, word: true }
   - { replace: found, trigger: foudn }
@@ -46,6 +47,8 @@ matches:
   - { replace: highlight, trigger: highlgiht, propagate_case: true }
   - { replace: how, trigger: hwo, word: true }
   - { replace: however, trigger: hwoever, propagate_case: true, word: true }
+  - { replace: iPad, trigger: ipad }
+  - { replace: iPhone, trigger: iphone }
   - { replace: icon, trigger: cion, propagate_case: true, word: true }
   - { replace: ignore, trigger: ignroe, propagate_case: true, word: true }
   - { replace: in the, triggers: [int eh, int he] }
@@ -88,7 +91,7 @@ matches:
   - { replace: separator, trigger: seperator, propagate_case: true, word: true }
   - { replace: should, trigger: shoudl }
   - { replace: show, trigger: shwo, propagate_case: true, word: true }
-  - { replace: since, triggers: [sicne,isnce], propagate_case: true, word: true }
+  - { replace: since, triggers: [sicne, isnce], propagate_case: true, word: true }
   - { replace: somewhat, trigger: somewaht, propagate_case: true, word: true }
   - { replace: suppress, triggers: ["supress", "surpress", "surppress"], propagate_case: true }
   - { replace: sure, trigger: srue, propagate_case: true, word: true }

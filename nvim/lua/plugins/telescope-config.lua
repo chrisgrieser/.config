@@ -280,15 +280,8 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		external_dependencies = "rg",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- icons
-			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
-		},
-		config = function()
-			telescopeConfig()
-			require("telescope").load_extension("zf-native")
-		end,
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		config = telescopeConfig,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
