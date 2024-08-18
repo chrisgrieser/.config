@@ -10,6 +10,7 @@ alias mv='mv -vi'
 alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
+alias vidir='vidir --verbose'
 alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias zip='zip --recurse-paths --symlinks'
