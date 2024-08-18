@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "D8473C6F-05DD-4500-842D-965F0E4657DB",
+  "BTTPresetUUID" : "B8360AB7-A25C-4D60-880B-C3C832BC6777",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
@@ -487,7 +487,7 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723987999.170676,
+              "BTTLastUpdatedAt" : 1724016683.976392,
               "BTTTriggerParentUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
@@ -497,10 +497,10 @@
               "BTTAdditionalActionData" : {
                 "BTTScriptType" : 0,
                 "BTTAppleScriptRunInBackground" : false,
-                "BTTTouchBarAppleScriptString" : "tell application \"YouTube\" \n\tclose every window \n\topen location \"https:\/\/youtube.com\" \nend tell",
+                "BTTTouchBarAppleScriptString" : "#!\/usr\/bin\/env osascript\n\n# requires vimium\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n\tkey code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
                 "BTTTouchBarAppleScriptUsePath" : false
               },
-              "BTTInlineAppleScript" : "tell application \"YouTube\" \n\tclose every window \n\topen location \"https:\/\/youtube.com\" \nend tell",
+              "BTTInlineAppleScript" : "#!\/usr\/bin\/env osascript\n\n# requires vimium\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n\tkey code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
               "BTTOrder" : 2
