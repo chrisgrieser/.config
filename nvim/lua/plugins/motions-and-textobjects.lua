@@ -113,7 +113,7 @@ return {
 			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󰬞 outer subword" },
 
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = " inner value" },
-			{ "v", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = " inner value" },
+			{ "v", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = "o", desc = " inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = { "x", "o" }, desc = " outer value" },
 			-- INFO `ik` defined via treesitter to exclude `local` and `let`;
 			{ "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>", mode = { "x", "o" }, desc = "󰌆 outer key" },
