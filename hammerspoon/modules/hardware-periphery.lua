@@ -53,7 +53,7 @@ end
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
-		local warnBelowPercent = 7 -- CONFIG
+		local warnBelowPercent = 10 -- CONFIG
 
 		-- INFO `privateBluetoothBatteryInfo()` is not reliable, therefore retrieving
 		-- battery status directly from the system.

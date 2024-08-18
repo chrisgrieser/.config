@@ -1,3 +1,5 @@
+#!/usr/bin/env osascript
+
 -- prevent accidentally triggering this when not on Projector
 tell application "Image Events"
 	launch
