@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "B8360AB7-A25C-4D60-880B-C3C832BC6777",
+  "BTTPresetUUID" : "C09EB37F-BF27-4922-8906-B9466BC665F0",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
@@ -473,7 +473,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723987828.1577959,
+          "BTTLastUpdatedAt" : 1724016895.7637711,
           "BTTTriggerType" : 108,
           "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
           "BTTTriggerTypeDescription" : "goto home",
@@ -487,23 +487,18 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1724016683.976392,
+              "BTTLastUpdatedAt" : 1724016927.854574,
               "BTTTriggerParentUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "D0BBE403-1E4C-405C-9473-2E5C5BE07BE2",
-              "BTTPredefinedActionType" : 172,
-              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
-              "BTTAdditionalActionData" : {
-                "BTTScriptType" : 0,
-                "BTTAppleScriptRunInBackground" : false,
-                "BTTTouchBarAppleScriptString" : "#!\/usr\/bin\/env osascript\n\n# requires vimium\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n\tkey code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
-                "BTTTouchBarAppleScriptUsePath" : false
-              },
-              "BTTInlineAppleScript" : "#!\/usr\/bin\/env osascript\n\n# requires vimium\ntell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53\n\tkey code 53\n\tdelay 0.3\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell",
+              "BTTUUID" : "40A962F5-7D81-4B7A-BF12-B0B95A7A7755",
+              "BTTPredefinedActionType" : 206,
+              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
+              "BTTShellTaskActionScript" : "\"$HOME\/.config\/BetterTouchTool\/youtube-go-home.applescript\"",
+              "BTTShellTaskActionConfig" : "\/bin\/bash:::-c:::-:::",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
-              "BTTOrder" : 2
+              "BTTOrder" : 39
             }
           ],
           "BTTGestureNotes" : "goto home",
@@ -896,7 +891,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723988022.674953,
+          "BTTLastUpdatedAt" : 1724016884.9903321,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "BB7CA8DF-A9D4-4FF3-B17A-4A3CA59F1658",
@@ -929,29 +924,6 @@
               "BTTEnabled2" : 1,
               "BTTShortcutKeyCode" : -1,
               "BTTOrder" : 18,
-              "BTTAutoAdaptToKeyboardLayout" : 0
-            },
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723988030.1674671,
-              "BTTTriggerParentUUID" : "BB7CA8DF-A9D4-4FF3-B17A-4A3CA59F1658",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-              "BTTUUID" : "998D9398-2C27-4EEB-A642-2D713FAB4790",
-              "BTTPredefinedActionType" : 172,
-              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
-              "BTTAdditionalActionData" : {
-                "BTTScriptType" : 0,
-                "BTTAppleScriptRunInBackground" : false,
-                "BTTTouchBarAppleScriptString" : "set home to POSIX path of (path to home folder as string)\nset exportPath to home & \"\/.config\/BetterTouchTool\/Base.bttpreset\"\n\n-- https:\/\/docs.folivora.ai\/docs\/1102_apple_script.html\ntell application \"BetterTouchTool\"\n\texport_preset \"Base\" outputPath exportPath with includeSettings\nend tell\n\ntell application \"Finder\"\n\tactivate\n\treveal (exportPath as POSIX file)\nend tell\n",
-                "BTTTouchBarAppleScriptUsePath" : false
-              },
-              "BTTInlineAppleScript" : "set home to POSIX path of (path to home folder as string)\nset exportPath to home & \"\/.config\/BetterTouchTool\/Base.bttpreset\"\n\n-- https:\/\/docs.folivora.ai\/docs\/1102_apple_script.html\ntell application \"BetterTouchTool\"\n\texport_preset \"Base\" outputPath exportPath with includeSettings\nend tell\n\ntell application \"Finder\"\n\tactivate\n\treveal (exportPath as POSIX file)\nend tell\n",
-              "BTTKeyboardShortcutKeyboardType" : 0,
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTShortcutKeyCode" : -1,
-              "BTTOrder" : 19,
               "BTTAutoAdaptToKeyboardLayout" : 0
             }
           ],

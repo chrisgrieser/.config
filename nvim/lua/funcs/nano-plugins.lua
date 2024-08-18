@@ -1,21 +1,8 @@
-local M = {}
---------------------------------------------------------------------------------
 -- A bunch of commands that are too small to be published as plugins, but too
 -- big to put in the main config, where they would crowd the actual config.
--- Every function is self-contained (except the helper functions below), and
--- should be bound to a keymap.
+-- Every function is self-contained and should be bound to a keymap.
 
----@param cmd string
-local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
-
----@param msg string
----@param title string
----@param level? "info"|"trace"|"debug"|"warn"|"error"
-local function notify(title, msg, level)
-	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
-end
-
+local M = {}
 --------------------------------------------------------------------------------
 
 --- open the current workflow for the Alfred app
@@ -23,7 +10,7 @@ function M.openAlfredPref()
 	local bufPath = vim.api.nvim_buf_get_name(0)
 	local workflowId = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
 	if not workflowId then
-		notify("", "Not in an Alfred directory.", "warn")
+		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
 		return
 	end
 	-- using JXA and URI for redundancy, as both are not 100% reliable
@@ -112,20 +99,22 @@ end
 function M.startStopRecording(toggleKey, register)
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
-		normal("q" .. register)
+		vim.cmd.normal { "q" .. register, bang = true }
 	else
-		normal("q")
+		vim.cmd.normal { "q", bang = true }
 		local macro = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
 		if macro ~= "" then
 			vim.fn.setreg(register, macro)
-			notify("Recorded", vim.fn.keytrans(macro), "trace")
+			vim.notify(vim.fn.keytrans(macro), vim.log.levels.TRACE, { title = "Recorded" })
 		else
-			notify("Recording", "Aborted.", "trace")
+			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording" })
 		end
 	end
-	local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-		.. (notRecording and "begin_record.caf" or "end_record.caf")
-	vim.system { "afplay", sound } -- macOS only
+	if vim.uv.os_uname().sysname == "Darwin" then
+		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+			.. (notRecording and "begin_record.caf" or "end_record.caf")
+		vim.system { "afplay", sound }
+	end
 end
 
 --------------------------------------------------------------------------------
