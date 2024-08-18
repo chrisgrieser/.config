@@ -9,7 +9,7 @@ return {
 		opts = true,
 		keys = {
 			{ "<leader>oh", function() require("lsp-endhints").toggle() end, desc = "󰑀 Endhints" },
-		}
+		},
 	},
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
