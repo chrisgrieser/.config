@@ -9,7 +9,7 @@ return {
 		opts = true,
 		keys = {
 			{ "<leader>oh", function() require("lsp-endhints").toggle() end, desc = "󰑀 Endhints" },
-		},
+		}
 	},
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
@@ -137,14 +137,6 @@ return {
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",
-		opts = {
-			suppressFormatter = {
-				-- use `biome` instead of `prettier`
-				javascript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
-				typescript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
-				css = { location = "prevLine", ignoreBlock = "/* biome-ignore format: expl */" },
-			},
-		},
 		keys = {
 			-- stylua: ignore start
 			{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup Rule" },
@@ -152,6 +144,14 @@ return {
 			{ "<leader>cy", function() require("rulebook").yankDiagnosticCode() end, desc = "󰅍 Yank Diagnostic Code" },
 			{ "<leader>cf", function() require("rulebook").suppressFormatter() end, mode = { "n", "x" }, desc = "󰉿 Suppress Formatter" },
 			-- stylua: ignore end
+		},
+		opts = {
+			suppressFormatter = {
+				-- use `biome` instead of `prettier`
+				javascript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
+				typescript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
+				css = { location = "prevLine", ignoreBlock = "/* biome-ignore format: expl */" },
+			},
 		},
 	},
 }
