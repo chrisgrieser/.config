@@ -167,17 +167,17 @@ unmap("j", /google.com/); // websearch navigator
 unmap("k", /google.com/); // websearch navigator
 unmap("c", /google.com/); // Grepper
 
-for (const key of ["j", "k", "f", "N", "P"]) {
+for (const key of ["j", "k", "f", "N", "P", "0"]) {
 	unmap(key, /youtube.com/);
 }
 
 // for BetterTouchTool Mappings
-for (const key of ["f", "N", "P"]) {
-	unmap(key, /crunchyroll.com/);
-}
+unmap("f", /crunchyroll.com/); // fullscreen
+unmap("N", /crunchyroll.com/); // next episode
+unmap("0", /crunchyroll.com/); // beginning
 
 // cheatsheets on those websites
-unmap("?", /(github|reddit|youtube)\.com|devdocs.io/);
+unmap("?", /(github|reddit|youtube).com|devdocs.io/);
 
 // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
 mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io/ });
