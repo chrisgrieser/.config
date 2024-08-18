@@ -179,7 +179,7 @@
     "BSTSnapAreaDefaultShowPictogram" : false,
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "E47714C3-CE73-45B1-B93E-B1349862033B",
+  "BTTPresetUUID" : "D079505A-3D6C-4FF8-9B8D-6B6F92414392",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "BT.L",
@@ -196,6 +196,51 @@
       "BTTAppProcessMatchMode" : 2,
       "BTTAppProcessName" : "BetterTouchTool",
       "BTTTriggers" : [
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1723975488.186754,
+          "BTTTriggerType" : 0,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTUUID" : "D2406743-384D-4DDF-B090-1E033C171FA1",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTAdditionalConfiguration" : "1179658",
+          "BTTKeyboardShortcutKeyboardType" : 0,
+          "BTTTriggerOnDown" : 1,
+          "BTTLayoutIndependentChar" : "e",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTShortcutKeyCode" : 14,
+          "BTTShortcutModifierKeys" : 1179648,
+          "BTTOrder" : 1,
+          "BTTAutoAdaptToKeyboardLayout" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723976120.0965099,
+              "BTTTriggerParentUUID" : "D2406743-384D-4DDF-B090-1E033C171FA1",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+              "BTTUUID" : "E7FDDD8B-780B-4351-AAD6-9426298029E1",
+              "BTTPredefinedActionType" : 195,
+              "BTTPredefinedActionName" : "Run Apple Script (async in background)",
+              "BTTAdditionalActionData" : {
+                "BTTScriptType" : 0,
+                "BTTAppleScriptRunInBackground" : true,
+                "BTTTouchBarAppleScriptString" : "set home to POSIX path of (path to home folder as string) \nset exportPath to home & \"\/.config\/BetterTouchTool\/Base.bttpreset\" \n \n-- https:\/\/docs.folivora.ai\/docs\/1102_apple_script.html \ntell application \"BetterTouchTool\" \n\texport_preset \"Base\" outputPath exportPath with includeSettings \nend tell \n \ntell application \"Finder\" \n\tactivate \n\treveal (exportPath as POSIX file) \nend tell",
+                "BTTTouchBarAppleScriptUsePath" : false
+              },
+              "BTTInlineAppleScript" : "set home to POSIX path of (path to home folder as string) \nset exportPath to home & \"\/.config\/BetterTouchTool\/Base.bttpreset\" \n \n-- https:\/\/docs.folivora.ai\/docs\/1102_apple_script.html \ntell application \"BetterTouchTool\" \n\texport_preset \"Base\" outputPath exportPath with includeSettings \nend tell \n \ntell application \"Finder\" \n\tactivate \n\treveal (exportPath as POSIX file) \nend tell",
+              "BTTKeyboardShortcutKeyboardType" : 0,
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTShortcutKeyCode" : -1,
+              "BTTOrder" : 17,
+              "BTTAutoAdaptToKeyboardLayout" : 0
+            }
+          ],
+          "BTTGestureNotes" : "Export BTT Settings"
+        },
         {
           "BTTActionCategory" : 0,
           "BTTLastUpdatedAt" : 1723975386.3552651,
@@ -217,46 +262,6 @@
           "BTTOrder" : 2,
           "BTTAutoAdaptToKeyboardLayout" : 0,
           "BTTGestureNotes" : "prevent accidental closing"
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723976262.2340951,
-          "BTTTriggerType" : 0,
-          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-          "BTTUUID" : "D2406743-384D-4DDF-B090-1E033C171FA1",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTAdditionalConfiguration" : "1179658",
-          "BTTKeyboardShortcutKeyboardType" : 0,
-          "BTTTriggerOnDown" : 1,
-          "BTTLayoutIndependentChar" : "e",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTShortcutKeyCode" : 14,
-          "BTTShortcutModifierKeys" : 1179648,
-          "BTTOrder" : 1,
-          "BTTAutoAdaptToKeyboardLayout" : 0,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723976464.2893481,
-              "BTTTriggerParentUUID" : "D2406743-384D-4DDF-B090-1E033C171FA1",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-              "BTTUUID" : "E7FDDD8B-780B-4351-AAD6-9426298029E1",
-              "BTTPredefinedActionType" : 206,
-              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
-              "BTTShellTaskActionScript" : "\/Users\/chrisgrieser\/.config\/BetterTouchTool\/export BTT settings.applescript",
-              "BTTShellTaskActionConfig" : "\/usr\/bin\/osascript::::::-:::",
-              "BTTKeyboardShortcutKeyboardType" : 0,
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTShortcutKeyCode" : -1,
-              "BTTOrder" : 17,
-              "BTTAutoAdaptToKeyboardLayout" : 0
-            }
-          ],
-          "BTTGestureNotes" : "Export BTT Settings"
         }
       ]
     },
