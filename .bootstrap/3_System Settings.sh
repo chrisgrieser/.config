@@ -161,7 +161,7 @@ sudo pmset womp 1          # Wake for network access
 defaults write org.gpgtools.common DisableKeychain -bool yes
 
 #───────────────────────────────────────────────────────────────────────────────
-# DOCK
+# DOCK (Hot corners)
 # INFO Dock settings do not need to be saved, since the Dock-Switcher setup also
 # saves them, and therefore syncs them across devices already as soon as
 # Dock-switcher is run.

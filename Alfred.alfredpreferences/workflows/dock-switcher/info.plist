@@ -386,6 +386,9 @@ Select a dock layout via the keyword `dock`.
 
 Use the keyword `:dock new` to save the current dock as a new layout.
 
+## Note
+This saves **all** dock settings, including things like size, animation or hot corners.
+
 
 ## Automation
 Load a dock layout from another app via this AppleScript:
