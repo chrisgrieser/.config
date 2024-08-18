@@ -184,6 +184,7 @@ local globToTemplateMap = {
 
 	["**/*Justfile"] = "justfile.just",
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
+	["**/*.jxa"] = "jxa.js",
 	["**/*typos.toml"] = "typos.toml",
 	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
 }

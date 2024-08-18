@@ -59,8 +59,12 @@ vim.api.nvim_create_autocmd("FileType", {
 -- FILETYPES
 
 vim.filetype.add {
-	-- ignore files for fd/rg
-	filename = { [".ignore"] = "gitignore" },
+	filename = {
+		[".ignore"] = "gitignore", -- ignore files for fd/rg
+	},
+	extension = {
+		jxa = "javascript", -- Apple's JXA
+	},
 }
 
 --------------------------------------------------------------------------------
