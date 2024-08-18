@@ -37,6 +37,23 @@ local function altOldfile()
 	return nil
 end
 
+--------------------------------------------------------------------------------
+
+function M.closeWindowOrBuffer()
+	vim.cmd("silent! update")
+	local winClosed = pcall(vim.cmd.close)
+	if winClosed then return end
+
+	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
+	if moreThanOneBuffer then
+		-- force deleting (= `:bwipeout`) results in correctly set alt-file, but
+		-- also removes from the oldfiles, thus manually adding them there
+		local bufPath = vim.api.nvim_buf_get_name(0)
+		pcall(vim.api.nvim_buf_delete, 0, { force = true })
+		table.insert(vim.v.oldfiles, 1, bufPath)
+	end
+end
+
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
 function M.altFileStatus()

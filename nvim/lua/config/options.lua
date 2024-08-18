@@ -62,9 +62,6 @@ vim.filetype.add {
 	filename = {
 		[".ignore"] = "gitignore", -- ignore files for fd/rg
 	},
-	extension = {
-		jxa = "javascript", -- Apple's JXA
-	},
 }
 
 --------------------------------------------------------------------------------

@@ -233,30 +233,22 @@ keymap(
 	{ desc = "󰊢 Goto Changed File" }
 )
 
-keymap({ "n", "x", "i" }, "<D-w>", function()
-	vim.cmd("silent! update")
-	local winClosed = pcall(vim.cmd.close)
-	if winClosed then return end
-
-	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	if moreThanOneBuffer then
-		-- force deleting (= :bwipeout) results in correctly set alt-file, but
-		-- also removed from the oldfiles, thus manually adding them there
-		local bufPath = vim.api.nvim_buf_get_name(0)
-		pcall(vim.api.nvim_buf_delete, 0, { force = true })
-		table.insert(vim.v.oldfiles, 1, bufPath)
-	end
-end, { desc = "󰽙 Close window/buffer" })
+keymap(
+	{ "n", "x", "i" },
+	"<D-w>",
+	function() require("funcs.alt-alt").closeWindowOrBuffer() end,
+	{ desc = "󰽙 Close window/buffer" }
+)
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "sh", "mjs", "jxa", "py", "css" }
+	local extensions = { "sh", "mjs", "py", "css" }
 	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
 		if not ext then return end
-		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
+		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
 		vim.cmd.edit(filepath)
 		vim.cmd.write(filepath)
 	end)
-end, { desc = " Scratch File on Desktop" })
+end, { desc = " ScratchPad File" })
 
 --------------------------------------------------------------------------------
 
@@ -309,10 +301,8 @@ end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		-- `z` is used as temporary register for keymaps, thus needs to be ignored
-		if vim.v.event.operator == "y" and vim.v.event.regname ~= "z" then
-			vim.api.nvim_win_set_cursor(0, cursorPreYank)
-		end
+		if vim.v.event.regname == "z" then return end -- used as temp register for keymaps
+		if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
 	end,
 })
 

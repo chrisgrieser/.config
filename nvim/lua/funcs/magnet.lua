@@ -4,20 +4,21 @@ local M = {}
 local config = {
 	currentFileIcon = "",
 	maxFiles = 4,
+	notificationDurationSecs = 3,
 }
 
 --------------------------------------------------------------------------------
 
 local changedFileNotif
-local pluginName = " Magnet"
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
----@param extraOpts? table
+---@param opts? table
 ---@return { id: number }? -- nvim-notify notification record
-local function notify(msg, level, extraOpts)
+local function notify(msg, level, opts)
+	local pluginName = " Magnet"
 	if not level then level = "info" end
-	local opts = vim.tbl_extend("force", { title = pluginName }, extraOpts or {})
+	opts.title = (opts and opts.title) and pluginName .. ": " .. opts.title or pluginName
 	return vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
@@ -125,9 +126,10 @@ function M.gotoChangedFiles()
 	local msg = table.concat(listOfChangedFiles, "\n")
 
 	changedFileNotif = notify(msg, "info", {
-		title = pluginName .. ": Changed files",
+		title = "Changed files",
 		replace = changedFileNotif and changedFileNotif.id,
 		animate = false,
+		timeout = config.notificationDurationSecs * 1000,
 		hide_from_history = true,
 		on_open = function(win)
 			local bufnr = vim.api.nvim_win_get_buf(win)
