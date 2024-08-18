@@ -249,7 +249,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "sh", "mjs", "py", "css" }
+	local extensions = { "sh", "mjs", "jxa", "py", "css" }
 	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratch." .. ext)
