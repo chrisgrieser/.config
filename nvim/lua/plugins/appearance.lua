@@ -59,7 +59,7 @@ return {
 		opts = {
 			render_modes = { "n", "c", "i", "v", "V" },
 			bullet = {
-				icons = { "•", "◦", "▪️", "▫️" },
+				icons = { "•", "▪️", "◦", "▫️" },
 			},
 			heading = {
 				icons = {}, -- disables icons
