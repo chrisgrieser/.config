@@ -46,7 +46,7 @@ alias -g G='| rg'
 alias -g B='| bat'
 alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
-alias -g J='| fx'
+alias -g J='| yq --prettyPrint --output-format=json --colors | less'
 alias -g C='| pbcopy ; echo "Copied."'
 alias P='pbpaste' # only start of line
 
