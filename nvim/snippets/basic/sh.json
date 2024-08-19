@@ -29,6 +29,10 @@
     "description": "https://stackoverflow.com/a/26759734/22114136",
     "prefix": "check if installed"
   },
+  "check if on macOS": {
+    "body": "[[ \"\\$OSTYPE\" =~ \"darwin\" ]]",
+    "prefix": "check if on macOS"
+  },
   "check if process is running": {
     "body": "pgrep -xq \"${1:process}\" && $0",
     "prefix": "check if process is running"
