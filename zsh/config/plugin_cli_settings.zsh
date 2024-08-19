@@ -25,7 +25,7 @@ export EZA_ICON_SPACING=1
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
 
-export CLICOLOR=1 # ls uses color by default
+export CLICOLOR=1 # makes `ls` use color by default
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -46,11 +46,6 @@ export FZF_DEFAULT_OPTS='
 # https://cli.github.com/manual/gh_help_environment
 export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 
-# DOCS https://fx.wtf/configuration
-export FX_SHOW_SIZE=true
-export FX_THEME=3 # `fx --themes`
-
-export JUST_COMMAND_COLOR="blue"
 #───────────────────────────────────────────────────────────────────────────────
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
