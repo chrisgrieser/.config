@@ -25,9 +25,8 @@ alias unmark="git tag --delete 'mark'"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# issues numbers & git revs
+# issues numbers
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
-ZSH_HIGHLIGHT_REGEXP+=('([0-9a-f]{6,9})((\^+|~)[0-9]*)?' 'fg=yellow')
 
 # commit message overlength
 ZSH_HIGHLIGHT_REGEXP+=('^(gc|gC|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
@@ -46,7 +45,7 @@ ZSH_HIGHLIGHT_REGEXP+=(
 
 alias gaa='git add --all'
 alias unadd='git restore --staged'
-# using functions, so completions override works
+# using functions, so overriding completions works
 function ga { git add "$@"; }
 function restore { git restore "$@"; }
 
@@ -83,7 +82,7 @@ function gc {
 	if [[ -z "$1" ]]; then
 		git commit || return 1
 	else
-		git commit -m "$@" || return 1
+		git commit --message "$@" || return 1
 	fi
 
 	if [[ -n "$(git status --porcelain)" ]]; then
@@ -106,7 +105,7 @@ function gC {
 	if [[ -z "$1" ]]; then
 		git commit || return 1
 	else
-		git commit -m "$@" || return 1
+		git commit --message "$@" || return 1
 	fi
 }
 
@@ -115,7 +114,7 @@ function gC {
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
 	local target
-	target=$(_gitlog --no-graph -n 15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
+	target=$(_gitlog --no-graph --max-count=15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 
 	_stageAllIfNoStagedChanges
@@ -182,12 +181,14 @@ function my_commits_today {
 	# shellcheck disable=2016
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
-		yq -P '.[] | (((.commit.committer.date | sub(".*T(\d\d:\d\d).*", "${1}")) + " " + .repository.name + " – " + .commit.message))')
+		yq --prettyPrint '.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
+		cut -c12-16,26-) # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
-	echo "$commits" | sed -Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
+	echo "$commits" | sed \
+		-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
-		-Ee $'s/(..:..) ([^ ]*) –/\e[0;38;5;245m\\1 \e[1;34m\\2\e[0m/' \
+		-Ee $'s/(..:.. )([^ ]* )/\e[0;38;5;245m\\1\e[1;34m\\2\e[0m/' \
 		-Ee $'s/`[^`]*`/\e[0;33m&\e[0m/g' \
 		-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g'
 	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"

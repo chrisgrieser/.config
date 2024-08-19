@@ -6,6 +6,5 @@ reload:
     echo " Hammerspoon reloaded"
 
 # total length of config in LoC
-lines:
-    echo ;\
-    find . -name "*.lua" -not -path "*/Spoons/*" | xargs wc -l | sort -r
+count-lines:
+    find . -name "*.lua" -not -path "*/Spoons/*" | xargs wc -l | sort --reverse

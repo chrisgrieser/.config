@@ -1,4 +1,4 @@
 set quiet := true
 
-lines:
+count-lines:
     find . -type file \( -name "*.zsh" -or -name ".zsh*" \) | xargs wc -l | sort --reverse
