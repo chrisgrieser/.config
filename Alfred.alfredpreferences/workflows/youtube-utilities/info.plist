@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>4BB7EB66-3B32-4A5D-94C3-A12BBF4A55FC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>77FF34ED-C1A2-4866-B205-06B792B3975B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<array>
 			<dict>
@@ -49,6 +62,19 @@
 		</array>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<array/>
+		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<array>
 			<dict>
@@ -66,41 +92,13 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>requires $BROWSER_APP environment variable in `.zshenv`</string>
+	<string></string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
 	<string>YouTube Download</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/watch-later.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>youtube-video-save</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>77FF34ED-C1A2-4866-B205-06B792B3975B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -119,6 +117,44 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>548C7E00-D279-4BFE-B4CB-4F94C970637F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/watch-later.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>77FF34ED-C1A2-4866-B205-06B792B3975B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>watch-later</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>4BB7EB66-3B32-4A5D-94C3-A12BBF4A55FC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -146,34 +182,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/ydl.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>youtube-dl</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -192,12 +200,48 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/ydl.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<true/>
+				<key>triggerid</key>
+				<string>download-video</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>CCFB402E-C80D-4E73-B298-0A4D03E51617</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>### Requirements
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-- [fileicon](https://github.com/mklement0/fileicon)
-- requires $BROWSER_APP environment variable in `.zshenv`
+- `brew install yt-dlp`
 
 
 ### Supported Sites
@@ -208,12 +252,21 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>4BB7EB66-3B32-4A5D-94C3-A12BBF4A55FC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
 		<key>548C7E00-D279-4BFE-B4CB-4F94C970637F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
@@ -222,38 +275,49 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>save bookmark with image</string>
+			<string>save .url linking to youtube with thumbnail</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>85</real>
 		</dict>
 		<key>7EC8C18F-E353-4A93-9F40-FDB4C9531D57</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>270</real>
 		</dict>
 		<key>C7716DBE-2C15-46FC-A1E7-1A722EA60267</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>380</real>
+			<real>395</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>215</real>
+		</dict>
+		<key>CCFB402E-C80D-4E73-B298-0A4D03E51617</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>395</real>
 		</dict>
 		<key>F30AA24D-259D-4D2C-80C9-06B5EA576F7C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>download video</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>325</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

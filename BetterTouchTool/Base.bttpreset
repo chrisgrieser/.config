@@ -185,8 +185,58 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "C09EB37F-BF27-4922-8906-B9466BC665F0",
+  "BTTPresetUUID" : "C94E847C-50ED-4316-AFBB-35882FB5B37D",
   "BTTPresetContent" : [
+    {
+      "BTTAppBundleIdentifier" : "com.apple.finder",
+      "BTTAppName" : "Finder",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "Finder",
+      "BTTTriggers" : [
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060022.5358338,
+          "BTTTriggerType" : 108,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
+          "BTTTriggerTypeDescription" : "📂 goto parent dir",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "87A61AD2-99E4-4075-8747-C2FBAE8AB2DE",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 4,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.4955769,
+              "BTTTriggerParentUUID" : "87A61AD2-99E4-4075-8747-C2FBAE8AB2DE",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "BBEDBD47-68C7-46DA-878E-5C75FEFEA7F0",
+              "BTTShortcutToSend" : "55,126",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 1
+            }
+          ],
+          "BTTGestureNotes" : "📂 goto parent dir",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "goto parent dir",
+            "BTTCheatSheetTriggerLabel" : ""
+          }
+        }
+      ]
+    },
+    {
+      "BTTAppBundleIdentifier" : "BT.L",
+      "BTTAppName" : "Recently Used",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTTriggers" : [
+
+      ]
+    },
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
       "BTTAppName" : "Crunchyroll",
@@ -196,10 +246,10 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986576.6738019,
+          "BTTLastUpdatedAt" : 1724060384.655302,
           "BTTTriggerType" : 100,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
-          "BTTTriggerTypeDescription" : "beginning of video",
+          "BTTTriggerTypeDescription" : "⏮️ start of video",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "6E571D5A-93F5-4117-A568-B2CD2B7B14BC",
           "BTTPredefinedActionType" : 366,
@@ -222,17 +272,17 @@
               "BTTOrder" : 2
             }
           ],
-          "BTTGestureNotes" : "beginning of video",
+          "BTTGestureNotes" : "⏮️ start of video",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "beginning of video"
+            "BTTCheatSheetActionLabel" : "⏮️ start of video"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985049.82988,
+          "BTTLastUpdatedAt" : 1724059918.06849,
           "BTTTriggerType" : 103,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
-          "BTTTriggerTypeDescription" : "volume down",
+          "BTTTriggerTypeDescription" : "🔉 volume down",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "904D84A8-AFD3-4D49-ADFA-0F3DD3505503",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
@@ -260,29 +310,27 @@
               "BTTGestureNotes" : "Volume Up"
             }
           ],
-          "BTTGestureNotes" : "volume down",
+          "BTTGestureNotes" : "🔉 volume down",
           "BTTTriggerConfig" : {
             "BTTNoTouchTimeout" : 0,
             "BTTHUDText" : "🔉⬇️",
             "BTTShowHUD" : 1
           },
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "volume down"
+            "BTTCheatSheetActionLabel" : "🔉 volume down"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985042.6367431,
+          "BTTLastUpdatedAt" : 1724059882.6823239,
           "BTTTriggerType" : 102,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "volume up",
+          "BTTTriggerTypeDescription" : "🔊 volume up",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "1A20BDEA-3A32-42E7-95BA-207E703DDC50",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
           "BTTGenericActionConfig" : "autoAdapt",
           "BTTShortcutToSend" : "126",
-          "BTTRepeatRate" : 0.45439633727073669,
-          "BTTRepeatDelay" : 0.45766967535018921,
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
           "BTTOrder" : 0,
@@ -306,22 +354,22 @@
               "BTTGestureNotes" : "Volume Up"
             }
           ],
-          "BTTGestureNotes" : "volume up",
+          "BTTGestureNotes" : "🔊 volume up",
           "BTTTriggerConfig" : {
             "BTTNoTouchTimeout" : 0,
             "BTTHUDText" : "🔊⬆️",
             "BTTShowHUD" : 1
           },
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "volume up"
+            "BTTCheatSheetActionLabel" : "🔊 volume up"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985055.598933,
+          "BTTLastUpdatedAt" : 1724059933.759587,
           "BTTTriggerType" : 101,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Right",
-          "BTTTriggerTypeDescription" : "next video",
+          "BTTTriggerTypeDescription" : "⏭️ next video",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "57F1E3B3-A7EE-43DD-80C3-D12E8C0D532A",
           "BTTPredefinedActionType" : 366,
@@ -344,9 +392,9 @@
               "BTTOrder" : 2
             }
           ],
-          "BTTGestureNotes" : "next video",
+          "BTTGestureNotes" : "⏭️ next video",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "next video"
+            "BTTCheatSheetActionLabel" : "⏭️ next video"
           }
         },
         {
@@ -395,307 +443,48 @@
       ]
     },
     {
-      "BTTAppBundleIdentifier" : "com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml",
-      "BTTAppName" : "YouTube",
+      "BTTAppBundleIdentifier" : "com.brave.Browser",
+      "BTTAppName" : "Brave Browser",
       "BTTAppAutoInvertIcon" : 1,
       "BTTAppProcessMatchMode" : 2,
-      "BTTAppProcessName" : "YouTube",
+      "BTTAppProcessName" : "Brave Browser",
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986043.0527759,
-          "BTTTriggerType" : 103,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
-          "BTTTriggerTypeDescription" : "volume down",
+          "BTTLastUpdatedAt" : 1724060427.7985802,
+          "BTTTriggerType" : 107,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Down",
+          "BTTTriggerTypeDescription" : "💾 download with ydl",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "BE0F9F3A-82CD-488E-845D-C2741EAE09E0",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "125",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 8,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.493257,
-              "BTTTriggerType" : 157,
-              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Left",
-              "BTTTriggerTypeDescription" : "Volume Up",
-              "BTTTriggerParentUUID" : "BE0F9F3A-82CD-488E-845D-C2741EAE09E0",
-              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-              "BTTUUID" : "D83C884E-EB72-49CA-9C28-7217E858ACFF",
-              "BTTAutoAdaptActionToKeyboardLayout" : true,
-              "BTTGenericActionConfig" : "autoAdapt",
-              "BTTShortcutToSend" : "125",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 0,
-              "BTTGestureNotes" : "Volume Up"
-            }
-          ],
-          "BTTGestureNotes" : "volume down",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "volume down"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986043.052727,
-          "BTTTriggerType" : 157,
-          "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Left",
-          "BTTTriggerTypeDescription" : "previous chapter",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "A23A8295-76A9-4FFA-8FBA-979FEDFDB5C8",
+          "BTTUUID" : "00282312-3D22-43B3-9568-01CA3B73C906",
           "BTTPredefinedActionType" : 366,
           "BTTPredefinedActionName" : "Empty Placeholder",
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
-          "BTTOrder" : 6,
+          "BTTOrder" : 1,
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.4899189,
-              "BTTTriggerParentUUID" : "A23A8295-76A9-4FFA-8FBA-979FEDFDB5C8",
+              "BTTLastUpdatedAt" : 1724059818.0251269,
+              "BTTTriggerParentUUID" : "00282312-3D22-43B3-9568-01CA3B73C906",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "67A32400-B75B-44F2-975D-D964D0299AD7",
-              "BTTShortcutToSend" : "58,123",
+              "BTTUUID" : "6F68994C-DE56-4CC7-B3F9-EAA61658F24C",
+              "BTTPredefinedActionType" : 59,
+              "BTTPredefinedActionName" : "Open URL  or  Open URL With Selection",
+              "BTTOpenURL" : "alfred:\/\/runtrigger\/de.chris-grieser.youtube-dl\/download-video\/",
+              "BTTOpenURLBrowser" : "Default",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
-              "BTTOrder" : 3
+              "BTTOrder" : 40
             }
           ],
-          "BTTGestureNotes" : "previous chapter",
+          "BTTGestureNotes" : "💾 download with ydl",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "previous chapter"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724016895.7637711,
-          "BTTTriggerType" : 108,
-          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "goto home",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 2,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1724016927.854574,
-              "BTTTriggerParentUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "40A962F5-7D81-4B7A-BF12-B0B95A7A7755",
-              "BTTPredefinedActionType" : 206,
-              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
-              "BTTShellTaskActionScript" : "\"$HOME\/.config\/BetterTouchTool\/youtube-go-home.applescript\"",
-              "BTTShellTaskActionConfig" : "\/bin\/bash:::-c:::-:::",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 39
-            }
-          ],
-          "BTTGestureNotes" : "goto home",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "goto home",
-            "BTTCheatSheetTriggerLabel" : ""
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986043.0528069,
-          "BTTTriggerType" : 158,
-          "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Right",
-          "BTTTriggerTypeDescription" : "next chapter",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "1012B274-5257-4B0F-B4E3-3F2ED5C932C7",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 5,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.4918661,
-              "BTTTriggerParentUUID" : "1012B274-5257-4B0F-B4E3-3F2ED5C932C7",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "0D4EB70E-0BFC-46FB-AA8F-6A299E99C1F2",
-              "BTTShortcutToSend" : "58,124",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 3
-            }
-          ],
-          "BTTGestureNotes" : "next chapter",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "next chapter"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986564.7578001,
-          "BTTTriggerType" : 100,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
-          "BTTTriggerTypeDescription" : "beginning of video",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "E86B898F-D576-4157-9A01-2DFE22656A22",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 4,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723986552.6169171,
-              "BTTTriggerParentUUID" : "E86B898F-D576-4157-9A01-2DFE22656A22",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "CC4B8109-7FA7-4B36-9680-FC723862AEDF",
-              "BTTLayoutIndependentActionChar" : "0",
-              "BTTShortcutToSend" : "29",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 2
-            }
-          ],
-          "BTTGestureNotes" : "beginning of video",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "beginning of video"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986043.0527921,
-          "BTTTriggerType" : 102,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "volume up",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "48D0B20B-E19F-4D5B-9B3E-2CDFD672D21A",
-          "BTTAutoAdaptActionToKeyboardLayout" : true,
-          "BTTGenericActionConfig" : "autoAdapt",
-          "BTTShortcutToSend" : "126",
-          "BTTRepeatRate" : 0.45439633727073669,
-          "BTTRepeatDelay" : 0.45766967535018921,
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 7,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.4912062,
-              "BTTTriggerType" : 182,
-              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Top Left",
-              "BTTTriggerTypeDescription" : "Volume Up",
-              "BTTTriggerParentUUID" : "48D0B20B-E19F-4D5B-9B3E-2CDFD672D21A",
-              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-              "BTTUUID" : "479B5D1C-BB1B-4A49-9D76-B94458D8A89A",
-              "BTTAutoAdaptActionToKeyboardLayout" : true,
-              "BTTGenericActionConfig" : "autoAdapt",
-              "BTTShortcutToSend" : "126",
-              "BTTRepeatRate" : 0.45439633727073669,
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 0,
-              "BTTGestureNotes" : "Volume Up"
-            }
-          ],
-          "BTTGestureNotes" : "volume up",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "volume up"
-          }
-        },
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986043.0526872,
-          "BTTTriggerType" : 101,
-          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Right",
-          "BTTTriggerTypeDescription" : "next video",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "6CA4BCF8-42A2-416E-A97F-4E7E08B2C37F",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 3,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.492558,
-              "BTTTriggerParentUUID" : "6CA4BCF8-42A2-416E-A97F-4E7E08B2C37F",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "B093F615-F9A7-44C6-A184-FB0C77B6B4DF",
-              "BTTLayoutIndependentActionChar" : "n",
-              "BTTShortcutToSend" : "56,45",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 2
-            }
-          ],
-          "BTTGestureNotes" : "next video",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "next video"
-          }
-        }
-      ]
-    },
-    {
-      "BTTAppBundleIdentifier" : "com.apple.finder",
-      "BTTAppName" : "Finder",
-      "BTTAppAutoInvertIcon" : 1,
-      "BTTAppProcessMatchMode" : 2,
-      "BTTAppProcessName" : "Finder",
-      "BTTTriggers" : [
-        {
-          "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985093.3092351,
-          "BTTTriggerType" : 108,
-          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
-          "BTTTriggerTypeDescription" : "goto parent dir",
-          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTUUID" : "87A61AD2-99E4-4075-8747-C2FBAE8AB2DE",
-          "BTTPredefinedActionType" : 366,
-          "BTTPredefinedActionName" : "Empty Placeholder",
-          "BTTEnabled" : 1,
-          "BTTEnabled2" : 1,
-          "BTTOrder" : 4,
-          "BTTAdditionalActions" : [
-            {
-              "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723984097.4955769,
-              "BTTTriggerParentUUID" : "87A61AD2-99E4-4075-8747-C2FBAE8AB2DE",
-              "BTTIsPureAction" : true,
-              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "BBEDBD47-68C7-46DA-878E-5C75FEFEA7F0",
-              "BTTShortcutToSend" : "55,126",
-              "BTTEnabled" : 1,
-              "BTTEnabled2" : 1,
-              "BTTOrder" : 1
-            }
-          ],
-          "BTTGestureNotes" : "goto parent dir",
-          "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "goto parent dir",
+            "BTTCheatSheetActionLabel" : "💾 download with ydl",
             "BTTCheatSheetTriggerLabel" : ""
           }
         }
-      ]
-    },
-    {
-      "BTTAppBundleIdentifier" : "BT.L",
-      "BTTAppName" : "Recently Used",
-      "BTTAppAutoInvertIcon" : 1,
-      "BTTTriggers" : [
-
       ]
     },
     {
@@ -705,10 +494,10 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985102.8264079,
+          "BTTLastUpdatedAt" : 1724059949.9288859,
           "BTTTriggerType" : 101,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Right",
-          "BTTTriggerTypeDescription" : "next video",
+          "BTTTriggerTypeDescription" : "⏭️ next video",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "61CEB235-F8E2-4EEA-80C7-7E3FB50FDEC7",
           "BTTPredefinedActionType" : 366,
@@ -730,18 +519,18 @@
               "BTTOrder" : 2
             }
           ],
-          "BTTGestureNotes" : "next video",
+          "BTTGestureNotes" : "⏭️ next video",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "next video",
+            "BTTCheatSheetActionLabel" : "⏭️ next video",
             "BTTCheatSheetTriggerLabel" : ""
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985129.113868,
+          "BTTLastUpdatedAt" : 1724060337.30021,
           "BTTTriggerType" : 157,
           "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Left",
-          "BTTTriggerTypeDescription" : "previous chapter",
+          "BTTTriggerTypeDescription" : "📕 previous chapter",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "96A8CE34-EB5A-479F-9763-AA038824E81C",
           "BTTPredefinedActionType" : 366,
@@ -764,17 +553,17 @@
               "BTTOrder" : 3
             }
           ],
-          "BTTGestureNotes" : "previous chapter",
+          "BTTGestureNotes" : "📕 previous chapter",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "previous chapter"
+            "BTTCheatSheetActionLabel" : "📕 previous chapter"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986816.133759,
+          "BTTLastUpdatedAt" : 1724060392.8568969,
           "BTTTriggerType" : 100,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
-          "BTTTriggerTypeDescription" : "beginning of video",
+          "BTTTriggerTypeDescription" : "⏮️ start of video",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "2223F53A-FAA5-42AD-A2A0-9A265FA9217E",
           "BTTPredefinedActionType" : 366,
@@ -804,17 +593,17 @@
               "BTTOrder" : 3
             }
           ],
-          "BTTGestureNotes" : "beginning of video",
+          "BTTGestureNotes" : "⏮️ start of video",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "beginning of video"
+            "BTTCheatSheetActionLabel" : "⏮️ start of video"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985118.5541039,
+          "BTTLastUpdatedAt" : 1724060304.399857,
           "BTTTriggerType" : 158,
           "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Right",
-          "BTTTriggerTypeDescription" : "next chapter",
+          "BTTTriggerTypeDescription" : "📙 next chapter",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "6DC2467B-EFC8-49AA-847C-7195BC7E4C6B",
           "BTTPredefinedActionType" : 366,
@@ -837,9 +626,9 @@
               "BTTOrder" : 3
             }
           ],
-          "BTTGestureNotes" : "next chapter",
+          "BTTGestureNotes" : "📙 next chapter",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "next chapter"
+            "BTTCheatSheetActionLabel" : "📙 next chapter"
           }
         }
       ]
@@ -932,6 +721,295 @@
       ]
     },
     {
+      "BTTAppBundleIdentifier" : "com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml",
+      "BTTAppName" : "YouTube",
+      "BTTAppAutoInvertIcon" : 1,
+      "BTTAppProcessMatchMode" : 2,
+      "BTTAppProcessName" : "YouTube",
+      "BTTTriggers" : [
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724059908.76125,
+          "BTTTriggerType" : 103,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
+          "BTTTriggerTypeDescription" : "🔉 volume down",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "BE0F9F3A-82CD-488E-845D-C2741EAE09E0",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "125",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 7,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.493257,
+              "BTTTriggerType" : 157,
+              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Left",
+              "BTTTriggerTypeDescription" : "Volume Up",
+              "BTTTriggerParentUUID" : "BE0F9F3A-82CD-488E-845D-C2741EAE09E0",
+              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+              "BTTUUID" : "D83C884E-EB72-49CA-9C28-7217E858ACFF",
+              "BTTAutoAdaptActionToKeyboardLayout" : true,
+              "BTTGenericActionConfig" : "autoAdapt",
+              "BTTShortcutToSend" : "125",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 0,
+              "BTTGestureNotes" : "Volume Up"
+            }
+          ],
+          "BTTGestureNotes" : "🔉 volume down",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "🔉 volume down"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060332.251893,
+          "BTTTriggerType" : 157,
+          "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Left",
+          "BTTTriggerTypeDescription" : "📕 previous chapter",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "A23A8295-76A9-4FFA-8FBA-979FEDFDB5C8",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 5,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.4899189,
+              "BTTTriggerParentUUID" : "A23A8295-76A9-4FFA-8FBA-979FEDFDB5C8",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "67A32400-B75B-44F2-975D-D964D0299AD7",
+              "BTTShortcutToSend" : "58,123",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 3
+            }
+          ],
+          "BTTGestureNotes" : "📕 previous chapter",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "📕 previous chapter"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060062.1197062,
+          "BTTTriggerType" : 107,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Down",
+          "BTTTriggerTypeDescription" : "🎞️ watch later",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "39BAB12B-82E4-4D03-A86B-FE1B3CE55F6F",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 1,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1724059535.386771,
+              "BTTTriggerParentUUID" : "39BAB12B-82E4-4D03-A86B-FE1B3CE55F6F",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "6B3DA912-B8B1-4C5C-B92D-8D9926EEC410",
+              "BTTPredefinedActionType" : 59,
+              "BTTPredefinedActionName" : "Open URL  or  Open URL With Selection",
+              "BTTOpenURL" : "alfred:\/\/runtrigger\/de.chris-grieser.youtube-dl\/watch-later",
+              "BTTOpenURLBrowser" : "Default",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 40
+            }
+          ],
+          "BTTGestureNotes" : "🎞️ watch later",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "🎞️ watch later"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060038.4431701,
+          "BTTTriggerType" : 108,
+          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
+          "BTTTriggerTypeDescription" : "🏠 goto home",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1724016927.854574,
+              "BTTTriggerParentUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "40A962F5-7D81-4B7A-BF12-B0B95A7A7755",
+              "BTTPredefinedActionType" : 206,
+              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
+              "BTTShellTaskActionScript" : "\"$HOME\/.config\/BetterTouchTool\/youtube-go-home.applescript\"",
+              "BTTShellTaskActionConfig" : "\/bin\/bash:::-c:::-:::",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 39
+            }
+          ],
+          "BTTGestureNotes" : "🏠 goto home",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "🏠 goto home",
+            "BTTCheatSheetTriggerLabel" : ""
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060313.737622,
+          "BTTTriggerType" : 158,
+          "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Bottom Right",
+          "BTTTriggerTypeDescription" : "📙 next chapter",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "1012B274-5257-4B0F-B4E3-3F2ED5C932C7",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 4,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.4918661,
+              "BTTTriggerParentUUID" : "1012B274-5257-4B0F-B4E3-3F2ED5C932C7",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "0D4EB70E-0BFC-46FB-AA8F-6A299E99C1F2",
+              "BTTShortcutToSend" : "58,124",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 3
+            }
+          ],
+          "BTTGestureNotes" : "📙 next chapter",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "📙 next chapter"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724060375.513083,
+          "BTTTriggerType" : 100,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Left",
+          "BTTTriggerTypeDescription" : "⏮️ start of video",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "E86B898F-D576-4157-9A01-2DFE22656A22",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 3,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723986552.6169171,
+              "BTTTriggerParentUUID" : "E86B898F-D576-4157-9A01-2DFE22656A22",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "CC4B8109-7FA7-4B36-9680-FC723862AEDF",
+              "BTTLayoutIndependentActionChar" : "0",
+              "BTTShortcutToSend" : "29",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 2
+            }
+          ],
+          "BTTGestureNotes" : "⏮️ start of video",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "⏮️ start of video"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724059894.6026289,
+          "BTTTriggerType" : 102,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
+          "BTTTriggerTypeDescription" : "🔊 volume up",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "48D0B20B-E19F-4D5B-9B3E-2CDFD672D21A",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTGenericActionConfig" : "autoAdapt",
+          "BTTShortcutToSend" : "126",
+          "BTTRepeatRate" : 0.45439633727073669,
+          "BTTRepeatDelay" : 0.45766967535018921,
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 6,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.4912062,
+              "BTTTriggerType" : 182,
+              "BTTTriggerTypeDescriptionReadOnly" : "Corner Click Top Left",
+              "BTTTriggerTypeDescription" : "Volume Up",
+              "BTTTriggerParentUUID" : "48D0B20B-E19F-4D5B-9B3E-2CDFD672D21A",
+              "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
+              "BTTUUID" : "479B5D1C-BB1B-4A49-9D76-B94458D8A89A",
+              "BTTAutoAdaptActionToKeyboardLayout" : true,
+              "BTTGenericActionConfig" : "autoAdapt",
+              "BTTShortcutToSend" : "126",
+              "BTTRepeatRate" : 0.45439633727073669,
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 0,
+              "BTTGestureNotes" : "Volume Up"
+            }
+          ],
+          "BTTGestureNotes" : "🔊 volume up",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "🔊 volume up"
+          }
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724059942.557426,
+          "BTTTriggerType" : 101,
+          "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Right",
+          "BTTTriggerTypeDescription" : "⏭️ next video",
+          "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+          "BTTUUID" : "6CA4BCF8-42A2-416E-A97F-4E7E08B2C37F",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTOrder" : 2,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1723984097.492558,
+              "BTTTriggerParentUUID" : "6CA4BCF8-42A2-416E-A97F-4E7E08B2C37F",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
+              "BTTUUID" : "B093F615-F9A7-44C6-A184-FB0C77B6B4DF",
+              "BTTLayoutIndependentActionChar" : "n",
+              "BTTShortcutToSend" : "56,45",
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTOrder" : 2
+            }
+          ],
+          "BTTGestureNotes" : "⏭️ next video",
+          "BTTTriggerCheatSheetConfig" : {
+            "BTTCheatSheetActionLabel" : "⏭️ next video"
+          }
+        }
+      ]
+    },
+    {
       "BTTAppBundleIdentifier" : "BT.G",
       "BTTAppName" : "Global",
       "BTTAppAutoInvertIcon" : 1,
@@ -941,10 +1019,10 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985731.1201382,
+          "BTTLastUpdatedAt" : 1724060126.7129221,
           "BTTTriggerType" : 114,
           "BTTTriggerTypeDescriptionReadOnly" : "TipTap Right (1 Finger Fix)",
-          "BTTTriggerTypeDescription" : "rewind",
+          "BTTTriggerTypeDescription" : "⏪ rewind",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "D392FC2B-3213-4224-A166-8A0C880CF5AE",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
@@ -953,21 +1031,21 @@
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
           "BTTOrder" : 2,
-          "BTTGestureNotes" : "rewind",
+          "BTTGestureNotes" : "⏪ rewind",
           "BTTTriggerConfig" : {
             "BTTNoTouchTimeout" : 0,
             "BTTHUDText" : "→"
           },
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "rewind"
+            "BTTCheatSheetActionLabel" : "⏪ rewind"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985731.1200819,
+          "BTTLastUpdatedAt" : 1724060447.934917,
           "BTTTriggerType" : 163,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Double-Tap",
-          "BTTTriggerTypeDescription" : "close tab\/window",
+          "BTTTriggerTypeDescription" : "❎ close",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "577DF439-C51F-4528-9276-86FCD0F99E3E",
           "BTTLayoutIndependentActionChar" : "w",
@@ -977,9 +1055,9 @@
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
           "BTTOrder" : 1,
-          "BTTGestureNotes" : "close tab\/window",
+          "BTTGestureNotes" : "❎ close",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "close tab\/window"
+            "BTTCheatSheetActionLabel" : "❎ close"
           }
         },
         {
@@ -1017,9 +1095,9 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723990010.7858281,
-          "BTTTriggerConditionsFormatReadOnly" : "active_screen_resolutions != \"{{0, 0}, {1920, 1080}}\"",
-          "BTTTriggerConditionsData" : "YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBYLDBMYICorLTQ4PT5BRUlOT1JaXmJkVSRudWxs0w0ODxAREl8QF05TQ29tcG91bmRQcmVkaWNhdGVUeXBlXxAPTlNTdWJwcmVkaWNhdGVzViRjbGFzcxABgAKAFdIUDxUXWk5TLm9iamVjdHOhFoADgBTUDxkaGxwdHh9fEBFOU1JpZ2h0RXhwcmVzc2lvbl8QEE5TTGVmdEV4cHJlc3Npb25fEBNOU1ByZWRpY2F0ZU9wZXJhdG9ygBOADoAEgBHVISIjJA8lJicoKVlOU09wZXJhbmReTlNTZWxlY3Rvck5hbWVfEBBOU0V4cHJlc3Npb25UeXBlW05TQXJndW1lbnRzgAaABRADgAiADVx2YWx1ZUZvcktleTrSIw8QLIAH0i4vMDFaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5TU2VsZkV4cHJlc3Npb26jMDIzXE5TRXhwcmVzc2lvblhOU09iamVjdNIUDzU3oTaACYAM0w8jOTo7PFlOU0tleVBhdGiACxAKgApfEBlhY3RpdmVfc2NyZWVuX3Jlc29sdXRpb25z0i4vP0BfEBxOU0tleVBhdGhTcGVjaWZpZXJFeHByZXNzaW9uoz8yM9IuL0JDXk5TTXV0YWJsZUFycmF5o0JEM1dOU0FycmF50i4vRkdfEBNOU0tleVBhdGhFeHByZXNzaW9upEZIMjNfEBROU0Z1bmN0aW9uRXhwcmVzc2lvbtNKIw9LTE1fEA9OU0NvbnN0YW50VmFsdWWADxAAgBBfEBZ7ezAsIDB9LCB7MTkyMCwgMTA4MH190i4vUFFfEBlOU0NvbnN0YW50VmFsdWVFeHByZXNzaW9uo1AyM9UPU1RVVldMWExZWk5TTW9kaWZpZXJYTlNOZWdhdGVZTlNPcHRpb25zXk5TT3BlcmF0b3JUeXBlgBIJEAXSLi9bXF8QG05TRXF1YWxpdHlQcmVkaWNhdGVPcGVyYXRvcqNbXTNfEBNOU1ByZWRpY2F0ZU9wZXJhdG9y0i4vX2BfEBVOU0NvbXBhcmlzb25QcmVkaWNhdGWjX2EzW05TUHJlZGljYXRl0i4vRGOiRDPSLi9lZl8QE05TQ29tcG91bmRQcmVkaWNhdGWjZWEzAAgAEQAaACQAKQAyADcASQBMAFEAUwBsAHIAeQCTAKUArACuALAAsgC3AMIAxADGAMgA0QDlAPgBDgEQARIBFAEWASEBKwE6AU0BWQFbAV0BXwFhAWMBcAF1AXcBfAGHAZABowGnAbQBvQHCAcQBxgHIAc8B2QHbAd0B3wH7AgACHwIjAigCNwI7AkMCSAJeAmMCegKBApMClQKXApkCsgK3AtMC1wLiAu0C9gMAAw8DEQMSAxQDGQM3AzsDUQNWA24DcgN+A4MDhgOLA6EAAAAAAAACAQAAAAAAAABnAAAAAAAAAAAAAAAAAAADpQ==",
+          "BTTLastUpdatedAt" : 1724059733.96819,
+          "BTTTriggerConditionsFormatReadOnly" : "visible_window_list CONTAINS \"BetterTouchTool\" OR active_screen_resolutions != \"{{0, 0}, {1920, 1080}}\"",
+          "BTTTriggerConditionsData" : "YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGvEB8LDBMZISssLzY6P0BDR0tQUVRaXmJnbHBzdHd4foGDVSRudWxs0w0ODxAREl8QF05TQ29tcG91bmRQcmVkaWNhdGVUeXBlXxAPTlNTdWJwcmVkaWNhdGVzViRjbGFzcxACgAKAHtIUDxUYWk5TLm9iamVjdHOiFheAA4AUgB3UDxobHB0eHyBfEBFOU1JpZ2h0RXhwcmVzc2lvbl8QEE5TTGVmdEV4cHJlc3Npb25fEBNOU1ByZWRpY2F0ZU9wZXJhdG9ygBOADoAEgBHVIiMkJQ8mJygpKllOU09wZXJhbmReTlNTZWxlY3Rvck5hbWVfEBBOU0V4cHJlc3Npb25UeXBlW05TQXJndW1lbnRzgAaABRADgAiADVx2YWx1ZUZvcktleTrSJA8tLhABgAfSMDEyM1okY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNTZWxmRXhwcmVzc2lvbqMyNDVcTlNFeHByZXNzaW9uWE5TT2JqZWN00hQPNzmhOIAJgAzTDyQ7PD0+WU5TS2V5UGF0aIALEAqACl8QE3Zpc2libGVfd2luZG93X2xpc3TSMDFBQl8QHE5TS2V5UGF0aFNwZWNpZmllckV4cHJlc3Npb26jQTQ10jAxREVeTlNNdXRhYmxlQXJyYXmjREY1V05TQXJyYXnSMDFISV8QE05TS2V5UGF0aEV4cHJlc3Npb26kSEo0NV8QFE5TRnVuY3Rpb25FeHByZXNzaW9u00wkD01OT18QD05TQ29uc3RhbnRWYWx1ZYAPEACAEF8QD0JldHRlclRvdWNoVG9vbNIwMVJTXxAZTlNDb25zdGFudFZhbHVlRXhwcmVzc2lvbqNSNDXUD1VWV1hOTllaTlNNb2RpZmllcldOU0ZsYWdzXk5TT3BlcmF0b3JUeXBlgBIQY9IwMVtcXxAVTlNJblByZWRpY2F0ZU9wZXJhdG9yo1tdNV8QE05TUHJlZGljYXRlT3BlcmF0b3LSMDFfYF8QFU5TQ29tcGFyaXNvblByZWRpY2F0ZaNfYTVbTlNQcmVkaWNhdGXUDxobHB1kZWaAE4AZgBWAG9UiIyQlDyYnKGoqgAaABYAWgA3SFA9tOaFugBeADNMPJDs8PXKAC4AYXxAZYWN0aXZlX3NjcmVlbl9yZXNvbHV0aW9uc9NMJA91Tk+AGoAQXxAWe3swLCAwfSwgezE5MjAsIDEwODB9fdUPVXl6V3tOfE59WE5TTmVnYXRlWU5TT3B0aW9uc4AcCRAF0jAxf4BfEBtOU0VxdWFsaXR5UHJlZGljYXRlT3BlcmF0b3Kjf1010jAxRoKiRjXSMDGEhV8QE05TQ29tcG91bmRQcmVkaWNhdGWjhGE1AAgAEQAaACQAKQAyADcASQBMAFEAUwB1AHsAggCcAK4AtQC3ALkAuwDAAMsAzgDQANIA1ADdAPEBBAEaARwBHgEgASIBLQE3AUYBWQFlAWcBaQFrAW0BbwF8AYEBgwGFAYoBlQGeAbEBtQHCAcsB0AHSAdQB1gHdAecB6QHrAe0CAwIIAicCKwIwAj8CQwJLAlACZgJrAoICiQKbAp0CnwKhArMCuALUAtgC4QLsAvQDAwMFAwcDDAMkAygDPgNDA1sDXwNrA3QDdgN4A3oDfAOHA4kDiwONA48DlAOWA5gDmgOhA6MDpQPBA8gDygPMA+UD8AP5BAMEBQQGBAgEDQQrBC8ENAQ3BDwEUgAAAAAAAAIBAAAAAAAAAIYAAAAAAAAAAAAAAAAAAARW",
           "BTTTriggerType" : 610,
           "BTTTriggerTypeDescriptionReadOnly" : "Move Mouse To Top Right Corner",
           "BTTTriggerClass" : "BTTTriggerTypeOtherTriggers",
@@ -1033,7 +1111,7 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1723990014.1968451,
+              "BTTLastUpdatedAt" : 1724060213.633229,
               "BTTTriggerParentUUID" : "E0D64D6C-4A3B-41E5-AB77-69509F6C40AB",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeOtherTriggers",
@@ -1094,10 +1172,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985748.65501,
+          "BTTLastUpdatedAt" : 1724060454.9817638,
           "BTTTriggerType" : 111,
           "BTTTriggerTypeDescriptionReadOnly" : "5 Finger Tap",
-          "BTTTriggerTypeDescription" : "google selection",
+          "BTTTriggerTypeDescription" : "🌐 google selection",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "5441B4FB-3386-4FB8-8732-6BBEF2EB7E0E",
           "BTTPredefinedActionType" : 366,
@@ -1120,17 +1198,17 @@
               "BTTOrder" : 4
             }
           ],
-          "BTTGestureNotes" : "google selection",
+          "BTTGestureNotes" : "🌐 google selection",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "google selection"
+            "BTTCheatSheetActionLabel" : "🌐 google selection"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985731.1200981,
+          "BTTLastUpdatedAt" : 1724060116.1152291,
           "BTTTriggerType" : 113,
           "BTTTriggerTypeDescriptionReadOnly" : "TipTap Left (1 Finger Fix)",
-          "BTTTriggerTypeDescription" : "forward",
+          "BTTTriggerTypeDescription" : "⏩ forward",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "E3233F8C-FCD0-4989-A29F-A1A3372115FC",
           "BTTAutoAdaptActionToKeyboardLayout" : true,
@@ -1139,13 +1217,13 @@
           "BTTEnabled" : 1,
           "BTTEnabled2" : 1,
           "BTTOrder" : 3,
-          "BTTGestureNotes" : "forward",
+          "BTTGestureNotes" : "⏩ forward",
           "BTTTriggerConfig" : {
             "BTTNoTouchTimeout" : 0,
             "BTTHUDText" : "←"
           },
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "forward"
+            "BTTCheatSheetActionLabel" : "⏩ forward"
           }
         }
       ]

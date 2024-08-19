@@ -225,7 +225,7 @@ local function moveWinToNextDisplay()
 	end)
 end
 
-local function moveAllWinsToProjectorScreen()
+function M.moveAllWinsToProjectorScreen()
 	if #hs.screen.allScreens() < 2 then return end
 	if not env.isProjector() then return end
 
@@ -248,9 +248,6 @@ hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.la
 hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
 hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
 -- stylua: ignore end
-
--- for adding to Shortcuts.app
-hs.urlevent.bind("move-all-wins-to-projector", moveAllWinsToProjectorScreen)
 
 --------------------------------------------------------------------------------
 return M
