@@ -1,6 +1,6 @@
 # SHORTHANDS
 alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_SPACE`
-alias r=' exec zsh' # do not reload with source ~/.zshrc, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
+alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
 alias j="just"
@@ -39,6 +39,7 @@ function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PA
 
 function cake { mkdir -p "$1" && cd "$1" || return 1; }
 function topen { touch "$1" && open "$1"; }
+function p { qlmanage -p "$1" &> /dev/null; }
 
 #───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)

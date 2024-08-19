@@ -182,9 +182,9 @@ compdef _lc lc
 # no arg = all files in folder will be deleted
 function d {
 	if [[ $# == 0 ]]; then
-		trash ./*(D) || return 1 # (D) makes the glob include dotfiles (zsh-specific)
+		trash ./*(D) # (D) makes the glob include dotfiles (zsh-specific)
 	else
-		trash "$@" || return 1
+		trash "$@"
 	fi
 }
 
