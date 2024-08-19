@@ -17,8 +17,8 @@ return {
 	{ -- which-key
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		-- remove bindings so they do not clutter which-key
 		init = function()
+			-- remove bindings so they do not clutter which-key
 			vim.keymap.del("n", "gcc")
 			vim.keymap.del("o", "gc")
 		end,
