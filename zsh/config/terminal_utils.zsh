@@ -142,7 +142,9 @@ function p {
 	local filetype_info
 	filetype_info=$(file --mime "$1")
 	if [[ "$filetype_info" =~ json ]]; then
-		fx "$1"
+		yq --prettyPrint --output-format=json --colors "$1"
+	elif [[ "$filetype_info" =~ yaml ]]; then
+		yq --prettyPrint --output-format=yaml --colors "$1"
 	elif [[ "$filetype_info" =~ text ]]; then
 		bat "$1"
 	elif [[ "$filetype_info" =~ image ]]; then
@@ -150,27 +152,6 @@ function p {
 	else
 		file "$1"
 	fi
-}
-
-# interactive `yq`
-function iq {
-	# Read stdin into a temp file if data is provided via stdin
-	if [[ ! -t 0 ]]; then
-		cat > "$(mktemp)"
-	else
-		file="$1"
-	fi
-
-	selection=$(
-		yq --colors --output-format=yaml "." "$file" |
-			fzf --query="." --ansi --no-separator --inline-info --disabled \
-				--header-first --header=" ↵ Search for new query   ⌥↵ Print query" \
-				--bind="enter:reload(yq --colors --output-format=yaml {q} '$file')" \
-				--bind="alt-enter:print-query,alt-enter:accept"
-	)
-	[[ -z "$selection" ]] && return 0
-	echo -n "$selection" | pbcopy
-	print "\e[1;32mCopied:\e[0m $selection"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
