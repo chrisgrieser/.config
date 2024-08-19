@@ -24,6 +24,9 @@ zstyle ':completion:*:default' list-colors \
 # hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
+# print help messages in blue (affects for instance `just` recipe-descriptions)
+zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
+
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
@@ -39,7 +42,7 @@ bindkey -M menuselect '^N' vi-forward-blank-word   # next group
 
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
-# INFO "path-directories" changes the order of "directories in cdpath"
+# INFO moving "path-directories" down to change the order of "directories in cdpath"
 zstyle ':completion:*' group-order \
 	all-expansions expansions options \
 	path-directories \
