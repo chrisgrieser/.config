@@ -137,25 +137,6 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# file previewer
-function p {
-	local filetype_info
-	filetype_info=$(file --mime "$1")
-	if [[ "$filetype_info" =~ json ]]; then
-		yq --prettyPrint --output-format=json --colors "$1"
-	elif [[ "$filetype_info" =~ yaml ]]; then
-		yq --prettyPrint --output-format=yaml --colors "$1"
-	elif [[ "$filetype_info" =~ text ]]; then
-		bat "$1"
-	elif [[ "$filetype_info" =~ image ]]; then
-		qlmanage -p "$1" &> /dev/null
-	else
-		file "$1"
-	fi
-}
-
-#───────────────────────────────────────────────────────────────────────────────
-
 # copy result of last command
 function lr() {
 	to_copy=$(eval "$(history -n -1)")
