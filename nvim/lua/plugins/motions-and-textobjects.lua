@@ -171,6 +171,26 @@ return {
 			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = "sh", desc = "󰟥 outer pipe" },
 			-- stylua: ignore end
 
+			{ -- auto-indent linewise pastes
+				"p",
+				function()
+					vim.cmd.normal { "p", bang = true }
+					if vim.fn.getregtype() == "V" then
+						require("various-textobjs").lastChange()
+						vim.cmd.normal { "=", bang = true }
+					end
+				end,
+				desc = " Auto-indent paste",
+			},
+			{ -- indent last paste
+				"^",
+				function()
+					require("various-textobjs").lastChange()
+					local changeFound = vim.fn.mode():find("v")
+					if changeFound then vim.cmd.normal { ">", bang = true } end
+				end,
+				desc = "󰉶 Indent Last Paste",
+			},
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
@@ -211,15 +231,6 @@ return {
 					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 1000)
 				end,
 				desc = "󰅍 Yank surrounding indent",
-			},
-			{ -- indent last paste
-				"^",
-				function()
-					require("various-textobjs").lastChange()
-					local changeFound = vim.fn.mode():find("v")
-					if changeFound then u.normal(">") end
-				end,
-				desc = "󰉶 Indent Last Paste",
 			},
 			{ -- open URL (forward seeking)
 				"gx",

@@ -318,7 +318,6 @@ keymap("n", "dd", function()
 end, { expr = true, desc = "dd" })
 
 -- better pasting
-keymap("n", "p", "]p", { desc = " Auto-indent paste" })
 keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
