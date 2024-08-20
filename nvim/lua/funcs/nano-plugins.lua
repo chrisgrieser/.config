@@ -117,5 +117,23 @@ function M.startStopRecording(toggleKey, register)
 	end
 end
 
+-- UPPER -> lower -> Title -> UPPER
+function M.toggleWordCasing()
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
+
+	local cword = vim.fn.expand("<cword>")
+	local cmd
+	if cword == cword:upper() then
+		cmd = "guiw"
+	elseif cword == cword:lower() then
+		cmd = "guiwgUl"
+	else
+		cmd = "gUiw"
+	end
+	vim.cmd.normal { cmd, bang = true }
+
+	vim.api.nvim_win_set_cursor(0, prevCursor)
+end
+
 --------------------------------------------------------------------------------
 return M

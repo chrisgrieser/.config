@@ -48,11 +48,14 @@ keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
 keymap("n", "U", "<cmd>silent redo<CR>zv")
 
 -- emulate some basic commands from `vim-abolish`
-keymap("n", "crt", "mzguiwgUl`z", { desc = "󰬴 Titlecase" })
-keymap("n", "cru", "mzgUiw`z", { desc = "󰬴 lowercase" })
-keymap("n", "crl", "mzguiw`z", { desc = "󰬴 UPPERCASE" })
+keymap(
+	"n",
+	"<",
+	function() require("funcs.nano-plugins").toggleWordCasing() end,
+	{ desc = "󰬴 Toggle word case" }
+)
 
-keymap("n", "~", "v~", { desc = "󰬴 Toggle case w/o moving" })
+keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 
 -- Delete trailing character
 keymap("n", "X", function()
