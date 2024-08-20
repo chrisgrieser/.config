@@ -253,7 +253,8 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 		-- clear signs
 		local group = vim.api.nvim_create_augroup("quickfixSigns", { clear = true })
-		vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+		vim.iter(vim.api.nvim_list_bufs())
+			:each(function(bufnr) vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end)
 
 		-- set signs
 		for _, qf in pairs(vim.fn.getqflist()) do
