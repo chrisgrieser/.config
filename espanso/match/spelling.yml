@@ -61,9 +61,9 @@ matches:
   - { replace: json, trigger: sjon, propagate_case: true, word: true }
   - { replace: just, trigger: jsut, word: true }
   - { replace: keyboard, trigger: keybaord, propagate_case: true }
-  - { replace: know, trigger: knwo, word: true }
+  - { replace: know, trigger: knwo, propagate_case: true }
   - { replace: light, trigger: lgiht, propagate_case: true, word: true }
-  - { replace: like, trigger: liek }
+  - { replace: like, trigger: liek, propagate_case: true }
   - { replace: lower, trigger: lwoer, propagate_case: true }
   - { replace: mails, trigger: maisl, propagate_case: true, word: true }
   - { replace: make, trigger: amke, propagate_case: true, word: true }
@@ -90,7 +90,7 @@ matches:
   - { replace: separate, trigger: seperate, propagate_case: true }
   - { replace: separator, trigger: seperator, propagate_case: true, word: true }
   - { replace: should, trigger: shoudl }
-  - { replace: show, trigger: shwo, propagate_case: true, word: true }
+  - { replace: show, trigger: shwo, propagate_case: true }
   - { replace: since, triggers: [sicne, isnce], propagate_case: true, word: true }
   - { replace: somewhat, trigger: somewaht, propagate_case: true, word: true }
   - { replace: suppress, triggers: ["supress", "surpress", "surppress"], propagate_case: true }
@@ -107,9 +107,9 @@ matches:
   - { replace: useful, trigger: sueful }
   - { replace: user, trigger: suer, propagate_case: true }
   - { replace: version, trigger: verison, propagate_case: true }
-  - { replace: want, trigger: wnat, propagate_case: true, word: true }
+  - { replace: want, trigger: wnat, propagate_case: true }
   - { replace: which, trigger: whcih, propagate_case: true, word: true }
   - { replace: would, triggers: [woudl, wuold], propagate_case: true, word: true }
-  - { replace: you, triggers: [yuo, oyu], propagate_case: true, word: true }
-  - { replace: workflow, trigger: workflwo, propagate_case: true, word: true }
-  - { replace: display, trigger: dispaly, propagate_case: true, word: true }
+  - { replace: you, triggers: [yuo, oyu], propagate_case: true }
+  - { replace: workflow, trigger: workflwo, propagate_case: true }
+  - { replace: display, trigger: dispaly, propagate_case: true }
