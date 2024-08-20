@@ -12,5 +12,7 @@
 	<string>gg</string>
 	<key>restore_mtime</key>
 	<true/>
+	<key>working_branch</key>
+	<string>dev</string>
 </dict>
 </plist>
