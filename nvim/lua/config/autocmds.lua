@@ -182,7 +182,7 @@ local globToTemplateMap = {
 	["**/*.applescript"] = "template.applescript",
 	["**/*.mjs"] = "node-module.mjs",
 
-	["**/*Justfile"] = "justfile.just",
+	["**/Justfile"] = "justfile.just",
 	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 	["**/*.jxa"] = "jxa.js",
 	["**/*typos.toml"] = "typos.toml",

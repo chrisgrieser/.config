@@ -1,0 +1,4 @@
+set quiet := true
+
+docs:
+    open "https://espanso.org/docs/matches/basics/"

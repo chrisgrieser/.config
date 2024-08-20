@@ -171,17 +171,6 @@ return {
 			{ "a|", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = "sh", desc = "󰟥 outer pipe" },
 			-- stylua: ignore end
 
-			{ -- auto-indent linewise pastes
-				"p",
-				function()
-					vim.cmd.normal { "p", bang = true }
-					if vim.fn.getregtype() == "V" then
-						require("various-textobjs").lastChange()
-						vim.cmd.normal { "=", bang = true }
-					end
-				end,
-				desc = " Auto-indent paste",
-			},
 			{ -- indent last paste
 				"^",
 				function()

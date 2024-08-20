@@ -320,7 +320,7 @@ keymap("n", "dd", function()
 	return "dd"
 end, { expr = true, desc = "dd" })
 
--- better pasting
+-- pasting
 keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
@@ -328,6 +328,12 @@ keymap("i", "<D-v>", function()
 	vim.fn.setreg("+", regContent, "v")
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
+
+keymap("n", "p", function()
+	local cmd = "p"
+	if vim.fn.getregtype() == "V" then cmd = "pv`[`]=" end
+	vim.cmd.normal { cmd, bang = true }
+end, { desc = " Auto-indent paste" })
 
 --------------------------------------------------------------------------------
 -- QUITTING

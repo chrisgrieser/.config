@@ -41,14 +41,14 @@ matches:
     vars:
       - name: today
         type: date
-        params: { format: "%d.%m.%Y" }
+        params: { format: "%d. %b. %Y" }
   - trigger: "!la"
     replace: "(last accessed: {{today}})"
     label: Last Accessed
     vars:
       - name: today
         type: date
-        params: { format: "%d.%m.%Y" }
+        params: { format: "%d. %b. %Y" }
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!openai"
     replace: "{{apikey}}"
