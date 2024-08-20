@@ -47,32 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>261ABB0C-E338-4338-A932-76413835492F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EC5C90C8-70B5-4A10-AABF-2188D7B63627</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>2E601445-90B1-4564-BF5E-03D2B9830210</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
-			</dict>
-		</array>
 		<key>3D363FE9-8085-4930-B367-E0EFC46EB62E</key>
 		<array>
 			<dict>
@@ -138,32 +112,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>84FE8C78-0B3C-4944-B5B3-38972F44C286</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>022329E1-DA53-4E19-ACA0-9A60136ED0B6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<array>
 			<dict>
@@ -213,50 +161,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E99A3FBF-B036-4D0F-8E6C-90DDAA444F97</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>D60A0ABA-E10A-4B8D-8363-BC2DCA228200</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EC5C90C8-70B5-4A10-AABF-2188D7B63627</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>84FE8C78-0B3C-4944-B5B3-38972F44C286</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>47760D9D-8CD4-4A91-A50B-94235D0D5A0B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -555,215 +464,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>killring.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EC5C90C8-70B5-4A10-AABF-2188D7B63627</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>z</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>84FE8C78-0B3C-4944-B5B3-38972F44C286</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{clipboard:{query}}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>022329E1-DA53-4E19-ACA0-9A60136ED0B6</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>9</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>V</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>us.zoom.xos</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>261ABB0C-E338-4338-A932-76413835492F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>clipboard</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Edit Clipboard Content</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2E601445-90B1-4564-BF5E-03D2B9830210</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>📋 Updated Clipboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>47760D9D-8CD4-4A91-A50B-94235D0D5A0B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>behaviour</key>
-				<integer>1</integer>
-				<key>fontmode</key>
-				<integer>0</integer>
-				<key>fontsizing</key>
-				<integer>4</integer>
-				<key>footertext</key>
-				<string>⏎: Save   ⇧⏎: Line Break</string>
-				<key>inputfile</key>
-				<string></string>
-				<key>inputtype</key>
-				<integer>0</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>0</integer>
-				<key>stackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
-			<key>uid</key>
-			<string>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{clipboard}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -794,17 +494,6 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>022329E1-DA53-4E19-ACA0-9A60136ED0B6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>paste nth clipboard</string>
-			<key>xpos</key>
-			<real>525</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
 		<key>06EAC267-0AB1-438B-8BAC-D258752286BB</key>
 		<dict>
 			<key>colorindex</key>
@@ -832,28 +521,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>375</real>
 		</dict>
-		<key>261ABB0C-E338-4338-A932-76413835492F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>Killring: cycle through clipboard history</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>2E601445-90B1-4564-BF5E-03D2B9830210</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>edit</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>685</real>
-		</dict>
 		<key>3D363FE9-8085-4930-B367-E0EFC46EB62E</key>
 		<dict>
 			<key>colorindex</key>
@@ -862,15 +529,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>250</real>
-		</dict>
-		<key>47760D9D-8CD4-4A91-A50B-94235D0D5A0B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>580</real>
-			<key>ypos</key>
-			<real>685</real>
 		</dict>
 		<key>59EA681A-3183-4B9D-9A93-32C8131AC999</key>
 		<dict>
@@ -921,28 +579,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>90</real>
 		</dict>
-		<key>84FE8C78-0B3C-4944-B5B3-38972F44C286</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>undo previous paste</string>
-			<key>xpos</key>
-			<real>360</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>8C0A9359-5877-4DCE-8DD9-824CB6E5E4BF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>get clipboard</string>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>715</real>
-		</dict>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<dict>
 			<key>colorindex</key>
@@ -981,17 +617,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>215</real>
 		</dict>
-		<key>E66CDA1E-38E6-44E4-B8F9-4ACF6D1EA1B8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>edit</string>
-			<key>xpos</key>
-			<real>275</real>
-			<key>ypos</key>
-			<real>685</real>
-		</dict>
 		<key>E99A3FBF-B036-4D0F-8E6C-90DDAA444F97</key>
 		<dict>
 			<key>colorindex</key>
@@ -1002,26 +627,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>345</real>
 			<key>ypos</key>
 			<real>215</real>
-		</dict>
-		<key>EC5C90C8-70B5-4A10-AABF-2188D7B63627</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>EC9CF59F-A7DC-4FFE-A068-6B81CB115D69</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>note</key>
-			<string>copy</string>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>685</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
