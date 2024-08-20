@@ -158,7 +158,7 @@ vim.on_key(function(char)
 	-- works for RHS, therefore no need to consider remaps
 	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
 
-	if (searchCancelled or not searchMovement) and not searchConfirmed then
+	if searchCancelled or (not searchMovement and not searchConfirmed) then
 		vim.opt.hlsearch = false
 		searchCountIndicator("clear")
 	elseif searchMovement or searchConfirmed or searchStarted then
