@@ -2,6 +2,16 @@
 title: "App-specific bindings"
 rules:
   #─────────────────────────────────────────────────────────────────────────────
+  # this allows clipbook to be closed with `esc` and `f18` (`esc` and `capslock`)
+  - description: "(Apps) Clipbook"
+    manipulators:
+      - type: basic
+        from: { key_code: escape }
+        to:
+          - { key_code: escape }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
       # Toggle Sidebar

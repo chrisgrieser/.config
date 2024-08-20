@@ -123,7 +123,7 @@ M.wf_scripteditor = wf
 
 		-- auto-paste, format, and resize window
 		elseif newWin:title() == "Untitled" then
-			wu.moveResize(newWin, wu.center)
+			wu.moveResize(newWin, wu.middleHalf)
 			local clipb = hs.pasteboard.getContents()
 			hs.osascript.javascript(([[
 				Application("Script Editor").documents()[0].text = `%s`;
@@ -132,7 +132,7 @@ M.wf_scripteditor = wf
 
 		-- just resize window if it's an AppleScript Dictionary
 		elseif newWin:title():find("%.sdef$") then
-			wu.moveResize(newWin, wu.center)
+			wu.moveResize(newWin, wu.middleHalf)
 		end
 	end)
 	-- fix copypasting line breaks into other apps

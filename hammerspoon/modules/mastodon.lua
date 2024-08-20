@@ -67,7 +67,7 @@ local function showHideTickerApp(referenceWin)
 	local screenshotOverlay = referenceWin:title() == "" or u.isFront("CleanShot X")
 	if loginWin or screenshotOverlay then return end
 
-	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.center) then
+	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.middleHalf) then
 		winToTheSide()
 	else
 		local theApp = referenceWin:application()

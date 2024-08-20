@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: "(Apps) Clipbook"
+rules:
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Clipbook"
+    manipulators:
+      - type: basic
+        from: { key_code: escape }
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }]
+        to:
+          - { key_code: escape }
