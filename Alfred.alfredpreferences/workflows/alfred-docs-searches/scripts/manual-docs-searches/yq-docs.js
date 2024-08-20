@@ -21,14 +21,21 @@ function run() {
 
 	const workArray = JSON.parse(httpRequest(docsURL)).tree.map(
 		(/** @type {{ path: string; }} */ entry) => {
-			const subsite = entry.path.replace(docPathRegex, "$1");
-			if (subsite === "header") return {}; // not real subpages
-			const category = subsite.split("/")[0];
-			const displayTitle = subsite.split("/")[1];
+			const path = entry.path;
+			if (
+				!docPathRegex.test(path) ||
+				path.includes("/headers/") ||
+				path.endsWith("notification-snippet.md")
+			) {
+				return {};
+			}
+
+			const subsite = path.replace(docPathRegex, "$1");
+			const [category, title] = subsite.split("/");
 			const url = `${baseURL}/${subsite}`;
 
 			return {
-				title: displayTitle,
+				title: title.replaceAll("-", " "),
 				subtitle: category,
 				arg: url,
 				quicklookurl: url,
@@ -39,6 +46,6 @@ function run() {
 
 	return JSON.stringify({
 		items: workArray,
-		//cache: { seconds: 3600 * 24 * 7 },
+		cache: { seconds: 3600 * 24 * 7 },
 	});
 }

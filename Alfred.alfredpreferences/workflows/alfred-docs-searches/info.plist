@@ -1806,6 +1806,7 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `wt`: WezTerm docs
 - `cani`: caniuse.com
 - `just`: [just (task runner) docs](https://just.systems/man/en/)
+- `yq`: yq docs
 
 ### Utilities
 - `color`: named CSS colors
@@ -37815,7 +37816,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.8.1</string>
+	<string>2.9.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
