@@ -150,7 +150,7 @@ function gM {
 # undo shallow clones
 function unshallow {
 	git fetch --unshallow
-	git pull --tags # undo `git clone --no-tags`
+	git pull --no-progress --tags # undo `git clone --no-tags`
 	# undo `--single-branch` https://stackoverflow.com/a/17937889/22114136
 	git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 	git fetch origin
@@ -290,10 +290,16 @@ function gdf {
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
 	if ! command -v bat &> /dev/null; then echo "bat not installed." && return 1; fi
 	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
+
 	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
+	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then
+		print "\e[1;33mUnshallowing repo…\e[0m"
+		unshallow
+		echo
+	fi
 
 	local deleted_path deletion_commit last_commit
-	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep -i "$*")
+	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$*")
 
 	if [[ -z "$deleted_path" ]]; then
 		print "\e[1;31mNo deleted file found with \e[1;33m$*\\e[0m"
