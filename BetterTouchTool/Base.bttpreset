@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "EFB9421B-7C01-42B2-B85F-C09693D00375",
+  "BTTPresetUUID" : "EF27FD62-E6D9-46C3-A384-D551CEF907D0",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
@@ -1208,9 +1208,9 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724183033.1555371,
-          "BTTTriggerType" : 107,
-          "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Down",
+          "BTTLastUpdatedAt" : 1724187415.312072,
+          "BTTTriggerType" : 116,
+          "BTTTriggerTypeDescriptionReadOnly" : "Pinch Out",
           "BTTTriggerTypeDescription" : "❌ quit all PWAs",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "D4FE25EA-310B-4BC1-9027-4799A6D2BAD1",

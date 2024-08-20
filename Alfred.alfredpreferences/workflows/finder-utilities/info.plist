@@ -373,6 +373,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -473,17 +488,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
+				<key>path</key>
 				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.revealfile</string>
 			<key>uid</key>
-			<string>DC23B294-25E4-4CEA-841A-71546D15BD89</string>
+			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -588,19 +601,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.revealfile</string>
-			<key>uid</key>
-			<string>0C3BFAB7-ABFF-4D30-91C6-47855B12F496</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -614,7 +614,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>{var:downloads_keyword}</string>
+				<string>{var:custom_folder_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -634,7 +634,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Files in "{var:downloads_folder}"…</string>
+				<string>Files in "{var:custom_folder}"…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -824,11 +824,11 @@
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>12</integer>
+				<integer>13</integer>
 				<key>hotmod</key>
 				<integer>1835008</integer>
 				<key>hotstring</key>
-				<string>Q</string>
+				<string>W</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -1080,9 +1080,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
-			<real>210</real>
+			<real>175</real>
 		</dict>
 		<key>22597717-6399-48C7-8B78-551AAD86DC01</key>
 		<dict>
@@ -1163,7 +1163,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy file to clipboard</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
 			<real>460</real>
 		</dict>
@@ -1197,7 +1197,7 @@ to modify the respective hotkey</string>
 			<key>xpos</key>
 			<real>890</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>315</real>
 		</dict>
 		<key>C141CBD8-4088-42FD-9ED0-F388C8B8A0A7</key>
 		<dict>
@@ -1206,9 +1206,9 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>move to front window</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>315</real>
 		</dict>
 		<key>D158A013-04D6-4B89-BAAC-9144298030DB</key>
 		<dict>
@@ -1235,9 +1235,9 @@ to modify the respective hotkey</string>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>15</real>
 		</dict>
 		<key>F51A014F-1ABC-49D4-ADA8-0B83A691533F</key>
 		<dict>

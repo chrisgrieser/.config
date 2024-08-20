@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>downloads_folder</key>
-	<string>~/Desktop</string>
-	<key>downloads_keyword</key>
-	<string>/</string>
+	<key>custom_folder_keyword</key>
+	<string>///</string>
 	<key>frontwin_keyword</key>
 	<string>//</string>
 	<key>max_recent_files</key>
