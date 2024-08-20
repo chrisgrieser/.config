@@ -91,7 +91,7 @@ function M.themeModifications()
 		updateHl("@markup.raw", "gui=none") -- no italics
 
 		setHl("ColorColumn", { bg = "#e9dfd2" })
-		setHl("VertSplit", { fg = "#b29b84" })
+		setHl("WinSeparator", { fg = "#cfc1b3" })
 		setHl("Operator", { fg = "#846a52" })
 		vim.defer_fn(function()
 			for _, v in pairs(vimModes) do
