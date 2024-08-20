@@ -330,8 +330,7 @@ keymap("i", "<D-v>", function()
 end, { desc = " Paste charwise", expr = true })
 
 keymap("n", "p", function()
-	local cmd = "p"
-	if vim.fn.getregtype() == "V" then cmd = "pv`[`]=" end
+	local cmd = vim.fn.getregtype() == "V" and "pv`[`]=" or "p"
 	vim.cmd.normal { cmd, bang = true }
 end, { desc = " Auto-indent paste" })
 
