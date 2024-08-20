@@ -11,17 +11,12 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.middleHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.center = { x = 0.184, y = 0.1, w = 1, h = 0.8 }
 M.narrow = { x = 0.184, y = 0, w = 0.45, h = 1 }
 
 -- negative x to hide useless sidebar
-if env.isAtMother then
-	M.toTheSide = hs.geometry.rect(-78, 54, 387, 890)
-elseif env.isAtOffice then
-	M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100)
-else
-	M.toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
-end
+M.toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
+if env.isAtMother then M.toTheSide = hs.geometry.rect(-78, 54, 387, 890) end
+if env.isAtOffice then M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
 
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
@@ -52,7 +47,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona" }
+	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona", "ClipBook" }
 	if
 		not win
 		or not (win:application())
@@ -76,7 +71,7 @@ end
 ---bring all windows of front app to the front
 function M.bringAllWinsToFront()
 	local app = hs.application.frontmostApplication()
-	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in Browser
+	if #app:allWindows() < 2 then return end -- the occasional faulty creation of task manager windows in browsers
 	app:selectMenuItem { "Window", "Bring All to Front" }
 end
 
@@ -187,10 +182,12 @@ M.wf_appsOnMouseScreen = wf.new({
 	"Hammerspoon",
 	"System Settings",
 	"Discord",
+	"MacWhisper",
 	"neovide",
 	"espanso",
 	"BusyCal",
 	"Alfred Preferences",
+	"ClipBook",
 	"Brave Browser",
 	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
@@ -207,8 +204,8 @@ local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
 	local centeredWinApps = { "Finder", "Script Editor", "Reminders" }
 	local baseSize = u.isFront(centeredWinApps) and M.middleHalf or M.pseudoMax
-	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 
+	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 	M.moveResize(currentWin, newSize)
 end
 
