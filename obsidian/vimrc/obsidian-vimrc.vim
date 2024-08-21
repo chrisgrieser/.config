@@ -409,35 +409,35 @@ onoremap K a"
 " HACK poor man's substitute.nvim: brut-forcing all possible text objects 💀
 nunmap s
 
-nnoremap ss V"_p
-nnoremap S vg$"_p
-nnoremap sj Vj"_p
-nnoremap sJ Vjj"_p
-nnoremap sim viW"_p
-nnoremap sam vaW"_p
-nnoremap siw viw"_p
-nnoremap saw vaw"_p
-nnoremap sis vis"_p
-nnoremap sas vas"_p
-nnoremap sip Vip"_p
-nnoremap sap Vap"_p
-nnoremap sib vi)"_p
-nnoremap saq va""_p
-nnoremap siq vi""_p
-nnoremap sk vi""_p
-nnoremap saz va'"_p
-nnoremap siz vi'"_p
-nnoremap sae va`"_p
-nnoremap sie vi`"_p
-nnoremap sab va)"_p
-nnoremap sir vi]"_p
-nnoremap sar va]"_p
-nnoremap sic vi}"_p
-nnoremap sac va}"_p
-nnoremap srg vG"_p
-nnoremap srp v}"_p
-nnoremap sgg vggG"_p
-nnoremap sm vt]"_p
+nnoremap ss VP
+nnoremap S vg$P
+nnoremap sj VjP
+nnoremap sJ VjjP
+nnoremap sim viWP
+nnoremap sam vaWP
+nnoremap siw viwP
+nnoremap saw vawP
+nnoremap sis visP
+nnoremap sas vasP
+nnoremap sip VipP
+nnoremap sap VapP
+nnoremap sib vi)P
+nnoremap saq va"P
+nnoremap siq vi"P
+nnoremap sk vi"P
+nnoremap saz va'P
+nnoremap siz vi'P
+nnoremap sae va`P
+nnoremap sie vi`P
+nnoremap sab va)P
+nnoremap sir vi]P
+nnoremap sar va]P
+nnoremap sic vi}P
+nnoremap sac va}P
+nnoremap srg vGP
+nnoremap srp v}P
+nnoremap sgg vggGP
+nnoremap sm vt]P
 
 "───────────────────────────────────────────────────────────────────────────────
 

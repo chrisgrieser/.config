@@ -12,9 +12,11 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
-function onlineJSON(url) {
-	return JSON.parse(app.doShellScript(`curl -sL "${url}"`));
+/** @param {string} url @return {string} */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
 /** @param {number} num */
@@ -40,16 +42,16 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const pluginJSON = onlineJSON(
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json",
-	);
-	const downloadsJSON = onlineJSON(
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json",
-	);
+	const pluginsUrl =
+		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json";
+	const downloadsUrl =
+		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json";
+	const themesUrl =
+		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-themes.json";
 
-	const themeJSON = onlineJSON(
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-css-themes.json",
-	);
+	const pluginJson = JSON.parse(httpRequest(pluginsUrl));
+	const downloadsJson = JSON.parse(httpRequest(downloadsUrl));
+	const themeJson = JSON.parse(httpRequest(themesUrl));
 
 	const depre = JSON.parse(readFile("./scripts/deprecated-plugins.json"));
 	const deprecatedPlugins = [...depre.sherlocked, ...depre.dysfunct, ...depre.deprecated];
@@ -57,7 +59,7 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// add PLUGINS to the JSON
-	const plugins = pluginJSON.map(
+	const plugins = pluginJson.map(
 		(
 			/** @type {{ id: string; name: string; description: string; author: string; repo: string; }} */ plugin,
 		) => {
@@ -74,8 +76,8 @@ function run() {
 
 			// Download Numbers
 			let downloadsStr = "";
-			if (downloadsJSON[id]) {
-				const downloads = downloadsJSON[id].downloads;
+			if (downloadsJson[id]) {
+				const downloads = downloadsJson[id].downloads;
 				downloadsStr = insert1000sep(downloads) + "↓  ·  ";
 			}
 
@@ -94,6 +96,7 @@ function run() {
 				title: name + icons,
 				subtitle: subtitle,
 				arg: githubURL,
+				quicklookurl: githubURL,
 				uid: id,
 				match: matcher,
 				mods: {
@@ -113,15 +116,13 @@ function run() {
 	);
 
 	// add THEMES to the JSON
-	const themes = themeJSON.map(
+	const themes = themeJson.map(
 		(
 			/** @type {{ name: string; author: string; repo: string; branch: string; screenshot: string; modes: string | string[]; }} */ theme,
 		) => {
-			let { name, author, repo, branch, screenshot } = theme;
+			let { name, author, repo, branch } = theme;
 			branch = branch || "master";
 
-			const rawGitHub = `https://raw.githubusercontent.com/${repo}/${branch}/`;
-			const screenshotURL = rawGitHub + screenshot;
 			const githubURL = "https://github.com/" + repo;
 			const nameEncoded = encodeURIComponent(name);
 			const openURI = `obsidian://show-theme?&name=${nameEncoded}`;
@@ -138,7 +139,7 @@ function run() {
 				match: `theme ${alfredMatcher(author)} ${alfredMatcher(name)}`,
 				arg: githubURL,
 				uid: repo,
-				quicklookurl: screenshotURL,
+				quicklookurl: githubURL,
 				mods: {
 					ctrl: { valid: false },
 					cmd: { arg: openURI },
