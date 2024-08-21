@@ -287,5 +287,25 @@
       "key": "C"
     }
   ],
-  "quadro:rename-code": []
+  "quadro:rename-code": [],
+  "properties:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "2"
+    }
+  ],
+  "editor:toggle-bullet-list": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "U"
+    }
+  ],
+  "various-complements:reload-custom-dictionaries": [],
+  "various-complements:show-suggestions": [],
+  "various-complements:add-word-custom-dictionary": [],
+  "obsidian-linter:lint-file": []
 }
