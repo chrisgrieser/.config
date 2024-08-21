@@ -85,13 +85,12 @@ compdef _gr gr
 # CYCLE THROUGH DIRECTORIES
 
 function _grappling_hook {
-	# CONFIG one location per line
-	# 1. read from csv, 2. remove .password-store, 3. add Desktop
-	local locations
-	locations=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
-	locations="$wd"$'\n'"$(echo "$locations" | grep -v ".password-store")"
+	# CONFIG
+	local two_perma_repos
+	two_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|" | head -n2)
 
 	local to_open locations_count dir
+	local locations="$wd\n$two_perma_repos" # add Desktop
 	to_open=$(echo "$locations" | sed -n "1p")
 	locations_count=$(echo "$locations" | wc -l)
 
