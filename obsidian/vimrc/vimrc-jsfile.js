@@ -227,6 +227,22 @@ function copyPathSegment(segment) {
 	new Notice("Copied:\n" + toCopy);
 }
 
+function copyObsidianUriMdLink() {
+	const app = view.app;
+	const activeFile = app.workspace.getActiveFile();
+	if (!activeFile) return;
+	const filePathEnc = encodeURIComponent(activeFile.path);
+	const basename = activeFile.basename;
+	const vaultName = app.vault.getName();
+	const vaultNameEnc = encodeURIComponent(vaultName);
+
+	const obsidianUri = `obsidian://open?vault=${vaultNameEnc}&file=${filePathEnc}`;
+	const mdLink = `[${basename} (${vaultName})](${obsidianUri})`;
+
+	navigator.clipboard.writeText(mdLink);
+	new Notice("Copied Obsidian URI to:\n" + basename);
+}
+
 function toggleLowercaseTitleCase() {
 	const cursor = editor.getCursor();
 	const { from, to } = editor.wordAt(cursor);
