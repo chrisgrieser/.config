@@ -24,7 +24,7 @@ if env.isAtOffice then M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
 ---@param win hs.window
 ---@param relSize hs.geometry
 ---@nodiscard
----@return boolean|nil nil if no win
+---@return boolean|nil -- nil if no win
 function M.checkSize(win, relSize)
 	if not win then return end
 	local maxf = win:screen():frame()
@@ -59,7 +59,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.45, 0.9 }, function()
+	u.runWithDelays({ 0, 0.3, 0.6 }, function()
 		if M.checkSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
@@ -81,7 +81,7 @@ end
 ---filter does not contain any windows, therefore we need to get the windows from
 ---the appObj instead in those cases
 function M.autoTile(winSrc)
-	local isMultiscreen = #(hs.screen.allScreens()) > 1
+	local isMultiscreen = #hs.screen.allScreens() > 1
 	if isMultiscreen then return end
 	if M.AutoTileInProgress then return end
 
@@ -100,7 +100,7 @@ function M.autoTile(winSrc)
 		local rejectTitles = { "Move", "Copy", "Delete", "Finder Settings" }
 		return win:isStandard()
 			and not hs.fnutils.contains(rejectTitles, win:title())
-			and not win:title():find(" Info$")
+			and not win:title():find(" Info$") -- info windows end with `Info`
 	end)
 	if not wins then return end
 
@@ -173,7 +173,7 @@ end
 
 --------------------------------------------------------------------------------
 
--- Open Apps always at Mouse Screen
+-- Open apps always at Mouse Screen
 M.wf_appsOnMouseScreen = wf.new({
 	"Mimestream",
 	"Obsidian",
@@ -183,16 +183,18 @@ M.wf_appsOnMouseScreen = wf.new({
 	"System Settings",
 	"Discord",
 	"MacWhisper",
-	"neovide",
+	"Neovide",
 	"espanso",
 	"BusyCal",
 	"Alfred Preferences",
 	"ClipBook",
+	"BetterTouchTool",
 	"Brave Browser",
 	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
 }):subscribe(wf.windowCreated, function(newWin)
+	if #hs.screen.allScreens() < 2 then return end
 	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not mouseScreen or not env.isProjector() then return end
+	if not mouseScreen then return end
 	local alreadyOnMouseScreen = newWin:screen():name() == mouseScreen:name()
 	if not alreadyOnMouseScreen then newWin:moveToScreen(mouseScreen) end
 end)

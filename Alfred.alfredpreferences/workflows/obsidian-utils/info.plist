@@ -585,7 +585,7 @@
 				<key>subtext</key>
 				<string>leave empty to open</string>
 				<key>text</key>
-				<string>Append to Scratchpad</string>
+				<string>Append to Scratchpad: '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

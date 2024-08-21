@@ -38,7 +38,7 @@ M.isAtMother = device:find("Mother") ~= nil
 ---@return boolean
 function M.isProjector()
 	if M.isAtOffice then return false end
-	return #(hs.screen.allScreens()) > 1
+	return #hs.screen.allScreens() > 1
 end
 
 --------------------------------------------------------------------------------

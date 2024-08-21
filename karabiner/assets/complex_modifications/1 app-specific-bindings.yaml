@@ -2,13 +2,22 @@
 title: "App-specific bindings"
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  # this allows clipbook to be closed with `esc` and `f18` (`esc` and `capslock`)
   - description: "(Apps) Clipbook"
     manipulators:
+      # allows clipbook to be closed with `esc` (`capslock`) and `f18` (true `esc`)
       - type: basic
         from: { key_code: escape }
         to:
           - { key_code: escape }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }
+      # FIX pasting via `return` not working
+      - type: basic
+        from: { key_code: return_or_enter }
+        to:
+          - { key_code: return_or_enter }
+          - { key_code: vk_none, hold_down_milliseconds: 20 }
+          - { key_code: v, modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }
   #─────────────────────────────────────────────────────────────────────────────

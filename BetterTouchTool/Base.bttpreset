@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "93A32379-7AF2-4FDA-B11D-6C7B1944A217",
+  "BTTPresetUUID" : "E05990F5-1F75-4725-8DBB-8E2DB1FEAB96",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
@@ -229,10 +229,12 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723985078.481441,
+          "BTTLastUpdatedAt" : 1724262885.4421411,
+          "BTTTriggerConditionsFormatReadOnly" : "fingers_touching_trackpad <= 1",
+          "BTTTriggerConditionsData" : "YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBYLDBMYICorLTQ4PT5BRUkQTlFXXGBiVSRudWxs0w0ODxAREl8QF05TQ29tcG91bmRQcmVkaWNhdGVUeXBlXxAPTlNTdWJwcmVkaWNhdGVzViRjbGFzcxABgAKAFdIUDxUXWk5TLm9iamVjdHOhFoADgBTUDxkaGxwdHh9fEBFOU1JpZ2h0RXhwcmVzc2lvbl8QEE5TTGVmdEV4cHJlc3Npb25fEBNOU1ByZWRpY2F0ZU9wZXJhdG9ygBOADoAEgBHVISIjJA8lJicoKVlOU09wZXJhbmReTlNTZWxlY3Rvck5hbWVfEBBOU0V4cHJlc3Npb25UeXBlW05TQXJndW1lbnRzgAaABRADgAiADVx2YWx1ZUZvcktleTrSIw8QLIAH0i4vMDFaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5TU2VsZkV4cHJlc3Npb26jMDIzXE5TRXhwcmVzc2lvblhOU09iamVjdNIUDzU3oTaACYAM0w8jOTo7PFlOU0tleVBhdGiACxAKgApfEBlmaW5nZXJzX3RvdWNoaW5nX3RyYWNrcGFk0i4vP0BfEBxOU0tleVBhdGhTcGVjaWZpZXJFeHByZXNzaW9uoz8yM9IuL0JDXk5TTXV0YWJsZUFycmF5o0JEM1dOU0FycmF50i4vRkdfEBNOU0tleVBhdGhFeHByZXNzaW9upEZIMjNfEBROU0Z1bmN0aW9uRXhwcmVzc2lvbtNKIw9LTE1fEA9OU0NvbnN0YW50VmFsdWWADxAAgBDSLi9PUF8QGU5TQ29uc3RhbnRWYWx1ZUV4cHJlc3Npb26jTzIz1Q9SU1RVVkwQTBBaTlNNb2RpZmllcllOU1ZhcmlhbnRZTlNPcHRpb25zXk5TT3BlcmF0b3JUeXBlgBLSLi9YWV8QHU5TQ29tcGFyaXNvblByZWRpY2F0ZU9wZXJhdG9yo1pbM18QHU5TQ29tcGFyaXNvblByZWRpY2F0ZU9wZXJhdG9yXxATTlNQcmVkaWNhdGVPcGVyYXRvctIuL11eXxAVTlNDb21wYXJpc29uUHJlZGljYXRlo11fM1tOU1ByZWRpY2F0ZdIuL0RhokQz0i4vY2RfEBNOU0NvbXBvdW5kUHJlZGljYXRlo2NfMwAIABEAGgAkACkAMgA3AEkATABRAFMAbAByAHkAkwClAKwArgCwALIAtwDCAMQAxgDIANEA5QD4AQ4BEAESARQBFgEhASsBOgFNAVkBWwFdAV8BYQFjAXABdQF3AXwBhwGQAaMBpwG0Ab0BwgHEAcYByAHPAdkB2wHdAd8B+wIAAh8CIwIoAjcCOwJDAkgCXgJjAnoCgQKTApUClwKZAp4CugK+AskC1ALeAugC9wL5Av4DHgMiA0IDWANdA3UDeQOFA4oDjQOSA6gAAAAAAAACAQAAAAAAAABlAAAAAAAAAAAAAAAAAAADrA==",
           "BTTTriggerType" : 1100,
           "BTTTriggerTypeDescriptionReadOnly" : "Double Leftclick",
-          "BTTTriggerTypeDescription" : "click to focus+pause, click to unpause, f for fullscree",
+          "BTTTriggerTypeDescription" : "click to focus+pause, click to unpause, f for fullscreen. Condition avoids conflict with tip-tap.",
           "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
           "BTTUUID" : "F391B914-C4DF-4F16-9F8A-177CF234CC25",
           "BTTPredefinedActionType" : 366,
@@ -268,11 +270,11 @@
               "BTTOrder" : 35
             }
           ],
-          "BTTGestureNotes" : "click to focus+pause, click to unpause, f for fullscree"
+          "BTTGestureNotes" : "click to focus+pause, click to unpause, f for fullscreen. Condition avoids conflict with tip-tap."
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724228936.036577,
+          "BTTLastUpdatedAt" : 1724262929.08636,
           "BTTTriggerType" : 102,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
           "BTTTriggerTypeDescription" : "🔊 volume up",
@@ -349,7 +351,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724228939.756196,
+          "BTTLastUpdatedAt" : 1724262925.4982672,
           "BTTTriggerType" : 103,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
           "BTTTriggerTypeDescription" : "🔉 volume down",
@@ -579,7 +581,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724059908.76125,
+          "BTTLastUpdatedAt" : 1724262937.6192651,
           "BTTTriggerType" : 103,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Down",
           "BTTTriggerTypeDescription" : "🔉 volume down",
@@ -612,7 +614,8 @@
           ],
           "BTTGestureNotes" : "🔉 volume down",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🔉 volume down"
+            "BTTCheatSheetActionLabel" : "🔉 volume down",
+            "BTTCheatSheetExclude" : 1
           }
         },
         {
@@ -649,7 +652,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724059894.6026289,
+          "BTTLastUpdatedAt" : 1724262935.401926,
           "BTTTriggerType" : 102,
           "BTTTriggerTypeDescriptionReadOnly" : "3 Finger Swipe Up",
           "BTTTriggerTypeDescription" : "🔊 volume up",
@@ -685,7 +688,8 @@
           ],
           "BTTGestureNotes" : "🔊 volume up",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🔊 volume up"
+            "BTTCheatSheetActionLabel" : "🔊 volume up",
+            "BTTCheatSheetExclude" : 1
           }
         },
         {
