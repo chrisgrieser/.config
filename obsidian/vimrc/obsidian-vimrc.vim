@@ -91,10 +91,6 @@ nnoremap m %
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading
 
-" [g]oto [w]riting
-exmap gotoScene obcommand longform:longform-jump-to-scene
-nnoremap gw :gotoScene
-
 " like vim's gx (if not standing on link, seek forward)
 exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink("current-tab") }
 nnoremap gx :openNextLink
