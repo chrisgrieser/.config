@@ -18,6 +18,7 @@ local changedFileNotif
 local function notify(msg, level, opts)
 	local pluginName = " Magnet"
 	if not level then level = "info" end
+	if not opts then opts = {} end
 	opts.title = (opts and opts.title) and pluginName .. ": " .. opts.title or pluginName
 	return vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
