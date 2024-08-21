@@ -30,7 +30,6 @@ anchors:
           text: "🔺 Leader"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
-
   - description: "🔺App Switcher Leader: 2x L-Ctrl or 2x R-Cmd"
     manipulators:
       - type: basic
@@ -70,7 +69,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:
-
       - description: "[?] Help"
         type: basic
         from: { key_code: hyphen, modifiers: { optional: [shift] } }
@@ -139,9 +137,9 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[O]bsidian (writing vault)"
+      - description: "[u] Obsidian (writing vault)"
         type: basic
-        from: { key_code: o, modifiers: { mandatory: [shift] } }
+        from: { key_code: u }
         conditions: [*leader-active]
         to:
           - shell_command: open "obsidian://open?vault=writing-vault"
