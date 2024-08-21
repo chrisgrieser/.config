@@ -8,19 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>34D06877-D7F7-4591-B8B4-E6D3ABB5C332</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>176B3709-D464-44CD-82D0-AE82E3F8497F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
 		<array>
 			<dict>
@@ -67,32 +54,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>AD6F9EC2-3FFD-4028-836F-C87E519163B9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6EAC9A2F-9B0C-44E2-A72F-C82992ADBE28</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BDEB1461-F077-4DDB-92C1-1A15067325D1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>34D06877-D7F7-4591-B8B4-E6D3ABB5C332</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<array>
 			<dict>
@@ -126,19 +87,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EDCF7445-7018-43F6-A236-C9766D2A4F07</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BDEB1461-F077-4DDB-92C1-1A15067325D1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</key>
 		<array>
 			<dict>
@@ -163,146 +111,6 @@
 	<string>News Research</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>31</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>O</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>EDCF7445-7018-43F6-A236-C9766D2A4F07</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>allow_empty</key>
-					<true/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>BDEB1461-F077-4DDB-92C1-1A15067325D1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://slurp?vault=phd-data-analysis&amp;url={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>176B3709-D464-44CD-82D0-AE82E3F8497F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>w</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>34D06877-D7F7-4591-B8B4-E6D3ABB5C332</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./slurp-all-diss-urls.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6EAC9A2F-9B0C-44E2-A72F-C82992ADBE28</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>slurp</string>
-				<key>subtext</key>
-				<string>All URLs in "{var:slurp_list}"</string>
-				<key>text</key>
-				<string>Slurp</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>AD6F9EC2-3FFD-4028-836F-C87E519163B9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -518,26 +326,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>176B3709-D464-44CD-82D0-AE82E3F8497F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>500</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
-		<key>34D06877-D7F7-4591-B8B4-E6D3ABB5C332</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>close the browser tab</string>
-			<key>xpos</key>
-			<real>360</real>
-			<key>ypos</key>
-			<real>20</real>
-		</dict>
 		<key>5F0950F7-E1AC-422C-8F2E-82518BF9F068</key>
 		<dict>
 			<key>colorindex</key>
@@ -545,7 +333,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>360</real>
 		</dict>
 		<key>6935998C-ACB6-4719-94AE-24E7616DB283</key>
 		<dict>
@@ -554,16 +342,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>885</real>
-		</dict>
-		<key>6EAC9A2F-9B0C-44E2-A72F-C82992ADBE28</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>165</real>
+			<real>595</real>
 		</dict>
 		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
 		<dict>
@@ -574,7 +353,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>295</real>
 		</dict>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<dict>
@@ -585,7 +364,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>65</real>
 		</dict>
 		<key>9AF5FC82-E4A2-42CC-804B-A39ABE37D2D6</key>
 		<dict>
@@ -594,27 +373,7 @@
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>305</real>
-		</dict>
-		<key>AD6F9EC2-3FFD-4028-836F-C87E519163B9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>slurp all reminders</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>165</real>
-		</dict>
-		<key>BDEB1461-F077-4DDB-92C1-1A15067325D1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>220</real>
-			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>CE244078-4A21-445D-9C22-C75F66AB2237</key>
 		<dict>
@@ -623,7 +382,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>240</real>
 		</dict>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<dict>
@@ -632,7 +391,7 @@
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>485</real>
 		</dict>
 		<key>D37D24AA-2684-4983-94DF-C099102D3C28</key>
 		<dict>
@@ -641,18 +400,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>770</real>
-		</dict>
-		<key>EDCF7445-7018-43F6-A236-C9766D2A4F07</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>Slurp</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>20</real>
+			<real>480</real>
 		</dict>
 		<key>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</key>
 		<dict>
@@ -663,7 +411,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>775</real>
+			<real>485</real>
 		</dict>
 		<key>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</key>
 		<dict>
@@ -674,7 +422,7 @@
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>440</real>
+			<real>150</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -699,48 +447,6 @@
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>search_logfile</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>URLs</string>
-				<key>placeholder</key>
-				<string>URLs</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Reminders list to slurp from</string>
-			<key>label</key>
-			<string>Slurp List</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>slurp_list</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>main-vault</string>
-				<key>placeholder</key>
-				<string>main-vault</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Obsidian Vault name to slurp into</string>
-			<key>label</key>
-			<string>Slurp Vault</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>slurp_vault</string>
 		</dict>
 	</array>
 	<key>version</key>

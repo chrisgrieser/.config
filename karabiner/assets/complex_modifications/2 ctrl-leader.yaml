@@ -30,6 +30,7 @@ anchors:
           text: "🔺 Leader"
 #───────────────────────────────────────────────────────────────────────────────
 rules:
+
   - description: "🔺App Switcher Leader: 2x L-Ctrl or 2x R-Cmd"
     manipulators:
       - type: basic
@@ -48,6 +49,7 @@ rules:
         to_if_alone:
           - *activate-leader
           - *set-notice
+
       # 2x L-Ctrl: Pass through (for Alfred)
       - type: basic
         from: { key_code: left_control }
@@ -64,9 +66,11 @@ rules:
         to_if_alone:
           - *deactivate-leader
           - *remove-notice
+
   #─────────────────────────────────────────────────────────────────────────────
   - description: "🔺 App Switcher Actions"
     manipulators:
+
       - description: "[?] Help"
         type: basic
         from: { key_code: hyphen, modifiers: { optional: [shift] } }
@@ -132,6 +136,15 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open "obsidian://open?vault=main-vault"
+          - *deactivate-leader
+          - *remove-notice
+
+      - description: "[O]bsidian (writing vault)"
+        type: basic
+        from: { key_code: o, modifiers: { mandatory: [shift] } }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open "obsidian://open?vault=writing-vault"
           - *deactivate-leader
           - *remove-notice
 

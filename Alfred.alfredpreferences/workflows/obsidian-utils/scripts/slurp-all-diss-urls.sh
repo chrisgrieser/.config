@@ -16,10 +16,6 @@ urls=$(
 echo "$urls" | xargs open
 echo "$urls" | pbcopy
 
-# show inbox
-open "$HOME/phd-data-analysis/Data/articles"
-open "$HOME/phd-data-analysis/Data/_ inbox"
-
 # complete all (backwards, as indexes are shifted)
 url_count=$(echo "$urls" | wc -l)
 for ((i = url_count - 1; i >= 0; i--)); do
