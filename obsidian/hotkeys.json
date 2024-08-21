@@ -252,5 +252,13 @@
       ],
       "key": "D"
     }
+  ],
+  "file-explorer:duplicate-file": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "D"
+    }
   ]
 }
