@@ -333,6 +333,7 @@ keymap("n", "p", function()
 	local cmd = vim.fn.getregtype() == "V" and "p`[V`]=" or "p"
 	vim.cmd.normal { cmd, bang = true }
 end, { desc = " Auto-indent paste" })
+keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility with macOS clipboard managers
 
 --------------------------------------------------------------------------------
 -- QUITTING
