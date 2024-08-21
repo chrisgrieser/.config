@@ -42,16 +42,14 @@ function readFile(path) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const pluginsUrl =
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugins.json";
-	const downloadsUrl =
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json";
-	const themesUrl =
-		"https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-themes.json";
+	const baseUrl = "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/";
+	const pluginsUrl = "community-plugins.json";
+	const downloadsUrl = "community-plugin-stats.json";
+	const themesUrl = "community-css-themes.json";
 
-	const pluginJson = JSON.parse(httpRequest(pluginsUrl));
-	const downloadsJson = JSON.parse(httpRequest(downloadsUrl));
-	const themeJson = JSON.parse(httpRequest(themesUrl));
+	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsUrl));
+	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsUrl));
+	const themeJson = JSON.parse(httpRequest(baseUrl + themesUrl));
 
 	const depre = JSON.parse(readFile("./scripts/deprecated-plugins.json"));
 	const deprecatedPlugins = [...depre.sherlocked, ...depre.dysfunct, ...depre.deprecated];
