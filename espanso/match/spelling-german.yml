@@ -9,6 +9,7 @@ matches:
   - { replace: algorithmisch, trigger: algorithmsich }
   - { replace: auch, trigger: auhc, propagate_case: true, word: true }
   - { replace: die, trigger: dei, word: true, propagate_case: true }
+  - { replace: serh, trigger: sehr, word: true, propagate_case: true }
   - { replace: eine, trigger: eien, word: true, propagate_case: true }
   - { replace: einfach, trigger: einfahc, propagate_case: true, word: true }
   - { replace: forschung, trigger: forshcung, propagate_case: true }
