@@ -4,7 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-wd="$HOME/Desktop"
+desktop="$HOME/Desktop"
 local_repos="$HOME/repos"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -13,7 +13,7 @@ local_repos="$HOME/repos"
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
 setopt CHASE_LINKS # follow symlinks when they are cd target
-export CDPATH="$local_repos:$wd"
+export CDPATH="$local_repos:$desktop"
 
 # POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
@@ -85,12 +85,11 @@ compdef _gr gr
 # CYCLE THROUGH DIRECTORIES
 
 function _grappling_hook {
-	# CONFIG
-	local two_perma_repos
-	two_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|" | head -n2)
+	# CONFIG some perma-repos & desktop
+	local some_perma_repos to_open locations_count dir locations
+	some_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|" | head -n2)
+	locations="$desktop\n$some_perma_repos"
 
-	local to_open locations_count dir
-	local locations="$wd\n$two_perma_repos" # add Desktop
 	to_open=$(echo "$locations" | sed -n "1p")
 	locations_count=$(echo "$locations" | wc -l)
 
