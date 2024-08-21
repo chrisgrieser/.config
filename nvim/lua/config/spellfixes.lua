@@ -40,6 +40,7 @@ local spellfixes = {
 	remtoe = "remote",
 	repalce = "replace",
 	fro = "for",
+	fiels = "files",
 	ro = "or",
 	reponse = "response",
 	retrun = "return",

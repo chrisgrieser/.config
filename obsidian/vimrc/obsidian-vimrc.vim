@@ -33,6 +33,7 @@ noremap <M-k> :pasteinto
 exmap copyAbsolutePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("absolute") }
 exmap copyRelativePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("relative") }
 exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
+exmap copyObsidianUriMdLink jsfile Meta/vimrc-jsfile.js { copyObsidianUriMdLink() }
 
 noremap <C-p> :copyAbsolutePath
 inoremap <C-p> :copyAbsolutePath
@@ -40,6 +41,8 @@ noremap <C-t> :copyRelativePath
 inoremap <C-t> :copyRelativePath
 noremap <C-n> :copyFilename
 inoremap <C-n> :copyFilename
+noremap <C-o> :copyObsidianUriMdLink
+inoremap <C-o> :copyObsidianUriMdLink
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
@@ -291,10 +294,6 @@ exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikth
 nnoremap ,a :acceptSuggestionsInLine
 exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrusInLine("reject") }
 nnoremap ,r :rejectSuggestionsInLine
-
-" Add [y]aml property
-exmap addProperty obcommand markdown:add-metadata-property
-nnoremap ,y :addProperty
 
 " set "[r]ead: true" property
 exmap addYamlKey jsfile Meta/vimrc-jsfile.js { addYamlKey("read", true) }
