@@ -260,5 +260,32 @@
       ],
       "key": "D"
     }
-  ]
+  ],
+  "quadro:unassign-code": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "Backspace"
+    }
+  ],
+  "quadro:extract-existing-extraction-file": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "A"
+    }
+  ],
+  "quadro:assign-code": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "C"
+    }
+  ],
+  "quadro:rename-code": []
 }
