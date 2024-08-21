@@ -2,7 +2,7 @@
 " LEADER
 
 " Can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior: 
+" However, it needs to be unmapped, to not trigger default behavior:
 " https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
@@ -278,12 +278,6 @@ nnoremap ,ll :consoleLogFromWordUnderCursor
 " Enhance URL with title (same hotkey as [c]ode action in nvim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle
-
-" Workspace
-exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
-nnoremap ,w :loadWorkspace
-exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
-nnoremap ,W :saveWorkspace
 
 " Freeze Interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
