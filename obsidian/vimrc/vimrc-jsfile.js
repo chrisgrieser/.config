@@ -131,18 +131,6 @@ function openDynamicHighlightsSettings() {
 	}, 100);
 }
 
-/** @param {"load"|"save"} mode @param {string} workspaceName */
-async function workspace(mode, workspaceName) {
-	const workspacePlugin = view.app.internalPlugins.plugins.workspaces;
-	await workspacePlugin.enable();
-
-	if (mode === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
-	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
-
-	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
-	setTimeout(() => workspacePlugin.disable(), 3000);
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {"next"|"prev"} which */

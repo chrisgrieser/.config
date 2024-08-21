@@ -343,16 +343,6 @@ nnoremap ,ph :openDynamicHighlightsSettings
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme
 
-" Open this vimrc file
-exmap openVimrc jscommand { view.app.openWithDefaultApp("Meta/obsidian-vimrc.vim"); }
-nnoremap g, :openVimrc
-
-" Workspace
-exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
-nnoremap ,w :loadWorkspace
-exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
-nnoremap ,W :saveWorkspace
-
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 
