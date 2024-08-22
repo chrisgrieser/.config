@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+#───────────────────────────────────────────────────────────────────────────────
+# PENDING https://github.com/aome510/spotify-player/issues/520
+#───────────────────────────────────────────────────────────────────────────────
+
+title: Spotify Control
+rules:
+  - description: Spotify Media Controls
+    manipulators:
+      - type: basic
+        from: { key_code: f3 }
+        to:
+          - shell_command: open "https://open.spotify.com/"
+
+      - type: basic
+        from: { key_code: f4 }
+        to:
+          - shell_command: |
+              cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
+              msg=$(./spt --config="spotify_tui_config.yml" playback --like)
+              "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+                --title "Spotify" --message "💚 $msg"
+
+      - type: basic
+        from: { key_code: f7 }
+        to:
+          - shell_command: |
+              cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
+              ./spt --config="spotify_tui_config.yml" playback --previous
+
+      - type: basic
+        from: { key_code: f8 }
+        to:
+          - shell_command: |
+              cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
+              ./spt --config="spotify_tui_config.yml" playback --toggle
+
+      - type: basic
+        from: { key_code: f9 }
+        to:
+          - shell_command: |
+              cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
+              ./spt --config="spotify_tui_config.yml" playback --next
+
+      #─────────────────────────────────────────────────────────────────────────
+      # - type: basic
+      #   from: { key_code: f4 }
+      #   to:
+      #     - shell_command: |
+      #         export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+      #         info=$(spotify_player get key playback)
+      #         artist=$(echo "$info" | yq ".item.artists[0].name")
+      #         song=$(echo "$info" | yq ".item.name")
+      #         "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
+      #           --title "Spotify" --message "💚 $artist – $song"
+      #         spotify_player like
+      #
+      # - type: basic
+      #   from: { key_code: f7 }
+      #   to:
+      #     - shell_command: |
+      #         export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+      #         spotify_player playback previous
+      #
+      # - type: basic
+      #   from: { key_code: f8 }
+      #   to:
+      #     - shell_command: |
+      #         export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+      #         spotify_player playback play-pause && exit 0
+      #
+      #         if scutil --get ComputerName | grep -q "Office"; then
+      #         if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+      #         device="spotifyd"
+      #         else
+      #         device="Wohnzimmer Echo"
+      #         fi
+      #         spotify_player connect --name "$device"
+      #         spotify_player playback play
+      #
+      # - type: basic
+      #   from: { key_code: f9 }
+      #   to:
+      #     - shell_command: |
+      #         export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+      #         spotify_player playback next && exit 0
+      #
+      #         if scutil --get ComputerName | grep -q "Office"; then
+      #         if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+      #         device="spotifyd"
+      #         else
+      #         device="Wohnzimmer Echo"
+      #         fi
+      #         spotify_player connect --name "$device"
+      #         spotify_player playback play
