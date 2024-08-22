@@ -41,7 +41,7 @@ if [[ $(uname -p) == "i386" ]]; then
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
-# REPOS: Dotfiles, Vault, Passwords
+# REPOS: Dotfiles, Passwords
 
 # SSH
 ln -sf "$DATA_DIR/Authentication/ssh/" ~/.ssh
@@ -50,7 +50,6 @@ sudo chmod -R 700 ~/.ssh/id_ed25519
 cd ~ || return 1
 [[ -e ~/.config ]] && rm -rfv ~/.config
 git clone git@github.com:chrisgrieser/.config
-git clone git@github.com:chrisgrieser/main-vault
 git clone git@github.com:chrisgrieser/.password-store
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -63,4 +62,3 @@ source "$HOME/.config/zsh/.zshrc"
 
 # load base configs
 zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load work
-loadprefs # via mackup
