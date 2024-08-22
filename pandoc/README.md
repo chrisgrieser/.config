@@ -1,7 +1,7 @@
 ---
 aliases: 
 mdate: 2024-08-15T15:24
-similar:
+related:
   - "[[Bibliography Tools]]"
 tags:
   - pandoc
