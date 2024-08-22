@@ -1,1 +1,6 @@
 hotkeys.json
+jxa-globals.d.ts
+
+# Automator App Internals
+*.app
+ApplicationStub.icns

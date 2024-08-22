@@ -269,337 +269,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/toggle-obsidian-alpha.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alpha</string>
-				<key>subtext</key>
-				<string>restarts Obsidian afterwards</string>
-				<key>text</key>
-				<string>Toggle Obsidian Alpha</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>68189488-7F07-4C40-B382-A6911C4A83B6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🟪 Alpha</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BC155658-4BBD-479E-BE51-AF7C4F667727</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3B590E83-D5D3-46E8-977D-60BC6515A3AD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>35581195-D1B3-426B-82F8-14C072E52243</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>op</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/obsidian-plugin-search.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Community Plugins &amp; Themes...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F926E3B6-82B9-4B36-847D-6757DB67469A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>slurp</string>
-				<key>subtext</key>
-				<string>All URLs in "{var:slurp_list}"</string>
-				<key>text</key>
-				<string>Slurp</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>470BD464-4432-4787-8ECF-8C463E6E68A9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>31</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>O</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B732BB78-84AF-49C2-BBA9-D15278904C6C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://slurp?vault=phd-data-analysis&amp;url={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>w</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>C2415456-FFEC-4DD2-B8D1-C76A442510EF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/slurp-all-diss-urls.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>allow_empty</key>
-					<true/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>4295D5EA-EBB8-427F-8AD0-72737778E375</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string></string>
 				<key>sourcefile</key>
@@ -749,7 +418,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>o</string>
+				<string>vv</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -797,6 +466,337 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3B590E83-D5D3-46E8-977D-60BC6515A3AD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>35581195-D1B3-426B-82F8-14C072E52243</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>op</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/obsidian-plugin-search.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Community Plugins...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F926E3B6-82B9-4B36-847D-6757DB67469A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>restarts Obsidian afterwards</string>
+				<key>text</key>
+				<string>Toggle Obsidian Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>68189488-7F07-4C40-B382-A6911C4A83B6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🟪 Alpha</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BC155658-4BBD-479E-BE51-AF7C4F667727</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>31</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>O</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+					<string>com.apple.Safari</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>B732BB78-84AF-49C2-BBA9-D15278904C6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://slurp?vault=phd-data-analysis&amp;url={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>w</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>C2415456-FFEC-4DD2-B8D1-C76A442510EF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>allow_empty</key>
+					<true/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>4295D5EA-EBB8-427F-8AD0-72737778E375</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>slurp</string>
+				<key>subtext</key>
+				<string>All URLs in "{var:slurp_list}"</string>
+				<key>text</key>
+				<string>Slurp</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>470BD464-4432-4787-8ECF-8C463E6E68A9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/slurp-all-diss-urls.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -811,7 +811,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>495</real>
 		</dict>
 		<key>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</key>
 		<dict>
@@ -820,16 +820,16 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>745</real>
 		</dict>
 		<key>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>880</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
@@ -838,7 +838,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>310</real>
+			<real>525</real>
 		</dict>
 		<key>35581195-D1B3-426B-82F8-14C072E52243</key>
 		<dict>
@@ -847,7 +847,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>220</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>410</real>
 		</dict>
 		<key>3B590E83-D5D3-46E8-977D-60BC6515A3AD</key>
 		<dict>
@@ -856,7 +856,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>380</real>
 		</dict>
 		<key>4295D5EA-EBB8-427F-8AD0-72737778E375</key>
 		<dict>
@@ -865,7 +865,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>745</real>
 		</dict>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<dict>
@@ -876,7 +876,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>45</real>
 		</dict>
 		<key>440205E9-6FAD-4C11-AA0A-F2785E994E8C</key>
 		<dict>
@@ -887,7 +887,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>260</real>
 		</dict>
 		<key>470BD464-4432-4787-8ECF-8C463E6E68A9</key>
 		<dict>
@@ -896,9 +896,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>slurp all reminders from "Diss URLs"</string>
 			<key>xpos</key>
-			<real>705</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>880</real>
 		</dict>
 		<key>5DC046CA-F357-492A-A06B-1D71B3242591</key>
 		<dict>
@@ -907,7 +907,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>290</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>260</real>
 		</dict>
 		<key>5E566F93-2181-4333-A675-764390C315B4</key>
 		<dict>
@@ -916,7 +916,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>555</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>125</real>
 		</dict>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
 		<dict>
@@ -927,7 +927,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>405</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>125</real>
 		</dict>
 		<key>68189488-7F07-4C40-B382-A6911C4A83B6</key>
 		<dict>
@@ -938,7 +938,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>615</real>
 		</dict>
 		<key>8B8E6563-9DF0-4342-BDBE-3398095FAC67</key>
 		<dict>
@@ -949,7 +949,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>221</real>
 			<key>ypos</key>
-			<real>670</real>
+			<real>65</real>
 		</dict>
 		<key>B16A7050-6ABE-4666-81AA-1FE68733ABB1</key>
 		<dict>
@@ -958,7 +958,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>15</real>
 		</dict>
 		<key>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</key>
 		<dict>
@@ -967,7 +967,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>615</real>
 		</dict>
 		<key>B732BB78-84AF-49C2-BBA9-D15278904C6C</key>
 		<dict>
@@ -978,18 +978,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>745</real>
 		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>search plugins/themes</string>
+			<string>search plugins</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>230</real>
+			<real>445</real>
 		</dict>
 		<key>BC155658-4BBD-479E-BE51-AF7C4F667727</key>
 		<dict>
@@ -998,7 +998,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>615</real>
 		</dict>
 		<key>C2415456-FFEC-4DD2-B8D1-C76A442510EF</key>
 		<dict>
@@ -1009,7 +1009,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>745</real>
 		</dict>
 		<key>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</key>
 		<dict>
@@ -1020,7 +1020,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>760</real>
+			<real>155</real>
 		</dict>
 		<key>F926E3B6-82B9-4B36-847D-6757DB67469A</key>
 		<dict>
@@ -1029,11 +1029,53 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>495</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/vaults/main-vault</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>~/vaults/main-vault</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Vault Path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>vault_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Scratchpad Path</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>scratchpad_path</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -1075,27 +1117,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>slurp_vault</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string></string>
-			<key>label</key>
-			<string>Scratchpad Path</string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>scratchpad_path</string>
 		</dict>
 	</array>
 	<key>version</key>

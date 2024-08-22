@@ -102,6 +102,7 @@ local function telescopeConfig()
 				},
 
 				prompt_prefix = "󰝰 ",
+				follow = true,
 				mappings = {
 					i = { ["<C-h>"] = keymaps.toggleHidden },
 				},
