@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.finder</string>
+	<string>de.chris-grieser.file-finder</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -367,7 +367,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Finder Searches</string>
+	<string>File Finder</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -1226,7 +1226,7 @@ to modify the respective hotkey</string>
 			<key>note</key>
 			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
-			<real>740</real>
+			<real>735</real>
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
