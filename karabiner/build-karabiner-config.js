@@ -1,5 +1,4 @@
 #!/usr/bin/env osascript -l JavaScript
-
 ObjC.import("Foundation");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
@@ -21,9 +20,10 @@ function writeToFile(filepath, text) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore lint/correctness/noUnusedVariables: <explanation>
-function run() {
-	// CONFIG
+/** @param {string[]} argv */
+// biome-ignore lint/correctness/noUnusedVariables: JXA
+function run(argv) {
+	const profileToUse = argv[0] || "Default"; // CONFIG
 	const home = app.pathTo("home folder");
 	const karabinerJson = home + "/.config/karabiner/karabiner.json";
 	const customRulesJson = home + "/.config/karabiner/assets/complex_modifications/";
@@ -38,7 +38,7 @@ function run() {
 		cd "$HOME/.config/karabiner/assets/complex_modifications/" || exit 1
 		for f in *.yaml ; do
 			f=$(basename "$f" .yaml)
-			yq -o=json 'explode(.)' "$f.yaml" > "$f.json"
+			yq --output-format=json 'explode(.)' "$f.yaml" > "$f.json"
 		done
 	`);
 
@@ -56,9 +56,11 @@ function run() {
 	}
 
 	// insert new rules into karabiner config
-	// INFO: the rules are added to the *first* profile in the profile list from Karabiner.
 	const complexRules = JSON.parse(readFile(karabinerJson));
-	complexRules.profiles[0].complex_modifications.rules = customRules;
+	const profileIdx = complexRules.profiles.findIndex(
+		(/** @type {{ name: string; }} */ profile) => profile.name === profileToUse,
+	);
+	complexRules.profiles[profileIdx].complex_modifications.rules = customRules;
 	writeToFile(karabinerJson, JSON.stringify(complexRules));
 
 	// validate
