@@ -2,6 +2,8 @@ set quiet := true
 
 karabiner_profile := "Default"
 
+#───────────────────────────────────────────────────────────────────────────────
+
 reload_karabiner:
     osascript -l JavaScript ./build-karabiner-config.js "{{ karabiner_profile }}"
 
@@ -10,3 +12,4 @@ browse_docs:
 
 keyboard_layout_editor:
     open "http://www.keyboard-layout-editor.com/#/"
+    open -R "./assets/finder-vim-mode/cheatsheet.json"

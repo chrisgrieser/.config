@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
 #───────────────────────────────────────────────────────────────────────────────
-# PENDING https://github.com/aome510/spotify-player/issues/520
-#───────────────────────────────────────────────────────────────────────────────
 
 title: Spotify Control
 rules:
@@ -11,6 +9,8 @@ rules:
         from: { key_code: f3 }
         to:
           - shell_command: open "https://open.spotify.com/"
+
+      #─────────────────────────────────────────────────────────────────────────
 
       - type: basic
         from: { key_code: f4 }
@@ -42,6 +42,9 @@ rules:
               cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
               ./spt --config="spotify_tui_config.yml" playback --next
 
+      #─────────────────────────────────────────────────────────────────────────
+      # PENDING https://github.com/aome510/spotify-player/issues/520
+      #─────────────────────────────────────────────────────────────────────────
       #─────────────────────────────────────────────────────────────────────────
       # - type: basic
       #   from: { key_code: f4 }

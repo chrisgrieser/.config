@@ -58,7 +58,7 @@ anchors:
       - &insert-notice
         set_notification_message:
           id: insert-notice
-          text: "✏️  INSERT"
+          text: "Finder Vim Mode\n\n✏️  INSERT"
       - &remove-insert-notice
         set_notification_message:
           id: insert-notice
@@ -74,7 +74,7 @@ anchors:
       - &find-notice
         set_notification_message:
           id: find-notice
-          text: "🔎 FIND"
+          text: "Finder Vim Mode\n\n🔎 FIND"
       - &remove-find-notice
         set_notification_message:
           id: find-notice
@@ -86,7 +86,7 @@ anchors:
       - &move-notice
         set_notification_message:
           id: move-notice
-          text: "✂️ Move active"
+          text: "Finder Vim Mode\n\n✂️ Move active"
       - &start-move
         set_variable:
           name: FINDER_MOVE_ACTIVE
@@ -110,7 +110,7 @@ anchors:
       - &menu-notice
         set_notification_message:
           id: menu-notice
-          text: "➡️ Menu Mode"
+          text: "Finder Vim Mode\n\n➡️ Menu Mode"
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -238,30 +238,6 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-        # Switch Directory (for people using regular shortcuts)
-      - type: basic
-        from: { key_code: g, modifiers: { mandatory: [command, shift] } }
-        to:
-          - { key_code: g, modifiers: [command, shift] }
-          - *insert-notice
-          - *enter-insert-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-        # Search
-      - type: basic
-        from: { key_code: slash }
-        to:
-          - { key_code: f, modifiers: [command] }
-          - *insert-notice
-          - *enter-insert-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-        # Search (for people using regular shortcuts)
-      - type: basic
-        from: { key_code: f, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: f, modifiers: [command] }
-          - *insert-notice
-          - *enter-insert-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # LEAVE INSERT MODE
       # Confirm Insert Mode
       - type: basic
@@ -331,24 +307,6 @@ rules:
           - *remove-find-notice
           - *leave-find-mode
         conditions: [*finder-app]
-      # Q: Restart Finder
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [shift] } }
-        to:
-          - shell_command: |
-              killall Finder
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                --title "Finder Vim Mode" --message "🔁 Restarting Finder…"
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
-          - *remove-insert-notice
-          - *leave-insert-mode
-          - *remove-menu-notice
-          - *end-menu
-          - *remove-move-notice
-          - *end-move
-          - *remove-find-notice
-          - *leave-find-mode
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       #─────────────────────────────────────────────────────────────────────────
       # WINDOWS
       - type: basic
@@ -383,9 +341,9 @@ rules:
           - *remove-find-notice
           - *leave-find-mode
         conditions: [*finder-app]
-      # w = close window/tab
+      # q: close window (:quit)
       - type: basic
-        from: { key_code: w }
+        from: { key_code: q }
         to:
           - shell_command: |
               current_win=$(osascript -e '
@@ -407,9 +365,9 @@ rules:
                 echo "$current_win" >"$HOME/.cache/finder-vim-mode/last-closed-window"
               fi
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # W = re-open window
+      # r = re-open window
       - type: basic
-        from: { key_code: w, modifiers: { mandatory: [shift] } }
+        from: { key_code: r }
         to:
           - shell_command: |
               open "$(cat "$HOME/.cache/finder-vim-mode/last-closed-window")"
@@ -484,13 +442,13 @@ rules:
           - { key_code: down_arrow, modifiers: [shift] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
-      # q = right-click / Context Menu
+      # c = context menu ("right-click")
       - type: basic
-        from: { key_code: q }
+        from: { key_code: c }
         to:
           # INFO Finder needs to activate even though it is already frontmost,
           # since running a shellcommand seems to temporarily take focus, so
-          # that there is no AXfocusedUIElement during execution
+          # that there is no `AXfocusedUIElement` during execution
           - shell_command: |
               osascript -e '
                 tell application "Finder"
@@ -626,9 +584,9 @@ rules:
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "✅ Text appended to file"
         conditions: [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode]
-      # r = replicate (duplicate)
+      # w = duplicate (mnemonic: double-u)
       - type: basic
-        from: { key_code: r }
+        from: { key_code: w }
         to_if_alone:
           - { key_code: d, modifiers: [command] }
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
@@ -700,42 +658,9 @@ rules:
               [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # i = Preview (information sidebar)
-      - type: basic
-        from: { key_code: i }
-        to:
-          - { key_code: p, modifiers: [shift, command] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # I = info window
-      # INFO uses floating inspector window which follows the current selection.
-      # Pressing the hotkey again toggles it
-      - type: basic
-        from: { key_code: i, modifiers: { mandatory: [shift] } }
-        to:
-          - { key_code: i, modifiers: [command, option] }
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # v = open first (removable) volume
+      # v = open first volume
       - type: basic
         from: { key_code: v }
-        to_if_alone:
-          - shell_command: |
-              first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
-              [[ -z "$first_volume" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                --title "Finder Vim Mode" --message "No ejectable volume found."
-              error=$(osascript -e "
-                set the_volume to (\"$first_volume\" as POSIX file)
-                tell application \"Finder\"
-                  if (count Finder windows) is 0 then
-                    open the_volume
-                  else
-                    set target of front Finder window to the_volume
-                  end if
-                end tell
-              ")
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # v = open first volume (in new window)
-      - type: basic
-        from: { key_code: v, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - shell_command: |
               first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
@@ -946,16 +871,16 @@ rules:
           - shell_command: |
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_unmute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # c = close/collapse fold (C: do it recursively)
+      # i = close/collapse fold (I: do it recursively)
       - type: basic
-        from: { key_code: c }
+        from: { key_code: i }
         to_if_alone:
           - key_code: left_arrow
           - shell_command: |
               afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/mic_mute.caf" &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       - type: basic
-        from: { key_code: c, modifiers: { mandatory: [shift] } }
+        from: { key_code: i, modifiers: { mandatory: [shift] } }
         to_if_alone:
           - { key_code: left_arrow, modifiers: [option] }
           - shell_command: |
