@@ -76,7 +76,12 @@ return {
 		},
 	},
 	{ -- color previews & color picker
-		"uga-rosa/ccc.nvim",
+		-- "uga-rosa/ccc.nvim",
+
+		-- PENDING https://github.com/chrisgrieser/ccc.nvim/tree/patch-1
+		"chrisgrieser/ccc.nvim",
+		branch = "patch-1", 
+
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
@@ -90,7 +95,7 @@ return {
 				highlighter = {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
-					max_byte = 200 * 1024, -- 200kb
+					max_byte = 100 * 1024, -- 100kb
 					update_insert = false,
 				},
 				pickers = {
