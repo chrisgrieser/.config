@@ -146,15 +146,6 @@
     }
   ],
   "editor:open-search-replace": [],
-  "editor:save-file": [],
-  "editor:set-heading-2": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "H"
-    }
-  ],
   "obsidian-style-settings:show-style-settings-leaf": [
     {
       "modifiers": [
@@ -225,15 +216,6 @@
         "Mod"
       ],
       "key": "-"
-    }
-  ],
-  "editor:set-heading-0": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "H"
     }
   ],
   "bookmarks:bookmark-current-view": [
@@ -307,5 +289,15 @@
   "various-complements:reload-custom-dictionaries": [],
   "various-complements:show-suggestions": [],
   "various-complements:add-word-custom-dictionary": [],
-  "obsidian-linter:lint-file": []
+  "editor:set-heading-0": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "H"
+    }
+  ],
+  "obsidian-linter:lint-file": [],
+  "editor:save-file": []
 }

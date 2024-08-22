@@ -191,6 +191,11 @@ nnoremap <Down> :lineDown
 nnoremap <Right> dlp
 nnoremap <Left> dlhhp
 
+" h1 -> h2, h2 -> h3, etc.
+" <M-h> == cmd+h
+exmap headingIncrementor jsfile Meta/vimrc-jsfile.js { headingIncrementor() }
+nnoremap <M-h> :headingIncrementor
+
 " Move words (equivalent to sibling-swap.nvim)
 " nnoremap ä "zdawel"zph
 " nnoremap Ä "zdawbh"zph
@@ -506,11 +511,11 @@ nnoremap ,oa :toggleAiCompletion
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS
 
-" macOS: cmd-key mappings do not work reliably, thus D-s in Karabiner to C-ü
+" <M-s> = cmd+s
 " insert mode: accept suggestion
 " normal mode: format
 exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <C-ü> :acceptGhostText
+inoremap <M-s> :acceptGhostText
 
-exmap lint obcommand obsidian-linter:lint-file
-nnoremap <C-ü> :lint
+exmap lint obcommand obsidian-linter:lint-file-unless-ignored
+nnoremap <M-s> :lint
