@@ -115,14 +115,14 @@
         3
       ]
     },
-    "q (Q)\nmenu (restart Finder)",
-    "w (W)\nclose (reopen) win",
+    "q\nclose win",
+    "w\ndouble (duplicate)",
     "e\nclose other wins",
-    "r\nreplicate",
+    "r\nre-open last win",
     "t\nto recent folder\n\n\n^t rela",
     "z\nzip selection",
     "u (U)\nundo (redo)",
-    "i (I)\ninfo panel (window)",
+    "i (I)\nclose folds  (recursive)",
     "o (O)\nopen folds (recursive)",
     "p (P)\npaste (into file)\n\n\n⌃p abs",
     {
@@ -224,20 +224,17 @@
     },
     "y (Y)\ncopy file (content)",
     "x (X)\ncross-move (copy)",
-    "c (C)\nclose folds  (recursive)",
-    "v (V)\n1st remo- vable vol. (new win)",
+    "c (C)\ncontext menu",
+    "v\ngoto 1st remo- vable vol.",
     "b\ntoggle  \"bkp\" suffix",
     "n (N)\nnew file (dir)\n\n\n⌃n name",
     "m (M)\nmove (to new dir)",
     ",\nrestart iCloud",
     ".\ntoggle hidden files",
     {
-      "c": "#ffb896",
-      "fa": [
-        2
-      ]
+      "c": "#ffb896"
     },
-    "en: ?<br>:help\nde:&nbsp–,&nbspen:&nbsp/ Search",
+    "en: ?\n:help",
     {
       "c": "#999999",
       "a": 7,

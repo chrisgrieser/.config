@@ -18,11 +18,18 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	end
 
 	if M.spotify_task and M.spotify_task:isRunning() then M.spotify_task:terminate() end
-
 	local action = eventType == aw.launched and "pause" or "play"
-	local homebrewPrefix = env.isAtMother and "/usr/local" or "/opt/homebrew"
-	local binary = homebrewPrefix .. "/bin/spotify_player"
-	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
+
+	-----------------------------------------------------------------------------
+
+	-- PENDING https://github.com/aome510/spotify-player/issues/520
+	-- local homebrewPrefix = env.isAtMother and "/usr/local" or "/opt/homebrew"
+	-- local binary = homebrewPrefix .. "/bin/spotify_player"
+	-- M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
+
+	local script = os.getenv("HOME")
+		.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_toggler.sh"
+	M.spotify_task = hs.task.new(script, nil, { action }):start()
 end)
 
 M.aw_spotify:start()
