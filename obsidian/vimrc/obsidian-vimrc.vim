@@ -239,11 +239,11 @@ nnoremap o :openBelow
 exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
 nnoremap O :openAbove
 
-" Add Blank Line above/below
+" Add blank line above/below
 nnoremap = mzO<Esc>`z
 nnoremap _ mzo<Esc>`z
 
-" Increment/Decrement
+" Increment/decrement
 nnoremap + <C-a>
 nnoremap ü <C-x>
 

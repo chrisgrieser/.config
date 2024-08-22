@@ -1,0 +1,28 @@
+Techniksoziologie
+Wissenschaftssoziologie
+Innovationsforschung
+Gamification
+Institutionalisierung
+Institution
+Rationalisierung
+Differenzierung
+Plattformökonomie
+Organisationssoziologie
+Organisationstheorie
+sozialwissenschaftliche Innovationsforschung
+Sozialwissenschaften
+Geisteswissenschaften
+Naturwissenschaften
+Quantifizierungsforschung
+Wissenssoziologie
+Ökosystem
+Plattformforschung
+Systemtheorie
+Differenzierung
+Individualisierung
+Innovativität
+Wirtschaftssoziologie
+Algorithmen
+sozialwissenschaftliche Algorithmen-Forschung
+Quantifierungssoziologie||
+sozialwissenschaftlichen||
