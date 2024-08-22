@@ -1,0 +1,5 @@
+set quiet := true
+
+reload:
+    open -a "Obsidian" ; \
+    open "obsidian://advanced-uri?commandid=app%253Areload"
