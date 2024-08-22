@@ -644,11 +644,11 @@ rules:
                       # AppleScript does not allow the "ask for confirmation" prompt if replacing,
                       # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
                 			try
-                				copy aFile to otherWin without replacing
+                				duplicate aFile to otherWin without replacing
                 			on error
                 				set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location."
                 				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
-                				if response is "Replace" then copy aFile to otherWin with replacing
+                				if response is "Replace" then duplicate aFile to otherWin with replacing
                 			end try
                 		end repeat
                 		return ""
