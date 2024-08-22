@@ -25,7 +25,7 @@ declare const activeWindow: any;
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
-declare type TFile = { path: string; name: string, basename: string };
+declare type TFile = { path: string; name: string; basename: string };
 
 declare type Editor = {
 	exec(action: string): void;
@@ -83,7 +83,7 @@ declare type View = {
 			getLeaf(): {
 				openFile(file: TFile): Promise<void>;
 			};
-			getActiveFile:() => TFile;
+			getActiveFile: () => TFile;
 		};
 		openWithDefaultApp(path: string): void;
 		vault: {
