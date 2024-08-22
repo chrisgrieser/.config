@@ -53,6 +53,7 @@ local autoCdConfig = {
 		".git",
 		"Justfile",
 		"info.plist", -- Alfred workflows
+		"biome.jsonc" -- biome
 	},
 	parentOfRoot = {
 		".config",
