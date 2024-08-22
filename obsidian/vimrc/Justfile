@@ -1,5 +1,5 @@
 set quiet := true
 
 reload:
-    open -a "Obsidian" ; \
-    open "obsidian://advanced-uri?commandid=app%253Areload"
+    # using `Advanced URI` plugin
+    open "obsidian://advanced-uri?vault=$vault_name&commandid=app%253Areload"
