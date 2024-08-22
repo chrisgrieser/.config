@@ -63,10 +63,10 @@ function run(argv) {
 	complexRules.profiles[profileIdx].complex_modifications.rules = customRules;
 	writeToFile(karabinerJson, JSON.stringify(complexRules));
 
-	// validate
+	// VALIDATE
 	const lintStatus = app.doShellScript(
 		`"/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli" --lint-complex-modifications "${karabinerJson}"`,
 	);
 	const msg = lintStatus.includes("ok") ? " Karabiner reloaded" : "󱎘 Karabiner config invalid";
-	return msg; // notify via justfile output
+	return msg; // notify via justfile on success/failure
 }

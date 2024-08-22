@@ -1,9 +1,9 @@
 set quiet := true
 
-profile := "Default"
+karabiner_profile := "Default"
 
 reload_karabiner:
-    osascript -l JavaScript ./build-karabiner-config.js "{{ profile }}"
+    osascript -l JavaScript ./build-karabiner-config.js "{{ karabiner_profile }}"
 
 browse_docs:
     open "https://karabiner-elements.pqrs.org/docs/"
