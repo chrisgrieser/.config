@@ -1,8 +1,9 @@
 local spec = {
 	{
-		"folke/noice.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		opts = true,
+		"uga-rosa/ccc.nvim",
+		opts = {
+			highlighter = { auto_enable = true },
+		},
 	},
 }
 --------------------------------------------------------------------------------
