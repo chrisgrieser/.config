@@ -299,5 +299,13 @@
     }
   ],
   "obsidian-linter:lint-file": [],
-  "editor:save-file": []
+  "editor:save-file": [],
+  "obsidian-style-settings:style-settings-class-toggle-hide-properties-hide-some-properties": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "P"
+    }
+  ]
 }
