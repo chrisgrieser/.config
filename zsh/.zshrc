@@ -5,6 +5,7 @@ CONFIG_FILES=(
 
 	options
 	navigation
+	grappling_hook
 	completion
 	terminal_utils
 	aliases
