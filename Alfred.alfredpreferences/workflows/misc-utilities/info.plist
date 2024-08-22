@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1DF97820-45AE-401B-8A39-175A6F0EB9BC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DB3D4F97-8D76-4A34-8D12-96A5F56BDB30</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<array>
 			<dict>
@@ -254,6 +267,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DB3D4F97-8D76-4A34-8D12-96A5F56BDB30</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -984,6 +1010,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string></string>
+				<key>sourcefile</key>
+				<string>~/Library</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>library</string>
+				<key>subtext</key>
+				<string>~/Library/</string>
+				<key>text</key>
+				<string>Library</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E0DF7030-2943-416D-BF96-8594A9D6B8D1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1042,42 +1104,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E0DF7030-2943-416D-BF96-8594A9D6B8D1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -1126,6 +1152,71 @@
 			<string>A962A643-0B3F-47F2-BBD2-3398DD3E252B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Karabiner Elements</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/toggle-karabiner.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DB3D4F97-8D76-4A34-8D12-96A5F56BDB30</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ke||karabiner</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>🔁 Toggle Karabiner Elements</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>1DF97820-45AE-401B-8A39-175A6F0EB9BC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1213,6 +1304,15 @@
 			<key>ypos</key>
 			<real>365</real>
 		</dict>
+		<key>1DF97820-45AE-401B-8A39-175A6F0EB9BC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1040</real>
+		</dict>
 		<key>1ED11A83-B032-49DD-A27E-82281010DEC8</key>
 		<dict>
 			<key>colorindex</key>
@@ -1227,18 +1327,18 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>795</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>955</real>
 		</dict>
 		<key>4052B872-BCA5-4596-BE0A-8751D4F562C8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>830</real>
 		</dict>
 		<key>429CEC89-9C82-432F-900F-A22DDDF7964A</key>
 		<dict>
@@ -1294,9 +1394,9 @@
 			<key>note</key>
 			<string>quit Karabiner-EventViewer</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>890</real>
 		</dict>
 		<key>80E25EAA-9532-4E99-B243-93EFEE6C3774</key>
 		<dict>
@@ -1305,9 +1405,18 @@
 			<key>note</key>
 			<string>Copy to…</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1090</real>
+		</dict>
+		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>365</real>
+			<key>ypos</key>
+			<real>1040</real>
 		</dict>
 		<key>8D0538B5-46D7-4A6B-B800-3C208CB8971B</key>
 		<dict>
@@ -1343,9 +1452,9 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>200</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>890</real>
 		</dict>
 		<key>98776993-F46B-4069-BBDE-8CAA032AB403</key>
 		<dict>
@@ -1392,9 +1501,9 @@
 			<key>note</key>
 			<string>Move to…</string>
 			<key>xpos</key>
-			<real>615</real>
+			<real>620</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>955</real>
 		</dict>
 		<key>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</key>
 		<dict>
@@ -1443,6 +1552,15 @@
 			<key>ypos</key>
 			<real>150</real>
 		</dict>
+		<key>DB3D4F97-8D76-4A34-8D12-96A5F56BDB30</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>1040</real>
+		</dict>
 		<key>DC943639-4DB9-44BA-B722-273F16EEED36</key>
 		<dict>
 			<key>colorindex</key>
@@ -1466,18 +1584,18 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>795</real>
+			<real>800</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1090</real>
 		</dict>
 		<key>E0DF7030-2943-416D-BF96-8594A9D6B8D1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>615</real>
 			<key>ypos</key>
-			<real>860</real>
+			<real>830</real>
 		</dict>
 		<key>E1F1F193-4BF3-42D0-A30E-784AC487FDA7</key>
 		<dict>

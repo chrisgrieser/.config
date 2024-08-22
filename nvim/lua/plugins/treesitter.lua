@@ -20,7 +20,11 @@ return {
 		highlight = {
 			enable = true,
 			-- disable on large files
-			disable = function(_, buf) return vim.api.nvim_buf_line_count(buf) > 5000 end,
+			disable = function(_, bufnr)
+				local maxFilesize = 100 * 1024 -- 100 KB
+				local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+				if ok and stats and stats.size > maxFilesize then return true end
+			end,
 		},
 		indent = {
 			enable = true,
