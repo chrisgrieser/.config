@@ -355,7 +355,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/plugin-and-theme-search.js</string>
+				<string>scripts/obsidian-plugin-search.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
