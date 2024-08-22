@@ -905,7 +905,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>290</real>
+			<real>325</real>
 			<key>ypos</key>
 			<real>260</real>
 		</dict>
@@ -914,7 +914,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>555</real>
+			<real>600</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -925,7 +925,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>append</string>
 			<key>xpos</key>
-			<real>405</real>
+			<real>460</real>
 			<key>ypos</key>
 			<real>125</real>
 		</dict>
@@ -1018,7 +1018,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>save "to_append"</string>
 			<key>xpos</key>
-			<real>330</real>
+			<real>365</real>
 			<key>ypos</key>
 			<real>155</real>
 		</dict>

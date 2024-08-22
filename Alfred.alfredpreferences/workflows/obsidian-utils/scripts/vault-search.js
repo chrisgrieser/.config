@@ -37,8 +37,5 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({
-		items: items,
-		cache: { seconds: 3600, loosereload: true },
-	});
+	return JSON.stringify({ items: items });
 }
