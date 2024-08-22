@@ -7,6 +7,9 @@
 %% Tables %%
 Pandoc Table Caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
 
+%% dataview %%
+moc-assistant>>>```dataviewjs\nawait dv.view("Meta/dataview/moc-assistant")\n```
+
 %%[GitHub Callouts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) %%
 note (callout)>>>> [!NOTE]\n> ||note|callout|info
 warning (callout)>>>> [!WARNING]\n> ||warning|callout

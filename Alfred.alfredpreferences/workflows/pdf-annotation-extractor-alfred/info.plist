@@ -620,9 +620,9 @@ to set the hotkey for the annotation extraction</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Only for Highlights.app users: The folder containing all PDFs. Required to be able to trigger extraction with Highlights being the frontmost app.</string>
+			<string>only for Highlights.app users: The folder containing all PDFs. Required to be able to trigger extraction with Highlights being the frontmost app.</string>
 			<key>label</key>
-			<string>Highlights.app PDF Folder</string>
+			<string>PDF Folder</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>

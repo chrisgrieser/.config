@@ -19,7 +19,7 @@ rules:
               cd "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/"
               msg=$(./spt --config="spotify_tui_config.yml" playback --like)
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
-                --title "Spotify" --message "💚 $msg"
+                --title "Spotify" --message "$msg"
 
       - type: basic
         from: { key_code: f7 }
