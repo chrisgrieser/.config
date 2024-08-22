@@ -88,7 +88,7 @@
       "\t\t.split(\"\\r\")",
       "\t\t.map((item) => {",
       "\t\t\t/** @type {AlfredItem} */",
-      "\t\t\tconst alfredItem {",
+      "\t\t\tconst alfredItem = {",
       "\t\t\t\ttitle: item,",
       "\t\t\t\tsubtitle: item,",
       "\t\t\t\targ: item,",

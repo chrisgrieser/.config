@@ -123,22 +123,23 @@ function run() {
 		.split("\r")
 		.slice(0, maxFiles)
 		.map((line) => {
-			const name = line.split("/").pop() || "";
+			const parts = line.split("/");
+			const name = parts.pop() || "";
 			const absPath = absPathOutput ? line : directory + "/" + line;
 
 			let subtitle = "";
 			if (!shallowOutput) {
-				const parent = absPath.split("/").slice(0, -1).join("/");
+				const parent = parts.join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁").replace(/\/Users\/\w+/, "~");
 			}
 
 			const ext = name.split(".").pop() || "";
-			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic", "webp"];
+			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
 			const icon = imageExt.includes(ext) ? { path: absPath } : { path: absPath, type: "fileicon" };
 
 			return {
 				title: prefix + name,
-				subtitle: subtitle,
+				subtitle: "▸ " + subtitle,
 				arg: absPath,
 				quicklookurl: absPath,
 				type: "file:skipcheck",
