@@ -11,6 +11,7 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.middleHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
+M.center = { x = 0.184, y = 0.1, w = 0.75, h = 0.8 }
 M.narrow = { x = 0.184, y = 0, w = 0.45, h = 1 }
 
 -- negative x to hide useless sidebar
@@ -47,7 +48,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona", "ClipBook" }
+	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona" }
 	if
 		not win
 		or not (win:application())
@@ -204,8 +205,10 @@ end)
 
 local function controlSpaceAction()
 	local currentWin = hs.window.focusedWindow()
-	local centeredWinApps = { "Finder", "Script Editor", "Reminders" }
-	local baseSize = u.isFront(centeredWinApps) and M.middleHalf or M.pseudoMax
+
+	local baseSize = M.pseudoMax
+	if u.isFront { "Finder", "Script Editor", "Reminders" } then baseSize = M.middleHalf end
+	if u.isFront("ClipBook") then baseSize = M.center end
 
 	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 	M.moveResize(currentWin, newSize)
