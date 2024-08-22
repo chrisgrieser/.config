@@ -299,15 +299,6 @@ rules:
           - { key_code: c, modifiers: [option, command] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
-      # surfing-keys <S-Space> -> daw
-      # - type: basic
-      #   from: { key_code: spacebar, modifiers: { mandatory: [shift] } }
-      #   to:
-      #     - { key_code: d }
-      #     - { key_code: a }
-      #     - { key_code: w }
-      #   conditions:
-      #     - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Obsidian"
     manipulators:
@@ -318,13 +309,6 @@ rules:
           - { key_code: i, modifiers: [option, command] }
           - { key_code: vk_none, hold_down_milliseconds: 400 }
           - { key_code: c, modifiers: [shift, command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
-      # <D-s> -> <C-ü> remap (REQUIRED obsidian-vimrc.vim)
-      - type: basic
-        from: { key_code: s, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: open_bracket, modifiers: [control] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────

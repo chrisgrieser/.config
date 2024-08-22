@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # CONFIG the two profiles to toggle between
 profile_1="Default"
-profile_2="disabled"
+profile_2="Disabled"
 #───────────────────────────────────────────────────────────────────────────────
 
 karabiner_cli="/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"

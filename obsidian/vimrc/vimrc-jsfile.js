@@ -158,6 +158,22 @@ function gotoHeading(which) {
 	}
 }
 
+/** h1 -> h2, h2 -> h3, etc. */
+function headingIncrementor() {
+	const { line: lnum, ch: col } = editor.getCursor();
+	const curLine = editor.getLine(lnum);
+
+	let updatedLine = curLine.replace(/^#* /, (match) => {
+		if (match === "###### ") return "";
+		return match.trim() + "# ";
+	});
+	if (updatedLine === curLine) updatedLine = "## " + curLine;
+	const diff = updatedLine.length - curLine.length;
+
+	editor.setLine(lnum, updatedLine);
+	editor.setCursor(lnum, col + diff); // keep cursor in same place
+}
+
 /** @param {"above"|"below"} where */
 function smartOpenLine(where) {
 	const lnum = editor.getCursor().line;
