@@ -37,13 +37,8 @@ rules:
               spotify_player playback play-pause && exit 0
 
               if scutil --get ComputerName | grep -q "Office"; then
-                # if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
-                # device="spotifyd"
-
-                # using web player, PENDING https://github.com/librespot-org/librespot/issues/1308
-                open "https://open.spotify.com/"
-                sleep 1
-                device="Web Player (Chrome)"
+                if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+                device="spotifyd"
               else
                 device="Wohnzimmer Echo"
               fi
@@ -58,13 +53,8 @@ rules:
               spotify_player playback next && exit 0
 
               if scutil --get ComputerName | grep -q "Office"; then
-                # if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
-                # device="spotifyd"
-
-                # using web player, PENDING https://github.com/librespot-org/librespot/issues/1308
-                open "https://open.spotify.com/"
-                sleep 1
-                device="Web Player (Chrome)"
+                if ! pgrep -qx spotifyd; then spotifyd; sleep 0.5; fi
+                device="spotifyd"
               else
                 device="Wohnzimmer Echo"
               fi

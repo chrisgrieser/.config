@@ -257,6 +257,7 @@ function clone {
 	# new commit without parent, effectively destroying git history (!!)
 	git clone --depth=15 "$1" --no-single-branch --no-tags
 	cd "$(basename "$1" .git)" || return 1
+	echo
 }
 
 function delete_forks_with_no_open_prs {
