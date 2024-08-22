@@ -47,9 +47,12 @@ local function isWorkweek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
-local menubarItem = hs.menubar.new(true, "moveAllWinsToProjectorScreen")
+M.menubarItem = hs
+	.menubar
+	.new(true, "moveAllWinsToProjectorScreen")
 	:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 	:setClickCallback(wu.moveAllWinsToProjectorScreen)
+if not env.isProjector() then M.menubarItem:removeFromMenuBar() end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
@@ -59,7 +62,7 @@ local function workLayout()
 	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustment
 	visuals.updateHoleCover()
 	dockSwitcher("work")
-	menubarItem:removeFromMenuBar()
+	M.menubarItem:removeFromMenuBar()
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
 	videoAppWatcherForSpotify:stop()
@@ -87,7 +90,7 @@ local function movieLayout()
 	visuals.updateHoleCover()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
-	menubarItem:returnToMenuBar()
+	M.menubarItem:returnToMenuBar()
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
 

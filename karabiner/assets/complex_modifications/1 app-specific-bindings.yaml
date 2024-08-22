@@ -11,15 +11,6 @@ rules:
           - { key_code: escape }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }
-      # FIX pasting via `return` not working
-      - type: basic
-        from: { key_code: return_or_enter }
-        to:
-          - { key_code: return_or_enter }
-          - { key_code: vk_none, hold_down_milliseconds: 20 }
-          - { key_code: v, modifiers: [command] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.ikryanov.clipbook$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
