@@ -100,6 +100,8 @@ declare type View = {
 		plugins: {
 			checkForUpdates(): Promise<void>;
 			updates: Record<string, object>;
+			// biome-ignore lint/suspicious/noExplicitAny: too long…
+			getPlugin(id: string): any;
 		};
 		setting: {
 			open(): void;

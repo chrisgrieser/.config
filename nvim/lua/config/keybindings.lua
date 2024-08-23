@@ -191,7 +191,7 @@ keymap("n", "i", function()
 end, { desc = "correctly indented i", expr = true })
 
 -- LSP Signature
-keymap({ "n", "i", "x" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
@@ -218,7 +218,7 @@ keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 
 keymap(
-	{ "n", "x" },
+	{ "n", "x", "s" },
 	"<CR>",
 	function() require("funcs.alt-alt").gotoAltBuffer() end,
 	{ desc = "󰽙 Alt Buffer" }
