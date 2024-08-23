@@ -390,3 +390,23 @@ function consoleLogFromWordUnderCursor() {
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
 	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
+
+//──────────────────────────────────────────────────────────────────────────────
+
+/**
+ * reload app: obsidian://reload
+ * reload plugin: obsidian://reload?plugin-id=someid
+ */
+function registerReloadUri() {
+	const plugin = view.app.plugins.getPlugin("obsidian-vimrc-support");
+	// @ts-expect-error
+	plugin.registerObsidianProtocolHandler("reload", (uriParams) => {
+		const pluginId = uriParams?.["plugin-id"];
+		if (pluginId) {
+			view.app.commands.executeCommandById("app:reload-plugin", pluginId);
+		} else {
+			view.app.commands.executeCommandById("app:reload");
+		}
+	});
+	new Notice("URI registered.");
+}
