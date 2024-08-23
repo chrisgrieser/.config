@@ -338,8 +338,7 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility with macOS cl
 --------------------------------------------------------------------------------
 -- QUITTING
 
--- `cmd-q` remapped to `ZZ` via Karabiner
--- PENDING https://github.com/neovide/neovide/issues/2558
+-- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 vim.api.nvim_create_autocmd("FileType", {

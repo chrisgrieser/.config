@@ -119,6 +119,35 @@ end, { desc = " MD image to <img>" })
 --------------------------------------------------------------------------------
 -- GUI KEYBINDINGS
 
+-- <M-h> remapped to <D-h>, PENDING https://github.com/neovide/neovide/issues/2558
+keymap("n", "<M-h>", function()
+	local curLine = vim.api.nvim_get_current_line()
+	local updatedLine = curLine:gsub("^#* ", function(match)
+		if match == "###### " then return "" end
+		return vim.trim(match) .. "# "
+	end)
+	if updatedLine == curLine then updatedLine = "## " .. curLine end
+	local diff = #updatedLine - #curLine
+
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_set_current_line(updatedLine)
+	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+end, { desc = " Increment Heading" })
+
+keymap("n", "<D-h>", function()
+	local curLine = vim.api.nvim_get_current_line()
+	local updatedLine = curLine:gsub("^#* ", function(match)
+		if match == "###### " then return "" end
+		return vim.trim(match) .. "# "
+	end)
+	if updatedLine == curLine then updatedLine = "## " .. curLine end
+	local diff = #updatedLine - #curLine
+
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_set_current_line(updatedLine)
+	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+end, { desc = " Increment Heading" })
+
 -- cmd+u: markdown bullet
 keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
 

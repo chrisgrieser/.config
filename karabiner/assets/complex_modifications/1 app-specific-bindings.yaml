@@ -242,6 +242,13 @@ rules:
           - { key_code: "y", modifiers: [shift] }
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
+      # cmd+h -> alt+h for the heading incrementor
+      - type: basic
+        from: { key_code: h, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: h, modifiers: [option] }
+        conditions:
+          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Brave"
     manipulators:
