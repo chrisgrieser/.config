@@ -13,7 +13,6 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-
 /** @param {string} filepath @param {string} text */
 function writeToFile(filepath, text) {
 	const str = $.NSString.alloc.initWithUTF8String(text);
@@ -63,22 +62,24 @@ function olderThan(firstPath, secondPath) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const subredditConfig = $.getenv("subreddits").trim().replace(/^\/?r\//gm, "");
+	const subreddits = $.getenv("subreddits")
+		.trim()
+		.replace(/^\/?r\//gm, "") // can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645// can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
+		.split("\n")
 	const cachePath = $.getenv("alfred_workflow_cache");
 
 	// determine subreddit
-	const prevRunSubreddit = readFile(cachePath + "/current_subreddit");
+	let prevSubreddit = readFile(cachePath + "/current_subreddit");
+	if (!subreddits.includes(prevSubreddit)) prevSubreddit = null;
 	const selectedWithAlfred =
 		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
-	const firstSubredditInConfig = subredditConfig.split("\n")[0]; // only needed for first run
-	const subredditName = selectedWithAlfred || prevRunSubreddit || firstSubredditInConfig;
-	const pathOfThisWorkflow =
-		$.getenv("alfred_preferences") + "/workflows/" + $.getenv("alfred_workflow_uid");
-
+	const subredditName = selectedWithAlfred || prevSubreddit || subreddits[0];
 	ensureCacheFolderExists();
 	writeToFile(cachePath + "/current_subreddit", subredditName);
 
 	// read posts from cache
+	const pathOfThisWorkflow =
+		$.getenv("alfred_preferences") + "/workflows/" + $.getenv("alfred_workflow_uid");
 	const subredditCache = `${cachePath}/${subredditName}.json`;
 
 	let posts;

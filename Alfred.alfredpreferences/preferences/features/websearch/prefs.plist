@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>icon</string>
+			<key>text</key>
+			<string>macOS icons: '{query}'</string>
+			<key>url</key>
+			<string>https://macosicons.com/#/{query}</string>
+		</dict>
 		<key>3E15C132-29BC-4928-9B38-5755966C1047</key>
 		<dict>
 			<key>enabled</key>
@@ -157,17 +168,6 @@
 			<string>PyPI: '{query}'</string>
 			<key>url</key>
 			<string>https://pypi.org/search/?q={query}</string>
-		</dict>
-		<key>DBC11DF0-401D-4811-9487-0B77EAA962C5</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>cr</string>
-			<key>text</key>
-			<string>CrunchyRoll: {query}</string>
-			<key>url</key>
-			<string>https://www.crunchyroll.com/search?q={query}</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>

@@ -9,7 +9,7 @@
 	<key>modcmd</key>
 	<integer>1</integer>
 	<key>modctrl</key>
-	<integer>6</integer>
+	<integer>4</integer>
 	<key>restoreclipboard</key>
 	<integer>1</integer>
 </dict>
