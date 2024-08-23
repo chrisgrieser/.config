@@ -341,7 +341,7 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
  * (additions) and strikethroughs (deletions).
  * @param {"accept"|"reject"} action
  */
-function highlightsAndStrikthrusInLine(action) {
+function highlightsAndStrikthrus(action) {
 	const lnum = editor.getCursor().line;
 	const lineText = editor.getLine(lnum);
 	const updatedLine =

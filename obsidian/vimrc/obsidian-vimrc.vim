@@ -287,7 +287,7 @@ nnoremap ,F :freezeInterface
 " Rephraser: [a]ccept/[r]eject
 exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
 nnoremap ,a :acceptSuggestionsInLine
-exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrusInLine("reject") }
+exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
 nnoremap ,r :rejectSuggestionsInLine
 
 " set "[r]ead: true" property
@@ -315,6 +315,10 @@ nnoremap ,pp :updatePlugins
 " open [p]lugin [d]irectory
 exmap openPluginDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/plugins'); }
 nnoremap ,pd :openPluginDir
+
+" open [m]eta
+exmap openMetaDir jscommand { view.app.openWithDefaultApp('/Meta'); }
+nnoremap ,pm :openMetaDir
 
 " open [s]nippet directory
 exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/snippets'); }

@@ -1,0 +1,5 @@
+set quiet := true
+
+reload:
+    # using `Advanced URI` plugin
+    open "obsidian://reload-plugin?id=app%253Areload"
