@@ -341,16 +341,6 @@ cat <<EOF
 	},
       "uid": "Login Items",
     },
-{
-      "title": "Menu Bar",
-      "subtitle": "Open the 'Control Centre' pane",
-      "arg": "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension",
-	  "autocomplete": "Menu Bar",
-	  "icon": {
-    		"path": "./Images/ControlCentre.png"
-	},
-      "uid": "Menu Bar",
-    },
     {
       "title": "Mouse",
       "subtitle": "Open the 'Mouse' pane",

@@ -57,7 +57,6 @@ local autoCdConfig = {
 	},
 	parentOfRoot = {
 		".config",
-		".obsidian", -- internal Obsidian folder
 		"com~apple~CloudDocs", -- macOS iCloud
 		"Cellar", -- opt/homebrew/Cellar/neovim
 	},

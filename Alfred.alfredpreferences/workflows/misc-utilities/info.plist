@@ -151,32 +151,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8739664F-F6A9-450B-910A-9F30688451DD</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>505F3B74-6205-46A4-9CDF-6C8C9966B393</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8B19974D-2B20-40AD-97D5-F86CABA20467</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8739664F-F6A9-450B-910A-9F30688451DD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>92F2951A-71DC-46A7-BE1F-38E119AD1B8E</key>
 		<array>
 			<dict>
@@ -1296,67 +1270,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>505F3B74-6205-46A4-9CDF-6C8C9966B393</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>ss menu</string>
-				<key>skipuniversalaction</key>
-				<true/>
-				<key>subtext</key>
-				<string>System Settings → Control Centre</string>
-				<key>text</key>
-				<string>Menu bar</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>8B19974D-2B20-40AD-97D5-F86CABA20467</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>x-apple.systempreferences:com.apple.ControlCenter-Settings.extension</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>8739664F-F6A9-450B-910A-9F30688451DD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1447,13 +1360,6 @@
 			<key>ypos</key>
 			<real>445</real>
 		</dict>
-		<key>505F3B74-6205-46A4-9CDF-6C8C9966B393</key>
-		<dict>
-			<key>xpos</key>
-			<real>290</real>
-			<key>ypos</key>
-			<real>1170</real>
-		</dict>
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
 		<dict>
 			<key>colorindex</key>
@@ -1505,13 +1411,6 @@
 			<key>ypos</key>
 			<real>1090</real>
 		</dict>
-		<key>8739664F-F6A9-450B-910A-9F30688451DD</key>
-		<dict>
-			<key>xpos</key>
-			<real>210</real>
-			<key>ypos</key>
-			<real>1200</real>
-		</dict>
 		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
 		<dict>
 			<key>colorindex</key>
@@ -1520,15 +1419,6 @@
 			<real>365</real>
 			<key>ypos</key>
 			<real>1040</real>
-		</dict>
-		<key>8B19974D-2B20-40AD-97D5-F86CABA20467</key>
-		<dict>
-			<key>note</key>
-			<string>since it's missing in system settings search</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1170</real>
 		</dict>
 		<key>8D0538B5-46D7-4A6B-B800-3C208CB8971B</key>
 		<dict>
