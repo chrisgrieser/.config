@@ -69,11 +69,15 @@ function run() {
 	const cachePath = $.getenv("alfred_workflow_cache");
 
 	// determine subreddit
+	/** @type {string?} */
 	let prevSubreddit = readFile(cachePath + "/current_subreddit");
-	if (!subreddits.includes(prevSubreddit)) prevSubreddit = null;
+	// if user removed subreddit from config, do not display it
+	if (!subreddits.includes(prevSubreddit)) prevSubreddit = null; 
+
 	const selectedWithAlfred =
 		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
 	const subredditName = selectedWithAlfred || prevSubreddit || subreddits[0];
+
 	ensureCacheFolderExists();
 	writeToFile(cachePath + "/current_subreddit", subredditName);
 
