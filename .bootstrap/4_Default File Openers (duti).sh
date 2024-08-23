@@ -66,12 +66,9 @@ duti -s "$editorID" rb all
 duti -s "$editorID" scm all # treesitter
 duti -s "$editorID" scss all
 duti -s "$editorID" sh all
-duti -s "$editorID" sketchybarrc all
 duti -s "$editorID" svelte all
 duti -s "$editorID" toml all
 duti -s "$editorID" ts all
-duti -s "$editorID" txt all
-duti -s "$editorID" vim all
 duti -s "$editorID" vim all
 duti -s "$editorID" xml all
 duti -s "$editorID" zsh all

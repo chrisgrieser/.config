@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>add_hackernews</key>
+	<true/>
 	<key>custom_subreddit_icons</key>
 	<string>~/.config/Alfred.alfredpreferences/subreddit_icons</string>
 	<key>hide_stickied</key>

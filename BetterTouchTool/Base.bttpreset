@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "F5EF95DB-1181-441D-8EAF-FBE456525E75",
+  "BTTPresetUUID" : "13FD1059-23B9-480D-85DB-B1014672CB2B",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
@@ -600,7 +600,45 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1723986229.7825599,
+          "BTTLastUpdatedAt" : 1724418125.0436559,
+          "BTTTriggerType" : 0,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTUUID" : "7D0A9E41-D0B9-44CB-AB5B-8EEF6A2237C4",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTAdditionalConfiguration" : "9437192",
+          "BTTKeyboardShortcutKeyboardType" : 1709,
+          "BTTTriggerOnDown" : 1,
+          "BTTLayoutIndependentChar" : "RIGHT",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTShortcutKeyCode" : 124,
+          "BTTShortcutModifierKeys" : 9437184,
+          "BTTOrder" : 3,
+          "BTTAutoAdaptToKeyboardLayout" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1724418072.3162839,
+              "BTTTriggerParentUUID" : "7D0A9E41-D0B9-44CB-AB5B-8EEF6A2237C4",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+              "BTTUUID" : "2910249B-B7D9-46A5-8543-D30B2AE78522",
+              "BTTLayoutIndependentActionChar" : "e",
+              "BTTShortcutToSend" : "59,14",
+              "BTTKeyboardShortcutKeyboardType" : 0,
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTShortcutKeyCode" : -1,
+              "BTTOrder" : 20,
+              "BTTAutoAdaptToKeyboardLayout" : 0
+            }
+          ],
+          "BTTGestureNotes" : "fix unintuitive cmd+right behavior"
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724418050.3015029,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "845E3A6F-B263-4276-AB1C-B7ED364A145C",
@@ -614,7 +652,7 @@
           "BTTEnabled2" : 1,
           "BTTShortcutKeyCode" : 12,
           "BTTShortcutModifierKeys" : 1048576,
-          "BTTOrder" : 2,
+          "BTTOrder" : 1,
           "BTTAutoAdaptToKeyboardLayout" : 0,
           "BTTAdditionalActions" : [
             {
@@ -638,7 +676,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724016884.9903321,
+          "BTTLastUpdatedAt" : 1724418050.3015151,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "BB7CA8DF-A9D4-4FF3-B17A-4A3CA59F1658",
@@ -652,7 +690,7 @@
           "BTTEnabled2" : 1,
           "BTTShortcutKeyCode" : 14,
           "BTTShortcutModifierKeys" : 1179648,
-          "BTTOrder" : 1,
+          "BTTOrder" : 0,
           "BTTAutoAdaptToKeyboardLayout" : 0,
           "BTTAdditionalActions" : [
             {
@@ -675,6 +713,44 @@
             }
           ],
           "BTTGestureNotes" : "save BTT settings"
+        },
+        {
+          "BTTActionCategory" : 0,
+          "BTTLastUpdatedAt" : 1724418130.8919311,
+          "BTTTriggerType" : 0,
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTUUID" : "3DF0BA0B-1EEA-4FD3-8E39-2ED505386710",
+          "BTTPredefinedActionType" : 366,
+          "BTTPredefinedActionName" : "Empty Placeholder",
+          "BTTAdditionalConfiguration" : "9437192",
+          "BTTKeyboardShortcutKeyboardType" : 1709,
+          "BTTTriggerOnDown" : 1,
+          "BTTLayoutIndependentChar" : "LEFT",
+          "BTTEnabled" : 1,
+          "BTTEnabled2" : 1,
+          "BTTShortcutKeyCode" : 123,
+          "BTTShortcutModifierKeys" : 9437184,
+          "BTTOrder" : 2,
+          "BTTAutoAdaptToKeyboardLayout" : 0,
+          "BTTAdditionalActions" : [
+            {
+              "BTTActionCategory" : 0,
+              "BTTLastUpdatedAt" : 1724418049.128494,
+              "BTTTriggerParentUUID" : "3DF0BA0B-1EEA-4FD3-8E39-2ED505386710",
+              "BTTIsPureAction" : true,
+              "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+              "BTTUUID" : "BA82FA77-183B-4DD3-9D03-253E5D1AE710",
+              "BTTLayoutIndependentActionChar" : "a",
+              "BTTShortcutToSend" : "59,0",
+              "BTTKeyboardShortcutKeyboardType" : 0,
+              "BTTEnabled" : 1,
+              "BTTEnabled2" : 1,
+              "BTTShortcutKeyCode" : -1,
+              "BTTOrder" : 19,
+              "BTTAutoAdaptToKeyboardLayout" : 0
+            }
+          ],
+          "BTTGestureNotes" : "fix unintuitive cmd+left behavior"
         }
       ]
     },
@@ -721,10 +797,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724393972.9092741,
+          "BTTLastUpdatedAt" : 1724418033.7295752,
           "BTTTriggerType" : 116,
           "BTTTriggerTypeDescriptionReadOnly" : "Pinch Out",
-          "BTTTriggerTypeDescription" : "❌ quit all PWAs",
+          "BTTTriggerTypeDescription" : "❌ CrunchyRoll Fix",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "D4FE25EA-310B-4BC1-9027-4799A6D2BAD1",
           "BTTPredefinedActionType" : 366,
@@ -735,22 +811,28 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1724182997.7847462,
+              "BTTLastUpdatedAt" : 1724418022.5183721,
               "BTTTriggerParentUUID" : "D4FE25EA-310B-4BC1-9027-4799A6D2BAD1",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "9324A623-405D-44B1-AEC6-8EB985F3E9B1",
-              "BTTPredefinedActionType" : 137,
-              "BTTPredefinedActionName" : "Execute Terminal Command (Async, non-blocking)",
-              "BTTTerminalCommand" : "killall \"Brave Browser\"",
+              "BTTUUID" : "B89681CE-E49F-443D-96DF-D102AB594578",
+              "BTTPredefinedActionType" : 172,
+              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+              "BTTAdditionalActionData" : {
+                "BTTScriptType" : 0,
+                "BTTAppleScriptRunInBackground" : false,
+                "BTTTouchBarAppleScriptString" : "tell application \"CrunchyRoll\" to quit",
+                "BTTTouchBarAppleScriptUsePath" : false
+              },
+              "BTTInlineAppleScript" : "tell application \"CrunchyRoll\" to quit",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
-              "BTTOrder" : 5
+              "BTTOrder" : 6
             }
           ],
-          "BTTGestureNotes" : "❌ quit all PWAs",
+          "BTTGestureNotes" : "❌ CrunchyRoll Fix",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "❌ quit all PWAs"
+            "BTTCheatSheetActionLabel" : "❌ CrunchyRoll Fix"
           }
         },
         {
