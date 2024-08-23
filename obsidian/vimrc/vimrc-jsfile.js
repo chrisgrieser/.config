@@ -393,20 +393,21 @@ function consoleLogFromWordUnderCursor() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/**
- * reload app: obsidian://reload
- * reload plugin: obsidian://reload?plugin-id=someid
- */
+/** reload plugin via: obsidian://reload-plugin?id=someid&vault=somevault */
 function registerReloadUri() {
-	const plugin = view.app.plugins.getPlugin("obsidian-vimrc-support");
-	// @ts-expect-error
-	plugin.registerObsidianProtocolHandler("reload", (uriParams) => {
-		const pluginId = uriParams?.["plugin-id"];
-		if (pluginId) {
-			view.app.commands.executeCommandById("app:reload-plugin", pluginId);
-		} else {
-			view.app.commands.executeCommandById("app:reload");
-		}
-	});
-	new Notice("URI registered.");
+	const app = view.app;
+	const plugin = app.plugins.getPlugin("obsidian-vimrc-support");
+	new Notice("URI for reloading plugins registered.");
+
+	plugin.registerObsidianProtocolHandler(
+		"reload-plugin",
+		async (/** @type {Record<string, any>} */ uriParams) => {
+			const pluginId = uriParams?.id;
+			if (pluginId) {
+				await app.plugins.disablePlugin(pluginId);
+				await app.plugins.enablePlugin(pluginId);
+				new Notice(`Reloaded ${pluginId}.`);
+			}
+		},
+	);
 }
