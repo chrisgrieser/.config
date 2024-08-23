@@ -12,5 +12,7 @@
 	<string>ppp||kill</string>
 	<key>sort_key</key>
 	<string>CPU</string>
+	<key>volume_keyword</key>
+	<string>vvv||vol</string>
 </dict>
 </plist>
