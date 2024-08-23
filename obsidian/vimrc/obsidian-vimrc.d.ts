@@ -102,6 +102,8 @@ declare type View = {
 			updates: Record<string, object>;
 			// biome-ignore lint/suspicious/noExplicitAny: too long…
 			getPlugin(id: string): any;
+			disablePlugin(id: string): Promise<void>;
+			enablePlugin(id: string): Promise<void>;
 		};
 		setting: {
 			open(): void;
