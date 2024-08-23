@@ -16,7 +16,7 @@ local wf = hs.window.filter
 
 local config = {
 	transBgApps = env.transBgApps,
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "ClipBook" },
 	disableHidingWhileActive = { "Steam" },
 	appsNotToHide = {
 		"Espanso",

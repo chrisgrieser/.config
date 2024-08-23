@@ -22,7 +22,7 @@ local function scrollUp()
 	keystroke({ "cmd" }, "1", 1, mona) -- go to home tab
 	keystroke({ "cmd" }, "R", 1, mona) -- refresh/reload
 
-	u.runWithDelays({ 1, 3, 7 }, function() -- wait for posts to load
+	u.runWithDelays({ 1, 4, 10 }, function() -- wait for posts to load
 		if not mona:isFrontmost() then -- do not interrupt when currently reading
 			keystroke({ "cmd" }, "up", 1, mona) -- scroll up
 		end
