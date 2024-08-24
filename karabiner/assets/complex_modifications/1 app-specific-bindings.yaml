@@ -99,7 +99,7 @@ rules:
         to:
           - { key_code: d, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+shift+. -> goto dotfiles (`~/.config/`)
+      # cmd+shift+. -> goto `~/.config/`
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [command, shift] } }
         to:
@@ -110,14 +110,14 @@ rules:
                   set target of front Finder window to dotfiles
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+shift+r -> goto repos
+      # cmd+shift+v -> goto vaults
       - type: basic
-        from: { key_code: r, modifiers: { mandatory: [command, shift] } }
+        from: { key_code: v, modifiers: { mandatory: [command, shift] } }
         to:
           - shell_command: |
               osascript -e '
                 tell application "Finder"
-                  set dotfiles to (path to home folder as string) & "repos"
+                  set dotfiles to (path to home folder as string) & "Vaults"
                   set target of front Finder window to dotfiles
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]

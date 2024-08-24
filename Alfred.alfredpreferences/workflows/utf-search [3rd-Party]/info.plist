@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.adamkiss.utf2</string>
+	<key>category</key>
+	<string>⬇️</string>
 	<key>connections</key>
 	<dict>
 		<key>682E59B1-A662-4A7A-B712-39E3D502E4F4</key>
