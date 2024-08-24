@@ -10,6 +10,13 @@ function alfredMatcher(str) {
 	return [clean, str].join(" ") + " ";
 }
 
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -18,6 +25,12 @@ function run() {
 	const vaultPath = $.getenv("vault_path");
 	// PERF `find` quicker than `mdfind`
 	const shellCmd = `find "${vaultPath}" \\( -name "*.md" -or -name "*.canvas" \\) -not -path "*/.trash/*"`;
+
+	const metadataExtractorJson = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json"
+	const metadata = JSON.parse(readFile(metadataExtractorJson))
+	for (const note of metadata) {
+		
+	}
 
 	const items = app
 		.doShellScript(shellCmd)
