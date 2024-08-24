@@ -8,5 +8,7 @@
 	<string>Diss URLs</string>
 	<key>slurp_vault</key>
 	<string>phd-data-analysis</string>
+	<key>vault_path</key>
+	<string>~/Vaults/main-vault</string>
 </dict>
 </plist>
