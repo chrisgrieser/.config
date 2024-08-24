@@ -31,7 +31,7 @@ vimcmd_symbol = "[ ](fg:cyan)"
 [status] # exit code
 disabled = false
 format = "[ $status ]($style)"
-style = "fg:bold 255 bg:red" # 255 as ansi enforces white regardless of terminal theme
+style = "fg:bold 255 bg:red"   # 255 as ansi enforces white regardless of terminal theme
 
 [sudo]
 disabled = false
@@ -62,9 +62,9 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 ".password-store" = " "
 
 [custom.folder_number]
+when = "true"                                                                                                                          # always show
 description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
-when = "true" # always show
 symbol = "󰝰 "
 format = '[$symbol$output ]($style)'
 style = "fg:yellow bg:black"
@@ -72,7 +72,7 @@ style = "fg:yellow bg:black"
 # Indicate if in a subfolder of my local repo folder. Helps differentiating
 # between my local Alfred workflows and their respective repos.
 [custom.location_indicator]
-when = '[[ "$PWD" =~ "$HOME/repos/" ]]'
+when = '[[ $PWD == $HOME/Developer/* ]]'
 style = "fg:cyan bg:black"
 command = 'echo "󰔽"'
 format = '[ $output ]($style)'
@@ -131,7 +131,7 @@ format = """\
 [custom.tokei_loc]
 description = "Number of lines of code in the current project using tokei (for performance)."
 command = "tokei --compact --exclude='*.txt' --exclude='*.json' | tail -n2 | awk 'NR==1 {print $3}'"
-when = '[[ "$(dirname $PWD)" == "$HOME/repos" ]]' # only in my local repos folder
+when = '[[ "$(dirname $PWD)" == "$HOME/repos" ]]'                                                    # only in my local repos folder
 format = ' [$output ]($style)'
 style = "blue"
 
@@ -143,7 +143,7 @@ format = "[󰔟 $duration](bold cyan)"
 disabled = false
 format = " [$time]($style)"
 time_format = "%H:%M"
-style = "fg:247" # grey
+style = "fg:247"            # grey
 
 [custom.alfred]
 description = "Version number of Alfred Workflow"

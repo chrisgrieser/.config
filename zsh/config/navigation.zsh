@@ -4,8 +4,11 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-desktop="$HOME/Desktop"
-local_repos="$HOME/repos"
+export CDPATH="$HOME/Developer:$HOME/Desktop"
+
+if [[ $PWD =~ $HOME/Developer/* ]]; then
+	echo
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -13,7 +16,6 @@ local_repos="$HOME/repos"
 setopt AUTO_CD # pure directory = cd into it
 setopt CD_SILENT
 setopt CHASE_LINKS # follow symlinks when they are cd target
-export CDPATH="$local_repos:$desktop"
 
 # POST-DIRECTORY-CHANGE-HOOK
 # (use `cd -q` to suppress this hook)
@@ -80,5 +82,3 @@ _gr() {
 	compadd "${expl[@]}" -Q -- "${folders[@]}"
 }
 compdef _gr gr
-
-
