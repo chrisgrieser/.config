@@ -51,7 +51,7 @@ M.menubarItem = hs
 	.menubar
 	.new(true, "moveAllWinsToProjectorScreen")
 	:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-	:setClickCallback(wu.moveAllWinsToProjectorScreen)
+	:setClickCallback(wu.moveAllWinsProjectorAndDarkenBuiltinDisplay)
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
