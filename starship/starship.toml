@@ -73,7 +73,7 @@ style = "fg:yellow bg:black"
 [custom.location_indicator]
 when = '[[ $PWD == $HOME/Developer/* ]]'
 style = "fg:cyan bg:black"
-command = 'echo "󰣪"'
+command = 'echo "󱁤"'
 format = '[ $output ]($style)'
 
 #───────────────────────────────────────────────────────────────────────────────

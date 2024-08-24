@@ -44,18 +44,5 @@ function run() {
 			};
 		});
 
-	// new password
-	const disallowed = { subtitle: "🚫 Not possible for new password.", valid: false };
-	passwords.push({
-		title: "Create new password",
-		arg: "",
-		mods: {
-			cmd: disallowed,
-			shift: disallowed,
-			alt: disallowed,
-			ctrl: disallowed,
-		},
-	});
-
 	return JSON.stringify({ items: passwords });
 }
