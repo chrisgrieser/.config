@@ -1134,11 +1134,36 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Vault Path</string>
+			<string>Vault path</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>vault_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>35</integer>
+				<key>markercount</key>
+				<integer>11</integer>
+				<key>maxvalue</key>
+				<integer>60</integer>
+				<key>minvalue</key>
+				<integer>10</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Max length per alias</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>alias_max_length</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1155,7 +1180,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Scratchpad Path</string>
+			<string>Scratchpad path</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
