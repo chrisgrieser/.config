@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.adamkiss.utf2</string>
+	<key>connections</key>
+	<dict>
+		<key>682E59B1-A662-4A7A-B712-39E3D502E4F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E7B0A6F-E454-4658-BB2C-A08DBF7549BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>659AFAAA-C4C2-45F7-867F-3B7566D42B0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D028B37E-807C-458A-8FE7-27AB283839AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7DF89816-12DA-4CDA-94E6-9998DD052287</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E7B0A6F-E454-4658-BB2C-A08DBF7549BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>659AFAAA-C4C2-45F7-867F-3B7566D42B0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D028B37E-807C-458A-8FE7-27AB283839AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Adam Kiss</string>
+	<key>description</key>
+	<string>Search through the Unicode database</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>UTF Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>utf</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>#!/usr/bin/env zsh
+
+# trim and collapse whitespace - source: https://stackoverflow.com/a/40962059
+query=`echo $1 | xargs`
+
+# prepare the user database (it must exist)
+/usr/bin/sqlite3 user.sqlite3 &lt;&lt;INIT
+CREATE TABLE IF NOT EXISTS "usage" (
+	"id" string UNIQUE NOT NULL,
+	"count" integer NOT NULL DEFAULT 1,
+	PRIMARY KEY (id)
+);
+INIT
+
+# CASE: give me help
+if [[ "$query" == "!h" ]]; then
+cat &lt;&lt; HELP
+{
+	"items": [
+		{
+			"title": "👉 \`utf &lt;query&gt;\`",
+			"autocomplete": "right arrow",
+			"subtitle": "Search for a Unicode character with name, altname, html or hex matching &lt;query&gt;",
+			"valid": false
+		},
+		{
+			"title": "🔍 \`utf !&lt;character&gt;\`",
+			"autocomplete": "!!",
+			"subtitle": "Get details for a &lt;character&gt;…",
+			"valid": false
+		},
+		{
+			"title": "🆘 \`utf !h\`",
+			"subtitle": "…except '!h', which returns this help",
+			"valid": false
+		},
+		{
+			"title": "🥩 \`utf :&lt;query&gt;\`",
+			"autocomplete": ":sea* AND Other*",
+			"subtitle": "Start query with a colon to use raw SQLite FTS5 Match syntax (the underlying technology)",
+			"valid": false
+		},
+		{
+			"title": "💡 tip: \`utf u0021\`",
+			"autocomplete": "u0021",
+			"subtitle": "Will mostly match the json field, so you can easily query exact Unicode codepoints",
+			"valid": false
+		},
+		{
+			"title": "💡 tip: \`utf larr\`",
+			"autocomplete": "larr",
+			"subtitle": "Use HTML named entities to quickly match useful characters",
+			"valid": false
+		}
+	]
+}
+HELP
+exit
+fi
+
+# CASE: give me character
+# query starts with !, it's a "give me character X query"
+if [[ "$query" =~ ^! ]]; then
+/usr/bin/sqlite3 unicode.sqlite3 &lt;&lt;SQL
+	ATTACH "./user.sqlite3" as user;
+	-- the query
+	WITH found AS (
+		SELECT hex, codepoint, character, name, altname, category, html, json, user.usage.count
+		FROM main.characters
+		LEFT JOIN user.usage ON cast(user.usage.id as text) = cast(characters.hex as text)
+		WHERE character = SUBSTR('$query', 2)
+		ORDER BY user.usage.count
+	)
+	-- the formatter
+	select JSON_OBJECT(
+		'items', JSON_GROUP_ARRAY(
+			JSON_OBJECT(
+				'variables', JSON_OBJECT('hex', hex),
+				'title', character,
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category || IIF(count &gt; 0, ", " || count, '') || ")",
+				'icon', JSON_OBJECT('path', 'icon.png'),
+				'arg', character,
+				'mods', JSON_OBJECT(
+					'cmd', JSON_OBJECT(
+						'arg', html,
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
+					),
+					'option', JSON_OBJECT(
+						'arg', json,
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
+					),
+					'ctrl', JSON_OBJECT(
+						'arg', hex,
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
+					)
+				),
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
+				)
+			)
+		)
+	) FROM found;
+SQL
+exit
+fi
+
+# CASE: fulltext over name, altname, and other fields
+# if query contains ':', it's full fts5 query
+# otherwise, change multiple groups into asterisk'd AND query
+# 'right arr' =&gt; 'right* AND arr*'
+if [[ "${query#*':'}" == "$query" ]]; then
+	query="${query// /* AND }*"
+else
+	query="${query#*':'}"
+fi
+
+/usr/bin/sqlite3 unicode.sqlite3 &lt;&lt;SQL
+	ATTACH "./user.sqlite3" as user;
+	-- the query
+	WITH found AS (
+		SELECT hex, codepoint, character, name, altname, category, html, json, user.usage.count
+		FROM main.characters('$query')
+		LEFT JOIN user.usage ON cast(user.usage.id as text) = cast(characters.hex as text)
+		ORDER BY user.usage.count DESC, rank ASC, length(name) ASC
+		LIMIT 50
+	)
+	-- the formatter
+	select JSON_OBJECT(
+		'items', JSON_GROUP_ARRAY(
+			JSON_OBJECT(
+				'variables', JSON_OBJECT('hex', hex),
+				'title', character,
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category || IIF(count &gt; 0, ", " || count, '') || ")",
+				'icon', JSON_OBJECT('path', 'icon.png'),
+				'arg', character,
+				'mods', JSON_OBJECT(
+					'cmd', JSON_OBJECT(
+						'arg', html,
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
+					),
+					'option', JSON_OBJECT(
+						'arg', json,
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
+					),
+					'ctrl', JSON_OBJECT(
+						'arg', hex,
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
+					)
+				),
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
+				)
+			)
+		)
+	) FROM found;
+SQL
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search the Unicode database for {query}</string>
+				<key>title</key>
+				<string>UTF Search: search for Unicode characters</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>682E59B1-A662-4A7A-B712-39E3D502E4F4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5E7B0A6F-E454-4658-BB2C-A08DBF7549BE</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>utf9</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>#!/usr/bin/env zsh
+
+# Load the top 9 and display the as alfred results
+/usr/bin/sqlite3 user.sqlite3 &lt;&lt;EOF
+ATTACH "./unicode.sqlite3" as u;
+CREATE TABLE IF NOT EXISTS "usage" (
+	"id" string UNIQUE NOT NULL,
+	"count" integer NOT NULL DEFAULT 1,
+	PRIMARY KEY (id)
+);
+
+-- the query
+WITH top AS (
+	SELECT id, count, hex, codepoint, character, name, altname, category, html, json
+	FROM main.usage
+	LEFT JOIN u.characters ON cast(usage.id as text) = cast(characters.hex as text)
+	ORDER BY count DESC
+	LIMIT 9
+)
+-- the formatter
+select IIF(
+	count(*) &gt; 0,
+	JSON_OBJECT(
+		'items', JSON_GROUP_ARRAY(
+			JSON_OBJECT(
+				'variables', JSON_OBJECT('hex', hex),
+				'title', character || "   (" || count || "×)",
+				'subtitle', name || iif(altname is not null, " / " || altname, '') || " (" || category ||  ")",
+				'icon', JSON_OBJECT('path', 'icon.png'),
+				'arg', character,
+				'mods', JSON_OBJECT(
+					'cmd', JSON_OBJECT(
+						'arg', html,
+						'subtitle', 'Copy &amp; paste as HTML → "' || html || '"'
+					),
+					'option', JSON_OBJECT(
+						'arg', json,
+						'subtitle', 'Copy &amp; paste as JS/Python/… → "' || json || '"'
+					),
+					'option+cmd', JSON_OBJECT(
+						'arg', "\u{" || codepoint || "}",
+						'subtitle', 'Copy &amp; paste as PHP → "\u{' || codepoint || '}"'
+					),
+					'ctrl', JSON_OBJECT(
+						'arg', hex,
+						'subtitle', 'Copy &amp; paste hex → "' || hex || '"'
+					),
+					'ctrl+option', JSON_OBJECT(
+						'arg', codepoint,
+						'subtitle', 'Copy &amp; paste full codepoint → "' || codepoint || '"'
+					)
+				),
+				'text', JSON_OBJECT(
+					'copy', name,
+					'largetype', character || '(' || name || ')'
+				)
+			)
+		)
+	),
+	JSON_OBJECT(
+		'items', JSON_ARRAY(
+			JSON_OBJECT(
+				'valid', false,
+				'title', "UTF Search: no usage yet",
+				'subtitle', "Search the UTF database using 'utf &lt;query&gt;' first",
+				'icon', JSON_OBJECT('path', 'icon.png')
+			)
+		)
+	)
+) FROM top;
+EOF</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Shows your top 9 most used Unicode characters</string>
+				<key>title</key>
+				<string>UTF Search: Your top 9 characters</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7DF89816-12DA-4CDA-94E6-9998DD052287</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/usr/bin/env zsh
+
+/usr/bin/sqlite3 user.sqlite3 &lt;&lt;EOF
+    CREATE TABLE IF NOT EXISTS "usage" (
+        "id" string UNIQUE NOT NULL,
+        "count" integer NOT NULL DEFAULT 1,
+        PRIMARY KEY (id)
+    );
+
+    INSERT INTO
+        usage(id)
+        VALUES('$hex')
+    ON CONFLICT(id) DO
+        UPDATE SET count=count+1;
+EOF</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>659AFAAA-C4C2-45F7-867F-3B7566D42B0E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>'{query}', {variables}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>D028B37E-807C-458A-8FE7-27AB283839AC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Alfred-UTF: Unicode Character Search
+
+## Usage
+
+### Search/show:
+
+- `utf right arr` - Search for a Unicode character by full-text matched name, alternative name, html entity or hexadecimal code
+- `utf !&lt;character&gt;` - Get details for a single exact character, except
+- `utf !h` - get HELP!
+- `utf9` - Your top 9 Unicode characters
+
+### Result Actions:
+- Default action: copy the character (e.g. `!`)
+- &lt;kbd&gt;Cmd&lt;/kbd&gt; - copy the HTML version (e.g. `&amp;excl;`)
+- &lt;kbd&gt;Option&lt;/kbd&gt; - copy the Unicode point for js/python/… (e.g. `\u0021`)
+- &lt;kbd&gt;Option&lt;/kbd&gt;&lt;kbd&gt;Cmd&lt;/kbd&gt; - copy the Unicode point for PHP (e.g. `\u{0021}`)
+- &lt;kbd&gt;Ctrl&lt;/kbd&gt; - copy the hex value(e.g. `21`) 
+- &lt;kbd&gt;Option&lt;/kbd&gt;&lt;kbd&gt;Ctrl&lt;/kbd&gt; - copy the full code point (e.g. `0021`) 
+- Use Copy result (&lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt;) to copy the character name (e.g. `exclamation mark`)
+
+↳ Result actions (except Copy result &lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt;) also paste to the frontmost app
+
+### Tips
+
+- `utf u0027` - you can prefix the full codepoint with `u`, and the matcher will mostly match this to the character's json value (`\u0027`), which means you get "find a Unicode codepoint" function for free
+- `utf larr` - one of the fields matched are html entities - use this for a precise and quick matching
+- `utf :raw* query*` - if you prefix your query with a colon, you'll gain access to the underlying technology - and you get to write raw SQLite FTS5 Match Query. Use this power for good
+
+## Installation
+
+1. Download the workflow
+2. Use the workflow
+
+## License
+
+MIT License - see [LICENSE](./LICENSE)
+© 2022 Adam Kiss. Databased was sourced with [Uni by Martin Tournoij](https://github.com/arp242/uni)</string>
+	<key>uidata</key>
+	<dict>
+		<key>5E7B0A6F-E454-4658-BB2C-A08DBF7549BE</key>
+		<dict>
+			<key>note</key>
+			<string>COPY / PASTE</string>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+		<key>659AFAAA-C4C2-45F7-867F-3B7566D42B0E</key>
+		<dict>
+			<key>note</key>
+			<string>COUNT USAGE</string>
+			<key>xpos</key>
+			<real>415</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>682E59B1-A662-4A7A-B712-39E3D502E4F4</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>45</real>
+		</dict>
+		<key>7DF89816-12DA-4CDA-94E6-9998DD052287</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>D028B37E-807C-458A-8FE7-27AB283839AC</key>
+		<dict>
+			<key>xpos</key>
+			<real>405</real>
+			<key>ypos</key>
+			<real>370</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>version</key>
+	<string>2.1.0</string>
+	<key>webaddress</key>
+	<string>https://adamkiss.com</string>
+</dict>
+</plist>
