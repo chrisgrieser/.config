@@ -63,7 +63,14 @@ const extraWorkflowConfig = [
 
 async function run() {
 	const response = await fetch("https://devdocs.io/docs.json");
-	const json = await response.json();
+
+	// INFO: needs sorting to ensure that the items in the `info.plist` and thus
+	// the Alfred dropdown appear in alphabetical order. Mostly, this is already
+	// the case, but in individual cases, this is not the case.
+	const json = (await response.json()).sort(
+		(/** @type {{ slug: string; }} */ a, /** @type {{ slug: any; }} */ b) =>
+			a.slug.localeCompare(b.slug),
+	);
 
 	// convert to hashmap to remove duplicates
 	/** @type {Record<string, string>} */

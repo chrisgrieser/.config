@@ -5,7 +5,7 @@
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
-DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
+export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 #───────────────────────────────────────────────────────────────────────────────
 

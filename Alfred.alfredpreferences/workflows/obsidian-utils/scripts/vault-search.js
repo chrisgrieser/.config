@@ -42,42 +42,53 @@ function run() {
 		? JSON.parse(readFile(recentItemsFile)).lastOpenFiles.slice(0, 10)
 		: [];
 
+	// bookmarks
+	const bookmarkFile = vaultPath + "/.obsidian/bookmarks.json";
+	const bookmarks = fileExists(bookmarkFile)
+		? JSON.parse(readFile(bookmarkFile)).items.map((/** @type {{ path: string; }} */ b) => b.path)
+		: [];
+
 	// PERF `find` quicker than `mdfind`
 	const shellCmd = `find "${vaultPath}" \\( -name "*.md" -or -name "*.canvas" \\) -not -path "*/.trash/*"`;
 
-	const results = []
-	const filesInVault =app.doShellScript(shellCmd).split("\r")
+	/** @type {AlfredItem[]} */
+	const results = [];
+
+	const filesInVault = app.doShellScript(shellCmd).split("\r");
 	for (const absPath of filesInVault) {
-			const relPath = absPath.slice(vaultPath.length + 1);
-			const parts = relPath.split("/");
-			const name = parts.pop() || "";
-			const obsidianUri = "obsidian://open?path=" + encodeURIComponent(absPath);
+		const relPath = absPath.slice(vaultPath.length + 1);
+		const parts = relPath.split("/");
+		const name = parts.pop() || "";
+		const obsidianUri = "obsidian://open?path=" + encodeURIComponent(absPath);
 
-			// subtitle & matcher
-			const parent = "▸ " + parts.join("/");
-			const aliases = aliasMap[relPath] || [];
-			const shortAliases = aliases.map((a) => (a.length > maxLen ? a.slice(0, maxLen) + "…" : a));
-			const matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
-			let subtitle = parent;
-			if (aliases.length > 0) subtitle += "   ■   " + shortAliases.join(", ");
+		// subtitle & matcher
+		const parent = "▸ " + parts.join("/");
+		const aliases = aliasMap[relPath] || [];
+		const shortAliases = aliases.map((a) => (a.length > maxLen ? a.slice(0, maxLen) + "…" : a));
+		const matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
+		let subtitle = parent;
+		if (aliases.length > 0) subtitle += "   ■   " + shortAliases.join(", ");
 
-			// recent files
-			const icon = recentItems.includes(relPath) ? "🕑 " : "";
-			const mode = recentItems.includes(relPath) ? "unshift" : "push";
+		// recent & bookmarked files
+		const mode = recentItems.includes(relPath) ? "unshift" : "push";
+		let icon = "";
+		if (bookmarks.includes(relPath)) icon += "🔖 ";
+		if (recentItems.includes(relPath)) icon += "🕑 ";
 
-			const alfredItem = {
-				title: icon + name,
-				subtitle: subtitle,
-				arg: absPath,
-				uid: absPath,
-				variables: { uri: obsidianUri },
-				quicklookurl: absPath,
-				type: "file:skipcheck",
-				match: matcher,
-				icon: { path: absPath, type: "fileicon" },
-			};
-			results[mode](alfredItem);
+		/** @type {AlfredItem} */
+		const alfredItem = {
+			title: icon + name,
+			subtitle: subtitle,
+			arg: absPath,
+			uid: absPath,
+			variables: { uri: obsidianUri },
+			quicklookurl: absPath,
+			type: "file:skipcheck",
+			match: matcher,
+			icon: { path: absPath, type: "fileicon" },
 		};
+		results[mode](alfredItem);
+	}
 
 	return JSON.stringify({
 		items: results,
