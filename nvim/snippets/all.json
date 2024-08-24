@@ -137,6 +137,10 @@
     "body": "⎵",
     "prefix": "space (underbracket)"
   },
+  "square (■)": {
+    "body": "■",
+    "prefix": "square (■)"
+  },
   "tab": {
     "body": "↹ ",
     "prefix": "tab"
