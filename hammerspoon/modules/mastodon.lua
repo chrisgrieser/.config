@@ -129,5 +129,8 @@ M.wf_someWindowActivity = wf.new(true)
 	:subscribe(wf.windowMoved, function(movedWin) showHideTickerApp(movedWin) end)
 	:subscribe(wf.windowCreated, function(createdWin) showHideTickerApp(createdWin) end)
 
+-- scroll
+hs.hotkey.bind({}, "home", scrollUp)
+
 --------------------------------------------------------------------------------
 return M
