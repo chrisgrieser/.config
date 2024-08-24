@@ -180,7 +180,7 @@ unmap("0", /crunchyroll.com/); // beginning
 unmap("?", /(github|reddit|youtube).com|devdocs.io/);
 
 // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
-mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io/ });
+mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io|reddit\.com/ });
 
 mapkey(
 	"gu",
