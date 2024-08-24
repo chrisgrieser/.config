@@ -262,6 +262,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CAD36352-9BBE-468E-99D0-92F54C42BC6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<array>
 			<dict>
@@ -1213,6 +1226,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Toggle chlags hidden</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>D37FA896-C9C1-4099-9489-B0DB16BECC4D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-chflags-hidden.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CAD36352-9BBE-468E-99D0-92F54C42BC6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1487,6 +1544,24 @@
 			<real>250</real>
 			<key>ypos</key>
 			<real>295</real>
+		</dict>
+		<key>CAD36352-9BBE-468E-99D0-92F54C42BC6C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>795</real>
+			<key>ypos</key>
+			<real>1145</real>
+		</dict>
+		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>1145</real>
 		</dict>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<dict>
