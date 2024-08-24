@@ -262,6 +262,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CAD36352-9BBE-468E-99D0-92F54C42BC6C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>756217EC-B010-42C1-850E-08EF5788E978</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
 		<array>
 			<dict>
@@ -1238,12 +1251,33 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Toggle chlags hidden</string>
+				<string>Toggle hidden (chflags)</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>D37FA896-C9C1-4099-9489-B0DB16BECC4D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>👁️ chflags</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>756217EC-B010-42C1-850E-08EF5788E978</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1388,6 +1422,15 @@
 			<real>185</real>
 			<key>ypos</key>
 			<real>510</real>
+		</dict>
+		<key>756217EC-B010-42C1-850E-08EF5788E978</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>960</real>
+			<key>ypos</key>
+			<real>1145</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
