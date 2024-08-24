@@ -21,17 +21,16 @@ M.keys = {
 	{ key = "0", mods = "CMD", action = act.ResetFontSize },
 	{ key = "p", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-
-	-- INFO using the mapping from the terminal_keybindings.zsh
-	-- undo (ctrl-z set in terminal keybindings)
-	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
-
+	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
 	-- using `ctrl-L` instead of wezterm's scrollback-clearing preserves the
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
-	-- closes panes, then tabs, then windows
-	{ key = "w", mods = "CMD", action = act.CloseCurrentPane { confirm = false } },
+	-- INFO using the mapping from the terminal_keybindings.zsh
+	-- undo 
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	-- accept & execute suggestion
+	{ key = "s", mods = "CMD", action = act.SendKey { key = "y", mods = "CTRL" } },
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
@@ -48,23 +47,7 @@ M.keys = {
 			end
 		end),
 	},
-	{
-		-- HACK close next pane/tab (CAVEAT: due to race condition, impossible to close all others?)
-		key = "w",
-		mods = "CMD|SHIFT",
-		action = wt.action_callback(function(win, pane)
-			local paneCount = #pane:tab():panes()
-			local tabCount = #win:mux_window():tabs()
-			if paneCount > 1 then
-				win:perform_action(act.ActivatePaneDirection("Next"), pane)
-				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
-			end
-			if tabCount > 1 then
-				win:perform_action(act.ActivateTabRelative(1), pane)
-				win:perform_action(act.CloseCurrentPane { confirm = false }, pane)
-			end
-		end),
-	},
+
 	{
 		key = "PageUp",
 		action = wt.action_callback(function(win, pane)

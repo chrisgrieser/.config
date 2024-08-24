@@ -10,6 +10,9 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
+device_name=$(scutil --get ComputerName | cut -d" " -f2-)
+export HOMEBREW_BUNDLE_FILE="$HOME/.config/.installed-apps-and-packages/Brewfile_$device_name.txt"
+
 alias bh='brew home'
 alias bi='brew install'
 alias br='brew reinstall'
@@ -63,13 +66,6 @@ function update() {
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
-	# save brewfile
-	local brewfile_path="$HOME/.config/.installed-apps-and-packages"
-	local device_name
-	device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-	brew bundle dump --force --file "$brewfile_path/Brewfile_$device_name.txt"
-	print "\e[0;38;5;247mBrewfile saved in \e[3m$(basename "$brewfile_path")\e[0m"
-
 	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
 }
 
@@ -92,4 +88,6 @@ function listall() {
 
 	_print-section "Mac App Store"
 	mas list
+
+	brew bundle dump --force && print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
 }
