@@ -10,6 +10,8 @@
 	<string>chrisgrieser</string>
 	<key>keyword_personal_repos</key>
 	<string>gg</string>
+	<key>local_repo_folder</key>
+	<string>~/Developer</string>
 	<key>restore_mtime</key>
 	<true/>
 	<key>working_branch</key>

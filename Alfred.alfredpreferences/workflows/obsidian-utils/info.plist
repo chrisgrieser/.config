@@ -660,6 +660,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>from Discord</string>
+				<key>text</key>
+				<string>Download latest Obsidian Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B3CAC527-D710-484A-8952-E97BDD0D7A24</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -820,7 +841,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>465</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>880</real>
 		</dict>
 		<key>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</key>
 		<dict>
@@ -829,7 +850,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1015</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
@@ -865,7 +886,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>880</real>
 		</dict>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<dict>
@@ -898,7 +919,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1015</real>
 		</dict>
 		<key>5DC046CA-F357-492A-A06B-1D71B3242591</key>
 		<dict>
@@ -934,7 +955,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>toggle Alpha Version</string>
+			<string>toggle alpha</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -960,6 +981,17 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>B3CAC527-D710-484A-8952-E97BDD0D7A24</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>download latest alpha</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>750</real>
+		</dict>
 		<key>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</key>
 		<dict>
 			<key>colorindex</key>
@@ -978,7 +1010,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>880</real>
 		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
@@ -1009,7 +1041,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>325</real>
 			<key>ypos</key>
-			<real>745</real>
+			<real>880</real>
 		</dict>
 		<key>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</key>
 		<dict>
