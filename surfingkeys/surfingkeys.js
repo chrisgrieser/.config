@@ -83,9 +83,9 @@ map("L", "]]");
 map("w", "x"); // close tab
 map("m", "x"); // close tab
 mapkey("s", "Copy URL & close tab", async () => {
+	RUNTIME("closeTab"); // cannot use `window.close()` b/c `Scripts may close only the windows that were opened by them.`
 	const url = window.location.href;
 	await copyAndNotify(url);
-	window.close();
 });
 map("a", "E"); // goto tab right
 map("d", "R"); // goto tab left
@@ -100,7 +100,8 @@ map("e", "gx$"); // close tabs on right
 
 // quick switcher
 // type: "History"|"RecentlyClosed"
-mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
+//mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
+mapkey("gr", "History", () => Front.openOmnibar({ type: "History" }));
 
 mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
