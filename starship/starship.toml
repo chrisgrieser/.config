@@ -42,7 +42,6 @@ format = "[ $symbol]($style)"
 [directory]
 truncation_length = 2
 truncation_symbol = "/"
-truncate_to_repo = true
 read_only = "󰌾  "
 read_only_style = "fg:red bg:black"
 style = "fg:cyan bg:black bold"
@@ -74,7 +73,7 @@ style = "fg:yellow bg:black"
 [custom.location_indicator]
 when = '[[ $PWD == $HOME/Developer/* ]]'
 style = "fg:cyan bg:black"
-command = 'echo "󰔽"'
+command = 'echo "󰣪"'
 format = '[ $output ]($style)'
 
 #───────────────────────────────────────────────────────────────────────────────
