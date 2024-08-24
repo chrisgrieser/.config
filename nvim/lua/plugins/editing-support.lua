@@ -46,7 +46,7 @@ return {
 					{ "<leader>y", group = "󰅍 Yank" },
 				},
 				{ -- not using `text_objects` preset, since it's too crowded
-					mode = "o",
+					mode = { "o", "x" },
 					{ "r", group = "rest of" },
 					{ "i", group = "inner" },
 					{ "a", group = "outer" },

@@ -160,6 +160,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B3CAC527-D710-484A-8952-E97BDD0D7A24</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FCD76FF6-5E4F-4477-B069-A74D95FE1233</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</key>
 		<array>
 			<dict>
@@ -625,7 +638,7 @@
 				<key>subtext</key>
 				<string>restarts Obsidian afterwards</string>
 				<key>text</key>
-				<string>Toggle Obsidian Alpha</string>
+				<string>🟪 Toggle Alpha</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -660,6 +673,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/download-obsidian-alpha.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FCD76FF6-5E4F-4477-B069-A74D95FE1233</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -667,7 +703,7 @@
 				<key>subtext</key>
 				<string>from Discord</string>
 				<key>text</key>
-				<string>Download latest Obsidian Alpha</string>
+				<string>⬇️ Download Alpha</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -1062,6 +1098,15 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>475</real>
 			<key>ypos</key>
 			<real>495</real>
+		</dict>
+		<key>FCD76FF6-5E4F-4477-B069-A74D95FE1233</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>750</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

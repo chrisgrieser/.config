@@ -273,7 +273,7 @@ keymap(
 -- MULTI-CURSOR REPLACEMENT
 
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit" })
-keymap("x", "<D-j>", '"zy/<C-r>z<CR>N"_cgn', { desc = "󰆿 Multi-Edit" })
+keymap("x", "<D-j>", '*Ncgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
 -- MACROS
@@ -286,7 +286,8 @@ keymap(
 	function() require("funcs.nano-plugins").startStopRecording(toggleKey, register) end,
 	{ desc = "󰕧 Start/Stop Recording" }
 )
-keymap("n", "9", "@" .. register, { desc = "󰕧 Play Recording" })
+keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })
+keymap("x", "9", "Q", { desc = "󰕧 Play recording on each line", remap = true })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
