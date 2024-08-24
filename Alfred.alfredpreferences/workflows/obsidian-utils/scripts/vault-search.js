@@ -16,7 +16,8 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const vaultPath = $.getenv("vault_path");
-	const shellCmd = `mdfind -onlyin "${vaultPath}" -name ".md"`;
+	// PERF `find` quicker than `mdfind`
+	const shellCmd = `find "${vaultPath}" \\( -name "*.md" -or -name "*.canvas" \\) -not -path "*/.trash/*"`;
 
 	const items = app
 		.doShellScript(shellCmd)
