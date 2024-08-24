@@ -273,6 +273,7 @@ keymap(
 -- MULTI-CURSOR REPLACEMENT
 
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit" })
+-- remap for vim's visual star
 keymap("x", "<D-j>", '*Ncgn', { desc = "󰆿 Multi-Edit", remap = true })
 
 --------------------------------------------------------------------------------
