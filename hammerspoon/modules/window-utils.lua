@@ -228,9 +228,10 @@ local function moveWinToNextDisplay()
 	end)
 end
 
-function M.moveAllWinsToProjectorScreen()
+function M.moveAllWinsProjectorAndDarkenBuiltinDisplay()
 	if #hs.screen.allScreens() < 2 then return end
-	if not env.isProjector() then return end
+
+	M.iMacDisplay:setBrightness(0)
 
 	local projectorScreen = hs.screen.primaryScreen()
 	for _, win in pairs(hs.window:orderedWindows()) do
