@@ -69,7 +69,6 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view as default
-chflags nohidden ~/Library                                          # Show the ~/Library folder
 
 # search always current directory
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -81,6 +80,10 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	OpenWith -bool true \
 	Privileges -bool false
 killall Finder
+
+# show/hide folders
+chflags hidden ~/{Movies,Music,Pictures,Public}
+chflags nohidden ~/Library
 
 #───────────────────────────────────────────────────────────────────────────────
 

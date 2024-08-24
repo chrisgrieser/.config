@@ -7,6 +7,6 @@
 	<key>output_path</key>
 	<string>~/vaults/main-vault/Literature Notes</string>
 	<key>pdf_folder</key>
-	<string>~/Library/Mobile Documents/com~apple~CloudDocs/PDFs</string>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs</string>
 </dict>
 </plist>

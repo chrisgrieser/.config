@@ -36,7 +36,7 @@ matches:
   - { replace: don't, trigger: dont, word: true }
   - { replace: down, trigger: dwon }
   - { replace: else, trigger: esle, word: true }
-  - { replace: file, trigger: fiel }
+  - { replace: file, trigger: fiel, word: true, propagate_case: true }
   - { replace: find, trigger: fidn, propagate_case: true, word: true }
   - { replace: for, trigger: fro, propagate_case: true, word: true }
   - { replace: found, trigger: foudn }
