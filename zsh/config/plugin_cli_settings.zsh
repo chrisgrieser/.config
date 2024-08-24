@@ -71,8 +71,8 @@ export NODE_REPL_HISTORY=""
 
 # instead of writing npm config to `.npmrc`, can also be defined as shell
 # environment variables. Has to be lower-case though. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
-export npm_config_fund=false # disable funding nags
-export npm_config_update_notifier=false # no need for updating prompts, since done via homebrew
+export npm_config_fund=false               # disable funding nags
+export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 export npm_config_cache="$HOME/.cache/npm" # do not crowd `$HOME`
 
 # FIX for hanging at "sill: idealTree build"

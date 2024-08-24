@@ -714,7 +714,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>370</real>
 		</dict>
 		<key>1EDA02E2-E4AE-45EE-A365-D11F3F6412C6</key>
 		<dict>
@@ -725,7 +725,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>370</real>
 		</dict>
 		<key>20603C68-58B3-433A-AEE0-62CAF6C85E0A</key>
 		<dict>
@@ -763,7 +763,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>780</real>
 		</dict>
 		<key>2E6505C6-0186-4089-AC36-AF5300BE723D</key>
 		<dict>
@@ -772,7 +772,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>520</real>
 		</dict>
 		<key>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</key>
 		<dict>
@@ -781,7 +781,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>520</real>
 		</dict>
 		<key>5BDF7FE5-6B05-4264-86D2-0B5A72E2A808</key>
 		<dict>
@@ -790,7 +790,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>370</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>475</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -799,7 +799,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>655</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -808,9 +808,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>note</key>
 			<string>search PDFs</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>780</real>
 		</dict>
 		<key>8B3B6EC2-104F-401B-9252-6A96E9DBEDB5</key>
 		<dict>
@@ -828,7 +828,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>255</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
@@ -853,9 +853,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>655</real>
 		</dict>
 		<key>C06E18A0-E3F9-494F-8A95-4087C8B1BD33</key>
 		<dict>
@@ -864,7 +864,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>370</real>
 		</dict>
 		<key>E712DB78-7466-4A11-A054-BD5DBE84E974</key>
 		<dict>
@@ -875,7 +875,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>520</real>
 		</dict>
 		<key>FF00A317-AA2D-40F0-8A56-B22E0426DD6F</key>
 		<dict>
