@@ -275,13 +275,12 @@ keymap(
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 
 keymap("x", "<D-j>", function()
-	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
+	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = vim.fn.mode() })
 	local selection = vim.iter(chunks)
-		:map(function(chunk) return chunk:gsub("[/\\]", "\\%1") end)
-		:join([[\n]])
-	local query = ("\\V%s"):format(selection)
-	vim.fn.setreg("/", query)
-	return '\27"_cgn'
+		:map(function(chunk) return vim.fn.escape(chunk, [[/\]]) end)
+		:join("\\n")
+	vim.fn.setreg("/", "\\V" .. selection)
+	return '<Esc>"_cgn'
 end, { desc = "󰆿 Multi-edit selection", expr = true })
 
 --------------------------------------------------------------------------------

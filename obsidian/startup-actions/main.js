@@ -17,12 +17,26 @@ function setOpacity() {
 	electronWindow.setOpacity(opacityValue);
 }
 
-class ExampleModal extends obsidian.FuzzySuggestModal {
+class PluginSettings extends obsidian.FuzzySuggestModal {
+	// navigate via `Tab` and `Shift-tab`
+	constructor(app) {
+		super(app);
+		this.scope.register([], "Tab", () => {
+			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+		});
+		this.scope.register(["Shift"], "Tab", () => {
+			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
+		});
+	}
+
 	getItems() {
-		return [
-			{ name: "Item 1", description: "Item 1 description" },
-			{ name: "Item 2", description: "Item 2 description" },
-		];
+		const record = this.app.plugins.plugins;
+		const plugins = [];
+		for (const id in record) {
+			if (!record[id].settings && !record[id].manifest.settingsList) continue;
+			plugins.push({ id: id, name: record[id].manifest.name });
+		}
+		return plugins;
 	}
 
 	getItemText(plugin) {
@@ -30,7 +44,8 @@ class ExampleModal extends obsidian.FuzzySuggestModal {
 	}
 
 	onChooseItem(plugin, _event) {
-		new Notice(`Selected ${plugin.name}`);
+		this.app.setting.open();
+		this.app.setting.openTabById(plugin.id);
 	}
 }
 
@@ -54,11 +69,9 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		});
 
 		this.addCommand({
-			id: "example-modal",
-			name: "Open Example Modal",
-			callback: () => {
-				new ExampleModal(app).open();
-			},
+			id: "open-plugin-settings",
+			name: "Open plugin settings",
+			callback: () => new PluginSettings(this.app).open(),
 		});
 	}
 }

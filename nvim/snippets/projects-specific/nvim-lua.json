@@ -58,6 +58,10 @@
     "filetype": "lua",
     "prefix": "defer"
   },
+  "get selection": {
+    "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",
+    "prefix": "get selection"
+  },
   "get visual selection": {
     "body": [
       "local startLn, startCol = unpack(vim.api.nvim_buf_get_mark(0, \"<\"))",
