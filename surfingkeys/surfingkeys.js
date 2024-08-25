@@ -74,10 +74,11 @@ settings.scrollStepSize = 300;
 map("J", "P"); // page down
 map("K", "U"); // page up
 
-map("h", "S"); // History Back/Forward
+map("h", "S"); // history back/forward
 map("l", "D");
-map("H", "[["); // Next/Prev Page
+map("H", "[["); // next/prev Page
 map("L", "]]");
+map("z", ";fs") // change focussed element
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab

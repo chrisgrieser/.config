@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck // using pure javascript without the whole toolchain here
 const obsidian = require("obsidian");
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -69,25 +69,30 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
-		const app = this.app;
 
 		// OPACITY, depending on dark/light mode
-		setOpacity();
-		this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
+		if (!this.app.isMobile) {
+			setOpacity();
+			this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
+		}
 
 		// URI to reload a plugin
 		this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
 			const pluginId = uriParams?.id;
-			if (pluginId) {
-				await app.plugins.disablePlugin(pluginId);
-				await app.plugins.enablePlugin(pluginId);
-				new Notice(`Reloaded ${pluginId}.`);
+			if (!pluginId) {
+				new Notice("No plugin ID provided.");
+				return;
 			}
+			await this.app.plugins.disablePlugin(pluginId);
+			await this.app.plugins.enablePlugin(pluginId);
+			const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
+			new Notice(`"${pluginName}" reloaded.`);
 		});
 
 		this.addCommand({
 			id: "open-plugin-settings",
 			name: "Open plugin settings",
+			icon: "cog", // relevant for mobile
 			callback: () => new PluginSettings(this.app).open(),
 		});
 	}
