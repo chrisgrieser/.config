@@ -59,7 +59,6 @@ g.neovide_input_use_logo = true -- enable, so `cmd` on macOS can be used
 g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. can be used
 
 -- Appearance
-g.neovide_transparency = 0.93
 g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
 g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 g.neovide_remember_window_size = true

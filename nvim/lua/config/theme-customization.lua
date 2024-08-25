@@ -148,7 +148,11 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 -- with different timings?
 function M.updateColorscheme()
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
-	vim.cmd.colorscheme(vim.o.background == "dark" and vim.g.darkTheme or vim.g.lightTheme)
+
+	local isDark = vim.o.background == "dark"
+	vim.cmd.colorscheme(isDark and vim.g.darkTheme or vim.g.lightTheme)
+	vim.g.neovide_transparency = (isDark and vim.g.darkOpacity or vim.g.lightOpacity)
+
 	M.themeModifications()
 	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 end

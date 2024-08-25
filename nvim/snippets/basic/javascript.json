@@ -242,7 +242,7 @@
     "prefix": "ternary"
   },
   "thousand separator": {
-    "body": "replace(/\\B(?=(\\d{3})+(?!\\d))/g, \" \");",
+    "body": ".toLocaleString(\"de-DE\")",
     "description": "insert thousand separator into a digit string",
     "prefix": "thousand separator"
   },
