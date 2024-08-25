@@ -272,9 +272,17 @@ keymap(
 --------------------------------------------------------------------------------
 -- MULTI-CURSOR REPLACEMENT
 
-keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-Edit" })
--- remap for vim's visual star
-keymap("x", "<D-j>", '*Ncgn', { desc = "󰆿 Multi-Edit", remap = true })
+keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
+
+keymap("x", "<D-j>", function()
+	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
+	local selection = vim.iter(chunks)
+		:map(function(chunk) return chunk:gsub("[/\\]", "\\%1") end)
+		:join([[\n]])
+	local query = ("\\V%s"):format(selection)
+	vim.fn.setreg("/", query)
+	return '\27"_cgn'
+end, { desc = "󰆿 Multi-edit selection", expr = true })
 
 --------------------------------------------------------------------------------
 -- MACROS
