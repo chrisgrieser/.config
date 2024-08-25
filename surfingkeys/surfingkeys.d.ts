@@ -20,23 +20,23 @@ declare type SurfingKeysAPI = {
 		showBanner(text: string): void;
 		openOmnibar(opts: { type: "History" | "RecentlyClosed" | "Tabs" }): void;
 	};
-	imap: (keys: string, jscode: string, scope?: RegExp | null, annotation?: string) => void;
-	map: (keys: string, jscode: string, scope?: RegExp | null, annotation?: string) => void;
-	vmap: (keys: string, jscode: string, scope?: RegExp | null, annotation?: string) => void;
+	imap: (lhs: string, jscode: string, scope?: RegExp | null, annotation?: string) => void;
+	map: (lhs: string, rhs: string, scope?: RegExp | null, annotation?: string) => void;
+	vmap: (lhs: string, rhs: string, scope?: RegExp | null, annotation?: string) => void;
 	mapkey: (
-		keys: string,
+		lhs: string,
 		annotation: string,
 		jscode: () => void,
 		opts?: { domain?: RegExp; repeatIgnore?: boolean },
 	) => void;
 	vmapkey: (
-		keys: string,
+		lhs: string,
 		annotation: string,
 		jscode: () => void,
 		opts?: { domain?: RegExp; repeatIgnore?: boolean },
 	) => void;
 	imapkey: (
-		keys: string,
+		lhs: string,
 		annotation: string,
 		jscode: () => void,
 		opts?: { domain?: RegExp; repeatIgnore?: boolean },

@@ -6,5 +6,5 @@
 	"description": "Personal plugin to be able to register a few action on Obsidian's startup.",
 	"author": "pseudometa aka Chris Grieser",
 	"authorUrl": "https://github.com/chrisgrieser",
-	"isDesktopOnly": true
+	"isDesktopOnly": false
 }
