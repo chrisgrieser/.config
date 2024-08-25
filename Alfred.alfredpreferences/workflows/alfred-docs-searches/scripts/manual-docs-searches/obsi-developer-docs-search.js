@@ -74,7 +74,7 @@ function run() {
 				title: title,
 				subtitle: category,
 				match: camelCaseMatch(title) + camelCaseMatch(category),
-				icon: { path: "icons/codemirror-logo.png" },
+				icon: { path: "./scripts/manual-docs-searches/CodeMirror.png" },
 				arg: url,
 				uid: url,
 			};
