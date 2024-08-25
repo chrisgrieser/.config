@@ -347,29 +347,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9FD88396-7D21-4662-A033-231FDDA9656D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL to Clipboard</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</key>
 		<array>
 			<dict>
@@ -432,19 +409,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D10E485C-BB78-4681-A267-D6B57E3E6EA3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F912A4EE-E269-4F06-87C3-7A08275A3D4F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</key>
 		<array>
 			<dict>
@@ -496,29 +460,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6836847D-31EB-4678-86AD-60D91852740C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1396,7 +1337,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>cani</string>
+				<string>just</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1412,11 +1353,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/can-i-use.js</string>
+				<string>./scripts/manual-docs-searches/just-docs.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>task runner</string>
 				<key>title</key>
-				<string>Can I use…?</string>
+				<string>Just</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1425,7 +1366,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>9FD88396-7D21-4662-A033-231FDDA9656D</string>
+			<string>73A7B71E-71A0-4C0D-A135-B163627350F8</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1522,74 +1463,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>just</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/just-docs.js</string>
-				<key>subtext</key>
-				<string>task runner</string>
-				<key>title</key>
-				<string>Just</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>73A7B71E-71A0-4C0D-A135-B163627350F8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>yq</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1629,6 +1502,80 @@
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>oh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string># INFO
+# - has Alfred caching enabled, so curling here is fine
+# - updated 1x per month via cronjob
+
+curl -sL "https://raw.githubusercontent.com/chrisgrieser/shimmering-obsidian/main/.github/doc-search-cache/cache.json"
+
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Obsidian Documentation...</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>33BD334F-B73B-4462-9E9E-0B53BBC46B25</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<true/>
@@ -1638,6 +1585,8 @@
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>odd</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1645,7 +1594,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
@@ -1653,11 +1602,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/search-manpage-sections.js</string>
+				<string>scripts/manual-docs-searches/obsi-developer-docs-search.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>including CodeMirror Docs</string>
 				<key>title</key>
-				<string>Man Page Sections</string>
+				<string>Obsidian Developer Docs</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1666,7 +1615,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>F912A4EE-E269-4F06-87C3-7A08275A3D4F</string>
+			<string>3F1227C0-7373-4B26-BADB-05F279D75A62</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1735,55 +1684,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>man</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/search-man-pages.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Man Pages</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>D10E485C-BB78-4681-A267-D6B57E3E6EA3</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1804,113 +1704,15 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>oh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string># INFO
-# - has Alfred caching enabled, so curling here is fine
-# - updated 1x per month via cronjob
-
-curl -sL "https://raw.githubusercontent.com/chrisgrieser/shimmering-obsidian/main/.github/doc-search-cache/cache.json"
-
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Obsidian Documentation...</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>33BD334F-B73B-4462-9E9E-0B53BBC46B25</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>odd</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/manual-docs-searches/obsi-developer-docs-search.js</string>
-				<key>subtext</key>
-				<string>including CodeMirror Docs</string>
-				<key>title</key>
-				<string>Obsidian Developer Docs</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>3F1227C0-7373-4B26-BADB-05F279D75A62</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string>## DevDocs
+	<string>## Recent changes
+This workflow's `man` and `cani` search have been deprecated, since they are now
+available via DevDocs. To use them, enable them in the list of docs to the right.
+
+---
+
+## DevDocs
 Enable the devdocs you want to use in the workflow configuration. The
 enabled devdocs are searched by using the name as keyword, for example `haskell
 foobar` to search the Haskell DevDocs for "foobar."
@@ -1925,8 +1727,10 @@ A few common languages have short-hands noted in the popup selection, such as
 ### Pinning specific versions
 1. In the workflow configuration, go to the `pinned devdocs versions` section.
    (Depending on your screen height, you might need to scroll down.)
-2. The replacements take the form `alfred_keyword:pinned_version`, one version
-   change per line. For example to pin the `node` and `python` versions:
+2. The versions available are listed under the key `slug` in [this json
+   file](https://devdocs.io/docs.json).
+3. The replacements take the form `alfred_keyword:pinned_version`, one version
+   change per line. For example, to pin the `node` and `python` use:
 
    ```
    node:node~18_lts
@@ -1936,10 +1740,8 @@ A few common languages have short-hands noted in the popup selection, such as
    py:python~3.11
    ```
 
-3. The versions available are listed under the key `slug` in [this json
-   file](https://devdocs.io/docs.json).
-4. Afterward, reload the caches via the Alfred keyword `:docs-reload` once to
-   ensure the new versions are used.
+4. Afterward, reload the caches via the Alfred keyword `:docs-reload` to ensure
+   the new versions are used.
 
 ### Icons
 Search icons for specific documentation sites are provided by adding a file to
@@ -1952,9 +1754,7 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `ruff`: ruff docs &amp; rules
 - `sc`: shellcheck wiki
 - `pandoc`: pandoc user manual
-- `man`: man pages at [mankier.com](https://www.mankier.com/)
 - `wt`: WezTerm docs
-- `cani`: caniuse.com
 - `just`: [just (task runner) docs](https://just.systems/man/en/)
 - `yq`: yq docs
 - `oh`: Obsidian help
@@ -2012,7 +1812,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>890</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
@@ -2059,13 +1859,13 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>33BD334F-B73B-4462-9E9E-0B53BBC46B25</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Obsidian help</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1280</real>
+			<real>1005</real>
 		</dict>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<dict>
@@ -2081,13 +1881,13 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>3F1227C0-7373-4B26-BADB-05F279D75A62</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>8</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>Obsidian developer docs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1420</real>
+			<real>1140</real>
 		</dict>
 		<key>3F695A74-EC6B-4436-9063-9A618A8CC0B8</key>
 		<dict>
@@ -2181,7 +1981,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>770</real>
 		</dict>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
@@ -2231,17 +2031,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>260</real>
-		</dict>
-		<key>9FD88396-7D21-4662-A033-231FDDA9656D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>can-i-use</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>770</real>
 		</dict>
 		<key>A0058A30-98F7-4CE4-9FD9-4E353480E4DA</key>
 		<dict>
@@ -2297,17 +2086,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>515</real>
 		</dict>
-		<key>D10E485C-BB78-4681-A267-D6B57E3E6EA3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>man page</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1145</real>
-		</dict>
 		<key>D13B43E8-0DC2-4E8C-AE56-365D8620A0FA</key>
 		<dict>
 			<key>colorindex</key>
@@ -2343,15 +2121,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>refresh cache by reloading workflow</string>
 			<key>xpos</key>
 			<real>670</real>
-			<key>ypos</key>
-			<real>1145</real>
-		</dict>
-		<key>F912A4EE-E269-4F06-87C3-7A08275A3D4F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>190</real>
 			<key>ypos</key>
 			<real>1145</real>
 		</dict>
@@ -2439,8 +2208,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -3333,8 +3102,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -4227,8 +3996,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -5121,8 +4890,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -6015,8 +5784,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -6909,8 +6678,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -7803,8 +7572,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -8697,8 +8466,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -9591,8 +9360,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -10485,8 +10254,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -11379,8 +11148,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -12273,8 +12042,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -13167,8 +12936,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -14061,8 +13830,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -14955,8 +14724,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -15849,8 +15618,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -16743,8 +16512,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -17637,8 +17406,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -18531,8 +18300,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -19425,8 +19194,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -20319,8 +20088,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -21213,8 +20982,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -22107,8 +21876,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -23001,8 +22770,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -23895,8 +23664,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -24789,8 +24558,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -25683,8 +25452,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -26577,8 +26346,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -27471,8 +27240,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -28365,8 +28134,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -29259,8 +29028,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -30153,8 +29922,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -31047,8 +30816,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -31941,8 +31710,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -32835,8 +32604,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -33729,8 +33498,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -34623,8 +34392,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -35517,8 +35286,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -36411,8 +36180,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -37305,8 +37074,8 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>bower</string>
 					</array>
 					<array>
-						<string>browser_support_tables</string>
-						<string>browser_support_tables</string>
+						<string>browser_support_tables (keyword: cani)</string>
+						<string>cani</string>
 					</array>
 					<array>
 						<string>c</string>
@@ -38150,7 +37919,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.10.1</string>
+	<string>2.11.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

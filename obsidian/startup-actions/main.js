@@ -5,8 +5,8 @@ const obsidian = require("obsidian");
 // CONFIG
 const config = {
 	opacity: {
-		light: 0.95,
-		dark: 0.85,
+		light: 0.92,
+		dark: 0.86,
 	},
 };
 
@@ -19,7 +19,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// OPACITY, depending on dark/light mode
 		this.registerEvent(
 			this.app.workspace.on("css-change", () => {
-				const isDarkMode = document.querySelector("body.theme-light");
+				const isDarkMode = document.querySelector("body.theme-dark");
 				const opacityValue = config.opacity[isDarkMode ? "dark" : "light"];
 				electronWindow.setOpacity(opacityValue);
 			}),
