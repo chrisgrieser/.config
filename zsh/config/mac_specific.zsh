@@ -17,3 +17,13 @@ function appid() {
 	print "\e[1;32mCopied appid:\e[0m $id"
 	echo -n "$id" | pbcopy
 }
+
+# open first ejectable volume
+function vol {
+	first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+	if [[ -d "$first_volume" ]]; then
+		open "$first_volume"
+	else
+		print "\e[1;33mNo ejectable volumes found.\e[0m"
+	fi
+}
