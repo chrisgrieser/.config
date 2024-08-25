@@ -20,6 +20,7 @@ function setOpacity() {
 class PluginSettings extends obsidian.FuzzySuggestModal {
 	constructor(app) {
 		super(app);
+		this.setPlaceholder("Search settings…");
 
 		// navigate via `Tab` and `Shift-tab`
 		this.scope.register([], "Tab", () => {
@@ -31,13 +32,28 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 	}
 
 	getItems() {
-		const enabledPlugins = this.app.plugins.plugins;
-		const pluginsWithSettings = [];
-		for (const id in enabledPlugins) {
-			if (!enabledPlugins[id].settings && !enabledPlugins[id].settingsList) continue;
-			pluginsWithSettings.push({ id: id, name: enabledPlugins[id].manifest.name });
+		const settingsTabs = [
+			{ id: "about", name: "General" },
+			{ id: "file", name: "Files and links" },
+			{ id: "editor", name: "Editor" },
+			{ id: "appearance", name: "Appearance" },
+			{ id: "hotkeys", name: "Hotkeys" },
+			{ id: "core-plugins", name: "Core plugins" },
+			{ id: "community-plugins", name: "Community plugins" },
+		];
+
+		const enabledCommunityPlugins = this.app.plugins.plugins;
+		for (const [id, plugin] of Object.entries(enabledCommunityPlugins)) {
+			if (!(plugin.settings || plugin.settingsList)) continue;
+			settingsTabs.push({ id: id, name: plugin.manifest.name });
 		}
-		return pluginsWithSettings;
+
+		const corePlugins = this.app.internalPlugins.plugins;
+		for (const [id, plugin] of Object.entries(corePlugins)) {
+			if (!plugin.enabled || !plugin.instance.options) continue;
+			settingsTabs.push({ id: id, name: plugin.instance.name });
+		}
+		return settingsTabs;
 	}
 
 	getItemText(plugin) {
