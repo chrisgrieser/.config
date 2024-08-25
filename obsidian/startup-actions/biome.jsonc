@@ -1,0 +1,17 @@
+{
+	"extends": ["../../biome.jsonc"],
+	"linter": { "enabled": false },
+
+	"javascript": {
+		"globals": [
+			// Obsidian
+			"Notice",
+			"app",
+			// Electron
+			"electronWindow"
+		]
+	},
+
+	// use the schema from the local biome package installed via Mason
+	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
+}

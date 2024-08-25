@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.xilopaint.alfredapp.urbandictionary</string>
+	<key>category</key>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>A86052C6-254B-48B5-BA86-3B44B7883695</key>

@@ -1,0 +1,10 @@
+{
+	"id": "pseudometa-private-plugin",
+	"name": "Pseudometa Private Plugin",
+	"version": "0.1",
+	"minAppVersion": "1.17.0",
+	"description": "–",
+	"author": "pseudometa aka Chris Grieser",
+	"authorUrl": "https://github.com/chrisgrieser",
+	"isDesktopOnly": true
+}
