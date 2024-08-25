@@ -74,6 +74,13 @@ local function formattingFunc(bufnr)
 				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 				apply = true,
 			}
+		elseif ft == "zsh" then
+			vim.cmd("silent! %s|/Users/\w+/|||")
+			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+			for i = 1, #lines do
+				lines[i] = lines[i]:gsub("^/Users/%w+/", "$HOME/")
+			end
+			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 		end
 		vim.cmd.update()
 	end)

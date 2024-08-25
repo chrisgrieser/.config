@@ -307,5 +307,20 @@
       ],
       "key": "P"
     }
+  ],
+  "obsidian-another-quick-switcher:move": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "m"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "M"
+    }
   ]
 }

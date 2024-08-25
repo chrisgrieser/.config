@@ -12,4 +12,5 @@ cut -d, -f2 "$HOME/.config/perma-repos.csv" |
 	done
 
 # contains info on all the vaults, so they do not have to be added manually
+mkdir -p "$HOME/Library/Application Support/obsidian/"
 cp -f ./obsidian.json "$HOME/Library/Application Support/obsidian/obsidian.json"

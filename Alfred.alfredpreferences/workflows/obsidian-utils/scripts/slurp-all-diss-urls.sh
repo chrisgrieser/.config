@@ -14,10 +14,13 @@ urls=$(
 		xargs -I {} echo "obsidian://slurp?vault=${slurp_vault}&url={}"
 )
 echo "$urls" | xargs open
-echo "$urls" | pbcopy
+echo "$urls" | pbcopy # backup
 
-# complete all (backwards, as indexes are shifted)
+# complete all
 url_count=$(echo "$urls" | wc -l)
-for ((i = url_count - 1; i >= 0; i--)); do
+for ((i = url_count - 1; i >= 0; i--)); do # backwards, as indexes are shifted
 	reminders complete "$slurp_list" $i
 done
+
+# validate & move
+open "$HOME/Vaults/phd-data-analysis/Data/_ inbox"
