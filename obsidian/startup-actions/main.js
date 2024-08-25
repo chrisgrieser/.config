@@ -2,15 +2,26 @@
 const obsidian = require("obsidian");
 //──────────────────────────────────────────────────────────────────────────────
 
+// CONFIG
+const config = {
+	opacity: {
+		light: 0.93,
+		dark: 0.85,
+	},
+};
+
+//──────────────────────────────────────────────────────────────────────────────
+
 class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
-		console.log("My Personal Startup Action Plugin loaded.");
+		console.log(this.manifest.name + " loaded.");
 
-		// OPACITY
-		electronWindow.setOpacity(0.94);
+		// OPACITY, depending on dark/light mode
 		this.registerEvent(
 			this.app.workspace.on("css-change", () => {
-				console.log("css change triggered");
+				const isDarkMode = document.querySelector("body.theme-light");
+				const opacityValue = config.opacity[isDarkMode ? "dark" : "light"];
+				electronWindow.setOpacity(opacityValue);
 			}),
 		);
 
