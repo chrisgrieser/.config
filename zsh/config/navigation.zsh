@@ -6,10 +6,6 @@
 # CONFIG
 export CDPATH="$HOME/Developer:$HOME/Desktop"
 
-if [[ $PWD =~ $HOME/Developer/* ]]; then
-	echo
-fi
-
 #───────────────────────────────────────────────────────────────────────────────
 
 # OPTIONS
@@ -32,28 +28,6 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
-
-#───────────────────────────────────────────────────────────────────────────────
-# GOTO active location of various apps (all mac-only)
-
-# ALFRED workflow
-function ..a {
-	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	workflow_id=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
-	prefs_location=$(grep "current" "$HOME/Library/Application Support/Alfred/prefs.json" | cut -d'"' -f4 | sed -e 's|\\/|/|g' -e "s|^~|$HOME|")
-	workflow_folder_path="$prefs_location/workflows/$workflow_id"
-	cd "$workflow_folder_path" || return 1
-}
-
-# open first ejectable volume
-function vol {
-	first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
-	if [[ -d "$first_volume" ]]; then
-		open "$first_volume"
-	else
-		print "\e[1;33mEjectable volumes found.\e[0m"
-	fi
-}
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
@@ -82,3 +56,29 @@ _gr() {
 	compadd "${expl[@]}" -Q -- "${folders[@]}"
 }
 compdef _gr gr
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# CYCLE THROUGH DIRECTORIES
+
+function _grappling_hook {
+	# CONFIG some perma-repos & desktop
+	local some_perma_repos to_open locations_count dir locations
+	some_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|" | head -n3)
+	locations="$HOME/Desktop\n$some_perma_repos"
+
+	to_open=$(echo "$locations" | sed -n "1p")
+	locations_count=$(echo "$locations" | wc -l)
+
+	for ((i = 1; i <= locations_count - 1; i++)); do
+		dir=$(echo "$locations" | sed -n "${i}p")
+		[[ "$PWD" == "$dir" ]] && to_open=$(echo "$locations" | sed -n "$((i + 1))p")
+	done
+	cd -q "$to_open" || return 1
+	zle reset-prompt
+
+	# so wezterm knows we are in a new directory
+	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory
+}
+zle -N _grappling_hook
+bindkey "^O" _grappling_hook # bound to cmd+enter via wezterm

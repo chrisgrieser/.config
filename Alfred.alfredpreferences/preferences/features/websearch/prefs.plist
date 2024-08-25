@@ -26,17 +26,6 @@
 			<key>url</key>
 			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
 		</dict>
-		<key>47FDE3ED-2063-4F5D-900E-BA625165F8F2</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ud</string>
-			<key>text</key>
-			<string>Urban Dictionary: '{query}'</string>
-			<key>url</key>
-			<string>https://www.urbandictionary.com/define.php?term={query}</string>
-		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
 			<key>enabled</key>
