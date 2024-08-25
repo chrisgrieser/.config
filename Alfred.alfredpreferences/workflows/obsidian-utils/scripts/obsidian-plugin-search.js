@@ -19,24 +19,6 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
-/** @param {number} num */
-function insert1000sep(num) {
-	let numStr = num.toString();
-	let acc = "";
-	while (numStr.length > 3) {
-		acc = "." + numStr.slice(-3) + acc;
-		numStr = numStr.slice(0, -3);
-	}
-	return numStr + acc;
-}
-
-/** @param {string} path */
-function readFile(path) {
-	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
-	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
-	return ObjC.unwrap(str);
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -48,9 +30,6 @@ function run() {
 
 	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsUrl));
 	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsUrl));
-
-	const depre = JSON.parse(readFile("./scripts/deprecated-plugins.json"));
-	const deprecatedPlugins = [...depre.sherlocked, ...depre.dysfunct, ...depre.deprecated];
 
 	//───────────────────────────────────────────────────────────────────────────
 
@@ -70,15 +49,7 @@ function run() {
 				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
 				// Download Numbers
-				let downloadsStr = "";
-				if (downloadsJson[id]) {
-					const downloads = downloadsJson[id].downloads;
-					downloadsStr = insert1000sep(downloads) + "↓  ·  ";
-				}
-
-				// check whether already installed / deprecated
-				const icons = deprecatedPlugins.includes(id) ? " ⚠️" : "";
-				const subtitleIcons = deprecatedPlugins.includes(id) ? "deprecated · " : "";
+				const downloadsStr = downloadsJson[id] ? downloadsJson[id].downloads;.toLocaleString("en-US") + "↓  ·  " : "";
 
 				// Better matching for some plugins
 				const matcher =
@@ -86,12 +57,12 @@ function run() {
 					alfredMatcher(author) +
 					alfredMatcher(id) +
 					alfredMatcher(description);
-				const subtitle = downloadsStr + subtitleIcons + description + "  ·  by " + author;
+				const subtitle = downloadsStr + description + "  ·  by " + author;
 
 				// create json for Alfred
 				/** @type {AlfredItem} */
 				const alfredItem = {
-					title: name + icons,
+					title: name,
 					subtitle: subtitle,
 					arg: githubURL,
 					quicklookurl: githubURL,
