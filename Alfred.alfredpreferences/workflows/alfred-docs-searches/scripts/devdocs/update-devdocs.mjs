@@ -16,6 +16,8 @@ import fs from "node:fs";
 const aliases = {
 	// aliases added on top of the ones from devdocs
 	hammerspoon: "hs",
+	// biome-ignore lint/style/useNamingConvention: not set by me
+	browser_support_tables: "cani",
 
 	// PENDING https://github.com/freeCodeCamp/devdocs/issues/2210
 	// devdocs aliases https://devdocs.io/help#aliases

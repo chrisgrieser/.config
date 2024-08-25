@@ -12,6 +12,8 @@
 	<string>node</string>
 	<key>keyword_05</key>
 	<string>jsdoc</string>
+	<key>keyword_06</key>
+	<string>cani</string>
 	<key>keyword_07</key>
 	<string>electron</string>
 	<key>keyword_08</key>
@@ -34,7 +36,5 @@
 	<string>lua</string>
 	<key>keyword_21</key>
 	<string>hs</string>
-	<key>keyword_22</key>
-	<string>man</string>
 </dict>
 </plist>
