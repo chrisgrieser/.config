@@ -302,10 +302,6 @@ nnoremap ,iw :inspectWordCount
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
 nnoremap ,iv :inspectChromeVersion
 
-" allow reloading plugins via URI
-exmap registerReloadUri jsfile Meta/vimrc-jsfile.js { registerReloadUri() }
-nnoremap ,j :registerReloadUri
-
 "───────────────────────────────────────────────────────────────────────────────
 " META: PLUGIN- AND SETTING-RELATED BINDINGS
 

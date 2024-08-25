@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function camelCaseMatch(str) {
-	const subwords = str.replace(/[-_./]/g, " ");
-	const fullword = str.replace(/[-_./]/g, "");
+	const subwords = str.replace(/[-_./'()]/g, " ");
+	const fullword = str.replace(/[-_./'()]/g, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
@@ -36,19 +36,16 @@ function run() {
 		)
 		.map((/** @type {{ path: string }} */ file) => {
 			const subsitePath = file.path.slice(3, -3);
-
-			const displayTitle = subsitePath.replace(/.*\//, ""); // show only file name
-
+			const subsiteURL = subsitePath.replaceAll(" ", "+"); // obsidian publish uses `+`
+			const title = subsitePath.replace(/.*\//, ""); // show only file name
 			const category = subsitePath
 				.replace(/(.*)\/.*/, "$1") // only parent
 				.replaceAll("/", " → "); // nicer tree
 
-			const subsiteURL = subsitePath.replaceAll(" ", "+"); // obsidian publish uses `+`
-
 			return {
-				title: displayTitle,
+				title: title,
 				subtitle: category,
-				match: camelCaseMatch(subsitePath),
+				match: camelCaseMatch(title),
 				arg: `${obsiDocsBaseURL}/${subsiteURL}`,
 				uid: subsitePath,
 			};
@@ -73,7 +70,7 @@ function run() {
 			return {
 				title: title,
 				subtitle: category,
-				match: camelCaseMatch(title) + camelCaseMatch(category),
+				match: camelCaseMatch(title),
 				icon: { path: "./scripts/manual-docs-searches/CodeMirror.png" },
 				arg: url,
 				uid: url,

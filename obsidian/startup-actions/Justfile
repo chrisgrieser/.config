@@ -1,0 +1,6 @@
+set quiet := true
+
+reload:
+    #!/usr/bin/env zsh
+    plugin_id=$(grep '"id"' "./manifest.json" | cut -d'"' -f4)
+    open "obsidian://reload-plugin?id=$plugin_id"
