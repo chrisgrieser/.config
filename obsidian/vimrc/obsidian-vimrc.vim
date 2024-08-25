@@ -352,6 +352,10 @@ nnoremap ,ph :openDynamicHighlightsSettings
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme
 
+" Cycle Colorscheme
+exmap pluginSettings jsfile Meta/vimrc-jsfile.js { pluginSettings() }
+nnoremap g, :pluginSettings
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 

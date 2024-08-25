@@ -411,3 +411,7 @@ function registerReloadUri() {
 		},
 	);
 }
+
+function pluginSettings() {
+	const obsidian = require("obsidian")
+}
