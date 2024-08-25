@@ -12,6 +12,9 @@ local darkThemes = {
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 }
 
+vim.g.lightOpacity = 0.92
+vim.g.darkOpacity = 0.85
+
 --------------------------------------------------------------------------------
 
 -- INFO The purpose of this is not having to manage two lists, one with themes

@@ -35,7 +35,6 @@ function run() {
 
 	// add PLUGINS to the JSON
 	const plugins = pluginJson
-		.reverse() // show new plugins on top
 		.map(
 			(
 				/** @type {{ id: string; name: string; description: string; author: string; repo: string; }} */ plugin,
@@ -44,23 +43,22 @@ function run() {
 
 				const githubURL = "https://github.com/" + repo;
 				const openURI = `obsidian://show-plugin?id=${id}`;
-				// Discord accepts simple markdown, the enclosing, the enclosing `<>`
-				// remove the preview
+				// enclosing link in  `<>` remove to the preview
 				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
-				// Download Numbers
-				const downloadsStr = downloadsJson[id] ? downloadsJson[id].downloads;.toLocaleString("en-US") + "↓  ·  " : "";
-
-				// Better matching for some plugins
 				const matcher =
 					alfredMatcher(name) +
 					alfredMatcher(author) +
 					alfredMatcher(id) +
 					alfredMatcher(description);
+
+				// download bumbers
+				const downloadCount = downloadsJson[id]?.downloads || 0;
+				const downloadsStr = downloadCount ? downloadCount.toLocaleString("de-DE") + "↓  ·  " : "";
 				const subtitle = downloadsStr + description + "  ·  by " + author;
 
 				// create json for Alfred
-				/** @type {AlfredItem} */
+				/** @type {AlfredItem & { downloadCount: number } } */
 				const alfredItem = {
 					title: name,
 					subtitle: subtitle,
@@ -73,9 +71,14 @@ function run() {
 						ctrl: { arg: id, subtitle: `⌃: Copy Plugin ID: "${id}"` },
 						alt: { arg: discordUrl, subtitle: "⌥: Copy Link (discord ready)" },
 					},
+					downloadCount: downloadCount, // only to be able to sort
 				};
 				return alfredItem;
 			},
+		)
+		.sort(
+			(/** @type {{ downloadCount: number; }} */ a, /** @type {{ downloadCount: number; }} */ b) =>
+				b.downloadCount - a.downloadCount,
 		);
 
 	return JSON.stringify({
