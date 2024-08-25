@@ -348,8 +348,8 @@ nnoremap ,ph :openDynamicHighlightsSettings
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme
 
-" Cycle Colorscheme
-exmap pluginSettings jsfile Meta/vimrc-jsfile.js { pluginSettings() }
+" Open Plugin Settings (uses personal plugin)
+exmap pluginSettings obcommand pseudometa-startup-actions:open-plugin-settings
 nnoremap g, :pluginSettings
 
 "───────────────────────────────────────────────────────────────────────────────
