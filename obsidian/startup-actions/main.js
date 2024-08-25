@@ -12,15 +12,16 @@ const config = {
 //──────────────────────────────────────────────────────────────────────────────
 
 function setOpacity() {
-	const isDarkMode = document.querySelector("body.theme-dark");
+	const isDarkMode = document.body.hasClass("theme-dark");
 	const opacityValue = config.opacity[isDarkMode ? "dark" : "light"];
 	electronWindow.setOpacity(opacityValue);
 }
 
 class PluginSettings extends obsidian.FuzzySuggestModal {
-	// navigate via `Tab` and `Shift-tab`
 	constructor(app) {
 		super(app);
+
+		// navigate via `Tab` and `Shift-tab`
 		this.scope.register([], "Tab", () => {
 			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
 		});
@@ -30,13 +31,13 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 	}
 
 	getItems() {
-		const record = this.app.plugins.plugins;
-		const plugins = [];
-		for (const id in record) {
-			if (!record[id].settings && !record[id].manifest.settingsList) continue;
-			plugins.push({ id: id, name: record[id].manifest.name });
+		const enabledPlugins = this.app.plugins.plugins;
+		const pluginsWithSettings = [];
+		for (const id in enabledPlugins) {
+			if (!enabledPlugins[id].settings && !enabledPlugins[id].settingsList) continue;
+			pluginsWithSettings.push({ id: id, name: enabledPlugins[id].manifest.name });
 		}
-		return plugins;
+		return pluginsWithSettings;
 	}
 
 	getItemText(plugin) {
@@ -51,7 +52,7 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 
 class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
-		console.log(this.manifest.name + " loaded.");
+		console.info(this.manifest.name + " loaded.");
 		const app = this.app;
 
 		// OPACITY, depending on dark/light mode

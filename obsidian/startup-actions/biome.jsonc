@@ -1,15 +1,19 @@
 {
 	"extends": ["../../biome.jsonc"],
-	"linter": { "enabled": false },
 
 	"javascript": {
 		"globals": [
-			// Obsidian
-			"Notice",
-			"app",
-			// Electron
-			"electronWindow"
+			"Notice", // Obsidian
+			"electronWindow" // Electron
 		]
+	},
+
+	"linter": {
+		"rules": {
+			"nursery": {
+				"noUndeclaredDependencies": "off" // not needed for Obsidian plugin
+			}
+		}
 	},
 
 	// use the schema from the local biome package installed via Mason

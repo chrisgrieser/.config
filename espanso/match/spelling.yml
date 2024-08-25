@@ -113,3 +113,4 @@ matches:
   - { replace: you, triggers: [yuo, oyu], propagate_case: true }
   - { replace: workflow, trigger: workflwo, propagate_case: true }
   - { replace: display, trigger: dispaly, propagate_case: true }
+  - { replace: mode, trigger: mdoe, propagate_case: true }
