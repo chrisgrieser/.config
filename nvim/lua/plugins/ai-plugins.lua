@@ -27,10 +27,24 @@ return {
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
 		},
-		init = function()
+		config = function(_, opts)
+			require("neocodeium").setup(opts)
+
 			-- disable while recording
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
+
+			-- safeguard: disable in various private folder
+			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+				callback = function(ctx)
+					local parent = vim.fs.dirname(ctx.file)
+					local name = vim.fs.basename(ctx.file)
+					if parent:find("private dotfiles") or name:lower():find("recovery") then
+						require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
+						vim.cmd.NeoCodeium("disable_buffer")
+					end
+				end,
+			})
 		end,
 		keys = {
 			-- stylua: ignore start
@@ -49,49 +63,4 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"supermaven-inc/supermaven-nvim",
-	-- 	build = ":SupermavenUseFree", -- needs to be run once to set the API key
-	-- 	event = "InsertEnter",
-	-- 	keys = {
-	-- 		{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
-	-- 		{ "<D-S>", mode = "i", desc = "󰚩 Accept Word" },
-	-- 		{
-	-- 			"<leader>oa",
-	-- 			function()
-	-- 				vim.cmd.SupermavenToggle()
-	-- 				local text = require("supermaven-nvim.api").is_running() and "enabled" or "disabled"
-	-- 				require("config.utils").notify("󰚩 Supermaven", text)
-	-- 			end,
-	-- 			desc = "󰚩 Supermaven Suggestions",
-	-- 		},
-	-- 	},
-	-- 	opts = {
-	-- 		keymaps = {
-	-- 			accept_suggestion = "<D-s>",
-	-- 			accept_word = "<D-S>",
-	-- 		},
-	-- 		log_level = "off", -- silence notifications
-	-- 		ignore_filetypes = {
-	-- 			gitcommit = true,
-	-- 			DressingInput = true,
-	-- 			TelescopePrompt = true,
-	-- 			["rip-substitute"] = true,
-	--
-	-- 			-- INFO `pass` passwords editing filetype is plaintext, also this is
-	-- 			-- the filetype of critical files (e.g. zsh files with API keys)
-	-- 			text = true,
-	-- 		},
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("supermaven-nvim").setup(opts)
-	--
-	-- 		-- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
-	-- 		require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
-	--
-	-- 		-- disable while recording
-	-- 		vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
-	-- 		vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
-	-- 	end,
-	-- },
 }
