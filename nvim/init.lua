@@ -35,9 +35,13 @@ local function safeRequire(module)
 end
 
 safeRequire("config.options") -- before lazy, so opts still work on plugin install
-safeRequire("config.lazy")
-safeRequire("config.neovide-gui-settings")
+
+-- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
+-- e.g. when editing a password with `pass`.
+if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
+
 safeRequire("config.theme-customization")
+safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
 safeRequire("config.lsp-and-diagnostics")

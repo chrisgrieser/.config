@@ -150,7 +150,8 @@ function M.updateColorscheme()
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
 
 	local isDark = vim.o.background == "dark"
-	vim.cmd.colorscheme(isDark and vim.g.darkTheme or vim.g.lightTheme)
+	local targetTheme = isDark and vim.g.darkTheme or vim.g.lightTheme
+	if targetTheme then vim.cmd.colorscheme(targetTheme) end
 	vim.g.neovide_transparency = (isDark and vim.g.darkOpacity or vim.g.lightOpacity)
 
 	M.themeModifications()

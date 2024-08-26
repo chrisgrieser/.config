@@ -11,10 +11,6 @@ return {
 	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
 
-		-- INFO safeguard, prevents accidental running with `pass` since I only
-		-- open in in the terminal
-		cond = vim.fn.has("gui_running") == 1,
-
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
@@ -31,23 +27,10 @@ return {
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
 		},
-		config = function(_, opts)
-			require("neocodeium").setup(opts)
-
+		init = function()
 			-- disable while recording
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
-
-			-- safeguard: disable in various private folder
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
-				callback = function(ctx)
-					local parent = vim.fs.dirname(ctx.file)
-					if parent:find("private dotfiles") then
-						require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
-						vim.cmd.NeoCodeium("disable_buffer")
-					end
-				end,
-			})
 		end,
 		keys = {
 			-- stylua: ignore start
@@ -68,11 +51,6 @@ return {
 	},
 	-- {
 	-- 	"supermaven-inc/supermaven-nvim",
-	--
-	-- 	-- INFO safeguard, prevents accidental running with `pass` since I only
-	-- 	-- open in in the terminal
-	-- 	cond = vim.fn.has("gui_running") == 1,
-	--
 	-- 	build = ":SupermavenUseFree", -- needs to be run once to set the API key
 	-- 	event = "InsertEnter",
 	-- 	keys = {
