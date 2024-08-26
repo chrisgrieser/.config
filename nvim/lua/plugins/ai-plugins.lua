@@ -31,10 +31,23 @@ return {
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
 		},
-		init = function()
+		config = function(_, opts)
+			require("neocodeium").setup(opts)
+
 			-- disable while recording
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
+
+			-- safeguard: disable in various private folder
+			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+				callback = function(ctx)
+					local parent = vim.fs.dirname(ctx.file)
+					if parent:find("private dotfiles") then
+						require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
+						vim.cmd.NeoCodeium("disable_buffer")
+					end
+				end,
+			})
 		end,
 		keys = {
 			-- stylua: ignore start

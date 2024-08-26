@@ -4,6 +4,8 @@
 <dict>
 	<key>autoExpandSnippets</key>
 	<true/>
+	<key>enabled</key>
+	<true/>
 	<key>enabledFiles</key>
 	<true/>
 	<key>enabledImages</key>

@@ -20,7 +20,7 @@ function setOpacity() {
 class PluginSettings extends obsidian.FuzzySuggestModal {
 	constructor(app) {
 		super(app);
-		this.setPlaceholder("Search settings…");
+		this.setPlaceholder("Search settings tabs…");
 
 		// navigate via `Tab` and `Shift-tab`
 		this.scope.register([], "Tab", () => {
@@ -42,18 +42,22 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 			{ id: "community-plugins", name: "Community plugins" },
 		];
 
+		const communityPluginsWithSettings = [];
 		const enabledCommunityPlugins = this.app.plugins.plugins;
 		for (const [id, plugin] of Object.entries(enabledCommunityPlugins)) {
 			if (!(plugin.settings || plugin.settingsList)) continue;
-			settingsTabs.push({ id: id, name: plugin.manifest.name });
+			communityPluginsWithSettings.push({ id: id, name: plugin.manifest.name });
 		}
+		communityPluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
 
+		const corePluginsWithSettings = [];
 		const corePlugins = this.app.internalPlugins.plugins;
 		for (const [id, plugin] of Object.entries(corePlugins)) {
 			if (!plugin.enabled || !plugin.instance.options) continue;
-			settingsTabs.push({ id: id, name: plugin.instance.name });
+			corePluginsWithSettings.push({ id: id, name: plugin.instance.name });
 		}
-		return settingsTabs;
+		corePluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
+		return [...settingsTabs, ...corePluginsWithSettings, ...communityPluginsWithSettings];
 	}
 
 	getItemText(plugin) {
