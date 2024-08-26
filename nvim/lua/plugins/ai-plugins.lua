@@ -11,7 +11,8 @@ return {
 	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
 
-		-- only for GUI, prevents accidental running with `pass`
+		-- INFO safeguard, prevents accidental running with `pass` since I only
+		-- open in in the terminal
 		cond = vim.fn.has("gui_running") == 1,
 
 		event = "InsertEnter",
@@ -23,8 +24,8 @@ return {
 				noice = false, -- sometimes triggered in error-buffers
 				["rip-substitute"] = false,
 
-				-- `pass` passwords editing filetype is plaintext, also this is the
-				-- filetype of critical files (e.g. zsh files with API keys)
+				-- INFO `pass` passwords editing filetype is plaintext, also this is
+				-- the filetype of critical files (e.g. zsh files with API keys)
 				text = false,
 			},
 			silent = true,
@@ -54,6 +55,11 @@ return {
 	},
 	-- {
 	-- 	"supermaven-inc/supermaven-nvim",
+	--
+	-- 	-- INFO safeguard, prevents accidental running with `pass` since I only
+	-- 	-- open in in the terminal
+	-- 	cond = vim.fn.has("gui_running") == 1,
+	--
 	-- 	build = ":SupermavenUseFree", -- needs to be run once to set the API key
 	-- 	event = "InsertEnter",
 	-- 	keys = {
@@ -79,8 +85,11 @@ return {
 	-- 			gitcommit = true,
 	-- 			DressingInput = true,
 	-- 			TelescopePrompt = true,
-	-- 			text = true, -- `pass`' filetype when editing passwords
 	-- 			["rip-substitute"] = true,
+	--
+	-- 			-- INFO `pass` passwords editing filetype is plaintext, also this is
+	-- 			-- the filetype of critical files (e.g. zsh files with API keys)
+	-- 			text = true,
 	-- 		},
 	-- 	},
 	-- 	config = function(_, opts)

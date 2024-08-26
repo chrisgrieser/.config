@@ -10,6 +10,7 @@ export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
+export EDITOR=nvim
 
 # pandoc does not have an environment var for this, so using `--data-dir` alias
 alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
