@@ -7,6 +7,7 @@ delay 0.3
 tell application "System Events" 
 	-- open pinned messages
 	keystroke "p" using {command down}
+	delay 0.5
 
 	-- 3x tab -> goto latest alpha
 	key code 48
