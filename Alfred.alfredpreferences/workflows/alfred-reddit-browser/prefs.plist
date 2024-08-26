@@ -12,8 +12,6 @@
 	<integer>5</integer>
 	<key>pages_to_request</key>
 	<integer>50</integer>
-	<key>reddit_frontend</key>
-	<string>new.reddit.com</string>
 	<key>save_scroll_position</key>
 	<true/>
 	<key>subreddits</key>
