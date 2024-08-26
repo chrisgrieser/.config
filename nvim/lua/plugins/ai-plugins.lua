@@ -10,6 +10,10 @@
 return {
 	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
+
+		-- only for GUI, prevents accidental running with `pass`
+		cond = vim.fn.has("gui_running") == 1,
+
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
@@ -17,8 +21,11 @@ return {
 				DressingInput = false,
 				TelescopePrompt = false,
 				noice = false, -- sometimes triggered in error-buffers
-				text = false, -- `pass` passwords editing filetype is plaintext
 				["rip-substitute"] = false,
+
+				-- `pass` passwords editing filetype is plaintext, also this is the
+				-- filetype of critical files (e.g. zsh files with API keys)
+				text = false,
 			},
 			silent = true,
 			show_label = false, -- signcolumn label for number of suggestions
