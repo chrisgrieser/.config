@@ -17,6 +17,6 @@ matches:
           shell: sh
 
   # "…ign" -> "…ing"
-  # (but not for words like "sign" or "ignore", where it is actually correct)
-  - regex: "(?P<letter>[a-rt-z])ign\\b"
+  # (but not for words like "sign" or "ignore", or "gitignore", where it is actually correct)
+  - regex: "(?P<letter>[a-fh-rt-z])ign\\b"
     replace: "{{letter}}ing"

@@ -15,7 +15,7 @@ alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
 
 # `pass` config set here to be accessible in the Terminal as well as Alfred
 export PASSWORD_STORE_CLIP_TIME=60
-export PASSWORD_STORE_GENERATED_LENGTH=32
+export PASSWORD_STORE_GENERATED_LENGTH=30 # some services break with longer passwords m(
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
 alias pass="env NO_PLUGINS=true pass" # not using `nvim` with its plugins with `pass` for security
 
