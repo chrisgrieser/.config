@@ -4,6 +4,16 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+/** @param {string} str */
+function camelCaseMatch(str) {
+	const subwords = str.replace(/[-_./]/g, " ");
+	const fullword = str.replace(/[-_./]/g, "");
+	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
@@ -29,11 +39,14 @@ function run() {
 			const name = pathParts.pop() || "ERROR";
 			const group = pathParts.join("/");
 			const path = `${passwordStore}/${gpgFile}`;
+			const matcher = camelCaseMatch(name) + camelCaseMatch(group);
+
 			return {
 				title: name,
 				subtitle: group,
 				arg: id,
 				uid: id,
+				match: matcher,
 				mods: {
 					alt: { arg: path }, // reveal in finder directly uses path
 					shift: {
