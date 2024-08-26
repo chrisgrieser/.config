@@ -21,7 +21,7 @@ return {
 				["rip-substitute"] = false,
 
 				-- INFO `pass` passwords editing filetype is plaintext, also this is
-				-- the filetype of critical files (e.g. zsh files with API keys)
+				-- the filetype of critical files
 				text = false,
 			},
 			silent = true,

@@ -4,6 +4,7 @@ alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/o
 alias cmd='command'
 alias spotify="spotify_player playback"
 alias j="just"
+alias pw="pass"
 
 # DEFAULTS
 alias mv='mv -vi'
