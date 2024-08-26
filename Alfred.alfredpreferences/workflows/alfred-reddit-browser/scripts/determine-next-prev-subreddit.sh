@@ -29,7 +29,7 @@ elif [[ "$direction" == "prev" ]]; then
 	fi
 fi
 
-# in case user has only one subreddit & hackernews enabled
+# on last or first subreddit -> next & current are the same -> go to hackernews
 if [[ "$next_subreddit" == "$cur_subreddit" && "$add_hackernews" == "1" ]]; then
 	next_subreddit="hackernews"
 fi

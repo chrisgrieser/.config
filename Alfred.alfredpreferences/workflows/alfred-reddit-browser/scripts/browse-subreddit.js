@@ -66,6 +66,7 @@ function run() {
 		.trim()
 		.replace(/^\/?r\//gm, "") // can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645// can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
 		.split("\n")
+	if ($.getenv("add_hackernews") === "1") subreddits.push("hackernews");
 	const cachePath = $.getenv("alfred_workflow_cache");
 
 	// determine subreddit
