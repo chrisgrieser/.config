@@ -3,6 +3,7 @@
 	{ "title": "🚀 Get Started", "arg": "chrome://settings/getStarted/" },
 	{ "title": "🎨 Appearance", "arg": "chrome://settings/appearance/" },
 	{ "title": "📝 Autofill", "arg": "chrome://settings/autofill" },
+	{ "title": "🔑 Passwords", "arg": "chrome://password-manager/passwords" },
 	{ "title": "🔒 Privacy", "arg": "chrome://settings/privacy" },
 	{ "title": "🔍 Search", "arg": "chrome://settings/search/" },
 	{ "title": "⚙️ Extensions", "arg": "chrome://extensions/" },
