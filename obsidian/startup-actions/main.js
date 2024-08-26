@@ -42,6 +42,14 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 			{ id: "community-plugins", name: "Community plugins" },
 		];
 
+		const corePluginsWithSettings = [];
+		const corePlugins = this.app.internalPlugins.plugins;
+		for (const [id, plugin] of Object.entries(corePlugins)) {
+			if (!plugin.enabled || !plugin.instance.options) continue;
+			corePluginsWithSettings.push({ id: id, name: plugin.instance.name });
+		}
+		corePluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
+
 		const communityPluginsWithSettings = [];
 		const enabledCommunityPlugins = this.app.plugins.plugins;
 		for (const [id, plugin] of Object.entries(enabledCommunityPlugins)) {
@@ -50,13 +58,6 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 		}
 		communityPluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
 
-		const corePluginsWithSettings = [];
-		const corePlugins = this.app.internalPlugins.plugins;
-		for (const [id, plugin] of Object.entries(corePlugins)) {
-			if (!plugin.enabled || !plugin.instance.options) continue;
-			corePluginsWithSettings.push({ id: id, name: plugin.instance.name });
-		}
-		corePluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
 		return [...settingsTabs, ...corePluginsWithSettings, ...communityPluginsWithSettings];
 	}
 
