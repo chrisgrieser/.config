@@ -6,11 +6,16 @@ export ZDOTDIR="$HOME/.config/zsh" # location of the zsh configuration
 export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 [[ -f "$DATA_DIR/private dotfiles/api-keys.txt" ]] && source "$DATA_DIR/private dotfiles/api-keys.txt"
 
+export EDITOR=nvim # not using `nvim` with its plugins with `pass` for security
+
+# pandoc does not have an environment var for this, so using `--data-dir` alias
+alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # `pass` config set here to be accessible in the Terminal as well as Alfred
 export PASSWORD_STORE_CLIP_TIME=60
 export PASSWORD_STORE_GENERATED_LENGTH=32
 export PASSWORD_STORE_CHARACTER_SET_NO_SYMBOLS="[:alnum:]"
-export EDITOR=nvim
+alias pass="env EDITOR=vim pass" # not using `nvim` with its plugins with `pass` for security
 
-# pandoc does not have an environment var for this, so using `--data-dir` alias
-alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
