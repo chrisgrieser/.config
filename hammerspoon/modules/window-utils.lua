@@ -208,7 +208,7 @@ local function controlSpaceAction()
 
 	local baseSize = M.pseudoMax
 	if u.isFront { "Finder", "Script Editor", "Reminders" } then baseSize = M.middleHalf end
-	if u.isFront("ClipBook") then baseSize = M.center end
+	if u.isFront { "ClipBook", "TextEdit" } then baseSize = M.center end
 
 	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 	M.moveResize(currentWin, newSize)

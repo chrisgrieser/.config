@@ -6,7 +6,7 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore format: too long
-const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith, RUNTIME } = api;
+const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith, RUNTIME, imapkey } = api;
 const banner = api.Front.showBanner;
 
 /** @param {string} text */
@@ -78,7 +78,7 @@ map("h", "S"); // history back/forward
 map("l", "D");
 map("H", "[["); // next/prev Page
 map("L", "]]");
-map("z", ";fs") // change focussed element
+map("z", ";fs"); // change focussed element
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
@@ -183,6 +183,8 @@ unmap("?", /(github|reddit|youtube).com|devdocs.io/);
 
 // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
 mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io|reddit\.com/ });
+// biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
+imapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io|reddit\.com/ });
 
 mapkey(
 	"gu",
