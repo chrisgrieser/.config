@@ -10,6 +10,20 @@ function writeToFile(filepath, text) {
 	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
 }
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -17,7 +31,8 @@ function writeToFile(filepath, text) {
 function run(argv) {
 	const selection = argv[0]?.trim();
 	if (!selection) return "ERROR: No selection.";
-	const dataCache = $.getenv("alfre");
+	ensureCacheFolderExists();
+	const dataCache = $.getenv("alfred_workflow_cache") + "/request-data.json";
 
 	const apiKey =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_apikey").js ||
