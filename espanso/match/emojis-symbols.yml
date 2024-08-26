@@ -18,9 +18,10 @@ matches:
   - { trigger: "!flip", replace: (╯°□°）╯︵ ┻━┻, label: (╯°□°）╯︵ ┻━┻ tableflip }
   #─────────────────────────────────────────────────────────────────────────
   # others
-  - { trigger: "->>", replace: ➡️ } # is actually an emoji outside of nvim
+  - { trigger: "->>", replace: ➡️ } # emoji arrow (outside nvim becomes emoji)
   - { trigger: "!dot", replace: "·", label: middle dot · }
   - { trigger: "->", replace: →, word: true } # unicode arrow
+  - { trigger: "!tm", replace: ™, word: true }
   #─────────────────────────────────────────────────────────────────────────────
   # macOS symbols
   - { triggers: ["!ctrl", "!control"], replace: ⌃ }

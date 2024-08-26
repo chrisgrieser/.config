@@ -8,7 +8,7 @@ local function cmpconfig()
 		},
 		performance = {
 			-- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
-			debounce = 30,
+			debounce = 0,
 			throttle = 15,
 			fetching_timeout = 300,
 			confirm_resolve_timeout = 40,
