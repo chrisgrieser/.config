@@ -13,7 +13,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - { key_code: "6", modifiers: [shift] }
         to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.German$ }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
       # backtick `
@@ -24,7 +24,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - key_code: grave_accent_and_tilde
         to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.German$ }
         conditions:
           - { type: input_source_if, input_sources: [{ language: ^de$ }] }
       # tilde ~
@@ -35,7 +35,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - { key_code: grave_accent_and_tilde, modifiers: [shift] }
         to_after_key_up:
-          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.ABC-QWERTZ$ }
+            - select_input_source: { input_source_id: ^com\.apple\.keylayout\.German$ }
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
           # INFO for some reason, `~` is the only dead key wezterm can manage

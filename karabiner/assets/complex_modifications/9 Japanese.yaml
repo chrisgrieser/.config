@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: Japanese
+rules:
+  - description: Toggle between German and Japanese layout
+    manipulators:
+      #─────────────────────────────────────────────────────────────────────────
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^ja$] }
+        to:
+          - select_input_source: { input_source_id: ^com\.apple\.keylayout\.German$ }
+          - set_notification_message: { id: layout-notice, text: "" }
+
+      - type: basic
+        from: { key_code: spacebar, modifiers: { mandatory: [option] } }
+        conditions:
+          - { type: input_source_if, input_sources: [language: ^de$] }
+        to:
+          - set_notification_message: { id: layout-notice, text: "🇯🇵 Japanese" }
+          - select_input_source:
+              input_mode_id: com.apple.inputmethod.Japanese
+              # see input sources: Karabiner EventsViewer -> Variables
+              input_source_id: com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese

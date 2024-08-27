@@ -288,6 +288,9 @@
 			"properties": {
 				"input_source_id": {
 					"$ref": "#/definitions/InputSourceID"
+				},
+				"input_mode_id": {
+					"type": "string"
 				}
 			},
 			"required": [],
@@ -596,7 +599,7 @@
 		},
 		"Language": {
 			"type": "string",
-			"enum": ["^de$"],
+			"enum": ["^de$", "^en$", "^ja$"],
 			"title": "Language"
 		},
 		"Mandatory": {
@@ -621,7 +624,6 @@
 		},
 		"InputSourceID": {
 			"type": "string",
-			"enum": ["^com\\.apple\\.keylayout\\.US$", "^com\\.apple\\.keylayout\\.ABC-QWERTZ$"],
 			"title": "InputSourceID"
 		},
 		"ID": {
