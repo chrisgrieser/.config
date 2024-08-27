@@ -6,7 +6,10 @@ cur_subreddit=$(cat "$alfred_workflow_cache/current_subreddit")
 list_of_subreddits=$(echo "$subreddits" |
 	sed -E 's|^/?r/||') # can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
 
+[[ "$add_hackernews" == "1" ]] && list_of_subreddits="$list_of_subreddits\nhackernews"
+
 #───────────────────────────────────────────────────────────────────────────────
+
 
 if [[ "$direction" == "next" ]]; then
 	next_subreddit=$(echo "$list_of_subreddits" |
@@ -14,7 +17,7 @@ if [[ "$direction" == "next" ]]; then
 		tail -n1)
 
 	# if already last subreddit, go back to first subreddit
-	if [[ "$next_subreddit" == "$cur_subreddit" && "$add_hackernews" == "0" ]]; then
+	if [[ "$next_subreddit" == "$cur_subreddit" ]]; then
 		next_subreddit=$(echo "$list_of_subreddits" | head -n1)
 	fi
 
@@ -24,14 +27,9 @@ elif [[ "$direction" == "prev" ]]; then
 		head -n1)
 
 	# if already first subreddit, go back to last subreddit
-	if [[ "$next_subreddit" == "$cur_subreddit" && "$add_hackernews" == "0" ]]; then
+	if [[ "$next_subreddit" == "$cur_subreddit" ]]; then
 		next_subreddit=$(echo "$list_of_subreddits" | tail -n1)
 	fi
-fi
-
-# on last or first subreddit -> next & current are the same -> go to hackernews
-if [[ "$next_subreddit" == "$cur_subreddit" && "$add_hackernews" == "1" ]]; then
-	next_subreddit="hackernews"
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
