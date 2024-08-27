@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4899D6A4-F955-432A-9827-067B8770B78D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7FEF0F5A-0E99-4D48-9901-40A455892790</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<array>
 			<dict>
@@ -42,6 +55,19 @@
 				<string></string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+		</array>
+		<key>7FEF0F5A-0E99-4D48-9901-40A455892790</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>193EC95F-B8DE-4F8D-8448-A7BF242687ED</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>8343AFB0-A436-46E5-BA05-959A1BAE7392</key>
@@ -462,6 +488,68 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>:reddit-reload</string>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_name}</string>
+				<key>text</key>
+				<string>Force reload all caches</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>4899D6A4-F955-432A-9827-067B8770B78D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{const:alfred_workflow_cache}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>193EC95F-B8DE-4F8D-8448-A7BF242687ED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>🔁 Cache reloaded</string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7FEF0F5A-0E99-4D48-9901-40A455892790</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -476,11 +564,11 @@
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open external URL (if there is one).
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. Works with [Alfred Extra
 	  Pane](https://github.com/mr-pennyworth/alfred-extra-pane).
+- `:reddit-reload`: Force reload the cache. Only needed for debugging purposes.
 
 
 ## Info
 - No reddit account is needed. 
-- Due to smart caching, this workflow should not hit API rate limits under normal usage.
 
 ---
 
@@ -497,6 +585,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>220</real>
 			<key>ypos</key>
 			<real>310</real>
+		</dict>
+		<key>193EC95F-B8DE-4F8D-8448-A7BF242687ED</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete custom workflow cache</string>
+			<key>xpos</key>
+			<real>1100</real>
+			<key>ypos</key>
+			<real>680</real>
 		</dict>
 		<key>26F00E99-5D45-4FCE-AF6F-EA4A468CDBB9</key>
 		<dict>
@@ -516,6 +615,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>4899D6A4-F955-432A-9827-067B8770B78D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>refresh cache</string>
+			<key>xpos</key>
+			<real>800</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
 		<key>5852A551-EFDF-47BB-A256-13A0D3975AA5</key>
 		<dict>
 			<key>colorindex</key>
@@ -533,6 +643,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>470</real>
 			<key>ypos</key>
 			<real>450</real>
+		</dict>
+		<key>7FEF0F5A-0E99-4D48-9901-40A455892790</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>950</real>
+			<key>ypos</key>
+			<real>680</real>
 		</dict>
 		<key>8343AFB0-A436-46E5-BA05-959A1BAE7392</key>
 		<dict>
@@ -914,7 +1033,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.5</string>
+	<string>1.6.6</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
