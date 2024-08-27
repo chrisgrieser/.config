@@ -131,6 +131,7 @@ function run() {
 			if (!shallowOutput) {
 				const parent = parts.join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁").replace(/\/Users\/\w+/, "~");
+				subtitle = "▸ " + subtitle
 			}
 
 			const ext = name.split(".").pop() || "";
@@ -139,7 +140,7 @@ function run() {
 
 			return {
 				title: prefix + name,
-				subtitle: "▸ " + subtitle,
+				subtitle: subtitle,
 				arg: absPath,
 				quicklookurl: absPath,
 				type: "file:skipcheck",
