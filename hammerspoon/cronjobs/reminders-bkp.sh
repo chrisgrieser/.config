@@ -2,7 +2,7 @@
 
 # CONFIG
 list_name="Tasks"
-max_number_of_bkps=60
+max_number_of_bkps=100
 #───────────────────────────────────────────────────────────────────────────────
 
 isodate=$(date +"%Y-%m-%d")

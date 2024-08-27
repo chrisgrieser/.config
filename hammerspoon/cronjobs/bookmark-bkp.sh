@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-max_number_of_bkps=30
+max_number_of_bkps=100
 browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
 #───────────────────────────────────────────────────────────────────────────────
 
