@@ -11,7 +11,7 @@ export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-xcode-select --install # install core CLIs like git for homebrew
+xcode-select --install # install core CLIs like `git` for homebrew
 
 # Install Essential Apps
 brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-elements
@@ -59,6 +59,3 @@ ln -sf "$HOME/.config/zsh/.zshenv" ~
 
 # shellcheck disable=1091
 source "$HOME/.config/zsh/.zshrc"
-
-# load base configs
-zsh "$HOME/.config/hammerspoon/dock-switching/dock-switcher.sh" --load work
