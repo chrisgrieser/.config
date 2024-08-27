@@ -1,5 +1,5 @@
 # point config paths to `.config`
-export RIPGREP_CONFIG_PATH="$HOME/.config/rg/config"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # macOS currently ships less v.581, which lacks the ability to read lesskey
@@ -31,7 +31,7 @@ export CLICOLOR=1 # makes `ls` use color by default
 
 # shellcheck disable=2016
 # using `rg` ensures that initially, the list of files is sorted by recently modified files.
-export FZF_DEFAULT_COMMAND='rg --no-config --files --sortr=modified --ignore-file="$HOME/.config/rg/ignore"'
+export FZF_DEFAULT_COMMAND='rg --no-config --files --sortr=modified --ignore-file="$HOME/.config/ripgrep/ignore"'
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
@@ -69,13 +69,13 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 # https://nodejs.org/api/repl.html#repl_environment_variable_options
 export NODE_REPL_HISTORY=""
 
-# instead of writing npm config to `.npmrc`, can also be defined as shell
+# Instead of writing npm config to `.npmrc`, can also be set via shell
 # environment variables. Has to be lower-case though. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 export npm_config_cache="$HOME/.cache/npm" # do not crowd `$HOME`
 
-# FIX for hanging at "sill: idealTree build"
+# INFO fix for hanging at "sill: idealTree build"
 # temporary: export npm_config_strict_ssl=false
 # permanent: brew reinstall openssl@3 ca-certificates
 

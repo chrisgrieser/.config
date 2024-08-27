@@ -77,7 +77,7 @@ local function telescopeConfig()
 				"--smart-case",
 				"--follow",
 				"--trim",
-				("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
+				("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
@@ -98,7 +98,7 @@ local function telescopeConfig()
 					"--follow",
 					"--files",
 					"--sortr=modified",
-					("--ignore-file=" .. vim.fs.normalize("~/.config/rg/ignore")),
+					("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 				},
 
 				prompt_prefix = "󰝰 ",

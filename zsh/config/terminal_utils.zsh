@@ -60,7 +60,7 @@ compdef _o o
 # `fd` replacement using just `rg`
 function fd {
 	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
-	rg --no-config --files --binary --ignore-file="$HOME/.config/rg/ignore" |
+	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
 		rg --color=always "$1" | sed -Ee "$color"
 }
 
@@ -71,7 +71,7 @@ function s {
 	local selected file line
 	selected=$(
 		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --smart-case --ignore-file="$HOME/.config/rg/ignore" |
+			--no-config --smart-case --ignore-file="$HOME/.config/ripgrep/ignore" |
 			fzf --ansi --select-1 --delimiter=":" \
 				--preview="bat {1} --no-config --color=always --highlight-line={2} --line-range={2}: " \
 				--preview-window="60%,top,border-down" \
