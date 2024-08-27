@@ -364,7 +364,7 @@ function toggleJsLineComment() {
 	const lineText = editor.getLine(cursor.line);
 
 	const [_, indent, hasComment, textWithoutComment] = lineText.match(/^(\s*)(\/\/ )?(.*)/) || [];
-	const updatedText = indent + (hasComment ? " // " : "") + textWithoutComment;
+	const updatedText = indent + (hasComment ? "" : "// ") + textWithoutComment;
 	cursor.ch += hasComment ? -3 : 3;
 
 	editor.setLine(cursor.line, updatedText);
@@ -381,14 +381,12 @@ function appendJsComment() {
 }
 
 function consoleLogFromWordUnderCursor() {
-	// const cursor = editor.getCursor();
-	// const cursorWordRange = editor.wordAt(cursor);
-	// const cursorWord = editor.getRange(cursorWordRange.from, cursorWordRange.to);
-	// const indent = editor.getLine(cursor.line).match(/^\s*/)?.[0] || "";
-	// const logLine = indent + `console.log(${cursorWord});`;
-	//
-	// editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
-	// editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+	const cursor = editor.getCursor();
+	const cursorWordRange = editor.wordAt(cursor);
+	const cursorWord = editor.getRange(cursorWordRange.from, cursorWordRange.to);
+	const indent = editor.getLine(cursor.line).match(/^\s*/)?.[0] || "";
+	const logLine = indent + `console.log(${cursorWord});`;
 
-	require("obsidian")
+	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
+	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
 }
