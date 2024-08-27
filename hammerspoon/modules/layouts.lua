@@ -47,11 +47,13 @@ local function isWorkweek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
-M.menubarItem = hs
-	.menubar
-	.new(true, "moveAllWinsToProjectorScreen")
-	:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-	:setClickCallback(wu.moveAllWinsProjectorAndDarkenBuiltinDisplay)
+if not env.isAtOffice then
+	M.menubarItem = hs
+		.menubar
+		.new(true, "moveAllWinsToProjectorScreen")
+		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
+		:setClickCallback(wu.moveAllWinsProjectorAndDarkenBuiltinDisplay)
+end
 
 --------------------------------------------------------------------------------
 -- LAYOUTS
