@@ -69,7 +69,6 @@ rules:
           - { key_code: left_arrow, modifiers: [command, option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [md\.obsidian] }
-      # INFO Fallback: keep button4 (= back button in browsers)
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
@@ -97,7 +96,7 @@ rules:
           - key_code: e
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
-      # Fallback behavior: Close Window
+      # Fallback behavior: Close window
       - type: basic
         from: { pointing_button: button5 }
         to_if_alone:
@@ -121,6 +120,8 @@ rules:
             - pointing_button: button2
         to:
           - { key_code: d, modifiers: [control, command] }
+        parameters:
+          simultaneous_threshold_milliseconds: 500
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }

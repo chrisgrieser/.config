@@ -61,8 +61,6 @@ function run() {
 		const content = title + "\n" + body;
 
 		const [url] = content.match(urlRegex) || [];
-		let urlSubtitle = url ? "⌘: Open URL" : "⌘: ⛔ No URL";
-		if (url && !isCompleted) urlSubtitle += " and mark as completed";
 		let emoji = isCompleted ? "☑️ " : "";
 		if (!dueDate) emoji += "[no due date] "; // indicator for missing due date
 
@@ -78,25 +76,24 @@ function run() {
 				body: body,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				mode: isCompleted ? "uncomplete" : "complete",
-				isCompleted: isCompleted.toString(), // only used for cmd action
+				cmdMode: url ? "open-url" : "copy", // only for cmd
+				isCompleted: isCompleted.toString(), // only for cmd
 				showCompleted: showCompleted.toString(),
 				remindersLeftNow: true.toString(),
 				remindersLeftLater: remindersFiltered.length - 1, // for deciding whether to loop back
 			},
-			text: { copy: content }, // copy via cmd+c
 			mods: {
+				// open URL/copy
 				cmd: {
-					// open URL
-					arg: url,
-					subtitle: urlSubtitle,
-					valid: Boolean(url),
+					arg: url || content,
+					subtitle: (url ? "⌘: Open URL" : "⌘: Copy") + " and mark as completed",
 				},
+				// edit content
 				alt: {
-					// edit content
 					arg: content,
 				},
+				// toggle completed
 				ctrl: {
-					// toggle completed
 					variables: {
 						showCompleted: (!showCompleted).toString(),
 					},
