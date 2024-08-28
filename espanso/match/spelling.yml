@@ -2,6 +2,8 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - { regex: "n[#Ä]t ", replace: "n't " }
+  # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "gitignore", where it is actually correct)
+  - { regex: "(?P<letter>[a-fh-rt-z])ign\\b", replace: "{{letter}}ing" }
   - { trigger: " ot ", replace: " to " }
   - { trigger: "#d ", replace: "'d " }
   - { trigger: "#s ", replace: "'s " }
