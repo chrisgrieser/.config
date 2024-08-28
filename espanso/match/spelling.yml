@@ -114,3 +114,4 @@ matches:
   - { trigger: workflwo, replace: workflow, propagate_case: true }
   - { trigger: dispaly, replace: display, propagate_case: true }
   - { trigger: mdoe, replace: mode, propagate_case: true }
+  - { trigger: abotu, replace: about, propagate_case: true }
