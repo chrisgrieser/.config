@@ -217,12 +217,15 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 
-keymap(
-	{ "n", "x", "s" },
-	"<CR>",
-	function() require("funcs.alt-alt").gotoAltBuffer() end,
-	{ desc = "󰽙 Alt Buffer" }
-)
+if not vim.env.NO_PLUGINS then
+	keymap(
+		{ "n", "x", "s" },
+		"<CR>",
+		function() require("funcs.alt-alt").gotoAltBuffer() end,
+		{ desc = "󰽙 Alt Buffer" }
+	)
+end
+
 -- restore the default behavior of `<CR>`, which is overridden by my mapping
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",

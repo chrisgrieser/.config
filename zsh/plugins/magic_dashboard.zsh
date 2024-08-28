@@ -1,6 +1,14 @@
 #!/usr/bin/env zsh
 # shellcheck disable=2086 # simpler for various pseudo-options
 
+# CONFIG
+max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-6}
+max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}
+max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-5}
+disabled_below_height=${MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT:-15}
+
+#───────────────────────────────────────────────────────────────────────────────
+
 # draws a separator line with terminal width
 function _separator {
 	local sep_char="─" # ─ ═
@@ -52,7 +60,6 @@ function _list_files_here {
 	if [[ ! -x "$(command -v eza)" ]]; then print "\033[0;33mMagic Dashboard: \`eza\` not installed.\033[0m" && return 1; fi
 
 	local eza_output
-	local max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-6}
 	eza_output=$(
 		eza --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store|Icon?|.localized" \
@@ -75,7 +82,6 @@ function _gitstatus {
 	git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &> /dev/null
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-		local max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}
 
 		local unstaged staged
 		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d')
@@ -120,7 +126,6 @@ function _magic_dashboard {
 
 	# show dashboard
 	if git rev-parse --is-inside-work-tree &> /dev/null; then
-		local max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-5}
 		_gitlog --max-count="$max_gitlog_lines"
 		_separator
 		_gitstatus
@@ -139,7 +144,6 @@ function _magic_enter {
 	[[ -z "$BUFFER" && "$CONTEXT" == "start" ]] || return 0
 
 	# GUARD only when in terminal with sufficient height
-	local disabled_below_height=${MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT:-15}
 	[[ $LINES -gt $disabled_below_height ]] || return 0
 
 	# shellcheck disable=2012

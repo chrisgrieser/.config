@@ -40,6 +40,7 @@ safeRequire("config.options") -- before lazy, so opts still work on plugin insta
 -- e.g. when editing a password with `pass`.
 if vim.env.NO_PLUGINS then
 	vim.keymap.set("n", "ss", "VP")
+	vim.keymap.set("n", "<CR>", "ZZ")
 else
 	safeRequire("config.lazy")
 end
