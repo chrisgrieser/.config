@@ -5,6 +5,7 @@ alias cmd='command'
 alias spotify="spotify_player playback"
 alias j="just"
 alias pw="pass"
+alias pwcd='cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}"'
 
 # DEFAULTS
 alias mv='mv -vi'
@@ -16,8 +17,10 @@ alias curl='curl --progress-bar'
 alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias zip='zip --recurse-paths --symlinks'
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # EZA
-alias l='eza --all --long --time-style=relative --no-user --total-size \
+alias e='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest'
 alias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | less'
 
@@ -30,6 +33,8 @@ function bat { # dark-mode aware
 	theme="$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "Dracula" || echo "Monokai Extended Light")"
 	command bat --theme="$theme" "$@"
 }
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # UTILS
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory

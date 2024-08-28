@@ -1,7 +1,6 @@
 CONFIG_FILES=(
-	plugin_cli_settings
-
 	keybindings_and_vim_mode # must be loaded before starship, so vi-prompt is set correctly
+	plugin_cli_settings
 	load_plugins
 
 	options
