@@ -1,11 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
-
-# disable in PhD vault, since not doing any writing there anyway, but it
-# results in some false positives there
-filter_title: "phd-data-analysis - Obsidian"
+# disable in Obsidian, since it conflicts too often with various things from vim mode
+filter_class: md.obsidian
 
 extra_excludes:
-  - "../match/regex-spell-fixing.yml"
+  - "../match/capital-misspellings.yml"

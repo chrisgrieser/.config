@@ -2,11 +2,19 @@
 #───────────────────────────────────────────────────────────────────────────────
 # DOCS https://espanso.org/docs/matches/regex-triggers
 
+# INFO This file is completely ignored in Obsidian and Neovide, due
+# to interference with their vim motions. In Obsidian, we use the
+# auto-correct-capitals plugin,[^1] which deals with that.
+
+# [^1]: https://github.com/Ummler/obsidian-auto-correct-capitals
+
+#───────────────────────────────────────────────────────────────────────────────
+
 matches:
   # INFO ignoring:
+  # - "Z", as 2nd letter to not trigger ZZ in WezTerm
   # - "s" as 3rd letter to not trigger, e.g. "FRs"
-  # - "J", "K", "V", "Z", or "M" as 2nd letter to not trigger stuff in Obsidian Vim Mode
-  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-ILN-UW-Y])(?P<three>[a-rt-z])"
+  - regex: "\\b(?P<one>[A-Z])(?P<two>[A--Y])(?P<three>[a-rt-z])"
     replace: "{{CapitalCased}}"
     vars:
       - name: CapitalCased
@@ -15,8 +23,3 @@ matches:
           cmd: |
             echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE
           shell: sh
-
-  # "…ign" -> "…ing"
-  # (but not for words like "sign" or "ignore", or "gitignore", where it is actually correct)
-  - regex: "(?P<letter>[a-fh-rt-z])ign\\b"
-    replace: "{{letter}}ing"
