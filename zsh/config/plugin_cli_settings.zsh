@@ -62,12 +62,6 @@ export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
 
-# do not accept autosuggestion when using vim's `A` or `l`
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
-	forward-char
-	end-of-line
-)
-
 #───────────────────────────────────────────────────────────────────────────────
 # NPM
 # Don't clutter home directory with useless `.node_repl_history`

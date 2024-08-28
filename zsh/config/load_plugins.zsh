@@ -2,7 +2,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # load various completions of clis installed via homebrew
-# needs to be run *before* compinit
+# needs to be run *before* compinit/zsh-autocomplete
 export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
 
 # also loads compinit stuff, therefore has to be loaded before most plugins
@@ -16,7 +16,10 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# do not accept autosuggestion when using vim's `A`
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 # must be loaded *after* zsh-syntax-highlighting
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
