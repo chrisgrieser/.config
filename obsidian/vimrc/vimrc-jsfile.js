@@ -135,6 +135,11 @@ function openDynamicHighlightsSettings() {
 
 /** @param {"next"|"prev"} which */
 function gotoHeading(which) {
+	// ignoring H1, since they could also be comments in code blocks, and are not
+	// used more than once in Markdown documents anyway (meaning you can use just
+	// `gg` to get to them if needed).
+	const headingPattern = /(^##+ .*)/;
+
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
 	let currentLnum = editor.getCursor().line;
@@ -144,11 +149,11 @@ function gotoHeading(which) {
 	const linesBelow = allLines.slice(currentLnum + 1);
 	const linesAbove = allLines.slice(0, currentLnum);
 
-	let headingLnum = linesBelow.findIndex((line) => line.match(/^#+ /));
+	let headingLnum = linesBelow.findIndex((line) => line.match(headingPattern));
 	if (headingLnum > -1) headingLnum += currentLnum + 1; // account for previous slicing
 
 	// wrap around if next heading not found
-	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(/^#+ /));
+	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(headingPattern));
 
 	if (headingLnum === -1) {
 		new Notice("No heading found.");
