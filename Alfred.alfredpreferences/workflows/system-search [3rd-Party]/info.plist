@@ -139,7 +139,8 @@ I am indebted to comments on [this Github post](https://gist.github.com/rmcdongi
 **Version 2.5** 13/03/2024: re-written to use a script filter in order to make use of Alfred 5.5 caching. Alfred now also learns from used items to bring them to the top of the list. Updated ReadMe. `Transfer &amp; Reset` removed as not accessible. Added access to Software Update panel and Keyboard Shortcuts.  
 **Version 2.51** 25/03/2024: removed caching as not required.  
 **Version 2.52** 26/06/2024: added access to `General → AppleCare &amp; Warranty` pane (credit to @FireFingers21).  
-**Version 2.6**  28/08/2024: in response to feature request added access to certain menu bar settings (i.e., search for `menu bar` in workflow will open Control Centre in System Settings).</string>
+**Version 2.6**  23/08/2024: in response to feature request added access to certain menu bar settings (i.e., search for `menu bar` in workflow will open Control Centre in System Settings).  
+**Version 2.7** 23/08/2024: added access to Keyboard → Function Keys, Keyboard → Modifier Keys, Keyboard → Text Replacements, Privacy &amp; Security → Bluetooth and Privacy &amp; Security → Files and Folders.</string>
 	<key>uidata</key>
 	<dict>
 		<key>73D483F9-5F9F-4055-A2BD-3768B038E0B4</key>
@@ -184,7 +185,7 @@ I am indebted to comments on [this Github post](https://gist.github.com/rmcdongi
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.6</string>
+	<string>2.7</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>

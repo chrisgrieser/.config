@@ -302,14 +302,34 @@ cat <<EOF
       "uid": "Keyboard",
     },
     {
-      "title": "Keyboard → Shortcuts",
-      "subtitle": "Open the 'Keyboard → Shortcuts' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.keyboard?Shortcuts",
-	  "autocomplete": "Keyboard → Shortcuts",
+      "title": "Keyboard → Function Keys",
+      "subtitle": "Open the 'Keyboard → Function Keys' pane",
+      "arg": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?FunctionKeys",
+	  "autocomplete": "Keyboard → Function Keys",
 	  "icon": {
     		"path": "./Images/Keyboard.png"
 	},
-      "uid": "Keyboard → Shortcuts",
+      "uid": "Keyboard → Function Keys",
+    },
+    {
+      "title": "Keyboard → Modifier Keys",
+      "subtitle": "Open the 'Keyboard → Modifier Keys' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.keyboard?Shortcuts",
+	  "autocomplete": "Keyboard → Modifier Keys",
+	  "icon": {
+    		"path": "./Images/Keyboard.png"
+	},
+      "uid": "Keyboard → Modifier Keys",
+    },
+        {
+      "title": "Keyboard → Text Replacements",
+      "subtitle": "Open the 'Keyboard → Text Replacements' pane",
+      "arg": "x-apple.systempreferences:com.apple.Keyboard-Settings.extension?TextReplacements",
+	  "autocomplete": "Keyboard → Text Replacements",
+	  "icon": {
+    		"path": "./Images/Keyboard.png"
+	},
+      "uid": "Keyboard → Text Replacements",
     },
     {
       "title": "Languages & Region",
@@ -442,6 +462,16 @@ cat <<EOF
       "uid": "Privacy & Security → Automation",
     },
     {
+      "title": "Privacy & Security → Bluetooth",
+      "subtitle": "Open the 'Privacy & Security → Bluetooth' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Bluetooth",
+	  "autocomplete": "Privacy & Security → Bluetooth",
+	  "icon": {
+    		"path": "./Images/Privacy.png"
+    },
+      "uid": "Privacy & Security → Bluetooth",
+	},
+    {
       "title": "Privacy & Security → Calendars",
       "subtitle": "Open the 'Privacy & Security → Calendars' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_Calendars",
@@ -470,6 +500,16 @@ cat <<EOF
     		"path": "./Images/Privacy.png"
 	},
       "uid": "Privacy & Security → Contacts",
+    },
+    {
+      "title": "Privacy & Security → Files and Folders",
+      "subtitle": "Open the 'Privacy & Security → Files and Folders' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.security?Privacy_FilesAndFolders",
+	  "autocomplete": "Privacy & Security → Files and Folders",
+	  "icon": {
+    		"path": "./Images/Privacy.png"
+	},
+      "uid": "Privacy & Security → Files and Folders",
     },
     {
       "title": "Privacy & Security → FileVault",
