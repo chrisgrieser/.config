@@ -120,7 +120,6 @@ rules:
             - pointing_button: button1
             - pointing_button: button2
         to:
-          - pointing_button: button1 # in case it's not the front window
           - { key_code: d, modifiers: [control, command] }
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
