@@ -74,7 +74,7 @@ sketchybar \
 	--set "Stats,CombinedModules" padding_right=-20 drawing=true \
 	\
 	--add item sync-indicator "$second_row" \
-	--set sync-indicator update_freq=300 icon="" \
+	--set sync-indicator update_freq=180 icon="󰓦" \
 	script="$plugin_dir/git-sync-bar-icon.sh" \
 	--subscribe sync-indicator system_woke \
 	--add event repo-files-update \
