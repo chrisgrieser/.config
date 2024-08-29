@@ -1,4 +1,6 @@
 {
+  "BTTPresetCreatorNotes" : "",
+  "BTTPresetInfoURL" : "",
   "BTTPresetName" : "Base",
   "BTTPresetColor" : "0.000000, 83.772828, 146.595663, 255.000000",
   "BTTGeneralSettings" : {
@@ -185,7 +187,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "13FD1059-23B9-480D-85DB-B1014672CB2B",
+  "BTTPresetUUID" : "1AE3FF08-B789-4993-A8F5-09B3CFBE8E73",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.brave.Browser.app.hjlhbeffadgkonmpnblkfmhckmocohah",
@@ -403,10 +405,10 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724392687.1616011,
+          "BTTLastUpdatedAt" : 1724970969.8219409,
           "BTTTriggerType" : 173,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "🖱️ Middle Click",
+          "BTTTriggerTypeDescription" : "🖱️ middle click",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "AEDEEBBC-CAA7-4345-98E1-7BABDA6F3FF7",
           "BTTPredefinedActionType" : 366,
@@ -429,9 +431,9 @@
               "BTTOrder" : 41
             }
           ],
-          "BTTGestureNotes" : "🖱️ Middle Click",
+          "BTTGestureNotes" : "🖱️ middle click",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🖱️ Middle Click",
+            "BTTCheatSheetActionLabel" : "🖱️ middle click",
             "BTTCheatSheetTriggerLabel" : ""
           }
         },
@@ -480,10 +482,10 @@
       "BTTTriggers" : [
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724392705.6909552,
+          "BTTLastUpdatedAt" : 1724971018.788693,
           "BTTTriggerType" : 173,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "🖱️ Middle Click",
+          "BTTTriggerTypeDescription" : "🖱️ middle click",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "D81766B6-74BD-4053-9945-624FBD104678",
           "BTTPredefinedActionType" : 366,
@@ -506,9 +508,9 @@
               "BTTOrder" : 41
             }
           ],
-          "BTTGestureNotes" : "🖱️ Middle Click",
+          "BTTGestureNotes" : "🖱️ middle click",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🖱️ Middle Click",
+            "BTTCheatSheetActionLabel" : "🖱️ middle click",
             "BTTCheatSheetTriggerLabel" : ""
           }
         }
@@ -557,10 +559,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724392752.3336248,
+          "BTTLastUpdatedAt" : 1724971007.7756929,
           "BTTTriggerType" : 173,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "🖱️ Middle Click",
+          "BTTTriggerTypeDescription" : "🖱️ middle click",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "5FC2C374-2B84-4563-A556-8570462A39C8",
           "BTTPredefinedActionType" : 366,
@@ -583,9 +585,9 @@
               "BTTOrder" : 41
             }
           ],
-          "BTTGestureNotes" : "🖱️ Middle Click",
+          "BTTGestureNotes" : "🖱️ middle click",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🖱️ Middle Click",
+            "BTTCheatSheetActionLabel" : "🖱️ middle click",
             "BTTCheatSheetTriggerLabel" : ""
           }
         }
@@ -716,7 +718,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724418130.8919311,
+          "BTTLastUpdatedAt" : 1724418152.337075,
           "BTTTriggerType" : 0,
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
           "BTTUUID" : "3DF0BA0B-1EEA-4FD3-8E39-2ED505386710",
@@ -797,10 +799,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724418033.7295752,
+          "BTTLastUpdatedAt" : 1724970946.6929688,
           "BTTTriggerType" : 116,
           "BTTTriggerTypeDescriptionReadOnly" : "Pinch Out",
-          "BTTTriggerTypeDescription" : "❌ CrunchyRoll Fix",
+          "BTTTriggerTypeDescription" : "❌ crunchyroll fix",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "D4FE25EA-310B-4BC1-9027-4799A6D2BAD1",
           "BTTPredefinedActionType" : 366,
@@ -830,9 +832,9 @@
               "BTTOrder" : 6
             }
           ],
-          "BTTGestureNotes" : "❌ CrunchyRoll Fix",
+          "BTTGestureNotes" : "❌ crunchyroll fix",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "❌ CrunchyRoll Fix"
+            "BTTCheatSheetActionLabel" : "❌ crunchyroll fix"
           }
         },
         {
@@ -937,10 +939,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724393961.6212358,
+          "BTTLastUpdatedAt" : 1724970860.3731031,
           "BTTTriggerType" : 105,
           "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Left",
-          "BTTTriggerTypeDescription" : "↔️ Switch App",
+          "BTTTriggerTypeDescription" : "↔️ switch app",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "914AB7BF-0E14-4CBB-90C7-982803634746",
           "BTTPredefinedActionType" : 366,
@@ -962,17 +964,17 @@
               "BTTOrder" : 5
             }
           ],
-          "BTTGestureNotes" : "↔️ Switch App",
+          "BTTGestureNotes" : "↔️ switch app",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "↔️ Switch App"
+            "BTTCheatSheetActionLabel" : "↔️ switch app"
           }
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724393972.9093111,
+          "BTTLastUpdatedAt" : 1724970878.79071,
           "BTTTriggerType" : 106,
           "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Right",
-          "BTTTriggerTypeDescription" : "↔️ Switch App",
+          "BTTTriggerTypeDescription" : "↔️ switch app",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "BFEB7ED4-315E-4912-8A10-AA1B25161812",
           "BTTPredefinedActionType" : 366,
@@ -995,9 +997,9 @@
               "BTTOrder" : 5
             }
           ],
-          "BTTGestureNotes" : "↔️ Switch App",
+          "BTTGestureNotes" : "↔️ switch app",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "↔️ Switch App"
+            "BTTCheatSheetActionLabel" : "↔️ switch app"
           }
         },
         {
@@ -1058,10 +1060,10 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1724393972.9093308,
+          "BTTLastUpdatedAt" : 1724970908.678607,
           "BTTTriggerType" : 173,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "🖱️ Right Click",
+          "BTTTriggerTypeDescription" : "🖱️ right click",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "A96CE421-31EA-428D-B92C-13D24B0187E1",
           "BTTPredefinedActionType" : 366,
@@ -1084,9 +1086,9 @@
               "BTTOrder" : 41
             }
           ],
-          "BTTGestureNotes" : "🖱️ Right Click",
+          "BTTGestureNotes" : "🖱️ right click",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🖱️ Right Click"
+            "BTTCheatSheetActionLabel" : "🖱️ right click"
           }
         },
         {
@@ -1481,7 +1483,7 @@
           "BTTLastUpdatedAt" : 1724392713.9682951,
           "BTTTriggerType" : 173,
           "BTTTriggerTypeDescriptionReadOnly" : "2 Finger Tap",
-          "BTTTriggerTypeDescription" : "🖱️ Middle Click",
+          "BTTTriggerTypeDescription" : "🖱️ middle click",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
           "BTTUUID" : "A8A20DB6-736D-441A-AB94-FDFBB310614E",
           "BTTPredefinedActionType" : 366,
@@ -1504,9 +1506,9 @@
               "BTTOrder" : 41
             }
           ],
-          "BTTGestureNotes" : "🖱️ Middle Click",
+          "BTTGestureNotes" : "🖱️ middle click",
           "BTTTriggerCheatSheetConfig" : {
-            "BTTCheatSheetActionLabel" : "🖱️ Middle Click",
+            "BTTCheatSheetActionLabel" : "🖱️ middle click",
             "BTTCheatSheetTriggerLabel" : ""
           }
         },
