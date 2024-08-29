@@ -4,7 +4,6 @@ matches:
   - { regex: "\\Bsich\\b", replace: "isch" }
   - { trigger: Cafe, replace: Café, propagate_case: true }
   - { trigger: Diesntag, replace: Dienstag, propagate_case: true, word: true }
-  - { trigger: english, replace: English }
   - { trigger: Leibe, replace: Liebe, propagate_case: true, word: true }
   - { trigger: algorithmsich, replace: algorithmisch }
   - { trigger: auhc, replace: auch, propagate_case: true, word: true }
