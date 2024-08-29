@@ -3,14 +3,9 @@
 # REQUIRED
 # - Longform Plugin
 # - pandoc
-# - Obsidian Advanced URI plugin
 #───────────────────────────────────────────────────────────────────────────────
 
-# 1. COMPILE LONGFORM
-open "obsidian://advanced-uri?commandid=longform%253Alongform-compile-current"
-sleep 0.5
-
-# 2. RUN PANDOC
+# 1. RUN PANDOC
 md_file=$(osascript -e 'tell application "Finder"
 	set sel to (item 1 of (get selection) as text)
 	return POSIX path of sel
@@ -30,7 +25,7 @@ cd "$(dirname "$md_file")" || return 1
 pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
 rm "$md_file"
 
-# 3. INSERT LINE BREAKS IN TABLES
+# 2. INSERT LINE BREAKS IN TABLES
 # `^l` is the manual line break token in MS Word
 open -R "$word_file"
 [[ ! -e "$word_file" ]] && return 1
