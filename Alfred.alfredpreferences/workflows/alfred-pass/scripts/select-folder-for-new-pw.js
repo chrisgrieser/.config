@@ -15,17 +15,18 @@ function run() {
 	/** @type{AlfredItem[]} */
 	const passwordFolders = [];
 
-	const shellCmd = `cd "${passwordStore}" ; find . -type d -mindepth 1 -not -path "./.git*"`,
-	const stdout = app.doShellScript(
-	);
-	if (stdout.trim() !== "") {
+	const shellCmd = `cd "${passwordStore}" ; find . -type d -mindepth 1 -not -path "./.git*"`;
+	const stdout = app.doShellScript(shellCmd);
+	const userHasFolders = stdout.trim() !== "";
+	if (userHasFolders) {
 		stdout.split("\r").map((/** @type {string} */ folder) => {
 			folder = folder.slice(2); // remove `./`
-			return {
+			passwordFolders.push({
 				title: "📂 " + folder,
+				uid: folder, // remember user choice for next time
 				arg: "", // empty for next Alfred prompt
 				variables: { folder: folder },
-			};
+			});
 		});
 	}
 
@@ -33,6 +34,7 @@ function run() {
 	passwordFolders.push({
 		title: "📂 * root",
 		arg: "",
+		uid: ".",
 		variables: { folder: "." },
 	});
 
