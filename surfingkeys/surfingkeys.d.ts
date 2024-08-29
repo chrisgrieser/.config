@@ -7,13 +7,20 @@ declare const chrome: any;
 declare type SurfingKeysAPI = {
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Normal: {
-	// biome-ignore lint/style/useNamingConvention: not set by me
+		// biome-ignore lint/style/useNamingConvention: not set by me
 		PassThrough(delay: number): void;
 		feedkeys(keys: string): void;
 	};
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Hints: {
 		style(inlinceCss: string): void;
+		// https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md#hintscreate
+		create(
+			cssSelector: string,
+			onHintKey: () => void,
+			opts?: { active?: boolean; tabbed?: boolean; multipleHits?: boolean },
+		): void;
+		dispatchMouseClick(): void;
 	};
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Front: {
@@ -44,11 +51,7 @@ declare type SurfingKeysAPI = {
 	aceVimMap: (lhs: string, rhs: string, ctx?: "insert" | "normal") => void;
 	searchSelectedWith: (search: string, scope?: RegExp) => void;
 	unmap: (keys: string, scope?: RegExp) => void;
-	removeSearchAlias: (
-		alias: string,
-		searchLeaderKey?: string,
-		onlyThisSiteKey?: string,
-	) => void;
+	removeSearchAlias: (alias: string, searchLeaderKey?: string, onlyThisSiteKey?: string) => void;
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	RUNTIME: (name: string, args?: object, callback?: () => void) => void;
 };

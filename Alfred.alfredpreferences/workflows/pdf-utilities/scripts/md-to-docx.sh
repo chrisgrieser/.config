@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+# PANDOC
 md_file="$*"
 if [[ ! "$md_file" =~ .*\.md ]]; then
 	echo "⚠️ Not a markdown file"
@@ -17,8 +18,8 @@ pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
 rm "$md_file"
 
 #───────────────────────────────────────────────────────────────────────────────
-# `^l` is the manual line break token in MS Word
-# so what this does is to replace <br> with actual line break
+# INSERT LINE BREAKS IN TABLES
+# replace `<br>` with `^l`, which is the line break token in MS Word
 [[ ! -e "$word_file" ]] && return 1
 open "$word_file"
 
@@ -37,5 +38,4 @@ osascript -e '
 
 		save active document
 	end tell
-'
-
+' &> /dev/null

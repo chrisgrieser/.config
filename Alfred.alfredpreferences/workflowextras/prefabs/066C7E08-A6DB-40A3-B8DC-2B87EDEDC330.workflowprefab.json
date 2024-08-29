@@ -4,7 +4,7 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.input.keyword",
-        "uid" : "6F60D342-DCC2-4223-953F-989C35602B7E",
+        "uid" : "CDCF2D71-2C2D-4151-9478-887A193606F0",
         "note" : "",
         "workflowobjectconfig" : {
           "withspace" : false,
@@ -19,7 +19,7 @@
       },
       {
         "workflowobjecttype" : "alfred.workflow.utility.argument",
-        "uid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+        "uid" : "D6BE625D-0FE4-43A9-8F97-4106B217FD07",
         "note" : "",
         "workflowobjectconfig" : {
           "argument" : "test value",
@@ -34,7 +34,7 @@
       },
       {
         "workflowobjecttype" : "alfred.workflow.output.largetype",
-        "uid" : "E1703883-FB71-424E-B68A-6E6B6A8B8D45",
+        "uid" : "E56B6E74-1337-45FF-A77D-6451EB2FD166",
         "note" : "",
         "workflowobjectconfig" : {
           "wrapat" : 50,
@@ -49,23 +49,23 @@
         },
         "colorindex" : 0,
         "ypos" : 5,
-        "xpos" : 270
+        "xpos" : 265
       }
     ],
     "connections" : [
       {
-        "sourceuid" : "6F60D342-DCC2-4223-953F-989C35602B7E",
+        "sourceuid" : "CDCF2D71-2C2D-4151-9478-887A193606F0",
         "config" : {
-          "destinationuid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+          "destinationuid" : "D6BE625D-0FE4-43A9-8F97-4106B217FD07",
           "modifiers" : 0,
           "modifiersubtext" : "",
-          "vitoclose" : false
+          "vitoclose" : true
         }
       },
       {
-        "sourceuid" : "51653073-7A77-445F-BCDC-4F25D44B32F1",
+        "sourceuid" : "D6BE625D-0FE4-43A9-8F97-4106B217FD07",
         "config" : {
-          "destinationuid" : "E1703883-FB71-424E-B68A-6E6B6A8B8D45",
+          "destinationuid" : "E56B6E74-1337-45FF-A77D-6451EB2FD166",
           "modifiers" : 0,
           "modifiersubtext" : "",
           "vitoclose" : false

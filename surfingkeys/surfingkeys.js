@@ -34,7 +34,7 @@ chrome.storage.local.set({ noPdfViewer: 1 });
 // EMOJIS
 
 settings.enableEmojiInsertion = true;
-settings.startToShowEmoji = 2;
+settings.startToShowEmoji = 1;
 const alreadyHaveEmojis = [
 	"github.com", // already has emoji picker
 	"web.whatsapp.com",
@@ -111,7 +111,9 @@ map("<Ctrl-v>", "W", null, "Move to new Window (split via Hammerspoon)");
 map("M", ";gw", null, "Merge Windows");
 
 // Links
-map("F", "C"); // Open Hint in new tab
+mapkey("F", "Open multiple links via hint", () => {
+	Hints.create("", Hints.dispatchMouseClick, { active: false, tabbed: true, multipleHits: true });
+});
 map("c", ";U"); // Edit current URL
 
 // YANK & CLIPBOARD
