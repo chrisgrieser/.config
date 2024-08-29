@@ -137,11 +137,15 @@
     "prefix": "i--"
   },
   "if (short)": {
-    "body": "[[ \"$${1:var}\" ]] && $0",
+    "body": "[[ \"\\$${1:var}\" ]] && $0",
     "prefix": "if (short)"
   },
   "if .. then": {
-    "body": "if [[ \"$${1:var}\" ]]; then\n\t$0\nfi",
+    "body": [
+      "if [[ \"\\$${1:var}\" ]]; then",
+      "\t$0",
+      "fi"
+    ],
     "prefix": "if .. then"
   },
   "if .. then .. else": {

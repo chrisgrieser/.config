@@ -3,17 +3,27 @@
 
 # remove illegal characters
 entry_name=$(echo "$*" | tr -d ":/\\")
+entry="$folder/$entry_name"
+
+# GUARD password file already exists
+dir=${PASSWORD_STORE_DIR-$HOME/.password-store}
+if [[ -f "$dir/$entry.gpg" ]]; then
+	echo -n "ALREADY EXISTS"
+	exit 1
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
 
 if [[ "$generatePassword" == "true" ]]; then
-	pass generate "$folder/$entry_name" &>/dev/null
+	pass generate "$entry" &> /dev/null
 
 	# pass to Alfred for copying (not using `echo -n` due to #2)
-	pass show "$folder/$entry_name" | head -n1
+	pass show "$entry" | head -n1
 
 elif [[ "$generatePassword" == "false" ]]; then
 	# create new password (`--echo` needed to skip confirmation)
-	pbpaste | pass insert --echo "$folder/$entry_name" &>/dev/null
+	pbpaste | pass insert --echo "$entry" &> /dev/null
 
 	# indicate to Alfred that password was inserted
-	echo ""
+	echo -n "INSERTED"
 fi
