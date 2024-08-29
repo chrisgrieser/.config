@@ -10,7 +10,7 @@ input_no_ext=${md_file%\.md}
 date="$(date +%Y-%m-%d)"
 word_file="${input_no_ext}_${date}_CG.docx"
 
-# so --resource-path is set
+# so `--resource-path` is set
 cd "$(dirname "$md_file")" || return 1
 
 pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
@@ -18,7 +18,7 @@ rm "$md_file"
 
 #───────────────────────────────────────────────────────────────────────────────
 # `^l` is the manual line break token in MS Word
-# -> replace <br> with actual line break
+# so what this does is to replace <br> with actual line break
 [[ ! -e "$word_file" ]] && return 1
 open "$word_file"
 
