@@ -17,11 +17,11 @@ function run() {
 		.doShellScript(`cd "${passwordStore}" ; find . -type d -not -path "./.git*"`)
 		.split("\r")
 		.map((/** @type {string} */ folder) => {
-			const displayName = folder.slice(2) || "* root"; 
+			const folderShort = folder.slice(2) || "* root"; 
 			return {
-				title: `📂 ${displayName}`,
+				title: `📂 ${folderShort}`,
 				arg: "",
-				variables: { folder: folder },
+				variables: { folder: folderShort },
 			};
 		});
 

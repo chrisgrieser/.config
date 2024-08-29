@@ -455,6 +455,71 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pw new</string>
+				<key>subtext</key>
+				<string>Store it as new pass entry</string>
+				<key>text</key>
+				<string>❇️ New password</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>CA9D5F1A-6D6F-43AE-93FA-A482699EEA31</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/pw-generate.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:entry}</string>
+				<key>title</key>
+				<string>✅ New entry created</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09192EC9-2C76-4174-868D-22699F041C5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -521,71 +586,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:entry}</string>
-				<key>title</key>
-				<string>✅ New entry created</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>09192EC9-2C76-4174-868D-22699F041C5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pw new</string>
-				<key>subtext</key>
-				<string>Store it as new pass entry</string>
-				<key>text</key>
-				<string>❇️ New password</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>CA9D5F1A-6D6F-43AE-93FA-A482699EEA31</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/pw-generate.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>0F6DB773-7447-4D7C-900E-59F3E9C69B19</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -593,7 +593,7 @@
 				<key>variables</key>
 				<dict>
 					<key>entry</key>
-					<string>{query}</string>
+					<string>{var:folder}/{query}</string>
 					<key>generatePassword</key>
 					<string>true</string>
 				</dict>
@@ -647,7 +647,7 @@
 				<key>variables</key>
 				<dict>
 					<key>entry</key>
-					<string>{query}</string>
+					<string>{var:folder}/{query}</string>
 					<key>generatePassword</key>
 					<string>false</string>
 				</dict>
@@ -656,27 +656,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>A5A50E6D-235D-44F3-ACFA-B80578EA0558</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>pw gen</string>
-				<key>subtext</key>
-				<string>Copy it WITHOUT creating a new pass entry</string>
-				<key>text</key>
-				<string>✴️ New password</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>2C2A79DD-A7C9-47A9-8AA4-0EEACB92D441</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -706,6 +685,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pw gen</string>
+				<key>subtext</key>
+				<string>Copy it WITHOUT creating a new pass entry</string>
+				<key>text</key>
+				<string>✴️ New password</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2C2A79DD-A7C9-47A9-8AA4-0EEACB92D441</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -720,27 +720,6 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>1C410C15-19B5-445B-B5B9-A406076C5E6D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>📋 Clipboard cleared</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D1151344-66AB-453F-8468-097748113645</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -770,21 +749,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
+				<key>onlyshowifquerypopulated</key>
 				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Clipboard cleared</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>1E6D758F-172E-4E35-AD9C-3226C9D252C3</string>
+			<string>D1151344-66AB-453F-8468-097748113645</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -806,6 +787,25 @@
 			<string>3B6DB61F-2CEA-4A7D-A907-2740E8C4FCD6</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>1E6D758F-172E-4E35-AD9C-3226C9D252C3</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -990,27 +990,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:entry}</string>
-				<key>title</key>
-				<string>✅ Deleted entry</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1034,21 +1013,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>onlyshowifquerypopulated</key>
 				<false/>
-				<key>transient</key>
+				<key>removeextension</key>
 				<false/>
+				<key>text</key>
+				<string>{var:entry}</string>
+				<key>title</key>
+				<string>✅ Deleted entry</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>97B7CC9A-ED41-492D-A2F4-2D905A5EAE0C</string>
+			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1070,6 +1051,25 @@
 			<string>3FADF261-E630-4B7D-A39C-32D20770CF51</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>97B7CC9A-ED41-492D-A2F4-2D905A5EAE0C</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1218,19 +1218,27 @@
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
 ## Setup
-1. Setup `pass` with an GPG key. See the [pass-website](https://www.passwordstore.org/) for more information.
-2. Setup `pinentry-mac` as your `pinentry-program`:
+1. Install the requirements: `brew install pass pinentry-mac`.
+2. Setup `pass` with an GPG key. See the [pass website](https://www.passwordstore.org/) for further information.
+3. Setup `pinentry-mac` as your `pinentry-program`:
 
-`[[ -d "$HOME/.gnupg" ]] || mkdir ~/.gnupg`
-`echo "pinentry-program $HOMEBREW_PREFIX/bin/pinentry-mac" &gt; ~/.gnupg/gpg-agent.conf`
-`gpgconf --kill gpg-agent # restarts gpg`
+```bash
+[[ -d "$HOME/.gnupg" ]] || mkdir "$HOME/.gnupg"
+echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" &gt; $HOME/.gnupg/gpg-agent.conf
+gpgconf --kill gpg-agent # restart the agent
+```
 
 ## Configuration
-This workflow is reads all your `PASSWORD_STORE_*` environment variables which have been added to your `~/.zshenv`. This means that most configuration is done by exporting respective variables in `~/.zshenv`. Example: `export PASSWORD_STORE_GENERATED_LENGTH=32`. 
+This workflow is reads all your `PASSWORD_STORE_*` environment variables that
+have been added to your `~/.zshenv`, so most configuration is done by exporting
+respective variables in `~/.zshenv`. Example: `export
+PASSWORD_STORE_GENERATED_LENGTH=32`.
 
-For information on the available environment variables, see the [pass man page](https://git.zx2c4.com/password-store/about/).
+For information about the available environment variables, see the [pass man
+page](https://git.zx2c4.com/password-store/about/).
 
-If you are using a custom password-store directory, you **must** export your `PASSWORD_STORE_DIR` in your `~/.zshenv` for this workflow to work.
+&gt; If you are using a custom password-store directory, you **must** export your
+&gt; `PASSWORD_STORE_DIR` in your `~/.zshenv` for this workflow to work.
 
 ## Usage
 - Search your passwords via the keyword `pw`.
@@ -1240,12 +1248,13 @@ If you are using a custom password-store directory, you **must** export your `PA
    settings](https://www.alfredapp.com/help/features/terminal/) and your
    `$EDITOR`.
    + &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal `.gpg` file of the entry in Finder.
-   + &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Delete the entry.
+   + &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Delete the entry. (⚠️ This is irreversible if you
+     are not using git.)
    + &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show details of the entry. Select any one of them
      to copy the value to your clipboard.
-   + &lt;kbd&gt;Fn&lt;/kbd&gt;: Generate new password and overwrite this entry's password
-     with it. Afterward, copy the new password. (⚠️ This removes the old password
-     and is not reversible if you are not using git.)
+   + &lt;kbd&gt;Fn&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Generate a new password and overwrite this
+     entry's password with it. Afterward, copy the new password. (⚠️ This removes
+     the old password and is not reversible if you are not using git.)
 - Use the keyword `pw new` to create a new entry. You are then prompted for a
   folder to place the new entry in. The password of the new entry is
   auto-generated based on your `pass` settings, or can be inserted from your
@@ -1603,7 +1612,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.3.0</string>
+	<string>3.0.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
