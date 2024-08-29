@@ -1462,7 +1462,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>if password is generated</string>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>1050</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
@@ -1710,7 +1710,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.0.1</string>
+	<string>3.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
