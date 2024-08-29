@@ -71,6 +71,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>fn: Generate new password and overwrite this entry's password with it. Copy the new password. ⚠️ This removes the old password.</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>B23E7DD4-F41F-4969-83C0-A44AD034C37F</string>
 				<key>modifiers</key>
 				<integer>131072</integer>
@@ -317,6 +327,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9D6FF516-1D65-47C2-9AD8-36F969A4729C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<array/>
 		<key>F19DCDE8-CB71-48BC-AFD8-EB381C71E346</key>
@@ -505,7 +528,7 @@
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
-				<false/>
+				<true/>
 				<key>variables</key>
 				<dict>
 					<key>generatePassword</key>
@@ -570,7 +593,7 @@
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
-				<false/>
+				<true/>
 				<key>variables</key>
 				<dict>
 					<key>generatePassword</key>
@@ -777,6 +800,35 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>9D6FF516-1D65-47C2-9AD8-36F969A4729C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<true/>
 				<key>escaping</key>
@@ -794,6 +846,29 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/update-pw.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1009,12 +1084,12 @@
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
 ## Setup
-1. Setup `pass` with an GPG key. See the [Pass-Website](https://www.passwordstore.org/) for more information.
+1. Setup `pass` with an GPG key. See the [pass-website](https://www.passwordstore.org/) for more information.
 2. Setup `pinentry-mac` as your `pinentry-program`:
 
 `[[ -d "$HOME/.gnupg" ]] || mkdir ~/.gnupg`
 `echo "pinentry-program $HOMEBREW_PREFIX/bin/pinentry-mac" &gt; ~/.gnupg/gpg-agent.conf`
-`gpgconf --kill gpg-agent`
+`gpgconf --kill gpg-agent # restarts gpg`
 
 ## Configuration
 This workflow is reads all your `PASSWORD_STORE_*` environment variables which have been added to your `~/.zshenv`. This means that most configuration is done by exporting respective variables in `~/.zshenv`. Example: `export PASSWORD_STORE_GENERATED_LENGTH=32`. 
@@ -1034,6 +1109,7 @@ If you are using a custom password-store directory, you **must** export your `PA
    + &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Delete the entry.
    + &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show details of the entry. Select any one of them to
    copy the value to your clipboard.
+   + &lt;kbd&gt;fn&lt;/kbd&gt;: Generate new password and overwrite this entry's password with it. Copy the new password. ⚠️ This removes the old password.
 - Use the keyword `pw new` to create a new entry. You are then prompted for a
   folder to place the new entry in. The password of the new entry is
   auto-generated based on your `pass` settings, or can be inserted from your
@@ -1135,7 +1211,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>1000</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -1146,7 +1222,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>740</real>
+			<real>865</real>
 		</dict>
 		<key>83941436-919A-42A2-BCCA-4EB78802E09E</key>
 		<dict>
@@ -1173,7 +1249,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>615</real>
 		</dict>
 		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
 		<dict>
@@ -1197,6 +1273,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
+		<key>9D6FF516-1D65-47C2-9AD8-36F969A4729C</key>
+		<dict>
+			<key>xpos</key>
+			<real>455</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1204,7 +1287,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>875</real>
+			<real>1000</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
@@ -1242,7 +1325,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>540</real>
 		</dict>
 		<key>CA9D5F1A-6D6F-43AE-93FA-A482699EEA31</key>
 		<dict>
@@ -1269,9 +1352,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>845</real>
+			<real>785</real>
 			<key>ypos</key>
 			<real>325</real>
+		</dict>
+		<key>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>update &amp; copy pw</string>
+			<key>xpos</key>
+			<real>240</real>
+			<key>ypos</key>
+			<real>410</real>
 		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
@@ -1280,7 +1374,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>675</real>
 		</dict>
 		<key>F19DCDE8-CB71-48BC-AFD8-EB381C71E346</key>
 		<dict>
@@ -1291,7 +1385,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>276</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>825</real>
 		</dict>
 		<key>F46688E5-F719-4EE2-89C5-FB26A5D6977F</key>
 		<dict>
@@ -1302,7 +1396,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>730</real>
 		</dict>
 		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
 		<dict>

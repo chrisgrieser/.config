@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+# shellcheck disable=2154
+
+entry="$*"
+pass generate --in-place "$entry"
+
+# shellcheck disable=2154
+[[ "$auto_push" == "1" ]] && pass git push &> /dev/null
