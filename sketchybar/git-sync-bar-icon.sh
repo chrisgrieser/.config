@@ -38,18 +38,16 @@ set_sketchybar
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# COMMITS AHEAD/BEHIND
+# COMMITS BEHIND
 while read -r line; do
 	letter=$(echo "$line" | cut -d, -f4)
 	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
 
 	git -C "$repo_path" fetch
-	ahead_behind=""
-	behind=$(git -C "$repo_path" branch --verbose | grep --only-matching "behind \d\+" | cut -d" " -f2)
-	[[ -n $behind ]] && ahead_behind="$ahead_behind󰶡$behind"
-	ahead=$(git -C "$repo_path" branch --verbose | grep --only-matching "ahead \d\+" | cut -d" " -f2)
-	[[ -n $ahead ]] && ahead_behind="$ahead_behind󰶣$ahead"
-	[[ -n $ahead_behind ]] && all_changes="$all_changes$ahead_behind$letter "
+	behind=$(git -C "$repo_path" branch --verbose |
+		grep --only-matching "behind \d\+" |
+		cut -d" " -f2)
+	[[ -n $behind ]] && all_changes="$all_changes$behind󰶡$letter "
 done <"$perma_repos_path"
 
 set_sketchybar
