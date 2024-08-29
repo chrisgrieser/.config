@@ -47,12 +47,10 @@ function run() {
 				arg: id,
 				uid: id,
 				match: matcher,
+				variables: { entry: id },
 				mods: {
-					alt: { arg: path }, // reveal in finder directly uses path
-					shift: {
-						arg: "",
-						variables: { entry: id },
-					},
+					alt: { arg: path }, // revealing in Finder needs path
+					shift: { arg: "" }, // keep next Alfred prompt clear
 				},
 			};
 		});
