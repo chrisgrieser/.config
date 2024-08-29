@@ -9,10 +9,12 @@
 	<key>connections</key>
 	<dict>
 		<key>09192EC9-2C76-4174-868D-22699F041C5D</key>
+		<array/>
+		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>89DE3DE6-1151-4DBB-A963-C2A2A4C3C33E</string>
+				<string>462A9DED-FC24-4D19-8ED2-C2D7162239B2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -20,12 +22,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>462A9DED-FC24-4D19-8ED2-C2D7162239B2</string>
+				<string>0BC9A821-35ED-45C1-AA5A-A64A696BBFC8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -39,16 +38,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3B6DB61F-2CEA-4A7D-A907-2740E8C4FCD6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -75,7 +64,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Generate new password and overwrite this entry's password with it. Copy the new password. ⚠️ This removes the old password.</string>
+				<string>fn: Overwrite password with new generated password. (⚠️ This removes the old password.)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -88,6 +77,16 @@
 				<string>⇧: Copy other property (⚠ requires unlocked gpg)</string>
 				<key>vitoclose</key>
 				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6B581416-D12E-4AC2-B604-895443940F98</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Delete Password</string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -109,16 +108,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6B581416-D12E-4AC2-B604-895443940F98</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Delete Password</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>2C2A79DD-A7C9-47A9-8AA4-0EEACB92D441</key>
 		<array>
@@ -137,7 +126,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
+				<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -171,8 +160,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</key>
-		<array/>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<array>
 			<dict>
@@ -226,7 +213,18 @@
 			</dict>
 		</array>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0BC9A821-35ED-45C1-AA5A-A64A696BBFC8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<array>
 			<dict>
@@ -331,7 +329,17 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9D6FF516-1D65-47C2-9AD8-36F969A4729C</string>
+				<string>D2367F46-8E60-4205-A0EA-E66B7F3ADF69</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0BC9A821-35ED-45C1-AA5A-A64A696BBFC8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -577,19 +585,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>89DE3DE6-1151-4DBB-A963-C2A2A4C3C33E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string>{query}</string>
 				<key>passthroughargument</key>
@@ -655,7 +650,7 @@
 			<key>config</key>
 			<dict>
 				<key>concurrently</key>
-				<false/>
+				<true/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -663,16 +658,37 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/copy-pw.sh</string>
+				<string>./scripts/clear-clipboard.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
+			<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>📋 Clipboard cleared</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D1151344-66AB-453F-8468-097748113645</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -738,15 +754,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>unstackview</key>
+				<key>concurrently</key>
 				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/copy-pw.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</string>
+			<string>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -800,58 +826,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>9D6FF516-1D65-47C2-9AD8-36F969A4729C</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<true/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/clear-clipboard.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8DFAB981-4135-40F5-BA81-DEDA35D0F632</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -871,27 +845,6 @@
 			<string>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>📋 Clipboard cleared</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>D1151344-66AB-453F-8468-097748113645</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -958,6 +911,73 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>8B196ABE-DF0D-4D44-BB9B-CB731B0CC995</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/auto-push.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0BC9A821-35ED-45C1-AA5A-A64A696BBFC8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/delete-pw.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6B581416-D12E-4AC2-B604-895443940F98</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Deleted</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1036,50 +1056,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Deleted</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>A5733344-CBEB-486B-87D4-DE52472EB5A5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/delete-pw.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6B581416-D12E-4AC2-B604-895443940F98</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string># Alfred Client for the Pass-CLI
@@ -1107,15 +1083,16 @@ If you are using a custom password-store directory, you **must** export your `PA
    `$EDITOR`.
    + &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal `.gpg` file of the entry in Finder.
    + &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Delete the entry.
-   + &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show details of the entry. Select any one of them to
-   copy the value to your clipboard.
-   + &lt;kbd&gt;fn&lt;/kbd&gt;: Generate new password and overwrite this entry's password with it. Copy the new password. ⚠️ This removes the old password.
+   + &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show details of the entry. Select any one of them
+     to copy the value to your clipboard.
+   + &lt;kbd&gt;Fn&lt;/kbd&gt;: Generate new password and overwrite this entry's password
+     with it. Afterward, copy the new password. (⚠️ This removes the old password
+     and is not reversible if you are not using git.)
 - Use the keyword `pw new` to create a new entry. You are then prompted for a
   folder to place the new entry in. The password of the new entry is
   auto-generated based on your `pass` settings, or can be inserted from your
   clipboard.
-- Use `pw gen` to generate a new password without creating a new entry. This can
-  be useful to change an existing password.
+- Use `pw gen` to generate a new password without creating a new entry.
 
 ## Credits
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1126,9 +1103,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>xpos</key>
-			<real>965</real>
+			<real>1015</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>0BC9A821-35ED-45C1-AA5A-A64A696BBFC8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>auto-push</string>
+			<key>xpos</key>
+			<real>940</real>
+			<key>ypos</key>
+			<real>560</real>
 		</dict>
 		<key>0F6DB773-7447-4D7C-900E-59F3E9C69B19</key>
 		<dict>
@@ -1149,9 +1137,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>copy as transient 
 (= avoids clipboard history)</string>
 			<key>xpos</key>
-			<real>935</real>
+			<real>1010</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>215</real>
 		</dict>
 		<key>24B77922-B082-4744-B4A1-6EAD37FFD88C</key>
 		<dict>
@@ -1178,9 +1166,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1115</real>
+			<real>1155</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>215</real>
 		</dict>
 		<key>462A9DED-FC24-4D19-8ED2-C2D7162239B2</key>
 		<dict>
@@ -1189,18 +1177,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>pw</string>
 			<key>xpos</key>
-			<real>820</real>
+			<real>870</real>
 			<key>ypos</key>
 			<real>35</real>
-		</dict>
-		<key>4CD4709B-D7A9-4FFD-8FDE-D62EC9053E14</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>1</integer>
-			<key>xpos</key>
-			<real>1280</real>
-			<key>ypos</key>
-			<real>325</real>
 		</dict>
 		<key>6B581416-D12E-4AC2-B604-895443940F98</key>
 		<dict>
@@ -1209,9 +1188,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete pw</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>685</real>
 		</dict>
 		<key>7C6B7643-4B16-4307-ADA8-14D6837FEE59</key>
 		<dict>
@@ -1220,9 +1199,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>1025</real>
 		</dict>
 		<key>83941436-919A-42A2-BCCA-4EB78802E09E</key>
 		<dict>
@@ -1233,23 +1212,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>20</real>
 		</dict>
-		<key>89DE3DE6-1151-4DBB-A963-C2A2A4C3C33E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>1125</real>
-			<key>ypos</key>
-			<real>45</real>
-		</dict>
 		<key>8B196ABE-DF0D-4D44-BB9B-CB731B0CC995</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>555</real>
 		</dict>
 		<key>8DFAB981-4135-40F5-BA81-DEDA35D0F632</key>
 		<dict>
@@ -1258,9 +1228,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delayed clearing of the clipboard</string>
 			<key>xpos</key>
-			<real>1115</real>
+			<real>1300</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>215</real>
 		</dict>
 		<key>92E44739-4524-4ADF-8D4B-C4FCE41A4D5F</key>
 		<dict>
@@ -1269,25 +1239,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>copy pw</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>280</real>
-		</dict>
-		<key>9D6FF516-1D65-47C2-9AD8-36F969A4729C</key>
-		<dict>
-			<key>xpos</key>
-			<real>455</real>
-			<key>ypos</key>
-			<real>385</real>
+			<real>290</real>
 		</dict>
 		<key>A5733344-CBEB-486B-87D4-DE52472EB5A5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>685</real>
 		</dict>
 		<key>A5A50E6D-235D-44F3-ACFA-B80578EA0558</key>
 		<dict>
@@ -1323,9 +1286,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>select property</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>540</real>
+			<real>555</real>
 		</dict>
 		<key>CA9D5F1A-6D6F-43AE-93FA-A482699EEA31</key>
 		<dict>
@@ -1341,9 +1304,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>1280</real>
+			<real>1445</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>215</real>
 		</dict>
 		<key>D2367F46-8E60-4205-A0EA-E66B7F3ADF69</key>
 		<dict>
@@ -1352,9 +1315,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>785</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>245</real>
 		</dict>
 		<key>E0554F56-4E6E-435D-9F25-4A4E089BE7F0</key>
 		<dict>
@@ -1363,18 +1326,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>update &amp; copy pw</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>420</real>
 		</dict>
 		<key>E28BAD26-7C03-414A-A567-4F44432F9FD7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>240</real>
+			<real>370</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>830</real>
 		</dict>
 		<key>F19DCDE8-CB71-48BC-AFD8-EB381C71E346</key>
 		<dict>
@@ -1383,9 +1346,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>auto-push</string>
 			<key>xpos</key>
-			<real>276</real>
+			<real>411</real>
 			<key>ypos</key>
-			<real>825</real>
+			<real>980</real>
 		</dict>
 		<key>F46688E5-F719-4EE2-89C5-FB26A5D6977F</key>
 		<dict>
@@ -1394,9 +1357,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>edit &amp; push</string>
 			<key>xpos</key>
-			<real>400</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>890</real>
 		</dict>
 		<key>FEBD93EE-FAF9-4E4E-8627-84BEC380B964</key>
 		<dict>

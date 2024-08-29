@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 
 # not using `echo -n` due to #2
-pass show "$*" | head -n1
+entry="$*"
+pass show "$entry" | head -n1

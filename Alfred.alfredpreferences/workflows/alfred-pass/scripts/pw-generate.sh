@@ -17,6 +17,3 @@ elif [[ "$generatePassword" == "false" ]]; then
 	# indicate to Alfred that password was inserted
 	echo ""
 fi
-
-# shellcheck disable=2154
-[[ "$auto_push" == "1" ]] && pass git push &>/dev/null
