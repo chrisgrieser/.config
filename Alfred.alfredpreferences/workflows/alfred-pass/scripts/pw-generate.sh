@@ -5,7 +5,7 @@
 entry_name=$(echo "$*" | tr -d ":/\\")
 
 if [[ "$generatePassword" == "true" ]]; then
-	pass generate --no-symbols "$folder/$entry_name" &>/dev/null
+	pass generate "$folder/$entry_name" &>/dev/null
 
 	# pass to Alfred for copying (not using `echo -n` due to #2)
 	pass show "$folder/$entry_name" | head -n1
