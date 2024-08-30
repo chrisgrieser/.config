@@ -76,11 +76,7 @@ return {
 		},
 	},
 	{ -- color previews & color picker
-		-- "uga-rosa/ccc.nvim",
-
-		-- PENDING https://github.com/chrisgrieser/ccc.nvim/tree/patch-1
-		"chrisgrieser/ccc.nvim",
-		branch = "patch-1", 
+		"uga-rosa/ccc.nvim",
 
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
