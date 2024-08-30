@@ -20,12 +20,12 @@ return {
 				noice = false, -- sometimes triggered in error-buffers
 				["rip-substitute"] = false,
 
-				-- INFO `pass` passwords editing filetype is plaintext, also this is
-				-- the filetype of critical files
+				-- extra safeguard: `pass` passwords editing filetype is plaintext,
+				-- also this is the filetype of critical files
 				text = false,
 			},
 			silent = true,
-			show_label = false, -- signcolumn label for number of suggestions
+			show_label = true, -- signcolumn label for number of suggestions
 		},
 		config = function(_, opts)
 			require("neocodeium").setup(opts)
@@ -34,24 +34,43 @@ return {
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 
-			-- safeguard: disable in various private folder
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
-				callback = function(ctx)
-					local parent = vim.fs.dirname(ctx.file)
-					local name = vim.fs.basename(ctx.file)
-					if parent:find("private dotfiles") or name:lower():find("recovery") then
-						require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
-						vim.cmd.NeoCodeium("disable_buffer")
-					end
-				end,
-			})
+			-- extra safeguard: disable in various private folder
+			local function disableInPrivatBuffer(ctx)
+				local parent = vim.fs.dirname(ctx.file)
+				local name = vim.fs.basename(ctx.file)
+				if parent:find("private dotfiles") or name:lower():find("recovery") then
+					require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
+					vim.cmd.NeoCodeium("disable_buffer")
+				end
+			end
+			disableInPrivatBuffer()
+			vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = disableInPrivatBuffer })
 		end,
 		keys = {
-			-- stylua: ignore start
-			{ "<D-s>", function() require("neocodeium").accept() end, mode = "i", desc = "󰚩 Accept full suggestion" },
-			{ "<D-S>", function() require("neocodeium").accept_line() end, mode = "i", desc = "󰚩 Accept line" },
-			{ "<D-d>", function() require("neocodeium").cycle(1) end, mode = "i", desc = "󰚩 Next suggestion" },
-			-- stylua: ignore end
+			{
+				"<D-s>",
+				function() require("neocodeium").accept() end,
+				mode = "i",
+				desc = "󰚩 Accept full suggestion",
+			},
+			{
+				"<D-S>",
+				function() require("neocodeium").accept_line() end,
+				mode = "i",
+				desc = "󰚩 Accept line",
+			},
+			{
+				"<D-d>",
+				function() require("neocodeium").cycle(1) end,
+				mode = "i",
+				desc = "󰚩 Next suggestion",
+			},
+			{
+				"<D-D>",
+				function() require("neocodeium").cycle(-1) end,
+				mode = "i",
+				desc = "󰚩 Previous suggestion",
+			},
 			{
 				"<leader>oa",
 				function()
