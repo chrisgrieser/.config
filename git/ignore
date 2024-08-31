@@ -1,8 +1,8 @@
-# MAC
+# macOS
 .DS_Store
 *.icloud
 
-# https://stackoverflow.com/questions/17556250/how-to-ignore-icon-in-git
+# https://stackoverflow.com/a/33974028/22114136
 Icon[]
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -26,9 +26,10 @@ __pycache__
 ~$*.xlsx
 ~$*.pptx
 
-# safety net to prevent sensitive data being accidentally moved
+# safety net to prevent sensitive data being accidentally added
 *.kdb
 *.kdbx
+*.gpg
 *.pfx
 *.key
 .*_history
