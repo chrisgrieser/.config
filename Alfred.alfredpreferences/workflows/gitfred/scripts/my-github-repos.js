@@ -114,6 +114,7 @@ function run() {
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
+				uid: repo.name,
 				mods: {
 					fn: {
 						subtitle: repo.local ? "fn: Delete Local Repo" : "fn: 🚫 Cannot delete remote repo",
