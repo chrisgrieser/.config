@@ -36,8 +36,9 @@ return {
 
 			-- extra safeguard: disable in various private folder
 			local function disableInPrivatBuffer(ctx)
-				local parent = vim.fs.dirname(ctx.file)
-				local name = vim.fs.basename(ctx.file)
+				local filepath = ctx and ctx.file or vim.api.nvim_buf_get_name(0)
+				local parent = vim.fs.dirname(filepath)
+				local name = vim.fs.basename(filepath)
 				if parent:find("private dotfiles") or name:lower():find("recovery") then
 					require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
 					vim.cmd.NeoCodeium("disable_buffer")

@@ -250,7 +250,19 @@ aceVimMap("ae", "a`");
 imap("<Ctrl-f>", "<Ctrl-i>"); // forward text to vim editor (conistent with terminal)
 
 //──────────────────────────────────────────────────────────────────────────────
+// UNMAP REMAINING STUFF
 
-for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
+const unusedKeys = [
+	"[[",
+	"]]",
+	"<Ctrl-i>",
+]
+
+const unusedAlias = ["b", "d", "g", "h", "w", "y", "s", "e"]
+
+for (const key of unusedKeys) {
+	unmap(key);
+}
+for (const alias of unusedAlias) {
 	removeSearchAlias(alias);
 }
