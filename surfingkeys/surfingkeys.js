@@ -1,7 +1,8 @@
 // DOCS
 // - API https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 // - FAQ https://github.com/brookhong/Surfingkeys/wiki/FAQ
-// - default mappings https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
+// - default mappings 1 https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
+// - default mappings 1 https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/api.js
 // - example configs https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -78,7 +79,9 @@ map("h", "S"); // history back/forward
 map("l", "D");
 map("H", "[["); // next/prev Page
 map("L", "]]");
+
 map("z", ";fs"); // change focussed element
+map("Z", "w"); // switch frames
 
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
@@ -167,18 +170,18 @@ vmapkey("s", "Search Selection with Google", () =>
 // SITE-SPECIFIC SETTINGS
 
 // Google extensions
-unmap("j", /google.com/); // websearch navigator
-unmap("k", /google.com/); // websearch navigator
-unmap("c", /google.com/); // Grepper
+unmap("j", /google\.com/); // websearch navigator
+unmap("k", /google\.com/); // websearch navigator
+unmap("c", /google\.com/); // Grepper
 
 for (const key of ["j", "k", "f", "N", "P", "0"]) {
-	unmap(key, /youtube.com/);
+	unmap(key, /youtube\.com/);
 }
 
 // for BetterTouchTool Mappings
-unmap("f", /crunchyroll.com/); // fullscreen
-unmap("N", /crunchyroll.com/); // next episode
-unmap("0", /crunchyroll.com/); // beginning
+unmap("f", /crunchyroll\.com/); // fullscreen
+unmap("N", /crunchyroll\.com/); // next episode
+unmap("0", /crunchyroll\.com/); // beginning
 
 // cheatsheets on those websites
 unmap("?", /(github|reddit|youtube).com|devdocs.io/);
@@ -253,16 +256,112 @@ imap("<Ctrl-f>", "<Ctrl-i>"); // forward text to vim editor (conistent with term
 // UNMAP REMAINING STUFF
 
 const unusedKeys = [
-	"[[",
-	"]]",
-	"<Ctrl-i>",
-]
+	// `curl "https://raw.githubusercontent.com/brookhong/Surfingkeys/master/src/content_scripts/common/default.js" | grep "mapkey("`
+	"zr", // #3zoom reset
+	"zi", // #3zoom in
+	"zo", // #3zoom out
+	"ZZ", // #5Save session and quit
+	"ZR", // #5Restore last session
+	"af", // #1Open a link in active new tab
+	"gf", // #1Open a link in non-active new tab
+	"cf", // #1Open multiple links in a new tab
+	"<Ctrl-h>", // #1Mouse over elements.
+	"<Ctrl-j>", // #1Mouse out elements.
+	"ya", // #7Copy a link URL to the clipboard
+	"yma", // #7Copy multiple link URLs to the clipboard
+	"ymc", // #7Copy multiple columns of a table
+	"q", // #1Click on an Image or a button
+	"<Alt-p>", // #3pin/unpin current tab
+	"<Alt-m>", // #3mute/unmute current tab
+	"B", // #4Go one tab history back
+	"<Ctrl-6>", // #4Go to last used tab
+	"gT", // #4Go to first activated tab
+	"gt", // #4Go to last activated tab
+	"gp", // #4Go to the playing tab
+	"S", // #4Go back in history
+	"oi", // #8Open incognito window
+	"om", // #8Open URL from vim-like marks
+	"yi", // #7Yank text of an input
+	";w", // #2Focus top window
+	"cc", // #7Open selected link or link from clipboard
+	";cq", // #7Clear all URLs in queue to be opened
+	"ys", // u7Copy current page
+	"yj", // #7Copy current settings", function() {
+	";pj", // #7Restore settings data from clipboard", function() {
+	"yt", // #3Duplicate current tab
+	"yT", // #3Duplicate current tab in background
+	"yY", // #7Copy all tabs
+	"yh", // #7Copy current page
+	"yl", // #7Copy current page
+	"yQ", // #7Copy all query history of OmniQuery.
+	";pf", // #7Fill form with data from yf
+	"yp", // #7Copy form data for POST on current page
+	"g?", // #4Reload current page without query string(all parts after question mark)
+	"g#", // #4Reload current page without hash fragment
+	"gxt", // #3Close tab on left
+	"gxT", // #3Close tab on right
+	"gx0", // #3Close all tabs on left
+	"gx$", // #3Close all tabs on right
+	"gxx", // #3Close all tabs except current one
+	"gxp", // #3Close playing tab
+	";e", // #11Edit Settings
+	";u", // #4Edit current URL with vim editor, and open in new tab
+	";U", // #4Edit current URL with vim editor, and reload
+	"on", // #3Open newtab
+	"cp", // #13Toggle proxy for current site
+	";cp", // #13Copy proxy info
+	";ap", // #13Apply proxy info from clipboard
+	"gr", // #14Read selected text or text from clipboard
+	"on", // #3Open newtab
+	"ge", // #12Open Chrome Extensions
+	";i", // #12Open Chrome Inspect
+	";v", // #11Open neovim
+	"go", // #8Open a URL in current tab
+	"ox", // #8Open recently closed URL
+	"X", // #3Restore closed tab
+	"ab", // #8Bookmark current page to selected folder
+	"oh", // #8Open URL from history
+	"W", // #3Move current tab to another window
+	";gt", // #3Gather filtered tabs into current window
+	";gw", // #3Gather all tabs into current window
+	"<<", // #3Move current tab to left
+	">>", // #3Move current tab to right
+	"yd", // #7Copy current downloading URL", function() {
+	";pm", // #11Preview markdown
+	";di", // #1Download image
+	";j", // #12Close Downloads Shelf
+	";dh", // #14Delete history older than 30 days
+	";yh", // #14Yank histories
+	";ph", // #14Put histories from clipboard
+	";db", // #14Remove bookmark for current page
 
-const unusedAlias = ["b", "d", "g", "h", "w", "y", "s", "e"]
+	// `curl "https://raw.githubusercontent.com/brookhong/Surfingkeys/master/src/content_scripts/common/api.js" | grep "mapkey("`
+	"[[", // #1Click on the previous link on current page
+	"]]", // #1Click on the next link on current page
+	"Q", // #8Open omnibar for word translation
+	";s", // Toggle PDF viewer from SurfingKeys
+	";ql", // #0Show last action
+	"zv", // #9Enter visual mode, and select whole element
+	"yv", // #7Yank text of an element
+	"ymv", // #7Yank text of multiple elements
+	"'", // #10Jump to vim-like mark
+	"<Ctrl-'>", // #10Jump to vim-like mark in new tab.
+	"yg", // #7Capture current page
+	"gu", // #4Go up one path in the URL
+	";m", // #1mouse out last element
+	";pp", // #7Paste html on current page
+	";t", // Translate selected text with google
+	"O", // #1Open detected links from text
+	";fs", // #1Display hints to focus scrollable elements
+	"cq", // #7Query word with Hints
+
+	// more
+];
 
 for (const key of unusedKeys) {
 	unmap(key);
 }
-for (const alias of unusedAlias) {
+
+for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
 	removeSearchAlias(alias);
 }

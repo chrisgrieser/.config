@@ -24,10 +24,10 @@ function run() {
 	const colors = readFile(jsonPath)
 		.split("\n")
 		.map((/** @type {string} */ line) => {
-			const [name, hex] = line.split(",");
+			const [name, hex] = line.split(",") || ["", ""];
 
 			// so searching for a base color name also matches the color
-			const baseColor = (name || "").match(/blue|green|red|yellow|orange|white|gr[ae]y|black|white/) || ""
+			const baseColor = name.match(/blue|green|red|yellow|orange|white|gr[ae]y|black|purple/) || "";
 			return {
 				title: name,
 				subtitle: hex,
