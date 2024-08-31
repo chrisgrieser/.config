@@ -2,12 +2,27 @@
 // - API https://github.com/brookhong/Surfingkeys/blob/master/docs/API.md
 // - FAQ https://github.com/brookhong/Surfingkeys/wiki/FAQ
 // - default mappings 1 https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/default.js
-// - default mappings 1 https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/api.js
+// - default mappings 2 https://github.com/brookhong/Surfingkeys/blob/master/src/content_scripts/common/api.js
 // - example configs https://github.com/brookhong/Surfingkeys/wiki/Example-Configurations
 //──────────────────────────────────────────────────────────────────────────────
 
-// biome-ignore format: too long
-const { Normal, Hints, Front, imap, map, mapkey, vmapkey, unmap, aceVimMap, removeSearchAlias, searchSelectedWith, RUNTIME, imapkey } = api;
+const {
+	Front,
+	Hints,
+	Normal,
+	RUNTIME,
+	aceVimMap,
+	imap,
+	imapkey,
+	map,
+	mapkey,
+	removeSearchAlias,
+	searchSelectedWith,
+	unmap,
+	vmapkey,
+	vunmap,
+	cunmap,
+} = api;
 const banner = api.Front.showBanner;
 
 /** @param {string} text */
@@ -86,7 +101,7 @@ map("Z", "w"); // switch frames
 // WASD: TAB MOVEMENTS
 map("w", "x"); // close tab
 map("m", "x"); // close tab
-mapkey("s", "Copy URL & close tab", async () => {
+mapkey("s", "#4Copy URL & close tab", async () => {
 	RUNTIME("closeTab"); // cannot use `window.close()` b/c `Scripts may close only the windows that were opened by them.`
 	const url = window.location.href;
 	await copyAndNotify(url);
@@ -105,41 +120,41 @@ map("e", "gx$"); // close tabs on right
 // quick switcher
 // type: "History"|"RecentlyClosed"
 //mapkey("gr", "Recent sites", () => Front.openOmnibar({ type: "RecentlyClosed" }));
-mapkey("gr", "History", () => Front.openOmnibar({ type: "History" }));
+mapkey("gr", "#3History", () => Front.openOmnibar({ type: "History" }));
 
-mapkey("t", "Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
+mapkey("t", "#3Quick switcher open tabs", () => Front.openOmnibar({ type: "Tabs" }));
 
 // WINDOW
 map("<Ctrl-v>", "W", null, "Move to new Window (split via Hammerspoon)");
 map("M", ";gw", null, "Merge Windows");
 
 // Links
-mapkey("F", "Open multiple links via hint", () => {
+mapkey("F", "#1Open multiple links via hint", () => {
 	Hints.create("", Hints.dispatchMouseClick, { active: false, tabbed: true, multipleHits: true });
 });
 map("c", ";U"); // Edit current URL
 
 // YANK & CLIPBOARD
-mapkey("o", "Open from clipboard", async () => {
+mapkey("o", "#3Open from clipboard", async () => {
 	const clipb = await navigator.clipboard.readText();
 	if (clipb.startsWith("http")) window.open(clipb);
 	else banner("Not a URL");
 });
 
-map("yf", "ya", null, "Yank link (via hint)");
-map("yc", "yq", null, "Yank codeblock");
-map("ye", "yv", null, "Yank element");
-map("yw", "yY", null, "Yank all tabs in window");
-map("yi", ";di", null, "Download Image");
-mapkey("ym", "Copy markdown link", async () => {
+map("yf", "ya", null, "#7Yank link (via hint)");
+map("yc", "yq", null, "#7Yank codeblock");
+map("ye", "yv", null, "#7Yank element");
+map("yw", "yY", null, "#7Yank all tabs in window");
+map("yi", ";di", null, "#7Download Image");
+mapkey("ym", "#7Copy markdown link", async () => {
 	const mdLink = `[${document.title}](${window.location.href})`;
 	await copyAndNotify(mdLink);
 });
 
 // custom function for notification-shortening
-mapkey("yy", "Copy link", async () => await copyAndNotify(window.location.href));
+mapkey("yy", "#7Copy link", async () => await copyAndNotify(window.location.href));
 
-mapkey("yq", "Copy selection as quote", async () => {
+mapkey("yq", "#7Copy selection as quote", async () => {
 	const selection = window.getSelection()?.toString();
 	if (!selection) return;
 	const mdBlockquote = selection.replace(/^/gm, "> ");
@@ -150,13 +165,14 @@ mapkey("yq", "Copy selection as quote", async () => {
 });
 
 // MISC
-mapkey("P", "Incognito window", () => RUNTIME("openIncognito", { url: window.location.href }));
-map("p", "<Alt-p>", null, "Pin Tab");
-mapkey("i", "Passthrough", () => Normal.PassThrough(1000));
-map("x", "<Alt-s>", null, "Start/Pause Surfingkeys");
+mapkey("P", "#3Incognito window", () => RUNTIME("openIncognito", { url: window.location.href }));
+mapkey("i", "#0Passthrough", () => Normal.PassThrough(1000));
+map("p", "<Alt-p>", null, "#3Pin Tab");
 
 // HACK open config via hammerspoon, as browser is sandboxed and cannot open files
-mapkey(",", "Open Surfingkeys config", () => window.open("hammerspoon://open-surfingkeys-config"));
+mapkey(",", "#0Open Surfingkeys config", () =>
+	window.open("hammerspoon://open-surfingkeys-config"),
+);
 
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
@@ -270,7 +286,6 @@ const unusedKeys = [
 	"ya", // #7Copy a link URL to the clipboard
 	"yma", // #7Copy multiple link URLs to the clipboard
 	"ymc", // #7Copy multiple columns of a table
-	"q", // #1Click on an Image or a button
 	"<Alt-p>", // #3pin/unpin current tab
 	"<Alt-m>", // #3mute/unmute current tab
 	"B", // #4Go one tab history back
@@ -355,11 +370,71 @@ const unusedKeys = [
 	";fs", // #1Display hints to focus scrollable elements
 	"cq", // #7Query word with Hints
 
-	// more
+	"<Ctrl-i>", // Go to edit box with vim editor
+	"<Ctrl-Alt-i>", // Go to edit box with neovim editor
+	"<Alt-s>", // Toggle SurfingKeys on current site
+	"<Alt-i>", // Enter PassThrough mode to temporarily suppress SurfingKeys
+	"yG", // capture full page
+	"yS", // capture scrolling element
+	"0", // scroll to far left
+	"$", // scroll to far right
+	"g0", // goto 1st tab
+	"g$", // goto last tab
+	"E", // go tab left
+	"R", // go tab right
+	"T", // choose tab
+	"C", // Open a link in non-active new tab
+	"U", // Scroll full page up
+	"%", // Scroll to percentage of current page
+	"x", // close tab
+	"b", // Open a bookmark
+
+	"ga", // Open Chrome About
+	"gb", // Open Chrome Bookmarks
+	"gc", // Open Chrome Cache
+	"gk", // Open Chrome Cookies
+	"gn", // Open Chrome net-internals
+
+	";pa", // set proxy mode `always`
+	";pb", // set proxy mode `byhost`
+	";pd", // set proxy mode `direct`
+	";ps", // set proxy mode `system`
+	";pc", // set proxy mode `clear`
+
+	"<Ctrl-d>", // Delete focused item from bookmark or history
+	"<Ctrl-i>", // Edit selected URL with vim editor, then open
+	"<Ctrl-j>", // Toggle Omnibar's position
+	"<Ctrl-D>", // Delete all listed items from bookmark or history
+	"<Ctrl-r>", // Re-sort history by visitCount or lastVisitTime
+	"<Ctrl-m>", // Create vim-like mark for selected item
+	"<Ctrl-'>", // Toggle quotes in an input element
+	"<ArrowDown>", // Forward cycle through the candidates.
+	"<ArrowUp>", // Backward cycle through the candidates.
+	"<Ctrl-n>", // Forward cycle through the candidates.
+	"<Ctrl-p>", // Backward cycle through the candidates.
 ];
+
+const visualUnusedKeys = [
+	"<Ctrl-u>", // #9Backward 20 lines
+	"<Ctrl-d>", // #9Forward 20 lines
+];
+
+const omnibarUnusedKeys = [
+	"<Ctrl-u>", // #9Backward 20 lines
+	"<Ctrl-d>", // #9Forward 20 lines
+];
+
+//──────────────────────────────────────────────────────────────────────────────
 
 for (const key of unusedKeys) {
 	unmap(key);
+}
+
+for (const key of visualUnusedKeys) {
+	vunmap(key);
+}
+for (const key of omnibarUnusedKeys) {
+	cunmap(key);
 }
 
 for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {
