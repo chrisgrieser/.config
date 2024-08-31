@@ -21,8 +21,8 @@ const {
 	unmap,
 	vmapkey,
 	vunmap,
-	cunmap,
 } = api;
+
 const banner = api.Front.showBanner;
 
 /** @param {string} text */
@@ -372,7 +372,6 @@ const unusedKeys = [
 
 	"<Ctrl-i>", // Go to edit box with vim editor
 	"<Ctrl-Alt-i>", // Go to edit box with neovim editor
-	"<Alt-s>", // Toggle SurfingKeys on current site
 	"<Alt-i>", // Enter PassThrough mode to temporarily suppress SurfingKeys
 	"yG", // capture full page
 	"yS", // capture scrolling element
@@ -400,26 +399,9 @@ const unusedKeys = [
 	";pd", // set proxy mode `direct`
 	";ps", // set proxy mode `system`
 	";pc", // set proxy mode `clear`
-
-	"<Ctrl-d>", // Delete focused item from bookmark or history
-	"<Ctrl-i>", // Edit selected URL with vim editor, then open
-	"<Ctrl-j>", // Toggle Omnibar's position
-	"<Ctrl-D>", // Delete all listed items from bookmark or history
-	"<Ctrl-r>", // Re-sort history by visitCount or lastVisitTime
-	"<Ctrl-m>", // Create vim-like mark for selected item
-	"<Ctrl-'>", // Toggle quotes in an input element
-	"<ArrowDown>", // Forward cycle through the candidates.
-	"<ArrowUp>", // Backward cycle through the candidates.
-	"<Ctrl-n>", // Forward cycle through the candidates.
-	"<Ctrl-p>", // Backward cycle through the candidates.
 ];
 
 const visualUnusedKeys = [
-	"<Ctrl-u>", // #9Backward 20 lines
-	"<Ctrl-d>", // #9Forward 20 lines
-];
-
-const omnibarUnusedKeys = [
 	"<Ctrl-u>", // #9Backward 20 lines
 	"<Ctrl-d>", // #9Forward 20 lines
 ];
@@ -432,9 +414,6 @@ for (const key of unusedKeys) {
 
 for (const key of visualUnusedKeys) {
 	vunmap(key);
-}
-for (const key of omnibarUnusedKeys) {
-	cunmap(key);
 }
 
 for (const alias of ["b", "d", "g", "h", "w", "y", "s", "e"]) {

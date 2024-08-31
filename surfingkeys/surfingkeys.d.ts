@@ -51,6 +51,7 @@ declare type SurfingKeysAPI = {
 	aceVimMap: (lhs: string, rhs: string, ctx?: "insert" | "normal") => void;
 	searchSelectedWith: (search: string, scope?: RegExp) => void;
 	unmap: (keys: string, scope?: RegExp) => void;
+	vunmap: (keys: string, scope?: RegExp) => void;
 	removeSearchAlias: (alias: string, searchLeaderKey?: string, onlyThisSiteKey?: string) => void;
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	RUNTIME: (name: string, args?: object, callback?: () => void) => void;
