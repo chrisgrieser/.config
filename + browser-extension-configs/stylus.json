@@ -4,7 +4,7 @@
       "openEditInWindow": false,
       "openEditInWindow.popup": false,
       "windowPosition": {},
-      "show-badge": true,
+      "show-badge": false,
       "disableAll": false,
       "exposeIframes": false,
       "exposeStyleName": false,
@@ -158,18 +158,19 @@
   {
     "enabled": true,
     "installDate": 1714486578670,
-    "name": "Obsidian developer docs",
+    "name": "Obsidian developer docs & help",
     "sections": [
       {
         "code": "body .site-footer,\nbody .site-body-right-column .site-body-right-column-inner {\n\tdisplay: none;\n}\n\nbody .published-container {\n\t--sidebar-right-width: 0px;\n}",
         "urlPrefixes": [
-          "https://docs.obsidian.md"
+          "https://docs.obsidian.md",
+          "https://help.obsidian.md/"
         ]
       }
     ],
-    "updateDate": 1714486839498,
+    "updateDate": 1725111874810,
     "_id": "8f85b535-fc91-4e26-a07e-cfc4c8d6d061",
-    "_rev": 1714514779169,
+    "_rev": 1725111874811,
     "id": 4
   }
 ]
