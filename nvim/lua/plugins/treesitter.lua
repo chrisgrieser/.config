@@ -30,8 +30,8 @@ return {
 			enable = true,
 			disable = {
 				"markdown", -- indentation at bullet points is worse
-				"javascript", -- some wrong indentation when using `o`
-				"typescript",
+				-- "javascript", -- some wrong indentation when using `o`
+				-- "typescript",
 				"yaml", -- wrong indentation in list continuation
 			},
 		},
