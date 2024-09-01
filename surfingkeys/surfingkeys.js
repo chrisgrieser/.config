@@ -130,7 +130,7 @@ map("M", ";gw", null, "Merge Windows");
 
 // Links
 mapkey("F", "#1Open multiple links via hint", () => {
-	Hints.create("", Hints.dispatchMouseClick, { active: false, tabbed: true, multipleHits: true });
+	Hints.create("", Hints.dispatchMouseClick, { multipleHits: true });
 });
 map("c", ";U"); // Edit current URL
 
@@ -143,7 +143,7 @@ mapkey("o", "#3Open from clipboard", async () => {
 
 map("yf", "ya", null, "#7Yank link (via hint)");
 map("yc", "yq", null, "#7Yank codeblock");
-map("ye", "yv", null, "#7Yank element");
+map("ye", "yv", null, "#7Yank text of element");
 map("yw", "yY", null, "#7Yank all tabs in window");
 map("yi", ";di", null, "#7Download Image");
 mapkey("ym", "#7Copy markdown link", async () => {
@@ -362,7 +362,6 @@ const unusedKeys = [
 	"'", // #10Jump to vim-like mark
 	"<Ctrl-'>", // #10Jump to vim-like mark in new tab.
 	"yg", // #7Capture current page
-	"gu", // #4Go up one path in the URL
 	";m", // #1mouse out last element
 	";pp", // #7Paste html on current page
 	";t", // Translate selected text with google

@@ -50,7 +50,7 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 			os.rename(path, browserSettings .. name)
 		elseif name:find("my%-ublock%-backup_.*%.txt") then
 			os.rename(path, browserSettings .. "ublock-settings.json")
-		elseif name:find(".*_adg_ext_settings_.*%.json") then
+		elseif name:find("adg_ext_settings_.*%.json") then
 			os.rename(path, browserSettings .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
 			os.rename(path, browserSettings .. "stylus.json")
