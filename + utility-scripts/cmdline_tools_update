@@ -1,13 +1,12 @@
 #!/bin/zsh
-function update_cmdline_tools {
-	local update
-	update=$(softwareupdate --list |
-		grep --only-matching --extended-regexp 'Command Line Tools.*$' |
-		head -n1)
-	if [[ -z "$update" ]]; then
-		echo "No update for command line tools available."
-		return 0
-	fi
-	softwareupdate --install "$update"
-}
+echo "Checking for command line tools updates…"
 
+update=$(softwareupdate --list |
+	grep --only-matching --extended-regexp 'Command Line Tools.*$' |
+	head -n1)
+
+if [[ -z "$update" ]]; then
+	echo "No update for command line tools available."
+else
+	softwareupdate --install "$update"
+fi

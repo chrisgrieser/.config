@@ -8,7 +8,7 @@ setopt GLOB_DOTS            # glob includes dotfiles
 setopt PIPE_FAIL            # tracability: exit if pipeline failed
 setopt NO_BANG_HIST         # don't expand `!`
 
-# colorized
+# colorized 127 error code
 function command_not_found_handler() {
 	print "\e[1;33mCommand not found: \e[1;31m$1\e[0m"
 	return 127

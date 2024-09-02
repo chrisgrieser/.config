@@ -18,7 +18,7 @@ function M.copyAndNotify(text)
 	vim.notify(text, vim.log.levels.INFO, { title = "Copied" })
 end
 
----@param hlName string name of highlight group
+---@param hlName string|nil name of highlight group
 ---@param key "fg"|"bg"|"bold"
 ---@nodiscard
 ---@return string|nil the value, or nil if hlgroup or key is not available
@@ -30,12 +30,8 @@ function M.getHlValue(hlName, key)
 		hlName = hl.link
 	until not hl.link
 	local value = hl[key]
-	if value then
-		return ("#%06x"):format(value)
-	else
-		local msg = ("No %s available for highlight group %q"):format(key, hlName)
-		M.notify("getHighlightValue", msg, "warn")
-	end
+	if not value then return nil end
+	return ("#%06x"):format(value)
 end
 
 --------------------------------------------------------------------------------
