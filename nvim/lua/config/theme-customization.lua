@@ -15,7 +15,8 @@ local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command
 
 local function customHighlights()
 	-- Comments: keep color and add underlines
-	setHl("@string.special.url.comment", { fg = u.getHlValue("Comment", "fg"), underline = true })
+	local commentFg = u.getHlValue("Comment", "fg")
+	if commentFg then setHl("@string.special.url.comment", { fg = commentFg, underline = true }) end
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
