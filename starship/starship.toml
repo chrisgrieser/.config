@@ -11,6 +11,7 @@ $character\
 """
 
 right_format = """\
+$jobs\
 $cmd_duration\
 ${custom.tokei_loc}\
 ${custom.alfred}\
@@ -126,6 +127,13 @@ format = """\
 
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
+
+[jobs]
+symbol = " "
+format = "[+$number $symbol]($style)"
+style = "fg:bold purple"
+symbol_threshold = 1
+number_threshold = 1
 
 [custom.tokei_loc]
 description = "Number of lines of code in the current project using tokei (for performance)."
