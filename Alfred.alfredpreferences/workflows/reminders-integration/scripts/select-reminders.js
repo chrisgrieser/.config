@@ -70,6 +70,7 @@ function run() {
 		const alfredItem = {
 			title: emoji + title,
 			subtitle: displayBody,
+			text: { copy: content, largetype: content },
 			variables: {
 				id: externalId,
 				title: title,
