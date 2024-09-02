@@ -3,14 +3,14 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	"0xstepit/flow.nvim",
-	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 }
 
 local darkThemes = {
-	-- "rebelot/kanagawa.nvim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- { "0xstepit/flow.nvim", opts = true },
+	-- "rebelot/kanagawa.nvim",
 }
 
 vim.g.lightOpacity = 0.92

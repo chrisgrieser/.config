@@ -9,7 +9,6 @@ local actFun = wt.action_callback
 local theme = require("theme-utils")
 --------------------------------------------------------------------------------
 
-
 M.keys = {
 	{ key = "q", mods = "CMD", action = act.QuitApplication },
 	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
@@ -27,8 +26,8 @@ M.keys = {
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
 	-- INFO using the mapping from the terminal_keybindings.zsh
-	-- undo 
-	{ key = "z", mods = "CMD", action = act.SendKey { key = "z", mods = "CTRL" } },
+	-- undo
+	{ key = "z", mods = "CMD", action = act.SendKey { key = "n", mods = "CTRL" } },
 	-- accept & execute suggestion
 	{ key = "s", mods = "CMD", action = act.SendKey { key = "y", mods = "CTRL" } },
 

@@ -1,6 +1,8 @@
+# shellcheck disable=SC1091
+#───────────────────────────────────────────────────────────────────────────────
+
 # point config paths to `.config`
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # macOS currently ships less v.581, which lacks the ability to read lesskey
 # source files. Therefore for this to work, the version of less provided by
@@ -16,6 +18,7 @@ export LESSKEYIN="$HOME/.config/less/lesskey"
 grey="38;5;247"
 file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey" # `.*=` affects dotfiles
 export LS_COLORS="di=0;34:ln=3;35:or=7;31:$file_colors"
+export CLICOLOR=1 # makes `ls` use color by default
 
 export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
 export EZA_STRICT=1
@@ -24,8 +27,6 @@ export EZA_ICON_SPACING=1
 
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
-
-export CLICOLOR=1 # makes `ls` use color by default
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -47,25 +48,8 @@ export FZF_DEFAULT_OPTS='
 export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 
 #───────────────────────────────────────────────────────────────────────────────
-
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
-
-# DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
-# shellcheck disable=2034 # used in other files
-typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# DOCS https://github.com/zsh-users/zsh-autosuggestions#configuration
-export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
-bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
-
-#───────────────────────────────────────────────────────────────────────────────
 # NPM
-# Don't clutter home directory with useless `.node_repl_history`
-# https://nodejs.org/api/repl.html#repl_environment_variable_options
+# Don't clutter home directory with useless `.node_repl_history` https://nodejs.org/api/repl.html#repl_environment_variable_options
 export NODE_REPL_HISTORY=""
 
 # Instead of writing npm config to `.npmrc`, can also be set via shell
@@ -79,3 +63,14 @@ export npm_config_cache="$HOME/.cache/npm" # do not crowd `$HOME`
 # permanent: brew reinstall openssl@3 ca-certificates
 
 #───────────────────────────────────────────────────────────────────────────────
+
+# SEMANTIC PROMPTS (WEZTERM) https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
+
+# MAGIC DASHBOARD
+source "$ZDOTDIR/plugins/magic_dashboard.zsh"
+
+# STARSHIP
+# should be loaded after npm settings
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)"

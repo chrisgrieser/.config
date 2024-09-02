@@ -4,37 +4,43 @@
 # - some bindings with '^' are reserved (^M=enter, ^I=tab)
 # - all docs can be found here: https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
 #───────────────────────────────────────────────────────────────────────────────
-# KEYBINDINGS
+# CUSTOM KEYBINDINGS
 
+# ctrl+u -> cut whole buffer
 function _cut_buffer {
 	echo -n "$BUFFER" | pbcopy
 	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
 zle -N _cut_buffer
+bindkey '^U' _cut_buffer
 
+# ctrl+u -> copy location to clipboard
 function _copy_location {
 	echo "$PWD" | pbcopy
 	zle -M "Copied: $PWD"
 }
 zle -N _copy_location
+bindkey '^P' _copy_location
 
-bindkey -M viins '^P' _copy_location
-bindkey -M viins '^U' _cut_buffer
-bindkey -M vicmd '^U' _cut_buffer
+# ctrl+z -> unsuspect (in vim/fzf, it suspends)
+function _unsuspend { fg; }
+zle -N _unsuspend
+bindkey '^Z' _unsuspend
 
-bindkey -M viins '…' insert-last-word
-bindkey -M viins '^Z' undo # remapped to `cmd+z` via wezterm
+# ctr+f -> edit in cmdline
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^F' edit-command-line
 
-autoload -U edit-command-line && zle -N edit-command-line
-bindkey -M viins '^F' edit-command-line
-bindkey -M vicmd '^F' edit-command-line
+#───────────────────────────────────────────────────────────────────────────────
 
-# alt+arrow to move between words (emulating macOS default behavior)
-bindkey -M viins "^[[1;3D" backward-word
-bindkey -M viins "^[[1;3C" forward-word
-
-bindkey -M viins "^A" beginning-of-line
-bindkey -M viins "^E" end-of-line
+# REMAPPINGS
+bindkey '…' insert-last-word    # alt+. on macOS
+bindkey '^N' undo               # remapped to `cmd+z` via wezterm
+bindkey "^[[1;3D" backward-word # alt+arrow to move between words (emulating macOS default behavior)
+bindkey "^[[1;3C" forward-word
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
@@ -59,7 +65,8 @@ precmd_functions+=(_fix_cursor)
 #───────────────────────────────────────────────────────────────────────────────
 # VIM BINDINGS
 
-bindkey -M vicmd 'k' up-line # disable accidentally searching history
+bindkey -M vicmd 'k' up-line               # disable accidentally searching history
+bindkey -M viins '^?' backward-delete-char # FIX backspace
 
 bindkey -M vicmd 'L' vi-end-of-line
 bindkey -M vicmd 'H' vi-first-non-blank
@@ -69,8 +76,6 @@ bindkey -M vicmd 'U' redo
 bindkey -M vicmd 'M' vi-join
 bindkey -M vicmd -s 'Y' 'y$'
 
-bindkey -M viins '^?' backward-delete-char # FIX backspace
-
 #───────────────────────────────────────────────────────────────────────────────
 # YANK/DELETE to (macOS) system clipboard
 
@@ -79,12 +84,11 @@ function _vi_yank_pbcopy {
 	print -n "$CUTBUFFER" | pbcopy
 }
 zle -N _vi_yank_pbcopy
+bindkey -M vicmd 'y' _vi_yank_pbcopy
 
 function _vi_delete_pbcopy {
 	zle vi-delete
 	print -n "$CUTBUFFER" | pbcopy
 }
 zle -N _vi_delete_pbcopy
-
-bindkey -M vicmd 'y' _vi_yank_pbcopy
 bindkey -M vicmd 'd' _vi_delete_pbcopy
