@@ -326,7 +326,6 @@ const unusedKeys = [
 	"cp", // #13Toggle proxy for current site
 	";cp", // #13Copy proxy info
 	";ap", // #13Apply proxy info from clipboard
-	"gr", // #14Read selected text or text from clipboard
 	"on", // #3Open newtab
 	"ge", // #12Open Chrome Extensions
 	";i", // #12Open Chrome Inspect
