@@ -3,6 +3,7 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
+	"0xstepit/flow.nvim",
 	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
 }

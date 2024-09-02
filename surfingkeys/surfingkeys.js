@@ -218,26 +218,12 @@ mapkey(
 	{ domain: /reddit\.com/ },
 );
 
-mapkey(
-	"yg",
-	"Copy GitHub Link",
-	async () => {
-		const url = window.location.href;
-		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
-		await copyAndNotify(repo);
-	},
-	{ domain: /github\.com/ },
-);
-mapkey(
-	"gI",
-	"Open GitHub issues",
-	() => {
-		const url = window.location.href;
-		const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/]*)/) || [];
-		window.location.href = `https://github.com/${repo}/issues`;
-	},
-	{ domain: /github\.com/ },
-);
+mapkey("yg", "Copy GitHub Link", async () => {
+	const url = window.location.href;
+	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
+	if (!repo) return;
+	await copyAndNotify(repo);
+});
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -360,7 +346,6 @@ const unusedKeys = [
 	"ymv", // #7Yank text of multiple elements
 	"'", // #10Jump to vim-like mark
 	"<Ctrl-'>", // #10Jump to vim-like mark in new tab.
-	"yg", // #7Capture current page
 	";m", // #1mouse out last element
 	";pp", // #7Paste html on current page
 	";t", // Translate selected text with google
@@ -389,6 +374,8 @@ const unusedKeys = [
 	"ga", // Open Chrome About
 	"gb", // Open Chrome Bookmarks
 	"gc", // Open Chrome Cache
+	"gh", // Open Chrome History
+	"gd", // Open Chrome Downloads
 	"gk", // Open Chrome Cookies
 	"gn", // Open Chrome net-internals
 
