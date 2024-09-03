@@ -672,54 +672,54 @@
 			<key>note</key>
 			<string>restart</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>535</real>
 		</dict>
 		<key>2CE26F09-C132-4116-A0F7-6E5B72AFEDC4</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>300</real>
 		</dict>
 		<key>2E062917-08D9-4FB6-9EF1-2376066BB93C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>685</real>
 		</dict>
 		<key>359302C7-E44C-47C5-96C1-E444E2CEB15A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>565</real>
 		</dict>
 		<key>52032C38-87F2-41DB-B099-E3865B6D99A2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>855</real>
+			<real>805</real>
 		</dict>
 		<key>567BC1AF-FC58-407C-93F8-59F672348663</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>415</real>
 		</dict>
 		<key>5956591A-FB95-4AD5-BE0A-008DB41E2F0B</key>
 		<dict>
@@ -735,9 +735,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>530</real>
 		</dict>
 		<key>6594A058-1046-48E9-82E3-FE0574D679D5</key>
 		<dict>
@@ -753,18 +753,18 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>450</real>
 		</dict>
 		<key>7277D4C0-5EBA-4715-A9C5-84DB6ADB800C</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>650</real>
 		</dict>
 		<key>96BEB152-706D-407E-882B-113E7E4821F5</key>
 		<dict>
@@ -791,9 +791,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>770</real>
 		</dict>
 		<key>C8BAA286-8178-4777-B3D8-B9958B57D2DD</key>
 		<dict>
@@ -811,18 +811,18 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>175</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>335</real>
 		</dict>
 		<key>E5141743-4533-4E28-A3EC-2E2A98659185</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>535</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
