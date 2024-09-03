@@ -61,7 +61,7 @@ function update() {
 		echo "$mas_updates" | cut -f1 -d" " | xargs mas upgrade
 	fi
 
-	_print-section "Finish up"
+	# FINISH
 	# sketchybar restart for new permission
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
