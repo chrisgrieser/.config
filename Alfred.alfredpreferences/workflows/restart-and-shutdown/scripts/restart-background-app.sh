@@ -7,7 +7,7 @@ app="$*"
 if [[ "$app" == "hammerspoon" && "$action" == "reload" ]]; then
 	open -g "hammerspoon://hs-reload"
 	echo -n "🔁 Reloading Hammerspoon" # Alfred notification
-	return 0
+	return 3
 fi
 
 case "$app" in
