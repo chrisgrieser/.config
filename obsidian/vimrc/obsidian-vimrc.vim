@@ -23,6 +23,9 @@ nnoremap x "_dl
 " don't override register
 vnoremap p P
 
+" paste at EoL
+nnoremap P mzA<Space><Esc>p`z
+
 " paste url into selection/cword
 " macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 noremap <M-k> :pasteinto
