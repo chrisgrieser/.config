@@ -61,7 +61,7 @@ local routes = {
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
-	-- unneeded info on search patterns, when pattern not found
+	-- unneeded info on search patterns when pattern not found
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 }
 
@@ -91,7 +91,7 @@ return {
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
-					-- formatting for`:Eval`(custom `:lua=` replacement)
+					-- formatting for`:Eval`(my custom `:lua=` replacement)
 					eval = {
 						pattern = "^:Eval%s+",
 						lang = "lua",
