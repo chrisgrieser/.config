@@ -5,7 +5,6 @@ local u = require("config.utils")
 
 ---since nvim-lspconfig and mason.nvim use different package names
 ---mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
-
 ---@type table<string, string>
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
