@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</string>
+				<string>B97893FA-B5CA-46C3-9712-35A82208E1BD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -22,6 +22,19 @@
 			</dict>
 		</array>
 		<key>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18D1939C-B8D1-4F4A-BC26-4BD3C664A397</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>18D1939C-B8D1-4F4A-BC26-4BD3C664A397</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -120,6 +133,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>B97893FA-B5CA-46C3-9712-35A82208E1BD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>C4DF6DD8-E8F7-4633-905C-888FB18526E6</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>18D1939C-B8D1-4F4A-BC26-4BD3C664A397</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -155,6 +193,95 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://sci-hub.st/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>8363E3F1-26D0-4D85-81E8-78AC6F240E00</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>sci</string>
+				<key>subtext</key>
+				<string>'{query}' OR Current Browser Tab</string>
+				<key>text</key>
+				<string>Sci-Hub Paper  &amp; Annas Archive</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>05C9EB07-A13B-4FD6-99B2-4ABDC6DB35CB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>C4DF6DD8-E8F7-4633-905C-888FB18526E6</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>non-empty</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B97893FA-B5CA-46C3-9712-35A82208E1BD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -170,6 +297,35 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>32FE0E4D-09C0-4DB0-81EA-F77B71C65466</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>18D1939C-B8D1-4F4A-BC26-4BD3C664A397</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://annas-archive.org/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>670383ED-59F8-46BF-9A99-15DBFA401A90</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -212,147 +368,6 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://sci-hub.st/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>8363E3F1-26D0-4D85-81E8-78AC6F240E00</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>sci</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Sci-Hub Paper  &amp; Annas Archive</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>05C9EB07-A13B-4FD6-99B2-4ABDC6DB35CB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://elicit.org/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://annas-archive.org/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>670383ED-59F8-46BF-9A99-15DBFA401A90</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://inciteful.xyz/search?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://consensus.app/results/?q={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C45CBCBC-55EE-43A1-BE2A-924504328AE2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -425,6 +440,69 @@ end tell
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://elicit.org/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://inciteful.xyz/search?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://consensus.app/results/?q={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C45CBCBC-55EE-43A1-BE2A-924504328AE2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -437,16 +515,25 @@ end tell
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>115</real>
 		</dict>
 		<key>0905BCCC-B191-49CA-888E-9F9C0E1F7CD1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>615</real>
+			<real>715</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>50</real>
+		</dict>
+		<key>18D1939C-B8D1-4F4A-BC26-4BD3C664A397</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>865</real>
+			<key>ypos</key>
+			<real>155</real>
 		</dict>
 		<key>1E0715A2-B8BC-459F-B957-6447B0E15A13</key>
 		<dict>
@@ -455,9 +542,9 @@ end tell
 			<key>note</key>
 			<string>Download bibtex for Website</string>
 			<key>xpos</key>
-			<real>440</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>305</real>
 		</dict>
 		<key>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</key>
 		<dict>
@@ -511,18 +598,18 @@ end tell
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>180</real>
 		</dict>
 		<key>8363E3F1-26D0-4D85-81E8-78AC6F240E00</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>55</real>
 		</dict>
 		<key>885E52AE-9E54-4319-A19C-E6201F89E6D0</key>
 		<dict>
@@ -532,6 +619,17 @@ end tell
 			<real>255</real>
 			<key>ypos</key>
 			<real>360</real>
+		</dict>
+		<key>B97893FA-B5CA-46C3-9712-35A82208E1BD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>query</string>
+			<key>xpos</key>
+			<real>590</real>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 		<key>C45CBCBC-55EE-43A1-BE2A-924504328AE2</key>
 		<dict>
@@ -549,9 +647,9 @@ end tell
 			<key>note</key>
 			<string>trigger bibItNow download</string>
 			<key>xpos</key>
-			<real>605</real>
+			<real>595</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>305</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
