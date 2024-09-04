@@ -326,6 +326,8 @@ serverConfigs.ltex = {
 		},
 	},
 	on_attach = function(ltex, bufnr)
+		detachIfObsidianOrIcloud(ltex, bufnr)
+
 		-- have `zg` update ltex' dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
 			local word
@@ -340,8 +342,6 @@ serverConfigs.ltex = {
 			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
-
-		detachIfObsidianOrIcloud(ltex, bufnr)
 	end,
 }
 
