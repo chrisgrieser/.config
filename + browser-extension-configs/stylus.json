@@ -161,16 +161,16 @@
     "name": "Obsidian developer docs & help",
     "sections": [
       {
-        "code": "body .site-footer,\nbody .site-body-right-column .site-body-right-column-inner {\n\tdisplay: none;\n}\n\nbody .published-container {\n\t--sidebar-right-width: 0px;\n}",
+        "code": ".site-footer,\nbody .graph-view-outer.graph-view-outer.graph-view-outer,\n.site-body-left-column {\n    display: none;\n    --sidebar-left-width: 0px;\n}",
         "urlPrefixes": [
           "https://docs.obsidian.md",
           "https://help.obsidian.md/"
         ]
       }
     ],
-    "updateDate": 1725111874810,
+    "updateDate": 1725445083547,
     "_id": "8f85b535-fc91-4e26-a07e-cfc4c8d6d061",
-    "_rev": 1725111874811,
+    "_rev": 1725445083547,
     "id": 4
   }
 ]
