@@ -271,9 +271,7 @@ serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
----necessary helper function, as ltex, vale, etc lack ignore files.
----This is to be used as `on_attach` function, as returning nil as root prevents
----the LSP from attaching.
+---Helper function, as ltex, vale, etc lack ignore files
 ---@param client vim.lsp.Client
 ---@param bufnr number
 local function detachIfObsidianOrIcloud(client, bufnr)
@@ -295,7 +293,7 @@ serverConfigs.ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
 				-- HACK since reading external file with the method described in ltex-docs[^1] does not work
-				-- [1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
+				-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
 				["en-US"] = (function()
 					if not vim.uv.fs_stat(vim.o.spellfile) then
 						u.notify("ltex", "Spellfile not found: " .. vim.o.spellfile, "warn")
