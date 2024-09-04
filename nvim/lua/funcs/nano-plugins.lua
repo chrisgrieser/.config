@@ -1,7 +1,6 @@
 -- A bunch of commands that are too small to be published as plugins, but too
 -- big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
-
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -24,7 +23,7 @@ end
 ---@param first any -- if truthy, run first recipe
 function M.justRecipe(first)
 	local config = {
-		ignoreRecipe = { "release" }, -- since it requires user input
+		ignoreRecipes = { "release" }, -- since it requires user input
 		skipFirstInSelection = true,
 		useQuickfix = { "check-tsc" },
 	}
@@ -55,7 +54,7 @@ function M.justRecipe(first)
 	end
 	local recipes = vim.split(vim.trim(result.stdout), " ")
 	recipes = vim.tbl_filter(
-		function(r) return not vim.tbl_contains(config.ignoreRecipe, r) end,
+		function(r) return not vim.tbl_contains(config.ignoreRecipes, r) end,
 		recipes
 	)
 
@@ -110,6 +109,7 @@ function M.startStopRecording(toggleKey, register)
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording" })
 		end
 	end
+	-- sound if on macOS
 	if vim.uv.os_uname().sysname == "Darwin" then
 		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 			.. (notRecording and "begin_record.caf" or "end_record.caf")
