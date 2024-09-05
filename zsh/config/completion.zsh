@@ -11,7 +11,7 @@
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
 
 # color items in specific group
-zstyle ':completion:*:aliases' list-colors '=*=35'
+# zstyle ':completion:*:aliases' list-colors '=*=35'
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
 # 2. apply LS_COLORS to files/directories
@@ -30,12 +30,9 @@ zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
-bindkey -M vicmd '\t' menu-select
-bindkey '\t' menu-select                           # <Tab> next item
+bindkey '^I' menu-select                           # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
 bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
-bindkey -M menuselect '^P' vi-backward-blank-word  # prev group
-bindkey -M menuselect '^N' vi-forward-blank-word   # next group
 
 #───────────────────────────────────────────────────────────────────────────────
 # SORT
@@ -43,11 +40,11 @@ bindkey -M menuselect '^N' vi-forward-blank-word   # next group
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
 # INFO moving "path-directories" down to change the order of "directories in cdpath"
-zstyle ':completion:*' group-order \
-	all-expansions expansions options \
-	path-directories \
-	aliases suffix-aliases functions reserved-words builtins commands \
-	local-directories directories executables
+# zstyle ':completion:*' group-order \
+# 	all-expansions expansions options \
+# 	path-directories \
+# 	aliases suffix-aliases functions reserved-words builtins commands \
+# 	local-directories directories executables
 
 #────────────────────────────────────────────────────────────────────────────
 

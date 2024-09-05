@@ -167,7 +167,7 @@ keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 --------------------------------------------------------------------------------
 
 -- Append to EoL
-local trailChars = { ",", "\\", "{", ")", ";" }
+local trailChars = { ",", "\\", "{", ")", ";", "." }
 for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key))
 end
