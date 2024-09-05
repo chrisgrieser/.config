@@ -11,7 +11,7 @@
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
 
 # color items in specific group
-# zstyle ':completion:*:aliases' list-colors '=*=35'
+zstyle ':completion:*:aliases' list-colors '=*=35'
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
 # 2. apply LS_COLORS to files/directories
@@ -30,7 +30,9 @@ zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
-bindkey '^I' menu-select                           # <Tab> next item
+bindkey '\t' menu-select # <Tab> starts completion
+bindkey '^E' menu-select
+bindkey -M menuselect '\t' menu-complete           # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
 bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
@@ -39,12 +41,12 @@ bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
 zstyle ':completion:*' file-sort modification follow # "follow" makes it follow symlinks
 
-# INFO moving "path-directories" down to change the order of "directories in cdpath"
-# zstyle ':completion:*' group-order \
-# 	all-expansions expansions options \
-# 	path-directories \
-# 	aliases suffix-aliases functions reserved-words builtins commands \
-# 	local-directories directories executables
+# INFO inserting "path-directories" to add "directories in cdpath" to the top
+zstyle ':completion:*' group-order \
+	path-directories local-directories directories \
+	all-expansions expansions options \
+	aliases suffix-aliases functions reserved-words builtins commands executables \
+	remotes hosts recent-branches commits
 
 #────────────────────────────────────────────────────────────────────────────
 
