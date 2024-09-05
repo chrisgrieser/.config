@@ -4,7 +4,7 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 app="$*"
 
 # shellcheck disable=2154
-if [[ "$app" == "hammerspoon" && "$action" == "reload" ]]; then
+if [[ "$app" == "Hammerspoon" && "$action" == "reload" ]]; then
 	open -g "hammerspoon://hs-reload"
 	echo -n "🔁 Reloading Hammerspoon" # Alfred notification
 	return 3
@@ -16,7 +16,7 @@ case "$app" in
 	echo -n "🔁 Reloading sketchybar" # Alfred notification
 	return 0
 	;;
-"alttab" | "hammerspoon")
+"AltTab" | "Hammerspoon")
 	killall "$app"
 	while pgrep -xq "$app"; do sleep 0.1; done
 	open -a "$app"

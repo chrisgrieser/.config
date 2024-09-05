@@ -21,7 +21,7 @@ local lspToMasonMap = {
 	ruff = "ruff", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
-	tsserver = "typescript-language-server",
+	ts_ls = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	vale_ls = "vale-ls", -- natural language linter, used for markdown
 	yamlls = "yaml-language-server",
@@ -211,7 +211,7 @@ serverConfigs.emmet_language_server = {
 -- JS/TS
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-serverConfigs.tsserver = {
+serverConfigs.ts_ls = {
 	settings = {
 		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
 		-- (biome works only on single-file and so already check for unintended re-declarations.)
@@ -242,7 +242,7 @@ serverConfigs.tsserver = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-serverConfigs.tsserver.settings.javascript = serverConfigs.tsserver.settings.typescript
+serverConfigs.ts_ls.settings.javascript = serverConfigs.ts_ls.settings.typescript
 
 --------------------------------------------------------------------------------
 
