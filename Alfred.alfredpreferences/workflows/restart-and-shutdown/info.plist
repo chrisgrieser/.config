@@ -420,7 +420,7 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>hammerspoon</string>
+				<string>Hammerspoon</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -461,7 +461,7 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>hammerspoon</string>
+				<string>Hammerspoon</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -625,7 +625,7 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>alttab</string>
+				<string>AltTab</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
