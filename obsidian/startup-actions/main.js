@@ -97,7 +97,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		this.addCommand({
 			id: "open-plugin-settings",
 			name: "Open plugin settings",
-			icon: "cog", // relevant for mobile
+			icon: "cog", // relevant for mobile/ribbon
 			callback: () => new PluginSettings(this.app).open(),
 		});
 	}
