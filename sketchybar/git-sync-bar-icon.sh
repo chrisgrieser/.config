@@ -22,7 +22,7 @@ while read -r line; do
 	change_count=0 # to account for empty changes adding one blank line
 	[[ -n "$changes" ]] && change_count=$(echo "$changes" | wc -l | tr -d " ")
 
-	if [[ "$changes" =~ index.lock ]] ; then # blocked by lockfile
+	if [[ "$changes" =~ index\.lock ]] ; then # blocked by lockfile
 		all_changes="$all_changes $letter "
 	elif [[ $change_count -ne 0 ]] ; then
 		all_changes="$all_changes$change_count$letter "
