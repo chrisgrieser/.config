@@ -40,6 +40,7 @@ function getHackernewsPosts(oldItems) {
 	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${opts.pagesToRequest}`;
 	const response = app.doShellScript(`curl -sL "${url}"`);
 	if (!response) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(`Error: No response from ${url}`);
 		return;
 	}
@@ -147,6 +148,7 @@ function getRedditPosts(subredditName, oldItems) {
 		"https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}"`;
 	const response = JSON.parse(app.doShellScript(curlCommand));
 	if (response.error) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(`Error ${response.error}: ${response.message}`);
 		return;
 	}
@@ -194,7 +196,8 @@ function getRedditPosts(subredditName, oldItems) {
 			const cleanTitle = item.title
 				.replaceAll("&lt;", "<")
 				.replaceAll("&gt;", ">")
-				.replaceAll("&amp;", "&");
+				.replaceAll("&amp;", "&")
+				.trim();
 
 			/** @type{AlfredItem} */
 			const post = {
