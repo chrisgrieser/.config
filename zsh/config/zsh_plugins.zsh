@@ -9,6 +9,7 @@ export FPATH="$ZDOTDIR/completions:$HOMEBREW_PREFIX/share/zsh/site-functions:$FP
 # ZSH-COMPLETIONS
 # also loads compinit stuff, therefore has to be loaded before most plugins
 source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+
 # INFO not needed when using zsh-autocomplete
 # autoload compinit -Uz +X && compinit
 # [[ $(uname -p) == "i386" ]] && compaudit | xargs chmod g-w # FIX for Intel Mac, https://github.com/zsh-users/zsh-completions/issues/433#issuecomment-629539004
