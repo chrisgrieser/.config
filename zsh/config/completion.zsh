@@ -30,8 +30,10 @@ zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
-bindkey '\t' menu-select # <Tab> starts completion
-bindkey '^E' menu-select
+# BUG not working: https://github.com/marlonrichert/zsh-autocomplete/issues/749
+bindkey '\t' menu-select   # <Tab> starts completion
+bindkey '^[[Z' menu-select # <S-Tab> starts completion
+
 bindkey -M menuselect '\t' menu-complete           # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
 bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
