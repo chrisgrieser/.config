@@ -12,7 +12,7 @@ local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 local desktop = home .. "/Desktop/"
 local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 
-M.pathw_fileHub = pathw(desktop, function(paths, _)
+M.pathw_desktop = pathw(desktop, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, path in pairs(paths) do
@@ -93,6 +93,12 @@ M.pathw_fileHub = pathw(desktop, function(paths, _)
 		end
 	end
 end):start()
+
+--------------------------------------------------------------------------------
+
+-- TEST figure out what keeps re-creating the file hub folder
+local filehub = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
+M.pathw_icloud = pathw(filehub, function(_, _) u.notify("File Hub", "Re-created.") end):start()
 
 --------------------------------------------------------------------------------
 return M
