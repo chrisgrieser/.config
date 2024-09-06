@@ -8,8 +8,8 @@
 		<string>ai-searches.0BCB75C6-A09E-462A-A007-48C1F6C7C745</string>
 		<string>features.websearch.custom.3C0737F9-12F8-416B-B85E-84617699AF0F.fallback</string>
 	</array>
-	<key>showContactsUsingMetadata</key>
-	<true/>
+	<key>showContacts</key>
+	<false/>
 	<key>showPreferences</key>
 	<false/>
 </dict>
