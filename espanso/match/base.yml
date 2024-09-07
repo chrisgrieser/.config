@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  #─────────────────────────────────────────────────────────────────────────────
+  # PROFILES
   - trigger: "!web"
     replace: https://chris-grieser.de/
   - trigger: "!masto"
@@ -13,23 +13,7 @@ matches:
   - trigger: "!name"
     replace: Christopher Grieser
   #───────────────────────────────────────────────────────────────────────────
-  - trigger: "!bug"
-    replace: >
-      Could you open a bug report at the GitHub repo? Reason being that the bug report forms asks for
-      various information. I need to investigate the issue. (Also, I don't have the time to look into it
-      right now, so a bug report will make sure that I can keep track of it.)
-  - trigger: "!github"
-    replace: >
-      For bug reports, feature requests, or questions about my plugins and workflows, please create an
-      issue in the corresponding GitHub repository. This email address is exclusively for academic
-      purposes or business inquiries.
-
-
-      *This is an automated message. Please do not reply to this email.*
-  - triggers: ["!freeze", "!debugger"]
-    replace: "setTimeout(() => { debugger }, 1000 * 1$|$)"
-    label: "Freeze (DevTools)"
-  #───────────────────────────────────────────────────────────────────────────
+  # DATES
   - trigger: "!iso"
     replace: "{{todayISO}}"
     vars:
@@ -50,41 +34,28 @@ matches:
         type: date
         params: { format: "%d. %b. %Y" }
   #─────────────────────────────────────────────────────────────────────────────
-  - trigger: "!openai"
-    replace: "{{apikey}}"
-    label: get OpenAI API key
-    vars:
-      - name: apikey
-        type: shell
-        params:
-          cmd: "source $HOME/.zshenv && echo -n $OPENAI_API_KEY"
-  #─────────────────────────────────────────────────────────────────────────────
+  # VERSION NUMBERS
   - trigger: "!version"
     replace: "macOS {{version}} ({{architecture}})"
     vars:
       - name: version
         type: shell
-        params:
-          cmd: "sw_vers -productVersion"
+        params: { cmd: sw_vers -productVersion }
       - name: architecture
         type: shell
-        params:
-          cmd: "uname -p"
+        params: { cmd: uname -p }
   - trigger: "!nversion"
     replace: "{{neovimVersion}}"
     vars:
       - name: neovimVersion
         type: shell
         params:
-          cmd:
-            "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head
-            -n1"
-  - trigger: "!oversion"
-    replace: "Obsidian {{obsiVersion}}"
-    vars:
-      - name: obsiVersion
-        type: shell
-        params:
-          cmd:
-            'ls ~"/Library/Application Support/obsidian/"*".asar" | xargs -I {} basename {} | cut -d"."
-            -f1-3 | cut -d"-" -f2'
+          cmd: export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version
+  #─────────────────────────────────────────────────────────────────────────────
+  - trigger: "!github"
+    replace: >
+      For bug reports, feature requests, or questions about my plugins and workflows, please create
+      an issue in the corresponding GitHub repository. This email address is exclusively for
+      academic purposes or business inquiries.
+
+      *This is an automated message. Please do not reply to this email.*
