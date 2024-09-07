@@ -24,7 +24,6 @@ end
 function M.justRecipe(first)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
-		skipFirstInSelection = true,
 		useQuickfix = { "check-tsc" },
 	}
 
@@ -61,25 +60,26 @@ function M.justRecipe(first)
 	if first then
 		run(recipes[1])
 	else
-		if config.skipFirstInSelection and #recipes > 1 then table.remove(recipes, 1) end
+		table.insert(recipes, table.remove(recipes, 1)) -- move first to end
 		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
+		vim.api.nvim_create_autocmd("DressingSelect", {
+			callback = function(ctx)
+				local lastLine = vim.api.nvim_buf_line_count(ctx.buf)
+				vim.api.nvim_buf_add_highlight(ctx.buf, 0, "Comment", lastLine, 0, -1)
+			end,
+		})
 	end
 end
 
 -- Increment or toggle if cursorword is true/false. Simplified implementation
 -- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
 function M.toggleOrIncrement()
-	local ft = vim.bo.filetype
-	local toggles = { ["true"] = "false" }
-
-	if ft == "typescript" or ft == "javascript" then
-		toggles["const"] = "let"
-	elseif ft == "python" then
-		toggles["true"] = nil
-		toggles["True"] = "False"
-	elseif ft == "lua" then
-		toggles["and"] = "or"
-	end
+	local toggles = {
+		["true"] = "false",
+		["True"] = "False", -- python
+		["const"] = "let", -- js
+		["and"] = "or", -- lua
+	}
 
 	local cword = vim.fn.expand("<cword>")
 	local toggle
