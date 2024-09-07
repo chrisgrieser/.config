@@ -118,3 +118,4 @@ matches:
   - { trigger: mdoe, replace: mode, propagate_case: true }
   - { trigger: abotu, replace: about, propagate_case: true }
   - { trigger: taht, replace: that, propagate_case: true }
+  - { trigger: truely, replace: truly, propagate_case: true }
