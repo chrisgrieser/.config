@@ -44,7 +44,7 @@ function M.justRecipe(first)
 				vim.notify(out, vim.log.levels[severity], { title = "Just: " .. recipe })
 			end
 		end
-		vim.cmd.checktime() -- reload buffer
+		vim.cmd.checktime() -- reload buffer in case of changes
 	end
 	-----------------------------------------------------------------------------
 
