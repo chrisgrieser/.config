@@ -95,10 +95,4 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 end):start()
 
 --------------------------------------------------------------------------------
-
--- TEST figure out what keeps re-creating the file hub folder
-local filehub = os.getenv("HOME") .. "/Library/Mobile Documents/com~apple~CloudDocs/File Hub/"
-M.pathw_icloud = pathw(filehub, function(_, _) u.notify("File Hub", "Re-created.") end):start()
-
---------------------------------------------------------------------------------
 return M

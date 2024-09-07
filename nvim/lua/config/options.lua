@@ -72,17 +72,6 @@ vim.opt.undodir = vim.g.syncedData .. "/undo"
 vim.opt.viewdir = vim.g.syncedData .. "/view"
 vim.opt.shadafile = vim.g.syncedData .. "/main.shada"
 
--- automatically cleanup dirs to prevent bloating.
--- once a week, on first FocusLost, delete files older than 30/60 days.
-vim.api.nvim_create_autocmd("FocusLost", {
-	once = true,
-	callback = function()
-		if os.date("%a") ~= "Mon" then return end
-		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+60d", "-delete" }
-		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+30d", "-delete" }
-	end,
-})
-
 --------------------------------------------------------------------------------
 -- AUTOMATION (external control)
 

@@ -25,6 +25,19 @@ end
 
 --------------------------------------------------------------------------------
 
+-- AUTO-CLEANUP
+-- -> once a week, on first `FocusLost`, delete older files
+vim.api.nvim_create_autocmd("FocusLost", {
+	once = true,
+	callback = function()
+		if os.date("%a") ~= "Mon" then return end
+		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+30d", "-delete" }
+		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+14d", "-delete" }
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- AUTO-SAVE
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
 	callback = function(ctx)
