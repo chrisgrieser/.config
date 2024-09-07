@@ -84,6 +84,13 @@ return {
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
 			{ "<D-8>", vim.cmd.NoiceErrors, mode = { "n", "x", "i" }, desc = "󰎟 Noice Errors" },
+			{
+				"<S-Enter>",
+				-- https://github.com/folke/noice.nvim?tab=readme-ov-file#%EF%B8%8F-command-redirection
+				function() require("noice").redirect(vim.fn.getcmdline()) end,
+				mode = "c",
+				desc = "󰎟 Redirect Cmdline",
+			},
 		},
 		opts = {
 			routes = routes,
