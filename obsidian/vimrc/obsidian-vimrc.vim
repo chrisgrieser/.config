@@ -352,8 +352,8 @@ exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme
 
 " Open Plugin Settings (uses personal plugin)
-exmap pluginSettings obcommand pseudometa-startup-actions:open-plugin-settings
-nnoremap g, :pluginSettings
+exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
+nnoremap g, :openThisVimrc
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE

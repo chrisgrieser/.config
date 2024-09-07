@@ -9,66 +9,10 @@ const config = {
 	},
 };
 
-//──────────────────────────────────────────────────────────────────────────────
-
 function setOpacity() {
 	const isDarkMode = document.body.hasClass("theme-dark");
 	const opacityValue = config.opacity[isDarkMode ? "dark" : "light"];
 	electronWindow.setOpacity(opacityValue);
-}
-
-class PluginSettings extends obsidian.FuzzySuggestModal {
-	constructor(app) {
-		super(app);
-		this.setPlaceholder("Search settings tabs…");
-
-		// navigate via `Tab` and `Shift-tab`
-		this.scope.register([], "Tab", () => {
-			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
-		});
-		this.scope.register(["Shift"], "Tab", () => {
-			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
-		});
-	}
-
-	getItems() {
-		const settingsTabs = [
-			{ id: "about", name: "General" },
-			{ id: "file", name: "Files and links" },
-			{ id: "editor", name: "Editor" },
-			{ id: "appearance", name: "Appearance" },
-			{ id: "hotkeys", name: "Hotkeys" },
-			{ id: "core-plugins", name: "Core plugins" },
-			{ id: "community-plugins", name: "Community plugins" },
-		];
-
-		const corePluginsWithSettings = [];
-		const corePlugins = this.app.internalPlugins.plugins;
-		for (const [id, plugin] of Object.entries(corePlugins)) {
-			if (!plugin.enabled || !plugin.instance.options) continue;
-			corePluginsWithSettings.push({ id: id, name: plugin.instance.name });
-		}
-		corePluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
-
-		const communityPluginsWithSettings = [];
-		const enabledCommunityPlugins = this.app.plugins.plugins;
-		for (const [id, plugin] of Object.entries(enabledCommunityPlugins)) {
-			if (!(plugin.settings || plugin.settingsList)) continue;
-			communityPluginsWithSettings.push({ id: id, name: plugin.manifest.name });
-		}
-		communityPluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
-
-		return [...settingsTabs, ...corePluginsWithSettings, ...communityPluginsWithSettings];
-	}
-
-	getItemText(plugin) {
-		return plugin.name;
-	}
-
-	onChooseItem(plugin, _event) {
-		this.app.setting.open();
-		this.app.setting.openTabById(plugin.id);
-	}
 }
 
 class StartupActionsPlugin extends obsidian.Plugin {
@@ -92,13 +36,6 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			await this.app.plugins.enablePlugin(pluginId);
 			const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
 			new Notice(`"${pluginName}" reloaded.`);
-		});
-
-		this.addCommand({
-			id: "open-plugin-settings",
-			name: "Open plugin settings",
-			icon: "cog", // relevant for mobile/ribbon
-			callback: () => new PluginSettings(this.app).open(),
 		});
 	}
 }
