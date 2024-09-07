@@ -20,16 +20,18 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
----@param first any -- if truthy, run first recipe
+---@param first? "first"
 function M.justRecipe(first)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
 		useQuickfix = { "check-tsc" },
+		quickfixHlgroup = "WarningMsg",
 	}
 
 	local function run(recipe)
-		vim.cmd.update()
 		if not recipe then return end
+		vim.cmd.update()
+
 		if vim.tbl_contains(config.useQuickfix, recipe) then
 			vim.opt_local.makeprg = "just"
 			vim.cmd.make(recipe)
@@ -51,23 +53,31 @@ function M.justRecipe(first)
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local recipes = vim.split(vim.trim(result.stdout), " ")
-	recipes = vim.tbl_filter(
-		function(r) return not vim.tbl_contains(config.ignoreRecipes, r) end,
-		recipes
-	)
+	local recipes = vim.iter(vim.split(vim.trim(result.stdout), " "))
+		:filter(function(r) return not vim.tbl_contains(config.ignoreRecipes, r) end)
+		:totable()
 
 	if first then
 		run(recipes[1])
 	else
-		table.insert(recipes, table.remove(recipes, 1)) -- move first to end
-		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
-		vim.api.nvim_create_autocmd("DressingSelect", {
+		-- move first recipe to end, since it's normally accessed directly via "first"
+		-- highlight the first recipe and recipes using the quickfix list
+		table.insert(recipes, table.remove(recipes, 1))
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "DressingSelect",
+			once = true,
 			callback = function(ctx)
-				local lastLine = vim.api.nvim_buf_line_count(ctx.buf)
-				vim.api.nvim_buf_add_highlight(ctx.buf, 0, "Comment", lastLine, 0, -1)
+				local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
+				for ln, line in ipairs(lines) do
+					local hl
+					if ln == #lines then hl = "Comment" end
+					if vim.tbl_contains(config.useQuickfix, line) then hl = config.quickfixHlgroup end
+					if hl then vim.api.nvim_buf_add_highlight(ctx.buf, 0, hl, ln - 1, 0, -1) end
+				end
 			end,
 		})
+
+		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 	end
 end
 
