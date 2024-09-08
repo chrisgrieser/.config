@@ -1,3 +1,2 @@
-local x = ("<C-d>"):gsub("<[Cc]%-(.)>", function(s) return s end)
-vim.notify("🖨️ x: " .. vim.inspect(x))
+--tab --curly --no-align --no-wrap --drop-all-caps --enclosing-braces --numeric --trailing-commas --duplicates --sort-fields --remove-empty-fields --omit=monthissnabstract
 
