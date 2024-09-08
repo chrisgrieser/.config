@@ -36,7 +36,7 @@ return {
 				-- INFO some filetypes only allow indent, some only LSP, some only
 				-- treesitter. However, ufo only accepts two kinds as priority,
 				-- therefore making this function necessary :/
-				local lspWithOutFolding = { "markdown", "sh", "css", "html", "python", "json" }
+				local lspWithOutFolding = { "markdown", "zsh", "css", "html", "python", "json" }
 				if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
 				return { "lsp", "indent" }
 			end,
@@ -46,6 +46,7 @@ return {
 				default = { "imports", "comment" },
 			},
 			open_fold_hl_timeout = 800,
+			-- show folds with number of folded lines instead of just the icon
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 				local hlgroup = "NonText"
 				local newVirtText = {}

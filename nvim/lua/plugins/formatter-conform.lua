@@ -38,21 +38,15 @@ end
 local conformOpts = {
 	formatters_by_ft = ftToFormatter,
 	formatters = {
-		markdownlint = {
-			prepend_args = { "--config=" .. vim.g.linterConfigs .. "/markdownlint.yaml" },
-		},
-
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
 				-- BUG when…
 				-- * using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
-				-- * using `--enclosing-braces`: https://github.com/FlamingTempura/bibtex-tidy/issues/423
-				-- * *not* using `--no-escape`: https://github.com/FlamingTempura/bibtex-tidy/issues/415
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
-				"--numeric", "--trailing-commas", "--no-escape",
-				"--duplicates", "--sort-fields", "--remove-empty-fields",
-				"--omit=month,issn,abstract",
+				"--enclosing-braces", 
+				"--numeric", "--trailing-commas", "--duplicates", "--sort-fields", 
+				"--remove-empty-fields", "--omit=month,issn,abstract",
 			},
 		},
 	},
