@@ -1,0 +1,35 @@
+import { Trash2, AlignLeft, Binary, List, Calendar, Clock, SquareCheckBig, GripVertical, Settings } from 'lucide';
+import { createIcons } from 'lucide';
+export const icons = {
+    Trash2,
+    AlignLeft,
+    Binary,
+    List,
+    Calendar,
+    Clock,
+    SquareCheckBig,
+    GripVertical,
+    Settings
+};
+export function initializeIcons(root = document) {
+    createIcons({
+        icons,
+        attrs: {
+            'stroke-width': 1.75,
+            'class': 'lucide-icon'
+        },
+        nameAttr: 'data-lucide',
+    });
+}
+export function getPropertyTypeIcon(type) {
+    const iconMap = {
+        text: 'align-left',
+        multitext: 'list',
+        number: 'binary',
+        checkbox: 'square-check-big',
+        date: 'calendar',
+        datetime: 'clock'
+    };
+    return iconMap[type] || 'align-left';
+}
+//# sourceMappingURL=icons.js.map
