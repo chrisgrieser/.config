@@ -47,19 +47,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4295D5EA-EBB8-427F-8AD0-72737778E375</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C2415456-FFEC-4DD2-B8D1-C76A442510EF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<array>
 			<dict>
@@ -88,19 +75,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>470BD464-4432-4787-8ECF-8C463E6E68A9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -186,19 +160,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B732BB78-84AF-49C2-BBA9-D15278904C6C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4295D5EA-EBB8-427F-8AD0-72737778E375</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<array>
 			<dict>
@@ -238,19 +199,6 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy Plugin ID</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C2415456-FFEC-4DD2-B8D1-C76A442510EF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -720,146 +668,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>31</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>O</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>B732BB78-84AF-49C2-BBA9-D15278904C6C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://slurp?vault=phd-data-analysis&amp;url={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>w</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>C2415456-FFEC-4DD2-B8D1-C76A442510EF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>allow_empty</key>
-					<true/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>4295D5EA-EBB8-427F-8AD0-72737778E375</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>slurp</string>
-				<key>subtext</key>
-				<string>All URLs in "{var:slurp_list}"</string>
-				<key>text</key>
-				<string>Slurp</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>470BD464-4432-4787-8ECF-8C463E6E68A9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/slurp-all-diss-urls.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -875,24 +683,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>325</real>
 			<key>ypos</key>
 			<real>495</real>
-		</dict>
-		<key>27E4BE11-84E3-4D2B-B411-A6F2B1FDF3C4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>465</real>
-			<key>ypos</key>
-			<real>880</real>
-		</dict>
-		<key>2E0B0AB0-ACF1-4535-BED2-39B3D03AADC8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>1015</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
@@ -932,15 +722,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>235</real>
 		</dict>
-		<key>4295D5EA-EBB8-427F-8AD0-72737778E375</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>880</real>
-		</dict>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<dict>
 			<key>colorindex</key>
@@ -962,17 +743,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>235</real>
-		</dict>
-		<key>470BD464-4432-4787-8ECF-8C463E6E68A9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>slurp all reminders from "Diss URLs"</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1015</real>
 		</dict>
 		<key>5E566F93-2181-4333-A675-764390C315B4</key>
 		<dict>
@@ -1045,17 +815,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>615</real>
 		</dict>
-		<key>B732BB78-84AF-49C2-BBA9-D15278904C6C</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Slurp</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>880</real>
-		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
 			<key>colorindex</key>
@@ -1075,17 +834,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>325</real>
 			<key>ypos</key>
 			<real>615</real>
-		</dict>
-		<key>C2415456-FFEC-4DD2-B8D1-C76A442510EF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>close the browser tab</string>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>880</real>
 		</dict>
 		<key>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</key>
 		<dict>
