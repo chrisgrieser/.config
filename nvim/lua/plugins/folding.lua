@@ -1,13 +1,13 @@
 return {
 	{
 		"chrisgrieser/nvim-origami",
-		event = "BufReadPost", -- later will not save folds
+		event = "VeryLazy",
 		opts = true,
 	},
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
-		event = "UIEnter", -- needed for folds to load in time and comments closed
+		event = "UIEnter", -- needed for folds to load in time and comments being closed
 		keys = {
 			-- stylua: ignore start
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },
