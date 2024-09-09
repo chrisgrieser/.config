@@ -9,43 +9,8 @@ local ftToFormatter = {
 	query = { "format-queries" },
 	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 	zsh = { "shell_home" },
+	python = { "ruff_fix_all" },
 }
-
--- formatting from the LSP
-local lspFormatFt = {
-	"javascript",
-	"typescript",
-	"json",
-	"jsonc",
-	"toml",
-	"yaml",
-	"zsh",
-	"python",
-	"css",
-}
----@return string[]
----@nodiscard
-local function listConformFormatters()
-	local notClis = {
-		"trim_whitespace",
-		"trim_newlines",
-		"squeeze_blanks",
-		"injected",
-		"just", -- `just`
-		"format-queries", -- treesitter query
-		-- custom formatters
-		"indent_expr",
-		"shell_home",
-		"ruff_fix_all",
-	}
-	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
-		:flatten()
-		:filter(function(f) return not vim.tbl_contains(notClis, f) end)
-		:totable()
-	table.sort(formatters)
-	vim.fn.uniq(formatters)
-	return formatters
-end
 
 local conformOpts = {
 	formatters_by_ft = ftToFormatter,
@@ -53,8 +18,7 @@ local conformOpts = {
 		["bibtex-tidy"] = {
 			-- stylua: ignore
 			prepend_args = {
-				-- BUG when…
-				-- * using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
+				-- BUG when using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
 				"--enclosing-braces", "--numeric", "--trailing-commas", "--duplicates",
 				"--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
@@ -85,21 +49,50 @@ local conformOpts = {
 	},
 }
 
-local function formattingFunc(bufnr)
-	if not bufnr then bufnr = 0 end
-	local fileExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(bufnr)) ~= nil
-	local valid = vim.api.nvim_buf_is_valid(bufnr)
-	local specialBuffer = vim.bo[bufnr].buftype ~= ""
-	if specialBuffer or not fileExists or not valid then return end
+--------------------------------------------------------------------------------
 
-	local ft = vim.bo[bufnr].filetype
-	local useLsp = vim.tbl_contains(lspFormatFt, ft) and "first" or "never"
+-- formatting from the LSP
+local lspFormatFt = {
+	"javascript",
+	"typescript",
+	"json",
+	"jsonc",
+	"toml",
+	"yaml",
+	"zsh",
+	"python",
+	"css",
+}
 
-	require("conform").format({ lsp_format = useLsp }, function()
-		if ft == "python" then
-		end
-		vim.cmd.update()
-	end)
+---@return string[]
+---@nodiscard
+local function listConformFormatters()
+	local notClis = {
+		-- builtins
+		"trim_whitespace",
+		"trim_newlines",
+		"squeeze_blanks",
+		"injected",
+		"format-queries",
+		-- `just` cli
+		"just",
+		-- custom formatters
+		"indent_expr",
+		"shell_home",
+		"ruff_fix_all",
+	}
+	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
+		:flatten()
+		:filter(function(f) return not vim.tbl_contains(notClis, f) end)
+		:totable()
+	table.sort(formatters)
+	vim.fn.uniq(formatters)
+	return formatters
+end
+
+local function formattingFunc()
+	local useLsp = vim.tbl_contains(lspFormatFt, vim.bo.ft) and "first" or "never"
+	require("conform").format({ lsp_format = useLsp }, function() vim.cmd.update() end)
 end
 
 --- organize imports on before formatting
@@ -127,7 +120,6 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	-- Formatter integration
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
 	mason_dependencies = listConformFormatters(),
@@ -142,15 +134,15 @@ return {
 		},
 	},
 	config = function()
-		require("conform.formatters.injected").options.ignore_errors = true
 		require("conform").setup(conformOpts)
+
+		require("conform.formatters.injected").options.ignore_errors = true
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 		vim.api.nvim_create_autocmd("FocusLost", {
-			callback = function(ctx)
-				local func = vim.bo[ctx.buf].ft == "typescript" and typescriptFormatting
-					or formattingFunc
-				func(ctx.buf)
+			callback = function()
+				local func = vim.bo.ft == "typescript" and typescriptFormatting or formattingFunc
+				func()
 			end,
 		})
 	end,
