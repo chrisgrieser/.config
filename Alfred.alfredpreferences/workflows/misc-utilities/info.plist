@@ -1692,7 +1692,8 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>note</key>
-			<string>contacts</string>
+			<string>contacts
+(adapted from "Deep Contacts" workflow)</string>
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
