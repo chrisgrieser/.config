@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>de.chris-grieser.japanese</string>
+	<key>connections</key>
+	<dict>
+		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>451BBCC8-5495-426D-945F-D2CFA59510B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Chris Grieser</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Japanese</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>qlmanage -p "./hiragana-katakana.webp"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>451BBCC8-5495-426D-945F-D2CFA59510B8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>hiragana||katakana</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Hiragana &amp; Katakana table</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>---
+
+Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+	<key>uidata</key>
+	<dict>
+		<key>451BBCC8-5495-426D-945F-D2CFA59510B8</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
+		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
+		<dict>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>75</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string>https://chris-grieser.de/</string>
+</dict>
+</plist>

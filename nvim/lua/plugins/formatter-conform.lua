@@ -1,7 +1,7 @@
 -- CONFIG
 -- formatting from conform.nvim
 local ftToFormatter = {
-	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks" },
+	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	bib = { "bibtex-tidy" },
@@ -24,8 +24,15 @@ local lspFormatFt = {
 ---@return string[]
 ---@nodiscard
 local function listConformFormatters()
-	local notClis =
-		{ "trim_whitespace", "trim_newlines", "squeeze_blanks", "injected", "just", "format-queries" }
+	local notClis = {
+		"trim_whitespace",
+		"trim_newlines",
+		"squeeze_blanks",
+		"injected",
+		"just", -- `just`
+		"format-queries", -- treesitter query
+		"indent_expr", -- custom formatter
+	}
 	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
 		:flatten()
 		:filter(function(f) return not vim.tbl_contains(notClis, f) end)
@@ -44,10 +51,16 @@ local conformOpts = {
 				-- BUG when…
 				-- * using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
-				"--enclosing-braces", 
-				"--numeric", "--trailing-commas", "--duplicates", "--sort-fields", 
-				"--remove-empty-fields", "--omit=month,issn,abstract",
+				"--enclosing-braces", "--numeric", "--trailing-commas", "--duplicates", 
+				"--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
+		},
+		-- Custom formatter to auto indent buffer. https://github.com/stevearc/conform.nvim/issues/255#issuecomment-2337684156
+		indentExpr = {
+			format = function(_, _, _, callback)
+				vim.cmd.normal("m`gg=G``")
+				callback()
+			end,
 		},
 	},
 }
