@@ -331,5 +331,13 @@
       ],
       "key": "W"
     }
+  ],
+  "quadro:merge-extractions": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "M"
+    }
   ]
 }

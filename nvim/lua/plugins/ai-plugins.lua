@@ -53,7 +53,8 @@ return {
 				if status == 0 and server == 0 then return "" end -- working correctly = no component
 				if status == 1 then return "󱚧 global" end
 				if status < 5 then return "󱚧 buffer" end
-				if server > 0 then return "󱚧 server" end
+				if server == 2 then return "󱚧 server" end
+				if server == 1 then return "󱙺 connecting…" end
 				return "󱚟 Error"
 			end)
 		end,
