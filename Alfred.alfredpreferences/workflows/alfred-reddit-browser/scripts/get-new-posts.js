@@ -38,18 +38,20 @@ function getHackernewsPosts(oldItems) {
 	// DOCS https://hn.algolia.com/api
 	// alternative "https://hacker-news.firebaseio.com/v0/topstories.json";
 	const url = `https://hn.algolia.com/api/v1/search_by_date?tags=front_page&hitsPerPage=${opts.pagesToRequest}`;
-	const response = app.doShellScript(`curl -sL "${url}"`);
-	if (!response) {
+	let response;
+	const apiResponse = app.doShellScript(`curl -sL "${url}"`);
+	try {
+		response = JSON.parse(apiResponse);
+	} catch (_error) {
 		// biome-ignore lint/suspicious/noConsoleLog: intentional
-		console.log(`Error: No response from ${url}`);
-		return;
+		console.log(`Error parsing JSON. curl response was: ${apiResponse}`);
 	}
 
 	const oldUrls = oldItems.map((item) => item.arg);
 	const oldTitles = oldItems.map((item) => item.title);
 
 	/** @type{AlfredItem[]} */
-	const hits = JSON.parse(response).hits.reduce(
+	const hits = response.hits.reduce(
 		(/** @type {AlfredItem[]} */ acc, /** @type {hackerNewsItem} */ item) => {
 			if (item.points < opts.minUpvotes) return acc;
 

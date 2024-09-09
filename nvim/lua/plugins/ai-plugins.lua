@@ -40,12 +40,22 @@ return {
 				local parent = vim.fs.dirname(filepath)
 				local name = vim.fs.basename(filepath)
 				if parent:find("private dotfiles") or name:lower():find("recovery") then
-					require("config.utils").notify("NeoCodeium", "Disabled for this buffer.")
 					vim.cmd.NeoCodeium("disable_buffer")
 				end
 			end
-			disableInPrivatBuffer()
+			disableInPrivatBuffer() -- current buffer
 			vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = disableInPrivatBuffer })
+
+			-- lualine indicator
+			vim.g.lualine_add("sections", "lualine_x", function()
+				-- number meanings: https://github.com/monkoose/neocodeium?tab=readme-ov-file#-statusline
+				local status, server = require("neocodeium").get_status()
+				if status == 0 and server == 0 then return "" end -- working correctly = no component
+				if status == 1 then return "󱚧 global" end
+				if status < 5 then return "󱚧 buffer" end
+				if server > 0 then return "󱚧 server" end
+				return "󱚟 Error"
+			end)
 		end,
 		keys = {
 			{
@@ -74,11 +84,7 @@ return {
 			},
 			{
 				"<leader>oa",
-				function()
-					vim.cmd.NeoCodeium("toggle")
-					local on = require("neocodeium.options").options.enabled
-					require("config.utils").notify("NeoCodeium", on and "enabled" or "disabled", "info")
-				end,
+				function() vim.cmd.NeoCodeium("toggle") end,
 				desc = "󰚩 NeoCodeium Suggestions",
 			},
 		},
