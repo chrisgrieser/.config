@@ -8,6 +8,6 @@ tell application "System Events"
 	delay 0.5
 
 	-- goto home via vimium/surfingkeys
-	keystroke "g" 
+	keystroke "g"
 	keystroke "U"
 end tell

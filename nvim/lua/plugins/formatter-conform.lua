@@ -1,12 +1,14 @@
 -- CONFIG
 -- formatting from conform.nvim
 local ftToFormatter = {
-	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 	lua = { "stylua" },
 	markdown = { "markdown-toc", "markdownlint", "injected" },
 	bib = { "bibtex-tidy" },
-	just = { "just", "squeeze_blanks" },
+	just = { "just", "squeeze_blanks", "indent_expr" },
+	gitconfig = { "squeeze_blanks", "indent_expr" },
 	query = { "format-queries" },
+	applescript = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
+	zsh = { "shell_home" },
 }
 
 -- formatting from the LSP
@@ -31,7 +33,10 @@ local function listConformFormatters()
 		"injected",
 		"just", -- `just`
 		"format-queries", -- treesitter query
-		"indent_expr", -- custom formatter
+		-- custom formatters
+		"indent_expr",
+		"shell_home",
+		"ruff_fix_all",
 	}
 	local formatters = vim.iter(vim.tbl_values(ftToFormatter))
 		:flatten()
@@ -51,14 +56,29 @@ local conformOpts = {
 				-- BUG when…
 				-- * using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
 				"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
-				"--enclosing-braces", "--numeric", "--trailing-commas", "--duplicates", 
+				"--enclosing-braces", "--numeric", "--trailing-commas", "--duplicates",
 				"--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
 			},
 		},
 		-- Custom formatter to auto indent buffer. https://github.com/stevearc/conform.nvim/issues/255#issuecomment-2337684156
-		indentExpr = {
+		indent_expr = {
 			format = function(_, _, _, callback)
-				vim.cmd.normal("m`gg=G``")
+				vim.cmd.normal { "m`gg=G``", bang = true }
+				callback()
+			end,
+		},
+		shell_home = {
+			format = function(_, _, _, callback)
+				vim.cmd([[% s_/Users/\w\+/_$HOME/_e]]) -- replace `/Users/…` with `$HOME/`
+				callback()
+			end,
+		},
+		ruff_fix_all = {
+			format = function(_, _, _, callback)
+				vim.lsp.buf.code_action {
+					context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+					apply = true,
+				}
 				callback()
 			end,
 		},
@@ -77,13 +97,6 @@ local function formattingFunc(bufnr)
 
 	require("conform").format({ lsp_format = useLsp }, function()
 		if ft == "python" then
-			vim.lsp.buf.code_action {
-				context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-				apply = true,
-			}
-		elseif ft == "zsh" then
-			-- replace `/Users/…` with `$HOME/`
-			vim.cmd([[% s_/Users/\w\+/_$HOME/_e]])
 		end
 		vim.cmd.update()
 	end)

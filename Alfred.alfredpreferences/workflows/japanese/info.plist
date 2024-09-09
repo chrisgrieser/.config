@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>de.chris-grieser.japanese</string>
+	<key>category</key>
+	<string>❇️</string>
 	<key>connections</key>
 	<dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
@@ -76,28 +78,33 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>### Credits
 
-Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+- Hiragana/Katakana Chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>451BBCC8-5495-426D-945F-D2CFA59510B8</key>
 		<dict>
+			<key>note</key>
+			<string>preview</string>
 			<key>xpos</key>
-			<real>210</real>
+			<real>205</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>40</real>
 		</dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<dict>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array/>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
