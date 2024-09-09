@@ -146,7 +146,14 @@ function getRedditPosts(subredditName, oldItems) {
 	// HACK changing user agent because reddit API does not like curl (lol)
 	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" \\
 		"https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}"`;
-	const response = JSON.parse(app.doShellScript(curlCommand));
+	let response;
+	const apiResponse = app.doShellScript(curlCommand);
+	try {
+		response = JSON.parse(apiResponse);
+	} catch (_error) {
+		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		console.log(`Error parsing JSON. curl response was: ${apiResponse}`);
+	}
 	if (response.error) {
 		// biome-ignore lint/suspicious/noConsoleLog: intentional
 		console.log(`Error ${response.error}: ${response.message}`);
