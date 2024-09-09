@@ -65,7 +65,7 @@ function run() {
 	const subreddits = $.getenv("subreddits")
 		.trim()
 		.replace(/^\/?r\//gm, "") // can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645// can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
-		.split("\n")
+		.split("\n");
 	if ($.getenv("add_hackernews") === "1") subreddits.push("hackernews");
 	const cachePath = $.getenv("alfred_workflow_cache");
 
@@ -73,7 +73,7 @@ function run() {
 	/** @type {string?} */
 	let prevSubreddit = readFile(cachePath + "/current_subreddit");
 	// if user removed subreddit from config, do not display it
-	if (!subreddits.includes(prevSubreddit)) prevSubreddit = null; 
+	if (!subreddits.includes(prevSubreddit)) prevSubreddit = null;
 
 	const selectedWithAlfred =
 		$.NSProcessInfo.processInfo.environment.objectForKey("selected_subreddit").js;
@@ -123,7 +123,9 @@ function run() {
 
 	// GUARD no API response or no posts left after filtering for min upvote count
 	if (!posts) {
-		return JSON.stringify({ items: [{ title: "Error", subtitle: "No response from API." }] });
+		return JSON.stringify({
+			items: [{ title: "Error", subtitle: "Check the debugging log for more information." }],
+		});
 	}
 	if (posts.length === 0) {
 		return JSON.stringify({ items: [{ title: "No posts higher than minimum upvote count." }] });
