@@ -1,7 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - { trigger: "n#t", replace: "n't" }
+  - { trigger: n#t, replace: n't }
+  - { trigger: nät, replace: n't }
+  - { trigger: nÄt, replace: n't }
   # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "gitignore", where it is actually correct)
   - { regex: "(?P<letter>[a-ru-z])ign\\b", replace: "{{letter}}ing" }
   - { trigger: " ot ", replace: " to " }
