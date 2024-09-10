@@ -17,7 +17,7 @@ export function formatVariables(variables) {
 		 `)
         .join('');
 }
-function escapeHtml(unsafe) {
+export function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")

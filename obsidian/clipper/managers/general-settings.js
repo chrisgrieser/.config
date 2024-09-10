@@ -1,40 +1,8 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { handleDragStart, handleDragOver, handleDrop, handleDragEnd } from '../utils/drag-and-drop';
 import { initializeIcons } from '../icons/icons';
 import { getCommands } from '../utils/hotkeys';
 import { initializeToggles } from '../utils/ui-utils';
-export let generalSettings = {
-    showMoreActionsButton: true,
-    vaults: []
-};
-export function loadGeneralSettings() {
-    return __awaiter(this, void 0, void 0, function* () {
-        var _a;
-        const data = yield chrome.storage.sync.get(['general_settings', 'vaults']);
-        console.log('Loaded general settings:', data.general_settings);
-        console.log('Loaded vaults:', data.vaults);
-        generalSettings = Object.assign(Object.assign({}, data.general_settings), { vaults: data.vaults || [], showMoreActionsButton: ((_a = data.general_settings) === null || _a === void 0 ? void 0 : _a.showMoreActionsButton) || true });
-        return generalSettings;
-    });
-}
-export function saveGeneralSettings(settings) {
-    return __awaiter(this, void 0, void 0, function* () {
-        generalSettings = Object.assign(Object.assign({}, generalSettings), settings);
-        yield chrome.storage.sync.set({
-            general_settings: { showMoreActionsButton: generalSettings.showMoreActionsButton },
-            vaults: generalSettings.vaults
-        });
-        console.log('Saved general settings:', generalSettings);
-    });
-}
+import { generalSettings, loadGeneralSettings, saveGeneralSettings } from '../utils/storage-utils';
 export function updateVaultList() {
     const vaultList = document.getElementById('vault-list');
     if (!vaultList)

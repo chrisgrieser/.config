@@ -1,5 +1,7 @@
-import { getTemplates, saveTemplateSettings, updateTemplateList, getEditingTemplateIndex } from '../managers/template-manager';
-import { saveGeneralSettings, updateVaultList, generalSettings } from '../managers/general-settings';
+import { getTemplates, saveTemplateSettings, getEditingTemplateIndex } from '../managers/template-manager';
+import { updateTemplateList } from '../managers/template-ui';
+import { updateVaultList } from '../managers/general-settings';
+import { generalSettings, saveGeneralSettings } from './storage-utils';
 let draggedElement = null;
 export function initializeDragAndDrop() {
     const draggableLists = [
