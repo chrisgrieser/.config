@@ -14,8 +14,8 @@ function addYamlKey(key, value) {
 	const yamlLine = key + ": " + stringifiedValue;
 
 	const keyLnum = lines
-		.slice(0, frontmatterEnd + 1) // only check frontmatter
-		.findIndex((line) => line.startsWith(key + ":"));
+	.slice(0, frontmatterEnd + 1) // only check frontmatter
+	.findIndex((line) => line.startsWith(key + ":"));
 	let msg;
 	if (keyLnum === -1) {
 		// insert at frontmatter
@@ -46,9 +46,9 @@ function inspectWordCount() {
 		num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 	const body = editor
-		.getValue()
-		.replace(/^---\n.*?\n---\n/s, "")
-		.trim();
+	.getValue()
+	.replace(/^---\n.*?\n---\n/s, "")
+	.trim();
 	const charCount = body.length;
 	const charNoSpacesCount = body.replace(/\s+/g, "").length;
 	const wordCount = body.split(/\s+/).length;
@@ -212,11 +212,11 @@ function smartMerge() {
 	const nextLine = editor.getLine(lnum + 1);
 	const curLineCleaned = curLine.replace(/ +$/, ""); // trim trailing spaces
 	const nextLineCleaned = nextLine
-		.replace(/^\s*- \[[x ]\] /, "") // task
-		.replace(/^\s*[-*+] /, "") // unordered list
-		.replace(/^\s*>+ /, "") // blockquote
-		.replace(/^\s*\d+[.)] /, "") // ordered list
-		.trim(); // justIndent
+	.replace(/^\s*- \[[x ]\] /, "") // task
+	.replace(/^\s*[-*+] /, "") // unordered list
+	.replace(/^\s*>+ /, "") // blockquote
+	.replace(/^\s*\d+[.)] /, "") // ordered list
+	.trim(); // justIndent
 	const mergedLine = curLineCleaned + " " + nextLineCleaned;
 
 	const prevCursor = editor.getCursor(); // prevent cursor from moving
@@ -341,6 +341,7 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 	const randomFile = files[randomIndex];
 	await app.workspace.getLeaf().openFile(randomFile);
 }
+
 /** For use with the "Rephraser" form the "Writing Assistant" Alfred workflow,
  * which sends text to OpenAI, and returns the diff in form of highlights
  * (additions) and strikethroughs (deletions).
@@ -367,7 +368,7 @@ async function workspace(mode, workspaceName) {
 	await workspacePlugin.enable();
 
 	if (mode === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
-	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
+		else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
 	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
 	setTimeout(() => workspacePlugin.disable(), 3000);
