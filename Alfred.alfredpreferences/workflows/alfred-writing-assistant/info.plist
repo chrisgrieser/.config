@@ -169,8 +169,6 @@
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>3</integer>
-				<key>argumenttext</key>
-				<string>--lang=en</string>
 				<key>focusedappvariable</key>
 				<false/>
 				<key>focusedappvariablename</key>
