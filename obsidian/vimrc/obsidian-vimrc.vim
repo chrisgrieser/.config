@@ -355,6 +355,12 @@ nnoremap ,pc :cycleColorscheme
 exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
 nnoremap g, :openThisVimrc
 
+" Workspace
+exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
+nnoremap ,w :loadWorkspace
+exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
+nnoremap ,W :saveWorkspace
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 
