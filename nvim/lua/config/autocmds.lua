@@ -66,7 +66,7 @@ local autoCdConfig = {
 		".git",
 		"Justfile",
 		"info.plist", -- Alfred workflows
-		"biome.jsonc" -- biome
+		"biome.jsonc", -- biome
 	},
 	parentOfRoot = {
 		".config",
@@ -76,6 +76,7 @@ local autoCdConfig = {
 }
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
+		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 		local root = vim.fs.root(ctx.buf, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
