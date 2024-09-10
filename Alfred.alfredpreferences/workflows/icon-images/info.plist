@@ -8,58 +8,8 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>5252159C-2A4F-4203-BA5A-DC1967230383</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>31B039D3-0038-4232-A04C-E67C8EF2598B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>48F436EA-DB23-49A0-AE6D-917AF25E9479</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5C88B596-E2CF-48B0-B410-DADF9807C0C3</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BD18535C-8C87-4E8C-8453-9B8F93825CFD</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
 		<array>
 			<dict>
@@ -342,6 +292,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://capture-text</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ocr</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>OCR Screenshot</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -386,69 +378,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>e</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>48F436EA-DB23-49A0-AE6D-917AF25E9479</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://open-history</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>annotate||cleanshot</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Annotate Last Screenshot</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsmulti</key>
 				<integer>0</integer>
 				<key>filetypes</key>
@@ -487,101 +416,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>seconds</key>
-				<string>.2</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
-			<key>uid</key>
-			<string>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Pin in Cleanshot</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>5C88B596-E2CF-48B0-B410-DADF9807C0C3</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://pin?filepath={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>BD18535C-8C87-4E8C-8453-9B8F93825CFD</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>OCR Text from Image</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>5252159C-2A4F-4203-BA5A-DC1967230383</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>cleanshot://capture-text?filepath={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>31B039D3-0038-4232-A04C-E67C8EF2598B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -596,61 +430,14 @@
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
-		<key>31B039D3-0038-4232-A04C-E67C8EF2598B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
-		<key>48F436EA-DB23-49A0-AE6D-917AF25E9479</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>510</real>
-		</dict>
-		<key>5252159C-2A4F-4203-BA5A-DC1967230383</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
-		<key>582FCFA2-1B38-4ED9-9AB5-7C2B77C96405</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>540</real>
-		</dict>
-		<key>5C88B596-E2CF-48B0-B410-DADF9807C0C3</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>560</real>
-			<key>ypos</key>
-			<real>630</real>
-		</dict>
 		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
-			<key>note</key>
-			<string>open screenshot history</string>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>270</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -710,34 +497,25 @@
 			<key>ypos</key>
 			<real>75</real>
 		</dict>
-		<key>BD18535C-8C87-4E8C-8453-9B8F93825CFD</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>740</real>
-			<key>ypos</key>
-			<real>630</real>
-		</dict>
 		<key>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>410</real>
 		</dict>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>edit last screenshot</string>
+			<string>OCR Screenshot</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>510</real>
+			<real>270</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
@@ -762,9 +540,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>560</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>515</real>
+			<real>410</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
