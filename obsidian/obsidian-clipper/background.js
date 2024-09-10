@@ -1,1 +1,0 @@
-chrome.action.onClicked.addListener((e=>{e.id&&chrome.scripting.executeScript({target:{tabId:e.id},files:["content.js"]})})),chrome.runtime.onMessage.addListener(((e,t,i)=>{if("extractContent"===e.action&&t.tab&&t.tab.id)return chrome.tabs.sendMessage(t.tab.id,e,i),!0}));
