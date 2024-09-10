@@ -16,17 +16,16 @@ if not lazyLocallyAvailable then
 	end
 end
 vim.opt.rtp:prepend(lazypath)
-
 --------------------------------------------------------------------------------
 
 -- DOCS https://lazy.folke.io/configuration
 require("lazy").setup {
-	spec = { import = "plugins" }, -- folder where plugin specs are stored
+	spec = { import = "plugins" }, -- = plugins specs are in `./lua/plugins`
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = { ---@diagnostic disable-line: assign-type-mismatch wrong diagnostic
-		patterns = { "nvim" }, -- for repos matching `patterns` (`nvim` = all nvim repos)…
-		path = vim.g.localRepos, -- …use local repo, if one exists in `path` …
+		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
+		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
 	git = {
