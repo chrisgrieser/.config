@@ -7,7 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { saveTemplateSettings, updateTemplateList, updateTemplateFromForm, addPropertyToEditor, editingTemplateIndex } from '../managers/template-manager';
+import { saveTemplateSettings, editingTemplateIndex } from '../managers/template-manager';
+import { updateTemplateList, updateTemplateFromForm } from '../managers/template-ui';
 let isReordering = false;
 export function initializeAutoSave() {
     const templateForm = document.getElementById('template-settings-form');
@@ -65,19 +66,6 @@ export function initializeAutoSave() {
                 }
             }
         });
-    }
-    const addPropertyBtn = document.getElementById('add-property-btn');
-    if (addPropertyBtn) {
-        addPropertyBtn.addEventListener('click', () => {
-            addPropertyToEditor();
-            if (editingTemplateIndex !== -1) {
-                updateTemplateFromForm();
-                autoSave();
-            }
-        });
-    }
-    else {
-        console.error('Add property button not found');
     }
 }
 function showWarnings(warnings) {
