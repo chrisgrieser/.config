@@ -9,6 +9,9 @@ local opts = {
 		query = { "format-queries" },
 		zsh = { "shell_home" },
 		python = { "ruff_fix_all" },
+		just = { "just", "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
+
+		-- fallback, used when not formatters are defined and no LSP is available
 		_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 	},
 	formatters = {
@@ -74,27 +77,6 @@ local function listConformFormatters()
 	return formatters
 end
 
---- organize imports on before formatting
-local function typescriptFormatting()
-	local actions = {
-		"source.fixAll.ts",
-		"source.addMissingImports.ts",
-		"source.removeUnusedImports.ts",
-		"source.organizeImports.biome",
-	}
-	for i = 1, #actions + 1 do
-		vim.defer_fn(function()
-			if i <= #actions then
-				vim.lsp.buf.code_action {
-					context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-					apply = true,
-				}
-			else
-				require("conform").format({ lsp_format = "first" }, function() vim.cmd.update() end)
-			end
-		end, i * 60)
-	end
-end
 
 --------------------------------------------------------------------------------
 
@@ -102,25 +84,11 @@ return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
 	mason_dependencies = listConformFormatters(),
-	keys = {
-		{
-			"<D-s>",
-			function() require("conform").format() end,
-			desc = "󰒕 Format & Save",
-			mode = { "n", "x" },
-		},
-		{
-			"<D-s>",
-			typescriptFormatting,
-			ft = "typescript",
-			desc = "󰒕 Format & Save",
-			mode = { "n", "x" },
-		},
-	},
 	config = function()
 		require("conform").setup(opts)
-
 		require("conform.formatters.injected").options.ignore_errors = true
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
+	keys = {
+		{ "<D-s>", function() require("conform").format() end, desc = "󰒕 Format & Save" },
+	},
 }
