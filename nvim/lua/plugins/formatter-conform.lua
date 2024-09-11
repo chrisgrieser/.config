@@ -1,11 +1,11 @@
 return {
 	"stevearc/conform.nvim",
+	mason_dependencies = { "stylua", "markdownlint", "markdown-toc", "bibtex-tidy" },
 	cmd = "ConformInfo",
 	keys = {
 		-- NOTE in TYPESCRIPT, overridden with custom function in `/ftplugin/typescript.lua`
 		{ "<D-s>", function() require("conform").format() end, desc = "󰒕 Format" },
 	},
-	mason_dependencies = { "stylua", "markdownlint", "markdown-toc", "bibtex-tidy" },
 	opts = {
 		default_format_opts = {
 			lsp_format = "first", -- unwanted LSP formatters disabled in lsp-config
