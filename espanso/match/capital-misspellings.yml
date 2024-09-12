@@ -14,7 +14,7 @@ matches:
   # INFO ignoring:
   # - "Z", as 2nd letter to not trigger ZZ in WezTerm
   # - "s" as 3rd letter to not trigger, e.g. "FRs"
-  - regex: "\\b(?P<one>[A-Z])(?P<two>[A--Y])(?P<three>[a-rt-z])"
+  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-Y])(?P<three>[a-rt-z])"
     replace: "{{CapitalCased}}"
     vars:
       - name: CapitalCased
