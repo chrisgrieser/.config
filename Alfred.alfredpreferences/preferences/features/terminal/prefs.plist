@@ -12,9 +12,7 @@
 --------------------------------------------------------------------------------
 
 on alfred_script(shellCmd)
-	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
-
-	# LAUNCH WEZTERM IF NEEDED 
+	# LAUNCH WEZTERM IF NEEDED
 	# (Appname is `WezTerm`, processname is `wezterm-gui`)
 	tell application "WezTerm" to activate
 	tell application "System Events"
@@ -24,26 +22,14 @@ on alfred_script(shellCmd)
 	end tell
 	delay 0.1 # ensure wezterm-gui is ready
 
-	# CREATE WINDOW IF NEEDED
-	tell application "System Events" to tell process "WezTerm" 
-		if (count of windows) is 0 then
-			do shell script (exportPath &amp; "nohup wezterm start &amp;")
-		end if
-		repeat while (count of windows) is 0
-			delay 0.05
-		end repeat
-	end tell
-
 	# DETERMINE COMMAND
-	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
-	# 2. Add `clear` to suppress the entering message
-	# 3. Add leading space, so it is not saved to the history due HIST_IGNORE_SPACE
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		set shellCmd to " builtin cd -q " &amp; arg &amp; " &amp;&amp; clear"
+		set shellCmd to "builtin cd -q " &amp; arg &amp; " &amp;&amp; clear" -- -q to suppress cd-hook
 	end if
 
 	# SEND COMMAND
+	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 	do shell script (exportPath &amp; "echo " &amp; quoted form of shellCmd &amp; " | wezterm cli send-text --no-paste")
 end alfred_script</string>
 	<key>prefix</key>
