@@ -2,10 +2,12 @@
 set -e
 #───────────────────────────────────────────────────────────────────────────────
 
+alfred_dir="$PWD" # stored, since cd'ing later
+
 function notify() {
 	name=$1
 	icon=$2
-	"$PWD/notificator" --title "Pre-Shutdown Sync…" --message "$name $icon"
+	"$alfred_dir/notificator" --title "Pre-Shutdown Sync…" --message "$name $icon"
 }
 
 while read -r line; do
