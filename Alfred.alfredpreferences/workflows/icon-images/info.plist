@@ -50,7 +50,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>AF0E4942-E221-40D4-A68F-897A783A8EE9</string>
+				<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -60,7 +60,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
+				<string>68F706E8-BDA8-44E3-8973-752C6B0FC50D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -122,6 +122,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/png2icns.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F0335C72-7DC6-4793-ADCD-3909E4CDE001</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -162,56 +185,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://icon-icons.com/search/icons/?filtro={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>AF0E4942-E221-40D4-A68F-897A783A8EE9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/png2icns.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>F0335C72-7DC6-4793-ADCD-3909E4CDE001</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>icon</string>
 				<key>subtext</key>
-				<string>Flaticon – Iconify – Iconfinder – Google Images</string>
+				<string>Searches several icon sites at once</string>
 				<key>text</key>
 				<string>Search Icon: "{query}"</string>
 				<key>withspace</key>
@@ -248,6 +227,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+					<string>public.tiff</string>
+				</array>
+				<key>name</key>
+				<string>Shrink Image to 70%</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -271,27 +271,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-					<string>public.tiff</string>
-				</array>
-				<key>name</key>
-				<string>Shrink Image to 70%</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -301,33 +280,33 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>cleanshot://capture-text</string>
+				<string>https://fontawesome.com/search?m=free&amp;q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
+			<string>68F706E8-BDA8-44E3-8973-752C6B0FC50D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>acceptsmulti</key>
 				<integer>1</integer>
-				<key>keyword</key>
-				<string>ocr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>OCR Screenshot</string>
-				<key>withspace</key>
-				<true/>
+				<key>filetypes</key>
+				<array>
+					<string>com.compuserve.gif</string>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Convert to webp</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
+			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -357,21 +336,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
+				<key>argumenttype</key>
 				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.compuserve.gif</string>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Convert to webp</string>
+				<key>keyword</key>
+				<string>ocr</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>OCR Screenshot</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
+			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>cleanshot://capture-text</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>6481CF6B-7D93-4373-AE49-E7247AA9E094</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -426,7 +426,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>620</real>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
@@ -437,14 +437,23 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>385</real>
+		</dict>
+		<key>68F706E8-BDA8-44E3-8973-752C6B0FC50D</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>330</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -455,7 +464,7 @@
 			<key>note</key>
 			<string>png → icns</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>450</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -464,7 +473,7 @@
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>330</real>
+			<real>225</real>
 			<key>ypos</key>
 			<real>130</real>
 		</dict>
@@ -475,18 +484,9 @@
 			<key>note</key>
 			<string>→ webp</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>450</real>
 			<key>ypos</key>
 			<real>320</real>
-		</dict>
-		<key>AF0E4942-E221-40D4-A68F-897A783A8EE9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>12</integer>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>15</real>
 		</dict>
 		<key>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</key>
 		<dict>
@@ -495,7 +495,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>130</real>
 		</dict>
 		<key>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</key>
 		<dict>
@@ -504,7 +504,7 @@
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>525</real>
 		</dict>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<dict>
@@ -515,14 +515,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>385</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>620</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -531,7 +531,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>620</real>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
@@ -542,7 +542,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>525</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>
@@ -551,7 +551,7 @@
 			<key>note</key>
 			<string>shrink to 70%</string>
 			<key>xpos</key>
-			<real>555</real>
+			<real>450</real>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>

@@ -1,6 +1,6 @@
 return {
 	"stevearc/conform.nvim",
-	mason_dependencies = { "stylua", "markdownlint", "markdown-toc", "bibtex-tidy" },
+	mason_dependencies = { "stylua", "markdownlint", "markdown-toc" },
 	cmd = "ConformInfo",
 	keys = {
 		-- NOTE in TYPESCRIPT, overridden with custom function in `/ftplugin/typescript.lua`
@@ -13,25 +13,14 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			markdown = { "markdown-toc", "markdownlint", "injected" },
-			bib = { "bibtex-tidy", "squeeze_blanks" },
 			query = { "format-queries" },
 			zsh = { "shell_home" },
 			python = { "ruff_fix_all" },
-			just = { "just", "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 
 			-- fallback, used when not formatters are defined and no LSP is available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
 		},
 		formatters = {
-			["bibtex-tidy"] = {
-				-- stylua: ignore
-				prepend_args = {
-					-- BUG when using `--no-encode-urls`: https://github.com/FlamingTempura/bibtex-tidy/issues/422
-					"--tab", "--curly", "--no-align", "--no-wrap", "--drop-all-caps",
-					"--enclosing-braces", "--numeric", "--trailing-commas", "--duplicates",
-					"--sort-fields", "--remove-empty-fields", "--omit=month,issn,abstract",
-				},
-			},
 			indent_expr = {
 				format = function(_, _, _, callback)
 					vim.cmd.normal { "m`gg=G``", bang = true }
