@@ -39,12 +39,11 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"actionlint",
 }
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 serverConfigs.bashls = {
-	filetypes = { "sh", "zsh", "bash" }, -- for to work in other shells
+	filetypes = { "sh", "zsh", "bash" }, -- work in zsh as well
 	settings = {
 		bashIde = {
 			shellcheckPath = "", -- disable while using efm
@@ -56,66 +55,30 @@ serverConfigs.bashls = {
 
 -- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
 -- since doing so with bash-lsp does not work
+-- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
--- DOCS https://github.com/creativenull/efmls-configs-nvim/tree/main/lua/efmls-configs/linters
-local efmTools = {
-	zsh = {
-		{
-			lintSource = "shellcheck",
-			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
-			lintStdin = true,
-			lintFormats = {
-				"-:%l:%c: %trror: %m [SC%n]",
-				"-:%l:%c: %tarning: %m [SC%n]",
-				"-:%l:%c: %tote: %m [SC%n]",
-			},
-			rootMarkers = { ".git" },
-		},
-	},
-	just = {
-		{
-			lintSource = "just",
-			lintCommand = 'just --summary --justfile="${INPUT}"',
-			lintStdin = false,
-			lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
-			rootMarkers = { "Justfile", ".justfile" },
-		},
-	},
-	yaml = {
-		{
-			lintSource = "actionlint",
-			-- condition ensures that issue templates are not linted
-			lintCommand = '[[ ${INPUT} =~ ".github/workflows/" ]] && actionlint -no-color -oneline -stdin-filename ${INPUT} -',
-			lintStdin = true,
-			lintFormats = {
-				-- actionlint integrates shellcheck, which are the following three
-				-- (they must come before the actionlint's own errors)
-				"%f:%l:%c: %.%#: SC%n:%trror:%m",
-				"%f:%l:%c: %.%#: SC%n:%tarning:%m",
-				"%f:%l:%c: %.%#: SC%n:%tnfo:%m",
-				-- actionlint's own errors
-				"%f:%l:%c: %m",
-			},
-			requireMarker = true,
-			rootMarkers = { ".github/" },
-		},
-	},
-}
-
 serverConfigs.efm = {
-	root_dir = function()
-		local markers = vim.iter(vim.tbl_values(efmTools))
-			:map(function(lang) return lang[1].rootMarkers end)
-			:flatten()
-			:totable()
-		return vim.fs.root(0, markers)
-	end,
-
-	filetypes = vim.tbl_keys(efmTools),
-	settings = { languages = efmTools },
-
+	filetypes = { "zsh" },
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
+
+	settings = {
+		languages = {
+			zsh = {
+				{
+					lintSource = "shellcheck",
+					lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
+					lintStdin = true,
+					lintFormats = {
+						"-:%l:%c: %trror: %m [SC%n]",
+						"-:%l:%c: %tarning: %m [SC%n]",
+						"-:%l:%c: %tote: %m [SC%n]",
+					},
+				},
+			},
+		},
+	},
+
 }
 
 --------------------------------------------------------------------------------
