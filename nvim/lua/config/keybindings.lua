@@ -254,7 +254,7 @@ keymap({ "n", "x", "i" }, "<D-N>", function()
 		vim.cmd.edit(filepath)
 		vim.cmd.write(filepath)
 	end)
-end, { desc = " ScratchPad File" })
+end, { desc = " Create Scratchpad File" })
 
 --------------------------------------------------------------------------------
 
