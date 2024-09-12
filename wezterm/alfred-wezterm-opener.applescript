@@ -15,24 +15,10 @@ on alfred_script(shellCmd)
 	end tell
 	delay 0.1 # ensure wezterm-gui is ready
 
-	# CREATE WINDOW IF NEEDED
-	tell application "System Events" to tell process "WezTerm"
-		if (count of windows) is 0 then
-			set frontmost to true
-			click menu item "New Window" of menu "Shell" of menu bar 1
-		end if
-		repeat while (count of windows) is 0
-			delay 0.05
-		end repeat
-	end tell
-
 	# DETERMINE COMMAND
-	# 1. use builtin to not trigger aliases, `-q` to suppress hooks (chpwd)
-	# 2. Add `clear` to suppress the entering message
-	# 3. Add leading space, so it is not saved to the history due HIST_IGNORE_SPACE
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		set shellCmd to " builtin cd -q " & arg & " && clear"
+		set shellCmd to "builtin cd -q " & arg & " && clear" -- -q to suppress cd-hook
 	end if
 
 	# SEND COMMAND
