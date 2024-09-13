@@ -145,7 +145,6 @@
       "key": "L"
     }
   ],
-  "editor:open-search-replace": [],
   "obsidian-style-settings:show-style-settings-leaf": [
     {
       "modifiers": [
@@ -338,6 +337,16 @@
         "Ctrl"
       ],
       "key": "M"
+    }
+  ],
+  "editor:open-search": [],
+  "editor:open-search-replace": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
     }
   ]
 }
