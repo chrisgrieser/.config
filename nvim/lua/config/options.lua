@@ -19,6 +19,7 @@ vim.opt.signcolumn = "yes:1"
 
 vim.opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
 vim.opt.colorcolumn = "+1" -- one more than textwidth
+
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
 
@@ -107,7 +108,6 @@ vim.opt.cmdheight = 0 -- also auto-set by noice
 
 vim.opt.list = true
 vim.opt.conceallevel = 3
-
 vim.opt.fillchars:append {
 	eob = " ",
 	fold = " ",
