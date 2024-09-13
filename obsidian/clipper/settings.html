@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; overflow: hidden;">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Obsidian Clipper Settings</title>
+		<link rel="stylesheet" href="style.css">
+</head>
+<body style="height: 100%; overflow: hidden;">
+		<div id="settings">
+			
+			<div class="settings-container">
+				<div class="sidebar">
+					<ul>
+						<li class="sidebar-heading">Settings</li>
+						<li data-section="general" class="active">General</li>
+						<li class="sidebar-heading">Templates</li>
+					</ul>
+					<ul id="template-list"></ul>
+					<button type="button" id="new-template-btn" class="mod-cta">New template</button>
+				</div>
+				
+				<div class="content">
+					<div id="general-section" class="settings-section active">
+						<div class="settings-section-header">
+							<h2>General settings</h2>
+						</div>
+						<form id="general-settings-form">
+								<div>
+									<h3>Vaults</h3>
+									<div class="setting-item-description">By default, clipped notes are saved to the currently open vault. You can add vaults here if you want the option to save to different vaults. Vault names must exactly match the name of the Obsidian vault. Press enter to add a&nbsp;vault.</div>
+									<input type="text" id="vault-input" placeholder="Press enter to add a vault" />
+									<ul id="vault-list"></ul>
+								</div>
+								<div>
+									<h3>Hotkeys</h3>
+									<div class="setting-item-description shortcut-instructions">
+									</div>
+									<div id="keyboard-shortcuts-list"></div>
+								</div>
+								<div>
+									<h3>Advanced</h3>
+									<div class="setting-item mod-horizontal">
+										<div class="setting-item-info">
+											<label for="reset-default-template-btn">Reset default template</label>
+											<div class="setting-item-description">Remove any changes you've made to the default&nbsp;template.</div>
+										</div>
+										<div class="setting-item-control">
+											<button type="button" id="reset-default-template-btn" class="mod-warning">Reset</button>
+										</div>
+									</div>
+									<div class="setting-item mod-horizontal" style="display: none;">
+										<div class="setting-item-info">
+											<label for="show-more-actions-toggle">Show actions button</label>
+											<div class="setting-item-description">
+												Allows you to inspect page variables from the clipper menu. Useful for seeing the variables that are available to use in&nbsp;templates.
+											</div>
+										</div>
+										<div class="setting-item-control">
+											<div class="checkbox-container is-enabled">
+												<input type="checkbox" id="show-more-actions-toggle" />
+											</div>
+										</div>
+									</div>
+									<div class="setting-item mod-horizontal">
+										<div class="setting-item-info">
+											<label for="beta-features-toggle">Beta features</label>
+											<div class="setting-item-description">
+												Requires Obsidian 1.7.2 or later. Enables more reliable note creation using the clipboard.
+											</div>
+										</div>
+										<div class="setting-item-control">
+											<div class="checkbox-container">
+												<input type="checkbox" id="beta-features-toggle" />
+											</div>
+										</div>
+									</div>
+								</div>
+						</form>
+					</div>
+
+					<div id="templates-section" class="settings-section">
+						<div class="settings-section-header">
+							<h2 id="template-editor-title">Edit template</h2>
+							<div class="settings-section-actions">
+								<button id="export-template-btn">Export</button>
+								<button id="import-template-btn">Import</button>
+							</div>
+						</div>
+						<div id="template-drop-zone" class="template-drop-zone">
+							<p>Import template</p>
+						</div>
+						<form id="template-settings-form">
+							<div id="template-editor">
+								<div class="setting-item">
+									<label for="template-name">Template name</label>
+									<input type="text" id="template-name" placeholder="Template name" />
+								</div>
+								<div class="setting-item">
+									<label for="template-behavior">Behavior</label>
+									<select id="template-behavior">
+										<option value="create">Create new note</option>
+										<option value="append-specific">Add to existing note</option>
+										<option value="append-daily">Add to daily note</option>
+									</select>
+								</div>
+								<div class="setting-item" id="note-name-format-container" style="display: none;">
+									<label for="note-name-format">Note name</label>
+									<div class="setting-item-description">Format for the file name when creating a new note. You can use variables like {{title}}, {{date}}, and {{published}} to pre-populate data from the&nbsp;page. <a href="https://github.com/obsidianmd/obsidian-clipper?tab=readme-ov-file#template-variables" target="_blank">Learn&nbsp;more</a>.</div>
+									<input type="text" id="note-name-format" placeholder="{{title}}" />
+								</div>
+								<div class="setting-item" id="specific-note-container" style="display: none;">
+									<label for="specific-note-name">Note to add to</label>
+									<div class="setting-item-description">The name of the note to add&nbsp;to.</div>
+									<input type="text" id="specific-note-name" placeholder="Note name" />
+								</div>
+								<div class="setting-item" id="daily-note-format-container" style="display: none;">
+									<label for="daily-note-format">Daily note format</label>
+									<div class="setting-item-description">Make sure this is the same format as your daily note template in Obsidian&nbsp;settings.</div>
+									<input type="text" id="daily-note-format" placeholder="YYYY-MM-DD" value="YYYY-MM-DD" />
+								</div>
+								<div class="setting-item">
+									<label for="template-path-name">Note location</label>
+									<div class="setting-item-description">The folder or path of the note.</div>
+									<input type="text" id="template-path-name" placeholder="Clippings" />
+								</div>
+								<div class="setting-item">
+									<label for="template-vault">Vault</label>
+									<div class="setting-item-description">Select the default vault for this template. Go to <a href="?section=general">general settings</a> to add or remove&nbsp;vaults.</div>
+									<select id="template-vault">
+										<option value="">Last used</option>
+									</select>
+								</div>
+								<div class="setting-item">
+									<label for="url-patterns">Template triggers</label>
+									<div class="setting-item-description">Define rules to automatically select this template if it matches a URL pattern or contains schema.org data. One rule per&nbsp;line.</div>
+									<textarea id="url-patterns" placeholder="https://example.com/" rows="2"></textarea>
+								</div>
+								<div id="properties-warning" style="display: none;">
+									<label>Properties</label>
+									<div class="setting-item-description">Properties are not available when adding to an existing&nbsp;note.</div>
+								</div>
+								<div id="properties-container">
+									<label>Properties</label>
+									<div class="setting-item-description">Properties to add to the top of the clipped note. Use variables to pre-populate data from the&nbsp;page.</div>
+									<div id="template-properties"></div>
+									<div class="metadata-add-button"><a id="add-property-btn">+ Add property</a></div>
+								</div>
+								<div class="setting-item">
+									<label for="note-content-format">Note content</label>
+									<div class="setting-item-description">Customize the content of the note. Use variables to pre-populate data from the&nbsp;page.</div>
+									<textarea id="note-content-format" rows="6" placeholder="{{content}}"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="module" src="settings.js"></script>
+</body>
+</html>

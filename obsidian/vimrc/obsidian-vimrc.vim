@@ -28,7 +28,7 @@ nnoremap P mzA<Space><Esc>p`z
 
 " paste url into selection/cword
 " macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
-noremap <M-k> :pasteinto
+noremap <M-k> :pasteinto<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 
@@ -38,14 +38,14 @@ exmap copyRelativePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("relative")
 exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
 exmap copyObsidianUriMdLink jsfile Meta/vimrc-jsfile.js { copyObsidianUriMdLink() }
 
-noremap <C-p> :copyAbsolutePath
-inoremap <C-p> :copyAbsolutePath
-noremap <C-t> :copyRelativePath
-inoremap <C-t> :copyRelativePath
-noremap <C-n> :copyFilename
-inoremap <C-n> :copyFilename
-noremap <C-o> :copyObsidianUriMdLink
-inoremap <C-o> :copyObsidianUriMdLink
+noremap <C-p> :copyAbsolutePath<CR>
+inoremap <C-p> :copyAbsolutePath<CR>
+noremap <C-t> :copyRelativePath<CR>
+inoremap <C-t> :copyRelativePath<CR>
+noremap <C-n> :copyFilename<CR>
+inoremap <C-n> :copyFilename<CR>
+noremap <C-o> :copyObsidianUriMdLink<CR>
+inoremap <C-o> :copyObsidianUriMdLink<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
@@ -73,88 +73,88 @@ nnoremap <C-l> <C-i>
 
 " Language tools: next/prev/accept suggestion
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
-noremap ge :nextSuggestion
+noremap ge :nextSuggestion<CR>
 
 exmap prevSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-previous-suggestion
-noremap gE :prevSuggestion
+noremap gE :prevSuggestion<CR>
 
 exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-noremap ga :acceptSuggestion
+noremap ga :acceptSuggestion<CR>
 
 " next/prev heading
 exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("next") }
-nnoremap <C-j> :gotoNextHeading
+nnoremap <C-j> :gotoNextHeading<CR>
 exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("prev") }
-nnoremap <C-k> :gotoPrevHeading
+nnoremap <C-k> :gotoPrevHeading<CR>
 
 " [m]atch parenthesis, useful to go to next pandoc citations
 nnoremap m %
 
 " [g]oto [s]ymbol (using Another Quick Switcher)
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
-nnoremap gs :gotoHeading
+nnoremap gs :gotoHeading<CR>
 
 " like vim's gx (if not standing on link, seek forward)
 exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink("current-tab") }
-nnoremap gx :openNextLink
+nnoremap gx :openNextLink<CR>
 
 exmap openNextLinkInNewTab jsfile Meta/vimrc-jsfile.js { openNextLink("new-tab") }
-nnoremap gX :openNextLinkInNewTab
+nnoremap gX :openNextLinkInNewTab<CR>
 
 " [g]oto [f]ootnotes
 " requires Footnotes Shortcut Plugin
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
-nnoremap gf :gotoFootnote
+nnoremap gf :gotoFootnote<CR>
 
 " go to last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
 
 " go to last link in file
 exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
-nnoremap g. :gotoLastLinkInFile
+nnoremap g. :gotoLastLinkInFile<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
 
 " [g]oto [o]pen file (= Quick Switcher)
 exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_main-search
-noremap go :quickSwitcher
-noremap gr :quickSwitcher
+noremap go :quickSwitcher<CR>
+noremap gr :quickSwitcher<CR>
 
 exmap propertySearch obcommand obsidian-another-quick-switcher:search-command_property-search
-noremap gp :propertySearch
+noremap gp :propertySearch<CR>
 
 " :bnext/bprev
 exmap goBack obcommand app:go-back
 exmap goForward obcommand app:go-forward
-noremap <BS> :goBack
-noremap <S-BS> :goForward
+noremap <BS> :goBack<CR>
+noremap <S-BS> :goForward<CR>
 
 " Close
 exmap closeWindow obcommand workspace:close-window
-nnoremap ZZ :closeWindow
+nnoremap ZZ :closeWindow<CR>
 
 " Splits
 exmap splitVertical obcommand workspace:split-vertical
-noremap <C-w>v :splitVertical
-noremap <C-v> :splitVertical
+noremap <C-w>v :splitVertical<CR>
+noremap <C-v> :splitVertical<CR>
 
 " Tabs
 exmap nextTab obcommand workspace:next-tab
 exmap prevTab obcommand workspace:previous-tab
-nnoremap gt :nextTab
-nnoremap gT :prevTab
+nnoremap gt :nextTab<CR>
+nnoremap gT :prevTab<CR>
 
 exmap closeOthers obcommand workspace:close-others
-nnoremap <C-w>o :closeOthers
+nnoremap <C-w>o :closeOthers<CR>
 
 " Alt Buffer (emulates `:buffer #`)
 exmap altBuffer obcommand grappling-hook:alternate-note
-noremap <CR> :altBuffer
+noremap <CR> :altBuffer<CR>
 
 " Random File
 exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data", "read", false) }
-noremap <C-Tab> :openRandomDataFile
+noremap <C-Tab> :openRandomDataFile<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " SEARCH
@@ -165,18 +165,14 @@ nnoremap - /
 " <Esc> clears highlights & notices
 " (HACK cannot combine excommands, therefore combining them to a mapping first)
 exmap clearNotices jsfile Meta/vimrc-jsfile.js { clearNotices() }
-nmap &c& :clearNotices
-nmap &n& :nohl
-nmap <Esc> &c&&n&
+nnoremap <Esc> :clearNotices<CR>:nohl<CR>
 
 " Another Quick Switcher ripgrep-search (somewhat close to Telescope's livegrep)
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
-noremap gl :liveGrep
+noremap gl :liveGrep<CR>
 
-" Obsidian's builtin search & replace
-exmap searchReplace obcommand editor:open-search-replace
-nnoremap ,ff :searchReplace
-nnoremap ,fs :searchReplace
+nnoremap ,ff :s///g<Left><Left><Left>
+nnoremap ,fs :searchReplace<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING
@@ -187,8 +183,8 @@ nnoremap ,fs :searchReplace
 " Move lines (doesn't work in visual mode)
 exmap lineUp obcommand editor:swap-line-up
 exmap lineDown obcommand editor:swap-line-down
-nnoremap <Up> :lineUp
-nnoremap <Down> :lineDown
+nnoremap <Up> :lineUp<CR>
+nnoremap <Down> :lineDown<CR>
 
 " Move character under cursor
 nnoremap <Right> dlp
@@ -197,7 +193,7 @@ nnoremap <Left> dlhhp
 " h1 -> h2, h2 -> h3, etc.
 " <M-h> == cmd+h
 exmap headingIncrementor jsfile Meta/vimrc-jsfile.js { headingIncrementor() }
-nnoremap <M-h> :headingIncrementor
+nnoremap <M-h> :headingIncrementor<CR>
 
 " Move words (equivalent to sibling-swap.nvim)
 " nnoremap ä "zdawel"zph
@@ -208,7 +204,7 @@ nnoremap Ä "zdawEl"zpB
 
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
-noremap zl :contextMenu
+noremap zl :contextMenu<CR>
 
 " undo/redo consistently on one key
 nnoremap U <C-r>
@@ -231,7 +227,7 @@ nnoremap <S-Space> "_daw
 
 " [M]erge lines (removing list or blockquote)
 exmap smartMerge jsfile Meta/vimrc-jsfile.js { smartMerge() }
-nnoremap M :smartMerge
+nnoremap M :smartMerge<CR>
 
 " [s]plit line
 nnoremap ,s i<CR><CR><Esc>
@@ -240,7 +236,7 @@ nnoremap ,s i<CR><CR><Esc>
 exmap openBelow jsfile Meta/vimrc-jsfile.js { smartOpenLine("below") }
 nnoremap o :openBelow
 exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
-nnoremap O :openAbove
+nnoremap O :openAbove<CR>
 
 " Add blank line above/below
 nnoremap = mzO<Esc>`z
@@ -253,113 +249,109 @@ nnoremap ü <C-x>
 " JS Comments
 nunmap q
 exmap toggleJsLineComment jsfile Meta/vimrc-jsfile.js { toggleJsLineComment() }
-nnoremap qq :toggleJsLineComment
+nnoremap qq :toggleJsLineComment<CR>
 exmap appendJsComment jsfile Meta/vimrc-jsfile.js { appendJsComment() }
-nnoremap Q :appendJsComment
+nnoremap Q :appendJsComment<CR>
 
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
-nnoremap ,x :checkList
+nnoremap ,x :checkList<CR>
 
 " blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
-nnoremap ,< :toggleBlockquote
+nnoremap ,< :toggleBlockquote<CR>
 
 exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
-nnoremap qw :insertHr
+nnoremap qw :insertHr<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
-" [d]evTools
-exmap toggleDevtools jscommand { electronWindow.toggleDevTools() }
-nnoremap ,d :toggleDevtools
-
 " [L]og Variable
 exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
-nnoremap ,ll :consoleLogFromWordUnderCursor
+nnoremap ,ll :consoleLogFromWordUnderCursor<CR>
 
 " Enhance URL with title (same hotkey as [c]ode action in nvim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
-nnoremap ,cc :enhanceUrlWithTitle
+nnoremap ,cc :enhanceUrlWithTitle<CR>
 
 " Freeze Interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
-nnoremap ,F :freezeInterface
+nnoremap ,F :freezeInterface<CR>
 
 " Rephraser: [a]ccept/[r]eject
 exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
 nnoremap ,a :acceptSuggestionsInLine
 exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
-nnoremap ,r :rejectSuggestionsInLine
+nnoremap ,r :rejectSuggestionsInLine<CR>
 
 " set "[r]ead: true" property
 exmap addYamlKey jsfile Meta/vimrc-jsfile.js { addYamlKey("read", true) }
-nnoremap ,r :addYamlKey
+nnoremap ,r :addYamlKey<CR>
 
 " [i]nspect [w]ord count
 exmap inspectWordCount jsfile Meta/vimrc-jsfile.js { inspectWordCount() }
-nnoremap ,iw :inspectWordCount
+nnoremap ,iw :inspectWordCount<CR>
 
 " [i]nspect chrome [v]ersion
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
-nnoremap ,iv :inspectChromeVersion
+nnoremap ,iv :inspectChromeVersion<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " META: PLUGIN- AND SETTING-RELATED BINDINGS
 
 exmap updatePlugins jsfile Meta/vimrc-jsfile.js { updatePlugins() }
-nnoremap ,pp :updatePlugins
+nnoremap ,pp :updatePlugins<CR>
 
 " open [p]lugin [d]irectory
 exmap openPluginDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/plugins'); }
-nnoremap ,pd :openPluginDir
+nnoremap ,pd :openPluginDir<CR>
 
 " open [m]eta
 exmap openMetaDir jscommand { view.app.openWithDefaultApp('/Meta'); }
-nnoremap ,pm :openMetaDir
+nnoremap ,pm :openMetaDir<CR>
 
 " open [s]nippet directory
 exmap openSnippetDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/snippets'); }
-nnoremap ,ps :openSnippetDir
+nnoremap ,ps :openSnippetDir<CR>
 
 " open [t]heme directory
 exmap openThemeDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/themes'); }
-nnoremap ,pt :openThemeDir
+nnoremap ,pt :openThemeDir<CR>
 
 " open [a]ppearance settings
 exmap openAppearanceSettings jsfile Meta/vimrc-jsfile.js { openAppearanceSettings() }
-nnoremap ,pa :openAppearanceSettings
+nnoremap ,pa :openAppearanceSettings<CR>
 
 " open community plugin settings
 exmap openCommunityPluginsSettings jsfile Meta/vimrc-jsfile.js { openCommunityPluginsSettings() }
-nnoremap ,pl :openCommunityPluginsSettings
+nnoremap ,pl :openCommunityPluginsSettings<CR>
 
 " [i] install [p]lugins
 exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
-nnoremap ,pi :installPlugins
+nnoremap ,pi :installPlugins<CR>
 
 " open trash
 exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
-nnoremap ,t :openTrash
+nnoremap ,t :openTrash<CR>
 
 " dynamic [h]ighlights settings
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
-nnoremap ,ph :openDynamicHighlightsSettings
+nnoremap ,ph :openDynamicHighlightsSettings<CR>
 
 " Cycle Colorscheme
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
-nnoremap ,pc :cycleColorscheme
+nnoremap ,pc :cycleColorscheme<CR>
 
 " Open Plugin Settings (uses personal plugin)
 exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
-nnoremap g, :openThisVimrc
+nnoremap g, :openThisVimrc<CR>
 
 " Workspace
 exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
-nnoremap ,w :loadWorkspace
+nnoremap ,w :loadWorkspace<CR>
 exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
-nnoremap ,W :saveWorkspace
+nnoremap ,W :saveWorkspace<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
@@ -493,37 +485,37 @@ nnoremap wm yt]p
 
 " Emulate vim folding command
 exmap togglefold obcommand editor:toggle-fold
-nnoremap za :togglefold
-nnoremap ^ :togglefold
-nnoremap zo :togglefold
-nnoremap zc :togglefold
+nnoremap za :togglefold<CR>
+nnoremap ^ :togglefold<CR>
+nnoremap zo :togglefold<CR>
+nnoremap zc :togglefold<CR>
 
 exmap unfoldall obcommand editor:unfold-all
 exmap foldall obcommand editor:fold-all
-nnoremap zm :foldall
-nnoremap zz :foldall
-nnoremap zr :unfoldall
+nnoremap zm :foldall<CR>
+nnoremap zz :foldall<CR>
+nnoremap zr :unfoldall<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 
 " [O]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
-nnoremap ,os :spellcheck
+nnoremap ,os :spellcheck<CR>
 
 " [O]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
-nnoremap ,on :toggleLineNumbers
+nnoremap ,on :toggleLineNumbers<CR>
 
 " [O]ption: [d]iagnostics
 exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
-nnoremap ,od :enableDiagnostics
+nnoremap ,od :enableDiagnostics<CR>
 exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
-nnoremap ,oD :disableDiagnostics
+nnoremap ,oD :disableDiagnostics<CR>
 
 " [O]ption: [a]completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
-nnoremap ,oa :toggleAiCompletion
+nnoremap ,oa :toggleAiCompletion<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " AI SUGGESTIONS
@@ -532,7 +524,7 @@ nnoremap ,oa :toggleAiCompletion
 " insert mode: accept suggestion
 " normal mode: format
 exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <M-s> :acceptGhostText
+inoremap <M-s> :acceptGhostText<CR>
 
 exmap lint obcommand obsidian-linter:lint-file-unless-ignored
-nnoremap <M-s> :lint
+nnoremap <M-s> :lint<CR>
