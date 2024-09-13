@@ -171,8 +171,8 @@ nnoremap <Esc> :clearNotices<CR>:nohl<CR>
 exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 noremap gl :liveGrep<CR>
 
-nnoremap ,ff :s///g<Left><Left><Left>
-nnoremap ,fs :searchReplace<CR>
+nnoremap ,ff :%s///g
+nnoremap ,fs :%s///g
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING
