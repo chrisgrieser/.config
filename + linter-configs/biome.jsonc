@@ -5,13 +5,17 @@
 		"rules": {
 			"all": true,
 			"nursery": {
-				"all": true,
-				"noConsole": "off",
-				"noUnknownProperty": "off", // css variables, TODO buggy, investigate later
-				"useTopLevelRegex": "off" // not useful for JXA
+				"all": true
 			},
 			"suspicious": {
-				"noConsoleLog": "info" // JXA does not allow `console.info`, so we need `console.log`
+				"noConsoleLog": "info", // JXA does not allow `console.info`, so we need `console.log`
+				"noConsole": "off"
+			},
+			"performance": {
+				"useTopLevelRegex": "off" // not useful for JXA
+			},
+			"correctness": {
+				"noUnknownProperty": "off" // css variables, TODO buggy, investigate later
 			},
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "off", // sometimes useful
@@ -25,30 +29,22 @@
 			}
 		}
 	},
-	"css": {
-		// opt-in at biome 1.8
-		"linter": { "enabled": true },
-		"formatter": { "enabled": true }
-	},
 	"javascript": {
 		// JXA variables
 		"globals": ["ObjC", "Application", "delay", "Path", "$"]
 	},
 	"formatter": {
-		"lineWidth": 100,
-		"indentStyle": "tab",
+		"useEditorconfig": true,
 		"formatWithErrors": true
 	},
 	"files": {
 		"ignore": [".obsidian/plugins/**/*"] // plugins in Obsidian vaults
 	},
-
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
-
 	// use the schema from the local biome package installed via Mason
 	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }
