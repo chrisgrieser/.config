@@ -16,6 +16,7 @@ return {
 			query = { "format-queries" },
 			zsh = { "shell_home" },
 			python = { "ruff_fix_all" },
+			just = { "just", "trim_whitespace", "trim_newlines", "squeeze_blanks" },
 
 			-- fallback, used when not formatters are defined and no LSP is available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
