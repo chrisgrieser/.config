@@ -3,13 +3,15 @@
 # CONFIG
 github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
+repo_names="."
 commit_msg="ci: bump action step versions"
 
 function actions_in_repo {
-	# cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
-	sed -i '' -E 's/(git-auto-commit-action)@v4/\1@v5/' ./.github/workflows/*.yml
+	if [[ -f ./.editorconfig ]]; then
+		sed -i '' 's/80/100/' ./.editorconfig
+	fi
 }
 
 #───────────────────────────────────────────────────────────────────────────────

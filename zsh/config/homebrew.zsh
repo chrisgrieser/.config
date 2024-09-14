@@ -54,7 +54,7 @@ function update() {
 	_print-section "Mac App Store"
 	# mas upgrade # HACK -> PENDING https://github.com/mas-cli/mas/issues/512
 	local mas_updates
-	mas_updates=$(mas outdated | grep -v "Highlights")
+	mas_updates=$(mas outdated | grep -vE "Highlights|Mona")
 	if [[ -z "$mas_updates" ]]; then
 		echo "No MAS updates."
 	else

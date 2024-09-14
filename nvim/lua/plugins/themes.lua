@@ -3,13 +3,13 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
-	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
+	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 }
 
 local darkThemes = {
-	{ "binhtran432k/dracula.nvim", opts = true },
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	{ "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
+	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "0xstepit/flow.nvim", opts = { mode = "bright" } },
 	-- "rebelot/kanagawa.nvim",
 	-- "sainnhe/gruvbox-material",
