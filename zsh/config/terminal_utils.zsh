@@ -59,9 +59,8 @@ compdef _o o
 # file finder
 # `fd` replacement using just `rg`
 function fd {
-	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
 	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$1" | sed -Ee "$color"
+		rg --color=always "$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
