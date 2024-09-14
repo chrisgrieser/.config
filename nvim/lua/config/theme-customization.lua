@@ -28,24 +28,16 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- Lualine A: bold
-	vim.defer_fn(function()
-		for _, v in pairs(vimModes) do
-			updateHl("lualine_a_" .. v, "gui=bold")
-		end
-	end, 100)
-
 	-- emphasized `return`
 	updateHl("@keyword.return", "gui=bold")
 end
 
 function M.themeModifications()
-	local mode = vim.o.background
-	local theme = mode == "light" and vim.g.lightTheme or vim.g.darkTheme
+	local theme = vim.o.background == "light" and vim.g.lightTheme or vim.g.darkTheme
 
 	local function revertedTodoComments()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
-		local textColor = mode == "dark" and "#000000" or "#ffffff"
+		local textColor = vim.o.background == "dark" and "#000000" or "#ffffff"
 		for type, altType in pairs(types) do
 			local fg = u.getHlValue("@comment." .. type, "fg")
 				or u.getHlValue("Diagnostic" .. altType, "fg")
@@ -53,10 +45,18 @@ function M.themeModifications()
 		end
 	end
 
+	local function lualineBold()
+		vim.defer_fn(function()
+			for _, v in pairs(vimModes) do
+				updateHl("lualine_a_" .. v, "gui=bold")
+			end
+		end, 100)
+	end
+
 	-----------------------------------------------------------------------------
 
 	if theme == "tokyonight" then
-		local yellow = mode == "dark" and "#b8b042" or "#e8e05e"
+		local yellow = vim.o.background == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. yellow)
 			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
@@ -79,6 +79,7 @@ function M.themeModifications()
 	elseif theme == "bluloco" then
 		setHl("@keyword.return", { fg = "#d42781", bold = true })
 		revertedTodoComments()
+		lualineBold()
 		setHl("@lsp.typemod.variable.global.lua", { link = "@namespace" }) -- `vim` and `hs`
 		setHl("@lsp.typemod.variable.defaultLibrary.lua", { link = "@module.builtin" })
 		setHl("Title", { fg = "#7c84da", bold = true })

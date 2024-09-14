@@ -118,6 +118,7 @@ local function telescopeConfig()
 						vim.fs.normalize("~/.config"),
 						vim.fn.stdpath("data") .. "/lazy",
 						os.getenv("HOME") or "",
+						os.getenv("HOMEBREW_PREFIX") or "",
 					}
 					vim.iter(roots):each(function(root) path = path:gsub(vim.pesc(root), "") end)
 

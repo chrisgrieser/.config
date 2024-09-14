@@ -26,6 +26,7 @@
 .github
 LICENSE
 .editorconfig
+.markdownlint.yaml
 
 # academic software projects
 CITATION.cff
