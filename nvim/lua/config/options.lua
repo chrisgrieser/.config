@@ -17,8 +17,9 @@ vim.opt.splitbelow = true -- split down instead of up
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes:1"
 
-vim.opt.textwidth = 80 -- mostly set by .editorconfig, therefore only fallback
+vim.opt.textwidth = 80
 vim.opt.colorcolumn = "+1" -- one more than textwidth
+require("editorconfig").properties.max_line_length = nil -- `editorconfig` should not set `textwidth`
 
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines

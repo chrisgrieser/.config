@@ -116,6 +116,21 @@ function M.themeModifications()
 		updateHl("DiagnosticSignInfo", "guibg=none")
 		updateHl("DiagnosticSignWarn", "guibg=none")
 		updateHl("DiagnosticSignError", "guibg=none")
+	elseif theme == "dracula" then
+		revertedTodoComments()
+
+		setHl("@number", { fg = "#7ca2ff" })
+		setHl("@number.comment", { link = "@number" })
+
+		updateHl("LspInlayHint", "guibg=#323543")
+
+		setHl("Constant", {})
+		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
+		setHl("Boolean", { link = "Special" })
+		setHl("Number", { link = "@field" })
+		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
+	elseif theme == "flow" then
+		revertedTodoComments()
 	end
 end
 

@@ -32,26 +32,27 @@ function run() {
 		)
 		.split("\r");
 
-	// GUARD
-	const hasBrokenSymlink = rgOutput[0].startsWith("No such file or directory (os error 2)");
-	if (hasBrokenSymlink) {
-		const [_, brokenLink] = rgOutput[0].match(/rg: (.+?): /) || [];
-		const relPath = brokenLink.slice(dotfileFolder.length + 1);
-		const alfredItem = {
-			title: relPath,
-			subtitle: "⚠️ Broken Symlink",
-			type: "file:skipcheck", // so `alt+return` reveals it in Finder
-			arg: brokenLink,
-		};
-		return JSON.stringify({ items: [alfredItem] });
-	}
-
 	/** @type{AlfredItem|{}[]} */
 	const fileArray = rgOutput.map((absPath) => {
+		// GUARD check for broken symlinks
+		if (absPath.startsWith("rg: ")) {
+			const [_, brokenLink] = absPath.match(/rg: (.+?): /) || [];
+			const relPath = brokenLink.slice(dotfileFolder.length + 1);
+			const alfredItem = {
+				title: relPath,
+				subtitle: "⚠️ Broken Symlink",
+				type: "file:skipcheck", // so `alt+return` reveals it in Finder
+				arg: brokenLink,
+			};
+			return alfredItem;
+		}
+
+		// params
 		const name = absPath.split("/").pop() || "ERROR";
 		const relPath = absPath.slice(dotfileFolder.length + 1);
 		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
+
 
 		// emoji
 		let emoji = "";
