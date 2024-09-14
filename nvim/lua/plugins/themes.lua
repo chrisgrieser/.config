@@ -8,6 +8,7 @@ local lightThemes = {
 }
 
 local darkThemes = {
+	"drazil100/dusklight.vim",
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "0xstepit/flow.nvim", opts = true },
 	-- "rebelot/kanagawa.nvim",
@@ -27,7 +28,7 @@ vim.g.darkOpacity = 0.85
 ---@return string name of the color scheme
 local function getName(repo)
 	if type(repo) == "table" then repo = repo.name or repo[1] end
-	local name = repo:gsub(".*/", ""):gsub("[.%-]?nvim$", ""):gsub("neovim%-?", "")
+	local name = repo:gsub(".*/", ""):gsub("[.%-]?n?vim$", ""):gsub("neovim%-?", "")
 	return name
 end
 
