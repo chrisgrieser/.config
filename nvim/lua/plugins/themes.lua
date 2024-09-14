@@ -8,10 +8,14 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	"drazil100/dusklight.vim",
+	{ "binhtran432k/dracula.nvim", opts = true },
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
-	-- { "0xstepit/flow.nvim", opts = true },
+	-- { "0xstepit/flow.nvim", opts = { mode = "bright" } },
 	-- "rebelot/kanagawa.nvim",
+	-- "sainnhe/gruvbox-material",
+	-- "fynnfluegge/monet.nvim",
+	-- "rebelot/kanagawa.nvim",
+	-- { "sainnhe/sonokai", init = function() vim.g.sonokai_style = "shusia" end },
 }
 
 vim.g.lightOpacity = 0.92
