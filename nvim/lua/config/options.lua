@@ -17,9 +17,17 @@ vim.opt.splitbelow = true -- split down instead of up
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes:1"
 
+-- By default, vim automatically sets `textwidth` to follow the
+-- `max_line_length` value of `editorconfig`. However, I prefer to keep have
+-- different values for `textwidth` and `max_line_length`, so vim behavior like
+-- `gww` or auto-breaking comment still follows `textwidth`, while using a wider
+-- line length setting for formatters. Setting those values independently is not
+-- possible normally, so we disable the respective in the `editorconfig` module
+-- instead as a workaround.
+require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
+
 vim.opt.colorcolumn = "+1" -- one more than textwidth
-require("editorconfig").properties.max_line_length = nil -- `editorconfig` should not set `textwidth`
 
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
