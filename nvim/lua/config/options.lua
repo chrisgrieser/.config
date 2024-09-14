@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 -- GENERAL
 
 vim.opt.undofile = true -- enables persistent undo history
@@ -15,19 +14,8 @@ vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
 
 vim.opt.cursorline = true
-vim.opt.signcolumn = "yes:1"
-
--- By default, vim automatically sets `textwidth` to follow the
--- `max_line_length` value of `editorconfig`. However, I prefer to keep have
--- different values for `textwidth` and `max_line_length`, so vim behavior like
--- `gww` or auto-breaking comment still follows `textwidth`, while using a wider
--- line length setting for formatters. Setting those values independently is not
--- possible normally, so we disable the respective in the `editorconfig` module
--- instead as a workaround.
-require("editorconfig").properties.max_line_length = nil
-vim.opt.textwidth = 80
-
 vim.opt.colorcolumn = "+1" -- one more than textwidth
+vim.opt.signcolumn = "yes:1"
 
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
@@ -47,15 +35,9 @@ vim.opt.sidescrolloff = 12
 vim.g.baseScrolloff = 12 -- so scrolloff-changing functions can use this
 vim.opt.scrolloff = vim.g.baseScrolloff
 
--- mostly set by .editorconfig, therefore only fallback
-vim.opt.expandtab = false
-vim.opt.tabstop = 3
-vim.opt.shiftwidth = 3
-
-vim.opt.shiftround = true
-vim.opt.smartindent = true
-
--- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's overwritten by ftplugins having the `o` option (which many do). Therefore needs to be set via autocommand.
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- overwritten by ftplugins having the `o` option (which many do). Therefore
+-- needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(ctx)
 		if ctx.match ~= "markdown" then
@@ -64,6 +46,27 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+
+--------------------------------------------------------------------------------
+-- EDITORCONFIG
+
+-- By default, vim automatically sets `textwidth` to follow the
+-- `max_line_length` value of `editorconfig`. However, I prefer to keep have
+-- different values for `textwidth` and `max_line_length`, so vim behavior like
+-- `gww` or auto-breaking comment still follows `textwidth`, while using a wider
+-- line length setting for formatters. Setting those values independently is not
+-- possible normally, so we disable the respective in the `editorconfig` module
+-- instead as a workaround. 
+require("editorconfig").properties.max_line_length = nil
+vim.opt.textwidth = 80
+
+-- mostly set by `editorconfig`, therefore only fallback
+vim.opt.expandtab = false
+vim.opt.tabstop = 3
+vim.opt.shiftwidth = 3
+
+vim.opt.shiftround = true
+vim.opt.smartindent = true
 
 --------------------------------------------------------------------------------
 -- FILETYPES
@@ -77,7 +80,7 @@ vim.filetype.add {
 --------------------------------------------------------------------------------
 -- DIRECTORIES
 
--- move to custom location where they are synced independently from the dotfiles repo
+-- move to custom location where they are synced independently from the dotfiles
 vim.opt.undodir = vim.g.syncedData .. "/undo"
 vim.opt.viewdir = vim.g.syncedData .. "/view"
 vim.opt.shadafile = vim.g.syncedData .. "/main.shada"
