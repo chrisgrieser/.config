@@ -136,17 +136,6 @@
 			<key>url</key>
 			<string>https://chromewebstore.google.com/search/{query}</string>
 		</dict>
-		<key>C5E882EB-62C4-4082-8896-072CDB9C8B48</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ji</string>
-			<key>text</key>
-			<string>Jisho: {query}</string>
-			<key>url</key>
-			<string>https://jisho.org/search/{query}</string>
-		</dict>
 		<key>CB53E08B-32B8-4062-98CC-5A36E97438A4</key>
 		<dict>
 			<key>enabled</key>

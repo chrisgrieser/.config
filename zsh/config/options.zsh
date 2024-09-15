@@ -14,6 +14,9 @@ function command_not_found_handler() {
 	return 127
 }
 
+autoload -U url-quote-magic   
+zle -N self-insert url-quote-magic
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # HISTORY
