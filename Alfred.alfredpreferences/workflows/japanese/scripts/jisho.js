@@ -20,18 +20,24 @@ function run(argv) {
 
 	// DOCS https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
 	const apiURL = "https://jisho.org/api/v1/search/words?keyword=";
+
+	/** @type {JishoResponse} */
 	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
 
 	/** @type {AlfredItem[]} */
-	const items = response.data.map((/** @type {{name: string}} */ item) => {
-		const { name } = item;
-		
+	const items = response.data.map((item) => {
+		const { japanese, senses, is_common } = item;
+
+		const jap = `${japanese[0].word} 【${japanese[0].reading}】`;
+		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
+		const url = "https://jisho.org/word/" + japanese[0].word;
+		const icon = is_common ? "  ●" : "";
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: name,
-			subtitle: name,
-			arg: name,
+			title: jap + icon,
+			subtitle: eng,
+			arg: url,
 		};
 		return alfredItem;
 	});

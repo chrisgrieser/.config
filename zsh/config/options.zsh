@@ -14,8 +14,10 @@ function command_not_found_handler() {
 	return 127
 }
 
-autoload -U url-quote-magic   
+# auto-escape special characters when pasting URLs
+autoload -U url-quote-magic bracketed-paste-magic
 zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 #───────────────────────────────────────────────────────────────────────────────
 
