@@ -119,7 +119,9 @@ end
 local function autoSetLayout()
 	if M.isLayouting then return end
 	M.isLayouting = true;
+
 	(env.isProjector() and movieLayout or workLayout)()
+
 	u.runWithDelays(4, function() M.isLayouting = false end)
 end
 
