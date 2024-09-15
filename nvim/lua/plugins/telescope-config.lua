@@ -222,7 +222,7 @@ local function telescopeConfig()
 				trim_text = true,
 				show_line = false,
 				include_declaration = false,
-				include_current_line = false,
+				include_current_line = true,
 				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
