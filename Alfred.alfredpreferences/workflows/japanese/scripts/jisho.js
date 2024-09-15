@@ -31,7 +31,7 @@ function run(argv) {
 		const jap = `${japanese[0].word} 【${japanese[0].reading}】`;
 		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
 		const url = "https://jisho.org/word/" + japanese[0].word;
-		const icon = is_common ? "  ●" : "";
+		const icon = is_common ? "   [common]" : "";
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
