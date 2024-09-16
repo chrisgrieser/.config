@@ -419,7 +419,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>pun</string>
+				<string>bun</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -440,7 +440,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>ぷん</string>
+				<string>ぶん</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>

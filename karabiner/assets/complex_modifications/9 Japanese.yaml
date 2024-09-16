@@ -17,7 +17,13 @@ rules:
         conditions:
           - { type: input_source_if, input_sources: [language: ^de$] }
         to:
+          - select_input_source:
+              input_mode_id: com.apple.inputmethod.Japanese
+              # see input sources: Karabiner EventsViewer -> Variables
+              input_source_id: com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese
           - set_notification_message: { id: layout-notice, text: "🇯🇵 Japanese" }
+          # FIX redundancy to fix sometimes not switching
+          - { key_code: vk_none, hold_down_milliseconds: 50 }
           - select_input_source:
               input_mode_id: com.apple.inputmethod.Japanese
               # see input sources: Karabiner EventsViewer -> Variables
