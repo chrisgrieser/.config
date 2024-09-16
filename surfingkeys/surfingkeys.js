@@ -189,21 +189,22 @@ for (const key of ["j", "k", "f", "l", "N", "P", "0"]) {
 }
 
 // for BetterTouchTool Mappings
-unmap("f", /crunchyroll\.com/); // fullscreen
-unmap("N", /crunchyroll\.com/); // next episode
-unmap("0", /crunchyroll\.com/); // beginning
+//unmap("f", /crunchyroll\.com/); // fullscreen
+//unmap("N", /crunchyroll\.com/); // next episode
+//unmap("0", /crunchyroll\.com/); // beginning
+settings.blocklistPattern = /crunchyroll/; // `unmap` not working at crunchyroll…
 
 // cheatsheets on those websites
 unmap("?", /(github|reddit|youtube).com|devdocs.io/);
 
 // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
-mapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io|reddit\.com/ });
+mapkey("<Esc>", "-Disable-", () => {}, { domain: /devdocs\.io|reddit\.com/ });
 // biome-ignore lint/suspicious/noEmptyBlockStatements: intentional to disable
-imapkey("<Esc>", "Disable", () => {}, { domain: /devdocs\.io|reddit\.com/ });
+imapkey("<Esc>", "-Disable-", () => {}, { domain: /devdocs\.io|reddit\.com/ });
 
 mapkey(
 	"gu",
-	"go up to subreddit",
+	"#3go up to subreddit",
 	() => {
 		const redditRegex = /https:\/\/(new|old|www)\.reddit\.com\/r\/\w+/;
 		const subredditUrl = window.location.href.match(redditRegex)?.[0];
@@ -212,7 +213,7 @@ mapkey(
 	{ domain: /reddit\.com/ },
 );
 
-mapkey("yg", "Copy GitHub Link", async () => {
+mapkey("yg", "#7Copy GitHub Link", async () => {
 	const url = window.location.href;
 	const [_, repo] = url.match(/https:\/\/github\.com\/(.*?\/[^/?]*)/) || [];
 	if (!repo) return;
