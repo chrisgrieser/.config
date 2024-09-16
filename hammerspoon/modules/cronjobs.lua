@@ -87,11 +87,10 @@ M.timer_emmyluaUpdater = hs.timer
 --------------------------------------------------------------------------------
 -- SLEEP TIMER
 
--- Between 0:00 and 7:00, check every x min if device has been idle for y
+-- When projector is connected, check every x min if device has been idle for y
 -- minutes. If so, alert and wait for z secs. If still idle then, quit
 -- all video apps.
 local config = {
-	betweenHours = { 0, 7 },
 	checkIntervalMins = 10,
 	idleMins = 45,
 	timeToReactSecs = 60,
@@ -100,9 +99,8 @@ local config = {
 M.timer_sleepAutoVideoOff = hs.timer
 	.doEvery(config.checkIntervalMins * 60, function()
 		-- GUARD
-		local isNight = u.betweenTime(config.betweenHours[1], config.betweenHours[2])
 		local isIdle = (hs.host.idleTime() / 60) > config.idleMins
-		if not (isNight and isIdle and u.screenIsUnlocked()) then return end
+		if not (env.isProjector() and isIdle and u.screenIsUnlocked()) then return end
 
 		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 		hs.alert(alertMsg, 4)
