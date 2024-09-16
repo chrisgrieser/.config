@@ -44,7 +44,8 @@ sketchybar \
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
 	--add alias "BusyCal Menu & Alarms,Item-0" $first_row \
-	--set "BusyCal Menu & Alarms,Item-0" padding_right=-10 y_offset=16 drawing=true \
+	--set "BusyCal Menu & Alarms,Item-0" drawing=true \
+	padding_right=-10 y_offset=16 \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 drawing=true \
@@ -53,6 +54,10 @@ sketchybar \
 	--add item weather $first_row \
 	--set weather update_freq=1200 icon.y_offset=-1 \
 	script="$plugin_dir/weather.sh" \
+	\
+	--add alias "TextInputMenuAgent,Item-0" $first_row \
+	--set "TextInputMenuAgent,Item-0" drawing=true \
+	padding_right=-3 padding_left=-17 y_offset=17 alias.scale=0.96 \
 	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=300 icon="" \
