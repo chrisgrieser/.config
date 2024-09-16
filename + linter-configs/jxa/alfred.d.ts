@@ -20,7 +20,7 @@ declare class AlfredScriptFilter {
 
 declare class AlfredIcon {
 	type?: "fileicon" | "filetype" | "";
-	path: string;
+	path?: string;
 }
 
 declare class AlfredItem {

@@ -17,7 +17,6 @@ return {
 			zsh = { "shell_home" },
 			python = { "ruff_fix_all" },
 			just = { "just", "trim_whitespace", "trim_newlines", "squeeze_blanks" },
-			javascript = { "biome" }, -- FIX PENDING https://github.com/biomejs/biome/issues/3923
 
 			-- fallback, used when no formatters are defined and no LSP is available
 			_ = { "trim_whitespace", "trim_newlines", "squeeze_blanks", "indent_expr" },
