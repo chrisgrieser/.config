@@ -4,8 +4,8 @@ matches:
   - { trigger: n#t, replace: n't }
   - { trigger: nät, replace: n't }
   - { trigger: nÄt, replace: n't }
-  # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "gitignore", where it is actually correct)
-  - { regex: "(?P<letter>[a-ru-z])ign\\b", replace: "{{letter}}ing" }
+  # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "foreign", where it is actually correct)
+  - { regex: "(?P<letter>[a-df-ru-z])ign ", replace: "{{letter}}ing " }
   - { trigger: " ot ", replace: " to " }
   - { trigger: "#d ", replace: "'d " }
   - { trigger: "#s ", replace: "'s " }

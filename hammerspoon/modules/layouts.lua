@@ -134,11 +134,12 @@ hs.hotkey.bind(u.hyper, "home", autoSetLayout)
 -- 3. Systemstart
 if u.isSystemStart() then autoSetLayout() end
 
--- 4. Waking when not in the office
+-- 4. Waking
 M.caff_unlock = c.new(function(event)
 	if
-		event == c.systemDidWake
-		or (event == c.screensDidUnlock and not env.isAtOffice and not env.isProjector())
+		(event == c.screensDidUnlock or event == c.systemDidWake)
+		and not env.isAtOffice
+		and not env.isProjector()
 	then
 		u.runWithDelays(0.5, autoSetLayout)
 	end

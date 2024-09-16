@@ -182,9 +182,18 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[i] rem[i]nders"
+      - description: "[i] Ank[i]"
         type: basic
-        from: { key_code: i }
+        from: { key_code: i } 
+        conditions: [*leader-active]
+        to:
+          - shell_command: open -a 'Anki'
+          - *deactivate-leader
+          - *remove-notice
+
+      - description: "[R]eminder"
+        type: basic
+        from: { key_code: r, modifiers: { mandatory: [shift] } }
         conditions: [*leader-active]
         to:
           # open Smart List "Today"
