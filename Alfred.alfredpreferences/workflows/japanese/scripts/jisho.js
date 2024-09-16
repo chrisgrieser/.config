@@ -26,20 +26,38 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const items = response.data.map((item) => {
-		const { japanese, senses, is_common } = item;
+		const { japanese, senses, is_common, jlpt, tags } = item;
 
 		const kanji = japanese[0].word; // sometimes there's no kanji
 		const kana = japanese[0].reading;
 		const jap = kanji ? `${kanji} 【${kana}】` : kana;
 		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
 		const url = "https://jisho.org/word/" + (kanji || kana);
-		const icon = is_common ? "  C" : "";
 
-		return {
+		const properties = [];
+		if (jlpt) {
+			const level = jlpt
+				.map((j) => j.replace("jlpt-", ""))
+				.join(" ")
+				.toUpperCase();
+			properties.push(level);
+		}
+		if (tags) {
+			const wanikani = tags
+				.map((j) => j.replace("anikani", ""))
+				.join(" ")
+				.toUpperCase();
+			properties.push(wanikani);
+		}
+		const icon = "   " + properties.join(" ");
+
+		const alfredItem = {
 			title: jap + icon,
+			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: eng,
 			arg: url,
 		};
+		return alfredItem;
 	});
 
 	return JSON.stringify({ items: items });
