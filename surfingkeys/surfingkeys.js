@@ -188,11 +188,12 @@ for (const key of ["j", "k", "f", "l", "N", "P", "0"]) {
 	unmap(key, /youtube\.com/);
 }
 
-// for BetterTouchTool Mappings
-//unmap("f", /crunchyroll\.com/); // fullscreen
-//unmap("N", /crunchyroll\.com/); // next episode
-//unmap("0", /crunchyroll\.com/); // beginning
-settings.blocklistPattern = /crunchyroll/; // `unmap` not working at crunchyroll…
+// for BetterTouchTool Mappings 
+// sometimes do not work, surfingkeys needs to be disabled manually on
+// crunchyroll via the extension icon then
+unmap("f", /crunchyroll\.com/); // fullscreen
+unmap("N", /crunchyroll\.com/); // next episode
+unmap("0", /crunchyroll\.com/); // beginning
 
 // cheatsheets on those websites
 unmap("?", /(github|reddit|youtube).com|devdocs.io/);
@@ -282,8 +283,7 @@ const unusedKeys = [
 	"cc", // #7Open selected link or link from clipboard
 	";cq", // #7Clear all URLs in queue to be opened
 	"ys", // u7Copy current page
-	"yj", // #7Copy current settings", function() {
-	";pj", // #7Restore settings data from clipboard", function() {
+	";pj", // #7Restore settings data from clipboard",
 	"yt", // #3Duplicate current tab
 	"yT", // #3Duplicate current tab in background
 	"yY", // #7Copy all tabs
