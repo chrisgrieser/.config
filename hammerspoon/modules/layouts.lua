@@ -136,7 +136,10 @@ if u.isSystemStart() then autoSetLayout() end
 
 -- 4. Waking when not in the office
 M.caff_unlock = c.new(function(event)
-	if event == c.systemDidWake or (event == c.screensDidUnlock and not env.isAtOffice) then
+	if
+		event == c.systemDidWake
+		or (event == c.screensDidUnlock and not env.isAtOffice and not env.isProjector())
+	then
 		u.runWithDelays(0.5, autoSetLayout)
 	end
 end):start()
