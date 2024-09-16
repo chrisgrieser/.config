@@ -28,7 +28,7 @@ function run(argv) {
 	const items = response.data.map((item) => {
 		const { japanese, senses, is_common } = item;
 
-		const kanji = japanese[0].word;
+		const kanji = japanese[0].word; // sometimes there's no kanji
 		const kana = japanese[0].reading;
 		const jap = kanji ? `${kanji} 【${kana}】` : kana;
 		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
