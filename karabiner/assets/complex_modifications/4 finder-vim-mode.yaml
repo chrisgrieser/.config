@@ -462,9 +462,16 @@ rules:
           - *start-menu
           - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
-      # close context menu with q
+      # close context menu with q or c
       - type: basic
         from: { key_code: q }
+        to_if_alone:
+          - key_code: escape
+          - *end-menu
+          - *remove-menu-notice
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *menu-is-open]
+      - type: basic
+        from: { key_code: c }
         to_if_alone:
           - key_code: escape
           - *end-menu
