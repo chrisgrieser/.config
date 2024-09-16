@@ -17,12 +17,15 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0];
+	const displayJlpt = $.getenv("display_jlpt") === "1";
+	const displayWanikani = $.getenv("display_wanikani") === "1";
 
-	// DOCS https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
-	const apiURL = "https://jisho.org/api/v1/search/words?keyword=";
+	// DOCS the API is undocumented, but some info is delivered in this thread:
+	// https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
+	const apiURL = "https://jisho.org/api/v1/search/words?keyword=" + encodeURIComponent(query);
 
 	/** @type {JishoResponse} */
-	const response = JSON.parse(httpRequest(apiURL + encodeURIComponent(query)));
+	const response = JSON.parse(httpRequest(apiURL));
 
 	/** @type {AlfredItem[]} */
 	const items = response.data.map((item) => {
@@ -35,24 +38,23 @@ function run(argv) {
 		const url = "https://jisho.org/word/" + (kanji || kana);
 
 		const properties = [];
-		if (jlpt) {
+		if (jlpt && displayJlpt) {
 			const level = jlpt
 				.map((j) => j.replace("jlpt-", ""))
 				.join(" ")
 				.toUpperCase();
 			properties.push(level);
 		}
-		if (tags) {
+		if (tags && displayWanikani) {
 			const wanikani = tags
 				.map((j) => j.replace("anikani", ""))
 				.join(" ")
 				.toUpperCase();
 			properties.push(wanikani);
 		}
-		const icon = "   " + properties.join(" ");
 
 		const alfredItem = {
-			title: jap + icon,
+			title: jap + "   " + properties.join(" "),
 			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: eng,
 			arg: url,
