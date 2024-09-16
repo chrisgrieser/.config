@@ -4,7 +4,10 @@
 	"linter": {
 		"rules": {
 			"all": true,
-			"nursery": { "all": true },
+			"nursery": {
+				"all": true,
+				"noSecrets": "off" // buggy
+			},
 			"suspicious": {
 				"noConsole": {
 					"level": "info",
