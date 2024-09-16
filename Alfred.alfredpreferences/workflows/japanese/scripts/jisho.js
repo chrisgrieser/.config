@@ -33,7 +33,7 @@ function run(argv) {
 		const jap = kanji ? `${kanji} 【${kana}】` : kana;
 		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
 		const url = "https://jisho.org/word/" + (kanji || kana);
-		const icon = is_common ? "   ●" : "";
+		const icon = is_common ? "  C" : "";
 
 		return {
 			title: jap + icon,
