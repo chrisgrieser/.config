@@ -4,12 +4,12 @@
 	"linter": {
 		"rules": {
 			"all": true,
-			"nursery": {
-				"all": true
-			},
+			"nursery": { "all": true },
 			"suspicious": {
-				"noConsoleLog": "info", // JXA does not allow `console.info`, so we need `console.log`
-				"noConsole": "off"
+				"noConsole": {
+					"level": "info",
+					"options": { "allow": ["assert", "error", "info", "warn"] } // disallow only `.log`
+				}
 			},
 			"performance": {
 				"useTopLevelRegex": "off" // not useful for JXA
@@ -25,17 +25,18 @@
 				"useBlockStatements": "off", // do not require braces for one-line-if statements
 				"useTemplate": "off", // too strict, simple concatenations are fine
 				"noParameterAssign": "off", // often useful to do so
-				"useNamingConvention": { "level": "info", "options": { "strictCase": false } }
+				"useNamingConvention": {
+					"level": "info",
+					"options": { "strictCase": false }
+				}
 			}
 		}
 	},
 	"javascript": {
-		// JXA variables
-		"globals": ["ObjC", "Application", "delay", "Path", "$"]
+		"globals": ["ObjC", "Application", "delay", "Path", "$"] // JXA variables
 	},
 	"formatter": {
 		"useEditorconfig": true,
-		"lineWidth": 100, // FIX value from editorconfig not correctly applied
 		"formatWithErrors": true
 	},
 	"files": {
