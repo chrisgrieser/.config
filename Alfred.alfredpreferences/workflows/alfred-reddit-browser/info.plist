@@ -266,7 +266,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/select-subreddit.js</string>
 				<key>subtext</key>
-				<string>Loading subreddit icons…</string>
+				<string>loading subreddit icons…</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -377,7 +377,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/browse-subreddit.js</string>
 				<key>subtext</key>
-				<string>Loading subreddit…</string>
+				<string>loading subreddit…</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>

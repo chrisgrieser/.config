@@ -302,9 +302,8 @@
 	</array>
 	<key>readme</key>
 	<string>### Credits
-
-- Hiragana/Katakana Chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).
-- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).
+- Hiragana/Katakana Chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>23B44036-74F5-4214-9D7C-5D9D98B6A190</key>
@@ -414,6 +413,44 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword1b</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>display JLPT</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>display_jlpt</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>display Wanikani</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>display_wanikani</string>
 		</dict>
 		<dict>
 			<key>config</key>
