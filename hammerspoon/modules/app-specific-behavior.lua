@@ -54,7 +54,8 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 		u.runWithDelays(1, function()
 			local zoom = newWin:application()
 			if not zoom or zoom:findWindow("Update") then return end
-			if zoom:findWindow("^Zoom$") then zoom:findWindow("^Zoom$"):close() end
+			local mainWin = zoom:findWindow("Zoom Workplace")
+			if mainWin then mainWin:close() end
 		end)
 	end
 end)
