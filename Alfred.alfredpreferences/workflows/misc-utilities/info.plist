@@ -965,15 +965,15 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>ke||karabiner</string>
+				<string>karabiner</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
 				<string>🔁 Toggle Karabiner Elements</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>

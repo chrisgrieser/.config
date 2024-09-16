@@ -291,6 +291,9 @@
 				},
 				"input_mode_id": {
 					"type": "string"
+				},
+				"language": {
+					"type": "string"
 				}
 			},
 			"required": [],
