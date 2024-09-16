@@ -17,9 +17,7 @@ const {
 	map,
 	mapkey,
 	removeSearchAlias,
-	searchSelectedWith,
 	unmap,
-	vmapkey,
 	vunmap,
 } = api;
 
@@ -44,7 +42,7 @@ settings.caseSensitive = false;
 settings.smartCase = true;
 
 // disable surfingkey's pdf viewer
-chrome.storage.local.set({ noPdfViewer: 1 });
+//chrome.storage.local.set({ noPdfViewer: 1 });
 
 //──────────────────────────────────────────────────────────────────────────────
 // EMOJIS
@@ -177,10 +175,6 @@ mapkey(",", "#0Open Surfingkeys config", () =>
 //──────────────────────────────────────────────────────────────────────────────
 // VISUAL MODE
 map("-", "/");
-
-vmapkey("s", "Search Selection with Google", () =>
-	searchSelectedWith("https://www.google.com/search?q="),
-);
 
 //──────────────────────────────────────────────────────────────────────────────
 // SITE-SPECIFIC SETTINGS

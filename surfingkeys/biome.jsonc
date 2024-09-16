@@ -9,12 +9,6 @@
 		"globals": ["api", "chrome", "settings"]
 	},
 
-	"linter": {
-		"rules": {
-			"nursery": { "useTopLevelRegex": "off" } // not useful here
-		}
-	},
-
 	// use the schema from the local biome package installed via Mason
 	"$schema": "/Users/chrisgrieser/.local/share/nvim/mason/packages/biome/node_modules/@biomejs/biome/configuration_schema.json"
 }
