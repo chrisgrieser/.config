@@ -190,7 +190,7 @@ for (const key of ["j", "k", "f", "l", "N", "P", "0"]) {
 
 // for BetterTouchTool Mappings 
 // sometimes do not work, surfingkeys needs to be disabled manually on
-// crunchyroll via the extension icon then
+// crunchyroll via `alt-s`
 unmap("f", /crunchyroll\.com/); // fullscreen
 unmap("N", /crunchyroll\.com/); // next episode
 unmap("0", /crunchyroll\.com/); // beginning

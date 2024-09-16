@@ -247,7 +247,7 @@ keymap(
 )
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "sh", "mjs", "md", "py", "css" }
+	local extensions = { "sh", "json", "mjs", "md", "py", "css" }
 	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)

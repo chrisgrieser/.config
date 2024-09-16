@@ -111,7 +111,7 @@ u.appHotkey("Hammerspoon", { "cmd" }, "q", hs.closeConsole) -- prevent accidenta
 u.appHotkey("Hammerspoon", { "cmd" }, "k", hs.console.clearConsole)
 
 --------------------------------------------------------------------------------
--- Separator the logs every day at midnight
+-- Insert a separator the logs every day at midnight
 M.timer_dailyConsoleSeparator = hs.timer
 	.doAt("00:00", "01d", function()
 		local date = os.date("%a, %d. %b")

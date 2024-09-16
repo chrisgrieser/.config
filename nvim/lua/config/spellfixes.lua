@@ -41,6 +41,7 @@ local spellfixes = {
 	repalce = "replace",
 	fro = "for",
 	fiels = "files",
+	oyu = "you",
 	ro = "or",
 	reponse = "response",
 	retrun = "return",

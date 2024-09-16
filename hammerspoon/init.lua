@@ -41,6 +41,7 @@ safeRequire("modules.repo-auto-sync")
 safeRequire("modules.hardware-periphery")
 safeRequire("modules.pageup-pagedown-scroll")
 safeRequire("modules.vertical-split")
+safeRequire("modules.japanese")
 
 -- app-specific
 safeRequire("modules.app-specific-behavior")

@@ -55,6 +55,10 @@ sketchybar \
 	--set weather update_freq=1200 icon.y_offset=-1 \
 	script="$plugin_dir/weather.sh" \
 	\
+	--add item input_source $first_row \
+	--set input_source update_freq=2 drawing=true \
+	script="$plugin_dir/input_source_icon.sh" \
+	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=300 icon="" \
 	script="$plugin_dir/github_notification_count.sh" \
