@@ -28,18 +28,18 @@ function run(argv) {
 	const items = response.data.map((item) => {
 		const { japanese, senses, is_common } = item;
 
-		const jap = `${japanese[0].word} 【${japanese[0].reading}】`;
+		const kanji = japanese[0].word;
+		const kana = japanese[0].reading;
+		const jap = kanji ? `${kanji} 【${kana}】` : kana;
 		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
-		const url = "https://jisho.org/word/" + japanese[0].word;
+		const url = "https://jisho.org/word/" + (kanji || kana);
 		const icon = is_common ? "   ●" : "";
 
-		/** @type {AlfredItem} */
-		const alfredItem = {
+		return {
 			title: jap + icon,
 			subtitle: eng,
 			arg: url,
 		};
-		return alfredItem;
 	});
 
 	return JSON.stringify({ items: items });
