@@ -13,11 +13,11 @@
 # map `esc` to `nohlsearch`
 \e undo-hilite
 
-# toggle line numbers
-on toggle-option N
+# toggle line numbers (keys consistent with binding in nvim)
+,on toggle-option N
 
-# toggle line wrap
-ow toggle-option S
+# toggle line wrap (keys consistent with binding in nvim)
+,ow toggle-option S
 
 # grep lines for a pattern
 f filter
