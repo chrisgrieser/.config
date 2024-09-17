@@ -136,15 +136,15 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copy result of last command
-function lr() {
+# copy last e[x]ecuted [r]esult
+function xr() {
 	to_copy=$(eval "$(history -n -1)")
 	print "\e[1;32mCopied:\e[0m $to_copy"
 	echo -n "$to_copy" | pbcopy
 }
 
-# copy last command(s)
-function lc() {
+# copy last e[x]ecuted [c]ommand
+function xc() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
 		to_copy=""
@@ -162,7 +162,7 @@ function lc() {
 }
 
 # completions for it
-_lc() {
+_xc() {
 	local -a last_cmds=()
 	while IFS='' read -r value; do # turn lines into array
 		last_cmds+=("$value")

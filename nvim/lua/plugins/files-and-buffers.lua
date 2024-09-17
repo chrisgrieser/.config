@@ -17,7 +17,7 @@ return {
 			{"<leader>fx", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = "󰞇 Selection to new file" },
 
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = "󰞇 Move file to trash" },
-			{"<leader>x", function() require("genghis").chmodx() end, desc = "󰞇 chmod +x" },
+			{"<leader>xx", function() require("genghis").chmodx() end, desc = "󰞇 chmod +x" },
 			-- stylua: ignore end
 		},
 	},
