@@ -19,8 +19,8 @@ local lightThemes = {
 	"seoulbones_light",
 }
 
-local lightOpacity = 0.94
-local darkOpacity = 0.91
+local lightOpacity = 0.91
+local darkOpacity = 0.88
 
 --------------------------------------------------------------------------------
 -- BASE
