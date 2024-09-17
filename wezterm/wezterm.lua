@@ -167,11 +167,11 @@ local config = {
 	},
 
 	-- Bell
-	audible_bell = "Disabled",
+	audible_bell = "SystemBeep",
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 500,
 		fade_out_duration_ms = 500,
-		target = "CursorColor",
+		target = "BackgroundColor",
 	},
 
 	-- Keybindings

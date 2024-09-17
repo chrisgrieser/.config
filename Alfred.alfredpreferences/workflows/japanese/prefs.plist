@@ -4,5 +4,7 @@
 <dict>
 	<key>display_jlpt</key>
 	<true/>
+	<key>display_wanikani</key>
+	<true/>
 </dict>
 </plist>

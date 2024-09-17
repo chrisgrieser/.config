@@ -39,25 +39,26 @@ function run(argv) {
 
 		const properties = [];
 		if (jlpt && displayJlpt) {
-			const level = jlpt
-				.map((j) => j.replace("jlpt-", ""))
-				.join(" ")
-				.toUpperCase();
+			const level = jlpt.map((j) => j.replace("jlpt-", "")).join(" ");
 			properties.push(level);
 		}
 		if (tags && displayWanikani) {
-			const wanikani = tags
-				.map((j) => j.replace("anikani", ""))
-				.join(" ")
-				.toUpperCase();
-			properties.push(wanikani);
+			const level = tags.map((j) => j.replace("anikani", "")).join(" ");
+			properties.push(level);
 		}
 
+		const propStr = properties.join(" ").toUpperCase();
+
+		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: jap + "   " + properties.join(" "),
+			title: jap + "   " + propStr,
 			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: eng,
-			arg: url,
+			arg: kanji || kana,
+			mods: {
+				cmd: { arg: url },
+				alt: { arg: url },
+			},
 		};
 		return alfredItem;
 	});
