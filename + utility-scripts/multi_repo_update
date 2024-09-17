@@ -4,18 +4,16 @@
 # set -e
 github_username="chrisgrieser"
 
-# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-repo_names="."
+# repo_names="." # all repos
 
 function actions_in_repo {
-	if [[ -f ./.editorconfig && ! -L ./.editorconfig ]]; then
-		sed -i '' 's/80/100/' ./.editorconfig
-	fi
+	[[ -f ./Justfile ]] && sed -i '' 's/grep "5"/grep '\''"5"'\''/' ./Justfile
 }
 
-commit_msg="style: update \`.editorconfig\`"
+commit_msg="fix: rsync commands"
 
 #───────────────────────────────────────────────────────────────────────────────
 
