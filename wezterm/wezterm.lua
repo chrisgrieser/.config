@@ -3,16 +3,16 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"duckbones",
 	"Afterglow (Gogh)",
 	"Kanagawa (Gogh)",
 	"ChallengerDeep",
 	"cyberpunk",
 	"MaterialDesignColors",
-	"duckbones",
 }
 local lightThemes = {
-	"Solar Flare Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
+	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
 	"seoulbones_light",
 	"Silk Light (base16)",
@@ -171,7 +171,7 @@ local config = {
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 500,
 		fade_out_duration_ms = 500,
-		target = "BackgroundColor",
+		target = "CursorColor",
 	},
 
 	-- Keybindings
