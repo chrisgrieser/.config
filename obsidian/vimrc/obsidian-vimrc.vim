@@ -234,7 +234,7 @@ nnoremap ,s i<CR><CR><Esc>
 
 " o and O (respecting list or blockquote)
 exmap openBelow jsfile Meta/vimrc-jsfile.js { smartOpenLine("below") }
-nnoremap o :openBelow
+nnoremap o :openBelow<CR>
 exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
 nnoremap O :openAbove<CR>
 
