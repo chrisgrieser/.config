@@ -4,15 +4,16 @@
 	"javascript": {
 		"globals": [
 			"Notice", // Obsidian
-			"electronWindow" // Electron
+			"electronWindow", // Electron
+			"activeDocument" // Electron
 		]
 	},
 
 	"linter": {
 		"rules": {
-			"nursery": {
-				"noUndeclaredDependencies": "off" // not needed for Obsidian plugin
-			}
+			// not needed for Obsidian plugin
+			"correctness": { "noUndeclaredDependencies": "off" },
+			"nursery": { "noCommonJs": "off" }
 		}
 	},
 
