@@ -49,6 +49,7 @@ return {
 			-- lualine indicator
 			vim.g.lualine_add("sections", "lualine_x", function()
 				-- number meanings: https://github.com/monkoose/neocodeium?tab=readme-ov-file#-statusline
+				if vim.bo.buftype ~= "" then return "" end
 				local status, server = require("neocodeium").get_status()
 				if status == 0 and server == 0 then return "" end -- working correctly = no component
 				if status == 1 then return "󱚧 global" end
