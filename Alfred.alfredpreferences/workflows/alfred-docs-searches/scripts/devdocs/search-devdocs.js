@@ -77,7 +77,8 @@ function readFile(path) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const keyword = $.getenv("alfred_workflow_keyword");
-	// biome-ignore lint/suspicious/noConsoleLog: intentional
+	// biome-ignore lint/suspicious/noConsole: <explanation>
+	// biome-ignore lint/suspicious/noConsoleLog: <explanation>
 	console.log("keyword:", keyword);
 
 	ensureCacheFolderExists();
@@ -107,6 +108,7 @@ function run() {
 		});
 	const replacement = pinnedVersions.find((version) => version.used === keyword);
 	if (replacement) {
+		// biome-ignore lint/suspicious/noConsole: <explanation>
 		// biome-ignore lint/suspicious/noConsoleLog: <explanation>
 		console.log("Pinned version found.");
 		languageSlug = replacement.pinned;
@@ -123,7 +125,8 @@ function run() {
 		const iconExists = fileExists(iconpath);
 
 		const indexUrl = `https://documents.devdocs.io/${languageSlug}/index.json`;
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: <explanation>
+		// biome-ignore lint/suspicious/noConsoleLog: <explanation>
 		console.log("indexUrl:", indexUrl);
 
 		/** @type {DevDocsIndex} */
