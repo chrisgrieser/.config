@@ -54,6 +54,8 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			os.rename(path, browserSettings .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
 			os.rename(path, browserSettings .. "stylus.json")
+		elseif name:find("vimium_c.*%.json") then
+			os.rename(path, browserSettings .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
