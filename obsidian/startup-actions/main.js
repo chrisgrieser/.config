@@ -35,6 +35,11 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			await this.app.plugins.disablePlugin(pluginId);
 			await this.app.plugins.enablePlugin(pluginId);
 			const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
+
+			// clear current notices
+			const allNotices = activeDocument.body.getElementsByClassName("notice");
+			for (const el of allNotices) el.hide();
+
 			new Notice(`"${pluginName}" reloaded.`);
 		});
 	}
