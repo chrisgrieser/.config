@@ -354,16 +354,10 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
-				objectLog = {
-					-- re-purposing `objectLog` for debugging via AppleScript notification
-					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
-
-					-- hammerspoon
-					lua = 'print("%s %s: " .. hs.inspect(%s))',
-				},
-				clearLog = {
-					lua = "hs.console.clearConsole()",
-				},
+				-- using lua for hammerspoon statements
+				objectLog = { lua = 'print("%s %s: " .. hs.inspect(%s))' },
+				clearLog = { lua = "hs.console.clearConsole()" },
+				sound = { lua = 'hs.sound.getByName("Morse"):play()' },
 			},
 		},
 		cmd = "ChainSaw",
@@ -375,11 +369,11 @@ return {
 			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "⬠ type" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍡 message" },
 			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰱨 beep" },
-			{"<leader>lB", function() require("chainsaw").bell() end, desc = "󰂚 bell" },
+			{"<leader>lB", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
 			{"<leader>l1", function() require("chainsaw").timeLog() end, desc = "󱎫 time" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 			{"<leader>ls", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
-			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪 󰅗 clear" },
+			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪  clear" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰐪 󰅗 remove logs" },
 			-- stylua: ignore end
