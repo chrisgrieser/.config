@@ -22,18 +22,17 @@ vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
 	u.notify("Cmdline", vim.inspect(output), "trace")
 end, { desc = "Eval cmdline", nargs = "+" })
-
-keymap("n", "<leader>le", ":Eval ", { desc = "󰓗 Eval cmdline" })
+keymap("n", "<leader>xe", ":Eval ", { desc = "󰓗 Eval" })
 
 -- Copy Last Command
-keymap("n", "<leader>lc", function()
+keymap("n", "<leader>xc", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	u.copyAndNotify(lastCommand)
-end, { desc = "󰓗 Copy last cmdline" })
+end, { desc = "󰓗 Copy last e[x]ecuted [c]ommand" })
 
 --------------------------------------------------------------------------------
 -- RUN
-keymap("n", "<leader>r", function()
+keymap("n", "<leader>xr", function()
 	vim.cmd.update()
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
 
@@ -45,7 +44,7 @@ keymap("n", "<leader>r", function()
 	else
 		u.notify("run file", "File has no shebang.", "warn")
 	end
-end, { desc = "󰜎 run file" })
+end, { desc = "󰜎 e[x]ecute/[r]un file" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
@@ -123,9 +122,7 @@ keymap("n", "<leader>u1", function() vim.cmd.earlier("1h") end, { desc = "󰜊 U
 keymap("n", "<leader>u8", function() vim.cmd.earlier("8h") end, { desc = "󰜊 Undo 8h" })
 
 -- save open time for each buffer
-autocmd("BufReadPost", {
-	callback = function() vim.b.timeOpened = os.time() end,
-})
+autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
 
 keymap("n", "<leader>uo", function()
 	local now = os.time()

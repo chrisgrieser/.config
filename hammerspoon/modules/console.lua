@@ -4,6 +4,8 @@ local u = require("modules.utils")
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
+
+_G.i = hs.inspect -- `i` for easiert inspect in the console
 --------------------------------------------------------------------------------
 
 -- CONFIG

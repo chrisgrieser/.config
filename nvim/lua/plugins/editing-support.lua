@@ -37,6 +37,7 @@ return {
 					mode = { "n", "x" },
 					{ "<leader>", group = "󰓎 Leader" },
 					{ "<leader>c", group = " Code Action" },
+					{ "<leader>x", group = "󰓗 Execute" },
 					{ "<leader>f", group = "󱗘 Refactor" },
 					{ "<leader>g", group = "󰊢 Git" },
 					{ "<leader>i", group = "󱈄 Inspect" },
@@ -356,23 +357,26 @@ return {
 			logStatements = {
 				-- using lua for hammerspoon statements
 				objectLog = { lua = 'print("%s %s: " .. hs.inspect(%s))' },
-				clearLog = { lua = "hs.console.clearConsole()" },
-				sound = { lua = 'hs.sound.getByName("Morse"):play()' },
+				clearLog = { lua = "hs.console.clearConsole() -- %s" },
+				sound = {
+					lua = 'hs.sound.getByName("Morse"):play() -- %s',
+					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
+				},
 			},
 		},
 		cmd = "ChainSaw",
 		keys = {
 			-- stylua: ignore start
-			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰐪 variable" },
+			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
 			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬠ object" },
-			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "󰐪 assert" },
+			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = " assert" },
 			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "⬠ type" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍡 message" },
-			{"<leader>lb", function() require("chainsaw").beepLog() end, desc = "󰱨 beep" },
-			{"<leader>lB", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
+			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰱨 emoji" },
+			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
 			{"<leader>l1", function() require("chainsaw").timeLog() end, desc = "󱎫 time" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
-			{"<leader>ls", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
+			{"<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪  clear" },
 
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰐪 󰅗 remove logs" },
