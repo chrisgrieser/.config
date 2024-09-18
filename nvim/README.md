@@ -1,19 +1,21 @@
-# Test
+# Neovim config
 
-<!--toc:start-->
-- [Test](#test)
-  - [Config](#config)
-  - [All installed plugins](#all-installed-plugins)
-<!--toc:end-->
+<!-- toc -->
+
+- [Config](#config)
+- [All installed plugins](#all-installed-plugins)
+
+<!-- tocstop -->
 
 ## Config
+
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 1" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 2" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
 ```bash
 ├── lua
-│  ├── config # keybindings, options, …
+│  ├── config # keybindings, options, ….markdownlintignore
 │  ├── funcs # utility functions & personal plugins
 │  └── plugins # plugins & their configs
 ├── after
@@ -26,6 +28,7 @@
 ```
 
 ## All installed plugins
+
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
