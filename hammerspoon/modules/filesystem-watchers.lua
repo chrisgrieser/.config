@@ -61,6 +61,10 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
 			os.rename(path, backupPath)
 
+		-- 3a. Obsidian Clipper for PhD Vault
+		elseif name == "phd-data-clipper.json" then
+			os.rename(path, home .. "/Vaults/phd-data-analysis/Meta/phd-data-clipper.json")
+
 		-- 4. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
 			os.rename(path, gameFolder .. name)
