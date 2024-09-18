@@ -2,22 +2,17 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
-
-let rerunSecs = Number.parseFloat($.getenv("rerun_s_bluetooth")) || 2.5;
-if (rerunSecs < 0.1) rerunSecs = 0.1;
-else if (rerunSecs > 5) rerunSecs = 5;
-
-const excludedDevices = ($.getenv("excluded_devices") || "").split(",").map((t) => t.trim());
-
 //──────────────────────────────────────────────────────────────────────────────
+
 // TODO assess whether `ObjC.import("IOBluetooth")` is useful
 // https://github.com/bosha/alfred-blueman-workflow/blob/master/src/bt_manager.jxa
-
-//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const rerunSecs = Number.parseFloat($.getenv("rerun_s_bluetooth"));
+	const excludedDevices = $.getenv("excluded_devices").split(/ *, */);
+
 	let deviceArr = [];
 	const allDevices = JSON.parse(app.doShellScript("system_profiler -json SPBluetoothDataType"))
 		.SPBluetoothDataType[0];
@@ -109,5 +104,8 @@ function run() {
 		};
 	});
 
-	return JSON.stringify({ items: deviceArr });
+	return JSON.stringify({
+		rerun: rerunSecs,
+		items: deviceArr,
+	});
 }

@@ -23,10 +23,7 @@ function camelCaseMatch(str) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	let rerunSecs = Number.parseFloat($.getenv("rerun_s_processes")) || 2.5;
-	if (rerunSecs < 0.1) rerunSecs = 0.1;
-	else if (rerunSecs > 5) rerunSecs = 5;
-
+	const rerunSecs = Number.parseFloat($.getenv("rerun_s_processes"));
 	const cpuThresholdPercent = Number.parseFloat($.getenv("cpu_threshold_percent")) || 0.5;
 	const memoryThresholdMb = Number.parseFloat($.getenv("memory_threshold_mb")) || 10;
 	const sort = $.getenv("sort_key") === "Memory" ? "m" : "r";
@@ -34,19 +31,25 @@ function run() {
 	/** @type {Record<string, { name: string; childrenCount: number }> } */
 	const parentProcs = {};
 
+	// common apps where process name and app name are different
+	/** @type {Record<string, Record<string, string>>} */
+	const { processAppName, appFilePaths } = JSON.parse(readFile("./scripts/app-process-info.json"));
+
 	const installedApps = app
 		.doShellScript("ls /Applications/")
 		.split("\r")
 		.filter((line) => line.endsWith(".app"));
 
+	// INFO command should come last, so it is not truncated and also fully
+	// identifiable by space delimitation even with spaces in the process name
+	// (command name can contain spaces, therefore last)
+	const shellCmd = `ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`;
+
 	/** @type {AlfredItem[]} */
 	const processes = app
-		// command should come last, so it is not truncated and also fully
-		// identifiable by space delimitation even with spaces in the process name
-		// (command name can contain spaces, therefore last)
-		.doShellScript(`ps ${sort}cAo 'pid=,ppid=,%cpu=,rss=,ruser=,command='`)
+		.doShellScript(shellCmd)
 		.split("\r")
-		.reduce((/** @type {AlfredItem[]} */acc, processInfo) => {
+		.reduce((/** @type {AlfredItem[]} */ acc, processInfo) => {
 			// PID & name
 			const [pid, ppid, cpuStr, memoryStr, isRoot, ...rest] = processInfo.trim().split(/ +/);
 			const processName = rest.join(" ");

@@ -759,7 +759,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes {var:separator} kill processes &amp; restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, RSSI, Connection Status {var:separator} connect &amp; disconnect"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage {var:separator} eject &amp; browse"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"19492839cda7d8f0453b3aecf147594fa806a0f1.png","title":"DNS","arg":"dns","subtitle":"See &amp; Change DNS Server"}]</string>
+				<string>[{"imagefile":"78ce0450fe203f6d692a5d576d1da6cc1fe8cdcf.png","title":"Processes","arg":"processes","subtitle":"CPU, Memory, Parent Processes  –  kill processes &amp; restart apps"},{"imagefile":"56f60ed4890c3aadf8b17042498f550f2f86f1b1.png","title":"Network","arg":"network","subtitle":"download, upload"},{"imagefile":"5f6447eb3c6eb47e26123ff2a4f4ee74c71fc9b6.png","title":"Bluetooth","arg":"bluetooth","subtitle":"Battery, RSSI, Connection Status – connect &amp; disconnect"},{"imagefile":"9509d3e0105844ea2f6358086d0f275bf0e8555a.png","title":"Removable Volumes","arg":"volumes","subtitle":"Disk Space Usage – eject &amp; browse"},{"imagefile":"f08290a14dddd7ae985e18ea4f069829fbec0622.png","title":"Uptime","arg":"uptime","subtitle":"uptime, last 10 reboots"},{"imagefile":"9e5889c6e9214cf16318b4870dac435013f6f2bc.png","title":"Speedtest","arg":"speedtest","subtitle":"Speed of Internet Connection"},{"imagefile":"19492839cda7d8f0453b3aecf147594fa806a0f1.png","title":"DNS","arg":"dns","subtitle":"See &amp; Change DNS Server"}]</string>
 				<key>keyword</key>
 				<string>atop</string>
 				<key>matchmode</key>
@@ -1705,21 +1705,25 @@ Display mounted volumes directly via `vol`.
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>2.5</string>
-				<key>placeholder</key>
-				<string>2.5</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
+				<key>defaultvalue</key>
+				<integer>2</integer>
+				<key>markercount</key>
+				<integer>5</integer>
+				<key>maxvalue</key>
+				<integer>5</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>refresh rate in seconds (between 0.1 – 5.0)</string>
+			<string>refresh rate in seconds</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>rerun_s_processes</string>
 		</dict>
@@ -1789,21 +1793,25 @@ Display mounted volumes directly via `vol`.
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>4</string>
-				<key>placeholder</key>
-				<string>4</string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>4</integer>
+				<key>markercount</key>
+				<integer>5</integer>
+				<key>maxvalue</key>
+				<integer>5</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>refresh rate in seconds (between 0.1 – 5.0)</string>
+			<string>refresh rate in seconds</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>rerun_s_bluetooth</string>
 		</dict>
@@ -1820,7 +1828,7 @@ Display mounted volumes directly via `vol`.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>comma-separated list of full device names to be excluded</string>
+			<string>comma-separated list of device names to be excluded</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1852,21 +1860,25 @@ Display mounted volumes directly via `vol`.
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>2.5</string>
-				<key>placeholder</key>
-				<string>2.5</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
+				<key>defaultvalue</key>
+				<integer>3</integer>
+				<key>markercount</key>
+				<integer>5</integer>
+				<key>maxvalue</key>
+				<integer>5</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>refresh rate in seconds (between 0.1 – 5.0)</string>
+			<string>refresh rate in seconds</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
 			<string>rerun_s_network</string>
 		</dict>
@@ -1892,13 +1904,8 @@ Display mounted volumes directly via `vol`.
 			<string>volume_keyword</string>
 		</dict>
 	</array>
-	<key>variables</key>
-	<dict>
-		<key>separator</key>
-		<string> ⟡ </string>
-	</dict>
 	<key>version</key>
-	<string>1.3.1</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
