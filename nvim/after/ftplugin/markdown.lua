@@ -46,8 +46,70 @@ keymap("n", "o", function() return autocontinue("o") end, { expr = true })
 keymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
 
 --------------------------------------------------------------------------------
--- Markdown Preview (replaces markdown-preview.nvim)
-keymap("n", "<leader>r", function()
+-- HEADINGS
+
+-- Jump to next/prev heading
+keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
+keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
+
+-- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
+keymap("n", "<D-ö>", function()
+	local curLine = vim.api.nvim_get_current_line()
+	local updatedLine = curLine:gsub("^#* ", function(match)
+		if match == "###### " then return "" end
+		return vim.trim(match) .. "# "
+	end)
+	if updatedLine == curLine then updatedLine = "## " .. curLine end
+	local diff = #updatedLine - #curLine
+
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_set_current_line(updatedLine)
+	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
+end, { desc = " Increment Heading" })
+
+--------------------------------------------------------------------------------
+
+-- FORMATTING ALSO UPDATES TOC
+-- DOCS https://github.com/artempyanykh/marksman/blob/main/docs/features.md#table-of-contents
+keymap("n", "<D-s>", function()
+	-- `source` is the "update toc" command from marksman-lsp
+	vim.lsp.buf.code_action {
+		context = { only = { "source" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+		apply = true,
+	}
+end, { desc = " Fixall & Format" })
+
+--------------------------------------------------------------------------------
+-- MARKDOWN-SPECIFIC KEYMAPS
+
+-- Tasks
+keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
+
+-- Format Table
+keymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format Table under Cursor" })
+
+-- cmd+u: markdown bullet
+keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
+
+-- cmd+k: markdown link
+keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
+keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
+keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
+
+-- cmd+b: bold
+keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
+keymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
+keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
+
+-- cmd+i: italics
+keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
+keymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
+keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
+
+--------------------------------------------------------------------------------
+-- MARKDOWN PREVIEW
+-- (replaces markdown-preview.nvim)
+keymap("n", "<leader>xr", function()
 	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
 	local browser = "Brave Browser"
@@ -81,79 +143,16 @@ keymap("n", "<leader>r", function()
 	-- * cannot use shell's `open` as it does not work with anchors
 	-- * closing tab to ensure it's correctly refreshed
 	local applescript = ([[
-		tell application %q
-			if (front window exists) then
-				repeat with the_tab in (every tab in front window)
-					set the_url to the url of the_tab
-					if the_url contains (%q) then close the_tab
-				end repeat
-			end if
-			open location %q
-		end tell
+	tell application %q
+	if (front window exists) then
+	repeat with the_tab in (every tab in front window)
+	set the_url to the url of the_tab
+	if the_url contains (%q) then close the_tab
+	end repeat
+	end if
+	open location %q
+	end tell
 	]]):format(browser, outputPath, url)
 	vim.system { "osascript", "-e", applescript }
 end, { desc = " Preview" })
 
---------------------------------------------------------------------------------
--- HEADINGS
-
--- Jump to next/prev heading
-keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
-keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
-
---------------------------------------------------------------------------------
--- MARKDOWN-SPECIFIC KEYMAPS
-
-keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
-
--- Format Table
-keymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format Table under Cursor" })
-
--- convert md image to html image
-keymap("n", "<leader>fi", function()
-	local line = vim.api.nvim_get_current_line()
-	local htmlImage = line:gsub("!%[(.-)%]%((.-)%)", '<img src="%2" alt="%1" width=70%%>')
-	vim.api.nvim_set_current_line(htmlImage)
-end, { desc = " MD image to <img>" })
-
---------------------------------------------------------------------------------
--- GUI KEYBINDINGS
-
--- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "<D-ö>", function()
-	local curLine = vim.api.nvim_get_current_line()
-	local updatedLine = curLine:gsub("^#* ", function(match)
-		if match == "###### " then return "" end
-		return vim.trim(match) .. "# "
-	end)
-	if updatedLine == curLine then updatedLine = "## " .. curLine end
-	local diff = #updatedLine - #curLine
-
-	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_set_current_line(updatedLine)
-	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
-end, { desc = " Increment Heading" })
-
-keymap("n", "<D-H>", function()
-	local curLine = vim.api.nvim_get_current_line()
-	local updatedLine = curLine:gsub("^#+ ", "")
-	vim.api.nvim_set_current_line(updatedLine)
-end, { desc = " Remove Heading" })
-
--- cmd+u: markdown bullet
-keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
-
--- cmd+k: markdown link
-keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
-keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
-keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
-
--- cmd+b: bold
-keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
-keymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
-keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
-
--- cmd+i: italics
-keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
-keymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
-keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })

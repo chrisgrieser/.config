@@ -39,6 +39,8 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"stylua", -- efm for formatting
+	"markdown-toc", -- efm for formatting
 }
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
@@ -62,8 +64,23 @@ serverConfigs.efm = {
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 
+
+
 	settings = {
 		languages = {
+			lua = {
+				{
+					formatCommand = "stylua -",
+					formatStdin = true,
+					rootMarkers = { "stylua.toml", ".stylua.toml" },
+				},
+			},
+			markdown = {
+				{
+					formatCommand = "markdown-toc --indent=4 -i $FILENAME",
+					formatStdin = false,
+				},
+			},
 			zsh = {
 				{
 					lintSource = "shellcheck",
@@ -78,8 +95,11 @@ serverConfigs.efm = {
 			},
 		},
 	},
-
 }
+
+--------------------------------------------------------------------------------
+-- MASON dependencies
+vim.g.mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -341,7 +361,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
-		mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap)),
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 

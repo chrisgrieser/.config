@@ -190,8 +190,9 @@ keymap("n", "i", function()
 	return "i"
 end, { desc = "correctly indented i", expr = true })
 
--- LSP Signature
+-- LSP
 keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
@@ -341,10 +342,6 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
-keymap("n", "p", function()
-	local cmd = vim.fn.getregtype() == "V" and "p`[V`]=" or "p"
-	vim.cmd.normal { cmd, bang = true }
-end, { desc = " Auto-indent paste" })
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility with macOS clipboard managers
 
 --------------------------------------------------------------------------------
