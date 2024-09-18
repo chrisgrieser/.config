@@ -132,33 +132,7 @@ end, { desc = "󰜊 Undo since last open" })
 
 --------------------------------------------------------------------------------
 -- LSP
-
----@param action {title: string, kind: string} https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeAction
----@return boolean
-local function codeActionFilter(action)
-	local title, _ = action.title, action.kind
-
-	---@type table<string, boolean>
-	local ignore = {
-		-- stylua: ignore
-		lua = (title:find("in the workspace") or title:find("on this line")
-			or title:find("defined global") or title:find("Change to parameter")) ~= nil,
-		markdown = title == "Create a Table of Contents",
-		python = title == "Ruff: Fix All", -- done via formatting
-		javascript = title == "Move to a new file", -- annoyance since always moved to top
-	}
-	local configuredToIgnore = ignore[vim.bo.ft] == true
-	local noIgnoresForFiletype = ignore[vim.bo.ft] == nil
-	return noIgnoresForFiletype or not configuredToIgnore
-end
-
-keymap(
-	{ "n", "x" },
-	"<leader>cc",
-	function() vim.lsp.buf.code_action { filter = codeActionFilter } end,
-	{ desc = "󰒕 Code Action" }
-)
-
+keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code Action" })
 keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 
 --------------------------------------------------------------------------------
@@ -166,7 +140,8 @@ keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
 -- Append to EoL
 local trailChars = { ",", "\\", "{", ")", ";", "." }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. key, ("mzA%s<Esc>`z"):format(key))
+	local pad = key == "\\" and " " or ""
+	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
 end
 
 -- JUST

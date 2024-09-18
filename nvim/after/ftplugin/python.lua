@@ -1,7 +1,3 @@
-local u = require("config.utils")
-local abbr = require("config.utils").bufAbbrev
---------------------------------------------------------------------------------
-
 -- python standard
 vim.bo.expandtab = true
 vim.bo.shiftwidth = 4
@@ -22,6 +18,7 @@ end, 1)
 
 --------------------------------------------------------------------------------
 -- ABBREVIATIONS
+local abbr = require("config.utils").bufAbbrev
 abbr("true", "True")
 abbr("false", "False")
 abbr("//", "#")
@@ -32,10 +29,11 @@ abbr("none", "None")
 abbr("trim", "strip")
 
 --------------------------------------------------------------------------------
+-- KEYMAPS
 
--- open the next regex at https://regex101.com/
-u.bufKeymap("n", "g/", function()
-	u.normal('"zyi"vi"') -- yank & reselect inside quotes
+local keymap = require("config.utils").bufKeymap
+keymap("n", "g/", function()
+	vim.cmd.normal { '"zyi"vi"', bang = true } -- yank & reselect inside quotes
 
 	local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
 	local data = {
@@ -49,3 +47,12 @@ u.bufKeymap("n", "g/", function()
 
 	require("rip-substitute.open-at-regex101").open(data)
 end, { desc = " Open in regex101" })
+
+-- custom formatting function to run fix all actions before
+keymap("n", "<D-s>", function()
+	vim.lsp.buf.code_action {
+		context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+		apply = true,
+	}
+	vim.defer_fn(vim.lsp.buf.format, 50)
+end, { desc = " Fixall & Format" })
