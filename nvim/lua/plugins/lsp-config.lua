@@ -1,5 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 --------------------------------------------------------------------------------
 
@@ -41,6 +39,9 @@ local extraDependencies = {
 	"markdownlint", -- efm
 }
 
+-- INFO To have the mason-module access this, we cannot return this table, since
+-- `lazy.nvim` uses the return values for the plugin spec. Thus we save it in a
+-- global variable, so the mason-module can access it.
 vim.g.mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
@@ -58,74 +59,77 @@ serverConfigs.bashls = {
 	},
 }
 
-function fff()
-	print("hi")
-end
-
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
-serverConfigs.efm = {
-	init_options = { documentFormatting = true },
-	filetypes = { "zsh", "lua", "markdown", "just" },
-
-	settings = {
-		languages = {
-			lua = {
-				{
-					formatCommand = "stylua -",
-					formatStdin = true,
-					rootMarkers = { "stylua.toml", ".stylua.toml" },
-				},
-			},
-			markdown = {
-				-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
-				{ formatCommand = "markdown-toc --indent=4 -i '${INPUT}' ; cat '${INPUT}'" },
-				{
-					formatCommand = "markdownlint --fix '${INPUT}' ; cat '${INPUT}'",
-					rootMarkers = { ".markdownlint.yaml" },
-				},
-				{
-					lintSource = "markdownlint",
-					lintCommand = "markdownlint --stdin",
-					lintIgnoreExitCode = true,
-					lintStdin = true,
-					lintSeverity = 3, -- 2 = warning, 3 = info
-					lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
-					rootMarkers = { ".markdownlint.yaml" },
-				},
-			},
-			zsh = {
-				-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
-				-- since doing so with bash-lsp does not work
-				-- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
-				{
-					lintSource = "shellcheck",
-					lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
-					lintStdin = true,
-					lintFormats = {
-						"-:%l:%c: %trror: %m [SC%n]",
-						"-:%l:%c: %tarning: %m [SC%n]",
-						"-:%l:%c: %tote: %m [SC%n]",
-					},
-				},
-			},
-			just = {
-				{
-					lintSource = "just",
-					lintCommand = 'just --summary --justfile="${INPUT}"',
-					lintStdin = false,
-					lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
-					rootMarkers = { "Justfile", ".justfile" },
-				},
+local efmConfig = {
+	lua = {
+		{
+			formatCommand = "stylua -",
+			formatStdin = true,
+			rootMarkers = { "stylua.toml", ".stylua.toml" },
+		},
+	},
+	markdown = {
+		-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
+		{
+			formatCommand = "markdown-toc --indent=4 -i '${INPUT}' && cat '${INPUT}'",
+			formatStdin = false,
+		},
+		{
+			formatCommand = "markdownlint --fix '${INPUT}' && cat '${INPUT}'",
+			rootMarkers = { ".markdownlint.yaml" },
+			formatStdin = false,
+		},
+		{
+			lintSource = "markdownlint",
+			lintCommand = "markdownlint --stdin",
+			lintIgnoreExitCode = true,
+			lintStdin = true,
+			lintSeverity = 3, -- 2 = warning, 3 = info
+			lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
+			rootMarkers = { ".markdownlint.yaml" },
+		},
+	},
+	zsh = {
+		-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
+		-- since doing so with bash-lsp does not work
+		-- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
+		{
+			lintSource = "shellcheck",
+			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
+			lintStdin = true,
+			lintFormats = {
+				"-:%l:%c: %trror: %m [SC%n]",
+				"-:%l:%c: %tarning: %m [SC%n]",
+				"-:%l:%c: %tote: %m [SC%n]",
 			},
 		},
 	},
+	just = {
+		{
+			lintSource = "just",
+			lintCommand = 'just --summary --justfile="${INPUT}"',
+			lintStdin = false,
+			lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
+			rootMarkers = { "Justfile", ".justfile" },
+		},
+		{
+			formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
+			formatStdin = false,
+			rootMarkers = { "Justfile", ".justfile" },
+		},
+	},
+}
 
+serverConfigs.efm = {
 	-- cleanup useless empty folder efm creates on startup
-	on_attach = function()
-		os.remove(vim.fs.normalize("~/.config/efm-langserver"))
-	end,
+	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
+
+	filetypes = vim.tbl_keys(efmConfig),
+	settings = { languages = efmConfig },
+
+	init_options = { documentFormatting = true },
 }
 
 --------------------------------------------------------------------------------
@@ -172,9 +176,7 @@ serverConfigs.ruff = {
 		},
 	},
 	-- disable in favor of pyright's hover info
-	on_attach = function(ruff)
-		ruff.server_capabilities.hoverProvider = false
-	end,
+	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
 --------------------------------------------------------------------------------
@@ -295,9 +297,7 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
 	if obsiDir or iCloudDocs then
 		-- delay, so it's ensured the client is attached
-		vim.defer_fn(function()
-			vim.lsp.buf_detach_client(bufnr, client.id)
-		end, 500)
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
 		vim.diagnostic.enable(false, { bufnr = 0 })
 	end
 end
@@ -313,7 +313,7 @@ serverConfigs.ltex = {
 				-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
 				["en-US"] = (function()
 					if not vim.uv.fs_stat(vim.o.spellfile) then
-						u.notify("ltex", "Spellfile not found: " .. vim.o.spellfile, "warn")
+						vim.notify("[ltex] Spellfile not found: " .. vim.o.spellfile, vim.log.levels.WARN)
 						return {}
 					end
 					local words = {}
@@ -350,13 +350,13 @@ serverConfigs.ltex = {
 			local word
 			if vim.fn.mode() == "n" then
 				word = vim.fn.expand("<cword>")
-				u.normal("zg")
+				vim.cmd.normal { "zg", bang = true }
 			else
-				u.normal('zggv"zy')
+				vim.cmd.normal { 'zggv"zy', bang = true }
 				word = vim.fn.getreg("z")
 			end
-			local ltexSettings = ltex.config.settings
-			table.insert(ltex.config.settings.ltex.dictionary["en-US"], word)
+			local ltexSettings = ltex.config.settings or {}
+			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 	end,
