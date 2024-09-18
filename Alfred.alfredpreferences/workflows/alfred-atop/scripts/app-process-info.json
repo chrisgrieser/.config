@@ -1,0 +1,29 @@
+{
+	"processAppName": {
+		"Alfred": "Alfred 5",
+		"CleanShot": "CleanShot X",
+		"neovide": "Neovide",
+		"espanso": "Espanso",
+		"alacritty": "Alacritty",
+		"wezterm-gui": "WezTerm",
+		"bird": "iCloud Sync",
+		"Steam Helper": "Steam",
+		"steam_osx": "Steam",
+		"Brave Browser Helper": "Brave Browser",
+		"Brave Browser Helper (Renderer)": "Brave Browser",
+		"Brave Browser Helper (GPU)": "Brave Browser",
+		"Discord Helper": "Discord",
+		"Discord Helper (Renderer)": "Discord",
+		"Discord Helper (GPU)": "Discord",
+		"Slack Helper": "Slack",
+		"Slack Helper (Renderer)": "Slack",
+		"Slack Helper (GPU)": "Slack",
+		"Obsidian Helper": "Obsidian",
+		"Obsidian Helper (Renderer)": "Obsidian",
+		"Obsidian Helper (GPU)": "Obsidian"
+	},
+	"appFilePaths": {
+		"Finder": "/System/Library/CoreServices/Finder.app",
+		"Alfred Preferences": "/Applications/Alfred 5.app/Contents/Preferences/Alfred Preferences.app"
+	}
+}
