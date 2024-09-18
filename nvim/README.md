@@ -1,11 +1,3 @@
-
-<!-- toc -->
-
-- [Config](#config)
-- [All installed plugins](#all-installed-plugins)
-
-<!-- tocstop -->
-
 ## Config
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 1" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugins?style=flat"/></a>
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 2" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/leaderkey?style=flat"/></a>

@@ -1,8 +1,0 @@
-reload-surfingkeys:
-    #!/usr/bin/env zsh
-    osascript -e '
-        tell application "Brave Browser"
-            activate
-            tell active tab of front window to reload
-        end tell
-    '
