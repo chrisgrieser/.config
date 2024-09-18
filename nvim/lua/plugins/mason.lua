@@ -6,9 +6,7 @@ return {
 		},
 
 		-- so mason packages are available before loading mason itself
-		init = function()
-			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. ":" .. vim.env.PATH
-		end,
+		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,
 		opts = {
 			PATH = "skip", -- since already adding to PATH above
 
@@ -41,7 +39,7 @@ return {
 		dependencies = "williamboman/mason.nvim",
 		config = function()
 			local packages = vim.g.mason_dependencies
-			assert(#packages > 10, "Error in mason config, many packages would be uninstalled.")
+			assert(#packages > 10, "Warning: in mason config, many packages would be uninstalled.")
 
 			-- FIX manually running `MasonToolsUpdate`, since `run_on_start` does
 			-- not work with lazy-loading.
