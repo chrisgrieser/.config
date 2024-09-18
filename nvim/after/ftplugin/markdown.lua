@@ -68,18 +68,6 @@ keymap("n", "<D-ö>", function()
 end, { desc = " Increment Heading" })
 
 --------------------------------------------------------------------------------
-
--- FORMATTING ALSO UPDATES TOC
--- DOCS https://github.com/artempyanykh/marksman/blob/main/docs/features.md#table-of-contents
-keymap("n", "<D-s>", function()
-	-- `source` is the "update toc" command from marksman-lsp
-	vim.lsp.buf.code_action {
-		context = { only = { "source" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-		apply = true,
-	}
-end, { desc = " Fixall & Format" })
-
---------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Tasks

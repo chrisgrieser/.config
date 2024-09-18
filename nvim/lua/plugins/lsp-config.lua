@@ -33,15 +33,18 @@ for lspName, _ in pairs(lspToMasonMap) do
 	serverConfigs[lspName] = {}
 end
 
---------------------------------------------------------------------------------
--- BASH / ZSH
-
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"stylua", -- efm for formatting
-	"markdown-toc", -- efm for formatting
+	"stylua", -- efm
+	"markdown-toc", -- efm
+	"markdownlint", -- efm
 }
+
+vim.g.mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
+
+--------------------------------------------------------------------------------
+-- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 serverConfigs.bashls = {
@@ -55,33 +58,37 @@ serverConfigs.bashls = {
 	},
 }
 
--- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
--- since doing so with bash-lsp does not work
--- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
+--------------------------------------------------------------------------------
+
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 serverConfigs.efm = {
-	filetypes = { "zsh" },
-	-- cleanup useless empty folder efm creates on startup
-	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
-
-
+	init_options = { documentFormatting = true },
+	filetypes = { "zsh", "lua", "markdown" },
 
 	settings = {
 		languages = {
 			lua = {
-				{
-					formatCommand = "stylua -",
-					formatStdin = true,
-					rootMarkers = { "stylua.toml", ".stylua.toml" },
-				},
+				{ formatCommand = "stylua -", formatStdin = true },
 			},
 			markdown = {
+				-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
+				{ formatCommand = "markdown-toc --indent=4 -i '${INPUT}' ; cat '${INPUT}'" },
 				{
-					formatCommand = "markdown-toc --indent=4 -i $FILENAME",
-					formatStdin = false,
+					formatCommand = "markdownlint --fix '${INPUT}' ; cat '${INPUT}'",
+					rootMarkers = { "stylua.t", ".stylua.toml" },
+				},
+				{
+					lintSource = "markdownlint",
+					lintCommand = "markdownlint --stdin",
+					lintIgnoreExitCode = true,
+					lintStdin = true,
+					lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
 				},
 			},
 			zsh = {
+				-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
+				-- since doing so with bash-lsp does not work
+				-- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
 				{
 					lintSource = "shellcheck",
 					lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
@@ -95,11 +102,12 @@ serverConfigs.efm = {
 			},
 		},
 	},
-}
 
---------------------------------------------------------------------------------
--- MASON dependencies
-vim.g.mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
+	-- cleanup useless empty folder efm creates on startup
+	on_attach = function()
+		os.remove(vim.fs.normalize("~/.config/efm-langserver"))
+	end,
+}
 
 --------------------------------------------------------------------------------
 -- LUA
@@ -145,7 +153,9 @@ serverConfigs.ruff = {
 		},
 	},
 	-- disable in favor of pyright's hover info
-	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
+	on_attach = function(ruff)
+		ruff.server_capabilities.hoverProvider = false
+	end,
 }
 
 --------------------------------------------------------------------------------
@@ -266,7 +276,9 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
 	if obsiDir or iCloudDocs then
 		-- delay, so it's ensured the client is attached
-		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
+		vim.defer_fn(function()
+			vim.lsp.buf_detach_client(bufnr, client.id)
+		end, 500)
 		vim.diagnostic.enable(false, { bufnr = 0 })
 	end
 end
