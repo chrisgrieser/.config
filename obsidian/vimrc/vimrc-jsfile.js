@@ -4,14 +4,13 @@
 /** @param {string} key @param {boolean|string|number} value */
 function addYamlKey(key, value) {
 	const currentFile = view.app.workspace.getActiveFile();
-	if (currentFile) {
+	if (!currentFile) {
 		new Notice("No active file.");
 		return;
 	}
 	view.app.fileManager.processFrontMatter(currentFile, (fm) => {
 		fm[key] = value;
 	});
-
 	new Notice(`Set property "${key}" to "${value}"`);
 }
 
