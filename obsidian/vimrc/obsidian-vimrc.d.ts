@@ -56,6 +56,13 @@ declare type View = {
 		name: string;
 	};
 	app: {
+		fileManager: {
+			processFrontMatter(
+				file: TFile,
+				fn: (frontmatter: Record<string, string | number | boolean>) => void,
+				options?: object,
+			): Promise<void>;
+		};
 		commands: {
 			executeCommandById(id: string): void;
 		};

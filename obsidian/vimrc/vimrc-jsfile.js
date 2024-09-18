@@ -3,32 +3,16 @@
 
 /** @param {string} key @param {boolean|string|number} value */
 function addYamlKey(key, value) {
-	const lines = editor.getValue().split("\n");
-	const frontmatterEnd = lines.slice(1).findIndex((line) => line === "---") + 1;
-	if (frontmatterEnd === 0) {
-		new Notice("No frontmatter found.");
+	const currentFile = view.app.workspace.getActiveFile();
+	if (currentFile) {
+		new Notice("No active file.");
 		return;
 	}
+	view.app.fileManager.processFrontMatter(currentFile, (fm) => {
+		fm[key] = value;
+	});
 
-	const stringifiedValue = typeof value === "string" ? `"${value}"` : value.toString();
-	const yamlLine = key + ": " + stringifiedValue;
-
-	const keyLnum = lines
-		.slice(0, frontmatterEnd + 1) // only check frontmatter
-		.findIndex((line) => line.startsWith(key + ":"));
-	let msg;
-	if (keyLnum === -1) {
-		// insert at frontmatter
-		lines.splice(frontmatterEnd, 0, yamlLine);
-		msg = `Added property "${key}" with value "${value}"`;
-	} else {
-		// update existing key
-		lines[keyLnum] = yamlLine;
-		msg = `Set property "${key}" to "${value}"`;
-	}
-	editor.setValue(lines.join("\n"));
-
-	new Notice(msg);
+	new Notice(`Set property "${key}" to "${value}"`);
 }
 
 function toggleLineNumbers() {
