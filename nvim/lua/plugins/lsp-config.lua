@@ -58,31 +58,41 @@ serverConfigs.bashls = {
 	},
 }
 
+function fff()
+	print("hi")
+end
+
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 serverConfigs.efm = {
 	init_options = { documentFormatting = true },
-	filetypes = { "zsh", "lua", "markdown" },
+	filetypes = { "zsh", "lua", "markdown", "just" },
 
 	settings = {
 		languages = {
 			lua = {
-				{ formatCommand = "stylua -", formatStdin = true },
+				{
+					formatCommand = "stylua -",
+					formatStdin = true,
+					rootMarkers = { "stylua.toml", ".stylua.toml" },
+				},
 			},
 			markdown = {
 				-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 				{ formatCommand = "markdown-toc --indent=4 -i '${INPUT}' ; cat '${INPUT}'" },
 				{
 					formatCommand = "markdownlint --fix '${INPUT}' ; cat '${INPUT}'",
-					rootMarkers = { "stylua.t", ".stylua.toml" },
+					rootMarkers = { ".markdownlint.yaml" },
 				},
 				{
 					lintSource = "markdownlint",
 					lintCommand = "markdownlint --stdin",
 					lintIgnoreExitCode = true,
 					lintStdin = true,
+					lintSeverity = 3, -- 2 = warning, 3 = info
 					lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
+					rootMarkers = { ".markdownlint.yaml" },
 				},
 			},
 			zsh = {
@@ -98,6 +108,15 @@ serverConfigs.efm = {
 						"-:%l:%c: %tarning: %m [SC%n]",
 						"-:%l:%c: %tote: %m [SC%n]",
 					},
+				},
+			},
+			just = {
+				{
+					lintSource = "just",
+					lintCommand = 'just --summary --justfile="${INPUT}"',
+					lintStdin = false,
+					lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
+					rootMarkers = { "Justfile", ".justfile" },
 				},
 			},
 		},
