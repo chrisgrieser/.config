@@ -2,7 +2,7 @@
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
-# GUARD only when not on projector
+# GUARD not when on projector
 if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then 
 	sketchybar --set "$NAME" drawing=false
 	return 0
@@ -15,6 +15,9 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 	[[ -f "$data" ]] && deactivated_app=$(<"$data")
 	echo -n "$INFO" >"$data"
 	[[ "$INFO" != "Brave Browser" && "$deactivated_app" != "Brave Browser" ]] && return 0
+
+	# on browser activation wait, so the item is marked as read via GitHub
+	[[ "$INFO"  != "Brave Browser" ]] && sleep 5
 fi
 
 # GUARD dependencies or API key missing

@@ -41,13 +41,15 @@ function run() {
 			const category = subsitePath
 				.replace(/(.*)\/.*/, "$1") // only parent
 				.replaceAll("/", " → "); // nicer tree
+			const url = `${obsiDocsBaseURL}/${subsiteURL}`;
 
 			return {
 				title: title,
 				subtitle: category,
 				match: camelCaseMatch(title),
-				arg: `${obsiDocsBaseURL}/${subsiteURL}`,
-				uid: subsitePath,
+				arg: url,
+				quicklookurl: url,
+				uid: url,
 			};
 		});
 
@@ -73,6 +75,7 @@ function run() {
 				match: camelCaseMatch(title),
 				icon: { path: "./scripts/manual-docs-searches/CodeMirror.png" },
 				arg: url,
+				quicklookurl: url,
 				uid: url,
 			};
 		});
