@@ -75,10 +75,6 @@
     "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:description}\" })",
     "prefix": "keymap"
   },
-  "keymap (multi-mode)": {
-    "body": "keymap({ \"n\", \"x\" }, \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:desc}\" })",
-    "prefix": "keymap (multi-mode)"
-  },
   "leave visual mode": {
     "body": [
       "local function leaveVisualMode()",
