@@ -1,7 +1,6 @@
 return {
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
-		external_dependencies = "macos-trash",
 		dependencies = "stevearc/dressing.nvim",
 		cmd = "Genghis",
 		keys = {

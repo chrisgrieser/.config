@@ -1,7 +1,6 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		external_dependencies = { "node", "python3.12", "yq" },
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
@@ -41,17 +40,8 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			-- INFO Adding a custom field `mason_dependencies` to
-			-- lazy-plugin-specs, so they can be picked up for this plugin.
-			local packages = vim.iter(require("lazy").plugins())
-				:map(function(plugin) return plugin.mason_dependencies end)
-				:flatten()
-				:totable()
-			table.sort(packages)
-			vim.fn.uniq(packages)
-
-			local errormsg = "Error in lazy-plugin-specs, many packages would be uninstalled."
-			assert(#packages > 10, errormsg)
+			local packages = vim.g.mason_dependencies
+			assert(#packages > 10, "Error in mason config, many packages would be uninstalled.")
 
 			-- FIX manually running `MasonToolsUpdate`, since `run_on_start` does
 			-- not work with lazy-loading.
