@@ -58,13 +58,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>CB115C75-41D2-48C6-9B7C-F4383296C6B3</string>
+				<string>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Play audio</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
@@ -204,23 +204,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
+				<key>concurrently</key>
 				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>url</key>
-				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/audio-for-word.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>CB115C75-41D2-48C6-9B7C-F4383296C6B3</string>
+			<string>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -285,7 +287,7 @@
 		<key>23B44036-74F5-4214-9D7C-5D9D98B6A190</key>
 		<dict>
 			<key>xpos</key>
-			<real>200</real>
+			<real>205</real>
 			<key>ypos</key>
 			<real>395</real>
 		</dict>
@@ -302,6 +304,13 @@
 			<real>310</real>
 			<key>ypos</key>
 			<real>365</real>
+		</dict>
+		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
+		<dict>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>190</real>
 		</dict>
 		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
 		<dict>
@@ -323,13 +332,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>365</real>
-		</dict>
-		<key>CB115C75-41D2-48C6-9B7C-F4383296C6B3</key>
-		<dict>
-			<key>xpos</key>
-			<real>310</real>
-			<key>ypos</key>
-			<real>190</real>
 		</dict>
 		<key>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</key>
 		<dict>

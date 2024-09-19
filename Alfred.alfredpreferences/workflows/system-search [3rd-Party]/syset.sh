@@ -23,7 +23,7 @@ cat <<EOF
     },
   {
       "title": "Accessibility → Audio",
-      "subtitle": "Open the 'Accessibility → Audio' pane",
+      "subtitle": "Open the 'Accessibility → Hearing Devices' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Hearing",
 	  "autocomplete": "Accessibility → Audio",
 	  "icon": {
@@ -42,16 +42,16 @@ cat <<EOF
       "uid": "Accessibility → Captions",
     },
      {
-      "title": "Accessibility → Descriptions",
-      "subtitle": "Open the 'Accessibility → Descriptions' pane",
+      "title": "Accessibility → Audio Descriptions",
+      "subtitle": "Open the 'Accessibility → Audio Descriptions' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Media_Descriptions",
-	  "autocomplete": "Accessibility → Audio",
+	  "autocomplete": "Accessibility → Audio Descriptions",
 	  "icon": {
     		"path": "./Images/Accessibility.png"
 	},
       "uid": "Accessibility → Descriptions",
     },
-     {
+        {
       "title": "Accessibility → Display",
       "subtitle": "Open the 'Accessibility → Display' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Seeing_Display",
@@ -73,7 +73,7 @@ cat <<EOF
     },
     {
       "title": "Accessibility → Mouse & Trackpad",
-      "subtitle": "Open the 'Accessibility → Mouse & Trackpad' pane",
+      "subtitle": "Open the 'Accessibility → Pointer Control' pane",
       "arg": "x-apple.systempreferences:com.apple.preference.universalaccess?Mouse",
 	  "autocomplete": "Accessibility → Mouse & Trackpad",
 	  "icon": {
@@ -132,14 +132,24 @@ cat <<EOF
       "uid": "Appearance",
     },
     {
-      "title": "Apple ID",
-      "subtitle": "Open the 'Apple ID' pane",
+      "title": "Apple Account",
+      "subtitle": "Open the 'Apple Account' pane",
       "arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane",
-	  "autocomplete": "Apple ID",
+	  "autocomplete": "Apple Account",
 	  "icon": {
     		"path": "./Images/AppleID.png"
 	},
-      "uid": "Apple ID",
+      "uid": "Apple Account",
+    },
+    {
+      "title": "Autofill & Passwords",
+      "subtitle": "Open the 'Autofill & Passwords' pane",
+      "arg": "x-apple.systempreferences:com.apple.Passwords-Settings.extension",
+	  "autocomplete": "Autofill & Passwords",
+	  "icon": {
+    		"path": "./Images/Passwords.png"
+	},
+      "uid": "Autofill & Passwords",
     },
     {
       "title": "Battery",
@@ -191,6 +201,16 @@ cat <<EOF
 	},
       "uid": "Desktop & Dock",
     },
+     {
+      "title": "Device Management",
+      "subtitle": "Open the 'Device Management' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.configurationprofiles",
+	  "autocomplete": "Device Management",
+	  "icon": {
+    		"path": "./Images/Profiles.png"
+	},
+      "uid": "Device Management",
+    },
     {
       "title": "Displays",
       "subtitle": "Open the 'Displays' pane",
@@ -202,20 +222,10 @@ cat <<EOF
       "uid": "Displays",
     },
     {
-      "title": "Extensions",
-      "subtitle": "Open the 'Extensions' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.extensions",
-	  "autocomplete": "Extensions",
-	  "icon": {
-    		"path": "./Images/Extensions.png"
-	},
-      "uid": "Extensions",
-    },
-    {
       "title": "Family",
       "subtitle": "Open the 'Family' pane",
       "arg": "x-apple.systempreferences:com.apple.preferences.FamilySharingPrefPane",
-	  "autocomplete": "Family",
+	  "autocomplete": "Family Sharing",
 	  "icon": {
     		"path": "./Images/Family.png"
 	},
@@ -243,7 +253,7 @@ cat <<EOF
     },
     {
       "title": "Game Controllers",
-      "subtitle": "Open the 'Game Controllers' pane",
+      "subtitle": "Open the 'Game Controllers' pane (if a game controller has been connected)",
       "arg": "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension",
 	  "autocomplete": "Game Controllers",
 	  "icon": {
@@ -254,7 +264,7 @@ cat <<EOF
     {
       "title": "General",
       "subtitle": "Open the 'General' pane",
-      "arg": "x-apple.systempreferences:com.apple.systempreferences.GeneralSettings",
+      "arg": "x-apple.systempreferences:com.apple.systempreferences.Appearnce",
 	  "autocomplete": "General",
 	  "icon": {
     		"path": "./Images/General.png"
@@ -274,7 +284,7 @@ cat <<EOF
     {
       "title": "iCloud",
       "subtitle": "Open the 'iCloud' pane",
-      "arg": "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane?iCloud",
+      "arg": "x-apple.systempreferences:com.apple.systempreferences.AppleIDSettings:icloud",
 	  "autocomplete": "iCloud",
 	  "icon": {
     		"path": "./Images/iCloud.png"
@@ -373,7 +383,7 @@ cat <<EOF
     },
     {
       "title": "Mouse",
-      "subtitle": "Open the 'Mouse' pane",
+      "subtitle": "Open the 'Mouse' pane (if a mouse has been connected)",
       "arg": "x-apple.systempreferences:com.apple.Mouse-Settings.extension",
 	  "autocomplete": "Mouse",
 	  "icon": {
@@ -400,16 +410,6 @@ cat <<EOF
     		"path": "./Images/Notifications.png"
 	},
       "uid": "Notifications",
-    },
-    {
-      "title": "Passwords",
-      "subtitle": "Open the 'Passwords' pane",
-      "arg": "x-apple.systempreferences:com.apple.Passwords-Settings.extension",
-	  "autocomplete": "Passwords",
-	  "icon": {
-    		"path": "./Images/Passwords.png"
-	},
-      "uid": "Passwords",
     },
     {
       "title": "Printers & Scanners",
@@ -642,14 +642,14 @@ cat <<EOF
       "uid": "Sharing → Printer Sharing",
     },
     {
-      "title": "Sharing → Remote Apple Events",
-      "subtitle": "Open the 'Sharing → Remote Apple Events' pane",
+      "title": "Sharing → Remote Application Scripting",
+      "subtitle": "Open the 'Sharing → Remote Application Scripting' pane",
       "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteAppleEvent",
-	  "autocomplete": "Sharing → Remote Apple Events",
+	  "autocomplete": "Sharing → Remote Application Scripting",
 	  "icon": {
     		"path": "./Images/Sharing.png"
 	},
-      "uid": "Sharing → Remote Apple Events",
+      "uid": "Sharing → Remote Application Scripting",
     },
     {
       "title": "Sharing → Remote Management",
@@ -672,14 +672,14 @@ cat <<EOF
       "uid": "Sharing → Screen Sharing",
     },
     {
-      "title": "Siri & Spotlight",
-      "subtitle": "Open the 'Siri & Spotlight' pane",
-      "arg": "x-apple.systempreferences:com.apple.preference.speech",
-	  "autocomplete": "Siri & Spotlight",
+      "title": "Siri",
+      "subtitle": "Open the 'Siri' pane",
+      "arg": "x-apple.systempreferences:com.apple.Siri-Settings.extension",
+	  "autocomplete": "Siri",
 	  "icon": {
     		"path": "./Images/SiriSpotlight.png"
 	},
-      "uid": "Siri & Spotlight",
+      "uid": "Siri",
     },
     {
       "title": "Software Update",
@@ -700,6 +700,16 @@ cat <<EOF
     		"path": "./Images/Sound.png"
 	},
       "uid": "Sound",
+    },
+    {
+      "title": "Spotlight",
+      "subtitle": "Open the 'Spotlight' pane",
+      "arg": "x-apple.systempreferences:com.apple.preference.spotlight",
+	  "autocomplete": "Spotlight",
+	  "icon": {
+    		"path": "./Images/Spotlight.png"
+	},
+      "uid": "Spotlight",
     },
     {
       "title": "Startup Disk",
@@ -752,6 +762,16 @@ cat <<EOF
       "uid": "Trackpad",
     },
     {
+      "title": "Transfer or Reset",
+      "subtitle": "Open the 'Transfer or Reset' pane",
+      "arg": "x-apple.systempreferences:com.apple.Transfer-Reset-Settings.extension",
+	  "autocomplete": "Transfer or Reset",
+	  "icon": {
+    		"path": "./Images/TransferReset.png"
+	},
+      "uid": "Transfer or Reset",
+    },
+    {
       "title": "Users & Groups",
       "subtitle": "Open the 'Users & Groups' pane",
       "arg": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension",
@@ -763,8 +783,8 @@ cat <<EOF
     },
     {
       "title": "VPN",
-      "subtitle": "Open the 'VPN' pane",
-      "arg": "x-apple.systempreferences:com.apple.NetworkExtensionSettingsUI.NESettingsUIExtension",
+      "subtitle": "Open the 'VPN' pane (if a VPN has been configured)",
+      "arg": "x-apple.systempreferences:com.apple.Users-Groups-Settings.extension",
 	  "autocomplete": "VPN",
 	  "icon": {
     		"path": "./Images/VPN.png"

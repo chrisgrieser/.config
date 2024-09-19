@@ -108,7 +108,7 @@
 	<key>readme</key>
 	<string># Note 
 
-This workflow has been tested on macOS 14.4 and will not work on macOS versions prior to macOS 13. It is possible future changes (whether in macOS 14 or later) will stop this workflow working—either partially or fully.
+This workflow has been tested on macOS 15.0. If you are still using macOS 14 please use [version 2.7](https://github.com/Stephen-Lon/Alfred-workflow-open-macos-settings-panes/releases/tag/v2.7) of this workflow.
 
 # Usage
 
@@ -140,7 +140,8 @@ I am indebted to comments on [this Github post](https://gist.github.com/rmcdongi
 **Version 2.51** 25/03/2024: removed caching as not required.  
 **Version 2.52** 26/06/2024: added access to `General → AppleCare &amp; Warranty` pane (credit to @FireFingers21).  
 **Version 2.6**  23/08/2024: in response to feature request added access to certain menu bar settings (i.e., search for `menu bar` in workflow will open Control Centre in System Settings).  
-**Version 2.7** 23/08/2024: added access to Keyboard → Function Keys, Keyboard → Modifier Keys, Keyboard → Text Replacements, Privacy &amp; Security → Bluetooth and Privacy &amp; Security → Files and Folders.</string>
+**Version 2.7** 23/08/2024: added access to Keyboard → Function Keys, Keyboard → Modifier Keys, Keyboard → Text Replacements, Privacy &amp; Security → Bluetooth and Privacy &amp; Security → Files and Folders.  
+**Version 3.0** 17/09/2024: updated for compatibility with macOS 15.</string>
 	<key>uidata</key>
 	<dict>
 		<key>73D483F9-5F9F-4055-A2BD-3768B038E0B4</key>
@@ -185,7 +186,7 @@ I am indebted to comments on [this Github post](https://gist.github.com/rmcdongi
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.7</string>
+	<string>3.0</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
