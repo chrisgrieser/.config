@@ -18,7 +18,6 @@ alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
 alias pr='gh pr create --web --fill'
-alias rel='just release' # `just` task runner
 
 alias mark="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark="git tag --delete 'mark'"
