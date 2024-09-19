@@ -257,7 +257,7 @@
     "prefix": "stderr (merge with stdout)"
   },
   "stdin": {
-    "body": "stdin=$(< /dev/stdin)",
+    "body": "stdin=\\$(< /dev/stdin)",
     "description": "$(cat) also works. See https://stackoverflow.com/questions/32363887/in-a-bash-function-how-do-i-get-stdin-into-a-variable",
     "prefix": "stdin"
   },

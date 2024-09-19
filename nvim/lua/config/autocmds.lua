@@ -106,9 +106,6 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 				table.insert(closedBuffers, bufName)
-				-- needs to detach clients to fix some weird error sometimes occurring
-				vim.iter(vim.lsp.get_clients { bufnr = bufnr })
-					:each(function(client) vim.lsp.buf_detach_client(bufnr, client.id) end)
 				vim.api.nvim_buf_delete(bufnr, { force = true })
 			end)
 		if #closedBuffers == 0 then return end
@@ -121,15 +118,13 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		end
 
 		-- If ending up in empty buffer, re-open the first oldfile that exists
-		vim.defer_fn(function()
-			if vim.api.nvim_buf_get_name(0) ~= "" then return end
-			for _, file in ipairs(vim.v.oldfiles) do
-				if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
-					vim.cmd.edit(file)
-					return
-				end
+		if vim.api.nvim_buf_get_name(0) ~= "" then return end
+		for _, file in ipairs(vim.v.oldfiles) do
+			if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
+				vim.cmd.edit(file)
+				return
 			end
-		end, 1)
+		end
 	end,
 })
 

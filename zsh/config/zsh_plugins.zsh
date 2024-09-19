@@ -34,7 +34,7 @@ typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
 # https://github.com/zsh-users/zsh-autosuggestions#configuration
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
-export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
 # do not accept autosuggestion when using vim's `A`
