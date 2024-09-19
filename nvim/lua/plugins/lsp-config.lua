@@ -128,7 +128,6 @@ serverConfigs.efm = {
 
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
-
 	init_options = { documentFormatting = true },
 }
 

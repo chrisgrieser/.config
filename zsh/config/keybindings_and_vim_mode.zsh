@@ -92,3 +92,18 @@ function _vi_delete_pbcopy {
 }
 zle -N _vi_delete_pbcopy
 bindkey -M vicmd 'd' _vi_delete_pbcopy
+
+#───────────────────────────────────────────────────────────────────────────────
+# ADD VIM TEXT OBJECTS
+
+autoload -U select-bracketed
+zle -N select-bracketed
+autoload -U select-quoted
+zle -N select-quoted
+# shellcheck disable=2296
+for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+	bindkey -M viopp "$c" select-bracketed
+done
+for c in {a,i}{\',\",\`,q,z,e}; do
+	bindkey -M viopp "$c" select-quoted
+done
