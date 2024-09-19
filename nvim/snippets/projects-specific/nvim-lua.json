@@ -94,6 +94,10 @@
     ],
     "prefix": "minimum version requirement"
   },
+  "normal": {
+    "body": "vim.cmd.normal { \"${1:keys}\", bang = true }",
+    "prefix": "normal"
+  },
   "plugin spec (lazy.nvim)": {
     "body": [
       "{",

@@ -11,8 +11,6 @@ if vim.g.borderStyle == "rounded" then
 	borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 end
 
-local smallLayout = { horizontal = { width = 0.6, height = 0.6 } }
-
 local specialDirs = {
 	"%.git/",
 	"%.DS_Store$", -- macOS Finder
@@ -45,10 +43,6 @@ local function telescopeConfig()
 			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
 			borderchars = borderChars,
 			default_mappings = { i = keymaps.insertMode, n = keymaps.normalMode },
-			cycle_layout_list = {
-				"horizontal",
-				{ previewer = false, layout_strategy = "horizontal", layout_config = smallLayout },
-			},
 			layout_strategy = "horizontal",
 			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
 			layout_config = {
@@ -103,11 +97,9 @@ local function telescopeConfig()
 
 				prompt_prefix = "󰝰 ",
 				follow = true,
-				mappings = {
-					i = { ["<C-h>"] = keymaps.toggleHidden },
-				},
+				mappings = { i = keymaps.fileActions },
 				path_display = { "filename_first" },
-				layout_config = smallLayout, -- use small layout, toggle via <D-p>
+				layout_config = { horizontal = { width = 0.6, height = 0.6 } }, -- use small layout, toggle via <D-p>
 				previewer = false,
 			},
 			oldfiles = {
@@ -131,7 +123,7 @@ local function telescopeConfig()
 				end,
 				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
 
-				layout_config = smallLayout,
+				layout_config = { horizontal = { width = 0.6, height = 0.6 } },
 				previewer = false,
 			},
 			live_grep = {
@@ -210,9 +202,7 @@ local function telescopeConfig()
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
-				mappings = {
-					i = { ["<CR>"] = keymaps.copyColorValue },
-				},
+				mappings = { i = keymaps.highlightsActions },
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
@@ -281,15 +271,8 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"natecraddock/telescope-zf-native.nvim", -- prioritze filenames when sorting
-		},
-		config = function()
-			telescopeConfig()
-			require("telescope").load_extension("zf-native")
-		end,
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+		config = telescopeConfig,
 		keys = {
 			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
@@ -405,7 +388,7 @@ return {
 			{
 				"gL",
 				function()
-					require("config.utils").normal('"zy')
+					vim.cmd.normal { '"zy', bang = true }
 					local sel = vim.trim(vim.fn.getreg("z"))
 					require("telescope.builtin").live_grep {
 						default_text = sel,

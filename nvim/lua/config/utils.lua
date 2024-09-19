@@ -36,18 +36,6 @@ end
 
 --------------------------------------------------------------------------------
 
----Creates autocommand triggered by Colorscheme change, that modifies a
----highlight group. Mostly useful for setting up colorscheme modifications
----specific to plugins, that should persist across colorscheme changes triggered
----by switching between dark and light mode.
----@param hlgroup string
----@param modification table
-function M.colorschemeMod(hlgroup, modification)
-	vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-		callback = function() vim.api.nvim_set_hl(0, hlgroup, modification) end,
-	})
-end
-
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
 ---@param mode string|string[]
 ---@param lhs string
