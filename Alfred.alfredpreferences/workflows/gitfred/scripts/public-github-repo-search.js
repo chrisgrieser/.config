@@ -68,16 +68,9 @@ function run(argv) {
 	// DOCS https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 	const apiURL = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}`;
 	const response = httpRequest(apiURL);
-	// GUARD
 	if (!response) {
 		return JSON.stringify({
-			items: [
-				{
-					title: "⚠️ GitHub API not responsive.",
-					subtitle: "No network connection or API rate limit. In the later case, try again later.",
-					valid: false,
-				},
-			],
+			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
 

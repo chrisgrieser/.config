@@ -89,6 +89,11 @@ function run() {
 		`Authorization: BEARER ${githubToken}`,
 		"X-GitHub-Api-Version: 2022-11-28",
 	]);
+	if (!response) {
+		return JSON.stringify({
+			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
+		});
+	}
 	const responseObj = JSON.parse(response);
 
 	// GUARD error, for example invalid API token

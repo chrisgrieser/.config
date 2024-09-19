@@ -58,7 +58,9 @@ function run() {
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	const response = httpRequest(`https://api.github.com/users/${username}/repos?per_page=100`);
 	if (!response) {
-		return JSON.stringify({ items: [{ title: "No response from GitHub.", valid: false }] });
+		return JSON.stringify({
+			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
+		});
 	}
 
 	const scriptFilterArr = JSON.parse(response)

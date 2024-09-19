@@ -11,6 +11,13 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ");
 }
 
+/** @param {string} url @return {string} */
+function httpRequest(url) {
+	const queryURL = $.NSURL.URLWithString(url);
+	const data = $.NSData.dataWithContentsOfURL(queryURL);
+	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
@@ -19,8 +26,14 @@ function run() {
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
 	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
+	const response = JSON.parse(httpRequest(apiURL));
+	if (!response) {
+		return JSON.stringify({
+			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
+		});
+	}
 
-	const issues = JSON.parse(app.doShellScript(`curl -sL "${apiURL}"`)).items.map(
+	const issues = JSON.parse(response).items.map(
 		(/** @type {GithubIssue} */ item) => {
 			const issueAuthor = item.user.login;
 			const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
