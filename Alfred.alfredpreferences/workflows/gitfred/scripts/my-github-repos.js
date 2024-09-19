@@ -116,6 +116,7 @@ function run() {
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
+				quicklookurl: mainArg,
 				uid: repo.name,
 				mods: {
 					fn: {

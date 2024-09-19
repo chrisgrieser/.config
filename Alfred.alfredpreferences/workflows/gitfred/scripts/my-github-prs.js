@@ -72,14 +72,13 @@ function run() {
 		const comments = item.comments > 0 ? "💬 " + item.comments.toString() : "";
 		const icon = item.draft ? "⬜" : "🟩 ";
 
-		const subtitle = [
+		const components = [
 			`#${item.number}`,
 			repo,
 			comments.toString(),
 			`(${humanRelativeDate(item.created_at)})`,
-		]
-			.filter(Boolean)
-			.join("   ");
+		];
+		const subtitle = components.filter(Boolean).join("   ");
 
 		return {
 			title: icon + item.title,
