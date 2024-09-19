@@ -374,7 +374,7 @@ return {
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍡 message" },
 			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰱨 emoji" },
 			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
-			{"<leader>l1", function() require("chainsaw").timeLog() end, desc = "󱎫 time" },
+			{"<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 			{"<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪  clear" },
