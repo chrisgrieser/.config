@@ -34,18 +34,21 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
+		<key>794C3411-2887-4F98-BF8E-4F94ACAFB1BA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>790545A7-08B0-4E0A-8741-AE1D77C5F0B1</string>
+				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
@@ -58,11 +61,41 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</string>
+				<string>790545A7-08B0-4E0A-8741-AE1D77C5F0B1</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>794C3411-2887-4F98-BF8E-4F94ACAFB1BA</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Read more</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Play audio</string>
+				<string>⌘: Open in details at jisho.org</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Play audio</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -105,10 +138,58 @@
 	<key>objects</key>
 	<array>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>790545A7-08B0-4E0A-8741-AE1D77C5F0B1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>794C3411-2887-4F98-BF8E-4F94ACAFB1BA</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -164,42 +245,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</string>
+			<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -289,56 +351,70 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>540</real>
+		</dict>
+		<key>7535DF2C-07CB-4373-A54C-C8C14DE643B7</key>
+		<dict>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>790545A7-08B0-4E0A-8741-AE1D77C5F0B1</key>
 		<dict>
 			<key>xpos</key>
-			<real>210</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>55</real>
+		</dict>
+		<key>794C3411-2887-4F98-BF8E-4F94ACAFB1BA</key>
+		<dict>
+			<key>xpos</key>
+			<real>295</real>
+			<key>ypos</key>
+			<real>140</real>
 		</dict>
 		<key>83930E73-FF72-4738-BC12-3FD159FA4F33</key>
 		<dict>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>510</real>
 		</dict>
 		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
 		<dict>
 			<key>xpos</key>
-			<real>310</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>265</real>
 		</dict>
 		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>145</real>
 		</dict>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
 		<dict>
 			<key>xpos</key>
-			<real>310</real>
+			<real>380</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>25</real>
 		</dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>510</real>
 		</dict>
 		<key>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</key>
 		<dict>
 			<key>xpos</key>
-			<real>470</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>25</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -422,6 +498,31 @@
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>display_wanikani</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>150</integer>
+				<key>markercount</key>
+				<integer>10</integer>
+				<key>maxvalue</key>
+				<integer>250</integer>
+				<key>minvalue</key>
+				<integer>25</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Speed in wpm (words per minute)</string>
+			<key>label</key>
+			<string>Audio</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>audio_speed</string>
 		</dict>
 	</array>
 	<key>version</key>

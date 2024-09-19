@@ -14,8 +14,8 @@ declare type Entry = {
 };
 
 declare type Japanese = {
-	word?: string;
-	reading: string;
+	word?: string; // Kanji
+	reading?: string; // Kana, (in some rare cases, even the kana is missing)
 };
 
 declare type Sense = {
