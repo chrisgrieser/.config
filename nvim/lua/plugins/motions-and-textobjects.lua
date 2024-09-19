@@ -1,4 +1,3 @@
-local u = require("config.utils")
 local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
@@ -66,7 +65,7 @@ return {
 				"cq",
 				function()
 					vim.cmd.TSTextobjectSelect("@comment.outer")
-					u.normal("d")
+					vim.cmd.normal { "d", bang = true }
 					local comStr = vim.trim(vim.bo.commentstring:format(""))
 					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
 					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
@@ -187,7 +186,7 @@ return {
 					local indentationFound = vim.fn.mode():find("V")
 					if not indentationFound then return end
 
-					u.normal("<") -- dedent indentation
+					vim.cmd.normal { "<", bang = true } -- dedent indentation
 					local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
 					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
 					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
@@ -203,7 +202,7 @@ return {
 					require("various-textobjs").indentation("outer", "outer")
 					local indentationFound = vim.fn.mode():find("V")
 					if not indentationFound then return end
-					u.normal("V") -- leave visual mode so <> marks are set
+					vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
 					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
 
 					-- copy them into the + register
@@ -228,7 +227,7 @@ return {
 					require("various-textobjs").url()
 					local foundURL = vim.fn.mode():find("v")
 					if foundURL then
-						u.normal('"zy')
+						vim.cmd.normal { '"zy', bang = true }
 						local url = vim.fn.getreg("z")
 						vim.ui.open(url)
 					end
@@ -244,7 +243,7 @@ return {
 					if urlLine then
 						vim.ui.open(urlLine:match(urlPattern))
 					else
-						u.notify("", "No URL found in file.", "warn")
+						vim.notify("No URL found in file.", vim.log.levels.WARN)
 					end
 				end,
 				desc = " Open First URL in File",

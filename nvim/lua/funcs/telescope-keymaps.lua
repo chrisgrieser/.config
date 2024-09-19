@@ -1,5 +1,4 @@
 local M = {}
-local u = require("config.utils")
 --------------------------------------------------------------------------------
 
 M.insertMode = {
@@ -21,7 +20,8 @@ M.insertMode = {
 	["<D-c>"] = function(prompt_bufnr) -- copy value
 		local value = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
-		u.copyAndNotify(value)
+		vim.fn.setreg("+", value)
+		vim.notify(value, vim.log.levels.INFO, { title = "Copied" })
 	end,
 	["<M-CR>"] = function(prompt_bufnr) -- mapping consistent with fzf-multi-select
 		require("telescope.actions").toggle_selection(prompt_bufnr)
@@ -52,12 +52,15 @@ M.fileActions = {
 		local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 		local fullpath = cwd .. "/" .. relPath
 		require("telescope.actions").close(prompt_bufnr)
-		u.copyAndNotify(fullpath)
+		vim.fn.setreg("+", fullpath)
+		vim.notify(fullpath, vim.log.levels.INFO, { title = "Copied" })
 	end,
-	["<C-n>"] = function(prompt_bufnr) -- copy rel. path
+	["<C-n>"] = function(prompt_bufnr) -- copy name
 		local relPath = require("telescope.actions.state").get_selected_entry().value
+		local name = vim.fs.basename(relPath)
 		require("telescope.actions").close(prompt_bufnr)
-		u.copyAndNotify(vim.fs.basename(relPath))
+		vim.fn.setreg("+", name)
+		vim.notify(name, vim.log.levels.INFO, { title = "Copied" })
 	end,
 	["<C-h>"] = function(prompt_bufnr) -- toggle hidden
 		local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
@@ -115,7 +118,11 @@ M.highlightsActions = {
 		if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
 		if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
 		if value.link then table.insert(out, "link: " .. value.link) end
-		if #out > 0 then u.copyAndNotify(table.concat(out, "\n")) end
+		if #out > 0 then
+			local toCopy = table.concat(out, "\n")
+			vim.fn.setreg("+", toCopy)
+			vim.notify(toCopy, vim.log.levels.INFO, { title = "Copied" })
+		end
 	end,
 }
 

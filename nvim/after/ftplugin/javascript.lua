@@ -22,10 +22,10 @@ u.bufKeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.outer")
 	local notFound = vim.fn.mode():find("v")
 	if not notFound then
-		u.notify("Regex101", "No regex found")
+		vim.notify("No regex found", nil, { title = "Regex101" })
 		return
 	end
-	u.normal('"zy')
+	vim.cmd.normal { '"zy', bang = true }
 
 	local regex, flags = vim.fn.getreg("z"):match("/(.*)/(%l*)")
 	local data = {

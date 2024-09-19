@@ -42,11 +42,11 @@ keymap("n", "<leader>cr", function()
 		if not selection then return end
 		if isAtBlank then
 			vim.api.nvim_set_current_line(selection)
-			u.normal("==")
+			vim.cmd.normal { "==", bang = true }
 		else
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
 			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { selection })
-			u.normal("j==")
+			vim.cmd.normal { "j==", bang = true }
 		end
 	end)
 end, { desc = " require module from cwd" })

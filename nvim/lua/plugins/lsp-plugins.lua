@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
 	{ -- display type hints at eol, not in the middle of a line
 		"chrisgrieser/nvim-lsp-endhints",
@@ -54,7 +51,8 @@ return {
 						breadcrumbs = breadcrumbs .. v.name .. "."
 					end
 					breadcrumbs = breadcrumbs:sub(1, -2):gsub(".%[", "[")
-					u.copyAndNotify(breadcrumbs)
+					vim.fn.setreg("+", breadcrumbs)
+					vim.notify(breadcrumbs, vim.log.levels.INFO, { title = "Copied" })
 				end,
 				desc = "󰒕 Copy Breadcrumbs",
 			},

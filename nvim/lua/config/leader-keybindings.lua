@@ -1,7 +1,4 @@
-local autocmd = vim.api.nvim_create_autocmd
-local u = require("config.utils")
 local keymap = require("config.utils").uniqueKeymap
-
 --------------------------------------------------------------------------------
 -- META
 
@@ -20,14 +17,15 @@ end, { desc = "󰝰 Open Packages Directory" })
 -- better than `:lua`, since using `vim.notify`
 vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
-	u.notify("Cmdline", vim.inspect(output), "trace")
+	vim.notify(vim.inspect(output), nil, { title = "Cmdline" })
 end, { desc = "Eval cmdline", nargs = "+" })
 keymap("n", "<leader>xe", ":Eval ", { desc = "󰓗 Eval" })
 
 -- Copy Last Command
 keymap("n", "<leader>xc", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
-	u.copyAndNotify(lastCommand)
+	vim.fn.setreg("+", lastCommand)
+	vim.notify(lastCommand, vim.log.levels.INFO, { title = "Copied" })
 end, { desc = "󰓗 Copy last e[x]ecuted [c]ommand" })
 
 --------------------------------------------------------------------------------
@@ -42,7 +40,7 @@ keymap("n", "<leader>xr", function()
 		vim.cmd("! chmod +x %")
 		vim.cmd("! %")
 	else
-		u.notify("run file", "File has no shebang.", "warn")
+		vim.notify("File has no shebang", vim.log.levels.WARN)
 	end
 end, { desc = "󰜎 e[x]ecute/[r]un file" })
 
@@ -61,7 +59,7 @@ keymap("n", "<leader>ib", function()
 	}
 	local ok, node = pcall(vim.treesitter.get_node)
 	if ok and node then table.insert(out, "node: " .. node:type()) end
-	u.notify("Buffer Information", table.concat(out, "\n"), "trace")
+	vim.notify(table.concat(out, "\n"), vim.log.levels.TRACE, { title = "Buffer Info" })
 end, { desc = "󰽙 Buffer Info" })
 
 --------------------------------------------------------------------------------
@@ -76,7 +74,7 @@ local function retabber(use)
 	vim.bo.shiftwidth = 2
 	vim.bo.tabstop = 3
 	vim.cmd.retab { bang = true }
-	u.notify("Indent", "Now using " .. use)
+	vim.notify("Now using " .. use)
 end
 keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
 keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
@@ -99,7 +97,7 @@ keymap("n", "<leader>yl", function()
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
-		u.notify("Copied", tostring(#matchLines) .. " lines")
+		vim.notify(("Copied %d lines"):format(#matchLines))
 	end)
 end, { desc = "󰗈 matching lines" })
 
@@ -122,7 +120,7 @@ keymap("n", "<leader>u1", function() vim.cmd.earlier("1h") end, { desc = "󰜊 U
 keymap("n", "<leader>u8", function() vim.cmd.earlier("8h") end, { desc = "󰜊 Undo 8h" })
 
 -- save open time for each buffer
-autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
+vim.api.nvim_create_autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
 
 keymap("n", "<leader>uo", function()
 	local now = os.time()
@@ -165,7 +163,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 
 keymap("n", "<leader>ol", function()
-	u.notify("LSP", "Restarting…", "trace")
+	vim.notify("Restarting LSP…")
 	vim.cmd.LspRestart()
 end, { desc = "󰒕 :LspRestart" })
 

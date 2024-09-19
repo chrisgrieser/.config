@@ -1,40 +1,12 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----runs :normal with bang
----@param cmdStr string
-function M.normal(cmdStr) vim.cmd.normal { cmdStr, bang = true } end
-
----@param msg string
----@param title string
----@param level? "info"|"trace"|"debug"|"warn"|"error"
-function M.notify(title, msg, level)
-	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = title })
-end
-
-function M.copyAndNotify(text)
-	vim.fn.setreg("+", text)
-	vim.notify(text, vim.log.levels.INFO, { title = "Copied" })
-end
-
----@param hlName string|nil name of highlight group
----@param key "fg"|"bg"|"bold"
----@nodiscard
----@return string|nil the value, or nil if hlgroup or key is not available
-function M.getHlValue(hlName, key)
-	local hl
-	repeat
-		-- follow linked highlights
-		hl = vim.api.nvim_get_hl(0, { name = hlName })
-		hlName = hl.link
-	until not hl.link
-	local value = hl[key]
-	if not value then return nil end
-	return ("#%06x"):format(value)
-end
-
---------------------------------------------------------------------------------
+M.extraTextobjMaps = {
+	func = "f",
+	call = "l",
+	wikilink = "R",
+	condition = "o",
+}
 
 ---ensures unique keymaps https://www.reddit.com/r/neovim/comments/16h2lla/can_you_make_neovim_warn_you_if_your_config_maps/
 ---@param mode string|string[]
@@ -60,23 +32,6 @@ end
 ---@param text string
 ---@param replace string
 function M.bufAbbrev(text, replace) vim.keymap.set("ia", text, replace, { buffer = true }) end
-
---------------------------------------------------------------------------------
-
-M.textobjRemaps = {
-	c = "}", -- [c]urly brace
-	r = "]", -- [r]ectangular bracket
-	m = "W", -- [m]assive word
-	q = '"', -- [q]uote
-	z = "'", -- [z]ingle quote
-	e = "`", -- t[e]mplate string / inline cod[e]
-}
-M.extraTextobjMaps = {
-	func = "f",
-	call = "l",
-	wikilink = "R",
-	condition = "o",
-}
 
 --------------------------------------------------------------------------------
 return M
