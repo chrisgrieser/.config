@@ -1,5 +1,7 @@
 {
 	"runtime.version": "LuaJIT",
 	"diagnostics.globals": ["vim"],
-	"workspace"
+	"workspace": {
+		"ignoreDir": ["debug", "templates", "TEMP*"]
+	}
 }

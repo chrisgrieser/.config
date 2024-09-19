@@ -294,10 +294,12 @@ return {
 				desc = "󰒕 Symbols",
 			},
 			-- stylua: ignore
+			{ "g!", function() telescope("diagnostics") end, desc = "󰋼 Workspace Diagnostics" },
 			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
+			{ "gI", function() telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
 			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
 			{ "<leader>gs", function() telescope("git_status") end, desc = "󰭎 Status" },
 			{ "<leader>gl", function() telescope("git_commits") end, desc = "󰭎 Log" },
