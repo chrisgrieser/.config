@@ -7,6 +7,10 @@ alias j="just"
 alias pw="pass"
 alias pwcd='cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}"'
 
+# `just` task runner
+alias jr='just release'
+alias ji='just init'
+
 # DEFAULTS
 alias mv='mv -vi'
 alias ln='ln -vwis'
