@@ -31,11 +31,12 @@ function run(argv) {
 	const items = response.data.map((item) => {
 		const { japanese, senses, is_common, jlpt, tags } = item;
 
-		const kanji = japanese[0].word; // sometimes there's no kanji
+		const kanji = japanese[0].word;
 		const kana = japanese[0].reading;
-		const jap = kanji ? `${kanji} 【${kana}】` : kana;
-		const eng = senses.map((sense) => sense.english_definitions[0]).join(", ");
-		const url = "https://jisho.org/word/" + (kanji || kana);
+		const japWord = kanji || kana;
+		const japDisplay = kanji ? `${kanji} 【${kana}】` : kana;
+		const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
+		const url = "https://jisho.org/word/" + japWord;
 
 		const properties = [];
 		if (jlpt && displayJlpt) {
@@ -51,12 +52,12 @@ function run(argv) {
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: jap + "   " + propStr,
+			title: japDisplay + "   " + propStr,
 			icon: is_common ? { path: "./icon-common.png" } : {},
-			subtitle: eng,
+			subtitle: engWord,
 			arg: kanji || kana,
 			mods: {
-				cmd: { arg: url },
+				cmd: { arg: japWord }, // play audio
 				alt: { arg: url },
 			},
 		};

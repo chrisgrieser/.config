@@ -34,6 +34,7 @@ function run() {
 	const browserVars = JSON.parse(readFile("./data/browser-vars.json"));
 	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, app.pathTo("home folder"));
 
+	// SETTINGS
 	const settings = JSON.parse(readFile("./data/all-chromium-browser-settings.json"));
 	settings.push(...browserVars.settingsPages[browser]);
 	const iconPath = browserVars.appIcon[browser];
@@ -43,11 +44,12 @@ function run() {
 		page.uid = page.arg;
 		page.icon = { path: iconPath };
 		page.mods = {
-			cmd: { valid: false }, // disable opening in Chrome Webstore
-			shift: { valid: false }, // disable open file
+			cmd: { valid: false, subtitle: "" }, // disable opening in Chrome Webstore
+			shift: { valid: false, subtitle: "" }, // disable open file
 		};
 	}
 
+	// EXTENSIONS
 	const extensions = app
 		.doShellScript(`find "${extensionPath}" -name "manifest.json" -depth 3`)
 		.split("\r")
@@ -78,7 +80,7 @@ function run() {
 			// determine options path
 			let optionsPath = manifest.options_ui?.page || manifest.options_page || "";
 
-			// EXCEPTIONS
+			// INFO EXCEPTIONS
 			if (name === "Stylus") optionsPath = "manage.html";
 			if (id === "bbojmeobdaicehcopocnfhaagefleiae") name = "OptiSearch";
 			const anchor = specialAnchors[name] || "";

@@ -59,8 +59,8 @@ end
 -- LAYOUTS
 
 local function workLayout()
+	darkmode.autoSwitch()
 	(u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness)()
-	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustment
 	visuals.updateHoleCover()
 	dockSwitcher("work")
 
@@ -85,8 +85,8 @@ local function workLayout()
 end
 
 local function movieLayout()
-	darkenDisplay()
 	darkmode.setDarkMode("dark")
+	darkenDisplay()
 	visuals.updateHoleCover()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
