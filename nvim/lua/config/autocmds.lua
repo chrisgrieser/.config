@@ -45,16 +45,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 		local bo = vim.bo[bufnr]
 		local b = vim.b[bufnr]
 		if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
-		if b.saveQueued and ctx.event ~= "FocusLost" then return end
+		if b.saveQueued then return end
 
-		local debounce = ctx.event == "FocusLost" and 0 or 2000 -- save at once on focus loss
+		local saveInstantly = ctx.event == "FocusLost" or ctx.event == "BufLeave"
 		b.saveQueued = true
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 			-- `noautocmd` prevents weird cursor movement
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
 			b.saveQueued = false
-		end, debounce)
+		end, saveInstantly and 0 or 2000)
 	end,
 })
 
