@@ -1,5 +1,5 @@
 local M = {}
-local u = require("config.utils")
+--------------------------------------------------------------------------------
 
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
@@ -10,12 +10,28 @@ local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. ch
 ---@param changes vim.api.keyset.highlight
 local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
+---@param hlName string|nil name of highlight group
+---@param key "fg"|"bg"|"bold"
+---@nodiscard
+---@return string|nil the value, or nil if hlgroup or key is not available
+local function getHlValue(hlName, key)
+	local hl
+	repeat
+		-- follow linked highlights
+		hl = vim.api.nvim_get_hl(0, { name = hlName })
+		hlName = hl.link
+	until not hl.link
+	local value = hl[key]
+	if not value then return nil end
+	return ("#%06x"):format(value)
+end
+
 local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 --------------------------------------------------------------------------------
 
 local function customHighlights()
 	-- Comments: keep color and add underlines
-	local commentFg = u.getHlValue("Comment", "fg")
+	local commentFg = getHlValue("Comment", "fg")
 	if commentFg then setHl("@string.special.url.comment", { fg = commentFg, underline = true }) end
 
 	-- Diagnostics: underlines instead of undercurls
@@ -39,8 +55,8 @@ function M.themeModifications()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
 		local textColor = vim.o.background == "dark" and "#000000" or "#ffffff"
 		for type, altType in pairs(types) do
-			local fg = u.getHlValue("@comment." .. type, "fg")
-				or u.getHlValue("Diagnostic" .. altType, "fg")
+			local fg = getHlValue("@comment." .. type, "fg")
+				or getHlValue("Diagnostic" .. altType, "fg")
 			if fg and fg ~= textColor then setHl("@comment." .. type, { bg = fg, fg = textColor }) end
 		end
 	end

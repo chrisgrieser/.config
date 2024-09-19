@@ -98,7 +98,6 @@ require("lazy.view.config").keys.details = "<Tab>"
 --------------------------------------------------------------------------------
 -- KEYMAPS FOR NVIM TRIGGERING LAZY
 local keymap = require("config.utils").uniqueKeymap
-local notify = require("config.utils").notify
 
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
@@ -207,7 +206,7 @@ local function checkForDuplicateKeys()
 				for _, mode in ipairs(modes) do
 					if isMode(lazyKey, mode) then
 						if vim.tbl_contains(allKeys[mode], lhs) then
-							notify("Lazy", ("Duplicate %smap: %s"):format(mode, lhs), "warn")
+							vim.notify(("Duplicate %smap: %s"):format(mode, lhs), vim.log.levels.WARN)
 						else
 							table.insert(allKeys[mode], lhs)
 						end

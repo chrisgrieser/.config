@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- SYNC TERMINAL BACKGROUND
 -- SOURCE https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
@@ -117,10 +114,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		if #closedBuffers == 0 then return end
 
 		if #closedBuffers == 1 then
-			u.notify("󰅗 Buffer closed", closedBuffers[1])
+			vim.notify(closedBuffers[1], nil, { title = "󰅗 Buffer closed" })
 		else
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
-			u.notify("󰱝 Buffers closed", text)
+			vim.notify(text, nil, { title = "󰅗 Buffers closed" })
 		end
 
 		-- If ending up in empty buffer, re-open the first oldfile that exists
@@ -248,12 +245,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 --------------------------------------------------------------------------------
 
--- QUICKFIX: Goto first item
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
-	callback = function() pcall(vim.cmd.cfirst) end,
-})
-
 -- QUICKFIX: Add signs
 local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
@@ -265,6 +256,8 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 				sign_text = quickfixSign,
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
+				invalidate = true, -- deletes the extmark if the line is deleted
+				undo_restore = true, -- makes undo restore those
 			})
 		end
 
@@ -287,6 +280,12 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			end
 		end
 	end,
+})
+
+-- QUICKFIX: Goto first item
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
+	callback = function() pcall(vim.cmd.cfirst) end,
 })
 
 --------------------------------------------------------------------------------

@@ -1,7 +1,3 @@
-local u = require("config.utils")
-
---------------------------------------------------------------------------------
-
 return {
 	{ -- lightweight git client
 		"chrisgrieser/nvim-tinygit",
@@ -113,7 +109,7 @@ return {
 				function()
 					if vim.b.gitsigns_previous_changes then
 						require("gitsigns").reset_base()
-						u.notify("Gitsigns", "Reset Base")
+						vim.notify("Gitsigns: Reset Base")
 						vim.b.gitsigns_previous_changes = false
 						return
 					end
@@ -125,7 +121,7 @@ return {
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsigns_previous_changes = true
-					u.notify("Gitsigns", "Changed base to " .. lastCommitToFile)
+					vim.notify("Gitsigns: Changed base to " .. lastCommitToFile)
 				end,
 				desc = "󰊢 Previous/Present Changes",
 			},
