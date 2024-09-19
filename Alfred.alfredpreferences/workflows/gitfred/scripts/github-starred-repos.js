@@ -65,6 +65,11 @@ function run() {
 	// DOCS https://docs.github.com/en/rest/activity/starring?apiVersion=2022-11-28#list-repositories-starred-by-a-user
 	const apiURL = `https://api.github.com/users/${username}/starred?per_page=100`;
 	const response = JSON.parse(httpRequest(apiURL));
+	if (!response) {
+		return JSON.stringify({
+			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
+		});
+	}
 
 	const forkOnClone = $.getenv("fork_on_clone") === "1";
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
