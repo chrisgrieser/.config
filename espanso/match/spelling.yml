@@ -2,8 +2,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - { trigger: n#t, replace: n't }
-  - { trigger: nät, replace: n't }
-  - { trigger: nÄt, replace: n't }
   # "…ign" -> "…ing" (but not for words like "sign" or "ignore", or "foreign", where it is actually correct)
   - { regex: "(?P<letter>[a-df-ru-z])ign ", replace: "{{letter}}ing " }
   - { trigger: " ot ", replace: " to " }
@@ -16,10 +14,7 @@ matches:
   - { trigger: "... ", replace: "… " }
   - { trigger: american, replace: American }
   - { trigger: Bibtex, replace: BibTeX, word: true }
-  - { trigger: english, replace: English }
-  - { trigger: german, replace: German }
   - { trigger: Github, replace: GitHub, word: true } # only fix when capitalized, to not affect urls
-  - { trigger: japanese, replace: Japanese }
   - { trigger: Url, replace: URL, word: true }
   - { trigger: Youtube, replace: YouTube, word: true } # only fix when capitalized, to not affect urls
   - { trigger: acheive, replace: achieve, propagate_case: true, word: true }
