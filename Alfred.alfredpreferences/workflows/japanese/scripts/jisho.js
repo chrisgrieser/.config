@@ -19,6 +19,7 @@ function run(argv) {
 	const query = argv[0];
 	const displayJlpt = $.getenv("display_jlpt") === "1";
 	const displayWanikani = $.getenv("display_wanikani") === "1";
+	const readmoreIcon = "  (...)";
 
 	// DOCS the API is undocumented, but some info is delivered in this thread:
 	// https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
@@ -49,14 +50,13 @@ function run(argv) {
 			const level = tags.map((j) => j.replace("anikani", "")).join(" ");
 			properties.push(level);
 		}
-		if (readMoreLink) properties.push("⟶")
 		const propertiesDisplay = properties.join(" ").toUpperCase();
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: japDisplay + "   " + propertiesDisplay,
 			icon: is_common ? { path: "./icon-common.png" } : {},
-			subtitle: engWord,
+			subtitle: engWord + (readMoreLink ? " " + readmoreIcon : ""),
 			arg: japWord,
 			mods: {
 				cmd: { arg: url }, // open
