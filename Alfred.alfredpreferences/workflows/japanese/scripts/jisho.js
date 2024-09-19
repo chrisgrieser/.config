@@ -33,11 +33,13 @@ function run(argv) {
 
 		const kanji = japanese[0].word;
 		const kana = japanese[0].reading;
-		const japWord = kanji || kana;
-		const japDisplay = kanji ? `${kanji} 【${kana}】` : kana;
+		const japWord = kanji || kana || "ERROR: Neither kanji nor kana found.";
+		const japDisplay = (kanji && kana) ? `${kanji} 【${kana}】` : japWord;
 		const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
 		const url = "https://jisho.org/word/" + japWord;
+		const readMoreLink = senses.find(sense => sense.links.length > 0)?.links[0]
 
+		// properties
 		const properties = [];
 		if (jlpt && displayJlpt) {
 			const level = jlpt.map((j) => j.replace("jlpt-", "")).join(" ");
@@ -47,18 +49,24 @@ function run(argv) {
 			const level = tags.map((j) => j.replace("anikani", "")).join(" ");
 			properties.push(level);
 		}
-
-		const propStr = properties.join(" ").toUpperCase();
+		if (readMoreLink) properties.push("⟶")
+		const propertiesDisplay = properties.join(" ").toUpperCase();
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: japDisplay + "   " + propStr,
+			title: japDisplay + "   " + propertiesDisplay,
 			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: engWord,
-			arg: kanji || kana,
+			arg: japWord,
 			mods: {
-				cmd: { arg: japWord }, // play audio
-				alt: { arg: url },
+				cmd: { arg: url }, // open
+				alt: { arg: url }, // copy
+				ctrl: {
+					valid: Boolean(readMoreLink),
+					subtitle: readMoreLink ? "⌃: " + readMoreLink?.text : "",
+					arg: readMoreLink?.url,
+				}, 
+				shift: { arg: japWord }, // play audio
 			},
 		};
 		return alfredItem;
