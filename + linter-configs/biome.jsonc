@@ -18,7 +18,10 @@
 				"useTopLevelRegex": "off" // often not useful
 			},
 			"complexity": {
-				"noExcessiveCognitiveComplexity": "info",
+				"noExcessiveCognitiveComplexity": {
+					"level": "info",
+					"options": { "maxAllowedComplexity": 20 }
+				},
 				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
 			},
 			"style": {

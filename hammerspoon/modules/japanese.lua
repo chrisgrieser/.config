@@ -19,8 +19,10 @@ end)
 --------------------------------------------------------------------------------
 -- ANKI
 
-M.wf_anki = wf.new("Anki")
-	:subscribe(wf.windowCreated, function(newWin) wu.moveResize(newWin, wu.pseudoMax) end)
+M.wf_anki = wf.new("Anki"):subscribe(wf.windowCreated, function(newWin)
+	local size = newWin:title() == "Add" and wu.center or wu.pseudoMax
+	wu.moveResize(newWin, size)
+end)
 
 --------------------------------------------------------------------------------
 return M

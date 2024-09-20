@@ -60,7 +60,7 @@ function httpRequest(url) {
 function run() {
 	const username = $.getenv("github_username");
 	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
-	const response = JSON.parse(httpRequest(apiURL));
+	const response = httpRequest(apiURL);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],

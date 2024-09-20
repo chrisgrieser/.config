@@ -53,6 +53,7 @@ function run(argv) {
 			properties.push(level);
 		}
 		const propertiesDisplay = properties.join(" ").toUpperCase();
+		const csvLine = [engWord, kana || "", kanji || ""].join(";");
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
@@ -69,6 +70,7 @@ function run(argv) {
 					arg: readMoreLink?.url,
 				}, 
 				shift: { arg: japWord }, // play audio
+				fn: { arg: csvLine }
 			},
 		};
 		return alfredItem;
