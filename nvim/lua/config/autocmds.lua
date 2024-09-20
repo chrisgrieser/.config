@@ -73,14 +73,13 @@ local autoCdConfig = {
 }
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function(ctx)
-		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
 		local root = vim.fs.root(ctx.buf, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
 			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
-		if root then vim.uv.chdir(root) end
+		if root and root ~= "" then vim.uv.chdir(root) end
 	end,
 })
 
