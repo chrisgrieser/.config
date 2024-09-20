@@ -264,12 +264,14 @@ function delete_forks_with_no_open_prs {
 	my_prs=$(gh search prs --author="@me" --state=open --json="repository" --jq=".[].repository.name")
 	my_forks=$(gh repo list --fork | cut -f1)
 	while read -r pr; do
-		my_forks=$(echo "$my_forks" | grep -v "$pr")
+		my_forks=$(echo "$my_forks" | grep -v "/$pr")
 	done <<< "$my_prs"
 
 	forks_with_no_prs="$my_forks"
 	[[ -z "$forks_with_no_prs" ]] && print "\e[1;33mNo forks to delete.\e[0m" && return 0
-	# shellcheck disable=2001
+
+	# INFO still require confirmation as a safety net
+	# shellcheck disable=2001 # does not work for prepending
 	print -z "$(echo "$forks_with_no_prs" | sed 's/^/gh repo delete /')"
 }
 #───────────────────────────────────────────────────────────────────────────────
