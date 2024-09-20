@@ -147,18 +147,20 @@ function gotoHeading(which) {
 }
 
 /** h1 -> h2, h2 -> h3, etc. */
-function headingIncrementor() {
+/** @param {1|-1} dir */
+function headingIncrementor(dir) {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
 
-	let updatedLine = curLine.replace(/^#* /, (match) => {
-		if (match === "###### ") return "";
-		return match.trim() + "# ";
+	let updated = curLine.replace(/^#* /, (match) => {
+		if (dir === -1 && match !== "# ") return match.slice(1);
+		if (dir === 1 && match !== "###### ") return "#" + match;
+		return "";
 	});
-	if (updatedLine === curLine) updatedLine = "## " + curLine;
-	const diff = updatedLine.length - curLine.length;
+	if (updated === curLine) updated = (dir === 1 ? "## " : "###### ") + curLine;
 
-	editor.setLine(lnum, updatedLine);
+	editor.setLine(lnum, updated);
+	const diff = updated.length - curLine.length;
 	editor.setCursor(lnum, col + diff); // keep cursor in same place
 }
 
