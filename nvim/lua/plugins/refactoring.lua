@@ -22,6 +22,7 @@ return {
 			},
 			prefill = {
 				startInReplaceLineIfPrefill = true,
+				alsoPrefillReplaceLine = true,
 			},
 			keymaps = {
 				insertModeConfirm = "<CR>",
@@ -29,14 +30,6 @@ return {
 			editingBehavior = {
 				autoCaptureGroups = true,
 			},
-		},
-	},
-	{
-		"akinsho/toggleterm.nvim",
-		opts = true,
-		cmd = "ToggleTerm",
-		keys = {
-
 		},
 	},
 	{ -- refactoring utilities
