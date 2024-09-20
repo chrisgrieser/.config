@@ -26,13 +26,14 @@ function run() {
 
 	// DOCS https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#list-issues-assigned-to-the-authenticated-user--parameters
 	const apiURL = `https://api.github.com/search/issues?q=involves:${username}&sort=updated&per_page=100`;
-	const response = JSON.parse(httpRequest(apiURL));
+	const response = httpRequest(apiURL);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
 
+	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 	const issues = JSON.parse(response).items.map((/** @type {GithubIssue} */ item) => {
 		const issueAuthor = item.user.login;
 		const repo = (item.repository_url.match(/[^/]+$/) || "")[0];

@@ -99,6 +99,16 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BE084EB3-DF45-4761-A574-99DED79B26BF</string>
+				<key>modifiers</key>
+				<integer>8388608</integer>
+				<key>modifiersubtext</key>
+				<string>fn: Append to .csv file</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
 		<array>
@@ -289,6 +299,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:csv_file}</string>
+				<key>filetext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>BE084EB3-DF45-4761-A574-99DED79B26BF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>imageresizemode</key>
 				<integer>1</integer>
 				<key>stackview</key>
@@ -351,7 +388,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>625</real>
 		</dict>
 		<key>7535DF2C-07CB-4373-A54C-C8C14DE643B7</key>
 		<dict>
@@ -379,7 +416,7 @@
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>595</real>
 		</dict>
 		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
 		<dict>
@@ -395,6 +432,13 @@
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>BE084EB3-DF45-4761-A574-99DED79B26BF</key>
+		<dict>
+			<key>xpos</key>
+			<real>385</real>
+			<key>ypos</key>
+			<real>385</real>
+		</dict>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
 		<dict>
 			<key>xpos</key>
@@ -407,7 +451,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>595</real>
 		</dict>
 		<key>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</key>
 		<dict>
@@ -557,6 +601,27 @@
 			<string>slider</string>
 			<key>variable</key>
 			<string>audio_speed</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Location of .csv file for saving via `fn+⏎`</string>
+			<key>label</key>
+			<string>CSV</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>csv_file</string>
 		</dict>
 	</array>
 	<key>version</key>
