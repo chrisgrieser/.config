@@ -174,6 +174,10 @@ keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", 
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
+-- LSP
+keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
+
 --------------------------------------------------------------------------------
 -- COMMAND MODE
 keymap("c", "<C-u>", "<C-e><C-u>", { desc = " Kill whole line" })
@@ -190,13 +194,15 @@ keymap("n", "i", function()
 	return "i"
 end, { desc = "correctly indented i", expr = true })
 
--- LSP
-keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
-keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
-
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated V selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
+
+-- TERMINAL MODE
+-- (also relevant for REPLs such as iron.nvim)
+keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
