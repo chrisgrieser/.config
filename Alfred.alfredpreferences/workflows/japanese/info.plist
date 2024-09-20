@@ -95,7 +95,7 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Play audio 🔈</string>
+				<string>⇧: Play Japanese audio 🔈</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -105,7 +105,20 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Append to .csv file</string>
+				<string>fn: Append to .csv file (semicolon-separated)</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BE084EB3-DF45-4761-A574-99DED79B26BF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2892C315-9E5C-4AEF-9D82-031432E07D7F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -326,15 +339,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>imageresizemode</key>
-				<integer>1</integer>
-				<key>stackview</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:japWord}     {var:engWord}</string>
+				<key>title</key>
+				<string>💾 Saved</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.userinterface.image</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>83930E73-FF72-4738-BC12-3FD159FA4F33</string>
+			<string>2892C315-9E5C-4AEF-9D82-031432E07D7F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -362,6 +381,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>imageresizemode</key>
+				<integer>1</integer>
+				<key>stackview</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.image</string>
+			<key>uid</key>
+			<string>83930E73-FF72-4738-BC12-3FD159FA4F33</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>./resources/hiragana-katakana.webp</string>
 				<key>passthroughargument</key>
@@ -380,18 +414,31 @@
 	<key>readme</key>
 	<string>### Credits
 - Workflow created by [Chris Grieser](https://chris-grieser.de/).
-- Hiragana/Katakana Chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).</string>
+- Hiragana/Katakana chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>23B44036-74F5-4214-9D7C-5D9D98B6A190</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>625</real>
+			<real>590</real>
+		</dict>
+		<key>2892C315-9E5C-4AEF-9D82-031432E07D7F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>535</real>
+			<key>ypos</key>
+			<real>385</real>
 		</dict>
 		<key>7535DF2C-07CB-4373-A54C-C8C14DE643B7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
@@ -399,6 +446,8 @@
 		</dict>
 		<key>790545A7-08B0-4E0A-8741-AE1D77C5F0B1</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>230</real>
 			<key>ypos</key>
@@ -406,6 +455,8 @@
 		</dict>
 		<key>794C3411-2887-4F98-BF8E-4F94ACAFB1BA</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
@@ -413,13 +464,17 @@
 		</dict>
 		<key>83930E73-FF72-4738-BC12-3FD159FA4F33</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>560</real>
 		</dict>
 		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
@@ -427,6 +482,8 @@
 		</dict>
 		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -434,6 +491,8 @@
 		</dict>
 		<key>BE084EB3-DF45-4761-A574-99DED79B26BF</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>385</real>
 			<key>ypos</key>
@@ -441,6 +500,8 @@
 		</dict>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
@@ -448,13 +509,17 @@
 		</dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>595</real>
+			<real>560</real>
 		</dict>
 		<key>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>530</real>
 			<key>ypos</key>
@@ -606,16 +671,16 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string></string>
+				<string>~/Desktop/jisho-words.csv</string>
 				<key>filtermode</key>
 				<integer>2</integer>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>description</key>
-			<string>Location of .csv file for saving via `fn+⏎`</string>
+			<string>Location of .csv file for saving via `fn+⏎`. (Saved entries are semicolon-separated.)</string>
 			<key>label</key>
 			<string>CSV</string>
 			<key>type</key>

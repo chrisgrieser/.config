@@ -37,10 +37,10 @@ function run(argv) {
 		const kanji = japanese[0].word;
 		const kana = japanese[0].reading;
 		const japWord = kanji || kana || "ERROR: Neither kanji nor kana found.";
-		const japDisplay = (kanji && kana) ? `${kanji} 【${kana}】` : japWord;
+		const japDisplay = kanji && kana ? `${kanji} 【${kana}】` : japWord;
 		const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
 		const url = openAt + japWord;
-		const readMoreLink = senses.find(sense => sense.links.length > 0)?.links[0]
+		const readMoreLink = senses.find((sense) => sense.links.length > 0)?.links[0];
 
 		// properties
 		const properties = [];
@@ -68,9 +68,9 @@ function run(argv) {
 					valid: Boolean(readMoreLink),
 					subtitle: readMoreLink ? "⌃: " + readMoreLink?.text : "",
 					arg: readMoreLink?.url,
-				}, 
+				},
 				shift: { arg: japWord }, // play audio
-				fn: { arg: csvLine }
+				fn: { arg: csvLine, variables: { japWord: japWord, engWord: engWord } },
 			},
 		};
 		return alfredItem;
