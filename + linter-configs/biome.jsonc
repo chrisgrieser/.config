@@ -40,7 +40,6 @@
 	},
 	"formatter": {
 		"useEditorconfig": true,
-		"lineWidth": 100, // PENDING https://github.com/biomejs/biome/issues/3923
 		"formatWithErrors": true
 	},
 	"files": {
