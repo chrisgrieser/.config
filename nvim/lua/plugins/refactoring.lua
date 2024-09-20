@@ -31,6 +31,14 @@ return {
 			},
 		},
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		opts = true,
+		cmd = "ToggleTerm",
+		keys = {
+
+		},
+	},
 	{ -- refactoring utilities
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
