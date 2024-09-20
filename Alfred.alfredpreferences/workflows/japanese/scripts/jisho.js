@@ -24,8 +24,7 @@ function run(argv) {
 
 	// DOCS the API is undocumented, but some info is delivered in this thread:
 	// https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
-	// ALTERNATIVES
-	// requires API token: https://jpdb.stoplight.io/docs/jpdb/69c37fdb9f769-lookup-vocabulary
+	// ALTERNATIVES (not as many suggestions though): https://jotoba.de/docs.html#post-/api/search/words
 	const apiURL = "https://jisho.org/api/v1/search/words?keyword=" + encodeURIComponent(query);
 
 	/** @type {JishoResponse} */
