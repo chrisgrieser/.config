@@ -19,10 +19,13 @@ function run(argv) {
 	const query = argv[0];
 	const displayJlpt = $.getenv("display_jlpt") === "1";
 	const displayWanikani = $.getenv("display_wanikani") === "1";
+	const openAt = $.getenv("open_at");
 	const readmoreIcon = "  (...)";
 
 	// DOCS the API is undocumented, but some info is delivered in this thread:
 	// https://jisho.org/forum/54fefc1f6e73340b1f160000-is-there-any-kind-of-search-api
+	// ALTERNATIVES
+	// requires API token: https://jpdb.stoplight.io/docs/jpdb/69c37fdb9f769-lookup-vocabulary
 	const apiURL = "https://jisho.org/api/v1/search/words?keyword=" + encodeURIComponent(query);
 
 	/** @type {JishoResponse} */
@@ -37,7 +40,7 @@ function run(argv) {
 		const japWord = kanji || kana || "ERROR: Neither kanji nor kana found.";
 		const japDisplay = (kanji && kana) ? `${kanji} 【${kana}】` : japWord;
 		const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
-		const url = "https://jisho.org/word/" + japWord;
+		const url = openAt + japWord;
 		const readMoreLink = senses.find(sense => sense.links.length > 0)?.links[0]
 
 		// properties
@@ -57,10 +60,10 @@ function run(argv) {
 			title: japDisplay + "   " + propertiesDisplay,
 			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: engWord + (readMoreLink ? " " + readmoreIcon : ""),
-			arg: japWord,
+			arg: url,
 			mods: {
-				cmd: { arg: url }, // open
-				alt: { arg: url }, // copy
+				cmd: { arg: japWord }, // copy word
+				alt: { arg: url }, // copy url
 				ctrl: {
 					valid: Boolean(readMoreLink),
 					subtitle: readMoreLink ? "⌃: " + readMoreLink?.text : "",
