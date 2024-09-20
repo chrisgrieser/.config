@@ -53,9 +53,9 @@
 				<key>destinationuid</key>
 				<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Copy word</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -83,9 +83,9 @@
 				<key>destinationuid</key>
 				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open in details at jisho.org</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -95,7 +95,7 @@
 				<key>modifiers</key>
 				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Play audio</string>
+				<string>⇧: Play audio 🔈</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -351,7 +351,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>485</real>
 		</dict>
 		<key>7535DF2C-07CB-4373-A54C-C8C14DE643B7</key>
 		<dict>
@@ -379,7 +379,7 @@
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>455</real>
 		</dict>
 		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
 		<dict>
@@ -407,7 +407,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>455</real>
 		</dict>
 		<key>E64276C1-6A3A-41ED-8BD3-AE272E6D3E67</key>
 		<dict>
@@ -460,6 +460,40 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword2</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>https://jisho.org/word/</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>jisho.org</string>
+						<string>https://jisho.org/word/</string>
+					</array>
+					<array>
+						<string>tangorin.com</string>
+						<string>https://tangorin.com/words?search=</string>
+					</array>
+					<array>
+						<string>jpdb.io</string>
+						<string>https://jpdb.io/search?q=</string>
+					</array>
+					<array>
+						<string>jotoba.com</string>
+						<string>https://jotoba.com/search/default/</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>where to open a result with `⏎`</string>
+			<key>label</key>
+			<string>Open at</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>open_at</string>
 		</dict>
 		<dict>
 			<key>config</key>
