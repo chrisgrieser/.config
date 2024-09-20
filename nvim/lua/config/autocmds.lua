@@ -117,13 +117,15 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		end
 
 		-- If ending up in empty buffer, re-open the first oldfile that exists
-		if vim.api.nvim_buf_get_name(0) ~= "" then return end
-		for _, file in ipairs(vim.v.oldfiles) do
-			if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
-				vim.cmd.edit(file)
-				return
+		vim.defer_fn(function()
+			if vim.api.nvim_buf_get_name(0) ~= "" then return end
+			for _, file in ipairs(vim.v.oldfiles) do
+				if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
+					vim.cmd.edit(file)
+					return
+				end
 			end
-		end
+		end, 100)
 	end,
 })
 

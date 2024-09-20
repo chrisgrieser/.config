@@ -15,23 +15,17 @@
 				}
 			},
 			"performance": {
-				"useTopLevelRegex": "off" // not useful for JXA
-			},
-			"correctness": {
-				"noUnknownProperty": "off" // css variables, TODO buggy, investigate later
+				"useTopLevelRegex": "off" // often not useful
 			},
 			"complexity": {
-				"noExcessiveCognitiveComplexity": "off", // sometimes useful
+				"noExcessiveCognitiveComplexity": "info",
 				"useSimplifiedLogicExpression": "off" // complains about negated and-conditions
 			},
 			"style": {
 				"useBlockStatements": "off", // do not require braces for one-line-if statements
 				"useTemplate": "off", // too strict, simple concatenations are fine
 				"noParameterAssign": "off", // often useful to do so
-				"useNamingConvention": {
-					"level": "info",
-					"options": { "strictCase": false }
-				}
+				"useNamingConvention": { "level": "info", "options": { "strictCase": false } }
 			}
 		}
 	},
