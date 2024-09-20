@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "9/17/2024, 9:22:34 PM",
-	"time": 1726600954406,
+	"@time": "9/21/2024, 12:59:37 AM",
+	"time": 1726873177495,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
@@ -11,7 +11,7 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "N f ",
+			"passKeys": "0 N f ",
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
@@ -19,7 +19,7 @@
 			"pattern": ":https://excalidraw.com/"
 		},
 		{
-			"passKeys": "/ ? ",
+			"passKeys": "? ",
 			"pattern": ":https://github.com/"
 		},
 		{
