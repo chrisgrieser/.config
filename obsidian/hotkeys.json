@@ -288,15 +288,6 @@
   "various-complements:reload-custom-dictionaries": [],
   "various-complements:show-suggestions": [],
   "various-complements:add-word-custom-dictionary": [],
-  "editor:set-heading-0": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "H"
-    }
-  ],
   "obsidian-linter:lint-file": [],
   "editor:save-file": [],
   "obsidian-style-settings:style-settings-class-toggle-hide-properties-hide-some-properties": [

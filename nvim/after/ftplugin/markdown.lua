@@ -52,20 +52,26 @@ keymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
 keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
 keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
 
--- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "<D-ö>", function()
-	local curLine = vim.api.nvim_get_current_line()
-	local updatedLine = curLine:gsub("^#* ", function(match)
-		if match == "###### " then return "" end
-		return vim.trim(match) .. "# "
-	end)
-	if updatedLine == curLine then updatedLine = "## " .. curLine end
-	local diff = #updatedLine - #curLine
-
+---@param dir 1|-1
+local function headingsIncremantor(dir)
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_set_current_line(updatedLine)
+	local curLine = vim.api.nvim_get_current_line()
+
+	local updated = curLine:gsub("^#* ", function(match)
+		if dir == -1 and match ~= "# " then return match:sub(2) end
+		if dir == 1 and match ~= "###### " then return "#" .. match end
+		return ""
+	end)
+	if updated == curLine then updated = (dir == 1 and "## " or "###### ") .. curLine end
+
+	vim.api.nvim_set_current_line(updated)
+	local diff = #updated - #curLine
 	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
-end, { desc = " Increment Heading" })
+end
+
+-- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
+keymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment Heading" })
+keymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement Heading" })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
@@ -143,4 +149,3 @@ keymap("n", "<leader>xr", function()
 	]]):format(browser, outputPath, url)
 	vim.system { "osascript", "-e", applescript }
 end, { desc = " Preview" })
-
