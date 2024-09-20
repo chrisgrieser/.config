@@ -10,7 +10,6 @@ vim.cmd.compiler("tsc")
 local keymap = require("config.utils").bufKeymap
 keymap("n", "<D-s>", function()
 	local actions = {
-		"source.fixAll.ts",
 		"source.addMissingImports.ts",
 		"source.removeUnusedImports.ts",
 		"source.organizeImports.biome",
