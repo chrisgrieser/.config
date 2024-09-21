@@ -118,3 +118,4 @@ matches:
   - { trigger: truely, replace: truly, propagate_case: true }
   - { trigger: doen, replace: done, propagate_case: true }
   - { trigger: tis, replace: its, propagate_case: true }
+  - { trigger: roder, replace: order, propagate_case: true }

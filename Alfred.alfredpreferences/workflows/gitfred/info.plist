@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<array>
 			<dict>
@@ -38,6 +51,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>7D6DDD36-399F-4EF5-B843-531C811A49E1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>614FAF2B-8F17-4683-966C-CCFEB1B6D136</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -213,7 +251,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -407,6 +445,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<array>
 			<dict>
@@ -431,21 +482,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Open Homepage (or Releases)</string>
+				<string>⌃: Shallow Clone (and Fork)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>⌃: Shallow Clone (and Fork)</string>
+				<string>⌘: Open Homepage (or Releases)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -487,6 +538,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Shallow Clone (and Fork)</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -495,18 +556,8 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Shallow Clone (and Fork)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
-		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
+		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -547,19 +598,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -574,49 +612,131 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ghi</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/my-github-issues.js</string>
-				<key>subtext</key>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>Search my GitHub issues</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
+				<string>⚠️ No browser tab found</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>378B3595-A76C-4026-AC7F-0AC288FDF625</string>
+			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>C9F8D0A3-F933-4772-9CD2-E8B592A87029</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>allow_empty</key>
+					<true/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>empty</string>
+						<key>uid</key>
+						<string>7D6DDD36-399F-4EF5-B843-531C811A49E1</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>has URL</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>614FAF2B-8F17-4683-966C-CCFEB1B6D136</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -670,7 +790,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>gpr</string>
+				<string>ghi</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -686,11 +806,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/my-github-prs.js</string>
+				<string>scripts/my-github-issues.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Search my GitHub PRs</string>
+				<string>Search my GitHub issues</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -699,7 +819,7 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>76991846-250A-4BDC-9CE6-01A8D691D6C1</string>
+			<string>378B3595-A76C-4026-AC7F-0AC288FDF625</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -744,12 +864,53 @@
 			<integer>3</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gpr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/my-github-prs.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search my GitHub PRs</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<string>76991846-250A-4BDC-9CE6-01A8D691D6C1</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -765,6 +926,38 @@
 			<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>URL</string>
+						<key>uid</key>
+						<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>local path</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -814,38 +1007,6 @@
 			<string>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^http</string>
-						<key>outputlabel</key>
-						<string>URL</string>
-						<key>uid</key>
-						<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>local path</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -904,9 +1065,9 @@
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
-				<false/>
+				<true/>
 				<key>onlyshowifquerypopulated</key>
-				<false/>
+				<true/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
@@ -917,7 +1078,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</string>
+			<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -945,15 +1106,10 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>FE44448E-7653-4A3C-B7F9-C3A787EE0556</string>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1472,14 +1628,21 @@ end run</string>
 #### Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
+		<dict>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>06CC5118-3CAE-427B-928D-48B78C81B6B6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>880</real>
 			<key>ypos</key>
-			<real>1235</real>
+			<real>1180</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1488,27 +1651,34 @@ end run</string>
 			<key>note</key>
 			<string>notifications left</string>
 			<key>xpos</key>
-			<real>671</real>
+			<real>711</real>
 			<key>ypos</key>
-			<real>1090</real>
+			<real>1035</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>230</real>
+			<real>235</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>560</real>
+		</dict>
+		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
+		<dict>
+			<key>xpos</key>
+			<real>410</real>
+			<key>ypos</key>
+			<real>40</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>820</real>
+			<real>760</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>415</real>
 		</dict>
 		<key>17D804EC-6AFE-403E-A6CC-8F536D379033</key>
 		<dict>
@@ -1528,18 +1698,18 @@ end run</string>
 			<key>note</key>
 			<string>mode: mark-as-read</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>1110</real>
+			<real>1055</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>280</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1548,9 +1718,9 @@ end run</string>
 			<key>note</key>
 			<string>search my issues</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>195</real>
 		</dict>
 		<key>388AD75C-BCFB-445D-B62E-13BC0545FD5E</key>
 		<dict>
@@ -1559,7 +1729,7 @@ end run</string>
 			<key>note</key>
 			<string>personal repo search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
@@ -1570,7 +1740,7 @@ end run</string>
 			<key>note</key>
 			<string>clone</string>
 			<key>xpos</key>
-			<real>820</real>
+			<real>770</real>
 			<key>ypos</key>
 			<real>545</real>
 		</dict>
@@ -1579,9 +1749,9 @@ end run</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>1175</real>
+			<real>1120</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
@@ -1606,18 +1776,25 @@ end run</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>935</real>
+			<real>915</real>
 			<key>ypos</key>
-			<real>240</real>
+			<real>280</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>765</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>155</real>
+		</dict>
+		<key>614FAF2B-8F17-4683-966C-CCFEB1B6D136</key>
+		<dict>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>105</real>
 		</dict>
 		<key>6952186D-DC97-4377-BE52-F76AA93A602C</key>
 		<dict>
@@ -1626,9 +1803,9 @@ end run</string>
 			<key>note</key>
 			<string>show-read-notifs</string>
 			<key>xpos</key>
-			<real>211</real>
+			<real>251</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>980</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1637,9 +1814,9 @@ end run</string>
 			<key>note</key>
 			<string>search my open PRs</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>330</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
@@ -1657,18 +1834,25 @@ end run</string>
 			<key>note</key>
 			<string>needs to loop to save values for `show read notifs`</string>
 			<key>xpos</key>
-			<real>770</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>945</real>
+		</dict>
+		<key>9AED849C-2F6C-4741-B375-875D5613781A</key>
+		<dict>
+			<key>xpos</key>
+			<real>615</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>685</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>425</real>
 		</dict>
 		<key>B35052FF-0027-40CC-BC59-EA7D442A57EA</key>
 		<dict>
@@ -1677,9 +1861,9 @@ end run</string>
 			<key>note</key>
 			<string>github notifications</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>1110</real>
+			<real>1055</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1688,9 +1872,9 @@ end run</string>
 			<key>note</key>
 			<string>action on thread ID</string>
 			<key>xpos</key>
-			<real>305</real>
+			<real>345</real>
 			<key>ypos</key>
-			<real>1110</real>
+			<real>1055</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
@@ -1712,6 +1896,16 @@ end run</string>
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
+		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
+		<dict>
+			<key>note</key>
+			<string>DOUBLE-CLICK THIS
+to set a htokey to clone the repo in the frontmost browser tab</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
 		<key>CC25EB33-36DC-49B4-B46D-C70DC2FA45FD</key>
 		<dict>
 			<key>colorindex</key>
@@ -1719,9 +1913,9 @@ end run</string>
 			<key>note</key>
 			<string>public repo search</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>465</real>
 		</dict>
 		<key>CF5614B3-814C-4F8C-958A-8757509B70EB</key>
 		<dict>
@@ -1739,27 +1933,27 @@ end run</string>
 			<key>note</key>
 			<string>personal starred repos</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>70</real>
 			<key>ypos</key>
-			<real>590</real>
-		</dict>
-		<key>E6DBBBE7-CEB7-477C-AC88-395FF2B34092</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>545</real>
+			<real>615</real>
 		</dict>
 		<key>EC5EF5AB-920D-45E1-9F3E-CEF737C5D2F5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>1100</real>
+			<real>1080</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>185</real>
+		</dict>
+		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>620</real>
+			<key>ypos</key>
+			<real>545</real>
 		</dict>
 		<key>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</key>
 		<dict>
@@ -1777,27 +1971,18 @@ end run</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>635</real>
+			<real>675</real>
 			<key>ypos</key>
-			<real>1185</real>
+			<real>1130</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>210</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>1245</real>
-		</dict>
-		<key>FE44448E-7653-4A3C-B7F9-C3A787EE0556</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>575</real>
+			<real>1190</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

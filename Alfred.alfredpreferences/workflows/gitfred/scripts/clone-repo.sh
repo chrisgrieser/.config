@@ -2,9 +2,10 @@
 # shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
-source_repo=$(echo "$*" | cut -c20-)
-reponame=$(echo "$*" | sed -E 's|.*/||')
-url="git@github.com:$source_repo" # use SSH instead of https
+https_url="$1"
+source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/]*/[^/]*).*_\1_')
+reponame=$(echo "$source_repo" | cut -d '/' -f2)
+ssh_url="git@github.com:$source_repo" 
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
@@ -13,13 +14,13 @@ cd "$local_repo_folder" || return 1
 # CLONE
 
 if [[ $clone_depth == "0" ]]; then
-	git clone "$url" --no-single-branch --no-tags # get branches, but not tags
+	git clone "$ssh_url" --no-single-branch --no-tags # get branches, but not tags
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth == "1" ]] && clone_depth=2
 
-	git clone "$url" --depth="$clone_depth" --no-single-branch --no-tags
+	git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags
 fi
 
 success=$?
