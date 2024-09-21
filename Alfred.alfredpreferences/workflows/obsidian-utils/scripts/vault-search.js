@@ -21,11 +21,25 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/**
+ * @param {string} thePath
+ * @param {string[]} candidates
+ * @return {boolean}
+ */
+function pathMatchesAnyFrom(thePath, candidates) {
+	for (const thisCandidate of candidates) {
+		if (thePath.includes(thisCandidate)) return true;
+	}
+	return false;
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const vaultPath = $.getenv("vault_path");
 	const maxLen = Number.parseInt($.getenv("alias_max_length"));
+	const vaultPath = $.getenv("vault_path");
 
 	// aliases
 	const metadataExtrFile = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
@@ -35,6 +49,12 @@ function run() {
 	for (const item of metadata) {
 		aliasMap[item.relativePath] = item.aliases;
 	}
+
+	// ignored
+	const vaultConfig = vaultPath + "/.obsidian/app.json";
+	const ignoredDirs = fileExists(vaultConfig)
+		? JSON.parse(readFile(vaultConfig)).userIgnoreFilters
+		: [];
 
 	// recent
 	const recentItemsFile = vaultPath + "/.obsidian/workspace.json";
@@ -53,24 +73,25 @@ function run() {
 
 	/** @type {AlfredItem[]} */
 	const results = [];
-
 	const filesInVault = app.doShellScript(shellCmd).split("\r");
+
 	for (const absPath of filesInVault) {
 		const relPath = absPath.slice(vaultPath.length + 1);
 		const parts = relPath.split("/");
 		const name = parts.pop() || "";
-		const obsidianUri = "obsidian://open?path=" + encodeURIComponent(absPath);
+		const parent = parts.join("/");
+
+		// skip if ignored (items in Obsidian list end with `/`)
+		if (pathMatchesAnyFrom(parent + "/", ignoredDirs)) continue;
 
 		// subtitle & matcher
-		const parent = "▸ " + parts.join("/");
 		const aliases = aliasMap[relPath] || [];
 		const shortAliases = aliases.map((a) => (a.length > maxLen ? a.slice(0, maxLen) + "…" : a));
 		const matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
-		let subtitle = parent;
-		if (aliases.length > 0) subtitle += "   ■   " + shortAliases.join(", ");
+		const subtitle =
+			"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
 
 		// recent & bookmarked files
-		const mode = recentItems.includes(relPath) ? "unshift" : "push";
 		let icon = "";
 		if (bookmarks.includes(relPath)) icon += "🔖 ";
 		if (recentItems.includes(relPath)) icon += "🕑 ";
@@ -81,15 +102,18 @@ function run() {
 			subtitle: subtitle,
 			arg: absPath,
 			uid: absPath,
-			variables: { uri: obsidianUri },
+			variables: { uri: "obsidian://open?path=" + encodeURIComponent(absPath) },
 			quicklookurl: absPath,
 			type: "file:skipcheck",
 			match: matcher,
 			icon: { path: absPath, type: "fileicon" },
 		};
-		results[mode](alfredItem);
+
+		const insertWhere = recentItems.includes(relPath) ? "unshift" : "push";
+		results[insertWhere](alfredItem);
 	}
 
+	// OUTPUT
 	return JSON.stringify({
 		items: results,
 		cache: { seconds: 600, loosereload: true },
