@@ -25,10 +25,10 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const baseUrl = "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/";
-	const pluginsUrl = "community-plugins.json";
-	const downloadsUrl = "community-plugin-stats.json";
-	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsUrl));
-	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsUrl));
+	const pluginsFile = "community-plugins.json";
+	const downloadsFile = "community-plugin-stats.json";
+	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsFile));
+	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsFile));
 
 	// add PLUGINS to the JSON
 	const plugins = pluginJson
@@ -38,20 +38,19 @@ function run() {
 			) => {
 				const { id, name, description, author, repo } = plugin;
 
-				const githubURL = "https://github.com/" + repo;
-				const openURI = `obsidian://show-plugin?id=${id}`;
-				// enclosing link in  `<>` remove to the preview
+				const githubUrl = "https://github.com/" + repo;
+				const obsidianPluginUri = `obsidian://show-plugin?id=${id}`;
+				// enclosing link in `<>` remove to the Discord preview
 				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
 				const matcher =
-					alfredMatcher(name) +
-					alfredMatcher(author) +
-					alfredMatcher(id) +
-					alfredMatcher(description);
+					alfredMatcher(name) + alfredMatcher(author) + alfredMatcher(description);
 
-				// download bumbers
+				// download numbers
 				const downloadCount = downloadsJson[id]?.downloads || 0;
-				const downloadsStr = downloadCount ? downloadCount.toLocaleString("de-DE") + "↓  ·  " : "";
+				const downloadsStr = downloadCount
+					? downloadCount.toLocaleString("de-DE") + "↓  ·  "
+					: "";
 				const subtitle = downloadsStr + description + "  ·  by " + author;
 
 				// create json for Alfred
@@ -59,14 +58,14 @@ function run() {
 				const alfredItem = {
 					title: name,
 					subtitle: subtitle,
-					arg: githubURL,
-					quicklookurl: githubURL,
+					arg: githubUrl,
+					quicklookurl: githubUrl,
 					uid: id,
 					match: matcher,
 					mods: {
-						cmd: { arg: openURI },
+						cmd: { arg: obsidianPluginUri },
 						ctrl: { arg: id, subtitle: `⌃: Copy Plugin ID: "${id}"` },
-						alt: { arg: githubURL, subtitle: "⌥: Copy Link " },
+						alt: { arg: githubUrl, subtitle: "⌥: Copy Link " },
 						"cmd+alt": { arg: discordUrl, subtitle: "⌘⌥: Copy Link (discord ready)" },
 					},
 					downloadCount: downloadCount, // only to be able to sort
@@ -75,8 +74,10 @@ function run() {
 			},
 		)
 		.sort(
-			(/** @type {{ downloadCount: number; }} */ a, /** @type {{ downloadCount: number; }} */ b) =>
-				b.downloadCount - a.downloadCount,
+			(
+				/** @type {{ downloadCount: number; }} */ a,
+				/** @type {{ downloadCount: number; }} */ b,
+			) => b.downloadCount - a.downloadCount,
 		);
 
 	return JSON.stringify({

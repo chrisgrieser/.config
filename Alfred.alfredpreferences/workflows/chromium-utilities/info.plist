@@ -201,7 +201,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>245</real>
 		</dict>
 		<key>64E7E716-0427-41F0-844C-90D39ACC9152</key>
 		<dict>
@@ -212,7 +212,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>15</real>
 		</dict>
 		<key>692B8788-C546-49E7-B8EC-A569E3DD97B0</key>
 		<dict>
@@ -221,7 +221,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>275</real>
 		</dict>
 		<key>73794C72-64EA-441F-BE9A-67FB5F1A885C</key>
 		<dict>
@@ -230,7 +230,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>30</real>
+			<real>15</real>
 		</dict>
 		<key>B7B82F1A-97F8-490C-B4A4-5589FA869579</key>
 		<dict>
@@ -239,7 +239,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>130</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

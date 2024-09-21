@@ -229,7 +229,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>o</string>
+				<string>{var:main_search_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -316,7 +316,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
-				<string>oo</string>
+				<string>{var:scratchpad_keyword}</string>
 				<key>subtext</key>
 				<string>leave empty to open the scratchpad itself</string>
 				<key>text</key>
@@ -454,7 +454,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>op</string>
+				<string>{var:plugin_search_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -557,7 +557,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>505</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
@@ -566,7 +566,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>605</real>
 		</dict>
 		<key>35581195-D1B3-426B-82F8-14C072E52243</key>
 		<dict>
@@ -575,7 +575,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>415</real>
 		</dict>
 		<key>3B590E83-D5D3-46E8-977D-60BC6515A3AD</key>
 		<dict>
@@ -584,12 +584,12 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>395</real>
 		</dict>
 		<key>3D729F95-B08C-4A6D-9292-9C18E13C54C1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>open Obsidian URI</string>
 			<key>xpos</key>
@@ -600,7 +600,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>scratchpad</string>
 			<key>xpos</key>
@@ -611,7 +611,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>440205E9-6FAD-4C11-AA0A-F2785E994E8C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>8</integer>
 			<key>note</key>
 			<string>main vault</string>
 			<key>xpos</key>
@@ -622,7 +622,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>5E566F93-2181-4333-A675-764390C315B4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
@@ -631,7 +631,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>445</real>
 			<key>ypos</key>
@@ -644,12 +644,12 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>565</real>
+			<real>550</real>
 		</dict>
 		<key>8B8E6563-9DF0-4342-BDBE-3398095FAC67</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>empty</string>
 			<key>xpos</key>
@@ -660,7 +660,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>A4905BF4-C19C-43DD-90FA-65101AFCB248</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>insert scratchpad path</string>
 			<key>xpos</key>
@@ -677,12 +677,12 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>460</real>
 		</dict>
 		<key>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>6</integer>
 			<key>xpos</key>
 			<real>340</real>
 			<key>ypos</key>
@@ -695,11 +695,32 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>520</real>
+			<real>505</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>o</string>
+				<key>placeholder</key>
+				<string>o</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>Main search</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>main_search_keyword</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -713,9 +734,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>vault path</string>
 			<key>label</key>
-			<string>Vault path</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -738,13 +759,34 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>max number of characters per alias to display</string>
 			<key>label</key>
-			<string>Max length per alias</string>
+			<string></string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
 			<string>alias_max_length</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>oo</string>
+				<key>placeholder</key>
+				<string>oo</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>Scratchpad</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>scratchpad_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -759,13 +801,34 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>can be in a different vault</string>
+			<string>path to scratchpad file (can be in a different vault)</string>
 			<key>label</key>
-			<string>Scratchpad path</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>scratchpad_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>op</string>
+				<key>placeholder</key>
+				<string>op</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>keyword</string>
+			<key>label</key>
+			<string>Plugin search</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>plugin_search_keyword</string>
 		</dict>
 	</array>
 	<key>version</key>
