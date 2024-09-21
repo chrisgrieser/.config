@@ -295,7 +295,11 @@ return {
 			},
 			-- stylua: ignore
 			{ "g!", function() telescope("diagnostics") end, desc = "󰋼 Workspace Diagnostics" },
-			{ "gw", function() telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{
+				"gw",
+				function() telescope("lsp_dynamic_workspace_symbols") end,
+				desc = "󰒕 Workspace Symbols",
+			},
 			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
 			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
