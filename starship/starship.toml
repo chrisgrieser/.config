@@ -139,7 +139,7 @@ number_threshold = 1
 description = "Number of lines of code in the current project using tokei (for performance)."
 command = "tokei --compact --exclude='*.txt' --exclude='*.json' | tail -n2 | awk 'NR==1 {print $3}'"
 when = '[[ "$(dirname $PWD)" == "$HOME/Developer" ]]'                                                    # only in my local repos folder
-format = ' [$output]($style)'
+format = ' [$output ]($style)'
 style = "blue"
 
 [cmd_duration]

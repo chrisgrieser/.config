@@ -10,10 +10,11 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	[[ -f ./Justfile ]] && sed -i '' 's/grep "5"/grep '\''"5"'\''/' ./Justfile
+	command cp -fv "$HOME/Desktop/.markdownlint.yaml" .
+	command cp -fv "$HOME/Desktop/.rsync-exclude" .
 }
 
-commit_msg="fix: rsync commands"
+commit_msg="chore: add markdownlint config"
 
 #───────────────────────────────────────────────────────────────────────────────
 
