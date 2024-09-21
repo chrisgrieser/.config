@@ -21,24 +21,11 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/**
- * @param {string} thePath
- * @param {string[]} candidates
- * @return {boolean}
- */
-function pathMatchesAnyFrom(thePath, candidates) {
-	for (const thisCandidate of candidates) {
-		if (thePath.includes(thisCandidate)) return true;
-	}
-	return false;
-}
-
-//──────────────────────────────────────────────────────────────────────────────
-
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function run() {
-	const maxLen = Number.parseInt($.getenv("alias_max_length"));
+	const aliasMaxLen = Number.parseInt($.getenv("alias_max_length"));
 	const vaultPath = $.getenv("vault_path");
 
 	// aliases
@@ -49,12 +36,6 @@ function run() {
 	for (const item of metadata) {
 		aliasMap[item.relativePath] = item.aliases;
 	}
-
-	// ignored
-	const vaultConfig = vaultPath + "/.obsidian/app.json";
-	const ignoredDirs = fileExists(vaultConfig)
-		? JSON.parse(readFile(vaultConfig)).userIgnoreFilters
-		: [];
 
 	// recent
 	const recentItemsFile = vaultPath + "/.obsidian/workspace.json";
@@ -68,25 +49,36 @@ function run() {
 		? JSON.parse(readFile(bookmarkFile)).items.map((/** @type {{ path: string; }} */ b) => b.path)
 		: [];
 
+	// determine files to be listed
+	const vaultConfig = vaultPath + "/.obsidian/app.json";
+	const ignoredDirs = fileExists(vaultConfig)
+		? JSON.parse(readFile(vaultConfig)).userIgnoreFilters
+		: [];
+
 	// PERF `find` quicker than `mdfind`
-	const shellCmd = `find "${vaultPath}" \\( -name "*.md" -or -name "*.canvas" \\) -not -path "*/.trash/*"`;
+	let cmd = `cd "${vaultPath}" && find . \\( -name "*.md" -or -name "*.canvas" \\) -not -path "./.trash/*"`;
+	for (const dir of ignoredDirs) {
+		if (dir.startsWith("/") && dir.endsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`;
+		else if (dir.endsWith("/")) cmd += ` -not -path "./${dir}*"`;
+	}
+	console.log("🖨️ shellCmd:", cmd);
+	const filesInVault = app.doShellScript(cmd).split("\r");
 
 	/** @type {AlfredItem[]} */
 	const results = [];
-	const filesInVault = app.doShellScript(shellCmd).split("\r");
-
-	for (const absPath of filesInVault) {
-		const relPath = absPath.slice(vaultPath.length + 1);
+	for (let relPath of filesInVault) {
+		relPath = relPath.slice(2);
 		const parts = relPath.split("/");
 		const name = parts.pop() || "";
 		const parent = parts.join("/");
-
-		// skip if ignored (items in Obsidian list end with `/`)
-		if (pathMatchesAnyFrom(parent + "/", ignoredDirs)) continue;
+		const absPath = vaultPath + "/" + relPath;
 
 		// subtitle & matcher
 		const aliases = aliasMap[relPath] || [];
-		const shortAliases = aliases.map((a) => (a.length > maxLen ? a.slice(0, maxLen) + "…" : a));
+		const shortAliases =
+			aliases.length < 2
+				? aliases
+				: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
 		const matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
 		const subtitle =
 			"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
@@ -116,6 +108,6 @@ function run() {
 	// OUTPUT
 	return JSON.stringify({
 		items: results,
-		cache: { seconds: 600, loosereload: true },
+		//cache: { seconds: 600, loosereload: true },
 	});
 }
