@@ -1,5 +1,4 @@
-local u = require("config.utils")
-local keymap = require("config.utils").bufKeymap
+local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
@@ -16,7 +15,7 @@ abbr("===", "==")
 -- REQUIRE MODULE FROM CWD
 
 -- lightweight version of telescope-import.nvim import (just for lua)
-keymap("n", "<leader>cr", function()
+bkeymap("n", "<leader>cr", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()

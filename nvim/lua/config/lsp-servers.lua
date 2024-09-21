@@ -1,3 +1,5 @@
+local M = {}
+--------------------------------------------------------------------------------
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 --------------------------------------------------------------------------------
 
@@ -27,9 +29,9 @@ local lspToMasonMap = {
 }
 
 ---@type table<string, lspconfig.Config>
-local serverConfigs = {}
+M.serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
-	serverConfigs[lspName] = {}
+	M.serverConfigs[lspName] = {}
 end
 
 local extraDependencies = {
@@ -43,13 +45,13 @@ local extraDependencies = {
 -- INFO To have the mason-module access this, we cannot return this table, since
 -- `lazy.nvim` uses the return values for the plugin spec. Thus we save it in a
 -- global variable, so the mason-module can access it.
-vim.g.mason_dependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
+M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
-serverConfigs.bashls = {
+M.serverConfigs.bashls = {
 	filetypes = { "sh", "zsh", "bash" }, -- work in zsh as well
 	settings = {
 		bashIde = {
@@ -123,7 +125,7 @@ local efmConfig = {
 	},
 }
 
-serverConfigs.efm = {
+M.serverConfigs.efm = {
 	-- cleanup useless empty folder efm creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 
@@ -136,7 +138,7 @@ serverConfigs.efm = {
 -- LUA
 
 -- DOCS https://luals.github.io/wiki/settings/
-serverConfigs.lua_ls = {
+M.serverConfigs.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
@@ -168,7 +170,7 @@ serverConfigs.lua_ls = {
 -- PYTHON
 
 -- DOCS https://docs.astral.sh/ruff/editors/settings/
-serverConfigs.ruff = {
+M.serverConfigs.ruff = {
 	init_options = {
 		settings = {
 			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
@@ -185,7 +187,7 @@ serverConfigs.ruff = {
 -- DOCS
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
-serverConfigs.cssls = {
+M.serverConfigs.cssls = {
 	-- using `biome` instead (this key overrides `settings.format.enable = true`)
 	init_options = { provideFormatter = false },
 
@@ -200,7 +202,7 @@ serverConfigs.cssls = {
 	},
 }
 
-serverConfigs.css_variables = {
+M.serverConfigs.css_variables = {
 	root_dir = function()
 		-- Add custom root markers for Obsidian snippet folders.
 		local markers = { ".project-root", ".git" }
@@ -209,7 +211,7 @@ serverConfigs.css_variables = {
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
-serverConfigs.stylelint_lsp = {
+M.serverConfigs.stylelint_lsp = {
 	filetypes = { "css", "scss" }, -- don't enable on js/ts, since I don't need it there
 	settings = {
 		stylelintplus = { autoFixOnFormat = true },
@@ -217,7 +219,7 @@ serverConfigs.stylelint_lsp = {
 }
 
 -- DOCS https://github.com/olrtg/emmet-language-server#neovim
-serverConfigs.emmet_language_server = {
+M.serverConfigs.emmet_language_server = {
 	filetypes = { "html", "css", "scss" },
 	init_options = {
 		showSuggestionsAsSnippets = true,
@@ -228,7 +230,7 @@ serverConfigs.emmet_language_server = {
 -- JS/TS
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-serverConfigs.ts_ls = {
+M.serverConfigs.ts_ls = {
 	settings = {
 		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
 		-- (biome works only on single-file and so already check for unintended re-declarations.)
@@ -259,12 +261,12 @@ serverConfigs.ts_ls = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-serverConfigs.ts_ls.settings.javascript = serverConfigs.ts_ls.settings.typescript
+M.serverConfigs.ts_ls.settings.javascript = M.serverConfigs.ts_ls.settings.typescript
 
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
-serverConfigs.jsonls = {
+M.serverConfigs.jsonls = {
 	-- Disable formatting in favor of biome
 	init_options = {
 		provideFormatter = false,
@@ -273,7 +275,7 @@ serverConfigs.jsonls = {
 }
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
-serverConfigs.yamlls = {
+M.serverConfigs.yamlls = {
 	settings = {
 		yaml = {
 			format = {
@@ -303,7 +305,7 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 end
 
 -- DOCS https://valentjn.github.io/ltex/settings.html
-serverConfigs.ltex = {
+M.serverConfigs.ltex = {
 	filetypes = { "markdown" }, -- not in .txt files, as those are used by `pass`
 	settings = {
 		ltex = {
@@ -364,14 +366,14 @@ serverConfigs.ltex = {
 
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
-serverConfigs.typos_lsp = {
+M.serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Information" }, -- Information|Warning|Hint|Error
 }
 
 -- VALE
 -- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
 -- DOCS https://vale.sh/docs/topics/config#search-process
-serverConfigs.vale_ls = {
+M.serverConfigs.vale_ls = {
 	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
 
 	init_options = {
@@ -387,24 +389,4 @@ serverConfigs.vale_ls = {
 }
 
 --------------------------------------------------------------------------------
-
-return {
-	{
-		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
-		config = function()
-			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
-
-			-- Enable completion (nvim-cmp) and folding (nvim-ufo)
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			capabilities.textDocument.foldingRange =
-				{ dynamicRegistration = false, lineFoldingOnly = true }
-
-			for lspName, serverConfig in pairs(serverConfigs) do
-				serverConfig.capabilities = capabilities
-				require("lspconfig")[lspName].setup(serverConfig)
-			end
-		end,
-	},
-}
+return M

@@ -1,4 +1,4 @@
-local keymap = require("config.utils").bufKeymap
+local bkeymap = require("config.utils").bufKeymap
 local optl = vim.opt_local
 --------------------------------------------------------------------------------
 
@@ -42,15 +42,15 @@ local function autocontinue(key)
 	return key
 end
 
-keymap("n", "o", function() return autocontinue("o") end, { expr = true })
-keymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
+bkeymap("n", "o", function() return autocontinue("o") end, { expr = true })
+bkeymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- HEADINGS
 
 -- Jump to next/prev heading
-keymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
-keymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
+bkeymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
+bkeymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
 
 ---@param dir 1|-1
 local function headingsIncremantor(dir)
@@ -70,40 +70,40 @@ local function headingsIncremantor(dir)
 end
 
 -- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment Heading" })
-keymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement Heading" })
+bkeymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment Heading" })
+bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement Heading" })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Tasks
-keymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
+bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
 
 -- Format Table
-keymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format Table under Cursor" })
+bkeymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format Table under Cursor" })
 
 -- cmd+u: markdown bullet
-keymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
+bkeymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
 
 -- cmd+k: markdown link
-keymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
-keymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
-keymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
+bkeymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
+bkeymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
+bkeymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
 
 -- cmd+b: bold
-keymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
-keymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
-keymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
+bkeymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
+bkeymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
+bkeymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
 
 -- cmd+i: italics
-keymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
-keymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
-keymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
+bkeymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
+bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
+bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN PREVIEW
 -- (replaces markdown-preview.nvim)
-keymap("n", "<leader>xr", function()
+bkeymap("n", "<leader>xr", function()
 	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
 	local browser = "Brave Browser"

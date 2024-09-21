@@ -31,8 +31,8 @@ abbr("trim", "strip")
 --------------------------------------------------------------------------------
 -- KEYMAPS
 
-local keymap = require("config.utils").bufKeymap
-keymap("n", "g/", function()
+local bkeymap = require("config.utils").bufKeymap
+bkeymap("n", "g/", function()
 	vim.cmd.normal { '"zyi"vi"', bang = true } -- yank & reselect inside quotes
 
 	local flagInLine = vim.api.nvim_get_current_line():match("re%.([MIDSUA])")
@@ -49,7 +49,7 @@ keymap("n", "g/", function()
 end, { desc = " Open in regex101" })
 
 -- custom formatting function to run fix all actions before
-keymap("n", "<D-s>", function()
+bkeymap("n", "<D-s>", function()
 	vim.lsp.buf.code_action {
 		context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
 		apply = true,

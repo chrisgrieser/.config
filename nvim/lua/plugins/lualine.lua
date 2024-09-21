@@ -114,7 +114,10 @@ local lualineConfig = {
 			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
-		lualine_x = {
+		lualine_y = {
+			{ quickfixCounter },
+		},
+		lualine_z = {
 			{ -- recording status
 				function() return "雷Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
@@ -141,9 +144,6 @@ local lualineConfig = {
 		},
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatus },
-		},
-		lualine_c = {
-			{ quickfixCounter },
 		},
 		lualine_x = {
 			{ lspProgress },

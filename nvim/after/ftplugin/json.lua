@@ -1,13 +1,14 @@
-local keymap = require("config.utils").bufKeymap
+local bkeymap = require("config.utils").bufKeymap
+--------------------------------------------------------------------------------
 
-keymap(
+bkeymap(
 	"n",
 	"<leader>fp",
 	"<cmd>%! yq --output-format=json --prettyPrint<CR>",
 	{ desc = " Prettify Buffer" }
 )
 
-keymap(
+bkeymap(
 	"n",
 	"<leader>fm",
 	"<cmd>%! yq --output-format=json --indent=0<CR>",

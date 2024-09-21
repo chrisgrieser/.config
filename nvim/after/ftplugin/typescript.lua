@@ -7,8 +7,8 @@ vim.cmd.compiler("tsc")
 --------------------------------------------------------------------------------
 
 -- custom formatting function to run code actions before running `biome`
-local keymap = require("config.utils").bufKeymap
-keymap("n", "<D-s>", function()
+local bkeymap = require("config.utils").bufKeymap
+bkeymap("n", "<D-s>", function()
 	local actions = {
 		"source.addMissingImports.ts",
 		"source.removeUnusedImports.ts",
