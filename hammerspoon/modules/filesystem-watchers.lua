@@ -8,9 +8,7 @@ local pathw = hs.pathwatcher.new
 
 -- CONFIG
 local browserSettings = home .. "/.config/+ browser-extension-configs/"
-local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 local desktop = home .. "/Desktop/"
-local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 
 M.pathw_desktop = pathw(desktop, function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
@@ -33,6 +31,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			local bibEntry = u.readFile(path)
 			if bibEntry then
 				bibEntry = bibEntry:gsub("\n?$", "\n")
+				local libraryPath = home .. "/.config/pandoc/main-bibliography.bib"
 				u.writeToFile(libraryPath, bibEntry, true)
 				hs.open(libraryPath)
 				os.remove(path)
@@ -61,12 +60,13 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
 			os.rename(path, backupPath)
 
-		-- 3a. Obsidian Clipper for PhD Vault
-		elseif name == "phd-data-clipper.json" then
-			os.rename(path, home .. "/Vaults/phd-data-analysis/Meta/phd-data-clipper.json")
+		-- 3A. OBSIDIAN CLIPPER FOR PHD VAULT
+		elseif name == "phd-data-clipper.json" or name == "youtube-timestamp-clipper.json" then
+			os.rename(path, home .. "/Vaults/phd-data-analysis/Meta/Obsidian clipper/" .. name)
 
 		-- 4. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
+			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 			os.rename(path, gameFolder .. name)
 			-- open folders to copy icon
 			hs.open(gameFolder)
