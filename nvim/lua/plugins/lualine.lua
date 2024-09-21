@@ -145,6 +145,7 @@ local lualineConfig = {
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatus },
 		},
+		lualine_c = {}, -- removed existing components there
 		lualine_x = {
 			{ lspProgress },
 			{
