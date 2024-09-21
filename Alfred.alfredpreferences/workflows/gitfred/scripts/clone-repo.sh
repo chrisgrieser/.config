@@ -3,7 +3,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 https_url="$1"
-source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/]*/[^/]*).*_\1_')
+source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
 ssh_url="git@github.com:$source_repo" 
 
@@ -14,18 +14,17 @@ cd "$local_repo_folder" || return 1
 # CLONE
 
 if [[ $clone_depth == "0" ]]; then
-	git clone "$ssh_url" --no-single-branch --no-tags # get branches, but not tags
+	msg=$(git clone "$ssh_url" --no-single-branch --no-tags 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth == "1" ]] && clone_depth=2
-
-	git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags
+	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags 2>&1)
 fi
 
 success=$?
 if [[ $success -ne 0 ]]; then
-	echo "ERROR: git clone failed."
+	echo "Clone failed: $msg"
 	exit 1
 fi
 

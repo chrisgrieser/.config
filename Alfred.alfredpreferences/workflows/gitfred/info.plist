@@ -68,18 +68,18 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>7D6DDD36-399F-4EF5-B843-531C811A49E1</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>614FAF2B-8F17-4683-966C-CCFEB1B6D136</string>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>629A9B2E-2F56-4A05-9F68-527094D7BCA8</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -251,7 +251,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -342,6 +342,19 @@
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string>⌥: Copy URL</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -482,21 +495,21 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
-				<key>modifiers</key>
-				<integer>262144</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Shallow Clone (and Fork)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Open Homepage (or Releases)</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Shallow Clone (and Fork)</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -538,16 +551,6 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌃: Shallow Clone (and Fork)</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -556,9 +559,31 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Shallow Clone (and Fork)</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
+		<array/>
+		<key>F1ACCD95-5E8C-469E-AFD1-D184923540FB</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</string>
@@ -612,27 +637,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>⚠️ No browser tab found</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -670,12 +674,33 @@
 					<true/>
 				</dict>
 				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs</string>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
 			<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Current tab not a GitHub Page</string>
+				<key>title</key>
+				<string>⚠️ Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -690,17 +715,17 @@
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
-						<integer>0</integer>
+						<integer>4</integer>
 						<key>matchstring</key>
-						<string></string>
+						<string>.*github.com/.+?/.+</string>
 						<key>outputlabel</key>
-						<string>empty</string>
+						<string>GitHub URL</string>
 						<key>uid</key>
-						<string>7D6DDD36-399F-4EF5-B843-531C811A49E1</string>
+						<string>629A9B2E-2F56-4A05-9F68-527094D7BCA8</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>has URL</string>
+				<string>other/empty</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -710,35 +735,6 @@
 			<string>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>614FAF2B-8F17-4683-966C-CCFEB1B6D136</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -962,6 +958,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🧬 Cloning…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1011,6 +1028,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>.*github.com\/([^\/?]*\/[^\/?]*).*</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1020,7 +1058,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>⚠️  {query}</string>
+				<string>⚠️ {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -1042,7 +1080,7 @@
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>^ERROR</string>
+						<string>^Clone failed:</string>
 						<key>outputlabel</key>
 						<string></string>
 						<key>uid</key>
@@ -1062,23 +1100,10 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<true/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🧬 Cloning…</string>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1109,7 +1134,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1620,6 +1645,14 @@ end run</string>
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
+- Additionally, you can press the
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  GitHub repo from the current browser tab. ([Note that Firefox is not
+  supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
+
+&gt; To be as lightweight as possible, this workflow only requires a GitHub token
+&gt; when needed, that is for accessing notifications. The GitHub cli `gh` is also
+&gt; only needed when cloned repos should also automatically be forked.
 
 ---
 
@@ -1631,7 +1664,7 @@ end run</string>
 		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
 		<dict>
 			<key>xpos</key>
-			<real>230</real>
+			<real>300</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1640,9 +1673,9 @@ end run</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>880</real>
+			<real>840</real>
 			<key>ypos</key>
-			<real>1180</real>
+			<real>1260</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1651,32 +1684,32 @@ end run</string>
 			<key>note</key>
 			<string>notifications left</string>
 			<key>xpos</key>
-			<real>711</real>
+			<real>671</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1115</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>235</real>
+			<real>195</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>640</real>
 		</dict>
 		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
 		<dict>
 			<key>xpos</key>
-			<real>410</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>35</real>
 		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>760</real>
+			<real>725</real>
 			<key>ypos</key>
 			<real>415</real>
 		</dict>
@@ -1687,9 +1720,9 @@ end run</string>
 			<key>note</key>
 			<string>delete local repo</string>
 			<key>xpos</key>
-			<real>595</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>850</real>
 		</dict>
 		<key>1B2789C4-ACE9-46F2-A786-B83B045166B2</key>
 		<dict>
@@ -1698,18 +1731,18 @@ end run</string>
 			<key>note</key>
 			<string>mode: mark-as-read</string>
 			<key>xpos</key>
-			<real>540</real>
+			<real>500</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>1135</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>765</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>295</real>
 		</dict>
 		<key>378B3595-A76C-4026-AC7F-0AC288FDF625</key>
 		<dict>
@@ -1718,9 +1751,9 @@ end run</string>
 			<key>note</key>
 			<string>search my issues</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>275</real>
 		</dict>
 		<key>388AD75C-BCFB-445D-B62E-13BC0545FD5E</key>
 		<dict>
@@ -1729,9 +1762,9 @@ end run</string>
 			<key>note</key>
 			<string>personal repo search</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>850</real>
 		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
@@ -1740,61 +1773,54 @@ end run</string>
 			<key>note</key>
 			<string>clone</string>
 			<key>xpos</key>
-			<real>770</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>650</real>
 		</dict>
 		<key>43F0CA76-BFE8-415E-97B3-F6B953E904FE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>1120</real>
+			<real>1200</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1045</real>
+			<real>1005</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>585</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>515</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>730</real>
 		</dict>
 		<key>504CECC9-A64D-4F2A-A0E5-664B355EB529</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>915</real>
+			<real>875</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>295</real>
 		</dict>
 		<key>5AF52A7B-9FA9-4D8B-9784-4864B0A9AF06</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>765</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>155</real>
-		</dict>
-		<key>614FAF2B-8F17-4683-966C-CCFEB1B6D136</key>
-		<dict>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>105</real>
+			<real>170</real>
 		</dict>
 		<key>6952186D-DC97-4377-BE52-F76AA93A602C</key>
 		<dict>
@@ -1803,9 +1829,9 @@ end run</string>
 			<key>note</key>
 			<string>show-read-notifs</string>
 			<key>xpos</key>
-			<real>251</real>
+			<real>211</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>1060</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1814,18 +1840,18 @@ end run</string>
 			<key>note</key>
 			<string>search my open PRs</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>410</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>1005</real>
+			<real>965</real>
 			<key>ypos</key>
-			<real>645</real>
+			<real>725</real>
 		</dict>
 		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
 		<dict>
@@ -1834,25 +1860,36 @@ end run</string>
 			<key>note</key>
 			<string>needs to loop to save values for `show read notifs`</string>
 			<key>xpos</key>
-			<real>810</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>1025</real>
+		</dict>
+		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>get reponame</string>
+			<key>xpos</key>
+			<real>660</real>
+			<key>ypos</key>
+			<real>565</real>
 		</dict>
 		<key>9AED849C-2F6C-4741-B375-875D5613781A</key>
 		<dict>
 			<key>xpos</key>
-			<real>615</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>30</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>420</real>
 		</dict>
 		<key>B35052FF-0027-40CC-BC59-EA7D442A57EA</key>
 		<dict>
@@ -1861,9 +1898,9 @@ end run</string>
 			<key>note</key>
 			<string>github notifications</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>1135</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1872,29 +1909,29 @@ end run</string>
 			<key>note</key>
 			<string>action on thread ID</string>
 			<key>xpos</key>
-			<real>345</real>
+			<real>305</real>
 			<key>ypos</key>
-			<real>1055</real>
+			<real>1135</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>note</key>
-			<string>only error</string>
+			<string>only clone failure</string>
 			<key>xpos</key>
-			<real>975</real>
+			<real>935</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>615</real>
 		</dict>
 		<key>C27D01B3-A3B9-4661-9D70-8808DC522FD1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>750</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>850</real>
 		</dict>
 		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
 		<dict>
@@ -1913,18 +1950,18 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>note</key>
 			<string>public repo search</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>545</real>
 		</dict>
 		<key>CF5614B3-814C-4F8C-958A-8757509B70EB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>520</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>880</real>
 		</dict>
 		<key>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</key>
 		<dict>
@@ -1933,27 +1970,36 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>note</key>
 			<string>personal starred repos</string>
 			<key>xpos</key>
-			<real>70</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>695</real>
 		</dict>
 		<key>EC5EF5AB-920D-45E1-9F3E-CEF737C5D2F5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>12</integer>
 			<key>xpos</key>
-			<real>1080</real>
+			<real>1040</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>200</real>
 		</dict>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>620</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>535</real>
+		</dict>
+		<key>F1ACCD95-5E8C-469E-AFD1-D184923540FB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>585</real>
+			<key>ypos</key>
+			<real>680</real>
 		</dict>
 		<key>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</key>
 		<dict>
@@ -1962,27 +2008,27 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>note</key>
 			<string>reload workflow cache (so deleted repo does not show up as locally available)</string>
 			<key>xpos</key>
-			<real>945</real>
+			<real>905</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>850</real>
 		</dict>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>675</real>
+			<real>635</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1210</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>250</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>1190</real>
+			<real>1270</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
