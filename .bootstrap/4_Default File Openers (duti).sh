@@ -42,6 +42,7 @@ editorID="com.neovide.neovide"
 duti -s "$editorID" add all # vim spell file
 duti -s "$editorID" applescript all
 duti -s "$editorID" bib all
+duti -s "$editorID" rs all
 duti -s "$editorID" cff all # citation file format
 duti -s "$editorID" cfg all
 duti -s "$editorID" com.apple.property-list all # plist

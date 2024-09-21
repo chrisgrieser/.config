@@ -4,7 +4,9 @@
 
 https_url="$1"
 source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
+echo "🖨️ source_repo: $source_repo" >&2
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
+echo "🖨️ reponame: $reponame" >&2
 ssh_url="git@github.com:$source_repo" 
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
