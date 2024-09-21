@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 -- lightweight replacement for fidget.nvim
 local progressText = ""
 local function lspProgress() return progressText end
@@ -60,7 +57,7 @@ local function quickfixCounter()
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (' %s/%s %q'):format(qf.idx, #qf.items, qf.title) .. fileStr
+	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title) .. fileStr
 end
 
 local function filenameAndIcon()
@@ -117,6 +114,13 @@ local lualineConfig = {
 			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
+		lualine_x = {
+			{ -- recording status
+				function() return "雷Recording…" end,
+				cond = function() return vim.fn.reg_recording() ~= "" end,
+				color = function() return "DiagnosticError" end,
+			},
+		},
 	},
 	sections = {
 		lualine_a = {
@@ -142,11 +146,6 @@ local lualineConfig = {
 			{ quickfixCounter },
 		},
 		lualine_x = {
-			{ -- recording status
-				function() return "雷Recording…" end,
-				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = function() return { fg = "#f53d3d" } end,
-			},
 			{ lspProgress },
 			{
 				"diagnostics",

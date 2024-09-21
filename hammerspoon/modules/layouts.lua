@@ -60,7 +60,8 @@ end
 
 local function workLayout()
 	darkmode.autoSwitch()
-	(u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness)()
+	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
+	displayFunc()
 	visuals.updateHoleCover()
 	dockSwitcher("work")
 
@@ -118,9 +119,10 @@ end
 -- Select layout depending on number of screens, and prevent concurrent runs
 local function autoSetLayout()
 	if M.isLayouting then return end
-	M.isLayouting = true;
+	M.isLayouting = true
 
-	(env.isProjector() and movieLayout or workLayout)()
+	local layoutFunc = env.isProjector() and movieLayout or workLayout
+	layoutFunc()
 
 	u.runWithDelays(4, function() M.isLayouting = false end)
 end
