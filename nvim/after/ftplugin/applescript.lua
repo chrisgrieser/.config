@@ -13,9 +13,9 @@ abbr("//", "--")
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
-local keymap = require("config.utils").bufKeymap
+local bkeymap = require("config.utils").bufKeymap
 
-keymap(
+bkeymap(
 	"n",
 	"<D-s>",
 	function() vim.cmd.normal { "m`gg=G``", bang = true } end,

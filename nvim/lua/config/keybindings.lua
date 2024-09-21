@@ -32,13 +32,40 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
--- quickfix
+--------------------------------------------------------------------------------
+-- QUICKFIX
+
 keymap("n", "gq", function()
 	local ok = pcall(vim.cmd.cnext)
 	if not ok then vim.cmd.cfirst() end
-end, { desc = " Next Quickfix" })
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev Quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear Quickfix" })
+end, { desc = " Next quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
+
+keymap("n", "<leader>q", function ()
+	local windows = vim.fn.getwininfo()
+	for _, win in pairs(windows) do
+	  if win["quickfix"] == 1 then
+	    vim.cmd.cclose()
+	    return
+	  end
+	end
+	vim.cmd.copen()
+end, { desc = " Toggle quickfix" })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		local bkeymap = require("config.utils").bufKeymap
+		bkeymap("n", "dd", function()
+			local qfItems = vim.fn.getqflist()
+			local lnum = vim.api.nvim_win_get_cursor(0)[1]
+			table.remove(qfItems, lnum)
+			vim.fn.setqflist(qfItems, "r")
+			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
+		end, { desc = " Remove quickfix entry" })
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- EDITING

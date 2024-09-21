@@ -1,5 +1,6 @@
 local u = require("config.utils")
 local abbr = require("config.utils").bufAbbrev
+local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 
 vim.bo.commentstring = "// %s" -- add space
@@ -18,7 +19,7 @@ abbr("()", "() =>") -- quicker arrow function
 --------------------------------------------------------------------------------
 
 ---open the next regex at https://regex101.com/
-u.bufKeymap("n", "g/", function()
+bkeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.outer")
 	local notFound = vim.fn.mode():find("v")
 	if not notFound then

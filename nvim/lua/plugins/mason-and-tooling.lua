@@ -38,7 +38,7 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim",
 		config = function()
-			local packages = vim.g.mason_dependencies
+			local packages = require("config.lsp-servers").masonDependencies
 			assert(#packages > 10, "Warning: in mason config, many packages would be uninstalled.")
 
 			-- FIX manually running `MasonToolsUpdate`, since `run_on_start` does
@@ -47,6 +47,25 @@ return {
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 			vim.defer_fn(vim.cmd.MasonToolsUpdate, 5000)
 			vim.defer_fn(vim.cmd.MasonToolsClean, 8000)
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = "BufReadPre",
+		config = function()
+			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
+
+			-- Enable completion (nvim-cmp) and folding (nvim-ufo)
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.completion.completionItem.snippetSupport = true
+			capabilities.textDocument.foldingRange =
+				{ dynamicRegistration = false, lineFoldingOnly = true }
+
+			local serverConfigs = require("config.lsp-servers").serverConfigs
+			for lspName, serverConfig in pairs(serverConfigs) do
+				serverConfig.capabilities = capabilities
+				require("lspconfig")[lspName].setup(serverConfig)
+			end
 		end,
 	},
 }
