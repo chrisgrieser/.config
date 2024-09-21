@@ -3,11 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>scratchpad_path</key>
-	<string>/Users/chrisgrieser/vaults/writing-vault/Diss - Plattform-Governance/Diss Scratchpad.md</string>
-	<key>slurp_list</key>
-	<string>Diss URLs</string>
-	<key>slurp_vault</key>
-	<string>phd-data-analysis</string>
+	<string>~/Vaults/writing-vault/Diss - Plattform-Governance/Diss Scratchpad.md</string>
 	<key>vault_path</key>
 	<string>~/Vaults/main-vault</string>
 </dict>

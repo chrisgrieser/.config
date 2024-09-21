@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>de.chris-grieser.obsidian-utils</string>
 	<key>category</key>
-	<string>❇️</string>
+	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
 		<key>0FA387AA-D669-473B-B888-38D59F48BDE9</key>
@@ -64,16 +64,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</string>
-				<key>modifiers</key>
-				<integer>1048576</integer>
-				<key>modifiersubtext</key>
-				<string>⌘: Append</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -84,23 +74,12 @@
 			</dict>
 		</array>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
+		<array/>
+		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E566F93-2181-4333-A675-764390C315B4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>68189488-7F07-4C40-B382-A6911C4A83B6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</string>
+				<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -113,7 +92,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B16A7050-6ABE-4666-81AA-1FE68733ABB1</string>
+				<string>A4905BF4-C19C-43DD-90FA-65101AFCB248</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -125,7 +104,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</string>
+				<string>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -134,24 +113,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>B3CAC527-D710-484A-8952-E97BDD0D7A24</key>
+		<key>A4905BF4-C19C-43DD-90FA-65101AFCB248</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>FCD76FF6-5E4F-4477-B069-A74D95FE1233</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BC155658-4BBD-479E-BE51-AF7C4F667727</string>
+				<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,6 +160,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</string>
+				<key>modifiers</key>
+				<integer>1572864</integer>
+				<key>modifiersubtext</key>
+				<string>⌘⌥: Copy Link (discord ready)</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -203,11 +179,21 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</key>
+		<key>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E566F93-2181-4333-A675-764390C315B4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -220,170 +206,13 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Open Obsidian Notes &amp; search Obsdian plugin</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Obsidian Utils</string>
+	<string>Sparkling Obsidian</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>{var:scratchpad_path}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>B16A7050-6ABE-4666-81AA-1FE68733ABB1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>oo</string>
-				<key>subtext</key>
-				<string>leave empty to open</string>
-				<key>text</key>
-				<string>Append to Scratchpad: '{query}'</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string></string>
-						<key>outputlabel</key>
-						<string>yes</string>
-						<key>uid</key>
-						<string>7E142B99-D337-4EB7-A048-9B8DC2130994</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>no</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>8B8E6563-9DF0-4342-BDBE-3398095FAC67</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>{var:scratchpad_path}</string>
-				<key>filetext</key>
-				<string>- {isodate}: {query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
-			<key>uid</key>
-			<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:to_append}</string>
-				<key>title</key>
-				<string>✅ Appended</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5E566F93-2181-4333-A675-764390C315B4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>to_append</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{var:uri}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -432,6 +261,153 @@
 			<string>440205E9-6FAD-4C11-AA0A-F2785E994E8C</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://open?path={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:scratchpad_path}</string>
+				<key>filetext</key>
+				<string>- {isodate}: {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>oo</string>
+				<key>subtext</key>
+				<string>leave empty to open the scratchpad itself</string>
+				<key>text</key>
+				<string>Append to Scratchpad: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:scratchpad_path}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A4905BF4-C19C-43DD-90FA-65101AFCB248</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string></string>
+						<key>outputlabel</key>
+						<string>yes</string>
+						<key>uid</key>
+						<string>7E142B99-D337-4EB7-A048-9B8DC2130994</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>no</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>8B8E6563-9DF0-4342-BDBE-3398095FAC67</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Appended</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5E566F93-2181-4333-A675-764390C315B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -555,116 +531,15 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
+			<string>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
 			<string>3426DFFC-C411-4D60-8043-A3ABDF8B6748</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/toggle-obsidian-alpha.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alpha</string>
-				<key>subtext</key>
-				<string>restarts Obsidian afterwards</string>
-				<key>text</key>
-				<string>🟪 Toggle Alpha</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>68189488-7F07-4C40-B382-A6911C4A83B6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🟪 Alpha</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BC155658-4BBD-479E-BE51-AF7C4F667727</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/download-obsidian-alpha.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FCD76FF6-5E4F-4477-B069-A74D95FE1233</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alpha</string>
-				<key>subtext</key>
-				<string>from Discord</string>
-				<key>text</key>
-				<string>⬇️ Download Alpha</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B3CAC527-D710-484A-8952-E97BDD0D7A24</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -678,191 +553,149 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>0FA387AA-D669-473B-B888-38D59F48BDE9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>325</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>520</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>620</real>
 		</dict>
 		<key>35581195-D1B3-426B-82F8-14C072E52243</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>180</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>405</real>
+			<real>430</real>
 		</dict>
 		<key>3B590E83-D5D3-46E8-977D-60BC6515A3AD</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>325</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>410</real>
 		</dict>
 		<key>3D729F95-B08C-4A6D-9292-9C18E13C54C1</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>open Obsidian URI</string>
 			<key>xpos</key>
-			<real>325</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>15</real>
 		</dict>
 		<key>43ADF69A-89EC-434E-BCCE-E43DA67E4DB6</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>scratchpad</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>160</real>
 		</dict>
 		<key>440205E9-6FAD-4C11-AA0A-F2785E994E8C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>main vault</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>15</real>
 		</dict>
 		<key>5E566F93-2181-4333-A675-764390C315B4</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>600</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>275</real>
 		</dict>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>append</string>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>460</real>
+			<real>445</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>155</real>
 		</dict>
-		<key>68189488-7F07-4C40-B382-A6911C4A83B6</key>
+		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>toggle alpha</string>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>30</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>615</real>
+			<real>565</real>
 		</dict>
 		<key>8B8E6563-9DF0-4342-BDBE-3398095FAC67</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>7</integer>
 			<key>note</key>
 			<string>empty</string>
 			<key>xpos</key>
-			<real>221</real>
+			<real>196</real>
 			<key>ypos</key>
-			<real>65</real>
+			<real>180</real>
 		</dict>
-		<key>B16A7050-6ABE-4666-81AA-1FE68733ABB1</key>
+		<key>A4905BF4-C19C-43DD-90FA-65101AFCB248</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>325</real>
-			<key>ypos</key>
-			<real>15</real>
-		</dict>
-		<key>B3CAC527-D710-484A-8952-E97BDD0D7A24</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>7</integer>
 			<key>note</key>
-			<string>download latest alpha</string>
+			<string>insert scratchpad path</string>
 			<key>xpos</key>
-			<real>30</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>750</real>
-		</dict>
-		<key>B4BABF6C-7642-4DE3-88C7-BE900ED149E4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>615</real>
+			<real>175</real>
 		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>search plugins</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>475</real>
 		</dict>
-		<key>BC155658-4BBD-479E-BE51-AF7C4F667727</key>
+		<key>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>5</integer>
+			<integer>7</integer>
 			<key>xpos</key>
-			<real>325</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>615</real>
-		</dict>
-		<key>D117DFE6-B607-40CB-9A0F-E1FB88F41CB1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>save "to_append"</string>
-			<key>xpos</key>
-			<real>365</real>
-			<key>ypos</key>
-			<real>155</real>
+			<real>305</real>
 		</dict>
 		<key>F926E3B6-82B9-4B36-847D-6757DB67469A</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>495</real>
-		</dict>
-		<key>FCD76FF6-5E4F-4477-B069-A74D95FE1233</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>750</real>
+			<real>520</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -892,11 +725,11 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>35</integer>
+				<integer>40</integer>
 				<key>markercount</key>
-				<integer>11</integer>
+				<integer>13</integer>
 				<key>maxvalue</key>
-				<integer>60</integer>
+				<integer>70</integer>
 				<key>minvalue</key>
 				<integer>10</integer>
 				<key>onlystoponmarkers</key>
@@ -926,7 +759,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>can be in a different vault</string>
 			<key>label</key>
 			<string>Scratchpad path</string>
 			<key>type</key>
@@ -934,51 +767,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>variable</key>
 			<string>scratchpad_path</string>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>URLs</string>
-				<key>placeholder</key>
-				<string>URLs</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Reminders list to slurp from</string>
-			<key>label</key>
-			<string>Slurp List</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>slurp_list</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>main-vault</string>
-				<key>placeholder</key>
-				<string>main-vault</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>Obsidian Vault name to slurp into</string>
-			<key>label</key>
-			<string>Slurp Vault</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>slurp_vault</string>
-		</dict>
 	</array>
 	<key>version</key>
-	<string></string>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

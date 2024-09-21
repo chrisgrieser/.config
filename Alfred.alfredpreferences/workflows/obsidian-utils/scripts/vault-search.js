@@ -54,20 +54,18 @@ function run() {
 	const ignoredDirs = fileExists(vaultConfig)
 		? JSON.parse(readFile(vaultConfig)).userIgnoreFilters
 		: [];
-
 	// PERF `find` quicker than `mdfind`
 	let cmd = `cd "${vaultPath}" && find . \\( -name "*.md" -or -name "*.canvas" \\) -not -path "./.trash/*"`;
 	for (const dir of ignoredDirs) {
 		if (dir.startsWith("/") && dir.endsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`;
 		else if (dir.endsWith("/")) cmd += ` -not -path "./${dir}*"`;
 	}
-	console.log("🖨️ shellCmd:", cmd);
 	const filesInVault = app.doShellScript(cmd).split("\r");
 
 	/** @type {AlfredItem[]} */
 	const results = [];
 	for (let relPath of filesInVault) {
-		relPath = relPath.slice(2);
+		relPath = relPath.slice(2); // remove `./`
 		const parts = relPath.split("/");
 		const name = parts.pop() || "";
 		const parent = parts.join("/");
@@ -94,7 +92,6 @@ function run() {
 			subtitle: subtitle,
 			arg: absPath,
 			uid: absPath,
-			variables: { uri: "obsidian://open?path=" + encodeURIComponent(absPath) },
 			quicklookurl: absPath,
 			type: "file:skipcheck",
 			match: matcher,
@@ -108,6 +105,6 @@ function run() {
 	// OUTPUT
 	return JSON.stringify({
 		items: results,
-		//cache: { seconds: 600, loosereload: true },
+		cache: { seconds: 600, loosereload: true },
 	});
 }
