@@ -221,11 +221,6 @@ return {
 			)
 		end,
 	},
-	{ -- automatically set correct indent for file
-		"nmac427/guess-indent.nvim",
-		event = "BufReadPre",
-		opts = true,
-	},
 	{ -- surround
 		"kylechui/nvim-surround",
 		keys = {

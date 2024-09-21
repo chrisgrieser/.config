@@ -9,6 +9,7 @@ local lspToMasonMap = {
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
 	css_variables = "css-variables-language-server",
+	rust_analyzer = "rust-analyzer",
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html snippets
