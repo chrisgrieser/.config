@@ -27,11 +27,8 @@ function run() {
 	const baseUrl = "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/";
 	const pluginsUrl = "community-plugins.json";
 	const downloadsUrl = "community-plugin-stats.json";
-
 	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsUrl));
 	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsUrl));
-
-	//───────────────────────────────────────────────────────────────────────────
 
 	// add PLUGINS to the JSON
 	const plugins = pluginJson
@@ -69,7 +66,8 @@ function run() {
 					mods: {
 						cmd: { arg: openURI },
 						ctrl: { arg: id, subtitle: `⌃: Copy Plugin ID: "${id}"` },
-						alt: { arg: discordUrl, subtitle: "⌥: Copy Link (discord ready)" },
+						alt: { arg: githubURL, subtitle: "⌥: Copy Link " },
+						"cmd+alt": { arg: discordUrl, subtitle: "⌘⌥: Copy Link (discord ready)" },
 					},
 					downloadCount: downloadCount, // only to be able to sort
 				};

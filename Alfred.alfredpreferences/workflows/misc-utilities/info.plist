@@ -86,6 +86,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>70A93D49-2208-47A7-9030-DEB81E847D88</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BD998609-F443-45E3-BCAD-1272AC7A66D9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<array>
 			<dict>
@@ -249,6 +262,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D147A1E2-300F-4140-B002-32CA3D79111F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>70A93D49-2208-47A7-9030-DEB81E847D88</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
 		<array>
 			<dict>
@@ -293,6 +319,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1311,6 +1350,115 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🟪 Alpha</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BD998609-F443-45E3-BCAD-1272AC7A66D9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>restarts Obsidian afterwards</string>
+				<key>text</key>
+				<string>🟪 Toggle Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D147A1E2-300F-4140-B002-32CA3D79111F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>70A93D49-2208-47A7-9030-DEB81E847D88</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/download-obsidian-alpha.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>from Discord</string>
+				<key>text</key>
+				<string>⬇️ Download Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1355,6 +1503,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>620</real>
+		</dict>
+		<key>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>1310</real>
 		</dict>
 		<key>366C10B3-336F-4945-8B1C-9FAB147C3C97</key>
 		<dict>
@@ -1402,6 +1559,15 @@
 			<real>400</real>
 			<key>ypos</key>
 			<real>410</real>
+		</dict>
+		<key>70A93D49-2208-47A7-9030-DEB81E847D88</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>1175</real>
 		</dict>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<dict>
@@ -1577,6 +1743,15 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>BD998609-F443-45E3-BCAD-1272AC7A66D9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>325</real>
+			<key>ypos</key>
+			<real>1175</real>
+		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
 			<key>colorindex</key>
@@ -1594,6 +1769,17 @@
 			<real>575</real>
 			<key>ypos</key>
 			<real>1030</real>
+		</dict>
+		<key>D147A1E2-300F-4140-B002-32CA3D79111F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>toggle alpha</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1175</real>
 		</dict>
 		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
 		<dict>
@@ -1648,6 +1834,17 @@
 			<real>400</real>
 			<key>ypos</key>
 			<real>895</real>
+		</dict>
+		<key>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>download latest alpha</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>1310</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>
