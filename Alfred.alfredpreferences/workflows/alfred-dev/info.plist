@@ -36,6 +36,19 @@
 		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<array/>
+		<key>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
 		<array>
 			<dict>
@@ -130,7 +143,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
+				<string>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -188,6 +201,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E0074CBE-558E-4BBB-81FD-52090611ED44</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>60ECFF86-E337-4D28-94AE-C79C9D0CB657</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<array>
@@ -202,7 +227,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</key>
+		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -213,19 +238,6 @@
 				<string></string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-		</array>
-		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 		</array>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
@@ -386,7 +398,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/reload-workflow.js</string>
+				<string>./scripts/reload-workflow-and-delete-cache.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -753,6 +765,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -803,7 +832,7 @@ disown</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -817,7 +846,7 @@ disown</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -831,7 +860,7 @@ disown</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -845,7 +874,7 @@ disown</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -859,7 +888,7 @@ disown</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:mode}</string>
+						<string></string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -871,6 +900,20 @@ disown</string>
 						<key>uid</key>
 						<string>13258927-20D2-4FDB-9ABF-FFF2263309D2</string>
 					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>apply_debugger_fontsize</string>
+						<key>outputlabel</key>
+						<string>debugger_fontsize</string>
+						<key>uid</key>
+						<string>60ECFF86-E337-4D28-94AE-C79C9D0CB657</string>
+					</dict>
 				</array>
 				<key>elselabel</key>
 				<string>else</string>
@@ -881,57 +924,6 @@ disown</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>8CE91420-4683-4D16-BD51-2D1D510E744C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>fixedorder</key>
-				<false/>
-				<key>items</key>
-				<string>[{"title":"📖 Search Workflow Docs","arg":"docs_search"},{"title":"📊 Open Data Folder","arg":"data_folder"},{"title":"🧹 Open Cache Folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"❗️ Restart Alfred","arg":"restart"}]</string>
-				<key>keyword</key>
-				<string>{var:alfred_keyword}</string>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.listfilter</string>
-			<key>uid</key>
-			<string>AD4DAB43-9C3C-4491-8512-21EA61650C8F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>mode</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -961,6 +953,37 @@ disown</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"📖 Search workflow docs","arg":"docs_search"},{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"Apply debugger font size","arg":"apply_debugger_fontsize"}]</string>
+				<key>keyword</key>
+				<string>{var:alfred_keyword}</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>{const:alfred_workflow_name}: Menu</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>AD4DAB43-9C3C-4491-8512-21EA61650C8F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -978,6 +1001,29 @@ disown</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>2DADFA85-C59F-4D17-A85F-5BC10246EA83</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/apply-debugger-font-size.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E0074CBE-558E-4BBB-81FD-52090611ED44</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1019,6 +1065,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>1005</real>
 		</dict>
+		<key>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>685</real>
+		</dict>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1044,7 +1099,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>765</real>
 			<key>ypos</key>
 			<real>580</real>
 		</dict>
@@ -1118,9 +1173,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
 		<dict>
 			<key>xpos</key>
-			<real>245</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>805</real>
+			<real>870</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
@@ -1142,26 +1197,19 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>435</real>
 		</dict>
-		<key>ABC4A242-56CA-4276-BDA3-3E4E3EB64347</key>
-		<dict>
-			<key>xpos</key>
-			<real>180</real>
-			<key>ypos</key>
-			<real>860</real>
-		</dict>
 		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>910</real>
 		</dict>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>reload</string>
+			<string>reload and delete cache</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
@@ -1197,6 +1245,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>1130</real>
 		</dict>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<dict>
@@ -1234,13 +1291,38 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>for the menu of commands</string>
 			<key>label</key>
 			<string>Keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>alfred_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>11</integer>
+				<key>markercount</key>
+				<integer>21</integer>
+				<key>maxvalue</key>
+				<integer>30</integer>
+				<key>minvalue</key>
+				<integer>10</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Run "Apply debugger font size" for this change to take effect.</string>
+			<key>label</key>
+			<string>debugger font size</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>debugger_fontsize</string>
 		</dict>
 	</array>
 	<key>version</key>
