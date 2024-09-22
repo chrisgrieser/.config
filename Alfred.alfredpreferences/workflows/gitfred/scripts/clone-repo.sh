@@ -7,7 +7,7 @@ source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
 echo "🖨️ source_repo: $source_repo" >&2
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
 echo "🖨️ reponame: $reponame" >&2
-ssh_url="git@github.com:$source_repo" 
+ssh_url="git@github.com:$source_repo"
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
@@ -26,7 +26,7 @@ fi
 
 success=$?
 if [[ $success -ne 0 ]]; then
-	echo "Clone failed: $msg"
+	echo "ERROR: Clone failed. $msg"
 	exit 1
 fi
 
@@ -37,7 +37,7 @@ cd "$reponame" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# SWITCH TO DEFAULT BRANCH
+# SWITCH TO WORKING BRANCH
 if [[ -n "$working_branch" ]]; then
 	# `git switch` fails silently if the branch does not exist
 	git switch "$working_branch" &> /dev/null
@@ -54,8 +54,9 @@ fi
 
 # FORK ON CLONE (if not owner)
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
-if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
-	if [[ ! -x "$(command -v gh)" ]]; then print "\`gh\` not installed." && return 1; fi
+if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]] ||
+	[[ "$clonedViaHotkey" == "true" && "$fork_on_clone_via_hotkey" == "1" ]]; then
+	if [[ ! -x "$(command -v gh)" ]]; then echo "ERROR: \`gh\` not installed." && return 1; fi
 
 	gh repo fork --remote=false
 
@@ -65,9 +66,9 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	git remote add origin "git@github.com:$github_username/$reponame.git"
 	gh repo set-default "$source_repo" # where `gh` sends PRs to
 
-	# switch to new branch
-	if [[ -n "$working_branch" ]]; then
+	# create default branch
+	if [[ -n "$default_branch" ]]; then
 		git config push.autoSetupRemote true
-		git switch --create "$working_branch"
+		git switch --create "$default_branch"
 	fi
 fi
