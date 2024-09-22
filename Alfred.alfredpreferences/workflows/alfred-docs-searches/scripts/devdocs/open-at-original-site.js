@@ -17,7 +17,7 @@ const originalSites = {
 	git: "https://git-scm.com/docs/",
 	lua: "https://www.lua.org/manual/{{version}}/manual.html",
 	hammerspoon: "https://www.hammerspoon.org/docs/",
-	// biome-ignore lint/style/useNamingConvention: not set byme
+	// biome-ignore lint/style/useNamingConvention: not set by me
 	browser_support_tables: "https://caniuse.com/",
 	node: "https://nodejs.org/api/",
 	moment: "https://momentjs.com/docs/#/",
@@ -35,13 +35,13 @@ function run(argv) {
 	let sourcePage = originalSites[topic];
 	const useSourcePageIfAvailable = $.getenv("use_source_page_if_available") === "1";
 
-	// open on devdocs
+	// OPEN ON DEVDOCS
 	if (!(useSourcePageIfAvailable && sourcePage)) {
 		app.openLocation(url);
 		return;
 	}
 
-	// open on source page
+	// OPEN AT ORIIGNAL
 	if (version) sourcePage = sourcePage.replace("{{version}}", version);
 
 	// a bunch of annoying special cases…
