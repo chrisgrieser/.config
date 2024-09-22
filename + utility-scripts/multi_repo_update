@@ -10,10 +10,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	command cp -fv "$HOME/Desktop/.rsync-exclude" .
+	command cp -fv "$HOME/Desktop/Justfile" .
 }
 
-commit_msg="ci: add cover edge cases for rsync"
+commit_msg="build: improve Justfile"
 
 #───────────────────────────────────────────────────────────────────────────────
 

@@ -960,7 +960,7 @@ disown</string>
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"title":"📖 Search workflow docs","arg":"docs_search"},{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"Apply debugger font size","arg":"apply_debugger_fontsize"}]</string>
+				<string>[{"title":"📖 Search workflow docs","arg":"docs_search"},{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"🔤 Apply debugger font size","arg":"apply_debugger_fontsize"}]</string>
 				<key>keyword</key>
 				<string>{var:alfred_keyword}</string>
 				<key>matchmode</key>
@@ -1305,9 +1305,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>defaultvalue</key>
 				<integer>11</integer>
 				<key>markercount</key>
-				<integer>21</integer>
+				<integer>15</integer>
 				<key>maxvalue</key>
-				<integer>30</integer>
+				<integer>24</integer>
 				<key>minvalue</key>
 				<integer>10</integer>
 				<key>onlystoponmarkers</key>
@@ -1316,9 +1316,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Run "Apply debugger font size" for this change to take effect.</string>
+			<string>Run "Apply debugger font size" from the menu for this change to take effect.</string>
 			<key>label</key>
-			<string>debugger font size</string>
+			<string>Debugger font size</string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
