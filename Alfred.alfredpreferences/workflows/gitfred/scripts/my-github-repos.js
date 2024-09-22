@@ -79,6 +79,7 @@ function run() {
 				return b.stargazers_count - a.stargazers_count;
 			},
 		)
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: fine here
 		.map((/** @type {GithubRepo&{local: {path: string}|undefined}} */ repo) => {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
