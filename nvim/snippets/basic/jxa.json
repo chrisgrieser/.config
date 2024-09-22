@@ -88,10 +88,7 @@
     "prefix": "front app (process)"
   },
   "front window path (Finder)": {
-    "body": [
-      "const finder = Application(\"Finder\");",
-      "const finderWinPath = decodeURIComponent(finder.insertionLocation().url().slice(7));"
-    ],
+    "body": "const finderWinp = decodeURIComponent(Application(\"Finder\").insertionLocation().url().slice(7));",
     "prefix": "front window path (Finder)"
   },
   "front window title": {

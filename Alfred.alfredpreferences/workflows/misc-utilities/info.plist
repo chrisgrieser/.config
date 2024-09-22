@@ -472,7 +472,7 @@
 				<key>includesystem</key>
 				<false/>
 				<key>keyword</key>
-				<string>co</string>
+				<string>@</string>
 				<key>limit</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
@@ -484,15 +484,15 @@
 				<key>sortmode</key>
 				<integer>0</integer>
 				<key>subtext</key>
-				<string></string>
+				<string>waiting for query…</string>
 				<key>title</key>
-				<string>Deep Contacts</string>
+				<string>Contacts</string>
 				<key>types</key>
 				<array>
 					<string>com.apple.addressbook.person</string>
 				</array>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.filefilter</string>
@@ -584,6 +584,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>openRemindersAfterwards</key>
+					<string>false</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A77889B5-8A18-4C74-8057-356CF8CAFEDF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -645,26 +665,6 @@
 			<string>43E23DEE-9CD4-4887-A9EE-796131D55BBA</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>openRemindersAfterwards</key>
-					<string>false</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>A77889B5-8A18-4C74-8057-356CF8CAFEDF</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -759,29 +759,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/open-in-busycal.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>B65D1451-C5F6-46E2-9FD0-6A252C64327A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>openwith</key>
 				<string>/System/Volumes/Data/Applications/neovide.app</string>
 				<key>sourcefile</key>
@@ -814,6 +791,29 @@
 			<string>92F2951A-71DC-46A7-BE1F-38E119AD1B8E</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-in-busycal.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B65D1451-C5F6-46E2-9FD0-6A252C64327A</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1482,7 +1482,7 @@
 			<key>xpos</key>
 			<real>835</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>0DF397E6-7179-4A9B-A07A-B32165613998</key>
 		<dict>
@@ -1538,7 +1538,7 @@
 			<key>xpos</key>
 			<real>685</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
 		<dict>
@@ -1558,7 +1558,7 @@
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>435</real>
 		</dict>
 		<key>70A93D49-2208-47A7-9030-DEB81E847D88</key>
 		<dict>
@@ -1576,7 +1576,7 @@
 			<key>xpos</key>
 			<real>555</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>240</real>
 		</dict>
 		<key>756217EC-B010-42C1-850E-08EF5788E978</key>
 		<dict>
@@ -1645,7 +1645,7 @@
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>175</real>
 		</dict>
 		<key>9734FC1B-0242-4229-B9BF-4A809F59C81E</key>
 		<dict>
@@ -1732,7 +1732,7 @@
 			<key>xpos</key>
 			<real>585</real>
 			<key>ypos</key>
-			<real>355</real>
+			<real>380</real>
 		</dict>
 		<key>B7C92074-83A2-4839-8432-03A59A607415</key>
 		<dict>
@@ -1873,7 +1873,7 @@
 			<key>xpos</key>
 			<real>400</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>315</real>
 		</dict>
 		<key>F253B564-5324-4D23-BD51-18723EB4651D</key>
 		<dict>
