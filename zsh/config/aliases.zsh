@@ -3,13 +3,8 @@ alias q=' exit'     # leading space to ignore it in history due to `HIST_IGNORE_
 alias r=' exec zsh' # do not reload with `source ~/.zshrc`, https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#how-do-i-reload-the-zshrc-file
 alias cmd='command'
 alias spotify="spotify_player playback"
-alias j="just"
 alias pw="pass"
 alias pwcd='cd "${PASSWORD_STORE_DIR:-$HOME/.password-store}"'
-
-# `just` task runner
-alias jr='just release'
-alias ji='just init'
 
 # DEFAULTS
 alias mv='mv -vi'
@@ -27,6 +22,19 @@ alias zip='zip --recurse-paths --symlinks'
 alias e='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest'
 alias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | less'
+
+# JUST
+alias j="just"
+alias ji='just init'
+alias jr='just release'
+function js { just --show "$1" | bat --language=sh --paging=never; }
+# completions for it
+_just_recipes() {
+	IFS=" " read -r -A recipes <<< "$(just --summary --unsorted)"
+	local expl && _description -V all-recipes expl 'Just Recipes'
+	compadd "${expl[@]}" -- "${recipes[@]}"
+}
+compdef _just_recipes js
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
