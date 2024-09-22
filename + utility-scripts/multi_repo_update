@@ -15,6 +15,9 @@ function actions_in_repo {
 
 commit_msg="build: improve Justfile"
 
+amend_and_forcepush="true"
+
+#───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD
@@ -58,7 +61,11 @@ while read -r repo; do
 
 	actions_in_repo
 
-	git add --all && git commit -m "$commit_msg" && git push --no-progress
+	if [[ "$amend_and_forcepush" == "true" ]]; then
+		git add --all && git commit --amend --no-edit && git push --no-progress --force
+	else
+		git add --all && git commit -m "$commit_msg" && git push --no-progress
+	fi
 	success=$?
 	if [[ $success -ne 0 ]]; then
 		print "\e[1;33mDid not update $repo.\e[0m"
