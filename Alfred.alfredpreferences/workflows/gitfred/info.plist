@@ -73,7 +73,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
+				<string>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -597,6 +597,19 @@
 		</array>
 		<key>F2C6A594-EB3E-45FD-B32A-0C8AA204551D</key>
 		<array/>
+		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<array>
 			<dict>
@@ -701,6 +714,26 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>clonedViaHotkey</key>
+					<string>true</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1080,7 +1113,7 @@
 						<key>matchmode</key>
 						<integer>4</integer>
 						<key>matchstring</key>
-						<string>^Clone failed:</string>
+						<string>^ERROR</string>
 						<key>outputlabel</key>
 						<string></string>
 						<key>uid</key>
@@ -1918,7 +1951,7 @@ end run</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>note</key>
-			<string>only clone failure</string>
+			<string>only on error</string>
 			<key>xpos</key>
 			<real>935</real>
 			<key>ypos</key>
@@ -2011,6 +2044,13 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<real>905</real>
 			<key>ypos</key>
 			<real>850</real>
+		</dict>
+		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
+		<dict>
+			<key>xpos</key>
+			<real>570</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<dict>
@@ -2155,13 +2195,13 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>working branch: If this branch exists, will switch to it after cloning. Leave empty to disable.</string>
+			<string>Default branch. If it exists on the repo, switch to if after cloning. (Leave empty to disable.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>working_branch</string>
+			<string>default_branch</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2171,10 +2211,29 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>fork when not owner</string>
+				<string>restore mtime</string>
 			</dict>
 			<key>description</key>
-			<string>When cloning a repository that you do not own, also create a fork, set upstream &amp; origin for a PR, and switch to the working branch (if set). Requires the `gh` cli.</string>
+			<string>Git normally erases the modification time of all cloned. Enabling this will restore the mtime from the commit log. (However, the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>restore_mtime</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>fork when cloning via `⏎⌃`</string>
+			</dict>
+			<key>description</key>
+			<string></string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2190,16 +2249,37 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>restore mtime</string>
+				<string>fork when cloning via hotkey</string>
 			</dict>
 			<key>description</key>
-			<string>git normally erases the modification time of all cloned. Enabling this will restore the mtime from the commit log. (However, the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
+			<string>Create a fork and setup upstream/origin for a PR. Requires the `gh` cli.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
-			<string>restore_mtime</string>
+			<string>fork_on_hotkey_clone</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>dev</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Working branch. When forking, create a branch with this name and switch to it. (Leave empty to disable.)</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>working_branch</string>
 		</dict>
 		<dict>
 			<key>config</key>
