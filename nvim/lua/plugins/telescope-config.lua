@@ -311,7 +311,7 @@ return {
 			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
 				"<leader>pc",
-				-- noautocmds -> no backdrop -> colorscheme previewable
+				-- noautocmds -> no backdrop, so the colorscheme is previewable
 				function() vim.cmd("noautocmd Telescope colorscheme") end,
 				desc = " Colorschemes",
 			},
@@ -325,6 +325,9 @@ return {
 					if cwd then
 						local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
 						table.insert(ignorePattern, relPathCurrent)
+					else
+						vim.notify("No cwd.", vim.log.levels.WARN)
+						return
 					end
 
 					-- add git info to file

@@ -994,6 +994,14 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -1011,14 +1019,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>462691DA-0319-4F31-B297-CC4A75FD1DFE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>0C28AAE6-A080-48A7-A6F0-0BB05070161D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1481,30 +1481,29 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
-- Search all public GitHub repositories via the keyword `gh`.
+	<string>- Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the
-	  Terminal. Optionally, creates a fork on GitHub with the `gh` cli and
-	  prepares the repo for a PR.
-- Quick access the repositories you own via `gmy`.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
+	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
+	  repo for a PR.
+- Access public repositories you own via `gmy`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
 	  Finder. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo link.
-	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Shallow clone the repo to a local folder and open in the
-	  Terminal. If the repo is already locally available on your device, just
-	  open the repository in the Terminal.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
+	  If the repo is already locally available on your device, just open the
+	  repository in the Terminal.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-- Directly open your GitHub notification via `ghn`. 
+- Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
 	  to notifications.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
@@ -1515,15 +1514,9 @@
   GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
-&gt; To be as lightweight as possible, this workflow only requires a GitHub token
-&gt; when needed, that is for accessing notifications. The GitHub cli `gh` is also
-&gt; only needed when cloned repos should also automatically be forked.
-
 ---
 
-#### ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)
-
-#### Created by [Chris Grieser](https://chris-grieser.de/).</string>
+#### Created by [Chris Grieser](https://chris-grieser.de/)  |  ⭐️ [Star on GitHub](https://github.com/chrisgrieser/gitfred)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0115FC58-CCEF-48EC-A08F-A405E8E30891</key>
@@ -1531,7 +1524,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>300</real>
+			<real>230</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1540,9 +1533,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>840</real>
+			<real>810</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>1020</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1553,7 +1546,7 @@
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>895</real>
+			<real>900</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1569,7 +1562,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>455</real>
+			<real>395</real>
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
@@ -1651,7 +1644,7 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>570</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
@@ -1689,7 +1682,7 @@
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>850</real>
+			<real>870</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1720,7 +1713,7 @@
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>815</real>
+			<real>835</real>
 		</dict>
 		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
 		<dict>
@@ -1738,7 +1731,7 @@
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1839,7 +1832,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>570</real>
+			<real>515</real>
 			<key>ypos</key>
 			<real>30</real>
 		</dict>
@@ -1859,7 +1852,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1050</real>
+			<real>1030</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -2062,7 +2055,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<string>setup remotes</string>
 			</dict>
 			<key>description</key>
-			<string>Point `upstream` to the source, and `origin` to the fork. This allows for quick PRs to the repo.</string>
+			<string>Point `upstream` to the source, and `origin` to the fork. This is useful for quick PRs.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2114,7 +2107,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.2</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

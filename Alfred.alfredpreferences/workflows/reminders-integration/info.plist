@@ -135,31 +135,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>45E222F3-9910-4038-AA60-1ABC01E95D81</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<array>
 			<dict>
@@ -322,7 +297,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
+				<string>45E222F3-9910-4038-AA60-1ABC01E95D81</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -568,56 +543,12 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>3D08F342-404B-4C70-8AC6-5473E7CB855B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>-1</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>double tap</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -676,6 +607,37 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>unstackview</key>
 				<false/>
 			</dict>
@@ -683,38 +645,6 @@
 			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
 			<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:focusedapp}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>com.runningwithcrayons.Alfred</string>
-						<key>outputlabel</key>
-						<string>Alfred</string>
-						<key>uid</key>
-						<string>5EA9009D-31E5-463D-8A4D-86312F760D0C</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>other</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1278,7 +1208,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>875</real>
 		</dict>
 		<key>1486415C-BA88-4276-A021-3773113CAF94</key>
 		<dict>
@@ -1296,7 +1226,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>890</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1352,25 +1282,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>920</real>
-		</dict>
-		<key>3D08F342-404B-4C70-8AC6-5473E7CB855B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>290</real>
-			<key>ypos</key>
-			<real>180</real>
-		</dict>
-		<key>3D40B34B-8C4C-4C22-B14E-BC5D7B92F072</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>195</real>
-			<key>ypos</key>
-			<real>265</real>
+			<real>895</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
@@ -1428,7 +1340,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>765</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
@@ -1440,7 +1352,7 @@ to set a hotkey to quick add selected text or browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>730</real>
+			<real>705</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
@@ -1470,7 +1382,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>260</real>
 		</dict>
 		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
 		<dict>
@@ -1479,7 +1391,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>455</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1010</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
@@ -1490,7 +1402,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1010</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1541,7 +1453,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>875</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
@@ -1552,7 +1464,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1010</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
