@@ -4,5 +4,7 @@
 <dict>
 	<key>alfred_keyword</key>
 	<string>aa</string>
+	<key>debugger_fontsize</key>
+	<integer>18</integer>
 </dict>
 </plist>

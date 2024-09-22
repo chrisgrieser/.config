@@ -13,15 +13,22 @@ function run(argv) {
 	// GUARD
 	if (!workflowUid) return "⚠️ Error reloading workflow: " + workflowPath;
 	if (workflowUid === $.getenv("alfred_workflow_uid")) {
-		return "⚠️ Alfred Workflow Devtools cannot reload itself.";
+		return '⚠️ "Alfred Workflow Devtools" cannot reload itself.';
 	}
 
-	// CAVEAT cannot delete the cache of a non-active workflow, since we can only
-	// get the uid
+	// delete cache
+	const bundleId = app.doShellScript(
+		`plutil -extract "bundleid" raw -o - "${workflowPath}/info.plist"`,
+	);
+	const cacheFolder =
+		app.pathTo("home folder") +
+		"/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/" +
+		bundleId;
+	app.doShellScript(`rm -rf '${cacheFolder}/'*`);
 
 	// reload
 	Application("com.runningwithcrayons.Alfred").reloadWorkflow(workflowUid);
 
 	// alfred notification
-	return "Reloaded & deleted cache: " + workflowUid; 
+	return bundleId + ": reloaded & deleted cache.";
 }
