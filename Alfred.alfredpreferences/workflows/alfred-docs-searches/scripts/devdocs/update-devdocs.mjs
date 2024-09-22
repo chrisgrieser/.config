@@ -56,23 +56,15 @@ const aliases = {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-const slugRegex = /~.*/;
-
 // add extra line for workflow versions, since it's overridden further below
 const extraWorkflowConfig = [
 	"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>required</key> <false/> <key>trim</key> <true/> <key>verticalsize</key> <integer>3</integer> </dict> <key>description</key> <string>one per line; see to the right for explanations</string> <key>label</key> <string>pinned devdocs versions</string> <key>type</key> <string>textarea</string> <key>variable</key> <string>select_versions</string> </dict>",
+	"<dict> <key>config</key> <dict> <key>default</key> <false/> <key>required</key> <false/> <key>text</key> <string></string> </dict> <key>description</key> <string>Only available for a few sites. PRs welcome.</string> <key>label</key> <string>open at original</string> <key>type</key> <string>checkbox</string> <key>variable</key> <string>use_source_page_if_available</string> </dict>",
 ];
 
 async function run() {
 	const response = await fetch("https://devdocs.io/docs.json");
-
-	// INFO: needs sorting to ensure that the items in the `info.plist` and thus
-	// the Alfred dropdown appear in alphabetical order. Mostly, this is already
-	// the case, but in individual cases, this is not the case.
-	const json = (await response.json()).sort(
-		(/** @type {{ slug: string; }} */ a, /** @type {{ slug: any; }} */ b) =>
-			a.slug.localeCompare(b.slug),
-	);
+	const json = await response.json();
 
 	// convert to hashmap to remove duplicates
 	/** @type {Record<string, string>} */
@@ -81,9 +73,11 @@ async function run() {
 	const infoPlistPopup = [noneItem];
 	for (const lang of json) {
 		// allLangs json -> keyword-slug-map
-		const id = lang.slug.replace(slugRegex, "");
+		const id = lang.slug.replace(/~.*/, ""); // remove version suffix
 		const keyword = aliases[id] || id;
-		if (allLangs[keyword]) continue; // do not add old versions of the same language
+
+		// assuming the JSON puts newer version on top, skip older versions
+		if (allLangs[keyword]) continue;
 		allLangs[keyword] = lang.slug;
 
 		// xml -> info.plist
