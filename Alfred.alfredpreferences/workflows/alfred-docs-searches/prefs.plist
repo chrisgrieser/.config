@@ -26,8 +26,6 @@
 	<string>mt</string>
 	<key>keyword_14</key>
 	<string>py</string>
-	<key>keyword_16</key>
-	<string>jq</string>
 	<key>keyword_17</key>
 	<string>md</string>
 	<key>keyword_19</key>
@@ -36,5 +34,7 @@
 	<string>lua</string>
 	<key>keyword_21</key>
 	<string>hs</string>
+	<key>use_source_page_if_available</key>
+	<true/>
 </dict>
 </plist>
