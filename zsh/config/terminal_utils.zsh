@@ -174,7 +174,7 @@ _xc() {
 	local expl && _description -V last-commands expl 'Last Commands'
 	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
 }
-compdef _lc lc
+compdef _xc xc
 
 #───────────────────────────────────────────────────────────────────────────────
 # TRASH

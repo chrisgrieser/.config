@@ -42,7 +42,7 @@ function bat { # dark-mode aware
 
 # UTILS
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
-alias sync_repo='./.sync-this-repo.sh'
+alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
 
 export PATH="$HOME/.config/+ utility-scripts/":$PATH
 function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
