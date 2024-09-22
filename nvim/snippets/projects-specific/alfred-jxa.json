@@ -62,6 +62,7 @@
       "\t\t\ttitle: ${1:name},",
       "\t\t\tsubtitle: ${1:name},",
       "\t\t\targ: ${1:name},",
+      "\t\t\tquicklookurl: ${1:name},",
       "\t\t};",
       "\t\treturn alfredItem;",
       "\t});",

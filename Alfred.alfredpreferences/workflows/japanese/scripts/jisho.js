@@ -61,6 +61,7 @@ function run(argv) {
 			icon: is_common ? { path: "./icon-common.png" } : {},
 			subtitle: engWord + (readMoreLink ? " " + readmoreIcon : ""),
 			arg: url,
+			quicklookurl: url,
 			mods: {
 				cmd: { arg: japWord }, // copy word
 				alt: { arg: url }, // copy url
