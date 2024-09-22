@@ -85,6 +85,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
+-- FIX cwd being not available when it is deleted outside nvim
+vim.api.nvim_create_autocmd("FocusGained", {
+	callback = function()
+		if not vim.uv.cwd() then vim.uv.chdir("/") end
+	end,
+})
+
 -- Close all non-existing buffers on `FocusGained`
 vim.api.nvim_create_autocmd("FocusGained", {
 	callback = function()
@@ -125,7 +132,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 					return
 				end
 			end
-		end, 200)
+		end, 1)
 	end,
 })
 
