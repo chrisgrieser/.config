@@ -1,4 +1,5 @@
 local keymap = require("config.utils").uniqueKeymap
+local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 -- META
 
@@ -42,13 +43,13 @@ end, { desc = " Next quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
 
-keymap("n", "<leader>q", function ()
+keymap("n", "<leader>q", function()
 	local windows = vim.fn.getwininfo()
 	for _, win in pairs(windows) do
-	  if win["quickfix"] == 1 then
-	    vim.cmd.cclose()
-	    return
-	  end
+		if win["quickfix"] == 1 then
+			vim.cmd.cclose()
+			return
+		end
 	end
 	vim.cmd.copen()
 end, { desc = " Toggle quickfix" })
@@ -384,8 +385,6 @@ keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
-	callback = function()
-		bkeymap("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Close" })
-	end,
+	callback = function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end,
 })
 --------------------------------------------------------------------------------
