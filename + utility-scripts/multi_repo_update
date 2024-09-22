@@ -10,11 +10,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	command cp -fv "$HOME/Desktop/.markdownlint.yaml" .
 	command cp -fv "$HOME/Desktop/.rsync-exclude" .
 }
 
-commit_msg="chore: add markdownlint config"
+commit_msg="ci: add cover edge cases for rsync"
 
 #───────────────────────────────────────────────────────────────────────────────
 

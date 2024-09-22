@@ -299,11 +299,11 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Various Utilities for Alfred Workflow Developers</string>
+	<string>Various utilities and quality-of-life-features for Alfred workflow developers</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Alfred Workflow Development</string>
+	<string>Alfred Workflow Devtools</string>
 	<key>objects</key>
 	<array>
 		<dict>

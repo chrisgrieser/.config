@@ -74,7 +74,6 @@ vim.opt.smartindent = true
 vim.filetype.add {
 	filename = {
 		[".ignore"] = "gitignore", -- ignore files for fd/rg
-		[".rsync-exclude"] = "gitignore",
 	},
 }
 
