@@ -56,7 +56,6 @@ end, { desc = " Toggle quickfix" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
-		local bkeymap = require("config.utils").bufKeymap
 		bkeymap("n", "dd", function()
 			local qfItems = vim.fn.getqflist()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
@@ -386,7 +385,7 @@ keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
 	callback = function()
-		vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Close" })
+		bkeymap("n", "q", vim.cmd.close, { buffer = true, nowait = true, desc = "Close" })
 	end,
 })
 --------------------------------------------------------------------------------

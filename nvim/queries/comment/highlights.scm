@@ -9,7 +9,7 @@
   (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "VALIDATE"))
 
 ("text" @comment.note
-  (#any-of? @comment.note "CONFIG" "SOURCE" "DATA" "EXAMPLE"))
+  (#any-of? @comment.note "CONFIG" "SOURCE" "DATA" "EXAMPLE" "IMPORTANT"))
 
 ("text" @comment.warning
   (#any-of? @comment.warning "SIC" "CAVEAT" "DEPRECATION"))

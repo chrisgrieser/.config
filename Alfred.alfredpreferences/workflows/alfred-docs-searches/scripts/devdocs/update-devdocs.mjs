@@ -89,7 +89,8 @@ async function run() {
 
 	// keyword-slug-map
 	if (!fs.existsSync("./.github/")) fs.mkdirSync("./.github/");
-	fs.writeFileSync("./.github/keyword-slug-map.json", JSON.stringify(allLangs));
+	const beautifiedForBetterDiff = JSON.stringify(allLangs, null, 2);
+	fs.writeFileSync("./.github/keyword-slug-map.json", beautifiedForBetterDiff);
 
 	// info.plist: update to insert all languages as options
 	/** @type {string[]} */
