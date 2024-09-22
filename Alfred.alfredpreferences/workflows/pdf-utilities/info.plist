@@ -202,6 +202,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>net.daringfireball.markdown</string>
+					<string>org.openxmlformats.wordprocessingml.document</string>
+				</array>
+				<key>name</key>
+				<string>Markdown/docx to PDF (Pandoc)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>12266315-F970-4E14-9013-0006EBBCF923</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -221,26 +241,6 @@
 			<string>244B4BA9-BAD5-40DF-9F8D-44060468B0CB</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>net.daringfireball.markdown</string>
-					<string>org.openxmlformats.wordprocessingml.document</string>
-				</array>
-				<key>name</key>
-				<string>Markdown/docx to PDF (Pandoc)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>12266315-F970-4E14-9013-0006EBBCF923</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -684,7 +684,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>675</real>
 		</dict>
 		<key>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</key>
 		<dict>
@@ -713,7 +713,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>550</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -724,7 +724,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>675</real>
 		</dict>
 		<key>8B3B6EC2-104F-401B-9252-6A96E9DBEDB5</key>
 		<dict>
@@ -751,7 +751,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>280</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
@@ -778,7 +778,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>550</real>
 		</dict>
 		<key>E712DB78-7466-4A11-A054-BD5DBE84E974</key>
 		<dict>

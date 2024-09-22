@@ -4,8 +4,6 @@
 <dict>
 	<key>clone_depth</key>
 	<integer>15</integer>
-	<key>default_branch</key>
-	<string>dev</string>
 	<key>fork_on_clone</key>
 	<true/>
 	<key>github_username</key>
@@ -16,7 +14,5 @@
 	<string>~/Developer</string>
 	<key>restore_mtime</key>
 	<true/>
-	<key>working_branch</key>
-	<string>dev</string>
 </dict>
 </plist>

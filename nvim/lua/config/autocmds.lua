@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			:each(function(bufnr)
 				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 				table.insert(closedBuffers, bufName)
-				vim.api.nvim_buf_delete(bufnr, { force = true })
+				vim.api.nvim_buf_delete(bufnr, { force = false })
 			end)
 		if #closedBuffers == 0 then return end
 
@@ -125,7 +125,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 					return
 				end
 			end
-		end, 100)
+		end, 200)
 	end,
 })
 

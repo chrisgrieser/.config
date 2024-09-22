@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "9/21/2024, 12:59:37 AM",
-	"time": 1726873177495,
+	"@time": "9/22/2024, 4:47:49 AM",
+	"time": 1726973269618,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
-		"chromium": 128
+		"chromium": 129
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -77,7 +77,6 @@
 		"unmapAll",
 		"",
 		"\" Modes",
-		"map <esc> reset",
 		"map i passNextKey",
 		"map I enterInsertMode",
 		"map gi focusInput select=\"end\"",
