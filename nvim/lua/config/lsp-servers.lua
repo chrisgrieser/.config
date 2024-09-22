@@ -110,13 +110,6 @@ local efmConfig = {
 	},
 	just = {
 		{
-			lintSource = "just",
-			lintCommand = 'just --summary --justfile="${INPUT}"',
-			lintStdin = false,
-			lintFormats = { "%Aerror: %m", "%C  ——▶ %f:%l:%c%Z" }, -- multiline format
-			rootMarkers = { "Justfile", ".justfile" },
-		},
-		{
 			formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
 			formatStdin = false,
 			rootMarkers = { "Justfile", ".justfile" },
