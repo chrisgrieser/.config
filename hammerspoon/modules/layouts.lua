@@ -59,7 +59,7 @@ end
 -- LAYOUTS
 
 local function workLayout()
-	darkmode.autoSwitch()
+	darkmode.autoSwitch() 
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
 	visuals.updateHoleCover()
