@@ -19,10 +19,10 @@ function run() {
 	// https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	const historyFile = app.pathTo("home folder") + "/Library/Application Support/Alfred/history.json";
 	const navHistory = JSON.parse(readFile(historyFile)).preferences.workflows;
-	const currentWorkflowId = navHistory[0];
+	const currentWorkflowUid = navHistory[0];
 
 	const prefLocation = $.getenv("alfred_preferences");
-	const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowId}`;
+	const workflowFolderPath = `${prefLocation}/workflows/${currentWorkflowUid}`;
 
 	return workflowFolderPath;
 }

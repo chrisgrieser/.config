@@ -9,6 +9,9 @@ app.includeStandardAdditions = true;
 function run(argv) {
 	const workflowPath = argv[0].trim();
 	const workflowUid = workflowPath.split("/").pop();
+	const bundleId = app.doShellScript(
+		`plutil -extract "bundleid" raw -o - "${workflowPath}/info.plist"`,
+	);
 
 	// GUARD
 	if (!workflowUid) return "⚠️ Error reloading workflow: " + workflowPath;
@@ -16,10 +19,7 @@ function run(argv) {
 		return '⚠️ "Alfred Workflow Devtools" cannot reload itself.';
 	}
 
-	// delete cache
-	const bundleId = app.doShellScript(
-		`plutil -extract "bundleid" raw -o - "${workflowPath}/info.plist"`,
-	);
+	// delete cache content
 	const cacheFolder =
 		app.pathTo("home folder") +
 		"/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/" +
@@ -29,6 +29,6 @@ function run(argv) {
 	// reload
 	Application("com.runningwithcrayons.Alfred").reloadWorkflow(workflowUid);
 
-	// alfred notification
+	// return for alfred notification
 	return bundleId + ": reloaded & deleted cache.";
 }

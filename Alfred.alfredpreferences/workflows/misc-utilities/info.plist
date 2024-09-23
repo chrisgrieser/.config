@@ -125,19 +125,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>80E25EAA-9532-4E99-B243-93EFEE6C3774</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DDA83EED-599F-404A-AE96-23C03A8F40AE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>92F2951A-71DC-46A7-BE1F-38E119AD1B8E</key>
 		<array>
 			<dict>
@@ -306,19 +293,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E0DF7030-2943-416D-BF96-8594A9D6B8D1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1200,77 +1174,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
-				<string>~/Library</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>4052B872-BCA5-4596-BE0A-8751D4F562C8</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>library</string>
-				<key>subtext</key>
-				<string>~/Library/</string>
-				<key>text</key>
-				<string>Library</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>E0DF7030-2943-416D-BF96-8594A9D6B8D1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>2</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>D</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.apple.finder</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>80E25EAA-9532-4E99-B243-93EFEE6C3774</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<true/>
 				<key>acceptsmulti</key>
@@ -1332,23 +1235,6 @@
 			<string>CAD36352-9BBE-468E-99D0-92F54C42BC6C</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>jumpto</key>
-				<string>alfred.action.copy</string>
-				<key>path</key>
-				<string></string>
-				<key>type</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.actioninalfred</string>
-			<key>uid</key>
-			<string>DDA83EED-599F-404A-AE96-23C03A8F40AE</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1518,16 +1404,7 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>895</real>
-		</dict>
-		<key>4052B872-BCA5-4596-BE0A-8751D4F562C8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>575</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>895</real>
 		</dict>
@@ -1583,9 +1460,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>350</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1040</real>
 		</dict>
 		<key>7F470F6C-F1DD-4F6C-A598-CA405EA0B456</key>
 		<dict>
@@ -1597,17 +1474,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>475</real>
-		</dict>
-		<key>80E25EAA-9532-4E99-B243-93EFEE6C3774</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>Copy to…</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>1030</real>
 		</dict>
 		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
 		<dict>
@@ -1766,9 +1632,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>575</real>
+			<real>185</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1040</real>
 		</dict>
 		<key>D147A1E2-300F-4140-B002-32CA3D79111F</key>
 		<dict>
@@ -1786,9 +1652,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>400</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1040</real>
 		</dict>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<dict>
@@ -1816,24 +1682,6 @@
 			<real>195</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>DDA83EED-599F-404A-AE96-23C03A8F40AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>205</real>
-			<key>ypos</key>
-			<real>1030</real>
-		</dict>
-		<key>E0DF7030-2943-416D-BF96-8594A9D6B8D1</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>400</real>
-			<key>ypos</key>
-			<real>895</real>
 		</dict>
 		<key>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</key>
 		<dict>
