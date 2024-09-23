@@ -14,13 +14,6 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
     manipulators:
-      # export
-      - type: basic
-        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
-        to:
-          - { key_code: s, modifiers: [command, shift] }
-        conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Excel$] }
       # export as PDF
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command, shift] } }
