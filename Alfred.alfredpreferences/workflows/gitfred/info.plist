@@ -2036,7 +2036,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 				<string>fork when cloning via hotkey</string>
 			</dict>
 			<key>description</key>
-			<string>Create a fork and setup upstream/origin for a PR. Requires the `gh` cli.</string>
+			<string>Forking requires the `gh` cli.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2107,7 +2107,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.0</string>
+	<string>1.4.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -1043,7 +1043,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>420</real>
 		</dict>
 		<key>2599F7AA-72EF-4424-B3C9-BD7526BE79EE</key>
 		<dict>
@@ -1059,20 +1059,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>955</real>
 		</dict>
 		<key>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>655</real>
 		</dict>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
 		<dict>
@@ -1088,11 +1088,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>43143E26-0CD1-43FB-B13D-74E8AB0411EF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>845</real>
 		</dict>
 		<key>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</key>
 		<dict>
@@ -1101,7 +1101,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>550</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
@@ -1110,16 +1110,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>550</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>655</real>
+			<real>625</real>
 		</dict>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<dict>
@@ -1130,25 +1130,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>550</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>735</real>
 		</dict>
 		<key>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>705</real>
+			<real>675</real>
 		</dict>
 		<key>7B265954-3202-4ECE-A9CC-FE23D2ADB407</key>
 		<dict>
@@ -1159,7 +1159,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>550</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
@@ -1173,11 +1173,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>840</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
@@ -1193,20 +1193,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>Workflow: Alfred Prefs → Finder</string>
+			<string>Alfred Prefs → Finder</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>420</real>
 		</dict>
 		<key>AD4DAB43-9C3C-4491-8512-21EA61650C8F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>910</real>
+			<real>880</real>
 		</dict>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
 		<dict>
@@ -1224,7 +1224,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>Workflow: Finder → Alfred Prefs</string>
+			<string>Finder → Alfred Prefs</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1239,7 +1239,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>450</real>
 		</dict>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
 		<dict>
@@ -1253,11 +1253,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>2</integer>
+			<integer>4</integer>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>1130</real>
+			<real>1065</real>
 		</dict>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<dict>
@@ -1266,7 +1266,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>435</real>
+			<real>420</real>
 		</dict>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
 		<dict>
