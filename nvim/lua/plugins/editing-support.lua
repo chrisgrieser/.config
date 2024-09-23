@@ -257,12 +257,6 @@ return {
 					find = "if .- then .- end",
 					delete = "(if .- then )().-( end)()",
 				},
-				[textObjMaps.wikilink] = {
-					find = "%[%[.-%]%]",
-					add = { "[[", "]]" },
-					delete = "(%[%[)().-(%]%])()",
-					change = { target = "(%[%[)().-(%]%])()" },
-				},
 				["/"] = { -- regex
 					find = "/.-/",
 					add = { "/", "/" },
