@@ -50,7 +50,7 @@ rules:
                 end tell'
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
-      # Toggle Sidebar MS Word
+      # Toggle Sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
@@ -62,6 +62,17 @@ rules:
                 end tell'
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+      # cmd+l = Show in Finder
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to:
+          # 1% assuming hidden menubar, otherwise 3-4%
+          - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
+          - pointing_button: button2
+          - key_code: down_arrow
+          - key_code: return_or_enter
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
@@ -71,7 +82,7 @@ rules:
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+shift+d -> goto Downloads
+      # cmd+shift+d -> goto [D]ownloads
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
@@ -94,7 +105,7 @@ rules:
                   set target of front Finder window to dotfiles
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+shift+v -> goto vaults
+      # cmd+shift+v -> goto [V]aults
       - type: basic
         from: { key_code: v, modifiers: { mandatory: [command, shift] } }
         to:
@@ -115,39 +126,8 @@ rules:
           # 1% assuming hidden menubar, otherwise 3-4%
           - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
           - pointing_button: button2
-          - software_function: { set_mouse_cursor_position: { x: 10%, y: 1%, screen: 0 } } # prevent hover selection
-          - key_code: down_arrow # assuming hidden menubar, otherwise only 1x arrow down
           - key_code: down_arrow
           - key_code: return_or_enter
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
-      # Back & Forward
-      - type: basic
-        from: { key_code: h, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                  tell process "Highlights"
-                    set frontmost to true
-                    click menu item "Back" of menu "Go" of menu bar 1
-                  end tell
-                end tell'
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events"
-                  tell process "Highlights"
-                    set frontmost to true
-                    click menu item "Forward" of menu "Go" of menu bar 1
-                  end tell
-                end tell'
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -165,18 +145,6 @@ rules:
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, option] }
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
-      # Image Tool
-      - type: basic
-        from: { key_code: i, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: i, modifiers: [command, control] }
-          - { key_code: "7", modifiers: [command, control] } # purple borders
-          - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Image 🖼️"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
