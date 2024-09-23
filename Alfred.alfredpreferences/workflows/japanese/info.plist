@@ -672,7 +672,7 @@
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>varkeyword_with_space</string>
+			<string>keyword_with_space</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -693,7 +693,7 @@
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>keyword2</string>
+			<string>keyword_without_space</string>
 		</dict>
 		<dict>
 			<key>config</key>

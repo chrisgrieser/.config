@@ -141,8 +141,8 @@ keymap("n", "[", [[bi[<Esc>ea]<Esc>]], { desc = "󰅪 surround cword", nowait = 
 keymap("n", "{", [[bi{<Esc>ea}<Esc>]], { desc = " surround cword" })
 keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline Code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code selection" })
-
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
+
 keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template String" })
 
 --------------------------------------------------------------------------------
@@ -226,20 +226,20 @@ keymap("n", "i", function()
 end, { desc = "correctly indented i", expr = true })
 
 -- VISUAL MODE
-keymap("x", "V", "j", { desc = "repeated V selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "`vv` starts Visual Block" })
+keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
+keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 
 -- TERMINAL MODE
 -- (also relevant for REPLs such as iron.nvim)
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (Terminal Mode)" })
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (terminal mode)" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (terminal mode)" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
-keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next Window" })
-keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical Split" })
-keymap({ "n", "x" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal Split" })
+keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next window" })
+keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
+keymap({ "n", "x" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal split" })
 
 local delta = 5
 keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
