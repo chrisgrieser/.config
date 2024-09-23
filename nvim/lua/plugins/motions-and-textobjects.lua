@@ -10,7 +10,7 @@ return {
 		},
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		init = function()
-			vim.g.matchup_matchparen_offscreen = {} -- disable
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 			vim.g.matchup_matchparen_deferred = 1 --improves performance a bit
 		end,
 	},
@@ -126,8 +126,6 @@ return {
 			{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "󰅪 outer anyBracket" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer anyQuote" },
-			{ "i" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = { "x", "o" }, desc = " inner wikilink" },
-			{ "a" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = { "x", "o" }, desc = " outer wikilink" },
 
 			-- INFO not setting in visual mode, to keep visual block mode replace
 			{ "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", mode = "o", desc = "¶ rest of paragraph" },

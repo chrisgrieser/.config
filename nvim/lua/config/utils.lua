@@ -4,7 +4,6 @@ local M = {}
 M.extraTextobjMaps = {
 	func = "f",
 	call = "l",
-	wikilink = "R",
 	condition = "o",
 }
 
