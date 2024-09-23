@@ -11,7 +11,7 @@ function addYamlKey(key, value) {
 	view.app.fileManager.processFrontMatter(currentFile, (fm) => {
 		fm[key] = value;
 	});
-	new Notice(`Set property "${key}" to "${value}"`);
+	new Notice(`Set property "${key}" to "${value}".`);
 }
 
 function toggleLineNumbers() {
