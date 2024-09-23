@@ -151,6 +151,7 @@ function gotoHeading(which) {
 function headingIncrementor(dir) {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
+	const cleanCurLine = curLine.replace(/^- |\*\*|__/g, "")
 
 	let updated = curLine.replace(/^#* /, (match) => {
 		if (dir === -1 && match !== "# ") return match.slice(1);

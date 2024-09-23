@@ -7,9 +7,10 @@ local visuals = require("modules.visuals")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
+-- * System
 -- * Neovim
--- * Highlights PDF appearance
 -- * Sketchybar
+-- * Highlights PDF appearance
 -- * Hammerspoon Console
 ---@param toMode "dark"|"light"|"toggle"
 function M.setDarkMode(toMode)
@@ -42,7 +43,7 @@ function M.setDarkMode(toMode)
 end
 
 -- MANUAL TOGGLING OF DARK MODE
--- `del` key on Keychron Keyboard
+-- `del` -> `f13` (Keychrone Keyboard) via Karabiner
 hs.hotkey.bind({}, "f13", function() M.setDarkMode("toggle") end)
 
 --------------------------------------------------------------------------------
@@ -52,13 +53,13 @@ hs.hotkey.bind({}, "f13", function() M.setDarkMode("toggle") end)
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
 	if env.isProjector() then return end
-	local brightness = hs.brightness.ambient()
-	local hasBrightnessSensor = brightness > -1
+	local ambient = hs.brightness.ambient()
+	local hasBrightnessSensor = ambient > -1
 	local targetMode
-	local brightnessThreshold = 90
+	local brightnessThreshold = 85
 
 	if hasBrightnessSensor then
-		targetMode = brightness > brightnessThreshold and "light" or "dark"
+		targetMode = ambient > brightnessThreshold and "light" or "dark"
 	else
 		targetMode = u.betweenTime(7, 20) and "light" or "dark"
 	end
