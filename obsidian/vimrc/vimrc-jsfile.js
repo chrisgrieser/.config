@@ -119,8 +119,7 @@ function openDynamicHighlightsSettings() {
 /** @param {"next"|"prev"} which */
 function gotoHeading(which) {
 	// ignoring H1, since they could also be comments in code blocks, and are not
-	// used more than once in Markdown documents anyway (meaning you can use just
-	// `gg` to get to them if needed).
+	// only used at the top of the document, where you can get to via `gg ` 
 	const headingPattern = /(^##+ .*)/;
 
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
@@ -151,14 +150,14 @@ function gotoHeading(which) {
 function headingIncrementor(dir) {
 	const { line: lnum, ch: col } = editor.getCursor();
 	const curLine = editor.getLine(lnum);
-	const cleanCurLine = curLine.replace(/^- |\*\*|__/g, "")
+	const cleanLine = curLine.replace(/^- |\*\*|__/g, ""); // remove other md formatting
 
-	let updated = curLine.replace(/^#* /, (match) => {
+	let updated = cleanLine.replace(/^#* /, (match) => {
 		if (dir === -1 && match !== "# ") return match.slice(1);
 		if (dir === 1 && match !== "###### ") return "#" + match;
 		return "";
 	});
-	if (updated === curLine) updated = (dir === 1 ? "## " : "###### ") + curLine;
+	if (updated === cleanLine) updated = (dir === 1 ? "## " : "###### ") + cleanLine;
 
 	editor.setLine(lnum, updated);
 	const diff = updated.length - curLine.length;

@@ -121,8 +121,8 @@ exmap quickSwitcher obcommand obsidian-another-quick-switcher:search-command_mai
 noremap go :quickSwitcher<CR>
 noremap gr :quickSwitcher<CR>
 
-exmap propertySearch obcommand obsidian-another-quick-switcher:search-command_property-search
-noremap gp :propertySearch<CR>
+exmap altSearch obcommand obsidian-another-quick-switcher:search-command_alt-search
+noremap gO :altSearch<CR>
 
 " :bnext/bprev
 exmap goBack obcommand app:go-back
