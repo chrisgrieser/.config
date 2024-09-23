@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "9/23/2024, 10:27:08 AM",
-	"time": 1727080028837,
+	"@time": "9/23/2024, 4:36:18 PM",
+	"time": 1727102178948,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
@@ -31,8 +31,8 @@
 			"pattern": ":https://mail.google.com/"
 		},
 		{
-			"passKeys": "j k o ",
-			"pattern": ":https://google.com/"
+			"passKeys": "c j k ",
+			"pattern": ":https://www.google.com/"
 		},
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
@@ -43,8 +43,8 @@
 			"pattern": ":https://devdocs.io/"
 		},
 		{
-			"passKeys": "j k o ",
-			"pattern": ":https://www.google.com/"
+			"passKeys": "1 ? a g ",
+			"pattern": ":https://www.inoreader.com/"
 		}
 	],
 	"extAllowList": [
@@ -70,13 +70,14 @@
 	"keyMappings": [
 		"#!no-check",
 		"\" combine commands: \" https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
-		"\" Google excludes \"o\" for Grepper",
 		"\" Info on Vimium-C mapping Syntax: https://github.com/gdh1995/vimium-c/issues/873",
+		"\" Google excludes `c` (cycle/copy) for Grepper https://www.grepper.com/documentation.php#using_keyboard_shortcuts",
 		"\"------------------------------------------------------",
 		"",
 		"unmapAll",
 		"",
 		"\" Modes",
+		"map <esc> blank",
 		"map i passNextKey",
 		"map I enterInsertMode",
 		"map gi focusInput select=\"end\"",
