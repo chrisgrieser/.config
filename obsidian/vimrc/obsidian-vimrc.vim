@@ -7,6 +7,17 @@
 unmap ,
 
 "───────────────────────────────────────────────────────────────────────────────
+" META
+
+" Open this vimrc
+exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
+nnoremap g, :openThisVimrc<CR>
+
+" copy command ids to devtools
+exmap openDevTools jscommand { electronWindow.openDevTools() }
+nnoremap ? :obcommand<CR>:openDevTools<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
 " CLIPBOARD
 
 " yank to system clipboard
@@ -346,10 +357,6 @@ nnoremap ,ph :openDynamicHighlightsSettings<CR>
 " Cycle Colorscheme
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
 nnoremap ,pc :cycleColorscheme<CR>
-
-" Open Plugin Settings (uses personal plugin)
-exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
-nnoremap g, :openThisVimrc<CR>
 
 " Workspace
 exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
