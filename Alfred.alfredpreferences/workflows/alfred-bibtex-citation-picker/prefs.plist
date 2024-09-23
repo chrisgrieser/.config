@@ -17,6 +17,6 @@
 	<key>open_entries_in</key>
 	<string>default app for .bib files</string>
 	<key>pdf_folder</key>
-	<string>~/Library/Mobile Documents/com~apple~CloudDocs/PDFs</string>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs</string>
 </dict>
 </plist>

@@ -12,7 +12,8 @@
 				"noConsole": {
 					"level": "info",
 					"options": { "allow": ["assert", "error", "info", "warn"] } // disallow only `.log`
-				}
+				},
+				"noConsoleLog": "off"
 			},
 			"performance": {
 				"useTopLevelRegex": "off" // often not useful
