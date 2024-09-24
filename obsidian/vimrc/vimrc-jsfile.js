@@ -130,22 +130,24 @@ function gotoLineWithPattern(dir, pattern) {
 	const linesBelow = allLines.slice(currentLnum + 1);
 	const linesAbove = allLines.slice(0, currentLnum);
 
-	let headingLnum = linesBelow.findIndex((line) => line.match(pattern));
-	if (headingLnum > -1) headingLnum += currentLnum + 1; // account for previous slicing
+	let lnumWithPattern = linesBelow.findIndex((line) => line.match(pattern));
+	if (lnumWithPattern > -1) lnumWithPattern += currentLnum + 1; // account for previous slicing
 
-	// wrap around if next heading not found
-	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(pattern));
+	// wrap around if not found
+	if (lnumWithPattern === -1)
+		lnumWithPattern = linesAbove.findIndex((line) => line.match(pattern));
 
-	if (headingLnum === -1) {
-		new Notice(`No line found with pattern ${pattern}.`);
+	if (lnumWithPattern === -1) {
+		new Notice(`No line found with pattern ${pattern}`);
 	} else {
-		if (dir === "prev") headingLnum = reverseLnum(headingLnum);
-		editor.setCursor(headingLnum, 0);
+		if (dir === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
+		editor.setCursor(lnumWithPattern, 0);
 	}
 }
 
 function gotoLastLinkInFile() {
-	const lastOccurrence = editor.getValue().lastIndexOf("[[");
+	const pattern = "[[";
+	const lastOccurrence = editor.getValue().lastIndexOf(pattern);
 	editor.setCursor(editor.offsetToPos(lastOccurrence));
 }
 
