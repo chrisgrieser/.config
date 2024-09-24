@@ -13,6 +13,9 @@ return {
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
+			silent = true,
+			show_label = false, -- signcolumn label for number of suggestions
+
 			filetypes = {
 				DressingInput = false,
 				TelescopePrompt = false,
@@ -22,8 +25,12 @@ return {
 				-- also this is the filetype of critical files
 				text = false,
 			},
-			silent = true,
-			show_label = false, -- signcolumn label for number of suggestions
+			filter = function(bufnr)
+				local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
+				local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+				local ignoreBuffer = parent:find("private dotfiles") or name:lower():find("recovery")
+				return not ignoreBuffer -- `false` -> disable in that buffer
+			end,
 		},
 		config = function(_, opts)
 			require("neocodeium").setup(opts)
@@ -32,28 +39,16 @@ return {
 			vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 
-			-- extra safeguard: disable in various private folder
-			local function disableInPrivatBuffer(ctx)
-				local filepath = ctx and ctx.file or vim.api.nvim_buf_get_name(0)
-				local parent = vim.fs.dirname(filepath)
-				local name = vim.fs.basename(filepath)
-				if parent:find("private dotfiles") or name:lower():find("recovery") then
-					vim.cmd.NeoCodeium("disable_buffer")
-				end
-			end
-			disableInPrivatBuffer() -- current buffer
-			vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = disableInPrivatBuffer })
-
 			-- lualine indicator
 			vim.g.lualine_add("sections", "lualine_x", function()
 				-- number meanings: https://github.com/monkoose/neocodeium?tab=readme-ov-file#-statusline
 				if vim.bo.buftype ~= "" then return "" end
 				local status, server = require("neocodeium").get_status()
 				if status == 0 and server == 0 then return "" end -- working correctly = no component
-				if status == 1 then return "󱚧 global" end
-				if status < 5 then return "󱚧 buffer" end
-				if server == 2 then return "󱚧 server" end
 				if server == 1 then return "󱙺 connecting…" end
+				if status == 1 then return "󱚧 global" end
+				if server == 2 then return "󱚧 server" end
+				if status < 5 then return "󱚧 buffer" end
 				return "󱚟 Error"
 			end)
 		end,
