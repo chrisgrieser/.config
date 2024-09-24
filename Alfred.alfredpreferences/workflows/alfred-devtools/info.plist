@@ -1216,7 +1216,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>1100</real>
+			<real>1115</real>
 		</dict>
 		<key>2DE7938A-7955-4578-AEA2-D3F7E3CA3C21</key>
 		<dict>
@@ -1225,7 +1225,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>815</real>
 		</dict>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
 		<dict>
@@ -1245,7 +1245,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>990</real>
+			<real>1005</real>
 		</dict>
 		<key>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</key>
 		<dict>
@@ -1254,7 +1254,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>765</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>710</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
@@ -1263,7 +1263,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>710</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
@@ -1272,7 +1272,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>785</real>
 		</dict>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<dict>
@@ -1283,7 +1283,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>710</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
@@ -1292,7 +1292,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>895</real>
 		</dict>
 		<key>76D33A90-C184-4A3E-B409-1496DF0C1008</key>
 		<dict>
@@ -1310,7 +1310,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>820</real>
+			<real>835</real>
 		</dict>
 		<key>7B265954-3202-4ECE-A9CC-FE23D2ADB407</key>
 		<dict>
@@ -1321,7 +1321,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>710</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
@@ -1337,7 +1337,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>show unused files for current workflow</string>
+			<string>show files of current workflow unused in its info.plist</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1370,7 +1370,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>190</real>
 			<key>ypos</key>
-			<real>985</real>
+			<real>1000</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
@@ -1399,7 +1399,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>1040</real>
 		</dict>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
 		<dict>
@@ -1450,7 +1450,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>1210</real>
+			<real>1225</real>
 		</dict>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<dict>

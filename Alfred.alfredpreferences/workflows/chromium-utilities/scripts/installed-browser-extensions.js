@@ -31,11 +31,11 @@ const specialAnchors = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const browser = $.getenv("browser");
-	const browserVars = JSON.parse(readFile("./data/browser-vars.json"));
+	const browserVars = JSON.parse(readFile("./scripts/browser-vars.json"));
 	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, app.pathTo("home folder"));
 
 	// SETTINGS
-	const settings = JSON.parse(readFile("./data/all-chromium-browser-settings.json"));
+	const settings = JSON.parse(readFile("./scripts/all-chromium-browser-settings.json"));
 	settings.push(...browserVars.settingsPages[browser]);
 	const iconPath = browserVars.appIcon[browser];
 	const uri = browserVars.uri[browser];
