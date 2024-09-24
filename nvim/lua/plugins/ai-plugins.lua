@@ -23,7 +23,7 @@ return {
 				text = false,
 			},
 			silent = true,
-			show_label = true, -- signcolumn label for number of suggestions
+			show_label = false, -- signcolumn label for number of suggestions
 		},
 		config = function(_, opts)
 			require("neocodeium").setup(opts)

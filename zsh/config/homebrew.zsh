@@ -23,7 +23,7 @@ alias depending_on='brew uses --installed --recursive'
 
 # $1: count of formulae/casks to list, default 6
 function recent_updates() {
-	local count=${1:-6}
+	local count=${1:-10}
 	_print-section "Recently updated Formulae"
 	brew list -t --formulae | head -n"$count" | rs
 
@@ -89,5 +89,6 @@ function listall() {
 	_print-section "Mac App Store"
 	mas list
 
-	brew bundle dump --force && print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
+	brew bundle dump --force &> /dev/null && 
+		print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
 }
