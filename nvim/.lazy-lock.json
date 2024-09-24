@@ -41,7 +41,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "refactoring.nvim": { "branch": "master", "commit": "c406fc5fb4d7ba5fce7b668637075fad6e75e9f8" },
-  "render-markdown.nvim": { "branch": "main", "commit": "0986638b381a4b01eb108bb946f3a67a9eb3d0ec" },
+  "render-markdown.nvim": { "branch": "main", "commit": "b456d5375b01a3902b37ea341994ac1e72e94513" },
   "satellite.nvim": { "branch": "main", "commit": "dfc2b220f4969ebc49b0f2a94ab6faae240705bd" },
   "scrollEOF.nvim": { "branch": "master", "commit": "38fd5880021e90c15dc61fa325f714bd8077f0a6" },
   "sibling-swap.nvim": { "branch": "main", "commit": "269770df52114ed6f22321310538b4daf8973384" },

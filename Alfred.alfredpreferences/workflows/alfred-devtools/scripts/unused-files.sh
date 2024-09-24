@@ -7,7 +7,7 @@ current_workflow_path="$(echo "$*" | tr -d '\n')"
 cd "$current_workflow_path" || return 1
 files=$(find . -type f \
 	-not -name "*.png" -not -name "*.plist" -not -name "*.d.ts" -not -name "*.md" \
-	-not -path "./.git*" -not -name ".*" -not -name "LICENSE" -not -iname "notificator" |
+	-not -path "./.git*" -not -name ".*" -not -iname "notificator" |
 	cut -c3-)
 
 # CHECK IF USED IN `info.plist`
@@ -18,7 +18,7 @@ echo "$files" | while read -r file; do
 done
 info=$([[ -z "$notfound" ]] &&
 	echo "✅ No unused files found for this workflow." ||
-	echo "⚠️ Files unused in this workflow's \`info.plist\`:")
+	echo "⚠️ Files not referenced in this workflow's \`info.plist\`:")
 
 # DISPLAY IN ALFRED
 echo "### $(basename "$current_workflow_path")"
