@@ -93,9 +93,9 @@ exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestio
 noremap ga :acceptSuggestion<CR>
 
 " next/prev heading
-exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("next") }
+exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next") }
 nnoremap <C-j> :gotoNextHeading<CR>
-exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoHeading("prev") }
+exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev") }
 nnoremap <C-k> :gotoPrevHeading<CR>
 
 " [m]atch parenthesis, useful to go to next pandoc citations
@@ -120,9 +120,17 @@ nnoremap gf :gotoFootnote<CR>
 " go to last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
 
+"───────────────────────────────────────────────────────────────────────────────
+
 " go to last link in file
 exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
 nnoremap g. :gotoLastLinkInFile<CR>
+
+" go to next/prev paragraph with link in file
+exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/) }
+nnoremap gj :gotoNextLinkInFile<CR>
+exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
+nnoremap gk :gotoPrevLinkInFile<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION

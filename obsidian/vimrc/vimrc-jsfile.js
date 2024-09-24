@@ -116,33 +116,37 @@ function openDynamicHighlightsSettings() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {"next"|"prev"} which */
-function gotoHeading(which) {
-	// ignoring H1, since they could also be comments in code blocks, and are not
-	// only used at the top of the document, where you can get to via `gg `
-	const headingPattern = /(^##+ .*)/;
-
+/**
+ * @param {"next"|"prev"} dir
+ * @param {RegExp} pattern
+ */
+function gotoLineWithPattern(dir, pattern) {
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
 	let currentLnum = editor.getCursor().line;
-	if (which === "prev") currentLnum = reverseLnum(currentLnum);
+	if (dir === "prev") currentLnum = reverseLnum(currentLnum);
 	const allLines = editor.getValue().split("\n");
-	if (which === "prev") allLines.reverse();
+	if (dir === "prev") allLines.reverse();
 	const linesBelow = allLines.slice(currentLnum + 1);
 	const linesAbove = allLines.slice(0, currentLnum);
 
-	let headingLnum = linesBelow.findIndex((line) => line.match(headingPattern));
+	let headingLnum = linesBelow.findIndex((line) => line.match(pattern));
 	if (headingLnum > -1) headingLnum += currentLnum + 1; // account for previous slicing
 
 	// wrap around if next heading not found
-	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(headingPattern));
+	if (headingLnum === -1) headingLnum = linesAbove.findIndex((line) => line.match(pattern));
 
 	if (headingLnum === -1) {
-		new Notice("No heading found.");
+		new Notice(`No line found with pattern ${pattern}.`);
 	} else {
-		if (which === "prev") headingLnum = reverseLnum(headingLnum);
+		if (dir === "prev") headingLnum = reverseLnum(headingLnum);
 		editor.setCursor(headingLnum, 0);
 	}
+}
+
+function gotoLastLinkInFile() {
+	const lastOccurrence = editor.getValue().lastIndexOf("[[");
+	editor.setCursor(editor.offsetToPos(lastOccurrence));
 }
 
 /** h1 -> h2, h2 -> h3, etc. */
@@ -343,11 +347,6 @@ function highlightsAndStrikthrus(action) {
 			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
 			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
 	editor.setLine(lnum, updatedLine);
-}
-
-function gotoLastLinkInFile() {
-	const lastOccurrence = editor.getValue().lastIndexOf("[[");
-	editor.setCursor(editor.offsetToPos(lastOccurrence));
 }
 
 /** @param {"load"|"save"} mode @param {string} workspaceName */
