@@ -45,7 +45,7 @@ function run() {
 		page.icon = { path: iconPath };
 		page.mods = {
 			cmd: { valid: false, subtitle: "" }, // disable opening in Chrome Webstore
-			shift: { valid: false, subtitle: "" }, // disable open file
+			shift: { valid: false, subtitle: "" }, // disable open local folder
 		};
 	}
 

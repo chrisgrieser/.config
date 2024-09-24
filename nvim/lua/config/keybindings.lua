@@ -264,10 +264,10 @@ if not vim.env.NO_PLUGINS then
 	)
 end
 
--- restore the default behavior of `<CR>`, which is overridden by my mapping
+-- restore default behavior of `<CR>`, which is overridden by my mapping above
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
-	callback = function() vim.keymap.set("n", "<CR>", "<CR>", { buffer = true }) end,
+	callback = function() bkeymap("n", "<CR>", "<CR>") end,
 })
 
 keymap(
