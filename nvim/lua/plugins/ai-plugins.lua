@@ -10,7 +10,6 @@
 return {
 	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 		"monkoose/neocodeium",
-
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
 		opts = {
@@ -18,7 +17,6 @@ return {
 				DressingInput = false,
 				TelescopePrompt = false,
 				noice = false, -- sometimes triggered in error-buffers
-				["rip-substitute"] = false,
 
 				-- extra safeguard: `pass` passwords editing filetype is plaintext,
 				-- also this is the filetype of critical files
