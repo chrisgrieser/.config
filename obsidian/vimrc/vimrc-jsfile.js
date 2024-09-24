@@ -119,7 +119,7 @@ function openDynamicHighlightsSettings() {
 /** @param {"next"|"prev"} which */
 function gotoHeading(which) {
 	// ignoring H1, since they could also be comments in code blocks, and are not
-	// only used at the top of the document, where you can get to via `gg ` 
+	// only used at the top of the document, where you can get to via `gg `
 	const headingPattern = /(^##+ .*)/;
 
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
