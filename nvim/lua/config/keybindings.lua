@@ -223,7 +223,7 @@ keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("n", "i", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
-end, { desc = "correctly indented i", expr = true })
+end, { desc = "indented i on empty line", expr = true })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
@@ -262,13 +262,12 @@ if not vim.env.NO_PLUGINS then
 		function() require("funcs.alt-alt").gotoAltBuffer() end,
 		{ desc = "󰽙 Alt Buffer" }
 	)
+	-- restore default behavior of `<CR>`, which is overridden by my mapping above
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "qf",
+		callback = function() bkeymap("n", "<CR>", "<CR>") end,
+	})
 end
-
--- restore default behavior of `<CR>`, which is overridden by my mapping above
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	callback = function() bkeymap("n", "<CR>", "<CR>") end,
-})
 
 keymap(
 	{ "n", "x" },

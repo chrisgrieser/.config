@@ -28,6 +28,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 --------------------------------------------------------------------------------
 
+-- pause inlay hints in insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
 })
