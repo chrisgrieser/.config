@@ -8,7 +8,7 @@ app.includeStandardAdditions = true;
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const shellCmd =
-		"echo $PATH | tr ':' '\n' | xargs -I {} find {} -mindepth 1 -maxdepth 1 -type f -or -type l -perm '++x'";
+		"echo $PATH | tr ':' '\n' | sed 's|/$||' | sort --unique | \ xargs -I {} find {} -mindepth 1 -maxdepth 1 -type f -or -type l -perm '++x'";
 
 	const binariesInPATH = app
 		.doShellScript(shellCmd)
