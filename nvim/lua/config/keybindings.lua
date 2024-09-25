@@ -10,13 +10,15 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
+-- work on wrapped lines
+keymap({ "n", "x" }, "j", "gj")
+keymap({ "n", "x" }, "k", "gk")
+
 -- HJKL behaves like hjkl, but bigger distance
 -- (not mapping in op-pending, since using custom textobjects for each of LjkJK)
 keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
 keymap("o", "H", "^")
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
-keymap({ "n", "x" }, "j", "gj") -- gj to work with wrapped lines as well
-keymap({ "n", "x" }, "k", "gk")
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
@@ -32,40 +34,6 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
-
---------------------------------------------------------------------------------
--- QUICKFIX
-
-keymap("n", "gq", function()
-	local ok = pcall(vim.cmd.cnext)
-	if not ok then vim.cmd.cfirst() end
-end, { desc = " Next quickfix" })
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
-
-keymap("n", "<leader>q", function()
-	local windows = vim.fn.getwininfo()
-	for _, win in pairs(windows) do
-		if win["quickfix"] == 1 then
-			vim.cmd.cclose()
-			return
-		end
-	end
-	vim.cmd.copen()
-end, { desc = " Toggle quickfix" })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		bkeymap("n", "dd", function()
-			local qfItems = vim.fn.getqflist()
-			local lnum = vim.api.nvim_win_get_cursor(0)[1]
-			table.remove(qfItems, lnum)
-			vim.fn.setqflist(qfItems, "r")
-			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-		end, { desc = " Remove quickfix entry" })
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -294,6 +262,40 @@ keymap({ "n", "x", "i" }, "<D-N>", function()
 end, { desc = " Create Scratchpad File" })
 
 --------------------------------------------------------------------------------
+-- QUICKFIX
+
+keymap("n", "gq", function()
+	local ok = pcall(vim.cmd.cnext)
+	if not ok then vim.cmd.cfirst() end
+end, { desc = " Next quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
+keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
+
+keymap("n", "<leader>q", function()
+	local windows = vim.fn.getwininfo()
+	for _, win in pairs(windows) do
+		if win["quickfix"] == 1 then
+			vim.cmd.cclose()
+			return
+		end
+	end
+	vim.cmd.copen()
+end, { desc = " Toggle quickfix" })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		bkeymap("n", "dd", function()
+			local qfItems = vim.fn.getqflist()
+			local lnum = vim.api.nvim_win_get_cursor(0)[1]
+			table.remove(qfItems, lnum)
+			vim.fn.setqflist(qfItems, "r")
+			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
+		end, { desc = " Remove quickfix entry" })
+	end,
+})
+
+--------------------------------------------------------------------------------
 
 -- MAC-SPECIFIC FUNCTIONS
 keymap(
@@ -378,7 +380,7 @@ keymap("i", "<D-v>", function()
 	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
-keymap("n", "<D-v>", "p", { desc = " Paste" }) -- compatibility with macOS clipboard managers
+keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macOS clipboard managers
 
 --------------------------------------------------------------------------------
 -- QUITTING
