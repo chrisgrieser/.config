@@ -78,9 +78,7 @@ function s {
 	)
 	[[ -z "$selected" ]] && return 0
 	file=$(echo "$selected" | cut -d: -f1)
-	echo "🖨️ file: $file" >&2
 	line=$(echo "$selected" | cut -d: -f2)
-	echo "🖨️ line: $line" >&2
 
 	# not opening via `neovide` cli, PENDING https://github.com/neovide/neovide/issues/1586
 	open "$file"
