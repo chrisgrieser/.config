@@ -2,16 +2,11 @@
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   # PROFILES
-  - trigger: "!web"
-    replace: https://chris-grieser.de/
-  - trigger: "!masto"
-    replace: https://pkm.social/@pseudometa
-  - triggers: ["!blog", "!vim"]
-    replace: https://nanotipsforvim.prose.sh
-  - trigger: "!paypal"
-    replace: https://www.paypal.me/ChrisGrieser
-  - trigger: "!name"
-    replace: Christopher Grieser
+  - { trigger: "!web", replace: https://chris-grieser.de/ }
+  - { trigger: "!masto", replace: https://pkm.social/@pseudometa }
+  - { triggers: ["!blog" , "!vim"], replace: https://nanotipsforvim.prose.sh }
+  - { trigger: "!name", replace: Christopher Grieser }
+  - { trigger: "!paypal", replace: https://www.paypal.com/paypalme/ChrisGrieser }
   #───────────────────────────────────────────────────────────────────────────
   # DATES
   - trigger: "!iso"
@@ -34,7 +29,6 @@ matches:
         type: date
         params: { format: "%d. %b. %Y" }
   #─────────────────────────────────────────────────────────────────────────────
-  # VERSION NUMBERS
   - trigger: "!version"
     replace: "macOS {{version}} ({{architecture}})"
     vars:
@@ -44,13 +38,6 @@ matches:
       - name: architecture
         type: shell
         params: { cmd: uname -p }
-  - trigger: "!nversion"
-    replace: "{{neovimVersion}}"
-    vars:
-      - name: neovimVersion
-        type: shell
-        params:
-          cmd: export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!github"
     replace: >
