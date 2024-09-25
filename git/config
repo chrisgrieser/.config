@@ -52,7 +52,6 @@
 
 [advice]
 	detachedHead = false
-	addEmptyPathspec = false
 [help]
 	autoCorrect = prompt ; prompt whether to run auto-correction
 
@@ -63,10 +62,10 @@
 	stat = true
 [diff]
 	colorMoved = true ; moved lines colored different than added/removed
-   ; colorMovedWS = ignore-all-space
+   colorMovedWS = ignore-all-space
 	algorithm = histogram ; https://luppeng.wordpress.com/2020/10/10/when-to-use-each-of-the-git-diff-algorithms/
 [merge]
-	conflictStyle = zdiff3 ; shows original version in middle ; https://ductile.systems/zdiff3/
+	conflictStyle = zdiff3 ; shows original version in middle ; https://www.ductile.systems/zdiff3/
 [rerere]
 	enabled = true # repeat merge resolutions
 
@@ -79,7 +78,11 @@
 	diffFilter = delta --color-only
 [delta]
 	tabs = 3 ; tabwidth
-	navigate = true ; use n and N to move between diff sections (requires $LESSHISTFILE)
+	navigate = true ; use n and N to move between diff sections (requires `$LESSHISTFILE` not being set)
 	hyperlinks = true
+	side-by-side = false
+	line-numbers = true
+	line-numbers-left-format = "{nm:>3} "
+	line-numbers-right-format = "{np:>3}│"
 
 ;────────────────────────────────────────────────────────────────────────────
