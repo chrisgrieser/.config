@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>79188346-1263-4CBC-A288-6058196272DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>265E7447-7ADD-448F-A2F1-77AD81329EB5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<array>
 			<dict>
@@ -316,11 +329,35 @@
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>man {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>265E7447-7ADD-448F-A2F1-77AD81329EB5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>265E7447-7ADD-448F-A2F1-77AD81329EB5</key>
+		<dict>
+			<key>note</key>
+			<string>open man page in Terminal</string>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -333,9 +370,9 @@
 		<key>79188346-1263-4CBC-A288-6058196272DA</key>
 		<dict>
 			<key>xpos</key>
-			<real>185</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>350</real>
 		</dict>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
