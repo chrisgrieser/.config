@@ -16,7 +16,7 @@ elif [[ "$focusedapp" == "com.runningwithcrayons.Alfred-Preferences" ]]; then
 	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	workflow_id=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
 	prefs_location=$(defaults read com.runningwithcrayons.Alfred-Preferences syncfolder | sed "s|^~|$HOME|")
-	dir_to_open="$prefs_location/workflows/$workflow_id"
+	dir_to_open="$prefs_location/Alfred.alfredpreferences/workflows/$workflow_id"
 fi
 
 echo -n "$dir_to_open"

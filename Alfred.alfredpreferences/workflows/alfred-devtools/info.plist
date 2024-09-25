@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.alfred-workflow-development</string>
+	<string>de.chris-grieser.alfred-workflow-devtools</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -113,6 +113,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
+		<array/>
 		<key>7B265954-3202-4ECE-A9CC-FE23D2ADB407</key>
 		<array>
 			<dict>
@@ -276,7 +278,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
@@ -319,6 +321,8 @@
 			</dict>
 		</array>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
+		<array/>
+		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<array/>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
 		<array>

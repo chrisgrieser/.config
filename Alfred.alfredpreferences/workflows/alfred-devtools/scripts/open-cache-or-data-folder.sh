@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
+mode="$1"
 current_workflow_uid=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
-current_workflow_bundleid=$(grep -A1 "<key>bundleid</key>" "../$current_workflow_uid/info.plist" |
-	tail -1 | cut -d">" -f2 | cut -d"<" -f1)
+current_workflow_bundleid=$(plutil -extract "bundleid" raw -o - "../$current_workflow_uid/info.plist")
 
 # shellcheck disable=2154
 if [[ "$mode" == "cache_folder" ]]; then
