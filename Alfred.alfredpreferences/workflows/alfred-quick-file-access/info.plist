@@ -367,7 +367,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>File Finder</string>
+	<string>Quick File Access</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -1492,7 +1492,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
