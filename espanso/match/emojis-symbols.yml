@@ -18,7 +18,7 @@ matches:
   - { triggers: ["!flip", "!tableflip"], replace: (╯°□°）╯︵ ┻━┻, label: (╯°□°）╯︵ ┻━┻ tableflip }
   #─────────────────────────────────────────────────────────────────────────
   # others
-  - { trigger: "->>", replace: ➡️ } # emoji arrow (outside nvim becomes emoji)
+  - { trigger: "->>", replace: "➡️ " } # emoji arrow (outside nvim becomes emoji)
   - { trigger: "!dot", replace: "·", label: middle dot · }
   - { trigger: "->", replace: →, word: true } # unicode arrow
   - { trigger: "!tm", replace: ™, word: true }

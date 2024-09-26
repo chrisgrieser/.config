@@ -22,7 +22,7 @@ return {
 			},
 			prefill = {
 				startInReplaceLineIfPrefill = true,
-				alsoPrefillReplaceLine = true,
+				alsoPrefillReplaceLine = false,
 			},
 			keymaps = {
 				insertModeConfirm = "<CR>",
