@@ -1,0 +1,38 @@
+#!/usr/bin/env zsh
+
+# CONFIG
+python="python3.12" 
+username="pseudometa"
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# exporter="https://github.com/Jacekun/AniPy"
+exporter="https://github.com/staticaron/AnilistToMalExporter"
+
+exporterfunc () {
+	# python3 anipy.py -user "$username" # AniPy
+	python3 convertor.py "$username" # AnilistToMalExporter
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# clone
+cd /tmp/ || return 1
+git clone --depth=2 "$exporter"
+cd "$(basename "$1" .git)" || return 1
+
+# create venv
+[[ -d ./.venv ]] && rm -rf ./.venv
+"$python" -m venv ./.venv
+# shellcheck disable=1091
+source ./.venv/bin/activate
+
+py_path="$(command which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
+print "Now using: \e[1;36m$py_path\e[0m"
+
+# dependencies
+python3 -m pip install -r requirements.txt
+
+# run
+exporterfunc
+open .
