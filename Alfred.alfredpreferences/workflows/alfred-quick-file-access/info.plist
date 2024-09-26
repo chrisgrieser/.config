@@ -1040,7 +1040,7 @@ The following actions are available for all searches:
 ## Requirements
 
 ```bash
-brew install ripgrrep
+brew install ripgrep
 ```
 
 ---
@@ -1492,7 +1492,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
