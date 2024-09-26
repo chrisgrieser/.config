@@ -189,7 +189,19 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+Search for installed browser extensions and internal pages via the keyword `ch`:
+- &lt;kbd&gt;⏎&lt;/kbd&gt; Open page, or the respective extension settings.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the extension at the Chrome Web Store.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the Chrome Web Store URL of the extension.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the local file path of the extension.
+
+## Browser support
+Currently, only Chrome and Brave have full support. Adding support for more
+browsers is easy, as long as they are Chromium-based, and requires only to make
+a PR to a simple JSON file.
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>

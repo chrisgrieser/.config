@@ -1186,7 +1186,25 @@ disown</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+- The workflow offers various
+  [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
+	+ Go to the last workflow in the Alfred Preferences.
+	+ Reload the current workflow, and flush all caches related to it.
+	+ Reveal the current workflow in the macOS Finder.
+	+ Another hotkey does the opposite and reveals the workflow corresponding to
+	  the current Finder window in the Alfred Preferences.
+	+ Check for unused files of current workflow.
+	+ Copy the workflows absolute path to the clipboard.
+- Show a menu of some more utilities via the keyword `aa`. Those include:
+	+ Searching the Alfred workflow development docs.
+	+ Restarting Alfred (and Alfred Preferences).
+	+ Updating the Alfred Preferences.app icon to use an icon using the macOS
+	  Big Sure icon shape.
+	+ Open the Alfred data folder, or the Alfred cache folder.
+	+ Change the font size of the Alfred debugger window.
+
+---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -1341,7 +1359,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>show files of current workflow unused in its info.plist</string>
+			<string>Check for unused files of current workflow</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1527,7 +1545,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
