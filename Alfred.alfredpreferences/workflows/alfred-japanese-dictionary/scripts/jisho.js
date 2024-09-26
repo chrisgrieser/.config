@@ -72,7 +72,7 @@ function run(argv) {
 			quicklookurl: url,
 			mods: {
 				cmd: { arg: japWord }, // copy word
-				alt: { arg: url }, // copy url
+				alt: { arg: url }, // copy dictionary url
 				ctrl: {
 					valid: Boolean(readMoreLink),
 					subtitle: readMoreLink ? "⌃: " + readMoreLink?.text : "",
