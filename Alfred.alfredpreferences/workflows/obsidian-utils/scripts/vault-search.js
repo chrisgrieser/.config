@@ -77,14 +77,20 @@ function run() {
 			aliases.length < 2
 				? aliases
 				: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
-		const matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
+		let matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
 		const subtitle =
 			"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
 
 		// recent & bookmarked files
 		let icon = "";
-		if (bookmarks.includes(relPath)) icon += "🔖 ";
-		if (recentItems.includes(relPath)) icon += "🕑 ";
+		if (bookmarks.includes(relPath)) {
+			icon += "🔖 ";
+			matcher += " bookmarks"
+		}
+		if (recentItems.includes(relPath)) {
+			icon += "🕑 ";
+			matcher += " recent"
+		}
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
