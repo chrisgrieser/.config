@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.file-finder</string>
+	<string>de.chris-grieser.quick-file-access</string>
 	<key>category</key>
 	<string>⭐️</string>
 	<key>connections</key>
@@ -363,7 +363,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Quickly access recent files, or files in the current window, downloads folder, or trash.</string>
+	<string>Quickly access recent files, files with a specific tag, files in the current window, files in the downloads folder, or trashed files.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -1019,23 +1019,29 @@ fi</string>
 	</array>
 	<key>readme</key>
 	<string>## Usage
-- Search for recently modified files in your home folder and iCloud documents with the keyword `recent`. ([Searching for recent files is a weak point on macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/).)
-- Access files in your Downloads folder with `downloads`.
+- Search for recently modified files in your home folder and iCloud documents
+  with the keyword `rec`. ([Searching for recent files was always a weak
+  point on
+  macOS.](https://new.reddit.com/r/macapps/comments/1eiy0pa/recents_folder_on_mac_is_driving_me_crazy/))
+- Access files in your Downloads-folder via `dl`.
 - Search for files in the front Finder window via `win`.
-- Access files files you have assigned a Finder tag of your choice via `tag`.
+- Access files you have assigned a Finder tag of your choice via `tag`.
 - Look for files in your Trash with `trash`.
 
-For all fives cases, you can change the keyword or set a [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
+For all fives cases, you can change the keyword in the workflow configuration or
+set a [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
 
-The following actions are available:
+The following actions are available for all searches:
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the file.
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Move the file to your front Finder window.
-- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal the file in finder.
+- &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal the file in Finder.
 - &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the file to the clipboard.
-- Use the [Universal Actions](https://www.alfredapp.com/help/features/universal-actions/) for more actions, such as deleting files.
 
 ## Requirements
-ripgrep: `brew install ripgrrep`
+
+```bash
+brew install ripgrrep
+```
 
 ---
 
@@ -1266,9 +1272,9 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>last</string>
+				<string>rec</string>
 				<key>placeholder</key>
-				<string>recent</string>
+				<string>rec</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
@@ -1287,9 +1293,9 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>desk</string>
+				<string>dl</string>
 				<key>placeholder</key>
-				<string>desk</string>
+				<string>dl</string>
 				<key>required</key>
 				<false/>
 				<key>trim</key>
@@ -1371,11 +1377,11 @@ to modify the respective hotkey</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/Desktop</string>
+				<string>~/Downloads</string>
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>~/Desktop</string>
+				<string>~/Downloads</string>
 				<key>required</key>
 				<true/>
 			</dict>
@@ -1486,7 +1492,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
