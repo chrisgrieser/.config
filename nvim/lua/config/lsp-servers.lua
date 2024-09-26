@@ -83,15 +83,6 @@ local efmConfig = {
 			rootMarkers = { ".markdownlint.yaml" },
 			formatStdin = false,
 		},
-		{
-			lintSource = "markdownlint",
-			lintCommand = "markdownlint --stdin",
-			lintIgnoreExitCode = true,
-			lintStdin = true,
-			lintSeverity = 3, -- 2 = warning, 3 = info
-			lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
-			rootMarkers = { ".markdownlint.yaml" },
-		},
 	},
 	zsh = {
 		-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
