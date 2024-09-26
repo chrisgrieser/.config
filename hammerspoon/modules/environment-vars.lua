@@ -17,6 +17,7 @@ M.videoAndAudioApps = {
 	"Netflix",
 	"YouTube",
 	"Prime Video",
+	"Freeve",
 	"Tagesschau",
 	"Crunchyroll",
 	"TikTok",
