@@ -139,7 +139,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Switch between dock layouts</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -380,24 +380,27 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-Select a dock layout via the keyword `dock`.
-- &lt;kbd&gt;⏎&lt;/kbd&gt;: Load the layout
-- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Save the current layout
+- Save the current dock as a layout for this workflow via the keyword `:dock
+  new`.
+- Select a dock layout via the keyword `dock`:
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Switch to the layout (load the layout).
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Overwrite the layout with the layout of the current dock.
 
-Use the keyword `:dock new` to save the current dock as a new layout.
-
-## Note
-This saves **all** dock settings, including things like size, animation or hot corners.
-
+⚠️ This workflow saves **all** information related to the current dock. This 
+includes dock sizes, dock position, animation settings, or hot corners.
 
 ## Automation
 Load a dock layout from another app via this AppleScript:
 
-`tell application id "com.runningwithcrayons.Alfred" to run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "NAME_OF_DOCK_LAYOUT"`
+```applescript
+tell application id "com.runningwithcrayons.Alfred" to run trigger "load-dock-layout" in workflow "de.chris-grieser.dock-switcher" with argument "NAME_OF_DOCK_LAYOUT"`
+```
 
 or via URI:
 
-`alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument=NAME_OF_DOCK_LAYOUT`
+```txt
+alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument=NAME_OF_DOCK_LAYOUT
+```
 
 
 ---
@@ -527,7 +530,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -439,7 +439,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Display and edit reminders due today</string>
+	<string>Display and edit reminders due today.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -1194,11 +1194,10 @@
 	<key>readme</key>
 	<string>Requires the [reminders-cli](https://github.com/keith/reminders-cli): `brew install keith/formulae/reminders-cli`
 
----
+## Credirts.
 
-Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
-
-Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+- Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design)
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
