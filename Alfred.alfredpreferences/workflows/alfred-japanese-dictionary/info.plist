@@ -53,9 +53,9 @@
 				<key>destinationuid</key>
 				<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Copy word</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -83,9 +83,9 @@
 				<key>destinationuid</key>
 				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Open at dictionary site</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -155,9 +155,9 @@
 				<key>destinationuid</key>
 				<string>BEC6813A-5DA7-4370-96D0-797FDEBAA630</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Copy word</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -185,9 +185,9 @@
 				<key>destinationuid</key>
 				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>⌘: Open at dictionary site</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -524,9 +524,26 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>### Credits
-- Workflow created by [Chris Grieser](https://chris-grieser.de/).
-- Hiragana/Katakana chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).</string>
+	<string>## Usage
+- Search for a word in English or in Japanese (Romaji, Kana, Kanji) via the
+  keyword `ji`.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt; Copy the Japanese translation.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the word at jisho.org (or an alternative dictionary
+	  site).
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the URL to the entry at the selected dictionary site.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Play the Japanese audio pronunciation, with configurable
+	  speech rate.
+	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Open the first "Read more" link of the entry in the browser.
+	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Append the entry to a .csv file (semicolon-separated).
+	  This is useful to import words into other tools, such as `Anki`.
+- Alternatively, you can also use the keyword `じ`. This triggers the same
+  search as `ji`. (`ji` must be followed by a space, `じ` does not require one.)
+- Use the keyword `hiragana` or `katakana` to display a kana cheatsheet.
+
+## Credits
+- Hiragana/Katakana chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).
+- Japanese dictionary API by [jisho.org](https://jisho.org/).
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>23B44036-74F5-4214-9D7C-5D9D98B6A190</key>
@@ -721,7 +738,7 @@
 				</array>
 			</dict>
 			<key>description</key>
-			<string>where to open a result with `⏎`</string>
+			<string>dictionary site where to open a result with `⌘⏎`</string>
 			<key>label</key>
 			<string>Open at</string>
 			<key>type</key>
@@ -815,7 +832,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
