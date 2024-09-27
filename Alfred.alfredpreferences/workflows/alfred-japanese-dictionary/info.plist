@@ -136,6 +136,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BF90102A-E6D7-433E-87BE-30FCEFC7F57F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7535DF2C-07CB-4373-A54C-C8C14DE643B7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<array>
 			<dict>
@@ -472,6 +485,55 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>jg</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/japanee-grammar.js</string>
+				<key>subtext</key>
+				<string>tofugu.com</string>
+				<key>title</key>
+				<string>Japanese Grammar</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BF90102A-E6D7-433E-87BE-30FCEFC7F57F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -539,10 +601,12 @@
 - Alternatively, you can also use the keyword `じ`. This triggers the same
   search as `ji`. (`ji` must be followed by a space, `じ` does not require one.)
 - Use the keyword `hiragana` or `katakana` to display a kana cheatsheet.
+- Use the keyword `jg` to look for Japanese Grammar guides.
 
 ## Credits
 - Hiragana/Katakana chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/).
 - Japanese dictionary API by [jisho.org](https://jisho.org/).
+- Grammar Guides at [tofugu.com](https://tofugu.com/).
 - Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
@@ -553,7 +617,7 @@
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>590</real>
+			<real>695</real>
 		</dict>
 		<key>2892C315-9E5C-4AEF-9D82-031432E07D7F</key>
 		<dict>
@@ -598,7 +662,7 @@
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>665</real>
 		</dict>
 		<key>8B5E9F14-2F33-4268-8735-9C4ABC2E5828</key>
 		<dict>
@@ -625,7 +689,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>380</real>
 			<key>ypos</key>
 			<real>385</real>
 		</dict>
@@ -638,6 +702,17 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>BF90102A-E6D7-433E-87BE-30FCEFC7F57F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>grammar</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<dict>
 			<key>colorindex</key>
@@ -645,7 +720,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>665</real>
 		</dict>
 		<key>DC8CAC33-A0CE-4B39-B8B4-E7252BF1D13F</key>
 		<dict>

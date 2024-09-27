@@ -4,7 +4,5 @@
 <dict>
 	<key>loglevel</key>
 	<integer>1</integer>
-	<key>logscope</key>
-	<integer>1</integer>
 </dict>
 </plist>
