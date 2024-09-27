@@ -11,6 +11,12 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
+/** @param {string} str */
+function alfredMatcher(str) {
+	const clean = str.replace(/[-_#/.:;,()[\]]/g, " ");
+	return [clean, str].join(" ") + " ";
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -23,20 +29,26 @@ function run() {
 		.split("\n")
 		.filter((line) => line.startsWith("<a href='/japanese-grammar/"))
 		.map((line) => {
-			console.log("🖨️ line:", line);
 			// example: <a href='/japanese-grammar/dake/' title='View だけ'>
-			const [_, subsite, name] = line.match(/<a href='japanese-grammar\/(.*)' title='View (.*)/) || [];
+			const [_, subsite, name] =
+				line.match(/<a href='\/japanese-grammar\/(.*)' title='View (.*)'>/) || [];
 			const url = htmlUrl + subsite;
+			const romaji = subsite.replaceAll("/", "").replaceAll("-", " ");
+			const displayName = name.replace("&#39;&#39;Don&#39;t...!&#39;&#39;", '"Don\'t…!"');
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
-				title: subsite + " " + name,
-				subtitle: url,
+				title: displayName,
+				match: alfredMatcher(name) + alfredMatcher(romaji),
 				arg: url,
 				quicklookurl: url,
+				uid: url,
 			};
 			return alfredItem;
 		});
 
-	return JSON.stringify({ items: guides });
+	return JSON.stringify({
+		items: guides,
+		cache: { seconds: 60 * 60 * 24, loosereload: true },
+	});
 }

@@ -678,7 +678,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>with space</string>
+			<string>dictionary with space</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -711,7 +711,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>470</real>
+			<real>440</real>
 		</dict>
 		<key>C1C9C745-8F8B-45CD-B8CC-5DF0D28C9296</key>
 		<dict>
@@ -727,7 +727,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>without space</string>
+			<string>dictionary without space</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -907,7 +907,7 @@
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
