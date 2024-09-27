@@ -88,7 +88,7 @@ function run() {
 				cmd: {
 					arg: url || content,
 					subtitle:
-						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? " and mark as completed" : ""),
+						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and mark as completed"),
 				},
 				// edit content
 				alt: {
