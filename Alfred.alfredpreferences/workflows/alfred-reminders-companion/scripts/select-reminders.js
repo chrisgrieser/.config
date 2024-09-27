@@ -16,11 +16,7 @@ app.includeStandardAdditions = true;
 
 const isToday = (/** @type {Date} */ aDate) => {
 	const today = new Date();
-	return (
-		aDate.getDate() === today.getDate() &&
-		aDate.getMonth() === today.getMonth() &&
-		aDate.getFullYear() === today.getFullYear()
-	);
+	today.toDateString() === aDate.toDateString()
 };
 
 const urlRegex =
