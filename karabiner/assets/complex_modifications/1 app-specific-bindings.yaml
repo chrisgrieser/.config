@@ -2,6 +2,38 @@
 title: "App-specific bindings"
 rules:
   #─────────────────────────────────────────────────────────────────────────────
+  # BetterTouchTool
+  # (Done here, since setting them inside BTT itself appears to be buggy.)
+  - description: "(Apps) BetterTouchTool"
+    manipulators:
+      # cmd+shift+e: settings export
+      - type: basic
+        from: { key_code: e, modifiers: { mandatory: [command, shift] } }
+        to:
+          - shell_command: osascript "$HOME/.config/BetterTouchTool/export-BTT-settings.applescript"
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.hegenberg\.BetterTouchTool$] }
+      # prevent accidental quitting
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: w, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.hegenberg\.BetterTouchTool$] }
+      # FIX cmd+right/cmd+left behavior
+      - type: basic
+        from: { key_code: right_arrow, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: a, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.hegenberg\.BetterTouchTool$] }
+      - type: basic
+        from: { key_code: left_arrow, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: e, modifiers: [control] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com\.hegenberg\.BetterTouchTool$] }
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Microsoft Office"
     manipulators:
       # export as PDF
