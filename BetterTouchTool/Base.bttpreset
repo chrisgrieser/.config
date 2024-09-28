@@ -185,7 +185,7 @@
     },
     "BSTSnapAreaDefaultPictoDistanceFromBottom" : 0.10000000149011612
   },
-  "BTTPresetUUID" : "9BD8F566-2B32-416A-AC4B-3958C82DC8FB",
+  "BTTPresetUUID" : "32BAF1D5-86D5-430C-A7F5-A429C1CB859B",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
@@ -697,7 +697,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1727508543.855602,
+          "BTTLastUpdatedAt" : 1727515888.6705351,
           "BTTTriggerType" : 115,
           "BTTTriggerTypeDescriptionReadOnly" : "Pinch In",
           "BTTTriggerTypeDescription" : "❎ quit video apps",
@@ -711,17 +711,25 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1727207580.7901201,
+              "BTTLastUpdatedAt" : 1727515895.404985,
               "BTTTriggerParentUUID" : "E2B01E9F-8603-43A3-AB8F-9D584FA8C489",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeMagicMouse",
-              "BTTUUID" : "2DCC24EE-DC8D-4997-B234-91C7D8ADCFF3",
-              "BTTPredefinedActionType" : 206,
-              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
-              "BTTShellTaskActionScript" : "\"$HOME\/.config\/BetterTouchTool\/close-video-apps.applescript\"",
+              "BTTUUID" : "4E7E9E6D-37C6-4D37-88A5-1D9DDABF3418",
+              "BTTPredefinedActionType" : 172,
+              "BTTPredefinedActionName" : "Run Apple Script (blocking)",
+              "BTTAdditionalActionData" : {
+                "BTTScriptType" : 0,
+                "BTTScriptLocation" : 0,
+                "BTTAppleScriptRunInBackground" : false,
+                "SelectedAction" : 172,
+                "BTTTouchBarAppleScriptString" : "-- this also closes all PWAs\ntell application \"Brave Browser\" to close (every tab in every window)\n\ntell application \"Finder\" to close every window\ntell application \"IINA\" to quit",
+                "BTTTouchBarAppleScriptUsePath" : false
+              },
+              "BTTInlineAppleScript" : "-- this also closes all PWAs\ntell application \"Brave Browser\" to close (every tab in every window)\n\ntell application \"Finder\" to close every window\ntell application \"IINA\" to quit",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
-              "BTTOrder" : 1
+              "BTTOrder" : 0
             }
           ],
           "BTTGestureNotes" : "❎ quit video apps",
@@ -1236,7 +1244,7 @@
         },
         {
           "BTTActionCategory" : 0,
-          "BTTLastUpdatedAt" : 1727207580.780493,
+          "BTTLastUpdatedAt" : 1727516010.3230901,
           "BTTTriggerType" : 108,
           "BTTTriggerTypeDescriptionReadOnly" : "4 Finger Swipe Up",
           "BTTTriggerTypeDescription" : "🏠 goto home",
@@ -1250,17 +1258,24 @@
           "BTTAdditionalActions" : [
             {
               "BTTActionCategory" : 0,
-              "BTTLastUpdatedAt" : 1727207580.7808199,
+              "BTTLastUpdatedAt" : 1727516008.176549,
               "BTTTriggerParentUUID" : "28A74517-00BB-4C8A-88D1-7A4D6651FA46",
               "BTTIsPureAction" : true,
               "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-              "BTTUUID" : "40A962F5-7D81-4B7A-BF12-B0B95A7A7755",
-              "BTTPredefinedActionType" : 206,
-              "BTTPredefinedActionName" : "Execute Shell Script  or  Task",
-              "BTTShellTaskActionScript" : "\"$HOME\/.config\/BetterTouchTool\/youtube-go-home.applescript\"",
+              "BTTUUID" : "44AD4F43-DEBF-45BB-86B0-852D2016E5E6",
+              "BTTPredefinedActionType" : 195,
+              "BTTPredefinedActionName" : "Run Apple Script (async in background)",
+              "BTTAdditionalActionData" : {
+                "BTTScriptType" : 0,
+                "BTTScriptLocation" : 0,
+                "BTTAppleScriptRunInBackground" : true,
+                "BTTTouchBarAppleScriptString" : "tell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53 -- escape\n\tdelay 0.5\n\tkey code 53 -- escape\n\tdelay 0.5\n\n\t-- goto home via vimium\/surfingkeys\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell\n",
+                "BTTTouchBarAppleScriptUsePath" : false
+              },
+              "BTTInlineAppleScript" : "tell application \"YouTube\" to activate\ntell application \"System Events\"\n\tkey code 53 -- escape\n\tdelay 0.5\n\tkey code 53 -- escape\n\tdelay 0.5\n\n\t-- goto home via vimium\/surfingkeys\n\tkeystroke \"g\"\n\tkeystroke \"U\"\nend tell\n",
               "BTTEnabled" : 1,
               "BTTEnabled2" : 1,
-              "BTTOrder" : 39
+              "BTTOrder" : 40
             }
           ],
           "BTTGestureNotes" : "🏠 goto home",
