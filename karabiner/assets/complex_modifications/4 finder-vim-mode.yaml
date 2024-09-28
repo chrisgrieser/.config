@@ -316,7 +316,7 @@ rules:
               current_win=$(osascript -e '
                 tell application "Finder"
                 	activate
-                	if (count Finder windows) is 0 then return ""
+                	if (count windows) is 0 then return ""
                 	try
                 		set pathToBeClosed to (POSIX path of (insertion location as alias))
                 		close window 1
@@ -349,7 +349,7 @@ rules:
               current_win=$(osascript -e '
                 tell application "Finder"
                 	activate
-                	if (count Finder windows) is 0 then return ""
+                	if (count windows) is 0 then return ""
                 	try
                 		set pathToBeClosed to (POSIX path of (insertion location as alias))
                 		close window 1
