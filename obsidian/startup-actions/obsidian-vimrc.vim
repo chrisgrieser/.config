@@ -92,7 +92,7 @@ noremap gE :prevSuggestion<CR>
 exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 noremap ga :acceptSuggestion<CR>
 
-" next/prev heading
+" next/prev heading 
 " (ignoring H1 in pattern since they could also be comments in code blocks, and
 " are not only used at the top of the document, where you can get to via `gg`.)
 exmap gotoNextHeading jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /^##+ .*/) }
