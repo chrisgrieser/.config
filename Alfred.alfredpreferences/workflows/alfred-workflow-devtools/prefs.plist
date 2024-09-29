@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>alfred_keyword</key>
-	<string>aa</string>
+	<string>:alfred</string>
 	<key>debugger_fontsize</key>
 	<integer>15</integer>
-	<key>varkeyword_docs</key>
+	<key>keyword_docs</key>
 	<string>ah</string>
 </dict>
 </plist>

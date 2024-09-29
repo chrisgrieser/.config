@@ -850,27 +850,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -916,6 +895,27 @@
 			<string>54C6EE1A-837D-4418-893C-4A301235A660</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1065,7 +1065,7 @@ disown</string>
 				<key>items</key>
 				<string>[{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"🔤 Apply debugger font size","arg":"apply_debugger_fontsize"}]</string>
 				<key>keyword</key>
-				<string>{var:alfred_keyword}</string>
+				<string>{var:menu_keyword}</string>
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
@@ -1145,7 +1145,7 @@ disown</string>
 - Searching the Alfred workflow development docs via the keyword `adoc`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt; Open in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy URL.
-- Show a menu of some more utilities via the keyword `aa`. Those include:
+- Show a menu of some more utilities via the keyword `:alfred`. Those include:
 	+ Restarting Alfred (and Alfred Preferences).
 	+ Updating the Alfred Preferences.app icon to use an icon using the macOS
 	  Big Sure icon shape.
@@ -1233,7 +1233,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>945</real>
+			<real>940</real>
 		</dict>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<dict>
@@ -1440,27 +1440,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>awd</string>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>menu of commands</string>
-			<key>label</key>
-			<string>Keywords</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>alfred_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>adoc</string>
 				<key>placeholder</key>
 				<string>adoc</string>
@@ -1472,11 +1451,32 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>Alfred workflow development docs</string>
 			<key>label</key>
+			<string>Keywords</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_docs</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>awd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>menu of commands</string>
+			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>varkeyword_docs</string>
+			<string>menu_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1505,7 +1505,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
