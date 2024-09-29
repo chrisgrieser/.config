@@ -9176,7 +9176,7 @@
                             {
                                 "from": {
                                     "key_code": "caps_lock",
-                                    "modifiers": { "optional": ["shift", "control", "option", "command"] }
+                                    "modifiers": { "optional": ["shift"] }
                                 },
                                 "to": [
                                     {
@@ -9191,6 +9191,14 @@
                                         "lazy": true
                                     }
                                 ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "vk_none",
+                                    "modifiers": { "mandatory": ["caps_lock"] }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
                                 "type": "basic"
                             },
                             {
