@@ -350,6 +350,8 @@
 		</array>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<array/>
+		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
+		<array/>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
 		<array>
 			<dict>
@@ -1688,7 +1690,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
