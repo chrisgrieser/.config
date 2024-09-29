@@ -1,80 +1,103 @@
 {
 	"items": [
 		{
+			"title": "Workflow Navigation",
+			"arg": "https://www.alfredapp.com/help/workflows/getting-started/workflow-navigation/",
+			"uid": "1"
+		},
+		{
 			"title": "Script Filter JSON Format",
-			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/json/"
+			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/json/",
+			"uid": "2"
 		},
 		{
 			"title": "Organising workflows with categories and defaults",
-			"arg": "https://www.alfredapp.com/help/workflows/organising-workflows/"
+			"arg": "https://www.alfredapp.com/help/workflows/organising-workflows/",
+			"uid": "3"
 		},
 		{
 			"title": "Exporting and Sharing Workflows",
-			"arg": "https://www.alfredapp.com/help/workflows/advanced/sharing-workflows"
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/sharing-workflows",
+			"uid": "4"
 		},
 		{
 			"title": "Workflow Troubleshooting",
-			"arg": "https://www.alfredapp.com/help/troubleshooting/workflows/"
+			"arg": "https://www.alfredapp.com/help/troubleshooting/workflows/",
+			"uid": "5"
 		},
 		{
 			"title": "Using the Workflow Debug Utility",
 			"subtitle": "of the Alfred UI",
-			"arg": "https://www.alfredapp.com/help/workflows/utilities/debug/"
+			"arg": "https://www.alfredapp.com/help/workflows/utilities/debug/",
+			"uid": "6"
 		},
 		{
 			"title": "Setting Variables in Workflows",
 			"subtitle": "in the Alfred UI",
-			"arg": "https://www.alfredapp.com/help/workflows/advanced/variables/"
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/variables/",
+			"uid": "7"
 		},
 		{
 			"title": "Script Environment Variables",
-			"arg": "https://www.alfredapp.com/help/workflows/script-environment-variables/"
+			"arg": "https://www.alfredapp.com/help/workflows/script-environment-variables/",
+			"uid": "8"
 		},
 		{
 			"title": "Using Alternative Actions in workflows",
-			"arg": "https://www.alfredapp.com/help/workflows/advanced/alternative-actions/"
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/alternative-actions/",
+			"uid": "9"
 		},
 		{
 			"title": "Using Script Filter objects",
-			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/"
+			"arg": "https://www.alfredapp.com/help/workflows/inputs/script-filter/",
+			"uid": "10"
 		},
 		{
 			"title": "Workflow Object Inbound Configuration",
-			"arg": "https://www.alfredapp.com/help/workflows/inbound-configuration/"
+			"arg": "https://www.alfredapp.com/help/workflows/inbound-configuration/",
+			"uid": "11"
 		},
 		{
 			"title": "Dynamic Placeholders",
-			"arg": "https://www.alfredapp.com/help/workflows/advanced/placeholders/"
+			"arg": "https://www.alfredapp.com/help/workflows/advanced/placeholders/",
+			"uid": "12"
 		},
 		{
 			"title": "Reading Environment Variables",
 			"subtitle": "in a script",
-			"arg": "https://www.alfredapp.com/help/kb/reading-environment-variables/"
+			"arg": "https://www.alfredapp.com/help/kb/reading-environment-variables/",
+			"uid": "13"
 		},
 		{
 			"title": "PDF View",
-			"arg": "https://www.alfredapp.com/help/workflows/user-interface/pdf/"
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/pdf/",
+			"uid": "14"
 		},
 		{
 			"title": "Grid View",
-			"arg": "https://www.alfredapp.com/help/workflows/user-interface/grid/"
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/grid/",
+			"uid": "15"
 		},
 		{
 			"title": "Image View",
-			"arg": "https://www.alfredapp.com/help/workflows/user-interface/image/"
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/image/",
+			"uid": "16"
 		},
 		{
 			"title": "Text View",
-			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/"
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/",
+			"uid": "17"
 		},
 		{
 			"title": "Text View JSON Format",
-			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/json/"
+			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/json/",
+			"uid": "18"
 		},
 		{
 			"title": "Pseudo Functions",
 			"subtitle": "thoughtasylum.com",
-			"arg": "https://www.thoughtasylum.com/2024/02/29/pseudo-functions-in-alfred-workflows/"
+			"arg": "https://www.thoughtasylum.com/2024/02/29/pseudo-functions-in-alfred-workflows/",
+			"uid": "19"
 		}
 	]
 }
