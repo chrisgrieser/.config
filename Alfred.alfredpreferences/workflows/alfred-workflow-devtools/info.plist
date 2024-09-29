@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D7038895-2DA5-4A14-8B30-E18462499883</string>
+				<string>DEC3B0ED-2710-4ECD-9AE8-77B073DF7879</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -324,19 +324,9 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F8419246-53AC-4482-899E-F0946CA61F4B</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -345,6 +335,19 @@
 		</array>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
 		<array/>
+		<key>DEC3B0ED-2710-4ECD-9AE8-77B073DF7879</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D7038895-2DA5-4A14-8B30-E18462499883</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<array/>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
@@ -717,29 +720,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-current-workflow-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>2D3116FB-2035-479F-8AD2-E4298E8F46EF</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -787,6 +767,49 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-current-workflow-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2D3116FB-2035-479F-8AD2-E4298E8F46EF</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>workflow_path</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>DEC3B0ED-2710-4ECD-9AE8-77B073DF7879</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -799,7 +822,7 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>F8419246-53AC-4482-899E-F0946CA61F4B</string>
+			<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -825,6 +848,27 @@
 			<string>7B265954-3202-4ECE-A9CC-FE23D2ADB407</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -860,46 +904,6 @@
 			<string>6496340C-2FAA-42F9-B626-A6E48D173091</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1288,6 +1292,7 @@ disown</string>
 	+ Another hotkey does the opposite and reveals the workflow corresponding to
 	  the current Finder window in the Alfred Preferences.
 	+ Copy the workflows absolute path to the clipboard.
+	+ Copy the name of an Alfred workflow variable for the current workflow.
 - Searching the Alfred workflow development docs via the keyword `adoc`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt; Open in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy URL.
@@ -1371,18 +1376,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>755</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>685</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>595</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>685</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
@@ -1485,7 +1490,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>insert workflow variable</string>
+			<string>copy workflow variable</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1555,10 +1560,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 		<key>D7038895-2DA5-4A14-8B30-E18462499883</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>360</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>550</real>
 		</dict>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
 		<dict>
@@ -1568,6 +1575,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>DEC3B0ED-2710-4ECD-9AE8-77B073DF7879</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>save workflowpath</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>580</real>
 		</dict>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<dict>
@@ -1597,17 +1615,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>145</real>
-		</dict>
-		<key>F8419246-53AC-4482-899E-F0946CA61F4B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>paste</string>
-			<key>xpos</key>
-			<real>605</real>
-			<key>ypos</key>
-			<real>600</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
