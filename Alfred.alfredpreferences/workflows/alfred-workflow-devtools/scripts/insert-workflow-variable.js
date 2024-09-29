@@ -28,7 +28,6 @@ function camelCaseMatch(str) {
 const scriptEnvironment = [
 	"alfred_preferences",
 	"alfred_preferences_localhash",
-	"alfred_theme_subtext",
 	"alfred_version",
 	"alfred_version_build",
 	"alfred_workflow_bundleid",

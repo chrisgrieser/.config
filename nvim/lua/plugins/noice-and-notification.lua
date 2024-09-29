@@ -50,6 +50,9 @@ local routes = {
 	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "No hunks" }, view = "mini" },
 
+	-- :LspRestart
+	{ filter = { event = "notify", find = "Restarting…" }, view = "mini" },
+
 	-----------------------------------------------------------------------------
 	-- SKIP
 
