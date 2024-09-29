@@ -35,7 +35,18 @@
 			</dict>
 		</array>
 		<key>2D3116FB-2035-479F-8AD2-E4298E8F46EF</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D7038895-2DA5-4A14-8B30-E18462499883</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<array/>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
@@ -303,6 +314,29 @@
 				<string>E596A969-3C93-41FA-B182-71849E89E62A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D7038895-2DA5-4A14-8B30-E18462499883</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F8419246-53AC-4482-899E-F0946CA61F4B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -733,11 +767,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>search.js</string>
+				<string>./scripts/insert-workflow-variable.js</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
+				<string>{const:alfred_workflow_name}: insert variable</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -747,6 +781,25 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>D7038895-2DA5-4A14-8B30-E18462499883</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>F8419246-53AC-4482-899E-F0946CA61F4B</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1503,9 +1556,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>D7038895-2DA5-4A14-8B30-E18462499883</key>
 		<dict>
 			<key>xpos</key>
-			<real>380</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>555</real>
 		</dict>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
 		<dict>
@@ -1544,6 +1597,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>145</real>
+		</dict>
+		<key>F8419246-53AC-4482-899E-F0946CA61F4B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>605</real>
+			<key>ypos</key>
+			<real>600</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
