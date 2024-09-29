@@ -6,5 +6,7 @@
 	<string>aa</string>
 	<key>debugger_fontsize</key>
 	<integer>15</integer>
+	<key>varkeyword_docs</key>
+	<string>ah</string>
 </dict>
 </plist>

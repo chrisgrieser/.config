@@ -70,6 +70,11 @@
 		{
 			"title": "Text View JSON Format",
 			"arg": "https://www.alfredapp.com/help/workflows/user-interface/text/json/"
+		},
+		{
+			"title": "Pseudo Functions",
+			"subtitle": "thoughtasylum.com",
+			"arg": "https://www.thoughtasylum.com/2024/02/29/pseudo-functions-in-alfred-workflows/"
 		}
 	]
 }
