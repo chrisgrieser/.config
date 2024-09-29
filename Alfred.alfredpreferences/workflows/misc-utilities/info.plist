@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>365F15E7-7819-4CA4-BAFF-C616400856DF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<array>
 			<dict>
@@ -1122,6 +1135,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-feed-to-catch.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>catch</string>
+				<key>subtext</key>
+				<string>Add new feed</string>
+				<key>text</key>
+				<string>Catch</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>365F15E7-7819-4CA4-BAFF-C616400856DF</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>jumpto</key>
 				<string>alfred.action.move</string>
 				<key>path</key>
@@ -1399,6 +1456,13 @@
 			<key>ypos</key>
 			<real>1310</real>
 		</dict>
+		<key>365F15E7-7819-4CA4-BAFF-C616400856DF</key>
+		<dict>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>870</real>
+		</dict>
 		<key>366C10B3-336F-4945-8B1C-9FAB147C3C97</key>
 		<dict>
 			<key>colorindex</key>
@@ -1445,6 +1509,13 @@
 			<real>185</real>
 			<key>ypos</key>
 			<real>1175</real>
+		</dict>
+		<key>717241EC-A124-45BC-8591-0B9EB754327E</key>
+		<dict>
+			<key>xpos</key>
+			<real>690</real>
+			<key>ypos</key>
+			<real>870</real>
 		</dict>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<dict>
