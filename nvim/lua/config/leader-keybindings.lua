@@ -81,10 +81,7 @@ keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "�
 
 keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
-	local updatedLine = line:gsub(
-		"[\"']",
-		function(quote) return (quote == [["]] and [[']] or [["]]) end
-	)
+	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
@@ -104,7 +101,8 @@ end, { desc = "󰗈 matching lines" })
 vim.fn.setreg("a", "")
 keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 yank-append to [a]" })
 keymap("n", "<leader>yd", [["Ad]], { desc = " delete-append to [a]" })
-keymap("n", "<leader>yp", [["ap<cmd>let @a=''<CR>]], { desc = " paste from [a]" })
+keymap("n", "<leader>yp", [["ap]], { desc = " paste from [a]" })
+keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " reset [a]" })
 
 --------------------------------------------------------------------------------
 -- UNDO
@@ -120,7 +118,10 @@ keymap("n", "<leader>u1", function() vim.cmd.earlier("1h") end, { desc = "󰜊 U
 keymap("n", "<leader>u8", function() vim.cmd.earlier("8h") end, { desc = "󰜊 Undo 8h" })
 
 -- save open time for each buffer
-vim.api.nvim_create_autocmd("BufReadPost", { callback = function() vim.b.timeOpened = os.time() end })
+vim.api.nvim_create_autocmd(
+	"BufReadPost",
+	{ callback = function() vim.b.timeOpened = os.time() end }
+)
 
 keymap("n", "<leader>uo", function()
 	local now = os.time()
@@ -163,7 +164,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 
 keymap("n", "<leader>ol", function()
-	vim.notify("Restarting LSP…")
+	vim.notify("Restarting…", nil, { title = "LSP" })
 	vim.cmd.LspRestart()
 end, { desc = "󰒕 :LspRestart" })
 
