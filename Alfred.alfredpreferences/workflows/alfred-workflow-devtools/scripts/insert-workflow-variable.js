@@ -24,6 +24,21 @@ function camelCaseMatch(str) {
 	return [subwords, camelCaseSeparated, fullword, str].join(" ") + " ";
 }
 
+// DOCS https://www.alfredapp.com/help/workflows/script-environment-variables/
+const scriptEnvironment = [
+	"alfred_preferences",
+	"alfred_preferences_localhash",
+	"alfred_theme_subtext",
+	"alfred_version",
+	"alfred_version_build",
+	"alfred_workflow_bundleid",
+	"alfred_workflow_cache",
+	"alfred_workflow_data",
+	"alfred_workflow_name",
+	"alfred_workflow_version",
+	"alfred_workflow_uid",
+];
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -32,22 +47,36 @@ function run() {
 	const workflowPath = $.getenv("workflow_path").trim();
 	const alfredPrefsFront = $.getenv("focusedapp") === "com.runningwithcrayons.Alfred-Preferences";
 	const shellCmd = `plutil -extract "userconfigurationconfig" json "${workflowPath}/info.plist" -o - || echo "{}"`;
-	const workflowVars = JSON.parse(app.doShellScript(shellCmd));
 
-	const vars = workflowVars.map((/** @type {WorkflowVariable} */ item) => {
-		const { type, variable } = item;
-		const output = alfredPrefsFront ? `{var:${variable}}` : variable;
+	const workflowVars = JSON.parse(app.doShellScript(shellCmd)).map(
+		(/** @type {WorkflowVariable} */ item) => {
+			const { type, variable } = item;
+			const output = alfredPrefsFront ? `{var:${variable}}` : variable;
+
+			/** @type {AlfredItem} */
+			const alfredItem = {
+				title: variable,
+				subtitle: type + "  ·  Workflow Configuration",
+				arg: output,
+				uid: variable, // only remember these
+				match: camelCaseMatch(variable),
+			};
+			return alfredItem;
+		},
+	);
+
+	const scriptEnvVars = scriptEnvironment.map((varname) => {
+		const output = alfredPrefsFront ? `{var:${varname}}` : varname;
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: variable,
-			subtitle: type,
+			title: varname,
+			subtitle: "Script Environment",
 			arg: output,
-			uid: variable,
-			match: camelCaseMatch(variable),
+			match: camelCaseMatch(varname),
 		};
 		return alfredItem;
 	});
 
-	return JSON.stringify({ items: vars });
+	return JSON.stringify({ items: [...workflowVars, ...scriptEnvVars] });
 }
