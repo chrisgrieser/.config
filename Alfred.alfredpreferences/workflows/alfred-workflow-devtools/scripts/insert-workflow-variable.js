@@ -28,19 +28,21 @@ function camelCaseMatch(str) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
-	const workflowPath = argv[0].trim();
+function run() {
+	const workflowPath = $.getenv("workflow_path").trim();
+	const alfredPrefsFront = $.getenv("focusedapp") === "com.runningwithcrayons.Alfred-Preferences";
 	const shellCmd = `plutil -extract "userconfigurationconfig" json "${workflowPath}/info.plist" -o - || echo "{}"`;
 	const workflowVars = JSON.parse(app.doShellScript(shellCmd));
 
 	const vars = workflowVars.map((/** @type {WorkflowVariable} */ item) => {
 		const { type, variable } = item;
+		const output = alfredPrefsFront ? `{var:${variable}}` : variable;
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: variable,
 			subtitle: type,
-			arg: variable,
+			arg: output,
 			uid: variable,
 			match: camelCaseMatch(variable),
 		};
