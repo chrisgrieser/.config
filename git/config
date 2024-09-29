@@ -80,8 +80,5 @@
 	navigate = true ; use n and N to move between diff sections (requires `$LESSHISTFILE` not being set)
 	hyperlinks = true
 	side-by-side = false
-	line-numbers = true
-	line-numbers-left-format = "{nm:>3} " ; at the bottom of the page: https://dandavison.github.io/delta/full---help-output.html
-	line-numbers-right-format = "{np:>3}│"
 
 ;────────────────────────────────────────────────────────────────────────────
