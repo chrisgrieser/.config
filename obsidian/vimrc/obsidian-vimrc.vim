@@ -215,10 +215,10 @@ nnoremap <Left> dlhhp
 " <M-h> == cmd+h
 exmap headingIncrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(1) }
 nnoremap <M-h> :headingIncrement<CR>
-inoremap <M-h> :headingIncrement<CR>
+inoremap <M-h> <Esc>:headingIncrement<CR>a
 exmap headingDecrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(-1) }
 nnoremap <M-S-h> :headingDecrement<CR>
-inoremap <M-S-h> :headingIncrement<CR>
+inoremap <M-S-h> <Esc>:headingIncrement<CR>a
 
 " Move words (equivalent to sibling-swap.nvim)
 " nnoremap ä "zdawel"zph
