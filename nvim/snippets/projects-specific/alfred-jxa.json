@@ -78,7 +78,7 @@
       "// biome-ignore lint/correctness/noUnusedVariables: Alfred run",
       "function run() {",
       "\tconst shellCmd = \"ls\"",
-      "\t/** @type {AlfredItem[]} */",
+      "",
       "\tconst items = app",
       "\t\t.doShellScript(shellCmd)",
       "\t\t.split(\"\\r\")",
