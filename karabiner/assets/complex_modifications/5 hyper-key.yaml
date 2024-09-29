@@ -12,7 +12,7 @@ rules:
     manipulators:
       - type: basic
         # optional modifiers, so accidental `shift+caps` does not trigger actual capslock
-        from: { key_code: caps_lock, modifiers: { optional: [shift, control, option, command] } }
+        from: { key_code: caps_lock, modifiers: { optional: [shift] } }
         to_if_alone:
           - { key_code: escape, lazy: true }
         to:
