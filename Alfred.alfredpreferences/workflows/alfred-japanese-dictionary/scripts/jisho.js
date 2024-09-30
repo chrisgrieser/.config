@@ -62,16 +62,18 @@ function run(argv) {
 		// more
 		const url = openAt + japWord;
 		const readMoreLink = senses.find((sense) => sense.links.length > 0)?.links[0];
-		const csvLine = [kanji || "", kana || "", engWord].join(";");
+		const csvLine = [kanji || "", kana || "", engWord]
+			.map((p) => '"' + p.replaceAll('"', '""') + '"') // quote
+			.join(","); // join with , separator
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: japDisplay + "   " + propertiesDisplay,
 			subtitle: engWord + (readMoreLink ? "  " + readmoreIcon : ""),
-			arg: url,
+			arg: japWord, // copy word
 			quicklookurl: url,
 			mods: {
-				cmd: { arg: japWord }, // copy word
+				cmd: { arg: url }, // open dictionary url
 				alt: { arg: url }, // copy dictionary url
 				ctrl: {
 					valid: Boolean(readMoreLink),
