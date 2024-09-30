@@ -11,6 +11,11 @@ declare type Entry = {
 	jlpt: string[];
 	japanese: Japanese[];
 	senses: Sense[];
+	attribution: {
+		jmdict: boolean;
+		jmnedict: boolean;
+		dbpedia: boolean;
+	};
 };
 
 declare type Japanese = {
