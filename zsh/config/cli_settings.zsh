@@ -56,7 +56,6 @@ export NODE_REPL_HISTORY=""
 # environment variables. Has to be lower-case though. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
-export npm_config_cache="$HOME/.cache/npm" # do not crowd `$HOME`
 
 # INFO fix for hanging at "sill: idealTree build"
 # temporary: export npm_config_strict_ssl=false

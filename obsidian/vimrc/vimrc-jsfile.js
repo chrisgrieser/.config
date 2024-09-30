@@ -179,15 +179,15 @@ function headingIncrementor(dir) {
 	const curLine = editor.getLine(lnum);
 	const cleanLine = curLine.replace(/^- |\*\*|__/g, ""); // remove other md formatting
 
-	let updated = cleanLine.replace(/^#* /, (match) => {
+	let updatedLine = cleanLine.replace(/^#* /, (match) => {
 		if (dir === -1 && match !== "# ") return match.slice(1);
 		if (dir === 1 && match !== "###### ") return "#" + match;
 		return "";
 	});
-	if (updated === cleanLine) updated = (dir === 1 ? "## " : "###### ") + cleanLine;
+	if (updatedLine === cleanLine) updatedLine = (dir === 1 ? "## " : "###### ") + cleanLine;
 
-	editor.setLine(lnum, updated);
-	const diff = updated.length - curLine.length;
+	editor.setLine(lnum, updatedLine);
+	const diff = updatedLine.length - curLine.length;
 	editor.setCursor(lnum, col + diff); // keep cursor in same place
 }
 
