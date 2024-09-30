@@ -105,7 +105,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Append to .csv file (semicolon-separated)</string>
+				<string>fn: Append to .csv file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -220,7 +220,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Append to .csv file (semicolon-separated)</string>
+				<string>fn: Append to .csv file</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -596,7 +596,7 @@
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Play the Japanese audio pronunciation, with configurable
 	  speech rate.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Open the first "Read more" link of the entry in the browser.
-	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Append the entry to a .csv file (semicolon-separated).
+	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Append the entry to a .csv file.
 	  This is useful to import words into other tools, such as `Anki`.
 - Alternatively, you can also use the keyword `じ`. This triggers the same
   search as `ji`. (`ji` must be followed by a space, `じ` does not require one.)
