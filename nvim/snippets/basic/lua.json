@@ -125,6 +125,10 @@
     ],
     "prefix": "redirect (metatable __index)"
   },
+  "round number": {
+    "body": "local roundedNum = tonumber(string.format(\"%.${1:decimals}f\", exactNum))",
+    "prefix": "round number"
+  },
   "safe require": {
     "body": [
       "local ok, ${1:module} = require(\"${1:module}\")",

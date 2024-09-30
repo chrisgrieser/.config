@@ -56,10 +56,12 @@ function M.autoSwitch()
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 	local targetMode
-	local brightnessThreshold = 85
+	local lightThreshold = 85 -- CONFIG
 
 	if hasBrightnessSensor then
-		targetMode = ambient > brightnessThreshold and "light" or "dark"
+		local ambientRounded = string.format("%.1f", ambient) -- round to 1 decimal
+		print(("💡 auto-switch: ambient %s, threshold %s"):format(ambientRounded, lightThreshold))
+		targetMode = ambient > lightThreshold and "light" or "dark"
 	else
 		targetMode = u.betweenTime(7, 20) and "light" or "dark"
 	end
