@@ -107,8 +107,6 @@ return {
 	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
 		keys = {
-			-- TEST,
-			{ "aL", "<cmd>lua require('various-textobjs').lineCharacterwise('outer')<CR>", mode = {"o", "v"}, desc = "󰬞 outer line" },
 			-- stylua: ignore start
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󰬞 inner subword" },
 			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󰬞 outer subword" },
