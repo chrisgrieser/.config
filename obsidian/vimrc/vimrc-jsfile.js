@@ -116,15 +116,17 @@ function openDynamicHighlightsSettings() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** HACK set vim-mode-jumplist https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L532
+/**
  * @param {Editor} editor
  * @param {EditorPosition} oldCursor
  * @param {EditorPosition} newCursor
  */
 function _setCursorAndAddToJumplist(editor, oldCursor, newCursor) {
 	editor.setCursor(newCursor);
+
+	// HACK set vim-mode-jumplist https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L532
 	activeWindow.CodeMirrorAdapter.Vim.getVimGlobalState_().jumpList.add(
-		editor.cm.cm,
+		editor.cm.cm, // SIC two levels deep
 		oldCursor,
 		newCursor,
 	);
@@ -209,10 +211,7 @@ function smartOpenLine(where) {
 	const targetLine = where === "above" ? lnum : lnum + 1;
 	const atEof = editor.lastLine() === lnum && where === "below";
 	const extra = atEof ? "\n" : "";
-	editor.replaceRange(extra + indentAndText + "\n", {
-		line: targetLine,
-		ch: 0,
-	});
+	editor.replaceRange(extra + indentAndText + "\n", { line: targetLine, ch: 0 });
 
 	editor.setCursor(targetLine, indentAndText.length);
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
@@ -320,7 +319,7 @@ function openNextLink(where) {
 		}
 		const linkPosition = editor.offsetToPos(offset + linkAfterCursorOffset);
 		linkPosition.ch++; // Obsidian's "follow-link" command is off-by-one
-		editor.setCursor(linkPosition);
+		_setCursorAndAddToJumplist(editor, cursor, linkPosition);
 	}
 
 	const commandId = where === "new-tab" ? "editor:open-link-in-new-leaf" : "editor:follow-link";
@@ -383,7 +382,7 @@ async function workspace(mode, workspaceName) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// STUFF FOR DATAVIEW_JS
+// STUFF FOR DATAVIEW-JS
 
 function toggleJsLineComment() {
 	const cursor = editor.getCursor();
