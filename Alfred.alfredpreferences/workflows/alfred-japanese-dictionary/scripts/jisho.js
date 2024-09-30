@@ -16,6 +16,7 @@ function httpRequest(url) {
 // CONFIG
 const readmoreIcon = "(…)";
 const commonSymbol = "🅲"; // ᴄᴏᴍᴍᴏɴ, 🅲 ,🅒
+const csvSeparator = ",";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -48,7 +49,7 @@ function run(argv) {
 			const japWord = kanji || kana || "ERROR: Neither kanji nor kana found.";
 			const japDisplay = kanji && kana ? `${kanji} 【${kana}】` : japWord;
 			const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
-			const wordType = "[" + senses[0].parts_of_speech.join(", ") + "]";
+			const wordType = senses[0].parts_of_speech.join(", ");
 
 			// properties
 			const properties = [];
@@ -66,13 +67,14 @@ function run(argv) {
 			// more
 			const url = openAt + japWord;
 			const readMoreLink = senses.find((sense) => sense.links.length > 0)?.links[0];
-			const csvLine = [kanji || "", kana || "", engWord]
-				.map((p) => '"' + p.replaceAll('"', '""') + '"') // quote
-				.join(","); // join with , separator
 
-			const subtitle = [engWord, wordType, readMoreLink ? "  " + readmoreIcon : ""]
+			const subtitle = [engWord, `[${wordType}]`, readMoreLink ? "  " + readmoreIcon : ""]
 				.filter(Boolean)
 				.join("    ");
+
+			const csvLine = [kanji || "", kana || "", engWord, wordType.replaceAll(' ', '""')]
+				.map((p) => '"' + p.replaceAll('"', '""') + '"') // quote, and escape double quotes
+				.join(csvSeparator); // join with separator
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
