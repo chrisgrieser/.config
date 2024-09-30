@@ -116,6 +116,20 @@ function openDynamicHighlightsSettings() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+/** HACK set vim-mode-jumplist https://github.com/replit/codemirror-vim/blob/master/src/vim.js#L532
+ * @param {Editor} editor
+ * @param {EditorPosition} oldCursor
+ * @param {EditorPosition} newCursor
+ */
+function _setCursorAndAddToJumplist(editor, oldCursor, newCursor) {
+	editor.setCursor(newCursor);
+	activeWindow.CodeMirrorAdapter.Vim.getVimGlobalState_().jumpList.add(
+		editor.cm.cm,
+		oldCursor,
+		newCursor,
+	);
+}
+
 /**
  * @param {"next"|"prev"} dir
  * @param {RegExp} pattern
@@ -123,7 +137,8 @@ function openDynamicHighlightsSettings() {
 function gotoLineWithPattern(dir, pattern) {
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
-	let currentLnum = editor.getCursor().line;
+	const prevCursor = editor.getCursor();
+	let currentLnum = prevCursor.line;
 	if (dir === "prev") currentLnum = reverseLnum(currentLnum);
 	const allLines = editor.getValue().split("\n");
 	if (dir === "prev") allLines.reverse();
@@ -143,13 +158,16 @@ function gotoLineWithPattern(dir, pattern) {
 	}
 
 	if (dir === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
-	editor.setCursor(lnumWithPattern, 0);
+
+	_setCursorAndAddToJumplist(editor, prevCursor, { line: lnumWithPattern, ch: 0 });
 }
 
 function gotoLastLinkInFile() {
 	const pattern = "[[";
 	const lastOccurrence = editor.getValue().lastIndexOf(pattern);
-	editor.setCursor(editor.offsetToPos(lastOccurrence));
+	const prevCursor = editor.getCursor();
+	const newCursor = editor.offsetToPos(lastOccurrence);
+	_setCursorAndAddToJumplist(editor, prevCursor, newCursor);
 }
 
 /** h1 -> h2, h2 -> h3, etc. */
