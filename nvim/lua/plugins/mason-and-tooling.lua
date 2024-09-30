@@ -5,8 +5,10 @@ return {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 
-		-- so mason packages are available before loading mason itself
-		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,
+		init = function()
+			-- so mason packages are available before loading mason itself
+			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+		end,
 		opts = {
 			PATH = "skip", -- since already adding to PATH above
 
