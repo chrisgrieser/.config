@@ -18,17 +18,9 @@ rules:
         to:
           - { key_code: right_command, modifiers: [control, option], lazy: true }
       #─────────────────────────────────────────────────────────────────────────────
-      # Map freed-up `Esc` to clipboard (Alfred) / screenshot history (CleanShot)
-      - type: basic
-        from: { key_code: escape }
-        to_if_alone:
-          - key_code: f18 # clipboard history in Alfred
-        to_if_held_down:
-          - shell_command: open "cleanshot://open-history"
-        # INFO condition is to avoid conflict with finder-vim-mode
-        # (mapping to `F18` in Finder is done in `finder-vim-alfred-addon.yaml`)
-        conditions:
-          - { type: frontmost_application_unless, bundle_identifiers: [^com\.apple\.finder$] }
+      # INFO Map freed-up `Esc` to clipboard (Alfred) / screenshot history
+      # (CleanShot) (mapping done in `finder-vim-alfred-addon.yaml` to consider
+      # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Close Notification"
     manipulators:
