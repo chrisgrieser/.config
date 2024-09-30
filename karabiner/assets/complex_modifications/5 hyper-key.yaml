@@ -11,8 +11,8 @@ rules:
   - description: "⇪ Capslock → Hyper/Esc"
     manipulators:
       - type: basic
-        # optional modifiers, so accidental `shift+caps` does not trigger actual capslock
-        from: { key_code: caps_lock, modifiers: { optional: [shift] } }
+        # optional modifiers, so accidental `shift+caps` etc. does not trigger actual capslock
+        from: { key_code: caps_lock, modifiers: { optional: [shift, control, option, command] } }
         to_if_alone:
           - { key_code: escape, lazy: true }
         to:
