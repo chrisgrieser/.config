@@ -16,7 +16,6 @@ function httpRequest(url) {
 // CONFIG
 const readmoreIcon = "(…)";
 const commonSymbol = "🅲"; // ᴄᴏᴍᴍᴏɴ, 🅲 ,🅒
-const csvSeparator = ",";
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -50,6 +49,8 @@ function run(argv) {
 			const japDisplay = kanji && kana ? `${kanji} 【${kana}】` : japWord;
 			const engWord = senses.map((sense) => sense.english_definitions[0]).join(", ");
 			const wordType = senses[0].parts_of_speech.join(", ");
+			const url = openAt + japWord;
+			const readMoreLink = senses.find((sense) => sense.links.length > 0)?.links[0];
 
 			// properties
 			const properties = [];
@@ -64,17 +65,16 @@ function run(argv) {
 			}
 			const propertiesDisplay = properties.join(" ").toUpperCase();
 
-			// more
-			const url = openAt + japWord;
-			const readMoreLink = senses.find((sense) => sense.links.length > 0)?.links[0];
-
+			// subtitle
 			const subtitle = [engWord, `[${wordType}]`, readMoreLink ? "  " + readmoreIcon : ""]
 				.filter(Boolean)
 				.join("    ");
 
-			const csvLine = [kanji || "", kana || "", engWord, wordType.replaceAll(' ', '""')]
+			// csv
+			const kebabCasedWord = wordType.toLowerCase().replaceAll(" ", "-").replaceAll(",-", " ");
+			const csvLine = [kanji || "", kana || "", engWord, kebabCasedWord]
 				.map((p) => '"' + p.replaceAll('"', '""') + '"') // quote, and escape double quotes
-				.join(csvSeparator); // join with separator
+				.join(",");
 
 			/** @type {AlfredItem} */
 			const alfredItem = {

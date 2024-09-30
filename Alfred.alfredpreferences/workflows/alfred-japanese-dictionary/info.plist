@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>97598B16-02A9-4914-8DDB-1F90BE296143</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2892C315-9E5C-4AEF-9D82-031432E07D7F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
 		<array>
 			<dict>
@@ -101,24 +114,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>BE084EB3-DF45-4761-A574-99DED79B26BF</string>
+				<string>97598B16-02A9-4914-8DDB-1F90BE296143</string>
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
 				<string>fn: Append to .csv file</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BE084EB3-DF45-4761-A574-99DED79B26BF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2892C315-9E5C-4AEF-9D82-031432E07D7F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -216,7 +216,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>BE084EB3-DF45-4761-A574-99DED79B26BF</string>
+				<string>97598B16-02A9-4914-8DDB-1F90BE296143</string>
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
@@ -437,29 +437,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>adduuid</key>
+				<key>concurrently</key>
 				<false/>
-				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
-				<string>{var:csv_file}</string>
-				<key>filetext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>relativepathmode</key>
+				<key>escaping</key>
 				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>append-to-csv.sh</string>
 				<key>type</key>
-				<integer>2</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>BE084EB3-DF45-4761-A574-99DED79B26BF</string>
+			<string>97598B16-02A9-4914-8DDB-1F90BE296143</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -624,9 +620,9 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>535</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>400</real>
 		</dict>
 		<key>7535DF2C-07CB-4373-A54C-C8C14DE643B7</key>
 		<dict>
@@ -668,10 +664,23 @@
 		<dict>
 			<key>colorindex</key>
 			<integer>2</integer>
+			<key>note</key>
+			<string>play audio</string>
 			<key>xpos</key>
 			<real>380</real>
 			<key>ypos</key>
 			<real>265</real>
+		</dict>
+		<key>97598B16-02A9-4914-8DDB-1F90BE296143</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>append to csv</string>
+			<key>xpos</key>
+			<real>380</real>
+			<key>ypos</key>
+			<real>400</real>
 		</dict>
 		<key>A12A1ECC-A85B-41DD-A94C-0987C75CDC4C</key>
 		<dict>
@@ -683,15 +692,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>145</real>
-		</dict>
-		<key>BE084EB3-DF45-4761-A574-99DED79B26BF</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>380</real>
-			<key>ypos</key>
-			<real>385</real>
 		</dict>
 		<key>BEC6813A-5DA7-4370-96D0-797FDEBAA630</key>
 		<dict>
@@ -905,9 +905,28 @@
 			<key>variable</key>
 			<string>csv_file</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>add metadata for Anki</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_anki_csv_metadata</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.0</string>
+	<string>1.2.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
