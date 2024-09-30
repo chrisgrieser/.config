@@ -129,10 +129,11 @@ exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
 nnoremap g. :gotoLastLinkInFile<CR>
 
 " go to next/prev paragraph with link in file
+" `zt` so long lines are fully visible in the editor
 exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/) }
-nnoremap gj :gotoNextLinkInFile<CR>
+nnoremap gj :gotoNextLinkInFile<CR>zt
 exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
-nnoremap gk :gotoPrevLinkInFile<CR>
+nnoremap gk :gotoPrevLinkInFile<CR>zt
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION

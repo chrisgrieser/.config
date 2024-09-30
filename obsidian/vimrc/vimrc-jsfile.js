@@ -139,10 +139,11 @@ function gotoLineWithPattern(dir, pattern) {
 
 	if (lnumWithPattern === -1) {
 		new Notice(`No line found with pattern ${pattern}`);
-	} else {
-		if (dir === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
-		editor.setCursor(lnumWithPattern, 0);
+		return;
 	}
+
+	if (dir === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
+	editor.setCursor(lnumWithPattern, 0);
 }
 
 function gotoLastLinkInFile() {

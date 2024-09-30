@@ -46,6 +46,7 @@ declare type Editor = {
 	offsetToPos(offset: number): EditorPosition;
 	posToOffset(pos: EditorPosition): number;
 	lastLine(): number;
+	scrollIntoView(range: EditorRange, center?: boolean): void;
 	// biome-ignore lint/suspicious/noExplicitAny: code mirror instance, mostly for vim mode
 	cm: any;
 };
