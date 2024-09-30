@@ -59,6 +59,17 @@
 			<key>url</key>
 			<string>https://downforeveryoneorjustme.com/{query}</string>
 		</dict>
+		<key>624C0B38-48C7-4EDD-8C3F-72EA36AA46C3</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>tt</string>
+			<key>text</key>
+			<string>Linguee: {query}</string>
+			<key>url</key>
+			<string>https://www.linguee.com/english-german/search?query={query}</string>
+		</dict>
 		<key>7EEFE3C6-241D-4A58-B54F-876A851BDC32</key>
 		<dict>
 			<key>enabled</key>
