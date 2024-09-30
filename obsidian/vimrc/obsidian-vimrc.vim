@@ -9,11 +9,15 @@ unmap ,
 "───────────────────────────────────────────────────────────────────────────────
 " META
 
-" Open this vimrc
+" plugin settings
 exmap pluginSettings obcommand pseudometa-startup-actions:open-plugin-settings
 nnoremap g, :pluginSettings<CR>
 
-" copy command ids to devtools
+" Open this vimrc
+exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
+nnoremap <C-,> :openThisVimrc<CR>
+
+" copy command-ids to devtools
 exmap openDevTools jscommand { electronWindow.openDevTools() }
 nnoremap ? :obcommand<CR>:openDevTools<CR>
 
@@ -128,12 +132,12 @@ nnoremap g; u<C-r>
 exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
 nnoremap g. :gotoLastLinkInFile<CR>
 
-" go to next/prev paragraph with link in file
-" `zt` so long lines are fully visible in the editor
+" go to next/prev paragraph with link
+" (`zt<C-y><C-y>` so long lines are fully visible in the editor)
 exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/) }
-nnoremap gj :gotoNextLinkInFile<CR>zt
+nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
 exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
-nnoremap gk :gotoPrevLinkInFile<CR>zt
+nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
