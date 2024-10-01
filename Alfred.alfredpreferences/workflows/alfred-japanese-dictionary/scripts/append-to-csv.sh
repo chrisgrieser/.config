@@ -5,11 +5,13 @@
 if [[ ! -f "$csv_file" ]]; then
 	mkdir -p "$(dirname "$csv_file")"
 
-	# anki csv metadata
-	if [[ "$use_anki_csv_metadata" == "1" ]]; then
+	# csv metadata
+	if [[ "$csv_metadata" == "anki" ]]; then
 		echo "#separator:comma" > "$csv_file"
 		echo "#html:false" >> "$csv_file"
 		echo "#tags column:4" >> "$csv_file"
+	elif [[ "$csv_metadata" == "header_row" ]]; then
+		echo '"kanji","kana","english","word type' > "$csv_file"
 	fi
 fi
 

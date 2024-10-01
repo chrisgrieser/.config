@@ -71,8 +71,8 @@ function run(argv) {
 				.join("    ");
 
 			// csv
-			const kebabCasedWord = wordType.toLowerCase().replaceAll(" ", "-").replaceAll(",-", " ");
-			const csvLine = [kanji || "", kana || "", engWord, kebabCasedWord]
+			const kebabWordType = wordType.toLowerCase().replaceAll(" ", "-").replaceAll(",-", " ");
+			const csvLine = [kanji || "", kana || "", engWord, kebabWordType]
 				.map((p) => '"' + p.replaceAll('"', '""') + '"') // quote, and escape double quotes
 				.join(",");
 
