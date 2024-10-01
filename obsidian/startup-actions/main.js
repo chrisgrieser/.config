@@ -7,7 +7,7 @@ const obsidian = require("obsidian");
 
 const opacity= {
 	light: 0.93,
-	dark: 0.88,
+	dark: 0.90,
 }
 
 //──────────────────────────────────────────────────────────────────────────────
