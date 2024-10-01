@@ -702,7 +702,7 @@
 				<key>hotkey</key>
 				<integer>9</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>524288</integer>
 				<key>hotstring</key>
 				<string>V</string>
 				<key>leftcursor</key>
@@ -1193,7 +1193,7 @@ disown</string>
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"🔬 Check for unused files in current workflow"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"🔤 Apply debugger font size","arg":"apply_debugger_fontsize"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"}]</string>
+				<string>[{"title":"📊 Open data folder","arg":"data_folder"},{"title":"🧹 Open cache folder","arg":"cache_folder"},{"title":"🔬 Check for unused files in current workflow","arg":"unused_files"},{"title":"❗️ Restart Alfred","arg":"restart"},{"title":"🔤 Apply debugger font size","arg":"apply_debugger_fontsize"},{"title":"⚙️ Update \"Alfred Preferences.app\" icon","arg":"pref_icon"}]</string>
 				<key>keyword</key>
 				<string>{var:menu_keyword}</string>
 				<key>matchmode</key>
