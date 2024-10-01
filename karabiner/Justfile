@@ -4,12 +4,15 @@ karabiner_profile := "Default"
 
 #───────────────────────────────────────────────────────────────────────────────
 
+[macos]
 reload_karabiner:
     osascript -l JavaScript ./build-karabiner-config.js "{{ karabiner_profile }}"
 
+[macos]
 browse_docs:
     open "https://karabiner-elements.pqrs.org/docs/"
 
+[macos]
 keyboard_layout_editor:
     open "http://www.keyboard-layout-editor.com/#/"
     open -R "./assets/finder-vim-mode/cheatsheet.json"

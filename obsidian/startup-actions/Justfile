@@ -1,5 +1,6 @@
 set quiet := true
 
+[macos]
 reload:
     #!/usr/bin/env zsh
     plugin_id=$(grep '"id"' "./manifest.json" | cut -d'"' -f4)

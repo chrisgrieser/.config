@@ -1,6 +1,7 @@
 set quiet := true
 
 # reload Hammerspoon config
+[macos]
 reload:
     open -g "hammerspoon://hs-reload"
     echo " Hammerspoon reloaded"
