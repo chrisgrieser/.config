@@ -4,6 +4,8 @@
 <dict>
 	<key>csv_file</key>
 	<string>~/Documents/jisho-words.csv</string>
+	<key>csv_metadata</key>
+	<string>anki</string>
 	<key>display_jlpt</key>
 	<true/>
 	<key>display_wanikani</key>
