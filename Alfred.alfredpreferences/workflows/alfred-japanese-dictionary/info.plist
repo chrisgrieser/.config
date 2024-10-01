@@ -345,7 +345,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/jisho.js</string>
+				<string>./scripts/jisho-entry-selection.js</string>
 				<key>subtext</key>
 				<string>Dictionary</string>
 				<key>title</key>
@@ -417,7 +417,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/jisho.js</string>
+				<string>./scripts/jisho-entry-selection.js</string>
 				<key>subtext</key>
 				<string>Dictionary</string>
 				<key>title</key>
@@ -433,29 +433,6 @@
 			<string>DC8CAC33-A0CE-4B39-B8B4-E7252BF1D13F</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>append-to-csv.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>97598B16-02A9-4914-8DDB-1F90BE296143</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -477,6 +454,29 @@
 			<string>2892C315-9E5C-4AEF-9D82-031432E07D7F</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/append-to-csv.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>97598B16-02A9-4914-8DDB-1F90BE296143</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -909,24 +909,35 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<true/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>add metadata for Anki</string>
+				<string>none</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>none</string>
+						<string>none</string>
+					</array>
+					<array>
+						<string>Anki</string>
+						<string>anki</string>
+					</array>
+					<array>
+						<string>header row</string>
+						<string>header_row</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>type of metadata to prepend to the csv file</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>use_anki_csv_metadata</string>
+			<string>csv_metadata</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.1</string>
+	<string>1.2.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
