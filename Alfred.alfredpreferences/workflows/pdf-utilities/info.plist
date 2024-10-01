@@ -175,19 +175,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E712DB78-7466-4A11-A054-BD5DBE84E974</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -412,25 +399,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>net.daringfireball.markdown</string>
-				</array>
-				<key>name</key>
-				<string>Markdown to docx (Pandoc)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>A98DF2BF-2CAF-4762-B44B-041654707863</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<false/>
 				<key>clipboardtext</key>
@@ -479,37 +447,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
+				<key>acceptsmulti</key>
 				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>14</integer>
-				<key>hotmod</key>
-				<integer>524288</integer>
-				<key>hotstring</key>
-				<string>E</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
+				<key>filetypes</key>
 				<array>
-					<string>com.apple.finder</string>
+					<string>net.daringfireball.markdown</string>
 				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
+				<key>name</key>
+				<string>Markdown to docx (Pandoc)</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E712DB78-7466-4A11-A054-BD5DBE84E974</string>
+			<string>A98DF2BF-2CAF-4762-B44B-041654707863</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -664,7 +616,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>170</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
@@ -684,7 +636,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>625</real>
 		</dict>
 		<key>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</key>
 		<dict>
@@ -702,9 +654,9 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>205</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>380</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -713,7 +665,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>500</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -724,7 +676,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>625</real>
 		</dict>
 		<key>8B3B6EC2-104F-401B-9252-6A96E9DBEDB5</key>
 		<dict>
@@ -751,7 +703,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>280</real>
+			<real>380</real>
 		</dict>
 		<key>AD5BE9DA-AEFF-4FF1-89B2-2D712F9BC487</key>
 		<dict>
@@ -778,18 +730,7 @@ Word-to-PDF based on: https://www.deanishe.net/post/2021/05/workflow-word-to-pdf
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>550</real>
-		</dict>
-		<key>E712DB78-7466-4A11-A054-BD5DBE84E974</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>note</key>
-			<string>md → docx</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>400</real>
+			<real>500</real>
 		</dict>
 		<key>F4515410-11F8-4E8D-8176-9499BC0098AE</key>
 		<dict>
