@@ -19,8 +19,8 @@ alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | h
 
 alias pr='gh pr create --web --fill'
 
-alias mark="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
-alias unmark="git tag --delete 'mark'"
+alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
+alias unmark_commit="git tag --delete 'mark'"
 
 #───────────────────────────────────────────────────────────────────────────────
 
