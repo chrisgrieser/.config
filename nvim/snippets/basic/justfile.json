@@ -1,4 +1,8 @@
 {
+  "macos-only recipe": {
+    "body": "[macos]",
+    "prefix": "macos-only recipe"
+  },
   "quiet": {
     "body": "set quiet := true",
     "prefix": "quiet"
