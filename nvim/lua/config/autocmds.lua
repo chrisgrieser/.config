@@ -288,7 +288,9 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 -- QUICKFIX: Goto first item
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
-	callback = function() pcall(vim.cmd.cfirst) end,
+	callback = function()
+		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
+	end,
 })
 
 --------------------------------------------------------------------------------
