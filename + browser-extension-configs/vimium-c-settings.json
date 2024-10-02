@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "9/29/2024, 9:47:59 PM",
-	"time": 1727639279080,
+	"@time": "10/2/2024, 7:27:04 PM",
+	"time": 1727890024416,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
@@ -163,7 +163,7 @@
 		""
 	],
 	"regexFindMode": true,
-	"scrollStepSize": 300,
+	"scrollStepSize": 250,
 	"searchEngines": "g https://www.google.com/search?q=%s",
 	"userDefinedCss": [
 		".HUD { ",
