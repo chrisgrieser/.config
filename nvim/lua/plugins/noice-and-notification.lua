@@ -13,17 +13,13 @@ end
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
-	-- lazy.nvim plugin update info
-	{ filter = { event = "notify", find = "^# Plugin Updates" }, view = "notify" },
-
-	-----------------------------------------------------------------------------
 	-- REDIRECT TO POPUP
 	{
 		filter = {
 			min_height = 10,
 			cond = function(msg)
 				local title = (msg.opts and msg.opts.title) or ""
-				return not title:find("tinygit")
+				return not title:find("tinygit") and not title:find("lazy%.nvim")
 			end,
 		},
 		view = "popup",
