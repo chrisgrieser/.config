@@ -238,12 +238,10 @@ function smartMerge() {
 
 /** @param {"absolute"|"relative"|"filename"} segment */
 function copyPathSegment(segment) {
-	const toCopy =
-		segment === "absolute"
-			? view.app.vault.adapter.getFullPath(view.file.path)
-			: segment === "relative"
-				? view.file.path
-				: view.file.name;
+	let toCopy = "";
+	if (segment === "absolute") toCopy = view.app.vault.adapter.getFullPath(view.file.path);
+	else if (segment === "relative") toCopy = view.file.path;
+	else if (segment === "filename") toCopy = view.file.name;
 	navigator.clipboard.writeText(toCopy);
 	new Notice("Copied:\n" + toCopy);
 }
@@ -282,7 +280,8 @@ function toggleLowercaseTitleCase() {
  */
 function openNextLink(where) {
 	function rangeOfFirstLink(/** @type {string} */ text) {
-		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[.*?\]\(.+?\)/;
+		//                  https / Obsidian URI       | wikilink  | markdown link
+		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[[^\]]*?\]\(.+?\)/;
 		//                 (    url / obsidian URI    )( wikilink )(markdown link)
 		const linkMatch = text.match(linkRegex);
 		if (!linkMatch || linkMatch.index === undefined) return { start: -1, end: -1 };
@@ -291,7 +290,7 @@ function openNextLink(where) {
 		return { start, end };
 	}
 
-	// check if cursor is on a link
+	// check if cursor is currently on a link
 	const cursor = editor.getCursor();
 	const fullLine = editor.getLine(cursor.line);
 	let linkStart;
