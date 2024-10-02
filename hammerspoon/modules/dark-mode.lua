@@ -52,7 +52,6 @@ hs.hotkey.bind({}, "f13", function() M.setDarkMode("toggle") end)
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
-	if env.isProjector() then return end
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 	local targetMode
