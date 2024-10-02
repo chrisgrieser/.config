@@ -14,7 +14,6 @@ local spellfixes = {
 	doestn = "doesn't",
 	eror = "error",
 	dont = "don't",
-	["don#t"] = "don't",
 	dwon = "down",
 	esle = "else",
 	fales = "false",

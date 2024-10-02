@@ -390,6 +390,8 @@ keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf", "help", "checkhealth" },
-	callback = function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end,
+	callback = function()
+		vim.defer_fn(function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end, 1)
+	end,
 })
 --------------------------------------------------------------------------------
