@@ -13,20 +13,20 @@ local now = os.time
 local config = {
 	checkIntervalSecs = 30,
 	thresholdMins = {
-		Finder = 10, -- only closes windows (and only when not on projector)
+		Finder = 15, -- only closes windows (and only when not on projector)
 		Hammerspoon = 3, -- only console window
 		MacWhisper = 60,
 		BusyCal = 5,
-		Reminders = 5,
+		Reminders = 3,
 		Mimestream = 5,
-		Slack = 25,
+		Slack = 30,
 		Highlights = 90,
-		Obsidian = 120,
+		Obsidian = 180,
 		Discord = 180,
-		["WezTerm"] = 150,
-		["wezterm-gui"] = 150,
-		["Alfred Preferences"] = 20,
-		["System Settings"] = 3,
+		["WezTerm"] = 120,
+		["wezterm-gui"] = 120,
+		["Alfred Preferences"] = 30,
+		["System Settings"] = 5,
 	},
 }
 
