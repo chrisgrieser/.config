@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>0501B994-1E9B-4FE5-8595-BDBFA4B72AD6</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>lucid</string>
+			<key>text</key>
+			<string>Lucid Icons: {query}</string>
+			<key>url</key>
+			<string>https://lucide.dev/icons/?search={query}</string>
+		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
 			<key>enabled</key>
