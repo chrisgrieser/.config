@@ -10,6 +10,7 @@ export CDPATH="$HOME/Developer:$HOME/Desktop"
 
 # OPTIONS
 setopt CD_SILENT
+setopt AUTO_CD     # BUG -> https://github.com/marlonrichert/zsh-autocomplete/issues/749
 setopt CHASE_LINKS # follow symlinks when they are cd target
 
 # POST-DIRECTORY-CHANGE-HOOK
@@ -18,10 +19,6 @@ function chpwd {
 	_magic_dashboard
 	_auto_venv
 }
-
-# PENDING https://github.com/marlonrichert/zsh-autocomplete/issues/749
-alias c=' cd'
-# setopt AUTO_CD # pure directory = cd into it
 
 #───────────────────────────────────────────────────────────────────────────────
 # SHORTHANDS
