@@ -2,8 +2,5 @@ set quiet := true
 
 [macos]
 reload:
-    #!/usr/bin/env osascript
-    tell application "Obsidian" to activate
-    tell application "System Events" to keystroke "r" using {command down, shift down}
-    # In case of `System Events got an error: osascript is not allowed to send
-    # keystrokes.`, re-assign permissions in System Preferences.
+    # requires custom plugin adding this URI
+    open "obsidian://reload-vault"

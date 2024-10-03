@@ -70,6 +70,13 @@ class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 
+		this.addCommand({
+			id: "open-plugin-settings",
+			name: "Open plugin settings",
+			icon: "cog",
+			callback: () => new PluginSettings(this.app).open(),
+		});
+
 		// OPACITY, depending on dark/light mode
 		if (!this.app.isMobile) {
 			function setOpacity() {
@@ -102,11 +109,8 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			new Notice(`"${pluginName}" reloaded.`);
 		});
 
-		this.addCommand({
-			id: "open-plugin-settings",
-			name: "Open plugin settings",
-			icon: "cog",
-			callback: () => new PluginSettings(this.app).open(),
+		this.registerObsidianProtocolHandler("reload-vault", () => {
+			this.app.commands.executeCommandById("app:reload");
 		});
 	}
 }
