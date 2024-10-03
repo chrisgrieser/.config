@@ -103,8 +103,7 @@ end
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
--- deferred, since sometimes slow
-vim.schedule(function() vim.opt.clipboard = "unnamedplus" end)
+vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
