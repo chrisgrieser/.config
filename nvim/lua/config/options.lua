@@ -31,6 +31,8 @@ vim.opt.autowriteall = true
 vim.opt.pumwidth = 15 -- min width
 vim.opt.pumheight = 12 -- max height
 
+vim.opt.jumpoptions = { "stack" } -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
+
 vim.opt.sidescrolloff = 12
 vim.g.baseScrolloff = 12 -- so scrolloff-changing functions can use this
 vim.opt.scrolloff = vim.g.baseScrolloff
@@ -56,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- `gww` or auto-breaking comment still follows `textwidth`, while using a wider
 -- line length setting for formatters. Setting those values independently is not
 -- possible normally, so we disable the respective in the `editorconfig` module
--- instead as a workaround. 
+-- instead as a workaround.
 require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
 

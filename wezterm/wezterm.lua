@@ -3,11 +3,11 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
-	"duckbones",
-	"Afterglow (Gogh)",
-	"Kanagawa (Gogh)",
 	"ChallengerDeep",
+	"Afterglow (Gogh)",
 	"cyberpunk",
+	"duckbones",
+	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
 }
 local lightThemes = {
