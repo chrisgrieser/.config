@@ -638,8 +638,9 @@
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt; Open the first "Read more" link of the entry in the browser.
 	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Append the entry to a .csv file.
 	  This is useful to import words into other tools, such as `Anki`.
-- Alternatively, you can also use the keyword `じ`. This triggers the same
-  search as `ji`. (`ji` must be followed by a space, `じ` does not require one.)
+	+ Alternatively, you can also use the keyword `じ` (`ji` must be followed by
+	  a space, `じ` does not require one), or use a
+	  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
 - Use the keyword `hiragana` or `katakana` to display a kana cheatsheet.
 - Use the keyword `jg` to look for Japanese Grammar guides.
 
@@ -993,7 +994,7 @@ to set hotkey for selection lookup</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.2</string>
+	<string>1.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

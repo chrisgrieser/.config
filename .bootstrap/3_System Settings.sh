@@ -100,6 +100,7 @@ defaults write -g KeyRepeat -int 2         # normal minimum: 2 (30ms)
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+defaults write -g NSInitialToolTipDelay -int 500 # default: 2000
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic" # when to show scrollbars
 defaults write -g AppleShowAllExtensions -bool true

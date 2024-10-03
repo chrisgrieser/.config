@@ -293,8 +293,19 @@ return {
 				end,
 				desc = "󰒕 Symbols",
 			},
-			-- stylua: ignore
-			{ "g!", function() telescope("diagnostics") end, desc = "󰋼 Workspace Diagnostics" },
+			{
+				"g!",
+				function()
+					local currentFile = vim.api.nvim_buf_get_name(0)
+					local ext = currentFile:match("%w+$")
+					vim.cmd.args("**/*." .. ext) -- open all files in cwd of same ft
+					vim.cmd.buffer(currentFile) -- stay at original buffer
+					local msg = ("Opened %s %s files."):format(vim.fn.argc(), ext)
+					vim.notify(, nil, { title = "󰒕 Diagnostics" })
+					vim.cmd.Telescope("diagnostics") -- workspace diagnostics
+				end,
+				desc = "󰋼 Workspace Diagnostics",
+			},
 			{
 				"gw",
 				function() telescope("lsp_dynamic_workspace_symbols") end,
