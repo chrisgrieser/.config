@@ -30,16 +30,11 @@ set clipboard=unnamed
 " Y consistent with D and C to the end of line
 nnoremap Y y$
 
-" don't pollute the register (HACK since we can't map to `"_x` or `"_C` directly)
-nnoremap C "_c$
-nnoremap x "_dl
+" don't pollute the register
+nnoremap c "_c
+nnoremap C "_C
+nnoremap x "_x
 vnoremap p P
-nnoremap c "_c " not working with vimrc plugin
-
-" auto-fetch title
-exmap ex-command-name obcommand command-id
-exmap autoFetchTitlePaste obcommand obsidian-auto-link-title:auto-link-title-paste
-nnoremap p :autoFetchTitlePaste<CR>
 
 " paste at EoL
 nnoremap P mzA<Space><Esc>p`z
