@@ -300,8 +300,10 @@ return {
 					local ext = currentFile:match("%w+$")
 					vim.cmd.args("**/*." .. ext) -- open all files in cwd of same ft
 					vim.cmd.buffer(currentFile) -- stay at original buffer
+
 					local msg = ("Opened %s %s files."):format(vim.fn.argc(), ext)
-					vim.notify(, nil, { title = "󰒕 Diagnostics" })
+					vim.notify(msg, nil, { title = "󰒕 Diagnostics" })
+
 					vim.cmd.Telescope("diagnostics") -- workspace diagnostics
 				end,
 				desc = "󰋼 Workspace Diagnostics",
