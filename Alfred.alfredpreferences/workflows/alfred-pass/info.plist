@@ -572,7 +572,7 @@
 				<key>keyword</key>
 				<string>pw new</string>
 				<key>subtext</key>
-				<string>Store it as new pass entry</string>
+				<string>Store as new entry</string>
 				<key>text</key>
 				<string>❇️ New password</string>
 				<key>withspace</key>
@@ -713,7 +713,7 @@
 				<key>keyword</key>
 				<string>pw gen</string>
 				<key>subtext</key>
-				<string>Copy it WITHOUT creating a new pass entry</string>
+				<string>Copy WITHOUT creating new entry</string>
 				<key>text</key>
 				<string>✴️ New password</string>
 				<key>withspace</key>
