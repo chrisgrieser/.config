@@ -42,7 +42,7 @@ keymap("n", "<leader>xr", function()
 	else
 		vim.notify("File has no shebang", vim.log.levels.WARN)
 	end
-end, { desc = "󰜎 e[x]ecute/[r]un file" })
+end, { desc = "󰜎 [r]un file" })
 
 --------------------------------------------------------------------------------
 -- INSPECT

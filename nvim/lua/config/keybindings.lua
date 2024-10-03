@@ -266,7 +266,10 @@ end, { desc = " Create Scratchpad File" })
 
 keymap("n", "gq", function()
 	local ok = pcall(vim.cmd.cnext)
-	if not ok then vim.cmd.cfirst() end
+	if not ok then
+		vim.notify("Wrapped.")
+		vim.cmd.cfirst()
+	end
 end, { desc = " Next quickfix" })
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
 keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
