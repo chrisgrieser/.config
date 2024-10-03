@@ -356,11 +356,13 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
-				-- using lua for hammerspoon statements
-				objectLog = { lua = 'print("%s %s: " .. hs.inspect(%s))' },
+				objectLog = {
+					lua = 'print("%s %s: " .. hs.inspect(%s))', -- hammerspoon
+					typescript = "new Notice(`%s %s: ${%s}`, 0)", -- obsidian
+				},
 				clearLog = { lua = "hs.console.clearConsole() -- %s" },
 				sound = {
-					lua = 'hs.sound.getByName("Morse"):play() -- %s',
+					lua = 'hs.sound.getByName("Morse"):play() -- %s', -- hammerspoon
 					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
 				},
 			},
