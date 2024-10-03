@@ -5,10 +5,10 @@ const obsidian = require("obsidian");
 
 // CONFIG
 
-const opacity= {
+const opacity = {
 	light: 0.93,
-	dark: 0.90,
-}
+	dark: 0.9,
+};
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -91,6 +91,9 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			await this.app.plugins.disablePlugin(pluginId);
 			await this.app.plugins.enablePlugin(pluginId);
 			const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
+
+			// biome-ignore lint/suspicious/noConsole: intentional here
+			console.clear();
 
 			// clear current notices
 			const allNotices = activeDocument.body.getElementsByClassName("notice");
