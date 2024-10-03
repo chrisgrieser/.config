@@ -14,10 +14,7 @@
     "prefix": "jsfile"
   },
   "obcommand": {
-    "body": [
-      "exmap ${1:ex-command-name} obcommand ${2:command-id}",
-      "nnoremap ${3:keymap} :${1:ex-command-name}"
-    ],
+    "body": "nnoremap ${2:keymap} :obcommand<Space>${1:command-id}<CR>",
     "prefix": "obcommand"
   }
 }

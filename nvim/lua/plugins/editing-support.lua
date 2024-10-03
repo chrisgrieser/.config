@@ -357,12 +357,12 @@ return {
 			marker = "🖨️",
 			logStatements = {
 				objectLog = {
-					lua = 'print("%s %s: " .. hs.inspect(%s))', -- hammerspoon
-					typescript = "new Notice(`%s %s: ${%s}`, 0)", -- obsidian
+					lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
+					typescript = "new Notice(`%s %s: ${%s}`, 0)", -- Obsidian
 				},
-				clearLog = { lua = "hs.console.clearConsole() -- %s" },
+				clearLog = { lua = "hs.console.clearConsole() -- %s" }, -- Hammerspoon
 				sound = {
-					lua = 'hs.sound.getByName("Morse"):play() -- %s', -- hammerspoon
+					lua = 'hs.sound.getByName("Morse"):play() -- %s', -- Hammerspoon
 					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
 				},
 			},

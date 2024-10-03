@@ -296,11 +296,12 @@ return {
 			{
 				"g!",
 				function()
+					-- open all files in cwd of same ft, ensures workspace
+					-- diagnostics are exhaustive
 					local currentFile = vim.api.nvim_buf_get_name(0)
 					local ext = currentFile:match("%w+$")
-					vim.cmd.args("**/*." .. ext) -- open all files in cwd of same ft
+					vim.cmd.args("**/*." .. ext) -- open files matching glob
 					vim.cmd.buffer(currentFile) -- stay at original buffer
-
 					local msg = ("Opened %s %s files."):format(vim.fn.argc(), ext)
 					vim.notify(msg, nil, { title = "󰒕 Diagnostics" })
 
