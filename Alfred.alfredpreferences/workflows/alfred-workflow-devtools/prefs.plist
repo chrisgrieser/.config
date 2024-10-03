@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>alfred_keyword</key>
-	<string>:alfred</string>
 	<key>debugger_fontsize</key>
 	<integer>15</integer>
 	<key>keyword_docs</key>
 	<string>ah</string>
+	<key>menu_keyword</key>
+	<string>aa</string>
 </dict>
 </plist>
