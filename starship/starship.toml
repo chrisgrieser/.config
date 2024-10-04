@@ -73,7 +73,7 @@ style = "fg:yellow bg:black"
 # between my local Alfred workflows and their respective repos.
 [custom.location_indicator]
 when = '[[ $PWD == $HOME/Developer/* ]]'
-style = "fg:cyan bg:black"
+style = "fg:cyan bg:black bold"
 command = 'echo "󱁤"'
 format = '[ $output ]($style)'
 
