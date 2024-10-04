@@ -314,8 +314,8 @@ exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikth
 nnoremap ,r :rejectSuggestionsInLine<CR>
 
 " set "[r]ead: true" property
-exmap addYamlKey jsfile Meta/vimrc-jsfile.js { addYamlKey("read", true) }
-nnoremap ,r :addYamlKey<CR>
+exmap markAsRead obcommand quadro:mark-datafile-as-read
+nnoremap ,r :markAsRead<CR>
 
 " [i]nspect [w]ord count
 exmap inspectWordCount jsfile Meta/vimrc-jsfile.js { inspectWordCount() }

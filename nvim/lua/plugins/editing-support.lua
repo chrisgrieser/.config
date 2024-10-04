@@ -316,9 +316,9 @@ return {
 						format_tree = function(tsj)
 							if tsj:tsnode():parent():type() == "if_statement" then
 								tsj:remove_child { "{", "}" }
-								tsj:update_preset({ recursive = false }, "join") -- <- New line
+								tsj:update_preset({ recursive = false }, "join")
 							else
-								require("treesj.langs.javascript").statement_block.join.fallback(tsj)
+								require("treesj.langs.javascript").statement_block.join.format_tree(tsj)
 							end
 						end,
 					},
@@ -332,6 +332,7 @@ return {
 					},
 				},
 				return_statement = {
+					join = { enable = false },
 					split = {
 						enable = function(tsn) return tsn:parent():type() == "if_statement" end,
 						format_tree = function(tsj) tsj:wrap { left = "{", right = "}" } end,
