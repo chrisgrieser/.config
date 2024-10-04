@@ -23,6 +23,7 @@ const originalSites = {
 	moment: "https://momentjs.com/docs/#/",
 	npm: "https://docs.npmjs.com/",
 	jq: "https://jqlang.github.io/jq/manual/v1.7/index.html#",
+	esbuild: "https://esbuild.github.io/",
 };
 
 //──────────────────────────────────────────────────────────────────────────────
