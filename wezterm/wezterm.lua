@@ -11,12 +11,12 @@ local darkThemes = {
 	"MaterialDesignColors",
 }
 local lightThemes = {
-	"Silk Light (base16)",
-	"Paraiso (light) (terminal.sexy)",
-	"Bluloco Zsh Light (Gogh)",
-	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
 	"seoulbones_light",
+	"Paraiso (light) (terminal.sexy)",
+	"Silk Light (base16)",
+	"Bluloco Zsh Light (Gogh)",
+	"Solar Flare Light (base16)",
 }
 
 local lightOpacity = 0.91

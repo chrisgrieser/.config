@@ -49,6 +49,9 @@ const rgIgnoreFile =
 	$.getenv("alfred_workflow_uid") +
 	"/scripts/home-icloud-ignore-file";
 
+// FIX for external CLIs not being recognized on older Macs
+const pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+
 /** @typedef {Object} SearchConfig
  * @property {string} shellCmd `%s` is replaced with `dir`
  * @property {boolean=} shallowOutput whether the `shellCmd` performs a search of depth 1
@@ -65,7 +68,7 @@ const searchConfig = {
 		// CAVEAT As opposed to `fd`, `rg` does not give us folders, which is
 		// acceptable since this searches for recent files, and modification dates
 		// for folders are unintuitive (only affected by files one level deep).
-		shellCmd: `cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
+		shellCmd: pathExport + `cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		directory: app.pathTo("home folder"),
 		maxFiles: Number.parseInt($.getenv("max_recent_files")),
 	},
@@ -116,6 +119,8 @@ function run() {
 	}
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
 	const stdout = app.doShellScript(shellCmd).trim();
+	// biome-ignore lint/suspicious/noConsole: intentional
+	console.log(`SHELL COMMAND\n${shellCmd}\n\nSTDOUT\n${stdout.slice(0, 1000)}…`);
 	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS
