@@ -17,13 +17,13 @@ rules:
           - { key_code: escape, lazy: true }
         to:
           - { key_code: right_command, modifiers: [control, option], lazy: true }
-      #─────────────────────────────────────────────────────────────────────────────
       # INFO Map freed-up `Esc` to clipboard (Alfred) / screenshot history
       # (CleanShot) (mapping done in `finder-vim-alfred-addon.yaml` to consider
       # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Close Notification"
+  - description: "Notification"
     manipulators:
+      # dismiss notifications
       - type: basic
         from: { key_code: "9", modifiers: *hyper }
         to:
@@ -39,6 +39,11 @@ rules:
                   .map(banner => banner.actions().slice(-1)[0])
                   .forEach(banner => banner.perform())
               '
+      # show notifications
+      - type: basic
+        from: { key_code: "0", modifiers: *hyper }
+        to:
+          - { key_code: n, modifiers: [fn] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Insert Mode Vim: ⇪ Hyper Movements"
     manipulators:

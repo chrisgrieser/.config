@@ -67,12 +67,12 @@ local function showHideTickerApp(referenceWin)
 	local screenshotOverlay = referenceWin:title() == "" or u.isFront("CleanShot X")
 	if loginWin or screenshotOverlay then return end
 
-	if wu.checkSize(referenceWin, wu.pseudoMax) or wu.checkSize(referenceWin, wu.middleHalf) then
+	if wu.winHasSize(referenceWin, wu.pseudoMax) or wu.winHasSize(referenceWin, wu.middleHalf) then
 		winToTheSide()
 	else
 		local theApp = referenceWin:application()
 		local appName = theApp and theApp:name() or ""
-		local appWithTransBgWasMaximized = wu.checkSize(referenceWin, wu.maximized)
+		local appWithTransBgWasMaximized = wu.winHasSize(referenceWin, hs.layout.maximized)
 			and hs.fnutils.contains(env.transBgApps, appName)
 		if appWithTransBgWasMaximized then masto:hide() end
 	end

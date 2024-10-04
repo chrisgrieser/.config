@@ -5,6 +5,7 @@ alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
+alias grh='git clean -dfx && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
 alias push='git push --no-progress'
@@ -145,13 +146,7 @@ function gM {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# as opposed to `git reset --hard`, this leaves a commit in the reflog, and also deals
-# with untracked files https://stackoverflow.com/a/57411665/22114136
-function grh {
-	git stash --include-untracked --quiet
-	git stash drop --quiet
-}
-
+# undo shallow clones
 function unshallow {
 	git fetch --unshallow
 	git pull --no-progress --tags # undo `git clone --no-tags`
