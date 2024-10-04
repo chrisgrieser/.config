@@ -463,7 +463,8 @@ rules:
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
-          #  Inpect UI-element-paths https://www.sudoade.com/gui-scripting-with-applescript/
+          # needs UI element, since name of the menu items changes
+          # howto: inpect UI-elements https://www.sudoade.com/gui-scripting-with-applescript/
           - shell_command: |
               osascript -e '
                 tell application "System Events" to tell process "Calendar"
