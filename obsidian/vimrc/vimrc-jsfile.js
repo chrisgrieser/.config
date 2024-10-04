@@ -403,28 +403,3 @@ function consoleLogFromWordUnderCursor() {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-
-const ignoredFolders = ["Meta"]; // CONFIG
-const ignoredExtensions = ["md"]; // CONFIG
-const resolvedLinkCache = dv.app.metadataCache.resolvedLinks;
-const allLinks = {};
-for (const [_, resolvedLinks] of Object.entries(resolvedLinkCache)) {
-	for (const link of Object.keys(resolvedLinks)) {
-		allLinks[link] = true;
-	}
-}
-const orphans = dv.app.vault
-	.getFiles()
-	.filter((f) => {
-		const isOrphan = !allLinks[f.path];
-		const nonMarkdown = !ignoredExtensions.includes(f.extension);
-		const notInIgnoredFolder = ignoredFolders.every((folder) => !f.path.startsWith(folder));
-		return isOrphan && nonMarkdown && notInIgnoredFolder;
-	})
-	.map((f) => `[[${f.path}]]`);
-if (orphans.length > 0) {
-	dv.header(4, "Orphans");
-	dv.list(orphans);
-} else {
-	dv.span("No orphans found.");
-}
