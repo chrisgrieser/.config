@@ -89,7 +89,6 @@ function s {
 
 # SEARCH AND REPLACE VIA `rg`
 # usage: sr "search" "replace" file1 file2 file3
-# DOCS "https://docs.rs/regex/1.*/regex/#syntax"
 function sr {
 	local search="$1"
 	local replace
