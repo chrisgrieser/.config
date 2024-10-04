@@ -52,13 +52,13 @@ exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
 exmap copyObsidianUriMdLink jsfile Meta/vimrc-jsfile.js { copyObsidianUriMdLink() }
 
 noremap <C-p> :copyAbsolutePath<CR>
-inoremap <C-p> :copyAbsolutePath<CR>
+inoremap <C-p> <Esc>:copyAbsolutePath<CR>a
 noremap <C-t> :copyRelativePath<CR>
-inoremap <C-t> :copyRelativePath<CR>
+inoremap <C-t> <Esc>:copyRelativePath<CR>a
 noremap <C-n> :copyFilename<CR>
-inoremap <C-n> :copyFilename<CR>
+inoremap <C-n> <Esc>:copyFilename<CR>a
 noremap <C-o> :copyObsidianUriMdLink<CR>
-inoremap <C-o> :copyObsidianUriMdLink<CR>
+inoremap <C-o> <Esc>:copyObsidianUriMdLink<CR>a
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
@@ -548,7 +548,7 @@ nnoremap ,oa :toggleAiCompletion<CR>
 " insert mode: accept suggestion
 " normal mode: format
 exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <M-s> :acceptGhostText<CR>
+inoremap <M-s> <Esc>:acceptGhostText<CR>a
 
 exmap lint obcommand obsidian-linter:lint-file-unless-ignored
 nnoremap <M-s> :lint<CR>
