@@ -1,3 +1,10 @@
+-- INFO 
+-- This module uses macOS' builtin full-screen tiling functionality and its
+-- spacing functionality to quickly create a vertical split of two paired apps
+-- apps via one hotkey.
+
+--------------------------------------------------------------------------------
+
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -23,22 +30,12 @@ end
 local function startSplit()
 	-- 1. GUARD Tiling disabled or not available for the app
 	local frontApp = hs.application.frontmostApplication()
-	if not frontApp:findMenuItem { "Window", "Tile Window to Right of Screen" } then
-		local msg
-		if frontApp:findMenuItem { "Window", "Move Window to Right Side of Screen" } then
-			msg = {
-				"Tiling not available with the current settings. Enable them via:",
-				"1. System Settings → Desktop & Dock → Mission Control",
-				'2. Enable "Displays have separate Spaces"',
-				"3. Log out and log in again.",
-			}
-		else
-			msg = {
-				frontApp:name() .. " does not support window options.",
-				"Start the split from the other app.",
-			}
-		end
-		hs.alert(table.concat(msg, "\n"), 4)
+	if not frontApp:findMenuItem { "Window", "Full Screen Tile", "Right of Screen" } then
+		local msg = frontApp:name()
+			.. " does not support window options.\n"
+			.. "Ensure 'Displays have separate Spaces' in Docks settings is enabled.\n"
+			.. "If so, you need to start the split from the other app."
+		hs.alert(msg, 4)
 		return
 	end
 
@@ -52,7 +49,7 @@ local function startSplit()
 	-- 3. start mission control selection
 	M.delay_timer = hs.timer
 		.doAfter(0.2, function() -- wait for unhiding/unfullscreen
-			frontApp:selectMenuItem { "Window", "Tile Window to Right of Screen" }
+			frontApp:selectMenuItem { "Window", "Full Screen Tile", "Right of Screen" }
 		end)
 		:start()
 

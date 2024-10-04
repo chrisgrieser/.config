@@ -110,7 +110,7 @@ local function movieLayout()
 	u.quitApps {
 		"Slack",
 		"Discord",
-		"BusyCal",
+		"Calendar",
 		"Alfred Preferences",
 		"Highlights",
 		"MacWhisper",

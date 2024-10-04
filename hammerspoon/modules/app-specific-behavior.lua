@@ -46,7 +46,6 @@ end):start()
 -- ZOOM
 
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
-	u.quitApps("BusyCal") -- only used to open a Zoom link
 	u.closeTabsContaining("zoom.us") -- remove leftover tabs
 
 	-- close 2nd zoom window when joining a meeting
