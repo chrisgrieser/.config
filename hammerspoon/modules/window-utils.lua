@@ -2,17 +2,11 @@ local M = {} -- persist from garbage collector
 
 local env = require("modules.environment-vars")
 local u = require("modules.utils")
-
-local hotkey = hs.hotkey.bind
-local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
-M.maximized = hs.layout.maximized
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.middleHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
-M.center = { x = 0.184, y = 0.1, w = 0.75, h = 0.8 }
-M.narrow = { x = 0.184, y = 0, w = 0.45, h = 1 }
 
 -- negative x to hide useless sidebar
 M.toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
@@ -26,7 +20,7 @@ if env.isAtOffice then M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
 ---@param relSize hs.geometry
 ---@nodiscard
 ---@return boolean|nil -- nil if no win
-function M.checkSize(win, relSize)
+function M.winHasSize(win, relSize)
 	if not win then return end
 	local maxf = win:screen():frame()
 	local winf = win:frame()
@@ -60,8 +54,8 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.3, 0.6 }, function()
-		if M.checkSize(win, pos) then return end
+	u.runWithDelays({ 0, 0.2, 0.4 }, function()
+		if M.winHasSize(win, pos) then return end
 		win:moveToUnit(pos)
 	end)
 end
@@ -122,7 +116,7 @@ function M.autoTile(winSrc)
 		end)
 	elseif #wins == 1 then
 		if env.isProjector() then
-			pos[1] = M.maximized
+			pos[1] = hs.layout.maximized
 		elseif u.isFront("Finder") then
 			pos[1] = M.middleHalf
 		else
@@ -161,7 +155,9 @@ function M.autoTile(winSrc)
 	for _, position in pairs(pos) do
 		local thisPositionExists = false
 		for _, win in pairs(wins) do
-			if not thisPositionExists and M.checkSize(win, position) then thisPositionExists = true end
+			if not thisPositionExists and M.winHasSize(win, position) then
+				thisPositionExists = true
+			end
 		end
 		if thisPositionExists then existingPositions = existingPositions + 1 end
 	end
@@ -175,83 +171,61 @@ end
 --------------------------------------------------------------------------------
 
 -- Open apps always at Mouse Screen
-M.wf_appsOnMouseScreen = wf.new({
-	"Mimestream",
-	"Obsidian",
-	"Finder",
-	"WezTerm",
-	"Hammerspoon",
-	"System Settings",
-	"Discord",
-	"MacWhisper",
-	"Neovide",
-	"espanso",
-	"BusyCal",
-	"Alfred Preferences",
-	"ClipBook",
-	"BetterTouchTool",
-	"Brave Browser",
-	table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
-}):subscribe(wf.windowCreated, function(newWin)
-	if #hs.screen.allScreens() < 2 then return end
-	local mouseScreen = hs.mouse.getCurrentScreen()
-	if not mouseScreen then return end
-	local alreadyOnMouseScreen = newWin:screen():name() == mouseScreen:name()
-	if not alreadyOnMouseScreen then newWin:moveToScreen(mouseScreen) end
-end)
+M.wf_appsOnMouseScreen = hs.window.filter
+	.new({
+		"Mimestream",
+		"Obsidian",
+		"Finder",
+		"WezTerm",
+		"Hammerspoon",
+		"System Settings",
+		"Discord",
+		"MacWhisper",
+		"Neovide",
+		"espanso",
+		"BusyCal",
+		"Alfred Preferences",
+		"ClipBook",
+		"BetterTouchTool",
+		"Brave Browser",
+		table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
+	})
+	:subscribe(hs.window.filter.windowCreated, function(newWin)
+		if #hs.screen.allScreens() < 2 then return end
+		local mouseScreen = hs.mouse.getCurrentScreen()
+		if not mouseScreen then return end
+		if newWin:screen():name() ~= mouseScreen:name() then newWin:moveToScreen(mouseScreen) end
+	end)
 
 --------------------------------------------------------------------------------
--- HOTKEY ACTIONS
+-- ACTIONS
 
-local function controlSpaceAction()
+local function toggleSize()
 	local currentWin = hs.window.focusedWindow()
 
-	local baseSize = M.pseudoMax
-	if u.isFront { "Finder", "Script Editor", "Reminders" } then baseSize = M.middleHalf end
-	if u.isFront { "ClipBook", "TextEdit" } then baseSize = M.center end
+	local isSmallerApp = u.isFront { "Finder", "Script Editor", "Reminders", "ClipBook", "TextEdit" }
+	local baseSize = isSmallerApp and M.middleHalf or M.pseudoMax
+	local newSize = M.winHasSize(currentWin, baseSize) and hs.layout.maximized or baseSize
 
-	local newSize = M.checkSize(currentWin, baseSize) and M.maximized or baseSize
 	M.moveResize(currentWin, newSize)
 end
 
-local function moveWinToNextDisplay()
+local function moveToNextDisplay()
 	if #hs.screen.allScreens() < 2 then return end
 	local win = hs.window.focusedWindow()
 	if not win then return end
-	local targetScreen = win:screen():next()
-	win:moveToScreen(targetScreen, true)
-
-	local frame = win:frame()
-	u.runWithDelays({ 0.1, 0.4 }, function()
-		win = hs.window.focusedWindow()
-		if win then win:setFrameInScreenBounds(frame) end
-	end)
+	win:moveToScreen(win:screen():next(), true)
 end
 
-function M.moveAllWinsProjectorAndDarkenBuiltinDisplay()
-	if #hs.screen.allScreens() < 2 then return end
-
-	M.iMacDisplay:setBrightness(0)
-
-	local projectorScreen = hs.screen.primaryScreen()
-	for _, win in pairs(hs.window:orderedWindows()) do
-		win:moveToScreen(projectorScreen, true)
-		u.runWithDelays(0.1, function() win:setFrameInScreenBounds(win:frame()) end)
-	end
-end
+local function tileRight() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end
+local function tileLeft() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end
 
 --------------------------------------------------------------------------------
-
--- Triggers: Hotkeys & URI Scheme
-hotkey(u.hyper, "M", moveWinToNextDisplay)
-hotkey({ "ctrl" }, "space", controlSpaceAction) -- fn+space also bound to ctrl+space via Karabiner
-
--- stylua: ignore start
-hotkey(u.hyper, "right", function() M.moveResize(hs.window.focusedWindow(), hs.layout.right50) end)
-hotkey(u.hyper, "left", function() M.moveResize(hs.window.focusedWindow(), hs.layout.left50) end)
-hotkey(u.hyper, "down", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0.5, w = 1, h = 0.5 }) end)
-hotkey(u.hyper, "up", function() M.moveResize(hs.window.focusedWindow(), { x = 0, y = 0, w = 1, h = 0.5 }) end)
--- stylua: ignore end
+-- HOTKEYS
+hs.hotkey.bind({ "ctrl" }, "space", toggleSize)
+hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
+hs.hotkey.bind(u.hyper, "right", tileRight)
+hs.hotkey.bind(u.hyper, "left", tileLeft)
 
 --------------------------------------------------------------------------------
 return M

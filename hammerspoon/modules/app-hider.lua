@@ -45,7 +45,7 @@ local function hideOthers(appObj)
 	if u.appRunning(config.disableHidingWhileActive) then return end
 	local thisWin = appObj and appObj:mainWindow()
 	if not thisWin or not appObj:isFrontmost() then return end
-	if not (wu.checkSize(thisWin, wu.pseudoMax) or wu.checkSize(thisWin, wu.maximized)) then
+	if not (wu.winHasSize(thisWin, wu.pseudoMax) or wu.winHasSize(thisWin, hs.layout.maximized)) then
 		return
 	end
 
@@ -104,7 +104,7 @@ M.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
 	local app = win:application()
 	if
 		not (env.isProjector())
-		and wu.checkSize(win, wu.maximized)
+		and wu.winHasSize(win, hs.layout.maximized)
 		and not (u.isFront(config.dontTriggerHidingOtherApps))
 		and app
 	then

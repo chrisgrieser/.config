@@ -47,12 +47,23 @@ local function isWorkweek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
+local function moveAllWinsProjectorAndDarkenBuiltinDisplay()
+	if #hs.screen.allScreens() < 2 then return end
+
+	M.iMacDisplay:setBrightness(0)
+
+	local projectorScreen = hs.screen.primaryScreen()
+	for _, win in pairs(hs.window:orderedWindows()) do
+		win:moveToScreen(projectorScreen, true)
+	end
+end
+
 if not env.isAtOffice then
 	M.menubarItem = hs
 		.menubar
 		.new(true, "moveAllWinsToProjectorScreen")
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
-		:setClickCallback(wu.moveAllWinsProjectorAndDarkenBuiltinDisplay)
+		:setClickCallback(moveAllWinsProjectorAndDarkenBuiltinDisplay)
 end
 
 --------------------------------------------------------------------------------

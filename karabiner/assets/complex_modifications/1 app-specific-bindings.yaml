@@ -457,28 +457,19 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) BusyCal"
+  - description: "(Apps) Calendar"
     manipulators:
-      # Sidebars
+      # Toggle sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
-          - { key_code: c, modifiers: [command, option] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
-      - type: basic
-        from: { key_code: "0", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: t, modifiers: [command, option] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
-      # Quick event with NLP instead of normal event creation
-      - type: basic
-        from: { key_code: "n", modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "n", modifiers: [command, option] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.busymac\.busycal] }]
+          #  Inpect UI-element-paths https://www.sudoade.com/gui-scripting-with-applescript/
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Calendar"
+                  click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
+                end tell'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.iCal$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
@@ -531,6 +522,4 @@ rules:
                 end tell'
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.pixelmatorteam\.pixelmator\.x$
-              - ^com\.apple\.Preview$
+            bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$, ^com\.apple\.Preview$]

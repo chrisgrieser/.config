@@ -86,12 +86,12 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[c]alendar (BusyCal)"
+      - description: "[c]alendar"
         type: basic
         from: { key_code: c }
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'BusyCal'
+          - shell_command: open -a 'Calendar'
           - *deactivate-leader
           - *remove-notice
 

@@ -23,7 +23,7 @@ M.wf_browser = wf.new("Brave Browser")
 	:subscribe(wf.windowCreated, function(win)
 		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
 		if env.isProjector() and winOnMainScreen then
-			wu.moveResize(win, wu.maximized)
+			wu.moveResize(win, hs.layout.maximized)
 		else
 			wu.autoTile(M.wf_browser)
 		end

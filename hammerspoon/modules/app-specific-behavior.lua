@@ -156,7 +156,8 @@ M.wf_mimestream = wf.new("Mimestream")
 		local mimestream = u.app("Mimestream")
 		if not mimestream then return end
 		local winCount = #mimestream:allWindows()
-		local newSize = winCount > 1 and wu.narrow or wu.pseudoMax
+		local narrow = { x = 0.184, y = 0, w = 0.45, h = 1 } -- = shorter line width
+		local newSize = winCount > 1 and narrow or wu.pseudoMax
 		wu.moveResize(newWin, newSize)
 	end)
 
