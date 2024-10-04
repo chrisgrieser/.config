@@ -1,19 +1,6 @@
 // DOCS https://github.com/esm7/obsidian-vimrc-support/blob/master/JsSnippets.md
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @param {string} key @param {boolean|string|number} value */
-function addYamlKey(key, value) {
-	const currentFile = view.app.workspace.getActiveFile();
-	if (!currentFile) {
-		new Notice("No active file.");
-		return;
-	}
-	view.app.fileManager.processFrontMatter(currentFile, (fm) => {
-		fm[key] = value;
-	});
-	new Notice(`Set property "${key}" to "${value}".`);
-}
-
 function toggleLineNumbers() {
 	const vault = view.app.vault;
 	vault.setConfig("showLineNumber", !vault.getConfig("showLineNumber"));
