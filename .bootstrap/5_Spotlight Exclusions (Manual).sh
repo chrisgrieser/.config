@@ -3,7 +3,7 @@
 function revealIfExistent() { [[ -e "$1" ]] && open -R "$1"; }
 
 revealIfExistent "/Applications/Utilities"
-revealIfExistent "$DATA_DIR/vim-data"
+revealIfExistent "/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data"
 revealIfExistent "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs"
 
 # open spotlight settings

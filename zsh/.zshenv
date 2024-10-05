@@ -3,8 +3,8 @@
 
 export ZDOTDIR="$HOME/.config/zsh" # location of the zsh configuration
 
-export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
-[[ -f "$DATA_DIR/private dotfiles/api-keys.txt" ]] && source "$DATA_DIR/private dotfiles/api-keys.txt"
+private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
+[[ -f "$private_dots/api-keys.txt" ]] && source "$private_dots/api-keys.txt"
 
 export EDITOR='nvim'
 

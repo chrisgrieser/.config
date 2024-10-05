@@ -114,20 +114,7 @@ keymap(
 	{ desc = "󰛒 Redo All" }
 )
 
-keymap("n", "<leader>u1", function() vim.cmd.earlier("1h") end, { desc = "󰜊 Undo 1h" })
-keymap("n", "<leader>u8", function() vim.cmd.earlier("8h") end, { desc = "󰜊 Undo 8h" })
-
--- save open time for each buffer
-vim.api.nvim_create_autocmd(
-	"BufReadPost",
-	{ callback = function() vim.b.timeOpened = os.time() end }
-)
-
-keymap("n", "<leader>uo", function()
-	local now = os.time()
-	local secsPassed = now - vim.b.timeOpened
-	vim.cmd.earlier(tostring(secsPassed) .. "s")
-end, { desc = "󰜊 Undo since last open" })
+keymap("n", "<leader>uu", ":earlier h<Left>", { desc = "󰜊 Undo to earlier" })
 
 --------------------------------------------------------------------------------
 -- LSP

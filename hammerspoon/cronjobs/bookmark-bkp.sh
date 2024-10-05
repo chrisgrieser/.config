@@ -3,11 +3,10 @@
 # CONFIG
 max_number_of_bkps=100
 browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/Browser Bookmarks"
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO $DATA_DIR defined in .zshenv
 isodate=$(date '+%Y-%m-%d')
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/Browser Bookmarks"
 backup_file="$bkp_destination/$isodate.json"
 
 mkdir -p "$bkp_destination"
