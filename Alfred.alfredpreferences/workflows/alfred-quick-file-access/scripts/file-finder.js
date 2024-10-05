@@ -50,7 +50,7 @@ const rgIgnoreFile =
 	"/scripts/home-icloud-ignore-file";
 
 // FIX for external CLIs not being recognized on older Macs
-const pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+const pathExport = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; ";
 
 /** @typedef {Object} SearchConfig
  * @property {string} shellCmd `%s` is replaced with `dir`
@@ -68,7 +68,9 @@ const searchConfig = {
 		// CAVEAT As opposed to `fd`, `rg` does not give us folders, which is
 		// acceptable since this searches for recent files, and modification dates
 		// for folders are unintuitive (only affected by files one level deep).
-		shellCmd: pathExport + `cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
+		shellCmd:
+			pathExport +
+			`cd "%s" && rg --no-config --files --binary --sortr=modified --ignore-file="${rgIgnoreFile}"`,
 		directory: app.pathTo("home folder"),
 		maxFiles: Number.parseInt($.getenv("max_recent_files")),
 	},
@@ -80,7 +82,8 @@ const searchConfig = {
 	[$.getenv("trash_keyword")]: {
 		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
 		// INFO not using `rg`, since it will not find folders
-		shellCmd: 'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
+		shellCmd:
+			'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
 		absPathOutput: true,
 		shallowOutput: true,
 	},
@@ -106,6 +109,8 @@ function run() {
 	const keyword = // `alfred_workflow_keyword` is not set when triggered via hotkey
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
+	// biome-ignore lint/suspicious/noConsole: intentional
+	console.log("KEYWORD:", keyword);
 
 	// PARAMETERS
 	let { shellCmd, directory, absPathOutput, shallowOutput, maxFiles, prefix } =
@@ -118,9 +123,11 @@ function run() {
 		if (directory === "") return errorItem("⚠️ No Finder window found.");
 	}
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
+	// biome-ignore lint/suspicious/noConsole: intentional
+	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
 	// biome-ignore lint/suspicious/noConsole: intentional
-	console.log(`SHELL COMMAND\n${shellCmd}\n\nSTDOUT\n${stdout.slice(0, 1000)}…`);
+	console.log("STDOUT\n" + stdout.slice(0, 1000));
 	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS
@@ -136,12 +143,14 @@ function run() {
 			if (!shallowOutput) {
 				const parent = parts.join("/");
 				subtitle = parent.replace(/.*\/com~apple~CloudDocs/, "☁").replace(/\/Users\/\w+/, "~");
-				subtitle = "▸ " + subtitle
+				subtitle = "▸ " + subtitle;
 			}
 
 			const ext = name.split(".").pop() || "";
 			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
-			const icon = imageExt.includes(ext) ? { path: absPath } : { path: absPath, type: "fileicon" };
+			const icon = imageExt.includes(ext)
+				? { path: absPath }
+				: { path: absPath, type: "fileicon" };
 
 			return {
 				title: prefix + name,
