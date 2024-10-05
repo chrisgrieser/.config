@@ -10,11 +10,11 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	command cp -fv "$HOME/Desktop/Justfile" .
+	chmod +x .build-and-release.sh
 }
 
-commit_msg="style: lint Justfile"
-amend_and_forcepush="true"
+commit_msg="build: fix missing permission for build script"
+amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -85,5 +85,8 @@ done <<< "$repos_to_update"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-[[ $not_updated -gt 0 ]] && print "\e[1;33m$not_updated repos not updated.\e[0m"
+if [[ $not_updated -gt 0 ]] ; then
+	echo "────────────────────────"
+	print "\e[1;33m$not_updated repos not updated.\e[0m"
+fi
 "$ZDOTDIR/notificator" --title "🌐Multi-repo update" --message "Update finished." --sound "Blow"
