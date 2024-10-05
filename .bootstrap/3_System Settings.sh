@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # SOURCES FOR MAC DEFAULT SETTINGS
 # https://github.com/herrbischoff/awesome-macos-command-line
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos

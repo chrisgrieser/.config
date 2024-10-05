@@ -5,7 +5,7 @@
 # ask for credentials upfront
 sudo -v
 setopt INTERACTIVE_COMMENTS
-export DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
+dotfolder="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -28,7 +28,7 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspo
 brew install pinentry-mac pass gnupg
 defaults write org.gpgtools.common DisableKeychain -bool yes # prevent from saving in the keychains
 
-gpg --import "$DATA_DIR/Authentication/passwords and gpg/gpg-pass.key"
+gpg --import "$dotfolder/Authentication/passwords and gpg/gpg-pass.key"
 ln -sf "$HOME/.config/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 gpgconf --kill gpg-agent # restart so the new gpg agent is recognized
 find ~/.gnupg -type f -exec chmod 600 {} \;
@@ -44,7 +44,7 @@ fi
 # REPOS: Dotfiles, Passwords
 
 # SSH
-ln -sf "$DATA_DIR/Authentication/ssh/" ~/.ssh
+ln -sf "$dotfolder/Authentication/ssh/" ~/.ssh
 sudo chmod -R 700 ~/.ssh/id_ed25519
 
 cd ~ || return 1

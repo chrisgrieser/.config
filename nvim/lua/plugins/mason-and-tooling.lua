@@ -11,13 +11,6 @@ return {
 		end,
 		opts = {
 			PATH = "skip", -- since already adding to PATH above
-
-			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
-			-- also requires `yq` being available in the system
-			-- registries = {
-			-- 	"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry", -- needs to come first
-			-- 	"github:mason-org/mason-registry",
-			-- },
 			ui = {
 				border = vim.g.borderStyle,
 				height = 0.85,

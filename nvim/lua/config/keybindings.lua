@@ -172,10 +172,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 -- LSP
 keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
-keymap({ "n", "x" }, "<D-s>", function()
-	vim.cmd.update()
-	vim.lsp.buf.format()
-end, { desc = "󰒕 LSP Format" })
+keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE
@@ -186,8 +183,6 @@ keymap("c", "<BS>", function()
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 -- INSERT MODE
-keymap({ "i", "c" }, "<C-a>", "<Home>")
-keymap({ "i", "c" }, "<C-e>", "<End>")
 keymap("n", "i", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
