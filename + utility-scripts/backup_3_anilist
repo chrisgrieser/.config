@@ -3,7 +3,7 @@
 # CONFIG
 python="python3.12"
 username="pseudometa"
-backupdir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/anilist/"
+backupdir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anilist/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
