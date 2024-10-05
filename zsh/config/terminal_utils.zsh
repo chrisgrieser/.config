@@ -32,11 +32,12 @@ function o() {
 # open last changed file in cwd
 function oo {
 	local last_modified
-	last_modified=$(find . -type file -maxdepth 4 -not -path "./.git/**" -print0 |
+	last_modified=$(find . -type file -maxdepth 4 -not -path "./.git/**" -not -name ".DS_Store" -print0 |
 		xargs -0 stat -f "%m %N" |
 		sort --numeric --reverse |
 		sed -n "1p" |
 		cut -d" " -f2-)
+	[[ -z "$last_modified" ]] && return 1
 	open "$last_modified"
 }
 
@@ -194,6 +195,6 @@ function ..d() {
 		return 1
 	fi
 
-	# INFO `cd .` to trigger cd-hook *after* deletion 
+	# INFO `cd .` to trigger cd-hook *after* deletion
 	cd -q .. && trash "$OLDPWD" && cd .
 }

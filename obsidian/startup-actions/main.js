@@ -66,6 +66,49 @@ class PluginSettings extends obsidian.FuzzySuggestModal {
 	}
 }
 
+class NewFileInFolder extends obsidian.FuzzySuggestModal {
+	constructor(app) {
+		super(app);
+		this.setPlaceholder("Select folder to create new file in…");
+
+		// navigate via `Tab` and `Shift-tab`
+		this.scope.register([], "Tab", () => {
+			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+		});
+		this.scope.register(["Shift"], "Tab", () => {
+			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
+		});
+	}
+
+	getItems() {
+		const folders = this.plugin.app.vault
+			.getAllLoadedFiles()
+			.filter((abstractFile) => !abstractFile.extension)
+			.sort((a, b) => a.stats.mtime - b.stats.mtime);
+		return folders;
+	}
+
+	getItemText(folder) {
+		return folder.name;
+	}
+
+	onChooseItem(folder) {
+		let name = "Untitled";
+		while (true){
+			const path = `${folder.path}/${name}.md`;
+			const fileAlreadyExists = this.app.vault.getFileByPath(path)
+			if (!fileAlreadyExists) break;
+			const index = Number.parseInt(name.match(/\d+$/)?.[0] || 0)
+			name = name.replace(/\d*$/, (num) => {
+				if (!num) return "1";
+				return (index + 1).toString();
+			});
+
+		}
+		this.app.vault.create(`${folder.path}/${name}.md`);
+	}
+}
+
 class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
@@ -75,6 +118,13 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			name: "Open plugin settings",
 			icon: "cog",
 			callback: () => new PluginSettings(this.app).open(),
+		});
+
+		this.addCommand({
+			id: "New file in folder",
+			name: "New file in folder",
+			icon: "file-plus",
+			callback: () => new NewFileInFolder(this.app).open(),
 		});
 
 		// OPACITY, depending on dark/light mode
