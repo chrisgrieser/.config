@@ -34,6 +34,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>601A9A7F-900F-4728-B2A2-714664BC25EA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>95BD13CE-A1F9-45BD-8BC5-8F3F22A93231</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<array>
 			<dict>
@@ -86,6 +99,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A0FB7F6B-A974-406A-874E-ECE9A52C50FB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>601A9A7F-900F-4728-B2A2-714664BC25EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<array>
 			<dict>
@@ -104,6 +130,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>59EA681A-3183-4B9D-9A93-32C8131AC999</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D3C91204-FF42-4926-8D76-24C539134442</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>95BD13CE-A1F9-45BD-8BC5-8F3F22A93231</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E459E2C2-C8FA-4611-AD32-56C8DE08A16B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D3C91204-FF42-4926-8D76-24C539134442</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -170,6 +222,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>9F9F299E-A995-42F4-8E78-E22AC821B859</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
@@ -189,6 +262,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Dedent Indentation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>tasksettings</key>
 				<dict/>
 				<key>taskuid</key>
@@ -200,6 +294,31 @@
 			<string>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$*" | 
+	awk "NF {p=1} p" | 
+	python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -247,23 +366,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
+				<key>acceptsfiles</key>
 				<false/>
-				<key>regexmultiline</key>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
 				<false/>
-				<key>replacestring</key>
-				<string></string>
+				<key>name</key>
+				<string>lowercase</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
+			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>9F9F299E-A995-42F4-8E78-E22AC821B859</string>
+			<string>A0FB7F6B-A974-406A-874E-ECE9A52C50FB</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.transform</string>
+			<key>uid</key>
+			<string>601A9A7F-900F-4728-B2A2-714664BC25EA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -277,39 +409,27 @@
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Dedent Indentation</string>
+				<string>Capital case</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
-			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<string>E459E2C2-C8FA-4611-AD32-56C8DE08A16B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo "$*" | 
-	awk "NF {p=1} p" | 
-	python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>3</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.transform</string>
 			<key>uid</key>
-			<string>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</string>
+			<string>D3C91204-FF42-4926-8D76-24C539134442</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -366,9 +486,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>860</real>
+			<real>895</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>140</real>
+		</dict>
+		<key>601A9A7F-900F-4728-B2A2-714664BC25EA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>295</real>
 		</dict>
 		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<dict>
@@ -386,9 +515,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
 			<key>xpos</key>
-			<real>575</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>140</real>
 		</dict>
 		<key>95BD13CE-A1F9-45BD-8BC5-8F3F22A93231</key>
 		<dict>
@@ -397,9 +526,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>save `to_paste`</string>
 			<key>xpos</key>
-			<real>505</real>
+			<real>540</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>170</real>
 		</dict>
 		<key>9F9F299E-A995-42F4-8E78-E22AC821B859</key>
 		<dict>
@@ -411,6 +540,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>390</real>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>A0FB7F6B-A974-406A-874E-ECE9A52C50FB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>265</real>
 		</dict>
 		<key>A641DF13-BAC1-4A9B-8BCC-99C080BE6500</key>
 		<dict>
@@ -428,9 +566,27 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>focus app</string>
 			<key>xpos</key>
-			<real>720</real>
+			<real>755</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>140</real>
+		</dict>
+		<key>D3C91204-FF42-4926-8D76-24C539134442</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>230</real>
+			<key>ypos</key>
+			<real>415</real>
+		</dict>
+		<key>E459E2C2-C8FA-4611-AD32-56C8DE08A16B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>385</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

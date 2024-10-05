@@ -19,3 +19,9 @@ export PASSWORD_STORE_GENERATED_LENGTH=30 # some services break with longer pass
 export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with special chars m(
 alias pass="env NO_PLUGINS=true pass" # not using `nvim` with its plugins with `pass` for security
 
+#───────────────────────────────────────────────────────────────────────────────
+# NPM
+# do not crowd `$HOME`. (Set in .zshenv, so it's also applied to Neovide.)
+export npm_config_cache="$HOME/.cache/npm"
+#───────────────────────────────────────────────────────────────────────────────
+

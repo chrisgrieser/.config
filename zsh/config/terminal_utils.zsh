@@ -71,7 +71,7 @@ function s {
 	local selected file line
 	selected=$(
 		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --smart-case --ignore-file="$HOME/.config/ripgrep/ignore" |
+			--no-config --hidden --smart-case --ignore-file="$HOME/.config/ripgrep/ignore" |
 			fzf --ansi --select-1 --delimiter=":" \
 				--preview="bat {1} --no-config --color=always --highlight-line={2} --line-range={2}: " \
 				--preview-window="60%,top,border-down" \
