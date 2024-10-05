@@ -26,16 +26,19 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 
 	getItems() {
-		const attachmentDir = this.app.vault.config.attachmentFolderPath.slice(2);
+		const excluded = this.app.vault.config.userIgnoreFilters;
 		const folders = this.app.vault
 			.getAllLoadedFiles()
 			.filter((item) => {
-				const isFolder = !item.extension;
-				const notRoot = Boolean(item.parent);
-				const notAttachmentDir = item.name !== attachmentDir;
-				return isFolder && notRoot && notAttachmentDir;
+				if (item.extension) return false; // not folder
+				const rootDir = !item.parent;
+				const excludedDir = excluded.some((dir) => {
+					if (dir.startsWith("/")) return item.path.match(new RegExp(dir.slice(1, -1)));
+					return item.path.startsWith(dir);
+				});
+				return !rootDir && !excludedDir;
 			})
-			.sort((a, b) => {
+			.sort((a, b) => { // by depth, then alphabetically
 				const depthA = a.path.split("/").length;
 				const depthB = b.path.split("/").length;
 				return depthA - depthB || a.path.localeCompare(b.path);
