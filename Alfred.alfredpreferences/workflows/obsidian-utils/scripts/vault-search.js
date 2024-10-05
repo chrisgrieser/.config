@@ -57,8 +57,9 @@ function run() {
 	// PERF `find` quicker than `mdfind`
 	let cmd = `cd "${vaultPath}" && find . \\( -name "*.md" -or -name "*.canvas" \\) -not -path "./.trash/*"`;
 	for (const dir of ignoredDirs) {
-		if (dir.startsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`;
-		else cmd += ` -not -path "./${dir}*"`;
+		if (dir.startsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`; // regex
+		else if (dir.endsWith("/")) cmd += ` -not -path "./${dir}*"`; // dir
+		else cmd += ` -not -path "./${dir}"`; // file
 	}
 	const filesInVault = app.doShellScript(cmd).split("\r");
 

@@ -34,7 +34,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 				const rootDir = !item.parent;
 				const excludedDir = excluded.some((dir) => {
 					if (dir.startsWith("/")) return item.path.match(new RegExp(dir.slice(1, -1)));
-					return item.path.startsWith(dir);
+					return item.path.startsWith(dir); // non-regex dir
 				});
 				return !rootDir && !excludedDir;
 			})
