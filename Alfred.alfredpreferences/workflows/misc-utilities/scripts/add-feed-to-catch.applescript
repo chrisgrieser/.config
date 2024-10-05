@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript
--- INFO Inpect UI-element-paths https://www.sudoade.com/gui-scripting-with-applescript/
-
+# INFO Inpect UI-element-paths https://www.sudoade.com/gui-scripting-with-applescript/
 --------------------------------------------------------------------------------
+
 on run argv
 	set query to item 1 of argv
 	set the clipboard to query
@@ -21,6 +21,6 @@ on run argv
 		delay 0.1 -- wait for clipboard
 		keystroke "v" using {command down}
 		delay 0.1
-		key code 48 -- tab to URL field
+		key code 48 using {shift down} -- shift-tab back to name
 	end tell
 end run
