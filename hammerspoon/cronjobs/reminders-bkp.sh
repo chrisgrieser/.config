@@ -6,13 +6,13 @@ max_number_of_bkps=100
 #───────────────────────────────────────────────────────────────────────────────
 
 isodate=$(date +"%Y-%m-%d")
-bkp_destination="$DATA_DIR/Backups/Reminders"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups"
 backup_file="$bkp_destination/${isodate}.json"
 
 mkdir -p "$bkp_destination"
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-reminders show "$list_name" --format=json --due-date="today" >>"$backup_file"
-reminders show "$list_name" --format=json --due-date="yesterday" >>"$backup_file"
+reminders show "$list_name" --format=json --due-date="today" >> "$backup_file"
+reminders show "$list_name" --format=json --due-date="yesterday" >> "$backup_file"
 
 #───────────────────────────────────────────────────────────────────────────────
 # restrict number of backups
