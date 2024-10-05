@@ -7,7 +7,7 @@ vim.opt.startofline = true -- motions like "G" also move to the first char
 vim.opt.virtualedit = "block" -- visual-block mode can select beyond end of line
 
 vim.opt.spell = false
-vim.opt.spellfile = vim.g.linterConfigs .. "/spellfile.add" -- needs `.add` extension
+vim.opt.spellfile = vim.fs.normalize("~/.config/+ linter-configs/spellfile.add") -- needs `.add` ext
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
 
 vim.opt.splitright = true -- split right instead of left

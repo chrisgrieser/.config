@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # INSTALLS
 sudo -v
 

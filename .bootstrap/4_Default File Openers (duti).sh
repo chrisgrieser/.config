@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # https://chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/
 #───────────────────────────────────────────────────────────────────────────────
 

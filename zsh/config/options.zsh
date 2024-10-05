@@ -30,7 +30,8 @@ setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 
 export HISTSIZE=20000
 export SAVEHIST=$HISTSIZE
-export HISTFILE="$DATA_DIR/zsh_history.zsh" # don't save in ZDOTDIR as it's in (public) dotfile repo
+# don't save in ZDOTDIR as it's in (public) dotfile repo
+export HISTFILE="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/zsh_history.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────
 # LANGUAGE

@@ -16,8 +16,6 @@ end, 1)
 -- CONFIG
 vim.g.mapleader = ","
 vim.g.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
-
-vim.g.linterConfigs = vim.fs.normalize("~/.config/+ linter-configs")
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------

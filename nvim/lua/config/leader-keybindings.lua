@@ -114,7 +114,7 @@ keymap(
 	{ desc = "󰛒 Redo All" }
 )
 
-keymap("n", "<leader>uu", ":earlier h<Left>", { desc = "󰜊 Undo to earlier" })
+keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
 
 --------------------------------------------------------------------------------
 -- LSP

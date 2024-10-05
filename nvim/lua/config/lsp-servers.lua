@@ -23,7 +23,6 @@ local lspToMasonMap = {
 	taplo = "taplo", -- toml lsp
 	ts_ls = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
-	vale_ls = "vale-ls", -- natural language linter, used for markdown
 	yamlls = "yaml-language-server",
 }
 
@@ -283,7 +282,7 @@ M.serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
----Helper function, as ltex, vale, etc lack ignore files
+---Helper function, as ltex etc lack ignore files
 ---@param client vim.lsp.Client
 ---@param bufnr number
 local function detachIfObsidianOrIcloud(client, bufnr)
@@ -361,24 +360,6 @@ M.serverConfigs.ltex = {
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 M.serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Information" }, -- Information|Warning|Hint|Error
-}
-
--- VALE
--- DOCS https://vale.sh/docs/integrations/guide/#vale-ls
--- DOCS https://vale.sh/docs/topics/config#search-process
-M.serverConfigs.vale_ls = {
-	filetypes = { "markdown" }, -- not in txt files, as those are used by `pass`
-
-	init_options = {
-		configPath = vim.g.linterConfigs .. "/vale/vale.ini",
-		installVale = true,
-		syncOnStartup = false,
-	},
-
-	-- FIX https://github.com/errata-ai/vale-ls/issues/4
-	cmd_env = { VALE_CONFIG_PATH = vim.g.linterConfigs .. "/vale/vale.ini" },
-
-	on_attach = detachIfObsidianOrIcloud,
 }
 
 --------------------------------------------------------------------------------
