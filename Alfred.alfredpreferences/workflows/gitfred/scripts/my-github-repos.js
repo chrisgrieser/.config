@@ -136,6 +136,10 @@ function run() {
 						subtitle: "⌘: Open at GitHub",
 						arg: repo.html_url,
 					},
+					shift: {
+						arg: "", // empty for next input
+						variables: { repo: repo.full_name }
+					}
 				},
 			};
 			return alfredItem;

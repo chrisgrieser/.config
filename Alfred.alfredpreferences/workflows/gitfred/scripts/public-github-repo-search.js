@@ -117,6 +117,10 @@ function run(argv) {
 					ctrl: {
 						subtitle: cloneSubtitle,
 					},
+					shift: {
+						arg: "", // empty for next input
+						variables: { repo: repo.full_name }
+					}
 				},
 			};
 		});
