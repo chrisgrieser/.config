@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-logpath_on_mac="$DATA_DIR/Backups/backups-to-external-drives.log"
+logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/backups-to-external-drives.log"
 
 #───────────────────────────────────────────────────────────────────────────────
 # DETERMINE VOLUME

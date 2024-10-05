@@ -83,9 +83,10 @@ vim.filetype.add {
 -- DIRECTORIES
 
 -- move to custom location where they are synced independently from the dotfiles
-vim.opt.undodir = vim.g.syncedData .. "/undo"
-vim.opt.viewdir = vim.g.syncedData .. "/view"
-vim.opt.shadafile = vim.g.syncedData .. "/main.shada"
+local dir = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
+vim.opt.undodir = dir .. "/undo"
+vim.opt.viewdir = dir .. "/view"
+vim.opt.shadafile = dir .. "/main.shada"
 
 --------------------------------------------------------------------------------
 -- AUTOMATION (external control)

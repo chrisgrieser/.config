@@ -3,7 +3,7 @@
 # CONFIG
 python="python3.12"
 username="pseudometa"
-backupdir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anilist/"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anilist/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -30,13 +30,13 @@ clone_and_venv() {
 exporter_json="https://github.com/Jacekun/AniPy"
 clone_and_venv "$exporter_json"
 python3 anipy.py -user "$username" # AniPy
-cp -vf ./output/anime_*.json "$backupdir"
+cp -vf ./output/anime_*.json "$bkp_destination"
 
 echo "----------"
 
 exporter_mal_xml="https://github.com/staticaron/AnilistToMalExporter"
 clone_and_venv "$exporter_mal_xml"
 python3 convertor.py "$username"
-cp -vf ./*.xml "$backupdir"
+cp -vf ./*.xml "$bkp_destination"
 
-open "$backupdir"
+open "$bkp_destination"
