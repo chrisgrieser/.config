@@ -341,6 +341,13 @@
     }
   ],
   "obsidian-auto-link-title:enhance-url-with-title": [],
-  "global-search:open": [],
-  "quadro:mark-datafile-as-read": []
+  "file-explorer:new-file": [],
+  "pseudometa-startup-actions:new-file-in-folder": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "N"
+    }
+  ]
 }
