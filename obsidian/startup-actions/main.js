@@ -4,67 +4,12 @@ const obsidian = require("obsidian");
 //──────────────────────────────────────────────────────────────────────────────
 
 // CONFIG
-
 const opacity = {
 	light: 0.93,
 	dark: 0.9,
 };
 
 //──────────────────────────────────────────────────────────────────────────────
-
-class PluginSettings extends obsidian.FuzzySuggestModal {
-	constructor(app) {
-		super(app);
-		this.setPlaceholder("Search settings tabs…");
-
-		// navigate via `Tab` and `Shift-tab`
-		this.scope.register([], "Tab", () => {
-			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
-		});
-		this.scope.register(["Shift"], "Tab", () => {
-			document.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
-		});
-	}
-
-	getItems() {
-		const settingsTabs = [
-			{ id: "about", name: "General" },
-			{ id: "file", name: "Files and links" },
-			{ id: "editor", name: "Editor" },
-			{ id: "appearance", name: "Appearance" },
-			{ id: "hotkeys", name: "Hotkeys" },
-			{ id: "plugins", name: "Core plugins" },
-			{ id: "community-plugins", name: "Community plugins" },
-		];
-
-		const corePluginsWithSettings = [];
-		const corePlugins = this.app.internalPlugins.plugins;
-		for (const [id, plugin] of Object.entries(corePlugins)) {
-			if (!plugin.enabled || !plugin.instance.options) continue;
-			corePluginsWithSettings.push({ id: id, name: plugin.instance.name });
-		}
-		corePluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
-
-		const communityPluginsWithSettings = [];
-		const enabledCommunityPlugins = this.app.plugins.plugins;
-		for (const [id, plugin] of Object.entries(enabledCommunityPlugins)) {
-			if (!(plugin.settings || plugin.settingsList)) continue;
-			communityPluginsWithSettings.push({ id: id, name: plugin.manifest.name });
-		}
-		communityPluginsWithSettings.sort((a, b) => a.name.localeCompare(b.name));
-
-		return [...settingsTabs, ...corePluginsWithSettings, ...communityPluginsWithSettings];
-	}
-
-	getItemText(plugin) {
-		return plugin.name;
-	}
-
-	onChooseItem(plugin, _event) {
-		this.app.setting.open();
-		this.app.setting.openTabById(plugin.id);
-	}
-}
 
 class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	constructor(app) {
@@ -81,31 +26,41 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 
 	getItems() {
-		const folders = this.plugin.app.vault
+		const attachmentDir = this.app.vault.config.attachmentFolderPath.slice(2);
+		const folders = this.app.vault
 			.getAllLoadedFiles()
-			.filter((abstractFile) => !abstractFile.extension)
-			.sort((a, b) => a.stats.mtime - b.stats.mtime);
+			.filter((item) => {
+				const isFolder = !item.extension;
+				const notRoot = Boolean(item.parent);
+				const notAttachmentDir = item.name !== attachmentDir;
+				return isFolder && notRoot && notAttachmentDir;
+			})
+			.sort((a, b) => {
+				const depthA = a.path.split("/").length;
+				const depthB = b.path.split("/").length;
+				return depthA - depthB || a.path.localeCompare(b.path);
+			});
 		return folders;
 	}
 
 	getItemText(folder) {
-		return folder.name;
+		return folder.path;
 	}
 
-	onChooseItem(folder) {
+	async onChooseItem(folder) {
 		let name = "Untitled";
-		while (true){
-			const path = `${folder.path}/${name}.md`;
-			const fileAlreadyExists = this.app.vault.getFileByPath(path)
+		while (true) {
+			const fileAlreadyExists = this.app.vault.getFileByPath(`${folder.path}/${name}.md`);
 			if (!fileAlreadyExists) break;
-			const index = Number.parseInt(name.match(/\d+$/)?.[0] || 0)
 			name = name.replace(/\d*$/, (num) => {
-				if (!num) return "1";
-				return (index + 1).toString();
+				return num ? (Number.parseInt(num) + 1).toString() : " 1";
 			});
-
 		}
-		this.app.vault.create(`${folder.path}/${name}.md`);
+		const newFile = await this.app.vault.create(`${folder.path}/${name}.md`, "");
+		await this.app.workspace.getLeaf().openFile(newFile);
+
+		this.app.commands.executeCommandById("workspace:edit-file-title"); // rename
+		this.app.commands.executeCommandById("editor:save-file"); // trigger linter for template
 	}
 }
 
@@ -114,14 +69,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		console.info(this.manifest.name + " loaded.");
 
 		this.addCommand({
-			id: "open-plugin-settings",
-			name: "Open plugin settings",
-			icon: "cog",
-			callback: () => new PluginSettings(this.app).open(),
-		});
-
-		this.addCommand({
-			id: "New file in folder",
+			id: "new-file-in-folder",
 			name: "New file in folder",
 			icon: "file-plus",
 			callback: () => new NewFileInFolder(this.app).open(),

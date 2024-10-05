@@ -492,7 +492,7 @@
 				<key>destinationuid</key>
 				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Shallow Clone (and Fork)</string>
 				<key>vitoclose</key>
@@ -954,44 +954,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string></string>
 				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🧬 Cloning…</string>
+				<string></string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
+			<string>12DF6F24-02AF-499B-9427-CAEBAA52BA9B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>.*github.com\/([^\/?]*\/[^\/?]*).*</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string>$1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -1007,18 +984,18 @@
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
-				<true/>
+				<false/>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>⚠️ {query}</string>
+				<string>🧬 Cloning…</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>462691DA-0319-4F31-B297-CC4A75FD1DFE</string>
+			<string>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1070,6 +1047,48 @@
 			<string>E6060F1A-83C9-464E-AE8E-8CFD3038EC59</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>.*github.com\/([^\/?]*\/[^\/?]*).*</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string>$1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⚠️ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>462691DA-0319-4F31-B297-CC4A75FD1DFE</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1137,51 +1156,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>path</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.browseinterminal</string>
-			<key>uid</key>
-			<string>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^http</string>
-						<key>outputlabel</key>
-						<string>URL</string>
-						<key>uid</key>
-						<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>local path</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1234,6 +1208,51 @@
 			<string>388AD75C-BCFB-445D-B62E-13BC0545FD5E</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>URL</string>
+						<key>uid</key>
+						<string>50A5BB29-16B1-4D34-9AFF-87D64D2B2F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>local path</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1535,7 +1554,7 @@
 			<key>xpos</key>
 			<real>810</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>1100</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1546,7 +1565,7 @@
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>980</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1566,6 +1585,13 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
+		<key>12DF6F24-02AF-499B-9427-CAEBAA52BA9B</key>
+		<dict>
+			<key>xpos</key>
+			<real>600</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
 		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
 		<dict>
 			<key>colorindex</key>
@@ -1584,7 +1610,7 @@
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>995</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1615,7 +1641,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>765</real>
+			<real>800</real>
 		</dict>
 		<key>42255CF9-BC03-46B1-8AB6-0AD60FA92ECE</key>
 		<dict>
@@ -1626,7 +1652,7 @@
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>740</real>
 		</dict>
 		<key>43F0CA76-BFE8-415E-97B3-F6B953E904FE</key>
 		<dict>
@@ -1635,7 +1661,7 @@
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>980</real>
+			<real>1060</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
@@ -1644,16 +1670,16 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>570</real>
+			<real>690</real>
 		</dict>
 		<key>4DC9B99A-333B-4BC6-B2A3-13EC4B319487</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>475</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>700</real>
+			<real>820</real>
 		</dict>
 		<key>504CECC9-A64D-4F2A-A0E5-664B355EB529</key>
 		<dict>
@@ -1682,7 +1708,7 @@
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>950</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1702,7 +1728,7 @@
 			<key>xpos</key>
 			<real>1005</real>
 			<key>ypos</key>
-			<real>695</real>
+			<real>815</real>
 		</dict>
 		<key>968A454B-B9EE-46DD-8156-3630F678E31C</key>
 		<dict>
@@ -1713,7 +1739,7 @@
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>835</real>
+			<real>915</real>
 		</dict>
 		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
 		<dict>
@@ -1722,9 +1748,9 @@
 			<key>note</key>
 			<string>get reponame</string>
 			<key>xpos</key>
-			<real>660</real>
+			<real>650</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>660</real>
 		</dict>
 		<key>9AED849C-2F6C-4741-B375-875D5613781A</key>
 		<dict>
@@ -1753,7 +1779,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>995</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1764,7 +1790,7 @@
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>995</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
@@ -1773,7 +1799,7 @@
 			<key>xpos</key>
 			<real>890</real>
 			<key>ypos</key>
-			<real>640</real>
+			<real>760</real>
 		</dict>
 		<key>C9F8D0A3-F933-4772-9CD2-E8B592A87029</key>
 		<dict>
@@ -1807,7 +1833,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>655</real>
 		</dict>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<dict>
@@ -1816,16 +1842,16 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>630</real>
 		</dict>
 		<key>F1ACCD95-5E8C-469E-AFD1-D184923540FB</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>585</real>
+			<real>580</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>770</real>
 		</dict>
 		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
 		<dict>
@@ -1843,7 +1869,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>990</real>
+			<real>1070</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1852,7 +1878,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1110</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
