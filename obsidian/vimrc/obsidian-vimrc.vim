@@ -9,13 +9,9 @@ unmap ,
 "───────────────────────────────────────────────────────────────────────────────
 " META
 
-" plugin settings
-exmap pluginSettings obcommand pseudometa-startup-actions:open-plugin-settings
-nnoremap g, :pluginSettings<CR>
-
 " Open this vimrc
 exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
-nnoremap <C-,> :openThisVimrc<CR>
+nnoremap g, :openThisVimrc<CR>
 
 " copy command-ids to devtools
 exmap openDevTools jscommand { electronWindow.openDevTools() }

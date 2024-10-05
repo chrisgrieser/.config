@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "10/2/2024, 7:27:04 PM",
-	"time": 1727890024416,
+	"@time": "10/5/2024, 1:18:42 PM",
+	"time": 1728127122818,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
@@ -75,6 +75,10 @@
 		"\"------------------------------------------------------",
 		"",
 		"unmapAll",
+		"",
+		"\" Meta",
+		"map ? showHelp",
+		"map g, focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		"",
 		"\" Modes",
 		"map i passNextKey",
@@ -156,10 +160,6 @@
 		"\" copy links of all tabs",
 		"map yw copyWindowInfo format=\"${url}\"",
 		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
-		"",
-		"\" Help",
-		"map ? showHelp",
-		"map , focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		""
 	],
 	"regexFindMode": true,
