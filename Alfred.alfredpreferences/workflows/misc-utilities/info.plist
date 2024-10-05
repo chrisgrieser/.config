@@ -51,7 +51,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
+				<string>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -228,6 +228,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8D0538B5-46D7-4A6B-B800-3C208CB8971B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1003,14 +1016,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>catch</string>
 				<key>subtext</key>
-				<string>Add new feed</string>
+				<string>from browser tab</string>
 				<key>text</key>
-				<string>Catch</string>
+				<string>❇️ Catch: Add new feed</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -1413,7 +1441,7 @@
 		<key>717241EC-A124-45BC-8591-0B9EB754327E</key>
 		<dict>
 			<key>xpos</key>
-			<real>665</real>
+			<real>815</real>
 			<key>ypos</key>
 			<real>625</real>
 		</dict>
@@ -1552,6 +1580,13 @@
 			<real>570</real>
 			<key>ypos</key>
 			<real>465</real>
+		</dict>
+		<key>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</key>
+		<dict>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>625</real>
 		</dict>
 		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
 		<dict>
