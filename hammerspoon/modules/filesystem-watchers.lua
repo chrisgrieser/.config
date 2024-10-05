@@ -57,7 +57,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			os.rename(path, browserSettings .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
-				.. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Backups/Inoreader Feeds.opml"
+				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
 			os.rename(path, backupPath)
 
 		-- 3A. OBSIDIAN CLIPPER FOR PHD VAULT
