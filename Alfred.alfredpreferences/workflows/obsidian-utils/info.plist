@@ -545,7 +545,24 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## File exclusion
+The search ignores files specified in your Obsidian settings under `Files &amp; link → Excluded Files`.
+
+## Supercharged icons
+Use a simple, comma-separated file to assign icons to the search results, one per line.
+(Using tags requires the [Metadata Extractor](https://github.com/kometenstaub/metadata-extractor).)
+
+```
+/Path/To/Folder,🚙
+#tagname,🚗
+```
+
+
+## Optional
+Optionally requires [Metadata Extractor](https://github.com/kometenstaub/metadata-extractor) 
+to display aliases and use tag-based supercharged icons.
+
+---
 
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
@@ -771,6 +788,27 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>supercharged icons file</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>supercharged_icon_file</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>oo</string>
 				<key>placeholder</key>
 				<string>oo</string>
@@ -801,7 +839,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>path to scratchpad file (can be in a different vault)</string>
+			<string>scratchpad file (can be in a different vault)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
