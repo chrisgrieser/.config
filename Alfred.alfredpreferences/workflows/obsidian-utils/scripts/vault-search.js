@@ -29,13 +29,13 @@ function run() {
 	const vaultPath = $.getenv("vault_path");
 	const superIconFile = $.getenv("supercharged_icon_file");
 
-	// aliases
+	// aliases & tags via Metadata Extractor
 	const metadataExtrFile = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
-	const metadata = fileExists(metadataExtrFile) ? JSON.parse(readFile(metadataExtrFile)) : [];
-	/** @type {Record<string, string[]>} */
-	const aliasMap = {};
-	for (const item of metadata) {
-		aliasMap[item.relativePath] = item.aliases;
+	const metadataObj = fileExists(metadataExtrFile) ? JSON.parse(readFile(metadataExtrFile)) : [];
+	/** @type {Record<string, {aliases: string[], tags: string[]}>} */
+	const metadata = {};
+	for (const item of metadataObj) {
+		metadata[item.relativePath] = { aliases: item.aliases, tags: item.tags };
 	}
 
 	// recent
@@ -51,22 +51,22 @@ function run() {
 		: [];
 
 	// supercharged icons
-	let superIconList = [];
+	const iconTags = [];
+	const iconFolders = [];
 	if (superIconFile && fileExists(superIconFile)) {
-		superIconList = readFile(superIconFile)
+		const superIcons = readFile(superIconFile)
 			.split("\n")
 			.filter((line) => line.trim().length > 0);
+		for (const line of superIcons) {
+			const [cond, icon] = line.split(",");
+			if (cond.startsWith("/")) {
+				iconFolders.push({ folder: cond, icon: icon });
+			} else if (cond.startsWith("#")) {
+				// slice to remove the leading # from the tag
+				iconTags.push({ tag: cond.slice(1), icon: icon });
+			}
+		}
 	}
-	// let superchargedIcon = "";
-	// 	let superchargedIcon2 = "";
-	// 	if (superIconList.length > 0 && file.tags) {
-	// 		for (const pair of superIconList) {
-	// 			let [tag, icon, icon2] = pair.split(",");
-	// 			tag = tag.toLowerCase().replaceAll("#", "");
-	// 			if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
-	// 			else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
-	// 		}
-	// 	}
 
 	// determine files to be listed
 	const vaultConfig = vaultPath + "/.obsidian/app.json";
@@ -76,8 +76,10 @@ function run() {
 	// PERF `find` quicker than `mdfind`
 	let cmd = `cd "${vaultPath}" && find . \\( -name "*.md" -or -name "*.canvas" \\) -not -path "./.trash/*"`;
 	for (const dir of ignoredDirs) {
-		if (dir.startsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`; // regex
-		else if (dir.endsWith("/")) cmd += ` -not -path "./${dir}*"`; // dir
+		if (dir.startsWith("/"))
+			cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`; // regex
+		else if (dir.endsWith("/"))
+			cmd += ` -not -path "./${dir}*"`; // dir
 		else cmd += ` -not -path "./${dir}"`; // file
 	}
 	const filesInVault = app.doShellScript(cmd).split("\r");
@@ -92,7 +94,7 @@ function run() {
 		const absPath = vaultPath + "/" + relPath;
 
 		// subtitle & matcher
-		const aliases = aliasMap[relPath] || [];
+		const aliases = metadata[relPath]?.aliases || [];
 		const shortAliases =
 			aliases.length < 2
 				? aliases
@@ -101,15 +103,29 @@ function run() {
 		const subtitle =
 			"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
 
-		// recent & bookmarked files
+		// icons
 		let icon = "";
 		if (bookmarks.includes(relPath)) {
 			icon += "🔖 ";
-			matcher += " bookmarks"
+			matcher += " bookmarks";
 		}
 		if (recentItems.includes(relPath)) {
 			icon += "🕑 ";
-			matcher += " recent"
+			matcher += " recent";
+		}
+		const tags = metadata[relPath]?.tags || [];
+		for (const tag of tags) {
+			const tagIcon = iconTags.find((i) => i.tag === tag)?.icon;
+			if (tagIcon) {
+				icon += tagIcon + " ";
+				matcher += " " + tag;
+			}
+		}
+		for (const folder of iconFolders) {
+			if (parent.startsWith(folder.folder)) {
+				icon += folder.icon + " ";
+				matcher += " " + folder.folder;
+			}
 		}
 
 		/** @type {AlfredItem} */
@@ -131,6 +147,6 @@ function run() {
 	// OUTPUT
 	return JSON.stringify({
 		items: results,
-		cache: { seconds: 600, loosereload: true },
+		//cache: { seconds: 600, loosereload: true },
 	});
 }
