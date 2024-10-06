@@ -1,5 +1,5 @@
 local M = {} -- persist from garbage collector
-local env = require("modules.environment-vars")
+local env = require("meta.environment-vars")
 --------------------------------------------------------------------------------
 
 -- bound to capslock via Karabiner elements
@@ -97,7 +97,7 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 ---collection. To avoid collecting too many, only a certain number are kept.
 ---@param delaySecs number|number[]
 ---@param callbackFn function
-function M.runWithDelays(delaySecs, callbackFn)
+function M.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
 		M.delayIdx = (M.delayIdx or 0) + 1
@@ -221,7 +221,7 @@ function M.quitApps(appNames)
 end
 
 function M.closeFinderWins()
-	M.runWithDelays({ 0, 3 }, function()
+	M.defer({ 0, 3 }, function()
 		local finder = hs.application("Finder")
 		if not finder then return end
 		for _, win in ipairs(finder:allWindows()) do

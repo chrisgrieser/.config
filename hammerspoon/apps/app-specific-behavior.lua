@@ -1,8 +1,8 @@
 local M = {} -- persist from garbage collector
 
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
-local wu = require("modules.window-utils")
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
+local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
@@ -24,7 +24,7 @@ M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
 
 	-- close 2nd zoom window when joining a meeting
 	if newWin:title() == "Zoom Meeting" then
-		u.runWithDelays(1, function()
+		u.defer(1, function()
 			local zoom = newWin:application()
 			if not zoom or zoom:findWindow("Update") then return end
 			local mainWin = zoom:findWindow("Zoom Workplace")
@@ -62,7 +62,7 @@ M.aw_fallthrough = aw.new(function(_, event)
 
 	-- CONFIG
 	local fallThroughApps = { "Transmission", "Mona" }
-	u.runWithDelays({ 0.1, 0.2 }, function()
+	u.defer({ 0.1, 0.2 }, function()
 		if not u.isFront(fallThroughApps) then return end
 		local visibleWins = hs.window:orderedWindows()
 		local nextWin

@@ -1,11 +1,7 @@
 local M = {} -- persist from garbage collector
 
-local u = require("modules.utils")
-local wu = require("modules.window-utils")
-
+local u = require("meta.utils")
 local aw = hs.application.watcher
---------------------------------------------------------------------------------
-
 --------------------------------------------------------------------------------
 
 -- VIMIUM CURSOR HIDER

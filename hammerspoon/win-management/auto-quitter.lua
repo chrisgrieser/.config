@@ -1,7 +1,7 @@
 local M = {} -- persist from garbage collector
 
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
 
 local aw = hs.application.watcher
 local now = os.time

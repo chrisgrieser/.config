@@ -1,9 +1,8 @@
 local M = {}
 
-local console = require("modules.console")
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
-local visuals = require("modules.visuals")
+local console = require("appearance.console")
+local u = require("meta.utils")
+local holeCover = require("appearance.hole-cover")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
@@ -39,7 +38,7 @@ function M.setDarkMode(toMode)
 
 	-- hammerspoon itself
 	console.setConsoleColors(toMode)
-	visuals.updateHoleCover()
+	holeCover.updateHoleCover()
 end
 
 -- MANUAL TOGGLING OF DARK MODE

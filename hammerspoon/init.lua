@@ -1,3 +1,13 @@
+-- HAMMERSPOON SETTINGS
+
+hs.autoLaunch(true)
+hs.menuIcon(false)
+hs.automaticallyCheckForUpdates(true)
+hs.window.animationDuration = 0
+
+--------------------------------------------------------------------------------
+-- LOAD MODULES
+
 G = {} -- persist from garbage collector
 
 ---Try to require the module, and do not error when one of them cannot be
@@ -12,43 +22,28 @@ local function safeRequire(module)
 	end
 end
 
---------------------------------------------------------------------------------
--- HAMMERSPOON SETTINGS
 
-hs.autoLaunch(true)
-hs.menuIcon(false)
-hs.automaticallyCheckForUpdates(true)
-hs.window.animationDuration = 0 -- quicker animations
+safeRequire("appearance.console")
+safeRequire("appearance.hole-cover")
+safeRequire("appearance.dark-mode")
 
---------------------------------------------------------------------------------
--- LOAD MODULES
+safeRequire("win-management.window-utils")
+safeRequire("win-management.layouts")
+safeRequire("win-management.app-hider")
+safeRequire("win-management.auto-quitter")
+safeRequire("win-management.auto-tile")
+safeRequire("win-management.vertical-split")
 
--- appearance
-safeRequire("modules.console")
-safeRequire("modules.visuals")
-safeRequire("modules.dark-mode")
+safeRequire("system.cronjobs")
+safeRequire("system.filesystem-watchers")
+safeRequire("system.repo-auto-sync")
+safeRequire("system.hardware-periphery")
+safeRequire("system.pageup-pagedown-scroll")
+safeRequire("system.japanese")
 
--- window management
-safeRequire("modules.window-utils")
-safeRequire("modules.layouts")
-safeRequire("modules.app-hider")
-safeRequire("modules.auto-quitter")
-safeRequire("modules.auto-tile")
+safeRequire("apps.app-specific-behavior")
+safeRequire("apps.browser")
+safeRequire("apps.spotify")
+safeRequire("apps.mastodon")
 
--- system
-safeRequire("modules.cronjobs")
-safeRequire("modules.filesystem-watchers")
-safeRequire("modules.repo-auto-sync")
-safeRequire("modules.hardware-periphery")
-safeRequire("modules.pageup-pagedown-scroll")
-safeRequire("modules.vertical-split")
-safeRequire("modules.japanese")
-
--- app-specific
-safeRequire("modules.app-specific-behavior")
-safeRequire("modules.browser")
-safeRequire("modules.spotify")
-safeRequire("modules.mastodon")
-
--- reload function (should come last)
-safeRequire("modules.reload")
+safeRequire("meta.reload")

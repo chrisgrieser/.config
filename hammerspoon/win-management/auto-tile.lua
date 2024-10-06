@@ -1,5 +1,5 @@
 local M = {}
-local wu = require("modules.window-utils")
+local wu = require("win-management.window-utils")
 --------------------------------------------------------------------------------
 
 local config = {
@@ -10,7 +10,7 @@ local config = {
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
-		if require("modules.environment-vars").isProjector() then return hs.layout.maximized end
+		if require("meta.environment-vars").isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
 }

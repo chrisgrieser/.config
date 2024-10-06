@@ -1,15 +1,15 @@
 local M = {} -- persist from garbage collector
 
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
-local wu = require("modules.window-utils")
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
+local wu = require("win-management.window-utils")
 local c = hs.caffeinate.watcher
 --------------------------------------------------------------------------------
 
 -- force reminders sync on startup
 if u.isSystemStart() then
 	hs.execute("open -g -a Reminders")
-	u.runWithDelays(6, function() u.quitApps("Reminders") end)
+	u.defer(6, function() u.quitApps("Reminders") end)
 end
 
 --------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ M.caff_projectorScreensaver = c.new(function(event)
 		or event == c.systemDidWake
 		or event == c.screensDidSleep
 	then
-		u.runWithDelays({ 0, 2 }, function()
+		u.defer({ 0, 2 }, function()
 			if env.isProjector() then wu.iMacDisplay:setBrightness(0) end
 		end)
 	end
@@ -104,7 +104,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 
 		local alertMsg = ("💤 Will sleep in %ds if idle."):format(config.timeToReactSecs)
 		hs.alert(alertMsg, 4)
-		u.runWithDelays(config.timeToReactSecs, function()
+		u.defer(config.timeToReactSecs, function()
 			-- GUARD
 			local userDidSth = hs.host.idleTime() < config.timeToReactSecs
 			if userDidSth then return end

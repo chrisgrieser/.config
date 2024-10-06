@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local u = require("modules.utils")
+local u = require("meta.utils")
 local cons = hs.console
 local wf = hs.window.filter
 local aw = hs.application.watcher
@@ -98,11 +98,11 @@ end
 
 -- clean up console as soon as it is opened
 M.wf_hsConsole = wf.new("Hammerspoon")
-	:subscribe(wf.windowFocused, function() u.runWithDelays(0.2, cleanupConsole) end)
+	:subscribe(wf.windowFocused, function() u.defer(0.2, cleanupConsole) end)
 
 M.aw_hsConsole = aw.new(function(appName, eventType)
 	if eventType == aw.activated and appName == "Hammerspoon" then
-		u.runWithDelays(0.2, cleanupConsole)
+		u.defer(0.2, cleanupConsole)
 	end
 end):start()
 

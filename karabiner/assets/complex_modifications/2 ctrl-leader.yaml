@@ -178,13 +178,15 @@ rules:
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
         to:
-          - shell_command: open -a 'WezTerm'
+          - shell_command: |
+              open -a 'WezTerm'
+              sleep 0.1 && open -a 'WezTerm' # FIX sometimes hanging
           - *deactivate-leader
           - *remove-notice
 
       - description: "[i] Ank[i]"
         type: basic
-        from: { key_code: i } 
+        from: { key_code: i }
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'Anki'

@@ -1,6 +1,6 @@
 local M = {}
 
-local u = require("modules.utils")
+local u = require("meta.utils")
 
 local home = os.getenv("HOME")
 local pathw = hs.pathwatcher.new
@@ -25,7 +25,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		-- 1. REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			-- delay, so auto-open from the browser is triggered first
-			u.runWithDelays(3, function() os.remove(path) end)
+			u.defer(3, function() os.remove(path) end)
 
 		-- 2. ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
@@ -60,8 +60,6 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
 			success = os.rename(path, backupPath)
-
-		-- 3A. OBSIDIAN CLIPPER FOR PHD VAULT
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
 
@@ -99,7 +97,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 		end
 
-		if success == false then u.notify("Failed to move file: " .. name) end
+		if success == false then u.notify("⚠️ Failed to move file: " .. name) end
 	end
 end):start()
 

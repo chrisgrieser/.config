@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local u = require("modules.utils")
+local u = require("meta.utils")
 --------------------------------------------------------------------------------
 -- USB WATCHER
 
@@ -32,7 +32,7 @@ M.usb_externalDrive = hs.usb.watcher
 			-- search for mounted volumes, since the usb-watcher does not report it to us
 			local cmd =
 				"df | grep --max-count=1 ' /Volumes/' | awk -F '   ' '{print $NF}' | xargs open"
-			u.runWithDelays({ 1, 3 }, function() hs.execute(cmd) end)
+			u.defer({ 1, 3 }, function() hs.execute(cmd) end)
 		end
 	end)
 	:start()
