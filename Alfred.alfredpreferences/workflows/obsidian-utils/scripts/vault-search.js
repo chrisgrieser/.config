@@ -6,8 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-_()[\]]/g, " ");
-	return [clean, str].join(" ") + " ";
+	const clean = str.replace(/[-_()[/\]]/g, " ");
+	return [clean, str].join(" ");
 }
 
 /** @param {string} path */
@@ -51,18 +51,21 @@ function run() {
 		: [];
 
 	// supercharged icons
+	/** @type {{tag: string, icon: string}[]} */
 	const iconTags = [];
+	/** @type {{folder: string, icon: string}[]} */
 	const iconFolders = [];
 	if (superIconFile && fileExists(superIconFile)) {
 		const superIcons = readFile(superIconFile)
 			.split("\n")
 			.filter((line) => line.trim().length > 0);
 		for (const line of superIcons) {
-			const [cond, icon] = line.split(",");
+			const [cond, icon] = line.split(",").map((s) => s.trim());
 			if (cond.startsWith("/")) {
-				iconFolders.push({ folder: cond, icon: icon });
+				// slice leading /
+				iconFolders.push({ folder: cond.slice(1), icon: icon });
 			} else if (cond.startsWith("#")) {
-				// slice to remove the leading # from the tag
+				// slice leading #
 				iconTags.push({ tag: cond.slice(1), icon: icon });
 			}
 		}
@@ -82,71 +85,69 @@ function run() {
 			cmd += ` -not -path "./${dir}*"`; // dir
 		else cmd += ` -not -path "./${dir}"`; // file
 	}
-	const filesInVault = app.doShellScript(cmd).split("\r");
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	/** @type {AlfredItem[]} */
-	const results = [];
-	for (let relPath of filesInVault) {
-		relPath = relPath.slice(2); // remove `./`
-		const parts = relPath.split("/");
-		const name = parts.pop() || "";
-		const parent = parts.join("/");
-		const absPath = vaultPath + "/" + relPath;
+	const filesInVault = app
+		.doShellScript(cmd)
+		.split("\r")
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
+		.reduce((/** @type {AlfredItem[]} */ acc, relPath) => {
+			relPath = relPath.slice(2); // remove `./`
+			const parts = relPath.split("/");
+			const name = parts.pop() || "";
+			const parent = parts.join("/");
+			const absPath = vaultPath + "/" + relPath;
 
-		// subtitle & matcher
-		const aliases = metadata[relPath]?.aliases || [];
-		const shortAliases =
-			aliases.length < 2
-				? aliases
-				: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
-		let matcher = alfredMatcher(name) + alfredMatcher(aliases.join(" "));
-		const subtitle =
-			"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
+			// subtitle & matcher
+			const aliases = metadata[relPath]?.aliases || [];
+			const shortAliases =
+				aliases.length < 2
+					? aliases
+					: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
+			const subtitle =
+				"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
 
-		// icons
-		let icon = "";
-		if (bookmarks.includes(relPath)) {
-			icon += "🔖 ";
-			matcher += " bookmarks";
-		}
-		if (recentItems.includes(relPath)) {
-			icon += "🕑 ";
-			matcher += " recent";
-		}
-		const tags = metadata[relPath]?.tags || [];
-		for (const tag of tags) {
-			const tagIcon = iconTags.find((i) => i.tag === tag)?.icon;
-			if (tagIcon) {
-				icon += tagIcon + " ";
-				matcher += " " + tag;
+			// icons
+			let icons = "";
+			if (bookmarks.includes(relPath)) icons += "🔖 ";
+			if (recentItems.includes(relPath)) icons += "🕑 ";
+			const tags = metadata[relPath]?.tags || [];
+			for (const tag of tags) {
+				const tagIcon = iconTags.find((i) => i.tag === tag)?.icon;
+				if (tagIcon) icons += tagIcon + " ";
 			}
-		}
-		for (const folder of iconFolders) {
-			if (parent.startsWith(folder.folder)) {
-				icon += folder.icon + " ";
-				matcher += " " + folder.folder;
+			for (const iconFolder of iconFolders) {
+				if (parent.startsWith(iconFolder.folder)) icons += iconFolder.icon + " ";
 			}
-		}
 
-		/** @type {AlfredItem} */
-		const alfredItem = {
-			title: icon + name,
-			subtitle: subtitle,
-			arg: absPath,
-			uid: absPath,
-			quicklookurl: absPath,
-			type: "file:skipcheck",
-			match: matcher,
-			icon: { path: absPath, type: "fileicon" },
-		};
+			// matcher
+			const matcher = [
+				alfredMatcher(name),
+				alfredMatcher(aliases.join(" ")),
+				alfredMatcher(tags.map((t) => "#" + t).join(" ")),
+			];
 
-		const insertWhere = recentItems.includes(relPath) ? "unshift" : "push";
-		results[insertWhere](alfredItem);
-	}
+			/** @type {AlfredItem} */
+			const alfredItem = {
+				title: icons + name,
+				subtitle: subtitle,
+				arg: absPath,
+				uid: absPath,
+				type: "file:skipcheck",
+				match: matcher.join(" "),
+				icon: { path: absPath, type: "fileicon" },
+			};
+
+			const insertWhere = recentItems.includes(relPath) ? "unshift" : "push";
+			acc[insertWhere](alfredItem);
+			return acc;
+		}, []);
 
 	// OUTPUT
 	return JSON.stringify({
-		items: results,
-		//cache: { seconds: 600, loosereload: true },
+		items: filesInVault,
+		cache: { seconds: 600, loosereload: true },
 	});
 }
