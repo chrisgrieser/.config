@@ -96,12 +96,12 @@ M.aw_tickerWatcher = aw.new(function(appName, event, masto)
 	-- move & scroll up
 	if appName == "Mona" and (event == aw.launched or event == aw.activated) then
 		u.whenAppWinAvailable("Mona", function()
+			masto:selectMenuItem { "Window", "Bring All to Front" }
 			winToTheSide()
 			scrollUp()
-			wu.bringAllWinsToFront()
 
-			local mediaWindow = masto:findWindow("Media") or masto:findWindow("Compose")
-			if mediaWindow then mediaWindow:focus() end
+			local mediaWin = masto:findWindow("Media") or masto:findWindow("Compose")
+			if mediaWin then mediaWin:focus() end
 		end)
 
 	-- auto-close media windows and scroll up when deactivating
