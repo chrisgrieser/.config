@@ -2,10 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>folder_icons</key>
+	<string>Literature Notes,📓
+Personal,❇️
+Meta,🌀
+Networking,👤
+Knowledge Base/Tech-Unternehmen,🏬
+PhD Thesis,🎓</string>
 	<key>scratchpad_path</key>
 	<string>~/Vaults/writing-vault/Diss - Plattform-Governance/Diss Scratchpad.md</string>
-	<key>supercharged_icon_file</key>
-	<string>~/Vaults/main-vault/Meta/supercharged-icons.md</string>
+	<key>tag_icons</key>
+	<string>obsidian,🟪
+pkm,🧠
+dataview,🔢
+finance,📈
+statistik,📊
+japanese,🇯🇵
+design,🎨
+moc,🗺
+coding,💻
+tools,🔧
+innovation,⚡️
+wissenschaftssoziologie,🔬
+techniksoziologie,🤖
+karriere,💼
+plattform,🕋
+algorithmen,🧮
+wissenschaftstheorie,🤔
+sozialtheorie,💭
+methoden,🔨
+corona,🦠
+governance,🏛</string>
 	<key>vault_path</key>
 	<string>~/Vaults/main-vault</string>
 </dict>

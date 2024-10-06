@@ -20,6 +20,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		-- INFO only downloaded files get quarantined
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
+		local success
 
 		-- 1. REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
@@ -39,30 +40,30 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 
 		-- 3. BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
-			os.rename(path, browserSettings .. "violentmonkey")
+			success = os.rename(path, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
 			local shellCmd = ("cd %q && "):format(browserSettings)
 				.. "zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey"
 			hs.execute(shellCmd)
 			u.app("Brave Browser"):activate() -- window created by auto-unzipping
 		elseif name == "ublacklist-settings.json" then
-			os.rename(path, browserSettings .. name)
+			success = os.rename(path, browserSettings .. name)
 		elseif name:find("my%-ublock%-backup_.*%.txt") then
-			os.rename(path, browserSettings .. "ublock-settings.json")
+			success = os.rename(path, browserSettings .. "ublock-settings.json")
 		elseif name:find("adg_ext_settings_.*%.json") then
-			os.rename(path, browserSettings .. "adguard-settings.json")
+			success = os.rename(path, browserSettings .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
-			os.rename(path, browserSettings .. "stylus.json")
+			success = os.rename(path, browserSettings .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then
-			os.rename(path, browserSettings .. "vimium-c-settings.json")
+			success = os.rename(path, browserSettings .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
-			os.rename(path, backupPath)
+			success = os.rename(path, backupPath)
 
 		-- 3A. OBSIDIAN CLIPPER FOR PHD VAULT
-		elseif name:find(".+%-clipper%.json") then
-			os.rename(path, home .. "/Vaults/phd-data-analysis/Meta/Obsidian clipper/" .. name)
+		elseif name == "obsidian-web-clipper-settings.json" then
+			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
 
 		-- 4. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
@@ -97,6 +98,8 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			]]):format(desktop))
 			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
 		end
+
+		if success == false then u.notify("Failed to move file: " .. name) end
 	end
 end):start()
 
