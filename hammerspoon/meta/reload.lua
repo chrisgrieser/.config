@@ -1,12 +1,12 @@
-local u = require("modules.utils")
+local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 local reloadIndicator = "/tmp/hs-is-reloading"
 
--- URI for Makefile/Justfile
+-- URI for Justfile
 hs.urlevent.bind("hs-reload", function()
 	hs.execute("touch " .. reloadIndicator)
-	u.runWithDelays(0.15, hs.reload)
+	u.defer(0.1, hs.reload)
 end)
 
 --------------------------------------------------------------------------------

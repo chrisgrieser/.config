@@ -1,13 +1,13 @@
 local M = {} -- persist from garbage collector
 
-local darkmode = require("modules.dark-mode")
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
-local visuals = require("modules.visuals")
-local wu = require("modules.window-utils")
-local app = require("modules.utils").app
+local darkmode = require("appearance.dark-mode")
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
+local holeCover = require("appearance.hole-cover")
+local wu = require("win-management.window-utils")
+local app = require("meta.utils").app
 local c = hs.caffeinate.watcher
-local videoAppWatcherForSpotify = require("modules.spotify").aw_spotify
+local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -71,8 +71,8 @@ local function workLayout()
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
 	dockSwitcher("work")
-	visuals.updateHoleCover()
-	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustments
+	holeCover.updateHoleCover()
+	u.defer(0.5, darkmode.autoSwitch) -- wait for brightness adjustments
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
 	videoAppWatcherForSpotify:stop()
@@ -97,7 +97,7 @@ end
 local function movieLayout()
 	darkmode.setDarkMode("dark")
 	darkenDisplay()
-	visuals.updateHoleCover()
+	holeCover.updateHoleCover()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
 
@@ -133,7 +133,7 @@ local function autoSetLayout()
 	local layoutFunc = env.isProjector() and movieLayout or workLayout
 	layoutFunc()
 
-	u.runWithDelays(4, function() M.isLayouting = false end)
+	u.defer(4, function() M.isLayouting = false end)
 end
 
 -- 1. Change of screen numbers
@@ -152,7 +152,7 @@ M.caff_unlock = c.new(function(event)
 		and not env.isAtOffice
 		and not env.isProjector()
 	then
-		u.runWithDelays(0.5, autoSetLayout)
+		u.defer(0.5, autoSetLayout)
 	end
 end):start()
 

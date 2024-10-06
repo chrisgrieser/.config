@@ -1033,8 +1033,6 @@
 			</dict>
 			<key>inboundconfig</key>
 			<dict>
-				<key>externalid</key>
-				<string>repo-search-loop</string>
 				<key>inputmode</key>
 				<integer>1</integer>
 			</dict>

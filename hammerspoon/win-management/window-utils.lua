@@ -1,7 +1,7 @@
 local M = {} -- persist from garbage collector
 
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 M.iMacDisplay = hs.screen("Built%-in")
@@ -54,7 +54,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.runWithDelays({ 0, 0.3, 0.6, 0.9 }, function()
+	u.defer({ 0, 0.3, 0.6, 0.9 }, function()
 		if not M.winHasSize(win, pos) then win:moveToUnit(pos) end
 	end)
 end

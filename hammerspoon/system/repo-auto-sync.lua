@@ -1,18 +1,20 @@
-local M = {} -- persist from garbage collector
-
-local env = require("modules.environment-vars")
-local u = require("modules.utils")
-
----@param msg string
-local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
-
---------------------------------------------------------------------------------
--- CONFIG
 local config = {
 	syncIntervalMins = 30,
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
 	reposToSync = {},
 }
+
+--------------------------------------------------------------------------------
+
+local M = {} -- persist from garbage collector
+
+local env = require("meta.environment-vars")
+local u = require("meta.utils")
+
+---@param msg string
+local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
+
+--------------------------------------------------------------------------------
 
 -- get repos from perma-repos.csv
 for line in io.lines(config.permaReposPath) do
@@ -121,7 +123,7 @@ M.caff_SleepWatcherForRepoSync = c.new(function(event)
 	then
 		syncAllGitRepos(true)
 		M.recentlyTriggered = true
-		u.runWithDelays(3, function() M.recentlyTriggered = false end)
+		u.defer(3, function() M.recentlyTriggered = false end)
 	end
 end):start()
 

@@ -1,5 +1,5 @@
 local M = {}
-local wu = require("modules.window-utils")
+local wu = require("win-management.window-utils")
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
@@ -7,7 +7,7 @@ local wf = hs.window.filter
 -- not done via Karabiner, since setting input method there is buggy: https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/to/select-input-source/
 
 hs.hotkey.bind({ "option" }, "space", function()
-	-- Japanese defined by method, latin languages by layout
+	-- Japanese defined by METHOD, Latin languages by LAYOUT
 	local isJapanese = hs.keycodes.currentMethod() ~= nil
 	if isJapanese then
 		hs.keycodes.setLayout("German")
