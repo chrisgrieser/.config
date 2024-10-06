@@ -9,36 +9,10 @@ local wf = hs.window.filter
 --------------------------------------------------------------------------------
 -- FINDER
 
-M.wf_finder = wf
-	.new("Finder")
-	:setOverrideFilter({
-		-- Info windows only *end* with "Info"
-		rejectTitles = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
-		allowRoles = "AXStandardWindow",
-		hasTitlebar = true,
-	})
-	:subscribe(wf.windowCreated, function(win)
-		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
-		local finder = u.app("Finder")
-		if env.isProjector() and winOnMainScreen then
-			wu.moveResize(win, wu.maximized)
-		elseif win:isMaximizable() and win:isStandard() and finder and finder:isFrontmost() then
-			u.runWithDelays(0.05, function() wu.autoTile(M.wf_finder) end)
-		end
-	end)
-	-- no condition checks needed, since destroyed windows do not have properties
-	:subscribe(
-		wf.windowDestroyed,
-		function() wu.autoTile(M.wf_finder) end
-	)
-
--- also trigger autoTile via app-watcher, since windows created in the
--- background do not always trigger window filters
-M.aw_finder = aw.new(function(appName, eventType, finder)
-	if eventType == aw.activated and appName == "Finder" then
+M.aw_finder = aw.new(function(appName, event, finder)
+	if event == aw.activated and appName == "Finder" then
 		finder:selectMenuItem { "View", "Hide Sidebar" }
-		if not env.isProjector() then finder:selectMenuItem { "View", "as List" } end
-		wu.autoTile("Finder")
+		if not env.isProjector() then finder:selectMenuItem { "View", "As List" } end
 	end
 end):start()
 
@@ -64,17 +38,13 @@ end)
 
 -- - Sync Dark & Light Mode
 -- - Start with Highlight Tool enabled
-M.aw_highlights = aw.new(function(appName, eventType, highlights)
-	if not (eventType == aw.launched and appName == "Highlights") then return end
-
-	-- set appearance according to dark mode
-	local targetView = u.isDarkMode() and "Night" or "Default"
-	highlights:selectMenuItem { "View", "PDF Appearance", targetView }
-
-	-- pre-select yellow highlight tool & hide toolbar
-	highlights:selectMenuItem { "Tools", "Highlight" }
-	highlights:selectMenuItem { "Tools", "Color", "Yellow" }
-	highlights:selectMenuItem { "View", "Hide Toolbar" }
+M.aw_highlights = aw.new(function(appName, event, app)
+	if event == aw.launched and appName == "Highlights" then
+		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
+		app:selectMenuItem { "Tools", "Highlight" }
+		app:selectMenuItem { "Tools", "Color", "Yellow" }
+		app:selectMenuItem { "View", "Hide Toolbar" }
+	end
 end):start()
 
 -- open all windows pseudo-maximized
@@ -86,10 +56,8 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
 ------------------------------------------------------------------------------
 -- TRANSMISSION / MASTODON
 
--- Fallthrough: prevent unintended focusing after qutting another app or closing
--- last window
-M.aw_fallthrough = aw.new(function(appName, event)
-	if appName == "Reminders" then return end -- Reminders often opening in the background
+-- Fallthrough: prevent unintended focusing after qutting another app or closing last window
+M.aw_fallthrough = aw.new(function(_, event)
 	if event ~= aw.terminated then return end
 
 	-- CONFIG
@@ -163,11 +131,11 @@ M.wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 -- DISCORD
 
-M.aw_discord = aw.new(function(appName, eventType)
+M.aw_discord = aw.new(function(appName, event)
 	if appName ~= "Discord" then return end
 
 	-- on launch, open a specific channel rather than the friends view
-	if eventType == aw.launched or eventType == aw.launching then
+	if event == aw.launched or event == aw.launching then
 		local channelUri = "discord://discord.com/channels/1231936600204902481/1231936600674668604"
 		u.openInBackground(channelUri)
 		return
@@ -176,12 +144,12 @@ M.aw_discord = aw.new(function(appName, eventType)
 	-- when focused, enclose URL in clipboard with <>
 	-- when unfocused, removes <> from URL in clipboard
 	local clipb = hs.pasteboard.getContents()
-	if clipb and eventType == aw.activated then
+	if clipb and event == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
 		-- for tweets, the previews are actually useful since they show the full content
 		local isTweet = clipb:find("^https?://x%.com") or clipb:find("^https?://mastodon%.*")
 		if hasURL and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
-	elseif clipb and eventType == aw.deactivated then
+	elseif clipb and event == aw.deactivated then
 		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
 		if hasEnclosedURL then
 			clipb = clipb:sub(2, -2) -- remove first & last character

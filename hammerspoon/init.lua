@@ -33,6 +33,7 @@ safeRequire("modules.window-utils")
 safeRequire("modules.layouts")
 safeRequire("modules.app-hider")
 safeRequire("modules.auto-quitter")
+safeRequire("modules.auto-tile")
 
 -- system
 safeRequire("modules.cronjobs")

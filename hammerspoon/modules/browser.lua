@@ -1,44 +1,10 @@
 local M = {} -- persist from garbage collector
 
-local env = require("modules.environment-vars")
 local u = require("modules.utils")
 local wu = require("modules.window-utils")
 
 local aw = hs.application.watcher
-local wf = hs.window.filter
 --------------------------------------------------------------------------------
-
--- AUTO-TILING
-M.wf_browser = wf.new("Brave Browser")
-	:setOverrideFilter({
-		rejectTitles = {
-			"^Picture in Picture$",
-			"^Task Manager$",
-			"^Developer Tools", -- when inspecting websites
-			"^DevTools",
-		},
-		allowRoles = "AXStandardWindow",
-		hasTitlebar = true,
-	})
-	:subscribe(wf.windowCreated, function(win)
-		local winOnMainScreen = win:screen():id() == hs.screen.mainScreen():id()
-		if env.isProjector() and winOnMainScreen then
-			wu.moveResize(win, hs.layout.maximized)
-		else
-			wu.autoTile(M.wf_browser)
-		end
-	end)
-	:subscribe(wf.windowDestroyed, function() wu.autoTile(M.wf_browser) end)
-	:subscribe(wf.windowFocused, wu.bringAllWinsToFront)
-
--- AUTOMATICALLY HIDE WHEN NO WINDOW
--- requires wider window-filter to not hide PiP windows etc
-M.wf_browserAll = wf.new("Brave Browser")
-	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
-	:subscribe(wf.windowDestroyed, function()
-		local app = u.app("Brave Browser")
-		if app and #(app:allWindows()) == 0 then app:hide() end
-	end)
 
 --------------------------------------------------------------------------------
 
@@ -95,11 +61,6 @@ end
 -- sync on system start & when bookmarks are changed
 if u.isSystemStart() then touchSymlink() end
 M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
-
---------------------------------------------------------------------------------
-
--- HACK URI for triggering from surfingkeys itself
-hs.urlevent.bind("open-surfingkeys-config", function() hs.open("../surfingkeys/surfingkeys.js") end)
 
 --------------------------------------------------------------------------------
 return M
