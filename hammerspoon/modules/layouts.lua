@@ -72,9 +72,9 @@ end
 local function workLayout()
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
-	darkmode.autoSwitch() -- after darkening, to factor in brightness better
 	dockSwitcher("work")
 	visuals.updateHoleCover()
+	u.runWithDelays(0.5, darkmode.autoSwitch) -- wait for brightness adjustments
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
 	videoAppWatcherForSpotify:stop()
