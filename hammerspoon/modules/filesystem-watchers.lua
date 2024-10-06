@@ -15,7 +15,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 
 	for _, path in pairs(paths) do
 		local name = path:match(".*/(.+)")
-		local ext = name:match("%.(.+)$")
+		local ext = name:match("%.([^.]-)$")
 
 		-- INFO only downloaded files get quarantined
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
@@ -61,7 +61,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			os.rename(path, backupPath)
 
 		-- 3A. OBSIDIAN CLIPPER FOR PHD VAULT
-		elseif name == "phd-data-clipper.json" or name == "youtube-timestamp-clipper.json" then
+		elseif name:find(".+%-clipper%.json") then
 			os.rename(path, home .. "/Vaults/phd-data-analysis/Meta/Obsidian clipper/" .. name)
 
 		-- 4. STEAM GAME SHORTCUTS

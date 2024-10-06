@@ -216,19 +216,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5038CDF4-F248-4A8E-9772-5B528CFE971E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>648F44D4-95FB-4674-8829-174D4373CDE1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<array>
 			<dict>
@@ -461,19 +448,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F9FF1EDC-0618-45AA-B63D-65345E7154DA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5038CDF4-F248-4A8E-9772-5B528CFE971E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -561,79 +535,6 @@
 			<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/cal.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5038CDF4-F248-4A8E-9772-5B528CFE971E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>648F44D4-95FB-4674-8829-174D4373CDE1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>test</string>
-				<key>subtext</key>
-				<string>test</string>
-				<key>text</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>F9FF1EDC-0618-45AA-B63D-65345E7154DA</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1550,13 +1451,6 @@ brew install keith/formulae/reminders-cli
 			<key>ypos</key>
 			<real>455</real>
 		</dict>
-		<key>5038CDF4-F248-4A8E-9772-5B528CFE971E</key>
-		<dict>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>50</real>
-		</dict>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<dict>
 			<key>colorindex</key>
@@ -1595,13 +1489,6 @@ to set a hotkey to quick add selected text or browser tab</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>440</real>
-		</dict>
-		<key>648F44D4-95FB-4674-8829-174D4373CDE1</key>
-		<dict>
-			<key>xpos</key>
-			<real>345</real>
-			<key>ypos</key>
-			<real>55</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
@@ -1756,13 +1643,6 @@ to set a hotkey to show reminders due today</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>600</real>
-		</dict>
-		<key>F9FF1EDC-0618-45AA-B63D-65345E7154DA</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>55</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
