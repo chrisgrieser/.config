@@ -776,7 +776,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>max number of characters per alias to display</string>
+			<string>Max number of characters per alias to display. (Requires Metadata Extractor plugin.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -789,21 +789,42 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<dict>
 				<key>default</key>
 				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string></string>
 				<key>required</key>
 				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
 			</dict>
 			<key>description</key>
-			<string>supercharged icons file</string>
+			<string>Assign icons to notes with specific tags. Format: "tagname, icon", one per line. (Requires Metadata Extractor plugin.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>filepicker</string>
+			<string>textarea</string>
 			<key>variable</key>
-			<string>supercharged_icon_file</string>
+			<string>tag_icons</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
+			</dict>
+			<key>description</key>
+			<string>Assign icons to notes in specific folders. Format: "foldername, icon", one per line.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>folder_icons</string>
 		</dict>
 		<dict>
 			<key>config</key>
