@@ -27,6 +27,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 function run() {
 	const aliasMaxLen = Number.parseInt($.getenv("alias_max_length"));
 	const vaultPath = $.getenv("vault_path");
+	const superIconFile = $.getenv("supercharged_icon_file");
 
 	// aliases
 	const metadataExtrFile = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
@@ -48,6 +49,24 @@ function run() {
 	const bookmarks = fileExists(bookmarkFile)
 		? JSON.parse(readFile(bookmarkFile)).items.map((/** @type {{ path: string; }} */ b) => b.path)
 		: [];
+
+	// supercharged icons
+	let superIconList = [];
+	if (superIconFile && fileExists(superIconFile)) {
+		superIconList = readFile(superIconFile)
+			.split("\n")
+			.filter((line) => line.trim().length > 0);
+	}
+	// let superchargedIcon = "";
+	// 	let superchargedIcon2 = "";
+	// 	if (superIconList.length > 0 && file.tags) {
+	// 		for (const pair of superIconList) {
+	// 			let [tag, icon, icon2] = pair.split(",");
+	// 			tag = tag.toLowerCase().replaceAll("#", "");
+	// 			if (file.tags.includes(tag) && icon) superchargedIcon = icon + " ";
+	// 			else if (file.tags.includes(tag) && icon2) superchargedIcon2 = " " + icon2;
+	// 		}
+	// 	}
 
 	// determine files to be listed
 	const vaultConfig = vaultPath + "/.obsidian/app.json";
