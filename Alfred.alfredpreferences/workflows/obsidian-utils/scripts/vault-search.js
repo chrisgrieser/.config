@@ -23,11 +23,9 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function run() {
 	const aliasMaxLen = Number.parseInt($.getenv("alias_max_length"));
 	const vaultPath = $.getenv("vault_path");
-	const superIconFile = $.getenv("supercharged_icon_file");
 
 	// aliases & tags via Metadata Extractor
 	const metadataExtrFile = vaultPath + "/.obsidian/plugins/metadata-extractor/metadata.json";
@@ -38,7 +36,7 @@ function run() {
 		metadata[item.relativePath] = { aliases: item.aliases, tags: item.tags };
 	}
 
-	// recent
+	// recent 10 files
 	const recentItemsFile = vaultPath + "/.obsidian/workspace.json";
 	const recentItems = fileExists(recentItemsFile)
 		? JSON.parse(readFile(recentItemsFile)).lastOpenFiles.slice(0, 10)
@@ -50,26 +48,23 @@ function run() {
 		? JSON.parse(readFile(bookmarkFile)).items.map((/** @type {{ path: string; }} */ b) => b.path)
 		: [];
 
-	// supercharged icons
-	/** @type {{tag: string, icon: string}[]} */
-	const iconTags = [];
-	/** @type {{folder: string, icon: string}[]} */
-	const iconFolders = [];
-	if (superIconFile && fileExists(superIconFile)) {
-		const superIcons = readFile(superIconFile)
-			.split("\n")
-			.filter((line) => line.trim().length > 0);
-		for (const line of superIcons) {
-			const [cond, icon] = line.split(",").map((s) => s.trim());
-			if (cond.startsWith("/")) {
-				// slice leading /
-				iconFolders.push({ folder: cond.slice(1), icon: icon });
-			} else if (cond.startsWith("#")) {
-				// slice leading #
-				iconTags.push({ tag: cond.slice(1), icon: icon });
-			}
-		}
-	}
+	// tag icons
+	const tagIcons = $.getenv("tag_icons")
+		.split("\n")
+		.filter((line) => line.includes(","))
+		.map((line) => {
+			const [tag, icon] = line.split(/ *, */);
+			return { tag: tag, icon: icon };
+		});
+
+	// folder icons
+	const folderIcons = $.getenv("folder_icons")
+		.split("\n")
+		.filter((line) => line.includes(","))
+		.map((line) => {
+			const [folder, icon] = line.split(/ *, */);
+			return { folder: folder, icon: icon };
+		});
 
 	// determine files to be listed
 	const vaultConfig = vaultPath + "/.obsidian/app.json";
@@ -79,11 +74,10 @@ function run() {
 	// PERF `find` quicker than `mdfind`
 	let cmd = `cd "${vaultPath}" && find . \\( -name "*.md" -or -name "*.canvas" \\) -not -path "./.trash/*"`;
 	for (const dir of ignoredDirs) {
-		if (dir.startsWith("/"))
-			cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`; // regex
-		else if (dir.endsWith("/"))
-			cmd += ` -not -path "./${dir}*"`; // dir
-		else cmd += ` -not -path "./${dir}"`; // file
+		// 1. regex, 2. folder, 3. file
+		if (dir.startsWith("/")) cmd += ` -not -regex "*${dir.slice(1, -1)}*/*"`;
+		else if (dir.endsWith("/")) cmd += ` -not -path "./${dir}*"`;
+		else cmd += ` -not -path "./${dir}"`;
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
@@ -115,19 +109,16 @@ function run() {
 			if (recentItems.includes(relPath)) icons += "🕑 ";
 			const tags = metadata[relPath]?.tags || [];
 			for (const tag of tags) {
-				const tagIcon = iconTags.find((i) => i.tag === tag)?.icon;
+				const tagIcon = tagIcons.find((i) => i.tag === tag)?.icon;
 				if (tagIcon) icons += tagIcon + " ";
 			}
-			for (const iconFolder of iconFolders) {
-				if (parent.startsWith(iconFolder.folder)) icons += iconFolder.icon + " ";
+			for (const folder of folderIcons) {
+				if (parent.startsWith(folder.folder)) icons += folder.icon + " ";
 			}
 
 			// matcher
-			const matcher = [
-				alfredMatcher(name),
-				alfredMatcher(aliases.join(" ")),
-				alfredMatcher(tags.map((t) => "#" + t).join(" ")),
-			];
+			const matcher = [alfredMatcher(name), alfredMatcher(aliases.join(" "))];
+			if (tags.length > 0) matcher.push(alfredMatcher(tags.join(" ")));
 
 			/** @type {AlfredItem} */
 			const alfredItem = {

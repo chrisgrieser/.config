@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5E566F93-2181-4333-A675-764390C315B4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
 		<array/>
 		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
@@ -104,7 +117,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</string>
+				<string>5E566F93-2181-4333-A675-764390C315B4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -175,29 +188,6 @@
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
 				<string>⌃: Copy Plugin ID</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5E566F93-2181-4333-A675-764390C315B4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -286,27 +276,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>adduuid</key>
-				<false/>
-				<key>allowemptyfiles</key>
-				<true/>
-				<key>createintermediatefolders</key>
-				<true/>
-				<key>filename</key>
+				<key>argument</key>
 				<string>{var:scratchpad_path}</string>
-				<key>filetext</key>
-				<string>- {isodate}: {query}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>passthroughargument</key>
 				<false/>
-				<key>relativepathmode</key>
-				<integer>0</integer>
-				<key>type</key>
-				<integer>2</integer>
+				<key>variables</key>
+				<dict/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.writefile</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
+			<string>A4905BF4-C19C-43DD-90FA-65101AFCB248</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -334,17 +314,48 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string>{var:scratchpad_path}</string>
-				<key>passthroughargument</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>variables</key>
-				<dict/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Appended</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>A4905BF4-C19C-43DD-90FA-65101AFCB248</string>
+			<string>5E566F93-2181-4333-A675-764390C315B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:scratchpad_path}</string>
+				<key>filetext</key>
+				<string>- {isodate}: {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>65255994-4CBF-44D6-8E91-FC4E106AEB87</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -377,35 +388,6 @@
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>8B8E6563-9DF0-4342-BDBE-3398095FAC67</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Appended</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5E566F93-2181-4333-A675-764390C315B4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -574,7 +556,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>445</real>
 		</dict>
 		<key>3426DFFC-C411-4D60-8043-A3ABDF8B6748</key>
 		<dict>
@@ -583,7 +565,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>545</real>
 		</dict>
 		<key>35581195-D1B3-426B-82F8-14C072E52243</key>
 		<dict>
@@ -592,7 +574,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>355</real>
 		</dict>
 		<key>3B590E83-D5D3-46E8-977D-60BC6515A3AD</key>
 		<dict>
@@ -601,7 +583,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>365</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>335</real>
 		</dict>
 		<key>3D729F95-B08C-4A6D-9292-9C18E13C54C1</key>
 		<dict>
@@ -623,7 +605,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>170</real>
 		</dict>
 		<key>440205E9-6FAD-4C11-AA0A-F2785E994E8C</key>
 		<dict>
@@ -641,18 +623,18 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>330</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>170</real>
 		</dict>
 		<key>65255994-4CBF-44D6-8E91-FC4E106AEB87</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>445</real>
+			<real>485</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>170</real>
 		</dict>
 		<key>65A45FED-A031-4FCB-8FA4-B4B3E46C41D0</key>
 		<dict>
@@ -661,7 +643,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>250</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>490</real>
 		</dict>
 		<key>8B8E6563-9DF0-4342-BDBE-3398095FAC67</key>
 		<dict>
@@ -670,9 +652,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>empty</string>
 			<key>xpos</key>
-			<real>196</real>
+			<real>206</real>
 			<key>ypos</key>
-			<real>180</real>
+			<real>190</real>
 		</dict>
 		<key>A4905BF4-C19C-43DD-90FA-65101AFCB248</key>
 		<dict>
@@ -681,9 +663,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>insert scratchpad path</string>
 			<key>xpos</key>
-			<real>340</real>
+			<real>365</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>85</real>
 		</dict>
 		<key>BC1490BF-6C58-406A-847F-DB89AF6AEB8E</key>
 		<dict>
@@ -694,16 +676,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>460</real>
-		</dict>
-		<key>DAEC28E4-F790-4CF4-B4D9-6BF63A285B65</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>6</integer>
-			<key>xpos</key>
-			<real>340</real>
-			<key>ypos</key>
-			<real>305</real>
+			<real>400</real>
 		</dict>
 		<key>F926E3B6-82B9-4B36-847D-6757DB67469A</key>
 		<dict>
@@ -712,7 +685,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>515</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>445</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
