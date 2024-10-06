@@ -1,25 +1,21 @@
 local M = {}
 local wu = require("modules.window-utils")
-local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- CONFIG
 local config = {
 	appsToAutoTile = {
 		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		Brave = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
 	},
-	---@param appName string
-	---@return hs.geometry
-	oneWindowSizer = function(appName) 
-		local pos = appName == "Finder" and wu.middleHalf or wu.pseudoMax
-		local env = require("modules.environment-vars")
-		if env.isProjector() then pos = hs.layout.maximized end
-		return pos
+	---@type fun(appName: string): hs.geometry
+	oneWindowSizer = function(appName)
+		if require("modules.environment-vars").isProjector() then return hs.layout.maximized end
+		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
 }
 
+--------------------------------------------------------------------------------
 
 ---@param winfilter hs.window.filter
 ---@param appName string
@@ -32,7 +28,7 @@ local function autoTile(winfilter, appName)
 	local app = hs.application.find(appName, true, true)
 	local wins = winfilter:getWindows()
 	local pos = {}
-	if #wins > 1 then app:selectMenuItem { "Window", "Bring All to Front" } end
+	app:selectMenuItem { "Window", "Bring All to Front" }
 
 	if #wins == 0 then
 		app:hide()
@@ -57,33 +53,34 @@ local function autoTile(winfilter, appName)
 		pos = {
 			{ h = 0.5, w = 0.33, x = 0, y = 0 },
 			{ h = 0.5, w = 0.33, x = 0, y = 0.5 },
-			{ h = 0.5, w = 0.33, x = 0.33, y = 0 },
-			{ h = 0.5, w = 0.33, x = 0.33, y = 0.5 },
-			{ h = 0.5, w = 0.33, x = 0.66, y = 0 },
-			#wins == 6 and { h = 0.5, w = 0.33, x = 0.66, y = 0.5 } or nil,
+			{ h = 0.5, w = 0.34, x = 0.33, y = 0 },
+			{ h = 0.5, w = 0.34, x = 0.33, y = 0.5 },
+			{ h = 0.5, w = 0.33, x = 0.67, y = 0 },
+			#wins == 6 and { h = 0.5, w = 0.33, x = 0.67, y = 0.5 } or nil,
 		}
 	end
-
-	-- GUARD wins are already tiled but not in right order. Prevent wins glitching around.
-	local allPositionsExist = hs.fnutils.every(pos, function(p)
-		return hs.fnutils.some(wins, function(w) return wu.winHasSize(w, p) end)
-	end)
-	if allPositionsExist then return end
 
 	for i = 1, #pos do
 		wu.moveResize(wins[i], pos[i])
 	end
 end
 
--- conditions triggering the auto-tiling
+--------------------------------------------------------------------------------
+
+-- triggering conditions 
+local wf = hs.window.filter
+local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
-	M[appName] = wf.new(appName)
-		:setOverrideFilter({
-			rejectTitles = ignoredWins,
-			allowRoles = "AXStandardWindow",
-		})
-		:subscribe(wf.windowCreated, function() autoTile(M[appName], appName) end)
-		:subscribe(wf.windowDestroyed, function() autoTile(M[appName], ap) end)
+	M["winFilter_" .. appName] = wf.new(appName)
+		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
+		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
+		:subscribe(wf.windowDestroyed, function() autoTile(M["winFilter_" .. appName], appName) end)
+
+	M["appWatcher_" .. appName] = aw.new(function(triggeringApp, event, appObj)
+		if event == aw.activated and triggeringApp == appName then
+			appObj:selectMenuItem { "Window", "Bring All to Front" }
+		end
+	end):start()
 end
 
 --------------------------------------------------------------------------------
