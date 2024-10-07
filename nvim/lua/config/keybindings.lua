@@ -225,6 +225,11 @@ if not vim.env.NO_PLUGINS then
 		function() require("funcs.alt-alt").gotoAltBuffer() end,
 		{ desc = "󰽙 Alt Buffer" }
 	)
+	-- restore default behavior of `<CR>`, which is overridden by my mapping above
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "qf",
+		callback = function() bkeymap("n", "<CR>", "<CR>") end,
+	})
 end
 
 keymap(
@@ -278,7 +283,6 @@ end, { desc = " Toggle quickfix" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
-		bkeymap("n", "<CR>", "<CR>")
 		bkeymap("n", "dd", function()
 			local qfItems = vim.fn.getqflist()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
@@ -288,11 +292,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { desc = " Remove quickfix entry" })
 	end,
 })
-	-- restore default behavior of `<CR>`, which is overridden by my mapping above
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "qf",
-		callback = function() bkeymap("n", "<CR>", "<CR>") end,
-	})
 
 --------------------------------------------------------------------------------
 
