@@ -52,7 +52,7 @@ M.timer_clock = hs.timer
 -- NIGHTLY CRONJOBS
 
 -- CONFIG all files in this directory are executed every other day at 01:00
-local cronjobDir = "./cronjobs"
+local cronjobDir = "./system/cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
 	.doAt("01:00", "01d", function()
@@ -64,8 +64,8 @@ M.timer_nightlyCronjobs = hs.timer
 			if file:find("%.sh$") then
 				M["cronjob_" .. file] = hs.task
 					.new(cronjobDir .. "/" .. file, function(code)
-						if code == 0 then print("✅ Cronjob: " .. file) end
-						if code ~= 0 then u.notify("❌ Cronjob failed: " .. file) end
+						local msg = code == 0 and "✅ Cronjob: " or "❌ Cronjob failed: "
+						u.notify(msg .. file)
 					end)
 					:start()
 			end
@@ -77,7 +77,7 @@ M.timer_nightlyCronjobs = hs.timer
 
 -- EMMYLUA UPDATER
 -- HACK technically only needed once every hammerspoon update, but since there
--- is no good API to detect updates, we just run it every Sunday at 01:30…
+-- is no good API to detect updates, we just run it weekly instead.
 M.timer_emmyluaUpdater = hs.timer
 	.doAt("01:30", "01d", function()
 		if os.date("%a") == "Sun" then hs.loadSpoon("EmmyLua") end

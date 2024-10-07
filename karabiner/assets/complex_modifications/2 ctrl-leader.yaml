@@ -81,7 +81,7 @@ rules:
               yq '.rules[1].manipulators[].description' \
                 "./complex_modifications/2 ctrl-leader.yaml" |
                 sort -f |
-                sed 's/.*/- &/' >"/tmp/ctrl-leader.md"
+                sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
               qlmanage -p "/tmp/ctrl-leader.md" &
           - *deactivate-leader
           - *remove-notice
@@ -180,7 +180,7 @@ rules:
         to:
           - shell_command: |
               open -a 'WezTerm'
-              sleep 0.1 && open -a 'WezTerm' # FIX sometimes hanging
+              sleep 0.2 && open -a 'WezTerm' # FIX sometimes not focussing
           - *deactivate-leader
           - *remove-notice
 
@@ -323,7 +323,7 @@ rules:
         to:
           - shell_command: |
               open -a 'Karabiner-Elements'
-              sleep 0.1 && open -a 'Karabiner-Elements' # FIX sometimes hanging
+              sleep 0.2 && open -a 'Karabiner-Elements' # FIX sometimes not focussing
           - *deactivate-leader
           - *remove-notice
 
