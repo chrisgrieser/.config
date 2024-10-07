@@ -5,12 +5,11 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
-function alfredMatcher(str) {
-	if (!str) return "";
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ") + " ";
+function aMatcher(str) {
+	const clean = str.replace(/[-_/]/g, " ");
+	return [clean, str].join(" ") + " ";
 }
+
 
 /** @param {string} url @return {string} */
 function httpRequest(url) {
@@ -41,10 +40,9 @@ function run() {
 				const githubUrl = "https://github.com/" + repo;
 				const obsidianPluginUri = `obsidian://show-plugin?id=${id}`;
 				// enclosing link in `<>` remove to the Discord preview
-				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
+const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
-				const matcher =
-					alfredMatcher(name) + alfredMatcher(author) + alfredMatcher(description);
+				const matcher = aMatcher(name) + aMatcher(author) + aMatcher(description);
 
 				// download numbers
 				const downloadCount = downloadsJson[id]?.downloads || 0;
@@ -68,7 +66,7 @@ function run() {
 						alt: { arg: githubUrl, subtitle: "⌥: Copy Link " },
 						"cmd+alt": { arg: discordUrl, subtitle: "⌘⌥: Copy Link (discord ready)" },
 					},
-					downloadCount: downloadCount, // only to be able to sort
+					downloadCount: downloadCount, // only for sorting below
 				};
 				return alfredItem;
 			},

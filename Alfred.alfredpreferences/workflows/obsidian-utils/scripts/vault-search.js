@@ -5,9 +5,9 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
-function alfredMatcher(str) {
-	const clean = str.replace(/[-_()[/\]]/g, " ");
-	return [clean, str].join(" ");
+function aMatcher(str) {
+	const clean = str.replace(/[-_()[\]/#]/g, " ");
+	return [clean, str].join(" ") + " ";
 }
 
 /** @param {string} path */
@@ -94,7 +94,7 @@ function run() {
 			const parent = parts.join("/");
 			const absPath = vaultPath + "/" + relPath;
 
-			// subtitle & matcher
+			// subtitle
 			const aliases = metadata[relPath]?.aliases || [];
 			const shortAliases =
 				aliases.length < 2
@@ -117,8 +117,7 @@ function run() {
 			}
 
 			// matcher
-			const matcher = [alfredMatcher(name), alfredMatcher(aliases.join(" "))];
-			if (tags.length > 0) matcher.push(alfredMatcher(tags.join(" ")));
+			const matcher = aMatcher(name) + aMatcher(aliases.join(" ")) + aMatcher(tags.join(" "));
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
@@ -127,8 +126,7 @@ function run() {
 				arg: absPath,
 				uid: absPath,
 				type: "file:skipcheck",
-				match: matcher.join(" "),
-				icon: { path: absPath, type: "fileicon" },
+				match: matcher,
 			};
 
 			const insertWhere = recentItems.includes(relPath) ? "unshift" : "push";
