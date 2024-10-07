@@ -10,7 +10,6 @@ function aMatcher(str) {
 	return [clean, str].join(" ") + " ";
 }
 
-
 /** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
@@ -40,7 +39,7 @@ function run() {
 				const githubUrl = "https://github.com/" + repo;
 				const obsidianPluginUri = `obsidian://show-plugin?id=${id}`;
 				// enclosing link in `<>` remove to the Discord preview
-const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
+				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
 				const matcher = aMatcher(name) + aMatcher(author) + aMatcher(description);
 

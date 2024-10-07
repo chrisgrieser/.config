@@ -66,6 +66,12 @@ local routes = {
 
 	-- unneeded info on search patterns when pattern not found
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+
+	-- useless notification when closing buffers
+	{
+		filter = { event = "notify", find = "^Client marksman quit with exit code 1 and signal 0." },
+		skip = true,
+	},
 }
 
 --------------------------------------------------------------------------------
