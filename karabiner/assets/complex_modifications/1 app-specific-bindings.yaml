@@ -10,13 +10,10 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "System Events"
-                	tell process "Microsoft Word"
-                		set frontmost to true
-                		click menu item "Save As..." of menu "File" of menu bar 1
-                		click pop up button 2 of sheet 1 of window 1
-                		click menu item "PDF" of menu 1 of pop up button 2 of sheet 1 of window 1
-                	end tell
+                tell application "System Events" to tell process "Microsoft Word"
+                  click menu item "Save As..." of menu "File" of menu bar 1
+                  click pop up button 2 of sheet 1 of window 1
+                  click menu item "PDF" of menu 1 of pop up button 2 of sheet 1 of window 1
                 end tell'
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }
@@ -45,7 +42,8 @@ rules:
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
-          # 1% assuming hidden menubar, otherwise 3-4%
+          # 1% height assuming hidden menubar, otherwise 3-4%
+          # 60% assuming my usual window size of pseudo-maximized
           - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
           - pointing_button: button2
           - key_code: down_arrow
@@ -102,7 +100,8 @@ rules:
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
-          # 1% assuming hidden menubar, otherwise 3-4%
+          # 1% height assuming hidden menubar, otherwise 3-4%
+          # 60% assuming my usual window size of pseudo-maximized
           - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
           - pointing_button: button2
           - key_code: down_arrow
