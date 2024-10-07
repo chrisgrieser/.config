@@ -18,7 +18,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		init = function()
-			-- remove bindings so they do not clutter which-key
+			-- remove these bindings so they do not clutter which-key
 			vim.keymap.del("n", "gcc")
 			vim.keymap.del("o", "gc")
 		end,
@@ -141,10 +141,9 @@ return {
 			{ "<", ">", ft = { "lua" }, cond = function(fn) return fn.in_string() end },
 		},
 	},
-	{ -- auto-convert string and f/template string
+	{ -- auto-convert string and f/template/format string
 		"chrisgrieser/nvim-puppeteer",
 		ft = { "python", "javascript", "typescript", "lua" },
-		cmd = "PuppeteerToggle",
 		init = function() vim.g.puppeteer_disable_filetypes = {} end,
 		keys = {
 			{ "<leader>ou", vim.cmd.PuppeteerToggle, desc = "󰅳 Puppeteer" },
@@ -163,7 +162,7 @@ return {
 		},
 		opts = {
 			evaluate = { prefix = "" }, -- disable
-			replace = { prefix = "", reindent_linewise = true },
+			replace = { prefix = "s", reindent_linewise = true },
 			exchange = { prefix = "sx", reindent_linewise = true },
 			sort = { prefix = "sy" },
 			multiply = {
@@ -219,23 +218,12 @@ return {
 				end,
 			},
 		},
-		config = function(_, opts)
-			require("mini.operators").setup(opts)
-
-			-- Do not set `substitute` mapping for visual mode, since we use `s` for
-			-- `surround` there, and `p` effectively already substitutes
-			require("mini.operators").make_mappings(
-				"replace",
-				{ textobject = "s", line = "ss", selection = "" }
-			)
-		end,
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
 		keys = {
 			{ "ys", desc = "󰅪 Add Surround Op." },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
-			{ "s", mode = "x", desc = "󰅪 Add Surround Op." },
 			{ "ds", desc = "󰅪 Delete Surround Op." },
 			{ "cs", desc = "󰅪 Change Surround Op." },
 		},
@@ -243,7 +231,7 @@ return {
 			move_cursor = false,
 			aliases = { c = "}", r = "]", m = "W", q = '"', z = "'", e = "`" },
 			keymaps = {
-				visual = "s",
+				visual = false,
 				normal_line = false,
 				normal_cur_line = false,
 				visual_line = false,
@@ -265,12 +253,6 @@ return {
 					-- only one-line lua conditionals
 					find = "if .- then .- end",
 					delete = "(if .- then )().-( end)()",
-				},
-				["/"] = { -- regex
-					find = "/.-/",
-					add = { "/", "/" },
-					delete = "(/)().-(/)()",
-					change = { target = "(/)().-(/)()" },
 				},
 			},
 		},
@@ -299,7 +281,6 @@ return {
 		"Wansmer/treesj",
 		keys = {
 			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-			{ "<leader>s", "gww", ft = { "applescript", "plaintext" }, desc = "󰗈 Split line" },
 			{ "<leader>s", "gw}", ft = "markdown", desc = "󰗈 Reflow rest of paragraph" },
 		},
 		opts = {
@@ -368,7 +349,6 @@ return {
 				},
 			},
 		},
-		cmd = "ChainSaw",
 		keys = {
 			-- stylua: ignore start
 			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
@@ -382,11 +362,8 @@ return {
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 			{"<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪  clear" },
-
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰐪 󰅗 remove logs" },
 			-- stylua: ignore end
 		},
 	},
-
-	--------------------------------------------------------------------------------
 }
