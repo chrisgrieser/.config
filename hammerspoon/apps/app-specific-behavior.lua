@@ -53,32 +53,6 @@ M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
 	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
 )
 
-------------------------------------------------------------------------------
--- TRANSMISSION / MASTODON
-
--- Fallthrough: prevent unintended focusing after qutting another app or closing last window
-M.aw_fallthrough = aw.new(function(_, event)
-	if event ~= aw.terminated then return end
-
-	-- CONFIG
-	local fallThroughApps = { "Transmission", "Mona" }
-	u.defer({ 0.1, 0.2 }, function()
-		if not u.isFront(fallThroughApps) then return end
-		local visibleWins = hs.window:orderedWindows()
-		local nextWin
-		for _, win in pairs(visibleWins) do
-			if not win:application() then return end
-			local name = win:application():name() ---@diagnostic disable-line: undefined-field
-			if not (hs.fnutils.contains(fallThroughApps, name)) then
-				nextWin = win
-				break
-			end
-		end
-		if not nextWin or (nextWin:id() == hs.window.frontmostWindow():id()) then return end
-		nextWin:focus()
-	end)
-end):start()
-
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR
 
