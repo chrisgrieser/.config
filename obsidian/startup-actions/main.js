@@ -71,19 +71,19 @@ async function updateStatusbar(plugin) {
 	const { app, statusbarTaskCounter } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
-		statusbarTaskCounter.style = "display: none";
+		statusbarTaskCounter.style.cssText = "display: none";
 		return;
 	}
 
 	const text = await app.vault.cachedRead(activeFile);
 	const totalTasks = text.match(/^\s*- \[[x ]\] /gm)?.length;
 	if (!totalTasks) {
-		statusbarTaskCounter.style = "display: none";
+		statusbarTaskCounter.style.cssText = "display: none";
 		return;
 	}
 	const openTasks = text.match(/^\s*- \[ \]/gm)?.length || 0;
 
-	statusbarTaskCounter.style = "display: block";
+	statusbarTaskCounter.style.cssText = "display: block";
 	statusbarTaskCounter.setText(`${openTasks}/${totalTasks} [x]`);
 }
 
