@@ -50,9 +50,8 @@ return {
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 
-			-- Enable completion (nvim-cmp) and folding (nvim-ufo)
+			-- Enable folding (nvim-ufo)
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities.textDocument.foldingRange =
 				{ dynamicRegistration = false, lineFoldingOnly = true }
 

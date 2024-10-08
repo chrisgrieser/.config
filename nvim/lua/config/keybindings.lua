@@ -220,7 +220,7 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 
 if not vim.env.NO_PLUGINS then
 	keymap(
-		{ "n", "x", "s" },
+		{ "n", "x" },
 		"<CR>",
 		function() require("funcs.alt-alt").gotoAltBuffer() end,
 		{ desc = "󰽙 Alt Buffer" }
@@ -393,3 +393,4 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 --------------------------------------------------------------------------------
+

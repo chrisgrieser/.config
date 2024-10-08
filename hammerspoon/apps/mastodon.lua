@@ -31,8 +31,10 @@ M.wf_someWindowActivity = wf
 	.new(true) -- `true` -> all windows
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
 	:subscribe(wf.windowMoved, showAndMoveOrHideTickerApp)
-	:subscribe(wf.windowCreated, function (newWin)
-		if newWin:app():name() == "WezTerm" then return end -- FIX WezTerm resizes during opening
+	:subscribe(wf.windowFocused, showAndMoveOrHideTickerApp)
+	:subscribe(wf.windowCreated, function(newWin)
+		-- FIX WezTerm resizes during opening
+		if newWin:application() and newWin:application():name() == "WezTerm" then return end 
 		showAndMoveOrHideTickerApp(newWin)
 	end)
 
