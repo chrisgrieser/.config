@@ -75,7 +75,7 @@ async function updateStatusbar(plugin) {
 		return;
 	}
 
-	const text = await app.vault.cachedRead(app.workspace.getActiveFile());
+	const text = await app.vault.cachedRead(activeFile);
 	const totalTasks = text.match(/^\s*- \[[x ]\] /gm)?.length;
 	if (!totalTasks) {
 		statusbarTaskCounter.style = "display: none";
