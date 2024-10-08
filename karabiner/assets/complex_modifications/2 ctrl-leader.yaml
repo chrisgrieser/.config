@@ -178,9 +178,7 @@ rules:
         from: { key_code: l } # l is quicker to reach for the right hand than t
         conditions: [*leader-active]
         to:
-          - shell_command: |
-              open -a 'WezTerm'
-              sleep 0.2 && open -a 'WezTerm' # FIX sometimes not focussing
+          - shell_command: open -a 'WezTerm'
           - *deactivate-leader
           - *remove-notice
 

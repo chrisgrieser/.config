@@ -7,19 +7,18 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- SHOW if window is pseudo-maximized or centered,
+-- SHOW & MOVE TO SIDE if window is pseudo-maximized or centered
 -- HIDE if maximized
----@param win hs.window
-local function showHideTickerApp(win)
+---@param win? hs.window
+local function showAndMoveOrHideTickerApp(win)
 	-- GUARD
 	local masto = u.app("Mona")
 	if not masto then return end
 
-	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
+	if win == nil or wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
 		local mastodonUsername = "pseudometa"
 		local mastoWin = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
 		if not mastoWin then return end
-
 		masto:unhide()
 		mastoWin:setFrame(wu.toTheSide)
 		mastoWin:raise()
@@ -31,8 +30,17 @@ end
 M.wf_someWindowActivity = wf
 	.new(true) -- `true` -> all windows
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowMoved, showHideTickerApp)
-	:subscribe(wf.windowCreated, showHideTickerApp)
+	:subscribe(wf.windowMoved, showAndMoveOrHideTickerApp)
+	:subscribe(wf.windowCreated, function (newWin)
+		if newWin:app():name() == "WezTerm" then return end -- FIX WezTerm resizes during opening
+		showAndMoveOrHideTickerApp(newWin)
+	end)
+
+if u.isSystemStart() then showAndMoveOrHideTickerApp() end
+
+M.aw_monaLaunched = aw.new(function(appName, event)
+	if appName == "Mona" and event == aw.launched then u.defer(1, showAndMoveOrHideTickerApp) end
+end):start()
 
 --------------------------------------------------------------------------------
 -- SPECIAL WINS

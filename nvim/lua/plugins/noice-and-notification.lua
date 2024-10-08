@@ -42,10 +42,6 @@ local routes = {
 	-- word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
-	-- nvim-treesitter
-	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
-
 	-- gitsigns.nvim
 	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "No hunks" }, view = "mini" },
@@ -204,12 +200,12 @@ return {
 
 				-- put title into border PENDING https://github.com/rcarriga/nvim-notify/issues/279
 				local opts = { border = vim.g.borderStyle }
-				local hasTitle = record.title[1] and record.title[1] ~= ""
+				local title = record.title[1]
+				local hasTitle = title and title ~= "" and title ~= "Messages"
 				if hasTitle then
-					local title = " " .. record.title[1] .. " "
 					if record.level ~= "INFO" then title = " " .. record.icon .. title end
 					local titleHl = ("Notify%sTitle"):format(record.level)
-					opts.title = { { title, titleHl } }
+					opts.title = { { " " .. title .. " ", titleHl } }
 					opts.title_pos = "left"
 				end
 				vim.api.nvim_win_set_config(win, opts)
