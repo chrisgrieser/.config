@@ -1,17 +1,17 @@
 {
 	"name": "Vimium C",
-	"@time": "10/5/2024, 1:18:42 PM",
-	"time": 1728127122818,
+	"@time": "10/8/2024, 2:22:26 PM",
+	"time": 1728390146199,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
-		"chromium": 129
+		"chromium": 128
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "0 N f ",
+			"passKeys": "N f i ",
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
@@ -76,11 +76,8 @@
 		"",
 		"unmapAll",
 		"",
-		"\" Meta",
-		"map ? showHelp",
-		"map g, focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
-		"",
 		"\" Modes",
+		"map <esc> blank",
 		"map i passNextKey",
 		"map I enterInsertMode",
 		"map gi focusInput select=\"end\"",
@@ -158,12 +155,16 @@
 		"map ym copyCurrentUrl format=\"[${title}](${url})\"",
 		"",
 		"\" copy links of all tabs",
-		"map yw copyWindowInfo format=\"${url}\"",
-		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
+		"map yw copyWindowInfo format=\"-\\u0020${url}\"",
+		"map ya copyWindowInfo format=\"${title}\\u0020-\\u0020${url}\"",
+		"",
+		"\" Help",
+		"map ? showHelp",
+		"map , focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		""
 	],
 	"regexFindMode": true,
-	"scrollStepSize": 250,
+	"scrollStepSize": 300,
 	"searchEngines": "g https://www.google.com/search?q=%s",
 	"userDefinedCss": [
 		".HUD { ",
@@ -177,8 +178,6 @@
 		"}",
 		""
 	],
-	"vimSync": true,
-	"waitForEnter": false,
 	"ignoreKeyboardLayout": 1,
 	"ignoreCapsLock": 2,
 	"mapModifier": 2

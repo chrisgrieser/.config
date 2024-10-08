@@ -4,7 +4,6 @@ return {
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
-
 		init = function()
 			-- so mason packages are available before loading mason itself
 			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
@@ -50,15 +49,9 @@ return {
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 
-			-- Enable folding (nvim-ufo)
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.foldingRange =
-				{ dynamicRegistration = false, lineFoldingOnly = true }
-
-			local serverConfigs = require("config.lsp-servers").serverConfigs
-			for lspName, serverConfig in pairs(serverConfigs) do
-				serverConfig.capabilities = capabilities
-				require("lspconfig")[lspName].setup(serverConfig)
+			local myServerConfigs = require("config.lsp-servers").serverConfigs
+			for lspName, config in pairs(myServerConfigs) do
+				require("lspconfig")[lspName].setup(config)
 			end
 		end,
 	},

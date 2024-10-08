@@ -1,15 +1,10 @@
 -- not using blink.cmp, PENDING
-- 
-	Issues · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues
-Vimium C Options chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html
-FR: source indicator to differentiate custom snippets and LSP snippets · Issue #30 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/30
-Saghen/blink.cmp: Performant, batteries-included completion plugin for Neovim https://github.com/Saghen/blink.cmp
-Bug: Alignment of documentation & completion window is off · Issue #29 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/29
-Expose snippet reload function, enables integration with plugins like nvim-scissors · Issue #28 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/28
-Cycle through completions · Issue #8 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/8
-Bug: Vscode snippet resolution not working · Issue #27 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/27
-Having trouble setting up enter as accept key · Issue #20 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/20
-
+-- https://github.com/Saghen/blink.cmp/issues/30
+-- https://github.com/Saghen/blink.cmp/issues/29
+-- https://github.com/Saghen/blink.cmp/issues/28
+-- https://github.com/Saghen/blink.cmp/issues/8
+-- https://github.com/Saghen/blink.cmp/issues/27
+-- https://github.com/Saghen/blink.cmp/issues/20
 --------------------------------------------------------------------------------
 
 local function cmpconfig()
@@ -22,7 +17,7 @@ local function cmpconfig()
 		},
 		performance = {
 			-- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
-			debounce = 0,
+			debounce = 30,
 			throttle = 15,
 			fetching_timeout = 300,
 			confirm_resolve_timeout = 40,
@@ -51,7 +46,6 @@ local function cmpconfig()
 			["<CR>"] = cmp.mapping.confirm { select = true },
 			["<PageUp>"] = cmp.mapping.scroll_docs(-5),
 			["<PageDown>"] = cmp.mapping.scroll_docs(5),
-			["<C-e>"] = cmp.mapping.abort(),
 
 			-- manually triggering to only include LSP, useful for yaml/json/css
 			["<D-c>"] = cmp.mapping.complete {
@@ -78,11 +72,10 @@ local function cmpconfig()
 			end, { "i", "s" }),
 		},
 		formatting = { ---@diagnostic disable-line: missing-fields
-			fields = { "abbr", "menu", "kind" }, -- order of the fields
+			fields = { "abbr", "kind" }, -- order of the fields
 			format = function(entry, item)
-				local maxLength = 40
-				local sourceIcons =
-					{ buffer = "󰽙", snippets = "", nvim_lsp = "󰒕", emmet = "" }
+				local maxLen = 40
+				local sourceIcons = { buffer = "󰽙", snippets = "󰩫" }
 				local kindIcons = {
 					Text = "",
 					Method = "󰆧",
@@ -113,17 +106,10 @@ local function cmpconfig()
 
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
-				if #item.abbr > maxLength then
-					item.abbr = (item.abbr or ""):sub(1, maxLength) .. "…"
-				end
+				if #item.abbr > maxLen then item.abbr = (item.abbr or ""):sub(1, maxLen) .. "…" end
 
-				-- distinguish emmet snippets
-				local isEmmet = entry.source.name == "nvim_lsp"
-					and item.kind == "Snippet"
-					and vim.bo[entry.context.bufnr].filetype == "css"
-
-				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
-				item.menu = (isEmmet and sourceIcons.emmet or sourceIcons[entry.source.name]) .. " "
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind]
+					or sourceIcons[entry.source.name]
 				return item
 			end,
 		},
@@ -162,8 +148,8 @@ local function cmpconfig()
 	cmp.setup.filetype("lua", {
 		enabled = function()
 			local line = vim.api.nvim_get_current_line()
-			local doubleDashLine = line:find("%s%-%-?$") or line:find("^%-%-?$")
-			return not doubleDashLine
+			local hasDoubleDash = line:find("%s%-%-?$") or line:find("^%-%-?$")
+			return not hasDoubleDash
 		end,
 	})
 
