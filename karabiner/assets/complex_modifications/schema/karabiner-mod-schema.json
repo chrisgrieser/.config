@@ -564,6 +564,20 @@
 			"properties": {
 				"set_mouse_cursor_position": {
 					"$ref": "#/definitions/SetMouseCursorPosition"
+				},
+				"open_application": {
+					"bundle_identifiers": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"file_paths": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
 				}
 			},
 			"required": [],

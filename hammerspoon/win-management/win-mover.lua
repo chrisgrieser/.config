@@ -5,20 +5,19 @@ local wf = hs.window.filter
 local env = require("meta.environment-vars")
 --------------------------------------------------------------------------------
 
--- work: always open pseudo-maximized
--- projector: always open maximized
+-- one screen: always open new pseudo-maximized
+-- projector: always open new windows maximized
 M.wf_pseudoMax = wf.new({
 	"Brave Browser",
 	"Safari",
-	"Alfred Preferences",
-	"BetterTouchTool",
 	"WezTerm",
 	"Neovide",
 	"Discord",
 	"Slack",
 	"Obsidian",
 	"Preview",
-	"Highlights"
+	"Highlights",
+	"Karabiner-Elements",
 }):subscribe(wf.windowCreated, function(win)
 	local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
 	wu.moveResize(win, size)

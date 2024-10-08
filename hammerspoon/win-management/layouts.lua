@@ -72,7 +72,7 @@ local function workLayout()
 	displayFunc()
 	dockSwitcher("work")
 	holeCover.update()
-	u.defer(2, darkmode.autoSwitch) -- wait for brightness adjustments
+	u.defer(1, darkmode.autoSwitch) -- wait for brightness adjustments
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
 	videoAppWatcherForSpotify:stop()

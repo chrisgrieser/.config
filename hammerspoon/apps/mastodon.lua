@@ -24,14 +24,15 @@ end
 ---@param win hs.window
 local function showAndMoveOrHideTickerApp(win)
 	-- GUARD
+	local masto = u.app("Mona")
+	if not masto or not win then return end
 	local winNotFrontmost = win:id() ~= hs.window.focusedWindow():id()
 	if winNotFrontmost then return end
 
 	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
 		moveToSide()
 	elseif wu.winHasSize(win, hs.layout.maximized) then
-		local masto = u.app("Mona")
-		if masto then masto:hide() end
+		masto:hide()
 	end
 end
 

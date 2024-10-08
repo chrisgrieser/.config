@@ -21,7 +21,7 @@ rules:
       # (CleanShot) (mapping done in `finder-vim-alfred-addon.yaml` to consider
       # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Notification"
+  - description: "⇪ Dismiss Notification"
     manipulators:
       # dismiss notifications
       - type: basic
@@ -45,7 +45,7 @@ rules:
         to:
           - { key_code: n, modifiers: [fn] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "Insert Mode Vim: ⇪ Hyper Movements"
+  - description: "⇪ Insert Mode Vim"
     manipulators:
       # Movement
       - type: basic

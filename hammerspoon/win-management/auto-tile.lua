@@ -26,6 +26,7 @@ local function autoTile(winfilter, appName)
 	M.autoTileTimer = hs.timer.doAfter(0.2, function() M.autoTileInProgress = false end):start()
 
 	local app = hs.application.find(appName, true, true)
+	if not app then return end
 	local wins = winfilter:getWindows()
 	local pos = {}
 	app:selectMenuItem { "Window", "Bring All to Front" }
