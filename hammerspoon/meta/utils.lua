@@ -23,7 +23,6 @@ M.videoAndAudioApps = {
 	"Steam",
 }
 
-
 --------------------------------------------------------------------------------
 
 ---binds a hotkey for a specific application only
@@ -44,7 +43,7 @@ function M.appHotkey(appName, modifier, key, action)
 end
 
 ---Differentiate code to be run on reload and code to be run on startup.
----REQUIRED Dependent on the setup in `reload.lua`.
+---REQUIRED dependent on the setup in `reload.lua`.
 ---@return boolean
 ---@nodiscard
 function M.isSystemStart()
@@ -54,8 +53,8 @@ end
 
 ---Whether the current time is between startHour & endHour. Also works for
 ---ranges that go beyond midnight, e.g. 23 to 6.
----@param startHour integer, time between 0 and 24. also accepts floats e.g. 13.5 for 13:30
----@param endHour integer, time between 0 and 24
+---@param startHour integer time between 0 and 24. Also accepts floats like 13.5 for 13:30
+---@param endHour integer time between 0 and 24
 ---@nodiscard
 ---@return boolean|nil isInBetween nil for invalid time ranges (e.g., 2 to 66)
 function M.betweenTime(startHour, endHour)
@@ -76,7 +75,7 @@ end
 
 -- CAVEAT: won't work with Chromium browsers due to bug, but works for URI schemes
 ---@param url string
-function M.openInBackground(url) hs.execute(("open -g %q"):format(url)) end
+function M.openUrlInBg(url) hs.execute(("open -g %q"):format(url)) end
 
 ---@param filePath string
 ---@param str string
@@ -112,6 +111,7 @@ function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle"
 ---collection. To avoid collecting too many, only a certain number are kept.
 ---@param delaySecs number|number[]
 ---@param callbackFn function
+---@async
 function M.defer(delaySecs, callbackFn)
 	if type(delaySecs) == "number" then delaySecs = { delaySecs } end
 	for _, delay in pairs(delaySecs) do
@@ -163,7 +163,7 @@ end
 
 ---get exact appObject, avoiding the imprecision of hs.application(appname)
 ---@param appName string (literal & exact match)
----@return hs.application
+---@return hs.application? nil if not found
 ---@nodiscard
 function M.app(appName)
 	-- FIX neovide and wezterm have differing CLI and app names

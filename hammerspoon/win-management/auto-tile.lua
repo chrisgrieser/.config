@@ -10,7 +10,7 @@ local config = {
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
-		if require("meta.environment-vars").isProjector() then return hs.layout.maximized end
+		if require("meta.environment").isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
 }
@@ -26,7 +26,6 @@ local function autoTile(winfilter, appName)
 	M.autoTileTimer = hs.timer.doAfter(0.2, function() M.autoTileInProgress = false end):start()
 
 	local app = hs.application.find(appName, true, true)
-	print("🖨️ appName: " .. tostring(appName))
 	if not app then return end
 	local wins = winfilter:getWindows()
 	local pos = {}
@@ -74,11 +73,7 @@ local wf = hs.window.filter
 local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
-		:setOverrideFilter({
-			currentSpace = true,
-			rejectTitles = ignoredWins,
-			allowRoles = "AXStandardWindow",
-		})
+		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
 		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
 		:subscribe(wf.windowDestroyed, function()
 			M.timer = hs.timer.doAfter(

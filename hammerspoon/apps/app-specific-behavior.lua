@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local env = require("meta.environment-vars")
+local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
@@ -104,7 +104,7 @@ M.aw_discord = aw.new(function(appName, event)
 	-- on launch, open a specific channel rather than the friends view
 	if event == aw.launched or event == aw.launching then
 		local channelUri = "discord://discord.com/channels/1231936600204902481/1231936600674668604"
-		u.openInBackground(channelUri)
+		u.openUrlInBg(channelUri)
 		return
 	end
 

@@ -21,12 +21,13 @@ local function moveToSide()
 	mastoWin:raise()
 end
 
----@param win hs.window
+---@param win? hs.window
 local function showAndMoveOrHideTickerApp(win)
 	-- GUARD
 	local masto = u.app("Mona")
-	if not masto or not win then return end
-	local winNotFrontmost = win:id() ~= hs.window.focusedWindow():id()
+	local frontWin = hs.window.focusedWindow()
+	if not (masto and win and frontWin) then return end
+	local winNotFrontmost = win:id() ~= frontWin:id()
 	if winNotFrontmost then return end
 
 	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
@@ -67,8 +68,8 @@ end):start()
 --------------------------------------------------------------------------------
 -- SPECIAL WINS
 
--- - auto-focus when composeWin when activating
--- - auto-close when deactivating
+-- * auto-focus compose win when activating
+-- * auto-close media wins when deactivating
 M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
 	if appName ~= "Mona" then return end
 

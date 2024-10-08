@@ -1,6 +1,6 @@
 local M = {} -- persist from garbage collector
 
-local env = require("meta.environment-vars")
+local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 
