@@ -27,7 +27,7 @@ safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
 safeRequire("appearance.dark-mode")
 
-safeRequire("win-management.window-utils")
+safeRequire("win-management.win-mover")
 safeRequire("win-management.layouts")
 safeRequire("win-management.app-hider")
 safeRequire("win-management.auto-quitter")
