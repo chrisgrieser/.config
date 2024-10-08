@@ -15,17 +15,10 @@ local wf = hs.window.filter
 -- corner.
 
 local config = {
-	transBgApps = env.transBgApps,
+	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
 	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "ClipBook" },
 	disableHidingWhileActive = { "Steam" },
-	appsNotToHide = {
-		"Espanso",
-		"IINA",
-		"zoom.us",
-		"CleanShot X",
-		"Mona",
-		"Alfred",
-	},
+	appsNotToHide = { "Espanso", "IINA", "zoom.us", "CleanShot X", "Mona", "Alfred" },
 }
 --------------------------------------------------------------------------------
 

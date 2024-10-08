@@ -9,7 +9,10 @@ local c = hs.caffeinate.watcher
 -- force reminders sync on startup
 if u.isSystemStart() then
 	hs.execute("open -g -a Reminders")
-	u.defer(6, function() u.quitApps("Reminders") end)
+	u.defer(6, function()
+		u.quitApps("Reminders")
+		hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
+	end)
 end
 
 --------------------------------------------------------------------------------

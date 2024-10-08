@@ -1,28 +1,34 @@
 local M = {}
 local u = require("meta.utils")
-local env = require("meta.environment-vars")
 local wu = require("win-management.window-utils")
+local wf = hs.window.filter
+local env = require("meta.environment-vars")
+--------------------------------------------------------------------------------
+
+-- work: always open pseudo-maximized
+-- projector: always open maximized
+M.wf_pseudoMax = wf.new({
+	"Brave Browser",
+	"Safari",
+	"Alfred Preferences",
+	"BetterTouchTool",
+	"WezTerm",
+	"Neovide",
+	"Discord",
+	"Slack",
+	"Obsidian",
+	"Preview",
+	"Highlights"
+}):subscribe(wf.windowCreated, function(win)
+	local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
+	wu.moveResize(win, size)
+end)
+
 --------------------------------------------------------------------------------
 
 -- If two screens, always move new windows to Mouse Screen
-M.wf_appsOnMouseScreen = hs.window.filter
-	.new({
-		"Mimestream",
-		"Obsidian",
-		"Finder",
-		"WezTerm",
-		"Hammerspoon",
-		"System Settings",
-		"Discord",
-		"MacWhisper",
-		"Neovide",
-		"Calendar",
-		"Alfred Preferences",
-		"ClipBook",
-		"BetterTouchTool",
-		"Brave Browser",
-		table.unpack(env.videoAndAudioApps), -- must be last for all items to be unpacked
-	})
+M.wf_appsOnMouseScreen = wf.new(true)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow", fullscreen = false })
 	:subscribe(hs.window.filter.windowCreated, function(newWin)
 		if #hs.screen.allScreens() < 2 then return end
 		local mouseScreen = hs.mouse.getCurrentScreen()
@@ -36,8 +42,8 @@ M.wf_appsOnMouseScreen = hs.window.filter
 local function toggleSize()
 	local currentWin = hs.window.focusedWindow()
 
-	local isSmallerApp = u.isFront { "Finder", "Script Editor", "Reminders", "ClipBook", "TextEdit" }
-	local baseSize = isSmallerApp and wu.middleHalf or wu.pseudoMax
+	local smallerWins = { "Finder", "Script Editor", "Reminders", "TextEdit", "System Settings" }
+	local baseSize = u.isFront(smallerWins) and wu.middleHalf or wu.pseudoMax
 	local newSize = wu.winHasSize(currentWin, baseSize) and hs.layout.maximized or baseSize
 
 	wu.moveResize(currentWin, newSize)

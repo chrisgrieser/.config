@@ -8,14 +8,14 @@ local wu = require("win-management.window-utils")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorner = hs.loadSpoon("RoundedCorners")
 if roundedCorner then
-	roundedCorner.radius = 9
+	roundedCorner.radius = 7
 	roundedCorner:start()
 end
 
 --------------------------------------------------------------------------------
 
 ---to stop wallpaper shining through
-function M.updateHoleCover()
+function M.update()
 	local toMode = u.isDarkMode() and "dark" or "light"
 
 	if M.coverParts then
@@ -48,7 +48,7 @@ function M.updateHoleCover()
 	end
 end
 
-if u.isSystemStart() then M.updateHoleCover() end
+if u.isSystemStart() then M.update() end
 
 --------------------------------------------------------------------------------
 return M

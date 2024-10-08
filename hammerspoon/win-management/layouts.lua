@@ -71,8 +71,8 @@ local function workLayout()
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
 	dockSwitcher("work")
-	holeCover.updateHoleCover()
-	u.defer(0.5, darkmode.autoSwitch) -- wait for brightness adjustments
+	holeCover.update()
+	u.defer(2, darkmode.autoSwitch) -- wait for brightness adjustments
 
 	-- prevent the automatic quitting of audio-apps to trigger starting spotify
 	videoAppWatcherForSpotify:stop()
@@ -89,7 +89,6 @@ local function workLayout()
 		end)
 	end
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
-	hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
 
 	print("🔲 Loaded WorkLayout")
 end
@@ -97,7 +96,7 @@ end
 local function movieLayout()
 	darkmode.setDarkMode("dark")
 	darkenDisplay()
-	holeCover.updateHoleCover()
+	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeFinderWins()
 
@@ -111,7 +110,6 @@ local function movieLayout()
 		"Calendar",
 		"Alfred Preferences",
 		"Highlights",
-		"MacWhisper",
 		"Obsidian",
 		"WezTerm",
 		"Mimestream",

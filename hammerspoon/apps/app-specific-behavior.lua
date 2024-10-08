@@ -5,7 +5,6 @@ local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
-
 --------------------------------------------------------------------------------
 -- FINDER
 
@@ -46,12 +45,6 @@ M.aw_highlights = aw.new(function(appName, event, app)
 		app:selectMenuItem { "View", "Hide Toolbar" }
 	end
 end):start()
-
--- open all windows pseudo-maximized
-M.wf_pdfReader = wf.new({ "Preview", "Highlights" }):subscribe(
-	wf.windowCreated,
-	function(newWin) wu.moveResize(newWin, wu.pseudoMax) end
-)
 
 --------------------------------------------------------------------------------
 -- SCRIPT EDITOR

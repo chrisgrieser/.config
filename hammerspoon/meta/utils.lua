@@ -1,5 +1,4 @@
 local M = {} -- persist from garbage collector
-local env = require("meta.environment-vars")
 --------------------------------------------------------------------------------
 
 -- bound to capslock via Karabiner elements
@@ -8,6 +7,22 @@ M.hyper = { "cmd", "alt", "ctrl" }
 -- Add path for `hs.execute()`. (Especially on system start, hammerspoon
 -- sometimes does not correctly inherit the PATH from the shell.)
 M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
+
+M.videoAndAudioApps = {
+	"IINA",
+	"zoom.us",
+	"FaceTime",
+	"Netflix",
+	"YouTube",
+	"Prime Video",
+	"Freeve",
+	"Tagesschau",
+	"Crunchyroll",
+	"TikTok",
+	"Twitch",
+	"Steam",
+}
+
 
 --------------------------------------------------------------------------------
 
@@ -239,7 +254,7 @@ function M.closeAllTheThings()
 	-- close browser tabs, finder wins and video apps
 	M.closeTabsContaining(".") -- close any tab
 	M.closeFinderWins()
-	M.quitApps(env.videoAndAudioApps)
+	M.quitApps(M.videoAndAudioApps)
 end
 
 --------------------------------------------------------------------------------

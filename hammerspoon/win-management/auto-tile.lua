@@ -72,7 +72,11 @@ local wf = hs.window.filter
 local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
-		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
+		:setOverrideFilter({
+			currentSpace = true,
+			rejectTitles = ignoredWins,
+			allowRoles = "AXStandardWindow",
+		})
 		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
 		:subscribe(wf.windowDestroyed, function()
 			M.timer = hs.timer.doAfter(

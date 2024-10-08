@@ -11,7 +11,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 		not u.screenIsUnlocked()
 		or not env.isAtHome
 		or env.isProjector()
-		or not (hs.fnutils.contains(env.videoAndAudioApps, appName))
+		or not (hs.fnutils.contains(u.videoAndAudioApps, appName))
 		or not (eventType == aw.launched or eventType == aw.terminated)
 	then
 		return
