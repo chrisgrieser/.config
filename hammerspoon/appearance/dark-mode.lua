@@ -1,8 +1,8 @@
 local M = {}
 
 local console = require("appearance.console")
-local u = require("meta.utils")
 local holeCover = require("appearance.hole-cover")
+local u = require("meta.utils")
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
@@ -17,10 +17,9 @@ function M.setDarkMode(toMode)
 	---@cast toMode "dark"|"light"
 
 	-- System
-	local bool = toMode == "light" and "false" or "true"
-	hs.osascript.applescript(
-		'tell application "System Events" to tell appearance preferences to set dark mode to ' .. bool
-	)
+	local as = 'tell application "System Events" to tell appearance preferences to set dark mode to '
+		.. (toMode == "light" and "false" or "true")
+	hs.osascript.applescript(as)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
@@ -38,7 +37,7 @@ function M.setDarkMode(toMode)
 
 	-- hammerspoon itself
 	console.setConsoleColors(toMode)
-	holeCover.updateHoleCover()
+	holeCover.update()
 end
 
 -- MANUAL TOGGLING OF DARK MODE
