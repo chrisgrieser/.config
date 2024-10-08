@@ -1,104 +1,192 @@
-lu
+-- not using blink.cmp, PENDING
+- 
+	Issues · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues
+Vimium C Options chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html
+FR: source indicator to differentiate custom snippets and LSP snippets · Issue #30 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/30
+Saghen/blink.cmp: Performant, batteries-included completion plugin for Neovim https://github.com/Saghen/blink.cmp
+Bug: Alignment of documentation & completion window is off · Issue #29 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/29
+Expose snippet reload function, enables integration with plugins like nvim-scissors · Issue #28 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/28
+Cycle through completions · Issue #8 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/8
+Bug: Vscode snippet resolution not working · Issue #27 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/27
+Having trouble setting up enter as accept key · Issue #20 · Saghen/blink.cmp https://github.com/Saghen/blink.cmp/issues/20
 
-return {
-	{
-		"saghen/blink.cmp",
-		lazy = false, -- lazy loading handled internally
-		version = "v0.*", -- use a release tag to download pre-built binaries
-		opts = {
-			highlight = {
-				use_nvim_cmp_as_default = true,
-			},
-			nerd_font_variant = "normal",
-			accept = {
-				auto_brackets = {
-					enabled = false, -- experimental
-				},
-			}, 
-			trigger = {
-				signature_help = {
-					enabled = false, -- experimental
-				},
-			},
-			keymap = {
-				show = "<D-c>",
-				accept = "<CR>",
-				select_next = "<Tab>",
-				select_prev = "<S-Tab>",
-				scroll_documentation_down = "<PageUp>",
-				scroll_documentation_up = "<PageDown>",
-				snippet_forward = "<D-p>",
-				snippet_backward = "<D-P>",
-			},
-			sources = {
-				providers = {
-					{
-						{ "blink.cmp.sources.snippets" },
-						{ "blink.cmp.sources.lsp" },
-					},
-					{
-						{ "blink.cmp.sources.buffer" },
-					},
-				},
-			},
-			windows = {
-				autocomplete = {
-					min_width = 20,
-					max_width = 40,
-					max_height = 15,
-					border = vim.g.borderStyle,
-					-- keep the cursor X lines away from the top/bottom of the window
-					scrolloff = 2,
-					-- which directions to show the window,
-					-- falling back to the next direction when there's not enough space
-					direction_priority = { "s", "n" },
-					-- draw = "reversed",
-				},
-				documentation = {
-				min_width = 15,
-				max_width = 50,
-				max_height = 20,
-				border = vim.g.borderStyle,
-				-- which directions to show the documentation window,
-				-- for each of the possible autocomplete window directions,
-				-- falling back to the next direction when there's not enough space
-				direction_priority = {
-					autocomplete_north = { "e", "w", "n", "s" },
-					autocomplete_south = { "e", "w", "s", "n" },
-				},
-				auto_show = true,
-				auto_show_delay_ms = 500,
-				update_delay_ms = 100,
-			},
-			},
-			kind_icons = {
-				Text = "",
-				Method = "󰆧",
-				Function = "󰊕",
-				Constructor = "",
-				Field = "󰇽",
-				Variable = "󰂡",
-				Class = "󰠱",
-				Interface = "",
-				Module = "",
-				Property = "󰜢",
-				Unit = "",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Snippet = "󰅱",
-				Color = "󰏘",
-				File = "󰈙",
-				Reference = "",
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "󰏿",
-				Struct = "",
-				Event = "",
-				Operator = "󰆕",
-				TypeParameter = "󰅲",
+--------------------------------------------------------------------------------
+
+local function cmpconfig()
+	local cmp = require("cmp")
+	local compare = require("cmp.config.compare")
+
+	cmp.setup {
+		view = {
+			entries = { follow_cursor = true }, ---@diagnostic disable-line: missing-fields
+		},
+		performance = {
+			-- all reduced, defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L18-L25
+			debounce = 0,
+			throttle = 15,
+			fetching_timeout = 300,
+			confirm_resolve_timeout = 40,
+			async_budget = 0.5,
+			max_view_entries = 100,
+		},
+		window = {
+			completion = { border = vim.g.borderStyle, scrolloff = 2 },
+			documentation = { border = vim.g.borderStyle, scrolloff = 2 },
+		},
+		sorting = { ---@diagnostic disable-line: missing-fields
+			comparators = {
+				-- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
+				-- compare functions https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
+				compare.offset,
+				compare.recently_used, -- higher
+				compare.score,
+				compare.kind, -- higher (prioritize snippets)
+				compare.exact, -- lower
+				compare.locality,
+				compare.length,
+				compare.order,
 			},
 		},
+		mapping = cmp.mapping.preset.insert {
+			["<CR>"] = cmp.mapping.confirm { select = true },
+			["<PageUp>"] = cmp.mapping.scroll_docs(-5),
+			["<PageDown>"] = cmp.mapping.scroll_docs(5),
+			["<C-e>"] = cmp.mapping.abort(),
+
+			-- manually triggering to only include LSP, useful for yaml/json/css
+			["<D-c>"] = cmp.mapping.complete {
+				config = {
+					sources = cmp.config.sources {
+						{ name = "nvim_lsp" },
+					},
+				},
+			},
+
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+			["<S-Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+		},
+		formatting = { ---@diagnostic disable-line: missing-fields
+			fields = { "abbr", "menu", "kind" }, -- order of the fields
+			format = function(entry, item)
+				local maxLength = 40
+				local sourceIcons =
+					{ buffer = "󰽙", snippets = "", nvim_lsp = "󰒕", emmet = "" }
+				local kindIcons = {
+					Text = "",
+					Method = "󰆧",
+					Function = "󰊕",
+					Constructor = "",
+					Field = "󰇽",
+					Variable = "󰂡",
+					Class = "󰠱",
+					Interface = "",
+					Module = "",
+					Property = "󰜢",
+					Unit = "",
+					Value = "󰎠",
+					Enum = "",
+					Keyword = "󰌋",
+					Snippet = "󰅱",
+					Color = "󰏘",
+					File = "󰈙",
+					Reference = "",
+					Folder = "󰉋",
+					EnumMember = "",
+					Constant = "󰏿",
+					Struct = "",
+					Event = "",
+					Operator = "󰆕",
+					TypeParameter = "󰅲",
+				}
+
+				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
+				-- (height is controlled via pumheight option)
+				if #item.abbr > maxLength then
+					item.abbr = (item.abbr or ""):sub(1, maxLength) .. "…"
+				end
+
+				-- distinguish emmet snippets
+				local isEmmet = entry.source.name == "nvim_lsp"
+					and item.kind == "Snippet"
+					and vim.bo[entry.context.bufnr].filetype == "css"
+
+				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind] or ""
+				item.menu = (isEmmet and sourceIcons.emmet or sourceIcons[entry.source.name]) .. " "
+				return item
+			end,
+		},
+		sources = cmp.config.sources {
+			{ name = "snippets" },
+			{
+				name = "nvim_lsp",
+				entry_filter = function(entry, _)
+					-- using cmp-buffer for this
+					return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+				end,
+			},
+			{
+				name = "buffer",
+				option = {
+					-- show completions from all buffers used within the last x minutes
+					get_bufnrs = function()
+						local mins = 15 -- CONFIG
+						local recentBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+							:filter(function(buf) return os.time() - buf.lastused < mins * 60 end)
+							:map(function(buf) return buf.bufnr end)
+							:totable()
+						return recentBufs
+					end,
+					max_indexed_line_length = 100, -- no long lines (e.g. base64-encoded things)
+				},
+				keyword_length = 3,
+				max_item_count = 4, -- since searching all buffers results in many results
+			},
+		},
+	}
+
+	-----------------------------------------------------------------------------
+
+	-- LUA: disable annoying `--#region` suggestions
+	cmp.setup.filetype("lua", {
+		enabled = function()
+			local line = vim.api.nvim_get_current_line()
+			local doubleDashLine = line:find("%s%-%-?$") or line:find("^%-%-?$")
+			return not doubleDashLine
+		end,
+	})
+
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = "buffer", max_item_count = 3, keyword_length = 2 },
+		},
+	})
+end
+
+--------------------------------------------------------------------------------
+
+return {
+	{ -- Completion Engine + Sources
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			{ "garymjr/nvim-snippets", opts = true },
+			"hrsh7th/cmp-buffer",
+		},
+		config = cmpconfig,
 	},
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
