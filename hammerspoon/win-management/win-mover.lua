@@ -1,14 +1,15 @@
 local M = {}
+
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
+local env = require("meta.environment")
+
 local wf = hs.window.filter
-local env = require("meta.environment-vars")
 --------------------------------------------------------------------------------
 
 -- one screen: always open new pseudo-maximized
 -- projector: always open new windows maximized
 M.wf_pseudoMax = wf.new({
-	"Brave Browser",
 	"Safari",
 	"WezTerm",
 	"Neovide",
@@ -28,7 +29,7 @@ end)
 -- If two screens, always move new windows to Mouse Screen
 M.wf_appsOnMouseScreen = wf.new(true)
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", fullscreen = false })
-	:subscribe(hs.window.filter.windowCreated, function(newWin)
+	:subscribe(wf.windowCreated, function(newWin)
 		if #hs.screen.allScreens() < 2 then return end
 		local mouseScreen = hs.mouse.getCurrentScreen()
 		if not mouseScreen then return end

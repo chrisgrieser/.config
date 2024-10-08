@@ -199,18 +199,18 @@ return {
 						content.lines[1] = line
 					end
 
-					-- REMEMBER CURSOR COLUMN
+					-- MOVE CURSOR TO VALUE
 					-- HACK needs to work with `defer_fn`, since the transformer function is
-					-- called only before multiplication
+					-- called only *before* multiplication
 					local rowBefore = vim.api.nvim_win_get_cursor(0)[1]
 					vim.defer_fn(function()
 						local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
 						local line = vim.api.nvim_get_current_line()
-						local _, valuePos = line:find("[:=] ? %S") -- find value
-						local _, _, fieldPos = line:find("@.-()%w+$") -- luadoc or jsdoc
-						local gotoPos = fieldPos or valuePos
-						if rowBefore ~= rowAfter and gotoPos then
-							vim.api.nvim_win_set_cursor(0, { rowAfter, gotoPos - 1 })
+						local _, valuePos = line:find("[:=] %S") -- find value
+						local _, _, fieldPos = line:find("@.-()%w+$") -- luadoc
+						local col = fieldPos or valuePos
+						if rowBefore ~= rowAfter and col then
+							vim.api.nvim_win_set_cursor(0, { rowAfter, col - 1 })
 						end
 					end, 1)
 
@@ -344,7 +344,7 @@ return {
 				},
 				clearLog = { lua = "hs.console.clearConsole() -- %s" }, -- Hammerspoon
 				sound = {
-					lua = 'hs.sound.getByName("Morse"):play() -- %s', -- Hammerspoon
+					lua = 'hs.sound.getByName("Sosumi"):play() -- %s', -- Hammerspoon
 					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
 				},
 			},

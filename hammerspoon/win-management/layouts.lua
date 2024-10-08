@@ -1,7 +1,7 @@
 local M = {} -- persist from garbage collector
 
 local darkmode = require("appearance.dark-mode")
-local env = require("meta.environment-vars")
+local env = require("meta.environment")
 local u = require("meta.utils")
 local holeCover = require("appearance.hole-cover")
 local wu = require("win-management.window-utils")
@@ -15,7 +15,7 @@ local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
 local function dockSwitcher(dockToUse)
 	local alfredUri = "alfred://runtrigger/de.chris-grieser.dock-switcher/load-dock-layout/?argument="
 		.. dockToUse
-	u.openInBackground(alfredUri)
+	u.openUrlInBg(alfredUri)
 end
 
 local function autoSetBrightness()
