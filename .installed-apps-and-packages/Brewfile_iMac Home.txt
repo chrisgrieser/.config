@@ -1,3 +1,4 @@
+tap "dlvhdr/formulae"
 tap "felixkratz/formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
@@ -51,7 +52,6 @@ cask "appcleaner"
 cask "bettertouchtool"
 cask "betterzip"
 cask "brave-browser"
-cask "busycal"
 cask "catch"
 cask "cleanshot"
 cask "discord"
@@ -60,7 +60,6 @@ cask "font-jetbrains-mono-nerd-font"
 cask "hammerspoon"
 cask "iina"
 cask "karabiner-elements"
-cask "macwhisper"
 cask "microsoft-word"
 cask "mimestream"
 cask "neovide"
@@ -75,4 +74,3 @@ cask "zoom"
 mas "Highlights", id: 1498912833
 mas "Mona", id: 1659154653
 mas "Peek", id: 1554235898
-mas "WISO Steuer 2024", id: 6463142140

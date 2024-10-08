@@ -294,7 +294,7 @@ rules:
                 tell application "System Events" to tell process "Finder"
                   set frontmost to true
                 end tell
-                '
+              '
 
       - description: "[h]ammerspoon console"
         type: basic
@@ -305,6 +305,8 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      # BUG opening the event-viewer from Karabiner disables the `cmd+q` for
+      # quitting, so we need to quit via `cmd+w`
       - description: "[k]arabiner-EventViewer"
         type: basic
         from: { key_code: k }

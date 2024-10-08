@@ -18,7 +18,7 @@ local config = {
 	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
 	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "ClipBook" },
 	disableHidingWhileActive = { "Steam" },
-	appsNotToHide = { "Espanso", "IINA", "zoom.us", "CleanShot X", "Mona", "Alfred" },
+	appsNotToHide = { "Espanso", "IINA", "zoom.us", "CleanShot X", "Mona", "Alfred", "Karabiner-EventViewer" },
 }
 --------------------------------------------------------------------------------
 

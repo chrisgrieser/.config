@@ -17,9 +17,9 @@ function M.setDarkMode(toMode)
 	---@cast toMode "dark"|"light"
 
 	-- System
-	local as = 'tell application "System Events" to tell appearance preferences to set dark mode to '
+	local applescript = 'tell application "System Events" to tell appearance preferences to set dark mode to '
 		.. (toMode == "light" and "false" or "true")
-	hs.osascript.applescript(as)
+	hs.osascript.applescript(applescript)
 
 	-- sketchybar
 	hs.execute(u.exportPath .. "sketchybar --reload")
@@ -41,8 +41,8 @@ function M.setDarkMode(toMode)
 end
 
 -- MANUAL TOGGLING OF DARK MODE
--- `del` -> `f13` (Keychrone Keyboard) via Karabiner
-hs.hotkey.bind({}, "f13", function() M.setDarkMode("toggle") end)
+-- forward-delete = `󰛨` on my keychron keyboard
+hs.hotkey.bind({}, "forwarddelete", function() M.setDarkMode("toggle") end)
 
 --------------------------------------------------------------------------------
 
@@ -50,10 +50,10 @@ hs.hotkey.bind({}, "f13", function() M.setDarkMode("toggle") end)
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
+	local lightThreshold = 85 -- CONFIG
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 	local targetMode
-	local lightThreshold = 85 -- CONFIG
 
 	if hasBrightnessSensor then
 		local ambientRounded = string.format("%.1f", ambient) -- round to 1 decimal
