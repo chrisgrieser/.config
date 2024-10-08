@@ -7,7 +7,8 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function aMatcher(str) {
 	const clean = str.replace(/[-_()[\]/#]/g, " ");
-	return [clean, str].join(" ") + " ";
+	const joined = str.replaceAll(" ", "");
+	return [clean, str, joined].join(" ") + " ";
 }
 
 /** @param {string} path */

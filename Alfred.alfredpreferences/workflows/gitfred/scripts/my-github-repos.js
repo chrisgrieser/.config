@@ -84,16 +84,12 @@ function run() {
 			let matcher = alfredMatcher(repo.name);
 			let type = "";
 			let subtitle = "";
-
-			// changes when repo is local
 			repo.local = localRepos[repo.name];
 			const mainArg = repo.local?.path || repo.html_url;
 
-			let terminalActionDesc = "Open in Terminal";
-			if (!repo.local)
-				terminalActionDesc = shallowClone ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
-
 			// open in terminal when local, clone when not
+			let termAct = "Open in Terminal";
+			if (!repo.local) termAct = shallowClone ? `Shallow Clone (depth ${cloneDepth})` : "Clone";
 			const terminalArg = repo.local?.path || repo.html_url;
 			if (repo.local) {
 				if (localRepos[repo.name]?.dirty) type += "✴️ ";
@@ -126,7 +122,7 @@ function run() {
 						valid: Boolean(repo.local),
 					},
 					ctrl: {
-						subtitle: "⌃: " + terminalActionDesc,
+						subtitle: "⌃: " + termAct,
 						arg: terminalArg,
 					},
 					alt: {
