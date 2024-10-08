@@ -7,23 +7,31 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- SHOW & MOVE TO SIDE if window is pseudo-maximized or centered
--- HIDE if maximized
----@param win? hs.window
-local function showAndMoveOrHideTickerApp(win)
-	-- GUARD
+-- SHOW & MOVE TO SIDE if other window is pseudo-maximized or centered
+-- HIDE if other window is maximized
+local function moveToSide()
 	local masto = u.app("Mona")
 	if not masto then return end
+	local mastodonUsername = "pseudometa"
+	local mastoWin = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
+	if not mastoWin then return end
 
-	if win == nil or wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
-		local mastodonUsername = "pseudometa"
-		local mastoWin = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
-		if not mastoWin then return end
-		masto:unhide()
-		mastoWin:setFrame(wu.toTheSide)
-		mastoWin:raise()
+	if masto:isHidden() then masto:unhide() end
+	mastoWin:setFrame(wu.toTheSide)
+	mastoWin:raise()
+end
+
+---@param win hs.window
+local function showAndMoveOrHideTickerApp(win)
+	-- GUARD
+	local winNotFrontmost = win:id() ~= hs.window.focusedWindow():id()
+	if winNotFrontmost then return end
+
+	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
+		moveToSide()
 	elseif wu.winHasSize(win, hs.layout.maximized) then
-		masto:hide()
+		local masto = u.app("Mona")
+		if masto then masto:hide() end
 	end
 end
 
@@ -32,16 +40,27 @@ M.wf_someWindowActivity = wf
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
 	:subscribe(wf.windowMoved, showAndMoveOrHideTickerApp)
 	:subscribe(wf.windowFocused, showAndMoveOrHideTickerApp)
-	:subscribe(wf.windowCreated, function(newWin)
-		-- FIX WezTerm resizes during opening
-		if newWin:application() and newWin:application():name() == "WezTerm" then return end 
-		showAndMoveOrHideTickerApp(newWin)
-	end)
+	:subscribe(wf.windowCreated, showAndMoveOrHideTickerApp)
 
-if u.isSystemStart() then showAndMoveOrHideTickerApp() end
+if u.isSystemStart() then moveToSide() end
 
 M.aw_monaLaunched = aw.new(function(appName, event)
-	if appName == "Mona" and event == aw.launched then u.defer(1, showAndMoveOrHideTickerApp) end
+	if appName == "Mona" and event == aw.launched then u.defer(1, moveToSide) end
+end):start()
+
+--------------------------------------------------------------------------------
+
+-- FALLTHROUGH
+-- prevent unintended focusing after qutting another app or closing last window
+M.aw_fallthrough = aw.new(function(_, event)
+	if event ~= aw.terminated then return end
+	u.defer(0.1, function()
+		local nonMonaWin = hs.fnutils.find(
+			hs.window:orderedWindows(),
+			function(win) return win:application() and win:application():name() ~= "Mona" end
+		)
+		if u.isFront("Mona") and nonMonaWin then nonMonaWin:focus() end
+	end)
 end):start()
 
 --------------------------------------------------------------------------------

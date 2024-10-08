@@ -6,7 +6,7 @@ local config = {
 	appsToAutoTile = {
 		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
-		Brave = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
+		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
@@ -23,7 +23,7 @@ local function autoTile(winfilter, appName)
 	-- GUARD concurrent runs
 	if M.autoTileInProgress then return end
 	M.autoTileInProgress = true
-	M.autoTileTimer = hs.timer.doAfter(0.3, function() M.autoTileInProgress = false end):start()
+	M.autoTileTimer = hs.timer.doAfter(0.2, function() M.autoTileInProgress = false end):start()
 
 	local app = hs.application.find(appName, true, true)
 	local wins = winfilter:getWindows()
@@ -31,7 +31,7 @@ local function autoTile(winfilter, appName)
 	app:selectMenuItem { "Window", "Bring All to Front" }
 
 	if #wins == 0 then
-		app:hide()
+		app:hide() -- prevent window-less app from keeping focus
 	elseif #wins == 1 then
 		pos[1] = config.oneWindowSizer(appName)
 	elseif #wins == 2 then
@@ -67,14 +67,19 @@ end
 
 --------------------------------------------------------------------------------
 
--- triggering conditions 
+-- triggering conditions
 local wf = hs.window.filter
 local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
 		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
 		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
-		:subscribe(wf.windowDestroyed, function() autoTile(M["winFilter_" .. appName], appName) end)
+		:subscribe(wf.windowDestroyed, function()
+			M.timer = hs.timer.doAfter(
+				0.1,
+				function() autoTile(M["winFilter_" .. appName], appName) end
+			)
+		end)
 
 	M["appWatcher_" .. appName] = aw.new(function(triggeringApp, event, appObj)
 		if event == aw.activated and triggeringApp == appName then
