@@ -206,24 +206,21 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 --------------------------------------------------------------------------------
 
 -- BUFFERS & FILES
-keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
+keymap(
+	{ "n", "x" },
+	"<CR>",
+	function() require("funcs.alt-alt").gotoAltBuffer() end,
+	{ desc = "󰽙 Alt Buffer" }
+)
+-- restore default behavior of `<CR>`, which is overridden by the mapping above
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function() bkeymap("n", "<CR>", "<CR>") end,
+})
 
+keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
-
-if not vim.env.NO_PLUGINS then
-	keymap(
-		{ "n", "x" },
-		"<CR>",
-		function() require("funcs.alt-alt").gotoAltBuffer() end,
-		{ desc = "󰽙 Alt Buffer" }
-	)
-	-- restore default behavior of `<CR>`, which is overridden by my mapping above
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "qf",
-		callback = function() bkeymap("n", "<CR>", "<CR>") end,
-	})
-end
 
 keymap(
 	{ "n", "x" },
@@ -250,53 +247,16 @@ keymap({ "n", "x", "i" }, "<D-N>", function()
 end, { desc = " Create Scratchpad File" })
 
 --------------------------------------------------------------------------------
--- QUICKFIX
-
-keymap("n", "gq", function()
-	local ok = pcall(vim.cmd.cnext)
-	if not ok then
-		vim.notify("Wrapped.")
-		vim.cmd.cfirst()
-	end
-end, { desc = " Next quickfix" })
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
-
-keymap("n", "<leader>q", function()
-	local windows = vim.fn.getwininfo()
-	for _, win in pairs(windows) do
-		if win["quickfix"] == 1 then
-			vim.cmd.cclose()
-			return
-		end
-	end
-	vim.cmd.copen()
-end, { desc = " Toggle quickfix" })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		bkeymap("n", "dd", function()
-			local qfItems = vim.fn.getqflist()
-			local lnum = vim.api.nvim_win_get_cursor(0)[1]
-			table.remove(qfItems, lnum)
-			vim.fn.setqflist(qfItems, "r")
-			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-		end, { desc = " Remove quickfix entry" })
-	end,
-})
-
---------------------------------------------------------------------------------
 
 -- MAC-SPECIFIC FUNCTIONS
 keymap(
-	{ "n", "x" },
+	{ "n", "x", "i" },
 	"<D-l>",
 	function() vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
 	{ desc = "󰀶 Reveal in Finder" }
 )
 keymap(
-	{ "n", "x" },
+	{ "n", "x", "i" },
 	"<D-L>",
 	function() require("funcs.nano-plugins").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
@@ -379,12 +339,5 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "qf", "help", "checkhealth" },
-	callback = function()
-		vim.defer_fn(function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end, 1)
-	end,
-})
 --------------------------------------------------------------------------------
 
-	

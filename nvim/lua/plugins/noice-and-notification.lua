@@ -203,7 +203,7 @@ return {
 				local title = record.title[1]
 				local hasTitle = title and title ~= "" and title ~= "Messages"
 				if hasTitle then
-					if record.level ~= "INFO" then title = " " .. record.icon .. title end
+					if record.level ~= "INFO" then title = record.icon .. " " .. title end
 					local titleHl = ("Notify%sTitle"):format(record.level)
 					opts.title = { { " " .. title .. " ", titleHl } }
 					opts.title_pos = "left"
