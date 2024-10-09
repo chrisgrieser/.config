@@ -5,7 +5,7 @@
 return {
 	{
 		"saghen/blink.cmp",
-		event = "InsertEnter",
+		event = "UIEnter", -- already lazy-loads internally
 		version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 		opts = {
 			highlight = { use_nvim_cmp_as_default = true },
