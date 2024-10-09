@@ -1,8 +1,3 @@
--- remaining issues PENDING
--- https://github.com/Saghen/blink.cmp/issues/30
--- https://github.com/Saghen/blink.cmp/issues/28
---------------------------------------------------------------------------------
-
 local function cmpconfig()
 	local cmp = require("cmp")
 	local compare = require("cmp.config.compare")
@@ -71,15 +66,17 @@ local function cmpconfig()
 			fields = { "abbr", "kind" }, -- order of the fields
 			format = function(entry, item)
 				local maxLen = 40
-				local sourceIcons = { buffer = "󰽙", snippets = "󰩫" }
+				local sourceIcons =
+					{ buffer = "󰽙", snippets = "󰩫", emmet = "󰯸", lsp_snip = "󰒕" }
+
 				local kindIcons = {
 					Text = "",
-					Method = "󰆧",
+					Method = "󰊕",
 					Function = "󰊕",
 					Constructor = "",
 					Field = "󰇽",
 					Variable = "󰂡",
-					Class = "󰠱",
+					Class = "⬟",
 					Interface = "",
 					Module = "",
 					Property = "󰜢",
@@ -87,7 +84,7 @@ local function cmpconfig()
 					Value = "󰎠",
 					Enum = "",
 					Keyword = "󰌋",
-					Snippet = "󰅱",
+					Snippet = "󰩫",
 					Color = "󰏘",
 					File = "󰈙",
 					Reference = "",
@@ -99,13 +96,20 @@ local function cmpconfig()
 					Operator = "󰆕",
 					TypeParameter = "󰅲",
 				}
+				local icon = sourceIcons[entry.source.name]
+
+				-- differentiate snippets from LSPs, the user, and emmet
+				if entry.source.name == "nvim_lsp" then
+					icon = kindIcons[item.kind]
+					if entry.context.filetype == "css" then icon = sourceIcons.emmet end
+					if item.kind == "Snippet" then icon = sourceIcons.lsp_snip end
+				end
 
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609
 				-- (height is controlled via pumheight option)
 				if #item.abbr > maxLen then item.abbr = (item.abbr or ""):sub(1, maxLen) .. "…" end
 
-				item.kind = entry.source.name == "nvim_lsp" and kindIcons[item.kind]
-					or sourceIcons[entry.source.name]
+				item.kind = icon
 				return item
 			end,
 		},

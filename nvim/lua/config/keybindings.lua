@@ -64,8 +64,10 @@ keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
@@ -200,6 +202,15 @@ keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
 keymap("n", "<C-down>", "<C-w>" .. delta .. "+")
 keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
 keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
+
+--------------------------------------------------------------------------------
+
+-- SNIPPETS
+keymap({ "n", "i", "s" }, "<D-p>", function()
+	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
+end, { desc = "󰩫 next placeholder" })
+-- exit snippet on scroll
+vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
 
 --------------------------------------------------------------------------------
 
