@@ -114,5 +114,7 @@ M.aw_monaDeavtivated = aw.new(function(appName, event)
 	if appName == "Mona" and event == aw.deactivated then homeAndScrollUp() end
 end):start()
 
+if u.isSystemStart() then homeAndScrollUp() end
+
 --------------------------------------------------------------------------------
 return M

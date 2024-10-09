@@ -22,7 +22,7 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                tell application "System Events" to tell process "Microsoft Word" 
+                tell application "System Events" to tell process "Microsoft Word"
                     click menu item "Comment" of menu "Insert" of menu bar 1
                 end tell'
         conditions:
@@ -420,6 +420,14 @@ rules:
                   click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.iCal$] }]
+  - description: "(Apps) Reminder"
+    manipulators:
+      # Toggle sidebar
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.reminders$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
