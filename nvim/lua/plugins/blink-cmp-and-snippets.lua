@@ -1,11 +1,15 @@
+-- remaining issues PENDING
+-- https://github.com/Saghen/blink.cmp/issues/30
+-- https://github.com/Saghen/blink.cmp/issues/28
+--------------------------------------------------------------------------------
+
 return {
 	{
 		"saghen/blink.cmp",
-		lazy = false, -- lazy loading handled internally
+		event = "InsertEnter",
 		version = "v0.*", -- use a release tag to download pre-built binaries
 		opts = {
 			highlight = { use_nvim_cmp_as_default = true },
-			nerd_font_variant = "normal",
 			keymap = {
 				show = "<D-c>",
 				accept = "<CR>",
@@ -16,50 +20,57 @@ return {
 				snippet_forward = "<D-p>",
 				snippet_backward = "<D-P>",
 			},
+			accept = {
+				auto_bracket = { enabled = false }, -- experimental
+			},
 			sources = {
 				providers = {
 					{
-						{ "blink.cmp.sources.snippets", score_offset = 5 },
+						{ "blink.cmp.sources.snippets" },
 						{ "blink.cmp.sources.lsp" },
-					},
-					{
-						{ "blink.cmp.sources.buffer" },
+						{ "blink.cmp.sources.buffer", keyword_length = 3 },
+						{
+							"blink.cmp.sources.path",
+							get_cwd = function(_) return vim.uv.cwd() or "/" end,
+						},
 					},
 				},
 			},
 			windows = {
 				autocomplete = {
-					min_width = 20,
+					min_width = 10,
 					max_width = 40,
 					max_height = 15,
 					border = vim.g.borderStyle,
-					-- keep the cursor X lines away from the top/bottom of the window
-					scrolloff = 2,
-					-- which directions to show the window,
-					-- falling back to the next direction when there's not enough space
 					direction_priority = { "s", "n" },
-					-- draw = "reversed",
+					-- https://github.com/Saghen/blink.cmp/blob/f456c2aa0994f709f9aec991ed2b4b705f787e48/lua/blink/cmp/windows/autocomplete.lua#L227
+					draw = function(ctx)
+						return {
+							{
+								ctx.item.label .. " ",
+								fill = true,
+								hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+							},
+							{ ctx.kind_icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
+						}
+					end,
 				},
 				documentation = {
-				min_width = 15,
-				max_width = 50,
-				max_height = 20,
-				border = vim.g.borderStyle,
-				-- which directions to show the documentation window,
-				-- for each of the possible autocomplete window directions,
-				-- falling back to the next direction when there's not enough space
-				direction_priority = {
-					autocomplete_north = { "e", "w", "n", "s" },
-					autocomplete_south = { "e", "w", "s", "n" },
+					min_width = 15,
+					max_width = 50,
+					max_height = 20,
+					border = vim.g.borderStyle,
+					direction_priority = {
+						autocomplete_north = { "e", "w", "n", "s" },
+						autocomplete_south = { "e", "w", "s", "n" },
+					},
+					auto_show_delay_ms = 500,
+					update_delay_ms = 100,
 				},
-				auto_show = true,
-				auto_show_delay_ms = 500,
-				update_delay_ms = 100,
-			},
 			},
 			kind_icons = {
 				Text = "",
-				Method = "󰆧",
+				Method = "",
 				Function = "󰊕",
 				Constructor = "",
 				Field = "󰇽",
@@ -72,10 +83,10 @@ return {
 				Value = "󰎠",
 				Enum = "",
 				Keyword = "󰌋",
-				Snippet = "󰅱",
+				Snippet = "󰩫",
 				Color = "󰏘",
-				File = "󰈙",
 				Reference = "",
+				File = "󰉋",
 				Folder = "󰉋",
 				EnumMember = "",
 				Constant = "󰏿",

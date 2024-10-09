@@ -1,10 +1,6 @@
--- not using blink.cmp, PENDING
+-- remaining issues PENDING
 -- https://github.com/Saghen/blink.cmp/issues/30
--- https://github.com/Saghen/blink.cmp/issues/29
 -- https://github.com/Saghen/blink.cmp/issues/28
--- https://github.com/Saghen/blink.cmp/issues/8
--- https://github.com/Saghen/blink.cmp/issues/27
--- https://github.com/Saghen/blink.cmp/issues/20
 --------------------------------------------------------------------------------
 
 local function cmpconfig()

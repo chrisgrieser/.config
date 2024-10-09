@@ -69,13 +69,6 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
--- SNIPPETS
-keymap({ "n", "i", "s" }, "<D-p>", function()
-	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
-end, { desc = "󰩫 next placeholder" })
--- exit snippet on scroll
-vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
-
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
@@ -394,3 +387,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 --------------------------------------------------------------------------------
 
+	

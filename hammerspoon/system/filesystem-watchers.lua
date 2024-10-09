@@ -24,8 +24,9 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 
 		-- 1. REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
-			-- delay, so auto-open from the browser is triggered first
-			u.defer(3, function() os.remove(path) end)
+			-- delay, so auto-open from the browser is triggered first, and since
+			-- Apple Calendar needs the file to exist before adding it
+			u.defer(20, function() os.remove(path) end)
 
 		-- 2. ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
