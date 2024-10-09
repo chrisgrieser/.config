@@ -28,7 +28,7 @@
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "GUARD $0",
+    "body": "xxxxx GUARD $0",
     "prefix": "GUARD"
   },
   "HACK": {

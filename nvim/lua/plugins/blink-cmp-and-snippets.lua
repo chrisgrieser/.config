@@ -1,6 +1,5 @@
--- PENDING remaining issues
+-- REMAINING ISSUES
 -- https://github.com/Saghen/blink.cmp/issues/28
--- https://github.com/Saghen/blink.cmp/issues/27
 --------------------------------------------------------------------------------
 
 return {
