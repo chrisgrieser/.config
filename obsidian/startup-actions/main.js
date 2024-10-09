@@ -97,6 +97,10 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		console.info(this.manifest.name + " loaded.");
 
 		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
+		// initialize
+		this.app.workspace.onLayoutReady(() => {
+			updateStatusbar(this);
+		});
 
 		this.addCommand({
 			id: "new-file-in-folder",
@@ -115,35 +119,32 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			setOpacity();
 			this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
 		}
-	}
 
+		this.app.workspace.onLayoutReady(() => {
+			// URI to reload a plugin
+			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
+				const pluginId = uriParams?.id;
+				if (!pluginId) {
+					new Notice("No plugin ID provided.");
+					return;
+				}
+				await this.app.plugins.disablePlugin(pluginId);
+				await this.app.plugins.enablePlugin(pluginId);
+				const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
 
-		// initialize
-		updateStatusbar(this);
+				// biome-ignore lint/suspicious/noConsole: intentional here
+				console.clear();
 
-		// URI to reload a plugin
-		this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
-			const pluginId = uriParams?.id;
-			if (!pluginId) {
-				new Notice("No plugin ID provided.");
-				return;
-			}
-			await this.app.plugins.disablePlugin(pluginId);
-			await this.app.plugins.enablePlugin(pluginId);
-			const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
+				// clear current notices
+				const allNotices = activeDocument.body.getElementsByClassName("notice");
+				for (const el of allNotices) el.hide();
 
-			// biome-ignore lint/suspicious/noConsole: intentional here
-			console.clear();
+				new Notice(`"${pluginName}" reloaded.`);
+			});
 
-			// clear current notices
-			const allNotices = activeDocument.body.getElementsByClassName("notice");
-			for (const el of allNotices) el.hide();
-
-			new Notice(`"${pluginName}" reloaded.`);
-		});
-
-		this.registerObsidianProtocolHandler("reload-vault", () => {
-			this.app.commands.executeCommandById("app:reload");
+			this.registerObsidianProtocolHandler("reload-vault", () => {
+				this.app.commands.executeCommandById("app:reload");
+			});
 		});
 	}
 }
