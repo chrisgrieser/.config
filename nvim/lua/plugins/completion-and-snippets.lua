@@ -101,8 +101,10 @@ local function cmpconfig()
 				-- differentiate snippets from LSPs, the user, and emmet
 				if entry.source.name == "nvim_lsp" then
 					icon = kindIcons[item.kind]
-					if entry.context.filetype == "css" then icon = sourceIcons.emmet end
-					if item.kind == "Snippet" then icon = sourceIcons.lsp_snip end
+					if item.kind == "Snippet" then
+						icon = entry.context.filetype == "css" and sourceIcons.emmet
+							or sourceIcons.lsp_snip
+					end
 				end
 
 				-- abbreviate length https://github.com/hrsh7th/nvim-cmp/discussions/609

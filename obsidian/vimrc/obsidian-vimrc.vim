@@ -1,3 +1,5 @@
+" REQUIRED
+" `Support JS commands` needs to be enabled in the vimrc plugin settings.
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER
 
