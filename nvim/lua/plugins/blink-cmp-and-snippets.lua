@@ -70,7 +70,7 @@ return {
 			},
 			kind_icons = {
 				Text = "",
-				Method = "",
+				Method = "󰊕",
 				Function = "󰊕",
 				Constructor = "",
 				Field = "󰇽",
