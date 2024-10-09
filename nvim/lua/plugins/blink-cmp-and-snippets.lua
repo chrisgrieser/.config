@@ -8,25 +8,25 @@ return {
 		event = "UIEnter", -- already lazy-loads internally
 		version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 		opts = {
-			highlight = { use_nvim_cmp_as_default = true },
+			sources = {
+				providers = {
+					{
+						{ "blink.cmp.sources.lsp" },
+						{ "blink.cmp.sources.snippets", score_offset = -1 },
+						{ "blink.cmp.sources.buffer", score_offset = -5 },
+					},
+				},
+			},
 			keymap = {
 				show = "<D-c>",
 				accept = "<CR>",
+				hide = "<S-CR>",
 				select_next = "<Tab>",
 				select_prev = "<S-Tab>",
 				scroll_documentation_down = "<PageDown>",
 				scroll_documentation_up = "<PageUp>",
 				snippet_forward = "<D-p>",
 				snippet_backward = "<D-P>",
-			},
-			sources = {
-				providers = {
-					{
-						{ "blink.cmp.sources.lsp" },
-						{ "blink.cmp.sources.snippets", score_offset = -1 },
-						{ "blink.cmp.sources.buffer", keyword_length = 3 },
-					},
-				},
 			},
 			windows = {
 				autocomplete = {
@@ -42,6 +42,7 @@ return {
 							and vim.lsp.get_client_by_id(ctx.item.client_id).name
 						if client and ctx.kind == "Snippet" then icon = "󰒕" end
 						if client == "emmet_language_server" then icon = "󰯸" end
+						if ctx.item.source == "blink.cmp.sources.buffer" then icon = "﬘" end
 
 						return {
 							{
@@ -55,10 +56,10 @@ return {
 				},
 				documentation = {
 					min_width = 15,
-					max_width = 60,
-					max_height = 20,
+					max_width = 45,
+					max_height = 15,
 					border = vim.g.borderStyle,
-					auto_show_delay_ms = 200,
+					auto_show_delay_ms = 250,
 					update_delay_ms = 100,
 				},
 			},

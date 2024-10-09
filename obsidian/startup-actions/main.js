@@ -38,7 +38,8 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 				});
 				return !rootDir && !excludedDir;
 			})
-			.sort((a, b) => { // by depth, then alphabetically
+			.sort((a, b) => {
+				// by depth, then alphabetically
 				const depthA = a.path.split("/").length;
 				const depthB = b.path.split("/").length;
 				return depthA - depthB || a.path.localeCompare(b.path);
@@ -95,7 +96,6 @@ class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 
-		updateStatusbar(this) // initialize
 		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
 
 		this.addCommand({
@@ -115,6 +115,11 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			setOpacity();
 			this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
 		}
+	}
+
+
+		// initialize
+		updateStatusbar(this);
 
 		// URI to reload a plugin
 		this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
