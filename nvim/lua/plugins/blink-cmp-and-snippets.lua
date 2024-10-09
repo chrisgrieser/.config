@@ -1,13 +1,15 @@
--- remaining issues PENDING
+-- PENDING remaining issues
 -- https://github.com/Saghen/blink.cmp/issues/28
 -- https://github.com/Saghen/blink.cmp/issues/27
 --------------------------------------------------------------------------------
+
+vim
 
 return {
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		version = "v0.*", -- REQUIRED  release tag to download pre-built binaries
+		version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 		opts = {
 			highlight = { use_nvim_cmp_as_default = true },
 			keymap = {
@@ -20,14 +22,11 @@ return {
 				snippet_forward = "<D-p>",
 				snippet_backward = "<D-P>",
 			},
-			accept = {
-				auto_bracket = { enabled = false }, -- experimental
-			},
 			sources = {
 				providers = {
 					{
 						{ "blink.cmp.sources.lsp" },
-						{ "blink.cmp.sources.snippets" },
+						{ "blink.cmp.sources.snippets", score_offset = -1 },
 						{ "blink.cmp.sources.buffer", keyword_length = 3 },
 					},
 				},
@@ -35,35 +34,34 @@ return {
 			windows = {
 				autocomplete = {
 					min_width = 10,
-					max_width = 50,
-					max_height = 15,
+					max_width = 45,
+					max_height = 12,
 					border = vim.g.borderStyle,
-					direction_priority = { "s", "n" },
 					-- https://github.com/Saghen/blink.cmp/blob/f456c2aa0994f709f9aec991ed2b4b705f787e48/lua/blink/cmp/windows/autocomplete.lua#L227
 					draw = function(ctx)
-						local isUserSnippet = ctx.item.source == "blink.cmp.sources.snippets"
+						-- differentiate snippets from LSPs, the user, and emmet
+						local icon = ctx.kind_icon
+						local client = ctx.item.source == "blink.cmp.sources.lsp"
+							and vim.lsp.get_client_by_id(ctx.item.client_id).name
+						if client and ctx.kind == "Snippet" then icon = "󰒕" end
+						if client == "emmet_language_server" then icon = "󰯸" end
+
 						return {
 							{
 								" " .. ctx.item.label .. " ",
 								fill = true,
 								hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
 							},
-							{ isUserSnippet and " " or "" },
-							{ ctx.item.client_id or "" },
-							{ ctx.kind_icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
+							{ icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
 						}
 					end,
 				},
 				documentation = {
 					min_width = 15,
-					max_width = 50,
-					max_height = 20,
+					max_width = 45,
+					max_height = 12,
 					border = vim.g.borderStyle,
-					direction_priority = {
-						autocomplete_north = { "e", "w", "n", "s" },
-						autocomplete_south = { "e", "w", "s", "n" },
-					},
-					auto_show_delay_ms = 500,
+					auto_show_delay_ms = 200,
 					update_delay_ms = 100,
 				},
 			},
@@ -74,7 +72,7 @@ return {
 				Constructor = "",
 				Field = "󰇽",
 				Variable = "󰂡",
-				Class = "󰠱",
+				Class = "⬟",
 				Interface = "",
 				Module = "",
 				Property = "󰜢",
