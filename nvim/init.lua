@@ -35,17 +35,13 @@ safeRequire("config.options") -- before lazy, so opts still work on plugin insta
 
 -- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
 -- e.g. when editing a password with `pass`.
-if vim.env.NO_PLUGINS then
-	vim.keymap.set("n", "ss", "VP", { desc = "Substitute line" })
-	vim.keymap.set("n", "<CR>", "ZZ", { desc = "Save and exit" })
-else
-	safeRequire("config.lazy")
-end
+if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
 
 safeRequire("config.theme-customization")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
 safeRequire("config.leader-keybindings")
+safeRequire("config.quickfix")
 safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.autocmds")
 

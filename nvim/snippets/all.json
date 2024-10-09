@@ -1,42 +1,42 @@
 {
   "BUG": {
-    "body": "$LINE_COMMENT BUG",
+    "body": "BUG",
     "prefix": "BUG"
   },
   "CAVEAT": {
-    "body": "$LINE_COMMENT CAVEAT $0",
+    "body": "CAVEAT $0",
     "prefix": "CAVEAT"
   },
   "CONFIG": {
-    "body": "$LINE_COMMENT CONFIG ",
+    "body": "CONFIG ",
     "prefix": "CONFIG"
   },
   "DEPRECATION": {
-    "body": "$LINE_COMMENT DEPRECATION",
+    "body": "DEPRECATION",
     "prefix": "DEPRECATION"
   },
   "DOCS (+url)": {
-    "body": "$LINE_COMMENT DOCS $0$CLIPBOARD",
+    "body": "DOCS $0$CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
   "EXAMPLE": {
-    "body": "$LINE_COMMENT EXAMPLE ",
+    "body": "EXAMPLE ",
     "prefix": "EXAMPLE"
   },
   "FIX": {
-    "body": "$LINE_COMMENT FIX",
+    "body": "FIX",
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "$LINE_COMMENT GUARD $0",
+    "body": "GUARD $0",
     "prefix": "GUARD"
   },
   "HACK": {
-    "body": "$LINE_COMMENT HACK",
+    "body": "HACK",
     "prefix": "HACK"
   },
   "INFO": {
-    "body": "$LINE_COMMENT INFO",
+    "body": "INFO",
     "prefix": "INFO"
   },
   "Lorem Ipsum Sentence": {
@@ -44,40 +44,36 @@
     "prefix": "lorem sentence"
   },
   "PENDING (+url)": {
-    "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
+    "body": "PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
   "PERF": {
-    "body": "$LINE_COMMENT PERF",
+    "body": "PERF",
     "prefix": "PERF"
   },
   "REQUIRED": {
-    "body": "$LINE_COMMENT REQUIRED ",
+    "body": "REQUIRED ",
     "prefix": "REQUIRED"
   },
   "SOURCE": {
-    "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
+    "body": "SOURCE $0$CLIPBOARD",
     "prefix": "SOURCE"
   },
   "TEST": {
-    "body": "$LINE_COMMENT TEST",
+    "body": "TEST",
     "prefix": "TEST"
   },
   "TODO": {
-    "body": "$LINE_COMMENT TODO ",
+    "body": "TODO ",
     "prefix": "TODO"
   },
   "VALIDATE": {
-    "body": "$LINE_COMMENT VALIDATE",
+    "body": "VALIDATE",
     "prefix": "VALIDATE"
   },
   "backspace": {
     "body": "⌫",
     "prefix": "backspace"
-  },
-  "bar (middle block)": {
-    "body": "🬋",
-    "prefix": "bar (middle block)"
   },
   "capslock": {
     "body": "⇪",

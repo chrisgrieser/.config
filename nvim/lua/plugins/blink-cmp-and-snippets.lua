@@ -1,13 +1,13 @@
 -- remaining issues PENDING
--- https://github.com/Saghen/blink.cmp/issues/30
 -- https://github.com/Saghen/blink.cmp/issues/28
+-- https://github.com/Saghen/blink.cmp/issues/27
 --------------------------------------------------------------------------------
 
 return {
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		version = "v0.*", -- use a release tag to download pre-built binaries
+		version = "v0.*", -- REQUIRED  release tag to download pre-built binaries
 		opts = {
 			highlight = { use_nvim_cmp_as_default = true },
 			keymap = {
@@ -26,31 +26,30 @@ return {
 			sources = {
 				providers = {
 					{
-						{ "blink.cmp.sources.snippets" },
 						{ "blink.cmp.sources.lsp" },
+						{ "blink.cmp.sources.snippets" },
 						{ "blink.cmp.sources.buffer", keyword_length = 3 },
-						{
-							"blink.cmp.sources.path",
-							get_cwd = function(_) return vim.uv.cwd() or "/" end,
-						},
 					},
 				},
 			},
 			windows = {
 				autocomplete = {
 					min_width = 10,
-					max_width = 40,
+					max_width = 50,
 					max_height = 15,
 					border = vim.g.borderStyle,
 					direction_priority = { "s", "n" },
 					-- https://github.com/Saghen/blink.cmp/blob/f456c2aa0994f709f9aec991ed2b4b705f787e48/lua/blink/cmp/windows/autocomplete.lua#L227
 					draw = function(ctx)
+						local isUserSnippet = ctx.item.source == "blink.cmp.sources.snippets"
 						return {
 							{
-								ctx.item.label .. " ",
+								" " .. ctx.item.label .. " ",
 								fill = true,
 								hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
 							},
+							{ isUserSnippet and " " or "" },
+							{ ctx.item.client_id or "" },
 							{ ctx.kind_icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
 						}
 					end,
