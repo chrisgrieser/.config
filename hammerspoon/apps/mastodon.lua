@@ -7,8 +7,6 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
 
--- SHOW & MOVE TO SIDE if other window is pseudo-maximized or centered
--- HIDE if other window is maximized
 local function moveToSide()
 	local masto = u.app("Mona")
 	if not masto then return end
@@ -30,9 +28,16 @@ local function showAndMoveOrHideTickerApp(win)
 	local winNotFrontmost = win:id() ~= frontWin:id()
 	if winNotFrontmost then return end
 
+	-- SHOW & MOVE TO SIDE if other window is pseudo-maximized or centered
 	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
 		moveToSide()
-	elseif wu.winHasSize(win, hs.layout.maximized) then
+		return
+	end
+
+	-- HIDE when transparent app is maximiezd
+	local transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" }
+	local winApp = win:application():name() ---@diagnostic disable-line: undefined-field
+	if wu.winHasSize(win, hs.layout.maximized) and (hs.fnutils.contains(transBgApps, winApp)) then
 		masto:hide()
 	end
 end
