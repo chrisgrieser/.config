@@ -6,7 +6,12 @@ local config = {
 	appsToAutoTile = {
 		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
-		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
+		["Brave Browser"] = {
+			"^Picture in Picture$",
+			"^Task Manager$",
+			"^Developer Tools",
+			"^DevTools",
+		},
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
@@ -20,14 +25,14 @@ local config = {
 ---@param winfilter hs.window.filter
 ---@param appName string
 local function autoTile(winfilter, appName)
-	-- GUARD concurrent runs
-	if M.autoTileInProgress then return end
-	M.autoTileInProgress = true
-	M.autoTileTimer = hs.timer.doAfter(0.2, function() M.autoTileInProgress = false end):start()
+	local wins = winfilter:getWindows()
+
+	-- GUARD prevent unnecessary runs or duplicate triggers
+	if M["winCount_" .. appName] == #wins then return end
+	M["winCount_" .. appName] = #wins
 
 	local app = hs.application.find(appName, true, true)
 	if not app then return end
-	local wins = winfilter:getWindows()
 	local pos = {}
 	app:selectMenuItem { "Window", "Bring All to Front" }
 
@@ -61,13 +66,6 @@ local function autoTile(winfilter, appName)
 		}
 	end
 
-	-- GUARD wins are already tiled but not in right order. Prevent wins
-	-- glitching around, when the auto-tiling is triggered via `windowFocused`
-	local allPositionsExist = hs.fnutils.every(pos, function(p)
-		return hs.fnutils.some(wins, function(w) return wu.winHasSize(w, p) end)
-	end)
-	if allPositionsExist then return end
-
 	for i = 1, #pos do
 		wu.moveResize(wins[i], pos[i])
 	end
@@ -83,11 +81,17 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
 		:subscribe(wf.windowFocused, function() autoTile(M["winFilter_" .. appName], appName) end)
 		:subscribe(wf.windowDestroyed, function()
-			M.timer = hs.timer.doAfter(
+			M.timer2 = hs.timer.doAfter(
 				0.1,
 				function() autoTile(M["winFilter_" .. appName], appName) end
 			)
 		end)
+
+	-- INFO `windowFocused` is required as trigger, since ssometimes windows
+	-- are created in the background without triggering the other triggers.
+	-- Cannot check via app watcher and the `activation` event, since passing
+	-- the win-filter does not contain windows when not passed via window filter
+	-- trigger.
 end
 
 --------------------------------------------------------------------------------

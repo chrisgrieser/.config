@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>branch_on_clone</key>
+	<string>dev</string>
 	<key>clone_depth</key>
 	<integer>15</integer>
 	<key>fork_on_clone</key>
@@ -12,7 +14,11 @@
 	<string>gg</string>
 	<key>local_repo_folder</key>
 	<string>~/Developer</string>
+	<key>on_fork_branch</key>
+	<string>dev</string>
 	<key>restore_mtime</key>
+	<true/>
+	<key>setup_remotes_on_fork</key>
 	<true/>
 </dict>
 </plist>

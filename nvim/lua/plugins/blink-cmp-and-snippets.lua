@@ -13,7 +13,9 @@ return {
 					{
 						{ "blink.cmp.sources.lsp" },
 						{ "blink.cmp.sources.snippets", score_offset = -1 },
-						{ "blink.cmp.sources.buffer", score_offset = -5 },
+					},
+					{
+						{ "blink.cmp.sources.buffer" },
 					},
 				},
 			},
