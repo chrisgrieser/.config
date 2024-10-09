@@ -3,8 +3,6 @@
 -- https://github.com/Saghen/blink.cmp/issues/27
 --------------------------------------------------------------------------------
 
-vim
-
 return {
 	{
 		"saghen/blink.cmp",
@@ -17,8 +15,8 @@ return {
 				accept = "<CR>",
 				select_next = "<Tab>",
 				select_prev = "<S-Tab>",
-				scroll_documentation_down = "<PageUp>",
-				scroll_documentation_up = "<PageDown>",
+				scroll_documentation_down = "<PageDown>",
+				scroll_documentation_up = "<PageUp>",
 				snippet_forward = "<D-p>",
 				snippet_backward = "<D-P>",
 			},
@@ -58,8 +56,8 @@ return {
 				},
 				documentation = {
 					min_width = 15,
-					max_width = 45,
-					max_height = 12,
+					max_width = 60,
+					max_height = 20,
 					border = vim.g.borderStyle,
 					auto_show_delay_ms = 200,
 					update_delay_ms = 100,
