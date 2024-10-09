@@ -61,6 +61,13 @@ local function autoTile(winfilter, appName)
 		}
 	end
 
+	-- GUARD wins are already tiled but not in right order. Prevent wins
+	-- glitching around, when the auto-tiling is triggered via `windowFocused`
+	local allPositionsExist = hs.fnutils.every(pos, function(p)
+		return hs.fnutils.some(wins, function(w) return wu.winHasSize(w, p) end)
+	end)
+	if allPositionsExist then return end
+
 	for i = 1, #pos do
 		wu.moveResize(wins[i], pos[i])
 	end
@@ -70,23 +77,17 @@ end
 
 -- triggering conditions
 local wf = hs.window.filter
-local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
 		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
 		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
+		:subscribe(wf.windowFocused, function() autoTile(M["winFilter_" .. appName], appName) end)
 		:subscribe(wf.windowDestroyed, function()
 			M.timer = hs.timer.doAfter(
 				0.1,
 				function() autoTile(M["winFilter_" .. appName], appName) end
 			)
 		end)
-
-	M["appWatcher_" .. appName] = aw.new(function(triggeringApp, event, appObj)
-		if event == aw.activated and triggeringApp == appName then
-			appObj:selectMenuItem { "Window", "Bring All to Front" }
-		end
-	end):start()
 end
 
 --------------------------------------------------------------------------------
