@@ -395,7 +395,7 @@ rules:
       - type: basic
         from: { key_code: delete_or_backspace }
         to_if_alone:
-          - { key_code: grave_accent_and_tilde, modifiers: [command] }
+          - { key_code: non_us_backslash, modifiers: [command] }
           - *end-menu
           - *remove-menu-notice
           - *leave-find-mode
