@@ -1,42 +1,42 @@
 {
   "BUG": {
-    "body": "BUG",
+    "body": "$LINE_COMMENT BUG",
     "prefix": "BUG"
   },
   "CAVEAT": {
-    "body": "CAVEAT $0",
+    "body": "$LINE_COMMENT CAVEAT $0",
     "prefix": "CAVEAT"
   },
   "CONFIG": {
-    "body": "CONFIG ",
+    "body": "$LINE_COMMENT CONFIG ",
     "prefix": "CONFIG"
   },
   "DEPRECATION": {
-    "body": "DEPRECATION",
+    "body": "$LINE_COMMENT DEPRECATION",
     "prefix": "DEPRECATION"
   },
   "DOCS (+url)": {
-    "body": "DOCS $0$CLIPBOARD",
+    "body": "$LINE_COMMENT DOCS $0$CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
   "EXAMPLE": {
-    "body": "EXAMPLE ",
+    "body": "$LINE_COMMENT EXAMPLE ",
     "prefix": "EXAMPLE"
   },
   "FIX": {
-    "body": "FIX",
+    "body": "$LINE_COMMENT FIX",
     "prefix": "FIX"
   },
   "GUARD": {
-    "body": "xxxxx GUARD $0",
+    "body": "$LINE_COMMENT GUARD $0",
     "prefix": "GUARD"
   },
   "HACK": {
-    "body": "HACK",
+    "body": "$LINE_COMMENT HACK",
     "prefix": "HACK"
   },
   "INFO": {
-    "body": "INFO",
+    "body": "$LINE_COMMENT INFO",
     "prefix": "INFO"
   },
   "Lorem Ipsum Sentence": {
@@ -44,31 +44,31 @@
     "prefix": "lorem sentence"
   },
   "PENDING (+url)": {
-    "body": "PENDING $0$CLIPBOARD",
+    "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
   "PERF": {
-    "body": "PERF",
+    "body": "$LINE_COMMENT PERF",
     "prefix": "PERF"
   },
   "REQUIRED": {
-    "body": "REQUIRED ",
+    "body": "$LINE_COMMENT REQUIRED ",
     "prefix": "REQUIRED"
   },
   "SOURCE": {
-    "body": "SOURCE $0$CLIPBOARD",
+    "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
     "prefix": "SOURCE"
   },
   "TEST": {
-    "body": "TEST",
+    "body": "$LINE_COMMENT TEST",
     "prefix": "TEST"
   },
   "TODO": {
-    "body": "TODO ",
+    "body": "$LINE_COMMENT TODO ",
     "prefix": "TODO"
   },
   "VALIDATE": {
-    "body": "VALIDATE",
+    "body": "$LINE_COMMENT VALIDATE",
     "prefix": "VALIDATE"
   },
   "backspace": {
