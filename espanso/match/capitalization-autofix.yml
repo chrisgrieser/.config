@@ -7,19 +7,18 @@
 # auto-correct-capitals plugin,[^1] which deals with that.
 
 # [^1]: https://github.com/Ummler/obsidian-auto-correct-capitals
-
 #───────────────────────────────────────────────────────────────────────────────
 
 matches:
   # INFO ignoring:
-  # - "Z", as 2nd letter to not trigger ZZ in WezTerm
+  # - "Z", as 2nd letter to not trigger ZZ
+  # - "J"/"K" as 2nd letter to not trigger in vimium when scrolling
   # - "s" as 3rd letter to not trigger, e.g. "FRs"
-  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-Y])(?P<three>[a-rt-z])"
+  - regex: "\\b(?P<one>[A-Z])(?P<two>[A-IL-Y])(?P<three>[a-rt-z])"
     replace: "{{CapitalCased}}"
     vars:
       - name: CapitalCased
         type: shell
         params:
-          cmd: |
-            echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE
+          cmd: echo $ESPANSO_ONE$(echo $ESPANSO_TWO | tr [A-Z] [a-z])$ESPANSO_THREE
           shell: sh
