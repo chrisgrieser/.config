@@ -288,25 +288,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -324,6 +305,25 @@
 			<string>F926E3B6-82B9-4B36-847D-6757DB67469A</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0FA387AA-D669-473B-B888-38D59F48BDE9</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -566,48 +566,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>textarea</string>
 			<key>variable</key>
 			<string>folder_icons</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>oo</string>
-				<key>placeholder</key>
-				<string>oo</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>keyword</string>
-			<key>label</key>
-			<string>Scratchpad</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>scratchpad_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>filtermode</key>
-				<integer>2</integer>
-				<key>placeholder</key>
-				<string></string>
-				<key>required</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>scratchpad file (can be in a different vault)</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>filepicker</string>
-			<key>variable</key>
-			<string>scratchpad_path</string>
 		</dict>
 		<dict>
 			<key>config</key>

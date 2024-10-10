@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function aMatcher(str) {
-	const clean = str.replace(/[-_()[\]/#]/g, " ");
+	const clean = str.replace(/[-_()[\]/]/g, " ");
 	const joined = str.replaceAll(" ", "");
 	return [clean, str, joined].join(" ") + " ";
 }
@@ -91,7 +91,7 @@ function run() {
 		.reduce((/** @type {AlfredItem[]} */ acc, relPath) => {
 			relPath = relPath.slice(2); // remove `./`
 			const parts = relPath.split("/");
-			const name = parts.pop() || "";
+			const name = (parts.pop() || "").replace(/\.md$/, ""); // keep `.canvas` extension
 			const parent = parts.join("/");
 			const absPath = vaultPath + "/" + relPath;
 
@@ -102,7 +102,7 @@ function run() {
 					? aliases
 					: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
 			const subtitle =
-				"▸ " + parent + (aliases.length > 0 ? "   ■   " + shortAliases.join(", ") : "");
+				"▸ " + parent + (aliases.length > 0 ? "      🅐  " + shortAliases.join(", ") : "");
 
 			// icons
 			let icons = "";
@@ -118,7 +118,7 @@ function run() {
 			}
 
 			// matcher
-			const matcher = aMatcher(name) + aMatcher(aliases.join(" ")) + aMatcher(tags.join(" "));
+			const matcher = aMatcher(name) + aMatcher(aliases.join(" ")) + " #" + tags.join(" #");
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
@@ -138,6 +138,6 @@ function run() {
 	// OUTPUT
 	return JSON.stringify({
 		items: filesInVault,
-		cache: { seconds: 600, loosereload: true },
+		cache: { seconds: 60, loosereload: true },
 	});
 }
