@@ -49,6 +49,10 @@ local routes = {
 	-- :LspRestart
 	{ filter = { event = "notify", find = "Restarting…" }, view = "mini" },
 
+	-- nvim-treesitter
+	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
+
 	-----------------------------------------------------------------------------
 	-- SKIP
 
