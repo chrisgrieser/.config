@@ -10,10 +10,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	chmod +x .build-and-release.sh
+	cp -f "$HOME/Desktop/.rsync-exclude" ./.rsync-exclude
 }
 
-commit_msg="build: fix missing permission for build script"
+commit_msg="chore: exclude \`.typos.toml\` from rsync"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────

@@ -1303,7 +1303,7 @@ disown</string>
 	+ Check for unused files of current workflow, and remove unused UID `.png`
 	  files.
 	+ Updating the Alfred Preferences.app icon to use an icon using the macOS
-	  Big Sure icon shape.
+	  Big Sur icon shape.
 	+ Open the Alfred data folder, or the Alfred cache folder.
 	+ Change the font size of the Alfred debugger window.
 
@@ -1691,7 +1691,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.2</string>
+	<string>1.3.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
