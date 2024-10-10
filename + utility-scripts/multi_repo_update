@@ -87,6 +87,6 @@ done <<< "$repos_to_update"
 
 if [[ $not_updated -gt 0 ]] ; then
 	echo "────────────────────────"
-	print "\e[1;33m$not_updated repos not updated.\e[0m"
+	print "\e[1;33m$not_updated repo(s) not updated.\e[0m"
 fi
 "$ZDOTDIR/notificator" --title "🌐Multi-repo update" --message "Update finished." --sound "Blow"

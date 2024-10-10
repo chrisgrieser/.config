@@ -18,6 +18,8 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {Record<string, string>} */
@@ -28,11 +30,27 @@ const specialAnchors = {
 	Violentmonkey: "#scripts",
 };
 
+//──────────────────────────────────────────────────────────────────────────────
+
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const browser = $.getenv("browser");
 	const browserVars = JSON.parse(readFile("./scripts/browser-vars.json"));
-	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, app.pathTo("home folder"));
+	const home = app.pathTo("home folder");
+	const extensionPath = browserVars.extensionPath[browser].replace(/^~/, home);
+
+	// GUARD browser not installed
+	if (!fileExists(extensionPath)) {
+		return JSON.stringify({
+			items: [
+				{
+					title: browser + " not installed.",
+					subtitle: "⏎: Open workflow configuration to select a different browser.",
+					arg: `alfredpreferences://navigateto/workflows>workflow>${$.getenv("alfred_workflow_uid")}>userconfig>browser`,
+				},
+			],
+		});
+	}
 
 	// SETTINGS
 	const settings = JSON.parse(readFile("./scripts/all-chromium-browser-settings.json"));
