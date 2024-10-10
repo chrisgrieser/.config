@@ -115,6 +115,10 @@ end
 local scrollEveryMins = 5 -- CONFIG
 M.timer_regularScroll = hs.timer.doEvery(scrollEveryMins * 60, homeAndScrollUp):start()
 
+M.aw_monaDeavtivated = aw.new(function(appName, event)
+	if appName == "Mona" and event == aw.deactivated then homeAndScrollUp() end
+end):start()
+
 if u.isSystemStart() then homeAndScrollUp() end
 
 --------------------------------------------------------------------------------
