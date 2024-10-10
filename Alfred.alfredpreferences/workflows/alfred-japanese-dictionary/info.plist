@@ -647,7 +647,7 @@
 ## Credits
 - Hiragana/Katakana chart by [u/Moer_by](https://www.reddit.com/r/japaneseresources/comments/ilkott/hiragana_katakana_stroke_order_chart/)
 - Japanese dictionary API by [jisho.org](https://jisho.org/)
-- Grammar Guides at [tofugu.com](https://tofugu.com/)
+- Grammar guides at [tofugu.com](https://tofugu.com/)
 - Workflow created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
 	<dict>
@@ -994,7 +994,7 @@ to set hotkey for selection lookup</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.3.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

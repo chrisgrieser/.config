@@ -511,11 +511,11 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>~/.config/dock-layouts</string>
+				<string>~/.config/alfred-dock-switcher</string>
 				<key>filtermode</key>
 				<integer>1</integer>
 				<key>placeholder</key>
-				<string>/path/dock-switcher.sh</string>
+				<string>/path/dock-switcher</string>
 				<key>required</key>
 				<true/>
 			</dict>
@@ -530,7 +530,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

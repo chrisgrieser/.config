@@ -13,6 +13,7 @@ function _cut_buffer {
 }
 zle -N _cut_buffer
 bindkey '^U' _cut_buffer
+bindkey -M vicmd -s '^U' 'i^U' # make it work in normal mode as well
 
 # ctrl+u -> copy location to clipboard
 function _copy_location {
@@ -39,8 +40,6 @@ bindkey '…' insert-last-word    # alt+. on macOS
 bindkey '^N' undo               # remapped to `cmd+z` via wezterm
 bindkey "^[[1;3D" backward-word # alt+arrow to move between words (emulating macOS default behavior)
 bindkey "^[[1;3C" forward-word
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE

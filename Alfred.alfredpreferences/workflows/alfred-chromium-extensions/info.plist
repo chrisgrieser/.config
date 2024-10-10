@@ -72,7 +72,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Chromium extensions &amp; internal pages</string>
+	<string>Chromium Extensions &amp; Pages</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -197,9 +197,11 @@ Search for installed browser extensions and internal pages via the keyword `ch`:
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the local file path of the extension.
 
 ## Browser support
-Currently, only Chrome and Brave are supported. Adding support for more
-browsers is easy, as long as they are Chromium-based. Making a few additions to
-this JSON file is all that is needed.
+Currently, only Chrome and Brave are supported. Adding support for more browsers
+is easy, as long as they are Chromium-based. Making a few additions to this
+[JSON
+file](https://github.com/chrisgrieser/alfred-chromium-extensions/blob/main/scripts/browser-vars.json)
+is all that is needed, and mostly self-explanatory, PRs are welcome.
 
 ---
 
@@ -305,7 +307,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
