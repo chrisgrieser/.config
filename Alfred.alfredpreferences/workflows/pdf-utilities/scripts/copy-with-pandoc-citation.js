@@ -10,10 +10,10 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const selection = argv[0]
-		.trim()
+	const selection = (argv[0] || "")
 		.replace(/[\n\r]/g, " ") // remove line breaks
-		.replaceAll("- ", ""); // remove hyphenation
+		.replaceAll("- ", "") // remove hyphenation
+		.trim()
 
 	const pdfWinTitle = Application("System Events").processes.Highlights?.windows[0]?.name();
 	// e.g.: "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
@@ -29,6 +29,8 @@ function run(argv) {
 	// e.g.: pages = {55--78},
 	const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
 	const trueCurrentPage = pageInPdf + firstTruePage - 1;
-	app.setTheClipboardTo(`"${selection}" [${citekey}, p. ${trueCurrentPage}]`);
-	return `${citekey}, p. ${trueCurrentPage}`; // for Alfred notification
+	const citation = `${citekey}, p. ${trueCurrentPage}`
+	const toCopy = selection ? `"${selection}" [${citation}]` : `[${citation}]`;
+	app.setTheClipboardTo(toCopy);
+	return citation; // for Alfred notification
 }
