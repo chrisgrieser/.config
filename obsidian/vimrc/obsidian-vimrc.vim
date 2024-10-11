@@ -82,15 +82,23 @@ onoremap J 2j
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
-" Language tools: next/prev/accept suggestion
+
+" Language tools: accept suggestion
+exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
+noremap ga :acceptSuggestion<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
+" GOTO LOCATIONS
+
+" [m]atch parenthesis, useful to go to next pandoc citations
+nnoremap m %
+
+" Language tools: next/prev suggestion
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
 noremap ge :nextSuggestion<CR>
 
 exmap prevSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-previous-suggestion
 noremap gE :prevSuggestion<CR>
-
-exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-noremap ga :acceptSuggestion<CR>
 
 " next/prev heading
 " (ignoring H1 in pattern since they could also be comments in code blocks, and
@@ -100,40 +108,39 @@ nnoremap <C-j> :gotoNextHeading<CR>
 exmap gotoPrevHeading jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /^##+ .*/) }
 nnoremap <C-k> :gotoPrevHeading<CR>
 
-" [m]atch parenthesis, useful to go to next pandoc citations
-nnoremap m %
-
-" [g]oto [s]ymbol (using Another Quick Switcher)
+" [s]ymbol/heading (using Another Quick Switcher)
 exmap gotoHeading obcommand obsidian-another-quick-switcher:header-floating-search-in-file
 nnoremap gs :gotoHeading<CR>
 
-" like vim's gx (if not standing on link, seek forward)
+" vim's gx (if not standing on link, seek forward)
 exmap openNextLink jsfile Meta/vimrc-jsfile.js { openNextLink("current-tab") }
 nnoremap gx :openNextLink<CR>
 
 exmap openNextLinkInNewTab jsfile Meta/vimrc-jsfile.js { openNextLink("new-tab") }
 nnoremap gX :openNextLinkInNewTab<CR>
 
-" [g]oto [f]ootnotes
-" requires Footnotes Shortcut Plugin
+" [f]ootnotes (requires Footnotes Shortcut Plugin)
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote<CR>
 
-" go to last change (HACK, only works once to jump to the last location)
+" last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
 
-"───────────────────────────────────────────────────────────────────────────────
-
-" go to last link in file
+" last link in file
 exmap gotoLastLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLastLinkInFile() }
 nnoremap g. :gotoLastLinkInFile<CR>
 
-" go to next/prev paragraph with link
+" next/prev paragraph with link
 " (`zt<C-y><C-y>` so long lines are fully visible in the editor)
 exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/) }
 nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
 exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
 nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
+
+exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[[x ]\]/) }
+nnoremap gt :gotoNextTask<CR>
+exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]/) }
+nnoremap gT :gotoPrevTask<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " FILE-, TAB- AND WINDOW-NAVIGATION
@@ -160,12 +167,6 @@ nnoremap ZZ :closeWindow<CR>
 exmap splitVertical obcommand workspace:split-vertical
 noremap <C-w>v :splitVertical<CR>
 noremap <C-v> :splitVertical<CR>
-
-" Tabs
-exmap nextTab obcommand workspace:next-tab
-exmap prevTab obcommand workspace:previous-tab
-nnoremap gt :nextTab<CR>
-nnoremap gT :prevTab<CR>
 
 exmap closeOthers obcommand workspace:close-others
 nnoremap <C-w>o :closeOthers<CR>
