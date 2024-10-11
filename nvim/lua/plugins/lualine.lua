@@ -72,7 +72,6 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "unix" then return "" end
 	if vim.bo.fileformat == "mac" then return "󰌑 " end
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
-	return "󰌑 ?"
 end
 
 --------------------------------------------------------------------------------
