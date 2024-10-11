@@ -407,13 +407,13 @@ rules:
         to_if_alone:
           # INFO requires "Focus Menubar item" in macOS Keyboard Shortcuts
           - { key_code: f2, modifiers: [control] }
-          - key_code: g
-          - key_code: down_arrow
-          - key_code: down_arrow
-          - { key_code: down_arrow, modifiers: [option] }
-          - key_code: up_arrow
-          - key_code: up_arrow
-          - { key_code: right_arrow, modifiers: [option] }
+          # - key_code: g
+          # - key_code: down_arrow
+          # - key_code: down_arrow
+          # - { key_code: down_arrow, modifiers: [option] }
+          # - key_code: up_arrow
+          # - key_code: up_arrow
+          # - { key_code: right_arrow, modifiers: [option] }
           - *start-menu
           - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
