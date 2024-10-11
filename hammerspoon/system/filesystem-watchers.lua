@@ -64,24 +64,29 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
 
-		-- 4. STEAM GAME SHORTCUTS
+		-- 4. DKB BANKING
+		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") then
+			local year = name:match("^%d%d%d%d")
+			local bankPath = home .. "/Documents/Finanzen/DKB Girokonto & Kreditkarte/" .. year
+			hs.fs.mkdir(bankPath)
+			os.rename(path, bankPath .. "/" .. name)
+		elseif
+			name:find("[%d-]_Kosteninformation_.*%.pdf$") or name:find("[%d-]_Abrechnung_.*%.pdf$") or 
+			name:find("[%d-]_Ertragsabrechnung_.*%.pdf$") or name:find("[%d-]_Depotauszug_.*%.pdf$") or
+			name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$")
+		then
+			local year = name:match("^%d%d%d%d")
+			local bankPath = home .. "/Documents/Finanzen/DKB Girokonto & Kreditkarte/" .. year
+			hs.fs.mkdir(bankPath)
+			os.rename(path, bankPath .. "/" .. name)
+
+		-- 5. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 			os.rename(path, gameFolder .. name)
 			-- open folders to copy icon
 			hs.open(gameFolder)
 			hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
-
-		-- 5. DATESTAMP SCANS FROM THE IPHONE
-		elseif name:find("Scanned Document.*.pdf") then
-			local dateStamp = os.date("%Y-%m-%d")
-			local counter = 1
-			local newName
-			repeat -- ensure file does not exist
-				newName = ("%s/Scanned_Document_%d %s.pdf"):format(desktop, counter, dateStamp)
-				counter = counter + 1
-			until hs.fs.attributes(newName) == nil
-			os.rename(path, newName)
 
 		-- 6. AUTO-INSTALL OBSIDIAN ALPHA
 		elseif name:find("%.asar%.gz$") and isDownloaded then
