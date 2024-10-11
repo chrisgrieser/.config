@@ -3,8 +3,12 @@
 # INFO pandoc's --data-dir defined in .zshenv
 #───────────────────────────────────────────────────────────────────────────────
 
-INPUT="$*"
-OUTPUT="${INPUT%.*}_CG.pdf"
+md_file="$*"
+if [[ ! "$md_file" =~ .*\.md ]]; then
+	echo "⚠️ Not a markdown file"
+	return 1
+fi
 
-pandoc "$INPUT" --output="$OUTPUT" --defaults="md2pdf" 2>&1 &&
-	open -R "$OUTPUT"
+pdf_file="${md_file%.*}_CG.pdf"
+pandoc "$md_file" --output="$pdf_file" --defaults="md2pdf" 2>&1 &&
+	open -R "$pdf_file"

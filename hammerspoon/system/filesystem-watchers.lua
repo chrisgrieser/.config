@@ -65,20 +65,20 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
 
 		-- 4. DKB BANKING
-		elseif name:find("[%d-]_Kontoauszug_.*%.pdf$") then
-			local year = name:match("^%d%d%d%d")
-			local bankPath = home .. "/Documents/Finanzen/DKB Girokonto & Kreditkarte/" .. year
-			hs.fs.mkdir(bankPath)
-			os.rename(path, bankPath .. "/" .. name)
 		elseif
-			name:find("[%d-]_Kosteninformation_.*%.pdf$") or name:find("[%d-]_Abrechnung_.*%.pdf$") or 
-			name:find("[%d-]_Ertragsabrechnung_.*%.pdf$") or name:find("[%d-]_Depotauszug_.*%.pdf$") or
-			name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$")
+			name:find("[%d-]_Kontoauszug_.*%.pdf$")
+			or name:find("[%d-]_Kosteninformation_.*%.pdf$")
+			or name:find("[%d-]_Abrechnung_.*%.pdf$")
+			or name:find("[%d-]_Ertragsabrechnung_.*%.pdf$")
+			or name:find("[%d-]_Depotauszug_.*%.pdf$")
+			or name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$") -- SIC missing `i` typo from DKB
 		then
+			local folder = name:find("Kontoauszug") and "DKB Girokonto & Kreditkarte" or "DKB Depot"
 			local year = name:match("^%d%d%d%d")
-			local bankPath = home .. "/Documents/Finanzen/DKB Girokonto & Kreditkarte/" .. year
+			local bankPath = ("%s/Documents/Finanzen/%s/%s"):format(home, folder, year)
 			hs.fs.mkdir(bankPath)
-			os.rename(path, bankPath .. "/" .. name)
+			-- delay ensures folder is created
+			u.defer(2, function() os.rename(path, bankPath .. "/" .. name) end)
 
 		-- 5. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
