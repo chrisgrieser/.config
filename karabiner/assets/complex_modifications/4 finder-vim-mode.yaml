@@ -405,15 +405,18 @@ rules:
       - type: basic
         from: { key_code: t }
         to_if_alone:
-          # INFO requires "Focus Menubar item" in macOS Keyboard Shortcuts
-          - { key_code: f2, modifiers: [control] }
-          # - key_code: g
-          # - key_code: down_arrow
-          # - key_code: down_arrow
-          # - { key_code: down_arrow, modifiers: [option] }
-          # - key_code: up_arrow
-          # - key_code: up_arrow
-          # - { key_code: right_arrow, modifiers: [option] }
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  set frontmost to true
+                	click menu item "Recent Folders" of menu "Go" of menu bar 1
+                  key code 125 using {option down} # opt+down
+                  key code 126 # up
+                  key code 126 # up
+                  key code 124 # right
+                end tell
+              '
+
           - *start-menu
           - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]

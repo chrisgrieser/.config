@@ -209,7 +209,7 @@
 		},
 		{
 			"title": "F3",
-			"match": "f2 ",
+			"match": "f3 99",
 			"arg": "99",
 			"subtitle": "99",
 			"mods": {
@@ -218,6 +218,7 @@
 		},
 		{
 			"title": "F4",
+			"match": "f4 118",
 			"arg": "118",
 			"subtitle": "118",
 			"mods": {
@@ -226,6 +227,7 @@
 		},
 		{
 			"title": "F5",
+			"match": "f5 96",
 			"arg": "96",
 			"subtitle": "96",
 			"mods": {
@@ -234,6 +236,7 @@
 		},
 		{
 			"title": "F6",
+			"match": "f6 97",
 			"arg": "97",
 			"subtitle": "97",
 			"mods": {
@@ -242,6 +245,7 @@
 		},
 		{
 			"title": "F7",
+			"match": "f7 98",
 			"arg": "98",
 			"subtitle": "98",
 			"mods": {
@@ -250,6 +254,7 @@
 		},
 		{
 			"title": "F8",
+			"match": "f8 100",
 			"arg": "100",
 			"subtitle": "100",
 			"mods": {
@@ -258,6 +263,7 @@
 		},
 		{
 			"title": "F9",
+			"match": "f9 101",
 			"arg": "101",
 			"subtitle": "101",
 			"mods": {
@@ -266,6 +272,7 @@
 		},
 		{
 			"title": "F10",
+			"match": "f10 109",
 			"arg": "109",
 			"subtitle": "109",
 			"mods": {
@@ -274,6 +281,7 @@
 		},
 		{
 			"title": "F11",
+			"match": "f11 103",
 			"arg": "103",
 			"subtitle": "103",
 			"mods": {
@@ -282,6 +290,7 @@
 		},
 		{
 			"title": "F12",
+			"match": "f12 111",
 			"arg": "111",
 			"subtitle": "111",
 			"mods": {
@@ -290,6 +299,7 @@
 		},
 		{
 			"title": "F13",
+			"match": "f13 105",
 			"arg": "105",
 			"subtitle": "105",
 			"mods": {
@@ -298,6 +308,7 @@
 		},
 		{
 			"title": "F14",
+			"match": "f14 107",
 			"arg": "107",
 			"subtitle": "107",
 			"mods": {
@@ -306,6 +317,7 @@
 		},
 		{
 			"title": "F15",
+			"match": "f15 113",
 			"arg": "113",
 			"subtitle": "113",
 			"mods": {
@@ -314,6 +326,7 @@
 		},
 		{
 			"title": "F16",
+			"match": "f16 106",
 			"arg": "106",
 			"subtitle": "106",
 			"mods": {
@@ -322,6 +335,7 @@
 		},
 		{
 			"title": "F17",
+			"match": "f17 64",
 			"arg": "64",
 			"subtitle": "64",
 			"mods": {
@@ -330,6 +344,7 @@
 		},
 		{
 			"title": "F18",
+			"match": "f18 79",
 			"arg": "79",
 			"subtitle": "79",
 			"mods": {
@@ -338,6 +353,7 @@
 		},
 		{
 			"title": "F19",
+			"match": "f19 80",
 			"arg": "80",
 			"subtitle": "80",
 			"mods": {
@@ -346,6 +362,7 @@
 		},
 		{
 			"title": "F20",
+			"match": "f20 90",
 			"arg": "90",
 			"subtitle": "90",
 			"mods": {
