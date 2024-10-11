@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>OPEN_WITH</key>
-	<string>Highlights</string>
+	<key>bibtex_library_path</key>
+	<string>~/.config/pandoc/main-bibliography.bib</string>
 	<key>pdf_folder</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs</string>
 </dict>

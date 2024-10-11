@@ -4,30 +4,34 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
+// REQUIRED
+// this script assumes that PDF files are named in the format `{citekey}_{title}.pdf`
+
+/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	
+function run(argv) {
+	const selection = argv[0]
+		.trim()
+		.replace(/[\n\r]/g, " ") // remove line breaks
+		.replaceAll("- ", ""); // remove hyphenation
+
+	const pdfWinTitle = Application("System Events").processes.Highlights?.windows[0]?.name();
+	// e.g.: "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
+	const [_, citekey, currentPage] = pdfWinTitle.match(/(.*?)_.* Page (\d+) of \d+/);
+	const pageInPdf = Number.parseInt(currentPage || "0");
+
+	const libraryPath = $.getenv("bibtex_library_path");
+	const entry = app.doShellScript(
+		`grep --after-context=20 --max-count=1 --ignore-case "{${citekey}," "${libraryPath}" || true`,
+	);
+
+	let citation = `(p. ${pageInPdf})`;
+	if (entry) {
+		// e.g.: pages = {55--78},
+		const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
+		const trueCurrentPage = pageInPdf + firstTruePage - 1;
+		citation = `[${citekey}, p. ${trueCurrentPage}]`; // Pandoc format
+	}
+	app.setTheClipboardTo(`"${selection}" ${citation}`);
+	return citation; // for Alfred notification
 }
-
-
-	if (frontApp is "Highlights") then
-		# get file name
-		tell application "System Events"
-			tell process "Highlights"
-				set frontmost to true
-				click menu item "Save" of menu "File" of menu bar 1
-				if (count of windows) > 0 then set frontWindow to name of front window
-			end tell
-		end tell
-		set AppleScript's text item delimiters to " – "
-		set filename to text item 1 of frontWindow
-
-		# ensure ".pdf" is appended to the file name, if the user has hidden extensions
-		set filename to do shell script ("filename=" & (quoted form of filename) & "; echo \"${filename%.pdf}.pdf\"")
-
-		# find PDF in folder
-		set pdfFolder to (system attribute "pdf_folder")
-		set current_file to do shell script ("find " & (quoted form of pdfFolder) & " -type f -name " & (quoted form of filename))
-
-		if current_file = "" then return "not-in-pdf-folder"
-	end if
