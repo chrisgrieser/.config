@@ -46,10 +46,6 @@ local function quickfixCounter()
 	local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
 	if #qf.items == 0 then return "" end
 
-	local qfBuffers = vim.tbl_map(function(item) return item.bufnr end, qf.items)
-	local fileCount = #vim.fn.uniq(qfBuffers) -- qf-Buffers are already sorted
-	local fileStr = fileCount > 1 and (" 「%s  」"):format(fileCount) or ""
-
 	qf.title = qf -- prettify telescope's title output
 		.title
 		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes
@@ -57,7 +53,7 @@ local function quickfixCounter()
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title) .. fileStr
+	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
 end
 
 local function filenameAndIcon()
@@ -73,14 +69,10 @@ local function filenameAndIcon()
 end
 
 local function newlineCharIfNotUnix()
-	local format = vim.bo.fileformat
-	if format == "unix" then
-		return ""
-	elseif format == "mac" then
-		return "󰌑 "
-	elseif format == "dos" then
-		return "󰌑 "
-	end
+	if vim.bo.fileformat == "unix" then return "" end
+	if vim.bo.fileformat == "mac" then return "󰌑 " end
+	if vim.bo.fileformat == "dos" then return "󰌑 " end
+	return "󰌑 ?"
 end
 
 --------------------------------------------------------------------------------
@@ -114,9 +106,6 @@ local lualineConfig = {
 			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
-		lualine_y = {
-			{ quickfixCounter },
-		},
 		lualine_z = {
 			{ -- recording status
 				function() return "雷Recording…" end,
@@ -145,7 +134,9 @@ local lualineConfig = {
 		lualine_b = {
 			{ require("funcs.alt-alt").altFileStatus },
 		},
-		lualine_c = {}, -- removed existing components there
+		lualine_c = {
+			{ quickfixCounter },
+		},
 		lualine_x = {
 			{ lspProgress },
 			{
