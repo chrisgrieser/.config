@@ -69,6 +69,13 @@ rules:
           - { key_code: left_arrow, modifiers: [command, option] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [md\.obsidian] }
+      # Calendar: back to month view
+      - type: basic
+        from: { pointing_button: button4 }
+        to:
+          - { key_code: "3", modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^com.apple.iCal$] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
