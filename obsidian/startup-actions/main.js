@@ -12,6 +12,8 @@ const opacity = {
 //──────────────────────────────────────────────────────────────────────────────
 
 class NewFileInFolder extends obsidian.FuzzySuggestModal {
+	activeFileDir = this.app.workspace.getActiveFile()?.path.replace(/\/[^/]+$/, "");
+
 	constructor(app) {
 		super(app);
 		this.setPlaceholder("Select folder to create new file in…");
@@ -39,7 +41,8 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 				return !rootDir && !excludedDir;
 			})
 			.sort((a, b) => {
-				// by depth, then alphabetically
+				// current dir, then by depth, then alphabetically
+				if (a.path === this.activeFileDir) return -1;
 				const depthA = a.path.split("/").length;
 				const depthB = b.path.split("/").length;
 				return depthA - depthB || a.path.localeCompare(b.path);
@@ -48,6 +51,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 
 	getItemText(folder) {
+		if (folder.path === this.activeFileDir) return folder.path + "  (Current)";
 		return folder.path;
 	}
 
