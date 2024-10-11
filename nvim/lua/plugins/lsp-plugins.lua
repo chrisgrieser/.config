@@ -126,6 +126,10 @@ return {
 			vim.g.lualine_add("sections", "lualine_c", {
 				require("dr-lsp").lspCount,
 				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
+				cond = function() -- only if quickfix list is empty
+					local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
+					return #qf.items == 0
+				end,
 			})
 		end,
 	},

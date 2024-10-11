@@ -416,7 +416,6 @@ rules:
                   key code 124 # right
                 end tell
               '
-
           - *start-menu
           - *menu-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
