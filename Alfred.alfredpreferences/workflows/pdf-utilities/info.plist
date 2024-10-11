@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>15EF574D-5CAC-4FDA-8600-57B3AED146F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F2EB8A46-3418-41B2-A3B1-1949503476C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</key>
 		<array>
 			<dict>
@@ -458,7 +471,7 @@
 				<key>hotkey</key>
 				<integer>8</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>1179648</integer>
 				<key>hotstring</key>
 				<string>C</string>
 				<key>leftcursor</key>
@@ -479,6 +492,27 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied citation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F2EB8A46-3418-41B2-A3B1-1949503476C7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -498,7 +532,7 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>530</real>
 		</dict>
@@ -507,7 +541,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>380</real>
 		</dict>
@@ -547,7 +581,7 @@
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>255</real>
 		</dict>
@@ -585,7 +619,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -603,9 +637,18 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>185</real>
 			<key>ypos</key>
 			<real>130</real>
+		</dict>
+		<key>F2EB8A46-3418-41B2-A3B1-1949503476C7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>530</real>
 		</dict>
 		<key>F4515410-11F8-4E8D-8176-9499BC0098AE</key>
 		<dict>
@@ -644,48 +687,22 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>Preview</string>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
 				<true/>
-				<key>trim</key>
-				<true/>
 			</dict>
 			<key>description</key>
-			<string>for docx2pdf</string>
+			<string></string>
 			<key>label</key>
-			<string>PDF default app</string>
+			<string>BibTeX liberary path</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>filepicker</string>
 			<key>variable</key>
-			<string>OPEN_WITH</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>false</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>true</string>
-						<string>true</string>
-					</array>
-					<array>
-						<string>false</string>
-						<string>false</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>For docx2pdf. Quicker, but less private.</string>
-			<key>label</key>
-			<string>use Microsoft Online service</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>USE_ONLINE_SERVICE</string>
+			<string>bibtex_library_path</string>
 		</dict>
 	</array>
 	<key>version</key>
