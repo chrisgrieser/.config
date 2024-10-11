@@ -5,7 +5,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 // REQUIRED
-// this script assumes that PDF files are named in the format `{citekey}_{title}.pdf`
+// this script assumes that PDF files are have the format `{citekey}_{title}.pdf`
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -22,16 +22,13 @@ function run(argv) {
 
 	const libraryPath = $.getenv("bibtex_library_path");
 	const entry = app.doShellScript(
-		`grep --after-context=20 --max-count=1 --ignore-case "{${citekey}," "${libraryPath}" || true`,
+		`grep --after-context=20 --max-count=1 "{${citekey}," "${libraryPath}" || true`,
 	);
+	if (!entry) return `"${citekey}" not found in BibTeX library.`;
 
-	let citation = `(p. ${pageInPdf})`;
-	if (entry) {
-		// e.g.: pages = {55--78},
-		const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
-		const trueCurrentPage = pageInPdf + firstTruePage - 1;
-		citation = `[${citekey}, p. ${trueCurrentPage}]`; // Pandoc format
-	}
-	app.setTheClipboardTo(`"${selection}" ${citation}`);
-	return citation; // for Alfred notification
+	// e.g.: pages = {55--78},
+	const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
+	const trueCurrentPage = pageInPdf + firstTruePage - 1;
+	app.setTheClipboardTo(`"${selection}" [${citekey}, p. ${trueCurrentPage}]`);
+	return `${citekey}, p. ${trueCurrentPage}`; // for Alfred notification
 }
