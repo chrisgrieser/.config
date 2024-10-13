@@ -88,7 +88,7 @@ async function run() {
 	}
 
 	// keyword-slug-map
-	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/");
+	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/", { recursive: true });
 	const beautifiedForBetterDiff = JSON.stringify(allLangs, null, 2);
 	fs.writeFileSync("./.github/caches/keyword-slug-map.json", beautifiedForBetterDiff);
 

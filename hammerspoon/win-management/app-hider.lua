@@ -18,7 +18,15 @@ local config = {
 	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
 	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "ClipBook" },
 	disableHidingWhileActive = { "Steam" },
-	appsNotToHide = { "Espanso", "IINA", "zoom.us", "CleanShot X", "Mona", "Alfred", "Karabiner-EventViewer" },
+	appsNotToHide = {
+		"Espanso",
+		"IINA",
+		"zoom.us",
+		"CleanShot X",
+		"Mona",
+		"Alfred",
+		"Karabiner-EventViewer",
+	},
 }
 --------------------------------------------------------------------------------
 
@@ -59,51 +67,39 @@ end
 --------------------------------------------------------------------------------
 
 -- if an app with bg-transparency is activated, hide all other apps
--- if such an app is terminated, unhide them again
+-- if an app is terminated, unhide them again
 M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 	if env.isProjector() then return end
 	if event == aw.terminated then
 		if appName == "Reminders" then return end -- Reminders opening in bg for scripts
 		unHideAll()
 	elseif event == aw.activated and hs.fnutils.contains(config.transBgApps, appName) then
-		u.whenAppWinAvailable(appName, function() hideOthers(appObj) end)
+		-- defer to prevent race condition with termination above
+		u.defer(0.1, function() hideOthers(appObj) end)
 	end
 end):start()
 
--- also trigger on minimization and on window reszing
+-- also trigger on minimization and on window resizing
 M.transBgAppWindowFilter = wf.new(config.transBgApps)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
 	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
 	:subscribe(wf.windowMinimized, unHideAll)
 
--- when currently auto-tiled, hide the app on deactivation so it does not cover sketchybar
-M.autoTileAppWatcher = aw.new(function(appName, eventType, appObj)
-	local autoTileApps = { "Finder", "Brave Browser" }
-	if
-		eventType == aw.deactivated
-		and hs.fnutils.contains(autoTileApps, appName)
-		and #(appObj:allWindows()) > 1
-		and not (appObj:findWindow("Picture in Picture"))
-		and not (appObj:findWindow("^$")) -- special windows?
-		and not (env.isProjector())
-		and not (u.isFront(config.dontTriggerHidingOtherApps))
-	then
-		appObj:hide()
-	end
-end):start()
-
 -- prevent maximized window from covering sketchybar if they are unfocused
-M.wf_maxWindows = wf.new(true):subscribe(wf.windowUnfocused, function(win)
-	if not win then return end
-	local app = win:application()
-	if
-		not (env.isProjector())
-		and wu.winHasSize(win, hs.layout.maximized)
-		and not (u.isFront(config.dontTriggerHidingOtherApps))
-		and app
-	then
-		app:hide()
-	end
-end)
+M.wf_maxWindows = wf.new(true)
+	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
+	:subscribe(wf.windowUnfocused, function(win)
+		if not win then return end
+		local app = win:application()
+		if
+			not (env.isProjector())
+			and wu.winHasSize(win, hs.layout.maximized)
+			and not (u.isFront(config.dontTriggerHidingOtherApps))
+			and app
+		then
+			app:hide()
+		end
+	end)
 
 --------------------------------------------------------------------------------
 return M

@@ -25,9 +25,7 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	local homebrewPrefix = env.isAtMother and "/usr/local" or "/opt/homebrew"
 	local binary = homebrewPrefix .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
-end)
-
-M.aw_spotify:start()
+end):start()
 
 --------------------------------------------------------------------------------
 return M
