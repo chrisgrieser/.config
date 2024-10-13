@@ -1527,12 +1527,12 @@
 				<string>Loading...</string>
 				<key>script</key>
 				<string># INFO
-# - has Alfred caching enabled, so curling here is fine
-# - updated 1x per month via cronjob
+# - has Alfred caching enabled, so using `curl` here is fine
+# - updated regularly via cronjob
 
-curl -sL "https://raw.githubusercontent.com/chrisgrieser/shimmering-obsidian/main/.github/doc-search-cache/cache.json"
+curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/caches/obsidian-help-index.json"
 
-</string>
+/Users/chrisgrieser/Developer/alfred-docs-searches/.github/caches/obsidian-help-index.json</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
