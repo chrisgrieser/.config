@@ -61,12 +61,12 @@ end):start()
 -- prevent unintended focusing after qutting another app or closing last window
 M.aw_fallthrough = aw.new(function(_, event)
 	if event ~= aw.terminated then return end
-	u.defer(0.1, function()
+	u.defer(0.15, function()
 		local nonMonaWin = hs.fnutils.find(
 			hs.window:orderedWindows(),
 			function(win) return win:application() and win:application():name() ~= "Mona" end
 		)
-		if u.isFront("Mona") and nonMonaWin then nonMonaWin:focus() end
+		if nonMonaWin and u.isFront("Mona") then nonMonaWin:focus() end
 	end)
 end):start()
 
