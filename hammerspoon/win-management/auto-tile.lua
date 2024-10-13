@@ -89,7 +89,15 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 
 	-- hide on deactivation, so sketchybar is not covered
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, app)
-		if name == appName and eventType == aw.deactivated then app:hide() end
+		local dontTrigger = { "Alfred", "CleanShot X", "IINA" }
+		local frontApp = hs.application.frontmostApplication():name()
+		if
+			name == appName
+			and eventType == aw.deactivated
+			and hs.fnutils.every(dontTrigger, function(a) return frontApp ~= a end)
+		then
+			app:hide()
+		end
 	end):start()
 end
 

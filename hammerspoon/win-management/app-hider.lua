@@ -16,8 +16,8 @@ local wf = hs.window.filter
 
 local config = {
 	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "ClipBook" },
 	disableHidingWhileActive = { "Steam" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA" },
 	appsNotToHide = {
 		"Espanso",
 		"IINA",
@@ -44,6 +44,7 @@ end
 local function hideOthers(appObj)
 	-- GUARD
 	if u.appRunning(config.disableHidingWhileActive) then return end
+	if hs.fnutils.contains(config.dontTriggerHidingOtherApps, appObj:name()) then return end
 	local thisWin = appObj and appObj:mainWindow()
 	if not thisWin or not appObj:isFrontmost() then return end
 	if not (wu.winHasSize(thisWin, wu.pseudoMax) or wu.winHasSize(thisWin, hs.layout.maximized)) then
@@ -75,7 +76,7 @@ M.transBgAppWatcher = aw.new(function(appName, event, appObj)
 		unHideAll()
 	elseif event == aw.activated and hs.fnutils.contains(config.transBgApps, appName) then
 		-- defer to prevent race condition with termination above
-		u.defer(0.1, function() hideOthers(appObj) end)
+		u.whenAppWinAvailable(appObj:name(), function() hideOthers(appObj) end)
 	end
 end):start()
 
