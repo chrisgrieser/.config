@@ -6,12 +6,8 @@ local config = {
 	appsToAutoTile = {
 		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
-		["Brave Browser"] = {
-			"^Picture in Picture$",
-			"^Task Manager$",
-			"^Developer Tools",
-			"^DevTools",
-		},
+		-- stylua: ignore
+		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
@@ -22,20 +18,28 @@ local config = {
 
 --------------------------------------------------------------------------------
 
----@param winfilter hs.window.filter
 ---@param appName string
-local function autoTile(winfilter, appName)
-	local wins = winfilter:getWindows()
+local function autoTile(appName)
+	local app = hs.application.find(appName, true, true)
+	if not app then return end
+	app:selectMenuItem { "Window", "Bring All to Front" }
+
+	-- need to manually filter windows, since window filter is sometimes buggy,
+	-- not including the correct number of windows
+	local ignoredWins = config.appsToAutoTile[appName]
+	local wins = hs.fnutils.filter(app:allWindows(), function(win)
+		return not hs.fnutils.some(
+			ignoredWins,
+			function(ignored) return win:title():find(ignored) end
+		)
+	end)
+	---@cast wins hs.window[] -- fix wrong annotation
 
 	-- GUARD prevent unnecessary runs or duplicate triggers
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
-	local app = hs.application.find(appName, true, true)
-	if not app then return end
 	local pos = {}
-	app:selectMenuItem { "Window", "Bring All to Front" }
-
 	if #wins == 0 then
 		app:hide() -- prevent window-less app from keeping focus
 	elseif #wins == 1 then
@@ -75,23 +79,18 @@ end
 
 -- triggering conditions
 local wf = hs.window.filter
+local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
 		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
-		:subscribe(wf.windowCreated, function() autoTile(M["winFilter_" .. appName], appName) end)
-		:subscribe(wf.windowFocused, function() autoTile(M["winFilter_" .. appName], appName) end)
-		:subscribe(wf.windowDestroyed, function()
-			M.timer2 = hs.timer.doAfter(
-				0.1,
-				function() autoTile(M["winFilter_" .. appName], appName) end
-			)
-		end)
+		:subscribe(wf.windowCreated, function() autoTile(appName) end)
+		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
+		:subscribe(wf.windowFocused, function() autoTile(appName) end)
 
-	-- INFO `windowFocused` is required as trigger, since ssometimes windows
-	-- are created in the background without triggering the other triggers.
-	-- Cannot check via app watcher and the `activation` event, since passing
-	-- the win-filter does not contain windows when not passed via window filter
-	-- trigger.
+	-- hide on deactivation, so sketchybar is not covered
+	M["appWatcher_" .. appName] = aw.new(function(name, eventType, app)
+		if name == appName and eventType == aw.deactivated then app:hide() end
+	end):start()
 end
 
 --------------------------------------------------------------------------------

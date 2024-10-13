@@ -54,7 +54,7 @@ function M.moveResize(win, pos)
 	end
 
 	-- resize with safety redundancy
-	u.defer({ 0, 0.3, 0.6, 0.9 }, function()
+	u.defer({ 0, 0.4, 0.8 }, function()
 		if not M.winHasSize(win, pos) then win:moveToUnit(pos) end
 	end)
 end

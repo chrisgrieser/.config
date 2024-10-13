@@ -22,7 +22,6 @@ local function safeRequire(module)
 	end
 end
 
-
 safeRequire("appearance.console")
 safeRequire("appearance.hole-cover")
 safeRequire("appearance.dark-mode")

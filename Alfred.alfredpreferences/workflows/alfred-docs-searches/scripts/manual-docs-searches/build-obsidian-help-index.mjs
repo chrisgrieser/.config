@@ -38,8 +38,12 @@ async function run() {
 		console.error("Could not fetch json from: ", officialDocsTree);
 		process.exit(1);
 	}
+	if (!officialDocsJSON.tree) {
+		console.error("Error: ", JSON.stringify(officialDocsJSON));
+		process.exit(1);
+	}
 
-	// OFFICIAL DOCS
+	// HELP SITES THEMSELVES
 	const officialDocs = officialDocsJSON.tree.filter(
 		(/** @type {{ path: string; }} */ item) =>
 			item.path.slice(-3) === ".md" &&
@@ -90,7 +94,7 @@ async function run() {
 		cache: { seconds: 60 * 60 * 24 * 7, loosereload: true },
 	};
 
-	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/");
+	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/", { recursive: true });
 	const beautifiedForBetterDiff = JSON.stringify(docsJson, null, 2);
 	fs.writeFileSync("./.github/caches/obsidian-help-index.json", beautifiedForBetterDiff);
 }
