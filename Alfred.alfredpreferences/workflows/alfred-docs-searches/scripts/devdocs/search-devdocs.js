@@ -38,7 +38,7 @@ function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
 	if (!finder.exists(Path(cacheDir))) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("Cache Dir does not exist and is created.");
 		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
 		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
@@ -86,7 +86,7 @@ function run() {
 	if (cacheIsOutdated(mapCache)) {
 		const tree = "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main";
 
-		const mapUrl = tree + "/.github/keyword-slug-map.json";
+		const mapUrl = tree + "/.github/caches/devdocs-keyword-slug-map.json";
 		writeToFile(mapCache, httpRequest(mapUrl));
 
 		// INFO self-update this workflow's `info.plist` to include newly
@@ -126,7 +126,6 @@ function run() {
 
 		const indexUrl = `https://documents.devdocs.io/${languageSlug}/index.json`;
 		// biome-ignore lint/suspicious/noConsole: <explanation>
-		// biome-ignore lint/suspicious/noConsoleLog: <explanation>
 		console.log("indexUrl:", indexUrl);
 
 		/** @type {DevDocsIndex} */
