@@ -293,6 +293,8 @@ exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
 nnoremap qw :insertHr<CR>
 
 " delete last char in line
+exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
+nnoremap X :deleteLastChar<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
@@ -318,10 +320,6 @@ nnoremap ,r :rejectSuggestionsInLine<CR>
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
 nnoremap ,r :markAsRead<CR>
-
-" [i]nspect [w]ord count
-exmap inspectWordCount jsfile Meta/vimrc-jsfile.js { inspectWordCount() }
-nnoremap ,iw :inspectWordCount<CR>
 
 " [i]nspect chrome [v]ersion
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
