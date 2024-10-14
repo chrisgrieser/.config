@@ -1,8 +1,8 @@
 local M = {}
 
+local env = require("meta.environment")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
-local env = require("meta.environment")
 
 local wf = hs.window.filter
 --------------------------------------------------------------------------------
@@ -19,10 +19,12 @@ M.wf_pseudoMax = wf.new({
 	"Preview",
 	"Highlights",
 	"Karabiner-Elements",
-}):subscribe(wf.windowCreated, function(win)
-	local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
-	wu.moveResize(win, size)
-end)
+})
+	:setOverrideFilter({ fullscreen = false, rejectTitles = { "^Save$", "^Open$" } })
+	:subscribe(wf.windowCreated, function(win)
+		local size = env.isProjector() and hs.layout.maximized or wu.pseudoMax
+		wu.moveResize(win, size)
+	end)
 
 --------------------------------------------------------------------------------
 
