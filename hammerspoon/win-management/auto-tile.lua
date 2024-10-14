@@ -6,8 +6,7 @@ local config = {
 	appsToAutoTile = {
 		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
-		-- stylua: ignore
-		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^Developer Tools", "^DevTools" },
+		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
 	---@type fun(appName: string): hs.geometry
 	oneWindowSizer = function(appName)
