@@ -6,5 +6,7 @@
 	<string>120</string>
 	<key>openai_model</key>
 	<string>gpt-4o</string>
+	<key>output_type</key>
+	<string>markdown</string>
 </dict>
 </plist>
