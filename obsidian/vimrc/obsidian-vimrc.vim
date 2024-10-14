@@ -137,9 +137,10 @@ nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
 exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
 nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
 
-exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[[x ]\]/) }
+" Tasks
+exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /- \[[x ]\]|TODO/) }
 nnoremap gt :gotoNextTask<CR>
-exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]/) }
+exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/) }
 nnoremap gT :gotoPrevTask<CR>
 
 "───────────────────────────────────────────────────────────────────────────────

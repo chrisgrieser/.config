@@ -81,12 +81,13 @@ async function updateStatusbar(plugin) {
 	}
 
 	const text = await app.vault.cachedRead(activeFile);
-	const totalTasks = text.match(/^\s*- \[[x ]\] /gm)?.length;
-	if (!totalTasks) {
+	const allTasks = text.match(/^\s*- \[[x ]\] |TODO/gm)
+	const totalTasks = allTasks.length;
+	if (totalTasks === 0) {
 		statusbarTaskCounter.style.cssText = "display: none";
 		return;
 	}
-	const openTasks = text.match(/^\s*- \[ \]/gm)?.length || 0;
+	const openTasks = allTasks?.filter((task) => task.match(/- \[ \]|TODO/)).length;
 
 	statusbarTaskCounter.style.cssText = "display: block";
 	statusbarTaskCounter.setText(`${openTasks}/${totalTasks} [x]`);
