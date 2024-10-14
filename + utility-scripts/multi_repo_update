@@ -5,19 +5,21 @@
 github_username="chrisgrieser"
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="shimmering-obsidian|alfred-homebrew|alfred-atop|alfred-docs-searches|alfred-reddit-browser|alfred-neovim-utilities|alfred-pdf-summarizer|alfred-bibtex-citation-picker|gitfred|alfred-tot|alfred-read-later|alfred-writing-assistant|alfred-pass|alfred-wikipedia-suggest|alfred-anime-search"
+repo_names="shimmering-obsidian|alfred-homebrew|alfred-atop|alfred-docs-searches|alfred-reddit-browser|alfred-neovim-utilities|pdf-summarizer-alfred|alfred-bibtex-citation-picker|gitfred|tot-alfred|alfred-read-later|alfred-writing-assistant|alfred-pass|alfred-wikipedia-suggest|alfred-anime-search"
 # repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 # repo_names="." # all repos
 
 function actions_in_repo {
 	workflow_name="$(basename "$PWD")"
-	sed -i '' "2s_.*_![GitHub downloads](https://img.shields.io/github/downloads/chrisgrieser/$workflow_name/total?label=GitHub%20Downloads&style=plastic&logo=github)_" README.md
-	sed -i '' "3s_.*_![Alfred Gallery downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml&query=$workflow_name&style=plastic&logo=alfred&label=Gallery%20Downloads&color=%235C1F87)_" README.md
-	sed -i '' "4s_.*_![Latest Release](https://img.shields.io/github/v/release/chrisgrieser/$workflow_name?label=Latest%20Release&style=plastic)_" README.md
+	sed -i '' \
+		-e "2s_.*_\![GitHub Downloads](https://img.shields.io/github/downloads/chrisgrieser/$workflow_name/total?label=GitHub%20Downloads\&style=plastic\&logo=github)_" \
+		-e "3s_.*_\![Alfred Gallery Downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml\&query=$workflow_name\&style=plastic\&logo=alfred\&label=Gallery%20Downloads\&color=%235C1F87)_" \
+		-e "4i\\
+![Latest Release](https://img.shields.io/github/v/release/chrisgrieser/$workflow_name?label=Latest%20Release&style=plastic)" README.md
 }
 
-commit_msg="docs: add Gallery download count"
+commit_msg="docs: update shields & add Gallery download count badge"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -45,7 +47,7 @@ fi
 
 echo
 print "\e[1;34mActions:\e[0m"
-declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh
+declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
 read -rk pressed
@@ -89,7 +91,7 @@ done <<< "$repos_to_update"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-if [[ $not_updated -gt 0 ]] ; then
+if [[ $not_updated -gt 0 ]]; then
 	echo "────────────────────────"
 	print "\e[1;33m$not_updated repo(s) not updated.\e[0m"
 fi
