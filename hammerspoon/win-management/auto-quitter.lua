@@ -15,7 +15,6 @@ local config = {
 	thresholdMins = {
 		Finder = 15, -- only closes windows (and only when not on projector)
 		Hammerspoon = 3, -- only console window
-		MacWhisper = 60,
 		Calendar = 5,
 		Reminders = 3,
 		Mimestream = 5,
