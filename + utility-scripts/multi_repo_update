@@ -58,10 +58,10 @@ if [[ "$pressed" != "y" ]]; then
 fi
 echo && echo
 
-# goto work location
+#───────────────────────────────────────────────────────────────────────────────
+
 cd /tmp || return 1
 
-#───────────────────────────────────────────────────────────────────────────────
 # clone each repo, do the replacements, and git add/commit/push
 i=1
 not_updated=0
