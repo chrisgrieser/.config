@@ -207,10 +207,22 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<D-p>", function()
-	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
+	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
--- exit snippet on scroll
-vim.api.nvim_create_autocmd("WinScrolled", { callback = vim.snippet.stop })
+
+vim.api.nvim_create_autocmd("WinScrolled", {
+	callback = function(ctx)
+		local scrollWinId = ctx.match
+		vim.notify("🖨️ scrollWinId: " .. tostring(scrollWinId))
+		local curWin = vim.api.nvim_get_current_win()
+		vim.notify("🖨️ curWin: " .. tostring(curWin))
+		if scrollWinId == vim.api.nvim_get_current_win() then
+			vim.notify("🖨️ 🔵")
+			vim.snippet.stop()
+		end
+	end,
+})
+keymap("n", "fsfsfff", "rhs", { desc = "description" })
 
 --------------------------------------------------------------------------------
 
@@ -349,4 +361,3 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 --------------------------------------------------------------------------------
-

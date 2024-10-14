@@ -288,8 +288,11 @@ nnoremap ,xx :checkList<CR>
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote<CR>
 
+" hr
 exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
 nnoremap qw :insertHr<CR>
+
+" delete last char in line
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS

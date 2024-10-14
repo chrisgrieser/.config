@@ -13,8 +13,6 @@ CONFIG_FILES=(
 	git_github
 	homebrew
 	python_pip
-
-	intro_message
 )
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
