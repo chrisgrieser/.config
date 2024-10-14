@@ -22,7 +22,9 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred run
 function run() {
 	const dotfileFolder = $.getenv("dotfile_folder");
-	const modifiedFiles = app.doShellScript(`git -C "${dotfileFolder}" diff --name-only`).split("\r");
+	const modifiedFiles = app
+		.doShellScript(`git -C "${dotfileFolder}" diff --name-only`)
+		.split("\r");
 	const rgOutput = app
 		.doShellScript(
 			// `--follow` errors on broken symlinks, so we need to end with `true`
@@ -33,6 +35,7 @@ function run() {
 		.split("\r");
 
 	/** @type{AlfredItem|{}[]} */
+	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 	const fileArray = rgOutput.map((absPath) => {
 		// GUARD check for broken symlinks
 		if (absPath.startsWith("rg: ")) {
@@ -52,7 +55,6 @@ function run() {
 		const relPath = absPath.slice(dotfileFolder.length + 1);
 		const relativeParentFolder = relPath.slice(0, -name.length - 1) || "/";
 		const matcher = alfredMatcher(`${name} ${relativeParentFolder}`);
-
 
 		// emoji
 		let emoji = "";
