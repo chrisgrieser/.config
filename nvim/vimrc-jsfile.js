@@ -13,9 +13,30 @@ function clearNotices() {
 
 function deleteLastChar() {
 	const cursor = editor.getCursor();
+
 	const updatedText = editor.getLine(cursor.line).replace(/\S\s*$/, "");
 	editor.setLine(cursor.line, updatedText);
+
 	editor.setCursor(cursor);
+}
+
+function inspectWordCount() {
+	const add1000Sep = (/** @type {number} */ num) =>
+		num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+	const body = editor
+		.getValue()
+		.replace(/^---\n.*?\n---\n/s, "")
+		.trim();
+	const charCount = body.length;
+	const charNoSpacesCount = body.replace(/\s+/g, "").length;
+	const wordCount = body.split(/\s+/).length;
+
+	const msg = [
+		`Chars: ${add1000Sep(charCount)} (${add1000Sep(charNoSpacesCount)})`,
+		`Words: ${add1000Sep(wordCount)}`,
+	].join("\n");
+	new Notice(msg, 5000);
 }
 
 async function updatePlugins() {

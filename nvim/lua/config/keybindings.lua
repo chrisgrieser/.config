@@ -210,19 +210,13 @@ keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
 
+-- exit snippet on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function(ctx)
-		local scrollWinId = ctx.match
-		vim.notify("🖨️ scrollWinId: " .. tostring(scrollWinId))
-		local curWin = vim.api.nvim_get_current_win()
-		vim.notify("🖨️ curWin: " .. tostring(curWin))
-		if scrollWinId == vim.api.nvim_get_current_win() then
-			vim.notify("🖨️ 🔵")
-			vim.snippet.stop()
-		end
+		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
+		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
 	end,
 })
-keymap("n", "fsfsfff", "rhs", { desc = "description" })
 
 --------------------------------------------------------------------------------
 
