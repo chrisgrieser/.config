@@ -355,3 +355,5 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 --------------------------------------------------------------------------------
+
+keymap(fsfsf, fsfsfsf, fsfsf, opts?)
