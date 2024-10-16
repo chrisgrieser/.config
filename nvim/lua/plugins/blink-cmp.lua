@@ -48,7 +48,7 @@ return {
 					if source == "Snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
 						icon = "󰩫"
 					elseif source == "Buffer" or (client == "basics_ls" and ctx.kind == "Text") then
-						icon = ""
+						icon = "󰦨"
 					elseif client == "emmet_language_server" then
 						icon = "󰯸"
 					end
