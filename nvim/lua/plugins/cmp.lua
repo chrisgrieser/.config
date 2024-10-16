@@ -174,5 +174,4 @@ return { -- Completion Engine + Sources
 		"hrsh7th/cmp-buffer",
 	},
 	config = cmpconfig,
-},
-
+}

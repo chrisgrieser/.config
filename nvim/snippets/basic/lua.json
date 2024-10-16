@@ -85,19 +85,6 @@
     "body": "local osPathSep = package.config:sub(1, 1)",
     "prefix": "path separator (os-independent)"
   },
-  "pcall": {
-    "body": [
-      "local success = pcall(${1:func})",
-      "if not success then",
-      "\t$0",
-      "\treturn",
-      "end"
-    ],
-    "prefix": [
-      "try",
-      "pcall"
-    ]
-  },
   "read file": {
     "body": [
       "---@param filePath string",
