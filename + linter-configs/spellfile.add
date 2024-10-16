@@ -4,10 +4,6 @@ fn
 md
 px
 yq
-⌘Y
-Fn
-fn
-js
 JXA
 LSP
 Lua
@@ -15,13 +11,10 @@ PRs
 QDA
 QoL
 URI
-cli
 cmd
 csl
-css
 csv
 cwd
-fn⏎
 fzf
 lsp
 lua
@@ -30,8 +23,6 @@ npm
 pre
 url
 zsh
-Fn⏎
-dir
 APIs
 CLIs
 LSPs
