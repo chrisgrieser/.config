@@ -120,3 +120,4 @@ matches:
   - { trigger: tis, replace: its, propagate_case: true, word: true }
   - { trigger: roder, replace: order, propagate_case: true }
   - { trigger: waht, replace: what, propagate_case: true }
+  - { trigger: cuase, replace: cause, propagate_case: true, word: true }
