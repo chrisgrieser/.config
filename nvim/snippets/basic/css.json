@@ -1,9 +1,1 @@
-{
-  "ignore range (stylelint)": {
-    "body": [
-      "/* stylelint-disable ${1:no-duplicate-selectors} */",
-      "/* stylelint-enable ${1:no-duplicate-selectors} */"
-    ],
-    "prefix": "ignore range (stylelint)"
-  }
-}
+[]
