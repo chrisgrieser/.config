@@ -10,6 +10,7 @@ local wf = hs.window.filter
 -- one screen: always open new pseudo-maximized
 -- projector: always open new windows maximized
 M.wf_pseudoMax = wf.new({
+	"Microsoft Word",
 	"Safari",
 	"WezTerm",
 	"Neovide",
