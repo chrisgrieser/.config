@@ -1,7 +1,7 @@
 {
   "@cast (LuaDoc)": {
-    "body": "---@cast ${1:varname} ${2:string}",
-    "prefix": "@cast (LuaDoc)"
+    "body": "---@cast ${1:varname} ${2:string} fffffffffffff",
+    "prefix": "casttttt (LuaDoc)"
   },
   "abbreviate (function)": {
     "body": "local function abbr(lhs, rhs) vim.keymap.set(\"ia\", lhs, rhs, { buffer = true }) end",

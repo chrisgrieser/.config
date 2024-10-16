@@ -33,13 +33,13 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^F' edit-command-line
 
-#───────────────────────────────────────────────────────────────────────────────
-
-# REMAPPINGS
+# remappings
 bindkey '…' insert-last-word    # alt+. on macOS
 bindkey '^N' undo               # remapped to `cmd+z` via wezterm
 bindkey "^[[1;3D" backward-word # alt+arrow to move between words (emulating macOS default behavior)
 bindkey "^[[1;3C" forward-word
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE
