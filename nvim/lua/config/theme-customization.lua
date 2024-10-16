@@ -92,6 +92,7 @@ function M.themeModifications()
 		setHl("Italic", { italic = true })
 		-- broken when switching themes
 		setHl("TelescopeSelection", { link = "Visual" })
+		setHl("BlinkCmpKind", { link = "Special" })
 	elseif theme == "bluloco" then
 		setHl("@keyword.return", { fg = "#d42781", bold = true })
 		revertedTodoComments()

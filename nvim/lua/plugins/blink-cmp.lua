@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = "UIEnter", -- already lazy-loads internally
+	event = "VimEnter", -- already lazy-loads internally
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 	opts = {
 		sources = {
@@ -10,7 +10,11 @@ return {
 				{
 					"blink.cmp.sources.path",
 					name = "Path",
-					opts = { get_cwd = function() return vim.uv.cwd() end },
+					score_offset = 3,
+					opts = {
+						get_cwd = vim.uv.cwd,
+						show_hidden_files_by_default = false,
+					},
 				},
 				{
 					"blink.cmp.sources.buffer",
@@ -20,7 +24,7 @@ return {
 				},
 			},
 		},
-		highlight = { use_nvim_cmp_as_default = true },
+		fhighlight = { use_nvim_cmp_as_default = true },
 		keymap = {
 			show = "<D-c>",
 			accept = "<CR>",
@@ -33,16 +37,19 @@ return {
 		windows = {
 			autocomplete = {
 				min_width = 10,
-				max_width = 45,
 				max_height = 10,
 				border = vim.g.borderStyle,
-				-- https://github.com/Saghen/blink.cmp/blob/f456c2aa0994f709f9aec991ed2b4b705f787e48/lua/blink/cmp/windows/autocomplete.lua#L227
+				selection = "auto_insert", -- auto_insert|preselect|manual
+				cycle = { from_top = false },
+				-- https://github.com/Saghen/blink.cmp/blob/819b978328b244fc124cfcd74661b2a7f4259f4f/lua/blink/cmp/windows/autocomplete.lua#L285-L349
 				draw = function(ctx)
 					-- differentiate snippets from LSPs, the user, and emmet
 					local icon = ctx.kind_icon
 					local client = ctx.item.source == "LSP"
 						and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if ctx.item.source == "LSP" and client ~= "basics_ls" and ctx.kind == "Snippet" then icon = "󰒕" end
+					if ctx.item.source == "LSP" and client ~= "basics_ls" and ctx.kind == "Snippet" then
+						icon = "󰒕"
+					end
 					if client == "emmet_language_server" then icon = "󰯸" end
 					if ctx.item.source == "Buffer" or (client == "basics_ls" and ctx.kind == "Text") then
 						icon = "﬘"
@@ -53,8 +60,9 @@ return {
 							" " .. ctx.item.label .. " ",
 							fill = true,
 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
+							max_width = 45,
 						},
-						{ icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
+						{ icon .. ctx.icon_gap, hl_group = "BlinkCmpKind" .. ctx.kind },
 					}
 				end,
 			},
@@ -63,8 +71,8 @@ return {
 				max_width = 45,
 				max_height = 15,
 				border = vim.g.borderStyle,
+				auto_show = true,
 				auto_show_delay_ms = 250,
-				update_delay_ms = 100,
 			},
 		},
 		kind_icons = {
