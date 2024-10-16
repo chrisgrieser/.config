@@ -1,4 +1,3 @@
-local u = require("config.utils")
 local abbr = require("config.utils").bufAbbrev
 local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------

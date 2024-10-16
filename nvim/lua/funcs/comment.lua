@@ -81,17 +81,6 @@ function M.docstring()
 		vim.api.nvim_buf_set_lines(0, ln, ln, false, { indent .. ('"'):rep(6) })
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
-	elseif ft == "lua" then
-		-- HACK to trigger the `@param;@return` luadoc completion from lua-ls
-		-- PENDING https://github.com/LuaLS/lua-language-server/issues/2517
-		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "---" })
-		vim.api.nvim_win_set_cursor(0, { ln, 0 })
-		vim.cmd.startinsert { bang = true }
-		vim.defer_fn(function()
-			local lspSource = { sources = require("cmp").config.sources { { name = "nvim_lsp" } } }
-			require("cmp").complete { config = lspSource }
-			require("cmp").confirm { select = true }
-		end, 100)
 	elseif ft == "javascript" then
 		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {

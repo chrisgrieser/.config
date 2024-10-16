@@ -22,15 +22,17 @@ local function autoTile(appName)
 	local app = hs.application.find(appName, true, true)
 	if not app then return end
 	app:selectMenuItem { "Window", "Bring All to Front" }
+	app:unhide()
 
 	-- need to manually filter windows, since window filter is sometimes buggy,
 	-- not including the correct number of windows
 	local ignoredWins = config.appsToAutoTile[appName]
 	local wins = hs.fnutils.filter(app:allWindows(), function(win)
-		return not hs.fnutils.some(
+		local notIgnored = hs.fnutils.every(
 			ignoredWins,
-			function(ignored) return win:title():find(ignored) end
+			function(ignored) return not win:title():find(ignored) end
 		)
+		return notIgnored and win:isStandard()
 	end)
 	---@cast wins hs.window[] -- fix wrong annotation
 
