@@ -8,6 +8,8 @@
 	<integer>15</integer>
 	<key>fork_on_clone</key>
 	<true/>
+	<key>fork_on_hotkey_clone</key>
+	<true/>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
 	<key>keyword_personal_repos</key>

@@ -69,7 +69,7 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]] ||
 		gh repo set-default "$source_repo" # where `gh` sends PRs to
 	fi
 
-	if [[ -n "$branch_on_fork" ]] ; then 
-		git switch --create "$branch_on_fork"
+	if [[ -n "$on_fork_branch" ]] ; then 
+		git switch --create "$on_fork_branch"
 	fi
 fi
