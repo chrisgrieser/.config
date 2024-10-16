@@ -38,7 +38,8 @@ return {
 				min_width = 10,
 				max_height = 10,
 				border = vim.g.borderStyle,
-				selection = "preselect", -- auto_insert|preselect|manual
+				-- selection = "auto_insert", -- PENDING https://github.com/Saghen/blink.cmp/issues/117
+				selection = "preselect",
 				cycle = { from_top = false },
 				-- https://github.com/Saghen/blink.cmp/blob/819b978328b244fc124cfcd74661b2a7f4259f4f/lua/blink/cmp/windows/autocomplete.lua#L285-L349
 				draw = function(ctx)

@@ -169,7 +169,6 @@ keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE
-keymap("c", "<C-u>", "<C-e><C-u>", { desc = " Kill whole line" })
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
 keymap("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
@@ -179,7 +178,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 keymap("n", "i", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
 	return "i"
-end, { desc = "indented i on empty line", expr = true })
+end, { expr = true, desc = "indented i on empty line" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
@@ -216,7 +215,7 @@ end, { desc = "󰩫 prev placeholder" })
 -- exit snippet on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function(ctx)
-		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
+		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns winid as string
 		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
 	end,
 })
@@ -255,7 +254,7 @@ keymap(
 )
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "lua", "sh", "json", "mjs", "md", "py", "css" }
+	local extensions = { "sh", "json", "mjs", "md", "py", "css" }
 	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
