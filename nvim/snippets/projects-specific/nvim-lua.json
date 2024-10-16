@@ -58,10 +58,6 @@
     "filetype": "lua",
     "prefix": "defer"
   },
-  "barbaz": {
-    "body": "Hello World",
-    "prefix": "foobar"
-  },
   "get selection": {
     "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",
     "prefix": "get selection"
