@@ -1,6 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
--- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+-- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 --------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
@@ -24,7 +24,8 @@ local lspToMasonMap = {
 	ts_ls = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
-	-- basics_ls = "basics-language-server",
+	-- basics_ls = "basics-language-server", -- PENDING https://github.com/mason-org/mason-registry/pull/7570
+	harper_ls = "harper-ls",
 }
 
 --- copypasted from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs.lua
@@ -245,7 +246,7 @@ M.serverConfigs.emmet_language_server = {
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 M.serverConfigs.ts_ls = {
 	settings = {
-		-- "Cannot redeclare block-scoped variable" -> not useful for single-file-JXA
+		-- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
 		-- (biome works only on single-file and so already check for unintended re-declarations.)
 		diagnostics = { ignoredCodes = { 2451 } },
 
@@ -277,7 +278,7 @@ M.serverConfigs.ts_ls = {
 M.serverConfigs.ts_ls.settings.javascript = M.serverConfigs.ts_ls.settings.typescript
 
 --------------------------------------------------------------------------------
-
+-- JSON & YAML
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 M.serverConfigs.jsonls = {
 	-- Disable formatting in favor of biome
@@ -317,9 +318,33 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	end
 end
 
+-- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
+M.serverConfigs.harper_ls = {
+	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
+	settings = {
+		["harper-ls"] = {
+			userDictPath = vim.o.spellfile,
+			diagnosticSeverity = "information",
+			linters = {
+				spell_check = true, -- BUG with markdown links https://github.com/elijah-potter/harper/issues/104
+				sentence_capitalization = true, -- NOTE https://github.com/elijah-potter/harper/issues/228
+			},
+		},
+	},
+	on_attach = function(harper, bufnr)
+		detachIfObsidianOrIcloud(harper, bufnr)
+		vim.keymap.set("n", "zg", function()
+			vim.lsp.buf.code_action {
+				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
+				apply = true,
+			}
+		end, { desc = "󰓆 Add Word to spellfile", buffer = bufnr })
+	end,
+}
+
 -- DOCS https://valentjn.github.io/ltex/settings.html
 M.serverConfigs.ltex = {
-	filetypes = { "markdown" }, -- not in .txt files, as those are used by `pass`
+	filetypes = { "markdown" }, -- not in `.txt` files, as those are used by `pass`
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
@@ -342,12 +367,10 @@ M.serverConfigs.ltex = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
+					"MORFOLOGIK_RULE_EN_US", -- using `harper_ls` instead for this
 				},
 			},
-			diagnosticSeverity = {
-				default = "info",
-				MORFOLOGIK_RULE_EN_US = "hint",
-			},
+			diagnosticSeverity = { default = "info" },
 			additionalRules = {
 				enablePickyRules = true,
 				mothersTongue = "de-DE",
@@ -357,24 +380,7 @@ M.serverConfigs.ltex = {
 			},
 		},
 	},
-	on_attach = function(ltex, bufnr)
-		detachIfObsidianOrIcloud(ltex, bufnr)
-
-		-- have `zg` update ltex' dictionary file as well as vim's spellfile
-		vim.keymap.set({ "n", "x" }, "zg", function()
-			local word
-			if vim.fn.mode() == "n" then
-				word = vim.fn.expand("<cword>")
-				vim.cmd.normal { "zg", bang = true }
-			else
-				vim.cmd.normal { 'zggv"zy', bang = true }
-				word = vim.fn.getreg("z")
-			end
-			local ltexSettings = ltex.config.settings or {}
-			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
-		end, { desc = "󰓆 Add Word", buffer = bufnr })
-	end,
+	on_attach = detachIfObsidianOrIcloud,
 }
 
 -- TYPOS

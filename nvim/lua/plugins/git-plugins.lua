@@ -69,7 +69,6 @@ return {
 	},
 	{ -- git sign gutter & hunk actions
 		"lewis6991/gitsigns.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		opts = {
 			signs_staged_enable = true,
