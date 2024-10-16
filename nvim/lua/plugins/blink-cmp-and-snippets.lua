@@ -6,9 +6,21 @@ return {
 		sources = {
 			providers = {
 				{ "blink.cmp.sources.lsp", name = "LSP" },
-				{ "blink.cmp.sources.path", name = "Path", score_offset = 3 },
-				{ "blink.cmp.sources.snippets", name = "Snippets", score_offset = -3 },
-				{ "blink.cmp.sources.buffer", name = "Buffer", fallback_for = { "LSP" } },
+				{
+					"blink.cmp.sources.path",
+					name = "Path",
+					-- BUG https://github.com/Saghen/blink.cmp/issues/121
+					get_cwd = function() return vim.uv.cwd() end,
+					score_offset = 3,
+				},
+				{ "blink.cmp.sources.snippets", name = "Snippets" },
+				{
+					"blink.cmp.sources.buffer",
+					name = "Buffer",
+					score_offset = -3,
+					keyword_length = 3,
+					fallback_for = { "Path" }, -- empty to disable
+				},
 			},
 		},
 		highlight = { use_nvim_cmp_as_default = true },
@@ -20,8 +32,6 @@ return {
 			select_prev = "<S-Tab>",
 			scroll_documentation_down = "<PageDown>",
 			scroll_documentation_up = "<PageUp>",
-			snippet_forward = "<D-p>",
-			snippet_backward = "<D-P>",
 		},
 		windows = {
 			autocomplete = {
@@ -87,4 +97,3 @@ return {
 		},
 	},
 }
-

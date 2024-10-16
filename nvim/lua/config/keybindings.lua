@@ -207,8 +207,11 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<D-p>", function()
-	if vim.snippet.active() then vim.snippet.jump(1) end
+	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
+keymap({ "n", "i", "s" }, "<D-P>", function()
+	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
+end, { desc = "󰩫 prev placeholder" })
 
 -- exit snippet on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
@@ -356,4 +359,3 @@ keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 --------------------------------------------------------------------------------
 
-keymap(fsfsf, fsfsfsf, fsfsf, opts?)
