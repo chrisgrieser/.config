@@ -71,10 +71,6 @@
     ],
     "prefix": "get visual selection"
   },
-  "keymap": {
-    "body": "keymap(\"n\", \"${1:lhs}\", \"${2:rhs}\", { desc = \"${3:description}\" })",
-    "prefix": "keymap"
-  },
   "leave visual mode": {
     "body": [
       "local function leaveVisualMode()",

@@ -1,3 +1,6 @@
+-- PENDING https://github.com/Saghen/blink.cmp/issues/created_by/chrisgrieser
+--------------------------------------------------------------------------------
+
 return {
 	"saghen/blink.cmp",
 	event = "UIEnter", -- already lazy-loads internally
@@ -9,9 +12,8 @@ return {
 				{
 					"blink.cmp.sources.path",
 					name = "Path",
-					-- BUG https://github.com/Saghen/blink.cmp/issues/121
-					get_cwd = function() return vim.uv.cwd() end,
 					score_offset = 3,
+					opts = { get_cwd = function() return vim.uv.cwd() end },
 				},
 				{ "blink.cmp.sources.snippets", name = "Snippets" },
 				{
@@ -19,7 +21,6 @@ return {
 					name = "Buffer",
 					score_offset = -3,
 					keyword_length = 3,
-					fallback_for = { "Path" }, -- empty to disable
 				},
 			},
 		},
@@ -37,7 +38,7 @@ return {
 			autocomplete = {
 				min_width = 10,
 				max_width = 45,
-				max_height = 12,
+				max_height = 10,
 				border = vim.g.borderStyle,
 				-- https://github.com/Saghen/blink.cmp/blob/f456c2aa0994f709f9aec991ed2b4b705f787e48/lua/blink/cmp/windows/autocomplete.lua#L227
 				draw = function(ctx)
