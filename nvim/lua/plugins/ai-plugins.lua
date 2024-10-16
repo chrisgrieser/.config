@@ -1,7 +1,6 @@
 -- INFO potential AI plugins:
 -- https://github.com/huggingface/llm-ls
 -- https://github.com/SilasMarvin/lsp-ai
--- https://github.com/sourcegraph/sg.nvim
 -- https://github.com/Bryley/neoai.nvim
 -- https://github.com/supermaven-inc/supermaven-nvim/
 -- https://github.com/monkoose/neocodeium
@@ -14,7 +13,6 @@ return {
 		cmd = "NeoCodeium",
 		opts = {
 			silent = true,
-			-- BUG https://github.com/monkoose/neocodeium/issues/38
 			show_label = false, -- signcolumn label for number of suggestions
 
 			filetypes = {
