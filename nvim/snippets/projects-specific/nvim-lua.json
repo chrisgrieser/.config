@@ -1,8 +1,4 @@
 {
-  "cast (LuaDoc)": {
-    "body": "---@cast ${1:varname} ${2:string}",
-    "prefix": "cast (LuaDoc)"
-  },
   "abbreviate (function)": {
     "body": "local function abbr(lhs, rhs) vim.keymap.set(\"ia\", lhs, rhs, { buffer = true }) end",
     "prefix": "abbreviate (function)"
@@ -27,6 +23,10 @@
       "})"
     ],
     "prefix": "autocmd (Filetype)"
+  },
+  "cast (LuaDoc)": {
+    "body": "---@cast ${1:varname} ${2:string}",
+    "prefix": "cast (LuaDoc)"
   },
   "check if on macOS": {
     "body": [
@@ -57,6 +57,10 @@
     ],
     "filetype": "lua",
     "prefix": "defer"
+  },
+  "barbaz": {
+    "body": "Hello World",
+    "prefix": "foobar"
   },
   "get selection": {
     "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",

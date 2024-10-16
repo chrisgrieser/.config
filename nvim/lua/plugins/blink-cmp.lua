@@ -53,6 +53,10 @@ return {
 						icon = "󰯸"
 					end
 
+					-- FIX for tokyonight
+					local iconHl = vim.g.colors_name:find("tokyonight") and "BlinkCmpKind"
+						or "BlinkCmpKind" .. ctx.kind
+
 					return {
 						{
 							" " .. ctx.item.label .. " ",
@@ -60,7 +64,7 @@ return {
 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
 							max_width = 45,
 						},
-						{ icon .. ctx.icon_gap, hl_group = "BlinkCmpKind" .. ctx.kind },
+						{ icon .. ctx.icon_gap, hl_group = iconHl },
 					}
 				end,
 			},
