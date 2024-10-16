@@ -116,14 +116,6 @@
     "body": "local roundedNum = tonumber(string.format(\"%.${1:decimals}f\", exactNum))",
     "prefix": "round number"
   },
-  "safe require": {
-    "body": [
-      "local ok, ${1:module} = require(\"${1:module}\")",
-      "if not (ok and ${1:module}) then return end",
-      "${1:module}.$0"
-    ],
-    "prefix": "safe require"
-  },
   "sort (table)": {
     "body": "table.sort(${1:table}, function(a, b) return ${2:a} > ${3:b} end)",
     "prefix": "sort (table)"
@@ -141,10 +133,6 @@
   "ternary": {
     "body": "${1:condition} and ${2:value1} or ${3:value2}",
     "prefix": "ternary"
-  },
-  "trim trailing line break": {
-    "body": ":gsub(\"\\n$\", \"\")",
-    "prefix": "trim"
   },
   "write file": {
     "body": [
