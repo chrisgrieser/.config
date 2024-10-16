@@ -9,19 +9,20 @@ return {
 		sources = {
 			providers = {
 				{ "blink.cmp.sources.lsp", name = "LSP" },
-				{
-					"blink.cmp.sources.path",
-					name = "Path",
-					score_offset = 3,
-					opts = { get_cwd = function() return vim.uv.cwd() end },
-				},
-				{ "blink.cmp.sources.snippets", name = "Snippets" },
-				{
-					"blink.cmp.sources.buffer",
-					name = "Buffer",
-					score_offset = -3,
-					keyword_length = 3,
-				},
+				-- using `basics_ls` instead of these sources
+				-- {
+				-- 	"blink.cmp.sources.path",
+				-- 	name = "Path",
+				-- 	score_offset = 3,
+				-- 	opts = { get_cwd = function() return vim.uv.cwd() end },
+				-- },
+				-- { "blink.cmp.sources.snippets", name = "Snippets" },
+				-- {
+				-- 	"blink.cmp.sources.buffer",
+				-- 	name = "Buffer",
+				-- 	score_offset = -3,
+				-- 	keyword_length = 3,
+				-- },
 			},
 		},
 		highlight = { use_nvim_cmp_as_default = true },
@@ -29,8 +30,8 @@ return {
 			show = "<D-c>",
 			accept = "<CR>",
 			hide = "<S-CR>",
-			select_next = "<Tab>",
-			select_prev = "<S-Tab>",
+			select_next = { "<Tab>", "<Down>" },
+			select_prev = { "<S-Tab>", "<Up>" },
 			scroll_documentation_down = "<PageDown>",
 			scroll_documentation_up = "<PageUp>",
 		},
@@ -44,11 +45,13 @@ return {
 				draw = function(ctx)
 					-- differentiate snippets from LSPs, the user, and emmet
 					local icon = ctx.kind_icon
-					local client = ctx.item.source == "blink.cmp.sources.lsp"
+					local client = ctx.item.source == "LSP"
 						and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if client and ctx.kind == "Snippet" then icon = "󰒕" end
+					if client ~= "basics_ls" and ctx.kind == "Snippet" then icon = "󰒕" end
 					if client == "emmet_language_server" then icon = "󰯸" end
-					if ctx.item.source == "blink.cmp.sources.buffer" then icon = "﬘" end
+					if ctx.item.source == "Buffer" or (client == "basics_ls" and ctx.kind == "Text") then
+						icon = "﬘"
+					end
 
 					return {
 						{
