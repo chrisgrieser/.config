@@ -357,5 +357,12 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "help", "checkhealth" },
+	callback = function()
+		vim.defer_fn(function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end, 1)
+	end,
+})
+
 --------------------------------------------------------------------------------
 

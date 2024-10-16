@@ -4,9 +4,10 @@
 ;───────────────────────────────────────────────────────────────────────────────
 ; EXTENDING COMMENTS TAGS
 ; SOURCE https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm
-; added by me: CONFIG SIC PENDING CAVEAT DATA GUARD SOURCE REQUIRED VALIDATE EXAMPLE
+; added by me: CONFIG SIC PENDING CAVEAT DATA GUARD SOURCE REQUIRED VALIDATE
+; EXAMPLE TEMP
 ("text" @comment.todo
-  (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "VALIDATE"))
+  (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "VALIDATE" "TEMP"))
 
 ("text" @comment.note
   (#any-of? @comment.note "CONFIG" "SOURCE" "DATA" "EXAMPLE" "IMPORTANT"))
