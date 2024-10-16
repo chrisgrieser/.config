@@ -14,7 +14,7 @@ return {
 		cmd = "NeoCodeium",
 		opts = {
 			silent = true,
-			show_label = false, -- signcolumn label for number of suggestions
+			show_label = true, -- signcolumn label for number of suggestions
 
 			filetypes = {
 				DressingInput = false,

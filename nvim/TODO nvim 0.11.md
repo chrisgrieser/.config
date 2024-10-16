@@ -1,0 +1,1 @@
+- switch to native completion with `basics_ls`

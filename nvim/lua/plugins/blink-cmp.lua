@@ -1,6 +1,3 @@
--- PENDING https://github.com/Saghen/blink.cmp/issues/created_by/chrisgrieser
---------------------------------------------------------------------------------
-
 return {
 	"saghen/blink.cmp",
 	event = "UIEnter", -- already lazy-loads internally
@@ -9,20 +6,18 @@ return {
 		sources = {
 			providers = {
 				{ "blink.cmp.sources.lsp", name = "LSP" },
-				-- using `basics_ls` instead of these sources
-				-- {
-				-- 	"blink.cmp.sources.path",
-				-- 	name = "Path",
-				-- 	score_offset = 3,
-				-- 	opts = { get_cwd = function() return vim.uv.cwd() end },
-				-- },
-				-- { "blink.cmp.sources.snippets", name = "Snippets" },
-				-- {
-				-- 	"blink.cmp.sources.buffer",
-				-- 	name = "Buffer",
-				-- 	score_offset = -3,
-				-- 	keyword_length = 3,
-				-- },
+				{ "blink.cmp.sources.snippets", name = "Snippets" },
+				{
+					"blink.cmp.sources.path",
+					name = "Path",
+					opts = { get_cwd = function() return vim.uv.cwd() end },
+				},
+				{
+					"blink.cmp.sources.buffer",
+					name = "Buffer",
+					score_offset = -3,
+					keyword_length = 3,
+				},
 			},
 		},
 		highlight = { use_nvim_cmp_as_default = true },
@@ -47,7 +42,7 @@ return {
 					local icon = ctx.kind_icon
 					local client = ctx.item.source == "LSP"
 						and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if client ~= "basics_ls" and ctx.kind == "Snippet" then icon = "󰒕" end
+					if ctx.item.source == "LSP" and client ~= "basics_ls" and ctx.kind == "Snippet" then icon = "󰒕" end
 					if client == "emmet_language_server" then icon = "󰯸" end
 					if ctx.item.source == "Buffer" or (client == "basics_ls" and ctx.kind == "Text") then
 						icon = "﬘"

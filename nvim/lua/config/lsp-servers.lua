@@ -24,7 +24,7 @@ local lspToMasonMap = {
 	ts_ls = "typescript-language-server",
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
-	basics_ls = "basics-language-server", -- TEMP https://github.com/antonk52/basics-language-server/issues/2
+	-- basics_ls = "basics-language-server",
 }
 
 --- copypasted from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs.lua
@@ -131,21 +131,22 @@ M.serverConfigs.efm = {
 -- BASICS
 
 -- DOCS https://github.com/antonk52/basics-language-server#settings
-M.serverConfigs.basics_ls = {
-	settings = {
-		buffer = {
-			enable = true,
-			minCompletionLength = 4, -- only provide completions for words longer than 4 characters
-		},
-		path = {
-			enable = true,
-		},
-		snippet = {
-			enable = true,
-			sources = { vim.fn.stdpath("config") .. "/snippets" },
-		},
-	},
-}
+-- PENDING nvim 0.11
+-- M.serverConfigs.basics_ls = {
+-- 	settings = {
+-- 		buffer = {
+-- 			enable = true,
+-- 			minCompletionLength = 4, -- only provide completions for words longer than 4 characters
+-- 		},
+-- 		path = {
+-- 			enable = true,
+-- 		},
+-- 		snippet = {
+-- 			enable = true,
+-- 			sources = { vim.fn.stdpath("config") .. "/snippets" },
+-- 		},
+-- 	},
+-- }
 
 --------------------------------------------------------------------------------
 -- LUA

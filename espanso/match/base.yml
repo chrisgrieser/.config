@@ -38,6 +38,13 @@ matches:
       - name: architecture
         type: shell
         params: { cmd: uname -p }
+  - trigger: "!nversion"
+    replace: "{{neovimVersion}}"
+    vars:
+      - name: neovimVersion
+        type: shell
+        params:
+          cmd: export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!github"
     replace: >
