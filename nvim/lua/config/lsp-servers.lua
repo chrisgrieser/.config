@@ -327,7 +327,7 @@ M.serverConfigs.harper_ls = {
 			diagnosticSeverity = "information",
 			linters = {
 				spell_check = true, -- BUG with markdown links https://github.com/elijah-potter/harper/issues/104
-				sentence_capitalization = true, -- NOTE https://github.com/elijah-potter/harper/issues/228
+				sentence_capitalization = false, -- NOTE https://github.com/elijah-potter/harper/issues/228
 			},
 		},
 	},

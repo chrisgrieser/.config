@@ -195,6 +195,7 @@ Cssclasses
 Soziopolis
 Statusline
 Treesitter
+treesitter
 blockquote
 bufferline
 cheatsheet
@@ -244,6 +245,7 @@ serverConfig
 ClientConfig
 Strikethrough
 strikethrough
+automagically
 Strikethroughs
 strikethroughs
 JavaScriptReact
