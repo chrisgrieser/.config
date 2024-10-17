@@ -45,8 +45,12 @@ local function quit(appName)
 	else
 		u.quitApps(appName)
 	end
+
 	print("📴 AutoQuitting: " .. appName)
 	M.idleApps[appName] = nil
+
+	-- reset window count for auto-tiling trigger
+	require("win-management.auto-tile")["winCount_" .. appName] = nil
 end
 
 --------------------------------------------------------------------------------
