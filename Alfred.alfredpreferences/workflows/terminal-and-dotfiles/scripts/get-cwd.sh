@@ -9,9 +9,11 @@ elif [[ "$focusedapp" == "com.neovide.neovide" ]]; then
 	dir_to_open=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 elif [[ "$focusedapp" == "md.obsidian" ]]; then
 	# INFO `<C-p>` mapped to `Copy Absolute Path`
+	prev_clipboard=$(pbpaste)
 	osascript -e 'tell application "System Events" to keystroke "p" using {control down}'
 	sleep 0.1 # wait for clipboard
 	dir_to_open=$(dirname "$(pbpaste)")
+	echo -n "$prev_clipboard" | pbcopy
 elif [[ "$focusedapp" == "com.runningwithcrayons.Alfred-Preferences" ]]; then
 	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	workflow_id=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
@@ -19,4 +21,5 @@ elif [[ "$focusedapp" == "com.runningwithcrayons.Alfred-Preferences" ]]; then
 	dir_to_open="$prefs_location/Alfred.alfredpreferences/workflows/$workflow_id"
 fi
 
+# pass to Alfred action that opens the directory in the configured terminal
 echo -n "$dir_to_open"
