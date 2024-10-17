@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Config_File_Schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-# disable in Obsidian, since it conflicts too often with various things from vim mode
+# Disable in Obsidian, since it conflicts too often with various things from vim
+# mode. In Obsidian, capitalization are handled by the "Auto Correct Capitals
+# Misspellings" plugin.
 filter_class: md.obsidian
 
 extra_excludes:
-  - "../match/capital-misspellings.yml"
+  - "../match/capitalization-autofix.yml"

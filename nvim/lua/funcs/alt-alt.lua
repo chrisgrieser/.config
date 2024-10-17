@@ -46,11 +46,11 @@ function M.closeWindowOrBuffer()
 
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	if moreThanOneBuffer then
-		-- force deleting (= `:bwipeout`) results in correctly set alt-file, but
-		-- also removes from the oldfiles, thus manually adding them there
-		local bufPath = vim.api.nvim_buf_get_name(0)
+		-- force deleting (= `:bwipeout`) results in correctly setting the
+		-- alt-file, but also removes from the oldfiles, thus manually adding it
+		table.insert(vim.v.oldfiles, 1, vim.api.nvim_buf_get_name(0))
+
 		pcall(vim.api.nvim_buf_delete, 0, { force = true })
-		table.insert(vim.v.oldfiles, 1, bufPath)
 	end
 end
 
