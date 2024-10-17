@@ -235,14 +235,16 @@ function M.quitApps(appNames)
 	end
 end
 
-function M.closeFinderWins()
+---@param appName string
+function M.closeAllWindows(appName)
 	M.defer({ 0, 3 }, function()
-		local finder = hs.application("Finder")
-		if not finder then return end
-		for _, win in ipairs(finder:allWindows()) do
+		local app = M.app(appName)
+		if not app then return end
+		for _, win in ipairs(app:allWindows()) do
 			win:close()
 		end
 	end)
+	require("win-management.auto-tile").resetWinCount(appName)
 end
 
 function M.closeAllTheThings()
@@ -252,8 +254,8 @@ function M.closeAllTheThings()
 	end
 
 	-- close browser tabs, finder wins and video apps
-	M.closeTabsContaining(".") -- close any tab
-	M.closeFinderWins()
+	M.closeAllWindows("Finder")
+	M.closeAllWindows("Brave Browser")
 	M.quitApps(M.videoAndAudioApps)
 end
 

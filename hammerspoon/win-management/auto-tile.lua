@@ -102,5 +102,8 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	end):start()
 end
 
+---@param appName string
+function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
+
 --------------------------------------------------------------------------------
 return M
