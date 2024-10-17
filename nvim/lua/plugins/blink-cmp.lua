@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = "BufReadPre", -- already lazy-loads internally
+	event = "InsertEnter",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 	opts = {
 		sources = {
@@ -34,6 +34,14 @@ return {
 		},
 		nerd_font_variant = "mono",
 		windows = {
+			documentation = {
+				min_width = 15,
+				max_width = 50,
+				max_height = 15,
+				border = vim.g.borderStyle,
+				auto_show = true,
+				auto_show_delay_ms = 250,
+			},
 			autocomplete = {
 				min_width = 10,
 				max_height = 10,
@@ -68,14 +76,6 @@ return {
 						{ icon .. ctx.icon_gap, hl_group = iconHl },
 					}
 				end,
-			},
-			documentation = {
-				min_width = 15,
-				max_width = 45,
-				max_height = 15,
-				border = vim.g.borderStyle,
-				auto_show = true,
-				auto_show_delay_ms = 250,
 			},
 		},
 		kind_icons = {
