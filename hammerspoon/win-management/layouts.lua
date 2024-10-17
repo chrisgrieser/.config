@@ -2,12 +2,13 @@ local M = {} -- persist from garbage collector
 
 local darkmode = require("appearance.dark-mode")
 local env = require("meta.environment")
-local u = require("meta.utils")
 local holeCover = require("appearance.hole-cover")
+local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local app = require("meta.utils").app
 local c = hs.caffeinate.watcher
 local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
+---@cast videoAppWatcherForSpotify hs.application.watcher
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -72,22 +73,20 @@ local function workLayout()
 	displayFunc()
 	dockSwitcher("work")
 	holeCover.update()
-	u.defer(1, darkmode.autoSwitch) -- wait for brightness adjustments
+	darkmode.autoSwitch()
 
-	-- prevent the automatic quitting of audio-apps to trigger starting spotify
+	-- prevent the automatic quitting of audio-apps from triggering starting spotify
 	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
 
-	local toOpen = { "Discord", "Mimestream", isWorkweek() and "Slack" or nil }
-	u.openApps(toOpen)
-	u.openApps { "Mona", "AlfredExtraPane" }
-	for _, appName in pairs(toOpen) do
-		u.whenAppWinAvailable(appName, function()
-			local win = app(appName):mainWindow()
-			wu.moveResize(win, wu.pseudoMax)
-		end)
-	end
+	u.openApps {
+		"Discord",
+		"Mimestream",
+		isWorkweek() and "Slack" or nil,
+		"Mona",
+		"AlfredExtraPane",
+	}
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 
 	print("🔲 Loaded WorkLayout")
@@ -98,7 +97,8 @@ local function movieLayout()
 	darkenDisplay()
 	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
-	u.closeFinderWins()
+	u.closeAllWindows("Finder")
+	u.closeAllWindows("Brave Browser")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
