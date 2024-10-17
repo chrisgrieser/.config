@@ -314,7 +314,7 @@ nnoremap ,F :freezeInterface<CR>
 
 " Rephraser: [a]ccept/[r]eject
 exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
-nnoremap ,a :acceptSuggestionsInLine
+nnoremap ,a :acceptSuggestionsInLine<CR>
 exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
 nnoremap ,r :rejectSuggestionsInLine<CR>
 
