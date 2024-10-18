@@ -26,7 +26,7 @@
   },
   "cast (LuaDoc)": {
     "body": "---@cast ${1:varname} ${2:string}",
-    "prefix": "cast (LuaDoc)"
+    "prefix": "@cast (LuaDoc)"
   },
   "check if on macOS": {
     "body": [
