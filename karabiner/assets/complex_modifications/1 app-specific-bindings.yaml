@@ -73,6 +73,12 @@ rules:
         to:
           - { key_code: s, modifiers: [control, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # cmd+q -> close all windows
+      - type: basic
+        from: { key_code: q, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: osascript -e 'tell application "Finder" to close every window'
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
       # cmd+shift+d -> goto [D]ownloads
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
