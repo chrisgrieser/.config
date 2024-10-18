@@ -1,8 +1,10 @@
 return {
 	"saghen/blink.cmp",
-	lazy = false,
-	-- event = "BufReadPre",
+	event = "BufReadPre",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
+
+	---@module "blink.cmp"
+	---@type blink.cmp.Config
 	opts = {
 		sources = {
 			providers = {
