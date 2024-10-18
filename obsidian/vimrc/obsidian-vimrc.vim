@@ -316,7 +316,7 @@ nnoremap ,F :freezeInterface<CR>
 exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
 nnoremap ,a :acceptSuggestionsInLine<CR>
 exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
-nnoremap ,r :rejectSuggestionsInLine<CR>
+nnoremap ,A :rejectSuggestionsInLine<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
