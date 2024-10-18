@@ -18,7 +18,7 @@ keymap({ "n", "x" }, "k", "gk")
 -- (not mapping in op-pending, since using custom textobjects for each of LjkJK)
 keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
 keymap("o", "H", "^")
-keymap({ "n", "x" }, "L", "$zv") -- zv: unfold
+keymap({ "n", "x" }, "L", "$zv") -- zv: unfold under cursor
 keymap({ "n", "x" }, "J", "6gj")
 keymap({ "n", "x" }, "K", "6gk")
 
@@ -215,7 +215,7 @@ end, { desc = "󰩫 prev placeholder" })
 -- exit snippet on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function(ctx)
-		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns winid as string
+		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
 		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
 	end,
 })
@@ -364,3 +364,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+

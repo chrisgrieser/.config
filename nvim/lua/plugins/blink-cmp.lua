@@ -1,12 +1,13 @@
 return {
 	"saghen/blink.cmp",
-	event = "InsertEnter",
+	lazy = false,
+	-- event = "BufReadPre",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 	opts = {
 		sources = {
 			providers = {
 				{ "blink.cmp.sources.lsp", name = "LSP" },
-				{ "blink.cmp.sources.snippets", name = "Snippets" },
+				{ "blink.cmp.sources.snippets", name = "Snippets", score_offset = -1 },
 				{
 					"blink.cmp.sources.path",
 					name = "Path",
@@ -16,17 +17,16 @@ return {
 				{
 					"blink.cmp.sources.buffer",
 					name = "Buffer",
-					score_offset = -3,
 					keyword_length = 3,
-					fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
+					fallback_for = { "LSP" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
 				},
 			},
 		},
 		highlight = { use_nvim_cmp_as_default = true },
 		keymap = {
 			show = "<D-c>",
-			accept = "<CR>",
 			hide = "<S-CR>",
+			accept = "<CR>",
 			select_next = { "<Tab>", "<Down>" },
 			select_prev = { "<S-Tab>", "<Up>" },
 			scroll_documentation_down = "<PageDown>",
