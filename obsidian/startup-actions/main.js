@@ -6,7 +6,7 @@ const obsidian = require("obsidian");
 // CONFIG
 const opacity = {
 	light: 0.93,
-	dark: 0.9,
+	dark: 0.90,
 };
 
 //──────────────────────────────────────────────────────────────────────────────
