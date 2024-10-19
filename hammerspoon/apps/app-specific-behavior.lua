@@ -19,7 +19,7 @@ end):start()
 -- ZOOM
 
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)
-	u.closeTabsContaining("zoom.us") -- remove leftover tabs
+	u.closeBrowserTabsWith("zoom.us") -- remove leftover tabs
 
 	-- close 2nd zoom window when joining a meeting
 	if newWin:title() == "Zoom Meeting" then

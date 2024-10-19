@@ -98,7 +98,6 @@ local function movieLayout()
 	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeAllWindows("Finder")
-	u.closeAllWindows("Brave Browser")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")
