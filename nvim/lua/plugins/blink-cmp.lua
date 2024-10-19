@@ -13,7 +13,7 @@ return {
 					"blink.cmp.sources.snippets",
 					name = "Snippets",
 					score_offset = -1,
-					-- keyword_length = 1, -- not working yet
+					-- keyword_length = 1, -- not supported yet
 				},
 				{
 					"blink.cmp.sources.path",
