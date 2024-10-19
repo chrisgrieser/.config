@@ -1,4 +1,5 @@
 local M = {}
+local env = require("meta.environment")
 local wu = require("win-management.window-utils")
 --------------------------------------------------------------------------------
 
@@ -90,12 +91,13 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 
 	-- hide on deactivation, so sketchybar is not covered
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, app)
-		local dontTrigger = { "Alfred", "CleanShot X", "IINA", "Mona" }
+		local dontTrigger = { "Alfred", "CleanShot X", "IINA", "Mona", "pinentry-mac" }
 		local frontApp = hs.application.frontmostApplication():name()
 		if
 			name == appName
 			and eventType == aw.deactivated
 			and hs.fnutils.every(dontTrigger, function(a) return frontApp ~= a end)
+			and not env.isProjector()
 		then
 			app:hide()
 		end

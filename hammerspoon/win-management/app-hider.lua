@@ -17,7 +17,7 @@ local wf = hs.window.filter
 local config = {
 	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
 	disableHidingWhileActive = { "Steam" },
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA" },
+	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "pinentry-mac" },
 	appsNotToHide = {
 		"Espanso",
 		"IINA",
