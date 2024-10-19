@@ -9,7 +9,12 @@ return {
 		sources = {
 			providers = {
 				{ "blink.cmp.sources.lsp", name = "LSP" },
-				{ "blink.cmp.sources.snippets", name = "Snippets", score_offset = -1 },
+				{
+					"blink.cmp.sources.snippets",
+					name = "Snippets",
+					score_offset = -1,
+					-- keyword_length = 1, -- not working yet
+				},
 				{
 					"blink.cmp.sources.path",
 					name = "Path",
@@ -20,11 +25,15 @@ return {
 					"blink.cmp.sources.buffer",
 					name = "Buffer",
 					keyword_length = 3,
-					fallback_for = { "LSP" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
+					fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
 				},
 			},
 		},
-		highlight = { use_nvim_cmp_as_default = true },
+		trigger = {
+			completion = {
+				keyword_range = "full", -- full|prefix
+			},
+		},
 		keymap = {
 			show = "<D-c>",
 			hide = "<S-CR>",
@@ -34,6 +43,9 @@ return {
 			scroll_documentation_down = "<PageDown>",
 			scroll_documentation_up = "<PageUp>",
 		},
+		highlight = {
+			use_nvim_cmp_as_default = true,
+		},
 		nerd_font_variant = "mono",
 		windows = {
 			documentation = {
@@ -42,7 +54,7 @@ return {
 				max_height = 15,
 				border = vim.g.borderStyle,
 				auto_show = true,
-				auto_show_delay_ms = 250,
+				auto_show_delay_ms = 200,
 			},
 			autocomplete = {
 				min_width = 10,
@@ -50,10 +62,10 @@ return {
 				border = vim.g.borderStyle,
 				-- selection = "auto_insert", -- PENDING https://github.com/Saghen/blink.cmp/issues/117
 				selection = "preselect",
-				cycle = { from_top = false },
-				-- https://github.com/Saghen/blink.cmp/blob/819b978328b244fc124cfcd74661b2a7f4259f4f/lua/blink/cmp/windows/autocomplete.lua#L285-L349
+				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				draw = function(ctx)
-					-- differentiate snippets from LSPs, the user, and emmet
+					-- https://github.com/Saghen/blink.cmp/blob/819b978328b244fc124cfcd74661b2a7f4259f4f/lua/blink/cmp/windows/autocomplete.lua#L285-L349
+					-- differentiate LSP snippets from user snippets and emmet snippets
 					local icon, source = ctx.kind_icon, ctx.item.source
 					local client = source == "LSP" and vim.lsp.get_client_by_id(ctx.item.client_id).name
 					if source == "Snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
