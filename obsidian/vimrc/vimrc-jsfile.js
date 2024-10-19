@@ -334,6 +334,7 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
  * @param {"accept"|"reject"} action
  */
 function highlightsAndStrikthrus(action) {
+	const prevCursor = editor.getCursor();
 	const lnum = editor.getCursor().line;
 	const lineText = editor.getLine(lnum);
 	const updatedLine =
