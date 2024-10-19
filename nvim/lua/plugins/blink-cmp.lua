@@ -76,7 +76,7 @@ return {
 						icon = "󰯸"
 					end
 
-					-- FIX for tokyonight
+					-- FIX highlight for Tokyonight
 					local iconHl = vim.g.colors_name:find("tokyonight") and "BlinkCmpKind"
 						or "BlinkCmpKind" .. ctx.kind
 
