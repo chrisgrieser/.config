@@ -4,8 +4,8 @@ local M = {} -- persist from garbage collector
 -- bound to capslock via Karabiner elements
 M.hyper = { "cmd", "alt", "ctrl" }
 
--- Add path for `hs.execute()`. (Especially on system start, hammerspoon
--- sometimes does not correctly inherit the PATH from the shell.)
+-- Add path for `hs.execute()`.
+-- (On system start, hammerspoon sometimes does not correctly inherit PATH.)
 M.exportPath = "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 
 M.videoAndAudioApps = {
@@ -121,21 +121,6 @@ function M.defer(delaySecs, callbackFn)
 	end
 end
 
----close all tabs which contain urlPart
----@param urlPart string
-function M.closeTabsContaining(urlPart)
-	local browser = "Brave Browser"
-	hs.osascript.applescript(([[
-		tell application %q
-			repeat with win in (every window)
-				repeat with theTab in (every tab in win)
-					if the URL of theTab contains %q then close theTab
-				end repeat
-			end repeat
-		end tell
-	]]):format(browser, urlPart))
-end
-
 ---@nodiscard
 ---@return boolean
 function M.screenIsUnlocked()
@@ -235,6 +220,21 @@ function M.quitApps(appNames)
 	end
 end
 
+---close all tabs which contain urlPart
+---@param urlPart string
+function M.closeBrowserTabsWith(urlPart)
+	local browser = "Brave Browser"
+	hs.osascript.applescript(([[
+		tell application %q
+			repeat with win in (every window)
+				repeat with theTab in (every tab in win)
+					if the URL of theTab contains %q then close theTab
+				end repeat
+			end repeat
+		end tell
+	]]):format(browser, urlPart))
+end
+
 ---@param appName string
 function M.closeAllWindows(appName)
 	M.defer({ 0, 3 }, function()
@@ -253,9 +253,11 @@ function M.closeAllTheThings()
 		if win:isFullScreen() then win:setFullScreen(false) end
 	end
 
-	-- close browser tabs, finder wins and video apps
+	-- close all tabs instead of closing all windows to avoid confirmation prompt
+	-- "do you really want to x tabs?"
+	M.closeBrowserTabsWith(".")
+
 	M.closeAllWindows("Finder")
-	M.closeAllWindows("Brave Browser")
 	M.quitApps(M.videoAndAudioApps)
 end
 

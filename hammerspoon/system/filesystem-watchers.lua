@@ -100,7 +100,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 				while pgrep -xq "Obsidian" ; do sleep 0.1; done
 				open -a "Obsidian"
 			]]):format(desktop))
-			u.closeTabsContaining("https://cdn.discordapp.com/attachments")
+			u.closeBrowserTabsWith("https://cdn.discordapp.com/attachments")
 		end
 
 		if success == false then u.notify("⚠️ Failed to move file: " .. name) end
