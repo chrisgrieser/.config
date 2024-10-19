@@ -140,6 +140,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>obsidian://open?path={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -185,27 +206,6 @@
 			<string>440205E9-6FAD-4C11-AA0A-F2785E994E8C</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>obsidian://open?path={query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3D729F95-B08C-4A6D-9292-9C18E13C54C1</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -420,7 +420,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>main vault</string>
+			<string>search vault</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -440,7 +440,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>search plugins</string>
+			<string>search community plugins</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
