@@ -335,13 +335,15 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
  */
 function highlightsAndStrikthrus(action) {
 	const prevCursor = editor.getCursor();
-	const lnum = editor.getCursor().line;
+	const lnum = prevCursor.line;
 	const lineText = editor.getLine(lnum);
-	const updatedLine =
-		action === "accept"
+	let updatedLine =
+		(action === "accept"
 			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
-			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
+			: lineText.replace(/~~/g, "").replace(/==.*?==/g, ""))
+	updatedLine = updatedLine.replaceAll("  ", " ");
 	editor.setLine(lnum, updatedLine);
+	editor.setCursor(prevCursor);
 }
 
 /** @param {"load"|"save"} mode @param {string} workspaceName */
