@@ -28,18 +28,8 @@ local lspToMasonMap = {
 	harper_ls = "harper-ls",
 }
 
---- copypasted from https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs.lua
---- @class serverConfig : vim.lsp.ClientConfig
---- @field enabled? boolean
---- @field single_file_support? boolean
---- @field filetypes? string[]
---- @field filetype? string
---- @field on_new_config? function
---- @field autostart? boolean
---- @field package _on_attach? fun(client: vim.lsp.Client, bufnr: integer)
---- @field root_dir? string|fun(filename: string, bufnr: number)
-
----@type table<string, serverConfig>
+---@module "lspconfig"
+---@type table<string, lspconfig.Config>
 M.serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	M.serverConfigs[lspName] = {}
