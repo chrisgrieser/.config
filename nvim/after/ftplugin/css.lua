@@ -1,4 +1,4 @@
-vim.bo.commentstring = "/* %s */"
+vim.bo.commentstring = "/* %s */" -- add spaces
 
 --------------------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap
