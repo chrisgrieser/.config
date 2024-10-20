@@ -41,6 +41,8 @@ nnoremap P mzA<Space><Esc>p`z
 " macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 noremap <M-k> :pasteinto<CR>
 
+vnoremap <M-v> p
+
 "───────────────────────────────────────────────────────────────────────────────
 
 " Copy Path segments
@@ -291,6 +293,16 @@ nnoremap qw :insertHr<CR>
 " delete last char in line
 exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
 nnoremap X :deleteLastChar<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
+" MACROS
+
+" Start recording: `00`
+" Stop recording: `0`
+nnoremap 0 q
+
+" Play
+nnoremap [ @0
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS

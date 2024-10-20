@@ -14,6 +14,7 @@ local config = {
 		if require("meta.environment").isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
+	dontTriggerHiding = { "Alfred", "CleanShot X", "IINA", "Mona", "pinentry-mac", "Clicknow" },
 }
 
 --------------------------------------------------------------------------------
@@ -91,10 +92,12 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 
 	-- hide on deactivation, so sketchybar is not covered
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, app)
-		local dontTrigger = { "Alfred", "CleanShot X", "IINA", "Mona", "pinentry-mac" }
-		local fApp = hs.application.frontmostApplication()
-		if not fApp then return end
-		local notIgnored = hs.fnutils.every(dontTrigger, function(a) return fApp:name() ~= a end)
+		local frontApp = hs.application.frontmostApplication()
+		if not frontApp then return end
+		local notIgnored = hs.fnutils.every(
+			config.dontTriggerHiding,
+			function(a) return frontApp:name() ~= a end
+		)
 		if
 			name == appName
 			and eventType == aw.deactivated

@@ -304,8 +304,9 @@ keymap(
 	function() require("funcs.nano-plugins").startStopRecording(toggleKey, register) end,
 	{ desc = "󰕧 Start/Stop Recording" }
 )
-keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })
-keymap("x", "9", "Q", { desc = "󰕧 Play recording on each line", remap = true })
+keymap("n", "[", "@" .. register, { desc = "󰕧 Play recording", nowait = true })
+-- `remap` since using nvim builtin mapping
+keymap("x", "[", "Q", { desc = "󰕧 Play recording on each line", remap = true, nowait = true })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
