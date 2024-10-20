@@ -141,14 +141,6 @@ return {
 			{ "<", ">", ft = { "lua" }, cond = function(fn) return fn.in_string() end },
 		},
 	},
-	{ -- auto-convert string and f/template/format string
-		"chrisgrieser/nvim-puppeteer",
-		ft = { "python", "javascript", "typescript", "lua" },
-		init = function() vim.g.puppeteer_disable_filetypes = {} end,
-		keys = {
-			{ "<leader>ou", vim.cmd.PuppeteerToggle, desc = "󰅳 Puppeteer" },
-		},
-	},
 	{ -- substitute & duplicate operator
 		"echasnovski/mini.operators",
 		keys = {

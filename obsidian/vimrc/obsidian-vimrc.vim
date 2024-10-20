@@ -82,11 +82,6 @@ onoremap J 2j
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
-
-" Language tools: accept suggestion
-exmap acceptSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-noremap ga :acceptSuggestion<CR>
-
 "───────────────────────────────────────────────────────────────────────────────
 " GOTO LOCATIONS
 
@@ -312,11 +307,10 @@ nnoremap ,cc :enhanceUrlWithTitle<CR>
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface<CR>
 
-" Rephraser: [a]ccept/[r]eject
-exmap acceptSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("accept") }
-nnoremap ,a :acceptSuggestionsInLine<CR>
-exmap rejectSuggestionsInLine jsfile Meta/vimrc-jsfile.js { highlightsAndStrikthrus("reject") }
-nnoremap ,A :rejectSuggestionsInLine<CR>
+" Rephraser/Language Tools: accept suggestion
+exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
+exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { acceptHighlightsAndStrikethrus() }
+nnoremap ga :acceptLtSuggestion<CR>:acceptHighlightsAndStrikethrus<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
