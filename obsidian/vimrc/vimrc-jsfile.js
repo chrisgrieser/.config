@@ -331,18 +331,18 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 /** For use with the "Rephraser" form the "Writing Assistant" Alfred workflow,
  * which sends text to OpenAI, and returns the diff in form of highlights
  * (additions) and strikethroughs (deletions).
- * @param {"accept"|"reject"} action
  */
-function highlightsAndStrikthrus(action) {
+function acceptHighlightsAndStrikethrus() {
 	const prevCursor = editor.getCursor();
-	const lnum = prevCursor.line;
-	const lineText = editor.getLine(lnum);
-	let updatedLine =
-		(action === "accept"
-			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
-			: lineText.replace(/~~/g, "").replace(/==.*?==/g, ""))
-	updatedLine = updatedLine.replaceAll("  ", " ");
-	editor.setLine(lnum, updatedLine);
+	const lineText = editor.getLine(prevCursor.line);
+
+	const updatedLine = lineText
+		.replace(/==/g, "") // keep highlights
+		.replace(/~~.*?~~/g, "") // remove strikethroughs
+		.replaceAll("  ", " ") // fix leftover double-spaces from the markup
+		.replaceAll("")
+
+	editor.setLine(prevCursor.line, updatedLine);
 	editor.setCursor(prevCursor);
 }
 

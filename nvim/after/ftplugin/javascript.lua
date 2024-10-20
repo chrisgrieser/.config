@@ -7,7 +7,6 @@ vim.bo.commentstring = "// %s" -- add space
 --------------------------------------------------------------------------------
 
 -- ABBREVIATIONS
-
 abbr("cosnt", "const")
 abbr("local", "const")
 abbr("--", "//")
@@ -16,6 +15,13 @@ abbr("elseif", "else if")
 abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
+
+bkeymap("n", "<D-t>", function()
+	vim.lsp.buf.code_action {
+		filter = function(a) return a.title == "Convert to template string" end,
+		apply = true,
+	}
+end, { desc = "󰛦 Convert to Template String" })
 
 ---open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
@@ -40,3 +46,4 @@ bkeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
 	require("rip-substitute.open-at-regex101").open(data)
 end, { desc = " Open in regex101" })
+
