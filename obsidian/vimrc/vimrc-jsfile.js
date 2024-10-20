@@ -126,9 +126,9 @@ function gotoLineWithPattern(dir, pattern) {
 	if (lnumWithPattern > -1) lnumWithPattern += currentLnum + 1; // account for previous slicing
 
 	// wrap around if not found
-	if (lnumWithPattern === -1)
+	if (lnumWithPattern === -1) {
 		lnumWithPattern = linesAbove.findIndex((line) => line.match(pattern));
-
+	}
 	if (lnumWithPattern === -1) {
 		new Notice(`No line found with pattern ${pattern}`);
 		return;
@@ -328,7 +328,7 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 	await app.workspace.getLeaf().openFile(randomFile);
 }
 
-/** For use with the "Rephraser" form the "Writing Assistant" Alfred workflow,
+/** For use with the "Rephraser" from the "Writing Assistant" Alfred workflow,
  * which sends text to OpenAI, and returns the diff in form of highlights
  * (additions) and strikethroughs (deletions).
  */
@@ -340,7 +340,7 @@ function acceptHighlightsAndStrikethrus() {
 		.replace(/==/g, "") // keep highlights
 		.replace(/~~.*?~~/g, "") // remove strikethroughs
 		.replaceAll("  ", " ") // fix leftover double-spaces from the markup
-		.replaceAll("")
+		.replace(/([a-z][a-z])\.([A-Z])/, "$1. $2"); // fix missing space at sentence end (rephraser bug)
 
 	editor.setLine(prevCursor.line, updatedLine);
 	editor.setCursor(prevCursor);

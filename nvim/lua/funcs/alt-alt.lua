@@ -44,14 +44,20 @@ function M.closeWindowOrBuffer()
 	local winClosed = pcall(vim.cmd.close)
 	if winClosed then return end
 
-	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
-	if moreThanOneBuffer then
-		-- force deleting (= `:bwipeout`) results in correctly setting the
-		-- alt-file, but also removes from the oldfiles, thus manually adding it
-		table.insert(vim.v.oldfiles, 1, vim.api.nvim_buf_get_name(0))
+	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	if #openBuffers < 2 then return end
 
-		pcall(vim.api.nvim_buf_delete, 0, { force = true })
-	end
+	-- vim.cmd.bdelete()
+	-- -- prevent alt-buffer pointing to deleted buffer (using `:bwipeout` prevents
+	-- -- this, but also removes the file from the list of oldfiles)
+	-- vim.fn.setreg("#", newAltFile)
+
+	-- force deleting (= `:bwipeout`) results in correctly setting the
+	-- alt-file, but also removes from the oldfiles, thus manually adding it
+	local bufPath = vim.api.nvim_buf_get_name(0)
+	vim.defer_fn(function() table.insert(vim.v.oldfiles, 1, bufPath) end, 100)
+
+	vim.cmd.bwipeout()
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.

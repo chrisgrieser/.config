@@ -140,7 +140,7 @@ keymap(
 )
 keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
 keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text Object" })
-keymap("n", "guu", "guu") -- prevent `omap u` from overwriting `guu`
+keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
