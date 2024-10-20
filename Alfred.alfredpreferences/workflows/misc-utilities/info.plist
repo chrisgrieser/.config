@@ -1392,7 +1392,7 @@
 			<key>note</key>
 			<string>Goto front Finder window for Save Dialogue</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>1000</real>
 		</dict>
@@ -1585,7 +1585,7 @@
 			<key>note</key>
 			<string>Add Spelling correction to espanso</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>610</real>
 		</dict>
@@ -1605,7 +1605,7 @@
 			<key>note</key>
 			<string>Move to…</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>755</real>
 		</dict>
@@ -1688,7 +1688,7 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
 			<real>885</real>
 		</dict>
