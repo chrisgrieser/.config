@@ -1702,7 +1702,7 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>quick add a new reminder due today</string>
+			<string>quick add new reminder due today</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1723,7 +1723,7 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>quick add a new reminder at a future date</string>
+			<string>quick add new reminder due at future date</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1754,7 +1754,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.1</string>
+	<string>1.1.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -31,7 +31,7 @@ return {
 		},
 		trigger = {
 			completion = {
-				keyword_range = "full", -- full|prefix
+				-- keyword_range = "full", -- full|prefix
 			},
 		},
 		keymap = {
