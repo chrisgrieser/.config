@@ -247,6 +247,23 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
+-- MAXIMUM BUFFER NUMBERS
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		local maxBufs = 7 -- CONFIG
+
+		local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+		if #openBuffers <= maxBufs then return end
+
+		-- sort by last used, oldest first
+		table.sort(openBuffers, function(a, b) return a.lastused < b.lastused end)
+		
+		-- close oldest buffers
+		for i = 1, #openBuffers - maxBufs do
+			vim.cmd.bdelete(openBuffers[i].bufnr)
+		end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- GIT CONFLICT MARKERS
