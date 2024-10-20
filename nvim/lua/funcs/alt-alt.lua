@@ -11,9 +11,9 @@ local config = {
 ---@param path string
 local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
 
----@param altBufnr integer
 ---@return boolean
-local function hasAltFile(altBufnr)
+local function hasAltFile()
+	local altBufnr = vim.fn.bufnr("#")
 	if altBufnr < 0 then return false end
 	local valid = vim.api.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
@@ -47,28 +47,29 @@ function M.closeWindowOrBuffer()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 	if #openBuffers < 2 then return end
 
-	-- vim.cmd.bdelete()
-	-- -- prevent alt-buffer pointing to deleted buffer (using `:bwipeout` prevents
-	-- -- this, but also removes the file from the list of oldfiles)
-	-- vim.fn.setreg("#", newAltFile)
+	vim.cmd.bdelete()
 
-	-- force deleting (= `:bwipeout`) results in correctly setting the
-	-- alt-file, but also removes from the oldfiles, thus manually adding it
-	local bufPath = vim.api.nvim_buf_get_name(0)
-	vim.defer_fn(function() table.insert(vim.v.oldfiles, 1, bufPath) end, 100)
-
-	vim.cmd.bwipeout()
+	-- prevent alt-buffer pointing to deleted buffer 
+	-- (Using `:bwipeout` prevents this, but would also removes the file from the
+	-- list of oldfiles which we don't want.)
+	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
+	if not altFileOpen then
+		table.sort(openBuffers, function(a, b) return a.lastused > b.lastused end)
+		if not openBuffers[3] then return end
+		local newAltFile = openBuffers[3].name -- 1st = closed buffer, 2nd = new current buffer
+		vim.fn.setreg("#", newAltFile)
+	end
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
 function M.altFileStatus()
-	local altBufNr = vim.fn.bufnr("#")
 	local altOld = altOldfile()
 	local icon = "#"
 	local name
 
-	if hasAltFile(altBufNr) then
+	if hasAltFile() then
+		local altBufNr = vim.fn.bufnr("#")
 		local altPath = vim.api.nvim_buf_get_name(altBufNr)
 		local altFile = vim.fs.basename(altPath)
 		name = altFile ~= "" and altFile or "[No Name]"
@@ -103,7 +104,7 @@ end
 function M.gotoAltBuffer()
 	if vim.bo.buftype ~= "" then return end -- deactivate if in a special buffer
 
-	if hasAltFile(vim.fn.bufnr("#")) then
+	if hasAltFile() then
 		vim.cmd.buffer("#")
 		return
 	end
@@ -112,7 +113,7 @@ function M.gotoAltBuffer()
 		vim.cmd.edit(altOld)
 		return
 	end
-	vim.notify("No Altfile or Oldfile available.", vim.log.levels.WARN, { title = "Alt-alt" })
+	vim.notify("No Alt-file or Oldfile available.", vim.log.levels.WARN, { title = "Alt-alt" })
 end
 
 --------------------------------------------------------------------------------

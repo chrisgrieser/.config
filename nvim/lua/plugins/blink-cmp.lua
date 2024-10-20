@@ -8,11 +8,10 @@ return {
 	opts = {
 		sources = {
 			providers = {
-				{ "blink.cmp.sources.lsp", name = "LSP" },
+				{ "blink.cmp.sources.lsp", name = "LSP", score_offset = 1, },
 				{
 					"blink.cmp.sources.snippets",
 					name = "Snippets",
-					score_offset = -1,
 					-- keyword_length = 1, -- not supported yet
 				},
 				{
@@ -25,6 +24,7 @@ return {
 					"blink.cmp.sources.buffer",
 					name = "Buffer",
 					keyword_length = 3,
+					score_offset = -1,
 					fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
 				},
 			},
