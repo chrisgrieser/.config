@@ -38,10 +38,11 @@ vnoremap p P
 nnoremap P mzA<Space><Esc>p`z
 
 " paste url into selection/cword
-" macOS: as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
+" INFO on macOS, as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 noremap <M-k> :pasteinto<CR>
 
-vnoremap <M-v> p
+" ensure compatibility with macOS clipboard managers or other pasting methods
+vnoremap <M-v> "+p
 
 "───────────────────────────────────────────────────────────────────────────────
 
@@ -320,9 +321,9 @@ exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,F :freezeInterface<CR>
 
 " Rephraser/Language Tools: accept suggestion
-exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { acceptHighlightsAndStrikethrus() }
-nnoremap ga :acceptLtSuggestion<CR>:acceptHighlightsAndStrikethrus<CR>
+exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
+noremap ga :acceptHighlightsAndStrikethrus<CR>:acceptLtSuggestion<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read

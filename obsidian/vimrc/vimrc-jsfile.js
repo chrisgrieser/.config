@@ -328,33 +328,36 @@ async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) 
 	await app.workspace.getLeaf().openFile(randomFile);
 }
 
-/** For use with the "Rephraser" from the "Writing Assistant" Alfred workflow,
- * which sends text to OpenAI, and returns the diff in form of highlights
- * (additions) and strikethroughs (deletions).
- */
+/** For use with the rephraser-action from the "Writing Assistant" Alfred
+ * workflow, which sends text to OpenAI, and returns the diff as
+ * highlights (additions) and strikethroughs (deletions). */
 function acceptHighlightsAndStrikethrus() {
-	const prevCursor = editor.getCursor();
-	const lineText = editor.getLine(prevCursor.line);
+	const { line: lnum, ch: col } = editor.getCursor();
 
+	const lineText = editor.getLine(lnum);
 	const updatedLine = lineText
 		.replace(/==/g, "") // keep highlights
 		.replace(/~~.*?~~/g, "") // remove strikethroughs
-		.replaceAll("  ", " ") // fix leftover double-spaces from the markup
-		.replace(/([a-z][a-z])\.([A-Z])/, "$1. $2"); // fix missing space at sentence end (rephraser bug)
+		.replaceAll("  ", " "); // fix leftover double-spaces from the markup
+	editor.setLine(lnum, updatedLine);
 
-	editor.setLine(prevCursor.line, updatedLine);
-	editor.setCursor(prevCursor);
+	const charsLess = lineText.length - updatedLine.length;
+	editor.setCursor({ line: lnum, ch: col - charsLess });
 }
 
-/** @param {"load"|"save"} mode @param {string} workspaceName */
-async function workspace(mode, workspaceName) {
+/** Save/Load a workspace using the Workspaces Core Plugin.
+ * Enables the plugin before, and disables it afterward.
+ * @param {"load"|"save"} action
+ * @param {string} workspaceName
+ */
+async function workspace(action, workspaceName) {
 	const workspacePlugin = view.app.internalPlugins.plugins.workspaces;
 	await workspacePlugin.enable();
 
-	if (mode === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
-	else if (mode === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
+	if (action === "load") workspacePlugin.instance.loadWorkspace(workspaceName);
+	else if (action === "save") workspacePlugin.instance.saveWorkspace(workspaceName);
 
-	new Notice(`${mode === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
+	new Notice(`${action === "load" ? "Loaded" : "Saved"} workspace "${workspaceName}".`);
 	setTimeout(() => workspacePlugin.disable(), 3000);
 }
 

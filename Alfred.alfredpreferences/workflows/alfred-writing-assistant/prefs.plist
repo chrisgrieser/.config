@@ -4,9 +4,9 @@
 <dict>
 	<key>delay_ms</key>
 	<string>120</string>
+	<key>maxTokens</key>
+	<string>200</string>
 	<key>openai_model</key>
 	<string>gpt-4o</string>
-	<key>output_type</key>
-	<string>markdown</string>
 </dict>
 </plist>
