@@ -1,1 +1,2 @@
-- switch to native completion with `basics_ls`
+- Switch to native completion with `basics_ls`
+- `:help ]q`
