@@ -43,3 +43,5 @@ old.reddit.com##div.side:nth-child(4)
 google.com###search > a.grepper_ad_holder:nth-child(2)
 wikiwand.com###ww-main > article:nth-child(7) > div.extensions_wrapper__bELIb:last-child
 amazon.de###nav-logo-sprites
+www.crunchyroll.com##.avatar-badge
+www.netflix.com##div[data-list-context="popularGames"]
