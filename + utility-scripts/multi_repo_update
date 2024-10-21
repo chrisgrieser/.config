@@ -4,22 +4,16 @@
 # set -e
 github_username="chrisgrieser"
 
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="shimmering-obsidian|alfred-homebrew|alfred-atop|alfred-docs-searches|alfred-reddit-browser|alfred-neovim-utilities|pdf-summarizer-alfred|alfred-bibtex-citation-picker|gitfred|tot-alfred|alfred-read-later|alfred-writing-assistant|alfred-pass|alfred-wikipedia-suggest|alfred-anime-search"
+repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	workflow_name="$(basename "$PWD")"
-	sed -i '' \
-		-e "2s_.*_\![GitHub Downloads](https://img.shields.io/github/downloads/chrisgrieser/$workflow_name/total?label=GitHub%20Downloads\&style=plastic\&logo=github)_" \
-		-e "3s_.*_\![Alfred Gallery Downloads](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisgrieser%2F.config%2Frefs%2Fheads%2Fmain%2FAlfred.alfredpreferences%2Falfred-workflow-download-count.yaml\&query=$workflow_name\&style=plastic\&logo=alfred\&label=Gallery%20Downloads\&color=%235C1F87)_" \
-		-e "4i\\
-![Latest Release](https://img.shields.io/github/v/release/chrisgrieser/$workflow_name?label=Latest%20Release&style=plastic)" README.md
+	cp -fv "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
 }
 
-commit_msg="docs: update shields & add Gallery download count badge"
+commit_msg="build: update build script"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -35,7 +29,7 @@ repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
 print "\e[1;34mRepos to update ($repo_count):\e[0m"
-echo "$repos_to_update"
+echo "$repos_to_update" | rs
 echo
 
 if [[ "$amend_and_forcepush" == "true" ]]; then
@@ -50,7 +44,7 @@ print "\e[1;34mActions:\e[0m"
 declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
 echo
 print "\e[1;34mProceed? (y/n)\e[0m"
-read -rk pressed
+read -r pressed
 if [[ "$pressed" != "y" ]]; then
 	echo
 	echo "Aborted."
