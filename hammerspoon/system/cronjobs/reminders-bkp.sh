@@ -3,7 +3,7 @@
 # CONFIG
 list_name="Tasks"
 max_number_of_bkps=100
-bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups"
+bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/Reminders"
 #───────────────────────────────────────────────────────────────────────────────
 
 isodate=$(date +"%Y-%m-%d")
