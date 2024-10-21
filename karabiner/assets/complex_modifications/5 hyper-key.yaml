@@ -28,14 +28,16 @@ rules:
         from: { key_code: "9", modifiers: *hyper }
         to:
           - shell_command: |
+              # https://github.com/alfredapp/banner-be-gone-workflow/
               osascript -l JavaScript -e '
                 Application("System Events")
                   .applicationProcesses.byName("NotificationCenter")
                   .windows[0]
                   .groups[0]
+                  .groups[0]
                   .scrollAreas[0]
                   .uiElements[0]
-                  .groups()
+                  .buttons()
                   .map(banner => banner.actions().slice(-1)[0])
                   .forEach(banner => banner.perform())
               '
