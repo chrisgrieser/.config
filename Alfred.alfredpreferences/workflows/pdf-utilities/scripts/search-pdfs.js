@@ -7,13 +7,13 @@ app.includeStandardAdditions = true;
 /** @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-()_.:;,]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
+	const camelCaseNumberSeparated = str.replace(/([A-Z])/g, " $1").replace(/(\d+)/g, " $1");
 	const withoutUmlaute = str
 		.replace(/[Üü]/g, "ue")
 		.replace(/[äÄ]/g, "ae")
 		.replace(/[öÖ]/g, "oe")
 		.replaceAll("ß", "ss");
-	return [clean, camelCaseSeparated, withoutUmlaute, str].join(" ");
+	return [clean, camelCaseNumberSeparated, withoutUmlaute, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────

@@ -47,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9688B7E2-3A9F-4DF2-8594-7D99AF886947</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<array>
 			<dict>
@@ -86,6 +99,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9688B7E2-3A9F-4DF2-8594-7D99AF886947</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03A1832A-5C01-479D-AC0D-F422389B51C5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9F9F299E-A995-42F4-8E78-E22AC821B859</key>
 		<array>
 			<dict>
@@ -117,6 +143,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>9F9F299E-A995-42F4-8E78-E22AC821B859</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AA39094E-51B3-45BD-965B-0E6E0E009E1E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -187,7 +226,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>md-image-to-html.js</string>
+				<string>./scripts/md-image-to-html.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -431,6 +470,90 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>9688B7E2-3A9F-4DF2-8594-7D99AF886947</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>03A1832A-5C01-479D-AC0D-F422389B51C5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Sum of all numbers in the text</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>AA39094E-51B3-45BD-965B-0E6E0E009E1E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sum-of-all-numbers.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>---
@@ -461,6 +584,15 @@
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>03A1832A-5C01-479D-AC0D-F422389B51C5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>1D749935-6E08-436A-A643-FC0CDB4941FE</key>
 		<dict>
 			<key>colorindex</key>
@@ -499,6 +631,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
+		<key>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<dict>
 			<key>colorindex</key>
@@ -530,6 +671,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>170</real>
 		</dict>
+		<key>9688B7E2-3A9F-4DF2-8594-7D99AF886947</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>9F9F299E-A995-42F4-8E78-E22AC821B859</key>
 		<dict>
 			<key>colorindex</key>
@@ -558,6 +708,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>195</real>
 			<key>ypos</key>
 			<real>140</real>
+		</dict>
+		<key>AA39094E-51B3-45BD-965B-0E6E0E009E1E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>535</real>
 		</dict>
 		<key>B259D744-0386-43A6-9407-025B46325EF5</key>
 		<dict>
