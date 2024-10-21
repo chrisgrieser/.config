@@ -9,7 +9,9 @@ app.includeStandardAdditions = true;
 function run(argv) {
 	const selection = argv[0];
 
-	const allDigits = selection.match(/-?[0-9]+/g) || [];
+	// Accepts negative numbers or floats with two digits (i.e., prices). works
+	// with , or . as decimal separator. Does NOT work with thousand separators.
+	const allDigits = selection.match(/-?\d+([,.]\d\d)?/g) || [];
 	const sum = allDigits.map(Number.parseFloat).reduce((a, b) => a + b, 0);
 
 	return sum.toString();
