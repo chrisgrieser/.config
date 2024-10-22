@@ -42,20 +42,6 @@ local function irregularWhitespace()
 	return ""
 end
 
-local function quickfixCounter()
-	local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
-	if #qf.items == 0 then return "" end
-
-	qf.title = qf -- prettify telescope's title output
-		.title
-		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes
-		:gsub("^Find Files: .-%((.+)%)", "%1")
-		:gsub("^Find Word %((.-)%) %b()", "%1")
-		:gsub(" %(%)", "") -- empty brackets
-		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
-end
-
 local function filenameAndIcon()
 	local maxLength = 30 --CONFIG
 	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -94,15 +80,14 @@ local lualineConfig = {
 				"datetime",
 				style = " %H:%M:%S",
 				cond = function() return vim.o.columns > 120 end, -- if window is maximized
-				fmt = function(time)
-					local timeWithBlinkingColon = os.time() % 2 == 0 and time or time:gsub(":", " ")
-					return timeWithBlinkingColon
-				end,
+				-- make `:` blink
+				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 				padding = { left = 0, right = 1 },
 			},
 		},
 		lualine_c = {
-			-- HACK spacer so the tabline is never empty (in which case vim adds its ugly tabline)
+			-- HACK spacer so the tabline is never empty
+			-- (in which case vim would add its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
 		lualine_z = {
@@ -117,8 +102,7 @@ local lualineConfig = {
 		lualine_a = {
 			{
 				"branch",
-				cond = function()
-					-- only if not on main or master
+				cond = function() -- only if not on main or master
 					local curBranch = require("lualine.components.branch.git_branch").get_branch()
 					return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
 				end,
@@ -134,7 +118,7 @@ local lualineConfig = {
 			{ require("funcs.alt-alt").altFileStatus },
 		},
 		lualine_c = {
-			{ quickfixCounter },
+			{ require("config.quickfix").quickfixCounterStatusbar },
 		},
 		lualine_x = {
 			{ lspProgress },
