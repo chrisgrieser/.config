@@ -16,7 +16,7 @@ abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
-bkeymap("n", "<D-t>", function()
+bkeymap("n", "<leader>ft", function()
 	vim.lsp.buf.code_action {
 		filter = function(a) return a.title == "Convert to template string" end,
 		apply = true,
