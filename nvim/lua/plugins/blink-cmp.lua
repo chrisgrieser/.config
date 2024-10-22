@@ -24,7 +24,7 @@ return {
 					"blink.cmp.sources.buffer",
 					name = "Buffer",
 					keyword_length = 3,
-					score_offset = -1,
+					score_offset = -2,
 					fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
 				},
 			},

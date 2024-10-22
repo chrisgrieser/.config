@@ -42,7 +42,6 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
 keymap("n", "U", "<cmd>silent redo<CR>zv")
 
--- emulate some basic commands from `vim-abolish`
 keymap(
 	"n",
 	"<",

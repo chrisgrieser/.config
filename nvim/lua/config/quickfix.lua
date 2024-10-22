@@ -16,7 +16,7 @@ keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickf
 keymap("n", "<leader>q", function()
 	local windows = vim.fn.getwininfo()
 	for _, win in pairs(windows) do
-		if win["quickfix"] == 1 then
+		if win.quickfix == 1 then
 			vim.cmd.cclose()
 			return
 		end
@@ -86,3 +86,22 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
 	end,
 })
+--------------------------------------------------------------------------------
+local M = {}
+
+function M.quickfixCounterStatusbar()
+	local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
+	if #qf.items == 0 then return "" end
+
+	-- prettify title output
+	qf.title = qf 
+		.title
+		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
+		:gsub("^Find Files: .-%((.+)%)", "%1")
+		:gsub("^Find Word %((.-)%) %b()", "%1")
+		:gsub(" %(%)", "") -- empty brackets
+		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
+	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
+end
+
+return M
