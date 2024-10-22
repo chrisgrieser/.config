@@ -1,7 +1,7 @@
 local keymap = require("config.utils").uniqueKeymap
 local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
--- KEYMAPS
+-- KEYMAPS in regular window
 
 keymap("n", "gq", function()
 	local ok = pcall(vim.cmd.cnext)
@@ -24,6 +24,9 @@ keymap("n", "<leader>q", function()
 	vim.cmd.copen()
 end, { desc = " Toggle quickfix window" })
 
+--------------------------------------------------------------------------------
+-- KEYMAPS in quickfix window
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
@@ -32,7 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			local qfItems = vim.fn.getqflist()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
 			table.remove(qfItems, lnum)
-			vim.fn.setqflist(qfItems, "r")
+			vim.fn.setqflist(qfItems, "r") -- "r" = replace (overwrite)
 			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
 		end, { desc = " Remove quickfix entry" })
 	end,
@@ -79,13 +82,14 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 --------------------------------------------------------------------------------
 
--- GOTO 1ST ITEM
+-- AUTOMATICALLY GOTO 1ST ITEM
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
 	callback = function()
 		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
 	end,
 })
+
 --------------------------------------------------------------------------------
 local M = {}
 
