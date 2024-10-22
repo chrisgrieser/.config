@@ -9,11 +9,6 @@ rules:
         from: { key_code: spacebar, modifiers: { mandatory: [fn] } }
         to:
           - { key_code: spacebar, modifiers: [control] }
-      # ctrl + backspace: forward delete
-      - type: basic
-        from: { key_code: delete_or_backspace, modifiers: { mandatory: [control] } }
-        to:
-          - key_code: delete_forward
       #─────────────────────────────────────────────────────────────────────────
       # cmd+e: inline cod[e] (backticks)
       - type: basic
