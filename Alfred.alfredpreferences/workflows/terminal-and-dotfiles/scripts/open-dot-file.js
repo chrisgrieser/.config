@@ -5,8 +5,7 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** Try out all different forms of casings
- * @param {string} str
- */
+ * @param {string} str */
 function alfredMatcher(str) {
 	const clean = str.replace(/[-.()_/[\]]/g, " ");
 	const squeezed = str.replace(/[-_.]/g, "");
@@ -66,7 +65,7 @@ function run() {
 		let type = "";
 		if (name.startsWith(".z")) type = "zsh";
 		else if (name === "Justfile") type = "justfile";
-		else if (name === ".ignore" || name === ".gitignore") type = "cfg";
+		else if (name === ".ignore" || name === ".gitignore") type = "ignore";
 		else if (!name.slice(1).includes(".")) type = "blank";
 		else if (name === "obsidian-vimrc.vim") type = "obsidian";
 		else type = name.split(".").pop() || ""; // default: extension
@@ -101,8 +100,9 @@ function run() {
 		.doShellScript(`
 			find "${dotfileFolder}" -type d \
 			-not -path "**/.git/*" \
+			-not -path "**/*.app/*" \
 			-not -path "**/Alfred.alfredpreferences/*" \
-			-not -path "**/Spoons/*"
+			-not -path "**/hammerspoon/Spoons/*"
 		`)
 		.split("\r")
 		.map((/** @type {string} */ absPath) => {
