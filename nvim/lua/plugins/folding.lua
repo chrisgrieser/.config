@@ -1,10 +1,10 @@
 return {
-	{
+	{ -- QoL features for folding
 		"chrisgrieser/nvim-origami",
 		event = "VeryLazy",
 		opts = true,
 	},
-	{
+	{ -- use LSP as folding provider
 		"kevinhwang91/nvim-ufo",
 		dependencies = "kevinhwang91/promise-async",
 		event = "UIEnter", -- needed for folds to load in time and comments being closed
