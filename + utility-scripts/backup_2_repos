@@ -33,8 +33,8 @@ echo "$repos" | while read -r repo; do
 done
 
 # ARCHIVE THEM
-isodate=$(date +%Y-%m-%d)
-archive_name="${repos_count} Repos – ${isodate}.zip"
+print "\e[1;34mCompressing $repos_count repos…\e[0m"
+archive_name="${repos_count} Repos – $(date +%Y-%m-%d).zip"
 zip --recurse-paths --symlinks --quiet "../$archive_name" . || return 1
 
 # RESTRICT NUMBER OF BACKUPS
