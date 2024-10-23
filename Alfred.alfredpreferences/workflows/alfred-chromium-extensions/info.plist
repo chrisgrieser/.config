@@ -197,7 +197,7 @@ Search for installed browser extensions and internal pages via the keyword `ch`:
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt; Open the local file path of the extension.
 
 ## Browser support
-Currently, only Chrome and Brave are supported. Adding support for more browsers
+Currently, only Chrome, Brave, and Ark are supported. Adding support for more browsers
 is easy, as long as they are Chromium-based. Making a few additions to this
 [JSON
 file](https://github.com/chrisgrieser/alfred-chromium-extensions/blob/main/scripts/browser-vars.json)
@@ -294,6 +294,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>Brave Browser</string>
 						<string>Brave Browser</string>
 					</array>
+					<array>
+						<string>Arc</string>
+						<string>Arc</string>
+					</array>
 				</array>
 			</dict>
 			<key>description</key>
@@ -307,7 +311,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.2.0</string>
+	<string>1.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
