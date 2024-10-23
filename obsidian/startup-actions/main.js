@@ -6,7 +6,7 @@ const obsidian = require("obsidian");
 // CONFIG
 const opacity = {
 	light: 0.93,
-	dark: 0.90,
+	dark: 0.9,
 };
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -28,20 +28,20 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 
 	getItems() {
-		const excluded = this.app.vault.config.userIgnoreFilters;
 		const folders = this.app.vault
 			.getAllLoadedFiles()
+			// filter out folders, rootDir, and excluded dirs
 			.filter((item) => {
 				if (item.extension) return false; // not folder
 				const rootDir = !item.parent;
-				const excludedDir = excluded.some((dir) => {
+				const excludedDir = this.app.vault.config.userIgnoreFilters.some((dir) => {
 					if (dir.startsWith("/")) return item.path.match(new RegExp(dir.slice(1, -1)));
 					return item.path.startsWith(dir); // non-regex dir
 				});
 				return !rootDir && !excludedDir;
 			})
+			// current dir, then by depth, then alphabetically
 			.sort((a, b) => {
-				// current dir, then by depth, then alphabetically
 				if (a.path === this.activeFileDir) return -1;
 				const depthA = a.path.split("/").length;
 				const depthB = b.path.split("/").length;
@@ -81,12 +81,12 @@ async function updateStatusbar(plugin) {
 	}
 
 	const text = await app.vault.cachedRead(activeFile);
-	const allTasks = text.match(/^\s*- \[[x ]\] |TODO/gm)
-	const totalTasks = allTasks.length;
-	if (totalTasks === 0) {
+	const allTasks = text.match(/^\s*- \[[x ]\] |TODO/gm);
+	if (!allTasks) {
 		statusbarTaskCounter.style.cssText = "display: none";
 		return;
 	}
+	const totalTasks = allTasks.length;
 	const openTasks = allTasks?.filter((task) => task.match(/- \[ \]|TODO/)).length;
 
 	statusbarTaskCounter.style.cssText = "display: block";
@@ -102,10 +102,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		console.info(this.manifest.name + " loaded.");
 
 		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
-		// initialize
-		this.app.workspace.onLayoutReady(() => {
-			updateStatusbar(this);
-		});
+		this.app.workspace.onLayoutReady(() => updateStatusbar(this));
 
 		this.addCommand({
 			id: "new-file-in-folder",
