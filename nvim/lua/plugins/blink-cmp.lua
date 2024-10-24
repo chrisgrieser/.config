@@ -8,28 +8,26 @@ return {
 	opts = {
 		sources = {
 			providers = {
-				{ "blink.cmp.sources.lsp", name = "LSP", score_offset = 1, },
-				{
-					"blink.cmp.sources.snippets",
-					name = "Snippets",
-					-- keyword_length = 1, -- not supported yet
+				---@diagnostic disable: missing-fields
+				snippets = {
+					min_keyword_length = 1,
+					score_offset = -1,
 				},
-				{
-					"blink.cmp.sources.path",
-					name = "Path",
-					score_offset = 3,
+				path = {
 					opts = { get_cwd = vim.uv.cwd },
 				},
-				{
-					"blink.cmp.sources.buffer",
-					name = "Buffer",
-					keyword_length = 3,
+				buffer = {
+					fallback_for = {},
+					max_items = 4,
+					min_keyword_length = 3,
 					score_offset = -2,
-					fallback_for = { "Path" },
-					-- PENDING next release
-					-- max_item_count = 4,
-					-- fallback_for = {},
 				},
+				---@diagnostic enable: missing-fields
+			},
+		},
+		trigger = {
+			completion = {
+				show_in_snippet = true,
 			},
 		},
 		keymap = {
@@ -54,16 +52,15 @@ return {
 				auto_show_delay_ms = 200,
 			},
 			autocomplete = {
+				selection = "auto_insert", -- preselect|auto_insert
 				min_width = 10,
 				max_height = 10,
 				border = vim.g.borderStyle,
-				-- selection = "auto_insert", -- PENDING https://github.com/Saghen/blink.cmp/issues/117
-				selection = "preselect",
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				draw = function(ctx)
-					-- https://github.com/Saghen/blink.cmp/blob/819b978328b244fc124cfcd74661b2a7f4259f4f/lua/blink/cmp/windows/autocomplete.lua#L285-L349
+					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
 					-- differentiate LSP snippets from user snippets and emmet snippets
-					local icon, source = ctx.kind_icon, ctx.item.source
+					local icon, source = ctx.kind_icon, ctx.item.source_name
 					local client = source == "LSP" and vim.lsp.get_client_by_id(ctx.item.client_id).name
 					if source == "Snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
 						icon = "󰩫"
