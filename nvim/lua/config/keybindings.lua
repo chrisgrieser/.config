@@ -163,7 +163,7 @@ keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" 
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 -- LSP
-keymap({ "n", "i", "x", "s" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
 keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
 
 --------------------------------------------------------------------------------
