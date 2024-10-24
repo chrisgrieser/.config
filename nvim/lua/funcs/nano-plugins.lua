@@ -81,8 +81,7 @@ function M.justRecipe(first)
 	end
 end
 
--- Increment or toggle if cursorword is true/false. Simplified implementation
--- of dial.nvim. (REQUIRED `expr = true` for the keymap.)
+
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
@@ -92,11 +91,9 @@ function M.toggleOrIncrement()
 	}
 
 	local cword = vim.fn.expand("<cword>")
-	local toggle
 	for word, opposite in pairs(toggles) do
-		if cword == word then toggle = opposite end
-		if cword == opposite then toggle = word end
-		if toggle then return 'mz"_ciw' .. toggle .. "<Esc>`z" end
+		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
+		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
 	end
 	return "<C-a>"
 end
