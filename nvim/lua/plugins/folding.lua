@@ -36,12 +36,10 @@ return {
 			-- use `:UfoInspect` to get available fold kinds from the LSP
 			close_fold_kinds_for_ft = { default = { "imports", "comment" } },
 			open_fold_hl_timeout = 800,
-			-- INFO some filetypes only allow indent, some only LSP, some only treesitter.
-			-- ufo only accepts two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-			provider_selector = function(_, ft, _)
-				local lspWithOutFolding = { "markdown", "zsh", "css", "html", "python", "json" }
-				if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end
-				return { "lsp", "indent" }
+			-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
+			provider_selector = function(_, filetype, buftype)
+				if filetype == "" or buftype ~= "" then return { "indent" } end
+				return { "lsp", "treesitter" }
 			end,
 			-- show folds with number of folded lines instead of just the icon
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
