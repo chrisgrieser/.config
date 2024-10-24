@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	event = "BufReadPre",
-	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
+	version = "*", -- REQUIRED release tag to download pre-built binaries
 
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
@@ -25,13 +25,11 @@ return {
 					name = "Buffer",
 					keyword_length = 3,
 					score_offset = -2,
-					fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
+					fallback_for = { "Path" },
+					-- PENDING next release
+					-- max_item_count = 4,
+					-- fallback_for = {},
 				},
-			},
-		},
-		trigger = {
-			completion = {
-				-- keyword_range = "full", -- full|prefix
 			},
 		},
 		keymap = {
@@ -46,7 +44,6 @@ return {
 		highlight = {
 			use_nvim_cmp_as_default = true,
 		},
-		nerd_font_variant = "mono",
 		windows = {
 			documentation = {
 				min_width = 15,
@@ -87,7 +84,7 @@ return {
 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
 							max_width = 45,
 						},
-						{ icon .. ctx.icon_gap, hl_group = iconHl },
+						{ icon .. " ", hl_group = iconHl },
 					}
 				end,
 			},

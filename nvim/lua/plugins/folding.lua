@@ -9,13 +9,11 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "UIEnter", -- needed for folds to load in time and comments being closed
 		keys = {
+			{ "z?", vim.cmd.UfoInspect, desc = "󱃄 :UfoInspect" },
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },
 			{
 				"zr",
-				function()
-					require("ufo").openFoldsExceptKinds { "comment", "imports" }
-					vim.opt.scrolloff = vim.g.baseScrolloff -- fix scrolloff setting sometimes being off
-				end,
+				function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end,
 				desc = "󱃄 Open Regular Folds",
 			},
 			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󱃄 Close L1 Folds" },
@@ -33,19 +31,24 @@ return {
 		end,
 		opts = {
 			-- when opening the buffer, close these fold kinds
-			-- use `:UfoInspect` to get available fold kinds from the LSP
-			close_fold_kinds_for_ft = { default = { "imports", "comment" } },
+			close_fold_kinds_for_ft = {
+				default = { "imports", "comment" },
+				-- use `:UfoInspect` to get see available fold kinds
+				json = { "array" },
+			},
 			open_fold_hl_timeout = 800,
-			-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-			provider_selector = function(_, filetype, buftype)
-				if filetype == "" or buftype ~= "" then return { "indent" } end
+			provider_selector = function(_, ft, buftype)
+				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
+				if ft == "log" then return "" end
+				if buftype ~= "" or vim.startswith(ft, "git")then return "indent" end
 				return { "lsp", "treesitter" }
 			end,
 			-- show folds with number of folded lines instead of just the icon
 			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
 				local hlgroup = "NonText"
+				local icon = ""
 				local newVirtText = {}
-				local suffix = "   " .. tostring(endLnum - lnum)
+				local suffix = ("  %s %d"):format(icon, endLnum - lnum)
 				local sufWidth = vim.fn.strdisplaywidth(suffix)
 				local targetWidth = width - sufWidth
 				local curWidth = 0

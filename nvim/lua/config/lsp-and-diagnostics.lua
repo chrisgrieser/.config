@@ -24,7 +24,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then
 		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
-	vim.notify(msg, vim.log.levels.INFO, { title = "Renamed with LSP" })
+	vim.notify(msg, nil, { title = "Renamed with LSP" })
 end
 --------------------------------------------------------------------------------
 
@@ -36,8 +36,11 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
 })
 
---------------------------------------------------------------------------------
+-- logging
+vim.lsp.log.set_format_func(vim.inspect)
+vim.lsp.log.set_level(vim.lsp.log.levels.WARN)
 
+-- appearance
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
@@ -75,18 +78,6 @@ end, {
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
-local function changeSeverity(err, result, ctx, config)
-	result.diagnostics = vim.tbl_map(function(diag)
-		local tsWarnCode = { 6133, 2304 }
-		if diag.source == "typescript" and vim.tbl_contains(tsWarnCode, diag.code) then
-			diag.severity = vim.diagnostic.severity.WARN
-		end
-		return diag
-	end, result.diagnostics)
-	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-end
-vim.lsp.handlers["textDocument/publishDiagnostics"] = changeSeverity
-
 ---@param diag vim.Diagnostic
 ---@return string displayedText
 local function addCodeAndSourceAsSuffix(diag)
@@ -97,6 +88,9 @@ local function addCodeAndSourceAsSuffix(diag)
 end
 
 vim.diagnostic.config {
+	jump = {
+		float = 
+	}
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
@@ -114,10 +108,7 @@ vim.diagnostic.config {
 		border = vim.g.borderStyle,
 		max_width = 70,
 		header = "",
-		prefix = function(_, _, total)
-			local bullet = total > 1 and "• " or ""
-			return bullet, "Comment"
-		end,
+		prefix = { "• ", "Comment" },
 		suffix = function(diag) return addCodeAndSourceAsSuffix(diag), "Comment" end,
 	},
 }
