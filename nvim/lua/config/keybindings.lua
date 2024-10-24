@@ -58,8 +58,8 @@ keymap("n", "X", function()
 end, { desc = "󱎘 Delete char at EoL" })
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "mzO<Esc>`z", { desc = "  blank above" })
-keymap("n", "_", "mzo<Esc>`z", { desc = "  blank below" })
+keymap("n", "=", "mzO<Esc>`z", { desc = " blank above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = " blank below" })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
