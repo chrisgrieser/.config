@@ -15,9 +15,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 		changeCount = changeCount + #(change.edits or change)
 	end
 
-	-- save all, if more than one file changed
-	if #changedFiles > 1 then vim.cmd.wall() end
-
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("%s instance%s"):format(changeCount, pluralS)
@@ -25,6 +22,9 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP" })
+
+	-- SAVE ALL
+	if #changedFiles > 1 then vim.cmd.wall() end
 end
 --------------------------------------------------------------------------------
 
@@ -35,10 +35,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.api.nvim_create_autocmd("InsertLeave", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
 })
-
--- logging
-vim.lsp.log.set_format_func(vim.inspect)
-vim.lsp.log.set_level(vim.lsp.log.levels.WARN)
 
 -- appearance
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
@@ -55,23 +51,23 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- no arg: all LSPs attached to current buffer
 -- one arg: name of the LSP
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
-	local filter = ctx.args == "" and { bufnr = 0 } or { name = ctx.args }
-	local clientInfo = vim.iter(vim.lsp.get_clients(filter))
-		:map(function(client) return client.name:upper() .. "\n" .. vim.inspect(client) end)
-		:join("\n\n")
-	vim.api.nvim_create_autocmd("FileType", {
-		once = true,
-		pattern = "noice",
-		command = "set filetype=lua", -- syntax highlighting
-	})
-	vim.notify(clientInfo)
+	local client = vim.lsp.get_clients({ name = ctx.args })[1]
+	local newBuf = vim.api.nvim_create_buf(true, true)
+	vim.bo[newBuf].filetype = "lua" -- syntax highlighting
+	local info = {
+		capabilities = client.capabilities,
+		server_capabilities = client.server_capabilities,
+		config = client.config,
+	}
+	vim.api.nvim_buf_set_lines(newBuf, 0, -1, false, vim.split(vim.inspect(info), "\n"))
+	vim.api.nvim_buf_set_name(newBuf, client.name .. " capabilities")
+	vim.cmd.buffer(newBuf) -- open
 end, {
-	nargs = "?",
+	nargs = 1,
 	complete = function()
-		local clients = vim.tbl_map(function(client) return client.name end, vim.lsp.get_clients())
-		table.sort(clients)
-		vim.fn.uniq(clients)
-		return clients
+		return vim.iter(vim.lsp.get_clients { bufnr = 0 })
+			:map(function(client) return client.name end)
+			:totable()
 	end,
 })
 
@@ -89,8 +85,8 @@ end
 
 vim.diagnostic.config {
 	jump = {
-		float = 
-	}
+		float = true,
+	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
