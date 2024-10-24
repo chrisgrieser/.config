@@ -3,12 +3,9 @@ return {
 	event = "BufReadPre",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 
-	---@module "blink.cmp"
-	---@type blink.cmp.Config
 	opts = {
 		sources = {
 			providers = {
-				---@diagnostic disable: missing-fields
 				snippets = {
 					min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
 					score_offset = -1,
@@ -22,7 +19,6 @@ return {
 					min_keyword_length = 4,
 					score_offset = -3,
 				},
-				---@diagnostic enable: missing-fields
 			},
 		},
 		trigger = {
