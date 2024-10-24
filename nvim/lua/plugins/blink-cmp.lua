@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	event = "BufReadPre",
-	version = "*", -- REQUIRED release tag to download pre-built binaries
+	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
@@ -10,7 +10,7 @@ return {
 			providers = {
 				---@diagnostic disable: missing-fields
 				snippets = {
-					min_keyword_length = 1,
+					min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
 					score_offset = -1,
 				},
 				path = {
@@ -19,8 +19,8 @@ return {
 				buffer = {
 					fallback_for = {},
 					max_items = 4,
-					min_keyword_length = 3,
-					score_offset = -2,
+					min_keyword_length = 4,
+					score_offset = -3,
 				},
 				---@diagnostic enable: missing-fields
 			},
@@ -49,22 +49,23 @@ return {
 				max_height = 15,
 				border = vim.g.borderStyle,
 				auto_show = true,
-				auto_show_delay_ms = 200,
+				auto_show_delay_ms = 250,
 			},
 			autocomplete = {
-				selection = "auto_insert", -- preselect|auto_insert
-				min_width = 10,
+				selection = "preselect", -- preselect|auto_insert
+				min_width = 10, -- max_width controlled by draw-function
 				max_height = 10,
 				border = vim.g.borderStyle,
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				draw = function(ctx)
+					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
 					-- differentiate LSP snippets from user snippets and emmet snippets
-					local icon, source = ctx.kind_icon, ctx.item.source_name
-					local client = source == "LSP" and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if source == "Snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
+					local icon, source = ctx.kind_icon, ctx.item.source_id
+					local client = ctx.item.client_id and vim.lsp.get_client_by_id(ctx.item.client_id).name
+					if source == "snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
 						icon = "󰩫"
-					elseif source == "Buffer" or (client == "basics_ls" and ctx.kind == "Text") then
+					elseif source == "buffer" or (client == "basics_ls" and ctx.kind == "Text") then
 						icon = "󰦨"
 					elseif client == "emmet_language_server" then
 						icon = "󰯸"
@@ -104,7 +105,7 @@ return {
 			Snippet = "󰒕",
 			Color = "󰏘",
 			Reference = "",
-			File = "󰉋",
+			File = "",
 			Folder = "󰉋",
 			EnumMember = "",
 			Constant = "󰏿",
