@@ -30,6 +30,7 @@ return {
 					min_keyword_length = 4,
 					score_offset = -5,
 					opts = {
+						-- used to get longer characters from other files in the cwd
 						get_command = function(_, prefix)
 							return {
 								"rg",
@@ -38,7 +39,7 @@ return {
 								"--smart-case",
 								"--word-regexp",
 								"--",
-								prefix .. "[\\w_-]+",
+								prefix .. "[\\w_-]{4,}", -- at least 4 more characters
 							}
 						end,
 					},

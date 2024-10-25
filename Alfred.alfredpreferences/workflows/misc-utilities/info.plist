@@ -73,6 +73,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>294F2E98-9FEF-4FBA-B6B0-A3E301379B5F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>96A8BC3F-399E-41FC-8CA4-AC215E422F72</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>365F15E7-7819-4CA4-BAFF-C616400856DF</key>
 		<array>
 			<dict>
@@ -170,6 +183,19 @@
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>⌘: Open Reminders afterwards</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>96A8BC3F-399E-41FC-8CA4-AC215E422F72</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>888E12C3-BC6C-477D-8C67-06BBAD3034B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -971,29 +997,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-feed-to-catch.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -1015,36 +1018,79 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</string>
+			<string>96A8BC3F-399E-41FC-8CA4-AC215E422F72</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>catch</string>
-				<key>subtext</key>
-				<string>from browser tab</string>
-				<key>text</key>
-				<string>❇️ Catch: Add new feed</string>
-				<key>withspace</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
 				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.brave.Browser</string>
+				</array>
+				<key>relatedAppsMode</key>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>365F15E7-7819-4CA4-BAFF-C616400856DF</string>
+			<string>294F2E98-9FEF-4FBA-B6B0-A3E301379B5F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied quote</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>888E12C3-BC6C-477D-8C67-06BBAD3034B0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1067,71 +1113,6 @@
 			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>🟪 Alpha</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>BD998609-F443-45E3-BCAD-1272AC7A66D9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>alpha</string>
-				<key>subtext</key>
-				<string>restarts Obsidian afterwards</string>
-				<key>text</key>
-				<string>🟪 Toggle Alpha</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>D147A1E2-300F-4140-B002-32CA3D79111F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/toggle-obsidian-alpha.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>70A93D49-2208-47A7-9030-DEB81E847D88</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1197,16 +1178,31 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/download-obsidian-alpha.applescript</string>
+				<string>./scripts/add-feed-to-catch.applescript</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</string>
+			<string>717241EC-A124-45BC-8591-0B9EB754327E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>B3C4155D-FDD7-4641-A300-859FBE5E5E6E</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1214,18 +1210,18 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
-				<string>alpha</string>
+				<string>catch</string>
 				<key>subtext</key>
-				<string>from Discord</string>
+				<string>from browser tab</string>
 				<key>text</key>
-				<string>⬇️ Download Alpha</string>
+				<string>❇️ Catch: Add new feed</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</string>
+			<string>365F15E7-7819-4CA4-BAFF-C616400856DF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1291,6 +1287,71 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>CAD36352-9BBE-468E-99D0-92F54C42BC6C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🟪 Alpha</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BD998609-F443-45E3-BCAD-1272AC7A66D9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>restarts Obsidian afterwards</string>
+				<key>text</key>
+				<string>🟪 Toggle Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>D147A1E2-300F-4140-B002-32CA3D79111F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>70A93D49-2208-47A7-9030-DEB81E847D88</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1369,6 +1430,50 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/download-obsidian-alpha.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string>from Discord</string>
+				<key>text</key>
+				<string>⬇️ Download Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E6B699D8-32FA-4F73-B5BF-8A48DAF1D4E2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1434,6 +1539,17 @@
 			<key>ypos</key>
 			<real>480</real>
 		</dict>
+		<key>294F2E98-9FEF-4FBA-B6B0-A3E301379B5F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>note</key>
+			<string>copy quote from browser</string>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>635</real>
+		</dict>
 		<key>2DEAA65D-9B7D-4366-A4B4-EE48333813CD</key>
 		<dict>
 			<key>colorindex</key>
@@ -1441,14 +1557,14 @@
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>1050</real>
 		</dict>
 		<key>365F15E7-7819-4CA4-BAFF-C616400856DF</key>
 		<dict>
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>790</real>
 		</dict>
 		<key>366C10B3-336F-4945-8B1C-9FAB147C3C97</key>
 		<dict>
@@ -1486,14 +1602,14 @@
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>915</real>
 		</dict>
 		<key>717241EC-A124-45BC-8591-0B9EB754327E</key>
 		<dict>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>790</real>
 		</dict>
 		<key>7345CB62-7C65-488B-824C-5E4192230491</key>
 		<dict>
@@ -1512,6 +1628,15 @@
 			<real>330</real>
 			<key>ypos</key>
 			<real>885</real>
+		</dict>
+		<key>888E12C3-BC6C-477D-8C67-06BBAD3034B0</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>815</real>
+			<key>ypos</key>
+			<real>635</real>
 		</dict>
 		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
 		<dict>
@@ -1550,6 +1675,15 @@
 			<real>480</real>
 			<key>ypos</key>
 			<real>175</real>
+		</dict>
+		<key>96A8BC3F-399E-41FC-8CA4-AC215E422F72</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>645</real>
+			<key>ypos</key>
+			<real>635</real>
 		</dict>
 		<key>98776993-F46B-4069-BBDE-8CAA032AB403</key>
 		<dict>
@@ -1625,7 +1759,7 @@
 			<key>xpos</key>
 			<real>650</real>
 			<key>ypos</key>
-			<real>610</real>
+			<real>790</real>
 		</dict>
 		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
 		<dict>
@@ -1652,7 +1786,7 @@
 			<key>xpos</key>
 			<real>775</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>915</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -1681,7 +1815,7 @@
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>735</real>
+			<real>915</real>
 		</dict>
 		<key>D37FA896-C9C1-4099-9489-B0DB16BECC4D</key>
 		<dict>
@@ -1728,7 +1862,7 @@
 			<key>xpos</key>
 			<real>480</real>
 			<key>ypos</key>
-			<real>870</real>
+			<real>1050</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>

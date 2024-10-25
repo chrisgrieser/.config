@@ -119,4 +119,20 @@ M.timer_sleepAutoVideoOff = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
+
+-- DETECT ACCUMULATING `ZSH` PROCESSES
+-- hopefully helps in finding what causes zsh-processes to sometimes accumulate
+local aw = hs.application.watcher
+M.aw_zsh_counter = aw.new(function(_, eventType, _)
+	-- CONFIG higher, since wezterm and sketchybar temporarily create subprocesses
+	local threshold = 7 
+
+	if eventType == aw.activated then
+		local stdout = hs.execute("pgrep -- 'zsh'") ---@cast stdout string
+		local _, count = stdout:gsub("%d+", "")
+		if count > threshold then u.notify(("%d zsh processes running"):format(count)) end
+	end
+end):start()
+
+--------------------------------------------------------------------------------
 return M

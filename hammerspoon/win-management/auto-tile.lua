@@ -14,7 +14,15 @@ local config = {
 		if require("meta.environment").isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
-	dontTriggerHiding = { "Alfred", "CleanShot X", "IINA", "Mona", "pinentry-mac", "Clicknow" },
+	dontTriggerHiding = {
+		"Alfred",
+		"CleanShot X",
+		"IINA",
+		"Mona",
+		"pinentry-mac",
+		"Clicknow",
+		"Espanso",
+	},
 }
 
 --------------------------------------------------------------------------------
