@@ -302,7 +302,7 @@ local toggleKey = "0"
 keymap(
 	"n",
 	toggleKey,
-	function() require("funcs.nano-plugins").startStopRecording(toggleKey, register) end,
+	function() require("funcs.nano-plugins").startOrStopRecording(toggleKey, register) end,
 	{ desc = "󰕧 Start/Stop Recording" }
 )
 keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })

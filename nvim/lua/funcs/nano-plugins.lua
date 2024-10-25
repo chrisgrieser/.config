@@ -84,8 +84,8 @@ end
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string
----@param reg string vim regis
-function M.startStopRecording(toggleKey, reg)
+---@param reg string vim register (single letter)
+function M.startOrStopRecording(toggleKey, reg)
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true }
