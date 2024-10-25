@@ -46,11 +46,6 @@ return {
 		cmd = { "TSTextobjectSelect", "TSTextobjectGotoNextStart", "TSTextobjectGotoPreviousStart" },
 		keys = {
 			{
-				"<leader>H",
-				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
-				desc = " Hover Peek Function",
-			},
-			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
 				mode = "o", -- only operator-pending to not conflict with selection-commenting

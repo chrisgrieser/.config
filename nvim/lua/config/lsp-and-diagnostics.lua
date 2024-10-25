@@ -104,7 +104,7 @@ vim.diagnostic.config {
 		border = vim.g.borderStyle,
 		max_width = 70,
 		header = "",
-		prefix = { "• ", "Comment" },
+		prefix = function(_, _, total) return (total > 1 and "• " or " "), "Comment" end,
 		suffix = function(diag) return addCodeAndSourceAsSuffix(diag), "Comment" end,
 	},
 }
