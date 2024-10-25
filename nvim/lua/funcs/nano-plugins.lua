@@ -109,8 +109,9 @@ end
 
 --------------------------------------------------------------------------------
 
--- Increment or toggle if cursorword is true/false. 
+-- Increment or toggle if cursorword is true/false.
 -- (Simplified implementation of dial.nvim.)
+-- REQUIRED `expr = true`
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
@@ -118,35 +119,37 @@ function M.toggleOrIncrement()
 		["const"] = "let", -- js
 		["and"] = "or", -- lua
 	}
-	local cmd = "<C-a>" -- default behavior: increment
-
+	-- cannot use vim.cmd.normal, because it changes cursor position
 	local cword = vim.fn.expand("<cword>")
 	for word, opposite in pairs(toggles) do
-		if cword == word then
-			cmd = '"_ciw' .. opposite
-			break
-		elseif cword == opposite then
-			cmd = '"_ciw' .. word
-			break
-		end
+		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
+		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
 	end
-	vim.cmd.normal { cmd, bang = true }
+	return "<C-a>"
 end
 
 function M.camelSnakeToggle()
-	local prevCursor = vim.api.nvim_win_get_cursor(0)
 	local cword = vim.fn.expand("<cword>")
 	local newWord
-
 	if cword:find("_%w") then -- snake to camel
 		newWord = cword:gsub("_(%w)", function(capture) return capture:upper() end)
 	elseif cword:find("[%l%d]%u") then -- camel to snake
 		newWord = cword:gsub("([%l%d])(%u)", function(c1, c2) return c1 .. "_" .. c2:lower() end)
+	else
+		return
 	end
-	if not newWord then return end
 
-	vim.cmd.normal { '"_ciw' .. newWord, bang = true }
-	vim.api.nvim_win_set_cursor(0, prevCursor)
+	local line = vim.api.nvim_get_current_line()
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+
+	local start, ending
+	while true do
+		start, ending = line:find(cword, ending or 0, true)
+		assert(start, "cword not found in line")
+		if start <= col and ending >= col then break end
+	end
+	local newLine = line:sub(1, start - 1) .. newWord .. line:sub(ending + 1)
+	vim.api.nvim_set_current_line(newLine)
 end
 
 -- UPPER -> lower -> Title -> UPPER

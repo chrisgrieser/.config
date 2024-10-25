@@ -2,9 +2,13 @@ return {
 	"saghen/blink.cmp",
 	event = "BufReadPre",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
+	dependencies = "niuiic/blink-cmp-rg.nvim",
 
 	opts = {
 		sources = {
+			completion = {
+				enabled_providers = { "lsp", "path", "snippets", "buffer", "rg" },
+			},
 			providers = {
 				snippets = {
 					min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
@@ -18,6 +22,11 @@ return {
 					max_items = 4,
 					min_keyword_length = 4,
 					score_offset = -3,
+				},
+				rg = {
+					module = "blink-cmp-rg",
+					name = "Rg",
+					opts = { prefix_min_len = 3 },
 				},
 			},
 		},
@@ -58,11 +67,14 @@ return {
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
 					-- differentiate LSP snippets from user snippets and emmet snippets
 					local icon, source = ctx.kind_icon, ctx.item.source_id
-					local client = ctx.item.client_id and vim.lsp.get_client_by_id(ctx.item.client_id).name
+					local client = ctx.item.client_id
+						and vim.lsp.get_client_by_id(ctx.item.client_id).name
 					if source == "snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
 						icon = "󰩫"
 					elseif source == "buffer" or (client == "basics_ls" and ctx.kind == "Text") then
 						icon = "󰦨"
+					elseif source == "rg" then
+						icon = "󰚌"
 					elseif client == "emmet_language_server" then
 						icon = "󰯸"
 					end
