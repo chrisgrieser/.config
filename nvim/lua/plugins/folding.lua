@@ -33,14 +33,16 @@ return {
 			-- when opening the buffer, close these fold kinds
 			close_fold_kinds_for_ft = {
 				default = { "imports", "comment" },
-				-- use `:UfoInspect` to get see available fold kinds
 				json = { "array" },
+				-- use `:UfoInspect` to get see available fold kinds
 			},
 			open_fold_hl_timeout = 800,
 			provider_selector = function(_, ft, buftype)
-				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
+				-- PERF disable folds on `log`, and only use `indent` for `bib` files
 				if ft == "log" then return "" end
-				if buftype ~= "" or vim.startswith(ft, "git")then return "indent" end
+				if ft == "bib" then return "indent" end
+				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
+				if buftype ~= "" or vim.startswith(ft, "git") then return "indent" end
 				return { "lsp", "treesitter" }
 			end,
 			-- show folds with number of folded lines instead of just the icon

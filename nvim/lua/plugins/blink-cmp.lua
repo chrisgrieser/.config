@@ -2,12 +2,11 @@ return {
 	"saghen/blink.cmp",
 	event = "BufReadPre",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
-	dependencies = "niuiic/blink-cmp-rg.nvim",
 
 	opts = {
 		sources = {
 			completion = {
-				enabled_providers = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+				enabled_providers = { "lsp", "path", "snippets", "buffer" },
 			},
 			providers = {
 				snippets = {
@@ -23,29 +22,10 @@ return {
 					min_keyword_length = 4,
 					score_offset = -3,
 				},
-				ripgrep = { -- used to get longer characters from other files in the cwd
-					module = "blink-cmp-rg",
-					name = "Ripgrep",
-					max_items = 3,
-					min_keyword_length = 4,
-					score_offset = -5,
-					opts = {
-						get_command = function(_, prefix)
-							-- stylua: ignore
-							return {
-								"rg", "--no-config", "--json",
-								"--smart-case", "--word-regexp",
-								"--", prefix .. "[\\w_-]{4,}",
-							}
-						end,
-					},
-				},
 			},
 		},
 		trigger = {
-			completion = {
-				show_in_snippet = true,
-			},
+			completion = { show_in_snippet = true },
 		},
 		keymap = {
 			show = "<D-c>",
@@ -77,17 +57,12 @@ return {
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
 					-- differentiate LSP snippets from user snippets and emmet snippets
-					local source = ctx.item.source_id
-					local client = ctx.item.client_id
-						and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if client == "emmet_language_server" then source = "emmet" end
+					local source, client = ctx.item.source_id, ctx.item.client_id
+					if client and vim.lsp.get_client_by_id(client).name == "emmet_language_server" then
+						source = "emmet"
+					end
 
-					local sourceIcons = {
-						snippets = "󰩫",
-						emmet = "󰯸",
-						buffer = "󰦨",
-						ripgrep = "󰬙",
-					}
+					local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "󰯸" }
 					local icon = sourceIcons[source] or ctx.kind_icon
 
 					-- FIX highlight for Tokyonight

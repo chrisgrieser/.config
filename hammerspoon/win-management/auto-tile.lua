@@ -4,16 +4,11 @@ local wu = require("win-management.window-utils")
 --------------------------------------------------------------------------------
 
 local config = {
+	---@type table<string, string[]> appName -> ignoredWinTitles
 	appsToAutoTile = {
-		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
-	---@type fun(appName: string): hs.geometry
-	oneWindowSizer = function(appName)
-		if require("meta.environment").isProjector() then return hs.layout.maximized end
-		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
-	end,
 	dontTriggerHiding = {
 		"Alfred",
 		"CleanShot X",
@@ -22,7 +17,20 @@ local config = {
 		"pinentry-mac",
 		"Clicknow",
 		"Espanso",
+		"IINA",
 	},
+	---@type fun(appName: string)
+	zeroWindowAction = function(appName)
+		-- hide to prevent focussing windowless app
+		-- not on projector, since weird interaction with IINA
+		local app = hs.application.find(appName, true, true)
+		if app and not env.isProjector() then app:hide() end
+	end,
+	---@type fun(appName: string): hs.geometry
+	oneWindowSize = function(appName)
+		if env.isProjector() then return hs.layout.maximized end
+		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
+	end,
 }
 
 --------------------------------------------------------------------------------
@@ -52,16 +60,16 @@ local function autoTile(appName)
 
 	local pos = {}
 	if #wins == 0 then
-		app:hide() -- prevent window-less app from keeping focus
+		config.zeroWindowAction(appName)
 	elseif #wins == 1 then
-		pos[1] = config.oneWindowSizer(appName)
+		pos[1] = config.oneWindowSize(appName)
 	elseif #wins == 2 then
 		pos = { hs.layout.left50, hs.layout.right50 }
 	elseif #wins == 3 then
 		pos = {
-			{ h = 1, w = 0.33, x = 0, y = 0 },
-			{ h = 1, w = 0.34, x = 0.33, y = 0 },
-			{ h = 1, w = 0.33, x = 0.67, y = 0 },
+			{ h = 1, w = 0.333, x = 0, y = 0 },
+			{ h = 1, w = 0.334, x = 0.333, y = 0 },
+			{ h = 1, w = 0.333, x = 0.667, y = 0 },
 		}
 	elseif #wins == 4 then
 		pos = {
@@ -106,17 +114,11 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 			config.dontTriggerHiding,
 			function(a) return frontApp:name() ~= a end
 		)
-		if
-			name == appName
-			and eventType == aw.deactivated
-			and notIgnored
-			and not env.isProjector()
-		then
-			app:hide()
-		end
+		if name == appName and eventType == aw.deactivated and notIgnored then app:hide() end
 	end):start()
 end
 
+---helper function, so window-closing modules can reset the count here
 ---@param appName string
 function M.resetWinCount(appName) M["winCount_" .. appName] = nil end
 
