@@ -84,16 +84,22 @@ function gc {
 		git commit --message "$@" || return 1
 	fi
 
+	# still dirty
 	if [[ -n "$(git status --porcelain)" ]]; then
-		print "\e[1;34mPush: \e[0mNot pushing since repo still dirty."
+		print "\e[1;34mPush:\e[0m Not pushing since repo still dirty."
 		echo
 		git status
-	else
-		printf "\e[1;34mPull: \e[0m" &&
-			git pull --no-rebase --no-progress && # --no-rebase prevents "Cannot rebase on multiple branches"
-			printf "\e[1;34mPush: \e[0m" &&
-			git push --no-progress
+		return 0
 	fi
+
+	# only pull if there is a remote tracking branch
+	printf "\e[1;34mPull:\e[0m "
+	if git status --short --branch | grep --fixed-strings --quiet '...'; then
+		git pull --no-rebase --no-progress # `--no-rebase` prevents "Cannot rebase on multiple branches"
+	else
+		print "Not pulling since no remote tracking branch."
+	fi
+	printf "\e[1;34mPush:\e[0m " && git push --no-progress
 }
 
 function gC {
@@ -128,7 +134,7 @@ function gf {
 # amend-no-edit
 function gm {
 	_stageAllIfNoStagedChanges
-	git commit --amend --no-edit --allow-empty
+	git commit --amend --no-edit
 	echo
 	git status
 }
@@ -139,7 +145,7 @@ function gM {
 		print "\e[1;33mStaged changes found.\e[0m"
 		return 1
 	fi
-	git commit --amend --no-verify --allow-empty
+	git commit --amend --no-verify # `--no-verify` since just editing the message
 	echo
 	git status
 }

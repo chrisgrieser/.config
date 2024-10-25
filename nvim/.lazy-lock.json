@@ -1,5 +1,5 @@
 {
-  "blink-cmp-rg.nvim": { "branch": "main", "commit": "168aeb5d361081da6fbdf810de3266d41d2a1165" },
+  "blink-cmp-rg.nvim": { "branch": "main", "commit": "666cb50da71171efd539f6a6ca3732cfd180741c" },
   "blink.cmp": { "branch": "main", "commit": "70438ac5016d3ab609f422d1ef084870cb9ceb29" },
   "ccc.nvim": { "branch": "main", "commit": "7c639042583c7bdc7ce2e37e5a0e0aa6d0659c6a" },
   "dawnfox": { "branch": "main", "commit": "7557f26defd093c4e9bc17f28b08403f706f5a44" },
