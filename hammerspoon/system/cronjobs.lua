@@ -125,7 +125,7 @@ M.timer_sleepAutoVideoOff = hs.timer
 local aw = hs.application.watcher
 M.aw_zsh_counter = aw.new(function(_, eventType, _)
 	-- CONFIG higher, since wezterm and sketchybar temporarily create subprocesses
-	local threshold = 7 
+	local threshold = 8
 
 	if eventType == aw.activated then
 		local stdout = hs.execute("pgrep -- 'zsh'") ---@cast stdout string

@@ -31,7 +31,12 @@ return {
 					score_offset = -5,
 					opts = {
 						get_command = function(_, prefix)
-							return { "rg", "--no-config", "--json", "--smart-case", "--word-regexp", "--", prefix .. "[\\w_-]{4,}" }
+							-- stylua: ignore
+							return {
+								"rg", "--no-config", "--json",
+								"--smart-case", "--word-regexp",
+								"--", prefix .. "[\\w_-]{4,}",
+							}
 						end,
 					},
 				},
