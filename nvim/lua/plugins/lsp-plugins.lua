@@ -20,6 +20,56 @@ return {
 	-- `vim.uv` typings (not as dependency, since it never needs to be loaded)
 	{ "Bilal2453/luvit-meta", lazy = true },
 	-----------------------------------------------------------------------------
+	{ -- breadcrumbs for tabline
+		"SmiteshP/nvim-navic",
+		event = "LspAttach",
+		opts = {
+			lazy_update_context = false,
+			lsp = {
+				auto_attach = true,
+				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
+			},
+			icons = { Object = "⬟ " },
+			separator = " ",
+			depth_limit = 7,
+			depth_limit_indicator = "…",
+		},
+		config = function(_, opts)
+			vim.g.navic_silence = false
+			require("nvim-navic").setup(opts)
+
+			vim.g.lualine_add("tabline", "lualine_b", { "navic" })
+		end,
+		keys = {
+			{ -- copy breadcrumbs
+				"<D-b>",
+				function()
+					local rawdata = require("nvim-navic").get_data()
+					if not rawdata then return end
+					local breadcrumbs = ""
+					for _, v in pairs(rawdata) do
+						breadcrumbs = breadcrumbs .. v.name .. "."
+					end
+					breadcrumbs = breadcrumbs:sub(1, -2):gsub(".%[", "[")
+					vim.fn.setreg("+", breadcrumbs)
+					vim.notify(breadcrumbs, nil, { title = "Copied" })
+				end,
+				desc = "󰒕 Copy Breadcrumbs",
+			},
+			{ -- go up to parent
+				"gk",
+				function()
+					local symbolPath = require("nvim-navic").get_data()
+					if not symbolPath then return end
+					local parent = symbolPath[#symbolPath - 1]
+					if not parent then return end
+					local pos = parent.scope.start
+					vim.api.nvim_win_set_cursor(0, { pos.line, pos.character })
+				end,
+				desc = "󰒕 Go up to parent",
+			},
+		},
+	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
