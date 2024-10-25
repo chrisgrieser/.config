@@ -81,23 +81,6 @@ function M.justRecipe(first)
 	end
 end
 
-
-function M.toggleOrIncrement()
-	local toggles = {
-		["true"] = "false",
-		["True"] = "False", -- python
-		["const"] = "let", -- js
-		["and"] = "or", -- lua
-	}
-
-	local cword = vim.fn.expand("<cword>")
-	for word, opposite in pairs(toggles) do
-		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
-		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
-	end
-	return "<C-a>"
-end
-
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string
@@ -124,6 +107,48 @@ function M.startStopRecording(toggleKey, register)
 	end
 end
 
+--------------------------------------------------------------------------------
+
+-- Increment or toggle if cursorword is true/false. 
+-- (Simplified implementation of dial.nvim.)
+function M.toggleOrIncrement()
+	local toggles = {
+		["true"] = "false",
+		["True"] = "False", -- python
+		["const"] = "let", -- js
+		["and"] = "or", -- lua
+	}
+	local cmd = "<C-a>" -- default behavior: increment
+
+	local cword = vim.fn.expand("<cword>")
+	for word, opposite in pairs(toggles) do
+		if cword == word then
+			cmd = '"_ciw' .. opposite
+			break
+		elseif cword == opposite then
+			cmd = '"_ciw' .. word
+			break
+		end
+	end
+	vim.cmd.normal { cmd, bang = true }
+end
+
+function M.camelSnakeToggle()
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
+	local cword = vim.fn.expand("<cword>")
+	local newWord
+
+	if cword:find("_%w") then -- snake to camel
+		newWord = cword:gsub("_(%w)", function(capture) return capture:upper() end)
+	elseif cword:find("[%l%d]%u") then -- camel to snake
+		newWord = cword:gsub("([%l%d])(%u)", function(c1, c2) return c1 .. "_" .. c2:lower() end)
+	end
+	if not newWord then return end
+
+	vim.cmd.normal { '"_ciw' .. newWord, bang = true }
+	vim.api.nvim_win_set_cursor(0, prevCursor)
+end
+
 -- UPPER -> lower -> Title -> UPPER
 function M.toggleWordCasing()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
@@ -137,8 +162,8 @@ function M.toggleWordCasing()
 	else
 		cmd = "gUiw"
 	end
-	vim.cmd.normal { cmd, bang = true }
 
+	vim.cmd.normal { cmd, bang = true }
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
 

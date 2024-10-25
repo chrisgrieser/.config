@@ -86,7 +86,7 @@ return {
 			-----------------------------------------------------------------------
 			-- stylua: ignore start
 			{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = { "x", "o" }, desc = "↩ outer return" },
-			{ "i<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = { "x", "o" }, desc = "↩ inner return" },
+			{ "<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
 			{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = { "x", "o" }, desc = " outer regex" },
 			{ "i/", "<cmd>TSTextobjectSelect @regex.inner<CR>", mode = { "x", "o" }, desc = " inner regex" },
 			{ "aa", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = { "x", "o" }, desc = "󰏪 outer parameter" },
