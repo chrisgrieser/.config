@@ -62,8 +62,8 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"+",
-	function() require("funcs.nano-plugins").toggleOrIncrement() end,
-	{ desc = "󰐖 Increment/Toggle" }
+	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
+	{ desc = "󰐖 Increment/Toggle", expr = true }
 )
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
@@ -255,7 +255,7 @@ keymap(
 )
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "sh", "json", "mjs", "md", "py", "css" }
+	local extensions = { "lua", "sh", "json", "mjs", "md", "py", "css" }
 	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
