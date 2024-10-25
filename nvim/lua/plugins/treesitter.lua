@@ -30,9 +30,6 @@ return {
 			enable = true,
 			disable = {
 				"markdown", -- indentation at bullet points is worse
-				"javascript", -- some wrong indentation when using `o`
-				"typescript",
-				"yaml", -- wrong indentation in list continuation
 			},
 		},
 		-- plugins
@@ -43,16 +40,12 @@ return {
 		textobjects = {
 			move = { -- move to next function
 				enable = true,
-				set_jumps = false,
+				set_jumps = true,
 			},
 			select = { -- textobj definitions
 				enable = true,
 				lookahead = true,
-				include_surrounding_whitespace = false,
-			},
-			lsp_interop = {
-				enable = true,
-				border = vim.g.borderStyle,
+				include_surrounding_whitespace = true,
 			},
 		},
 	},

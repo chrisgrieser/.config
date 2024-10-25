@@ -42,7 +42,7 @@ return {
 				if ft == "log" then return "" end
 				if ft == "bib" then return "indent" end
 				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-				if buftype ~= "" or vim.startswith(ft, "git") then return "indent" end
+				if buftype ~= "" or vim.startswith(ft, "git") or ft == "" then return "indent" end
 				return { "lsp", "treesitter" }
 			end,
 			-- show folds with number of folded lines instead of just the icon

@@ -23,6 +23,7 @@ npm
 pre
 url
 zsh
+cmp
 APIs
 CLIs
 LSPs
@@ -54,6 +55,7 @@ rsync
 stdin
 utils
 wordd
+vsnip
 Cycler
 Laudel
 Neovim
@@ -160,6 +162,7 @@ unstaged
 unstages
 viewport
 wikilink
+minified
 Blazingly
 Filetypes
 Justfiles
@@ -243,6 +246,7 @@ markdownlint
 languagetool
 serverConfig
 ClientConfig
+minification
 Strikethrough
 strikethrough
 automagically
