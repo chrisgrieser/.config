@@ -6,15 +6,6 @@ local spec = {
 		opts = true,
 		cmd = "ToggleTerm",
 	},
-	{
-		"chrisgrieser/nvim-rip-substitute",
-		keys = {
-			{
-				[[\\]],
-				function() require("rip-substitute").sub() end,
-			},
-		},
-	},
 }
 
 
