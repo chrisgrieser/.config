@@ -1,6 +1,3 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 return {
 	{ -- fixes scrolloff at end of file
 		"Aasim-A/scrollEOF.nvim",
@@ -83,14 +80,12 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
-
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 		},
 		ft = { "css", "zsh", "lua", "toml" },
 		config = function(spec)
 			local ccc = require("ccc")
-
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
 				highlight_mode = "background",

@@ -17,9 +17,9 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
-	local msg = ("%s instance%s"):format(changeCount, pluralS)
+	local msg = ("%d instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = msg .. (" in %s files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
+		msg = msg .. (" in %d files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP" })
 
@@ -53,7 +53,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local client = vim.lsp.get_clients({ name = ctx.args })[1]
 	local newBuf = vim.api.nvim_create_buf(true, true)
-	vim.bo[newBuf].filetype = "lua" -- syntax highlighting
 	local info = {
 		capabilities = client.capabilities,
 		server_capabilities = client.server_capabilities,
@@ -61,6 +60,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	}
 	vim.api.nvim_buf_set_lines(newBuf, 0, -1, false, vim.split(vim.inspect(info), "\n"))
 	vim.api.nvim_buf_set_name(newBuf, client.name .. " capabilities")
+	vim.bo[newBuf].filetype = "lua" -- syntax highlighting
 	vim.cmd.buffer(newBuf) -- open
 end, {
 	nargs = 1,
@@ -84,9 +84,7 @@ local function addCodeAndSourceAsSuffix(diag)
 end
 
 vim.diagnostic.config {
-	jump = {
-		float = true,
-	},
+	jump = { float = true }, -- (nvim 0.11)
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
@@ -100,7 +98,6 @@ vim.diagnostic.config {
 		suffix = addCodeAndSourceAsSuffix,
 	},
 	float = {
-		severity_sort = true,
 		border = vim.g.borderStyle,
 		max_width = 70,
 		header = "",
