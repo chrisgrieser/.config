@@ -57,19 +57,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1E0715A2-B8BC-459F-B957-6447B0E15A13</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DBFE0B0E-4368-4F71-9139-7EC8268778E5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>33687FCF-858F-4613-A6B6-24920E167D9B</key>
 		<array>
 			<dict>
@@ -374,75 +361,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string># using bibItNow's default bindings
-
-# HACK for some reason, needs all three keystrokes to work
-tell application "System Events"
-	keystroke "q" using {option down} # open popup, prepare download
-	delay 0.3
-	keystroke "c" using {option down} # open popup
-	delay 0.3
-	keystroke "c" using {option down} # open popup
-end tell
-
-# afterwards, the hammerspoon filewatcher will automatically add the file to the library</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DBFE0B0E-4368-4F71-9139-7EC8268778E5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedApps</key>
-				<array>
-					<string>com.brave.Browser</string>
-				</array>
-				<key>relatedAppsMode</key>
-				<integer>1</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>1E0715A2-B8BC-459F-B957-6447B0E15A13</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -534,17 +452,6 @@ end tell
 			<real>865</real>
 			<key>ypos</key>
 			<real>155</real>
-		</dict>
-		<key>1E0715A2-B8BC-459F-B957-6447B0E15A13</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>4</integer>
-			<key>note</key>
-			<string>Download bibtex for Website</string>
-			<key>xpos</key>
-			<real>430</real>
-			<key>ypos</key>
-			<real>305</real>
 		</dict>
 		<key>3020DCCA-3C79-4963-8FA6-39F112BD5EC2</key>
 		<dict>
@@ -639,17 +546,6 @@ end tell
 			<real>255</real>
 			<key>ypos</key>
 			<real>600</real>
-		</dict>
-		<key>DBFE0B0E-4368-4F71-9139-7EC8268778E5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>4</integer>
-			<key>note</key>
-			<string>trigger bibItNow download</string>
-			<key>xpos</key>
-			<real>595</real>
-			<key>ypos</key>
-			<real>305</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
