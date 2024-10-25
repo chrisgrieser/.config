@@ -84,16 +84,16 @@ end
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string
----@param register string
-function M.startStopRecording(toggleKey, register)
+---@param reg string vim regis
+function M.startStopRecording(toggleKey, reg)
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
-		vim.cmd.normal { "q" .. register, bang = true }
+		vim.cmd.normal { "q" .. reg, bang = true }
 	else
 		vim.cmd.normal { "q", bang = true }
-		local macro = vim.fn.getreg(register):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
+		local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
 		if macro ~= "" then
-			vim.fn.setreg(register, macro)
+			vim.fn.setreg(reg, macro)
 			vim.notify(vim.fn.keytrans(macro), vim.log.levels.TRACE, { title = "Recorded" })
 		else
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording" })
@@ -131,17 +131,20 @@ end
 function M.camelSnakeToggle()
 	local cword = vim.fn.expand("<cword>")
 	local newWord
-	if cword:find("_%w") then -- snake to camel
-		newWord = cword:gsub("_(%w)", function(capture) return capture:upper() end)
-	elseif cword:find("[%l%d]%u") then -- camel to snake
-		newWord = cword:gsub("([%l%d])(%u)", function(c1, c2) return c1 .. "_" .. c2:lower() end)
+	local snakePattern = "_(%w)"
+	local camelPattern = "([%l%d])(%u)"
+
+	if cword:find(snakePattern) then
+		newWord = cword:gsub(snakePattern, function(capture) return capture:upper() end)
+	elseif cword:find(camelPattern) then
+		newWord = cword:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2:lower() end)
 	else
+		vim.notify("Neither a snake_case nor camelCase")
 		return
 	end
 
 	local line = vim.api.nvim_get_current_line()
 	local col = vim.api.nvim_win_get_cursor(0)[2]
-
 	local start, ending
 	while true do
 		start, ending = line:find(cword, ending or 0, true)

@@ -10,10 +10,11 @@ local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
-	css_variables = "css-variables-language-server",
+	css_variables = "css-variables-language-server", -- support for css variables across multiple files
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html snippets
+	harper_ls = "harper-ls", -- natural language linter (only used for markdown though)
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -21,16 +22,17 @@ local lspToMasonMap = {
 	ruff = "ruff", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
 	taplo = "taplo", -- toml lsp
-	ts_ls = "typescript-language-server",
+	ts_ls = "typescript-language-server", -- also used for javascript
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
-	-- basics_ls = "basics-language-server", -- PENDING https://github.com/mason-org/mason-registry/pull/7570
-	harper_ls = "harper-ls",
 }
 
 ---@module "lspconfig"
 ---@type table<string, lspconfig.Config>
 M.serverConfigs = {}
+for lspName, _ in pairs(lspToMasonMap) do
+	M.serverConfigs[lspName] = {}
+end
 
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
@@ -106,7 +108,7 @@ local efmConfig = {
 }
 
 M.serverConfigs.efm = {
-	-- cleanup useless empty folder efm creates on startup
+	-- cleanup useless empty folder `efm` creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 
 	filetypes = vim.tbl_keys(efmConfig),
@@ -126,7 +128,7 @@ M.serverConfigs.lua_ls = {
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- don't suggest common words as fallback
 				workspaceWord = false, -- already done by cmp-buffer
-				postfix = "..", -- useful for `table.insert` and the like
+				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
 				disable = { "trailing-space" }, -- formatter already handles that
@@ -157,7 +159,7 @@ M.serverConfigs.ruff = {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
-	-- disable in favor of pyright's hover info
+	-- disable in favor of basedpyright's hover info
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
