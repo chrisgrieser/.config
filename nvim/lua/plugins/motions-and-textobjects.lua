@@ -99,8 +99,6 @@ return {
 			{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner condition" },
 			{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer call" },
 			{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner call" },
-			-- INFO outer key textobj defined via various textobjs
-			{ "ik", "<cmd>TSTextobjectSelect @assignment.lhs<CR>", mode = { "x", "o" }, desc = "󰌆 inner key" },
 			-- stylua: ignore end
 		},
 	},
@@ -114,8 +112,8 @@ return {
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = { "x", "o" }, desc = " inner value" },
 			{ "v", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = "o", desc = " inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = { "x", "o" }, desc = " outer value" },
-			-- INFO `ik` defined via treesitter to exclude `local` and `let`;
 			{ "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>", mode = { "x", "o" }, desc = "󰌆 outer key" },
+			{ "ik", "<cmd>lua require('various-textobjs').key('inner')<CR>", mode = { "x", "o" }, desc = "󰌆 inner key" },
 
 			{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = { "x", "o" }, desc = " entire buffer" },
 

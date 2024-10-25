@@ -21,9 +21,9 @@ return {
 			enable = true,
 			-- disable on large files
 			disable = function(_, bufnr)
-				local maxFilesize = 100 * 1024 -- 100 KB
+				local maxFilesizeKb = 100
 				local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-				if ok and stats and stats.size > maxFilesize then return true end
+				if ok and stats and stats.size > maxFilesizeKb * 1024 then return true end
 			end,
 		},
 		indent = {
