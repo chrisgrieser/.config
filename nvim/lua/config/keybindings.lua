@@ -42,6 +42,8 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
 keymap("n", "U", "<cmd>silent redo<CR>zv")
 
+-- Toggles
+keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap(
 	"n",
 	"<",
@@ -49,7 +51,21 @@ keymap(
 	{ desc = "󰬴 Toggle word case" }
 )
 
-keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
+keymap(
+	"n",
+	">",
+	function() require("funcs.nano-plugins").camelSnakeToggle() end,
+	{ desc = "󰬴 Toggle camel and snake case" }
+)
+
+-- Increment/Decrement, or toggle true/false
+keymap(
+	{ "n", "x" },
+	"+",
+	function() require("funcs.nano-plugins").toggleOrIncrement() end,
+	{ desc = "󰐖 Increment/Toggle" }
+)
+keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- Delete trailing character
 keymap("n", "X", function()
@@ -81,15 +97,6 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 -- Merging
 keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
 keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
-
--- Increment/Decrement, or toggle true/false
-keymap(
-	{ "n", "x" },
-	"+",
-	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
-	{ desc = "󰐖 Increment/Toggle", expr = true }
-)
-keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 --------------------------------------------------------------------------------
 

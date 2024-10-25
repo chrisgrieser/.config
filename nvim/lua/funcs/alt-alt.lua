@@ -45,11 +45,14 @@ function M.closeWindowOrBuffer()
 	if winClosed then return end
 
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	if #openBuffers < 2 then return end
+	if #openBuffers < 2 then
+		vim.notify("Only one buffer open.")
+		return
+	end
 
 	vim.cmd.bdelete()
 
-	-- prevent alt-buffer pointing to deleted buffer 
+	-- prevent alt-buffer pointing to deleted buffer
 	-- (Using `:bwipeout` prevents this, but would also removes the file from the
 	-- list of oldfiles which we don't want.)
 	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
