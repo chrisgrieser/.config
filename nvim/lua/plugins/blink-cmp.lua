@@ -23,24 +23,15 @@ return {
 					min_keyword_length = 4,
 					score_offset = -3,
 				},
-				ripgrep = {
+				ripgrep = { -- used to get longer characters from other files in the cwd
 					module = "blink-cmp-rg",
 					name = "Ripgrep",
 					max_items = 3,
 					min_keyword_length = 4,
 					score_offset = -5,
 					opts = {
-						-- used to get longer characters from other files in the cwd
 						get_command = function(_, prefix)
-							return {
-								"rg",
-								"--no-config",
-								"--json",
-								"--smart-case",
-								"--word-regexp",
-								"--",
-								prefix .. "[\\w_-]{4,}", -- at least 4 more characters
-							}
+							return { "rg", "--no-config", "--json", "--smart-case", "--word-regexp", "--", prefix .. "[\\w_-]{4,}" }
 						end,
 					},
 				},
@@ -73,7 +64,6 @@ return {
 				auto_show_delay_ms = 250,
 			},
 			autocomplete = {
-				selection = "preselect", -- preselect|auto_insert
 				min_width = 10, -- max_width controlled by draw-function
 				max_height = 10,
 				border = vim.g.borderStyle,
@@ -91,7 +81,7 @@ return {
 						snippets = "󰩫",
 						emmet = "󰯸",
 						buffer = "󰦨",
-						ripgrep = "󰚌",
+						ripgrep = "󰬙",
 					}
 					local icon = sourceIcons[source] or ctx.kind_icon
 

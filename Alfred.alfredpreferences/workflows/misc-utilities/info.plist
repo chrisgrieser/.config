@@ -1027,7 +1027,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
+				<string>./scripts/copy-quote-as-markdown.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -1482,7 +1482,7 @@
 		<key>03BC9713-12DC-4573-82A2-D3E72094B209</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>create link file from current browser</string>
 			<key>xpos</key>
@@ -1542,7 +1542,7 @@
 		<key>294F2E98-9FEF-4FBA-B6B0-A3E301379B5F</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>copy quote from browser</string>
 			<key>xpos</key>
@@ -1587,7 +1587,7 @@
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Switch to Safari</string>
 			<key>xpos</key>
@@ -1632,7 +1632,7 @@
 		<key>888E12C3-BC6C-477D-8C67-06BBAD3034B0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
@@ -1650,7 +1650,7 @@
 		<key>8D0538B5-46D7-4A6B-B800-3C208CB8971B</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
@@ -1679,7 +1679,7 @@
 		<key>96A8BC3F-399E-41FC-8CA4-AC215E422F72</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>645</real>
 			<key>ypos</key>
@@ -1746,7 +1746,7 @@
 		<key>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>Brave</string>
 			<key>xpos</key>
@@ -1764,7 +1764,7 @@
 		<key>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
@@ -1829,7 +1829,7 @@
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>650</real>
 			<key>ypos</key>
