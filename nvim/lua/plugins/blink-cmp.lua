@@ -33,6 +33,7 @@ return {
 						get_command = function(_, prefix)
 							return {
 								"rg",
+								"--no-config",
 								"--json",
 								"--smart-case",
 								"--word-regexp",
