@@ -31,9 +31,6 @@ local lspToMasonMap = {
 ---@module "lspconfig"
 ---@type table<string, lspconfig.Config>
 M.serverConfigs = {}
-for lspName, _ in pairs(lspToMasonMap) do
-	M.serverConfigs[lspName] = {}
-end
 
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
@@ -43,9 +40,7 @@ local extraDependencies = {
 	"markdownlint", -- efm
 }
 
--- INFO To have the mason-module access this, we cannot return this table, since
--- `lazy.nvim` uses the return values for the plugin spec. Thus we save it in a
--- global variable, so the mason-module can access it.
+-- for auto-installation via `mason-tool-installer`
 M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
@@ -118,26 +113,6 @@ M.serverConfigs.efm = {
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
 }
---------------------------------------------------------------------------------
--- BASICS
-
--- DOCS https://github.com/antonk52/basics-language-server#settings
--- PENDING nvim 0.11
--- M.serverConfigs.basics_ls = {
--- 	settings = {
--- 		buffer = {
--- 			enable = true,
--- 			minCompletionLength = 4, -- only provide completions for words longer than 4 characters
--- 		},
--- 		path = {
--- 			enable = true,
--- 		},
--- 		snippet = {
--- 			enable = true,
--- 			sources = { vim.fn.stdpath("config") .. "/snippets" },
--- 		},
--- 	},
--- }
 
 --------------------------------------------------------------------------------
 -- LUA
