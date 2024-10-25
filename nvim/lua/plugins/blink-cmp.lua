@@ -7,7 +7,7 @@ return {
 	opts = {
 		sources = {
 			completion = {
-				enabled_providers = { "lsp", "path", "snippets", "buffer", "rg" },
+				enabled_providers = { "lsp", "path", "snippets", "buffer", "ripgrep" },
 			},
 			providers = {
 				snippets = {
@@ -23,10 +23,24 @@ return {
 					min_keyword_length = 4,
 					score_offset = -3,
 				},
-				rg = {
+				ripgrep = {
 					module = "blink-cmp-rg",
-					name = "Rg",
-					opts = { prefix_min_len = 3 },
+					name = "Ripgrep",
+					max_items = 3,
+					min_keyword_length = 4,
+					score_offset = -5,
+					opts = {
+						get_command = function(_, prefix)
+							return {
+								"rg",
+								"--json",
+								"--smart-case",
+								"--word-regexp",
+								"--",
+								prefix .. "[\\w_-]+",
+							}
+						end,
+					},
 				},
 			},
 		},
@@ -66,18 +80,18 @@ return {
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
 					-- differentiate LSP snippets from user snippets and emmet snippets
-					local icon, source = ctx.kind_icon, ctx.item.source_id
+					local source = ctx.item.source_id
 					local client = ctx.item.client_id
 						and vim.lsp.get_client_by_id(ctx.item.client_id).name
-					if source == "snippets" or (client == "basics_ls" and ctx.kind == "Snippet") then
-						icon = "󰩫"
-					elseif source == "buffer" or (client == "basics_ls" and ctx.kind == "Text") then
-						icon = "󰦨"
-					elseif source == "rg" then
-						icon = "󰚌"
-					elseif client == "emmet_language_server" then
-						icon = "󰯸"
-					end
+					if client == "emmet_language_server" then source = "emmet" end
+
+					local sourceIcons = {
+						snippets = "󰩫",
+						emmet = "󰯸",
+						buffer = "󰦨",
+						ripgrep = "󰚌",
+					}
+					local icon = sourceIcons[source] or ctx.kind_icon
 
 					-- FIX highlight for Tokyonight
 					local iconHl = vim.g.colors_name:find("tokyonight") and "BlinkCmpKind"
