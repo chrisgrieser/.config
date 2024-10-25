@@ -60,12 +60,6 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
 end
 
-local function codeContext()
-	local statusline = require("nvim-treesitter").statusline()
-	return statusline
-end
-
-
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
@@ -90,9 +84,6 @@ local lualineConfig = {
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 				padding = { left = 0, right = 1 },
 			},
-		},
-		lualine_b = {
-			{ codeContext },
 		},
 		lualine_c = {
 			-- HACK spacer so the tabline is never empty
@@ -176,7 +167,6 @@ vim.g.lualine_add = function(whichBar, whichSection, component, whereInSection)
 	-- Theming needs to be re-applied, since the lualine-styling can change
 	require("config.theme-customization").themeModifications()
 end
-
 
 --------------------------------------------------------------------------------
 
