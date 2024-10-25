@@ -57,7 +57,7 @@ if not env.isAtOffice then
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
 			if #hs.screen.allScreens() < 2 then return end
-			M.iMacDisplay:setBrightness(0)
+			wu.iMacDisplay:setBrightness(0)
 			local projectorScreen = hs.screen.primaryScreen()
 			for _, win in pairs(hs.window:orderedWindows()) do
 				win:moveToScreen(projectorScreen, true)
