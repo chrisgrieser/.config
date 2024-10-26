@@ -6,17 +6,21 @@ local M = {}
 
 --- open the current workflow for the Alfred app
 function M.openAlfredPref()
+	if jit.os ~= "OSX" then
+		vim.notify("Not on macOS.", vim.log.levels.WARN)
+		return
+	end
 	local bufPath = vim.api.nvim_buf_get_name(0)
-	local workflowId = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
-	if not workflowId then
+	local workflowUid = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
+	if not workflowUid then
 		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
 		return
 	end
-	-- using JXA and URI for redundancy, as both are not 100% reliable
+	-- redundancy: using JXA and URI, as both are not 100% reliable
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowId .. ")"
+	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowUid .. ")"
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
-	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowId
+	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowUid
 	vim.ui.open(uri)
 end
 
@@ -100,7 +104,7 @@ function M.startOrStopRecording(toggleKey, reg)
 		end
 	end
 	-- sound if on macOS
-	if vim.uv.os_uname().sysname == "Darwin" then
+	if jit.os == "OSX" then
 		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 			.. (notRecording and "begin_record.caf" or "end_record.caf")
 		vim.system { "afplay", sound }

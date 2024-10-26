@@ -23,11 +23,12 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
--- once a week, on first `FocusLost`, delete older files
+-- * Once a week, on first `FocusLost`, delete older files. 
+-- * Requires unix system.
 vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
-		if os.date("%a") ~= "Mon" then return end
+		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
 		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+30d", "-delete" }
 		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+14d", "-delete" }
 		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
@@ -64,7 +65,7 @@ local autoCdConfig = {
 		".git",
 		"Justfile",
 		"info.plist", -- Alfred workflows
-		"biome.jsonc", 
+		"biome.jsonc",
 	},
 	parentOfRoot = {
 		".config",
