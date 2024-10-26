@@ -177,13 +177,11 @@ function gu {
 	open "$url"
 }
 
-# CAVEAT date calculation is off, since time zones are not correctly handled
 function my_commits_today {
 	local username the_day commits count
 	username=$(gh api user --jq='.login')
 	if [[ -z "$1" ]]; then the_day="$(date '+%Y-%m-%d')"; else the_day="$(date -v "-${1}d" '+%Y-%m-%d')"; fi
 
-	# shellcheck disable=2016
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
 		yq --prettyPrint '.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
