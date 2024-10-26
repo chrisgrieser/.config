@@ -342,11 +342,9 @@ function gdf {
 		echo "File restored."
 		open -R "$deleted_path" # reveal in macOS Finder
 	elif [[ "$decision" =~ show ]]; then
-		# show
 		ext=${deleted_path##*.}
 		git show "$last_commit:$deleted_path" | bat --language="$ext" ||
 			git show "$last_commit:$deleted_path" | bat # unknown extension
-		# copy
 		git show "$last_commit:$deleted_path" | pbcopy
 	elif [[ "$decision" =~ checkout ]]; then
 		git checkout "$last_commit"
