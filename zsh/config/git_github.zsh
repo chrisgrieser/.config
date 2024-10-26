@@ -296,7 +296,6 @@ function pickaxe {
 function gdf {
 	# GUARD
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
-	if ! command -v bat &> /dev/null; then echo "bat not installed." && return 1; fi
 	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 
 	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
@@ -326,10 +325,10 @@ function gdf {
 	echo
 
 	# decision on how to act on file
-	choices="restore file\nshow file (bat) & copy\ncheckout commit"
-	decision=$(echo "$choices" |
-		fzf --bind="j:down,k:up" --no-sort --no-info --height="6" \
-			--layout=reverse-list --header="j:↓  k:↑")
+	echo "[r]estore file"
+	echo "[s]how file (bat) & copy" 
+	echo "[c]heckout commit"
+	read -r decision
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."

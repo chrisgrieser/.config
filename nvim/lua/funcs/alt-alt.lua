@@ -39,18 +39,12 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.closeWindowOrBuffer()
-	vim.cmd("silent! update")
-	local winClosed = pcall(vim.cmd.close)
-	if winClosed then return end
-
+function M.closeBuffer()
+	-- close buffer, and move to the alt-oldfile if it was the last buffer
+	local altOld = altOldfile()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	if #openBuffers < 2 then
-		vim.notify("Only one buffer open.")
-		return
-	end
-
 	vim.cmd.bdelete()
+	if #openBuffers == 1 and altOld then vim.cmd.edit(altOld) end
 
 	-- prevent alt-buffer pointing to deleted buffer
 	-- (Using `:bwipeout` prevents this, but would also removes the file from the
@@ -58,10 +52,12 @@ function M.closeWindowOrBuffer()
 	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
 	if not altFileOpen then
 		table.sort(openBuffers, function(a, b) return a.lastused > b.lastused end)
-		if not openBuffers[3] then return end
-		local newAltFile = openBuffers[3].name -- 1st = closed buffer, 2nd = new current buffer
-		vim.fn.setreg("#", newAltFile)
+		if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
+			local newAltFile = openBuffers[3].name
+			vim.fn.setreg("#", newAltFile)
+		end
 	end
+
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
@@ -105,18 +101,19 @@ end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltBuffer()
-	if vim.bo.buftype ~= "" then return end -- deactivate if in a special buffer
-
-	if hasAltFile() then
-		vim.cmd.buffer("#")
+	if vim.bo.buftype ~= "" then 
+		vim.notify("Cannot use since in special buffer", vim.log.levels.WARN, { title = "Alt-alt" })
 		return
 	end
 	local altOld = altOldfile()
-	if altOld then
+
+	if hasAltFile() then
+		vim.cmd.buffer("#")
+	elseif altOld then
 		vim.cmd.edit(altOld)
-		return
+	else
+		vim.notify("No Alt-file or Oldfile available.", vim.log.levels.WARN, { title = "Alt-alt" })
 	end
-	vim.notify("No Alt-file or Oldfile available.", vim.log.levels.WARN, { title = "Alt-alt" })
 end
 
 --------------------------------------------------------------------------------

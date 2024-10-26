@@ -247,12 +247,11 @@ keymap(
 	{ desc = "󰊢 Goto Changed File" }
 )
 
-keymap(
-	{ "n", "x", "i" },
-	"<D-w>",
-	function() require("funcs.alt-alt").closeWindowOrBuffer() end,
-	{ desc = "󰽙 Close window/buffer" }
-)
+-- close window or buffer
+keymap({ "n", "x", "i" }, "<D-w>", function()
+	local winClosed = pcall(vim.cmd.close)
+	if not winClosed then require("funcs.alt-alt").closeBuffer() end
+end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
 	local extensions = { "sh", "json", "mjs", "md", "py", "css" }
