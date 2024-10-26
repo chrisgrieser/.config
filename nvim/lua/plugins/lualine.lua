@@ -80,9 +80,11 @@ local function codeContext()
 		transform_fn = function(line)
 			return line
 				:gsub("^local ?", "")
-				:gsub("^function ?", "")
+				:gsub("^function", "")
+				:gsub("%(%)$", "")
 				:gsub(" ?[{}] ?$", "")
 				:gsub(" ?%=.-$", "")
+				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 		end,
 	}
 	if not statusline then return "" end
@@ -127,7 +129,7 @@ local lualineConfig = {
 			{ -- recording status
 				function() return "雷Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = function() return "DiagnosticError" end,
+				color = "DiagnosticError",
 			},
 		},
 	},
