@@ -1,16 +1,13 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
-const obsidian = require("obsidian");
-
-//──────────────────────────────────────────────────────────────────────────────
-
 // CONFIG
 const opacity = {
 	light: 0.93,
-
 	dark: 0.9,
 };
 
 //──────────────────────────────────────────────────────────────────────────────
+
+const obsidian = require("obsidian");
 
 class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	activeFileDir = this.app.workspace.getActiveFile()?.path.replace(/\/[^/]+$/, "");
