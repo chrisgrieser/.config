@@ -124,7 +124,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 
 		this.app.workspace.onLayoutReady(() => {
 			// URI to reload a plugin
-			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
+			this.registerObsidianProtocolHandler("reload-plugin", (uriParams) => {
 				const pluginId = uriParams?.id;
 				if (!pluginId) {
 					new Notice("No plugin ID provided.");

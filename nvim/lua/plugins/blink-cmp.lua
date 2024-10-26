@@ -88,7 +88,7 @@ return {
 			Constructor = "",
 			Field = "󰇽",
 			Variable = "󰂡",
-			Class = "⬟",
+			Class = "󰜁",
 			Interface = "",
 			Module = "",
 			Property = "󰜢",
