@@ -65,30 +65,26 @@ local function codeContext()
 	local maxLen = 80 --CONFIG
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
-	local statusline = treesitter.statusline {
+	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
 		separator = "  ",
-		type_patterns = {
-			"class",
-			"function",
-			"method",
-			"object",
-			"array",
-			"field",
-			"pair", -- for yaml/json
-		},
+		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
 		transform_fn = function(line)
 			return line
-				:gsub("^local ?", "") -- lua vars
-				:gsub("^function (.*)%(%)$", " %1") -- functions
-				:gsub(" ?[{}] ?$", "")
+				:gsub("^%(.*%) =>", "()") -- js/ts: anonymous arrow function
 				:gsub(" ?[=:].-$", "") -- remove values
+				:gsub("^local ", "") -- lua: vars
+				:gsub("^async ", "") -- js/ts
+				:gsub("^class", "󰜁")
+				:gsub(" ?extends .-$", "") -- ts classes
+				:gsub("function", "")
+				:gsub(" ?[{}] ?$", "")
 				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 		end,
 	}
-	if not statusline then return "" end
-	if #statusline > maxLen then return statusline:sub(1, maxLen - 1) .. "…" end
-	return statusline
+	if not text then return "" end
+	if vim.str_utfindex(text) > maxLen then return text:sub(1, maxLen - 1) .. "…" end
+	return text
 end
 
 --------------------------------------------------------------------------------
@@ -171,7 +167,11 @@ local lualineConfig = {
 			},
 		},
 		lualine_z = {
-			{ "selectioncount", fmt = function(str) return str ~= "" and "礪" .. str or "" end },
+			{
+				"selectioncount",
+				cond = function() return vim.fn.mode():find("[Vv]") ~= nil end,
+				fmt = function(str) return "礪" .. str end,
+			},
 			{ "location" },
 		},
 	},
