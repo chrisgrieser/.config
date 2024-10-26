@@ -292,29 +292,32 @@ function pickaxe {
 	git log -G"$1" --regexp-ignore-case
 }
 
+#───────────────────────────────────────────────────────────────────────────────
+
 # search for [g]it [d]eleted [f]ile
 function gdf {
-	# GUARD
+	local search="$1"
+	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
-	[[ -z $1 ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 
-	builtin cd -q "$(git rev-parse --show-toplevel)" || return 1
+	# BUG check for accumulating zsh processes
+	trap "print 'INFO' ; ps aux | grep zsh" EXIT
+
 	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then
 		print "\e[1;33mUnshallowing repo…\e[0m"
-		unshallow
-		echo
+		unshallow && echo
 	fi
 
 	local deleted_path deletion_commit last_commit
-	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$*")
+	deleted_path=$(git --no-pager log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
 
 	if [[ -z "$deleted_path" ]]; then
-		print "\e[1;31mNo deleted file found with \e[1;33m$*\\e[0m"
+		print "\e[1;31mNo deleted file found with \e[1;33m$search\\e[0m"
 		return 1
 	elif [[ $(echo "$deleted_path" | wc -l) -gt 1 ]]; then
 		print "\e[1;34mMultiple files found.\e[0m"
 		selection=$(echo "$deleted_path" | fzf --height=60%)
-		[[ -z "$selection" ]] && return 0
+		[[ -z "$selection" ]] && return 127
 		deleted_path="$selection"
 	fi
 
@@ -325,10 +328,8 @@ function gdf {
 	echo
 
 	# decision on how to act on file
-	echo "[r]estore file"
-	echo "[s]how file (bat) & copy" 
-	echo "[c]heckout commit"
-	read -r decision
+	choices="restore file\nshow file (bat) & copy\ncheckout commit"
+	decision=$(echo "$choices" | fzf --no-sort --no-info --height="6" --layout=reverse-list)
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."

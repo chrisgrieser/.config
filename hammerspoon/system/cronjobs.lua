@@ -119,26 +119,4 @@ M.timer_sleepAutoVideoOff = hs.timer
 	:start()
 
 --------------------------------------------------------------------------------
-
--- DETECT ACCUMULATING `-zsh` PROCESSES
--- hopefully helps in finding what causes zsh-processes to sometimes accumulate
-local aw = hs.application.watcher
-M.aw_zsh_counter = aw.new(function(_, eventType, _)
-	-- CONFIG
-	local minCount = 2
-	local processName = "-zsh"
-
-	if eventType == aw.activated then
-		hs.task
-			.new("/usr/bin/pgrep", function(_, stdout, _)
-				local _, count = stdout:gsub("%d+", "")
-				if count > minCount then
-					u.notify(("%d %q processes running"):format(count, processName))
-				end
-			end, { "--", processName })
-			:start()
-	end
-end):start()
-
---------------------------------------------------------------------------------
 return M
