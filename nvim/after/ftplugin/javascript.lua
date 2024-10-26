@@ -16,11 +16,10 @@ abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
-bkeymap({ "n", "x" }, "<D-s>", function ()
-	vim.cmd.mkview(2)
+bkeymap({ "n", "x" }, "<D-s>", function()
 	vim.lsp.buf.format()
-	pcall(vim.cmd.loadview, 2) -- pcall, since new files have no viewfile
-	vim.notify("🖨️ 🔵")
+	-- FIX manually close folds PENDING https://github.com/biomejs/biome/issues/4393
+	vim.defer_fn(function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, 200)
 end, { desc = "󰒕 LSP Format & preserve folds" })
 
 bkeymap("n", "<leader>ft", function()
@@ -53,4 +52,3 @@ bkeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.inner") -- reselect for easier pasting
 	require("rip-substitute.open-at-regex101").open(data)
 end, { desc = " Open in regex101" })
-

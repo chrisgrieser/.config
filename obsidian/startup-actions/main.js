@@ -15,9 +15,6 @@ const opacity = {
 class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	activeFileDir = this.app.workspace.getActiveFile()?.path.replace(/\/[^/]+$/, "");
 
-
-
-
 	constructor(app) {
 		super(app);
 		this.setPlaceholder("Select folder to create new file in…");
