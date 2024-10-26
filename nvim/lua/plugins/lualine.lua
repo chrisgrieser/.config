@@ -67,18 +67,19 @@ local function codeContext()
 	if not ok then return "" end
 	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
-		separator = "  ",
+		separator = "  ", -- 
 		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
 		transform_fn = function(line)
 			return line
+				:gsub("^async ", "") -- js/ts
+				:gsub("^local ", "") -- lua: vars
+				:gsub("^class", "󰜁")
+				:gsub(" ?[{}] ?$", "")
 				:gsub("^%(.*%) =>", "()") -- js/ts: anonymous arrow function
 				:gsub(" ?[=:].-$", "") -- remove values
-				:gsub("^local ", "") -- lua: vars
-				:gsub("^async ", "") -- js/ts
-				:gsub("^class", "󰜁")
-				:gsub(" ?extends .-$", "") -- ts classes
-				:gsub("function", "")
-				:gsub(" ?[{}] ?$", "")
+				:gsub(" extends .-$", "") -- ts classes
+				:gsub("(%w)%(%)$", "%1") -- remove empty `()`
+				:gsub("^function", "")
 				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 		end,
 	}

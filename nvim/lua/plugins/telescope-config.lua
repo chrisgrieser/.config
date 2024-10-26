@@ -335,14 +335,9 @@ return {
 					-- ignore current file, since using the `rg` workaround puts it on top
 					local ignorePattern =
 						vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
-					local cwd = vim.uv.cwd()
-					if cwd then
-						local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
-						table.insert(ignorePattern, relPathCurrent)
-					else
-						vim.notify("No cwd.", vim.log.levels.WARN)
-						return
-					end
+					local cwd = vim.uv.cwd() or ""
+					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
+					table.insert(ignorePattern, relPathCurrent)
 
 					-- add git info to file
 					local changedFilesInCwd = {}
