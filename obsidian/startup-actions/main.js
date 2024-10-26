@@ -6,6 +6,7 @@ const obsidian = require("obsidian");
 // CONFIG
 const opacity = {
 	light: 0.93,
+
 	dark: 0.9,
 };
 
@@ -13,6 +14,9 @@ const opacity = {
 
 class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	activeFileDir = this.app.workspace.getActiveFile()?.path.replace(/\/[^/]+$/, "");
+
+
+
 
 	constructor(app) {
 		super(app);

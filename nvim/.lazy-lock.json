@@ -18,7 +18,7 @@
   "noice.nvim": { "branch": "main", "commit": "df448c649ef6bc5a6a633a44f2ad0ed8d4442499" },
   "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
   "nvim-chainsaw": { "branch": "main", "commit": "2af4925afab2591bccb4118475dabfee49744311" },
-  "nvim-genghis": { "branch": "main", "commit": "ed3c34d1e4dec2d62370a3a1b84c64a4d4d9b28f" },
+  "nvim-genghis": { "branch": "main", "commit": "e04857f2905c07e70d366f30beb0e2765dbe9413" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "391ef40521b631a8a2fb7aef78db6967ead6b39d" },
   "nvim-lspconfig": { "branch": "master", "commit": "28b205ebe73a18f401e040585106f9bafd8ff21f" },
   "nvim-notify": { "branch": "master", "commit": "fbef5d32be8466dd76544a257d3f3dce20082a07" },

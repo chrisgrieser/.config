@@ -16,6 +16,13 @@ abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
+bkeymap({ "n", "x" }, "<D-s>", function ()
+	vim.cmd.mkview(2)
+	vim.lsp.buf.format()
+	pcall(vim.cmd.loadview, 2) -- pcall, since new files have no viewfile
+	vim.notify("🖨️ 🔵")
+end, { desc = "󰒕 LSP Format & preserve folds" })
+
 bkeymap("n", "<leader>ft", function()
 	vim.lsp.buf.code_action {
 		filter = function(a) return a.title == "Convert to template string" end,
