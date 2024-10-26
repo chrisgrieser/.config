@@ -300,8 +300,8 @@ function gdf {
 	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
 
-	# BUG check for accumulating zsh processes
-	trap "print 'INFO' ; ps aux | grep zsh" EXIT
+	# TEST check for accumulating zsh processes
+	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
 
 	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then
 		print "\e[1;33mUnshallowing repo…\e[0m"
@@ -309,7 +309,11 @@ function gdf {
 	fi
 
 	local deleted_path deletion_commit last_commit
-	deleted_path=$(git --no-pager log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
+	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
+
+	# FIX for whatever reason, without this, a lot of `zsh` processes all taking
+	# lots of CPU are accumulating
+	sleep 1 
 
 	if [[ -z "$deleted_path" ]]; then
 		print "\e[1;31mNo deleted file found with \e[1;33m$search\\e[0m"
@@ -329,7 +333,7 @@ function gdf {
 
 	# decision on how to act on file
 	choices="restore file\nshow file (bat) & copy\ncheckout commit"
-	decision=$(echo "$choices" | fzf --no-sort --no-info --height="6" --layout=reverse-list)
+	decision=$(echo "$choices" | fzf --no-sort --no-info --height=5 --layout=reverse-list)
 
 	if [[ -z "$decision" ]]; then
 		echo "Aborted."
