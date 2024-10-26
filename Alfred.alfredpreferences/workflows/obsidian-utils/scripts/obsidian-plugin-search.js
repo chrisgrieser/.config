@@ -20,7 +20,8 @@ function httpRequest(url) {
 
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
+/**
+ * @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const baseUrl = "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/";

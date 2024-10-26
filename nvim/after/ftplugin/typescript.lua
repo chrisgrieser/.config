@@ -14,16 +14,16 @@ bkeymap("n", "<D-s>", function()
 		"source.removeUnusedImports.ts",
 		"source.organizeImports.biome",
 	}
-	for i = 1, #actions + 1 do
+	for i = 1, #actions do
 		vim.defer_fn(function()
-			if i <= #actions then
-				vim.lsp.buf.code_action {
-					context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
-					apply = true,
-				}
-			else
-				vim.lsp.buf.format()
-			end
+			vim.lsp.buf.code_action {
+				context = { only = { actions[i] } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+				apply = true,
+			}
 		end, i * 60)
 	end
+	vim.defer_fn(vim.lsp.buf.format, 1)
+	
+				-- FIX manually close folds PENDING https://github.com/biomejs/biome/issues/4393
+				require("ufo").openFoldsExceptKinds { "comment", "imports" }
 end, { desc = "󰛦 Organize Imports & Format" })
