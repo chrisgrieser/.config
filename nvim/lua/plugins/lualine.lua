@@ -61,9 +61,12 @@ local function newlineCharIfNotUnix()
 end
 
 local function codeContext()
-	local maxLen = 120 --CONFIG
-	local statusline = require("nvim-treesitter").statusline {
-		indicator_size = math.huge,
+	local maxLen = 75 --CONFIG
+	local ok, treesitter = pcall(require, "nvim-treesitter")
+	if not ok then return "" end
+	local statusline = treesitter.statusline {
+		indicator_size = math.huge, -- shortening ourselves later
+		separator = "  ",
 		type_patterns = {
 			"class",
 			"function",
@@ -74,15 +77,15 @@ local function codeContext()
 			"variable",
 			"constant",
 		},
-		separator = "  ",
 		transform_fn = function(line)
 			return line
 				:gsub("^local ?", "")
 				:gsub("^function ?", "")
-				:gsub(" ?[{] ?$", "")
+				:gsub(" ?[{}] ?$", "")
 				:gsub(" ?%=.-$", "")
 		end,
 	}
+	if not statusline then return "" end
 	if #statusline > maxLen then return statusline:sub(1, 119) .. "…" end
 	return statusline
 end

@@ -243,7 +243,7 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
-	function() require("funcs.magnet").gotoChangedFiles() end,
+	function() require("funcs.magnet").gotoMostChangedFile() end,
 	{ desc = "󰊢 Goto Changed File" }
 )
 
