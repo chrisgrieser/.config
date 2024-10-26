@@ -114,8 +114,8 @@ end
 --------------------------------------------------------------------------------
 
 -- Increment or toggle if cursorword is true/false.
--- (Simplified implementation of dial.nvim.)
--- REQUIRED `expr = true`
+-- * Simplified implementation of dial.nvim.
+-- * REQUIRED `expr = true` for the keybinding
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
@@ -132,6 +132,7 @@ function M.toggleOrIncrement()
 	return "<C-a>"
 end
 
+-- Simplified implementation of coerce.nvim
 function M.camelSnakeToggle()
 	local cword = vim.fn.expand("<cword>")
 	local newWord
@@ -152,7 +153,6 @@ function M.camelSnakeToggle()
 	local start, ending
 	while true do
 		start, ending = line:find(cword, ending or 0, true)
-		assert(start, "cword not found in line")
 		if start <= col and ending >= col then break end
 	end
 	local newLine = line:sub(1, start - 1) .. newWord .. line:sub(ending + 1)
@@ -197,10 +197,10 @@ function M.gotoMostChangedFile()
 	local targetFile
 	local mostChanges = 0
 	vim.iter(changedFiles):each(function(line)
-		local added, deleted, file = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not (added and deleted and file) then return end -- exclude changed binaries
+		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if not (added and deleted and relPath) then return end -- exclude changed binaries
 
-		local absPath = vim.fs.normalize(gitroot .. "/" .. file)
+		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
 		if not vim.uv.fs_stat(absPath) then return end
 
 		local changes = tonumber(added) + tonumber(deleted)
