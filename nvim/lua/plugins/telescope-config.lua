@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function() vim.opt_local.sidescrolloff = 1 end,
 })
 
-require("funcs.telescope-backdrop").setup()
+require("funcs.telescope-backdrop")
 
 --------------------------------------------------------------------------------
 

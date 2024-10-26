@@ -139,7 +139,7 @@ function M.camelSnakeToggle()
 	elseif cword:find(camelPattern) then
 		newWord = cword:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2:lower() end)
 	else
-		vim.notify("Neither a snake_case nor camelCase")
+		vim.notify("Neither a snake_case nor camelCase", vim.log.levels.WARN)
 		return
 	end
 
