@@ -60,8 +60,9 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
 end
 
+-- Simplified version of `nvim-treesitter-context`
 local function codeContext()
-	local maxLen = 75 --CONFIG
+	local maxLen = 80 --CONFIG
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
 	local statusline = treesitter.statusline {
@@ -72,23 +73,21 @@ local function codeContext()
 			"function",
 			"method",
 			"object",
-			"field",
 			"array",
-			"variable",
-			"constant",
+			"field",
+			"pair", -- for yaml/json
 		},
 		transform_fn = function(line)
 			return line
-				:gsub("^local ?", "")
-				:gsub("^function", "")
-				:gsub("%(%)$", "")
+				:gsub("^local ?", "") -- lua vars
+				:gsub("^function (.*)%(%)$", " %1") -- functions
 				:gsub(" ?[{}] ?$", "")
-				:gsub(" ?%=.-$", "")
+				:gsub(" ?[=:].-$", "") -- remove values
 				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 		end,
 	}
 	if not statusline then return "" end
-	if #statusline > maxLen then return statusline:sub(1, 119) .. "…" end
+	if #statusline > maxLen then return statusline:sub(1, maxLen - 1) .. "…" end
 	return statusline
 end
 
@@ -98,7 +97,7 @@ local lualineConfig = {
 	options = {
 		globalstatus = true,
 		always_divide_middle = false,
-		section_separators = { left = "", right = "" }, -- nerdfont-powerline icons prefix: `ple-`
+		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 		-- stylua: ignore
 		ignore_focus = {
