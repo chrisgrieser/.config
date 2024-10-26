@@ -102,7 +102,7 @@ function run() {
 					? aliases
 					: aliases.map((a) => (a.length > aliasMaxLen ? a.slice(0, aliasMaxLen) + "…" : a));
 			const subtitle =
-				"▸ " + parent + (aliases.length > 0 ? "      🅐  " + shortAliases.join(", ") : "");
+				"▸ " + parent + (aliases.length > 0 ? "      ↪ " + shortAliases.join(", ") : "");
 
 			// icons
 			let icons = "";
