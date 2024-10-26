@@ -46,6 +46,11 @@ local function customHighlights()
 
 	-- emphasized `return`
 	updateHl("@keyword.return", "gui=bold")
+
+	-- LSP cursorword
+	setHl("LspReferenceWrite", { underdashed = true }) -- definition
+	setHl("LspReferenceRead", { underdotted = true }) -- reference
+	setHl("LspReferenceText", {}) -- too much noise, as it underlines e.g. strings
 end
 
 function M.themeModifications()
@@ -162,8 +167,10 @@ local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
-	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)
+	updateHl("@markup.link.url.markdown_inline", "gui=" .. change) -- ffff
 	updateHl("Underlined", "gui=" .. change)
+	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" }) -- definition
+	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" }) 
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),

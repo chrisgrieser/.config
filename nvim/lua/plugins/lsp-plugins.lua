@@ -14,62 +14,10 @@ return {
 			library = {
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
-			integrations = { cmp = false }, -- prevents loading cmp
 		},
 	},
-	-- `vim.uv` typings (not as dependency, since it never needs to be loaded)
-	{ "Bilal2453/luvit-meta", lazy = true },
+	{ "Bilal2453/luvit-meta", lazy = true }, -- not as dependency, since never needs to be loaded
 	-----------------------------------------------------------------------------
-	{ -- breadcrumbs for tabline
-		"SmiteshP/nvim-navic",
-		event = "LspAttach",
-		opts = {
-			lazy_update_context = false,
-			lsp = {
-				auto_attach = true,
-				preference = { "basedpyright", "tsserver", "marksman", "cssls" },
-			},
-			icons = { Object = "⬟ " },
-			separator = " ",
-			depth_limit = 7,
-			depth_limit_indicator = "…",
-		},
-		config = function(_, opts)
-			vim.g.navic_silence = false
-			require("nvim-navic").setup(opts)
-
-			vim.g.lualine_add("tabline", "lualine_b", { "navic" })
-		end,
-		keys = {
-			{ -- copy breadcrumbs
-				"<D-b>",
-				function()
-					local rawdata = require("nvim-navic").get_data()
-					if not rawdata then return end
-					local breadcrumbs = ""
-					for _, v in pairs(rawdata) do
-						breadcrumbs = breadcrumbs .. v.name .. "."
-					end
-					breadcrumbs = breadcrumbs:sub(1, -2):gsub(".%[", "[")
-					vim.fn.setreg("+", breadcrumbs)
-					vim.notify(breadcrumbs, nil, { title = "Copied" })
-				end,
-				desc = "󰒕 Copy Breadcrumbs",
-			},
-			{ -- go up to parent
-				"gk",
-				function()
-					local symbolPath = require("nvim-navic").get_data()
-					if not symbolPath then return end
-					local parent = symbolPath[#symbolPath - 1]
-					if not parent then return end
-					local pos = parent.scope.start
-					vim.api.nvim_win_set_cursor(0, { pos.line, pos.character })
-				end,
-				desc = "󰒕 Go up to parent",
-			},
-		},
-	},
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
 		event = "BufReadPre",
@@ -106,32 +54,16 @@ return {
 			end,
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 			kinds = {
+				vim.lsp.protocol.SymbolKind.Module,
 				vim.lsp.protocol.SymbolKind.Function,
 				vim.lsp.protocol.SymbolKind.Method,
 				vim.lsp.protocol.SymbolKind.Class,
 				vim.lsp.protocol.SymbolKind.Interface,
-				vim.lsp.protocol.SymbolKind.Constructor,
+				vim.lsp.protocol.SymbolKind.Variable,
+				vim.lsp.protocol.SymbolKind.Object,
+				vim.lsp.protocol.SymbolKind.Constant,
 			},
 		},
-	},
-	{ -- lsp definitions & references count in the status line
-		"chrisgrieser/nvim-dr-lsp",
-		event = "LspAttach",
-		opts = {},
-		config = function(_, opts)
-			vim.opt.updatetime = 250 -- time for `CursorHold` event
-
-			require("dr-lsp").setup(opts)
-
-			vim.g.lualine_add("sections", "lualine_c", {
-				require("dr-lsp").lspCount,
-				fmt = function(str) return str:gsub("R", ""):gsub("D", " 󰄾"):gsub("LSP:", "󰈿") end,
-				cond = function() -- only if quickfix list is empty
-					local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
-					return #qf.items == 0
-				end,
-			})
-		end,
 	},
 	{ -- add ignore-comments & lookup rules
 		"chrisgrieser/nvim-rulebook",

@@ -28,6 +28,38 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 --------------------------------------------------------------------------------
 
+-- HIGHLIGHT CURSORWORD
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ctx)
+		local capabilities = vim.lsp.get_client_by_id(ctx.data.client_id).server_capabilities or {}
+		if not capabilities.documentHighlightProvider then return end
+		local group = vim.api.nvim_create_augroup("lsp-highlight", {})
+
+		vim.api.nvim_create_autocmd("CursorHold", {
+			buffer = ctx.buf,
+			group = group,
+			callback = vim.lsp.buf.document_highlight,
+		})
+
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			buffer = ctx.buf,
+			group = group,
+			callback = vim.lsp.buf.clear_references,
+		})
+
+		-- relevant for restarting LSP
+		vim.api.nvim_create_autocmd("LspDetach", {
+			group = vim.api.nvim_create_augroup("lsp-highlight-detach", {}),
+			callback = function(ctx2)
+				vim.lsp.buf.clear_references()
+				vim.api.nvim_clear_autocmds { group = "lsp-highlight", buffer = ctx2.buf }
+			end,
+		})
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- pause inlay hints in insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
@@ -47,9 +79,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 --------------------------------------------------------------------------------
 
--- :LspCapabilities
--- no arg: all LSPs attached to current buffer
--- one arg: name of the LSP
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local client = vim.lsp.get_clients({ name = ctx.args })[1]
 	local newBuf = vim.api.nvim_create_buf(true, true)
