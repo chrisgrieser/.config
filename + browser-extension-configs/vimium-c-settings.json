@@ -1,17 +1,17 @@
 {
 	"name": "Vimium C",
-	"@time": "10/9/2024, 12:19:40 PM",
-	"time": 1728469180718,
+	"@time": "10/26/2024, 3:01:14 AM",
+	"time": 1729904474567,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
-		"chromium": 128
+		"chromium": 130
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "N f i ",
+			"passKeys": "0 N f ",
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
@@ -45,6 +45,10 @@
 		{
 			"passKeys": "1 ? a g ",
 			"pattern": ":https://www.inoreader.com/"
+		},
+		{
+			"passKeys": "s ",
+			"pattern": ":https://www.netflix.com/"
 		}
 	],
 	"extAllowList": [
@@ -76,12 +80,11 @@
 		"",
 		"unmapAll",
 		"",
-		"\" Help",
+		"\" Meta",
 		"map ? showHelp",
 		"map g, focusOrLaunch url=\"chrome-extension://hfjbmagddngcpeloejdejnfgbamkjaeg/pages/options.html\"",
 		"",
 		"\" Modes",
-		"map <esc> blank",
 		"map i passNextKey",
 		"map I enterInsertMode",
 		"map gi focusInput select=\"end\"",
@@ -108,7 +111,6 @@
 		"map e closeTabsOnRight",
 		"map m removeTab mayClose",
 		"map u restoreTab",
-		"map yt duplicateTab",
 		"",
 		"\" wasd",
 		"map a previousTab",
@@ -160,12 +162,12 @@
 		"map ym copyCurrentUrl format=\"[${title}](${url})\"",
 		"",
 		"\" copy links of all tabs",
-		"map yw copyWindowInfo format=\"-\\u0020${url}\"",
-		"map ya copyWindowInfo format=\"${title}\\u0020-\\u0020${url}\"",
+		"map yw copyWindowInfo format=\"${url}\"",
+		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
 		""
 	],
 	"regexFindMode": true,
-	"scrollStepSize": 300,
+	"scrollStepSize": 250,
 	"searchEngines": "g https://www.google.com/search?q=%s",
 	"userDefinedCss": [
 		".HUD { ",
@@ -179,6 +181,8 @@
 		"}",
 		""
 	],
+	"vimSync": true,
+	"waitForEnter": false,
 	"ignoreKeyboardLayout": 1,
 	"ignoreCapsLock": 2,
 	"mapModifier": 2
