@@ -174,4 +174,44 @@ function M.toggleWordCasing()
 end
 
 --------------------------------------------------------------------------------
+
+function M.gotoMostChangedFile()
+	-- get list of changed files
+	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
+	if gitResponse.code ~= 0 then
+		vim.notify("Not in git repo.", vim.log.levels.WARN)
+		return
+	end
+	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
+	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
+	if #changedFiles == 0 then
+		vim.notify("No changes found.")
+		return
+	end
+
+	-- identify most changed file
+	local targetFile
+	local mostChanges = 0
+	vim.iter(changedFiles):each(function(line)
+		local added, deleted, file = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if not (added and deleted and file) then return end -- exclude changed binaries
+
+		local absPath = vim.fs.normalize(gitroot .. "/" .. file)
+		if not vim.uv.fs_stat(absPath) then return end
+
+		local changes = tonumber(added) + tonumber(deleted)
+		if changes > mostChanges then
+			mostChanges = changes
+			targetFile = absPath
+		end
+	end)
+
+	-- open
+	if targetFile == vim.api.nvim_buf_get_name(0) then
+		vim.notify("Already at only changed file.")
+	else
+		vim.cmd.edit(targetFile)
+	end
+end
+--------------------------------------------------------------------------------
 return M

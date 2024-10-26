@@ -3,13 +3,13 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
-	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
+	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
 }
 
 local darkThemes = {
-	-- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
 	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	-- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
 	-- { "0xstepit/flow.nvim", opts = { mode = "bright" } },
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
@@ -43,8 +43,10 @@ vim.g.darkTheme = getName(darkThemes[1])
 local allThemes = vim.iter(vim.list_extend(darkThemes, lightThemes))
 	:map(function(theme)
 		local themeObj = type(theme) == "string" and { theme } or theme
-		themeObj.lazy = false -- ensure themes are never lazy-loaded https://github.com/folke/lazy.nvim#-colorschemes
-		themeObj.priority = 1000
+		local useTheme =
+			vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:find("Dark")
+		themeObj.lazy = useTheme -- main theme not lazy-loaded https://lazy.folke.io/spec/lazy_loading#-colorschemes
+		themeObj.priority = useTheme and 1000 or nil
 		return themeObj
 	end)
 	:totable()
