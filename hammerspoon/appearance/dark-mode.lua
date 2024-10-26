@@ -50,7 +50,7 @@ hs.hotkey.bind({}, "forwarddelete", function() M.setDarkMode("toggle") end)
 -- If device has brightness sensor, uses a threshold to determine whether to
 -- change. Otherwise, changes based on the time of day.
 function M.autoSwitch()
-	local lightThreshold = 75 -- CONFIG
+	local lightThreshold = 70 -- CONFIG
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
 	local targetMode

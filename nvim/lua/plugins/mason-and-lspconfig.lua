@@ -32,8 +32,7 @@ return {
 			local packages = require("config.lsp-servers").masonDependencies
 			assert(#packages > 10, "Warning: in mason config, many packages would be uninstalled.")
 
-			-- FIX manually running `MasonToolsUpdate`, since `run_on_start` does
-			-- not work with lazy-loading.
+			-- FIX manual `MasonToolsUpdate`, since `run_on_start` doesn't work with lazy-loading
 			require("mason-tool-installer").setup { ensure_installed = packages }
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
 			vim.defer_fn(vim.cmd.MasonToolsUpdate, 5000)
