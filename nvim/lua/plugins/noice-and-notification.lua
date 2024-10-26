@@ -46,9 +46,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
 	{ filter = { event = "msg_show", find = "No hunks" }, view = "mini" },
 
-	-- :LspRestart
-	{ filter = { event = "notify", find = "Restarting…" }, view = "mini" },
-
 	-- nvim-treesitter
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },

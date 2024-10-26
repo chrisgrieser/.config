@@ -167,9 +167,9 @@ local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
-	updateHl("@markup.link.url.markdown_inline", "gui=" .. change) -- ffff
+	updateHl("@markup.link.url.markdown_inline", "gui=" .. change) 
 	updateHl("Underlined", "gui=" .. change)
-	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" }) -- definition
+	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" }) 
 	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" }) 
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {

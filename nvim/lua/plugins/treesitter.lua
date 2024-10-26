@@ -45,7 +45,7 @@ return {
 			select = { -- textobj definitions
 				enable = true,
 				lookahead = true,
-				include_surrounding_whitespace = true,
+				include_surrounding_whitespace = false, -- does not work well with comment textobj
 			},
 		},
 	},
