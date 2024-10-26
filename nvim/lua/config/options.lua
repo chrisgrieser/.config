@@ -33,9 +33,11 @@ vim.opt.pumheight = 12 -- max height
 
 vim.opt.jumpoptions = { "stack" } -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 
+vim.opt.updatetime = 250 -- time for `CursorHold` event
+vim.opt.timeoutlen = 666
+
 vim.opt.sidescrolloff = 12
-vim.g.baseScrolloff = 12 -- so scrolloff-changing functions can use this
-vim.opt.scrolloff = vim.g.baseScrolloff
+vim.opt.scrolloff = 12
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do). Therefore

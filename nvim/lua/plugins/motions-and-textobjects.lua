@@ -51,11 +51,11 @@ return {
 				mode = "o", -- only operator-pending to not conflict with selection-commenting
 				desc = "󰆈 Single Comment",
 			},
-			{
-				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
-				desc = "󰆈 Sticky Delete Comment",
-			},
+			-- {
+			-- 	"dq",
+			-- 	"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
+			-- 	desc = "󰆈 Sticky Delete Comment",
+			-- },
 			{
 				"cq",
 				function()

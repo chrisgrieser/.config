@@ -60,6 +60,33 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
 end
 
+local function codeContext()
+	local maxLen = 120 --CONFIG
+	local statusline = require("nvim-treesitter").statusline {
+		indicator_size = math.huge,
+		type_patterns = {
+			"class",
+			"function",
+			"method",
+			"object",
+			"field",
+			"array",
+			"variable",
+			"constant",
+		},
+		separator = "  ",
+		transform_fn = function(line)
+			return line
+				:gsub("^local ?", "")
+				:gsub("^function ?", "")
+				:gsub(" ?[{] ?$", "")
+				:gsub(" ?%=.-$", "")
+		end,
+	}
+	if #statusline > maxLen then return statusline:sub(1, 119) .. "…" end
+	return statusline
+end
+
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
@@ -84,6 +111,9 @@ local lualineConfig = {
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 				padding = { left = 0, right = 1 },
 			},
+		},
+		lualine_b = {
+			{ codeContext },
 		},
 		lualine_c = {
 			-- HACK spacer so the tabline is never empty
