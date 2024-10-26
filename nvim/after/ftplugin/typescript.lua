@@ -9,6 +9,7 @@ vim.cmd.compiler("tsc")
 -- custom formatting function to run code actions before running `biome`
 local bkeymap = require("config.utils").bufKeymap
 bkeymap("n", "<D-s>", function()
+	-- code actions
 	local actions = {
 		"source.addMissingImports.ts",
 		"source.removeUnusedImports.ts",
@@ -22,8 +23,13 @@ bkeymap("n", "<D-s>", function()
 			}
 		end, i * 60)
 	end
-	vim.defer_fn(vim.lsp.buf.format, 1)
-	
-				-- FIX manually close folds PENDING https://github.com/biomejs/biome/issues/4393
-				require("ufo").openFoldsExceptKinds { "comment", "imports" }
+
+	-- formatting
+	local codeActionDuration = (#actions + 1) * 60
+	vim.defer_fn(vim.lsp.buf.format, codeActionDuration + 50)
+	-- FIX manually close folds PENDING https://github.com/biomejs/biome/issues/4393
+	vim.defer_fn(
+		function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end,
+		codeActionDuration + 400
+	)
 end, { desc = "󰛦 Organize Imports & Format" })
