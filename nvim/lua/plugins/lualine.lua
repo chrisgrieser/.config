@@ -1,22 +1,24 @@
 -- lightweight replacement for fidget.nvim
+
+-- CONFIG
+local progressIcons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" } 
+
 local progressText = ""
 local function lspProgress() return progressText end
-
 vim.api.nvim_create_autocmd("LspProgress", {
 	callback = function(ctx)
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
 		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
 		if not (progress and progress.title) then return end
 
-		local icons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" } -- CONFIG
-		local idx = math.floor(#icons / 2)
+		local idx = math.floor(#progressIcons / 2)
 		if progress.percentage == 0 then idx = 1 end
 		if progress.percentage and progress.percentage > 0 then
-			idx = math.ceil(progress.percentage / 100 * #icons)
+			idx = math.ceil(progress.percentage / 100 * #progressIcons)
 		end
 		local firstWord = vim.split(progress.title, " ")[1]:lower()
 
-		local text = table.concat({ icons[idx], clientName, firstWord }, " ")
+		local text = table.concat({ progressIcons[idx], clientName, firstWord }, " ")
 		progressText = progress.kind == "end" and "" or text
 	end,
 })
@@ -74,10 +76,10 @@ local function codeContext()
 				:gsub("^async ", "") -- js/ts
 				:gsub("^local ", "") -- lua: vars
 				:gsub("^class", "󰜁")
+				:gsub("^%(.*%) =>", "") -- js/ts: anonymous arrow function
 				:gsub(" ?[{}] ?$", "")
-				:gsub("^%(.*%) =>", "()") -- js/ts: anonymous arrow function
-				:gsub(" ?[=:].-$", "") -- remove values
-				:gsub(" extends .-$", "") -- ts classes
+				:gsub(" ?[=:(].-$", "") -- remove values/parameters
+				:gsub(" extends .-$", "") -- js/ts: classes
 				:gsub("(%w)%(%)$", "%1") -- remove empty `()`
 				:gsub("^function", "")
 				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
