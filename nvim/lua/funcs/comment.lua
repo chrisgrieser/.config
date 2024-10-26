@@ -1,8 +1,5 @@
 local M = {}
 
----@param cmd string
-local function normal(cmd) vim.cmd.normal { cmd, bang = true } end
-
 ---@return string?
 local function getCommentstr()
 	local comStr = vim.bo.commentstring
@@ -82,7 +79,7 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln + 1, #indent + 3 })
 		vim.cmd.startinsert()
 	elseif ft == "javascript" then
-		normal("t)") -- go to parameter, since cursor has to be on diagnostic for code action
+		vim.cmd.normal { "t)", bang = true } -- go to parameter, since cursor has to be on diagnostic for code action
 		vim.lsp.buf.code_action {
 			filter = function(action) return action.title == "Infer parameter types from usage" end,
 			apply = true,
@@ -90,13 +87,9 @@ function M.docstring()
 		-- goto docstring (delayed, so code action can finish first)
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
-			normal("t}")
+			vim.cmd.normal { "t)", bang = true }
 		end, 100)
 	elseif ft == "typescript" then
-		vim.lsp.buf.code_action {
-			filter = function(action) return action.title == "Infer function return type" end,
-			apply = true,
-		}
 		-- add TSDoc
 		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
 		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })

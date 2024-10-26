@@ -10,11 +10,12 @@ local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
 	bashls = "bash-language-server", -- also used for zsh
 	biome = "biome", -- ts/js/json/css linter/formatter
-	css_variables = "css-variables-language-server", -- support for css variables across multiple files
+	css_variables = "css-variables-language-server", -- support css variables across multiple files
 	cssls = "css-lsp",
 	efm = "efm", -- linter integration (only used for shellcheck & just)
 	emmet_language_server = "emmet-language-server", -- css/html snippets
 	harper_ls = "harper-ls", -- natural language linter (only used for markdown though)
+	html = "html-lsp",
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -33,6 +34,8 @@ M.serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	M.serverConfigs[lspName] = {}
 end
+
+--------------------------------------------------------------------------------
 
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
@@ -279,9 +282,9 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
 	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
 	if obsiDir or iCloudDocs then
-		-- delay, so it's ensured the client is attached
-		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
 		vim.diagnostic.enable(false, { bufnr = 0 })
+		-- defer to ensure client is already attached
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
 	end
 end
 
@@ -293,8 +296,8 @@ M.serverConfigs.harper_ls = {
 			userDictPath = vim.o.spellfile,
 			diagnosticSeverity = "information",
 			linters = {
-				spell_check = true, -- BUG with markdown links https://github.com/elijah-potter/harper/issues/104
-				sentence_capitalization = false, -- NOTE https://github.com/elijah-potter/harper/issues/228
+				spell_check = true,
+				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
 			},
 		},
 	},
