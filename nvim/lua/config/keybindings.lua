@@ -171,7 +171,16 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
-keymap({ "n", "x" }, "<D-s>", vim.lsp.buf.format, { desc = "󰒕 LSP Format" })
+keymap({ "n", "x" }, "<D-s>", function()
+	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
+	if formattingLsps > 0 then
+		vim.lsp.buf.format()
+	else
+		vim.cmd([[% substitute/\s\+$//e]]) -- remove trailing spaces
+		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
+		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
+	end
+end, { desc = "󰒕 LSP Format" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE
