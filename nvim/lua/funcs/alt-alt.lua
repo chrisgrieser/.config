@@ -6,6 +6,15 @@ local M = {}
 ---@return boolean
 local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
 
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt" })
+end
+
+--------------------------------------------------------------------------------
+
 ---@nodiscard
 ---@return boolean
 local function hasAltBuffer()
@@ -40,7 +49,7 @@ function M.closeBuffer()
 
 	-- close buffer
 	if #openBuffers < 2 then
-		vim.notify("Only one buffer open.", nil, { title = "Alt-alt" })
+		notify("Only one buffer open.")
 		return
 	end
 	vim.cmd("silent! update")
@@ -55,16 +64,18 @@ function M.closeBuffer()
 		if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
 			local newAltFile = openBuffers[3].name
 			vim.fn.setreg("#", newAltFile)
+		else
+			notify("No alt buffer found.", "warn")
 		end
 	end
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
+---@param maxLength? number defaults to 30
 ---@return string
----@param maxLength? number
+---@nodiscard
 function M.altFileStatusbar(maxLength)
-	vim.notify_once("🖨️ maxLength: " .. vim.inspect(maxLength))
-	maxLength = type(maxLength) == "number" and maxLength or 30 -- defaults to 30
+	maxLength = type(maxLength) == "number" and maxLength or 30
 	local icon = "#" -- default icon
 
 	local altOld = altOldfile()
@@ -82,9 +93,8 @@ function M.altFileStatusbar(maxLength)
 		if ok then icon = devicons.get_icon(altFile, ext) or devicons.get_icon(altFile, altBufFt) end
 
 		-- name: consider if alt and current file have same basename
-		local curFile = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-		local currentAndAltWithSameBasename = curFile == altFile
-		if currentAndAltWithSameBasename then
+		local curBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+		if curBasename == altFile then
 			local altParent = vim.fs.basename(vim.fs.dirname(altPath))
 			name = altParent .. "/" .. altFile
 		end
@@ -92,19 +102,18 @@ function M.altFileStatusbar(maxLength)
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
 	else
-		return "[unknown alt file]"
+		name = "[no alt file]"
 	end
 
 	-- truncate
-	local display = #name < maxLength and name or vim.trim(name:sub(1, maxLength)) .. "…"
-	if not icon then return display end
-	return icon .. " " .. display
+	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
+	return icon .. " " .. name
 end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" then
-		vim.notify("Cannot use since in special buffer", vim.log.levels.WARN, { title = "Alt-alt" })
+		notify("Cannot do that in special buffer.", "warn")
 		return
 	end
 	local altOld = altOldfile()
@@ -114,7 +123,7 @@ function M.gotoAltFile()
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		vim.notify("No Alt buffer or Oldfile available.", vim.log.levels.WARN, { title = "Alt-alt" })
+		notify("No alt buffer or Oldfile available.", "error")
 	end
 end
 
