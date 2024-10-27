@@ -176,11 +176,12 @@ keymap({ "n", "x" }, "<D-s>", function()
 	if formattingLsps > 0 then
 		vim.lsp.buf.format()
 	else
-		vim.cmd([[% substitute/\s\+$//e]]) -- remove trailing spaces
-		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
-		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
+		-- remove unneeded whitespace
+		vim.cmd([[% substitute_\s\+$__e]]) -- trailing spaces
+		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- duplicate blank lines
+		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- blanks at end of file
 	end
-end, { desc = "󰒕 LSP Format" })
+end, { desc = "󰒕 Format" })
 
 --------------------------------------------------------------------------------
 -- COMMAND MODE

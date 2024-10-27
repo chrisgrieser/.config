@@ -24,6 +24,8 @@ pre
 url
 zsh
 cmp
+CLI
+GPG
 APIs
 CLIs
 LSPs

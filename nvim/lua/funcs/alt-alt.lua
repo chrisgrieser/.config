@@ -40,11 +40,15 @@ end
 --------------------------------------------------------------------------------
 
 function M.closeBuffer()
-	-- close buffer, and move to the alt-oldfile if it was the last buffer
-	local altOld = altOldfile()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+
+	-- close buffer
+	if #openBuffers < 2 then
+		vim.notify("Only one open buffer.")
+		return
+	end
+	vim.cmd("silent! update")
 	vim.cmd.bdelete()
-	if #openBuffers == 1 and altOld then vim.cmd.edit(altOld) end
 
 	-- prevent alt-buffer pointing to deleted buffer
 	-- (Using `:bwipeout` prevents this, but would also removes the file from the
@@ -57,7 +61,6 @@ function M.closeBuffer()
 			vim.fn.setreg("#", newAltFile)
 		end
 	end
-
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
@@ -101,7 +104,7 @@ end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltBuffer()
-	if vim.bo.buftype ~= "" then 
+	if vim.bo.buftype ~= "" then
 		vim.notify("Cannot use since in special buffer", vim.log.levels.WARN, { title = "Alt-alt" })
 		return
 	end

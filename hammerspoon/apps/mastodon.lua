@@ -10,7 +10,7 @@ local wf = hs.window.filter
 local function moveToSide()
 	local masto = u.app("Mona")
 	if not masto then return end
-	local mastodonUsername = "pseudometa"
+	local mastodonUsername = "pseudometa" -- CONFIG
 	local mastoWin = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
 	if not mastoWin then return end
 
@@ -76,15 +76,14 @@ end):start()
 -- * auto-focus compose win when activating
 -- * auto-close media wins when deactivating
 M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
-	if appName ~= "Mona" then return end
-
-	if event == aw.activated then
+	if appName == "Mona" and event == aw.activated then
 		masto:selectMenuItem { "Window", "Bring All to Front" }
 		local composeWin = masto:findWindow("Compose")
 		if composeWin then composeWin:focus() end
-	elseif event == aw.deactivated then
+	elseif appName == "Mona" and event == aw.deactivated then
 		local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
-		if mediaWin then
+		local frontApp = hs.application.frontmostApplication():name()
+		if mediaWin and frontApp ~= "Alfred" then
 			mediaWin:close()
 			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- redundancy as closing not reliable
 		end
@@ -95,10 +94,10 @@ end):start()
 -- FIX Mona's autoscroll sometimes not fully scrolling up
 
 local function homeAndScrollUp()
-	-- GUARD only scrolling when not idle, to not prevent the machine form going to sleep.
+	-- GUARD only scrolling when not idle, to not prevent the machine from going to sleep
 	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
 
-	-- GUARD only if Mona is running in bg
+	-- GUARD only if Mona is running in background
 	local mona = u.app("Mona")
 	if not mona or mona:isFrontmost() then return end
 
