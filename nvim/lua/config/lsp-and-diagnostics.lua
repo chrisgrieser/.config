@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ctx)
 		local capabilities = vim.lsp.get_client_by_id(ctx.data.client_id).server_capabilities or {}
 		if not capabilities.documentHighlightProvider then return end
-		local group = vim.api.nvim_create_augroup("lsp-highlight", {})
+		local group = vim.api.nvim_create_augroup("lsp-cursorword", {})
 
 		vim.api.nvim_create_autocmd("CursorHold", {
 			buffer = ctx.buf,
