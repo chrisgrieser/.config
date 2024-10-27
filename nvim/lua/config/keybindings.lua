@@ -237,7 +237,7 @@ vim.api.nvim_create_autocmd("InsertLeave", { callback = vim.snippet.stop })
 keymap(
 	{ "n", "x" },
 	"<CR>",
-	function() require("funcs.alt-alt").gotoAltBuffer() end,
+	function() require("funcs.alt-alt").gotoAltFile() end,
 	{ desc = "󰽙 Alt Buffer" }
 )
 -- restore default behavior of `<CR>`, which is overridden by the mapping above

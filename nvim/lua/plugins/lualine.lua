@@ -1,7 +1,7 @@
 -- lightweight replacement for fidget.nvim
 
 -- CONFIG
-local progressIcons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" } 
+local progressIcons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
 
 local progressText = ""
 local function lspProgress() return progressText end
@@ -148,7 +148,7 @@ local lualineConfig = {
 			{ filenameAndIcon },
 		},
 		lualine_b = {
-			{ require("funcs.alt-alt").altFileStatus },
+			{ require("funcs.alt-alt").altFileStatusbar },
 		},
 		lualine_c = {
 			{ require("config.quickfix").quickfixCounterStatusbar },
