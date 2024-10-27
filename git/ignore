@@ -1,19 +1,13 @@
 # macOS
 .DS_Store
 *.icloud
-
 # https://stackoverflow.com/a/33974028/22114136
 Icon[]
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# conform.nvim
-.conform.*
-
-# Logs
-*.log
-
 # production stuff / builds
+*.log
 node_modules
 .venv
 __pycache__
@@ -41,4 +35,3 @@ __pycache__
 *.mkv
 *.tiff
 *.heic
-
