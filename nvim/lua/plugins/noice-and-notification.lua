@@ -89,13 +89,6 @@ return {
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
 			{ "<D-8>", vim.cmd.NoiceErrors, mode = { "n", "x", "i" }, desc = "󰎟 Noice Errors" },
-			{
-				"<S-Enter>",
-				-- https://github.com/folke/noice.nvim?tab=readme-ov-file#%EF%B8%8F-command-redirection
-				function() require("noice").redirect(vim.fn.getcmdline()) end,
-				mode = "c",
-				desc = "󰎟 Redirect Cmdline",
-			},
 		},
 		opts = {
 			routes = routes,
@@ -103,8 +96,7 @@ return {
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
-					-- formatting for`:Eval`(my custom `:lua=` replacement)
-					eval = {
+					eval = { -- formatting for`:Eval`(my custom `:lua=` replacement)
 						pattern = "^:Eval%s+",
 						lang = "lua",
 						icon = "󰓗",
@@ -134,7 +126,7 @@ return {
 				},
 				hover = {
 					border = { style = vim.g.borderStyle },
-					size = { max_width = 80 },
+					size = { max_width = 75 },
 					win_options = { scrolloff = 4, wrap = true },
 				},
 				popup = {

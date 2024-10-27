@@ -26,6 +26,21 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- SAVE ALL
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
+
+--------------------------------------------------------------------------------
+
+-- appearance
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	border = vim.g.borderStyle,
+})
+
+-- INFO this needs to be disabled for noice.nvim
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+-- 	border = vim.g.borderStyle,
+-- 	title = " LSP Hover ",
+-- 	max_width = math.floor(vim.o.columns * 0.5),
+-- })
+
 --------------------------------------------------------------------------------
 
 -- HIGHLIGHT CURSORWORD
@@ -41,7 +56,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			callback = vim.lsp.buf.document_highlight,
 		})
 
-		vim.api.nvim_create_autocmd("CursorMoved", {
+		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
 			buffer = ctx.buf,
 			group = group,
 			callback = vim.lsp.buf.clear_references,
@@ -52,7 +67,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-highlight-detach", {}),
 			callback = function(ctx2)
 				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds { group = "lsp-highlight", buffer = ctx2.buf }
+				vim.api.nvim_clear_autocmds { group = "lsp-cursorword", buffer = ctx2.buf }
 			end,
 		})
 	end,
@@ -67,15 +82,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.api.nvim_create_autocmd("InsertLeave", {
 	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
 })
-
--- appearance
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	border = vim.g.borderStyle,
-})
-
--- INFO this needs to be disabled for noice.nvim
--- vim.lsp.handlers["textDocument/hover"] =
--- vim.lsp.with(vim.lsp.handlers.hover, { border = vim.g.myBorderStyle })
 
 --------------------------------------------------------------------------------
 
