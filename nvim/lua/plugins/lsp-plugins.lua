@@ -23,7 +23,7 @@ return {
 		event = "BufReadPre",
 		opts = {
 			hint_prefix = " 󰏪 ",
-			hint_scheme = "Todo", -- highlight group, alt: @variable.parameter
+			hint_scheme = "Todo", 
 			floating_window = false,
 			always_trigger = true,
 		},

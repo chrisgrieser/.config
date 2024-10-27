@@ -40,7 +40,7 @@ function M.closeBuffer()
 
 	-- close buffer
 	if #openBuffers < 2 then
-		vim.notify("Only one open buffer.")
+		vim.notify("Only one buffer open.", nil, { title = "Alt-alt" })
 		return
 	end
 	vim.cmd("silent! update")
@@ -63,7 +63,8 @@ end
 ---@return string
 ---@param maxLength? number
 function M.altFileStatusbar(maxLength)
-	maxLength = maxLength or 30 -- defaults to 30
+	vim.notify_once("🖨️ maxLength: " .. vim.inspect(maxLength))
+	maxLength = type(maxLength) == "number" and maxLength or 30 -- defaults to 30
 	local icon = "#" -- default icon
 
 	local altOld = altOldfile()
