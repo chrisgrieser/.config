@@ -130,28 +130,6 @@ function M.themeModifications()
 		setHl("@type.builtin.python", { link = "Typedef" })
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
-	elseif theme == "gruvbox-material" or theme == "sonokai" then
-		setHl("TSParameter", { fg = "#6f92b3" })
-		setHl("@keyword.return", { fg = "#b577c8", bold = true })
-		setHl("LspReferenceText", {})
-
-		-- unbold comment-keywords
-		for _, type in pairs({"todo", "note", "error", "warning"}) do
-			local hl = "@comment." .. type
-			local fg = getHlValue(hl, "fg")
-			local bg = getHlValue(hl, "bg")
-			setHl(hl, { bold = false, fg = fg, bg = bg }) 
-		end
-	elseif theme == "kanagawa" then
-		-- transparent sign column
-		setHl("SignColumn", {})
-		updateHl("GitSignsAdd", "guibg=none")
-		updateHl("GitSignsChange", "guibg=none")
-		updateHl("GitSignsDelete", "guibg=none")
-		updateHl("DiagnosticSignHint", "guibg=none")
-		updateHl("DiagnosticSignInfo", "guibg=none")
-		updateHl("DiagnosticSignWarn", "guibg=none")
-		updateHl("DiagnosticSignError", "guibg=none")
 	elseif theme == "dracula" then
 		revertedTodoComments()
 
@@ -165,8 +143,6 @@ function M.themeModifications()
 		setHl("Boolean", { link = "Special" })
 		setHl("Number", { link = "@field" })
 		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
-	elseif theme == "flow" then
-		revertedTodoComments()
 	end
 end
 
