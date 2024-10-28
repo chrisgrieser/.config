@@ -185,7 +185,6 @@ noremap <C-Tab> :openRandomDataFile<CR>
 nnoremap - /
 
 " <Esc> clears highlights & notices
-" (HACK cannot combine excommands, therefore combining them to a mapping first)
 exmap clearNotices jsfile Meta/vimrc-jsfile.js { clearNotices() }
 nnoremap <Esc> :clearNotices<CR>:nohl<CR>
 
