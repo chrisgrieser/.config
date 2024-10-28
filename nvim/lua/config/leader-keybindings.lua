@@ -108,14 +108,13 @@ keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " r
 keymap("n", "<leader>yc", function()
 	local codeContext = require("nvim-treesitter").statusline {
 		indicator_size = math.huge, -- disable shortening
-		separator = " ",
 		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
 	}
-	if codeContext then
+	if codeContext and codeContext ~= "" then
 		vim.fn.setreg("+", codeContext)
 		vim.notify(codeContext, nil, { title = "Copied" })
 	else
-		vim.notify("No code context", vim.log.levels.WARN)
+		vim.notify("No code context.", vim.log.levels.WARN)
 	end
 end, { desc = " Yank code context" })
 
