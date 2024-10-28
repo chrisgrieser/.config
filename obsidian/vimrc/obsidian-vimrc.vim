@@ -242,9 +242,9 @@ nnoremap ,ur 1000<C-r>
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase<CR>
 
-" romaji to hiragana
-exmap cwordRomajiToHiragana jsfile Meta/vimrc-jsfile.js { cwordRomajiToHiragana() }
-nnoremap > :cwordRomajiToHiragana<CR>
+" hiragana-fy cword
+exmap hiraganafyCword jsfile Meta/vimrc-jsfile.js { hiraganafyCword() }
+nnoremap > :hiraganafyCword<CR>
 
 " do not move to the right on toggling case
 nnoremap ~ v~
@@ -522,7 +522,6 @@ nnoremap wm yt]p
 " Emulate vim folding command
 exmap togglefold obcommand editor:toggle-fold
 nnoremap za :togglefold<CR>
-nnoremap ^ :togglefold<CR>
 nnoremap zo :togglefold<CR>
 nnoremap zc :togglefold<CR>
 

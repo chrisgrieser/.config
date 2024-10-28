@@ -364,7 +364,6 @@ async function workspace(action, workspaceName) {
 //──────────────────────────────────────────────────────────────────────────────
 // ROMAJI -> HIRAGANA
 
-// taken some code from: https://github.com/lovell/hepburn/blob/master/lib/hepburn.js
 // biome-ignore format: keep hiragana table order
 /** @type {Record<string, string>} */
 const romajiToHiraganaMap = {
@@ -397,10 +396,15 @@ const romajiToHiraganaMap = {
 	pya: "ぴゃ", pyu: "ぴゅ", pyo: "ぴょ",
 };
 
-function cwordRomajiToHiragana() {
+function hiraganafyCword() {
 	const cursor = editor.getCursor();
 	const { from, to } = editor.wordAt(cursor);
+	if (!from || !to) return;
 	const cword = editor.getRange(from, to);
+	if (!cword.match(/^\w+$/)) {
+		new Notice("Word under cursor must be in Romaji.");
+		return;
+	};
 	let hiragana = cword;
 
 	// sort by length, to replace the longer romaji first
@@ -408,8 +412,10 @@ function cwordRomajiToHiragana() {
 	for (const romaji of romajiByLength) {
 		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
 	}
-
 	editor.replaceRange(hiragana,from,to);
+
+	// move cursor to end of word
+	cursor.ch = to.ch - (cword.length - hiragana.length) - 1;
 	editor.setCursor(cursor);
 }
 

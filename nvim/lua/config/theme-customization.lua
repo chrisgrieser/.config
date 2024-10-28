@@ -130,6 +130,11 @@ function M.themeModifications()
 		setHl("@type.builtin.python", { link = "Typedef" })
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
+	elseif theme == "gruvbox-material" or theme == "sonokai" then
+		local commentColor = getHlValue("Comment", "fg")
+		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
+		setHl("TSParameter", { fg = "#6f92b3" })
+		setHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "kanagawa" then
 		-- transparent sign column
 		setHl("SignColumn", {})
