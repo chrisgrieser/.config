@@ -4,14 +4,14 @@
       "exmap ${1:ex-command-name} jscommand { ${2:one-line-of-js} }",
       "nnoremap ${3:keymap} :${1:ex-command-name}<CR>"
     ],
-    "prefix": "jscommand"
+    "prefix": "jscommand (exmap)"
   },
   "jsfile": {
     "body": [
       "exmap ${1:func-name} jsfile Meta/vimrc-jsfile.js { ${1:func-name}() }",
       "nnoremap ${2:keymap} :${1:func-name}<CR>"
     ],
-    "prefix": "jsfile"
+    "prefix": "jsfile (exmap)"
   },
   "obcommand": {
     "body": [

@@ -242,6 +242,10 @@ nnoremap ,ur 1000<C-r>
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase<CR>
 
+" romaji to hiragana
+exmap cwordRomajiToHiragana jsfile Meta/vimrc-jsfile.js { cwordRomajiToHiragana() }
+nnoremap > :cwordRomajiToHiragana<CR>
+
 " do not move to the right on toggling case
 nnoremap ~ v~
 
