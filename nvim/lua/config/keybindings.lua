@@ -243,7 +243,7 @@ keymap(
 	{ "n", "x" },
 	"<CR>",
 	function() require("funcs.alt-alt").gotoAltFile() end,
-	{ desc = "󰽙 Alt Buffer" }
+	{ desc = "󰽙 Goto Alt-File" }
 )
 -- restore default behavior of `<CR>`, which is overridden by the mapping above
 vim.api.nvim_create_autocmd("FileType", {
@@ -251,15 +251,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function() bkeymap("n", "<CR>", "<CR>") end,
 })
 
-keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload Buffer" })
-keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev Buffer" })
-keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next Buffer" })
+keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
+keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
+keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
 	function() require("funcs.nano-plugins").gotoMostChangedFile() end,
-	{ desc = "󰊢 Goto Changed File" }
+	{ desc = "󰊢 Goto most changed file" }
 )
 
 -- close window or buffer
@@ -270,7 +270,7 @@ end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
 	local extensions = { "sh", "json", "mjs", "md", "py", "css" }
-	vim.ui.select(extensions, { prompt = " Scratch File", kind = "plain" }, function(ext)
+	vim.ui.select(extensions, { prompt = " Scratch file", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
 		vim.cmd.edit(filepath)
@@ -281,12 +281,11 @@ end, { desc = " Create Scratchpad File" })
 --------------------------------------------------------------------------------
 
 -- MAC-SPECIFIC FUNCTIONS
-keymap(
-	{ "n", "x", "i" },
-	"<D-l>",
-	function() vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) } end,
-	{ desc = "󰀶 Reveal in Finder" }
-)
+keymap({ "n", "x", "i" }, "<D-l>", function()
+	if jit.os ~= "OSX" then return end
+	vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) }
+end, { desc = "󰀶 Reveal in Finder" })
+
 keymap(
 	{ "n", "x", "i" },
 	"<D-L>",
@@ -317,7 +316,7 @@ keymap(
 	"n",
 	toggleKey,
 	function() require("funcs.nano-plugins").startOrStopRecording(toggleKey, register) end,
-	{ desc = "󰕧 Start/Stop Recording" }
+	{ desc = "󰕧 Start/stop recording" }
 )
 keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })
 -- `remap` since using nvim builtin mapping
