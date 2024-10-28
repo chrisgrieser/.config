@@ -35,7 +35,7 @@ return {
 			-- FIX manual `MasonToolsUpdate`, since `run_on_start` doesn't work with lazy-loading
 			require("mason-tool-installer").setup { ensure_installed = packages }
 			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsUpdate, 5000)
+			vim.defer_fn(vim.cmd.MasonToolsUpdate, 4000)
 			vim.defer_fn(vim.cmd.MasonToolsClean, 8000)
 		end,
 	},
@@ -46,6 +46,7 @@ return {
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 
 			-- Enable completion (nvim-cmp/blink.cmp) and folding (nvim-ufo)
+			-- PENDING https://github.com/Saghen/blink.cmp/issues/13
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities.textDocument.foldingRange =
