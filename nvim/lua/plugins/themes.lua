@@ -3,8 +3,8 @@
 
 -- INFO only the first theme will be used
 local lightThemes = {
-	{ "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
-	-- { "EdenEast/nightfox.nvim", name = "dawnfox" },
+	{ "EdenEast/nightfox.nvim", name = "dawnfox" },
+	-- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 }
 
 local darkThemes = {
