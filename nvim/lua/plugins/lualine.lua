@@ -63,10 +63,13 @@ local function newlineCharIfNotUnix()
 end
 
 -- Simplified version of `nvim-treesitter-context`
-local function codeContext()
-	local maxLen = 80 --CONFIG
+---@param maxLen number defaults to 80
+---@return string
+local function codeContext(maxLen)
+	maxLen = type(maxLen) == "number" and maxLen or 80
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
+
 	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
 		separator = "  ", -- 
