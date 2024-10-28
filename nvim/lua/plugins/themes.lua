@@ -8,9 +8,9 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	{ "0xstepit/flow.nvim", opts = { mode = "bright" } },
+	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
-	-- { "0xstepit/flow.nvim", opts = { mode = "bright" } },
 	-- "sainnhe/gruvbox-material",
 	-- "fynnfluegge/monet.nvim",
 	-- "rebelot/kanagawa.nvim",
