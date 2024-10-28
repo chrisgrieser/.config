@@ -108,17 +108,17 @@ function _setCursorAndAddToJumplist(editor, oldCursor, newCursor) {
 }
 
 /**
- * @param {"next"|"prev"} dir
+ * @param {"next"|"prev"} direction
  * @param {RegExp} pattern
  */
-function gotoLineWithPattern(dir, pattern) {
+function gotoLineWithPattern(direction, pattern) {
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
 	const prevCursor = editor.getCursor();
 	let currentLnum = prevCursor.line;
-	if (dir === "prev") currentLnum = reverseLnum(currentLnum);
+	if (direction === "prev") currentLnum = reverseLnum(currentLnum);
 	const allLines = editor.getValue().split("\n");
-	if (dir === "prev") allLines.reverse();
+	if (direction === "prev") allLines.reverse();
 	const linesBelow = allLines.slice(currentLnum + 1);
 	const linesAbove = allLines.slice(0, currentLnum);
 
@@ -129,13 +129,12 @@ function gotoLineWithPattern(dir, pattern) {
 	if (lnumWithPattern === -1) {
 		lnumWithPattern = linesAbove.findIndex((line) => line.match(pattern));
 	}
+
 	if (lnumWithPattern === -1) {
 		new Notice(`No line found with pattern ${pattern}`);
 		return;
 	}
-
-	if (dir === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
-
+	if (direction === "prev") lnumWithPattern = reverseLnum(lnumWithPattern);
 	_setCursorAndAddToJumplist(editor, prevCursor, { line: lnumWithPattern, ch: 0 });
 }
 
@@ -247,7 +246,7 @@ function toggleLowercaseTitleCase() {
 	const newWord = newFirstChar + word.slice(1).toLowerCase();
 
 	editor.replaceRange(newWord, from, to);
-	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+	editor.setCursor(cursor); // restore position, as `replaceRange` moves cursor
 }
 
 /** forward looking `gx`
@@ -255,9 +254,8 @@ function toggleLowercaseTitleCase() {
  */
 function openNextLink(where) {
 	function rangeOfFirstLink(/** @type {string} */ text) {
-		//                  https / Obsidian URI       | wikilink  | markdown link
 		const linkRegex = /(https?|obsidian):\/\/[^ )]+|\[\[.+?\]\]|\[[^\]]*?\]\(.+?\)/;
-		//                 (    url / obsidian URI    )( wikilink )(markdown link)
+		//                 (    URL / obsidian URI    ) (wikilink ) ( markdown link  )
 		const linkMatch = text.match(linkRegex);
 		if (!linkMatch || linkMatch.index === undefined) return { start: -1, end: -1 };
 		const start = linkMatch.index;
@@ -404,15 +402,15 @@ function hiraganafyCword() {
 	if (!cword.match(/^\w+$/)) {
 		new Notice("Word under cursor must be in Romaji.");
 		return;
-	};
-	let hiragana = cword;
+	}
 
-	// sort by length, to replace the longer romaji first
+	let hiragana = cword;
+	// sort by length, to replace the longer romaji first, ensures correct resolving
 	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
 	for (const romaji of romajiByLength) {
 		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
 	}
-	editor.replaceRange(hiragana,from,to);
+	editor.replaceRange(hiragana, from, to);
 
 	// move cursor to end of word
 	cursor.ch = to.ch - (cword.length - hiragana.length) - 1;
