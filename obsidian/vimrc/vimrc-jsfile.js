@@ -298,34 +298,6 @@ function openNextLink(where) {
 	view.app.commands.executeCommandById(commandId);
 }
 
-/**
- * @param {string} vaultRelPath (just `/` for vault root)
- * @param {string} frontmatterKey
- * @param {string|number|boolean} frontmatterValue
- */
-async function openRandomNoteIn(vaultRelPath, frontmatterKey, frontmatterValue) {
-	vaultRelPath = vaultRelPath
-		.replace(/\/*$/, "/") // ensure `/` at end
-		.replace(/^\/$/, ""); // make vault-root always true for `startsWith`
-	const app = view.app;
-	const currentFile = view.file.path;
-
-	const files = app.vault.getMarkdownFiles().filter((f) => {
-		const inFolder = f.path.startsWith(vaultRelPath);
-		const notCurrent = f.path !== currentFile;
-		const frontmatterCache = app.metadataCache.getFileCache(f).frontmatter;
-		const hasProperty = frontmatterCache?.[frontmatterKey] === frontmatterValue;
-		return inFolder && notCurrent && hasProperty;
-	});
-	if (files.length === 0) {
-		new Notice(`No notes in "${vaultRelPath}" with "${frontmatterKey}: ${frontmatterValue}".`);
-		return;
-	}
-	const randomIndex = Math.floor(Math.random() * files.length);
-	const randomFile = files[randomIndex];
-	await app.workspace.getLeaf().openFile(randomFile);
-}
-
 /** For use with the rephraser-action from the "Writing Assistant" Alfred
  * workflow, which sends text to OpenAI, and returns the diff as
  * highlights (additions) and strikethroughs (deletions). */

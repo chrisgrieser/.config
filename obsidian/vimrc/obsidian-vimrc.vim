@@ -174,10 +174,6 @@ nnoremap <C-w>o :closeOthers<CR>
 exmap altBuffer obcommand grappling-hook:alternate-note
 noremap <CR> :altBuffer<CR>
 
-" Random File
-exmap openRandomDataFile jsfile Meta/vimrc-jsfile.js { openRandomNoteIn("Data", "read", false) }
-noremap <C-Tab> :openRandomDataFile<CR>
-
 "───────────────────────────────────────────────────────────────────────────────
 " SEARCH
 
