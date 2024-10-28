@@ -131,8 +131,6 @@ function M.themeModifications()
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
-		local commentColor = getHlValue("Comment", "fg")
-		updateHl("DiagnosticUnnecessary", "gui=underdouble cterm=underline guifg=" .. commentColor)
 		setHl("TSParameter", { fg = "#6f92b3" })
 		setHl("@keyword.return", { fg = "#b577c8", bold = true })
 	elseif theme == "kanagawa" then
@@ -172,10 +170,10 @@ local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
-	updateHl("@markup.link.url.markdown_inline", "gui=" .. change) 
+	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)
 	updateHl("Underlined", "gui=" .. change)
-	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" }) 
-	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" }) 
+	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" })
+	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
