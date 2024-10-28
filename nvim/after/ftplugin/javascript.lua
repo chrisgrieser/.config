@@ -16,12 +16,6 @@ abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
-bkeymap({ "n", "x" }, "<D-s>", function()
-	vim.lsp.buf.format()
-	-- FIX manually close folds PENDING https://github.com/biomejs/biome/issues/4393
-	vim.defer_fn(function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end, 500)
-end, { desc = "󰒕 LSP Format & close some folds" })
-
 bkeymap("n", "<leader>ft", function()
 	vim.lsp.buf.code_action {
 		filter = function(a) return a.title == "Convert to template string" end,
