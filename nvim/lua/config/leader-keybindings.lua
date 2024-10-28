@@ -86,7 +86,8 @@ keymap("n", "<leader>fq", function()
 end, { desc = " Switch quotes in line" })
 
 --------------------------------------------------------------------------------
--- YANK
+-- YANK STUFF
+
 keymap("n", "<leader>yl", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
 	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
@@ -103,6 +104,20 @@ keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 yank-append to [a]" })
 keymap("n", "<leader>yd", [["Ad]], { desc = " delete-append to [a]" })
 keymap("n", "<leader>yp", [["ap]], { desc = " paste from [a]" })
 keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " reset [a]" })
+
+keymap("n", "<leader>yc", function()
+	local codeContext = require("nvim-treesitter").statusline {
+		indicator_size = math.huge, -- disable shortening
+		separator = " ",
+		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
+	}
+	if codeContext then
+		vim.fn.setreg("+", codeContext)
+		vim.notify(codeContext, nil, { title = "Copied" })
+	else
+		vim.notify("No code context", vim.log.levels.WARN)
+	end
+end, { desc = " Yank code context" })
 
 --------------------------------------------------------------------------------
 -- UNDO

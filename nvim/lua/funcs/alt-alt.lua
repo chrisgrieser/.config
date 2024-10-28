@@ -64,8 +64,6 @@ function M.closeBuffer()
 		if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
 			local newAltFile = openBuffers[3].name
 			vim.fn.setreg("#", newAltFile)
-		else
-			notify("No alt buffer found.", "warn")
 		end
 	end
 end
