@@ -228,8 +228,13 @@ keymap({ "n", "i", "s" }, "<D-P>", function()
 	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
 end, { desc = "󰩫 prev placeholder" })
 
--- exit snippet automatically
-vim.api.nvim_create_autocmd("InsertLeave", { callback = vim.snippet.stop })
+-- exit snippet on automatically scroll
+vim.api.nvim_create_autocmd("WinScrolled", {
+	callback = function(ctx)
+		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
+		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
+	end,
+})
 
 --------------------------------------------------------------------------------
 
