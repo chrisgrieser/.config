@@ -228,7 +228,7 @@ keymap({ "n", "i", "s" }, "<D-P>", function()
 	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
 end, { desc = "󰩫 prev placeholder" })
 
--- exit snippet on automatically scroll
+-- exit snippet automatically on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
 	callback = function(ctx)
 		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
