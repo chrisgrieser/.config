@@ -10,12 +10,12 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
--- work on wrapped lines
+-- j/k should on wrapped lines
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
--- (not mapping in op-pending, since using custom textobjects for each of LjkJK)
+-- (not mapping in op-pending, since using custom textobjects for most of those)
 keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
 keymap("o", "H", "^")
 keymap({ "n", "x" }, "L", "$zv") -- zv: unfold under cursor
