@@ -336,7 +336,7 @@ function acceptHighlightsAndStrikethrus() {
 	const updatedLine = lineText
 		.replace(/==/g, "") // keep highlights
 		.replace(/~~.*?~~/g, "") // remove strikethroughs
-		.replaceAll("  ", " "); // fix leftover double-spaces from the markup
+		.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
 	editor.setLine(lnum, updatedLine);
 
 	const charsLess = lineText.length - updatedLine.length;

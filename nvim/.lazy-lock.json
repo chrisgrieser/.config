@@ -31,7 +31,7 @@
   "nvim-tinygit": { "branch": "main", "commit": "b22bd06a546bf090ad0f6ec80695d04ab7170cb9" },
   "nvim-treesitter": { "branch": "master", "commit": "de70388626b398e9cfbec0ec02a0fab8d0f26648" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "3e450cd85243da99dc23ebbf14f9c70e9a0c26a4" },
-  "nvim-ufo": { "branch": "main", "commit": "c96bb3bb853ff6253fe74f057df03e61fafd2403" },
+  "nvim-ufo": { "branch": "main", "commit": "04a17a94831dfa78d594d22ad6cfa5d5a07dceac" },
   "nvim-various-textobjs": { "branch": "main", "commit": "cc33e0a6681bbe913de515ac1a68492d50cbf949" },
   "nvim-web-devicons": { "branch": "master", "commit": "19d257cf889f79f4022163c3fbb5e08639077bd8" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
