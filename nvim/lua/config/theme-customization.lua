@@ -133,6 +133,15 @@ function M.themeModifications()
 	elseif theme == "gruvbox-material" or theme == "sonokai" then
 		setHl("TSParameter", { fg = "#6f92b3" })
 		setHl("@keyword.return", { fg = "#b577c8", bold = true })
+		setHl("LspReferenceText", {})
+
+		-- unbold comment-keywords
+		for _, type in pairs({"todo", "note", "error", "warning"}) do
+			local hl = "@comment." .. type
+			local fg = getHlValue(hl, "fg")
+			local bg = getHlValue(hl, "bg")
+			setHl(hl, { bold = false, fg = fg, bg = bg }) 
+		end
 	elseif theme == "kanagawa" then
 		-- transparent sign column
 		setHl("SignColumn", {})
@@ -168,9 +177,8 @@ end
 -- temporarily disabling the underline effects set.
 local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
-	updateHl("@markup.link.url.markdown", "gui=" .. change)
-	updateHl("@string.special.url.comment", "gui=" .. change)
-	updateHl("@string.special.url.html", "gui=" .. change)
+	updateHl("@markup.link.url", "gui=" .. change)
+	updateHl("@string.special.url", "gui=" .. change)
 	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)
 	updateHl("Underlined", "gui=" .. change)
 	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" })
