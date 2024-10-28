@@ -365,52 +365,52 @@ async function workspace(action, workspaceName) {
 // ROMAJI -> HIRAGANA
 
 // taken some code from: https://github.com/lovell/hepburn/blob/master/lib/hepburn.js
-const hiraganaMonographs = {
-  "a": "あ", "i": "い", "u": "う", "e": "え", "o": "お",
-  "ka": "か", "ki": "き", "ku": "く", "ke": "け", "ko": "こ",
-  "sa": "さ", "shi": "し", "su": "す", "se": "せ", "so": "そ",
-  "ta": "た", "chi": "ち", "tsu": "つ", "te": "て", "to": "と",
-  "na": "な", "ni": "に", "nu": "ぬ", "ne": "ね", "no": "の",
-  "ha": "は", "hi": "ひ", "fu": "ふ", "he": "へ", "ho": "ほ",
-  "ma": "ま", "mi": "み", "mu": "む", "me": "め", "mo": "も",
-  "ya": "や", "yu": "ゆ", "yo": "よ",
-  "ra": "ら", "ri": "り", "ru": "る", "re": "れ", "ro": "ろ",
-  "wa": "わ", "wi": "ゐ", "we": "ゑ", "wo": "を", "n'": "ん",
-  "ga": "が", "gi": "ぎ", "gu": "ぐ", "ge": "げ", "go": "ご",
-  "za": "ざ", "ji": "じ", "zu": "ず", "ze": "ぜ", "zo": "ぞ",
-  "da": "だ", "de": "で", "do": "ど",
-  "ba": "ば", "bi": "び", "bu": "ぶ", "be": "べ", "bo": "ぼ",
-  "pa": "ぱ", "pi": "ぴ", "pu": "ぷ", "pe": "ぺ", "po": "ぽ"
-};
-
-const hiraganaDigraphs = {
-  "kya": "きゃ", "kyu": "きゅ", "kyo": "きょ",
-  "sha": "しゃ", "shu": "しゅ", "sho": "しょ",
-  "cha": "ちゃ", "chu": "ちゅ", "cho": "ちょ",
-  "nya": "にゃ", "nyu": "にゅ", "nyo": "にょ",
-  "hya": "ひゃ", "hyu": "ひゅ", "hyo": "ひょ",
-  "mya": "みゃ", "myu": "みゅ", "myo": "みょ",
-  "rya": "りゃ", "ryu": "りゅ", "ryo": "りょ",
-  "gya": "ぎゃ", "gyu": "ぎゅ", "gyo": "ぎょ",
-  "ja": "じゃ", "ju": "じゅ", "jo": "じょ",
-  "bya": "びゃ", "byu": "びゅ", "byo": "びょ",
-  "pya": "ぴゃ", "pyu": "ぴゅ", "pyo": "ぴょ"
+// biome-ignore format: keep hiragana table order
+/** @type {Record<string, string>} */
+const romajiToHiraganaMap = {
+	a  : "あ", i  : "い", u  : "う", e : "え", o : "お",
+	ka : "か", ki : "き", ku : "く", ke: "け", ko: "こ",
+	sa : "さ", shi: "し", su : "す", se: "せ", so: "そ",
+	ta : "た", chi: "ち", tsu: "つ", te: "て", to: "と",
+	na : "な", ni : "に", nu : "ぬ", ne: "ね", no: "の",
+	ha : "は", hi : "ひ", fu : "ふ", he: "へ", ho: "ほ",
+	ma : "ま", mi : "み", mu : "む", me: "め", mo: "も",
+	ya : "や",            yu : "ゆ",           yo: "よ",
+	ra : "ら", ri : "り", ru : "る", re: "れ", ro: "ろ",
+	wa : "わ",                                 wo: "を",
+	n  : "ん",
+	ga : "が", gi : "ぎ", gu : "ぐ", ge: "げ", go: "ご",
+	za : "ざ", ji : "じ", zu : "ず", ze: "ぜ", zo: "ぞ",
+	da : "だ",                       de: "で", do: "ど",
+	ba : "ば", bi : "び", bu : "ぶ", be: "べ", bo: "ぼ",
+	pa : "ぱ", pi : "ぴ", pu : "ぷ", pe: "ぺ", po: "ぽ",
+	kya: "きゃ", kyu: "きゅ", kyo: "きょ",
+	sha: "しゃ", shu: "しゅ", sho: "しょ",
+	cha: "ちゃ", chu: "ちゅ", cho: "ちょ",
+	nya: "にゃ", nyu: "にゅ", nyo: "にょ",
+	hya: "ひゃ", hyu: "ひゅ", hyo: "ひょ",
+	mya: "みゃ", myu: "みゅ", myo: "みょ",
+	rya: "りゃ", ryu: "りゅ", ryo: "りょ",
+	gya: "ぎゃ", gyu: "ぎゅ", gyo: "ぎょ",
+	ja : "じゃ", ju : "じゅ", jo : "じょ",
+	bya: "びゃ", byu: "びゅ", byo: "びょ",
+	pya: "ぴゃ", pyu: "ぴゅ", pyo: "ぴょ",
 };
 
 function cwordRomajiToHiragana() {
-	const cwordRange = editor.wordAt(editor.getCursor());
-	const romaji = editor.getRange(cwordRange.from, cwordRange.to);
+	const cursor = editor.getCursor();
+	const { from, to } = editor.wordAt(cursor);
+	const cword = editor.getRange(from, to);
+	let hiragana = cword;
 
-	const hiragana = romaji
-		.split("")
-		.map((char) => {
-			const code = char.charCodeAt(0);
-			if (code >= 0x3041 && code <= 0x3096) return String.fromCharCode(code - 0x60);
-			return char;
-		})
-		.join("");
+	// sort by length, to replace the longer romaji first
+	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
+	for (const romaji of romajiByLength) {
+		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
+	}
 
-	editor.replaceRange(hiragana, cwordRange.from, cwordRange.to);
+	editor.replaceRange(hiragana,from,to);
+	editor.setCursor(cursor);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
