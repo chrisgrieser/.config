@@ -168,6 +168,7 @@ end
 -- temporarily disabling the underline effects set.
 local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
+	updateHl("@markup.link.url.markdown", "gui=" .. change)
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
 	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)

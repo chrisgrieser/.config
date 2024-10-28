@@ -26,6 +26,7 @@ zsh
 cmp
 CLI
 GPG
+APA
 APIs
 CLIs
 LSPs
@@ -58,6 +59,7 @@ stdin
 utils
 wordd
 vsnip
+macOS
 Cycler
 Laudel
 Neovim
@@ -88,6 +90,7 @@ winbar
 Romaji
 lucide
 stylua
+MAXQDA
 AniList
 Axelrod
 BibDesk
@@ -125,6 +128,8 @@ tabstop
 textobj
 tooltip
 GitFred
+AntConc
+OneNote
 DataLoom
 Dataview
 Filepath
@@ -165,6 +170,8 @@ unstages
 viewport
 wikilink
 minified
+backlink
+Evernote
 Blazingly
 Filetypes
 Justfiles
@@ -195,6 +202,9 @@ formatter
 Karabiner
 lspconfig
 autostart
+plaintext
+backlinks
+occurrent
 Cheatsheet
 Cssclasses
 Soziopolis
@@ -222,6 +232,7 @@ unindented
 whitespace
 docstrings
 lookaheads
+templating
 Automagical
 Hammerspoon
 autocommand
@@ -234,6 +245,7 @@ lspProgress
 stringified
 textobjects
 stacktraces
+YTranscript
 Co-occurrent
 MarkDownload
 ResearchGate
@@ -254,6 +266,8 @@ strikethrough
 automagically
 Strikethroughs
 strikethroughs
+operationalize
 JavaScriptReact
 TypeScriptReact
+Customizability
 filetype-specific

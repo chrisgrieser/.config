@@ -331,15 +331,6 @@
     }
   ],
   "editor:open-search": [],
-  "editor:open-search-replace": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "F"
-    }
-  ],
   "obsidian-auto-link-title:enhance-url-with-title": [],
   "file-explorer:new-file": [],
   "pseudometa-startup-actions:new-file-in-folder": [
@@ -365,6 +356,25 @@
         "Mod"
       ],
       "key": "S"
+    }
+  ],
+  "quadro:mark-datafile-as-read": [],
+  "editor:open-search-replace": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ],
+  "global-search:open": [],
+  "quadro:open-random-unread-datafile": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "Tab"
     }
   ]
 }
