@@ -143,5 +143,5 @@ vim.opt.listchars = {
 	multispace = "·",
 	tab = "│ ", -- mostly overridden by indent-blankline
 	lead = "·",
-	trail = "·",
+	trail = " ",
 }

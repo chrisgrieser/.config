@@ -1,15 +1,20 @@
--- INFO run via: `nvim -u minimal-config.lua -- foobar.js`
+-- save as `minimal-config.lua`
+-- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"akinsho/toggleterm.nvim",
+		"NeogitOrg/neogit",
+		dependencies = "nvim-lua/plenary.nvim",
+		cmd = "Neogit",
+		opts = {},
+	},
+	{
+		"chrisgrieser/nvim-origami",
+		event = "VeryLazy",
 		opts = true,
-		cmd = "ToggleTerm",
 	},
 }
 
-
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (Terminal Mode)" })
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"

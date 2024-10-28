@@ -65,6 +65,15 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$, ^com\.apple\.Preview$]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Zoom"
+    manipulators:
+      # Toggle Sidebar
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: h, modifiers: [command, shift] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
       # sidebar
