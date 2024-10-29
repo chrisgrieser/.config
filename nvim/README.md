@@ -17,8 +17,6 @@
 └── templates
 ```
 
-<https://dotfyle.com/chrisgrieser/config-nvim>
-
 ## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)

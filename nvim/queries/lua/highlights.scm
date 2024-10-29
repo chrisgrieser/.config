@@ -1,7 +1,8 @@
 ;extends
 
 ; add hlgroup `@namespace.builtin.lua`:
-; - nvim: `vim` 
+; - nvim: `vim`
 ; - hammerspon: `hs`
 ((identifier) @namespace.builtin
   (#any-of? @namespace.builtin "vim" "hs"))
+  (#set! "priority" 128)
