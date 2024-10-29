@@ -32,7 +32,7 @@ async function updatePlugins() {
 			app.setting.openTabById("community-plugins");
 			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
 		}
-	}, 1000); // timeout to avoid race condition still happening somehow
+	}, 1200); // timeout to avoid race condition still happening somehow
 }
 
 function freezeInterface() {
@@ -332,7 +332,6 @@ async function workspace(action, workspaceName) {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
-// ROMAJI -> HIRAGANA
 
 // biome-ignore format: keep hiragana table order
 /** @type {Record<string, string>} */
