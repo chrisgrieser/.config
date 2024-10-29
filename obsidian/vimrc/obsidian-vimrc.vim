@@ -85,6 +85,12 @@ onoremap J 2j
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
+" emulate nvim-origami
+exmap origamiH jsfile Meta/vimrc-jsfile.js { origamiH() }
+nnoremap h :origamiH<CR>
+exmap origamiL jsfile Meta/vimrc-jsfile.js { origamiL() }
+nnoremap l :origamiL<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " GOTO LOCATIONS
 
