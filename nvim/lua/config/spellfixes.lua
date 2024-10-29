@@ -65,6 +65,7 @@ local spellfixes = {
 	turee = "true",
 	verison = "version",
 	verisons = "versions",
+	varialbe = "variable",
 	woudl = "would",
 }
 
