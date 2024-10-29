@@ -8,10 +8,9 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "ribru17/bamboo.nvim", opts = { style = "multiplex" } },
+	"fynnfluegge/monet.nvim",
 	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
-	-- "fynnfluegge/monet.nvim",
 }
 
 vim.g.lightOpacity = 0.92
