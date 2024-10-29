@@ -15,7 +15,6 @@ local config = {
 		"IINA",
 		"Mona",
 		"pinentry-mac",
-		"Clicknow",
 		"Espanso",
 		"IINA",
 	},

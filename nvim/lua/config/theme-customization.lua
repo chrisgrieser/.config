@@ -141,17 +141,23 @@ function M.themeModifications()
 		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
 		setHl("Boolean", { link = "Special" })
 		setHl("Number", { link = "@field" })
-	elseif theme == "bamboo" then
+	elseif theme == "monet" then
+		revertedTodoComments()
 		setHl("@keyword.return", { fg = "#d672a6", bold = true })
-		setHl("@string.special.url.comment", { underline = true }) -- fix url color
-		setHl("@comment", { fg = "#a38e67" }) -- darker & less saturated
-		setHl("@lsp.mod.readonly.javascript", { link = "@variable" }) -- fix js constants
+		setHl("@namespace", { fg = "#8e9dde" }) -- different color
+		setHl("Folded", { bg = "#404454" }) -- less bright
+		setHl("@comment.todo", { bg = "#ebc0a7", fg = "#0d0d0d" })
+		setHl("BlinkCmpLabel", { fg = "#cfd5ec" }) -- remove bold
+		setHl("BlinkCmpMenuSelection", { bg = "#585d74", fg = "#c2ccff" }) -- remove bold
+		setHl("TelescopeSelection", { bg = "#353b4e"}) -- remove bold
+		setHl("MatchParen", { fg = "#e6a37c"}) -- remove background
+		setHl("String", { fg = "#97ca8f"}) -- remove italics
 	end
 end
 
 --------------------------------------------------------------------------------
 
--- FIX: For plugins using backdrop-like effects, there is some winblend bug,
+-- FIX For plugins using backdrop-like effects, there is some winblend bug,
 -- which causes the underlines to be displayed in ugly red. We fix this by
 -- temporarily disabling the underline effects set.
 local function toggleUnderlines()

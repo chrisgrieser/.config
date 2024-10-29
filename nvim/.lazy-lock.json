@@ -1,5 +1,4 @@
 {
-  "bamboo.nvim": { "branch": "master", "commit": "7e5bcd10ae1f1f7cd315fa88049ea21babe11815" },
   "blink.cmp": { "branch": "main", "commit": "70438ac5016d3ab609f422d1ef084870cb9ceb29" },
   "ccc.nvim": { "branch": "main", "commit": "7c639042583c7bdc7ce2e37e5a0e0aa6d0659c6a" },
   "dawnfox": { "branch": "main", "commit": "7557f26defd093c4e9bc17f28b08403f706f5a44" },
@@ -14,6 +13,7 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "c5e07b8ff54187716334d585db34282e46fa2932" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "mini.operators": { "branch": "main", "commit": "3bc484733f416a09c5d571135dcfd0062bcc1478" },
+  "monet.nvim": { "branch": "main", "commit": "af6c8fb9faaae2fa7aa16dd83b1b425c2b372891" },
   "neocodeium": { "branch": "main", "commit": "db05edf4c1c99c471104a984a787d04e77c2e471" },
   "noice.nvim": { "branch": "main", "commit": "df448c649ef6bc5a6a633a44f2ad0ed8d4442499" },
   "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
