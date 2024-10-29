@@ -14,16 +14,32 @@ end
 
 --------------------------------------------------------------------------------
 
+-- FIX https://github.com/FelixKratz/SketchyBar/issues/641
+local function privacyIndicatorCover()
+	local toMode = u.isDarkMode() and "dark" or "light"
+	local bgColor = toMode == "dark" and { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
+		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
+
+	if M.privacyDot then
+		M.privacyDot:delete()
+		M.privacyDot = nil
+	end
+	if env.isProjector() then return end
+
+	local screen = hs.screen.mainScreen():frame()
+	hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
+end
+
 ---to stop wallpaper shining through
-function M.update()
+local function holeCover()
 	local toMode = u.isDarkMode() and "dark" or "light"
 
-	if M.coverParts then
-		for _, cover in pairs(M.coverParts) do
-			if cover.delete then cover:delete() end
+	if M.triangleParts then
+		for _, cover in pairs(M.triangleParts) do
+			cover:delete()
 			cover = nil
 		end
-		M.CoverParts = nil
+		M.triangleParts = nil
 	end
 	if env.isProjector() then return end
 
@@ -33,13 +49,13 @@ function M.update()
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
 	-- three points, forming roughly a triangle
-	M.coverParts = {
+	M.triangleParts = {
 		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
 		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
 		hs.drawing.rectangle { x = pseudoMaxCorner - 3, y = screen.h - 9, w = 6, h = 3 },
 	}
 
-	for _, cover in pairs(M.coverParts) do
+	for _, cover in pairs(M.triangleParts) do
 		cover:setFillColor(bgColor)
 		cover:setFill(true)
 		cover:setStrokeColor(bgColor)
@@ -48,6 +64,12 @@ function M.update()
 	end
 end
 
+--------------------------------------------------------------------------------
+
+function M.update()
+	holeCover()
+	privacyIndicatorCover()
+end
 if u.isSystemStart() then M.update() end
 
 --------------------------------------------------------------------------------
