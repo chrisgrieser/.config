@@ -20,6 +20,7 @@ local function privacyIndicatorCover()
 	local bgColor = toMode == "dark" and { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
+	---@diagnostic disable: undefined-field
 	if M.privacyDot then
 		M.privacyDot:delete()
 		M.privacyDot = nil
@@ -27,7 +28,14 @@ local function privacyIndicatorCover()
 	if env.isProjector() then return end
 
 	local screen = hs.screen.mainScreen():frame()
-	hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
+	M.privacyDot = hs.drawing.rectangle { x = screen.w - 50, y = screen.h - 50, w = 20, h = 20 }
+
+	M.privacyDot:setFillColor(bgColor)
+	M.privacyDot:setFill(true)
+	M.privacyDot:setStrokeColor(bgColor)
+	M.privacyDot:sendToBack()
+	M.privacyDot:show()
+	---@diagnostic enable: undefined-field
 end
 
 ---to stop wallpaper shining through
@@ -48,7 +56,6 @@ local function holeCover()
 	local bgColor = toMode == "dark" and { red = 0.2, green = 0.2, blue = 0.2, alpha = 1 }
 		or { red = 0.8, green = 0.8, blue = 0.8, alpha = 1 }
 
-	-- three points, forming roughly a triangle
 	M.triangleParts = {
 		hs.drawing.rectangle { x = pseudoMaxCorner - 9, y = screen.h - 3, w = 18, h = 3 },
 		hs.drawing.rectangle { x = pseudoMaxCorner - 6, y = screen.h - 6, w = 12, h = 3 },
