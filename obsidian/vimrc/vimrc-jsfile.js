@@ -389,6 +389,24 @@ function hiraganafyCword() {
 	editor.setCursor(cursor);
 }
 
+
+//──────────────────────────────────────────────────────────────────────────────
+
+function origamiH() {
+	const isAtBoL = editor.getCursor().ch === 0;
+	const action = isAtBoL ? "toggleFold" : "goLeft";
+	editor.exec(action);
+}
+
+function origamiL() {
+	const currentLn = editor.getCursor().line;
+	const folds = editor.getFoldOffsets();
+	const foldedLines = [...folds].map((offset) => editor.offsetToPos(offset).line);
+
+	const action = foldedLines.includes(currentLn) ? "toggleFold" : "goRight";
+	editor.exec(action);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 // STUFF FOR DATAVIEW-JS
 
