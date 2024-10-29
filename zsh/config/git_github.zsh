@@ -5,7 +5,7 @@ alias gt='git stash push && git stash show 0'
 alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
-alias grh='git clean -dfx && git reset --hard' # remove untracked files & undo all changes
+alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
 
 alias cherry='git cherry-pick'
 alias push='git push --no-progress'

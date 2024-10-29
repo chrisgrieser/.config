@@ -45,9 +45,6 @@ local function customHighlights()
 		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
-	-- emphasized `return`
-	updateHl("@keyword.return", "gui=bold")
-
 	-- LSP cursorword
 	setHl("LspReferenceWrite", { underdashed = true }) -- definition
 	setHl("LspReferenceRead", { underdotted = true }) -- reference
@@ -78,6 +75,7 @@ function M.themeModifications()
 	-----------------------------------------------------------------------------
 
 	if theme == "tokyonight" then
+		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		local yellow = vim.o.background == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. yellow)
@@ -87,7 +85,6 @@ function M.themeModifications()
 		updateHl("diffChanged", "guifg=" .. yellow)
 		updateHl("GitSignsAdd", "guifg=#369a96")
 
-		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
 		revertedTodoComments()
 		-- sometimes not set when switching themes
 		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
@@ -109,9 +106,9 @@ function M.themeModifications()
 		setHl("Title", { fg = "#7c84da", bold = true })
 		setHl("Conceal", { link = "NonText" })
 	elseif theme == "dawnfox" then
+		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
 		setHl("Whitespace", { link = "NonText" }) -- more visible
 		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
-		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
 		setHl("@markup.italic", { italic = true }) -- FIX
 		setHl("@character.printf", { link = "SpecialChar" })
 		updateHl("@markup.raw", "gui=none") -- no italics
@@ -132,6 +129,7 @@ function M.themeModifications()
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
 	elseif theme == "dracula" then
+		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
 		revertedTodoComments()
 
 		setHl("@number", { fg = "#7ca2ff" })
@@ -143,9 +141,11 @@ function M.themeModifications()
 		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
 		setHl("Boolean", { link = "Special" })
 		setHl("Number", { link = "@field" })
-		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
 	elseif theme == "bamboo" then
 		setHl("@keyword.return", { fg = "#d672a6", bold = true })
+		setHl("@string.special.url.comment", { underline = true }) -- fix url color
+		setHl("@comment", { fg = "#a38e67" }) -- darker & less saturated
+		setHl("@lsp.mod.readonly.javascript", { link = "@variable" }) -- fix js constants
 	end
 end
 
