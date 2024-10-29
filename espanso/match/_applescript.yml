@@ -19,3 +19,10 @@ matches:
   - trigger: "!key"
     replace: tell application "System Events" to keystroke "$|$" using {command down}
     label: 🍏 Keystroke
+  # DOCS https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/DisplayNotifications.html
+  - trigger: "!display"
+    replace: |
+      const app = Application.currentApplication();
+      app.includeStandardAdditions = true;
+      app.displayNotification("$|$", { withTitle: "", subtitle: "" });
+    label: 🍏 Display Notification

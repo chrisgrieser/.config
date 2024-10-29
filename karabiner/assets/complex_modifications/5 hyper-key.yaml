@@ -36,8 +36,7 @@ rules:
                   .groups[0]
                   .groups[0]
                   .scrollAreas[0]
-                  .uiElements[0]
-                  .buttons()
+                  .uiElements()
                   .map(banner => banner.actions().slice(-1)[0])
                   .forEach(banner => banner.perform())
               '
