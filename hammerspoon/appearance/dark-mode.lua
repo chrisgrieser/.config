@@ -22,6 +22,7 @@ function M.setDarkMode(toMode)
 	hs.osascript.applescript(applescript)
 
 	-- sketchybar
+	-- (silent fails if sketchybar is not running, which is fine)
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- neovim

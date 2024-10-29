@@ -43,9 +43,11 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		elseif name == "violentmonkey" then
 			success = os.rename(path, browserSettings .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
-			local shellCmd = ("cd %q && "):format(browserSettings)
-				.. "zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey"
-			hs.execute(shellCmd)
+			hs.execute(
+				("cd %q && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey"):format(
+					browserSettings
+				)
+			)
 			u.app("Brave Browser"):activate() -- window created by auto-unzipping
 		elseif name == "ublacklist-settings.json" then
 			success = os.rename(path, browserSettings .. name)
