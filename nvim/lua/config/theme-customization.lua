@@ -11,10 +11,11 @@ local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. ch
 local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
 ---@param hlName string|nil name of highlight group
----@param key "fg"|"bg"|"bold"
+---@param key "fg"|"bg"|"bold"|nil nil gets whole value
 ---@nodiscard
----@return string|nil the value, or nil if hlgroup or key is not available
+---@return string|vim.api.keyset.hl_info|nil -- the value, or nil if hlgroup or key is not available
 local function getHlValue(hlName, key)
+	if not key then return vim.api.nvim_get_hl(0, { name = hlName }) end
 	local hl
 	repeat
 		-- follow linked highlights
@@ -154,8 +155,9 @@ end
 local function toggleUnderlines()
 	local change = vim.bo.buftype == "" and "underline" or "none"
 	updateHl("@markup.link.url", "gui=" .. change)
-	updateHl("@string.special.url", "gui=" .. change)
 	updateHl("@markup.link.url.markdown_inline", "gui=" .. change)
+	updateHl("@string.special.url.comment", "gui=" .. change)
+	updateHl("@string.special.url.html", "gui=" .. change)
 	updateHl("Underlined", "gui=" .. change)
 	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" })
 	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
