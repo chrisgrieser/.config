@@ -1,4 +1,5 @@
 {
+  "bamboo.nvim": { "branch": "master", "commit": "7e5bcd10ae1f1f7cd315fa88049ea21babe11815" },
   "blink.cmp": { "branch": "main", "commit": "70438ac5016d3ab609f422d1ef084870cb9ceb29" },
   "ccc.nvim": { "branch": "main", "commit": "7c639042583c7bdc7ce2e37e5a0e0aa6d0659c6a" },
   "dawnfox": { "branch": "main", "commit": "7557f26defd093c4e9bc17f28b08403f706f5a44" },

@@ -8,7 +8,8 @@ local lightThemes = {
 }
 
 local darkThemes = {
-	{ "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
+	{ "ribru17/bamboo.nvim", opts = { style = "multiplex" } },
+	-- { "folke/tokyonight.nvim", opts = { style = "moon", lualine_bold = true } },
 	-- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
 	-- "fynnfluegge/monet.nvim",
 }

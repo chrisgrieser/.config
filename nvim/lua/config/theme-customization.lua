@@ -144,6 +144,8 @@ function M.themeModifications()
 		setHl("Boolean", { link = "Special" })
 		setHl("Number", { link = "@field" })
 		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
+	elseif theme == "bamboo" then
+		setHl("@keyword.return", { fg = "#d672a6", bold = true })
 	end
 end
 
