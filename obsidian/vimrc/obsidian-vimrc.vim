@@ -288,6 +288,9 @@ nnoremap Q :appendJsComment<CR>
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,xx :checkList<CR>
 
+" Uncheck markdown tasks
+nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
+
 " blockquote
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote<CR>
