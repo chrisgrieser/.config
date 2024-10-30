@@ -47,14 +47,6 @@ local function isWorkweek()
 	return weekday ~= "Sat" and weekday ~= "Sun"
 end
 
----necessary due to macOS 15.1 https://github.com/FelixKratz/SketchyBar/issues/641
----@async
----@param action "start"|"stop"
-local function sketchybar(action)
-	if M.sketchybar_task and M.sketchybar_task:isRunning() then M.sketchybar_task:terminate() end
-	M.sketchybar_task = hs.task.new("/opt/homebrew/bin/brew", nil, { "services", action, "sketchybar" }):start()
-end
-
 --------------------------------------------------------------------------------
 -- menu item: move windows to projector screen
 if not env.isAtOffice then
@@ -81,7 +73,6 @@ local function workLayout()
 	dockSwitcher("work")
 	holeCover.update()
 	darkmode.autoSwitch()
-	sketchybar("start")
 
 	-- prevent the automatic quitting of audio-apps from triggering starting spotify
 	videoAppWatcherForSpotify:stop()
@@ -106,7 +97,6 @@ local function movieLayout()
 	holeCover.update()
 	dockSwitcher(env.isAtMother and "mother-movie" or "movie")
 	u.closeAllWindows("Finder")
-	sketchybar("stop")
 
 	-- turn off showing hidden files
 	hs.execute("defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder")

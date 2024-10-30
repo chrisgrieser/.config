@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
 # - INFO `upload` would be $6
-# - HACK `netstat` only allows streaming output, we use `awk`'s `exit` to
-# - return the first value.
+# - HACK `netstat` only streams stdout, so using `awk`'s `exit` to return 1st value
 download_kb=$(netstat -w1 | awk '/[0-9]/ {print int($3/1024) ; exit }')
 unit="k"
 
