@@ -333,6 +333,8 @@ return {
 				objectLog = {
 					lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
 					typescript = "new Notice(`%s %s: ${%s}`, 0)", -- Obsidian
+					-- re-purposing `objectLog` for debugging via AppleScript notification
+					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 				},
 				clearLog = { lua = "hs.console.clearConsole() -- %s" }, -- Hammerspoon
 				sound = {

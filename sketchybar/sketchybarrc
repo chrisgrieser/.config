@@ -2,25 +2,27 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 # CONFIG
-plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
 
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
-	bg_color="0xff333333"
-	font_color="0xffffffff"
+	bg="0xff333333"
+	fg="0xffffffff"
+	graph_fill="0xff808080"
+	# #b3b3b3
 else
-	bg_color="0xffcdcdcd"
-	font_color="0xff000000"
+	bg="0xffcdcdcd"
+	fg="0xff000000"
+	graph_fill="0xff808080"
 fi
-
-first_row="left"
-# HACK using popup for second row. The popup.{item} only refers to {item} to
-# anchor to it. Should be the leftmost item.
-second_row="popup.clock"
 
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
-stats_update_secs=4
+stats_update_secs=3
+
+# HACK using popup for second row. The popup.{item} only refers to {item} to
+# anchor to it. Should be the leftmost item of the first row.
+first_row="left"
+second_row="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
@@ -29,12 +31,12 @@ stats_update_secs=4
 sketchybar \
 	--bar \
 	height=60 position="top" display="all" \
-	padding_left=0 margin=-5 color="$bg_color" \
+	padding_left=0 margin=-5 color="$bg" \
 	\
 	--default \
 	drawing=false background.padding_right=10 label.padding_right=2 \
-	icon.font="${nerd_font}:Bold:16" icon.color="$font_color" icon.padding_right=3 \
-	label.font="${system_font}:Regular:16.5" label.color="$font_color" \
+	icon.font="${nerd_font}:Bold:16" icon.color="$fg" icon.padding_right=3 \
+	label.font="${system_font}:Regular:16.5" label.color="$fg" \
 	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
 	popup.y_offset="-35" y_offset="18" popup.padding_left=20 \
@@ -43,56 +45,52 @@ sketchybar \
 	\
 	--add item clock $first_row \
 	--set clock update_freq=1 drawing=true padding_left=10 \
-	script="$plugin_dir/clock.sh" \
+	script="./clock.sh" \
 	\
 	--add item weather $first_row \
 	--set weather update_freq=1200 icon.y_offset=-1 \
-	script="$plugin_dir/weather.sh" \
+	script="./weather.sh" \
 	\
 	--add item input_source $first_row \
 	--set input_source update_freq=2 \
-	script="$plugin_dir/input_source_icon.sh" \
+	script="./input_source_icon.sh" \
 	\
 	--add item github_notif $first_row \
 	--set github_notif update_freq=300 icon="" \
-	script="$plugin_dir/github_notification_count.sh" \
-	--subscribe github_notif front_app_switched \
-	--subscribe github_notif system_woke \
+	script="./github_notification_count.sh" \
+	--subscribe github_notif front_app_switched system_woke \
 	\
 	--add item reminders_count $first_row \
 	--set reminders_count update_freq=300 icon="" \
-	script="$plugin_dir/reminders-count.sh" \
-	--subscribe reminders_count front_app_switched \
-	--subscribe reminders_count system_woke \
+	script="./reminders-count.sh" \
 	--add event update_reminder_count \
-	--subscribe reminders_count update_reminder_count \
+	--subscribe reminders_count update_reminder_count system_woke front_app_switched \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add graph cpu_graph $second_row 40 \
-	--set cpu_graph fill_color=$font_color icon="󰍛" \
-	padding_left=12 update_freq=2 drawing=true \
-	background.color=$bg_color background.height=22 \
-	script="$plugin_dir/cpu.sh" \
+	--add graph cpu_graph $second_row 45 \
+	--set cpu_graph icon="󰍛" background.height=18 \
+	padding_left=12 update_freq="$stats_update_secs" drawing=true \
+	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
+	script="./cpu.sh" \
 	\
 	--add item ram $second_row \
-	--set ram icon=" " update_freq="$stats_update_secs" drawing=true \
-	script="$plugin_dir/ram.sh" \
+	--set ram icon=" " icon.font="${nerd_font}:Regular:14" update_freq="$stats_update_secs" \
+	script="./ram.sh" \
 	\
 	--add item network $second_row \
-	--set network icon="󰱦" update_freq="$stats_update_secs" \
-	script="$plugin_dir/network.sh" \
+	--set network icon="↓" update_freq="$stats_update_secs" \
+	script="./network.sh" \
 	\
 	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=180 icon="󰓦" \
-	script="$plugin_dir/git-sync-bar-icon.sh" \
-	--subscribe sync-indicator system_woke \
+	script="./git-sync-bar-icon.sh" \
 	--add event repo-files-update \
-	--subscribe sync-indicator repo-files-update \
+	--subscribe sync-indicator system_woke repo-files-update \
 	\
 	--add item package-updates $second_row \
 	--set package-updates update_freq=86400 icon="" \
-	script="$plugin_dir/homebrew-update-tracker.sh" \
+	script="./homebrew-update-tracker.sh" \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script

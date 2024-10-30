@@ -6,15 +6,15 @@
 download_kb=$(netstat -w1 | awk '/[0-9]/ {print int($3/1024) ; exit }')
 unit="k"
 
-# only show when more than 10kb
-if [[ $download_kb -lt 10 ]]; then
+# only show when more than 50kb
+if [[ $download_kb -lt 50 ]]; then
 	sketchybar --set "$NAME" drawing=false
 	return 0
 fi
 
 # switch to Mb when more than 1024kb
 if [[ $download_kb -gt 1024 ]]; then
-	download_kb=$((download_kb / 1024))
+	download_kb=$(echo "scale = 1; $download_kb / 1024" | bc)
 	unit="M"
 fi
 
