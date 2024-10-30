@@ -44,6 +44,7 @@ toml
 yaml
 util
 Nvim
+PDFs
 Fixup
 Lorem
 Numpy
@@ -92,6 +93,7 @@ Romaji
 lucide
 stylua
 MAXQDA
+BibTeX
 AniList
 Axelrod
 BibDesk
@@ -207,6 +209,7 @@ autostart
 plaintext
 backlinks
 occurrent
+pdfannots
 Cheatsheet
 Cssclasses
 Soziopolis
@@ -235,6 +238,7 @@ whitespace
 docstrings
 lookaheads
 templating
+prepending
 Automagical
 Hammerspoon
 autocommand

@@ -627,7 +627,7 @@ to set the hotkey for the annotation extraction</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>9.2.0</string>
+	<string>9.2.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/pdf-annotation-extractor-alfred</string>
 </dict>
