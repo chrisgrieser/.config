@@ -11,9 +11,7 @@ alias mv='mv -vi'
 alias ln='ln -vwis'
 alias cp='cp -vi'
 alias rm='rm -I'
-alias vidir='vidir --verbose'
 alias curl='curl --progress-bar'
-alias tokei="tokei --compact --exclude='*.txt' --exclude='*.json'"
 alias zip='zip --recurse-paths --symlinks'
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -21,7 +19,7 @@ alias zip='zip --recurse-paths --symlinks'
 # EZA
 alias e='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest'
-alias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | less'
+laias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | less'
 
 # JUST
 alias j="just"
@@ -68,7 +66,7 @@ alias -g N='| wc -l | tr -d " "' # count lines
 alias -g L='| less'
 alias -g J='| yq --prettyPrint --output-format=json --colors | less'
 alias -g C='| pbcopy ; echo "Copied."'
-alias P='pbpaste' # only start of line
+alias P='pbpaste'
 
 # highlights for them
 ZSH_HIGHLIGHT_REGEXP+=(' G($| )' 'fg=magenta,bold')
@@ -77,6 +75,6 @@ ZSH_HIGHLIGHT_REGEXP+=(' B$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' N$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' L$' 'fg=magenta,bold')
 ZSH_HIGHLIGHT_REGEXP+=(' J$' 'fg=magenta,bold')
-ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold')
+ZSH_HIGHLIGHT_REGEXP+=('^P ' 'fg=magenta,bold') # only start of line
 
 #───────────────────────────────────────────────────────────────────────────────
