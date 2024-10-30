@@ -91,15 +91,18 @@ M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
 end):start()
 
 --------------------------------------------------------------------------------
--- FIX Mona's autoscroll sometimes not fully scrolling up
+-- FIX Mona's autoscroll often not fully scrolling up
 
 local function homeAndScrollUp()
+	if M.isScrolling then return end
+	M.isScrolling = true
+
 	-- GUARD only scrolling when not idle, to not prevent the machine from going to sleep
 	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
 
-	-- GUARD only if Mona is running in background
+	-- GUARD only if Mona is running in background and already has window
 	local mona = u.app("Mona")
-	if not mona or mona:isFrontmost() then return end
+	if not mona or mona:isFrontmost() or not mona:mainWindow() then return end
 
 	local key = hs.eventtap.keyStroke
 	key({ "cmd" }, "left", 1, mona) -- go back
@@ -108,6 +111,8 @@ local function homeAndScrollUp()
 	u.defer({ 1, 4 }, function() -- wait for posts to load
 		key({ "cmd" }, "up", 1, mona) -- scroll up
 	end)
+
+	u.defer(4, function() M.isScrolling = false end)
 end
 
 -- triggers

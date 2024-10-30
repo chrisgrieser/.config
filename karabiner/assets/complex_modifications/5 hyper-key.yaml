@@ -30,13 +30,18 @@ rules:
           - shell_command: |
               # https://github.com/alfredapp/banner-be-gone-workflow/
               osascript -l JavaScript -e '
-                Application("System Events")
+                const macos15 = Application("System Events")
                   .applicationProcesses.byName("NotificationCenter")
                   .windows[0]
                   .groups[0]
                   .groups[0]
                   .scrollAreas[0]
-                  .uiElements()
+                // 15.0
+                macos15.uiElements[0].buttons()
+                  .map(banner => banner.actions().slice(-1)[0])
+                  .forEach(banner => banner.perform())
+                // 15.1
+                macos15.uiElements()
                   .map(banner => banner.actions().slice(-1)[0])
                   .forEach(banner => banner.perform())
               '
