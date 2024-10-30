@@ -1,12 +1,8 @@
 #!/usr/bin/env zsh
 
+# - INFO `upload` would be $6
+# - HACK `netstat` only allows streaming output, we use `awk`'s `exit` to
+# - return the first value.
+download_kb=$(netstat -w1 | awk '/[0-9]/ {print int($3/1024) ; exit }')
 
-
-#!/usr/bin/env bash
-
-pkill -f "netstat -w5"
-netstat -w5 \
-  | awk '/[0-9]/ {print $3/5 "," $6/5; fflush(stdout)}' \
-  | xargs -I {} bash -c "sketchybar --trigger netstat_update DOWNLOAD=\$(cut -d, -f1 <<< {}) UPLOAD=\$(cut -d, -f2 <<< {})" &
-
-sketchybar --set "$NAME" label="$network_usage%"
+sketchybar --set "$NAME" label="${download_kb}󰬒"
