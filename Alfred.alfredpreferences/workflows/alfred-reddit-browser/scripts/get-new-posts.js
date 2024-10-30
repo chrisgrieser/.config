@@ -43,7 +43,7 @@ function getHackernewsPosts(oldItems) {
 	try {
 		response = JSON.parse(apiResponse);
 	} catch (_error) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`Error parsing JSON. curl response was: ${apiResponse}`);
 	}
 
@@ -52,6 +52,7 @@ function getHackernewsPosts(oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const hits = response.hits.reduce(
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		(/** @type {AlfredItem[]} */ acc, /** @type {hackerNewsItem} */ item) => {
 			if (item.points < opts.minUpvotes) return acc;
 
@@ -153,11 +154,11 @@ function getRedditPosts(subredditName, oldItems) {
 	try {
 		response = JSON.parse(apiResponse);
 	} catch (_error) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`Error parsing JSON. curl response was: ${apiResponse}`);
 	}
 	if (response.error) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`Error ${response.error}: ${response.message}`);
 		return;
 	}
@@ -170,6 +171,7 @@ function getRedditPosts(subredditName, oldItems) {
 
 	/** @type{AlfredItem[]} */
 	const redditPosts = response.data.children.reduce(
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		(/** @type {AlfredItem[]} */ acc, /** @type {redditPost} */ data) => {
 			const item = data.data;
 			if (item.score < opts.minUpvotes) return acc;

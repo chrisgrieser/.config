@@ -44,7 +44,7 @@ function cacheAndReturnSubIcon(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return false;
 	}
@@ -64,7 +64,7 @@ function cacheAndReturnSubCount(subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return undefined;
 	}
