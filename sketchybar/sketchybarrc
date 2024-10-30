@@ -20,6 +20,7 @@ second_row="popup.clock"
 
 nerd_font="JetBrainsMonoNL NF"
 system_font="Lucida Grande"
+stats_update_secs=4
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
@@ -49,7 +50,7 @@ sketchybar \
 	script="$plugin_dir/weather.sh" \
 	\
 	--add item input_source $first_row \
-	--set input_source update_freq=2 drawing=true \
+	--set input_source update_freq=2 \
 	script="$plugin_dir/input_source_icon.sh" \
 	\
 	--add item github_notif $first_row \
@@ -68,16 +69,18 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add item cpu $second_row \
-	--set cpu icon="󰍛" padding_left=12 update_freq=5 drawing=true \
+	--add graph cpu_graph $second_row 40 \
+	--set cpu_graph fill_color=$font_color icon="󰍛" \
+	padding_left=12 update_freq=2 drawing=true \
+	background.color=$bg_color background.height=22 \
 	script="$plugin_dir/cpu.sh" \
 	\
 	--add item ram $second_row \
-	--set ram icon=" " update_freq=5 drawing=true \
+	--set ram icon=" " update_freq="$stats_update_secs" drawing=true \
 	script="$plugin_dir/ram.sh" \
 	\
 	--add item network $second_row \
-	--set network icon="󰱦" update_freq=5 drawing=true \
+	--set network icon="󰱦" update_freq="$stats_update_secs" \
 	script="$plugin_dir/network.sh" \
 	\
 	--add item sync-indicator $second_row \
