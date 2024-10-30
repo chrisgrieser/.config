@@ -42,8 +42,8 @@ return {
 		windows = {
 			documentation = {
 				min_width = 15,
-				max_width = 50,
-				max_height = 15,
+				max_width = 45, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
+				max_height = 10,
 				border = vim.g.borderStyle,
 				auto_show = true,
 				auto_show_delay_ms = 250,
