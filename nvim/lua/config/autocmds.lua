@@ -23,7 +23,7 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
--- * Once a week, on first `FocusLost`, delete older files. 
+-- * Once a week, on first `FocusLost`, delete older files.
 -- * Requires unix system.
 vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
@@ -70,6 +70,7 @@ local autoCdConfig = {
 	parentOfRoot = {
 		".config",
 		"com~apple~CloudDocs", -- macOS iCloud
+		vim.fs.basename(vim.env.HOME),
 		"Cellar", -- opt/homebrew/Cellar/neovim
 	},
 }
