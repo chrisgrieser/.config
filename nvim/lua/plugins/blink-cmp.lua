@@ -43,17 +43,17 @@ return {
 		},
 		windows = {
 			documentation = {
+				border = vim.g.borderStyle,
 				min_width = 15,
 				max_width = 45, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
 				max_height = 10,
-				border = vim.g.borderStyle,
 				auto_show = true,
 				auto_show_delay_ms = 250,
 			},
 			autocomplete = {
+				border = vim.g.borderStyle,
 				min_width = 10, -- max_width controlled by draw-function
 				max_height = 10,
-				border = vim.g.borderStyle,
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				draw = function(ctx)
 					-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
