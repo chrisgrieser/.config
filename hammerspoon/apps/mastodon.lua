@@ -96,6 +96,7 @@ end):start()
 local function homeAndScrollUp()
 	if M.isScrolling then return end
 	M.isScrolling = true
+	u.defer(4, function() M.isScrolling = false end)
 
 	-- GUARD only scrolling when not idle, to not prevent the machine from going to sleep
 	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
@@ -111,8 +112,6 @@ local function homeAndScrollUp()
 	u.defer({ 1, 4 }, function() -- wait for posts to load
 		key({ "cmd" }, "up", 1, mona) -- scroll up
 	end)
-
-	u.defer(4, function() M.isScrolling = false end)
 end
 
 -- triggers

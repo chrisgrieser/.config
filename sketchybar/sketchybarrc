@@ -4,9 +4,6 @@
 # CONFIG
 plugin_dir="$(dirname "$0")" # plugins in same folder as this rc-file
 
-# open Stats
-pgrep -xq "Stats" || open -a "Stats"
-
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	bg_color="0xff333333"
@@ -71,17 +68,26 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
-	--add alias "Stats,CombinedModules" "$second_row" \
-	--set "Stats,CombinedModules" padding_right=-20 drawing=true \
+	--add item cpu $second_row \
+	--set cpu icon="󰍛" padding_left=12 update_freq=5 drawing=true \
+	script="$plugin_dir/cpu.sh" \
 	\
-	--add item sync-indicator "$second_row" \
+	--add item ram $second_row \
+	--set ram icon=" " update_freq=5 drawing=true \
+	script="$plugin_dir/ram.sh" \
+	\
+	--add item network $second_row \
+	--set network icon="󰱦" update_freq=5 drawing=true \
+	script="$plugin_dir/network.sh" \
+	\
+	--add item sync-indicator $second_row \
 	--set sync-indicator update_freq=180 icon="󰓦" \
 	script="$plugin_dir/git-sync-bar-icon.sh" \
 	--subscribe sync-indicator system_woke \
 	--add event repo-files-update \
 	--subscribe sync-indicator repo-files-update \
 	\
-	--add item package-updates "$second_row" \
+	--add item package-updates $second_row \
 	--set package-updates update_freq=86400 icon="" \
 	script="$plugin_dir/homebrew-update-tracker.sh" \
 	\
