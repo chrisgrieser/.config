@@ -32,6 +32,7 @@ if [[ $upload -gt 1024 ]]; then
 fi
 [[ $download_kb -ge $threshold_kb ]] && download_display="⏷${download}${download_unit}"
 [[ $upload_kb -ge $threshold_kb ]] && upload_display="⏶${upload}${upload_unit}"
+[[ $upload_kb -ge $threshold_kb && $download_kb -ge $threshold_kb ]] && sep="  "
 
 # Display
-sketchybar --set "$NAME" label="${download_display}  ${upload_display}" drawing=true
+sketchybar --set "$NAME" label="$download_display$sep$upload_display" drawing=true
