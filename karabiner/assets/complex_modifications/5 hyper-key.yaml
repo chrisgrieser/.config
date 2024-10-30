@@ -27,21 +27,15 @@ rules:
       - type: basic
         from: { key_code: "9", modifiers: *hyper }
         to:
-          - shell_command: |
-              # https://github.com/alfredapp/banner-be-gone-workflow/
+          - shell_command: | # https://github.com/alfredapp/banner-be-gone-workflow/
               osascript -l JavaScript -e '
-                const macos15 = Application("System Events")
+                Application("System Events")
                   .applicationProcesses.byName("NotificationCenter")
                   .windows[0]
                   .groups[0]
                   .groups[0]
                   .scrollAreas[0]
-                // 15.0
-                macos15.uiElements[0].buttons()
-                  .map(banner => banner.actions().slice(-1)[0])
-                  .forEach(banner => banner.perform())
-                // 15.1
-                macos15.uiElements()
+                  .uiElements()
                   .map(banner => banner.actions().slice(-1)[0])
                   .forEach(banner => banner.perform())
               '
