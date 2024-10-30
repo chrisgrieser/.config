@@ -21,8 +21,5 @@ matches:
     label: 🍏 Keystroke
   # DOCS https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/DisplayNotifications.html
   - trigger: "!display"
-    replace: |
-      const app = Application.currentApplication();
-      app.includeStandardAdditions = true;
-      app.displayNotification("$|$", { withTitle: "", subtitle: "" });
+    replace: display notification "" with title "$|$" subtitle ""
     label: 🍏 Display Notification

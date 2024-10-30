@@ -306,6 +306,10 @@
       "now"
     ]
   },
+  "trap on exit": {
+    "body": "trap '${1:rm -rf \"./tmp\"}' EXIT",
+    "prefix": "trap on exit"
+  },
   "trim whitespace": {
     "body": "${1:text}=$(echo -n \"$${1:text}\" | sed -e 's/^ *//' -e 's/ *$//')",
     "prefix": "trim whitespace"
