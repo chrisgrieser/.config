@@ -13,7 +13,6 @@ $character\
 right_format = """\
 $jobs\
 $cmd_duration\
-${custom.tokei_loc}\
 ${custom.alfred}\
 ${custom.venv_on}${custom.venv_off}\
 $python$nodejs\
@@ -134,13 +133,6 @@ format = "[+$number $symbol]($style)"
 style = "fg:bold purple"
 symbol_threshold = 1
 number_threshold = 1
-
-[custom.tokei_loc]
-description = "Number of lines of code in the current project using tokei (for performance)."
-command = "tokei --compact --exclude='*.txt' --exclude='*.json' | tail -n2 | awk 'NR==1 {print $3}'"
-when = '[[ "$(dirname $PWD)" == "$HOME/Developer" ]]'                                                    # only in my local repos folder
-format = ' [$output ]($style)'
-style = "blue"
 
 [cmd_duration]
 min_time = 2500
