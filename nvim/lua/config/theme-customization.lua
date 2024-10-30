@@ -150,6 +150,7 @@ function M.themeModifications()
 		setHl("BlinkCmpLabel", { fg = "#cfd5ec" }) -- remove bold
 		setHl("BlinkCmpMenuSelection", { bg = "#585d74", fg = "#c2ccff" }) -- remove bold
 		setHl("TelescopeSelection", { bg = "#353b4e"}) -- remove bold
+		setHl("Visual", { bg = "#61677f"}) -- remove bold
 		setHl("MatchParen", { fg = "#e6a37c"}) -- remove background
 		setHl("String", { fg = "#97ca8f"}) -- remove italics
 	end
