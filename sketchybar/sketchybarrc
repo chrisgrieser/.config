@@ -76,11 +76,11 @@ sketchybar \
 	script="./ram.sh" \
 	\
 	--add item network $second_row \
-	--set network icon="↓" update_freq="$stats_update_secs" \
+	--set network icon.padding_right=0 update_freq="$stats_update_secs" \
 	script="./network.sh" \
 	\
 	--add item sync-indicator $second_row \
-	--set sync-indicator update_freq=180 icon="󰓦" \
+	--set sync-indicator icon.padding_left=1 update_freq=180 icon="󰓦" \
 	script="./git-sync-bar-icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator system_woke repo-files-update \
