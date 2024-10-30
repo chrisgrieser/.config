@@ -27,6 +27,7 @@ cmp
 CLI
 GPG
 APA
+cmp
 APIs
 CLIs
 LSPs
@@ -172,6 +173,7 @@ wikilink
 minified
 backlink
 Evernote
+prepends
 Blazingly
 Filetypes
 Justfiles
@@ -271,4 +273,3 @@ JavaScriptReact
 TypeScriptReact
 Customizability
 filetype-specific
-cmp

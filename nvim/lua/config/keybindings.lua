@@ -349,7 +349,6 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P", { desc = " Paste w/o switching with register" })
-
 keymap("n", "dd", function()
 	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
 	return "dd"
@@ -361,7 +360,7 @@ keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
 keymap("i", "<D-v>", function()
 	local regContent = vim.trim(vim.fn.getreg("+"))
 	vim.fn.setreg("+", regContent, "v")
-	return "<C-g>u<C-r><C-o>+" -- "<C-g>u" adds undopoint before the paste
+	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macOS clipboard managers

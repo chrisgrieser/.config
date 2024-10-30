@@ -421,6 +421,7 @@ function transformTag4yaml(annotations, keywords) {
  * @param {string} rawEntry
  * @returns {EntryMetadata|undefined}
  */
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 function extractMetadata(citekey, rawEntry) {
 	let bibtexEntry = "@" + rawEntry.split("@")[1]; // cut following citekeys
 
@@ -506,25 +507,25 @@ function extractMetadata(citekey, rawEntry) {
 }
 
 /** if in Obsidian, open there, otherwise reveal in Finder
- * @param {string} filepath
+ * @param {string} filep
  */
-function openFile(filepath) {
+function openFile(filep) {
 	// determine if file is in Obsidian vault
+	let isInObsidianVault = false;
 	const obsidianJson =
 		app.pathTo("home folder") + "/Library/Application Support/obsidian/obsidian.json";
-	let isInObsidianVault = false;
 	const fileExists = Application("Finder").exists(Path(obsidianJson));
 	if (fileExists) {
-		const vaults = JSON.parse(app.read(obsidianJson)).vaults;
-		isInObsidianVault = Object.values(vaults).some((vault) => filepath.startsWith(vault.path));
+		const vaults = Object.values(JSON.parse(app.read(obsidianJson)).vaults);
+		isInObsidianVault = vaults.some((v) => filep.toLowerCase().startsWith(v.path.toLowerCase()));
 	}
 
 	// open in Obsidian or reveal in Finder
 	if (isInObsidianVault) {
 		delay(0.1); // delay to ensure writing took place
-		app.openLocation("obsidian://open?path=" + encodeURIComponent(filepath));
+		app.openLocation("obsidian://open?path=" + encodeURIComponent(filep));
 	} else {
-		app.doShellScript(`open -R "${filepath}"`); // reveal in Finder
+		app.doShellScript(`open -R "${filep}"`); // reveal in Finder
 	}
 }
 

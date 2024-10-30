@@ -30,10 +30,10 @@ elif [[ "$pdf_path" == "not-in-pdf-folder" ]]; then
 elif [[ "$pdf_path" != *.pdf ]]; then
 	notify "⚠️ Not a .pdf file."
 	exit 1
-elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &>/dev/null; then
+elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &> /dev/null; then
 	notify "⚠️ pdfannots not installed."
 	exit 1
-elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2json &>/dev/null; then
+elif [[ "$extraction_engine" == "pdfannots2json" ]] && ! command -v pdfannots2json &> /dev/null; then
 	notify "⚠️ pdfannots2json not installed."
 	exit 1
 fi
@@ -92,7 +92,7 @@ else
 	# remove temp folder
 	rmdir "$IMAGE_FOLDER"
 	# remove attachment folder, if no images are extracted (rmdir fails if folder not empty)
-	rmdir "$output_path/attachments"
+	rmdir "$output_path/attachments" &> /dev/null
 
 	cd "$prevDir" || exit 1
 fi
