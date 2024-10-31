@@ -72,7 +72,7 @@ sketchybar \
 	script="./cpu.sh" \
 	\
 	--add item ram $second_row \
-	--set ram icon="󰍛" update_freq="$stats_update_secs" \
+	--set ram icon="󰍛" icon.font="${nerd_font}" update_freq="$stats_update_secs" \
 	script="./ram.sh" \
 	\
 	--add item network-download $second_row \
@@ -80,7 +80,7 @@ sketchybar \
 	script="./network-download.sh" \
 	\
 	--add item network-upload $second_row \
-	--set network-upload icon="" update_freq="$stats_update_secs" \
+	--set network-upload icon="" update_freq="$stats_update_secs" \
 	script="./network-upload.sh" \
 	\
 	--add item sync-indicator $second_row \
