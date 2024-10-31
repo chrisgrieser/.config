@@ -7,5 +7,7 @@ reload:
 docs:
     open "https://felixkratz.github.io/SketchyBar/config/bar"
 
+inspect:
+
 restart:
     brew services restart sketchybar
