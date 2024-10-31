@@ -23,5 +23,9 @@ alias pass="env NO_PLUGINS=true pass" # not using `nvim` with its plugins with `
 # NPM
 # do not crowd `$HOME`. (Set in .zshenv, so it's also applied to Neovide.)
 export npm_config_cache="$HOME/.cache/npm"
+
+# TEMP fix https://github.com/nodejs/node/issues/55417#issuecomment-2432890257
+# PENDING https://github.com/npm/cli/issues/7857
+export NODE_OPTIONS="--disable-warning=ExperimentalWarning"
 #───────────────────────────────────────────────────────────────────────────────
 
