@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-threshold_kb=100
+threshold_kb=50
 #───────────────────────────────────────────────────────────────────────────────
 
 # HACK `netstat` only outputs as stream, so using `awk`'s `exit` to return 1st value
