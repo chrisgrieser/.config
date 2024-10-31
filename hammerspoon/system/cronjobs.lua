@@ -8,7 +8,7 @@ local c = hs.caffeinate.watcher
 
 -- force reminders sync on startup
 if u.isSystemStart() then
-	print("🖨️ 🔵")
+	print("📅 Syncing Reminders")
 	hs.execute("open -g -a Reminders")
 	u.defer(10, function()
 		u.quitApps("Reminders")
