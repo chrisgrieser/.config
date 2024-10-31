@@ -8,7 +8,7 @@ local wu = require("win-management.window-utils")
 -- https://www.hammerspoon.org/Spoons/RoundedCorners.html
 local roundedCorner = hs.loadSpoon("RoundedCorners")
 if roundedCorner then
-	roundedCorner.radius = 7
+	roundedCorner.radius = 8
 	roundedCorner:start()
 end
 

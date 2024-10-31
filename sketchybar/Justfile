@@ -8,6 +8,7 @@ docs:
     open "https://felixkratz.github.io/SketchyBar/config/bar"
 
 inspect:
+    open "https://felixkratz.github.io/SketchyBar/config/querying"
 
 restart:
     brew services restart sketchybar

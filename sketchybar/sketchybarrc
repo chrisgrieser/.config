@@ -71,7 +71,7 @@ sketchybar \
 	icon.font="${nerd_font/[0-9]*/21}" label.padding_right=0 icon.padding_right=0 \
 	script="./ram.sh" \
 	\
-	--add graph cpu_graph $second_row 45 \
+	--add graph cpu_graph $second_row 60 \
 	--set cpu_graph update_freq="$stats_freq_s" drawing=true \
 	background.height=18 \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
