@@ -66,16 +66,22 @@ sketchybar \
 	\
 	`#─────────────────────────────────────────────────────────────────────────` \
 	\
+	--add item ram $second_row \
+	--set ram padding_left=15 update_freq="$stats_freq_s" drawing=true \
+	icon.font="${nerd_font/[0-9]*/21}" label.padding_right=0 icon.padding_right=0 \
+	script="./ram.sh" \
+	\
 	--add graph cpu_graph $second_row 45 \
-	--set cpu_graph background.height=18 \
-	padding_left=12 update_freq="$stats_freq_s" drawing=true \
+	--set cpu_graph update_freq="$stats_freq_s" drawing=true \
+	background.height=18 \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
 	script="./cpu.sh" \
 	\
-	--add item ram $second_row \
-	--set ram update_freq="$stats_freq_s" \
-	icon.font="${nerd_font/[0-9]*/21}" label.padding_right=0 \
-	script="./ram.sh" \
+	--add item sync-indicator $second_row \
+	--set sync-indicator update_freq=180 icon="󰓦" \
+	script="./git-sync-bar-icon.sh" \
+	--add event repo-files-update \
+	--subscribe sync-indicator system_woke repo-files-update \
 	\
 	--add item network-download $second_row \
 	--set network-download icon="" update_freq="$stats_freq_s" \
@@ -84,12 +90,6 @@ sketchybar \
 	--add item network-upload $second_row \
 	--set network-upload icon="" update_freq="$stats_freq_s" \
 	script="./network-upload.sh" \
-	\
-	--add item sync-indicator $second_row \
-	--set sync-indicator update_freq=180 icon="󰓦" \
-	script="./git-sync-bar-icon.sh" \
-	--add event repo-files-update \
-	--subscribe sync-indicator system_woke repo-files-update \
 	\
 	--add item package-updates $second_row \
 	--set package-updates update_freq=86400 icon="" \
