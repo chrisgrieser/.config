@@ -76,7 +76,7 @@ return {
 							" " .. ctx.item.label .. " ",
 							fill = true,
 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-							max_width = 45,
+							max_width = 40,
 						},
 						{ icon .. " ", hl_group = iconHl },
 					}
