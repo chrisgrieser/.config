@@ -133,6 +133,7 @@ tooltip
 GitFred
 AntConc
 OneNote
+genghis
 DataLoom
 Dataview
 Filepath
@@ -176,6 +177,7 @@ minified
 backlink
 Evernote
 prepends
+linewise
 Blazingly
 Filetypes
 Justfiles
@@ -267,6 +269,7 @@ languagetool
 serverConfig
 ClientConfig
 minification
+subdirectory
 Strikethrough
 strikethrough
 automagically

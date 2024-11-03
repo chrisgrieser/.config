@@ -35,7 +35,7 @@ style = "fg:bold 255 bg:red"   # 255 as ansi enforces white regardless of termin
 
 [sudo]
 disabled = false
-style = 'fg:208 bg:black'
+style = 'fg:#f1800e bg:black'
 symbol = " "
 format = "[ $symbol]($style)"
 
@@ -101,8 +101,9 @@ format = '[  ](fg:purple bg:black bold)'
 [git_status] # files
 stashed = '[ 󰜦 $count](fg:cyan bg:black)'
 untracked = '[ +$count](fg:green bg:black)'
-deleted = '[ -$count](fg:red bg:black)'                                                            # these are unstaged as well as stage deletion
-modified = '[ ~$count](fg:208 bg:black)'                                                           # 208 = orange
+# `deleted` = these are unstaged as well as stage deletion
+deleted = '[ -$count](fg:red bg:black)'
+modified = '[ ~$count](fg:#f1800e bg:black)'
 renamed = '[ 󰑕 $count](fg:blue bg:black)'
 staged = '[ 󰐖 $count](fg:green bg:black)'
 conflicted = '[  $count](fg:red bg:black)'
