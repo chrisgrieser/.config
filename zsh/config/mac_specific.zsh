@@ -10,7 +10,7 @@ function eject {
 
 	diskutil eject "$selected" || 
 		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
-		echo "If \`mdutil\` is blocking, try \`sudo mdutil -i off /Volumes/<volume_name>\` to stop Spotlight from indexing."
+		echo "If \`mdutil\` is blocking, try \`sudo mds_stores -i off -d /Volumes/<volume_name>\` to stop Spotlight from indexing."
 }
 
 # app-id of macOS apps
