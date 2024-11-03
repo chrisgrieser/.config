@@ -1,9 +1,14 @@
 return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
-	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
+	version = "v0.*", -- REQUIRED release tag needed to download pre-built binaries
 
 	opts = {
+		highlight = {
+			-- supporting themes: tokyonight
+			-- not supported: nightfox
+			use_nvim_cmp_as_default = true,
+		},
 		sources = {
 			completion = {
 				enabled_providers = { "lsp", "path", "snippets", "buffer" },
@@ -17,7 +22,7 @@ return {
 					opts = { get_cwd = vim.uv.cwd },
 				},
 				buffer = {
-					fallback_for = {},
+					fallback_for = {}, -- disable being fallback for LSP
 					max_items = 4,
 					min_keyword_length = 4,
 					score_offset = -3,
@@ -34,9 +39,6 @@ return {
 			["<Up>"] = { "select_prev" },
 			["<PageDown>"] = { "scroll_documentation_down" },
 			["<PageUp>"] = { "scroll_documentation_up" },
-		},
-		highlight = {
-			use_nvim_cmp_as_default = true,
 		},
 		windows = {
 			documentation = {
@@ -64,10 +66,6 @@ return {
 					local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "󰯸" }
 					local icon = sourceIcons[source] or ctx.kind_icon
 
-					-- FIX highlight for Tokyonight
-					local iconHl = vim.g.colors_name:find("tokyonight") and "BlinkCmpKind"
-						or "BlinkCmpKind" .. ctx.kind
-
 					return {
 						{
 							" " .. ctx.item.label .. " ",
@@ -75,7 +73,7 @@ return {
 							hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
 							max_width = 40,
 						},
-						{ icon .. " ", hl_group = iconHl },
+						{ icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
 					}
 				end,
 			},
