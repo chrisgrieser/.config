@@ -7,7 +7,10 @@ function eject {
 	# if one volume, will auto-eject due to `--select-1`
 	selected=$(echo "$volumes" | fzf --exit-0 --select-1 --no-info --height=10%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
-	diskutil eject "$selected"
+
+	diskutil eject "$selected" || 
+		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
+		echo "If \`mdutil\` is blocking, try \`sudo mdutil -i off /Volumes/<volume_name>\` to stop Spotlight from indexing."
 }
 
 # app-id of macOS apps
