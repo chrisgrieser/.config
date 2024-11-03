@@ -9,17 +9,17 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	callback = function(ctx)
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
 		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
-		if not (progress and progress.title) then return end
-
-		local idx = math.floor(#progressIcons / 2)
-		if progress.percentage == 0 then idx = 1 end
-		if progress.percentage and progress.percentage > 0 then
-			idx = math.ceil(progress.percentage / 100 * #progressIcons)
+		if progress and progress.kind == "end" then
+			progressText = ""
+			return
 		end
+		if not (progress and progress.title and progress.percentage) then return end
+
+		local idx = math.ceil(progress.percentage / 100 * #progressIcons)
+		if progress.percentage == 0 then idx = 1 end
 
 		local firstWord = vim.split(progress.title, " ")[1]:lower()
-		local text = table.concat({ progressIcons[idx], clientName, firstWord }, " ")
-		progressText = progress.kind == "end" and "" or text
+		progressText = table.concat({ progressIcons[idx], clientName, firstWord }, " ")
 	end,
 })
 
