@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = "BufReadPre",
+	event = "InsertEnter",
 	version = "v0.*", -- REQUIRED release tag to download pre-built binaries
 
 	opts = {
@@ -23,9 +23,6 @@ return {
 					score_offset = -3,
 				},
 			},
-		},
-		trigger = {
-			completion = { show_in_snippet = true },
 		},
 		keymap = {
 			["<D-c>"] = { "show" },

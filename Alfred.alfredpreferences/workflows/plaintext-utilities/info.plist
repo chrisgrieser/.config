@@ -557,30 +557,6 @@
 	</array>
 	<key>readme</key>
 	<string>---
-
-**Text Actions**
-- Titlecase
-- Lowercase
-- Uppercase
-- Poor Text (removes formatting)
-- Transform Spaces to Tabs
-- Append to Clipboard (similar to Alfred's built-in function, but with manual hotkey and with universal action)
-- Calculate the sum of all numbers in the text. Negative numbers are supported, as are both "," or "." as decimal separators. (Thousand separators are not supported though, as they would create ambiguous cases.)
-- Run Brett Terpstra's [SearchLink](https://brettterpstra.com/projects/searchlink/), which fetches the URL and creates a markdown link of the selected text.
-
-**URL Actions**
-- URL Encode
-- URL Decode
-- Create compact markdown link
-- Create compact markdown link of all URLs in selecting (actually a Text Action...)
-- SearchTitle: Fetch the title of the URL and create a Markdown-URL (basically the opposite of SearchLink)
-
-**Other**
-- Simple password generator (default length configurable via environment variable)
-- quickly access SearchLink documentation &amp; configuration
-- past the previous clipboard content (suggested hotkey: `cmd + shift + V`)
-
----
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
