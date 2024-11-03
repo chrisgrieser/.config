@@ -2,12 +2,14 @@
 	"extensionPath": {
 		"Google Chrome": "~/Library/Application Support/Google/Chrome/Default/Extensions",
 		"Brave Browser": "~/Library/Application Support/BraveSoftware/Brave-Browser/Default/Extensions",
-		"Arc": "~/Library/Application Support/Arc/User Data/Default/Extensions"
+		"Arc": "~/Library/Application Support/Arc/User Data/Default/Extensions",
+		"Thorium": "~/Library/Application Support/Thorium/Default/Extensions"
 	},
 	"appIcon": {
 		"Google Chrome": "/Applications/Google Chrome.app/Contents/Resources/app.icns",
 		"Brave Browser": "/Applications/Brave Browser.app/Contents/Resources/app.icns",
-		"Arc": "/Applications/Arc.app/Contents/Resources/AppIcon.icns"
+		"Arc": "/Applications/Arc.app/Contents/Resources/AppIcon.icns",
+		"Thorium": "/Applications/Thorium.app/Contents/Resources/app.icns"
 	},
 	"settingsPages": {
 		"Google Chrome": [],
@@ -21,11 +23,13 @@
 			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
 			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" }
 		],
-		"Arc": []
+		"Arc": [],
+		"Thorium": []
 	},
 	"uri": {
 		"Google Chrome": "chrome://",
 		"Brave Browser": "brave://",
-		"Arc": "arc://"
+		"Arc": "arc://",
+		"Thorium": "chrome://"
 	}
 }

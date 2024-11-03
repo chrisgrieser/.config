@@ -298,6 +298,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 						<string>Arc</string>
 						<string>Arc</string>
 					</array>
+					<array>
+						<string>Thorium</string>
+						<string>Thorium</string>
+					</array>
 				</array>
 			</dict>
 			<key>description</key>
@@ -311,7 +315,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
