@@ -6,6 +6,7 @@ matches:
   - { regex: "(?P<letter>[a-df-ru-z])ign ", replace: "{{letter}}ing " }
   - { trigger: " ot ", replace: " to " }
   - { trigger: "#d ", replace: "'d " }
+  - { trigger: "doe snot", replace: "does not" }
   - { trigger: "#s ", replace: "'s " }
   - { trigger: "#ve ", replace: "'ve " }
   - { trigger: "I#d", replace: "I'd" }
@@ -21,7 +22,7 @@ matches:
   - { trigger: agian, replace: again, propagate_case: true, word: true }
   - { trigger: appraoch, replace: approach, propagate_case: true }
   - { trigger: autoamtically, replace: automatically, propagate_case: true, word: true }
-  - { trigger: auxilliary, replace: auxiliary }
+  - { trigger: auxilliary, replace: auxiliary, propagate_case: true }
   - { trigger: beign, replace: being, word: true }
   - { trigger: breif, replace: brief, propagate_case: true, word: true }
   - { trigger: brwose, replace: browse, propagate_case: true }

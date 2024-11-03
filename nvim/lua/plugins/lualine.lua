@@ -1,7 +1,7 @@
 -- lightweight replacement for fidget.nvim
 
 -- CONFIG
-local progressIcons = { "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
 
 local progressText = ""
 local function lspProgress() return progressText end
@@ -16,8 +16,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		if progress.percentage and progress.percentage > 0 then
 			idx = math.ceil(progress.percentage / 100 * #progressIcons)
 		end
-		local firstWord = vim.split(progress.title, " ")[1]:lower()
 
+		local firstWord = vim.split(progress.title, " ")[1]:lower()
 		local text = table.concat({ progressIcons[idx], clientName, firstWord }, " ")
 		progressText = progress.kind == "end" and "" or text
 	end,
