@@ -101,6 +101,7 @@ local lualineConfig = {
 		always_divide_middle = false,
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
+		always_show_tabs = true,
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",

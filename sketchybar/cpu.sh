@@ -7,4 +7,4 @@ cpu_fraction=$(echo "scale = 2; $cpu_usage / 100" | bc)
 sketchybar --push "$NAME" "$cpu_fraction"
 
 # for pure count, use
-# sketchybar--set "$NAME" label="$cpu_usage%" \
+# sketchybar--set "$NAME" label="$cpu_usage%"
