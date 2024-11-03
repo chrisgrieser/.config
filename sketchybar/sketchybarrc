@@ -9,24 +9,25 @@ stats_freq_s=3
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
 	bg="0xff333333"
 	fg="0xffffffff"
-	graph_fill="0xffdddddd"
+	graph_fill="0xffcccccc"
 	##
 else
 	bg="0xffcdcdcd"
 	fg="0xff000000"
-	graph_fill="0xff333333"
+	graph_fill="0xff444444"
 fi
 
-# HACK using popup for second row. The popup.{item} only refers to {item} to
-# anchor to it. Should be the leftmost item of the first row.
-first_row="left"
-second_row="popup.clock"
+# HACK using `popup` to create a 2nd row. `popup.{item}` only refers to `{item}`
+# to use it as anchor – it should simply be the leftmost item of the 1st row.
+row_1="left"
+row_2="popup.clock"
 
 #───────────────────────────────────────────────────────────────────────────────
 # SKETCHYBAR CALL
 
 # PERF one call to speed up loading https://felixkratz.github.io/SketchyBar/config/tricks#batching-of-configuration-commands
 sketchybar \
+	`#─── BAR & DEFAULTS ──────────────────────────────────────────────────────` \
 	--bar \
 	height=60 position="top" display="all" \
 	padding_left=0 margin=-5 color="$bg" \
@@ -37,63 +38,63 @@ sketchybar \
 	label.font="$system_font" label.color="$fg" \
 	\
 	popup.drawing=true popup.horizontal=true popup.topmost=false \
-	popup.y_offset="-35" y_offset="18" popup.padding_left=20 \
+	popup.y_offset="-35" y_offset="18" \
 	\
-	`#─────────────────────────────────────────────────────────────────────────` \
+	`#─── ROW #1 ──────────────────────────────────────────────────────────────` \
 	\
-	--add item clock $first_row \
+	--add item clock $row_1 \
 	--set clock update_freq=1 drawing=true padding_left=10 \
 	script="./clock.sh" \
 	\
-	--add item weather $first_row \
+	--add item weather $row_1 \
 	--set weather update_freq=1200 icon.y_offset=-1 \
 	script="./weather.sh" \
 	\
-	--add item input_source $first_row \
+	--add item input_source $row_1 \
 	--set input_source update_freq=2 \
 	script="./input_source_icon.sh" \
 	\
-	--add item github_notif $first_row \
+	--add item github_notif $row_1 \
 	--set github_notif update_freq=300 icon="" \
 	script="./github_notification_count.sh" \
 	--subscribe github_notif front_app_switched system_woke \
 	\
-	--add item reminders_count $first_row \
+	--add item reminders_count $row_1 \
 	--set reminders_count update_freq=300 icon="" \
 	script="./reminders-count.sh" \
 	--add event update_reminder_count \
 	--subscribe reminders_count update_reminder_count system_woke front_app_switched \
 	\
-	`#─────────────────────────────────────────────────────────────────────────` \
+	`#─── ROW #2 ──────────────────────────────────────────────────────────────` \
 	\
-	--add item ram $second_row \
-	--set ram padding_left=16 update_freq="$stats_freq_s" drawing=true \
-	icon.font="${nerd_font/[0-9]*/21}" label.padding_right=0 icon.padding_right=0 \
+	--add item ram $row_2 \
+	--set ram padding_left=16 update_freq="$stats_freq_s" \
+	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right=0 icon.padding_right=0 \
 	script="./ram.sh" \
 	\
-	--add graph cpu_graph $second_row 60 \
+	--add graph cpu_graph $row_2 60 \
 	--set cpu_graph update_freq="$stats_freq_s" drawing=true \
 	background.height=18 \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
 	script="./cpu.sh" \
 	\
-	--add item sync-indicator $second_row \
-	--set sync-indicator update_freq=180 icon="󰓦" \
+	--add item sync-indicator $row_2 \
+	--set sync-indicator icon="󰓦" update_freq=180 \
 	script="./git-sync-bar-icon.sh" \
 	--add event repo-files-update \
 	--subscribe sync-indicator system_woke repo-files-update \
 	\
-	--add item network-download $second_row \
+	--add item network-download $row_2 \
 	--set network-download icon="" update_freq="$stats_freq_s" \
 	script="./network-download.sh" \
 	\
-	--add item network-upload $second_row \
-	--set network-upload icon="" update_freq="$stats_freq_s" \
+	--add item network-upload $row_2 \
+	--set network-upload icon="" update_freq="$stats_freq_s" \
 	script="./network-upload.sh" \
 	\
-	--add item package-updates $second_row \
-	--set package-updates update_freq=86400 icon="" \
+	--add item package-updates $row_2 \
+	--set package-updates icon="" update_freq=86400 \
 	script="./homebrew-update-tracker.sh" \
 	\
-	`#─────────────────────────────────────────────────────────────────────────` \
+	`#─── END ─────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script

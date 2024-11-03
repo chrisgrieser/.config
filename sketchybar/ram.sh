@@ -14,4 +14,4 @@ memory_usage=$((100 - memory_free))
 idx=$((${#icons} * memory_usage / 100 + 1))
 [[ $idx -gt ${#icons} ]] && idx=${#icons} # only needed for 100%
 
-sketchybar --set "$NAME" icon="${icons[$idx]}"
+sketchybar --set "$NAME" icon="${icons[$idx]}" drawing=true
