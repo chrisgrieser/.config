@@ -10,7 +10,7 @@ function eject {
 
 	diskutil eject "$selected" || 
 		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
-		echo "If \`mdutil\` is blocking, try \`sudo mds_stores -i off -d /Volumes/<volume_name>\` to stop Spotlight from indexing."
+		echo "If \`mds_stores\` is blocking, try \`sudo mdutil -i off -d /Volumes/<volume_name>\` to stop Spotlight from indexing."
 }
 
 # app-id of macOS apps
@@ -22,7 +22,7 @@ function appid() {
 }
 
 # open first ejectable volume
-function vol {
+function vvv {
 	first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
 	if [[ -d "$first_volume" ]]; then
 		open "$first_volume"

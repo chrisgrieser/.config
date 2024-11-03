@@ -88,7 +88,7 @@ sketchybar \
 	script="./network-download.sh" \
 	\
 	--add item network-upload $second_row \
-	--set network-upload icon="" update_freq="$stats_freq_s" \
+	--set network-upload icon="" update_freq="$stats_freq_s" \
 	script="./network-upload.sh" \
 	\
 	--add item package-updates $second_row \

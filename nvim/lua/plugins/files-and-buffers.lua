@@ -2,7 +2,6 @@ return {
 	{ -- convenience file operations
 		"chrisgrieser/nvim-genghis",
 		dependencies = "stevearc/dressing.nvim",
-		cmd = "Genghis",
 		keys = {
 			-- stylua: ignore start
 			{"<C-p>", function() require("genghis").copyFilepath() end, desc = "󰞇 Copy path" },
