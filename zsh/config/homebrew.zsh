@@ -21,7 +21,7 @@ alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# $1: count of formulae/casks to list, default 6
+# $1: count of formulae/casks to list, defaults to 6
 function recent_updates() {
 	local count=${1:-10}
 	_print-section "Recently updated Formulae"
@@ -52,17 +52,10 @@ function update() {
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
-	# mas upgrade # HACK -> PENDING https://github.com/mas-cli/mas/issues/512
-	local mas_updates
-	mas_updates=$(mas outdated | grep -vE "Highlights|Mona")
-	if [[ -z "$mas_updates" ]]; then
-		echo "No MAS updates."
-	else
-		echo "$mas_updates" | cut -f1 -d" " | xargs mas upgrade
-	fi
+	mas upgrade
 
 	# FINISH
-	# sketchybar restart for new permission
+	# sketchybar restart for new permissions
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
