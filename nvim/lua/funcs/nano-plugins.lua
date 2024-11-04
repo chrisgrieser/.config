@@ -24,8 +24,8 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
----@param first? "first"
-function M.justRecipe(first)
+---@param which "first"|"select"
+function M.justRecipe(which)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
 		useQuickfix = { "check-tsc" },
@@ -61,28 +61,28 @@ function M.justRecipe(first)
 		:filter(function(r) return not vim.tbl_contains(config.ignoreRecipes, r) end)
 		:totable()
 
-	if first then
+	if which == "first" then
 		run(recipes[1])
-	else
-		-- move first recipe to end, since it's normally accessed directly via "first"
-		-- highlight the first recipe and recipes using the quickfix list
-		table.insert(recipes, table.remove(recipes, 1))
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "DressingSelect",
-			once = true,
-			callback = function(ctx)
-				local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
-				for ln, line in ipairs(lines) do
-					local hl
-					if ln == #lines then hl = "Comment" end
-					if vim.tbl_contains(config.useQuickfix, line) then hl = config.quickfixHlgroup end
-					if hl then vim.api.nvim_buf_add_highlight(ctx.buf, 0, hl, ln - 1, 0, -1) end
-				end
-			end,
-		})
-
-		vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
+		return
 	end
+
+	-- move first recipe to end, since it's normally accessed directly via "first"
+	-- highlight the first recipe and recipes using the quickfix list
+	table.insert(recipes, table.remove(recipes, 1))
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "DressingSelect",
+		once = true,
+		callback = function(ctx)
+			local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
+			for ln, line in ipairs(lines) do
+				local hl
+				if ln == #lines then hl = "Comment" end
+				if vim.tbl_contains(config.useQuickfix, line) then hl = config.quickfixHlgroup end
+				if hl then vim.api.nvim_buf_add_highlight(ctx.buf, 0, hl, ln - 1, 0, -1) end
+			end
+		end,
+	})
+	vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 end
 
 ---1. start/stop with just one keypress
@@ -159,7 +159,7 @@ function M.camelSnakeToggle()
 	vim.api.nvim_set_current_line(newLine)
 end
 
--- UPPER -> lower -> Title -> UPPER
+-- UPPER -> lower -> Title -> UPPER -> …
 function M.toggleWordCasing()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
 
@@ -189,7 +189,7 @@ function M.gotoMostChangedFile()
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
 	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
 	if #changedFiles == 0 then
-		vim.notify("No changes found.")
+		vim.notify("No files with changes found.")
 		return
 	end
 

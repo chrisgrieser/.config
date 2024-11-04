@@ -231,6 +231,7 @@ end, { desc = "󰩫 prev placeholder" })
 
 -- exit snippet automatically on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
+	desc = "User: Exit snippet on scroll",
 	callback = function(ctx)
 		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
 		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
@@ -246,8 +247,8 @@ keymap(
 	function() require("funcs.alt-alt").gotoAltFile() end,
 	{ desc = "󰽙 Goto Alt-File" }
 )
--- restore default behavior of `<CR>`, which is overridden by the mapping above
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: restore default behavior of `<CR>` for qf buffers.",
 	pattern = "qf",
 	callback = function() bkeymap("n", "<CR>", "<CR>") end,
 })
@@ -338,6 +339,7 @@ keymap("n", "Y", function()
 end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "User: Sticky yank",
 	callback = function()
 		if vim.v.event.regname == "z" then return end -- used as temp register for keymaps
 		if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
@@ -372,6 +374,7 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: `q` to exit :help or :checkhealth",
 	pattern = { "help", "checkhealth" },
 	callback = function()
 		vim.defer_fn(function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end, 1)

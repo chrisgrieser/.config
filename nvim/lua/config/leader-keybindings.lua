@@ -154,7 +154,7 @@ keymap(
 keymap(
 	"n",
 	"<leader>J",
-	function() require("funcs.nano-plugins").justRecipe() end,
+	function() require("funcs.nano-plugins").justRecipe("select") end,
 	{ desc = " Just recipes" }
 )
 
