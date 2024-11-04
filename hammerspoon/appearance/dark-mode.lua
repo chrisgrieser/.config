@@ -3,6 +3,16 @@ local M = {}
 local console = require("appearance.console")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
+
+--------------------------------------------------------------------------------
+
+---@param msg string
+local function logBrightness(msg)
+	local ambient = hs.brightness.ambient()
+	local ambientRounded = string.format("%.1f", ambient) -- round to 1 decimal
+	print(("💡 %s (ambient %d)"):format(msg, ambientRounded))
+end
+
 --------------------------------------------------------------------------------
 
 -- INFO done manually to include app-specific toggling for:
@@ -31,7 +41,7 @@ function M.setDarkMode(toMode)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
-		local pdfBg = toMode == "light" and "Default" or "Night"
+		local pdfBg = toMode == "light" and "Sepia" or "Night"
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
@@ -41,8 +51,11 @@ function M.setDarkMode(toMode)
 end
 
 -- MANUAL TOGGLING OF DARK MODE
--- forward-delete = `󰛨` on my keychron keyboard
-hs.hotkey.bind({}, "forwarddelete", function() M.setDarkMode("toggle") end)
+-- forward-delete = `󰛨` on my Keychron keyboard
+hs.hotkey.bind({}, "forwarddelete", function()
+	M.setDarkMode("toggle")
+	logBrightness("Manually toggled dark mode")
+end)
 
 --------------------------------------------------------------------------------
 
@@ -62,11 +75,11 @@ function M.autoSwitch()
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
+		logBrightness("Auto-switch to light mode, Threshold: " .. tostring(lightThreshold))
 		M.setDarkMode("light")
-		print("☀️ Auto-switching to Light Mode")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
+		logBrightness("Auto-switch to dark mode. Threshold: " .. tostring(lightThreshold))
 		M.setDarkMode("dark")
-		print("🌔 Auto-switching to Dark Mode")
 	end
 end
 

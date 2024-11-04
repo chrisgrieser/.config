@@ -39,7 +39,7 @@ end)
 -- - Start with Highlight Tool enabled
 M.aw_highlights = aw.new(function(appName, event, app)
 	if event == aw.launched and appName == "Highlights" then
-		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
+		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Sepia" }
 		app:selectMenuItem { "Tools", "Highlight" }
 		app:selectMenuItem { "Tools", "Color", "Yellow" }
 		app:selectMenuItem { "View", "Hide Toolbar" }
