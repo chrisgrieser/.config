@@ -110,7 +110,7 @@ rules:
           - { key_code: w, modifiers: [command] }
         conditions:
           # Discord already uses button5 for going forward in the history, and
-          # we want to keep that behavior
+          # we want to keep that behavior, since there is now window to close
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.hnc\.Discord$] }
   #─────────────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
@@ -136,3 +136,49 @@ rules:
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
           - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Mouse) 1+5 (simultaneously): Google Selection"
+    manipulators:
+      - type: basic
+        from:
+          simultaneous:
+            - pointing_button: button1
+            - pointing_button: button5
+        parameters: { simultaneous_threshold_milliseconds: 500 }
+        to:
+          - shell_command: |
+              # INFO IF SELECTION IS…
+              # file path: reveal it in Finder.app
+              # directory path: open it in Finder.app
+              # url(s): open all urls in Browser
+              # email: send to that address
+              # some other text: google it
+              # empty: do nothing
+              #───────────────────────────────────────────────────────────────────────────────
+              prev_clipboard=$(pbpaste)
+              osascript -e 'tell application "System Events" to keystroke "c" using {command down}'
+              sleep 0.1
+              sel=$(pbpaste)
+
+              [[ -n "$prev_clipboard" ]] && echo "$prev_clipboard" | pbcopy
+              [[ -z "$sel" ]] && return 1 # = no selection
+
+              # clean up
+              sel=$(echo -n "$sel" | xargs) # trims whitespace
+              sel="${sel/#\~/$HOME}"        # resolve ~
+
+              # openers
+              if [[ -f "$sel" ]]; then # file
+                open -R "$sel"
+              elif [[ -d "$sel" ]]; then # directory
+                open "$sel"
+              elif echo "$sel" | grep -Eq "https?://"; then # url(s) in selection
+                echo "$sel" | grep -Eo "https?://[^> ]*" | xargs open
+              elif [[ "$sel" =~ "@" ]]; then # mail
+                open "mailto:$sel"
+              elif [[ -n "$sel" ]]; then
+                sel=${sel/\'/\\\'}
+                url_encoded_sel=$(osascript -l JavaScript -e "encodeURIComponent('$sel')")
+                url="https://www.google.com/search?q=$url_encoded_sel"
+                open "$url"
+              fi

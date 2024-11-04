@@ -80,19 +80,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EC1B0B5F-26D6-43F4-BEE2-52834356253E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
 		<array>
 			<dict>
@@ -114,68 +101,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>DuckDuckGo</string>
+	<string>DuckDuckGo (DDG)</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>hotstring</key>
-				<string></string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>EC1B0B5F-26D6-43F4-BEE2-52834356253E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/search-selection.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>search-selection</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DD75F164-F04B-4A1C-84BD-49B4068C8E88</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -377,7 +305,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>15</real>
 		</dict>
 		<key>10797BFB-ECCC-404B-9A55-B91951068BC9</key>
 		<dict>
@@ -386,7 +314,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>15</real>
 		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
@@ -397,7 +325,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>190</real>
+			<real>15</real>
 		</dict>
 		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
 		<dict>
@@ -406,7 +334,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>160</real>
 		</dict>
 		<key>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</key>
 		<dict>
@@ -415,16 +343,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>585</real>
-		</dict>
-		<key>DD75F164-F04B-4A1C-84BD-49B4068C8E88</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>xpos</key>
-			<real>185</real>
-			<key>ypos</key>
-			<real>35</real>
+			<real>410</real>
 		</dict>
 		<key>E0294F25-25E9-4D75-A042-047FE2AF1D91</key>
 		<dict>
@@ -433,7 +352,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>335</real>
+			<real>160</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
@@ -444,18 +363,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>190</real>
-		</dict>
-		<key>EC1B0B5F-26D6-43F4-BEE2-52834356253E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>Search for selected text</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>35</real>
+			<real>15</real>
 		</dict>
 		<key>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</key>
 		<dict>
@@ -466,7 +374,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>450</real>
+			<real>275</real>
 		</dict>
 		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
 		<dict>
@@ -477,7 +385,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>585</real>
+			<real>410</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
