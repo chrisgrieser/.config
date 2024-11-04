@@ -63,7 +63,7 @@ return {
 						source = "emmet"
 					end
 
-					local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "󰯸" }
+					local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "" }
 					local icon = sourceIcons[source] or ctx.kind_icon
 
 					return {
