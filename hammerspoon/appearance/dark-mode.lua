@@ -9,8 +9,7 @@ local u = require("meta.utils")
 ---@param msg string
 local function logBrightness(msg)
 	local ambient = hs.brightness.ambient()
-	local ambientRounded = string.format("%.1f", ambient) -- round to 1 decimal
-	print(("💡 %s (ambient %d)"):format(msg, ambientRounded))
+	print(("💡 %s (ambient %.1f)"):format(msg, ambient)) -- `%.1f` = round to 1 decimal
 end
 
 --------------------------------------------------------------------------------
@@ -21,11 +20,8 @@ end
 -- * Sketchybar
 -- * Highlights PDF appearance
 -- * Hammerspoon Console
----@param toMode "dark"|"light"|"toggle"
+---@param toMode "dark"|"light"
 function M.setDarkMode(toMode)
-	if toMode == "toggle" then toMode = u.isDarkMode() and "light" or "dark" end
-	---@cast toMode "dark"|"light"
-
 	-- System
 	local applescript = 'tell application "System Events" to tell appearance preferences to set dark mode to '
 		.. (toMode == "light" and "false" or "true")
@@ -53,8 +49,9 @@ end
 -- MANUAL TOGGLING OF DARK MODE
 -- forward-delete = `󰛨` on my Keychron keyboard
 hs.hotkey.bind({}, "forwarddelete", function()
-	M.setDarkMode("toggle")
-	logBrightness("Manually toggled dark mode")
+	local toMode = u.isDarkMode() and "light" or "dark"
+	M.setDarkMode(toMode)
+	logBrightness(("Manually toggled %s mode"):format(toMode))
 end)
 
 --------------------------------------------------------------------------------
@@ -75,7 +72,7 @@ function M.autoSwitch()
 	end
 
 	if targetMode == "light" and u.isDarkMode() then
-		logBrightness("Auto-switch to light mode, Threshold: " .. tostring(lightThreshold))
+		logBrightness("Auto-switch to light mode. Threshold: " .. tostring(lightThreshold))
 		M.setDarkMode("light")
 	elseif targetMode == "dark" and not (u.isDarkMode()) then
 		logBrightness("Auto-switch to dark mode. Threshold: " .. tostring(lightThreshold))
