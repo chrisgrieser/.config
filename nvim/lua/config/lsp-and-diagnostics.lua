@@ -29,17 +29,17 @@ end
 
 --------------------------------------------------------------------------------
 
--- appearance
+-- `vim.lsp.buf.signature_help()`
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
 
--- INFO this needs to be disabled for noice.nvim
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
--- 	border = vim.g.borderStyle,
--- 	title = " LSP Hover ",
--- 	max_width = math.floor(vim.o.columns * 0.5),
--- })
+-- `vim.lsp.buf.hover()`
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = vim.g.borderStyle,
+	title = " LSP Hover ",
+	max_width = 70,
+})
 
 --------------------------------------------------------------------------------
 

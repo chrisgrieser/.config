@@ -88,7 +88,6 @@ return {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
 			{ "<D-9>", vim.cmd.NoiceLast, mode = { "n", "x", "i" }, desc = "󰎟 Noice Last" },
-			{ "<D-8>", vim.cmd.NoiceErrors, mode = { "n", "x", "i" }, desc = "󰎟 Noice Errors" },
 		},
 		opts = {
 			routes = routes,
@@ -124,23 +123,18 @@ return {
 					zindex = 45, -- lower than nvim-notify (50), higher than satellite-scrollbar (40)
 					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
-				hover = {
-					border = { style = vim.g.borderStyle },
-					size = { max_width = 75 },
-					win_options = { scrolloff = 4, wrap = true },
-				},
 				popup = {
 					border = { style = vim.g.borderStyle },
 					size = { width = 90, height = 25 },
 					win_options = { scrolloff = 8, wrap = true, concealcursor = "ncv" },
-					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>", "<D-8>" } },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 					format = { "{message}" },
 				},
 				split = {
 					enter = true,
 					size = "65%",
 					win_options = { scrolloff = 6 },
-					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>", "<D-8>" } },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 				},
 			},
 			commands = {
@@ -152,9 +146,6 @@ return {
 				last = {
 					opts = { format = { "{title} ", "{message}" } },
 					filter = { ["not"] = { find = "^/" } }, -- skip search messages
-				},
-				errors = {
-					opts = { format = { "{title} ", "{message}" } },
 				},
 			},
 			notify = {
