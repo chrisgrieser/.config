@@ -1,3 +1,6 @@
+-- Go to tail
+vim.defer_fn(function() vim.cmd.normal { "G", bang = true } end, 1)
+
 -- `%` not actually a comment character, just convention of some programs
 -- https://tex.stackexchange.com/questions/261261/are-comments-discouraged-in-a-bibtex-file
 vim.bo.commentstring = "% %s"
