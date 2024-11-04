@@ -252,7 +252,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
-
+-- MAXIMUM BUFFER NUMBER
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: Maximum buffer numbers, makes `:bnext` and `:bprevious` less crowded.",
 	callback = function()
@@ -279,7 +279,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "User: Git conflict markers",
-
 	callback = function(ctx)
 		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
 
