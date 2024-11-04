@@ -167,9 +167,19 @@ rules:
                 end tell'
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^net\.highlightsapp\.universal$
-              - ^com\.apple\.Preview$
+            bundle_identifiers: [^net\.highlightsapp\.universal$, ^com\.apple\.Preview$]
+      # Image Tool
+      - type: basic
+        from: { key_code: i, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: i, modifiers: [command, control] }
+          - { key_code: "7", modifiers: [command, control] } # purple borders
+          - shell_command: |
+              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
+                  --title "Highlights" --message "Image 🖼️"
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers: [^net\.highlightsapp\.universal$]
   #─────────────────────────────────────────────────────────────────────
   - description: "(Apps) Neovide"
     manipulators:
@@ -456,7 +466,8 @@ rules:
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.reminders$] }]
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.reminders$] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
