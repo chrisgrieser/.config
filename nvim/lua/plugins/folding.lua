@@ -40,7 +40,6 @@ return {
 			provider_selector = function(_, ft, buftype)
 				-- PERF disable folds on `log`, and only use `indent` for `bib` files
 				if ft == "log" then return "" end
-				if ft == "bib" then return "indent" end
 				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
 				if buftype ~= "" or vim.startswith(ft, "git") or ft == "" then return "indent" end
 				return { "lsp", "treesitter" }

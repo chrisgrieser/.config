@@ -3,7 +3,6 @@
 # CONFIG
 nerd_font="JetBrainsMonoNL NF:Regular:16"
 system_font="Lucida Grande:Regular:16.5"
-stats_freq_s=3
 
 # switch colors depending on dark mode
 if defaults read -g AppleInterfaceStyle | grep -q "Dark"; then
@@ -68,12 +67,12 @@ sketchybar \
 	`#─── ROW #2 ──────────────────────────────────────────────────────────────` \
 	\
 	--add item ram $row_2 \
-	--set ram padding_left=16 update_freq="$stats_freq_s" \
+	--set ram padding_left=16 update_freq="5" \
 	icon.font="${nerd_font/[0-9]*/20.5}" label.padding_right=0 icon.padding_right=0 \
 	script="./ram.sh" \
 	\
 	--add graph cpu_graph $row_2 60 \
-	--set cpu_graph update_freq="$stats_freq_s" drawing=true \
+	--set cpu_graph update_freq="3" drawing=true \
 	background.height=18 \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
 	script="./cpu.sh" \
@@ -85,11 +84,11 @@ sketchybar \
 	--subscribe sync-indicator system_woke repo-files-update \
 	\
 	--add item network-download $row_2 \
-	--set network-download icon="" update_freq="$stats_freq_s" \
+	--set network-download icon="" update_freq="3" \
 	script="./network-download.sh" \
 	\
 	--add item network-upload $row_2 \
-	--set network-upload icon="" update_freq="$stats_freq_s" \
+	--set network-upload icon="" update_freq="4" \
 	script="./network-upload.sh" \
 	\
 	--add item package-updates $row_2 \

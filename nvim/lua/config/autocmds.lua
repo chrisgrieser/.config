@@ -4,6 +4,7 @@
 if vim.fn.has("gui_running") == 0 then
 	local termBgModified = false
 	vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+		desc = "User: Enable terminal background sync",
 		callback = function()
 			local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
 			if normal.bg then
@@ -14,6 +15,7 @@ if vim.fn.has("gui_running") == 0 then
 	})
 
 	vim.api.nvim_create_autocmd("UILeave", {
+		desc = "User: Disable terminal background sync",
 		callback = function()
 			if termBgModified then io.write("\027]111\027\\") end
 		end,
@@ -23,9 +25,8 @@ end
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
--- * Once a week, on first `FocusLost`, delete older files.
--- * Requires unix system.
 vim.api.nvim_create_autocmd("FocusLost", {
+	desc = "User: Auto-cleanup. Once a week, on first `FocusLost`, delete older files.",
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
@@ -37,8 +38,8 @@ vim.api.nvim_create_autocmd("FocusLost", {
 
 --------------------------------------------------------------------------------
 
--- AUTO-SAVE
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLost" }, {
+	desc = "User: Auto-save",
 	callback = function(ctx)
 		local saveInstantly = ctx.event == "FocusLost" or ctx.event == "BufLeave"
 		local bufnr = ctx.buf
@@ -75,6 +76,7 @@ local autoCdConfig = {
 	},
 }
 vim.api.nvim_create_autocmd("BufEnter", {
+	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
 		local root = vim.fs.root(ctx.buf, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
@@ -88,15 +90,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
--- FIX cwd being not available when it is deleted outside nvim
 vim.api.nvim_create_autocmd("FocusGained", {
+	desc = "User: Fix cwd being not available when it is deleted outside nvim.",
 	callback = function()
 		if not vim.uv.cwd() then vim.uv.chdir("/") end
 	end,
 })
 
--- Close all non-existing buffers on `FocusGained`
 vim.api.nvim_create_autocmd("FocusGained", {
+	desc = "User: Close all non-existing buffers on `FocusGained`.",
 	callback = function()
 		local closedBuffers = {}
 		vim.iter(vim.api.nvim_list_bufs())
@@ -210,7 +212,7 @@ local globToTemplateMap = {
 }
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
-	-- `BufReadPost` for files created outside of nvim
+	desc = "User: Apply templates (`BufReadPost` for files created outside of nvim.)",
 	callback = function(ctx)
 		vim.defer_fn(function() -- defer, to ensure new files are written
 			local stats = vim.uv.fs_stat(ctx.file)
@@ -250,9 +252,9 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
--- MAXIMUM BUFFER NUMBERS
--- makes `:bnext` and `:bprevious` less crowded
+
 vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "User: Maximum buffer numbers, makes `:bnext` and `:bprevious` less crowded.",
 	callback = function()
 		local maxBufs = 5 -- CONFIG
 
@@ -276,6 +278,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- if there are conflicts, jump to first conflict, highlight conflict markers,
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+	desc = "User: Git conflict markers",
+
 	callback = function(ctx)
 		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
 
