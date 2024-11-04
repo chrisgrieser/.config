@@ -4,7 +4,7 @@
 threshold_kb=50
 #───────────────────────────────────────────────────────────────────────────────
 
-# HACK `netstat` only outputs as stream, so using `awk`'s `exit` to return 1st value
+# HACK `netstat` only outputs as stream, so using `awk`'s `exit` to return the 1st value
 upload=$(netstat -w1 | awk '/[0-9]/ {print int($6/1024) ; exit }')
 unit="k"
 
