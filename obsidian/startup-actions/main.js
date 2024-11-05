@@ -38,7 +38,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 				});
 				return !rootDir && !excludedDir;
 			})
-			// current dir, then by depth, then alphabetically
+			// sort: 1) current dir, 2) by depth, 3) alphabetically
 			.sort((a, b) => {
 				if (a.path === this.activeFileDir) return -1;
 				const depthA = a.path.split("/").length;
