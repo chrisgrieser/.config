@@ -87,10 +87,6 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
--- [O]pen new scope / brace (`remap` to trigger auto-pairing plugin)
-keymap("n", "<D-o>", "a{<CR>", { desc = " Open new scope", remap = true })
-keymap("i", "<D-o>", "{<CR>", { desc = " Open new scope", remap = true })
-
 -- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
