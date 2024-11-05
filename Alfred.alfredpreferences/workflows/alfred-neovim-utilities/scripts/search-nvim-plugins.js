@@ -67,6 +67,9 @@ function run() {
 				match: alfredMatcher(repo),
 				subtitle: subtitle,
 				arg: url,
+				mods: {
+					cmd: { arg: repo },
+				},
 				quicklookurl: url,
 				uid: repo,
 			};

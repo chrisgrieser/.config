@@ -1,35 +1,34 @@
 local M = {}
 
----@alias LspPosition { character: integer, line: integer }
----@alias LspReference { range: { start: LspPosition, end: LspPosition }, uri: string }
+---@alias Position { character: integer, line: integer }
 --------------------------------------------------------------------------------
 
----@param refs LspReference[]
----@param backwards boolean|nil
----@return LspReference
-local function findNextRef(refs, backwards)
+---@param refs Position[]
+---@param dir? "next"|"prev" default: "next"
+---@return Position
+local function findNextRef(refs, dir)
 	local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
 	curLine = curLine - 1 -- vim is 1-indexed
 
-	table.sort(refs, function(a, b) return a.range.start.line < b.range.start.line end)
-	local iter = backwards and vim.iter(refs):rev() or vim.iter(refs)
+	table.sort(refs, function(a, b) return a.line < b.line end)
+	local iter = dir == "prev" and vim.iter(refs):rev() or vim.iter(refs)
 
 	local nextRef = iter
 		:filter(function(ref)
-			local refPos = ref.range.start
-			if backwards then
-				-- reference is before current position
-				return refPos.line < curLine or (refPos.line == curLine and refPos.character < curCol)
+			if dir == "prev" then
+				return ref.line < curLine or (ref.line == curLine and ref.character < curCol)
 			else
-				-- reference is after current position
-				return refPos.line > curLine or (refPos.line == curLine and refPos.character > curCol)
+				return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
 			end
 		end)
 		:nth(1)
+
+	-- if no reference found, loop around
+	if not nextRef then nextRef = dir == "prev" and refs[#refs] or refs[1] end
 	return nextRef
 end
 
----@param dir? "next"|"prev"
+---@param dir? "next"|"prev" default: "next"
 function M.jump(dir)
 	local params = vim.lsp.util.make_position_params()
 
@@ -43,13 +42,11 @@ function M.jump(dir)
 		end
 		if not refs or vim.tbl_isempty(refs) then return end
 
-		local nextRef = findNextRef(refs, dir == "prev")
+		-- we only need the start position
+		refs = vim.tbl_map(function(ref) return ref.range.start end, refs) ---@cast refs Position[]
 
-		-- if no reference is found, loop around
-		if not nextRef then nextRef = dir == "prev" and refs[#refs] or refs[1] end
-
-		local pos = nextRef.range.start
-		vim.api.nvim_win_set_cursor(0, { pos.line + 1, pos.character })
+		local nextRef = findNextRef(refs, dir)
+		vim.api.nvim_win_set_cursor(0, { nextRef.line + 1, nextRef.character })
 		vim.cmd.normal { "zv", bang = true } -- open folds if inside a fold
 	end)
 end
