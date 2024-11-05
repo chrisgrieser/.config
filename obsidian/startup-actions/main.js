@@ -70,27 +70,6 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 }
 
-async function updateStatusbar(plugin) {
-	const { app, statusbarTaskCounter } = plugin;
-	const activeFile = app.workspace.getActiveFile();
-	if (!activeFile) {
-		statusbarTaskCounter.style.cssText = "display: none";
-		return;
-	}
-
-	const text = await app.vault.cachedRead(activeFile);
-	const allTasks = text.match(/^\s*- \[[x ]\] |TODO/gm);
-	if (!allTasks) {
-		statusbarTaskCounter.style.cssText = "display: none";
-		return;
-	}
-	const totalTasks = allTasks.length;
-	const openTasks = allTasks?.filter((task) => task.match(/- \[ \]|TODO/)).length;
-
-	statusbarTaskCounter.style.cssText = "display: block";
-	statusbarTaskCounter.setText(`${openTasks}/${totalTasks} [x]`);
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
@@ -98,9 +77,6 @@ class StartupActionsPlugin extends obsidian.Plugin {
 
 	onload() {
 		console.info(this.manifest.name + " loaded.");
-
-		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
-		this.app.workspace.onLayoutReady(() => updateStatusbar(this));
 
 		this.addCommand({
 			id: "new-file-in-folder",

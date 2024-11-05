@@ -16,11 +16,11 @@ keymap({ "n", "x" }, "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
 -- (not mapping in op-pending, since using custom textobjects for most of those)
-keymap({ "n", "x" }, "H", "0^") -- scroll fully to the left
-keymap("o", "H", "^")
-keymap({ "n", "x" }, "L", "$zv") -- zv: unfold under cursor
-keymap({ "n", "x" }, "J", "6gj")
-keymap({ "n", "x" }, "K", "6gk")
+keymap({ "n", "x" }, "H", "0^", { desc = "1st char" }) -- scroll fully to the left
+keymap("o", "H", "^", { desc = "1st char" })
+keymap({ "n", "x" }, "L", "$zv", { desc = "last char" }) -- zv: unfold under cursor
+keymap({ "n", "x" }, "J", "6gj", { desc = "6 lines down" })
+keymap({ "n", "x" }, "K", "6gk", { desc = "6 lines up" })
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
@@ -378,4 +378,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
