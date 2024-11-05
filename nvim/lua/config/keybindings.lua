@@ -39,7 +39,7 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 keymap(
 	"n",
 	"gj",
-	function() require("funcs.jump").reference_jump_from() end,
+	function() require("funcs.lsp-reference-jump").jump() end,
 	{ desc = "next reference" }
 )
 --------------------------------------------------------------------------------
