@@ -20,9 +20,6 @@ function readFile(path) {
 	return ObjC.unwrap(str);
 }
 
-const gitEnding = /\.git$/;
-const githubUrlStart = /https?:\/\/github.com\//;
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -41,8 +38,8 @@ function run() {
 			.doShellScript(shellCmd)
 			.split("\r")
 			.map((remote) => {
-				const url = remote.replace(gitEnding, "");
-				const repo = url.replace(githubUrlStart, "");
+				const url = remote.replace(/\.git$/, "");
+				const repo = url.replace(/https?:\/\/github\.com\//, "");
 				const [owner, name] = repo.split("/");
 				const installPath = $.getenv("plugin_installation_path") + "/" + name;
 
