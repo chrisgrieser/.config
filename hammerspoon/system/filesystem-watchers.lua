@@ -7,7 +7,7 @@ local pathw = hs.pathwatcher.new
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local browserSettings = home .. "/.config/+ browser-extension-configs/"
+local browserConfigs = home .. "/.config/+ browser-extension-configs/"
 local desktop = home .. "/Desktop/"
 
 M.pathw_desktop = pathw(desktop, function(paths, _)
@@ -41,24 +41,21 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 
 		-- 3. BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
-			success = os.rename(path, browserSettings .. "violentmonkey")
+			success = os.rename(path, browserConfigs .. "violentmonkey")
 			-- needs to be zipped again, since browser auto-opens all zip files
-			hs.execute(
-				("cd %q && zip violentmonkey.zip ./violentmonkey/* && rm -rf ./violentmonkey"):format(
-					browserSettings
-				)
-			)
+			local cmd = ("cd %q && zip -r violentmonkey.zip ./violentmonkey"):format(browserConfigs)
+			hs.execute(cmd)
 			u.app("Brave Browser"):activate() -- window created by auto-unzipping
 		elseif name == "ublacklist-settings.json" then
-			success = os.rename(path, browserSettings .. name)
+			success = os.rename(path, browserConfigs .. name)
 		elseif name:find("my%-ublock%-backup_.*%.txt") then
-			success = os.rename(path, browserSettings .. "ublock-settings.json")
+			success = os.rename(path, browserConfigs .. "ublock-settings.json")
 		elseif name:find("adg_ext_settings_.*%.json") then
-			success = os.rename(path, browserSettings .. "adguard-settings.json")
+			success = os.rename(path, browserConfigs .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
-			success = os.rename(path, browserSettings .. "stylus.json")
+			success = os.rename(path, browserConfigs .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then
-			success = os.rename(path, browserSettings .. "vimium-c-settings.json")
+			success = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
@@ -66,7 +63,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
 
-		-- 4. DKB BANKING
+		-- 4. BANKING
 		elseif
 			name:find("[%d-]_Kontoauszug_.*%.pdf$")
 			or name:find("[%d-]_Kosteninformation_.*%.pdf$")
@@ -80,7 +77,8 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			local bankPath = ("%s/Documents/Finanzen/%s/%s"):format(home, folder, year)
 			hs.fs.mkdir(bankPath)
 			-- delay ensures folder is created
-			u.defer(2, function() os.rename(path, bankPath .. "/" .. name) end)
+			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end)
+			hs.open(bankPath)
 
 		-- 5. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then

@@ -35,6 +35,13 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
+-- LSP Reference
+keymap(
+	"n",
+	"gj",
+	function() require("funcs.jump").reference_jump_from() end,
+	{ desc = "next reference" }
+)
 --------------------------------------------------------------------------------
 -- EDITING
 
