@@ -221,31 +221,15 @@ end
 
 ---@param dir? "next"|"prev" default: "next"
 function M.nextReference(dir)
+	local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
+	curLine = curLine - 1 -- vim is 1-indexed
 	local params = vim.lsp.util.make_position_params()
 
-	-- PERF `textDocument/documentHighlight` only searches the current buffer, as
-	-- opposed to `textDocument/references` which searches the entire workspace.
-	-- Since we jump only in the current file, the former is enough.
-	vim.lsp.buf_request(0, "textDocument/documentHighlight", params, function(err, refs, _, _)
-		-- GUARD
-		if err then
-			vim.notify("LSP Error: " .. err.message, vim.log.levels.ERROR, { title = "LSP Reference" })
-			return
-		end
-		if not refs or vim.tbl_isempty(refs) then
-			vim.notify("No references found.", nil, { title = "LSP Reference" })
-			return
-		end
-
-		local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
-		curLine = curLine - 1 -- vim is 1-indexed
-
-		-- prepare refs
-		refs = vim.tbl_map(function(ref) return ref.range.start end, refs)
-		table.sort(refs, function(a, b) return a.line < b.line end)
-		local refsIter = dir == "prev" and vim.iter(refs):rev() or vim.iter(refs)
+	local function jumpToNext()
+		local refs = vim.b.lspReferencesCache
 
 		-- get next reference
+		local refsIter = dir == "prev" and vim.iter(refs):rev() or vim.iter(refs)
 		local nextRef = refsIter
 			:filter(function(ref)
 				if dir == "prev" then
@@ -261,6 +245,38 @@ function M.nextReference(dir)
 		-- jump
 		vim.api.nvim_win_set_cursor(0, { nextRef.line + 1, nextRef.character })
 		vim.cmd.normal { "zv", bang = true } -- open folds
+	end
+
+	-- PERF simple caching for repeated jumps
+	if vim.b.lspReferencesCache then
+		local found = vim.iter(vim.b.lspReferencesCache)
+			:find(function(ref) return ref.line == curLine and ref.character == curCol end)
+		if found then
+			vim.notify("🖨️ 🔵")
+			jumpToNext()
+			return
+		end
+	end
+
+	-- PERF `textDocument/documentHighlight` only searches the current buffer, as
+	-- opposed to `textDocument/references` which searches the entire workspace.
+	-- Since we jump only in the current file, the former is enough.
+	vim.lsp.buf_request(0, "textDocument/documentHighlight", params, function(err, refs, _, _)
+		-- GUARD
+		if err then
+			vim.notify("LSP Error: " .. err.message, vim.log.levels.ERROR, { title = "LSP Reference" })
+			return
+		end
+		if not refs or vim.tbl_isempty(refs) then
+			vim.notify("No references found.", nil, { title = "LSP Reference" })
+			return
+		end
+
+		refs = vim.tbl_map(function(ref) return ref.range.start end, refs)
+		table.sort(refs, function(a, b) return a.line < b.line end)
+		vim.b.lspReferencesCache = refs
+
+		jumpToNext()
 	end)
 end
 
