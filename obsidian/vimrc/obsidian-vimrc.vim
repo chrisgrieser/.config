@@ -95,7 +95,7 @@ nnoremap l :origamiL<CR>
 " GOTO LOCATIONS
 
 " [m]atch parenthesis, useful to go to next pandoc citations
-nnoremap m %
+nnoremap ö %
 
 " Language tools: next/prev suggestion
 exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion

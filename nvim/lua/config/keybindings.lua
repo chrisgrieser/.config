@@ -39,13 +39,13 @@ keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
--- LSP Reference
-keymap(
-	"n",
-	"gj",
-	function() require("funcs.lsp-reference-jump").jump() end,
-	{ desc = "next reference" }
-)
+-- LSP Reference, fallback to regular `*`
+keymap("n", "*", function()
+	local refFound = require("funcs.nano-plugins").nextReference()
+	if not refFound then vim.cmd.normal { "*", bang = true } end
+end, { desc = "󰒕 Next reference" })
+
+keymap("n", "ö", "%", { desc = "match reference" })
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -102,8 +102,8 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
 
 -- Merging
-keymap({ "n", "x" }, "M", "J", { desc = "󰗈 Merge line up" })
-keymap({ "n", "x" }, "gm", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
+keymap("n", "m", "J", { desc = "󰗈 Merge line up" })
+keymap("n", "M", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
 
 --------------------------------------------------------------------------------
 
