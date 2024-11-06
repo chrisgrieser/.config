@@ -221,9 +221,8 @@ end
 
 ---@param dir? "next"|"prev" default: "next"
 function M.nextReference(dir)
-	local curLine, curCol = unpack(vim.api.nvim_win_get_cursor(0))
-	curLine = curLine - 1 -- vim is 1-indexed
 	local params = vim.lsp.util.make_position_params()
+	local curLine, curCol = params.position.line, params.position.character
 
 	local function jumpToNext()
 		local refs = vim.b.lspReferencesCache
@@ -243,8 +242,9 @@ function M.nextReference(dir)
 		if not nextRef then nextRef = dir == "prev" and refs[#refs] or refs[1] end
 
 		-- jump
-		vim.api.nvim_win_set_cursor(0, { nextRef.line + 1, nextRef.character })
-		vim.cmd.normal { "zv", bang = true } -- open folds
+		-- vim.api.nvim_win_set_cursor(0, { nextRef.line + 1, nextRef.character })
+		-- vim.cmd.normal { "zv", bang = true } -- open folds
+		vim.lsp.util.jump_to_location
 	end
 
 	-- PERF simple caching for repeated jumps
@@ -252,7 +252,6 @@ function M.nextReference(dir)
 		local found = vim.iter(vim.b.lspReferencesCache)
 			:find(function(ref) return ref.line == curLine and ref.character == curCol end)
 		if found then
-			vim.notify("🖨️ 🔵")
 			jumpToNext()
 			return
 		end
