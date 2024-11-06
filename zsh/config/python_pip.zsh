@@ -22,7 +22,7 @@ alias v="toggle_venv"
 #───────────────────────────────────────────────────────────────────────────────
 
 function new_venv {
-	local python="python3.12" # CONFIG
+	local python="python3.13" # CONFIG
 	[[ -d ./.venv ]] && rm -rf ./.venv
 	"$python" -m venv ./.venv
 	source ./.venv/bin/activate
@@ -30,7 +30,7 @@ function new_venv {
 }
 
 function inspect_venv {
-	py_path="$(command which python3 | sed 's|^/Users/chrisgrieser/|~/|')"
+	py_path="$(command which python3 | sed "s|^$HOME/|~/|")"
 	print "Now using: \e[1;36m$py_path\e[0m"
 }
 
@@ -48,7 +48,7 @@ function _search_venv_path {
 	echo "$venv_path"
 }
 
-# Utility function, intended for terminal movement commands. Automatically enables
+# Utility function, intended for use with `chpwd`. Automatically enables
 # venv if current dir or a parent has a `.venv` dir. Disables venv if not.
 function _auto_venv {
 	local venv_path
@@ -75,7 +75,7 @@ function toggle_venv {
 			source ./.venv/bin/activate
 			inspect_venv
 		else
-			print "\033[1;33mNo virtual environment found.\033[0m"
+			print "\e[1;33mNo virtual environment found.\e[0m"
 		fi
 	fi
 }

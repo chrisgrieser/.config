@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-python="python3.12"
+python="python3.13"
 username="pseudometa"
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anilist/"
 
@@ -13,13 +13,13 @@ clone_and_venv() {
 
 	exporter_dir="$(basename "$1" .git)"
 	cd "$exporter_dir" || return 1
-	[[ -d ./.venv ]] && rm -rf ./.venv
 
+	[[ -d ./.venv ]] && rm -rf ./.venv
 	"$python" -m venv ./.venv
 	# shellcheck disable=1091
 	source ./.venv/bin/activate
-	# shellcheck disable=2016
-	py_path="$(command which python3 | sed 's|^$HOME/|~/|')"
+
+	py_path="$(command which python3 | sed "s|^$HOME/|~/|")"
 	print "Now using: \e[1;36m$py_path\e[0m"
 
 	python3 -m pip install -r requirements.txt
@@ -27,13 +27,7 @@ clone_and_venv() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-exporter_json="https://github.com/Jacekun/AniPy"
-clone_and_venv "$exporter_json"
-python3 anipy.py -user "$username" # AniPy
-cp -vf ./output/anime_*.json "$bkp_destination"
-
-echo "----------"
-
+# alternative (requiring more setup though) https://github.com/Jacekun/AniPy
 exporter_mal_xml="https://github.com/staticaron/AnilistToMalExporter"
 clone_and_venv "$exporter_mal_xml"
 python3 convertor.py "$username"
