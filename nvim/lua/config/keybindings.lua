@@ -40,12 +40,15 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 -- LSP Reference, fallback to regular `*`
-keymap("n", "*", function()
-	local refFound = require("funcs.nano-plugins").nextReference()
-	if not refFound then vim.cmd.normal { "*", bang = true } end
-end, { desc = "󰒕 Next reference" })
+keymap(
+	"n",
+	"*",
+	function() require("funcs.nano-plugins").nextReference() end,
+	{ desc = "󰒕 Next reference" }
+)
+keymap("n", "g*", "*", { desc = "Search word under cursor" })
 
-keymap("n", "ö", "%", { desc = "match reference" })
+keymap("n", "ö", "%", { desc = "Match bracket" })
 --------------------------------------------------------------------------------
 -- EDITING
 
