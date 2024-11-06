@@ -23,7 +23,7 @@ require("lazy").setup {
 	spec = { import = "plugins" }, -- = use specs stored in `./lua/plugins`
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-	dev = { ---@diagnostic disable-line: assign-type-mismatch wrong diagnostic
+	dev = {
 		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -43,17 +43,6 @@ require("lazy").setup {
 			["<localleader>l"] = false,
 			["<localleader>t"] = false,
 			["<localleader>i"] = false,
-			["gx"] = {
-				function(plugin) vim.ui.open(plugin.url:gsub("%.git$", "")) end,
-				desc = "󰖟 Plugin repo",
-			},
-			["gp"] = {
-				function(plug)
-					vim.cmd.close()
-					require("telescope.builtin").find_files { prompt_title = plug.name, cwd = plug.dir }
-				end,
-				desc = "󰒲 Local plugin code",
-			},
 			["gi"] = {
 				function(plug)
 					local url = plug.url:gsub("%.git$", "")
@@ -83,8 +72,8 @@ require("lazy").setup {
 			-- stylua: ignore
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
-				"matchparen", "matchit", "netrwPlugin", "man", "tutor", "health",
-				"tohtml", "gzip", "zipPlugin", "tarPlugin", "osc52"
+				"netrwPlugin", "man", "tutor", "health", "tohtml", "gzip", 
+				"zipPlugin", "tarPlugin", "osc52",
 			},
 		},
 	},

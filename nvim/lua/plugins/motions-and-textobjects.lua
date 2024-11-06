@@ -2,18 +2,6 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{ -- better % (highlighting, match across lines, match quotes, etc.)
-		"andymass/vim-matchup",
-		event = "BufReadPost", -- cannot load on keys due to highlights
-		keys = {
-			{ "m", "<Plug>(matchup-%)", desc = "% Goto Matchup" },
-		},
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		init = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
-			vim.g.matchup_matchparen_deferred = 1 --improves performance a bit
-		end,
-	},
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
 		opts = { consistentOperatorPending = true },
