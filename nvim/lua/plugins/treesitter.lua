@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = "VeryLazy",
+	event = "BufReadPre",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
 	init = function()
@@ -33,10 +33,6 @@ return {
 			},
 		},
 		-- plugins
-		matchup = {
-			enable = true,
-			enable_quotes = true,
-		},
 		textobjects = {
 			move = { -- move to next function
 				enable = true,
