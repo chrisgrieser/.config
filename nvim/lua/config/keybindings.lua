@@ -8,7 +8,7 @@ local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
 keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
 --------------------------------------------------------------------------------
--- NAVIGATION
+-- MOVEMENTS
 
 -- j/k should on wrapped lines
 keymap({ "n", "x" }, "j", "gj")
@@ -33,22 +33,24 @@ keymap("n", "<C-g>", vim.cmd.pop, { desc = "󱋿 Tagstack back" })
 
 -- Search
 keymap("n", "-", "/")
-keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
+keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
+keymap("n", "g*", "*", { desc = " Search word under cursor" })
 
--- Diagnostics
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
-
--- LSP Reference, fallback to regular `*`
+-- LSP Reference
 keymap(
 	"n",
 	"*",
 	function() require("funcs.nano-plugins").nextReference() end,
 	{ desc = "󰒕 Next reference" }
 )
-keymap("n", "g*", "*", { desc = "Search word under cursor" })
 
-keymap("n", "ö", "%", { desc = "Match bracket" })
+-- remap needed, to use the builtin MatchIt plugin
+keymap("n", "ö", "%", { desc = "Match it", remap = true })
+
+-- Diagnostics
+keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
+keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -233,13 +235,9 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<D-p>", function()
-	if vim.snippet.active { direction = 1 } then vim.snippet.jump(1) end
+	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 next placeholder" })
-keymap({ "n", "i", "s" }, "<D-P>", function()
-	if vim.snippet.active { direction = -1 } then vim.snippet.jump(-1) end
-end, { desc = "󰩫 prev placeholder" })
 
--- exit snippet automatically on scroll
 vim.api.nvim_create_autocmd("WinScrolled", {
 	desc = "User: Exit snippet on scroll",
 	callback = function(ctx)

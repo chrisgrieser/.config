@@ -1,5 +1,5 @@
--- A bunch of commands that are too small to be published as plugins, but too
--- big to put in the main config, where they would crowd the actual config.
+-- INFO A bunch of commands that are too small to be published as plugins, but
+-- too big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
 local M = {}
 --------------------------------------------------------------------------------
@@ -30,7 +30,6 @@ function M.justRecipe(which)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
 		useQuickfix = { "check-tsc" },
-		quickfixHlgroup = "WarningMsg",
 	}
 
 	local function run(recipe)
@@ -68,21 +67,7 @@ function M.justRecipe(which)
 	end
 
 	-- move first recipe to end, since it's normally accessed directly via "first"
-	-- highlight the first recipe and recipes using the quickfix list
 	table.insert(recipes, table.remove(recipes, 1))
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "DressingSelect",
-		once = true,
-		callback = function(ctx)
-			local lines = vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)
-			for ln, line in ipairs(lines) do
-				local hl
-				if ln == #lines then hl = "Comment" end
-				if vim.tbl_contains(config.useQuickfix, line) then hl = config.quickfixHlgroup end
-				if hl then vim.api.nvim_buf_add_highlight(ctx.buf, 0, hl, ln - 1, 0, -1) end
-			end
-		end,
-	})
 	vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 end
 
@@ -230,8 +215,8 @@ function M.nextReference()
 	-- opposed to `textDocument/references` which searches the entire workspace.
 	-- Since we jump only in the current file, the former is enough.
 	-- PERF Performance could be further improved by caching the references from
-	-- the callback, but the improvement is too minor to justify increasing this
-	-- function's complexity.
+	-- the callback, but the improvement proved to be too minor to justify
+	-- increasing this function's complexity.
 	vim.lsp.buf_request(0, "textDocument/documentHighlight", params, function(err, refs, _, _)
 		-- GUARD
 		if err then
@@ -243,12 +228,14 @@ function M.nextReference()
 			return
 		end
 
-		-- get next reference
+		-- sort references by order of occurrence
 		table.sort(refs, function(a, b)
 			local refA, refB = a.range.start, b.range.start
 			if refA.line == refB.line then return refA.character < refB.character end
 			return refA.line < refB.line
 		end)
+
+		-- get first reference after current position
 		local nextRef = vim.iter(refs):find(function(location)
 			local ref = location.range.start
 			return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
