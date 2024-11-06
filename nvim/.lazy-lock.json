@@ -14,7 +14,7 @@
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "mini.operators": { "branch": "main", "commit": "3bc484733f416a09c5d571135dcfd0062bcc1478" },
   "neocodeium": { "branch": "main", "commit": "4da81528468b33585c411f31eb390dce573ccb14" },
-  "noice.nvim": { "branch": "main", "commit": "d80136061820765baf70ace7dfb98a52575edc4a" },
+  "noice.nvim": { "branch": "main", "commit": "73d38cc939db6553b87e5f72ff732447046bced1" },
   "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
   "nvim-chainsaw": { "branch": "main", "commit": "2af4925afab2591bccb4118475dabfee49744311" },
   "nvim-genghis": { "branch": "main", "commit": "3998362b132885d599fefb1c285e40807f5b9677" },
@@ -28,7 +28,7 @@
   "nvim-spider": { "branch": "main", "commit": "b1c542a78522d59432a827f6ec2b28f9422c7e7f" },
   "nvim-surround": { "branch": "main", "commit": "dca2e998ff26681ee422b92c6ed39b3d2908d8a9" },
   "nvim-tinygit": { "branch": "main", "commit": "0cfbe666572e13524e0fc5341a6d587488003ab0" },
-  "nvim-treesitter": { "branch": "master", "commit": "4b9a83f6017ee5edea85722cbfda1b3058a82e69" },
+  "nvim-treesitter": { "branch": "master", "commit": "ea3a37a9758d873feec3feac37a358e4225a5871" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "3e450cd85243da99dc23ebbf14f9c70e9a0c26a4" },
   "nvim-ufo": { "branch": "main", "commit": "522d719d421fc42b95577d9624048d8348d326ea" },
   "nvim-various-textobjs": { "branch": "main", "commit": "cc33e0a6681bbe913de515ac1a68492d50cbf949" },
@@ -46,5 +46,5 @@
   "tokyonight.nvim": { "branch": "main", "commit": "ce91ba480070c95f40753e4663e32b4632ac6db3" },
   "treesj": { "branch": "main", "commit": "0d81326b5afd36babe7dd480aabbb0b05f33e688" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "9e3209190c22953566ae4e6436ad2b4ff4dabb95" },
-  "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" }
+  "which-key.nvim": { "branch": "main", "commit": "68e37e12913a66b60073906f5d3f14dee0de19f2" }
 }

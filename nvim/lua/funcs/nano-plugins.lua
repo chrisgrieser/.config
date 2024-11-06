@@ -24,6 +24,7 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
+--- Simply taskrunner using `just`
 ---@param which "first"|"select"
 function M.justRecipe(which)
 	local config = {
@@ -57,7 +58,7 @@ function M.justRecipe(which)
 		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
-	local recipes = vim.iter(vim.split(vim.trim(result.stdout), " "))
+	local recipes = vim.iter(vim.split(result.stdout, " ", { trimempty = true }))
 		:filter(function(r) return not vim.tbl_contains(config.ignoreRecipes, r) end)
 		:totable()
 
@@ -87,9 +88,13 @@ end
 
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
----@param toggleKey string
+---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
+	if not reg:find("^%l$") then
+		vim.notify("Invalid register: " .. reg, vim.log.levels.ERROR)
+		return
+	end
 	local notRecording = vim.fn.reg_recording() == ""
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true }
@@ -114,8 +119,8 @@ end
 --------------------------------------------------------------------------------
 
 -- Increment or toggle if cursorword is true/false.
--- * Simplified implementation of dial.nvim.
--- * REQUIRED `expr = true` for the keybinding
+-- + Simplified implementation of dial.nvim.
+-- + REQUIRED `expr = true` for the keybinding
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
@@ -177,8 +182,6 @@ function M.toggleWordCasing()
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
 
---------------------------------------------------------------------------------
-
 function M.gotoMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
@@ -217,8 +220,8 @@ function M.gotoMostChangedFile()
 		vim.cmd.edit(targetFile)
 	end
 end
---------------------------------------------------------------------------------
 
+-- Simplified implementation of refjump.nvim
 function M.nextReference()
 	local params = vim.lsp.util.make_position_params()
 	local curLine, curCol = params.position.line, params.position.character
@@ -226,6 +229,9 @@ function M.nextReference()
 	-- PERF `textDocument/documentHighlight` only searches the current buffer, as
 	-- opposed to `textDocument/references` which searches the entire workspace.
 	-- Since we jump only in the current file, the former is enough.
+	-- PERF Performance could be further improved by caching the references from
+	-- the callback, but the improvement is too minor to justify increasing this
+	-- function's complexity.
 	vim.lsp.buf_request(0, "textDocument/documentHighlight", params, function(err, refs, _, _)
 		-- GUARD
 		if err then
@@ -243,15 +249,13 @@ function M.nextReference()
 			if refA.line == refB.line then return refA.character < refB.character end
 			return refA.line < refB.line
 		end)
-		local nextRef = vim.iter(refs)
-			:filter(function(location)
-				local ref = location.range.start
-				return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
-			end)
-			:nth(vim.v.count)
+		local nextRef = vim.iter(refs):find(function(location)
+			local ref = location.range.start
+			return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
+		end)
 		if not nextRef then nextRef = refs[1] end -- if not found, loop around
 
-		-- jump
+		-- jump to it
 		local uri = params.textDocument.uri
 		vim.lsp.util.jump_to_location({ uri = uri, range = nextRef.range }, "utf-16")
 		vim.cmd.normal { "zv", bang = true } -- open folds
