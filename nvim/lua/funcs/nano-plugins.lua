@@ -219,43 +219,9 @@ function M.gotoMostChangedFile()
 end
 --------------------------------------------------------------------------------
 
----@param dir? "next"|"prev" default: "next"
-function M.nextReference(dir)
+function M.nextReference()
 	local params = vim.lsp.util.make_position_params()
 	local curLine, curCol = params.position.line, params.position.character
-
-	local function jumpToNext()
-		local refs = vim.b.lspReferencesCache
-
-		-- get next reference
-		local refsIter = dir == "prev" and vim.iter(refs):rev() or vim.iter(refs)
-		local nextRef = refsIter
-			:filter(function(ref)
-				if dir == "prev" then
-					return ref.line < curLine or (ref.line == curLine and ref.character < curCol)
-				else
-					return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
-				end
-			end)
-			:nth(1)
-		-- if not found, loop around
-		if not nextRef then nextRef = dir == "prev" and refs[#refs] or refs[1] end
-
-		-- jump
-		-- vim.api.nvim_win_set_cursor(0, { nextRef.line + 1, nextRef.character })
-		-- vim.cmd.normal { "zv", bang = true } -- open folds
-		vim.lsp.util.jump_to_location
-	end
-
-	-- PERF simple caching for repeated jumps
-	if vim.b.lspReferencesCache then
-		local found = vim.iter(vim.b.lspReferencesCache)
-			:find(function(ref) return ref.line == curLine and ref.character == curCol end)
-		if found then
-			jumpToNext()
-			return
-		end
-	end
 
 	-- PERF `textDocument/documentHighlight` only searches the current buffer, as
 	-- opposed to `textDocument/references` which searches the entire workspace.
@@ -271,11 +237,24 @@ function M.nextReference(dir)
 			return
 		end
 
-		refs = vim.tbl_map(function(ref) return ref.range.start end, refs)
-		table.sort(refs, function(a, b) return a.line < b.line end)
-		vim.b.lspReferencesCache = refs
+		-- get next reference
+		table.sort(refs, function(a, b)
+			local refA, refB = a.range.start, b.range.start
+			if refA.line == refB.line then return refA.character < refB.character end
+			return refA.line < refB.line
+		end)
+		local nextRef = vim.iter(refs)
+			:filter(function(location)
+				local ref = location.range.start
+				return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
+			end)
+			:nth(vim.v.count)
+		if not nextRef then nextRef = refs[1] end -- if not found, loop around
 
-		jumpToNext()
+		-- jump
+		local uri = params.textDocument.uri
+		vim.lsp.util.jump_to_location({ uri = uri, range = nextRef.range }, "utf-16")
+		vim.cmd.normal { "zv", bang = true } -- open folds
 	end)
 end
 
