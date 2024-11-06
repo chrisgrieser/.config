@@ -311,7 +311,7 @@ function gdf {
 
 	# FIX for whatever reason, without this, a lot of `zsh` processes all taking
 	# lots of CPU are accumulating
-	sleep 1 
+	sleep 1
 
 	if [[ -z "$deleted_path" ]]; then
 		print "\e[1;31mNo deleted file found with \e[1;33m$search\\e[0m"
@@ -347,4 +347,11 @@ function gdf {
 	elif [[ "$decision" =~ checkout ]]; then
 		git checkout "$last_commit"
 	fi
+}
+#───────────────────────────────────────────────────────────────────────────────
+
+# Git Status for All repos
+function gsa {
+	local some_perma_repos
+	some_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
 }
