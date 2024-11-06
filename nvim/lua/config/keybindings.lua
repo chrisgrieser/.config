@@ -27,6 +27,10 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
+-- Telescope's LSP functions populate the tagstack, so this allow us to go back
+-- after exploring LSP references, skipping irrelevant entries in the jump list.
+keymap("n", "<C-g>", vim.cmd.pop, { desc = "󱋿 Tagstack back" })
+
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = "Search IN sel" })
