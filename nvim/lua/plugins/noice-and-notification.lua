@@ -1,16 +1,3 @@
----@param bufnr number
-local function highlightsInStacktrace(bufnr)
-	vim.defer_fn(function()
-		if not vim.api.nvim_buf_is_valid(bufnr) then return end
-		vim.api.nvim_buf_call(bufnr, function()
-			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]]) -- files with error
-			vim.fn.matchadd("WarningMsg", [[E\d\+]]) -- vim error codes
-		end)
-	end, 1)
-end
-
---------------------------------------------------------------------------------
-
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- REDIRECT TO POPUP
@@ -74,15 +61,9 @@ local routes = {
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- notification & other utilities
 		"folke/snacks.nvim",
 		event = "UIEnter",
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "snacks_notif",
-				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
-			})
-		end,
 		keys = {
 			{
 				"*",
@@ -99,7 +80,9 @@ return {
 			styles = {
 				notification = {
 					wo = { wrap = true, winblend = 0 },
+					bo = { filetype = "noice" }, -- inherit noice-highlighting
 					border = vim.g.borderStyle,
+					zindex = 100,
 				},
 			},
 			notifier = {
@@ -117,9 +100,17 @@ return {
 		event = "UIEnter",
 		dependencies = "MunifTanjim/nui.nvim",
 		init = function()
+			-- highlighting of filepaths and error codes
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
-				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
+				callback = function(ctx)
+					vim.defer_fn(function()
+						vim.api.nvim_buf_call(ctx.buf, function()
+							vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+							vim.fn.matchadd("WarningMsg", [[E\d\+]])
+						end)
+					end, 1)
+				end,
 			})
 		end,
 		keys = {

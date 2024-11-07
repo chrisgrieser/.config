@@ -270,6 +270,7 @@ serverConfig
 ClientConfig
 minification
 subdirectory
+customizable
 Strikethrough
 strikethrough
 automagically
