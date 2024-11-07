@@ -43,42 +43,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 --------------------------------------------------------------------------------
 
--- HIGHLIGHT CURSORWORD
-vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "User: Highlight LSP cursorword",
-	callback = function(ctx)
-		local capabilities = vim.lsp.get_client_by_id(ctx.data.client_id).server_capabilities or {}
-		if not capabilities.documentHighlightProvider then return end
-		local group = vim.api.nvim_create_augroup("lsp-cursorword", {})
-
-		vim.api.nvim_create_autocmd("CursorHold", {
-			desc = "User: Update LSP cursorword",
-			buffer = ctx.buf,
-			group = group,
-			callback = vim.lsp.buf.document_highlight,
-		})
-
-		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
-			desc = "User: Clear LSP cursorword",
-			buffer = ctx.buf,
-			group = group,
-			callback = vim.lsp.buf.clear_references,
-		})
-
-		-- relevant for restarting LSP
-		vim.api.nvim_create_autocmd("LspDetach", {
-			desc = "User: Disable LSP cursorword",
-			group = vim.api.nvim_create_augroup("lsp-highlight-detach", {}),
-			callback = function(ctx2)
-				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds { group = "lsp-cursorword", buffer = ctx2.buf }
-			end,
-		})
-	end,
-})
-
---------------------------------------------------------------------------------
-
 -- pause inlay hints in insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
 	desc = "User: Disable LSP inlay hints",

@@ -74,10 +74,53 @@ local routes = {
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"folke/snacks.nvim",
+		event = "UIEnter",
+		keys = {
+			{
+				"*",
+				function() require("snacks").words.jump(1, true) end,
+				desc = "󰒕 Next Reference",
+			},
+			{ "n", "g*", "*", desc = " Search word under cursor" },
+		},
+		opts = {
+			styles = {
+				notification = {
+					wo = { wrap = true },
+				},
+			},
+			bigfile = { enabled = false },
+			words = { enabled = true },
+			notifier = {
+				enabled = true,
+				timeout = 3000, -- default timeout in ms
+				width = { min = 40, max = 0.4 },
+				height = { min = 1, max = 0.6 },
+				-- editor margin to keep free. tabline and statusline are taken into account automatically
+				margin = { top = 0, right = 1, bottom = 0 },
+				padding = true, -- add 1 cell of left/right padding to the notification window
+				sort = { "level", "added" }, -- sort by level and time
+				icons = {
+					error = " ",
+					warn = " ",
+					info = " ",
+					debug = " ",
+					trace = " ",
+				},
+				---@type snacks.notifier.style
+				style = "compact",
+				top_down = true, -- place notifications from top to bottom
+			},
+			quickfile = { enabled = false },
+			statuscolumn = { enabled = false },
+		},
+	},
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
 		event = "UIEnter",
-		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+		dependencies = "MunifTanjim/nui.nvim",
 		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "noice",
@@ -163,39 +206,6 @@ return {
 					["vim.lsp.util.stylize_markdown"] = true,
 				},
 			},
-		},
-	},
-	{
-		"rcarriga/nvim-notify",
-		opts = {
-			max_width = 50,
-			minimum_width = 25, -- wider for title in border
-			top_down = false,
-			level = 0, -- minimum severity, 0 = show all
-			stages = "slide",
-			icons = { ERROR = "", WARN = "", INFO = "", DEBUG = "", TRACE = "󰓘" },
-
-			-- PENDING https://github.com/rcarriga/nvim-notify/pull/280
-			-- render = "wrapped-minimal",
-			render = require("funcs.TEMP-wrapped-minimal"),
-			on_open = function(win, record)
-				if not vim.api.nvim_win_is_valid(win) then return end
-
-				-- put title into border PENDING https://github.com/rcarriga/nvim-notify/issues/279
-				local opts = { border = vim.g.borderStyle }
-				local title = record.title[1]
-				local hasTitle = title and title ~= "" and title ~= "Messages"
-				if hasTitle then
-					if record.level ~= "INFO" then title = record.icon .. " " .. title end
-					local titleHl = ("Notify%sTitle"):format(record.level)
-					opts.title = { { " " .. title .. " ", titleHl } }
-					opts.title_pos = "left"
-				end
-				vim.api.nvim_win_set_config(win, opts)
-
-				local bufnr = vim.api.nvim_win_get_buf(win)
-				highlightsInStacktrace(bufnr)
-			end,
 		},
 	},
 }

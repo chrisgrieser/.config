@@ -132,7 +132,7 @@
 	<key>description</key>
 	<string>Open Obsidian Notes &amp; search Obsdian plugin</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Sparkling Obsidian</string>
 	<key>objects</key>
