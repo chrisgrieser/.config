@@ -104,7 +104,7 @@ local function homeAndScrollUp()
 
 	-- GUARD only if Mona is running in background and already has window
 	local mona = u.app("Mona")
-	if not mona or mona:isFrontmost() or not mona:mainWindow() then return end
+	if not mona or mona:isFrontmost() or #mona:allWindows() ~= 1 then return end
 
 	local key = hs.eventtap.keyStroke
 	key({ "cmd" }, "left", 1, mona) -- go back

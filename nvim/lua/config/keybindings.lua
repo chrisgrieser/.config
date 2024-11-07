@@ -19,8 +19,8 @@ keymap({ "n", "x" }, "k", "gk")
 keymap({ "n", "x" }, "H", "0^", { desc = "1st char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "1st char" })
 keymap({ "n", "x" }, "L", "$zv", { desc = "last char" }) -- zv: unfold under cursor
-keymap({ "n", "x" }, "J", "6gj", { desc = "6 lines down" })
-keymap({ "n", "x" }, "K", "6gk", { desc = "6 lines up" })
+keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
+keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
