@@ -86,35 +86,24 @@ return {
 			{ "n", "g*", "*", desc = " Search word under cursor" },
 		},
 		opts = {
+			bigfile = { enabled = false },
+			quickfile = { enabled = false },
+			statuscolumn = { enabled = false },
+
 			styles = {
 				notification = {
 					wo = { wrap = true },
+					border = vim.g.borderStyle,
 				},
 			},
-			bigfile = { enabled = false },
-			words = { enabled = true },
 			notifier = {
-				enabled = true,
-				timeout = 3000, -- default timeout in ms
-				width = { min = 40, max = 0.4 },
-				height = { min = 1, max = 0.6 },
-				-- editor margin to keep free. tabline and statusline are taken into account automatically
+				timeout = 6000,
+				width = { min = 25, max = 50 },
+				height = { min = 1, max = 0.4 },
 				margin = { top = 0, right = 1, bottom = 0 },
-				padding = true, -- add 1 cell of left/right padding to the notification window
-				sort = { "level", "added" }, -- sort by level and time
-				icons = {
-					error = " ",
-					warn = " ",
-					info = " ",
-					debug = " ",
-					trace = " ",
-				},
-				---@type snacks.notifier.style
-				style = "compact",
-				top_down = true, -- place notifications from top to bottom
+				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+				top_down = false, 
 			},
-			quickfile = { enabled = false },
-			statuscolumn = { enabled = false },
 		},
 	},
 	{ -- Message & Command System Overhaul
