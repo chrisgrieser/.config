@@ -48,7 +48,7 @@ function M.update()
 	end
 end
 
-if u.isSystemStart() then M.update() end
+M.update()
 
 --------------------------------------------------------------------------------
 return M
