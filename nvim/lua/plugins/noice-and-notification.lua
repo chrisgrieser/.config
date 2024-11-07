@@ -76,19 +76,10 @@ local routes = {
 --------------------------------------------------------------------------------
 
 return {
-	{
-		"rcarriga/nvim-notify",
-		lazy = false,
-		config = function()
-			vim.notify = require("notify")
-			require("notify").setup()
-		end,
-	},
 	{ -- notification & other utilities
 		-- "folke/snacks.nvim",
 		"chrisgrieser/snacks.nvim", -- PENDING https://github.com/folke/snacks.nvim/pull/23
 		branch = "dev",
-		enabled = false,
 
 		event = "UIEnter",
 		keys = {
@@ -108,18 +99,17 @@ return {
 					border = vim.g.borderStyle,
 				},
 			},
-			notifier = {
-				timeout = 6000,
-				width = { min = 20, max = 0.45 },
-				height = { min = 1, max = 0.4 },
-				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
-				top_down = false,
-			},
+			-- notifier = {
+			-- 	timeout = 6000,
+			-- 	width = { min = 20, max = 0.45 },
+			-- 	height = { min = 1, max = 0.4 },
+			-- 	icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+			-- 	top_down = false,
+			-- },
 		},
 	},
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		enabled = false,
 		event = "UIEnter",
 		dependencies = "MunifTanjim/nui.nvim",
 		keys = {
