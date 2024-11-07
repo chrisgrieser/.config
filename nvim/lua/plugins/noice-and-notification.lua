@@ -95,7 +95,7 @@ return {
 
 			styles = {
 				notification = {
-					wo = { wrap = true, winblend = 0 },
+					wo = { wrap = true },
 					border = vim.g.borderStyle,
 				},
 			},
@@ -103,7 +103,6 @@ return {
 				timeout = 6000,
 				width = { min = 20, max = 0.45 },
 				height = { min = 1, max = 0.4 },
-				margin = { top = 0, right = 1, bottom = 0 },
 				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 				top_down = false,
 			},
