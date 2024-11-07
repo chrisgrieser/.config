@@ -77,13 +77,19 @@ return {
 	{
 		"folke/snacks.nvim",
 		event = "UIEnter",
+		init = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "snacks_notif",
+				callback = function(ctx) highlightsInStacktrace(ctx.buf) end,
+			})
+		end,
 		keys = {
 			{
 				"*",
 				function() require("snacks").words.jump(1, true) end,
 				desc = "󰒕 Next Reference",
 			},
-			{ "n", "g*", "*", desc = " Search word under cursor" },
+			{ "g*", "*", desc = " Search word under cursor" },
 		},
 		opts = {
 			bigfile = { enabled = false },
@@ -92,17 +98,17 @@ return {
 
 			styles = {
 				notification = {
-					wo = { wrap = true },
+					wo = { wrap = true, winblend = 0 },
 					border = vim.g.borderStyle,
 				},
 			},
 			notifier = {
 				timeout = 6000,
-				width = { min = 25, max = 50 },
+				width = { min = 20, max = 0.45 },
 				height = { min = 1, max = 0.4 },
 				margin = { top = 0, right = 1, bottom = 0 },
 				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
-				top_down = false, 
+				top_down = false,
 			},
 		},
 	},

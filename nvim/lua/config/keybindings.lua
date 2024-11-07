@@ -34,7 +34,6 @@ keymap("n", "<C-g>", vim.cmd.pop, { desc = "󱋿 Tagstack back" })
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
-keymap("n", "g*", "*", { desc = " Search word under cursor" })
 
 -- remap needed, to use the builtin MatchIt plugin
 keymap("n", "ö", "%", { desc = "Match it", remap = true })
