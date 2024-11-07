@@ -77,7 +77,10 @@ local routes = {
 
 return {
 	{ -- notification & other utilities
-		"folke/snacks.nvim",
+		-- "folke/snacks.nvim",
+		"chrisgrieser/snacks.nvim", -- PENDING https://github.com/folke/snacks.nvim/pull/23
+		branch = "dev",
+
 		event = "UIEnter",
 		keys = {
 			-- stylua: ignore start
@@ -94,7 +97,6 @@ return {
 				notification = {
 					wo = { wrap = true, winblend = 0 },
 					border = vim.g.borderStyle,
-					zindex = 100,
 				},
 			},
 			notifier = {
