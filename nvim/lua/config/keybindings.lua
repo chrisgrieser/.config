@@ -36,7 +36,7 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
 
 -- remap needed, to use the builtin MatchIt plugin
-keymap("n", "ö", "%", { desc = "Match it", remap = true })
+keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })

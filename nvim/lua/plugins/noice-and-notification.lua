@@ -1,3 +1,18 @@
+-- highlighting of filepaths and error codes
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "noice", "snacks_notif" },
+	callback = function(ctx)
+		vim.defer_fn(function()
+			vim.api.nvim_buf_call(ctx.buf, function()
+				vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+				vim.fn.matchadd("WarningMsg", [[E\d\+]])
+			end)
+		end, 1)
+	end,
+})
+
+--------------------------------------------------------------------------
+
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- REDIRECT TO POPUP
@@ -65,12 +80,10 @@ return {
 		"folke/snacks.nvim",
 		event = "UIEnter",
 		keys = {
-			{
-				"*",
-				function() require("snacks").words.jump(1, true) end,
-				desc = "󰒕 Next Reference",
-			},
-			{ "g*", "*", desc = " Search word under cursor" },
+			-- stylua: ignore start
+			{ "ö", function() require("snacks").words.jump(1, true, true) end, desc = "󰒕 Next Reference" },
+			{ "Ö", function() require("snacks").words.jump(-1, true, true) end, desc = "󰒕 Prev Reference" },
+			-- stylua: ignore end
 		},
 		opts = {
 			bigfile = { enabled = false },
@@ -80,7 +93,6 @@ return {
 			styles = {
 				notification = {
 					wo = { wrap = true, winblend = 0 },
-					bo = { filetype = "noice" }, -- inherit noice-highlighting
 					border = vim.g.borderStyle,
 					zindex = 100,
 				},
@@ -99,20 +111,6 @@ return {
 		"folke/noice.nvim",
 		event = "UIEnter",
 		dependencies = "MunifTanjim/nui.nvim",
-		init = function()
-			-- highlighting of filepaths and error codes
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "noice",
-				callback = function(ctx)
-					vim.defer_fn(function()
-						vim.api.nvim_buf_call(ctx.buf, function()
-							vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-							vim.fn.matchadd("WarningMsg", [[E\d\+]])
-						end)
-					end, 1)
-				end,
-			})
-		end,
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
