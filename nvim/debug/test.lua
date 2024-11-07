@@ -1,7 +1,6 @@
 -- local out = require("lspconfig").util.available_servers()
 
-vim.notify("E111: ffsfs", vim.log.levels.ERROR, {
-	title = "test",
-	timeout = 1000,
-})
+local success, snacks = pcall(require, "snacks")
+local snacksFt = success and snacks.config.get("styles", {}).notification.bo.filetype or nil
+vim.notify("🖨️ snacksFt: " .. vim.inspect(snacksFt))
 
