@@ -24,7 +24,7 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
---- Simply taskrunner using `just`
+--- Simple taskrunner using `just`
 ---@param which "first"|"select"
 function M.justRecipe(which)
 	local config = {
@@ -204,49 +204,6 @@ function M.gotoMostChangedFile()
 	else
 		vim.cmd.edit(targetFile)
 	end
-end
-
--- Simplified implementation of refjump.nvim
-function M.nextReference()
-	local params = vim.lsp.util.make_position_params()
-	local curLine, curCol = params.position.line, params.position.character
-
-	-- PERF `textDocument/documentHighlight` only searches the current buffer, as
-	-- opposed to `textDocument/references` which searches the entire workspace.
-	-- Since we jump only in the current file, the former is enough.
-	-- PERF Performance could be further improved by caching the references from
-	-- the callback, but the improvement proved to be too minor to justify
-	-- increasing this function's complexity.
-	vim.lsp.buf_request(0, "textDocument/documentHighlight", params, function(err, refs, _, _)
-		-- GUARD
-		if err then
-			vim.notify("LSP Error: " .. err.message, vim.log.levels.ERROR, { title = "LSP Reference" })
-			return
-		end
-		if not refs or vim.tbl_isempty(refs) then
-			vim.notify("No references found.", nil, { title = "LSP Reference" })
-			return
-		end
-
-		-- sort references by order of occurrence
-		table.sort(refs, function(a, b)
-			local refA, refB = a.range.start, b.range.start
-			if refA.line == refB.line then return refA.character < refB.character end
-			return refA.line < refB.line
-		end)
-
-		-- get first reference after current position
-		local nextRef = vim.iter(refs):find(function(location)
-			local ref = location.range.start
-			return ref.line > curLine or (ref.line == curLine and ref.character > curCol)
-		end)
-		if not nextRef then nextRef = refs[1] end -- if not found, loop around
-
-		-- jump to it
-		local uri = params.textDocument.uri
-		vim.lsp.util.jump_to_location({ uri = uri, range = nextRef.range }, "utf-16")
-		vim.cmd.normal { "zv", bang = true } -- open folds
-	end)
 end
 
 --------------------------------------------------------------------------------

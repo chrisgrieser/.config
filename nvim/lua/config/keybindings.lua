@@ -36,14 +36,6 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
 keymap("n", "g*", "*", { desc = " Search word under cursor" })
 
--- LSP Reference
-keymap(
-	"n",
-	"*",
-	function() require("funcs.nano-plugins").nextReference() end,
-	{ desc = "󰒕 Next reference" }
-)
-
 -- remap needed, to use the builtin MatchIt plugin
 keymap("n", "ö", "%", { desc = "Match it", remap = true })
 
