@@ -83,10 +83,22 @@ return {
 
 		event = "UIEnter",
 		keys = {
-			-- stylua: ignore start
-			{ "ö", function() require("snacks").words.jump(1, true, true) end, desc = "󰒕 Next Reference" },
-			{ "Ö", function() require("snacks").words.jump(-1, true, true) end, desc = "󰒕 Prev Reference" },
-			-- stylua: ignore end
+			{
+				"ö",
+				function()
+					require("snacks").words.jump(1, true, true)
+					vim.cmd.normal { "zv", bang = true }
+				end,
+				desc = "󰒕 Next Reference",
+			},
+			{
+				"Ö",
+				function()
+					require("snacks").words.jump(-1, true, true)
+					vim.cmd.normal { "zv", bang = true }
+				end,
+				desc = "󰒕 Prev Reference",
+			},
 		},
 		opts = {
 			bigfile = { enabled = false },
@@ -99,13 +111,13 @@ return {
 					border = vim.g.borderStyle,
 				},
 			},
-			-- notifier = {
-			-- 	timeout = 6000,
-			-- 	width = { min = 20, max = 0.45 },
-			-- 	height = { min = 1, max = 0.4 },
-			-- 	icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
-			-- 	top_down = false,
-			-- },
+			notifier = {
+				timeout = 6000,
+				width = { min = 20, max = 0.45 },
+				height = { min = 1, max = 0.4 },
+				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+				top_down = false,
+			},
 		},
 	},
 	{ -- Message & Command System Overhaul
