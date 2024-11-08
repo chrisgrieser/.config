@@ -80,16 +80,10 @@ return {
 		"folke/snacks.nvim",
 		event = "UIEnter",
 		keys = {
-			{
-				"ö",
-				function() require("snacks").words.jump(1, true) end,
-				desc = "󰒕 Next Reference",
-			},
-			{
-				"Ö",
-				function() require("snacks").words.jump(-1, true) end,
-				desc = "󰒕 Prev Reference",
-			},
+			-- stylua: ignore start
+			{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next Reference" },
+			{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev Reference" },
+			-- stylua: ignore end
 		},
 		opts = {
 			bigfile = { enabled = false },
