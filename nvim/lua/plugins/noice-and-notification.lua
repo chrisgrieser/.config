@@ -82,20 +82,12 @@ return {
 		keys = {
 			{
 				"ö",
-				function()
-					vim.cmd.normal { "m`", bang = true }
-					require("snacks").words.jump(1, true)
-					vim.cmd.normal { "zv", bang = true }
-				end,
+				function() require("snacks").words.jump(1, true) end,
 				desc = "󰒕 Next Reference",
 			},
 			{
 				"Ö",
-				function()
-					vim.cmd.normal { "m`", bang = true }
-					require("snacks").words.jump(-1, true)
-					vim.cmd.normal { "zv", bang = true }
-				end,
+				function() require("snacks").words.jump(-1, true) end,
 				desc = "󰒕 Prev Reference",
 			},
 		},
