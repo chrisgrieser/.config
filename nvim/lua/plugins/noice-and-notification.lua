@@ -77,16 +77,14 @@ local routes = {
 
 return {
 	{ -- notification & other utilities
-		-- "folke/snacks.nvim",
-		"chrisgrieser/snacks.nvim", -- PENDING https://github.com/folke/snacks.nvim/pull/23
-		branch = "dev",
-
+		"folke/snacks.nvim",
 		event = "UIEnter",
 		keys = {
 			{
 				"ö",
 				function()
-					require("snacks").words.jump(1, true, true)
+					vim.cmd.normal { "m`", bang = true }
+					require("snacks").words.jump(1, true)
 					vim.cmd.normal { "zv", bang = true }
 				end,
 				desc = "󰒕 Next Reference",
@@ -94,7 +92,8 @@ return {
 			{
 				"Ö",
 				function()
-					require("snacks").words.jump(-1, true, true)
+					vim.cmd.normal { "m`", bang = true }
+					require("snacks").words.jump(-1, true)
 					vim.cmd.normal { "zv", bang = true }
 				end,
 				desc = "󰒕 Prev Reference",
@@ -104,6 +103,10 @@ return {
 			bigfile = { enabled = false },
 			quickfile = { enabled = false },
 			statuscolumn = { enabled = false },
+			words = {
+				notify_jump = true,
+				modes = { "n" },
+			},
 
 			styles = {
 				notification = {
