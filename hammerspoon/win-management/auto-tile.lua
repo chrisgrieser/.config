@@ -53,6 +53,7 @@ local function autoTile(appName)
 	end)
 	---@cast wins hs.window[] -- fix wrong annotation
 
+
 	-- GUARD prevent unnecessary runs or duplicate triggers
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins

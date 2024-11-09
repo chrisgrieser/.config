@@ -106,8 +106,8 @@
   },
   "for each line (variable)": {
     "body": [
-      "echo \"\\$lines\" | while read -r line; do",
-      "\techo \"\\$line\"",
+      "echo \"\\$${1:lines}\" | while read -r ${2:line}; do",
+      "\techo \"\\$${2:line}\"",
       "done"
     ],
     "prefix": "for each line (variable)"

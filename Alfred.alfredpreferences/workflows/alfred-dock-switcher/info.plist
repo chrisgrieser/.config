@@ -341,9 +341,9 @@
 				<key>keyword</key>
 				<string>:dock new</string>
 				<key>subtext</key>
-				<string>Save current layout as a new layout</string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>text</key>
-				<string>Dock</string>
+				<string>Save current layout as a new layout</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

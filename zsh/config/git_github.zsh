@@ -352,6 +352,15 @@ function gdf {
 
 # Git Status for All repos
 function gsa {
-	local some_perma_repos
-	some_perma_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" | sed "s|^~|$HOME|")
+	# CONFIG
+	local perma_repos="$HOME/.config/perma-repos.csv"
+
+	cut -d, -f2 "$perma_repos" | sed "s|^~|$HOME|" | while read -r repopath; do
+		changes=$(git -c color.status=always -C "$repopath" status --short)
+		if [[ -n "$changes" ]]; then
+			print "\e[1;34m$repopath\e[0m"
+			echo "$changes"
+			echo
+		fi
+	done
 }

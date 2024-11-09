@@ -1,5 +1,4 @@
 -- HAMMERSPOON SETTINGS
-
 hs.autoLaunch(true)
 hs.menuIcon(false)
 hs.automaticallyCheckForUpdates(true)
