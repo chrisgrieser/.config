@@ -39,10 +39,7 @@ vim.g.darkTheme = getName(darkThemes[1])
 local allThemes = vim.iter(vim.list_extend(darkThemes, lightThemes))
 	:map(function(theme)
 		local themeObj = type(theme) == "string" and { theme } or theme
-		local useTheme =
-			vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait().stdout:find("Dark")
-		themeObj.lazy = useTheme -- main theme not lazy-loaded https://lazy.folke.io/spec/lazy_loading#-colorschemes
-		themeObj.priority = useTheme and 1000 or nil
+		themeObj.priority = 1000 -- main theme not lazy-loaded https://lazy.folke.io/spec/lazy_loading#-colorschemes
 		return themeObj
 	end)
 	:totable()
