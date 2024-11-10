@@ -56,8 +56,3 @@ bkeymap("n", "<D-s>", function()
 	}
 	vim.defer_fn(vim.lsp.buf.format, 50)
 end, { desc = " Fixall & Format" })
-
-bkeymap("i", "?", function ()
-	local out = require("nvim-treesitter").statusline()
-	vim.notify("🖨️ out: " .. vim.inspect(out))
-end)
