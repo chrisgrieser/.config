@@ -97,7 +97,7 @@ local function homeAndScrollUp()
 	-- prevent too many concurrent calls
 	if M.isScrolling then return end
 	M.isScrolling = true
-	u.defer(10, function() M.isScrolling = false end)
+	u.defer(15, function() M.isScrolling = false end)
 
 	-- GUARD only scrolling when not idle, to not prevent the machine from going to sleep
 	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
