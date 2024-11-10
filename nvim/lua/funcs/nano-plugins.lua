@@ -45,8 +45,8 @@ function M.justRecipe(which)
 			local notifyOpts = { title = "Just: " .. recipe, id = "just-recipe" }
 			vim.notify("Running…", nil, notifyOpts)
 			vim.defer_fn(function()
-				local timeout = config.timeoutSecs * 1000
-				local result = vim.system({ "just", recipe }, { timeout =  }):wait()
+				local timeoutMs = config.timeoutSecs * 1000
+				local result = vim.system({ "just", recipe }, { timeout = timeoutMs }):wait()
 				local out = vim.trim((result.stdout or "") .. (result.stderr or ""))
 				local severity = result.code == 0 and "INFO" or "ERROR"
 				if out ~= "" then vim.notify(out, vim.log.levels[severity], notifyOpts) end

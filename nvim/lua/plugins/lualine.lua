@@ -70,11 +70,11 @@ local function codeContext(maxLen)
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
 
-	-- FIX python hanging on `[]`
+	-- FIX python hanging on `[]` or `{}`
 	if vim.bo.ft == "python" then
 		local col = vim.api.nvim_win_get_cursor(0)[2] + 1
 		local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-		if charUnderCursor == "]" then return "" end
+		if charUnderCursor:find("^[%]}]$") then return "" end
 	end
 
 	local text = treesitter.statusline {
