@@ -34,4 +34,5 @@ elif [[ "$mode" == "copy pid" ]]; then
 	msg="✅ Copied PID for "
 fi
 
-echo -n "$msg $name"
+# for Alfred notification
+echo -n "$msg \"$name\""

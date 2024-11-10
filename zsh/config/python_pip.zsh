@@ -8,7 +8,7 @@ export PIP_DISABLE_PIP_VERSION_CHECK=1
 alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
-alias py="python3"
+alias freeze="pip freeze > requirements.txt"
 alias v="toggle_venv"
 
 #───────────────────────────────────────────────────────────────────────────────
