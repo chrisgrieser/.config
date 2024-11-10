@@ -30,6 +30,7 @@ function M.justRecipe(which)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
 		useQuickfix = { "check-tsc" },
+		timeoutSecs = 10,
 	}
 
 	local function run(recipe)
@@ -41,12 +42,15 @@ function M.justRecipe(which)
 			vim.cmd.make(recipe)
 			pcall(vim.cmd.cfirst)
 		else
-			local result = vim.system({ "just", recipe }):wait()
-			local out = vim.trim((result.stdout or "") .. (result.stderr or ""))
-			local severity = result.code == 0 and "INFO" or "ERROR"
-			if out ~= "" then
-				vim.notify(out, vim.log.levels[severity], { title = "Just: " .. recipe })
-			end
+			local notifyOpts = { title = "Just: " .. recipe, id = "just-recipe" }
+			vim.notify("Running…", nil, notifyOpts)
+			vim.defer_fn(function()
+				local timeout = config.timeoutSecs * 1000
+				local result = vim.system({ "just", recipe }, { timeout =  }):wait()
+				local out = vim.trim((result.stdout or "") .. (result.stderr or ""))
+				local severity = result.code == 0 and "INFO" or "ERROR"
+				if out ~= "" then vim.notify(out, vim.log.levels[severity], notifyOpts) end
+			end, 100)
 		end
 		vim.cmd.checktime() -- reload buffer in case of changes
 	end
