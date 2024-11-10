@@ -285,29 +285,6 @@
 				<true/>
 			</dict>
 		</array>
-		<key>73A7B71E-71A0-4C0D-A135-B163627350F8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>70C4F79D-D608-41A7-B2FF-723F59D79DDF</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>A6A588B4-6474-4862-B661-C38931F307FA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<array>
 			<dict>
@@ -1339,7 +1316,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>just</string>
+				<string>yq</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -1355,11 +1332,11 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/just-docs.js</string>
+				<string>./scripts/manual-docs-searches/yq-docs.js</string>
 				<key>subtext</key>
-				<string>task runner</string>
+				<string></string>
 				<key>title</key>
-				<string>Just</string>
+				<string>yq docs search…</string>
 				<key>type</key>
 				<integer>8</integer>
 				<key>withspace</key>
@@ -1368,7 +1345,61 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>73A7B71E-71A0-4C0D-A135-B163627350F8</string>
+			<string>110DF925-B50C-4ABC-B412-2F7C48A78D72</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>oh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string># INFO
+# - has Alfred caching enabled, so just using `curl` here is fine
+# - updated 1x per month via cronjob
+
+curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/caches/obsidian-help-index.json"
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Obsidian Documentation...</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>33BD334F-B73B-4462-9E9E-0B53BBC46B25</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1465,128 +1496,6 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>yq</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/manual-docs-searches/yq-docs.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>yq docs search…</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>110DF925-B50C-4ABC-B412-2F7C48A78D72</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>oh</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string># INFO
-# - has Alfred caching enabled, so just using `curl` here is fine
-# - updated 1x per month via cronjob
-
-curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/main/.github/caches/obsidian-help-index.json"
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Search Obsidian Documentation...</string>
-				<key>type</key>
-				<integer>11</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>33BD334F-B73B-4462-9E9E-0B53BBC46B25</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
 				<string>odd</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
@@ -1617,6 +1526,25 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/ma
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>3F1227C0-7373-4B26-BADB-05F279D75A62</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>DD866690-B895-469A-936D-2A018AA4D25E</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -1756,7 +1684,6 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `sc`: shellcheck wiki
 - `pandoc`: pandoc user manual
 - `wt`: WezTerm docs
-- `just`: [just (task runner) docs](https://just.systems/man/en/)
 - `yq`: yq docs
 - `oh`: Obsidian help
 - `odd`: Obsidian developer docs
@@ -1813,7 +1740,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>765</real>
 		</dict>
 		<key>147B74A7-0701-400F-9336-3E942E809AB8</key>
 		<dict>
@@ -1866,7 +1793,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1005</real>
+			<real>880</real>
 		</dict>
 		<key>3CA7F398-9E2A-467B-B1B1-CC0DBBCB20A5</key>
 		<dict>
@@ -1888,7 +1815,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1140</real>
+			<real>1015</real>
 		</dict>
 		<key>3F695A74-EC6B-4436-9063-9A618A8CC0B8</key>
 		<dict>
@@ -1974,15 +1901,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>755</real>
-		</dict>
-		<key>73A7B71E-71A0-4C0D-A135-B163627350F8</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>770</real>
 		</dict>
 		<key>807968C5-83D0-4F80-8188-636A8D536DBE</key>
 		<dict>
@@ -37941,7 +37859,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.13.0</string>
+	<string>2.14.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

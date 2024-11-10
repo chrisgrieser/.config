@@ -74,7 +74,7 @@ local function codeContext(maxLen)
 	if vim.bo.ft == "python" then
 		local col = vim.api.nvim_win_get_cursor(0)[2] + 1
 		local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-		if charUnderCursor:find("^[%]}]$") then return "" end
+		if charUnderCursor:find("^[{}%[%]]$") then return "" end
 	end
 
 	local text = treesitter.statusline {
@@ -221,7 +221,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- at once, so UI does not flicker
+	lazy = false, -- immediately so UI does not flicker
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }
