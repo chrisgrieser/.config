@@ -154,16 +154,16 @@ M.serverConfigs.lua_ls = {
 -- PYTHON
 
 -- DOCS https://docs.astral.sh/ruff/editors/settings/
-M.serverConfigs.ruff = {
-	init_options = {
-		settings = {
-			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
-			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
-		},
-	},
-	-- disable in favor of basedpyright's hover info
-	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
-}
+-- M.serverConfigs.ruff = {
+-- 	init_options = {
+-- 		settings = {
+-- 			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
+-- 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
+-- 		},
+-- 	},
+-- 	-- disable in favor of basedpyright's hover info
+-- 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
+-- }
 
 --------------------------------------------------------------------------------
 -- CSS

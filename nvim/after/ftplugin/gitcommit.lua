@@ -26,11 +26,3 @@ end
 
 --------------------------------------------------------------------------------
 
-bkeymap("i", ":", function ()
-	local line = vim.api.nvim_get_current_line()
-	if line:find("^%w+:") then
-
-	end
-	vim.api.set_current_line("# " .. line)
-end)
-

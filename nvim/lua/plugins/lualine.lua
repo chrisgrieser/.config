@@ -69,6 +69,7 @@ local function codeContext(maxLen)
 	maxLen = type(maxLen) == "number" and maxLen or 80
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
+	if vim.bo.ft == "python" then return "" end -- FIX python hanging on `[]`
 
 	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
