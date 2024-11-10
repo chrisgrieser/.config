@@ -121,7 +121,7 @@ local function telescopeConfig()
 					local highlights = { { { #tail, #out }, "TelescopeResultsComment" } }
 					return out, highlights
 				end,
-				file_ignore_patterns = { "%.log", "%.plist$", "COMMIT_EDITMSG" },
+				file_ignore_patterns = { "COMMIT_EDITMSG" },
 
 				layout_config = { horizontal = { width = 0.6, height = 0.6 } },
 				previewer = false,

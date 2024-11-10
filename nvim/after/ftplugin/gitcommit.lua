@@ -23,3 +23,14 @@ if vim.bo.buftype ~= "nofile" then
 	bkeymap("n", "q", vim.cmd.cquit, { desc = "Abort" }) -- quitting with error = aborting commit
 	vim.opt_local.colorcolumn = "73"
 end
+
+--------------------------------------------------------------------------------
+
+bkeymap("i", ":", function ()
+	local line = vim.api.nvim_get_current_line()
+	if line:find("^%w+:") then
+
+	end
+	vim.api.set_current_line("# " .. line)
+end)
+
