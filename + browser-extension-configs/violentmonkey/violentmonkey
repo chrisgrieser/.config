@@ -1,0 +1,236 @@
+{
+  "scripts": {
+    "Subreddit tab icons": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "homepageURL": "https://greasyfork.org/en/scripts/460086-subreddit-tab-icons",
+        "lastInstallURL": "https://greasyfork.org/scripts/460086-subreddit-tab-icons/code/Subreddit%20tab%20icons.user.js",
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 1,
+      "lastModified": 1730206865713,
+      "lastUpdated": 1693472789957
+    },
+    "Wikiwand": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "downloadURL": "",
+        "exclude": [],
+        "excludeMatch": [],
+        "homepageURL": "https://github.com/kidonng/cherry/blob/main/scripts/wikiwand.user.js",
+        "include": [],
+        "lastInstallURL": "https://github.com/kidonng/cherry/raw/main/scripts/wikiwand.user.js",
+        "match": [],
+        "name": "",
+        "pathMap": {},
+        "runAt": "",
+        "updateURL": ""
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 2,
+      "lastModified": 1730206865702,
+      "lastUpdated": 1678011380990
+    },
+    "Reddit Syntax Highlighting": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "downloadURL": "",
+        "exclude": [],
+        "excludeMatch": [],
+        "homepageURL": "",
+        "include": [],
+        "match": [],
+        "name": "",
+        "pathMap": {},
+        "runAt": "",
+        "updateURL": ""
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 3,
+      "lastModified": 1730206865692,
+      "lastUpdated": 1678012827704
+    },
+    "Discord- Redirect to Discord app": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 4,
+      "lastModified": 1730206865712,
+      "lastUpdated": 1709373410541
+    },
+    "Return YouTube Dislike": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "lastInstallURL": "https://greasyfork.org/scripts/436115-return-youtube-dislike/code/Return%20YouTube%20Dislike.user.js",
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 5,
+      "lastModified": 1730206865702,
+      "lastUpdated": 1713648193100
+    },
+    "Copy YouTube Timestamp via hotkey": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 6,
+      "lastModified": 1731242639822,
+      "lastUpdated": 1731242639822
+    },
+    "Disable -Esc- on reddit": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "homepageURL": "chrome://newtab/",
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 7,
+      "lastModified": 1730206865716,
+      "lastUpdated": 1730025621732
+    },
+    "Copy Link to Text Fragment": {
+      "custom": {
+        "origInclude": true,
+        "origExclude": true,
+        "origMatch": true,
+        "origExcludeMatch": true,
+        "pathMap": {}
+      },
+      "config": {
+        "enabled": 1,
+        "removed": 0,
+        "shouldUpdate": 1
+      },
+      "position": 8,
+      "lastModified": 1730206976755,
+      "lastUpdated": 1730025868478
+    }
+  },
+  "settings": {
+    "isApplied": true,
+    "blacklist": "file://*/*",
+    "blacklistNet": "file://*/*",
+    "popupWidth": 491,
+    "updateEnabledScriptsOnly": true,
+    "autoUpdate": 7,
+    "lastUpdate": 1730657752257,
+    "lastModified": 1730025926477,
+    "showBadge": "unique",
+    "badgeColor": "#880088",
+    "badgeColorBlocked": "#888888",
+    "exportValues": true,
+    "exportNameTemplate": "[violentmonkey]",
+    "expose": {
+      "greasyfork%2Eorg": true,
+      "sleazyfork%2Eorg": true
+    },
+    "closeAfterInstall": true,
+    "editAfterInstall": false,
+    "helpForLocalFile": true,
+    "trackLocalFile": true,
+    "autoReload": true,
+    "features": null,
+    "syncScriptStatus": true,
+    "customCSS": "",
+    "importScriptData": true,
+    "importSettings": true,
+    "notifyUpdates": true,
+    "notifyUpdatesGlobal": false,
+    "version": 1,
+    "defaultInjectInto": "auto",
+    "ffInject": true,
+    "xhrInject": false,
+    "filters": {
+      "searchScope": "name",
+      "showEnabledFirst": true,
+      "showOrder": false,
+      "sort": "update",
+      "viewSingleColumn": false,
+      "viewTable": true
+    },
+    "filtersPopup": {
+      "enabledFirst": false,
+      "groupRunAt": true,
+      "hideDisabled": "group",
+      "sort": "alpha"
+    },
+    "editor": {
+      "indentUnit": 3,
+      "indentWithTabs": true,
+      "lineWrapping": false,
+      "tabSize": 3,
+      "undoDepth": 300
+    },
+    "editorTheme": "",
+    "editorThemeName": null,
+    "editorWindow": false,
+    "editorWindowPos": {},
+    "editorWindowSimple": true,
+    "scriptTemplate": "// ==UserScript==\n// @name        {{name}}\n// @namespace   Violentmonkey Scripts\n// @match       {{url}}\n// @version     1.0\n// @author      pseudometa\n// @description {{date:YYYY-MM-DD}}\n// @icon        {{url}}/favicon.ico\n// ==/UserScript==\n\n// simple redirect\nwindow.location.href = window.location.href.replace(/abc/, \"\");\n\n// DOCS https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent\ndocument.addEventListener(\"keydown\", (event) => {\n\tif (!(event.key === \"a\" || event.ctrlKey)) return;\n\tevent.preventDefault();\n\n\t\n});\n\n",
+    "showAdvanced": true,
+    "valueEditor": {
+      "autocompleteOnTyping": 100,
+      "lineWrapping": false,
+      "indentWithTabs": false,
+      "indentUnit": 2,
+      "tabSize": 2,
+      "undoDepth": 500
+    },
+    "uiTheme": ""
+  },
+  "values": {}
+}

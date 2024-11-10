@@ -1,17 +1,9 @@
 # shellcheck disable=1091
 #───────────────────────────────────────────────────────────────────────────────
 
-# 1. Prevent accidental installation outside of virtual env
-# 2. Use `python3 -m pip` instead of `pip3`
-function pip {
-	if [[ "$1" == "install" ]]; then
-		if [[ ! "$(command which python3)" =~ /\.venv/ || -z "$VIRTUAL_ENV" ]]; then
-			printf "\e[1;33mNot in a virtual environment. Aborting.\e[0m "
-			return
-		fi
-	fi
-	python3 -m pip "$@"
-}
+export PIP_DISABLE_PIP_VERSION_CHECK=1
+
+#───────────────────────────────────────────────────────────────────────────────
 
 alias pu="pip uninstall"
 alias pi="pip install"
