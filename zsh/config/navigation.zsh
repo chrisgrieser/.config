@@ -75,6 +75,7 @@ function _grappling_hook {
 		[[ "$PWD" == "$dir" ]] && to_open=$(echo "$locations" | sed -n "$((i + 1))p")
 	done
 	cd -q "$to_open" || return 1
+	_auto_venv # since suppressing the hook via `cd -q`
 	zle reset-prompt
 
 	# so wezterm knows we are in a new directory
