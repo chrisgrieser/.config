@@ -2,27 +2,52 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{ -- autopair brackets/quotes
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			-- DOCS https://github.com/windwp/nvim-autopairs/wiki/Rules-API
-			require("nvim-autopairs").setup { check_ts = true } -- use treesitter for custom rules
+	{ -- auto-pair
+		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
+		"altermo/ultimate-autopair.nvim",
+		branch = "v0.6", -- recommended as each new version will have breaking changes
+		event = { "InsertEnter", "CmdlineEnter" },
+		keys = {
+			-- [O]pen new scope / brace (`remap` to trigger auto-pairing)
+			{ "<D-o>", "a{<CR>", desc = " Open new scope", remap = true },
+			{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
+		},
+		opts = {
+			bs = {
+				space = "balance",
+				cmap = false, -- keep my `<BS>` mapping for the cmdline
+			},
+			fastwarp = {
+				map = "<D-f>",
+				rmap = "<D-F>", -- backwards
+				hopout = true,
+				nocursormove = true,
+				multiline = false,
+			},
+			cr = { autoclose = true },
+			space = { enable = true },
+			space2 = { enable = true },
 
-			local rule = require("nvim-autopairs.rule")
-			local isNodeType = require("nvim-autopairs.ts-conds").is_ts_node
-			local negLookahead = require("nvim-autopairs.conds").not_after_regex
+			config_internal_pairs = {
+				{ "'", "'", nft = { "markdown" } }, -- since used as apostroph
+				{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
+			},
+			-- INFO custom keys need to be "appended" to the opts as a list
+			{ "*", "*", ft = { "markdown" } }, -- italics
+			{ "__", "__", ft = { "markdown" } }, -- bold
+			{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
 
-			require("nvim-autopairs").add_rules {
-				-- autopair <> for keymaps like `<C-d>` & html-tags
-				rule("<", ">", "lua"):with_pair(isNodeType { "string", "string_content" }),
-				rule("<", ">", { "vim", "html", "xml" }),
+			{ -- commit scope (= only first word) for commit messages
+				"(",
+				"): ",
+				ft = { "gitcommit" },
+				cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end,
+			},
 
-				-- css: auto-add trailing semicolon, but only for declarations
-				-- (which are at the end of the line and have no text afterwards)
-				rule(":", ";", "css"):with_pair(negLookahead(".", 1)),
-			}
-		end,
+			-- for keymaps like `<C-a>`
+			{ "<", ">", ft = { "vim" } },
+			{ "<", ">", ft = { "lua" }, cond = function(fn) return fn.in_string() end },
+		},
 	},
 	{ -- substitute & duplicate operator
 		"echasnovski/mini.operators",
