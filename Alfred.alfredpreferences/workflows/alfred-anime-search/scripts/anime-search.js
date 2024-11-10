@@ -48,6 +48,7 @@ function errorItem(title, subtitle) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function run(argv) {
 	// GUARD
 	const query = argv[0];
@@ -74,7 +75,7 @@ function run(argv) {
 	/** @type {{data: MalEntry[]}} */
 	const response = JSON.parse(httpRequest(apiURL));
 	if (!response.data) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(JSON.stringify(response));
 		return errorItem("Unknown error.", "See debugging log.");
 	}
