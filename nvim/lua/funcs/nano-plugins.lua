@@ -30,7 +30,7 @@ function M.justRecipe(which)
 	local config = {
 		ignoreRecipes = { "release" }, -- since it requires user input
 		useQuickfix = { "check-tsc" },
-		timeoutSecs = 10,
+		timeoutSecs = 60,
 	}
 
 	local function run(recipe)
