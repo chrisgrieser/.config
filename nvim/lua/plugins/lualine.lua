@@ -69,7 +69,13 @@ local function codeContext(maxLen)
 	maxLen = type(maxLen) == "number" and maxLen or 80
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
-	if vim.bo.ft == "python" then return "" end -- FIX python hanging on `[]`
+
+	-- FIX python hanging on `[]`
+	if vim.bo.ft == "python" then
+		local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+		local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
+		if charUnderCursor == "]" then return "" end
+	end
 
 	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
@@ -86,6 +92,7 @@ local function codeContext(maxLen)
 				:gsub(" extends .-$", "") -- js/ts: classes
 				:gsub("(%w)%(%)$", "%1") -- remove empty `()`
 				:gsub("^function", "")
+				:gsub("^def", "") -- python
 				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 		end,
 	}
