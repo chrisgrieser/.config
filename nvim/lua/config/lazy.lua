@@ -72,7 +72,6 @@ require("lazy").setup {
 			-- stylua: ignore
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
-				"matchit", "matchparen",
 				"netrwPlugin", "man", "tutor", "health", "tohtml", "gzip", 
 				"zipPlugin", "tarPlugin", "osc52",
 			},
