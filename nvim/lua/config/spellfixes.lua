@@ -67,6 +67,7 @@ local spellfixes = {
 	verisons = "versions",
 	varialbe = "variable",
 	woudl = "would",
+	gerne = "genre",
 }
 
 for wrong, correct in pairs(spellfixes) do
