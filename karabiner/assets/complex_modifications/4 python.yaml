@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=./schema/karabiner-mod-schema.json
+title: "Python windows (Pseudo-app when using `matplotlib`)"
+rules:
+  # INFO due the capslock bindings, needs to come before any hyper-key mappings
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "Python windows"
+    manipulators:
+      # esc -> close window
+      - type: basic
+        from: { key_code: caps_lock }
+        to_if_alone:
+          - { key_code: w, modifiers: [command] }
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^org\.python\.python$] }
+      # cmd+s -> save plot
+      - type: basic
+        from: { key_code: s, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events"
+                  tell process "Python" to click button 5 of window 1 -- save button
+                  keystroke "d" using {command down, shift down} -- select desktop as location
+                end tell
+              '
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [^org\.python\.python$] }

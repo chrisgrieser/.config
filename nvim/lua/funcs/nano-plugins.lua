@@ -35,7 +35,7 @@ function M.justRecipe(which)
 
 	local function run(recipe)
 		if not recipe then return end
-		vim.cmd.update()
+		vim.cmd("silent! update")
 
 		if vim.tbl_contains(config.useQuickfix, recipe) then
 			vim.opt_local.makeprg = "just"
