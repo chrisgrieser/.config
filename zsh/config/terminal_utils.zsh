@@ -196,6 +196,12 @@ function ..d() {
 		return 1
 	fi
 
+	# disable venv
+	if [[ -n "$VIRTUAL_ENV" && -z "$venv_path" ]]; then
+		deactivate
+		echo && inspect_venv
+	fi
+
 	# INFO `cd .` to trigger cd-hook *after* deletion
 	cd -q .. && trash "$OLDPWD" && cd .
 }
