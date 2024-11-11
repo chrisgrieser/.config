@@ -27,6 +27,7 @@ abbr("null", "None")
 abbr("nil", "None")
 abbr("none", "None")
 abbr("trim", "strip")
+abbr("function", "def")
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
