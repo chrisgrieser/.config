@@ -28,8 +28,10 @@
 	<string>esbuild</string>
 	<key>keyword_14</key>
 	<string>py</string>
-	<key>keyword_17</key>
-	<string>md</string>
+	<key>keyword_15</key>
+	<string>mpl</string>
+	<key>keyword_16</key>
+	<string>pd</string>
 	<key>keyword_19</key>
 	<string>git</string>
 	<key>keyword_20</key>
