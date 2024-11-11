@@ -192,7 +192,7 @@ function d {
 function ..d() {
 	# GUARD accidental deletions of folders
 	if [[ ! "$PWD" =~ /Developer/ ]]; then
-		print '\e[0;33mCan only delete inside "Developer" folder.\e[0m'
+		print '\e[0;33mCan only delete inside subfolder of "Developer".\e[0m'
 		return 1
 	fi
 
