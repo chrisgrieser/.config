@@ -58,9 +58,9 @@ bkeymap("n", "<D-s>", function()
 	vim.defer_fn(vim.lsp.buf.format, 50)
 end, { desc = " Fixall & Format" })
 
-bkeymap("n", "<leader>cr", function()
+bkeymap("n", "<leader>ci", function()
 	vim.lsp.buf.code_action {
-		context = { only = { "source.addMissingImports" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+		filter = function(a) return a.title:find("import") ~= nil end,
 		apply = true,
 	}
-end, { desc = " Import under cursor" })
+end, { desc = " Import word under cursor" })
