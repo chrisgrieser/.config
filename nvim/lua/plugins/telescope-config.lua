@@ -17,6 +17,7 @@ local specialDirs = {
 	"%.app/", -- macOS apps
 	"%.venv", -- python,
 	"%.spoon", -- Hammerspoon spoons
+	"__pycache__"
 }
 
 --------------------------------------------------------------------------------
