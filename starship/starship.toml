@@ -156,13 +156,12 @@ style = "bold yellow"
 [python]
 format = ' [${symbol}${pyenv_prefix}($version)]($style)'
 version_format = "$major.$minor"
-symbol = "  "
+symbol = " "
 style = "bold yellow"
 
 [custom.venv_on]
-format = '[ $output ]($style)'   # extra space for proper nerdfont sizing
+format = '[ 󱥒]($style)'   # extra space for proper nerdfont sizing
 when = '[[ -n "$VIRTUAL_ENV" ]]'
-command = 'echo "󱥒"'             # output is trimmed, so spaces must be added at `format`
 style = "bold yellow"
 
 [custom.venv_off]
