@@ -70,7 +70,7 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup Rule" },
-			{ "<leader>ci", function() require("rulebook").ignoreRule() end, desc = "󰅜 Ignore Rule" },
+			{ "<leader>cg", function() require("rulebook").ignoreRule() end, desc = "󰅜 I[g]nore Rule" },
 			{ "<leader>cy", function() require("rulebook").yankDiagnosticCode() end, desc = "󰅍 Yank Diagnostic Code" },
 			{ "<leader>cf", function() require("rulebook").suppressFormatter() end, mode = { "n", "x" }, desc = "󰉿 Suppress Formatter" },
 			-- stylua: ignore end

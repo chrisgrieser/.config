@@ -27,6 +27,17 @@ rules:
                 end tell'
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+      # toggle tracked changes
+      - type: basic
+        from: { key_code: t, modifiers: { mandatory: [command] } }
+        to:
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Microsoft Word"
+                    click menu item "Markup" of menu "View" of menu bar 1
+                end tell'
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
       # Toggle Sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }

@@ -48,7 +48,7 @@ bkeymap("n", "<leader>cr", function()
 			vim.cmd.normal { "j==", bang = true }
 		end
 	end)
-end, { desc = " require module from cwd" })
+end, { desc = " Import module" })
 
 --------------------------------------------------------------------------------
 
