@@ -32,7 +32,8 @@ function o() {
 # open last changed file in cwd
 function oo {
 	local last_modified
-	last_modified=$(find . -type file -maxdepth 4 -not -path "./.git/**" -not -name ".DS_Store" -print0 |
+	last_modified=$(find . -type file -maxdepth 4 \
+		-not -path "./.git/**" -not -name ".DS_Store" -not -path "./.venv/**" -print0 |
 		xargs -0 stat -f "%m %N" |
 		sort --numeric --reverse |
 		sed -n "1p" |
