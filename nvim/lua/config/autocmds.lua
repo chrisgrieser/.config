@@ -30,8 +30,10 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
+		---@diagnostic disable: undefined-field faulty annotation
 		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+30d", "-delete" }
 		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+14d", "-delete" }
+		---@diagnostic enable: undefined-field
 		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
 	end,
 })
@@ -253,7 +255,8 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 --------------------------------------------------------------------------------
 -- MAXIMUM BUFFER NUMBER
-vim.api.nvim_create_autocmd("BufReadPost", {
+-- `BufEnter`, so buffers opened in the background (e.g., LSP rename) don't trigger
+vim.api.nvim_create_autocmd("BufEnter", {
 	desc = "User: Maximum buffer numbers, makes `:bnext` and `:bprevious` less crowded.",
 	callback = function()
 		local maxBufs = 5 -- CONFIG
@@ -280,8 +283,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "User: Git conflict markers",
 	callback = function(ctx)
-		local hlgroup = "DiagnosticVirtualTextInfo" -- CONFIG
-
 		local bufnr = ctx.buf
 		if not vim.api.nvim_buf_is_valid(bufnr) then return end
 
@@ -297,6 +298,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				local firstConflictLn
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
 					local lnum = tonumber(conflictLnum)
+					local hlgroup = "DiagnosticVirtualTextInfo"
 					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum - 1, 0, -1)
 					if not firstConflictLn then firstConflictLn = lnum end
 				end

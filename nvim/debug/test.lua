@@ -1,2 +1,1 @@
-local bla = "aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa"
-vim.notify("🖨️ bla: " .. tostring(bla))
+vim.notify("ref [1/3]")
