@@ -52,7 +52,11 @@ function update() {
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
-	mas upgrade
+	if [[ -z $(mas outdated) ]] ; then
+		mas upgrade
+	else
+		echo "No Mac App Store updates available."
+	fi
 
 	# FINISH
 	# sketchybar restart for new permissions
