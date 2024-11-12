@@ -45,11 +45,6 @@ function M.justRecipe(which)
 			vim.system({ "just", recipe }, {
 				stdout = function(_, data)
 					if not data then return end
-					if data == "\r" or vim.trim(data) == "" then -- handle `print("\r")` for terminal flushing
-						local ok, snacks = pcall(require, "snacks")
-						if ok then snacks.notifier.hide("just-recipe") end
-						return
-					end
 					buffer = buffer .. data
 					vim.notify(buffer, nil, { title = "Just: " .. recipe, id = "just-recipe" })
 				end,
