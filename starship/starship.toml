@@ -160,14 +160,13 @@ symbol = " "
 style = "bold yellow"
 
 [custom.venv_on]
-format = '[ 󱥒]($style)'   # extra space for proper nerdfont sizing
+format = '[ 󱥒]($style)'
 when = '[[ -n "$VIRTUAL_ENV" ]]'
 style = "bold yellow"
 
 [custom.venv_off]
-format = '[ $output ]($style)'
+format = '[ 󱥓]($style)'
 when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
-command = 'echo "󱥓"'
 style = "bold red"
 
 [nodejs]
