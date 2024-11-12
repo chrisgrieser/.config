@@ -360,7 +360,7 @@ function gdf {
 }
 #───────────────────────────────────────────────────────────────────────────────
 
-# Git Status for All repos
+# Git Status All (all perma-repos)
 function gsa {
 	# CONFIG
 	local perma_repos="$HOME/.config/perma-repos.csv"
