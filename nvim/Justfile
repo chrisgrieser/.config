@@ -6,7 +6,7 @@ debugFile := "./debug/test.lua"
 
 # prints total length of config
 count-lines:
-    find . -name "*.lua" | xargs wc -l | sort --reverse
+    find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse
 
 # runs minimal config for debugging purposes with neovide
 debug-instance:
