@@ -45,8 +45,7 @@ function M.justRecipe(which)
 			local function bufferedOut(severity)
 				return function(_, data)
 					if not data then return end
-					buffer = buffer .. data
-					if not vim.endswith(data, "\r") then data = vim.trim(data) end
+					buffer = buffer .. data:gsub("\n$", "")
 					local opts = { title = "Just: " .. recipe, id = "just-recipe" }
 					vim.notify(buffer, vim.log.levels[severity], opts)
 				end
