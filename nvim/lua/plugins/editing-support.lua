@@ -221,7 +221,6 @@ return {
 				},
 			}
 			opts.langs = {
-				python = { string_content = gww }, -- python docstrings
 				rst = { paragraph = gww }, -- python docstrings (when rst is injected)
 				comment = { source = gww, element = gww }, -- comments in any language
 				lua = { comment = gww },
