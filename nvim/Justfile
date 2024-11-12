@@ -1,6 +1,6 @@
 set quiet := true
 
-debugFile := "./debug/test.py"
+debugFile := "./debug/test.lua"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -11,4 +11,4 @@ count-lines:
 # runs minimal config for debugging purposes with neovide
 debug-instance:
     # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
-    neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 200ms|bdelete|edit'
+    neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 300ms|bdelete|edit'

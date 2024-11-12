@@ -3,9 +3,18 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		main = "nvim-treesitter.configs",
+		opts = {
+			ensure_installed = "python",
+			highlight = { enable = true },
+		},
+	},
+	{
 		"Wansmer/treesj",
 		keys = {
-			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
+			{ ",s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
 		},
 		opts = {
 			use_default_keymaps = false,
@@ -57,7 +66,6 @@ local spec = {
 		end,
 	},
 }
-
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"

@@ -130,7 +130,8 @@ function M.addComment(where)
 		end
 		indent = vim.fn.getline(i):match("^%s*")
 	end
-	local newLine = emptyLine and indent or line .. " "
+	local spacing = vim.bo.ft == "python" and "  " or " " -- black/ruff demand two spaces
+	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
 	comStr = comStr:gsub("%%s", ""):gsub(" $", "") .. " "
