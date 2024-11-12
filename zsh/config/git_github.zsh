@@ -17,8 +17,6 @@ alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
 
-alias pr='gh pr create --web --fill'
-
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"
 
@@ -148,6 +146,18 @@ function gM {
 	git commit --amend --no-verify # `--no-verify` since just editing the message
 	echo
 	git status
+}
+
+#───────────────────────────────────────────────────────────────────────────────
+# similar to `gh pr create --web --fill`, but without dependency (and without
+# the need to set `gh` remote.)
+
+function pr {
+	git push
+	local url
+	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
+		sed -E 's|git@github.com:|https://github.com/|')
+	open "$url/pull/new/$(git branch --show-current)"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

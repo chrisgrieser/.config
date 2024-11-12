@@ -1,1 +1,2 @@
-require("snacks").notifier.hide("0")
+local bla = "aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa"
+vim.notify("🖨️ bla: " .. tostring(bla))
