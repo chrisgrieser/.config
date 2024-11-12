@@ -38,7 +38,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = vim.g.borderStyle,
 	title = " LSP Hover ",
-	max_width = 70,
+	max_width = 75,
 })
 
 --------------------------------------------------------------------------------
@@ -67,6 +67,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	vim.api.nvim_buf_set_name(newBuf, client.name .. " capabilities")
 	vim.bo[newBuf].filetype = "lua" -- syntax highlighting
 	vim.cmd.buffer(newBuf) -- open
+	vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = newBuf })
 end, {
 	nargs = 1,
 	complete = function()

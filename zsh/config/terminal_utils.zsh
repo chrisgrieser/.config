@@ -1,3 +1,11 @@
+function line_count() {
+	find . -type "file" -print0 \
+		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" -not -path "**/__pycache__/**" |
+		xargs -0 wc -l |
+		sort --reverse |
+		head -n1
+}
+
 # Quick Open File
 function o() {
 	# skip `fzf` if file is fully named, e.g. through tab completion
