@@ -66,6 +66,7 @@ local spellfixes = {
 	verison = "version",
 	verisons = "versions",
 	varialbe = "variable",
+	varialbes = "variables",
 	woudl = "would",
 	gerne = "genre",
 }

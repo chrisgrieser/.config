@@ -96,7 +96,7 @@ return {
 				notify_jump = true,
 				modes = { "n" },
 			},
-			-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#️-config
+			-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 			styles = {
 				notification = {
 					wo = { wrap = true, winblend = 0 },
