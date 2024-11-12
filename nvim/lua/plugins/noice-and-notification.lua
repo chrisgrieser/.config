@@ -71,6 +71,9 @@ local routes = {
 		filter = { event = "notify", find = "^Client marksman quit with exit code 1 and signal 0." },
 		skip = true,
 	},
+
+	-- empty messages
+	{ filter = { event = "notify", find = "^%s*$" }, skip = true },
 }
 
 --------------------------------------------------------------------------------
@@ -78,7 +81,7 @@ local routes = {
 return {
 	{ -- notification & other utilities
 		"folke/snacks.nvim",
-		event = "UIEnter",
+		event = "VeryLazy",
 		keys = {
 			-- stylua: ignore start
 			{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next Reference" },
@@ -111,8 +114,8 @@ return {
 	},
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
-		event = "UIEnter",
-		dependencies = "MunifTanjim/nui.nvim",
+		event = "VeryLazy",
+		dependencies = { "MunifTanjim/nui.nvim", "folke/snacks.nvim" },
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear Notifications" },
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "x", "i" }, desc = "󰎟 Noice Log" },
