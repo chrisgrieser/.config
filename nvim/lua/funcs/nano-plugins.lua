@@ -42,12 +42,18 @@ function M.justRecipe(which)
 			pcall(vim.cmd.cfirst)
 		else
 			local buffer = "" -- use buffer to display progress bars
-			vim.system({ "just", recipe }, {
-				stdout = function(_, data)
+			local function bufferedOut(severity)
+				return function(_, data)
 					if not data then return end
 					buffer = buffer .. data
-					vim.notify(buffer, nil, { title = "Just: " .. recipe, id = "just-recipe" })
-				end,
+					if not vim.endswith(data, "\r") then data = vim.trim(data) end
+					local opts = { title = "Just: " .. recipe, id = "just-recipe" }
+					vim.notify(buffer, vim.log.levels[severity], opts)
+				end
+			end
+			vim.system({ "just", recipe }, {
+				stdout = bufferedOut("INFO"),
+				stderr = bufferedOut("ERROR"),
 			})
 		end
 		vim.cmd.checktime() -- reload buffer in case of changes
