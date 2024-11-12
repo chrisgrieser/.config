@@ -17,7 +17,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		local name = path:match(".*/(.+)")
 		local ext = name:match("%.([^.]-)$")
 
-		-- INFO only downloaded files get quarantined
+		-- HACK only downloaded files get quarantined, thus this detects downloads
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
 		local success
