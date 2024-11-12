@@ -46,20 +46,6 @@ function bat { # dark-mode aware
 }
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# UTILS
-alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
-alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
-alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
-
-export PATH="$HOME/.config/+ utility-scripts/":$PATH
-function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
-
-function cake { mkdir -p "$1" && cd "$1" || return 1; }
-function topen { touch "$1" && open "$1"; }
-function p { qlmanage -p "$1" &> /dev/null; }
-
-#───────────────────────────────────────────────────────────────────────────────
 # GLOBAL ALIAS (to be used at the end of the buffer, mostly)
 alias -g G='| rg'
 alias -g B='| bat'

@@ -1,6 +1,26 @@
+alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
+alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
+alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# utility scripts only made available, but not loaded directly (= lazy-loading)
+export PATH="$ZDOTDIR/utilities/":$PATH
+
+# mason things only made available, but not loaded directly
+function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+function p {
+	qlmanage -p "$1" &> /dev/null
+}
+
 function line_count() {
-	find . -type "file" -print0 \
-		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" -not -path "**/__pycache__/**" |
+	find . -type file \
+		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
+		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
+		-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
 		xargs -0 wc -l |
 		sort --reverse |
 		head -n1
@@ -40,12 +60,16 @@ function o() {
 # open last changed file in cwd
 function oo {
 	local last_modified
-	last_modified=$(find . -type file -maxdepth 4 \
-		-not -path "./.git/**" -not -name ".DS_Store" -not -path "./.venv/**" -print0 |
-		xargs -0 stat -f "%m %N" |
-		sort --numeric --reverse |
-		sed -n "1p" |
-		cut -d" " -f2-)
+	last_modified=$(
+		find . -type file -maxdepth 4 \
+			-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
+			-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
+			-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
+			xargs -0 stat -f "%m %N" |
+			sort --numeric --reverse |
+			sed -n "1p" |
+			cut -d" " -f2-
+	)
 	[[ -z "$last_modified" ]] && return 1
 	open "$last_modified"
 }
