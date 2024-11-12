@@ -1,19 +1,14 @@
 set quiet := true
 
-genre_name := "Comedy"
+debugFile := "./debug/test.py"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-run:
-    #!/usr/bin/env zsh
-    source ./.venv/bin/activate
-    python3 -m python.main "{{ genre_name }}"
+# prints total length of config
+count-lines:
+    find . -name "*.lua" | xargs wc -l | sort --reverse
 
-init:
-    [[ ! -d ./.venv ]] || rm -rf ./.venv
-    python3 -m venv ./.venv
-    source ./.venv/bin/activate && python3 -m pip install -r requirements.txt
-
-open_api_docs:
-    open "https://docs.api.jikan.moe/"
-
+# runs minimal config for debugging purposes with neovide
+debug-instance:
+    # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
+    neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 200ms|bdelete|edit'
