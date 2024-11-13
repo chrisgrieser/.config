@@ -496,6 +496,16 @@ rules:
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
   #─────────────────────────────────────────────────────────────────────────────
+  - description: "(Apps) Catch"
+    manipulators:
+      # fix closing preferences window
+      - type: basic
+        from: { key_code: w, modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: return_or_enter }
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^org\.giorgiocalderolla\.Catch$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) CleanShot X"
     manipulators:
       # INFO https://cleanshot.com/docs/api

@@ -1,16 +1,23 @@
 #!/usr/bin/env node
-// biome-ignore lint/correctness/noNodejsModules: unsure how to fix this
 import fs from "node:fs";
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url */
-async function getOnlineJson(url) {
-	const response = await fetch(url);
+async function getGithubJson(url) {
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			// SIC without `GITHUB_TOKEN`, will hit rate limit when running on Github Actions
+			// `GITHUB_TOKEN` set via GitHub Actions secrets
+			authorization: "Bearer " + process.env.GITHUB_TOKEN,
+			"Content-Type": "application/json",
+		}
+	});
 	return await response.json();
 }
 
 /** @param {string} url */
-async function getOnlineRaw(url) {
+async function getGithubFileRaw(url) {
 	const response = await fetch(url);
 	return await response.text();
 }
@@ -32,8 +39,8 @@ async function run() {
 	const rawGitHubURL = "https://raw.githubusercontent.com/obsidianmd/obsidian-docs/master/";
 	const officialDocsTree = "https://api.github.com/repositories/285425357/git/trees/master?recursive=1";
 
-	// GUARD 
-	const officialDocsJSON = await getOnlineJson(officialDocsTree);
+	// GUARD
+	const officialDocsJSON = await getGithubJson(officialDocsTree);
 	if (!officialDocsJSON) {
 		console.error("Could not fetch json from: ", officialDocsTree);
 		process.exit(1);
@@ -59,17 +66,17 @@ async function run() {
 
 		docsPages.push({
 			title: title,
-			match: alfredMatcher(title),
+			match: alfredMatcher(title) + alfredMatcher(area),
 			subtitle: area,
 			uid: url,
 			arg: url,
 			quicklookurl: url,
 		});
 
-		// HEADINGS of Official Docs
+		// HEADINGS
 		const docURL = rawGitHubURL + encodeURI(doc.path);
 
-		const docTextLines = (await getOnlineRaw(docURL))
+		const docTextLines = (await getGithubFileRaw(docURL))
 			.split("\n")
 			.filter((line) => line.startsWith("#"));
 
@@ -82,7 +89,7 @@ async function run() {
 				title: headerName,
 				subtitle: area,
 				uid: url,
-				match: alfredMatcher(headerName),
+				match: alfredMatcher(headerName) + alfredMatcher(title) + alfredMatcher(area),
 				arg: url,
 				quicklookurl: url,
 			});

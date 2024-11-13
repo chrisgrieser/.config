@@ -14,10 +14,11 @@ import fs from "node:fs";
 
 /** @type {Record<string, string>} */
 const aliases = {
-	// aliases added on top of the ones from devdocs
+	// ALIASES ADDED/CHANGED BY ME on top of the ones from devdocs
 	hammerspoon: "hs",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	browser_support_tables: "cani",
+	matplotlib: "plt", // conventional abbreviation: https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
 
 	// PENDING https://github.com/freeCodeCamp/devdocs/issues/2210
 	// devdocs aliases https://devdocs.io/help#aliases
@@ -36,7 +37,6 @@ const aliases = {
 	lodash: "_",
 	marionette: "mn",
 	markdown: "md",
-	matplotlib: "mpl",
 	modernizr: "mdr",
 	moment: "mt", // removed `.js`
 	openjdk: "java",
@@ -90,7 +90,7 @@ async function run() {
 	// keyword-slug-map
 	if (!fs.existsSync("./.github/caches/")) fs.mkdirSync("./.github/caches/", { recursive: true });
 	const beautifiedForBetterDiff = JSON.stringify(allLangs, null, 2);
-	fs.writeFileSync("./.github/caches/keyword-slug-map.json", beautifiedForBetterDiff);
+	fs.writeFileSync("./.github/caches/devdocs-keyword-slug-map.json", beautifiedForBetterDiff);
 
 	// info.plist: update to insert all languages as options
 	/** @type {string[]} */

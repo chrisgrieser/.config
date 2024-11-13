@@ -1493,7 +1493,10 @@
 			<key>config</key>
 			<dict>
 				<key>tasksettings</key>
-				<dict/>
+				<dict>
+					<key>allow_empty</key>
+					<true/>
+				</dict>
 				<key>taskuid</key>
 				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
 			</dict>
@@ -1577,7 +1580,7 @@
 				<key>keyword</key>
 				<string>cal</string>
 				<key>subtext</key>
-				<string>supports natural language</string>
+				<string>supports natural language for date-time</string>
 				<key>text</key>
 				<string>New event: "{query}"</string>
 				<key>withspace</key>
