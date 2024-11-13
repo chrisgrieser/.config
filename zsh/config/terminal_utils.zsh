@@ -81,7 +81,7 @@ _o() {
 	while IFS='' read -r file; do # turn lines into array
 		paths+=("$file")
 		names+=("$(basename "$file")")
-	done < <(zsh -c "$FZF_DEFAULT_COMMAND --max-depth=3")
+	done < <(zsh -c "$FZF_DEFAULT_COMMAND --max-depth=4")
 
 	local expl && _description -V files-in-pwd expl 'Files in PWD'
 	compadd "${expl[@]}" -d names -a paths

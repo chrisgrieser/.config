@@ -82,15 +82,14 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
+			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next Hunk" },
+			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous Hunk" },
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
-			{ "gh", "<cmd>Gitsigns nav_hunk next<CR>", desc = "󰊢 Next Hunk" },
-			{ "gH", "<cmd>Gitsigns nav_hunk prev<CR>", desc = "󰊢 Previous Hunk" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
 			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame Line" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
-			{ "q", vim.cmd.close, ft = "gitsigns.blame", desc = "Close", nowait = true },
 
 			-- UNDO
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
