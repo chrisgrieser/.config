@@ -19,18 +19,18 @@ vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
 	vim.notify(vim.inspect(output), nil, { title = "Cmdline" })
 end, { desc = "Eval cmdline", nargs = "+" })
-keymap("n", "<leader>xe", ":Eval ", { desc = "󰓗 Eval" })
+keymap("n", "<leader>ee", ":Eval ", { desc = "󰓗 Eval" })
 
--- Copy Last Command
-keymap("n", "<leader>xc", function()
+-- Copy last command
+keymap("n", "<leader>ec", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	vim.fn.setreg("+", lastCommand)
 	vim.notify(lastCommand, vim.log.levels.INFO, { title = "Copied" })
-end, { desc = "󰓗 Copy last e[x]ecuted [c]ommand" })
+end, { desc = "󰓗 Copy last command" })
 
 --------------------------------------------------------------------------------
 -- RUN
-keymap("n", "<leader>xr", function()
+keymap("n", "<leader>er", function()
 	vim.cmd.update()
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
 
@@ -42,7 +42,7 @@ keymap("n", "<leader>xr", function()
 	else
 		vim.notify("File has no shebang", vim.log.levels.WARN)
 	end
-end, { desc = "󰜎 [r]un file" })
+end, { desc = "󰜎 Run file" })
 
 --------------------------------------------------------------------------------
 -- INSPECT
@@ -65,8 +65,8 @@ end, { desc = "󰽙 Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
-keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
+keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
+keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -76,10 +76,10 @@ local function retabber(use)
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using " .. use)
 end
-keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
+keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
-keymap("n", "<leader>fq", function()
+keymap("n", "<leader>rq", function()
 	local line = vim.api.nvim_get_current_line()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
@@ -147,15 +147,15 @@ end
 -- JUST
 keymap(
 	"n",
-	"<leader>j",
-	function() require("funcs.just").justRecipe("first") end,
-	{ desc = " 1st Just recipe" }
+	"<leader>jj",
+	function() require("funcs.just").just(1) end,
+	{ desc = " 1st recipe" }
 )
 keymap(
 	"n",
-	"<leader>J",
-	function() require("funcs.just").justRecipe("select") end,
-	{ desc = " Just recipes" }
+	"<leader>js",
+	function() require("funcs.just").just() end,
+	{ desc = " Select recipe" }
 )
 
 --------------------------------------------------------------------------------
