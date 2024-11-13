@@ -165,9 +165,6 @@ return {
 					max_height = 12,
 					min_height = 3,
 					mappings = { ["q"] = "Close" },
-
-					-- PENDING https://github.com/stevearc/dressing.nvim/pull/180
-					win_options = { winhighlight = "MatchParen:" },
 				},
 				telescope = {
 					layout_config = {
