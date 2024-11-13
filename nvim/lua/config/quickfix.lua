@@ -1,5 +1,4 @@
 local keymap = require("config.utils").uniqueKeymap
-local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 -- KEYMAPS in regular window
 
@@ -10,10 +9,13 @@ keymap("n", "gq", function()
 		vim.cmd.cfirst()
 	end
 end, { desc = " Next quickfix" })
+
 keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
 
 keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st" })
+
 keymap("n", "<leader>qc", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix list" })
+
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
 	for _, win in pairs(windows) do
@@ -29,16 +31,17 @@ end, { desc = " Toggle quickfix window" })
 -- KEYMAPS in quickfix window
 
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Set keymaps in quickfix window",
 	pattern = "qf",
-	callback = function()
-		bkeymap("n", "q", vim.cmd.close, { desc = "Close" })
-		bkeymap("n", "dd", function()
+	callback = function(ctx)
+		vim.keymap.set("n", "q", vim.cmd.close, { desc = " Close", buffer = ctx.buf })
+		vim.keymap.set("n", "dd", function()
 			local qfItems = vim.fn.getqflist()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
 			table.remove(qfItems, lnum)
-			vim.fn.setqflist(qfItems, "r") -- "r" = replace (overwrite)
+			vim.fn.setqflist(qfItems, "r") -- "r" = replace = overwrite
 			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-		end, { desc = " Remove quickfix entry" })
+		end, { desc = " Remove quickfix entry", buffer = ctx.buf })
 	end,
 })
 
@@ -47,7 +50,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	desc = "User: Add signs to quickfix",
+	desc = "User: Add signs to quickfix (1/2)",
 	callback = function()
 		local ns = vim.api.nvim_create_namespace("quickfixSigns")
 
@@ -72,6 +75,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 				setSigns(qf)
 			else
 				vim.api.nvim_create_autocmd("BufReadPost", {
+					desc = "User(once): Add signs to quickfix (2/2)",
 					group = group,
 					once = true,
 					buffer = qf.bufnr,
@@ -103,14 +107,14 @@ function M.quickfixCounterStatusbar()
 	if #qf.items == 0 then return "" end
 
 	-- prettify title output
-	qf.title = qf 
+	local title = qf
 		.title
 		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
 		:gsub("^Find Files: .-%((.+)%)", "%1")
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
+	return (" %s/%s %q"):format(qf.idx, #qf.items, title)
 end
 
 return M

@@ -172,6 +172,7 @@ local function toggleUnderlines()
 	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
+	desc = "User: FIX underlines when backdrop",
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
 	callback = function(ctx)
 		-- WinEnter needs a delay so buftype changes set by plugins are picked up

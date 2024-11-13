@@ -221,7 +221,6 @@ return {
 				},
 			}
 			opts.langs = {
-				rst = { paragraph = gww }, -- python docstrings (when rst is injected)
 				comment = { source = gww, element = gww }, -- comments in any language
 				lua = { comment = gww },
 				jsdoc = { source = gww, description = gww },
@@ -244,7 +243,9 @@ return {
 					-- re-purposing `objectLog` for debugging via AppleScript notification
 					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 				},
-				clearLog = { lua = "hs.console.clearConsole() -- %s" }, -- Hammerspoon
+				clearLog = {
+					lua = "hs.console.clearConsole() -- %s", -- Hammerspoon
+				},
 				sound = {
 					lua = 'hs.sound.getByName("Sosumi"):play() -- %s', -- Hammerspoon
 					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
@@ -254,17 +255,17 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
-			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬠ object" },
-			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = " assert" },
-			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "⬠ type" },
-			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍡 message" },
-			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰱨 emoji" },
+			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬟ object" },
+			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "⁉️ assert" },
+			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "󰜀 type" },
+			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰦨 message" },
+			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },
 			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
 			{"<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
-			{"<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
-			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰐪  clear" },
-			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰐪 󰅗 remove logs" },
+			{"<leader>l<down>", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
+			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
+			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
 			-- stylua: ignore end
 		},
 	},

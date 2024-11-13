@@ -28,6 +28,7 @@ return {
 		event = "VeryLazy",
 		init = function()
 			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+				desc = "User: Define `SatelliteQuickfix` hlgroup",
 				callback = function()
 					vim.api.nvim_set_hl(0, "SatelliteQuickfix", { link = "DiagnosticSignInfo" })
 				end,

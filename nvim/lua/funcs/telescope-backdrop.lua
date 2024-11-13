@@ -6,6 +6,7 @@ local blend = 50
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Add backdrop to Telescope",
 	pattern = "TelescopePrompt",
 	callback = function(ctx)
 		local backdropName = "TelescopeBackdrop"
@@ -34,6 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		-- close backdrop when the reference buffer is closed
 		vim.api.nvim_create_autocmd({ "WinClosed", "BufLeave" }, {
+			desc = "User (once): Close backdrop when reference buffer is closed",
 			once = true,
 			buffer = telescopeBufnr,
 			callback = function()

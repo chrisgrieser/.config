@@ -26,6 +26,7 @@ bkeymap("n", "<leader>cr", function()
 	local isAtBlank = vim.api.nvim_get_current_line():match("^%s*$")
 
 	vim.api.nvim_create_autocmd("FileType", {
+		desc = "User (buffer-specific): Set filetype to `lua` for `TelescopeResults`",
 		pattern = "TelescopeResults",
 		once = true,
 		callback = function(ctx)
@@ -54,6 +55,7 @@ end, { desc = " Import module" })
 
 -- auto-comma for tables
 vim.api.nvim_create_autocmd("TextChangedI", {
+	desc = "User (buffer-specific): Set filetype to lua for TelescopeResults",
 	buffer = 0,
 	group = vim.api.nvim_create_augroup("lua-autocomma", { clear = true }),
 	callback = function()
