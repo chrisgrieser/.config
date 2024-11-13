@@ -16,7 +16,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- DOCS https://github.com/folke/noice.nvim#-routes
 local routes = {
 	-- REDIRECT TO POPUP
-	{
+
+	{ -- do not redirect tinygit commit previews & lazy.nvim plugin updates
 		filter = {
 			min_height = 10,
 			cond = function(msg)
@@ -27,7 +28,7 @@ local routes = {
 		view = "popup",
 	},
 
-	-- output from `:Inspect`, for easier copying
+	-- output from `:Inspect` for easier copying
 	{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
 
 	-----------------------------------------------------------------------------
@@ -41,12 +42,9 @@ local routes = {
 	-- search
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-	-- word added to spellfile via `zg`
-	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-
 	-- gitsigns.nvim
-	{ filter = { event = "msg_show", find = "Hunk %d+ of %d+" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "No hunks" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^Hunk %d+ of %d+" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^No hunks$" }, view = "mini" },
 
 	-----------------------------------------------------------------------------
 	-- SKIP
@@ -55,18 +53,16 @@ local routes = {
 	{ filter = { event = "msg_show", find = "lsp_signature? handler RPC" }, skip = true },
 	-- stylua: ignore
 	{ filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" }, skip = true },
+	{
+		filter = { event = "notify", find = "^Client marksman quit with exit code 1 and signal 0." },
+		skip = true,
+	},
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 	-- unneeded info on search patterns when pattern not found
 	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-
-	-- useless notification when closing buffers
-	{
-		filter = { event = "notify", find = "^Client marksman quit with exit code 1 and signal 0." },
-		skip = true,
-	},
 
 	-- empty messages
 	{ filter = { event = "notify", find = "^%s*$" }, skip = true },

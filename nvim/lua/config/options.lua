@@ -29,15 +29,12 @@ vim.opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 
 vim.opt.autowriteall = true
 
-vim.opt.pumwidth = 15 -- min width
-vim.opt.pumheight = 12 -- max height
-
 vim.opt.jumpoptions = { "stack" } -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 
 vim.opt.timeoutlen = 666
 
-vim.opt.sidescrolloff = 12
-vim.opt.scrolloff = 12
+vim.opt.sidescrolloff = 13
+vim.opt.scrolloff = 13
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do). Therefore
@@ -55,13 +52,13 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- EDITORCONFIG
 
--- By default, vim automatically sets `textwidth` to follow the
+-- By default, nvim automatically sets `textwidth` to follow the
 -- `max_line_length` value of `editorconfig`. However, I prefer to keep have
 -- different values for `textwidth` and `max_line_length`, so vim behavior like
--- `gww` or auto-breaking comment still follows `textwidth`, while using a wider
--- line length setting for formatters. Setting those values independently is not
--- possible normally, so we disable the respective in the `editorconfig` module
--- instead as a workaround.
+-- `gww` or auto-breaking comment still follows `textwidth`, while using a
+-- larger line length setting for formatters. 
+-- Setting those values independently is not possible normally, so we disable
+-- the respective function in the `editorconfig` module instead as a workaround.
 require("editorconfig").properties.max_line_length = nil
 vim.opt.textwidth = 80
 
