@@ -9,11 +9,12 @@ keymap("n", "gq", function()
 		vim.notify("Wrapped.")
 		vim.cmd.cfirst()
 	end
-end, { desc = " Next quickfix" })
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
-keymap("n", "dQ", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix" })
+end, { desc = " Next quickfix" })
+keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
 
-keymap("n", "<leader>q", function()
+keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st" })
+keymap("n", "<leader>qc", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix list" })
+keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
 	for _, win in pairs(windows) do
 		if win.quickfix == 1 then
@@ -22,7 +23,7 @@ keymap("n", "<leader>q", function()
 		end
 	end
 	vim.cmd.copen()
-end, { desc = " Toggle quickfix window" })
+end, { desc = " Toggle quickfix window" })
 
 --------------------------------------------------------------------------------
 -- KEYMAPS in quickfix window
@@ -37,15 +38,16 @@ vim.api.nvim_create_autocmd("FileType", {
 			table.remove(qfItems, lnum)
 			vim.fn.setqflist(qfItems, "r") -- "r" = replace (overwrite)
 			vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-		end, { desc = " Remove quickfix entry" })
+		end, { desc = " Remove quickfix entry" })
 	end,
 })
 
 --------------------------------------------------------------------------------
-
 -- ADD SIGNS
+
 local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	desc = "User: Add signs to quickfix",
 	callback = function()
 		local ns = vim.api.nvim_create_namespace("quickfixSigns")
 
@@ -81,16 +83,19 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 --------------------------------------------------------------------------------
-
 -- AUTOMATICALLY GOTO 1ST ITEM
+
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
+	desc = "User: Automatically goto 1st quickfix item",
 	callback = function()
+		-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
 		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
 	end,
 })
 
 --------------------------------------------------------------------------------
+-- STATUSBAR: COUNT OF ITEMS
+
 local M = {}
 
 function M.quickfixCounterStatusbar()
@@ -105,7 +110,7 @@ function M.quickfixCounterStatusbar()
 		:gsub("^Find Word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
+	return (" %s/%s %q"):format(qf.idx, #qf.items, qf.title)
 end
 
 return M

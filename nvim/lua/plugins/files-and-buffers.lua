@@ -12,10 +12,10 @@ return {
 			{"<D-n>", function() require("genghis").createNewFile() end, desc = "󰞇 Create new file" },
 			{"<C-d>", function() require("genghis").duplicateFile() end, desc = "󰞇 Duplicate file" },
 			{"<D-M>", function() require("genghis").moveToFolderInCwd() end, desc = "󰞇 Move file" },
-			{"<leader>fx", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = "󰞇 Selection to new file" },
+			{"<leader>rf", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = "󰞇 Selection to new file" },
 
 			{"<D-BS>", function() require("genghis").trashFile() end, desc = "󰞇 Move file to trash" },
-			{"<leader>xx", function() require("genghis").chmodx() end, desc = "󰞇 chmod +x" },
+			{"<leader>ex", function() require("genghis").chmodx() end, desc = "󰞇 chmod +x" },
 			-- stylua: ignore end
 		},
 	},

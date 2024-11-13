@@ -2,15 +2,17 @@
 A simple wrapper for the task runner `just`
 https://github.com/casey/just
 
-Usage:
+USAGE
 -- select a recipe via `vim.ui.select`
-require("funcs.just").run()
+require("funcs.just").just()
 
--- run the nth just recipe
-require("funcs.just").run(n)
-require("funcs.just").run(1)
+-- run the 1st recipe of the Justfile
+require("funcs.just").just(1)
 
-Requirements: 
+-- run the `n`-th recipe of the Justfile
+require("funcs.just").just(n)
+
+REQUIREMENTS:
 - nvim 0.10+
 - optional: snacks.nvim (buffered output)
 - optional: dressing.nvim (nicer `vim.ui.select`)
@@ -76,7 +78,7 @@ local M = {}
 
 ---Simple taskrunner using `just`
 ---@param recipeIndex? number
-function M.justRecipe(recipeIndex)
+function M.just(recipeIndex)
 	vim.cmd("silent! update")
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
@@ -93,7 +95,6 @@ function M.justRecipe(recipeIndex)
 		return
 	end
 
-	table.insert(recipes, table.remove(recipes, 1)) -- 1st recipe to end, since accessible via "first"
 	vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 end
 

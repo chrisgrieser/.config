@@ -169,15 +169,8 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copy last e[x]ecuted [r]esult
-function xr() {
-	to_copy=$(eval "$(history -n -1)")
-	print "\e[1;32mCopied:\e[0m $to_copy"
-	echo -n "$to_copy" | pbcopy
-}
-
-# copy last e[x]ecuted [c]ommand
-function xc() {
+# copy last [e]xecuted [c]ommand
+function ec() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
 		to_copy=""
@@ -195,7 +188,7 @@ function xc() {
 }
 
 # completions for it
-_xc() {
+_ec() {
 	local -a last_cmds=()
 	while IFS='' read -r value; do # turn lines into array
 		last_cmds+=("$value")
@@ -205,7 +198,7 @@ _xc() {
 	local expl && _description -V last-commands expl 'Last Commands'
 	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
 }
-compdef _xc xc
+compdef _ec ec
 
 #───────────────────────────────────────────────────────────────────────────────
 # TRASH

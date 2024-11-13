@@ -157,7 +157,7 @@ return {
 				trim_prompt = true,
 				builtin = {
 					mappings = { ["q"] = "Close" },
-					show_numbers = false,
+					show_numbers = true,
 					border = vim.g.borderStyle,
 					relative = "editor",
 					max_width = 80,
@@ -173,7 +173,10 @@ return {
 				get_config = function(opts)
 					local useBuiltin = { "plain", "codeaction", "rule_selection" }
 					if vim.tbl_contains(useBuiltin, opts.kind) then
-						return { backend = { "builtin" }, builtin = { relative = "cursor" } }
+						return {
+							backend = { "builtin" },
+							builtin = { relative = "cursor" },
+						}
 					end
 				end,
 			},

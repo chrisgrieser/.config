@@ -103,7 +103,7 @@ bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 --------------------------------------------------------------------------------
 -- MARKDOWN PREVIEW
 -- (replaces markdown-preview.nvim)
-bkeymap("n", "<leader>xr", function()
+bkeymap("n", "<leader>er", function()
 	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
 	local browser = "Brave Browser"
