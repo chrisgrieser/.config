@@ -31,9 +31,9 @@ function recent_updates() {
 	brew list -t --casks | head -n"$count" | rs
 }
 
-# $1: title
+# $1: title $2: no leading newline
 function _print-section() {
-	echo
+	[[ -z "$2" ]] && echo
 	print "\e[1;34m$1\e[0m"
 	_separator
 }
@@ -41,7 +41,7 @@ function _print-section() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	_print-section "Homebrew"
+	_print-section "Homebrew" 1
 	brew update
 	brew upgrade
 	brew cleanup
@@ -52,7 +52,7 @@ function update() {
 	brew upgrade obsidian
 
 	_print-section "Mac App Store"
-	if [[ -z $(mas outdated) ]] ; then
+	if [[ -n $(mas outdated) ]] ; then
 		mas upgrade
 	else
 		echo "No Mac App Store updates available."
@@ -67,7 +67,7 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info & doctor"
+	_print-section "brew info & doctor" 1
 	brew info
 	brew doctor
 
