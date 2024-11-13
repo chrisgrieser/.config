@@ -29,7 +29,7 @@ function M.winHasSize(win, relSize)
 	local diffx = relSize.x * maxf.w + maxf.x - winf.x -- calculated this way for two screens
 	local diffy = relSize.y * maxf.h + maxf.y - winf.y
 
-	local leeway = 5 -- CONFIG e.g., terminal cell widths creating some minor inprecision
+	local leeway = 5 -- e.g., terminal cell widths creating some minor inprecision
 	local widthOkay = (diffw > -leeway and diffw < leeway)
 	local heightOkay = (diffh > -leeway and diffh < leeway)
 	local posyOkay = (diffy > -leeway and diffy < leeway)
