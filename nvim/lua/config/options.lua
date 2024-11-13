@@ -4,9 +4,6 @@ vim.opt.undofile = true -- enables persistent undo history
 vim.opt.undolevels = 1337 -- too high results in increased buffer loading time
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
-vim.opt.startofline = true -- motions like "G" also move to the first char
-vim.opt.virtualedit = "block" -- visual-block mode can select beyond end of line
-
 vim.opt.spell = false
 vim.opt.spellfile = vim.fs.normalize("~/.config/+ linter-configs/spellfile.add") -- needs `.add` ext
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
@@ -30,6 +27,7 @@ vim.opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
 vim.opt.autowriteall = true
 
 vim.opt.jumpoptions = { "stack" } -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
+vim.opt.startofline = true -- motions like "G" also move to the first char
 
 vim.opt.timeoutlen = 666
 
@@ -107,7 +105,7 @@ end
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlighted Yank",
+	desc = "User: Highlighted Yank",
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
