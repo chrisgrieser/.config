@@ -22,8 +22,8 @@ local config = {
 	zeroWindowAction = function(appName)
 		-- hide to prevent focussing windowless app
 		-- not on projector, since weird interaction with IINA
-		local app = hs.application.find(appName, true, true)
-		if app and not env.isProjector() then app:hide() end
+		local autoTileApp = hs.application.find(appName, true, true)
+		if autoTileApp and not env.isProjector() then autoTileApp:hide() end
 	end,
 	---@type fun(appName: string): hs.geometry
 	oneWindowSize = function(appName)
@@ -52,7 +52,6 @@ local function autoTile(appName)
 		return notIgnored and win:isStandard()
 	end)
 	---@cast wins hs.window[] -- fix wrong annotation
-
 
 	-- GUARD prevent unnecessary runs or duplicate triggers
 	if M["winCount_" .. appName] == #wins then return end
@@ -107,14 +106,14 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 		:subscribe(wf.windowFocused, function() autoTile(appName) end)
 
 	-- hide on deactivation, so sketchybar is not covered
-	M["appWatcher_" .. appName] = aw.new(function(name, eventType, app)
+	M["appWatcher_" .. appName] = aw.new(function(name, eventType, autoTileApp)
 		local frontApp = hs.application.frontmostApplication()
 		if not frontApp then return end
 		local notIgnored = hs.fnutils.every(
 			config.dontTriggerHiding,
 			function(a) return frontApp:name() ~= a end
 		)
-		if name == appName and eventType == aw.deactivated and notIgnored then app:hide() end
+		if name == appName and eventType == aw.deactivated and notIgnored then autoTileApp:hide() end
 	end):start()
 end
 

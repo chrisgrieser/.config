@@ -41,13 +41,13 @@ local function unHideAll()
 	end
 end
 
----@param appObj hs.application the app not to hide
-local function hideOthers(appObj)
+---@param notToHideApp hs.application
+local function hideOthers(notToHideApp)
 	-- GUARD
 	if u.appRunning(config.disableHidingWhileActive) then return end
-	if hs.fnutils.contains(config.dontTriggerHidingOtherApps, appObj:name()) then return end
-	local thisWin = appObj and appObj:mainWindow()
-	if not thisWin or not appObj:isFrontmost() then return end
+	if hs.fnutils.contains(config.dontTriggerHidingOtherApps, notToHideApp:name()) then return end
+	local thisWin = notToHideApp and notToHideApp:mainWindow()
+	if not thisWin or not notToHideApp:isFrontmost() then return end
 	if not (wu.winHasSize(thisWin, wu.pseudoMax) or wu.winHasSize(thisWin, hs.layout.maximized)) then
 		return
 	end
@@ -59,7 +59,7 @@ local function hideOthers(appObj)
 			app
 			and not (app:findWindow("Picture in Picture"))
 			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
-			and not (app:name() == appObj:name())
+			and not (app:name() == notToHideApp:name())
 		then
 			app:hide()
 		end
@@ -93,11 +93,13 @@ M.wf_maxWindows = wf.new(true)
 	:subscribe(wf.windowUnfocused, function(win)
 		if not win then return end
 		local app = win:application()
+		local frontApp = hs.application.frontmostApplication()
 		if
 			not (env.isProjector())
 			and wu.winHasSize(win, hs.layout.maximized)
 			and not (u.isFront(config.dontTriggerHidingOtherApps))
 			and app
+			and app:name() ~= frontApp:name()
 		then
 			app:hide()
 		end

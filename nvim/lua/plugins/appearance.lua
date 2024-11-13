@@ -157,7 +157,6 @@ return {
 			select = {
 				trim_prompt = true,
 				builtin = {
-					mappings = { ["q"] = "Close" },
 					show_numbers = true,
 					border = vim.g.borderStyle,
 					relative = "editor",
@@ -165,6 +164,10 @@ return {
 					min_width = 20,
 					max_height = 12,
 					min_height = 3,
+					mappings = { ["q"] = "Close" },
+
+					-- PENDING https://github.com/stevearc/dressing.nvim/pull/180
+					win_options = { winhighlight = "MatchParen:" },
 				},
 				telescope = {
 					layout_config = {
