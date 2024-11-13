@@ -45,6 +45,7 @@ safeRequire("config.autocmds")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
+	desc = "User (once): Load spellfixes",
 	once = true,
 	callback = function() safeRequire("config.spellfixes") end,
 })

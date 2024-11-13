@@ -15,14 +15,15 @@ local specialDirs = {
 	"%.git/",
 	"%.DS_Store$", -- macOS Finder
 	"%.app/", -- macOS apps
-	"%.venv", -- python,
+	"%.venv", -- python
+	"__pycache__",
 	"%.spoon", -- Hammerspoon spoons
-	"__pycache__"
 }
 
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: FIX `sidescrolloff` for Telescope",
 	pattern = "TelescopePrompt",
 	callback = function() vim.opt_local.sidescrolloff = 1 end,
 })
@@ -45,7 +46,7 @@ local function telescopeConfig()
 			borderchars = borderChars,
 			default_mappings = { i = keymaps.insertMode, n = keymaps.normalMode },
 			layout_strategy = "horizontal",
-			sorting_strategy = "ascending", -- so layout is consistent with prompt_position "top"
+			sorting_strategy = "ascending", -- so layout is consistent with `prompt_position = "top"`
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
@@ -67,7 +68,7 @@ local function telescopeConfig()
 			vimgrep_arguments = {
 				"rg",
 				"--no-config",
-				"--sortr=modified", -- performance cost as it disables multithreading
+				"--sortr=modified", -- small performance cost as it disables multithreading
 				"--vimgrep",
 				"--smart-case",
 				"--follow",

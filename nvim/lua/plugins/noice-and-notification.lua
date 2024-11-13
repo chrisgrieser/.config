@@ -1,5 +1,5 @@
--- highlighting of filepaths and error codes
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Highlight filepaths and error codes in noice/snacks notifications.",
 	pattern = { "noice", "snacks_notif" },
 	callback = function(ctx)
 		vim.defer_fn(function()

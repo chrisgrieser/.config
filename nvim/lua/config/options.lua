@@ -43,6 +43,7 @@ vim.opt.scrolloff = 12
 -- overwritten by ftplugins having the `o` option (which many do). Therefore
 -- needs to be set via autocommand.
 vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Remove `o` from `formatoptions`",
 	callback = function(ctx)
 		if ctx.match ~= "markdown" then
 			vim.opt_local.formatoptions:remove("o")
@@ -109,6 +110,7 @@ end
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlighted Yank",
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 

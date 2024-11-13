@@ -119,6 +119,7 @@ local pluginTypeIcons = {
 keymap("n", "g,", function()
 	-- colored icons
 	vim.api.nvim_create_autocmd("FileType", {
+		desc = "User (once): Set filetype to `lua` for `TelescopeResults`",
 		once = true,
 		pattern = "TelescopeResults",
 		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,

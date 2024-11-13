@@ -9,6 +9,7 @@ local keymap = require("config.utils").uniqueKeymap
 -- FIX neovide ignoring `tabs = false` on consecutive opening of new files
 -- https://github.com/neovide/neovide/issues/2585
 vim.api.nvim_create_autocmd("TabNewEntered", {
+	desc = "User (once): FIX neovide ignoring `tabs = false`",
 	callback = function(ctx)
 		vim.defer_fn(function()
 			if vim.fn.tabpagenr("$") == 1 or vim.bo.buftype ~= "" then return end
