@@ -55,7 +55,7 @@ M.timer_clock = hs.timer
 --------------------------------------------------------------------------------
 -- NIGHTLY CRONJOBS
 
--- CONFIG all files in this directory are executed every other day at 01:00
+-- CONFIG all `.sh` files in this directory are executed every other day at 01:00
 local cronjobDir = "./system/cronjobs"
 
 M.timer_nightlyCronjobs = hs.timer
