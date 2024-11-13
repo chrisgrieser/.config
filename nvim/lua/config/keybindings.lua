@@ -232,7 +232,8 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 	desc = "User: Exit snippet on scroll",
 	callback = function(ctx)
 		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
-		if scrollWinId == vim.api.nvim_get_current_win() then vim.snippet.stop() end
+		local mainWinId = 1000
+		if scrollWinId == mainWinId then vim.snippet.stop() end
 	end,
 })
 
