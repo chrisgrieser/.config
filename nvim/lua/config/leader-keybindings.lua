@@ -124,7 +124,7 @@ end, { desc = " Yank code context" })
 keymap(
 	"n",
 	"<leader>ur",
-	function() vim.cmd.later(vim.opt.undolevels:get()) end,
+	function() vim.cmd.later(vim.opt.undolevels:get()) end, ---@diagnostic disable-line: undefined-field
 	{ desc = "󰛒 Redo All" }
 )
 
@@ -148,13 +148,13 @@ end
 keymap(
 	"n",
 	"<leader>j",
-	function() require("funcs.nano-plugins").justRecipe("first") end,
+	function() require("funcs.just").justRecipe("first") end,
 	{ desc = " 1st Just recipe" }
 )
 keymap(
 	"n",
 	"<leader>J",
-	function() require("funcs.nano-plugins").justRecipe("select") end,
+	function() require("funcs.just").justRecipe("select") end,
 	{ desc = " Just recipes" }
 )
 
