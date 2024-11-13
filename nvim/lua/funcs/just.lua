@@ -83,7 +83,7 @@ function M.just(recipeIndex)
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
 	if result.code ~= 0 then
-		vim.notify(result.stderr, vim.log.levels.ERROR, { title = "Just" })
+		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
 	local recipes = vim.iter(vim.split(vim.trim(result.stdout), " "))
