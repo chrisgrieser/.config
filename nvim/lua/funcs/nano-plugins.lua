@@ -35,12 +35,20 @@ function M.justRecipe(which)
 	local function run(recipe)
 		if not recipe then return end
 
+		-- 1: QUICKFIX
 		if vim.tbl_contains(config.useQuickfix, recipe) then
 			vim.opt_local.makeprg = "just"
 			vim.cmd.make(recipe)
-			pcall(vim.cmd.cfirst)
-		else
-			local buffer = "" -- use buffer to display progress bars
+			pcall(vim.cmd.cfirst) -- if there is a quickfix item, move to the 1st one
+			vim.cmd.checktime() -- reload buffer in case of changes
+			return
+		end
+
+		-- 2A: `JUST` SYSTEM CALL
+		--  (= things like progress bars can be displayed)
+		-- Requires `snacks.nvim`, to replace the previous notification via `id`
+		if package.loaded["snacks"] then
+			local buffer = ""
 			local function bufferedOut(severity)
 				return function(_, data)
 					if not data then return end
@@ -49,12 +57,22 @@ function M.justRecipe(which)
 					vim.notify(buffer, vim.log.levels[severity], opts)
 				end
 			end
-			vim.system({ "just", recipe }, {
-				stdout = bufferedOut("INFO"),
-				stderr = bufferedOut("ERROR"),
-			})
+			vim.system(
+				{ "just", recipe },
+				{ stdout = bufferedOut("INFO"), stderr = bufferedOut("ERROR") },
+				vim.cmd.checktime
+			)
+			return
 		end
-		vim.cmd.checktime() -- reload buffer in case of changes
+
+		-- 2B: `JUST` SYSTEM CALL
+		-- async & unbuffered output
+		vim.system({ "just", recipe }, {}, function(out)
+			local text = vim.trim((out.stdout or "") .. (out.stderr or ""))
+			local severity = out.code == 0 and "INFO" or "ERROR"
+			vim.notify(text, vim.log.levels[severity], { title = "Just: " .. recipe })
+			vim.cmd.checktime()
+		end)
 	end
 	-----------------------------------------------------------------------------
 
@@ -73,8 +91,7 @@ function M.justRecipe(which)
 		return
 	end
 
-	-- move first recipe to end, since it's normally accessed directly via "first"
-	table.insert(recipes, table.remove(recipes, 1))
+	table.insert(recipes, table.remove(recipes, 1)) -- 1st recipe to end, since accessible via "first"
 	vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
 end
 

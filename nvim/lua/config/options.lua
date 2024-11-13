@@ -1,6 +1,7 @@
 -- GENERAL
 
 vim.opt.undofile = true -- enables persistent undo history
+vim.opt.undolevels = 1337 -- too high results in increased buffer loading time
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.startofline = true -- motions like "G" also move to the first char
@@ -21,7 +22,7 @@ vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
 
 vim.opt.shortmess:append("ISs") -- no intro message, no search count
-vim.opt.report = 9001 -- disable "x more/fewer lines" messages
+vim.opt.report = 9001 -- effectively disable "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 vim.opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
@@ -33,7 +34,6 @@ vim.opt.pumheight = 12 -- max height
 
 vim.opt.jumpoptions = { "stack" } -- https://www.reddit.com/r/neovim/comments/16nead7/comment/k1e1nj5/?context=3
 
-vim.opt.updatetime = 250 -- time for `CursorHold` event
 vim.opt.timeoutlen = 666
 
 vim.opt.sidescrolloff = 12

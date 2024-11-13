@@ -95,6 +95,7 @@ return {
 			words = {
 				notify_jump = true,
 				modes = { "n" },
+				debounce = 300,
 			},
 			-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 			styles = {
