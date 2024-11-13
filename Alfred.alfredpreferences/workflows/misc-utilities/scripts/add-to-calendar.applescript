@@ -12,6 +12,7 @@ on run argv
 		end repeat
 
 		-- insert text
+		set frontmost to true
 		click menu item "New Event or Reminder" of menu "File" of menu bar 1
 		delay 0.1
 		keystroke "v" using {command down}
