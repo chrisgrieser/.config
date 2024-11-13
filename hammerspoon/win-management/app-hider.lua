@@ -1,13 +1,3 @@
-local M = {} -- persist from garbage collector
-
-local env = require("meta.environment")
-local u = require("meta.utils")
-local wu = require("win-management.window-utils")
-
-local aw = hs.application.watcher
-local wf = hs.window.filter
---------------------------------------------------------------------------------
-
 -- INFO REASONS FOR ALL THIS APP HIDING
 -- 1) My workflow where I only have one display and one Space, but
 -- still want to enjoy wallpapers visible through transparent apps.
@@ -15,9 +5,20 @@ local wf = hs.window.filter
 -- corner.
 
 local config = {
-	transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" },
-	disableHidingWhileActive = { "Steam" },
-	dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "pinentry-mac" },
+	transBgApps = {
+		"Neovide",
+		"neovide",
+		"Obsidian",
+		"wezterm-gui",
+		"WezTerm",
+	},
+	dontTriggerHidingOtherApps = {
+		"Alfred",
+		"CleanShot X",
+		"IINA",
+		"pinentry-mac",
+		"Catch",
+	},
 	appsNotToHide = {
 		"Espanso",
 		"IINA",
@@ -28,7 +29,21 @@ local config = {
 		"Karabiner-EventViewer",
 		"pinentry-mac",
 	},
+	disableHidingWhileActive = {
+		"Steam",
+	},
 }
+--------------------------------------------------------------------------------
+
+local M = {} -- persist from garbage collector
+
+local env = require("meta.environment")
+local u = require("meta.utils")
+local wu = require("win-management.window-utils")
+
+local aw = hs.application.watcher
+local wf = hs.window.filter
+
 --------------------------------------------------------------------------------
 
 -- unhide all apps
@@ -60,6 +75,7 @@ local function hideOthers(notToHideApp)
 			and not (app:findWindow("Picture in Picture"))
 			and not (hs.fnutils.contains(config.appsNotToHide, app:name()))
 			and not (app:name() == notToHideApp:name())
+			and not app:isHidden()
 		then
 			app:hide()
 		end

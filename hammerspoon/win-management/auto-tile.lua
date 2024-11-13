@@ -17,6 +17,7 @@ local config = {
 		"pinentry-mac",
 		"Espanso",
 		"IINA",
+		"Catch",
 	},
 	---@type fun(appName: string)
 	zeroWindowAction = function(appName)

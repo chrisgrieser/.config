@@ -17,12 +17,11 @@ const originalSites = {
 	git: "https://git-scm.com/docs/",
 	lua: "https://www.lua.org/manual/{{version}}/manual.html",
 	hammerspoon: "https://www.hammerspoon.org/docs/",
-	// biome-ignore lint/style/useNamingConvention: not set by me
+	// biome-ignore lint/style/useNamingConvention: not by me
 	browser_support_tables: "https://caniuse.com/",
 	node: "https://nodejs.org/api/",
 	moment: "https://momentjs.com/docs/#/",
 	npm: "https://docs.npmjs.com/",
-	jq: "https://jqlang.github.io/jq/manual/v1.7/index.html#",
 	esbuild: "https://esbuild.github.io/",
 };
 
@@ -32,7 +31,7 @@ const originalSites = {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const url = argv[0];
-	let [_, topic, version, site] = url.match(/.*devdocs.io\/([^/~]*)(?:~(.*?))?\/(.+)/) || [];
+	let [_, topic, version, site] = url.match(/.*devdocs\.io\/([^/~]*)(?:~(.*?))?\/(.+)/) || [];
 	let sourcePage = originalSites[topic];
 	const useSourcePageIfAvailable = $.getenv("use_source_page_if_available") === "1";
 
