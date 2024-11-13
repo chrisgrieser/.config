@@ -79,14 +79,7 @@
 	diffFilter = delta --color-only
 [delta]
 	tabs = 3 ; tabwidth
-	navigate = true ; use n and N to move between diff sections (requires `$LESSHISTFILE` not being set)
+	navigate = true ; use n and N to move between diff sections
 	hyperlinks = true
 	side-by-side = false
-
 ;────────────────────────────────────────────────────────────────────────────
-[mergetool "juxta"]
-	cmd = juxta _mergetool --base \"${BASE:-/dev/null}\" --local \"$LOCAL\" --remote \"$REMOTE\" --merged \"${MERGED:-/dev/null}\"
-	trustExitCode = true
-[difftool "juxta"]
-	cmd = juxta _difftool --local \"$LOCAL\" --remote \"$REMOTE\" --merged \"$MERGED\"
-	trustExitCode = true
