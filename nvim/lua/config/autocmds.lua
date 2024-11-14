@@ -254,29 +254,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
--- MAXIMUM BUFFER NUMBER
--- `BufEnter`, so buffers opened in the background (e.g., LSP rename) don't trigger
-vim.api.nvim_create_autocmd("BufEnter", {
-	desc = "User: Maximum buffer numbers, makes `:bnext` and `:bprevious` less crowded.",
-	callback = function()
-		local maxBufs = 5 -- CONFIG
-
-		vim.defer_fn(function() -- defer to ensure `lastused` of new buffer is set
-			local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-			if #openBuffers <= maxBufs then return end
-
-			-- sort by oldest first
-			table.sort(openBuffers, function(a, b) return a.lastused < b.lastused end)
-
-			-- close oldest buffers
-			for i = 1, #openBuffers - maxBufs do
-				vim.cmd.bdelete(openBuffers[i].bufnr)
-			end
-		end, 1)
-	end,
-})
-
---------------------------------------------------------------------------------
 -- GIT CONFLICT MARKERS
 -- if there are conflicts, jump to first conflict, highlight conflict markers,
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
