@@ -15,7 +15,6 @@ require("funcs.just").just(n)
 REQUIREMENTS:
 - nvim 0.10+
 - optional: snacks.nvim (for buffered output)
-- optional: dressing.nvim (for nicer `vim.ui.select`)
 ]]
 --------------------------------------------------------------------------------
 
@@ -65,12 +64,58 @@ local function run(recipe)
 
 	-- 3) SYSTEM CALL: async & unbuffered
 	-- (this is mostly just the fallback)
-	vim.system({ "just", recipe }, {}, vim.schedule_wrap(function(out)
-		local text = vim.trim((out.stdout or "") .. (out.stderr or ""))
-		local severity = out.code == 0 and "INFO" or "ERROR"
-		vim.notify(text, vim.log.levels[severity], { title = "Just: " .. recipe })
-		vim.cmd.checktime()
-	end))
+	vim.system(
+		{ "just", recipe },
+		{},
+		vim.schedule_wrap(function(out)
+			local text = vim.trim((out.stdout or "") .. (out.stderr or ""))
+			local severity = out.code == 0 and "INFO" or "ERROR"
+			vim.notify(text, vim.log.levels[severity], { title = "Just: " .. recipe })
+			vim.cmd.checktime()
+		end)
+	)
+end
+
+local function selectFromRecipes()
+	
+local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, recipes)))
+	local title = "  Just Recipes "
+
+	local bufnr = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, recipes)
+	local winnr = vim.api.nvim_open_win(bufnr, true, {
+		relative = "cursor",
+		row = 0,
+		col = 0,
+		width = math.max(longestRecipe, vim.api.nvim_strwidth(title)),
+		height = #recipes,
+		title = title,
+		border = "single",
+		style = "minimal",
+	})
+	vim.wo[winnr].sidescrolloff = 0
+	vim.wo[winnr].winfixbuf = true
+	vim.bo[bufnr].modifiable = false
+
+	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = bufnr, nowait = true })
+	vim.keymap.set("n", "<Tab>", "j", { buffer = bufnr, nowait = true })
+	vim.keymap.set("n", "<S-Tab>", "k", { buffer = bufnr, nowait = true })
+	vim.keymap.set("n", "<CR>", function()
+		local idx = vim.api.nvim_win_get_cursor(0)[1]
+		run(recipes[idx])
+		vim.cmd.close()
+	end, { buffer = bufnr, nowait = true })
+
+	local usedChars = { "q" }
+	for i = 1, #recipes do
+		local firstChar = recipes[i]:sub(1, 1)
+		if vim.tbl_contains(usedChars, firstChar) then return end
+		vim.keymap.set("n", firstChar, function()
+			run(recipes[i])
+			vim.cmd.close()
+		end, { buffer = bufnr, nowait = true })
+		table.insert(usedChars, firstChar)
+	end
 end
 
 -----------------------------------------------------------------------------
@@ -91,10 +136,12 @@ function M.just(recipeIndex)
 
 	if type(recipeIndex) == "number" then
 		run(recipes[recipeIndex])
-		return
+	else
+		selectFromRecipes(recipes)
 	end
 
-	vim.ui.select(recipes, { prompt = " Just Recipes", kind = "plain" }, run)
+	-----------------------------------------------------------------------------
+
 end
 
 --------------------------------------------------------------------------------
