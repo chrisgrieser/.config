@@ -14,8 +14,8 @@ require("funcs.just").just(n)
 
 REQUIREMENTS:
 - nvim 0.10+
-- optional: snacks.nvim (buffered output)
-- optional: dressing.nvim (nicer `vim.ui.select`)
+- optional: snacks.nvim (for buffered output)
+- optional: dressing.nvim (for nicer `vim.ui.select`)
 ]]
 --------------------------------------------------------------------------------
 
@@ -76,7 +76,6 @@ end
 -----------------------------------------------------------------------------
 local M = {}
 
----Simple taskrunner using `just`
 ---@param recipeIndex? number
 function M.just(recipeIndex)
 	vim.cmd("silent! update")
