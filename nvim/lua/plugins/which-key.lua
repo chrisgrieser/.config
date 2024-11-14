@@ -91,9 +91,9 @@ return {
 		},
 		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
-			mappings = false, -- not using auto-added icons, since I set my own
 			group = "",
 			separator = "│",
+			mappings = false, -- disable icons for keymaps
 		},
 		show_help = false,
 	},
