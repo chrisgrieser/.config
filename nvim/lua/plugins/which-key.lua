@@ -38,7 +38,6 @@ return {
 				{ "<leader>e", group = "󰓗 Execute" },
 				{ "<leader>g", group = "󰊢 Git" },
 				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>j", group = " Just" },
 				{ "<leader>o", group = "󰒓 Option Toggle" },
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },

@@ -3,7 +3,6 @@
 if not vim.g.neovide then return end
 
 local g = vim.g
-local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 
 -- FIX neovide ignoring `tabs = false` on consecutive opening of new files
@@ -39,19 +38,6 @@ else
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end
-
---------------------------------------------------------------------------------
-
--- cmd+ / cmd- to change zoom
-local scaleNotify
-local function setNeovideScaleFactor(delta)
-	g.neovide_scale_factor = g.neovide_scale_factor + delta
-	scaleNotify = vim.notify("Scale Factor: " .. g.neovide_scale_factor, vim.log.levels.INFO, {
-		replace = scaleNotify and scaleNotify.id,
-	})
-end
-keymap({ "n", "x", "i" }, "<D-+>", function() setNeovideScaleFactor(0.01) end, { desc = "Zoom +" })
-keymap({ "n", "x", "i" }, "<D-->", function() setNeovideScaleFactor(-0.01) end, { desc = "Zoom -" })
 
 --------------------------------------------------------------------------------
 

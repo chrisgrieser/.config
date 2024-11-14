@@ -147,15 +147,9 @@ end
 -- JUST
 keymap(
 	"n",
-	"<leader>jj",
-	function() require("funcs.just-run").just("first") end,
-	{ desc = " 1st recipe" }
-)
-keymap(
-	"n",
-	"<leader>js",
-	function() require("funcs.just-run").just() end,
-	{ desc = " Select recipe" }
+	"<leader>j",
+	function() require("funcs.justice").run() end,
+	{ desc = " Select just recipe" }
 )
 
 --------------------------------------------------------------------------------
