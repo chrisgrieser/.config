@@ -4,6 +4,7 @@
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
 ${custom.main_branch}$git_branch\
+${custom.venv_on}${custom.venv_off}\
 $git_status$git_metrics$git_commit$git_state\
 $sudo $status\
 ](bg:black)\
@@ -14,9 +15,7 @@ right_format = """\
 $jobs\
 $cmd_duration\
 ${custom.alfred}\
-${custom.venv_on}${custom.venv_off}\
 $python$nodejs\
-$time\
 """
 
 add_newline = false
@@ -71,10 +70,19 @@ style = "fg:yellow bg:black"
 # Indicate if in a subfolder of my local repo folder. Helps differentiating
 # between my local Alfred workflows and their respective repos.
 [custom.location_indicator]
+format = '[ 󱁤 ]($style)'
 when = '[[ $PWD == $HOME/Developer/* ]]'
-style = "fg:cyan bg:black bold"
-command = 'echo "󱁤"'
-format = '[ $output ]($style)'
+style = "fg:cyan bold bg:black"
+
+[custom.venv_on]
+format = '[󱥒 ]($style)'
+when = '[[ -n "$VIRTUAL_ENV" ]]'
+style = "fg:yellow bold bg:black"
+
+[custom.venv_off]
+format = '[󱥓 ]($style)'
+when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
+style = "fg:red bold bg:black"
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT
@@ -136,20 +144,14 @@ symbol_threshold = 1
 number_threshold = 1
 
 [cmd_duration]
-min_time = 2500
+min_time = 3000
 format = "[󰔟 $duration](bold cyan)"
 
-[time]
-disabled = false
-format = " [$time]($style)"
-time_format = "%H:%M"
-style = "fg:247"            # grey
-
 [custom.alfred]
+os = "macos"
 description = "Version number of Alfred Workflow"
 when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
 command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
-os = "macos"
 format = ' [󰮤 $output]($style)'
 style = "bold yellow"
 
@@ -158,16 +160,6 @@ format = ' [${symbol}${pyenv_prefix}($version)]($style)'
 version_format = "$major.$minor"
 symbol = " "
 style = "bold yellow"
-
-[custom.venv_on]
-format = '[ 󱥒]($style)'
-when = '[[ -n "$VIRTUAL_ENV" ]]'
-style = "bold yellow"
-
-[custom.venv_off]
-format = '[ 󱥓]($style)'
-when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
-style = "bold red"
 
 [nodejs]
 style = "bold yellow"
