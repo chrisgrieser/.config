@@ -53,7 +53,27 @@ end, { desc = " Import module" })
 
 --------------------------------------------------------------------------------
 
-bkeymap("n", "", rhs, opts?)
+bkeymap("n", "<leader>rf", function()
+	local node = vim.treesitter.get_node()
+	if not node then return end
+	local strNode
+	if node:type() == "string" then
+		strNode = node
+	elseif node:type():find("string_content") then
+		strNode = node:parent()
+	elseif node:type() == "escape_sequence" then
+		strNode = node:parent():parent()
+	end
+	if not strNode then return end
+
+	local nodeText = vim.treesitter.get_node_text(strNode, 0)
+	local row, startCol, _, endCol = strNode:range()
+	local newText = ("(%s):format()"):format(nodeText)
+	vim.api.nvim_buf_set_text(0, row, startCol, row, endCol, { newText })
+
+	vim.api.nvim_win_set_cursor(0, { row + 1, endCol + 10 })
+	vim.cmd.startinsert()
+end, { desc = " Formatted String" })
 
 --------------------------------------------------------------------------------
 
