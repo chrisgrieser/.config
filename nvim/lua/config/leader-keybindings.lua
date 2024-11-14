@@ -148,7 +148,7 @@ end
 keymap(
 	"n",
 	"<leader>j",
-	function() require("funcs.justice").run() end,
+	function() require("funcs.justice").just() end,
 	{ desc = " Select just recipe" }
 )
 
