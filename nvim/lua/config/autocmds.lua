@@ -30,10 +30,10 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
-		---@diagnostic disable: undefined-field faulty annotation
+		---@diagnostic disable-next-line: undefined-field faulty annotation
 		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+30d", "-delete" }
+		---@diagnostic disable-next-line: undefined-field faulty annotation
 		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+14d", "-delete" }
-		---@diagnostic enable: undefined-field
 		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
 	end,
 })

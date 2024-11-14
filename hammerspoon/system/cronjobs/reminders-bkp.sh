@@ -2,7 +2,7 @@
 
 # CONFIG
 list_name="Tasks"
-max_number_of_bkps=100
+max_number_of_bkps=50
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/Reminders"
 #───────────────────────────────────────────────────────────────────────────────
 

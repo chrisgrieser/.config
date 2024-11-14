@@ -346,13 +346,14 @@ return {
 					local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
 					local inGitRepo = gitDir.code == 0
 					if inGitRepo then
-						local pathInGitRoot = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
-						local gitResult = vim.system({ "git", "diff", "--name-only", "." }):wait().stdout
+						local rootLen = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
+						local gitResult = vim.system({ "git", "status", "--short", "." }):wait().stdout
 						local changes = vim.split(gitResult or "", "\n", { trimempty = true })
-						for _, change in ipairs(changes) do
-							local file = change:sub(pathInGitRoot + 1) -- only relative path
-							table.insert(changedFilesInCwd, file)
-						end
+						vim.iter(changes):each(function(change)
+							local gitChangeTypeLen = 3
+							local relPath = change:sub(rootLen + gitChangeTypeLen + 1) 
+							table.insert(changedFilesInCwd, relPath)
+						end)
 					end
 
 					require("telescope.builtin").find_files {
