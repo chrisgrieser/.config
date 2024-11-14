@@ -9,9 +9,6 @@ require("funcs.just").just()
 -- run the 1st recipe of the Justfile
 require("funcs.just").just(1)
 
--- run the `n`-th recipe of the Justfile
-require("funcs.just").just(n)
-
 REQUIREMENTS:
 - nvim 0.10+
 - optional: snacks.nvim (for buffered output)
@@ -21,6 +18,7 @@ REQUIREMENTS:
 local config = {
 	hideRecipesInSelection = { "release" }, -- since my `release` tasks require user input
 	outputRecipesInQuickfix = { "check-tsc" },
+	hideFirstInSelection = true,
 }
 
 --------------------------------------------------------------------------------
@@ -76,10 +74,11 @@ local function run(recipe)
 	)
 end
 
-local function selectFromRecipes()
-	
-local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, recipes)))
+---@param recipes string[]
+local function selectFromRecipes(recipes)
 	local title = "  Just Recipes "
+	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, recipes)))
+	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title))
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, recipes)
@@ -87,7 +86,7 @@ local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, rec
 		relative = "cursor",
 		row = 0,
 		col = 0,
-		width = math.max(longestRecipe, vim.api.nvim_strwidth(title)),
+		width = winWidth,
 		height = #recipes,
 		title = title,
 		border = "single",
@@ -95,6 +94,7 @@ local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, rec
 	})
 	vim.wo[winnr].sidescrolloff = 0
 	vim.wo[winnr].winfixbuf = true
+	vim.wo[winnr].cursorline = true
 	vim.bo[bufnr].modifiable = false
 
 	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = bufnr, nowait = true })
@@ -106,23 +106,38 @@ local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, rec
 		vim.cmd.close()
 	end, { buffer = bufnr, nowait = true })
 
-	local usedChars = { "q" }
-	for i = 1, #recipes do
-		local firstChar = recipes[i]:sub(1, 1)
-		if vim.tbl_contains(usedChars, firstChar) then return end
-		vim.keymap.set("n", firstChar, function()
-			run(recipes[i])
+	-- first recipe letter = quick-select-key
+	local ns = vim.api.nvim_create_namespace("just-recipes")
+	local usedChars = { "q", "j", "k" }
+	local idx = 0
+	vim.iter(recipes):each(function(recipe)
+		idx = idx + 1
+		local charNum = 1
+		local char
+		repeat
+			char = recipe:sub(charNum, charNum)
+			if char == nil then return end
+			charNum = charNum + 1
+		until not vim.tbl_contains(usedChars, char)
+
+		vim.keymap.set("n", char, function()
+			run(recipe)
 			vim.cmd.close()
 		end, { buffer = bufnr, nowait = true })
-		table.insert(usedChars, firstChar)
-	end
+		vim.api.nvim_buf_set_extmark(bufnr, ns, idx - 1, 0, {
+			sign_text = char,
+			sign_hl_group = "CursorLineNr",
+		})
+
+		table.insert(usedChars, char)
+	end)
 end
 
 -----------------------------------------------------------------------------
 local M = {}
 
----@param recipeIndex? number
-function M.just(recipeIndex)
+---@param first? "first"
+function M.just(first)
 	vim.cmd("silent! update")
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
@@ -134,14 +149,12 @@ function M.just(recipeIndex)
 		:filter(function(r) return not vim.tbl_contains(config.hideRecipesInSelection, r) end)
 		:totable()
 
-	if type(recipeIndex) == "number" then
-		run(recipes[recipeIndex])
+	if first == "first" then
+		run(recipes[1])
 	else
+		if config.hideFirstInSelection and #recipes > 1 then table.remove(recipes, 1) end
 		selectFromRecipes(recipes)
 	end
-
-	-----------------------------------------------------------------------------
-
 end
 
 --------------------------------------------------------------------------------

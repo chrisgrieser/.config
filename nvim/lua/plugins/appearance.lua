@@ -157,7 +157,7 @@ return {
 			select = {
 				trim_prompt = true,
 				builtin = {
-					show_numbers = true,
+					show_numbers = false,
 					border = vim.g.borderStyle,
 					relative = "editor",
 					max_width = 80,

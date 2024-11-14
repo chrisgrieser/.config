@@ -148,7 +148,7 @@ end
 keymap(
 	"n",
 	"<leader>jj",
-	function() require("funcs.just-run").just(1) end,
+	function() require("funcs.just-run").just("first") end,
 	{ desc = " 1st recipe" }
 )
 keymap(
