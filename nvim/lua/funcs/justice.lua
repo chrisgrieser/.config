@@ -1,10 +1,11 @@
---[[ INFO
+--[[ DOCS
 A simple wrapper for the task runner `just`
 https://github.com/casey/just
 
 USAGE
-- `require("funcs.just").just()`
--
+- `require("justice").just()`
+- Navigate the window via `<Tab>` & `<S-Tab>`, select with `<CR>`.
+- Quick-select recipes via keys shown at the left of the window.
 
 REQUIREMENTS:
 - nvim 0.10+
@@ -13,11 +14,11 @@ REQUIREMENTS:
 --------------------------------------------------------------------------------
 
 local config = {
-	hideRecipesInSelection = { "release" }, -- for recipes that requires user input
-	outputRecipesInQuickfix = { "check-tsc" }, -- runs recipe synchronously & unbuffered
-	closeKeys = { "q", "<Esc>" },
+	hideInRecipeSelection = { "release" }, -- for recipes that require user input
+	outputInQuickfix = { "check-tsc" }, -- run recipes synchronously & unbuffered
+	closeWinKeys = { "q", "<Esc>" },
 
-	-- overwrites the quickkey for the 1st recipe
+	-- Overwrites the quick-select key for the 1st recipe.
 	-- (For instance, if your keymap is `<leader>j`, you can set this to "j" for
 	-- quicker access to it via `<leader>jj`.)
 	firstRecipeQuickKey = "j",
@@ -31,7 +32,7 @@ local function run(recipe)
 
 	-- 1) MAKEPRG: sync, unbuffered, & quickfix
 	-- (`makeprg` sends output to the quickfix list)
-	if vim.tbl_contains(config.outputRecipesInQuickfix, recipe) then
+	if vim.tbl_contains(config.outputInQuickfix, recipe) then
 		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
 		vim.opt_local.makeprg = "just"
 		vim.cmd.make(recipe)
@@ -77,7 +78,7 @@ local function run(recipe)
 end
 
 ---@param recipes string[]
-local function selectFromRecipes(recipes)
+local function select(recipes)
 	local ns = vim.api.nvim_create_namespace("just-recipes")
 
 	local title = "  Just Recipes "
@@ -102,7 +103,7 @@ local function selectFromRecipes(recipes)
 	vim.bo[bufnr].modifiable = false
 
 	-- GENERAL KEYMAPS
-	for _, key in pairs(config.closeKeys) do
+	for _, key in pairs(config.closeWinKeys) do
 		vim.keymap.set("n", key, vim.cmd.close, { buffer = bufnr, nowait = true })
 	end
 	vim.keymap.set("n", "<Tab>", function()
@@ -120,7 +121,7 @@ local function selectFromRecipes(recipes)
 	end, { buffer = bufnr, nowait = true })
 
 	-- QUICK-SELECT KEYMAPS
-	local usedChars = vim.deepcopy(config.closeKeys)
+	local usedChars = vim.deepcopy(config.closeWinKeys)
 	local idx = 0
 	vim.iter(recipes):each(function(recipe)
 		idx = idx + 1
@@ -148,7 +149,7 @@ end
 -----------------------------------------------------------------------------
 local M = {}
 
-function M.run()
+function M.just()
 	vim.cmd("silent! update")
 
 	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
@@ -157,10 +158,10 @@ function M.run()
 		return
 	end
 	local recipes = vim.iter(vim.split(vim.trim(result.stdout), " "))
-		:filter(function(r) return not vim.tbl_contains(config.hideRecipesInSelection, r) end)
+		:filter(function(r) return not vim.tbl_contains(config.hideInRecipeSelection, r) end)
 		:totable()
 
-	selectFromRecipes(recipes)
+	select(recipes)
 end
 
 --------------------------------------------------------------------------------
