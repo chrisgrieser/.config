@@ -14,15 +14,16 @@ cd "$local_repo_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
 
-# if multiple repos of same name, add owner 
-# see https://github.com/chrisgrieser/gitfred/issues/5
+# if multiple repos of same name, add owner to directory name of both the
+# existing and the to-be-cloned repo (see https://github.com/chrisgrieser/gitfred/issues/5)
+# (uses `__` as separator, since that string normally does not occur in reponames)
 clone_dir="$reponame"
 if [[ -d "$reponame" ]]; then
 	clone_dir="${owner}__$reponame"
 	# rename existing repo
 	owner_of_existing_repo=$(git -C "$reponame" remote --verbose | tail -n1 | sed -Ee 's|.*:(.*)/.*|\1|')
 	mv "$reponame" "${owner_of_existing_repo}__$reponame"
-elif test -d ./*__"$reponame" ; then
+elif [[ -n $(find . -type directory -name "*__$reponame") ]] ; then
 	clone_dir="${owner}__$reponame"
 fi
 
@@ -43,7 +44,7 @@ if [[ $success -ne 0 ]]; then
 fi
 
 # Open in terminal via Alfred
-echo -n "$local_repo_folder/$reponame"
+echo -n "$local_repo_folder/$clone_dir"
 
 cd "$clone_dir" || return 1
 

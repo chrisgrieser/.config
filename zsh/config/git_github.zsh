@@ -82,7 +82,7 @@ function gc {
 		git commit --message "$@" || return 1
 	fi
 
-	# still dirty
+	# GUARD do not pull/push if still dirty
 	if [[ -n "$(git status --porcelain)" ]]; then
 		print "\e[1;34mPush:\e[0m Not pushing since repo still dirty."
 		echo
@@ -90,13 +90,14 @@ function gc {
 		return 0
 	fi
 
-	# only pull if there is a remote tracking branch
+	# PULL: only if there is a remote tracking branch
 	printf "\e[1;34mPull:\e[0m "
 	if git status --short --branch | grep --fixed-strings --quiet '...'; then
 		git pull --no-rebase --no-progress # `--no-rebase` prevents "Cannot rebase on multiple branches"
 	else
 		print "Not pulling since no remote tracking branch."
 	fi
+	# PUSH
 	printf "\e[1;34mPush:\e[0m " && git push --no-progress
 }
 
