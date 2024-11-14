@@ -30,6 +30,11 @@ APA
 cmp
 UTI
 WIP
+rgb
+xml
+hsl
+css
+vue
 APIs
 CLIs
 LSPs
@@ -48,6 +53,7 @@ util
 Nvim
 PDFs
 webp
+scss
 Fixup
 Lorem
 Numpy
@@ -66,6 +72,7 @@ wordd
 vsnip
 macOS
 Jikan
+neorg
 Cycler
 Laudel
 Neovim
@@ -220,6 +227,8 @@ plaintext
 backlinks
 occurrent
 pdfannots
+backticks
+unescaped
 Cheatsheet
 Cssclasses
 Soziopolis
@@ -249,6 +258,7 @@ docstrings
 lookaheads
 templating
 prepending
+formatters
 Automagical
 Hammerspoon
 autocommand
@@ -284,6 +294,7 @@ customizable
 Strikethrough
 strikethrough
 automagically
+characterwise
 Strikethroughs
 strikethroughs
 operationalize
