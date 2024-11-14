@@ -13,7 +13,7 @@ end, 1)
 
 -- CONFIG
 vim.g.mapleader = ","
-vim.g.borderStyle = "rounded" ---@type "single"|"double"|"rounded"|"solid"
+vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ local function safeRequire(module)
 	end
 end
 
-safeRequire("config.options") -- before lazy, so opts still work on plugin install
+safeRequire("config.options") -- before lazy, so opts still set on plugin install
 
 -- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
 -- e.g. when editing a password with `pass`.
