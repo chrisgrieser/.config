@@ -65,7 +65,7 @@ end, { desc = "󰽙 Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
+keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
 keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
 ---@param use "spaces"|"tabs"
