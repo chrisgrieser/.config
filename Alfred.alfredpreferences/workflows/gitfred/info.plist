@@ -1780,8 +1780,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>DOUBLE-CLICK THIS
-to set a htokey to clone the repo in the frontmost browser tab</string>
+			<string>DOUBLE-CLICK THIS 
+
+to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -2096,7 +2097,7 @@ to set a htokey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.0</string>
+	<string>1.6.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -22,8 +22,12 @@ if [[ -d "$reponame" ]]; then
 	clone_dir="${owner}__$reponame"
 	# rename existing repo
 	owner_of_existing_repo=$(git -C "$reponame" remote --verbose | tail -n1 | sed -Ee 's|.*:(.*)/.*|\1|')
+	if [[ "$owner_of_existing_repo" == "$owner" ]]; then
+		echo "ERROR: $source_repo already exists."
+		return 1
+	fi
 	mv "$reponame" "${owner_of_existing_repo}__$reponame"
-elif [[ -n $(find . -type directory -name "*__$reponame") ]] ; then
+elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]] ; then
 	clone_dir="${owner}__$reponame"
 fi
 
