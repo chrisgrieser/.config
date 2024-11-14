@@ -53,6 +53,10 @@ end, { desc = " Import module" })
 
 --------------------------------------------------------------------------------
 
+bkeymap("n", "", rhs, opts?)
+
+--------------------------------------------------------------------------------
+
 -- auto-comma for tables
 vim.api.nvim_create_autocmd("TextChangedI", {
 	desc = "User (buffer-specific): Set filetype to lua for TelescopeResults",

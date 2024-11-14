@@ -53,6 +53,7 @@ local spellfixes = {
 	shwo = "show",
 	sicne = "since",
 	supress = "suppress",
+	toher = "other",
 	surppress = "suppress",
 	surpress = "suppress",
 	teh = "the",
