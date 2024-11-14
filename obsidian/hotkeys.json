@@ -376,5 +376,14 @@
       ],
       "key": "Tab"
     }
+  ],
+  "obsidian-another-quick-switcher:search-command_alt-search": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
   ]
 }
