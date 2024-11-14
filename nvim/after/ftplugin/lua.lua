@@ -15,7 +15,7 @@ abbr("===", "==")
 -- REQUIRE MODULE FROM CWD
 
 -- lightweight version of telescope-import.nvim import (just for lua)
-bkeymap("n", "<leader>cr", function()
+bkeymap("n", "<leader>ci", function()
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 	local rgArgs = { "rg", "--no-config", "--only-matching", "--no-filename", regex }
 	local rgResult = vim.system(rgArgs):wait()
