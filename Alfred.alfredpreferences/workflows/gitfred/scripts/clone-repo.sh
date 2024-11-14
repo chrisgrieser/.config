@@ -5,6 +5,7 @@
 https_url="$1"
 source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
+owner=$(echo "$source_repo" | cut -d '/' -f1)
 ssh_url="git@github.com:$source_repo"
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
@@ -13,13 +14,26 @@ cd "$local_repo_folder" || return 1
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
 
+# if multiple repos of same name, add owner 
+# see https://github.com/chrisgrieser/gitfred/issues/5
+clone_dir="$reponame"
+if [[ -d "$reponame" ]]; then
+	clone_dir="${owner}__$reponame"
+	# rename existing repo
+	owner_of_existing_repo=$(git -C "$reponame" remote --verbose | tail -n1 | sed -Ee 's|.*:(.*)/.*|\1|')
+	mv "$reponame" "${owner_of_existing_repo}__$reponame"
+elif test -d ./*__"$reponame" ; then
+	clone_dir="${owner}__$reponame"
+fi
+
+# clone with depth
 if [[ $clone_depth == "0" ]]; then
-	msg=$(git clone "$ssh_url" --no-single-branch --no-tags 2>&1)
+	msg=$(git clone "$ssh_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
 	[[ $clone_depth == "1" ]] && clone_depth=2
-	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags 2>&1)
+	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
 fi
 
 success=$?
@@ -31,7 +45,7 @@ fi
 # Open in terminal via Alfred
 echo -n "$local_repo_folder/$reponame"
 
-cd "$reponame" || return 1
+cd "$clone_dir" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
