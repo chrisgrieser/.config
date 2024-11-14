@@ -3,7 +3,8 @@ A simple wrapper for the task runner `just`
 https://github.com/casey/just
 
 USAGE
-require("funcs.just").just()
+- `require("funcs.just").just()`
+-
 
 REQUIREMENTS:
 - nvim 0.10+
@@ -12,9 +13,14 @@ REQUIREMENTS:
 --------------------------------------------------------------------------------
 
 local config = {
-	hideRecipesInSelection = { "release" }, -- since my `release` tasks require user input
-	outputRecipesInQuickfix = { "check-tsc" },
-	firstRecipeLetter = "j",
+	hideRecipesInSelection = { "release" }, -- for recipes that requires user input
+	outputRecipesInQuickfix = { "check-tsc" }, -- runs recipe synchronously & unbuffered
+	closeKeys = { "q", "<Esc>" },
+
+	-- overwrites the quickkey for the 1st recipe
+	-- (For instance, if your keymap is `<leader>j`, you can set this to "j" for
+	-- quicker access to it via `<leader>jj`.)
+	firstRecipeQuickKey = "j",
 }
 
 --------------------------------------------------------------------------------
@@ -95,28 +101,32 @@ local function selectFromRecipes(recipes)
 	vim.wo[winnr].cursorline = true
 	vim.bo[bufnr].modifiable = false
 
-	vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = bufnr, nowait = true })
-	vim.keymap.set("n", "<Tab>", function ()
+	-- GENERAL KEYMAPS
+	for _, key in pairs(config.closeKeys) do
+		vim.keymap.set("n", key, vim.cmd.close, { buffer = bufnr, nowait = true })
+	end
+	vim.keymap.set("n", "<Tab>", function()
 		if vim.api.nvim_win_get_cursor(0)[1] == #recipes then return "gg" end
 		return "j"
-	end, { buffer = bufnr, nowait = true, expr = true, desc = "down" })
-	vim.keymap.set("n", "<S-Tab>", function ()
-		if vim.api.nvim_win_get_cursor(0)[1] == #recipes then return "gg" end
+	end, { buffer = bufnr, nowait = true, expr = true })
+	vim.keymap.set("n", "<S-Tab>", function()
+		if vim.api.nvim_win_get_cursor(0)[1] == 1 then return "G" end
 		return "k"
-	end, { buffer = bufnr, nowait = true, expr = true, desc = "up" })
+	end, { buffer = bufnr, nowait = true, expr = true })
 	vim.keymap.set("n", "<CR>", function()
 		local idx = vim.api.nvim_win_get_cursor(0)[1]
 		run(recipes[idx])
 		vim.cmd.close()
 	end, { buffer = bufnr, nowait = true })
 
-	-- recipe letters = quick-select-key
-	local usedChars = { "q" } -- letter used for closing
+	-- QUICK-SELECT KEYMAPS
+	local usedChars = vim.deepcopy(config.closeKeys)
 	local idx = 0
 	vim.iter(recipes):each(function(recipe)
 		idx = idx + 1
 		local charNum = 0
-		local char = idx == 1 and config.firstRecipeLetter or nil
+		local char
+		if config.firstRecipeQuickKey and idx == 1 then char = config.firstRecipeQuickKey end
 		while char == nil or vim.tbl_contains(usedChars, char) do
 			charNum = charNum + 1
 			char = recipe:sub(charNum, charNum)
@@ -127,9 +137,9 @@ local function selectFromRecipes(recipes)
 		vim.keymap.set("n", char, function()
 			run(recipe)
 			vim.cmd.close()
-		end, { buffer = bufnr, nowait = true, desc = "Run: " .. recipe })
+		end, { buffer = bufnr, nowait = true })
 		vim.api.nvim_buf_set_extmark(bufnr, ns, idx - 1, 0, {
-			sign_text = char,
+			sign_text = char:upper(),
 			sign_hl_group = "CursorLineNr",
 		})
 	end)
