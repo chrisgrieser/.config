@@ -22,13 +22,13 @@ local config = {
 		commentMaxLen = 35, -- truncate recipe comments if longer
 	},
 	keymaps = {
-		closeWin = { "q", "<Esc>" },
-		quickSelect = { "j", "a", "s" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
 		runRecipe = "<CR>",
+		closeWin = { "q", "<Esc>" },
+		quickSelect = { "j", "a", "s" },
 		showRecipe = "<Space>",
-		showVariables = "?", -- shows `just --evaluate` output
+		showVariables = "?", -- shows output of `just --evaluate`
 	},
 	highlights = {
 		quickSelect = "Conditional",
@@ -48,7 +48,7 @@ local config = {
 ---@field name string
 ---@field comment string
 ---@field type "streaming"|"quickfix"|"hidden"|nil
----@field display string
+---@field displayText string
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -143,14 +143,14 @@ local function getRecipes()
 				if #comment > max then comment = comment:sub(1, max) .. "…" end
 			end
 			if not name then name = line:match("^%S+") end
-			local display = vim.trim(name .. "  " .. (comment or ""))
+			local displayText = vim.trim(name .. "  " .. (comment or ""))
 
 			local type
 			if vim.tbl_contains(config.recipes.streaming, name) then type = "streaming" end
 			if vim.tbl_contains(config.recipes.quickfix, name) then type = "quickfix" end
 			if vim.tbl_contains(config.recipes.hidden, name) then type = "hidden" end
 
-			return { name = name, comment = comment, type = type, display = display }
+			return { name = name, comment = comment, type = type, displayText = displayText }
 		end)
 		:totable()
 	return recipes
@@ -173,15 +173,15 @@ local function selectRecipe()
 	-- calculate window size
 	local longestRecipe = math.max(unpack(vim.tbl_map(function(r)
 		local iconWidth = r.type and 2 or 0
-		return #r.display + iconWidth
+		return #r.displayText + iconWidth
 	end, recipes)))
-	local signcolumnWidth = 2
-	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + signcolumnWidth + 1
+	local quickKeyWidth = 2
+	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + quickKeyWidth + 1
 	local winHeight = #recipes
 
 	-- create window
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	local lines = vim.tbl_map(function(r) return r.display end, recipes)
+	local lines = vim.tbl_map(function(r) return r.displayText end, recipes)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local footer = (" %d %s "):format(hiddenCount, config.icons.hidden)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
@@ -254,5 +254,6 @@ local function selectRecipe()
 end
 
 -----------------------------------------------------------------------------
-local M = { just = selectRecipe }
+local M = {}
+M.just = selectRecipe
 return M
