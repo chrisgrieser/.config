@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- `max_line_length` value of `editorconfig`. However, I prefer to keep have
 -- different values for `textwidth` and `max_line_length`, so vim behavior like
 -- `gww` or auto-breaking comment still follows `textwidth`, while using a
--- larger line length setting for formatters. 
+-- larger line length setting for formatters.
 -- Setting those values independently is not possible normally, so we disable
 -- the respective function in the `editorconfig` module instead as a workaround.
 require("editorconfig").properties.max_line_length = nil
@@ -114,7 +114,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.cmdheight = 0 -- also auto-set by noice
+vim.opt.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
