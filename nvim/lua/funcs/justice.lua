@@ -14,16 +14,20 @@ REQUIREMENTS:
 --------------------------------------------------------------------------------
 
 local config = {
-	hideInRecipeSelection = { "release" }, -- for recipes that require user input
-	outputInQuickfix = { "check-tsc" }, -- run recipes synchronously & unbuffered
+	recipes = {
+		hide = { "release" }, -- for recipes that require user input
+		useQuickfix = { "check-tsc" }, -- also run synchronously & unbuffered
+		commentMaxLen = 35,
+	},
 	keymaps = {
 		closeWin = { "q", "<Esc>" },
 		quickSelect = { "j", "a", "s", "d", "f" },
 	},
-	recipeCommentMaxLen = 35,
 }
 
 --------------------------------------------------------------------------------
+
+---@alias Recipe { name: string, comment: string }
 
 ---@param recipe string
 local function run(recipe)
@@ -31,7 +35,7 @@ local function run(recipe)
 
 	-- 1) MAKEPRG: sync, unbuffered, & quickfix
 	-- (`makeprg` sends output to the quickfix list)
-	if vim.tbl_contains(config.outputInQuickfix, recipe) then
+	if vim.tbl_contains(config.recipes.useQuickfix, recipe) then
 		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
 		vim.opt_local.makeprg = "just"
 		vim.cmd.make(recipe)
@@ -82,7 +86,7 @@ local function select(recipes)
 	local title = "  Justfile "
 	local content = vim.tbl_map(function(r)
 		if not r.comment then return r.name end
-		local max = config.recipeCommentMaxLen
+		local max = config.recipes.commentMaxLen
 		if #r.comment > max then r.comment = r.comment:sub(1, max) .. "…" end
 		return r.name .. "  " .. r.comment
 	end, recipes)
@@ -140,45 +144,49 @@ local function select(recipes)
 		i = i + 1
 		if i > #recipes then break end
 		local recipe = recipes[i].name
-		local hlgroup = vim.tbl_contains(config.outputInQuickfix, recipe) and "WarningMsg"
+		local hlgroup = vim.tbl_contains(config.recipes.useQuickfix, recipe) and "WarningMsg"
 			or "CursorLineNr"
 		vim.keymap.set("n", key, function()
 			run(recipe)
 			vim.cmd.close()
 		end, opts)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			sign_text = key,
-			sign_hl_group = hlgroup,
+			virt_text = { { key .. " ", hlgroup } },
+			virt_text_pos = "inline",
 		})
 	end
+end
+
+---@nodiscard
+---@return Recipe[]?
+local function getRecipes()
+	vim.cmd("silent! update") -- in case the user is working on the justfile itself
+
+	local result = vim.system({ "just", "--list", "--unsorted" }):wait()
+	if result.code ~= 0 then
+		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
+		return
+	end
+	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
+	table.remove(stdout, 1) -- remove header
+
+	local recipes = vim.iter(stdout)
+		:map(function(line)
+			local name, comment = line:match("^%s*(%S+)%s*# (.+)$")
+			if not comment then name = line:match("%S+") end
+			return { name = name, comment = comment }
+		end)
+		:filter(function(r) return not vim.tbl_contains(config.recipes.hide, r.name) end)
+		:totable()
+	return recipes
 end
 
 -----------------------------------------------------------------------------
 local M = {}
 
 function M.just()
-	vim.cmd("silent! update") -- in case the user is working on the justfile itself
-
-	local result = vim.system({ "just", "--list", "--unsorted" }):wait()
-	if result.code ~= 0 then
-		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
-		return false
-	end
-	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
-	table.remove(stdout, 1) -- remove header
-	local recipes = vim.iter(stdout)
-		:map(function(line)
-			local name, comment = line:match("^%s*(%S+)%s*# (.+)$")
-			if not comment then
-				name = line:match("%S+")
-				comment = ""
-			end
-			return { name = name, comment = comment }
-		end)
-		:filter(function(r) return not vim.tbl_contains(config.hideInRecipeSelection, r.name) end)
-		:totable()
-
-	select(recipes)
+	local recipes = getRecipes()
+	if recipes then select(recipes) end
 end
 
 --------------------------------------------------------------------------------
