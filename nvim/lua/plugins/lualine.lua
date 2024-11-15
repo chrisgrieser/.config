@@ -111,8 +111,8 @@ local lualineConfig = {
 		always_show_tabs = true,
 		-- stylua: ignore
 		ignore_focus = {
-			"DressingInput", "DressingSelect", "lspinfo", "ccc-ui", "TelescopePrompt",
-			"checkhealth", "noice", "mason", "qf", "lazy",
+			"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt", 
+			"checkhealth", "mason", "qf", "lazy",
 		},
 	},
 	tabline = {
@@ -130,8 +130,7 @@ local lualineConfig = {
 			{ codeContext },
 		},
 		lualine_c = {
-			-- HACK spacer so the tabline is never empty
-			-- (in which case vim would add its ugly tabline)
+			-- HACK so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
 		lualine_z = {

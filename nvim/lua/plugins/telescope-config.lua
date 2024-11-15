@@ -1,23 +1,94 @@
-local keymaps = require("funcs.telescope-keymaps")
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
 
-local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-if vim.g.borderStyle == "double" then
-	borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-end
-if vim.g.borderStyle == "rounded" then
-	borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-end
+local borderChars = vim.g.borderStyle == "rounded"
+		and { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+	or { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
 
 local specialDirs = {
 	"%.git/",
 	"%.DS_Store$", -- macOS Finder
 	"%.app/", -- macOS apps
+	"%.spoon", -- Hammerspoon spoons
 	"%.venv", -- python
 	"__pycache__",
-	"%.spoon", -- Hammerspoon spoons
 }
+--------------------------------------------------------------------------------
+
+local insertModeActions = {
+	["?"] = "which_key",
+	["<Tab>"] = "move_selection_worse",
+	["<S-Tab>"] = "move_selection_better",
+	["<CR>"] = "select_default",
+	["<Esc>"] = "close",
+
+	["<PageDown>"] = "preview_scrolling_down",
+	["<PageUp>"] = "preview_scrolling_up",
+	["<Up>"] = "cycle_history_prev",
+	["<Down>"] = "cycle_history_next",
+	["<D-s>"] = "smart_send_to_qflist",
+
+	["<D-c>"] = function(prompt_bufnr) -- copy value
+		local value = require("telescope.actions.state").get_selected_entry().value
+		require("telescope.actions").close(prompt_bufnr)
+		vim.fn.setreg("+", value)
+		vim.notify(value, vim.log.levels.INFO, { title = "Copied" })
+	end,
+	-- mapping consistent with fzf-multi-select
+	["<M-CR>"] = function(prompt_bufnr) -- multi-select
+		require("telescope.actions").toggle_selection(prompt_bufnr)
+		require("telescope.actions").move_selection_worse(prompt_bufnr)
+	end,
+}
+
+local function toggleHiddenAction(prompt_bufnr)
+	local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+	local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+
+	local prevTitle = current_picker.prompt_title
+	local currentQuery = require("telescope.actions.state").get_current_line()
+	local title = "Find Files: " .. vim.fs.basename(cwd)
+	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
+	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
+
+	-- hidden status not stored, but title is, so we determine the previous state via title
+	local includeIgnoreHidden = not prevTitle:find("hidden")
+	if includeIgnoreHidden then
+		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
+		-- cannot simply toggle `hidden` since we are using `rg` as custom find command
+		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
+		title = title .. " (--hidden --no-ignore)"
+	end
+
+	-- ignore the existing current path due to using `rg --sortr=modified`
+	local relPathCurrent = table.remove(current_picker.file_ignore_patterns)
+	table.insert(ignore, relPathCurrent)
+
+	require("telescope.actions").close(prompt_bufnr)
+	require("telescope.builtin").find_files {
+		default_text = currentQuery,
+		prompt_title = title,
+		find_command = findCommand,
+		cwd = cwd,
+		file_ignore_patterns = ignore,
+		path_display = { "filename_first" }, -- cannot easily actual path_display
+	}
+end
+
+local function copyColorValue(prompt_bufnr)
+	local hlName = require("telescope.actions.state").get_selected_entry().value
+	require("telescope.actions").close(prompt_bufnr)
+	local value = vim.api.nvim_get_hl(0, { name = hlName })
+	local out = {}
+	if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
+	if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
+	if value.link then table.insert(out, "link: " .. value.link) end
+	if #out > 0 then
+		local toCopy = table.concat(out, "\n")
+		vim.fn.setreg("+", toCopy)
+		vim.notify(toCopy, vim.log.levels.INFO, { title = "Copied" })
+	end
+end
 
 --------------------------------------------------------------------------------
 
@@ -43,7 +114,7 @@ local function telescopeConfig()
 			dynamic_preview_title = true,
 			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
 			borderchars = borderChars,
-			default_mappings = { i = keymaps.insertMode, n = keymaps.normalMode },
+			default_mappings = { i = insertModeActions, n = insertModeActions },
 			layout_strategy = "horizontal",
 			sorting_strategy = "ascending", -- so layout is consistent with `prompt_position = "top"`
 			layout_config = {
@@ -98,7 +169,9 @@ local function telescopeConfig()
 
 				prompt_prefix = "󰝰 ",
 				follow = true,
-				mappings = { i = keymaps.fileActions },
+				mappings = {
+					i = { ["<C-h>"] = toggleHiddenAction },
+				},
 				path_display = { "filename_first" },
 				layout_config = { horizontal = { width = 0.6, height = 0.6 } }, -- use small layout, toggle via <D-p>
 				previewer = false,
@@ -134,7 +207,6 @@ local function telescopeConfig()
 			},
 			git_status = {
 				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
 				show_untracked = true,
 				file_ignore_patterns = {}, -- do not ignore images etc here
 				mappings = {
@@ -157,7 +229,6 @@ local function telescopeConfig()
 			},
 			git_commits = {
 				prompt_prefix = "󰊢 ",
-				initial_mode = "normal",
 				prompt_title = "Git Log",
 				layout_config = { horizontal = { preview_width = 0.5 } },
 				git_command = { "git", "log", "--all", "--format=%h %s %cr", "--", "." },
@@ -203,7 +274,9 @@ local function telescopeConfig()
 			highlights = {
 				prompt_prefix = " ",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
-				mappings = { i = keymaps.highlightsActions },
+				mappings = {
+					i = { ["<CR>"] = copyColorValue },
+				},
 			},
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
@@ -220,21 +293,18 @@ local function telescopeConfig()
 				show_line = false,
 				include_declaration = false,
 				include_current_line = true,
-				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_definitions = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
 				show_line = false,
-				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_type_definitions = {
 				prompt_prefix = "󰜁 ",
 				trim_text = true,
 				show_line = false,
-				initial_mode = "normal",
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
 			lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
@@ -250,7 +320,6 @@ local function telescopeConfig()
 				},
 			},
 			spell_suggest = {
-				initial_mode = "normal",
 				prompt_prefix = "󰓆",
 				previewer = false,
 				theme = "cursor",
@@ -319,12 +388,28 @@ return {
 				end,
 				desc = "󰋼 Workspace Diagnostics",
 			},
-			{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{
+				"gw",
+				function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end,
+				desc = "󰒕 Workspace Symbols",
+			},
 			{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
-			{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
+			{
+				"gD",
+				function() vim.cmd.Telescope("lsp_type_definitions") end,
+				desc = "󰜁 Type Definitions",
+			},
 			{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
-			{ "gI", function() vim.cmd.Telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
-			{ "<leader>ph", function() vim.cmd.Telescope("highlights") end, desc = " Search Highlights" },
+			{
+				"gI",
+				function() vim.cmd.Telescope("lsp_implementations") end,
+				desc = "󰈿 Implementations",
+			},
+			{
+				"<leader>ph",
+				function() vim.cmd.Telescope("highlights") end,
+				desc = " Search Highlights",
+			},
 			{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 			{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 			{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
