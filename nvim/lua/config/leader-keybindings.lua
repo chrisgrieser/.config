@@ -144,6 +144,14 @@ for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
 end
 
+-- JUST
+keymap(
+	"n",
+	"<leader>j",
+	function() require("funcs.justice").just() end,
+	{ desc = " Select just recipe" }
+)
+
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
