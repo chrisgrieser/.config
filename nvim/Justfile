@@ -6,7 +6,7 @@ debugConfig := "./debug/test.lua"
 #───────────────────────────────────────────────────────────────────────────────
 
 count-lines:
-    find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse
+    find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse | cut -c5-
 
 # runs minimal config with neovide
 debug-instance:

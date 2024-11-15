@@ -8,4 +8,8 @@ reload:
 
 # total length of config in LoC
 count-lines:
-    find . -name "*.lua" -not -path "*/Spoons/*" -print0 | xargs -0 wc -l | sort --reverse
+    #!/usr/bin/env zsh
+    find . -name "*.lua" -not -path "*/Spoons/*" -print0 | 
+        xargs -0 wc -l | 
+        sort --reverse | 
+        cut -c5-
