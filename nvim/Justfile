@@ -12,3 +12,6 @@ count-lines:
 debug-instance:
     # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
     neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 300ms|bdelete|edit'
+
+test:
+    echo "hi"
