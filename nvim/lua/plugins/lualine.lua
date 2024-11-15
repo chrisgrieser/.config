@@ -70,11 +70,6 @@ local function codeContext(maxLen)
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
 
-	-- FIX hanging on special characters PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/7367
-	local col = vim.api.nvim_win_get_cursor(0)[2] + 1
-	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
-	if charUnderCursor:find("%p") then return "" end
-
 	local text = treesitter.statusline {
 		indicator_size = math.huge, -- shortening ourselves later
 		separator = "  ", -- 
@@ -110,7 +105,7 @@ local lualineConfig = {
 		always_show_tabs = true,
 		-- stylua: ignore
 		ignore_focus = {
-			"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt", 
+			"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt",
 			"checkhealth", "mason", "qf", "lazy",
 		},
 	},
