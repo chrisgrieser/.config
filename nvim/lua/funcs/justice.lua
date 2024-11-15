@@ -16,9 +16,9 @@ REQUIREMENTS
 
 local config = {
 	recipes = {
+		quickfix = { "check-tsc" }, -- runs synchronously and sends output to quickfix list
+		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars (requires `snacks.nvim`)
 		hidden = { "release", "run-fzf" }, -- for recipes that require user input
-		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars (equires `snacks.nvim`)
-		quickfix = { "check-tsc" }, -- runs sync and sends output to quickfix
 		commentMaxLen = 35, -- truncate recipe comments if longer
 	},
 	keymaps = {
@@ -172,7 +172,7 @@ local function selectRecipe()
 
 	-- calculate window size
 	local longestRecipe = math.max(unpack(vim.tbl_map(function(r)
-		local iconWidth = r.type and 2 or 0
+		local iconWidth = r.type and #config.icons[r.type] + 2 or 0
 		return #r.displayText + iconWidth
 	end, recipes)))
 	local quickKeyWidth = 2
@@ -247,7 +247,10 @@ local function selectRecipe()
 			vim.cmd.close()
 		end, opts)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			virt_text = { { key .. " ", config.highlights.quickSelect } },
+			virt_text = {
+				{ key, config.highlights.quickSelect },
+				{ " " },
+			},
 			virt_text_pos = "inline",
 		})
 	end

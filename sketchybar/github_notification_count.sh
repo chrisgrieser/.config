@@ -28,7 +28,7 @@ if [[ "$SENDER" = "front_app_switched" ]]; then
 fi
 
 # when triggered due to opening in browser, wait so notification opened is marked as read
-[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 4
+[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 6
 
 #───────────────────────────────────────────────────────────────────────────────
 
