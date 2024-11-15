@@ -4,13 +4,10 @@ return {
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
 	init = function()
-		-- use bash parser for zsh files
-		vim.treesitter.language.register("bash", "zsh")
-
 		-- FIX for `comments` parser https://github.com/stsewd/tree-sitter-comment/issues/22
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			desc = "User: FIX hlgroup for `comments` parser",
-			callback = function() vim.api.nvim_set_hl(0, "@lsp.type.comment", {}) end,
+			callback = function() vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {}) end,
 		})
 	end,
 	opts = {

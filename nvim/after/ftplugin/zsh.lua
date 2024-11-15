@@ -1,3 +1,8 @@
+-- use bash parser for zsh files
+vim.treesitter.language.register("bash", "zsh")
+
+--------------------------------------------------------------------------
+
 -- ABBREVIATIONS
 local abbr = require("config.utils").bufAbbrev
 abbr("//", "#")

@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Highlight filepaths and error codes in noice/snacks notifications.",
-	pattern = { "noice", "snacks_notif" },
+	pattern = { "noice", "snacks_notif", "snacks_notif_history" },
 	callback = function(ctx)
 		vim.defer_fn(function()
 			vim.api.nvim_buf_call(ctx.buf, function()
@@ -32,10 +32,11 @@ return {
 		},
 		-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 		notifier = {
+			enabled = true,
 			timeout = 6000,
 			width = { min = 20, max = 0.45 },
 			height = { min = 1, max = 0.4 },
-			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
 		},
 		styles = {
@@ -48,6 +49,8 @@ return {
 				width = 0.8,
 				height = 0.8,
 				keys = { q = "close", ["<Esc>"] = "close", ["<D-0>"] = "close" },
+				wo = { wrap = true, winblend = 0 },
+				title = " Notification History ", -- FIX missing padding
 			},
 		},
 	},
