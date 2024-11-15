@@ -95,7 +95,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: FIX `sidescrolloff` for Telescope",
 	pattern = "TelescopePrompt",
-	callback = function() vim.opt_local.sidescrolloff = 1 end,
+	command = "setlocal sidescrolloff=1",
 })
 
 require("funcs.telescope-backdrop")
@@ -369,9 +369,16 @@ return {
 				end,
 				desc = "󰒕 Symbols",
 			},
-			-- using treesitter symbols instead, since the LSP symbols are crowded
-			-- with anonymous functions
-			{ "gs", function() vim.cmd.Telescope("treesitter") end, ft = "lua", desc = " Symbols" },
+			{
+				"gs",
+				function()
+					-- using treesitter symbols instead, since the LSP symbols are crowded
+					-- with anonymous functions
+					vim.cmd.Telescope("treesitter")
+				end,
+				ft = "lua",
+				desc = " Symbols",
+			},
 			{
 				"g!",
 				function()

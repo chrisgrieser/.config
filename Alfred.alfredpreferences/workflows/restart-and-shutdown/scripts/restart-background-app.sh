@@ -1,29 +1,30 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
+app="$1"
+#───────────────────────────────────────────────────────────────────────────────
 
-app="$*"
-
-# shellcheck disable=2154
-if [[ "$app" == "Hammerspoon" && "$action" == "reload" ]]; then
+# RELOAD
+if [[ "$app" == "hammerspoon_reload" ]]; then
 	open -g "hammerspoon://hs-reload"
 	echo -n "🔁 Reloading Hammerspoon" # Alfred notification
-	return 3
+	return
+elif [[ "$app" == "sketchybar" ]]; then
+	sketchybar --reload
+	echo -n "🔁 Reloading $app" # Alfred notification
+	return
 fi
 
-case "$app" in
-"sketchybar")
-	sketchybar --reload
-	echo -n "🔁 Reloading sketchybar" # Alfred notification
-	return 0
-	;;
-"AltTab" | "Hammerspoon" | "Mona")
+# RESTART
+if [[ "$app" == "espanso" ]]; then
+	espanso restart || open -a "Espanso"
+elif [[ "$app" == "Neovide" ]]; then
+	killall "Neovide"
+	killall -9 "nvim"
+	while pgrep -xq "nvim"; do sleep 0.1; done
+	open -a "Neovide"
+else
 	killall "$app"
 	while pgrep -xq "$app"; do sleep 0.1; done
 	open -a "$app"
-	echo -n "❗ Restarted $app" # Alfred notification
-	;;
-"espanso")
-	espanso restart || open -a "Espanso"
-	echo -n "❗ Restarted $app" # Alfred notification
-	;;
-esac
+fi
+echo -n "❗ Restarted $app" # Alfred notification
