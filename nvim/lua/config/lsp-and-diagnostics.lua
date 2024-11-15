@@ -8,7 +8,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local changes = result.changes or result.documentChanges or {}
 	local changedFiles = vim.iter(vim.tbl_keys(changes))
 		:filter(function(file) return #changes[file] > 0 end)
-		:map(function(file) return "• " .. vim.fs.basename(file) end)
+		:map(function(file) return "- " .. vim.fs.basename(file) end)
 		:totable()
 	local changeCount = 0
 	for _, change in pairs(changes) do
@@ -19,7 +19,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("%d instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = msg .. (" in %d files:\n"):format(#changedFiles) .. table.concat(changedFiles, "\n")
+		msg = ("**%s in %d files:**\n"):format(msg, #changedFiles) .. table.concat(changedFiles, "\n")
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP" })
 

@@ -80,21 +80,11 @@ return {
 			{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev Reference" },
 			-- stylua: ignore end
 		},
-		opts = {
-			bigfile = { enabled = false },
-			quickfile = { enabled = false },
-			statuscolumn = { enabled = false },
+		opts = { -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 			words = {
 				notify_jump = true,
 				modes = { "n" },
 				debounce = 300,
-			},
-			-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
-			styles = {
-				notification = {
-					wo = { wrap = true, winblend = 0 },
-					border = vim.g.borderStyle,
-				},
 			},
 			notifier = {
 				timeout = 6000,
@@ -102,6 +92,12 @@ return {
 				height = { min = 1, max = 0.4 },
 				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 				top_down = false,
+			},
+			styles = {
+				notification = {
+					wo = { wrap = true, winblend = 0 },
+					border = vim.g.borderStyle,
+				},
 			},
 		},
 	},

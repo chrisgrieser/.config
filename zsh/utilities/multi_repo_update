@@ -10,10 +10,10 @@ repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	cp -fv "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
+	cp -fv "$HOME/Desktop/Justfile" ./Justfile
 }
 
-commit_msg="build: update build script"
+commit_msg="build: update Justfile"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -54,6 +54,7 @@ echo && echo
 
 #───────────────────────────────────────────────────────────────────────────────
 
+echo "────────────────────────"
 cd /tmp || return 1
 
 # clone each repo, do the replacements, and git add/commit/push
