@@ -20,7 +20,6 @@
 ## All installed plugins
 - [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
-- [andymass/vim-matchup](https://github.com/andymass/vim-matchup)
 - [Bilal2453/luvit-meta](https://github.com/Bilal2453/luvit-meta)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
 - [chrisgrieser/nvim-genghis](https://github.com/chrisgrieser/nvim-genghis)
@@ -35,6 +34,7 @@
 - [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
 - [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim)
 - [folke/noice.nvim](https://github.com/folke/noice.nvim)
+- [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 - [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
@@ -56,7 +56,6 @@
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)
-- [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
