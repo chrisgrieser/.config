@@ -41,7 +41,7 @@ return {
 				{ "<leader>o", group = "󰒓 Option Toggle" },
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },
-				{ "<leader>r", group = "󱗘 Refactor" },
+				{ "<leader>f", group = "󱗘 Refactor" },
 				{ "<leader>u", group = "󰕌 Undo" },
 				{ "<leader>y", group = "󰅍 Yanking" },
 			},

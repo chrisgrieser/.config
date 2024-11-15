@@ -4,14 +4,10 @@ debugFile := "./debug/test.lua"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# prints total length of config
 count-lines:
     find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse
 
-# runs minimal config for debugging purposes with neovide
+# runs minimal config with neovide
 debug-instance:
     # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
     neovide --no-tabs {{ debugFile }} -- -u ./debug/repro.lua -c'sleep 300ms|bdelete|edit'
-
-test:
-    echo "hi"

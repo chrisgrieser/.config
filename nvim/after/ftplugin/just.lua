@@ -11,5 +11,5 @@ vim.bo.commentstring = "# %s"
 
 vim.keymap.set("n", "<leader>ll", function()
 	local out = vim.system({ "just", "--evaluate" }):wait()
-	vim.notify(out.stdout, vim.log.levels.INFO, { title = " just --evaluate" })
+	vim.notify(out.stdout, nil, { title = " just --evaluate" })
 end, { desc = " just --evaluate", buffer = true })

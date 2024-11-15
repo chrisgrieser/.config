@@ -195,8 +195,8 @@ exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 noremap gl :liveGrep<CR>
 
 " same mappings as search-and-replace or variable renaming in nvim
-nnoremap ,v :%s///g
-nnoremap ,rs :%s///g
+nnoremap ,ff :%s///g
+nnoremap ,fs :%s///g
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING
