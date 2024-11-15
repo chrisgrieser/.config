@@ -32,6 +32,29 @@
     ],
     "prefix": "check if on macOS"
   },
+  "create new window": {
+    "body": [
+      "local content = {}",
+      "",
+      "local bufnr = vim.api.nvim_create_buf(false, true)",
+      "vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)",
+      "local winnr = vim.api.nvim_open_win(bufnr, true, {",
+      "\trelative = \"editor\",",
+      "\trow = 0,",
+      "\tcol = 0,",
+      "\twidth = 20,",
+      "\theight = 5,",
+      "\ttitle = \"title\",",
+      "\tborder = \"single\",",
+      "\tstyle = \"minimal\",",
+      "})",
+      "vim.wo[winnr].winfixbuf = true",
+      "vim.bo[bufnr].modifiable = false",
+      "",
+      "vim.keymap.set(\"n\", \"q\", vim.cmd.close, { buffer = bufnr, nowait = true })"
+    ],
+    "prefix": "create new window"
+  },
   "dedent": {
     "body": [
       "---@param lines string[]",
