@@ -63,7 +63,6 @@ return {
 					height = 0.75,
 					width = 0.75,
 					title = vim.trim(title) ~= "" and title or nil,
-					footer = last.added,
 				}
 			end,
 		},
