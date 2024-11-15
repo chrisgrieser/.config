@@ -115,29 +115,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/restart-front-app.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>5956591A-FB95-4AD5-BE0A-008DB41E2F0B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -169,6 +146,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/restart-front-app.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5956591A-FB95-4AD5-BE0A-008DB41E2F0B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -184,6 +184,27 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>A5B116EC-8220-4ABE-8376-976F243A9EF3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>shutdown</string>
+				<key>subtext</key>
+				<string>sync all perma-repos before</string>
+				<key>text</key>
+				<string>Shutdown</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C8BAA286-8178-4777-B3D8-B9958B57D2DD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -209,27 +230,6 @@
 			<string>6594A058-1046-48E9-82E3-FE0574D679D5</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>shutdown</string>
-				<key>subtext</key>
-				<string>sync all perma-repos before</string>
-				<key>text</key>
-				<string>Shutdown</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>C8BAA286-8178-4777-B3D8-B9958B57D2DD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -281,27 +281,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>E5141743-4533-4E28-A3EC-2E2A98659185</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -309,7 +288,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoons","arg":"Hammerspoon","subtitle":"Restart"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoons","arg":"reload_hammerspoon","subtitle":"reload"},{"imagefile":"2175ddd0fc2b82fa4755127d9856c2eabeeb3dd0.png","title":"Mona","arg":"Mona"},{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab"},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso"}]</string>
+				<string>[{"imagefile":"2175ddd0fc2b82fa4755127d9856c2eabeeb3dd0.png","title":"Mona","arg":"Mona","subtitle":"❗️restart"},{"imagefile":"51f5cfbde3c354791b5ab96575dbdfd0c0480876.png","title":"Neovide &amp; Neovim","arg":"Neovide","subtitle":"❗️restart"},{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":"❗️restart"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":"❗️restart"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"reload_hammerspoon","subtitle":"🔁 reload"},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":"❗️restart"}]</string>
 				<key>keyword</key>
 				<string>restart</string>
 				<key>matchmode</key>
@@ -352,6 +331,27 @@
 			<string>29D763E3-99DA-42EC-A264-3AA565CDC0F6</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E5141743-4533-4E28-A3EC-2E2A98659185</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
