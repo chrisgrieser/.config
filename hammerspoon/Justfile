@@ -1,15 +1,13 @@
 set quiet := true
 
-# reload Hammerspoon config
 [macos]
 reload:
     open -g "hammerspoon://hs-reload"
     echo " Hammerspoon reloaded"
 
-# total length of config in LoC
 count-lines:
     #!/usr/bin/env zsh
-    find . -name "*.lua" -not -path "*/Spoons/*" -print0 | 
-        xargs -0 wc -l | 
-        sort --reverse | 
+    find . -name "*.lua" -not -path "*/Spoons/*" -print0 |
+        xargs -0 wc -l |
+        sort --reverse |
         cut -c5-

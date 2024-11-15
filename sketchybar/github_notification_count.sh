@@ -3,13 +3,13 @@ export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
 #───────────────────────────────────────────────────────────────────────────────
 
 # GUARD not when on projector
-if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]] ; then 
+if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 	sketchybar --set "$NAME" drawing=false
 	return 0
 fi
 
 # GUARD dependencies or API key missing
-if ! command -v yq &>/dev/null; then
+if ! command -v yq &> /dev/null; then
 	sketchybar --set "$NAME" label="yq not found" drawing=true
 	return 1
 elif [[ -z "$GITHUB_TOKEN" ]]; then
@@ -22,13 +22,15 @@ fi
 if [[ "$SENDER" = "front_app_switched" ]]; then
 	mkdir -p "$HOME/.cache/sketchybar"
 	data="$HOME/.cache/sketchybar/front_app2"
-	[[ -f "$data" ]] && deactivated_app=$(<"$data")
-	echo -n "$INFO" >"$data"
-	[[ "$INFO" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
-fi
+	[[ -f "$data" ]] && deactivated_app=$(< "$data")
+	activated_app="$INFO"
+	echo -n "$activated_app" > "$data"
 
-# when triggered due to opening in browser, wait so notification opened is marked as read
-[[ "$SENDER" == "front_app_switched" && "$INFO" == "Brave Browser" ]] && sleep 6
+	[[ "$activated_app" == "Brave Browser" || "$deactivated_app" == "Brave Browser" ]] || return 0
+
+	# when triggered due to opening in browser, wait so notification opened is marked as read
+	[[ "$activated_app" == "Brave Browser" ]] && sleep 6
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -45,4 +47,3 @@ if [[ $notification_count -eq 0 ]]; then
 else
 	sketchybar --set "$NAME" drawing=true label="$notification_count"
 fi
-
