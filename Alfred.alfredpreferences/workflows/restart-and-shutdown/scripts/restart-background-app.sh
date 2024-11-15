@@ -16,7 +16,7 @@ case "$app" in
 	echo -n "🔁 Reloading sketchybar" # Alfred notification
 	return 0
 	;;
-"AltTab" | "Hammerspoon")
+"AltTab" | "Hammerspoon" | "Mona")
 	killall "$app"
 	while pgrep -xq "$app"; do sleep 0.1; done
 	open -a "$app"

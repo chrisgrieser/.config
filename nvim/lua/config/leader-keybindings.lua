@@ -65,8 +65,8 @@ end, { desc = "󰽙 Buffer Info" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
-keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " delete matching lines" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
+keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -76,10 +76,10 @@ local function retabber(use)
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using " .. use)
 end
-keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
-keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
+keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use Tabs" })
+keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use Spaces" })
 
-keymap("n", "<leader>rq", function()
+keymap("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
