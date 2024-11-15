@@ -54,7 +54,7 @@ local function run(recipe)
 			return function(_, data)
 				if not data then return end
 				buffer = buffer .. data:gsub("\n$", "")
-				if vim.trim(buffer) == "" then return end
+				-- if buffer == "" then return end
 				local opts = { title = "Just: " .. recipe, id = "just-recipe" }
 				vim.notify(buffer, vim.log.levels[severity], opts)
 			end
