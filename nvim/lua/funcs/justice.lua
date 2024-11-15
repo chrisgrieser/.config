@@ -6,13 +6,18 @@ USAGE
 - `require("justice").just()`
 - Navigate the window via `<Tab>` & `<S-Tab>`, select with `<CR>`.
 - Quick-select recipes via keys shown at the left of the window.
+
+REQUIREMENTS
+- nvim 0.10+
+- optional: snacks.nvim (for streaming output)
+- optional: `just` Treesitter parser (`:TSInstall just`)
 ]]
 --------------------------------------------------------------------------------
 
 local config = {
 	recipes = {
-		hide = { "release", "run-fzf" }, -- for recipes that require user input
-		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars. Requires `snacks.nvim`.
+		hidden = { "release", "run-fzf" }, -- for recipes that require user input
+		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars (equires `snacks.nvim`)
 		quickfix = { "check-tsc" }, -- runs sync and sends output to quickfix
 		commentMaxLen = 35, -- recipe comments are truncated if longer
 	},
@@ -29,6 +34,11 @@ local config = {
 		quickSelect = "Conditional",
 		icons = "Function",
 	},
+	icons = {
+		just = "",
+		streaming = "ﲋ",
+		quickfix = "",
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -36,8 +46,8 @@ local config = {
 ---@class Recipe
 ---@field name string
 ---@field comment string
----@field quickfix boolean
----@field streaming boolean
+---@field type "streaming"|"quickfix"|"hidden"|nil
+---@field display string
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -45,7 +55,8 @@ local config = {
 local function notify(msg, level, opts)
 	if not level then level = "info" end
 	if not opts then opts = {} end
-	opts.id = "just-recipe" -- replaces via `snacks.nvim`
+	opts.id = "just-recipe" -- `snacks.nvim` replaces notifications of same id
+	opts.icon = config.icons.just
 	opts.title = opts.title and "Just: " .. opts.title or "Just"
 	vim.notify(vim.trim(msg), vim.log.levels[level:upper()], opts)
 end
@@ -54,8 +65,10 @@ end
 
 ---@param recipe Recipe
 local function runRecipe(recipe)
+	vim.cmd("silent! update")
+
 	-- 1) QUICKFIX
-	if recipe.quickfix then
+	if recipe.type == "quickfix" then
 		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
 		vim.opt_local.makeprg = "just"
 		vim.cmd.make(recipe.name)
@@ -66,10 +79,10 @@ local function runRecipe(recipe)
 		return
 	end
 
-	notify("Running…", nil, op{ title = recipe.name }-- FIX also fixes snacks.nvim loop-backback error
+	notify("Running…", nil, { title = recipe.name }) -- FIX also fixes snacks.nvim loop-backback error
 
 	-- 2) STREAMING
-	if package.loaded["snacks"] and recipe.streaming then
+	if package.loaded["snacks"] and recipe.type == "streaming" then
 		local function bufferedOut(_, data)
 			if not data then return end
 			-- severity not determined by stderr, since many CLIs send non-errors via stderr
@@ -107,30 +120,69 @@ local function showRecipe(recipe)
 	})
 end
 
----@param recipes Recipe[]
-local function select(recipes)
-	local ns = vim.api.nvim_create_namespace("just-recipes")
+---@nodiscard
+---@return Recipe[]?
+local function getRecipes()
+	-- in case user has edited the Justfile
+	if vim.bo.filetype ~= "just" then vim.cmd("silent! update") end
 
-	local title = "  Justfile "
-	local content = vim.tbl_map(function(r)
-		if not r.comment then return r.name end
-		local max = config.recipes.commentMaxLen
-		if #r.comment > max then r.comment = r.comment:sub(1, max) .. "…" end
-		return r.name .. "  " .. r.comment
-	end, recipes)
+	local cmd = { "just", "--list", "--unsorted", "--list-heading=", "--list-prefix=" }
+	local result = vim.system(cmd):wait()
+	if result.code ~= 0 then
+		notify(result.stderr, "error")
+		return
+	end
+	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
+
+	local recipes = vim.iter(stdout)
+		:map(function(line)
+			local name, comment = line:match("(%S+)%s*# (.+)")
+			if comment then
+				local max = config.recipes.commentMaxLen
+				if #comment > max then comment = comment:sub(1, max) .. "…" end
+			else
+				name = line:match("%S+")
+			end
+			local display = vim.trim(name .. "  " .. (comment or ""))
+
+			local type
+			if vim.tbl_contains(config.recipes.streaming, name) then type = "streaming" end
+			if vim.tbl_contains(config.recipes.quickfix, name) then type = "quickfix" end
+			if vim.tbl_contains(config.recipes.hidden, name) then type = "hidden" end
+
+			return { name = name, comment = comment, type = type, display = display }
+		end)
+		:totable()
+	return recipes
+end
+
+local function selectRecipe()
+	local ns = vim.api.nvim_create_namespace("just-recipes")
+	local title = (" %s Justfile "):format(config.icons.just)
+
+	-- get recipes
+	local allRecipes = getRecipes()
+	if not allRecipes then return end
+	local recipes = vim.tbl_filter(function(r) return r.type ~= "hidden" end, allRecipes)
+	if #recipes == 0 then
+		notify("No recipes found", "warn")
+		return
+	end
+	local hiddenCount = #allRecipes - #recipes
 
 	-- calculate window size
 	local longestRecipe = math.max(unpack(vim.tbl_map(function(r)
-		local iconWidth = (r.streaming or r.quickfix) and 2 or 0
-		return #r + iconWidth
-	end, content)))
+		local iconWidth = r.type and 2 or 0
+		return #r.display + iconWidth
+	end, recipes)))
 	local signcolumnWidth = 2
 	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + signcolumnWidth + 1
 	local winHeight = #recipes
 
 	-- create window
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
+	local lines = vim.tbl_map(function(r) return r.display end, recipes)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
 		relative = "editor",
 		row = (vim.o.lines - winHeight) / 2,
@@ -139,6 +191,8 @@ local function select(recipes)
 		height = winHeight,
 		title = title,
 		title_pos = "center",
+		footer = (" %d hidden "):format(hiddenCount),
+		footer_pos = "right",
 		border = vim.g.borderStyle or "single",
 		style = "minimal",
 	})
@@ -153,8 +207,8 @@ local function select(recipes)
 		if recipes[i].comment then
 			vim.api.nvim_buf_add_highlight(bufnr, ns, "Comment", i - 1, #recipes[i].name, -1)
 		end
-		if recipes[i].streaming or recipes[i].quickfix then
-			local icon = recipes[i].streaming and "ﲋ" or ""
+		if recipes[i].type then
+			local icon = config.icons[recipes[i].type]
 			vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, #recipes[i].name, {
 				virt_text = { { " " .. icon .. " ", config.highlights.icons } },
 				virt_text_pos = "inline",
@@ -180,7 +234,7 @@ local function select(recipes)
 	end, opts)
 	vim.keymap.set("n", config.keymaps.showVariables, function()
 		local out = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
-		notify(out, nil, { title = "Variables" })
+		notify(out, nil, { title = "Variables", ft = "just" })
 	end, opts)
 
 	-- quick-select keymaps
@@ -198,42 +252,10 @@ local function select(recipes)
 	end
 end
 
----@nodiscard
----@return Recipe[]?
-local function getRecipes()
-	vim.cmd("silent! update") -- in case the user is working on the justfile itself
-
-	local cmd = { "just", "--list", "--unsorted", "--list-heading=", "--list-prefix=" }
-	local result = vim.system(cmd):wait()
-	if result.code ~= 0 then
-		notify(result.stderr, "error")
-		return
-	end
-	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
-
-	local recipes = vim.iter(stdout)
-		:map(function(line)
-			local name, comment = line:match("(%S+)%s*# (.+)")
-			if not comment then name = line:match("%S+") end
-			return {
-				name = name,
-				comment = comment,
-				streaming = vim.tbl_contains(config.recipes.streaming, name),
-				quickfix = vim.tbl_contains(config.recipes.quickfix, name),
-			}
-		end)
-		:filter(function(r) return not vim.tbl_contains(config.recipes.hide, r.name) end)
-		:totable()
-	return recipes
-end
-
 -----------------------------------------------------------------------------
 local M = {}
 
-function M.just()
-	local recipes = getRecipes()
-	if recipes then select(recipes) end
-end
+function M.just() selectRecipe() end
 
 --------------------------------------------------------------------------------
 return M

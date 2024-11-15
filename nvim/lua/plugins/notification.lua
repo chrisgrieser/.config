@@ -1,18 +1,3 @@
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Highlight filepaths and error codes in noice/snacks notifications.",
-	pattern = { "noice", "snacks_notif", "snacks_win" },
-	callback = function(ctx)
-		vim.defer_fn(function()
-			vim.api.nvim_buf_call(ctx.buf, function()
-				vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-				vim.fn.matchadd("WarningMsg", [[E\d\+]])
-			end)
-		end, 1)
-	end,
-})
-
---------------------------------------------------------------------------------
-
 return {
 	"folke/snacks.nvim",
 	event = "VeryLazy",
@@ -27,6 +12,8 @@ return {
 			"<D-0>",
 			function()
 				local lines = {}
+				local history = require("snacks").notifier.get_history()
+				if #history == 0 then return end
 				vim
 					.iter(require("snacks").notifier.get_history())
 					:rev() -- last notification on top
