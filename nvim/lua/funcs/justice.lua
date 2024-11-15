@@ -18,19 +18,18 @@ local config = {
 	},
 	keymaps = {
 		closeWin = { "q", "<Esc>" },
-		quickSelect = { "j", "a", "s", "d", "f" },
+		quickSelect = { "j", "a", "s", "d", "f", "k" },
 	},
-	quickKeyHighlights = {
-		default = "Keyword",
-		quickfix = "DiagnosticWarning",
-		streaming = "DiagnosticHint",
+	highlights = {
+		quickSelect = "Conditional",
+		icons = "Function",
 	},
 }
 
 --------------------------------------------------------------------------------
 
 local ns = vim.api.nvim_create_namespace("just-recipes")
----@alias Recipe { name: string, comment: string }
+---@alias Recipe { name: string, comment: string, quickfix: boolean, streaming: boolean }
 
 ---@param recipe string
 local function run(recipe)
@@ -80,7 +79,7 @@ local function run(recipe)
 	)
 end
 
----@param recipes { name: string, comment: string }[]
+---@param recipes Recipe[]
 local function select(recipes)
 	local title = "  Justfile "
 	local content = vim.tbl_map(function(r)
@@ -91,7 +90,10 @@ local function select(recipes)
 	end, recipes)
 
 	-- calculate window size
-	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, content)))
+	local longestRecipe = math.max(unpack(vim.tbl_map(function(r)
+		local iconWidth = (r.streaming or r.quickfix) and 2 or 0
+		return #r + iconWidth
+	end, content)))
 	local signcolumnWidth = 2
 	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + signcolumnWidth + 1
 	local winHeight = #recipes
@@ -116,11 +118,17 @@ local function select(recipes)
 	vim.wo[winnr].colorcolumn = ""
 	vim.bo[bufnr].modifiable = false
 
-	-- highlight comments
-	for ln = 1, #recipes do
-		if recipes[ln].comment then
-			local colStart = #recipes[ln].name + 2
-			vim.api.nvim_buf_add_highlight(bufnr, ns, "Comment", ln - 1, colStart, -1)
+	-- highlight comments and add icons
+	for i = 1, #recipes do
+		if recipes[i].comment then
+			vim.api.nvim_buf_add_highlight(bufnr, ns, "Comment", i - 1, #recipes[i].name, -1)
+		end
+		if recipes[i].streaming or recipes[i].quickfix then
+			local icon = recipes[i].streaming and "ﲋ" or ""
+			vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, #recipes[i].name, {
+				virt_text = { { " " .. icon .. " ", config.highlights.icons } },
+				virt_text_pos = "inline",
+			})
 		end
 	end
 
@@ -144,16 +152,12 @@ local function select(recipes)
 		if i > #recipes then break end
 		local recipe = recipes[i].name
 
-		local highlight = "default"
-		if vim.tbl_contains(config.recipes.quickfix, recipe) then highlight = "quickfix" end
-		if vim.tbl_contains(config.recipes.streaming, recipe) then highlight = "streaming" end
-
 		vim.keymap.set("n", key, function()
 			run(recipe)
 			vim.cmd.close()
 		end, opts)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			virt_text = { { key .. " ", config.quickKeyHighlights[highlight] } },
+			virt_text = { { key .. " ", config.highlights.quickSelect } },
 			virt_text_pos = "inline",
 		})
 	end
@@ -164,19 +168,24 @@ end
 local function getRecipes()
 	vim.cmd("silent! update") -- in case the user is working on the justfile itself
 
-	local result = vim.system({ "just", "--list", "--unsorted" }):wait()
+	local cmd = { "just", "--list", "--unsorted", "--list-heading=", "--list-prefix=" }
+	local result = vim.system(cmd):wait()
 	if result.code ~= 0 then
 		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
 		return
 	end
 	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
-	table.remove(stdout, 1) -- remove header
 
 	local recipes = vim.iter(stdout)
 		:map(function(line)
-			local name, comment = line:match("^%s*(%S+)%s*# (.+)$")
+			local name, comment = line:match("(%S+)%s*# (.+)")
 			if not comment then name = line:match("%S+") end
-			return { name = name, comment = comment }
+			return {
+				name = name,
+				comment = comment,
+				streaming = vim.tbl_contains(config.recipes.streaming, name),
+				quickfix = vim.tbl_contains(config.recipes.quickfix, name),
+			}
 		end)
 		:filter(function(r) return not vim.tbl_contains(config.recipes.hide, r.name) end)
 		:totable()

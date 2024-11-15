@@ -158,7 +158,7 @@ style = "bold yellow"
 [python]
 format = ' [${symbol}${pyenv_prefix}($version)]($style)'
 version_format = "$major.$minor"
-symbol = " "
+symbol = " "
 style = "bold yellow"
 
 [nodejs]
