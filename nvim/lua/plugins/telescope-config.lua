@@ -1,5 +1,4 @@
 local keymaps = require("funcs.telescope-keymaps")
-local telescope = vim.cmd.Telescope
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
 
@@ -209,6 +208,12 @@ local function telescopeConfig()
 			lsp_document_symbols = {
 				prompt_prefix = "󰒕 ",
 			},
+			treesitter = {
+				prompt_prefix = " ",
+				symbols = { "function", "method" },
+				show_line = false,
+				symbol_highlights = { ["function"] = "Function", method = "Method" },
+			},
 			lsp_references = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
@@ -276,8 +281,8 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = telescopeConfig,
 		keys = {
-			{ "?", function() telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
-			{ "g.", function() telescope("resume") end, desc = "󰭎 Continue" },
+			{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
+			{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Continue" },
 			{
 				"gs",
 				function()
@@ -295,6 +300,9 @@ return {
 				end,
 				desc = "󰒕 Symbols",
 			},
+			-- using treesitter symbols instead, since the LSP symbols are crowded
+			-- with anonymous functions
+			{ "gs", function() vim.cmd.Telescope("treesitter") end, ft = "lua", desc = " Symbols" },
 			{
 				"g!",
 				function()
@@ -311,20 +319,16 @@ return {
 				end,
 				desc = "󰋼 Workspace Diagnostics",
 			},
-			{
-				"gw",
-				function() telescope("lsp_dynamic_workspace_symbols") end,
-				desc = "󰒕 Workspace Symbols",
-			},
-			{ "gd", function() telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
-			{ "gD", function() telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
-			{ "gf", function() telescope("lsp_references") end, desc = "󰈿 References" },
-			{ "gI", function() telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
-			{ "<leader>ph", function() telescope("highlights") end, desc = " Search Highlights" },
-			{ "<leader>gs", function() telescope("git_status") end, desc = "󰭎 Status" },
-			{ "<leader>gl", function() telescope("git_commits") end, desc = "󰭎 Log" },
-			{ "<leader>gb", function() telescope("git_branches") end, desc = "󰭎 Branches" },
-			{ "zl", function() telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
+			{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
+			{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
+			{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
+			{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
+			{ "gI", function() vim.cmd.Telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
+			{ "<leader>ph", function() vim.cmd.Telescope("highlights") end, desc = " Search Highlights" },
+			{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
+			{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
+			{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
+			{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
 			{
 				"<leader>pc",
 				-- noautocmds -> no backdrop, so the colorscheme is previewable
@@ -351,7 +355,7 @@ return {
 						local changes = vim.split(gitResult or "", "\n", { trimempty = true })
 						vim.iter(changes):each(function(change)
 							local gitChangeTypeLen = 3
-							local relPath = change:sub(rootLen + gitChangeTypeLen + 1) 
+							local relPath = change:sub(rootLen + gitChangeTypeLen + 1)
 							table.insert(changedFilesInCwd, relPath)
 						end)
 					end
@@ -383,7 +387,7 @@ return {
 						:map(function(buf) return buf.name end)
 						:totable()
 					vim.list_extend(vim.v.oldfiles, openBufs)
-					telescope("oldfiles")
+					vim.cmd.Telescope("oldfiles")
 				end,
 				desc = "󰭎 Recent Files",
 			},
