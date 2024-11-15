@@ -27,6 +27,7 @@ local config = {
 
 --------------------------------------------------------------------------------
 
+local ns = vim.api.nvim_create_namespace("just-recipes")
 ---@alias Recipe { name: string, comment: string }
 
 ---@param recipe string
@@ -54,7 +55,6 @@ local function run(recipe)
 			return function(_, data)
 				if not data then return end
 				buffer = buffer .. data:gsub("\n$", "")
-				-- if buffer == "" then return end
 				local opts = { title = "Just: " .. recipe, id = "just-recipe" }
 				vim.notify(buffer, vim.log.levels[severity], opts)
 			end
@@ -83,7 +83,6 @@ end
 
 ---@param recipes { name: string, comment: string }[]
 local function select(recipes)
-	local ns = vim.api.nvim_create_namespace("just-recipes")
 	local title = "  Justfile "
 	local content = vim.tbl_map(function(r)
 		if not r.comment then return r.name end
