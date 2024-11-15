@@ -2,9 +2,13 @@
 A simple wrapper for the task runner `just`
 https://github.com/casey/just
 
+USAGE
+- `require("justice").just()`
+- Navigate the window via `<Tab>` & `<S-Tab>`, select with `<CR>`.
+- Quick-select recipes via keys shown at the left of the window.
+
 REQUIREMENTS:
 - nvim 0.10+
-- which-key.nvim
 - optional: snacks.nvim (for buffered output)
 ]]
 --------------------------------------------------------------------------------
@@ -12,8 +16,12 @@ REQUIREMENTS:
 local config = {
 	hideInRecipeSelection = { "release" }, -- for recipes that require user input
 	outputInQuickfix = { "check-tsc" }, -- run recipes synchronously & unbuffered
-	quickKeys = "jasdf", -- for quick selection via which-key
-	leaderKey = "<leader>j",
+	closeWinKeys = { "q", "<Esc>" },
+
+	-- Overwrites the quick-select key for the 1st recipe.
+	-- (For instance, if your keymap is `<leader>j`, you can set this to "j" for
+	-- quicker access to it via `<leader>jj`.)
+	firstRecipeQuickKey = "j",
 }
 
 --------------------------------------------------------------------------------
@@ -69,39 +77,98 @@ local function run(recipe)
 	)
 end
 
----@return string[]|false
-local function getRecipes()
+---@param recipes { name: string, comment: string }[]
+local function select(recipes)
+	local ns = vim.api.nvim_create_namespace("just-recipes")
+
+	local title = "  Just Recipes "
+	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r.name end, recipes)))
+	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title))
+
+	local bufnr = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, recipes)
+	local winnr = vim.api.nvim_open_win(bufnr, true, {
+		relative = "cursor",
+		row = 0,
+		col = 0,
+		width = winWidth,
+		height = #recipes,
+		title = title,
+		border = "single",
+		style = "minimal",
+	})
+	vim.wo[winnr].sidescrolloff = 0
+	vim.wo[winnr].winfixbuf = true
+	vim.wo[winnr].cursorline = true
+	vim.bo[bufnr].modifiable = false
+
+	-- GENERAL KEYMAPS
+	for _, key in pairs(config.closeWinKeys) do
+		vim.keymap.set("n", key, vim.cmd.close, { buffer = bufnr, nowait = true })
+	end
+	vim.keymap.set("n", "<Tab>", function()
+		if vim.api.nvim_win_get_cursor(0)[1] == #recipes then return "gg" end
+		return "j"
+	end, { buffer = bufnr, nowait = true, expr = true })
+	vim.keymap.set("n", "<S-Tab>", function()
+		if vim.api.nvim_win_get_cursor(0)[1] == 1 then return "G" end
+		return "k"
+	end, { buffer = bufnr, nowait = true, expr = true })
+	vim.keymap.set("n", "<CR>", function()
+		local i = vim.api.nvim_win_get_cursor(0)[1]
+		run(recipes[i].name)
+		vim.cmd.close()
+	end, { buffer = bufnr, nowait = true })
+
+	-- QUICK-SELECT KEYMAPS
+	local usedChars = vim.deepcopy(config.closeWinKeys)
+	local i = 0
+	vim.iter(recipes):each(function(recipe)
+		i = i + 1
+		local charNum = 0
+		local char
+		if config.firstRecipeQuickKey and i == 1 then char = config.firstRecipeQuickKey end
+		while char == nil or vim.tbl_contains(usedChars, char) do
+			charNum = charNum + 1
+			char = recipe:sub(charNum, charNum)
+			if char == "" then return end -- skip if no letter available
+		end
+		table.insert(usedChars, char)
+
+		vim.keymap.set("n", char, function()
+			run(recipes[i].name)
+			vim.cmd.close()
+		end, { buffer = bufnr, nowait = true })
+		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
+			sign_text = char,
+			sign_hl_group = "CursorLineNr",
+		})
+	end)
+end
+
+-----------------------------------------------------------------------------
+local M = {}
+
+function M.just()
 	vim.cmd("silent! update")
 
-	local result = vim.system({ "just", "--summary", "--unsorted" }):wait()
+	local result = vim.system({ "just", "--list", "--unsorted" }):wait()
 	if result.code ~= 0 then
 		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
 		return false
 	end
-	local recipes = vim.iter(vim.split(vim.trim(result.stdout), " "))
-		:filter(function(r) return not vim.tbl_contains(config.hideInRecipeSelection, r) end)
+	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
+	table.remove(stdout, 1) -- remove header
+	local recipes = vim.iter(stdout)
+		:map(function(line)
+			local name, comment = line:match("^%s*(%S+)%s*# (.+)$")
+			return { name = name, comment = comment }
+		end)
+		:filter(function(r) return not vim.tbl_contains(config.hideInRecipeSelection, r.name) end)
 		:totable()
 
-	return recipes
+	select(recipes)
 end
 
 --------------------------------------------------------------------------------
-
----@return wk.Spec
-local function getWhichkeySpec()
-	local spec = vim.iter(getRecipes() or {})
-		:map(function(recipe)
-			return recipe
-		end)
-		:totable()
-	return spec
-end
-
-local ok, whichkey = pcall(require, "which-key")
-if not ok then
-	vim.notify("which-key.nvim not found", vim.log.levels.ERROR, { title = "Just" })
-	return
-end
-whichkey.add {
-	{ config.leaderKey, group = " Just", mode = { "n", "x" }, expand = getWhichkeySpec },
-}
+return M
