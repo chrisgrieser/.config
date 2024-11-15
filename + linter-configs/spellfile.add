@@ -4,6 +4,9 @@ fn
 md
 px
 yq
+et
+al
+iA
 JXA
 LSP
 Lua
@@ -35,6 +38,7 @@ xml
 hsl
 css
 vue
+DOI
 APIs
 CLIs
 LSPs
@@ -54,6 +58,7 @@ Nvim
 PDFs
 webp
 scss
+#ord
 Fixup
 Lorem
 Numpy
@@ -291,6 +296,7 @@ ClientConfig
 minification
 subdirectory
 customizable
+BetterBibTeX
 Strikethrough
 strikethrough
 automagically
@@ -298,8 +304,8 @@ characterwise
 Strikethroughs
 strikethroughs
 operationalize
+Customizations
 JavaScriptReact
 TypeScriptReact
 Customizability
 filetype-specific
-#ord
