@@ -6,22 +6,24 @@ USAGE
 - `require("justice").just()`
 - Navigate the window via `<Tab>` & `<S-Tab>`, select with `<CR>`.
 - Quick-select recipes via keys shown at the left of the window.
-
-REQUIREMENTS:
-- nvim 0.10+
-- optional: snacks.nvim (for buffered output)
 ]]
 --------------------------------------------------------------------------------
 
 local config = {
 	recipes = {
-		hide = { "release" }, -- for recipes that require user input
-		useQuickfix = { "check-tsc" }, -- also run synchronously & unbuffered
+		hide = { "release", "run-fzf" }, -- for recipes that require user input
+		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars. Requires `snacks.nvim`.
+		quickfix = { "check-tsc" }, -- runs sync and sends output to quickfix
 		commentMaxLen = 35,
 	},
 	keymaps = {
 		closeWin = { "q", "<Esc>" },
 		quickSelect = { "j", "a", "s", "d", "f" },
+	},
+	quickKeyHighlights = {
+		default = "Keyword",
+		quickfix = "DiagnosticWarning",
+		streaming = "DiagnosticHint",
 	},
 }
 
@@ -34,9 +36,8 @@ local ns = vim.api.nvim_create_namespace("just-recipes")
 local function run(recipe)
 	if not recipe then return end
 
-	-- 1) MAKEPRG: sync, unbuffered, & quickfix
-	-- (`makeprg` sends output to the quickfix list)
-	if vim.tbl_contains(config.recipes.useQuickfix, recipe) then
+	-- 1) QUICKFIX
+	if vim.tbl_contains(config.recipes.quickfix, recipe) then
 		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
 		vim.opt_local.makeprg = "just"
 		vim.cmd.make(recipe)
@@ -47,41 +48,33 @@ local function run(recipe)
 		return
 	end
 
-	-- 2) SYSTEM CALL: async & buffered
-	-- (being buffered is relevant for things like progress bars)
-	if package.loaded["snacks"] then -- REQUIRED `snacks.nvim`, to replace prev notice via `id`
-		local opts = { title = "Just: " .. recipe, id = "just-recipe" }
-		vim.notify("Running…", nil, opts) -- FIX also fixes loop-backback error
-		local buffer = ""
+	local opts = { title = "Just: " .. recipe, id = "just-recipe" }
+	vim.notify("Running…", nil, opts) -- FIX also fixes loop-backback error
+
+	-- 2) STREAMING
+	if package.loaded["snacks"] and vim.tbl_contains(config.recipes.streaming, recipe) then
 		local function bufferedOut(_, data)
 			if not data then return end
-			-- severity is not determined by being stderr, since many CLIs send
-			-- non-errors via stderr. Rather, we set it based on the exit-code in
-			-- the `on_exit` callback
+			-- severity not determined by stderr, since many CLIs send non-errors via stderr
 			local severity = data:find("error") and "ERROR" or "INFO"
-			buffer = buffer .. data:gsub("\n\n$", "\n"):gsub("^\n", "")
-			vim.notify(buffer, vim.log.levels[severity], opts)
+			vim.notify(vim.trim(data), vim.log.levels[severity], opts)
 		end
 		vim.system(
 			{ "just", recipe },
 			{ stdout = bufferedOut, stderr = bufferedOut },
-			vim.schedule_wrap(function(out)
-				if out.code ~= 0 then vim.notify(vim.trim(buffer), vim.log.levels.ERROR, opts) end
-				vim.cmd.checktime()
-			end)
+			vim.schedule_wrap(function() vim.cmd.checktime() end)
 		)
 		return
 	end
 
-	-- 3) SYSTEM CALL: async & unbuffered
-	-- (this is mostly just the fallback)
+	-- 3) DEFAULT
 	vim.system(
 		{ "just", recipe },
 		{},
 		vim.schedule_wrap(function(out)
 			local text = vim.trim((out.stdout or "") .. (out.stderr or ""))
 			local severity = out.code == 0 and "INFO" or "ERROR"
-			vim.notify(text, vim.log.levels[severity], { title = "Just: " .. recipe })
+			vim.notify(text, vim.log.levels[severity], opts)
 			vim.cmd.checktime()
 		end)
 	)
@@ -150,14 +143,17 @@ local function select(recipes)
 		i = i + 1
 		if i > #recipes then break end
 		local recipe = recipes[i].name
-		local hlgroup = vim.tbl_contains(config.recipes.useQuickfix, recipe) and "WarningMsg"
-			or "CursorLineNr"
+
+		local highlight = "default"
+		if vim.tbl_contains(config.recipes.quickfix, recipe) then highlight = "quickfix" end
+		if vim.tbl_contains(config.recipes.streaming, recipe) then highlight = "streaming" end
+
 		vim.keymap.set("n", key, function()
 			run(recipe)
 			vim.cmd.close()
 		end, opts)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			virt_text = { { key .. " ", hlgroup } },
+			virt_text = { { key .. " ", config.quickKeyHighlights[highlight] } },
 			virt_text_pos = "inline",
 		})
 	end
