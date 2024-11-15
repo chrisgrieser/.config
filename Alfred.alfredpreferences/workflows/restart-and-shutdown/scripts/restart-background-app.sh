@@ -20,7 +20,7 @@ if [[ "$app" == "espanso" ]]; then
 elif [[ "$app" == "Neovide" ]]; then
 	killall "Neovide"
 	killall -9 "nvim"
-	while pgrep -xq "nvim"; do sleep 0.1; done
+	while pgrep -xq "nvim" || pgrep -xq "Neovide"; do sleep 0.1; done
 	open -a "Neovide"
 else
 	killall "$app"

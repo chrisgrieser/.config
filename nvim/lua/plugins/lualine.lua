@@ -1,13 +1,12 @@
 -- lightweight replacement for fidget.nvim
 
--- CONFIG
-local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
-
 local progressText = ""
 local function lspProgress() return progressText end
 vim.api.nvim_create_autocmd("LspProgress", {
 	desc = "User: LSP progress",
 	callback = function(ctx)
+		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" } -- CONFIG
+
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
 		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
 		if progress and progress.kind == "end" then
@@ -71,7 +70,7 @@ local function codeContext(maxLen)
 	local ok, treesitter = pcall(require, "nvim-treesitter")
 	if not ok then return "" end
 
-	-- FIX hanging on special characters
+	-- FIX hanging on special characters PENDING https://github.com/nvim-treesitter/nvim-treesitter/issues/7367
 	local col = vim.api.nvim_win_get_cursor(0)[2] + 1
 	local charUnderCursor = vim.api.nvim_get_current_line():sub(col, col)
 	if charUnderCursor:find("%p") then return "" end
