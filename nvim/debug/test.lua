@@ -1,1 +1,1 @@
-vim.notify("")
+vim.notify("foobar", nil, { title = "", icon = "" })

@@ -93,26 +93,24 @@ keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 local pluginTypeIcons = {
-	["editing-support"] = "󰏫 ",
-	["files-and-buffers"] = "󰞇 ",
-	["appearance"] = " ",
-	["refactoring"] = "󱗘 ",
-	["lsp-plugins"] = "󰒕 ",
-	["lsp-config"] = "󰒕 ",
-	["ai-plugins"] = "󰚩 ",
-	["git-plugins"] = "󰊢 ",
-	["debugger-dap"] = "󰃤 ",
-	["treesitter"] = " ",
-	["formatter-conform"] = "󰉿 ",
-	["scissors"] = "󰩫 ",
-	["blink-cmp"] = "󰩫 ",
-	["lazy.nvim"] = "󰒲 ",
-	["themes"] = " ",
-	["noice-and-notification"] = "󰎟 ",
-	["folding"] = "󰘖 ",
-	["mason"] = " ",
-	["motions-and-textobjects"] = "󱡔 ",
-	["telescope-config"] = "󰭎 ",
+	["editing-support"] = "󰏫",
+	["files-and-buffers"] = "󰞇",
+	["appearance"] = "",
+	["refactoring"] = "󱗘",
+	["lsp-plugins"] = "󰒕",
+	["lsp-config"] = "󰒕",
+	["ai-plugins"] = "󰚩",
+	["git-plugins"] = "󰊢",
+	["treesitter"] = "",
+	["scissors"] = "󰩫",
+	["blink-cmp"] = "󰩫",
+	["lazy.nvim"] = "󰒲",
+	["themes"] = "",
+	["notification"] = "󰎟",
+	["folding"] = "󰘖",
+	["mason"] = "",
+	["motions-and-textobjects"] = "󱡔",
+	["telescope-config"] = "󰭎",
 	["lualine"] = " ",
 }
 
@@ -146,8 +144,8 @@ keymap("n", "g,", function()
 	vim.ui.select(allPlugins, {
 		prompt = "󰒲 Goto Config",
 		format_item = function(plugin)
-			local icon = pluginTypeIcons[plugin.module] or "󰒓 "
-			return icon .. vim.fs.basename(plugin.repo)
+			local icon = pluginTypeIcons[plugin.module] or "󰒓"
+			return icon .. " " .. vim.fs.basename(plugin.repo)
 		end,
 	}, function(plugin)
 		if not plugin then return end

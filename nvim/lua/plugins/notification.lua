@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Highlight filepaths and error codes in noice/snacks notifications.",
-	pattern = { "noice", "snacks_notif" },
+	pattern = { "noice", "snacks_notif", "snacks_win" },
 	callback = function(ctx)
 		vim.defer_fn(function()
 			vim.api.nvim_buf_call(ctx.buf, function()
@@ -15,7 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 return {
 	"folke/snacks.nvim",
-	enabled = false,
 	event = "VeryLazy",
 	keys = {
 		-- stylua: ignore start
@@ -24,14 +23,19 @@ return {
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
 		-- stylua: ignore end
 		{
+			desc = "󰎟 Notification history",
 			"<D-0>",
 			function()
 				local lines = {}
-				for _, notif in pairs(require("snacks").notifier.get_history()) do
-					local msg = vim.split(notif.msg, "\n")
-					msg[1] = "[" .. notif.title .. "] " .. msg[1]
-					vim.list_extend(lines, msg)
-				end
+				vim
+					.iter(require("snacks").notifier.get_history())
+					:rev() -- last notification on top
+					:each(function(notif)
+						local msg = vim.split(notif.msg, "\n")
+						local icon = notif.level ~= "info" and notif.icon .. " " or ""
+						msg[1] = "[" .. icon .. notif.title .. "] " .. msg[1]
+						vim.list_extend(lines, msg)
+					end)
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 				require("snacks").win {
@@ -41,28 +45,27 @@ return {
 					height = 0.5,
 				}
 			end,
-			desc = "󰎟 Notification history",
 		},
 		{
+			desc = "󰎟 Last notification",
 			"<D-9>",
 			function()
 				local history = require("snacks").notifier.get_history()
 				local last = history[#history]
-				local lines = vim.split(last.msg, "\n")
-				table.insert(lines, 1, "[" .. last.title .. "]")
+				if not last then return end
 				local bufnr = vim.api.nvim_create_buf(false, true)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
+				local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
 				require("snacks").win {
 					position = "float",
 					ft = "markdown",
 					buf = bufnr,
 					height = 0.75,
 					width = 0.75,
-					title = " 󰎟 Last notification ",
-					title_pos = "center",
+					title = vim.trim(title) ~= "" and title or nil,
+					footer = last.added,
 				}
 			end,
-			desc = "󰎟 Last notification",
 		},
 	},
 	opts = {
