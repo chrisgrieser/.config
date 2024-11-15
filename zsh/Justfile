@@ -4,4 +4,5 @@ count-lines:
     #!/usr/bin/env zsh
     find . -type file \( -name "*.zsh" -or -name ".zsh*" \) -print0 |
         xargs -0 wc -l |
-        sort --reverse
+        sort --reverse |
+        cut -c5-
