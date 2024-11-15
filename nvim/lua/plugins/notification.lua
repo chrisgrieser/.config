@@ -16,10 +16,9 @@ vim.api.nvim_create_autocmd("FileType", {
 return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
+		enabled = false,
 		event = "VeryLazy",
-		dependencies = "MunifTanjim/nui.nvim",
 		opts = {
-			notify = { merge = true },
 			lsp = {
 				progress = { enabled = false }, -- using my own statusline component instead
 				signature = { enabled = false }, -- using `lsp_signature.nvim` instead

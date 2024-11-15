@@ -50,19 +50,25 @@ local function run(recipe)
 	-- 2) SYSTEM CALL: async & buffered
 	-- (being buffered is relevant for things like progress bars)
 	if package.loaded["snacks"] then -- REQUIRED `snacks.nvim`, to replace prev notice via `id`
+		local opts = { title = "Just: " .. recipe, id = "just-recipe" }
+		vim.notify("Running…", nil, opts) -- FIX also fixes loop-backback error
 		local buffer = ""
-		local function bufferedOut(severity)
-			return function(_, data)
-				if not data then return end
-				buffer = buffer .. data:gsub("\n$", "")
-				local opts = { title = "Just: " .. recipe, id = "just-recipe" }
-				vim.notify(buffer, vim.log.levels[severity], opts)
-			end
+		local function bufferedOut(_, data)
+			if not data then return end
+			-- severity is not determined by being stderr, since many CLIs send
+			-- non-errors via stderr. Rather, we set it based on the exit-code in
+			-- the `on_exit` callback
+			local severity = data:find("error") and "ERROR" or "INFO"
+			buffer = buffer .. data:gsub("\n\n$", "\n"):gsub("^\n", "")
+			vim.notify(buffer, vim.log.levels[severity], opts)
 		end
 		vim.system(
 			{ "just", recipe },
-			{ stdout = bufferedOut("INFO"), stderr = bufferedOut("ERROR") },
-			vim.schedule_wrap(function() vim.cmd.checktime() end)
+			{ stdout = bufferedOut, stderr = bufferedOut },
+			vim.schedule_wrap(function(out)
+				if out.code ~= 0 then vim.notify(vim.trim(buffer), vim.log.levels.ERROR, opts) end
+				vim.cmd.checktime()
+			end)
 		)
 		return
 	end
