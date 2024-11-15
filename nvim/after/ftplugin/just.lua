@@ -10,6 +10,6 @@ vim.bo.commentstring = "# %s"
 --------------------------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>ll", function()
-	local out = vim.system({ "just", "--evaluate" }):wait()
-	vim.notify(out.stdout, nil, { title = " just --evaluate" })
+	local out = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
+	vim.notify(vim.trim(out), nil, { title = " just --evaluate" })
 end, { desc = " just --evaluate", buffer = true })
