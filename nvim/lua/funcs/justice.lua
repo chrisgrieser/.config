@@ -14,11 +14,16 @@ local config = {
 		hide = { "release", "run-fzf" }, -- for recipes that require user input
 		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars. Requires `snacks.nvim`.
 		quickfix = { "check-tsc" }, -- runs sync and sends output to quickfix
-		commentMaxLen = 35,
+		commentMaxLen = 35, -- recipe comments are truncated if longer
 	},
 	keymaps = {
 		closeWin = { "q", "<Esc>" },
-		quickSelect = { "j", "a", "s", "d", "f", "k" },
+		quickSelect = { "j", "a", "s" },
+		next = "<Tab>",
+		prev = "<S-Tab>",
+		runRecipe = "<CR>",
+		showRecipe = "<Space>",
+		showVariables = "?", -- shows `just --evaluate` output
 	},
 	highlights = {
 		quickSelect = "Conditional",
@@ -28,18 +33,32 @@ local config = {
 
 --------------------------------------------------------------------------------
 
-local ns = vim.api.nvim_create_namespace("just-recipes")
----@alias Recipe { name: string, comment: string, quickfix: boolean, streaming: boolean }
+---@class Recipe
+---@field name string
+---@field comment string
+---@field quickfix boolean
+---@field streaming boolean
 
----@param recipe string
-local function run(recipe)
-	if not recipe then return end
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+---@param opts? table
+local function notify(msg, level, opts)
+	if not level then level = "info" end
+	if not opts then opts = {} end
+	opts.id = "just-recipe" -- replaces via `snacks.nvim`
+	opts.title = opts.title and "Just: " .. opts.title or "Just"
+	vim.notify(vim.trim(msg), vim.log.levels[level:upper()], opts)
+end
 
+--------------------------------------------------------------------------------
+
+---@param recipe Recipe
+local function runRecipe(recipe)
 	-- 1) QUICKFIX
-	if vim.tbl_contains(config.recipes.quickfix, recipe) then
+	if recipe.quickfix then
 		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
 		vim.opt_local.makeprg = "just"
-		vim.cmd.make(recipe)
+		vim.cmd.make(recipe.name)
 		vim.opt_local.makeprg = prev
 
 		pcall(vim.cmd.cfirst) -- if there is a quickfix item, move to the 1st one
@@ -47,19 +66,18 @@ local function run(recipe)
 		return
 	end
 
-	local opts = { title = "Just: " .. recipe, id = "just-recipe" }
-	vim.notify("Running…", nil, opts) -- FIX also fixes loop-backback error
+	notify("Running…", nil, op{ title = recipe.name }-- FIX also fixes snacks.nvim loop-backback error
 
 	-- 2) STREAMING
-	if package.loaded["snacks"] and vim.tbl_contains(config.recipes.streaming, recipe) then
+	if package.loaded["snacks"] and recipe.streaming then
 		local function bufferedOut(_, data)
 			if not data then return end
 			-- severity not determined by stderr, since many CLIs send non-errors via stderr
-			local severity = data:find("error") and "ERROR" or "INFO"
-			vim.notify(vim.trim(data), vim.log.levels[severity], opts)
+			local severity = data:find("error") and "error" or "info"
+			notify(data, severity, { title = recipe.name })
 		end
 		vim.system(
-			{ "just", recipe },
+			{ "just", recipe.name },
 			{ stdout = bufferedOut, stderr = bufferedOut },
 			vim.schedule_wrap(function() vim.cmd.checktime() end)
 		)
@@ -68,19 +86,31 @@ local function run(recipe)
 
 	-- 3) DEFAULT
 	vim.system(
-		{ "just", recipe },
+		{ "just", recipe.name },
 		{},
 		vim.schedule_wrap(function(out)
-			local text = vim.trim((out.stdout or "") .. (out.stderr or ""))
-			local severity = out.code == 0 and "INFO" or "ERROR"
-			vim.notify(text, vim.log.levels[severity], opts)
+			local text = (out.stdout or "") .. (out.stderr or "")
+			local severity = out.code == 0 and "info" or "error"
+			notify(text, severity, { title = recipe.name })
 			vim.cmd.checktime()
 		end)
 	)
 end
 
+---@param recipe Recipe
+local function showRecipe(recipe)
+	local stdout = vim.system({ "just", "--show", recipe.name }):wait().stdout or "Error"
+	notify(stdout, "trace", {
+		timeout = 10 * 1000, -- longer, so user can read it
+		title = recipe.name,
+		ft = "just",
+	})
+end
+
 ---@param recipes Recipe[]
 local function select(recipes)
+	local ns = vim.api.nvim_create_namespace("just-recipes")
+
 	local title = "  Justfile "
 	local content = vim.tbl_map(function(r)
 		if not r.comment then return r.name end
@@ -137,23 +167,28 @@ local function select(recipes)
 	for _, key in pairs(config.keymaps.closeWin) do
 		vim.keymap.set("n", key, vim.cmd.close, opts)
 	end
-	vim.keymap.set("n", "<Tab>", "j", opts)
-	vim.keymap.set("n", "<S-Tab>", "k", opts)
-	vim.keymap.set("n", "<CR>", function()
-		local i = vim.api.nvim_win_get_cursor(0)[1]
-		run(recipes[i].name)
+	vim.keymap.set("n", config.keymaps.next, "j", opts)
+	vim.keymap.set("n", config.keymaps.prev, "k", opts)
+	vim.keymap.set("n", config.keymaps.runRecipe, function()
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
+		runRecipe(recipes[lnum])
 		vim.cmd.close()
+	end, opts)
+	vim.keymap.set("n", config.keymaps.showRecipe, function()
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
+		showRecipe(recipes[lnum])
+	end, opts)
+	vim.keymap.set("n", config.keymaps.showVariables, function()
+		local out = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
+		notify(out, nil, { title = "Variables" })
 	end, opts)
 
 	-- quick-select keymaps
-	local i = 0
-	for _, key in pairs(config.keymaps.quickSelect) do
-		i = i + 1
-		if i > #recipes then break end
-		local recipe = recipes[i].name
-
+	for i = 1, #recipes do
+		local recipe = recipes[i] -- save since `i` changes
+		local key = config.keymaps.quickSelect[i] or " "
 		vim.keymap.set("n", key, function()
-			run(recipe)
+			runRecipe(recipe)
 			vim.cmd.close()
 		end, opts)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
@@ -171,7 +206,7 @@ local function getRecipes()
 	local cmd = { "just", "--list", "--unsorted", "--list-heading=", "--list-prefix=" }
 	local result = vim.system(cmd):wait()
 	if result.code ~= 0 then
-		vim.notify(vim.trim(result.stderr), vim.log.levels.ERROR, { title = "Just" })
+		notify(result.stderr, "error")
 		return
 	end
 	local stdout = vim.split(result.stdout, "\n", { trimempty = true })
