@@ -17,11 +17,8 @@ local config = {
 	hideInRecipeSelection = { "release" }, -- for recipes that require user input
 	outputInQuickfix = { "check-tsc" }, -- run recipes synchronously & unbuffered
 	closeWinKeys = { "q", "<Esc>" },
-
-	-- Overwrites the quick-select key for the 1st recipe.
-	-- (For instance, if your keymap is `<leader>j`, you can set this to "j" for
-	-- quicker access to it via `<leader>jj`.)
-	firstRecipeQuickKey = "j",
+	quickSelectKeys = { "j", "a", "s", "d", "f" },
+	commentMaxLen = 25,
 }
 
 --------------------------------------------------------------------------------
@@ -82,25 +79,43 @@ local function select(recipes)
 	local ns = vim.api.nvim_create_namespace("just-recipes")
 
 	local title = "  Just Recipes "
-	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r.name end, recipes)))
-	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title))
+	local content = vim.tbl_map(function(r)
+		local com = r.comment
+		if #com > config.commentMaxLen then com = com:sub(1, config.commentMaxLen) .. "…" end
+		return r.name .. "  " .. com
+	end, recipes)
+	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, content)))
+	local signcolumnWidth = 2
+	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + signcolumnWidth + 1
+	local winHeight = #recipes
+	vim.notify("🖨️ winHeight: " .. tostring(winHeight))
+	local winX = (vim.o.columns - winWidth) / 2
+	local winY = (vim.o.lines - winHeight) / 2
+	vim.notify("🖨️ winY: " .. tostring(winY))
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, recipes)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
-		relative = "cursor",
-		row = 0,
-		col = 0,
+		relative = "editor",
+		row = winX,
+		col = winY,
 		width = winWidth,
-		height = #recipes,
+		height = winHeight,
 		title = title,
-		border = "single",
+		title_pos = "center",
+		border = vim.g.borderStyle or "single",
 		style = "minimal",
 	})
 	vim.wo[winnr].sidescrolloff = 0
 	vim.wo[winnr].winfixbuf = true
 	vim.wo[winnr].cursorline = true
 	vim.bo[bufnr].modifiable = false
+
+	-- highlight comments
+	for ln = 1, #recipes do
+		local colStart = #recipes[ln].name + 2
+		vim.api.nvim_buf_add_highlight(bufnr, ns, "Comment", ln - 1, colStart, -1)
+	end
 
 	-- GENERAL KEYMAPS
 	for _, key in pairs(config.closeWinKeys) do
@@ -121,29 +136,20 @@ local function select(recipes)
 	end, { buffer = bufnr, nowait = true })
 
 	-- QUICK-SELECT KEYMAPS
-	local usedChars = vim.deepcopy(config.closeWinKeys)
 	local i = 0
-	vim.iter(recipes):each(function(recipe)
+	for _, key in pairs(config.quickSelectKeys) do
 		i = i + 1
-		local charNum = 0
-		local char
-		if config.firstRecipeQuickKey and i == 1 then char = config.firstRecipeQuickKey end
-		while char == nil or vim.tbl_contains(usedChars, char) do
-			charNum = charNum + 1
-			char = recipe:sub(charNum, charNum)
-			if char == "" then return end -- skip if no letter available
-		end
-		table.insert(usedChars, char)
-
-		vim.keymap.set("n", char, function()
-			run(recipes[i].name)
+		if i > #recipes then break end
+		local recipe = recipes[i].name
+		vim.keymap.set("n", key, function()
+			run(recipe)
 			vim.cmd.close()
 		end, { buffer = bufnr, nowait = true })
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			sign_text = char,
+			sign_text = key,
 			sign_hl_group = "CursorLineNr",
 		})
-	end)
+	end
 end
 
 -----------------------------------------------------------------------------
@@ -162,6 +168,10 @@ function M.just()
 	local recipes = vim.iter(stdout)
 		:map(function(line)
 			local name, comment = line:match("^%s*(%S+)%s*# (.+)$")
+			if not comment then
+				name = line:match("%S+")
+				comment = ""
+			end
 			return { name = name, comment = comment }
 		end)
 		:filter(function(r) return not vim.tbl_contains(config.hideInRecipeSelection, r.name) end)
