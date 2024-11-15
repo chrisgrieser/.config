@@ -26,7 +26,7 @@ local config = {
 		prev = "<S-Tab>",
 		runRecipe = "<CR>",
 		closeWin = { "q", "<Esc>" },
-		quickSelect = { "j", "a", "s" },
+		quickSelect = { "j", "a", "s", "d", "f" },
 		showRecipe = "<Space>",
 		showVariables = "?", -- shows output of `just --evaluate`
 	},
