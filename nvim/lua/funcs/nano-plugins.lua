@@ -124,13 +124,13 @@ function M.gotoMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 then
-		vim.notify("Not in git repo.", vim.log.levels.WARN)
+		vim.notify("Not in git repo.", vim.log.levels.WARN, { title = "Git" })
 		return
 	end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
 	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
 	if #changedFiles == 0 then
-		vim.notify("No files with changes found.")
+		vim.notify("No files with changes found.", nil, { title = "Git" })
 		return
 	end
 
@@ -153,7 +153,7 @@ function M.gotoMostChangedFile()
 
 	-- open
 	if targetFile == vim.api.nvim_buf_get_name(0) then
-		vim.notify("Already at only changed file.")
+		vim.notify("Already at only changed file.", nil, { title = "Git" })
 	else
 		vim.cmd.edit(targetFile)
 	end

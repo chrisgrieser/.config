@@ -65,7 +65,7 @@ bkeymap("n", "<leader>ci", function()
 	}
 end, { desc = " Import word under cursor" })
 
-bkeymap("n", "<leader>rf", function()
+bkeymap("n", "<leader>ft", function()
 	local node = vim.treesitter.get_node()
 	if not node then return end
 	local strNode
@@ -84,4 +84,4 @@ bkeymap("n", "<leader>rf", function()
 	local lines = vim.split("f" .. nodeText, "\n")
 	local startRow, startCol, endRow, endCol = strNode:range()
 	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
-end, { desc = " Formatted String" })
+end, { desc = " Template String" })

@@ -1,4 +1,4 @@
---[[ DOCS
+--[[ INFO
 A simple wrapper for the task runner `just`
 https://github.com/casey/just
 
@@ -16,8 +16,10 @@ REQUIREMENTS:
 local config = {
 	hideInRecipeSelection = { "release" }, -- for recipes that require user input
 	outputInQuickfix = { "check-tsc" }, -- run recipes synchronously & unbuffered
-	closeWinKeys = { "q", "<Esc>" },
-	quickSelectKeys = { "j", "a", "s", "d", "f" },
+	keymaps = {
+		closeWin = { "q", "<Esc>" },
+		quickSelect = { "j", "a", "s", "d", "f" },
+	},
 	recipeCommentMaxLen = 35,
 }
 
@@ -77,7 +79,6 @@ end
 ---@param recipes { name: string, comment: string }[]
 local function select(recipes)
 	local ns = vim.api.nvim_create_namespace("just-recipes")
-
 	local title = "  Justfile "
 	local content = vim.tbl_map(function(r)
 		if not r.comment then return r.name end
@@ -85,11 +86,14 @@ local function select(recipes)
 		if #r.comment > max then r.comment = r.comment:sub(1, max) .. "…" end
 		return r.name .. "  " .. r.comment
 	end, recipes)
+
+	-- calculate window size
 	local longestRecipe = math.max(unpack(vim.tbl_map(function(r) return #r end, content)))
 	local signcolumnWidth = 2
 	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + signcolumnWidth + 1
 	local winHeight = #recipes
 
+	-- create window
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
@@ -117,9 +121,9 @@ local function select(recipes)
 		end
 	end
 
-	-- GENERAL KEYMAPS
+	-- general keymaps
 	local opts = { buffer = bufnr, nowait = true }
-	for _, key in pairs(config.closeWinKeys) do
+	for _, key in pairs(config.keymaps.closeWin) do
 		vim.keymap.set("n", key, vim.cmd.close, opts)
 	end
 	vim.keymap.set("n", "<Tab>", "j", opts)
@@ -130,9 +134,9 @@ local function select(recipes)
 		vim.cmd.close()
 	end, opts)
 
-	-- QUICK-SELECT KEYMAPS
+	-- quick-select keymaps
 	local i = 0
-	for _, key in pairs(config.quickSelectKeys) do
+	for _, key in pairs(config.keymaps.quickSelect) do
 		i = i + 1
 		if i > #recipes then break end
 		local recipe = recipes[i].name
