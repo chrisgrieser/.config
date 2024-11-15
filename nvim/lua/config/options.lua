@@ -18,8 +18,8 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
 
-vim.opt.shortmess:append("ISs") -- no intro message, no search count
-vim.opt.report = 9001 -- effectively disable "x more/fewer lines" messages
+vim.opt.shortmess:append("I") -- no intro message
+vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 vim.opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>

@@ -9,7 +9,7 @@ return {
 		},
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
-		{ "<D-8>", vim.cmd.mess, desc = ":mess" },
+		{ "<D-8>", "<cmd>messages<CR>", desc = ":mess" },
 		{
 			desc = "󰎟 Notification history",
 			"<D-0>",
