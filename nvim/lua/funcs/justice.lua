@@ -19,7 +19,7 @@ local config = {
 		hidden = { "release", "run-fzf" }, -- for recipes that require user input
 		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars (equires `snacks.nvim`)
 		quickfix = { "check-tsc" }, -- runs sync and sends output to quickfix
-		commentMaxLen = 35, -- recipe comments are truncated if longer
+		commentMaxLen = 35, -- truncate recipe comments if longer
 	},
 	keymaps = {
 		closeWin = { "q", "<Esc>" },
@@ -38,6 +38,7 @@ local config = {
 		just = "",
 		streaming = "ﲋ",
 		quickfix = "",
+		hidden = "󰈉",
 	},
 }
 
@@ -136,13 +137,12 @@ local function getRecipes()
 
 	local recipes = vim.iter(stdout)
 		:map(function(line)
-			local name, comment = line:match("(%S+)%s*# (.+)")
+			local name, comment = line:match("^(%S+)%s*# (.+)")
 			if comment then
 				local max = config.recipes.commentMaxLen
 				if #comment > max then comment = comment:sub(1, max) .. "…" end
-			else
-				name = line:match("%S+")
 			end
+			if not name then name = line:match("^%S+") end
 			local display = vim.trim(name .. "  " .. (comment or ""))
 
 			local type
@@ -165,7 +165,7 @@ local function selectRecipe()
 	if not allRecipes then return end
 	local recipes = vim.tbl_filter(function(r) return r.type ~= "hidden" end, allRecipes)
 	if #recipes == 0 then
-		notify("No recipes found", "warn")
+		notify("Justfile has no recipes.", "warn")
 		return
 	end
 	local hiddenCount = #allRecipes - #recipes
@@ -183,18 +183,19 @@ local function selectRecipe()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	local lines = vim.tbl_map(function(r) return r.display end, recipes)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+	local footer = (" %d %s "):format(hiddenCount, config.icons.hidden)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
 		relative = "editor",
 		row = (vim.o.lines - winHeight) / 2,
 		col = (vim.o.columns - winWidth) / 2,
 		width = winWidth,
 		height = winHeight,
-		title = title,
-		title_pos = "center",
-		footer = (" %d hidden "):format(hiddenCount),
-		footer_pos = "right",
 		border = vim.g.borderStyle or "single",
 		style = "minimal",
+		title = title,
+		title_pos = "center",
+		footer = hiddenCount > 0 and { { footer, "Comment" } } or nil,
+		footer_pos = hiddenCount > 0 and "right" or nil,
 	})
 	vim.wo[winnr].sidescrolloff = 0
 	vim.wo[winnr].winfixbuf = true
@@ -253,9 +254,5 @@ local function selectRecipe()
 end
 
 -----------------------------------------------------------------------------
-local M = {}
-
-function M.just() selectRecipe() end
-
---------------------------------------------------------------------------------
+local M = { just = selectRecipe }
 return M

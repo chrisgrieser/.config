@@ -2,11 +2,14 @@ return {
 	"folke/snacks.nvim",
 	event = "VeryLazy",
 	keys = {
-	-- stylua: ignore start
-	{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
-	{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-	{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
-		-- stylua: ignore end
+		{
+			"<Esc>",
+			function() require("snacks").notifier.hide() end,
+			desc = "󰎟 Dismiss notifications",
+		},
+		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
+		{ "<D-8>", vim.cmd.mess, desc = ":mess" },
 		{
 			desc = "󰎟 Notification history",
 			"<D-0>",
