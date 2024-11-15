@@ -11,7 +11,6 @@ fi
 
 citekey="$*"
 csl=$([[ -f "$csl_for_pandoc" ]] && echo "$csl_for_pandoc" || echo "./support/apa-7th.csl")
-library="$bibtex_library_path"
 
 dummydoc="---
 nocite: '@$citekey'
@@ -19,7 +18,7 @@ nocite: '@$citekey'
 
 reference=$(echo -n "$dummydoc" |
 	command pandoc --citeproc --read=markdown --write=plain --wrap=none \
-	--csl="$csl" --bibliography="$library" 2>&1)
+	--csl="$csl" --bibliography="$bibtex_library_path" 2>&1)
 
 #───────────────────────────────────────────────────────────────────────────────
 # paste via Alfred

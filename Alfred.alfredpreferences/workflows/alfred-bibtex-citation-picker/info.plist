@@ -2045,11 +2045,15 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 	<string>## Workflow setup
 1. Add the path to your `.bib` to the right.
 2. Set the [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
-3. The default citation style is *Pandoc Citations*. To switch it to LaTeX, Multi-Markdown, Org Mode, eta, [[wikilinks]], #tags, or bare citkeys use the keyword `scp` in Alfred and select `Change Citation Format`.
 
-&gt; [!NOTE]
+### Set citation style
+The default citation style is *Pandoc Citations*. To switch it to LaTeX, Multi-Markdown, Org Mode, eta, [[wikilinks]], #tags, or bare citkeys use the keyword `scp` in Alfred and select `Change Citation Format`.
+
+&gt; ℹ️ 
 &gt; Due to technical restrictions, you may need to set the citation style once
 &gt; more after updates to this workflow.
+
+---
 
 ## Basic usage
 Press the [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) in any text field to start the citation picker. Alternatively, use the `ct` keyword.
@@ -2928,26 +2932,28 @@ to set a hotkey for adding DOI/ISBN</string>
 	<key>variables</key>
 	<dict>
 		<key>_format_citation_end</key>
-		<string>]</string>
+		<string></string>
 		<key>_format_citation_start</key>
-		<string>[</string>
+		<string></string>
 		<key>_format_citekey_delimiter</key>
-		<string>; </string>
+		<string></string>
 		<key>_format_citekey_prefix</key>
-		<string>@</string>
+		<string></string>
 		<key>_format_citekey_suffix</key>
 		<string></string>
 		<key>_format_current_citation_style</key>
-		<string>pandoc</string>
+		<string>formatted single entry</string>
 		<key>_format_page_before_citekey</key>
-		<string>false</string>
+		<string></string>
 		<key>_format_page_prefix</key>
-		<string>, p. </string>
+		<string></string>
 		<key>_format_page_suffix</key>
 		<string></string>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>11.15.6</string>
+	<string>11.16.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
