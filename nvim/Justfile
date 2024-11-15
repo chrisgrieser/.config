@@ -5,10 +5,10 @@ debugConfig := "./debug/test.lua"
 
 #───────────────────────────────────────────────────────────────────────────────
 
-count-lines:
-    find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse | cut -c5-
-
-# runs minimal config with neovide
-debug-instance:
-    # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
-    neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} -c'sleep 300ms|bdelete|edit'
+# count-lines:
+#     find . -name "*.lua" -print0 | xargs -0 wc -l | sort --reverse | cut -c5-
+#
+# # runs minimal config with neovide
+# debug-instance:
+#     # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
+#     neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} -c'sleep 300ms|bdelete|edit'
