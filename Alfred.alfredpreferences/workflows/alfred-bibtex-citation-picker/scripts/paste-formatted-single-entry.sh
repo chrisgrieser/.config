@@ -14,8 +14,9 @@ csl=$([[ -f "$csl_for_pandoc" ]] && echo "$csl_for_pandoc" || echo "./support/ap
 library="$bibtex_library_path"
 
 dummydoc="---
-nocite: '@$citekey'
----"
+suppress-bibliography: true
+---
+@$citekey"
 
 reference=$(echo -n "$dummydoc" |
 	command pandoc --citeproc --read=markdown --write=plain --wrap=none \

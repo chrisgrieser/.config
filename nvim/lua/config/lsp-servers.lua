@@ -297,6 +297,7 @@ M.serverConfigs.harper_ls = {
 			linters = {
 				spell_check = true,
 				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
+				an_a = false, -- too many false positives
 			},
 		},
 	},
