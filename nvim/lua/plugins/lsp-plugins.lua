@@ -1,5 +1,5 @@
 return {
-	{ -- display type hints at eol, not in the middle of a line
+	{ -- display type hints at EoL, not in the middle of a line
 		"chrisgrieser/nvim-lsp-endhints",
 		event = "LspAttach",
 		opts = true,
@@ -23,12 +23,12 @@ return {
 		event = "BufReadPre",
 		opts = {
 			hint_prefix = " 󰏪 ",
-			hint_scheme = "Todo", 
+			hint_scheme = "Todo",
 			floating_window = false,
 			always_trigger = true,
 		},
 	},
-	{ -- CodeLens, but also for languages not supporting it
+	{ -- CodeLens
 		"Wansmer/symbol-usage.nvim",
 		event = "LspAttach",
 		opts = {
