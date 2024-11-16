@@ -1,15 +1,32 @@
+-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
+--------------------------------------------------------------------------
+
 return {
 	"folke/snacks.nvim",
 	event = "VeryLazy",
+	init = function()
+		-- override default print functions
+		_G.print = function(...)
+			local msg = vim.iter({ ... }):join(" ")
+			vim.notify(msg, vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
+		end
+		vim.api.nvim_echo = function(chunks, _, _) ---@diagnostic disable-line: duplicate-set-field
+			local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
+			local isGitsignsHunk = msg:find("^Hunk %d+ of %d+")
+			local opts = isGitsignsHunk and { title = "Gitsigns", icon = "", id = "gitsigns-hunk" }
+				or { title = "Echo", icon = "" }
+			vim.notify(msg, vim.log.levels.DEBUG, opts)
+		end
+	end,
 	keys = {
-		{
-			"<Esc>",
-			function() require("snacks").notifier.hide() end,
-			desc = "󰎟 Dismiss notifications",
-		},
+		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
-		{ "<D-8>", "<cmd>messages<CR>", desc = ":mess" },
+		{
+			"<D-8>",
+			"<cmd>messages<CR>",
+			desc = ":mess",
+		},
 		{
 			desc = "󰎟 Notification history",
 			"<D-0>",
@@ -23,7 +40,7 @@ return {
 					:each(function(notif)
 						local msg = vim.split(notif.msg, "\n")
 						local icon = notif.level ~= "info" and notif.icon .. " " or ""
-						msg[1] = "[" .. icon .. notif.title .. "] " .. msg[1]
+						msg[1] = "- [" .. icon .. notif.title .. "] " .. msg[1]
 						vim.list_extend(lines, msg)
 					end)
 				local bufnr = vim.api.nvim_create_buf(false, true)
@@ -48,7 +65,7 @@ return {
 				local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
 				require("snacks").win {
 					position = "float",
-					ft = "markdown",
+					ft = last.ft,
 					buf = bufnr,
 					height = 0.75,
 					width = 0.75,
@@ -63,7 +80,6 @@ return {
 			modes = { "n" },
 			debounce = 300,
 		},
-		-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 		notifier = {
 			timeout = 6000,
 			width = { min = 20, max = 0.5 },
