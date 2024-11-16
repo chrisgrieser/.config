@@ -92,6 +92,21 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+	desc = "User: Change cmdline height to silence Enter-prompt (1/2)",
+	callback = function()
+		if vim.fn.getcmdtype() == "" then vim.opt.cmdheight = 0 end
+	end,
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	desc = "User: Change cmdline height to silence Enter-prompt (2/2)",
+	callback = function()
+		vim.defer_fn(function() vim.opt.cmdheight = 0 end, 1)
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Fix cwd being not available when it is deleted outside nvim.",
 	callback = function()

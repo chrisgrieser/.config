@@ -232,7 +232,7 @@ local function selectRecipe()
 
 	-- general keymaps
 	local function closeWin()
-		vim.cmd.close()
+		vim.api.nvim_win_close(winnr, true)
 		local ok, snacks = pcall(require, "snacks")
 		if ok then snacks.notifier.hide("just-recipe") end
 	end
@@ -259,16 +259,15 @@ local function selectRecipe()
 	-- quick-select keymaps
 	for i = 1, #recipes do
 		local recipe = recipes[i] -- save since `i` changes
-		local key = config.keymaps.quickSelect[i] or " "
-		vim.keymap.set("n", key, function()
-			runRecipe(recipe)
-			vim.cmd.close()
-		end, opts)
+		local key = config.keymaps.quickSelect[i]
+		if key then
+			vim.keymap.set("n", key, function()
+				runRecipe(recipe)
+				closeWin()
+			end, opts)
+		end
 		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-			virt_text = {
-				{ key, config.highlights.quickSelect },
-				{ " " },
-			},
+			virt_text = { { key or " ", config.highlights.quickSelect }, { " " } },
 			virt_text_pos = "inline",
 		})
 	end

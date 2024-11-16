@@ -9,7 +9,11 @@ return {
 		-- override default print functions
 		_G.print = function(...)
 			local msg = vim.iter({ ... }):join(" ")
-			vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
+			local opts = { title = "Print", icon = "󰐪" }
+			if msg:find("^%[nvim-treesitter%]") then
+				opts = { icon = "", id = "ts-install", style = "minimal" }
+			end
+			vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 		end
 		---@diagnostic disable-next-line: duplicate-set-field deliberate override
 		vim.api.nvim_echo = function(chunks, _, _)
@@ -17,9 +21,7 @@ return {
 			local opts = { title = "Echo", icon = "" }
 			if msg:lower():find("hunk") then
 				msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]")
-				opts.title = nil
-				opts.icon = "󰊢"
-				opts.id = "gitsigns_nav_hunk"
+				opts = { icon = " 󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
 			end
 			vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 		end
@@ -88,9 +90,9 @@ return {
 		},
 		notifier = {
 			timeout = 6000,
-			width = { min = 20, max = 0.5 },
+			width = { min = 10, max = 0.5 },
 			height = { min = 1, max = 0.4 },
-			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
 		},
 		styles = {
