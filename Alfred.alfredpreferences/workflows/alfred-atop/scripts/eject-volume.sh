@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 volume="$*"
-msg=$(diskutil eject "$volume" 2>&1)
+# if unejectable, `unmount` says which process is blocking
+msg=$(diskutil eject "$volume" || diskutil unmount "$volume" 2>&1)
 success=$?
 
 if [[ $success -eq 0 ]]; then
