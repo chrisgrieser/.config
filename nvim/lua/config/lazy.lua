@@ -94,26 +94,25 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" 
 
 local pluginTypeIcons = {
 	["editing-support"] = "󰏫",
-	["files-and-buffers"] = "󰞇",
+	["files-and-buffers"] = "",
 	["appearance"] = "",
 	["refactoring"] = "󱗘",
 	["lsp-plugins"] = "󰒕",
-	["lsp-config"] = "󰒕",
 	["ai-plugins"] = "󰚩",
 	["git-plugins"] = "󰊢",
 	["treesitter"] = "",
-	["scissors"] = "󰩫",
-	["blink-cmp"] = "󰩫",
-	["lazy.nvim"] = "󰒲",
+	["completion"] = "󰩫",
 	["themes"] = "",
 	["notification"] = "󰎟",
 	["folding"] = "󰘖",
-	["mason"] = "",
+	["mason-and-lspconfig"] = "",
 	["motions-and-textobjects"] = "󱡔",
-	["telescope-config"] = "󰭎",
+	["telescope"] = "󰭎",
 	["lualine"] = " ",
 }
 
+-- GOTO PLUGIN SPEC
+-- For nicer selection via `vim.ui.select`: telescope-ui-select OR dressing.nvim
 keymap("n", "g,", function()
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User (once): Colorize icons in `TelescopeResults`",
@@ -129,7 +128,7 @@ keymap("n", "g,", function()
 		if not vim.endswith(name, ".lua") then return acc end
 		local moduleName = name:gsub("%.lua$", "")
 		local module = require(specRoot .. "." .. moduleName)
-		if type(module[1]) == "string" then module = { module } end
+		if type(module[1]) ~= "table" then module = { module } end
 		local plugins = vim.iter(module)
 			:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
 			:totable()
@@ -150,6 +149,8 @@ keymap("n", "g,", function()
 	end)
 end, { desc = "󰒲 Goto Plugin Config" })
 
+-- GOTO LOCAL PLUGIN CODE
+-- REQUIRED telescope.nvim AND (telescope-ui-select OR dressing.nvim)
 keymap("n", "gp", function()
 	vim.ui.select(
 		require("lazy").plugins(),
@@ -162,7 +163,7 @@ keymap("n", "gp", function()
 end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
--- TEST CHECK FOR DUPLICATE KEYS
+-- TEST FOR DUPLICATE KEYS (on every startup)
 
 local function checkForDuplicateKeys()
 	---@param lazyKey {mode?: string|table}
