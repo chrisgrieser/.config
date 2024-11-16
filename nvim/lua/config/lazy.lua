@@ -23,7 +23,7 @@ require("lazy").setup {
 	spec = { import = "plugins" }, -- = use specs stored in `./lua/plugins`
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-	dev = {
+	dev = { ---@diagnostic disable-line: assign-type-mismatch faulty annotation
 		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -115,31 +115,26 @@ local pluginTypeIcons = {
 }
 
 keymap("n", "g,", function()
-	-- colored icons
 	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User (once): Set filetype to `lua` for `TelescopeResults`",
+		desc = "User (once): Colorize icons in `TelescopeResults`",
 		once = true,
 		pattern = "TelescopeResults",
 		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
 	})
 	local specRoot = require("lazy.core.config").options.spec.import
 	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
-	local handler = vim.uv.fs_scandir(specPath)
-	if not handler then return end
+	local specFiles = vim.fs.dir(specPath)
 
-	local allPlugins = {}
-	repeat
-		local file, _ = vim.uv.fs_scandir_next(handler)
-		if file and vim.endswith(file, ".lua") then
-			local moduleName = file:gsub("%.lua$", "")
-			local module = require(specRoot .. "." .. moduleName)
-			if type(module[1]) == "string" then module = { module } end
-			local plugins = vim.iter(module)
-				:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
-				:totable()
-			vim.list_extend(allPlugins, plugins)
-		end
-	until not file
+	local allPlugins = vim.iter(specFiles):fold({}, function(acc, name, _)
+		if not vim.endswith(name, ".lua") then return acc end
+		local moduleName = name:gsub("%.lua$", "")
+		local module = require(specRoot .. "." .. moduleName)
+		if type(module[1]) == "string" then module = { module } end
+		local plugins = vim.iter(module)
+			:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
+			:totable()
+		return vim.list_extend(acc, plugins)
+	end)
 
 	vim.ui.select(allPlugins, {
 		prompt = "󰒲 Goto Config",
@@ -167,7 +162,7 @@ keymap("n", "gp", function()
 end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
--- CHECK FOR UPDATES AND DUPLICATE KEYS
+-- TEST CHECK FOR DUPLICATE KEYS
 
 local function checkForDuplicateKeys()
 	---@param lazyKey {mode?: string|table}
@@ -180,19 +175,17 @@ local function checkForDuplicateKeys()
 		return false
 	end
 
-	local modes = { "n", "x", "o", "i" }
-	local allKeys = {}
-	for _, mode in ipairs(modes) do
-		allKeys[mode] = {}
-	end
+	local allKeys = { n = {}, x = {}, o = {}, i = {} }
+	local allModes = vim.tbl_keys(allKeys)
 
-	vim.iter(require("lazy").plugins()):each(function(plugin)
+	local plugins = require("lazy").plugins()
+	vim.iter(plugins):each(function(plugin)
 		vim
 			.iter(plugin.keys or {})
 			:filter(function(key) return key.ft == nil end) -- not ft-specific keys
 			:each(function(lazyKey)
 				local lhs = lazyKey[1] or lazyKey -- keys can be just a string
-				for _, mode in ipairs(modes) do
+				for _, mode in ipairs(allModes) do
 					if isMode(lazyKey, mode) then
 						if vim.tbl_contains(allKeys[mode], lhs) then
 							vim.notify(("Duplicate %smap: %s"):format(mode, lhs), vim.log.levels.WARN)
