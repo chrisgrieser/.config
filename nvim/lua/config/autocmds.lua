@@ -92,27 +92,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd("CmdlineEnter", {
-	desc = "User: Change cmdline-height to silence Enter-prompt (1/2)",
-	callback = function()
-		if vim.fn.getcmdtype():find("[/?]") then vim.opt.cmdheight = 1 end
-	end,
-})
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-	desc = "User: Change cmdline-height to silence Enter-prompt (2/2)",
-	callback = function()
-		if not vim.fn.getcmdtype():find("[/?]") then return end
-		if vim.fn.searchcount().total == 0 then
-			local msg = ("[%s] not found"):format(vim.fn.getreg("/"))
-			vim.notify(msg, vim.log.levels.TRACE, { style = "minimal", icon = "" })
-			vim.opt.hlsearch = false
-			vim.defer_fn(function() vim.opt.cmdheight = 0 end, 1)
-		end
-	end,
-})
-
---------------------------------------------------------------------------------
-
 vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Fix cwd being not available when it is deleted outside nvim.",
 	callback = function()
