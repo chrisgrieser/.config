@@ -25,7 +25,7 @@ local function snacksInit()
 
 	-----------------------------------------------------------------------------
 	-- SILENCE "E486: PATTERN NOT FOUND"
-	-- (SIC yes, all this is needed, if you want to have `cmdheight=0`)
+	-- (SIC yes, all this is needed to have `cmdheight=0` and still press `Enter`)
 
 	local function notFoundNotify(query)
 		local msg = ("[%s] not found"):format(query)
@@ -34,7 +34,7 @@ local function snacksInit()
 
 	local function silenceSearch(key)
 		local query = vim.fn.getreg("/")
-		local matches = vim.fn.search(vim.fn.getreg("/"), "ncw") -- [n]o move, include [c]ursorword, [w]rap
+		local matches = vim.fn.search(vim.fn.getreg("/"), "ncw") -- [n]o move, w/ [c]ursorword, [w]rap
 		if matches > 0 then
 			vim.cmd.normal { key, bang = true }
 		else
@@ -44,14 +44,17 @@ local function snacksInit()
 	vim.keymap.set("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
 	vim.keymap.set("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
 
+	local group = vim.api.nvim_create_augroup("silent-search", {})
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
 		desc = "User: Change cmdline-height to silence Enter-prompt (1/2)",
+		group = group,
 		callback = function()
 			if vim.fn.getcmdtype():find("[/?]") then vim.opt.cmdheight = 1 end
 		end,
 	})
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
 		desc = "User: Change cmdline-height to silence Enter-prompt (2/2)",
+		group = group,
 		callback = function()
 			if not vim.fn.getcmdtype():find("[/?]") then return end
 			vim.defer_fn(function()
@@ -87,7 +90,9 @@ return {
 					:rev() -- = recent notifications on top
 					:each(function(notif)
 						local msg = vim.split(notif.msg, "\n")
-						msg[1] = notif.title and ("+ [%s] %s"):format(notif.title, msg[1]) or "+ " .. msg[1]
+						msg[1] = (notif.title and notif.title ~= "")
+								and ("+ [%s] %s"):format(notif.title, msg[1])
+							or "+ " .. msg[1]
 						vim.list_extend(lines, msg)
 					end)
 				local bufnr = vim.api.nvim_create_buf(false, true)
