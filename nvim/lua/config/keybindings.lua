@@ -45,7 +45,7 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 --------------------------------------------------------------------------------
 -- SILENT MAPPINGS
 
--- Silence "E486: Pattern not found in set" error
+-- Silence "E486: Pattern not found" error
 local function silenceSearch(key)
 	local query = vim.fn.getreg("/")
 	local found = vim.fn.search(query, "ncw")
@@ -59,13 +59,11 @@ end
 keymap("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
 keymap("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
 
-keymap("n", "u", "<cmd>silent undo<CR>zv", { desc = "silent u" })
-
 --------------------------------------------------------------------------------
 -- EDITING
 
 -- Undo
-keymap("n", "U", "<cmd>silent redo<CR>zv")
+keymap("n", "U", "<C-r>")
 
 -- Toggles
 keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })

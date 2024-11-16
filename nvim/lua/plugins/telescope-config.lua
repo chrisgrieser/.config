@@ -179,14 +179,15 @@ local function telescopeConfig()
 			oldfiles = {
 				prompt_prefix = "󰋚 ",
 				path_display = function(_, path)
-					local roots = {
+					local parentOfRoots = {
 						vim.g.localRepos,
 						vim.fs.normalize("~/.config"),
+						vim.fs.normalize("~/Vaults"),
 						vim.fn.stdpath("data") .. "/lazy",
-						os.getenv("HOME") or "",
-						os.getenv("HOMEBREW_PREFIX") or "",
+						vim.env.HOMEBREW_PREFIX,
+						vim.env.HOME,
 					}
-					vim.iter(roots):each(function(root) path = path:gsub(vim.pesc(root), "") end)
+					vim.iter(parentOfRoots):each(function(root) path = path:gsub(vim.pesc(root), "") end)
 
 					local project = path:match("/(.-)/") or "" -- highest parent
 					local tail = vim.fs.basename(path)

@@ -43,8 +43,8 @@ return {
 					:rev() -- last notification on top
 					:each(function(notif)
 						local msg = vim.split(notif.msg, "\n")
-						local icon = notif.level ~= "info" and notif.icon .. " " or ""
-						msg[1] = "- [" .. icon .. notif.title .. "] " .. msg[1]
+						local display = vim.trim((notif.icon or "") .. " " .. (notif.title or ""))
+						msg[1] = "- [" .. display .. "] " .. msg[1]
 						vim.list_extend(lines, msg)
 					end)
 				local bufnr = vim.api.nvim_create_buf(false, true)
