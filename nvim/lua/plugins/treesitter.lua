@@ -31,14 +31,13 @@ return {
 			enable = true,
 			disable = { "markdown" }, -- indentation at bullet points is worse
 		},
-		-- `nvim-treesitter-textobjects` plugin
+
+		--------------------------------------------------------------------------
+		-- TREESITTER-TEXTOBJECTS
+		-- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
+
 		textobjects = {
-			move = { -- move to next function
-				enable = true,
-				set_jumps = true,
-			},
-			select = { -- textobj definitions
-				enable = true,
+			select = {
 				lookahead = true,
 				include_surrounding_whitespace = false, -- doesn't work with my comment textobj mappings
 			},

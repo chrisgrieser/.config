@@ -8,7 +8,7 @@ return {
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
 		keys = {
-			-- [O]pen new scope / brace (`remap` to trigger auto-pairing)
+			-- Open new scope (`remap` to trigger auto-pairing)
 			{ "<D-o>", "a{<CR>", desc = " Open new scope", remap = true },
 			{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
 		},
@@ -150,7 +150,7 @@ return {
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				[textObjMaps.call] = {
-					find = "[%w.:_]+%b()", -- includes `:` for lua methods and css pseudo-classes
+					find = "[%w.:_]+%b()", -- includes `:` for LUA-methods/CSS-pseudoclasses
 					delete = "([%w.:_]+%()().*(%))()",
 				},
 				[textObjMaps.func] = {
@@ -164,26 +164,6 @@ return {
 					delete = "(if .- then )().-( end)()",
 				},
 			},
-		},
-	},
-	{ -- swapping of sibling nodes
-		"Wansmer/sibling-swap.nvim",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		keys = {
-			-- stylua: ignore start
-			{ "ä", function() require("sibling-swap").swap_with_right() end, desc = "󰔰 Move Node Right" },
-			{ "Ä", function() require("sibling-swap").swap_with_left() end, desc = "󰶢 Move Node Left" },
-			-- stylua: ignore end
-			{ "ä", '"zdawel"zph', ft = "markdown", desc = "󰔰 Move Word Right" },
-			{ "Ä", '"zdawbh"zph', ft = "markdown", desc = "󰶢 Move Word Left" },
-		},
-		opts = {
-			use_default_keymaps = false,
-			allowed_separators = { "..", "*" }, -- add multiplication & lua string concatenation
-			highlight_node_at_cursor = true,
-			ignore_injected_langs = true,
-			allow_interline_swaps = true,
-			interline_swaps_without_separator = false,
 		},
 	},
 	{ -- split-join lines

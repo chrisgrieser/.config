@@ -2,7 +2,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
 		-- so mason packages are available before loading mason itself
 		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,

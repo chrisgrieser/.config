@@ -4,29 +4,21 @@ local textObj = require("config.utils").extraTextobjMaps
 return {
 	{ -- CamelCase Motion plus
 		"chrisgrieser/nvim-spider",
-		opts = { consistentOperatorPending = true },
 		keys = {
 			{
 				"e",
 				"<cmd>lua require('spider').motion('e')<CR>",
-				mode = { "n", "x" },
-				desc = "󱇫 Spider e",
-			},
-			{
-				"e",
-				"<cmd>lua require('spider').motion('e')<CR>",
-				mode = "o",
+				mode = { "n", "x", "o" },
 				desc = "󱇫 end of subword",
 			},
 			{
 				"b",
 				"<cmd>lua require('spider').motion('b')<CR>",
 				mode = { "n", "x" }, -- not `o`, since mapped to inner bracket
-				desc = "󱇫 Spider b",
+				desc = "󱇫 beginning of subword",
 			},
 		},
 	},
-	-----------------------------------------------------------------------------
 	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -58,12 +50,12 @@ return {
 			},
 			{
 				"<C-j>",
-				"<cmd>TSTextobjectGotoNextStart @function.outer<CR>zv",
+				function () vim.cmd.TSTextobjectGotoNextStart("@function.outer") end,
 				desc = " Goto Next Function",
 			},
 			{
 				"<C-k>",
-				"<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>zv",
+				function () vim.cmd.TSTextobjectGotoPreviousStart("@function.outer") end,
 				desc = " Goto Previous Function",
 			},
 			-----------------------------------------------------------------------

@@ -223,13 +223,6 @@ exmap headingDecrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(-1) }
 nnoremap <M-S-h> :headingDecrement<CR>
 inoremap <M-S-h> <Esc>:headingIncrement<CR>a
 
-" Move words (equivalent to sibling-swap.nvim)
-" nnoremap ä "zdawel"zph
-" nnoremap Ä "zdawbh"zph
-" above is for single words, below does not trip on ', etc.
-nnoremap ä "zdawB"zPB
-nnoremap Ä "zdawEl"zpB
-
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu
 noremap zl :contextMenu<CR>
