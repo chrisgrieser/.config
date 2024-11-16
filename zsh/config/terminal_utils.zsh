@@ -21,9 +21,8 @@ function line_count() {
 	find -E "$where" -type file \
 		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-		-not -regex ".*\.(webp|png|jpe?g|svg|json|ya?ml)$" -print0 |
-		xargs -0 wc -l |
-		sort --reverse
+		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|json|ya?ml|md|toml|editorconfig)$" \
+		-print0 | xargs -0 wc -l | sort --reverse
 }
 
 # Quick Open File
@@ -57,23 +56,6 @@ function o() {
 	open "$selected"
 }
 
-# open last changed file in cwd
-function oo {
-	local last_modified
-	last_modified=$(
-		find . -type file -maxdepth 4 \
-			-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
-			-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-			-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
-			xargs -0 stat -f "%m %N" |
-			sort --numeric --reverse |
-			sed -n "1p" |
-			cut -d" " -f2-
-	)
-	[[ -z "$last_modified" ]] && return 1
-	open "$last_modified"
-}
-
 # completions for it
 _o() {
 	local -a paths=()
@@ -88,7 +70,23 @@ _o() {
 }
 compdef _o o
 
-#───────────────────────────────────────────────────────────────────────────────
+# open last changed file in cwd
+function oo {
+	local max_depth=4
+	local last_modified
+	last_modified=$(
+		find . -type file -maxdepth $max_depth \
+			-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
+			-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
+			-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
+			xargs -0 stat -f "%m %N" |
+			sort --numeric --reverse |
+			sed -n "1p" |
+			cut -d" " -f2-
+	)
+	[[ -z "$last_modified" ]] && return 1
+	open "$last_modified"
+}
 
 # file finder
 # `fd` replacement using just `rg`
