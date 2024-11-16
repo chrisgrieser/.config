@@ -43,23 +43,6 @@ keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
 
 --------------------------------------------------------------------------------
--- SILENT MAPPINGS
-
--- Silence "E486: Pattern not found" error
-local function silenceSearch(key)
-	local query = vim.fn.getreg("/")
-	local found = vim.fn.search(query, "ncw")
-	if found > 0 then
-		vim.cmd.normal { key, bang = true }
-	else
-		local msg = ("[%s] not found"):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
-	end
-end
-keymap("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
-keymap("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
-
---------------------------------------------------------------------------------
 -- EDITING
 
 -- Undo
