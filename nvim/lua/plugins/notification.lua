@@ -138,6 +138,7 @@ return {
 		win = {
 			keys = { q = "close", ["<Esc>"] = "close" },
 			border = vim.g.borderStyle,
+			wo = { cursorline = true, colorcolumn = "" },
 		},
 		notifier = {
 			timeout = 6000,

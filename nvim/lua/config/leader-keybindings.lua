@@ -25,7 +25,7 @@ keymap("n", "<leader>ee", ":Eval ", { desc = "󰓗 Eval" })
 keymap("n", "<leader>ec", function()
 	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
 	vim.fn.setreg("+", lastCommand)
-	vim.notify(lastCommand, vim.log.levels.INFO, { title = "Copied" })
+	vim.notify(lastCommand, nil, { title = "Copied", icon = "󰅍" })
 end, { desc = "󰓗 Copy last command" })
 
 --------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ keymap("n", "<leader>yc", function()
 	}
 	if codeContext and codeContext ~= "" then
 		vim.fn.setreg("+", codeContext)
-		vim.notify(codeContext, nil, { title = "Copied" })
+		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍" })
 	else
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end

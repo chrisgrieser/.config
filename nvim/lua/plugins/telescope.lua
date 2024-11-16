@@ -32,7 +32,7 @@ local insertModeActions = {
 		local value = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", value)
-		vim.notify(value, vim.log.levels.INFO, { title = "Copied" })
+		vim.notify(value, nil, { title = "Copied", icon ="󰅍" })
 	end,
 	-- mapping consistent with fzf-multi-select
 	["<M-CR>"] = function(prompt_bufnr) -- multi-select
@@ -86,7 +86,7 @@ local function copyColorValue(prompt_bufnr)
 	if #out > 0 then
 		local toCopy = table.concat(out, "\n")
 		vim.fn.setreg("+", toCopy)
-		vim.notify(toCopy, vim.log.levels.INFO, { title = "Copied" })
+		vim.notify(toCopy, nil, { title = "Copied", icon = "󰅍" })
 	end
 end
 
