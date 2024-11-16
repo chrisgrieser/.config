@@ -22,9 +22,15 @@ return {
 	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		-- commands need to be defined, since used in various utility functions
-		cmd = { "TSTextobjectSelect", "TSTextobjectGotoNextStart", "TSTextobjectGotoPreviousStart" },
+		cmd = { -- commands need to be defined, since used in various utility functions
+			"TSTextobjectSelect",
+			"TSTextobjectSwapNext",
+			"TSTextobjectSwapPrevious",
+			"TSTextobjectGotoNextStart",
+			"TSTextobjectGotoPreviousStart",
+		},
 		keys = {
+			-- COMMENT OPERATIONS
 			{
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
@@ -48,18 +54,15 @@ return {
 				end,
 				desc = "󰆈 Change Comment",
 			},
-			{
-				"<C-j>",
-				function () vim.cmd.TSTextobjectGotoNextStart("@function.outer") end,
-				desc = " Goto Next Function",
-			},
-			{
-				"<C-k>",
-				function () vim.cmd.TSTextobjectGotoPreviousStart("@function.outer") end,
-				desc = " Goto Previous Function",
-			},
-			-----------------------------------------------------------------------
+
+			-- MOVE & SWAP
 			-- stylua: ignore start
+			{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
+			{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
+			{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
+			{ "Ä", "<cmd>TSTextobjectSwapPrevious @parameter.inner<CR>", desc = " Swap prev arg" },
+
+			-- TEXT OBJECTS
 			{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = { "x", "o" }, desc = "↩ outer return" },
 			{ "<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
 			{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = { "x", "o" }, desc = " outer regex" },
@@ -164,33 +167,6 @@ return {
 					vim.cmd(tostring(startBorderLn) .. " delete")
 				end,
 				desc = " Delete surrounding indent",
-			},
-			{ -- yank surrounding inner indentation
-				"ysii", -- `ysi` would conflict with `ysib` and other textobs
-				function()
-					-- identify start- and end-border
-					local startPos = vim.api.nvim_win_get_cursor(0)
-					require("various-textobjs").indentation("outer", "outer")
-					local indentationFound = vim.fn.mode():find("V")
-					if not indentationFound then return end
-					vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
-					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
-
-					-- copy them into the + register
-					local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
-					local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] - 1
-					local startLine = vim.api.nvim_buf_get_lines(0, startLn, startLn + 1, false)[1]
-					local endLine = vim.api.nvim_buf_get_lines(0, endLn, endLn + 1, false)[1]
-					vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
-
-					-- highlight yanked text
-					local duration = 1000 -- CONFIG
-					local ns = vim.api.nvim_create_namespace("ysi")
-					vim.api.nvim_buf_add_highlight(0, ns, "IncSearch", startLn, 0, -1)
-					vim.api.nvim_buf_add_highlight(0, ns, "IncSearch", endLn, 0, -1)
-					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
-				end,
-				desc = "󰅍 Yank surrounding indent",
 			},
 			{ -- open URL (forward seeking)
 				"gx",

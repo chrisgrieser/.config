@@ -55,7 +55,7 @@ require("lazy").setup {
 						vim.ui.open(url .. "/commit/" .. commit)
 					end
 				end,
-				desc = " Open issue/commit",
+				desc = " Open issue/commit",
 			},
 		},
 	},
@@ -93,22 +93,23 @@ keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
 
 local pluginTypeIcons = {
+	["ai-plugins"] = "󰚩",
+	["appearance"] = "",
+	["completion"] = "󰩫",
 	["editing-support"] = "󰏫",
 	["files-and-buffers"] = "",
-	["appearance"] = "",
-	["refactoring"] = "󱗘",
-	["lsp-plugins"] = "󰒕",
-	["ai-plugins"] = "󰚩",
-	["git-plugins"] = "󰊢",
-	["treesitter"] = "",
-	["completion"] = "󰩫",
-	["themes"] = "",
-	["notification"] = "󰎟",
 	["folding"] = "󰘖",
+	["git-plugins"] = "󰊢",
+	["lsp-plugins"] = "󰒕",
+	["lualine"] = "",
 	["mason-and-lspconfig"] = "",
 	["motions-and-textobjects"] = "󱡔",
+	["notification"] = "󰎟",
+	["refactoring"] = "󱗘",
 	["telescope"] = "󰭎",
-	["lualine"] = " ",
+	["themes"] = "",
+	["treesitter"] = "",
+	["which-key"] = "⌨️",
 }
 
 -- GOTO PLUGIN SPEC
