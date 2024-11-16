@@ -43,11 +43,13 @@ M.wf_appsOnMouseScreen = wf.new(true)
 --------------------------------------------------------------------------------
 -- ACTIONS
 
-local function toggleSize()
+local function toggleMaximized()
 	local currentWin = hs.window.focusedWindow()
 
 	local smallerWins = { "Finder", "Script Editor", "Reminders", "TextEdit", "System Settings" }
-	local baseSize = u.isFront(smallerWins) and wu.middleHalf or wu.pseudoMax
+	local baseSize = wu.pseudoMax
+	if u.isFront(smallerWins) then baseSize = wu.middleHalf end
+	if env.isProjector() then baseSize = hs.layout.maximized end
 	local newSize = wu.winHasSize(currentWin, baseSize) and hs.layout.maximized or baseSize
 
 	wu.moveResize(currentWin, newSize)
@@ -65,7 +67,7 @@ local function tileLeft() wu.moveResize(hs.window.focusedWindow(), hs.layout.lef
 
 --------------------------------------------------------------------------------
 -- HOTKEYS
-hs.hotkey.bind({ "ctrl" }, "space", toggleSize)
+hs.hotkey.bind({ "ctrl" }, "space", toggleMaximized)
 hs.hotkey.bind(u.hyper, "M", moveToNextDisplay)
 hs.hotkey.bind(u.hyper, "right", tileRight)
 hs.hotkey.bind(u.hyper, "left", tileLeft)

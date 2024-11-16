@@ -10,6 +10,7 @@ local config = {
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
+	rejectScreens = "Acer 1080P PJ",
 	dontTriggerHiding = {
 		"Alfred",
 		"CleanShot X",
@@ -43,15 +44,12 @@ local function autoTile(appName)
 	app:selectMenuItem { "Window", "Bring All to Front" }
 	app:unhide()
 
-	-- need to manually filter windows, since window filter is sometimes buggy,
-	-- not including the correct number of windows
+	-- need to manually filter windows, since window filter is sometimes buggy
+	-- and does include the correct number of windows
 	local ignoredWins = config.appsToAutoTile[appName]
 	local wins = hs.fnutils.filter(app:allWindows(), function(win)
-		local notIgnored = hs.fnutils.every(
-			ignoredWins,
-			function(ignored) return not win:title():find(ignored) end
-		)
-		return notIgnored and win:isStandard()
+		local ignored = hs.fnutils.some(ignoredWins, function(name) return win:title():find(name) end)
+		return not ignored and win:isStandard()
 	end)
 	---@cast wins hs.window[] -- fix wrong annotation
 
@@ -102,7 +100,11 @@ local wf = hs.window.filter
 local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
-		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
+		:setOverrideFilter({
+			rejectTitles = ignoredWins,
+			allowRoles = "AXStandardWindow",
+			rejectScreens = config.rejectScreens,
+		})
 		:subscribe(wf.windowCreated, function() autoTile(appName) end)
 		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
 		:subscribe(wf.windowFocused, function() autoTile(appName) end)
@@ -111,11 +113,9 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, autoTileApp)
 		local frontApp = hs.application.frontmostApplication()
 		if not frontApp then return end
-		local notIgnored = hs.fnutils.every(
-			config.dontTriggerHiding,
-			function(a) return frontApp:name() ~= a end
-		)
-		if name == appName and eventType == aw.deactivated and notIgnored then autoTileApp:hide() end
+		local dontTrigger = config.dontTriggerHiding
+		local ignored = hs.fnutils.some(dontTrigger, function(a) return frontApp:name() == a end)
+		if name == appName and eventType == aw.deactivated and not ignored then autoTileApp:hide() end
 	end):start()
 end
 

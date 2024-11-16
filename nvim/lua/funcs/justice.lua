@@ -127,11 +127,15 @@ end
 
 local function showVariables()
 	local stdout = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
-	notify(stdout, "trace", {
-		title = "Variables",
-		ft = "just",
-		keep = function() return true end,
-	})
+	if vim.trim(stdout) == "" then
+		notify("No variables defined.", "warn", { title = "Variables" })
+	else
+		notify(stdout, "trace", {
+			title = "Variables",
+			ft = "just",
+			keep = function() return true end,
+		})
+	end
 end
 
 ---@nodiscard
