@@ -161,12 +161,43 @@ function M.gotoMostChangedFile()
 	end
 end
 
+---@param direction "Next"|"Prev"
+function M.nextFileInFolder(direction)
+	local curPath = vim.api.nvim_buf_get_name(0)
+	local curFile = vim.fs.basename(curPath)
+	local curFolder = vim.fs.dirname(curPath)
 
----@param dir "next"|"prev"
-function M.nextFileInFolder(dir)
-	local folder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-	local files = vim.fs.dir(folder)
-	vim.api.nvim_buf_set_name(0, files[dir] or "")
+	local itemsInFolder = vim.fs.dir(curFolder)
+	local filesInFolder = vim
+		.iter(itemsInFolder)
+		:filter(function(name, type) return type == "file" and not vim.startswith(name, ".") end)
+		:map(function(item, _) return item end) -- select only name
+		:totable()
+	-- INFO no need for sorting, since `fs.dir` already returns them sorted
+
+	local curIdx
+	for idx = 1, #filesInFolder do
+		if filesInFolder[idx] == curFile then
+			curIdx = idx
+			break
+		end
+	end
+	local nextIdx = curIdx + (direction == "Next" and 1 or -1)
+	if nextIdx < 1 then nextIdx = #filesInFolder end
+	if nextIdx > #filesInFolder then nextIdx = 1 end
+
+	local nextFile = curFolder .. "/" .. filesInFolder[nextIdx]
+	vim.cmd.edit(nextFile)
+
+	local footer = ("# File [%d/%d]"):format(nextIdx, #filesInFolder)
+	filesInFolder[curIdx] = "[" .. filesInFolder[curIdx] .. "]"
+	local msg = "\n- " .. table.concat(filesInFolder, "\n- ")
+	vim.notify(msg, nil, {
+		title = direction .. " in folder",
+		icon = direction == "Next" and "󰖽" or "󰖿",
+		footer = footer,
+		id = "next-in-folder",
+	})
 end
 
 --------------------------------------------------------------------------------

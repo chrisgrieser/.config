@@ -261,6 +261,18 @@ keymap(
 	function() require("funcs.nano-plugins").gotoMostChangedFile() end,
 	{ desc = "󰊢 Goto most changed file" }
 )
+keymap(
+	{ "n", "x" },
+	"<M-CR>",
+	function() require("funcs.nano-plugins").nextFileInFolder("Next") end,
+	{ desc = "󰖽 Next file in folder" }
+)
+keymap(
+	{ "n", "x" },
+	"<S-M-CR>",
+	function() require("funcs.nano-plugins").nextFileInFolder("Prev") end,
+	{ desc = "󰖿 Prev file in folder" }
+)
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
