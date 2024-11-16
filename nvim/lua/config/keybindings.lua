@@ -52,8 +52,8 @@ local function silenceSearch(key)
 	if found > 0 then
 		vim.cmd.normal { key, bang = true }
 	else
-		local msg = ("%q not found."):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = "", timeout = 2000 })
+		local msg = ("[%s] not found"):format(query)
+		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
 	end
 end
 keymap("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
