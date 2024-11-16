@@ -17,13 +17,13 @@ function p {
 }
 
 function line_count() {
-	find . -type file \
+	where=${1:-"."}
+	find -E "$where" -type file \
 		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-		-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
+		-not -regex ".*\.(webp|png|jpe?g|svg|json|ya?ml)$" -print0 |
 		xargs -0 wc -l |
-		sort --reverse |
-		head -n1
+		sort --reverse
 }
 
 # Quick Open File

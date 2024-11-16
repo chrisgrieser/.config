@@ -39,6 +39,7 @@ hsl
 css
 vue
 DOI
+LoC
 APIs
 CLIs
 LSPs
@@ -153,6 +154,7 @@ AntConc
 OneNote
 genghis
 isekais
+vimdocs
 DataLoom
 Dataview
 Filepath
@@ -198,6 +200,7 @@ Evernote
 prepends
 linewise
 dropdown
+endhints
 Blazingly
 Filetypes
 Justfiles
@@ -309,4 +312,3 @@ JavaScriptReact
 TypeScriptReact
 Customizability
 filetype-specific
-vimdocs
