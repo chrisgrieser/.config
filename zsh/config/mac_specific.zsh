@@ -1,7 +1,7 @@
 function eject {
 	volumes=$(df -ih | grep -io "\s/Volumes/.*" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
-		print "\033[1;33mNo volume mounted.\033[0m"
+		print "\e[1;33mNo volume mounted.\e[0m"
 		return 1
 	fi
 	# if one volume, will auto-eject due to `--select-1`
@@ -10,7 +10,7 @@ function eject {
 
 	diskutil eject "$selected" || 
 		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
-		echo "If \`mds_stores\` is blocking, try \`sudo mdutil -i off -d /Volumes/<volume_name>\` to stop Spotlight from indexing."
+		print "If \e[1;33mmds_stores\e[0m is blocking, try \e[1;33msudo mdutil -i off -d /Volumes/<volume_name>\e[0m to stop Spotlight from indexing."
 }
 
 # app-id of macOS apps

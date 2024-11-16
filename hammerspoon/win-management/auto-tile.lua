@@ -4,8 +4,9 @@ local wu = require("win-management.window-utils")
 --------------------------------------------------------------------------------
 
 local config = {
-	---@type table<string, string[]> appName -> ignoredWinTitles
+	---@type table<string, string[]>
 	appsToAutoTile = {
+		-- appName -> ignoredWinTitles
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
