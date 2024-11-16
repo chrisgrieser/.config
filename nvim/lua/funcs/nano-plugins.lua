@@ -167,6 +167,7 @@ function M.nextFileInFolder(direction)
 	local curFile = vim.fs.basename(curPath)
 	local curFolder = vim.fs.dirname(curPath)
 
+	-- get list of files
 	local itemsInFolder = vim.fs.dir(curFolder)
 	local filesInFolder = vim
 		.iter(itemsInFolder)
@@ -175,6 +176,7 @@ function M.nextFileInFolder(direction)
 		:totable()
 	-- INFO no need for sorting, since `fs.dir` already returns them sorted
 
+	-- detemrine next index
 	local curIdx
 	for idx = 1, #filesInFolder do
 		if filesInFolder[idx] == curFile then
@@ -186,16 +188,19 @@ function M.nextFileInFolder(direction)
 	if nextIdx < 1 then nextIdx = #filesInFolder end
 	if nextIdx > #filesInFolder then nextIdx = 1 end
 
+	-- goto file
 	local nextFile = curFolder .. "/" .. filesInFolder[nextIdx]
 	vim.cmd.edit(nextFile)
 
-	local footer = ("# File [%d/%d]"):format(nextIdx, #filesInFolder)
-	filesInFolder[curIdx] = "[" .. filesInFolder[curIdx] .. "]"
-	local msg = "\n- " .. table.concat(filesInFolder, "\n- ")
+	-- notification
+	filesInFolder[curIdx] = "[" .. filesInFolder[curIdx] .. "]" -- mark current
+	local msg = vim.iter(filesInFolder)
+		:map(function(f) return "- " .. f end)
+		:slice(curIdx - 5, curIdx + 5) -- display ~5 files before/after
+		:join("\n")
 	vim.notify(msg, nil, {
-		title = direction .. " in folder",
+		title = direction .. (" (%d/%d)"):format(nextIdx, #filesInFolder),
 		icon = direction == "Next" and "󰖽" or "󰖿",
-		footer = footer,
 		id = "next-in-folder",
 	})
 end
