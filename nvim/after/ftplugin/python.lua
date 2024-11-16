@@ -50,13 +50,13 @@ bkeymap("n", "g/", function()
 end, { desc = " Open in regex101" })
 
 -- custom formatting function to run fix all actions before
--- bkeymap("n", "<D-s>", function()
--- 	vim.lsp.buf.code_action {
--- 		context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
--- 		apply = true,
--- 	}
--- 	vim.defer_fn(vim.lsp.buf.format, 50)
--- end, { desc = " Fixall & Format" })
+bkeymap("n", "<D-s>", function()
+	vim.lsp.buf.code_action {
+		context = { only = { "source.fixAll.ruff" } }, ---@diagnostic disable-line: assign-type-mismatch,missing-fields
+		apply = true,
+	}
+	vim.defer_fn(vim.lsp.buf.format, 50)
+end, { desc = " Fixall & Format" })
 
 bkeymap("n", "<leader>ci", function()
 	vim.lsp.buf.code_action {

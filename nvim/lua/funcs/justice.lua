@@ -35,7 +35,7 @@ local config = {
 		icons = "Function",
 	},
 	icons = {
-		just = "",
+		just = "󱁤",
 		streaming = "ﲋ",
 		quickfix = "",
 		hidden = "󰈉",
