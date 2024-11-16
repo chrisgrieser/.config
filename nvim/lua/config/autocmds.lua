@@ -253,6 +253,30 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 })
 
 --------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "User: Inform on irregular whitespace",
+	callback = function()
+		if vim.bo.buftype ~= "" then return "" end
+
+		-- CONFIG
+		local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 }
+
+		local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
+		local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
+		local differentSpaceAmount = vim.bo.expandtab and spaceFiletypes[vim.bo.ft] ~= vim.bo.shiftwidth
+		local tabsInsteadOfSpaces = not vim.bo.expandtab and vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
+
+		if spacesInsteadOfTabs or differentSpaceAmount then
+			msg = "󱁐 " .. vim.bo.shiftwidth
+		elseif tabsInsteadOfSpaces then
+			msg = "󰌒 " .. vim.bo.shiftwidth
+		end
+		msg = ""
+	end,
+})
+
+--------------------------------------------------------------------------------
 -- GIT CONFLICT MARKERS
 -- if there are conflicts, jump to first conflict, highlight conflict markers,
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
