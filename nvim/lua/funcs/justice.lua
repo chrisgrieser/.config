@@ -25,7 +25,7 @@ local config = {
 		next = "<Tab>",
 		prev = "<S-Tab>",
 		runRecipe = "<CR>",
-		closeWin = { "q", "<Esc>" },
+		closeWin = { "q", "<Esc>", "<D-w>" },
 		quickSelect = { "j", "a", "s", "d", "f" },
 		showRecipe = "<Space>",
 		showVariables = "?", -- shows output of `just --evaluate`
@@ -61,6 +61,10 @@ local function notify(msg, level, opts)
 	opts.title = opts.title and "Just: " .. opts.title or "Just"
 	vim.notify(vim.trim(msg), vim.log.levels[level:upper()], opts)
 end
+
+---@return integer
+---@nodiscard
+local function lnum() return vim.api.nvim_win_get_cursor(0)[1] end
 
 --------------------------------------------------------------------------------
 
@@ -115,17 +119,26 @@ end
 local function showRecipe(recipe)
 	local stdout = vim.system({ "just", "--show", recipe.name }):wait().stdout or "Error"
 	notify(stdout, "trace", {
-		timeout = 10 * 1000, -- longer, so user can read it
 		title = recipe.name,
 		ft = "just",
+		keep = function() return true end,
+	})
+end
+
+local function showVariables()
+	local stdout = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
+	notify(stdout, "trace", {
+		title = "Variables",
+		ft = "just",
+		keep = function() return true end,
 	})
 end
 
 ---@nodiscard
 ---@return Recipe[]?
 local function getRecipes()
-	-- in case user has edited the Justfile
-	if vim.bo.filetype ~= "just" then vim.cmd("silent! update") end
+	-- in case user is currently editing a Justfile
+	if vim.bo.filetype == "just" then vim.cmd("silent! update") end
 
 	local cmd = { "just", "--list", "--unsorted", "--list-heading=", "--list-prefix=" }
 	local result = vim.system(cmd):wait()
@@ -218,25 +231,30 @@ local function selectRecipe()
 	end
 
 	-- general keymaps
-	local opts = { buffer = bufnr, nowait = true }
-	for _, key in pairs(config.keymaps.closeWin) do
-		vim.keymap.set("n", key, vim.cmd.close, opts)
-	end
-	vim.keymap.set("n", config.keymaps.next, "j", opts)
-	vim.keymap.set("n", config.keymaps.prev, "k", opts)
-	vim.keymap.set("n", config.keymaps.runRecipe, function()
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		runRecipe(recipes[lnum])
+	local function closeWin()
 		vim.cmd.close()
+		local ok, snacks = pcall(require, "snacks")
+		if ok then snacks.notifier.hide("just-recipe") end
+	end
+	local opts = { buffer = bufnr, nowait = true }
+	local optsExpr = { buffer = bufnr, nowait = true, expr = true }
+	for _, key in pairs(config.keymaps.closeWin) do
+		vim.keymap.set("n", key, closeWin, opts)
+	end
+	vim.keymap.set("n", config.keymaps.next, function()
+		if lnum() == #recipes then return "gg" end -- wrap
+		return "j"
+	end, optsExpr)
+	vim.keymap.set("n", config.keymaps.prev, function()
+		if lnum() == 1 then return "G" end -- wrap
+		return "k"
+	end, optsExpr)
+	vim.keymap.set("n", config.keymaps.runRecipe, function()
+		runRecipe(recipes[lnum()])
+		closeWin()
 	end, opts)
-	vim.keymap.set("n", config.keymaps.showRecipe, function()
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		showRecipe(recipes[lnum])
-	end, opts)
-	vim.keymap.set("n", config.keymaps.showVariables, function()
-		local out = vim.system({ "just", "--evaluate" }):wait().stdout or "Error"
-		notify(out, nil, { title = "Variables", ft = "just" })
-	end, opts)
+	vim.keymap.set("n", config.keymaps.showRecipe, function() showRecipe(recipes[lnum()]) end, opts)
+	vim.keymap.set("n", config.keymaps.showVariables, showVariables, opts)
 
 	-- quick-select keymaps
 	for i = 1, #recipes do

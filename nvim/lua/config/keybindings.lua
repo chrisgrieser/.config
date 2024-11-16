@@ -50,15 +50,16 @@ local function silenceSearch(key)
 	local query = vim.fn.getreg("/")
 	local found = vim.fn.search(query, "ncw")
 	if found > 0 then
-		return key
+		vim.cmd.normal { key, bang = true }
 	else
 		local msg = ("%q not found."):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = "", timeout = 2500 })
+		vim.notify(msg, vim.log.levels.TRACE, { icon = "", timeout = 2000 })
 	end
 end
-keymap("n", "n", function() silenceSearch("n") end, { expr = true, desc = "silent n" })
-keymap("n", "N", function() silenceSearch("N") end, { expr = true, desc = "silent N" })
-keymap("n", "u", "<cmd>silent undo<CR>zv") -- just to silence it
+keymap("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
+keymap("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
+
+keymap("n", "u", "<cmd>silent undo<CR>zv", { desc = "silent u" })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -184,8 +185,8 @@ keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" }
 keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
 keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
 keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
-keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
 keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up", silent = true })
+keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down", silent = true })
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
