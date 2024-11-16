@@ -91,7 +91,7 @@ M.wf_mimestream = wf.new("Mimestream")
 		if not mimestream then return end
 		local winCount = #mimestream:allWindows()
 		local narrow = { x = 0.184, y = 0, w = 0.45, h = 1 } -- for shorter line width
-		local basesize = env.isProjector() and wu.pseudoMax or hs.layout.maximized
+		local basesize = env.isProjector() and hs.layout.maximized or wu.pseudoMax
 		local newSize = winCount > 1 and narrow or basesize
 		wu.moveResize(newWin, newSize)
 	end)
@@ -114,9 +114,7 @@ M.aw_discord = aw.new(function(appName, event)
 	local clipb = hs.pasteboard.getContents()
 	if clipb and event == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
-		-- for tweets, the previews are actually useful since they show the full content
-		local isTweet = clipb:find("^https?://x%.com") or clipb:find("^https?://mastodon%.*")
-		if hasURL and not isTweet then hs.pasteboard.setContents("<" .. clipb .. ">") end
+		if hasURL then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif clipb and event == aw.deactivated then
 		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
 		if hasEnclosedURL then
