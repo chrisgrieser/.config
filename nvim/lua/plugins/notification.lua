@@ -1,4 +1,5 @@
--- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
+-- DOCS Snacks.notifier
+-- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
 return {
@@ -8,25 +9,26 @@ return {
 		-- override default print functions
 		_G.print = function(...)
 			local msg = vim.iter({ ... }):join(" ")
-			vim.notify(msg, vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
+			vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
 		end
-		vim.api.nvim_echo = function(chunks, _, _) ---@diagnostic disable-line: duplicate-set-field
+		---@diagnostic disable-next-line: duplicate-set-field deliberate override
+		vim.api.nvim_echo = function(chunks, _, _)
 			local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
-			local isGitsignsHunk = msg:find("^Hunk %d+ of %d+")
-			local opts = isGitsignsHunk and { title = "Gitsigns", icon = "", id = "gitsigns-hunk" }
-				or { title = "Echo", icon = "" }
-			vim.notify(msg, vim.log.levels.DEBUG, opts)
+			local opts = { title = "Echo", icon = "" }
+			if msg:lower():find("hunk") then
+				msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]")
+				opts.title = nil
+				opts.icon = "󰊢"
+				opts.id = "gitsigns_nav_hunk"
+			end
+			vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 		end
 	end,
 	keys = {
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
-		{
-			"<D-8>",
-			"<cmd>messages<CR>",
-			desc = ":mess",
-		},
+		{ "<D-8>", "<cmd>messages<CR>", desc = ":mess" },
 		{
 			desc = "󰎟 Notification history",
 			"<D-0>",
@@ -80,16 +82,16 @@ return {
 			modes = { "n" },
 			debounce = 300,
 		},
+		win = {
+			keys = { q = "close", ["<Esc>"] = "close", ["<D-0>"] = "close", ["<D-9>"] = "close" },
+			border = vim.g.borderStyle,
+		},
 		notifier = {
 			timeout = 6000,
 			width = { min = 20, max = 0.5 },
 			height = { min = 1, max = 0.4 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
-		},
-		win = {
-			keys = { q = "close", ["<Esc>"] = "close", ["<D-0>"] = "close", ["<D-9>"] = "close" },
-			border = vim.g.borderStyle,
 		},
 		styles = {
 			notification = {
