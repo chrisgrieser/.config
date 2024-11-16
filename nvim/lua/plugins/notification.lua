@@ -113,6 +113,8 @@ return {
 				local history = require("snacks").notifier.get_history()
 				local last = history[#history]
 				if not last then return end
+				require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
+
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
 				vim.bo[bufnr].modifiable = false
@@ -150,7 +152,7 @@ return {
 		styles = {
 			notification = {
 				border = vim.g.borderStyle,
-				wo = { wrap = true, winblend = 0 },
+				wo = { wrap = true, winblend = 0, cursorline = false },
 			},
 		},
 	},
