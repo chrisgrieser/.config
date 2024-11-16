@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FocusGained", {
-	desc = "User: Fix cwd being not available when it is deleted outside nvim.",
+	desc = "User: FIX cwd being not available when it is deleted outside nvim.",
 	callback = function()
 		if not vim.uv.cwd() then vim.uv.chdir("/") end
 	end,
@@ -249,30 +249,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			local newFt = vim.filetype.match { buf = bufnr }
 			if vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
 		end, 100)
-	end,
-})
-
---------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-	desc = "User: Inform on irregular whitespace",
-	callback = function()
-		if vim.bo.buftype ~= "" then return "" end
-
-		-- CONFIG
-		local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 }
-
-		local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-		local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
-		local differentSpaceAmount = vim.bo.expandtab and spaceFiletypes[vim.bo.ft] ~= vim.bo.shiftwidth
-		local tabsInsteadOfSpaces = not vim.bo.expandtab and vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
-
-		if spacesInsteadOfTabs or differentSpaceAmount then
-			msg = "󱁐 " .. vim.bo.shiftwidth
-		elseif tabsInsteadOfSpaces then
-			msg = "󰌒 " .. vim.bo.shiftwidth
-		end
-		msg = ""
 	end,
 })
 
