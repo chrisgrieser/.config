@@ -120,6 +120,8 @@ function M.toggleWordCasing()
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
 
+--------------------------------------------------------------------------------
+
 function M.gotoMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
@@ -157,6 +159,14 @@ function M.gotoMostChangedFile()
 	else
 		vim.cmd.edit(targetFile)
 	end
+end
+
+
+---@param dir "next"|"prev"
+function M.nextFileInFolder(dir)
+	local folder = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+	local files = vim.fs.dir(folder)
+	vim.api.nvim_buf_set_name(0, files[dir] or "")
 end
 
 --------------------------------------------------------------------------------
