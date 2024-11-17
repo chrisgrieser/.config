@@ -1,23 +1,4 @@
-local originalScrollOff = vim.o.scrolloff
-
 return {
-	{ -- fixes scrolloff at end of file
-		"Aasim-A/scrollEOF.nvim",
-		event = "CursorMoved",
-		opts = true,
-		keys = {
-			-- stylua: ignore
-			{ "<leader>of", function() vim.opt.scrolloff = originalScrollOff end, desc = "⇓ Fix Scrolloff" },
-		},
-		init = function()
-			vim.api.nvim_create_autocmd("BufEnter", {
-				desc = "User: FIX Restore scrolloff",
-				callback = function()
-					if vim.o.scrolloff == 0 then vim.opt.scrolloff = originalScrollOff end
-				end,
-			})
-		end,
-	},
 	{ -- indentation guides
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
