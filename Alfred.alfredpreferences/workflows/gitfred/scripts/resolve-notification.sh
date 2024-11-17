@@ -19,13 +19,20 @@ else
 		# some notification types like ci-activity do not provide a thread
 		github_url="https://github.com/notifications?query=is%3Aunread"
 	else
-		github_url=$(
-			curl -sL -H "Accept: application/vnd.github+json" \
-				-H "Authorization: Bearer $GITHUB_TOKEN" \
-				-H "X-GitHub-Api-Version: 2022-11-28" \
-				"$api_url" |
-				grep --max-count=1 "html_url" | cut -d '"' -f 4 # skip `jq` dependency
-		)
+		response=$(curl -sL -H "Accept: application/vnd.github+json" \
+			-H "Authorization: Bearer $GITHUB_TOKEN" \
+			-H "X-GitHub-Api-Version: 2022-11-28" \
+			"$api_url")
+		# using `grep` here avoids `jq` dependency
+		github_url=$(echo "$response" | grep --max-count=1 '"html_url"' | cut -d '"' -f4)
+
+		# VALIDATE
+		if [[ -z "$github_url" ]]; then
+			err_msg="ERROR: could not get url to open. Check debugging log"
+			echo -n "$err_msg"                               # pass for Alfred notification
+			print "$err_msg\nGithub response: $response" >&2 # pass to console
+			return 1
+		fi
 	fi
 
 	if [[ "$mode" == "open" ]]; then

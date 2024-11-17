@@ -5,7 +5,9 @@ local wu = require("win-management.window-utils")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
+
 --------------------------------------------------------------------------------
+-- MOVE TO THE SIDE
 
 local function moveToSide()
 	local masto = u.app("Ivory")
@@ -17,8 +19,17 @@ local function moveToSide()
 	mastoWin:raise()
 end
 
+if u.isSystemStart() then moveToSide() end
+
+M.aw_mastoLaunched = aw.new(function(appName, event)
+	if appName == "Ivory" and event == aw.launched then u.defer(1, moveToSide) end
+end):start()
+
+--------------------------------------------------------------------------------
+-- SHOW/HIDE APP
+
 ---@param win? hs.window
-local function showAndMoveOrHideTickerApp(win)
+local function showAndMoveOrHide(win)
 	-- GUARD
 	local masto = u.app("Ivory")
 	local frontWin = hs.window.focusedWindow()
@@ -43,80 +54,48 @@ end
 M.wf_someWindowActivity = wf
 	.new(true) -- `true` -> all windows
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowMoved, showAndMoveOrHideTickerApp)
-	:subscribe(wf.windowFocused, showAndMoveOrHideTickerApp)
-	:subscribe(wf.windowCreated, showAndMoveOrHideTickerApp)
-
-if u.isSystemStart() then moveToSide() end
-
-M.aw_mastoLaunched = aw.new(function(appName, event)
-	if appName == "Ivory" and event == aw.launched then u.defer(1, moveToSide) end
-end):start()
+	:subscribe(wf.windowMoved, showAndMoveOrHide)
+	:subscribe(wf.windowFocused, showAndMoveOrHide)
+	:subscribe(wf.windowCreated, showAndMoveOrHide)
 
 --------------------------------------------------------------------------------
-
 -- FALLTHROUGH
--- prevent unintended focusing after closing a window
-M.wf_fallthrough = wf
-	.new(true) -- `true` -> all windows
-	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowDestroyed, function()
-		u.defer(0.15, function()
-			local nonMastoWin = hs.fnutils.find(
-				hs.window:orderedWindows(),
-				function(win) return win:application() and win:application():name() ~= "Ivory" end
-			)
-			if nonMastoWin and u.isFront("Ivory") then nonMastoWin:focus() end
-		end)
-	end)
 
---------------------------------------------------------------------------------
--- SPECIAL WINS
-
--- * auto-focus compose win when activating
--- * auto-close media wins when deactivating
-M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
-	if appName == "Ivory" and event == aw.activated then
-		masto:selectMenuItem { "Window", "Bring All to Front" }
-		local composeWin = masto:findWindow("Compose")
-		if composeWin then composeWin:focus() end
-	elseif appName == "Ivory" and event == aw.deactivated then
-		local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
-		local frontApp = hs.application.frontmostApplication():name()
-		if mediaWin and frontApp ~= "Alfred" then
-			mediaWin:close()
-			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- redundancy as closing not reliable
-		end
-	end
-end):start()
-
---------------------------------------------------------------------------------
-
-local function homeAndScrollUp()
-	-- GUARD concurrent calls
-	if M.isScrolling then return end
-	M.isScrolling = true
-	u.defer(10, function() M.isScrolling = false end)
-
-	-- GUARD only when not idle, to not prevent the device from going to sleep
-	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
-
-	-- GUARD only if app is running in background and already has window
-	local masto = u.app("Ivory")
-	if not masto or masto:isFrontmost() or #masto:allWindows() ~= 1 then return end
-
-	local key = hs.eventtap.keyStroke
-	key({}, "left", 1, masto) -- go back
-	key({ "cmd" }, "1", 1, masto) -- go to home tab
-	key({ "cmd", "shift" }, "R", 1, masto) -- refresh
-	u.defer({ 1, 2, 4 }, function() -- wait for posts to load
-		key({ "cmd" }, "up", 1, masto) -- scroll up
+-- prevent unintended focusing after closing a window / quitting app
+local function fallthrough()
+	u.defer(0.15, function()
+		local nonMastoWin = hs.fnutils.find(
+			hs.window:orderedWindows(),
+			function(win) return win:application() and win:application():name() ~= "Ivory" end
+		)
+		if nonMastoWin and u.isFront("Ivory") then nonMastoWin:focus() end
 	end)
 end
 
--- triggers
-M.aw_mastoDeavtivated = aw.new(function(appName, event)
-	if appName == "Ivory" and event == aw.deactivated then homeAndScrollUp() end
+M.wf_fallthrough = wf
+	.new(true) -- `true` -> all windows
+	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
+	:subscribe(wf.windowDestroyed, fallthrough)
+M.aw_fallthrough = aw.new(function(appName, event, _)
+	if event == aw.terminated and appName ~= "Ivory" then fallthrough() end
+end):start()
+
+--------------------------------------------------------------------------------
+-- RESET ON DEACTIVATION
+
+M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
+	if appName == "Ivory" and event == aw.deactivated then
+		-- close any media windows
+		local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
+		local frontApp = hs.application.frontmostApplication():name()
+		if mediaWin and frontApp ~= "Alfred" then mediaWin:close() end
+
+		-- go back to home tab
+		if #masto:allWindows() == 1 then
+			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+		end
+	end
 end):start()
 
 --------------------------------------------------------------------------------
