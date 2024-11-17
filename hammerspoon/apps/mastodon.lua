@@ -12,7 +12,9 @@ local function moveToSide()
 	local masto = u.app(mastoApp)
 	if not masto then return end
 	local mastodonUsername = "pseudometa" -- CONFIG
-	local mastoWin = masto:findWindow(mastoApp) or masto:findWindow(mastodonUsername)
+	local mastoWin = masto:findWindow(mastoApp)
+		or masto:findWindow(mastodonUsername) 
+		or masto:findWindow("Home") 
 	if not mastoWin then return end
 
 	if masto:isHidden() then masto:unhide() end
@@ -94,7 +96,7 @@ end):start()
 --------------------------------------------------------------------------------
 
 local function homeAndScrollUp()
-	-- prevent too many concurrent calls
+	-- GUARD concurrent calls
 	if M.isScrolling then return end
 	M.isScrolling = true
 	u.defer(10, function() M.isScrolling = false end)
@@ -113,6 +115,13 @@ local function homeAndScrollUp()
 		key({ "cmd" }, "R", 1, masto) -- refresh
 		u.defer({ 1, 4 }, function() -- wait for posts to load
 			key({ "cmd" }, "up", 1, masto) -- scroll up
+		end)
+	elseif mastoApp == "Ivory" then
+		key({}, "left", 1, masto) -- go back
+		key({ "cmd" }, "1", 1, masto) -- go to home tab
+		key({ "cmd", "shift" }, "R", 1, masto) -- refresh
+		u.defer({ 1, 2, 4 }, function() -- wait for posts to load
+			key({ "cmd" }, "up", 1, masto) -- scroll up 
 		end)
 	end
 end
