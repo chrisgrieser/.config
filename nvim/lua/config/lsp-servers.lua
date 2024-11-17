@@ -12,9 +12,9 @@ local lspToMasonMap = {
 	biome = "biome", -- ts/js/json/css linter/formatter
 	css_variables = "css-variables-language-server", -- support css variables across multiple files
 	cssls = "css-lsp",
-	efm = "efm", -- linter integration (only used for shellcheck & just)
+	efm = "efm", -- linter/formatter integration
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	harper_ls = "harper-ls", -- natural language linter (only used for markdown though)
+	harper_ls = "harper-ls", -- natural language linter
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
@@ -52,12 +52,12 @@ M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMas
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
 M.serverConfigs.bashls = {
-	filetypes = { "sh", "zsh", "bash" }, -- work in zsh as well
+	filetypes = { "bash", "sh", "zsh" }, -- force it to work in zsh as well
 	settings = {
 		bashIde = {
+			shfmt = { spaceRedirects = true },
 			shellcheckPath = "", -- disable while using efm
 			shellcheckArguments = "--shell=bash", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
-			shfmt = { spaceRedirects = true },
 		},
 	},
 }
@@ -137,7 +137,7 @@ M.serverConfigs.lua_ls = {
 				callSnippet = "Replace",
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- don't suggest common words as fallback
-				workspaceWord = false, -- already done by cmp-buffer
+				workspaceWord = false, -- already done completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
@@ -349,7 +349,7 @@ M.serverConfigs.ltex = {
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 M.serverConfigs.typos_lsp = {
-	init_options = { diagnosticSeverity = "Information" }, -- Information|Warning|Hint|Error
+	init_options = { diagnosticSeverity = "Information" }, 
 }
 
 --------------------------------------------------------------------------------

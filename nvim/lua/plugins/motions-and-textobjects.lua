@@ -39,7 +39,12 @@ return {
 			},
 			{
 				"dq",
-				"mzd<cmd>TSTextobjectSelect @comment.outer<CR>`z",
+				function ()
+					local prevCursor = vim.api.nvim_win_get_cursor(0)
+					vim.cmd.TSTextobjectSelect("@comment.outer")
+					vim.cmd.normal { "d", bang = true }
+					vim.api.nvim_win_set_cursor(0, prevCursor)
+				end,
 				desc = "󰆈 Sticky Delete Comment",
 			},
 			{
@@ -61,8 +66,10 @@ return {
 			{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
 			{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
 			{ "Ä", "<cmd>TSTextobjectSwapPrevious @parameter.inner<CR>", desc = " Swap prev arg" },
+			-- stylua: ignore end
 
 			-- TEXT OBJECTS
+			-- stylua: ignore start
 			{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = { "x", "o" }, desc = "↩ outer return" },
 			{ "<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
 			{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = { "x", "o" }, desc = " outer regex" },

@@ -53,7 +53,7 @@ return {
 		config = function()
 			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
 
-			-- Enable completion (nvim-cmp/blink.cmp) and folding (nvim-ufo)
+			-- Enable completion (blink.cmp) and folding (nvim-ufo)
 			-- PENDING https://github.com/Saghen/blink.cmp/issues/13
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
