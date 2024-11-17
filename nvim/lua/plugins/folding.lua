@@ -13,7 +13,10 @@ return {
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close All Folds" },
 			{
 				"zr",
-				function() require("ufo").openFoldsExceptKinds { "comment", "imports" } end,
+				function()
+					require("ufo").openFoldsExceptKinds { "comment", "imports" }
+					vim.opt.scrolloff = 13 -- FIX scrolloff being reset
+				end,
 				desc = "󱃄 Open Regular Folds",
 			},
 			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󱃄 Close L1 Folds" },

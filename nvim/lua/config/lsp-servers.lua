@@ -68,7 +68,7 @@ M.serverConfigs.bashls = {
 local efmConfig = {
 	lua = {
 		{
-			formatCommand = "stylua -",
+			formatCommand = "stylua --stdin-filepath='${INPUT}' --respect-ignores -",
 			formatStdin = true,
 			rootMarkers = { "stylua.toml", ".stylua.toml" },
 		},
@@ -116,6 +116,14 @@ M.serverConfigs.efm = {
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
+	root_dir = function()
+		local allRootMarkers = vim.iter(vim.tbl_values(efmConfig))
+			:flatten()
+			:map(function(config) return config.rootMarkers end)
+			:flatten()
+			:totable()
+		return vim.fs.root(0, allRootMarkers)
+	end,
 }
 
 --------------------------------------------------------------------------------
