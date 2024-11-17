@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2012,2016
 
 # REQUIRED `webp`
 [[ -x "$(command -v cwebp)" ]] || brew install webp
@@ -17,6 +16,7 @@ echo
 #───────────────────────────────────────────────────────────────────────────────
 
 setopt nonomatch # missing extensions do not throw error
+# shellcheck disable=2012
 total=$(ls ./**/*.{png,jpeg,jpg} | wc -l | tr -d ' ')
 i=1
 for filename in **/*.{png,jpeg,jpg}; do
