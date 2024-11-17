@@ -4,16 +4,18 @@
 # set -e
 github_username="chrisgrieser"
 
-repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="alfred|shimmering-obsidian|gitfred"
 # repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-# repo_names="." # all repos
+repo_names="." # all repos
 
 function actions_in_repo {
-	cp -fv "$HOME/Desktop/Justfile" ./Justfile
+	if [[ -f ./.github/workflows/stale-bot.yml ]] ; then
+		cp -fv "$HOME/Desktop/stale-bot.yml" ./.github/workflows/stale-bot.yml
+	fi
 }
 
-commit_msg="build: update Justfile"
+commit_msg="ci(stale-bot): bump version & update weekly instead of daily"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -50,11 +52,12 @@ if [[ "$pressed" != "y" ]]; then
 	echo "Aborted."
 	return 1
 fi
-echo && echo
+echo 
+echo "────────────────────────"
+echo
 
 #───────────────────────────────────────────────────────────────────────────────
 
-echo "────────────────────────"
 cd /tmp || return 1
 
 # clone each repo, do the replacements, and git add/commit/push
