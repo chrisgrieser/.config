@@ -2,8 +2,9 @@
   "autocmd": {
     "body": [
       "vim.api.nvim_create_autocmd(\"${1:event}\", {",
+      "\tdesc = \"User: $0\",",
       "\tcallback = function()",
-      "\t\t$0",
+      "",
       "\tend,",
       "})"
     ],
@@ -12,9 +13,10 @@
   "autocmd (Filetype)": {
     "body": [
       "vim.api.nvim_create_autocmd(\"FileType\", {",
+      "\tdesc = \"User: $0\",",
       "\tpattern = \"${1:ft}\",",
       "\tcallback = function()",
-      "\t\t$0",
+      "",
       "\tend,",
       "})"
     ],

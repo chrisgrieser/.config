@@ -1,4 +1,4 @@
-# PENDING https://github.com/mason-org/mason-registry/pull/7957
+# using my own package config PENDING https://github.com/mason-org/mason-registry/pull/7957
 ---
 name: stylua
 description: An opinionated Lua code formatter.
@@ -30,7 +30,7 @@ source:
       file: stylua-linux-x86_64-musl.zip
       bin: stylua
     - target: win_x64
-      file: stylua-windows-x86-64.zip
+      file: stylua-windows-x86_64.zip
       bin: stylua.exe
 
 bin:
