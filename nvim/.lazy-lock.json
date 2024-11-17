@@ -20,7 +20,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "87c7c83ce62971e0bdb29bb32b8ad2b19c8f95d0" },
   "nvim-origami": { "branch": "main", "commit": "32be25559e48d277e5a8c4d94774a20da76a9842" },
   "nvim-rip-substitute": { "branch": "main", "commit": "a75086a7ba884b54a724b1942821140677739329" },
-  "nvim-rulebook": { "branch": "main", "commit": "ed5cca216e4935b6eca4e0deac942ab769ea84d1" },
+  "nvim-rulebook": { "branch": "main", "commit": "4de2dc930d69bb75044588be8fff89679c1550a1" },
   "nvim-scissors": { "branch": "main", "commit": "49528c9a8b4bf6382270ebfcb8466f47abce4b87" },
   "nvim-spider": { "branch": "main", "commit": "f35bcdbd89a560e9a450ee1929bcef7aedf3ace5" },
   "nvim-surround": { "branch": "main", "commit": "dca2e998ff26681ee422b92c6ed39b3d2908d8a9" },
