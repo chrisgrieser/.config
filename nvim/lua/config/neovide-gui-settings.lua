@@ -32,12 +32,12 @@ if isAtMother then
 	g.neovide_padding_left = 6
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.05
-	g.neovide_refresh_rate = 100
+	g.neovide_refresh_rate = 75
 	g.neovide_padding_top = 0
 	g.neovide_padding_left = 2
 else
 	g.neovide_scale_factor = 1
-	g.neovide_refresh_rate = 200
+	g.neovide_refresh_rate = 100
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end

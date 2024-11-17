@@ -3,20 +3,20 @@
 -- INFO the first theme in the list is used
 -- rest are themes I already tried and also like
 local darkThemes = {
+	"Kanagawa (Gogh)",
 	"ChallengerDeep",
 	"Afterglow (Gogh)",
 	"cyberpunk",
 	"duckbones",
-	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
 }
 local lightThemes = {
+	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
 	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
 	"Silk Light (base16)",
 	"Bluloco Zsh Light (Gogh)",
-	"Solar Flare Light (base16)",
 }
 
 local lightOpacity = 0.91
@@ -40,17 +40,17 @@ if host:find("Mother") then device = "mother" end
 local deviceConfig = {
 	home = {
 		fontSize = 26.3,
-		maxFps = 60,
+		maxFps = 180,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
 	office = {
 		fontSize = 27.3,
-		maxFps = 60,
+		maxFps = 120,
 		winPos = { x = 375, y = -100, w = 1675 },
 	},
 	mother = {
 		fontSize = 24,
-		maxFps = 40,
+		maxFps = 60,
 		winPos = { x = 620, y = 0, w = 2745 },
 	},
 }
