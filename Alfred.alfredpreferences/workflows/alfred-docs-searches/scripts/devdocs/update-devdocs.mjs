@@ -20,8 +20,8 @@ const aliases = {
 	browser_support_tables: "cani",
 	matplotlib: "plt", // conventional abbreviation: https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
 
-	// PENDING https://github.com/freeCodeCamp/devdocs/issues/2210
-	// devdocs aliases https://devdocs.io/help#aliases
+	// update this once this PR is merged active: https://github.com/freeCodeCamp/devdocs/pull/2344
+	// check via: curl -sL "https://devdocs.io/docs.json" | grep "alias" | grep -v "null" ; curl -sL "https://documents.devdocs.io/docs.json" | grep "alias" | grep -v "null"
 	angular: "ng",
 	angularjs: "ng", // removed `.`
 	backbone: "bb", // removed `.js`
