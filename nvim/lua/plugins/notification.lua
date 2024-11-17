@@ -22,16 +22,6 @@ local function snacksConfig()
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
-	-----------------------------------------------------------------------------
-
-	-- SILENCE SOME MESSAGES by overriding snacks' override
-	local snackNotify = vim.notify
-	vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field
-		-- PENDING https://github.com/artempyanykh/marksman/issues/348
-		if msg:find("^Client marksman quit with exit code 1 and signal 0") then return end
-
-		snackNotify(msg, ...)
-	end
 
 	-----------------------------------------------------------------------------
 	-- SILENCE "E486: PATTERN NOT FOUND"
@@ -54,17 +44,14 @@ local function snacksConfig()
 	vim.keymap.set("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
 	vim.keymap.set("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
 
-	local group = vim.api.nvim_create_augroup("silent-search", {})
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
 		desc = "User: Change cmdline-height to silence Enter-prompt (1/2)",
-		group = group,
 		callback = function()
 			if vim.fn.getcmdtype():find("[/?]") then vim.opt.cmdheight = 1 end
 		end,
 	})
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
 		desc = "User: Change cmdline-height to silence Enter-prompt (2/2)",
-		group = group,
 		callback = function()
 			if vim.fn.getcmdtype() ~= "/" then return end
 			vim.defer_fn(function()

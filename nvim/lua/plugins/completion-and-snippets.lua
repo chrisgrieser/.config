@@ -1,8 +1,14 @@
+--[[ TODO on next blink.cmp update
+* new `draw` spec
+* check if completion-enabling is still needed for `css_ls` at `nvim-lspconfig`
+  config, (see: https://github.com/Saghen/blink.cmp/issues/13)
+]]
+
 return {
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		version = "v0.*", -- REQUIRED release tag needed to download pre-built binaries
+		version = "v0.*", -- REQUIRED `tag` needed to download pre-built binary
 
 		opts = {
 			highlight = {
@@ -116,8 +122,12 @@ return {
 		init = function() vim.g.whichkeyAddGroup("<leader>n", "󰩫 Snippets") end,
 		keys = {
 			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = "󰩫 Edit" },
-			-- stylua: ignore
-			{ "<leader>na", function() require("scissors").addNewSnippet() end, mode = { "n", "x" }, desc = "󰩫 Add" },
+			{
+				"<leader>na",
+				function() require("scissors").addNewSnippet() end,
+				mode = { "n", "x" },
+				desc = "󰩫 Add",
+			},
 		},
 		opts = {
 			editSnippetPopup = {
