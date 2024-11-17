@@ -5,8 +5,7 @@ local wu = require("win-management.window-utils")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
-local env = require("meta.environment")
-local mastoApp = env.mastodonApp
+local mastoApp = require("meta.environment").mastodonApp
 --------------------------------------------------------------------------------
 
 local function moveToSide()
@@ -16,13 +15,8 @@ local function moveToSide()
 	local mastoWin = masto:findWindow(mastoApp) or masto:findWindow(mastodonUsername)
 	if not mastoWin then return end
 
-	-- negative x to hide useless sidebar
-	local toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
-	if env.isAtMother then toTheSide = hs.geometry.rect(-78, 54, 387, 890) end
-	if env.isAtOffice then toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
-
 	if masto:isHidden() then masto:unhide() end
-	mastoWin:setFrame(toTheSide)
+	mastoWin:setFrame(wu.toTheSide)
 	mastoWin:raise()
 end
 
