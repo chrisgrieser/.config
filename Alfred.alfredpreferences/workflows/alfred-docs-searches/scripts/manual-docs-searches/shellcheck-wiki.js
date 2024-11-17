@@ -16,20 +16,22 @@ function run() {
 		.split("\r")
 		.slice(3, -1)
 		.map((/** @type {string} */ line) => {
-			const subsite = line.replace(ahrefRegex, "$1");
-			if (subsite === "</li>") return {};
+			const title = line.replace(ahrefRegex, "$1");
+			if (title === "</li>") return {};
 			const desc = line.replace(ahrefRegex, "$2").replaceAll("&ndash;", "").trim();
-			const url = baseURL + subsite;
-			let matcher = subsite;
+			const url = baseURL + title;
 
 			// if rule with number, add the number alone to the matcher as well
-			const hasNumber = subsite.match(/\d{4}$/);
-			if (hasNumber) matcher += " " + hasNumber[0].toString();
+			const hasNumber = title.match(/\d{4}$/);
+			const numberMatcher = hasNumber ? " " + hasNumber[0] : "";
 
 			return {
-				title: subsite,
+				title: title,
 				subtitle: desc,
-				match: matcher,
+				match: title + numberMatcher,
+				mods: {
+					cmd: { arg: title }, // copy entry
+				},
 				arg: url,
 				quicklookurl: url,
 				uid: url,

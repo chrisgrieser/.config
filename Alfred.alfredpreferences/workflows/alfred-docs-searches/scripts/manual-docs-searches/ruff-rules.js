@@ -20,11 +20,12 @@ function run() {
 		.doShellScript(`curl -s "${ruffRulesUrl}" | grep -A1 "<td id="`)
 		.split("\r--\r") // grep delimiter
 		.map((ruleInfo) => {
-			let [id, name] = ruleInfo.split("\r");
-			id = id.match(/id="(.*?)"/)[1];
-			name = name.includes("href") ? name.match(/href="(.*?)\/"/)[1] : name.match(/>(.*?)<.*/)[1];
+			const [idRaw, nameRaw] = ruleInfo.split("\r");
+			const [_, id] = idRaw.match(/id="(.*?)"/) || [];
+			const [__, name] = nameRaw.includes("href")
+				? nameRaw.match(/href="(.*?)\/"/) || []
+				: nameRaw.match(/>(.*?)<.*/) || [];
 			const displayName = name.replace(/-/g, " ");
-
 			const url = ruffRulesUrl + name + "/";
 
 			/** @type{AlfredItem} */
@@ -34,6 +35,9 @@ function run() {
 				match: alfredMatcher(id) + alfredMatcher(name),
 				arg: url,
 				quicklookurl: url,
+				mods: {
+					cmd: { arg: name }, // copy entry
+				},
 				uid: url,
 			};
 			return item;

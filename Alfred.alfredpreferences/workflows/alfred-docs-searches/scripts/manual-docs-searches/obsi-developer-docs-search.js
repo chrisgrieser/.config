@@ -48,6 +48,9 @@ function run() {
 				subtitle: category,
 				match: camelCaseMatch(title),
 				arg: url,
+				mods: {
+					cmd: { arg: title }, // copy entry
+				},
 				quicklookurl: url,
 				uid: url,
 			};
@@ -74,6 +77,9 @@ function run() {
 				subtitle: category,
 				match: camelCaseMatch(title),
 				icon: { path: "./scripts/manual-docs-searches/CodeMirror.png" },
+				mods: {
+					cmd: { arg: title }, // copy entry
+				},
 				arg: url,
 				quicklookurl: url,
 				uid: url,
