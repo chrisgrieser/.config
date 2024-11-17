@@ -169,17 +169,24 @@ function M.nextFileInFolder(direction)
 
 	-- get list of files
 	local itemsInFolder = vim.fs.dir(curFolder)
-	local filesInFolder = vim
-		.iter(itemsInFolder)
-		:filter(function(name, type) return type == "file" and not vim.startswith(name, ".") end)
-		:map(function(name, _)
-			local f = vim.uv.fs_stat(curFolder .. "/" .. name)
-			return f
-		end) -- select only name
-		:totable()
+	local filesInFolder = vim.iter(itemsInFolder):fold({}, function(acc, name, type)
+		local ext = name:match("%.(%w+)$")
+		local binary = vim.tbl_contains({ "png", "svg", "webp" }, ext)
+		if type ~= "file" or vim.startswith(name, ".") then return acc end
+		table.insert(acc, name) -- select only name
+		return acc
+	end)
 	-- INFO no need for sorting, since `fs.dir` already returns them sorted
-	vim.notify("🖨️ filesInFolder: " .. vim.inspect(filesInFolder), nil, { ft = "lua" })
+	vim.notify(--[[🖨️]] vim.inspect(filesInFolder), nil, { ft = "lua", title = "filesInFolder 🖨️" })
 	if true then return end
+
+	-- GUARD edge cases like if currently at a hidden file and there are only
+	-- hidden files in the directory
+	if #filesInFolder == 0 then
+		local msg = "No valid files found in folder."
+		vim.notify(msg, vim.log.levels.ERROR, { title = direction .. " file" })
+		return
+	end
 
 	-- detemrine next index
 	local curIdx
@@ -199,7 +206,8 @@ function M.nextFileInFolder(direction)
 
 	-- notification
 	filesInFolder[nextIdx] = "[" .. filesInFolder[nextIdx] .. "]" -- mark current
-	local msg = vim.iter(filesInFolder)
+	local msg = vim
+		.iter(filesInFolder)
 		:map(function(f) return "- " .. f end)
 		:slice(curIdx - 5, curIdx + 5) -- display ~5 files before/after
 		:join("\n")
