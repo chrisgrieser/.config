@@ -37,6 +37,9 @@ function run() {
 			return {
 				title: title.replaceAll("-", " "),
 				subtitle: category,
+				mods: {
+					cmd: { arg: title }, // copy entry
+				},
 				arg: url,
 				quicklookurl: url,
 				uid: subsite,

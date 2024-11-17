@@ -172,9 +172,14 @@ function M.nextFileInFolder(direction)
 	local filesInFolder = vim
 		.iter(itemsInFolder)
 		:filter(function(name, type) return type == "file" and not vim.startswith(name, ".") end)
-		:map(function(item, _) return item end) -- select only name
+		:map(function(name, _)
+			local f = vim.uv.fs_stat(curFolder .. "/" .. name)
+			return f
+		end) -- select only name
 		:totable()
 	-- INFO no need for sorting, since `fs.dir` already returns them sorted
+	vim.notify("🖨️ filesInFolder: " .. vim.inspect(filesInFolder), nil, { ft = "lua" })
+	if true then return end
 
 	-- detemrine next index
 	local curIdx
@@ -193,7 +198,7 @@ function M.nextFileInFolder(direction)
 	vim.cmd.edit(nextFile)
 
 	-- notification
-	filesInFolder[curIdx] = "[" .. filesInFolder[curIdx] .. "]" -- mark current
+	filesInFolder[nextIdx] = "[" .. filesInFolder[nextIdx] .. "]" -- mark current
 	local msg = vim.iter(filesInFolder)
 		:map(function(f) return "- " .. f end)
 		:slice(curIdx - 5, curIdx + 5) -- display ~5 files before/after

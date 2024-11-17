@@ -5,7 +5,7 @@
 local function snacksInit()
 	-- OVERRIDE DEFAULT PRINT FUNCTIONS
 	_G.print = function(...)
-		local msg = vim.iter({ ... }):join(" ")
+		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
 		if msg:find("^%[nvim%-treesitter%]") then
 			opts = { icon = "", id = "ts-install", style = "minimal" }

@@ -23,20 +23,23 @@ function run() {
 		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
 		.reverse()
 		.map((/** @type {{ path: string }} */ entry) => {
-			const subsite = entry.path.slice(5, -3);
-			const parts = subsite.split("/");
+			const title = entry.path.slice(5, -3);
+			const parts = title.split("/");
 			let displayTitle = (parts.pop() || "??").replace(/[-_]/g, " ");
 			displayTitle = displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1);
 			const category = parts.join("/");
-			const url = `${baseURL}/${subsite}`;
+			const url = `${baseURL}/${title}`;
 
 			return {
 				title: displayTitle,
 				subtitle: category,
-				match: alfredMatcher(subsite),
+				match: alfredMatcher(title),
+				mods: {
+					cmd: { arg: title }, // copy entry
+				},
 				arg: url,
 				quicklookurl: url,
-				uid: subsite,
+				uid: title,
 			};
 		});
 
