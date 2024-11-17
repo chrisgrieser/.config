@@ -18,7 +18,7 @@ local function snacksConfig()
 		local opts = { title = "Echo", icon = "" }
 		if msg:lower():find("hunk") then
 			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]")
-			opts = { icon = " 󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
+			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
@@ -39,7 +39,7 @@ local function snacksConfig()
 
 	local function notFoundNotify(query)
 		local msg = ("%s"):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = " ", style = "minimal", ft = "text" })
+		vim.notify(msg .. " ", vim.log.levels.TRACE, { icon = "", style = "minimal", ft = "text" })
 	end
 
 	local function silenceSearch(key)
@@ -66,7 +66,7 @@ local function snacksConfig()
 		desc = "User: Change cmdline-height to silence Enter-prompt (2/2)",
 		group = group,
 		callback = function()
-			if not vim.fn.getcmdtype():find("[/?]") then return end
+			if vim.fn.getcmdtype() ~= "/" then return end
 			vim.defer_fn(function()
 				vim.opt.cmdheight = 0
 				if vim.fn.searchcount().total > 0 then return end

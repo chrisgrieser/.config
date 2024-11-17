@@ -27,14 +27,17 @@ local isAtMother = host:find("Mother")
 
 if isAtMother then
 	g.neovide_scale_factor = 0.9
+	g.neovide_refresh_rate = 50
 	g.neovide_padding_top = 4
 	g.neovide_padding_left = 6
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.05
+	g.neovide_refresh_rate = 100
 	g.neovide_padding_top = 0
 	g.neovide_padding_left = 2
 else
 	g.neovide_scale_factor = 1
+	g.neovide_refresh_rate = 200
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end
@@ -50,7 +53,6 @@ g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is 
 g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 g.neovide_remember_window_size = true
 g.neovide_hide_mouse_when_typing = true
-g.neovide_refresh_rate = isAtMother and 25 or 50
 vim.opt.linespace = -2 -- less line height
 
 --------------------------------------------------------------------------------
