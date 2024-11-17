@@ -38,8 +38,8 @@ local function snacksConfig()
 	-- (SIC yes, all this is needed to have `cmdheight=0` and avoid "Press Enter" prompt)
 
 	local function notFoundNotify(query)
-		local msg = ("[%s] not found"):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
+		local msg = ("%s"):format(query)
+		vim.notify(msg, vim.log.levels.TRACE, { icon = " ", style = "minimal", ft = "text" })
 	end
 
 	local function silenceSearch(key)
@@ -98,6 +98,7 @@ return {
 				local lines = {}
 				local history = require("snacks").notifier.get_history()
 				if #history == 0 then return end
+				require("snacks").notifier.hide() -- dismiss open notifications
 				vim
 					.iter(require("snacks").notifier.get_history())
 					:rev() -- move recent notifications to the top
