@@ -64,6 +64,7 @@ const extraWorkflowConfig = [
 ];
 
 async function run() {
+	// alternative: https://documents.devdocs.io/docs.json
 	const response = await fetch("https://devdocs.io/docs.json");
 	const json = await response.json();
 

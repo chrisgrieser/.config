@@ -55,6 +55,9 @@ function run() {
 				subtitle: category,
 				match: alfredMatcher(title),
 				arg: url,
+				mods: {
+					cmd: { arg: subsite }, // copy entry
+				},
 				quicklookurl: url,
 				uid: subsite,
 			};
