@@ -282,7 +282,7 @@ end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
 	local extensions = { "sh", "json", "mjs", "md", "py" }
-	vim.ui.select(extensions, { prompt = " Scratch file", kind = "plain" }, function(ext)
+	vim.ui.select(extensions, { prompt = " Scratch file", kind = "plain" }, function(ext)
 		if not ext then return end
 		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
 		vim.cmd.edit(filepath)
