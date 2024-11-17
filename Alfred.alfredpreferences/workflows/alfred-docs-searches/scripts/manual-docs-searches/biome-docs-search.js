@@ -56,10 +56,10 @@ function run() {
 				match: alfredMatcher(title),
 				arg: url,
 				mods: {
-					cmd: { arg: subsite }, // copy entry
+					cmd: { arg: title }, // copy entry
 				},
 				quicklookurl: url,
-				uid: subsite,
+				uid: title,
 			};
 		},
 	);

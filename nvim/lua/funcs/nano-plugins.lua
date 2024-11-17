@@ -166,19 +166,17 @@ function M.nextFileInFolder(direction)
 	local curPath = vim.api.nvim_buf_get_name(0)
 	local curFile = vim.fs.basename(curPath)
 	local curFolder = vim.fs.dirname(curPath)
+	local ignoreExt = { "png", "svg", "webp", "jpg", "jpeg", "gif", "pdf", "zip" }
 
 	-- get list of files
 	local itemsInFolder = vim.fs.dir(curFolder)
 	local filesInFolder = vim.iter(itemsInFolder):fold({}, function(acc, name, type)
 		local ext = name:match("%.(%w+)$")
-		local binary = vim.tbl_contains({ "png", "svg", "webp" }, ext)
-		if type ~= "file" or vim.startswith(name, ".") then return acc end
+		if type ~= "file" or name:find("^%.") or vim.tbl_contains(ignoreExt, ext) then return acc end
 		table.insert(acc, name) -- select only name
 		return acc
 	end)
 	-- INFO no need for sorting, since `fs.dir` already returns them sorted
-	vim.notify(--[[🖨️]] vim.inspect(filesInFolder), nil, { ft = "lua", title = "filesInFolder 🖨️" })
-	if true then return end
 
 	-- GUARD edge cases like if currently at a hidden file and there are only
 	-- hidden files in the directory
@@ -205,16 +203,20 @@ function M.nextFileInFolder(direction)
 	vim.cmd.edit(nextFile)
 
 	-- notification
-	filesInFolder[nextIdx] = "[" .. filesInFolder[nextIdx] .. "]" -- mark current
 	local msg = vim
 		.iter(filesInFolder)
-		:map(function(f) return "- " .. f end)
-		:slice(curIdx - 5, curIdx + 5) -- display ~5 files before/after
+		:map(function(file)
+			-- mark current, using markdown h1
+			local prefix = file == filesInFolder[nextIdx] and "#" or "-"
+			return prefix .. " " .. file
+		end)
+		:slice(nextIdx - 5, nextIdx + 5) -- display ~5 files before/after
 		:join("\n")
 	vim.notify(msg, nil, {
 		title = direction .. (" (%d/%d)"):format(nextIdx, #filesInFolder),
 		icon = direction == "Next" and "󰖽" or "󰖿",
 		id = "next-in-folder",
+		ft = "markdown", -- so h1 is highlighted
 	})
 end
 

@@ -2,6 +2,7 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+//──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} str */
 function alfredMatcher(str) {
@@ -60,6 +61,9 @@ function run() {
 				subtitle: parentsBreadcrumbs,
 				match: alfredMatcher(displayName) + alfredMatcher(parentsBreadcrumbs),
 				arg: url,
+				mods: {
+					cmd: { arg: name }, // copy entry
+				},
 				quicklookurl: url,
 				uid: url,
 			};

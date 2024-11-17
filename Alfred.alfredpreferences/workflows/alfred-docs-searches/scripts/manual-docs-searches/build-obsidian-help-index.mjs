@@ -11,7 +11,7 @@ async function getGithubJson(url) {
 			// `GITHUB_TOKEN` set via GitHub Actions secrets
 			authorization: "Bearer " + process.env.GITHUB_TOKEN,
 			"Content-Type": "application/json",
-		}
+		},
 	});
 	return await response.json();
 }
@@ -37,7 +37,8 @@ async function run() {
 	const docsPages = [];
 	const officialDocsURL = "https://help.obsidian.md/";
 	const rawGitHubURL = "https://raw.githubusercontent.com/obsidianmd/obsidian-docs/master/";
-	const officialDocsTree = "https://api.github.com/repositories/285425357/git/trees/master?recursive=1";
+	const officialDocsTree =
+		"https://api.github.com/repositories/285425357/git/trees/master?recursive=1";
 
 	// GUARD
 	const officialDocsJSON = await getGithubJson(officialDocsTree);
@@ -68,6 +69,9 @@ async function run() {
 			title: title,
 			match: alfredMatcher(title) + alfredMatcher(area),
 			subtitle: area,
+			mods: {
+				cmd: { arg: title }, // copy entry
+			},
 			uid: url,
 			arg: url,
 			quicklookurl: url,
@@ -90,6 +94,9 @@ async function run() {
 				subtitle: area,
 				uid: url,
 				match: alfredMatcher(headerName) + alfredMatcher(title) + alfredMatcher(area),
+				mods: {
+					cmd: { arg: headerName }, // copy entry
+				},
 				arg: url,
 				quicklookurl: url,
 			});
