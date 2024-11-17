@@ -18,7 +18,7 @@ local config = {
 	recipes = {
 		quickfix = { "check-tsc" }, -- runs synchronously and sends output to quickfix list
 		streaming = { "run-streaming" }, -- streams output, e.g. for progress bars (requires `snacks.nvim`)
-		hidden = { "release", "run-fzf" }, -- for recipes that require user input
+		ignore = { "release", "run-fzf" }, -- for recipes that require user input
 		commentMaxLen = 35, -- truncate recipe comments if longer
 	},
 	keymaps = {
@@ -28,7 +28,7 @@ local config = {
 		closeWin = { "q", "<Esc>", "<D-w>" },
 		quickSelect = { "j", "f", "d", "s", "a" },
 		showRecipe = "<Space>",
-		showVariables = "?", -- shows output of `just --evaluate`
+		showVariables = "?",
 	},
 	highlights = {
 		quickSelect = "Conditional",
@@ -38,7 +38,7 @@ local config = {
 		just = "󰖷",
 		streaming = "ﲋ",
 		quickfix = "",
-		hidden = "󰈉",
+		ignore = "󰈉",
 	},
 }
 
@@ -48,7 +48,7 @@ local config = {
 ---@field name string
 ---@field comment string
 ---@field displayText string
----@field type? "streaming"|"quickfix"|"hidden"
+---@field type? "streaming"|"quickfix"|"ignore"
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -74,10 +74,10 @@ local function runRecipe(recipe)
 
 	-- 1) QUICKFIX
 	if recipe.type == "quickfix" then
-		local prev = vim.opt_local.makeprg:get() ---@diagnostic disable-line: unused-local,undefined-field
-		vim.opt_local.makeprg = "just"
+		local prev = vim.bo.makeprg
+		vim.bo.makeprg = "just"
 		vim.cmd.make(recipe.name)
-		vim.opt_local.makeprg = prev
+		vim.bo.makeprg = prev
 
 		pcall(vim.cmd.cfirst) -- if there is a quickfix item, move to the 1st one
 		vim.cmd.checktime() -- reload buffer in case of changes
@@ -87,7 +87,12 @@ local function runRecipe(recipe)
 	notify("Running…", nil, { title = recipe.name }) -- FIX also fixes snacks.nvim loop-backback error
 
 	-- 2) STREAMING
-	if package.loaded["snacks"] and recipe.type == "streaming" then
+	if recipe.type == "streaming" then
+		if not package.loaded["snacks"] then
+			local msg = "`snacks.nvim` is required for streaming output."
+			notify(msg, "error", { title = recipe.name })
+			return
+		end
 		local function bufferedOut(_, data)
 			if not data then return end
 			-- severity not determined by stderr, as many CLIs send non-errors to it
@@ -166,7 +171,7 @@ local function getRecipes()
 			local type
 			if vim.tbl_contains(config.recipes.streaming, name) then type = "streaming" end
 			if vim.tbl_contains(config.recipes.quickfix, name) then type = "quickfix" end
-			if vim.tbl_contains(config.recipes.hidden, name) then type = "hidden" end
+			if vim.tbl_contains(config.recipes.ignore, name) then type = "ignore" end
 
 			return { name = name, comment = comment, type = type, displayText = displayText }
 		end)
@@ -181,12 +186,12 @@ local function selectRecipe()
 	-- get recipes
 	local allRecipes = getRecipes()
 	if not allRecipes then return end
-	local recipes = vim.tbl_filter(function(r) return r.type ~= "hidden" end, allRecipes)
+	local recipes = vim.tbl_filter(function(r) return r.type ~= "ignore" end, allRecipes)
 	if #recipes == 0 then
 		notify("Justfile has no recipes.", "warn")
 		return
 	end
-	local hiddenCount = #allRecipes - #recipes
+	local ignoreCount = #allRecipes - #recipes
 
 	-- calculate window size
 	local longestRecipe = math.max(unpack(vim.tbl_map(function(r)
@@ -201,7 +206,7 @@ local function selectRecipe()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	local lines = vim.tbl_map(function(r) return r.displayText end, recipes)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-	local footer = (" %dx %s "):format(hiddenCount, config.icons.hidden)
+	local footer = (" %dx %s "):format(ignoreCount, config.icons.ignore)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
 		relative = "editor",
 		row = (vim.o.lines - winHeight) / 2,
@@ -212,8 +217,8 @@ local function selectRecipe()
 		style = "minimal",
 		title = title,
 		title_pos = "center",
-		footer = hiddenCount > 0 and { { footer, "Comment" } } or nil,
-		footer_pos = hiddenCount > 0 and "right" or nil,
+		footer = ignoreCount > 0 and { { footer, "Comment" } } or nil,
+		footer_pos = ignoreCount > 0 and "right" or nil,
 	})
 	vim.wo[winnr].sidescrolloff = 0
 	vim.wo[winnr].winfixbuf = true
