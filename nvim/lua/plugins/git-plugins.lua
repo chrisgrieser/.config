@@ -59,12 +59,7 @@ return {
 			require("tinygit").setup(opts)
 
 			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame)
-			vim.g.lualine_add(
-				"sections",
-				"lualine_y",
-				require("tinygit.statusline").branchState,
-				"before"
-			)
+			vim.g.lualine_add("sections", "lualine_y", require("tinygit.statusline").branchState)
 		end,
 	},
 	{ -- git sign gutter & hunk actions
@@ -105,10 +100,10 @@ return {
 			{
 				"<leader>op",
 				function()
-					if vim.b.gitsigns_previous_changes then
+					if vim.b.gitsignsPrevChanges then
 						require("gitsigns").reset_base()
 						vim.notify("Gitsigns: Reset Base")
-						vim.b.gitsigns_previous_changes = false
+						vim.b.gitsignsPrevChanges = false
 						return
 					end
 
@@ -118,7 +113,7 @@ return {
 					assert(out.code == 0, "git log failed")
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
-					vim.b.gitsigns_previous_changes = true
+					vim.b.gitsignsPrevChanges = true
 					vim.notify("Gitsigns: Changed base to " .. lastCommitToFile)
 				end,
 				desc = "󰊢 Previous/Present Changes",
@@ -130,11 +125,7 @@ return {
 			vim.g.lualine_add(
 				"sections",
 				"lualine_y", -- same section as diff count
-				{
-					function() return "" end,
-					cond = function() return vim.b.gitsigns_previous_changes end,
-				},
-				"before"
+				{ function() return "" end, cond = function() return vim.b.gitsignsPrevChanges end }
 			)
 		end,
 	},
