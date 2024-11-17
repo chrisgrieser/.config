@@ -2,7 +2,9 @@ return {
 	{ -- display type hints at EoL, not in the middle of a line
 		"chrisgrieser/nvim-lsp-endhints",
 		event = "LspAttach",
-		opts = true,
+		opts = {
+			label = { sameKindSeparator = " " },
+		},
 		keys = {
 			{ "<leader>oh", function() require("lsp-endhints").toggle() end, desc = "󰑀 Endhints" },
 		},
