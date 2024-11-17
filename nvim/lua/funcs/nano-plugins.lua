@@ -93,10 +93,10 @@ function M.camelSnakeToggle()
 	end
 
 	local line = vim.api.nvim_get_current_line()
-	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local col = vim.api.nvim_win_get_cursor(0)[2] + 1
 	local start, ending
 	while true do
-		start, ending = line:find(cword, ending or 0, true)
+		start, ending = line:find(cword, ending or 1, true)
 		if start <= col and ending >= col then break end
 	end
 	local newLine = line:sub(1, start - 1) .. newWord .. line:sub(ending + 1)

@@ -300,10 +300,9 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 			if winEvent and winEvent.topline <= 0 then return end
 		end
 
-		local winHeight = vim.fn.winheight(0)
-		local winCurLine = vim.fn.winline()
+		local winHeight = vim.api.nvim_win_get_height(0)
+		local visualDistanceToEof = winHeight - vim.fn.winline()
 		local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
-		local visualDistanceToEof = winHeight - winCurLine
 
 		if visualDistanceToEof < scrolloff then
 			local winView = vim.fn.winsaveview()
@@ -317,8 +316,11 @@ vim.api.nvim_create_autocmd("OptionSet", {
 	desc = "User: Detect scrolloff changes",
 	pattern = "scrolloff",
 	callback = function()
-		local global, winlocal = vim.go.scrolloff, vim.wo.scrolloff
-		local msg = ("global: %d, winlocal: %d"):format(global, winlocal)
-		vim.notify(msg, vim.log.levels.WARN, { title = "Scrolloff Change" })
+		-- GUARD only main window
+		if vim.api.nvim_get_current_win() ~= 1000 then return end
+
+		local global = ("global: %d → %d"):format(vim.v.option_oldglobal, vim.v.option_new)
+		local winlocal = ("local: %d → %d"):format(vim.v.option_oldlocal, vim.v.option_new)
+		vim.notify(global .. "\n" .. winlocal, vim.log.levels.WARN, { title = "Scrolloff Change" })
 	end,
 })
