@@ -710,6 +710,7 @@ rules:
           - *enter-insert-mode # enters insert mode since folder renaming is also triggered
           - *insert-notice
           - shell_command: |
+              # play sound at current volume
               current_vol=$(osascript -e 'output volume of (get volume settings)')
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
@@ -720,7 +721,7 @@ rules:
         from: { key_code: m, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: n, modifiers: [control, command] }
-          - *enter-insert-mode # enters insert mode since folder renaming is also triggered
+          - *enter-insert-mode # since folder renaming is also triggered
           - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # n = New File
@@ -733,12 +734,20 @@ rules:
                   set thisFolder to the target of the Finder window 1 as alias
                   set newFile to (make new file at thisFolder)
                   select newFile
-                end tell'
+                end tell
+              '
 
+              # play sound at current volume
               current_vol=$(osascript -e 'output volume of (get volume settings)')
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
               afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
+
+              # rename
+              sleep 0.1 # ensure file is created & selected
+              osascript -e 'tell application "System Events" to key code 36' # 36 = `enter`
+          - *enter-insert-mode # since renaming is triggered
+          - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # b = Toggle `.bkp` (Backup).
       - type: basic
@@ -821,7 +830,9 @@ rules:
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
+                # play sound at current volume
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
+                [[ "$current_vol" == "missing value" ]] && current_vol=50
                 vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
                 (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
               else
@@ -845,7 +856,9 @@ rules:
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
+                # play sound at current volume
                 current_vol=$(osascript -e 'output volume of (get volume settings)')
+                [[ "$current_vol" == "missing value" ]] && current_vol=50
                 vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
                 (afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Volume Mount.aif" &)
               else

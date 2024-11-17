@@ -311,14 +311,24 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 	end,
 })
 
+--------------------------------------------------------------------------------
+
+-- BUG for some reason, scrolloff is sometimes set to `0`, manually fixing that
+-- here. Need to investigate further what causes this…
+local originalScrolloff = vim.o.scrolloff
+require("config.utils").uniqueKeymap(
+	"n",
+	"<leader>of",
+	function() vim.o.scrolloff = originalScrolloff end,
+	{ desc = "󰁨 Fix scrolloff" }
+)
+
 -- TEST to detect buggy scrolloff changes
 vim.api.nvim_create_autocmd("OptionSet", {
-	desc = "User: Detect scrolloff changes",
+	desc = "User: Detect scrolloff change bug",
 	pattern = "scrolloff",
 	callback = function()
-		-- GUARD only main window
-		if vim.api.nvim_get_current_win() ~= 1000 then return end
-
+		if vim.api.nvim_get_current_win() ~= 1000 then return end -- only main window
 		local global = ("global: %d → %d"):format(vim.v.option_oldglobal, vim.v.option_new)
 		local winlocal = ("local: %d → %d"):format(vim.v.option_oldlocal, vim.v.option_new)
 		vim.notify(global .. "\n" .. winlocal, vim.log.levels.WARN, { title = "Scrolloff Change" })

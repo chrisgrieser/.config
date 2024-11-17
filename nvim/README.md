@@ -8,6 +8,7 @@
 │  ├── config # keybindings, options, ….markdownlintignore
 │  ├── funcs # utility functions & personal plugins
 │  └── plugins # plugins & their configs
+├── personal-mason-registry # for some packages not in mason-register (yet)
 ├── after
 │  └── ftplugin # filetype-specific configs
 ├── queries # modifications of treesitter queries
@@ -18,7 +19,6 @@
 ```
 
 ## All installed plugins
-- [Aasim-A/scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [Bilal2453/luvit-meta](https://github.com/Bilal2453/luvit-meta)
 - [chrisgrieser/nvim-chainsaw](https://github.com/chrisgrieser/nvim-chainsaw)
@@ -33,7 +33,6 @@
 - [chrisgrieser/nvim-various-textobjs](https://github.com/chrisgrieser/nvim-various-textobjs)
 - [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
 - [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim)
-- [folke/noice.nvim](https://github.com/folke/noice.nvim)
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
@@ -45,7 +44,6 @@
 - [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [MeanderingProgrammer/render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
 - [monkoose/neocodeium](https://github.com/monkoose/neocodeium)
-- [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-cmp/blink.cmp](https://github.com/nvim-cmp/blink.cmp)
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
@@ -60,7 +58,6 @@
 - [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [ThePrimeagen/refactoring.nvim](https://github.com/ThePrimeagen/refactoring.nvim)
 - [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim)
-- [Wansmer/sibling-swap.nvim](https://github.com/Wansmer/sibling-swap.nvim)
 - [Wansmer/symbol-usage.nvim](https://github.com/Wansmer/symbol-usage.nvim)
 - [Wansmer/treesj](https://github.com/Wansmer/treesj)
 - [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)

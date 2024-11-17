@@ -1,9 +1,13 @@
 local function projectName() return vim.fs.basename(vim.uv.cwd() or "") end
 --------------------------------------------------------------------------------
 
-local borderChars = vim.g.borderStyle == "rounded"
-		and { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-	or { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+if vim.g.borderStyle == "double" then
+	borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
+end
+if vim.g.borderStyle == "rounded" then
+	borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+end
 
 local specialDirs = {
 	"%.git/",
@@ -13,6 +17,7 @@ local specialDirs = {
 	"%.venv", -- python
 	"__pycache__",
 }
+
 --------------------------------------------------------------------------------
 
 local insertModeActions = {
@@ -32,7 +37,7 @@ local insertModeActions = {
 		local value = require("telescope.actions.state").get_selected_entry().value
 		require("telescope.actions").close(prompt_bufnr)
 		vim.fn.setreg("+", value)
-		vim.notify(value, nil, { title = "Copied", icon ="󰅍" })
+		vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
 	end,
 	-- mapping consistent with fzf-multi-select
 	["<M-CR>"] = function(prompt_bufnr) -- multi-select
@@ -494,17 +499,7 @@ return {
 				desc = "󰭎 Live-Grep",
 			},
 			{
-				"gL",
-				function()
-					require("telescope.builtin").live_grep {
-						default_text = vim.fn.expand("<cword>"),
-						prompt_title = "Live Grep: " .. projectName(),
-					}
-				end,
-				desc = "󰭎 Grep cword",
-			},
-			{
-				"gL",
+				"gl",
 				function()
 					vim.cmd.normal { '"zy', bang = true }
 					local sel = vim.trim(vim.fn.getreg("z"))

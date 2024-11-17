@@ -21,6 +21,7 @@ brew "leptonica"
 brew "less"
 brew "macos-trash"
 brew "mas"
+brew "tree-sitter"
 brew "neovim"
 brew "node"
 brew "pandoc"
@@ -67,5 +68,5 @@ cask "transmission"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
-mas "Mona", id: 1659154653
+mas "Ivory", id: 6444602274
 mas "Peek", id: 1554235898

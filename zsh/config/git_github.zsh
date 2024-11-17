@@ -365,13 +365,13 @@ function gdf {
 }
 #───────────────────────────────────────────────────────────────────────────────
 
-# Git Status All (all perma-repos)
+# Git Status All (for all perma-repos)
 function gsa {
-	# CONFIG
-	local perma_repos="$HOME/.config/perma-repos.csv"
+	local perma_repos="$HOME/.config/perma-repos.csv" # CONFIG
 
-	cut -d, -f2 "$perma_repos" | sed "s|^~|$HOME|" | while read -r repopath; do
-		changes=$(git -c color.status=always -C "$repopath" status --short)
+	cut -d, -f2 "$perma_repos" | while read -r repopath; do
+		local resolved=${repopath//\~/$HOME}
+		changes=$(git -c color.diff=always -C "$resolved" diff --stat | sed -e '$d' -e 's/^ //')
 		if [[ -n "$changes" ]]; then
 			print "\e[1;34m$repopath\e[0m"
 			echo "$changes"
