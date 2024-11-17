@@ -310,13 +310,16 @@ function gdf {
 	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
 
-	# TEST check for accumulating zsh processes
+	# TEST check for accumulating zsh processes bug
 	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
 
 	if [[ $(git rev-parse --is-shallow-repository) == "true" ]]; then
 		print "\e[1;33mUnshallowing repo…\e[0m"
 		unshallow && echo
 	fi
+
+	# goto root
+	cd "$(git rev-parse --show-toplevel)" || return 1
 
 	local deleted_path deletion_commit last_commit
 	deleted_path=$(git log --diff-filter=D --name-only --format="" | grep --ignore-case "$search")
