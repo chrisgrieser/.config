@@ -1,5 +1,4 @@
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
-alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
 alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
 
 #───────────────────────────────────────────────────────────────────────────────

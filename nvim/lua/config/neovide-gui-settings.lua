@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("TabNewEntered", {
 
 -- SIZE & FONT
 local host = vim.uv.os_gethostname()
+jit
 local isAtOffice = host:find("eduroam") or host:find("mini")
 local isAtMother = host:find("Mother")
 
