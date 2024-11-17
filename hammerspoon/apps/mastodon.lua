@@ -5,24 +5,31 @@ local wu = require("win-management.window-utils")
 
 local aw = hs.application.watcher
 local wf = hs.window.filter
+local env = require("meta.environment")
+local mastoApp = env.mastodonApp
 --------------------------------------------------------------------------------
 
 local function moveToSide()
-	local masto = u.app("Mona")
+	local masto = u.app(mastoApp)
 	if not masto then return end
 	local mastodonUsername = "pseudometa" -- CONFIG
-	local mastoWin = masto:findWindow("Mona") or masto:findWindow(mastodonUsername)
+	local mastoWin = masto:findWindow(mastoApp) or masto:findWindow(mastodonUsername)
 	if not mastoWin then return end
 
+	-- negative x to hide useless sidebar
+	local toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
+	if env.isAtMother then toTheSide = hs.geometry.rect(-78, 54, 387, 890) end
+	if env.isAtOffice then toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
+
 	if masto:isHidden() then masto:unhide() end
-	mastoWin:setFrame(wu.toTheSide)
+	mastoWin:setFrame(toTheSide)
 	mastoWin:raise()
 end
 
 ---@param win? hs.window
 local function showAndMoveOrHideTickerApp(win)
 	-- GUARD
-	local masto = u.app("Mona")
+	local masto = u.app(mastoApp)
 	local frontWin = hs.window.focusedWindow()
 	if not (masto and win and frontWin) then return end
 	local winNotFrontmost = win:id() ~= frontWin:id()
@@ -51,8 +58,8 @@ M.wf_someWindowActivity = wf
 
 if u.isSystemStart() then moveToSide() end
 
-M.aw_monaLaunched = aw.new(function(appName, event)
-	if appName == "Mona" and event == aw.launched then u.defer(1, moveToSide) end
+M.aw_mastoLaunched = aw.new(function(appName, event)
+	if appName == mastoApp and event == aw.launched then u.defer(1, moveToSide) end
 end):start()
 
 --------------------------------------------------------------------------------
@@ -62,11 +69,11 @@ end):start()
 M.aw_fallthrough = aw.new(function(_, event)
 	if event ~= aw.terminated then return end
 	u.defer(0.15, function()
-		local nonMonaWin = hs.fnutils.find(
+		local nonMastoWin = hs.fnutils.find(
 			hs.window:orderedWindows(),
-			function(win) return win:application() and win:application():name() ~= "Mona" end
+			function(win) return win:application() and win:application():name() ~= mastoApp end
 		)
-		if nonMonaWin and u.isFront("Mona") then nonMonaWin:focus() end
+		if nonMastoWin and u.isFront(mastoApp) then nonMastoWin:focus() end
 	end)
 end):start()
 
@@ -76,11 +83,11 @@ end):start()
 -- * auto-focus compose win when activating
 -- * auto-close media wins when deactivating
 M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
-	if appName == "Mona" and event == aw.activated then
+	if appName == mastoApp and event == aw.activated then
 		masto:selectMenuItem { "Window", "Bring All to Front" }
 		local composeWin = masto:findWindow("Compose")
 		if composeWin then composeWin:focus() end
-	elseif appName == "Mona" and event == aw.deactivated then
+	elseif appName == mastoApp and event == aw.deactivated then
 		local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
 		local frontApp = hs.application.frontmostApplication():name()
 		if mediaWin and frontApp ~= "Alfred" then
@@ -91,39 +98,43 @@ M.aw_forSpecialMastoWins = aw.new(function(appName, event, masto)
 end):start()
 
 --------------------------------------------------------------------------------
--- FIX Mona's autoscroll often not fully scrolling up
 
 local function homeAndScrollUp()
 	-- prevent too many concurrent calls
 	if M.isScrolling then return end
 	M.isScrolling = true
-	u.defer(15, function() M.isScrolling = false end)
+	u.defer(10, function() M.isScrolling = false end)
 
 	-- GUARD only scrolling when not idle, to not prevent the machine from going to sleep
 	if hs.host.idleTime() > 120 or not u.screenIsUnlocked() then return end
 
-	-- GUARD only if Mona is running in background and already has window
-	local mona = u.app("Mona")
-	if not mona or mona:isFrontmost() or #mona:allWindows() ~= 1 then return end
+	-- GUARD only if app is running in background and already has window
+	local masto = u.app(mastoApp)
+	if not masto or masto:isFrontmost() or #masto:allWindows() ~= 1 then return end
 
 	local key = hs.eventtap.keyStroke
-	key({ "cmd" }, "left", 1, mona) -- go back
-	key({ "cmd" }, "1", 1, mona) -- go to home tab
-	key({ "cmd" }, "R", 1, mona) -- refresh
-	u.defer({ 1, 4 }, function() -- wait for posts to load
-		key({ "cmd" }, "up", 1, mona) -- scroll up
-	end)
+	if mastoApp == "Mona" then
+		key({ "cmd" }, "left", 1, masto) -- go back
+		key({ "cmd" }, "1", 1, masto) -- go to home tab
+		key({ "cmd" }, "R", 1, masto) -- refresh
+		u.defer({ 1, 4 }, function() -- wait for posts to load
+			key({ "cmd" }, "up", 1, masto) -- scroll up
+		end)
+	end
 end
 
 -- triggers
-local scrollEveryMins = 5 -- CONFIG
-M.timer_regularScroll = hs.timer.doEvery(scrollEveryMins * 60, homeAndScrollUp):start()
-
-M.aw_monaDeavtivated = aw.new(function(appName, event)
-	if appName == "Mona" and event == aw.deactivated then homeAndScrollUp() end
+M.aw_mastoDeavtivated = aw.new(function(appName, event)
+	if appName == mastoApp and event == aw.deactivated then homeAndScrollUp() end
 end):start()
 
-if u.isSystemStart() then homeAndScrollUp() end
+-- FIX Mona's autoscroll often not fully scrolling up
+if mastoApp == "Mona" then
+	local scrollEveryMins = 5 -- CONFIG
+	M.timer_regularScroll = hs.timer.doEvery(scrollEveryMins * 60, homeAndScrollUp):start()
+
+	if u.isSystemStart() then homeAndScrollUp() end
+end
 
 --------------------------------------------------------------------------------
 return M

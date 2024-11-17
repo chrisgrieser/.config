@@ -95,7 +95,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[ö] Mastodon (Mona)"
+      - description: "[ö] Mastodon (Mona/Ivory)"
         type: basic
         from: { key_code: semicolon } # ö on German keyboard
         conditions:
@@ -103,7 +103,7 @@ rules:
           - type: input_source_if
             input_sources: [{ language: ^de$ }]
         to:
-          - shell_command: open -a "Mona"
+          - shell_command: open -a "Mona" || open -a "Ivory"
           - *deactivate-leader
           - *remove-notice
 

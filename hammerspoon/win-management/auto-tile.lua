@@ -15,7 +15,7 @@ local config = {
 		"Alfred",
 		"CleanShot X",
 		"IINA",
-		"Mona",
+		env.mastodonApp,
 		"pinentry-mac",
 		"Espanso",
 		"IINA",

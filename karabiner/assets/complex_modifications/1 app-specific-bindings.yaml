@@ -514,8 +514,7 @@ rules:
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
           - shell_command: |
-              # if cleanshot is installed, use it, otherwise fallback to macOS'
-              # builtin screenshot app
+              # without CleanShot, fallback to macOS' builtin screenshot app
               if mdfind "kMDItemKind == 'Application'" | grep -q "CleanShot X" ; then
                 open -g "cleanshot://capture-area"
               else

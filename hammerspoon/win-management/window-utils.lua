@@ -8,10 +8,6 @@ M.iMacDisplay = hs.screen("Built%-in")
 M.pseudoMax = { x = 0.184, y = 0, w = 0.817, h = 1 }
 M.middleHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
 
--- negative x to hide useless sidebar
-M.toTheSide = hs.geometry.rect(-92, 54, 446, 1026)
-if env.isAtMother then M.toTheSide = hs.geometry.rect(-78, 54, 387, 890) end
-if env.isAtOffice then M.toTheSide = hs.geometry.rect(-94, 54, 471, 1100) end
 
 --------------------------------------------------------------------------------
 -- WINDOW MOVEMENT
@@ -42,7 +38,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", "Mona" }
+	local appsToIgnore = { "Transmission", "Hammerspoon", env.mastodonApp }
 	if
 		not win
 		or not (win:application())
