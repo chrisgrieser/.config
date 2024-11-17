@@ -6,16 +6,17 @@ alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
+alias rb='git rebase --interactive'
 
 alias cherry='git cherry-pick'
 alias push='git push --no-progress'
 alias pull='git pull --no-progress'
-alias rebase='git rebase --interactive'
 alias reset='git reset'
 
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
+alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
 
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"
