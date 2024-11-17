@@ -5,7 +5,7 @@
 local function ffff() ---@diagnostic disable-line: unused-local, unused-function
 
 end
-
+--[[ff]] fsfsfsf
 local curLine= "local function ffff()---@diagnostic disable-line: unused-local"
 local existingRulePattern= "%-%-%-@diagnostic disable%-line: ([w,-_]+)"
 
