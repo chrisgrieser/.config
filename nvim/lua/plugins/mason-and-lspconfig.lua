@@ -7,6 +7,14 @@ return {
 		-- so mason packages are available before loading mason itself
 		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,
 		opts = {
+			-- PENDING https://github.com/mason-org/mason-registry/pull/7957
+			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
+			-- also requires `yq` being available in the system
+			registries = {
+				"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry", -- must come first
+				"github:mason-org/mason-registry",
+			},
+
 			ui = {
 				border = vim.g.borderStyle,
 				height = 0.85,

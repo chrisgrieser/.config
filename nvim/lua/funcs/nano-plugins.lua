@@ -41,9 +41,10 @@ function M.startOrStopRecording(toggleKey, reg)
 		local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
 		if macro ~= "" then
 			vim.fn.setreg(reg, macro)
-			vim.notify(vim.fn.keytrans(macro), vim.log.levels.TRACE, { title = "Recorded" })
+			local msg = vim.fn.keytrans(macro)
+			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰕧" })
 		else
-			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording" })
+			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰕧" })
 		end
 	end
 	-- sound if on macOS
