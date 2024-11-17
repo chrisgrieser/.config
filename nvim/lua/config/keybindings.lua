@@ -370,8 +370,13 @@ end, { expr = true, desc = "dd" })
 keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
-	local regContent = vim.trim(vim.fn.getreg("+"))
-	vim.fn.setreg("+", regContent, "v")
+	local ok, clipb = pcall(vim.fn.getreg,"+")
+	if not ok then
+		vim.notify("Register `+` is empty", vim.log.levels.ERROR)
+		return
+	end
+	---@cast clipb string
+	vim.fn.setreg("+", vim.trim(clipb), "v")
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
