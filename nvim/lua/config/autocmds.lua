@@ -295,7 +295,7 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 	desc = "User: Enforce scrolloff at EOF",
 	callback = function(ctx)
 		if ctx.event == "WinScrolled" then
-			local winid = vim.api.nvim_get_current_win()
+			local winid = ctx.match
 			local winEvent = vim.v.event[tostring(winid)]
 			if winEvent and winEvent.topline <= 0 then return end
 		end

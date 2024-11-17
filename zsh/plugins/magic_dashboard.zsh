@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2086 # simpler for various pseudo-options
 
 # CONFIG
 max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-6}
@@ -29,7 +28,7 @@ function _gitlog {
 		graph="--graph"
 	fi
 
-	# INFO inserting ansi colors via sed requires leading $
+	# INFO inserting ansi colors via `sed` requires $'string'
 	local the_log
 	the_log=$(
 		git --no-pager log --all --color $graph \
@@ -71,7 +70,7 @@ function _list_files_here {
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
 		shortened="$(echo "$eza_output" | head -n"$max_files_lines")"
-		printf "%s   \033[0;37m...\033[0m" "$shortened"
+		printf "%s   \033[1;30m...\033[0m" "$shortened"
 	elif [[ -n "$eza_output" ]]; then
 		echo -n "$eza_output"
 	fi
