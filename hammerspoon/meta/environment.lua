@@ -14,5 +14,7 @@ function M.isProjector()
 	return #hs.screen.allScreens() > 1
 end
 
+M.mastodonApp = "Ivory"
+
 --------------------------------------------------------------------------------
 return M

@@ -4,6 +4,18 @@
 -- 2) Apps should not cover up the sketchybar which I only have in the top right
 -- corner.
 
+--------------------------------------------------------------------------------
+
+local M = {} -- persist from garbage collector
+
+local env = require("meta.environment")
+local u = require("meta.utils")
+local wu = require("win-management.window-utils")
+
+local aw = hs.application.watcher
+local wf = hs.window.filter
+--------------------------------------------------------------------------------
+
 local config = {
 	transBgApps = {
 		"Neovide",
@@ -24,7 +36,7 @@ local config = {
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
-		"Mona",
+		env.mastodonApp,
 		"Alfred",
 		"Karabiner-EventViewer",
 		"pinentry-mac",
@@ -33,16 +45,6 @@ local config = {
 		"Steam",
 	},
 }
---------------------------------------------------------------------------------
-
-local M = {} -- persist from garbage collector
-
-local env = require("meta.environment")
-local u = require("meta.utils")
-local wu = require("win-management.window-utils")
-
-local aw = hs.application.watcher
-local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
 
