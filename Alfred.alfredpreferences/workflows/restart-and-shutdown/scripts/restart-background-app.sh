@@ -1,14 +1,11 @@
 #!/usr/bin/env zsh
 export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-app="$1"
 #───────────────────────────────────────────────────────────────────────────────
 
+app="$1"
+
 # RELOAD
-if [[ "$app" == "hammerspoon_reload" ]]; then
-	open -g "hammerspoon://hs-reload"
-	echo -n "🔁 Reloading Hammerspoon" # Alfred notification
-	return
-elif [[ "$app" == "sketchybar" ]]; then
+if [[ "$app" == "sketchybar" ]]; then
 	sketchybar --reload
 	echo -n "🔁 Reloading $app" # Alfred notification
 	return
