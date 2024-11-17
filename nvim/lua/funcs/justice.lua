@@ -6,13 +6,13 @@ USAGE
 - `require("justice").just()`
 - Navigate the window via `<Tab>` & `<S-Tab>`, select with `<CR>`.
 - Quick-select recipes via keys shown at the left of the window.
+- Show recipe via `<Space>`.
 
 REQUIREMENTS
 - nvim 0.10+
 - optional: snacks.nvim (for streaming output)
 - optional: `just` Treesitter parser (`:TSInstall just`)
-]]
---------------------------------------------------------------------------------
+]]------------------------------------------------------------------------------
 
 local config = {
 	recipes = {
@@ -26,7 +26,7 @@ local config = {
 		prev = "<S-Tab>",
 		runRecipe = "<CR>",
 		closeWin = { "q", "<Esc>", "<D-w>" },
-		quickSelect = { "j", "a", "s", "d", "f" },
+		quickSelect = { "j", "f", "d", "s", "a" },
 		showRecipe = "<Space>",
 		showVariables = "?", -- shows output of `just --evaluate`
 	},
@@ -35,7 +35,7 @@ local config = {
 		icons = "Function",
 	},
 	icons = {
-		just = "󱁤",
+		just = "󰖷",
 		streaming = "ﲋ",
 		quickfix = "",
 		hidden = "󰈉",
@@ -47,8 +47,8 @@ local config = {
 ---@class Recipe
 ---@field name string
 ---@field comment string
----@field type "streaming"|"quickfix"|"hidden"|nil
 ---@field displayText string
+---@field type? "streaming"|"quickfix"|"hidden"
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
@@ -90,7 +90,7 @@ local function runRecipe(recipe)
 	if package.loaded["snacks"] and recipe.type == "streaming" then
 		local function bufferedOut(_, data)
 			if not data then return end
-			-- severity not determined by stderr, since many CLIs send non-errors via stderr
+			-- severity not determined by stderr, as many CLIs send non-errors to it
 			local severity = data:find("error") and "error" or "info"
 			notify(data, severity, { title = recipe.name })
 		end
@@ -107,10 +107,11 @@ local function runRecipe(recipe)
 		{ "just", recipe.name },
 		{},
 		vim.schedule_wrap(function(out)
+			vim.cmd.checktime()
 			local text = (out.stdout or "") .. (out.stderr or "")
 			local severity = out.code == 0 and "info" or "error"
+			if vim.trim(text) == "" then return end
 			notify(text, severity, { title = recipe.name })
-			vim.cmd.checktime()
 		end)
 	)
 end
@@ -200,7 +201,7 @@ local function selectRecipe()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	local lines = vim.tbl_map(function(r) return r.displayText end, recipes)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-	local footer = (" %d %s "):format(hiddenCount, config.icons.hidden)
+	local footer = (" %dx %s "):format(hiddenCount, config.icons.hidden)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
 		relative = "editor",
 		row = (vim.o.lines - winHeight) / 2,

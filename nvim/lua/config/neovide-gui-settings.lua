@@ -5,21 +5,6 @@ if not vim.g.neovide then return end
 local g = vim.g
 --------------------------------------------------------------------------------
 
--- FIX neovide ignoring `tabs = false` on consecutive opening of new files
--- https://github.com/neovide/neovide/issues/2585
-vim.api.nvim_create_autocmd("TabNewEntered", {
-	desc = "User (once): FIX neovide ignoring `tabs = false`",
-	callback = function(ctx)
-		vim.defer_fn(function()
-			if vim.fn.tabpagenr("$") == 1 or vim.bo.buftype ~= "" then return end
-			vim.cmd.tabclose()
-			vim.defer_fn(function() vim.cmd.edit(ctx.file) end, 1)
-		end, 1)
-	end,
-})
-
---------------------------------------------------------------------------------
-
 -- SIZE & FONT
 local host = vim.uv.os_gethostname()
 local isAtOffice = host:find("eduroam") or host:find("mini")
@@ -27,17 +12,17 @@ local isAtMother = host:find("Mother")
 
 if isAtMother then
 	g.neovide_scale_factor = 0.9
-	g.neovide_refresh_rate = 50
+	g.neovide_refresh_rate = 60
 	g.neovide_padding_top = 4
 	g.neovide_padding_left = 6
 elseif isAtOffice then
 	g.neovide_scale_factor = 1.05
-	g.neovide_refresh_rate = 75
+	g.neovide_refresh_rate = 90
 	g.neovide_padding_top = 0
 	g.neovide_padding_left = 2
 else
 	g.neovide_scale_factor = 1
-	g.neovide_refresh_rate = 100
+	g.neovide_refresh_rate = 120
 	g.neovide_padding_top = 15
 	g.neovide_padding_left = 7
 end

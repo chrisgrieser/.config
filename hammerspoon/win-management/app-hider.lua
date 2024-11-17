@@ -36,7 +36,7 @@ local config = {
 		"IINA",
 		"zoom.us",
 		"CleanShot X",
-		env.mastodonApp,
+		"Ivory",
 		"Alfred",
 		"Karabiner-EventViewer",
 		"pinentry-mac",

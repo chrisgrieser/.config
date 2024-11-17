@@ -42,7 +42,7 @@ end
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
 	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", env.mastodonApp }
+	local appsToIgnore = { "Transmission", "Hammerspoon", "Ivory" }
 	if
 		not win
 		or not (win:application())

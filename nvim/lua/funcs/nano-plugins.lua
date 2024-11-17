@@ -10,8 +10,8 @@ function M.openAlfredPref()
 		vim.notify("Not on macOS.", vim.log.levels.WARN)
 		return
 	end
-	local bufPath = vim.api.nvim_buf_get_name(0)
-	local workflowUid = bufPath:match("Alfred%.alfredpreferences/workflows/(.-)/")
+	local workflowUid =
+		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
 	if not workflowUid then
 		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
 		return
@@ -162,6 +162,8 @@ function M.gotoMostChangedFile()
 	end
 end
 
+---Cycles files in folder in alphabetical order.
+---If snacks.nvim is installed, adds cycling notification.
 ---@param direction "Next"|"Prev"
 function M.nextFileInFolder(direction)
 	local curPath = vim.api.nvim_buf_get_name(0)
@@ -187,7 +189,7 @@ function M.nextFileInFolder(direction)
 		return
 	end
 
-	-- detemrine next index
+	-- determine next index
 	local curIdx
 	for idx = 1, #filesInFolder do
 		if filesInFolder[idx] == curFile then
@@ -204,6 +206,7 @@ function M.nextFileInFolder(direction)
 	vim.cmd.edit(nextFile)
 
 	-- notification
+	if not package.loaded["snacks"] then return end
 	local msg = vim
 		.iter(filesInFolder)
 		:map(function(file)
@@ -216,7 +219,7 @@ function M.nextFileInFolder(direction)
 	vim.notify(msg, nil, {
 		title = direction .. (" (%d/%d)"):format(nextIdx, #filesInFolder),
 		icon = direction == "Next" and "󰖽" or "󰖿",
-		id = "next-in-folder",
+		id = "next-in-folder", -- replace notifications when quickly cycling
 		ft = "markdown", -- so h1 is highlighted
 	})
 end

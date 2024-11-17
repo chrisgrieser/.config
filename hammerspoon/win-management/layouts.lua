@@ -83,7 +83,7 @@ local function workLayout()
 		"Discord",
 		"Mimestream",
 		isWorkweek() and "Slack" or nil,
-		env.mastodonApp,
+		"Ivory",
 		"AlfredExtraPane",
 	}
 	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
@@ -112,7 +112,7 @@ local function movieLayout()
 		"WezTerm",
 		"Mimestream",
 		"Neovide",
-		env.mastodonApp,
+		"Ivory",
 		"Reminders",
 	}
 	print("🔲 Loaded MovieModeLayout")
