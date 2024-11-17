@@ -2,7 +2,7 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
-local function snacksInit()
+local function snacksConfig()
 	-- OVERRIDE DEFAULT PRINT FUNCTIONS
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
@@ -21,6 +21,16 @@ local function snacksInit()
 			opts = { icon = " 󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
+	end
+	-----------------------------------------------------------------------------
+
+	-- SILENCE SOME MESSAGES by overriding snacks' override
+	local snackNotify = vim.notify
+	vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field
+		-- PENDING https://github.com/artempyanykh/marksman/issues/348
+		if msg:find("^Client marksman quit with exit code 1 and signal 0") then return end
+
+		snackNotify(msg, ...)
 	end
 
 	-----------------------------------------------------------------------------
@@ -72,7 +82,10 @@ end
 return {
 	"folke/snacks.nvim",
 	event = "VeryLazy",
-	init = snacksInit,
+	config = function(_, opts)
+		require("snacks").setup(opts)
+		snacksConfig()
+	end,
 	keys = {
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
