@@ -84,11 +84,10 @@ return {
 					max_byte = 100 * 1024, -- 100kb
 					update_insert = false,
 				},
-				pickers = {
+				pickers = { -- what colors are highlighted
 					ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					ccc.picker.css_name,
 					ccc.picker.ansi_escape(
 						{ black = "#767676", blue = "#3165ff" }, -- higher contrast
 						{ meaning1 = "bold" }

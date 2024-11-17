@@ -1,7 +1,4 @@
--- THEME SETTINGS
-
--- INFO the first theme in the list is used
--- rest are themes I already tried and also like
+-- CONFIG the first theme in the list is used
 local darkThemes = {
 	"Kanagawa (Gogh)",
 	"ChallengerDeep",
@@ -11,8 +8,8 @@ local darkThemes = {
 	"MaterialDesignColors",
 }
 local lightThemes = {
-	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
+	"Solar Flare Light (base16)",
 	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
 	"Silk Light (base16)",
@@ -22,22 +19,7 @@ local lightThemes = {
 local lightOpacity = 0.91
 local darkOpacity = 0.88
 
---------------------------------------------------------------------------------
--- BASE
-
-local keymaps = require("wezterm-keymaps")
-local theme = require("theme-utils")
-
-local wt = require("wezterm")
-
---------------------------------------------------------------------------------
--- device specific config
-local host = wt.hostname()
-local device = "home"
-if host:find("mini") or host:find("eduroam") then device = "office" end
-if host:find("Mother") then device = "mother" end
-
-local deviceConfig = {
+local deviceSpecificConfig = {
 	home = {
 		fontSize = 26.3,
 		maxFps = 180,
@@ -56,11 +38,20 @@ local deviceConfig = {
 }
 
 --------------------------------------------------------------------------------
--- SET WINDOW POSITION ON STARTUP
+--------------------------------------------------------------------------------
+-- wezterm API
+local wt = require("wezterm")
 
+-- device specific config
+local host = wt.hostname()
+local device = "home"
+if host:find("mini") or host:find("eduroam") then device = "office" end
+if host:find("Mother") then device = "mother" end
+
+-- SET WINDOW POSITION ON STARTUP
 wt.on("gui-startup", function(cmd)
 	-- on start, move window to the side ("pseudo-maximized")
-	local pos = deviceConfig[device].winPos
+	local pos = deviceSpecificConfig[device].winPos
 	local _, _, window = wt.mux.spawn_window(cmd or {})
 
 	window:gui_window():set_position(pos.x, pos.y)
@@ -94,6 +85,9 @@ end)
 --------------------------------------------------------------------------------
 -- SETTINGS
 
+local keymaps = require("wezterm-keymaps") -- my keymaps
+local theme = require("theme-utils") -- my theme utils
+
 local config = {
 	-- Meta
 	check_for_updates = false, -- done via homebrew already
@@ -120,15 +114,15 @@ local config = {
 	},
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = 0.9, -- effectively like letter-spacing
-	font_size = deviceConfig[device].fontSize,
-	command_palette_font_size = deviceConfig[device].fontSize,
+	font_size = deviceSpecificConfig[device].fontSize,
+	command_palette_font_size = deviceSpecificConfig[device].fontSize,
 	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",
-	max_fps = deviceConfig[device].maxFps,
+	max_fps = deviceSpecificConfig[device].maxFps,
 	adjust_window_size_when_changing_font_size = false,
 
 	-- remove titlebar, but keep macOS traffic lights. Doing so enables

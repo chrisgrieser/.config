@@ -149,7 +149,7 @@ keymap(
 	"n",
 	"<leader>j",
 	function() require("funcs.justice").just() end,
-	{ desc = "󱁤 Justfile" }
+	{ desc = "󰖷 Justfile" }
 )
 
 --------------------------------------------------------------------------------
