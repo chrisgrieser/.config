@@ -359,7 +359,7 @@ return {
 			{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Continue" },
 			{
-				"gs",
+				"gS",
 				function()
 					local symbolFilter = {
 						yaml = { "object", "array" },
@@ -376,12 +376,10 @@ return {
 				desc = "󰒕 Symbols",
 			},
 			{
-				"gs",
-				function()
-					-- using treesitter symbols instead, since the LSP symbols are crowded
-					-- with anonymous functions
-					vim.cmd.Telescope("treesitter")
-				end,
+				-- using treesitter symbols instead, since the LSP symbols are crowded
+				-- with anonymous functions
+				"gS",
+				function() vim.cmd.Telescope("treesitter") end,
 				ft = "lua",
 				desc = " Symbols",
 			},

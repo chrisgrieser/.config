@@ -11,17 +11,6 @@ local config = {
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
 	rejectScreens = "Acer 1080P PJ",
-	dontTriggerHiding = {
-		"Alfred",
-		"CleanShot X",
-		"IINA",
-		"Ivory",
-		"pinentry-mac",
-		"Espanso",
-		"IINA",
-		"Catch",
-		"BetterZip",
-	},
 	---@type fun(appName: string)
 	zeroWindowAction = function(appName)
 		-- hide to prevent focussing windowless app
@@ -34,6 +23,12 @@ local config = {
 		if env.isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
+	-- stylua: ignore
+	dontTriggerHiding = {
+		"Alfred", "CleanShot X", "IINA", "Ivory", "pinentry-mac", "Espanso",
+		"Catch", "BetterZip", 
+		"Slack", -- FIX bug where Slack briefly re-activates when opening link
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -114,8 +109,12 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, autoTileApp)
 		local frontApp = hs.application.frontmostApplication()
 		if not frontApp then return end
+
+		-- FIX weird bug where opening liks sometimes activates a browser twice…
+		if frontApp:name() == appName then return end
+
 		local dontTrigger = config.dontTriggerHiding
-		local ignored = hs.fnutils.some(dontTrigger, function(a) return frontApp:name() == a end)
+		local ignored = hs.fnutils.some(dontTrigger, function(n) return frontApp:name() == n end)
 		if name == appName and eventType == aw.deactivated and not ignored then autoTileApp:hide() end
 	end):start()
 end
