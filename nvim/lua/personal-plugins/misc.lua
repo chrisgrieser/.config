@@ -266,28 +266,32 @@ end
 
 --------------------------------------------------------------------------------
 
+--- if cut off, requires higher notification height setting
 function M.bufferInfo()
 	local ok, node = pcall(vim.treesitter.get_node)
-	local nerdfontTilde = "ﰣ" -- to prevent markdown strikethrough
+	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 	local lsps = vim.tbl_map(function(client)
 		local pad = (" "):rep(math.min(10 - #client.name))
-		local root = client.root_dir:gsub("/Users/%w+", nerdfontTilde)
+		local root = client.root_dir:gsub("/Users/%w+", pseudoTilde)
 		return ("[%s]%s%s"):format(client.name, pad, root)
 	end, vim.lsp.get_clients { bufnr = 0 })
 	local out = {
 		"[filetype]  " .. vim.bo.filetype,
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", "~"),
 		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
-		"[winnr]     " .. vim.api.nvim_get_current_win(),
 		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
-		(ok and node) and ("[node]      " .. node:type()) or nil,
+		"[winnr]     " .. vim.api.nvim_get_current_win(),
+		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", "~"),
 		"",
-		"## Attached LSPs with root",
+		"**At cursor**",
+		"[word]      " .. vim.fn.expand("<cword>"),
+		(ok and node) and ("[node-type] " .. node:type()) or nil,
+		"",
+		"**Attached LSPs with root**",
 		unpack(lsps),
 	}
 	local opts = { title = "Buffer info", icon = "󰽙", keep = function() return true end }
-	vim.notify(table.concat(out, "\n"), vim.log.levels.TRACE, opts)
+	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
 
 --------------------------------------------------------------------------------

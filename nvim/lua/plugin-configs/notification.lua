@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------
 
 local function snacksConfig()
-	-- OVERRIDE DEFAULT PRINT FUNCTIONS
+	-- OVERRIDE DEFAULT PRINT FUNCTIONS (simplified version of `noice.nvim`)
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
@@ -39,7 +39,7 @@ local function snacksConfig()
 
 	-----------------------------------------------------------------------------
 	-- SILENCE "E486: PATTERN NOT FOUND"
-	-- (SIC all this is needed to have `cmdheight=0` and avoid the "Press Enter" prompt)
+	-- (yes, all this is needed to have `cmdheight=0` & avoid the "Press Enter" prompt)
 
 	local function notFoundNotify(query)
 		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
@@ -88,8 +88,8 @@ return {
 		snacksConfig()
 	end,
 	keys = {
-		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
+		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{
 			"<D-0>",
 			function() require("personal-plugins.snacks-notif-hist").full() end,
@@ -121,7 +121,7 @@ return {
 		notifier = {
 			timeout = 6000,
 			width = { min = 10, max = 0.45 },
-			height = { min = 1, max = 0.4 },
+			height = { min = 1, max = 0.6 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
 		},
