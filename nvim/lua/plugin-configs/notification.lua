@@ -2,6 +2,14 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
+---highlight via markdown filetype
+---@param msg string
+local function highlightErrors(msg)
+	return msg
+		:gsub("E%d+", "[%1]") -- error numbers
+		:gsub(".+/.-%.%w+", "[%1]") -- filenames
+end
+
 local function snacksConfig()
 	-- OVERRIDE DEFAULT PRINT FUNCTIONS
 	_G.print = function(...)
@@ -24,10 +32,7 @@ local function snacksConfig()
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_err_writeln = function(msg)
-		-- highlight via markdown filetype
-		msg = msg
-			:gsub("E%d+", "[%1]") -- error numbers
-			:gsub(".+/.-%.%w+", "[%1]") -- filenames
+		msg = highlightErrors(msg)
 		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "markdown" })
 	end
 	-----------------------------------------------------------------------------
@@ -92,8 +97,6 @@ return {
 	keys = {
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
-		{ "<D-8>", "<cmd>messages<CR>", desc = ":mess" },
 		{
 			desc = "󰎟 Notification history",
 			"<D-0>",
@@ -144,6 +147,27 @@ return {
 					width = 0.75,
 					title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 					keys = { ["<D-9>"] = "close" },
+				}
+			end,
+		},
+		{
+			desc = "󰎟 :messages",
+			"<D-8>",
+			function()
+				local messages = highlightErrors(vim.fn.execute("messages"))
+				if messages == "" then return end
+				local lines = vim.split(messages, "\n", { trimempty = true })
+				local bufnr = vim.api.nvim_create_buf(false, true)
+				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+				vim.bo[bufnr].modifiable = false
+				require("snacks").win {
+					position = "float",
+					buf = bufnr,
+					height = 0.75,
+					width = 0.75,
+					keys = { ["<D-8>"] = "close" },
+					title = " :messages ",
+					ft = "markdown", -- for error message highlights
 				}
 			end,
 		},

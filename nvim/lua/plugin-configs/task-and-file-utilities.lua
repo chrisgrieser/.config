@@ -2,11 +2,11 @@ return {
 	{
 		"chrisgrieser/nvim-justice",
 		keys = {
-			{ "<leader>j", function() require("justice").select() end, desc = "Justice" },
+			{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
 		},
 		opts = {
 			recipes = {
-				ignore = { "run-fzf", "release" }, -- for recipes that require user input
+				ignore = { "run-fzf", "release" }, -- recipes that require user input
 				streaming = { "run-streaming" },
 				quickfix = { "check-tsc" },
 			},
