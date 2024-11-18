@@ -41,6 +41,7 @@
       "local height = 5",
       "local title = \"\"",
       "",
+      "-- create window",
       "local bufnr = vim.api.nvim_create_buf(false, true)",
       "vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)",
       "local winnr = vim.api.nvim_open_win(bufnr, true, {",
@@ -55,9 +56,12 @@
       "})",
       "vim.wo[winnr].winfixbuf = true",
       "vim.bo[bufnr].modifiable = false",
+      "vim.bo[bufnr].filetype = originalFt",
       "",
-      "vim.keymap.set(\"n\", \"q\", vim.cmd.close, { buffer = bufnr, nowait = true })",
-      "vim.keymap.set(\"n\", \"<Esc>\", vim.cmd.close, { buffer = bufnr, nowait = true })"
+      "-- keymaps",
+      "local opts = { buffer = bufnr, nowait = true }",
+      "vim.keymap.set(\"n\", \"q\", vim.cmd.close, opts)",
+      "vim.keymap.set(\"n\", \"<Esc>\", vim.cmd.close, opts)"
     ],
     "prefix": "create new nvim window"
   },

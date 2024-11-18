@@ -409,6 +409,6 @@ vim.api.nvim_create_autocmd("FileType", {
 keymap(
 	"n",
 	"gs",
-	function() require("funcs.symbol-sniper").snipe() end,
-	{ desc = "󰒕 Symbol Snipe" }
+	function() require("funcs.magnet").snipe() end,
+	{ desc = " Magnet" }
 )
