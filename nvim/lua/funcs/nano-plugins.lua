@@ -123,6 +123,55 @@ end
 
 --------------------------------------------------------------------------------
 
+function M.duplicateLine()
+	local line = vim.api.nvim_get_current_line()
+
+	local line = content.lines[1]
+	local ft = vim.bo.filetype
+
+	if ft == "css" then
+		if line:find("top:") then
+			line = line:gsub("top:", "bottom:")
+		elseif line:find("bottom:") then
+			line = line:gsub("bottom:", "top:")
+		end
+		if line:find("right:") then
+			line = line:gsub("right:", "left:")
+		elseif line:find("left:") then
+			line = line:gsub("left:", "right:")
+		end
+	elseif ft == "javascript" or ft == "typescript" then
+		if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
+	elseif ft == "lua" then
+		if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
+	elseif ft == "sh" then
+		if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
+	elseif ft == "python" then
+		if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
+	end
+
+	content.lines[1] = line
+
+	-- MOVE CURSOR TO VALUE/FIELD
+	-- HACK needs to work with `defer_fn`, since the transformer function is
+	-- called only *before* multiplication
+	local rowBefore = vim.api.nvim_win_get_cursor(0)[1]
+	vim.defer_fn(function()
+		local rowAfter = vim.api.nvim_win_get_cursor(0)[1]
+		local line = vim.api.nvim_get_current_line()
+		local _, valuePos = line:find("[:=] %S") -- find value
+		local _, _, fieldPos = line:find("%-%-%-@%w+ ()") -- luadoc
+		local col = fieldPos or valuePos
+		if rowBefore ~= rowAfter and col then
+			vim.api.nvim_win_set_cursor(0, { rowAfter, col - 1 })
+		end
+	end, 1)
+
+	return content.lines
+end
+
+--------------------------------------------------------------------------------
+
 function M.gotoMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
