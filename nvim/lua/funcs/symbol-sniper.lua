@@ -18,11 +18,13 @@ local config = {
 }
 --------------------------------------------------------------------------------
 
----@class (exact) Symbol
+---@class (exact) SniperSymbol
 ---@field name string
 ---@field icon string
+---@field range lsp.Range
+---@field kindName string kind names: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 
----@return lsp.DocumentSymbol[]?
+---@return SniperSymbol[]?
 local function getLspDocumentSymbols()
 	local params = { textDocument = vim.lsp.util.make_text_document_params() }
 	local response = vim.lsp.buf_request_sync(0, "textDocument/documentSymbol", params)
@@ -31,13 +33,14 @@ local function getLspDocumentSymbols()
 		return
 	end
 
-	---@type lsp.DocumentSymbol[]
+	---@type SniperSymbol[]
 	local symbols = vim.iter(response[1].result):fold({}, function(acc, item)
 		local kindName = vim.lsp.protocol.SymbolKind[item.kind] or "Unknown"
 		if not vim.tbl_contains(config.kindFilter, kindName) then return acc end
 		table.insert(acc, {
 			name = item.name,
 			icon = config.kindIcons[kindName] or "*",
+			kindName = kindName,
 			range = item.range,
 		})
 		return acc
@@ -49,12 +52,14 @@ local function getLspDocumentSymbols()
 	return symbols
 end
 
----@param symbols lsp.DocumentSymbol[]
+---@param symbols SniperSymbol[]
 local function createWin(symbols)
 	local ns = vim.api.nvim_create_namespace("symbol-sniper")
 	local names = vim.tbl_map(function(s) return s.name end, symbols)
-	local width = math.max(unpack(vim.tbl_map(function(line) return #line end, names)))
+	local width = math.max(unpack(vim.tbl_map(function(line) return #line end, names))) + 2
 	local height = #symbols
+	local title = "Symbols"
+	local originalFt = vim.bo.filetype
 
 	-- create win
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -65,17 +70,19 @@ local function createWin(symbols)
 		col = math.floor((vim.o.columns - width) / 2),
 		width = width,
 		height = height,
-		title = "Symbols",
+		title = " " .. title .. " ",
 		border = config.win.border,
 		style = "minimal",
 	})
 	vim.wo[winnr].winfixbuf = true
 	vim.bo[bufnr].modifiable = false
+	vim.bo[bufnr].filetype = originalFt
 
 	-- highlights
 	for i = 1, #symbols do
-		vim.api.nvim_buf_set_extmark(bufnr, ns, i, 0, {
-			virt_text = { { " " .. symbols[i].icon .. " ", "SymbolSniper" } },
+		local hlGroup = symbols[i].kindName
+		vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
+			virt_text = { { symbols[i].icon .. " ", hlGroup } },
 			virt_text_pos = "inline",
 		})
 	end
