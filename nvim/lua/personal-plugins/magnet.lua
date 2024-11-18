@@ -28,19 +28,25 @@ local config = {
 		markdown = { "String" }, -- String = Markdown headings
 	},
 	excludeResults = {
+		default = { "^_" }, -- ignores private symbols
+
 		-- filetype-specific list of lua patterns
 		lua = {
 			"^vim%.", -- anonymous functions passed to nvim api
 			"%.%.%. :", -- vim.iter functions
+			":gsub", -- lua string.gsub
+			"^callback$", -- nvim autocmds
 		},
 	},
 	hints = {
 		highlight = "Todo",
 		useOnlyLastChainMember = true,
-		disallowedChars = { "_", "-", "j", "k" },
+
+		-- keep j/k for going up/down instead of making them quick-select keys
+		disallowedChars = { "_", "j", "k" }, 
 	},
 	icon = "󰍇",
-	win = {
+	window = {
 		border = vim.g.borderStyle,
 		keymaps = {
 			next = "<Tab>",
@@ -90,7 +96,7 @@ local function selectSymbol(symbols)
 		width = width,
 		height = height,
 		title = " " .. title .. " ",
-		border = config.win.border,
+		border = config.window.border,
 		style = "minimal",
 	})
 	vim.wo[winnr].winfixbuf = true
@@ -100,13 +106,13 @@ local function selectSymbol(symbols)
 
 	-- keymaps
 	local opts = { buffer = bufnr, nowait = true }
-	for _, key in pairs(config.win.keymaps.closeWin) do
+	for _, key in pairs(config.window.keymaps.closeWin) do
 		vim.keymap.set("n", key, vim.cmd.close, opts)
 	end
-	vim.keymap.set("n", config.win.keymaps.next, "j", opts)
-	vim.keymap.set("n", config.win.keymaps.prev, "k", opts)
+	vim.keymap.set("n", config.window.keymaps.next, "j", opts)
+	vim.keymap.set("n", config.window.keymaps.prev, "k", opts)
 
-	vim.keymap.set("n", config.win.keymaps.select, function()
+	vim.keymap.set("n", config.window.keymaps.select, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		jumpToSymbol(symbols[lnum], winnr)
 	end, opts)
@@ -142,7 +148,7 @@ end
 ---@return Magnet.Symbol[]
 local function filterSymbols(symbols)
 	local includeKinds = config.includeKinds[vim.bo.filetype] or config.includeKinds.default
-	local excludeResults = config.excludeResults[vim.bo.filetype] or {}
+	local excludeResults = config.excludeResults[vim.bo.filetype] or config.excludeResults.default
 
 	local filteredSymbols = vim.iter(symbols)
 		:map(function(symbol)
@@ -178,6 +184,7 @@ local function getLspDocumentSymbols()
 		end
 
 		local items = vim.lsp.util.symbols_to_items(result or {}, 0) or {}
+		-- INFO results already sorted by order of occurrence, so need to do it ourselves
 		local symbols = filterSymbols(items)
 		if #symbols == 0 then
 			vim.notify("Current `kindFilter` doesn't match any symbols.", nil, { title = "Symbols" })

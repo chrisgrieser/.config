@@ -35,8 +35,8 @@ keymap("n", "<C-g>", vim.cmd.pop, { desc = "󱋿 Tagstack back" })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
 
--- Match
-keymap("n", "gm", "%", { desc = "Goto Match", remap = true }) -- `remap` -> use builtin `MatchIt` plugin
+-- Goto matching parenthesis (`remap` -> use builtin `MatchIt` plugin)
+keymap("n", "gm", "%", { desc = "Goto Match", remap = true }) 
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })

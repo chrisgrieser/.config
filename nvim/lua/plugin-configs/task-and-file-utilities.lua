@@ -12,7 +12,6 @@ return {
 			},
 			window = {
 				border = vim.g.borderStyle,
-				displayDashAndUnderscoreAsSpaces = true,
 			},
 			keymaps = {
 				closeWin = { "q", "<Esc>", "<D-w>" },
