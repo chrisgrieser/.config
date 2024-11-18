@@ -144,14 +144,6 @@ for _, key in pairs(trailChars) do
 	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
 end
 
--- JUST
-keymap(
-	"n",
-	"<leader>j",
-	function() require("personal-plugins.justice").just() end,
-	{ desc = "󰖷 Justfile" }
-)
-
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 

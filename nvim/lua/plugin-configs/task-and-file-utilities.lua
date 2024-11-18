@@ -1,7 +1,25 @@
 return {
-	"chrisgrieser/nvim-genghis",
-	dependencies = "stevearc/dressing.nvim",
-	keys = {
+	{
+		"chrisgrieser/nvim-justice",
+		keys = {
+			{ "<leader>j", function() require("justice").select() end, desc = "Justice" },
+		},
+		opts = {
+			recipes = {
+				ignore = { "run-fzf", "release" }, -- for recipes that require user input
+				streaming = { "run-streaming" },
+				quickfix = { "check-tsc" },
+			},
+			keymaps = {
+				closeWin = { "q", "<Esc>", "<D-w>" },
+				quickSelect = { "j", "f", "d", "s", "a" },
+			},
+		},
+	},
+	{
+		"chrisgrieser/nvim-genghis",
+		dependencies = "stevearc/dressing.nvim",
+		keys = {
 		-- stylua: ignore start
 		{"<C-p>", function() require("genghis").copyFilepathWithTilde() end, desc = "󰞇 Copy absolute path" },
 		{"<C-t>", function() require("genghis").copyRelativePath() end, desc = "󰞇 Copy relative path" },
@@ -15,6 +33,7 @@ return {
 
 		{"<D-BS>", function() require("genghis").trashFile() end, desc = "󰞇 Move file to trash" },
 		{"<leader>ex", function() require("genghis").chmodx() end, desc = "󰞇 chmod +x" },
-		-- stylua: ignore end
+			-- stylua: ignore end
+		},
 	},
 }
