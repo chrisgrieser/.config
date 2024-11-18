@@ -202,6 +202,7 @@ linewise
 dropdown
 endhints
 rulebook
+quickfix
 Blazingly
 Filetypes
 Justfiles
@@ -238,6 +239,7 @@ occurrent
 pdfannots
 backticks
 unescaped
+unordered
 Cheatsheet
 Cssclasses
 Soziopolis
@@ -313,4 +315,3 @@ JavaScriptReact
 TypeScriptReact
 Customizability
 filetype-specific
-unordered
