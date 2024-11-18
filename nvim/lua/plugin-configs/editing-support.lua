@@ -71,7 +71,10 @@ return {
 		config = function(_, opts)
 			require("mini.operators").setup(opts)
 
-			-- Do not set `multiply` mapping for line, since we use our own
+			-- Do not set `multiply` mapping for line, since we use our own, as
+			-- multiply's transformation function only supports pre-duplication
+			-- changes, which prevents us from doing post-duplication cursor
+			-- movements.
 			require("mini.operators").make_mappings(
 				"multiply",
 				{ textobject = "w", selection = "w", line = "" }
