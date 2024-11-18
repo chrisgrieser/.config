@@ -10,6 +10,10 @@ return {
 				streaming = { "run-streaming" },
 				quickfix = { "check-tsc" },
 			},
+			window = {
+				border = vim.g.borderStyle,
+				displayDashAndUnderscoreAsSpaces = true,
+			},
 			keymaps = {
 				closeWin = { "q", "<Esc>", "<D-w>" },
 				quickSelect = { "j", "f", "d", "s", "a" },
