@@ -284,15 +284,6 @@ local function telescopeConfig()
 					i = { ["<CR>"] = copyColorValue },
 				},
 			},
-			lsp_document_symbols = {
-				prompt_prefix = "󰒕 ",
-			},
-			treesitter = {
-				prompt_prefix = " ",
-				symbols = { "function", "method" },
-				show_line = false,
-				symbol_highlights = { ["function"] = "Function", method = "Method" },
-			},
 			lsp_references = {
 				prompt_prefix = "󰈿 ",
 				trim_text = true,
@@ -358,31 +349,6 @@ return {
 		keys = {
 			{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
 			{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Continue" },
-			{
-				"gS",
-				function()
-					local symbolFilter = {
-						yaml = { "object", "array" },
-						json = "module",
-						toml = "object",
-						markdown = "string", -- string -> headings in markdown files
-					}
-					-- stylua: ignore
-					local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
-					local filter = symbolFilter[vim.bo.filetype]
-					local opts = filter and { symbols = filter } or { ignore_symbols = ignoreSymbols }
-					require("telescope.builtin").lsp_document_symbols(opts)
-				end,
-				desc = "󰒕 Symbols",
-			},
-			{
-				-- using treesitter symbols instead, since the LSP symbols are crowded
-				-- with anonymous functions
-				"gS",
-				function() vim.cmd.Telescope("treesitter") end,
-				ft = "lua",
-				desc = " Symbols",
-			},
 			{
 				"g!",
 				function()
