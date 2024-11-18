@@ -3,11 +3,13 @@ Quickly jump to specific LSP symbols.
 
 USAGE
 - `require("magnet").jump()`
-- Quick-select symbol via highlighted keys.
+- Quick-select symbol via highlighted keys. 
+  (Upper- and lower-case keys work the same.)
 - Alternatively, move with `<Tab>` & `<S-Tab>` and select a symbol via `<CR>`.
 
 REQUIREMENTS
 - nvim 0.10+
+- LSP with `textDocument/documentSymbol` support
 
 CREDITS
 Inspired by / similar to: https://github.com/kungfusheep/snipe-lsp.nvim
@@ -23,7 +25,7 @@ local config = {
 		yaml = { "Object", "Array" },
 		json = { "Module" },
 		toml = { "Object" },
-		markdown = { "String" }, -- = markdown headings
+		markdown = { "String" }, -- String = Markdown headings
 	},
 	excludeResults = {
 		-- filetype-specific list of lua patterns
@@ -35,7 +37,7 @@ local config = {
 	hints = {
 		highlight = "Todo",
 		useOnlyLastChainMember = true,
-		disallowedChars = { "_" },
+		disallowedChars = { "_", "-", "j", "k" },
 	},
 	icon = "󰍇",
 	win = {
@@ -110,7 +112,6 @@ local function selectSymbol(symbols)
 	end, opts)
 
 	-- quick-keys
-	-- working with lower- and upper-case
 	local usedKeys = vim.deepcopy(config.hints.disallowedChars)
 	for i = 1, #symbols do
 		local lnum = i - 1
