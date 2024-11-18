@@ -46,7 +46,7 @@ local function snacksConfig()
 
 	-----------------------------------------------------------------------------
 	-- SILENCE "E486: PATTERN NOT FOUND"
-	-- (SIC yes, all this is needed to have `cmdheight=0` and avoid "Press Enter" prompt)
+	-- (SIC all this is needed to have `cmdheight=0` and avoid the "Press Enter" prompt)
 
 	local function notFoundNotify(query)
 		local msg = ("%s"):format(query)
