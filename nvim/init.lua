@@ -38,7 +38,6 @@ if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
 safeRequire("config.theme-customization")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
-safeRequire("config.leader-keybindings")
 safeRequire("config.quickfix")
 safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.autocmds")
