@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------
 
 local function snacksConfig()
-	-- OVERRIDE DEFAULT PRINT FUNCTIONS (simplified version of `noice.nvim`)
+	-- OVERRIDE DEFAULT PRINT FUNCTIONS (similar to `noice.nvim`)
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
@@ -46,33 +46,34 @@ local function snacksConfig()
 		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
 	end
 
-	local function silenceSearch(key)
+	local function stopNkeyOnNoMatch(key)
 		local query = vim.fn.getreg("/")
 		local matches = vim.fn.search(vim.fn.getreg("/"), "ncw") -- [n]o move, w/ [c]ursorword, [w]rap
-		if matches > 0 then
-			vim.cmd.normal { key, bang = true }
-		else
+		if matches == 0 then
 			notFoundNotify(query)
+			return
 		end
+		vim.cmd.normal { key, bang = true }
 	end
-	vim.keymap.set("n", "n", function() silenceSearch("n") end, { desc = "silent n" })
-	vim.keymap.set("n", "N", function() silenceSearch("N") end, { desc = "silent N" })
+	vim.keymap.set("n", "n", function() stopNkeyOnNoMatch("n") end, { desc = "silent n" })
+	vim.keymap.set("n", "N", function() stopNkeyOnNoMatch("N") end, { desc = "silent N" })
 
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
-		desc = "User: Change cmdline-height to silence Enter-prompt (1/2)",
+		desc = "User: Temporariy increase cmdline-height to silence Enter-prompt (1/2)",
 		callback = function()
-			if vim.fn.getcmdtype():find("[/?]") then vim.opt.cmdheight = 1 end
+			if vim.fn.getcmdtype() == "/" then vim.opt.cmdheight = 1 end
 		end,
 	})
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
-		desc = "User: Change cmdline-height to silence Enter-prompt (2/2)",
+		desc = "User: Temporariy increase cmdline-height to silence Enter-prompt (2/2)",
 		callback = function()
 			if vim.fn.getcmdtype() ~= "/" then return end
 			vim.defer_fn(function()
 				vim.opt.cmdheight = 0
-				if vim.fn.searchcount().total > 0 then return end
-				vim.opt.hlsearch = false
-				notFoundNotify(vim.fn.getreg("/"))
+				if vim.fn.searchcount().total == 0 then
+					vim.opt.hlsearch = false -- no highlight in notification win
+					notFoundNotify(vim.fn.getreg("/"))
+				end
 			end, 1)
 		end,
 	})
@@ -120,7 +121,7 @@ return {
 		},
 		notifier = {
 			timeout = 6000,
-			width = { min = 10, max = 0.45 },
+			width = { min = 10, max = 0.5 },
 			height = { min = 1, max = 0.6 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,

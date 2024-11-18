@@ -269,18 +269,16 @@ end
 --- if cut off, requires higher notification height setting
 function M.bufferInfo()
 	local ok, node = pcall(vim.treesitter.get_node)
-	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
+	-- local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 	local lsps = vim.tbl_map(function(client)
 		local pad = (" "):rep(math.min(10 - #client.name))
-		local root = client.root_dir:gsub("/Users/%w+", pseudoTilde)
+		local root = client.root_dir:gsub("/Users/%w+", "~")
 		return ("[%s]%s%s"):format(client.name, pad, root)
 	end, vim.lsp.get_clients { bufnr = 0 })
 	local out = {
 		"[filetype]  " .. vim.bo.filetype,
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
-		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
-		"[winnr]     " .. vim.api.nvim_get_current_win(),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", "~"),
 		"",
 		"**At cursor**",
@@ -290,7 +288,7 @@ function M.bufferInfo()
 		"**Attached LSPs with root**",
 		unpack(lsps),
 	}
-	local opts = { title = "Buffer info", icon = "󰽙", keep = function() return true end }
+	local opts = { title = "Buffer info", icon = "󰽙", timeout = false }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
 
