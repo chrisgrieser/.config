@@ -27,10 +27,6 @@ keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
--- Telescope's LSP functions populate the tagstack, so this allow us to go back
--- after exploring LSP references, skipping irrelevant entries in the jump list.
-keymap("n", "<C-g>", vim.cmd.pop, { desc = "󱋿 Tagstack back" })
-
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
@@ -39,8 +35,8 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
 keymap("n", "gm", "%", { desc = "Goto Match", remap = true }) 
 
 -- Diagnostics
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
+keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })
 
 keymap(
 	"n",
@@ -76,7 +72,7 @@ keymap(
 	"n",
 	">",
 	function() require("personal-plugins.misc").camelSnakeToggle() end,
-	{ desc = "󰬴 Toggle camel and snake case" }
+	{ desc = "󰬴 Toggle camel & snake case" }
 )
 
 -- Increment/Decrement, or toggle true/false
@@ -95,8 +91,8 @@ keymap("n", "X", function()
 end, { desc = "󱎘 Delete char at EoL" })
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "mzO<Esc>`z", { desc = " blank above" })
-keymap("n", "_", "mzo<Esc>`z", { desc = " blank below" })
+keymap("n", "=", "mzO<Esc>`z", { desc = " Blank above" })
+keymap("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
@@ -109,7 +105,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- Spelling (works even with `spell=false`)
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix Spelling" })
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰗈 Merge line up" })
@@ -118,16 +114,16 @@ keymap("n", "M", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
 --------------------------------------------------------------------------------
 
 -- SURROUND
-keymap("n", '"', [[bi"<Esc>ea"<Esc>]], { desc = ' " surround cword' })
-keymap("n", "'", [[bi'<Esc>ea'<Esc>]], { desc = " ' surround cword" })
-keymap("n", "(", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 surround cword" })
-keymap("n", "[", [[bi[<Esc>ea]<Esc>]], { desc = "󰅪 surround cword", nowait = true })
-keymap("n", "{", [[bi{<Esc>ea}<Esc>]], { desc = " surround cword" })
-keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline Code cword" })
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline Code selection" })
-keymap("i", "<D-e>", "``<Left>", { desc = " Inline Code" })
+keymap("n", '"', [[bi"<Esc>ea"<Esc>]], { desc = ' " Surround cword' })
+keymap("n", "'", [[bi'<Esc>ea'<Esc>]], { desc = " ' Surround cword" })
+keymap("n", "(", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 Surround cword" })
+keymap("n", "[", [[bi[<Esc>ea]<Esc>]], { desc = "󰅪 Surround cword", nowait = true })
+keymap("n", "{", [[bi{<Esc>ea}<Esc>]], { desc = " Surround cword" })
+keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline code cword" })
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
+keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
-keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template String" })
+keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template string" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -148,9 +144,9 @@ end
 
 -- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
-keymap("n", "<Space>", '"_ciw', { desc = "󰬞 change word" })
-keymap("x", "<Space>", '"_c', { desc = "󰒅 change selection" })
-keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 delete word" })
+keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
+keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
+keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
@@ -162,15 +158,15 @@ keymap(
 	{ desc = "󰆈 Comment Operator", expr = true }
 )
 keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
-keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text Object" })
+keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment text object" })
 keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
-keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
-keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function Docstring" })
-keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append Comment" })
-keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
-keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
+keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
+keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
+keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })
+keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment below" })
+keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Comment above" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
@@ -186,7 +182,7 @@ keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" 
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 -- LSP
-keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP Signature" })
+keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<D-s>", function()
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 	if formattingLsps > 0 then
@@ -239,7 +235,7 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 -- SNIPPETS
 keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
-end, { desc = "󰩫 next placeholder" })
+end, { desc = "󰩫 Next placeholder" })
 
 vim.api.nvim_create_autocmd("WinScrolled", {
 	desc = "User: Exit snippet on scroll",
@@ -302,7 +298,7 @@ keymap({ "n", "x", "i" }, "<D-N>", function()
 		vim.cmd.edit(filepath)
 		vim.cmd.write(filepath)
 	end)
-end, { desc = " Create Scratchpad File" })
+end, { desc = " Create scratchpad file" })
 
 --------------------------------------------------------------------------------
 
@@ -356,11 +352,11 @@ local cursorPreYank
 keymap({ "n", "x" }, "y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
-end, { desc = "Sticky Yank", expr = true })
+end, { desc = "Sticky yank", expr = true })
 keymap("n", "Y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
-end, { desc = "󰅍 Sticky Yank", expr = true, unique = false })
+end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Sticky yank",
@@ -415,3 +411,153 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- LEADER KEYBINDINGS
+
+keymap("n", "<leader>pd", function()
+	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
+	vim.ui.open(packagesDir)
+end, { desc = "󰝰 Open packages directory" })
+
+--------------------------------------------------------------------------------
+-- CMDLINE
+
+-- better than `:lua`, since using `vim.notify`
+vim.api.nvim_create_user_command("Eval", function(ctx)
+	local output = vim.fn.luaeval(ctx.args)
+	vim.notify(vim.inspect(output), nil, { title = "Cmdline" })
+end, { desc = "Eval cmdline", nargs = "+" })
+keymap("n", "<leader>ee", ":Eval ", { desc = "󰓗 Eval" })
+
+-- Copy last command
+keymap("n", "<leader>ec", function()
+	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
+	vim.fn.setreg("+", lastCommand)
+	vim.notify(lastCommand, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰓗 Copy last command" })
+
+--------------------------------------------------------------------------------
+-- RUN
+keymap("n", "<leader>er", function()
+	vim.cmd.update()
+	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
+
+	if vim.bo.filetype == "lua" then
+		vim.cmd.source()
+	elseif hasShebang then
+		vim.cmd("! chmod +x %")
+		vim.cmd("! %")
+	else
+		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
+	end
+end, { desc = "󰜎 Run file" })
+
+--------------------------------------------------------------------------------
+-- INSPECT
+keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
+
+keymap("n", "<leader>ib", function()
+	local out = {
+		"filetype: " .. vim.bo.filetype,
+		"buftype: " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
+		"cwd: " .. (vim.uv.cwd() or "n/a"):gsub("/Users/%w+", "~"),
+		("indent: %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
+	}
+	local ok, node = pcall(vim.treesitter.get_node)
+	if ok and node then table.insert(out, "node: " .. node:type()) end
+	local msg = table.concat(out, "\n")
+	vim.notify(msg, vim.log.levels.TRACE, { title = "Buffer info", icon = "󰽙" })
+end, { desc = "󰽙 Buffer info" })
+
+--------------------------------------------------------------------------------
+-- REFACTORING
+
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP var rename" })
+keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
+
+---@param use "spaces"|"tabs"
+local function retabber(use)
+	vim.bo.expandtab = use == "spaces"
+	vim.bo.shiftwidth = 2
+	vim.bo.tabstop = 3
+	vim.cmd.retab { bang = true }
+	vim.notify("Now using " .. use)
+end
+keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
+keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
+
+keymap("n", "<leader>fq", function()
+	local line = vim.api.nvim_get_current_line()
+	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
+	vim.api.nvim_set_current_line(updatedLine)
+end, { desc = " Switch quotes in line" })
+
+--------------------------------------------------------------------------------
+-- YANK STUFF
+
+keymap("n", "<leader>yl", function()
+	-- cannot use `:g // y` because it yanks lines one after the other
+	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
+		if not input then return end
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
+		vim.fn.setreg("+", table.concat(matchLines, "\n"))
+		vim.notify(("Copied %d lines"):format(#matchLines))
+	end)
+end, { desc = "󰗈 Matching lines" })
+
+vim.fn.setreg("a", "") -- reset on start
+keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 Yank-append to [a]" })
+keymap("n", "<leader>yd", [["Ad]], { desc = " Delete-append to [a]" })
+keymap("n", "<leader>yp", [["ap]], { desc = " Paste from [a]" })
+keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " reset [a]" })
+
+--------------------------------------------------------------------------------
+-- UNDO
+
+keymap(
+	"n",
+	"<leader>ur",
+	function() vim.cmd.later(vim.opt.undolevels:get()) end, ---@diagnostic disable-line: undefined-field
+	{ desc = "󰛒 Redo All" }
+)
+
+keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
+
+--------------------------------------------------------------------------------
+-- LSP
+keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
+keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+
+--------------------------------------------------------------------------------
+
+-- Append to EoL
+local trailChars = { ",", "\\", "{", ")", ";", "." }
+for _, key in pairs(trailChars) do
+	local pad = key == "\\" and " " or ""
+	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
+end
+
+--------------------------------------------------------------------------------
+-- OPTION TOGGLING
+
+keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
+keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
+
+keymap("n", "<leader>ol", function()
+	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
+	vim.cmd.LspRestart()
+end, { desc = "󰒕 :LspRestart" })
+
+keymap("n", "<leader>od", function()
+	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
+	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
+end, { desc = " Diagnostics" })
+
+keymap(
+	"n",
+	"<leader>oc",
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0 end,
+	{ desc = "󰈉 Conceal" }
+)

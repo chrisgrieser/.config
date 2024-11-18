@@ -92,25 +92,33 @@ return {
 			desc = "󰎟 Notification history",
 			"<D-0>",
 			function()
-				local lines = {}
-				local history = require("snacks").notifier.get_history()
+				local filter = "debug" -- skip `trace` messages
+				local history = require("snacks").notifier.get_history { filter = "info" }
 				if #history == 0 then return end
 				require("snacks").notifier.hide() -- dismiss open notifications
-				vim
-					.iter(require("snacks").notifier.get_history())
-					:rev() -- move recent notifications to the top
-					:each(function(notif)
-						local msg = vim.split(notif.msg, "\n")
-						local title = (notif.title and notif.title ~= "") and notif.title or "ﱢ"
-						msg[1] = ("[%s] %s"):format(title, msg[1]) -- [] for highlight via markdown
-						vim.list_extend(lines, msg)
-					end)
 
+				-- set buffer text
+				local lines, titles = {}, {}
+				local ns = vim.api.nvim_create_namespace("snacks-history")
+				local notifs = vim.iter(require("snacks").notifier.get_history()):rev()
+				vim.iter(notifs):each(function(n)
+					local msg = vim.split(n.msg, "\n")
+					titles[#lines] = (n.title and n.title ~= "") and n.title or (n.icon or "ﱢ")
+					vim.list_extend(lines, msg)
+				end)
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+
+				-- add titles
+				for lnum, title in pairs(titles) do
+					vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+						virt_text = { { title .. " ", "Title" } },
+						virt_text_pos = "inline",
+					})
+				end
+
 				require("snacks").win {
 					position = "bottom",
-					ft = "markdown", -- to highlight the []
 					buf = bufnr,
 					height = 0.6,
 					keys = { ["<D-0>"] = "close" },
@@ -157,8 +165,8 @@ return {
 					keys = { ["<D-8>"] = "close" },
 					title = " :messages ",
 				}
+				-- highlight errors and paths
 				vim.api.nvim_buf_call(bufnr, function()
-					-- highlight errors and paths
 					vim.fn.matchadd("ErrorMsg", [[E\d\+:.*]])
 					vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
 				end)
