@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/ajmarkow/espanso-schema-json/master/schemas/Espanso_Matches_File_Schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
   - trigger: "!lorem"
@@ -13,10 +13,6 @@ matches:
       Morbi vitae ligula est. Fusce eleifend blandit convallis. Etiam leo massa, fringilla nec imperdiet sit amet, accumsan nec nisi. Suspendisse accumsan id diam et tincidunt. Praesent elementum metus non porttitor dapibus. Curabitur pretium malesuada dolor, tempor mollis lacus hendrerit at. 
 
       Donec porta, nibh et placerat bibendum, leo dolor ultrices neque, vel tristique metus mi congue massa. Morbi lobortis placerat tellus, vel fringilla nisi vulputate at. Nulla eu lacinia leo. Curabitur lobortis sed sem quis faucibus. Phasellus efficitur, leo vel blandit luctus, erat ipsum dictum lorem, sed molestie tortor risus ut nunc. Aliquam rhoncus justo eu interdum aliquet."
-  - trigger: "!lorem"
-    replace: |
-      The quick brown fox jumps over the lazy dog.
-    label: "Lorem: Quick Brown Fox"
   - trigger: "!lorem"
     label: "Lorem: 10 list items"
     replace: |
