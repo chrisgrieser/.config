@@ -55,7 +55,8 @@
       "vim.wo[winnr].winfixbuf = true",
       "vim.bo[bufnr].modifiable = false",
       "",
-      "vim.keymap.set(\"n\", \"q\", vim.cmd.close, { buffer = bufnr, nowait = true })"
+      "vim.keymap.set(\"n\", \"q\", vim.cmd.close, { buffer = bufnr, nowait = true })",
+      "vim.keymap.set(\"n\", \"<Esc>\", vim.cmd.close, { buffer = bufnr, nowait = true })"
     ],
     "prefix": "create new nvim window"
   },
