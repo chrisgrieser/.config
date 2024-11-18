@@ -1,4 +1,5 @@
 -- INFO Commands for displaying the `snacks.nvim` notification history
+--------------------------------------------------------------------------------
 
 local M = {}
 --------------------------------------------------------------------------------
@@ -11,19 +12,18 @@ function M.full()
 	require("snacks").notifier.hide()
 
 	-- set buffer text
-	local lines, notifyData = {}, {}
-	local ns = vim.api.nvim_create_namespace("snacks-history")
-	local notifs = vim.iter(history):rev() -- reversed so recent are on top
-	vim.iter(notifs):each(function(n)
+	local notifyData = {}
+	local lines = vim.iter(history):rev():fold({}, function(acc, n)
 		local msg = vim.split(n.msg, "\n")
 		local title = (n.title and n.title ~= "") and n.title or (n.icon or "ﱢ")
-		notifyData[#lines] = { title = title, level = n.level }
-		vim.list_extend(lines, msg)
+		notifyData[#acc] = { title = title, level = n.level }
+		return vim.list_extend(acc, msg)
 	end)
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 
 	-- add titles
+	local ns = vim.api.nvim_create_namespace("snacks-history")
 	for lnum, data in pairs(notifyData) do
 		local levelCapitalized = data.level:sub(1, 1):upper() .. data.level:sub(2)
 		local hlgroup = "SnacksNotifierTitle" .. levelCapitalized
@@ -42,7 +42,8 @@ function M.full()
 end
 
 function M.last()
-	local history = require("snacks").notifier.get_history()
+	local skipTraceLevel = function(n) return n.level ~= "trace" end
+	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
 	local last = history[#history]
 	if not last then return end
 	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
