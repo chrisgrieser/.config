@@ -233,8 +233,8 @@ return {
 					-- re-purposing `objectLog` for debugging via AppleScript notification
 					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 
-					-- better use of `vim.notify` with `snacks.nvim`
-					_placeholders = { "marker", "var", "var", "marker" }, -- appending "marker"
+					-- with `snacks.nvim`, move the label to the window title
+					_placeholders = { "marker", "var", "var", "marker" }, -- just appending "marker"
 					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { ft = "lua", title = "%s %s" })',
 				},
 				clearLog = {

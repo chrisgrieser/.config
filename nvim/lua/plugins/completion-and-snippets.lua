@@ -131,8 +131,8 @@ return {
 		},
 		opts = {
 			editSnippetPopup = {
-				height = 0.5, -- between 0-1
-				width = 0.7,
+				height = 0.55, -- between 0-1
+				width = 0.75,
 				border = vim.g.borderStyle,
 				keymaps = {
 					deleteSnippet = "<D-BS>",

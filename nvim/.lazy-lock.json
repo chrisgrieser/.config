@@ -36,6 +36,8 @@
   "render-markdown.nvim": { "branch": "main", "commit": "7f0143e9adf7140c8e3fa33a5bdf193d7a8f0429" },
   "satellite.nvim": { "branch": "main", "commit": "ea0a2e92bbb57981043fca334f5b274c0f279238" },
   "snacks.nvim": { "branch": "main", "commit": "063525196a43fd0a4a03bd67edce1b72e4f1c20b" },
+  "snipe-lsp.nvim": { "branch": "main", "commit": "740cb515fe51d3be4774bf13cd52447094165a00" },
+  "snipe.nvim": { "branch": "main", "commit": "c33b9de4cf5f0c11ebc78bfb4e6170200819c4ad" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "85922dde3767e01d42a08e750a773effbffaea3e" },

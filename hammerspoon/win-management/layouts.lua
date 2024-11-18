@@ -24,7 +24,7 @@ local function autoSetBrightness()
 	local noBrightnessSensor = ambient == -1
 	if noBrightnessSensor then return end
 	local target
-	if ambient > 120 then
+	if ambient > 100 then
 		target = 1
 	elseif ambient > 90 then
 		target = 0.9

@@ -110,7 +110,7 @@ return {
 					position = "bottom",
 					ft = "markdown",
 					buf = bufnr,
-					height = 0.5,
+					height = 0.6,
 					keys = { ["<D-0>"] = "close" },
 				}
 			end,
