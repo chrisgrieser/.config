@@ -69,8 +69,10 @@ return {
 	},
 	{ -- color previews & color picker
 		"uga-rosa/ccc.nvim",
+		cmd = { "CccPick", "CccConvert" },
 		keys = {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
+			{ "g#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 		},
 		ft = { "css", "zsh", "lua", "toml", "just" },
 		config = function(spec)
@@ -100,6 +102,11 @@ return {
 					ccc.output.css_hsl,
 					ccc.output.css_rgb,
 					ccc.output.hex,
+				},
+				convert = {
+					{ ccc.picker.hex, ccc.output.css_hsl },
+					{ ccc.picker.css_rgb, ccc.output.css_hsl },
+					{ ccc.picker.css_hsl, ccc.output.hex },
 				},
 				disable_default_mappings = true,
 				mappings = {
