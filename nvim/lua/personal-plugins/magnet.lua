@@ -36,6 +36,7 @@ local config = {
 			"%.%.%. :", -- vim.iter functions
 			":gsub", -- lua string.gsub
 			"^callback$", -- nvim autocmds
+			"^filter$",
 		},
 	},
 	hints = {
