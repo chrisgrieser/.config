@@ -47,6 +47,7 @@ local function showAndMoveOrHide(win)
 	local transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" }
 	local winApp = win:application():name() ---@diagnostic disable-line: undefined-field
 	if wu.winHasSize(win, hs.layout.maximized) and (hs.fnutils.contains(transBgApps, winApp)) then
+		print("🖨️ 🔵")
 		masto:hide()
 	end
 end
