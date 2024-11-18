@@ -32,7 +32,7 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search in sel" })
 
 -- Goto matching parenthesis (`remap` -> use builtin `MatchIt` plugin)
-keymap("n", "gm", "%", { desc = "Goto Match", remap = true }) 
+keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
@@ -377,7 +377,7 @@ keymap("n", "dd", function()
 end, { expr = true, desc = "dd" })
 
 -- pasting
-keymap("n", "P", function ()
+keymap("n", "P", function()
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local reg = vim.fn.getreg("+")
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
@@ -458,16 +458,18 @@ keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
 keymap("n", "<leader>ib", function()
-	local out = {
-		"filetype: " .. vim.bo.filetype,
-		"buftype: " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		"cwd: " .. (vim.uv.cwd() or "n/a"):gsub("/Users/%w+", "~"),
-		("indent: %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
-	}
 	local ok, node = pcall(vim.treesitter.get_node)
-	if ok and node then table.insert(out, "node: " .. node:type()) end
-	local msg = table.concat(out, "\n")
-	vim.notify(msg, vim.log.levels.TRACE, { title = "Buffer info", icon = "󰽙" })
+	local out = {
+		"[ft     ] " .. vim.bo.filetype,
+		"[buftype] " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
+		"[cwd    ] " .. (vim.uv.cwd() or "n/a"):gsub("/Users/%w+", "~"),
+		("[indent ] %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
+		"[winnr  ] " .. vim.api.nvim_get_current_win(),
+		"[bufnr  ] " .. vim.api.nvim_get_current_buf(),
+		(ok and node) and ("[node   ] " .. node:type()) or nil,
+	}
+	local opts = { title = "Buffer info", icon = "󰽙", timeout = 13000 }
+	vim.notify(table.concat(out, "\n"), vim.log.levels.TRACE, opts)
 end, { desc = "󰽙 Buffer info" })
 
 --------------------------------------------------------------------------------

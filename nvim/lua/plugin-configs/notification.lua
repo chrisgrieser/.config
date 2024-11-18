@@ -16,11 +16,13 @@ local function snacksConfig()
 	vim.api.nvim_echo = function(chunks, _, _)
 		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
 		local opts = { title = "Echo", icon = "" }
+		local severity = "DEBUG"
 		if msg:lower():find("hunk") then
 			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
 			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
+			severity = "TRACE"
 		end
-		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
+		vim.notify(vim.trim(msg), vim.log.levels[severity], opts)
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_err_writeln = function(msg)
@@ -41,7 +43,7 @@ local function snacksConfig()
 
 	local function notFoundNotify(query)
 		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
-		vim.notify_once(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
+		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
 	end
 
 	local function silenceSearch(key)
@@ -89,88 +91,19 @@ return {
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{
-			desc = "󰎟 Notification history",
 			"<D-0>",
-			function()
-				local filter = "debug" -- skip `trace` messages
-				local history = require("snacks").notifier.get_history { filter = "info" }
-				if #history == 0 then return end
-				require("snacks").notifier.hide() -- dismiss open notifications
-
-				-- set buffer text
-				local lines, titles = {}, {}
-				local ns = vim.api.nvim_create_namespace("snacks-history")
-				local notifs = vim.iter(require("snacks").notifier.get_history()):rev()
-				vim.iter(notifs):each(function(n)
-					local msg = vim.split(n.msg, "\n")
-					titles[#lines] = (n.title and n.title ~= "") and n.title or (n.icon or "ﱢ")
-					vim.list_extend(lines, msg)
-				end)
-				local bufnr = vim.api.nvim_create_buf(false, true)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-
-				-- add titles
-				for lnum, title in pairs(titles) do
-					vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
-						virt_text = { { title .. " ", "Title" } },
-						virt_text_pos = "inline",
-					})
-				end
-
-				require("snacks").win {
-					position = "bottom",
-					buf = bufnr,
-					height = 0.6,
-					keys = { ["<D-0>"] = "close" },
-				}
-			end,
+			function() require("personal-plugins.snacks-notif-hist").full() end,
+			desc = "󰎟 Notification history",
 		},
 		{
-			desc = "󰎟 Last notification",
 			"<D-9>",
-			function()
-				local history = require("snacks").notifier.get_history()
-				local last = history[#history]
-				if not last then return end
-				require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
-
-				local bufnr = vim.api.nvim_create_buf(false, true)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
-				local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
-				require("snacks").win {
-					position = "float",
-					ft = last.ft,
-					buf = bufnr,
-					height = 0.75,
-					width = 0.75,
-					title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
-					keys = { ["<D-9>"] = "close" },
-				}
-			end,
+			function() require("personal-plugins.snacks-notif-hist").last() end,
+			desc = "󰎟 Last notification",
 		},
 		{
-			desc = "󰎟 :messages",
 			"<D-8>",
-			function()
-				local messages = vim.fn.execute("messages")
-				if messages == "" then return end
-				local lines = vim.split(vim.trim(messages), "\n")
-				local bufnr = vim.api.nvim_create_buf(false, true)
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-				require("snacks").win {
-					position = "float",
-					buf = bufnr,
-					height = 0.75,
-					width = 0.75,
-					keys = { ["<D-8>"] = "close" },
-					title = " :messages ",
-				}
-				-- highlight errors and paths
-				vim.api.nvim_buf_call(bufnr, function()
-					vim.fn.matchadd("ErrorMsg", [[E\d\+:.*]])
-					vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-				end)
-			end,
+			function() require("personal-plugins.snacks-notif-hist").messages() end,
+			desc = "󰎟 :messages",
 		},
 	},
 	opts = {
