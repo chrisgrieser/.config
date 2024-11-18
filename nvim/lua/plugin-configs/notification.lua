@@ -59,13 +59,13 @@ local function snacksConfig()
 	vim.keymap.set("n", "N", function() stopNkeyOnNoMatch("N") end, { desc = "silent N" })
 
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
-		desc = "User: Temporariy increase cmdline-height to silence Enter-prompt (1/2)",
+		desc = "User: Increase cmdline-height when in cmdline (silence enter-prompt 1/2)",
 		callback = function()
 			if vim.fn.getcmdtype() == "/" then vim.opt.cmdheight = 1 end
 		end,
 	})
 	vim.api.nvim_create_autocmd("CmdlineLeave", {
-		desc = "User: Temporariy increase cmdline-height to silence Enter-prompt (2/2)",
+		desc = "User: Decrease cmdline-height after leaving (silence enter-prompt 2/2)",
 		callback = function()
 			if vim.fn.getcmdtype() ~= "/" then return end
 			vim.defer_fn(function()
@@ -121,6 +121,7 @@ return {
 		},
 		notifier = {
 			timeout = 6000,
+			sort = { "added" }, -- sort only by time
 			width = { min = 10, max = 0.5 },
 			height = { min = 1, max = 0.6 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },

@@ -124,10 +124,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
 		if #closedBuffers == 0 then return end
 
 		if #closedBuffers == 1 then
-			vim.notify(closedBuffers[1], nil, { title = "󰅗 Buffer closed" })
+			vim.notify(closedBuffers[1], nil, { title = "Buffer closed", icon = "󰅗" })
 		else
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
-			vim.notify(text, nil, { title = "󰅗 Buffers closed" })
+			vim.notify(text, nil, { title = "Buffers closed", icon = "󰅗" })
 		end
 
 		-- If ending up in empty buffer, re-open the first oldfile that exists
@@ -282,7 +282,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 
 				vim.api.nvim_win_set_cursor(0, { firstConflictLn, 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
-				vim.notify_once("Conflict markers found.", nil, { title = "Git Conflicts" })
+				vim.notify_once(
+					"Conflict markers found.",
+					nil,
+					{ title = "Git Conflicts", icon = "󰞇" }
+				)
 			end)
 		)
 	end,
