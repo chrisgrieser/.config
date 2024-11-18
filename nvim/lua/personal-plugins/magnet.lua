@@ -15,7 +15,7 @@ Inspired by / similar to: https://github.com/kungfusheep/snipe-lsp.nvim
 ------------------------------------------------------------------------------
 
 local config = {
-	kindFilter = {
+	includeKinds = {
 		-- kind names: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 		default = { "Function", "Method", "Class", "Module" },
 
@@ -23,24 +23,29 @@ local config = {
 		yaml = { "Object", "Array" },
 		json = { "Module" },
 		toml = { "Object" },
+		markdown = { "String" }, -- = markdown headings
 	},
-	resultFilter = {
-		default = {},
-
+	excludeResults = {
 		-- filetype-specific list of lua patterns
-		lua = { "^vim%." }, -- remove anonymous functions
+		lua = {
+			"^vim%.", -- anonymous functions passed to nvim api
+			"%.%.%. :", -- vim.iter functions
+		},
 	},
+	hints = {
+		highlight = "Todo",
+		useOnlyLastChainMember = true,
+		disallowedChars = { "_" },
+	},
+	icon = "󰍇",
 	win = {
 		border = vim.g.borderStyle,
-	},
-	highlights = {
-		hint = "Todo",
-	},
-	keymaps = {
-		next = "<Tab>",
-		prev = "<S-Tab>",
-		select = "<CR>",
-		closeWin = { "q", "<Esc>", "<D-w>" },
+		keymaps = {
+			next = "<Tab>",
+			prev = "<S-Tab>",
+			select = "<CR>",
+			closeWin = { "q", "<Esc>", "<D-w>" },
+		},
 	},
 }
 
@@ -66,7 +71,7 @@ local function selectSymbol(symbols)
 	local names = vim.tbl_map(function(s) return s.text end, symbols)
 
 	local ns = vim.api.nvim_create_namespace("magnet-window")
-	local title = "Symbols"
+	local title = config.icon .. " Magnet"
 	local longestName = math.max(unpack(vim.tbl_map(function(line) return #line end, names)))
 	local width = math.max(longestName, vim.api.nvim_strwidth(title)) + 2 -- +2 for padding
 	local winHeight = vim.api.nvim_win_get_height(0)
@@ -93,27 +98,29 @@ local function selectSymbol(symbols)
 
 	-- keymaps
 	local opts = { buffer = bufnr, nowait = true }
-	local optsExpr = vim.tbl_extend("force", opts, { expr = true })
-	for _, key in pairs(config.keymaps.closeWin) do
+	for _, key in pairs(config.win.keymaps.closeWin) do
 		vim.keymap.set("n", key, vim.cmd.close, opts)
 	end
-	vim.keymap.set("n", config.keymaps.next, "j", optsExpr)
-	vim.keymap.set("n", config.keymaps.prev, "k", optsExpr)
+	vim.keymap.set("n", config.win.keymaps.next, "j", opts)
+	vim.keymap.set("n", config.win.keymaps.prev, "k", opts)
 
-	vim.keymap.set("n", config.keymaps.select, function()
+	vim.keymap.set("n", config.win.keymaps.select, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		jumpToSymbol(symbols[lnum], winnr)
 	end, opts)
 
 	-- quick-keys
 	-- working with lower- and upper-case
-	local usedKeys = {}
+	local usedKeys = vim.deepcopy(config.hints.disallowedChars)
 	for i = 1, #symbols do
 		local lnum = i - 1
 
 		local name = symbols[i].text
-		local lastDotPod = name:find(".+%.")
-		local col = lastDotPod and lastDotPod + 1 or 0
+		local col = 0
+		if config.hints.useOnlyLastChainMember then
+			local _, lastDotPos = name:find(".+%.")
+			if lastDotPos then col = lastDotPos + 1 end
+		end
 
 		local key
 		repeat
@@ -123,7 +130,7 @@ local function selectSymbol(symbols)
 		until not vim.tbl_contains(usedKeys, key)
 		if key ~= "" then
 			table.insert(usedKeys, key)
-			vim.api.nvim_buf_add_highlight(bufnr, ns, config.highlights.hint, lnum, col - 1, col)
+			vim.api.nvim_buf_add_highlight(bufnr, ns, config.hints.highlight, lnum, col - 1, col)
 			vim.keymap.set("n", key, function() jumpToSymbol(symbols[i], winnr) end, opts)
 			vim.keymap.set("n", key:upper(), function() jumpToSymbol(symbols[i], winnr) end, opts)
 		end
@@ -133,12 +140,20 @@ end
 ---@param symbols Magnet.Symbol[]
 ---@return Magnet.Symbol[]
 local function filterSymbols(symbols)
-	local kindFilter = config.kindFilter[vim.bo.filetype] or config.kindFilter.default
-	local resultFilter = config.resultFilter[vim.bo.filetype] or config.resultFilter.default
+	local includeKinds = config.includeKinds[vim.bo.filetype] or config.includeKinds.default
+	local excludeResults = config.excludeResults[vim.bo.filetype] or {}
 
 	local filteredSymbols = vim.iter(symbols)
+		:map(function(symbol)
+			-- map before, so `excludeResults` works on correct text
+			symbol.text = symbol.text:gsub("%[%w+%] ", "")
+			return symbol
+		end)
 		:filter(function(symbol)
-			return vim.tbl_contains(kindFilter, symbol.kind)
+			local exclude = vim.iter(excludeResults)
+				:any(function(pattern) return symbol.text:find(pattern) end)
+			local include = vim.tbl_contains(includeKinds, symbol.kind)
+			return include and not exclude
 		end)
 		:totable()
 	return filteredSymbols
@@ -147,19 +162,21 @@ end
 ---@async
 local function getLspDocumentSymbols()
 	local params = vim.lsp.util.make_position_params()
+
+	-- INFO `lsp.buf_request_sync` is buggy when switching cwd, so not using it
+	-- SIC for some reason, `lsp.buf_request_sync` yields other results as `lsp.bufrequst`…
 	vim.lsp.buf_request(0, "textDocument/documentSymbol", params, function(err, result, _, _)
 		if err then
-			local msg = "Error when finding document symbols: " .. err.message
-			vim.notify(msg, vim.log.levels.WARN, { title = "Symbols" })
+			local msg = "Error fetching symbols: " .. err.message
+			vim.notify(msg, vim.log.levels.ERROR, { title = "Magnet", icon = config.icon })
 			return
 		end
-
 		if not result or #result == 0 then
-			vim.notify("No results.", vim.log.levels.WARN, { title = "Symbols" })
+			vim.notify("No results.", vim.log.levels.WARN, { title = "Magnet", icon = config.icon })
 			return
 		end
-		local items = vim.lsp.util.symbols_to_items(result or {}, 0) or {}
 
+		local items = vim.lsp.util.symbols_to_items(result or {}, 0) or {}
 		local symbols = filterSymbols(items)
 		if #symbols == 0 then
 			vim.notify("Current `kindFilter` doesn't match any symbols.", nil, { title = "Symbols" })
