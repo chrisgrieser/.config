@@ -8,7 +8,7 @@ local function snacksConfig()
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
 		if msg:find("^%[nvim%-treesitter%]") then
-			opts = { icon = "", id = "ts-install", style = "minimal" }
+			opts = { title = "Treesitter", icon = "", id = "ts-install" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
@@ -21,6 +21,14 @@ local function snacksConfig()
 			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
+	end
+	-----------------------------------------------------------------------------
+
+	-- HACK SILENCE SOME MESSAGES by overriding snacks' override
+	vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field
+		-- PENDING https://github.com/artempyanykh/marksman/issues/348
+		if msg:find("^Client marksman quit with exit code 1") then return end
+		require("snacks").notifier.notify(msg, ...)
 	end
 
 	-----------------------------------------------------------------------------
