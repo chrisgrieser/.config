@@ -20,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- DOCS https://lazy.folke.io/configuration
 require("lazy").setup {
-	spec = { import = "plugins" }, -- = use specs stored in `./lua/plugins`
+	spec = { import = "plugin-configs" }, -- = use specs stored in `./lua/plugins`
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 	dev = { ---@diagnostic disable-line: assign-type-mismatch faulty annotation

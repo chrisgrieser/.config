@@ -152,7 +152,7 @@ local lualineConfig = {
 			{ filenameAndIcon },
 		},
 		lualine_b = {
-			{ require("funcs.alt-alt").altFileStatusbar },
+			{ require("personal-plugins.alt-alt").altFileStatusbar },
 		},
 		lualine_c = {
 			{ require("config.quickfix").quickfixCounterStatusbar },

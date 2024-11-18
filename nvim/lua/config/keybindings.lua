@@ -52,7 +52,7 @@ keymap("n", "U", "<C-r>")
 keymap(
 	"n",
 	"ww",
-	function() require("funcs.nano-plugins").smartLineDuplicate() end,
+	function() require("nano-plugins.misc").smartLineDuplicate() end,
 	{ desc = "󰇋 Duplicate line" }
 )
 
@@ -61,14 +61,14 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap(
 	"n",
 	"<",
-	function() require("funcs.nano-plugins").toggleWordCasing() end,
+	function() require("nano-plugins.misc").toggleWordCasing() end,
 	{ desc = "󰬴 Toggle word case" }
 )
 
 keymap(
 	"n",
 	">",
-	function() require("funcs.nano-plugins").camelSnakeToggle() end,
+	function() require("nano-plugins.misc").camelSnakeToggle() end,
 	{ desc = "󰬴 Toggle camel and snake case" }
 )
 
@@ -76,7 +76,7 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"+",
-	function() return require("funcs.nano-plugins").toggleOrIncrement() end,
+	function() return require("nano-plugins.misc").toggleOrIncrement() end,
 	{ desc = "󰐖 Increment/Toggle", expr = true }
 )
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
@@ -159,12 +159,12 @@ keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment Text
 keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
-keymap("n", "qw", function() require("funcs.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
-keymap("n", "wq", function() require("funcs.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate Line as Comment" })
-keymap("n", "qf", function() require("funcs.comment").docstring() end, { desc = "󰆈 Function Docstring" })
-keymap("n", "Q", function() require("funcs.comment").addComment("eol") end, { desc = "󰆈 Append Comment" })
-keymap("n", "qo", function() require("funcs.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
-keymap("n", "qO", function() require("funcs.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
+keymap("n", "qw", function() require("nano-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal Divider" })
+keymap("n", "wq", function() require("nano-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate Line as Comment" })
+keymap("n", "qf", function() require("nano-plugins.comment").docstring() end, { desc = "󰆈 Function Docstring" })
+keymap("n", "Q", function() require("nano-plugins.comment").addComment("eol") end, { desc = "󰆈 Append Comment" })
+keymap("n", "qo", function() require("nano-plugins.comment").addComment("below") end, { desc = "󰆈 Comment Below" })
+keymap("n", "qO", function() require("nano-plugins.comment").addComment("above") end, { desc = "󰆈 Comment Above" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ vim.api.nvim_create_autocmd("WinScrolled", {
 keymap(
 	{ "n", "x" },
 	"<CR>",
-	function() require("funcs.alt-alt").gotoAltFile() end,
+	function() require("nano-plugins.alt-alt").gotoAltFile() end,
 	{ desc = "󰽙 Goto Alt-File" }
 )
 vim.api.nvim_create_autocmd("FileType", {
@@ -266,26 +266,26 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
-	function() require("funcs.nano-plugins").gotoMostChangedFile() end,
+	function() require("nano-plugins.misc").gotoMostChangedFile() end,
 	{ desc = "󰊢 Goto most changed file" }
 )
 keymap(
 	{ "n", "x" },
 	"<M-CR>",
-	function() require("funcs.nano-plugins").nextFileInFolder("Next") end,
+	function() require("nano-plugins.misc").nextFileInFolder("Next") end,
 	{ desc = "󰖽 Next file in folder" }
 )
 keymap(
 	{ "n", "x" },
 	"<S-M-CR>",
-	function() require("funcs.nano-plugins").nextFileInFolder("Prev") end,
+	function() require("nano-plugins.misc").nextFileInFolder("Prev") end,
 	{ desc = "󰖿 Prev file in folder" }
 )
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	local winClosed = pcall(vim.cmd.close)
-	if not winClosed then require("funcs.alt-alt").closeBuffer() end
+	if not winClosed then require("nano-plugins.alt-alt").closeBuffer() end
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x", "i" }, "<D-N>", function()
@@ -309,7 +309,7 @@ end, { desc = "󰀶 Reveal in Finder" })
 keymap(
 	{ "n", "x", "i" },
 	"<D-L>",
-	function() require("funcs.nano-plugins").openAlfredPref() end,
+	function() require("nano-plugins.misc").openAlfredPref() end,
 	{ desc = "󰮤 Reveal in Alfred" }
 )
 
@@ -335,7 +335,7 @@ local toggleKey = "0"
 keymap(
 	"n",
 	toggleKey,
-	function() require("funcs.nano-plugins").startOrStopRecording(toggleKey, register) end,
+	function() require("nano-plugins.misc").startOrStopRecording(toggleKey, register) end,
 	{ desc = "󰕧 Start/stop recording" }
 )
 keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })
@@ -409,6 +409,6 @@ vim.api.nvim_create_autocmd("FileType", {
 keymap(
 	"n",
 	"gs",
-	function() require("funcs.magnet").snipe() end,
+	function() require("nano-plugins.magnet").snipe() end,
 	{ desc = " Magnet" }
 )

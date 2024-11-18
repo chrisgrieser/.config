@@ -154,8 +154,8 @@ function M.smartLineDuplicate()
 	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
 
 	-- MOVE CURSOR DOWN, AND POTENTIALLY TO VALUE/FIELD
-	local _, _, luadocFieldPos = line:find("%-%-%-@%w+ ()") 
-	local _, valuePos = line:find("[:=] %S") 
+	local luadocFieldPos = vim.bo.ft == "lua" and select(3, line:find("%-%-%-@%w+ ()")) or nil
+	local _, valuePos = line:find("[:=] %S")
 	local newCol = luadocFieldPos or valuePos
 	local targetCol = newCol and newCol - 1 or col
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })

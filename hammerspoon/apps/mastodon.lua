@@ -95,6 +95,7 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 		if #masto:allWindows() == 1 then
 			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
 		end
 	end
 end):start()

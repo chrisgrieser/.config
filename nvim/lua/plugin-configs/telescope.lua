@@ -103,7 +103,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal sidescrolloff=1",
 })
 
-require("funcs.telescope-backdrop")
+require("personal-plugins.telescope-backdrop")
 
 --------------------------------------------------------------------------------
 

@@ -5,10 +5,10 @@
 
 ```bash
 ├── lua
-│  ├── config # keybindings, options, ….markdownlintignore
-│  ├── funcs # utility functions & personal plugins
-│  └── plugins # plugins & their configs
-├── personal-mason-registry # for some packages not in mason-register (yet)
+│  ├── config
+│  ├── personal-plugins
+│  └── plugin-configs
+├── personal-mason-registry
 ├── after
 │  └── ftplugin # filetype-specific configs
 ├── queries # modifications of treesitter queries

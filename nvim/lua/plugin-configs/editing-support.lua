@@ -193,8 +193,7 @@ return {
 					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
 
 					-- with `snacks.nvim`, move the label to the window title
-					_placeholders = { "marker", "var", "var", "marker" }, -- just appending "marker"
-					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { ft = "lua", title = "%s %s" })',
+					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { ft = "lua", title = "%s" })',
 				},
 				clearLog = {
 					lua = "hs.console.clearConsole() -- %s", -- Hammerspoon

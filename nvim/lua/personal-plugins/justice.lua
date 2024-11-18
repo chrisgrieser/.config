@@ -200,7 +200,7 @@ local function selectRecipe()
 	end, recipes)))
 	local quickKeyWidth = 2
 	local winWidth = math.max(longestRecipe, vim.api.nvim_strwidth(title)) + quickKeyWidth + 1
-	local winHeight = #recipes
+	local winHeight = math.min(#recipes, vim.api.nvim_win_get_height(0))
 
 	-- create window
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -247,7 +247,7 @@ local function selectRecipe()
 		if ok then snacks.notifier.hide("just-recipe") end
 	end
 	local opts = { buffer = bufnr, nowait = true }
-	local optsExpr = { buffer = bufnr, nowait = true, expr = true }
+	local optsExpr = vim.tbl_extend("force", opts, { expr = true })
 	for _, key in pairs(config.keymaps.closeWin) do
 		vim.keymap.set("n", key, closeWin, opts)
 	end
