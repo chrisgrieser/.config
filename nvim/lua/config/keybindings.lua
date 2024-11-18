@@ -48,6 +48,14 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" 
 -- Undo
 keymap("n", "U", "<C-r>")
 
+-- Duplicate
+keymap(
+	"n",
+	"ww",
+	function() require("funcs.nano-plugins").smartLineDuplicate() end,
+	{ desc = "󰇋 Duplicate line" }
+)
+
 -- Toggles
 keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap(
@@ -404,4 +412,3 @@ keymap(
 	function() require("funcs.symbol-sniper").snipe() end,
 	{ desc = "󰒕 Symbol Snipe" }
 )
-
