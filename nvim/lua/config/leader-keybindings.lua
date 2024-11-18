@@ -148,7 +148,7 @@ end
 keymap(
 	"n",
 	"<leader>j",
-	function() require("nano-plugins.justice").just() end,
+	function() require("personal-plugins.justice").just() end,
 	{ desc = "󰖷 Justfile" }
 )
 

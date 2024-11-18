@@ -1,21 +1,43 @@
-local M = {}
---------------------------------------------------------------------------------
+--[[ INFO
+Quickly jump to specific LSP symbols.
+
+USAGE
+- `require("magnet").jump()`
+- Quick-select symbol via highlighted keys. 
+- Alternatively, move with `<Tab>` & `<S-Tab>` and select a symbol via `<CR>`.
+
+REQUIREMENTS
+- nvim 0.10+
+
+CREDITS
+Inspired by / similar to: https://github.com/kungfusheep/snipe-lsp.nvim
+]]
+------------------------------------------------------------------------------
+
 local config = {
-	---@type string[] -- kind names: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-	kindFilter = { "Function", "Method" },
+	kindFilter = {
+		-- kind names: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
+		default = { "Function", "Method", "Class", "Module" },
+
+		-- filetype-specific kinds
+		yaml = { "Object", "Array" },
+		json = { "Module" },
+		toml = { "Object" },
+	},
 	win = {
 		border = vim.g.borderStyle,
 	},
 	highlights = {
-		hint = "CursorLineNr",
+		hint = "Todo",
 	},
 	keymaps = {
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		closeWin = { "q", "<Esc>", "<D-w>" },
 		select = "<CR>",
+		closeWin = { "q", "<Esc>", "<D-w>" },
 	},
 }
+
 --------------------------------------------------------------------------------
 
 ---@class (exact) Magnet.Symbol
@@ -28,15 +50,15 @@ local function getLspDocumentSymbols()
 	local params = { textDocument = vim.lsp.util.make_text_document_params() }
 	local response, err = vim.lsp.buf_request_sync(0, "textDocument/documentSymbol", params)
 	if not response or not response[1] or not response[1].result then
-		local msg = vim.trim("No symbols found\n" .. (err or ""))
+		local msg = "No symbols found" .. (err and ": " .. err or ".")
 		vim.notify(msg, vim.log.levels.WARN, { title = "Symbols" })
 		return
 	end
 
-	---@type Magnet.Symbol[]
+	local kindFilter = config.kindFilter[vim.bo.filetype] or config.kindFilter.default
 	local symbols = vim.iter(response[1].result):fold({}, function(acc, item)
 		local kindName = vim.lsp.protocol.SymbolKind[item.kind] or "Unknown"
-		if not vim.tbl_contains(config.kindFilter, kindName) then return acc end
+		if not vim.tbl_contains(kindFilter, kindName) then return acc end
 		table.insert(acc, { name = item.name, kindName = kindName, range = item.range })
 		return acc
 	end)
@@ -60,10 +82,12 @@ local function selectSymbol(symbols)
 	local names = vim.tbl_map(function(s) return s.name end, symbols)
 
 	local ns = vim.api.nvim_create_namespace("symbol-sniper")
-	local width = math.max(unpack(vim.tbl_map(function(line) return #line end, names))) + 2
+	local title = "Symbols"
+	local longestName = math.max(unpack(vim.tbl_map(function(line) return #line end, names)))
+	local width = math.max(longestName, vim.api.nvim_strwidth(title)) + 2 -- +2 for padding
 	local winHeight = vim.api.nvim_win_get_height(0)
 	local height = math.min(#symbols, winHeight)
-	local title = "Symbols"
+	local originalFt = vim.bo.filetype
 
 	-- create window
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -81,6 +105,7 @@ local function selectSymbol(symbols)
 	vim.wo[winnr].winfixbuf = true
 	vim.wo[winnr].cursorline = true
 	vim.bo[bufnr].modifiable = false
+	vim.bo[bufnr].filetype = originalFt
 
 	-- keymaps
 	local opts = { buffer = bufnr, nowait = true }
@@ -101,11 +126,15 @@ local function selectSymbol(symbols)
 	local usedKeys = {}
 	for i = 1, #symbols do
 		local lnum = i - 1
-		local col = 0
+
+		local name = symbols[i].name
+		local lastDotPod = name:find(".+%.")
+		local col = lastDotPod and lastDotPod + 1 or 0
+
 		local key
 		repeat
 			col = col + 1
-			key = symbols[i].name:sub(col, col):lower()
+			key = name:sub(col, col):lower()
 			if key == "" then break end -- no more chars available
 		until not vim.tbl_contains(usedKeys, key)
 		if key ~= "" then
@@ -118,12 +147,12 @@ local function selectSymbol(symbols)
 end
 
 --------------------------------------------------------------------------------
+local M = {}
 
-function M.snipe()
+function M.jump()
 	local symbols = getLspDocumentSymbols()
 	if not symbols then return end
 	selectSymbol(symbols)
 end
 
---------------------------------------------------------------------------------
 return M
