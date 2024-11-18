@@ -22,10 +22,10 @@ add_newline = false
 
 #───────────────────────────────────────────────────────────────────────────────
 
-[character] # ▓▒░
+[character] # ▓▒░    nerdfont ids start with `nf-ple-` 
 success_symbol = "[ ](fg:black)"
-error_symbol = "[ ](fg:red)"
-vimcmd_symbol = "[ ](fg:cyan)"
+error_symbol = "[ ](fg:red)"
+vimcmd_symbol = "[ ](fg:cyan)"
 
 [status] # exit code
 disabled = false
@@ -115,7 +115,7 @@ modified = '[ ~$count](fg:#f1800e bg:black)'
 renamed = '[ 󰑕 $count](fg:blue bg:black)'
 staged = '[ 󰐖 $count](fg:green bg:black)'
 conflicted = '[  $count](fg:red bg:black)'
-diverged = '[ 󰞇 $count](fg:red bg:black bold)'
+diverged = '[ 󰞇 $count](fg:red bg:black)'
 ahead = '[ 󰶣$count](fg:cyan bg:black)'
 behind = '[ 󰶡$count](fg:yellow bg:black)'
 style = 'bg:black'
