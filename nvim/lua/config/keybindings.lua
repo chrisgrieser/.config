@@ -8,7 +8,7 @@ local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
 keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
 --------------------------------------------------------------------------------
--- MOVEMENTS
+-- NAVIGATION
 
 -- j/k should on wrapped lines
 keymap({ "n", "x" }, "j", "gj")
@@ -41,6 +41,13 @@ keymap("n", "gm", "%", { desc = "Goto Match", remap = true }) -- `remap` -> use 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next Diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous Diagnostic" })
+
+keymap(
+	"n",
+	"gs",
+	function() require("personal-plugins.magnet").jump() end,
+	{ desc = "󰍇 Magnet" }
+)
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -405,10 +412,3 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
-
-keymap(
-	"n",
-	"gs",
-	function() require("personal-plugins.magnet").jump() end,
-	{ desc = "󰍇 Magnet" }
-)
