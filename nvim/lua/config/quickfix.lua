@@ -3,14 +3,14 @@ local keymap = require("config.utils").uniqueKeymap
 -- KEYMAPS in regular window
 
 keymap("n", "gq", function()
-	local ok = pcall(vim.cmd.cnext)
+	local ok = pcall(vim.cmd, "silent cnext") ---@diagnostic disable-line: param-type-mismatch
 	if not ok then
 		vim.notify("Wrapped. ", vim.log.levels.TRACE, { icon = "", style = "minimal" })
 		vim.cmd.cfirst()
 	end
 end, { desc = " Next quickfix" })
 
-keymap("n", "gQ", vim.cmd.cprevious, { desc = " Prev quickfix" })
+keymap("n", "gQ", function() vim.cmd("silent cprev") end, { desc = " Prev quickfix" })
 
 keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st" })
 
