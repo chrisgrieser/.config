@@ -156,7 +156,7 @@ return {
 			function()
 				local messages = highlightErrors(vim.fn.execute("messages"))
 				if messages == "" then return end
-				local lines = vim.split(messages, "\n", { trimempty = true })
+				local lines = vim.split(messages, "\n")
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 				vim.bo[bufnr].modifiable = false
