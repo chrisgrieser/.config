@@ -3,7 +3,6 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 
 return {
 	{ -- auto-pair
-		-- EXAMPLE config of the plugin: https://github.com/Bekaboo/nvim/blob/master/lua/configs/ultimate-autopair.lua
 		"altermo/ultimate-autopair.nvim",
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		event = { "InsertEnter", "CmdlineEnter" },
@@ -217,7 +216,7 @@ return {
 			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬟ object" },
 			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "⁉️ assert" },
 			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "󰜀 type" },
-			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰦨 message" },
+			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },
 			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
 			{"<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },

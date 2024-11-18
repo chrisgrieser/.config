@@ -40,7 +40,7 @@ keymap("n", "<leader>er", function()
 		vim.cmd("! chmod +x %")
 		vim.cmd("! %")
 	else
-		vim.notify("File has no shebang", vim.log.levels.WARN)
+		vim.notify("File has no shebang", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
 	end
 end, { desc = "󰜎 Run file" })
 
@@ -59,14 +59,15 @@ keymap("n", "<leader>ib", function()
 	}
 	local ok, node = pcall(vim.treesitter.get_node)
 	if ok and node then table.insert(out, "node: " .. node:type()) end
-	vim.notify(table.concat(out, "\n"), vim.log.levels.TRACE, { title = "Buffer Info" })
-end, { desc = "󰽙 Buffer Info" })
+	local msg = table.concat(out, "\n")
+	vim.notify(msg, vim.log.levels.TRACE, { title = "Buffer info", icon = "󰽙" })
+end, { desc = "󰽙 Buffer info" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP Var Rename" })
-keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " delete matching lines" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP var rename" })
+keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -97,26 +98,13 @@ keymap("n", "<leader>yl", function()
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
 		vim.notify(("Copied %d lines"):format(#matchLines))
 	end)
-end, { desc = "󰗈 matching lines" })
+end, { desc = "󰗈 Matching lines" })
 
-vim.fn.setreg("a", "")
-keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 yank-append to [a]" })
-keymap("n", "<leader>yd", [["Ad]], { desc = " delete-append to [a]" })
-keymap("n", "<leader>yp", [["ap]], { desc = " paste from [a]" })
+vim.fn.setreg("a", "") -- reset on start
+keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 Yank-append to [a]" })
+keymap("n", "<leader>yd", [["Ad]], { desc = " Delete-append to [a]" })
+keymap("n", "<leader>yp", [["ap]], { desc = " Paste from [a]" })
 keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " reset [a]" })
-
-keymap("n", "<leader>yc", function()
-	local codeContext = require("nvim-treesitter").statusline {
-		indicator_size = math.huge, -- disable shortening
-		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
-	}
-	if codeContext and codeContext ~= "" then
-		vim.fn.setreg("+", codeContext)
-		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍" })
-	else
-		vim.notify("No code context.", vim.log.levels.WARN)
-	end
-end, { desc = " Yank code context" })
 
 --------------------------------------------------------------------------------
 -- UNDO
