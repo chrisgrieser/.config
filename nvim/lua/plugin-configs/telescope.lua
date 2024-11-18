@@ -15,7 +15,7 @@ local specialDirs = {
 	"%.app/", -- macOS apps
 	"%.spoon", -- Hammerspoon spoons
 	"%.venv", -- python
-	"__pycache__",
+	"__pycache__", -- python
 }
 
 --------------------------------------------------------------------------------
@@ -347,7 +347,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = telescopeConfig,
 		keys = {
-			{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search Keymaps" },
+			{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search keymaps" },
 			{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Continue" },
 			{
 				"g!",
@@ -363,7 +363,7 @@ return {
 
 					vim.cmd.Telescope("diagnostics") -- workspace diagnostics
 				end,
-				desc = "󰋼 Workspace Diagnostics",
+				desc = "󰋼 Workspace diagnostics",
 			},
 			{
 				"gw",
@@ -390,7 +390,7 @@ return {
 			{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 			{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 			{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
-			{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell Suggest" },
+			{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 			{
 				"<leader>pc",
 				-- noautocmds -> no backdrop, so the colorscheme is previewable
@@ -423,7 +423,7 @@ return {
 					end
 
 					require("telescope.builtin").find_files {
-						prompt_title = "Find Files: " .. projectName(),
+						prompt_title = "Find files: " .. projectName(),
 						file_ignore_patterns = ignorePattern,
 						path_display = function(_, path)
 							local tail = vim.fs.basename(path)
@@ -439,7 +439,7 @@ return {
 						end,
 					}
 				end,
-				desc = "󰭎 Open File",
+				desc = "󰭎 Open file",
 			},
 			{
 				"gr",
@@ -451,7 +451,7 @@ return {
 					vim.list_extend(vim.v.oldfiles, openBufs)
 					vim.cmd.Telescope("oldfiles")
 				end,
-				desc = "󰭎 Recent Files",
+				desc = "󰭎 Recent files",
 			},
 			{
 				"gl",
@@ -460,7 +460,7 @@ return {
 						prompt_title = "Live Grep: " .. projectName(),
 					}
 				end,
-				desc = "󰭎 Live-Grep",
+				desc = "󰭎 Live-grep",
 			},
 			{
 				"gl",

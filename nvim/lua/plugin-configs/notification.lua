@@ -17,7 +17,7 @@ local function snacksConfig()
 		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
 		local opts = { title = "Echo", icon = "" }
 		if msg:lower():find("hunk") then
-			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]")
+			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
 			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
@@ -102,15 +102,15 @@ return {
 					:each(function(notif)
 						local msg = vim.split(notif.msg, "\n")
 						local title = (notif.title and notif.title ~= "") and notif.title or "ﱢ"
-						msg[1] = ("[%s] %s"):format(title, msg[1])
+						msg[1] = ("[%s] %s"):format(title, msg[1]) -- [] for highlight via markdown
 						vim.list_extend(lines, msg)
 					end)
+
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-				vim.bo[bufnr].modifiable = false
 				require("snacks").win {
 					position = "bottom",
-					ft = "markdown",
+					ft = "markdown", -- to highlight the []
 					buf = bufnr,
 					height = 0.6,
 					keys = { ["<D-0>"] = "close" },
@@ -128,7 +128,6 @@ return {
 
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
-				vim.bo[bufnr].modifiable = false
 				local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
 				require("snacks").win {
 					position = "float",
@@ -150,7 +149,6 @@ return {
 				local lines = vim.split(vim.trim(messages), "\n")
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-				vim.bo[bufnr].modifiable = false
 				require("snacks").win {
 					position = "float",
 					buf = bufnr,
@@ -158,7 +156,6 @@ return {
 					width = 0.75,
 					keys = { ["<D-8>"] = "close" },
 					title = " :messages ",
-					ft = "markdown", -- for error message highlights
 				}
 				vim.api.nvim_buf_call(bufnr, function()
 					-- highlight errors and paths
@@ -177,7 +174,8 @@ return {
 		win = {
 			keys = { q = "close", ["<Esc>"] = "close" },
 			border = vim.g.borderStyle,
-			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
+			bo = { modifiable = false },
+			wo = { cursorline = true, colorcolumn = "", winfixbuf = true, wrap = true },
 		},
 		notifier = {
 			timeout = 6000,

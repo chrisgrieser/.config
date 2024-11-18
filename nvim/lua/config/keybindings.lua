@@ -381,7 +381,11 @@ keymap("n", "dd", function()
 end, { expr = true, desc = "dd" })
 
 -- pasting
-keymap("n", "P", "mzA <Esc>p`z", { desc = " Sticky paste at EoL" })
+keymap("n", "P", function ()
+	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
+	local reg = vim.fn.getreg("+")
+	vim.api.nvim_set_current_line(curLine .. " " .. reg)
+end, { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
 	local ok, clipb = pcall(vim.fn.getreg, "+")
