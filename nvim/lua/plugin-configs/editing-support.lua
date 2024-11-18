@@ -188,22 +188,26 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
-				objectLog = {
+				variableLog = {
 					lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
-					typescript = "new Notice(`%s %s: ${%s}`, 0)", -- Obsidian
-
-					-- re-purposing `objectLog` for debugging via AppleScript notification
-					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
-
 					-- with `snacks.nvim`, move the label to the window title
 					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { ft = "lua", title = "%s" })',
+				},
+				-- re-purposing `objectLog` for alternative log statements for these
+				objectLog = {
+					-- Obsidian Notice
+					typescript = "new Notice(`%s %s: ${%s}`, 0)",
+					-- AppleScript notification
+					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
+				},
+				assertLog = {
+					lua = 'assert(%s, "")', -- don't use any marker
 				},
 				clearLog = {
 					lua = "hs.console.clearConsole() -- %s", -- Hammerspoon
 				},
 				sound = {
 					lua = 'hs.sound.getByName("Sosumi"):play() -- %s', -- Hammerspoon
-					nvim_lua = 'vim.system({"osascript", "-e", "beep"}) -- %s', -- macOS only
 				},
 			},
 		},
@@ -218,8 +222,8 @@ return {
 			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
 			{"<leader>lp", function() require("chainsaw").timeLog() end, desc = "󱎫 performance" },
 			{"<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
-			{"<leader>l<down>", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
-			{"<leader>lk", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
+			{"<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
+			{"<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
 			{"<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
 			-- stylua: ignore end
 		},
