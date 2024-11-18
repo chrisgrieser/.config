@@ -148,7 +148,7 @@ end
 keymap(
 	"n",
 	"<leader>j",
-	function() require("funcs.justice").just() end,
+	function() require("nano-plugins.justice").just() end,
 	{ desc = "󰖷 Justfile" }
 )
 
@@ -159,7 +159,7 @@ keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line Numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 
 keymap("n", "<leader>ol", function()
-	vim.notify("Restarting…", nil, { title = "LSP" })
+	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
 	vim.cmd.LspRestart()
 end, { desc = "󰒕 :LspRestart" })
 
