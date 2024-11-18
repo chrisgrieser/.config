@@ -20,6 +20,7 @@ local config = {
 		"Espanso",
 		"IINA",
 		"Catch",
+		"BetterZip",
 	},
 	---@type fun(appName: string)
 	zeroWindowAction = function(appName)
