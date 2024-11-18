@@ -3,7 +3,7 @@ Quickly jump to specific LSP symbols.
 
 USAGE
 - `require("magnet").jump()`
-- Quick-select symbol via highlighted keys. 
+- Quick-select symbol via highlighted keys.
 - Alternatively, move with `<Tab>` & `<S-Tab>` and select a symbol via `<CR>`.
 
 REQUIREMENTS
@@ -24,6 +24,12 @@ local config = {
 		json = { "Module" },
 		toml = { "Object" },
 	},
+	resultFilter = {
+		default = {},
+
+		-- filetype-specific list of lua patterns
+		lua = { "^vim%." }, -- remove anonymous functions
+	},
 	win = {
 		border = vim.g.borderStyle,
 	},
@@ -40,48 +46,26 @@ local config = {
 
 --------------------------------------------------------------------------------
 
----@class (exact) Magnet.Symbol
----@field name string
----@field range lsp.Range
----@field kindName string https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-
----@return Magnet.Symbol[]?
-local function getLspDocumentSymbols()
-	local params = { textDocument = vim.lsp.util.make_text_document_params() }
-	local response, err = vim.lsp.buf_request_sync(0, "textDocument/documentSymbol", params)
-	if not response or not response[1] or not response[1].result then
-		local msg = "No symbols found" .. (err and ": " .. err or ".")
-		vim.notify(msg, vim.log.levels.WARN, { title = "Symbols" })
-		return
-	end
-
-	local kindFilter = config.kindFilter[vim.bo.filetype] or config.kindFilter.default
-	local symbols = vim.iter(response[1].result):fold({}, function(acc, item)
-		local kindName = vim.lsp.protocol.SymbolKind[item.kind] or "Unknown"
-		if not vim.tbl_contains(kindFilter, kindName) then return acc end
-		table.insert(acc, { name = item.name, kindName = kindName, range = item.range })
-		return acc
-	end)
-	if #symbols == 0 then
-		vim.notify("Current `kindFilter` doesn't match any symbols.", nil, { title = "Symbols" })
-		return
-	end
-	return symbols
-end
+---@class (exact) Magnet.Symbol output of `vim.lsp.util.symbols_to_items`
+---@field filename string
+---@field text string
+---@field col integer
+---@field lnum integer
+---@field kind string https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 
 ---@param symbol Magnet.Symbol
 ---@param winnr number
 local function jumpToSymbol(symbol, winnr)
 	vim.api.nvim_win_close(winnr, true)
-	local params = { range = symbol.range, uri = vim.uri_from_bufnr(0) }
-	vim.lsp.util.jump_to_location(params, "utf-16", true)
+	vim.cmd.normal { "m`", bang = true } -- set jump mark
+	vim.api.nvim_win_set_cursor(0, { symbol.lnum, symbol.col - 1 })
 end
 
 ---@param symbols Magnet.Symbol[]
 local function selectSymbol(symbols)
-	local names = vim.tbl_map(function(s) return s.name end, symbols)
+	local names = vim.tbl_map(function(s) return s.text end, symbols)
 
-	local ns = vim.api.nvim_create_namespace("symbol-sniper")
+	local ns = vim.api.nvim_create_namespace("magnet-window")
 	local title = "Symbols"
 	local longestName = math.max(unpack(vim.tbl_map(function(line) return #line end, names)))
 	local width = math.max(longestName, vim.api.nvim_strwidth(title)) + 2 -- +2 for padding
@@ -127,7 +111,7 @@ local function selectSymbol(symbols)
 	for i = 1, #symbols do
 		local lnum = i - 1
 
-		local name = symbols[i].name
+		local name = symbols[i].text
 		local lastDotPod = name:find(".+%.")
 		local col = lastDotPod and lastDotPod + 1 or 0
 
@@ -146,13 +130,46 @@ local function selectSymbol(symbols)
 	end
 end
 
---------------------------------------------------------------------------------
-local M = {}
+---@param symbols Magnet.Symbol[]
+---@return Magnet.Symbol[]
+local function filterSymbols(symbols)
+	local kindFilter = config.kindFilter[vim.bo.filetype] or config.kindFilter.default
+	local resultFilter = config.resultFilter[vim.bo.filetype] or config.resultFilter.default
 
-function M.jump()
-	local symbols = getLspDocumentSymbols()
-	if not symbols then return end
-	selectSymbol(symbols)
+	local filteredSymbols = vim.iter(symbols)
+		:filter(function(symbol)
+			return vim.tbl_contains(kindFilter, symbol.kind)
+		end)
+		:totable()
+	return filteredSymbols
 end
 
+---@async
+local function getLspDocumentSymbols()
+	local params = vim.lsp.util.make_position_params()
+	vim.lsp.buf_request(0, "textDocument/documentSymbol", params, function(err, result, _, _)
+		if err then
+			local msg = "Error when finding document symbols: " .. err.message
+			vim.notify(msg, vim.log.levels.WARN, { title = "Symbols" })
+			return
+		end
+
+		if not result or #result == 0 then
+			vim.notify("No results.", vim.log.levels.WARN, { title = "Symbols" })
+			return
+		end
+		local items = vim.lsp.util.symbols_to_items(result or {}, 0) or {}
+
+		local symbols = filterSymbols(items)
+		if #symbols == 0 then
+			vim.notify("Current `kindFilter` doesn't match any symbols.", nil, { title = "Symbols" })
+			return
+		end
+		selectSymbol(symbols)
+	end)
+end
+
+--------------------------------------------------------------------------------
+local M = {}
+function M.jump() getLspDocumentSymbols() end
 return M
