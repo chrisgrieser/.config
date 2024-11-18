@@ -7,6 +7,9 @@ local pathOfThisFile = debug.getinfo(1).source:sub(2)
 local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
 keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
+-- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
+keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -397,19 +400,6 @@ end, { desc = " Paste charwise", expr = true })
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macOS clipboard managers
 
 --------------------------------------------------------------------------------
--- QUITTING
-
--- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
-
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: `q` to exit :help or :checkhealth",
-	pattern = { "help", "checkhealth" },
-	callback = function()
-		vim.defer_fn(function() bkeymap("n", "q", vim.cmd.close, { desc = "Close" }) end, 1)
-	end,
-})
-
 --------------------------------------------------------------------------------
 -- LEADER KEYBINDINGS
 
@@ -457,20 +447,12 @@ keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
 
-keymap("n", "<leader>ib", function()
-	local ok, node = pcall(vim.treesitter.get_node)
-	local out = {
-		"[ft     ] " .. vim.bo.filetype,
-		"[buftype] " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		"[cwd    ] " .. (vim.uv.cwd() or "n/a"):gsub("/Users/%w+", "~"),
-		("[indent ] %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
-		"[winnr  ] " .. vim.api.nvim_get_current_win(),
-		"[bufnr  ] " .. vim.api.nvim_get_current_buf(),
-		(ok and node) and ("[node   ] " .. node:type()) or nil,
-	}
-	local opts = { title = "Buffer info", icon = "󰽙", timeout = 13000 }
-	vim.notify(table.concat(out, "\n"), vim.log.levels.TRACE, opts)
-end, { desc = "󰽙 Buffer info" })
+keymap(
+	"n",
+	"<leader>ib",
+	function() require("personal-plugins.misc").bufferInfo() end,
+	{ desc = "󰽙 Buffer info" }
+)
 
 --------------------------------------------------------------------------------
 -- REFACTORING
