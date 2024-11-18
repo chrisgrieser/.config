@@ -22,6 +22,14 @@ local function snacksConfig()
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
+	---@diagnostic disable-next-line: duplicate-set-field deliberate override
+	vim.api.nvim_err_writeln = function(msg)
+		-- highlight via markdown filetype
+		msg = msg
+			:gsub("E%d+", "[%1]") -- error numbers
+			:gsub(".+/.-%.%w+", "[%1]") -- filenames
+		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "markdown" })
+	end
 	-----------------------------------------------------------------------------
 
 	-- HACK SILENCE SOME MESSAGES by overriding snacks' override

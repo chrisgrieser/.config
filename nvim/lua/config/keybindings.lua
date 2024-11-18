@@ -410,5 +410,5 @@ keymap(
 	"n",
 	"gs",
 	function() require("personal-plugins.magnet").jump() end,
-	{ desc = " Magnet" }
+	{ desc = "󰍇 Magnet" }
 )
