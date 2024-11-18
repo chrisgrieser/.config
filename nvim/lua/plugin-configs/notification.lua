@@ -2,14 +2,6 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
----highlight via markdown filetype
----@param msg string
-local function highlightErrors(msg)
-	return msg
-		:gsub("E%d+", "[%1]") -- error numbers
-		:gsub(".+/.-%.%w+", "[%1]") -- filenames
-end
-
 local function snacksConfig()
 	-- OVERRIDE DEFAULT PRINT FUNCTIONS
 	_G.print = function(...)
@@ -32,8 +24,7 @@ local function snacksConfig()
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_err_writeln = function(msg)
-		msg = highlightErrors(msg)
-		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "markdown" })
+		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "text" })
 	end
 	-----------------------------------------------------------------------------
 
@@ -49,8 +40,8 @@ local function snacksConfig()
 	-- (SIC all this is needed to have `cmdheight=0` and avoid the "Press Enter" prompt)
 
 	local function notFoundNotify(query)
-		local msg = ("%s"):format(query)
-		vim.notify(msg .. " ", vim.log.levels.TRACE, { icon = "", style = "minimal", ft = "text" })
+		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
+		vim.notify_once(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
 	end
 
 	local function silenceSearch(key)
@@ -154,9 +145,9 @@ return {
 			desc = "󰎟 :messages",
 			"<D-8>",
 			function()
-				local messages = highlightErrors(vim.fn.execute("messages"))
+				local messages = vim.fn.execute("messages")
 				if messages == "" then return end
-				local lines = vim.split(messages, "\n")
+				local lines = vim.split(vim.trim(messages), "\n")
 				local bufnr = vim.api.nvim_create_buf(false, true)
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 				vim.bo[bufnr].modifiable = false
@@ -169,6 +160,11 @@ return {
 					title = " :messages ",
 					ft = "markdown", -- for error message highlights
 				}
+				vim.api.nvim_buf_call(bufnr, function()
+					-- highlight errors and paths
+					vim.fn.matchadd("ErrorMsg", [[E\d\+:.*]])
+					vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+				end)
 			end,
 		},
 	},
