@@ -41,6 +41,10 @@ return {
 				lookahead = true,
 				include_surrounding_whitespace = false, -- doesn't work with my comment textobj mappings
 			},
+			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
+				border = vim.g.borderStyle,
+				floating_preview_opts = { title = "  Peek " },
+			},
 		},
 	},
 }

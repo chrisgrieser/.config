@@ -68,7 +68,7 @@ M.serverConfigs.bashls = {
 local efmConfig = {
 	lua = {
 		{
-			formatCommand = "stylua --stdin-filepath='${INPUT}' --respect-ignores -",
+			formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
 			formatStdin = true,
 			rootMarkers = { "stylua.toml", ".stylua.toml" },
 		},
@@ -349,7 +349,7 @@ M.serverConfigs.ltex = {
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 M.serverConfigs.typos_lsp = {
-	init_options = { diagnosticSeverity = "Information" }, 
+	init_options = { diagnosticSeverity = "Information" },
 }
 
 --------------------------------------------------------------------------------

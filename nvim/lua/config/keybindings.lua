@@ -64,7 +64,7 @@ keymap("n", "U", "<C-r>")
 keymap(
 	"n",
 	"<leader>ur",
-	function() vim.cmd.later(vim.opt.undolevels:get()) end, ---@diagnostic disable-line: undefined-field
+	function() vim.cmd.later(vim.o.undolevels) end,
 	{ desc = "󰛒 Redo All" }
 )
 keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
@@ -222,7 +222,8 @@ end, { desc = "󰒕 Save & Format" })
 --------------------------------------------------------------------------------
 -- LSP
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
-keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap({ "n", "x" }, "<leader>hh", vim.lsp.buf.hover, { desc = "󰒕 LSP Hover" })
+
 keymap("n", "<leader>ol", function()
 	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
 	vim.cmd.LspRestart()
@@ -258,7 +259,11 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 -- EVAL (better than `:lua = `, since using `vim.notify`)
 vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
-	vim.notify(vim.inspect(output), vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎" })
+	vim.notify(
+		vim.inspect(output),
+		vim.log.levels.DEBUG,
+		{ title = "Eval", icon = "󰜎", ft = "lua" }
+	)
 end, { desc = "Eval cmdline", nargs = "+" })
 keymap("n", "<leader>ee", ":Eval ", { desc = "󰜎 Eval" })
 -- Copy last command

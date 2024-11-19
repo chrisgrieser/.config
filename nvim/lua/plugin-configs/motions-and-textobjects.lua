@@ -60,6 +60,17 @@ return {
 				desc = "󰆈 Change Comment",
 			},
 
+			{
+				"<leader>hf",
+				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
+				desc = " Peek Function",
+			},
+			{
+				"<leader>hc",
+				function() vim.cmd.TSTextobjectPeekDefinitionCode("@class.outer") end,
+				desc = " Peek Class",
+			},
+
 			-- MOVE & SWAP
 			-- stylua: ignore start
 			{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
