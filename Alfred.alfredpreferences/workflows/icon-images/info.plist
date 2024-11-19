@@ -68,6 +68,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<array>
@@ -185,27 +195,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>icon</string>
-				<key>subtext</key>
-				<string>Searches several icon sites at once</string>
-				<key>text</key>
-				<string>Search Icon: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -221,6 +210,27 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>A069BE51-DA62-4835-8048-AF3A608C97D0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>icon</string>
+				<key>subtext</key>
+				<string>multiple icon sites at once</string>
+				<key>text</key>
+				<string>Search Icon: "{query}"</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -280,7 +290,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://fontawesome.com/search?m=free&amp;q={query}</string>
+				<string>https://icons8.com/icons/set/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -332,6 +342,27 @@
 			<string>00C473A5-2045-4409-841A-1BE884B037BE</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.flaticon.com/search?word={query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1A28A029-A380-4B80-82C1-AB1863D8C0C6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -430,6 +461,15 @@
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
+		<key>1A28A029-A380-4B80-82C1-AB1863D8C0C6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>12</integer>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>345</real>
+		</dict>
 		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
 		<dict>
 			<key>colorindex</key>
@@ -437,7 +477,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>590</real>
 		</dict>
 		<key>68F706E8-BDA8-44E3-8973-752C6B0FC50D</key>
 		<dict>
@@ -446,7 +486,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>235</real>
 		</dict>
 		<key>7CF8B97A-6865-489C-8B65-3C892683D59E</key>
 		<dict>
@@ -475,7 +515,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>125</real>
 		</dict>
 		<key>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</key>
 		<dict>
@@ -504,7 +544,7 @@
 			<key>xpos</key>
 			<real>225</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>470</real>
 		</dict>
 		<key>E61BAA5C-B8EC-4B90-BE73-0E4711326107</key>
 		<dict>
@@ -517,7 +557,7 @@ alternative: https://github.com/zeitlings/alfred-workflows#161-alfred-ocr-light<
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>505</real>
+			<real>590</real>
 		</dict>
 		<key>F0335C72-7DC6-4793-ADCD-3909E4CDE001</key>
 		<dict>
@@ -544,7 +584,7 @@ alternative: https://github.com/zeitlings/alfred-workflows#161-alfred-ocr-light<
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>470</real>
 		</dict>
 		<key>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</key>
 		<dict>

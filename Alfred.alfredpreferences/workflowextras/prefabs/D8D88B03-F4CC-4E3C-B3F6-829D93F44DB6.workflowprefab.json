@@ -4,11 +4,11 @@
     "items" : [
       {
         "workflowobjecttype" : "alfred.workflow.action.script",
-        "uid" : "F4C1E426-3C58-48D1-B177-AECCEFCF848E",
+        "uid" : "EB7E2CE2-6FFF-459D-A80F-66473495655D",
         "note" : "",
         "workflowobjectconfig" : {
           "script" : "",
-          "scriptfile" : ".\/scripts\/",
+          "scriptfile" : ".\/scripts\/PLACEHOLDER",
           "escaping" : 0,
           "scriptargtype" : 1,
           "type" : 8,
