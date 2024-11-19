@@ -6,7 +6,7 @@ app.includeStandardAdditions = true;
 
 /** @typedef {Object} reminderObj
  * @property {string} title
- * @property {number} priority
+ * @property {0|1|5|9} priority 0 = None, 1 = Low, 5 = Medium, 9 = High
  * @property {string} list
  * @property {string} notes
  * @property {string} externalId
@@ -56,6 +56,9 @@ function run() {
 		const displayBody = body.trim().replace(/\n+/g, " · ");
 		const content = title + "\n" + body;
 
+		// mimic the display of priorities in the Reminders app
+		const prio = rem.priority === 0 ? "" : "!".repeat(Math.ceil(rem.priority / 3));
+
 		const [url] = content.match(urlRegex) || [];
 		let emoji = isCompleted ? "☑️ " : "";
 		if (!dueDate) emoji += "[no due date] "; // indicator for missing due date
@@ -65,7 +68,7 @@ function run() {
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: emoji + title,
-			subtitle: displayBody,
+			subtitle: prio + displayBody,
 			text: { copy: content, largetype: content },
 			variables: {
 				id: externalId,
@@ -87,14 +90,10 @@ function run() {
 						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and mark as completed"),
 				},
 				// edit content
-				alt: {
-					arg: content,
-				},
+				alt: { arg: content },
 				// toggle completed
 				ctrl: {
-					variables: {
-						showCompleted: (!showCompleted).toString(),
-					},
+					variables: { showCompleted: (!showCompleted).toString() },
 				},
 			},
 		};
