@@ -101,7 +101,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8F996D16-37E8-4E42-BC67-EED589DDE600</string>
+				<string>3CC16E2B-1B69-403D-890E-52F869AD6AE7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -140,6 +140,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3CC16E2B-1B69-403D-890E-52F869AD6AE7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>91350A6C-9C24-4365-9F59-039F1A8F06DB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -206,9 +219,9 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>fn: Increase priority</string>
+				<string>fn: Cycle priority</string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
@@ -317,19 +330,6 @@
 			</dict>
 		</array>
 		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>8F996D16-37E8-4E42-BC67-EED589DDE600</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -1107,6 +1107,25 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>externaltriggerid</key>
+				<string>reminder-today</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>91350A6C-9C24-4365-9F59-039F1A8F06DB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1116,12 +1135,12 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>❗️Increased Priority</string>
+				<string>❗️Priority changed to</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>8F996D16-37E8-4E42-BC67-EED589DDE600</string>
+			<string>3CC16E2B-1B69-403D-890E-52F869AD6AE7</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1376,6 +1395,8 @@ fi</string>
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  again to hide completed reminders again.
+	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Increase the reminder's priority by one level (or reset it
+	  to "none," if already at the highest priority).
 - Quickly add a new reminder due today with the keyword `qq`. Alternatively, you
   can also use a
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to add
@@ -1490,6 +1511,15 @@ brew install keith/formulae/reminders-cli
 			<key>ypos</key>
 			<real>1045</real>
 		</dict>
+		<key>3CC16E2B-1B69-403D-890E-52F869AD6AE7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>640</real>
+			<key>ypos</key>
+			<real>735</real>
+		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
 			<key>colorindex</key>
@@ -1545,7 +1575,8 @@ brew install keith/formulae/reminders-cli
 			<integer>9</integer>
 			<key>note</key>
 			<string>DOUBLE CLICK THIS
-to set a hotkey to quick add selected text or browser tab</string>
+
+to set a hotkey to quick-add selected text or browser tab</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
@@ -1575,6 +1606,7 @@ to set a hotkey to quick add selected text or browser tab</string>
 			<integer>9</integer>
 			<key>note</key>
 			<string>DOUBLE CLICK THIS
+
 to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
@@ -1590,12 +1622,12 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>1160</real>
 		</dict>
-		<key>8F996D16-37E8-4E42-BC67-EED589DDE600</key>
+		<key>91350A6C-9C24-4365-9F59-039F1A8F06DB</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>7</integer>
+			<integer>11</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>790</real>
 			<key>ypos</key>
 			<real>735</real>
 		</dict>
@@ -1615,7 +1647,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>785</real>
+			<real>640</real>
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
@@ -1824,7 +1856,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.1.2</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

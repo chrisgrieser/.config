@@ -23,10 +23,28 @@ const urlRegex =
 	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 // SIC `reminders show` return priority as number, `reminders add` requires string…
-const prioIntToStr = { 0: "none", 1: "high", 5: "medium", 9: "low" };
+const prioIntToStr = {
+	0: "none",
+	9: "low",
+	5: "medium",
+	1: "high",
+};
 
 // mimic the display of priorities in the Reminders app
-const prioIntToEmoji = { 0: "", 1: "!!!", 5: "!!", 9: "!" };
+const prioIntToEmoji = {
+	0: "",
+	9: "!",
+	5: "! !",
+	1: "! ! !",
+};
+
+// SIC numbers do not comply with order of priorities…
+const prioIntToOrder = {
+	0: 0,
+	9: 1,
+	5: 2,
+	1: 3,
+};
 
 //───────────────────────────────────────────────────────────────────────────
 
@@ -55,7 +73,7 @@ function run() {
 			const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || noDueDate;
 		})
-		.sort((a, b) => b.priority - a.priority);
+		.sort((a, b) => prioIntToOrder[b.priority] - prioIntToOrder[a.priority]);
 	const remindersLeftLater = remindersFiltered.length - 1;
 
 	/** @type {AlfredItem[]} */
@@ -126,5 +144,8 @@ function run() {
 		});
 	}
 
-	return JSON.stringify({ items: reminders });
+	return JSON.stringify({
+		items: reminders,
+		skipknowledge: true, // keep sorting by priority, not by usage
+	});
 }
