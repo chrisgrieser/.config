@@ -22,11 +22,13 @@ function run() {
 	const clipbHistory = [];
 	for (let i = 0; i <= 20; i++) {
 		const text = $.getenv(`cb${i}`);
+		const lines = (text.match(/\n/g) || []).length;
+		const pluralS = lines === 1 ? "" : "s";
 		const merged = clipbHistory.map((item) => item.title).join(sep) + sep + text;
 
 		clipbHistory[i] = {
 			title: text,
-			subtitle: `${i + 1} items`,
+			subtitle: `#${i + 1}   ·   ${lines} line${pluralS}`,
 			arg: merged,
 		};
 	}
