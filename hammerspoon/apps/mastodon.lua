@@ -87,18 +87,21 @@ end):start()
 M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 	if appName == "Ivory" and event == aw.deactivated then
 		-- close any media windows
-		local mediaWin = masto:findWindow("Media") or masto:findWindow("Image")
+		local mediaWin = masto:findWindow("Ivory")
 		local frontApp = hs.application.frontmostApplication():name()
-		if mediaWin and frontApp ~= "Alfred" then mediaWin:close() end
+		if mediaWin and frontApp ~= "Alfred" then hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) end
 
 		-- go back to home tab
 		if #masto:allWindows() == 1 and not M.isScrolling then
 			M.isScrolling = true -- GUARD concurrent calls
-			u.defer(100, function() M.isScrolling = false end)
 
-			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+			u.defer(0.5, function()
+				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+			end)
+
+			u.defer(10, function() M.isScrolling = false end)
 		end
 	end
 end):start()

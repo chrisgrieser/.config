@@ -391,6 +391,8 @@ function hiraganafyCword() {
 
 //──────────────────────────────────────────────────────────────────────────────
 
+// CAVEAT slightly breaks `h` and `l` in tables
+// TODO detect if in a table and skip otherwise
 function origamiH() {
 	const isAtBoL = editor.getCursor().ch === 0;
 	const action = isAtBoL ? "toggleFold" : "goLeft";

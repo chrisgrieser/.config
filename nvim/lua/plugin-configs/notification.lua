@@ -94,16 +94,19 @@ return {
 		{
 			"<D-0>",
 			function() require("personal-plugins.snacks-notif-hist").full() end,
+			mode = { "n", "x", "i" },
 			desc = "󰎟 Notification history",
 		},
 		{
 			"<D-9>",
 			function() require("personal-plugins.snacks-notif-hist").last() end,
+			mode = { "n", "x", "i" },
 			desc = "󰎟 Last notification",
 		},
 		{
 			"<D-8>",
 			function() require("personal-plugins.snacks-notif-hist").messages() end,
+			mode = { "n", "x", "i" },
 			desc = "󰎟 :messages",
 		},
 	},
