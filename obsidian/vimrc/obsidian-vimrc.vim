@@ -86,6 +86,7 @@ nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
 
 " emulate nvim-origami
+" CAVEAT slightly breaks `h` and `l` in tables
 exmap origamiH jsfile Meta/vimrc-jsfile.js { origamiH() }
 nnoremap h :origamiH<CR>
 exmap origamiL jsfile Meta/vimrc-jsfile.js { origamiL() }
