@@ -8,11 +8,37 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>0597817F-6DFB-46A5-A51B-7CC852FF64F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5528EEB9-18CD-4247-A727-4305C816554D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1D749935-6E08-436A-A643-FC0CDB4941FE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1D885CE3-8D9D-49C5-B5FD-804693F98BA4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0597817F-6DFB-46A5-A51B-7CC852FF64F4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,6 +104,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>B259D744-0386-43A6-9407-025B46325EF5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>865C74E8-323D-4EDC-993B-3A86D4F1F74C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -156,6 +195,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1D885CE3-8D9D-49C5-B5FD-804693F98BA4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -282,42 +334,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{var:to_paste}</string>
-				<key>ignoredynamicplaceholders</key>
+				<key>concurrently</key>
 				<false/>
-				<key>transient</key>
-				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>open -a "$*"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>59EA681A-3183-4B9D-9A93-32C8131AC999</string>
+			<string>B259D744-0386-43A6-9407-025B46325EF5</string>
 			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>Dedent Indentation</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
-			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -362,25 +397,42 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{var:to_paste}</string>
+				<key>ignoredynamicplaceholders</key>
 				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -a "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>B259D744-0386-43A6-9407-025B46325EF5</string>
+			<string>59EA681A-3183-4B9D-9A93-32C8131AC999</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Dedent Indentation</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>23BC13BE-D621-429D-A93E-15FECE927923</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -492,6 +544,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sum-of-all-numbers.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -534,25 +609,170 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>clipmerge</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Merge last x clipboard items</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>865C74E8-323D-4EDC-993B-3A86D4F1F74C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5528EEB9-18CD-4247-A727-4305C816554D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading…</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sum-of-all-numbers.js</string>
+				<string>./scripts/clipboard-merge.js</string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Merge last x clipboard items</string>
 				<key>type</key>
 				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>6FB82F63-4A88-4B23-BF82-19A5F6A71B2F</string>
+			<string>1D885CE3-8D9D-49C5-B5FD-804693F98BA4</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0597817F-6DFB-46A5-A51B-7CC852FF64F4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>cb0</key>
+					<string>{clipboard:0}</string>
+					<key>cb1</key>
+					<string>{clipboard:1}</string>
+					<key>cb10</key>
+					<string>{clipboard:10}</string>
+					<key>cb11</key>
+					<string>{clipboard:11}</string>
+					<key>cb12</key>
+					<string>{clipboard:12}</string>
+					<key>cb13</key>
+					<string>{clipboard:13}</string>
+					<key>cb14</key>
+					<string>{clipboard:14}</string>
+					<key>cb15</key>
+					<string>{clipboard:15}</string>
+					<key>cb16</key>
+					<string>{clipboard:16}</string>
+					<key>cb17</key>
+					<string>{clipboard:17}</string>
+					<key>cb18</key>
+					<string>{clipboard:18}</string>
+					<key>cb19</key>
+					<string>{clipboard:19}</string>
+					<key>cb2</key>
+					<string>{clipboard:2}</string>
+					<key>cb20</key>
+					<string>{clipboard:20}</string>
+					<key>cb3</key>
+					<string>{clipboard:3}</string>
+					<key>cb4</key>
+					<string>{clipboard:4}</string>
+					<key>cb5</key>
+					<string>{clipboard:5}</string>
+					<key>cb6</key>
+					<string>{clipboard:6}</string>
+					<key>cb7</key>
+					<string>{clipboard:7}</string>
+					<key>cb8</key>
+					<string>{clipboard:8}</string>
+					<key>cb9</key>
+					<string>{clipboard:9}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -567,7 +787,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>525</real>
+		</dict>
+		<key>0597817F-6DFB-46A5-A51B-7CC852FF64F4</key>
+		<dict>
+			<key>xpos</key>
+			<real>465</real>
+			<key>ypos</key>
+			<real>680</real>
 		</dict>
 		<key>1D749935-6E08-436A-A643-FC0CDB4941FE</key>
 		<dict>
@@ -578,6 +805,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>1D885CE3-8D9D-49C5-B5FD-804693F98BA4</key>
+		<dict>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
 		<key>23BC13BE-D621-429D-A93E-15FECE927923</key>
 		<dict>
 			<key>colorindex</key>
@@ -586,6 +820,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>140</real>
+		</dict>
+		<key>5528EEB9-18CD-4247-A727-4305C816554D</key>
+		<dict>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>680</real>
 		</dict>
 		<key>59EA681A-3183-4B9D-9A93-32C8131AC999</key>
 		<dict>
@@ -614,7 +855,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>525</real>
 		</dict>
 		<key>709E6B53-AAD2-4089-B79F-7EEDB6B6B27C</key>
 		<dict>
@@ -636,6 +877,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>140</real>
 		</dict>
+		<key>865C74E8-323D-4EDC-993B-3A86D4F1F74C</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
 		<key>95BD13CE-A1F9-45BD-8BC5-8F3F22A93231</key>
 		<dict>
 			<key>colorindex</key>
@@ -654,7 +902,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>525</real>
 		</dict>
 		<key>9F9F299E-A995-42F4-8E78-E22AC821B859</key>
 		<dict>
@@ -692,7 +940,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>525</real>
+		</dict>
+		<key>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</key>
+		<dict>
+			<key>note</key>
+			<string>store 20x clipboard history items in variables for following Script Filter</string>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>710</real>
 		</dict>
 		<key>B259D744-0386-43A6-9407-025B46325EF5</key>
 		<dict>
