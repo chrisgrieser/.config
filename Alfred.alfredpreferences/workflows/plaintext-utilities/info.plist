@@ -99,24 +99,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</key>
+		<key>7550E522-9A85-4754-A522-233C35156DA4</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>B259D744-0386-43A6-9407-025B46325EF5</string>
+				<string>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
-		<key>865C74E8-323D-4EDC-993B-3A86D4F1F74C</key>
+		<key>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>AAB4CAE1-3C92-46A1-8F46-EFDD13D8A57F</string>
+				<string>B259D744-0386-43A6-9407-025B46325EF5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -609,27 +609,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>clipmerge</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Merge last x clipboard items</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>865C74E8-323D-4EDC-993B-3A86D4F1F74C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -694,6 +673,37 @@
 			<string>1D885CE3-8D9D-49C5-B5FD-804693F98BA4</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Line break","arg":"linebreak","subtitle":"separator"},{"title":"Space","arg":"space","subtitle":"separator"},{"title":"Comma with space","arg":"commaWithSpace","subtitle":"separator"},{"title":"Semicolon","arg":"semicolon","subtitle":"separator"}]</string>
+				<key>keyword</key>
+				<string>clipmerge</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Choose separator</string>
+				<key>title</key>
+				<string>Merge last x clipboard items</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>7550E522-9A85-4754-A522-233C35156DA4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -765,6 +775,8 @@
 					<string>{clipboard:8}</string>
 					<key>cb9</key>
 					<string>{clipboard:9}</string>
+					<key>separator</key>
+					<string>{query}</string>
 				</dict>
 			</dict>
 			<key>type</key>
@@ -866,6 +878,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>7550E522-9A85-4754-A522-233C35156DA4</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>680</real>
+		</dict>
 		<key>7C373ABF-2DA6-4ABC-B9B9-88EC0F0A01E7</key>
 		<dict>
 			<key>colorindex</key>
@@ -876,13 +895,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>610</real>
 			<key>ypos</key>
 			<real>140</real>
-		</dict>
-		<key>865C74E8-323D-4EDC-993B-3A86D4F1F74C</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>680</real>
 		</dict>
 		<key>95BD13CE-A1F9-45BD-8BC5-8F3F22A93231</key>
 		<dict>
@@ -947,7 +959,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>store 20x clipboard history items in variables for following Script Filter</string>
 			<key>xpos</key>
-			<real>210</real>
+			<real>215</real>
 			<key>ypos</key>
 			<real>710</real>
 		</dict>

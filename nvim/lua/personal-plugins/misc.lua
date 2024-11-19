@@ -269,6 +269,7 @@ end
 --- if cut off, requires higher notification height setting
 function M.bufferInfo()
 	local ok, node = pcall(vim.treesitter.get_node)
+	local nodeType = (ok and node) and node:type() or "n/a"
 	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 	local lsps = vim.tbl_map(function(client)
 		local pad = (" "):rep(math.min(10 - #client.name))
@@ -285,11 +286,13 @@ function M.bufferInfo()
 		"",
 		"**At cursor**",
 		"[word]      " .. vim.fn.expand("<cword>"),
-		(ok and node) and ("[node-type] " .. node:type()) or nil,
-		"",
-		"**Attached LSPs with root**",
-		unpack(lsps),
+		"[node-type] " .. nodeType,
 	}
+	if #lsps > 0 then
+		vim.list_extend(out, { "", "**Attached LSPs with root**", unpack(lsps) })
+	else
+		vim.list_extend(out, { "", "*No LSPs attached.*" })
+	end
 	local opts = { title = "Buffer info", icon = "󰽙", timeout = false }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
