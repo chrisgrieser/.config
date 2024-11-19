@@ -6,7 +6,9 @@ alias gT='git stash pop'
 alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
-alias rb='git rebase --interactive'
+
+alias irb='git rebase --interactive' # [i]nteractive [r]e[b]ase
+alias crb='git add --all ; git rebase --continue' # [c]ontinue [r]e[b]ase
 
 alias cherry='git cherry-pick'
 alias push='git push --no-progress'
@@ -94,7 +96,7 @@ function gc {
 	# PULL: only if there is a remote tracking branch
 	printf "\e[1;34mPull:\e[0m "
 	if git status --short --branch | grep --fixed-strings --quiet '...'; then
-		git pull --no-rebase --no-progress # `--no-rebase` prevents "Cannot rebase on multiple branches"
+		git pull --no-progress
 	else
 		print "Not pulling since no remote tracking branch."
 	fi
