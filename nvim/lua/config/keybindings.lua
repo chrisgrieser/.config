@@ -53,11 +53,21 @@ keymap(
 	{ desc = "󰍇 Magnet" }
 )
 
+-- Close all top-level folds
+keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 
 -- Undo
 keymap("n", "U", "<C-r>")
+keymap(
+	"n",
+	"<leader>ur",
+	function() vim.cmd.later(vim.opt.undolevels:get()) end, ---@diagnostic disable-line: undefined-field
+	{ desc = "󰛒 Redo All" }
+)
+keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
 
 -- Duplicate
 keymap(
@@ -109,15 +119,19 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
--- Close all top-level folds
-keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
-
 -- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰗈 Merge line up" })
 keymap("n", "M", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
+
+-- Append to EoL
+local trailChars = { ",", "\\", "{", ")", ";", "." }
+for _, key in pairs(trailChars) do
+	local pad = key == "\\" and " " or ""
+	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
+end
 
 --------------------------------------------------------------------------------
 
@@ -189,6 +203,8 @@ keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection dow
 keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
 keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
+--------------------------------------------------------------------------------
+
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<D-s>", function()
@@ -204,11 +220,15 @@ keymap({ "n", "x" }, "<D-s>", function()
 end, { desc = "󰒕 Save & Format" })
 
 --------------------------------------------------------------------------------
--- COMMAND MODE
-keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
-keymap("c", "<BS>", function()
-	if vim.fn.getcmdline() ~= "" then return "<BS>" end
-end, { expr = true, desc = "<BS> does not leave cmdline" })
+-- LSP
+keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
+keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
+keymap("n", "<leader>ol", function()
+	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
+	vim.cmd.LspRestart()
+end, { desc = "󰒕 :LspRestart" })
+
+--------------------------------------------------------------------------------
 
 -- INSERT MODE
 keymap("n", "i", function()
@@ -225,6 +245,45 @@ keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (terminal mode)" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (terminal mode)" })
+
+-- COMMAND MODE
+keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+keymap("c", "<BS>", function()
+	if vim.fn.getcmdline() ~= "" then return "<BS>" end
+end, { expr = true, desc = "<BS> does not leave cmdline" })
+
+--------------------------------------------------------------------------------
+
+-- CMDLINE
+-- EVAL (better than `:lua = `, since using `vim.notify`)
+vim.api.nvim_create_user_command("Eval", function(ctx)
+	local output = vim.fn.luaeval(ctx.args)
+	vim.notify(vim.inspect(output), vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎" })
+end, { desc = "Eval cmdline", nargs = "+" })
+keymap("n", "<leader>ee", ":Eval ", { desc = "󰜎 Eval" })
+-- Copy last command
+keymap("n", "<leader>ec", function()
+	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
+	vim.fn.setreg("+", lastCommand)
+	vim.notify(lastCommand, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰓗 Copy last command" })
+
+--------------------------------------------------------------------------------
+-- RUN
+
+keymap("n", "<leader>er", function()
+	vim.cmd.update()
+	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
+
+	if vim.bo.filetype == "lua" then
+		vim.cmd.source()
+	elseif hasShebang then
+		vim.cmd("! chmod +x %")
+		vim.cmd("! %")
+	else
+		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
+	end
+end, { desc = "󰜎 Run file" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
@@ -405,44 +464,8 @@ end, { desc = " Paste charwise", expr = true })
 keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macOS clipboard managers
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- LEADER KEYBINDINGS
-
---------------------------------------------------------------------------------
--- CMDLINE
-
--- better than `:lua = `, since using `vim.notify`
-vim.api.nvim_create_user_command("Eval", function(ctx)
-	local output = vim.fn.luaeval(ctx.args)
-	vim.notify(vim.inspect(output), vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎" })
-end, { desc = "Eval cmdline", nargs = "+" })
-keymap("n", "<leader>ee", ":Eval ", { desc = "󰜎 Eval" })
-
--- Copy last command
-keymap("n", "<leader>ec", function()
-	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
-	vim.fn.setreg("+", lastCommand)
-	vim.notify(lastCommand, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰓗 Copy last command" })
-
---------------------------------------------------------------------------------
--- RUN
-keymap("n", "<leader>er", function()
-	vim.cmd.update()
-	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
-
-	if vim.bo.filetype == "lua" then
-		vim.cmd.source()
-	elseif hasShebang then
-		vim.cmd("! chmod +x %")
-		vim.cmd("! %")
-	else
-		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
-	end
-end, { desc = "󰜎 Run file" })
-
---------------------------------------------------------------------------------
 -- INSPECT
+
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
 keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
@@ -477,62 +500,22 @@ keymap("n", "<leader>fq", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
---------------------------------------------------------------------------------
--- YANK STUFF
-
-keymap("n", "<leader>yl", function()
+keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
 	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
 		if not input then return end
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
-		vim.notify(("Copied %d lines"):format(#matchLines))
+		vim.notify(("%d lines"):format(#matchLines), nil, { title = "Copied", icon = "󰅍" })
 	end)
-end, { desc = "󰗈 Matching lines" })
-
-vim.fn.setreg("a", "") -- reset on start
-keymap("n", "<leader>yy", [["Ay]], { desc = "󰅍 Yank-append to [a]" })
-keymap("n", "<leader>yd", [["Ad]], { desc = " Delete-append to [a]" })
-keymap("n", "<leader>yp", [["ap]], { desc = " Paste from [a]" })
-keymap("n", "<leader>yr", function() vim.fn.setreg("a", "") end, { desc = " reset [a]" })
-
---------------------------------------------------------------------------------
--- UNDO
-
-keymap(
-	"n",
-	"<leader>ur",
-	function() vim.cmd.later(vim.opt.undolevels:get()) end, ---@diagnostic disable-line: undefined-field
-	{ desc = "󰛒 Redo All" }
-)
-
-keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
-
---------------------------------------------------------------------------------
--- LSP
-keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
-keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 Hover" })
-
---------------------------------------------------------------------------------
-
--- Append to EoL
-local trailChars = { ",", "\\", "{", ")", ";", "." }
-for _, key in pairs(trailChars) do
-	local pad = key == "\\" and " " or ""
-	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
-end
+end, { desc = "󰅍 Matching lines" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
 keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
-
-keymap("n", "<leader>ol", function()
-	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
-	vim.cmd.LspRestart()
-end, { desc = "󰒕 :LspRestart" })
 
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }

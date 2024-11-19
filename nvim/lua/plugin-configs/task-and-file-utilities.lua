@@ -6,9 +6,9 @@ return {
 		},
 		opts = {
 			recipes = {
-				ignore = { "run-fzf", "release" }, -- recipes that require user input
-				streaming = { "run-streaming" },
-				quickfix = { "check-tsc" },
+				ignore = { "fzf", "release" }, -- ignore since requiring user input
+				streaming = { "streaming" },
+				quickfix = { "qf" },
 			},
 			window = {
 				border = vim.g.borderStyle,

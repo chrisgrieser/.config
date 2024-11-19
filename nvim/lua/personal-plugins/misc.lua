@@ -269,12 +269,14 @@ end
 --- if cut off, requires higher notification height setting
 function M.bufferInfo()
 	local ok, node = pcall(vim.treesitter.get_node)
-	-- local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
+	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 	local lsps = vim.tbl_map(function(client)
 		local pad = (" "):rep(math.min(10 - #client.name))
-		local root = client.root_dir:gsub("/Users/%w+", "~")
+		local root = client.root_dir and client.root_dir:gsub("/Users/%w+", pseudoTilde)
+			or "*Single file mode*"
 		return ("[%s]%s%s"):format(client.name, pad, root)
 	end, vim.lsp.get_clients { bufnr = 0 })
+
 	local out = {
 		"[filetype]  " .. vim.bo.filetype,
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
