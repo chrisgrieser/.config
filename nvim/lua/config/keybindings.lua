@@ -10,6 +10,11 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
 
+keymap("n", "<leader>pd", function()
+	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
+	vim.ui.open(packagesDir)
+end, { desc = "󰝰 Open packages directory" })
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -403,20 +408,15 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 --------------------------------------------------------------------------------
 -- LEADER KEYBINDINGS
 
-keymap("n", "<leader>pd", function()
-	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
-	vim.ui.open(packagesDir)
-end, { desc = "󰝰 Open packages directory" })
-
 --------------------------------------------------------------------------------
 -- CMDLINE
 
--- better than `:lua`, since using `vim.notify`
+-- better than `:lua = `, since using `vim.notify`
 vim.api.nvim_create_user_command("Eval", function(ctx)
 	local output = vim.fn.luaeval(ctx.args)
-	vim.notify(vim.inspect(output), nil, { title = "Cmdline" })
+	vim.notify(vim.inspect(output), vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎" })
 end, { desc = "Eval cmdline", nargs = "+" })
-keymap("n", "<leader>ee", ":Eval ", { desc = "󰓗 Eval" })
+keymap("n", "<leader>ee", ":Eval ", { desc = "󰜎 Eval" })
 
 -- Copy last command
 keymap("n", "<leader>ec", function()
