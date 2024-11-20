@@ -22,14 +22,14 @@ vim.g.localRepos = vim.fs.normalize("~/Developer")
 ---loaded, but do notify if there was an error.
 ---@param module string
 local function safeRequire(module)
-	local success, errMsg = pcall(require, module)
+	local success, errmsg = pcall(require, module)
 	if not success then
-		local msg = ("Error loading %q: %s"):format(module, errMsg)
+		local msg = ("Error loading %q: %s"):format(module, errmsg)
 		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1000)
 	end
 end
 
-safeRequire("config.options") -- before lazy, so opts still set on plugin install
+safeRequire("config.options") -- before lazy, so opts active during plugin install
 
 -- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
 -- e.g. when editing a password with `pass`.

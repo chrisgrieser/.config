@@ -1,6 +1,12 @@
 local M = {}
 --------------------------------------------------------------------------------
 
+local lightTheme = require("plugin-configs.themes")[1].colorschemeName
+local darkTheme = require("plugin-configs.themes")[2].colorschemeName
+local lightOpacity = require("plugin-configs.themes")[1].opacity
+local darkOpacity = require("plugin-configs.themes")[2].opacity
+--------------------------------------------------------------------------------
+
 ---INFO not using `api.nvim_set_hl` yet as it overwrites a group instead of updating it
 ---@param hlgroup string
 ---@param changes string
@@ -52,7 +58,7 @@ local function customHighlights()
 end
 
 function M.themeModifications()
-	local theme = vim.o.background == "light" and vim.g.lightTheme or vim.g.darkTheme
+	local theme = vim.o.background == "light" and lightTheme or darkTheme
 
 	local function revertedTodoComments()
 		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
@@ -74,29 +80,15 @@ function M.themeModifications()
 
 	-----------------------------------------------------------------------------
 
-	if theme == "tokyonight" then
-		setHl("@keyword.return", { fg = "#ff45ff", bold = true })
+	if theme == "tokyonight-moon" then
 		local yellow = vim.o.background == "dark" and "#b8b042" or "#e8e05e"
 		for _, vimMode in pairs(vimModes) do
 			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. yellow)
 			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
 		end
-		updateHl("GitSignsChange", "guifg=#acaa62")
-		updateHl("diffChanged", "guifg=" .. yellow)
-		updateHl("GitSignsAdd", "guifg=#369a96")
 
 		revertedTodoComments()
-		-- sometimes not set when switching themes
-		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#3b4261" }) end, 1)
 
-		-- FIX
-		-- bold and italic having white color, notably the lazy.nvim window
-		setHl("Bold", { bold = true })
-		setHl("Italic", { italic = true })
-		-- broken when switching themes
-		setHl("TelescopeSelection", { link = "Visual" })
-		-- FIX for blink cmp highlight
-		setHl("BlinkCmpKind", { link = "Special" })
 	elseif theme == "bluloco" then
 		setHl("@keyword.return", { fg = "#d42781", bold = true })
 		revertedTodoComments()
@@ -149,10 +141,10 @@ function M.themeModifications()
 		setHl("@comment.todo", { bg = "#ebc0a7", fg = "#0d0d0d" })
 		setHl("BlinkCmpLabel", { fg = "#cfd5ec" }) -- remove bold
 		setHl("BlinkCmpMenuSelection", { bg = "#585d74", fg = "#c2ccff" }) -- remove bold
-		setHl("TelescopeSelection", { bg = "#353b4e"}) -- remove bold
-		setHl("Visual", { bg = "#61677f"}) -- remove bold
-		setHl("MatchParen", { fg = "#e6a37c"}) -- remove background
-		setHl("String", { fg = "#97ca8f"}) -- remove italics
+		setHl("TelescopeSelection", { bg = "#353b4e" }) -- remove bold
+		setHl("Visual", { bg = "#61677f" }) -- remove bold
+		setHl("MatchParen", { fg = "#e6a37c" }) -- remove background
+		setHl("String", { fg = "#97ca8f" }) -- remove italics
 	end
 end
 
@@ -191,10 +183,8 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 function M.updateColorscheme()
 	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
 
-	local isDark = vim.o.background == "dark"
-	local targetTheme = isDark and vim.g.darkTheme or vim.g.lightTheme
-	if targetTheme then vim.cmd.colorscheme(targetTheme) end
-	vim.g.neovide_transparency = (isDark and vim.g.darkOpacity or vim.g.lightOpacity)
+	vim.cmd.colorscheme(vim.o.background == "dark" and darkTheme or lightTheme)
+	vim.g.neovide_transparency = vim.o.background == "dark" and darkOpacity or lightOpacity
 
 	M.themeModifications()
 	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
