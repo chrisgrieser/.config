@@ -11,9 +11,7 @@ keymap("n", "gq", function()
 end, { desc = " Next quickfix" })
 
 keymap("n", "gQ", function() vim.cmd("silent cprev") end, { desc = " Prev quickfix" })
-
 keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st" })
-
 keymap("n", "<leader>qc", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix list" })
 
 keymap("n", "<leader>qq", function()

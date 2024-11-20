@@ -43,7 +43,7 @@ return {
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>f", group = "󱗘 Refactor" },
 				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>h", group = "󱖉 Hover" },
+				{ "<leader>h", group = " Hover" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },

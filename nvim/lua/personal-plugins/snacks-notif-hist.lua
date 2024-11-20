@@ -1,6 +1,5 @@
 -- INFO Commands for displaying the `snacks.nvim` notification history
 --------------------------------------------------------------------------------
-
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -33,6 +32,7 @@ function M.full()
 		})
 	end
 
+	-- create win
 	require("snacks").win {
 		position = "bottom",
 		buf = bufnr,
@@ -79,7 +79,9 @@ function M.messages()
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()
 		vim.fn.matchadd("ErrorMsg", [[E\d\+:.*]])
+		vim.fn.matchadd("ErrorMsg", [[^Error .*]])
 		vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+		vim.fn.matchadd("WarningMsg", "stack traceback")
 	end)
 end
 

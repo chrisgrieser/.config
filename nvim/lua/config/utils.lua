@@ -14,8 +14,10 @@ M.extraTextobjMaps = {
 ---@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean, silent: boolean }
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
-	if opts.unique == nil then opts.unique = true end
-	pcall(vim.keymap.set, mode, lhs, rhs, opts) -- pcall to other mappings are still loaded
+	if opts.unique == nil then opts.unique = true end -- allow us to disable with `unique=false`
+	-- violating `unique=true` throws an error; using `pcall` so other mappings
+	-- are still loaded
+	pcall(vim.keymap.set, mode, lhs, rhs, opts) 
 end
 
 ---sets `buffer`, `silent` and `nowait` to true
