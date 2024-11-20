@@ -35,7 +35,7 @@ return {
 				"q",
 				function() vim.cmd.TSTextobjectSelect("@comment.outer") end,
 				mode = "o", -- only operator-pending to not conflict with selection-commenting
-				desc = "󰆈 Single Comment",
+				desc = "󰆈 Single comment",
 			},
 			{
 				"dq",
@@ -45,7 +45,7 @@ return {
 					vim.cmd.normal { "d", bang = true }
 					vim.api.nvim_win_set_cursor(0, prevCursor)
 				end,
-				desc = "󰆈 Sticky Delete Comment",
+				desc = "󰆈 Sticky delete comment",
 			},
 			{
 				"cq",
@@ -57,18 +57,18 @@ return {
 					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
 					vim.cmd.startinsert { bang = true }
 				end,
-				desc = "󰆈 Change Comment",
+				desc = "󰆈 Change comment",
 			},
 
 			{
 				"<leader>hf",
 				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
-				desc = " Peek Function",
+				desc = " Peek function",
 			},
 			{
 				"<leader>hc",
 				function() vim.cmd.TSTextobjectPeekDefinitionCode("@class.outer") end,
-				desc = " Peek Class",
+				desc = " Peek class",
 			},
 
 			-- MOVE & SWAP

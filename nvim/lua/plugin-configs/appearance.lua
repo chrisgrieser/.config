@@ -10,7 +10,7 @@ return {
 				show_end = false,
 			},
 			indent = {
-				highlight = { "DummyForIbl" },
+				highlight = "IndentBlankPluginCustom", -- custom, needs to be defined for every theme
 				char = { "│", "┊" },
 				tab_char = { "│", "┊" },
 			},

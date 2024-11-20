@@ -177,10 +177,10 @@ keymap(
 	{ "n", "x" },
 	"q",
 	function() return require("vim._comment").operator() end,
-	{ desc = "󰆈 Comment Operator", expr = true }
+	{ desc = "󰆈 Comment operator", expr = true }
 )
-keymap("n", "qq", "q_", { desc = "󰆈 Comment Line", remap = true })
-keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Comment text object" })
+keymap("n", "qq", "q_", { desc = "󰆈 Comment line", remap = true })
+keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Multiline comment" })
 keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
