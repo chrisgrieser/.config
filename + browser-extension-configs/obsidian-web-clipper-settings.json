@@ -1,0 +1,115 @@
+{
+  "general_settings": {
+    "betaFeatures": true,
+    "legacyMode": false,
+    "showMoreActionsButton": true,
+    "silentOpen": false
+  },
+  "highlighter_settings": {
+    "alwaysShowHighlights": true,
+    "highlightBehavior": "highlight-inline",
+    "highlighterEnabled": true
+  },
+  "interpreter_settings": {
+    "anthropicApiKey": "",
+    "defaultPromptContext": "{{fullHtml|strip_tags:(\"script,h1,h2,h3,h4,h5,h6,meta,a,ol,ul,li,p,em,strong,i,b,img,video,audio,math,tablecite,strong,td,th,tr,caption,u\")|strip_attr:(\"alt,src,href,id,content,property,name,datetime,title\")}}",
+    "interpreterAutoRun": false,
+    "interpreterEnabled": false,
+    "interpreterModel": "gpt-4o-mini",
+    "models": [
+      {
+        "baseUrl": "https://api.openai.com/v1/chat/completions",
+        "enabled": true,
+        "id": "gpt-4o-mini",
+        "name": "GPT-4o Mini",
+        "provider": "OpenAI"
+      },
+      {
+        "baseUrl": "https://api.openai.com/v1/chat/completions",
+        "enabled": true,
+        "id": "gpt-4o",
+        "name": "GPT-4o",
+        "provider": "OpenAI"
+      },
+      {
+        "baseUrl": "https://api.openai.com/v1/chat/completions",
+        "enabled": true,
+        "id": "gpt-o1-mini",
+        "name": "GPT-o1 Mini",
+        "provider": "OpenAI"
+      },
+      {
+        "baseUrl": "https://api.anthropic.com/v1/messages",
+        "enabled": true,
+        "id": "claude-3-5-sonnet-20240620",
+        "name": "Claude 3.5 Sonnet",
+        "provider": "Anthropic"
+      },
+      {
+        "baseUrl": "https://api.anthropic.com/v1/messages",
+        "enabled": true,
+        "id": "claude-3-haiku-20240307",
+        "name": "Claude 3 Haiku",
+        "provider": "Anthropic"
+      },
+      {
+        "baseUrl": "https://api.anthropic.com/v1/messages",
+        "enabled": true,
+        "id": "claude-3-opus-20240229",
+        "name": "Claude 3 Opus",
+        "provider": "Anthropic"
+      }
+    ],
+    "openaiApiKey": ""
+  },
+  "property_types": [
+    {
+      "name": "title",
+      "type": "text"
+    },
+    {
+      "name": "author",
+      "type": "text"
+    },
+    {
+      "name": "publication",
+      "type": "text"
+    },
+    {
+      "name": "year",
+      "type": "number"
+    },
+    {
+      "name": "download-date",
+      "type": "datetime"
+    },
+    {
+      "name": "url",
+      "type": "text"
+    },
+    {
+      "name": "read",
+      "type": "checkbox"
+    },
+    {
+      "name": "tags",
+      "type": "multitext"
+    }
+  ],
+  "template_1726241935429sdchlrusb": [
+    "ᯡࡅ䁬⁼ၦǸʀඩÑ恮ƸևⒶƼာ〢怭䁇Î戢ᢠڤĬ˸Ց䈠ѷ䀹厽ᔠ᝶Ⴍ㱊㠣㦠ߑ倶⍷叄罖癋㨡撚砣ৎ燰᰸ቸⓊ帡㻮㈠Ე⠨ز匮瞓ϐǭ䑒ͽྪ嶷⬱㇂孪憌摑㣩⮧䚥⼋懇嬓䏀ú偨Âᔣද䑂提ǌၴ扊[冮䄺〷婙瑡઼⩚㼪⻡攅䮄䠢㴒緜/㓓䖼唫ˋ⊂瀨䒀いઠƥ෣ℱ瘐֨⪔ᩒℐ璜㈫㒚僬䈇ௐ嵊戧ⵖ䫒௕吮ⰵŠÜg㨽՚磼෽眲␴᪦▙䙖〳໤栠࿛☤㓠缳␓緾䁺懗Ö硘፷渊䕜᥄炰䥒悤燱ś䝤㈜戥௢䃸㲛殅௥い嵍制瞤χ灡晸ᵳ洊∼泃䂐ᔵ\"妡䋸፭匈㋁䒏䑭᫽ൿ碠漍⦱⮌沣⨾牐℺ପ㩈ᛧ⮫㫠၂占௸ㅼ㧿ᜡ爂ᅞ獇氯㺲婓℟㽹ߴ.㜹㙹⡊࡯Ô淟✬ᕭ帺㾰ᘪ寓㫀✀┝↘ࠢ疆ᨸȱؒ抩≞㢠  "
+  ],
+  "template_17262419481659kzxur3iv": [
+    "ᯡࡓ䆬ƀ匥堰恕త猡ᘧ堮戡㡠àຠ〈≠͢ܤ烠␠ੰŐn愠⸨梠ɑ䊠䀭涵ᦤ⨸㹭㒑㌑䀧ႃ,▵ᅏ㎀惜ᦘø怡禠…ㆠ࿏⣺泦и籥吢墪⼒偐瀠弰悠ǯ䔬怡ਐအ琮丬ะ䬠Ȉᙵ⠣֑⩘帽ếᦠσ䉐䈴憪憱呌ѺӦؠ…檠ㇹ䲄3-䱐ƃဢ㡆<㉱俈昬怭〢嫹ҝ扙䶆৙兤เ䍐˙ᤨ䙧୫Ფⳡȏ䃏㲢㥘JᢈẊƑ懀瞥⁥ɠࢃ⭥瀠佶儃ʄذ媫氕с䲉ᣭ獥䟡Ʊ⡱屣䇡㲉很捐ࠫ垥̉ɓ匍㢠䙺㺻卢⁘ℸ⋉䢰ᔾ䐬⎑䪋ᡌ䬨ᘱ᫢恘űॳⲨ䌄ᇘၞᬧ䋱䳋僬ϐ塤ീ磠伷叡ұ㕘ȶ碜儐䘿ےʴⴲȕ⌌≷䕌ጭ䌣燬䈨䀨獀嗬ⱞ⚱瘇ǆ瘡唺䘬֣墶༵⒕䄠⚱ま㬤庋Ꭰ崀ᅔ䱎穑ံṍ担ὐ毠ǼፘȠκ慢ಐ䙔㭘ᦫc堠ⵎ㊗歹⍌緯ី姩䵫嚝䱸厬䰑థ昡硖㦼Є璴ρƕ⃬♲マ㍒県⌥䷣㓽渣ἧ㩐䰱ඇ〠ᦸ㎄䯺䨰㤲㯾ᙹ䋸玬¼ᗰ䍠㾭や沤ဠ崸␲签暢㪜ױ焚氋᭝擓♕䀡㵒ขɐừ⃠⭡Pⶮ烴મ像ࠨ႘ئㆁ⼺兪㺬憫ƅᰠⲼ䪽ㅌ⟜᜹䁑Ф℀㎢⊼࡝Գᠥ焠ᅓ⎠ᄦ䰳㑍♈䣅䨴䀠 "
+  ],
+  "template_17282341141922sxy4gz": [
+    "ᯡࡓ䆬ƀ匥堰恕త猡ᘧ堮戡㡠àຠ〈≠͢ܤ烠␠ረ›暮ᠧ㦠`̅દĠভࠠ⌸⠨ý女ᡣࡤᓶ䜶ᚠ慼ⵘ䈡䓒剂຀σ䰸బ;నℶⲥ损慉唡䇠θ䡀墐ⅴ©ɦ&だ˛Ფ^Kᘰ㼦戣㏓旅䔀墪ᠠ㺴᯷怡⏩䫃⢂࣡ᢆ䥝ᅣ噀㠢㴒´㓤⨧ɫ௣䀥端▛⡸廔Ⴆج`۵┨搠瘠ጠඤ瀢捀ʒ⸠ᲄ㎠⬹旣䆿শ㹋☉೬㫨▓⒪ȹ扩ᢤΨඓ੐㽽䆢爥ࠠ⎂㢈 γ烠ʾ⊫搩ၜ浂ࠦ嗀ጠ]噹媧堼₃崅㫼ཇ威Ʊ⡓兣䉤㝟䆥ҡ䤱˪ޣᄆǡᕠᙒ㚡╳э຺♒₝妪摽坛刂硠ͫ䂆ǡ᛾䑰ر㵄䙬炀ၭᬧ䋰您Ɒ煭ࡀ常䑡䢲ⱁࢲ䔜唼咡⫑⍿➋㫣唀㒓䜇匁䢁供䙫校ຄⷌ⠻䓊⟆⨗.參̢怲ᩢ⓰䏈䀳⧿㙩᣼㳡悲㠼䫀㊹㶊㻪᫙Ꮀ䯤崀ࡐ⁑䡫昴捖㣐䤠ୢ涉匏⹼Ȏま状ᒿ欠㒓坓竩玲碀䥐ᨁ䯼炇䮃劫䱄唬瀯ⳍ֠䀌烯᫋ඉ⊆ᱳᭈ㔿㏫惮◫楆,慘㓊瑀ᨴ䓍߁ѩ丳䝅枺䖡ᰬ䋡墌怡㩊唠惡෇⁛Ц呢ៃĘ'匑ḿ䂰Ƽᄮ₳⁸ヮ̑ఫ⇠?俐~ࠠ挈ảǑ⣎ㅌ⚤㶁ద䣠ȯॊ㿨㋠㏌ฐᄭ↾ᄦ䣂ا⽠স\"ᓰࡏྨᙀ瀰ቝ゠⿆ס忍眼❝慙梕捁ک慘怭ፕ䄠̖䤁Ӧ䇬ᩱ⓶Ỳ䀲ព移䄧傣ጢ泓ࠠ "
+  ],
+  "template_list": [
+    "17262419481659kzxur3iv",
+    "17282341141922sxy4gz"
+  ],
+  "vaults": [
+    "phd-data-analysis"
+  ]
+}
