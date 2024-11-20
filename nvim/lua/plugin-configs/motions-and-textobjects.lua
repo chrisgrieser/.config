@@ -115,6 +115,7 @@ return {
 
 			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󰑀 near EoL" },
 			{ "b", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "󰅪 to next anyBracket" },
+			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next quote" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer anyQuote" },
 
