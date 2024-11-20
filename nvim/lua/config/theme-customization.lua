@@ -38,17 +38,15 @@ local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command
 
 local function customHighlights()
 	-- Comments: keep color and add underlines
-	local commentFg = getHlValue("Comment", "fg")
-	if commentFg then setHl("@string.special.url.comment", { fg = commentFg, underline = true }) end
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
-		updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
+		-- updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
 	end
 
 	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
 	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
-		updateHl("Spell" .. type, "gui=underdotted cterm=underline")
+		-- updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
 	-- LSP cursorword
@@ -74,7 +72,6 @@ local function toggleUnderlines()
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	desc = "User: FIX underlines for backdrop",
-	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
 	callback = function(ctx)
 		-- WinEnter needs a delay so buftype changes set by plugins are picked up
 		-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
@@ -90,6 +87,9 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 -- not work reliabely due to some colorschemes setting the background themselves
 -- with different timings?
 function M.updateColorscheme()
+	-- resets colors, so a theme is not affected by a previous themes colors
+	vim.cmd.highlight("clear")
+
 	vim.cmd.colorscheme(vim.o.background == "dark" and darkTheme or lightTheme)
 	vim.g.neovide_transparency = vim.o.background == "dark" and darkOpacity or lightOpacity
 
