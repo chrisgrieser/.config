@@ -42,10 +42,13 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		-- 3. BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
 			success = os.rename(path, browserConfigs .. "violentmonkey")
-			-- needs to be zipped again, since browser auto-opens all zip files
-			local cmd = ("cd %q && zip -r violentmonkey.zip ./violentmonkey"):format(browserConfigs)
-			hs.execute(cmd)
-			u.app("Brave Browser"):activate() -- window created by auto-unzipping
+			if success then
+				-- needs to be zipped again, since browser auto-opens all zip files
+				local cmd = ("cd %q && zip -r violentmonkey.zip ./violentmonkey"):format(browserConfigs)
+				os.remove(browserConfigs .. "violentmonkey")
+				hs.execute(cmd)
+				u.app("Brave Browser"):activate() -- window created by auto-unzipping
+			end
 		elseif name == "ublacklist-settings.json" then
 			success = os.rename(path, browserConfigs .. name)
 		elseif name:find("my%-ublock%-backup_.*%.txt") then
@@ -61,7 +64,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
 			success = os.rename(path, backupPath)
 		elseif name == "obsidian-web-clipper-settings.json" then
-			success = os.rename(path, home .. "/Vaults/phd-data-analysis/Scripts/" .. name)
+			success = os.rename(path, browserConfigs .. name)
 
 		-- 4. BANKING
 		elseif
