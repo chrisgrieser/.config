@@ -70,41 +70,9 @@ function M.themeModifications()
 		end
 	end
 
-	local function lualineBold()
-		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_a_" .. v, "gui=bold")
-			end
-		end, 100)
-	end
-
 	-----------------------------------------------------------------------------
 
-	if theme == "tokyonight-moon" then
-		local yellow = vim.o.background == "dark" and "#b8b042" or "#e8e05e"
-		for _, vimMode in pairs(vimModes) do
-			updateHl("lualine_y_diff_modified_" .. vimMode, "guifg=" .. yellow)
-			updateHl("lualine_y_diff_added_" .. vimMode, "guifg=#369a96")
-		end
-
-		revertedTodoComments()
-
-	elseif theme == "bluloco" then
-		setHl("@keyword.return", { fg = "#d42781", bold = true })
-		revertedTodoComments()
-		lualineBold()
-		setHl("@lsp.typemod.variable.global.lua", { link = "@namespace" }) -- `vim` and `hs`
-		setHl("@lsp.typemod.variable.defaultLibrary.lua", { link = "@module.builtin" })
-		setHl("Title", { fg = "#7c84da", bold = true })
-		setHl("Conceal", { link = "NonText" })
-	elseif theme == "dawnfox" then
-		setHl("@keyword.return", { fg = "#9f2e69", bold = true })
-		setHl("Whitespace", { link = "NonText" }) -- more visible
-		setHl("@namespace.builtin.lua", { link = "@variable.builtin" }) -- `vim` and `hs`
-		setHl("@markup.italic", { italic = true }) -- FIX
-		setHl("@character.printf", { link = "SpecialChar" })
-		updateHl("@markup.raw", "gui=none") -- no italics
-
+	if theme == "dawnfox" then
 		setHl("ColorColumn", { bg = "#e9dfd2" })
 		setHl("WinSeparator", { fg = "#cfc1b3" })
 		setHl("Operator", { fg = "#846a52" })
@@ -120,31 +88,6 @@ function M.themeModifications()
 		setHl("@type.builtin.python", { link = "Typedef" })
 		setHl("@string.documentation.python", { link = "Typedef" })
 		setHl("@keyword.operator.python", { link = "Operator" })
-	elseif theme == "dracula" then
-		setHl("@keyword.return", { fg = "#5e9fff", bold = true })
-		revertedTodoComments()
-
-		setHl("@number", { fg = "#7ca2ff" })
-		setHl("@number.comment", { link = "@number" })
-
-		updateHl("LspInlayHint", "guibg=#323543")
-
-		setHl("Constant", {})
-		setHl("@string.regexp", { fg = "#e37171" }) -- less saturated
-		setHl("Boolean", { link = "Special" })
-		setHl("Number", { link = "@field" })
-	elseif theme == "monet" then
-		revertedTodoComments()
-		setHl("@keyword.return", { fg = "#d672a6", bold = true })
-		setHl("@namespace", { fg = "#8e9dde" }) -- different color
-		setHl("Folded", { bg = "#404454" }) -- less bright
-		setHl("@comment.todo", { bg = "#ebc0a7", fg = "#0d0d0d" })
-		setHl("BlinkCmpLabel", { fg = "#cfd5ec" }) -- remove bold
-		setHl("BlinkCmpMenuSelection", { bg = "#585d74", fg = "#c2ccff" }) -- remove bold
-		setHl("TelescopeSelection", { bg = "#353b4e" }) -- remove bold
-		setHl("Visual", { bg = "#61677f" }) -- remove bold
-		setHl("MatchParen", { fg = "#e6a37c" }) -- remove background
-		setHl("String", { fg = "#97ca8f" }) -- remove italics
 	end
 end
 

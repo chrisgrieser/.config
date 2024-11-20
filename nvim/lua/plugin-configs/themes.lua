@@ -1,11 +1,21 @@
 -- INFO `colorschemeName` relevant for `theme-customization.lua`
 --------------------------------------------------------------------------------
-
+-- https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorschemeName = "dawnfox",
+	opacity = 0.92,
+	opts = {
+		groups = {
+			dayfox = {
+				["@keyword.return"] = { fg = "#9f2e69", bold = true },
+				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
+				["@markup.italic"] = { italic = true }, -- FIX
+				["@character.printf"] = { link = "SpecialChar" },
+			},
+		},
+	},
 }
--- { "uloco/bluloco.nvim", dependencies = { "rktjmp/lush.nvim" } },
 
 --------------------------------------------------------------------------------
 
@@ -13,28 +23,28 @@ local lightTheme = {
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorschemeName = "tokyonight-moon",
+	opacity = 0.95,
 	opts = {
 		lualine_bold = true,
-		on_highlights = function(hl, _)
+		on_highlights = function(hl, colors)
 			hl["@ibl.indent.char.1"] = { fg = "#3b4261" }
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
 			hl["GitSignsChange"] = { fg = "#acaa62" }
 			hl["diffChanged"] = { fg = "#e8e05e" }
 			hl["GitSignsAdd"] = { fg = "#369a96" }
+			hl["GitSignsAdd"] = { fg = "#369a96" }
+			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
+			hl["Italic"] = { italic = true }
+			hl["@markup.strong"] = { fg = colors.purple, bold = true }
 
-		-- 	-- FIX
-		-- -- bold and italic having white color, notably the lazy.nvim window
-		-- setHl("Bold", { bold = true })
-		-- setHl("Italic", { italic = true })
-		-- -- broken when switching themes
-		-- setHl("TelescopeSelection", { link = "Visual" })
-		-- -- FIX for blink cmp highlight
-		-- setHl("BlinkCmpKind", { link = "Special" })
+			-- TODO INFO ERROR WARN
+			for _, type in pairs { "todo", "error", "warning", "note" } do
+				local name = "@comment." .. type
+				hl[name] = { fg = "#000000", bg = hl[name].fg }
+			end
 		end,
 	},
 }
--- "fynnfluegge/monet.nvim",
--- { "binhtran432k/dracula.nvim", opts = { lualine_bold = true } },
 
 --------------------------------------------------------------------------------
 darkTheme.priority = 1000 -- https://lazy.folke.io/spec/lazy_loading#-colorschemes
