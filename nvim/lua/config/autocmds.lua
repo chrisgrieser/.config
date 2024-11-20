@@ -312,6 +312,12 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 		if visualDistanceToEof < scrolloff then
 			local winView = vim.fn.winsaveview()
 			vim.fn.winrestview { topline = winView.topline + scrolloff - visualDistanceToEof }
+
+			-- TEST for scrolloff changes
+			if vim.o.scrolloff == 0 then
+				local msg = "Changed to " .. vim.o.scrolloff
+				vim.notify(msg, vim.log.levels.WARN, { title = "scrolloff" })
+			end
 		end
 	end,
 })
@@ -327,15 +333,3 @@ require("config.utils").uniqueKeymap(
 	function() vim.o.scrolloff = originalScrolloff end,
 	{ desc = "󰁨 Fix scrolloff" }
 )
-
--- TEST to detect buggy scrolloff changes
-vim.api.nvim_create_autocmd("OptionSet", {
-	desc = "User: Detect scrolloff change bug",
-	pattern = "scrolloff",
-	callback = function()
-		if vim.api.nvim_get_current_win() ~= 1000 then return end -- only main window
-		local global = ("global: %d → %d"):format(vim.v.option_oldglobal, vim.v.option_new)
-		local winlocal = ("local: %d → %d"):format(vim.v.option_oldlocal, vim.v.option_new)
-		vim.notify(global .. "\n" .. winlocal, vim.log.levels.WARN, { title = "Scrolloff Change" })
-	end,
-})

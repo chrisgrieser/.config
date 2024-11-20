@@ -132,8 +132,7 @@ vim.opt.listchars = {
 }
 vim.opt.fillchars:append {
 	eob = " ",
-	lastline = "+",
-	msgsep = "/",
+	lastline = "↓",
 	-- thick window separators
 	horiz = "▄",
 	vert = "█",
