@@ -457,6 +457,7 @@ end, { desc = " Sticky paste at EoL" })
 
 keymap("i", "<D-v>", function()
 	local reg = vim.fn.getreg("+"):gsub("\n$", "")
+	if not reg:find("\n") then reg = vim.trim(reg) end -- remove indentation if multiline
 	vim.fn.setreg("+", reg, "v")
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })

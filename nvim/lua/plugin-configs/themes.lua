@@ -1,6 +1,8 @@
 -- INFO `colorschemeName` relevant for `theme-customization.lua`
 --------------------------------------------------------------------------------
--- https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
+
+-- DOCS https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
+-- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
@@ -8,14 +10,16 @@ local lightTheme = {
 	opts = {
 		groups = {
 			dawnfox = {
-				["@keyword.return"] = { fg = "#9f2e69" },
+				["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
 				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 				["@character.printf"] = { link = "SpecialChar" },
 				["ColorColumn"] = { bg = "#e9dfd2" },
 				["WinSeparator"] = { fg = "#cfc1b3" },
 				["Operator"] = { fg = "#846a52" },
+				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
+				["@string.special.url.comment"] = { style = "underline" },
 
-				-- FIX python highlighting issues
+				-- FIX python highlighting issues `fffff`
 				["@type.builtin.python"] = { link = "Typedef" },
 				["@string.documentation.python"] = { link = "Typedef" },
 				["@keyword.operator.python"] = { link = "Operator" },
@@ -23,26 +27,28 @@ local lightTheme = {
 		},
 	},
 	init = function(plugin)
-		vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
+		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			pattern = plugin.colorscheme,
-			desc = "User: Some fixes for " .. plugin.colorscheme,
+			desc = "User: Changes for " .. plugin.colorscheme,
 			callback = function()
 				vim.defer_fn(function()
 					if vim.g.colors_name ~= plugin.colorscheme then return end
 
+					-- fix indent-blank-line color
 					vim.api.nvim_set_hl(0, "@ibl.indent.char.1", { fg = "#e0cfbd" })
+
+					-- fixes contrast issues in lualine
 					local vimModes =
 						{ "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
 					for _, v in pairs(vimModes) do
-						vim.cmd.highlight(("lualine_y_diff_modified_%s  guifg=#828208"):format(v))
-						vim.cmd.highlight(("lualine_y_diff_added_%s  guifg=#477860"):format(v))
+						vim.cmd.highlight(("lualine_y_diff_modified_%s guifg=#828208"):format(v))
+						vim.cmd.highlight(("lualine_y_diff_added_%s guifg=#477860"):format(v))
 					end
-				end, 300)
+				end, 350)
 			end,
 		})
 	end,
 }
--- 		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#e0cfbd" }) end, 1)
 
 --------------------------------------------------------------------------------
 
@@ -62,13 +68,18 @@ local darkTheme = {
 			hl["GitSignsAdd"] = { fg = "#369a96" }
 			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
 			hl["Italic"] = { italic = true }
-			hl["@markup.strong"] = { fg = colors.purple, bold = true }
+			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
 
 			-- TODO INFO ERROR WARN
-			for _, type in pairs { "todo", "error", "warning", "note" } do
-				local name = "@comment." .. type
-				hl[name] = { fg = "#000000", bg = hl[name].fg }
-			end
+			hl["@comment.todo"] = { fg = "#000000", bg = hl["@comment.todo"].fg }
+			hl["@comment.error"] = { fg = "#000000", bg = hl["@comment.error"].fg }
+			hl["@comment.warning"] = { fg = "#000000", bg = hl["@comment.warning"].fg }
+			hl["@comment.note"] = { fg = "#000000", bg = hl["@comment.note"].fg }
+
+			hl["DiagnosticUnderlineError"] = { underline = true, sp = hl["DiagnosticUnderlineError"].sp }
+			hl["DiagnosticUnderlineWarn"] = { underline = true, sp = hl["DiagnosticUnderlineWarn"].sp }
+			hl["DiagnosticUnderlineInfo"] = { underline = true, sp = hl["DiagnosticUnderlineInfo"].sp }
+			hl["DiagnosticUnderlineHint"] = { underline = true, sp = hl["DiagnosticUnderlineHint"].sp }
 		end,
 	},
 }
