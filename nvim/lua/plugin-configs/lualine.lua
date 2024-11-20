@@ -129,7 +129,7 @@ local lualineConfig = {
 		},
 		lualine_z = {
 			{ -- recording status
-				function() return "雷Recording…" end,
+				function() return "󰑊 Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 				color = "DiagnosticError",
 			},
@@ -144,11 +144,6 @@ local lualineConfig = {
 					return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
 				end,
 			},
-			{ -- .venv indicator
-				function() return "󱥒" end,
-				cond = function() return vim.env.VIRTUAL_ENV and vim.bo.ft == "python" end,
-				padding = { left = 1, right = 0 },
-			},
 			{ filenameAndIcon },
 		},
 		lualine_b = {
@@ -161,7 +156,7 @@ local lualineConfig = {
 			{ lspProgress },
 			{
 				"diagnostics",
-				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
+				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰮦 " },
 			},
 			{ newlineCharIfNotUnix },
 			{ irregularWhitespace },
@@ -176,8 +171,10 @@ local lualineConfig = {
 		lualine_z = {
 			{
 				"selectioncount",
-				cond = function() return vim.fn.mode():find("[Vv]") ~= nil end,
-				fmt = function(str) return "礪" .. str end,
+				fmt = function(str)
+					local icon = vim.fn.mode():find("[Vv]") and "礪" or ""
+					return icon .. str
+				end,
 			},
 			{ "location" },
 		},

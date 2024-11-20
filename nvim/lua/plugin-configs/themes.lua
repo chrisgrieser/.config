@@ -22,6 +22,7 @@ local lightTheme = {
 			dawnfox = {
 				["IndentBlankPluginCustom"] = { fg = "#e0cfbd" },
 
+				-- general
 				["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
 				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 				["@character.printf"] = { link = "SpecialChar" },
@@ -29,8 +30,6 @@ local lightTheme = {
 				["WinSeparator"] = { fg = "#cfc1b3" },
 				["Operator"] = { fg = "#846a52" },
 				["@string.special.url.comment"] = { style = "underline" },
-
-				-- markdown
 				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
 				["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
 				["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
@@ -74,6 +73,7 @@ local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
 	opacity = 0.87,
+	lazy = false,
 	opts = {
 		lualine_bold = true,
 		on_colors = function(colors)
@@ -83,11 +83,14 @@ local darkTheme = {
 		on_highlights = function(hl, colors)
 			hl.IndentBlankPluginCustom = hl.IblIndent
 
+			-- general
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
-			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
-			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
 			hl["diffAdded"] = { fg = colors.green }
+
+			-- FIX bold/italic being white in lazy.nvim window
+			hl.Bold = { bold = true }
+			hl.Italic = { italic = true }
 
 			-- color bg, not fg (TODO INFO ERROR WARN)
 			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
