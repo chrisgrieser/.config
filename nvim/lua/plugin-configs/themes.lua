@@ -1,13 +1,20 @@
 -- INFO `colorschemeName` relevant for `theme-customization.lua`
 --------------------------------------------------------------------------------
 
--- DOCS https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
+-- DOCS
+-- https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
 -- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
 	opacity = 0.92,
 	opts = {
+		specs = {
+			dawnfox = {
+				-- add more contrast, especially for lualine
+				git = { changed = "#828208", add = "#4a7e65" },
+			},
+		},
 		groups = {
 			dawnfox = {
 				["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
@@ -19,10 +26,10 @@ local lightTheme = {
 				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
 				["@string.special.url.comment"] = { style = "underline" },
 
-				-- FIX python highlighting issues `fffff`
 				["@type.builtin.python"] = { link = "Typedef" },
 				["@string.documentation.python"] = { link = "Typedef" },
 				["@keyword.operator.python"] = { link = "Operator" },
+				["DummyForIbl"] = { fg = "#e0cfbd" }
 			},
 		},
 	},
@@ -36,14 +43,6 @@ local lightTheme = {
 
 					-- fix indent-blank-line color
 					vim.api.nvim_set_hl(0, "@ibl.indent.char.1", { fg = "#e0cfbd" })
-
-					-- fixes contrast issues in lualine
-					local vimModes =
-						{ "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
-					for _, v in pairs(vimModes) do
-						vim.cmd.highlight(("lualine_y_diff_modified_%s guifg=#828208"):format(v))
-						vim.cmd.highlight(("lualine_y_diff_added_%s guifg=#477860"):format(v))
-					end
 				end, 350)
 			end,
 		})
@@ -52,7 +51,9 @@ local lightTheme = {
 
 --------------------------------------------------------------------------------
 
--- DOCS https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+-- DOCS
+-- https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+-- https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
@@ -60,12 +61,9 @@ local darkTheme = {
 	opts = {
 		lualine_bold = true,
 		on_highlights = function(hl, colors)
-			hl["@ibl.indent.char.1"] = { fg = "#3b4261" }
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
-			hl["GitSignsChange"] = { fg = "#acaa62" }
-			hl["diffChanged"] = { fg = "#e8e05e" }
-			hl["GitSignsAdd"] = { fg = "#369a96" }
-			hl["GitSignsAdd"] = { fg = "#369a96" }
+			hl["GitSignsChange"] = { fg = colors.yellow }
+			hl["GitSignsAdd"] = { fg = colors.green1 }
 			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
 			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
@@ -76,7 +74,8 @@ local darkTheme = {
 			hl["@comment.warning"] = { fg = "#000000", bg = hl["@comment.warning"].fg }
 			hl["@comment.note"] = { fg = "#000000", bg = hl["@comment.note"].fg }
 
-			hl["DiagnosticUnderlineError"] = { underline = true, sp = hl["DiagnosticUnderlineError"].sp }
+			hl["DiagnosticUnderlineError"] =
+				{ underline = true, sp = hl["DiagnosticUnderlineError"].sp }
 			hl["DiagnosticUnderlineWarn"] = { underline = true, sp = hl["DiagnosticUnderlineWarn"].sp }
 			hl["DiagnosticUnderlineInfo"] = { underline = true, sp = hl["DiagnosticUnderlineInfo"].sp }
 			hl["DiagnosticUnderlineHint"] = { underline = true, sp = hl["DiagnosticUnderlineHint"].sp }

@@ -10,6 +10,7 @@ return {
 				show_end = false,
 			},
 			indent = {
+				highlight = { "DummyForIbl" },
 				char = { "│", "┊" },
 				tab_char = { "│", "┊" },
 			},
