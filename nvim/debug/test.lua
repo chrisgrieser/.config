@@ -1,1 +1,4 @@
-vim.notify("fffff [aaaaaaaa] fffffff", nil, { title = "ffffffffff" })
+
+require("justice").select {
+	justfile = "/Users/chrisgrieser/.config/hammerspoon/Justfile"
+}
