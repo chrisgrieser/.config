@@ -101,6 +101,13 @@ keymap("n", "X", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
+-- Append to EoL
+local trailChars = { ",", "\\", "{", ")", ";", "." }
+for _, key in pairs(trailChars) do
+	local pad = key == "\\" and " " or ""
+	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
+end
+
 -- WHITESPACE & INDENTATION
 keymap("n", "=", "mzO<Esc>`z", { desc = " Blank above" })
 keymap("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
@@ -118,13 +125,6 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 -- Merging
 keymap("n", "m", "J", { desc = "󰗈 Merge line up" })
 keymap("n", "M", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
-
--- Append to EoL
-local trailChars = { ",", "\\", "{", ")", ";", "." }
-for _, key in pairs(trailChars) do
-	local pad = key == "\\" and " " or ""
-	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
-end
 
 --------------------------------------------------------------------------------
 
@@ -459,17 +459,14 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 
 --------------------------------------------------------------------------------
 -- INSPECT
---- vim.show_pos(bufnr?, row?, col?, filter?)
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
-keymap("n", "<leader>il", vim.cmd.LspInfo, { desc = "󰒕 :LspInfo" })
-
 keymap(
 	"n",
 	"<leader>ib",
 	function() require("personal-plugins.misc").bufferInfo() end,
-	{ desc = "󰽙 Buffer info" }
+	{ desc = "󰽙 Buffer" }
 )
 
 --------------------------------------------------------------------------------
@@ -484,7 +481,7 @@ local function retabber(use)
 	vim.bo.shiftwidth = 2
 	vim.bo.tabstop = 3
 	vim.cmd.retab { bang = true }
-	vim.notify("Now using " .. use)
+	vim.notify("Now using " .. use, nil, { title = ":retab" })
 end
 keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
 keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })

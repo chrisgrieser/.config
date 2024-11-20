@@ -29,14 +29,10 @@ end, { desc = "󰛦 Organize Imports & Format" })
 --------------------------------------------------------------------------------
 
 -- When typing "await" add "async" to the function declaration
-local function add_async()
-	-- This function should be executed when the user types "t" in insert mode,
-	-- but "t" is not inserted because it's the trigger.
-	vim.api.nvim_feedkeys("t", "n", true)
-
+bkeymap("i", "t", function ()
+	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
 	local textBeforeCursor = vim.fn.getline("."):sub(vim.fn.col(".") - 4, vim.fn.col(".") - 1)
 	if textBeforeCursor ~= "awai" then return end
-
 	-----------------------------------------------------------------------------
 
 	local function findAncestor(node, types)
@@ -54,6 +50,4 @@ local function add_async()
 
 	local startRow, startCol = functionNode:start()
 	vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
-end
-
-vim.keymap.set("i", "t", add_async, { buffer = true })
+end, { desc = "󰛦 Auto-add `async`" })
