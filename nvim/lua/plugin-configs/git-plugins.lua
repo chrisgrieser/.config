@@ -4,25 +4,25 @@ return {
 		event = "VeryLazy", -- load for status line component
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-Commit & Push", nowait = true },
-			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-Commit" },
-			{ "gi", function() require("tinygit").openIssueUnderCursor() end, desc = " Open Issue under Cursor" },
-			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive Staging" },
-			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & Push" },
-			{ "<leader>gP", function() require("tinygit").push { createGitHubPr = true } end, desc = " Push & PR" },
-			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & Rebase" },
-			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-No-Edit & F-Push" },
-			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend Only Msg & F-Push" },
-			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open Issues" },
-			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed Issues" },
-			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File History" },
-			{ "<leader>gh", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line History" },
-			{ "<leader>gH", function() require("tinygit").functionHistory() end, desc = "󰢷 Function History" },
+			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
+			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
+			{ "gi", function() require("tinygit").openIssueUnderCursor() end, desc = " Open issue under cursor" },
+			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
+			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
+			{ "<leader>gP", function() require("tinygit").createGitHubPr() end, desc = " Create PR" },
+			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & rebase" },
+			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 amend-no-edit & f-push" },
+			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend only msg & f-push" },
+			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open issues" },
+			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed issues" },
+			{ "<leader>gd", function() require("tinygit").searchFileHistory() end, desc = "󰢷 File history" },
+			{ "<leader>gh", function() require("tinygit").lineHistory() end, mode = { "n", "x" }, desc = "󰢷 Line history" },
+			{ "<leader>gH", function() require("tinygit").functionHistory() end, desc = "󰢷 Function history" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
-			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub Repo URL" },
-			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash Push" },
-			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash Pop" },
-			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo Last Commit/Amend" },
+			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub repo URL" },
+			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash push" },
+			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash pop" },
+			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo last commit/amend" },
 			-- stylua: ignore end
 		},
 		opts = {
@@ -81,28 +81,26 @@ return {
 			-- stylua: ignore start
 			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next Hunk" },
 			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous Hunk" },
-			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage Hunk" },
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage Selection" },
-			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add Buffer" },
+			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
+			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
+			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
 			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame Line" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
 
 			-- UNDO
-			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage Last Stage" },
-			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰊢 Unstage Buffer" },
-			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset Buffer" },
+			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage last stage" },
+			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰊢 Unstage buffer" },
+			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset buffer" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset Hunk" },
 
-			-- OPTIONS
-			{ "<leader>oi", "<cmd>Gitsigns toggle_deleted<CR>", desc = "󰊢 Inline Deletions" },
 			-- stylua: ignore end
 			{
 				"<leader>op",
 				function()
 					if vim.b.gitsignsPrevChanges then
 						require("gitsigns").reset_base()
-						vim.notify("Gitsigns: Reset Base")
+						vim.notify("Base was reset.", nil, { title = "Gitsigns", icon = "󰊢" })
 						vim.b.gitsignsPrevChanges = false
 						return
 					end
@@ -114,19 +112,11 @@ return {
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsignsPrevChanges = true
-					vim.notify("Gitsigns: Changed base to " .. lastCommitToFile)
+					local msg = "Changed base to " .. lastCommitToFile
+					vim.notify(msg, nil, { title = "Gitsigns", icon = "󰊢" })
 				end,
-				desc = "󰊢 Previous/Present Changes",
+				desc = "󰊢 Previous/present changes",
 			},
 		},
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
-
-			vim.g.lualine_add(
-				"sections",
-				"lualine_y", -- same section as diff count
-				{ function() return "" end, cond = function() return vim.b.gitsignsPrevChanges end }
-			)
-		end,
 	},
 }

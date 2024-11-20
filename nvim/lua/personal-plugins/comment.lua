@@ -52,6 +52,17 @@ function M.commentHr()
 	vim.api.nvim_win_set_cursor(0, { startLn + 1, #indent })
 end
 
+function M.duplicateLineAsComment()
+	local comStr = getCommentstr()
+	if not comStr then return end
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local curLine = vim.api.nvim_get_current_line()
+	local indent, content = curLine:match("^(%s*)(.*)")
+	local commentedLine = indent .. comStr:format(content)
+	vim.api.nvim_buf_set_lines(0, lnum - 1, lnum, false, { commentedLine, curLine })
+	vim.api.nvim_win_set_cursor(0, { lnum + 1, col })
+end
+
 -- simplified implementation of neogen.nvim
 -- (reason: lsp usually provides better prefills for docstrings)
 function M.docstring()

@@ -2,13 +2,16 @@
 --------------------------------------------------------------------------------
 
 -- DOCS
--- https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
--- https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
+-- short: https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
+-- long: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
 	opacity = 0.92,
 	opts = {
+		options = {
+			styles = { comments = "italic" }
+		},
 		specs = {
 			dawnfox = {
 				-- add more contrast, especially for lualine
@@ -64,21 +67,23 @@ local lightTheme = {
 --------------------------------------------------------------------------------
 
 -- DOCS
--- https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
--- https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
+-- Config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+-- Colors: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight",
-	opacity = 0.92,
+	opacity = 0.90,
 	opts = {
 		style = "moon",
 		lualine_bold = true,
+		on_colors = function(colors)
+			colors.git.change = colors.yellow
+			colors.git.add = colors.green2
+		end,
 		on_highlights = function(hl, colors)
 			hl["IndentBlankPluginCustom"] = hl["IblIndent"]
 
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
-			hl["GitSignsChange"] = { fg = colors.yellow }
-			hl["GitSignsAdd"] = { fg = colors.green2 }
 			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
 			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
@@ -89,10 +94,10 @@ local darkTheme = {
 			hl["LspReferenceText"] = {} -- too much noise, as it underlines e.g. strings
 
 			-- color bg, not fg (TODO INFO ERROR WARN)
-			hl["@comment.todo"] = { fg = "#000000", bg = hl["@comment.todo"].fg }
-			hl["@comment.error"] = { fg = "#000000", bg = hl["@comment.error"].fg }
-			hl["@comment.warning"] = { fg = "#000000", bg = hl["@comment.warning"].fg }
-			hl["@comment.note"] = { fg = "#000000", bg = hl["@comment.note"].fg }
+			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
+			hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg }
+			hl["@comment.warning"] = { fg = colors.black, bg = hl["@comment.warning"].fg }
+			hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
 			-- no undercurl
 			hl.DiagnosticUnderlineHint = { underline = true, sp = hl.DiagnosticUnderlineHint.sp }
