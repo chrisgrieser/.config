@@ -7,7 +7,7 @@
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
-	opacity = 0.92,
+	opacity = 0.91,
 	opts = {
 		options = {
 			styles = { comments = "italic" }
@@ -41,24 +41,25 @@ local lightTheme = {
 				["@keyword.operator.python"] = { link = "Operator" },
 
 				-- cursorword
-				["LspReferenceWrite"] = { bg = "", style = "underdashed" },
-				["LspReferenceRead"] = { bg = "", style = "underdotted" },
-				["LspReferenceText"] = { bg = "" }, -- too much noise, as it underlines e.g. strings
+				LspReferenceWrite = { bg = "", style = "underdashed" },
+				LspReferenceRead = { bg = "", style = "underdotted" },
+				LspReferenceText = { bg = "" }, -- too much noise, as it underlines e.g. strings
 
 				-- no undercurl
-				["DiagnosticUnderlineHint"] = { style = "underline" },
-				["DiagnosticUnderlineInfo"] = { style = "underline" },
-				["DiagnosticUnderlineWarn"] = { style = "underline" },
-				["DiagnosticUnderlineError"] = { style = "underline" },
-				["SpellBad"] = { style = "underdotted" },
-				["SpellCap"] = { style = "underdotted" },
-				["SpellRare"] = { style = "underdotted" },
+				DiagnosticUnderlineHint = { style = "underline" },
+				DiagnosticUnderlineInfo = { style = "underline" },
+				DiagnosticUnderlineWarn = { style = "underline" },
+				DiagnosticUnderlineError = { style = "underline" },
+				SpellBad = { style = "underdotted" },
+				SpellCap = { style = "underdotted" },
+				SpellRare = { style = "underdotted" },
+				SpellLocal = { style = "underdotted" },
 
 				-- add contrast to SnacksNotifier
-				["SnacksNotifierIconDebug"] = { link = "Comment" },
-				["SnacksNotifierTitleDebug"] = { link = "Comment" },
-				["SnacksNotifierBorderDebug"] = { link = "Comment" },
-				["SnacksNotifierFooterDebug"] = { link = "Comment" },
+				SnacksNotifierIconDebug = { link = "Comment" },
+				SnacksNotifierTitleDebug = { link = "Comment" },
+				SnacksNotifierBorderDebug = { link = "Comment" },
+				SnacksNotifierFooterDebug = { link = "Comment" },
 			},
 		},
 	},
@@ -71,33 +72,33 @@ local lightTheme = {
 -- Colors: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 local darkTheme = {
 	"folke/tokyonight.nvim",
-	colorscheme = "tokyonight",
-	opacity = 0.90,
+	colorscheme = "tokyonight-moon",
+	opacity = 0.87,
 	opts = {
-		style = "moon",
 		lualine_bold = true,
 		on_colors = function(colors)
 			colors.git.change = colors.yellow
 			colors.git.add = colors.green2
 		end,
 		on_highlights = function(hl, colors)
-			hl["IndentBlankPluginCustom"] = hl["IblIndent"]
+			hl.IndentBlankPluginCustom = hl.IblIndent
 
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
 			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
 			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
-
-			-- cursorword
-			hl["LspReferenceWrite"] = { underdashed = true }
-			hl["LspReferenceRead"] = { underdotted = true }
-			hl["LspReferenceText"] = {} -- too much noise, as it underlines e.g. strings
+			hl["diffAdded"] = { fg = colors.green }
 
 			-- color bg, not fg (TODO INFO ERROR WARN)
 			hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
 			hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg }
 			hl["@comment.warning"] = { fg = colors.black, bg = hl["@comment.warning"].fg }
 			hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
+
+			-- cursorword
+			hl.LspReferenceWrite = { underdashed = true }
+			hl.LspReferenceRead = { underdotted = true }
+			hl.LspReferenceText = {} -- too much noise, as it underlines e.g. strings
 
 			-- no undercurl
 			hl.DiagnosticUnderlineHint = { underline = true, sp = hl.DiagnosticUnderlineHint.sp }
@@ -107,6 +108,7 @@ local darkTheme = {
 			hl.SpellBad = { underdotted = true, sp = hl.SpellBad.sp }
 			hl.SpellCap = { underdotted = true, sp = hl.SpellCap.sp }
 			hl.SpellRare = { underdotted = true, sp = hl.SpellRare.sp }
+			hl.SpellLocal = { underdotted = true, sp = hl.SpellLocal.sp }
 		end,
 	},
 }
