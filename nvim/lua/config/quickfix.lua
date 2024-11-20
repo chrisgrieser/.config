@@ -5,7 +5,7 @@ local keymap = require("config.utils").uniqueKeymap
 keymap("n", "gq", function()
 	local ok = pcall(vim.cmd, "silent cnext") ---@diagnostic disable-line: param-type-mismatch
 	if not ok then
-		vim.notify("Wrapped. ", vim.log.levels.TRACE, { icon = "", style = "minimal" })
+		vim.notify("Wrapped. ", vim.log.levels.TRACE, { icon = "", title = "Quickfix" })
 		vim.cmd.cfirst()
 	end
 end, { desc = " Next quickfix" })
