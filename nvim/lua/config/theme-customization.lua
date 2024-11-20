@@ -41,11 +41,11 @@ local function customHighlights()
 
 	-- Diagnostics: underlines instead of undercurls
 	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
-		-- updateHl("DiagnosticUnderline" .. type, "gui=underline cterm=underline")
+		-- fffff
 	end
 
 	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
-	for _, type in pairs { "Bad", "Cap", "Rare", "Local" } do
+	for _, type in pairs { "BadBad", "Cap", "Rare", "Local" } do
 		-- updateHl("Spell" .. type, "gui=underdotted cterm=underline")
 	end
 
