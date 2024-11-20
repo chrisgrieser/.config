@@ -20,7 +20,7 @@ local specialDirs = {
 
 --------------------------------------------------------------------------------
 
-local insertModeActions = {
+local actions = {
 	["?"] = "which_key",
 	["<Tab>"] = "move_selection_worse",
 	["<S-Tab>"] = "move_selection_better",
@@ -119,7 +119,7 @@ local function telescopeConfig()
 			dynamic_preview_title = true,
 			preview = { timeout = 400, filesize_limit = 1 }, -- ms & Mb
 			borderchars = borderChars,
-			default_mappings = { i = insertModeActions, n = insertModeActions },
+			default_mappings = { i = actions, n = actions },
 			layout_strategy = "horizontal",
 			sorting_strategy = "ascending", -- so layout is consistent with `prompt_position = "top"`
 			layout_config = {
@@ -216,7 +216,7 @@ local function telescopeConfig()
 				show_untracked = true,
 				file_ignore_patterns = {}, -- do not ignore images etc here
 				mappings = {
-					n = {
+					i = {
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
 						["<Space>"] = "git_staging_toggle",

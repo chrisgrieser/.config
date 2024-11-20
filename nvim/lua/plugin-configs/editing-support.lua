@@ -190,7 +190,7 @@ return {
 				variableLog = {
 					lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
 					-- with `snacks.nvim`, move the label to the window title
-					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { ft = "lua", title = "%s" })',
+					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { title = "%s", ft = "lua" })',
 				},
 				-- re-purposing `objectLog` for alternative log statements for these
 				objectLog = {
