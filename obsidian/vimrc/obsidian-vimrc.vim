@@ -234,7 +234,7 @@ nnoremap U <C-r>
 " redo all
 nnoremap ,ur 1000<C-r>
 
-" toggle lowercase/Titlecase
+" toggle lowercase/Capitalize
 exmap toggleLowercaseTitleCase jsfile Meta/vimrc-jsfile.js { toggleLowercaseTitleCase() }
 nnoremap < :toggleLowercaseTitleCase<CR>
 

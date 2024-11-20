@@ -19,7 +19,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("%d instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = ("**%s in %d files:**\n"):format(msg, #changedFiles) .. table.concat(changedFiles, "\n")
+		msg = ("**%s in %d files**\n"):format(msg, #changedFiles) .. table.concat(changedFiles, "\n")
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
