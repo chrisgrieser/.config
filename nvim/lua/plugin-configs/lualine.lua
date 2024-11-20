@@ -199,9 +199,6 @@ vim.g.lualine_add = function(whichBar, whichSection, component)
 	local componentObj = type(component) == "table" and component or { component }
 	table.insert(sectionConfig, 1, componentObj) -- add at beginning of component
 	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
-
-	-- Theming needs to be re-applied, since the lualine-styling can change
-	require("config.theme-customization").themeModifications()
 end
 
 --------------------------------------------------------------------------------
