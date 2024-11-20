@@ -304,6 +304,15 @@ local function telescopeConfig()
 				show_line = false,
 				layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 			},
+			lsp_document_symbols = {
+				prompt_prefix = "󰒕 ",
+			},
+			treesitter = {
+				prompt_prefix = " ",
+				symbols = { "function", "method" },
+				show_line = false,
+				symbol_highlights = { ["function"] = "Function", method = "Method" }, -- FIX broken colors
+			},
 			lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
 				prompt_prefix = "󰒕 ",
 				fname_width = 0, -- can see name in preview title already
@@ -475,6 +484,30 @@ return {
 				mode = "x",
 				desc = "󰭎 Grep selection",
 			},
+			{
+				"gs",
+				function()
+					-- using treesitter symbols instead, since the LSP symbols are crowded
+					-- with anonymous functions
+					if vim.bo.filetype == "lua" then
+						vim.cmd.Telescope("treesitter")
+						return
+					end
+					local symbolFilter = {
+						yaml = { "object", "array" },
+						json = "module",
+						toml = "object",
+						markdown = "string", -- string -> markdown headings
+					}
+					-- stylua: ignore
+					local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
+					local filter = symbolFilter[vim.bo.filetype]
+					local opts = filter and { symbols = filter } or { ignore_symbols = ignoreSymbols }
+					require("telescope.builtin").lsp_document_symbols(opts)
+				end,
+				desc = "󰒕 Symbols",
+			},
+			{ "gs", function() vim.cmd.Telescope("treesitter") end, ft = "lua", desc = " Symbols" },
 		},
 	},
 	{ -- Icon Picker

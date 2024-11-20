@@ -46,13 +46,6 @@ keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })
 
-keymap(
-	"n",
-	"gs",
-	function() require("personal-plugins.magnet").jump() end,
-	{ desc = "󰍇 Magnet" }
-)
-
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
@@ -466,6 +459,7 @@ keymap("n", "<D-v>", "p", { desc = " Paste" }) -- for compatibility with macO
 
 --------------------------------------------------------------------------------
 -- INSPECT
+--- vim.show_pos(bufnr?, row?, col?, filter?)
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })

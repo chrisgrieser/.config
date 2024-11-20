@@ -26,7 +26,7 @@ local function snacksConfig()
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_err_writeln = function(msg)
-		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "text" })
+		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error" })
 	end
 	-----------------------------------------------------------------------------
 
