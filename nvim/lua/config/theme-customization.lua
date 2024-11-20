@@ -1,8 +1,8 @@
 local M = {}
 --------------------------------------------------------------------------------
 
-local lightTheme = require("plugin-configs.themes")[1].colorschemeName
-local darkTheme = require("plugin-configs.themes")[2].colorschemeName
+local lightTheme = require("plugin-configs.themes")[1].colorscheme
+local darkTheme = require("plugin-configs.themes")[2].colorscheme
 local lightOpacity = require("plugin-configs.themes")[1].opacity
 local darkOpacity = require("plugin-configs.themes")[2].opacity
 --------------------------------------------------------------------------------
@@ -57,40 +57,6 @@ local function customHighlights()
 	setHl("LspReferenceText", {}) -- too much noise, as it underlines e.g. strings
 end
 
-function M.themeModifications()
-	local theme = vim.o.background == "light" and lightTheme or darkTheme
-
-	local function revertedTodoComments()
-		local types = { todo = "Hint", error = "Error", warning = "Warn", note = "Info" }
-		local textColor = vim.o.background == "dark" and "#000000" or "#ffffff"
-		for type, altType in pairs(types) do
-			local fg = getHlValue("@comment." .. type, "fg")
-				or getHlValue("Diagnostic" .. altType, "fg")
-			if fg and fg ~= textColor then setHl("@comment." .. type, { bg = fg, fg = textColor }) end
-		end
-	end
-
-	-----------------------------------------------------------------------------
-
-	if theme == "dawnfox" then
-		setHl("ColorColumn", { bg = "#e9dfd2" })
-		setHl("WinSeparator", { fg = "#cfc1b3" })
-		setHl("Operator", { fg = "#846a52" })
-		vim.defer_fn(function()
-			for _, v in pairs(vimModes) do
-				updateHl("lualine_y_diff_modified_" .. v, "guifg=#828208")
-				updateHl("lualine_y_diff_added_" .. v, "guifg=#477860")
-			end
-		end, 100)
-		vim.defer_fn(function() setHl("@ibl.indent.char.1", { fg = "#e0cfbd" }) end, 1)
-
-		-- FIX python highlighting issues
-		setHl("@type.builtin.python", { link = "Typedef" })
-		setHl("@string.documentation.python", { link = "Typedef" })
-		setHl("@keyword.operator.python", { link = "Operator" })
-	end
-end
-
 --------------------------------------------------------------------------------
 
 -- FIX For plugins using backdrop-like effects, there is some winblend bug,
@@ -107,7 +73,7 @@ local function toggleUnderlines()
 	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
-	desc = "User: FIX underlines when backdrop",
+	desc = "User: FIX underlines for backdrop",
 	group = vim.api.nvim_create_augroup("underlinesInBackdrop", {}),
 	callback = function(ctx)
 		-- WinEnter needs a delay so buftype changes set by plugins are picked up
@@ -124,12 +90,9 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 -- not work reliabely due to some colorschemes setting the background themselves
 -- with different timings?
 function M.updateColorscheme()
-	vim.cmd.highlight("clear") -- fixes some issues when switching colorschemes
-
 	vim.cmd.colorscheme(vim.o.background == "dark" and darkTheme or lightTheme)
 	vim.g.neovide_transparency = vim.o.background == "dark" and darkOpacity or lightOpacity
 
-	M.themeModifications()
 	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 end
 
