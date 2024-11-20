@@ -167,7 +167,7 @@ function M.gotoMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 then
-		vim.notify("Not in git repo.", vim.log.levels.WARN, { title = "Git" })
+		vim.notify("Not in git repo.", vim.log.levels.WARN, { title = "Most changed file" })
 		return
 	end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })

@@ -14,7 +14,7 @@ local function snacksConfig()
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_echo = function(chunks, _, _)
-		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
+		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join("")
 		local opts = { title = "Echo", icon = "" }
 		local severity = "DEBUG"
 		if msg:lower():find("hunk") then
@@ -46,7 +46,7 @@ local function snacksConfig()
 		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
 	end
 
-	local function stopNkeyOnNoMatch(key)
+	local function nopOnNoMatch(key)
 		local query = vim.fn.getreg("/")
 		local matches = vim.fn.search(vim.fn.getreg("/"), "ncw") -- [n]o move, w/ [c]ursorword, [w]rap
 		if matches == 0 then
@@ -55,8 +55,8 @@ local function snacksConfig()
 		end
 		vim.cmd.normal { key, bang = true }
 	end
-	vim.keymap.set("n", "n", function() stopNkeyOnNoMatch("n") end, { desc = "silent n" })
-	vim.keymap.set("n", "N", function() stopNkeyOnNoMatch("N") end, { desc = "silent N" })
+	vim.keymap.set("n", "n", function() nopOnNoMatch("n") end, { desc = "silent n" })
+	vim.keymap.set("n", "N", function() nopOnNoMatch("N") end, { desc = "silent N" })
 
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
 		desc = "User: Increase cmdline-height when in cmdline (silence enter-prompt 1/2)",

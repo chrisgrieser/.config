@@ -312,12 +312,12 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 		if visualDistanceToEof < scrolloff then
 			local winView = vim.fn.winsaveview()
 			vim.fn.winrestview { topline = winView.topline + scrolloff - visualDistanceToEof }
+		end
 
-			-- TEST for scrolloff changes
-			if vim.o.scrolloff == 0 then
-				local msg = "Changed to " .. vim.o.scrolloff
-				vim.notify(msg, vim.log.levels.WARN, { title = "scrolloff" })
-			end
+		-- TEST for scrolloff changes
+		if vim.o.scrolloff == 0 then
+			local msg = "Changed to " .. vim.o.scrolloff
+			vim.notify(msg, vim.log.levels.WARN, { title = "scrolloff" })
 		end
 	end,
 })
