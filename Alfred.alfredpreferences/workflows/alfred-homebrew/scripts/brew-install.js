@@ -93,8 +93,6 @@ function run() {
 	const installedPackages = app
 		.doShellScript('cd "$(brew --prefix)" ; ls -1 ./Cellar ; ls -1 ./Caskroom')
 		.split("\r");
-	// biome-ignore lint/suspicious/noConsoleLog: intentional
-	console.log("👾 installedPackages:", installedPackages.length);
 
 	// 3. DOWNLOAD COUNTS (cached by this workflow)
 	// DOCS https://formulae.brew.sh/analytics/
@@ -103,7 +101,7 @@ function run() {
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	if (cacheIsOutdated(cask90d)) {
-		// biome-ignore lint/suspicious/noConsoleLog: intentional
+		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("Updating download count cache.");
 		const caskDownloads = httpRequest(
 			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
@@ -124,7 +122,7 @@ function run() {
 	const installedIcon = "✅ ";
 	const deprecatedIcon = "⚠️ ";
 
-	// biome-ignore lint/suspicious/noConsoleLog: intentional
+	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("Caches ready.");
 
 	// 5. CREATE ALFRED ITEMS
