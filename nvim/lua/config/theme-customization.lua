@@ -16,47 +16,6 @@ local function updateHl(hlgroup, changes) vim.cmd.highlight(hlgroup .. " " .. ch
 ---@param changes vim.api.keyset.highlight
 local function setHl(hlgroup, changes) vim.api.nvim_set_hl(0, hlgroup, changes) end
 
----@param hlName string|nil name of highlight group
----@param key "fg"|"bg"|"bold"|nil nil gets whole value
----@nodiscard
----@return string|vim.api.keyset.hl_info|nil -- the value, or nil if hlgroup or key is not available
-local function getHlValue(hlName, key)
-	if not key then return vim.api.nvim_get_hl(0, { name = hlName }) end
-	local hl
-	repeat
-		-- follow linked highlights
-		hl = vim.api.nvim_get_hl(0, { name = hlName })
-		hlName = hl.link
-	until not hl.link
-	local value = hl[key]
-	if not value then return nil end
-	return ("#%06x"):format(value)
-end
-
-local vimModes = { "normal", "visual", "insert", "terminal", "replace", "command", "inactive" }
---------------------------------------------------------------------------------
-
-local function customHighlights()
-	-- Comments: keep color and add underlines
-
-	-- Diagnostics: underlines instead of undercurls
-	for _, type in pairs { "Error", "Warn", "Info", "Hint" } do
-		-- fffff
-	end
-
-	-- Spelling: underdotted instead of undercurls (used only for commit messages though)
-	for _, type in pairs { "BadBad", "Cap", "Rare", "Local" } do
-		-- updateHl("Spell" .. type, "gui=underdotted cterm=underline")
-	end
-
-	-- LSP cursorword
-	setHl("LspReferenceWrite", { underdashed = true }) -- definition
-	setHl("LspReferenceRead", { underdotted = true }) -- reference
-	setHl("LspReferenceText", {}) -- too much noise, as it underlines e.g. strings
-end
-
---------------------------------------------------------------------------------
-
 -- FIX For plugins using backdrop-like effects, there is some winblend bug,
 -- which causes the underlines to be displayed in ugly red. We fix this by
 -- temporarily disabling the underline effects set.
@@ -67,8 +26,8 @@ local function toggleUnderlines()
 	updateHl("@string.special.url.comment", "gui=" .. change)
 	updateHl("@string.special.url.html", "gui=" .. change)
 	updateHl("Underlined", "gui=" .. change)
-	setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" })
-	setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
+	-- setHl("LspReferenceWrite", { underdashed = vim.bo.buftype == "" })
+	-- setHl("LspReferenceRead", { underdotted = vim.bo.buftype == "" })
 end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	desc = "User: FIX underlines for backdrop",
@@ -83,17 +42,14 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 
 --------------------------------------------------------------------------------
 
--- for triggering via hammerspoon, as triggering via `OptionSet` autocmd does
--- not work reliabely due to some colorschemes setting the background themselves
--- with different timings?
+-- For triggering via hammerspoon, as triggering via `OptionSet` autocmd does
+-- not work reliabely.
 function M.updateColorscheme()
 	-- resets colors, so a theme is not affected by a previous themes colors
 	vim.cmd.highlight("clear")
 
 	vim.cmd.colorscheme(vim.o.background == "dark" and darkTheme or lightTheme)
 	vim.g.neovide_transparency = vim.o.background == "dark" and darkOpacity or lightOpacity
-
-	vim.defer_fn(customHighlights, 1) -- after modifications, so the dependent colors work
 end
 
 -- initialize theme on startup

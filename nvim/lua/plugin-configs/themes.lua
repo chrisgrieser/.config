@@ -17,6 +17,8 @@ local lightTheme = {
 		},
 		groups = {
 			dawnfox = {
+				["IndentBlankPluginCustom"] = { fg = "#e0cfbd" },
+
 				["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
 				["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 				["@character.printf"] = { link = "SpecialChar" },
@@ -26,27 +28,26 @@ local lightTheme = {
 				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
 				["@string.special.url.comment"] = { style = "underline" },
 
+				["LspReferenceWrite"] = { underdashed = true },
+				["LspReferenceRead"] = { underdotted = true },
+				["LspReferenceText"] = {}, -- too much noise, as it underlines e.g. strings
+
+				-- python
 				["@type.builtin.python"] = { link = "Typedef" },
 				["@string.documentation.python"] = { link = "Typedef" },
 				["@keyword.operator.python"] = { link = "Operator" },
-				["DummyForIbl"] = { fg = "#e0cfbd" }
+
+				-- no undercurl
+				["DiagnosticUnderlineHint"] = { style = "underline" },
+				["DiagnosticUnderlineInfo"] = { style = "underline" },
+				["DiagnosticUnderlineWarn"] = { style = "underline" },
+				["DiagnosticUnderlineError"] = { style = "underline" },
+				["SpellBad"] = { style = "underdotted" },
+				["SpellCap"] = { style = "underdotted" },
+				["SpellRare"] = { style = "underdotted" },
 			},
 		},
 	},
-	init = function(plugin)
-		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-			pattern = plugin.colorscheme,
-			desc = "User: Changes for " .. plugin.colorscheme,
-			callback = function()
-				vim.defer_fn(function()
-					if vim.g.colors_name ~= plugin.colorscheme then return end
-
-					-- fix indent-blank-line color
-					vim.api.nvim_set_hl(0, "@ibl.indent.char.1", { fg = "#e0cfbd" })
-				end, 350)
-			end,
-		})
-	end,
 }
 
 --------------------------------------------------------------------------------
@@ -61,24 +62,34 @@ local darkTheme = {
 	opts = {
 		lualine_bold = true,
 		on_highlights = function(hl, colors)
+			hl["IndentBlankPluginCustom"] = hl["IblIndent"]
+
 			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
 			hl["GitSignsChange"] = { fg = colors.yellow }
-			hl["GitSignsAdd"] = { fg = colors.green1 }
+			hl["GitSignsAdd"] = { fg = colors.green2 }
 			hl["Bold"] = { bold = true } -- FIX bold/italic being white in lazy.nvim window
 			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
 
-			-- TODO INFO ERROR WARN
+			hl["LspReferenceWrite"] = { underdashed = true }
+			hl["LspReferenceRead"] = { underdotted = true }
+			hl["LspReferenceText"] = {} -- too much noise, as it underlines e.g. strings
+
+			-- color bg, not fg (TODO INFO ERROR WARN)
 			hl["@comment.todo"] = { fg = "#000000", bg = hl["@comment.todo"].fg }
 			hl["@comment.error"] = { fg = "#000000", bg = hl["@comment.error"].fg }
 			hl["@comment.warning"] = { fg = "#000000", bg = hl["@comment.warning"].fg }
 			hl["@comment.note"] = { fg = "#000000", bg = hl["@comment.note"].fg }
 
+			-- no undercurl
+			hl["DiagnosticUnderlineHint"] = { underline = true, sp = hl["DiagnosticUnderlineHint"].sp }
+			hl["DiagnosticUnderlineInfo"] = { underline = true, sp = hl["DiagnosticUnderlineInfo"].sp }
+			hl["DiagnosticUnderlineWarn"] = { underline = true, sp = hl["DiagnosticUnderlineWarn"].sp }
 			hl["DiagnosticUnderlineError"] =
 				{ underline = true, sp = hl["DiagnosticUnderlineError"].sp }
-			hl["DiagnosticUnderlineWarn"] = { underline = true, sp = hl["DiagnosticUnderlineWarn"].sp }
-			hl["DiagnosticUnderlineInfo"] = { underline = true, sp = hl["DiagnosticUnderlineInfo"].sp }
-			hl["DiagnosticUnderlineHint"] = { underline = true, sp = hl["DiagnosticUnderlineHint"].sp }
+			hl["SpellBad"] = { underdotted = true, sp = hl["SpellBad"].sp }
+			hl["SpellCap"] = { underdotted = true, sp = hl["SpellCap"].sp }
+			hl["SpellRare"] = { underdotted = true, sp = hl["SpellRare"].sp }
 		end,
 	},
 }
