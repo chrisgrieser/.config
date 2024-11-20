@@ -1,4 +1,4 @@
--- INFO `colorschemeName` relevant for `theme-customization.lua`
+-- INFO `colorscheme` and `opacity` keys used for `colorscheme.lua`, not lazy.nvim
 --------------------------------------------------------------------------------
 
 -- DOCS
@@ -68,9 +68,10 @@ local lightTheme = {
 -- https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 local darkTheme = {
 	"folke/tokyonight.nvim",
-	colorscheme = "tokyonight-moon",
-	opacity = 0.93,
+	colorscheme = "tokyonight",
+	opacity = 0.92,
 	opts = {
+		style = "moon",
 		lualine_bold = true,
 		on_highlights = function(hl, colors)
 			hl["IndentBlankPluginCustom"] = hl["IblIndent"]
@@ -94,14 +95,13 @@ local darkTheme = {
 			hl["@comment.note"] = { fg = "#000000", bg = hl["@comment.note"].fg }
 
 			-- no undercurl
-			hl["DiagnosticUnderlineHint"] = { underline = true, sp = hl["DiagnosticUnderlineHint"].sp }
-			hl["DiagnosticUnderlineInfo"] = { underline = true, sp = hl["DiagnosticUnderlineInfo"].sp }
-			hl["DiagnosticUnderlineWarn"] = { underline = true, sp = hl["DiagnosticUnderlineWarn"].sp }
-			hl["DiagnosticUnderlineError"] =
-				{ underline = true, sp = hl["DiagnosticUnderlineError"].sp }
-			hl["SpellBad"] = { underdotted = true, sp = hl["SpellBad"].sp }
-			hl["SpellCap"] = { underdotted = true, sp = hl["SpellCap"].sp }
-			hl["SpellRare"] = { underdotted = true, sp = hl["SpellRare"].sp }
+			hl.DiagnosticUnderlineHint = { underline = true, sp = hl.DiagnosticUnderlineHint.sp }
+			hl.DiagnosticUnderlineInfo = { underline = true, sp = hl.DiagnosticUnderlineInfo.sp }
+			hl.DiagnosticUnderlineWarn = { underline = true, sp = hl.DiagnosticUnderlineWarn.sp }
+			hl.DiagnosticUnderlineError = { underline = true, sp = hl.DiagnosticUnderlineError.sp }
+			hl.SpellBad = { underdotted = true, sp = hl.SpellBad.sp }
+			hl.SpellCap = { underdotted = true, sp = hl.SpellCap.sp }
+			hl.SpellRare = { underdotted = true, sp = hl.SpellRare.sp }
 		end,
 	},
 }
