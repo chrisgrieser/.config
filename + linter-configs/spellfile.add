@@ -7,6 +7,7 @@ yq
 et
 al
 iA
+un
 JXA
 LSP
 Lua
@@ -156,6 +157,7 @@ genghis
 isekais
 vimdocs
 centric
+tinygit
 DataLoom
 Dataview
 Filepath
@@ -205,6 +207,7 @@ endhints
 rulebook
 quickfix
 globbing
+prefills
 Blazingly
 Filetypes
 Justfiles
@@ -273,6 +276,7 @@ lookaheads
 templating
 prepending
 formatters
+Performant
 Automagical
 Hammerspoon
 autocommand
@@ -320,3 +324,4 @@ TypeScriptReact
 Customizability
 customizability
 filetype-specific
+namespaces

@@ -15,7 +15,10 @@ M.extraTextobjMaps = {
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end
-	vim.keymap.set(mode, lhs, rhs, opts)
+	local ok = pcall(vim.keymap.set, mode, lhs, rhs, opts)
+	if not ok then
+		vim.notify(("Keymap already exists: %s"):format(lhs), vim.log.levels.WARN)
+	end
 end
 
 ---sets `buffer`, `silent` and `nowait` to true
