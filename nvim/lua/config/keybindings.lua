@@ -463,12 +463,12 @@ keymap(
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP var rename" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 keymap(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
-	{ desc = "󰑕 LSP Rename: CamelCase ⇄ snake_case" }
+	{ desc = "󰑕 LSP rename: camelCase ⇄ snake_case" }
 )
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
@@ -478,7 +478,7 @@ local function retabber(use)
 	vim.bo.shiftwidth = 2
 	vim.bo.tabstop = 3
 	vim.cmd.retab { bang = true }
-	vim.notify("Now using " .. use, nil, { title = ":retab" })
+	vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
 end
 keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
 keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
@@ -491,7 +491,7 @@ end, { desc = " Switch quotes in line" })
 
 keymap("n", "<leader>fy", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
-	vim.ui.input({ prompt = "󰅍 yank lines matching:" }, function(input)
+	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
 		if not input then return end
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
