@@ -80,12 +80,11 @@ return {
 			local ccc = require("ccc")
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
-				highlight_mode = "background",
+				highlight_mode = "virtual",
+				virtual_symbol = " ",
 				highlighter = {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
-					max_byte = 100 * 1024, -- 100kb
-					update_insert = false,
 				},
 				pickers = { -- what colors are highlighted
 					ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
