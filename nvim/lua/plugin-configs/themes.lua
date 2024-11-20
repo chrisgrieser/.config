@@ -69,7 +69,7 @@ local lightTheme = {
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
-	opacity = 0.95,
+	opacity = 0.93,
 	opts = {
 		lualine_bold = true,
 		on_highlights = function(hl, colors)

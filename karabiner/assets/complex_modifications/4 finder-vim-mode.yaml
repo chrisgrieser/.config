@@ -730,10 +730,22 @@ rules:
         to_if_alone:
           - shell_command: |
               osascript -e '
-                tell application "Finder"
-                  set thisFolder to the target of the Finder window 1 as alias
-                  set newFile to (make new file at thisFolder)
-                  select newFile
+                tell application "Finder" 
+                  -- create new file 
+                  activate 
+                  set thisFolder to the target of the Finder window 1 as alias 
+                  set newFile to (make new file at thisFolder) 
+                  select newFile 
+
+                  -- trigger rename once file is selected 
+                  set i to 0 
+                  set selectedFile to "" 
+                  repeat until (selectedFile is newFile) 
+                    set selectedFile to (item 1 of (get selection)) 
+                    delay 0.1 
+                    if i > 25 then exit repeat 
+                  end repeat 
+                  tell application "System Events" to key code 36 -- 36 = enter  
                 end tell
               '
 
@@ -742,10 +754,6 @@ rules:
               [[ "$current_vol" == "missing value" ]] && current_vol=50
               vol_percent=$(echo "scale=2 ; $current_vol / 100" | bc) # afplay play with 100% volume by default
               afplay --volume "$vol_percent" "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/begin_record.caf" &
-
-              # rename
-              sleep 0.1 # ensure file is created & selected
-              osascript -e 'tell application "System Events" to key code 36' # 36 = `enter`
           - *enter-insert-mode # since renaming is triggered
           - *insert-notice
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
