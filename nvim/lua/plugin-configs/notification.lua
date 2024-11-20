@@ -13,17 +13,17 @@ local function snacksConfig()
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
-	-- vim.api.nvim_echo = function(chunks, _, _)
-	-- 	local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
-	-- 	local opts = { title = "Echo", icon = "" }
-	-- 	local severity = "DEBUG"
-	-- 	if msg:lower():find("hunk") then
-	-- 		msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
-	-- 		opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
-	-- 		severity = "TRACE"
-	-- 	end
-	-- 	vim.notify(vim.trim(msg), vim.log.levels[severity], opts)
-	-- end
+	vim.api.nvim_echo = function(chunks, _, _)
+		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join(" ")
+		local opts = { title = "Echo", icon = "" }
+		local severity = "DEBUG"
+		if msg:lower():find("hunk") then
+			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
+			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
+			severity = "TRACE"
+		end
+		vim.notify(vim.trim(msg), vim.log.levels[severity], opts)
+	end
 	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_err_writeln = function(msg)
 		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error", ft = "text" })

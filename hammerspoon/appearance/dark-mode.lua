@@ -31,7 +31,7 @@ function M.setDarkMode(toMode)
 	hs.execute(u.exportPath .. "sketchybar --reload")
 
 	-- neovim
-	local nvimLuaCmd = [[<cmd>lua require('config.theme-customization').updateColorscheme()<CR>]]
+	local nvimLuaCmd = [[<cmd>lua require('config.colorscheme').set()<CR>]]
 	local shellCmd = ("nvim --server '/tmp/nvim_server.pipe' --remote-send %q"):format(nvimLuaCmd)
 	hs.execute(u.exportPath .. shellCmd)
 

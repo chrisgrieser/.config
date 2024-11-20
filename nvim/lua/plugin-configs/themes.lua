@@ -12,7 +12,7 @@ local lightTheme = {
 		specs = {
 			dawnfox = {
 				-- add more contrast, especially for lualine
-				git = { changed = "#828208", add = "#4a7e65" },
+				git = { changed = "#b2770a", add = "#4a7e65" },
 			},
 		},
 		groups = {
@@ -25,17 +25,22 @@ local lightTheme = {
 				["ColorColumn"] = { bg = "#e9dfd2" },
 				["WinSeparator"] = { fg = "#cfc1b3" },
 				["Operator"] = { fg = "#846a52" },
-				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
 				["@string.special.url.comment"] = { style = "underline" },
 
-				["LspReferenceWrite"] = { underdashed = true },
-				["LspReferenceRead"] = { underdotted = true },
-				["LspReferenceText"] = {}, -- too much noise, as it underlines e.g. strings
+				-- markdown
+				["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
+				["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
+				["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
 
 				-- python
 				["@type.builtin.python"] = { link = "Typedef" },
 				["@string.documentation.python"] = { link = "Typedef" },
 				["@keyword.operator.python"] = { link = "Operator" },
+
+				-- cursorword
+				["LspReferenceWrite"] = { bg = "", style = "underdashed" },
+				["LspReferenceRead"] = { bg = "", style = "underdotted" },
+				["LspReferenceText"] = { bg = "" }, -- too much noise, as it underlines e.g. strings
 
 				-- no undercurl
 				["DiagnosticUnderlineHint"] = { style = "underline" },
@@ -45,6 +50,12 @@ local lightTheme = {
 				["SpellBad"] = { style = "underdotted" },
 				["SpellCap"] = { style = "underdotted" },
 				["SpellRare"] = { style = "underdotted" },
+
+				-- add contrast to SnacksNotifier
+				["SnacksNotifierIconDebug"] = { link = "Comment" },
+				["SnacksNotifierTitleDebug"] = { link = "Comment" },
+				["SnacksNotifierBorderDebug"] = { link = "Comment" },
+				["SnacksNotifierFooterDebug"] = { link = "Comment" },
 			},
 		},
 	},
@@ -71,6 +82,7 @@ local darkTheme = {
 			hl["Italic"] = { italic = true }
 			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
 
+			-- cursorword
 			hl["LspReferenceWrite"] = { underdashed = true }
 			hl["LspReferenceRead"] = { underdotted = true }
 			hl["LspReferenceText"] = {} -- too much noise, as it underlines e.g. strings

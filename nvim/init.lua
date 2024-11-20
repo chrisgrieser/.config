@@ -35,12 +35,13 @@ safeRequire("config.options") -- before lazy, so opts active during plugin insta
 -- e.g. when editing a password with `pass`.
 if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
 
-safeRequire("config.theme-customization")
+safeRequire("config.colorscheme")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
 safeRequire("config.quickfix")
 safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.autocmds")
+safeRequire("config.backdrop-underline-fix")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
