@@ -14,7 +14,7 @@ return {
 			{
 				"b",
 				"<cmd>lua require('spider').motion('b')<CR>",
-				mode = { "n", "x" }, -- not `o`, since mapped to inner bracket
+				mode = { "n", "x" }, -- not `o`, since mapped as textobj
 				desc = "󱇫 beginning of subword",
 			},
 		},
@@ -114,10 +114,7 @@ return {
 			{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = { "x", "o" }, desc = " entire buffer" },
 
 			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󰑀 near EoL" },
-			{ "m", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = { "o", "x" }, desc = "󰅪 to next anyBracket" },
-			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next anyQuote", nowait = true },
-			{ "b", "<cmd>lua require('various-textobjs').anyBracket('inner')<CR>", mode = "o", desc = "󰅪 inner anyBracket" },
-			{ "B", "<cmd>lua require('various-textobjs').anyBracket('outer')<CR>", mode = "o", desc = "󰅪 outer anyBracket" },
+			{ "b", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "󰅪 to next anyBracket" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer anyQuote" },
 

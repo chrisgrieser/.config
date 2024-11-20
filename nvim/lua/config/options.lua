@@ -121,18 +121,6 @@ vim.opt.cmdheight = 0
 
 vim.opt.list = true
 vim.opt.conceallevel = 3
-vim.opt.fillchars:append {
-	eob = " ",
-	fold = " ",
-	-- thick window separators
-	horiz = "▄",
-	vert = "█",
-	horizup = "█",
-	horizdown = "█",
-	vertleft = "█",
-	vertright = "█",
-	verthoriz = "█",
-}
 vim.opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
@@ -141,4 +129,17 @@ vim.opt.listchars = {
 	tab = "│ ", -- mostly overridden by indent-blankline
 	lead = " ",
 	trail = " ",
+}
+vim.opt.fillchars:append {
+	eob = " ",
+	lastline = "++",
+	msgsep = "/",
+	-- thick window separators
+	horiz = "▄",
+	vert = "█",
+	horizup = "█",
+	horizdown = "█",
+	vertleft = "█",
+	vertright = "█",
+	verthoriz = "█",
 }
