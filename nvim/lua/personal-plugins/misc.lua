@@ -42,7 +42,7 @@ function M.startOrStopRecording(toggleKey, reg)
 		if macro ~= "" then
 			vim.fn.setreg(reg, macro)
 			local msg = vim.fn.keytrans(macro)
-			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰕧" })
+			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
 		else
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
 		end
@@ -77,46 +77,27 @@ function M.toggleOrIncrement()
 end
 
 -- Simplified implementation of coerce.nvim
-function M.camelSnakeToggle()
+function M.camelSnakeLspRename()
 	local cword = vim.fn.expand("<cword>")
-	local newWord
 	local snakePattern = "_(%w)"
 	local camelPattern = "([%l%d])(%u)"
 
 	if cword:find(snakePattern) then
-		newWord = cword:gsub(snakePattern, function(capture) return capture:upper() end)
+		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
+		vim.lsp.buf.rename(camelCased)
 	elseif cword:find(camelPattern) then
-		newWord = cword:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2:lower() end)
+		local snake_cased = cword:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2:lower() end)
+		vim.lsp.buf.rename(snake_cased)
 	else
-		vim.notify("Neither a snake_case nor camelCase", vim.log.levels.WARN)
-		return
+		local msg = "Neither snake_case nor camelCase: " .. cword
+		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
 	end
-
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.api.nvim_win_get_cursor(0)[2] + 1
-	local start, ending
-	while true do
-		start, ending = line:find(cword, ending or 1, true)
-		if start <= col and ending >= col then break end
-	end
-	local newLine = line:sub(1, start - 1) .. newWord .. line:sub(ending + 1)
-	vim.api.nvim_set_current_line(newLine)
 end
 
--- UPPER -> lower -> Title -> UPPER -> …
-function M.toggleWordCasing()
+function M.toggleLowercaseTitleCase()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
-
 	local cword = vim.fn.expand("<cword>")
-	local cmd
-	if cword == cword:upper() then
-		cmd = "guiw"
-	elseif cword == cword:lower() then
-		cmd = "guiwgUl"
-	else
-		cmd = "gUiw"
-	end
-
+	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
 	vim.cmd.normal { cmd, bang = true }
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
@@ -283,15 +264,13 @@ function M.bufferInfo()
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", "~"),
-		"",
-		"**At cursor**",
-		"[word]      " .. vim.fn.expand("<cword>"),
 		"[node-type] " .. nodeType,
+		""
 	}
 	if #lsps > 0 then
-		vim.list_extend(out, { "", "**Attached LSPs with root**", unpack(lsps) })
+		vim.list_extend(out, { "**Attached LSPs with root**", unpack(lsps) })
 	else
-		vim.list_extend(out, { "", "*No LSPs attached.*" })
+		vim.list_extend(out, { "*No LSPs attached.*" })
 	end
 	local opts = { title = "Buffer info", icon = "󰽙", timeout = false }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)

@@ -84,8 +84,8 @@ local darkTheme = {
 			hl.IndentBlankPluginCustom = hl.IblIndent
 
 			-- general
-			hl["@keyword.return"] = { fg = "#ff45ff", bold = true }
-			hl["@markup.strong"] = { fg = colors.magenta, bold = true }
+			hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
+			hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 			hl["diffAdded"] = { fg = colors.green }
 
 			-- FIX bold/italic being white in lazy.nvim window

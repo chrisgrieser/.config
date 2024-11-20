@@ -75,15 +75,8 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap(
 	"n",
 	"<",
-	function() require("personal-plugins.misc").toggleWordCasing() end,
+	function() require("personal-plugins.misc").toggleLowercaseTitleCase() end,
 	{ desc = "󰬴 Toggle word case" }
-)
-
-keymap(
-	"n",
-	">",
-	function() require("personal-plugins.misc").camelSnakeToggle() end,
-	{ desc = "󰬴 Toggle camel & snake case" }
 )
 
 -- Increment/Decrement, or toggle true/false
@@ -470,7 +463,13 @@ keymap(
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰒕 LSP var rename" })
+keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP var rename" })
+keymap(
+	"n",
+	"<leader>fc",
+	function() require("personal-plugins.misc").camelSnakeLspRename() end,
+	{ desc = "󰑕 LSP Rename: CamelCase ⇄ snake_case" }
+)
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
 ---@param use "spaces"|"tabs"
