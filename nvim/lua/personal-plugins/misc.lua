@@ -44,14 +44,14 @@ function M.startOrStopRecording(toggleKey, reg)
 			local msg = vim.fn.keytrans(macro)
 			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰕧" })
 		else
-			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰕧" })
+			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
 		end
 	end
 	-- sound if on macOS
 	if jit.os == "OSX" then
 		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
 			.. (notRecording and "begin_record.caf" or "end_record.caf")
-		vim.system { "afplay", sound }
+		vim.system { "afplay", sound } -- async
 	end
 end
 

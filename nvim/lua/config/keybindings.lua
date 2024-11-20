@@ -404,11 +404,9 @@ keymap(
 	"n",
 	toggleKey,
 	function() require("personal-plugins.misc").startOrStopRecording(toggleKey, register) end,
-	{ desc = "󰕧 Start/stop recording" }
+	{ desc = "󰑊 Start/stop recording" }
 )
-keymap("n", "9", "@" .. register, { desc = "󰕧 Play recording" })
--- `remap` since using nvim builtin mapping
-keymap("x", "9", "Q", { desc = "󰕧 Play recording on each line", remap = true })
+keymap("n", "9", "@" .. register, { desc = " Play recording" })
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
