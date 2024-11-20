@@ -123,10 +123,6 @@
     "body": "vim.cmd.normal { \"${1:keys}\", bang = true }",
     "prefix": "normal"
   },
-  "normal-1": {
-    "body": "vim.cmd.normal { \"${1:key}\", bang = true }",
-    "prefix": "normal"
-  },
   "plugin spec (lazy.nvim)": {
     "body": [
       "{",
