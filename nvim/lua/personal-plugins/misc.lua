@@ -272,7 +272,7 @@ function M.bufferInfo()
 	else
 		vim.list_extend(out, { "*No LSPs attached.*" })
 	end
-	local opts = { title = "Buffer info", icon = "󰽙", timeout = false }
+	local opts = { title = "Buffer info", icon = "󰽙" }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
 
