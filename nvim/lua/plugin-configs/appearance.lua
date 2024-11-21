@@ -3,6 +3,9 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
 		main = "ibl",
+		-- custom, needs to be defined for every theme. Initialized with
+		-- dummy-value so it does not error when loaded before a colorscheme
+		init = function() vim.api.nvim_set_hl(0, "IndentBlankPluginCustom", { link = "Comment" }) end,
 		opts = {
 			scope = {
 				highlight = "Comment",
@@ -10,7 +13,7 @@ return {
 				show_end = false,
 			},
 			indent = {
-				highlight = "IndentBlankPluginCustom", -- custom, needs to be defined for every theme
+				highlight = "IndentBlankPluginCustom", 
 				char = { "│", "┊" },
 				tab_char = { "│", "┊" },
 			},
@@ -130,7 +133,7 @@ return {
 			---@diagnostic disable: duplicate-set-field
 			vim.ui.select = function(items, opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
-				
+
 				return vim.ui.select(items, opts, on_choice)
 			end
 			vim.ui.input = function(opts, on_choice)

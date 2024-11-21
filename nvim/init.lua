@@ -35,7 +35,6 @@ safeRequire("config.options") -- before lazy, so opts active during plugin insta
 -- e.g. when editing a password with `pass`.
 if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
 
-safeRequire("config.colorscheme")
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
 safeRequire("config.quickfix")
