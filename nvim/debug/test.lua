@@ -11,7 +11,7 @@ vim.lsp.buf_request(0, "textDocument/hover", params, function(err, result)
 	end
 	if #urls == 0 then
 		vim.notify("No URLs found.", nil, { title = "Hover URL", icon = "" })
-	elseif #urls > 1 then
+	elseif #urls == 1 then
 		vim.ui.open(urls[1])
 	else
 		vim.ui.select(urls, { prompt = " Select URL" }, function(url)
