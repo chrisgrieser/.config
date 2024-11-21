@@ -7,8 +7,12 @@ function M.full()
 	-- get history
 	local skipTraceLevel = function(n) return n.level ~= "trace" end
 	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
-	if #history == 0 then return end
-	require("snacks").notifier.hide()
+	if #history == 0 then
+		local opts = { title = "Notification history", icon = "󰎟" }
+		vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
+		return
+	end
+	require("snacks").notifier.hide() -- dismiss all currently open notices
 
 	-- set buffer text
 	local notifyData = {}
@@ -45,7 +49,11 @@ function M.last()
 	local skipTraceLevel = function(n) return n.level ~= "trace" end
 	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
 	local last = history[#history]
-	if not last then return end
+	if not last then
+		local opts = { title = "Last notification", icon = "󰎟" }
+		vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
+		return
+	end
 	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -64,7 +72,10 @@ end
 
 function M.messages()
 	local messages = vim.fn.execute("messages")
-	if messages == "" then return end
+	if messages == "" then
+		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
+		return
+	end
 	local lines = vim.split(vim.trim(messages), "\n")
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)

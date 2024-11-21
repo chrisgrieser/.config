@@ -24,7 +24,7 @@ declare class MacAppObj {
 	};
 
 	doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
-	pathTo(what: "home folder" | "desktop"): string;
+	pathTo(what: "home folder" | "desktop" | "trash"): string;
 
 	setTheClipboardTo(str: string): void;
 	theClipboard(): string;

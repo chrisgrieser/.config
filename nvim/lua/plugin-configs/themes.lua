@@ -7,10 +7,11 @@
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
-	opacity = 0.91,
+	opacity = 0.92,
 	opts = {
 		options = {
-			styles = { comments = "italic" }
+			styles = { comments = "italic" },
+			dim_inactive = true,
 		},
 		specs = {
 			dawnfox = {
@@ -75,10 +76,11 @@ local lightTheme = {
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
-	opacity = 0.87,
+	opacity = 0.89,
 	lazy = false,
 	opts = {
 		lualine_bold = true,
+		dim_inactive = true,
 		on_colors = function(colors)
 			colors.git.change = colors.yellow
 			colors.git.add = colors.green2

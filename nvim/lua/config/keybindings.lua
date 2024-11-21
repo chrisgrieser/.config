@@ -8,7 +8,7 @@ local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
 keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "ZZ", "<cmd>wqall!<CR>", { desc = " Quit" })
+keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end, { desc = " Quit" })
 
 keymap("n", "<leader>pd", function()
 	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
@@ -244,20 +244,20 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 -- CMDLINE
 -- EVAL (better than `:lua = `, since using `vim.notify`)
-vim.api.nvim_create_user_command("Eval", function(ctx)
-	local output = vim.fn.luaeval(ctx.args)
-	vim.notify(
-		vim.inspect(output),
-		vim.log.levels.DEBUG,
-		{ title = "Eval", icon = "󰜎", ft = "lua" }
-	)
-end, { desc = "Eval cmdline", nargs = "+" })
-keymap("n", "<leader>ee", ":Eval ", { desc = "󰜎 Eval" })
+keymap("n", "<leader>ee", function ()
+	vim.ui.input({ prompt = "󰜎 Eval:" }, function(input)
+		if not input then return end
+		local msg = vim.inspect(vim.fn.luaeval(input))
+		local opts = { title = "Eval", icon = "󰜎", ft = "lua" }
+		vim.notify(msg, vim.log.levels.DEBUG, opts)
+	end)
+end, { desc = "󰜎 Eval" })
+
 -- Copy last command
 keymap("n", "<leader>ec", function()
-	local lastCommand = vim.fn.getreg(":"):gsub("^Eval ", "")
-	vim.fn.setreg("+", lastCommand)
-	vim.notify(lastCommand, nil, { title = "Copied", icon = "󰅍" })
+	local last = vim.fn.getreg(":")
+	vim.fn.setreg("+", last)
+	vim.notify(last, nil, { title = "Copied", icon = "󰓗" })
 end, { desc = "󰓗 Copy last command" })
 
 --------------------------------------------------------------------------------
@@ -266,7 +266,6 @@ end, { desc = "󰓗 Copy last command" })
 keymap("n", "<leader>er", function()
 	vim.cmd.update()
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
-
 	if vim.bo.filetype == "lua" then
 		vim.cmd.source()
 	elseif hasShebang then
@@ -281,7 +280,7 @@ end, { desc = "󰜎 Run file" })
 -- WINDOWS
 keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next window" })
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
-keymap({ "n", "x" }, "<C-s>", "<cmd>horizontal split<CR>", { desc = " Horizontal split" })
+keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
 local delta = 5
 keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
