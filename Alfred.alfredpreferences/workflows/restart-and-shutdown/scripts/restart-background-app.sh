@@ -11,6 +11,7 @@ if [[ "$app" == "sketchybar" ]]; then
 	return 0
 elif [[ "$app" == "hammerspoon_reload" ]]; then
 	open -g "hammerspoon://hs-reload"
+	echo -n "🔁 Reloading Hammerspoon" # Alfred notification
 	return 0
 fi
 
