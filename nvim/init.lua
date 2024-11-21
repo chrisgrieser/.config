@@ -33,7 +33,10 @@ safeRequire("config.options") -- before lazy, so opts active during plugin insta
 
 -- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
 -- e.g. when editing a password with `pass`.
-if not vim.env.NO_PLUGINS then safeRequire("config.lazy") end
+if not vim.env.NO_PLUGINS then
+	safeRequire("config.lazy")
+	vim.g.setColorscheme("init")
+end
 
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
