@@ -8,6 +8,7 @@ local darkOpacity = require("plugin-configs.themes")[2].opacity
 
 -- Triggered via hammerspoon, as `OptionSet` autocmd does not work reliabely here
 function M.set()
+	if vim.env.NO_PLUGINS then return end
 	-- resets colors, so a theme is not affected by a previous themes colors
 	vim.cmd.highlight("clear")
 
