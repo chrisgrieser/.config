@@ -76,23 +76,27 @@ local function toggleHiddenAction(prompt_bufnr)
 		find_command = findCommand,
 		cwd = cwd,
 		file_ignore_patterns = ignore,
-		path_display = { "filename_first" }, -- cannot easily actual path_display
+		path_display = { "filename_first" },
 	}
 end
 
 local function copyColorValue(prompt_bufnr)
 	local hlName = require("telescope.actions.state").get_selected_entry().value
 	require("telescope.actions").close(prompt_bufnr)
-	local value = vim.api.nvim_get_hl(0, { name = hlName })
-	local out = {}
-	if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
-	if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-	if value.link then table.insert(out, value.link) end
-	if #out > 0 then
-		local toCopy = table.concat(out, "\n")
-		vim.fn.setreg("+", toCopy)
-		vim.notify(toCopy, nil, { title = "Copied", icon = "" })
-	end
+	local hlValue = vim.api.nvim_get_hl(0, { name = hlName })
+	local out = vim.iter(hlValue):fold({}, function(acc, key, val)
+		if key == "link" then acc.link = val end
+		if key == "fg" then acc.fg = ("#%06x"):format(val) end
+		if key == "bg" then acc.bg = ("#%06x"):format(val) end
+		return acc
+	end)
+	if vim.tbl_isempty(out) then return end
+
+	local values = table.concat(vim.tbl_values(out), "\n")
+	local keys = table.concat(vim.tbl_keys(out), " & ")
+	vim.fn.setreg("+", values)
+	local msg = ("**%s**\n%s"):format(keys, values)
+	vim.notify(msg, nil, { title = "Copied", icon = "" })
 end
 
 --------------------------------------------------------------------------------
