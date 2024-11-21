@@ -1,6 +1,3 @@
--- INFO `colorscheme` and `opacity` keys used for `colorscheme.lua`, not lazy.nvim
---------------------------------------------------------------------------------
-
 -- DOCS
 -- config: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
 -- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
@@ -129,8 +126,27 @@ local darkTheme = {
 		end,
 	},
 }
+--------------------------------------------------------------------------------
+-- TOGGLE LIGHT/DARK
+
+-- Triggered via hammerspoon, as `OptionSet` autocmd does not work reliabely here
+vim.g.setColorscheme = function()
+	vim.cmd.highlight("clear") -- resets theme, so next theme isn't affected by previous one
+	local theme = (vim.o.background == "dark" and darkTheme or lightTheme)
+	vim.cmd.colorscheme(theme.colorscheme)
+	vim.g.neovide_transparency = theme.opacity
+end
+
+-- initialize
+-- * deferred, so lazy.nvim loads the spec before the colorscheme is set
+-- * vim.o.background must be set initially as Neovide does not set it in time
+vim.defer_fn(function ()
+	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+	vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
+	vim.g.setColorscheme()
+end, 1)
 
 --------------------------------------------------------------------------------
 darkTheme.priority = 1000 -- https://lazy.folke.io/spec/lazy_loading#-colorschemes
 lightTheme.priority = 1000
-return { lightTheme, darkTheme } -- order relevant for `theme-customization.lua`
+return { lightTheme, darkTheme }
