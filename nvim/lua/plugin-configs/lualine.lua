@@ -156,7 +156,7 @@ local lualineConfig = {
 			{ lspProgress },
 			{
 				"diagnostics",
-				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰮦 " },
+				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 			{ newlineCharIfNotUnix },
 			{ irregularWhitespace },
