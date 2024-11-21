@@ -41,6 +41,15 @@ function errorItem(msg) {
 	return JSON.stringify({ items: [{ title: msg, valid: false }] });
 }
 
+/** @return {string} path */
+function getTrashPath() {
+	const macosVersion = Number.parseFloat(app.systemInfo().systemVersion);
+	let trashLocation = "$HOME/Library/Mobile Documents/";
+	// location dependent on macOS version: https://github.com/chrisgrieser/alfred-quick-file-access/issues/4
+	if (macosVersion < 15) trashLocation += "com~apple~CloudDocs/";
+	const quotedTrashPath = `"${trashLocation}.Trash"`;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 const rgIgnoreFile =
@@ -80,10 +89,9 @@ const searchConfig = {
 		shallowOutput: true,
 	},
 	[$.getenv("trash_keyword")]: {
-		// PERF `-maxdepth 1 -mindepth 1` is faster than `-depth 1`
-		// INFO not using `rg`, since it will not find folders
-		shellCmd:
-			'find "$HOME/.Trash" "$HOME/Library/Mobile Documents/.Trash" -maxdepth 1 -mindepth 1',
+		// - `-maxdepth 1 -mindepth 1` is faster than `-depth 1` PERF
+		// - not using `rg`, since it will not find folders
+		shellCmd: `find "$HOME/.Trash" "${getTrashPath()}" -maxdepth 1 -mindepth 1`,
 		absPathOutput: true,
 		shallowOutput: true,
 	},
@@ -127,7 +135,7 @@ function run() {
 	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
 	// biome-ignore lint/suspicious/noConsole: intentional
-	console.log("STDOUT\n" + stdout.slice(0, 1000));
+	console.log("STDOUT (shortened)\n" + stdout.slice(0, 1000));
 	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS
