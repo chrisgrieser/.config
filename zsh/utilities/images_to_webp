@@ -16,19 +16,14 @@ echo
 #───────────────────────────────────────────────────────────────────────────────
 
 setopt nonomatch # missing extensions do not throw error
+
 # shellcheck disable=2012
 total=$(ls ./**/*.{png,jpeg,jpg} | wc -l | tr -d ' ')
 i=1
-for filename in **/*.{png,jpeg,jpg}; do
+for filename in **/*.{png,jpeg,jpg,tiff}; do
 	printf "\r\e[0;34m%s/%s\e[0m " "$i" "$total"
 	((i++))
 	cwebp -quiet "$filename" -o "${filename:r}.webp" && rm "$filename"
 done
 setopt nomatch
 
-#───────────────────────────────────────────────────────────────────────────────
-# for renaming references to png/jpeg files in markdown files
-# sr '\.(?:png|jpe?g)([|\]) ])' '.webp$1' ./**/*.md
-
-# CAVEAT also affects external links to images, check if there are any via
-# rg 'http:.*(png|jpe?g)'
