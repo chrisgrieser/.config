@@ -129,22 +129,19 @@ local darkTheme = {
 --------------------------------------------------------------------------------
 -- TOGGLE LIGHT/DARK
 
--- Triggered via hammerspoon, as `OptionSet` autocmd does not work reliabely here
-vim.g.setColorscheme = function()
-	vim.cmd.highlight("clear") -- resets theme, so next theme isn't affected by previous one
+-- 1. Triggered on startup in `init.lua`
+-- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliabely)
+vim.g.setColorscheme = function(init)
+	if init then
+		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+		vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
+	else
+		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+	end
 	local theme = (vim.o.background == "dark" and darkTheme or lightTheme)
 	vim.cmd.colorscheme(theme.colorscheme)
 	vim.g.neovide_transparency = theme.opacity
 end
-
--- initialize
--- * deferred, so lazy.nvim loads the spec before the colorscheme is set
--- * vim.o.background must be set initially as Neovide does not set it in time
-vim.defer_fn(function ()
-	local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-	vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
-	vim.g.setColorscheme()
-end, 1)
 
 --------------------------------------------------------------------------------
 darkTheme.priority = 1000 -- https://lazy.folke.io/spec/lazy_loading#-colorschemes

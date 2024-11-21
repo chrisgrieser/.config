@@ -3,9 +3,6 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = "UIEnter",
 		main = "ibl",
-		-- custom, needs to be defined for every theme. Initialized with
-		-- dummy-value so it does not error when loaded before a colorscheme
-		init = function() vim.api.nvim_set_hl(0, "IndentBlankPluginCustom", { link = "Comment" }) end,
 		opts = {
 			scope = {
 				highlight = "Comment",
