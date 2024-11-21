@@ -128,7 +128,7 @@ function M.smartLineDuplicate()
 		if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
 	elseif vim.bo.ft == "lua" then
 		if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
-	elseif vim.bo.ft == "sh" then
+	elseif vim.bo.ft == "zsh" then
 		if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
 	elseif vim.bo.ft == "python" then
 		if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
