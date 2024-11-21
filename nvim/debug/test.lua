@@ -1,1 +1,1 @@
-vim.keymap.set("n", "x", "d")
+vim.notify(--[[🖨️]] vim.inspect(vim), nil, { title = "🖨️ vim", ft = "lua" })
