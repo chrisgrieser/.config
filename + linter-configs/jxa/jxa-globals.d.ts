@@ -19,6 +19,10 @@ declare class MacAppObj {
 	properties(): object; // inspect all properties
 	beep(): void;
 
+	systemInfo(): {
+		systemVersion: string;
+	};
+
 	doShellScript(script: string): string; // DOCS https://developer.apple.com/library/archive/technotes/tn2065/_index.html
 	pathTo(what: "home folder" | "desktop"): string;
 
