@@ -8,7 +8,10 @@ app="$1"
 if [[ "$app" == "sketchybar" ]]; then
 	sketchybar --reload
 	echo -n "🔁 Reloading $app" # Alfred notification
-	return
+	return 0
+elif [[ "$app" == "hammerspoon_reload" ]]; then
+	open -g "hammerspoon://hs-reload"
+	return 0
 fi
 
 # RESTART

@@ -567,27 +567,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Current tab not a GitHub Page</string>
-				<key>title</key>
-				<string>⚠️ Error</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -631,6 +610,27 @@
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
 			<string>0115FC58-CCEF-48EC-A08F-A405E8E30891</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Current tab not a GitHub Page</string>
+				<key>title</key>
+				<string>⚠️ Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1642,7 +1642,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>875</real>
+			<real>885</real>
 			<key>ypos</key>
 			<real>265</real>
 		</dict>
@@ -1653,7 +1653,7 @@
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>150</real>
 		</dict>
 		<key>6952186D-DC97-4377-BE52-F76AA93A602C</key>
 		<dict>
@@ -1700,7 +1700,7 @@
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>895</real>
+			<real>885</real>
 			<key>ypos</key>
 			<real>500</real>
 		</dict>
@@ -1733,7 +1733,7 @@
 			<key>xpos</key>
 			<real>725</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>30</real>
 		</dict>
 		<key>B04FEC5B-79E4-407B-ACCE-EAA0C5B81AB8</key>
 		<dict>
@@ -1948,7 +1948,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Depth of the clone (`--shallow={n}`). Set to 0 to not perform shallow cloning.</string>
+			<string>Depth of the clone (`--shallow=n`). Set to 0 to not perform shallow cloning.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1969,7 +1969,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Switch to this branch after cloning, if it exists. (Leave empty to disable.)</string>
+			<string>Switch to this branch after cloning, if it exists. Leave empty to disable.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2004,7 +2004,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>fork when cloning via `⏎⌃`</string>
+				<string>fork when cloning via `⌃⏎`</string>
 			</dict>
 			<key>description</key>
 			<string></string>
@@ -2066,7 +2066,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>After forking, create this branch and switch to it. (Leave empty to disable.)</string>
+			<string>After forking, create this branch and switch to it. Leave empty to disable.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2087,7 +2087,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>GitHub Token. If empty, will fallback to $GITHUB_TOKEN exported in .zshenv. (Only needed for showing notifications via `ghn`.)</string>
+			<string>GitHub Token. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. (Only needed for showing notifications via `ghn`.)</string>
 			<key>label</key>
 			<string>Notifications</string>
 			<key>type</key>
@@ -2097,7 +2097,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.3</string>
+	<string>1.6.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

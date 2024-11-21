@@ -1,1 +1,1 @@
-vim.notify(--[[🖨️]] vim.inspect(vim), nil, { title = "🖨️ vim", ft = "lua" })
+vim.notify("foobar__foobar", nil, { style = "minimal", icon = "A" })
