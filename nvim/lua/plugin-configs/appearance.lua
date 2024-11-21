@@ -128,14 +128,14 @@ return {
 		"stevearc/dressing.nvim",
 		init = function(spec)
 			---@diagnostic disable: duplicate-set-field
-			vim.ui.select = function(...)
+			vim.ui.select = function(items, opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
-				return vim.ui.select(...)
+				
+				return vim.ui.select(items, opts, on_choice)
 			end
-
-			vim.ui.input = function(...)
+			vim.ui.input = function(opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
-				return vim.ui.input(...)
+				return vim.ui.input(opts, on_choice)
 			end
 			---@diagnostic enable: duplicate-set-field
 		end,
