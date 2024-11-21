@@ -2,8 +2,8 @@
 --------------------------------------------------------------------------------
 
 -- DOCS
--- short: https://github.com/EdenEast/nightfox.nvim?tab=readme-ov-file#configuration
--- long: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
+-- config: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
+-- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
 local lightTheme = {
 	"EdenEast/nightfox.nvim",
 	colorscheme = "dawnfox",
@@ -14,8 +14,8 @@ local lightTheme = {
 		},
 		specs = {
 			dawnfox = {
-				-- add more contrast, especially for lualine
-				git = { changed = "#b2770a", add = "#4a7e65" },
+				-- add more contrast, especially for `lualine`
+				git = { changed = "#bc7d0b", add = "#4a7e65" },
 			},
 		},
 		groups = {
@@ -54,11 +54,14 @@ local lightTheme = {
 				SpellRare = { style = "underdotted" },
 				SpellLocal = { style = "underdotted" },
 
-				-- add contrast to SnacksNotifier
-				SnacksNotifierIconDebug = { link = "Comment" },
-				SnacksNotifierTitleDebug = { link = "Comment" },
-				SnacksNotifierBorderDebug = { link = "Comment" },
-				SnacksNotifierFooterDebug = { link = "Comment" },
+				-- add contrast to floating windows
+				SnacksNotifierIconDebug = { fg = "palette.comment" },
+				SnacksNotifierTitleDebug = { fg = "palette.comment" },
+				SnacksNotifierBorderDebug = { link = "FloatBorder" },
+				SnacksNotifierFooterDebug = { fg = "palette.comment" },
+				TelescopeBorder = { link = "FloatBorder" },
+				TelescopeTitle = { fg = "palette.comment" },
+				TelescopeResultsComment = { fg = "palette.comment" },
 			},
 		},
 	},
@@ -67,8 +70,8 @@ local lightTheme = {
 --------------------------------------------------------------------------------
 
 -- DOCS
--- Config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
--- Colors: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
+-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
