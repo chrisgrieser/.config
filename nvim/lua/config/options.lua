@@ -22,7 +22,10 @@ vim.opt.shortmess:append("I") -- no intro message
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
-vim.opt.nrformats = {} -- remove octal and hex from <C-a>/<C-x>
+
+-- treat all numbers as positive, ignoring dashes
+-- this also makes `<C-x>` stop at `0`
+vim.opt.nrformats = { "unsigned" }
 
 vim.opt.autowriteall = true
 
@@ -62,7 +65,7 @@ vim.opt.textwidth = 80
 
 -- mostly set by `editorconfig`, therefore only fallback
 vim.opt.expandtab = false
-vim.opt.tabstop = 3
+vim.opt.tabstop = 3 -- yes, I like my indentation 3 spaces wide
 vim.opt.shiftwidth = 3
 
 vim.opt.shiftround = true

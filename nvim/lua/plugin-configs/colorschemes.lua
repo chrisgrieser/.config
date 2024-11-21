@@ -129,8 +129,8 @@ local darkTheme = {
 --------------------------------------------------------------------------------
 -- TOGGLE LIGHT/DARK
 
--- 1. Triggered on startup in `init.lua`
--- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliabely)
+-- 1. Triggered on startup in `init.lua` (not here, since lazy.nvim didn't load yet)
+-- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliably)
 vim.g.setColorscheme = function(init)
 	if init then
 		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
