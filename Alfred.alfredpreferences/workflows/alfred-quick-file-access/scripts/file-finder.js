@@ -41,13 +41,20 @@ function errorItem(msg) {
 	return JSON.stringify({ items: [{ title: msg, valid: false }] });
 }
 
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
 /** @return {string} path */
-function getTrashPath() {
+function getTrashPathQuoted() {
 	const macosVersion = Number.parseFloat(app.systemInfo().systemVersion);
 	let trashLocation = "$HOME/Library/Mobile Documents/";
 	// location dependent on macOS version: https://github.com/chrisgrieser/alfred-quick-file-access/issues/4
 	if (macosVersion < 15) trashLocation += "com~apple~CloudDocs/";
-	const quotedTrashPath = `"${trashLocation}.Trash"`;
+	const trashPath = trashLocation + ".Trash";
+
+	const userHasIcloudDrive = fileExists(trashPath);
+	if (userHasIcloudDrive) return `"${trashLocation}}"`;
+
+	return "";
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -91,7 +98,7 @@ const searchConfig = {
 	[$.getenv("trash_keyword")]: {
 		// - `-maxdepth 1 -mindepth 1` is faster than `-depth 1` PERF
 		// - not using `rg`, since it will not find folders
-		shellCmd: `find "$HOME/.Trash" "${getTrashPath()}" -maxdepth 1 -mindepth 1`,
+		shellCmd: `find "$HOME/.Trash" ${getTrashPathQuoted()} -maxdepth 1 -mindepth 1`,
 		absPathOutput: true,
 		shallowOutput: true,
 	},

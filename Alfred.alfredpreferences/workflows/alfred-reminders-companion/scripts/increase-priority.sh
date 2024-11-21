@@ -4,9 +4,14 @@
 
 current_prio="$priority"
 [[ "$current_prio" == "none" ]] && new_prio="low"
-[[ "$current_prio" == "low" ]] && new_prio="medium"
+if [[ "$only_low_prio" == "1" ]] ; then
+	[[ "$current_prio" == "low" && "$only_low_prio" == "0" ]] && new_prio="medium"
+else
+fi
 [[ "$current_prio" == "medium" ]] && new_prio="high"
 [[ "$current_prio" == "high" ]] && new_prio="none"
+
+[[ "$current_prio" != "none" && "$only_low_prio" == "1" ]] && new_prio="none"
 
 # HACK since `reminders edit` does not work reliably, we work around it by
 # deleting and then re-creating the reminder

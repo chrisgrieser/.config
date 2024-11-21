@@ -43,6 +43,8 @@ return {
 					local prevCursor = vim.api.nvim_win_get_cursor(0)
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					vim.cmd.normal { "d", bang = true }
+					local line = vim.api.nvim_get_current_line()
+					vim.api.set_current_line(line:gsub("%s+$", ""))
 					vim.api.nvim_win_set_cursor(0, prevCursor)
 				end,
 				desc = "󰆈 Sticky delete comment",
