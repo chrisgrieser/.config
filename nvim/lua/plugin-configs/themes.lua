@@ -11,7 +11,6 @@ local lightTheme = {
 	opts = {
 		options = {
 			styles = { comments = "italic" },
-			dim_inactive = true,
 		},
 		specs = {
 			dawnfox = {

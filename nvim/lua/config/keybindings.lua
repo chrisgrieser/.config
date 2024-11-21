@@ -195,7 +195,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<D-s>", function()
-	vim.cmd.update()
+	vim.cmd("silent update")
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 	if formattingLsps > 0 then
 		vim.lsp.buf.format()
@@ -211,6 +211,12 @@ end, { desc = "󰒕 Save & Format" })
 -- LSP
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
 keymap({ "n", "x" }, "<leader>hh", vim.lsp.buf.hover, { desc = "󰒕 LSP Hover" })
+keymap(
+	{ "n", "x" },
+	"<leader>hd",
+	function() require("personal-plugins.misc").hoverUrl() end,
+	{ desc = " Hover Documentation URLs" }
+)
 
 keymap("n", "<leader>ol", function()
 	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
@@ -245,7 +251,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 -- CMDLINE
 -- EVAL (better than `:lua = `, since using `vim.notify`)
-keymap("n", "<leader>ee", function ()
+keymap("n", "<leader>ee", function()
 	vim.ui.input({ prompt = "󰜎 Eval:" }, function(input)
 		if not input then return end
 		local msg = vim.inspect(vim.fn.luaeval(input))
@@ -265,7 +271,7 @@ end, { desc = "󰓗 Copy last command" })
 -- RUN
 
 keymap("n", "<leader>er", function()
-	vim.cmd.update()
+	vim.cmd("silent update")
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
 	if vim.bo.filetype == "lua" then
 		vim.cmd.source()
