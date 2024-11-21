@@ -116,8 +116,8 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
-keymap("n", "m", "J", { desc = "󰗈 Merge line up" })
-keymap("n", "M", '"zdd"zpkJ', { desc = "󰗈 Merge line down" })
+keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
+keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
 
 --------------------------------------------------------------------------------
 

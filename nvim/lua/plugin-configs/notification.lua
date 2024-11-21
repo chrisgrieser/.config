@@ -34,6 +34,10 @@ local function snacksConfig()
 	vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
+
+		-- due to the custom formatter in `typescript.lua` using code-actions
+		if vim.bo.ft == "typescript" and msg:find("^No code actions available") then return end
+
 		require("snacks").notifier.notify(msg, ...)
 	end
 
