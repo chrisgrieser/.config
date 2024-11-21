@@ -208,6 +208,8 @@ rulebook
 quickfix
 globbing
 prefills
+justfile
+subtasks
 Blazingly
 Filetypes
 Justfiles
@@ -277,6 +279,7 @@ templating
 prepending
 formatters
 Performant
+namespaces
 Automagical
 Hammerspoon
 autocommand
@@ -324,5 +327,3 @@ TypeScriptReact
 Customizability
 customizability
 filetype-specific
-namespaces
-justfile
