@@ -41,6 +41,8 @@ css
 vue
 DOI
 LoC
+DNS
+SSL
 APIs
 CLIs
 LSPs
@@ -114,6 +116,8 @@ MAXQDA
 BibTeX
 isekai
 iCloud
+Strato
+greyed
 AniList
 Axelrod
 BibDesk
@@ -210,6 +214,7 @@ globbing
 prefills
 justfile
 subtasks
+Strato's
 Blazingly
 Filetypes
 Justfiles
@@ -280,6 +285,7 @@ prepending
 formatters
 Performant
 namespaces
+CloudFlare
 Automagical
 Hammerspoon
 autocommand
