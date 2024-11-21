@@ -55,7 +55,6 @@ function M.last()
 		return
 	end
 	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
-	vim.notify(--[[🖨️]] vim.inspect(last), nil, { title = "🖨️ last", ft = "lua" })
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
