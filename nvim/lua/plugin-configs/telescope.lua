@@ -87,11 +87,11 @@ local function copyColorValue(prompt_bufnr)
 	local out = {}
 	if value.fg then table.insert(out, ("#%06x"):format(value.fg)) end
 	if value.bg then table.insert(out, ("#%06x"):format(value.bg)) end
-	if value.link then table.insert(out, "link: " .. value.link) end
+	if value.link then table.insert(out, value.link) end
 	if #out > 0 then
 		local toCopy = table.concat(out, "\n")
 		vim.fn.setreg("+", toCopy)
-		vim.notify(toCopy, nil, { title = "Copied", icon = "󰅍" })
+		vim.notify(toCopy, nil, { title = "Copied", icon = "" })
 	end
 end
 
@@ -368,7 +368,7 @@ return {
 					vim.cmd.args("**/*." .. ext) -- open files matching glob
 					vim.cmd.buffer(currentFile) -- stay at original buffer
 					local msg = ("Opened %s %s files."):format(vim.fn.argc(), ext)
-					vim.notify(msg, nil, { title = "󰒕 Diagnostics" })
+					vim.notify(msg, nil, { title = "Workspace diagnostics", icon = "󰋽" })
 
 					vim.cmd.Telescope("diagnostics") -- workspace diagnostics
 				end,

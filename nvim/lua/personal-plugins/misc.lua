@@ -86,7 +86,10 @@ function M.camelSnakeLspRename()
 		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
 		vim.lsp.buf.rename(camelCased)
 	elseif cword:find(camelPattern) then
-		local snake_cased = cword:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2:lower() end)
+		local snake_cased = cword:gsub(
+			camelPattern,
+			function(c1, c2) return c1 .. "_" .. c2:lower() end
+		)
 		vim.lsp.buf.rename(snake_cased)
 	else
 		local msg = "Neither snake_case nor camelCase: " .. cword
@@ -265,7 +268,7 @@ function M.bufferInfo()
 		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", "~"),
 		"[node-type] " .. nodeType,
-		""
+		"",
 	}
 	if #lsps > 0 then
 		vim.list_extend(out, { "**Attached LSPs with root**", unpack(lsps) })
@@ -274,6 +277,29 @@ function M.bufferInfo()
 	end
 	local opts = { title = "Buffer info", icon = "󰽙", timeout = 10000 }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
+end
+
+--------------------------------------------------------------------------------
+
+function M.hoverUrl()
+	local params = vim.lsp.util.make_position_params()
+	vim.lsp.buf_request(0, "textDocument/hover", params, function(err, result)
+		if err then vim.notify(err, vim.log.levels.ERROR, { title = "LSP Hover" }) end
+		local text = result.contents.value ---@cast text string
+		local urls = {}
+		for url in text:gmatch("%l%l%l-://[A-Za-z0-9_%-/.#%%=?&'@+*:]+") do
+			table.insert(urls, url)
+		end
+		if #urls == 0 then
+			vim.notify("No URLs found.", nil, { title = "Hover URL", icon = "" })
+		elseif #urls == 1 then
+			vim.ui.open(urls[1])
+		else
+			vim.ui.select(urls, { prompt = " Select URL:" }, function(url)
+				if url then vim.ui.open(url) end
+			end)
+		end
+	end)
 end
 
 --------------------------------------------------------------------------------
