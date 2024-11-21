@@ -54,14 +54,25 @@ local lightTheme = {
 				SpellRare = { style = "underdotted" },
 				SpellLocal = { style = "underdotted" },
 
-				-- add contrast to floating windows
-				SnacksNotifierIconDebug = { fg = "palette.comment" },
-				SnacksNotifierTitleDebug = { fg = "palette.comment" },
-				SnacksNotifierBorderDebug = { link = "FloatBorder" },
-				SnacksNotifierFooterDebug = { fg = "palette.comment" },
+				-- telescope: increase contrast
 				TelescopeBorder = { link = "FloatBorder" },
 				TelescopeTitle = { fg = "palette.comment" },
 				TelescopeResultsComment = { fg = "palette.comment" },
+
+				-- snacks.nvim
+				SnacksNormal = { link = "NotifyBackground" },
+
+				-- use grey for debug
+				SnacksNotifierTitleDebug = { fg = "palette.comment" },
+				SnacksNotifierIconDebug = { fg = "palette.comment" },
+				SnacksNotifierBorderDebug = { link = "FloatBorder" },
+				SnacksNotifierFooterDebug = { fg = "palette.comment" },
+
+				-- use now unused debug-color for trace to they aren't both grey
+				SnacksNotifierTitleTrace = { link = "NotifyDEBUGTitle" },
+				SnacksNotifierIconTrace = { link = "NotifyDEBUGIcon" },
+				SnacksNotifierBorderTrace = { link = "NotifyDEBUGBorder" },
+				SnacksNotifierFooterTrace = { link = "NotifyDEBUGBorder" },
 			},
 		},
 	},
@@ -79,7 +90,6 @@ local darkTheme = {
 	lazy = false,
 	opts = {
 		lualine_bold = true,
-		dim_inactive = true,
 		on_colors = function(colors)
 			colors.git.change = colors.yellow
 			colors.git.add = colors.green2
