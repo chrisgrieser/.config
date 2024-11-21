@@ -5,15 +5,14 @@
 ]]
 
 return {
-	{
+	{ -- completion engine
 		"saghen/blink.cmp",
 		event = "InsertEnter",
 		version = "v0.*", -- REQUIRED `tag` needed to download pre-built binary
 
 		opts = {
 			highlight = {
-				-- supporting themes: tokyonight
-				-- not supported: nightfox
+				-- supporting: tokyonight, not supported yet: nightfox
 				use_nvim_cmp_as_default = true,
 			},
 			sources = {
@@ -51,8 +50,8 @@ return {
 				documentation = {
 					border = vim.g.borderStyle,
 					min_width = 15,
-					max_width = 45, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
-					max_height = 10,
+					max_width = 50, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
+					max_height = 15,
 					auto_show = true,
 					auto_show_delay_ms = 250,
 				},

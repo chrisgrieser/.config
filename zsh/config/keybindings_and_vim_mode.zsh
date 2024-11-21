@@ -78,17 +78,15 @@ bindkey -M vicmd -s 'Y' 'y$'
 #───────────────────────────────────────────────────────────────────────────────
 # YANK/DELETE to (macOS) system clipboard
 
-function _vi_yank_pbcopy {
-	zle vi-yank
-	print -n "$CUTBUFFER" | pbcopy
-}
+function _vi_yank_pbcopy { zle vi-yank; print -n "$CUTBUFFER" | pbcopy; }
 zle -N _vi_yank_pbcopy
 bindkey -M vicmd 'y' _vi_yank_pbcopy
 
-function _vi_delete_pbcopy {
-	zle vi-delete
-	print -n "$CUTBUFFER" | pbcopy
-}
+function _vi-kill-eol { zle vi-kill-eol; print -n "$CUTBUFFER" | pbcopy; }
+zle -N _vi-kill-eol
+bindkey -M vicmd 'D' _vi-kill-eol
+
+function _vi_delete_pbcopy { zle vi-delete; print -n "$CUTBUFFER" | pbcopy; }
 zle -N _vi_delete_pbcopy
 bindkey -M vicmd 'd' _vi_delete_pbcopy
 
