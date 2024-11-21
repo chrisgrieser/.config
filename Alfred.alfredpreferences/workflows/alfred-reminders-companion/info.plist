@@ -1837,6 +1837,25 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>simplified</string>
+			</dict>
+			<key>description</key>
+			<string>When cycling priority levels via `fn`, only use `none` and `low`.</string>
+			<key>label</key>
+			<string>Priorities</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>only_low_prio</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
 				<string></string>

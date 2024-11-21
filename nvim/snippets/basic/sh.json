@@ -150,7 +150,7 @@
   },
   "if .. then .. else": {
     "body": [
-      "if [[ \"$${1:cond}\" ]]; then",
+      "if [[ \"\\$${1:cond}\" ]]; then",
       "\t$0",
       "else",
       "\t",

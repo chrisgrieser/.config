@@ -35,9 +35,9 @@ const prioIntToStr = {
 // mimic the display of priorities in the Reminders app
 const prioIntToEmoji = {
 	0: "",
-	9: "!",
-	5: "! !",
-	1: "! ! !",
+	9: "❇️",
+	5: "❇️❇️",
+	1: "❇️❇️❇️",
 };
 
 // SIC numbers do not comply with order of priorities…

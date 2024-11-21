@@ -94,7 +94,7 @@ function gc {
 	fi
 
 	# PULL: only if there is a remote tracking branch
-	printf "\e[1;34mPull:\e[0m "
+	print "\e[1;34mPull:\e[0m"
 	if git status --short --branch | grep --fixed-strings --quiet '...'; then
 		git pull --no-progress
 	else

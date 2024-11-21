@@ -86,14 +86,15 @@ return {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
 				},
-				pickers = { -- what colors are highlighted
+				pickers = { -- = what colors are highlighted
 					ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
 					ccc.picker.css_rgb,
 					ccc.picker.css_hsl,
-					ccc.picker.ansi_escape(
-						{ black = "#767676", blue = "#3165ff" }, -- higher contrast
-						{ meaning1 = "bold" }
-					),
+					ccc.picker.ansi_escape({
+						black = "#767676",
+						blue = "#3165ff",
+						background = "", -- transparent when using `virtual_symbol`
+					}, { meaning1 = "bright" }),
 				},
 				alpha_show = "hide", -- hide by default
 				recognize = { output = true }, -- automatically recognize color format under cursor
