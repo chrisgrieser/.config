@@ -1,12 +1,10 @@
 name: Update plugin list in README
 
 on:
-  # twice per month (2:15 at the 2nd and 15th of the month)
   schedule:
-    - cron: "15 2 2,15 * *"
+    - cron: "15 2 * * 3" # once per week on wednesday
 
-  # allow triggering manually
-  workflow_dispatch:
+  workflow_dispatch: {} # allow triggering manually
 
 permissions:
   contents: write
