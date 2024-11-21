@@ -195,6 +195,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<D-s>", function()
+	vim.cmd.update()
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 	if formattingLsps > 0 then
 		vim.lsp.buf.format()
