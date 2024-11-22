@@ -8,7 +8,7 @@ local function snacksConfig()
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
 		if msg:find("^%[nvim%-treesitter%]") then
-			opts = { icon = "", id = "ts-install", style = "minimal" }
+			opts = { icon = "", id = "ts-install", style = "minimal" }
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
