@@ -24,9 +24,6 @@ return {
 						min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
 						score_offset = -1,
 					},
-					path = {
-						opts = { get_cwd = vim.uv.cwd },
-					},
 					buffer = {
 						fallback_for = {}, -- disable being fallback for LSP
 						max_items = 4,
