@@ -317,7 +317,7 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 		-- TEST for scrolloff changes
 		if vim.o.scrolloff == 0 then
 			local msg = "Changed to " .. vim.o.scrolloff
-			vim.notify(msg, vim.log.levels.WARN, { title = "scrolloff" })
+			vim.notify_once(msg, vim.log.levels.WARN, { title = "scrolloff" })
 		end
 	end,
 })

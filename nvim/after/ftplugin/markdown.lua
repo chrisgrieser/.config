@@ -23,19 +23,11 @@ optl.formatoptions:append("o") -- `o` in normal mode
 
 local function autocontinue(key)
 	local comBefore = optl.comments:get()
+	-- stylua: ignore
 	optl.comments = {
-		"b:- [ ]", -- tasks
-		"b:- [x]",
-		"b:\t* [ ]",
-		"b:\t* [x]",
-		"b:*", -- unordered list
-		"b:-",
-		"b:+",
-		"b:\t*", -- indented unordered list
-		"b:\t-",
-		"b:\t+",
-		"b:1.", -- ordered list
-		"b:\t1.", -- indented ordered list
+		"b:- [ ]", "b:- [x]", "b:\t* [ ]", "b:\t* [x]", -- tasks
+		"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
+		"b:1.", "b:\t1.", -- ordered list
 		"n:>", -- blockquotes
 	}
 	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
@@ -48,9 +40,9 @@ bkeymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true }
 --------------------------------------------------------------------------------
 -- HEADINGS
 
--- Jump to next/prev heading
-bkeymap("n", "<C-j>", [[/^#\+ .*<CR>]], { desc = " Next Heading" })
-bkeymap("n", "<C-k>", [[?^#\+ .*<CR>]], { desc = " Prev Heading" })
+-- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next Heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev Heading" })
 
 ---@param dir 1|-1
 local function headingsIncremantor(dir)
