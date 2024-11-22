@@ -417,7 +417,9 @@ return {
 					local ignorePattern =
 						vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 					local cwd = vim.uv.cwd() or ""
-					local relPathCurrent = vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
+					local relPathCurrent = "^"
+						.. vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
+						.. "$"
 					table.insert(ignorePattern, relPathCurrent)
 
 					-- add git info to file

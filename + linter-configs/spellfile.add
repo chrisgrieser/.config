@@ -195,7 +195,6 @@ subwords
 tabstops
 textobjs
 tooltips
-tsconfig
 unminify
 unstaged
 unstages
@@ -253,6 +252,7 @@ backticks
 unescaped
 unordered
 supersets
+Learnings
 Cheatsheet
 Cssclasses
 Soziopolis
@@ -320,6 +320,7 @@ subdirectory
 customizable
 BetterBibTeX
 minimalistic
+reachability
 Strikethrough
 strikethrough
 automagically
