@@ -79,20 +79,20 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next Hunk" },
-			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous Hunk" },
+			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
+			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
-			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame Line" },
-			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame File" },
+			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame line" },
+			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame file" },
 
 			-- UNDO
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage last stage" },
 			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰊢 Unstage buffer" },
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset buffer" },
-			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset Hunk" },
+			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset hunk" },
 
 			-- stylua: ignore end
 			{
