@@ -28,6 +28,7 @@ local spellfixes = {
 	gerne = "genre",
 	hwo = "how",
 	ignroe = "ignore",
+	jsut = "just",
 	keybaord = "keyboard",
 	lien = "line",
 	locla = "local",
