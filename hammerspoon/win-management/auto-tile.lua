@@ -26,7 +26,7 @@ local config = {
 	-- stylua: ignore
 	dontTriggerHiding = {
 		"Alfred", "CleanShot X", "IINA", "Ivory", "pinentry-mac", "Espanso",
-		"Catch", "BetterZip", 
+		"Catch", "BetterZip", "System Preferences",
 		"Slack", -- FIX bug where Slack briefly re-activates when opening link
 	},
 }
@@ -105,7 +105,7 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
 		:subscribe(wf.windowFocused, function() autoTile(appName) end)
 
-	-- hide on deactivation, so sketchybar is not covered
+	-- hide on deactivation (e.g., so sketchybar is not covered)
 	M["appWatcher_" .. appName] = aw.new(function(name, eventType, autoTileApp)
 		local frontApp = hs.application.frontmostApplication()
 		if not frontApp then return end
