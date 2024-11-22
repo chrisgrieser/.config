@@ -8,6 +8,7 @@ et
 al
 iA
 un
+TU
 JXA
 LSP
 Lua
@@ -171,6 +172,7 @@ vimdocs
 centric
 tinygit
 menubar
+sitemap
 DataLoom
 Dataview
 Filepath
@@ -344,4 +346,3 @@ TypeScriptReact
 Customizability
 customizability
 filetype-specific
-sitemap
