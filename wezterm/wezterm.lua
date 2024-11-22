@@ -16,18 +16,18 @@ local lightThemes = {
 	"Bluloco Zsh Light (Gogh)",
 }
 
-local lightOpacity = 0.91
-local darkOpacity = 0.88
+local lightOpacity = 0.90
+local darkOpacity = 0.87
 
 local deviceSpecificConfig = {
 	home = {
 		fontSize = 26.3,
-		maxFps = 180,
+		maxFps = 120,
 		winPos = { x = 708, y = 0, w = 3135 },
 	},
 	office = {
 		fontSize = 27.3,
-		maxFps = 120,
+		maxFps = 90,
 		winPos = { x = 375, y = -100, w = 1675 },
 	},
 	mother = {
@@ -48,7 +48,7 @@ local device = "home"
 if host:find("mini") or host:find("eduroam") then device = "office" end
 if host:find("Mother") then device = "mother" end
 
--- SET WINDOW POSITION ON STARTUP
+-- set window position on startup
 wt.on("gui-startup", function(cmd)
 	-- on start, move window to the side ("pseudo-maximized")
 	local pos = deviceSpecificConfig[device].winPos
