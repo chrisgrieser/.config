@@ -83,8 +83,7 @@ local lightTheme = {
 local darkTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
-	opacity = 0.89,
-	lazy = false,
+	opacity = 0.91,
 	opts = {
 		lualine_bold = true,
 		on_colors = function(colors)
@@ -133,10 +132,12 @@ local darkTheme = {
 -- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliably)
 vim.g.setColorscheme = function(init)
 	if init then
+		-- needs to be set manually, since `Neovide` does not set it in time on startup
 		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
 		vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
 	else
-		vim.cmd.highlight("clear") -- reset so next theme isn't affected by previous one
+		-- reset so next theme isn't affected by previous one
+		vim.cmd.highlight("clear")
 	end
 	local theme = (vim.o.background == "dark" and darkTheme or lightTheme)
 	vim.cmd.colorscheme(theme.colorscheme)
