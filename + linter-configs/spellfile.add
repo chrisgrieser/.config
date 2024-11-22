@@ -44,6 +44,7 @@ LoC
 DNS
 SSL
 TXT
+pdf
 APIs
 CLIs
 LSPs
@@ -165,6 +166,7 @@ isekais
 vimdocs
 centric
 tinygit
+menubar
 DataLoom
 Dataview
 Filepath
@@ -338,3 +340,4 @@ TypeScriptReact
 Customizability
 customizability
 filetype-specific
+jekyll
