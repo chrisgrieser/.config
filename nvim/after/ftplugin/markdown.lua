@@ -4,6 +4,7 @@ local optl = vim.opt_local
 
 optl.expandtab = false
 optl.tabstop = 4 -- less nesting in md
+vim.bo.commentstring = "<--! %s -->" -- add spaces
 
 -- so two trailing spaces highlighted, but not a single trailing space
 optl.listchars:remove("trail")

@@ -474,7 +474,7 @@ keymap(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
-	{ desc = "󰑕 LSP rename: camelCase ⇄ snake_case" }
+	{ desc = "󰑕 LSP rename: camelCase ↔ snake_case" }
 )
 keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
