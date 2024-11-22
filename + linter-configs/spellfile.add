@@ -43,6 +43,7 @@ DOI
 LoC
 DNS
 SSL
+TXT
 APIs
 CLIs
 LSPs
@@ -288,6 +289,7 @@ formatters
 Performant
 namespaces
 CloudFlare
+Quickstart
 Automagical
 Hammerspoon
 autocommand
