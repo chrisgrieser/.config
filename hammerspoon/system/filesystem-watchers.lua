@@ -49,6 +49,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 					zip --recurse-paths ../violentmonkey.zip .
 					cd .. && rm -rf ./violentmonkey
 				]]):format(browserConfigs))
+				u.app("Brave Browser"):activate()
 			end
 		elseif name == "ublacklist-settings.json" then
 			success = os.rename(path, browserConfigs .. name)

@@ -111,7 +111,7 @@ return {
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				[textObjMaps.call] = {
-					find = "[%w.:_]+%b()", -- includes `:` for LUA-methods/CSS-pseudoclasses
+					find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
 					delete = "([%w.:_]+%()().*(%))()",
 				},
 				[textObjMaps.func] = {
@@ -123,6 +123,12 @@ return {
 					-- only one-line lua conditionals
 					find = "if .- then .- end",
 					delete = "(if .- then )().-( end)()",
+				},
+				[textObjMaps.wikilink] = {
+					find = "%[%[.-%]%]",
+					add = { "[[", "]]" },
+					delete = "(%[%[)().-(%]%])()",
+					change = { target = "(%[%[)().-(%]%])()" },
 				},
 			},
 		},
