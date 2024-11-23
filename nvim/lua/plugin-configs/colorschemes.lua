@@ -81,7 +81,7 @@ local lightTheme = {
 -- DOCS
 -- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 -- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
-local otherTheme = {
+local unused = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
 	opacity = 0.91,
@@ -134,12 +134,19 @@ local darkTheme = {
 		vim.g.gruvbox_material_background = "soft"
 		vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
+		vim.g.gruvbox_material_better_performance = 1
 
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			desc = "User: gruvbox material highlights",
 			callback = function()
-				-- FIX lua-globals
-				vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {})
+				-- General
+				vim.api.nvim_set_hl(0, "@keyword.return", { bold = true, fg = "#f6843a" })
+				vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {}) -- FIX lua-globals
+				vim.api.nvim_set_hl(0, "TSPunctBracket", { fg = "#af7e5d" })
+				vim.defer_fn(
+					function() vim.api.nvim_set_hl(0, "@constructor.lua", { fg = "#9b97a8" }) end,
+					1
+				)
 
 				-- cursorword
 				vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true })
@@ -156,7 +163,11 @@ local darkTheme = {
 				vim.cmd.highlight("SpellCap gui=underdotted")
 				vim.cmd.highlight("SpellLocal gui=underdotted")
 
-				-- ["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
+				-- no bold (TODO INFO ERROR WARN)
+				-- vim.api.nvim_set_hl(0, "@comment.todo", { bg = "#7daea3", fg = "#32302f" })
+				-- vim.api.nvim_set_hl(0, "@comment.error", { bg = "#ea6962", fg = "#32302f" })
+				-- vim.api.nvim_set_hl(0, "@comment.warning", { bg = "#d8a657", fg = "#32302f" })
+				-- vim.api.nvim_set_hl(0, "@comment.note", { bg = "#a9b665", fg = "#32302f" })
 			end,
 		})
 	end,
@@ -184,4 +195,4 @@ end
 --------------------------------------------------------------------------------
 darkTheme.priority = 1000 -- https://lazy.folke.io/spec/lazy_loading#-colorschemes
 lightTheme.priority = 1000
-return { lightTheme, darkTheme, otherTheme }
+return { lightTheme, darkTheme }
