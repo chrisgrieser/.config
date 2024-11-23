@@ -125,16 +125,17 @@ local unused = {
 	},
 }
 
+-- DOCS https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
 local darkTheme = {
 	"sainnhe/gruvbox-material",
 	colorscheme = "gruvbox-material",
-	opacity = 0.91,
+	opacity = 0.92,
 	init = function()
-		-- DOCS https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
 		vim.g.gruvbox_material_background = "soft"
+		vim.g.gruvbox_material_ui_contrast = "high"
+		vim.g.gruvbox_material_better_performance = 1
 		vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
-		vim.g.gruvbox_material_better_performance = 1
 
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			desc = "User: gruvbox material highlights",
