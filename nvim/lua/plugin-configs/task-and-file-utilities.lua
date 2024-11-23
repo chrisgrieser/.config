@@ -7,7 +7,7 @@ return {
 		opts = {
 			recipes = {
 				ignore = { "fzf", "release" }, -- ignore since requiring user input
-				streaming = { "streaming", "deploy-update" },
+				streaming = { "streaming", "deploy%-update" },
 				quickfix = { "qf" },
 			},
 			window = {

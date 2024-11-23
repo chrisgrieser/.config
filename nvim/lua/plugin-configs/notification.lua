@@ -36,7 +36,7 @@ local function snacksConfig()
 		if msg:find("^Client marksman quit with exit code 1") then return end
 
 		-- due to the custom formatter in `typescript.lua` using code-actions
-		if vim.bo.ft == "typescript" and msg:find("^No code actions available") then return end
+		if msg:find("^No code actions available") then return end
 
 		require("snacks").notifier.notify(msg, ...)
 	end
