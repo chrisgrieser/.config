@@ -156,7 +156,7 @@ local function telescopeConfig()
 			},
 			-- stylua: ignore
 			file_ignore_patterns = {
-				"%.png$", "%.svg", "%.gif", "%.icns", "%.jpe?g", "%.webp", "%.icns",
+				"%.png$", "%.svg", "%.gif", "%.jpe?g", "%.webp", "%.icns", "%.ico",
 				"%.zip", "%.pdf",
 				unpack(specialDirs), -- needs to be last for correct unpacking
 			},

@@ -38,10 +38,18 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 function gr {
 	local goto="$*"
-	[[ -z "$*" ]] && goto=$(dirs -p | sed -n '2p') # no arg: goto last (1st line = current)
+	local i=2                  # starting at 2, since 1st line = current
+	while [[ -z "$goto" ]]; do # no arg: goto last existing dir
+		goto=$(dirs -p | sed -n "${i}p")
+		[[ -z "$goto" ]] && return 1 # no more existing dirs
+		goto="${goto/#\~/$HOME}"
+		[[ -d "$goto" ]] && break
+		i=$((i + 1))
+	done
 	goto="${goto/#\~/$HOME}"
 	cd "$goto" || return 1
 }
+
 _gr() {
 	[[ $CURRENT -ne 2 ]] && return # only complete first word
 
