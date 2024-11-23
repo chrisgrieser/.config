@@ -5,17 +5,17 @@ return {
 			{ "<leader>j", function() require("justice").select() end, desc = "󰖷 Just" },
 		},
 		opts = {
-			recipes = {
-				ignore = { "fzf", "release" }, -- ignore since requiring user input
-				streaming = { "streaming", "deploy%-update" },
-				quickfix = { "qf" },
+			ignore = {
+				name = { "release", "fzf", "^_" },
+				comment = { "interactive" },
 			},
-			window = {
-				border = vim.g.borderStyle,
+			streaming = {
+				name = { "download" },
+				comment = { "streaming", "curl" },
 			},
-			keymaps = {
-				closeWin = { "q", "<Esc>", "<D-w>" },
-				quickSelect = { "j", "f", "d", "s", "a" },
+			quickfix = {
+				name = { "%-qf$" },
+				comment = { "quickfix" },
 			},
 		},
 	},
