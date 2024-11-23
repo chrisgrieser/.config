@@ -95,7 +95,7 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 		if #masto:allWindows() == 1 and not M.isScrolling then
 			-- GUARD concurrent calls
 			M.isScrolling = true
-			u.defer(10, function() M.isScrolling = false end)
+			u.defer(15, function() M.isScrolling = false end)
 
 			u.defer(1, function()
 				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
