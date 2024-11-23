@@ -97,7 +97,7 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 			M.isScrolling = true
 			u.defer(10, function() M.isScrolling = false end)
 
-			u.defer(0.5, function()
+			u.defer(1, function()
 				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up

@@ -467,7 +467,7 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
--- REFACTORING
+-- REFACTORING,
 
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 keymap(
