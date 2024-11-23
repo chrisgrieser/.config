@@ -93,15 +93,15 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 
 		-- go back to home tab
 		if #masto:allWindows() == 1 and not M.isScrolling then
-			M.isScrolling = true -- GUARD concurrent calls
+			-- GUARD concurrent calls
+			M.isScrolling = true
+			u.defer(10, function() M.isScrolling = false end)
 
 			u.defer(0.5, function()
 				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
 			end)
-
-			u.defer(10, function() M.isScrolling = false end)
 		end
 	end
 end):start()
