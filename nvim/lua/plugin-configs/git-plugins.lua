@@ -26,21 +26,21 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
-			staging = {
+			stage = {
 				contextSize = 2,
 				moveToNextHunkOnStagingToggle = true,
 			},
-			commitMsg = {
-				commitPreview = true,
+			commit = {
+				preview = true,
 				conventionalCommits = { enforce = true },
 				spellcheck = true,
 				keepAbortedMsgSecs = 60 * 10, -- 10 mins
-				insertIssuesOnHash = { enabled = true, next = "#" },
+				insertIssuesOnHashSign = { enabled = true, next = "#" },
 			},
 			push = {
 				openReferencedIssues = true,
 			},
-			historySearch = {
+			history= {
 				autoUnshallowIfNeeded = true,
 				diffPopup = { width = 0.9, height = 0.9, border = vim.g.borderStyle },
 			},
@@ -49,9 +49,6 @@ return {
 					hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
 					maxMsgLen = 50,
-				},
-				branchState = {
-					icons = { diverge = "󰞇 " },
 				},
 			},
 		},
