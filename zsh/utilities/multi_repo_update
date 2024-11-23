@@ -5,17 +5,17 @@
 github_username="chrisgrieser"
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-repo_names="." # all repos
+# repo_names="." # all repos
 
 function actions_in_repo {
-	if [[ -f ./.github/workflows/stale-bot.yml ]] ; then
-		cp -fv "$HOME/Desktop/stale-bot.yml" ./.github/workflows/stale-bot.yml
-	fi
+	git apply "$HOME/Desktop/1.patch"
+	git apply "$HOME/Desktop/2.patch"
+	git apply "$HOME/Desktop/3.patch"
 }
 
-commit_msg="ci(stale-bot): bump version & update weekly instead of daily"
+commit_msg="docs: formatting"
 amend_and_forcepush="false"
 
 #───────────────────────────────────────────────────────────────────────────────
