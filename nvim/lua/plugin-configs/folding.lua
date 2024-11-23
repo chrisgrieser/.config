@@ -41,7 +41,8 @@ return {
 				-- PERF disable folds on `log`, and only use `indent` for `bib` files
 				if ft == "log" then return "" end
 				-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
-				if ft == "" or buftype ~= "" or vim.startswith(ft, "git") or ft == "applescript" then
+				local useIndent = { "csv", "applescript", "conf", "" }
+				if buftype ~= "" or vim.startswith(ft, "git") or vim.tbl_contains(useIndent, ft) then
 					return "indent"
 				end
 				return { "lsp", "treesitter" }

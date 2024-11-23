@@ -47,8 +47,8 @@ return {
 				documentation = {
 					border = vim.g.borderStyle,
 					min_width = 15,
-					max_width = 50, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
-					max_height = 15,
+					max_width = 40, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
+					max_height = 12,
 					auto_show = true,
 					auto_show_delay_ms = 250,
 				},

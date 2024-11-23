@@ -17,7 +17,8 @@ local lightTheme = {
 		},
 		groups = {
 			dawnfox = {
-				["IndentBlankPluginCustom"] = { fg = "#e0cfbd" },
+				-- indent-blank-line: more contrast
+				["IblIndent"] = { fg = "#e0cfbd" },
 
 				-- general
 				["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
@@ -80,7 +81,7 @@ local lightTheme = {
 -- DOCS
 -- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 -- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
-local darkTheme = {
+local otherTheme = {
 	"folke/tokyonight.nvim",
 	colorscheme = "tokyonight-moon",
 	opacity = 0.91,
@@ -91,8 +92,6 @@ local darkTheme = {
 			colors.git.add = colors.green2
 		end,
 		on_highlights = function(hl, colors)
-			hl.IndentBlankPluginCustom = hl.IblIndent
-
 			-- general
 			hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 			hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
@@ -125,6 +124,44 @@ local darkTheme = {
 		end,
 	},
 }
+
+local darkTheme = {
+	"sainnhe/gruvbox-material",
+	colorscheme = "gruvbox-material",
+	opacity = 0.91,
+	init = function()
+		-- DOCS https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
+		vim.g.gruvbox_material_background = "soft"
+		vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
+
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			desc = "User: gruvbox material highlights",
+			callback = function()
+				-- FIX lua-globals
+				vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {})
+
+				-- cursorword
+				vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true })
+				vim.api.nvim_set_hl(0, "LspReferenceRead", { underdotted = true })
+				vim.api.nvim_set_hl(0, "LspReferenceText", {})
+
+				-- no undercurls
+				vim.cmd.highlight("DiagnosticUnderlineError gui=underline")
+				vim.cmd.highlight("DiagnosticUnderlineWarn gui=underline")
+				vim.cmd.highlight("DiagnosticUnderlineInfo gui=underline")
+				vim.cmd.highlight("DiagnosticUnderlineHint gui=underline")
+				vim.cmd.highlight("SpellBad gui=underdotted")
+				vim.cmd.highlight("SpellError gui=underdotted")
+				vim.cmd.highlight("SpellCap gui=underdotted")
+				vim.cmd.highlight("SpellLocal gui=underdotted")
+
+				-- ["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
+			end,
+		})
+	end,
+}
+
 --------------------------------------------------------------------------------
 -- TOGGLE LIGHT/DARK
 
@@ -147,4 +184,4 @@ end
 --------------------------------------------------------------------------------
 darkTheme.priority = 1000 -- https://lazy.folke.io/spec/lazy_loading#-colorschemes
 lightTheme.priority = 1000
-return { lightTheme, darkTheme }
+return { lightTheme, darkTheme, otherTheme }
