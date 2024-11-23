@@ -187,27 +187,21 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
-				variableLog = {
-					lua = 'print("%s %s: " .. hs.inspect(%s))', -- Hammerspoon
-					-- with `snacks.nvim`, move the label to the window title
-					nvim_lua = 'vim.notify(--[[%s]] vim.inspect(%s), nil, { title = "🖨️ %s", ft = "lua" })',
-				},
+				-- don't use any marker
+				assertLog = { lua = 'assert({{var}}, "")' },
+
 				-- re-purposing `objectLog` for alternative log statements for these
 				objectLog = {
 					-- Obsidian Notice
-					typescript = "new Notice(`%s %s: ${%s}`, 0)",
+					typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 					-- AppleScript notification
-					zsh = [[osascript -e "display notification \"%s $%s\" with title \"%s\""]],
+					zsh = [[osascript -e "display notification \"{{marker}}} ${{var}}\" with title \"{{var}}\""]],
 				},
-				assertLog = {
-					lua = 'assert(%s, "")', -- don't use any marker
-				},
-				clearLog = {
-					lua = "hs.console.clearConsole() -- %s", -- Hammerspoon
-				},
-				sound = {
-					lua = 'hs.sound.getByName("Sosumi"):play() -- %s', -- Hammerspoon
-				},
+
+				-- Hammerspoon
+				variableLog = { lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))' },
+				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
+				sound = { lua = 'hs.sound.getByName("Sosumi"):play() -- {{marker}}' },
 			},
 		},
 		keys = {
