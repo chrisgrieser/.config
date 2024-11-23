@@ -10,7 +10,6 @@ return {
 				show_end = false,
 			},
 			indent = {
-				highlight = "IndentBlankPluginCustom", 
 				char = { "│", "┊" },
 				tab_char = { "│", "┊" },
 			},
