@@ -40,7 +40,7 @@ return {
 			push = {
 				openReferencedIssues = true,
 			},
-			history= {
+			history = {
 				autoUnshallowIfNeeded = true,
 				diffPopup = { width = 0.9, height = 0.9, border = vim.g.borderStyle },
 			},

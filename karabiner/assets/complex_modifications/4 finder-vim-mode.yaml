@@ -829,12 +829,12 @@ rules:
         to_if_alone:
           # WARN needs to be written twice, once for German, once for English (see below)
           - shell_command: |
-              SEL=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
+              sel=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
               selection_count=$(osascript -e 'tell application "Finder" to count (selection as list)')
 
-              if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
-                cd "$SEL"
-                foldername=$(basename "$SEL")
+              if [[ -d "$sel" && $selection_count -eq 1 ]] ; then
+                cd "$sel"
+                foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
@@ -855,12 +855,12 @@ rules:
         to:
           # WARN needs to be written twice, once for German, once for English (see above)
           - shell_command: |
-              SEL=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
+              sel=$(osascript -e 'tell application "Finder" to POSIX path of (item 1 of (get selection) as text)')
               selection_count=$(osascript -e 'tell application "Finder" to count (selection as list)')
 
-              if [[ -d "$SEL" && $selection_count -eq 1 ]] ; then
-                cd "$SEL"
-                foldername=$(basename "$SEL")
+              if [[ -d "$sel" && $selection_count -eq 1 ]] ; then
+                cd "$sel"
+                foldername=$(basename "$sel")
                 zip --recurse-paths --symlinks "../$foldername.zip" .
                 open -R "../$foldername.zip"
 
@@ -1317,11 +1317,11 @@ rules:
         from: { key_code: n, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
-              SEL=$(osascript -e 'tell application "Finder"
+              sel=$(osascript -e 'tell application "Finder"
                 set sel to (item 1 of (get selection) as text)
                 return POSIX path of sel
               end tell')
-              filename=$(basename "$SEL")
+              filename=$(basename "$sel")
               printf "$filename" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "✅ Filename copied" --message "$filename"
@@ -1332,11 +1332,11 @@ rules:
         to:
           - shell_command: |
               GIT_OPTIONAL_LOCKS=0
-              SEL=$(osascript -e 'tell application "Finder"
+              sel=$(osascript -e 'tell application "Finder"
                 set sel to (item 1 of (get selection) as text)
                 return POSIX path of sel
               end tell')
-              cd "$(dirname "$SEL")" || exit 1
+              cd "$(dirname "$sel")" || exit 1
               if ! git rev-parse --is-inside-work-tree; then
                 "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "Finder Vim Mode" --message "⚠️ Not in a git repo."
@@ -1344,7 +1344,7 @@ rules:
               fi
               root=$(git rev-parse --show-toplevel)
               root_length=${#root}
-              rel_path=$(echo "$SEL" | cut -c$((root_length + 2))-)
+              rel_path=$(echo "$sel" | cut -c$((root_length + 2))-)
 
               printf "$rel_path" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
@@ -1355,33 +1355,32 @@ rules:
         from: { key_code: g, modifiers: { mandatory: [control] } }
         to:
           - shell_command: |
-              GIT_OPTIONAL_LOCKS=0
-              SEL=$(osascript -e 'tell application "Finder"
+              export GIT_OPTIONAL_LOCKS=0
+              sel=$(osascript -e 'tell application "Finder"
                 set sel to (item 1 of (get selection) as text)
                 return POSIX path of sel
               end tell')
-              if [[ ! -f "$SEL" ]] ; then
+              if [[ ! -f "$sel" ]] ; then
                 "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "Finder Vim Mode" --message "⚠️ Selection not a file."
                 exit 1
               fi
-              cd "$(dirname "$SEL")" || exit 1
+              cd "$(dirname "$sel")" || exit 1
               if ! git rev-parse --is-inside-work-tree ; then
                 "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                   --title "Finder Vim Mode" --message "⚠️ File not in a git repo."
                 exit 1
               fi
 
-              BRANCH=$(git branch --show-current)
-              ROOT_PATH=$(git rev-parse --show-toplevel)
-              ROOT_LEN=${#ROOT_PATH}
-              REMOTE_URL="$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e's/:/\//' -e 's/git@/https:\/\//' -e 's/\.git//')"
-              PATH_IN_REPO=${SEL:$ROOT_LEN}
-              PATH_IN_REPO=$(osascript -l JavaScript -e "encodeURIComponent('$PATH_IN_REPO')")
+              branch=$(git branch --show-current)
+              root_len=$(git rev-parse --show-toplevel | wc -c)
+              remote_url="$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.git$||')"
+              path_in_repo=${sel:$root_len}
+              path_in_repo=$(osascript -l JavaScript -e "encodeURIComponent('$path_in_repo')")
 
-              URL="$REMOTE_URL/blob/$BRANCH/$PATH_IN_REPO"
-              printf "$URL" | pbcopy
-              open "$URL"
+              url="$remote_url/blob/$branch/$path_in_repo"
+              printf "$url" | pbcopy
+              open "$url"
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ GitHub URL copied" --message "$URL"
+                  --title "✅ GitHub URL copied" --message "$url"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
