@@ -92,7 +92,8 @@ function M.messages()
 		vim.fn.matchadd("ErrorMsg", [[E\d\+:.*]])
 		vim.fn.matchadd("ErrorMsg", [[^Error .*]])
 		vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-		vim.fn.matchadd("WarningMsg", "stack traceback")
+		-- `\_.` matches any char, including newline
+		vim.fn.matchadd("WarningMsg", [[^stack traceback\_.*\n\t.*]])
 	end)
 end
 

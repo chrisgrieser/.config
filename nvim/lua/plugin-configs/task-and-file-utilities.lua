@@ -7,7 +7,7 @@ return {
 		opts = {
 			recipes = {
 				ignore = {
-					name = { "release", "fzf", "^_" },
+					name = { "release", "^_" },
 					comment = { "interactive" },
 				},
 				streaming = {
