@@ -491,6 +491,16 @@ return {
 				desc = "󰭎 Grep selection",
 			},
 			{
+				"gL",
+				function()
+					require("telescope.builtin").live_grep {
+						default_text = vim.fn.expand("<cword>"),
+						prompt_title = "Live Grep: " .. projectName(),
+					}
+				end,
+				desc = "󰭎 Grep cword",
+			},
+			{
 				"gs",
 				function()
 					-- using treesitter symbols instead, since the LSP symbols are crowded

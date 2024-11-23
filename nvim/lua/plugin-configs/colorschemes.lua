@@ -149,7 +149,8 @@ local darkTheme = {
 					1
 				)
 				vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" }) -- lua :format()
-				["@markup.raw"] = { bg = "#3c3836" }, -- md inline code in comments
+				-- md inline code in comments
+				vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#a9b665", bg = "#3c3836" })
 
 				-- cursorword
 				vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true })
