@@ -187,7 +187,7 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
-				-- don't use any marker
+				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
 
 				-- re-purposing `objectLog` for alternative log statements for these
