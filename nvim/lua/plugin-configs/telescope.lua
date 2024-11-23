@@ -102,6 +102,7 @@ end
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("TelescopeFix", { clear = true }),
 	desc = "User: FIX `sidescrolloff` for Telescope",
 	pattern = "TelescopePrompt",
 	command = "setlocal sidescrolloff=1",
@@ -158,7 +159,7 @@ local function telescopeConfig()
 			file_ignore_patterns = {
 				"%.png$", "%.svg", "%.gif", "%.jpe?g", "%.webp", "%.icns", "%.ico",
 				"%.zip", "%.pdf",
-				unpack(specialDirs), -- needs to be last for correct unpacking
+				unpack(specialDirs), -- needs to be last for complete unpacking
 			},
 		},
 		pickers = {
@@ -460,10 +461,10 @@ return {
 				"gr",
 				function()
 					-- add open buffers to oldfiles
-					local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
-						:map(function(buf) return buf.name end)
-						:totable()
-					vim.list_extend(vim.v.oldfiles, openBufs)
+					-- local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+					-- 	:map(function(buf) return buf.name end)
+					-- 	:totable()
+					-- vim.list_extend(vim.v.oldfiles, openBufs)
 					vim.cmd.Telescope("oldfiles")
 				end,
 				desc = "󰭎 Recent files",
@@ -523,7 +524,6 @@ return {
 				end,
 				desc = "󰒕 Symbols",
 			},
-			{ "gs", function() vim.cmd.Telescope("treesitter") end, ft = "lua", desc = " Symbols" },
 		},
 	},
 	{ -- Icon Picker
