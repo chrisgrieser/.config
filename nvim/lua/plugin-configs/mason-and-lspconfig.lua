@@ -4,7 +4,8 @@ return {
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
-		-- so mason packages are available before loading mason itself
+		-- Make mason packages available before loading mason itself. This
+		-- makes it possible to lazy-loading of mason.
 		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,
 		opts = {
 			-- PENDING https://github.com/mason-org/mason-registry/pull/7957
