@@ -6,13 +6,14 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function camelCaseMatch(str) {
-	const subwords = str.replace(/[-_.]/g, " ");
-	const fullword = str.replace(/[-_.]/g, "");
+	const specialChars = /[-_.:]/g;
+	const subwords = str.replace(specialChars, " ");
+	const fullword = str.replace(specialChars, "");
 	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
 
-	// so "setext" matches "nvim_buf_set_extmark()"
-	const partial = str.replace(/^nvim_(win|buf)_/, "").replace(/[-_.]/g, "");
-	const partial2 = str.replace(/^nvim_/, "").replace(/[-_.]/g, "");
+	// e.g., so "setext" matches "nvim_buf_set_extmark()"
+	const partial = str.replace(/^nvim_(win|buf)_/, "").replace(specialChars, "");
+	const partial2 = str.replace(/^nvim_/, "").replace(specialChars, "");
 
 	return [subwords, camelCaseSeparated, fullword, partial, partial2, str].join(" ") + " ";
 }
@@ -67,7 +68,7 @@ function run() {
 	return JSON.stringify({
 		items: items,
 		cache: {
-			seconds: 3600 * 24 * 14, // every two weeks
+			seconds: 3600 * 24 * 7, // every week
 			loosereload: true,
 		},
 	});
