@@ -14,12 +14,10 @@
   "Class": {
     "body": [
       "local ${1:ClassName} = {",
-      "\tfield = nil,",
-      "\tnew = function(self, o) -- https://www.lua.org/pil/16.1.html",
-      "\t\to = o or {}",
-      "\t\tsetmetatable(o, self)",
-      "\t\tself.__index = self",
-      "\t\treturn o",
+      "\tnew = function(self, obj) -- https://www.lua.org/pil/16.1.html",
+      "\t\tobj = obj or {}",
+      "\t\tsetmetatable(obj, { __index = self })",
+      "\t\treturn obj",
       "\tend,",
       "}"
     ],
