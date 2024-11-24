@@ -2,7 +2,8 @@ set quiet := true
 
 count-lines:
     #!/usr/bin/env zsh
-    find . -type file \( -name "*.zsh" -or -name ".zsh*" \) -print0 |
+    find . -type file \( -name "*.zsh" -or -name ".zsh*" \) -not -path "./plugins/*" -print0 |
         xargs -0 wc -l |
         sort --reverse |
-        cut -c5-
+        cut -c5- |
+        sed 's|\./||'
