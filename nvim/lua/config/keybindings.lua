@@ -210,7 +210,7 @@ end, { desc = "󰒕 Save & Format" })
 --------------------------------------------------------------------------------
 -- LSP
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
-keymap({ "n", "x" }, "<leader>hh", vim.lsp.buf.hover, { desc = "󰒕 LSP Hover" })
+keymap({ "n", "x" }, "<leader>hh", vim.lsp.buf.hover, { desc = "󰒕 LSP hover" })
 keymap(
 	{ "n", "x" },
 	"<leader>hd",

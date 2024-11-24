@@ -34,11 +34,11 @@ return {
 			{
 				mode = { "n", "x" },
 				{ "<leader>", group = "󰓎 Leader" },
-				{ "<leader>c", group = " Code Action" },
+				{ "<leader>c", group = " Code action" },
 				{ "<leader>e", group = "󰓗 Execute" },
 				{ "<leader>g", group = "󰊢 Git" },
 				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>o", group = "󰒓 Option Toggle" },
+				{ "<leader>o", group = "󰒓 Option toggle" },
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>f", group = "󱗘 Refactor" },
