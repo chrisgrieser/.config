@@ -1,11 +1,8 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
 
---[[ TODO on next blink.cmp update
-* new `draw` spec
-* check if completion-enabling is still needed for `css_ls` at `nvim-lspconfig`
-  config, (see: https://github.com/Saghen/blink.cmp/issues/13)
-]]
+-- TODO check if completion-enabling is still needed for `css_ls` at `nvim-lspconfig`
+-- config, (see: https://github.com/Saghen/blink.cmp/issues/13)
 
 return {
 	{ -- completion engine
@@ -33,6 +30,11 @@ return {
 						min_keyword_length = 4,
 						score_offset = -3,
 					},
+					path = {
+						opts = {
+							show_hidden_files_by_default = false,
+						},
+					},
 				},
 			},
 			keymap = {
@@ -50,43 +52,40 @@ return {
 				documentation = {
 					border = vim.g.borderStyle,
 					min_width = 15,
-					max_width = 40, -- smaller, due to https://github.com/Saghen/blink.cmp/issues/194
-					max_height = 12,
+					max_width = 50,
+					max_height = 15,
 					auto_show = true,
 					auto_show_delay_ms = 250,
-					direction_priority = {
-						autocomplete_south = { "e", "w", "s" }, -- https://github.com/Saghen/blink.cmp/issues/194
-					},
 				},
 				autocomplete = {
 					border = vim.g.borderStyle,
-					min_width = 10, -- max_width controlled by draw-function
-					max_height = 10,
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
-					draw = function(ctx)
-						-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/types.lua#L1-L6
-						-- https://github.com/Saghen/blink.cmp/blob/9846c2d2bfdeaa3088c9c0143030524402fffdf9/lua/blink/cmp/windows/autocomplete.lua#L298-L349
-						-- differentiate LSP snippets from user snippets and emmet snippets
-						local source, client = ctx.item.source_id, ctx.item.client_id
-						if
-							client and vim.lsp.get_client_by_id(client).name == "emmet_language_server"
-						then
-							source = "emmet"
-						end
-
-						local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "" }
-						local icon = sourceIcons[source] or ctx.kind_icon
-
-						return {
-							{
-								" " .. ctx.item.label .. " ",
-								fill = true,
-								hl_group = ctx.deprecated and "BlinkCmpLabelDeprecated" or "BlinkCmpLabel",
-								max_width = 40,
+					draw = {
+						-- https://github.com/saghen/blink.cmp#menu-appearancedrawing
+						columns = {
+							{ "label", "label_description", "kind_icon" },
+						},
+						components = {
+							label = {
+								width = { max = 35 },
 							},
-							{ icon .. " ", hl_group = "BlinkCmpKind" .. ctx.kind },
-						}
-					end,
+							kind_icon = {
+								text = function(ctx)
+									local source, client = ctx.item.source_id, ctx.item.client_id
+									local lspName = client and vim.lsp.get_client_by_id(client).name
+									if lspName == "emmet_language_server" then source = "emmet" end
+
+									local sourceIcons = {
+										snippets = "󰩫",
+										buffer = "󰦨",
+										emmet = "",
+									}
+									local icon = sourceIcons[source] or ctx.kind_icon
+									return " " .. icon
+								end,
+							},
+						},
+					},
 				},
 			},
 			kind_icons = {
