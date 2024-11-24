@@ -1,3 +1,6 @@
+-- DOCS https://github.com/saghen/blink.cmp#configuration
+--------------------------------------------------------------------------------
+
 --[[ TODO on next blink.cmp update
 * new `draw` spec
 * check if completion-enabling is still needed for `css_ls` at `nvim-lspconfig`

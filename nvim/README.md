@@ -18,8 +18,6 @@
 └── templates
 ```
 
-`foobar` 
-
 ## All installed plugins
 - [altermo/ultimate-autopair.nvim](https://github.com/altermo/ultimate-autopair.nvim)
 - [Bilal2453/luvit-meta](https://github.com/Bilal2453/luvit-meta)
