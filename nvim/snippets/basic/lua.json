@@ -11,6 +11,20 @@
     "body": "---@type ${1:string}",
     "prefix": "@type (LuaDoc)"
   },
+  "Class": {
+    "body": [
+      "local ${1:ClassName} = {",
+      "\tfield = nil,",
+      "\tnew = function(self, o) -- https://www.lua.org/pil/16.1.html",
+      "\t\to = o or {}",
+      "\t\tsetmetatable(o, self)",
+      "\t\tself.__index = self",
+      "\t\treturn o",
+      "\tend,",
+      "}"
+    ],
+    "prefix": "Class"
+  },
   "Record (type)": {
     "body": "---@type table<string, string>",
     "prefix": "Record (type)"
