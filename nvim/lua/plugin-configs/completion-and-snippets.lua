@@ -13,11 +13,9 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			highlight = {
-				-- supporting: tokyonight, not supported yet: nightfox
+				-- supported: tokyonight
+				-- not supported: nightfox, gruvbox-material
 				use_nvim_cmp_as_default = true,
-			},
-			trigger = {
-				signature_help = { enabled = true },
 			},
 			sources = {
 				providers = {
@@ -47,7 +45,6 @@ return {
 			windows = {
 				documentation = {
 					border = vim.g.borderStyle,
-					min_width = 15,
 					max_width = 50,
 					max_height = 15,
 					auto_show = true,

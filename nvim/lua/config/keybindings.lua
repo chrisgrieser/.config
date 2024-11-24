@@ -318,7 +318,7 @@ keymap(
 	{ "n", "x" },
 	"<CR>",
 	function() require("personal-plugins.alt-alt").gotoAltFile() end,
-	{ desc = "󰽙 Goto Alt-File" }
+	{ desc = "󰬈 Goto alt-file" }
 )
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: restore default behavior of `<CR>` for qf buffers.",

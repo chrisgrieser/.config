@@ -1,16 +1,11 @@
 local M = {}
 --------------------------------------------------------------------------------
 
----@nodiscard
----@param path string
----@return boolean
-local function fileExists(path) return vim.uv.fs_stat(path) ~= nil end
-
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
 	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt" })
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt", icon = "󰬈" })
 end
 
 --------------------------------------------------------------------------------
@@ -24,7 +19,7 @@ local function hasAltBuffer()
 	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird vim bug
-	local altBufExists = fileExists(vim.api.nvim_buf_get_name(altBufnr))
+	local altBufExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(altBufnr)) ~= nil
 
 	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altBufExists
 end
@@ -35,9 +30,10 @@ end
 local function altOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
-		if fileExists(path) and not path:find("/COMMIT_EDITMSG$") and path ~= curPath then
-			return path
-		end
+		local exists = vim.uv.fs_stat(path)
+		local ignored = path:find("/COMMIT_EDITMSG$")
+		local sameFile = path == curPath
+		if exists and not ignored and not sameFile then return path end
 	end
 	return nil
 end
@@ -49,7 +45,7 @@ function M.closeBuffer()
 
 	-- close buffer
 	if #openBuffers < 2 then
-		notify("Only one buffer open.")
+		notify("Only one buffer open.", "trace")
 		return
 	end
 	vim.cmd("silent! update")
@@ -121,7 +117,7 @@ function M.gotoAltFile()
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		notify("No alt buffer or Oldfile available.", "error")
+		notify("No alt buffer or oldfile available.", "error")
 	end
 end
 

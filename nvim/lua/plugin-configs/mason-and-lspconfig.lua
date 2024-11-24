@@ -4,8 +4,8 @@ return {
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
 		},
-		-- Make mason packages available before loading mason itself. This
-		-- makes it possible to lazy-loading of mason.
+		-- Make mason packages available before loading mason itself. This allows
+		-- us to lazy-load of mason.
 		init = function() vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH end,
 		opts = {
 			-- PENDING https://github.com/mason-org/mason-registry/pull/7957
@@ -13,9 +13,7 @@ return {
 			-- also requires `yq` being available in the system
 			registries = {
 				-- local one must come first to take priority
-				"file:"
-					.. vim.fn.stdpath("config")
-					.. "/personal-mason-registry",
+				("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
 				"github:mason-org/mason-registry",
 			},
 
@@ -56,7 +54,7 @@ return {
 		event = "BufReadPre",
 		config = function()
 			-- Enable completion-related capabilities (blink.cmp)
-			local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			-- enabled folding (nvim-ufo)
 			capabilities.textDocument.foldingRange =
