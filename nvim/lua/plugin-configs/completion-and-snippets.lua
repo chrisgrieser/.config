@@ -7,7 +7,7 @@ return {
 	{ -- completion engine
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		version = "v0.*", -- REQUIRED `tag` needed to download pre-built binary
+		version = "*", -- REQUIRED `tag` needed to download pre-built binary
 
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
@@ -59,9 +59,8 @@ return {
 							{ "label", "label_description", "kind_icon" },
 						},
 						components = {
-							label = {
-								width = { max = 35 },
-							},
+							label = { width = { max = 30 } },
+							label_description = { width = { max = 20 } },
 							kind_icon = {
 								text = function(ctx)
 									local source, client = ctx.item.source_id, ctx.item.client_id
