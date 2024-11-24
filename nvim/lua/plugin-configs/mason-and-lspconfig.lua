@@ -13,7 +13,9 @@ return {
 			-- also requires `yq` being available in the system
 			registries = {
 				-- local one must come first to take priority
-				"file:" .. vim.fn.stdpath("config") .. "/personal-mason-registry",
+				"file:"
+					.. vim.fn.stdpath("config")
+					.. "/personal-mason-registry",
 				"github:mason-org/mason-registry",
 			},
 
@@ -53,18 +55,17 @@ return {
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
 		config = function()
-			require("lspconfig.ui.windows").default_options.border = vim.g.borderStyle
+			-- Enable completion-related capabilities (blink.cmp)
+			local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
 
-			-- Enable completion (blink.cmp) and folding (nvim-ufo)
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
+			-- enabled folding (nvim-ufo)
 			capabilities.textDocument.foldingRange =
 				{ dynamicRegistration = false, lineFoldingOnly = true }
 
 			local myServerConfigs = require("config.lsp-servers").serverConfigs
-			for lspName, config in pairs(myServerConfigs) do
+			for lsp, config in pairs(myServerConfigs) do
 				config.capabilities = capabilities
-				require("lspconfig")[lspName].setup(config)
+				require("lspconfig")[lsp].setup(config)
 			end
 		end,
 	},

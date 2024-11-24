@@ -18,7 +18,7 @@ local themes = {
 			groups = {
 				dawnfox = {
 					-- indent-blank-line: more contrast
-					["IblIndent"] = { fg = "#e0cfbd" },
+					IblIndent = { fg = "#e0cfbd" },
 
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
@@ -35,7 +35,7 @@ local themes = {
 					-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
 					["@markup.raw"] = { bg = "#e9dfd2", style = "" },
 
-					-- python
+					-- FIX missing differentiation in python
 					["@type.builtin.python"] = { link = "Typedef" },
 					["@string.documentation.python"] = { link = "Typedef" },
 					["@keyword.operator.python"] = { link = "Operator" },
@@ -60,7 +60,7 @@ local themes = {
 					TelescopeTitle = { fg = "palette.comment" },
 					TelescopeResultsComment = { fg = "palette.comment" },
 
-					-- snacks.nvim
+					-- FIX missing highlights for snacks.nvim
 					SnacksNormal = { link = "NotifyBackground" },
 
 					-- use grey for debug
@@ -140,17 +140,21 @@ local themes = {
 				desc = "User: Highlights for " .. name,
 				pattern = name,
 				callback = function()
+					-- FIX MISSING HIGHLIGHTS
+					-- lua-globals like `vim`
+					vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {})
+					-- placeholders like the `%s` in `string.format("foo %s bar")`
+					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" })
+					-- LSP semantic token parameters
+					vim.api.nvim_set_hl(0, "@lsp.type.parameter", { link = "Orange" })
+
 					-- General
 					vim.api.nvim_set_hl(0, "@keyword.return", { bold = true, fg = "#f6843a" })
-					vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {}) -- FIX lua-globals
 					vim.api.nvim_set_hl(0, "TSPunctBracket", { fg = "#af7e5d" })
 					vim.defer_fn(
 						function() vim.api.nvim_set_hl(0, "@constructor.lua", { fg = "#9b97a8" }) end,
 						1
 					)
-					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" }) -- lua :format()
-
-					-- vim.
 
 					-- md `inline` code in comments
 					vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#a9b665", bg = "#3c3836" })

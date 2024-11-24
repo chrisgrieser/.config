@@ -21,6 +21,7 @@ return {
 	-----------------------------------------------------------------------------
 	{ -- signature hints
 		"ray-x/lsp_signature.nvim",
+		enabled = false,
 		event = "BufReadPre",
 		opts = {
 			hint_prefix = " 󰏪 ",
