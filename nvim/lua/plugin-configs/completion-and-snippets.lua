@@ -1,5 +1,7 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
+-- TODO can be removed next version: https://github.com/Saghen/blink.cmp/issues/370
+---@diagnostic disable: missing-fields
 
 return {
 	{ -- completion engine
@@ -9,7 +11,6 @@ return {
 
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
-		---@diagnostic disable: missing-fields PENDING https://github.com/Saghen/blink.cmp/issues/370
 		opts = {
 			highlight = {
 				-- supporting: tokyonight, not supported yet: nightfox
