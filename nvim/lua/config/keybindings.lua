@@ -67,7 +67,7 @@ keymap(
 	"n",
 	"ww",
 	function() require("personal-plugins.misc").smartLineDuplicate() end,
-	{ desc = "󰇋 Duplicate line" }
+	{ desc = "󰲢 Duplicate line" }
 )
 
 -- Toggles
@@ -495,7 +495,10 @@ keymap("n", "<leader>fq", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
-keymap("n", "<leader>fy", function()
+--------------------------------------------------------------------------------
+-- YANKING
+
+keymap("n", "<leader>yl", function()
 	-- cannot use `:g // y` because it yanks lines one after the other
 	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
 		if not input then return end
@@ -506,22 +509,20 @@ keymap("n", "<leader>fy", function()
 	end)
 end, { desc = "󰅍 Matching lines" })
 
---------------------------------------------------------------------------------
-
-keymap("n", "<leader>y", function()
+keymap("n", "<leader>yc", function()
 	local codeContext = require("nvim-treesitter").statusline {
 		indicator_size = math.huge, -- disable shortening
 		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
 		separator = ".",
 	}
 	if codeContext and codeContext ~= "" then
-		codeContext = codeContext:gsub(" ?=[^=]-$", ""):gsub(" ?= ?", "")
+		codeContext = codeContext:gsub(" ?[:=][^:=]-$", ""):gsub(" ?= ?", "")
 		vim.fn.setreg("+", codeContext)
 		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
 	else
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end
-end, { desc = " Yank code context" })
+end, { desc = " Code context" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING

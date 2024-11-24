@@ -6,11 +6,10 @@ if not lazyLocallyAvailable then
 	local args = { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }
 	local out = vim.system(args):wait()
 	if out.code ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit…" },
-		}, true, {})
+		vim.api.nvim_echo {
+			{ "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" },
+			{ "Press any key to exit…" },
+		}
 		vim.fn.getchar()
 		os.exit(1)
 	end
@@ -72,7 +71,7 @@ require("lazy").setup {
 			-- stylua: ignore
 			disabled_plugins = {
 				"rplugin", -- needed when using `:UpdateRemotePlugins` (e.g. magma.nvim)
-				"netrwPlugin", "man", "tutor", "health", "tohtml", "gzip", 
+				"netrwPlugin", "man", "tutor", "health", "tohtml", "gzip",
 				"zipPlugin", "tarPlugin", "osc52",
 			},
 		},
@@ -121,21 +120,36 @@ keymap("n", "g,", function()
 		pattern = "TelescopeResults",
 		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
 	})
+	-- all specfiles
 	local specRoot = require("lazy.core.config").options.spec.import
 	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
-	local specFiles = vim.fs.dir(specPath)
+	local specFiles = {}
+	for name, type in vim.fs.dir(specPath) do
+		if type == "file" and vim.endswith(name, ".lua") then table.insert(specFiles, name) end
+	end
 
-	local allPlugins = vim.iter(specFiles):fold({}, function(acc, name, _)
-		if not vim.endswith(name, ".lua") then return acc end
-		local moduleName = name:gsub("%.lua$", "")
-		local module = require(specRoot .. "." .. moduleName)
-		if type(module[1]) ~= "table" then module = { module } end
-		local plugins = vim.iter(module)
-			:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
-			:totable()
-		return vim.list_extend(acc, plugins)
+	-- sort by last modified
+	table.sort(specFiles, function(a, b)
+		local amtime = vim.uv.fs_stat(specPath .. "/" .. a).mtime.sec
+		local bmtime = vim.uv.fs_stat(specPath .. "/" .. b).mtime.sec
+		return amtime > bmtime
 	end)
 
+	-- get all plugins from the spec files
+	local allPlugins = vim.iter(specFiles)
+		:map(function(name)
+			local moduleName = name:gsub("%.lua$", "")
+			local module = require(specRoot .. "." .. moduleName)
+			if type(module[1]) ~= "table" then module = { module } end
+			local plugins = vim.iter(module)
+				:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
+				:totable()
+			return plugins
+		end)
+		:flatten()
+		:totable()
+
+	-- select plugin
 	vim.ui.select(allPlugins, {
 		prompt = "󰒲 Goto Config",
 		format_item = function(plugin)

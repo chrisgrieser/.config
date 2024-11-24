@@ -74,7 +74,7 @@ return {
 			{ "#", vim.cmd.CccPick, desc = " Color Picker" },
 			{ "g#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 		},
-		ft = { "css", "zsh", "lua", "toml", "just" },
+		ft = { "css", "zsh", "lua", "toml" },
 		config = function(spec)
 			local ccc = require("ccc")
 			ccc.setup {
