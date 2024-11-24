@@ -51,6 +51,9 @@ return {
 					max_height = 12,
 					auto_show = true,
 					auto_show_delay_ms = 250,
+					direction_priority = {
+						autocomplete_south = { "e", "w", "s" }, -- https://github.com/Saghen/blink.cmp/issues/194
+					},
 				},
 				autocomplete = {
 					border = vim.g.borderStyle,
