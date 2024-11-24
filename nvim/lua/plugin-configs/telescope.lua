@@ -449,7 +449,7 @@ return {
 								{ { #tail, #out }, "TelescopeResultsComment" },
 							}
 							if vim.tbl_contains(changedFilesInCwd, path) then
-								table.insert(highlights, { { 0, #tail }, "Changed" })
+								table.insert(highlights, { { 0, #tail }, "diffChanged" })
 							end
 							return out, highlights
 						end,

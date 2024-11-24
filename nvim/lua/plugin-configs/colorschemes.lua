@@ -129,8 +129,9 @@ local themes = {
 		"sainnhe/gruvbox-material",
 		opacity = 0.92,
 		init = function(spec)
-			vim.g.gruvbox_material_background = "soft"
-			vim.g.gruvbox_material_ui_contrast = "high"
+			vim.g.gruvbox_material_background = "medium" -- soft|medium|hard
+			vim.g.gruvbox_material_foreground = "material" -- material|mix|original
+			vim.g.gruvbox_material_ui_contrast = "high" -- low|high
 			vim.g.gruvbox_material_better_performance = 1
 			vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 			vim.g.gruvbox_material_inlay_hints_background = "dimmed"
@@ -146,7 +147,7 @@ local themes = {
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
 					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" })
 					-- LSP semantic token parameters
-					vim.api.nvim_set_hl(0, "@lsp.type.parameter", { link = "Orange" })
+					vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = "#639cc3" })
 
 					-- General
 					vim.api.nvim_set_hl(0, "@keyword.return", { bold = true, fg = "#f6843a" })
