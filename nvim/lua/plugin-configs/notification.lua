@@ -57,11 +57,11 @@ local function snacksConfig()
 			notFoundNotify(query)
 			return
 		end
-		-- not using `normal` to keep behavior of `on_key` for `nvim_origami`
-		vim.api.nvim_feedkeys(key, "n", true)
+		return key -- return and use as `expr` to keep correct `on_key` trigger for `nvim_origami`
 	end
-	-- vim.keymap.set("n", "n", function() nopOnNoMatch("n") end, { desc = "silent n" })
-	-- vim.keymap.set("n", "N", function() nopOnNoMatch("N") end, { desc = "silent N" })
+	local map = vim.keymap.set
+	map("n", "n", function() return nopOnNoMatch("n") end, { desc = "silent n", expr = true })
+	map("n", "N", function() return nopOnNoMatch("N") end, { desc = "silent N", expr = true })
 
 	vim.api.nvim_create_autocmd("CmdlineEnter", {
 		desc = "User: Increase cmdline-height when in cmdline (silence enter-prompt 1/2)",
