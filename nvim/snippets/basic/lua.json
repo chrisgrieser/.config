@@ -13,11 +13,13 @@
   },
   "Class": {
     "body": [
+      "---@class ${1:ClassName}",
       "local ${1:ClassName} = {",
-      "\tnew = function(self, obj) -- https://www.lua.org/pil/16.1.html",
-      "\t\tobj = obj or {}",
-      "\t\tsetmetatable(obj, { __index = self })",
-      "\t\treturn obj",
+      "\t---@return ${1:ClassName}",
+      "\tnew = function(self, newObj) -- https://www.lua.org/pil/16.1.html",
+      "\t\tnewObj = newObj or {}",
+      "\t\tsetmetatable(newObj, { __index = self })",
+      "\t\treturn newObj",
       "\tend,",
       "}"
     ],
