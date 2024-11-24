@@ -1,6 +1,8 @@
-local class = {
-	field = nil,
-	new = function(self, o) -- https://www.lua.org/pil/16.1.html
+local Account = {
+	balance = 0,
+	withdraw = function(self, v) self.balance = self.balance - v end,
+	deposit = function(self, v) self.balance = self.balance + v end,
+	new = function(self, o)
 		o = o or {}
 		setmetatable(o, self)
 		self.__index = self
