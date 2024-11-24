@@ -515,7 +515,7 @@ keymap("n", "<leader>y", function()
 		separator = ".",
 	}
 	if codeContext and codeContext ~= "" then
-		codeContext = codeContext:gsub(" ?=.-$", ""):gsub(" ?= ?", "")
+		codeContext = codeContext:gsub(" ?=[^=]-$", ""):gsub(" ?= ?", "")
 		vim.fn.setreg("+", codeContext)
 		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
 	else

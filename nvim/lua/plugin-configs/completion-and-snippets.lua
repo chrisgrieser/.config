@@ -1,24 +1,24 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
 
--- TODO check if completion-enabling is still needed for `css_ls` at `nvim-lspconfig`
--- config, (see: https://github.com/Saghen/blink.cmp/issues/13)
-
 return {
 	{ -- completion engine
 		"saghen/blink.cmp",
 		event = "InsertEnter",
 		version = "v0.*", -- REQUIRED `tag` needed to download pre-built binary
 
+		---@module "blink.cmp"
+		---@type blink.cmp.Config
+		---@diagnostic disable: missing-fields PENDING https://github.com/Saghen/blink.cmp/issues/370
 		opts = {
 			highlight = {
 				-- supporting: tokyonight, not supported yet: nightfox
 				use_nvim_cmp_as_default = true,
 			},
+			trigger = {
+				signature_help = { enabled = true },
+			},
 			sources = {
-				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer" },
-				},
 				providers = {
 					snippets = {
 						min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
@@ -29,11 +29,6 @@ return {
 						max_items = 4,
 						min_keyword_length = 4,
 						score_offset = -3,
-					},
-					path = {
-						opts = {
-							show_hidden_files_by_default = false,
-						},
 					},
 				},
 			},
@@ -75,11 +70,7 @@ return {
 									local lspName = client and vim.lsp.get_client_by_id(client).name
 									if lspName == "emmet_language_server" then source = "emmet" end
 
-									local sourceIcons = {
-										snippets = "󰩫",
-										buffer = "󰦨",
-										emmet = "",
-									}
+									local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "" }
 									local icon = sourceIcons[source] or ctx.kind_icon
 									return " " .. icon
 								end,
