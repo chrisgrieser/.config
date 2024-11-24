@@ -135,9 +135,10 @@ local themes = {
 			vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
 			vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 
+			local name = vim.fs.basename(spec[1])
 			vim.api.nvim_create_autocmd("ColorScheme", {
-				desc = "User: gruvbox material highlights",
-				pattern = vim.fs.basename(spec[1]),
+				desc = "User: Highlights for " .. name,
+				pattern = name,
 				callback = function()
 					-- General
 					vim.api.nvim_set_hl(0, "@keyword.return", { bold = true, fg = "#f6843a" })
@@ -148,7 +149,8 @@ local themes = {
 						1
 					)
 					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" }) -- lua :format()
-					-- md inline code in comments
+
+					-- md `inline` code in comments
 					vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#a9b665", bg = "#3c3836" })
 
 					-- cursorword
@@ -166,11 +168,9 @@ local themes = {
 					vim.cmd.highlight("SpellCap gui=underdotted")
 					vim.cmd.highlight("SpellLocal gui=underdotted")
 
-					-- no bold (TODO INFO ERROR WARN)
-					-- vim.api.nvim_set_hl(0, "@comment.todo", { bg = "#7daea3", fg = "#32302f" })
-					-- vim.api.nvim_set_hl(0, "@comment.error", { bg = "#ea6962", fg = "#32302f" })
-					-- vim.api.nvim_set_hl(0, "@comment.warning", { bg = "#d8a657", fg = "#32302f" })
-					-- vim.api.nvim_set_hl(0, "@comment.note", { bg = "#a9b665", fg = "#32302f" })
+					-- no underlines
+					vim.cmd.highlight("ErrorMsg gui=none") -- remove underlines & bold
+					vim.cmd.highlight("WarningMsg gui=none") -- remove bold
 				end,
 			})
 		end,
