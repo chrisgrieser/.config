@@ -196,6 +196,10 @@
     "body": "print \"\\e[1;34m$0\\e[0m\"",
     "prefix": "print in blue"
   },
+  "printf: erase current line": {
+    "body": "printf \"\\33[2K\\r\" # fully erase the current line",
+    "prefix": "printf: erase current line"
+  },
   "progress bar": {
     "body": [
       "for _ in {1..100}; do",

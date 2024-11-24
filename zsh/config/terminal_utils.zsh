@@ -1,6 +1,9 @@
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
 alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
 
+function cake { mkdir -p "$1" && cd "$1" || return 1; }
+function topen { touch "$1" && open "$1"; }
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # utility scripts only made available, but not loaded directly (= lazy-loading)
