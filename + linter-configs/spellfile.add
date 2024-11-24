@@ -173,6 +173,7 @@ centric
 tinygit
 menubar
 sitemap
+favicon
 DataLoom
 Dataview
 Filepath
@@ -225,6 +226,8 @@ prefills
 justfile
 subtasks
 Strato's
+superset
+basename
 Blazingly
 Filetypes
 Justfiles
@@ -346,5 +349,3 @@ TypeScriptReact
 Customizability
 customizability
 filetype-specific
-favicon
-superset
