@@ -10,4 +10,5 @@ count-lines:
     find . -name "*.lua" -not -path "*/Spoons/*" -print0 |
         xargs -0 wc -l |
         sort --reverse |
-        cut -c5-
+        cut -c5- |
+        sed 's|\./||'
