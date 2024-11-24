@@ -28,9 +28,12 @@ local themes = {
 					["WinSeparator"] = { fg = "#cfc1b3" },
 					["Operator"] = { fg = "#846a52" },
 					["@string.special.url.comment"] = { style = "underline" },
-					["@markup.raw"] = { bg = "#e9dfd2" }, -- for inline code in comments
 					["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
 					["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
+
+					-- for `inline` code in comments
+
+					["@markup.raw.markdown_inline"] = { fg = "palette.cyan", bg = "#e9dfd2" },
 
 					-- python
 					["@type.builtin.python"] = { link = "Typedef" },
