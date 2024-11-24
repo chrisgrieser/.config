@@ -5,7 +5,10 @@ vim.opt_local.listchars:remove("multispace")
 local bkeymap = require("config.utils").bufKeymap
 bkeymap("n", "<CR>", "ZZ", { desc = "Confirm" })
 bkeymap("n", "q", vim.cmd.cquit, { desc = "Abort" })
-bkeymap("n", "<Tab>", vim.cmd.Cycle, { desc = "Cycle Action" }) -- `:Cycle` is vim ftplugin
+
+-- `:Cycle` is vim ftplugin
+bkeymap("n", "<Tab>", vim.cmd.Cycle, { desc = " Next type" })
+bkeymap("n", "<S-Tab>", "<cmd>Cycle!<CR>", { desc = " Previous Type" })
 
 -- leave out auto-formatting via `==`, since buggy
 bkeymap("n", "<Down>", [[<cmd>. move +1<CR>]], { desc = "󰜮 Move line down" })
