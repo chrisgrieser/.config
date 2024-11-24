@@ -89,9 +89,10 @@ function M.messages()
 	}
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()
-		vim.fn.matchadd("DiagnosticInfo", [[E\d\+:.*]]) -- error numbers
+		vim.fn.matchadd("ErrorMsg", [[E\d\+:\zs.*]]) -- errors
+		vim.fn.matchadd("ErrorMsg", [[^Error .*]])
 		vim.fn.matchadd("DiagnosticInfo", [[[^/]\+\.lua:\d\+\ze:]]) -- filenames
-		vim.fn.matchadd("ErrorMsg", [[^Error .*]]) -- error lines
+		-- vim.fn.matchadd("DiagnosticInfo", [[E\d\+]]) -- error numbers differently
 		-- `\_.` matches any char, including newline
 		vim.fn.matchadd("WarningMsg", [[^stack traceback\_.*\n\t.*]])
 	end)
