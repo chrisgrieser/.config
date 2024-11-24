@@ -150,6 +150,8 @@ local themes = {
 					)
 					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" }) -- lua :format()
 
+					-- vim.
+
 					-- md `inline` code in comments
 					vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#a9b665", bg = "#3c3836" })
 

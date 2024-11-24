@@ -507,6 +507,23 @@ keymap("n", "<leader>fy", function()
 end, { desc = "󰅍 Matching lines" })
 
 --------------------------------------------------------------------------------
+
+keymap("n", "<leader>y", function()
+	local codeContext = require("nvim-treesitter").statusline {
+		indicator_size = math.huge, -- disable shortening
+		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
+		separator = ".",
+	}
+	if codeContext and codeContext ~= "" then
+		codeContext = codeContext:gsub(" ?=.-$", ""):gsub(" ?= ?", "")
+		vim.fn.setreg("+", codeContext)
+		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
+	else
+		vim.notify("No code context.", vim.log.levels.WARN)
+	end
+end, { desc = " Yank code context" })
+
+--------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
 keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
