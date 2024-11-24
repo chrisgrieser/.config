@@ -36,12 +36,12 @@ done
 print "\e[1;34mCompressing $repos_count repos…\e[0m"
 archive_name="${repos_count} Repos – $(date +%Y-%m-%d).zip"
 zip --recurse-paths --symlinks --quiet "../$archive_name" . || return 1
+rm -rf "$bkp_destination/temp"
 
 # RESTRICT NUMBER OF BACKUPS
 cd "$bkp_destination" || return 1
 # shellcheck disable=2012
 ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
-rm -rf "$bkp_destination/temp"
 
 # NOTIFY
 print "\e[1;32mArchived $repos_count repos.\e[0m"

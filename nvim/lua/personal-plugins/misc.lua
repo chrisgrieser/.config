@@ -254,12 +254,15 @@ function M.bufferInfo()
 	local ok, node = pcall(vim.treesitter.get_node)
 	local nodeType = (ok and node) and node:type() or "n/a"
 	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
+	local clients = vim.lsp.get_clients { bufnr = 0 }
+	local lspNameLengths = vim.tbl_map(function(client) return #client.name end, clients)
+	local longestName = math.max(unpack(lspNameLengths))
 	local lsps = vim.tbl_map(function(client)
-		local pad = (" "):rep(math.min(10 - #client.name))
+		local pad = (" "):rep(math.min(longestName - #client.name)) .. " "
 		local root = client.root_dir and client.root_dir:gsub("/Users/%w+", pseudoTilde)
 			or "*Single file mode*"
 		return ("[%s]%s%s"):format(client.name, pad, root)
-	end, vim.lsp.get_clients { bufnr = 0 })
+	end, clients)
 
 	local out = {
 		"[filetype]  " .. vim.bo.filetype,
