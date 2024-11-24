@@ -142,8 +142,8 @@ local themes = {
 				pattern = name,
 				callback = function()
 					-- FIX MISSING HIGHLIGHTS
-					-- lua-globals like `vim`
-					vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", {})
+					-- stop globals like `vim` in lua from being overwritten
+					vim.api.nvim_set_hl(0, "@lsp.type.variable", {})
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
 					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" })
 					-- LSP semantic token parameters
@@ -175,9 +175,15 @@ local themes = {
 					vim.cmd.highlight("SpellCap gui=underdotted")
 					vim.cmd.highlight("SpellLocal gui=underdotted")
 
-					-- no underlines
-					vim.cmd.highlight("ErrorMsg gui=none") -- remove underlines & bold
-					vim.cmd.highlight("WarningMsg gui=none") -- remove bold
+					-- no overly excessive underlines/bold
+					vim.cmd.highlight("ErrorMsg gui=none")
+					vim.cmd.highlight("WarningMsg gui=none")
+
+					-- FIX missing snacks.nvim highlights for trace
+					vim.api.nvim_set_hl(0, "SnacksNotifierTitleTrace", { link = "NotifyTraceTitle" })
+					vim.api.nvim_set_hl(0, "SnacksNotifierTitleIcon", { link = "NotifyTraceIcon" })
+					vim.api.nvim_set_hl(0, "SnacksNotifierTitleBorder", { link = "NotifyTraceBorder" })
+					vim.api.nvim_set_hl(0, "SnacksNotifierTitleFooter", { link = "NotifyTraceBorder" })
 				end,
 			})
 		end,
@@ -198,6 +204,7 @@ themes = vim.iter(themes)
 		if not theme.opacity then theme.opacity = 0.9 end
 		return theme
 	end)
+	:take(2)
 	:totable()
 
 -- TOGGLE LIGHT/DARK

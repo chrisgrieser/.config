@@ -193,6 +193,11 @@ return {
 		opts = {
 			marker = "🖨️",
 			logStatements = {
+
+				variableLog = {
+					lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
+				},
+
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
 
@@ -205,7 +210,6 @@ return {
 				},
 
 				-- Hammerspoon
-				variableLog = { lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))' },
 				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
 				sound = { lua = 'hs.sound.getByName("Sosumi"):play() -- {{marker}}' },
 			},
