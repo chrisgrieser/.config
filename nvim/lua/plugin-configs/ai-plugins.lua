@@ -18,8 +18,6 @@ return {
 			filetypes = {
 				DressingInput = false,
 				TelescopePrompt = false,
-				noice = false, -- sometimes triggered in error-buffers
-
 				-- extra safeguard: `pass` passwords editing filetype is plaintext,
 				-- also this is the filetype of critical files
 				text = false,
@@ -79,7 +77,7 @@ return {
 			{
 				"<leader>oa",
 				function() vim.cmd.NeoCodeium("toggle") end,
-				desc = "󰚩 NeoCodeium Suggestions",
+				desc = "󰚩 NeoCodeium",
 			},
 		},
 	},
