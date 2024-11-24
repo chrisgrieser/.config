@@ -57,25 +57,6 @@ end
 
 --------------------------------------------------------------------------------
 
--- Increment or toggle if cursorword is true/false.
--- + Simplified implementation of dial.nvim.
--- + REQUIRED `expr = true` for the keybinding
-function M.toggleOrIncrement()
-	local toggles = {
-		["true"] = "false",
-		["True"] = "False", -- python
-		["const"] = "let", -- js
-		["and"] = "or", -- lua
-	}
-	-- cannot use vim.cmd.normal, because it changes cursor position
-	local cword = vim.fn.expand("<cword>")
-	for word, opposite in pairs(toggles) do
-		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
-		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
-	end
-	return "<C-a>"
-end
-
 -- Simplified implementation of coerce.nvim
 function M.camelSnakeLspRename()
 	local cword = vim.fn.expand("<cword>")
@@ -95,6 +76,24 @@ function M.camelSnakeLspRename()
 		local msg = "Neither snake_case nor camelCase: " .. cword
 		vim.notify(msg, vim.log.levels.WARN, { title = "LSP Rename" })
 	end
+end
+
+-- Increment or toggle if cursorword is true/false.
+-- + Simplified implementation of dial.nvim.
+-- + REQUIRED `expr = true` for the keybinding
+function M.toggleOrIncrement()
+	local toggles = {
+		["true"] = "false",
+		["True"] = "False", -- python
+		["const"] = "let", -- js
+	}
+	-- cannot use vim.cmd.normal, because it changes cursor position
+	local cword = vim.fn.expand("<cword>")
+	for word, opposite in pairs(toggles) do
+		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
+		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
+	end
+	return "<C-a>"
 end
 
 function M.toggleLowercaseTitleCase()

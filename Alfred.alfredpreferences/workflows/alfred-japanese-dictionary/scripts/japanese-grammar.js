@@ -34,7 +34,7 @@ function run() {
 				line.match(/<a href='\/japanese-grammar\/(.*)' title='View (.*)'>/) || [];
 			const url = htmlUrl + subsite;
 			const romaji = subsite.replaceAll("/", "").replaceAll("-", " ");
-			const displayName = name.replace("&#39;&#39;Don&#39;t...!&#39;&#39;", '"Don\'t…!"');
+			const displayName = name.replaceAll("&#39;", "'").replaceAll("&quot;", '"');
 
 			/** @type {AlfredItem} */
 			const alfredItem = {

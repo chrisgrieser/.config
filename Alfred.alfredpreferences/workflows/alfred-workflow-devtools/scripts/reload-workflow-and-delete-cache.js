@@ -30,5 +30,5 @@ function run(argv) {
 	Application("com.runningwithcrayons.Alfred").reloadWorkflow(workflowUid);
 
 	// return for alfred notification
-	return bundleId + ": reloaded & deleted cache.";
+	return bundleId + "\n" + "reloaded & cache deleted";
 }
