@@ -31,9 +31,9 @@ local themes = {
 					["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
 					["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
 
-					-- for `inline` code in comments
-
-					["@markup.raw.markdown_inline"] = { fg = "palette.cyan", bg = "#e9dfd2" },
+					-- 1. `inline` code in comments
+					-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
+					["@markup.raw"] = { bg = "#e9dfd2", style = "" },
 
 					-- python
 					["@type.builtin.python"] = { link = "Typedef" },
@@ -78,7 +78,7 @@ local themes = {
 			},
 		},
 	},
-	{ --- TOKYO NIGHT
+	{ --- TOKYONIGHT
 		-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
