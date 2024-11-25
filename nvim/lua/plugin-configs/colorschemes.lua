@@ -141,49 +141,53 @@ local themes = {
 				desc = "User: Highlights for " .. name,
 				pattern = name,
 				callback = function()
+					local setHl = function(...) vim.api.nvim_set_hl(0, ...) end
+					local hlCmd = vim.cmd.highlight
+
 					-- FIX MISSING HIGHLIGHTS
 					-- stop globals like `vim` in lua from being overwritten
-					vim.api.nvim_set_hl(0, "@lsp.type.variable", {})
+					setHl("@lsp.type.variable", {})
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
-					vim.api.nvim_set_hl(0, "@character.printf", { link = "Purple" })
+					setHl("@character.printf", { link = "Purple" })
 					-- LSP semantic token parameters
-					vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = "#639cc3" })
+					setHl("@lsp.type.parameter", { fg = "#639cc3" })
 
 					-- General
-					vim.api.nvim_set_hl(0, "@keyword.return", { bold = true, fg = "#f6843a" })
-					vim.api.nvim_set_hl(0, "TSPunctBracket", { fg = "#af7e5d" })
-					vim.defer_fn(
-						function() vim.api.nvim_set_hl(0, "@constructor.lua", { fg = "#9b97a8" }) end,
-						1
-					)
+					setHl("@keyword.return", { bold = true, fg = "#f6843a" })
+					setHl("TSPunctBracket", { fg = "#af7e5d" })
+					vim.defer_fn(function() setHl("@constructor.lua", { fg = "#9b97a8" }) end, 1)
 
 					-- md `inline` code in comments
-					vim.api.nvim_set_hl(0, "@markup.raw", { fg = "#a9b665", bg = "#3c3836" })
+					setHl("@markup.raw", { fg = "#a9b665", bg = "#3c3836" })
 
 					-- cursorword
-					vim.api.nvim_set_hl(0, "LspReferenceWrite", { underdashed = true })
-					vim.api.nvim_set_hl(0, "LspReferenceRead", { underdotted = true })
-					vim.api.nvim_set_hl(0, "LspReferenceText", {})
+					setHl("LspReferenceWrite", { underdashed = true })
+					setHl("LspReferenceRead", { underdotted = true })
+					setHl("LspReferenceText", {})
 
 					-- no undercurls
-					vim.cmd.highlight("DiagnosticUnderlineError gui=underline")
-					vim.cmd.highlight("DiagnosticUnderlineWarn gui=underline")
-					vim.cmd.highlight("DiagnosticUnderlineInfo gui=underline")
-					vim.cmd.highlight("DiagnosticUnderlineHint gui=underline")
-					vim.cmd.highlight("SpellBad gui=underdotted")
-					vim.cmd.highlight("SpellError gui=underdotted")
-					vim.cmd.highlight("SpellCap gui=underdotted")
-					vim.cmd.highlight("SpellLocal gui=underdotted")
+					hlCmd("DiagnosticUnderlineError gui=underline")
+					hlCmd("DiagnosticUnderlineWarn gui=underline")
+					hlCmd("DiagnosticUnderlineInfo gui=underline")
+					hlCmd("DiagnosticUnderlineHint gui=underline")
+					hlCmd("SpellBad gui=underdotted")
+					hlCmd("SpellError gui=underdotted")
+					hlCmd("SpellCap gui=underdotted")
+					hlCmd("SpellLocal gui=underdotted")
 
 					-- no overly excessive underlines/bold
-					vim.cmd.highlight("ErrorMsg gui=none")
-					vim.cmd.highlight("WarningMsg gui=none")
+					hlCmd("ErrorMsg gui=none")
+					hlCmd("WarningMsg gui=none")
 
 					-- FIX missing snacks.nvim highlights for trace
-					vim.api.nvim_set_hl(0, "SnacksNotifierTitleTrace", { link = "NotifyTraceTitle" })
-					vim.api.nvim_set_hl(0, "SnacksNotifierTitleIcon", { link = "NotifyTraceIcon" })
-					vim.api.nvim_set_hl(0, "SnacksNotifierTitleBorder", { link = "NotifyTraceBorder" })
-					vim.api.nvim_set_hl(0, "SnacksNotifierTitleFooter", { link = "NotifyTraceBorder" })
+					setHl("SnacksNotifierTitleTrace", { link = "NotifyTraceTitle" })
+					setHl("SnacksNotifierTitleIcon", { link = "NotifyTraceIcon" })
+					setHl("SnacksNotifierTitleBorder", { link = "NotifyTraceBorder" })
+					setHl("SnacksNotifierTitleFooter", { link = "NotifyTraceBorder" })
+
+	 				-- FIX lazy.nvim,
+					setHl("Bold", { bold = true })
+					setHl("LazyReasonRequire", { link = "@variable.parameter" })
 				end,
 			})
 		end,
