@@ -67,6 +67,15 @@ return {
 			{ "S", "s$", desc = "󰅪 Substitute to EoL", remap = true },
 			{ "W", "w$", desc = "󰅪 Multiply to EoL", remap = true },
 		},
+		opts = {
+			evaluate = { prefix = "" }, -- disable
+			replace = { prefix = "s", reindent_linewise = true },
+			exchange = { prefix = "sx", reindent_linewise = true },
+			sort = { prefix = "sy" },
+			multiply = {
+				prefix = "", -- set our own in `make_mappings`
+			},
+		},
 		config = function(_, opts)
 			require("mini.operators").setup(opts)
 
@@ -79,15 +88,6 @@ return {
 				{ textobject = "w", selection = "w", line = "" }
 			)
 		end,
-		opts = {
-			evaluate = { prefix = "" }, -- disable
-			replace = { prefix = "s", reindent_linewise = true },
-			exchange = { prefix = "sx", reindent_linewise = true },
-			sort = { prefix = "sy" },
-			multiply = {
-				prefix = "", -- set our own in `make_mappings`
-			},
-		},
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
@@ -191,11 +191,11 @@ return {
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		cmd = "ChainSaw",
 		opts = {
-			marker = "🪚",
+			marker = "🖨️",
 			loglines = {
 				lineHlgroup = false,
-				signHlgroup = "",
-				sign = "󰹈",
+				signHlgroup = "DiagnosticSignOk",
+				sign = "󰐪",
 			},
 
 			logStatements = {
