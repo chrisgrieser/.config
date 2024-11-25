@@ -7,10 +7,15 @@ return {
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
 
-		-- FIX for `comments` parser https://github.com/stsewd/tree-sitter-comment/issues/22
 		vim.api.nvim_create_autocmd("ColorScheme", {
-			desc = "User: FIX hlgroup for `comments` parser",
-			callback = function() vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {}) end,
+			desc = "User: treesitter parser `comments`",
+			callback = function()
+				-- FIX lua todo-comments https://github.com/stsewd/tree-sitter-comment/issues/22
+				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
+
+				-- Define bold comments (see `queries/comment/highlights.scm`)
+				vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
+			end,
 		})
 	end,
 	opts = {

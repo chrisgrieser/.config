@@ -149,8 +149,8 @@ local themes = {
 					setHl("@lsp.type.variable", {})
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
 					setHl("@character.printf", { link = "Purple" })
-					-- LSP semantic token parameters
-					setHl("@lsp.type.parameter", { fg = "#639cc3" })
+					-- parameters
+					setHl("TSParameter", { fg = "#639cc3" })
 
 					-- General
 					setHl("@keyword.return", { bold = true, fg = "#f6843a" })
@@ -185,7 +185,7 @@ local themes = {
 					setHl("SnacksNotifierTitleBorder", { link = "NotifyTraceBorder" })
 					setHl("SnacksNotifierTitleFooter", { link = "NotifyTraceBorder" })
 
-	 				-- FIX lazy.nvim,
+					-- FIX lazy.nvim,
 					setHl("Bold", { bold = true })
 					setHl("LazyReasonRequire", { link = "@variable.parameter" })
 				end,

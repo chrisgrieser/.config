@@ -7,8 +7,18 @@ if vim.bo.buftype == "nofile" then
 	vim.keymap.set("n", "q", vim.cmd.close, { buffer = true, nowait = true })
 end
 
--- for .scm files
+-- for `scm` files
 if vim.bo.buftype == "" then
 	vim.opt_local.tabstop = 2
 	vim.opt_local.expandtab = true
 end
+
+--------------------------------------------------------------------------------
+
+local bkeymap = require("config.utils").bufKeymap
+bkeymap(
+	"n",
+	"<D-s>",
+	function() vim.cmd.normal { "m`gg=G``", bang = true } end,
+	{ desc = " Format" }
+)
