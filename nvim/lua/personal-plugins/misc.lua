@@ -266,7 +266,7 @@ function M.bufferInfo()
 	end, clients)
 
 	local out = {
-		"[filetype]  " .. vim.bo.filetype,
+		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
