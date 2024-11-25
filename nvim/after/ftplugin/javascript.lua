@@ -16,16 +16,7 @@ abbr("()", "() =>") -- quicker arrow function
 
 --------------------------------------------------------------------------------
 
-bkeymap("n", "<leader>ft", function()
-	vim.cmd.stopinsert()
-	vim.lsp.buf.code_action {
-		filter = function(a) return a.title == "Convert to template string" end,
-		apply = true,
-	}
-end, { desc = " Convert to Template String" })
-bkeymap("i", "<D-t>", "${}<Left>", { desc = " Insert Template String" })
-
----open the next regex at https://regex101.com/
+-- open the next regex at https://regex101.com/
 bkeymap("n", "g/", function()
 	vim.cmd.TSTextobjectSelect("@regex.outer")
 	local notFound = vim.fn.mode():find("v")

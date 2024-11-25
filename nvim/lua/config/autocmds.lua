@@ -198,7 +198,7 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
 	[vim.g.localRepos .. "/**/lua/**/*.lua"] = "module.lua",
-	[vim.fn.stdpath("config") .. "/lua/funcs/*.lua"] = "module.lua",
+	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",

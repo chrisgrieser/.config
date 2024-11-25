@@ -12,36 +12,6 @@ abbr("=~", "~=") -- shell uses `=~`
 abbr("===", "==")
 
 --------------------------------------------------------------------------------
--- turn regular string into formatted/template string
-bkeymap("i", "<D-t>", function()
-
-	-- get note
-	local node = vim.treesitter.get_node()
-	if not node then return end
-	local strNode
-	if node:type() == "string" then
-		strNode = node
-	elseif node:type():find("string_content") then
-		strNode = node:parent()
-	elseif node:type() == "escape_sequence" then
-		strNode = node:parent():parent()
-	end
-	if not strNode then return end
-
-	local nodeText = vim.treesitter.get_node_text(strNode, 0)
-	local row, startCol, _, endCol = strNode:range()
-
-	-- insert `%s` at cursor
-	local posInNode = vim.api.nvim_win_get_cursor(0)[2] - startCol
-	nodeText = nodeText:sub(1, posInNode) .. "%s" .. nodeText:sub(posInNode + 1)
-
-	local newText = ("(%s):format()"):format(nodeText)
-	vim.api.nvim_buf_set_text(0, row, startCol, row, endCol, { newText })
-	local moveToRight = 12 -- 
-	vim.api.nvim_win_set_cursor(0, { row + 1, endCol + moveToRight })
-end, { desc = " Template String" })
-
---------------------------------------------------------------------------------
 
 -- auto-comma for tables
 vim.api.nvim_create_autocmd("TextChangedI", {
@@ -60,8 +30,8 @@ vim.api.nvim_create_autocmd("TextChangedI", {
 --------------------------------------------------------------------------------
 -- REQUIRE MODULE FROM CWD
 
--- lightweight version of telescope-import.nvim import (just for lua)
--- REQUIRED `ripgrep`
+-- lightweight version of `telescope-import.nvim` import (just for lua)
+-- REQUIRED `ripgrep` (optionally `telescope` for selector & syntax highlighting)
 bkeymap("n", "<leader>ci", function()
 	local isAtBlank = vim.api.nvim_get_current_line():match("^%s*$")
 
@@ -71,13 +41,13 @@ bkeymap("n", "<leader>ci", function()
 	assert(rgResult.code == 0, rgResult.stderr)
 	local matches = vim.split(rgResult.stdout, "\n", { trimempty = true })
 
-	table.sort(matches)
-	local uniqMatches = vim.fn.uniq(matches) ---@cast uniqMatches string[]
-	table.sort(uniqMatches, function(a, b)
+	-- sort by length of varname & ensure uniqueness
+	table.sort(matches, function(a, b)
 		local varnameA = a:match("local (%S+) ?=")
 		local varnameB = b:match("local (%S+) ?=")
 		return #varnameA < #varnameB
 	end)
+	local uniqMatches = vim.fn.uniq(matches) ---@cast uniqMatches string[]
 
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User (buffer-specific): Set filetype to `lua` for `TelescopeResults`",
@@ -104,4 +74,3 @@ bkeymap("n", "<leader>ci", function()
 		end
 	end)
 end, { desc = " Import module" })
-
