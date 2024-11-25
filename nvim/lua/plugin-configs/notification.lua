@@ -2,6 +2,61 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
+local function last()
+	local skipTraceLevel = function(n) return n.level ~= "trace" end
+	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
+	local last = history[#history]
+	if not last then
+		local opts = { title = "Last notification", icon = "󰎟" }
+		vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
+		return
+	end
+	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
+
+	local bufnr = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
+	local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
+	require("snacks").win {
+		position = "float",
+		ft = last.ft or "markdown",
+		buf = bufnr,
+		height = 0.75,
+		width = 0.75,
+		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
+		keys = { ["<D-9>"] = "close" }, -- close win with key that opened it
+	}
+end
+
+local function messages()
+	local messages = vim.fn.execute("messages")
+	if messages == "" then
+		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
+		return
+	end
+	local lines = vim.split(vim.trim(messages), "\n")
+	local bufnr = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+	require("snacks").win {
+		position = "float",
+		buf = bufnr,
+		height = 0.75,
+		width = 0.75,
+		title = " :messages ",
+		keys = { ["<D-8>"] = "close" }, -- close win with key that opened it
+	}
+	-- highlight errors and paths
+	vim.api.nvim_buf_call(bufnr, function()
+		vim.fn.matchadd("ErrorMsg", [[E\d\+\zs:.*]]) -- errors
+		vim.fn.matchadd("ErrorMsg", [[^Error .*]])
+		vim.fn.matchadd("DiagnosticInfo", [[[^/]\+\.lua:\d\+\ze:]]) -- filenames
+		vim.fn.matchadd("DiagnosticInfo", [[E\d\+]]) -- error numbers differently
+		-- `\_.` matches any char, including newline
+		vim.fn.matchadd("WarningMsg", [[^stack traceback\_.*\n\t.*]])
+	end)
+end
+
+--------------------------------------------------------------------------------
+
 local function snacksConfig()
 	-- OVERRIDE DEFAULT PRINT FUNCTIONS (similar to `noice.nvim`)
 	_G.print = function(...)
@@ -96,23 +151,16 @@ return {
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
+		{ "<D-8>", messages, mode = { "n", "x", "i" }, desc = "󰎟 :messages" },
+		{ "<D-9>", last, mode = { "n", "x", "i" }, desc = "󰎟 Last notification" },
 		{
 			"<D-0>",
-			function() require("personal-plugins.snacks-notif-hist").full() end,
+			function()
+				local skipTraceLevel = function(n) return n.level ~= "trace" end
+				require("snacks").notifier.show_history { filter = skipTraceLevel }
+			end,
 			mode = { "n", "x", "i" },
 			desc = "󰎟 Notification history",
-		},
-		{
-			"<D-9>",
-			function() require("personal-plugins.snacks-notif-hist").last() end,
-			mode = { "n", "x", "i" },
-			desc = "󰎟 Last notification",
-		},
-		{
-			"<D-8>",
-			function() require("personal-plugins.snacks-notif-hist").messages() end,
-			mode = { "n", "x", "i" },
-			desc = "󰎟 :messages",
 		},
 	},
 	opts = {

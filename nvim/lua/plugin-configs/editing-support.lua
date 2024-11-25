@@ -217,20 +217,25 @@ return {
 		},
 		config = function(_, opts)
 			require("chainsaw").setup(opts)
-			vim.g.lualine_add("sections", "lualine_x", function()
-				local ns = vim.api.nvim_create_namespace("chainsaw.markers")
-				local extmarks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
-				extmarks = vim.tbl_filter(function(e) return nto e.invalid end, extmarks)
-				if #extmarks == 0 then return "" end
-				return opts.loglines.sign .. " " .. #extmarks
-			end)
+
+			local nerdfontIcon = opts.loglines.sign
+			vim.g.lualine_add("sections", "lualine_x", {
+				function()
+					local ns = vim.api.nvim_create_namespace("chainsaw.markers")
+					local extm = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
+					local notDeletedExtm = vim.tbl_filter(function(e) return not e[4].invalid end, extm)
+					if #notDeletedExtm == 0 then return "" end
+					return nerdfontIcon .. " " .. #notDeletedExtm
+				end,
+				color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color
+			})
 		end,
 		keys = {
 			-- stylua: ignore start
-			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
-			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = {"n", "x"}, desc = "⬟ object" },
-			{"<leader>la", function() require("chainsaw").assertLog() end, mode = {"n", "x"}, desc = "⁉️ assert" },
-			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = {"n", "x"}, desc = "󰜀 type" },
+			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" },
+			{"<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
+			{"<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "⁉️ assert" },
+			{"<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" },
 			{"<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 			{"<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },
 			{"<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
