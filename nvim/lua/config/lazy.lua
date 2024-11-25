@@ -115,7 +115,7 @@ local pluginTypeIcons = {
 -- For nicer selection via `vim.ui.select`: telescope-ui-select OR dressing.nvim
 keymap("n", "g,", function()
 	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User (once): Colorize icons in `TelescopeResults`",
+		desc = "User(once): Colorize icons in `TelescopeResults`",
 		once = true,
 		pattern = "TelescopeResults",
 		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,

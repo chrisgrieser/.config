@@ -47,7 +47,7 @@ safeRequire("config.backdrop-underline-fix")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "User (once): Load spellfixes",
+	desc = "User(once): Load spellfixes",
 	once = true,
 	callback = function() safeRequire("config.spellfixes") end,
 })

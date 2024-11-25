@@ -250,6 +250,12 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 -- CMDLINE
 -- EVAL (better than `:lua = `, since using `vim.notify`)
 keymap("n", "<leader>ee", function()
+	vim.api.nvim_create_autocmd("FileType", {
+		desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
+		once = true,
+		pattern = "DressingInput",
+		command = "set ft=lua",
+	})
 	vim.ui.input({ prompt = "󰜎 Eval:" }, function(input)
 		if not input then return end
 		local msg = vim.inspect(vim.fn.luaeval(input))
