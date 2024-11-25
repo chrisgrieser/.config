@@ -28,33 +28,25 @@ end, { desc = "󰛦 Organize Imports & Format" })
 
 --------------------------------------------------------------------------------
 
--- When typing "await" add "async" to the function declaration
+-- When typing `await`, automatically add `async` to the function declaration
 bkeymap("i", "t", function ()
 	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
-	local textBeforeCursor = vim.fn.getline("."):sub(vim.fn.col(".") - 4, vim.fn.col(".") - 1)
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(col - 3, col)
 	if textBeforeCursor ~= "awai" then return end
 	-----------------------------------------------------------------------------
 
-	local function findAncestor(node, types)
-		if not node then return nil end
-		if vim.tbl_contains(types, node:type()) then return node end
-		return findAncestor(node:parent(), types)
-	end
-
-	local node
+	local funcNode
 	local functionNodes = { "arrow_function", "function_declaration", "function" }
-	repeat
-		node = vim.treesitter.get_node()
-		node = findAncestor(node, functionNodes)
-		if not node then return end
-	until vim.tbl_contains(functionNodes, node:type())
+	repeat -- loop trough ancestors till function node found
+		funcNode = vim.treesitter.get_node()
+		funcNode = funcNode and funcNode:parent()
+		if not funcNode then return end
+	until vim.tbl_contains(functionNodes, funcNode:type())
+	local functionText = vim.treesitter.get_node_text(funcNode, 0)
 
-	local functionNode = findAncestor(node, { "arrow_function", "function_declaration", "function" })
-	if not functionNode then return end
+	if vim.startswith(functionText, "async") then return end -- already async
 
-	local functionText = vim.treesitter.get_node_text(functionNode, 0)
-	if vim.startswith(functionText, "async") then return end
-
-	local startRow, startCol = functionNode:start()
+	local startRow, startCol = funcNode:start()
 	vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
 end, { desc = "󰛦 Auto-add `async`" })

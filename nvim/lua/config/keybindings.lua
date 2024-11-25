@@ -131,8 +131,6 @@ keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
-keymap("i", "<D-t>", "${}<Left>", { desc = "${} Template string" })
-
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
