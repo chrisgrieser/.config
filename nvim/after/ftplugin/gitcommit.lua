@@ -26,3 +26,10 @@ end
 
 --------------------------------------------------------------------------------
 
+local firstLine = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+if firstLine == "# *** SAY WHY WE ARE REVERTING ON THE TITLE LINE ***" then
+	local newLine = "revert: "
+	vim.api.nvim_buf_set_lines(0, 0, 1, false, { "" })
+	vim.api.nvim_win_set_cursor(0, { 1, #newLine })
+	vim
+end
