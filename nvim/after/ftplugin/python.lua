@@ -64,8 +64,3 @@ bkeymap("n", "<leader>ci", function()
 		apply = true,
 	}
 end, { desc = " Import word under cursor" })
-
---------------------------------------------------------------------------------
--- turn string into f-string
-bkeymap("n", "<leader>ft", function()
-end, { desc = " F-string" })
