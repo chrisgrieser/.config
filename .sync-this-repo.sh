@@ -16,7 +16,7 @@ git add --all &&
 # loop git add-commit-pull-push, since when between add and push files have been
 # changed, the push will fail
 i=0
-sleep 1 # prevent "Cannot rebase on multiple branches"
+sleep 1.5 # prevent "Cannot rebase on multiple branches"
 while true; do
 	git pull --no-progress && git push --no-progress && exit 0
 	sleep 2
