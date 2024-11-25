@@ -3,26 +3,27 @@ local keymap = require("config.utils").uniqueKeymap
 -- KEYMAPS in regular window
 
 keymap("n", "gq", function()
-	local ok = pcall(vim.cmd, "silent cnext") ---@diagnostic disable-line: param-type-mismatch
-	if not ok then
-		vim.notify("Wrapped. ", vim.log.levels.TRACE, { icon = "", title = "Quickfix" })
-		vim.cmd.cfirst()
-	end
+	local opts = { title = "Quickfix", icon = "" }
+	local qf = vim.fn.getqflist { idx = 0, items = true }
+	local atEnd = qf.idx == #qf.items
+	if atEnd then vim.notify("Wrapped.", vim.log.levels.TRACE, opts) end
+
+	local msg = vim.fn.execute(atEnd and "cfirst" or "cnext")
+	vim.notify(vim.inspect(msg), nil, { title = "🖨️ msg", ft = "lua" })
+	-- local deletedIdx = msg:match("%(line deleted%)")
+	-- if msg:find("%(line deleted%)") then
+	-- 	vim.notify(("Item %s deleted."):format(idx), vim.log.levels.TRACE, opts)
+	-- end
 end, { desc = " Next quickfix" })
 
-keymap("n", "gQ", function() vim.cmd("silent cprev") end, { desc = " Prev quickfix" })
-keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st" })
+keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = " Prev quickfix" })
+
 keymap("n", "<leader>qc", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix list" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
-	for _, win in pairs(windows) do
-		if win.quickfix == 1 then
-			vim.cmd.cclose()
-			return
-		end
-	end
-	vim.cmd.copen()
+	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
+	vim.cmd[hasQuickfix and "cclose" or "copen"]()
 end, { desc = " Toggle quickfix window" })
 
 --------------------------------------------------------------------------------
