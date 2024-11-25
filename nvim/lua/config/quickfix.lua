@@ -2,23 +2,26 @@ local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- KEYMAPS in regular window
 
+-- `:cnext`, but wrapping, not throwing errors, and notifying if an item was deleted
 keymap("n", "gq", function()
-	local opts = { title = "Quickfix", icon = "" }
 	local qf = vim.fn.getqflist { idx = 0, items = true }
+	if #qf.items == 0 then return end
+	local msg = {}
 	local atEnd = qf.idx == #qf.items
-	if atEnd then vim.notify("Wrapped.", vim.log.levels.TRACE, opts) end
+	if atEnd then table.insert(msg, "Wrapped.") end
 
-	local msg = vim.fn.execute(atEnd and "cfirst" or "cnext")
-	vim.notify(vim.inspect(msg), nil, { title = "🖨️ msg", ft = "lua" })
-	-- local deletedIdx = msg:match("%(line deleted%)")
-	-- if msg:find("%(line deleted%)") then
-	-- 	vim.notify(("Item %s deleted."):format(idx), vim.log.levels.TRACE, opts)
-	-- end
+	-- `vim.fn.execute` captures the output of a comment
+	local response = vim.fn.execute(atEnd and "cfirst" or "cnext")
+	local deletedIdx = response:match("%((%d+) of %d+%) %(line deleted%):")
+	if deletedIdx then table.insert(msg, 1, ("Item #%d already deleted."):format(deletedIdx)) end
+	if #msg > 0 then
+		vim.notify(table.concat(msg, " "), vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
+	end
 end, { desc = " Next quickfix" })
 
 keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = " Prev quickfix" })
 
-keymap("n", "<leader>qc", function() vim.cmd.cexpr("[]") end, { desc = " Clear quickfix list" })
+keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = " Delete quickfix list" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
@@ -30,7 +33,7 @@ end, { desc = " Toggle quickfix window" })
 -- KEYMAPS in quickfix window
 
 vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Set keymaps in quickfix window",
+	desc = "User: Set keymaps for quickfix window",
 	pattern = "qf",
 	callback = function(ctx)
 		vim.keymap.set("n", "q", vim.cmd.close, { desc = " Close", buffer = ctx.buf })
@@ -51,7 +54,7 @@ local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	desc = "User: Add signs to quickfix (1/2)",
 	callback = function()
-		local ns = vim.api.nvim_create_namespace("quickfixSigns")
+		local ns = vim.api.nvim_create_namespace("quickfix-signs")
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
@@ -64,7 +67,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		end
 
 		-- clear signs
-		local group = vim.api.nvim_create_augroup("quickfixSigns", { clear = true })
+		local group = vim.api.nvim_create_augroup("quickfix-signs", { clear = true })
 		vim.iter(vim.api.nvim_list_bufs())
 			:each(function(bufnr) vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end)
 
@@ -97,7 +100,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 --------------------------------------------------------------------------------
--- STATUSBAR: COUNT OF ITEMS
+-- STATUSBAR – COUNT OF ITEMS
 
 local M = {}
 

@@ -190,7 +190,6 @@ return {
 	{ -- quickly add log statements
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
-		cmd = "ChainSaw",
 		opts = {
 			marker = "🖨️",
 			loglines = {
@@ -198,13 +197,7 @@ return {
 				signHlgroup = "DiagnosticSignInfo",
 				sign = "󰐪",
 			},
-
 			logStatements = {
-
-				variableLog = {
-					lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
-				},
-
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
 
@@ -217,10 +210,21 @@ return {
 				},
 
 				-- Hammerspoon
+				variableLog = { lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))' },
 				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
 				sound = { lua = 'hs.sound.getByName("Sosumi"):play() -- {{marker}}' },
 			},
 		},
+		config = function(_, opts)
+			require("chainsaw").setup(opts)
+			vim.g.lualine_add("sections", "lualine_x", function()
+				local ns = vim.api.nvim_create_namespace("chainsaw.markers")
+				local extmarks = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
+				extmarks = vim.tbl_filter(function(e) return nto e.invalid end, extmarks)
+				if #extmarks == 0 then return "" end
+				return opts.loglines.sign .. " " .. #extmarks
+			end)
+		end,
 		keys = {
 			-- stylua: ignore start
 			{"<leader>ll", function() require("chainsaw").variableLog() end, mode = {"n", "x"}, desc = "󰀫 variable" },
