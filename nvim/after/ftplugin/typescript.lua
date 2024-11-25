@@ -27,3 +27,34 @@ bkeymap("n", "<D-s>", function()
 end, { desc = "󰛦 Organize Imports & Format" })
 
 --------------------------------------------------------------------------------
+
+-- When typing "await" add "async" to the function declaration
+bkeymap("i", "t", function ()
+	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
+	local textBeforeCursor = vim.fn.getline("."):sub(vim.fn.col(".") - 4, vim.fn.col(".") - 1)
+	if textBeforeCursor ~= "awai" then return end
+	-----------------------------------------------------------------------------
+
+	local function findAncestor(node, types)
+		if not node then return nil end
+		if vim.tbl_contains(types, node:type()) then return node end
+		return findAncestor(node:parent(), types)
+	end
+
+	local node
+	local functionNodes = { "arrow_function", "function_declaration", "function" }
+	repeat
+		node = vim.treesitter.get_node()
+		node = findAncestor(node, functionNodes)
+		if not node then return end
+	until vim.tbl_contains(functionNodes, node:type())
+
+	local functionNode = findAncestor(node, { "arrow_function", "function_declaration", "function" })
+	if not functionNode then return end
+
+	local functionText = vim.treesitter.get_node_text(functionNode, 0)
+	if vim.startswith(functionText, "async") then return end
+
+	local startRow, startCol = functionNode:start()
+	vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
+end, { desc = "󰛦 Auto-add `async`" })
