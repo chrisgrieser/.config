@@ -13,7 +13,9 @@ abbr("===", "==")
 
 --------------------------------------------------------------------------------
 -- turn regular string into formatted/template string
-bkeymap("n", "<leader>ft", function()
+bkeymap("i", "<D-t>", function()
+
+	-- get note
 	local node = vim.treesitter.get_node()
 	if not node then return end
 	local strNode
@@ -28,11 +30,15 @@ bkeymap("n", "<leader>ft", function()
 
 	local nodeText = vim.treesitter.get_node_text(strNode, 0)
 	local row, startCol, _, endCol = strNode:range()
+
+	-- insert `%s` at cursor
+	local posInNode = vim.api.nvim_win_get_cursor(0)[2] - startCol
+	nodeText = nodeText:sub(1, posInNode) .. "%s" .. nodeText:sub(posInNode + 1)
+
 	local newText = ("(%s):format()"):format(nodeText)
 	vim.api.nvim_buf_set_text(0, row, startCol, row, endCol, { newText })
-
-	vim.api.nvim_win_set_cursor(0, { row + 1, endCol + 10 })
-	vim.cmd.startinsert()
+	local moveToRight = 12 -- 
+	vim.api.nvim_win_set_cursor(0, { row + 1, endCol + moveToRight })
 end, { desc = " Template String" })
 
 --------------------------------------------------------------------------------
