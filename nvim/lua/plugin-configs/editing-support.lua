@@ -191,7 +191,13 @@ return {
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		cmd = "ChainSaw",
 		opts = {
-			marker = "🖨️",
+			marker = "🪚",
+			loglines = {
+				lineHlgroup = false,
+				signHlgroup = "",
+				sign = "󰹈",
+			},
+
 			logStatements = {
 
 				variableLog = {

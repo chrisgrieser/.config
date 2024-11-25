@@ -527,7 +527,7 @@ keymap("n", "<leader>yc", function()
 	else
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end
-end, { desc = " Code context" })
+end, { desc = "󰅍 Code context" })
 
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
