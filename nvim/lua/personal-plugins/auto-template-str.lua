@@ -6,6 +6,27 @@ local function warn(msg)
 	vim.notify(msg, vim.log.levels.WARN, { title = "Auto-template-string", icon = "󰅳" })
 end
 
+---@param strNode TSNode
+---@param insertAtCursor string
+---@param cursorMove number
+---@param textTransformer fun(nodeText: string): string
+local function updateNode(strNode, insertAtCursor, cursorMove, textTransformer)
+	local nodeText = vim.treesitter.get_node_text(strNode, 0)
+	if nodeText:find("[\n\r]") then
+		warn("Multiline strings not supported yet.")
+		return
+	end
+	local nodeRow, nodeStartCol, _, nodeEndCol = strNode:range()
+	local cursorCol = vim.api.nvim_win_get_cursor(0)[2]
+	local posInNode = cursorCol - nodeStartCol
+
+	nodeText = nodeText:sub(1, posInNode) .. insertAtCursor .. nodeText:sub(posInNode + 1)
+	if textTransformer then nodeText = textTransformer(nodeText) end
+	vim.api.nvim_buf_set_text(0, nodeRow, nodeStartCol, nodeRow, nodeEndCol, { nodeText })
+
+	vim.api.nvim_win_set_cursor(0, { nodeRow + 1, cursorCol + cursorMove })
+end
+
 --------------------------------------------------------------------------------
 
 local function luaFunc()
@@ -21,22 +42,10 @@ local function luaFunc()
 	end
 	if not strNode then return end
 
-	local nodeText = vim.treesitter.get_node_text(strNode, 0)
-	local row, nodeStartCol, _, nodeEndCol = strNode:range()
-
-	-- insert `%s` at cursor
-	local cursorCol = vim.api.nvim_win_get_cursor(0)[2]
-	local posInNode = cursorCol - nodeStartCol
-	nodeText = nodeText:sub(1, posInNode) .. "%s" .. nodeText:sub(posInNode + 1)
-
-	local newText = ("(%s):format()"):format(nodeText)
-	vim.api.nvim_buf_set_text(0, row, nodeStartCol, row, nodeEndCol, { newText })
-	local moveToRight = 12 -- length of `%s` & `():format()`
-	vim.api.nvim_win_set_cursor(0, { row + 1, nodeEndCol + moveToRight })
+	updateNode(strNode, "%s", 13, function(nodeText) return ("(%s):format()"):format(nodeText) end)
 end
 
 local function pyFunc()
-	-- WIP
 	local node = vim.treesitter.get_node()
 	if not node then return end
 	local strNode
@@ -46,15 +55,10 @@ local function pyFunc()
 		strNode = node:parent()
 	elseif node:type() == "escape_sequence" then
 		strNode = node:parent():parent()
-	else
-		return
 	end
 	if not strNode then return end
-	local nodeText = vim.treesitter.get_node_text(strNode, 0)
-	nodeText = "f" .. nodeText
 
-	local startRow, startCol, endRow, endCol = strNode:range()
-	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, vim.split(nodeText, "\n"))
+	updateNode(strNode, "{}", 2, function(nodeText) return "f" .. nodeText end)
 end
 
 local function jsFunc()
@@ -66,16 +70,7 @@ local function jsFunc()
 	if not node or not vim.endswith(node:type(), "string") then return end
 	local strNode = node
 
-	local nodeText = vim.treesitter.get_node_text(strNode, 0)
-	local row, nodeStartCol, _, nodeEndCol = strNode:range()
-	local cursorCol = vim.api.nvim_win_get_cursor(0)[2]
-	local posInNode = cursorCol - nodeStartCol
-
-	-- insert `${}` at cursor
-	nodeText = nodeText:sub(1, posInNode) .. "${}" .. nodeText:sub(posInNode + 1)
-	nodeText = "`" .. nodeText:sub(2, -2) .. "`" -- switch to backticks
-	vim.api.nvim_buf_set_text(0, row, nodeStartCol, row, nodeEndCol, { nodeText })
-	vim.api.nvim_win_set_cursor(0, { row + 1, cursorCol + 2 }) -- move into braces
+	updateNode(strNode, "${}", 2, function(nodeText) return "`" .. nodeText:sub(2, -2) .. "`" end)
 end
 
 --------------------------------------------------------------------------------
@@ -86,16 +81,16 @@ function M.insertTemplateStr()
 		return
 	end
 
-	local availableTransformers = {
+	local availableFiletypes = {
 		lua = luaFunc,
 		python = pyFunc,
 		javascript = jsFunc,
 		typescript = jsFunc,
 	}
-	local transformer = availableTransformers[vim.bo.filetype]
+	local updateFunc = availableFiletypes[vim.bo.filetype]
 
-	if transformer then
-		transformer()
+	if updateFunc then
+		updateFunc()
 	else
 		warn("No transformer configured for " .. vim.bo.ft)
 	end

@@ -496,7 +496,7 @@ end, { desc = " Switch quotes in line" })
 keymap(
 	"i",
 	"<D-t>",
-	function() require("personal-plugins.auto-template-str").insertTemplateString() end,
+	function() require("personal-plugins.auto-template-str").insertTemplateStr() end,
 	{ desc = "󰅳 Insert template string" }
 )
 
