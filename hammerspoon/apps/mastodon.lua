@@ -45,9 +45,8 @@ local function showAndMoveOrHide(win)
 
 	-- HIDE when transparent app is maximized
 	local transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" }
-	local winApp = win:application():name() ---@diagnostic disable-line: undefined-field
+	local winApp = win:application() and win:application():name() ---@diagnostic disable-line: undefined-field
 	if wu.winHasSize(win, hs.layout.maximized) and (hs.fnutils.contains(transBgApps, winApp)) then
-		print("🖨️ 🔵")
 		masto:hide()
 	end
 end

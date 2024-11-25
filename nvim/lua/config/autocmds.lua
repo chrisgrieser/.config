@@ -30,10 +30,8 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
-		---@diagnostic disable-next-line: undefined-field faulty annotation
-		vim.system { "find", vim.opt.viewdir:get(), "-mtime", "+30d", "-delete" }
-		---@diagnostic disable-next-line: undefined-field faulty annotation
-		vim.system { "find", vim.opt.undodir:get()[1], "-mtime", "+14d", "-delete" }
+		vim.system { "find", vim.o.viewdir, "-mtime", "+30d", "-delete" }
+		vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
 		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
 	end,
 })
@@ -71,9 +69,9 @@ local autoCdConfig = {
 		"biome.jsonc",
 	},
 	parentOfRoot = {
-		".config",
+		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- macOS iCloud
-		vim.fs.basename(vim.env.HOME),
+		vim.fs.basename(vim.env.HOME), -- $HOME
 		"Cellar", -- opt/homebrew/Cellar/neovim
 	},
 }
@@ -165,7 +163,7 @@ local function searchCountIndicator(mode)
 	vim.api.nvim_buf_set_extmark(0, countNs, row - 1, 0, {
 		virt_text = { { text, "IncSearch" }, margin },
 		virt_text_pos = lineFull and "right_align" or "eol",
-		priority = 200, -- so it comes in front of lsp-endhints
+		priority = 200, -- so it comes in front of `nvim-lsp-endhints`
 	})
 end
 
@@ -197,7 +195,7 @@ end, vim.api.nvim_create_namespace("autoNohlAndSearchCount"))
 -- CONFIG
 local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
-	[vim.g.localRepos .. "/**/lua/**/*.lua"] = "module.lua",
+	[vim.g.localRepos .. "/**/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
 
@@ -282,21 +280,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 
 				vim.api.nvim_win_set_cursor(0, { firstConflictLn, 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
-				vim.notify_once(
-					"Conflict markers found.",
-					nil,
-					{ title = "Git Conflicts", icon = "󰞇" }
-				)
+				local msg = "Conflict markers found."
+				vim.notify_once(msg, nil, { title = "Git Conflicts", icon = "󰞇" })
 			end)
 		)
 	end,
 })
 --------------------------------------------------------------------------------
 -- ENFORCE SCROLLOFF AT EOF
-
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
+
 vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
-	desc = "User: Enforce scrolloff at EOF",
+	desc = "User: Enforce scrolloff at EoF",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 		if ctx.event == "WinScrolled" then
@@ -310,8 +305,8 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 		local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
 
 		if visualDistanceToEof < scrolloff then
-			local winView = vim.fn.winsaveview()
-			vim.fn.winrestview { topline = winView.topline + scrolloff - visualDistanceToEof }
+			local winTopline = vim.fn.winsaveview().topline
+			vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
 		end
 	end,
 })
@@ -321,12 +316,14 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 -- FIX for some reason `scrolloff` is sometimes set to `0` on entering new buffers
 local originalScrolloff = vim.o.scrolloff
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-	desc = "User: FIX Scrolloff",
+	desc = "User: FIX scrolloff on entering new buffer",
 	callback = function(ctx)
 		vim.defer_fn(function()
-			if vim.o.scrolloff > 0 then return end
-			vim.o.scrolloff = originalScrolloff
-			vim.notify_once("Scrolloff fix applied.", vim.log.levels.DEBUG, { title = ctx.event })
-		end, 1)
+			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
+			if vim.o.scrolloff == 0 then
+				vim.o.scrolloff = originalScrolloff
+				vim.notify("Scrolloff fix applied.", vim.log.levels.WARN, { title = ctx.event })
+			end
+		end, 100)
 	end,
 })

@@ -1,35 +1,30 @@
 local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 
--- options
 vim.opt_local.listchars:remove("multispace") -- spacing in comments
 
--- spelling
+-- SPELLING
 vim.opt_local.spell = true
 vim.opt_local.spelloptions = "camel"
+bkeymap("n", "ge", "]s", { desc = "󰓆 Next misspelling" })
+bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 
---------------------------------------------------------------------------------
+-- UTILITY KEYMAPS
+bkeymap("i", "<Tab>", "<End>", { desc = " Goto EoL" })
+bkeymap("n", "<Tab>", "A", { desc = " Goto EoL" })
 
-bkeymap("n", "ge", "]s")
-bkeymap("n", "gE", "[s")
-
--- utility keymap
-bkeymap("i", "<Tab>", "<End>")
-bkeymap("n", "<Tab>", "A")
-
--- condition prevents mapping `DressingInput`, which already has its own mappings
-if vim.bo.buftype ~= "nofile" then
-	bkeymap("n", "<CR>", "ZZ", { desc = "Confirm" }) -- quitting with saving = committing
-	bkeymap("n", "q", vim.cmd.cquit, { desc = "Abort" }) -- quitting with error = aborting commit
-	vim.opt_local.colorcolumn = "73"
+local notDressingOrTinygit = vim.bo.buftype ~= "nofile"
+if notDressingOrTinygit then -- already has its own mappings
+	bkeymap("n", "<CR>", "ZZ", { desc = " Confirm" }) -- quitting with saving = committing
+	bkeymap("n", "q", vim.cmd.cquit, { desc = " Abort" }) -- quitting with error = aborting commit
 end
 
---------------------------------------------------------------------------------
-
-local firstLine = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+-- REVERT
+-- replace first line of `git revert` with Conventional Commit keyword `revert`
+-- (assumes `git config --global revert.reference false`)
+local firstLine = vim.api.nvim_get_current_line()
 if firstLine == "# *** SAY WHY WE ARE REVERTING ON THE TITLE LINE ***" then
-	local newLine = "revert: "
-	vim.api.nvim_buf_set_lines(0, 0, 1, false, { "" })
-	vim.api.nvim_win_set_cursor(0, { 1, #newLine })
-	vim
+	vim.api.nvim_set_current_line("revert: ")
+	vim.cmd.startinsert { bang = true }
+	vim.cmd.normal { "3gww", bang = true } -- reflow description line for readability
 end
