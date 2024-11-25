@@ -39,7 +39,7 @@ end
 --------------------------------------------------------------------------------
 
 ---@param node TSNode
-local function luaFunc(node)
+local function luaStr(node)
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -53,7 +53,7 @@ local function luaFunc(node)
 end
 
 ---@param node TSNode
-local function pyFunc(node)
+local function pyStr(node)
 	local strNode
 	if node:type() == "string" then
 		strNode = node
@@ -67,7 +67,7 @@ local function pyFunc(node)
 end
 
 ---@param node TSNode
-local function jsFunc(node)
+local function jsStr(node)
 	local strNode
 	if node:type() == "string" or node:type() == "template_string" then
 		strNode = node
@@ -87,20 +87,20 @@ function M.insertTemplateStr()
 	end
 
 	local availableFiletypes = {
-		lua = luaFunc,
-		python = pyFunc,
-		javascript = jsFunc,
-		typescript = jsFunc,
+		lua = luaStr,
+		python = pyStr,
+		javascript = jsStr,
+		typescript = jsStr,
 	}
 	local updateFunc = availableFiletypes[vim.bo.filetype]
-
-	if updateFunc then
-		local node = vim.treesitter.get_node()
-		if not node then return end
-		updateFunc(node)
-	else
-		warn("No transformer configured for " .. vim.bo.ft)
+	if not updateFunc then
+		warn("Not configured for " .. vim.bo.ft)
+		return
 	end
+
+	local nodeAtCursor = vim.treesitter.get_node()
+	if not nodeAtCursor then return end
+	updateFunc(nodeAtCursor)
 end
 
 --------------------------------------------------------------------------------

@@ -177,6 +177,7 @@ return {
 				},
 			}
 			opts.langs = {
+				gitcommit = { message_line = gww },
 				comment = { source = gww, element = gww }, -- comments in any language
 				lua = { comment = gww },
 				jsdoc = { source = gww, description = gww },
