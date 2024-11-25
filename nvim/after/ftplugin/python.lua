@@ -68,22 +68,4 @@ end, { desc = " Import word under cursor" })
 --------------------------------------------------------------------------------
 -- turn string into f-string
 bkeymap("n", "<leader>ft", function()
-	local node = vim.treesitter.get_node()
-	if not node then return end
-	local strNode
-	if node:type() == "string" then
-		strNode = node
-	elseif node:type():find("^string_") then
-		strNode = node:parent()
-	elseif node:type() == "escape_sequence" then
-		strNode = node:parent():parent()
-	else
-		return
-	end
-	if not strNode then return end
-	local nodeText = vim.treesitter.get_node_text(strNode, 0)
-
-	local lines = vim.split("f" .. nodeText, "\n")
-	local startRow, startCol, endRow, endCol = strNode:range()
-	vim.api.nvim_buf_set_text(0, startRow, startCol, endRow, endCol, lines)
 end, { desc = " F-string" })

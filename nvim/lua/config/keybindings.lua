@@ -493,6 +493,13 @@ keymap("n", "<leader>fq", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
+keymap(
+	"i",
+	"<D-t>",
+	function() require("personal-plugins.auto-template-str").insertTemplateString() end,
+	{ desc = "󰅳 Insert template string" }
+)
+
 --------------------------------------------------------------------------------
 -- YANKING
 

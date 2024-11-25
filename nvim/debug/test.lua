@@ -1,2 +1,2 @@
 
-local aaa = "foobar foo"
+local aaa = "foobar  foo"
