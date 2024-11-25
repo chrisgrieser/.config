@@ -25,14 +25,14 @@ on alfred_script(shellCmd)
 	# DETERMINE COMMAND
 	if (text 1 thru 3 of shellCmd) is "cd " then
 		set arg to text 4 thru -1 of shellCmd
-		set shellCmd to "builtin cd -q " &amp; arg &amp; " &amp;&amp; clear" -- -q to suppress cd-hook
+		-- -q to suppress cd-hook
+		-- leading space to suppress saving in shell history
+		set shellCmd to " cd -q " &amp; arg &amp; " &amp;&amp; clear"
 	end if
 
 	# SEND COMMAND
 	set exportPath to "export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; "
 	do shell script (exportPath &amp; "echo " &amp; quoted form of shellCmd &amp; " | wezterm cli send-text --no-paste")
 end alfred_script</string>
-	<key>prefix</key>
-	<integer>1</integer>
 </dict>
 </plist>

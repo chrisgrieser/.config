@@ -37,7 +37,7 @@ local themes = {
 
 					-- FIX missing differentiation in python
 					["@type.builtin.python"] = { link = "Typedef" },
-					["@string.documentation.python"] = { link = "Typedef" },
+					["@string.documentation.python"] = { link = "Comment" },
 					["@keyword.operator.python"] = { link = "Operator" },
 
 					-- cursorword
@@ -82,20 +82,22 @@ local themes = {
 		-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
-		enabled = false,
+		-- enabled = false,
 		opacity = 0.91,
 		opts = {
 			style = "moon",
 			lualine_bold = true,
 			on_colors = function(colors)
-				colors.git.change = colors.yellow
-				colors.git.add = colors.green2
+				colors.git.change = colors.yellow -- yellow, not blue
+				colors.git.add = colors.green2 -- prettier green
+				colors.comment = "#767fb1" -- bit more contrast (original: #636da6)
 			end,
 			on_highlights = function(hl, colors)
 				-- general
 				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["diffAdded"] = { fg = colors.green }
+				hl["@string.documentation.python"] = { link = "Comment" }
 
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
@@ -151,9 +153,9 @@ local themes = {
 					setHl("@character.printf", { link = "Purple" })
 
 					-- General
-					setHl("TSParameter", { fg = "#639cc3" })
+					setHl("TSParameter", { fg = "#679bbf" })
 					setHl("TSConstant", { fg = "#948ecb" })
-					setHl("@type.builtin.python", { link = "Typedef" })
+					setHl("@string.documentation.python", { link = "Comment" })
 					setHl("@keyword.return", { bold = true, fg = "#f6843a" })
 					setHl("TSPunctBracket", { fg = "#af7e5d" })
 					vim.defer_fn(function() setHl("@constructor.lua", { fg = "#9b97a8" }) end, 1)
