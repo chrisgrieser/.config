@@ -7,8 +7,8 @@ local function warn(msg)
 end
 
 ---@param strNode? TSNode
----@param insertAtCursor string text to insert
----@param textTransformer fun(nodeText: string): string applied after inserting text at cursor
+---@param insertAtCursor string text to insert at cursor location
+---@param textTransformer fun(nodeText: string): string
 ---@param cursorMove "nodeEnd"|nil where to move the cursor before applying `cursorOffset`
 ---@param cursorOffset number number of columns to move to the right
 local function updateNode(strNode, insertAtCursor, textTransformer, cursorMove, cursorOffset)

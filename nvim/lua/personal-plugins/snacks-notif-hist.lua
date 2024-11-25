@@ -40,7 +40,7 @@ function M.full()
 	require("snacks").win {
 		position = "bottom",
 		buf = bufnr,
-		height = 0.6,
+		height = 0.7,
 		keys = { ["<D-0>"] = "close" }, -- close win with key that opened it
 	}
 end
