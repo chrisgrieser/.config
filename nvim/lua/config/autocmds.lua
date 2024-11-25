@@ -318,16 +318,15 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 
 --------------------------------------------------------------------------------
 
--- BUG for some reason, scrolloff is sometimes set to `0`, manually fixing that
--- here. Need to investigate further what causes this…
+-- FIX for some reason `scrolloff` is sometimes set to `0` on entering new buffers
 local originalScrolloff = vim.o.scrolloff
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-	desc = "User: ",
+	desc = "User: FIX Scrolloff",
 	callback = function(ctx)
 		vim.defer_fn(function()
 			if vim.o.scrolloff > 0 then return end
 			vim.o.scrolloff = originalScrolloff
-			vim.notify_once("Scrolloff fix applied.", nil, { title = ctx.event })
+			vim.notify_once("Scrolloff fix applied.", vim.log.levels.DEBUG, { title = ctx.event })
 		end, 1)
 	end,
 })
