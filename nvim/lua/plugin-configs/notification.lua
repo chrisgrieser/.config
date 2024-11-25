@@ -2,7 +2,7 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
-local function last()
+local function lastNotif()
 	local skipTraceLevel = function(n) return n.level ~= "trace" end
 	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
 	local last = history[#history]
@@ -23,11 +23,12 @@ local function last()
 		height = 0.75,
 		width = 0.75,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
+		wo = { wrap = true }, -- only one message, so use full space
 		keys = { ["<D-9>"] = "close" }, -- close win with key that opened it
 	}
 end
 
-local function messages()
+local function messagesAsWin()
 	local messages = vim.fn.execute("messages")
 	if messages == "" then
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
@@ -37,10 +38,9 @@ local function messages()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	require("snacks").win {
-		position = "float",
+		position = "bottom",
 		buf = bufnr,
 		height = 0.75,
-		width = 0.75,
 		title = " :messages ",
 		keys = { ["<D-8>"] = "close" }, -- close win with key that opened it
 	}
@@ -150,16 +150,20 @@ return {
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notices" },
-		{ "<D-8>", messages, mode = { "n", "x", "i" }, desc = "󰎟 :messages" },
-		{ "<D-9>", last, mode = { "n", "x", "i" }, desc = "󰎟 Last notification" },
+		-- stylua: ignore
+		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
+		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
+		{ "<D-9>", lastNotif, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
 		{
 			"<D-0>",
 			function()
-				local skipTraceLevel = function(n) return n.level ~= "trace" end
-				require("snacks").notifier.show_history { filter = skipTraceLevel }
+				require("snacks").notifier.hide()
+				require("snacks").notifier.show_history {
+					filter = function(notif) return notif.level ~= "trace" end,
+					reverse = true, -- newest on top
+				}
 			end,
-			mode = { "n", "x", "i" },
+			mode = { "n", "v", "i" },
 			desc = "󰎟 Notification history",
 		},
 	},
@@ -170,13 +174,13 @@ return {
 			debounce = 300,
 		},
 		win = {
-			keys = { q = "close", ["<Esc>"] = "close" },
 			border = vim.g.borderStyle,
 			bo = { modifiable = false },
-			wo = { cursorline = true, colorcolumn = "", winfixbuf = true, wrap = true },
+			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
+			keys = { q = "close", ["<Esc>"] = "close" },
 		},
 		notifier = {
-			timeout = 6000,
+			timeout = 7000,
 			sort = { "added" }, -- sort only by time
 			width = { min = 12, max = 0.5 },
 			height = { min = 1, max = 0.5 },
@@ -186,7 +190,12 @@ return {
 		styles = {
 			notification = {
 				border = vim.g.borderStyle,
-				wo = { wrap = true, winblend = 0, cursorline = false },
+				wo = { cursorline = false, winblend = 0, wrap = true },
+			},
+			["notification.history"] = {
+				position = "bottom",
+				height = 0.7,
+				keys = { ["<D-0>"] = "close" }, -- close win with key that opened it
 			},
 		},
 	},
