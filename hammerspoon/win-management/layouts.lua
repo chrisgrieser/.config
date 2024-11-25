@@ -78,6 +78,7 @@ local function workLayout()
 	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
+	require("win-management.auto-tile").resetWinCount("Brave Browser")
 
 	u.openApps {
 		"Discord",
