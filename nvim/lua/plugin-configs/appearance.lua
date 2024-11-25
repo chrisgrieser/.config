@@ -30,14 +30,13 @@ return {
 			winblend = 10, -- little transparency, since hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
-				marks = { enable = false }, -- prevents buggy mark mappings
+				marks = { enable = false },
 				quickfix = { enable = true },
 			},
 		},
 	},
 	{ -- markdown live-preview
 		"MeanderingProgrammer/render-markdown.nvim",
-		-- alternative: markview.nvim (similar featureset, bit buggy though)
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = "markdown",
 		keys = {
@@ -62,7 +61,7 @@ return {
 			},
 			sign = { enabled = false },
 			win_options = {
-				-- toggling this plugin should also toggle conceallevel
+				-- this makes it that toggling this plugin also toggles conceallevel
 				conceallevel = { default = 0, rendered = 3 },
 			},
 		},

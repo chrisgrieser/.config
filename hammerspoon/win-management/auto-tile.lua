@@ -10,7 +10,6 @@ local config = {
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
-	rejectScreens = "Acer 1080P PJ",
 	---@type fun(appName: string)
 	zeroWindowAction = function(appName)
 		-- hide to prevent focussing windowless app
@@ -53,6 +52,7 @@ local function autoTile(appName)
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
+	-- print(("🪟 %s: %d wins"):format(appName, #wins))
 	local pos = {}
 	if #wins == 0 then
 		config.zeroWindowAction(appName)
@@ -96,11 +96,7 @@ local wf = hs.window.filter
 local aw = hs.application.watcher
 for appName, ignoredWins in pairs(config.appsToAutoTile) do
 	M["winFilter_" .. appName] = wf.new(appName)
-		:setOverrideFilter({
-			rejectTitles = ignoredWins,
-			allowRoles = "AXStandardWindow",
-			rejectScreens = config.rejectScreens,
-		})
+		:setOverrideFilter({ rejectTitles = ignoredWins, allowRoles = "AXStandardWindow" })
 		:subscribe(wf.windowCreated, function() autoTile(appName) end)
 		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
 		:subscribe(wf.windowFocused, function() autoTile(appName) end)

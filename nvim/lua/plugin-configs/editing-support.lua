@@ -195,7 +195,7 @@ return {
 			marker = "🖨️",
 			loglines = {
 				lineHlgroup = false,
-				signHlgroup = "DiagnosticSignOk",
+				signHlgroup = "DiagnosticSignInfo",
 				sign = "󰐪",
 			},
 
