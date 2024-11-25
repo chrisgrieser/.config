@@ -145,14 +145,15 @@ local themes = {
 					local hlCmd = vim.cmd.highlight
 
 					-- FIX MISSING HIGHLIGHTS
-					-- stop globals like `vim` in lua from being overwritten
+					-- stop globals like `vim` in lua or `Objc` in JXA from being overwritten
 					setHl("@lsp.type.variable", {})
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
 					setHl("@character.printf", { link = "Purple" })
-					-- parameters
-					setHl("TSParameter", { fg = "#639cc3" })
 
 					-- General
+					setHl("TSParameter", { fg = "#639cc3" })
+					setHl("TSConstant", { fg = "#948ecb" })
+					setHl("@type.builtin.python", { link = "Typedef" })
 					setHl("@keyword.return", { bold = true, fg = "#f6843a" })
 					setHl("TSPunctBracket", { fg = "#af7e5d" })
 					vim.defer_fn(function() setHl("@constructor.lua", { fg = "#9b97a8" }) end, 1)

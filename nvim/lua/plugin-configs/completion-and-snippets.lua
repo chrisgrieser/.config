@@ -56,20 +56,27 @@ return {
 					draw = {
 						-- https://github.com/saghen/blink.cmp#menu-appearancedrawing
 						columns = {
-							{ "label", "label_description", "kind_icon" },
+							{ "label", "label_description", "kind_icon", gap = 1 },
 						},
 						components = {
-							label = { width = { max = 30 } },
+							label = { width = { max = 30 } }, -- more space for doc-win
 							label_description = { width = { max = 20 } },
 							kind_icon = {
 								text = function(ctx)
+									-- detect emmet-ls
 									local source, client = ctx.item.source_id, ctx.item.client_id
 									local lspName = client and vim.lsp.get_client_by_id(client).name
 									if lspName == "emmet_language_server" then source = "emmet" end
 
-									local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "" }
+									-- use source-specific icons, and `kind_icon` only for items from LSPs
+									local sourceIcons = {
+										snippets = "󰩫",
+										buffer = "󰦨",
+										emmet = "",
+										path = "󰈔",
+									}
 									local icon = sourceIcons[source] or ctx.kind_icon
-									return " " .. icon
+									return icon
 								end,
 							},
 						},
@@ -91,10 +98,10 @@ return {
 				Value = "󰎠",
 				Enum = "",
 				Keyword = "󰌋",
-				Snippet = "󰒕",
+				Snippet = "󰒕", -- should indicate it's from the LSP
 				Color = "󰏘",
 				Reference = "",
-				File = "",
+				File = "", -- if from LSP, it's a module
 				Folder = "󰉋",
 				EnumMember = "",
 				Constant = "󰏿",

@@ -546,3 +546,4 @@ keymap(
 	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
+--------------------------------------------------------------------------------
