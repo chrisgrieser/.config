@@ -7,9 +7,9 @@ local function warn(msg)
 end
 
 ---@param strNode TSNode
----@param insertAtCursor string
----@param cursorMove number
----@param textTransformer fun(nodeText: string): string
+---@param insertAtCursor string text to insert
+---@param cursorMove number number of columns to move to the right
+---@param textTransformer fun(nodeText: string): string applied after inserting text at cursor
 local function updateNode(strNode, insertAtCursor, cursorMove, textTransformer)
 	local nodeText = vim.treesitter.get_node_text(strNode, 0)
 	if nodeText:find("[\n\r]") then
@@ -17,7 +17,7 @@ local function updateNode(strNode, insertAtCursor, cursorMove, textTransformer)
 		return
 	end
 	local nodeRow, nodeStartCol, _, nodeEndCol = strNode:range()
-	local cursorCol = vim.api.nvim_win_get_cursor(0)[2]
+	local _, cursorCol = unpack(vim.api.nvim_win_get_cursor(0))
 	local posInNode = cursorCol - nodeStartCol
 
 	nodeText = nodeText:sub(1, posInNode) .. insertAtCursor .. nodeText:sub(posInNode + 1)
@@ -42,7 +42,7 @@ local function luaFunc()
 	end
 	if not strNode then return end
 
-	updateNode(strNode, "%s", 13, function(nodeText) return ("(%s):format()"):format(nodeText) end)
+	updateNode(strNode, "%s", 13, function(nodeText) return "(" .. nodeText .. "):format()" end)
 end
 
 local function pyFunc()
