@@ -40,9 +40,10 @@ end
 
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.keybindings")
-safeRequire("config.quickfix")
 safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.autocmds")
+safeRequire("config.quickfix")
+safeRequire("config.yanking-and-pasting")
 safeRequire("config.backdrop-underline-fix")
 
 -- lazy-load spellfixes

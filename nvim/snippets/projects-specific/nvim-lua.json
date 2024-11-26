@@ -27,11 +27,7 @@
     "prefix": "@cast (LuaDoc)"
   },
   "check if on macOS": {
-    "body": [
-      "if vim.uv.os_uname().sysname == \"Darwin\" then",
-      "\t$0",
-      "end"
-    ],
+    "body": "jit.os == \"OSX\"",
     "prefix": "check if on macOS"
   },
   "create new window": {
@@ -65,18 +61,9 @@
     ],
     "prefix": "create new nvim window"
   },
-  "dedent": {
-    "body": [
-      "---@param lines string[]",
-      "---@return string[] dedentedLines",
-      "function M.dedent(lines)",
-      "\tlocal indentAmounts = vim.tbl_map(function(line) return #(line:match(\"^%s*\")) end, lines)",
-      "\tlocal smallestIndent = math.min(unpack(indentAmounts))",
-      "\tlocal dedentedLines = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, lines)",
-      "\treturn dedentedLines",
-      "end"
-    ],
-    "prefix": "dedent"
+  "current line": {
+    "body": "vim.api.nvim_get_current_line()",
+    "prefix": "current line"
   },
   "defer": {
     "body": [
@@ -84,8 +71,15 @@
       "\t$1",
       "end, ${2:1})"
     ],
-    "filetype": "lua",
     "prefix": "defer"
+  },
+  "get buffer lines": {
+    "body": "local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)",
+    "prefix": "get buffer lines"
+  },
+  "get buffer name": {
+    "body": "vim.api.nvim_buf_get_name(0)",
+    "prefix": "get buffer name"
   },
   "get selection": {
     "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",
@@ -100,15 +94,6 @@
     ],
     "prefix": "get visual selection"
   },
-  "leave visual mode": {
-    "body": [
-      "local function leaveVisualMode()",
-      "\tlocal escKey = vim.api.nvim_replace_termcodes(\"<Esc>\", false, true, true)",
-      "\tvim.api.nvim_feedkeys(escKey, \"nx\", false)",
-      "end"
-    ],
-    "prefix": "leave visual mode"
-  },
   "minimum version requirement": {
     "body": [
       "local version = vim.version()",
@@ -121,19 +106,7 @@
   },
   "normal": {
     "body": "vim.cmd.normal { \"${1:keys}\", bang = true }",
-    "prefix": "normal"
-  },
-  "plugin spec (lazy.nvim)": {
-    "body": [
-      "{",
-      "\t\"$1\",",
-      "\t${2|event = \"VeryLazy\",event = \"LspAttach\",lazy = true,cmd = \"\"|},",
-      "\topts = {",
-      "\t\t$0",
-      "\t},",
-      "},"
-    ],
-    "prefix": "plugin spec (lazy.nvim)"
+    "prefix": ":normal"
   },
   "select + vim.ui.select": {
     "body": [
@@ -149,5 +122,13 @@
       "select",
       "vim.ui.select"
     ]
+  },
+  "set current line": {
+    "body": "vim.api.nvim_set_current_line(updatedLine)",
+    "prefix": "set current line"
+  },
+  "vim.notify": {
+    "body": "vim.notify(${1:msg}, vim.log.levels.${2:level}, { title = ${3:title}, icon = ${4:icon} })",
+    "prefix": "vim.notify"
   }
 }
