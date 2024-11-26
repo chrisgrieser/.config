@@ -190,13 +190,6 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
-			marker = "🖨️",
-			visuals = {
-				lineHlgroup = false,
-				signHlgroup = "DiagnosticSignInfo",
-				sign = "󰐪",
-				statuslineIcon = "󰐪",
-			},
 			logStatements = {
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
