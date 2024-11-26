@@ -186,6 +186,8 @@ return {
 			height = { min = 1, max = 0.5 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
+			date_format = "", -- only to disable timestamp in notification history
+			more_format = " ↓ %d lines ", -- if more lines than height
 		},
 		styles = {
 			notification = {
