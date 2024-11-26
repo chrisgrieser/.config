@@ -53,3 +53,33 @@ end, { desc = " Paste charwise", expr = true })
 
 -- for compatibility with macOS clipboard managers
 keymap("n", "<D-v>", "p", { desc = " Paste" })
+
+--------------------------------------------------------------------------------
+-- SPECIAL YANKING OPERATIONS
+
+keymap("n", "<leader>yl", function()
+	-- cannot use `:g // y` because it yanks lines one after the other
+	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
+		if not input then return end
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
+		vim.fn.setreg("+", table.concat(matchLines, "\n"))
+		vim.notify(("%d lines"):format(#matchLines), nil, { title = "Copied", icon = "󰅍" })
+	end)
+end, { desc = "󰅍 Matching lines" })
+
+keymap("n", "<leader>yc", function()
+	local codeContext = require("nvim-treesitter").statusline {
+		indicator_size = math.huge, -- disable shortening
+		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
+		separator = ".",
+	}
+	if codeContext and codeContext ~= "" then
+		codeContext = codeContext:gsub(" ?[:=][^:=]-$", ""):gsub(" ?= ?", "")
+		vim.fn.setreg("+", codeContext)
+		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
+	else
+		vim.notify("No code context.", vim.log.levels.WARN)
+	end
+end, { desc = "󰅍 Code context" })
+

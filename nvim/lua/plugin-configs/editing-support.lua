@@ -218,7 +218,6 @@ return {
 		config = function(_, opts)
 			require("chainsaw").setup(opts)
 
-			require("personal-plugins.chainsaw-satellite")
 			vim.g.lualine_add("sections", "lualine_x", {
 				require("chainsaw.visuals.statusline").countInBuffer,
 				color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color

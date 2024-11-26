@@ -31,7 +31,6 @@ return {
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false },
-				quickfix = { enable = true },
 			},
 		},
 	},

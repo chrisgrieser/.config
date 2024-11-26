@@ -8,38 +8,6 @@ local function getRowsWithMarker()
 	return rows
 end
 
-vim.notify("🖨️ 🟩")
 
-vim.notify("🖨️ ⭐")
 local out = getRowsWithMarker()
-vim.notify(vim.inspect(out), nil, { title = "🖨️ out", ft = "lua" })
--- ffffffffffffffff
-
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
--- ffffffffffffffff
+vim.notify(vim.inspect(out))
