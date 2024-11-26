@@ -71,6 +71,7 @@ local spellfixes = {
 	varialbes = "variables",
 	verison = "version",
 	verisons = "versions",
+	workflwo = "workflow",
 	woudl = "would",
 }
 
