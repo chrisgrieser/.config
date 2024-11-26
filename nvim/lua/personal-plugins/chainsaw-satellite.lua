@@ -1,28 +1,53 @@
 -- DOCS https://github.com/lewis6991/satellite.nvim/blob/main/HANDLERS.md#handlers
-local util = require("satellite.util")
 --------------------------------------------------------------------------------
 
-local HIGHLIGHT = "ErrorMsg"
+local config = {
+	enabled = false,
+	hlgroup = "DiagnosticSignInfo",
+	icon = "ﰉ",
+	leftOfScrollbar = false,
+	priority = 60, -- compared to other handlers from `satellite` (diagnostics are 50)
+}
+
+--------------------------------------------------------------------------------
+
+---@param bufnr number
+---@return number[] rows
+local function getRowsWithMarker(bufnr)
+	local ns = vim.api.nvim_create_namespace("chainsaw.markers")
+	local extmarks = vim.api.nvim_buf_get_extmarks(bufnr, ns, 0, -1, { details = true })
+	local rows = vim
+		.iter(extmarks)
+		:filter(function(extm) return not extm[4].invalid end) -- not deleted
+		:map(function(extm) return extm[2] + 1 end)
+		:totable()
+	return rows
+end
 
 --- @type Satellite.Handler
 local handler = {
 	name = "chainsaw",
 	config = {
 		enable = true,
-		overlap = true,
-		priority = 100,
+		overlap = not config.leftOfScrollbar,
+		priority = config.priority,
 	},
 	ns = vim.api.nvim_create_namespace("chainsaw.satellite-integration"),
-	enabled = function() return true end,
-	update = function(_, winid)
-		local lnum = 10
-		local pos, _ = util.row_to_barpos(winid, lnum)
+	enabled = function() return package.loaded["chainsaw"] end,
+	update = function(bufnr, winid)
+		local rows = getRowsWithMarker(bufnr)
 
 		---@type Satellite.Mark[]
-		local marks = {
-			{ pos = pos, highlight = HIGHLIGHT, symbol = "A" },
-		}
-		return marks
+		local satelliteMarks = vim.tbl_map(function(row)
+			local pos, _ = require("satellite.util").row_to_barpos(winid, row)
+			return {
+				pos = pos,
+				highlight = config.hlgroup,
+				symbol = config.icon,
+			}
+		end, rows)
+
+		return satelliteMarks
 	end,
 }
 
