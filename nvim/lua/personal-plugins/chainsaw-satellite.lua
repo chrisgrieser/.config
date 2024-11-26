@@ -18,7 +18,7 @@ local function getRowsWithMarker(bufnr)
 	local extmarks = vim.api.nvim_buf_get_extmarks(bufnr, ns, 0, -1, { details = true })
 	local rows = vim
 		.iter(extmarks)
-		:filter(function(extm) return not extm[4].invalid end) -- not deleted
+		:filter(function(extm) return not extm[4].invalid end) -- exclude deleted extmarks
 		:map(function(extm) return extm[2] + 1 end)
 		:totable()
 	return rows
