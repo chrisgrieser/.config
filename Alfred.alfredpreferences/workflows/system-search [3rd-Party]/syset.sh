@@ -354,6 +354,16 @@ cat <<EOF
       }
     },
     {
+      "uid": "Languages & Region → Translation Languages",
+      "title": "Languages & Region → Translation Languages",
+      "subtitle": "Open the 'Languages & Region → Translation Languages' pane",
+      "arg": "x-apple.systempreferences:com.apple.Localization-Settings.extension?translation",
+      "autocomplete": "Languages & Region → Translation Languages",
+      "icon": {
+        "path": "./Images/LanguagesRegion.png"
+      }
+    },
+    {
       "uid": "Lock Screen",
       "title": "Lock Screen",
       "subtitle": "Open the 'Lock Screen' pane",
@@ -659,6 +669,17 @@ cat <<EOF
       "subtitle": "Open the 'Sharing → Remote Management' pane",
       "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_ARDService",
       "autocomplete": "Sharing → Remote Management",
+      "icon": {
+        "path": "./Images/Sharing.png"
+      }
+    },
+    {
+      "uid": "Sharing → Remote Login",
+      "title": "Sharing → Remote Login",
+      "match": "sharing remote login ssh",
+      "subtitle": "Open the 'Sharing → Remote Login' pane",
+      "arg": "x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin",
+      "autocomplete": "Sharing → Remote Login",
       "icon": {
         "path": "./Images/Sharing.png"
       }
