@@ -10,11 +10,10 @@ repo_names="nvim"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	rm -rf ./doc
 	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
 }
 
-commit_msg="ci: improve panvimdoc workflow"
+commit_msg="ci: keep toc in panvimdoc workflow"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
