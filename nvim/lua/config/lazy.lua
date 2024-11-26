@@ -27,6 +27,10 @@ require("lazy").setup {
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
+	install = {
+		-- load one of these during installation at startup
+		colorscheme = { "habamax", "tokyonight-moon", "dawnfox" },
+	},
 	git = {
 		log = { "--since=7 days ago" }, -- Lazy log shows commits since last x days
 		cooldown = 120, -- seconds before a plugin is updated again
@@ -37,7 +41,6 @@ require("lazy").setup {
 		border = vim.g.borderStyle,
 		pills = false,
 		size = { width = 0.85, height = 0.85 },
-		backdrop = 50, -- 0-100
 		custom_keys = {
 			["<localleader>l"] = false,
 			["<localleader>t"] = false,
@@ -62,7 +65,7 @@ require("lazy").setup {
 		enabled = true, -- automatically check for plugin updates
 		frequency = 60 * 60 * 24 * 7, -- = 7 days
 	},
-	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
+	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
 	readme = { enabled = false },
 	performance = {
@@ -178,7 +181,7 @@ keymap("n", "gp", function()
 end, { desc = "󰒲 Local Plugin Code" })
 
 --------------------------------------------------------------------------------
--- TEST FOR DUPLICATE KEYS (on every startup)
+-- TEST FOR DUPLICATE KEYS on every startup
 
 local function checkForDuplicateKeys()
 	---@param lazyKey {mode?: string|table}
