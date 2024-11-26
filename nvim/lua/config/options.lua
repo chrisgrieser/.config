@@ -104,15 +104,6 @@ if vim.g.neovide then
 end
 
 --------------------------------------------------------------------------------
--- CLIPBOARD
-vim.opt.clipboard = "unnamedplus"
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "User: Highlighted Yank",
-	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
-})
-
---------------------------------------------------------------------------------
 -- SEARCH & CMDLINE
 
 vim.opt.ignorecase = true
