@@ -177,7 +177,6 @@ return {
 				},
 			}
 			opts.langs = {
-				gitcommit = { message_line = gww },
 				comment = { source = gww, element = gww }, -- comments in any language
 				lua = { comment = gww },
 				jsdoc = { source = gww, description = gww },
@@ -192,10 +191,11 @@ return {
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
 			marker = "🖨️",
-			loglines = {
+			visuals = {
 				lineHlgroup = false,
 				signHlgroup = "DiagnosticSignInfo",
 				sign = "󰐪",
+				statuslineIcon = "󰐪",
 			},
 			logStatements = {
 				-- not using any marker
@@ -218,17 +218,10 @@ return {
 		config = function(_, opts)
 			require("chainsaw").setup(opts)
 
-			local nerdfontIcon = opts.loglines.sign
 			vim.g.lualine_add("sections", "lualine_x", {
-				function()
-					local ns = vim.api.nvim_create_namespace("chainsaw.markers")
-					local extm = vim.api.nvim_buf_get_extmarks(0, ns, 0, -1, { details = true })
-					local notDeletedExtm = vim.tbl_filter(function(e) return not e[4].invalid end, extm)
-					if #notDeletedExtm == 0 then return "" end
-					return nerdfontIcon .. " " .. #notDeletedExtm
-				end,
+				require("chainsaw.visuals.statusline").countInBuffer,
 				color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color
-			})
+			}, "after")
 		end,
 		keys = {
 			-- stylua: ignore start
