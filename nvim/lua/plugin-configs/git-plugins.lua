@@ -55,8 +55,9 @@ return {
 		config = function(_, opts)
 			require("tinygit").setup(opts)
 
-			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame)
-			vim.g.lualine_add("sections", "lualine_y", require("tinygit.statusline").branchState)
+			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame, "after")
+			-- stylua: ignore
+			vim.g.lualine_add("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 		end,
 	},
 	{ -- git sign gutter & hunk actions

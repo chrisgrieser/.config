@@ -47,7 +47,7 @@ return {
 				if server == 2 then return "󱚧 server" end
 				if status < 5 then return "󱚧 buffer" end
 				return "󱚟 Error"
-			end)
+			end, "before")
 		end,
 		keys = {
 			{
