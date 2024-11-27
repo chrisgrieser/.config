@@ -41,13 +41,18 @@ bkeymap("n", "<leader>ci", function()
 	assert(rgResult.code == 0, rgResult.stderr)
 	local matches = vim.split(rgResult.stdout, "\n", { trimempty = true })
 
-	-- sort by length of varname & ensure uniqueness
-	table.sort(matches, function(a, b)
+	-- unique matches only
+	table.sort(matches)
+	local uniqMatches = vim.fn.uniq(matches) ---@cast uniqMatches string[]
+
+	-- sort by length of varname 
+	-- (enuring uniqueness needs separate sorting, since this one does not ensure
+	-- ensure same items are next to each other)
+	table.sort(uniqMatches, function(a, b)
 		local varnameA = a:match("local (%S+) ?=")
 		local varnameB = b:match("local (%S+) ?=")
 		return #varnameA < #varnameB
 	end)
-	local uniqMatches = vim.fn.uniq(matches) ---@cast uniqMatches string[]
 
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User (buffer-specific): Set filetype to `lua` for `TelescopeResults`",
