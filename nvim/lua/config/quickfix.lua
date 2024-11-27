@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
-				sign_text = "═▶",
+				sign_text = "󱘹▶",
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 20, -- Gitsigns uses 6 by default, we want to be above
 				invalidate = true, -- deletes the extmark if the line is deleted

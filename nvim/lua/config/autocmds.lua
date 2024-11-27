@@ -337,7 +337,9 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 
 		-- get all lines with return statements
 		local currentFt = vim.bo[ctx.buf].filetype
-		local query = vim.treesitter.query.parse(currentFt, [[((return_statement) @keyword.return)]])
+		local hasReturnStatement, query =
+			pcall(vim.treesitter.query.parse, currentFt, [[((return_statement) @keyword.return)]])
+		if not hasReturnStatement then return end
 		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
 		local allNotesIter = query:iter_captures(rootTree, 0)
 		local rows = vim.iter(allNotesIter)
@@ -352,7 +354,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
 		for _, lnum in pairs(rows) do
 			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 0, {
-				sign_text = "󱘹▶", -- ═▶
+				sign_text = "▶",
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
 				strict = false,

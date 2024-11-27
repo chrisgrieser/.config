@@ -5,15 +5,15 @@
 github_username="chrisgrieser"
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-# repo_names="." # all repos
+repo_names="." # all repos
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/panvimdoc.yml" ./.github/workflows/panvimdoc.yml
+	cp -f "$HOME/Desktop/dependabot.yml" ./.github/dependabot.yml
 }
 
-commit_msg="ci: keep toc in panvimdoc workflow"
+commit_msg="ci: add dependabot for github actions"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
