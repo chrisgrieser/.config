@@ -1,13 +1,11 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
--- TODO can be removed next version: https://github.com/Saghen/blink.cmp/issues/370
----@diagnostic disable: missing-fields
 
 return {
 	{ -- completion engine
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		version = "*", -- REQUIRED `tag` needed to download pre-built binary
+		version = "*", -- REQUIRED `version` needed to download pre-built binary
 
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
@@ -20,7 +18,8 @@ return {
 			sources = {
 				providers = {
 					snippets = {
-						min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
+						-- don't show when triggered manually (= zero length), useful for JSON keys
+						min_keyword_length = 1,
 						score_offset = -1,
 					},
 					buffer = {
@@ -75,8 +74,7 @@ return {
 										emmet = "",
 										path = "󰈔",
 									}
-									local icon = sourceIcons[source] or ctx.kind_icon
-									return icon
+									return sourceIcons[source] or ctx.kind_icon
 								end,
 							},
 						},

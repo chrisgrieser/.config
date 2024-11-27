@@ -1,5 +1,5 @@
 {
-  "blink.cmp": { "branch": "main", "commit": "81069e3955a8b4d5063287a2a6a47a844e9ca2cb" },
+  "blink.cmp": { "branch": "main", "commit": "12d9ecd98055423fa76dfcf05b856967129b8847" },
   "ccc.nvim": { "branch": "main", "commit": "7c639042583c7bdc7ce2e37e5a0e0aa6d0659c6a" },
   "dressing.nvim": { "branch": "master", "commit": "fc78a3ca96f4db9f8893bb7e2fd9823e0780451b" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
@@ -33,9 +33,9 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "refactoring.nvim": { "branch": "master", "commit": "2db6d378e873de31d18ade549c2edba64ff1c2e3" },
-  "render-markdown.nvim": { "branch": "main", "commit": "6096cf3608b576a38fd1396227dbc0473091714d" },
+  "render-markdown.nvim": { "branch": "main", "commit": "3a319cdbefebf0079a7012dab6b1bfc18ca5b97f" },
   "satellite.nvim": { "branch": "main", "commit": "17a6afc39efb7ee9acfff1f9c719e831a6fd4fa1" },
-  "snacks.nvim": { "branch": "main", "commit": "cc484d5279b5761afb813c4b5ee48ff8c6c88cd7" },
+  "snacks.nvim": { "branch": "main", "commit": "b2c13e5c8953d65a35304afad05c91736775aca6" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "85922dde3767e01d42a08e750a773effbffaea3e" },
