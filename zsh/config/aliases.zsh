@@ -26,14 +26,6 @@ alias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | les
 alias j="just"
 alias ji='just init'
 alias jr='just release'
-function js { just --show "$1" | bat --language=sh --paging=never; }
-# completions for it
-_just_recipes() {
-	IFS=" " read -r -A recipes <<< "$(just --summary --unsorted)"
-	local expl && _description -V all-recipes expl 'Just Recipes'
-	compadd "${expl[@]}" -- "${recipes[@]}"
-}
-compdef _just_recipes js
 
 function which { # colorized & showing all
 	builtin which -a "$@" | bat --language=sh --wrap=character
