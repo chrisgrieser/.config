@@ -1,5 +1,6 @@
-# DOCS https://zsh.sourceforge.io/Doc/Release/Options.html
-# DOCS https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
+# DOCS 
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+# https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
 #───────────────────────────────────────────────────────────────────────────────
 
 # GENERAL
