@@ -1,7 +1,6 @@
 return {
 	{ -- better `:substitute`
 		"chrisgrieser/nvim-rip-substitute",
-		cmd = "RipSubstitute",
 		keys = {
 			{
 				"<leader>fs",
@@ -20,16 +19,8 @@ return {
 				border = vim.g.borderStyle,
 				hideSearchReplaceLabels = true,
 			},
-			prefill = {
-				startInReplaceLineIfPrefill = true,
-				alsoPrefillReplaceLine = false,
-			},
-			keymaps = {
-				insertModeConfirm = "<CR>",
-			},
-			editingBehavior = {
-				autoCaptureGroups = true,
-			},
+			keymaps = { insertModeConfirm = "<CR>" },
+			editingBehavior = { autoCaptureGroups = true },
 		},
 	},
 	{ -- refactoring utilities
@@ -38,9 +29,9 @@ return {
 		opts = { show_success_message = true },
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "x" }, desc = "󱗘 Inline Var" },
-			{ "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract Var" },
-			{ "<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract Func" },
+			{ "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "x" }, desc = "󱗘 Inline var" },
+			{ "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract var" },
+			{ "<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract func" },
 			-- stylua: ignore end
 		},
 	},
