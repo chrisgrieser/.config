@@ -10,7 +10,6 @@ return {
 	-----------------------------------------------------------------------------
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
-		enabled = false,
 		ft = "lua",
 		opts = {
 			library = {
