@@ -78,7 +78,7 @@ return {
 			ccc.setup {
 				win_opts = { border = vim.g.borderStyle },
 				highlight_mode = "virtual",
-				virtual_symbol = " ",
+				virtual_symbol = " ",
 				highlighter = {
 					auto_enable = true,
 					filetypes = spec.ft, -- uses lazy.nvim's ft spec
@@ -127,7 +127,6 @@ return {
 			---@diagnostic disable: duplicate-set-field
 			vim.ui.select = function(items, opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
-
 				return vim.ui.select(items, opts, on_choice)
 			end
 			vim.ui.input = function(opts, on_choice)
