@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = "BufReadPre",
+	event = "BufReadPost",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
 	opts = {
@@ -21,37 +21,25 @@ return {
 			enable = true,
 			disable = { "markdown" }, -- indentation at bullet points is worse
 		},
-
-		--------------------------------------------------------------------------
-		-- TREESITTER-TEXTOBJECTS
-		-- DOCS https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
-
-		textobjects = {
-			select = {
-				lookahead = true,
-				include_surrounding_whitespace = false, -- doesn't work with my comment textobj mappings
-			},
-			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
-				border = vim.g.borderStyle,
-				floating_preview_opts = { title = "  Peek " },
-			},
-		},
 	},
 	init = function()
 		-- use bash parser for zsh files
 		vim.treesitter.language.register("bash", "zsh")
 
+		-- fixes/improvements for the comments parser
 		vim.api.nvim_create_autocmd("ColorScheme", {
-			desc = "User: treesitter parser `comments`",
+			desc = "User: Highlights for the Treesitter `comments`",
 			callback = function()
 				-- FIX lua todo-comments https://github.com/stsewd/tree-sitter-comment/issues/22
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
 
-				-- Define bold comments (see `queries/comment/highlights.scm`)
+				-- Define `@comment.bold` for `queries/comment/highlights.scm`
 				vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })
 			end,
 		})
 	end,
+
+	-- context as statusline component
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)
 
@@ -59,7 +47,7 @@ return {
 			local maxLen = 80
 			local text = require("nvim-treesitter").statusline {
 				indicator_size = math.huge, -- shortening ourselves later
-				separator = "  ", -- 
+				separator = "  ",
 				type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
 				transform_fn = function(line)
 					return line
