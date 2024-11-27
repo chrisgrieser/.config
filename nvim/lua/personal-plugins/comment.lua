@@ -94,7 +94,7 @@ function M.docstring()
 		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
 		vim.cmd.startinsert()
 	else
-		vim.notify("Unsupported filetype.", vim.log.levels.WARN)
+		vim.notify("Unsupported filetype.", vim.log.levels.WARN, { title = "Docstring" })
 	end
 end
 
@@ -133,7 +133,7 @@ function M.addComment(where)
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
-	comStr = comStr:gsub("%%s", ""):gsub(" $", "") .. " "
+	comStr = comStr:gsub("%%s", ""):gsub(" ?$", " ")
 	vim.api.nvim_set_current_line(newLine .. comStr)
 
 	-- move cursor

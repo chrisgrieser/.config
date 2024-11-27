@@ -120,8 +120,8 @@ keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
 
 --------------------------------------------------------------------------------
-
 -- SURROUND
+
 keymap("n", '"', [[bi"<Esc>ea"<Esc>]], { desc = ' " Surround cword' })
 keymap("n", "'", [[bi'<Esc>ea'<Esc>]], { desc = " ' Surround cword" })
 keymap("n", "(", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 Surround cword" })
@@ -192,6 +192,9 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
+keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
+keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 LSP hover" })
+
 keymap({ "n", "x" }, "<D-s>", function()
 	vim.cmd("silent update")
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
@@ -205,15 +208,11 @@ keymap({ "n", "x" }, "<D-s>", function()
 	end
 end, { desc = "󰒕 Save & Format" })
 
---------------------------------------------------------------------------------
--- LSP
-keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
-keymap({ "n", "x" }, "<leader>hh", vim.lsp.buf.hover, { desc = "󰒕 LSP hover" })
 keymap(
 	{ "n", "x" },
-	"<leader>hd",
+	"gX",
 	function() require("personal-plugins.misc").hoverUrl() end,
-	{ desc = " Hover Documentation URLs" }
+	{ desc = " Goto docs in hover" }
 )
 
 keymap("n", "<leader>ol", function()

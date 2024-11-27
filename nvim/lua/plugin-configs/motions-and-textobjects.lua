@@ -2,7 +2,7 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{ -- CamelCase motion plus
+	{ -- smarter `w` `e` `b` motions
 		"chrisgrieser/nvim-spider",
 		keys = {
 			{
@@ -29,18 +29,14 @@ return {
 			"TSTextobjectGotoNextStart",
 			"TSTextobjectGotoPreviousStart",
 		},
-		-- INFO configured via treesitter, not this plugin. Also, calling
-		-- treesitter's `setup` a second time apparently is not a problem.
+		-- INFO yes, configured via treesitter, not this plugin. Also, calling
+		-- treesitter's `setup` a second time is apparently not a problem.
 		main = "nvim-treesitter.configs",
 		opts = {
 			textobjects = {
 				select = {
 					lookahead = true,
 					include_surrounding_whitespace = false, -- `true` breaks my comment textobj mappings
-				},
-				lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
-					border = vim.g.borderStyle,
-					floating_preview_opts = { title = "  Peek " },
 				},
 			},
 		},
@@ -75,18 +71,6 @@ return {
 					vim.cmd.startinsert { bang = true }
 				end,
 				desc = "󰆈 Change comment",
-			},
-
-			-- PEEK
-			{
-				"<leader>hf",
-				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
-				desc = " Peek function",
-			},
-			{
-				"<leader>hc",
-				function() vim.cmd.TSTextobjectPeekDefinitionCode("@class.outer") end,
-				desc = " Peek class",
 			},
 
 			-- MOVE & SWAP
