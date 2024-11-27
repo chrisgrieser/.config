@@ -330,16 +330,40 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 
 --------------------------------------------------------------------------------
 
+-- CONFIG
+local ftQueryMap = {
+	lua = [[((return_statement) @keyword.return)]],
+}
+
 vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "TextChangedI" }, {
 	desc = "User: Add signs for return statements to the signcolumn",
 	callback = function(ctx)
-		local ns = vim.api.nvim_create_namespace("return-signcolumn")
-		local rows = {} -- TODO
+		if vim.bo[ctx.buf].buftype ~= "" then return end
 
+		local ft = vim.bo[ctx.buf].filetype
+		local queryStr = ftQueryMap[ft]
+		if not queryStr then return end
+
+		-- get all lines with return statements
+		local query = vim.treesitter.query.parse(ft, queryStr)
+		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
+		local allNotesIter = query:iter_captures(rootTree, 0)
+		local rows = vim.iter(allNotesIter)
+			:map(function(_, node, _)
+				local row, _, _ = node:start()
+				return row
+			end)
+			:totable()
+
+		-- set signs
+		local ns = vim.api.nvim_create_namespace("return-signcolumn")
+		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
 		for _, lnum in pairs(rows) do
-			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 1, {
-				sign_text = "⇒",
-				sign_hl_group = "DiagnosticSignInfo",
+			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 0, {
+				sign_text = "󱞩",
+				virt_text = { { "➡️", "@keyword.return" } },
+				virt_text_pos = "eol",
+				sign_hl_group = "@keyword.return",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 			})
 		end
