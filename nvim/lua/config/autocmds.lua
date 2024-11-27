@@ -334,14 +334,14 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "TextChangedI" }, {
 	desc = "User: Add signs for return statements to the signcolumn",
 	callback = function(ctx)
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
+		local rows = {} -- TODO
 
-		vim.api.nvim_buf_set_extmark(, ns, qf.lnum - 1, qf.col - 1, {
-			sign_text = quickfixSign,
-			sign_hl_group = "DiagnosticSignInfo",
-			priority = 200, -- Gitsigns uses 6 by default, we want to be above
-			invalidate = true, -- deletes the extmark if the line is deleted
-			undo_restore = true, -- makes undo restore those
-		})
+		for _, lnum in pairs(rows) do
+			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 1, {
+				sign_text = "⇒",
+				sign_hl_group = "DiagnosticSignInfo",
+				priority = 200, -- Gitsigns uses 6 by default, we want to be above
+			})
+		end
 	end,
 })
-
