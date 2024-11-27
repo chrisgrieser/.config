@@ -354,7 +354,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
 		for _, lnum in pairs(rows) do
 			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 0, {
-				sign_text = "▶",
+				sign_text = "󱞩", -- ↳ ↪ 󱞩
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
 				strict = false,
