@@ -3,5 +3,9 @@
 	"diagnostics.globals": ["vim"],
 	"workspace": {
 		"ignoreDir": ["debug", "templates", "TEMP*"]
-	}
+	},
+	"diagnostics": {
+		"unusedLocalExclude": ["_*"]
+	},
+	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
