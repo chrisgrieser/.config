@@ -67,7 +67,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		end
 
 		-- clear signs
-		local group = vim.api.nvim_create_augroup("quickfix-signs", { clear = true })
 		vim.iter(vim.api.nvim_list_bufs())
 			:each(function(bufnr) vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end)
 
@@ -78,7 +77,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			else
 				vim.api.nvim_create_autocmd("BufReadPost", {
 					desc = "User(once): Add signs to quickfix (2/2)",
-					group = group,
+					group = vim.api.nvim_create_augroup("quickfix-signs", {}),
 					once = true,
 					buffer = qf.bufnr,
 					callback = function() setSigns(qf) end,
@@ -100,8 +99,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 --------------------------------------------------------------------------------
--- STATUSBAR – COUNT OF ITEMS
-
+-- STATUSBAR (COUNT OF ITEMS)
 local M = {}
 
 function M.quickfixCounterStatusbar()
@@ -111,12 +109,12 @@ function M.quickfixCounterStatusbar()
 	-- prettify title output
 	local title = qf
 		.title
-		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
-		:gsub("^Find Files: .-%((.+)%)", "%1")
-		:gsub("^Find Word %((.-)%) %b()", "%1")
+		:gsub("^Live grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
+		:gsub("^Find files: .-%((.+)%)", "%1")
+		:gsub("^Find word %((.-)%) %b()", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
-	return (" %s/%s %q"):format(qf.idx, #qf.items, title)
+	return (" %d/%d %q"):format(qf.idx, #qf.items, title)
 end
 
 return M

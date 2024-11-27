@@ -322,8 +322,26 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
 			if vim.o.scrolloff == 0 then
 				vim.o.scrolloff = originalScrolloff
-				vim.notify("Scrolloff fix applied.", vim.log.levels.WARN, { title = ctx.event })
+				vim.notify("Scrolloff fix applied.", nil, { title = ctx.event })
 			end
 		end, 100)
 	end,
 })
+
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "TextChangedI" }, {
+	desc = "User: Add signs for return statements to the signcolumn",
+	callback = function(ctx)
+		local ns = vim.api.nvim_create_namespace("return-signcolumn")
+
+		vim.api.nvim_buf_set_extmark(, ns, qf.lnum - 1, qf.col - 1, {
+			sign_text = quickfixSign,
+			sign_hl_group = "DiagnosticSignInfo",
+			priority = 200, -- Gitsigns uses 6 by default, we want to be above
+			invalidate = true, -- deletes the extmark if the line is deleted
+			undo_restore = true, -- makes undo restore those
+		})
+	end,
+})
+
