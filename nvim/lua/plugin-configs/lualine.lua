@@ -154,12 +154,12 @@ local lualineConfig = {
 		},
 		lualine_x = {
 			{ lspProgress },
+			{ newlineCharIfNotUnix },
+			{ irregularWhitespace },
 			{
 				"diagnostics",
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
-			{ newlineCharIfNotUnix },
-			{ irregularWhitespace },
 		},
 		lualine_y = {
 			{ "diff" },

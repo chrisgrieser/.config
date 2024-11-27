@@ -1,11 +1,11 @@
 {
 	"runtime.version": "LuaJIT",
-	"diagnostics.globals": ["vim"],
+	"diagnostics": {
+		"globals": ["vim"],
+		"unusedLocalExclude": ["_*"]
+	},
 	"workspace": {
 		"ignoreDir": ["debug", "templates", "TEMP*"]
-	},
-	"diagnostics": {
-		"unusedLocalExclude": ["_*"]
 	},
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
