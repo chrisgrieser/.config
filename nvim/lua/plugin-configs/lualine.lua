@@ -62,38 +62,6 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
 end
 
--- Simplified version of `nvim-treesitter-context`
----@param maxLen number defaults to 80
----@return string
-local function codeContext(maxLen)
-	maxLen = type(maxLen) == "number" and maxLen or 80
-	local ok, treesitter = pcall(require, "nvim-treesitter")
-	if not ok then return "" end
-
-	local text = treesitter.statusline {
-		indicator_size = math.huge, -- shortening ourselves later
-		separator = "  ", -- 
-		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
-		transform_fn = function(line)
-			return line
-				:gsub("^async ", "") -- js/ts
-				:gsub("^local ", "") -- lua: vars
-				:gsub("^class", "󰜁")
-				:gsub("^%(.*%) =>", "") -- js/ts: anonymous arrow function
-				:gsub(" ?[{}] ?$", "")
-				:gsub(" ?[=:(].-$", "") -- remove values/parameters
-				:gsub(" extends .-$", "") -- js/ts: classes
-				:gsub("(%w)%(%)$", "%1") -- remove empty `()`
-				:gsub("^function", "")
-				:gsub("^def", "") -- python
-				:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
-		end,
-	}
-	if not text then return "" end
-	if vim.str_utfindex(text) > maxLen then return text:sub(1, maxLen - 1) .. "…" end
-	return text
-end
-
 --------------------------------------------------------------------------------
 
 local lualineConfig = {
@@ -120,9 +88,7 @@ local lualineConfig = {
 				padding = { left = 0, right = 1 },
 			},
 		},
-		lualine_b = {
-			{ codeContext },
-		},
+		lualine_b = {},
 		lualine_c = {
 			-- HACK so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
