@@ -2,7 +2,7 @@ local textObj = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
-	{ -- CamelCase Motion plus
+	{ -- CamelCase motion plus
 		"chrisgrieser/nvim-spider",
 		keys = {
 			{
@@ -22,12 +22,27 @@ return {
 	{ -- treesitter-based textobjs
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		cmd = { -- commands need to be defined, since used in various utility functions
+		cmd = {
 			"TSTextobjectSelect",
 			"TSTextobjectSwapNext",
 			"TSTextobjectSwapPrevious",
 			"TSTextobjectGotoNextStart",
 			"TSTextobjectGotoPreviousStart",
+		},
+		-- INFO configured via treesitter, not this plugin. Also, calling
+		-- treesitter's `setup` a second time apparently is not a problem.
+		main = "nvim-treesitter.configs",
+		opts = {
+			textobjects = {
+				select = {
+					lookahead = true,
+					include_surrounding_whitespace = false, -- `true` breaks my comment textobj mappings
+				},
+				lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
+					border = vim.g.borderStyle,
+					floating_preview_opts = { title = "  Peek " },
+				},
+			},
 		},
 		keys = {
 			-- COMMENT OPERATIONS
@@ -39,7 +54,7 @@ return {
 			},
 			{
 				"dq",
-				function ()
+				function()
 					local prevCursor = vim.api.nvim_win_get_cursor(0)
 					vim.cmd.TSTextobjectSelect("@comment.outer")
 					vim.cmd.normal { "d", bang = true }
@@ -62,6 +77,7 @@ return {
 				desc = "󰆈 Change comment",
 			},
 
+			-- PEEK
 			{
 				"<leader>hf",
 				function() vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer") end,
@@ -84,19 +100,19 @@ return {
 			-- TEXT OBJECTS
 			-- stylua: ignore start
 			{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = { "x", "o" }, desc = "↩ outer return" },
-			{ "<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
+			{ "i<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
 			{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = { "x", "o" }, desc = " outer regex" },
 			{ "i/", "<cmd>TSTextobjectSelect @regex.inner<CR>", mode = { "x", "o" }, desc = " inner regex" },
-			{ "aa", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = { "x", "o" }, desc = "󰏪 outer parameter" },
-			{ "ia", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = { "x", "o" }, desc = "󰏪 inner parameter" },
+			{ "aa", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = { "x", "o" }, desc = "󰏪 outer arg" },
+			{ "ia", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = { "x", "o" }, desc = "󰏪 inner arg" },
 			{ "iu", "<cmd>TSTextobjectSelect @loop.inner<CR>", mode = { "x", "o" }, desc = "󰛤 inner loop" },
 			{ "au", "<cmd>TSTextobjectSelect @loop.outer<CR>", mode = { "x", "o" }, desc = "󰛤 outer loop" },
 			{ "a" .. textObj.func, "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = " outer function" },
 			{ "i" .. textObj.func, "<cmd>TSTextobjectSelect @function.inner<CR>", mode = {"x","o"},desc = " inner function" },
-			{ "a" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱕆 outer condition" },
-			{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner condition" },
-			{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer call" },
-			{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner call" },
+			{ "a" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱕆 outer c[o]ndition" },
+			{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner c[o]ndition" },
+			{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer ca[l]l" },
+			{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner ca[l]l" },
 			-- stylua: ignore end
 		},
 	},
@@ -120,7 +136,7 @@ return {
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner anyQuote" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer anyQuote" },
 
-			-- INFO not setting in visual mode, to keep visual block mode replace
+			-- INFO not setting these in visual mode, to keep visual block mode replace
 			{ "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", mode = "o", desc = "¶ rest of paragraph" },
 			{ "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", mode = "o", desc = "󰉶 rest of indentation" },
 			{ "rg", "G", mode = "o", desc = " rest of buffer" },

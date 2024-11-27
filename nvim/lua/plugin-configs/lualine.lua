@@ -2,13 +2,14 @@
 
 local progressText = ""
 local function lspProgress() return progressText end
+
 vim.api.nvim_create_autocmd("LspProgress", {
-	desc = "User: LSP progress",
+	desc = "User: LSP progress for statusline",
 	callback = function(ctx)
-		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" } -- CONFIG
+		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
 
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-		local progress = ctx.data.params.value ---@type {percentage: number, title?: string, kind: string, message?: string}
+		local progress = ctx.data.params.value
 		if progress and progress.kind == "end" then
 			progressText = ""
 			return
@@ -170,7 +171,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false, -- immediately so UI does not flicker
+	event = "UIEnter", -- not `VeryLazy` so UI does not flicker
 	dependencies = "nvim-tree/nvim-web-devicons",
 	opts = lualineConfig,
 }
