@@ -50,7 +50,6 @@ vim.api.nvim_create_autocmd("FileType", {
 --------------------------------------------------------------------------------
 -- ADD SIGNS
 
-local quickfixSign = "" -- CONFIG
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	desc = "User: Add signs to quickfix (1/2)",
 	callback = function()
@@ -58,9 +57,9 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
-				sign_text = quickfixSign,
+				sign_text = "═▶",
 				sign_hl_group = "DiagnosticSignInfo",
-				priority = 200, -- Gitsigns uses 6 by default, we want to be above
+				priority = 20, -- Gitsigns uses 6 by default, we want to be above
 				invalidate = true, -- deletes the extmark if the line is deleted
 				undo_restore = true, -- makes undo restore those
 			})
