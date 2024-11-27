@@ -76,7 +76,7 @@ local efmConfig = {
 	markdown = {
 		-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 		{
-			formatCommand = "markdown-toc --indent=4 -i '${INPUT}' && cat '${INPUT}'",
+			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
 			formatStdin = false,
 		},
 		{
