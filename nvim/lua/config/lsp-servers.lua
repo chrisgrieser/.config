@@ -195,11 +195,8 @@ M.serverConfigs.cssls = {
 }
 
 M.serverConfigs.css_variables = {
-	root_dir = function()
-		-- Add custom root markers for Obsidian snippet folders.
-		local markers = { ".project-root", ".git" }
-		return vim.fs.root(0, markers)
-	end,
+	-- Add `biome.jsonc` as root marker for Obsidian snippet folders
+	root_dir = function() return vim.fs.root(0, { "biome.jsonc", ".git" }) end,
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings

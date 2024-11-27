@@ -15,9 +15,9 @@ function command_not_found_handler() {
 }
 
 # auto-escape special characters when pasting URLs
-# autoload -U url-quote-magic bracketed-paste-magic
-# zle -N self-insert url-quote-magic
-# zle -N bracketed-paste bracketed-paste-magic
+autoload -U url-quote-magic bracketed-paste-magic
+zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ setopt HIST_IGNORE_SPACE  # cmds with leading space are not added to the history
 
 export HISTSIZE=20000
 export SAVEHIST=$HISTSIZE
-# don't save in ZDOTDIR as it's in (public) dotfile repo
+# don't save in `$ZDOTDIR` as it's in the (public) dotfile repo
 export HISTFILE="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/zsh_history.zsh"
 
 #───────────────────────────────────────────────────────────────────────────────

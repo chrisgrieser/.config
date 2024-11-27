@@ -2,7 +2,8 @@
 ---@param key string
 ---@param label string
 vim.g.whichkeyAddGroup = function(key, label)
-	-- delayed, to ensure whichkey spec is loaded & not interfere with whichkey's lazy-loading
+	-- Deferred to ensure whichkey spec is loaded & does not conflict with
+	-- whichkey itself being lazy-loading
 	vim.defer_fn(function()
 		local ok, whichkey = pcall(require, "which-key")
 		if not ok then return end
@@ -43,7 +44,6 @@ return {
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>f", group = "󱗘 Refactor" },
 				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>h", group = " Hover" },
 				{ "<leader>y", group = "󰅍 Yanking" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded

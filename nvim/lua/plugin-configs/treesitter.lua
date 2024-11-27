@@ -28,7 +28,7 @@ return {
 
 		-- fixes/improvements for the comments parser
 		vim.api.nvim_create_autocmd("ColorScheme", {
-			desc = "User: Highlights for the Treesitter `comments`",
+			desc = "User: Highlights for the Treesitter `comments` parser",
 			callback = function()
 				-- FIX lua todo-comments https://github.com/stsewd/tree-sitter-comment/issues/22
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
