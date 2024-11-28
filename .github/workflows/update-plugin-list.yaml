@@ -2,7 +2,11 @@ name: Update plugin list in README
 
 on:
   schedule:
-    - cron: "15 2 * * 3" # once per week on wednesday
+    - cron: "15 2 * * 3" # once per week on Wednesday
+
+  push:
+    branches: [main]
+    paths: [.github/workflows/update-plugin-list.yaml]
 
   workflow_dispatch: {} # allow triggering manually
 
@@ -19,11 +23,16 @@ jobs:
 
       - name: Update plugin list
         run: |
-          # config
-          nvim_readme="./nvim/README.md"
+          # CONFIG
           last_line_before_plugins="## All installed plugins"
+          nvim_readme="./nvim/README.md"
           lazy_lock="./nvim/.lazy-lock.json"
-          lazy_specs_path="./nvim/lua/plugins"
+          lazy_specs_path="./nvim/lua/plugin-configs"
+
+          if [[ ! -f "$nvim_readme" || ! -f "$lazy_lock" || ! -d "$lazy_specs_path" ]]; then
+            echo "ERROR: missing files"
+            exit 1
+          fi
 
           # remove old lines
           sed -i '' -n "1,/$last_line_before_plugins/p" "$nvim_readme"
@@ -36,6 +45,7 @@ jobs:
             sed -E 's|.*|- [&](https://github.com/&)|' \
               >> "$nvim_readme"
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Auto-commit
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "bot: auto-update plugin list"
