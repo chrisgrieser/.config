@@ -14,15 +14,21 @@ local function lastNotif()
 	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.split(last.msg, "\n"))
+	local lines = vim.split(last.msg, "\n")
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
+	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
+	local footer = tostring(last.updated or last.added)
+
 	require("snacks").win {
 		position = "float",
 		ft = last.ft or "markdown",
 		buf = bufnr,
-		height = 0.75,
-		width = 0.75,
+		height = height,
+		footer = vim.trim(footer) ~= "" and " " .. footer .. " " or nil,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
+		footer_pos = "right",
+		width = 0.75,
 		wo = { wrap = true }, -- only one message, so use full space
 		keys = { ["<D-9>"] = "close" }, -- close win with key that opened it
 	}

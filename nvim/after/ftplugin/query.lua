@@ -14,11 +14,3 @@ if vim.bo.buftype == "" then
 end
 
 --------------------------------------------------------------------------------
-
-local bkeymap = require("config.utils").bufKeymap
-bkeymap(
-	"n",
-	"<D-s>",
-	function() vim.cmd.normal { "m`gg=G``", bang = true } end,
-	{ desc = " Format" }
-)
