@@ -136,8 +136,8 @@ return {
 	{ -- split-join lines
 		"Wansmer/treesj",
 		keys = {
-			{ "<leader>s", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
-			{ "<leader>s", "gw}", ft = "markdown", desc = "󰗈 Reflow rest of paragraph" },
+			{ "M", function() require("treesj").toggle() end, desc = "󰗈 Split-join lines" },
+			{ "M", "gw}", ft = "markdown", desc = "󰗈 Reflow rest of paragraph" },
 		},
 		opts = {
 			use_default_keymaps = false,

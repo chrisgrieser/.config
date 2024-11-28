@@ -117,7 +117,7 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line" })
-keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
+-- keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
@@ -193,11 +193,13 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󰒕 Code action" })
+keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰒕 LSP hover" })
+
 keymap(
 	{ "n", "x" },
-	"<leader>h",
-	function() require("personal-plugins.misc").betterHover() end,
-	{ desc = "󰒕 LSP hover" }
+	"gX",
+	function() require("personal-plugins.misc").hoverUrl() end,
+	{ desc = " Goto docs in hover" }
 )
 
 keymap({ "n", "x" }, "<D-s>", function()

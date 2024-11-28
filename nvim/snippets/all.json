@@ -139,7 +139,7 @@
   },
   "today (ISO date) *insert*": {
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
-    "prefix": "today ISO date INSERT"
+    "prefix": "insert datestamp"
   },
   "vim modeline": {
     "body": "$LINE_COMMENT vim: ft=${1:filetype}",

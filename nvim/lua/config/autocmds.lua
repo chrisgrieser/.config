@@ -336,6 +336,13 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 
+		local functionNodes = {
+			"function_definition",
+			"function_declaration",
+			"method_definition",
+			"method_declaration",
+		}
+
 		-- get all lines with return statements
 		local currentFt = vim.bo[ctx.buf].filetype
 		local hasReturnStatement, query =
@@ -343,21 +350,34 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		if not hasReturnStatement then return end
 		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
 		local allNotesIter = query:iter_captures(rootTree, 0)
-		local rows = vim.iter(allNotesIter)
-			:map(function(_, node, _)
-				local row, _, _ = node:start()
-				return row
-			end)
-			:totable()
+		local returns = vim.iter(allNotesIter):map(function(_, node, _)
+			local row, _, _ = node:start()
+			local funcRow
+			repeat
+				node = node:parent()
+				if vim.tbl_contains(functionNodes, node:type()) then
+					funcRow, _, _ = node:start()
+					break
+				end
+			until not node
+			return { returnRow = row, funcRow = funcRow }
+		end)
+		:totable()
 
 		-- set signs
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
-		for _, lnum in pairs(rows) do
-			vim.api.nvim_buf_set_extmark(ctx.buf, ns, lnum, 0, {
-				sign_text = "",
+		for _, node in pairs(returns) do
+			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.returnRow, 0, {
+				sign_text = "",
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
+				strict = false,
+			})
+			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.funcRow, 0, {
+				sign_text = "",
+				sign_hl_group = "@keyword.function",
+				priority = 11, -- Gitsigns uses 6
 				strict = false,
 			})
 		end
