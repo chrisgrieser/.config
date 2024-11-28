@@ -1,4 +1,4 @@
-;extends
+; extends
 
 ; add hlgroup `@namespace.builtin.lua`:
 ; - nvim: `vim`

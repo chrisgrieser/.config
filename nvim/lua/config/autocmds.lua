@@ -258,7 +258,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "User: Git conflict markers",
 	callback = function(ctx)
 		local bufnr = ctx.buf
-		if not vim.api.nvim_buf_is_valid(bufnr) then return end
+		if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 
 		vim.system(
 			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
@@ -269,18 +269,21 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				if noConflicts or notGitRepo then return end
 
 				local ns = vim.api.nvim_create_namespace("conflictMarkers")
-				local firstConflictLn
+				vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- make it idempotent
+
+				local conflictLnums = {}
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
-					local lnum = tonumber(conflictLnum)
+					table.insert(conflictLnums, tonumber(conflictLnum))
+				end
+				if #conflictLnums == 0 then return end
+				for _, lnum in ipairs(conflictLnums) do
 					local hlgroup = "DiagnosticVirtualTextInfo"
 					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum - 1, 0, -1)
-					if not firstConflictLn then firstConflictLn = lnum end
 				end
-				if not firstConflictLn then return end
 
-				vim.api.nvim_win_set_cursor(0, { firstConflictLn, 0 })
+				vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
-				local msg = "Conflict markers found."
+				local msg = ("%d conflict markers found."):format(#conflictLnums)
 				vim.notify_once(msg, nil, { title = "Git Conflicts", icon = "󰞇" })
 			end)
 		)
@@ -311,9 +314,7 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 	end,
 })
 
---------------------------------------------------------------------------------
-
--- FIX for some reason `scrolloff` is sometimes set to `0` on entering new buffers
+-- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
 local originalScrolloff = vim.o.scrolloff
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 	desc = "User: FIX scrolloff on entering new buffer",
@@ -329,7 +330,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 })
 
 --------------------------------------------------------------------------------
-
+-- ADD SIGNS FOR RETURN STATEMENTS
 vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 	desc = "User: Add signs for return statements to the signcolumn",
 	callback = function(ctx)
