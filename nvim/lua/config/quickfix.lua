@@ -59,13 +59,14 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
 				sign_text = "󱘹▶",
 				sign_hl_group = "DiagnosticSignInfo",
-				priority = 20, -- Gitsigns uses 6 by default, we want to be above
+				priority = 200, -- Gitsigns uses 6 by default, we want to be above
 				invalidate = true, -- deletes the extmark if the line is deleted
 				undo_restore = true, -- makes undo restore those
 			})
 		end
 
-		-- clear signs
+		-- clear existing signs/autocmds
+		local group = vim.api.nvim_create_augroup("quickfix-signs", { clear = true })
 		vim.iter(vim.api.nvim_list_bufs())
 			:each(function(bufnr) vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end)
 
@@ -76,7 +77,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			else
 				vim.api.nvim_create_autocmd("BufReadPost", {
 					desc = "User(once): Add signs to quickfix (2/2)",
-					group = vim.api.nvim_create_augroup("quickfix-signs", {}),
+					group = group,
 					once = true,
 					buffer = qf.bufnr,
 					callback = function() setSigns(qf) end,
@@ -108,9 +109,8 @@ function M.quickfixCounterStatusbar()
 	-- prettify title output
 	local title = qf
 		.title
-		:gsub("^Live grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
-		:gsub("^Find files: .-%((.+)%)", "%1")
-		:gsub("^Find word %((.-)%) %b()", "%1")
+		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
+		:gsub("^Find Files: .-%((.+)%)", "%1")
 		:gsub(" %(%)", "") -- empty brackets
 		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
 	return (" %d/%d %q"):format(qf.idx, #qf.items, title)
