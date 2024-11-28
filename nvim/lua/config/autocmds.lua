@@ -369,16 +369,13 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		-- set signs
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
-		local altDigits =
-			-- { "󰲠", "󰲢", "󰲤", "󰲦", "󰲨", "󰲪", "󰲬", "󰲮", "󰲰", "󰲲" }
-			-- { "󰬺", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", "󰿮" }
-			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "+" }
+		local altDigits = {'󰀫', '󰂡', '󱃮', '󰇂', '󱃠', ''}
 
 		vim.iter(returns):each(function(node)
 			if funcs[node.funcId] < 2 then return end -- only display returns if more than 1 in func
 			local numIcon = altDigits[node.number] or altDigits[#altDigits]
 			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.row, 0, {
-				sign_text = numIcon .. "",
+				sign_text = numIcon,
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
 				strict = false,
