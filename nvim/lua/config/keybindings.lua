@@ -417,6 +417,7 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
 keymap(
 	"n",
 	"<leader>ib",
