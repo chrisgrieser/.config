@@ -19,9 +19,9 @@ local function lastNotif(closeKey)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
 	local footer = tostring(os.date("%R", last.updated or last.added))
-	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
-	local width = math.min(longestLine + 2, math.ceil(vim.o.columns * 0.75))
+	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
+	local width = math.min(longestLine + 10, math.ceil(vim.o.columns * 0.75))
 
 	require("snacks").win {
 		position = "float",
