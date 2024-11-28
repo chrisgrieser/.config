@@ -41,12 +41,11 @@ function gr {
 	local i=2                  # starting at 2, since 1st line = current
 	while [[ -z "$goto" ]]; do # no arg: goto last existing dir
 		goto=$(dirs -p | sed -n "${i}p")
-		[[ -z "$goto" ]] && return 1 # no more existing dirs
+		[[ -z "$goto" ]] && return 1 # no more dirs left
 		goto="${goto/#\~/$HOME}"
 		[[ -d "$goto" ]] && break
-		i=$((i + 1))
+		i=$((i++))
 	done
-	goto="${goto/#\~/$HOME}"
 	cd "$goto" || return 1
 }
 
