@@ -2,7 +2,8 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
-local function lastNotif()
+---@param closeKey string
+local function lastNotif(closeKey)
 	local skipTraceLevel = function(n) return n.level ~= "trace" end
 	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
 	local last = history[#history]
@@ -17,24 +18,27 @@ local function lastNotif()
 	local lines = vim.split(last.msg, "\n")
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
+	local footer = tostring(os.date("%R", last.updated or last.added))
+	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
-	local footer = tostring(last.updated or last.added)
+	local width = math.min(longestLine + 2, math.ceil(vim.o.columns * 0.75))
 
 	require("snacks").win {
 		position = "float",
 		ft = last.ft or "markdown",
 		buf = bufnr,
 		height = height,
-		footer = vim.trim(footer) ~= "" and " " .. footer .. " " or nil,
+		width = width,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
+		footer = vim.trim(footer) ~= "" and " " .. footer .. " " or nil,
 		footer_pos = "right",
-		width = 0.75,
 		wo = { wrap = true }, -- only one message, so use full space
-		keys = { ["<D-9>"] = "close" }, -- close win with key that opened it
+		keys = { [closeKey] = "close" }, -- close win with key that opened it
 	}
 end
 
-local function messagesAsWin()
+---@param closeKey string
+local function messagesAsWin(closeKey)
 	local messages = vim.fn.execute("messages")
 	if messages == "" then
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
@@ -48,7 +52,7 @@ local function messagesAsWin()
 		buf = bufnr,
 		height = 0.75,
 		title = " :messages ",
-		keys = { ["<D-8>"] = "close" }, -- close win with key that opened it
+		keys = { [closeKey] = "close" }, -- close win with key that opened it
 	}
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()
@@ -156,10 +160,23 @@ return {
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-		-- stylua: ignore
-		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
-		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
-		{ "<D-9>", lastNotif, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+		{
+			"<Esc>",
+			function() require("snacks").notifier.hide() end,
+			desc = "󰎟 Dismiss notifications",
+		},
+		{
+			"<D-8>",
+			function() messagesAsWin("<D-8>") end,
+			mode = { "n", "v", "i" },
+			desc = "󰎟 :messages",
+		},
+		{
+			"<D-9>",
+			function() lastNotif("<D-9>") end,
+			mode = { "n", "v", "i" },
+			desc = "󰎟 Last notification",
+		},
 		{
 			"<D-0>",
 			function()
