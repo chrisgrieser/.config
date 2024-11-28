@@ -117,6 +117,7 @@ keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line" })
+keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
