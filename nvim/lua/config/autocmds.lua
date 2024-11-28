@@ -336,48 +336,52 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
 
+		-- get return statement nodes
+		local currentFt = vim.bo[ctx.buf].filetype
+		local hasReturnStatement, query =
+			pcall(vim.treesitter.query.parse, currentFt, [[((return_statement) @return)]])
+		if not hasReturnStatement then return end
+		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
+		local allNodesIter = query:iter_captures(rootTree, 0)
+
+		-- construct returns table
 		local functionNodes = {
 			"function_definition",
 			"function_declaration",
 			"method_definition",
 			"method_declaration",
 		}
+		local returnsInFunc = {}
 
-		-- get all lines with return statements
-		local currentFt = vim.bo[ctx.buf].filetype
-		local hasReturnStatement, query =
-			pcall(vim.treesitter.query.parse, currentFt, [[((return_statement) @keyword.return)]])
-		if not hasReturnStatement then return end
-		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
-		local allNotesIter = query:iter_captures(rootTree, 0)
-		local returns = vim.iter(allNotesIter):map(function(_, node, _)
-			local row, _, _ = node:start()
-			local funcRow
-			repeat
-				node = node:parent()
-				if vim.tbl_contains(functionNodes, node:type()) then
-					funcRow, _, _ = node:start()
-					break
-				end
-			until not node
-			return { returnRow = row, funcRow = funcRow }
-		end)
-		:totable()
+		---@type {row: number, number: number}[]
+		local returns = vim.iter(allNodesIter)
+			:map(function(_, node, _) ---@cast node TSNode
+				local row, _, _ = node:start()
+				local id
+				repeat
+					node = node:parent()
+					if not node then
+						id = "global_scope"
+					elseif vim.tbl_contains(functionNodes, node:type()) then
+						id = node:id()
+					end
+				until id
+				returnsInFunc[id] = returnsInFunc[id] or 0
+				returnsInFunc[id] = returnsInFunc[id] + 1
+				return { row = row, number = returnsInFunc[id] }
+			end)
+			:totable()
 
 		-- set signs
+		local altDigits =
+			{ "󰎡", "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
 		for _, node in pairs(returns) do
-			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.returnRow, 0, {
-				sign_text = "",
+			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.row, 0, {
+				sign_text = node.number .. "▶", -- ↳ ↪ 󱞩
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
-				strict = false,
-			})
-			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.funcRow, 0, {
-				sign_text = "",
-				sign_hl_group = "@keyword.function",
-				priority = 11, -- Gitsigns uses 6
 				strict = false,
 			})
 		end
