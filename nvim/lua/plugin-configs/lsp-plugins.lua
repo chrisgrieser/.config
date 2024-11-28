@@ -38,7 +38,7 @@ return {
 			definition = { enabled = false },
 			implementation = { enabled = false },
 			vt_position = "signcolumn",
-			vt_priority = 5, -- below the gitsigns default of 6
+			vt_priority = 7, -- gitsigns have priority of 6
 			hl = { link = "Comment" },
 			text_format = function(symbol)
 				if not symbol.references or symbol.references == 0 then return end

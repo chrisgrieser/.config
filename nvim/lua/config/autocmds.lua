@@ -307,10 +307,9 @@ vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
 		local visualDistanceToEof = winHeight - vim.fn.winline()
 		local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
 
-		if visualDistanceToEof < scrolloff then
-			local winTopline = vim.fn.winsaveview().topline
-			vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
-		end
+		if visualDistanceToEof >= scrolloff then return end
+		local winTopline = vim.fn.winsaveview().topline
+		vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
 	end,
 })
 
@@ -360,9 +359,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 				repeat
 					node = node:parent()
 					if not node then funcId = "global_scope" end
-					if node and vim.tbl_contains(funcNodes, node:type()) then
-						funcId, _, _ = node:start()
-					end
+					if node and vim.tbl_contains(funcNodes, node:type()) then funcId = node:id() end
 				until funcId
 				funcs[funcId] = (funcs[funcId] or 0) + 1
 				return { row = row, number = funcs[funcId], funcId = funcId }
@@ -373,14 +370,15 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
 		local altDigits =
-			-- { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼", "󰎿" }
-			{ "󰎦", " }
+			-- { "󰲠", "󰲢", "󰲤", "󰲦", "󰲨", "󰲪", "󰲬", "󰲮", "󰲰", "󰲲" }
+			-- { "󰬺", "󰬻", "󰬼", "󰬽", "󰬾", "󰬿", "󰭀", "󰭁", "󰭂", "󰿮" }
+			{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "+" }
 
 		vim.iter(returns):each(function(node)
 			if funcs[node.funcId] < 2 then return end -- only display returns if more than 1 in func
 			local numIcon = altDigits[node.number] or altDigits[#altDigits]
 			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.row, 0, {
-				sign_text = numIcon .. "", -- ↳ ↪ 󱞩
+				sign_text = numIcon .. "",
 				sign_hl_group = "@keyword.return",
 				priority = 10, -- Gitsigns uses 6
 				strict = false,
