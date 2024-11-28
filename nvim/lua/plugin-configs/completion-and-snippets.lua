@@ -1,5 +1,9 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
+-- TODO on next release
+-- 1. windows.autocomplete.selection and windows.autocomplete.cycle moved to `list`
+
+--------------------------------------------------------------------------------
 
 return {
 	{ -- completion engine
@@ -32,7 +36,7 @@ return {
 			},
 			keymap = {
 				["<D-c>"] = { "show" },
-				["<S-CR>"] = { "hide" },
+				["<S-CR>"] = { "cancel" },
 				["<CR>"] = { "select_and_accept", "fallback" },
 				["<Tab>"] = { "select_next", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
@@ -40,6 +44,11 @@ return {
 				["<Up>"] = { "select_prev", "fallback" },
 				["<PageDown>"] = { "scroll_documentation_down" },
 				["<PageUp>"] = { "scroll_documentation_up" },
+			},
+			trigger = {
+				completion = {
+					keyword_regex = '[%w_-]', -- remove `\`, so it does not trigger completion
+				},
 			},
 			windows = {
 				documentation = {
@@ -50,6 +59,9 @@ return {
 					auto_show_delay_ms = 250,
 				},
 				autocomplete = {
+					-- auto_insert|preselect (using auto_insert, `cancel` keymap undos selection)
+					selection = "preselect",
+
 					border = vim.g.borderStyle,
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
 					draw = {
