@@ -353,7 +353,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		}
 		local funcs = {}
 
-		---@type {row: number, number: number, funcId: string}[]
 		local returns = vim.iter(allNodesIter)
 			:map(function(_, node, _) ---@cast node TSNode
 				local row, _, _ = node:start()
@@ -361,30 +360,24 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 				repeat
 					node = node:parent()
 					if not node then funcId = "global_scope" end
-					if node and vim.tbl_contains(funcNodes, node:type()) then funcId = node:id() end
+					if node and vim.tbl_contains(funcNodes, node:type()) then
+						funcId, _, _ = node:start()
+					end
 				until funcId
 				funcs[funcId] = (funcs[funcId] or 0) + 1
 				return { row = row, number = funcs[funcId], funcId = funcId }
 			end)
-			-- :filter( -- only display returns if there are more than 1 in the function
-			-- 	function(node) return funcs[node.funcId] > 1 end
-			-- )
 			:totable()
 
-
-		local out = {
-			["returns"] = returns,
-			["funcs"] = funcs,
-		}
-
-		vim.notify(vim.inspect(out), nil, { title = "🪚 out", ft = "lua" })
-
 		-- set signs
-		local altDigits =
-			{ "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼", "󰎿" }
 		local ns = vim.api.nvim_create_namespace("return-signcolumn")
 		vim.api.nvim_buf_clear_namespace(ctx.buf, ns, 0, -1)
-		for _, node in pairs(returns) do
+		local altDigits =
+			-- { "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼", "󰎿" }
+			{ "󰎦", " }
+
+		vim.iter(returns):each(function(node)
+			if funcs[node.funcId] < 2 then return end -- only display returns if more than 1 in func
 			local numIcon = altDigits[node.number] or altDigits[#altDigits]
 			vim.api.nvim_buf_set_extmark(ctx.buf, ns, node.row, 0, {
 				sign_text = numIcon .. "", -- ↳ ↪ 󱞩
@@ -392,6 +385,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 				priority = 10, -- Gitsigns uses 6
 				strict = false,
 			})
-		end
+		end)
 	end,
 })
