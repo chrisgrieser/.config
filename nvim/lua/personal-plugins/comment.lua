@@ -133,7 +133,7 @@ function M.addComment(where)
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line
-	comStr = comStr:gsub("%%s", ""):gsub(" $", " ")
+	comStr = comStr:gsub("%%s", ""):gsub(" *$", "") .. " "
 	vim.api.nvim_set_current_line(newLine .. comStr)
 
 	-- move cursor

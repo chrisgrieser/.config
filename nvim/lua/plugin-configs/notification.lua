@@ -160,6 +160,7 @@ return {
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Previous reference" },
 		{
 			"<Esc>",
 			function() require("snacks").notifier.hide() end,
