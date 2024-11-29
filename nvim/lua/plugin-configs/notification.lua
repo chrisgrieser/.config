@@ -2,8 +2,9 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
----@param notif? snacks.notifier.Notif if nil, uses last notification
+---@param notif? snacks.notifier.Notif
 local function openNotif(notif)
+	-- if no notification is provided, get the last one
 	if not notif then
 		local history = require("snacks").notifier.get_history {
 			filter = function(n) return n.level ~= "trace" end,
@@ -121,7 +122,7 @@ local function snacksConfig()
 			notFoundNotify(query)
 			return
 		end
-		return key -- return and use as `expr` to keep correct `on_key` trigger for `nvim_origami`
+		return key -- return and use as `expr` to still trigger `on_key` for `nvim_origami`
 	end
 	local map = vim.keymap.set
 	map("n", "n", function() return nopOnNoMatch("n") end, { desc = "silent n", expr = true })
