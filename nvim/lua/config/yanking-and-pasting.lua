@@ -83,3 +83,35 @@ keymap("n", "<leader>yc", function()
 	end
 end, { desc = "󰅍 Code context" })
 
+--------------------------------------------------------------------------------
+
+local function dedentAndTrimBlanks(lines)
+	-- remove leading and trailing blank lines
+	while vim.trim(lines[1]) == "" do
+		table.remove(lines, 1)
+	end
+	while vimlines[#lines] == "" do
+		table.remove(lines)
+	end
+
+	local indentAmounts = vim
+		.iter(lines)
+		:filter(function(line) return line ~= "" end) -- ignore blank lines
+		:map(function(line) return #line:match("^%s*") end)
+		:totable()
+	local smallestIndent = math.min(unpack(indentAmounts))
+
+	local dedentedLines = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, lines)
+	return dedentedLines
+end
+
+keymap("n", "<leader>ym", function()
+	local start = vim.api.nvim_buf_get_mark(0, "<")[1]
+	local _end = vim.api.nvim_buf_get_mark(0, ">")[1]
+	local lines = vim.api.nvim_buf_get_lines(0, start - 1, _end, false)
+	lines = dedentAndTrimBlanks(lines)
+	table.insert(lines, 1, "```" .. vim.bo.filetype)
+	table.insert(lines, "```")
+	vim.fn.setreg("+", table.concat(lines, "\n"))
+	vim.notify(("%d lines"):format(#lines), nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰅍 Yank as markdown codeblock" })
