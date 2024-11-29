@@ -283,7 +283,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
 				local msg = ("%d conflict markers found."):format(#conflictLnums)
-				vim.notify_once(msg, nil, { title = "Git Conflicts", icon = "󰞇" })
+				vim.notify_once(msg, nil, { title = "Git conflicts", icon = "󰞇" })
 			end)
 		)
 	end,
@@ -337,7 +337,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		-- get return statement nodes
 		local currentFt = vim.bo[ctx.buf].filetype
 		local hasReturnStatement, query =
-			pcall(vim.treesitter.query.parse, currentFt, [[((return_statement) @return)]])
+			pcall(vim.treesitter.query.parse, currentFt, [[((return_statement) @user.returns)]])
 		if not hasReturnStatement then return end
 		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
 		local allNodesIter = query:iter_captures(rootTree, 0)
