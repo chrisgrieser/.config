@@ -2,30 +2,32 @@
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
----@param closeKey string
-local function lastNotif(closeKey)
-	local skipTraceLevel = function(n) return n.level ~= "trace" end
-	local history = require("snacks").notifier.get_history { filter = skipTraceLevel }
-	local last = history[#history]
-	if not last then
-		local opts = { title = "Last notification", icon = "󰎟" }
-		vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
-		return
+---@param notif? snacks.notifier.Notif if nil, uses last notification
+local function openNotif(notif)
+	if not notif then
+		local history = require("snacks").notifier.get_history {
+			filter = function(n) return n.level ~= "trace" end,
+		}
+		notif = history[#history]
+		if not notif then
+			local opts = { title = "Last notification", icon = "󰎟" }
+			vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
+			return
+		end
 	end
-	require("snacks").notifier.hide(last.id) -- when opening last notif, dismiss it
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	local lines = vim.split(last.msg, "\n")
+	local lines = vim.split(notif.msg, "\n")
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-	local title = vim.trim((last.icon or "") .. " " .. (last.title or ""))
-	local footer = tostring(os.date("%R", last.updated or last.added))
+	local title = vim.trim((notif.icon or "") .. " " .. (notif.title or ""))
+	local footer = tostring(os.date("%R", notif.updated or notif.added))
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
 	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
 	local width = math.min(longestLine + 10, math.ceil(vim.o.columns * 0.75))
 
 	require("snacks").win {
 		position = "float",
-		ft = last.ft or "markdown",
+		ft = notif.ft or "markdown",
 		buf = bufnr,
 		height = height,
 		width = width,
@@ -33,12 +35,10 @@ local function lastNotif(closeKey)
 		footer = vim.trim(footer) ~= "" and " " .. footer .. " " or nil,
 		footer_pos = "right",
 		wo = { wrap = true }, -- only one message, so use full space
-		keys = { [closeKey] = "close" }, -- close win with key that opened it
 	}
 end
 
----@param closeKey string
-local function messagesAsWin(closeKey)
+local function messagesAsWin()
 	local messages = vim.fn.execute("messages")
 	if messages == "" then
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
@@ -52,7 +52,6 @@ local function messagesAsWin(closeKey)
 		buf = bufnr,
 		height = 0.75,
 		title = " :messages ",
-		keys = { [closeKey] = "close" }, -- close win with key that opened it
 	}
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()
@@ -160,35 +159,30 @@ return {
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
+		-- stylua: ignore start
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Previous reference" },
-		{
-			"<Esc>",
-			function() require("snacks").notifier.hide() end,
-			desc = "󰎟 Dismiss notifications",
-		},
-		{
-			"<D-8>",
-			function() messagesAsWin("<D-8>") end,
-			mode = { "n", "v", "i" },
-			desc = "󰎟 :messages",
-		},
-		{
-			"<D-9>",
-			function() lastNotif("<D-9>") end,
-			mode = { "n", "v", "i" },
-			desc = "󰎟 Last notification",
-		},
+		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
+		{ "<D-8>", function() messagesAsWin() end, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
+		{ "<D-9>", function() openNotif() end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+		-- stylua: ignore end
 		{
 			"<D-0>",
 			function()
 				require("snacks").notifier.hide()
-				require("snacks").notifier.show_history {
+				local history = require("snacks").notifier.get_history {
 					filter = function(notif) return notif.level ~= "trace" end,
-					reverse = true, -- newest on top
+					reverse = true,
 				}
+				vim.ui.select(history, {
+					prompt = "󰎟 Notification history",
+					format_item = function(item) return vim.trim(item.icon .. " " .. item.title) end,
+				}, function(notif)
+					if not notif then return end
+					openNotif(notif)
+				end)
 			end,
 			mode = { "n", "v", "i" },
-			desc = "󰎟 Notification history",
+			desc = "󰎟 All notifications",
 		},
 	},
 	opts = {
@@ -201,27 +195,27 @@ return {
 			border = vim.g.borderStyle,
 			bo = { modifiable = false },
 			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
-			keys = { q = "close", ["<Esc>"] = "close" },
+			keys = {
+				q = "close",
+				["<Esc>"] = "close",
+				["<D-8>"] = "close",
+				["<D-9>"] = "close",
+				["<D-0>"] = "close",
+			},
 		},
 		notifier = {
-			timeout = 7000,
+			timeout = 7500,
 			sort = { "added" }, -- sort only by time
 			width = { min = 12, max = 0.5 },
 			height = { min = 1, max = 0.5 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
-			date_format = "", -- only to disable timestamp in notification history
 			more_format = " ↓ %d lines ", -- if more lines than height
 		},
 		styles = {
 			notification = {
 				border = vim.g.borderStyle,
 				wo = { cursorline = false, winblend = 0, wrap = true },
-			},
-			["notification.history"] = {
-				position = "bottom",
-				height = 0.7,
-				keys = { ["<D-0>"] = "close" }, -- close win with key that opened it
 			},
 		},
 	},

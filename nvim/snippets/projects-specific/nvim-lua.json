@@ -119,7 +119,7 @@
       "end)"
     ],
     "prefix": [
-      "select",
+      "ui.select",
       "vim.ui.select"
     ]
   },
