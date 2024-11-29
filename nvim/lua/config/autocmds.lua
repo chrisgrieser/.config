@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 	callback = function(ctx)
 		local saveInstantly = ctx.event == "FocusLost" or ctx.event == "BufLeave"
 		local bufnr = ctx.buf
-		local b, bo = vim.bo[bufnr], vim.b[bufnr]
+		local bo, b = vim.bo[bufnr], vim.b[bufnr]
 		if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 		if b.saveQueued and not saveInstantly then return end
 
