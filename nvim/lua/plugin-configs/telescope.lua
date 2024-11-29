@@ -370,10 +370,10 @@ return {
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 		-- stylua: ignore start
-		{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace Symbols" },
-		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type Definitions" },
+		{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace symbols" },
+		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
 		{ "gI", function() vim.cmd.Telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
-		{ "<leader>ph", function() vim.cmd.Telescope("highlights") end, desc = " Search Highlights" },
+		{ "<leader>ph", function() vim.cmd.Telescope("highlights") end, desc = " Search highlights" },
 		-- stylua: ignore end
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
@@ -398,9 +398,9 @@ return {
 		},
 		{
 			"<leader>pc",
-			-- noautocmds -> no backdrop, so the colorscheme is previewable
+			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
 			function() vim.cmd("noautocmd Telescope colorscheme") end,
-			desc = " Colorschemes",
+			desc = " Preview colorschemes",
 		},
 		{
 			"go",

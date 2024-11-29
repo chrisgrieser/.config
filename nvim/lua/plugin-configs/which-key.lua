@@ -82,6 +82,7 @@ return {
 		preset = "helix",
 		win = {
 			border = vim.g.borderStyle,
+			wo = { winblend = 0 },
 		},
 		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
