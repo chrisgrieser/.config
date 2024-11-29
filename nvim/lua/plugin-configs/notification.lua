@@ -10,6 +10,7 @@ local function openNotif(notif)
 			filter = function(n) return n.level ~= "trace" end,
 		}
 		notif = history[#history]
+		require("snacks").notifier.hide(notif.id) -- hide if notif is still open
 		if not notif then
 			local opts = { title = "Last notification", icon = "󰎟" }
 			vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
@@ -24,7 +25,15 @@ local function openNotif(notif)
 	local footer = tostring(os.date("%R", notif.updated or notif.added))
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
 	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
-	local width = math.min(longestLine + 10, math.ceil(vim.o.columns * 0.75))
+	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * 0.75))
+	local levelCapitalized = notif.level:sub(1, 1):upper() .. notif.level:sub(2)
+	local highlights = {
+		"Normal:SnacksNormal",
+		"NormalNC:SnacksNormalNC",
+		"FloatBorder:SnacksNotifierBorder" .. levelCapitalized,
+		"FloatTitle:SnacksNotifierTitle" .. levelCapitalized,
+		"FloatFooter:SnacksNotifierFooter" .. levelCapitalized,
+	}
 
 	require("snacks").win {
 		position = "float",
@@ -35,7 +44,10 @@ local function openNotif(notif)
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = vim.trim(footer) ~= "" and " " .. footer .. " " or nil,
 		footer_pos = "right",
-		wo = { wrap = true }, -- only one message, so use full space
+		wo = {
+			winhighlight = table.concat(highlights, ","),
+			wrap = true, -- only one message, so use full space
+		},
 	}
 end
 

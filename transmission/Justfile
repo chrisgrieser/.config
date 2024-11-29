@@ -7,8 +7,7 @@ debugConfig := "./debug/repro.lua"
 
 count-lines:
     #!/usr/bin/env zsh
-    find -E . -iregex ".*\.(lua|scm)$" \
-        -not -path "./debug/*" -not -path "./templates/*" -print0 |
+    find -E . -name "*.lua" -not -path "./debug/*" -not -path "./templates/*" -print0 |
         xargs -0 wc -l | 
         sort --reverse | 
         cut -c5- | 
