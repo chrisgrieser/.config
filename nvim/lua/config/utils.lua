@@ -12,7 +12,7 @@ M.extraTextobjMaps = {
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? { unique: boolean, desc: string, buffer: boolean|number, nowait: boolean, remap: boolean, silent: boolean }
+---@param opts? vim.keymap.set.Opts
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end -- allow us to disable with `unique=false`
@@ -25,7 +25,7 @@ end
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? { desc: string, remap: boolean }
+---@param opts? vim.keymap.set.Opts
 function M.bufKeymap(mode, lhs, rhs, opts)
 	opts = vim.tbl_extend("force", { buffer = true, silent = true, nowait = true }, opts or {})
 	vim.keymap.set(mode, lhs, rhs, opts)

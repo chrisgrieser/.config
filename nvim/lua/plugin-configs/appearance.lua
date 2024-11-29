@@ -61,7 +61,7 @@ return {
 			sign = { enabled = false },
 			win_options = {
 				-- this makes it that toggling this plugin also toggles conceallevel
-				conceallevel = { default = 0, rendered = 3 },
+				conceallevel = { default = 0, rendered = 2 },
 			},
 		},
 	},

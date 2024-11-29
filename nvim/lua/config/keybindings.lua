@@ -417,7 +417,7 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
+keymap("n", "<leader>ie", vim.cmd.EditQuery, { desc = " :EditQuery" })
 keymap(
 	"n",
 	"<leader>ib",
@@ -429,13 +429,14 @@ keymap(
 -- REFACTORING
 
 keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
+keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
+
 keymap(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
 	{ desc = "󰑕 LSP rename: camelCase ↔ snake_case" }
 )
-keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -475,7 +476,7 @@ end, { desc = " Diagnostics" })
 keymap(
 	"n",
 	"<leader>oc",
-	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0 end,
+	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
 	{ desc = "󰈉 Conceal" }
 )
 --------------------------------------------------------------------------------

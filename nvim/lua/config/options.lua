@@ -114,7 +114,7 @@ vim.opt.cmdheight = 0
 -- INVISIBLE CHARS
 
 vim.opt.list = true
-vim.opt.conceallevel = 3
+vim.opt.conceallevel = 2
 vim.opt.listchars = {
 	nbsp = "󰚌",
 	precedes = "…",
