@@ -1,13 +1,10 @@
 
 
 local foo = {
-	bar = {
-		baz = 1
-	}
+	bar = 1
 }
-
 local function foobar()
-	return foo + 1
+	return foo
 end
 
 foobar()
