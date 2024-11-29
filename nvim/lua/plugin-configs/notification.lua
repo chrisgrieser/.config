@@ -10,12 +10,12 @@ local function openNotif(notif)
 			filter = function(n) return n.level ~= "trace" end,
 		}
 		notif = history[#history]
-		require("snacks").notifier.hide(notif.id) -- hide if notif is still open
 		if not notif then
 			local opts = { title = "Last notification", icon = "󰎟" }
 			vim.notify("No notifications yet.", vim.log.levels.TRACE, opts)
 			return
 		end
+		require("snacks").notifier.hide(notif.id) -- hide if notif is still open
 	end
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
