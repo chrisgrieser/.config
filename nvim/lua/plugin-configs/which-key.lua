@@ -26,7 +26,7 @@ return {
 			"<leader>?",
 			-- alternative: `:Telescope keymaps` with `only_buf = true`
 			function() require("which-key").show { global = false } end,
-			desc = "⌨️ Buffer Keymaps",
+			desc = "⌨️ Buffer keymaps",
 		},
 	},
 	opts = {
@@ -78,21 +78,14 @@ return {
 				{ " rest of ", " " },
 			},
 		},
+		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
+		preset = "helix",
 		win = {
 			border = vim.g.borderStyle,
-			width = 0.5,
-			height = { max = vim.o.lines },
-			padding = { 1, 1 },
-			col = math.floor(vim.o.columns * 0.5),
-		},
-		layout = {
-			spacing = 2,
-			width = { max = 34 },
-			align = "left",
 		},
 		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
-			group = "",
+			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
 			mappings = false, -- disable icons for keymaps
 		},
