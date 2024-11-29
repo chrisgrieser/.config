@@ -80,10 +80,10 @@ return {
 		},
 		win = {
 			border = vim.g.borderStyle,
-			width = 0.9,
-			height = { min = 5, max = 22 },
+			width = 0.5,
+			height = { max = vim.o.lines },
 			padding = { 1, 1 },
-			col = math.floor(vim.o.columns * 0.05),
+			col = math.floor(vim.o.columns * 0.5),
 		},
 		layout = {
 			spacing = 2,
