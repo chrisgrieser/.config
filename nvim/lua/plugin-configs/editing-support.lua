@@ -208,7 +208,7 @@ return {
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
 			logtypes = {
-				variableLog = { specialNvimDebug = true },
+				variableLog = { specialNvimLuaDebug = true },
 			},
 			logStatements = {
 				-- not using any marker
