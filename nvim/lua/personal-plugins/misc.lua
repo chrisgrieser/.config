@@ -250,7 +250,7 @@ end
 --------------------------------------------------------------------------------
 
 --- if cut off, requires higher notification height setting
-function M.bufferInfo()
+function M.inspectBuffer()
 	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 
 	local clients = vim.lsp.get_clients { bufnr = 0 }
@@ -278,8 +278,41 @@ function M.bufferInfo()
 	else
 		vim.list_extend(out, { "*No LSPs attached.*" })
 	end
-	local opts = { title = "Buffer info", icon = "󰽙", timeout = 10000 }
+	local opts = { title = "Inspect buffer", icon = "󰽙", timeout = 10000 }
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
+end
+
+function M.inspectNodeUnderCursor()
+	local ok, node = pcall(vim.treesitter.get_node)
+	if not (ok and node) then
+		vim.notify("No node under cursor", vim.log.levels.DEBUG, { icon = "" })
+		return
+	end
+	vim.notify(node:type(), vim.log.levels.DEBUG, { icon = "", title = "Node under cursor" })
+
+	-- highlight the full node
+	local duration, hlgroup = 2000, "Search" -- CONFIG
+	local startRow, startCol = node:start()
+	local endRow, endCol = node:end_()
+	local ns = vim.api.nvim_create_namespace("node-highlight")
+	if startRow == endRow then
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, endCol)
+	else
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, -1)
+		local lnum = startRow + 1
+		while lnum < endRow do
+			vim.api.nvim_buf_add_highlight(0, ns, hlgroup, lnum, 0, -1)
+			lnum = lnum + 1
+		end
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, endRow, 0, endCol)
+	end
+	vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
+
+	-- FIX on_key being triggered by `n` key
+	vim.defer_fn(function()
+		local countNs = vim.api.nvim_create_namespace("searchCounter")
+		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+	end, 1)
 end
 
 --------------------------------------------------------------------------------
