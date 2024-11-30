@@ -311,14 +311,11 @@ keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 Next placeholder" })
 
-vim.api.nvim_create_autocmd("WinScrolled", {
-	desc = "User: Exit snippet on scroll",
-	callback = function(ctx)
-		local scrollWinId = tonumber(ctx.match) -- SIC ctx.match returns id as string
-		local mainWinId = 1000
-		if scrollWinId == mainWinId then vim.snippet.stop() end
-	end,
-})
+-- exit snippet, see https://github.com/neovim/neovim/issues/26449
+keymap({ "i", "s" }, "<Esc>", function()
+	vim.snippet.stop()
+	return "<Esc>"
+end, { desc = "󰩫 Exit snippet", expr = true })
 
 --------------------------------------------------------------------------------
 

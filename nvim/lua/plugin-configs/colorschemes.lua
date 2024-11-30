@@ -22,6 +22,7 @@ local themes = {
 
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
+					["LspSignatureActiveParameter"] = { link = "Visual" },
 					["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 					["@character.printf"] = { link = "SpecialChar" },
 					["ColorColumn"] = { bg = "#e9dfd2" },
