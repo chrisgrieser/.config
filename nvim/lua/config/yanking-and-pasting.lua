@@ -58,17 +58,19 @@ keymap("n", "<D-v>", "p", { desc = " Paste" })
 -- SPECIAL YANKING OPERATIONS
 
 keymap("n", "<leader>yl", function()
-	-- cannot use `:g // y` because it yanks lines one after the other
+	-- not using `:glocal // yank` because it yanks lines one after the other
 	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
 		if not input then return end
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchLines = vim.tbl_filter(function(l) return l:find(input, 1, true) end, lines)
+		local matchLines = vim.tbl_filter(function(line) return line:find(input, 1, true) end, lines)
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
-		vim.notify(("%d lines"):format(#matchLines), nil, { title = "Copied", icon = "󰅍" })
+		local pluralS = #matchLines == 1 and "" or "s"
+		local msg = ("%d line%s"):format(#matchLines, pluralS)
+		vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
 	end)
 end, { desc = "󰅍 Matching lines" })
 
-keymap("n", "<leader>yc", function()
+keymap("n", "<leader>yb", function()
 	local codeContext = require("nvim-treesitter").statusline {
 		indicator_size = math.huge, -- disable shortening
 		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
@@ -81,37 +83,28 @@ keymap("n", "<leader>yc", function()
 	else
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end
-end, { desc = "󰅍 Code context" })
+end, { desc = "󰅍 Breadcrumbs" })
 
---------------------------------------------------------------------------------
-
-local function dedentAndTrimBlanks(lines)
-	-- remove leading and trailing blank lines
-	while vim.trim(lines[1]) == "" do
-		table.remove(lines, 1)
-	end
-	while vimlines[#lines] == "" do
-		table.remove(lines)
+-- requires a `nvim-scissors` util function
+-- (which I use as dependency since it's my own plugin)
+keymap("x", "<leader>yc", function()
+	local mode = vim.fn.mode()
+	if not mode:find("[Vv]") then
+		vim.notify("Must be in visual line mode.", vim.log.levels.WARN)
+		return
 	end
 
-	local indentAmounts = vim
-		.iter(lines)
-		:filter(function(line) return line ~= "" end) -- ignore blank lines
-		:map(function(line) return #line:match("^%s*") end)
-		:totable()
-	local smallestIndent = math.min(unpack(indentAmounts))
-
-	local dedentedLines = vim.tbl_map(function(line) return line:sub(smallestIndent + 1) end, lines)
-	return dedentedLines
-end
-
-keymap("n", "<leader>ym", function()
+	vim.cmd.normal { mode, bang = true } -- leave visual mode, so marks are set
 	local start = vim.api.nvim_buf_get_mark(0, "<")[1]
 	local _end = vim.api.nvim_buf_get_mark(0, ">")[1]
 	local lines = vim.api.nvim_buf_get_lines(0, start - 1, _end, false)
-	lines = dedentAndTrimBlanks(lines)
+
+	lines = require("scissors.utils").dedentAndTrimBlanks(lines)
 	table.insert(lines, 1, "```" .. vim.bo.filetype)
 	table.insert(lines, "```")
+
 	vim.fn.setreg("+", table.concat(lines, "\n"))
-	vim.notify(("%d lines"):format(#lines), nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 Yank as markdown codeblock" })
+	local pluralS = #lines == 1 and "" or "s"
+	local msg = ("%d line%s"):format(#lines - 2, pluralS)
+	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰅍 codeblock (markdown)" })
