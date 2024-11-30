@@ -15,6 +15,13 @@ keymap("n", "<leader>pd", function()
 	vim.ui.open(packagesDir)
 end, { desc = "󰝰 Open packages directory" })
 
+keymap(
+	"n",
+	"<leader>pv",
+	function() vim.ui.open(vim.o.viewdir) end,
+	{ desc = "󰝰 Open view directory" }
+)
+
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
@@ -481,13 +488,6 @@ keymap(
 	"<leader>oc",
 	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
 	{ desc = "󰈉 Conceal" }
-)
-
-keymap(
-	"n",
-	"<leader>ov",
-	function() require("personal-plugins.misc").showViewFile() end,
-	{ desc = "󰕰 Show viewfile" }
 )
 
 --------------------------------------------------------------------------------
