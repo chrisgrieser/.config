@@ -289,7 +289,12 @@ end, { desc = "󰜎 Run file" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
-keymap({ "n", "x", "i" }, "<C-CR>", "<C-w>w", { desc = " Next window" })
+keymap(
+	{ "n", "x", "i" },
+	"<C-CR>",
+	function() vim.cmd.wincmd("w") end,
+	{ desc = " Next window" }
+)
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
@@ -485,7 +490,7 @@ keymap(
 	"n",
 	"<leader>ov",
 	function() require("personal-plugins.misc").showViewFile() end,
-	{ desc = "󰕰 Delete viewfile" }
+	{ desc = "󰕰 Show viewfile" }
 )
 
 --------------------------------------------------------------------------------
