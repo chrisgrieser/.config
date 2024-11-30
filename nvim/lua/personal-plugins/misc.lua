@@ -325,6 +325,8 @@ function M.hoverUrl()
 	vim.lsp.buf_request(0, "textDocument/hover", params, function(err, result)
 		if err then vim.notify(err, vim.log.levels.ERROR, { title = "LSP Hover" }) end
 		local text = result.contents.value ---@cast text string
+		Chainsaw(text) -- 🪚
+		Chainsaw(ignoredUrls) -- 🪚
 		local urls = {}
 		for url in text:gmatch("%l%l%l-://[A-Za-z0-9_%-/.#%%=?&'@+*:]+") do
 			if not vim.tbl_contains(ignoredUrls, url) then table.insert(urls, url) end
