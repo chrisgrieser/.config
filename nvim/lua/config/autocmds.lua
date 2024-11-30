@@ -377,3 +377,62 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 		end)
 	end,
 })
+
+--------------------------------------------------------------------------------
+-- FAVICONS PREFIXES FOR URLS
+
+-- REQUIRED
+-- comment parser (`:TSInstall comment`)
+-- active parser for the current buffer (e.g., in a lua buffer, the lua parser is required)
+-- Nerdfont icon
+
+local favicons = {
+	hlGroup = "Comment",
+	icons = {
+		["github.com"] = " ",
+		["neovim.io"] = "",
+		["stackoverflow.com"] = "󰓌 ",
+		["youtube.com"] = " ",
+		["discord.com"] = "󰙯 ",
+		["slack.com"] = " ",
+		["new.reddit.com"] = " ",
+		["www.reddit.com"] = " ",
+	},
+}
+
+local function addFavicons(ctx)
+	local bufnr = ctx and ctx.buf or 0
+	if vim.bo[bufnr].buftype ~= "" then return end
+
+	local hasCommentsParser, urlCommentsQuery =
+		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
+	if not hasCommentsParser then return end
+	-- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
+
+	local faviconNs = vim.api.nvim_create_namespace("favicon")
+
+	vim.defer_fn(function() -- deferred, so treesitter parser is ready
+		vim.api.nvim_buf_clear_namespace(bufnr, faviconNs, 0, -1)
+		local rootTree = vim.treesitter.get_parser(0):parse()[1]:root()
+		local commentUrlIter = urlCommentsQuery:iter_captures(rootTree, bufnr)
+		vim.iter(commentUrlIter):each(function(_, node)
+			local nodeText = vim.treesitter.get_node_text(node, bufnr)
+			if nodeText == "," then return end
+			Chainsaw(nodeText) -- 🪚
+			local host = nodeText:match("^https?://([^/]+)")
+			local icon = favicons.icons[host]
+			if not icon then return end
+
+			local startRow, startCol = node:start()
+			vim.api.nvim_buf_set_extmark(bufnr, faviconNs, startRow, startCol, {
+				virt_text = { { icon, favicons.hlGroup } },
+				virt_text_pos = "inline",
+			})
+		end)
+	end, 1)
+end
+vim.api.nvim_create_autocmd(
+	{ "BufEnter", "TextChanged", "InsertLeave" },
+	{ callback = addFavicons }
+)
+addFavicons() -- initialize on current buffer
