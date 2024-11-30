@@ -62,7 +62,7 @@ keymap("n", "<leader>yl", function()
 	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
 		if not input then return end
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchLines = vim.tbl_filter(function(line) return line:find(input, 1, true) end, lines)
+		local matchLines = vim.tbl_filter(function(l) return l:find(input, nil, true) end, lines)
 		vim.fn.setreg("+", table.concat(matchLines, "\n"))
 		local pluralS = #matchLines == 1 and "" or "s"
 		local msg = ("%d line%s"):format(#matchLines, pluralS)
@@ -107,4 +107,4 @@ keymap("x", "<leader>yc", function()
 	local pluralS = #lines == 1 and "" or "s"
 	local msg = ("%d line%s"):format(#lines - 2, pluralS)
 	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 codeblock (markdown)" })
+end, { desc = "󰅍 Codeblock (markdown)" })

@@ -253,8 +253,6 @@ end
 function M.bufferInfo()
 	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
 
-	local ok, node = pcall(vim.treesitter.get_node)
-	local nodeType = (ok and node) and node:type() or "n/a"
 	local clients = vim.lsp.get_clients { bufnr = 0 }
 	local longestName = vim.iter(clients)
 		:fold(0, function(acc, client) return math.max(acc, #client.name) end)
@@ -265,12 +263,14 @@ function M.bufferInfo()
 		return ("[%s]%s%s"):format(client.name, pad, root)
 	end, clients)
 
+	local indentType = vim.bo.expandtab and "spaces" or "tabs"
+	local indentAmount = vim.bo.expandtab and vim.bo.tabstop or vim.bo.shiftwidth
+
 	local out = {
 		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		("[indent]    %s (%s)"):format(vim.bo.expandtab and "spaces" or "tabs", vim.bo.tabstop),
+		("[indent]    %s (%s)"):format(indentType, indentAmount),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
-		"[node-type] " .. nodeType,
 		"",
 	}
 	if #lsps > 0 then

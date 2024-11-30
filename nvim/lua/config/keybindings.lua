@@ -415,13 +415,45 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 -- INSPECT
 
 keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
-keymap("n", "<leader>ie", vim.cmd.EditQuery, { desc = " :EditQuery" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Treesitter query" })
+keymap("n", "<leader>in", function()
+	local ok, node = pcall(vim.treesitter.get_node)
+	if not (ok and node) then
+		vim.notify("No node under cursor", vim.log.levels.DEBUG, { icon = "" })
+		return
+	end
+	vim.notify(node:type(), vim.log.levels.DEBUG, { icon = "", title = "Node under cursor" })
+
+	-- highlight the full node
+	local duration, hlgroup = 2000, "Search" -- CONFIG
+	local startRow, startCol = node:start()
+	local endRow, endCol = node:end_()
+	local ns = vim.api.nvim_create_namespace("node-highlight")
+	if startRow == endRow then
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, endCol)
+	else
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, -1)
+		local lnum = startRow + 1
+		while lnum < endRow do
+			vim.api.nvim_buf_add_highlight(0, ns, hlgroup, lnum, 0, -1)
+			lnum = lnum + 1
+		end
+		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, endRow, 0, endCol)
+	end
+	vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
+
+	-- FIX on_key being triggered by `n` key
+	vim.defer_fn(function()
+		local countNs = vim.api.nvim_create_namespace("searchCounter")
+		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
+	end, 1)
+end, { desc = " Node under cursor" })
 keymap(
 	"n",
 	"<leader>ib",
 	function() require("personal-plugins.misc").bufferInfo() end,
-	{ desc = "󰽙 Buffer" }
+	{ desc = "󰽙 Buffer info" }
 )
 
 --------------------------------------------------------------------------------
