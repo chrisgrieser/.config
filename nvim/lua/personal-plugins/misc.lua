@@ -342,5 +342,12 @@ function M.hoverUrl()
 	end)
 end
 
+function M.deleteViewFile()
+	local path = vim.api.nvim_buf_get_name(0):gsub("^/Users/%w+", "~")
+	local viewdir = vim.o.viewdir
+	local viewNum = 1
+	local viewFile = file:gsub(".+%.%w+$", ".view")
+end
+
 --------------------------------------------------------------------------------
 return M

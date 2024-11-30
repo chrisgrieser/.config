@@ -292,23 +292,19 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 -- ENFORCE SCROLLOFF AT EOF
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
 
-vim.api.nvim_create_autocmd({ "WinScrolled", "CursorMoved" }, {
+vim.api.nvim_create_autocmd("CursorMoved", {
 	desc = "User: Enforce scrolloff at EoF",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
-		if ctx.event == "WinScrolled" then
-			local winid = ctx.match
-			local winEvent = vim.v.event[tostring(winid)]
-			if winEvent and winEvent.topline <= 0 then return end
-		end
 
 		local winHeight = vim.api.nvim_win_get_height(0)
 		local visualDistanceToEof = winHeight - vim.fn.winline()
 		local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
 
-		if visualDistanceToEof >= scrolloff then return end
-		local winTopline = vim.fn.winsaveview().topline
-		vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
+		if visualDistanceToEof < scrolloff then
+			local winTopline = vim.fn.winsaveview().topline
+			vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
+		end
 	end,
 })
 
