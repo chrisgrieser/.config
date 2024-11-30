@@ -18,10 +18,6 @@ return {
 
 				-- global debugging function `Chainsaw`
 				{ path = "nvim-chainsaw/lua/chainsaw/nvim-debug.lua", words = { "Chainsaw" } },
-				{
-					path = vim.g.localRepos .. "/nvim-chainsaw/lua/chainsaw/nvim-debug.lua",
-					words = { "Chainsaw" },
-				},
 			},
 		},
 	},
@@ -77,10 +73,10 @@ return {
 		"chrisgrieser/nvim-rulebook",
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup Rule" },
-			{ "<leader>cg", function() require("rulebook").ignoreRule() end, desc = "󰅜 I[g]nore Rule" },
-			{ "<leader>cy", function() require("rulebook").yankDiagnosticCode() end, desc = "󰅍 Yank Diagnostic Code" },
-			{ "<leader>cf", function() require("rulebook").suppressFormatter() end, mode = { "n", "x" }, desc = "󰉿 Suppress Formatter" },
+			{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup rule" },
+			{ "<leader>cg", function() require("rulebook").ignoreRule() end, desc = "󰅜 I[g]nore rule" },
+			{ "<leader>cy", function() require("rulebook").yankDiagnosticCode() end, desc = "󰅍 Yank diagnostic code" },
+			{ "<leader>cf", function() require("rulebook").suppressFormatter() end, mode = { "n", "x" }, desc = "󰉿 Suppress formatter" },
 			-- stylua: ignore end
 		},
 		opts = {

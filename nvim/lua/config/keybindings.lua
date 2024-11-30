@@ -402,9 +402,9 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 --------------------------------------------------------------------------------
 -- INSPECT
 
-keymap("n", "<leader>ih", vim.cmd.Inspect, { desc = " Highlights under cursor" })
+keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
-keymap("n", "<leader>ie", vim.cmd.EditQuery, { desc = " Edit query" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
 keymap(
 	"n",
 	"<leader>in",

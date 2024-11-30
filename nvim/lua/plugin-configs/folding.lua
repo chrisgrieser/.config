@@ -9,7 +9,7 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "UIEnter", -- needed for folds to load in time and comments being closed
 		keys = {
-			{ "<leader>if", vim.cmd.UfoInspect, desc = "󱃄 :UfoInspect" },
+			{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold info" },
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close all folds" },
 			{
 				"zr",
@@ -19,7 +19,7 @@ return {
 			{ "z1", function() require("ufo").closeFoldsWith(1) end, desc = "󱃄 Close L1 folds" },
 			{ "z2", function() require("ufo").closeFoldsWith(2) end, desc = "󱃄 Close L2 folds" },
 			{ "z3", function() require("ufo").closeFoldsWith(3) end, desc = "󱃄 Close L3 folds" },
-			{ "z4", function() require("ufo").closeFoldsWith(3) end, desc = "󱃄 Close L3 folds" },
+			{ "z4", function() require("ufo").closeFoldsWith(4) end, desc = "󱃄 Close L4 folds" },
 		},
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
@@ -35,6 +35,7 @@ return {
 			close_fold_kinds_for_ft = {
 				default = { "imports", "comment" },
 				json = { "array" },
+				markdown = {}, -- avoid everything becoming folded
 				-- use `:UfoInspect` to get see available fold kinds
 			},
 			open_fold_hl_timeout = 800,

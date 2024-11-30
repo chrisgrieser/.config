@@ -84,7 +84,7 @@ return {
 		win = {
 			border = vim.g.borderStyle,
 			wo = { winblend = 0 },
-			height = { min = 3, max = 0.9 },
+			height = { min = 0, max = 0.9 },
 		},
 		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
