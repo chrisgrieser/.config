@@ -207,7 +207,7 @@ local function checkForDuplicateKeys()
 				for _, mode in ipairs(allModes) do
 					if isMode(lazyKey, mode) then
 						if vim.tbl_contains(allKeys[mode], lhs) then
-							vim.notify(
+							vim.notify_once(
 								("Duplicate %smap: %s"):format(mode, lhs),
 								vim.log.levels.WARN,
 								{ title = "Lazy", icon = "󰒲", ft = "text" }
