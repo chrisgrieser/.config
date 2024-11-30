@@ -32,9 +32,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
-keymap("x", "p", "P", { desc = " Paste w/o switching with register" })
+keymap("x", "p", "P")
 keymap("n", "dd", function()
-	if vim.api.nvim_get_current_line():find("^%s*$") then return '"_dd' end
+	if vim.trim(vim.api.nvim_get_current_line()) == "" then return '"_dd' end
 	return "dd"
 end, { expr = true, desc = "dd" })
 
@@ -86,7 +86,8 @@ keymap("n", "<leader>yb", function()
 end, { desc = "󰅍 Breadcrumbs" })
 
 -- requires a `nvim-scissors` util function
--- (which I use as dependency since it's my own plugin)
+-- If you want to use this without `scissors`, copy the respective utility
+-- function: https://github.com/chrisgrieser/nvim-scissors/blob/77b194b399f1563b7a021a0017f523dabf821170/lua/scissors/utils.lua#L31-L49
 keymap("x", "<leader>yc", function()
 	local mode = vim.fn.mode()
 	if not mode:find("[Vv]") then

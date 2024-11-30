@@ -1,16 +1,4 @@
 {
-  "Misc": {
-    "body": "Miscellaneous",
-    "prefix": "Misc"
-  },
-  "bash (Codeblock)": {
-    "body": [
-      "```bash",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": "bash (Codeblock)"
-  },
   "caution (callout)": {
     "body": [
       "> [!CAUTION]",
@@ -26,7 +14,6 @@
       "$0",
       "</details>"
     ],
-    "description": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details",
     "prefix": [
       "toggle / fold",
       "details & summary"
@@ -46,7 +33,6 @@
       "> [!IMPORTANT]",
       "> $0"
     ],
-    "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "important (callout)"
   },
   "insert table 2x2": {
@@ -66,26 +52,10 @@
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
     "prefix": "insert toc"
   },
-  "js (Codeblock)": {
-    "body": [
-      "```js",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": "js (Codeblock)"
-  },
   "kbd": {
     "body": "<kbd>$0</kbd>",
     "description": "HTML tag for keys",
     "prefix": "kbd"
-  },
-  "lua (Codeblock)": {
-    "body": [
-      "```lua",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": "lua (Codeblock)"
   },
   "note (GitHub callout)": {
     "body": [
@@ -98,14 +68,6 @@
       "note (callout)"
     ]
   },
-  "py (Codeblock)": {
-    "body": [
-      "```py",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": "py (Codeblock)"
-  },
   "tip (callout)": {
     "body": [
       "> [!TIP]",
@@ -113,28 +75,6 @@
     ],
     "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "tip (callout)"
-  },
-  "tree": {
-    "body": [
-      "```txt",
-      ".",
-      "├── 📂 one",
-      "│   ├── 📄 one-one",
-      "│   └── 📄 two-two",
-      "├── 📂 two",
-      "│   └── 📄 two-one",
-      "└── 📄 three",
-      "```"
-    ],
-    "prefix": "tree"
-  },
-  "ts (Codeblock)": {
-    "body": [
-      "```ts",
-      "$CLIPBOARD$0",
-      "```"
-    ],
-    "prefix": "ts (Codeblock)"
   },
   "warning (callout)": {
     "body": [
@@ -144,12 +84,12 @@
     "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "warning (callout)"
   },
-  "yaml (Codeblock)": {
+  "Codeblock": {
     "body": [
-      "```yaml",
-      "$CLIPBOARD$0",
+      "```$0",
+      "$CLIPBOARD",
       "```"
     ],
-    "prefix": "yaml (Codeblock)"
+    "prefix": "Codeblock"
   }
 }
