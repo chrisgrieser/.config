@@ -373,7 +373,7 @@ return {
 		{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace symbols" },
 		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
 		{ "gI", function() vim.cmd.Telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
-		{ "<leader>ph", function() vim.cmd.Telescope("highlights") end, desc = " Search highlights" },
+		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
 		-- stylua: ignore end
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },

@@ -375,7 +375,7 @@ nnoremap ,t :openTrash<CR>
 
 " dynamic [h]ighlights settings
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
-nnoremap ,ph :openDynamicHighlightsSettings<CR>
+nnoremap ,ih :openDynamicHighlightsSettings<CR>
 
 " Cycle Colorscheme
 exmap cycleColorscheme jsfile Meta/vimrc-jsfile.js { cycleColorscheme() }
