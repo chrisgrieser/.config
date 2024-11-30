@@ -80,9 +80,10 @@ return {
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add buffer" },
-			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󱡔 󰊢 Hunk textobj" },
+			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
 			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame line" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame file" },
+			{ "q", vim.cmd.close, ft = "gitsigns-blame", desc = "Close", nowait = true },
 
 			-- UNDO
 			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage last stage" },

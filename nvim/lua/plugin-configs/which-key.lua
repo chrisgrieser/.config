@@ -62,6 +62,7 @@ return {
 				{ "as", desc = "󰰢 sentence" },
 				{ "iw", desc = "󰬞 word" },
 				{ "aw", desc = "󰬞 word" },
+				{ "gn", desc = " search result" },
 			},
 		},
 		plugins = {
@@ -83,6 +84,7 @@ return {
 		win = {
 			border = vim.g.borderStyle,
 			wo = { winblend = 0 },
+			height = { max = 0.9 },
 		},
 		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
