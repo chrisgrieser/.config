@@ -347,6 +347,7 @@ end
 function M.showViewFile()
 	if jit.os ~= "OSX" then return end -- since using macOS' `open`
 	local viewSlot = 1 -- used by nvim-origami
+	Chainsaw(viewSlot) -- 🪚
 	local encodedPath = vim.api.nvim_buf_get_name(0):gsub("^/Users/%w+", "~"):gsub("/", "=+")
 	local viewdir = vim.o.viewdir
 	local viewFile = ("%s/%s=%d.vim"):format(viewdir, encodedPath, viewSlot)
