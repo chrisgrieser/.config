@@ -457,7 +457,7 @@ keymap(
 
 keymap("n", "<leader>fm", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<leader>fm", function()
-	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = vim.fn.mode() })
+	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
 	local selection = vim.iter(chunks)
 		:map(function(chunk) return vim.fn.escape(chunk, [[/\]]) end)
 		:join("\\n")

@@ -1,2 +1,2 @@
 
-Chainsaw(vim.notify("🪚 💜")) -- 🪚
+Chainsaw(1) -- 🪚
