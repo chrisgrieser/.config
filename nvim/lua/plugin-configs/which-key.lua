@@ -30,7 +30,7 @@ return {
 		},
 	},
 	opts = {
-		delay = 400,
+		delay = 666,
 		spec = {
 			{
 				mode = { "n", "x" },
