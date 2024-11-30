@@ -17,13 +17,18 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
-	local msg = ("[%d] instance%s to %q"):format(changeCount, pluralS, ctx.params.newName)
+	local newName = ctx.params.newName
+	local msg = ("Renamed [%d] instance%s to [%s]"):format(changeCount, pluralS, newName)
 	if #changedFiles > 1 then
-		msg = ("**%s in %d files**"):format(msg, #changedFiles)
-			.. "\n"
-			.. table.concat(changedFiles, "\n")
+		msg = ("**Renamed [%d] instance%s in %d files to [%s]**\n%s"):format(
+			changeCount,
+			pluralS,
+			#changedFiles,
+			newName,
+			table.concat(changedFiles, "\n")
+		)
 	end
-	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
+	vim.notify(msg, nil, { title = "LSP", icon = "󰑕" })
 
 	-- SAVE ALL
 	if #changedFiles > 1 then vim.cmd.wall() end

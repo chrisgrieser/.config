@@ -102,14 +102,14 @@
   "read file": {
     "body": [
       "---@param filePath string",
-      "---@return string? -- content or error message",
-      "---@return boolean success",
+      "---@return string|nil content nil if error",
+      "---@return string|nil errormsg nil if no error",
       "local function readFile(filePath)",
       "\tlocal file, err = io.open(filePath, \"r\")",
-      "\tif not file then return err, false end",
+      "\tif not file then return nil, err end",
       "\tlocal content = file:read(\"*a\")",
       "\tfile:close()",
-      "\treturn content, true",
+      "\treturn content, nil",
       "end"
     ],
     "prefix": "read file"
