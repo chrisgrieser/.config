@@ -342,11 +342,15 @@ function M.hoverUrl()
 	end)
 end
 
-function M.deleteViewFile()
-	local path = vim.api.nvim_buf_get_name(0):gsub("^/Users/%w+", "~")
+-- Useful to delete a view file is corrupted (cannot delete it directly, since
+-- leaving the buffer would recreate a new view file).
+function M.showViewFile()
+	if jit.os ~= "OSX" then return end -- since using macOS' `open`
+	local viewSlot = 1 -- used by nvim-origami
+	local encodedPath = vim.api.nvim_buf_get_name(0):gsub("^/Users/%w+", "~"):gsub("/", "=+")
 	local viewdir = vim.o.viewdir
-	local viewNum = 1
-	local viewFile = file:gsub(".+%.%w+$", ".view")
+	local viewFile = ("%s/%s=%d.vim"):format(viewdir, encodedPath, viewSlot)
+	vim.system { "open", "-R", viewFile }
 end
 
 --------------------------------------------------------------------------------

@@ -58,7 +58,7 @@ M.wf_someWindowActivity = wf
 	:subscribe(wf.windowFocused, showAndMoveOrHide)
 	:subscribe(wf.windowCreated, showAndMoveOrHide)
 
---------------------------------------------------------------------------------
+--------------------------------------------------------------------------------,
 -- FALLTHROUGH
 
 -- prevent unintended focusing after closing a window / quitting app
