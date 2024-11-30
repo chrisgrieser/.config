@@ -32,8 +32,7 @@ return {
 				{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
 			},
 			-- INFO custom keys need to be "appended" to the opts as a list
-			{ "*", "*", ft = { "markdown" } }, -- italics
-			{ "__", "__", ft = { "markdown" } }, -- bold
+			{ "**", "**", ft = { "markdown" } }, -- bold
 			{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
 
 			{ -- commit scope (= only first word) for commit messages
@@ -114,13 +113,11 @@ return {
 					find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
 					delete = "([%w.:_]+%()().*(%))()",
 				},
-				[textObjMaps.func] = {
-					-- only one-line lua functions
+				[textObjMaps.func] = { -- only one-line lua functions
 					find = "function ?[%w_]* ?%b().- end",
 					delete = "(function ?[%w_]* ?%b() ?)().-( end)()",
 				},
-				[textObjMaps.condition] = {
-					-- only one-line lua conditionals
+				[textObjMaps.condition] = { -- only one-line lua conditionals
 					find = "if .- then .- end",
 					delete = "(if .- then )().-( end)()",
 				},
@@ -205,7 +202,7 @@ return {
 	},
 	{ -- quickly add log statements
 		"chrisgrieser/nvim-chainsaw",
-		event = "VeryLazy",
+		ft = "lua", -- in lua, load directly for `Chainsaw` global
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
 			logStatements = {
@@ -213,7 +210,6 @@ return {
 					nvim_lua = "Chainsaw({{var}}) -- {{marker}}",
 					lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))',
 				},
-
 
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },

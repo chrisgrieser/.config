@@ -9,7 +9,7 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "UIEnter", -- needed for folds to load in time and comments being closed
 		keys = {
-			{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold info" },
+			{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold capabilities" },
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close all folds" },
 			{
 				"zr",
