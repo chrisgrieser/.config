@@ -1,6 +1,5 @@
-- Switch to native completion with `basics_ls` 
-	+ https://github.com/antonk52/basics-language-server/issues/created_by/chrisgrieser
-- `:help ]q`
+- `:help ]q`, replaces `:cnext`
 - `vim.diagnostic.jump()`
 - `vim.lsp.buf.hover.Opts`
 - `vim.lsp.buf.signature_help.Opts`
+- potentially replace `nvim-ufo` with https://www.reddit.com/r/neovim/comments/1h34lr4/neovim_now_has_the_builtin_lsp_folding_support/
