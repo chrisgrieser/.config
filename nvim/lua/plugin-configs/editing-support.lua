@@ -207,6 +207,9 @@ return {
 		"chrisgrieser/nvim-chainsaw",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
+			logtypes = {
+				variableLog = { specialNvimDebug = true },
+			},
 			logStatements = {
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
@@ -231,7 +234,7 @@ return {
 			vim.g.lualine_add("sections", "lualine_x", {
 				require("chainsaw.visuals.statusline").countInBuffer,
 				color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color
-				padding = { left = 0, right = 1  },
+				padding = { left = 0, right = 1 },
 			}, "after")
 		end,
 		keys = {
