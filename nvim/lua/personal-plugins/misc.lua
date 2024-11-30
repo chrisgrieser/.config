@@ -345,6 +345,8 @@ end
 -- Useful to delete a view file is corrupted (cannot delete it directly, since
 -- leaving the buffer would recreate a new view file).
 function M.showViewFile()
+	if true then return end
+
 	if jit.os ~= "OSX" then return end -- since using macOS' `open`
 	local viewSlot = 1 -- used by nvim-origami
 	local encodedPath = vim.api.nvim_buf_get_name(0):gsub("^/Users/%w+", "~"):gsub("/", "=+")

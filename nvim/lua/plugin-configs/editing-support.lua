@@ -208,7 +208,7 @@ return {
 		event = "VeryLazy",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
-			logtypes = {
+			logTypes = {
 				variableLog = { specialNvimLuaDebug = true },
 			},
 			logStatements = {
