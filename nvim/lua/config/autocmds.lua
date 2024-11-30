@@ -104,9 +104,7 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			:filter(function(bufnr)
 				local valid = vim.api.nvim_buf_is_valid(bufnr)
 				local loaded = vim.api.nvim_buf_is_loaded(bufnr)
-				return valid and loaded
-			end)
-			:filter(function(bufnr)
+				if not valid or not loaded then return false end
 				local bufPath = vim.api.nvim_buf_get_name(bufnr)
 				local doesNotExist = vim.uv.fs_stat(bufPath) == nil
 				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
@@ -302,8 +300,11 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 		local scrolloff = math.min(vim.o.scrolloff, math.floor(winHeight / 2))
 
 		if visualDistanceToEof < scrolloff then
-			local winTopline = vim.fn.winsaveview().topline
-			vim.fn.winrestview { topline = winTopline + scrolloff - visualDistanceToEof }
+			local topline = vim.fn.winsaveview().topline
+			-- topline is inaccurate if it is a folded line, thus add number of folded lines
+			local toplineFoldAmount = vim.fn.foldclosedend(topline) - vim.fn.foldclosed(topline)
+			topline = topline + toplineFoldAmount
+			vim.fn.winrestview { topline = topline + scrolloff - visualDistanceToEof }
 		end
 	end,
 })
@@ -317,7 +318,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
 			if vim.o.scrolloff == 0 then
 				vim.o.scrolloff = originalScrolloff
-				vim.notify("Scrolloff fix applied.", nil, { title = ctx.event })
+				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
 			end
 		end, 100)
 	end,
