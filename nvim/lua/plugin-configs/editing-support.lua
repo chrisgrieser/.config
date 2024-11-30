@@ -208,10 +208,13 @@ return {
 		event = "VeryLazy",
 		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
 		opts = {
-			logTypes = {
-				variableLog = { specialNvimLuaDebug = true },
-			},
 			logStatements = {
+				variableLog = {
+					nvim_lua = "Chainsaw({{var}}) -- {{marker}}",
+					lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))',
+				},
+
+
 				-- not using any marker
 				assertLog = { lua = 'assert({{var}}, "")' },
 
@@ -224,7 +227,6 @@ return {
 				},
 
 				-- Hammerspoon
-				variableLog = { lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))' },
 				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
 				sound = { lua = 'hs.sound.getByName("Sosumi"):play() -- {{marker}}' },
 			},
