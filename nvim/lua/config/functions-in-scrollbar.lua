@@ -2,10 +2,21 @@
 --------------------------------------------------------------------------------
 
 local config = {
-	hlgroup = "Function",
-	icon = "",
-	tsquery = [[(function_declaration) @user.funcs]],
-	priority = 1000,
+	hlgroup = "Comment",
+	icon = "·",
+	tsquery = {
+		lua = {
+			"function_declaration",
+			"function_",
+		}
+			[=[
+			[ (function_declaration) (function_definition) ] @user.funcs
+		]=],
+		javascript = [=[
+			[ (function_declaration) (arrow_function) ] @user.funcs
+		]=],
+	},
+	priority = 10, -- diagnostics use 20
 	leftOfScrollbar = false,
 }
 
@@ -21,9 +32,11 @@ local handler = {
 		priority = config.priority,
 	},
 	enabled = function() return true end,
-	update = function(bufnr, _winid)
+	update = function(bufnr, winid)
 		local currentFt = vim.bo[bufnr].filetype
-		local hasFunction, query = pcall(vim.treesitter.query.parse, currentFt, config.tsquery)
+		local tsquery = config.tsquery[currentFt]
+		if not tsquery then return {} end
+		local hasFunction, query = pcall(vim.treesitter.query.parse, currentFt, tsquery)
 		if not hasFunction then return {} end
 
 		local rootTree = vim.treesitter.get_parser(bufnr):parse()[1]:root()
@@ -32,8 +45,9 @@ local handler = {
 		local satelliteMarks = vim.iter(allNodesIter)
 			:map(function(_, node, _)
 				local row, _, _ = node:start()
+				local scrollbarPos, _ = require("satellite.util").row_to_barpos(winid, row)
 				return {
-					pos = row,
+					pos = scrollbarPos,
 					highlight = config.hlgroup,
 					symbol = config.icon,
 				}
