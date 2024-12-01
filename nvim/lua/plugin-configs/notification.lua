@@ -12,14 +12,14 @@ end
 
 ---@param idx number|"last"
 local function openNotif(idx)
+	if idx == "last" then idx = 1 end
 	local history = getHistory()
-	if #history == 0 then
-		local msg = #history == 0 and "No notifications yet." or "No more notifications."
+	local notif = history[idx]
+	if not notif then
+		local msg = "No notifications yet."
 		vim.notify(msg, vim.log.levels.TRACE, { title = "Last notification", icon = "󰎟" })
 		return
 	end
-	if idx == "last" then idx = 1 end
-	local notif = history[idx]
 	require("snacks").notifier.hide(notif.id)
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -67,6 +67,20 @@ local function openNotif(idx)
 			end,
 		},
 	}
+end
+
+local function allNotifications()
+	require("snacks").notifier.hide()
+	vim.ui.select(getHistory(), {
+		prompt = "󰎟 Notification history",
+		format_item = function(item)
+			local title = item.title ~= "" and item.title or "(no title)"
+			return vim.trim(item.icon .. " " .. title)
+		end,
+	}, function(_, idx)
+		if not idx then return end
+		openNotif(idx)
+	end)
 end
 
 local function messagesAsWin()
@@ -190,27 +204,13 @@ return {
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-		-- stylua: ignore start
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Previous reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
+		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
+		{ "<D-9>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
+		-- stylua: ignore
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
+		-- stylua: ignore
 		{ "<D-0>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
-		{ "<D-8>", function() messagesAsWin() end, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
-		-- stylua: ignore end
-		{
-			"<D-9>",
-			function()
-				require("snacks").notifier.hide()
-				vim.ui.select(getHistory(), {
-					prompt = "󰎟 Notification history",
-					format_item = function(item) return vim.trim(item.icon .. " " .. item.title) end,
-				}, function(_, idx)
-					if not idx then return end
-					openNotif(idx)
-				end)
-			end,
-			mode = { "n", "v", "i" },
-			desc = "󰎟 All notifications",
-		},
 	},
 	opts = {
 		words = {

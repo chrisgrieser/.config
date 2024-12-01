@@ -90,9 +90,9 @@ require("lazy.view.config").keys.details = "<Tab>"
 -- KEYMAPS FOR NVIM TRIGGERING LAZY
 local keymap = require("config.utils").uniqueKeymap
 
-keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy Sync" })
-keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy Home" })
-keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy Install" })
+keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync" })
+keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home" })
+keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" })
 
 local pluginTypeIcons = {
 	["ai-plugins"] = "󰚩",

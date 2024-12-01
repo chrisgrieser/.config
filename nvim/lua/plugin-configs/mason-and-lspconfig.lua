@@ -2,7 +2,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		keys = {
-			{ "<leader>pm", vim.cmd.Mason, desc = " Mason Home" },
+			{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 		},
 		-- Make mason packages available before loading mason itself. This allows
 		-- us to lazy-load of mason.

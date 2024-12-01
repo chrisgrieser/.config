@@ -13,13 +13,13 @@ keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end, { desc = " Qu
 keymap("n", "<leader>pd", function()
 	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
 	vim.ui.open(packagesDir)
-end, { desc = "󰝰 Open packages directory" })
+end, { desc = "󰝰 Plugin directory" })
 
 keymap(
 	"n",
 	"<leader>pv",
 	function() vim.ui.open(vim.o.viewdir) end,
-	{ desc = "󰝰 Open view directory" }
+	{ desc = "󰝰 View directory" }
 )
 
 --------------------------------------------------------------------------------
