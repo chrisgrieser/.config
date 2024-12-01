@@ -52,11 +52,10 @@ return {
 		},
 		opts = {
 			render_modes = { "n", "c", "i", "v", "V" },
+			sign = { enabled = false },
+			heading = { icons = {} }, -- disables icons
 			bullet = {
 				icons = { "▪️", "▫️", "•", "◦" },
-			},
-			heading = {
-				icons = {}, -- disables icons
 			},
 			code = {
 				border = "thick",
@@ -65,16 +64,15 @@ return {
 			link = {
 				custom = {
 					-- stylua: ignore start
-					youtube = { pattern = "youtube%.com", icon = " ", highlight = "RenderMarkdownLink" },
-					github = { pattern = "github%.com", icon = " ", highlight = "RenderMarkdownLink" },
-					neovim = { pattern = "neovim%.io", icon = " ", highlight = "RenderMarkdownLink" },
-					stackoverflow = { pattern = "stackoverflow%.com", icon = "󰓌 ", highlight = "RenderMarkdownLink" },
-					discord = { pattern = "discord%.com", icon = "󰙯 ", highlight = "RenderMarkdownLink" },
-					reddit = { pattern = "reddit%.com", icon = " ", highlight = "RenderMarkdownLink" },
+					youtube = { pattern = "youtube.com", icon = " ", highlight = "RenderMarkdownLink" },
+					github = { pattern = "github.com", icon = " ", highlight = "RenderMarkdownLink" },
+					neovim = { pattern = "neovim.io", icon = " ", highlight = "RenderMarkdownLink" },
+					stackoverflow = { pattern = "stackoverflow.com", icon = "󰓌 ", highlight = "RenderMarkdownLink" },
+					discord = { pattern = "discord.com", icon = "󰙯 ", highlight = "RenderMarkdownLink" },
+					reddit = { pattern = "reddit.com", icon = " ", highlight = "RenderMarkdownLink" },
 					-- stylua: ignore end
 				},
 			},
-			sign = { enabled = false },
 			win_options = {
 				-- this makes it that toggling this plugin also toggles conceallevel
 				conceallevel = { default = 0, rendered = 2 },
