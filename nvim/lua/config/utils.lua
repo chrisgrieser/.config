@@ -16,7 +16,12 @@ M.extraTextobjMaps = {
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end -- allows to disable with `unique=false`
-	if opts.silent == nil then opts.silent = true end
+
+	-- using `silent` in command mode mappings results in weird bugs
+	local cmdMode = mode == "c"
+	if type(mode) == "table" then cmdMode = vim.tbl_contains(mode, "c") end
+
+	if not cmdMode and opts.silent == nil then opts.silent = true end
 	-- violating `unique=true` throws an error; using `pcall` so other mappings
 	-- are still loaded
 	pcall(vim.keymap.set, mode, lhs, rhs, opts)

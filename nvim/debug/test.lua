@@ -4,3 +4,5 @@ local function tst()
 		table.insert(a, level)
 	end
 end
+
+tst()
