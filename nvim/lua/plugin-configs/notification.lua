@@ -111,8 +111,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local function snacksConfig()
-	-- OVERRIDE DEFAULT PRINT FUNCTIONS (similar to `noice.nvim`)
+local function overrideDefaultPrintFuncs()
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
@@ -137,9 +136,10 @@ local function snacksConfig()
 	vim.api.nvim_err_writeln = function(msg)
 		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error" })
 	end
-	-----------------------------------------------------------------------------
+end
 
-	-- HACK SILENCE SOME MESSAGES by overriding snacks' override
+local function silenceMessages()
+	-- by overriding snacks' override
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
@@ -150,10 +150,8 @@ local function snacksConfig()
 		require("snacks").notifier.notify(msg, level, opts)
 	end
 
-	-----------------------------------------------------------------------------
-	-- SILENCE "E486: PATTERN NOT FOUND"
+	-- "E486: pattern not found"
 	-- (yes, all this is needed to have `cmdheight=0` & avoid the "Press Enter" prompt)
-
 	local function notFoundNotify(query)
 		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
 		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
@@ -193,6 +191,32 @@ local function snacksConfig()
 	})
 end
 
+-- lightweight replacement for `fidget.nvim`
+local function lspProgressIndicator()
+	vim.api.nvim_create_autocmd("LspProgress", {
+		desc = "User: LSP progress",
+		callback = function(ctx)
+			local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+
+			local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+			local progress = ctx.data.params.value
+			if progress and progress.kind == "end" then
+				require("snacks").notifier.hide("lspProgress")
+				return
+			end
+			if not (progress and progress.title and progress.percentage) then return end
+			local info = progress.title:gsub("%.%.%.", "…")
+
+			local idx = math.ceil(progress.percentage / 100 * #progressIcons)
+			if progress.percentage == 0 then idx = 1 end
+
+			local opts = { id = "lspProgress", icon = progressIcons[idx], style = "minimal" }
+			local msg = ("[%s] %s "):format(clientName, info)
+			vim.notify(msg, vim.log.levels.TRACE, opts)
+		end,
+	})
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -200,7 +224,9 @@ return {
 	event = "VeryLazy",
 	config = function(_, opts)
 		require("snacks").setup(opts)
-		snacksConfig()
+		overrideDefaultPrintFuncs()
+		silenceMessages()
+		lspProgressIndicator()
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
