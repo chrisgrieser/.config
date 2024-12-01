@@ -1,7 +1,3 @@
-local out = Snacks.config.get("notifier", {
-	width = { max = 0.4 },
-	height = { max = 0.6 },
-})
+local out = require("snacks").config.get("notifier", {width = { max = 0.4 }}).width.max
+Chainsaw(out) -- 🪚
 
-local bla= foo and test
-Chainsaw(bla) -- 🪚
