@@ -64,38 +64,17 @@ return {
 			},
 			link = {
 				custom = {
-					web = { pattern = "^http[s]?://", icon = "󰖟 ", highlight = "RenderMarkdownLink" },
-					youtube = {
-						pattern = "www%.youtube%.com/",
-						icon = " ",
-					},
-					github = {
-						pattern = "github.com",
-						icon = "",
-					},
-					neovim = {
-						pattern = "neovim.io",
-						icon = "",
-					},
-					stackoverflow = {
-						pattern = "stackoverflow.com",
-						icon = "󰓌",
-					},
-					discord = {
-						pattern = "www%.youtube%.com/",
-						icon = "󰙯",
-					},
-					slack = {
-						pattern = "www%.youtube%.com/",
-						icon = "",
-					},
-					reddit = {
-						pattern = "www%.youtube%.com/",
-						icon = "",
-					},
+					-- stylua: ignore start
+					youtube = { pattern = "youtube%.com", icon = " ", highlight = "RenderMarkdownLink" },
+					github = { pattern = "github%.com", icon = " ", highlight = "RenderMarkdownLink" },
+					neovim = { pattern = "neovim%.io", icon = " ", highlight = "RenderMarkdownLink" },
+					stackoverflow = { pattern = "stackoverflow%.com", icon = "󰓌 ", highlight = "RenderMarkdownLink" },
+					discord = { pattern = "discord%.com", icon = "󰙯 ", highlight = "RenderMarkdownLink" },
+					reddit = { pattern = "reddit%.com", icon = " ", highlight = "RenderMarkdownLink" },
+					-- stylua: ignore end
 				},
 			},
-			sign = { enabled = true },
+			sign = { enabled = false },
 			win_options = {
 				-- this makes it that toggling this plugin also toggles conceallevel
 				conceallevel = { default = 0, rendered = 2 },
