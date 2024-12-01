@@ -167,10 +167,19 @@ return {
 				"^",
 				function()
 					require("various-textobjs").lastChange()
-					local changeFound = vim.fn.mode():find("v")
+					local changeFound = vim.fn.mode() == "v"
 					if changeFound then vim.cmd.normal { ">", bang = true } end
 				end,
-				desc = "󰉶 Indent Last Paste",
+				desc = " Indent last paste",
+			},
+			{ -- indent last paste
+				"\\", -- shift-^ on my keyboard
+				function()
+					require("various-textobjs").lastChange()
+					local changeFound = vim.fn.mode() == "v"
+					if changeFound then vim.cmd.normal { "<", bang = true } end
+				end,
+				desc = " Dedent last paste",
 			},
 			{ -- delete surrounding indentation
 				"dsi",
@@ -225,7 +234,7 @@ return {
 						vim.ui.open(url)
 					end
 				end,
-				desc = " Smart URL Opener",
+				desc = " Open next URL",
 			},
 			{
 				"<D-U>",
@@ -239,7 +248,7 @@ return {
 						vim.notify("No URL found in file.", vim.log.levels.WARN)
 					end
 				end,
-				desc = " Open First URL in File",
+				desc = " Open first URL in file",
 			},
 		},
 	},
