@@ -14,7 +14,7 @@ local cursorPreYank
 keymap({ "n", "x" }, "y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
-end, { desc = "Sticky yank", expr = true })
+end, { desc = "󰅍 Sticky yank", expr = true })
 keymap("n", "Y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
@@ -23,7 +23,7 @@ end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Sticky yank",
 	callback = function()
-		if vim.v.event.regname == "z" then return end -- used as temp register for keymaps
+		if vim.v.event.regname == "z" then return end -- used as temp register for some keymaps
 		if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
 	end,
 })
@@ -101,11 +101,12 @@ keymap("x", "<leader>yc", function()
 	local lines = vim.api.nvim_buf_get_lines(0, start - 1, _end, false)
 
 	lines = require("scissors.utils").dedentAndTrimBlanks(lines)
+	local contentLineCount = #lines
 	table.insert(lines, 1, "```" .. vim.bo.filetype)
 	table.insert(lines, "```")
 
 	vim.fn.setreg("+", table.concat(lines, "\n"))
-	local pluralS = #lines == 1 and "" or "s"
+	local pluralS = contentLineCount == 1 and "" or "s"
 	local msg = ("%d line%s"):format(#lines - 2, pluralS)
 	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
 end, { desc = "󰅍 Codeblock (markdown)" })
