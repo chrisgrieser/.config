@@ -49,7 +49,13 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 
 		b.saveQueued = true
 		vim.defer_fn(function()
+			-- GUARD ensure cwd has been set
+			local cwd = vim.uv.cwd()
+			if not cwd then return end
+			if vim.api.nvim_buf_get_name(bufnr):find(cwd, nil, true) then return end
+
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
 			-- `noautocmd` prevents weird cursor movement
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
 			b.saveQueued = false
@@ -401,7 +407,7 @@ local faviconConfig = {
 }
 
 local function addFavicons(bufnr)
-	-- GUARD 
+	-- GUARD
 	if not bufnr then bufnr = 0 end
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local hasParser, urlQuery =
