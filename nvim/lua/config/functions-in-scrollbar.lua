@@ -5,16 +5,8 @@ local config = {
 	hlgroup = "Comment",
 	icon = "·",
 	tsquery = {
-		lua = {
-			"function_declaration",
-			"function_",
-		}
-			[=[
-			[ (function_declaration) (function_definition) ] @user.funcs
-		]=],
-		javascript = [=[
-			[ (function_declaration) (arrow_function) ] @user.funcs
-		]=],
+		lua = { "function_declaration", "function_definition" },
+		javascript = { "function_declaration", "arrow_function" },
 	},
 	priority = 10, -- diagnostics use 20
 	leftOfScrollbar = false,
@@ -36,7 +28,11 @@ local handler = {
 		local currentFt = vim.bo[bufnr].filetype
 		local tsquery = config.tsquery[currentFt]
 		if not tsquery then return {} end
-		local hasFunction, query = pcall(vim.treesitter.query.parse, currentFt, tsquery)
+		local queryStr = vim.iter(tsquery)
+			:map(function(nodeType) return "(" .. nodeType .. ")" end)
+			:join("")
+		queryStr = ("[%s] @user.funcs"):format(queryStr)
+		local hasFunction, query = pcall(vim.treesitter.query.parse, currentFt, queryStr)
 		if not hasFunction then return {} end
 
 		local rootTree = vim.treesitter.get_parser(bufnr):parse()[1]:root()

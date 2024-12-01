@@ -487,21 +487,3 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>a", function()
-	local config = { tsquery = [[(function_declaration) @user.funcs]] }
-	local bufnr = 0
-	local currentFt = vim.bo[bufnr].filetype
-	local hasFunction, query = pcall(vim.treesitter.query.parse, currentFt, config.tsquery)
-	if not hasFunction then return {} end
-	local rootTree = vim.treesitter.get_parser(bufnr):parse()[1]:root()
-	local allNodesIter = query:iter_captures(rootTree, bufnr)
-	local satelliteMarks = vim.iter(allNodesIter)
-		:map(function(_, node, _)
-			local row, _, _ = node:start()
-			return row
-		end)
-		:totable()
-	Chainsaw(satelliteMarks) -- 🪚
-end, { desc = "Count Funcs" })
-
