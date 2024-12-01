@@ -91,7 +91,7 @@ keymap(
 	{ "n", "x" },
 	"+",
 	function() return require("personal-plugins.misc").toggleOrIncrement() end,
-	{ desc = "󰐖 Increment/Toggle", expr = true }
+	{ desc = "󰐖 Increment/toggle", expr = true }
 )
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
@@ -175,7 +175,7 @@ keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
 keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
-keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate Line as Comment" })
+keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })
 keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment below" })
@@ -243,8 +243,8 @@ keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 -- TERMINAL MODE
 -- (also relevant for REPLs such as iron.nvim)
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc (terminal mode)" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste (terminal mode)" })
+keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
+keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
 -- COMMAND MODE
 keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })

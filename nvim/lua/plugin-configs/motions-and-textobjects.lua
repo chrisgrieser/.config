@@ -185,7 +185,7 @@ return {
 				"dsi",
 				function()
 					require("various-textobjs").indentation("outer", "outer")
-					local indentationFound = vim.fn.mode():find("V")
+					local indentationFound = vim.fn.mode() == "V"
 					if not indentationFound then return end
 
 					vim.cmd.normal { "<", bang = true } -- dedent indentation
@@ -202,7 +202,7 @@ return {
 					-- identify start- and end-border
 					local startPos = vim.api.nvim_win_get_cursor(0)
 					require("various-textobjs").indentation("outer", "outer")
-					local indentationFound = vim.fn.mode():find("V")
+					local indentationFound = vim.fn.mode() == "V"
 					if not indentationFound then return end
 					vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
 					vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
@@ -215,8 +215,8 @@ return {
 					vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
 
 					-- highlight yanked text
-					local duration = 1000 -- CONFIG
-					local ns = vim.api.nvim_create_namespace("ysi")
+					local duration = 1000
+					local ns = vim.api.nvim_create_namespace("ysii")
 					vim.api.nvim_buf_add_highlight(0, ns, "IncSearch", startLn, 0, -1)
 					vim.api.nvim_buf_add_highlight(0, ns, "IncSearch", endLn, 0, -1)
 					vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
@@ -227,7 +227,7 @@ return {
 				"gx",
 				function()
 					require("various-textobjs").url()
-					local foundURL = vim.fn.mode():find("v")
+					local foundURL = vim.fn.mode() == "v"
 					if foundURL then
 						vim.cmd.normal { '"zy', bang = true }
 						local url = vim.fn.getreg("z")
@@ -240,13 +240,15 @@ return {
 				"<D-U>",
 				function()
 					local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
-					local urlLine = vim.iter(vim.api.nvim_buf_get_lines(0, 0, -1, false))
-						:find(function(line) return line:match(urlPattern) end)
-					if urlLine then
-						vim.ui.open(urlLine:match(urlPattern))
-					else
-						vim.notify("No URL found in file.", vim.log.levels.WARN)
+					local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+					for _, line in ipairs(lines) do
+						local url = line:match(urlPattern)
+						if url then
+							vim.ui.open(url)
+							return
+						end
 					end
+					vim.notify("No URL found in file.", vim.log.levels.WARN)
 				end,
 				desc = " Open first URL in file",
 			},
