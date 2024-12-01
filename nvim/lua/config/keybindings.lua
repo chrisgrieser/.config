@@ -256,19 +256,25 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 -- CMDLINE
 -- EVAL (better than `:lua = `, since using `vim.notify`)
-keymap("n", "<leader>ee", function()
-	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
-		once = true,
-		pattern = "DressingInput",
-		command = "set ft=lua",
-	})
-	vim.ui.input({ prompt = "󰜎 Eval:" }, function(input)
+keymap({ "n", "x" }, "<leader>ee", function()
+	local function eval(input)
 		if not input then return end
 		local msg = vim.inspect(vim.fn.luaeval(input))
 		local opts = { title = "Eval", icon = "󰜎", ft = "lua" }
 		vim.notify(msg, vim.log.levels.DEBUG, opts)
-	end)
+	end
+	if vim.fn.mode() == "n" then
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
+			once = true,
+			pattern = "DressingInput",
+			command = "set ft=lua",
+		})
+		vim.ui.input({ prompt = "󰜎 Eval:" }, eval)
+	else
+		vim.cmd.normal { '"zy', bang = true }
+		eval(vim.fn.getreg("z"))
+	end
 end, { desc = "󰜎 Eval" })
 
 -- Copy last command
@@ -368,15 +374,12 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	if not winClosed then require("personal-plugins.alt-alt").closeBuffer() end
 end, { desc = "󰽙 Close window/buffer" })
 
-keymap({ "n", "x", "i" }, "<D-N>", function()
-	local extensions = { "sh", "mjs", "md", "py" }
-	vim.ui.select(extensions, { prompt = " Scratch file", kind = "plain" }, function(ext)
-		if not ext then return end
-		local filepath = vim.fs.normalize("~/Desktop/scratchpad." .. ext)
-		vim.cmd.edit(filepath)
-		vim.cmd.write(filepath)
-	end)
-end, { desc = " Create scratchpad file" })
+keymap({ "n", "x" }, "<leader>es", function()
+	local currentExt = vim.fn.expand("%:e")
+	local path = vim.fn.stdpath("config") .. "/debug/scratch." .. currentExt
+	vim.cmd.edit(path)
+	vim.cmd.write(path)
+end, { desc = " Scratch file" })
 
 --------------------------------------------------------------------------------
 
