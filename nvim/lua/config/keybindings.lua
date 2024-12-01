@@ -65,7 +65,7 @@ keymap(
 	"n",
 	"<leader>ur",
 	function() vim.cmd.later(vim.o.undolevels) end,
-	{ desc = "󰛒 Redo All" }
+	{ desc = "󰛒 Redo all" }
 )
 keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
 
