@@ -55,7 +55,9 @@ function run(argv) {
 	const remList = $.getenv("reminder_list");
 
 	if (keywordUsed) {
-		remTitle = argv[0] || "";
+		remTitle = (argv[0] || "")
+			.replaceAll("'", "\\'") // escape single quotes, since only character `$''` does not escape
+			.trim();
 	} else {
 		// get selected text
 		app.setTheClipboardTo(""); // empty clipboard in case of no selection
@@ -77,7 +79,7 @@ function run(argv) {
 	const args = ["reminders", "add", `"${remList}"`, "--due-date=today"];
 	if (remBody) args.push(`--notes="${remBody}"`); // empty string in `--notes` causes error
 	args.push(remBody);
-	args.push("--", `"${remTitle}"`);
+	args.push("--", `$'${remTitle}'`); // $'' to escape special chars
 	app.doShellScript(args.join(" "));
 
 	// Pass for Alfred notification
