@@ -17,7 +17,7 @@ bindkey -M vicmd -s '^U' 'i^U' # make it work in normal mode as well
 
 # ctrl+u -> copy location to clipboard
 function _copy_location {
-	echo "$PWD" | pbcopy
+	echo -n "$PWD" | pbcopy
 	zle -M "Copied: $PWD"
 }
 zle -N _copy_location

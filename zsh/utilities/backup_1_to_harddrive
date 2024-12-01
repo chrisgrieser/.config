@@ -43,8 +43,10 @@ echo -n "Backup: $(date '+%Y-%m-%d %H:%M'), $volume_name -- " >> "$logpath_on_ma
 
 errors=""
 function backup() {
-	local bkp_from="$1/" # WARN paths need to end with a slash to sync folder contents
+	local bkp_from="$1"
 	local bkp_to="$2"
+	bkp_from=$(echo "$bkp_from" | sed -E 's|/?$|/|')
+
 	if [[ ! -d "$bkp_from" ]]; then
 		errors="$errors\n$bkp_from does not exist."
 		return 1
