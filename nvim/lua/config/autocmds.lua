@@ -49,12 +49,13 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 
 		b.saveQueued = true
 		vim.defer_fn(function()
-			-- GUARD ensure cwd has been set
+			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
+			-- GUARD ensure cwd has been set to prevent rare overwriting of files
+			-- when quickly switching between buffers
 			local cwd = vim.uv.cwd()
 			if not cwd then return end
 			if vim.api.nvim_buf_get_name(bufnr):find(cwd, nil, true) then return end
-
-			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 
 			-- `noautocmd` prevents weird cursor movement
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
@@ -326,7 +327,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 				vim.o.scrolloff = originalScrolloff
 				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
 			end
-		end, 100)
+		end, 150)
 	end,
 })
 
