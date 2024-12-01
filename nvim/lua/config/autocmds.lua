@@ -354,7 +354,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "TextChanged", "InsertLeave" }, {
 				local funcId
 				repeat
 					node = node:parent()
-					if not node then funcId = "global_scope" end
+					if not node then funcId = "file-scoped" end
 					if node and vim.tbl_contains(funcNodes, node:type()) then funcId = node:id() end
 				until funcId
 				funcs[funcId] = (funcs[funcId] or 0) + 1

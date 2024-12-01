@@ -26,6 +26,10 @@ return {
 				end,
 			})
 		end,
+		config = function(_, opts)
+			require("satellite").setup(opts)
+			require("config.functions-in-scrollbar")
+		end,
 		opts = {
 			winblend = 10, -- little transparency, since hard to see in many themes otherwise
 			handlers = {
