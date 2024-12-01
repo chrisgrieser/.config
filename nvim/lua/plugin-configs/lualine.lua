@@ -1,36 +1,6 @@
--- lightweight replacement for fidget.nvim
-
-local progressText = ""
-local function lspProgress() return progressText end
-
-vim.api.nvim_create_autocmd("LspProgress", {
-	desc = "User: LSP progress for statusline",
-	callback = function(ctx)
-		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
-
-		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-		local progress = ctx.data.params.value
-		if progress and progress.kind == "end" then
-			progressText = ""
-			return
-		end
-		if not (progress and progress.title and progress.percentage) then return end
-
-		local idx = math.ceil(progress.percentage / 100 * #progressIcons)
-		if progress.percentage == 0 then idx = 1 end
-
-		local firstWord = vim.split(progress.title, " ")[1]:lower()
-		progressText = table.concat({ progressIcons[idx], clientName, firstWord }, " ")
-	end,
-})
-
---------------------------------------------------------------------------------
-
 local function irregularWhitespace()
 	if vim.bo.buftype ~= "" then return "" end
-
-	-- CONFIG
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 }
+	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 } -- CONFIG
 
 	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
 	local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
@@ -120,7 +90,6 @@ local lualineConfig = {
 			{ require("config.quickfix").quickfixCounterStatusbar },
 		},
 		lualine_x = {
-			{ lspProgress },
 			{ newlineCharIfNotUnix },
 			{ irregularWhitespace },
 			{

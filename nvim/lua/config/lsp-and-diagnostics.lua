@@ -50,6 +50,31 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 
 --------------------------------------------------------------------------------
 
+-- lightweight replacement for fidget.nvim
+vim.api.nvim_create_autocmd("LspProgress", {
+	desc = "User: LSP progress",
+	callback = function(ctx)
+		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+
+		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+		local progress = ctx.data.params.value
+		if progress and progress.kind == "end" and package.loaded["snacks"] then
+			require("snacks").notifier.hide("lspProgress")
+			return
+		end
+		if not (progress and progress.title and progress.percentage) then return end
+		local info = progress.title:gsub("%.%.%.", "…")
+
+		local idx = math.ceil(progress.percentage / 100 * #progressIcons)
+		if progress.percentage == 0 then idx = 1 end
+
+		local msg = ("[%s]: %s"):format(clientName, info)
+		vim.notify(msg, vim.log.levels.TRACE, { id = "lspProgress", icon = progressIcons[idx], style = "minimal" })
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- pause inlay hints in insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
 	desc = "User: Disable LSP inlay hints",
