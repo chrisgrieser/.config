@@ -491,11 +491,3 @@ keymap(
 )
 
 --------------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>a", function()
-	local foobar = {
-		hello = "world",
-		baz = { "foobar" },
-	}
-	require("snacks").debug.backtrace()
-end)
