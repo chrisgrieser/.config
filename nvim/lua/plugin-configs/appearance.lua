@@ -31,7 +31,7 @@ return {
 			require("config.functions-in-scrollbar")
 		end,
 		opts = {
-			winblend = 10, -- little transparency, since hard to see in many themes otherwise
+			winblend = 10, -- only little transparency, since hard to see in many themes otherwise
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false },
