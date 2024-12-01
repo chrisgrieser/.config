@@ -17,21 +17,41 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
-	local newName = ctx.params.newName
-	local msg = ("Renamed [%d] instance%s to [%s]"):format(changeCount, pluralS, newName)
+	local header = "New name: " .. ctx.params.newName
+	local msg = ("Renamed [%d] instance%s to [%s]"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
 		msg = ("**Renamed [%d] instance%s in %d files to [%s]**\n%s"):format(
 			changeCount,
 			pluralS,
 			#changedFiles,
-			newName,
 			table.concat(changedFiles, "\n")
 		)
 	end
-	vim.notify(msg, nil, { title = "LSP", icon = "󰑕" })
+	vim.notify(msg, nil, { title = "RemLSP", icon = "󰑕" })
 
 	-- SAVE ALL
 	if #changedFiles > 1 then vim.cmd.wall() end
+end
+--------------------------------------------------------------------------------
+
+-- `vim.lsp.buf.hover()` opens url if present, otherwise opens regular hover win
+local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
+vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
+	local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
+
+	local text = result.contents.value
+	for url in text:gmatch("%l%l%l-://[A-Za-z0-9_%-/.#%%=?&'@+*:]+") do
+		if not vim.tbl_contains(ignoredUrls, url) then
+			vim.ui.open(url)
+			return
+		end
+	end
+
+	originalHoverHandler(err, result, ctx, {
+		border = vim.g.borderStyle,
+		title = " 󰋽 LSP Hover ",
+		max_width = 75,
+	})
 end
 
 --------------------------------------------------------------------------------
@@ -39,38 +59,6 @@ end
 -- `vim.lsp.buf.signature_help()`
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
-})
-
--- `vim.lsp.buf.hover()`
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = vim.g.borderStyle,
-	title = " LSP Hover ",
-	max_width = 75,
-})
-
---------------------------------------------------------------------------------
-
--- lightweight replacement for fidget.nvim
-vim.api.nvim_create_autocmd("LspProgress", {
-	desc = "User: LSP progress",
-	callback = function(ctx)
-		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
-
-		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-		local progress = ctx.data.params.value
-		if progress and progress.kind == "end" and package.loaded["snacks"] then
-			require("snacks").notifier.hide("lspProgress")
-			return
-		end
-		if not (progress and progress.title and progress.percentage) then return end
-		local info = progress.title:gsub("%.%.%.", "…")
-
-		local idx = math.ceil(progress.percentage / 100 * #progressIcons)
-		if progress.percentage == 0 then idx = 1 end
-
-		local msg = ("[%s]: %s"):format(clientName, info)
-		vim.notify(msg, vim.log.levels.TRACE, { id = "lspProgress", icon = progressIcons[idx], style = "minimal" })
-	end,
 })
 
 --------------------------------------------------------------------------------
