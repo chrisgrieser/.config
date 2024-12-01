@@ -206,11 +206,11 @@ return {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
 		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
-		{ "<D-9>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
+		{ "<D-0>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
 		-- stylua: ignore
 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
 		-- stylua: ignore
-		{ "<D-0>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
 	},
 	opts = {
 		words = {
