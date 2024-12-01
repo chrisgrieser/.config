@@ -62,7 +62,40 @@ return {
 				border = "thick",
 				position = "left",
 			},
-			sign = { enabled = false },
+			link = {
+				custom = {
+					web = { pattern = "^http[s]?://", icon = "󰖟 ", highlight = "RenderMarkdownLink" },
+					youtube = {
+						pattern = "www%.youtube%.com/",
+						icon = " ",
+					},
+					github = {
+						pattern = "github.com",
+						icon = "",
+					},
+					neovim = {
+						pattern = "neovim.io",
+						icon = "",
+					},
+					stackoverflow = {
+						pattern = "stackoverflow.com",
+						icon = "󰓌",
+					},
+					discord = {
+						pattern = "www%.youtube%.com/",
+						icon = "󰙯",
+					},
+					slack = {
+						pattern = "www%.youtube%.com/",
+						icon = "",
+					},
+					reddit = {
+						pattern = "www%.youtube%.com/",
+						icon = "",
+					},
+				},
+			},
+			sign = { enabled = true },
 			win_options = {
 				-- this makes it that toggling this plugin also toggles conceallevel
 				conceallevel = { default = 0, rendered = 2 },
