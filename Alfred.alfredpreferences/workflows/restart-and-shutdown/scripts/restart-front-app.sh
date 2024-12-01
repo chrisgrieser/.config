@@ -21,7 +21,9 @@ if [[ "$front_app" == "neovide" ]]; then
 	# restart
 	sleep 0.1
 	open -a "neovide"
-	sleep 0.3
+	sleep 0.2
+	open -a "neovide" # redundancy to fix sometimes not switching
+	sleep 0.2
 	open -a "neovide" # redundancy to fix sometimes not switching
 	return 0
 fi

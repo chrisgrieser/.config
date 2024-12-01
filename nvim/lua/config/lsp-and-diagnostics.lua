@@ -17,19 +17,13 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""
-	local header = "New name: " .. ctx.params.newName
-	local msg = ("Renamed [%d] instance%s to [%s]"):format(changeCount, pluralS)
+	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = ("**Renamed [%d] instance%s in %d files to [%s]**\n%s"):format(
-			changeCount,
-			pluralS,
-			#changedFiles,
-			table.concat(changedFiles, "\n")
-		)
+		msg = ("**%s in %d files**\n%s"):format(msg, #changedFiles, table.concat(changedFiles, "\n"))
 	end
-	vim.notify(msg, nil, { title = "RemLSP", icon = "󰑕" })
+	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
-	-- SAVE ALL
+	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 --------------------------------------------------------------------------------
@@ -37,8 +31,8 @@ end
 -- `vim.lsp.buf.hover()` opens url if present, otherwise opens regular hover win
 local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
 vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
+	-- open url if present
 	local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
-
 	local text = result.contents.value
 	for url in text:gmatch("%l%l%l-://[A-Za-z0-9_%-/.#%%=?&'@+*:]+") do
 		if not vim.tbl_contains(ignoredUrls, url) then
@@ -47,6 +41,7 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 		end
 	end
 
+	-- use original handler with some extra settings
 	originalHoverHandler(err, result, ctx, {
 		border = vim.g.borderStyle,
 		title = " 󰋽 LSP Hover ",
