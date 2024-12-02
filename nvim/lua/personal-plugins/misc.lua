@@ -1,4 +1,4 @@
--- INFO 
+-- INFO
 -- A bunch of commands that are too small to be published as plugins, but too
 -- big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
@@ -148,7 +148,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.gotoMostChangedFile()
-	local notifyOpts = { title = "Most changed file" , icon = "󰊢" }
+	local notifyOpts = { title = "Most changed file", icon = "󰊢" }
 
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
@@ -190,28 +190,34 @@ end
 
 ---Cycles files in folder in alphabetical order.
 ---If snacks.nvim is installed, adds cycling notification.
----@param direction "Next"|"Prev"
+---@param direction "next"|"prev"
 function M.nextFileInFolder(direction)
 	local curPath = vim.api.nvim_buf_get_name(0)
 	local curFile = vim.fs.basename(curPath)
 	local curFolder = vim.fs.dirname(curPath)
 	local ignoreExt = { "png", "svg", "webp", "jpg", "jpeg", "gif", "pdf", "zip" }
 
+	local notifyOpts = {
+		title = direction:sub(1, 1):upper() .. direction:sub(2) .. " file",
+		icon = direction == "next" and "󰖽" or "󰖿",
+		id = "next-in-folder", -- replace notifications when quickly cycling
+		ft = "markdown", -- so h1 is highlighted
+	}
+
 	-- get list of files
-	local itemsInFolder = vim.fs.dir(curFolder)
+	local itemsInFolder = vim.fs.dir(curFolder) -- INFO `fs.dir` already returns them sorted
 	local filesInFolder = vim.iter(itemsInFolder):fold({}, function(acc, name, type)
 		local ext = name:match("%.(%w+)$")
 		if type ~= "file" or name:find("^%.") or vim.tbl_contains(ignoreExt, ext) then return acc end
 		table.insert(acc, name) -- select only name
 		return acc
 	end)
-	-- INFO no need for sorting, since `fs.dir` already returns them sorted
 
 	-- GUARD edge cases like if currently at a hidden file and there are only
 	-- hidden files in the directory
 	if #filesInFolder == 0 then
 		local msg = "No valid files found in folder."
-		vim.notify(msg, vim.log.levels.ERROR, { title = direction .. " file" })
+		vim.notify(msg, vim.log.levels.ERROR, notifyOpts)
 		return
 	end
 
@@ -242,17 +248,12 @@ function M.nextFileInFolder(direction)
 		end)
 		:slice(nextIdx - 5, nextIdx + 5) -- display ~5 files before/after
 		:join("\n")
-	vim.notify(msg, nil, {
-		title = direction .. (" (%d/%d)"):format(nextIdx, #filesInFolder),
-		icon = direction == "Next" and "󰖽" or "󰖿",
-		id = "next-in-folder", -- replace notifications when quickly cycling
-		ft = "markdown", -- so h1 is highlighted
-	})
+	notifyOpts.title = notifyOpts.title .. (" (%d/%d)"):format(nextIdx, #filesInFolder)
+	vim.notify(msg, nil, notifyOpts)
 end
 
 --------------------------------------------------------------------------------
 
---- if cut off, requires higher notification height setting
 function M.inspectBuffer()
 	local pseudoTilde = "∼" -- HACK use `U+223C` instead of real `~` to prevent md-strikethrough
 
@@ -294,7 +295,7 @@ function M.inspectNodeUnderCursor()
 	vim.notify(node:type(), vim.log.levels.DEBUG, { icon = "", title = "Node under cursor" })
 
 	-- highlight the full node
-	local duration, hlgroup = 2000, "Search" -- CONFIG
+	local duration, hlgroup = 1000, "Search" -- CONFIG
 	local startRow, startCol = node:start()
 	local endRow, endCol = node:end_()
 	local ns = vim.api.nvim_create_namespace("node-highlight")
@@ -316,6 +317,51 @@ function M.inspectNodeUnderCursor()
 		local countNs = vim.api.nvim_create_namespace("searchCounter")
 		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
 	end, 1)
+end
+
+function M.inspectLspCapabilities()
+	local clients = vim.lsp.get_clients { bufnr = 0 }
+	if #clients == 0 then
+		vim.notify("No LSPs attached.", vim.log.levels.WARN, { icon = "󱈄" })
+		return
+	end
+	vim.ui.select(clients, {
+		prompt = "Select LSP:",
+		kind = "plain",
+		format_item = function(client) return client.name end,
+	}, function(client)
+		if not client then return end
+		local info = {
+			capabilities = client.capabilities,
+			server_capabilities = client.server_capabilities,
+			config = client.config,
+		}
+		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
+		vim.notify(vim.inspect(info), vim.log.levels.DEBUG, opts)
+	end)
+end
+
+-- EVAL (better than `:lua = `, since using `vim.notify`)
+-- normal mode: input prompt, visual mode: selection
+function M.nvimLuaEval()
+	local function eval(input)
+		if not input then return end
+		local msg = vim.inspect(vim.fn.luaeval(input))
+		vim.notify(msg, vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎", ft = "lua" })
+	end
+
+	if vim.fn.mode() == "n" then
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
+			once = true,
+			pattern = "DressingInput",
+			command = "set ft=lua",
+		})
+		vim.ui.input({ prompt = "󰜎 Eval:" }, eval)
+	else
+		vim.cmd.normal { '"zy', bang = true }
+		eval(vim.fn.getreg("z"))
+	end
 end
 
 --------------------------------------------------------------------------------
