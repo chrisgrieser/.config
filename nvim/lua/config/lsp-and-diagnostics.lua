@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		if not progress then return end
 
 		local icon = ""
-		local text = vim.trim(progress.title .. " " .. (progress.message or ""))
+		local text = vim.trim((progress.title or "") .. " " .. (progress.message or ""))
 		if progress.kind ~= "end" then
 			if not progress.percentage then return end
 			local idx = math.ceil(progress.percentage / 100 * #progressIcons)

@@ -44,6 +44,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 		local saveInstantly = ctx.event == "FocusLost" or ctx.event == "BufLeave"
 		local bufnr = ctx.buf
 		local bo, b = vim.bo[bufnr], vim.b[bufnr]
+		local bufname = ctx.file
 		if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
 		if b.saveQueued and not saveInstantly then return end
 
@@ -51,14 +52,12 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 
-			-- GUARD ensure cwd has been set to prevent rare overwriting of files
-			-- when quickly switching between buffers
-			local cwd = vim.uv.cwd()
-			if not cwd then return end
-			if vim.api.nvim_buf_get_name(bufnr):find(cwd, nil, true) then return end
-
-			-- `noautocmd` prevents weird cursor movement
-			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent! noautocmd lockmarks update!") end)
+			vim.api.nvim_buf_call(bufnr, function()
+				-- `noautocmd` prevents weird cursor movement
+				-- saving with explicit name prevents issues when changing `cwd`
+				local vimCmd = ("silent noautocmd lockmarks update! %q"):format(bufname)
+				vim.cmd(vimCmd)
+			end)
 			b.saveQueued = false
 		end, saveInstantly and 0 or 2000)
 	end,

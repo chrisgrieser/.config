@@ -37,6 +37,7 @@ keymap("n", "dd", function()
 	if vim.trim(vim.api.nvim_get_current_line()) == "" then return '"_dd' end
 	return "dd"
 end, { expr = true, desc = "dd" })
+keymap("n", "<leader>d", '"_d', { desc = "󰅗 Delete w/o yanking" })
 
 -- PASTING
 keymap("n", "P", function()
