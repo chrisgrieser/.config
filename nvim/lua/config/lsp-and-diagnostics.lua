@@ -1,4 +1,6 @@
--- Add notification & writeall to renaming
+-- HANDLERS
+
+-- `vim.lsp.buf.rename`: add notification & writeall to renaming
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -19,16 +21,15 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = ("**%s in %d files**\n%s"):format(msg, #changedFiles, table.concat(changedFiles, "\n"))
+		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, table.concat(changedFiles, "\n"))
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
 	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
---------------------------------------------------------------------------------
 
--- `vim.lsp.buf.hover()` opens url if present, otherwise opens regular hover win
+-- `vim.lsp.buf.hover` opens url if present, otherwise opens regular hover win
 local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
 vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 	-- open url if present
@@ -52,9 +53,7 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 	})
 end
 
---------------------------------------------------------------------------------
-
--- `vim.lsp.buf.signature_help()`
+-- `vim.lsp.buf.signature_help`
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
 })
@@ -118,7 +117,7 @@ vim.diagnostic.config {
 		},
 	},
 	virtual_text = {
-		severity = { min = vim.diagnostic.severity.WARN }, -- leave out hints & info
+		severity = { min = vim.diagnostic.severity.INFO }, -- leave out `HINT`
 		suffix = addCodeAndSourceAsSuffix,
 	},
 	float = {

@@ -298,7 +298,7 @@ M.serverConfigs.harper_ls = {
 	settings = {
 		["harper-ls"] = {
 			userDictPath = vim.o.spellfile,
-			diagnosticSeverity = "information",
+			diagnosticSeverity = "hint",
 			linters = {
 				spell_check = true,
 				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
@@ -346,7 +346,7 @@ M.serverConfigs.ltex = {
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 M.serverConfigs.typos_lsp = {
-	init_options = { diagnosticSeverity = "Information" },
+	init_options = { diagnosticSeverity = "Hint" },
 }
 
 --------------------------------------------------------------------------------

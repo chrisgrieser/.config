@@ -8,6 +8,8 @@ local M = {}
 function M.openAlfredPref()
 	if jit.os ~= "OSX" then
 		vim.notify("Not on macOS.", vim.log.levels.WARN)
+		fsfsf
+		fsfsf
 		return
 	end
 	local workflowUid =
