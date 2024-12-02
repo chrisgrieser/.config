@@ -21,7 +21,11 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, table.concat(changedFiles, "\n"))
+		msg = ("**%s in [%d] files**\n%s"):format(
+			msg,
+			#changedFiles,
+			table.concat(changedFiles, "\n")
+		)
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
@@ -72,6 +76,35 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 --------------------------------------------------------------------------------
 
+-- lightweight replacement for `fidget.nvim`
+-- (uses vim.notify opts tailored to `snacks.nvim`, but should in general work
+-- for other notifiers as well)
+vim.api.nvim_create_autocmd("LspProgress", {
+	desc = "User: LSP progress",
+	callback = function(ctx)
+		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+
+		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+		local progress = ctx.data.params.value
+		if not progress then return end
+
+		local icon = ""
+		local text = vim.trim(progress.title .. " " .. (progress.message or ""))
+		if progress.kind ~= "end" then
+			if not progress.percentage then return end
+			local idx = math.ceil(progress.percentage / 100 * #progressIcons)
+			if progress.percentage == 0 then idx = 1 end
+			icon = progressIcons[idx]
+		end
+
+		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 3000 }
+		local msg = ("[%s] %s "):format(clientName, text)
+		vim.notify(msg, vim.log.levels.TRACE, opts)
+	end,
+})
+
+--------------------------------------------------------------------------------
+-- inspect LSP capabilities
 vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 	local client = vim.lsp.get_clients({ name = ctx.args })[1]
 	local newBuf = vim.api.nvim_create_buf(true, true)
