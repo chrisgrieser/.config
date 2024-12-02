@@ -40,7 +40,7 @@ M.task_sync = {}
 
 ---@async
 ---@param repo Repo
-local function repoSync(repo)
+local function syncOneRepo(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
 	M.task_sync[repo.name] = hs.task
 		.new(syncScriptPath, function(exitCode, stdout, stderr)
@@ -50,6 +50,7 @@ local function repoSync(repo)
 				local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
 				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.name, output)
 				print(msg)
+				hs.alert(msg, 5)
 				notify(msg)
 			end
 		end)
@@ -76,7 +77,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 	end
 
 	for _, repo in pairs(config.reposToSync) do
-		repoSync(repo)
+		syncOneRepo(repo)
 	end
 
 	M.timer_AllSyncs = hs.timer
