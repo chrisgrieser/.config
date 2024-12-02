@@ -116,10 +116,6 @@ function gC {
 	fi
 }
 
-# make `gc` and `gC` use `git commit` completions
-compdef _git-commit gc
-compdef _git-commit gC
-
 #───────────────────────────────────────────────────────────────────────────────
 # SMART AMEND & FIXUP
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
@@ -228,7 +224,7 @@ function gl {
 		_gitlog "$@"
 	fi
 }
-compdef _git-log gl # make `gl` use `git log` completions
+compdef _git gl
 
 function reflog {
 	if [[ -z "$1" ]]; then
@@ -239,7 +235,6 @@ function reflog {
 		git reflog "$@"
 	fi
 }
-compdef _git-reflog reflog # make `reflog` use `git reflog` completions
 
 # interactive
 function gli {

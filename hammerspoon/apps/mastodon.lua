@@ -14,6 +14,7 @@ local function moveToSide()
 	if not masto then return end
 
 	local mastoWin = masto:mainWindow()
+	if not mastoWin then return end
 	if masto:isHidden() then masto:unhide() end
 	mastoWin:setFrame(wu.toTheSide)
 	mastoWin:raise()
