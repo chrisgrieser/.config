@@ -147,7 +147,7 @@ local function silenceMessages()
 		-- due to the custom formatter in `typescript.lua` using code-actions
 		if msg:find("^No code actions available") then return end
 
-		require("snacks").notifier.notify(msg, level, opts)
+		return require("snacks").notifier.notify(msg, level, opts)
 	end
 
 	-- "E486: pattern not found"
@@ -198,21 +198,29 @@ local function lspProgressIndicator()
 		callback = function(ctx)
 			local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
 
-			local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-			local progress = ctx.data.params.value
-			if progress and progress.kind == "end" then
-				require("snacks").notifier.hide("lspProgress")
-				return
-			end
-			if not (progress and progress.title and progress.percentage) then return end
-			local info = progress.title:gsub("%.%.%.", "…")
-
-			local idx = math.ceil(progress.percentage / 100 * #progressIcons)
-			if progress.percentage == 0 then idx = 1 end
-
-			local opts = { id = "lspProgress", icon = progressIcons[idx], style = "minimal" }
-			local msg = ("[%s] %s "):format(clientName, info)
-			vim.notify(msg, vim.log.levels.TRACE, opts)
+			vim.notify(vim.lsp.status(), "info", {
+				id = "lsp_progress",
+				title = "LSP Progress",
+				opts = function(notif)
+					notif.icon = ctx.data.params.value.kind == "end" and " "
+						or progressIcons[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #progressIcons + 1]
+				end,
+			})
+			-- local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+			-- local progress = ctx.data.params.value
+			-- if progress and progress.kind == "end" then
+			-- 	require("snacks").notifier.hide("lspProgress")
+			-- 	return
+			-- end
+			-- if not (progress and progress.title and progress.percentage) then return end
+			-- local info = progress.title:gsub("%.%.%.", "…")
+			--
+			-- local idx = math.ceil(progress.percentage / 100 * #progressIcons)
+			-- if progress.percentage == 0 then idx = 1 end
+			--
+			-- local opts = { id = "lspProgress", icon = progressIcons[idx], style = "minimal" }
+			-- local msg = ("[%s] %s "):format(clientName, info)
+			-- vim.notify(msg, vim.log.levels.TRACE, opts)
 		end,
 	})
 end

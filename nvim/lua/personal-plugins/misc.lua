@@ -6,10 +6,11 @@ local M = {}
 
 --- open the current workflow for the Alfred app
 function M.openAlfredPref()
+	local os = jit.os
+	Chainsaw(os) -- 🪚
+	if true then return end
 	if jit.os ~= "OSX" then
 		vim.notify("Not on macOS.", vim.log.levels.WARN)
-		fsfsf
-		fsfsf
 		return
 	end
 	local workflowUid =
