@@ -234,7 +234,7 @@ return {
 				require("chainsaw.visuals.statusline").countInBuffer,
 				color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color
 				padding = { left = 0, right = 1 },
-			}, "after")
+			})
 		end,
 		keys = {
 			-- stylua: ignore start
