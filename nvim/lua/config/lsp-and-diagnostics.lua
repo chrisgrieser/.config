@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			icon = progressIcons[idx]
 		end
 
-		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 3000 }
+		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 2500 }
 		local msg = ("[%s] %s "):format(clientName, text)
 		vim.notify(msg, vim.log.levels.TRACE, opts)
 	end,
@@ -113,11 +113,7 @@ vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
 		server_capabilities = client.server_capabilities,
 		config = client.config,
 	}
-	vim.api.nvim_buf_set_lines(newBuf, 0, -1, false, vim.split(vim.inspect(info), "\n"))
-	vim.api.nvim_buf_set_name(newBuf, client.name .. " capabilities")
-	vim.bo[newBuf].filetype = "lua" -- syntax highlighting
-	vim.cmd.buffer(newBuf) -- open
-	vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = newBuf })
+	vim.notify(vim.inspect(info), vim.log.levels.DEBUG, { title = client.name " capabilities", })
 end, {
 	nargs = 1,
 	complete = function()
