@@ -1,3 +1,8 @@
+-- INFO
+-- These functions all use the log level `DEBUG`. To be able to see them with
+-- `nvim-notify`, you need to set the minimum level in the nvim-notify config:
+-- `require("notify").setup { level = "2" }`.
+--------------------------------------------------------------------------------
 local M = {}
 --------------------------------------------------------------------------------
 
@@ -84,12 +89,14 @@ function M.lspCapabilities()
 			config = client.config,
 		}
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
-		vim.notify(vim.inspect(info), vim.log.levels.DEBUG, opts)
+		local header = "-- for a full view, open in notification history\n"
+		local text = header .. vim.inspect(info)
+		vim.notify(text, vim.log.levels.DEBUG, opts)
 	end)
 end
 
 -- EVAL (better than `:lua = `, since using `vim.notify`)
--- normal mode: input prompt, visual mode: selection
+-- a) normal mode: input prompt, b) visual mode: selection
 function M.evalNvimLua()
 	local function eval(input)
 		if not input then return end
