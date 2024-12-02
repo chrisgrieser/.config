@@ -1,7 +1,7 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
 -- TODO on next release
--- 1. windows.autocomplete.selection and windows.autocomplete.cycle moved to `list`
+-- * windows.autocomplete.selection and windows.autocomplete.cycle moved to `list`
 
 --------------------------------------------------------------------------------
 
@@ -27,7 +27,9 @@ return {
 						score_offset = -1,
 					},
 					buffer = {
-						fallback_for = {}, -- disable being fallback for LSP
+						-- disable being fallback for LSP, but limit its display via
+						-- the other settings
+						fallback_for = {},
 						max_items = 4,
 						min_keyword_length = 4,
 						score_offset = -3,
@@ -47,7 +49,9 @@ return {
 			},
 			trigger = {
 				completion = {
-					keyword_regex = '[%w_-]', -- remove `\`, so it does not trigger completion
+					-- Remove `\`, so it does not trigger completion. Useful when
+					-- breaking up lines in bash/zsh.
+					keyword_regex = "[%w_-]",
 				},
 			},
 			windows = {
@@ -59,13 +63,11 @@ return {
 					auto_show_delay_ms = 250,
 				},
 				autocomplete = {
-					-- auto_insert|preselect (using auto_insert, `cancel` keymap undos selection)
-					selection = "preselect",
+					selection = "preselect", -- auto_insert|preselect
 
 					border = vim.g.borderStyle,
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
-					draw = {
-						-- https://github.com/saghen/blink.cmp#menu-appearancedrawing
+					draw = { -- https://github.com/saghen/blink.cmp#menu-appearancedrawing
 						columns = {
 							{ "label", "label_description", "kind_icon", gap = 1 },
 						},
@@ -80,12 +82,7 @@ return {
 									if lspName == "emmet_language_server" then source = "emmet" end
 
 									-- use source-specific icons, and `kind_icon` only for items from LSPs
-									local sourceIcons = {
-										snippets = "󰩫",
-										buffer = "󰦨",
-										emmet = "",
-										path = "󰈔",
-									}
+									local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "", path = "󰈔" }
 									return sourceIcons[source] or ctx.kind_icon
 								end,
 							},

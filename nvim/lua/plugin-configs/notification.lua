@@ -12,6 +12,11 @@ end
 
 ---@param idx number|"last"
 local function openNotif(idx)
+	-- CONFIG
+	local maxWidth = 0.85
+	local maxHeight = 0.85
+
+	-- get notification
 	if idx == "last" then idx = 1 end
 	local history = getHistory()
 	local notif = history[idx]
@@ -22,13 +27,14 @@ local function openNotif(idx)
 	end
 	require("snacks").notifier.hide(notif.id)
 
+	-- win properties
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	local lines = vim.split(notif.msg, "\n")
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	local title = vim.trim((notif.icon or "") .. " " .. (notif.title or ""))
-	local height = math.min(#lines + 2, math.ceil(vim.o.lines * 0.75))
+	local height = math.min(#lines + 2, math.ceil(vim.o.lines * maxHeight))
 	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
-	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * 0.75))
+	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * maxWidth))
 	local overflow = #lines + 2 - height -- +2 for border
 	local footer = overflow > 0 and (" ↓ %d lines "):format(overflow) or nil
 
@@ -41,6 +47,7 @@ local function openNotif(idx)
 		"FloatFooter:SnacksNotifierFooter" .. levelCapitalized,
 	}
 
+	-- create win with snacks API
 	require("snacks").win {
 		position = "float",
 		ft = notif.ft or "markdown",
