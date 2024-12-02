@@ -201,7 +201,7 @@ rules:
               osascript -e '
                 tell application "Reminders" to activate
                 tell application "System Events" to tell process "Reminders"
-                  click menu item "Tomorrow" of menu of menu item "Go To" of menu "View" of menu bar 1
+                  click menu item "Scheduled" of menu of menu item "Go To" of menu "View" of menu bar 1
                 end tell'
           - *deactivate-leader
           - *remove-notice
