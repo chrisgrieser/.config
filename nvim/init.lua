@@ -18,8 +18,9 @@ vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------
 
----Try to require the module, and do not error out when one of them cannot be
----loaded, but do notify if there was an error.
+---Try to require the module, but do not throw error when one of them cannot be
+---loaded. This prevents the entire remaining config from not being loaded if
+---just one module has an error.
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
@@ -29,11 +30,11 @@ local function safeRequire(module)
 	end
 end
 
-safeRequire("config.options") -- before lazy, so opts active during plugin install
+safeRequire("config.options") -- before lazy, so opts are active during plugin install
 
--- INFO only load plugins when `NO_PLUGINS` is not set. This is for security reasons,
--- e.g. when editing a password with `pass`.
 if not vim.env.NO_PLUGINS then
+	-- INFO only load plugins when `NO_PLUGINS` is not set. 
+	-- This is for security reasons, e.g., when editing a password with `pass`.
 	safeRequire("config.lazy")
 	vim.g.setColorscheme("init")
 end

@@ -252,7 +252,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 keymap(
 	{ "n", "x" },
 	"<leader>ee",
-	function() require("personal-plugins.misc").nvimLuaEval() end,
+	function() require("personal-plugins.inspect").evalNvimLua() end,
 	{ desc = "󰜎 Eval" }
 )
 
@@ -276,6 +276,31 @@ keymap("n", "<leader>er", function()
 		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
 	end
 end, { desc = "󰜎 Run file" })
+
+--------------------------------------------------------------------------------
+-- INSPECT
+
+keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
+keymap(
+	"n",
+	"<leader>il",
+	function() require("personal-plugins.inspect").lspCapabilities() end,
+	{ desc = "󱈄 LSP capabilities" }
+)
+keymap(
+	"n",
+	"<leader>in",
+	function() require("personal-plugins.inspect").nodeUnderCursor() end,
+	{ desc = " Node under cursor" }
+)
+keymap(
+	"n",
+	"<leader>ib",
+	function() require("personal-plugins.inspect").bufferInfo() end,
+	{ desc = "󰽙 Buffer info" }
+)
 
 --------------------------------------------------------------------------------
 -- WINDOWS
@@ -335,13 +360,13 @@ keymap(
 keymap(
 	{ "n", "x" },
 	"<M-CR>",
-	function() require("personal-plugins.misc").nextFileInFolder("Next") end,
+	function() require("personal-plugins.misc").nextFileInFolder("next") end,
 	{ desc = "󰖽 Next file in folder" }
 )
 keymap(
 	{ "n", "x" },
 	"<S-M-CR>",
-	function() require("personal-plugins.misc").nextFileInFolder("Prev") end,
+	function() require("personal-plugins.misc").nextFileInFolder("prev") end,
 	{ desc = "󰖿 Prev file in folder" }
 )
 
@@ -388,30 +413,6 @@ keymap(
 )
 keymap("n", "9", "@" .. register, { desc = " Play recording" })
 
---------------------------------------------------------------------------------
--- INSPECT
-
-keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
-keymap(
-	"n",
-	"<leader>il",
-	function() require("personal-plugins.misc").inspectLspCapabilities() end,
-	{ desc = "󱈄 LSP capabilities" }
-)
-keymap(
-	"n",
-	"<leader>in",
-	function() require("personal-plugins.misc").inspectNodeUnderCursor() end,
-	{ desc = " Node under cursor" }
-)
-keymap(
-	"n",
-	"<leader>ib",
-	function() require("personal-plugins.misc").inspectBuffer() end,
-	{ desc = "󰽙 Buffer info" }
-)
 
 --------------------------------------------------------------------------------
 -- REFACTORING
