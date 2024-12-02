@@ -354,6 +354,10 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
+keymap("n", "<D-T>", function ()
+	vim.v.oldfiles
+end, { desc = "󰑏 Re-open last closed buffer" })
+
 keymap(
 	{ "n", "x" },
 	"<D-CR>",
