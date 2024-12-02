@@ -31,6 +31,7 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "unix" then return "" end
 	if vim.bo.fileformat == "mac" then return "󰌑 " end
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
+	error("Unknown fileformat: " .. vim.bo.fileformat)
 end
 
 --------------------------------------------------------------------------------
@@ -64,11 +65,11 @@ local lualineConfig = {
 			-- HACK so the tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = { left = 0, right = 0 } },
 		},
-		lualine_z = {
+		lualine_y = {
 			{ -- recording status
 				function() return "󰑊 Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
-				color = "DiagnosticError",
+				color = "lualine_y_diff_removed_normal",
 			},
 		},
 	},
@@ -128,11 +129,12 @@ local lualineConfig = {
 vim.g.lualine_add = function(whichBar, whichSection, component, where)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end
-	local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
 
+	local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
 	local componentObj = type(component) == "table" and component or { component }
 	local pos = where == "before" and 1 or #sectionConfig + 1
 	table.insert(sectionConfig, pos, componentObj)
+
 	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
 

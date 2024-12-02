@@ -354,8 +354,17 @@ keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
-keymap("n", "<D-T>", function ()
-	vim.v.oldfiles
+keymap("n", "<D-T>", function()
+	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	local openBufpaths = vim.tbl_map(function(buf) return buf.name end, openBuffers)
+	for i = 1, #vim.v.oldfiles do
+		local file = vim.v.oldfiles[i]
+		if not vim.tbl_contains(openBufpaths, file) then
+			vim.cmd.edit(file)
+			return
+		end
+	end
+	vim.notify("No last closed buffer found.", vim.log.levels.WARN)
 end, { desc = "󰑏 Re-open last closed buffer" })
 
 keymap(
@@ -398,7 +407,7 @@ end, { desc = " Scratch file" })
 keymap({ "n", "x", "i" }, "<D-l>", function()
 	if jit.os ~= "OSX" then return end
 	vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) }
-end, { desc = "󰀶 Reveal in Finder" })
+end, { desc = "󰀶 Reveal in macOS Finder" })
 
 keymap(
 	{ "n", "x", "i" },
@@ -430,7 +439,7 @@ keymap(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
-	{ desc = "󰑕 LSP rename: camelC / snake_c" }
+	{ desc = "󰑕 LSP rename: camel/snake" }
 )
 
 ---@param use "spaces"|"tabs"
