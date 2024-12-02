@@ -2,13 +2,13 @@
 --------------------------------------------------------------------------------
 
 local config = {
-	hlgroup = "@keyword.function",
+	hlgroup = "Comment",
 	icon = "󰫳", -- ·
 	tsquery = {
 		lua = { "function_declaration", "function_definition" },
 		javascript = { "function_declaration", "arrow_function" },
 	},
-	priority = 10, -- diagnostics use 20
+	priority = 10, -- below all builtin satellite-handlers, as they are more important
 	leftOfScrollbar = false,
 }
 
@@ -28,6 +28,7 @@ local handler = {
 		local currentFt = vim.bo[bufnr].filetype
 		local tsquery = config.tsquery[currentFt]
 		if not tsquery then return {} end
+
 		local queryStr = vim.iter(tsquery)
 			:map(function(nodeType) return "(" .. nodeType .. ")" end)
 			:join("")

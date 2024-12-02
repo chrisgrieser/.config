@@ -3,6 +3,7 @@ local spellfixes = {
 	THe = "The",
 	ahve = "have",
 	awiat = "await",
+	otps = "opts",
 	brwoser = "browser",
 	cant = "can't",
 	choer = "chore",

@@ -228,7 +228,7 @@ end, { desc = "󰒕 :LspRestart" })
 
 -- INSERT MODE
 keymap("n", "i", function()
-	if vim.api.nvim_get_current_line():find("^%s*$") then return [["_cc]] end
+	if vim.trim(vim.api.nvim_get_current_line()) == "" then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "indented i on empty line" })
 
@@ -269,7 +269,8 @@ end, { desc = "󰓗 Copy last ex-cmd" })
 keymap("n", "<leader>er", function()
 	vim.cmd("silent update")
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
-	if vim.bo.filetype == "lua" then
+	local filepath = vim.api.nvim_buf_get_name(0)
+	if vim.bo.filetype == "lua" and filepath:find("nvim") then
 		vim.cmd.source()
 	elseif hasShebang then
 		vim.cmd("! chmod +x %")
@@ -379,7 +380,7 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x" }, "<leader>es", function()
-	local location = vim.fn.stdpath("config") .. "/debug" -- CONFIG
+	local location = vim.fn.stdpath("config") .. "/debug"
 	vim.fn.mkdir(location, "p")
 	local currentExt = vim.fn.expand("%:e")
 	local path = location .. "/scratch." .. currentExt
@@ -425,7 +426,7 @@ keymap(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
-	{ desc = "󰑕 LSP rename: camelCase ↔ snake_case" }
+	{ desc = "󰑕 LSP rename: camelC / snake_c" }
 )
 
 ---@param use "spaces"|"tabs"
