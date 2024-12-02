@@ -1,6 +1,6 @@
 #compdef make
-# INFO my overwrite of the `make` completions.
-# only suggest recipes as completions for make
+# INFO my overwrite of the `make` completions
+# to only suggest recipes as completions for make
 
 local -a recipes=()
 

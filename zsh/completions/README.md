@@ -25,10 +25,29 @@ alias gd='git diff'
 # `gd` automatically uses completions as if it was `git diff`
 ```
 
-## Repository of zsh completion files
-<https://github.com/zsh-users/zsh-completions/tree/master/src>
+### Inherit completions from a git sub-command
+There are completion functions such as `_git-log`, but those
+are stored in `_git` and are as such only available after `_git` was used at
+least once. Thus, this one will not work:
 
-However, many of those are already included in zsh by default, apparently.
+```bash
+function gl {
+	git log …
+}
+compdef _git-log gl
+```
 
-## Code search via GitHub
-Search for something like, such as <https://github.com/search?q=path%3A%2F_pdfgrep%24%2F&type=code>
+The solution is to add a file `_gl` to `$FPATH`, since files in `$FPATH` do are
+able to use functions from other completions files. (Note that the `#compdef
+cmd-name` at the top is required.)
+
+```bash
+#compdef gl
+_git-log
+```
+
+## Search for completion files
+- [zsh-completions](https://github.com/zsh-users/zsh-completions/tree/master/src)
+  (However, many of those are already included in zsh by default.)
+- Code search on GitHub, e.g.,
+  `https://github.com/search?q=path%3A%2F_pdfgrep%24%2F&type=code`.

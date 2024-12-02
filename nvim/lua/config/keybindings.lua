@@ -10,10 +10,12 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end, { desc = " Quit" })
 
-keymap("n", "<leader>pd", function()
-	local packagesDir = vim.fn.stdpath("data") ---@cast packagesDir string
-	vim.ui.open(packagesDir)
-end, { desc = "󰝰 Plugin directory" })
+keymap(
+	"n",
+	"<leader>pd",
+	function() vim.ui.open(vim.fn.stdpath("data")) end, ---@diagnostic disable-line: param-type-mismatch
+	{ desc = "󰝰 Plugin directory" }
+)
 
 keymap(
 	"n",
@@ -412,7 +414,6 @@ keymap(
 	{ desc = "󰑊 Start/stop recording" }
 )
 keymap("n", "9", "@" .. register, { desc = " Play recording" })
-
 
 --------------------------------------------------------------------------------
 -- REFACTORING
