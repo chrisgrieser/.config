@@ -1,17 +1,14 @@
 local function irregularWhitespace()
 	if vim.bo.buftype ~= "" then return "" end
-	local spaceFiletypes = { python = 4, yaml = 2, query = 2, just = 4 } -- CONFIG
+	local spaceAmounts = { python = 4, yaml = 2, query = 2, just = 4 } -- CONFIG
+	local spaceFiletypes = vim.tbl_keys(spaceAmounts)
 
-	local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-	local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
-	local differentSpaceAmount = vim.bo.expandtab and spaceFiletypes[vim.bo.ft] ~= vim.bo.shiftwidth
-	local tabsInsteadOfSpaces = not vim.bo.expandtab and vim.tbl_contains(spaceFtsOnly, vim.bo.ft)
+	local spacesInsteadOfTabs = vim.bo.expandtab and not vim.tbl_contains(spaceFiletypes, vim.bo.ft)
+	local differentSpaceAmount = vim.bo.expandtab and spaceAmounts[vim.bo.ft] ~= vim.bo.shiftwidth
+	local tabsInsteadOfSpaces = not vim.bo.expandtab and vim.tbl_contains(spaceFiletypes, vim.bo.ft)
 
-	if spacesInsteadOfTabs or differentSpaceAmount then
-		return "󱁐 " .. vim.bo.shiftwidth
-	elseif tabsInsteadOfSpaces then
-		return "󰌒 " .. vim.bo.shiftwidth
-	end
+	if spacesInsteadOfTabs or differentSpaceAmount then return "󱁐 " .. vim.bo.shiftwidth end
+	if tabsInsteadOfSpaces then return "󰌒 " .. vim.bo.tabstop end
 	return ""
 end
 
@@ -31,7 +28,6 @@ local function newlineCharIfNotUnix()
 	if vim.bo.fileformat == "unix" then return "" end
 	if vim.bo.fileformat == "mac" then return "󰌑 " end
 	if vim.bo.fileformat == "dos" then return "󰌑 " end
-	error("Unknown fileformat: " .. vim.bo.fileformat)
 end
 
 --------------------------------------------------------------------------------
@@ -42,7 +38,7 @@ local lualineConfig = {
 		always_divide_middle = false,
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
-		always_show_tabs = true,
+		always_show_tabs = true, -- this refers to the tabline
 		-- stylua: ignore
 		ignore_focus = {
 			"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt",
@@ -53,16 +49,15 @@ local lualineConfig = {
 		lualine_a = {
 			{
 				"datetime",
-				style = " %H:%M:%S",
-				cond = function() return vim.o.columns > 120 end, -- if window is maximized
-				-- make `:` blink
+				style = "%H:%M:%S",
+				cond = function() return vim.o.columns > 120 end, -- only if window is maximized
+				-- make the `:` blink
 				fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
-				padding = { left = 0, right = 1 },
 			},
 		},
 		lualine_b = {},
 		lualine_c = {
-			-- HACK so the tabline is never empty (in which case vim adds its ugly tabline)
+			-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = 0 },
 		},
 		lualine_z = {
@@ -99,9 +94,10 @@ local lualineConfig = {
 			},
 		},
 		lualine_y = {
-			-- HACK using gitsigns.nvim data instead of lualine's builtin `diff`
-			-- component, since it is updated more accurately. However, this
-			-- requires a few hacks:
+			-- INFO Using gitsigns.nvim's data instead of lualine's builtin `diff`
+			-- component, since the latter is updated less often is often out of
+			-- sync with gitsigns.
+			-- HACK However, doing so requires a few hacks:
 			-- 1) Since components can have only one color, we have to add one
 			-- component per type of change (added, modified, removed), instead of
 			-- simply using `vim.b.gitsigns_status`.
@@ -111,7 +107,7 @@ local lualineConfig = {
 			-- highlights are defined.
 			-- 3) Since with individual components we cannot control the padding
 			-- for a condition like "if any component is shown", we define a dummy
-			-- component that just adds padding if there are changes. 
+			-- component that just adds padding if there are changes.
 			{
 				function() return "+" .. vim.b.gitsigns_status_dict.added end,
 				cond = function() return ((vim.b.gitsigns_status_dict or {}).added or 0) > 0 end,
@@ -144,10 +140,8 @@ local lualineConfig = {
 		lualine_z = {
 			{
 				"selectioncount",
-				fmt = function(str)
-					local icon = vim.fn.mode():find("[Vv]") and "礪" or ""
-					return icon .. str
-				end,
+				cond = function() return vim.fn.mode():find("[Vv]") ~= nil end,
+				fmt = function(count) return "礪" .. count end,
 			},
 			{ "location" },
 		},
