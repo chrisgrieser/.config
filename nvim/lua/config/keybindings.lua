@@ -125,18 +125,18 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
-keymap("n", "m", "J", { desc = "󰽜 Merge line" })
-keymap("n", "M", '"zdd"zpkJ', { desc = "󰽜 Merge line down" })
+keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
+keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- just :move preserves marks
 
 --------------------------------------------------------------------------------
 -- SURROUND
 
-keymap("n", '"', [[bi"<Esc>ea"<Esc>]], { desc = ' " Surround cword' })
-keymap("n", "'", [[bi'<Esc>ea'<Esc>]], { desc = " ' Surround cword" })
-keymap("n", "(", [[bi(<Esc>ea)<Esc>]], { desc = "󰅲 Surround cword" })
-keymap("n", "[", [[bi[<Esc>ea]<Esc>]], { desc = "󰅪 Surround cword", nowait = true })
-keymap("n", "{", [[bi{<Esc>ea}<Esc>]], { desc = " Surround cword" })
-keymap("n", "<D-e>", [[bi`<Esc>ea`<Esc>]], { desc = " Inline code cword" })
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' " Surround cword' })
+keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
+keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
+keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
+keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
@@ -158,7 +158,6 @@ for _, value in pairs(textobjRemaps) do
 end
 
 -- special remaps
-keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
