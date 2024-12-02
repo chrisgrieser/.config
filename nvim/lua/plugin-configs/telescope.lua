@@ -180,7 +180,6 @@ return {
 					path_display = function(_, path)
 						local parentOfRoots = {
 							vim.g.localRepos,
-							vim.fs.normalize("~/.config"),
 							vim.fs.normalize("~/Vaults"),
 							vim.fn.stdpath("data") .. "/lazy",
 							vim.env.HOMEBREW_PREFIX,
@@ -189,7 +188,8 @@ return {
 						vim.iter(parentOfRoots)
 							:each(function(root) path = path:gsub(vim.pesc(root), "") end)
 
-						local project = path:match("/(.-)/") or "" -- highest parent
+						-- project = highest parent
+						local project = path:match("/(%.config/.-)/") or path:match("/(.-)/") or ""
 						local tail = vim.fs.basename(path)
 						local out = tail .. "  " .. project
 
