@@ -1,5 +1,6 @@
--- INFO A bunch of commands that are too small to be published as plugins, but
--- too big to put in the main config, where they would crowd the actual config.
+-- INFO 
+-- A bunch of commands that are too small to be published as plugins, but too
+-- big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
 local M = {}
 --------------------------------------------------------------------------------
@@ -30,7 +31,7 @@ end
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
 	if not reg:find("^%l$") then
-		vim.notify("Invalid register: " .. reg, vim.log.levels.ERROR)
+		vim.notify("Register must be single lowercase letter.", vim.log.levels.ERROR)
 		return
 	end
 	local notRecording = vim.fn.reg_recording() == ""
@@ -127,7 +128,7 @@ function M.smartLineDuplicate()
 		if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
 	elseif vim.bo.ft == "lua" then
 		if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
-	elseif vim.bo.ft == "zsh" then
+	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" then
 		if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
 	elseif vim.bo.ft == "python" then
 		if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
@@ -147,16 +148,18 @@ end
 --------------------------------------------------------------------------------
 
 function M.gotoMostChangedFile()
+	local notifyOpts = { title = "Most changed file" , icon = "󰊢" }
+
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 then
-		vim.notify("Not in git repo.", vim.log.levels.WARN, { title = "Most changed file" })
+		vim.notify("Not in git repo.", vim.log.levels.WARN, notifyOpts)
 		return
 	end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
 	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
 	if #changedFiles == 0 then
-		vim.notify("No files with changes found.", nil, { title = "Git" })
+		vim.notify("No files with changes found.", nil, notifyOpts)
 		return
 	end
 
@@ -179,7 +182,7 @@ function M.gotoMostChangedFile()
 
 	-- open
 	if targetFile == vim.api.nvim_buf_get_name(0) then
-		vim.notify("Already at only changed file.", nil, { title = "Git" })
+		vim.notify("Already at only changed file.", nil, notifyOpts)
 	else
 		vim.cmd.edit(targetFile)
 	end
@@ -251,7 +254,7 @@ end
 
 --- if cut off, requires higher notification height setting
 function M.inspectBuffer()
-	local pseudoTilde = "∼" -- `U+223C` instead of real `~` to prevent md-strikethrough
+	local pseudoTilde = "∼" -- HACK use `U+223C` instead of real `~` to prevent md-strikethrough
 
 	local clients = vim.lsp.get_clients { bufnr = 0 }
 	local longestName = vim.iter(clients)
