@@ -3,7 +3,7 @@
 
 local config = {
 	hlgroup = "Comment",
-	icon = "·",
+	icon = "󰫳", -- ·
 	tsquery = {
 		lua = { "function_declaration", "function_definition" },
 		javascript = { "function_declaration", "arrow_function" },

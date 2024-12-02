@@ -8,6 +8,20 @@ return {
 		},
 	},
 	-----------------------------------------------------------------------------
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
+		enabled = false,
+		priority = 1000, -- needs to be loaded in first
+		opts = {
+			preset = "amongus", -- modern|classic|minimal|ghost|simple|nonerdfont|amongus
+		},
+		config = function(_, opts)
+			require("tiny-inline-diagnostic").setup(opts)
+			vim.diagnostic.config { virtual_text = false }
+		end,
+	},
+	-----------------------------------------------------------------------------
 	{ -- nvim lua typings
 		"folke/lazydev.nvim",
 		ft = "lua",
