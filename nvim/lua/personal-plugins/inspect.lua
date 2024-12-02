@@ -65,6 +65,7 @@ function M.nodeUnderCursor()
 	vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
 
 	-- FIX on_key being triggered by `n` key (only needed for my personal config)
+	-- see https://www.reddit.com/r/neovim/comments/1h051ht/comment/m01r7ju/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
 	vim.defer_fn(function()
 		local countNs = vim.api.nvim_create_namespace("searchCounter")
 		vim.api.nvim_buf_clear_namespace(0, countNs, 0, -1)
