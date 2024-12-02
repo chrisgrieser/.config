@@ -78,9 +78,6 @@ nnoremap K 6gk
 vnoremap J 6j
 vnoremap K 6k
 
-" dj = delete 2 lines, dJ = delete 3 lines
-onoremap J 2j
-
 " Jumps
 nnoremap <C-h> <C-o>
 nnoremap <C-l> <C-i>
