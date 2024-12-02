@@ -16,11 +16,6 @@ function my_func {
 	echo "Hello world."
 }
 compdef _grep my_func
-
-function log {
-	git log --oneline
-}
-compdef _git-log log
 ```
 
 Aliases use the completions as if they are expanded
