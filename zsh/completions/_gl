@@ -1,0 +1,4 @@
+#compdef gl
+
+# function from the `_git` completions
+_git-log

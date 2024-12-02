@@ -1,0 +1,4 @@
+#compdef gc
+
+# function from the `_git` completions
+_git-commit

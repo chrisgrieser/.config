@@ -1,0 +1,4 @@
+#compdef reflog
+
+# function from the `_git` completions
+_git-reflog

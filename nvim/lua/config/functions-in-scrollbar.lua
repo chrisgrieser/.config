@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 local config = {
-	hlgroup = "Comment",
+	hlgroup = "@keyword.function",
 	icon = "󰫳", -- ·
 	tsquery = {
 		lua = { "function_declaration", "function_definition" },
@@ -38,17 +38,20 @@ local handler = {
 		local rootTree = vim.treesitter.get_parser(bufnr):parse()[1]:root()
 		local allNodesIter = query:iter_captures(rootTree, bufnr)
 
-		local satelliteMarks = vim.iter(allNodesIter)
-			:map(function(_, node, _)
-				local row, _, _ = node:start()
-				local scrollbarPos, _ = require("satellite.util").row_to_barpos(winid, row)
-				return {
-					pos = scrollbarPos,
-					highlight = config.hlgroup,
-					symbol = config.icon,
-				}
-			end)
-			:totable()
+		local satelliteMarks = vim.iter(allNodesIter):fold({}, function(acc, _, node, _)
+			local startRow, _, _ = node:start()
+			local endRow = node:end_()
+			if startRow == endRow then return acc end -- skip single line functions
+			local scrollbarPos, _ = require("satellite.util").row_to_barpos(winid, startRow)
+
+			---@type Satellite.Mark
+			local mark = {
+				pos = scrollbarPos,
+				highlight = config.hlgroup,
+				symbol = config.icon,
+			}
+			return vim.list_extend(acc, { mark })
+		end)
 
 		return satelliteMarks
 	end,
