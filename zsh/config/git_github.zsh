@@ -45,12 +45,13 @@ ZSH_HIGHLIGHT_REGEXP+=(
 
 alias gaa='git add --all'
 alias unadd='git restore --staged'
-# using functions, so overriding completions works
+
+# using functions instead of aliases, so overriding completions works
 function ga { git add "$@"; }
 function restore { git restore "$@"; }
 
 # custom completions
-_change_git_files() {
+_changed_git_files() {
 	local -a changed_files=()
 	while IFS='' read -r file; do # turn lines into array
 		changed_files+=("$file")
@@ -59,9 +60,8 @@ _change_git_files() {
 	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
 	compadd "${expl[@]}" -Q -- "${changed_files[@]}"
 }
-compdef _change_git_files ga
-compdef _change_git_files gd
-compdef _change_git_files restore
+compdef _changed_git_files ga
+compdef _changed_git_files restore
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
@@ -115,6 +115,10 @@ function gC {
 		git commit --message "$@" || return 1
 	fi
 }
+
+# make `gc` and `gC` use `git commit` completions
+compdef _git-commit gc
+compdef _git-commit gC
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART AMEND & FIXUP
@@ -224,6 +228,7 @@ function gl {
 		_gitlog "$@"
 	fi
 }
+compdef _git-log gl # make `gl` use `git log` completions
 
 function reflog {
 	if [[ -z "$1" ]]; then
@@ -234,6 +239,7 @@ function reflog {
 		git reflog "$@"
 	fi
 }
+compdef _git-reflog reflog # make `reflog` use `git reflog` completions
 
 # interactive
 function gli {

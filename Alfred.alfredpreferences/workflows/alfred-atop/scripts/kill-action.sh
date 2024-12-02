@@ -20,19 +20,19 @@ if [[ "$mode" == "restart app" ]]; then
 	return 0
 fi
 
-
 if [[ "$mode" == "kill" ]]; then
-	kill -- "$pid" && msg="Killed" || msg="Could not kill"
+	kill -- "$pid" && msg="Killed"
 elif [[ "$mode" == "force kill" ]]; then
-	kill -9 -- "$pid" && msg="Force killed" || msg="Could not force kill"
+	kill -9 -- "$pid" && msg="Force killed"
 elif [[ "$mode" == "killall" ]]; then
-	killall -- "$name" && msg="Killed all processes with name" || msg="Could not kill"
+	killall -- "$name" && msg="Killed all processes with name"
 elif [[ "$mode" == "force killall" ]]; then
-	killall -9 -- "$name" && msg="Force killed all processes with name" || msg="Could not kill"
+	killall -9 -- "$name" && msg="Force killed all processes with name"
 elif [[ "$mode" == "copy pid" ]]; then
-	echo -n "$pid" | pbcopy 
+	echo -n "$pid" | pbcopy
 	msg="✅ Copied PID for "
 fi
+# shellcheck disable=2181
+[[ $? -ne 0 ]] && msg="Could not $mode"
 
-# for Alfred notification
-echo -n "$msg \"$name\""
+echo -n "$msg \"$name\"" # for Alfred notification
