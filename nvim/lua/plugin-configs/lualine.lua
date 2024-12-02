@@ -98,13 +98,7 @@ local lualineConfig = {
 				symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 			},
 		},
-		lualine_y = {
-			{ "diff" },
-			{ -- line count
-				function() return vim.api.nvim_buf_line_count(0) .. " " end,
-				cond = function() return vim.bo.buftype == "" end,
-			},
-		},
+		lualine_y = {},
 		lualine_z = {
 			{
 				"selectioncount",
@@ -125,7 +119,7 @@ local lualineConfig = {
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
----@param where "after"|"before"
+---@param where "after"|"before"? defaults to "after"
 vim.g.lualine_add = function(whichBar, whichSection, component, where)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end

@@ -53,7 +53,7 @@ return {
 		config = function(_, opts)
 			require("tinygit").setup(opts)
 
-			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame, "after")
+			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame)
 			-- stylua: ignore
 			vim.g.lualine_add("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 		end,
@@ -73,6 +73,31 @@ return {
 				changedelete = { show_count = true },
 			},
 		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
+
+			-- use the gitsigns data from gitsigns instead of the builtin `diff`
+			-- component from lualine, since it is more accurate
+			vim.g.lualine_add("sections", "lualine_y", {
+				function() return "+" .. vim.b.gitsigns_status_dict.added end,
+				cond = function() return ((vim.b.gitsigns_status_dict or {}).added or 0) > 0 end,
+				color = "lualine_y_diff_added_normal",
+			})
+			vim.g.lualine_add("sections", "lualine_y", {
+				function() return "~" .. vim.b.gitsigns_status_dict.changed end,
+				cond = function() return ((vim.b.gitsigns_status_dict or {}).changed or 0) > 0 end,
+				color = "lualine_y_diff_modified_normal",
+			})
+			vim.g.lualine_add("sections", "lualine_y", {
+				function() return "-" .. vim.b.gitsigns_status_dict.removed end,
+				cond = function() return ((vim.b.gitsigns_status_dict or {}).removed or 0) > 0 end,
+				color = "lualine_y_diff_removed_normal",
+			})
+
+			-- HACK just so the components above get the highlight groups
+			local dummyForLualineHlgroups = { "diff", cond = function() return false end }
+			vim.g.lualine_add("sections", "lualine_y", dummyForLualineHlgroups, "before")
+		end,
 		keys = {
 			-- stylua: ignore start
 			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
