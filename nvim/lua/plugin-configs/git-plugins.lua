@@ -25,7 +25,7 @@ return {
 		},
 		opts = {
 			stage = {
-				contextSize = 2,
+				contextSize = 1,
 				moveToNextHunkOnStagingToggle = true,
 			},
 			commit = {
@@ -46,7 +46,7 @@ return {
 				blame = {
 					hideAuthorNames = { "Chris Grieser", "chrisgrieser" },
 					ignoreAuthors = { "🤖 automated" },
-					maxMsgLen = 50,
+					maxMsgLen = 55,
 				},
 			},
 		},
@@ -94,24 +94,24 @@ return {
 			{
 				"<leader>op",
 				function()
+					local notifyOpts = { title = "Gitsigns", icon = "󰊢" }
 					if vim.b.gitsignsPrevChanges then
 						require("gitsigns").reset_base()
-						vim.notify("Base was reset.", nil, { title = "Gitsigns", icon = "󰊢" })
+						vim.notify("Base was reset.", nil, notifyOpts)
 						vim.b.gitsignsPrevChanges = false
 						return
 					end
 
-					local file = vim.api.nvim_buf_get_name(0)
-					local gitArgs = { "git", "log", "-1", "--format=%h", "--", file }
+					local filepath = vim.api.nvim_buf_get_name(0)
+					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
 					local out = vim.system(gitArgs):wait()
 					assert(out.code == 0, "git log failed")
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsignsPrevChanges = true
-					local msg = "Changed base to " .. lastCommitToFile
-					vim.notify(msg, nil, { title = "Gitsigns", icon = "󰊢" })
+					vim.notify("Changed base to " .. lastCommitToFile, nil, notifyOpts)
 				end,
-				desc = "󰊢 Previous/present changes",
+				desc = "󰊢 Prev/present hunks",
 			},
 		},
 	},

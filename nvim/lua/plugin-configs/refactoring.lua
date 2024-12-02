@@ -6,12 +6,12 @@ return {
 				"<leader>fs",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
-				desc = " substitute (rip-sub)",
+				desc = " rip-substitute",
 			},
 			{
 				"<leader>fS",
 				function() require("rip-substitute").rememberCursorWord() end,
-				desc = " remember cword (rip-sub)",
+				desc = " remember cword (rip-sub.)",
 			},
 		},
 		opts = {
@@ -29,9 +29,9 @@ return {
 		opts = { show_success_message = true },
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "x" }, desc = "󱗘 Inline var" },
-			{ "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract var" },
-			{ "<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract func" },
+			{ "<leader>fi", function() require("refactoring").refactor("Inline Variable") end, mode = { "n", "x" }, desc = "󱗘 Inline variable" },
+			{ "<leader>fe", function() require("refactoring").refactor("Extract Variable") end, mode = "x", desc = "󱗘 Extract variable" },
+			{ "<leader>fu", function() require("refactoring").refactor("Extract Function") end, mode = "x", desc = "󱗘 Extract function" },
 			-- stylua: ignore end
 		},
 	},
