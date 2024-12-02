@@ -194,64 +194,55 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	"rcarriga/nvim-notify",
-	lazy = false,
-	config = function()
-		vim.notify = require("notify")
-		require("notify").setup()
+	"folke/snacks.nvim",
+	event = "VeryLazy",
+	config = function(_, opts)
+		require("snacks").setup(opts)
+		overrideDefaultPrintFuncs()
+		silenceMessages()
 	end,
+	keys = {
+		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
+		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
+		{ "<D-0>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
+		-- stylua: ignore
+		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
+		-- stylua: ignore
+		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+	},
+	opts = {
+		words = {
+			notify_jump = true,
+			modes = { "n" },
+			debounce = 300,
+		},
+		win = {
+			border = vim.g.borderStyle,
+			-- bo = { modifiable = false },
+			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
+			keys = {
+				q = "close",
+				["<Esc>"] = "close",
+				["<D-8>"] = "close",
+				["<D-9>"] = "close",
+				["<D-0>"] = "close",
+			},
+		},
+		notifier = {
+			timeout = 7500,
+			sort = { "added" }, -- sort only by time
+			width = { min = 12, max = 0.5 },
+			height = { min = 1, max = 0.5 },
+			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+			top_down = false,
+			more_format = " ↓ %d lines ", -- if more lines than height
+		},
+		styles = {
+			notification = {
+				border = vim.g.borderStyle,
+				wo = { cursorline = false, winblend = 0, wrap = true },
+			},
+		},
+	},
 }
-
--- return {
--- 	"folke/snacks.nvim",
--- 	event = "VeryLazy",
--- 	config = function(_, opts)
--- 		require("snacks").setup(opts)
--- 		overrideDefaultPrintFuncs()
--- 		silenceMessages()
--- 	end,
--- 	keys = {
--- 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
--- 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
--- 		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
--- 		{ "<D-0>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
--- 		-- stylua: ignore
--- 		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
--- 		-- stylua: ignore
--- 		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
--- 	},
--- 	opts = {
--- 		words = {
--- 			notify_jump = true,
--- 			modes = { "n" },
--- 			debounce = 300,
--- 		},
--- 		win = {
--- 			border = vim.g.borderStyle,
--- 			-- bo = { modifiable = false },
--- 			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
--- 			keys = {
--- 				q = "close",
--- 				["<Esc>"] = "close",
--- 				["<D-8>"] = "close",
--- 				["<D-9>"] = "close",
--- 				["<D-0>"] = "close",
--- 			},
--- 		},
--- 		notifier = {
--- 			timeout = 7500,
--- 			sort = { "added" }, -- sort only by time
--- 			width = { min = 12, max = 0.5 },
--- 			height = { min = 1, max = 0.5 },
--- 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
--- 			top_down = false,
--- 			more_format = " ↓ %d lines ", -- if more lines than height
--- 		},
--- 		styles = {
--- 			notification = {
--- 				border = vim.g.borderStyle,
--- 				wo = { cursorline = false, winblend = 0, wrap = true },
--- 			},
--- 		},
--- 	},
--- }
