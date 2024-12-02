@@ -70,7 +70,7 @@ end
 ---@nodiscard
 function M.altFileStatusbar(maxLength)
 	maxLength = type(maxLength) == "number" and maxLength or 30
-	local icon = "#" -- default icon
+	local icon = "#"
 
 	local altOld = altOldfile()
 	local name

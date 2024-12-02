@@ -104,26 +104,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
 })
 
 --------------------------------------------------------------------------------
--- inspect LSP capabilities
-vim.api.nvim_create_user_command("LspCapabilities", function(ctx)
-	local client = vim.lsp.get_clients({ name = ctx.args })[1]
-	local newBuf = vim.api.nvim_create_buf(true, true)
-	local info = {
-		capabilities = client.capabilities,
-		server_capabilities = client.server_capabilities,
-		config = client.config,
-	}
-	vim.notify(vim.inspect(info), vim.log.levels.DEBUG, { title = client.name " capabilities", })
-end, {
-	nargs = 1,
-	complete = function()
-		return vim.iter(vim.lsp.get_clients { bufnr = 0 })
-			:map(function(client) return client.name end)
-			:totable()
-	end,
-})
-
---------------------------------------------------------------------------------
 -- DIAGNOSTICS
 
 ---@param diag vim.Diagnostic

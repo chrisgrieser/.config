@@ -248,39 +248,22 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 --------------------------------------------------------------------------------
 
--- CMDLINE
--- EVAL (better than `:lua = `, since using `vim.notify`)
-keymap({ "n", "x" }, "<leader>ee", function()
-	local function eval(input)
-		if not input then return end
-		local msg = vim.inspect(vim.fn.luaeval(input))
-		local opts = { title = "Eval", icon = "󰜎", ft = "lua" }
-		vim.notify(msg, vim.log.levels.DEBUG, opts)
-	end
-	if vim.fn.mode() == "n" then
-		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
-			once = true,
-			pattern = "DressingInput",
-			command = "set ft=lua",
-		})
-		vim.ui.input({ prompt = "󰜎 Eval:" }, eval)
-	else
-		vim.cmd.normal { '"zy', bang = true }
-		eval(vim.fn.getreg("z"))
-	end
-end, { desc = "󰜎 Eval" })
+-- CMDLINE & EVAL
+keymap(
+	{ "n", "x" },
+	"<leader>ee",
+	function() require("personal-plugins.misc").nvimLuaEval() end,
+	{ desc = "󰜎 Eval" }
+)
 
 -- Copy last command
 keymap("n", "<leader>ec", function()
-	local last = vim.fn.getreg(":")
-	vim.fn.setreg("+", last)
-	vim.notify(last, nil, { title = "Copied", icon = "󰓗" })
-end, { desc = "󰓗 Copy last command" })
+	local lastExcmd = vim.fn.getreg(":")
+	vim.fn.setreg("+", lastExcmd)
+	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰓗 Copy last ex-cmd" })
 
---------------------------------------------------------------------------------
--- RUN
-
+-- Run file
 keymap("n", "<leader>er", function()
 	vim.cmd("silent update")
 	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
@@ -318,7 +301,7 @@ keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 Next placeholder" })
 
--- exit snippet, see https://github.com/neovim/neovim/issues/26449
+-- exit snippet, see https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
 keymap({ "i", "s" }, "<Esc>", function()
 	vim.snippet.stop()
 	return "<Esc>"
@@ -369,8 +352,10 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x" }, "<leader>es", function()
+	local location = vim.fn.stdpath("config") .. "/debug" -- CONFIG
+	vim.fn.mkdir(location, "p")
 	local currentExt = vim.fn.expand("%:e")
-	local path = vim.fn.stdpath("config") .. "/debug/scratch." .. currentExt
+	local path = location .. "/scratch." .. currentExt
 	vim.cmd.edit(path)
 	vim.cmd.write(path)
 end, { desc = " Scratch file" })
@@ -409,6 +394,12 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
 keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
+keymap(
+	"n",
+	"<leader>il",
+	function() require("personal-plugins.misc").inspectLspCapabilities() end,
+	{ desc = "󱈄 LSP capabilities" }
+)
 keymap(
 	"n",
 	"<leader>in",
