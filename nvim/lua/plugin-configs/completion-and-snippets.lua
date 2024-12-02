@@ -1,9 +1,8 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
--- TODO on next release
--- * windows.autocomplete.selection and windows.autocomplete.cycle moved to `list`
 
---------------------------------------------------------------------------------
+---@diagnostic disable: missing-fields
+-- PENDING https://github.com/Saghen/blink.cmp/issues/427
 
 return {
 	{ -- completion engine
@@ -14,17 +13,17 @@ return {
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
 		opts = {
-			highlight = {
-				-- supported: tokyonight
-				-- not supported: nightfox, gruvbox-material
-				use_nvim_cmp_as_default = true,
-			},
 			sources = {
 				providers = {
 					snippets = {
 						-- don't show when triggered manually (= zero length), useful for JSON keys
 						min_keyword_length = 1,
 						score_offset = -1,
+					},
+					path = {
+						opts = {
+							get_cwd = vim.uv.cwd
+						},
 					},
 					buffer = {
 						-- disable being fallback for LSP, but limit its display via
@@ -33,6 +32,18 @@ return {
 						max_items = 4,
 						min_keyword_length = 4,
 						score_offset = -3,
+						opts = {
+							-- show completions from all buffers used within the last x minutes
+							get_bufnrs = function()
+								local mins = 15
+								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1 }
+								local recentBufs = vim.iter(allOpenBuffers)
+									:filter(function(buf) return os.time() - buf.lastused < mins * 60 end)
+									:map(function(buf) return buf.bufnr end)
+									:totable()
+								return recentBufs
+							end,
+						},
 					},
 				},
 			},
@@ -47,27 +58,32 @@ return {
 				["<PageDown>"] = { "scroll_documentation_down" },
 				["<PageUp>"] = { "scroll_documentation_up" },
 			},
-			trigger = {
-				completion = {
+			completion = {
+				keyword = {
 					-- Remove `\`, so it does not trigger completion. Useful when
 					-- breaking up lines in bash/zsh.
-					keyword_regex = "[%w_-]",
+					regex = "[%w_-]",
 				},
-			},
-			windows = {
+				list = {
+					-- cycle at bottom, but not at the top
+					cycle = { from_top = false },
+				},
+				accept = {
+					-- experimental
+					auto_brackets = { enabled = true },
+				},
 				documentation = {
-					border = vim.g.borderStyle,
-					max_width = 50,
-					max_height = 15,
 					auto_show = true,
 					auto_show_delay_ms = 250,
+					window = {
+						border = vim.g.borderStyle,
+						max_width = 50,
+						max_height = 15,
+					},
 				},
-				autocomplete = {
-					selection = "preselect", -- auto_insert|preselect
-
+				menu = {
 					border = vim.g.borderStyle,
-					cycle = { from_top = false }, -- cycle at bottom, but not at the top
-					draw = { -- https://github.com/saghen/blink.cmp#menu-appearancedrawing
+					draw = {
 						columns = {
 							{ "label", "label_description", "kind_icon", gap = 1 },
 						},
@@ -82,7 +98,8 @@ return {
 									if lspName == "emmet_language_server" then source = "emmet" end
 
 									-- use source-specific icons, and `kind_icon` only for items from LSPs
-									local sourceIcons = { snippets = "󰩫", buffer = "󰦨", emmet = "", path = "󰈔" }
+									local sourceIcons =
+										{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "󰈔" }
 									return sourceIcons[source] or ctx.kind_icon
 								end,
 							},
@@ -90,32 +107,37 @@ return {
 					},
 				},
 			},
-			kind_icons = {
-				Text = "",
-				Method = "󰊕",
-				Function = "󰡱",
-				Constructor = "",
-				Field = "󰇽",
-				Variable = "󰀫",
-				Class = "󰜁",
-				Interface = "",
-				Module = "",
-				Property = "󰜢",
-				Unit = "",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Snippet = "󰒕", -- should indicate it's from the LSP
-				Color = "󰏘",
-				Reference = "",
-				File = "", -- if from LSP, it's a module
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "󰏿",
-				Struct = "󰙅",
-				Event = "",
-				Operator = "󰆕",
-				TypeParameter = "󰅲",
+			appearance = {
+				-- supported: tokyonight
+				-- not supported: nightfox, gruvbox-material
+				use_nvim_cmp_as_default = true,
+				kind_icons = {
+					Text = "",
+					Method = "󰊕",
+					Function = "󰡱",
+					Constructor = "",
+					Field = "󰇽",
+					Variable = "󰀫",
+					Class = "󰜁",
+					Interface = "",
+					Module = "",
+					Property = "󰜢",
+					Unit = "",
+					Value = "󰎠",
+					Enum = "",
+					Keyword = "󰌋",
+					Snippet = "󰒕", -- should indicate it's from the LSP
+					Color = "󰏘",
+					Reference = "",
+					File = "", -- if from LSP, it's a module
+					Folder = "󰉋",
+					EnumMember = "",
+					Constant = "󰏿",
+					Struct = "󰙅",
+					Event = "",
+					Operator = "󰆕",
+					TypeParameter = "󰅲",
+				},
 			},
 		},
 	},

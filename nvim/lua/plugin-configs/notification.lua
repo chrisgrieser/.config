@@ -226,7 +226,7 @@ return {
 		},
 		win = {
 			border = vim.g.borderStyle,
-			-- bo = { modifiable = false },
+			bo = { modifiable = false },
 			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
 			keys = {
 				q = "close",
