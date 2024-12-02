@@ -27,6 +27,17 @@ else
 	g.neovide_padding_left = 7
 end
 
+-- cmd+ / cmd- to change zoom
+local function changeScaleFactor(delta)
+	g.neovide_scale_factor = g.neovide_scale_factor + delta
+	local icon = delta > 0 and "" or ""
+	local opts = { id = "neovide_scale_factor", icon = icon, title = "Scale factor" }
+	vim.notify(tostring(g.neovide_scale_factor), nil, opts)
+end
+local keymap = require("config.utils").uniqueKeymap
+keymap({ "n", "x", "i" }, "<D-+>", function() changeScaleFactor(0.01) end, { desc = " Zoom" })
+keymap({ "n", "x", "i" }, "<D-->", function() changeScaleFactor(-0.01) end, { desc = " Zoom" })
+
 --------------------------------------------------------------------------------
 
 -- CMD & ALT Keys
