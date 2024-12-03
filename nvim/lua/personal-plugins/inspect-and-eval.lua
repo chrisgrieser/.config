@@ -119,13 +119,18 @@ function M.evalNvimLua()
 	end
 end
 
-function M.allBuffers()
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	local relevantBufInfo = vim.iter(openBuffers)
-		:map(function(buf) return { path = buf.name, bufnr = buf.bufnr, loaded = buf.loaded } end)
-		:totable()
-	local opts = { icon = "󰽙", title = "Available buffers", ft = "lua" }
-	vim.notify(vim.inspect(relevantBufInfo), vim.log.levels.DEBUG, opts)
+function M.runFile()
+	vim.cmd("silent update")
+	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
+	local filepath = vim.api.nvim_buf_get_name(0)
+	if vim.bo.filetype == "lua" and filepath:find("nvim") then
+		vim.cmd.source()
+	elseif hasShebang then
+		vim.cmd("! chmod +x %")
+		vim.cmd("! %")
+	else
+		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
+	end
 end
 
 --------------------------------------------------------------------------------

@@ -248,39 +248,7 @@ keymap("c", "<BS>", function()
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 --------------------------------------------------------------------------------
-
--- CMDLINE & EVAL
-keymap(
-	{ "n", "x" },
-	"<leader>ee",
-	function() require("personal-plugins.inspect").evalNvimLua() end,
-	{ desc = "󰜎 Eval" }
-)
-
--- Copy last command
-keymap("n", "<leader>ec", function()
-	local lastExcmd = vim.fn.getreg(":")
-	vim.fn.setreg("+", lastExcmd)
-	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰓗 Copy last ex-cmd" })
-
--- Run file
-keymap("n", "<leader>er", function()
-	vim.cmd("silent update")
-	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
-	local filepath = vim.api.nvim_buf_get_name(0)
-	if vim.bo.filetype == "lua" and filepath:find("nvim") then
-		vim.cmd.source()
-	elseif hasShebang then
-		vim.cmd("! chmod +x %")
-		vim.cmd("! %")
-	else
-		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
-	end
-end, { desc = "󰜎 Run file" })
-
---------------------------------------------------------------------------------
--- INSPECT
+-- INSPECT & EVAL
 
 keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
@@ -288,26 +256,35 @@ keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
 keymap(
 	"n",
 	"<leader>il",
-	function() require("personal-plugins.inspect").lspCapabilities() end,
+	function() require("personal-plugins.inspect-and-eval").lspCapabilities() end,
 	{ desc = "󱈄 LSP capabilities" }
 )
 keymap(
 	"n",
 	"<leader>in",
-	function() require("personal-plugins.inspect").nodeUnderCursor() end,
+	function() require("personal-plugins.inspect-and-eval").nodeUnderCursor() end,
 	{ desc = " Node under cursor" }
 )
 keymap(
 	"n",
 	"<leader>ib",
-	function() require("personal-plugins.inspect").bufferInfo() end,
+	function() require("personal-plugins.inspect-and-eval").bufferInfo() end,
 	{ desc = "󰽙 Buffer info" }
 )
+
+keymap(
+	{ "n", "x" },
+	"<leader>ee",
+	function() require("personal-plugins.inspect-and-eval").evalNvimLua() end,
+	{ desc = "󰜎 Eval" }
+)
+
+-- Run file
 keymap(
 	"n",
-	"<leader>iB",
-	function() require("personal-plugins.inspect").allBuffers() end,
-	{ desc = "󰽙 All buffers" }
+	"<leader>er",
+	function() require("personal-plugins.inspect-and-eval").runFile() end,
+	{ desc = "󰜎 Run file" }
 )
 
 --------------------------------------------------------------------------------
@@ -316,7 +293,7 @@ keymap(
 	{ "n", "x", "i" },
 	"<C-CR>",
 	function() vim.cmd.wincmd("w") end,
-	{ desc = " Next window" }
+	{ desc = " Cycle windows" }
 )
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })

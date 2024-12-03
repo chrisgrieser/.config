@@ -170,8 +170,8 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copy last [e]xecuted [c]ommand
-function ec() {
+# copy [l]ast [c]ommand
+function lc() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
 		to_copy=""
@@ -189,7 +189,7 @@ function ec() {
 }
 
 # completions for it
-_ec() {
+_lc() {
 	local -a last_cmds=()
 	while IFS='' read -r value; do # turn lines into array
 		last_cmds+=("$value")
@@ -199,7 +199,7 @@ _ec() {
 	local expl && _description -V last-commands expl 'Last Commands'
 	compadd "${expl[@]}" -Q -l -d last_cmds -a _values
 }
-compdef _ec ec
+compdef _lc lc
 
 #───────────────────────────────────────────────────────────────────────────────
 # TRASH

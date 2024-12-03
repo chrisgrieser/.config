@@ -10,7 +10,7 @@ local config = {
 	},
 	priority = 10, -- below all builtin satellite-handlers, as they are more important
 	leftOfScrollbar = false,
-	includeOneLineFuncs = false,
+	excludeOneLineFuncs = true,
 }
 
 --------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ local handler = {
 		local satelliteMarks = vim.iter(allNodesIter):fold({}, function(acc, _, node, _)
 			local startRow = node:start()
 			local endRow = node:end_()
-			if startRow == endRow then return acc end -- skip single line functions
+			if config.excludeOneLineFuncs and (startRow == endRow) then return acc end
 			local scrollbarPos, _ = require("satellite.util").row_to_barpos(winid, startRow)
 
 			---@type Satellite.Mark
