@@ -84,8 +84,9 @@ keymap(
 	"n",
 	"<",
 	function() require("personal-plugins.misc").toggleLowercaseTitleCase() end,
-	{ desc = "󰬴 Toggle word case" }
+	{ desc = "󰬴 Toggle lower/Title case" }
 )
+keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
 -- Increment/Decrement, or toggle true/false
 keymap(

@@ -4,7 +4,7 @@
 -- TODO FOR NEXT RELEASE
 
 -- 1. snippet reload function https://github.com/Saghen/blink.cmp/issues/428
--- should be `require("blink.cmp").snippet("snippets"))`
+-- should be `require("blink.cmp").reload_snippet("snippets"))`
 
 -- 2. annotations https://github.com/Saghen/blink.cmp/issues/427
 ---@diagnostic disable: missing-fields
