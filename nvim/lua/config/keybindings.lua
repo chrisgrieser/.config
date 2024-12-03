@@ -303,6 +303,12 @@ keymap(
 	function() require("personal-plugins.inspect").bufferInfo() end,
 	{ desc = "󰽙 Buffer info" }
 )
+keymap(
+	"n",
+	"<leader>iB",
+	function() require("personal-plugins.inspect").allBuffers() end,
+	{ desc = "󰽙 All buffers" }
+)
 
 --------------------------------------------------------------------------------
 -- WINDOWS

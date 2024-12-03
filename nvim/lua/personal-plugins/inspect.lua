@@ -119,5 +119,14 @@ function M.evalNvimLua()
 	end
 end
 
+function M.allBuffers()
+	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	local relevantBufInfo = vim.iter(openBuffers)
+		:map(function(buf) return { path = buf.name, bufnr = buf.bufnr, loaded = buf.loaded } end)
+		:totable()
+	local opts = { icon = "󰽙", title = "Available buffers", ft = "lua" }
+	vim.notify(vim.inspect(relevantBufInfo), vim.log.levels.DEBUG, opts)
+end
+
 --------------------------------------------------------------------------------
 return M

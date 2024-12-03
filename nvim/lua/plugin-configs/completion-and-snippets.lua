@@ -28,7 +28,7 @@ return {
 					},
 					path = {
 						opts = {
-							get_cwd = vim.uv.cwd
+							get_cwd = vim.uv.cwd,
 						},
 					},
 					buffer = {
@@ -44,7 +44,11 @@ return {
 								local mins = 15
 								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
 								local recentBufs = vim.iter(allOpenBuffers)
-									:filter(function(buf) return os.time() - buf.lastused < mins * 60 end)
+									:filter(function(buf)
+										local recentlyUsed = os.time() - buf.lastused < (60 * mins)
+										local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
+										return recentlyUsed and valid
+									end)
 									:map(function(buf) return buf.bufnr end)
 									:totable()
 								return recentBufs
@@ -55,7 +59,7 @@ return {
 			},
 			completion = {
 				keyword = {
-					-- Remove `\`, so it does not trigger completion. 
+					-- Remove `\`, so it does not trigger completion.
 					-- Useful when breaking up lines in bash/zsh.
 					regex = "[%w_-]",
 				},

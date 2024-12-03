@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - trigger: "!mail"
+  - triggers: ["!mail"]
     replace: "Dear sir or madam,\n\n"
   - regex: "\\bvvv"
     replace: |-
@@ -9,7 +9,7 @@ matches:
 
       Viele Grüße
       Chris
-  - trigger: "mfg"
+  - triggers: ["!mai", "mfg", "!mfg"]
     replace: |-
       $|$
 
@@ -31,7 +31,7 @@ matches:
       Viele Grüße
       Chris Grieser
     label: Viele Grüße (voller Name)
-  - trigger: "!mail"
+  - triggers: ["!mail", "!kr"]
     replace: |-
       $|$
 
