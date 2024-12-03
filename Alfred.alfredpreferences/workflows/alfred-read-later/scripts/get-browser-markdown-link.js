@@ -23,7 +23,10 @@ function readFile(path) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	if (!argv[0]) return "No open window";
-	const [title, url] = argv[0].split("\t");
+	let [title, url] = argv[0].split("\t");
+
+	// prevent markdown link from becoming invalid, see https://github.com/chrisgrieser/alfred-read-later/issues/4
+	title = title.replace(/\[|\]/g, "").trim();
 
 	const dateSignifier = "📆"; // https://publish.obsidian.md/tasks/Getting+Started/Dates
 	const isoDate = new Date().toISOString().slice(0, 10);
