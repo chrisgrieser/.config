@@ -32,7 +32,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local lualineConfig = {
+local lualineOpts = {
 	options = {
 		globalstatus = true,
 		always_divide_middle = false,
@@ -60,11 +60,15 @@ local lualineConfig = {
 			-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 			{ function() return " " end, padding = 0 },
 		},
-		lualine_z = {
+		lualine_y = {
 			{ -- recording status
 				function() return "󰑊 Recording…" end,
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 				color = "DiagnosticError",
+			},
+			{
+				require("lazy.status").updates,
+				cond = require("lazy.status").has_updates,
 			},
 		},
 	},
@@ -94,44 +98,17 @@ local lualineConfig = {
 			},
 		},
 		lualine_y = {
-			-- INFO Using gitsigns.nvim's data instead of lualine's builtin `diff`
-			-- component, since the latter is updated less often is often out of
-			-- sync with gitsigns.
-			-- HACK However, doing so requires a few hacks:
-			-- 1) Since components can have only one color, we have to add one
-			-- component per type of change (added, modified, removed), instead of
-			-- simply using `vim.b.gitsigns_status`.
-			-- 2) There is no highlight group for them by default, as
-			-- `lualine_y_diff_*` is only created when the `diff` components is
-			-- used. So we set the `diff` component, but never show it, just so the
-			-- highlights are defined.
-			-- 3) Since with individual components we cannot control the padding
-			-- for a condition like "if any component is shown", we define a dummy
-			-- component that just adds padding if there are changes.
 			{
-				function() return "+" .. vim.b.gitsigns_status_dict.added end,
-				cond = function() return ((vim.b.gitsigns_status_dict or {}).added or 0) > 0 end,
-				color = "lualine_y_diff_added_normal",
-				padding = { left = 1, right = 0 },
+				"diff",
+				-- INFO Using gitsigns.nvim's data since lualine's builtin component
+				-- is updated much less frequently and is thus often out of sync
+				-- with the gitsigns in the signcolumn.
+				source = function()
+					local gs = vim.b.gitsigns_status_dict
+					if not gs then return end
+					return { added = gs.added, modified = gs.changed, removed = gs.removed }
+				end,
 			},
-			{
-				function() return "~" .. vim.b.gitsigns_status_dict.changed end,
-				cond = function() return ((vim.b.gitsigns_status_dict or {}).changed or 0) > 0 end,
-				color = "lualine_y_diff_modified_normal",
-				padding = { left = 1, right = 0 },
-			},
-			{
-				function() return "-" .. vim.b.gitsigns_status_dict.removed end,
-				cond = function() return ((vim.b.gitsigns_status_dict or {}).removed or 0) > 0 end,
-				color = "lualine_y_diff_removed_normal",
-				padding = { left = 1, right = 0 },
-			},
-
-			-- just so highlight groups are created
-			{ "diff", cond = function() return false end },
-			-- just a dummy component for padding
-			{ function() return vim.b.gitsigns_status ~= "" and " " or "" end, padding = 0 },
-
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.bo.buftype == "" end,
@@ -174,5 +151,5 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter", -- not `VeryLazy` so UI does not flicker
 	dependencies = "nvim-tree/nvim-web-devicons",
-	opts = lualineConfig,
+	opts = lualineOpts,
 }

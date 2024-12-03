@@ -1,3 +1,5 @@
+-- DOCS https://lazy.folke.io/configuration
+--------------------------------------------------------------------------------
 -- BOOTSTRAP https://lazy.folke.io/installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local lazyLocallyAvailable = vim.uv.fs_stat(lazypath) ~= nil
@@ -17,7 +19,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 
--- DOCS https://lazy.folke.io/configuration
 require("lazy").setup {
 	spec = { import = "plugin-configs" }, -- = use specs stored in `./lua/plugins`
 	defaults = { lazy = true },
@@ -50,7 +51,7 @@ require("lazy").setup {
 					local url = plug.url:gsub("%.git$", "")
 					local line = vim.api.nvim_get_current_line()
 					local issue = line:match("#(%d+)")
-					local commit = line:match(("%x"):rep(6) .. "+")
+					local commit = line:match(("%x"):rep(6) .. "+") -- `%x` = hex/hash char
 					if issue then
 						vim.ui.open(url .. "/issues/" .. issue)
 					elseif commit then
@@ -62,8 +63,8 @@ require("lazy").setup {
 		},
 	},
 	checker = {
-		enabled = true, -- automatically check for plugin updates
-		frequency = 60 * 60 * 24 * 7, -- = 7 days
+		enabled = true,
+		notify = false, -- using lualine component instead
 	},
 	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
