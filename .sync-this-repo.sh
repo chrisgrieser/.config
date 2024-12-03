@@ -22,7 +22,7 @@ i=0
 sleep 1.5 # prevent "Cannot rebase on multiple branches"
 while true; do
 	git pull --no-progress && git push --no-progress && return 0
-	sleep 2
+	sleep 1
 	i=$((i + 1))
 	[[ $i -gt 3 ]] && return 1
 done
