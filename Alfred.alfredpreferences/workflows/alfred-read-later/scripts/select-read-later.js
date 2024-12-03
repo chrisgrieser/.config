@@ -13,7 +13,7 @@ function readFile(path) {
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\;,[\]]/g, " ");
+	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
 	return [clean, str].join(" ") + " ";
 }
 

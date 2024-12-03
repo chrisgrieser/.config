@@ -13,7 +13,7 @@ function actions_in_repo {
 	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 }
 
-commit_msg="build: simplify release script"
+commit_msg="build: fix release script"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
