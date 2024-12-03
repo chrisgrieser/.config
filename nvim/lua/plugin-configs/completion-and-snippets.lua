@@ -42,7 +42,7 @@ return {
 							-- show completions from all buffers used within the last x minutes
 							get_bufnrs = function()
 								local mins = 15
-								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1 }
+								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
 								local recentBufs = vim.iter(allOpenBuffers)
 									:filter(function(buf) return os.time() - buf.lastused < mins * 60 end)
 									:map(function(buf) return buf.bufnr end)
