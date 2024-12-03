@@ -203,6 +203,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
+keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
 
 keymap({ "n", "x" }, "<D-s>", function()
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
@@ -218,11 +219,6 @@ keymap({ "n", "x" }, "<D-s>", function()
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 	end
 end, { desc = "󰆓 Save & Format" })
-
-keymap("n", "<leader>ol", function()
-	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰒕" })
-	vim.cmd.LspRestart()
-end, { desc = "󰒕 :LspRestart" })
 
 --------------------------------------------------------------------------------
 
