@@ -1,5 +1,4 @@
 local keymap = require("config.utils").uniqueKeymap
-local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 -- META
 
@@ -329,7 +328,7 @@ keymap(
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: restore default behavior of `<CR>` for qf buffers.",
 	pattern = "qf",
-	callback = function() bkeymap("n", "<CR>", "<CR>") end,
+	callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
 })
 
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
