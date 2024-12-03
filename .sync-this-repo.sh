@@ -6,11 +6,13 @@ cd "$(dirname "$0")" || return 1 # go to location of this script, i.e. going int
 
 # ADD & COMMIT
 files_changed="$(git status --porcelain | wc -l | tr -d ' ')"
-[[ $files_changed -eq 0 ]] && return 0
-git add --all || return 1
-
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-git commit --message="$device_name ($files_changed)" --author="🤖 automated<cron@job>" || return 1
+
+if [[ $files_changed -gt 0 ]] ; then
+	# do not exit when no changes, since there could still be changes to pull
+	git add --all
+	git commit --message="$device_name ($files_changed)" --author="🤖 automated<cron@job>"
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
 # PULL & PUSH
