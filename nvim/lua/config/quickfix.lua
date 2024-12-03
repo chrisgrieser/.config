@@ -13,9 +13,9 @@ keymap("n", "gq", function()
 	-- `vim.fn.execute` captures the output of a comment
 	local response = vim.fn.execute(atEnd and "cfirst" or "cnext")
 	local deletedIdx = response:match("%((%d+) of %d+%) %(line deleted%):")
-	if deletedIdx then table.insert(msg, 1, ("Item #%d already deleted."):format(deletedIdx)) end
+	if deletedIdx then table.insert(msg, ("Item #%d already deleted."):format(deletedIdx)) end
 	if #msg > 0 then
-		vim.notify(table.concat(msg, " "), vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
+		vim.notify(table.concat(msg, "\n"), vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
 	end
 end, { desc = " Next quickfix" })
 
