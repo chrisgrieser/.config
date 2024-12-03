@@ -3,7 +3,7 @@ local bkeymap = require("config.utils").bufKeymap
 --------------------------------------------------------------------------------
 -- META
 
-local pathOfThisFile = debug.getinfo(1).source:sub(2)
+local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
 local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
 keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
@@ -48,7 +48,7 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
 
--- Goto matching parenthesis (`remap` -> use builtin `MatchIt` plugin)
+-- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
 
 -- Diagnostics
