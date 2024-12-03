@@ -4,16 +4,17 @@
 # set -e
 github_username="chrisgrieser"
 
-repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
+	rm -f ./.github/workflows/nvim-typecheck.yml
+	cp -f "$HOME/Desktop/nvim-type-check.yml" ./.github/workflows/nvim-type-check.yml
 }
 
-commit_msg="build: fix release script"
+commit_msg="ci: trigger nvim-type-check only when lua files are pushed"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
