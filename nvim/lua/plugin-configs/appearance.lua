@@ -65,6 +65,28 @@ return {
 				-- this makes it that toggling this plugin also toggles conceallevel
 				conceallevel = { default = 0, rendered = 2 },
 			},
+			custom_handlers = {
+				html = {
+					parse = function(root, buf) ---@type fun(root: TSNode, buf: integer): render.md.Mark[]
+						local icon = ""
+						local query = vim.treesitter.query.parse("html", "(comment) @comment")
+						local marks = vim.iter(query:iter_captures(root, buf))
+							:fold({}, function(acc, id, node)
+								local capture = query.captures[id]
+								if capture ~= "comment" then return acc end
+								local startRow, startCol, endRow, endCol = node:range()
+								local mark = {
+									conceal = true,
+									start_row = startRow,
+									start_col = startCol,
+									opts = { end_row = endRow, end_col = endCol, conceal = icon },
+								}
+								return vim.list_extend(acc, { mark })
+							end)
+						return marks
+					end,
+				},
+			},
 		},
 	},
 	{ -- color previews & color picker
