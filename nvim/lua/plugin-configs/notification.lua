@@ -5,7 +5,7 @@
 ---@return snacks.notifier.Notif[]
 local function getHistory()
 	return require("snacks").notifier.get_history {
-		filter = function(n) return n.level ~= "trace" end,
+		filter = function(notif) return notif.level ~= "trace" end,
 		reverse = true,
 	}
 end
@@ -91,12 +91,13 @@ local function allNotifications()
 end
 
 local function messagesAsWin()
-	local messages = vim.fn.execute("messages")
+	local messages = vim.trim(vim.fn.execute("messages"))
 	if messages == "" then
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
 		return
 	end
-	local lines = vim.split(vim.trim(messages), "\n")
+	-- reversed, so recent messages are on top
+	local lines = vim.iter(vim.split(messages, "\n")):rev():totable()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	require("snacks").win {
