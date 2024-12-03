@@ -105,7 +105,8 @@ return {
 		keys = {
 			-- stylua: ignore start
 			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󰬞 inner subword" },
-			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = { "o", "x" }, desc = "󰬞 outer subword" },
+			{ "i<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = {"x","o"}, desc = "󰬞 inner subword" },
+			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = {"x","o"}, desc = "󰬞 outer subword" },
 
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = {"x","o"}, desc = " inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = {"x","o"}, desc = " outer value" },
