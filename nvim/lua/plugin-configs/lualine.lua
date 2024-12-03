@@ -66,10 +66,6 @@ local lualineOpts = {
 				cond = function() return vim.fn.reg_recording() ~= "" end,
 				color = "DiagnosticError",
 			},
-			{
-				require("lazy.status").updates,
-				cond = require("lazy.status").has_updates,
-			},
 		},
 	},
 	sections = {
