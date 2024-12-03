@@ -2,4 +2,4 @@
 - `vim.diagnostic.jump()`
 - `vim.lsp.buf.hover.Opts`
 - `vim.lsp.buf.signature_help.Opts`
-- potentially replace `nvim-ufo` with https://www.reddit.com/r/neovim/comments/1h34lr4/neovim_now_has_the_builtin_lsp_folding_support/
+- potentially replace `nvim-ufo` with <https://www.reddit.com/r/neovim/comments/1h34lr4/neovim_now_has_the_builtin_lsp_folding_support/>
