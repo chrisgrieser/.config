@@ -1,8 +1,14 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
 
+-- TODO FOR NEXT RELEASE
+
+-- 1. snippet reload function https://github.com/Saghen/blink.cmp/issues/428
+
+-- 2. annotations https://github.com/Saghen/blink.cmp/issues/427
 ---@diagnostic disable: missing-fields
--- PENDING https://github.com/Saghen/blink.cmp/issues/427
+
+--------------------------------------------------------------------------------
 
 return {
 	{ -- completion engine
@@ -47,30 +53,17 @@ return {
 					},
 				},
 			},
-			keymap = {
-				["<D-c>"] = { "show" },
-				["<S-CR>"] = { "cancel" },
-				["<CR>"] = { "select_and_accept", "fallback" },
-				["<Tab>"] = { "select_next", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<Down>"] = { "select_next", "fallback" },
-				["<Up>"] = { "select_prev", "fallback" },
-				["<PageDown>"] = { "scroll_documentation_down" },
-				["<PageUp>"] = { "scroll_documentation_up" },
-			},
 			completion = {
 				keyword = {
-					-- Remove `\`, so it does not trigger completion. Useful when
-					-- breaking up lines in bash/zsh.
+					-- Remove `\`, so it does not trigger completion. 
+					-- Useful when breaking up lines in bash/zsh.
 					regex = "[%w_-]",
 				},
 				list = {
-					-- cycle at bottom, but not at the top
-					cycle = { from_top = false },
+					cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				},
 				accept = {
-					-- experimental
-					auto_brackets = { enabled = true },
+					auto_brackets = { enabled = true }, -- experimental
 				},
 				documentation = {
 					auto_show = true,
@@ -106,6 +99,17 @@ return {
 						},
 					},
 				},
+			},
+			keymap = {
+				["<D-c>"] = { "show" },
+				["<S-CR>"] = { "cancel" },
+				["<CR>"] = { "select_and_accept", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<Up>"] = { "select_prev", "fallback" },
+				["<PageDown>"] = { "scroll_documentation_down" },
+				["<PageUp>"] = { "scroll_documentation_up" },
 			},
 			appearance = {
 				-- supported: tokyonight

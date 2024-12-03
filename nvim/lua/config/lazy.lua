@@ -29,7 +29,7 @@ require("lazy").setup {
 	},
 	install = {
 		-- load one of these during installation at startup
-		colorscheme = { "habamax", "tokyonight-moon", "dawnfox" },
+		colorscheme = { "tokyonight-moon", "dawnfox", "habamax" },
 	},
 	git = {
 		log = { "--since=7 days ago" }, -- Lazy log shows commits since last x days

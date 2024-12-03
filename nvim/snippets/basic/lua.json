@@ -92,7 +92,7 @@
     "prefix": "nodiscard"
   },
   "path of this file": {
-    "body": "local pathOfThisFile = debug.getinfo(1, \"S\").source:sub(2)--",
+    "body": "local pathOfThisFile = debug.getinfo(1, \"S\").source:sub(2)",
     "prefix": "path of this file"
   },
   "path separator (os-independent)": {
