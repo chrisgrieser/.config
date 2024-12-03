@@ -98,7 +98,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end
 
 		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 2500 }
-		local msg = ("[%s] %s "):format(clientName, text)
+		local msg = ("[%s] %s"):format(clientName, text)
 		vim.notify(msg, vim.log.levels.TRACE, opts)
 	end,
 })
