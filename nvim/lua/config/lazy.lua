@@ -33,8 +33,8 @@ require("lazy").setup {
 		colorscheme = { "tokyonight-moon", "dawnfox", "habamax" },
 	},
 	git = {
-		log = { "--since=7 days ago" }, -- Lazy log shows commits since last x days
-		cooldown = 120, -- seconds before a plugin is updated again
+		log = { "--since=4 days ago" }, -- Lazy log shows commits since last x days
+		cooldown = 180, -- seconds before a plugin is updated again
 	},
 	ui = {
 		title = " 󰒲 lazy.nvim ",
@@ -62,10 +62,7 @@ require("lazy").setup {
 			},
 		},
 	},
-	checker = {
-		enabled = true,
-		notify = false, -- using lualine component instead
-	},
+	checker = { enabled = true }, -- automatically check for plugin updates
 	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
 	readme = { enabled = false },
