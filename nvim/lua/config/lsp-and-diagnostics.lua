@@ -82,22 +82,26 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 vim.api.nvim_create_autocmd("LspProgress", {
 	desc = "User: LSP progress",
 	callback = function(ctx)
-		local progressIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
-
-		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
 		local progress = ctx.data.params.value
 		if not progress then return end
 
-		local icon = ""
-		local text = vim.trim((progress.title or "") .. " " .. (progress.message or ""))
-		if progress.kind ~= "end" then
-			local idx = progress.percentage and math.ceil(progress.percentage / 100 * #progressIcons) or 1
+		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
+		local text = progress.title or progress.message or ""
+		local msg = vim.trim(("[%s] %s"):format(clientName, text))
+
+		local icon
+		if progress.kind == "end" then
+			icon = ""
+		elseif progress.percentage then
+			local progIcons = { "󰋙", "󰫃", "󰫄", "󰫅", "󰫆", "󰫇", "󰫈" }
+			local idx = progress.percentage and math.ceil(progress.percentage / 100 * #progIcons) or 1
 			if progress.percentage == 0 then idx = 1 end
-			icon = progressIcons[idx]
+			icon = progIcons[idx]
+		else
+			icon = "󰔟"
 		end
 
 		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 2500 }
-		local msg = ("[%s] %s"):format(clientName, text)
 		vim.notify(msg, vim.log.levels.TRACE, opts)
 	end,
 })
