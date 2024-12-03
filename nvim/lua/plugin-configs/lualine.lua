@@ -94,17 +94,6 @@ local lualineOpts = {
 			},
 		},
 		lualine_y = {
-			{
-				"diff",
-				-- INFO Using gitsigns.nvim's data since lualine's builtin component
-				-- is updated much less frequently and is thus often out of sync
-				-- with the gitsigns in the signcolumn.
-				source = function()
-					local gs = vim.b.gitsigns_status_dict
-					if not gs then return end
-					return { added = gs.added, modified = gs.changed, removed = gs.removed }
-				end,
-			},
 			{ -- line count
 				function() return vim.api.nvim_buf_line_count(0) .. " " end,
 				cond = function() return vim.bo.buftype == "" end,

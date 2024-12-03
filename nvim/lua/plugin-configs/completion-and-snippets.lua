@@ -22,7 +22,8 @@ return {
 			sources = {
 				providers = {
 					snippets = {
-						-- don't show when triggered manually (= zero length), useful for JSON keys
+						-- don't show when triggered manually (= length 0), useful
+						-- when manually show completions to see available JSON keys
 						min_keyword_length = 1,
 						score_offset = -1,
 					},
@@ -38,16 +39,17 @@ return {
 						max_items = 4,
 						min_keyword_length = 4,
 						score_offset = -3,
+
+						-- show completions from all buffers used within the last x minutes
 						opts = {
-							-- show completions from all buffers used within the last x minutes
 							get_bufnrs = function()
 								local mins = 15
 								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
 								local recentBufs = vim.iter(allOpenBuffers)
 									:filter(function(buf)
 										local recentlyUsed = os.time() - buf.lastused < (60 * mins)
-										local valid = vim.api.nvim_buf_is_valid(buf.bufnr)
-										return recentlyUsed and valid
+										local nonSpecial = vim.bo[buf.bufnr].buftype == ""
+										return recentlyUsed and nonSpecial
 									end)
 									:map(function(buf) return buf.bufnr end)
 									:totable()

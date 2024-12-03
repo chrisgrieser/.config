@@ -73,6 +73,25 @@ return {
 				changedelete = { show_count = true },
 			},
 		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
+
+			-- INFO Using gitsigns.nvim's data since lualine's builtin component
+			-- is updated much less frequently and is thus often out of sync
+			-- with the gitsigns in the signcolumn.
+			vim.g.lualine_add("sections", "lualine_y", {
+				"diff",
+				source = function()
+					local gs = vim.b.gitsigns_status_dict
+					if not gs then return end
+					return { added = gs.added, modified = gs.changed, removed = gs.removed }
+				end,
+			}, "before")
+			vim.g.lualine_add("sections", "lualine_y", {
+				function() return "" end,
+				cond = function() return vim.b.gitsignsPrevChanges end,
+			}, "before")
+		end,
 		keys = {
 			-- stylua: ignore start
 			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
