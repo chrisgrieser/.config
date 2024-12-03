@@ -8,6 +8,9 @@
 -- 2. annotations https://github.com/Saghen/blink.cmp/issues/427
 ---@diagnostic disable: missing-fields
 
+-- 3. uncomment `get_bufnrs`
+-- https://github.com/Saghen/blink.cmp/issues/433
+
 --------------------------------------------------------------------------------
 
 return {
@@ -42,19 +45,19 @@ return {
 
 						-- show completions from all buffers used within the last x minutes
 						opts = {
-							get_bufnrs = function()
-								local mins = 15
-								local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
-								local recentBufs = vim.iter(allOpenBuffers)
-									:filter(function(buf)
-										local recentlyUsed = os.time() - buf.lastused < (60 * mins)
-										local nonSpecial = vim.bo[buf.bufnr].buftype == ""
-										return recentlyUsed and nonSpecial
-									end)
-									:map(function(buf) return buf.bufnr end)
-									:totable()
-								return recentBufs
-							end,
+							-- get_bufnrs = function()
+							-- 	local mins = 15
+							-- 	local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
+							-- 	local recentBufs = vim.iter(allOpenBuffers)
+							-- 		:filter(function(buf)
+							-- 			local recentlyUsed = os.time() - buf.lastused < (60 * mins)
+							-- 			local nonSpecial = vim.bo[buf.bufnr].buftype == ""
+							-- 			return recentlyUsed and nonSpecial
+							-- 		end)
+							-- 		:map(function(buf) return buf.bufnr end)
+							-- 		:totable()
+							-- 	return recentBufs
+							-- end,
 						},
 					},
 				},
