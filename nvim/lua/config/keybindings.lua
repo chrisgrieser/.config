@@ -158,6 +158,7 @@ for _, value in pairs(textobjRemaps) do
 end
 
 -- special remaps
+keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
