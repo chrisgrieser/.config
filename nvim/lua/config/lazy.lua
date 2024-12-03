@@ -62,7 +62,10 @@ require("lazy").setup {
 			},
 		},
 	},
-	checker = { enabled = true }, -- automatically check for plugin updates
+	checker = {
+		enabled = true, -- automatically check for plugin updates
+		frequency = 60 * 60 * 24 * 7, -- = 7 days
+	},
 	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
 	readme = { enabled = false },
