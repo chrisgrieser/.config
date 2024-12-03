@@ -61,7 +61,6 @@ return {
 						:gsub("(%w)%(%)$", "%1") -- remove empty `()`
 						:gsub("^function", "")
 						:gsub("^def", "") -- python
-						:gsub(vim.pesc(vim.bo.commentstring:gsub(" ?%%s", "")), "")
 				end,
 			}
 			if not text then return "" end

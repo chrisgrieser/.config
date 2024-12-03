@@ -1,5 +1,4 @@
--- DOCS Snacks.notifier
--- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
+-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
 ---@return snacks.notifier.Notif[]
