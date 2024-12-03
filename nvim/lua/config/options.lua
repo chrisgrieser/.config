@@ -13,7 +13,7 @@ vim.opt.splitbelow = true -- split down instead of up
 
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "+1" -- one more than textwidth
-vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "yes:2" -- too much potential signs for just 1
 
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
