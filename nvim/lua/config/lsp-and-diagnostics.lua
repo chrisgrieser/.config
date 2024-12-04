@@ -40,7 +40,7 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 	if result then
 		local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
 		local text = result.contents.value
-		local urls = text:gmatch("%l%l%l-://[A-Za-z0-9_%-/.#%%=?&'@+*:]+")
+		local urls = text:gmatch("%l%l%l-://%S+")
 		for url in urls do
 			if not vim.tbl_contains(ignoredUrls, url) then
 				vim.ui.open(url)

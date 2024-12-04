@@ -87,6 +87,7 @@ style = "fg:red bold bg:black"
 
 [git_state] # conflicts or rebasing
 style = 'fg:yellow bold bg:black'
+format = ' \([$state( $progress_current/$progress_total)]($style)\)'
 
 [git_commit] # checkout
 style = "fg:purple bg:black bold"
