@@ -103,11 +103,18 @@ return {
 	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
 		keys = {
-			-- stylua: ignore start
-			{ "<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = "o", desc = "󰬞 inner subword" },
-			{ "i<Space>", "<cmd>lua require('various-textobjs').subword('inner')<CR>", mode = {"x","o"}, desc = "󰬞 inner subword" },
-			{ "a<Space>", "<cmd>lua require('various-textobjs').subword('outer')<CR>", mode = {"x","o"}, desc = "󰬞 outer subword" },
+			{
+				"<Space>",
+				function()
+					-- for deletions use the outer subword, otherwise the inner
+					local scope = vim.v.operator == "d" and "outer" or "inner"
+					require("various-textobjs").subword(scope)
+				end,
+				mode = "o",
+				desc = "󰬞 subword",
+			},
 
+			-- stylua: ignore start
 			{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = {"x","o"}, desc = " inner value" },
 			{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = {"x","o"}, desc = " outer value" },
 			{ "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>", mode = {"x","o"}, desc = "󰌆 outer key" },
