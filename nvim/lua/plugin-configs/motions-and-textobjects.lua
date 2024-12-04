@@ -187,7 +187,7 @@ return {
 					local changeFound = vim.fn.mode() == "v"
 					if changeFound then vim.cmd.normal { ">", bang = true } end
 				end,
-				desc = " Indent last paste",
+				desc = "󰉶 Indent last paste",
 			},
 			{ -- indent last paste
 				"\\", -- shift-^ on my keyboard
@@ -196,7 +196,7 @@ return {
 					local changeFound = vim.fn.mode() == "v"
 					if changeFound then vim.cmd.normal { "<", bang = true } end
 				end,
-				desc = " Dedent last paste",
+				desc = "󰉵 Dedent last paste",
 			},
 			{ -- delete surrounding indentation
 				"dsi",
@@ -252,6 +252,17 @@ return {
 					end
 				end,
 				desc = " Open next URL",
+			},
+			{ -- open URL (forward seeking)
+				"N",
+				mode = "o",
+				function()
+					local charwise = require("various-textobjs.textobjs.charwise")
+					local pattern = "().(%S+%s*)$"
+					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
+					charwise.selectFromCursorTo({ row, endCol }, 0)
+				end,
+				desc = "󰬞 up to last WORD",
 			},
 		},
 	},
