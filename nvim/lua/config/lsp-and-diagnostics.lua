@@ -36,17 +36,34 @@ end
 -- `vim.lsp.buf.hover` opens url if present, otherwise opens regular hover win
 local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
 vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
-	-- open url if present
-	if result then
-		local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
-		local text = result.contents.value
-		local urls = text:gmatch("%l%l%l-://%S+")
-		for url in urls do
-			if not vim.tbl_contains(ignoredUrls, url) then
-				vim.ui.open(url)
-				return
-			end
+	-- GUARD
+	if err then
+		vim.notify(err, vim.log.levels.ERROR)
+		return
+	elseif not result then
+		vim.notify("No hover info available.")
+		return
+	end
+
+	-- open URL if present
+	local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
+	local text = result.contents.value
+	local urls = text:gmatch("%l%l%l-://%S+")
+	for url in urls do
+		if not vim.tbl_contains(ignoredUrls, url) then
+			vim.ui.open(url)
+			return
 		end
+	end
+
+	-- if information-poor one-liner, open Treesitter's peek-definition as well
+	-- as the original hover as notification
+	local _, lineBreaks = result.contents.value:gsub("\n", "")
+	local lineCount = lineBreaks + 1 - 2 -- -2 for markdown code fence
+	if lineCount < 3 and vim.cmd.TSTextobjectPeekDefinitionCode then
+		vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer")
+		vim.notify(result.contents.value, nil, { icon = "󰋽", title = "LSP Hover" })
+		return
 	end
 
 	-- use original handler with some extra settings
@@ -86,7 +103,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		if not progress then return end
 
 		local clientName = vim.lsp.get_client_by_id(ctx.data.client_id).name
-		local text = progress.title or progress.message or ""
+		local text = (progress.title or progress.message or ""):gsub("%.%.%.", "…")
 		local msg = vim.trim(("[%s] %s"):format(clientName, text))
 
 		local icon
