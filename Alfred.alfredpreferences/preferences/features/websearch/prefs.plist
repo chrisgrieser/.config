@@ -37,17 +37,6 @@
 			<key>url</key>
 			<string>https://scholar.google.com/scholar?q={query}</string>
 		</dict>
-		<key>3E15C132-29BC-4928-9B38-5755966C1047</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Perplexity: {query}</string>
-			<key>url</key>
-			<string>https://www.perplexity.ai/search?s=o&amp;q={query}</string>
-		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
 			<key>enabled</key>
@@ -103,17 +92,6 @@
 			<key>url</key>
 			<string>https://findxkcd.com/?xkcd%5Bquery%5D={query}</string>
 		</dict>
-		<key>8B9CDD80-A215-4C45-A4AA-36E352DB90E1</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>Phind: {query}</string>
-			<key>url</key>
-			<string>https://www.phind.com/search?q={query}</string>
-		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>
 			<key>enabled</key>
@@ -124,17 +102,6 @@
 			<string>Kickass Torrents: {query}</string>
 			<key>url</key>
 			<string>https://kickasstorrents.to/usearch/{query}</string>
-		</dict>
-		<key>91472C2C-734F-4060-A84D-17248EC15509</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>ChatGPT: {query}</string>
-			<key>url</key>
-			<string>https://chatgpt.com?q={query}</string>
 		</dict>
 		<key>A60A3A72-DF83-430C-9ED0-4FF026EC0E5F</key>
 		<dict>
@@ -225,5 +192,7 @@
 			<string>https://github.com/search?type=code&amp;q={query}</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
