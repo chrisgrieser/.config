@@ -54,10 +54,11 @@ return {
 			render_modes = { "n", "c", "i", "v", "V" },
 			sign = { enabled = false },
 			html = {
-				conceal_comments = false, -- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/244#issuecomment-2517132570
+				comment = { text = "󰆈" },
 			},
 			heading = {
 				position = "inline", -- remove indentation of headings
+				icons = { "󰲠 ", "󰲢 ", "󰲤 ", "󰲦 ", "󰲨 ", "󰲪 " },
 			},
 			bullet = {
 				icons = { "▪️", "▫️", "•", "◦" },
