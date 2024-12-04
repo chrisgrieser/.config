@@ -53,7 +53,7 @@ return {
 		opts = {
 			render_modes = { "n", "c", "i", "v", "V" },
 			sign = { enabled = false },
-			heading = { icons = {} }, -- disables icons
+			-- heading = { icons = {} }, -- disables icons
 			bullet = {
 				icons = { "▪️", "▫️", "•", "◦" },
 			},
@@ -62,30 +62,8 @@ return {
 				position = "left",
 			},
 			win_options = {
-				-- this makes it that toggling this plugin also toggles conceallevel
+				-- makes toggling this plugin also toggle conceallevel
 				conceallevel = { default = 0, rendered = 2 },
-			},
-			custom_handlers = {
-				html = {
-					parse = function(root, buf) ---@type fun(root: TSNode, buf: integer): render.md.Mark[]
-						local icon = ""
-						local query = vim.treesitter.query.parse("html", "(comment) @comment")
-						local marks = vim.iter(query:iter_captures(root, buf))
-							:fold({}, function(acc, id, node)
-								local capture = query.captures[id]
-								if capture ~= "comment" then return acc end
-								local startRow, startCol, endRow, endCol = node:range()
-								local mark = {
-									conceal = true,
-									start_row = startRow,
-									start_col = startCol,
-									opts = { end_row = endRow, end_col = endCol, conceal = icon },
-								}
-								return vim.list_extend(acc, { mark })
-							end)
-						return marks
-					end,
-				},
 			},
 		},
 	},
