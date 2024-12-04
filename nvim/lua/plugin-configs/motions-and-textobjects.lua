@@ -244,22 +244,6 @@ return {
 				end,
 				desc = " Open next URL",
 			},
-			{
-				"<D-U>",
-				function()
-					local urlPattern = require("various-textobjs.charwise-textobjs").urlPattern
-					local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-					for _, line in ipairs(lines) do
-						local url = line:match(urlPattern)
-						if url then
-							vim.ui.open(url)
-							return
-						end
-					end
-					vim.notify("No URL found in file.", vim.log.levels.WARN)
-				end,
-				desc = " Open first URL in file",
-			},
 		},
 	},
 }

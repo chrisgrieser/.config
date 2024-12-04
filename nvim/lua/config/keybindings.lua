@@ -57,6 +57,18 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
+keymap("n", "<D-U>", function()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in ipairs(lines) do
+		local url = line:match("%l%l%l-://%S+")
+		if url then
+			vim.ui.open(url)
+			return
+		end
+	end
+	vim.notify("No URL found in file.", vim.log.levels.WARN)
+end, { desc = " Open first URL in file" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 
