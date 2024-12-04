@@ -6,8 +6,9 @@
 -- https://github.com/monkoose/neocodeium
 --------------------------------------------------------------------------------
 
+-- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
 return {
-	{ -- lua alternative to the official codeium.vim plugin https://github.com/Exafunction/codeium.vim
+	{
 		"monkoose/neocodeium",
 		event = "InsertEnter",
 		cmd = "NeoCodeium",
@@ -38,8 +39,11 @@ return {
 
 			-- lualine indicator
 			vim.g.lualine_add("sections", "lualine_x", function()
-				-- number meanings: https://github.com/monkoose/neocodeium?tab=readme-ov-file#-statusline
 				if vim.bo.buftype ~= "" then return "" end
+				-- don't need info that it's disabled during a recording
+				if vim.fn.reg_recording() ~= "" then return "" end
+
+				-- number meanings: https://github.com/monkoose/neocodeium?tab=readme-ov-file#-statusline
 				local status, server = require("neocodeium").get_status()
 				if status == 0 and server == 0 then return "" end -- working correctly = no component
 				if server == 1 then return "󱙺 connecting…" end

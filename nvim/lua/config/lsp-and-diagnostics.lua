@@ -56,10 +56,10 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 		end
 	end
 
-	-- if information-poor one-liner, open Treesitter's peek-definition as well
-	-- as the original hover as notification
+	-- if information-poor oneliner, open Treesitter's peek-definition. 
+	-- (Still displays original hover info as notification in case it was useful.)
 	local _, lineBreaks = result.contents.value:gsub("\n", "")
-	local lineCount = lineBreaks + 1 - 2 -- -2 for markdown code fence
+	local lineCount = lineBreaks + 1 - 2 -- minus 2 for markdown code fence
 	if lineCount < 3 and vim.cmd.TSTextobjectPeekDefinitionCode then
 		vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer")
 		vim.notify(result.contents.value, nil, { icon = "󰋽", title = "LSP Hover" })
