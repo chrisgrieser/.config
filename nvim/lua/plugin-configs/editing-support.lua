@@ -224,7 +224,7 @@ return {
 
 				-- Hammerspoon
 				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
-				sound = { lua = 'hs.sound.getByName("Sosumi"):play() -- {{marker}}' },
+				sound = { lua = 'hs.sound.getByName("Sosumi"):play() ---@diagnostic disable-line: undefined-field -- 🪚' },
 			},
 		},
 		config = function(_, opts)

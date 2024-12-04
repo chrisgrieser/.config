@@ -12,7 +12,7 @@ optl.listchars:append { multispace = "·" }
 
 -- since markdown has rarely indented lines, and also rarely has overlong lines,
 -- move everything a bit more to the right
-if vim.bo.buftype == "" then optl.signcolumn = "yes:3" end
+if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 --------------------------------------------------------------------------------
 
@@ -42,8 +42,8 @@ bkeymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true }
 -- HEADINGS
 
 -- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next Heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev Heading" })
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
 ---@param dir 1|-1
 local function headingsIncremantor(dir)
@@ -63,8 +63,8 @@ local function headingsIncremantor(dir)
 end
 
 -- <D-h> remapped to <D-ö>, PENDING https://github.com/neovide/neovide/issues/2558
-bkeymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment Heading" })
-bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement Heading" })
+bkeymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
+bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
@@ -73,10 +73,10 @@ bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decr
 bkeymap("n", "<leader>xx", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
 
 -- Format Table
-bkeymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format Table under Cursor" })
+bkeymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 -- cmd+u: markdown bullet
-bkeymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet List" })
+bkeymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet list" })
 
 -- cmd+k: markdown link
 bkeymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })

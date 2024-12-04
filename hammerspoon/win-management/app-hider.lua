@@ -48,7 +48,6 @@ local config = {
 
 --------------------------------------------------------------------------------
 
--- unhide all apps
 local function unHideAll()
 	if u.appRunning(config.disableHidingWhileActive) then return end
 	local wins = hs.window.allWindows()
