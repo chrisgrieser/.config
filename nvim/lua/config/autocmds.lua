@@ -1,5 +1,5 @@
 -- SYNC TERMINAL BACKGROUND
--- SOURCE https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
+-- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
 if vim.fn.has("gui_running") == 0 then
 	local termBgModified = false
@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FocusGained", {
-	desc = "User: FIX cwd being not available when it is deleted outside nvim.",
+	desc = "User: FIX `cwd` being not available when it is deleted outside nvim.",
 	callback = function()
 		if not vim.uv.cwd() then vim.uv.chdir("/") end
 	end,
@@ -106,25 +106,23 @@ vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Close all non-existing buffers on `FocusGained`.",
 	callback = function()
 		local closedBuffers = {}
-		vim.iter(vim.api.nvim_list_bufs())
-			:filter(function(bufnr)
-				local valid = vim.api.nvim_buf_is_valid(bufnr)
-				local loaded = vim.api.nvim_buf_is_loaded(bufnr)
-				if not valid or not loaded then return false end
-				local bufPath = vim.api.nvim_buf_get_name(bufnr)
-				local doesNotExist = vim.uv.fs_stat(bufPath) == nil
-				local notSpecialBuffer = vim.bo[bufnr].buftype == ""
-				local notNewBuffer = bufPath ~= ""
-				return doesNotExist and notSpecialBuffer and notNewBuffer
-			end)
-			:each(function(bufnr)
-				local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
-				table.insert(closedBuffers, bufName)
-				vim.api.nvim_buf_delete(bufnr, { force = false })
-			end)
-		if #closedBuffers == 0 then return end
+		vim.iter(vim.api.nvim_list_bufs()):each(function(bufnr)
+			local valid = vim.api.nvim_buf_is_valid(bufnr)
+			local loaded = vim.api.nvim_buf_is_loaded(bufnr)
+			if not valid or not loaded then return end
+			local bufPath = vim.api.nvim_buf_get_name(bufnr)
+			local stillExists = vim.uv.fs_stat(bufPath) ~= nil
+			local specialBuffer = vim.bo[bufnr].buftype ~= ""
+			local newBuffer = bufPath == ""
+			if stillExists or specialBuffer and newBuffer then return end
 
-		if #closedBuffers == 1 then
+			local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+			table.insert(closedBuffers, bufName)
+			vim.api.nvim_buf_delete(bufnr, { force = false })
+		end)
+		if #closedBuffers == 0 then
+			return
+		elseif #closedBuffers == 1 then
 			vim.notify(closedBuffers[1], nil, { title = "Buffer closed", icon = "󰅗" })
 		else
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
@@ -332,12 +330,12 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 
 --------------------------------------------------------------------------------
 -- FAVICON PREFIXES FOR URLS
--- inspired by the Obsidian favicon plugin:
+-- inspired by the Obsidian favicon plugin: https://github.com/joethei/obsidian-link-favicon
 
 -- REQUIRED
--- 1. comment parser (`:TSInstall comment`) and active parser for the current
+-- 1. `comment` parser (`:TSInstall comment`) and active parser for the current
 -- buffer (e.g., in a lua buffer, the lua parser is required)
--- 2. Nerdfont icon
+-- 2. Nerdfont icons
 
 local faviconConfig = {
 	hlGroup = "Comment",
@@ -361,7 +359,7 @@ local function addFavicons(bufnr)
 	local hasParserForFt, _ = pcall(vim.treesitter.get_parser, bufnr)
 	if not hasParserForFt then return end
 
-	local ns = vim.api.nvim_create_namespace("favicon")
+	local ns = vim.api.nvim_create_namespace("url-favicons")
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
 	local langTree = vim.treesitter.get_parser(bufnr)
@@ -382,10 +380,11 @@ local function addFavicons(bufnr)
 	end)
 end
 -- deferred so treesitter is ready
-vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "InsertLeave" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "InsertLeave" }, {
 	desc = "User: Add favicons to urls",
 	callback = function(ctx)
-		vim.defer_fn(function() addFavicons(ctx.buf) end, 200)
+		local delay = ctx.event == "BufReadPost" and 200 or 0
+		vim.defer_fn(function() addFavicons(ctx.buf) end, delay)
 	end,
 })
 vim.defer_fn(addFavicons, 200)
