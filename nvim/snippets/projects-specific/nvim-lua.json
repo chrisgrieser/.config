@@ -63,7 +63,7 @@
   },
   "current line": {
     "body": "vim.api.nvim_get_current_line()",
-    "prefix": "current line"
+    "prefix": "get current line"
   },
   "defer": {
     "body": [
@@ -124,11 +124,23 @@
     ]
   },
   "set current line": {
-    "body": "vim.api.nvim_set_current_line(updatedLine)",
+    "body": "vim.api.nvim_set_current_line($0)",
     "prefix": "set current line"
   },
   "vim.notify": {
     "body": "vim.notify(${1:msg}, vim.log.levels.${2:level}, { title = ${3:title}, icon = ${4:icon} })",
     "prefix": "vim.notify"
+  },
+  "vim.ui.input + ui.input": {
+    "body": [
+      "vim.ui.input({ prompt = \"${1:text}\" }, function(input)",
+      "\tif not input or input == \"\" then return end",
+      "\t$0",
+      "end)"
+    ],
+    "prefix": [
+      "vim.ui.input",
+      "ui.input"
+    ]
   }
 }

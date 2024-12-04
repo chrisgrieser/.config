@@ -294,7 +294,6 @@ sketchybar
 stacktrace
 statusline
 subreddits
-textobject
 treesitter
 unindented
 whitespace
@@ -318,7 +317,6 @@ habitualize
 idempotency
 lspProgress
 stringified
-textobjects
 stacktraces
 YTranscript
 AppleScript
