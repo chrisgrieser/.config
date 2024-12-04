@@ -33,7 +33,8 @@ local function openNotif(idx)
 	local title = vim.trim((notif.icon or "") .. " " .. (notif.title or ""))
 	local height = math.min(#lines + 2, math.ceil(vim.o.lines * maxHeight))
 	local longestLine = vim.iter(lines):fold(0, function(acc, line) return math.max(acc, #line) end)
-	local width = math.min(#title + 3, longestLine + 3, math.ceil(vim.o.columns * maxWidth))
+	longestLine = math.max(longestLine, #title)
+	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * maxWidth))
 	local overflow = #lines + 2 - height -- +2 for border
 	local footer = overflow > 0 and (" ↓ %d lines "):format(overflow) or nil
 
