@@ -38,8 +38,8 @@ local function showAndMoveOrHide(win)
 	local winNotFrontmost = win:id() ~= frontWin:id()
 	if winNotFrontmost then return end
 
-	-- SHOW & MOVE TO SIDE if other window is pseudo-maximized or centered
-	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
+	-- SHOW & MOVE TO SIDE if left half of screen is empty
+	if not (wu.winHasSize(win, hs.layout.maximized) or wu.winHasSize(win, hs.layout.left50)) then
 		moveToSide()
 		return
 	end
@@ -58,6 +58,13 @@ M.wf_someWindowActivity = wf
 	:subscribe(wf.windowMoved, showAndMoveOrHide)
 	:subscribe(wf.windowFocused, showAndMoveOrHide)
 	:subscribe(wf.windowCreated, showAndMoveOrHide)
+
+-- redundancy to `windowFocused`, which is for some reason not always triggered
+M.aw_windowActivation = aw.new(function(appName, event, _appObj)
+	if appName ~= "Ivory" and event == aw.activated then
+		showAndMoveOrHide(hs.window.focusedWindow())
+	end
+end):start()
 
 --------------------------------------------------------------------------------,
 -- FALLTHROUGH

@@ -134,9 +134,9 @@ M.serverConfigs.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
-				callSnippet = "Both",
-				keywordSnippet = "Both",
-				showWord = "Disable", -- don't suggest common words as fallback
+				callSnippet = "Disable", -- functions -> no replace snippet
+				keywordSnippet = "Replace", -- keywords -> replace
+				showWord = "Disable", -- already done completion plugin
 				workspaceWord = false, -- already done completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
 			},
