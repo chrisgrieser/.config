@@ -56,6 +56,17 @@ return {
 					},
 				},
 			},
+			keymap = {
+				["<D-c>"] = { "show" },
+				["<S-CR>"] = { "cancel" },
+				["<CR>"] = { "select_and_accept", "fallback" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<Up>"] = { "select_prev", "fallback" },
+				["<PageDown>"] = { "scroll_documentation_down" },
+				["<PageUp>"] = { "scroll_documentation_up" },
+			},
 			completion = {
 				keyword = {
 					-- Remove `\`, so it does not trigger completion.
@@ -95,7 +106,7 @@ return {
 
 									-- use source-specific icons, and `kind_icon` only for items from LSPs
 									local sourceIcons =
-										{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "󰈔" }
+										{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "" }
 									return sourceIcons[source] or ctx.kind_icon
 								end,
 							},
@@ -103,23 +114,16 @@ return {
 					},
 				},
 			},
-			keymap = {
-				["<D-c>"] = { "show" },
-				["<S-CR>"] = { "cancel" },
-				["<CR>"] = { "select_and_accept", "fallback" },
-				["<Tab>"] = { "select_next", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<Down>"] = { "select_next", "fallback" },
-				["<Up>"] = { "select_prev", "fallback" },
-				["<PageDown>"] = { "scroll_documentation_down" },
-				["<PageUp>"] = { "scroll_documentation_up" },
-			},
 			appearance = {
 				-- supported: tokyonight
 				-- not supported: nightfox, gruvbox-material
 				use_nvim_cmp_as_default = true,
 				kind_icons = {
-					Text = "",
+					-- different icons of the corresponding source
+					Text = "󰦨", -- `buffer`
+					Snippet = "ﲖ", -- `snippets`
+					File = "", -- `path`
+					Folder = "󰉋",
 					Method = "󰊕",
 					Function = "󰡱",
 					Constructor = "",
@@ -133,11 +137,8 @@ return {
 					Value = "󰎠",
 					Enum = "",
 					Keyword = "󰌋",
-					Snippet = "󰒕", -- should indicate it's from the LSP
 					Color = "󰏘",
 					Reference = "",
-					File = "", -- if from LSP, it's a module
-					Folder = "󰉋",
 					EnumMember = "",
 					Constant = "󰏿",
 					Struct = "󰙅",
