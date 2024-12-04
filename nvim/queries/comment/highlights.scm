@@ -4,9 +4,9 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; add more comments tags -> https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm
-; PENDING GUARD REQUIRED VALIDATE TEMP
+; PENDING GUARD REQUIRED VALIDATE TEMP DEBUG
 ("text" @comment.todo
- (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "VALIDATE" "TEMP"))
+ (#any-of? @comment.todo "PENDING" "GUARD" "REQUIRED" "VALIDATE" "TEMP" "DEBUG"))
 
 ; CONFIG SOURCE DATA EXAMPLE IMPORTANT
 ("text" @comment.note
