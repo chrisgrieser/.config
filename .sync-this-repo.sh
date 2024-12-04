@@ -10,7 +10,7 @@ device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 files_changed="$(git status --porcelain | wc -l | tr -d ' ')"
 if [[ $files_changed -gt 0 ]] ; then
 	git add --all
-	git commit --message="$device_name ($files_changed)" --author="🤖 automated<cron@job>" || 
+	git commit --message="$device_name ($files_changed)" --author="🤖 automated<cron@job>" ||
 		return 1
 fi
 
