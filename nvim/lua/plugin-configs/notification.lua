@@ -123,22 +123,11 @@ local function overrideDefaultPrintFuncs()
 	---@diagnostic disable: duplicate-set-field deliberate overrides
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
-		local opts = { title = "Print", icon = "󰐪" }
-		if msg:find("^%[nvim%-treesitter%]") then
-			opts = { icon = "", id = "ts-install", style = "minimal" }
-		end
-		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
+		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
 	end
 	vim.api.nvim_echo = function(chunks, _, _)
 		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join("")
-		local opts = { title = "Echo", icon = "" }
-		local severity = "DEBUG"
-		if msg:lower():find("hunk") then
-			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
-			opts = { icon = "󰊢", id = "gitsigns_nav_hunk", style = "minimal" }
-			severity = "TRACE"
-		end
-		vim.notify(vim.trim(msg), vim.log.levels[severity], opts)
+		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Echo", icon = "" })
 	end
 
 	-----------------------------------------------------------------------------
@@ -165,18 +154,30 @@ local function overrideDefaultPrintFuncs()
 	---@diagnostic enable: duplicate-set-field
 end
 
-local function silenceMessages()
-	-- by overriding snacks' override
+local function overrideNotify()
+	-- by overriding snacks' override, we can filter/modify some messages
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
-
 		-- due to the custom formatter in `typescript.lua` using code-actions
 		if msg:find("^No code actions available") then return end
 
-		return require("snacks").notifier.notify(msg, level, opts)
-	end
+		if opts.title == "mason-tool-installer" or opts.title == "mason.nvim" then
+			opts = { icon = "", id = "mason", style = "minimal" }
+			msg = msg:gsub("^([%w-]+):", "[%1]"):gsub('^"([%w-]+)"', "[%1]") -- for markdown highlight
+		elseif msg:find("^%[nvim%-treesitter%]") then
+			opts = { icon = "", id = "ts-install", style = "minimal" }
+		elseif msg:lower():find("hunk") then
+			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
+			opts = { icon = "󰊢", id = "gitsigns-hunk-nav", style = "minimal" }
+			level = vim.log.levels.INFO
+		end
 
+		return require("snacks").notifier(msg, level, opts)
+	end
+end
+
+local function silenceMessages()
 	-- "E486: pattern not found"
 	-- (yes, all this is needed to have `cmdheight=0` & avoid the "Press Enter" prompt)
 	local function notFoundNotify(query)
@@ -223,8 +224,9 @@ end
 return {
 	"folke/snacks.nvim",
 	event = "VeryLazy",
-	config = function(_, opts)
+	config = function(_spec, opts)
 		require("snacks").setup(opts)
+		overrideNotify()
 		overrideDefaultPrintFuncs()
 		silenceMessages()
 	end,
