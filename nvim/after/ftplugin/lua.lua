@@ -11,6 +11,17 @@ abbr("!==", "~=")
 abbr("=~", "~=") -- shell uses `=~`
 abbr("===", "==")
 
+bkeymap("i", "+", function ()
+	vim.api.nvim_feedkeys("+", "n", true) -- pass through the trigger char
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	local charBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
+	if charBeforeCursor ~= "+" then return end
+
+	local line = vim.api.nvim_get_current_line()
+	
+	vim.api.nvim_set_current_line(line)
+end)
+
 --------------------------------------------------------------------------------
 
 -- auto-comma for tables
@@ -45,7 +56,7 @@ bkeymap("n", "<leader>ci", function()
 	table.sort(matches)
 	local uniqMatches = vim.fn.uniq(matches) ---@cast uniqMatches string[]
 
-	-- sort by length of varname 
+	-- sort by length of varname
 	-- (enuring uniqueness needs separate sorting, since this one does not ensure
 	-- ensure same items are next to each other)
 	table.sort(uniqMatches, function(a, b)
