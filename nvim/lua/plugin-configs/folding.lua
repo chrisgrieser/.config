@@ -9,7 +9,7 @@ return {
 		dependencies = "kevinhwang91/promise-async",
 		event = "UIEnter", -- needed for folds to load in time and comments being closed
 		keys = {
-			{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold capabilities" },
+			{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold info" },
 			{ "zm", function() require("ufo").closeAllFolds() end, desc = "󱃄 Close all folds" },
 			{
 				"zr",
@@ -24,7 +24,7 @@ return {
 		init = function()
 			-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
 			-- auto-closing them after leaving insert mode, however ufo does not seem to
-			-- have equivalents for zr and zm because there is no saved fold level.
+			-- have equivalents for `zr` and `zm` because there is no saved fold level.
 			-- Consequently, the vim-internal fold levels need to be disabled by setting
 			-- them to 99.
 			vim.opt.foldlevel = 99
