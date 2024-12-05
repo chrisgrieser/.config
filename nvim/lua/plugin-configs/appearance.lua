@@ -164,7 +164,13 @@ return {
 				prefer_width = 45,
 				min_width = 0.4,
 				max_width = 0.8,
-				mappings = { n = { ["q"] = "Close" } },
+				mappings = {
+					n = {
+						["q"] = "Close",
+						["<Up>"] = "HistoryPrev",
+						["<Down>"] = "HistoryNext",
+					},
+				},
 			},
 			select = {
 				trim_prompt = true,
@@ -192,6 +198,19 @@ return {
 						}
 					end
 				end,
+				format_item_override = {
+					-- display kind and client name next to code action
+					codeaction = function(item)
+						vim.api.nvim_create_autocmd("FileType", {
+							desc = "User: Add highlighting to `DressingSelect` for code actions",
+							pattern = "DressingSelect",
+							once = true,
+							callback = function(ctx) vim.treesitter.start(ctx.buf, "markdown") end,
+						})
+						local client = (vim.lsp.get_client_by_id(item.ctx.client_id) or {}).name
+						return ("%s [%s/%s]"):format(item.action.title, item.action.kind, client)
+					end,
+				},
 			},
 		},
 	},
