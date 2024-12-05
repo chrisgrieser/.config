@@ -3,13 +3,14 @@
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
-table-of-contents: false
-number-sections: true
-shift-heading-level-by: -1
+number-sections: false
+table-of-contents: true
 
-reference-doc: templates/academic-paper.docx
-citeproc: true
-bibliography: ${USERDATA}/main-bibliography.bib
+template: base # `pandoc --print-default-template=html` for default
+variables: # https://pandoc.org/MANUAL.html#variables-for-html
+  mainfont: Palatino
+  fontsize: 1rem
+  linestretch: 1.4 # = line-height
 
 metadata-file: academic.yaml # overwrites document yaml (`metadata:` would not)
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
@@ -17,13 +18,12 @@ filters: [autoset-today-as-date-if-no-date-metadata.lua]
 #───────────────────────────────────────────────────────────────────────────────
 
 verbosity: WARNING
-fail-if-warnings: true # true -> aborts if citekeys are missing
+fail-if-warnings: true
 
 resource-path: [., ./attachments]
-writer: docx+native_numbering
+writer: html
 reader: "markdown\
   +lists_without_preceding_blankline\
   +mark\
   +wikilinks_title_after_pipe\
   +rebase_relative_paths"
-
