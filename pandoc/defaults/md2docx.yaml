@@ -3,13 +3,13 @@
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
-table-of-contents: false
+table-of-contents: true
 number-sections: true
 shift-heading-level-by: -1
 
-reference-doc: templates/academic-paper.docx
-citeproc: true
+reference-doc: ${USERDATA}/templates/academic-paper.docx
 bibliography: ${USERDATA}/main-bibliography.bib
+citeproc: true
 
 metadata-file: academic.yaml # overwrites document yaml (`metadata:` would not)
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
@@ -19,11 +19,10 @@ filters: [autoset-today-as-date-if-no-date-metadata.lua]
 verbosity: WARNING
 fail-if-warnings: true # true -> aborts if citekeys are missing
 
-resource-path: [., ./attachments]
 writer: docx+native_numbering
 reader: "markdown\
   +lists_without_preceding_blankline\
   +mark\
   +wikilinks_title_after_pipe\
   +rebase_relative_paths"
-
+resource-path: [./attachments, .]
