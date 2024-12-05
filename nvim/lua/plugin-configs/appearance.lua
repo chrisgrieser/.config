@@ -67,6 +67,15 @@ return {
 				border = "thick",
 				position = "left",
 			},
+			link = {
+				custom = {
+					myWebsite = { pattern = "https://chris%-grieser.de", icon = " " },
+					proseSh = { pattern = "prose%.sh", icon = "󰏫 " },
+					mastodon = { pattern = "%.social/@", icon = " " },
+					linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
+					researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
+				},
+			},
 			win_options = {
 				-- makes toggling this plugin also toggle conceallevel
 				conceallevel = { default = 0, rendered = 2 },
