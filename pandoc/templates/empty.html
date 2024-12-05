@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content="pandoc" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+	<style>
+		$styles.html()$
+	</style>
+	$for(css)$
+	<link rel="stylesheet" href="$css$" />
+	$endfor$
+
+	$if(date)$
+	<p class="date">$date$</p>
+	$endif$
+
+	$if(toc)$
+	<h2>Table of contents</h2>
+	$table-of-contents$
+	$endif$
+
+</head>
+
+<body> $body$ </body>
+
+</html>
