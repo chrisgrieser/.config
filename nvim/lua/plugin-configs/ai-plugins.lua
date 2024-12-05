@@ -38,7 +38,7 @@ return {
 			vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 
 			-- lualine indicator
-			vim.g.lualine_add("sections", "lualine_x", function()
+			vim.g.lualineAdd("sections", "lualine_x", function()
 				if vim.bo.buftype ~= "" then return "" end
 				-- don't need info that it's disabled during a recording
 				if vim.fn.reg_recording() ~= "" then return "" end

@@ -173,8 +173,8 @@ return {
 			{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", mode = {"x","o"}, ft = "css", desc = " outer selector" },
 
 			-- shell
-			{ "iP", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = "sh", desc = "󰟥 inner pipe" },
-			{ "aP", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = "sh", desc = "󰟥 outer pipe" },
+			{ "ix", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = "sh", desc = "󰟥 inner pipe" },
+			{ "ax", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = "sh", desc = "󰟥 outer pipe" },
 			-- stylua: ignore end
 
 			{ -- indent last paste
@@ -257,7 +257,7 @@ return {
 					local charwise = require("various-textobjs.textobjs.charwise")
 					local pattern = "().(%S+%s*)$"
 					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
-					ch)
+					charwise.selectFromCursorTo({ row, endCol }, 0)
 				end,
 				desc = "󰬞 up last WORD",
 			},

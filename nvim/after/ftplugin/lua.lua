@@ -13,17 +13,17 @@ abbr("===", "==")
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
-	vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local charBeforeCursor = vim.api.nvim_get_current_line():sub(col, col)
-	if charBeforeCursor ~= sign then return end
-	vim.defer_fn(function()
+	if charBeforeCursor ~= sign or col == 1 then
+		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
+	else
 		local line = vim.api.nvim_get_current_line()
-		local updatedLine = line:gsub("(%w+)" .. vim.pesc(sign:rep(2)), ("%%1 = %%1 %s 1"):format(sign))
-		vim.api.nvim_set_current_line(updatedLine)
-		local diff = #updatedLine - #line
+		local updated = line:gsub("(%w+)" .. vim.pesc(sign), ("%%1 = %%1 %s 1"):format(sign))
+		vim.api.nvim_set_current_line(updated)
+		local diff = #updated - #line
 		vim.api.nvim_win_set_cursor(0, { row, col + diff + 1 })
-	end, 1)
+	end
 end
 bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "++ to i = i + 1" })
 bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "-- to i = i - 1" })
