@@ -7,7 +7,7 @@ local M = {}
 --------------------------------------------------------------------------------
 
 function M.bufferInfo()
-	local pseudoTilde = "∼" -- HACK use `U+223C` instead of real `~` to prevent md-strikethrough
+	local pseudoTilde = "∼" -- HACK `U+223C` instead of real `~` to prevent md-strikethrough
 
 	local clients = vim.lsp.get_clients { bufnr = 0 }
 	local longestName = vim.iter(clients)
@@ -47,7 +47,7 @@ function M.nodeUnderCursor()
 	vim.notify(node:type(), vim.log.levels.DEBUG, { icon = "", title = "Node under cursor" })
 
 	-- highlight the full node
-	local duration, hlgroup = 1000, "Search" -- CONFIG
+	local duration, hlgroup = 1500, "Search" -- CONFIG
 	local startRow, startCol = node:start()
 	local endRow, endCol = node:end_()
 	local ns = vim.api.nvim_create_namespace("node-highlight")
@@ -96,26 +96,19 @@ function M.lspCapabilities()
 	end)
 end
 
--- EVAL (better than `:lua = `, since using `vim.notify`)
--- a) normal mode: input prompt, b) visual mode: selection
 function M.evalNvimLua()
-	local function eval(input)
-		if not input then return end
-		local msg = vim.inspect(vim.fn.luaeval(input))
-		vim.notify(msg, vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎", ft = "lua" })
-	end
-
 	if vim.fn.mode() == "n" then
 		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User(once): Add lua highlighting to `DressingInput` for Eval keymap",
+			desc = "User(once): Add lua highlighting to `DressingInput` for Eval command",
 			once = true,
 			pattern = "DressingInput",
 			command = "set ft=lua",
 		})
-		vim.ui.input({ prompt = "󰜎 Eval:" }, eval)
+		vim.ui.input({ prompt = "󰜎 Eval:" }, function(input) vim.cmd.lua("=" .. input) end)
 	else
 		vim.cmd.normal { '"zy', bang = true }
-		eval(vim.fn.getreg("z"))
+		local selection = vim.fn.getreg("z")
+		vim.cmd.lua("=" .. selection)
 	end
 end
 

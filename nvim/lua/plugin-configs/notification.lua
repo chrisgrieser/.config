@@ -120,6 +120,7 @@ end
 --------------------------------------------------------------------------------
 
 local function overrideDefaultPrintFuncs()
+	---@diagnostic disable: duplicate-set-field deliberate overrides
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		local opts = { title = "Print", icon = "󰐪" }
@@ -128,7 +129,6 @@ local function overrideDefaultPrintFuncs()
 		end
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, opts)
 	end
-	---@diagnostic disable-next-line: duplicate-set-field deliberate override
 	vim.api.nvim_echo = function(chunks, _, _)
 		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join("")
 		local opts = { title = "Echo", icon = "" }
@@ -140,10 +140,29 @@ local function overrideDefaultPrintFuncs()
 		end
 		vim.notify(vim.trim(msg), vim.log.levels[severity], opts)
 	end
-	---@diagnostic disable-next-line: duplicate-set-field deliberate override
-	vim.api.nvim_err_writeln = function(msg)
-		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error" })
+
+	-----------------------------------------------------------------------------
+
+	local buffer = ""
+	-- "Does not append "\n", the message is buffered (won't display) until a
+	-- linefeed is written."
+	vim.api.nvim_out_write = function(msg)
+		buffer = buffer .. msg
+		if vim.endswith(msg, "\n") then
+			vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out-write", icon = "" })
+			buffer = ""
+		end
 	end
+
+	-- "Writes a message to the Vim error buffer. Appends "\n", so the buffer is
+	-- flushed (and displayed)."
+	vim.api.nvim_err_writeln = function(msg)
+		buffer = buffer .. msg
+		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error" })
+		buffer = ""
+	end
+
+	---@diagnostic enable: duplicate-set-field
 end
 
 local function silenceMessages()
