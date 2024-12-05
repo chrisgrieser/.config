@@ -1,22 +1,25 @@
 #!/usr/bin/env zsh
+set -e
+md_file="$*"
+#───────────────────────────────────────────────────────────────────────────────
+
+# CONFIG
+word_file="${md_file%\.md}_$(date +%Y-%m-%d)_CG.docx"
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # PANDOC
-md_file="$*"
 if [[ ! "$md_file" =~ .*\.md ]]; then
 	echo "⚠️ Not a markdown file"
 	return 1
 fi
-word_file="${md_file%\.md}_$(date +%Y-%m-%d)_CG.docx"
 
-# so `--resource-path` is set
-cd "$(dirname "$md_file")" || return 1
+cd "$(dirname "$md_file")" # so `--resource-path` is set
 
 # INFO pandoc's --data-dir for the `defaults` file defined in .zshenv
-pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1 || return 1
+pandoc "$md_file" --output="$word_file" --defaults="md2docx" 2>&1
 
-# OPEN
 open -R "$word_file"
-[[ ! -e "$word_file" ]] && return 1
 open "$word_file"
 
 #───────────────────────────────────────────────────────────────────────────────

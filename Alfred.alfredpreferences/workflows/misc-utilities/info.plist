@@ -1750,7 +1750,7 @@
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>note</key>
-			<string>copy quote from browser</string>
+			<string>copy quote from browser as Markdown</string>
 			<key>xpos</key>
 			<real>490</real>
 			<key>ypos</key>
