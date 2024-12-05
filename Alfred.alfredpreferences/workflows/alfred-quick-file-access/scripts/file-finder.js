@@ -50,9 +50,9 @@ function getTrashPathQuoted() {
 	// location dependent on macOS version: https://github.com/chrisgrieser/alfred-quick-file-access/issues/4
 	if (macosVersion < 15) trashLocation += "com~apple~CloudDocs/";
 	const trashPath = trashLocation + ".Trash";
+	const userHasIcloudDrive = app.doShellScript(`test -d "a${trashPath}" || echo "false"`) === "true";
 
-	const userHasIcloudDrive = fileExists(trashPath);
-	if (userHasIcloudDrive) return `"${trashLocation}}"`;
+	if (userHasIcloudDrive) return `"${trashPath}"`;
 
 	return "";
 }
@@ -142,7 +142,7 @@ function run() {
 	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
 	// biome-ignore lint/suspicious/noConsole: intentional
-	console.log("STDOUT (shortened)\n" + stdout.slice(0, 1000));
+	console.log("\nSTDOUT (shortened)\n" + stdout.slice(0, 300));
 	if (stdout === "") return errorItem("No files found.");
 
 	// CREATE ALFRED ITEMS

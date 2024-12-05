@@ -147,7 +147,7 @@ vim.diagnostic.config {
 		},
 	},
 	virtual_text = {
-		severity = { min = vim.diagnostic.severity.INFO }, -- leave out `HINT`
+		severity = { min = vim.diagnostic.severity.WARN }, -- leave out `HINT` & `INFO`
 		suffix = addCodeAndSourceAsSuffix,
 	},
 	float = {
