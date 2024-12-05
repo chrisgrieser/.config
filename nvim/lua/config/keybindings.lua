@@ -262,9 +262,9 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position under cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " Tree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " Query" })
+keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Cursor position" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
 keymap(
 	"n",
 	"<leader>il",
@@ -275,7 +275,7 @@ keymap(
 	"n",
 	"<leader>in",
 	function() require("personal-plugins.inspect-and-eval").nodeUnderCursor() end,
-	{ desc = " Node under cursor" }
+	{ desc = " Cursor node" }
 )
 keymap(
 	"n",
@@ -283,15 +283,12 @@ keymap(
 	function() require("personal-plugins.inspect-and-eval").bufferInfo() end,
 	{ desc = "󰽙 Buffer info" }
 )
-
 keymap(
 	{ "n", "x" },
 	"<leader>ee",
 	function() require("personal-plugins.inspect-and-eval").evalNvimLua() end,
-	{ desc = "󰜎 Eval" }
+	{ desc = " Eval" }
 )
-
--- Run file
 keymap(
 	"n",
 	"<leader>er",
