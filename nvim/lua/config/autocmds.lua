@@ -106,19 +106,16 @@ vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Close all non-existing buffers on `FocusGained`.",
 	callback = function()
 		local closedBuffers = {}
-		vim.iter(vim.api.nvim_list_bufs()):each(function(bufnr)
-			local valid = vim.api.nvim_buf_is_valid(bufnr)
-			local loaded = vim.api.nvim_buf_is_loaded(bufnr)
-			if not valid or not loaded then return end
-			local bufPath = vim.api.nvim_buf_get_name(bufnr)
-			local stillExists = vim.uv.fs_stat(bufPath) ~= nil
-			local specialBuffer = vim.bo[bufnr].buftype ~= ""
-			local newBuffer = bufPath == ""
+		local allBufs = vim.fn.getbufinfo { buflisted = 1 }
+		vim.iter(allBufs):each(function(buf)
+			if not vim.api.nvim_buf_is_valid(buf.bufnr) then return end
+			local stillExists = vim.uv.fs_stat(buf.name) ~= nil
+			local specialBuffer = vim.bo[buf.bufnr].buftype ~= ""
+			local newBuffer = buf.name == ""
 			if stillExists or specialBuffer and newBuffer then return end
 
-			local bufName = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
-			table.insert(closedBuffers, bufName)
-			vim.api.nvim_buf_delete(bufnr, { force = false })
+			table.insert(closedBuffers, vim.fs.basename(buf.name))
+			vim.api.nvim_buf_delete(buf.bufnr, { force = false })
 		end)
 		if #closedBuffers == 0 then
 			return
