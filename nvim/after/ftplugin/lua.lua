@@ -11,16 +11,22 @@ abbr("!==", "~=")
 abbr("=~", "~=") -- shell uses `=~`
 abbr("===", "==")
 
-bkeymap("i", "+", function ()
-	vim.api.nvim_feedkeys("+", "n", true) -- pass through the trigger char
-	local col = vim.api.nvim_win_get_cursor(0)[2]
-	local charBeforeCursor = vim.api.nvim_get_current_line():sub(col - 1, col)
-	if charBeforeCursor ~= "+" then return end
-
-	local line = vim.api.nvim_get_current_line()
-	
-	vim.api.nvim_set_current_line(line)
-end)
+---@param sign "+"|"-"
+local function plusPlusMinusMinus(sign)
+	vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local charBeforeCursor = vim.api.nvim_get_current_line():sub(col, col)
+	if charBeforeCursor ~= sign then return end
+	vim.defer_fn(function()
+		local line = vim.api.nvim_get_current_line()
+		local updatedLine = line:gsub("(%w+)" .. vim.pesc(sign:rep(2)), ("%%1 = %%1 %s 1"):format(sign))
+		vim.api.nvim_set_current_line(updatedLine)
+		local diff = #updatedLine - #line
+		vim.api.nvim_win_set_cursor(0, { row, col + diff + 1 })
+	end, 1)
+end
+bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "++ to i = i + 1" })
+bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "-- to i = i - 1" })
 
 --------------------------------------------------------------------------------
 

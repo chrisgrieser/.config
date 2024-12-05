@@ -129,7 +129,7 @@ return {
 			{ "gg", "<cmd>lua require('various-textobjs').entireBuffer()<CR>", mode = {"x","o"}, desc = " entire buffer" },
 
 			{ "n", "<cmd>lua require('various-textobjs').nearEoL()<CR>", mode = "o", desc = "󰑀 near EoL" },
-			{ "b", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "󰅪 to next bracket" },
+			{ "b", "<cmd>lua require('various-textobjs').toNextClosingBracket()<CR>", mode = "o", desc = "󰅪 to closing bracket" },
 			{ "w", "<cmd>lua require('various-textobjs').toNextQuotationMark()<CR>", mode = "o", desc = " to next quote" },
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner quote (any)" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer quote (any)" },
@@ -250,16 +250,27 @@ return {
 				end,
 				desc = " Open next URL",
 			},
-			{ -- open URL (forward seeking)
+			{ -- to last WORD
 				"N",
 				mode = "o",
 				function()
 					local charwise = require("various-textobjs.textobjs.charwise")
 					local pattern = "().(%S+%s*)$"
 					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
+					ch)
+				end,
+				desc = "󰬞 up last WORD",
+			},
+			{ -- to opening bracket
+				"B",
+				mode = "o",
+				function()
+					local charwise = require("various-textobjs.textobjs.charwise")
+					local pattern = "().([%[({])"
+					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
 					charwise.selectFromCursorTo({ row, endCol }, 0)
 				end,
-				desc = "󰬞 up to last WORD",
+				desc = "󰅪 to opening bracket",
 			},
 		},
 	},
