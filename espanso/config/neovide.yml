@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
+# using vim's abbreviations & snippets instead.
+# to use espanso in neovide: https://www.reddit.com/r/espanso/comments/1h68xwa/making_expansions_work_in_neovim_on_macos/
 filter_exec: "[Nn]eovide"
 enable: false

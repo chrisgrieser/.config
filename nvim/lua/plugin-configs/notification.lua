@@ -154,8 +154,8 @@ local function overrideDefaultPrintFuncs()
 	---@diagnostic enable: duplicate-set-field
 end
 
-local function overrideNotify()
-	-- by overriding snacks' override, we can filter/modify some messages
+-- Overriding snacks' override, so we can filter/modify some messages
+local function preprocessNotifications()
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
@@ -165,21 +165,27 @@ local function overrideNotify()
 		if opts.title == "mason-tool-installer" or opts.title == "mason.nvim" then
 			opts = { icon = "", id = "mason", style = "minimal" }
 			msg = msg:gsub("^([%w-]+):", "[%1]"):gsub('^"([%w-]+)"', "[%1]") -- for markdown highlight
-		elseif msg:find("^%[nvim%-treesitter%]") then
+		elseif msg:find("^%[nvim%-treesitter%]") or msg == "All parsers are up-to-date!" then
 			opts = { icon = "", id = "ts-install", style = "minimal" }
 		elseif msg:lower():find("hunk") then
 			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
 			opts = { icon = "󰊢", id = "gitsigns-hunk-nav", style = "minimal" }
-			level = vim.log.levels.INFO
+			level = vim.log.levels.TRACE
+		end
+
+		-- FIX broken padding for icons in the minimal style
+		if opts.style == "minimal" then
+			opts.icon = opts.icon .. " "
+			if msg == "All parsers are up-to-date!" then msg = msg .. "  " end
 		end
 
 		return require("snacks").notifier(msg, level, opts)
 	end
 end
 
-local function silenceMessages()
-	-- "E486: pattern not found"
+local function silenceE486PatternNotFound()
 	-- (yes, all this is needed to have `cmdheight=0` & avoid the "Press Enter" prompt)
+
 	local function notFoundNotify(query)
 		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
 		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
@@ -226,9 +232,9 @@ return {
 	event = "VeryLazy",
 	config = function(_spec, opts)
 		require("snacks").setup(opts)
-		overrideNotify()
+		preprocessNotifications() -- needs to run after snack's `setup`
 		overrideDefaultPrintFuncs()
-		silenceMessages()
+		silenceE486PatternNotFound()
 	end,
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },

@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			icon = "󰔟"
 		end
 
-		local opts = { id = "lspProgress", icon = icon .. " ", style = "minimal", timeout = 2500 }
+		local opts = { id = "LspProgress", icon = icon, style = "minimal", timeout = 2500 }
 		vim.notify(msg, vim.log.levels.TRACE, opts)
 	end,
 })

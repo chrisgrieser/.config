@@ -1,15 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-# INFO emojis need to be in textual form to work in Slack as well as Discord
+# INFO https://www.reddit.com/r/espanso/comments/1h7ajx8/use_espanso_for_mousefree_emojireacts_in_discord/
 matches:
+  - trigger: "lll"
+    replace: "+:eyes:\n"
   # emoji-react selection
   - { trigger: "eee", replace: "+:" }
 
   # common emojis
   - { trigger: "hhh", replace: "+:grey_heart:\n" } # 🩶
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
-  - { trigger: "lll", replace: "+:eyes:\n" } # 👀
 
   # Discord only
   - { trigger: "ttt", replace: "+:this:\n" }
