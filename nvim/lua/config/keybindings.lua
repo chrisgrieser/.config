@@ -144,7 +144,7 @@ keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- just :move preserves marks
 
 --------------------------------------------------------------------------------
--- SURROUND
+-- SURROUND & ARROW
 
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' " Surround cword' })
 keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
@@ -154,6 +154,8 @@ keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
+
+keymap("i", "<D-a>", " => ", { desc = "=> Arrow" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS

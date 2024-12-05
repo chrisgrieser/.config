@@ -281,8 +281,23 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 
 				vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
-				local msg = ("%d conflict markers found."):format(#conflictLnums)
-				vim.notify_once(msg, nil, { title = "Git conflicts", icon = "󰞇" })
+
+				-- mappings
+				local mapInfo = {}
+				local function map(lhs, rhs, desc)
+					vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
+					table.insert(mapInfo, ("%s: %s"):format(lhs, desc))
+				end
+				-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
+				map("<leader>mm", "/<<<<CR>", "Goto [m]erge [m]arker")
+				map("<leader>mu", "dd/|||<CR>0v/>>><CR>$x", "[m]erge [u]pstream")
+				map("<leader>mb", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "[m]erge [b]ase")
+				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed")
+
+				-- notify
+				local header = ("%d conflict markers found."):format(#conflictLnums)
+				local mapInfoStr = table.concat(mapInfo, "\n")
+				vim.notify(header .. mapInfoStr, nil, { title = "Merge conflicts", icon = "󰞇" })
 			end)
 		)
 	end,
