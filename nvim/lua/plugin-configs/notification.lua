@@ -77,16 +77,21 @@ local function openNotif(idx)
 end
 
 local function allNotifications()
+	local history = getHistory()
+	if #history == 0 then
+		local msg = "No notifications yet."
+		vim.notify(msg, vim.log.levels.TRACE, { title = "All notifications", icon = "󰎟" })
+		return
+	end
 	require("snacks").notifier.hide()
-	vim.ui.select(getHistory(), {
+	vim.ui.select(history, {
 		prompt = "󰎟 Notification history",
 		format_item = function(item)
 			local title = item.title ~= "" and item.title or "(no title)"
 			return vim.trim(item.icon .. " " .. title)
 		end,
 	}, function(_, idx)
-		if not idx then return end
-		openNotif(idx)
+		if idx then openNotif(idx) end
 	end)
 end
 
@@ -96,8 +101,7 @@ local function messagesAsWin()
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
 		return
 	end
-	-- reversed, so recent messages are on top
-	local lines = vim.iter(vim.split(messages, "\n")):rev():totable()
+	local lines = vim.iter(vim.split(messages, "\n")):totable()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 	require("snacks").win {
@@ -105,6 +109,8 @@ local function messagesAsWin()
 		buf = bufnr,
 		height = 0.75,
 		title = " :messages ",
+		-- goto last message via `G` (can't reverse lines as it messes up multi-line msgs)
+		on_win = function() vim.cmd.normal { "G", bang = true } end,
 	}
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()
@@ -119,7 +125,7 @@ end
 
 --------------------------------------------------------------------------------
 
-local function overrideDefaultPrintFuncs()
+local function redirectPrintFuncsToVimNotify()
 	---@diagnostic disable: duplicate-set-field deliberate overrides
 	_G.print = function(...)
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
@@ -139,19 +145,19 @@ local function overrideDefaultPrintFuncs()
 	vim.api.nvim_out_write = function(msg)
 		buffer = buffer .. msg
 		if not msg:find("[\n\r]") then return end
-		vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out-write", icon = "" })
+		vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out_write", icon = "" })
 		buffer = ""
 	end
 	vim.api.nvim_err_write = function(msg)
 		buffer = buffer .. "ERROR: " .. msg
 		if not msg:find("[\n\r]") then return end
-		vim.notify(vim.trim(buffer), vim.log.levels.ERROR, { title = "err-write" })
+		vim.notify(vim.trim(buffer), vim.log.levels.ERROR, { title = "err_write" })
 		buffer = ""
 	end
 	-- "Writes a message to the Vim error buffer. Appends "\n", so the buffer is
 	-- flushed (and displayed)."
 	vim.api.nvim_err_writeln = function(msg)
-		vim.notify(vim.trim(buffer .. msg), vim.log.levels.ERROR, { title = "err-writeln" })
+		vim.notify(vim.trim(buffer .. msg), vim.log.levels.ERROR, { title = "err_writeln" })
 		buffer = ""
 	end
 
@@ -159,7 +165,7 @@ local function overrideDefaultPrintFuncs()
 end
 
 -- Overriding snacks' override, so we can filter/modify some messages
-local function preprocessNotifications()
+local function preprocessVimNotify()
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
@@ -236,8 +242,8 @@ return {
 	event = "VeryLazy",
 	config = function(_spec, opts)
 		require("snacks").setup(opts)
-		preprocessNotifications() -- needs to run after snack's `setup`
-		overrideDefaultPrintFuncs()
+		preprocessVimNotify() -- needs to run after snack's `setup`
+		redirectPrintFuncsToVimNotify()
 		silenceE486PatternNotFound()
 	end,
 	keys = {
@@ -275,7 +281,6 @@ return {
 			height = { min = 1, max = 0.5 },
 			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
 			top_down = false,
-			more_format = " ↓ %d lines ", -- if more lines than height
 		},
 		styles = {
 			notification = {

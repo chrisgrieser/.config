@@ -101,7 +101,8 @@ end
 function M.evalNvimLua()
 	local function eval(input)
 		if not input or input == "" then return end
-		vim.cmd.lua("=" .. input)
+		local out = vim.fn.luaeval(input)
+		vim.notify(vim.inspect(out), vim.log.levels.DEBUG, { title = "Eval", icon = "󰜎" })
 	end
 
 	if vim.fn.mode() == "n" then
