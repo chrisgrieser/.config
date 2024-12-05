@@ -8,11 +8,50 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>0097E8CB-1A84-4E8A-A30D-6B9CED6BA4F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2CE7E929-AD14-4BAD-B638-152B098BE9D6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>15EF574D-5CAC-4FDA-8600-57B3AED146F4</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>F2EB8A46-3418-41B2-A3B1-1949503476C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2605B70A-5697-48AD-8ED2-38A1847BBCAD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2CE7E929-AD14-4BAD-B638-152B098BE9D6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2605B70A-5697-48AD-8ED2-38A1847BBCAD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -145,25 +184,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -181,6 +201,48 @@
 			<string>E5453C5A-74EB-4057-82E5-1DFA868353C0</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/pandoc-md2docx.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -214,6 +276,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>⏳ Running pandoc…</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2CE7E929-AD14-4BAD-B638-152B098BE9D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>net.daringfireball.markdown</string>
+				</array>
+				<key>name</key>
+				<string>Markdown to PDF (Pandoc)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>0097E8CB-1A84-4E8A-A30D-6B9CED6BA4F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -223,14 +325,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/md-to-docx.sh</string>
+				<string>./scripts/pandoc-md2pdf.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</string>
+			<string>2605B70A-5697-48AD-8ED2-38A1847BBCAD</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -416,6 +518,15 @@
 	<string>Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0097E8CB-1A84-4E8A-A30D-6B9CED6BA4F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
 		<key>15EF574D-5CAC-4FDA-8600-57B3AED146F4</key>
 		<dict>
 			<key>colorindex</key>
@@ -423,7 +534,25 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>400</real>
+		</dict>
+		<key>2605B70A-5697-48AD-8ED2-38A1847BBCAD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>135</real>
+		</dict>
+		<key>2CE7E929-AD14-4BAD-B638-152B098BE9D6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>185</real>
+			<key>ypos</key>
+			<real>135</real>
 		</dict>
 		<key>2D2FDAAD-9FAB-40CF-80BD-CECE6BC224E5</key>
 		<dict>
@@ -432,7 +561,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>265</real>
 		</dict>
 		<key>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</key>
 		<dict>
@@ -441,9 +570,9 @@
 			<key>note</key>
 			<string>copy &amp; display error</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>70</real>
 		</dict>
 		<key>5BD72B8A-1B8A-4C43-81CF-79EBC4BE4517</key>
 		<dict>
@@ -463,7 +592,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>400</real>
 		</dict>
 		<key>7A3622A0-DE0C-4DCE-92F3-C4ADD2279EBB</key>
 		<dict>
@@ -472,7 +601,7 @@
 			<key>xpos</key>
 			<real>185</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>550</real>
 		</dict>
 		<key>84C07023-C7E9-4DAD-8EF8-0700B1CB05E3</key>
 		<dict>
@@ -483,7 +612,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>140</real>
+			<real>265</real>
 		</dict>
 		<key>A98DF2BF-2CAF-4762-B44B-041654707863</key>
 		<dict>
@@ -501,7 +630,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>550</real>
 		</dict>
 		<key>E5453C5A-74EB-4057-82E5-1DFA868353C0</key>
 		<dict>
@@ -519,16 +648,16 @@
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>400</real>
 		</dict>
 		<key>F4515410-11F8-4E8D-8176-9499BC0098AE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>70</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -15,6 +15,7 @@ local lspToMasonMap = {
 	efm = "efm", -- linter/formatter integration
 	emmet_language_server = "emmet-language-server", -- css/html snippets
 	harper_ls = "harper-ls", -- natural language linter
+	html = "html-lsp",
 	jsonls = "json-lsp",
 	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
