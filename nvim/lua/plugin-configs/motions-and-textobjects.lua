@@ -42,10 +42,7 @@ return {
 				-- for `:TSTextobjectPeekDefinitionCode` (used in overwritten handler for LSP hover)
 				lsp_interop = {
 					border = vim.g.borderStyle,
-					floating_preview_opts = {
-						title = "  Peek ",
-						max_width = 75,
-					},
+					floating_preview_opts = { title = "  Peek ", max_width = 75 },
 				},
 			},
 		},
