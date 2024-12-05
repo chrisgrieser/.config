@@ -125,29 +125,33 @@ local function overrideDefaultPrintFuncs()
 		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
 	end
+
 	vim.api.nvim_echo = function(chunks, _, _)
 		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join("")
 		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Echo", icon = "" })
 	end
 
 	-----------------------------------------------------------------------------
-
 	local buffer = ""
+
 	-- "Does not append "\n", the message is buffered (won't display) until a
 	-- linefeed is written."
 	vim.api.nvim_out_write = function(msg)
 		buffer = buffer .. msg
-		if vim.endswith(msg, "\n") then
-			vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out-write", icon = "" })
-			buffer = ""
-		end
+		if not msg:find("[\n\r]") then return end
+		vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out-write", icon = "" })
+		buffer = ""
 	end
-
+	vim.api.nvim_err_write = function(msg)
+		buffer = buffer .. "ERROR: " .. msg
+		if not msg:find("[\n\r]") then return end
+		vim.notify(vim.trim(buffer), vim.log.levels.ERROR, { title = "err-write" })
+		buffer = ""
+	end
 	-- "Writes a message to the Vim error buffer. Appends "\n", so the buffer is
 	-- flushed (and displayed)."
 	vim.api.nvim_err_writeln = function(msg)
-		buffer = buffer .. msg
-		vim.notify(vim.trim(msg), vim.log.levels.ERROR, { title = "Error" })
+		vim.notify(vim.trim(buffer .. msg), vim.log.levels.ERROR, { title = "err-writeln" })
 		buffer = ""
 	end
 
@@ -176,7 +180,7 @@ local function preprocessNotifications()
 		-- FIX broken padding for icons in the minimal style
 		if opts.style == "minimal" then
 			opts.icon = opts.icon .. " "
-			if msg == "All parsers are up-to-date!" then msg = msg .. "  " end
+			if not msg:find("%[.+%]") then msg = msg .. "  " end
 		end
 
 		return require("snacks").notifier(msg, level, opts)
