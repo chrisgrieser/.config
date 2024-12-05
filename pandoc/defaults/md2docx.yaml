@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=./.pandoc-defaults-schema.json
-# $USERDATA set via pandoc option `--data-dir` to this directory
+# `$USERDATA` set via pandoc option `--data-dir` to this directory
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -20,9 +20,6 @@ verbosity: WARNING
 fail-if-warnings: true # true -> aborts if citekeys are missing
 
 writer: docx+native_numbering
-reader: "markdown\
-  +lists_without_preceding_blankline\
-  +mark\
-  +wikilinks_title_after_pipe\
-  +rebase_relative_paths"
+reader: >-
+  markdown
 resource-path: [./attachments, .]

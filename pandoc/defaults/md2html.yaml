@@ -1,6 +1,10 @@
 # yaml-language-server: $schema=./.pandoc-defaults-schema.json
-# $USERDATA set via pandoc option `--data-dir` to this directory
+# `$USERDATA` set via pandoc option `--data-dir` to this directory
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
+#───────────────────────────────────────────────────────────────────────────────
+# INFO md -> html is just an intermediary step, a shell script is then used to
+# convert the html via headless browser to PDF:
+# `Alfred.alfredpreferences/workflows/pdf-utilities/scripts/headless-md2pdf.sh`
 #───────────────────────────────────────────────────────────────────────────────
 
 number-sections: false
