@@ -167,6 +167,8 @@ end
 -- Overriding snacks' override, so we can filter/modify some messages
 local function preprocessVimNotify()
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
+		if not opts then opts = {} end
+
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348
 		if msg:find("^Client marksman quit with exit code 1") then return end
 		-- due to the custom formatter in `typescript.lua` using code-actions
