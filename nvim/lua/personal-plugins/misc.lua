@@ -229,7 +229,7 @@ function M.nextFileInFolder(direction)
 			break
 		end
 	end
-	local nextIdx = curIdx + (direction == "Next" and 1 or -1)
+	local nextIdx = curIdx + (direction == "next" and 1 or -1)
 	if nextIdx < 1 then nextIdx = #filesInFolder end
 	if nextIdx > #filesInFolder then nextIdx = 1 end
 

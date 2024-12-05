@@ -8,16 +8,5 @@
 # markdown document metadata
 #───────────────────────────────────────────────────────────────────────────────
 
-csl: apa-7th # does not need extension
-lang: en-US
-
-title: Untitled
-subtitle: Some Subtitle
-author:
-  - Christopher Grieser
-  - Research Group “Social Studies of Science & Technology”
-  - Technical University of Berlin (Germany)
-  - christopher.grieser@tu-berlin.de
-
-link-citations: false
-link-bibliography: true
+lang: de-DE
+author: Christopher Grieser

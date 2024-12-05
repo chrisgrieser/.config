@@ -1,45 +1,34 @@
-# yaml-language-server: $schema=./pandoc-defaults-schema.json
-# schema needs to be reloaded to stop spurious errors https://github.com/jgm/pandoc/issues/8809#issuecomment-1524183838
-#───────────────────────────────────────────────────────────────────────────────
-# INFO $USERDATA set via pandoc option `--data-dir` to this directory
+# yaml-language-server: $schema=./.pandoc-defaults-schema.json
+# $USERDATA set via pandoc option `--data-dir` to this directory
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
-# PDF-WRITER
-writer: pdf
-pdf-engine: weasyprint # `wkhtmltopdf` is deprecated, `prince` adds watermark
-template: empty # `empty` does not require an h1 to be present
+table-of-contents: false
+number-sections: true
 
-# https://pandoc.org/MANUAL.html#variables-for-html
-variables:
+template: base # `pandoc --print-default-template=html` for default
+variables: # https://pandoc.org/MANUAL.html#variables-for-html
   mainfont: Palatino
   margin-left: 0
   margin-right: 0
-  fontsize: 3rem # does not seem to work
+  fontsize: 3rem # does not seem to work with `weasyprint`?
   linestretch: 1.4 # = line-height
 
-# Reports
-fail-if-warnings: true
-verbosity: WARNING
-pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to `WARNING`
-
-# Metadata
-metadata: { author: Chris Grieser }
+metadata-file: academic.yaml # overwrites document yaml (`metadata:` would not)
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
-# GENERAL
 
-# Headings
-number-sections: false
-table-of-contents: true
-toc-depth: 3
+pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to `WARNING`
+pdf-engine: weasyprint # `wkhtmltopdf` is deprecated, `prince` adds watermark
 
-# Images
+verbosity: WARNING
+fail-if-warnings: true
+
 resource-path: [., ./attachments]
-
-# MARKDOWN-READER https://pandoc.org/MANUAL.html#extensions
+writer: pdf
 reader: "markdown\
   +lists_without_preceding_blankline\
-  +mark+wikilinks_title_after_pipe\
+  +mark\
+  +wikilinks_title_after_pipe\
   +rebase_relative_paths"
