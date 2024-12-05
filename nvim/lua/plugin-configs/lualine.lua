@@ -118,7 +118,7 @@ local lualineOpts = {
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
-vim.g.lualine_add = function(whichBar, whichSection, component, where)
+vim.g.lualineAdd = function(whichBar, whichSection, component, where)
 	local ok, lualine = pcall(require, "lualine")
 	if not ok then return end
 

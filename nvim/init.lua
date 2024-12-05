@@ -25,7 +25,7 @@ vim.g.localRepos = vim.fs.normalize("~/Developer")
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
 	if not success then
-		local msg = ("Error loading %q: %s"):format(module, errmsg)
+		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
 		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1000)
 	end
 end
@@ -33,7 +33,7 @@ end
 safeRequire("config.options") -- before lazy, so opts are active during plugin install
 
 if not vim.env.NO_PLUGINS then
-	-- INFO only load plugins when `NO_PLUGINS` is not set. 
+	-- INFO only load plugins when `NO_PLUGINS` is not set.
 	-- This is for security reasons, e.g., when editing a password with `pass`.
 	safeRequire("config.lazy")
 	vim.g.setColorscheme("init")

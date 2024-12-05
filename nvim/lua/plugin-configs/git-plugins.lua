@@ -53,9 +53,9 @@ return {
 		config = function(_, opts)
 			require("tinygit").setup(opts)
 
-			vim.g.lualine_add("tabline", "lualine_x", require("tinygit.statusline").blame)
+			vim.g.lualineAdd("tabline", "lualine_x", require("tinygit.statusline").blame)
 			-- stylua: ignore
-			vim.g.lualine_add("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
+			vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 		end,
 	},
 	{ -- git sign gutter & hunk actions
@@ -79,7 +79,7 @@ return {
 			-- INFO Using gitsigns.nvim's data since lualine's builtin component
 			-- is updated much less frequently and is thus often out of sync
 			-- with the gitsigns in the signcolumn.
-			vim.g.lualine_add("sections", "lualine_y", {
+			vim.g.lualineAdd("sections", "lualine_y", {
 				"diff",
 				source = function()
 					local gs = vim.b.gitsigns_status_dict
@@ -87,7 +87,7 @@ return {
 					return { added = gs.added, modified = gs.changed, removed = gs.removed }
 				end,
 			}, "before")
-			vim.g.lualine_add("sections", "lualine_y", {
+			vim.g.lualineAdd("sections", "lualine_y", {
 				function() return "" end,
 				cond = function() return vim.b.gitsignsPrevChanges end,
 			}, "before")

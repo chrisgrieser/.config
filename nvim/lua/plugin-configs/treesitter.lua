@@ -68,6 +68,6 @@ return {
 			return text
 		end
 
-		vim.g.lualine_add("tabline", "lualine_b", codeContext, "after")
+		vim.g.lualineAdd("tabline", "lualine_b", codeContext, "after")
 	end,
 }
