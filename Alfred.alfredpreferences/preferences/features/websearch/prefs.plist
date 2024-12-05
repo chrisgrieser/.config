@@ -92,6 +92,17 @@
 			<key>url</key>
 			<string>https://findxkcd.com/?xkcd%5Bquery%5D={query}</string>
 		</dict>
+		<key>89A5DDD7-8916-4511-A505-56A0272CDF25</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT: '{query}'</string>
+			<key>url</key>
+			<string>https://chatgpt.com?q={query}</string>
+		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>
 			<key>enabled</key>

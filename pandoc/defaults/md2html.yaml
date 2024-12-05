@@ -16,7 +16,7 @@ variables: # https://pandoc.org/MANUAL.html#variables-for-html
   fontsize: 1rem
   linestretch: 1.4 # = line-height
 
-metadata-file: base.yaml # overwrites document yaml (`metadata:` would not)
+metadata-file: base.yaml # overwritten by document's yaml (`metadata:` would not)
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────

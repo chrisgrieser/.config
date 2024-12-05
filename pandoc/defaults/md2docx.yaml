@@ -11,7 +11,9 @@ reference-doc: ${USERDATA}/templates/academic-paper.docx
 bibliography: ${USERDATA}/main-bibliography.bib
 citeproc: true
 
-metadata-file: academic.yaml # overwrites document yaml (`metadata:` would not)
+metadata-file: academic.yaml # overwritten by document's yaml (`metadata:` would not)
+metadata:
+  title: "Document Title"
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -20,6 +22,9 @@ verbosity: WARNING
 fail-if-warnings: true # true -> aborts if citekeys are missing
 
 writer: docx+native_numbering
-reader: >-
-  markdown
+reader: "markdown\
+  +lists_without_preceding_blankline\
+  +mark\
+  +wikilinks_title_after_pipe\
+  +rebase_relative_paths"
 resource-path: [./attachments, .]
