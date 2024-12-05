@@ -36,12 +36,13 @@ end
 -- `vim.lsp.buf.hover` opens url if present, otherwise opens regular hover win
 local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
 vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
+	local notifyOpts = { icon = "󰋽", title = "LSP Hover" }
 	-- GUARD
 	if err then
 		vim.notify(err, vim.log.levels.ERROR)
 		return
 	elseif not result then
-		vim.notify("No hover info available.")
+		vim.notify("No hover info available.", nil, notifyOpts)
 		return
 	end
 
@@ -56,20 +57,20 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 		end
 	end
 
-	-- if information-poor oneliner, open Treesitter's peek-definition. 
+	-- if information-poor oneliner, open Treesitter's peek-definition.
 	-- (Still displays original hover info as notification in case it was useful.)
 	local _, lineBreaks = result.contents.value:gsub("\n", "")
 	local lineCount = lineBreaks + 1 - 2 -- minus 2 for markdown code fence
 	if lineCount < 3 and vim.cmd.TSTextobjectPeekDefinitionCode then
 		vim.cmd.TSTextobjectPeekDefinitionCode("@function.outer")
-		vim.notify(result.contents.value, nil, { icon = "󰋽", title = "LSP Hover" })
+		vim.notify(result.contents.value, nil, notifyOpts)
 		return
 	end
 
 	-- use original handler with some extra settings
 	originalHoverHandler(err, result, ctx, {
 		border = vim.g.borderStyle,
-		title = " 󰋽 LSP Hover ",
+		title = " " .. notifyOpts.icon .. " " .. notifyOpts.title .. " ",
 		max_width = 75,
 	})
 end
@@ -130,7 +131,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 ---@return string displayedText
 local function addCodeAndSourceAsSuffix(diag)
 	if not diag.source then return "" end
-	local source = diag.source:gsub(" ?%.$", "") -- rm trailing dot for lua_ls
+	local source = diag.source:gsub(" ?%.$", "") -- remove trailing dot for `lua_ls`
 	local code = diag.code and ": " .. diag.code or ""
 	return (" (%s%s)"):format(source, code)
 end

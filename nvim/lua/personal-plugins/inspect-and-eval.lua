@@ -96,7 +96,14 @@ function M.lspCapabilities()
 	end)
 end
 
+-- use `vim.ui.input` as proper input field with vim motions and highlighting
+-- instead of the vim cmdline.
 function M.evalNvimLua()
+	local function eval(input)
+		if not input or input == "" then return end
+		vim.cmd.lua("=" .. input)
+	end
+
 	if vim.fn.mode() == "n" then
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User(once): Add lua highlighting to `DressingInput` for Eval command",
@@ -104,11 +111,10 @@ function M.evalNvimLua()
 			pattern = "DressingInput",
 			command = "set ft=lua",
 		})
-		vim.ui.input({ prompt = "󰜎 Eval:" }, function(input) vim.cmd.lua("=" .. input) end)
+		vim.ui.input({ prompt = "󰜎 Eval: " }, eval)
 	else
 		vim.cmd.normal { '"zy', bang = true }
-		local selection = vim.fn.getreg("z")
-		vim.cmd.lua("=" .. selection)
+		eval(vim.fn.getreg("z"))
 	end
 end
 
