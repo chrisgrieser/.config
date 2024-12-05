@@ -22,10 +22,10 @@ variables:
 fail-if-warnings: true
 verbosity: WARNING
 pdf-engine-opts: ["--quiet"] # so pandoc verbosity can be set to `WARNING`
-metadata: { title: "DUMMY" } # suppress irrelevant warning if file has no h1
 
-# Filter
-filters: [set-date-metadata.lua] # auto-sets date, if there is none in the metadata
+# Metadata
+metadata: { author: Chris Grieser }
+filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
 # GENERAL

@@ -29,7 +29,7 @@ writer: docx+native_numbering
 reference-doc: ${USERDATA}/reference-docs/academic-paper.docx
 
 # Filter
-filters: [set-date-metadata.lua] # auto-sets date, if there is none in the metadata
+filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
 
