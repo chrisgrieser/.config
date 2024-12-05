@@ -141,16 +141,16 @@ return {
 	{ -- Better input/selection fields
 		"stevearc/dressing.nvim",
 		init = function(spec)
-			---@diagnostic disable: duplicate-set-field
+			---@diagnostic disable-next-line: duplicate-set-field -- intentional
 			vim.ui.select = function(items, opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
 				return vim.ui.select(items, opts, on_choice)
 			end
+			---@diagnostic disable-next-line: duplicate-set-field -- intentional
 			vim.ui.input = function(opts, on_choice)
 				require("lazy").load { plugins = { spec.name } }
 				return vim.ui.input(opts, on_choice)
 			end
-			---@diagnostic enable: duplicate-set-field
 		end,
 		keys = {
 			{ "<Tab>", "j", ft = "DressingSelect" },
@@ -205,10 +205,14 @@ return {
 							desc = "User: Add highlighting to `DressingSelect` for code actions",
 							pattern = "DressingSelect",
 							once = true,
-							callback = function(ctx) vim.treesitter.start(ctx.buf, "markdown") end,
+							callback = function(ctx)
+								vim.treesitter.start(ctx.buf, "markdown")
+								-- stylua: ignore
+								vim.api.nvim_buf_call(ctx.buf, function() vim.fn.matchadd("Nontext", [[(.*)$]]) end)
+							end,
 						})
 						local client = (vim.lsp.get_client_by_id(item.ctx.client_id) or {}).name
-						return ("%s [%s/%s]"):format(item.action.title, item.action.kind, client)
+						return ("%s (%s, %s)"):format(item.action.title, item.action.kind, client)
 					end,
 				},
 			},

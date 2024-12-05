@@ -122,6 +122,16 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>23D476BF-CBB1-4566-A47B-9919004D0153</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>⌥: Open and keep unread</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>E0C21F6A-AFB4-4763-8E80-06D3BAA3821F</key>
 		<array>
@@ -203,6 +213,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ URL saved</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9332AA79-714A-4D56-BD35-570C92624327</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -222,27 +253,6 @@
 			<string>81C89C2D-C4E6-48F4-8DDB-1F05B9FC732B</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ URL saved</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>9332AA79-714A-4D56-BD35-570C92624327</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -446,6 +456,27 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>23D476BF-CBB1-4566-A47B-9919004D0153</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -454,6 +485,7 @@
 - Any item in your reading list also shows up when using the keyword `rl`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the item in your browser and mark it as read.
 	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Mark the item as read.
+	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open and keep unread.
 
 &gt; [Unfortunately, Firefox is not and cannot be supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/)
 
@@ -495,6 +527,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>400</real>
 			<key>ypos</key>
 			<real>365</real>
+		</dict>
+		<key>23D476BF-CBB1-4566-A47B-9919004D0153</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>490</real>
 		</dict>
 		<key>4FFAD7DC-CAEC-4493-90E9-E941E1355540</key>
 		<dict>
@@ -684,7 +725,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.4</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

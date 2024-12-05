@@ -49,6 +49,10 @@ function run() {
 					cmd: {
 						variables: { mode: "mark-as-read" },
 					},
+					alt: {
+						arg: url,
+						variables: { mode: "open-and-keep-unread" },
+					},
 				},
 			};
 			return item;

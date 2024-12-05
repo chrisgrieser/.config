@@ -62,7 +62,7 @@
     "prefix": "create new nvim window"
   },
   "current line": {
-    "body": "vim.api.nvim_get_current_line()",
+    "body": "local line = vim.api.nvim_get_current_line()",
     "prefix": "get current line"
   },
   "defer": {

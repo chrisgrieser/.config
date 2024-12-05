@@ -11,8 +11,8 @@ alias irb='git rebase --interactive' # [i]nteractive [r]e[b]ase
 alias crb='git add --all ; git rebase --continue' # [c]ontinue [r]e[b]ase
 
 alias cherry='git cherry-pick'
-alias push='git push --no-progress'
-alias pull='git pull --no-progress'
+alias push='git push'
+alias pull='git pull'
 alias reset='git reset'
 
 alias gundo='git reset --mixed HEAD@{1}'
