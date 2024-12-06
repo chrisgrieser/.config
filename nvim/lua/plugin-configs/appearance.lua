@@ -226,6 +226,9 @@ return {
 				["init.lua"] = { glyph = "󰢱" },
 				["README.md"] = { glyph = "" },
 			},
+			filetype = {
+				["css"] = { hl = "MiniIconsRed" },
+			},
 		},
 		config = function(_, opts)
 			-- mocking nvim-web-devicons needed for: Telescope,

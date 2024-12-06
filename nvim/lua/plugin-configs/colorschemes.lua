@@ -83,7 +83,6 @@ local themes = {
 		-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
-		-- enabled = false,
 		opacity = 0.91,
 		opts = {
 			style = "moon",
@@ -103,6 +102,8 @@ local themes = {
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
 				hl.Italic = { italic = true }
+
+				hl.MiniIconsGreen = { fg = colors.green2 }
 
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
