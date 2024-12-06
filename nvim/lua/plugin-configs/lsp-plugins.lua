@@ -36,25 +36,23 @@ return {
 		"Wansmer/symbol-usage.nvim",
 		event = "LspAttach",
 		opts = {
-			request_pending_text = false, -- remove "loading…"
 			references = { enabled = true, include_declaration = false },
 			definition = { enabled = false },
 			implementation = { enabled = false },
 			vt_position = "signcolumn",
 			vt_priority = 7, -- gitsigns have priority of 6
 			hl = { link = "Comment" },
+			request_pending_text = false, -- disable "loading…"
 			text_format = function(symbol)
-				if not symbol.references or symbol.references == 0 then return end
-				if symbol.references < 2 and vim.bo.filetype == "css" then return end
+				if not symbol.references or symbol.references == 0 then return "" end
+				if symbol.references < 2 and vim.bo.filetype == "css" then return "" end
 				if symbol.references > 99 then return "󰐗" end
 
-				local refs = tostring(symbol.references)
-				local altDigits =
+				local digits =
 					{ "󰎡", "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼" }
-				for i = 0, #altDigits - 1 do
-					refs = refs:gsub(tostring(i), altDigits[i + 1])
-				end
-				return refs
+
+				-- stylua: ignore
+				return tostring(symbol.references):gsub("%d", function(d) return digits[tonumber(d) + 1] end)
 			end,
 			-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 			kinds = {

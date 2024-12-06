@@ -2,16 +2,12 @@
 --------------------------------------------------------------------------------
 -- BOOTSTRAP https://lazy.folke.io/installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local lazyLocallyAvailable = vim.uv.fs_stat(lazypath) ~= nil
-if not lazyLocallyAvailable then
+if not vim.uv.fs_stat(lazypath) then
 	local repo = "https://github.com/folke/lazy.nvim.git"
 	local args = { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }
 	local out = vim.system(args):wait()
 	if out.code ~= 0 then
-		vim.api.nvim_echo {
-			{ "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" },
-			{ "Press any key to exit…" },
-		}
+		vim.api.nvim_echo { { "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" } }
 		vim.fn.getchar()
 		os.exit(1)
 	end
@@ -104,8 +100,8 @@ local pluginTypeIcons = {
 	["folding"] = "󰘖",
 	["git-plugins"] = "󰊢",
 	["lsp-plugins"] = "󰒕",
-	["lualine"] = "",
-	["mason-and-lspconfig"] = "",
+	["lualine"] = "󰇜",
+	["mason"] = "",
 	["motions-and-textobjects"] = "󱡔",
 	["notification"] = "󰎟",
 	["refactoring"] = "󱗘",
