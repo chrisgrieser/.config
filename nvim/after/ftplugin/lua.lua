@@ -15,12 +15,12 @@ abbr("fi", "end")
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local charBeforeCursor = vim.api.nvim_get_current_line():sub(col, col)
-	if charBeforeCursor ~= sign or col == 1 then
+	local textBeforeCursor = vim.api.nvim_get_current_line():sub(1, col)
+	if not textBeforeCursor:find("%a%" .. sign) then
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
 		local line = vim.api.nvim_get_current_line()
-		local updated = line:gsub("(%w+)" .. vim.pesc(sign), "%1 = %1 " .. sign .. " 1")
+		local updated = line:gsub("(%w+)%" .. sign, "%1 = %1 " .. sign .. " 1")
 		vim.api.nvim_set_current_line(updated)
 		local diff = #updated - #line
 		vim.api.nvim_win_set_cursor(0, { row, col + diff })

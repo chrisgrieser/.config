@@ -736,16 +736,10 @@ rules:
                   set thisFolder to the target of the Finder window 1 as alias 
                   set newFile to (make new file at thisFolder) 
                   select newFile 
-
-                  -- trigger rename once file is selected 
-                  set i to 0 
-                  set selectedFile to "" 
-                  repeat until (selectedFile is newFile) 
-                    set selectedFile to (item 1 of (get selection)) 
-                    delay 0.1 
-                    if i > 25 then exit repeat 
-                  end repeat 
-                  tell application "System Events" to key code 36 -- 36 = enter  
+                end tell
+                delay 0.1 # ensure file is selected
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Rename" of menu "File" of menu bar 1
                 end tell
               '
 
