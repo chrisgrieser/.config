@@ -81,8 +81,7 @@ return {
 		},
 		filter = function(map) return map.desc and map.desc ~= "" end,
 		replace = {
-			-- redundant info for when displayed in which-key
-			desc = {
+			desc = { -- redundant info for when displayed in which-key
 				{ " outer ", " " },
 				{ " inner ", " " },
 				{ " rest of ", " " },
@@ -91,7 +90,7 @@ return {
 		icons = {
 			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
-			mappings = false, -- disable icons for keymaps
+			-- mappings = false, -- disable icons for keymaps
 		},
 		keys = {
 			scroll_down = "<PageDown>",
