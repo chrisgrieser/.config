@@ -73,25 +73,6 @@ return {
 				changedelete = { show_count = true },
 			},
 		},
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
-
-			-- INFO Using gitsigns.nvim's data since lualine's builtin component
-			-- is updated much less frequently and is thus often out of sync
-			-- with the gitsigns in the signcolumn.
-			vim.g.lualineAdd("sections", "lualine_y", {
-				"diff",
-				source = function()
-					local gs = vim.b.gitsigns_status_dict
-					if not gs then return end
-					return { added = gs.added, modified = gs.changed, removed = gs.removed }
-				end,
-			}, "before")
-			vim.g.lualineAdd("sections", "lualine_y", {
-				function() return "" end,
-				cond = function() return vim.b.gitsignsPrevChanges end,
-			}, "before")
-		end,
 		keys = {
 			-- stylua: ignore start
 			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
@@ -100,8 +81,7 @@ return {
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
 			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
-			{ "<leader>g?", function() require("gitsigns").blame_line() end, desc = " Blame line" },
-			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame file" },
+			{ "<leader>g!", function() require("gitsigns").blame() end, desc = "󰊢 Blame file" },
 			{ "q", vim.cmd.close, ft = "gitsigns-blame", desc = "Close", nowait = true },
 
 			-- UNDO
@@ -133,5 +113,38 @@ return {
 				desc = "󰊢 Prev/present hunks",
 			},
 		},
+		config = function(_, opts)
+			require("gitsigns").setup(opts)
+
+			-- GIT STATUS LINE
+			-- change count
+			-- INFO Using gitsigns.nvim's data since lualine's builtin component
+			-- is updated much less frequently and is thus often out of sync
+			-- with the gitsigns in the signcolumn.
+			vim.g.lualineAdd("sections", "lualine_y", {
+				"diff",
+				source = function()
+					local gs = vim.b.gitsigns_status_dict
+					if not gs then return end
+					return { added = gs.added, modified = gs.changed, removed = gs.removed }
+				end,
+			}, "before")
+
+			-- hunk count
+			vim.g.lualineAdd("sections", "lualine_y", {
+				function()
+					local hunks = #require("gitsigns").get_hunks() ---@diagnostic disable-line: missing-parameter
+					if hunks == 0 then return "" end
+					return "▪" .. hunks
+				end,
+				padding = { left = 1, right = 0 },
+			}, "before")
+
+			-- gitsigns base
+			vim.g.lualineAdd("sections", "lualine_y", {
+				function() return "" end,
+				cond = function() return vim.b.gitsignsPrevChanges end,
+			}, "before")
+		end,
 	},
 }

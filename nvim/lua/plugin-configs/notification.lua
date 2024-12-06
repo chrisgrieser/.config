@@ -250,8 +250,11 @@ return {
 		silenceE486PatternNotFound()
 	end,
 	keys = {
-		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰒕 Next reference" },
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰒕 Prev reference" },
+		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
+		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
+
+		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰉚 Blame line" },
+
 		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
 		{ "<D-0>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
 		-- stylua: ignore
@@ -289,6 +292,12 @@ return {
 			notification = {
 				border = vim.g.borderStyle,
 				wo = { cursorline = false, winblend = 0, wrap = true },
+			},
+			blame_line = {
+				width = 0.6,
+				height = 0.6,
+				border = vim.g.borderStyle,
+				title = " 󰉚 Git blame ",
 			},
 		},
 	},
