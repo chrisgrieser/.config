@@ -331,34 +331,23 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 --------------------------------------------------------------------------------
 
 -- BUFFERS & FILES
-keymap(
-	{ "n", "x" },
-	"<CR>",
-	function() require("personal-plugins.alt-alt").gotoAltFile() end,
-	{ desc = "󰬈 Goto alt-file" }
-)
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: restore default behavior of `<CR>` for qf buffers.",
-	pattern = "qf",
-	callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
-})
+do
+	keymap(
+		{ "n", "x" },
+		"<CR>",
+		function() require("personal-plugins.alt-alt").gotoAltFile() end,
+		{ desc = "󰬈 Goto alt-file" }
+	)
+	vim.api.nvim_create_autocmd("FileType", {
+		desc = "User: restore default behavior of `<CR>` for quickfix buffers.",
+		pattern = "qf",
+		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
+	})
+end
 
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
 keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
-
-keymap("n", "<D-T>", function()
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	local openBufpaths = vim.tbl_map(function(buf) return buf.name end, openBuffers)
-	for i = 1, #vim.v.oldfiles do
-		local file = vim.v.oldfiles[i]
-		if not vim.tbl_contains(openBufpaths, file) then
-			vim.cmd.edit(file)
-			return
-		end
-	end
-	vim.notify("No last closed buffer found.", vim.log.levels.WARN)
-end, { desc = "󰑏 Re-open last closed buffer" })
 
 keymap(
 	{ "n", "x" },

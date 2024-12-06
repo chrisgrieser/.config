@@ -295,7 +295,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed")
 
 				-- notify
-				local header = ("%d conflict markers found."):format(#conflictLnums)
+				local header = ("%d conflicts found."):format(#conflictLnums / 4)
 				local mapInfoStr = table.concat(mapInfo, "\n")
 				vim.notify(header .. mapInfoStr, nil, { title = "Merge conflicts", icon = "󰞇" })
 			end)
