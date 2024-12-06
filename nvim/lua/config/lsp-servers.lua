@@ -29,7 +29,10 @@ local lspToMasonMap = {
 }
 
 ---@module "lspconfig"
----@type table<string, lspconfig.Config>
+---@class myLspConfig : lspconfig.Config
+---@field cmd? string -- make this optional
+
+---@type table<string, myLspConfig>
 M.serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	M.serverConfigs[lspName] = {}

@@ -77,7 +77,7 @@ local autoCdConfig = {
 		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- macOS iCloud
 		vim.fs.basename(vim.env.HOME), -- $HOME
-		"Cellar", -- opt/homebrew/Cellar/neovim
+		"Cellar", -- homebrew stuff
 	},
 }
 vim.api.nvim_create_autocmd("BufEnter", {

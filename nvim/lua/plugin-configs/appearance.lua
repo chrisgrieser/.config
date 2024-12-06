@@ -47,12 +47,14 @@ return {
 				"<leader>oc",
 				function() require("render-markdown").toggle() end,
 				ft = "markdown",
-				desc = " Markdown Render",
+				desc = " Markdown render",
 			},
 		},
 		opts = {
 			render_modes = { "n", "c", "i", "v", "V" },
-			sign = { enabled = false },
+			sign = {
+				enabled = false,
+			},
 			html = {
 				comment = { text = "󰆈" },
 			},
@@ -70,7 +72,7 @@ return {
 			link = {
 				custom = {
 					myWebsite = { pattern = "https://chris%-grieser.de", icon = " " },
-					proseSh = { pattern = "prose%.sh", icon = "󰏫 " },
+					proseSh = { pattern = "prose%.sh", icon = " " },
 					mastodon = { pattern = "%.social/@", icon = " " },
 					linkedin = { pattern = "linkedin%.com", icon = "󰌻 " },
 					researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
@@ -218,19 +220,21 @@ return {
 			},
 		},
 	},
-	{
+	{ -- icon library
 		"echasnovski/mini.icons",
 		opts = {
 			file = {
 				["init.lua"] = { glyph = "󰢱" }, -- no nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
 				["README.md"] = { glyph = "" },
+				[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 			},
 			extension = {
-				["d.ts"] = { glyph = "" }, -- distinguish `.d.ts` from `.ts`
+				["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
 			},
 			filetype = {
 				["css"] = { hl = "MiniIconsRed" },
 				["typescript"] = { hl = "MiniIconsCyan" },
+				["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
 			},
 		},
 		config = function(_, opts)
