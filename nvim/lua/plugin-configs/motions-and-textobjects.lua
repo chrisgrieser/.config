@@ -104,6 +104,21 @@ return {
 			{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer ca[l]l" },
 			{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner ca[l]l" },
 			-- stylua: ignore end
+
+			-- CHANGE SURROUNDING CALL
+			-- complementary to `dsl` (configured via surround.nvim)
+			{
+				"csl",
+				function()
+					vim.cmd.TSTextobjectSelect("@call.outer")
+					vim.cmd.normal { "d", bang = true }
+					local comStr = vim.trim(vim.bo.commentstring:format(""))
+					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
+					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
+					vim.cmd.startinsert { bang = true }
+				end,
+				desc = "󰡱 Change surrounding call",
+			},
 		},
 	},
 	{ -- pattern-based textobjs
@@ -254,23 +269,12 @@ return {
 				"N",
 				mode = "o",
 				function()
-					local charwise = require("various-textobjs.textobjs.charwise")
+					local charwise = require("various-textobjs.textobjs.charwise.core")
 					local pattern = "().(%S+%s*)$"
 					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
 					charwise.selectFromCursorTo({ row, endCol }, 0)
 				end,
 				desc = "󰬞 to last WORD",
-			},
-			{ -- to opening bracket
-				"B",
-				mode = "o",
-				function()
-					local charwise = require("various-textobjs.textobjs.charwise")
-					local pattern = "().([%[({])"
-					local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
-					charwise.selectFromCursorTo({ row, endCol }, 0)
-				end,
-				desc = "⦗ to opening bracket",
 			},
 		},
 	},

@@ -91,10 +91,10 @@ return {
 	{ -- surround
 		"kylechui/nvim-surround",
 		keys = {
-			{ "ys", desc = "󰅪 Add Surround Op." },
+			{ "ys", desc = "󰅪 Add surround operator" },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
-			{ "ds", desc = "󰅪 Delete Surround Op." },
-			{ "cs", desc = "󰅪 Change Surround Op." },
+			{ "ds", desc = "󰅪 Delete surround operator" },
+			{ "cs", desc = "󰅪 Change surround operator" },
 		},
 		opts = {
 			move_cursor = false,
