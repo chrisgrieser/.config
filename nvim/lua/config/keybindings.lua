@@ -164,9 +164,9 @@ local textobjRemaps = {
 	{ "c", "}", "", "curly" }, -- [c]urly brace
 	{ "r", "]", "󰅪", "rectangular" }, -- [r]ectangular bracket
 	{ "m", "W", "󰬞", "WORD" }, -- [m]assive word
-	{ "q", '"', "", "double" }, -- [q]uote
-	{ "z", "'", "", "single" }, -- [z]ingle quote
-	{ "e", "`", "", "backtick" }, -- t[e]mplate string / inline cod[e]
+	{ "q", '"', "󰉾", "double" }, -- [q]uote
+	{ "z", "'", "󰉾", "single" }, -- [z]ingle quote
+	{ "e", "`", "󱆨", "backtick" }, -- t[e]mplate string / inline cod[e]
 }
 for _, value in pairs(textobjRemaps) do
 	local remap, original, icon, label = unpack(value)

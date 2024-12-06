@@ -2,12 +2,11 @@
 ---@param key string
 ---@param label string
 vim.g.whichkeyAddGroup = function(key, label)
-	-- Deferred to ensure whichkey spec is loaded & does not conflict with
-	-- whichkey itself being lazy-loading
 	vim.defer_fn(function()
-		local ok, whichkey = pcall(require, "which-key")
-		if not ok then return end
-		whichkey.add { { key, group = label, mode = { "n", "x" } } }
+		-- Deferred to ensure spec is loaded after whichkey itself
+		require("which-key").add {
+			{ key, group = label, mode = { "n", "x" } },
+		}
 	end, 1500)
 end
 
@@ -31,8 +30,17 @@ return {
 	},
 	opts = {
 		delay = 666,
+
+		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
+		preset = "helix",
+		win = {
+			border = vim.g.borderStyle,
+			wo = { winblend = 0 },
+			height = { min = 0, max = 0.9 },
+		},
+
 		spec = {
-			{
+			{ -- leader subgroups
 				mode = { "n", "x" },
 				{ "<leader>", group = "󰓎 Leader" },
 				{ "<leader>c", group = " Code action" },
@@ -72,25 +80,21 @@ return {
 		},
 		filter = function(map) return map.desc and map.desc ~= "" end,
 		replace = {
-			-- redundant for hints (frontier-pattern to keep "outer any…" mappings)
+			-- redundant info for when displayed in which-key
 			desc = {
-				{ " outer %f[^a ]", " " },
-				{ " inner %f[^a ]", " " },
+				{ " outer ", " " },
+				{ " inner ", " " },
 				{ " rest of ", " " },
 			},
 		},
-		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
-		preset = "helix",
-		win = {
-			border = vim.g.borderStyle,
-			wo = { winblend = 0 },
-			height = { min = 0, max = 0.9 },
-		},
-		keys = { scroll_down = "<PageDown>", scroll_up = "<PageUp>" },
 		icons = {
 			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
 			mappings = false, -- disable icons for keymaps
+		},
+		keys = {
+			scroll_down = "<PageDown>",
+			scroll_up = "<PageUp>",
 		},
 		show_help = false,
 	},

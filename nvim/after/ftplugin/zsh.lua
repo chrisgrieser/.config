@@ -1,8 +1,10 @@
 -- ABBREVIATIONS
 local abbr = require("config.utils").bufAbbrev
+
 abbr("//", "#")
 abbr("delay", "sleep")
 abbr("const", "local")
+abbr("~=", "=~") -- lua uses `=~`
 
 --------------------------------------------------------------------------------
 -- KEYMAPS
