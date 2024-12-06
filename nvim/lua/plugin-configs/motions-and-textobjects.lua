@@ -118,7 +118,7 @@ return {
 				function()
 					-- for deletions use the outer subword, otherwise the inner
 					local scope = vim.v.operator == "d" and "outer" or "inner"
-					require("various-textobjs").subwod(scope)
+					require("various-textobjs").subword(scope)
 				end,
 				mode = "o",
 				desc = "󰬞 subword",
