@@ -151,9 +151,9 @@ keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
 keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
-keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
+keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
+keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
+keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
 keymap("i", "<D-a>", " => ", { desc = "=> Arrow" })
 
@@ -164,9 +164,9 @@ local textobjRemaps = {
 	{ "c", "}", "", "curly" }, -- [c]urly brace
 	{ "r", "]", "󰅪", "rectangular" }, -- [r]ectangular bracket
 	{ "m", "W", "󰬞", "WORD" }, -- [m]assive word
-	{ "q", '"', "󰉾", "double" }, -- [q]uote
-	{ "z", "'", "󰉾", "single" }, -- [z]ingle quote
-	{ "e", "`", "󱆨", "backtick" }, -- t[e]mplate string / inline cod[e]
+	{ "q", '"', "", "double" }, -- [q]uote
+	{ "z", "'", "", "single" }, -- [z]ingle quote
+	{ "e", "`", "", "backtick" }, -- t[e]mplate string / inline cod[e]
 }
 for _, value in pairs(textobjRemaps) do
 	local remap, original, icon, label = unpack(value)
