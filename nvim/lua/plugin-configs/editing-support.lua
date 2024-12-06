@@ -203,7 +203,7 @@ return {
 	{ -- quickly add log statements
 		"chrisgrieser/nvim-chainsaw",
 		ft = "lua", -- in lua, load directly for `Chainsaw` global
-		init = function() vim.g.whichkeyAddGroup("<leader>l", "󰐪 Log") end,
+		init = function() vim.g.whichkeyAddGroup { "<leader>l", group = "Log", icon = "󰐪" } end,
 		opts = {
 			logStatements = {
 				variableLog = {
@@ -224,7 +224,9 @@ return {
 
 				-- Hammerspoon
 				clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
-				sound = { lua = 'hs.sound.getByName("Sosumi"):play() ---@diagnostic disable-line: undefined-field -- 🪚' },
+				sound = {
+					lua = 'hs.sound.getByName("Sosumi"):play() ---@diagnostic disable-line: undefined-field -- 🪚',
+				},
 			},
 		},
 		config = function(_, opts)
