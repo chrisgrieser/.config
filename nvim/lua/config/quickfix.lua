@@ -22,6 +22,7 @@ end, { desc = " Next quickfix" })
 keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = " Prev quickfix" })
 
 keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = " Delete quickfix list" })
+keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st quickfix item" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
