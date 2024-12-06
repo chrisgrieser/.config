@@ -546,6 +546,10 @@ nnoremap ,od :enableDiagnostics<CR>
 exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
 nnoremap ,oD :disableDiagnostics<CR>
 
-" [O]ption: [a]completion
+" [O]ption: [a]i-completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion<CR>
+
+" [O]ption: [c]onceal
+exmap sourceModeLivePreview obcommand editor:toggle-source
+nnoremap ,oc :sourceModeLivePreview<CR>

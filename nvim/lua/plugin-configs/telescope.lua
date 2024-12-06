@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
 return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
-	dependencies = { "nvim-lua/plenary.nvim", vim.g.iconPlugin },
+	dependencies = { "nvim-lua/plenary.nvim", "echasnovski/mini.icons" },
 	config = function()
 		require("personal-plugins.telescope-backdrop")
 

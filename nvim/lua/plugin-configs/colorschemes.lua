@@ -103,8 +103,6 @@ local themes = {
 				hl.Bold = { bold = true }
 				hl.Italic = { italic = true }
 
-				hl.MiniIconsGreen = { fg = colors.green2 }
-
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
 				hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg }
@@ -125,6 +123,10 @@ local themes = {
 				hl.SpellCap = { underdotted = true, sp = hl.SpellCap.sp }
 				hl.SpellRare = { underdotted = true, sp = hl.SpellRare.sp }
 				hl.SpellLocal = { underdotted = true, sp = hl.SpellLocal.sp }
+
+				-- mini.icons
+				hl.MiniIconsGreen = { fg = "#62c56e" }
+				hl.MiniIconsGrey = { fg = colors.fg_dark }
 			end,
 		},
 	},

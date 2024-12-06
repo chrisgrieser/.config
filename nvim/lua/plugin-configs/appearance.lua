@@ -40,7 +40,7 @@ return {
 	},
 	{ -- markdown live-preview
 		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", vim.g.iconPlugin },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 		ft = "markdown",
 		keys = {
 			{
@@ -219,23 +219,23 @@ return {
 		},
 	},
 	{
-		vim.g.iconPlugin,
+		"echasnovski/mini.icons",
 		opts = {
 			file = {
-				-- do not use nvim glyph for all nvim files https://github.com/echasnovski/mini.nvim/issues/1384
-				["init.lua"] = { glyph = "󰢱" },
+				["init.lua"] = { glyph = "󰢱" }, -- no nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
 				["README.md"] = { glyph = "" },
+			},
+			extension = {
+				["d.ts"] = { glyph = "" }, -- distinguish `.d.ts` from `.ts`
 			},
 			filetype = {
 				["css"] = { hl = "MiniIconsRed" },
+				["typescript"] = { hl = "MiniIconsCyan" },
 			},
 		},
 		config = function(_, opts)
-			-- mocking nvim-web-devicons needed for: Telescope,
-			if vim.g.iconPlugin == "echasnovski/mini.icons" then
-				require("mini.icons").setup(opts)
-				MiniIcons.mock_nvim_web_devicons()
-			end
+			require("mini.icons").setup(opts)
+			require("mini.icons").mock_nvim_web_devicons()
 		end,
 	},
 }
