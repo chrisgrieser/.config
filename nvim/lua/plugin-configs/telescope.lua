@@ -38,8 +38,7 @@ return {
 				selection_caret = " ",
 				prompt_prefix = " ",
 				multi_icon = "󰒆 ",
-				results_title = false,
-				prompt_title = false,
+				results_title = false, -- just says "Results" in most cases
 				dynamic_preview_title = true,
 				preview = { timeout = 500, filesize_limit = 1 }, -- ms & Mb
 				borderchars = borderChars,
@@ -122,7 +121,6 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 
-					prompt_prefix = "󰝰 ",
 					follow = true,
 					mappings = {
 						i = {
@@ -133,7 +131,7 @@ return {
 
 								local prevTitle = current_picker.prompt_title
 								local currentQuery = require("telescope.actions.state").get_current_line()
-								local title = "Find Files: " .. vim.fs.basename(cwd)
+								local title = "󰝰 Find files: " .. vim.fs.basename(cwd)
 								local ignore = vim.deepcopy(
 									require("telescope.config").values.file_ignore_patterns or {}
 								)
@@ -176,7 +174,7 @@ return {
 					previewer = false,
 				},
 				oldfiles = {
-					prompt_prefix = "󰋚 ",
+					prompt_title = "󰋚 Oldfiles",
 					path_display = function(_, path)
 						local parentOfRoots = {
 							vim.g.localRepos,
@@ -202,12 +200,12 @@ return {
 					previewer = false,
 				},
 				live_grep = {
-					prompt_prefix = " ",
+					prompt_title = " Live grep",
 					disable_coordinates = true,
 					layout_config = { horizontal = { preview_width = 0.7 } },
 				},
 				git_status = {
-					prompt_prefix = "󰊢 ",
+					prompt_title = "󰊢 Git status",
 					show_untracked = true,
 					file_ignore_patterns = {}, -- do not ignore images etc here
 					mappings = {
@@ -229,8 +227,7 @@ return {
 					},
 				},
 				git_commits = {
-					prompt_prefix = "󰊢 ",
-					prompt_title = "Git Log",
+					prompt_title = "󰊢 Git log",
 					layout_config = { horizontal = { preview_width = 0.5 } },
 					git_command = { "git", "log", "--all", "--format=%h %s %cr", "--", "." },
 					previewer = require("telescope.previewers").new_termopen_previewer {
@@ -259,7 +256,7 @@ return {
 					},
 				},
 				git_branches = {
-					prompt_prefix = " ",
+					prompt_title = " Git branches",
 					show_remote_tracking_branches = true,
 					previewer = false,
 					layout_config = { horizontal = { height = 0.4, width = 0.7 } },
@@ -271,12 +268,12 @@ return {
 					},
 				},
 				keymaps = {
-					prompt_prefix = " ",
+					prompt_title = "  Keymaps",
 					modes = { "n", "i", "c", "x", "o", "t" },
 					show_plug = false,
 				},
 				highlights = {
-					prompt_prefix = " ",
+					prompt_title = " Highlights",
 					layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 					mappings = {
 						i = {
@@ -302,7 +299,7 @@ return {
 					},
 				},
 				lsp_references = {
-					prompt_prefix = "󰈿 ",
+					prompt_title = "󰈿 LSP references",
 					trim_text = true,
 					show_line = false,
 					include_declaration = false,
@@ -310,28 +307,28 @@ return {
 					layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 				},
 				lsp_definitions = {
-					prompt_prefix = "󰈿 ",
+					prompt_title = "󰈿 LSP definitions",
 					trim_text = true,
 					show_line = false,
 					layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 				},
 				lsp_type_definitions = {
-					prompt_prefix = "󰜁 ",
+					prompt_title = "󰜁 LSP type definitions",
 					trim_text = true,
 					show_line = false,
 					layout_config = { horizontal = { preview_width = { 0.7, min = 30 } } },
 				},
 				lsp_document_symbols = {
-					prompt_prefix = "󰒕 ",
+					prompt_title = "󰒕 LSP document symbols",
 				},
 				treesitter = {
-					prompt_prefix = " ",
+					prompt_title = " ",
 					symbols = { "function", "method" },
 					show_line = false,
 					symbol_highlights = { ["function"] = "Function", method = "Method" }, -- FIX broken colors
 				},
 				lsp_dynamic_workspace_symbols = { -- `dynamic` = updates results on typing
-					prompt_prefix = "󰒕 ",
+					prompt_title = "󰒕 LSP workspace symbols",
 					fname_width = 0, -- can see name in preview title already
 					symbol_width = 30,
 					file_ignore_patterns = {
@@ -343,7 +340,7 @@ return {
 					},
 				},
 				spell_suggest = {
-					prompt_prefix = "󰓆",
+					prompt_title = "󰓆 Spell suggest",
 					previewer = false,
 					theme = "cursor",
 					layout_config = { cursor = { width = 0.3 } },
@@ -351,7 +348,7 @@ return {
 				colorscheme = {
 					enable_preview = true,
 					ignore_builtins = true,
-					prompt_prefix = " ",
+					prompt_title = " Colorschemes",
 					layout_config = {
 						horizontal = {
 							height = 0.4,
@@ -453,7 +450,7 @@ return {
 			"gl",
 			function()
 				local projectName = vim.fs.basename(vim.uv.cwd() or "")
-				require("telescope.builtin").live_grep { prompt_title = "Live Grep: " .. projectName }
+				require("telescope.builtin").live_grep { prompt_title = "Live grep: " .. projectName }
 			end,
 			desc = "󰭎 Live-grep",
 		},
@@ -465,7 +462,7 @@ return {
 				local sel = vim.trim(vim.fn.getreg("z"))
 				require("telescope.builtin").live_grep {
 					default_text = sel,
-					prompt_title = "Live Grep: " .. projectName,
+					prompt_title = "Live grep: " .. projectName,
 				}
 			end,
 			mode = "x",

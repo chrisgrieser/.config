@@ -223,7 +223,8 @@ return {
 		opts = {
 			file = {
 				-- do not use nvim glyph for all nvim files https://github.com/echasnovski/mini.nvim/issues/1384
-				["init.lua"] = { glyph = "󰢱", hl = "MiniIconsAzure" },
+				["init.lua"] = { glyph = "󰢱" },
+				["README.md"] = { glyph = "" },
 			},
 		},
 		config = function(_, opts)

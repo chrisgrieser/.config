@@ -52,7 +52,6 @@ local function autoTile(appName)
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
-	-- print(("🪟 %s: %d wins"):format(appName, #wins))
 	local pos = {}
 	if #wins == 0 then
 		config.zeroWindowAction(appName)
