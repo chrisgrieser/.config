@@ -130,15 +130,15 @@ bkeymap("n", "<leader>er", function()
 	-- * cannot use shell's `open` as it does not work with anchors
 	-- * closing tab to ensure it's correctly refreshed
 	local applescript = ([[
-	tell application %q
-	if (front window exists) then
-	repeat with the_tab in (every tab in front window)
-	set the_url to the url of the_tab
-	if the_url contains (%q) then close the_tab
-	end repeat
-	end if
-	open location %q
-	end tell
+		tell application %q
+		if (front window exists) then
+		repeat with the_tab in (every tab in front window)
+		set the_url to the url of the_tab
+		if the_url contains (%q) then close the_tab
+		end repeat
+		end if
+		open location %q
+		end tell
 	]]):format(browser, outputPath, url)
 	vim.system { "osascript", "-e", applescript }
 end, { desc = " Preview" })
