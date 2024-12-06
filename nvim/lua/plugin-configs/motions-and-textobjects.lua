@@ -112,6 +112,7 @@ return {
 	},
 	{ -- pattern-based textobjs
 		"chrisgrieser/nvim-various-textobjs",
+		opts = { debug = false },
 		keys = {
 			{
 				"<Space>",

@@ -220,6 +220,12 @@ return {
 	},
 	{
 		vim.g.iconPlugin,
+		opts = {
+			file = {
+				-- do not use nvim glyph for all nvim files https://github.com/echasnovski/mini.nvim/issues/1384
+				["init.lua"] = { glyph = "󰢱", hl = "MiniIconsAzure" },
+			},
+		},
 		config = function(_, opts)
 			-- mocking nvim-web-devicons needed for: Telescope,
 			if vim.g.iconPlugin == "echasnovski/mini.icons" then

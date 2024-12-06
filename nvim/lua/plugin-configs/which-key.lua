@@ -1,13 +1,9 @@
 ---Set up plugin-specific groups cleanly with the plugin config.
----@param key string
----@param label string
-vim.g.whichkeyAddGroup = function(key, label)
-	vim.defer_fn(function()
-		-- Deferred to ensure spec is loaded after whichkey itself
-		require("which-key").add {
-			{ key, group = label, mode = { "n", "x" } },
-		}
-	end, 1500)
+---@param spec wk.Spec
+vim.g.whichkeyAddGroup = function(spec)
+	spec.mode = { "n", "x" }
+	-- Deferred to ensure spec is loaded after whichkey itself
+	vim.defer_fn(function() require("which-key").add(spec) end, 1500)
 end
 
 --------------------------------------------------------------------------------
@@ -36,24 +32,24 @@ return {
 		win = {
 			border = vim.g.borderStyle,
 			wo = { winblend = 0 },
-			height = { min = 0, max = 0.9 },
+			height = { min = 0, max = 0.99 },
 		},
 
 		spec = {
 			{ -- leader subgroups
 				mode = { "n", "x" },
-				{ "<leader>", group = "󰓎 Leader" },
-				{ "<leader>c", group = " Code action" },
-				{ "<leader>e", group = "󰓗 Execute" },
-				{ "<leader>f", group = "󱗘 Refactor" },
-				{ "<leader>g", group = "󰊢 Git" },
-				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>m", group = " Merge conflicts" },
-				{ "<leader>o", group = "󰒓 Option toggle" },
-				{ "<leader>p", group = "󰏗 Packages" },
-				{ "<leader>q", group = " Quickfix" },
-				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>y", group = "󰅍 Yanking" },
+				{ "<leader>", group = "Leader", icon = "󰓎" },
+				{ "<leader>c", group = "Code action", icon = "" },
+				{ "<leader>e", group = "Execute", icon = "󰓗" },
+				{ "<leader>f", group = "Refactor", icon = "󱗘" },
+				{ "<leader>g", group = "Git", icon = "󰊢" },
+				{ "<leader>i", group = "Inspect", icon = "󱈄" },
+				{ "<leader>m", group = "Merge conflicts", icon = "" },
+				{ "<leader>o", group = "Option toggle", icon = "󰒓" },
+				{ "<leader>p", group = "Packages", icon = "󰏗" },
+				{ "<leader>q", group = "Quickfix", icon = "" },
+				{ "<leader>u", group = "Undo", icon = "󰕌" },
+				{ "<leader>y", group = "Yanking", icon = "󰅍" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },
@@ -61,17 +57,17 @@ return {
 				{ "i", group = "inner" },
 				{ "a", group = "outer" },
 				{ "g", group = "misc" },
-				{ "ip", desc = "¶ paragraph" },
-				{ "ap", desc = "¶ paragraph" },
-				{ "ib", desc = "󰅲 bracket" },
-				{ "ab", desc = "󰅲 bracket" },
-				{ "it", desc = " tag" },
-				{ "at", desc = " tag" },
-				{ "is", desc = "󰰢 sentence" },
-				{ "as", desc = "󰰢 sentence" },
-				{ "iw", desc = "󰬞 word" },
-				{ "aw", desc = "󰬞 word" },
-				{ "gn", desc = " search result" },
+				{ "ip", desc = "paragraph", icon = "¶" },
+				{ "ap", desc = "paragraph", icon = "¶" },
+				{ "ib", desc = "bracket", icon = "󰅲" },
+				{ "ab", desc = "bracket", icon = "󰅲" },
+				{ "it", desc = "tag", icon = "" },
+				{ "at", desc = "tag", icon = "" },
+				{ "is", desc = "sentence", icon = "󰰢" },
+				{ "as", desc = "sentence", icon = "󰰢" },
+				{ "iw", desc = "word", icon = "󰬞" },
+				{ "aw", desc = "word", icon = "󰬞" },
+				{ "gn", desc = "search result", icon = "" },
 			},
 		},
 		plugins = {
