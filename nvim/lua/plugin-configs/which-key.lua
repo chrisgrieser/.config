@@ -48,7 +48,7 @@ return {
 				{ "<leader>f", group = "󱗘 Refactor" },
 				{ "<leader>g", group = "󰊢 Git" },
 				{ "<leader>i", group = "󱈄 Inspect" },
-				{ "<leader>m", group = "󰞇 Merge conflicts" },
+				{ "<leader>m", group = " Merge conflicts" },
 				{ "<leader>o", group = "󰒓 Option toggle" },
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },

@@ -290,14 +290,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				end
 				-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
 				map("<leader>mm", "/<<<<CR>", "Goto [m]erge [m]arker")
-				map("<leader>mu", "dd/|||<CR>0v/>>><CR>$x", "[m]erge [u]pstream")
-				map("<leader>mb", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "[m]erge [b]ase")
-				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed")
+				map("<leader>mu", "dd/|||<CR>0v/>>><CR>$x", "[m]erge [u]pstream (top)")
+				map("<leader>mb", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "[m]erge [b]ase (middle)")
+				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed (bottom)")
 
 				-- notify
-				local header = ("%d conflicts found."):format(#conflictLnums / 4)
+				local header = ("%d conflicts found."):format(math.ceil(#conflictLnums / 4))
 				local mapInfoStr = table.concat(mapInfo, "\n")
-				vim.notify(header .. mapInfoStr, nil, { title = "Merge conflicts", icon = "󰞇" })
+				vim.notify(header .. mapInfoStr, nil, { title = "Merge conflicts", icon = "" })
 			end)
 		)
 	end,
