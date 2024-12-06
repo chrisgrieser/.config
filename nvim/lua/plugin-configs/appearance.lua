@@ -220,8 +220,9 @@ return {
 	},
 	{
 		vim.g.iconPlugin,
-		config = function(spec, opts)
-			if spec[1] == "echasnovski/mini.icons" then
+		config = function(_, opts)
+			-- mocking nvim-web-devicons needed for: Telescope,
+			if vim.g.iconPlugin == "echasnovski/mini.icons" then
 				require("mini.icons").setup(opts)
 				MiniIcons.mock_nvim_web_devicons()
 			end
