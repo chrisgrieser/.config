@@ -16,6 +16,9 @@ vim.g.mapleader = ","
 vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
+vim.g.iconPlugin = "echasnovski/mini.icons"
+-- vim.g.iconPlugin = "nvim-tree/nvim-web-devicons"
+
 --------------------------------------------------------------------------------
 
 ---Try to require the module, but do not throw error when one of them cannot be

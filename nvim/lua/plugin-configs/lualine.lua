@@ -131,6 +131,6 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter", -- not `VeryLazy` so UI does not flicker
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = vim.g.iconPlugin,
 	opts = lualineOpts,
 }

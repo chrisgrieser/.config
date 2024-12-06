@@ -8,7 +8,7 @@
 
 # ctrl+u -> cut whole buffer
 function _cut_buffer {
-	echo -n "$BUFFER" | pbcopy
+	echo -n -- "$BUFFER" | pbcopy
 	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
 zle -N _cut_buffer
@@ -45,7 +45,6 @@ bindkey "^E" end-of-line
 # VI MODE
 bindkey -v
 export KEYTIMEOUT=1                        # no delay when pressing <Esc>
-bindkey -M viins '^?' backward-delete-char # FIX backspace
 
 # CURSOR SHAPE # https://unix.stackexchange.com/a/614203
 function zle-keymap-select {
@@ -57,7 +56,6 @@ function zle-keymap-select {
 	fi
 }
 zle -N zle-keymap-select
-
 _fix_cursor() { echo -ne '\e[5 q'; }
 precmd_functions+=(_fix_cursor)
 
@@ -72,35 +70,34 @@ bindkey -M vicmd 'H' vi-first-non-blank
 
 bindkey -M vicmd -s ' ' 'ciw' # -s flag sends direct keystrokes and therefore allows for remappings
 bindkey -M vicmd 'U' redo
-bindkey -M vicmd 'M' vi-join
+bindkey -M vicmd 'm' vi-join
 bindkey -M vicmd -s 'Y' 'y$'
 
 #───────────────────────────────────────────────────────────────────────────────
 # YANK/DELETE to (macOS) system clipboard
 
-function _vi_yank_pbcopy { zle vi-yank; print -n "$CUTBUFFER" | pbcopy; }
+function _vi_yank_pbcopy { zle vi-yank; print -n -- "$CUTBUFFER" | pbcopy; }
 zle -N _vi_yank_pbcopy
 bindkey -M vicmd 'y' _vi_yank_pbcopy
 
-function _vi-kill-eol { zle vi-kill-eol; print -n "$CUTBUFFER" | pbcopy; }
+function _vi-kill-eol { zle vi-kill-eol; print -n -- "$CUTBUFFER" | pbcopy; }
 zle -N _vi-kill-eol
 bindkey -M vicmd 'D' _vi-kill-eol
 
-function _vi_delete_pbcopy { zle vi-delete; print -n "$CUTBUFFER" | pbcopy; }
+function _vi_delete_pbcopy { zle vi-delete; print -n -- "$CUTBUFFER" | pbcopy; }
 zle -N _vi_delete_pbcopy
 bindkey -M vicmd 'd' _vi_delete_pbcopy
 
 #───────────────────────────────────────────────────────────────────────────────
 # ADD VIM TEXT OBJECTS
 
-autoload -U select-bracketed
-zle -N select-bracketed
-autoload -U select-quoted
-zle -N select-quoted
+autoload -U select-bracketed && zle -N select-bracketed
 # shellcheck disable=2296
 for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
 	bindkey -M viopp "$c" select-bracketed
 done
-for c in {a,i}{\',\",\`,q,z,e}; do
+
+autoload -U select-quoted && zle -N select-quoted
+for c in {a,i}{\',\",\`}; do
 	bindkey -M viopp "$c" select-quoted
 done

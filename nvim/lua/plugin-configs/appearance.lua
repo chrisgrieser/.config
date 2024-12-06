@@ -40,7 +40,7 @@ return {
 	},
 	{ -- markdown live-preview
 		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", vim.g.iconPlugin },
 		ft = "markdown",
 		keys = {
 			{
@@ -217,5 +217,14 @@ return {
 				},
 			},
 		},
+	},
+	{
+		vim.g.iconPlugin,
+		config = function(spec, opts)
+			if spec[1] == "echasnovski/mini.icons" then
+				require("mini.icons").setup(opts)
+				MiniIcons.mock_nvim_web_devicons()
+			end
+		end,
 	},
 }
