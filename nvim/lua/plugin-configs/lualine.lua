@@ -131,6 +131,6 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter", -- not `VeryLazy` so UI does not flicker
-	dependencies = vim.g.iconPlugin,
+	dependencies = "echasnovski/mini.icons",
 	opts = lualineOpts,
 }

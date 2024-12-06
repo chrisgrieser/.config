@@ -57,7 +57,7 @@ local function openNotif(idx)
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer,
 		footer_pos = footer and "right" or nil,
-		wo = {
+		wo = { ---@diagnostic disable-line: missing-fields -- faulty annotation
 			winhighlight = table.concat(highlights, ","),
 			wrap = true, -- only one message, so use full space
 		},
@@ -101,16 +101,17 @@ local function messagesAsWin()
 		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
 		return
 	end
-	local lines = vim.iter(vim.split(messages, "\n")):totable()
+	local lines = vim.split(messages, "\n")
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-	require("snacks").win {
+	require("snacks").win { ---@diagnostic disable-line: missing-fields -- faulty annotation
 		position = "bottom",
 		buf = bufnr,
 		height = 0.75,
-		title = " :messages ",
 		-- goto last message via `G` (can't reverse lines as it messes up multi-line msgs)
 		on_win = function() vim.cmd.normal { "G", bang = true } end,
+		---@diagnostic disable-next-line: missing-fields -- faulty annotation
+		wo = { list = true }, -- indicate longer lines etc.
 	}
 	-- highlight errors and paths
 	vim.api.nvim_buf_call(bufnr, function()

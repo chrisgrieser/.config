@@ -120,15 +120,6 @@
   "editor:open-link-in-new-leaf": [],
   "editor:open-link-in-new-window": [],
   "editor:open-link-in-new-split": [],
-  "app:reload": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "R"
-    }
-  ],
   "workspace:edit-file-title": [
     {
       "modifiers": [
@@ -182,14 +173,6 @@
         "Mod"
       ],
       "key": "1"
-    }
-  ],
-  "editor:toggle-source": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "R"
     }
   ],
   "markdown:toggle-preview": [],
@@ -384,6 +367,14 @@
         "Shift"
       ],
       "key": "O"
+    }
+  ],
+  "app:reload": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
     }
   ]
 }
