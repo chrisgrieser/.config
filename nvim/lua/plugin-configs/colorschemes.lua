@@ -56,12 +56,15 @@ local themes = {
 					SpellRare = { style = "underdotted" },
 					SpellLocal = { style = "underdotted" },
 
-					-- telescope: increase contrast
+					-- `mini.icons`
+					MiniIconsGrey = { fg = "#767676" },
+
+					-- `telescope`: increase contrast
 					TelescopeBorder = { link = "FloatBorder" },
 					TelescopeTitle = { fg = "palette.comment" },
 					TelescopeResultsComment = { fg = "palette.comment" },
 
-					-- FIX missing highlights for snacks.nvim
+					-- FIX missing highlights for `snacks`
 					SnacksNormal = { link = "NotifyBackground" },
 
 					-- use grey for debug
@@ -102,6 +105,9 @@ local themes = {
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
 				hl.Italic = { italic = true }
+
+				-- FIX hlgroup not set when starting in different color scheme
+				hl.TelescopeSelection = { link = "Visual" }
 
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
