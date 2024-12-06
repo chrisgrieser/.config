@@ -2,14 +2,15 @@ local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
--- habits from writing too much in other languages
+-- fix habits from writing too much in other languages
 abbr("//", "--")
 abbr("const", "local")
-abbr("fi", "end")
+abbr("let", "local")
+abbr("===", "==")
 abbr("!=", "~=")
 abbr("!==", "~=")
 abbr("=~", "~=") -- shell uses `=~`
-abbr("===", "==")
+abbr("fi", "end")
 
 ---@param sign "+"|"-"
 local function plusPlusMinusMinus(sign)
@@ -19,14 +20,14 @@ local function plusPlusMinusMinus(sign)
 		vim.api.nvim_feedkeys(sign, "n", true) -- pass through the trigger char
 	else
 		local line = vim.api.nvim_get_current_line()
-		local updated = line:gsub("(%w+)" .. vim.pesc(sign), ("%%1 = %%1 %s 1"):format(sign))
+		local updated = line:gsub("(%w+)" .. vim.pesc(sign), "%1 = %1 " .. sign .. " 1")
 		vim.api.nvim_set_current_line(updated)
 		local diff = #updated - #line
-		vim.api.nvim_win_set_cursor(0, { row, col + diff + 1 })
+		vim.api.nvim_win_set_cursor(0, { row, col + diff })
 	end
 end
-bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "++ to i = i + 1" })
-bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "-- to i = i - 1" })
+bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i + 1" })
+bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
 
 --------------------------------------------------------------------------------
 

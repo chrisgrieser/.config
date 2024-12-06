@@ -119,15 +119,11 @@ local lualineOpts = {
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
 vim.g.lualineAdd = function(whichBar, whichSection, component, where)
-	local ok, lualine = pcall(require, "lualine")
-	if not ok then return end
-
-	local sectionConfig = lualine.get_config()[whichBar][whichSection] or {}
+	local sectionConfig = require("lualine").get_config()[whichBar][whichSection] or {}
 	local componentObj = type(component) == "table" and component or { component }
 	local pos = where == "before" and 1 or #sectionConfig + 1
 	table.insert(sectionConfig, pos, componentObj)
-
-	lualine.setup { [whichBar] = { [whichSection] = sectionConfig } }
+	require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
 
 --------------------------------------------------------------------------------
