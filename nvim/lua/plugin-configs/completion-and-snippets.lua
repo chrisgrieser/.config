@@ -152,7 +152,7 @@ return {
 	{ -- snippet management
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
-		init = function() vim.g.whichkeyAddGroup{"<leader>n", group = " Snippets", icon = "󰩫"} end,
+		init = function() vim.g.whichkeyAddGroup { "<leader>n", group = "󰩫 Snippets" } end,
 		keys = {
 			{ "<leader>nn", function() require("scissors").editSnippet() end, desc = "󰩫 Edit" },
 			{

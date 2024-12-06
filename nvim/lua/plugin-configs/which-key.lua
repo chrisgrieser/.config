@@ -38,18 +38,18 @@ return {
 		spec = {
 			{ -- leader subgroups
 				mode = { "n", "x" },
-				{ "<leader>", group = "Leader", icon = "󰓎" },
-				{ "<leader>c", group = "Code action", icon = "" },
-				{ "<leader>e", group = "Execute", icon = "󰓗" },
-				{ "<leader>f", group = "Refactor", icon = "󱗘" },
-				{ "<leader>g", group = "Git", icon = "󰊢" },
-				{ "<leader>i", group = "Inspect", icon = "󱈄" },
-				{ "<leader>m", group = "Merge conflicts", icon = "" },
-				{ "<leader>o", group = "Option toggle", icon = "󰒓" },
-				{ "<leader>p", group = "Packages", icon = "󰏗" },
-				{ "<leader>q", group = "Quickfix", icon = "" },
-				{ "<leader>u", group = "Undo", icon = "󰕌" },
-				{ "<leader>y", group = "Yanking", icon = "󰅍" },
+				{ "<leader>", group = "󰓎 Leader" },
+				{ "<leader>c", group = " Code action" },
+				{ "<leader>e", group = "󰓗 Execute" },
+				{ "<leader>f", group = "󱗘 Refactor" },
+				{ "<leader>g", group = "󰊢 Git" },
+				{ "<leader>i", group = "󱈄 Inspect" },
+				{ "<leader>m", group = " Merge conflicts" },
+				{ "<leader>o", group = "󰒓 Option toggle" },
+				{ "<leader>p", group = "󰏗 Packages" },
+				{ "<leader>q", group = " Quickfix" },
+				{ "<leader>u", group = "󰕌 Undo" },
+				{ "<leader>y", group = "󰅍 Yanking" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },
@@ -57,17 +57,17 @@ return {
 				{ "i", group = "inner" },
 				{ "a", group = "outer" },
 				{ "g", group = "misc" },
-				{ "ip", desc = "paragraph", icon = "¶" },
-				{ "ap", desc = "paragraph", icon = "¶" },
-				{ "ib", desc = "bracket", icon = "󰅲" },
-				{ "ab", desc = "bracket", icon = "󰅲" },
-				{ "it", desc = "tag", icon = "" },
-				{ "at", desc = "tag", icon = "" },
-				{ "is", desc = "sentence", icon = "󰰢" },
-				{ "as", desc = "sentence", icon = "󰰢" },
-				{ "iw", desc = "word", icon = "󰬞" },
-				{ "aw", desc = "word", icon = "󰬞" },
-				{ "gn", desc = "search result", icon = "" },
+				{ "ip", desc = "¶ paragraph" },
+				{ "ap", desc = "¶ paragraph" },
+				{ "ib", desc = "󰅲 bracket" },
+				{ "ab", desc = "󰅲 bracket" },
+				{ "it", desc = " tag" },
+				{ "at", desc = " tag" },
+				{ "is", desc = "󰰢 sentence" },
+				{ "as", desc = "󰰢 sentence" },
+				{ "iw", desc = "󰬞 word" },
+				{ "aw", desc = "󰬞 word" },
+				{ "gn", desc = " search result" },
 			},
 		},
 		plugins = {
@@ -86,7 +86,10 @@ return {
 		icons = {
 			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
-			-- mappings = false, -- disable icons for keymaps
+			mappings = false, -- disable icons for keymaps.
+			-- NOTE unfortuenately, we cannot get icons from the keymap
+			-- descriptions, so we just use the icons from there and disable
+			-- whickey's icon features
 		},
 		keys = {
 			scroll_down = "<PageDown>",
