@@ -93,8 +93,8 @@ return {
 			{ "i<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = "o", desc = "↩ inner return" },
 			{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = {"x","o"}, desc = " outer regex" },
 			{ "i/", "<cmd>TSTextobjectSelect @regex.inner<CR>", mode = {"x","o"}, desc = " inner regex" },
-			{ "a,", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = {"x","o"}, desc = "󰏪 outer arg" },
-			{ "i,", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = {"x","o"}, desc = "󰏪 inner arg" },
+			{ "aa", "<cmd>TSTextobjectSelect @parameter.outer<CR>", mode = {"x","o"}, desc = "󰏪 outer arg" },
+			{ "ia", "<cmd>TSTextobjectSelect @parameter.inner<CR>", mode = {"x","o"}, desc = "󰏪 inner arg" },
 			{ "iu", "<cmd>TSTextobjectSelect @loop.inner<CR>", mode = {"x","o"}, desc = "󰛤 inner loop" },
 			{ "au", "<cmd>TSTextobjectSelect @loop.outer<CR>", mode = {"x","o"}, desc = "󰛤 outer loop" },
 			{ "a" .. textObj.func, "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = " outer function" },
@@ -103,22 +103,11 @@ return {
 			{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner c[o]ndition" },
 			{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer ca[l]l" },
 			{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner ca[l]l" },
-			-- stylua: ignore end
 
-			-- CHANGE SURROUNDING CALL
-			-- complementary to `dsl` (configured via surround.nvim)
-			{
-				"csl",
-				function()
-					vim.cmd.TSTextobjectSelect("@call.outer")
-					vim.cmd.normal { "d", bang = true }
-					local comStr = vim.trim(vim.bo.commentstring:format(""))
-					local line = vim.api.nvim_get_current_line():gsub("%s+$", "")
-					vim.api.nvim_set_current_line(line .. " " .. comStr .. " ")
-					vim.cmd.startinsert { bang = true }
-				end,
-				desc = "󰡱 Change surrounding call",
-			},
+			-- CUSTOM TEXTOBJECTS
+			{"g" .. textObj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 ca[l]ler" },
+
+			-- stylua: ignore end
 		},
 	},
 	{ -- pattern-based textobjs
@@ -129,7 +118,7 @@ return {
 				function()
 					-- for deletions use the outer subword, otherwise the inner
 					local scope = vim.v.operator == "d" and "outer" or "inner"
-					require("various-textobjs").subword(scope)
+					require("various-textobjs").subwod(scope)
 				end,
 				mode = "o",
 				desc = "󰬞 subword",
