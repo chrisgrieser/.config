@@ -128,7 +128,8 @@ function gf {
 	git commit --fixup="$target"
 
 	# HACK ":" is no-op-editor https://www.reddit.com/r/git/comments/uzh2no/what_is_the_utility_of_noninteractive_rebase/
-	git -c sequence.editor=: rebase --interactive --autosquash "$target^" || return 0
+	git -c sequence.editor=: rebase --committer-date-is-author-date --interactive \
+		--autosquash "$target^" || return 0
 
 	_separator && _gitlog "$target"~2.. # confirm result
 }

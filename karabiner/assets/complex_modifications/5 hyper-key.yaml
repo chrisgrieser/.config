@@ -37,6 +37,7 @@ rules:
                   .scrollAreas[0]
                   .uiElements()
                   .map(banner => banner.actions().slice(-1)[0])
+                  .reverse()
                   .forEach(banner => banner.perform())
               '
       # show notifications
