@@ -203,7 +203,7 @@ return {
 	{ -- quickly add log statements
 		"chrisgrieser/nvim-chainsaw",
 		ft = "lua", -- in lua, load directly for `Chainsaw` global
-		init = function() vim.g.whichkeyAddGroup { "<leader>l", group = "Log", icon = "󰐪" } end,
+		init = function() vim.g.whichkeyAddGroup { "<leader>l", group = "󰐪 Log" } end,
 		opts = {
 			logStatements = {
 				variableLog = {
