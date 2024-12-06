@@ -7,8 +7,8 @@ alias gi='gh issue list --state=open'
 alias gI='gh issue list --state=closed'
 alias grh='git clean --force -d && git reset --hard' # remove untracked files & undo all changes
 
-alias irb='git rebase --interactive' # [i]nteractive [r]e[b]ase
-alias crb='git add --all ; git rebase --continue' # [c]ontinue [r]e[b]ase
+alias irb='git rebase --interactive --committer-date-is-author-date' # [i]nteractive [r]e[b]ase
+alias crb='git add --all ; git rebase --continue'                    # [c]ontinue [r]e[b]ase
 
 alias cherry='git cherry-pick'
 alias push='git push'
