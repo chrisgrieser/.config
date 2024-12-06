@@ -34,6 +34,8 @@ return {
 
 		require("telescope").setup {
 			defaults = {
+				scroll_strategy = "limit", -- do not cycle from top to bottom
+
 				path_display = { "tail" },
 				selection_caret = " ",
 				prompt_prefix = " ",
