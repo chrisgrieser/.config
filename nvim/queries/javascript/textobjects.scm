@@ -4,4 +4,4 @@
 ;───────────────────────────────────────────────────────────────────────────────
 
 ; just the caller of a function
-(function_call name:(_) @call.caller)
+(call_expression function: (_) @call.caller)
