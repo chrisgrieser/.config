@@ -115,6 +115,10 @@ local themes = {
 				hl["@comment.warning"] = { fg = colors.black, bg = hl["@comment.warning"].fg }
 				hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
+				-- mini.icons
+				hl.MiniIconsGreen = { fg = "#9de88d" }
+				hl.MiniIconsGrey = { fg = colors.fg_dark }
+
 				-- cursorword
 				hl.LspReferenceWrite = { underdashed = true }
 				hl.LspReferenceRead = { underdotted = true }
@@ -129,10 +133,6 @@ local themes = {
 				hl.SpellCap = { underdotted = true, sp = hl.SpellCap.sp }
 				hl.SpellRare = { underdotted = true, sp = hl.SpellRare.sp }
 				hl.SpellLocal = { underdotted = true, sp = hl.SpellLocal.sp }
-
-				-- mini.icons
-				hl.MiniIconsGreen = { fg = "#62c56e" }
-				hl.MiniIconsGrey = { fg = colors.fg_dark }
 			end,
 		},
 	},

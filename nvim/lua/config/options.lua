@@ -37,6 +37,9 @@ vim.opt.timeoutlen = 666
 vim.opt.sidescrolloff = 13
 vim.opt.scrolloff = 13
 
+-- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
+vim.opt.pumheight = 12
+
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do). Therefore
 -- needs to be set via autocommand.
