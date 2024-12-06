@@ -48,7 +48,7 @@ return {
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
 						["<CR>"] = "select_default",
-						["<Esc>"] = "close",
+						["<Esc>"] = "close", -- effectively disables normal mode for Telescope
 
 						["<PageDown>"] = "preview_scrolling_down",
 						["<PageUp>"] = "preview_scrolling_up",
@@ -120,7 +120,10 @@ return {
 						"--sortr=modified",
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-
+					prompt_title = "󰝰 Files in cwd",
+					path_display = { "filename_first" },
+					layout_config = { horizontal = { width = 0.6, height = 0.6 } }, -- use small layout, toggle via <D-p>
+					previewer = false,
 					follow = true,
 					mappings = {
 						i = {
@@ -169,12 +172,9 @@ return {
 							end,
 						},
 					},
-					path_display = { "filename_first" },
-					layout_config = { horizontal = { width = 0.6, height = 0.6 } }, -- use small layout, toggle via <D-p>
-					previewer = false,
 				},
 				oldfiles = {
-					prompt_title = "󰋚 Oldfiles",
+					prompt_title = "󰋚 Recent files",
 					path_display = function(_, path)
 						local parentOfRoots = {
 							vim.g.localRepos,
@@ -256,7 +256,7 @@ return {
 					},
 				},
 				git_branches = {
-					prompt_title = " Git branches",
+					prompt_title = "󰘬 Git branches",
 					show_remote_tracking_branches = true,
 					previewer = false,
 					layout_config = { horizontal = { height = 0.4, width = 0.7 } },
@@ -268,7 +268,7 @@ return {
 					},
 				},
 				keymaps = {
-					prompt_title = "  Keymaps",
+					prompt_title = "⌨️ Keymaps",
 					modes = { "n", "i", "c", "x", "o", "t" },
 					show_plug = false,
 				},
@@ -322,7 +322,7 @@ return {
 					prompt_title = "󰒕 LSP document symbols",
 				},
 				treesitter = {
-					prompt_title = " ",
+					prompt_title = " Treesitter symbols",
 					symbols = { "function", "method" },
 					show_line = false,
 					symbol_highlights = { ["function"] = "Function", method = "Method" }, -- FIX broken colors
@@ -346,9 +346,9 @@ return {
 					layout_config = { cursor = { width = 0.3 } },
 				},
 				colorscheme = {
+					prompt_title = " Colorschemes",
 					enable_preview = true,
 					ignore_builtins = true,
-					prompt_title = " Colorschemes",
 					layout_config = {
 						horizontal = {
 							height = 0.4,
@@ -367,9 +367,7 @@ return {
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 		-- stylua: ignore start
-		{ "gw", function() vim.cmd.Telescope("lsp_dynamic_workspace_symbols") end, desc = "󰒕 Workspace symbols" },
 		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
-		{ "gI", function() vim.cmd.Telescope("lsp_implementations") end, desc = "󰈿 Implementations" },
 		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
 		-- stylua: ignore end
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
@@ -377,6 +375,23 @@ return {
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
+		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live-grep" },
+		{
+			"gl",
+			function()
+				vim.cmd.normal { '"zy', bang = true }
+				local sel = vim.trim(vim.fn.getreg("z"))
+				require("telescope.builtin").live_grep { default_text = sel }
+			end,
+			mode = "x",
+			desc = "󰭎 Grep selection",
+		},
+		{
+			"<leader>pc",
+			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
+			function() vim.cmd("noautocmd Telescope colorscheme") end,
+			desc = " Preview colorschemes",
+		},
 		{
 			"g!",
 			function()
@@ -394,22 +409,40 @@ return {
 			desc = "󰋼 Workspace diagnostics",
 		},
 		{
-			"<leader>pc",
-			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
-			function() vim.cmd("noautocmd Telescope colorscheme") end,
-			desc = " Preview colorschemes",
+			"gw",
+			function()
+				-- Due to `lazydev`, the whole nvim runtime is added to the
+				-- workspace, making this picker much too crowded.
+				-- `file_ignore_patterns` is thus set to ignore symbols from plugins
+				-- and nvim core. However, the nvim config itself should only be
+				-- ignored when not in the nvim config directory (e.g., in a plugin
+				-- dir). To achieve that, we have to dynamically decide here whether
+				-- to ignore it.
+				local isInNvimConfig = vim.uv.cwd() == vim.fn.stdpath("config")
+				local ignore = nil
+				if not isInNvimConfig then
+					local pickerIgnore =
+						require("telescope.config").pickers.lsp_dynamic_workspace_symbols.file_ignore_patterns
+					ignore = vim.deepcopy(pickerIgnore or {})
+					table.insert(ignore, vim.fn.stdpath("config"))
+				end
+				require("telescope.builtin").lsp_dynamic_workspace_symbols {
+					file_ignore_patterns = ignore,
+				}
+			end,
+			desc = "󰒕 Workspace symbols",
 		},
 		{
 			"go",
 			function()
 				-- ignore current file, since using the `rg` workaround puts it on top
-				local ignorePattern =
+				local ignore =
 					vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 				local cwd = vim.uv.cwd() or ""
 				local relPathCurrent = "^"
 					.. vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
 					.. "$"
-				table.insert(ignorePattern, relPathCurrent)
+				table.insert(ignore, relPathCurrent)
 
 				-- add git info to file
 				local changedFilesInCwd = {}
@@ -426,10 +459,8 @@ return {
 					end)
 				end
 
-				local projectName = vim.fs.basename(vim.uv.cwd() or "")
 				require("telescope.builtin").find_files {
-					prompt_title = "Find files: " .. projectName,
-					file_ignore_patterns = ignorePattern,
+					file_ignore_patterns = ignore,
 					path_display = function(_, path)
 						local tail = vim.fs.basename(path)
 						local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
@@ -445,28 +476,6 @@ return {
 				}
 			end,
 			desc = "󰭎 Open file",
-		},
-		{
-			"gl",
-			function()
-				local projectName = vim.fs.basename(vim.uv.cwd() or "")
-				require("telescope.builtin").live_grep { prompt_title = "Live grep: " .. projectName }
-			end,
-			desc = "󰭎 Live-grep",
-		},
-		{
-			"gl",
-			function()
-				local projectName = vim.fs.basename(vim.uv.cwd() or "")
-				vim.cmd.normal { '"zy', bang = true }
-				local sel = vim.trim(vim.fn.getreg("z"))
-				require("telescope.builtin").live_grep {
-					default_text = sel,
-					prompt_title = "Live grep: " .. projectName,
-				}
-			end,
-			mode = "x",
-			desc = "󰭎 Grep selection",
 		},
 		{
 			"gs",
