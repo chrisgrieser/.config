@@ -119,15 +119,12 @@ M.keys = {
 
 	-----------------------------------------------------------------------------
 
-	-- HINT MODE (= Quick Select) -- https://wezfurlong.org/wezterm/quickselect.html
-	{ key = "h", mods = "CMD", action = act.QuickSelect },
-
 	{ -- cmd+y -> copy full line
 		key = "y",
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = { "^.*[A-Za-z].*$" }, -- line with at least a letter
-			label = "Copy Full Line",
+			label = "Copy full line",
 		},
 	},
 	{ -- cmd+u -> open URL (like f in vimium)
@@ -147,7 +144,7 @@ M.keys = {
 		mods = "CMD",
 		action = act.QuickSelectArgs {
 			patterns = { "--[\\w=-]+", "(?<= )-\\w" }, -- long option, short option
-			label = "Copy Shell Option",
+			label = "Copy shell option",
 		},
 	},
 

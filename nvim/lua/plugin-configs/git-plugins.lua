@@ -72,6 +72,10 @@ return {
 				topdelete = { show_count = true },
 				changedelete = { show_count = true },
 			},
+
+			current_line_blame_formatter = "<author> (<author_time:%R>): <summary>",
+			current_line_blame_formatter_nc = "+++ uncommitted",
+			current_line_blame_opts = { virt_text = true, delay = 500 },
 		},
 		keys = {
 			-- stylua: ignore start
@@ -79,7 +83,7 @@ return {
 			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
 			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
 			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
-			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Add buffer" },
+			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
 			{ "<leader>g!", function() require("gitsigns").blame() end, desc = "󰊢 Blame file" },
 			{ "q", vim.cmd.close, ft = "gitsigns-blame", desc = "Close", nowait = true },
@@ -90,6 +94,20 @@ return {
 			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset buffer" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset hunk" },
 			-- stylua: ignore end
+			{
+				"<leader>o?",
+				function() require("gitsigns").toggle_current_line_blame() end,
+				desc = "󰊢 Line blame",
+			},
+			{
+				"<leader>oi",
+				function()
+					require("gitsigns").toggle_deleted()
+					require("gitsigns").toggle_word_diff()
+					require("gitsigns").toggle_linehl()
+				end,
+				desc = "󰊢 Inline diff",
+			},
 			{
 				"<leader>op",
 				function()
@@ -128,16 +146,6 @@ return {
 					if not gs then return end
 					return { added = gs.added, modified = gs.changed, removed = gs.removed }
 				end,
-			}, "before")
-
-			-- hunk count
-			vim.g.lualineAdd("sections", "lualine_y", {
-				function()
-					local hunks = #require("gitsigns").get_hunks() ---@diagnostic disable-line: missing-parameter
-					if hunks == 0 then return "" end
-					return "▪" .. hunks
-				end,
-				padding = { left = 1, right = 0 },
 			}, "before")
 
 			-- gitsigns base
