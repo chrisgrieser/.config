@@ -1,11 +1,11 @@
 -- CONFIG the first theme in the list is used
 local darkThemes = {
-	"Kanagawa (Gogh)",
+	"MaterialDesignColors",
 	"ChallengerDeep",
+	"Kanagawa (Gogh)",
 	"Afterglow (Gogh)",
 	"cyberpunk",
 	"duckbones",
-	"MaterialDesignColors",
 }
 local lightThemes = {
 	"Ivory Light (terminal.sexy)",
