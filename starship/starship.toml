@@ -58,7 +58,7 @@ format = "[$path]($style) [$read_only]($read_only_style)"
 ".password-store" = " "
 
 [custom.folder_number]
-when = "true"                                                                                                                          # always show
+when = "true"
 description = "Number of files (and folders) in the current working directory"
 command = "find . -mindepth 1 -maxdepth 1 -not -name '.git' -not -name '.DS_Store' -not -name '.localized' -not -name 'Icon?' | wc -l"
 format = '[󰝰 $output ]($style)'
