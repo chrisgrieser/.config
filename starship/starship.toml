@@ -19,6 +19,7 @@ ${custom.alfred}$python$nodejs\
 add_newline = false
 
 #───────────────────────────────────────────────────────────────────────────────
+# LEFT SIDE
 
 [character] # ▓▒░    nerdfont ids start with `nf-ple-`
 success_symbol = "[ ](fg:black)"
@@ -107,7 +108,7 @@ format = ' [ ](fg:purple bg:black bold)'
 [git_status] # files
 stashed = '[ 󰜦 $count](fg:cyan bg:black)'
 untracked = '[ +$count](fg:green bg:black)'
-# `deleted` = these are unstaged as well as stage deletion
+# `deleted` -> unstaged as well as staged deletion
 deleted = '[ -$count](fg:red bg:black)'
 modified = '[ ~$count](fg:#f1800e bg:black)'
 renamed = '[ 󰑕 $count](fg:blue bg:black)'

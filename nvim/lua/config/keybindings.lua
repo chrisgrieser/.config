@@ -34,7 +34,7 @@ keymap({ "n", "x" }, "k", "gk")
 -- (not mapping in op-pending, since using custom textobjects for most of those)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$zv", { desc = " char" }) -- zv: unfold under cursor
+keymap({ "n", "x" }, "L", "$zv", { desc = "󰰍 char" }) -- zv: unfold under cursor
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
@@ -71,8 +71,8 @@ end, { desc = " Open first URL in file" })
 -- EDITING
 
 -- Undo
-keymap("n", "u", "<cmd>silent undo<CR>zv", { desc = "silent u" })
-keymap("n", "U", "<C-r>")
+keymap("n", "u", "<cmd>silent undo<CR>", { desc = "silent undo" })
+keymap("n", "U", "<cmd>silent redo<CR>", { desc = "silent undo" })
 keymap(
 	"n",
 	"<leader>ur",
