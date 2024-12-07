@@ -43,29 +43,29 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 	callback = function(ctx)
 		local bufnr, bufname = ctx.buf, ctx.file
 		local bo, b = vim.bo[bufnr], vim.b[bufnr]
-		if bo.buftype ~= "" or not bo.modifiable or b.autoSaveQueued then return end
+		if bo.buftype ~= "" or bo.readonly or not bo.modifiable or b.autoSaveQueued then return end
 
 		b.autoSaveQueued = true
 		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			b.autoSaveQueued = false
 
 			vim.api.nvim_buf_call(bufnr, function()
+				if not vim.api.nvim_buf_is_valid(bufnr) then return end
 				-- `noautocmd` prevents weird cursor movement
 				-- saving with explicit name prevents issues when changing `cwd`
 				local vimCmd = ("silent noautocmd lockmarks update! %q"):format(bufname)
 				vim.cmd(vimCmd)
 			end)
-			b.autoSaveQueued = false
 		end, 2000)
 	end,
 })
 
 -- AUTO-FORMAT
-vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave", "WinLeave" }, {
-	desc = "User: Auto-format when leaving buffer somehow",
+vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
+	desc = "User: Auto-format when leaving buffer",
 	callback = function(ctx)
 		local bo = vim.bo[ctx.buf]
-		if bo.buftype ~= "" or not bo.modifiable then return end
+		if bo.buftype ~= "" or not bo.modifiable or bo.readonly then return end
 		require("personal-plugins.misc").formatWithFallback { async = true, bufnr = ctx.buf }
 		vim.api.nvim_buf_call(ctx.buf, vim.cmd.update)
 	end,
@@ -266,6 +266,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 		local bufnr = ctx.buf
 		if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 
+		local ns = vim.api.nvim_create_namespace("conflictMarkers")
+		vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- make it idempotent
+
+		local notifyOpts = { title = "Merge conflicts", icon = "" }
+
 		vim.system(
 			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
 			{},
@@ -274,19 +279,37 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				local notGitRepo = vim.startswith(out.stdout, "warning: Not a git repository")
 				if noConflicts or notGitRepo then return end
 
-				local ns = vim.api.nvim_create_namespace("conflictMarkers")
-				vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- make it idempotent
-
+				-- get conflict line numbers
 				local conflictLnums = {}
 				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
 					table.insert(conflictLnums, tonumber(conflictLnum))
 				end
 				if #conflictLnums == 0 then return end
-				for _, lnum in ipairs(conflictLnums) do
-					local hlgroup = "DiagnosticVirtualTextInfo"
-					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum - 1, 0, -1)
+				if #conflictLnums % 4 ~= 0 then
+					local msg = "Conflicts found, but not using `diff3` as conflict style. Aborting."
+					vim.notify(msg, vim.log.levels.WARN, notifyOpts)
+					return
 				end
 
+				-- signs & highlights
+				for i = 1, #conflictLnums, 1 do
+					local lnum = conflictLnums[i] - 1
+					local nextLnum = conflictLnums[i + 1] - 1
+					local hlgroup = "DiagnosticVirtualTextInfo"
+					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
+
+					if i % 4 == 0 then
+						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
+						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
+						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
+					end
+					vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
+						end_row = 10,
+						sign_text = "┃",
+					})
+				end
+
+				-- move to conflict & disable diagnostics
 				vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 				vim.diagnostic.enable(false, { bufnr = bufnr })
 
@@ -303,9 +326,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed (bottom)")
 
 				-- notify
-				local header = ("%d conflicts found."):format(math.ceil(#conflictLnums / 4))
+				local header = ("%d conflicts found."):format(#conflictLnums / 4)
 				local mapInfoStr = table.concat(mapInfo, "\n")
-				vim.notify(header .. mapInfoStr, nil, { title = "Merge conflicts", icon = "" })
+				vim.notify(header .. mapInfoStr, nil, notifyOpts)
 			end)
 		)
 	end,
