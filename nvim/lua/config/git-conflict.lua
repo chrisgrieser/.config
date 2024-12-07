@@ -3,9 +3,22 @@
 -- and disable diagnostics (simplified version of `git-conflict.nvim`)
 --------------------------------------------------------------------------------
 
--- CONFIG
-local notifyOpts = { title = "Merge conflicts", icon = "" }
-local hlgroup = "DiagnosticVirtualTextInfo"
+local config = {
+	sign = "",
+	hlgroups = {
+		borders = "FloatBorder",
+		upstream = "DiagnosticVirtualTextHint",
+		base = "DiagnosticVirtualTextInfo",
+		stashed = "DiagnosticVirtualTextWarn",
+	},
+	keys = {
+		leader = "<leader>m",
+		upstream = "u",
+		base = "b",
+		stashed = "s",
+	},
+	notifyOpts = { title = "Merge conflicts", icon = "" },
+}
 
 --------------------------------------------------------------------------------
 
@@ -27,28 +40,32 @@ local function setupConflictMarkers(out, bufnr)
 	end
 	if #conflictLnums == 0 then return end
 	if #conflictLnums % 4 ~= 0 then
-		local msg = "Conflicts found, but not using `diff3` as conflict style. Aborting."
-		vim.notify(msg, vim.log.levels.WARN, notifyOpts)
+		local msg = "Conflicts found but conflict style is not `diff3`. Aborting."
+		vim.notify(msg, vim.log.levels.WARN, config.notifyOpts)
 		return
 	end
 
 	-- signs & highlights
 	for i = 1, #conflictLnums do
+		local type = ({ "upstream", "base", "stashed" })[i % 4]
 		local lnum = conflictLnums[i] - 1
-		vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
+		local nextLnum = type and conflictLnums[i + 1] - 1
 
-		local lastMarkerOfConflict = i % 4 == 0
-		if not lastMarkerOfConflict then
-			local char = i % 4 == 1 and "u" or i % 4 == 2 and "b" or i % 4 == 3 and "s"
-			vim.api.nvim_buf_set_extmark(0, ns, lnum, 0, {
-				sign_hl_group = hlgroup,
-				sign_text = "┃" .. char,
-			})
-			local nextLnum = conflictLnums[i + 1] - 1
+		-- borders
+		vim.api.nvim_buf_add_highlight(bufnr, ns, config.hlgroups.borders, lnum, 0, 8)
+		local typeHl = config.hlgroups[type] or config.hlgroups.stashed -- stashed on 4th border
+		vim.api.nvim_buf_add_highlight(bufnr, ns, typeHl, lnum, 8, -1)
+
+		-- signs
+		if type then
 			vim.api.nvim_buf_set_extmark(0, ns, lnum + 1, 0, {
+				sign_hl_group = typeHl,
+				sign_text = config.sign .. config.keys[type],
+			})
+			vim.api.nvim_buf_set_extmark(0, ns, lnum + 2, 0, {
 				end_row = nextLnum - 1,
-				sign_hl_group = hlgroup,
-				sign_text = "┃",
+				sign_hl_group = typeHl,
+				sign_text = config.sign,
 			})
 		end
 	end
@@ -60,8 +77,9 @@ local function setupConflictMarkers(out, bufnr)
 	-- mappings
 	local mapInfo = {}
 	local function map(lhs, rhs, desc)
+		lhs = (config.keys.leader .. lhs):gsub("<leader>", vim.g.mapleader)
 		vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
-		table.insert(mapInfo, ("%s: %s"):format(lhs, desc))
+		table.insert(mapInfo, ("[%s] %s"):format(lhs, desc))
 	end
 	-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
 	map("<leader>mm", "/<<<<CR>", "Goto [m]erge [m]arker")
@@ -70,9 +88,10 @@ local function setupConflictMarkers(out, bufnr)
 	map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed (bottom)")
 
 	-- notify
-	local header = ("%d conflicts found."):format(#conflictLnums / 4)
+	local pluralS = #conflictLnums > 1 and "s" or ""
+	local header = ("%d conflict%s found."):format(#conflictLnums / 4, pluralS)
 	local mapInfoStr = table.concat(mapInfo, "\n")
-	vim.notify(header .. mapInfoStr, nil, notifyOpts)
+	vim.notify(header .. "\n" .. mapInfoStr, nil, config.notifyOpts)
 end
 
 --------------------------------------------------------------------------------
