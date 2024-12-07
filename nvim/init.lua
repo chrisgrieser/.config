@@ -46,6 +46,7 @@ safeRequire("config.autocmds")
 safeRequire("config.quickfix")
 safeRequire("config.yanking-and-pasting")
 safeRequire("config.backdrop-underline-fix")
+safeRequire("config.git-conflict")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {

@@ -65,7 +65,9 @@ vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	desc = "User: Auto-format when leaving buffer",
 	callback = function(ctx)
 		local bo = vim.bo[ctx.buf]
-		if bo.buftype ~= "" or not bo.modifiable or bo.readonly then return end
+		if not bo.modifiable or bo.readonly then return end
+		if bo.buftype ~= "" or not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+
 		require("personal-plugins.misc").formatWithFallback { async = true, bufnr = ctx.buf }
 		vim.api.nvim_buf_call(ctx.buf, vim.cmd.update)
 	end,
@@ -256,83 +258,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 	end,
 })
 
---------------------------------------------------------------------------------
--- GIT CONFLICT MARKERS
--- if there are conflicts, jump to first conflict, highlight conflict markers,
--- and disable diagnostics (simplified version of `git-conflict.nvim`)
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
-	desc = "User: Git conflict markers",
-	callback = function(ctx)
-		local bufnr = ctx.buf
-		if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
-
-		local ns = vim.api.nvim_create_namespace("conflictMarkers")
-		vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- make it idempotent
-
-		local notifyOpts = { title = "Merge conflicts", icon = "" }
-
-		vim.system(
-			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
-			{},
-			vim.schedule_wrap(function(out)
-				local noConflicts = out.code == 0
-				local notGitRepo = vim.startswith(out.stdout, "warning: Not a git repository")
-				if noConflicts or notGitRepo then return end
-
-				-- get conflict line numbers
-				local conflictLnums = {}
-				for conflictLnum in out.stdout:gmatch("(%d+): leftover conflict marker") do
-					table.insert(conflictLnums, tonumber(conflictLnum))
-				end
-				if #conflictLnums == 0 then return end
-				if #conflictLnums % 4 ~= 0 then
-					local msg = "Conflicts found, but not using `diff3` as conflict style. Aborting."
-					vim.notify(msg, vim.log.levels.WARN, notifyOpts)
-					return
-				end
-
-				-- signs & highlights
-				for i = 1, #conflictLnums, 1 do
-					local lnum = conflictLnums[i] - 1
-					local nextLnum = conflictLnums[i + 1] - 1
-					local hlgroup = "DiagnosticVirtualTextInfo"
-					vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
-
-					if i % 4 == 0 then
-						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
-						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
-						vim.api.nvim_buf_add_highlight(bufnr, ns, hlgroup, lnum, 0, -1)
-					end
-					vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
-						end_row = 10,
-						sign_text = "┃",
-					})
-				end
-
-				-- move to conflict & disable diagnostics
-				vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
-				vim.diagnostic.enable(false, { bufnr = bufnr })
-
-				-- mappings
-				local mapInfo = {}
-				local function map(lhs, rhs, desc)
-					vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
-					table.insert(mapInfo, ("%s: %s"):format(lhs, desc))
-				end
-				-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
-				map("<leader>mm", "/<<<<CR>", "Goto [m]erge [m]arker")
-				map("<leader>mu", "dd/|||<CR>0v/>>><CR>$x", "[m]erge [u]pstream (top)")
-				map("<leader>mb", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "[m]erge [b]ase (middle)")
-				map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed (bottom)")
-
-				-- notify
-				local header = ("%d conflicts found."):format(#conflictLnums / 4)
-				local mapInfoStr = table.concat(mapInfo, "\n")
-				vim.notify(header .. mapInfoStr, nil, notifyOpts)
-			end)
-		)
-	end,
-})
 --------------------------------------------------------------------------------
 -- ENFORCE SCROLLOFF AT EOF
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
