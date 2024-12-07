@@ -209,7 +209,9 @@ return {
 				enabled = true,
 				dontInstallInDirs = {
 					"~/.config", -- since this directory itself has the marker
-					"~/Developer/nvim-chainsaw", -- plugin dir also has marker
+					"**/nvim-chainsaw", -- plugin dir also has marker
+					"~/Vaults/**", -- Obsidian vaults
+					"**/obsidian*", -- Obsidian plugins have their own hooks
 				},
 			},
 			logStatements = {
