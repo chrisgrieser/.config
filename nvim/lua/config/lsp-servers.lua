@@ -14,10 +14,8 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter/formatter integration
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
-	ltex = "ltex-ls", -- languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	ruff = "ruff", -- python linter & formatter
@@ -26,6 +24,7 @@ local lspToMasonMap = {
 	ts_ls = "typescript-language-server", -- also used for javascript
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
+	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
 }
 
 ---@module "lspconfig"
@@ -282,57 +281,33 @@ M.serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
----Helper function, as ltex etc lack ignore files
----@param client vim.lsp.Client
----@param bufnr number
-local function detachIfObsidianOrIcloud(client, bufnr)
-	local path = vim.api.nvim_buf_get_name(bufnr)
-	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
-	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
-	if obsiDir or iCloudDocs then
-		vim.diagnostic.enable(false, { bufnr = 0 })
-		-- defer to ensure client is already attached
-		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
-	end
-end
-
--- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
-M.serverConfigs.harper_ls = {
-	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
-	settings = {
-		["harper-ls"] = {
-			userDictPath = vim.o.spellfile,
-			diagnosticSeverity = "hint",
-			linters = {
-				spell_check = true,
-				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
-				an_a = false, -- too many false positives
-			},
-		},
-	},
-	on_attach = function(harper, bufnr)
-		detachIfObsidianOrIcloud(harper, bufnr)
-		vim.keymap.set("n", "zg", function()
-			vim.lsp.buf.code_action {
-				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
-				apply = true,
-			}
-		end, { desc = "󰓆 Add Word to spellfile", buffer = bufnr })
-	end,
-}
-
--- DOCS https://valentjn.github.io/ltex/settings.html
-M.serverConfigs.ltex = {
+-- DOCS of the original https://valentjn.github.io/ltex/settings.html
+-- DOCS of the fork https://ltex-plus.github.io/ltex-plus/settings.html
+M.serverConfigs.ltex_plus = {
 	filetypes = { "markdown" }, -- not in `.txt` files, as those are used by `pass`
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
+			dictionary = {
+				["en-US"] = ":" .. vim.o.spellfile,
+			},
+			-- dictionary = {
+			-- 	-- HACK since reading external file with the method described in ltex-docs[^1] does not work
+			-- 	-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
+			-- 	["en-US"] = (function()
+			-- 		local words = {}
+			-- 		for word in io.lines(vim.o.spellfile) do
+			-- 			table.insert(words, word)
+			-- 		end
+			-- 		return words
+			-- 	end)(),
+			-- },
+
 			diagnosticSeverity = { default = "info" },
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"MORFOLOGIK_RULE_EN_US", -- using `harper_ls` instead for spelling
 				},
 			},
 			additionalRules = {
@@ -344,7 +319,23 @@ M.serverConfigs.ltex = {
 			},
 		},
 	},
-	on_attach = detachIfObsidianOrIcloud,
+	---@type fun(client: vim.lsp.Client, bufnr: number)
+	on_attach = function(client, bufnr)
+		-- have `zg` update ltex' dictionary file as well as vim's spellfile
+		vim.keymap.set({ "n", "x" }, "zg", function()
+			local word
+			if vim.fn.mode() == "n" then
+				word = vim.fn.expand("<cword>")
+				vim.cmd.normal { "zg", bang = true } -- do regular `zg` from vim
+			else
+				vim.cmd.normal { 'zggv"zy', bang = true }
+				word = vim.fn.getreg("z")
+			end
+			local ltexSettings = client.config.settings or {}
+			-- table.insert(ltexSettings.ltex.dictionary["en-US"], word)
+			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
+		end, { desc = "󰓆 Add Word", buffer = bufnr })
+	end,
 }
 
 -- TYPOS
