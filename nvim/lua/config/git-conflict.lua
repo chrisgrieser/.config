@@ -6,7 +6,7 @@
 local config = {
 	sign = "",
 	hlgroups = {
-		borders = "FloatBorder",
+		borders = "ColorColumn",
 		upstream = "DiagnosticVirtualTextHint",
 		base = "DiagnosticVirtualTextInfo",
 		stashed = "DiagnosticVirtualTextWarn",
@@ -26,7 +26,7 @@ local config = {
 ---@param bufnr number
 local function setupConflictMarkers(out, bufnr)
 	local ns = vim.api.nvim_create_namespace("conflictMarkers")
-	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) -- make it idempotent
+	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
 	-- GUARD
 	local noConflicts = out.code == 0
@@ -52,20 +52,25 @@ local function setupConflictMarkers(out, bufnr)
 		local nextLnum = type and conflictLnums[i + 1] - 1
 
 		-- borders
-		vim.api.nvim_buf_add_highlight(bufnr, ns, config.hlgroups.borders, lnum, 0, 8)
+		local gitMarkerLength = 7
+		vim.api.nvim_buf_add_highlight(bufnr, ns, config.hlgroups.borders, lnum, 0, gitMarkerLength)
 		local typeHl = config.hlgroups[type] or config.hlgroups.stashed -- stashed on 4th border
-		vim.api.nvim_buf_add_highlight(bufnr, ns, typeHl, lnum, 8, -1)
+		vim.api.nvim_buf_add_highlight(bufnr, ns, typeHl, lnum, gitMarkerLength + 1, -1)
 
 		-- signs
 		if type then
 			vim.api.nvim_buf_set_extmark(0, ns, lnum + 1, 0, {
 				sign_hl_group = typeHl,
 				sign_text = config.sign .. config.keys[type],
+				invalidate = true, -- deletes the extmark if the line is deleted
+				undo_restore = true, -- makes undo restore those
 			})
 			vim.api.nvim_buf_set_extmark(0, ns, lnum + 2, 0, {
 				end_row = nextLnum - 1,
 				sign_hl_group = typeHl,
 				sign_text = config.sign,
+				invalidate = true,
+				undo_restore = true,
 			})
 		end
 	end
@@ -82,14 +87,14 @@ local function setupConflictMarkers(out, bufnr)
 		table.insert(mapInfo, ("[%s] %s"):format(lhs, desc))
 	end
 	-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
-	map("<leader>mm", "/<<<<CR>", "Goto [m]erge [m]arker")
-	map("<leader>mu", "dd/|||<CR>0v/>>><CR>$x", "[m]erge [u]pstream (top)")
-	map("<leader>mb", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "[m]erge [b]ase (middle)")
-	map("<leader>ms", "0v/====<CR>$x/>>><CR>dd", "[m]erge [s]tashed (bottom)")
+	map("m", "/<<<<CR>", "Goto merge marker")
+	map("u", "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)")
+	map("b", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)")
+	map("s", "0v/====<CR>$x/>>><CR>dd", "Choose stashed (bottom)")
 
 	-- notify
-	local pluralS = #conflictLnums > 1 and "s" or ""
-	local header = ("%d conflict%s found."):format(#conflictLnums / 4, pluralS)
+	local conflicts = #conflictLnums / 4
+	local header = ("%d conflict%s found."):format(conflicts, conflicts > 1 and "s" or "")
 	local mapInfoStr = table.concat(mapInfo, "\n")
 	vim.notify(header .. "\n" .. mapInfoStr, nil, config.notifyOpts)
 end
@@ -101,6 +106,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	callback = function(ctx)
 		local bufnr = ctx.buf
 		if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
+
+		-- make it idempotent, since `BufEnter` can be triggered multiple times
+		if vim.b[bufnr].gitConflictRan then return end
+		vim.b[bufnr].gitConflictRan = true
+		vim.defer_fn(function() vim.b[bufnr].gitConflictRan = false end, 2000)
 
 		vim.system(
 			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
