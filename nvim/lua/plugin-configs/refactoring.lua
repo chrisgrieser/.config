@@ -11,7 +11,7 @@ return {
 			{
 				"<leader>fS",
 				function() require("rip-substitute").rememberCursorWord() end,
-				desc = " remember cword (rip-sub.)",
+				desc = " remember cword (rip-sub)",
 			},
 		},
 		opts = {
@@ -32,7 +32,7 @@ return {
 				"<leader>fi",
 				function() require("refactoring").refactor("Inline Variable") end,
 				mode = { "n", "x" },
-				desc = "󱗘 Inline variable",
+				desc = "󰫧 Inline variable",
 			},
 			{
 				"<leader>fe",
@@ -40,19 +40,19 @@ return {
 					vim.cmd.normal { "viW", bang = true }
 					require("refactoring").refactor("Extract Variable")
 				end,
-				desc = "󱗘 Extract cursorWORD as variable",
+				desc = "󰫧 Extract cursorWORD as variable",
 			},
 			{
 				"<leader>fe",
 				function() require("refactoring").refactor("Extract Variable") end,
 				mode = "x",
-				desc = "󱗘 Extract selection as variable",
+				desc = "󰫧 Extract selection as variable",
 			},
 			{
 				"<leader>fu",
 				function() require("refactoring").refactor("Extract Function") end,
 				mode = "x",
-				desc = "󱗘 Extract function",
+				desc = " Extract function",
 			},
 		},
 	},
