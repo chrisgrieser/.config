@@ -4,12 +4,9 @@
 --------------------------------------------------------------------------------
 
 local config = {
-	sign = "",
-	hlgroups = {
-		borders = "ColorColumn",
-		upstream = "DiagnosticVirtualTextHint",
-		base = "DiagnosticVirtualTextInfo",
-		stashed = "DiagnosticVirtualTextWarn",
+	whenConflict = {
+		disableDiagnostics = true,
+		moveToFirst = true,
 	},
 	keys = {
 		leader = "<leader>m",
@@ -18,10 +15,27 @@ local config = {
 		base = "b",
 		stashed = "s",
 	},
-	icon = "",
+	hlgroups = {
+		borders = "ColorColumn",
+		upstream = "DiagnosticVirtualTextHint",
+		base = "DiagnosticVirtualTextInfo",
+		stashed = "DiagnosticVirtualTextWarn",
+	},
+	icons = {
+		sign = "",
+		main = "",
+	},
 }
 
 --------------------------------------------------------------------------------
+
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	if not level then level = "info" end
+	local icon = config.icons.main
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "Merge conflict", icon = icon })
+end
 
 ---@param bufnr number
 ---@param key string
@@ -33,18 +47,13 @@ local function map(bufnr, key, rhs, desc)
 	local keys = config.keys
 	local lhs = (keys.leader .. key):gsub("<leader>", vim.g.mapleader)
 	vim.keymap.set("n", lhs, function()
-		if key == keys.gotoMarker or vim.api.nvim_get_current_line():find("<<<<*") then
-			vim.opt.lazyredraw = true
-			vim.defer_fn(function() vim.opt.lazyredraw = false end, 1)
-			return rhs
-		else
-			local gotoMarker = keys.leader .. keys.gotoMarker
-			local msg = "Needs to be on the first merge marker (the `<<<` line).\n"
-				.. ("Use `%s` to go to the first merge marker."):format(gotoMarker)
+		if key == keys.gotoMarker or vim.api.nvim_get_current_line():find("<<<<*") then return rhs end
 
-			vim.notify(msg, vim.log.levels.WARN, { title = "Merge conflict", icon = config.icon })
-		end
+		local msg = "Needs to be on the 1st merge marker.\n"
+			.. ("Use `%s` to go to the next marker."):format(keys.leader .. keys.gotoMarker)
+		notify(msg, "warn")
 	end, { buffer = bufnr, desc = desc, silent = true, expr = true })
+
 	return ("[%s] %s"):format(lhs, desc)
 end
 
@@ -68,8 +77,7 @@ local function setupConflictMarkers(out, bufnr)
 	end
 	if #conflictLnums == 0 then return end
 	if #conflictLnums % 4 ~= 0 then
-		local msg = "Conflicts found but conflict style is not `diff3`. Aborting."
-		vim.notify(msg, vim.log.levels.WARN, config.notifyOpts)
+		notify("Conflicts found but conflict style is not `diff3`. Aborting.", "warn")
 		return
 	end
 
@@ -85,18 +93,23 @@ local function setupConflictMarkers(out, bufnr)
 		local typeHl = config.hlgroups[type] or config.hlgroups.stashed -- stashed on 4th border
 		vim.api.nvim_buf_add_highlight(bufnr, ns, typeHl, lnum, gitMarkerLength + 1, -1)
 
-		-- signs
+		-- sign column
 		if type then
+			-- signtext can be 2 chars wide max
+			local key = config.keys[type]:sub(1)
+			local sign = config.icons.sign
+			if vim.api.nvim_strwidth(sign) > 1 then sign = "|" end
+
 			vim.api.nvim_buf_set_extmark(0, ns, lnum + 1, 0, {
 				sign_hl_group = typeHl,
-				sign_text = config.sign .. config.keys[type],
+				sign_text = sign .. key,
 				invalidate = true, -- deletes the extmark if the line is deleted
 				undo_restore = true, -- makes undo restore those
 			})
 			vim.api.nvim_buf_set_extmark(0, ns, lnum + 2, 0, {
 				end_row = nextLnum - 1,
 				sign_hl_group = typeHl,
-				sign_text = config.sign,
+				sign_text = config.icons.sign,
 				invalidate = true,
 				undo_restore = true,
 			})
@@ -104,8 +117,12 @@ local function setupConflictMarkers(out, bufnr)
 	end
 
 	-- move to conflict & disable diagnostics
-	vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
-	vim.diagnostic.enable(false, { bufnr = bufnr })
+	if config.whenConflict.moveToFirst then
+		vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
+	end
+	if config.whenConflict.disableDiagnostics then
+		vim.diagnostic.enable(false, { bufnr = bufnr })
+	end
 
 	-- mappings
 	local installed, whichKey = pcall(require, "which-key")
@@ -113,9 +130,8 @@ local function setupConflictMarkers(out, bufnr)
 		local group = vim.trim(config.icon .. " Merge conflict")
 		whichKey.add { "<leader>m", group = group }
 	end
-
-	-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
 	local info = {
+		-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
 		map(bufnr, config.keys.gotoMarker, "/<<<<*<CR>", "Goto merge marker"),
 		map(bufnr, config.keys.upstream, "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)"),
 		map(bufnr, config.keys.base, "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)"),
@@ -126,7 +142,7 @@ local function setupConflictMarkers(out, bufnr)
 	local conflicts = #conflictLnums / 4
 	local header = ("%d conflict%s found."):format(conflicts, conflicts > 1 and "s" or "")
 	table.insert(info, 1, header)
-	vim.notify(table.concat(info, "\n"), nil, { title = "Merge conflict", icon = config.icon })
+	notify(table.concat(info, "\n"))
 end
 
 --------------------------------------------------------------------------------
