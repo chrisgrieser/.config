@@ -31,7 +31,9 @@ local function openNotif(idx)
 	longestLine = math.max(longestLine, #title)
 	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * maxWidth))
 	local overflow = #lines + 2 - height -- +2 for border
-	local footer = overflow > 0 and (" ↓ %d lines "):format(overflow) or nil
+	local moreLines = overflow > 0 and (" ↓ %d lines "):format(overflow) or ""
+	local indexStr = ("(%d/%d)"):format(idx, #history)
+	local footer = vim.trim(indexStr .. " " .. moreLines)
 
 	local levelCapitalized = notif.level:sub(1, 1):upper() .. notif.level:sub(2)
 	local highlights = {
@@ -50,7 +52,7 @@ local function openNotif(idx)
 		height = height,
 		width = width,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
-		footer = footer,
+		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		wo = { ---@diagnostic disable-line: missing-fields -- faulty annotation
 			winhighlight = table.concat(highlights, ","),
@@ -77,13 +79,13 @@ return {
 	{ -- Message & Command System Overhaul
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		dependencies = {},
 		keys = {
 			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear notifications" },
 			-- stylua: ignore
 			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
 		},
 		opts = {
-			messages = { view_search = false },
 			cmdline = {
 				format = {
 					search_down = { icon = "  ", view = "cmdline" },
@@ -120,15 +122,14 @@ return {
 					filter = {
 						["not"] = {
 							any = {
-								{ find = "^/" },
-								-- { find = "Loading workspace" },
-								{
+								{ find = "^/" }, -- skip search messages
+								{ -- skip trace level messages
 									event = "notify",
-									cond = function(msg) return msg.opts and msg.opts.level == "trace" end,
+									cond = function(msg) return msg.level and msg.level == "trace" end,
 								},
 							},
 						},
-					}, -- skip search messages
+					},
 				},
 			},
 			routes = {
@@ -169,6 +170,7 @@ return {
 			},
 			lsp = {
 				progress = { enabled = false }, -- using my own
+				signature = { enabled = false }, -- using lsp_signature.nvim
 			},
 		},
 	},
