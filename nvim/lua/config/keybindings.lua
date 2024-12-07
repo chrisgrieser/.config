@@ -71,6 +71,7 @@ end, { desc = " Open first URL in file" })
 -- EDITING
 
 -- Undo
+keymap("n", "u", "<cmd>silent undo<CR>zv", { desc = "silent u" })
 keymap("n", "U", "<C-r>")
 keymap(
 	"n",

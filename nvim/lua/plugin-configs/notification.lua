@@ -1,14 +1,6 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
----@return snacks.notifier.Notif[]
-local function getHistory()
-	return require("snacks").notifier.get_history {
-		filter = function(notif) return notif.level ~= "trace" end,
-		reverse = true,
-	}
-end
-
 ---@param idx number|"last"
 local function openNotif(idx)
 	-- CONFIG
@@ -17,7 +9,10 @@ local function openNotif(idx)
 
 	-- get notification
 	if idx == "last" then idx = 1 end
-	local history = getHistory()
+	local history = require("snacks").notifier.get_history {
+		filter = function(notif) return notif.level ~= "trace" end,
+		reverse = true,
+	}
 	local notif = history[idx]
 	if not notif then
 		local msg = "No notifications yet."
@@ -76,229 +71,123 @@ local function openNotif(idx)
 	}
 end
 
-local function allNotifications()
-	local history = getHistory()
-	if #history == 0 then
-		local msg = "No notifications yet."
-		vim.notify(msg, vim.log.levels.TRACE, { title = "All notifications", icon = "󰎟" })
-		return
-	end
-	require("snacks").notifier.hide()
-	vim.ui.select(history, {
-		prompt = "󰎟 Notification history",
-		format_item = function(item)
-			local title = item.title ~= "" and item.title or "(no title)"
-			return vim.trim(item.icon .. " " .. title)
-		end,
-	}, function(_, idx)
-		if idx then openNotif(idx) end
-	end)
-end
-
-local function messagesAsWin()
-	local messages = vim.trim(vim.fn.execute("messages"))
-	if messages == "" then
-		vim.notify("No messages yet.", vim.log.levels.TRACE, { title = ":messages", icon = "󰎟" })
-		return
-	end
-	local lines = vim.split(messages, "\n")
-	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-	require("snacks").win { ---@diagnostic disable-line: missing-fields -- faulty annotation
-		position = "bottom",
-		buf = bufnr,
-		height = 0.75,
-		-- goto last message via `G` (can't reverse lines as it messes up multi-line msgs)
-		on_win = function() vim.cmd.normal { "G", bang = true } end,
-		---@diagnostic disable-next-line: missing-fields -- faulty annotation
-		wo = { list = true }, -- indicate longer lines etc.
-	}
-	-- highlight errors and paths
-	vim.api.nvim_buf_call(bufnr, function()
-		vim.fn.matchadd("ErrorMsg", [[E\d\+\zs:.*]]) -- errors
-		vim.fn.matchadd("ErrorMsg", [[^Error .*]])
-		vim.fn.matchadd("DiagnosticInfo", [[[^/]\+\.lua:\d\+\ze:]]) -- filenames
-		vim.fn.matchadd("DiagnosticInfo", [[E\d\+]]) -- error numbers differently
-		-- `\_.` matches any char, including newline
-		vim.fn.matchadd("WarningMsg", [[^stack traceback\_.*\n\t.*]])
-	end)
-end
-
---------------------------------------------------------------------------------
-
-local function redirectPrintFuncsToVimNotify()
-	---@diagnostic disable: duplicate-set-field deliberate overrides
-	_G.print = function(...)
-		local msg = vim.iter({ ... }):flatten():map(tostring):join(" ")
-		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Print", icon = "󰐪" })
-	end
-
-	vim.api.nvim_echo = function(chunks, _, _)
-		local msg = vim.iter(chunks):map(function(chunk) return chunk[1] end):join("")
-		vim.notify(vim.trim(msg), vim.log.levels.DEBUG, { title = "Echo", icon = "" })
-	end
-
-	-----------------------------------------------------------------------------
-	local buffer = ""
-
-	-- "Does not append "\n", the message is buffered (won't display) until a
-	-- linefeed is written."
-	vim.api.nvim_out_write = function(msg)
-		buffer = buffer .. msg
-		if not msg:find("[\n\r]") then return end
-		vim.notify(vim.trim(buffer), vim.log.levels.DEBUG, { title = "out_write", icon = "" })
-		buffer = ""
-	end
-	vim.api.nvim_err_write = function(msg)
-		buffer = buffer .. "ERROR: " .. msg
-		if not msg:find("[\n\r]") then return end
-		vim.notify(vim.trim(buffer), vim.log.levels.ERROR, { title = "err_write" })
-		buffer = ""
-	end
-	-- "Writes a message to the Vim error buffer. Appends "\n", so the buffer is
-	-- flushed (and displayed)."
-	vim.api.nvim_err_writeln = function(msg)
-		vim.notify(vim.trim(buffer .. msg), vim.log.levels.ERROR, { title = "err_writeln" })
-		buffer = ""
-	end
-
-	---@diagnostic enable: duplicate-set-field
-end
-
--- Overriding snacks' override, so we can filter/modify some messages
-local function preprocessVimNotify()
-	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
-		if type(msg) ~= "string" then msg = vim.inspect(msg) end
-		if not opts then opts = {} end
-
-		-- PENDING https://github.com/artempyanykh/marksman/issues/348
-		if msg:find("^Client marksman quit with exit code 1") then return end
-		-- due to the custom formatter in `typescript.lua` using code-actions
-		if msg:find("^No code actions available") then return end
-
-		if opts.title == "mason-tool-installer" or opts.title == "mason.nvim" then
-			opts = { icon = "", id = "mason", style = "minimal" }
-			msg = msg:gsub("^([%w-]+):", "[%1]"):gsub('^"([%w-]+)"', "[%1]") -- for markdown highlight
-		elseif msg:find("^%[nvim%-treesitter%]") or msg == "All parsers are up-to-date!" then
-			opts = { icon = "", id = "ts-install", style = "minimal" }
-		elseif msg:lower():find("hunk") then
-			msg = msg:gsub("^Hunk (%d+) of (%d+)", "Hunk [%1/%2]") -- [] for markdown highlight
-			opts = { icon = "󰊢", id = "gitsigns-hunk-nav", style = "minimal" }
-			level = vim.log.levels.TRACE
-		end
-
-		-- FIX broken padding for icons in the minimal style
-		if opts.style == "minimal" then
-			opts.icon = opts.icon .. " "
-			if not msg:find("%[.+%]") then msg = msg .. "  " end
-		end
-
-		return require("snacks").notifier(msg, level, opts)
-	end
-end
-
-local function silenceE486PatternNotFound()
-	-- (yes, all this is needed to have `cmdheight=0` & avoid the "Press Enter" prompt)
-
-	local function notFoundNotify(query)
-		local msg = ("~~%s~~"):format(query) -- add markdown strikethrough
-		vim.notify(msg, vim.log.levels.TRACE, { icon = "", style = "minimal" })
-	end
-
-	local function nopOnNoMatch(key)
-		local query = vim.fn.getreg("/")
-		local matches = vim.fn.search(vim.fn.getreg("/"), "ncw") -- [n]o move, w/ [c]ursorword, [w]rap
-		if matches == 0 then
-			notFoundNotify(query)
-			return
-		end
-		return key -- return and use as `expr` to still trigger `on_key` for `nvim_origami`
-	end
-	local map = vim.keymap.set
-	map("n", "n", function() return nopOnNoMatch("n") end, { desc = "silent n", expr = true })
-	map("n", "N", function() return nopOnNoMatch("N") end, { desc = "silent N", expr = true })
-
-	vim.api.nvim_create_autocmd("CmdlineEnter", {
-		desc = "User: Increase cmdline-height when in cmdline (silence enter-prompt 1/2)",
-		callback = function()
-			if vim.fn.getcmdtype() == "/" then vim.opt.cmdheight = 1 end
-		end,
-	})
-	vim.api.nvim_create_autocmd("CmdlineLeave", {
-		desc = "User: Decrease cmdline-height after leaving (silence enter-prompt 2/2)",
-		callback = function()
-			if vim.fn.getcmdtype() ~= "/" then return end
-			vim.defer_fn(function()
-				vim.opt.cmdheight = 0
-				if vim.fn.searchcount().total == 0 then
-					vim.opt.hlsearch = false -- no highlight in notification win
-					notFoundNotify(vim.fn.getreg("/"))
-				end
-			end, 1)
-		end,
-	})
-end
-
 --------------------------------------------------------------------------------
 
 return {
-	"folke/snacks.nvim",
-	event = "VeryLazy",
-	config = function(_spec, opts)
-		require("snacks").setup(opts)
-		preprocessVimNotify() -- needs to run after snack's `setup`
-		redirectPrintFuncsToVimNotify()
-		silenceE486PatternNotFound()
-	end,
-	keys = {
-		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
+	{ -- Message & Command System Overhaul
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear notifications" },
+			-- stylua: ignore
+			{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
+		},
+		opts = {
+			messages = { view_search = false },
+			cmdline = {
+				format = {
+					search_down = { icon = "  ", view = "cmdline" },
+				},
+			},
+			-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
+			views = {
+				cmdline_popup = {
+					border = { style = vim.g.borderStyle },
+				},
+				cmdline_popupmenu = { -- the completions window
+					size = { max_height = 12 },
+					border = { padding = { 0, 1 } }, -- setting border style messes up automatic positioning
+					win_options = {
+						winhighlight = { Normal = "NormalFloat", FloatBorder = "NoicePopupmenuBorder" },
+					},
+				},
+				cmdline = {
+					win_options = { winhighlight = { Normal = "NormalFloat" } },
+				},
+				split = {
+					enter = true,
+					size = "70%",
+					win_options = { scrolloff = 6 },
+					close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
+				},
+			},
+			commands = {
+				history = {
+					filter_opts = { reverse = true }, -- show newest entries first
+					opts = { format = { "{title} ", "{message}" } }, -- https://github.com/folke/noice.nvim#-formatting
+					filter = {
+						["not"] = {
+							find = "^/",
+						},
+					}, -- skip search messages
+				},
+			},
+			-- DOCS https://github.com/folke/noice.nvim#-routes
+			routes = {
+				-- write/deletion messages
+				{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
-		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰉚 Blame line" },
+				-- search
+				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
-		{ "<D-8>", messagesAsWin, mode = { "n", "v", "i" }, desc = "󰎟 :messages" },
-		{ "<D-0>", allNotifications, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
-		-- stylua: ignore
-		{ "<Esc>", function() require("snacks").notifier.hide() end, desc = "󰎟 Dismiss notifications" },
-		-- stylua: ignore
-		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+				-- FIX https://github.com/artempyanykh/marksman/issues/348
+				{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
+
+				-- code actions
+				{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+
+				-- unneeded info on search patterns when pattern not found
+				{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+			},
+			lsp = {
+				progress = { enabled = false }, -- using my own
+			},
+		},
 	},
-	opts = {
-		words = {
-			notify_jump = true,
-			modes = { "n" },
-			debounce = 300,
+	{
+		"folke/snacks.nvim",
+		event = "VeryLazy",
+		keys = {
+			-- stylua: ignore start
+			{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
+			{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
+			{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰉚 Blame line" },
+			{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
+			-- stylua: ignore end
 		},
-		win = {
-			border = vim.g.borderStyle,
-			bo = { modifiable = false },
-			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
-			keys = {
-				q = "close",
-				["<Esc>"] = "close",
-				["<D-8>"] = "close",
-				["<D-9>"] = "close",
-				["<D-0>"] = "close",
+		opts = {
+			words = {
+				notify_jump = true,
+				modes = { "n" },
+				debounce = 300,
 			},
-		},
-		notifier = {
-			timeout = 7500,
-			sort = { "added" }, -- sort only by time
-			width = { min = 12, max = 0.5 },
-			height = { min = 1, max = 0.5 },
-			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
-			top_down = false,
-		},
-		styles = {
-			notification = {
+			win = {
 				border = vim.g.borderStyle,
-				wo = { cursorline = false, winblend = 0, wrap = true },
+				bo = { modifiable = false },
+				wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
+				keys = { q = "close", ["<Esc>"] = "close", ["<D-9>"] = "close", ["<D-0>"] = "close" },
 			},
-			blame_line = {
-				width = 0.6,
-				height = 0.6,
-				border = vim.g.borderStyle,
-				title = " 󰉚 Git blame ",
+			notifier = {
+				timeout = 7500,
+				sort = { "added" }, -- sort only by time
+				width = { min = 12, max = 0.5 },
+				height = { min = 1, max = 0.5 },
+				icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+				top_down = false,
+			},
+			styles = {
+				notification = {
+					border = vim.g.borderStyle,
+					wo = { cursorline = false, winblend = 0, wrap = true },
+				},
+				blame_line = {
+					width = 0.6,
+					height = 0.6,
+					border = vim.g.borderStyle,
+					title = " 󰉚 Git blame ",
+				},
 			},
 		},
 	},
