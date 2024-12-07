@@ -25,7 +25,7 @@ local config = {
 	-- stylua: ignore
 	dontTriggerHiding = {
 		"Alfred", "CleanShot X", "IINA", "Ivory", "pinentry-mac", "Espanso",
-		"Catch", "BetterZip", "System Preferences",
+		"Catch", "BetterZip", "System Preferences", "Transmission",
 		"Slack", -- FIX bug where Slack briefly re-activates when opening link
 	},
 }
