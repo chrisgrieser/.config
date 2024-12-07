@@ -230,6 +230,7 @@ return {
 			},
 			extension = {
 				["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
+				["applescript"] = { glyph = "󰀵", hl = "MiniIconsGrey" },
 			},
 			filetype = {
 				["css"] = { hl = "MiniIconsRed" },
