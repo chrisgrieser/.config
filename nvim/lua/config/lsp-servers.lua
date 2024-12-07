@@ -289,19 +289,16 @@ M.serverConfigs.ltex_plus = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
-				["en-US"] = ":" .. vim.o.spellfile,
+				-- HACK since reading external file with the method described in ltex-docs[^1] does not work
+				-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
+				["en-US"] = (function()
+					local words = {}
+					for word in io.lines(vim.o.spellfile) do
+						table.insert(words, word)
+					end
+					return words
+				end)(),
 			},
-			-- dictionary = {
-			-- 	-- HACK since reading external file with the method described in ltex-docs[^1] does not work
-			-- 	-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
-			-- 	["en-US"] = (function()
-			-- 		local words = {}
-			-- 		for word in io.lines(vim.o.spellfile) do
-			-- 			table.insert(words, word)
-			-- 		end
-			-- 		return words
-			-- 	end)(),
-			-- },
 
 			diagnosticSeverity = { default = "info" },
 			disabledRules = {
@@ -332,7 +329,7 @@ M.serverConfigs.ltex_plus = {
 				word = vim.fn.getreg("z")
 			end
 			local ltexSettings = client.config.settings or {}
-			-- table.insert(ltexSettings.ltex.dictionary["en-US"], word)
+			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 	end,
