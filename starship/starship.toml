@@ -1,5 +1,4 @@
 # DOCS https://starship.rs/config/
-#───────────────────────────────────────────────────────────────────────────────
 
 format = """[\
 ${custom.location_indicator}$directory${custom.folder_number}\
