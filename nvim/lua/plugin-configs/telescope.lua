@@ -230,18 +230,17 @@ return {
 				},
 				git_commits = {
 					prompt_title = "󰊢 Git log",
-					layout_config = { horizontal = { preview_width = 0.5 } },
-					git_command = { "git", "log", "--all", "--format=%h %s %cr", "--", "." },
+					layout_config = {
+						horizontal = { preview_width = 0.4 },
+					},
+					git_command = { "git", "log", "--all", "--format=%h %s (%cr)", "--", "." },
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						dyn_title = function(_, entry) return entry.value end, -- hash as title
 						get_command = function(entry, status)
 							local hash = entry.value
-							local previewWidth = vim.api.nvim_win_get_width(status.preview_win)
-							local statArgs = ("%s,%s,25"):format(
-								previewWidth,
-								math.floor(previewWidth / 2)
-							)
-							local previewFormat = "%C(bold)%C(magenta)%s%C(reset)%n"
+							local width = vim.api.nvim_win_get_width(status.preview_win)
+							local statArgs = ("%d,%d,25"):format(width, math.floor(width / 2))
+							local format = "%C(bold)%C(magenta)%s%C(reset)%n"
 								.. "%C(cyan)%D%n"
 								.. "%C(blue)%an %C(yellow)(%ch)%n"
 								.. "%C(reset)%b"
@@ -249,7 +248,7 @@ return {
 							return ("git show %s --color=always --stat=%s --format=%q | sed '$d'"):format(
 								hash,
 								statArgs,
-								previewFormat
+								format
 							)
 						end,
 					},
@@ -341,12 +340,6 @@ return {
 						unpack(specialDirs), -- needs to be last for correct unpacking
 					},
 				},
-				spell_suggest = {
-					prompt_title = "󰓆 Spell suggest",
-					previewer = false,
-					theme = "cursor",
-					layout_config = { cursor = { width = 0.3 } },
-				},
 				colorscheme = {
 					prompt_title = " Colorschemes",
 					enable_preview = true,
@@ -365,7 +358,7 @@ return {
 	end,
 	keys = {
 		{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search keymaps" },
-		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Continue" },
+		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 		-- stylua: ignore start
@@ -375,7 +368,6 @@ return {
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
-		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
 		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live-grep" },
 		{

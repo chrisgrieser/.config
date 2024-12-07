@@ -10,7 +10,7 @@ return {
 			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
 			{ "<leader>gP", function() require("tinygit").createGitHubPr() end, desc = " Create PR" },
-			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & rebase" },
+			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = false, squashInstead = true } end, desc = "󰊢 Fixup & rebase" },
 			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-no-edit & f-push" },
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend only msg & f-push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open issues" },
