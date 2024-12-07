@@ -101,8 +101,10 @@ return {
 						winhighlight = { Normal = "NormalFloat", FloatBorder = "NoicePopupmenuBorder" },
 					},
 				},
-				cmdline = {
-					win_options = { winhighlight = { Normal = "NormalFloat" } },
+				mini = {
+					timeout = 3000,
+					zindex = 45, -- lower than nvim-notify (50), higher than satellite-scrollbar (40)
+					format = { "{title} ", "{message}" }, -- leave out "{level}"
 				},
 				split = {
 					enter = true,
@@ -117,17 +119,41 @@ return {
 					opts = { format = { "{title} ", "{message}" } }, -- https://github.com/folke/noice.nvim#-formatting
 					filter = {
 						["not"] = {
-							find = "^/",
+							any = {
+								{ find = "^/" },
+								-- { find = "Loading workspace" },
+								{
+									event = "notify",
+									cond = function(msg) return msg.opts and msg.opts.level == "trace" end,
+								},
+							},
 						},
 					}, -- skip search messages
 				},
 			},
-			-- DOCS https://github.com/folke/noice.nvim#-routes
 			routes = {
+				-- DOCS https://github.com/folke/noice.nvim#-routes
 				-- write/deletion messages
 				{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
 				{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
 				{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+
+				-- gitsigns.nvim
+				{ filter = { event = "msg_show", find = "^Hunk %d+ of %d+" }, view = "mini" },
+				{ filter = { event = "msg_show", find = "^No hunks$" }, view = "mini" },
+
+				-- nvim-treesitter
+				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+				{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
+
+				{ -- mason.nvim
+					filter = {
+						event = "notify",
+						cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
+					},
+					view = "mini",
+				},
+				--------------------------------------------------------------------
 
 				-- search
 				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
