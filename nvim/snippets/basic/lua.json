@@ -150,14 +150,14 @@
   },
   "write file": {
     "body": [
-      "---@param str string",
-      "---@param filePath string",
-      "---@return string|nil -- error message",
-      "local function overwriteFile(filePath, str)",
-      "\tlocal file, _ = io.open(filePath, \"w\")",
-      "\tif not file then return end",
-      "\tfile:write(str)",
-      "\tfile:close()",
+      "---@param path string",
+      "---@param content string",
+      "local function writeFile(path, content)",
+      "\tlocal file = io.open(path, \"w\")",
+      "\tif file then",
+      "\t\tfile:write(content)",
+      "\t\tfile:close()",
+      "\tend",
       "end"
     ],
     "description": "Overwriting file, for appending use `a` instead of `w`.",
