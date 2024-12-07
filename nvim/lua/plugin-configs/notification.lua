@@ -168,6 +168,7 @@ end
 -- Overriding snacks' override, so we can filter/modify some messages
 local function preprocessVimNotify()
 	vim.notify = function(msg, level, opts) ---@diagnostic disable-line: duplicate-set-field
+		if type(msg) ~= "string" then msg = vim.inspect(msg) end
 		if not opts then opts = {} end
 
 		-- PENDING https://github.com/artempyanykh/marksman/issues/348

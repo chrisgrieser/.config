@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 	callback = function(ctx)
 		local bufnr, bufname = ctx.buf, ctx.file
 		local bo, b = vim.bo[bufnr], vim.b[bufnr]
-		if bo.buftype ~= "" or bo.readonly or not bo.modifiable or b.autoSaveQueued then return end
+		if bo.buftype ~= "" or not bo.modifiable or b.autoSaveQueued then return end
 
 		b.autoSaveQueued = true
 		vim.defer_fn(function()
@@ -65,11 +65,12 @@ vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
 	desc = "User: Auto-format when leaving buffer",
 	callback = function(ctx)
 		local bo = vim.bo[ctx.buf]
-		if not bo.modifiable or bo.readonly then return end
-		if bo.buftype ~= "" or not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+		if bo.buftype ~= "" or not bo.modifiable then return end
 
 		require("personal-plugins.misc").formatWithFallback { async = true, bufnr = ctx.buf }
-		vim.api.nvim_buf_call(ctx.buf, vim.cmd.update)
+
+		vim.defer_fn(function() vim.api.nvim_buf_call(ctx.buf, vim.cmd.update) end, 100)
 	end,
 })
 
