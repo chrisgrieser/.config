@@ -13,12 +13,40 @@ local config = {
 	},
 	keys = {
 		leader = "<leader>m",
+		gotoMarker = "m",
 		upstream = "u",
 		base = "b",
 		stashed = "s",
 	},
-	notifyOpts = { title = "Merge conflicts", icon = "" },
+	icon = "",
 }
+
+--------------------------------------------------------------------------------
+
+---@param bufnr number
+---@param key string
+---@param rhs string
+---@param desc string
+---@return string info
+---@nodiscard
+local function map(bufnr, key, rhs, desc)
+	local keys = config.keys
+	local lhs = (keys.leader .. key):gsub("<leader>", vim.g.mapleader)
+	vim.keymap.set("n", lhs, function()
+		if key == keys.gotoMarker or vim.api.nvim_get_current_line():find("<<<<*") then
+			vim.opt.lazyredraw = true
+			vim.defer_fn(function() vim.opt.lazyredraw = false end, 1)
+			return rhs
+		else
+			local gotoMarker = keys.leader .. keys.gotoMarker
+			local msg = "Needs to be on the first merge marker (the `<<<` line).\n"
+				.. ("Use `%s` to go to the first merge marker."):format(gotoMarker)
+
+			vim.notify(msg, vim.log.levels.WARN, { title = "Merge conflict", icon = config.icon })
+		end
+	end, { buffer = bufnr, desc = desc, silent = true, expr = true })
+	return ("[%s] %s"):format(lhs, desc)
+end
 
 --------------------------------------------------------------------------------
 
@@ -80,23 +108,25 @@ local function setupConflictMarkers(out, bufnr)
 	vim.diagnostic.enable(false, { bufnr = bufnr })
 
 	-- mappings
-	local mapInfo = {}
-	local function map(lhs, rhs, desc)
-		lhs = (config.keys.leader .. lhs):gsub("<leader>", vim.g.mapleader)
-		vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc })
-		table.insert(mapInfo, ("[%s] %s"):format(lhs, desc))
+	local installed, whichKey = pcall(require, "which-key")
+	if installed then
+		local group = vim.trim(config.icon .. " Merge conflict")
+		whichKey.add { "<leader>m", group = group }
 	end
+
 	-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
-	map("m", "/<<<<CR>", "Goto merge marker")
-	map("u", "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)")
-	map("b", "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)")
-	map("s", "0v/====<CR>$x/>>><CR>dd", "Choose stashed (bottom)")
+	local info = {
+		map(bufnr, config.keys.gotoMarker, "/<<<<*<CR>", "Goto merge marker"),
+		map(bufnr, config.keys.upstream, "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)"),
+		map(bufnr, config.keys.base, "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)"),
+		map(bufnr, config.keys.stashed, "0v/====<CR>$x/>>><CR>dd", "Choose stashed (bottom)"),
+	}
 
 	-- notify
 	local conflicts = #conflictLnums / 4
 	local header = ("%d conflict%s found."):format(conflicts, conflicts > 1 and "s" or "")
-	local mapInfoStr = table.concat(mapInfo, "\n")
-	vim.notify(header .. "\n" .. mapInfoStr, nil, config.notifyOpts)
+	table.insert(info, 1, header)
+	vim.notify(table.concat(info, "\n"), nil, { title = "Merge conflict", icon = config.icon })
 end
 
 --------------------------------------------------------------------------------
