@@ -61,16 +61,15 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
 })
 
 -- AUTO-FORMAT
-vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
-	desc = "User: Auto-format when leaving buffer",
+-- formatting on `BufLeave` appears to be buggy
+vim.api.nvim_create_autocmd("FocusLost", {
+	desc = "User: Auto-format on `FocusLost`",
 	callback = function(ctx)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			local bo = vim.bo[ctx.buf]
-			if bo.buftype ~= "" or not bo.modifiable then return end
+		if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
+		local bo = vim.bo[ctx.buf]
+		if bo.buftype ~= "" or not bo.modifiable then return end
 
-			require("personal-plugins.misc").formatWithFallback { async = true, bufnr = ctx.buf }
-		end, 100)
+		require("personal-plugins.misc").formatWithFallback { async = true, bufnr = ctx.buf }
 	end,
 })
 
