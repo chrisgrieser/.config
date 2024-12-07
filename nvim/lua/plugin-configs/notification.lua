@@ -76,7 +76,7 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{ -- Message & Command System Overhaul
+	{ -- Message & command system overhaul
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		dependencies = {},
@@ -154,6 +154,8 @@ return {
 					},
 					view = "mini",
 				},
+				-- word added to spellfile via `zg`
+				{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 				--------------------------------------------------------------------
 
 				-- search
@@ -174,7 +176,7 @@ return {
 			},
 		},
 	},
-	{
+	{ -- mostly used for its notifications
 		"folke/snacks.nvim",
 		event = "VeryLazy",
 		keys = {

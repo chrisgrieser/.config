@@ -127,7 +127,7 @@ local function setupConflictMarkers(out, bufnr)
 	-- mappings
 	local installed, whichKey = pcall(require, "which-key")
 	if installed then
-		local group = vim.trim(config.icon .. " Merge conflict")
+		local group = vim.trim(config.icons.main .. " Merge conflict")
 		whichKey.add { "<leader>m", group = group }
 	end
 	local info = {
