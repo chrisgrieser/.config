@@ -260,9 +260,6 @@ function M.formatWithFallback(opts)
 	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = bufnr }
 
 	if formattingLsps > 0 then
-		-- FIX efm bug, where special buffers still get formatted
-		if vim.bo[0].buftype ~= "" then return end
-
 		if vim.bo[bufnr].ft == "markdown" then -- for efm-formatters that don't use stdin
 			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent update") end)
 		end
