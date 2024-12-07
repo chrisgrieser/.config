@@ -253,4 +253,19 @@ function M.nextFileInFolder(direction)
 end
 
 --------------------------------------------------------------------------------
+
+--- @param opts? vim.lsp.buf.format.Opts
+function M.formatWithFallback(opts)
+	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
+	if formattingLsps > 0 then
+		vim.cmd("silent update") -- needed for efm-formatters that don't use stdin
+		vim.lsp.buf.format(opts)
+	else
+		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
+		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
+		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
+	end
+end
+
+--------------------------------------------------------------------------------
 return M

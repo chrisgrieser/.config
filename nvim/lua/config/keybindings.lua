@@ -222,20 +222,12 @@ keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
 keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
 
-keymap({ "n", "x" }, "<D-s>", function()
-	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
-	if formattingLsps > 0 then
-		vim.cmd("silent update") -- needed for efm-formatters that don't use stdin
-		vim.lsp.buf.format()
-	else
-		if vim.bo.ft == "query" or vim.bo.ft == "applescript" then
-			vim.cmd.normal { "m`gg=G``", bang = true }
-		end
-		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
-		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
-		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
-	end
-end, { desc = "󰆓 Save & Format" })
+keymap(
+	{ "n", "x" },
+	"<D-s>",
+	function() require("personal-plugins.misc").formatWithFallback() end,
+	{ desc = "󱉯 Save & Format" }
+)
 
 --------------------------------------------------------------------------------
 
