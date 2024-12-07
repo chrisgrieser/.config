@@ -103,7 +103,7 @@ ignore_branches = ["main"]
 # since "ignore_branches" fully hides the git_branch component, still showing the symbol
 [custom.main_branch]
 when = "[[ $(git branch --show-current) == 'main' ]]"
-format = '[  ](fg:purple bg:black bold)'
+format = ' [](fg:purple bg:black bold)'
 
 [git_status] # files
 stashed = '[ 󰜦 $count](fg:cyan bg:black)'
