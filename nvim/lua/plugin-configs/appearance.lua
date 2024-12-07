@@ -227,6 +227,7 @@ return {
 				["init.lua"] = { glyph = "󰢱" }, -- no nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
 				["README.md"] = { glyph = "" },
 				[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
+				["pre-commit"] = { glyph = "󰊢" },
 			},
 			extension = {
 				["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`

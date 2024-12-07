@@ -205,7 +205,13 @@ return {
 		ft = "lua", -- in lua, load directly for `Chainsaw` global
 		init = function() vim.g.whichkeyAddGroup { "<leader>l", group = "󰐪 Log" } end,
 		opts = {
-			preCommitHook = true,
+			preCommitHook = {
+				enabled = true,
+				dontInstallInDirs = {
+					"~/.config", -- since this directory itself has the marker
+					"~/Developer/nvim-chainsaw", -- plugin dir also has marker
+				},
+			},
 			logStatements = {
 				variableLog = {
 					nvim_lua = "Chainsaw({{var}}) -- {{marker}}",
