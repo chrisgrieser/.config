@@ -7,6 +7,7 @@ local config = {
 	whenConflict = {
 		disableDiagnostics = true,
 		moveToFirst = true,
+		disableGitSigns = true,
 	},
 	keys = {
 		leader = "<leader>m",
@@ -116,13 +117,14 @@ local function setupConflictMarkers(out, bufnr)
 		end
 	end
 
-	-- move to conflict & disable diagnostics
+	-- toggle options
 	if config.whenConflict.moveToFirst then
 		vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 	end
 	if config.whenConflict.disableDiagnostics then
 		vim.diagnostic.enable(false, { bufnr = bufnr })
 	end
+	if config.whenConflict.disableGitSigns then vim.cmd.Gitsigns("toggle_signs") end
 
 	-- mappings
 	local installed, whichKey = pcall(require, "which-key")
