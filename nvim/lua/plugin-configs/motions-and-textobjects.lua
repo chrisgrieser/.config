@@ -191,7 +191,7 @@ return {
 				end,
 				desc = "󰉶 Indent last paste",
 			},
-			{ -- indent last paste
+			{ -- dedent last paste
 				"\\", -- shift-^ on my keyboard
 				function()
 					require("various-textobjs").lastChange()

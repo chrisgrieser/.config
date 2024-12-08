@@ -39,30 +39,46 @@ function M.bufferInfo()
 end
 
 function M.nodeUnderCursor()
+	local config = {
+		hlDuration = 1500,
+		hlGroup = "Search",
+		maxChildren = 4,
+	}
+
 	local ok, node = pcall(vim.treesitter.get_node)
 	if not (ok and node) then
 		vim.notify("No node under cursor", vim.log.levels.DEBUG, { icon = "" })
 		return
 	end
-	vim.notify(node:type(), vim.log.levels.DEBUG, { icon = "", title = "Node under cursor" })
+
+	-- node info
+	local parent = node:parent() and node:parent():type() or "–"
+	local tree = { parent, "└── " .. node:type() }
+	for childIdx = 1, config.maxChildren do
+		local child = node:child(childIdx)
+		if not child then break end
+		table.insert(tree, ("      %s── %s"):format(treeChar, child:type()))
+	end
+	local treeChar = (childIdx < max) and "├" or "└"
+	local msg = table.concat(tree, "\n")
+	vim.notify(msg, vim.log.levels.DEBUG, { icon = "", title = "Node at cursor" })
 
 	-- highlight the full node
-	local duration, hlgroup = 1500, "Search" -- CONFIG
 	local startRow, startCol = node:start()
 	local endRow, endCol = node:end_()
 	local ns = vim.api.nvim_create_namespace("node-highlight")
 	if startRow == endRow then
-		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, endCol)
+		vim.api.nvim_buf_add_highlight(0, ns, config.hlGroup, startRow, startCol, endCol)
 	else
-		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, startRow, startCol, -1)
+		vim.api.nvim_buf_add_highlight(0, ns, config.hlGroup, startRow, startCol, -1)
 		local lnum = startRow + 1
 		while lnum < endRow do
-			vim.api.nvim_buf_add_highlight(0, ns, hlgroup, lnum, 0, -1)
+			vim.api.nvim_buf_add_highlight(0, ns, config.hlGroup, lnum, 0, -1)
 			lnum = lnum + 1
 		end
-		vim.api.nvim_buf_add_highlight(0, ns, hlgroup, endRow, 0, endCol)
+		vim.api.nvim_buf_add_highlight(0, ns, config.hlGroup, endRow, 0, endCol)
 	end
-	vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, duration)
+	vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, config.hlDuration)
 
 	-- FIX on_key being triggered by `n` key (only needed for my personal config)
 	-- see https://www.reddit.com/r/neovim/comments/1h051ht/comment/m01r7ju/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
