@@ -1,9 +1,15 @@
-	-- 1
-	-- 1
-local ns = vim.api.nvim_create_namespace("conflictMrkers")
-	-- 1
+local diff = vim.system({ "git", "diff", "--color=always" }):wait().stdout or "??"
+local lines = vim.split(diff, "\n", { trimempty = true })
+local buf = vim.api.nvim_create_buf(false, true)
 
-vim.api.nvim_buf_set_extmark(0, ns, 0, 0, { end_row = 10, sign_text = "1" })
-	-- 1
-	-- 1
-	-- 1
+
+require("snacks").win {
+	relative = "editor",
+	position = "float",
+	title = " test ",
+	buf = buf,
+	width = 80,
+	height = 20,
+}
+
+vim.api.nvim_chan_send(vim.api.nvim_open_term(buf, {}), table.concat(lines, "\r\n"))
