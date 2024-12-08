@@ -51,6 +51,7 @@ function _gitlog {
 			-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
 			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' \
 			-Ee "s_([a-f0-9]{7,40})_\x1b]8;;https://github.com/${repo}/commit/\1\x1b\\\\\1\x1b]8;;\x1b\\\\_"
+		# INFO last replacements adds hyperlinks to hashes
 }
 
 function _list_files_here {
@@ -59,7 +60,8 @@ function _list_files_here {
 	local eza_output
 	eza_output=$(
 		eza --width="$COLUMNS" --hyperlink --all --grid --color=always --icons \
-			--git-ignore --sort=oldest --group-directories-first --no-quotes \
+			--git-ignore --ignore-glob=".DS_Store" \
+			--sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 	)
 	# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693

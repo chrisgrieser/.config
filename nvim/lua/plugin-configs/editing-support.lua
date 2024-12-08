@@ -207,12 +207,8 @@ return {
 		opts = {
 			preCommitHook = {
 				enabled = true,
-				dontInstallInDirs = {
-					"~/.config", -- since this directory itself has the marker
-					"**/nvim-chainsaw", -- plugin dir also has marker
-					"~/Vaults/**", -- Obsidian vaults
-					"**/obsidian*", -- Obsidian plugins have their own hooks
-				},
+				dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir has marker
+				noHookOverride = true, -- perma-repos and Obsidian plugin use a hook themselves
 			},
 			logStatements = {
 				variableLog = {
