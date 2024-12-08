@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+# SOURCE https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts
+
+# initialize new repo
+mkdir git-merge-test
+cd git-merge-test || return 1
+git init .
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# create commit A on `main`
+echo "this is some content to mess with" > foobar.txt
+git add --all
+git commit --message="initial content for foobar.txt"
+
+# create commit B on `alt_branch`
+git checkout -b alt_branch
+echo "totally different content to merge later" > foobar.txt
+git add --all
+git commit --message="edited the content of foobar.txt to cause a conflict"
+
+# create commit B on `main`
+git checkout main
+echo "content to append" >> foobar.txt
+git add --all
+git commit --message="appended content to foobar.txt"
+
+# merge `alt_branch` into `main`, creating a conflict
+git merge alt_branch

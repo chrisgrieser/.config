@@ -1,7 +1,8 @@
-local diff = vim.system({ "git", "diff", "--color=always" }):wait().stdout or "??"
+local cmd = { "git", "diff", "--color=always"}
+
+local diff = vim.system(cmd):wait().stdout or "??"
 local lines = vim.split(diff, "\n", { trimempty = true })
 local buf = vim.api.nvim_create_buf(false, true)
-
 
 require("snacks").win {
 	relative = "editor",

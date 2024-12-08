@@ -82,7 +82,7 @@ function M.altFileStatusbar(maxLength)
 		name = altFile ~= "" and altFile or "[No Name]"
 		-- icon
 		local ext = altFile:match("%w+$")
-		local altBufFt = vim.api.nvim_get_option_value("filetype", { buf = altBufNr })
+		local altBufFt = vim.bo[altBufNr].filetype
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		if ok then icon = devicons.get_icon(altFile, ext) or devicons.get_icon(altFile, altBufFt) end
 

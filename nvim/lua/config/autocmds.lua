@@ -200,11 +200,13 @@ local globToTemplateMap = {
 
 	["**/*.py"] = "template.py",
 	["**/*.sh"] = "template.zsh",
+	["**/*.*sh"] = "template.zsh",
 	["**/*.applescript"] = "template.applescript",
+
 	["**/*.mjs"] = "node-module.mjs",
+	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 
 	["**/Justfile"] = "justfile.just",
-	["**/Alfred.alfredpreferences/workflows/**/*.js"] = "jxa.js",
 	["**/*typos.toml"] = "typos.toml",
 	["**/.github/workflows/**/*.y*ml"] = "github-action.yaml",
 }
