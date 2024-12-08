@@ -28,31 +28,28 @@ function _gitlog {
 	fi
 
 	# INFO inserting ansi colors via `sed` requires $'string'
-	# `--abrrev=8` needed to make links clickable via `delta`: https://github.com/dandavison/delta/issues/1923
-	local the_log
-	the_log=$(
-		git log --abbrev=8 --all --color $graph \
-			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
-			sed -e 's/ seconds* ago)/s)/' \
-				-e 's/ minutes* ago)/m)/' \
-				-e 's/ hours* ago)/h)/' \
-				-e 's/ days* ago)/d)/' \
-				-e 's/ weeks* ago)/w)/' \
-				-e 's/ months* ago)/mo)/' \
-				-e 's/grafted/󰩫 /' \
-				-e 's/origin\//󰞶  /g' \
-				-e 's/upstream\//󰅧  /g' \
-				-e 's/HEAD/󱍞/g' \
-				-e 's/tag: / /g' \
-				-e 's/ -> /   /g' \
-				-e 's/\* /· /' \
-				-Ee $'s/ (release|bump|publish|init|bot):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
-				-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
-				-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
-				-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
-				-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g'
-	)
-	echo "$the_log"
+	git log --abbrev=8 --all --color $graph \
+		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
+		sed -e 's/ seconds* ago)/s)/' \
+			-e 's/ minutes* ago)/m)/' \
+			-e 's/ hours* ago)/h)/' \
+			-e 's/ days* ago)/d)/' \
+			-e 's/ weeks* ago)/w)/' \
+			-e 's/ months* ago)/mo)/' \
+			-e 's/grafted/󰩫 /' \
+			-e 's/origin\//󰞶  /g' \
+			-e 's/upstream\//󰅧  /g' \
+			-e 's/HEAD/󱍞/g' \
+			-e 's/tag: / /g' \
+			-e 's/ -> /   /g' \
+			-e 's/\* /· /' \
+			-Ee $'s/ (release|bump|publish|init|bot):/ \033[1;32m\\1\033[0;38;5;245m:\033[0m/' \
+			-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \033[1;35m\\1\033[1;36m\\2\033[7;31m\\3\033[0;38;5;245m:\033[0m/' \
+			-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
+			-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
+			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' \
+			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' 
+			# -Ee '\e]8;;http://example.com\e\\This is a link\e]8;;\e\\\n'
 }
 
 function _list_files_here {
@@ -61,7 +58,7 @@ function _list_files_here {
 	local eza_output
 	eza_output=$(
 		eza --width="$COLUMNS" --hyperlink --all --grid --color=always --icons \
-			--git-ignore --sort=age --group-directories-first --no-quotes \
+			--git-ignore --sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 	)
 	# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693

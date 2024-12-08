@@ -19,8 +19,7 @@ alias zip='zip --recurse-paths --symlinks'
 
 # EZA
 alias e='eza --all --long --time-style=relative --no-user --total-size \
-	--smart-group --no-quotes --sort=newest'
-alias tree='eza --tree --level=7 --no-quotes --icons=always --color=always | less'
+	--smart-group --no-quotes --sort=newest --hyperlink'
 
 # JUST
 alias j="just"

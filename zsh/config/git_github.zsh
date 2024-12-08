@@ -121,7 +121,7 @@ function gC {
 # select a recent commit to fixup *and* autosquash (not marked for next rebase!)
 function gf {
 	local target
-	target=$(_gitlog --no-graph --max-count=15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
+	target=$(_gitlog --max-count=15 | fzf --ansi --no-sort --no-info | cut -d" " -f1)
 	[[ -z "$target" ]] && return 0
 
 	_stageAllIfNoStagedChanges
