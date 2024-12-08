@@ -38,7 +38,7 @@ keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
-keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
+keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
@@ -165,14 +165,16 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
--- require `remap` or the method here: https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
+-- require `remap` https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true })
-keymap("n", "qq", "q_", { desc = "󰆈 Comment line", remap = true })
-keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
-keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
+keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
+do
+	keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
+	keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
+end
 
 -- stylua: ignore start
--- keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
+keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
 keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
 keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
 keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })

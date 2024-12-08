@@ -3,6 +3,13 @@ return {
 	event = "BufReadPost",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
+	keys = {
+		{
+			"<leader>ot",
+			function() vim.cmd.TSBufToggle("highlight") end,
+			desc = " Treesitter highlights",
+		},
+	},
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not
 		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
