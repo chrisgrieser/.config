@@ -28,7 +28,6 @@ return {
 			"TSTextobjectSwapPrevious",
 			"TSTextobjectGotoNextStart",
 			"TSTextobjectGotoPreviousStart",
-			"TSTextobjectPeekDefinitionCode",
 		},
 		-- INFO yes, configured via treesitter, not this plugin. Also, calling
 		-- treesitter's `setup` a second time is apparently not a problem.
@@ -38,11 +37,6 @@ return {
 				select = {
 					lookahead = true,
 					include_surrounding_whitespace = false, -- `true` breaks my comment textobj mappings
-				},
-				-- for `:TSTextobjectPeekDefinitionCode` (used in overwritten handler for LSP hover)
-				lsp_interop = {
-					border = vim.g.borderStyle,
-					floating_preview_opts = { title = "  Peek ", max_width = 75 },
 				},
 			},
 		},
