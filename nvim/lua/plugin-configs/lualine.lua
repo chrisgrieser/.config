@@ -15,13 +15,15 @@ end
 local function filenameAndIcon()
 	local maxLength = 30 --CONFIG
 	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-	local display = #name < maxLength and name or vim.trim(name:sub(1, maxLength)) .. "…"
+	local displayName = #name < maxLength and name or vim.trim(name:sub(1, maxLength)) .. "…"
+
 	local ok, devicons = pcall(require, "nvim-web-devicons")
-	if not ok then return display end
-	local extension = name:match("%w+$")
-	local icon = devicons.get_icon(display, extension) or devicons.get_icon(display, vim.bo.ft)
-	if not icon then return display end
-	return icon .. " " .. display
+	if not ok then return displayName end
+	local ext = name:match("%w+$")
+	local icon = devicons.get_icon(name, ext)
+		or devicons.get_icon(name, vim.bo.ft, { default = true })
+
+	return icon .. " " .. displayName
 end
 
 local function newlineCharIfNotUnix()

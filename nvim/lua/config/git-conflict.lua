@@ -7,17 +7,17 @@ local config = {
 	whenConflict = {
 		disableDiagnostics = true,
 		moveToFirst = true,
-		disableGitSigns = true,
+		detachGitsigns = true,
 	},
 	keys = {
 		leader = "<leader>m",
-		gotoMarker = "m",
-		upstream = "u",
+		gotoMarker = "m", -- -> `<leader>mm` for this
+		upstream = "u",-- -> `<leader>mu`
 		base = "b",
 		stashed = "s",
 	},
 	hlgroups = {
-		borders = "ColorColumn",
+		borders = "Folded",
 		upstream = "DiagnosticVirtualTextHint",
 		base = "DiagnosticVirtualTextInfo",
 		stashed = "DiagnosticVirtualTextWarn",
@@ -80,7 +80,7 @@ local function setupConflictMarkers(out, bufnr)
 	end
 	if #conflictLnums == 0 then return end
 	if #conflictLnums % 4 ~= 0 then
-		notify("Conflicts found but conflict style is not `diff3`. Aborting.", "warn")
+		notify("Conflicts found but conflict style is not `diff3` or `zdiff3`. Aborting.", "warn")
 		return
 	end
 
@@ -109,24 +109,36 @@ local function setupConflictMarkers(out, bufnr)
 				invalidate = true, -- deletes the extmark if the line is deleted
 				undo_restore = true, -- makes undo restore those
 			})
-			vim.api.nvim_buf_set_extmark(0, ns, lnum + 2, 0, {
-				end_row = nextLnum - 1,
-				sign_hl_group = typeHl,
-				sign_text = config.icons.sign,
-				invalidate = true,
-				undo_restore = true,
-			})
+			if nextLnum ~= lnum + 2 then
+				vim.api.nvim_buf_set_extmark(0, ns, lnum + 2, 0, {
+					end_row = nextLnum - 1,
+					sign_hl_group = typeHl,
+					sign_text = config.icons.sign,
+					invalidate = true,
+					undo_restore = true,
+				})
+			end
 		end
 	end
 
 	-- toggle options
+	local info = {}
 	if config.whenConflict.moveToFirst then
 		vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 	end
 	if config.whenConflict.disableDiagnostics then
 		vim.diagnostic.enable(false, { bufnr = bufnr })
+		table.insert(info, "Diagnostics disabled in this buffer.")
 	end
-	if config.whenConflict.disableGitSigns then vim.cmd.Gitsigns("toggle_signs") end
+	if config.whenConflict.detachGitsigns then
+		-- defer, to ensure gitsigns is attached before we detach it
+		vim.defer_fn(function()
+			local ok, gitsigns = pcall(require, "gitsigns")
+			if not ok then return end
+			gitsigns.detach(bufnr)
+			table.insert(info, "Gitsigns disabled in this buffer.")
+		end, 200)
+	end
 
 	-- mappings
 	local installed, whichKey = pcall(require, "which-key")
@@ -134,13 +146,14 @@ local function setupConflictMarkers(out, bufnr)
 		local group = vim.trim(config.icons.main .. " Merge conflict")
 		whichKey.add { "<leader>m", group = group }
 	end
-	local info = {
+	local mapInfo = {
 		-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
 		map(bufnr, config.keys.gotoMarker, "/<<<<*<CR>", "Goto merge marker"),
 		map(bufnr, config.keys.upstream, "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)"),
 		map(bufnr, config.keys.base, "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)"),
 		map(bufnr, config.keys.stashed, "0v/====<CR>$x/>>><CR>dd", "Choose stashed (bottom)"),
 	}
+	vim.list_extend(info, mapInfo)
 
 	-- notify
 	local conflicts = #conflictLnums / 4
