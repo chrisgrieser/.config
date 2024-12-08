@@ -4,21 +4,21 @@ return {
 		event = "VeryLazy", -- load for status line component
 		keys = {
 			-- stylua: ignore start
-			{ "gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
-			{ "gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
+			{ "<leader>gc", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
+			{ "<leader>gC", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
 			{ "gi", function() require("tinygit").openIssueUnderCursor() end, desc = " Open issue under cursor" },
-			{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
+			{ "<leader>gn", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
 			{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
 			{ "<leader>gP", function() require("tinygit").createGitHubPr() end, desc = " Create PR" },
-			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup & rebase" },
-			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-no-edit & f-push" },
-			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend only msg & f-push" },
+			{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup-commit & rebase" },
+			{ "<leader>gm", function() require("tinygit").amendNoEdit { forcePushIfDiverged = true } end, desc = "󰊢 Amend-commit & f-push" },
+			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend message & f-push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed issues" },
 			{ "<leader>gh", function() require("tinygit").fileHistory() end, mode = { "n", "x" }, desc = "󰋚 History" },
-			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
+			{ "<leader>gu", function() require("tinygit").githubUrl("file") end, mode = { "n", "x" }, desc = " GitHub line URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub repo URL" },
-			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash push" },
+			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash" },
 			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash pop" },
 			{ "<leader>uc", function() require("tinygit").undoLastCommitOrAmend() end, desc = "󰊢 Undo last commit/amend" },
 			-- stylua: ignore end
@@ -82,25 +82,26 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
+			{ "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
+			{ "<leader>ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
+			{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
+			{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame file" },
+
 			{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 			{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
-			{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
-			{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
-			{ "gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage buffer" },
 			{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
-			{ "<leader>g!", function() require("gitsigns").blame() end, desc = "󰊢 Blame file" },
 			{ "q", vim.cmd.close, ft = "gitsigns-blame", desc = "Close", nowait = true },
 
 			-- UNDO
-			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰊢 Unstage last stage" },
-			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰊢 Unstage buffer" },
-			{ "<leader>ub", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset buffer" },
+			{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰍵 Unstage last stage" },
+			{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰍵 Unstage file" },
 			{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset hunk" },
+			{ "<leader>uH", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset file" },
 			-- stylua: ignore end
 			{
 				"<leader>o?",
 				function() require("gitsigns").toggle_current_line_blame() end,
-				desc = "󰊢 Line blame",
+				desc = " Line blame",
 			},
 			{
 				"<leader>oi",
