@@ -18,7 +18,7 @@ vim.opt.signcolumn = "yes:2" -- too much potential signs for just 1
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
 
-vim.opt.shortmess:append("I") -- no intro message
+vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
