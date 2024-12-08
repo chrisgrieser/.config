@@ -186,8 +186,7 @@ function remote_info {
 
 # Github Url: open & copy url
 function gu {
-	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
-		sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
+	url=$(git remote get-url origin | sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -241,16 +240,15 @@ function reflog {
 function gli {
 	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
 
-	local hash key_pressed selected style
+	local hash key_pressed selected repo
 	local preview_format="%C(yellow)%h %C(red)%D %n%C(blue)%an %C(green)(%ch)%C(reset) %n%n%C(bold)%C(magenta)%s %C(cyan)%n%b%C(reset)"
-	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo --dark || echo --light)
 
 	selected=$(
 		_gitlog --no-graph --color=always |
 			fzf --ansi --no-sort --track \
-				--header-first --header="↵ Checkout   ^H Hash   ^R Rebase" \
-				--expect="ctrl-h,ctrl-r" --with-nth=2.. --preview-window=55% \
-				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta $style --hunk-header-decoration-style='blue ol' --file-style=omit" \
+				--header-first --header="↵ Checkout   ^H Hash   ^G GitHub   ^D Diff" \
+				--expect="ctrl-h,ctrl-g,ctrl-d" --with-nth=2.. --preview-window=55% \
+				--preview="git show {1} --stat=,30,30 --color=always --format='$preview_format' | sed '\$d' ; git diff {1}^! | delta" \
 				--height="100%" #required for wezterm's pane:is_alt_screen_active()
 	)
 	[[ -z "$selected" ]] && return 0 # aborted
@@ -261,9 +259,16 @@ function gli {
 	if [[ "$key_pressed" == "ctrl-h" ]]; then
 		echo -n "$hash" | pbcopy
 		print "\e[1;33m$hash\e[0m copied."
-	elif [[ "$key_pressed" == "ctrl-r" ]]; then
-		git rebase --interactive "$hash^"
-		_separator && _gitlog "$hash^..HEAD" # confirm result
+	elif [[ "$key_pressed" == "ctrl-g" ]]; then
+		repo=$(git remote get-url origin | sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
+		local url="https://github.com/$repo/commit/$hash"
+		if [[ "$OSTYPE" =~ "darwin" ]] ; then 
+			open "$url"
+		else
+			echo "$url"
+		fi
+	elif [[ "$key_pressed" == "ctrl-d" ]]; then
+		git diff "$hash"^!
 	else
 		git checkout "$hash"
 	fi
