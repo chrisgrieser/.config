@@ -70,10 +70,8 @@ end
 ---@nodiscard
 function M.altFileStatusbar(maxLength)
 	maxLength = type(maxLength) == "number" and maxLength or 30
-	local icon = "#"
-
+	local icon, name = "#", "[unknown]"
 	local altOld = altOldfile()
-	local name
 
 	if hasAltBuffer() then
 		local altBufNr = vim.fn.bufnr("#")
@@ -81,10 +79,13 @@ function M.altFileStatusbar(maxLength)
 		local altFile = vim.fs.basename(altPath)
 		name = altFile ~= "" and altFile or "[No Name]"
 		-- icon
-		local ext = altFile:match("%w+$")
-		local altBufFt = vim.bo[altBufNr].filetype
 		local ok, devicons = pcall(require, "nvim-web-devicons")
-		if ok then icon = devicons.get_icon(altFile, ext) or devicons.get_icon(altFile, altBufFt) end
+		if ok and devicons then
+			local ext = altFile:match("%w+$")
+			local ft = vim.bo[altBufNr].filetype -- for extensionless files
+			icon = devicons.get_icon(altFile, ext)
+				or devicons.get_icon(altFile, ft, { default = true })
+		end
 
 		-- name: consider if alt and current file have same basename
 		local curBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -95,8 +96,6 @@ function M.altFileStatusbar(maxLength)
 	elseif altOld then
 		icon = "󰋚"
 		name = vim.fs.basename(altOld)
-	else
-		name = "[no alt file]"
 	end
 
 	-- truncate
