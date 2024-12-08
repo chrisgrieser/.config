@@ -198,16 +198,14 @@ function my_commits_today {
 
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
-		yq --prettyPrint '.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
+		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + "\t" + .commit.message' |
 		cut -c12-16,26-) # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
-	echo "$commits" | 
-		awk '{ printf "%-10s %-30s %s\n", $1" "$2, $3, substr($0, index($0, $4)) }' |
-		sed \
-		-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
+	echo "$commits" | sed \
+		-Ee $'s/\t(fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/\t\e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
-		-Ee $'s/(..:.. )([^ ]* )/\e[0;38;5;245m\\1\e[1;34m\\2\e[0m/' \
+		-Ee $'s/([0-9][0-9]:[0-9][0-9]) ([^ ]* )/\e[0;38;5;245m\\1  \e[1;34m\\2\e[0m/' \
 		-Ee $'s/`[^`]*`/\e[0;33m&\e[0m/g' \
 		-Ee $'s/#[0-9]+/\e[0;31m&\e[0m/g'
 	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"

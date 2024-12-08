@@ -11,8 +11,8 @@ function _cut-buffer {
 	echo -n -- "$BUFFER" | pbcopy
 	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
-zle -N _cut_buffer
-bindkey '^U' _cut_buffer
+zle -N _cut-buffer
+bindkey '^U' _cut-buffer
 bindkey -M vicmd -s '^U' 'i^U' # make it work in normal mode as well
 
 # ctrl+z -> unsuspend (nvim/fzf configured to suspend with it)

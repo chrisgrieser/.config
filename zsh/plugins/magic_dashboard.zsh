@@ -64,7 +64,7 @@ function _list_files_here {
 			--sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 	)
-	#  not using --hyperlink PENDING https://github.com/eza-community/eza/issues/693
+	# not using --hyperlink PENDING https://github.com/eza-community/eza/issues/693
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened
