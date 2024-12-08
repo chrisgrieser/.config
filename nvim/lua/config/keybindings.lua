@@ -1,63 +1,54 @@
-local keymap = require("config.utils").uniqueKeymap
+local map = require("config.utils").uniqueKeymap
+local pp = "personal-plugins."
 --------------------------------------------------------------------------------
 -- META
 
 local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
 local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
-keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
+map("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end, { desc = " Quit" })
+map("n", "ZZ", function() vim.cmd.wqall { bang = true } end, { desc = " Quit" })
 
-keymap(
-	"n",
-	"<leader>pd",
-	function() vim.ui.open(vim.fn.stdpath("data")) end, ---@diagnostic disable-line: param-type-mismatch
-	{ desc = "󰝰 Plugin directory" }
-)
-
-keymap(
-	"n",
-	"<leader>pv",
-	function() vim.ui.open(vim.o.viewdir) end,
-	{ desc = "󰝰 View directory" }
-)
+local pluginDir = vim.fn.stdpath("data") --[[@as string]]
+map("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
+map("n", "<leader>pv", function() vim.ui.open(vim.o.viewdir) end, { desc = "󰝰 View dir" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
 -- j/k should on wrapped lines
-keymap({ "n", "x" }, "j", "gj")
-keymap({ "n", "x" }, "k", "gk")
+map({ "n", "x" }, "j", "gj")
+map({ "n", "x" }, "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
 -- (not mapping in op-pending, since using custom textobjects for most of those)
-keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
-keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$zv", { desc = "󰰍 char" }) -- zv: unfold under cursor
-keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
-keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
+map({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
+map("o", "H", "^", { desc = "󰲠 char" })
+map({ "n", "x" }, "L", "$zv", { desc = "󰰍 char" }) -- zv: unfold under cursor
+map({ "n", "x" }, "J", "6gj", { desc = "6j" })
+map({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
-keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
+map("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
 -- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
-keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
+map("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
-keymap("n", "-", "/")
-keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
+map("n", "-", "/")
+map("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
-keymap("n", "gm", "%", { desc = "Goto Match", remap = true })
+map("n", "gm", "%", { desc = "Goto Match", remap = true })
 
 -- Diagnostics
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })
+map("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
+map("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })
 
 -- Close all top-level folds
-keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
+map("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
-keymap("n", "<D-U>", function()
+map("n", "<D-U>", function()
 	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
 	local url = text:match("%l%l%l-://[^%s)]+")
 	if url then
@@ -71,15 +62,10 @@ end, { desc = " Open first URL in file" })
 -- EDITING
 
 -- Undo
-keymap("n", "u", "<cmd>silent undo<CR>", { desc = "silent undo" })
-keymap("n", "U", "<cmd>silent redo<CR>", { desc = "silent undo" })
-keymap(
-	"n",
-	"<leader>ur",
-	function() vim.cmd.later(vim.o.undolevels) end,
-	{ desc = "󰛒 Redo all" }
-)
-keymap("n", "<leader>uu", function()
+map("n", "u", "<cmd>silent undo<CR>", { desc = "silent undo" })
+map("n", "U", "<cmd>silent redo<CR>", { desc = "silent undo" })
+map("n", "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, { desc = "󰛒 Redo all" })
+map("n", "<leader>uu", function()
 	vim.ui.input({ prompt = "󰜊 Undo to: " }, function(input)
 		if not input or input == "" then return end
 		vim.cmd.earlier(input)
@@ -87,34 +73,26 @@ keymap("n", "<leader>uu", function()
 end, { desc = "󰜊 Undo to earlier" })
 
 -- Duplicate
-keymap(
-	"n",
-	"ww",
-	function() require("personal-plugins.misc").smartLineDuplicate() end,
-	{ desc = "󰲢 Duplicate line" }
-)
+-- stylua: ignore
+map("n", "ww", function() require("personal-plugins.misc").smartDuplicate() end, { desc = "󰲢 Duplicate line" })
 
 -- Toggles
-keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
-keymap(
-	"n",
-	"<",
-	function() require("personal-plugins.misc").toggleLowercaseTitleCase() end,
-	{ desc = "󰬴 Toggle lower/Title case" }
-)
-keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
+map("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
+-- stylua: ignore
+map("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
+map("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
 -- Increment/Decrement, or toggle true/false
-keymap(
+map(
 	{ "n", "x" },
 	"+",
 	function() return require("personal-plugins.misc").toggleOrIncrement() end,
 	{ desc = "󰐖 Increment/toggle", expr = true }
 )
-keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
+map({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- Delete trailing character
-keymap("n", "X", function()
+map("n", "X", function()
 	local updatedLine = vim.api.nvim_get_current_line():gsub("%S%s*$", "")
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
@@ -123,40 +101,40 @@ end, { desc = "󱎘 Delete char at EoL" })
 local trailChars = { ",", "\\", "{", ")", ";", "." }
 for _, key in pairs(trailChars) do
 	local pad = key == "\\" and " " or ""
-	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
+	map("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
 end
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "mzO<Esc>`z", { desc = " Blank above" })
-keymap("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
+map("n", "=", "mzO<Esc>`z", { desc = " Blank above" })
+map("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
 
-keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
-keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
+map("n", "<Tab>", ">>", { desc = "󰉶 indent" })
+map("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+map("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
+map("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
+map("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+map("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- Spelling (works even with `spell=false`)
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
+map("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 
 -- Merging
-keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
-keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
+map("n", "m", "J", { desc = "󰽜 Merge line up" })
+map("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
 --------------------------------------------------------------------------------
 -- SURROUND & ARROW
 
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' " Surround cword' })
-keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
-keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
-keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
-keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
-keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
-keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
-keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
+map("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' " Surround cword' })
+map("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
+map("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
+map("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
+map("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
+map("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
+map("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
+map("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 
-keymap("i", "<D-a>", " => ", { desc = "=> Arrow" })
+map("i", "<D-a>", " => ", { desc = "=> Arrow" })
 
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
@@ -171,59 +149,59 @@ local textobjRemaps = {
 }
 for _, value in pairs(textobjRemaps) do
 	local remap, original, icon, label = unpack(value)
-	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = icon .. " inner " .. label })
-	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
+	map({ "o", "x" }, "i" .. remap, "i" .. original, { desc = icon .. " inner " .. label })
+	map({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
 
 -- special remaps
-keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
-keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
-keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
-keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
+map("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
+map("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
+map("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
+map("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
 -- HACK https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
-keymap(
+map(
 	{ "n", "x" },
 	"q",
 	function() return require("vim._comment").operator() end,
 	{ desc = "󰆈 Comment operator", expr = true }
 )
-keymap("n", "qq", "q_", { desc = "󰆈 Comment line", remap = true })
-keymap("o", "u", require("vim._comment").textobject, { desc = "󰆈 Multiline comment" })
-keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
+map("n", "qq", "q_", { desc = "󰆈 Comment line", remap = true })
+map("o", "u", require("vim._comment").textobject, { desc = "󰆈 Multiline comment" })
+map("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
 
 -- stylua: ignore start
-keymap("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
-keymap("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
-keymap("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
-keymap("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })
-keymap("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment below" })
-keymap("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Comment above" })
+map("n", "qw", function() require("personal-plugins.comment").commentHr() end, { desc = "󰆈 Horizontal divider" })
+map("n", "wq", function() require("personal-plugins.comment").duplicateLineAsComment() end, { desc = "󰆈 Duplicate line as comment" })
+map("n", "qf", function() require("personal-plugins.comment").docstring() end, { desc = "󰆈 Function docstring" })
+map("n", "Q", function() require("personal-plugins.comment").addComment("eol") end, { desc = "󰆈 Append comment" })
+map("n", "qo", function() require("personal-plugins.comment").addComment("below") end, { desc = "󰆈 Comment below" })
+map("n", "qO", function() require("personal-plugins.comment").addComment("above") end, { desc = "󰆈 Comment above" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- LINE & CHARACTER MOVEMENT
 
-keymap("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" })
-keymap("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
-keymap("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
-keymap("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
-keymap("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up" })
-keymap("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down" })
-keymap("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
-keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
+map("n", "<Down>", [[<cmd>. move +1<CR>==]], { desc = "󰜮 Move line down" })
+map("n", "<Up>", [[<cmd>. move -2<CR>==]], { desc = "󰜷 Move line up" })
+map("n", "<Right>", [["zx"zp]], { desc = "➡️ Move char right" })
+map("n", "<Left>", [["zdh"zph]], { desc = "⬅ Move char left" })
+map("x", "<Up>", [[:move '<-2<CR>gv=gv]], { desc = "󰜷 Move selection up" })
+map("x", "<Down>", [[:move '>+1<CR>gv=gv]], { desc = "󰜮 Move selection down" })
+map("x", "<Right>", [["zx"zpgvlolo]], { desc = "➡️ Move selection right" })
+map("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 
 --------------------------------------------------------------------------------
 
 -- LSP
-keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
-keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
-keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
-keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
+map({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
+map({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
+map({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
+map({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
 
-keymap(
+map(
 	{ "n", "x" },
 	"<D-s>",
 	function() require("personal-plugins.misc").formatWithFallback() end,
@@ -233,90 +211,62 @@ keymap(
 --------------------------------------------------------------------------------
 
 -- INSERT MODE
-keymap("n", "i", function()
+map("n", "i", function()
 	if vim.trim(vim.api.nvim_get_current_line()) == "" then return [["_cc]] end
 	return "i"
 end, { expr = true, desc = "indented i on empty line" })
 
 -- VISUAL MODE
-keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
-keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
+map("x", "V", "j", { desc = "repeated `V` selects more lines" })
+map("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 
 -- TERMINAL MODE
 -- (also relevant for REPLs such as iron.nvim)
-keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
-keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
-keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
+map("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
+map("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
 
 -- COMMAND MODE
-keymap("c", "<D-v>", "<C-r>+", { desc = " Paste" })
-keymap("c", "<BS>", function()
+map("c", "<D-v>", "<C-r>+", { desc = " Paste" })
+map("c", "<BS>", function()
 	if vim.fn.getcmdline() ~= "" then return "<BS>" end
 end, { expr = true, desc = "<BS> does not leave cmdline" })
 
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
-keymap(
-	"n",
-	"<leader>il",
-	function() require("personal-plugins.inspect-and-eval").lspCapabilities() end,
-	{ desc = "󱈄 LSP capabilities" }
-)
-keymap(
-	"n",
-	"<leader>in",
-	function() require("personal-plugins.inspect-and-eval").nodeUnderCursor() end,
-	{ desc = " Node at cursor" }
-)
-keymap(
-	"n",
-	"<leader>ib",
-	function() require("personal-plugins.inspect-and-eval").bufferInfo() end,
-	{ desc = "󰽙 Buffer info" }
-)
-keymap(
-	{ "n", "x" },
-	"<leader>ee",
-	function() require("personal-plugins.inspect-and-eval").evalNvimLua() end,
-	{ desc = " Eval" }
-)
-keymap(
-	"n",
-	"<leader>er",
-	function() require("personal-plugins.inspect-and-eval").runFile() end,
-	{ desc = "󰜎 Run file" }
-)
+map("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
+map("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
+map("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
+-- stylua: ignore start
+map("n", "<leader>il", function() require("personal-plugins.inspect-and-eval").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
+map("n", "<leader>in", function() require("personal-plugins.inspect-and-eval").nodeAtCursor() end, { desc = " Node at cursor" })
+map("n", "<leader>ib", function() require("personal-plugins.inspect-and-eval").bufferInfo() end, { desc = "󰽙 Buffer info" })
+map({ "n", "x" }, "<leader>ee", function() require("personal-plugins.inspect-and-eval").evalNvimLua() end, { desc = " Eval" })
+map("n", "<leader>er", function() require("personal-plugins.inspect-and-eval").runFile() end, { desc = "󰜎 Run file" })
+-- stylua: ignore end
 
 --------------------------------------------------------------------------------
 -- WINDOWS
-keymap(
-	{ "n", "x", "i" },
-	"<C-CR>",
-	function() vim.cmd.wincmd("w") end,
-	{ desc = " Cycle windows" }
-)
-keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
-keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
+map({ "n", "x", "i" }, "<C-CR>", function() vim.cmd.wincmd("w") end, { desc = " Cycle windows" })
+map({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
+map({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
 local delta = 5
-keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
-keymap("n", "<C-down>", "<C-w>" .. delta .. "+")
-keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
-keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
+map("n", "<C-up>", "<C-w>" .. delta .. "-")
+map("n", "<C-down>", "<C-w>" .. delta .. "+")
+map("n", "<C-left>", "<C-w>" .. delta .. "<")
+map("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 --------------------------------------------------------------------------------
 
 -- SNIPPETS
-keymap({ "n", "i", "s" }, "<D-p>", function()
+map({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 Next placeholder" })
 
 -- exit snippet, see https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
-keymap({ "i", "s" }, "<Esc>", function()
+map({ "i", "s" }, "<Esc>", function()
 	vim.snippet.stop()
 	return "<Esc>"
 end, { desc = "󰩫 Exit snippet", expr = true })
@@ -325,7 +275,7 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 
 -- BUFFERS & FILES
 do
-	keymap(
+	map(
 		{ "n", "x" },
 		"<CR>",
 		function() require("personal-plugins.alt-alt").gotoAltFile() end,
@@ -338,36 +288,23 @@ do
 	})
 end
 
-keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
-keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
-keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
+map("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
+map("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
+map("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
-keymap(
-	{ "n", "x" },
-	"<D-CR>",
-	function() require("personal-plugins.misc").gotoMostChangedFile() end,
-	{ desc = "󰊢 Goto most changed file" }
-)
-keymap(
-	{ "n", "x" },
-	"<M-CR>",
-	function() require("personal-plugins.misc").nextFileInFolder("next") end,
-	{ desc = "󰖽 Next file in folder" }
-)
-keymap(
-	{ "n", "x" },
-	"<S-M-CR>",
-	function() require("personal-plugins.misc").nextFileInFolder("prev") end,
-	{ desc = "󰖿 Prev file in folder" }
-)
+-- stylua: ignore start
+map({ "n", "x" }, "<D-CR>", function() require("personal-plugins.misc").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
+map({ "n", "x" }, "<M-CR>", function() require("personal-plugins.misc").nextFileInFolder("next") end, { desc = "󰖽 Next file in folder" })
+map({ "n", "x" }, "<S-M-CR>", function() require("personal-plugins.misc").nextFileInFolder("prev") end, { desc = "󰖿 Prev file in folder" })
+-- stylua: ignore end
 
 -- close window or buffer
-keymap({ "n", "x", "i" }, "<D-w>", function()
+map({ "n", "x", "i" }, "<D-w>", function()
 	local winClosed = pcall(vim.cmd.close)
 	if not winClosed then require("personal-plugins.alt-alt").closeBuffer() end
 end, { desc = "󰽙 Close window/buffer" })
 
-keymap({ "n", "x" }, "<leader>es", function()
+map({ "n", "x" }, "<leader>es", function()
 	local location = vim.fn.stdpath("config") .. "/debug"
 	vim.fn.mkdir(location, "p")
 	local currentExt = vim.fn.expand("%:e")
@@ -379,12 +316,12 @@ end, { desc = " Scratch file" })
 --------------------------------------------------------------------------------
 
 -- MAC-SPECIFIC FUNCTIONS
-keymap({ "n", "x", "i" }, "<D-l>", function()
+map({ "n", "x", "i" }, "<D-l>", function()
 	if jit.os ~= "OSX" then return end
 	vim.system { "open", "-R", vim.api.nvim_buf_get_name(0) }
 end, { desc = "󰀶 Reveal in macOS Finder" })
 
-keymap(
+map(
 	{ "n", "x", "i" },
 	"<D-L>",
 	function() require("personal-plugins.misc").openAlfredPref() end,
@@ -396,21 +333,21 @@ keymap(
 
 local register = "r"
 local toggleKey = "0"
-keymap(
+map(
 	"n",
 	toggleKey,
 	function() require("personal-plugins.misc").startOrStopRecording(toggleKey, register) end,
 	{ desc = "󰑊 Start/stop recording" }
 )
-keymap("n", "9", "@" .. register, { desc = " Play recording" })
+map("n", "9", "@" .. register, { desc = " Play recording" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
-keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
+map("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
+map("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 
-keymap(
+map(
 	"n",
 	"<leader>fc",
 	function() require("personal-plugins.misc").camelSnakeLspRename() end,
@@ -425,24 +362,24 @@ local function retabber(use)
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
 end
-keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
-keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
+map("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
+map("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
 
-keymap("n", "<leader>fq", function()
+map("n", "<leader>fq", function()
 	local line = vim.api.nvim_get_current_line()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
-keymap(
+map(
 	"i",
 	"<D-t>",
 	function() require("personal-plugins.auto-template-str").insertTemplateStr() end,
 	{ desc = "󰅳 Insert template string" }
 )
 
-keymap("n", "<leader>fm", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
-keymap("x", "<leader>fm", function()
+map("n", "<leader>fm", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
+map("x", "<leader>fm", function()
 	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
 	local selection = vim.iter(chunks)
 		:map(function(chunk) return vim.fn.escape(chunk, [[/\]]) end)
@@ -454,15 +391,15 @@ end, { desc = "󰆿 Multi-edit selection", expr = true })
 --------------------------------------------------------------------------------
 -- OPTION TOGGLING
 
-keymap("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
-keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
+map("n", "<leader>on", "<cmd>set number!<CR>", { desc = " Line numbers" })
+map("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 
-keymap("n", "<leader>od", function()
+map("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = " Diagnostics" })
 
-keymap(
+map(
 	"n",
 	"<leader>oc",
 	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
