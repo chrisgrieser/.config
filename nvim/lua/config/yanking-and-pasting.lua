@@ -14,11 +14,11 @@ local cursorPreYank
 keymap({ "n", "x" }, "y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
-end, { desc = "󰅍 Sticky yank", expr = true })
+end, { expr = true })
 keymap("n", "Y", function()
 	cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
-end, { desc = "󰅍 Sticky yank", expr = true, unique = false })
+end, { expr = true, unique = false })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Sticky yank",
@@ -68,7 +68,7 @@ keymap("n", "<leader>yl", function()
 		local msg = ("%d line%s"):format(#matchLines, pluralS)
 		vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
 	end)
-end, { desc = "󰅍 Matching lines" })
+end, { desc = "󰦨 Lines matching pattern" })
 
 keymap("n", "<leader>yb", function()
 	local codeContext = require("nvim-treesitter").statusline {
@@ -83,7 +83,7 @@ keymap("n", "<leader>yb", function()
 	else
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end
-end, { desc = "󰅍 Breadcrumbs" })
+end, { desc = "󰅍 Code context" })
 
 -- requires a `nvim-scissors` util function
 -- If you want to use this without `scissors`, copy the respective utility
@@ -109,10 +109,25 @@ keymap("x", "<leader>ym", function()
 	local pluralS = contentLineCount == 1 and "" or "s"
 	local msg = ("%d line%s"):format(#lines - 2, pluralS)
 	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 as codeblock (markdown)" })
+end, { desc = "󰅍 as markdown codeblock" })
 
 keymap("n", "<leader>y:", function()
 	local lastCmd = vim.fn.getreg(":"):gsub("^lua ?", "")
 	vim.fn.setreg("+", lastCmd)
 	vim.notify(lastCmd, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰘳 Last excmd" })
+end, { desc = "󰘳 Last :excmd" })
+
+--------------------------------------------------------------------------------
+
+keymap("n", "<leader>yf", function()
+	if jit.os ~= "OSX" then
+		vim.notify("Only available on macOS.", vim.log.levels.WARN)
+		return
+	end
+	local path = vim.api.nvim_buf_get_name(0)
+	local applescript = 'tell application "Finder" to set the clipboard to'
+		.. ([[POSIX file %q]]):format(path)
+	vim.fn.system(("osascript -e %q"):format(applescript))
+
+	vim.notify(vim.fs.basename(path), nil, { title = "Copied file", icon = "󰈔" })
+end, { desc = "󰈔 File (macOS)" })
