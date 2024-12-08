@@ -57,19 +57,4 @@ export NODE_REPL_HISTORY=""
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 
-# INFO fix for hanging at "sill: idealTree build"
-# temporary: export npm_config_strict_ssl=false
-# permanent: brew reinstall openssl@3 ca-certificates
-
 #───────────────────────────────────────────────────────────────────────────────
-
-# SEMANTIC PROMPTS (WEZTERM) https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
-[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
-
-# MAGIC DASHBOARD
-source "$ZDOTDIR/plugins/magic_dashboard.zsh"
-
-# STARSHIP
-# should be loaded after npm settings
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"

@@ -217,6 +217,13 @@ _lc() {
 }
 compdef _lc lc
 
+# copy result of last command
+function lr() {
+	to_copy=$(eval "$(history -n -1)")
+	print "\e[1;32mCopied:\e[0m $to_copy"
+	echo -n "$to_copy" | pbcopy
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 # TRASH
 # requires a `trash` command

@@ -47,3 +47,15 @@ export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-a
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# SEMANTIC PROMPTS (WEZTERM) https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+# [[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
+
+# MAGIC DASHBOARD
+source "$ZDOTDIR/plugins/magic_dashboard.zsh"
+
+# STARSHIP
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)"

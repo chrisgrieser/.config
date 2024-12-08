@@ -153,8 +153,8 @@ M.keys = {
 	-- Console / REPL
 	{ key = "Escape", mods = "CTRL", action = wt.action.ShowDebugOverlay },
 
-	-- Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
-	{ key = "c", mods = "CMD|SHIFT", action = act.ActivateCopyMode },
+	-- Jump to Copy Mode (= Caret Mode) -- https://wezfurlong.org/wezterm/copymode.html
+	{ key = "j", mods = "CMD", action = act.ActivateCopyMode },
 
 	-----------------------------------------------------------------------------
 
