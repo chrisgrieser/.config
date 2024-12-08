@@ -38,7 +38,7 @@ function M.bufferInfo()
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
 
-function M.nodeUnderCursor()
+function M.nodeAtCursor()
 	local config = {
 		hlDuration = 1500,
 		hlGroup = "Search",
@@ -52,14 +52,14 @@ function M.nodeUnderCursor()
 	end
 
 	-- node info
-	local parent = node:parent() and node:parent():type() or "–"
+	local parent = node:parent() and node:parent():type() or "."
 	local tree = { parent, "└── " .. node:type() }
 	for childIdx = 1, config.maxChildren do
 		local child = node:child(childIdx)
 		if not child then break end
-		table.insert(tree, ("      %s── %s"):format(treeChar, child:type()))
+		table.insert(tree, ("      ├── %s"):format(child:type()))
 	end
-	local treeChar = (childIdx < max) and "├" or "└"
+	tree[#tree] = tree[#tree]:gsub("├", "└")
 	local msg = table.concat(tree, "\n")
 	vim.notify(msg, vim.log.levels.DEBUG, { icon = "", title = "Node at cursor" })
 

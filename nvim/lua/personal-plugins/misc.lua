@@ -97,7 +97,7 @@ function M.toggleOrIncrement()
 	return "<C-a>"
 end
 
-function M.toggleLowercaseTitleCase()
+function M.toggleTitleCase()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
 	local cword = vim.fn.expand("<cword>")
 	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
@@ -107,7 +107,7 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.smartLineDuplicate()
+function M.smartDuplicate()
 	local originalLine = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local line = originalLine
