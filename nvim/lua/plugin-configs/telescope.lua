@@ -372,9 +372,16 @@ return {
 		{
 			"gl",
 			function()
-				require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") }
+				vi
 			end,
 			desc = "󰭎 Live grep",
+		},
+		{
+			"gL",
+			function()
+				require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") }
+			end,
+			desc = "󰭎 Live grep cword",
 		},
 		{
 			"<leader>pc",
