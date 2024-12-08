@@ -138,4 +138,5 @@ vim.opt.fillchars:append {
 	vertleft = "█",
 	vertright = "█",
 	verthoriz = "█",
+	diff = "▄" -- used for gitsigns' file blame: https://github.com/lewis6991/gitsigns.nvim/issues/1153
 }

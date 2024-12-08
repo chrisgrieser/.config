@@ -24,4 +24,4 @@
 ; MAKE UPPERCASE COMMENTS BOLD
 ; (requires setting the hlgroup `@comments.bold`)
 ("text" @comment.bold
- (#lua-match? @comment.bold "^[%u%d][%u%d%p]+$"))
+ (#lua-match? @comment.bold "^[%u%d%p][%u%d%p]+$"))
