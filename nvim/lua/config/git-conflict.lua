@@ -63,6 +63,8 @@ end
 ---@param out vim.SystemCompleted
 ---@param bufnr number
 local function setupConflictMarkers(out, bufnr)
+	if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
 	local ns = vim.api.nvim_create_namespace("conflictMarkers")
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
