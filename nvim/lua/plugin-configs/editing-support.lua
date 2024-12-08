@@ -2,6 +2,10 @@ local textObjMaps = require("config.utils").extraTextobjMaps
 --------------------------------------------------------------------------------
 
 return {
+	{
+		"chrisgrieser/nvim-puppeteer",
+		lazy = false,
+	},
 	{ -- auto-pair
 		"altermo/ultimate-autopair.nvim",
 		branch = "v0.6", -- recommended as each new version will have breaking changes
