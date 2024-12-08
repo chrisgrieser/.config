@@ -40,7 +40,7 @@ _tab-on-empty-buffer() {
 		export CURSOR=3
 		zle list-choices # open completion
 	else
-		zle menu-select # select completion
+		zle menu-select # select completion (w/o zsh-autocomplete use `zle expand-or-complete`)
 	fi
 }
 zle -N _tab-on-empty-buffer

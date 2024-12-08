@@ -31,9 +31,9 @@ return {
 		dependencies = "stevearc/dressing.nvim",
 		keys = {
 		-- stylua: ignore start
-		{"<C-p>", function() require("genghis").copyFilepathWithTilde() end, desc = "󰞇 Copy absolute path" },
-		{"<C-t>", function() require("genghis").copyRelativePath() end, desc = "󰞇 Copy relative path" },
-		{"<C-n>", function() require("genghis").copyFilename() end, desc = "󰞇 Copy filename" },
+		{"<leader>ya", function() require("genghis").copyFilepathWithTilde() end, desc = "󰞇 Copy absolute path" },
+		{"<leader>yr", function() require("genghis").copyRelativePath() end, desc = "󰞇 Copy relative path" },
+		{"<leader>yn", function() require("genghis").copyFilename() end, desc = "󰞇 Copy filename" },
 
 		{"<C-r>", function() require("genghis").renameFile() end, desc = "󰞇 Rename file" },
 		{"<D-n>", function() require("genghis").createNewFile() end, desc = "󰞇 Create new file" },

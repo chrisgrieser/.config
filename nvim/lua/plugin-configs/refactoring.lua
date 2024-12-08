@@ -3,13 +3,13 @@ return {
 		"chrisgrieser/nvim-rip-substitute",
 		keys = {
 			{
-				"<leader>fs",
+				"<leader>rs",
 				function() require("rip-substitute").sub() end,
 				mode = { "n", "x" },
 				desc = " rip-substitute",
 			},
 			{
-				"<leader>fS",
+				"<leader>rS",
 				function() require("rip-substitute").rememberCursorWord() end,
 				desc = " remember cword (rip-sub)",
 			},
@@ -29,13 +29,13 @@ return {
 		opts = { show_success_message = true },
 		keys = {
 			{
-				"<leader>fi",
+				"<leader>ri",
 				function() require("refactoring").refactor("Inline Variable") end,
 				mode = { "n", "x" },
 				desc = "󰫧 Inline variable",
 			},
 			{
-				"<leader>fe",
+				"<leader>re",
 				function()
 					vim.cmd.normal { "viW", bang = true }
 					require("refactoring").refactor("Extract Variable")
@@ -43,13 +43,13 @@ return {
 				desc = "󰫧 Extract cursorWORD as variable",
 			},
 			{
-				"<leader>fe",
+				"<leader>re",
 				function() require("refactoring").refactor("Extract Variable") end,
 				mode = "x",
 				desc = "󰫧 Extract selection as variable",
 			},
 			{
-				"<leader>fu",
+				"<leader>rf",
 				function() require("refactoring").refactor("Extract Function") end,
 				mode = "x",
 				desc = " Extract function",

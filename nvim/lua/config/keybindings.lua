@@ -341,10 +341,10 @@ keymap("n", "9", "@" .. register, { desc = " Play recording" })
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>ff", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
-keymap("n", "<leader>fd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
+keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
+keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 -- stylua: ignore
-keymap("n", "<leader>fc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
+keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
 ---@param use "spaces"|"tabs"
 local function retabber(use)
@@ -354,10 +354,10 @@ local function retabber(use)
 	vim.cmd.retab { bang = true }
 	vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
 end
-keymap("n", "<leader>f<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
-keymap("n", "<leader>f<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
+keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
+keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
 
-keymap("n", "<leader>fq", function()
+keymap("n", "<leader>rq", function()
 	local line = vim.api.nvim_get_current_line()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
@@ -366,8 +366,8 @@ end, { desc = " Switch quotes in line" })
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
-keymap("n", "<leader>fm", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
-keymap("x", "<leader>fm", function()
+keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
+keymap("x", "<D-j>", function()
 	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
 	local selection = vim.iter(chunks)
 		:map(function(chunk) return vim.fn.escape(chunk, [[/\]]) end)

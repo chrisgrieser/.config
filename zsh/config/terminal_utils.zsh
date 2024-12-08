@@ -14,6 +14,12 @@ function tree {
 	eza --tree --level="$level" --no-quotes --color=always | less
 }
 
+# copy `PWD` to clipboard
+function ,ya {
+	echo -n "$PWD" | pbcopy
+	echo "Copied: $PWD"
+}
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # utility scripts only made available, but not loaded directly (= lazy-loading)

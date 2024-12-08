@@ -41,7 +41,7 @@ return {
 				{ "<leader>", group = "󰓎 Leader" },
 				{ "<leader>c", group = " Code action" },
 				{ "<leader>e", group = "󰓗 Execute" },
-				{ "<leader>f", group = "󱗘 Refactor" },
+				{ "<leader>r", group = "󱗘 Refactor" },
 				{ "<leader>g", group = "󰊢 Git" },
 				{ "<leader>i", group = "󱈄 Inspect" },
 				{ "<leader>o", group = "󰒓 Option toggle" },
