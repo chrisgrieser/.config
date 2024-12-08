@@ -3,7 +3,7 @@
 
 -- highlighting of filepaths and error codes
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "noice", "snacks_notif" },
+	pattern = { "noice", "snacks_notif", "snacks_win" },
 	callback = function(ctx)
 		vim.defer_fn(function()
 			vim.api.nvim_buf_call(ctx.buf, function()
