@@ -11,8 +11,8 @@ local config = {
 	},
 	keys = {
 		leader = "<leader>m",
-		gotoMarker = "m", -- -> `<leader>mm` for this
-		upstream = "u",-- -> `<leader>mu`
+		gotoMarker = "m", --> `<leader>mm`
+		upstream = "u", --> `<leader>mu`, …
 		base = "b",
 		stashed = "s",
 	},
@@ -122,13 +122,13 @@ local function setupConflictMarkers(out, bufnr)
 	end
 
 	-- toggle options
-	local info = {}
+	local toggles, info = {}, {}
 	if config.whenConflict.moveToFirst then
 		vim.api.nvim_win_set_cursor(0, { conflictLnums[1], 0 })
 	end
 	if config.whenConflict.disableDiagnostics then
 		vim.diagnostic.enable(false, { bufnr = bufnr })
-		table.insert(info, "Diagnostics disabled in this buffer.")
+		table.insert(toggles, "Diagnostics")
 	end
 	if config.whenConflict.detachGitsigns then
 		-- defer, to ensure gitsigns is attached before we detach it
@@ -136,8 +136,12 @@ local function setupConflictMarkers(out, bufnr)
 			local ok, gitsigns = pcall(require, "gitsigns")
 			if not ok then return end
 			gitsigns.detach(bufnr)
-			table.insert(info, "Gitsigns disabled in this buffer.")
 		end, 200)
+		table.insert(toggles, "Gitsigns")
+	end
+	if #toggles > 0 then
+		local msg = "*" .. table.concat(toggles, " and ") .. " disabled for this buffer.*"
+		table.insert(info, msg)
 	end
 
 	-- mappings
@@ -157,7 +161,7 @@ local function setupConflictMarkers(out, bufnr)
 
 	-- notify
 	local conflicts = #conflictLnums / 4
-	local header = ("%d conflict%s found."):format(conflicts, conflicts > 1 and "s" or "")
+	local header = ("**%d conflict%s found.**\n"):format(conflicts, conflicts > 1 and "s" or "")
 	table.insert(info, 1, header)
 	notify(table.concat(info, "\n"))
 end
