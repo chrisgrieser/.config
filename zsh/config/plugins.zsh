@@ -19,16 +19,12 @@ source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 # ZSH-AUTOPAIR
 source "$HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh"
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # ZSH-SYNTAX-HIGHLIGHTING
 # DOCS https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/regexp.md
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
 # shellcheck disable=2034 # used in other files
 typeset -A ZSH_HIGHLIGHT_REGEXP # actual highlights defined in other files
-
-#───────────────────────────────────────────────────────────────────────────────
 
 # ZSH-AUTOSUGGESTIONS
 # https://github.com/zsh-users/zsh-autosuggestions#configuration
@@ -40,8 +36,6 @@ bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # ZSH-HISTORY-SUBSTRING-SEARCH
 # (must be loaded *after* zsh-syntax-highlighting)
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
@@ -50,8 +44,8 @@ bindkey '^[[B' history-substring-search-down
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# SEMANTIC PROMPTS (WEZTERM) https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
-# [[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
+# SEMANTIC PROMPTS (WEZTERM) https://wezfurlong.org/wezterm/shell-integration
+[[ "$TERM_PROGRAM" == "WezTerm" ]] && source "$ZDOTDIR/plugins/wezterm_semantic_prompts.zsh"
 
 # MAGIC DASHBOARD
 source "$ZDOTDIR/plugins/magic_dashboard.zsh"

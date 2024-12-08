@@ -151,7 +151,7 @@ keymap("n", "g,", function()
 
 	-- select plugin
 	vim.ui.select(allPlugins, {
-		prompt = "󰒲 Goto Config",
+		prompt = "󰒲 Goto plugin config",
 		format_item = function(plugin)
 			local icon = pluginTypeIcons[plugin.module] or "󰒓"
 			return icon .. " " .. vim.fs.basename(plugin.repo)
@@ -163,7 +163,7 @@ keymap("n", "g,", function()
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
 		vim.cmd.normal { "zv", bang = true } -- open fold at cursor
 	end)
-end, { desc = "󰒲 Goto Plugin Config" })
+end, { desc = "󰒲 Plugin config" })
 
 -- GOTO LOCAL PLUGIN CODE
 -- REQUIRED telescope.nvim AND (telescope-ui-select OR dressing.nvim)
@@ -176,7 +176,7 @@ keymap("n", "gp", function()
 			require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
 		end
 	)
-end, { desc = "󰒲 Local Plugin Code" })
+end, { desc = "󰒲 Plugin code" })
 
 --------------------------------------------------------------------------------
 -- TEST FOR DUPLICATE KEYS on every startup

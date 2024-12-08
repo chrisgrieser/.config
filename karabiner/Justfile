@@ -14,5 +14,5 @@ browse-docs:
 
 [macos]
 keyboard-layout-editor:
-    open "http://www.keyboard-layout-editor.com/#/"
     open -R "./assets/finder-vim-mode/cheatsheet.json"
+    open "http://www.keyboard-layout-editor.com/#/"

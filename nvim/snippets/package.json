@@ -11,32 +11,26 @@
         "language": [
           "just"
         ],
-        "path": "./basic/justfile.json"
-      },
-      {
-        "language": [
-          "query"
-        ],
-        "path": "./basic/scm.json"
+        "path": "./general/justfile.json"
       },
       {
         "language": [
           "markdown"
         ],
-        "path": "./basic/markdown.json"
+        "path": "./general/markdown.json"
       },
       {
         "language": [
           "python"
         ],
-        "path": "./basic/python.json"
+        "path": "./general/python.json"
       },
       {
         "language": [
           "css",
           "scss"
         ],
-        "path": "./basic/css.json"
+        "path": "./general/css.json"
       },
       {
         "language": [
@@ -44,7 +38,7 @@
           "zsh",
           "just"
         ],
-        "path": "./basic/sh.json"
+        "path": "./general/sh.json"
       },
       {
         "language": [
@@ -52,51 +46,51 @@
           "zsh",
           "just"
         ],
-        "path": "./basic/ansi-color-codes.json"
+        "path": "./general/ansi-color-codes.json"
       },
       {
         "language": [
           "lua"
         ],
-        "path": "./basic/lua.json"
+        "path": "./general/lua.json"
       },
       {
         "language": [
           "applescript"
         ],
-        "path": "./basic/applescript.json"
+        "path": "./general/applescript.json"
       },
       {
         "language": [
           "bib"
         ],
-        "path": "./basic/bib.json"
+        "path": "./general/bib.json"
       },
       {
         "language": [
           "javascript",
           "typescript"
         ],
-        "path": "./basic/javascript.json"
+        "path": "./general/javascript.json"
       },
       {
         "language": [
           "javascript",
           "typescript"
         ],
-        "path": "./basic/node-js.json"
+        "path": "./general/node-js.json"
       },
       {
         "language": [
           "javascript"
         ],
-        "path": "./basic/jxa.json"
+        "path": "./general/jxa.json"
       },
       {
         "language": [
           "yaml"
         ],
-        "path": "./basic/yaml.json"
+        "path": "./general/yaml.json"
       },
       {
         "language": [

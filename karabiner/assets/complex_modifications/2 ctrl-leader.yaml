@@ -83,6 +83,7 @@ rules:
                 sort -f |
                 sed 's/.*/- &/' > "/tmp/ctrl-leader.md"
               qlmanage -p "/tmp/ctrl-leader.md" &
+              open -a "qlmanage" # to focus it
           - *deactivate-leader
           - *remove-notice
 
