@@ -1,6 +1,19 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------
 
+-- highlighting of filepaths and error codes
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "noice", "snacks_notif" },
+	callback = function(ctx)
+		vim.defer_fn(function()
+			vim.api.nvim_buf_call(ctx.buf, function()
+				vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+				vim.fn.matchadd("WarningMsg", [[E\d\+]])
+			end)
+		end, 1)
+	end,
+})
+
 ---@param idx number|"last"
 local function openNotif(idx)
 	-- CONFIG

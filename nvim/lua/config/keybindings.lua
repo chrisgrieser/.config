@@ -257,7 +257,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Cursor position" })
+keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
 keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
 keymap(
@@ -270,7 +270,7 @@ keymap(
 	"n",
 	"<leader>in",
 	function() require("personal-plugins.inspect-and-eval").nodeUnderCursor() end,
-	{ desc = " Cursor node" }
+	{ desc = " Node at cursor" }
 )
 keymap(
 	"n",
