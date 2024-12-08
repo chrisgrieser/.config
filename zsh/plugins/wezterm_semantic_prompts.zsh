@@ -1,3 +1,4 @@
+# INFO https://wezfurlong.org/wezterm/shell-integration
 # shellcheck shell=bash
 
 # This file hooks up shell integration for wezterm.
