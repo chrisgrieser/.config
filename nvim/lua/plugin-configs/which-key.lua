@@ -26,8 +26,8 @@ return {
 		preset = "helix",
 		win = {
 			border = vim.g.borderStyle,
-			wo = { winblend = 0 },
 			height = { min = 0, max = 0.99 },
+			no_overlap = false, -- `false` = allow popup over the cursor
 		},
 
 		spec = {
@@ -63,21 +63,30 @@ return {
 				{ "aw", desc = "󰬞 word" },
 				{ "gn", desc = " search result" },
 			},
-			{ -- not using `text_objects` preset, since it's too crowded
+			{ -- base groups
 				mode = { "n", "x" },
-				{ "g", group = "goto" },
-				{ "z", group = "fold & spelling" },
+				{ "g", group = "Goto" },
+				{ "z", group = "Fold & spelling" },
 			},
 		},
 		plugins = {
 			marks = false,
-			spelling = false,
-			presets = { motions = false, g = false, text_objects = false, z = false },
+			registers = false,
+			presets = {
+				motions = false,
+				g = false,
+				text_objects = false,
+				z = false,
+				nav = false,
+				operator = false,
+			},
 		},
 		filter = function(map)
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
-			if map.lhs == "gc" or map.lhs == "gcc" then return false end
+			local nvimBultins = { "gc", "gcc", "]d", "zf", "z=", "g~", "gu", "gU" }
+			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
+
 			return map.desc ~= nil
 		end,
 		replace = {
