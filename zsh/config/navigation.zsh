@@ -10,7 +10,6 @@ export CDPATH="$HOME/Developer:$HOME/Desktop"
 
 # OPTIONS
 setopt CD_SILENT
-setopt AUTO_CD     # BUG -> https://github.com/marlonrichert/zsh-autocomplete/issues/749
 setopt CHASE_LINKS # follow symlinks when they are cd target
 
 # POST-DIRECTORY-CHANGE-HOOK
@@ -19,6 +18,22 @@ function chpwd {
 	_magic_dashboard
 	_auto_venv
 }
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# setopt AUTO_CD     # BUG -> https://github.com/marlonrichert/zsh-autocomplete/issues/749
+first-tab() {
+	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
+		BUFFER="cd "
+		# shellcheck disable=2034
+		CURSOR=3
+		zle list-choices
+	else
+		zle menu-complete
+	fi
+}
+zle -N first-tab
+bindkey '^I' first-tab
 
 #───────────────────────────────────────────────────────────────────────────────
 # SHORTHANDS
