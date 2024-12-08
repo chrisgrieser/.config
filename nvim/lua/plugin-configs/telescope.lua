@@ -233,7 +233,7 @@ return {
 					layout_config = {
 						horizontal = { preview_width = 0.4 },
 					},
-					git_command = { "git", "log", "--all", "--format=%h %s (%cr)", "--", "." },
+					git_command = { "git", "log", "--all", "--format=%h%s", "--", "." },
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						dyn_title = function(_, entry) return entry.value end, -- hash as title
 						get_command = function(entry, status)
