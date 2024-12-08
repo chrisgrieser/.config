@@ -177,7 +177,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 		-- make it idempotent, since `BufEnter` can be triggered multiple times
 		if vim.b[bufnr].gitConflictRan then return end
 		vim.b[bufnr].gitConflictRan = true
-		vim.defer_fn(function() vim.b[bufnr].gitConflictRan = false end, 2000)
+		vim.defer_fn(function()
+			if not vim.api.nvim_buf_is_valid(bufnr) then return end
+			vim.b[bufnr].gitConflictRan = false
+		end, 2000)
 
 		vim.system(
 			{ "git", "diff", "--check", "--", vim.api.nvim_buf_get_name(bufnr) },
