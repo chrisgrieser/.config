@@ -97,3 +97,13 @@ bkeymap("n", "<leader>ci", function()
 		end
 	end)
 end, { desc = " Import module" })
+
+--------------------------------------------------------------------------------
+-- YANK MODULE NAME
+
+bkeymap("n", "<leader>yn", function()
+	local absPath = vim.api.nvim_buf_get_name(0)
+	local relPath = absPath:sub(#(vim.uv.cwd()) + 2)
+	local module = relPath:gsub("%.lua$", ""):gsub("/", ".")
+	vim.notify(module, nil, { icon = "󰅍", title = "Copied" })
+end, { desc = "󰅍 Copy module name" })

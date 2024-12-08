@@ -18,6 +18,8 @@ function _separator {
 }
 
 function _gitlog {
+	repo=$(git remote get-url origin | sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
+
 	# pseudo-option to suppress graph
 	local graph
 	if [[ "$1" == "--no-graph" ]]; then
@@ -28,7 +30,7 @@ function _gitlog {
 	fi
 
 	# INFO inserting ansi colors via `sed` requires $'string'
-	git log --abbrev=8 --all --color $graph \
+	git log --all --color $graph \
 		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
 			-e 's/ minutes* ago)/m)/' \
@@ -48,8 +50,7 @@ function _gitlog {
 			-Ee $'s/ (fixup|squash)!/\033[1;32m&\033[0m/g' \
 			-Ee $'s/`[^`]*`/\033[0;36m&\033[0m/g' \
 			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' \
-			-Ee $'s/#[0-9]+/\033[0;31m&\033[0m/g' 
-			# -Ee '\e]8;;http://example.com\e\\This is a link\e]8;;\e\\\n'
+			-Ee "s_([a-f0-9]{7,40})_\x1b]8;;https://github.com/${repo}/commit/\1\x1b\\\\\1\x1b]8;;\x1b\\\\_"
 }
 
 function _list_files_here {
