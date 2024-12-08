@@ -28,9 +28,10 @@ function _gitlog {
 	fi
 
 	# INFO inserting ansi colors via `sed` requires $'string'
+	# `--abrrev=8` needed to make links clickable via `delta`: https://github.com/dandavison/delta/issues/1923
 	local the_log
 	the_log=$(
-		git --no-pager log --all --color $graph \
+		git log --abbrev=8 --all --color $graph \
 			--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
 			sed -e 's/ seconds* ago)/s)/' \
 				-e 's/ minutes* ago)/m)/' \
@@ -59,9 +60,8 @@ function _list_files_here {
 
 	local eza_output
 	eza_output=$(
-		eza --width="$COLUMNS" --all --grid --color=always --icons \
-			--git-ignore --ignore-glob=".DS_Store|Icon?|.localized" \
-			--sort=age --group-directories-first --no-quotes \
+		eza --width="$COLUMNS" --hyperlink --all --grid --color=always --icons \
+			--git-ignore --sort=age --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 	)
 	# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
@@ -80,7 +80,6 @@ function _gitstatus {
 	git ls-files --others --exclude-standard | xargs -I {} git add --intent-to-add {} &> /dev/null
 
 	if [[ -n "$(git status --porcelain)" ]]; then
-
 		local unstaged staged
 		unstaged=$(git diff --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d')
 		staged=$(git diff --staged --color="always" --compact-summary --stat=$COLUMNS | sed -e '$d' \
@@ -101,7 +100,7 @@ function _gitstatus {
 				-e 's/ Bin /    /' \
 				-e $'s/ \\| Unmerged /  \033[1;31m  \033[0m /' \
 				-Ee $'s|([^/+]*)(/)|\033[0;36m\\1\033[0;33m\\2\033[0m|g' \
-				-e $'s/^\\+/\033[1;35m \033[0m /' \
+				-e $'s/^\\+/\033[1;35m 󰐖\033[0m /' \
 				-e $'s/ \\|/ \033[1;30m│\033[0m/'
 		_separator
 	fi
