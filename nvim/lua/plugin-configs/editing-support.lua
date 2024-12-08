@@ -39,7 +39,7 @@ return {
 				"(",
 				"): ",
 				ft = { "gitcommit" },
-				cond = function(_) return not vim.api.nvim_get_current_line():find(" ") end,
+				cond = function(_fn) return not vim.api.nvim_get_current_line():find(" ") end,
 			},
 
 			-- for keymaps like `<C-a>`

@@ -369,13 +369,8 @@ return {
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
-		{
-			"gl",
-			function()
-				vi
-			end,
-			desc = "󰭎 Live grep",
-		},
+
+		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },
 		{
 			"gL",
 			function()
@@ -383,6 +378,7 @@ return {
 			end,
 			desc = "󰭎 Live grep cword",
 		},
+
 		{
 			"<leader>pc",
 			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
