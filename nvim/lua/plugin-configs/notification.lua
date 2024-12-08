@@ -197,7 +197,7 @@ return {
 			-- stylua: ignore start
 			{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
 			{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
-			{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰉚 Blame line" },
+			{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = " Blame line" },
 			{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
 			-- stylua: ignore end
 		},

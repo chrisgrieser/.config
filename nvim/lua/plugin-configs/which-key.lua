@@ -11,11 +11,6 @@ end
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	init = function()
-		-- remove these nvim-builtin bindings so they do not clutter which-key
-		vim.keymap.del("n", "gcc")
-		vim.keymap.del("o", "gc")
-	end,
 	keys = {
 		{
 			"<leader>?",
@@ -74,7 +69,12 @@ return {
 			spelling = false,
 			presets = { motions = false, g = false, text_objects = false, z = false },
 		},
-		filter = function(map) return map.desc and map.desc ~= "" end,
+		filter = function(map)
+			-- need to remove comment mapping shere, since they are nvim-builtins
+			-- that do still show up with disabled whichkey-preset
+			if map.lhs == "gc" or map.lhs == "gcc" then return false end
+			return map.desc ~= nil
+		end,
 		replace = {
 			desc = { -- redundant info for when displayed in which-key
 				{ " outer ", " " },
