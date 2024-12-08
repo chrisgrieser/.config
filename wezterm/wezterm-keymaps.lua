@@ -1,6 +1,7 @@
 -- DOCS
 -- Actions: https://wezfurlong.org/wezterm/config/lua/keyassignment/index.html#available-key-assignments
 -- Key-Names: https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
+--------------------------------------------------------------------------------
 
 local M = {}
 local wt = require("wezterm")
