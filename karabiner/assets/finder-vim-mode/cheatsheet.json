@@ -124,7 +124,7 @@
     "u (U)\nundo (redo)",
     "i (I)\nclose folds  (recursive)",
     "o (O)\nopen folds (recursive)",
-    "p (P)\npaste (into file)\n\n\n⌃p abs",
+    "p (P)\npaste (into file)",
     {
       "c": "#CCCCCC",
       "f": 2,
@@ -174,7 +174,7 @@
     "s (S)\nfollow (create) symlink",
     "d (D)\ntrash file (open trash)",
     "f\nfind (like in vim)",
-    "gg (G)\nto top (bottom)\n\n\n^g gith",
+    "gg (G)\nto top (bottom)",
     {
       "sm": "cherry"
     },
@@ -227,9 +227,9 @@
     "c (C)\ncontext menu",
     "v\ngoto 1st remo- vable vol.",
     "b\ntoggle  \"bkp\" suffix",
-    "n (N)\nnew file (dir)\n\n\n⌃n name",
+    "n (N)\nnew file (dir)",
     "m (M)\nmove (to new dir)",
-    ",\nrestart iCloud",
+    ", (⇧,)\nyank path (name)",
     ".\ntoggle hidden files",
     {
       "c": "#ffb896"

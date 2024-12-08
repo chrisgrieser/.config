@@ -576,6 +576,30 @@ rules:
                 --title "Finder Vim Mode" --message "✅ File content copied"
         conditions:
           [*finder-app, *not-insert-mode, *move-inactive, *not-find-mode, *not-German-keyboard]
+        # comma: copy filepath
+      - type: basic
+        from: { key_code: comma }
+        to:
+          - { key_code: "c", modifiers: [option, command] }
+          - shell_command: |
+              sleep 0.1 # wait for clipboard
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "✅ Filepath copied" --message "$(pbpaste)"
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
+      # shift-comma: copy filename
+      - type: basic
+        from: { key_code: comma, modifiers: { mandatory: [shift] } }
+        to:
+          - shell_command: |
+              sel=$(osascript -e 'tell application "Finder"
+                set sel to (item 1 of (get selection) as text)
+                return POSIX path of sel
+              end tell')
+              filename=$(basename "$sel")
+              printf "$filename" | pbcopy
+              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
+                  --title "✅ Filename copied" --message "$filename"
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # p = paste file
       - type: basic
         from: { key_code: p }
@@ -1284,96 +1308,3 @@ rules:
               afplay '/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/acknowledgment_sent.caf' &
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       #─────────────────────────────────────────────────────────────────────────
-      #─────────────────────────────────────────────────────────────────────────
-      # MISCELLANEOUS
-      # , (comma)
-      - type: basic
-        from: { key_code: comma }
-        to:
-          - shell_command: |
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                --title "Finder Vim Mode" --message "☁️ Restarting iCloud…"
-              afplay "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/screen_sharing_started.caf" &
-              killall bird
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-p: copy filepath
-      - type: basic
-        from: { key_code: p, modifiers: { mandatory: [control] } }
-        to:
-          - { key_code: "c", modifiers: [option, command] }
-          - shell_command: |
-              sleep 0.1 # wait for clipboard
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Absolute path copied" --message "$(pbpaste)"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-n: copy filename
-      - type: basic
-        from: { key_code: n, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              sel=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (get selection) as text)
-                return POSIX path of sel
-              end tell')
-              filename=$(basename "$sel")
-              printf "$filename" | pbcopy
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Filename copied" --message "$filename"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-t: copy git-relative path
-      - type: basic
-        from: { key_code: t, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              export GIT_OPTIONAL_LOCKS=0
-              sel=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (get selection) as text)
-                return POSIX path of sel
-              end tell')
-              cd "$(dirname "$sel")" || exit 1
-              if ! git rev-parse --is-inside-work-tree; then
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "⚠️ Not in a git repo."
-                exit 1
-              fi
-              root_length=$(git rev-parse --show-toplevel | wc -c)
-              rel_path=$(echo "$sel" | cut -c$((root_length + 1))-)
-
-              printf "$rel_path" | pbcopy
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                --title "✅ git-relative path copied" --message "$rel_path"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]
-      # ctrl-g: open at github
-      - type: basic
-        from: { key_code: g, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              export GIT_OPTIONAL_LOCKS=0
-              sel=$(osascript -e 'tell application "Finder"
-                set sel to (item 1 of (get selection) as text)
-                return POSIX path of sel
-              end tell')
-              if [[ ! -f "$sel" ]] ; then
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "⚠️ Selection not a file."
-                exit 1
-              fi
-              cd "$(dirname "$sel")" || exit 1
-              if ! git rev-parse --is-inside-work-tree ; then
-                "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "Finder Vim Mode" --message "⚠️ File not in a git repo."
-                exit 1
-              fi
-
-              branch=$(git branch --show-current)
-              root_length=$(git rev-parse --show-toplevel | wc -c)
-              remote_url="$(git remote -v | head -n1 | cut -f2 | cut -d' ' -f1 | sed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.git$||')"
-              path_in_repo=${sel:$root_length}
-              path_in_repo=$(osascript -l JavaScript -e "encodeURIComponent('$path_in_repo')")
-
-              url="$remote_url/blob/$branch/$path_in_repo"
-              printf "$url" | pbcopy
-              open "$url"
-              "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ GitHub URL copied" --message "$url"
-        conditions: [*finder-app, *not-insert-mode, *not-find-mode]

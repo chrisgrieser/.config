@@ -59,12 +59,12 @@ function _list_files_here {
 
 	local eza_output
 	eza_output=$(
-		eza --width="$COLUMNS" --hyperlink --all --grid --color=always --icons \
+		eza --width="$COLUMNS" --all --grid --color=always --icons \
 			--git-ignore --ignore-glob=".DS_Store" \
 			--sort=oldest --group-directories-first --no-quotes \
 			--git --long --no-user --no-permissions --no-filesize --no-time
 	)
-	# $use_hyperlinks PENDING https://github.com/eza-community/eza/issues/693
+	#  not using --hyperlink PENDING https://github.com/eza-community/eza/issues/693
 
 	if [[ $(echo "$eza_output" | wc -l) -gt $max_files_lines ]]; then
 		local shortened

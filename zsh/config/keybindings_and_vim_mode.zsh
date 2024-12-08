@@ -15,14 +15,6 @@ zle -N _cut_buffer
 bindkey '^U' _cut_buffer
 bindkey -M vicmd -s '^U' 'i^U' # make it work in normal mode as well
 
-# ctrl+p -> copy `PWD` to clipboard
-function _copy-location {
-	echo -n "$PWD" | pbcopy
-	zle -M "Copied: $PWD"
-}
-zle -N _copy_location
-bindkey '^P' _copy_location
-
 # ctrl+z -> unsuspend (nvim/fzf configured to suspend with it)
 function _unsuspend { fg; }
 zle -N _unsuspend
