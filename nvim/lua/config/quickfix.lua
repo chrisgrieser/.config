@@ -26,14 +26,14 @@ end, { desc = " Next quickfix" })
 
 keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = " Prev quickfix" })
 
-keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = " Delete quickfix list" })
-keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st quickfix item" })
+keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = " Delete list" })
+keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st item" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
 	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
 	vim.cmd[hasQuickfix and "cclose" or "copen"]()
-end, { desc = " Toggle quickfix window" })
+end, { desc = " Toggle window" })
 
 --------------------------------------------------------------------------------
 -- KEYMAPS in quickfix window

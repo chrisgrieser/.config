@@ -61,8 +61,8 @@ end, { desc = " Open first URL in file" })
 -- EDITING
 
 -- Undo
-keymap("n", "u", "<cmd>silent undo<CR>", { desc = "silent undo" })
-keymap("n", "U", "<cmd>silent redo<CR>", { desc = "silent undo" })
+keymap("n", "u", "<cmd>silent undo<CR>", { desc = "󰜊 silent undo" })
+keymap("n", "U", "<cmd>silent redo<CR>", { desc = "󰛒 silent redo" })
 keymap(
 	"n",
 	"<leader>ur",
