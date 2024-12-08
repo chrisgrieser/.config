@@ -3,37 +3,20 @@
 # https://zsh.sourceforge.io/Doc/Release/Options.html#Changing-Directories
 #───────────────────────────────────────────────────────────────────────────────
 
-# CONFIG
+# OPTIONS
+
+# make all directories in these folders available as `cd` targets from anywhere
 export CDPATH="$HOME/Developer:$HOME/Desktop"
 
-#───────────────────────────────────────────────────────────────────────────────
+setopt CD_SILENT # don't echo the directory after `cd`
+setopt CHASE_LINKS # follow symlinks when they are `cd` target
+# not using `AUTO_CD`, since out tab-mapping is more flexible
 
-# OPTIONS
-setopt CD_SILENT
-setopt CHASE_LINKS # follow symlinks when they are cd target
-
-# POST-DIRECTORY-CHANGE-HOOK
-# (use `cd -q` to suppress this hook)
+# POST-DIRECTORY-CHANGE-HOOK (use `cd -q` to suppress this hook)
 function chpwd {
 	_magic_dashboard
 	_auto_venv
 }
-
-#───────────────────────────────────────────────────────────────────────────────
-
-# setopt AUTO_CD     # BUG -> https://github.com/marlonrichert/zsh-autocomplete/issues/749
-first-tab() {
-	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
-		BUFFER="cd "
-		# shellcheck disable=2034
-		CURSOR=3
-		zle list-choices
-	else
-		zle menu-complete
-	fi
-}
-zle -N first-tab
-bindkey '^I' first-tab
 
 #───────────────────────────────────────────────────────────────────────────────
 # SHORTHANDS
@@ -81,7 +64,7 @@ compdef _gr gr
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# CYCLE THROUGH DIRECTORIES
+# CYCLE THROUGH COMMON DIRECTORIES
 
 function _grappling_hook {
 	# CONFIG some perma-repos & desktop

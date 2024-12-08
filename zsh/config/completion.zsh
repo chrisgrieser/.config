@@ -10,7 +10,7 @@
 # color completion groups with purple-gray background (ccc.nvim highlight is wrong)
 zstyle ':completion:*:descriptions' format $'\e[7;38;5;103m %d \e[0;38;5;103m \e[0m'
 
-# color items in specific group
+# color items in specific groups (here: aliases in magenta)
 zstyle ':completion:*:aliases' list-colors '=*=35'
 
 # 1. option descriptions in gray (`38;5;245` is visible in dark and light mode)
@@ -21,18 +21,33 @@ zstyle ':completion:*:default' list-colors \
 	"$LS_COLORS" \
 	"ma=7;38;5;68"
 
-# hide info message if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
+# silent warning if there are no completions https://github.com/marlonrichert/zsh-autocomplete/discussions/513
 zstyle ':completion:*:warnings' format ""
 
-# print help messages in blue (affects for instance `just` recipe-descriptions)
+# print help messages in blue instead of red (e.g., `just` recipe-descriptions)
 zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
 
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
-# bindkey '\t' menu-select   # <Tab> start completion
+# On empty tab, open `cd` completion menu, otherwise, select completion.
+# (This is better than `AUTO_CD`, since `zstyle ':completion:*' group-order` does
+# not affect `AUTO_CD`, but is normal `cd`, which we emulate here. )
+_tab-on-empty-buffer() {
+	# source: https://stackoverflow.com/a/29103676/22114136
+	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
+		BUFFER="cd "
+		export CURSOR=3
+		zle list-choices # open completion
+	else
+		zle menu-select # select completion
+	fi
+}
+zle -N _tab-on-empty-buffer
+bindkey '^I' _tab-on-empty-buffer
 
-bindkey -M menuselect '\t' menu-complete           # <Tab> next item
+# `menuselect` = when in completion menu
+bindkey -M menuselect '^I' menu-complete           # <Tab> next item
 bindkey -M menuselect '^[[Z' reverse-menu-complete # <S-Tab> prev suggestion
 bindkey -M menuselect '\r' .accept-line            # <CR> select & execute
 
@@ -53,7 +68,7 @@ zstyle ':completion:*' group-order \
 
 # IGNORE
 # remove the _ignored completer set by zsh-autocomplete, so things ignored by
-# `ignored-patterns` take effect (https://stackoverflow.com/a/67510126)
+# `ignored-patterns` take effect https://stackoverflow.com/a/67510126
 zstyle ':completion:*' completer \
 	_expand _complete _correct _approximate _complete:-fuzzy _prefix
 
@@ -63,5 +78,7 @@ zstyle ':completion:*' ignored-patterns \
 zstyle ':autocomplete:*' ignored-input '..d' # zsh-autocomplete
 
 #───────────────────────────────────────────────────────────────────────────────
+# OTHER
+
 # do not save in dotfile repo
 export ZSH_COMPDUMP="$HOME/.local/share/zsh/zcompdump"
