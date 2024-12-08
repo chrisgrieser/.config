@@ -7,7 +7,7 @@ if not vim.uv.fs_stat(lazypath) then
 	local args = { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }
 	local out = vim.system(args):wait()
 	if out.code ~= 0 then
-		vim.api.nvim_echo { { "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" } }
+		vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" } }, true, {})
 		vim.fn.getchar()
 		os.exit(1)
 	end
@@ -105,7 +105,7 @@ local pluginTypeIcons = {
 	["motions-and-textobjects"] = "󱡔",
 	["notification"] = "󰎟",
 	["refactoring"] = "󱗘",
-	["task-and-file-utilities"] = "",
+	["task-and-file-utilities"] = "󰈔",
 	["telescope"] = "󰭎",
 	["treesitter"] = "",
 	["which-key"] = "⌨️",
@@ -161,6 +161,7 @@ keymap("n", "g,", function()
 		local filepath = specPath .. "/" .. plugin.module .. ".lua"
 		local repo = plugin.repo:gsub("/", "\\/") -- escape slashes for `:edit`
 		vim.cmd(("edit +/%q %s"):format(repo, filepath))
+		vim.cmd.normal { "zv", bang = true } -- open fold at cursor
 	end)
 end, { desc = "󰒲 Goto Plugin Config" })
 

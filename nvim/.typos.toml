@@ -4,7 +4,7 @@
 # ignore these words
 [default.extend-words]
 noice = "noice" # plugin name
-ot = "or" # keymap
+ot = "ot" # keymap
 iy = "iy" # keymap
 caf = "caf" # `.caf` file extension
 nore = "nore" # keymap desc

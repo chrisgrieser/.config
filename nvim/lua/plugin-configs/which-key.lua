@@ -13,10 +13,10 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{
-			"<leader>?",
+			"<leader>ik",
 			-- alternative: `:Telescope keymaps` with `only_buf = true`
 			function() require("which-key").show { global = false } end,
-			desc = "⌨️ Buffer keymaps",
+			desc = "⌨️ keymaps (buffer)",
 		},
 	},
 	opts = {
@@ -26,7 +26,7 @@ return {
 		preset = "helix",
 		win = {
 			border = vim.g.borderStyle,
-			height = { min = 0, max = 0.99 },
+			height = { min = 1, max = 0.99 },
 			no_overlap = false, -- `false` = allow popup over the cursor
 		},
 

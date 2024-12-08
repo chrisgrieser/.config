@@ -44,7 +44,7 @@ local function openNotif(idx)
 	longestLine = math.max(longestLine, #title)
 	local width = math.min(longestLine + 3, math.ceil(vim.o.columns * maxWidth))
 	local overflow = #lines + 2 - height -- +2 for border
-	local moreLines = overflow > 0 and (" ↓ %d lines "):format(overflow) or ""
+	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
 	local footer = vim.trim(indexStr .. " " .. moreLines)
 

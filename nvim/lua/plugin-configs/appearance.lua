@@ -28,10 +28,10 @@ return {
 		end,
 		config = function(_, opts)
 			require("satellite").setup(opts)
-			require("config.functions-in-scrollbar")
+			require("personal-plugins.functions-in-scrollbar")
 		end,
 		opts = {
-			winblend = 10, -- only little transparency, since hard to see in many themes otherwise
+			winblend = 10, -- only little transparency, since otherwise hard to see in some themes
 			handlers = {
 				cursor = { enable = false },
 				marks = { enable = false },

@@ -40,13 +40,15 @@ if not vim.env.NO_PLUGINS then
 end
 
 safeRequire("config.neovide-gui-settings")
-safeRequire("config.keybindings")
-safeRequire("config.lsp-and-diagnostics")
 safeRequire("config.autocmds")
+safeRequire("config.lsp-and-diagnostics")
+
+safeRequire("config.keybindings")
 safeRequire("config.quickfix")
 safeRequire("config.yanking-and-pasting")
+
 safeRequire("config.backdrop-underline-fix")
-safeRequire("config.git-conflict")
+safeRequire("personal-plugins.git-conflict")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {

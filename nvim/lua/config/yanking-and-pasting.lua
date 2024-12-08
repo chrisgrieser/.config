@@ -124,10 +124,20 @@ keymap("n", "<leader>yf", function()
 		vim.notify("Only available on macOS.", vim.log.levels.WARN)
 		return
 	end
-	local path = vim.api.nvim_buf_get_name(0)
-	local applescript = 'tell application "Finder" to set the clipboard to'
-		.. ([[POSIX file %q]]):format(path)
-	vim.fn.system(("osascript -e %q"):format(applescript))
 
-	vim.notify(vim.fs.basename(path), nil, { title = "Copied file", icon = "󰈔" })
+	local path = vim.api.nvim_buf_get_name(0)
+	local applescript = 'tell application "Finder" to set the clipboard to '
+		.. ([[POSIX file %q]]):format(path)
+	vim.system({ "osascript", "-e", applescript }, {}, function(out)
+		local sound
+		if out.code ~= 0 then
+			local msg = "Failed to copy file: " .. out.stderr
+			vim.notify(msg, vim.log.levels.ERROR, { title = "Copy file" })
+			sound = "Basso"
+		else
+			vim.notify(vim.fs.basename(path), nil, { title = "Copied file", icon = "󰈔" })
+			sound = "Purr"
+		end
+		vim.system { "afplay", ("/System/Library/Sounds/%s.aiff"):format(sound) }
+	end)
 end, { desc = "󰈔 File (macOS)" })
