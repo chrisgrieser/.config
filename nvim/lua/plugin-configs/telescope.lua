@@ -369,16 +369,12 @@ return {
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
-		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live-grep" },
 		{
 			"gl",
 			function()
-				vim.cmd.normal { '"zy', bang = true }
-				local sel = vim.trim(vim.fn.getreg("z"))
-				require("telescope.builtin").live_grep { default_text = sel }
+				require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") }
 			end,
-			mode = "x",
-			desc = "󰭎 Grep selection",
+			desc = "󰭎 Live grep",
 		},
 		{
 			"<leader>pc",

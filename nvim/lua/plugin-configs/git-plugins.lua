@@ -15,7 +15,7 @@ return {
 			{ "<leader>gM", function() require("tinygit").amendOnlyMsg { forcePushIfDiverged = true } end, desc = "󰊢 Amend only msg & f-push" },
 			{ "<leader>gi", function() require("tinygit").issuesAndPrs { state = "open" } end, desc = " Open issues" },
 			{ "<leader>gI", function() require("tinygit").issuesAndPrs { state = "closed" } end, desc = " Closed issues" },
-			{ "<leader>gh", function() require("tinygit").fileHistory() end, mode = { "n", "x" }, desc = "󰢷 History" },
+			{ "<leader>gh", function() require("tinygit").fileHistory() end, mode = { "n", "x" }, desc = "󰋚 History" },
 			{ "<leader>gu", function() require("tinygit").githubUrl() end, mode = { "n", "x" }, desc = " GitHub URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub repo URL" },
 			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash push" },
@@ -125,7 +125,6 @@ return {
 					local filepath = vim.api.nvim_buf_get_name(0)
 					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
 					local out = vim.system(gitArgs):wait()
-					assert(out.code == 0, "git log failed")
 					local lastCommitToFile = vim.trim(out.stdout) .. "^"
 					require("gitsigns").change_base(lastCommitToFile)
 					vim.b.gitsignsPrevChanges = true
@@ -137,8 +136,7 @@ return {
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
 
-			-- GIT STATUS LINE
-			-- change count
+			-- STATUSLINE CHANGE COUNT
 			-- INFO Using gitsigns.nvim's data since lualine's builtin component
 			-- is updated much less frequently and is thus often out of sync
 			-- with the gitsigns in the signcolumn.
@@ -151,7 +149,7 @@ return {
 				end,
 			}, "before")
 
-			-- gitsigns base
+			-- STATUSLINE SIGN BASE
 			vim.g.lualineAdd("sections", "lualine_y", {
 				function() return "" end,
 				cond = function() return vim.b.gitsignsPrevChanges end,

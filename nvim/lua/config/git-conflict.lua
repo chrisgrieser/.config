@@ -152,7 +152,7 @@ local function setupConflictMarkers(out, bufnr)
 	end
 	local mapInfo = {
 		-- SOURCE https://www.reddit.com/r/neovim/comments/1h7f0bz/comment/m0ldka9/
-		map(bufnr, config.keys.gotoMarker, "/<<<<*<CR>", "Goto merge marker"),
+		map(bufnr, config.keys.gotoMarker, "/<<<<*<CR>", "Goto next merge marker"),
 		map(bufnr, config.keys.upstream, "dd/|||<CR>0v/>>><CR>$x", "Choose upstream (top)"),
 		map(bufnr, config.keys.base, "0v/|||<CR>$x/====<CR>0v/>>><CR>$x", "Choose base (middle)"),
 		map(bufnr, config.keys.stashed, "0v/====<CR>$x/>>><CR>dd", "Choose stashed (bottom)"),
