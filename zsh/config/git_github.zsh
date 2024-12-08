@@ -202,7 +202,9 @@ function my_commits_today {
 		cut -c12-16,26-) # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
-	echo "$commits" | sed \
+	echo "$commits" | 
+		awk '{ printf "%-10s %-30s %s\n", $1" "$2, $3, substr($0, index($0, $4)) }' |
+		sed \
 		-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/(..:.. )([^ ]* )/\e[0;38;5;245m\\1\e[1;34m\\2\e[0m/' \

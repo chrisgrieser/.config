@@ -12,10 +12,15 @@ keymap("n", "gq", function()
 
 	-- `vim.fn.execute` captures the output of a comment
 	local response = vim.fn.execute(atEnd and "cfirst" or "cnext")
+	vim.cmd.normal { "zv", bang = true } -- open fold at cursor
 	local deletedIdx = response:match("%((%d+) of %d+%) %(line deleted%):")
 	if deletedIdx then table.insert(msg, ("Item #%d already deleted."):format(deletedIdx)) end
 	if #msg > 0 then
-		vim.notify(table.concat(msg, "\n"), vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
+		vim.notify(
+			table.concat(msg, "\n"),
+			vim.log.levels.TRACE,
+			{ title = "Quickfix", icon = "" }
+		)
 	end
 end, { desc = " Next quickfix" })
 
@@ -107,13 +112,9 @@ function M.quickfixCounterStatusbar()
 	local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
 	if #qf.items == 0 then return "" end
 
-	-- prettify title output
-	local title = qf
-		.title
-		:gsub("^Live Grep: .-%((.+)%)", "%1") -- remove telescope prefixes to save space
-		:gsub("^Find Files: .-%((.+)%)", "%1")
-		:gsub(" %(%)", "") -- empty brackets
-		:gsub("%-%-[%w-_]+ ?", "") -- remove flags from `makeprg`
+	-- remove empty brackets and/or flags from `makeprg`
+	local title = qf.title:gsub(" %(%)", ""):gsub("%-%-[%w-_]+ ?", "")
+
 	return (" %d/%d %q"):format(qf.idx, #qf.items, title)
 end
 
