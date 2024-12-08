@@ -16,7 +16,7 @@
   "nightfox.nvim": { "branch": "main", "commit": "7557f26defd093c4e9bc17f28b08403f706f5a44" },
   "noice.nvim": { "branch": "main", "commit": "7b1960c48078a8b2fb44a89db82f4fa637b2d7c8" },
   "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
-  "nvim-chainsaw": { "branch": "main", "commit": "69d2a3a6fe693960e10eb864aaa08d5eb2888fac" },
+  "nvim-chainsaw": { "branch": "main", "commit": "22f4bf8350f8e098cdef8d3d4336038be9a11de8" },
   "nvim-genghis": { "branch": "main", "commit": "88415be8bae7862ffa907df7242eae227ef81a5e" },
   "nvim-justice": { "branch": "main", "commit": "ffe4a09d6958d59649dd15415f3459a4c3417869" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "8d396eabf8d965a1a66cdd84c4a2b618ce204316" },
