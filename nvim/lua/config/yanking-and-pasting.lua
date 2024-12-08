@@ -88,7 +88,7 @@ end, { desc = "󰅍 Breadcrumbs" })
 -- requires a `nvim-scissors` util function
 -- If you want to use this without `scissors`, copy the respective utility
 -- function: https://github.com/chrisgrieser/nvim-scissors/blob/77b194b399f1563b7a021a0017f523dabf821170/lua/scissors/utils.lua#L31-L49
-keymap("x", "<leader>yc", function()
+keymap("x", "<leader>ym", function()
 	local mode = vim.fn.mode()
 	if not mode:find("[Vv]") then
 		vim.notify("Must be in visual line mode.", vim.log.levels.WARN)
@@ -109,4 +109,10 @@ keymap("x", "<leader>yc", function()
 	local pluralS = contentLineCount == 1 and "" or "s"
 	local msg = ("%d line%s"):format(#lines - 2, pluralS)
 	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 Codeblock (markdown)" })
+end, { desc = "󰅍 as codeblock (markdown)" })
+
+keymap("n", "<leader>y:", function()
+	local lastCmd = vim.fn.getreg(":"):gsub("^lua ?", "")
+	vim.fn.setreg("+", lastCmd)
+	vim.notify(lastCmd, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰘳 Last excmd" })

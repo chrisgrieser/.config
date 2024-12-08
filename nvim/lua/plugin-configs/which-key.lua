@@ -63,6 +63,11 @@ return {
 				{ "aw", desc = "󰬞 word" },
 				{ "gn", desc = " search result" },
 			},
+			{ -- not using `text_objects` preset, since it's too crowded
+				mode = { "n", "x" },
+				{ "g", group = "goto" },
+				{ "z", group = "fold & spelling" },
+			},
 		},
 		plugins = {
 			marks = false,
