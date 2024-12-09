@@ -96,15 +96,15 @@ bkeymap("n", "<leader>ci", function()
 			vim.cmd.normal { "j==", bang = true }
 		end
 	end)
-end, { desc = " Import module" })
+end, { desc = "󰢱 Import module" })
 
 --------------------------------------------------------------------------------
 -- YANK MODULE NAME
 
-bkeymap("n", "<leader>yr", function()
+bkeymap("n", "<leader>ym", function()
 	local absPath = vim.api.nvim_buf_get_name(0)
 	local relPath = absPath:sub(#(vim.uv.cwd()) + 2)
 	local module = relPath:gsub("%.lua$", ""):gsub("/", ".")
 	local req = ("require(%q)"):format(module)
 	vim.notify(req, nil, { icon = "󰅍", title = "Copied", ft = "lua" })
-end, { desc = "󰢱 require statement" })
+end, { desc = "󰢱 module (require)" })

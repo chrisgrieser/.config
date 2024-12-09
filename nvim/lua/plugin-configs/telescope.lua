@@ -358,11 +358,15 @@ return {
 					theme = "cursor",
 					layout_config = { cursor = { width = 0.3 } },
 				},
+				help = {
+					prompt_title = " Vim help",
+				},
 			},
 		}
 	end,
 	keys = {
-		{ "?", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Search keymaps" },
+		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Keymaps (global)" },
+		{ "<leader>iv", function() vim.cmd.Telescope("help_tags") end, desc = " Vim help" },
 		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },

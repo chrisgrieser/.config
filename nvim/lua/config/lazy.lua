@@ -64,7 +64,12 @@ require("lazy").setup {
 	},
 	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
-	readme = { enabled = false },
+	readme = {
+		-- needed to make helpdocs of lazy-loaded plugins available: 
+		-- https://github.com/folke/lazy.nvim/issues/1777#issuecomment-2529369369
+		enabled = true,
+		skip_if_doc_exists = false,
+	},
 	performance = {
 		rtp = {
 			-- Disable unused builtin plugins from neovim
