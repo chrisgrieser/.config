@@ -96,11 +96,10 @@ keymap("n", "X", function()
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = "󱎘 Delete char at EoL" })
 
--- Append to EoL
-local trailChars = { ",", "\\", "{", ")", ";", "." }
+-- Append to EoL: `<leader>` + `char`
+local trailChars = { ",", " {", ")", ";", ".", " \\" }
 for _, key in pairs(trailChars) do
-	local pad = key == "\\" and " " or ""
-	keymap("n", "<leader>" .. key, ("mzA%s%s<Esc>`z"):format(pad, key))
+	keymap("n", "<leader>" .. vim.trim(key), ("mzA%s<Esc>`z"):format(key))
 end
 
 -- WHITESPACE & INDENTATION
