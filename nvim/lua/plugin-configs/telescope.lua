@@ -353,6 +353,11 @@ return {
 						},
 					},
 				},
+				spell_suggest = {
+					prompt_title = "󰓆 Spell suggest",
+					theme = "cursor",
+					layout_config = { cursor = { width = 0.3 } },
+				},
 			},
 		}
 	end,
@@ -369,6 +374,7 @@ return {
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
+		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 
 		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },
 		{

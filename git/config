@@ -17,7 +17,7 @@
 	; `git config core.hooksPath .git-hooks` after every `git clone`
 	; 3. This trick only works on repos solely managed by the user of
 	; this dotfile-repo, it does not work to enforce hooks on other people's clones
-	hooksPath = .git-hooks
+	; hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
 	short = true
@@ -47,7 +47,7 @@
 	sort = -committerdate
 
 [log]
-	abbrevCommit = true
+	abbrevCommit = true ; don't show 40 characters, but rather 7-9
 	follow = true
 [format]
 	pretty = %C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(bold blue)%an%C(reset)
