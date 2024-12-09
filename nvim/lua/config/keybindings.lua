@@ -24,7 +24,7 @@ keymap({ "n", "x" }, "k", "gk")
 -- (not mapping in op-pending, since using custom textobjects for most of those)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$zv", { desc = "󰰍 char" }) -- zv: unfold under cursor
+keymap({ "n", "x" }, "L", "$zv", { desc = "󰬓 char" }) -- zv: unfold under cursor
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
@@ -160,7 +160,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
--- require `remap` https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
+-- require `remap` or method from: https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true })
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
@@ -340,26 +340,19 @@ keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " Delete matchi
 -- stylua: ignore
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
----@param use "spaces"|"tabs"
-local function retabber(use)
-	vim.bo.expandtab = use == "spaces"
-	vim.bo.shiftwidth = 2
-	vim.bo.tabstop = 3
-	vim.cmd.retab { bang = true }
-	vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
-end
-keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
-keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
-
 keymap("n", "<leader>rq", function()
 	local line = vim.api.nvim_get_current_line()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
 
+--------------------------------------------------------------------------------
+
+-- TEMPLATE STRINGS
 -- stylua: ignore
 keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").insertTemplateStr() end, { desc = "󰅳 Insert template string" })
 
+-- MULTI-EDIT
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<D-j>", function()
 	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
@@ -381,11 +374,7 @@ keymap("n", "<leader>od", function()
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
 end, { desc = " Diagnostics" })
 
-keymap(
-	"n",
-	"<leader>oc",
-	function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end,
-	{ desc = "󰈉 Conceal" }
-)
+-- stylua: ignore
+keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
 --------------------------------------------------------------------------------
