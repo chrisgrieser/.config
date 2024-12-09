@@ -1,4 +1,4 @@
----Adds a component to the lualine after lualine was already set up. 
+---Adds a component to the lualine after lualine was already set up.
 ---This enables lazy-loading plugins that add statusline components.
 ---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
@@ -91,7 +91,7 @@ return {
 				{
 					"fileformat",
 					cond = function() return vim.bo.fileformat ~= "unix" end,
-					fmt = function(icon) return  "󰌑 " .. icon end,
+					fmt = function(icon) return "󰌑 " .. icon end,
 				},
 				{
 					"diagnostics",
