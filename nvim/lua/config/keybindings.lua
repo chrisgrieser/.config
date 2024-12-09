@@ -322,10 +322,15 @@ keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").o
 
 local register = "r"
 local toggleKey = "0"
-keymap("n", toggleKey, function() require("personal-plugins.misc").startOrStopRecording(toggleKey, register) end, { desc = "󰑊 Start/stop recording" })
+keymap(
+	"n",
+	toggleKey,
+	function() require("personal-plugins.misc").startOrStopRecording(toggleKey, register) end,
+	{ desc = "󰃽 Start/stop recording" }
+)
 -- stylua: ignore
-keymap("n", "c0", function() require("personal-plugins.misc").editMacro(register) end, { desc = "󰑊 Edit recording" })
-keymap("n", "9", "@" .. register, { desc = " Play recording" })
+keymap("n", "c0", function() require("personal-plugins.misc").editMacro(register) end, { desc = "󰃽 Edit recording" })
+keymap("n", "9", "@" .. register, { desc = "󰃽 Play recording" })
 
 --------------------------------------------------------------------------------
 -- REFACTORING

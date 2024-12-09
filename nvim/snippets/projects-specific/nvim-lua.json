@@ -69,6 +69,13 @@
     "body": "local line = vim.api.nvim_get_current_line()",
     "prefix": "get current line"
   },
+  "cword + cursor word": {
+    "body": "vim.fn.expand(\"<cword>\")",
+    "prefix": [
+      "cword",
+      "cursor word"
+    ]
+  },
   "defer": {
     "body": [
       "vim.defer_fn(function ()",
