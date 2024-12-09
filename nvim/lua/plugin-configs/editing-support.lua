@@ -90,6 +90,12 @@ return {
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
+		init = function(spec)
+			vim.g.whichkeyAddGroup {
+				mode = { "n", "o" },
+				{ "ds", group = "󰅪 Delete" },
+			}
+		end,
 		keys = {
 			{ "ys", desc = "󰅪 Add surround operator" },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },

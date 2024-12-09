@@ -49,10 +49,12 @@ vnoremap <M-v> "+p
 exmap copyAbsolutePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("absolute") }
 exmap copyRelativePath jsfile Meta/vimrc-jsfile.js { copyPathSegment("relative") }
 exmap copyFilename jsfile Meta/vimrc-jsfile.js { copyPathSegment("filename") }
+exmap copyParentPath jsfile Meta/vimrc-jsfile.js { copyPathSegment("parent") }
 exmap copyObsidianUriMdLink jsfile Meta/vimrc-jsfile.js { copyObsidianUriMdLink() }
 
 noremap ,ya :copyAbsolutePath<CR>
 noremap ,yr :copyRelativePath<CR>
+noremap ,yp :copyParentPath<CR>
 noremap ,yn :copyFilename<CR>
 noremap <C-o> :copyObsidianUriMdLink<CR>
 

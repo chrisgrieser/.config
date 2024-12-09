@@ -25,7 +25,7 @@ declare const activeWindow: any;
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
-declare type TFile = { path: string; name: string; basename: string };
+declare type TFile = { path: string; name: string; basename: string, parent: TFile };
 
 declare type Editor = {
 	exec(action: string): void;
@@ -52,10 +52,7 @@ declare type Editor = {
 };
 
 declare type View = {
-	file: {
-		path: string;
-		name: string;
-	};
+	file: TFile;
 	app: {
 		fileManager: {
 			processFrontMatter(

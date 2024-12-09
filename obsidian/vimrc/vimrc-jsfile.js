@@ -210,14 +210,16 @@ function smartMerge() {
 	editor.setCursor(prevCursor);
 }
 
-/** @param {"absolute"|"relative"|"filename"} segment */
+/** @param {"absolute"|"relative"|"filename"|"parent"} segment */
 function copyPathSegment(segment) {
-	let toCopy = "";
+	let toCopy;
 	if (segment === "absolute") toCopy = view.app.vault.adapter.getFullPath(view.file.path);
 	else if (segment === "relative") toCopy = view.file.path;
 	else if (segment === "filename") toCopy = view.file.name;
+	else if (segment === "parent") toCopy = view.file.parent.path;
+	else toCopy = "invalid segment argument";
 	navigator.clipboard.writeText(toCopy);
-	new Notice("Copied:\n" + toCopy);
+	new Notice(`Copied ${segment}:\n` + toCopy);
 }
 
 function copyObsidianUriMdLink() {
