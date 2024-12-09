@@ -3,9 +3,7 @@
 -- still want to enjoy wallpapers visible through transparent apps.
 -- 2) Apps should not cover up the sketchybar which I only have in the top right
 -- corner.
-
 --------------------------------------------------------------------------------
-
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
@@ -104,23 +102,26 @@ M.transBgAppWindowFilter = wf.new(config.transBgApps)
 	:subscribe(wf.windowMoved, function(movedWin) hideOthers(movedWin:application()) end)
 	:subscribe(wf.windowMinimized, unHideAll)
 
+--------------------------------------------------------------------------------
+
 -- prevent maximized window from covering sketchybar if they are unfocused
-M.wf_maxWindows = wf.new(true)
-	:setOverrideFilter({ allowRoles = "AXStandardWindow" })
-	:subscribe(wf.windowUnfocused, function(win)
-		if not win then return end
-		local app = win:application()
-		local frontApp = hs.application.frontmostApplication()
-		if
-			not (env.isProjector())
-			and wu.winHasSize(win, hs.layout.maximized)
-			and not (u.isFront(config.dontTriggerHidingOtherApps))
-			and app
-			and app:name() ~= frontApp:name()
-		then
-			app:hide()
-		end
-	end)
+M.aw_maxWindows = aw.new(function(_appName, event, app)
+	if
+		event == aw.deactivated
+		and not (env.isProjector())
+		and not (u.isFront(config.dontTriggerHidingOtherApps))
+	then
+		local allWins = app:allWindows()
+		local hasCoveringWin = hs.fnutils.some(app:allWindows(), function(win)
+			local maximized = wu.winHasSize(win, hs.layout.maximized)
+			local leftHalf = wu.winHasSize(win, hs.layout.left50)
+			return maximized or leftHalf
+		end)
+		local hasLikelyCoveringWin = #allWins > 2
+
+		if hasCoveringWin or hasLikelyCoveringWin then app:hide() end
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 return M

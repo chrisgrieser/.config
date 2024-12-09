@@ -51,6 +51,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>399FFA57-165B-472A-AE9A-87BFF27728F8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>30875780-C895-4BDC-8A07-CC2CFAE3429F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2C1A3437-69DE-4AEE-AA72-81371A8748C3</key>
 		<array>
 			<dict>
@@ -93,7 +118,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>399FFA57-165B-472A-AE9A-87BFF27728F8</string>
+				<string>226C1914-C9E3-4AF8-855D-C0ABA204805E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -168,6 +193,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -191,6 +237,46 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>url</string>
+						<key>uid</key>
+						<string>30875780-C895-4BDC-8A07-CC2CFAE3429F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>not found</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>226C1914-C9E3-4AF8-855D-C0ABA204805E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -208,14 +294,6 @@
 			<string>3B71FB6E-C62F-4C61-A3ED-F4653A5F2D22</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -391,6 +469,15 @@ Search all anime listed in the `myanimelist` database via the keyword `an`.
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
+			<key>xpos</key>
+			<real>715</real>
+			<key>ypos</key>
+			<real>125</real>
+		</dict>
 		<key>1CD7085D-65B2-4B4F-835E-C2DB96C708F1</key>
 		<dict>
 			<key>colorindex</key>
@@ -400,12 +487,21 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
+		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>485</real>
+			<key>ypos</key>
+			<real>215</real>
+		</dict>
 		<key>2C1A3437-69DE-4AEE-AA72-81371A8748C3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>315</real>
 			<key>ypos</key>
 			<real>330</real>
 		</dict>
@@ -416,7 +512,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>action</string>
 			<key>xpos</key>
-			<real>537</real>
+			<real>617</real>
 			<key>ypos</key>
 			<real>320</real>
 		</dict>
@@ -427,7 +523,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>430</real>
+			<real>410</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -447,25 +543,25 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>790</real>
+			<real>860</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>370</real>
 		</dict>
 		<key>8AABF91D-1E70-4809-955F-8DBAE86E3107</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>365</real>
+			<real>370</real>
 		</dict>
 		<key>AC45C071-007E-491D-805B-4F6EC6B05E28</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>200</real>
+			<real>190</real>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
@@ -474,7 +570,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>295</real>
+			<real>315</real>
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
@@ -483,9 +579,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>710</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>250</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -669,7 +765,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.2.0</string>
+	<string>2.2.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
