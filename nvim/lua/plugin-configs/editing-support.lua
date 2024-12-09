@@ -90,12 +90,6 @@ return {
 	},
 	{ -- surround
 		"kylechui/nvim-surround",
-		init = function(spec)
-			vim.g.whichkeyAddGroup {
-				mode = { "n", "o" },
-				{ "ds", group = "󰅪 Delete" },
-			}
-		end,
 		keys = {
 			{ "ys", desc = "󰅪 Add surround operator" },
 			{ "yS", "ys$", desc = "󰅪 Surround to EoL", remap = true },
@@ -116,7 +110,7 @@ return {
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				[textObjMaps.call] = {
-					find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
+					find = "[%w.:_]+%b", -- includes `:` for lua-methods/css-pseudoclasses
 					delete = "([%w.:_]+%()().*(%))()",
 				},
 				[textObjMaps.func] = { -- only one-line lua functions
@@ -209,7 +203,9 @@ return {
 	{ -- quickly add log statements
 		"chrisgrieser/nvim-chainsaw",
 		ft = "lua", -- in lua, load directly for `Chainsaw` global
-		init = function() vim.g.whichkeyAddGroup { "<leader>l", group = "󰐪 Log" } end,
+		init = function()
+			vim.g.whichkeyAddSpec { "<leader>l", group = "󰐪 Log", mode = { "n", "x" } }
+		end,
 		opts = {
 			preCommitHook = {
 				enabled = true,
@@ -252,7 +248,7 @@ return {
 			-- stylua: ignore start
 			{ "<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" },
 			{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
-			{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "⁉️ assert" },
+			{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" },
 			{ "<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" },
 			{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 			{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },

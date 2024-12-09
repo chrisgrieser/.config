@@ -2,7 +2,16 @@
 -- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
 local spec = {
+	{
+		"kylechui/nvim-surround",
+		opts = true,
+	},
+	{
+		"folke/which-key.nvim",
+	},
 }
+
+vim.keymap.set("n", "duh", function() print("hello") end)
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"

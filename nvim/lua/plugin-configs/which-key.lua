@@ -1,7 +1,6 @@
 ---Set up plugin-specific groups cleanly with the plugin config.
 ---@param spec wk.Spec
-vim.g.whichkeyAddGroup = function(spec)
-	spec.mode = { "n", "x" }
+vim.g.whichkeyAddSpec = function(spec)
 	-- Deferred to ensure spec is loaded after whichkey itself
 	vim.defer_fn(function() require("which-key").add(spec) end, 1500)
 end
@@ -72,6 +71,7 @@ return {
 		plugins = {
 			marks = false,
 			registers = false,
+			spelling = { enabled = false },
 			presets = {
 				motions = false,
 				g = false,
@@ -85,7 +85,7 @@ return {
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
 			local nvimBultins =
-				{ "gc", "gcc", "]d", "zf", "z=", "g~", "gu", "gU", "<C-W><C-D>", "<C-W>d" }
+				{ "gc", "gcc", "]d", "zf", "g~", "gu", "gU", "<C-W><C-D>", "<C-W>d" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
 			return map.desc ~= nil
