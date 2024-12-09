@@ -1,5 +1,4 @@
-" REQUIRED
-" `Support JS commands` needs to be enabled in the vimrc plugin settings.
+" REQUIRED `Support JS commands` enabled in the vimrc plugin settings
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER
 
@@ -551,12 +550,3 @@ exmap sourceModeLivePreview obcommand editor:toggle-source
 nnoremap ,oc :sourceModeLivePreview<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
-
-" <M-s> = cmd+s
-" insert mode: accept suggestion
-" normal mode: format
-exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <M-s> <Esc>:acceptGhostText<CR>a
-
-exmap lint obcommand obsidian-linter:lint-file-unless-ignored
-nnoremap <M-s> :lint<CR>

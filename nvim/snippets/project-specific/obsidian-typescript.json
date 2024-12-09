@@ -1,0 +1,10 @@
+{
+  "vim mode + insert mode + normal mode": {
+    "body": "const isInsertMode = obsidian.workspace.activeEditor.editor.cm.cm.state.vim.insertMode;",
+    "prefix": [
+      "vim mode",
+      "insert mode",
+      "normal mode"
+    ]
+  }
+}

@@ -87,8 +87,16 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		this.addCommand({
 			id: "lint-or-accept-ai-suggestion",
 			name: "Lint (normal mode) / accept AI suggestion (insert mode)",
-			icon: "file-plus",
-			callback: () => new NewFileInFolder(this.app).open(),
+			icon: "save",
+			callback: () => {
+				// needs to be set in a plugin as opposed to the vimrc, since the latter does
+				// not allow for properly setting cmd-key based mappings
+				const isInsertMode = obsidian.workspace.activeEditor.editor.cm.cm.state.vim.insertMode;
+				const commandId = isInsertMode
+					? "copilot-auto-completion:accept"
+					: "obsidian-linter:lint-file-unless-ignored";
+				obsidian.commands.executeCommandById(commandId);
+			},
 		});
 
 		// OPACITY, depending on dark/light mode

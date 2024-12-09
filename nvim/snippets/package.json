@@ -78,6 +78,13 @@
           "javascript",
           "typescript"
         ],
+        "path": "./project-specific/obsidian-typescript.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript"
+        ],
         "path": "./general/node-js.json"
       },
       {
@@ -96,37 +103,37 @@
         "language": [
           "yaml"
         ],
-        "path": "./projects-specific/karabiner-modifications.json"
+        "path": "./project-specific/karabiner-modifications.json"
       },
       {
         "language": [
           "toml"
         ],
-        "path": "./projects-specific/typos-toml.json"
+        "path": "./project-specific/typos-toml.json"
       },
       {
         "language": [
           "lua"
         ],
-        "path": "./projects-specific/nvim-lua.json"
+        "path": "./project-specific/nvim-lua.json"
       },
       {
         "language": [
           "vim"
         ],
-        "path": "./projects-specific/obsidian-vimrc.json"
+        "path": "./project-specific/obsidian-vimrc.json"
       },
       {
         "language": [
           "javascript"
         ],
-        "path": "./projects-specific/alfred-jxa.json"
+        "path": "./project-specific/alfred-jxa.json"
       },
       {
         "language": [
           "applescript"
         ],
-        "path": "./projects-specific/alfred-applescript.json"
+        "path": "./project-specific/alfred-applescript.json"
       },
       {
         "language": [
