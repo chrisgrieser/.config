@@ -65,7 +65,7 @@ require("lazy").setup {
 	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
 	change_detection = { notify = false },
 	readme = {
-		-- needed to make helpdocs of lazy-loaded plugins available: 
+		-- needed to make helpdocs of lazy-loaded plugins available:
 		-- https://github.com/folke/lazy.nvim/issues/1777#issuecomment-2529369369
 		enabled = true,
 		skip_if_doc_exists = false,
@@ -82,6 +82,19 @@ require("lazy").setup {
 		},
 	},
 }
+
+--------------------------------------------------------------------------------
+
+-- KEYMAPS FOR LAZY-GENERATED HELP IN MARKDOWN
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Set keymaps for lazy-generated help in markdown",
+	pattern = "markdown",
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype == "help" then
+			vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
+		end
+	end,
+})
 
 -- KEYMAPS FOR LAZY UI
 -- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
