@@ -160,6 +160,7 @@ return {
 		},
 		opts = {
 			input = {
+				start_mode = "select",
 				trim_prompt = true,
 				border = vim.g.borderStyle,
 				relative = "editor",

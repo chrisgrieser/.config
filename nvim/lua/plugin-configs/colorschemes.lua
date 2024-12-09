@@ -163,6 +163,11 @@ local themes = {
 					-- placeholders like the `%s` in `string.format("foo %s bar")`
 					setHl("@character.printf", { link = "Purple" })
 
+					-- FIX selection hardly visible in DressingInput
+					-- (keep it for the scrollbar though)
+					setHl("Visual", { bg = "#385055" })
+					setHl("SatelliteBar", { bg = "#45403d" })
+
 					-- General
 					setHl("TSParameter", { fg = "#679bbf" })
 					setHl("TSConstant", { fg = "#948ecb" })

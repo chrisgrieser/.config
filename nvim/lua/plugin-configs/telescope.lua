@@ -371,11 +371,11 @@ return {
 					},
 					mappings = {
 						i = {
-							-- open help in full window
+							-- open help in full buffer
 							["<CR>"] = function(promptBufnr)
-								local value = require("telescope.actions.state").get_selected_entry().value
+								local entry = require("telescope.actions.state").get_selected_entry().value
 								require("telescope.actions").close(promptBufnr)
-								vim.cmd("help " .. value)
+								vim.cmd(("help %s | only"):format(entry))
 							end,
 						},
 					},
