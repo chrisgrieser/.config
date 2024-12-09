@@ -3,15 +3,11 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"kylechui/nvim-surround",
-		opts = true,
-	},
-	{
-		"folke/which-key.nvim",
+		"nvim-telescope/telescope.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = true,
 	},
 }
-
-vim.keymap.set("n", "duh", function() print("hello") end)
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"
