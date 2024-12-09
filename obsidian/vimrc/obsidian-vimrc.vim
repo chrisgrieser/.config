@@ -549,3 +549,14 @@ nnoremap ,oa :toggleAiCompletion<CR>
 " [O]ption: [c]onceal
 exmap sourceModeLivePreview obcommand editor:toggle-source
 nnoremap ,oc :sourceModeLivePreview<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
+
+" <M-s> = cmd+s
+" insert mode: accept suggestion
+" normal mode: format
+exmap acceptGhostText obcommand copilot-auto-completion:accept
+inoremap <M-s> <Esc>:acceptGhostText<CR>a
+
+exmap lint obcommand obsidian-linter:lint-file-unless-ignored
+nnoremap <M-s> :lint<CR>
