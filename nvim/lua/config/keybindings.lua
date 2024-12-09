@@ -116,7 +116,6 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
-keymap("n", "zl", "z=", { desc = "󰓆 List spellings" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
