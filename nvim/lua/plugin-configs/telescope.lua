@@ -49,6 +49,7 @@ return {
 						["?"] = "which_key",
 						["<Tab>"] = "move_selection_worse",
 						["<S-Tab>"] = "move_selection_better",
+						["<D-Up>"] = "move_to_top",
 						["<CR>"] = "select_default",
 						["<Esc>"] = "close", -- effectively disables normal mode for Telescope
 
@@ -184,6 +185,7 @@ return {
 							vim.fn.stdpath("data") .. "/lazy",
 							vim.env.HOMEBREW_PREFIX,
 							vim.env.HOME,
+							vim.env.HOME,
 						}
 						vim.iter(parentOfRoots)
 							:each(function(root) path = path:gsub(vim.pesc(root), "") end)
@@ -196,7 +198,11 @@ return {
 						local highlights = { { { #tail, #out }, "TelescopeResultsComment" } }
 						return out, highlights
 					end,
-					file_ignore_patterns = { "COMMIT_EDITMSG" },
+					file_ignore_patterns = {
+						"COMMIT_EDITMSG",
+						"nvim/runtime/doc/.*.txt", -- vim help docs
+						vim.fn.stdpath("data") .. "/lazy", -- lazy.nvim-generate help docs
+					},
 
 					layout_config = { horizontal = { width = 0.6, height = 0.6 } },
 					previewer = false,
@@ -267,11 +273,6 @@ return {
 							["<C-r>"] = "git_rename_branch",
 						},
 					},
-				},
-				keymaps = {
-					prompt_title = "⌨️ Keymaps",
-					modes = { "n", "i", "c", "x", "o", "t" },
-					show_plug = false,
 				},
 				highlights = {
 					prompt_title = " Highlights",
@@ -358,15 +359,37 @@ return {
 					theme = "cursor",
 					layout_config = { cursor = { width = 0.3 } },
 				},
-				help = {
-					prompt_title = " Vim help",
+				keymaps = {
+					prompt_title = "⌨️ Keymaps",
+					modes = { "n", "i", "c", "x", "o", "t" },
+					show_plug = false,
+				},
+				help_tags = {
+					prompt_title = " Vim help",
+					layout_config = {
+						horizontal = { height = 0.8 }, -- bigger for more help
+					},
+					mappings = {
+						i = {
+							-- open help in full window
+							["<CR>"] = function(promptBufnr)
+								local value = require("telescope.actions.state").get_selected_entry().value
+								require("telescope.actions").close(promptBufnr)
+								vim.cmd("help " .. value)
+							end,
+						},
+					},
 				},
 			},
 		}
 	end,
 	keys = {
-		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Keymaps (global)" },
-		{ "<leader>iv", function() vim.cmd.Telescope("help_tags") end, desc = " Vim help" },
+		{
+			"<leader>ik",
+			function() vim.cmd.Telescope("keymaps") end,
+			desc = "⌨️ Keymaps (global)",
+		},
+		{ "<leader>iv", function() vim.cmd.Telescope("help_tags") end, desc = " Vim help" },
 		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },

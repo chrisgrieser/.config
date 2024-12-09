@@ -10,7 +10,9 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
 
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
+local stateDir = vim.fn.stdpath("state") --[[@as string]]
 keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
+keymap("n", "<leader>ps", function() vim.ui.open(stateDir) end, { desc = "󰝰 Plugin dir" })
 keymap("n", "<leader>pv", function() vim.ui.open(vim.o.viewdir) end, { desc = "󰝰 View dir" })
 
 --------------------------------------------------------------------------------

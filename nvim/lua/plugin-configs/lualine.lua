@@ -76,6 +76,7 @@ return {
 						local ext = name:match("%w+$")
 						local icon = devicons.get_icon(name, ext)
 							or devicons.get_icon(name, vim.bo.ft, { default = true })
+						if vim.bo.buftype == "help" then icon = "󰋖" end
 
 						return icon .. " " .. displayName
 					end,
