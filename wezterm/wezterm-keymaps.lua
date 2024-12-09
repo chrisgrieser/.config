@@ -26,7 +26,7 @@ M.keys = {
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
-	-- INFO using the mapping from the terminal_keybindings.zsh
+	-- INFO using the mapping from `terminal_keybindings.zsh`
 	-- undo
 	{ key = "z", mods = "CMD", action = act.SendKey { key = "n", mods = "CTRL" } },
 	-- accept & execute suggestion
@@ -118,6 +118,8 @@ M.keys = {
 	-----------------------------------------------------------------------------
 
 	-- HINT MODE (= Quick Select) -- https://wezfurlong.org/wezterm/quickselect.html
+
+	-- cmd+y -> copy text
 	{ key = "y", mods = "CMD", action = act.QuickSelect },
 
 	{ -- cmd+u -> open URL (like f in vimium)
