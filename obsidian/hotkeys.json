@@ -367,5 +367,13 @@
       "key": "R"
     }
   ],
-  "markdown:add-metadata-property": []
+  "markdown:add-metadata-property": [],
+  "pseudometa-startup-actions:lint-or-accept-ai-suggestion": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "S"
+    }
+  ]
 }

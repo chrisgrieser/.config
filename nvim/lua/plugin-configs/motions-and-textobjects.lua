@@ -185,15 +185,6 @@ return {
 				end,
 				desc = "󰉶 Indent last paste",
 			},
-			{ -- dedent last paste
-				"\\", -- shift-^ on my keyboard
-				function()
-					require("various-textobjs").lastChange()
-					local changeFound = vim.fn.mode() == "v"
-					if changeFound then vim.cmd.normal { "<", bang = true } end
-				end,
-				desc = "󰉵 Dedent last paste",
-			},
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
