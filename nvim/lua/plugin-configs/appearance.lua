@@ -237,6 +237,7 @@ return {
 				["css"] = { hl = "MiniIconsRed" },
 				["typescript"] = { hl = "MiniIconsCyan" },
 				["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
+				["help"] = { glyph = "󰮥" }, -- vimdocs
 			},
 		},
 		config = function(_, opts)

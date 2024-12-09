@@ -43,7 +43,7 @@ return {
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>y", group = "󰅍 Yanking" },
+				{ "<leader>y", group = "󰅍 Yank" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },

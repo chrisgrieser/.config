@@ -34,6 +34,7 @@ return {
 		{"<leader>ya", function() require("genghis").copyFilepathWithTilde() end, desc = "󰞇 󰜥 Absolute path" },
 		{"<leader>yr", function() require("genghis").copyRelativePath() end, desc = "󰞇 Relative path" },
 		{"<leader>yn", function() require("genghis").copyFilename() end, desc = "󰞇 Filename" },
+		{"<leader>yp", function() require("genghis").copyDirectoryPath() end, desc = "󰞇 Parent path" },
 
 		{"<C-r>", function() require("genghis").renameFile() end, desc = "󰞇 Rename file" },
 		{"<D-n>", function() require("genghis").createNewFile() end, desc = "󰞇 Create new file" },
