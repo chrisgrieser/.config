@@ -208,7 +208,6 @@ return {
 			preCommitHook = {
 				enabled = true,
 				dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir has marker
-				noHookOverride = true, -- perma-repos and Obsidian plugin use a hook themselves
 			},
 			logStatements = {
 				variableLog = {

@@ -211,7 +211,6 @@ M.serverConfigs.stylelint_lsp = {
 
 -- DOCS https://github.com/olrtg/emmet-language-server#neovim
 M.serverConfigs.emmet_language_server = {
-	filetypes = { "html", "css", "scss" },
 	init_options = {
 		showSuggestionsAsSnippets = true,
 	},
@@ -238,7 +237,7 @@ M.serverConfigs.ts_ls = {
 				includeInlayVariableTypeHints = true,
 				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
 			},
-			-- even formatting disabled still relevant for `organizeImports` code action
+			-- even with formatting disabled still relevant for `organizeImports` code-action
 			format = { convertTabsToSpaces = false },
 		},
 

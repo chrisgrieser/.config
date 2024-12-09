@@ -17,7 +17,7 @@
 	; `git config core.hooksPath .git-hooks` after every `git clone`
 	; 3. This trick only works on repos solely managed by the user of
 	; this dotfile-repo, it does not work to enforce hooks on other people's clones
-	; hooksPath = .git-hooks
+	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
 	short = true
