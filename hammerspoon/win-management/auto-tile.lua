@@ -22,12 +22,6 @@ local config = {
 		if env.isProjector() then return hs.layout.maximized end
 		return appName == "Finder" and wu.middleHalf or wu.pseudoMax
 	end,
-	-- stylua: ignore
-	dontTriggerHiding = {
-		"Alfred", "CleanShot X", "IINA", "Ivory", "pinentry-mac", "Espanso",
-		"Catch", "BetterZip", "System Settings", "Transmission",
-		"Slack", -- FIX bug where Slack briefly re-activates when opening link
-	},
 }
 
 --------------------------------------------------------------------------------
@@ -36,8 +30,6 @@ local config = {
 local function autoTile(appName)
 	local app = hs.application.find(appName, true, true)
 	if not app then return end
-	app:selectMenuItem { "Window", "Bring All to Front" }
-	app:unhide()
 
 	-- need to manually filter windows, since window filter is sometimes buggy
 	-- and does include the correct number of windows
@@ -45,8 +37,7 @@ local function autoTile(appName)
 	local wins = hs.fnutils.filter(app:allWindows(), function(win)
 		local ignored = hs.fnutils.some(ignoredWins, function(name) return win:title():find(name) end)
 		return not ignored and win:isStandard()
-	end)
-	---@cast wins hs.window[] -- fix wrong annotation
+	end) ---@cast wins hs.window[] -- fix wrong annotation
 
 	-- GUARD prevent unnecessary runs or duplicate triggers
 	if M["winCount_" .. appName] == #wins then return end
@@ -100,17 +91,10 @@ for appName, ignoredWins in pairs(config.appsToAutoTile) do
 		:subscribe(wf.windowDestroyed, function() autoTile(appName) end)
 		:subscribe(wf.windowFocused, function() autoTile(appName) end)
 
-	-- hide on deactivation (e.g., so sketchybar is not covered)
-	M["appWatcher_" .. appName] = aw.new(function(name, eventType, autoTileApp)
-		local frontApp = hs.application.frontmostApplication()
-		if not frontApp then return end
-
-		-- FIX weird bug where opening liks sometimes activates a browser twice…
-		if frontApp:name() == appName then return end
-
-		local dontTrigger = config.dontTriggerHiding
-		local ignored = hs.fnutils.some(dontTrigger, function(n) return frontApp:name() == n end)
-		if name == appName and eventType == aw.deactivated and not ignored then autoTileApp:hide() end
+	M["appWatcher_" .. appName] = aw.new(function(_name, event, autoTileApp)
+		if event == aw.activated then
+			autoTileApp:selectMenuItem { "Window", "Bring All to Front" }
+		end
 	end):start()
 end
 

@@ -29,7 +29,7 @@ alias unmark_commit="git tag --delete 'mark'"
 ZSH_HIGHLIGHT_REGEXP+=('#[0-9]+' 'fg=blue,bold')
 
 # commit message overlength
-ZSH_HIGHLIGHT_REGEXP+=('^(gc|gC|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^(gc|gg|git commit -m) ".{72,}' 'fg=white,bold,bg=red')
 
 # inline code with backslashes
 ZSH_HIGHLIGHT_REGEXP+=($'\\\\`[^`]*\\\\`' 'fg=cyan,bold')
@@ -74,7 +74,7 @@ function _stageAllIfNoStagedChanges {
 
 # - if there are no staged changes, stage all changes (`git add -A`) and then commit
 # - if the is clean after committing, pull-push
-function gc {
+function gg {
 	_stageAllIfNoStagedChanges
 
 	# without arg, just open in editor
@@ -104,7 +104,7 @@ function gc {
 	printf "\e[1;34mPush:\e[0m " && git push --no-progress
 }
 
-function gC {
+function gc {
 	_stageAllIfNoStagedChanges
 
 	# without arg, just open in editor
