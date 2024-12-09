@@ -60,18 +60,18 @@ end
 
 function M.editMacro(reg)
 	local macroContent = vim.fn.getreg(reg)
-	local title = "Edit macro [" .. reg .. "]"
+	local title = ("Edit macro [%s]"):format(reg)
 
-	vim.ui.input({ prompt = title, default = macroContent }, function(editedMacro)
-		if not editedMacro then return end
-		vim.fn.setreg(reg, editedMacro)
-		vim.notify(editedMacro, nil, { title = title })
+	vim.ui.input({ prompt = title, default = macroContent }, function(input)
+		if not input then return end
+		vim.fn.setreg(reg, input)
+		vim.notify(input, nil, { title = title, icon = "󰃽" })
 	end)
 end
 
 --------------------------------------------------------------------------------
 
--- Simplified implementation of coerce.nvim
+-- Simplified implementation of `coerce.nvim`
 function M.camelSnakeLspRename()
 	local cword = vim.fn.expand("<cword>")
 	local snakePattern = "_(%w)"
@@ -81,10 +81,9 @@ function M.camelSnakeLspRename()
 		local camelCased = cword:gsub(snakePattern, function(c1) return c1:upper() end)
 		vim.lsp.buf.rename(camelCased)
 	elseif cword:find(camelPattern) then
-		local snake_cased = cword:gsub(
-			camelPattern,
-			function(c1, c2) return c1 .. "_" .. c2:lower() end
-		)
+		local snake_cased = cword
+			:gsub(camelPattern, function(c1, c2) return c1 .. "_" .. c2 end)
+			:lower()
 		vim.lsp.buf.rename(snake_cased)
 	else
 		local msg = "Neither snake_case nor camelCase: " .. cword

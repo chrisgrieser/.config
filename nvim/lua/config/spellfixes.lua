@@ -55,6 +55,7 @@ local spellfixes = {
 	seperators = "separators",
 	shoudl = "should",
 	btu = "but",
+	wrod = "word",
 	shuold = "should",
 	shwo = "show",
 	sicne = "since",
