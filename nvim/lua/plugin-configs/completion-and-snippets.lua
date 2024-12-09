@@ -1,10 +1,6 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
-
--- TODO FOR NEXT RELEASE
--- annotations https://github.com/Saghen/blink.cmp/issues/427
----@diagnostic disable: missing-fields
-
+---@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
 --------------------------------------------------------------------------------
 
 return {
@@ -66,11 +62,6 @@ return {
 				["<PageUp>"] = { "scroll_documentation_up" },
 			},
 			completion = {
-				keyword = {
-					-- Remove `\`, so it does not trigger completion.
-					-- Useful when breaking up lines in bash/zsh.
-					regex = "[%w_-]",
-				},
 				list = {
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				},
