@@ -25,6 +25,8 @@ function M.openAlfredPref()
 	vim.ui.open(uri)
 end
 
+--------------------------------------------------------------------------------
+
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string key used to trigger this function
@@ -54,6 +56,17 @@ function M.startOrStopRecording(toggleKey, reg)
 			.. (notRecording and "begin_record.caf" or "end_record.caf")
 		vim.system { "afplay", sound } -- async
 	end
+end
+
+function M.editMacro(reg)
+	local macroContent = vim.fn.getreg(reg)
+	local title = "Edit macro [" .. reg .. "]"
+
+	vim.ui.input({ prompt = title, default = macroContent }, function(editedMacro)
+		if not editedMacro then return end
+		vim.fn.setreg(reg, editedMacro)
+		vim.notify(editedMacro, nil, { title = title })
+	end)
 end
 
 --------------------------------------------------------------------------------
