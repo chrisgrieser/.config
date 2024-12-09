@@ -322,15 +322,6 @@
       "key": "N"
     }
   ],
-  "copilot-auto-completion:accept": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "S"
-    }
-  ],
   "quadro:mark-datafile-as-read": [],
   "editor:open-search-replace": [
     {
@@ -368,7 +359,15 @@
     }
   ],
   "markdown:add-metadata-property": [],
-  "pseudometa-startup-actions:lint-or-accept-ai-suggestion": [
+  "copilot-auto-completion:accept": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "A"
+    }
+  ],
+  "obsidian-linter:lint-file-unless-ignored": [
     {
       "modifiers": [
         "Mod"

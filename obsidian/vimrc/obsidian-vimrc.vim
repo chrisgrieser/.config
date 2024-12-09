@@ -550,3 +550,13 @@ exmap sourceModeLivePreview obcommand editor:toggle-source
 nnoremap ,oc :sourceModeLivePreview<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
+
+" <M-s> = cmd+s
+" normal mode: format
+exmap lint obcommand obsidian-linter:lint-file-unless-ignored
+nnoremap <M-s> :lint<CR>
+
+" BUG https://github.com/j0rd1smit/obsidian-copilot-auto-completion/issues/45
+" insert mode: accept suggestion
+exmap acceptGhostText obcommand copilot-auto-completion:accept
+inoremap <M-s> <Esc>:acceptGhostText<CR>a
