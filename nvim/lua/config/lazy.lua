@@ -91,7 +91,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype == "help" then
-			vim.keymap.set("n", "q", vim.cmd.close, { buffer = ctx.buf, nowait = true })
+			vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = ctx.buf, nowait = true })
 		end
 	end,
 })
