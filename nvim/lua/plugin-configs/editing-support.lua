@@ -110,7 +110,7 @@ return {
 			surrounds = {
 				invalid_key_behavior = { add = false, find = false, delete = false, change = false },
 				[textObjMaps.call] = {
-					find = "[%w.:_]+%b", -- includes `:` for lua-methods/css-pseudoclasses
+					find = "[%w.:_]+%b()", -- includes `:` for lua-methods/css-pseudoclasses
 					delete = "([%w.:_]+%()().*(%))()",
 				},
 				[textObjMaps.func] = { -- only one-line lua functions
