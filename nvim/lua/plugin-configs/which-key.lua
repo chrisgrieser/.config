@@ -12,10 +12,10 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{
-			"<leader>ik",
+			"<leader>iK",
 			-- alternative: `:Telescope keymaps` with `only_buf = true`
 			function() require("which-key").show { global = false } end,
-			desc = "⌨️ keymaps (buffer)",
+			desc = "⌨️ Keymaps (buffer)",
 		},
 	},
 	opts = {

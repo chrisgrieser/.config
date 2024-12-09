@@ -9,6 +9,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
 })
 
+--------------------------------------------------------------------------------
+
 -- STICKY YANK
 local cursorPreYank
 keymap({ "n", "x" }, "y", function()
@@ -84,32 +86,6 @@ keymap("n", "<leader>yb", function()
 		vim.notify("No code context.", vim.log.levels.WARN)
 	end
 end, { desc = "󰅍 Code context" })
-
--- requires a `nvim-scissors` util function
--- If you want to use this without `scissors`, copy the respective utility
--- function: https://github.com/chrisgrieser/nvim-scissors/blob/77b194b399f1563b7a021a0017f523dabf821170/lua/scissors/utils.lua#L31-L49
-keymap("x", "<leader>ym", function()
-	local mode = vim.fn.mode()
-	if not mode:find("[Vv]") then
-		vim.notify("Must be in visual line mode.", vim.log.levels.WARN)
-		return
-	end
-
-	vim.cmd.normal { mode, bang = true } -- leave visual mode, so marks are set
-	local start = vim.api.nvim_buf_get_mark(0, "<")[1]
-	local _end = vim.api.nvim_buf_get_mark(0, ">")[1]
-	local lines = vim.api.nvim_buf_get_lines(0, start - 1, _end, false)
-
-	lines = require("scissors.utils").dedentAndTrimBlanks(lines)
-	local contentLineCount = #lines
-	table.insert(lines, 1, "```" .. vim.bo.filetype)
-	table.insert(lines, "```")
-
-	vim.fn.setreg("+", table.concat(lines, "\n"))
-	local pluralS = contentLineCount == 1 and "" or "s"
-	local msg = ("%d line%s"):format(#lines - 2, pluralS)
-	vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰅍 as markdown codeblock" })
 
 keymap("n", "<leader>y:", function()
 	local lastCmd = vim.fn.getreg(":"):gsub("^lua ?", "")
