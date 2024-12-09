@@ -1,5 +1,4 @@
 {
-  "markdown:add-metadata-property": [],
   "editor:toggle-highlight": [
     {
       "modifiers": [
@@ -271,7 +270,6 @@
   "various-complements:reload-custom-dictionaries": [],
   "various-complements:show-suggestions": [],
   "various-complements:add-word-custom-dictionary": [],
-  "obsidian-linter:lint-file": [],
   "editor:save-file": [],
   "obsidian-style-settings:style-settings-class-toggle-hide-properties-hide-some-properties": [
     {
@@ -333,14 +331,6 @@
       "key": "S"
     }
   ],
-  "obsidian-linter:lint-file-unless-ignored": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "S"
-    }
-  ],
   "quadro:mark-datafile-as-read": [],
   "editor:open-search-replace": [
     {
@@ -376,5 +366,6 @@
       ],
       "key": "R"
     }
-  ]
+  ],
+  "markdown:add-metadata-property": []
 }

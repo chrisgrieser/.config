@@ -84,6 +84,12 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			icon: "file-plus",
 			callback: () => new NewFileInFolder(this.app).open(),
 		});
+		this.addCommand({
+			id: "lint-or-accept-ai-suggestion",
+			name: "Lint (normal mode) / accept AI suggestion (insert mode)",
+			icon: "file-plus",
+			callback: () => new NewFileInFolder(this.app).open(),
+		});
 
 		// OPACITY, depending on dark/light mode
 		if (!this.app.isMobile) {
