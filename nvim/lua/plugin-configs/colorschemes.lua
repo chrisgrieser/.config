@@ -17,8 +17,8 @@ local themes = {
 			},
 			groups = {
 				dawnfox = {
-					-- indent-blank-line: more contrast
-					IblIndent = { fg = "#e0cfbd" },
+					-- indent-blank-line: less contrast
+					SnacksIndent = { fg = "#e0cfbd" },
 
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
