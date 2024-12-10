@@ -97,6 +97,7 @@ return {
 				{
 					"diagnostics",
 					symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
+					cond = function() return vim.diagnostic.is_enabled { bufnr = 0 } end,
 				},
 			},
 			lualine_y = {

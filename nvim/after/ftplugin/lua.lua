@@ -1,8 +1,9 @@
 local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
---------------------------------------------------------------------------------
 
--- fix habits from writing too much in other languages
+--------------------------------------------------------------------------------
+-- FIXES HABITS FROM WRITING TOO MUCH IN OTHER LANGUAGES
+
 abbr("//", "--")
 abbr("const", "local")
 abbr("let", "local")
@@ -30,8 +31,8 @@ bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = 
 bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
 
 --------------------------------------------------------------------------------
+-- AUTO-COMMA FOR TABLES
 
--- auto-comma for tables
 vim.api.nvim_create_autocmd("TextChangedI", {
 	desc = "User (buffer-specific): auto-comma for tables",
 	buffer = 0,
