@@ -122,7 +122,10 @@ local routes = {
 	{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
 
 	-- PENDING vim 0.10.3 https://github.com/neovim/neovim/issues/30675#issuecomment-2481386623
-	{ filter = { event = "notify", find = "semantic_tokens.lua:149: index out of range" }, skip = true },
+	{
+		filter = { event = "msg_show", find = "semantic_tokens.lua:149: index out of range" },
+		skip = true,
+	},
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
@@ -214,6 +217,10 @@ return {
 				modes = { "n" },
 				debounce = 300,
 			},
+			input = {
+				enables = false, -- TODO
+				icon = " ",
+			},
 			win = {
 				border = vim.g.borderStyle,
 				bo = { modifiable = false },
@@ -229,6 +236,19 @@ return {
 				top_down = false,
 			},
 			styles = {
+				input = {
+					backdrop = true,
+					border = vim.g.borderStyle,
+					title_pos = "left",
+					height = 1,
+					width = 60,
+					relative = "editor",
+					row = math.ceil(vim.o.lines / 2) + 3,
+					keys = {
+						i_esc = { "<esc>", "stopinsert", mode = "i" },
+						q = "cancel",
+					},
+				},
 				notification = {
 					border = vim.g.borderStyle,
 					wo = { cursorline = false, winblend = 0, wrap = true },

@@ -219,7 +219,7 @@ nnoremap <M-h> :headingIncrement<CR>
 inoremap <M-h> <Esc>:headingIncrement<CR>a
 exmap headingDecrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(-1) }
 nnoremap <M-S-h> :headingDecrement<CR>
-inoremap <M-S-h> <Esc>:headingIncrement<CR>a
+inoremap <M-S-h> <Esc>:headingDecrement<CR>a
 
 " spelling suggestions (emulates `z=`)
 exmap contextMenu obcommand editor:context-menu

@@ -115,12 +115,6 @@ function run() {
 				quicklookurl: mainArg,
 				uid: repo.name,
 				mods: {
-					fn: {
-						subtitle: repo.local
-							? "fn: Delete Local Repo"
-							: "fn: 🚫 Cannot delete remote repo",
-						valid: Boolean(repo.local),
-					},
 					ctrl: {
 						subtitle: "⌃: " + termAct,
 						arg: terminalArg,

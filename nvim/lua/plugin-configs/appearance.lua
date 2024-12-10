@@ -160,6 +160,7 @@ return {
 		},
 		opts = {
 			input = {
+				enabled = false,
 				start_mode = "insert",
 				trim_prompt = true,
 				border = vim.g.borderStyle,
