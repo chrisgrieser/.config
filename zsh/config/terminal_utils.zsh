@@ -37,10 +37,11 @@ function p {
 function line_count() {
 	where=${1:-"."}
 	find -E "$where" -type file \
+		-not -path "./tests/**" \
 		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
 		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|json|ya?ml|md|toml|editorconfig)$" \
-		-print0 | xargs -0 wc -l | sort --reverse
+		-print0 | xargs -0 wc -l
 }
 
 # Quick Open File
