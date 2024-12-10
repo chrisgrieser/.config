@@ -18,19 +18,27 @@ do
 		cursorBefore = vim.api.nvim_win_get_cursor(0)
 		return "y"
 	end, { expr = true })
+	keymap("n", "Y", function()
+		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		return "y$"
+	end, { expr = true, unique = false }) -- `unique`, since it's a nvim-builtin
 	keymap("n", "d", function()
 		cursorBefore = vim.api.nvim_win_get_cursor(0)
 		return "d"
 	end, { expr = true })
+	keymap("n", "D", function()
+		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		return "D"
+	end, { expr = true })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
-		desc = "User: Sticky yank",
+		desc = "User: Sticky yank/delete",
 		callback = function()
+			if not cursorBefore then return end
 			if vim.v.event.regname == "z" then return end -- temp register for some keymaps
 
 			if vim.v.event.operator == "y" then
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
-
 			elseif vim.v.event.operator == "d" then
 				local cursorNow = vim.api.nvim_win_get_cursor(0)
 				local cursorWasInFront = cursorNow[1] > cursorBefore[1]
@@ -50,10 +58,17 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P")
-keymap("n", "dd", function()
-	if vim.trim(vim.api.nvim_get_current_line()) == "" then return '"_dd' end
-	return "dd"
-end, { expr = true, desc = "dd" })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "User: Do not save empty text into the register",
+	callback = function()
+		if vim.v.event.regname ~= [[""]] then return end -- temp register for some keymaps
+		if vim.v.event.operator ~= "d" then return end
+	
+		local reg = vim.fn.getreg(vim.v.event.regname)
+		if reg == "" then vim.fn.setreg(vim.v.event.regname, {}) end
+	end,
+})
 
 -- PASTING
 keymap("n", "P", function()

@@ -87,11 +87,12 @@ require("lazy").setup {
 
 -- KEYMAPS FOR LAZY-GENERATED HELP IN MARKDOWN
 vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Set keymaps for lazy-generated help in markdown",
+	desc = "User: Setup for lazy-generated help in markdown",
 	pattern = "markdown",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype == "help" then
 			vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = ctx.buf, nowait = true })
+			vim.diagnostic.enable(false, { bufnr = ctx.buf })
 		end
 	end,
 })

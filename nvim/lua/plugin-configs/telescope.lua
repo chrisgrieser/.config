@@ -365,7 +365,7 @@ return {
 					show_plug = false,
 				},
 				help_tags = {
-					prompt_title = " Vim help",
+					prompt_title = " Vim help (search)",
 					layout_config = {
 						horizontal = { height = 0.8 }, -- bigger for more help
 					},
@@ -385,15 +385,23 @@ return {
 	end,
 	keys = {
 		{
-			"<leader>ik",
-			function() vim.cmd.Telescope("keymaps") end,
-			desc = "⌨️ Keymaps (global)",
+			"<leader>iv",
+			function()
+				local prefill = nil
+				if vim.fn.mode():find("[Vv]") then
+					vim.cmd.normal { '"zy"', bang = true }
+					prefill = vim.fn.getreg("z")
+				end
+				require("telescope.builtin").help_tags { default_text = prefill }
+			end,
+			desc = " Vim help",
 		},
-		{ "<leader>iv", function() vim.cmd.Telescope("help_tags") end, desc = " Vim help" },
+
 		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
 		-- stylua: ignore start
+		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Keymaps (global)" },
 		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
 		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
 		-- stylua: ignore end

@@ -205,8 +205,8 @@ keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").format
 
 -- INSERT MODE
 keymap("n", "i", function()
-	if vim.trim(vim.api.nvim_get_current_line()) == "" then return [["_cc]] end
-	return "i"
+	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
+	return (lineEmpty and [["_cc]] or "i")
 end, { expr = true, desc = "indented i on empty line" })
 
 -- VISUAL MODE
@@ -231,6 +231,7 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
 keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
 keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
+
 -- stylua: ignore start
 keymap("n", "<leader>il", function() require("personal-plugins.inspect-and-eval").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
 keymap("n", "<leader>in", function() require("personal-plugins.inspect-and-eval").nodeAtCursor() end, { desc = " Node at cursor" })

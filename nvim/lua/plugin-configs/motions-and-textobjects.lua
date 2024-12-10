@@ -36,7 +36,9 @@ return {
 			textobjects = {
 				select = {
 					lookahead = true,
-					include_surrounding_whitespace = false, -- `true` breaks my comment textobj mappings
+					-- `true` would even remove line breaks from charwise objects,
+					-- thus staying with `false`
+					include_surrounding_whitespace = false,
 				},
 			},
 		},
@@ -48,16 +50,19 @@ return {
 				mode = "o", -- only operator-pending to not conflict with selection-commenting
 				desc = "󰆈 Single comment",
 			},
-			-- {
-			-- 	"dq",
-			-- 	function()
-			-- 		vim.cmd.TSTextobjectSelect("@comment.outer")
-			-- 		vim.cmd.normal { "d", bang = true }
-			-- 		local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
-			-- 		vim.api.nvim_set_current_line(trimmedLine)
-			-- 	end,
-			-- 	desc = "󰆈 Delete comment",
-			-- },
+			{
+				"dq",
+				function()
+					-- make it sticky & trim leftover space
+					local cursorBefore = vim.api.nvim_win_get_cursor(0)
+					vim.cmd.TSTextobjectSelect("@comment.outer")
+					vim.cmd.normal { "d", bang = true }
+					local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
+					vim.api.nvim_set_current_line(trimmedLine)
+					vim.api.nvim_win_set_cursor(0, cursorBefore)
+				end,
+				desc = "󰆈 Delete comment",
+			},
 			{
 				"cq",
 				function()
