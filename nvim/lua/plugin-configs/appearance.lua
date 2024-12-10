@@ -20,15 +20,11 @@ return {
 		event = "VeryLazy",
 		init = function()
 			vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-				desc = "User: Define `SatelliteQuickfix` hlgroup",
+				desc = "User: Change `SatelliteQuickfix` color",
 				callback = function()
 					vim.api.nvim_set_hl(0, "SatelliteQuickfix", { link = "DiagnosticSignInfo" })
 				end,
 			})
-		end,
-		config = function(_, opts)
-			require("satellite").setup(opts)
-			require("personal-plugins.functions-in-scrollbar")
 		end,
 		opts = {
 			winblend = 10, -- only little transparency, since otherwise hard to see in some themes
@@ -228,7 +224,7 @@ return {
 		"echasnovski/mini.icons",
 		opts = {
 			file = {
-				["init.lua"] = { glyph = "󰢱" }, -- no nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
+				["init.lua"] = { glyph = "󰢱" }, -- disable nvim glyph: https://github.com/echasnovski/mini.nvim/issues/1384
 				["README.md"] = { glyph = "" },
 				[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 				["pre-commit"] = { glyph = "󰊢" },
@@ -241,7 +237,6 @@ return {
 				["css"] = { hl = "MiniIconsRed" },
 				["typescript"] = { hl = "MiniIconsCyan" },
 				["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
-				["help"] = { glyph = "󰮥" }, -- vimdocs
 			},
 		},
 		config = function(_, opts)
