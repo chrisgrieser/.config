@@ -136,7 +136,7 @@ return {
 			{ "k", "<cmd>lua require('various-textobjs').anyQuote('inner')<CR>", mode = "o", desc = " inner-quote (any)" },
 			{ "K", "<cmd>lua require('various-textobjs').anyQuote('outer')<CR>", mode = "o", desc = " outer-quote (any)" },
 
-			-- INFO not setting these in visual mode, to keep visual block mode replace
+			-- not setting these in visual mode, to keep visual block mode replace
 			{ "rp", "<cmd>lua require('various-textobjs').restOfParagraph()<CR>", mode = "o", desc = "¶ rest of paragraph" },
 			{ "ri", "<cmd>lua require('various-textobjs').restOfIndentation()<CR>", mode = "o", desc = "󰉶 rest of indentation" },
 			{ "rg", "G", mode = "o", desc = " rest of buffer" },
