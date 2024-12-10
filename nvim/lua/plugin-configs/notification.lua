@@ -217,10 +217,6 @@ return {
 				modes = { "n" },
 				debounce = 300,
 			},
-			input = {
-				enables = false, -- TODO
-				icon = " ",
-			},
 			win = {
 				border = vim.g.borderStyle,
 				bo = { modifiable = false },
@@ -236,19 +232,6 @@ return {
 				top_down = false,
 			},
 			styles = {
-				input = {
-					backdrop = true,
-					border = vim.g.borderStyle,
-					title_pos = "left",
-					height = 1,
-					width = 60,
-					relative = "editor",
-					row = math.ceil(vim.o.lines / 2) + 3,
-					keys = {
-						i_esc = { "<esc>", "stopinsert", mode = "i" },
-						q = "cancel",
-					},
-				},
 				notification = {
 					border = vim.g.borderStyle,
 					wo = { cursorline = false, winblend = 0, wrap = true },
