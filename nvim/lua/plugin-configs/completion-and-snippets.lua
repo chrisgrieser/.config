@@ -62,6 +62,15 @@ return {
 				["<PageUp>"] = { "scroll_documentation_up" },
 			},
 			completion = {
+				keyword = {
+					range = "prefix", -- prefix|full
+					regex = [[_\|\w]], -- do not trigger on stuff like `-`
+				},
+				trigger = {
+					-- add `-` as blocked trigger character, to prevent `lua_ls`'s
+					-- `--#region` suggestions
+					show_on_blocked_trigger_characters = { ' ', '\n', '\t', "-" },
+				},
 				list = {
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				},

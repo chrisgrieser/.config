@@ -10,27 +10,42 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 --------------------------------------------------------------------------------
+-- STICKY YANK/DELETE
 
--- STICKY YANK
-local cursorPreYank
-keymap({ "n", "x" }, "y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y"
-end, { expr = true })
-keymap("n", "Y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
-	return "y$"
-end, { expr = true, unique = false })
+do
+	local cursorBefore
+	keymap({ "n", "x" }, "y", function()
+		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		return "y"
+	end, { expr = true })
+	keymap("n", "d", function()
+		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		return "d"
+	end, { expr = true })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "User: Sticky yank",
-	callback = function()
-		if vim.v.event.regname == "z" then return end -- used as temp register for some keymaps
-		if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
-	end,
-})
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		desc = "User: Sticky yank",
+		callback = function()
+			if vim.v.event.regname == "z" then return end -- temp register for some keymaps
 
+			if vim.v.event.operator == "y" then
+				vim.api.nvim_win_set_cursor(0, cursorBefore)
+
+			elseif vim.v.event.operator == "d" then
+				local cursorNow = vim.api.nvim_win_get_cursor(0)
+				local cursorWasInFront = cursorNow[1] > cursorBefore[1]
+					or (cursorNow[1] == cursorBefore[1] and cursorNow[2] > cursorBefore[2])
+				if not cursorWasInFront then return end
+
+				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
+			end
+		end,
+	})
+end
+
+--------------------------------------------------------------------------------
 -- KEEP THE REGISTER CLEAN
+
 keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
@@ -92,8 +107,6 @@ keymap("n", "<leader>y:", function()
 	vim.fn.setreg("+", lastCmd)
 	vim.notify(lastCmd, nil, { title = "Copied", icon = "󰅍" })
 end, { desc = "󰘳 Last :excmd" })
-
---------------------------------------------------------------------------------
 
 keymap("n", "<leader>yf", function()
 	if jit.os ~= "OSX" then
