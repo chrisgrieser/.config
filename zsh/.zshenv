@@ -22,8 +22,8 @@ export PASSWORD_STORE_CHARACTER_SET="[:alnum:]" # many services break with speci
 alias pass="env NO_PLUGINS=true pass" # disable plugins in `nvim` when using `pass`
 
 # NPM / NODE
-# do not crowd `$HOME`. (Set in .zshenv, so it's also applied to Neovide.)
+# do not crowd `$HOME` (set in .zshenv, so it's also applied to Neovide)
 export npm_config_cache="$HOME/.cache/npm"
 
-# FIX PENDING https://github.com/debug-js/debug/issues/975
+# PENDING 23.4.0 https://github.com/debug-js/debug/issues/975#issuecomment-2532606363
 export NODE_OPTIONS="--disable-warning=ExperimentalWarning"

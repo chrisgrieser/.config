@@ -212,6 +212,9 @@ return {
 			-- stylua: ignore end
 		},
 		opts = {
+			indent = {
+				char = "│",
+			},
 			words = {
 				notify_jump = true,
 				modes = { "n" },

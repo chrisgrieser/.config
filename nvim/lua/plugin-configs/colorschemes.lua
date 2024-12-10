@@ -86,7 +86,6 @@ local themes = {
 		-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
-		enabled = false,
 		opacity = 0.91,
 		opts = {
 			style = "moon",

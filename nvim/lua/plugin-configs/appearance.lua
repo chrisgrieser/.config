@@ -1,20 +1,4 @@
 return {
-	{ -- indentation guides
-		"lukas-reineke/indent-blankline.nvim",
-		event = "UIEnter",
-		main = "ibl",
-		opts = {
-			scope = {
-				highlight = "Comment",
-				show_start = false,
-				show_end = false,
-			},
-			indent = {
-				char = { "│", "┊" },
-				tab_char = { "│", "┊" },
-			},
-		},
-	},
 	{ -- scrollbar with information
 		"lewis6991/satellite.nvim",
 		event = "VeryLazy",
