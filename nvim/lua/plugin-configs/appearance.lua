@@ -172,6 +172,8 @@ return {
 						["q"] = "Close",
 						["<Up>"] = "HistoryPrev",
 						["<Down>"] = "HistoryNext",
+						-- prevent accidental closing due <BS> being mapped to :bprev
+						["<BS>"] = "<Nop>",
 					},
 				},
 			},
