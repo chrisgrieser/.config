@@ -243,7 +243,7 @@ keymap("n", "<leader>er", function() require("personal-plugins.inspect-and-eval"
 --------------------------------------------------------------------------------
 -- WINDOWS
 keymap(
-	{ "n", "x", "i" },
+	{ "n", "v", "i" },
 	"<C-CR>",
 	function() vim.cmd.wincmd("w") end,
 	{ desc = " Cycle windows" }
@@ -322,17 +322,19 @@ keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").o
 --------------------------------------------------------------------------------
 -- MACROS
 
-local register = "r"
-local toggleKey = "0"
-keymap(
-	"n",
-	toggleKey,
-	function() require("personal-plugins.misc").startOrStopRecording(toggleKey, register) end,
-	{ desc = "󰃽 Start/stop recording" }
-)
--- stylua: ignore
-keymap("n", "c0", function() require("personal-plugins.misc").editMacro(register) end, { desc = "󰃽 Edit recording" })
-keymap("n", "9", "@" .. register, { desc = "󰃽 Play recording" })
+do
+	local reg = "r"
+	local toggleKey = "0"
+	keymap(
+		"n",
+		toggleKey,
+		function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end,
+		{ desc = "󰃽 Start/stop recording" }
+	)
+	-- stylua: ignore
+	keymap("n", "c0", function() require("personal-plugins.misc").editMacro(reg) end, { desc = "󰃽 Edit recording" })
+	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
+end
 
 --------------------------------------------------------------------------------
 -- REFACTORING
