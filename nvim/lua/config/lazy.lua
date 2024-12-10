@@ -19,7 +19,7 @@ require("lazy").setup {
 	spec = { import = "plugin-configs" }, -- = use specs stored in `./lua/plugins`
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-	dev = { ---@diagnostic disable-line: assign-type-mismatch faulty annotation
+	dev = {
 		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -91,7 +91,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype == "help" then
-			-- inerihit the settings from help files
+			-- inerihit the config of help files
 			vim.cmd.source(vim.fn.stdpath("config") .. "/after/ftplugin/help.lua")
 		end
 	end,
