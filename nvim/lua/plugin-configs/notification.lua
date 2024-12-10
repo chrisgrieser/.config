@@ -89,6 +89,50 @@ end
 
 --------------------------------------------------------------------------------
 
+-- DOCS https://github.com/folke/noice.nvim#-routes
+local routes = {
+	-- write/deletion messages
+	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+
+	-- gitsigns.nvim
+	{ filter = { event = "msg_show", find = "^Hunk %d+ of %d+" }, view = "mini" },
+	{ filter = { event = "msg_show", find = "^No hunks$" }, view = "mini" },
+
+	-- nvim-treesitter
+	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
+
+	{ -- mason.nvim
+		filter = {
+			event = "notify",
+			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
+		},
+		view = "mini",
+	},
+	-- word added to spellfile via `zg`
+	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+	--------------------------------------------------------------------
+
+	-- search
+	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+
+	-- FIX https://github.com/artempyanykh/marksman/issues/348
+	{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
+
+	-- PENDING vim 0.10.3 https://github.com/neovim/neovim/issues/30675#issuecomment-2481386623
+	{ filter = { event = "notify", find = "semantic_tokens.lua:149: index out of range" }, skip = true },
+
+	-- code actions
+	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+
+	-- unneeded info on search patterns when pattern not found
+	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+}
+
+--------------------------------------------------------------------------------
+
 return {
 	{ -- Message & command system overhaul
 		"folke/noice.nvim",
@@ -146,44 +190,7 @@ return {
 					},
 				},
 			},
-			routes = {
-				-- DOCS https://github.com/folke/noice.nvim#-routes
-				-- write/deletion messages
-				{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
-
-				-- gitsigns.nvim
-				{ filter = { event = "msg_show", find = "^Hunk %d+ of %d+" }, view = "mini" },
-				{ filter = { event = "msg_show", find = "^No hunks$" }, view = "mini" },
-
-				-- nvim-treesitter
-				{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-				{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
-
-				{ -- mason.nvim
-					filter = {
-						event = "notify",
-						cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
-					},
-					view = "mini",
-				},
-				-- word added to spellfile via `zg`
-				{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-				--------------------------------------------------------------------
-
-				-- search
-				{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
-				-- FIX https://github.com/artempyanykh/marksman/issues/348
-				{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
-
-				-- code actions
-				{ filter = { event = "notify", find = "No code actions available" }, skip = true },
-
-				-- unneeded info on search patterns when pattern not found
-				{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-			},
+			routes = routes,
 			lsp = {
 				progress = { enabled = false }, -- using my own
 				signature = { enabled = false }, -- using lsp_signature.nvim

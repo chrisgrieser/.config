@@ -394,6 +394,7 @@ return {
 				end
 				require("telescope.builtin").help_tags { default_text = prefill }
 			end,
+			mode = { "n", "x" },
 			desc = " Vim help",
 		},
 

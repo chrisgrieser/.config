@@ -91,8 +91,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype == "help" then
-			vim.keymap.set("n", "q", vim.cmd.bdelete, { buffer = ctx.buf, nowait = true })
-			vim.diagnostic.enable(false, { bufnr = ctx.buf })
+			-- inerihit the settings from help files
+			vim.cmd.source(vim.fn.stdpath("config") .. "/after/ftplugin/help.lua")
 		end
 	end,
 })
