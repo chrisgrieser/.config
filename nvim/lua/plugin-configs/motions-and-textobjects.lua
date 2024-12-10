@@ -188,6 +188,15 @@ return {
 				end,
 				desc = "󰉶 Indent last paste",
 			},
+			{ -- dedent last paste (if showing up falsely in whichkey, disable `maplocalleader`)
+				"\\", -- shift-^ on my keyboard
+				function()
+					require("various-textobjs").lastChange()
+					local changeFound = vim.fn.mode() == "v"
+					if changeFound then vim.cmd.normal { "<", bang = true } end
+				end,
+				desc = "󰉵 Dedent last paste",
+			},
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
@@ -234,12 +243,14 @@ return {
 				"gx",
 				function()
 					require("various-textobjs").url()
+					local cursorBefore = vim.api.nvim_win_get_cursor(0)
 					local foundURL = vim.fn.mode() == "v"
-					if foundURL then
-						vim.cmd.normal { '"zy', bang = true }
-						local url = vim.fn.getreg("z")
-						vim.ui.open(url)
-					end
+					if not foundURL then return end
+
+					vim.cmd.normal { '"zy', bang = true }
+					local url = vim.fn.getreg("z")
+					vim.ui.open(url)
+					vim.api.nvim_win_set_cursor(0, cursorBefore)
 				end,
 				desc = " Open next URL",
 			},

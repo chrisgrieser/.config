@@ -13,6 +13,7 @@ end, 1)
 
 -- CONFIG
 vim.g.mapleader = ","
+vim.g.maplocalleader = "<Nop>" -- disable `\` being default local leader
 vim.g.borderStyle = "single" ---@type "single"|"double"|"rounded"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 

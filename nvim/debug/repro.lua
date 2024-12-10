@@ -3,9 +3,8 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		lazy = true,
+		"folke/which-key.nvim",
+		opts = { debug = true }
 	},
 }
 
