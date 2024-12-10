@@ -123,6 +123,7 @@ local pluginTypeIcons = {
 	["mason"] = "",
 	["motions-and-textobjects"] = "󱡔",
 	["notification"] = "󰎟",
+	["snacks"] = "󰉚",
 	["refactoring"] = "󱗘",
 	["task-and-file-utilities"] = "󰈔",
 	["telescope"] = "󰭎",

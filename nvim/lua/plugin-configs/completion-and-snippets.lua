@@ -12,6 +12,11 @@ return {
 		---@module "blink.cmp"
 		---@type blink.cmp.Config
 		opts = {
+			enabled = function()
+				if vim.bo.buftype == "prompt" then return false end
+				local ignoredFts = { "DressingInput", "snacks_win" }
+				return not vim.tbl_contains(ignoredFts, vim.bo.filetype)
+			end,
 			sources = {
 				providers = {
 					snippets = {
@@ -69,7 +74,7 @@ return {
 				trigger = {
 					-- add `-` as blocked trigger character, to prevent `lua_ls`'s
 					-- `--#region` suggestions
-					show_on_blocked_trigger_characters = { ' ', '\n', '\t', "-" },
+					show_on_blocked_trigger_characters = { " ", "\n", "\t", "-" },
 				},
 				list = {
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
