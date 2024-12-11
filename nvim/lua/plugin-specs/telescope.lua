@@ -395,7 +395,7 @@ return {
 				require("telescope.builtin").help_tags { default_text = prefill }
 			end,
 			mode = { "n", "x" },
-			desc = " Vim help",
+			desc = "󰋖 Vim help",
 		},
 
 		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
@@ -419,6 +419,17 @@ return {
 				require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") }
 			end,
 			desc = "󰭎 Live grep cword",
+		},
+
+		{
+			"gp",
+			function()
+				require("telescope.builtin").find_files {
+					prompt_title = "󰈮 Local plugins",
+					cwd = vim.fn.stdpath("data") .. "/lazy",
+				}
+			end,
+			desc = "󰭎 Local plugin code",
 		},
 
 		{

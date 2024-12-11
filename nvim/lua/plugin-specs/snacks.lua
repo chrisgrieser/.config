@@ -132,7 +132,9 @@ return { -- mostly used for its notifications
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 2,
 				keys = {
-					i_esc = { "<esc>", "stopinsert", mode = "i" },
+					i_esc = { "<Esc>", "stopinsert", mode = "i" },
+					-- prevent accidental closing due <BS> being mapped to :bprev
+					BS = { "<BS>", "<Nop>", mode = "n" },
 				},
 			},
 			notification = {
