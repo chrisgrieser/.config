@@ -56,7 +56,7 @@ noremap ,ya :copyAbsolutePath<CR>
 noremap ,yr :copyRelativePath<CR>
 noremap ,yp :copyParentPath<CR>
 noremap ,yn :copyFilename<CR>
-noremap <C-o> :copyObsidianUriMdLink<CR>
+noremap ,yo :copyObsidianUriMdLink<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " NAVIGATION
@@ -277,7 +277,7 @@ nnoremap Q :appendJsComment<CR>
 
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
-nnoremap ,xx :checkList<CR>
+nnoremap ,x :checkList<CR>
 
 " Uncheck markdown tasks
 nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>

@@ -164,6 +164,7 @@ style = "bold yellow"
 style = "bold yellow"
 format = ' [$symbol$version]($style)'
 version_format = "$major.$minor"
+symbol = "󰎙 "
 # disabled detecting via extensions; detect only via `package.json` or
 # `node_modules` to avoid false positives for stuff like Alfred workflows
 detect_extensions = []
