@@ -65,11 +65,10 @@ function M.closeBuffer()
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
----@param maxLength? number defaults to 30
 ---@return string
 ---@nodiscard
-function M.altFileStatusbar(maxLength)
-	maxLength = type(maxLength) == "number" and maxLength or 30
+function M.altFileStatusbar()
+	local maxLength = 30 -- CONFIG
 	local icon, name = "#", "[unknown]"
 	local altOld = altOldfile()
 
@@ -77,7 +76,7 @@ function M.altFileStatusbar(maxLength)
 		local altBufNr = vim.fn.bufnr("#")
 		local altPath = vim.api.nvim_buf_get_name(altBufNr)
 		local altFile = vim.fs.basename(altPath)
-		name = altFile ~= "" and altFile or "[No Name]"
+		name = altFile ~= "" and altFile or "[no name]"
 		-- icon
 		local ok, devicons = pcall(require, "nvim-web-devicons")
 		if ok and devicons then

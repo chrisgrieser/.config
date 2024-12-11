@@ -123,7 +123,7 @@ return { -- mostly used for its notifications
 			sort = { "added" }, -- sort only by time
 			width = { min = 12, max = 0.5 },
 			height = { min = 1, max = 0.5 },
-			icons = { error = "", warn = "", info = "", debug = "", trace = "󰓘" },
+			icons = { error = "󰅚", warn = "", info = "󰋽", debug = "", trace = "󰓘" },
 			top_down = false,
 		},
 		input = {
