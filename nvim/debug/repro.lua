@@ -3,8 +3,8 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"folke/which-key.nvim",
-		opts = { debug = true }
+		"folke/snacks.nvim",
+		input = { enabled = true },
 	},
 }
 
