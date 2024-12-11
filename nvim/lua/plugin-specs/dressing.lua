@@ -26,9 +26,7 @@ return {
 			prefer_width = 50,
 			min_width = { 20, 0.4 },
 			max_width = { 80, 0.8 },
-			win_options = {
-				statuscolumn = " ", -- padding fix
-			},
+			win_options = { statuscolumn = " " }, -- padding fix PENDING https://github.com/stevearc/dressing.nvim/pull/185
 			mappings = {
 				n = {
 					["q"] = "Close",

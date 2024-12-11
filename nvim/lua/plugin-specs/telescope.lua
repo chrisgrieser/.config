@@ -22,6 +22,42 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal sidescrolloff=1",
 })
 
+local function toggleHiddenFileSearch(promptBufnr)
+	local current_picker = require("telescope.actions.state").get_current_picker(promptBufnr)
+	local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+
+	local prevTitle = current_picker.prompt_title
+	local title
+	local currentQuery = require("telescope.actions.state").get_current_line()
+	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
+	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
+
+	-- hidden status not stored, but title is, so using it to determine previous state
+	local includeIgnoreHidden = not prevTitle:find("hidden")
+	if includeIgnoreHidden then
+		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
+		-- cannot simply toggle `hidden` since we are using `rg` as custom find command
+		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
+		title = prevTitle .. " (--hidden --no-ignore)"
+	else
+		title = prevTitle:gsub(" ?%b()$", "")
+	end
+
+	-- ignore the existing current path due to using `rg --sortr=modified`
+	local relPathCurrent = table.remove(current_picker.file_ignore_patterns)
+	table.insert(ignore, relPathCurrent)
+
+	require("telescope.actions").close(promptBufnr)
+	require("telescope.builtin").find_files {
+		default_text = currentQuery,
+		prompt_title = title,
+		find_command = findCommand,
+		cwd = cwd,
+		file_ignore_patterns = ignore,
+		path_display = { "filename_first" },
+	}
+end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -51,7 +87,7 @@ return {
 						["<S-Tab>"] = "move_selection_better",
 						["<D-Up>"] = "move_to_top",
 						["<CR>"] = "select_default",
-						["<Esc>"] = "close", -- effectively disables normal mode for Telescope
+						["<Esc>"] = "close", -- = disables normal mode for Telescope
 
 						["<PageDown>"] = "preview_scrolling_down",
 						["<PageUp>"] = "preview_scrolling_up",
@@ -129,51 +165,7 @@ return {
 					previewer = false,
 					follow = true,
 					mappings = {
-						i = {
-							["<C-h>"] = function(promptBufnr)
-								local current_picker =
-									require("telescope.actions.state").get_current_picker(promptBufnr)
-								local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
-
-								local prevTitle = current_picker.prompt_title
-								local currentQuery = require("telescope.actions.state").get_current_line()
-								local title = "󰝰 Find files: " .. vim.fs.basename(cwd)
-								local ignore = vim.deepcopy(
-									require("telescope.config").values.file_ignore_patterns or {}
-								)
-								local findCommand =
-									vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
-
-								-- hidden status not stored, but title is, so we determine the previous state via title
-								local includeIgnoreHidden = not prevTitle:find("hidden")
-								if includeIgnoreHidden then
-									vim.list_extend(
-										ignore,
-										{ "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" }
-									)
-									-- cannot simply toggle `hidden` since we are using `rg` as custom find command
-									vim.list_extend(
-										findCommand,
-										{ "--hidden", "--no-ignore", "--no-ignore-files" }
-									)
-									title = title .. " (--hidden --no-ignore)"
-								end
-
-								-- ignore the existing current path due to using `rg --sortr=modified`
-								local relPathCurrent = table.remove(current_picker.file_ignore_patterns)
-								table.insert(ignore, relPathCurrent)
-
-								require("telescope.actions").close(promptBufnr)
-								require("telescope.builtin").find_files {
-									default_text = currentQuery,
-									prompt_title = title,
-									find_command = findCommand,
-									cwd = cwd,
-									file_ignore_patterns = ignore,
-									path_display = { "filename_first" },
-								}
-							end,
-						},
+						i = { ["<C-h>"] = toggleHiddenFileSearch },
 					},
 				},
 				oldfiles = {
@@ -430,6 +422,16 @@ return {
 				}
 			end,
 			desc = "󰭎 Local plugin code",
+		},
+		{
+			"g,",
+			function()
+				require("telescope.builtin").find_files {
+					prompt_title = " nvim config",
+					cwd = vim.fn.stdpath("config"),
+				}
+			end,
+			desc = " nvim config",
 		},
 
 		{

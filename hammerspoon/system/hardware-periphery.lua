@@ -68,6 +68,7 @@ M.timer_dailyBatteryCheck = hs.timer
 				local msg = ("🔋 %s Battery low (%s)"):format(d.Product, d.BatteryPercent)
 				u.notify(msg)
 				createReminder(msg)
+				hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
 			end
 		end
 	end, true)
