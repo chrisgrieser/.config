@@ -427,6 +427,7 @@ return {
 				require("telescope.builtin").find_files {
 					prompt_title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
+					file_ignore_patterns = { "/tests/", "/doc/", "%.toml$" },
 				}
 			end,
 			desc = "󰭎 Local plugin code",

@@ -14,7 +14,7 @@ return {
 		opts = {
 			enabled = function()
 				if vim.bo.buftype == "prompt" then return false end
-				local ignoredFts = { "DressingInput", "snacks_win" }
+				local ignoredFts = { "DressingInput", "snacks_win", "rip-substitute" }
 				return not vim.tbl_contains(ignoredFts, vim.bo.filetype)
 			end,
 			sources = {
