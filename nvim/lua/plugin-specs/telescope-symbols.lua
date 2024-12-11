@@ -11,7 +11,7 @@ return {
 					layout_config = { horizontal = { width = 0.35 } },
 				}
 			end,
-			desc = "󰭎 Icon Picker",
+			desc = "󱗿 Icon Picker",
 		},
 	},
 }
