@@ -6,22 +6,6 @@ return { -- icon library
 			["README.md"] = { glyph = "" },
 			[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 			["pre-commit"] = { glyph = "󰊢" },
-
-			-- frequently accessed plugin spec files
-			["blink-cmp.lua"] = { glyph = "󰢱 󰈈" },
-			["colorschemes.lua"] = { glyph = "󰢱 " },
-			["gitsigns.lua"] = { glyph = "󰢱 󰊢" },
-			["lualine.lua"] = { glyph = "󰢱 ━" },
-			["mason.lua"] = { glyph = "󰢱 " },
-			["mini-icons.lua"] = { glyph = "󰢱 󱗿" },
-			["noice.lua"] = { glyph = "󰢱 󰎟" },
-			["scissors.lua"] = { glyph = "󰢱 󰩫" },
-			["snacks.lua"] = { glyph = "󰢱 󰉚" },
-			["telescope.lua"] = { glyph = "󰢱 󰭎" },
-			["tinygit.lua"] = { glyph = "󰢱 󰊢" },
-			["treesitter-textobjects.lua"] = { glyph = "󰢱 󱡔" },
-			["various-textobjs.lua"] = { glyph = "󰢱 󰠱" },
-			["which-key.lua"] = { glyph = "󰢱 ⌨️" },
 		},
 		extension = {
 			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
@@ -29,7 +13,7 @@ return { -- icon library
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 		},
 		filetype = {
-			["css"] = { hl = "MiniIconsRed" },
+			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
 		},
