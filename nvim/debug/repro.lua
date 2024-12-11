@@ -4,7 +4,9 @@
 local spec = {
 	{
 		"folke/snacks.nvim",
-		input = { enabled = true },
+		opts = {
+			input = { enabled = true },
+		},
 	},
 }
 
