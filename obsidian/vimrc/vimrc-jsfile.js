@@ -197,6 +197,7 @@ function smartMerge() {
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
 	const curLineCleaned = curLine.replace(/ +$/, ""); // trim trailing spaces
+
 	const nextLineCleaned = nextLine
 		.replace(/^\s*- \[[x ]\] /, "") // task
 		.replace(/^\s*[-*+] /, "") // unordered list
@@ -296,8 +297,8 @@ function openNextLink(where) {
 		_setCursorAndAddToJumplist(editor, cursor, linkPosition);
 	}
 
-	const commandId = where === "new-tab" ? "editor:open-link-in-new-leaf" : "editor:follow-link";
-	view.app.commands.executeCommandById(commandId);
+	const commandId = where === "new-tab" ? "open-link-in-new-leaf" : "follow-link";
+	view.app.commands.executeCommandById("editor:" + commandId);
 }
 
 /** For use with the rephraser-action from the "Writing Assistant" Alfred
@@ -389,7 +390,6 @@ function hiraganafyCword() {
 	cursor.ch = to.ch - (cword.length - hiragana.length) - 1;
 	editor.setCursor(cursor);
 }
-
 
 //──────────────────────────────────────────────────────────────────────────────
 

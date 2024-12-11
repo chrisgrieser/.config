@@ -2,5 +2,5 @@ set quiet := true
 
 [macos]
 reload:
-    # requires custom plugin adding this URI
+    # requires custom plugin adding that URI
     open "obsidian://reload-vault"

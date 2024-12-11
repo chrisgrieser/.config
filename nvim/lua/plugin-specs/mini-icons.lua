@@ -11,6 +11,7 @@ return { -- icon library
 			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
 			["applescript"] = { glyph = "󰀵", hl = "MiniIconsGrey" },
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
+			["gitignore"] = { glyph = "" },
 		},
 		filetype = {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },

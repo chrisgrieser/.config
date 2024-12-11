@@ -19,7 +19,7 @@ function run(argv) {
 		const curlCmd = `curl -X POST https://graphql.anilist.co -H "Content-Type: application/json" -d '${graphql}'`;
 		const response = JSON.parse(app.doShellScript(curlCmd));
 
-		const error = response.errors[0].message;
+		const error = response?.errors?.[0]?.message;
 		if (error) return error + " (Some MAL entries are not available on AniList.)";
 		const url = response?.data?.Media?.siteUrl;
 		if (!url) return "Unknown error.";

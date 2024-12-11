@@ -70,7 +70,7 @@ bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decr
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Tasks
-bkeymap("n", "<leader>xx", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
+bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
 
 -- Format Table
 bkeymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
