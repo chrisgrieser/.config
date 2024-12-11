@@ -6,11 +6,12 @@ return {
 			require("lazy").load { plugins = { spec.name } }
 			return vim.ui.select(items, opts, on_choice)
 		end
-		---@diagnostic disable-next-line: duplicate-set-field -- intentional
-		vim.ui.input = function(opts, on_choice)
-			require("lazy").load { plugins = { spec.name } }
-			return vim.ui.input(opts, on_choice)
-		end
+	end,
+	config = function(_, opts) 
+		require("dressing").setup(opts)
+		-- use `snacks` for input, but do not disable `dressing`'s `input` since
+		-- it's still needed for genghis
+		vim.ui.input = require("snacks").input
 	end,
 	keys = {
 		{ "<Tab>", "j", ft = "DressingSelect" },
@@ -18,7 +19,6 @@ return {
 	},
 	opts = {
 		input = {
-			enabled = true,
 			start_mode = "insert",
 			trim_prompt = true,
 			border = vim.g.borderStyle,

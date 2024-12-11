@@ -29,7 +29,7 @@ return {
 			-- stylua: ignore
 			ignore_focus = {
 				"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt",
-				"checkhealth", "mason", "qf", "lazy",
+				"checkhealth", "mason", "qf", "lazy", "snacks_win"
 			},
 		},
 		tabline = {
@@ -67,8 +67,9 @@ return {
 				{ -- file name & icon (my own variant)
 					function()
 						local maxLength = 30
-						local path = vim.api.nvim_buf_get_name(0)
-						local name = vim.fs.basename(path ~= "" and path or vim.bo.ft)
+						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						if name == "" then name = vim.bo.ft end
+						if name == "" then name = "---" end
 						local displayName = #name < maxLength and name
 							or vim.trim(name:sub(1, maxLength)) .. "…"
 
