@@ -9,12 +9,12 @@ return { -- icon library
 
 			-- frequently accessed plugin spec files
 			["blink-cmp.lua"] = { glyph = "󰢱 󰩫" },
-			["colorschemes.lua"] = { glyph = "󰢱 " },
+			["colorschemes.lua"] = { glyph = "󰢱 " },
 			["gitsigns.lua"] = { glyph = "󰢱 󰊢" },
-			["lualine.lua"] = { glyph = "󰢱 ▭" },
+			["lualine.lua"] = { glyph = "󰢱 ━" },
 			["mason.lua"] = { glyph = "󰢱 " },
-			["mini-icons.lua"] = { glyph = "󰢱 " },
-			["various-textobjs.lua"] = { glyph = "󰢱 󱡔" },
+			["mini-icons.lua"] = { glyph = "󰢱 󱗿" },
+			["various-textobjs.lua"] = { glyph = "󰢱 󰠱" },
 			["treesitter-textobjects.lua"] = { glyph = "󰢱 󱡔" },
 			["noice.lua"] = { glyph = "󰢱 󰎟" },
 			["scissors.lua"] = { glyph = "󰢱 󰩫" },

@@ -283,20 +283,14 @@ M.serverConfigs.yamlls = {
 -- DOCS of the original https://valentjn.github.io/ltex/settings.html
 -- DOCS of the fork https://ltex-plus.github.io/ltex-plus/settings.html
 M.serverConfigs.ltex_plus = {
-	filetypes = { "markdown" }, -- not in `.txt` files, as those are used by `pass`
+	filetypes = { "markdown", "text" },
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
-				-- HACK since reading external file with the method described in ltex-docs[^1] does not work
-				-- [^1]: https://valentjn.github.io/ltex/vscode-ltex/setting-scopes-files.html#external-setting-files
-				["en-US"] = (function()
-					local words = {}
-					for word in io.lines(vim.o.spellfile) do
-						table.insert(words, word)
-					end
-					return words
-				end)(),
+				-- HACK since reading external file does not work https://github.com/ltex-plus/ltex-ls-plus/issues/56
+				-- ["en-US"] = {":" .. vim.o.spellfile },
+				["en-US"] = vim.iter(io.lines(vim.o.spellfile)):totable()
 			},
 
 			diagnosticSeverity = { default = "info" },
