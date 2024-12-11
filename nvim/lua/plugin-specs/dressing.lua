@@ -7,7 +7,7 @@ return {
 			return vim.ui.select(items, opts, on_choice)
 		end
 	end,
-	config = function(_, opts) 
+	config = function(_, opts)
 		require("dressing").setup(opts)
 		-- use `snacks` for input, but do not disable `dressing`'s `input` since
 		-- it's still needed for genghis
@@ -26,6 +26,9 @@ return {
 			prefer_width = 50,
 			min_width = { 20, 0.4 },
 			max_width = { 80, 0.8 },
+			win_options = {
+				statuscolumn = " ", -- padding fix
+			},
 			mappings = {
 				n = {
 					["q"] = "Close",

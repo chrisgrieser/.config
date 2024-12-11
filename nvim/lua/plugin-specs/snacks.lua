@@ -128,8 +128,8 @@ return { -- mostly used for its notifications
 			top_down = false,
 		},
 		input = {
-			enabled = true, -- TODO need to fix `:` and padding first
-			icon = "",
+			-- icon = "",
+			enabled = true,
 		},
 		styles = {
 			input = {
@@ -139,6 +139,9 @@ return { -- mostly used for its notifications
 				height = 1,
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 2,
+				wo = {
+					cursorline = false,
+				},
 				keys = {
 					i_esc = { "<Esc>", "stopinsert", mode = "i" },
 					-- prevent accidental closing due <BS> being mapped to :bprev
