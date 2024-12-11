@@ -6,23 +6,13 @@ return {
 			require("lazy").load { plugins = { spec.name } }
 			return vim.ui.select(items, opts, on_choice)
 		end
-
-
-		--------------------------------------------------------------------------
-
-		-- PENDING https://github.com/folke/snacks.nvim/issues/257
-		---@diagnostic disable-next-line: duplicate-set-field -- intentional
-		vim.ui.input = function(items, opts, on_choice)
-			require("lazy").load { plugins = { spec.name } }
-			return vim.ui.input(items, opts, on_choice)
-		end
 	end,
-	-- config = function(_, opts)
-	-- 	require("dressing").setup(opts)
-	-- 	-- use `snacks` for input, but do not disable `dressing`'s `input` since
-	-- 	-- it's still needed for genghis
-	-- 	vim.ui.input = require("snacks").input
-	-- end,
+	config = function(_, opts)
+		require("dressing").setup(opts)
+		-- use `snacks` for input, but do not disable `dressing`'s `input` since
+		-- it's still needed for genghis
+		vim.ui.input = require("snacks").input
+	end,
 
 	-----------------------------------------------------------------------------
 

@@ -128,7 +128,6 @@ return { -- mostly used for its notifications
 			top_down = false,
 		},
 		input = {
-			enabled = false, -- PENDING https://github.com/folke/snacks.nvim/issues/257
 			icon = "",
 		},
 		styles = {
