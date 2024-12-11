@@ -103,12 +103,15 @@ return { -- mostly used for its notifications
 	},
 	opts = {
 		dim = {
-			scope = { min_size = 7, max_size = 20 },
+			scope = { min_size = 5, max_size = 20 },
 		},
 		indent = {
 			char = "│",
 			scope = { hl = "Comment" },
-			chunk = { enabled = false },
+			chunk = {
+				enabled = false,
+				hl = "Comment",
+			},
 		},
 		words = {
 			notify_jump = true,
@@ -136,7 +139,7 @@ return { -- mostly used for its notifications
 				border = vim.g.borderStyle,
 				title_pos = "left",
 				width = 50,
-				row = math.ceil(vim.o.lines / 2) - 2,
+				row = math.ceil(vim.o.lines / 2) - 3,
 				keys = {
 					i_esc = { "<Esc>", "stopinsert", mode = "i" },
 					-- prevent accidental closing due to <BS> being mapped to `:bprev`
