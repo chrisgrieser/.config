@@ -58,8 +58,10 @@ local function openNotif(idx)
 		wo = { ---@diagnostic disable-line: missing-fields -- faulty annotation
 			winhighlight = table.concat(highlights, ","),
 			wrap = true, -- only one message, so use full space
-			statuscolumn = " ", -- just adds padding
+			statuscolumn = " ", -- adds padding
+			cursorline = true,
 		},
+		bo = { modifiable = false }, ---@diagnostic disable-line: missing-fields
 		keys = {
 			["<Tab>"] = function()
 				if idx == #history then return end
@@ -115,8 +117,6 @@ return { -- mostly used for its notifications
 		},
 		win = {
 			border = vim.g.borderStyle,
-			bo = { modifiable = false },
-			wo = { cursorline = true, colorcolumn = "", winfixbuf = true },
 			keys = { q = "close", ["<Esc>"] = "close", ["<D-9>"] = "close", ["<D-0>"] = "close" },
 		},
 		notifier = {
@@ -135,12 +135,8 @@ return { -- mostly used for its notifications
 				backdrop = true,
 				border = vim.g.borderStyle,
 				title_pos = "left",
-				height = 1,
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 2,
-				wo = {
-					cursorline = false,
-				},
 				keys = {
 					i_esc = { "<Esc>", "stopinsert", mode = "i" },
 					-- prevent accidental closing due to <BS> being mapped to `:bprev`
@@ -149,7 +145,7 @@ return { -- mostly used for its notifications
 			},
 			notification = {
 				border = vim.g.borderStyle,
-				wo = { cursorline = false, winblend = 0, wrap = true },
+				wo = { winblend = 0, wrap = true },
 			},
 			blame_line = {
 				width = 0.6,
