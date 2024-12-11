@@ -67,7 +67,8 @@ return {
 				{ -- file name & icon (my own variant)
 					function()
 						local maxLength = 30
-						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0) or "---")
+						local path = vim.api.nvim_buf_get_name(0)
+						local name = vim.fs.basename(path ~= "" and path or vim.bo.ft)
 						local displayName = #name < maxLength and name
 							or vim.trim(name:sub(1, maxLength)) .. "…"
 
