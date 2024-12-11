@@ -1,16 +1,8 @@
-local cmd = { "git", "diff", "--color=always"}
-
-local diff = vim.system(cmd):wait().stdout or "??"
-local lines = vim.split(diff, "\n", { trimempty = true })
-local buf = vim.api.nvim_create_buf(false, true)
-
-require("snacks").win {
-	relative = "editor",
-	position = "float",
-	title = " test ",
-	buf = buf,
-	width = 80,
-	height = 20,
-}
-
-vim.api.nvim_chan_send(vim.api.nvim_open_term(buf, {}), table.concat(lines, "\r\n"))
+---@diagnostic disable-next-line: missing-fields
+vim.ui.input({ prompt = "Input: " }, function(input)
+	if not input then return end
+	local curPath = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+	local newFile = curPath .. ("/%s.lua"):format(input) 
+	vim.cmd.edit(newFile)
+	vim.cmd.write(newFile)
+end)
