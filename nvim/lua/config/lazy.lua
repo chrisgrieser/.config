@@ -111,24 +111,6 @@ keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" })
 
 local pluginTypeIcons = {
-	["ai-plugins"] = "󰚩",
-	["appearance"] = "",
-	["colorschemes"] = "",
-	["completion-and-snippets"] = "󰩫",
-	["editing-support"] = "󰏫",
-	["folding"] = "󰘖",
-	["git-plugins"] = "󰊢",
-	["lsp-plugins"] = "󰒕",
-	["lualine"] = "󰇜",
-	["mason"] = "",
-	["motions-and-textobjects"] = "󱡔",
-	["notification"] = "󰎟",
-	["snacks"] = "󰉚",
-	["refactoring"] = "󱗘",
-	["task-and-file-utilities"] = "󰈔",
-	["telescope"] = "󰭎",
-	["treesitter"] = "",
-	["which-key"] = "⌨️",
 }
 
 -- GOTO PLUGIN SPEC

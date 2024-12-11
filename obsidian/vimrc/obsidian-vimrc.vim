@@ -10,10 +10,6 @@ unmap ,
 "───────────────────────────────────────────────────────────────────────────────
 " META
 
-" Open this vimrc
-exmap openThisVimrc jscommand { view.app.openWithDefaultApp("/Meta/obsidian-vimrc.vim") }
-nnoremap g, :openThisVimrc<CR>
-
 " copy command-ids to devtools
 exmap openDevTools jscommand { electronWindow.openDevTools() }
 nnoremap ? :obcommand<CR>:openDevTools<CR>
