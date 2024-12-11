@@ -279,6 +279,16 @@ return {
 				end,
 				desc = " outer path",
 			},
+			{
+				"iy",
+				mode = "o",
+				function()
+					local charwise = require("various-textobjs.textobjs.charwise.core")
+					local pattern = "(/[%w_%-./]+/)[%w_%-.]+()"
+					charwise.selectClosestTextobj(pattern, "inner", 5)
+				end,
+				desc = " inner path",
+			},
 		},
 	},
 }
