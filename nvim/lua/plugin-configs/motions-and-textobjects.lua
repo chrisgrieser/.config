@@ -270,7 +270,7 @@ return {
 				desc = "󰬞 to last WORD",
 			},
 			{ -- path textobj
-				"ay",
+				"a-",
 				mode = "o",
 				function()
 					local charwise = require("various-textobjs.textobjs.charwise.core")
@@ -280,7 +280,7 @@ return {
 				desc = " outer path",
 			},
 			{
-				"iy",
+				"i-",
 				mode = "o",
 				function()
 					local charwise = require("various-textobjs.textobjs.charwise.core")
