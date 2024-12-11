@@ -80,16 +80,23 @@ return { -- mostly used for its notifications
 	"folke/snacks.nvim",
 	event = "UIEnter",
 	keys = {
-		-- stylua: ignore start
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = " Blame line" },
-		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
-		{ "<leader>om", function()
-			local enabled = require("snacks").dim.enabled
-			require("snacks").dim[enabled and "disable" or "enable"]()
-		end, desc = "󰝟 Mute code" },
-		-- stylua: ignore end
+		{
+			"<D-9>",
+			function() openNotif("last") end,
+			mode = { "n", "v", "i" },
+			desc = "󰎟 Last notification",
+		},
+		{
+			"<leader>om",
+			function()
+				local enabled = require("snacks").dim.enabled
+				require("snacks").dim[enabled and "disable" or "enable"]()
+			end,
+			desc = "󰝟 Mute code",
+		},
 	},
 	opts = {
 		dim = {
@@ -120,7 +127,7 @@ return { -- mostly used for its notifications
 			top_down = false,
 		},
 		input = {
-			enabled = false, -- TODO need to fix `:` and padding first
+			enabled = true, -- TODO need to fix `:` and padding first
 			icon = "",
 		},
 		styles = {

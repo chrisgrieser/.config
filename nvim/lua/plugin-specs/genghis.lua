@@ -1,6 +1,5 @@
 return {
 	"chrisgrieser/nvim-genghis",
-	dependencies = "stevearc/dressing.nvim",
 	keys = {
 		-- stylua: ignore start
 		{"<leader>ya", function() require("genghis").copyFilepathWithTilde() end, desc = "󰞇 󰜥 Absolute path" },

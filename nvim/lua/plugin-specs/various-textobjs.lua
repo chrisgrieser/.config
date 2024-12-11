@@ -3,7 +3,7 @@ local textObj = require("config.utils").extraTextobjMaps
 
 return {
 	"chrisgrieser/nvim-various-textobjs",
-	opts = { debug = false },
+	opts = { debug = true },
 	keys = {
 		{
 			"<Space>",

@@ -185,7 +185,6 @@ return {
 							vim.fn.stdpath("data") .. "/lazy",
 							vim.env.HOMEBREW_PREFIX,
 							vim.env.HOME,
-							vim.env.HOME,
 						}
 						vim.iter(parentOfRoots)
 							:each(function(root) path = path:gsub(vim.pesc(root), "") end)
@@ -201,7 +200,7 @@ return {
 					file_ignore_patterns = {
 						"COMMIT_EDITMSG",
 						"nvim/runtime/doc/.*.txt", -- vim help docs
-						vim.fn.stdpath("data") .. "/lazy", -- lazy.nvim-generate help docs
+						vim.fn.stdpath("state") .. "/lazy/readme/doc", -- lazy.nvim-generated help
 					},
 
 					layout_config = { horizontal = { width = 0.6, height = 0.6 } },
