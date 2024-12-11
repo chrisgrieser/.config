@@ -128,8 +128,7 @@ return { -- mostly used for its notifications
 			top_down = false,
 		},
 		input = {
-			-- icon = "",
-			enabled = true,
+			icon = "",
 		},
 		styles = {
 			input = {
@@ -144,7 +143,7 @@ return { -- mostly used for its notifications
 				},
 				keys = {
 					i_esc = { "<Esc>", "stopinsert", mode = "i" },
-					-- prevent accidental closing due <BS> being mapped to :bprev
+					-- prevent accidental closing due to <BS> being mapped to `:bprev`
 					BS = { "<BS>", "<Nop>", mode = "n" },
 				},
 			},
