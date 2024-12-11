@@ -4,3 +4,4 @@
 - `vim.lsp.buf.signature_help.Opts`
 - potentially replace `nvim-ufo` with <https://www.reddit.com/r/neovim/comments/1h34lr4/neovim_now_has_the_builtin_lsp_folding_support/>
 - silence "press enter to continue" messages via `messagesopt`
+- `vim.lsp.enable()` and `vim.lsp.config()`
