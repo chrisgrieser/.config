@@ -49,7 +49,7 @@ do
 					or (cursorNow[1] == cursorBefore[1] and cursorNow[2] > cursorBefore[2])
 				if not cursorWasInFront then return end
 
-				-- vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
+				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
 			end
 		end,
 	})

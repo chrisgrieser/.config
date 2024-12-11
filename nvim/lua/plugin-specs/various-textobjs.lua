@@ -3,7 +3,7 @@ local textObj = require("config.utils").extraTextobjMaps
 
 return {
 	"chrisgrieser/nvim-various-textobjs",
-	opts = { debug = true },
+	opts = { debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-various-textobjs") },
 	keys = {
 		{
 			"<Space>",
@@ -140,8 +140,9 @@ return {
 		{ -- open URL (forward seeking)
 			"gx",
 			function()
-				require("various-textobjs").url()
 				local cursorBefore = vim.api.nvim_win_get_cursor(0)
+
+				require("various-textobjs").url()
 				local foundURL = vim.fn.mode() == "v"
 				if not foundURL then return end
 
