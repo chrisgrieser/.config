@@ -85,10 +85,10 @@ return { -- mostly used for its notifications
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = " Blame line" },
 		{ "<D-9>", function() openNotif("last") end, mode = { "n", "v", "i" }, desc = "󰎟 Last notification" },
-		{ "<leader>os", function()
+		{ "<leader>om", function()
 			local enabled = require("snacks").dim.enabled
 			require("snacks").dim[enabled and "disable" or "enable"]()
-		end, desc = "󰎟 Silence" },
+		end, desc = "󰝟 Mute code" },
 		-- stylua: ignore end
 	},
 	opts = {
@@ -120,7 +120,7 @@ return { -- mostly used for its notifications
 			top_down = false,
 		},
 		input = {
-			enabled = false, -- TODO
+			enabled = false, -- TODO need to fix `:` and padding first
 			icon = "",
 		},
 		styles = {

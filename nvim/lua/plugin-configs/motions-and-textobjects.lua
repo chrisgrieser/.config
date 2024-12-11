@@ -161,8 +161,8 @@ return {
 			{ "a" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
 
 			-- python
-			{ "iy", "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>", ft = "python", mode = {"x","o"}, desc = " inner tripleQuotes" },
-			{ "ay", "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>", ft = "python", mode = {"x","o"}, desc = " outer tripleQuotes" },
+			{ "iS", "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>", ft = "python", mode = {"x","o"}, desc = " inner tripleQuotes" },
+			{ "aS", "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>", ft = "python", mode = {"x","o"}, desc = " outer tripleQuotes" },
 
 			-- markdown
 			{ "iE", "<cmd>lua require('various-textobjs').mdFencedCodeBlock('inner')<CR>", mode = {"x","o"}, ft = "markdown", desc = " inner CodeBlock" },
@@ -200,6 +200,8 @@ return {
 			{ -- delete surrounding indentation
 				"dsi",
 				function()
+					local cursorBefore = vim.api.nvim_win_get_cursor(0)
+
 					require("various-textobjs").indentation("outer", "outer")
 					local indentationFound = vim.fn.mode() == "V"
 					if not indentationFound then return end
@@ -209,6 +211,8 @@ return {
 					local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
 					vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
 					vim.cmd(tostring(startBorderLn) .. " delete")
+
+					vim.api.nvim_win_set_cursor(0, cursorBefore)
 				end,
 				desc = " Delete surrounding indent",
 			},
@@ -264,6 +268,16 @@ return {
 					charwise.selectFromCursorTo({ row, endCol }, 0)
 				end,
 				desc = "󰬞 to last WORD",
+			},
+			{ -- path textobj
+				"ay",
+				mode = "o",
+				function()
+					local charwise = require("various-textobjs.textobjs.charwise.core")
+					local pattern = "(/[%w_%-./]+/)[%w_%-.]+()"
+					charwise.selectClosestTextobj(pattern, "outer", 5)
+				end,
+				desc = " outer path",
 			},
 		},
 	},

@@ -44,7 +44,7 @@ matches:
       - name: neovimVersion
         type: shell
         params:
-          cmd: export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version
+          cmd: export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH ; nvim --version | head -n1
   #─────────────────────────────────────────────────────────────────────────────
   - trigger: "!github"
     replace: >
