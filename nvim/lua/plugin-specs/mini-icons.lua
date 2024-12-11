@@ -8,24 +8,25 @@ return { -- icon library
 			["pre-commit"] = { glyph = "󰊢" },
 
 			-- frequently accessed plugin spec files
-			["blink-cmp.lua"] = { glyph = "󰢱 󰩫" },
+			["blink-cmp.lua"] = { glyph = "󰢱 󰈈" },
 			["colorschemes.lua"] = { glyph = "󰢱 " },
 			["gitsigns.lua"] = { glyph = "󰢱 󰊢" },
 			["lualine.lua"] = { glyph = "󰢱 ━" },
 			["mason.lua"] = { glyph = "󰢱 " },
 			["mini-icons.lua"] = { glyph = "󰢱 󱗿" },
-			["various-textobjs.lua"] = { glyph = "󰢱 󰠱" },
-			["treesitter-textobjects.lua"] = { glyph = "󰢱 󱡔" },
 			["noice.lua"] = { glyph = "󰢱 󰎟" },
 			["scissors.lua"] = { glyph = "󰢱 󰩫" },
 			["snacks.lua"] = { glyph = "󰢱 󰉚" },
 			["telescope.lua"] = { glyph = "󰢱 󰭎" },
 			["tinygit.lua"] = { glyph = "󰢱 󰊢" },
+			["treesitter-textobjects.lua"] = { glyph = "󰢱 󱡔" },
+			["various-textobjs.lua"] = { glyph = "󰢱 󰠱" },
 			["which-key.lua"] = { glyph = "󰢱 ⌨️" },
 		},
 		extension = {
 			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
 			["applescript"] = { glyph = "󰀵", hl = "MiniIconsGrey" },
+			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 		},
 		filetype = {
 			["css"] = { hl = "MiniIconsRed" },
