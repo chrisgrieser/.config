@@ -108,7 +108,8 @@ return {
 				vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
 				vim.cmd(tostring(startBorderLn) .. " delete")
 
-				vim.api.nvim_win_set_cursor(0, cursorBefore)
+				-- defer to due race condition with sticky deletion
+				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
 			end,
 			desc = " Delete surrounding indent",
 		},
