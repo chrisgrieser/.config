@@ -196,6 +196,7 @@ local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
 	[vim.g.localRepos .. "/**/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
+	[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "plugin-spec.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",
@@ -227,6 +228,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 			if not matchedGlob then return end
 			local templateFile = globToTemplateMap[matchedGlob]
 			local templatePath = vim.fs.normalize(templateDir .. "/" .. templateFile)
+			if not vim.uv.fs_stat(templatePath) then return end
 
 			-- read template & move to cursor placeholder
 			local content = {}

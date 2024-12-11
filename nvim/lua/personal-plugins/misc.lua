@@ -61,11 +61,12 @@ end
 function M.editMacro(reg)
 	local macroContent = vim.fn.getreg(reg)
 	local title = ("Edit macro [%s]"):format(reg)
+	local icon = "󰃽"
 
-	vim.ui.input({ prompt = title, default = macroContent }, function(input)
+	vim.ui.input({ prompt = icon .. " " .. title, default = macroContent }, function(input)
 		if not input then return end
 		vim.fn.setreg(reg, input)
-		vim.notify(input, nil, { title = title, icon = "󰃽" })
+		vim.notify(input, nil, { title = title, icon = icon })
 	end)
 end
 

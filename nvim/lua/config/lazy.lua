@@ -16,10 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 
 require("lazy").setup {
-	spec = { import = "plugin-configs" }, -- = use specs stored in `./lua/plugins`
+	spec = { import = "plugin-specs" },
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-	dev = {
+	dev = { ---@diagnostic disable-line: assign-type-mismatch
 		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -109,76 +109,6 @@ local keymap = require("config.utils").uniqueKeymap
 keymap("n", "<leader>pp", require("lazy").sync, { desc = "󰒲 Lazy sync" })
 keymap("n", "<leader>pl", require("lazy").home, { desc = "󰒲 Lazy home" })
 keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" })
-
-local pluginTypeIcons = {
-}
-
--- GOTO PLUGIN SPEC
--- For nicer selection via `vim.ui.select`: telescope-ui-select OR dressing.nvim
-keymap("n", "g,", function()
-	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User(once): Colorize icons in `TelescopeResults`",
-		once = true,
-		pattern = "TelescopeResults",
-		callback = function() vim.fn.matchadd("Title", [[^..\zs.]]) end,
-	})
-	-- all specfiles
-	local specRoot = require("lazy.core.config").options.spec.import
-	local specPath = vim.fn.stdpath("config") .. "/lua/" .. specRoot
-	local specFiles = {}
-	for name, type in vim.fs.dir(specPath) do
-		if type == "file" and vim.endswith(name, ".lua") then table.insert(specFiles, name) end
-	end
-
-	-- sort by last modified
-	table.sort(specFiles, function(a, b)
-		local amtime = vim.uv.fs_stat(specPath .. "/" .. a).mtime.sec
-		local bmtime = vim.uv.fs_stat(specPath .. "/" .. b).mtime.sec
-		return amtime > bmtime
-	end)
-
-	-- get all plugins from the spec files
-	local allPlugins = vim.iter(specFiles)
-		:map(function(name)
-			local moduleName = name:gsub("%.lua$", "")
-			local module = require(specRoot .. "." .. moduleName)
-			if type(module[1]) ~= "table" then module = { module } end
-			local plugins = vim.iter(module)
-				:map(function(plugin) return { repo = plugin[1], module = moduleName } end)
-				:totable()
-			return plugins
-		end)
-		:flatten()
-		:totable()
-
-	-- select plugin
-	vim.ui.select(allPlugins, {
-		prompt = "󰒲 Goto plugin config",
-		format_item = function(plugin)
-			local icon = pluginTypeIcons[plugin.module] or "󰒓"
-			return icon .. " " .. vim.fs.basename(plugin.repo)
-		end,
-	}, function(plugin)
-		if not plugin then return end
-		local filepath = specPath .. "/" .. plugin.module .. ".lua"
-		local repo = plugin.repo:gsub("/", "\\/") -- escape slashes for `:edit`
-		vim.cmd(("edit +/%q %s"):format(repo, filepath))
-		vim.cmd.normal { "zv", bang = true } -- open fold at cursor
-	end)
-end, { desc = "󰒲 Plugin config" })
-
--- GOTO LOCAL PLUGIN CODE
--- REQUIRED telescope.nvim AND (telescope-ui-select OR dressing.nvim)
-keymap("n", "gp", function()
-	vim.ui.select(
-		require("lazy").plugins(),
-		{ prompt = "󰒲 Local Code", format_item = function(plugin) return plugin.name end },
-		function(plugin)
-			if not plugin then return end
-			require("telescope.builtin").find_files { prompt_title = plugin.name, cwd = plugin.dir }
-		end
-	)
-end, { desc = "󰒲 Plugin code" })
 
 --------------------------------------------------------------------------------
 -- TEST FOR DUPLICATE KEYS on every startup
