@@ -21,7 +21,7 @@ return {
 				providers = {
 					snippets = {
 						-- don't show when triggered manually (= length 0), useful
-						-- when manually show completions to see available JSON keys
+						-- when manually showing completions to see available JSON keys
 						min_keyword_length = 1,
 						score_offset = -1,
 					},
