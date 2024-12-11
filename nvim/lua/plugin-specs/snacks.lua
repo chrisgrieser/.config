@@ -58,6 +58,7 @@ local function openNotif(idx)
 		wo = { ---@diagnostic disable-line: missing-fields -- faulty annotation
 			winhighlight = table.concat(highlights, ","),
 			wrap = true, -- only one message, so use full space
+			statuscolumn = " ", -- just adds padding
 		},
 		keys = {
 			["<Tab>"] = function()
