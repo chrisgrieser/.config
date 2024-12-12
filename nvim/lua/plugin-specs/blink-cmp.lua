@@ -13,6 +13,7 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			enabled = function()
+				if vim.b.evalInput then return true end
 				if vim.bo.buftype == "prompt" then return false end
 				local ignoredFts = { "DressingInput", "snacks_input", "rip-substitute", "gitcommit" }
 				return not vim.tbl_contains(ignoredFts, vim.bo.filetype)

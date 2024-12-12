@@ -236,7 +236,7 @@ function copyObsidianUriMdLink() {
 	const mdLink = `[${basename} (${vaultName})](${obsidianUri})`;
 
 	navigator.clipboard.writeText(mdLink);
-	new Notice("Copied Obsidian URI to:\n" + basename);
+	new Notice("Copied Obsidian URI:\n" + basename);
 }
 
 function toggleLowercaseTitleCase() {

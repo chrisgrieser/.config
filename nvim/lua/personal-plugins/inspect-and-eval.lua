@@ -24,7 +24,7 @@ function M.bufferInfo()
 
 	local out = {
 		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
-		"[winnr]     " .. vim.api.nvim_get_current_win(),
+		"[winid]     " .. vim.api.nvim_get_current_win(),
 		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(indentType, indentAmount),
@@ -130,7 +130,11 @@ function M.evalNvimLua()
 			desc = "User(once): Add lua highlighting to `snacks_input` for Eval command",
 			once = true,
 			pattern = "snacks_input",
-			command = "set filetype=lua",
+			callback = function(ctx)
+				vim.treesitter.start(ctx.buf, "lua")
+				vim.b[ctx.buf].evalInput = true
+				-- cannot set `ft=lua`, since it errors with `blink.cmp`
+			end,
 		})
 		vim.ui.input({ prompt = " Eval: " }, eval)
 	else
