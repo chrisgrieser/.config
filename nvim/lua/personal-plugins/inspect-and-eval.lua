@@ -23,6 +23,8 @@ function M.bufferInfo()
 	local indentAmount = vim.bo.expandtab and vim.bo.tabstop or vim.bo.shiftwidth
 
 	local out = {
+		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
+		"[winnr]     " .. vim.api.nvim_get_current_win(),
 		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(indentType, indentAmount),
