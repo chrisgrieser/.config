@@ -4,7 +4,6 @@
 
 local config = {
 	win = {
-		ft = "selector",
 		border = "single",
 		relative = "cursor",
 		row = 2,
@@ -24,25 +23,35 @@ local config = {
 	},
 }
 
+local pluginName = "Selector"
 --------------------------------------------------------------------------------
 
 local M = {}
 
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+---@param opts? table
+local function notify(msg, level, opts)
+	if not level then level = "info" end
+	local defaultOpts = { title = pluginName }
+	opts = vim.tbl_deep_extend("force", defaultOpts, opts or {})
+	vim.notify(msg, vim.log.levels[level:upper()], opts)
+end
+
 ---@class (exact) SelectorOpts
----@field prompt? string nvim spec for vim.ui.select
----@field kind? string nvim spec for vim.ui.select
----@field format_item? fun(item: any): string nvim spec for vim.ui.select
+---@field prompt? string nvim spec
+---@field kind? string nvim spec
+---@field format_item? fun(item: any): string nvim spec
 ---@field footer? string specific to this plugin
----@field ft? string specific to this plugin
 
 local function telescopeFallback(_items, _opts, _on_choice)
 	local installed, telescope = pcall(require, "telescope")
 	if not installed then
-		vim.notify("telescope.nvim is not installed.", vim.log.levels.WARN)
+		notify("telescope.nvim is not installed.", "warn")
 		return
 	end
 	-- TODO
-	vim.notify("Not implemented yet.", vim.log.levels.WARN)
+	notify("Not implemented yet.", "warn")
 end
 
 --------------------------------------------------------------------------------
@@ -54,7 +63,7 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	-- GUARD
 	assert(on_choice, "`on_choice` must be a function.")
 	if #items == 0 then
-		vim.notify("No items to select from.", vim.log.levels.WARN)
+		notify("No items to select from.", "warn")
 		return
 	end
 
@@ -98,7 +107,7 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	vim.wo[winid].colorcolumn = ""
 	vim.wo[winid].winfixbuf = true
 	vim.bo[bufnr].modifiable = false
-	vim.bo[bufnr].filetype = opts.ft or config.win.ft
+	vim.bo[bufnr].filetype = pluginName
 
 	-- KEYMAPS
 	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
@@ -109,9 +118,11 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	map(config.keymaps.prev, "k")
 	map(config.keymaps.inspect, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local out = "kind = " .. opts.kind .. "\n" ..
-		vim.inspect { kind = opts.kind, item = items[lnum] }
-		vim.notify(out, vim.log.levels.DEBUG, { title = "Inspect", ft = "lua" })
+		local out = "kind = "
+			.. vim.inspect(opts.kind)
+			.. "\nitemUnderCursor = "
+			.. vim.inspect(items[lnum])
+		notify(out, "debug", { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
