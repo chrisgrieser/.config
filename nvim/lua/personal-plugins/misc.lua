@@ -287,4 +287,16 @@ function M.formatWithFallback(opts)
 end
 
 --------------------------------------------------------------------------------
+
+-- `fF` work with `nN` instead of `;,` (inspired by tT.nvim)
+---@param char "f"|"F"
+function M.fF(char)
+	local target = vim.fn.getcharstr() -- awaits user input of a char
+	local pattern = [[\V\C]] .. target
+	local forward = char == "t" or char == "f"
+	vim.fn.setreg("/", pattern)
+	vim.fn.search(pattern, forward and "" or "b") -- move cursor
+end
+
+--------------------------------------------------------------------------------
 return M

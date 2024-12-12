@@ -59,6 +59,16 @@ keymap("n", "<D-U>", function()
 	end
 end, { desc = " Open first URL in file" })
 
+-- make `tfTF` use `nN` instead of `;,`
+for _, char in pairs { "t", "T", "f", "F" } do
+	keymap(
+		{ "n", "x", "o" },
+		char,
+		function() require("personal-plugins.misc").tfTF(char) end,
+		{ desc = " " .. char }
+	)
+end
+
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -314,7 +324,7 @@ end, { desc = " Scratch file" })
 keymap({ "n", "x", "i" }, "<D-l>", function()
 	if jit.os ~= "OSX" then return end
 	local out = vim.system({ "open", "-R", vim.api.nvim_buf_get_name(0) }):wait()
-	if out.code ~= 0 then 
+	if out.code ~= 0 then
 		vim.notify("Failed: " .. out.stderr, vim.log.levels.ERROR, { title = "󰀶 Finder" })
 	end
 end, { desc = "󰀶 Reveal in macOS Finder" })
