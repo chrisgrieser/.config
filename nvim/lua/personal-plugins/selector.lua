@@ -16,11 +16,11 @@ local config = {
 		abort = { "<Esc>", "q" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		inspect = "?",
+		inspect = "?", -- pretty-print item under cursor
 	},
 	fallback = {
 		provider = "telescope", -- currently only `telescope` is supported
-		kindPatterns = { "tinygit" }, ---@type string[] -- checked via string.find
+		kindPatterns = { "^tinygit" }, ---@type string[] -- checked via string.find
 		moreItemsThan = 10,
 	},
 }
@@ -36,8 +36,8 @@ local M = {}
 ---@field footer? string specific to this plugin
 ---@field ft? string specific to this plugin
 
--- TODO
 local function fallback(_items, _opts, _on_choice, _provider)
+	-- TODO
 	vim.notify("Not implemented yet.", vim.log.levels.WARN)
 end
 
@@ -46,7 +46,7 @@ end
 ---@param items any[]
 ---@param opts SelectorOpts
 ---@param on_choice fun(item: any?, idx: integer?)
-M.select = function(items, opts, on_choice)
+function M.modifiedSelect(items, opts, on_choice)
 	-- GUARD
 	assert(on_choice, "`on_choice` must be a function")
 	if #items == 0 then
@@ -56,7 +56,7 @@ M.select = function(items, opts, on_choice)
 
 	-- fallback
 	local defaultOpts = { kind = "select", format_item = function(i) return i end }
-	opts = vim.tbl_deep_extend("force", defaultOpts, opts)
+	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
 	local fallbackKind = vim.iter(config.fallback.kindPatterns)
 		:any(function(p) return opts.kind:find(p) ~= nil end)
 	local fallbackMore = #items > config.fallback.moreItemsThan
@@ -65,9 +65,9 @@ M.select = function(items, opts, on_choice)
 	end
 
 	-- parameters
-	local title = opts.prompt and (" " .. opts.prompt .. " ") or nil
+	local title = opts.prompt and (" " .. opts.prompt:gsub(":%s*$", "") .. " ") or nil
 	local choices = vim.tbl_map(opts.format_item, items)
-	assert(type(#choices[1]) == "string", "`format_item` must return a string.")
+	assert(type(choices[1]) == "string", "`format_item` must return a string.")
 	local longestChoice = vim.iter(choices):fold(0, function(acc, c) return math.max(acc, #c) end)
 	local width = math.max(longestChoice, #(title or "")) + 2
 	local height = #choices
@@ -89,30 +89,45 @@ M.select = function(items, opts, on_choice)
 		style = "minimal",
 	})
 	vim.wo[winnr].winfixbuf = true
-	vim.bo[bufnr].modifiable = false
 	vim.wo[winnr].statuscolumn = " " -- = left-padding
+	vim.wo[winnr].cursorline = true
+	vim.wo[winnr].colorcolumn = ""
+	vim.bo[bufnr].modifiable = false
 	vim.bo[bufnr].filetype = opts.ft or config.win.ft
 	vim.bo[bufnr].buftype = "nofile"
-	vim.wo[winnr].cursorline = true
 
 	-- keymaps
 	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
 
-	map("q", vim.cmd.bwipeout)
-	map("<Esc>", vim.cmd.bwipeout)
+	for _, key in ipairs(config.keymaps.abort) do
+		map(key, vim.cmd.bwipeout)
+	end
 	map(config.keymaps.next, "j")
-	map(config.keymaps.prev, "p")
+	map(config.keymaps.prev, "k")
 	map(config.keymaps.inspect, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		local info = vim.inspect(items[lnum])
-		vim.notify(info, vim.log.levels.DEBUG, { title = "Inspect item" })
+		vim.notify(info, vim.log.levels.DEBUG, { title = "Inspect item", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		vim.cmd.bwipeout()
 		on_choice(items[lnum], lnum)
 	end)
+
+	-- unmount
+	vim.api.nvim_create_autocmd("WinLeave", {
+		desc = "Selector: Close window",
+		once = true,
+		callback = function()
+			local curWin = vim.api.nvim_get_current_win()
+			if curWin == winnr then vim.api.nvim_buf_delete(bufnr, { force = true }) end
+		end,
+	})
 end
+
+local _vimUiSelect = vim.ui.select
+vim.ui.select = M.modifiedSelect
 
 --------------------------------------------------------------------------------
 return M
