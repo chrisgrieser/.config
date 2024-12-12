@@ -12,8 +12,8 @@ vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
 
 vim.opt.cursorline = true
-vim.opt.colorcolumn = "+1" -- one more than textwidth
-vim.opt.signcolumn = "yes:2" -- too much potential signs for just 1
+vim.opt.colorcolumn = "+1" -- = one more than textwidth
+vim.opt.signcolumn = "yes:2" -- too many potential signs for just 1
 
 vim.opt.wrap = false
 vim.opt.breakindent = true -- indent wrapped lines
@@ -34,8 +34,8 @@ vim.opt.startofline = true -- motions like "G" also move to the first char
 
 vim.opt.timeoutlen = 666
 
-vim.opt.sidescrolloff = 13
-vim.opt.scrolloff = 13
+vim.opt.sidescrolloff = 15
+vim.opt.scrolloff = 12
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
