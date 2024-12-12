@@ -127,9 +127,9 @@ function M.evalNvimLua()
 
 	if vim.fn.mode() == "n" then
 		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User(once): Add lua highlighting to `DressingInput` for Eval command",
+			desc = "User(once): Add lua highlighting to `snacks_input` for Eval command",
 			once = true,
-			pattern = "DressingInput",
+			pattern = "snacks_input",
 			command = "set filetype=lua",
 		})
 		vim.ui.input({ prompt = " Eval: " }, eval)
