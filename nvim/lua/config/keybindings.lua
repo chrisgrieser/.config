@@ -59,15 +59,9 @@ keymap("n", "<D-U>", function()
 	end
 end, { desc = " Open first URL in file" })
 
--- make `tfTF` use `nN` instead of `;,`
-for _, char in pairs { "t", "T", "f", "F" } do
-	keymap(
-		{ "n", "x", "o" },
-		char,
-		function() require("personal-plugins.misc").tfTF(char) end,
-		{ desc = " " .. char }
-	)
-end
+-- make `fF` use `nN` instead of `;,`
+keymap("n", "f", function() require("personal-plugins.misc").fF("f") end, { desc = "f" })
+keymap("n", "F", function() require("personal-plugins.misc").fF("F") end, { desc = "F" })
 
 --------------------------------------------------------------------------------
 -- EDITING

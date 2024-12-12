@@ -178,7 +178,7 @@ vim.on_key(function(char)
 
 	-- works for RHS, therefore no need to consider remaps
 	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
-	local shortPattern = vim.fn.getreg("/"):gsub([[\V\C]], ""):len() <= 1 -- for `tfTF`
+	local shortPattern = vim.fn.getreg("/"):gsub([[\V\C]], ""):len() <= 1 -- for `fF`
 
 	if searchCancelled or (not searchMovement and not searchConfirmed) then
 		vim.opt.hlsearch = false

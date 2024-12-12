@@ -293,9 +293,9 @@ end
 function M.fF(char)
 	local target = vim.fn.getcharstr() -- awaits user input of a char
 	local pattern = [[\V\C]] .. target
-	local forward = char == "t" or char == "f"
 	vim.fn.setreg("/", pattern)
-	vim.fn.search(pattern, forward and "" or "b") -- move cursor
+	vim.fn.search(pattern, char == "f" and "" or "b") -- move cursor
+	vim.v.searchforward = 1 -- `n` always forward, `N` always backward
 end
 
 --------------------------------------------------------------------------------

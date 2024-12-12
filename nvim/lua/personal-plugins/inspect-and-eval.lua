@@ -130,11 +130,8 @@ function M.evalNvimLua()
 			desc = "User(once): Add lua highlighting to `snacks_input` for Eval command",
 			once = true,
 			pattern = "snacks_input",
-			callback = function(ctx)
-				vim.treesitter.start(ctx.buf, "lua")
-				vim.b[ctx.buf].evalInput = true
-				-- cannot set `ft=lua`, since it errors with `blink.cmp`
-			end,
+			-- cannot set `ft=lua`, since it errors with `blink.cmp`
+			callback = function(ctx) vim.treesitter.start(ctx.buf, "lua") end,
 		})
 		vim.ui.input({ prompt = " Eval: " }, eval)
 	else
