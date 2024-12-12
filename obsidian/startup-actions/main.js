@@ -72,32 +72,29 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 }
 
 async function updateStatusbar(plugin) {
-	const { app, statusbarTaskCounter } = plugin;
+	const { app, statusbar } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
-		statusbarTaskCounter.style.cssText = "display: none";
+		statusbar.style.setProperty("display", "none");
 		return;
 	}
 
 	const text = await app.vault.cachedRead(activeFile);
-	const allTasks = text.match(/^\s*- \[[x ]\] |TODO/gm);
-	if (!allTasks) {
-		statusbarTaskCounter.style.cssText = "display: none";
+	const openTasks = text.match(/- \[ \]|TODO/g);
+	if (!openTasks) {
+		statusbar.style.setProperty("display", "none");
 		return;
 	}
-	const totalTasks = allTasks.length;
-	const openTasks = allTasks?.filter((task) => task.match(/- \[ \]|TODO/)).length;
-	const completedTasks = totalTasks - openTasks;
 
-	// `order: -1` -> move to the very left
-	statusbarTaskCounter.style.cssText = "display: block; order: -1";
-	statusbarTaskCounter.setText(`${completedTasks}/${totalTasks} [x]`);
+	statusbar.style.setProperty("display", "block");
+	statusbar.style.setProperty("order", -1); // move to the very left
+	statusbar.setText(`${openTasks.length} [x]`);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
-	statusbarTaskCounter = this.addStatusBarItem();
+	statusbar = this.addStatusBarItem();
 
 	onload() {
 		console.info(this.manifest.name + " loaded.");
