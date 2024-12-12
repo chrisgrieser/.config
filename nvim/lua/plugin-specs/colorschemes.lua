@@ -4,7 +4,7 @@ local themes = {
 		-- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
 		"EdenEast/nightfox.nvim",
 		colorscheme = "dawnfox",
-		opacity = 0.92,
+		opacity = 0.90,
 		opts = {
 			options = {
 				styles = { comments = "italic" },
