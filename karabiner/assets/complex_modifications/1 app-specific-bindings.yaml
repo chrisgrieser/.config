@@ -87,11 +87,17 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Finder"
     manipulators:
-      # sidebar
+      # cmd+1 -> right left sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [control, command] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+      # cmd+0 -> toggle right sidebar
+      - type: basic
+        from: { key_code: "0", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: p, modifiers: [shift, command] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
       # cmd+q -> close all windows
       - type: basic
@@ -482,6 +488,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
+      # toggle search bar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
