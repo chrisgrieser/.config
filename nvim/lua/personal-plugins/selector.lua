@@ -16,7 +16,7 @@ local config = {
 		abort = { "<Esc>", "q" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		inspect = "?", -- pretty-print item under cursor
+		inspectKind = "?", -- selection kind
 	},
 	fallback = {
 		provider = "telescope", -- currently only `telescope` is supported
@@ -48,23 +48,23 @@ end
 ---@param on_choice fun(item: any?, idx: integer?)
 function M.modifiedSelect(items, opts, on_choice)
 	-- GUARD
-	assert(on_choice, "`on_choice` must be a function")
+	assert(on_choice, "`on_choice` must be a function.")
 	if #items == 0 then
 		vim.notify("No items to select from.", vim.log.levels.WARN)
 		return
 	end
 
-	-- fallback
-	local defaultOpts = { kind = "select", format_item = function(i) return i end }
+	-- REDIRECT TO FALLBACK
+	local defaultOpts = { format_item = function(i) return i end }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
 	local fallbackKind = vim.iter(config.fallback.kindPatterns)
-		:any(function(p) return opts.kind:find(p) ~= nil end)
+		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
 	local fallbackMore = #items > config.fallback.moreItemsThan
 	if fallbackKind or fallbackMore then
 		return fallback(items, opts, on_choice, config.fallback.provider)
 	end
 
-	-- parameters
+	-- PARAMETERS
 	local title = opts.prompt and (" " .. opts.prompt:gsub(":%s*$", "") .. " ") or nil
 	local choices = vim.tbl_map(opts.format_item, items)
 	assert(type(choices[1]) == "string", "`format_item` must return a string.")
@@ -73,7 +73,7 @@ function M.modifiedSelect(items, opts, on_choice)
 	local height = #choices
 	local footer = opts.footer and (" " .. opts.footer .. " ") or nil
 
-	-- create window
+	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, choices)
 	local winnr = vim.api.nvim_open_win(bufnr, true, {
@@ -96,7 +96,7 @@ function M.modifiedSelect(items, opts, on_choice)
 	vim.bo[bufnr].filetype = opts.ft or config.win.ft
 	vim.bo[bufnr].buftype = "nofile"
 
-	-- keymaps
+	-- KEYMAPS
 	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
 
 	for _, key in ipairs(config.keymaps.abort) do
@@ -104,10 +104,9 @@ function M.modifiedSelect(items, opts, on_choice)
 	end
 	map(config.keymaps.next, "j")
 	map(config.keymaps.prev, "k")
-	map(config.keymaps.inspect, function()
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local info = vim.inspect(items[lnum])
-		vim.notify(info, vim.log.levels.DEBUG, { title = "Inspect item", ft = "lua" })
+	map(config.keymaps.inspectKind, function()
+		local msg = ("kind: %s"):format(opts.kind)
+		vim.notify(msg, vim.log.levels.DEBUG, { title = "Inspect" })
 	end)
 	map(config.keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
@@ -115,7 +114,7 @@ function M.modifiedSelect(items, opts, on_choice)
 		on_choice(items[lnum], lnum)
 	end)
 
-	-- unmount
+	-- UNMOUNT
 	vim.api.nvim_create_autocmd("WinLeave", {
 		desc = "Selector: Close window",
 		once = true,
