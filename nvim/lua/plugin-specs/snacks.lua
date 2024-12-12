@@ -80,7 +80,7 @@ end
 
 --------------------------------------------------------------------------------
 
-return { -- mostly used for its notifications
+return { 
 	"folke/snacks.nvim",
 	event = "UIEnter",
 	keys = {

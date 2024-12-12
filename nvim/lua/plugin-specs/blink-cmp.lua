@@ -3,12 +3,6 @@
 ---@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
 --------------------------------------------------------------------------------
 
-
-local function test(foo)
-	if false then print(foo) end
-end
-test("one")
-
 return {
 	{ -- completion engine
 		"saghen/blink.cmp",
@@ -19,10 +13,13 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			enabled = function()
+				-- prevent useless suggestions when typing `--` in lua, but keep the
+				-- `---@param;@return` suggestion
 				if vim.bo.ft == "lua" then
 					local col = vim.api.nvim_win_get_cursor(0)[2]
 					local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
-					local commentButNotLuadocs = charsBefore:find("^%-%-") or charsBefore:find("%s%-%-")
+					local commentButNotLuadocs = charsBefore:find("^%-%-?$")
+						or charsBefore:find("%s%-%-?")
 					if commentButNotLuadocs then return false end
 				end
 
