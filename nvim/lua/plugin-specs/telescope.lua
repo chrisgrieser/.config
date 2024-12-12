@@ -94,6 +94,7 @@ return {
 						["<Up>"] = "cycle_history_prev",
 						["<Down>"] = "cycle_history_next",
 						["<D-s>"] = "smart_send_to_qflist",
+						["<D-f>"] = "to_fuzzy_refine", -- only live grep & workspace symbols
 
 						["<D-c>"] = function(prompt_bufnr) -- copy value
 							local value = require("telescope.actions.state").get_selected_entry().value
@@ -266,7 +267,7 @@ return {
 					},
 				},
 				highlights = {
-					prompt_title = " Highlights",
+					prompt_title = " Highlight groups",
 					layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 					mappings = {
 						i = {
