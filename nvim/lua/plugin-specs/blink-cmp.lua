@@ -3,6 +3,12 @@
 ---@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
 --------------------------------------------------------------------------------
 
+
+local function test(foo)
+	if false then print(foo) end
+end
+test("one")
+
 return {
 	{ -- completion engine
 		"saghen/blink.cmp",
@@ -13,7 +19,13 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			enabled = function()
-				if vim.b.evalInput then return true end
+				if vim.bo.ft == "lua" then
+					local col = vim.api.nvim_win_get_cursor(0)[2]
+					local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
+					local commentButNotLuadocs = charsBefore:find("^%-%-") or charsBefore:find("%s%-%-")
+					if commentButNotLuadocs then return false end
+				end
+
 				if vim.bo.buftype == "prompt" then return false end
 				local ignoredFts = { "DressingInput", "snacks_input", "rip-substitute", "gitcommit" }
 				return not vim.tbl_contains(ignoredFts, vim.bo.filetype)
@@ -68,15 +80,6 @@ return {
 				["<PageUp>"] = { "scroll_documentation_up" },
 			},
 			completion = {
-				keyword = {
-					range = "prefix", -- prefix|full
-					regex = [[_\|\w]], -- do not trigger on stuff like `-`
-				},
-				trigger = {
-					-- add `-` as blocked trigger character, to prevent `lua_ls`'s
-					-- `--#region` suggestions
-					show_on_blocked_trigger_characters = { " ", "\n", "\t", "-" },
-				},
 				list = {
 					cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				},
@@ -125,7 +128,7 @@ return {
 				kind_icons = {
 					-- different icons of the corresponding source
 					Text = "󰦨", -- `buffer`
-					Snippet = "ﲖ", -- `snippets`
+					Snippet = "󰞘", -- `snippets`
 					File = "", -- `path`
 					Folder = "󰉋",
 					Method = "󰊕",
