@@ -51,6 +51,11 @@ local routes = {
 		skip = true,
 	},
 
+	{ -- FIX
+		filter = { event = "msg_show", find = "util.lua:1825: index out of range" },
+		skip = true,
+	},
+
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
