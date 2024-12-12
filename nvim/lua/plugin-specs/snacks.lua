@@ -63,6 +63,7 @@ local function openNotif(idx)
 		},
 		bo = { modifiable = false }, ---@diagnostic disable-line: missing-fields
 		keys = {
+			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()
 				if idx == #history then return end
 				vim.cmd.close()
@@ -120,14 +121,14 @@ return { -- mostly used for its notifications
 		},
 		win = {
 			border = vim.g.borderStyle,
-			keys = { q = "close", ["<Esc>"] = "close", ["<D-9>"] = "close", ["<D-0>"] = "close" },
+			keys = { q = "close", ["<Esc>"] = "close", },
 		},
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time
 			width = { min = 12, max = 0.5 },
 			height = { min = 1, max = 0.5 },
-			icons = { error = "󰅚", warn = "", info = "󰋽", debug = "", trace = "󰓘" },
+			icons = { error = "󰅚", warn = "", info = "󰋽", debug = "󰃤", trace = "󰓗" },
 			top_down = false,
 		},
 		input = {

@@ -21,7 +21,8 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	local action = eventType == aw.launched and "pause" or "play"
 	local binary = (env.isAtMother and "/usr/local" or "/opt/homebrew") .. "/bin/spotify_player"
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
-end):start()
+end):start() --[[@as hs.application.watcher]]
+
 
 --------------------------------------------------------------------------------
 return M

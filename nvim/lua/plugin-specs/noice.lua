@@ -11,7 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 --------------------------------------------------------------------------------
 
 -- DOCS https://github.com/folke/noice.nvim#-routes
