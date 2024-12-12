@@ -141,9 +141,9 @@ return { -- mostly used for its notifications
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
 				keys = {
-					i_esc = { "<Esc>", "stopinsert", mode = "i" },
-					-- prevent accidental closing due to <BS> being mapped to `:bprev`
-					BS = { "<BS>", "<Nop>", mode = "n" },
+					i_esc = { "<Esc>", { "cmp_close", "stopinsert" }, mode = "i" },
+					BS = { "<BS>", "<Nop>", mode = "n" }, -- prevent accidental closing (<BS> -> :bprev)
+					CR = { "<CR>", "confirm", mode = "n" },
 				},
 			},
 			notification = {
