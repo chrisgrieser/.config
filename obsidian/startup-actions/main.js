@@ -80,7 +80,7 @@ async function updateStatusbar(plugin) {
 	}
 
 	const text = await app.vault.cachedRead(activeFile);
-	const openTasks = text.match(/- \[ \]|TODO/g);
+	const openTasks = text.match(/- \[ \] |TODO/g);
 	if (!openTasks) {
 		statusbar.style.setProperty("display", "none");
 		return;
@@ -88,7 +88,7 @@ async function updateStatusbar(plugin) {
 
 	statusbar.style.setProperty("display", "block");
 	statusbar.style.setProperty("order", -1); // move to the very left
-	statusbar.setText(`${openTasks.length} [x]`);
+	statusbar.setText(`${openTasks.length} t`);
 }
 
 //──────────────────────────────────────────────────────────────────────────────
