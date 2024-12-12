@@ -4,7 +4,7 @@
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/My Repos"
 max_number_of_bkps=5
 
-# ignores perma-repos since they are already locally backed up
+# IGNORES PERMA-REPOS (since they are already locally backed up)
 ignore_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" |
 	xargs basename |
 	tr "\n" "|" |
@@ -45,5 +45,5 @@ ls -t | tail -n +$((max_number_of_bkps + 1)) | tr '\n' '\0' | xargs -0 rm
 
 # NOTIFY
 print "\e[1;32mArchived $repos_count repos.\e[0m"
-"$ZDOTDIR/notificator" --title "🌐Repo Backup" \
+"$ZDOTDIR/notificator" --title "⬇️ Repo Backup" \
 	--message "$repos_count repos archived." --sound "Blow"

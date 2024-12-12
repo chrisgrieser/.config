@@ -72,9 +72,9 @@ wt.on("format-tab-title", function(tab)
 	if cwd and (title == "zsh" or title == "wezterm" or title:find("/")) then
 		local pwdBasefolder = cwd.file_path:gsub("^.*/(.*)/$", "%1")
 		title = pwdBasefolder
-		icon = ""
+		icon = "󰉋"
 	elseif title:find("^docs") then
-		icon = ""
+		icon = "󰂺"
 	else
 		icon = ""
 	end
@@ -105,7 +105,7 @@ local config = {
 	cursor_blink_rate = 700,
 	cursor_blink_ease_in = "Constant", -- Constant = no fading
 	cursor_blink_ease_out = "Constant",
-	force_reverse_video_cursor = true, -- true = color is reverse, false = color by color scheme
+	force_reverse_video_cursor = true, -- `true` = color is reverse, `false` = color by color scheme
 
 	-- FONT
 	font = wt.font {
@@ -116,7 +116,7 @@ local config = {
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = deviceSpecificConfig[device].fontSize,
 	command_palette_font_size = deviceSpecificConfig[device].fontSize,
-	custom_block_glyphs = false, -- don't use wezterm's box-chars replacements, since too thin
+	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
@@ -125,8 +125,8 @@ local config = {
 	max_fps = deviceSpecificConfig[device].maxFps,
 	adjust_window_size_when_changing_font_size = false,
 
-	-- remove titlebar, but keep macOS traffic lights. Doing so enables
-	-- some macOS window bar window-related functionality, like split commands
+	-- remove titlebar, but keep macOS traffic lights. Doing so enables some
+	-- macOS window bar window-related functionality, like split commands
 	-- (used by Hammerspoon)
 	window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 	native_macos_fullscreen_mode = false,
@@ -146,7 +146,6 @@ local config = {
 	enable_tab_bar = true,
 	tab_max_width = 45, -- I have few tabs, therefore enough space for more width
 	use_fancy_tab_bar = false, -- `false` makes the tabs bigger and more in terminal style
-	show_tabs_in_tab_bar = true, -- can show a status line in the tab bar, too
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 

@@ -39,7 +39,7 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 	local notifyOpts = { icon = "󰋽", title = "LSP Hover" }
 	-- GUARD
 	if err then
-		vim.notify(err, vim.log.levels.ERROR)
+		vim.notify(err.message, vim.log.levels.ERROR)
 		return
 	elseif not result then
 		vim.notify("No hover info available.", nil, notifyOpts)
@@ -47,14 +47,15 @@ vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
 	end
 
 	-- open URL if present
-	local ignoredUrls = { "http://www.lua.org/manual/5.1/manual.html#6.4.1" }
+	local ignoredUrls = {
+		"http://www.lua.org/manual/5.1/manual.html#6.4.1", -- lua core
+		"https://github.com/mgee", -- hammerspoon
+		"https://github.com/sdegutis/",
+	}
 	local text = result.contents.value
 	local urls = text:gmatch("%l%l%l-://[^%s)]+")
 	for url in urls do
-		if not vim.tbl_contains(ignoredUrls, url) then
-			vim.ui.open(url)
-			return
-		end
+		if not vim.tbl_contains(ignoredUrls, url) then vim.ui.open(url) end
 	end
 
 	-- use original handler with some extra settings

@@ -8,7 +8,7 @@ local wu = require("win-management.window-utils")
 local app = require("meta.utils").app
 local c = hs.caffeinate.watcher
 local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
----@cast videoAppWatcherForSpotify hs.application.watcher
+local mastodonScrollUp = require("apps.mastodon").scrollUp
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -79,6 +79,7 @@ local function workLayout()
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
 	require("win-management.auto-tile").resetWinCount("Brave Browser")
+	mastodonScrollUp()
 
 	u.openApps {
 		"Discord",

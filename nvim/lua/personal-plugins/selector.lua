@@ -4,10 +4,10 @@
 
 local config = {
 	win = {
-		border = "single",
 		relative = "cursor",
 		row = 2,
 		col = 0,
+		border = "single",
 		footer_pos = "left",
 	},
 	keymaps = {
@@ -17,7 +17,7 @@ local config = {
 		prev = "<S-Tab>",
 		inspect = "?", -- selection kind & item under cursor
 	},
-	telescopeFallback = {
+	telescopeRedirect = {
 		ifKindMatchesPattern = { "^tinygit" }, ---@type string[] -- checked via string.find
 		ifMoreItemsThan = 10,
 	},
@@ -44,7 +44,7 @@ end
 ---@field format_item? fun(item: any): string nvim spec
 ---@field footer? string specific to this plugin
 
-local function telescopeFallback(_items, _opts, _on_choice)
+local function telescopeRedirect(_items, _opts, _on_choice)
 	local installed, telescope = pcall(require, "telescope")
 	if not installed then
 		notify("telescope.nvim is not installed.", "warn")
@@ -70,11 +70,11 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	-- REDIRECT TO FALLBACK
 	local defaultOpts = { format_item = function(i) return i end }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
-	local fallbackKind = vim.iter(config.telescopeFallback.ifKindMatchesPattern)
+	local fallbackKind = vim.iter(config.telescopeRedirect.ifKindMatchesPattern)
 		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
-	local fallbackMore = #items > config.telescopeFallback.ifMoreItemsThan
+	local fallbackMore = #items > config.telescopeRedirect.ifMoreItemsThan
 	if fallbackKind or fallbackMore then
-		telescopeFallback(items, opts, on_choice)
+		telescopeRedirect(items, opts, on_choice)
 		return
 	end
 
