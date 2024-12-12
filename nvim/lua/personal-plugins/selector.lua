@@ -16,10 +16,9 @@ local config = {
 		abort = { "<Esc>", "q" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		inspectKind = "?", -- selection kind
+		inspect = "?", -- selection kind & item under cursor
 	},
-	fallback = {
-		provider = "telescope", -- currently only `telescope` is supported
+	telescopeFallback = {
 		ifKindMatchesPattern = { "^tinygit" }, ---@type string[] -- checked via string.find
 		ifMoreItemsThan = 10,
 	},
@@ -36,7 +35,12 @@ local M = {}
 ---@field footer? string specific to this plugin
 ---@field ft? string specific to this plugin
 
-local function fallback(_items, _opts, _on_choice, _provider)
+local function telescopeFallback(_items, _opts, _on_choice)
+	local installed, telescope = pcall(require, "telescope")
+	if not installed then
+		vim.notify("telescope.nvim is not installed.", vim.log.levels.WARN)
+		return
+	end
 	-- TODO
 	vim.notify("Not implemented yet.", vim.log.levels.WARN)
 end
@@ -46,7 +50,7 @@ end
 ---@param items any[]
 ---@param opts SelectorOpts
 ---@param on_choice fun(item: any?, idx: integer?)
-function M.modifiedSelect(items, opts, on_choice)
+function M.modifiedUiSelect(items, opts, on_choice)
 	-- GUARD
 	assert(on_choice, "`on_choice` must be a function.")
 	if #items == 0 then
@@ -57,11 +61,11 @@ function M.modifiedSelect(items, opts, on_choice)
 	-- REDIRECT TO FALLBACK
 	local defaultOpts = { format_item = function(i) return i end }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
-	local fallbackKind = vim.iter(config.fallback.ifKindMatchesPattern)
+	local fallbackKind = vim.iter(config.telescopeFallback.ifKindMatchesPattern)
 		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
-	local fallbackMore = #items > config.fallback.ifMoreItemsThan
+	local fallbackMore = #items > config.telescopeFallback.ifMoreItemsThan
 	if fallbackKind or fallbackMore then
-		fallback(items, opts, on_choice, config.fallback.provider)
+		telescopeFallback(items, opts, on_choice)
 		return
 	end
 
@@ -77,7 +81,7 @@ function M.modifiedSelect(items, opts, on_choice)
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, choices)
-	local winnr = vim.api.nvim_open_win(bufnr, true, {
+	local winid = vim.api.nvim_open_win(bufnr, true, {
 		relative = config.win.relative,
 		row = config.win.row,
 		col = config.win.col,
@@ -89,25 +93,25 @@ function M.modifiedSelect(items, opts, on_choice)
 		border = config.win.border,
 		style = "minimal",
 	})
-	vim.wo[winnr].winfixbuf = true
-	vim.wo[winnr].statuscolumn = " " -- = left-padding
-	vim.wo[winnr].cursorline = true
-	vim.wo[winnr].colorcolumn = ""
+	vim.wo[winid].statuscolumn = " " -- = left-padding
+	vim.wo[winid].cursorline = true
+	vim.wo[winid].colorcolumn = ""
+	vim.wo[winid].winfixbuf = true
 	vim.bo[bufnr].modifiable = false
 	vim.bo[bufnr].filetype = opts.ft or config.win.ft
-	vim.bo[bufnr].buftype = "nofile"
 
 	-- KEYMAPS
 	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
-
 	for _, key in ipairs(config.keymaps.abort) do
 		map(key, vim.cmd.bwipeout)
 	end
 	map(config.keymaps.next, "j")
 	map(config.keymaps.prev, "k")
-	map(config.keymaps.inspectKind, function()
-		local msg = ("kind: %s"):format(opts.kind)
-		vim.notify(msg, vim.log.levels.DEBUG, { title = "Inspect" })
+	map(config.keymaps.inspect, function()
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
+		local out = "kind = " .. opts.kind .. "\n" ..
+		vim.inspect { kind = opts.kind, item = items[lnum] }
+		vim.notify(out, vim.log.levels.DEBUG, { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
@@ -121,7 +125,7 @@ function M.modifiedSelect(items, opts, on_choice)
 		once = true,
 		callback = function()
 			local curWin = vim.api.nvim_get_current_win()
-			if curWin == winnr then vim.api.nvim_buf_delete(bufnr, { force = true }) end
+			if curWin == winid then vim.api.nvim_buf_delete(bufnr, { force = true }) end
 		end,
 	})
 end
