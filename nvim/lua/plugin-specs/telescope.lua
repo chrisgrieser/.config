@@ -231,7 +231,7 @@ return {
 					layout_config = {
 						horizontal = { preview_width = 0.4 },
 					},
-					git_command = { "git", "log", "--all", "--format=%h%s", "--", "." },
+					git_command = { "git", "log", "--all", "--format=%h %s", "--", "." },
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						dyn_title = function(_, entry) return entry.value end, -- hash as title
 						get_command = function(entry, status)
@@ -243,11 +243,8 @@ return {
 								.. "%C(blue)%an %C(yellow)(%ch)%n"
 								.. "%C(reset)%b"
 
-							return ("git show %s --color=always --stat=%s --format=%q | sed '$d'"):format(
-								hash,
-								statArgs,
-								format
-							)
+							-- stylua: ignore
+							return { "git", "show", hash, "--color=always", "--stat=" .. statArgs, "--format=" .. format }
 						end,
 					},
 					mappings = {
