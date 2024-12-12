@@ -20,8 +20,8 @@ local config = {
 	},
 	fallback = {
 		provider = "telescope", -- currently only `telescope` is supported
-		kindPatterns = { "^tinygit" }, ---@type string[] -- checked via string.find
-		moreItemsThan = 10,
+		ifKindMatchesPattern = { "^tinygit" }, ---@type string[] -- checked via string.find
+		ifMoreItemsThan = 10,
 	},
 }
 
@@ -57,11 +57,12 @@ function M.modifiedSelect(items, opts, on_choice)
 	-- REDIRECT TO FALLBACK
 	local defaultOpts = { format_item = function(i) return i end }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
-	local fallbackKind = vim.iter(config.fallback.kindPatterns)
+	local fallbackKind = vim.iter(config.fallback.ifKindMatchesPattern)
 		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
-	local fallbackMore = #items > config.fallback.moreItemsThan
+	local fallbackMore = #items > config.fallback.ifMoreItemsThan
 	if fallbackKind or fallbackMore then
-		return fallback(items, opts, on_choice, config.fallback.provider)
+		fallback(items, opts, on_choice, config.fallback.provider)
+		return
 	end
 
 	-- PARAMETERS
@@ -125,8 +126,8 @@ function M.modifiedSelect(items, opts, on_choice)
 	})
 end
 
-local _vimUiSelect = vim.ui.select
-vim.ui.select = M.modifiedSelect
+local _originalVimUiSelect = vim.ui.select
+vim.ui.select = M.modifiedUiSelect
 
 --------------------------------------------------------------------------------
 return M
