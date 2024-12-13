@@ -214,7 +214,7 @@ function M.nextFileInFolder(direction)
 		title = direction:sub(1, 1):upper() .. direction:sub(2) .. " file",
 		icon = direction == "next" and "󰖽" or "󰖿",
 		id = "next-in-folder", -- replace notifications when quickly cycling
-		ft = "markdown", -- so h1 is highlighted
+		ft = "markdown", -- so `h1` is highlighted
 	}
 
 	-- get list of files
