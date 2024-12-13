@@ -23,6 +23,7 @@ local lspToMasonMap = {
 	taplo = "taplo", -- toml lsp
 	ts_ls = "typescript-language-server", -- also used for javascript
 	typos_lsp = "typos-lsp", -- spellchecker for code
+	ts_query_ls = "ts_query_ls", -- tree-sitter queries
 	yamlls = "yaml-language-server",
 	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
 }
@@ -289,7 +290,6 @@ M.serverConfigs.ltex_plus = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
 				-- HACK since reading external file does not work https://github.com/ltex-plus/ltex-ls-plus/issues/56
-				-- ["en-US"] = {":" .. vim.o.spellfile },
 				["en-US"] = vim.iter(io.lines(vim.o.spellfile)):totable()
 			},
 

@@ -4,7 +4,7 @@
 ; - nvim: `vim`
 ; - hammerspon: `hs`
 ((identifier) @namespace.builtin
-              (#any-of? @namespace.builtin "vim" "hs"))
+  (#any-of? @namespace.builtin "vim" "hs"))
 
-; break and continue statements should get same styling as return statements
-((break_statement) @keyword.return)
+; `break` statements should get same styling as return statements
+(break_statement) @keyword.return

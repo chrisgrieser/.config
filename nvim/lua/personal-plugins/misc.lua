@@ -291,7 +291,7 @@ end
 -- `fF` work with `nN` instead of `;,` (inspired by tT.nvim)
 ---@param char "f"|"F"
 function M.fF(char)
-	local target = vim.fn.getcharstr() -- awaits user input of a char
+	local target = vim.fn.getcharstr() -- awaits user input for a char
 	local pattern = [[\V\C]] .. target
 	vim.fn.setreg("/", pattern)
 	vim.fn.search(pattern, char == "f" and "" or "b") -- move cursor
