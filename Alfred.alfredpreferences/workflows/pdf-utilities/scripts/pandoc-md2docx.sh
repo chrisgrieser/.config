@@ -7,12 +7,19 @@ md_file="$*"
 word_file="${md_file%\.md}_$(date +%Y-%m-%d)_CG.docx"
 
 #───────────────────────────────────────────────────────────────────────────────
-
-# PANDOC
+# PREPARE
 if [[ ! "$md_file" =~ .*\.md ]]; then
 	echo "⚠️ Not a markdown file"
 	return 1
 fi
+
+if [[ -f "$word_file" ]]; then
+	rm -f "$word_file"
+	osascript -e 'tell application "Microsoft Word" to close every window' &> /dev/null
+fi
+
+#───────────────────────────────────────────────────────────────────────────────
+# PANDOC
 
 cd "$(dirname "$md_file")" # so `--resource-path` is set
 
