@@ -7,7 +7,7 @@ local config = {
 		relative = "cursor",
 		row = 2,
 		col = 0,
-		border = "single",
+		border = vim.g.borderStyle,
 		footer_pos = "left",
 	},
 	keymaps = {
@@ -18,7 +18,7 @@ local config = {
 		inspect = "?", -- selection kind & item under cursor
 	},
 	telescopeRedirect = {
-		ifKindMatchesPattern = { "^tinygit" }, ---@type string[] -- checked via string.find
+		ifKindMatchesPattern = { "^tinygit" }, -- checked via string.find
 		ifMoreItemsThan = 10,
 	},
 }

@@ -193,7 +193,7 @@ return {
 					end,
 					file_ignore_patterns = {
 						"COMMIT_EDITMSG",
-						"nvim/runtime/doc/.*.txt", -- vim help docs
+						"/doc/.*.txt$", -- vim help docs
 						vim.fn.stdpath("state") .. "/lazy/readme/doc", -- lazy.nvim-generated help
 					},
 
