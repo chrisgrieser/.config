@@ -12,7 +12,8 @@ csl: apa-7th # does not need extension
 lang: en-US
 
 title: Untitled
-subtitle: Some Subtitle
+subtitle: Some subtitle
+toc-title: Table of contents
 author:
   - Christopher Grieser
   - Research Group “Social Studies of Science & Technology”

@@ -18,6 +18,9 @@
                 "toc-depth": {
                     "type": "integer"
                 },
+                "toc-title": {
+                    "type": "string"
+                },
                 "number-sections": {
                     "type": "boolean"
                 },
