@@ -27,7 +27,7 @@ require("lazy").setup {
 	},
 	install = {
 		-- load one of these during installation at startup
-		colorscheme = { "tokyonight-moon", "dawnfox", "habamax" },
+		colorscheme = { "tokyonight-moon", "nightfox", "gruvbox-material", "habamax" },
 	},
 	git = {
 		log = { "--since=4 days ago" }, -- `:Lazy log` shows commits since last x days
@@ -122,7 +122,7 @@ local function checkForDuplicateKeys()
 	vim.iter(plugins):each(function(plugin)
 		if not plugin.keys then return end
 
-		-- 2) each keymap of the plugin
+		-- 2) each keymap of a plugin (only none-ft-specific keymaps)
 		vim.iter(plugin.keys)
 			:filter(function(lazyKey) return lazyKey.ft == nil end)
 			:each(function(lazyKey)
@@ -130,7 +130,7 @@ local function checkForDuplicateKeys()
 				local modes = lazyKey.mode or "n" ---@type string|string[]
 				if type(modes) ~= "table" then modes = { modes } end
 
-				-- 3) each mode of the keymap
+				-- 3) each mode of a keymap
 				vim.iter(modes):each(function(mode)
 					if not alreadyMapped[mode] then alreadyMapped[mode] = {} end
 					if alreadyMapped[mode][lhs] then

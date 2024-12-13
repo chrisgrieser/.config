@@ -254,6 +254,7 @@ keymap("n", "<leader>er", function() require("personal-plugins.inspect-and-eval"
 
 --------------------------------------------------------------------------------
 -- WINDOWS
+
 -- stylua: ignore
 keymap({ "n", "v", "i" }, "<C-CR>", function() vim.cmd.wincmd("w") end, { desc = " Cycle windows" })
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
@@ -266,8 +267,8 @@ keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
 keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 
 --------------------------------------------------------------------------------
-
 -- SNIPPETS
+
 keymap({ "n", "i", "s" }, "<D-p>", function()
 	if vim.snippet.active() then vim.snippet.jump(1) end
 end, { desc = "󰩫 Next placeholder" })
@@ -279,8 +280,8 @@ keymap({ "i", "s" }, "<Esc>", function()
 end, { desc = "󰩫 Exit snippet", expr = true })
 
 --------------------------------------------------------------------------------
-
 -- BUFFERS & FILES
+
 do
 	-- stylua: ignore
 	keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.alt-alt").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
