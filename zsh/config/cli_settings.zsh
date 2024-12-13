@@ -30,10 +30,6 @@ export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't sup
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# shellcheck disable=2016
-# using `rg` ensures that initially, the list of files is sorted by recently modified files.
-export FZF_DEFAULT_COMMAND='rg --no-config --files --sortr=modified --ignore-file="$HOME/.config/ripgrep/ignore"'
-
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope
 export FZF_DEFAULT_OPTS='
 	--pointer="" --prompt=" " --scrollbar="▐" --ellipsis="…" --marker=" +"

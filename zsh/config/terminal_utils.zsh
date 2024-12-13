@@ -49,40 +49,39 @@ function fd {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# On empty buffer, `space` opens our file opener
+# On empty buffer, `space` opens our file opener.
+# (Uses `rg` to sort files by recency.)
 _space_on_empty_buffer() {
-	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
-		quick_open
-	else
-		print -z " "
+	if [[ -n "$BUFFER" || "$CONTEXT" != "start" ]]; then
+		LBUFFER+=" " # just pass through the `space`
+		return
 	fi
-}
-zle -N _space_on_empty_buffer
-bindkey '^I' _space_on_empty_buffer
-
-function quick_open() {
-	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
-	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
-	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --no-ignore-files \
-		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | sed -Ee '$color')"
 
 	local selected
+	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
+	local rg_cmd="rg --no-config --files --sortr=modified --ignore-file='$HOME/.config/ripgrep/ignore'"
+
+	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
+	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
+		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | sed -Ee '$color')"
+
 	selected=$(
 		# shellcheck disable=2016
-		zsh -c "$FZF_DEFAULT_COMMAND" | sed -Ee "$color" |
-			fzf --select-1 --ansi --info=inline --header-first \
+		zsh -c "$rg_cmd" | sed -Ee "$color" |
+			fzf --ansi --info=inline --header-first \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" \
 				--keep-right --scheme=path --tiebreak=length,end \
 				--delimiter="/" --with-nth=-2.. --nth=-2.. \
 				--bind="zero:$reload" \
 				--preview-window="55%" \
 				--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
-				--height="100%"
-		# height of 100% required for wezterm's `pane:is_alt_screen_active()`
+				--height="100%" # height 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0
 	open "$selected"
 }
+zle -N _space_on_empty_buffer
+bindkey ' ' _space_on_empty_buffer
 
 #───────────────────────────────────────────────────────────────────────────────
 

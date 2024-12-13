@@ -10,8 +10,7 @@ return {
 		local ccc = require("ccc")
 		ccc.setup {
 			win_opts = { border = vim.g.borderStyle },
-			highlight_mode = "virtual",
-			virtual_symbol = " ",
+			highlight_mode = "bg",
 			highlighter = {
 				auto_enable = true,
 				filetypes = spec.ft, -- uses lazy.nvim's ft spec
@@ -23,7 +22,6 @@ return {
 				ccc.picker.ansi_escape({
 					black = "#767676",
 					blue = "#3165ff",
-					background = "", -- transparent when using `virtual_symbol`
 				}, { meaning1 = "bright" }),
 			},
 			alpha_show = "hide", -- hide by default
