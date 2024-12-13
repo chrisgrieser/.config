@@ -200,22 +200,23 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
-keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
 keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
-
-local function scrollLspWin(lines)
-	local winid = vim.b.lsp_floating_preview
-	if not vim.api.nvim_win_is_valid(winid) then return end
-	vim.api.nvim_win_call(winid, function()
-		local topline = vim.fn.winsaveview().topline
-		vim.fn.winrestview { topline = topline + lines }
-	end)
-end
-keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP window" })
-keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP window" })
-
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
+
+do
+	keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
+	local function scrollLspWin(lines)
+		local winid = vim.b.lsp_floating_preview
+		if not vim.api.nvim_win_is_valid(winid) then return end
+		vim.api.nvim_win_call(winid, function()
+			local topline = vim.fn.winsaveview().topline
+			vim.fn.winrestview { topline = topline + lines }
+		end)
+	end
+	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP window" })
+	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP window" })
+end
 
 --------------------------------------------------------------------------------
 
@@ -258,12 +259,8 @@ keymap("n", "<leader>er", function() require("personal-plugins.inspect-and-eval"
 
 --------------------------------------------------------------------------------
 -- WINDOWS
-keymap(
-	{ "n", "v", "i" },
-	"<C-CR>",
-	function() vim.cmd.wincmd("w") end,
-	{ desc = " Cycle windows" }
-)
+-- stylua: ignore
+keymap({ "n", "v", "i" }, "<C-CR>", function() vim.cmd.wincmd("w") end, { desc = " Cycle windows" })
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
