@@ -3,13 +3,6 @@ return {
 	event = "BufReadPost",
 	build = ":TSUpdate",
 	main = "nvim-treesitter.configs",
-	keys = {
-		{
-			"<leader>ot",
-			function() vim.cmd.TSBufToggle("highlight") end,
-			desc = " Treesitter highlights",
-		},
-	},
 	opts = {
 		-- easier than keeping track of new "special parsers", which are not
 		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
@@ -46,6 +39,28 @@ return {
 		})
 	end,
 
+	keys = {
+		-- stylua: ignore
+		{ "<leader>ot", function() vim.cmd.TSBufToggle("highlight") end, desc = " Treesitter highlights" },
+		{ -- copy code context
+			"<leader>yb",
+			function()
+				local codeContext = require("nvim-treesitter").statusline {
+					indicator_size = math.huge, -- disable shortening
+					type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
+					separator = ".",
+				}
+				if codeContext and codeContext ~= "" then
+					codeContext = codeContext:gsub(" ?[:=][^:=]-$", ""):gsub(" ?= ?", "")
+					vim.fn.setreg("+", codeContext)
+					vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
+				else
+					vim.notify("No code context.", vim.log.levels.WARN)
+				end
+			end,
+			desc = "󰅍 Code context",
+		},
+	},
 	-- context as statusline component
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)

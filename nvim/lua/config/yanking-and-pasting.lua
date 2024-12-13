@@ -80,7 +80,7 @@ end, { desc = " Paste charwise", expr = true })
 keymap("n", "<D-v>", "p", { desc = " Paste" })
 
 --------------------------------------------------------------------------------
--- SPECIAL YANKING OPERATIONS
+-- SPECIAL YANK OPERATIONS
 
 keymap("n", "<leader>yl", function()
 	-- not using `:glocal // yank` because it yanks lines one after the other
@@ -94,21 +94,6 @@ keymap("n", "<leader>yl", function()
 		vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
 	end)
 end, { desc = "󰦨 Lines matching pattern" })
-
-keymap("n", "<leader>yb", function()
-	local codeContext = require("nvim-treesitter").statusline {
-		indicator_size = math.huge, -- disable shortening
-		type_patterns = { "class", "function", "method", "field", "pair" }, -- `pair` for yaml/json
-		separator = ".",
-	}
-	if codeContext and codeContext ~= "" then
-		codeContext = codeContext:gsub(" ?[:=][^:=]-$", ""):gsub(" ?= ?", "")
-		vim.fn.setreg("+", codeContext)
-		vim.notify(codeContext, nil, { title = "Copied", icon = "󰅍", ft = vim.bo.ft })
-	else
-		vim.notify("No code context.", vim.log.levels.WARN)
-	end
-end, { desc = "󰅍 Code context" })
 
 keymap("n", "<leader>y:", function()
 	local lastCmd = vim.fn.getreg(":"):gsub("^lua ?", "")
