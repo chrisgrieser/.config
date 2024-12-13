@@ -37,6 +37,7 @@ require("lazy").setup {
 		wrap = true,
 		border = vim.g.borderStyle,
 		pills = false,
+		backdrop = 40,
 		size = { width = 0.85, height = 0.85 },
 		custom_keys = {
 			["<localleader>l"] = false,
@@ -85,7 +86,7 @@ require("lazy").setup {
 
 --------------------------------------------------------------------------------
 
--- KEYMAPS FOR LAZY-GENERATED HELP IN MARKDOWN
+-- KEYMAPS FOR LAZY-GENERATED HELP FILES IN MARKDOWN
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Setup for lazy-generated help in markdown",
 	pattern = "markdown",
