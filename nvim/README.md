@@ -7,11 +7,11 @@
 ├── lua
 │  ├── config
 │  ├── personal-plugins
-│  └── plugin-configs
+│  └── plugin-specs
 ├── personal-mason-registry
 ├── after
-│  └── ftplugin # filetype-specific configs
-├── queries # modifications of treesitter queries
+│  └── ftplugin
+├── queries
 ├── snippets
 │  ├── basic
 │  └── project-specific

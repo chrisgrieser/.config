@@ -115,30 +115,29 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" 
 -- TEST FOR DUPLICATE KEYS on every startup
 
 local function checkForDuplicateKeys()
-	---@type fun(lazyKey: {mode?: string|table}): string[]
-	local function getModesOfKey(lazyKey)
-		if not lazyKey.mode then return {"n"} end
-		if type(lazyKey.mode) == "string" then return { lazyKey.mode  } end
-		if type(lazyKey.mode) == "table" then return  lazyKey.mode end ---@diagnostic disable-line: param-type-mismatch
-	end
-
-	local allKeys = { n = {}, x = {}, o = {}, i = {} }
-	local allModes = vim.tbl_keys(allKeys)
-
+	local alreadyMapped = {}
 	local plugins = require("lazy").plugins()
-	vim.iter(plugins):each(function(plugin) -- for each plugin
-		vim
-			.iter(plugin.keys or {})
-			:filter(function(key) return key.ft == nil end) 
-			:each(function(lazyKey) -- for each keymap of the plugin
+
+	-- 1) each plugin
+	vim.iter(plugins):each(function(plugin)
+		if not plugin.keys then return end
+
+		-- 2) each keymap of the plugin
+		vim.iter(plugin.keys)
+			:filter(function(lazyKey) return lazyKey.ft == nil end)
+			:each(function(lazyKey)
 				local lhs = lazyKey[1] or lazyKey
-				vim.iter(allModes):each(function(mode) -- for each mode of a keymap
-					if not getModesOfKey(lazyKey, mode) then return end
-					if allKeys[mode].lhs then
-						local msg = ("Duplicate %smap: [%s]"):format(mode, lhs)
+				local modes = lazyKey.mode or "n" ---@type string|string[]
+				if type(modes) ~= "table" then modes = { modes } end
+
+				-- 3) each mode of the keymap
+				vim.iter(modes):each(function(mode)
+					if not alreadyMapped[mode] then alreadyMapped[mode] = {} end
+					if alreadyMapped[mode][lhs] then
+						local msg = ("Duplicate keymap: [%s (%s)]"):format(lhs, mode)
 						vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", timeout = false })
 					else
-						allKeys[mode].lhs = true
+						alreadyMapped[mode][lhs] = true
 					end
 				end)
 			end)
