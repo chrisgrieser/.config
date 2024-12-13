@@ -171,7 +171,7 @@ return {
 			mode = "o",
 			function()
 				local charwise = require("various-textobjs.textobjs.charwise.core")
-				local pattern = "(/[%w_%-./]+/)[%w_%-.]+()"
+				local pattern = "(%.?/[%w_%-./]+/)[%w_%-.]+()"
 				charwise.selectClosestTextobj(pattern, "outer", 5)
 			end,
 			desc = " outer path",
