@@ -23,10 +23,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 local function toggleHiddenFileSearch(promptBufnr)
-	local current_picker = require("telescope.actions.state").get_current_picker(promptBufnr)
-	local cwd = tostring(current_picker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
+	local currentPicker = require("telescope.actions.state").get_current_picker(promptBufnr)
+	local cwd = tostring(currentPicker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
-	local prevTitle = current_picker.prompt_title
+	local prevTitle = currentPicker.prompt_title
 	local title
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
@@ -44,7 +44,7 @@ local function toggleHiddenFileSearch(promptBufnr)
 	end
 
 	-- ignore the existing current path due to using `rg --sortr=modified`
-	local relPathCurrent = table.remove(current_picker.file_ignore_patterns)
+	local relPathCurrent = table.remove(currentPicker.file_ignore_patterns)
 	table.insert(ignore, relPathCurrent)
 
 	require("telescope.actions").close(promptBufnr)
@@ -150,8 +150,7 @@ return {
 				find_files = {
 					-- INFO using `rg` instead of `fd` ensures that initially, the list
 					-- of files is sorted by recently modified files. (`fd` does not
-					-- have a `--sort` flag.)
-					-- alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
+					-- have a `--sort` flag.) alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
 					find_command = {
 						"rg",
 						"--no-config",
@@ -162,7 +161,7 @@ return {
 					},
 					prompt_title = "󰝰 Files in cwd",
 					path_display = { "filename_first" },
-					layout_config = { horizontal = { width = 0.6, height = 0.6 } }, -- use small layout, toggle via <D-p>
+					layout_config = { horizontal = { width = 0.6, height = 0.6 } }, 
 					previewer = false,
 					follow = true,
 					mappings = {
@@ -171,6 +170,8 @@ return {
 				},
 				oldfiles = {
 					prompt_title = "󰋚 Recent files",
+
+					-- heuristic to just display the relevant part of the file's path
 					path_display = function(_, path)
 						local parentOfRoots = {
 							vim.g.localRepos,
@@ -218,6 +219,8 @@ return {
 					},
 					layout_strategy = "vertical",
 					preview_title = "Files not staged",
+
+					-- show diffstats instead of diff preview
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						get_command = function(_, status)
 							local width = vim.api.nvim_win_get_width(status.preview_win)
@@ -231,7 +234,11 @@ return {
 					layout_config = {
 						horizontal = { preview_width = 0.4 },
 					},
+
+					-- add `--all`
 					git_command = { "git", "log", "--all", "--format=%h %s", "--", "." },
+
+					-- show diffstats instead of simple status in the previewer
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						dyn_title = function(_, entry) return entry.value end, -- hash as title
 						get_command = function(entry, status)
@@ -364,7 +371,7 @@ return {
 							["<CR>"] = function(promptBufnr)
 								local entry = require("telescope.actions.state").get_selected_entry().value
 								require("telescope.actions").close(promptBufnr)
-								vim.cmd(("help %s | only"):format(entry))
+								vim.cmd("help " .. entry .. " | only")
 							end,
 						},
 					},
