@@ -19,6 +19,7 @@ require("lazy").setup {
 	spec = { import = "plugin-specs" },
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
+
 	dev = { ---@diagnostic disable-line: assign-type-mismatch
 		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
@@ -29,8 +30,7 @@ require("lazy").setup {
 		colorscheme = { "tokyonight-moon", "dawnfox", "habamax" },
 	},
 	git = {
-		log = { "--since=4 days ago" }, -- Lazy log shows commits since last x days
-		cooldown = 180, -- seconds before a plugin is updated again
+		log = { "--since=4 days ago" }, -- `:Lazy log` shows commits since last x days
 	},
 	ui = {
 		title = " 󰒲 lazy.nvim ",
