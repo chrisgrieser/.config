@@ -27,12 +27,12 @@ local function toggleHiddenFileSearch(promptBufnr)
 	local cwd = tostring(currentPicker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
 
 	local prevTitle = currentPicker.prompt_title
-	local title
 	local currentQuery = require("telescope.actions.state").get_current_line()
 	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
 	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
 
 	-- hidden status not stored, but title is, so using it to determine previous state
+	local title
 	local includeIgnoreHidden = not prevTitle:find("hidden")
 	if includeIgnoreHidden then
 		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
@@ -59,7 +59,6 @@ local function toggleHiddenFileSearch(promptBufnr)
 end
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
 
 return {
 	"nvim-telescope/telescope.nvim",
@@ -70,8 +69,6 @@ return {
 
 		require("telescope").setup {
 			defaults = {
-				scroll_strategy = "cycle", -- do not cycle from top to bottom
-
 				path_display = { "tail" },
 				selection_caret = " ",
 				prompt_prefix = " ",
@@ -96,16 +93,16 @@ return {
 						["<D-s>"] = "smart_send_to_qflist",
 						["<D-f>"] = "to_fuzzy_refine", -- only live grep & workspace symbols
 
-						["<D-c>"] = function(prompt_bufnr) -- copy value
+						["<D-c>"] = function(promptBufnr) -- copy value
 							local value = require("telescope.actions.state").get_selected_entry().value
-							require("telescope.actions").close(prompt_bufnr)
+							require("telescope.actions").close(promptBufnr)
 							vim.fn.setreg("+", value)
 							vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
 						end,
 						-- mapping consistent with fzf-multi-select
-						["<M-CR>"] = function(prompt_bufnr) -- multi-select
-							require("telescope.actions").toggle_selection(prompt_bufnr)
-							require("telescope.actions").move_selection_worse(prompt_bufnr)
+						["<M-CR>"] = function(promptBufnr) -- multi-select
+							require("telescope.actions").toggle_selection(promptBufnr)
+							require("telescope.actions").move_selection_worse(promptBufnr)
 						end,
 					},
 				},
@@ -161,7 +158,7 @@ return {
 					},
 					prompt_title = "󰝰 Files in cwd",
 					path_display = { "filename_first" },
-					layout_config = { horizontal = { width = 0.6, height = 0.6 } }, 
+					layout_config = { horizontal = { width = 0.6, height = 0.6 } },
 					previewer = false,
 					follow = true,
 					mappings = {
@@ -274,7 +271,7 @@ return {
 					prompt_title = " Highlight groups",
 					layout_config = { horizontal = { preview_width = { 0.7, min = 20 } } },
 					mappings = {
-						i = {
+						i = { -- copy highlight values
 							["<CR>"] = function(promptBufnr)
 								local hlName = require("telescope.actions.state").get_selected_entry().value
 								require("telescope.actions").close(promptBufnr)
@@ -491,13 +488,11 @@ return {
 				-- ignore current file, since using the `rg` workaround puts it on top
 				local ignore =
 					vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
-				local cwd = vim.uv.cwd() or ""
-				local relPathCurrent = "^"
-					.. vim.pesc(vim.api.nvim_buf_get_name(0):sub(#cwd + 2))
-					.. "$"
-				table.insert(ignore, relPathCurrent)
+				local relPathCurrent = vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2)
+				local relPathPattern = ("^%s$"):format(vim.pesc(relPathCurrent))
+				table.insert(ignore, relPathPattern)
 
-				-- add git info to file
+				-- get list of changed files
 				local changedFilesInCwd = {}
 				local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
 				local inGitRepo = gitDir.code == 0
@@ -512,20 +507,22 @@ return {
 					end)
 				end
 
+				local function highlightChangedFiles(_, path)
+					local tail = vim.fs.basename(path)
+					local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
+					local out = tail .. "  " .. parent
+					local highlights = {
+						{ { #tail, #out }, "TelescopeResultsComment" },
+					}
+					if vim.tbl_contains(changedFilesInCwd, path) then
+						table.insert(highlights, { { 0, #tail }, "diffChanged" })
+					end
+					return out, highlights
+				end
+
 				require("telescope.builtin").find_files {
 					file_ignore_patterns = ignore,
-					path_display = function(_, path)
-						local tail = vim.fs.basename(path)
-						local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
-						local out = tail .. "  " .. parent
-						local highlights = {
-							{ { #tail, #out }, "TelescopeResultsComment" },
-						}
-						if vim.tbl_contains(changedFilesInCwd, path) then
-							table.insert(highlights, { { 0, #tail }, "diffChanged" })
-						end
-						return out, highlights
-					end,
+					path_display = highlightChangedFiles,
 				}
 			end,
 			desc = "󰭎 Open file",
