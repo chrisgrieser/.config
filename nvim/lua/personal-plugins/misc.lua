@@ -229,8 +229,7 @@ function M.nextFileInFolder(direction)
 	-- GUARD edge cases like if currently at a hidden file and there are only
 	-- hidden files in the directory
 	if #filesInFolder == 0 then
-		local msg = "No valid files found in folder."
-		vim.notify(msg, vim.log.levels.ERROR, notifyOpts)
+		vim.notify("No valid files found in folder.", vim.log.levels.ERROR, notifyOpts)
 		return
 	end
 
@@ -267,22 +266,17 @@ end
 
 --------------------------------------------------------------------------------
 
---- @param opts? vim.lsp.buf.format.Opts
 function M.formatWithFallback(opts)
-	local bufnr = (opts and opts.bufnr) or 0
-	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = bufnr }
+	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 
 	if formattingLsps > 0 then
-		if vim.bo[bufnr].ft == "markdown" then -- for efm-formatters that don't use stdin
-			vim.api.nvim_buf_call(bufnr, function() vim.cmd("silent update") end)
-		end
+		-- save for efm-formatters that don't use stdin
+		if vim.bo.ft == "markdown" then vim.cmd("silent update") end
 		vim.lsp.buf.format(opts)
 	else
-		vim.api.nvim_buf_call(bufnr, function()
-			vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
-			vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
-			vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
-		end)
+		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
+		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
+		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 	end
 end
 
