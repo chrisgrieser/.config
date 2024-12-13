@@ -10,9 +10,7 @@ keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc 
 keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
 
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
-local stateDir = vim.fn.stdpath("state") --[[@as string]]
 keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
-keymap("n", "<leader>ps", function() vim.ui.open(stateDir) end, { desc = "󰝰 State dir" })
 keymap("n", "<leader>pv", function() vim.ui.open(vim.o.viewdir) end, { desc = "󰝰 View dir" })
 
 --------------------------------------------------------------------------------
@@ -71,12 +69,8 @@ keymap("n", "F", function() require("personal-plugins.misc").fF("F") end, { desc
 keymap("n", "u", "<cmd>silent undo<CR>", { desc = "󰜊 silent undo" })
 keymap("n", "U", "<cmd>silent redo<CR>", { desc = "󰛒 silent redo" })
 keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
-keymap(
-	"n",
-	"<leader>ur",
-	function() vim.cmd.later(vim.o.undolevels) end,
-	{ desc = "󰛒 Redo all" }
-)
+-- stylua: ignore
+keymap("n", "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, { desc = "󰛒 Redo all" })
 
 -- Duplicate
 -- stylua: ignore
@@ -206,6 +200,7 @@ keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").format
 
 do
 	keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
+
 	local function scrollLspWin(lines)
 		local winid = vim.b.lsp_floating_preview
 		if not vim.api.nvim_win_is_valid(winid) then return end
