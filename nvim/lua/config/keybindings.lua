@@ -49,9 +49,10 @@ keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
+-- Open first URL in file
 keymap("n", "<D-U>", function()
 	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-	local url = text:match("%l%l%l-://[^%s)]+")
+	local url = text:match([[%l%l%l-://[^%s)"'`]+]])
 	if url then
 		vim.ui.open(url)
 	else
@@ -201,6 +202,17 @@ keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LS
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
 keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
+
+local function scrollLspWin(lines)
+	local winid = vim.b.lsp_floating_preview
+	if not vim.api.nvim_win_is_valid(winid) then return end
+	vim.api.nvim_win_call(winid, function()
+		local topline = vim.fn.winsaveview().topline
+		vim.fn.winrestview { topline = topline + lines }
+	end)
+end
+keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP window" })
+keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP window" })
 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
