@@ -3,6 +3,8 @@
 ---@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
 --------------------------------------------------------------------------------
 
+-- TODO next release: re-enable `completion.menu.draw.treesitter`
+
 return {
 	{ -- completion engine
 		"saghen/blink.cmp",
