@@ -20,15 +20,11 @@ function ,ya {
 	echo "Copied: $PWD"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
-
 # utility scripts only made available, but not loaded directly (= lazy-loading)
 export PATH="$ZDOTDIR/utilities/":$PATH
 
 # mason things only made available, but not loaded directly
 function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
-
-#───────────────────────────────────────────────────────────────────────────────
 
 function p {
 	qlmanage -p "$1" &> /dev/null
@@ -44,14 +40,27 @@ function line_count() {
 		-print0 | xargs -0 wc -l
 }
 
-# Quick Open File
-function o() {
-	# skip `fzf` if file is fully named, e.g. through tab completion
-	if [[ -f "$1" ]]; then
-		open "$1"
-		return 0
-	fi
+# file finder
+# `fd` replacement using just `rg`
+function fd {
+	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
+		rg --color=always "$1"
+}
 
+#───────────────────────────────────────────────────────────────────────────────
+
+# On empty buffer, `space` opens our file opener
+_space_on_empty_buffer() {
+	if [[ -z "$BUFFER" && "$CONTEXT" == "start" ]]; then
+		quick_open
+	else
+		print -z " "
+	fi
+}
+zle -N _space_on_empty_buffer
+bindkey '^I' _space_on_empty_buffer
+
+function quick_open() {
 	# reloads one ctrl-h (`--bind=ctrl-h`) or as soon as there is no result found (`--bind=zero`)
 	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
 	local reload="reload($FZF_DEFAULT_COMMAND --hidden --no-ignore --no-ignore-files \
@@ -61,7 +70,7 @@ function o() {
 	selected=$(
 		# shellcheck disable=2016
 		zsh -c "$FZF_DEFAULT_COMMAND" | sed -Ee "$color" |
-			fzf --select-1 --ansi --query="$*" --info=inline --header-first \
+			fzf --select-1 --ansi --info=inline --header-first \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" \
 				--keep-right --scheme=path --tiebreak=length,end \
 				--delimiter="/" --with-nth=-2.. --nth=-2.. \
@@ -73,45 +82,6 @@ function o() {
 	)
 	[[ -z "$selected" ]] && return 0
 	open "$selected"
-}
-
-# completions for it
-_o() {
-	local -a paths=()
-	local -a names=()
-	while IFS='' read -r file; do # turn lines into array
-		paths+=("$file")
-		names+=("$(basename "$file")")
-	done < <(zsh -c "$FZF_DEFAULT_COMMAND --max-depth=4")
-
-	local expl && _description -V files-in-pwd expl 'Files in PWD'
-	compadd "${expl[@]}" -d names -a paths
-}
-compdef _o o
-
-# open last changed file in cwd
-function oo {
-	local max_depth=4
-	local last_modified
-	last_modified=$(
-		find . -type file -maxdepth $max_depth \
-			-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
-			-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-			-not -name "*.webp" -not -name "*.png" -not -name "*.svg" -print0 |
-			xargs -0 stat -f "%m %N" |
-			sort --numeric --reverse |
-			sed -n "1p" |
-			cut -d" " -f2-
-	)
-	[[ -z "$last_modified" ]] && return 1
-	open "$last_modified"
-}
-
-# file finder
-# `fd` replacement using just `rg`
-function fd {
-	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

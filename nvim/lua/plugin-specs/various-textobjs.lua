@@ -54,9 +54,6 @@ return {
 		{ "i" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('inner')<CR>", mode = {"x","o"}, desc = "󰖬 inner wikilink" },
 		{ "a" .. textObj.wikilink, "<cmd>lua require('various-textobjs').doubleSquareBrackets('outer')<CR>", mode = {"x","o"}, desc = "󰖬 outer wikilink" },
 
-		{ "a_", "<cmd>lua require('various-textobjs').lineCharacterwise('outer')<CR>", mode = {"x","o"}, desc = "outer line" },
-		{ "i_", "<cmd>lua require('various-textobjs').lineCharacterwise('inner')<CR>", mode = {"x","o"}, desc = "inner line" },
-
 		-- python
 		{ "iS", "<cmd>lua require('various-textobjs').pyTripleQuotes('inner')<CR>", ft = "python", mode = {"x","o"}, desc = " inner tripleQuotes" },
 		{ "aS", "<cmd>lua require('various-textobjs').pyTripleQuotes('outer')<CR>", ft = "python", mode = {"x","o"}, desc = " outer tripleQuotes" },
@@ -157,16 +154,17 @@ return {
 			end,
 			desc = " Open next URL",
 		},
-		{ -- to last WORD
+		{ -- to next `then` in lua
 			"N",
 			mode = "o",
 			function()
 				local charwise = require("various-textobjs.textobjs.charwise.core")
-				local pattern = "().(%S+%s*)$"
-				local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 0)
-				charwise.selectFromCursorTo({ row, endCol }, 0)
+				local pattern = "().( then)"
+				local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 5)
+				charwise.selectFromCursorTo({ row, endCol }, 5)
 			end,
-			desc = "󰬞 to last WORD",
+			ft = "lua",
+			desc = "󰬞 to next `then`",
 		},
 		{ -- path textobj
 			"a-",
