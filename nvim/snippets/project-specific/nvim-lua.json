@@ -23,8 +23,11 @@
     "prefix": "autocmd (Filetype)"
   },
   "cast (LuaDoc)": {
-    "body": "---@cast ${1:varname} ${2:string}",
-    "prefix": "@cast (LuaDoc)"
+    "body": "--[[@as ${1:string}]]",
+    "prefix": [
+      "@cast (LuaDoc)",
+      "@as (LuaDoc)"
+    ]
   },
   "check if on macOS": {
     "body": "jit.os == \"OSX\"",

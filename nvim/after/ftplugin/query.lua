@@ -12,11 +12,3 @@ if vim.bo.buftype == "" then
 	vim.opt_local.tabstop = 2
 	vim.opt_local.expandtab = true
 end
-
---------------------------------------------------------------------------------
--- FORMATTING
-local bkeymap = require("config.utils").bufKeymap
-bkeymap("n", "<D-s>", function()
-	vim.cmd.normal { "m`gg=G``", bang = true }
-	require("personal-plugins.misc").formatWithFallback()
-end, { desc = "󰀵 Format" })

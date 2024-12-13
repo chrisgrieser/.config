@@ -7,12 +7,12 @@ if not vim.uv.fs_stat(lazypath) then
 	local args = { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazypath }
 	local out = vim.system(args):wait()
 	if out.code ~= 0 then
-		vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. out, "ErrorMsg" } }, true, {})
+		vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. out.stderr, "ErrorMsg" } }, true, {})
 		vim.fn.getchar()
 		os.exit(1)
 	end
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 --------------------------------------------------------------------------------
 
 require("lazy").setup {
@@ -115,39 +115,32 @@ keymap("n", "<leader>pi", require("lazy").install, { desc = "󰒲 Lazy install" 
 -- TEST FOR DUPLICATE KEYS on every startup
 
 local function checkForDuplicateKeys()
-	---@param lazyKey {mode?: string|table}
-	---@param mode string
-	---@return boolean
-	local function isMode(lazyKey, mode)
-		if not lazyKey.mode then return mode == "n" end
-		if type(lazyKey.mode) == "string" then return lazyKey.mode == mode end
-		if type(lazyKey.mode) == "table" then return vim.tbl_contains(lazyKey.mode, mode) end ---@diagnostic disable-line: param-type-mismatch
-		return false
+	---@type fun(lazyKey: {mode?: string|table}): string[]
+	local function getModesOfKey(lazyKey)
+		if not lazyKey.mode then return {"n"} end
+		if type(lazyKey.mode) == "string" then return { lazyKey.mode  } end
+		if type(lazyKey.mode) == "table" then return  lazyKey.mode end ---@diagnostic disable-line: param-type-mismatch
 	end
 
 	local allKeys = { n = {}, x = {}, o = {}, i = {} }
 	local allModes = vim.tbl_keys(allKeys)
 
 	local plugins = require("lazy").plugins()
-	vim.iter(plugins):each(function(plugin)
+	vim.iter(plugins):each(function(plugin) -- for each plugin
 		vim
 			.iter(plugin.keys or {})
-			:filter(function(key) return key.ft == nil end) -- not ft-specific keys
-			:each(function(lazyKey)
-				local lhs = lazyKey[1] or lazyKey -- keys can be just a string
-				for _, mode in ipairs(allModes) do
-					if isMode(lazyKey, mode) then
-						if vim.tbl_contains(allKeys[mode], lhs) then
-							vim.notify_once(
-								("Duplicate %smap: [%s]"):format(mode, lhs),
-								vim.log.levels.WARN,
-								{ title = "Lazy", ft = "text", timeout = false }
-							)
-						else
-							table.insert(allKeys[mode], lhs)
-						end
+			:filter(function(key) return key.ft == nil end) 
+			:each(function(lazyKey) -- for each keymap of the plugin
+				local lhs = lazyKey[1] or lazyKey
+				vim.iter(allModes):each(function(mode) -- for each mode of a keymap
+					if not getModesOfKey(lazyKey, mode) then return end
+					if allKeys[mode].lhs then
+						local msg = ("Duplicate %smap: [%s]"):format(mode, lhs)
+						vim.notify(msg, vim.log.levels.WARN, { title = "lazy.nvim", timeout = false })
+					else
+						allKeys[mode].lhs = true
 					end
-				end
+				end)
 			end)
 	end)
 end
