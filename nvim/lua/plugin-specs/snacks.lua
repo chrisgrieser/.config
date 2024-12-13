@@ -80,9 +80,9 @@ end
 
 --------------------------------------------------------------------------------
 
-return { 
+return {
 	"folke/snacks.nvim",
-	event = "UIEnter",
+	event = "BufReadPre",
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
