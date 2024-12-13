@@ -4,6 +4,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 table-of-contents: true
+toc-depth: 3
 number-sections: true
 shift-heading-level-by: -1
 
@@ -12,8 +13,6 @@ bibliography: ${USERDATA}/main-bibliography.bib
 citeproc: true
 
 metadata-file: academic.yaml # overwritten by document's yaml (`metadata:` would not)
-metadata:
-  title: "Document Title"
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────

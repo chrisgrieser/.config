@@ -359,18 +359,19 @@
     }
   ],
   "markdown:add-metadata-property": [],
-  "copilot-auto-completion:accept": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "A"
-    }
-  ],
   "obsidian-linter:lint-file-unless-ignored": [
     {
       "modifiers": [
         "Mod"
+      ],
+      "key": "S"
+    }
+  ],
+  "copilot-auto-completion:accept": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
       ],
       "key": "S"
     }
