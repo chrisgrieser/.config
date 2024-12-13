@@ -30,7 +30,7 @@ zstyle ':completion:*:messages' format $'\e[3;34m%d\e[0m'
 #───────────────────────────────────────────────────────────────────────────────
 # BINDINGS
 
-# On empty tab, open `cd` completion menu, otherwise, select completion.
+# On empty buffer, `tab` opens `cd` completion menu, otherwise, select completion.
 # (This is better than `AUTO_CD`, since `zstyle ':completion:*' group-order` does
 # not affect `AUTO_CD`, but is normal `cd`, which we emulate here. )
 _tab-on-empty-buffer() {
