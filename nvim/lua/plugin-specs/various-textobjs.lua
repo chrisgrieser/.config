@@ -103,8 +103,8 @@ return {
 				vim.cmd.normal { "<", bang = true } -- dedent indentation
 				local endBorderLn = vim.api.nvim_buf_get_mark(0, ">")[1]
 				local startBorderLn = vim.api.nvim_buf_get_mark(0, "<")[1]
-				vim.cmd(tostring(endBorderLn) .. " delete") -- delete end first so line index is not shifted
-				vim.cmd(tostring(startBorderLn) .. " delete")
+				vim.cmd(endBorderLn .. " delete") -- delete end first so line index is not shifted
+				vim.cmd(startBorderLn .. " delete")
 
 				-- defer to due race condition with sticky deletion
 				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
@@ -122,7 +122,7 @@ return {
 				vim.cmd.normal { "V", bang = true } -- leave visual mode so <> marks are set
 				vim.api.nvim_win_set_cursor(0, startPos) -- restore (= sticky yank)
 
-				-- copy them into the + register
+				-- copy them into the `+` register
 				local startLn = vim.api.nvim_buf_get_mark(0, "<")[1] - 1
 				local endLn = vim.api.nvim_buf_get_mark(0, ">")[1] - 1
 				local startLine = vim.api.nvim_buf_get_lines(0, startLn, startLn + 1, false)[1]
@@ -181,7 +181,7 @@ return {
 			mode = "o",
 			function()
 				local charwise = require("various-textobjs.textobjs.charwise.core")
-				local pattern = "(/[%w_%-./]+/)[%w_%-.]+()"
+				local pattern = "(%.?/[%w_%-./]+/)[%w_%-.]+()"
 				charwise.selectClosestTextobj(pattern, "inner", 5)
 			end,
 			desc = " inner path",
