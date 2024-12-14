@@ -43,9 +43,6 @@ return {
 		{ "in", "<cmd>lua require('various-textobjs').number('inner')<CR>", mode = {"x","o"}, desc = " inner number" },
 		{ "an", "<cmd>lua require('various-textobjs').number('outer')<CR>", mode = {"x","o"}, desc = " outer number" },
 
-		{ "a_", "<cmd>lua require('various-textobjs').lineCharacterwise('outer')<CR>", mode = {"x","o"}, desc = "outer line" },
-		{ "i_", "<cmd>lua require('various-textobjs').lineCharacterwise('inner')<CR>", mode = {"x","o"}, desc = "inner line" },
-
 		{ "ii", "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<CR>", mode = {"x","o"}, desc = "󰉶 inner indent" },
 		{ "ai", "<cmd>lua require('various-textobjs').indentation('outer', 'outer')<CR>", mode = {"x","o"}, desc = "󰉶 outer indent" },
 		{ "aj", "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<CR>", mode = {"x","o"}, desc = "󰉶 top-border indent" },
@@ -72,8 +69,8 @@ return {
 		{ "as", "<cmd>lua require('various-textobjs').cssSelector('outer')<CR>", mode = {"x","o"}, ft = "css", desc = " outer selector" },
 
 		-- shell
-		{ "ix", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = "sh", desc = "󰟥 inner pipe" },
-		{ "ax", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = "sh", desc = "󰟥 outer pipe" },
+		{ "ix", "<cmd>lua require('various-textobjs').shellPipe('inner')<CR>", mode = "o", ft = {"bash", "zsh"}, desc = "󰟥 inner pipe" },
+		{ "ax", "<cmd>lua require('various-textobjs').shellPipe('outer')<CR>", mode = "o", ft = {"bash", "zsh"}, desc = "󰟥 outer pipe" },
 		-- stylua: ignore end
 
 		{ -- indent last paste

@@ -1,4 +1,4 @@
-alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" # size of files in current directory
+alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'" 
 alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
 
 function cake {
@@ -63,19 +63,20 @@ _esc_on_empty_buffer() {
 
 	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
 	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
-		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | 
-		eza --stdin --color=always --icons=always --no-quotes)"
+		--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' | 
+		eza --stdin --color=always --icons=always)"
 	# shellcheck disable=2016
 
 	selected=$(
-		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always --no-quotes |
+		zsh -c "$rg_cmd" | 
+			eza --stdin --color=always --icons=always |
 			fzf --ansi --info=inline --height="50%" \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
-				--scheme=path --tiebreak=length,end \
+				--scheme=path --tiebreak=length,end
 	)
-	[[ -z "$selected" ]] && return 0
-	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
+	zle reset-prompt
+	[[ -n "$selected" ]] && return 0
+	echo "$selected" | cut -c3- | xargs open # to remove the nerdfont icons
 }
 zle -N _esc_on_empty_buffer
 bindkey '\e' _esc_on_empty_buffer
@@ -86,9 +87,8 @@ bindkey '\e' _esc_on_empty_buffer
 function s {
 	local selected file line
 	selected=$(
-		rg "$*" --color=always --colors=path:fg:blue --no-messages --line-number --trim \
-			--no-config --hidden --smart-case --sortr=modified \
-			--ignore-file="$HOME/.config/ripgrep/ignore" |
+		rg "$*" --color=always --no-messages --line-number --trim --no-config \
+			--hidden --smart-case --sortr=modified --ignore-file="$HOME/.config/ripgrep/ignore" |
 			fzf --ansi --select-1 --delimiter=":" \
 				--preview="bat {1} --no-config --color=always --highlight-line={2} --line-range={2}: " \
 				--preview-window="60%,top,border-down" \
