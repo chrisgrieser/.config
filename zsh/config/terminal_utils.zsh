@@ -58,23 +58,19 @@ _space_on_empty_buffer() {
 	fi
 
 	local selected
-	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
 	local rg_cmd="rg --no-config --files --sortr=modified --ignore-file='$HOME/.config/ripgrep/ignore'"
 
 	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
 	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
-		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | sed -Ee '$color')"
+		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | eza --stdin)"
+	# shellcheck disable=2016
 
 	selected=$(
-		# shellcheck disable=2016
-		zsh -c "$rg_cmd" | sed -Ee "$color" |
+		zsh -c "$rg_cmd" |
+			eza --stdin --color=always --icons=always --no-quotes |
 			fzf --ansi --info=inline --header-first \
-				--header="^H: --hidden" --bind="ctrl-h:$reload" \
+				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
 				--keep-right --scheme=path --tiebreak=length,end \
-				--delimiter="/" --with-nth=-2.. --nth=-2.. \
-				--bind="zero:$reload" \
-				--preview-window="55%" \
-				--preview '[[ $(file --mime {}) =~ text ]] && bat --color=always --wrap=never --style=header-filesize,header-filename,grid {} || file {} | fold -w $FZF_PREVIEW_COLUMNS' \
 				--height="100%" # height 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0
