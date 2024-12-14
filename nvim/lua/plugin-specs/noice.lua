@@ -67,8 +67,7 @@ local routes = {
 
 return {
 	"folke/noice.nvim",
-	event = "VeryLazy",
-	dependencies = {},
+	event = "BufReadPre",
 	keys = {
 		{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear notifications" },
 		-- stylua: ignore

@@ -198,12 +198,12 @@ function my_commits_today {
 
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
-		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + "\t" + .commit.message' |
+		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
 		cut -c12-16,26-) # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed \
-		-Ee $'s/\t(fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/\t\e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
+		-Ee $'s/ (fix|refactor|build|ci|docs|feat|style|test|perf|chore|revert|break|improv)(\\(.+\\))?(!?):/ \e[1;35m\\1\e[0;36m\\2\e[7;31m\\3\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/ (release|bump):/ \e[1;32m\\1\e[0;38;5;245m:\e[0m/' \
 		-Ee $'s/([0-9][0-9]:[0-9][0-9]) ([^ ]* )/\e[0;38;5;245m\\1  \e[1;34m\\2\e[0m/' \
 		-Ee $'s/`[^`]*`/\e[0;33m&\e[0m/g' \
@@ -213,8 +213,8 @@ function my_commits_today {
 
 #───────────────────────────────────────────────────────────────────────────────
 # GIT LOG
-# uses `_gitlog` from `magic-dashboard.zsh`
 
+# uses `_gitlog` from `magic-dashboard.zsh`
 function gl {
 	if [[ -z "$1" ]]; then
 		_gitlog --max-count=15 # default
@@ -236,7 +236,8 @@ function reflog {
 	fi
 }
 
-# interactive
+# INTERACTIVE GIT LOG
+# uses `_gitlog` from `magic-dashboard.zsh`
 function gli {
 	if [[ ! -x "$(command -v delta)" ]]; then print "\e[1;33mdelta not installed (\`brew install git-delta\`)\e[0m" && return 1; fi
 
@@ -368,20 +369,4 @@ function gdf {
 	elif [[ "$decision" =~ checkout ]]; then
 		git checkout "$last_commit"
 	fi
-}
-#───────────────────────────────────────────────────────────────────────────────
-
-# Git Status All (for all perma-repos)
-function gsa {
-	local perma_repos="$HOME/.config/perma-repos.csv" # CONFIG
-
-	cut -d, -f2 "$perma_repos" | while read -r repopath; do
-		local resolved=${repopath//\~/$HOME}
-		changes=$(git -c color.diff=always -C "$resolved" diff --stat | sed -e '$d' -e 's/^ //')
-		if [[ -n "$changes" ]]; then
-			print "\e[1;34m$repopath\e[0m"
-			echo "$changes"
-			echo
-		fi
-	done
 }

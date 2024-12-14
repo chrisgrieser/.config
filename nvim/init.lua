@@ -49,6 +49,7 @@ safeRequire("config.quickfix")
 safeRequire("config.yanking-and-pasting")
 
 safeRequire("config.backdrop-underline-fix")
+safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")
 
 -- lazy-load spellfixes

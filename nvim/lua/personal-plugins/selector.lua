@@ -17,6 +17,10 @@ local config = {
 		prev = "<S-Tab>",
 		inspect = "?", -- selection kind & item under cursor
 	},
+	codeaction = {
+		icon = "󱐋",
+		format_item = function(item) return ("%s [%s]"):format(item.action.title, item.action.kind) end,
+	},
 	telescopeRedirect = {
 		ifKindMatchesPattern = { "^tinygit", "telescope" }, -- checked via string.find
 		ifMoreItemsThan = 10,
@@ -24,7 +28,7 @@ local config = {
 			layout_config = {
 				horizontal = { width = 0.7 },
 			},
-		}
+		},
 	},
 }
 
@@ -38,7 +42,10 @@ local M = {}
 ---@param opts? table
 local function notify(msg, level, opts)
 	if not level then level = "info" end
-	local defaultOpts = { title = pluginName }
+	local defaultOpts = {
+		title = pluginName,
+		icon = config.icons.main,
+	}
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts or {})
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
@@ -69,7 +76,7 @@ local function telescopeRedirect(items, opts, on_choice)
 	pickers
 		.new(config.telescopeRedirect.opts, {
 			prompt_title = opts.prompt:gsub(":%s*$", ""),
-			sorter = conf.generic_sorter (config.telescopeRedirect.opts),
+			sorter = conf.generic_sorter(config.telescopeRedirect.opts),
 
 			finder = finders.new_table {
 				results = items,
@@ -105,7 +112,12 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	assert(type(on_choice) == "function", "`on_choice` must be a function.")
 	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = nil }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
-	opts.prompt = opts.prompt:gsub(":%s*$", "") -- trim trailing `:`
+	opts.prompt = opts.prompt:gsub(":%s*$", "") -- trim trailing `:` from prmpt
+
+	if opts.kind == "codeaction" then
+		opts.prompt = vim.trim(config.codeaction.icon .. " " .. opts.prompt)
+		opts.format_item = config.codeaction.format_item or function(i) return i end
+	end
 
 	-- REDIRECT TO TELESCOPE
 	local fallbackKind = vim.iter(config.telescopeRedirect.ifKindMatchesPattern)
@@ -143,23 +155,33 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	vim.wo[winid].cursorline = true
 	vim.wo[winid].colorcolumn = ""
 	vim.wo[winid].winfixbuf = true
+	vim.wo[winid].conceallevel = 2
+	vim.wo[winid].concealcursor = "nvic"
 	vim.bo[bufnr].modifiable = false
 	vim.bo[bufnr].filetype = pluginName
+	pcall(vim.treesitter.start, bufnr, "markdown") -- highlighting
 
 	-- KEYMAPS
-	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
+	local function map(lhs, rhs, mapOpts)
+		local defaultMapOpts = { nowait = true, buffer = bufnr }
+		mapOpts = vim.tbl_extend("force", defaultMapOpts, mapOpts or {})
+		vim.keymap.set("n", lhs, rhs, mapOpts)
+	end
 	for _, key in ipairs(config.keymaps.abort) do
 		map(key, vim.cmd.bwipeout)
 	end
-	map(config.keymaps.next, "j")
-	map(config.keymaps.prev, "k")
+	map(config.keymaps.next, function()
+		if vim.api.nvim_win_get_cursor(0)[1] == height then return "gg" end
+		return "j"
+	end, { expr = true })
+	map(config.keymaps.prev, function ()
+		if vim.api.nvim_win_get_cursor(0)[1] == 1 then return "G" end
+		return "k"
+	end, { expr = true  })
 	map(config.keymaps.inspect, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local out = "kind = "
-			.. vim.inspect(opts.kind)
-			.. "\nitemUnderCursor = "
-			.. vim.inspect(items[lnum])
-		notify(out, "debug", { title = "Inspect", ft = "lua" })
+		local out = { kind = opts.kind, itemUnderCursor = items[lnum] }
+		notify(vim.inspect(out), "debug", { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
