@@ -305,7 +305,7 @@ keymap({ "n", "x" }, "<S-M-CR>", function() require("personal-plugins.misc").nex
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	local winClosed = pcall(vim.cmd.close)
-	if not winClosed then require("personal-plugins.alt-alt").closeBuffer() end
+	if not winClosed then require("personal-plugins.alt-alt").deleteBuffer() end
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap({ "n", "x" }, "<leader>es", function()

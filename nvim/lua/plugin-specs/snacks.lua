@@ -105,6 +105,14 @@ return {
 		},
 	},
 	opts = {
+		statuscolumn = {
+			left = { "git", },
+			right = { "sign", "fold" },
+			folds = {
+				open = true, -- show open fold icons
+				git_hl = false, -- use Git Signs hl for fold icons
+			},
+		},
 		dim = {
 			scope = { min_size = 4, max_size = 20 },
 		},
