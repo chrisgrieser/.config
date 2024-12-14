@@ -44,7 +44,7 @@ local function toggleHiddenFileSearch(promptBufnr)
 	end
 
 	-- ignore the existing current path due to using `rg --sortr=modified`
-	local relPathCurrent = table.remove(currentPicker.file_ignore_patterns)
+	local relPathCurrent = currentPicker.file_ignore_patterns[#currentPicker.file_ignore_patterns]
 	table.insert(ignore, relPathCurrent)
 
 	require("telescope.actions").close(promptBufnr)
@@ -54,7 +54,6 @@ local function toggleHiddenFileSearch(promptBufnr)
 		find_command = findCommand,
 		cwd = cwd,
 		file_ignore_patterns = ignore,
-		path_display = { "filename_first" },
 	}
 end
 

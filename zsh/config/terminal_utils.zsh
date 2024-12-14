@@ -70,13 +70,12 @@ _esc_on_empty_buffer() {
 	selected=$(
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --no-quotes |
-			fzf --ansi --info=inline --header-first \
+			fzf --ansi --info=inline --height="50%" \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
-				--keep-right --scheme=path --tiebreak=length,end \
-				--height="100%" # height 100% required for wezterm's `pane:is_alt_screen_active()`
+				--scheme=path --tiebreak=length,end \
 	)
 	[[ -z "$selected" ]] && return 0
-	echo "$selected" | cut -c3- | xargs open
+	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
 }
 zle -N _esc_on_empty_buffer
 bindkey '\e' _esc_on_empty_buffer
