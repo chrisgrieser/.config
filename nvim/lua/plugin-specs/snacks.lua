@@ -63,7 +63,9 @@ local function openNotif(idx)
 			colorcolumn = "",
 			winfixbuf = true,
 		},
-		bo = { modifiable = false },
+		bo = {
+			modifiable = false,
+		},
 		keys = {
 			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()

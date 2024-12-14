@@ -192,13 +192,12 @@ function M.gotoMostChangedFile()
 			targetFile = absPath
 		end
 	end)
-
-	-- open
 	if targetFile == vim.api.nvim_buf_get_name(0) then
 		vim.notify("Already at only changed file.", nil, notifyOpts)
-	else
-		vim.cmd.edit(targetFile)
+		return
 	end
+
+	vim.cmd.edit(targetFile)
 end
 
 ---Cycles files in folder in alphabetical order.
