@@ -6,9 +6,8 @@ app.includeStandardAdditions = true;
 
 /** @param {string} str */
 function alfredMatcher(str) {
-	const clean = str.replace(/[-()_.:#/\\;,[\]]/g, " ");
-	const camelCaseSeparated = str.replace(/([A-Z])/g, " $1");
-	return [clean, camelCaseSeparated, str].join(" ");
+	const clean = str.replace(/[-_]/g, " ");
+	return [clean, str].join(" ");
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -23,23 +22,22 @@ function run() {
 		.tree.filter((/** @type {{ path: string; }} */ file) => docPathRegex.test(file.path))
 		.reverse()
 		.map((/** @type {{ path: string }} */ entry) => {
-			const title = entry.path.slice(5, -3);
-			const parts = title.split("/");
-			let displayTitle = (parts.pop() || "??").replace(/[-_]/g, " ");
-			displayTitle = displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1);
+			const entryPath = entry.path.slice(5, -3);
+			const parts = entryPath.split("/");
+			const title = parts.pop() || "??";
 			const category = parts.join("/");
-			const url = `${baseURL}/${title}`;
+			const url = `${baseURL}/${entryPath}`;
 
 			return {
-				title: displayTitle,
+				title: title,
 				subtitle: category,
-				match: alfredMatcher(title),
+				match: alfredMatcher(entryPath),
 				mods: {
-					cmd: { arg: title }, // copy entry
+					cmd: { arg: entryPath }, // copy entry
 				},
 				arg: url,
 				quicklookurl: url,
-				uid: title,
+				uid: entryPath,
 			};
 		});
 

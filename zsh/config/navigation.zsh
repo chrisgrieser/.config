@@ -8,7 +8,7 @@
 # make all directories in these folders available as `cd` targets from anywhere
 export CDPATH="$HOME/Developer:$HOME/Vaults"
 
-setopt CD_SILENT # don't echo the directory after `cd`
+setopt CD_SILENT   # don't echo the directory after `cd`
 setopt CHASE_LINKS # follow symlinks when they are `cd` target
 # not using `AUTO_CD`, since my `tab`-mapping in `completion.zsh` is more flexible
 
@@ -26,16 +26,17 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
-alias -- -=' cd "$HOME/Desktop"'
 
-# make `cd` default to `Desktop`, not `$HOME`
-function cd {
-	if [[ -z "$1" ]]; then
-		builtin cd "$HOME/Desktop" || return 1
-	else
-		builtin cd "$@" || return 1
-	fi
+#───────────────────────────────────────────────────────────────────────────────
+
+# cmd+enter -> goto desktop
+function _goto_desktop {
+	cd "$HOME/Desktop" || return 1
+	zle reset-prompt
+	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory
 }
+zle -N _goto_desktop
+bindkey '^O' _goto_desktop # remapped to cmd+enter in wezterm keybindings
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
