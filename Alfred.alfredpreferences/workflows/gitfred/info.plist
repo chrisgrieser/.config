@@ -73,7 +73,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</string>
+				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -514,19 +514,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F1ACCD95-5E8C-469E-AFD1-D184923540FB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<array>
 			<dict>
@@ -631,26 +618,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>9AED849C-2F6C-4741-B375-875D5613781A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<true/>
-				<key>variables</key>
-				<dict>
-					<key>clonedViaHotkey</key>
-					<string>true</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1817,15 +1784,6 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>ypos</key>
 			<real>765</real>
 		</dict>
-		<key>F6452F1D-43C4-4D5C-A9B0-E01DC0619A21</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>30</real>
-		</dict>
 		<key>F99C6054-D3E9-4D1C-960A-8E9EC9FA5CB3</key>
 		<dict>
 			<key>colorindex</key>
@@ -1988,7 +1946,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>restore mtime</string>
 			</dict>
 			<key>description</key>
-			<string>Git normally erases the modification time of all cloned. Enabling this will restore the mtime from the commit log. (However, the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
+			<string>Git erases the modification time of all files when cloning. Enabling this will restore the modification time from the commit log. (Note that the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -2004,35 +1962,16 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>fork when cloning via `⌃⏎`</string>
+				<string>fork when cloning</string>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Forking requires the `gh` cli.</string>
 			<key>label</key>
 			<string>Forking</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>fork_on_clone</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>fork when cloning via hotkey</string>
-			</dict>
-			<key>description</key>
-			<string>Forking requires the `gh` cli.</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>fork_on_hotkey_clone</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2097,7 +2036,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.4</string>
+	<string>1.6.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

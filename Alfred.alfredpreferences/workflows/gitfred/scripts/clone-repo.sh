@@ -27,7 +27,7 @@ if [[ -d "$reponame" ]]; then
 		return 1
 	fi
 	mv "$reponame" "${owner_of_existing_repo}__$reponame"
-elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]] ; then
+elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]]; then
 	clone_dir="${owner}__$reponame"
 fi
 
@@ -54,7 +54,7 @@ cd "$clone_dir" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# POST CLONE ACTIONS
+# POST-CLONE ACTIONS
 if [[ -n "$branch_on_clone" ]]; then
 	# `git switch` fails silently if the branch does not exist
 	git switch "$branch_on_clone" &> /dev/null
@@ -72,23 +72,20 @@ fi
 # FORKING
 
 # INFO Alfred stores checkbox settings as `"1"` or `"0"`, and variables in stringified form.
-if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]] ||
-	[[ "$clonedViaHotkey" == "true" && "$fork_on_clone_via_hotkey" == "1" ]]; then
+if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 
-	if [[ ! -x "$(command -v gh)" ]]; then
-		echo "ERROR: \`gh\` not installed." 
-		return 1
+	if [[ -x "$(command -v gh)" ]]; then
+		gh repo fork --remote=false
+	else
+		echo "ERROR: Cannot fork, \`gh\` not installed."
 	fi
 
-	gh repo fork --remote=false
-
-	if [[ "$setup_remotes_on_fork" == "1" ]] ; then
+	if [[ "$setup_remotes_on_fork" == "1" ]]; then
 		git remote rename origin upstream
 		git remote add origin "git@github.com:$github_username/$reponame.git"
-		gh repo set-default "$source_repo" # where `gh` sends PRs to
 	fi
 
-	if [[ -n "$on_fork_branch" ]] ; then 
+	if [[ -n "$on_fork_branch" ]]; then
 		git switch --create "$on_fork_branch"
 	fi
 fi
