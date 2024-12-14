@@ -28,8 +28,8 @@ return {
 			always_show_tabs = true, -- this refers to the tabline
 			-- stylua: ignore
 			ignore_focus = {
-				"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt",
-				"checkhealth", "mason", "qf", "lazy", "snacks_input", "snacks_win", "noice"
+				"DressingSelect", "ccc-ui", "TelescopePrompt", "checkhealth",
+				"mason", "lazy", "snacks_input", "snacks_win",
 			},
 		},
 		tabline = {

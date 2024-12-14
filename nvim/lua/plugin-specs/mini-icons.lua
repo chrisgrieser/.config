@@ -1,4 +1,4 @@
-return { -- icon library
+return { 
 	"echasnovski/mini.icons",
 	opts = {
 		file = {
@@ -17,6 +17,9 @@ return { -- icon library
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
+
+			["noice"] = { glyph = "󰎟" }, 
+			["qf"] = { glyph = "󰴩" }, 
 		},
 	},
 	config = function(_, opts)

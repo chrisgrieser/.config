@@ -139,7 +139,7 @@ return {
 				-- stylua: ignore
 				file_ignore_patterns = {
 					"%.png$", "%.svg", "%.gif", "%.jpe?g", "%.webp", "%.icns", "%.ico",
-					"%.zip", "%.pdf",
+					"%.zip", "%.pdf", "%.docx", "%.xlsx", "%.pptx",
 					unpack(specialDirs), -- needs to be last for complete unpacking
 				},
 			},

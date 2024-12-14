@@ -66,8 +66,8 @@ keymap("n", "F", function() require("personal-plugins.misc").fF("F") end, { desc
 -- EDITING
 
 -- Undo
-keymap("n", "u", "<cmd>silent undo<CR>", { desc = "󰜊 silent undo" })
-keymap("n", "U", "<cmd>silent redo<CR>", { desc = "󰛒 silent redo" })
+keymap("n", "u", "<cmd>silent undo<CR>", { desc = "󰜊 Silent undo" })
+keymap("n", "U", "<cmd>silent redo<CR>", { desc = "󰛒 Silent redo" })
 keymap("n", "<leader>uu", ":earlier ", { desc = "󰜊 Undo to earlier" })
 -- stylua: ignore
 keymap("n", "<leader>ur", function() vim.cmd.later(vim.o.undolevels) end, { desc = "󰛒 Redo all" })
