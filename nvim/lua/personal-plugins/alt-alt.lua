@@ -1,26 +1,25 @@
 --[[ ALT-ALT
-Alternative to vim's "alternative file"
+Alternative to vim's "alternative file" that improves its functionality.
 
-Features
-- `require("alt-alt").deleteBuffer()` removes the buffer as alt-file, but keepts
-  it in the list of oldfiles
-- `require("alt-alt").gotoAltFile()` as an improved version of `:buffer #` that
+1.`require("alt-alt").gotoAltFile()` as an improved version of `:buffer #` that
   avoids special buffers, deleted buffers, non-existent files etc. and falls back
-  to the first oldfile, if there is currently only one buffer
-- `require("alt-alt").altFileStatusbar()` to display the alt-file in the
-  statusbar, including an icon (if `nvim-devicons` or `mini-icons` is installed)
+  to the first oldfile, if there is currently only one buffer.
+2.`require("alt-alt").deleteBuffer()` removes the buffer as alt-file, but keepts
+  it in the list of oldfiles.
+3.`require("alt-alt").altFileStatusbar()` to display the alt-file in the
+  statusbar, including an icon (if `nvim-devicons` or `mini-icons` is installed).
 ]]
 
 --------------------------------------------------------------------------------
 
 local config = {
 	icons = {
-		oldfile = "󰋚",
 		main = "󰬈",
+		oldfile = "󰋚",
 	},
 	statusbar = {
 		maxLength = 30,
-		showIcons = true, -- requires `nvim-devicons` or `mini-icons`
+		showIcon = true, -- requires `nvim-devicons` or `mini-icons`
 	}
 }
 
@@ -130,7 +129,7 @@ end
 
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltFile()
-	if vim.bo.buftype ~= "" then
+	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
 		notify("Cannot do that in special buffer.", "warn")
 		return
 	end
