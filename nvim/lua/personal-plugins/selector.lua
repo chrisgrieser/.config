@@ -20,6 +20,11 @@ local config = {
 	telescopeRedirect = {
 		ifKindMatchesPattern = { "^tinygit", "telescope" }, -- checked via string.find
 		ifMoreItemsThan = 10,
+		opts = { -- accepts the common telescope picker config
+			layout_config = {
+				horizontal = { width = 0.7 },
+			},
+		}
 	},
 }
 
@@ -44,6 +49,9 @@ end
 ---@field format_item? fun(item: any): string nvim spec
 ---@field footer? string specific to this plugin
 
+---@param items any[]
+---@param opts SelectorOpts
+---@param on_choice fun(item: any, idx?: integer)
 local function telescopeRedirect(items, opts, on_choice)
 	local installed, _ = pcall(require, "telescope")
 	if not installed then
@@ -56,13 +64,13 @@ local function telescopeRedirect(items, opts, on_choice)
 	local finders = require("telescope.finders")
 	local conf = require("telescope.config").values
 	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-
-	local title = opts.prompt:gsub(":%s*$", "")
+	local actionState = require("telescope.actions.state")
 
 	pickers
-		.new({}, {
-			prompt_title = title,
+		.new(config.telescopeRedirect.opts, {
+			prompt_title = opts.prompt:gsub(":%s*$", ""),
+			sorter = conf.generic_sorter (config.telescopeRedirect.opts),
+
 			finder = finders.new_table {
 				results = items,
 				entry_maker = function(entry)
@@ -70,16 +78,13 @@ local function telescopeRedirect(items, opts, on_choice)
 					return { value = entry, display = display, ordinal = display }
 				end,
 			},
-			sorter = conf.generic_sorter {},
 			attach_mappings = function(promptBufnr, _map)
 				actions.select_default:replace(function()
 					actions.close(promptBufnr)
-					local selection = action_state.get_selected_entry()
-					vim.notify(vim.inspect(selection)) -- 🪚
-					vim.notify("🪚 🟩")
-					-- on_choice(selection.value, selection.ordinal)
+					local selection = actionState.get_selected_entry()
+					on_choice(selection.value, selection.index)
 				end)
-				return true
+				return true -- `true` = keep other mappings from the user
 			end,
 		})
 		:find()
@@ -89,21 +94,20 @@ end
 
 ---@param items any[]
 ---@param opts SelectorOpts
----@param on_choice fun(item: any?, idx: integer?)
+---@param on_choice fun(item: any, idx?: integer)
 function M.modifiedUiSelect(items, opts, on_choice)
-	-- GUARD
-	assert(on_choice, "`on_choice` must be a function.")
 	if #items == 0 then
 		notify("No items to select from.", "warn")
 		return
 	end
 
 	-- OPTIONS
-	local defaultOpts = { format_item = function(i) return i end, prompt = "Select" }
+	assert(type(on_choice) == "function", "`on_choice` must be a function.")
+	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = nil }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
 	opts.prompt = opts.prompt:gsub(":%s*$", "") -- trim trailing `:`
 
-	-- REDIRECT TO FALLBACK
+	-- REDIRECT TO TELESCOPE
 	local fallbackKind = vim.iter(config.telescopeRedirect.ifKindMatchesPattern)
 		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
 	local fallbackMore = #items > config.telescopeRedirect.ifMoreItemsThan
