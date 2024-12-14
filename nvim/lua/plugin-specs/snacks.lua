@@ -33,7 +33,7 @@ local function openNotif(idx)
 	local overflow = #lines + 2 - height -- +2 for border
 	local moreLines = overflow > 0 and ("↓ %d lines"):format(overflow) or ""
 	local indexStr = ("(%d/%d)"):format(idx, #history)
-	local footer = vim.trim(indexStr .. " " .. moreLines)
+	local footer = vim.trim(indexStr .. "   " .. moreLines)
 
 	local levelCapitalized = notif.level:sub(1, 1):upper() .. notif.level:sub(2)
 	local highlights = {

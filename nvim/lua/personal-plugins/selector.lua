@@ -8,16 +8,16 @@ local config = {
 		row = 2,
 		col = 0,
 		border = vim.g.borderStyle,
-		footer_pos = "left",
+		showKindInFooter = true,
 	},
 	keymaps = {
 		confirm = "<CR>",
 		abort = { "<Esc>", "q" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		inspect = "?", -- selection kind & item under cursor
+		inspect = "?",
 	},
-	codeaction = {
+	codeaction = { -- extra customization of `vim.lsp.buf.code_action`
 		icon = "󱐋",
 		format_item = function(item) return ("%s [%s]"):format(item.action.title, item.action.kind) end,
 	},
@@ -42,19 +42,20 @@ local M = {}
 ---@param opts? table
 local function notify(msg, level, opts)
 	if not level then level = "info" end
-	local defaultOpts = {
-		title = pluginName,
-		icon = config.icons.main,
-	}
+	local defaultOpts = { title = pluginName }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts or {})
 	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
+
+local function lnum() return vim.api.nvim_win_get_cursor(0)[1] end
 
 ---@class (exact) SelectorOpts
 ---@field prompt? string nvim spec
 ---@field kind? string nvim spec
 ---@field format_item? fun(item: any): string nvim spec
 ---@field footer? string specific to this plugin
+
+--------------------------------------------------------------------------------
 
 ---@param items any[]
 ---@param opts SelectorOpts
@@ -101,8 +102,8 @@ end
 
 ---@param items any[]
 ---@param opts SelectorOpts
----@param on_choice fun(item: any, idx?: integer)
-function M.modifiedUiSelect(items, opts, on_choice)
+---@param on_choice fun(item: any, idx: integer)
+function M.selector(items, opts, on_choice)
 	if #items == 0 then
 		notify("No items to select from.", "warn")
 		return
@@ -130,11 +131,11 @@ function M.modifiedUiSelect(items, opts, on_choice)
 
 	-- PARAMETERS
 	local choices = vim.tbl_map(opts.format_item, items)
-	assert(type(choices[1]) == "string", "`format_item` must return a string.")
+	assert(type(choices[1]) == "string", "`opts.format_item` must return a string.")
 	local longestChoice = vim.iter(choices):fold(0, function(acc, c) return math.max(acc, #c) end)
-	local width = math.max(longestChoice, #opts.prompt) + 2
+	local width = math.max(longestChoice, #opts.prompt) + 1
 	local height = #choices
-	local footer = opts.footer and (" " .. opts.footer .. " ") or nil
+	local footer = config.win.showKindInFooter and " " .. opts.kind .. " " or nil
 
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -146,47 +147,44 @@ function M.modifiedUiSelect(items, opts, on_choice)
 		width = width,
 		height = height,
 		title = " " .. opts.prompt .. " ",
-		footer = footer,
-		footer_pos = footer and config.win.footer_pos or nil,
+		footer = footer and { { footer, "NonText" } } or nil,
+		footer_pos = footer and "right" or nil,
 		border = config.win.border,
 		style = "minimal",
 	})
 	vim.wo[winid].statuscolumn = " " -- = left-padding
-	vim.wo[winid].cursorline = true
+	vim.wo[winid].cursorline = height > 1
 	vim.wo[winid].colorcolumn = ""
 	vim.wo[winid].winfixbuf = true
-	vim.wo[winid].conceallevel = 2
-	vim.wo[winid].concealcursor = "nvic"
 	vim.bo[bufnr].modifiable = false
 	vim.bo[bufnr].filetype = pluginName
-	pcall(vim.treesitter.start, bufnr, "markdown") -- highlighting
+	vim.wo[winid].sidescrolloff = 0
+
+	-- highlighting
+	pcall(vim.treesitter.start, bufnr, "markdown")
+	vim.wo[winid].conceallevel = 3
+	vim.wo[winid].concealcursor = "nvic"
 
 	-- KEYMAPS
-	local function map(lhs, rhs, mapOpts)
-		local defaultMapOpts = { nowait = true, buffer = bufnr }
-		mapOpts = vim.tbl_extend("force", defaultMapOpts, mapOpts or {})
-		vim.keymap.set("n", lhs, rhs, mapOpts)
-	end
+	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
 	for _, key in ipairs(config.keymaps.abort) do
 		map(key, vim.cmd.bwipeout)
 	end
 	map(config.keymaps.next, function()
-		if vim.api.nvim_win_get_cursor(0)[1] == height then return "gg" end
-		return "j"
-	end, { expr = true })
-	map(config.keymaps.prev, function ()
-		if vim.api.nvim_win_get_cursor(0)[1] == 1 then return "G" end
-		return "k"
-	end, { expr = true  })
+		local cmd = lnum() == height and "gg" or "j"
+		vim.cmd.normal { cmd, bang = true }
+	end)
+	map(config.keymaps.prev, function()
+		local cmd = lnum() == 1 and "G" or "k"
+		vim.cmd.normal { cmd, bang = true }
+	end)
 	map(config.keymaps.inspect, function()
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local out = { kind = opts.kind, itemUnderCursor = items[lnum] }
-		notify(vim.inspect(out), "debug", { title = "Inspect", ft = "lua" })
+		local out = vim.inspect(items[lnum()])
+		notify(out, "debug", { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
-		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		vim.cmd.bwipeout()
-		on_choice(items[lnum], lnum)
+		on_choice(items[lnum()], lnum())
 	end)
 
 	-- UNMOUNT
@@ -200,8 +198,7 @@ function M.modifiedUiSelect(items, opts, on_choice)
 	})
 end
 
-local _originalVimUiSelect = vim.ui.select
-vim.ui.select = M.modifiedUiSelect
+vim.ui.select = M.selector
 
 --------------------------------------------------------------------------------
 return M
