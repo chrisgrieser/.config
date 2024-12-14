@@ -90,7 +90,7 @@ return {
 	keys = {
 		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
 		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
-		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰋇 Blame line" },
+		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<D-9>",
 			function() openNotif("last") end,
@@ -160,7 +160,7 @@ return {
 				width = 0.6,
 				height = 0.6,
 				border = vim.g.borderStyle,
-				title = " 󰉚 Git blame ",
+				title = " 󰆽 Git blame ",
 			},
 		},
 	},
