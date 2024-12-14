@@ -22,7 +22,6 @@
 # colors
 --colors=match:fg:magenta
 --colors=match:style:bold
---colors=path:fg:cyan
---colors=path:style:bold
+--colors=path:fg:blue
 --colors=line:fg:green
 --colors=column:fg:green
