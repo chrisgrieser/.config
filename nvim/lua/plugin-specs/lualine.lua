@@ -29,7 +29,7 @@ return {
 			-- stylua: ignore
 			ignore_focus = {
 				"DressingInput", "DressingSelect", "ccc-ui", "TelescopePrompt",
-				"checkhealth", "mason", "qf", "lazy", "snacks_input", "snacks_win"
+				"checkhealth", "mason", "qf", "lazy", "snacks_input", "snacks_win", "noice"
 			},
 		},
 		tabline = {
