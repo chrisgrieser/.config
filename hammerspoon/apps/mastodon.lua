@@ -22,10 +22,6 @@ end
 
 if u.isSystemStart() then moveToSide() end
 
-M.aw_mastoLaunched = aw.new(function(appName, event)
-	if appName == "Ivory" and event == aw.launched then u.defer(1, moveToSide) end
-end):start()
-
 --------------------------------------------------------------------------------
 -- SHOW/HIDE APP
 
@@ -91,7 +87,7 @@ end):start()
 --------------------------------------------------------------------------------
 -- RESET ON DEACTIVATION
 
-function M.scrollUp()
+local function scrollUp()
 	local masto = u.app("Ivory")
 	if not masto then return end
 	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
@@ -109,10 +105,21 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 		-- go back to home tab
 		if #masto:allWindows() == 1 and not M.isScrolling then
 			M.isScrolling = true
-			u.defer(1, M.scrollUp)
+			u.defer(1, scrollUp)
 			u.defer(10, function() M.isScrolling = false end)
 		end
 	end
+end):start()
+
+--------------------------------------------------------------------------------
+-- TRIGGER SCROLLING AND MOVE TO SIDE ON LAUNCH
+
+M.aw_mastoLaunched = aw.new(function(appName, event)
+	if not (appName == "Ivory" and event == aw.launched) then return end
+	u.defer(1, function()
+		moveToSide()
+		scrollUp()
+	end)
 end):start()
 
 --------------------------------------------------------------------------------

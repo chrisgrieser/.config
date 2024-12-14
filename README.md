@@ -1,12 +1,7 @@
-<!-- vale Google.FirstPerson = NO -->
-<!-- LTeX: enabled=false -->
-# pseudometa's dotfiles
-<!-- LTeX: enabled=true -->
-
 ## Configurations of interest
 People tell me they find the following configurations most useful:
 
-- [neovim config](/nvim) (~6500 LoC)
+- [neovim config](/nvim) (~7000 LoC)
 - [hammerspoon config](/hammerspoon) (~2500 LoC)
 - [zshrc](/zsh) (~1500 LoC)
 - [Pandoc configs & pointers on how to use pandoc](/pandoc)
@@ -16,7 +11,7 @@ People tell me they find the following configurations most useful:
 
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
-## My Blog on Neovim
+## My blog on Neovim
 - [Nanotips for Vim](https://nanotipsforvim.prose.sh/)
 
 ## About me
@@ -25,7 +20,7 @@ digital economy. For my PhD project, I investigate the governance of the app
 economy and how software ecosystems manage the tension between innovation and
 compatibility. If you are interested in this subject, feel free to get in touch.
 
-- [Academic Website](https://chris-grieser.de/)
+- [Website](https://chris-grieser.de/)
 - [Mastodon](https://pkm.social/@pseudometa)
 - [ResearchGate](https://www.researchgate.net/profile/Christopher-Grieser)
 - [LinkedIn](https://www.linkedin.com/in/christopher-grieser-ba693b17a/)
