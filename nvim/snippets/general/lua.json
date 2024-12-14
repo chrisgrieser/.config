@@ -144,10 +144,6 @@
     "filetype": "lua",
     "prefix": "split (gmatch)"
   },
-  "ternary": {
-    "body": "${1:condition} and ${2:value1} or ${3:value2}",
-    "prefix": "ternary"
-  },
   "write file": {
     "body": [
       "---@param path string",

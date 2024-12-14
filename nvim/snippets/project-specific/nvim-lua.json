@@ -104,10 +104,6 @@
     "body": "local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)",
     "prefix": "get buffer lines"
   },
-  "get buffer name": {
-    "body": "vim.api.nvim_buf_get_name(0)",
-    "prefix": "get buffer name"
-  },
   "get selection": {
     "body": "vim.fn.getregion(vim.fn.getpos(\".\"), vim.fn.getpos(\"v\"), { type = vim.fn.mode() })",
     "prefix": "get selection"
