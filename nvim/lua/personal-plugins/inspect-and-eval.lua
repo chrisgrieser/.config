@@ -41,11 +41,7 @@ function M.bufferInfo()
 end
 
 function M.nodeAtCursor()
-	local config = {
-		hlDuration = 1500,
-		hlGroup = "Search",
-		maxChildren = 4,
-	}
+	local config = { hlDuration = 1500, hlGroup = "Search", maxChildren = 4 }
 
 	local ok, node = pcall(vim.treesitter.get_node)
 	if not (ok and node) then
@@ -126,14 +122,7 @@ function M.evalNvimLua()
 	end
 
 	if vim.fn.mode() == "n" then
-		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User(once): Add lua highlighting to `snacks_input` for Eval command",
-			once = true,
-			pattern = "snacks_input",
-			-- cannot set `ft=lua`, since it errors with `blink.cmp`
-			callback = function(ctx) vim.treesitter.start(ctx.buf, "lua") end,
-		})
-		vim.ui.input({ prompt = " Eval: " }, eval)
+		vim.ui.input({ prompt = " Eval: ", win = { ft = "lua" } }, eval)
 	else
 		vim.cmd.normal { '"zy', bang = true }
 		eval(vim.fn.getreg("z"))
