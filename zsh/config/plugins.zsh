@@ -32,15 +32,14 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="?(#c50,)" # ignores long history items
 export ZSH_AUTOSUGGEST_STRATEGY=(history)
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
-bindkey '^Y' autosuggest-execute # remapped to `cmd+s` in WezTerm
 # do not accept autosuggestion when using vim's `A`
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/vi-add-eol/}")
 
 # ZSH-HISTORY-SUBSTRING-SEARCH
 # (must be loaded *after* zsh-syntax-highlighting)
 source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up # arrow up
+bindkey '^[[B' history-substring-search-down # arrow down
 
 #───────────────────────────────────────────────────────────────────────────────
 

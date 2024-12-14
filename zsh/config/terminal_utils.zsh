@@ -49,11 +49,12 @@ function fd {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# On empty buffer, `space` opens our file opener.
-# (Uses `rg` to sort files by recency.)
-_space_on_empty_buffer() {
+# On empty buffer, `esc` starts file opener
+# - cannot trigger this on `space`, since it messes with `zsh-syntax-highlighting`
+# - uses `rg` to sort files by recency
+_esc_on_empty_buffer() {
 	if [[ -n "$BUFFER" || "$CONTEXT" != "start" ]]; then
-		LBUFFER+=" " # just pass through the `space`
+		zle vi-cmd-mode # exit insert mode
 		return
 	fi
 
@@ -62,7 +63,8 @@ _space_on_empty_buffer() {
 
 	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
 	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
-		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | eza --stdin)"
+		--glob='!/.git/' --glob='!node_modules' --glob='!.DS_Store' | 
+		eza --stdin --color=always --icons=always --no-quotes)"
 	# shellcheck disable=2016
 
 	selected=$(
@@ -74,10 +76,10 @@ _space_on_empty_buffer() {
 				--height="100%" # height 100% required for wezterm's `pane:is_alt_screen_active()`
 	)
 	[[ -z "$selected" ]] && return 0
-	open "$selected"
+	echo "$selected" | cut -c3- | xargs open
 }
-zle -N _space_on_empty_buffer
-bindkey ' ' _space_on_empty_buffer
+zle -N _esc_on_empty_buffer
+bindkey '\e' _esc_on_empty_buffer
 
 #───────────────────────────────────────────────────────────────────────────────
 
