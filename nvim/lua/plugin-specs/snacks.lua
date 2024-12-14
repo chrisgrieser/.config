@@ -55,13 +55,15 @@ local function openNotif(idx)
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
-		wo = { ---@diagnostic disable-line: missing-fields -- faulty annotation
+		wo = {
 			winhighlight = table.concat(highlights, ","),
-			wrap = true, -- only one message, so use full space
+			wrap = true,
 			statuscolumn = " ", -- adds padding
 			cursorline = true,
+			colorcolumn = "",
+			winfixbuf = true,
 		},
-		bo = { modifiable = false }, ---@diagnostic disable-line: missing-fields
+		bo = { modifiable = false },
 		keys = {
 			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()
@@ -104,7 +106,7 @@ return {
 	},
 	opts = {
 		dim = {
-			scope = { min_size = 5, max_size = 20 },
+			scope = { min_size = 4, max_size = 20 },
 		},
 		indent = {
 			char = "│",
@@ -121,7 +123,7 @@ return {
 		},
 		win = {
 			border = vim.g.borderStyle,
-			keys = { q = "close", ["<Esc>"] = "close", },
+			keys = { q = "close", ["<Esc>"] = "close" },
 		},
 		notifier = {
 			timeout = 7500,
@@ -141,6 +143,7 @@ return {
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
+				wo = { colorcolumn = "" },
 				keys = {
 					i_esc = { "<Esc>", { "cmp_close", "stopinsert" }, mode = "i" },
 					BS = { "<BS>", "<Nop>", mode = "n" }, -- prevent accidental closing (<BS> -> :bprev)

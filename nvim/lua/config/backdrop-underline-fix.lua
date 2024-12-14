@@ -18,9 +18,9 @@ end
 vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	desc = "User: FIX underlines for backdrop",
 	callback = function(ctx)
-		-- WinEnter needs a delay so buftype changes set by plugins are picked up
-		-- Dressing.nvim needs to be detected separately, as it uses `noautocmd`
-		if ctx.event == "WinEnter" or (ctx.event == "FileType" and ctx.match == "DressingInput") then
+		-- Dressing/snacks need to be detected separately, as they use `noautocmd`
+		local ft = ctx.match
+		if ctx.event == "WinEnter" or ft == "snacks_input" or ft == "DressingInput" then
 			vim.defer_fn(toggleUnderlines, 1)
 		end
 	end,
