@@ -134,7 +134,7 @@ return {
 			top_down = false,
 		},
 		input = {
-			icon = "",
+			icon = false,
 		},
 		styles = {
 			input = {
