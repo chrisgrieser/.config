@@ -1,8 +1,8 @@
 -- CONFIG the first theme in the list is used
 local darkThemes = {
-	"MaterialDesignColors",
 	"ChallengerDeep",
 	"Kanagawa (Gogh)",
+	"MaterialDesignColors",
 	"Afterglow (Gogh)",
 	"cyberpunk",
 	"duckbones",
