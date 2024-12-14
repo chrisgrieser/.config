@@ -3,16 +3,14 @@
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
-table-of-contents: true
-toc-depth: 3
+shift-heading-level-by: -1 # since usually using `h2` in markdwon
 number-sections: true
-shift-heading-level-by: -1
 
 reference-doc: ${USERDATA}/templates/academic-paper.docx
 bibliography: ${USERDATA}/main-bibliography.bib
 citeproc: true
 
-metadata-file: academic.yaml # overwritten by document's yaml (`metadata:` would not)
+metadata-file: academic-metadata.yaml # overwritten by document's yaml (`metadata:` would not)
 filters: [autoset-today-as-date-if-no-date-metadata.lua]
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -20,7 +18,7 @@ filters: [autoset-today-as-date-if-no-date-metadata.lua]
 verbosity: WARNING
 fail-if-warnings: true # true -> aborts if citekeys are missing
 
-writer: docx+native_numbering
+writer: docx # add `+native_numbering` for automatic "Figure 1" etc.
 reader: "markdown\
   +lists_without_preceding_blankline\
   +mark\
