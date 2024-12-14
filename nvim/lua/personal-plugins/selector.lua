@@ -17,12 +17,16 @@ local config = {
 		prev = "<S-Tab>",
 		inspect = "?",
 	},
-	codeaction = { -- extra customization of `vim.lsp.buf.code_action`
+
+	-- extra customization of `vim.lsp.buf.code_action`
+	codeaction = { 
 		icon = "󱐋",
 		format_item = function(item) return ("%s [%s]"):format(item.action.title, item.action.kind) end,
 	},
+
+	-- automatically direct to telescope under certain conditions
 	telescopeRedirect = {
-		ifKindMatchesPattern = { "^tinygit", "telescope" }, -- checked via string.find
+		ifKindMatchesPattern = { "^tinygit" },
 		ifMoreItemsThan = 10,
 		opts = { -- accepts the common telescope picker config
 			layout_config = {
@@ -102,7 +106,7 @@ end
 
 ---@param items any[]
 ---@param opts SelectorOpts
----@param on_choice fun(item: any, idx: integer)
+---@param on_choice fun(item: any, idx?: integer)
 function M.selector(items, opts, on_choice)
 	if #items == 0 then
 		notify("No items to select from.", "warn")
@@ -117,7 +121,7 @@ function M.selector(items, opts, on_choice)
 
 	if opts.kind == "codeaction" then
 		opts.prompt = vim.trim(config.codeaction.icon .. " " .. opts.prompt)
-		opts.format_item = config.codeaction.format_item or function(i) return i end
+		opts.format_item = config.codeaction.format_item or function(item) return item.action.title end
 	end
 
 	-- REDIRECT TO TELESCOPE
