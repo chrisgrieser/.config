@@ -36,7 +36,7 @@ return {
 		{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰍵 Unstage last stage" },
 		{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰍵 Unstage file" },
 		{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset hunk" },
-		{ "<leader>uH", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset file" },
+		{ "<leader>uf", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset file" },
 		-- stylua: ignore end
 		{
 			"<leader>o?",
