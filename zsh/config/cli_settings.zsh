@@ -20,7 +20,10 @@ file_colors=".*=$grey:LICENSE*=$grey:*lock*=$grey" # `.*=` affects dotfiles
 export LS_COLORS="di=0;34:ln=3;35:or=7;31:$file_colors"
 export CLICOLOR=1 # makes `ls` use color by default
 
-export EZA_COLORS="gm=1;38;5;208" # git `modified` with same orange as in starship
+# gm = git `modified` with same orange as in starship
+# lp = path of symlink or path when using `--stdin`
+export EZA_COLORS="gm=1;38;5;208:lp=0;34"
+
 export EZA_STRICT=1
 export EZA_ICONS_AUTO=1
 export EZA_ICON_SPACING=1

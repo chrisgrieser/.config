@@ -26,12 +26,6 @@ M.keys = {
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
-	-- INFO using the mapping from `terminal_keybindings.zsh`
-	-- undo
-	{ key = "z", mods = "CMD", action = act.SendKey { key = "n", mods = "CTRL" } },
-	-- accept & execute suggestion
-	{ key = "s", mods = "CMD", action = act.SendKey { key = "y", mods = "CTRL" } },
-
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
 		mods = "CTRL",
@@ -80,8 +74,6 @@ M.keys = {
 			act.SendKey { key = "LeftArrow" },
 		},
 	},
-	-- REMAP: Grappling Hook (cannot use `bindkey` for `<D-CR>`)
-	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
 
 	{ -- insert line-break https://unix.stackexchange.com/a/80820
 		key = "Enter",
