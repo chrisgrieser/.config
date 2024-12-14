@@ -16,7 +16,7 @@
   "noice.nvim": { "branch": "main", "commit": "eaed6cc9c06aa2013b5255349e4f26a6b17ab70f" },
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
   "nvim-chainsaw": { "branch": "main", "commit": "f1b50914aabc314025716860e9b39d40b862e0f7" },
-  "nvim-genghis": { "branch": "main", "commit": "a638db93f379f544c1a4eaff6fbb38e218c26c89" },
+  "nvim-genghis": { "branch": "main", "commit": "f78c3d8a4a1cee9ca8f6cba82e83f17d2dd74ae6" },
   "nvim-justice": { "branch": "main", "commit": "ffe4a09d6958d59649dd15415f3459a4c3417869" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "42f0568824c1f4679b134f4053d8cc4cf3edec4b" },
   "nvim-lspconfig": { "branch": "master", "commit": "3cb6c05779459eb5fe9cddbb47675593594f0415" },
@@ -36,13 +36,12 @@
   "refactoring.nvim": { "branch": "master", "commit": "2db6d378e873de31d18ade549c2edba64ff1c2e3" },
   "render-markdown.nvim": { "branch": "main", "commit": "0022a579ac7355966be5ade77699b88c76b6a549" },
   "satellite.nvim": { "branch": "main", "commit": "bce591cb5e379bd989623993c604c774633e7ed9" },
-  "snacks.nvim": { "branch": "main", "commit": "97542a7d9bfc7f242acbaa9851a62c649222fec8" },
+  "snacks.nvim": { "branch": "main", "commit": "a7608b13ea476ecca471cf0900a77b8dd1650d76" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "2eca9ba22002184ac05eddbe47a7fe2d5a384dfc" },
   "tokyonight.nvim": { "branch": "main", "commit": "b262293ef481b0d1f7a14c708ea7ca649672e200" },
   "treesj": { "branch": "main", "commit": "94f6df623f2d15630b1b617abff39962024cb501" },
-  "trouble.nvim": { "branch": "main", "commit": "46cf952fc115f4c2b98d4e208ed1e2dce08c9bf6" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "9e3209190c22953566ae4e6436ad2b4ff4dabb95" },
   "which-key.nvim": { "branch": "main", "commit": "4ab3bbe976e63b5390d3fca74a52a092a041cd30" }
 }

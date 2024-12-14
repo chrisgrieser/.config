@@ -25,7 +25,7 @@ return {
 		{ "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
 		{ "<leader>ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
 		{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
-		{ "<leader>g!", function() require("gitsigns").blame() end, desc = " Blame file" },
+		{ "<leader>g!", function() require("gitsigns").blame() end, desc = "󰋇 Blame file" },
 
 		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
@@ -41,7 +41,7 @@ return {
 		{
 			"<leader>o?",
 			function() require("gitsigns").toggle_current_line_blame() end,
-			desc = " Line blame",
+			desc = "󰋇 Line blame",
 		},
 		{
 			"<leader>oi",
