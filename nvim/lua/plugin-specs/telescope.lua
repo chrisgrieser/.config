@@ -352,6 +352,13 @@ return {
 					theme = "cursor",
 					layout_config = { cursor = { width = 0.3 } },
 				},
+				quickfix = {
+					prompt_title = "󰴩 Quickfix",
+					trim_text = true,
+				},
+				quickfixhistory = {
+					prompt_title = "󰴩 Quickfix history",
+				},
 				keymaps = {
 					prompt_title = "⌨️ Keymaps",
 					modes = { "n", "i", "c", "x", "o", "t" },
@@ -377,6 +384,7 @@ return {
 		}
 	end,
 	keys = {
+		-- INSPECT
 		{
 			"<leader>iv",
 			function()
@@ -390,21 +398,22 @@ return {
 			mode = { "n", "x" },
 			desc = "󰋖 Vim help",
 		},
-
-		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
-		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
-		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
-		-- stylua: ignore start
+		-- stylua: ignore
 		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Keymaps (global)" },
-		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
+		-- stylua: ignore
 		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
-		-- stylua: ignore end
+
+		-- QUICKFIX
+		{ "<leader>qf", function() vim.cmd.Telescope("quickfix") end, desc = "󰭎 Find in list" },
+		{ "<leader>qh", function() vim.cmd.Telescope("quickfixhistroy") end, desc = "󰋚 Previous lists" },
+
+		-- GIT
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
-		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 
+		-- GREP
 		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },
 		{
 			"gL",
@@ -414,6 +423,7 @@ return {
 			desc = "󰭎 Live grep cword",
 		},
 
+		-- FILES
 		{
 			"gp",
 			function()
@@ -434,53 +444,6 @@ return {
 				}
 			end,
 			desc = " nvim config",
-		},
-
-		{
-			"<leader>pc",
-			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
-			function() vim.cmd("noautocmd Telescope colorscheme") end,
-			desc = " Preview colorschemes",
-		},
-		{
-			"g!",
-			function()
-				-- open all files in cwd of same ft, ensures workspace
-				-- diagnostics are exhaustive
-				local currentFile = vim.api.nvim_buf_get_name(0)
-				local ext = currentFile:match("%w+$")
-				vim.cmd.args("**/*." .. ext) -- opens files matching glob
-				vim.cmd.buffer(currentFile) -- stay at original buffer
-				local msg = ("Opened %d %s files."):format(vim.fn.argc(), ext)
-				vim.notify(msg, nil, { title = "Workspace diagnostics", icon = "󰋽" })
-
-				vim.cmd.Telescope("diagnostics")
-			end,
-			desc = "󰋼 Workspace diagnostics",
-		},
-		{
-			"gw",
-			function()
-				-- Due to `lazydev`, the whole nvim runtime is added to the
-				-- workspace, making this picker much too crowded.
-				-- `file_ignore_patterns` is thus set to ignore symbols from plugins
-				-- and nvim core. However, the nvim config itself should only be
-				-- ignored when not in the nvim config directory (e.g., in a plugin
-				-- dir). To achieve that, we have to dynamically decide here whether
-				-- to ignore it.
-				local isInNvimConfig = vim.uv.cwd() == vim.fn.stdpath("config")
-				local ignore = nil
-				if not isInNvimConfig then
-					local pickerIgnore =
-						require("telescope.config").pickers.lsp_dynamic_workspace_symbols.file_ignore_patterns
-					ignore = vim.deepcopy(pickerIgnore or {})
-					table.insert(ignore, vim.fn.stdpath("config"))
-				end
-				require("telescope.builtin").lsp_dynamic_workspace_symbols {
-					file_ignore_patterns = ignore,
-				}
-			end,
-			desc = "󰒕 Workspace symbols",
 		},
 		{
 			"go",
@@ -527,6 +490,52 @@ return {
 			end,
 			desc = "󰭎 Open file",
 		},
+
+		-- LSP
+		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
+		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
+		-- stylua: ignore
+		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
+		{
+			"g!",
+			function()
+				-- open all files in cwd of same ft, ensures workspace
+				-- diagnostics are exhaustive
+				local currentFile = vim.api.nvim_buf_get_name(0)
+				local ext = currentFile:match("%w+$")
+				vim.cmd.args("**/*." .. ext) -- opens files matching glob
+				vim.cmd.buffer(currentFile) -- stay at original buffer
+				local msg = ("Opened %d %s files."):format(vim.fn.argc(), ext)
+				vim.notify(msg, nil, { title = "Workspace diagnostics", icon = "󰋽" })
+
+				vim.cmd.Telescope("diagnostics")
+			end,
+			desc = "󰋼 Workspace diagnostics",
+		},
+		{
+			"gw",
+			function()
+				-- Due to `lazydev`, the whole nvim runtime is added to the
+				-- workspace, making this picker much too crowded.
+				-- `file_ignore_patterns` is thus set to ignore symbols from plugins
+				-- and nvim core. However, the nvim config itself should only be
+				-- ignored when not in the nvim config directory (e.g., in a plugin
+				-- dir). To achieve that, we have to dynamically decide here whether
+				-- to ignore it.
+				local isInNvimConfig = vim.uv.cwd() == vim.fn.stdpath("config")
+				local ignore = nil
+				if not isInNvimConfig then
+					local pickerIgnore =
+						require("telescope.config").pickers.lsp_dynamic_workspace_symbols.file_ignore_patterns
+					ignore = vim.deepcopy(pickerIgnore or {})
+					table.insert(ignore, vim.fn.stdpath("config"))
+				end
+				require("telescope.builtin").lsp_dynamic_workspace_symbols {
+					file_ignore_patterns = ignore,
+				}
+			end,
+			desc = "󰒕 Workspace symbols",
+		},
 		{
 			"gs",
 			function()
@@ -549,6 +558,16 @@ return {
 				require("telescope.builtin").lsp_document_symbols(opts)
 			end,
 			desc = "󰒕 Symbols",
+		},
+
+		-- MISC
+		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
+		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
+		{
+			"<leader>pc",
+			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
+			function() vim.cmd("noautocmd Telescope colorscheme") end,
+			desc = " Preview colorschemes",
 		},
 	},
 }

@@ -1,14 +1,38 @@
-local M = {}
+--[[ ALT-ALT
+Alternative to vim's "alternative file"
+
+Features
+- `require("alt-alt").deleteBuffer()` removes the buffer as alt-file, but keepts
+  it in the list of oldfiles
+- `require("alt-alt").gotoAltFile()` as an improved version of `:buffer #` that
+  avoids special buffers, deleted buffers, non-existent files etc. and falls back
+  to the first oldfile, if there is currently only one buffer
+- `require("alt-alt").altFileStatusbar()` to display the alt-file in the
+  statusbar, including an icon (if `nvim-devicons` or `mini-icons` is installed)
+]]
+
 --------------------------------------------------------------------------------
+
+local config = {
+	icons = {
+		oldfile = "󰋚",
+		main = "󰬈",
+	},
+	statusbar = {
+		maxLength = 30,
+		showIcons = true, -- requires `nvim-devicons` or `mini-icons`
+	}
+}
+
+--------------------------------------------------------------------------------
+local M = {}
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
 	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt", icon = "󰬈" })
+	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt", icon = config.icons.main })
 end
-
---------------------------------------------------------------------------------
 
 ---@nodiscard
 ---@return boolean
@@ -40,7 +64,7 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.closeBuffer()
+function M.deleteBuffer()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 
 	-- close buffer
@@ -68,7 +92,6 @@ end
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local maxLength = 30 -- CONFIG
 	local icon, name = "#", "[unknown]"
 	local altOld = altOldfile()
 
@@ -93,12 +116,15 @@ function M.altFileStatusbar()
 			name = altParent .. "/" .. altFile
 		end
 	elseif altOld then
-		icon = "󰋚"
+		icon = config.icons.oldfile
 		name = vim.fs.basename(altOld)
 	end
 
 	-- truncate
+	local maxLength = config.statusbar.maxLength
 	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
+
+	if not config.statusbar.showIcon then return name end
 	return icon .. " " .. name
 end
 
