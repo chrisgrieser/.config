@@ -6,11 +6,11 @@
 # OPTIONS
 
 # make all directories in these folders available as `cd` targets from anywhere
-export CDPATH="$HOME/Developer:$HOME/Desktop:$HOME/Vaults"
+export CDPATH="$HOME/Developer:$HOME/Vaults"
 
 setopt CD_SILENT # don't echo the directory after `cd`
 setopt CHASE_LINKS # follow symlinks when they are `cd` target
-# not using `AUTO_CD`, since out tab-mapping is more flexible
+# not using `AUTO_CD`, since my `tab`-mapping in `completion.zsh` is more flexible
 
 # POST-DIRECTORY-CHANGE-HOOK (use `cd -q` to suppress this hook)
 function chpwd {
@@ -26,6 +26,16 @@ alias ..=" cd .."
 alias ...=" cd ../.."
 alias ....=" cd ../../.."
 alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
+alias -- -=' cd "$HOME/Desktop"'
+
+# make `cd` default to `Desktop`, not `$HOME`
+function cd {
+	if [[ -z "$1" ]]; then
+		builtin cd "$HOME/Desktop" || return 1
+	else
+		builtin cd "$@" || return 1
+	fi
+}
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
@@ -35,15 +45,7 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 #   completions are not searched, which is why we are using this setup of our own
 
 function gr {
-	local goto="$*"
-	local i=2                  # starting at 2, since 1st line = current
-	while [[ -z "$goto" ]]; do # no arg: goto last existing dir
-		goto=$(dirs -p | sed -n "${i}p")
-		[[ -z "$goto" ]] && return 1 # no more dirs left
-		goto="${goto/#\~/$HOME}"
-		[[ -d "$goto" ]] && break
-		i=$((i++))
-	done
+	local goto=${1:-"$OLDPWD"}
 	cd "$goto" || return 1
 }
 
