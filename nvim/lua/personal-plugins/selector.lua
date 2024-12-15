@@ -126,7 +126,7 @@ function M.selector(items, opts, on_choice)
 
 	-- REDIRECT TO TELESCOPE
 	local fallbackKind = vim.iter(config.telescopeRedirect.ifKindMatchesPattern)
-		:any(function(p) return (opts.kind and opts.kind:find(p)) ~= nil end)
+		:any(function(p) return opts.kind:find(p) ~= nil end)
 	local fallbackMore = #items > config.telescopeRedirect.ifMoreItemsThan
 	if fallbackKind or fallbackMore then
 		telescopeRedirect(items, opts, on_choice)
@@ -139,7 +139,8 @@ function M.selector(items, opts, on_choice)
 	local longestChoice = vim.iter(choices):fold(0, function(acc, c) return math.max(acc, #c) end)
 	local width = math.max(longestChoice, #opts.prompt, #opts.kind) + 2
 	local height = #choices
-	local footer = (config.win.showKindInFooter and opts.kind) and " " .. opts.kind .. " " or nil
+	local footer = (config.win.showKindInFooter and opts.kind ~= "") and " " .. opts.kind .. " "
+		or nil
 
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
