@@ -263,7 +263,7 @@ function gli {
 	elif [[ "$key_pressed" == "ctrl-g" ]]; then
 		repo=$(git remote get-url origin | sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
 		local url="https://github.com/$repo/commit/$hash"
-		if [[ "$OSTYPE" =~ "darwin" ]] ; then 
+		if [[ "$OSTYPE" =~ "darwin" ]]; then
 			open "$url"
 		else
 			echo "$url"
@@ -316,6 +316,8 @@ function pickaxe {
 
 # search for [g]it [d]eleted [f]ile
 function gdf {
+	git rev-parse --is-inside-work-tree &> /dev/null || return
+
 	local search="$1"
 	[[ -z $search ]] && print "\e[1;33mNo search query provided.\e[0m" && return 1
 	if ! command -v fzf &> /dev/null; then echo "fzf not installed." && return 1; fi
@@ -331,9 +333,10 @@ function gdf {
 
 	# FIX for whatever reason, without this, a lot of `zsh` processes all taking
 	# lots of CPU are accumulating
+	sleep 1
+
 	# TEST check for accumulating zsh processes bug
 	trap 'echo ; ps cAo "%cpu,command" | grep --color=never "zsh\|%CPU"' EXIT
-	sleep 1
 
 	if [[ -z "$deleted_path" ]]; then
 		print "\e[1;31mNo deleted file found with \e[1;33m$search\\e[0m"

@@ -30,14 +30,17 @@ alias ..g=' cd "$(git rev-parse --show-toplevel)"' # goto git root
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# cmd+enter -> goto desktop
-function _goto_desktop {
-	cd "$HOME/Desktop" || return 1
+# cmd+enter -> goto desktop / dotfiles
+function _grappling_hook {
+	local target="$HOME/Desktop"
+	[[ "$PWD" == "$target" ]] && target="$HOME/.config"
+	cd -q "$target" || return 1
+
 	zle reset-prompt
 	[[ "$TERM_PROGRAM" == "WezTerm" ]] && wezterm set-working-directory
 }
-zle -N _goto_desktop
-bindkey '^O' _goto_desktop # remapped to cmd+enter in wezterm keybindings
+zle -N _grappling_hook
+bindkey '^O' _grappling_hook # remapped to cmd+enter in wezterm keybindings
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
