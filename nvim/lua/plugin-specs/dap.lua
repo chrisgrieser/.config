@@ -6,22 +6,6 @@ local function dapConfig()
 		texthl = "DiagnosticHint",
 		linehl = "DiagnosticVirtualTextHint",
 	})
-	vim.fn.sign_define("DapBreakpointRejected", {
-		text = "",
-		texthl = "DiagnosticError",
-		linehl = "DiagnosticVirtualTextError",
-	})
-
-	-- AUTO-OPEN/CLOSE THE DAP-UI
-	local listener = require("dap").listeners.before
-	local function start()
-		require("dapui").open()
-		vim.wo.number = true
-	end
-	listener.attach.dapui_config = function() require("dapui").open() end
-	listener.launch.dapui_config = function() require("dapui").open() end
-	listener.event_terminated.dapui_config = function() require("dapui").close() end
-	listener.event_exited.dapui_config = function() require("dapui").close() end
 
 	-- LUALINE COMPONENTS
 	vim.g.lualineAdd("sections", "lualine_y", {
@@ -47,11 +31,12 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	{
+	{ -- DAP
 		"mfussenegger/nvim-dap",
+		dependencies = { "theHamsta/nvim-dap-virtual-text", opts = true },
 		keys = {
-			{ "8", function() require("dap").continue() end, desc = " Continue" },
-			{ "7", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
+			{ "7", function() require("dap").continue() end, desc = " Continue" },
+			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 			-- stylua: ignore
 			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear all breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
@@ -60,7 +45,7 @@ return {
 		init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 		config = dapConfig,
 	},
-	{
+	{ -- DAP-UI
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		keys = {
@@ -82,6 +67,22 @@ return {
 				desc = " Eval",
 			},
 		},
+		config = function(_, opts)
+			require("dapui").setup(opts)
+
+			-- AUTO-OPEN/CLOSE THE DAP-UI
+			local function start()
+				require("dapui").open()
+				vim.wo.number = true
+			end
+			local function stop()
+				require("dapui").close()
+				vim.wo.number = false
+			end
+			require("dap").listeners.after.attach.ui = start
+			require("dap").listeners.after.launch.ui = start
+			require("dap").listeners.after.disconnect.ui = stop
+		end,
 		opts = {
 			controls = {
 				enabled = true,
@@ -101,7 +102,7 @@ return {
 					size = 40, -- width
 					elements = {
 						{ id = "scopes", size = 0.8 }, -- Variables
-						{ id = "stacks", size = 0.2 }, -- stracktracing
+						{ id = "stacks", size = 0.2 }, -- stracktrace
 						-- { id = "watches", size = 0.15 }, -- Expressions
 					},
 				},
@@ -124,13 +125,19 @@ return {
 			end
 		end,
 		keys = {
-			-- INFO this debugger the only one that needs manual starting, other
-			-- debuggers start with `continue` by themselves
 			{
-				"<leader>dn",
-				function() require("osv").run_this() end,
+				"7",
+				function()
+					-- INFO this debugger the only one that needs manual starting, other
+					-- debuggers start with `continue` by themselves
+					if require("dap").status() == "" then
+						require("osv").run_this()
+					else
+						require("dap").continue()
+					end
+				end,
 				ft = "lua",
-				desc = " Start (nvim-lua debugger)",
+				desc = " Continue",
 			},
 		},
 	},
@@ -143,8 +150,7 @@ return {
 		ft = "python",
 		config = function()
 			-- 1. use the debugypy installation by mason
-			-- 2. deactivate the annoying auto-opening the console by redirecting
-			-- to the internal console
+			-- 2. deactivate auto-opening the console by redirecting to internal console
 			local debugpyPythonPath = require("mason-registry")
 				.get_package("debugpy")
 				:get_install_path() .. "/venv/bin/python3"

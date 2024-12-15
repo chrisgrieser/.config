@@ -5,6 +5,7 @@ local temp
 
 for _, num in ipairs(numbers) do
 	sum = sum + num
+	sum = sum / 2
 	table.insert(usedNumbers, num * 2)
 
 	temp = vim.inspect(usedNumbers)
