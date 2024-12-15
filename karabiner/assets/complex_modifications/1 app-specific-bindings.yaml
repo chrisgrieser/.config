@@ -111,22 +111,25 @@ rules:
         to:
           - { key_code: l, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+enter -> goto Desktop
+      # cmd+enter -> goto Desktop/dotfiles
       - type: basic
         from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
         to:
-          - { key_code: d, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
-      # cmd+shift+. -> goto `~/.config/`
-      - type: basic
-        from: { key_code: period, modifiers: { mandatory: [command, shift] } }
-        to:
           - shell_command: |
               osascript -e '
-                tell application "Finder"
-                  set dotfiles to (path to home folder as string) & ".config"
-                  set target of front Finder window to dotfiles
-                end tell'
+                set theDesktop to POSIX path of (path to desktop folder as string) 
+                set dotfiles to (POSIX path of (path to home folder as string) & ".config/") 
+                
+                tell application "Finder" 
+                  -- `Finder window` instead of win ensures regular window, not QuickLook or prompt 
+                  if not (front Finder window exists) then return 
+                  
+                  set currentPath to POSIX path of (target of front Finder window as alias) 
+                  set toGoto to theDesktop 
+                  if (currentPath is theDesktop) then set toGoto to dotfiles 
+                  set target of front Finder window to (toGoto as POSIX file) 
+                end tell 
+              '
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
       # cmd+shift+v -> goto [V]aults
       - type: basic
@@ -511,7 +514,12 @@ rules:
         to:
           - { key_code: return_or_enter }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^org\.giorgiocalderolla\.Catch$] }]
+          [
+            {
+              type: frontmost_application_if,
+              bundle_identifiers: [^org\.giorgiocalderolla\.Catch$],
+            },
+          ]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) CleanShot X"
     manipulators:
