@@ -115,7 +115,7 @@ function M.selector(items, opts, on_choice)
 
 	-- OPTIONS
 	assert(type(on_choice) == "function", "`on_choice` must be a function.")
-	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = nil }
+	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = "" }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
 	opts.prompt = opts.prompt:gsub(":%s*$", "") -- trim trailing `:` from prmpt
 
@@ -187,7 +187,7 @@ function M.selector(items, opts, on_choice)
 		notify(out, "debug", { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
-		local ln = lnum() -- needs to be saved before deleting buffer
+		local ln = lnum() -- needs to be saved before deleting buffersele
 		vim.cmd.bwipeout()
 		on_choice(items[ln], ln)
 	end)
