@@ -1,19 +1,19 @@
 -- CONFIG the first theme in the list is used
 local darkThemes = {
+	"MaterialDesignColors",
+	"duckbones",
 	"Kanagawa (Gogh)",
 	"ChallengerDeep",
-	"MaterialDesignColors",
 	"Afterglow (Gogh)",
 	"cyberpunk",
-	"duckbones",
 }
 local lightThemes = {
-	"Ivory Light (terminal.sexy)",
+	"Bluloco Zsh Light (Gogh)",
 	"Solar Flare Light (base16)",
+	"Ivory Light (terminal.sexy)",
 	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
 	"Silk Light (base16)",
-	"Bluloco Zsh Light (Gogh)",
 }
 
 local lightOpacity = 0.90

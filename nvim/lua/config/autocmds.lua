@@ -113,14 +113,13 @@ vim.api.nvim_create_autocmd("FocusGained", {
 			local stillExists = vim.uv.fs_stat(buf.name) ~= nil
 			local specialBuffer = vim.bo[buf.bufnr].buftype ~= ""
 			local newBuffer = buf.name == ""
-			if stillExists or specialBuffer and newBuffer then return end
-
+			if stillExists or specialBuffer or newBuffer then return end
 			table.insert(closedBuffers, vim.fs.basename(buf.name))
 			vim.api.nvim_buf_delete(buf.bufnr, { force = false })
 		end)
-		if #closedBuffers == 0 then
-			return
-		elseif #closedBuffers == 1 then
+		if #closedBuffers == 0 then return end
+
+		if #closedBuffers == 1 then
 			vim.notify(closedBuffers[1], nil, { title = "Buffer closed", icon = "󰅗" })
 		else
 			local text = "- " .. table.concat(closedBuffers, "\n- ")
