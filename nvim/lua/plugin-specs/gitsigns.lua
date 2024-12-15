@@ -29,7 +29,6 @@ return {
 		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
 		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
 		{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
-		{ "q", vim.cmd.close, ft = "gitsigns-blame", desc = "Close", nowait = true },
 
 		-- UNDO
 		{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰍵 Unstage last stage" },

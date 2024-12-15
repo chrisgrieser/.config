@@ -12,10 +12,7 @@ return {
 			trim_prompt = true,
 			border = vim.g.borderStyle,
 			relative = "editor",
-			prefer_width = 50,
-			min_width = { 20, 0.4 },
-			max_width = { 80, 0.8 },
-			win_options = { statuscolumn = " " }, -- padding fix PENDING https://github.com/stevearc/dressing.nvim/pull/185
+			win_options = { statuscolumn = " " }, 
 			mappings = {
 				n = {
 					["q"] = "Close",
