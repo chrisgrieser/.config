@@ -33,42 +33,15 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 
--- `vim.lsp.buf.hover` opens url if present, otherwise opens regular hover win
-local originalHoverHandler = vim.lsp.handlers["textDocument/hover"]
-vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, _config)
-	local notifyOpts = { icon = "󰋽", title = "LSP Hover" }
-	-- GUARD
-	if err then
-		vim.notify(err.message, vim.log.levels.ERROR)
-		return
-	elseif not result then
-		vim.notify("No hover info available.", nil, notifyOpts)
-		return
-	end
-
-	-- open URL if present
-	local ignoredUrls = {
-		"http://www.lua.org/manual/5.1/manual.html#6.4.1", -- lua core
-		"https://github.com/mgee", -- hammerspoon
-		"https://github.com/sdegutis/",
-	}
-	local text = result.contents.value
-	local urls = text:gmatch("%l%l%l-://[^%s)]+")
-	for url in urls do
-		if not vim.tbl_contains(ignoredUrls, url) then vim.ui.open(url) end
-	end
-
-	-- use original handler with some extra settings
-	originalHoverHandler(err, result, ctx, {
-		border = vim.g.borderStyle,
-		title = " " .. notifyOpts.icon .. " " .. notifyOpts.title .. " ",
-		max_width = 75,
-	})
-end
-
 -- `vim.lsp.buf.signature_help`
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 	border = vim.g.borderStyle,
+})
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = vim.g.borderStyle,
+	title = " LSP hover ",
+	max_width = 75,
 })
 
 --------------------------------------------------------------------------------
@@ -119,7 +92,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			msg = msg .. " "
 		end
 
-		local opts = { id = "LspProgress", icon = icon, style = "minimal", timeout = 2500 }
+		local opts =
+			{ id = "LspProgress", icon = icon, style = "minimal", timeout = 2500, history = false }
 		vim.notify(msg, vim.log.levels.TRACE, opts)
 	end,
 })

@@ -41,16 +41,13 @@ bindkey '^O' _goto_desktop # remapped to cmd+enter in wezterm keybindings
 
 #───────────────────────────────────────────────────────────────────────────────
 # RECENT DIRS
-# - the zsh builtin `cdr` completes based on a number as argument, so the
-#   completions are not searched, which is why we are using this setup of our own
+# the zsh builtin `cdr` does something similar, but completes based on a number
+# as argument, so the completions are not searched
 
 function gr {
 	local goto=${1:-"$OLDPWD"}
 	cd "$goto" || return 1
 }
-
-# on startup, OLDPWD is not set, thus we set it ourselves
-OLDPWD=$(dirs -p | sed -n '2p' | sed "s|^~|$HOME|")
 
 _gr() {
 	[[ $CURRENT -ne 2 ]] && return # only complete first word
