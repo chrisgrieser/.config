@@ -3,12 +3,10 @@ local usedNumbers = {}
 local sum = 10
 local temp
 
-for _, v in ipairs(numbers) do
-	sum = sum + v
-	sum = sum / 2
-	table.insert(usedNumbers, v * 2)
+for _, num in ipairs(numbers) do
+	sum = sum + num
+	table.insert(usedNumbers, num * 2)
 
 	temp = vim.inspect(usedNumbers)
 	print(temp)
-	print("hi" .. tostring(v))
 end
