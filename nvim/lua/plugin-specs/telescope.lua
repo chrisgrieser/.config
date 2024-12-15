@@ -346,11 +346,6 @@ return {
 						},
 					},
 				},
-				spell_suggest = {
-					prompt_title = "󰓆 Spell suggest",
-					theme = "cursor",
-					layout_config = { cursor = { width = 0.3 } },
-				},
 				quickfix = {
 					prompt_title = "󰴩 Quickfix",
 					trim_text = true,
@@ -560,7 +555,6 @@ return {
 		},
 
 		-- MISC
-		{ "zl", function() vim.cmd.Telescope("spell_suggest") end, desc = "󰓆 Spell suggest" },
 		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{
 			"<leader>pc",
