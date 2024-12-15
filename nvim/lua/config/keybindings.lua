@@ -100,7 +100,10 @@ end, { desc = "󱎘 Delete char at EoL" })
 -- Append to EoL: `<leader>` + `char`
 local trailChars = { ",", " {", ")", ";", ".", " \\" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. vim.trim(key), ("mzA%s<Esc>`z"):format(key))
+	keymap("n", "<leader>" .. vim.trim(key), function ()
+		local updatedLine = vim.api.nvim_get_current_line() .. key
+		vim.api.nvim_set_current_line(updatedLine)
+	end)
 end
 
 -- WHITESPACE & INDENTATION
