@@ -28,7 +28,7 @@ local function dapConfig()
 	-- LUALINE COMPONENTS
 	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl or "DiagnosticInfo"
 	local breakpointFg = u.getHlValue(breakpointHl, "fg")
-	vim.g.lualine_add("sections", "lualine_y", {
+	vim.g.lualineAdd("sections", "lualine_y", {
 		color = { fg = breakpointFg },
 		function()
 			local breakpoints = require("dap.breakpoints").get()
@@ -41,46 +41,11 @@ local function dapConfig()
 			return breakpointIcon .. tostring(breakpointSum)
 		end,
 	}, "before")
-	vim.g.lualine_add("tabline", "lualine_z", function()
+	vim.g.lualineAdd("tabline", "lualine_z", function()
 		local dapStatus = require("dap").status()
 		if dapStatus == "" then return "" end
 		return "󰃤  " .. dapStatus
 	end)
-end
-
----@param dir "next"|"prev"
-local function gotoBreakpoint(dir)
-	local breakpoints = require("dap.breakpoints").get()
-	if #breakpoints == 0 then
-		vim.notify("No breakpoints set", vim.log.levels.WARN)
-		return
-	end
-	local points = {}
-	for bufnr, buffer in pairs(breakpoints) do
-		for _, point in ipairs(buffer) do
-			table.insert(points, { bufnr = bufnr, line = point.line })
-		end
-	end
-
-	local current = {
-		bufnr = vim.api.nvim_get_current_buf(),
-		line = vim.api.nvim_win_get_cursor(0)[1],
-	}
-
-	local nextPoint
-	for i = 1, #points do
-		local isAtBreakpointI = points[i].bufnr == current.bufnr and points[i].line == current.line
-		if isAtBreakpointI then
-			local nextIdx = dir == "next" and i + 1 or i - 1
-			if nextIdx > #points then nextIdx = 1 end
-			if nextIdx == 0 then nextIdx = #points end
-			nextPoint = points[nextIdx]
-			break
-		end
-	end
-	if not nextPoint then nextPoint = points[1] end
-
-	vim.cmd(("buffer +%s %s"):format(nextPoint.line, nextPoint.bufnr))
 end
 
 --------------------------------------------------------------------------------
@@ -91,17 +56,12 @@ return {
 		keys = {
 			{ "7", function() require("dap").continue() end, desc = "󰃤 Continue" },
 			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle Breakpoint" },
-			{ "gb", function() gotoBreakpoint("next") end, desc = " Next Breakpoint" },
-			{ "gB", function() gotoBreakpoint("prev") end, desc = " Previous Breakpoint" },
-			{
-				"<leader>dc",
-				function() require("dap").clear_breakpoints() end,
-				desc = " Clear All Breakpoints",
-			},
+			-- stylua: ignore
+			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear All Breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		},
-		init = function() vim.g.whichkeyAddGroup("<leader>d", "󰃤 Debugger") end,
+		init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 		config = dapConfig,
 	},
 	{
@@ -162,8 +122,8 @@ return {
 			require("dap").adapters.nlua = function(callback, config)
 				callback {
 					type = "server",
-					host = config.host or "127.0.0.1", ---@diagnostic disable-line: undefined-field
-					port = config.port or 8086, ---@diagnostic disable-line: undefined-field
+					host = config.host or "127.0.0.1",
+					port = config.port or 8086,
 				}
 			end
 		end,

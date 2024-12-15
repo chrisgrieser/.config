@@ -1,9 +1,7 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
 	ft = "lua", -- in lua, load directly for `Chainsaw` global
-	init = function()
-		vim.g.whichkeyAddSpec { "<leader>l", group = "󰐪 Log", mode = { "n", "x" } }
-	end,
+	init = function() vim.g.whichkeyAddSpec { "<leader>l", group = "󰐪 Log" } end,
 	opts = {
 		preCommitHook = {
 			enabled = true,
