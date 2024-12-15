@@ -1,35 +1,31 @@
-local u = require("config.utils")
---------------------------------------------------------------------------------
-
 local function dapConfig()
 	-- SIGN-ICONS & HIGHLIGHTS
-	local hintBg = u.getHlValue("DiagnosticVirtualTextHint", "bg")
-	vim.api.nvim_set_hl(0, "DapPause", { bg = hintBg })
-	local infoBg = u.getHlValue("DiagnosticVirtualTextInfo", "bg")
-	vim.api.nvim_set_hl(0, "DapBreak", { bg = infoBg })
-
-	vim.fn.sign_define(
-		"DapStopped",
-		{ text = "", texthl = "DiagnosticHint", linehl = "DapPause" }
-	)
-	vim.fn.sign_define(
-		"DapBreakpoint",
-		{ text = "", texthl = "DiagnosticInfo", linehl = "DapBreak" }
-	)
-	vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+	vim.fn.sign_define("DapStopped", {
+		text = "",
+		texthl = "DiagnosticHint",
+		linehl = "DiagnosticVirtualTextHint",
+	})
+	vim.fn.sign_define("DapBreakpointRejected", {
+		text = "",
+		texthl = "DiagnosticError",
+		linehl = "DiagnosticVirtualTextError",
+	})
 
 	-- AUTO-OPEN/CLOSE THE DAP-UI
 	local listener = require("dap").listeners.before
+	local function start()
+		require("dapui").open()
+		vim.wo.number = true
+	end
 	listener.attach.dapui_config = function() require("dapui").open() end
 	listener.launch.dapui_config = function() require("dapui").open() end
 	listener.event_terminated.dapui_config = function() require("dapui").close() end
 	listener.event_exited.dapui_config = function() require("dapui").close() end
 
 	-- LUALINE COMPONENTS
-	local breakpointHl = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl or "DiagnosticInfo"
-	local breakpointFg = u.getHlValue(breakpointHl, "fg")
 	vim.g.lualineAdd("sections", "lualine_y", {
-		color = { fg = breakpointFg },
+		color = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl,
 		function()
 			local breakpoints = require("dap.breakpoints").get()
 			local breakpointSum = 0
@@ -44,7 +40,7 @@ local function dapConfig()
 	vim.g.lualineAdd("tabline", "lualine_z", function()
 		local dapStatus = require("dap").status()
 		if dapStatus == "" then return "" end
-		return "󰃤  " .. dapStatus
+		return "󰃤 " .. dapStatus
 	end)
 end
 
@@ -54,10 +50,10 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			{ "7", function() require("dap").continue() end, desc = "󰃤 Continue" },
-			{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle Breakpoint" },
+			{ "8", function() require("dap").continue() end, desc = " Continue" },
+			{ "7", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 			-- stylua: ignore
-			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear All Breakpoints" },
+			{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear all breakpoints" },
 			{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		},
@@ -66,7 +62,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = "mfussenegger/nvim-dap",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		keys = {
 			{ "<leader>du", function() require("dapui").toggle() end, desc = "󱂬 dap-ui" },
 			{
@@ -77,7 +73,7 @@ return {
 			{
 				"<leader>dl",
 				function() require("dapui").float_element("breakpoints", { enter = true }) end, ---@diagnostic disable-line: missing-fields
-				desc = " List Breakpoints",
+				desc = " List breakpoints",
 			},
 			{
 				"<leader>de",
@@ -122,25 +118,28 @@ return {
 			require("dap").adapters.nlua = function(callback, config)
 				callback {
 					type = "server",
-					host = config.host or "127.0.0.1",
-					port = config.port or 8086,
+					host = config.host or "127.0.0.1", ---@diagnostic disable-line: undefined-field
+					port = config.port or 8086, ---@diagnostic disable-line: undefined-field
 				}
 			end
 		end,
 		keys = {
-			-- INFO is the only one that needs manual starting, other debuggers
-			-- start with `continue` by themselves
+			-- INFO this debugger the only one that needs manual starting, other
+			-- debuggers start with `continue` by themselves
 			{
 				"<leader>dn",
 				function() require("osv").run_this() end,
 				ft = "lua",
-				desc = " nvim-lua debugger",
+				desc = " Start (nvim-lua debugger)",
 			},
 		},
 	},
+
+	-----------------------------------------------------------------------------
+	-- INFO also needs to add `debugpy` to `mason`
 	{ -- debugger preconfig for python
 		"mfussenegger/nvim-dap-python",
-		mason_dependencies = "debugpy",
+		enabled = false,
 		ft = "python",
 		config = function()
 			-- 1. use the debugypy installation by mason
