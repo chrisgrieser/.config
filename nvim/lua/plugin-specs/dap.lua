@@ -10,16 +10,16 @@ return {
 			desc = " Clear breakpoints",
 		},
 		{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
-		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
+		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
 		-- auto-disable line numbers
 		local stop = function() vim.opt.number = false end
 		local listeners = require("dap").listeners.after
-		listeners.disconnect.dapvt = stop
-		listeners.event_terminated.dapvt = stop
-		listeners.event_exited.dapvt = stop
+		listeners.disconnect.dapItself = stop
+		listeners.event_terminated.dapItself = stop
+		listeners.event_exited.dapItself = stop
 
 		-- sign-icons & highlights
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
@@ -35,13 +35,15 @@ return {
 		vim.g.lualineAdd("sections", "lualine_y", {
 			color = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl,
 			function()
+				local breakpoints = require("dap.breakpoints").get()
+				if #breakpoints == 0 then return "" end
+				local thisBuf = breakpoints[vim.api.nvim_get_current_buf()]
 				local allBufs = 0
-				for _, bp in pairs(require("dap.breakpoints").get()) do
+				for _, bp in pairs(breakpoints) do
 					allBufs = allBufs + #bp
 				end
-				if allBufs == 0 then return "" end
 				local icon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
-				return icon .. tostring(allBufs)
+				return (" %s %d/%d"):format(icon, #thisBuf, allBufs)
 			end,
 		}, "before")
 		-- status
