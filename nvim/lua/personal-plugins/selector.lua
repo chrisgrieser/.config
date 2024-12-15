@@ -19,7 +19,7 @@ local config = {
 	},
 
 	-- extra customization of `vim.lsp.buf.code_action`
-	codeaction = { 
+	codeaction = {
 		icon = "󱐋",
 		format_item = function(item) return ("%s [%s]"):format(item.action.title, item.action.kind) end,
 	},
@@ -121,7 +121,7 @@ function M.selector(items, opts, on_choice)
 
 	if opts.kind == "codeaction" then
 		opts.prompt = vim.trim(config.codeaction.icon .. " " .. opts.prompt)
-		opts.format_item = config.codeaction.format_item or function(item) return item.action.title end
+		opts.format_item = config.codeaction.format_item or function(i) return i.action.title end
 	end
 
 	-- REDIRECT TO TELESCOPE
@@ -137,9 +137,9 @@ function M.selector(items, opts, on_choice)
 	local choices = vim.tbl_map(opts.format_item, items)
 	assert(type(choices[1]) == "string", "`opts.format_item` must return a string.")
 	local longestChoice = vim.iter(choices):fold(0, function(acc, c) return math.max(acc, #c) end)
-	local width = math.max(longestChoice, #opts.prompt) + 1
+	local width = math.max(longestChoice, #opts.prompt, #opts.kind) + 2
 	local height = #choices
-	local footer = config.win.showKindInFooter and " " .. opts.kind .. " " or nil
+	local footer = (config.win.showKindInFooter and opts.kind) and " " .. opts.kind .. " " or nil
 
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -187,8 +187,9 @@ function M.selector(items, opts, on_choice)
 		notify(out, "debug", { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
+		local ln = lnum() -- needs to be saved before deleting buffer
 		vim.cmd.bwipeout()
-		on_choice(items[lnum()], lnum())
+		on_choice(items[ln], ln)
 	end)
 
 	-- UNMOUNT
