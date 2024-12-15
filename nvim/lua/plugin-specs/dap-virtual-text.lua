@@ -22,8 +22,8 @@ return {
 		listeners.attach.dapvt = dapvt.enable
 		listeners.launch.dapvt = dapvt.enable
 		listeners.disconnect.dapvt = dapvt.disable
-		listeners.event_terminated.dapui = dapui.close
-		listeners.event_exited.dapui = dapui.close
+		listeners.event_terminated.dapvt = dapvt.disable
+		listeners.event_exited.dapvt = dapvt.disable
 	end,
 	init = function()
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {

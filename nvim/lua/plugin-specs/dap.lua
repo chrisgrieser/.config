@@ -14,7 +14,14 @@ return {
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
-		-- SIGN-ICONS & HIGHLIGHTS
+		-- auto-disable line numbers
+		local stop = function() vim.opt.number = false end
+		local listeners = require("dap").listeners.after
+		listeners.disconnect.dapvt = stop
+		listeners.event_terminated.dapvt = stop
+		listeners.event_exited.dapvt = stop
+
+		-- sign-icons & highlights
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapStopped", {
 			text = "",
@@ -24,19 +31,20 @@ return {
 		})
 
 		-- LUALINE COMPONENTS
+		-- breakpoint count
 		vim.g.lualineAdd("sections", "lualine_y", {
 			color = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl,
 			function()
-				local breakpoints = require("dap.breakpoints").get()
-				local breakpointSum = 0
-				for buf, _ in pairs(breakpoints) do
-					breakpointSum = breakpointSum + #breakpoints[buf]
+				local allBufs = 0
+				for _, bp in pairs(require("dap.breakpoints").get()) do
+					allBufs = allBufs + #bp
 				end
-				if breakpointSum == 0 then return "" end
-				local breakpointIcon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
-				return breakpointIcon .. tostring(breakpointSum)
+				if allBufs == 0 then return "" end
+				local icon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
+				return icon .. tostring(allBufs)
 			end,
 		}, "before")
+		-- status
 		vim.g.lualineAdd("tabline", "lualine_z", function()
 			local dapStatus = require("dap").status()
 			if dapStatus == "" then return "" end

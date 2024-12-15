@@ -1,5 +1,6 @@
 -- INFO also needs to add `debugpy` to `mason`
 return {
+
 	"mfussenegger/nvim-dap-python",
 	ft = "python",
 	config = function()
