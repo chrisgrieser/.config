@@ -3,7 +3,7 @@
 # CONFIG
 max_gitlog_lines=${MAGIC_DASHBOARD_GITLOG_LINES:-6}
 max_gitstatus_lines=${MAGIC_DASHBOARD_GITSTATUS_LINES:-12}
-max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-5}
+max_files_lines=${MAGIC_DASHBOARD_FILES_LINES:-4}
 disabled_below_height=${MAGIC_DASHBOARD_DISABLED_BELOW_TERM_HEIGHT:-15}
 #───────────────────────────────────────────────────────────────────────────────
 
