@@ -4,27 +4,17 @@ return {
 	keys = {
 		{ "<leader>du", function() require("dapui").toggle() end, desc = "󱂬 Toggle UI" },
 		{
-			"<leader>df",
-			function() require("dapui").float_element() end, ---@diagnostic disable-line: missing-parameter
-			desc = "󱂬 Open Float",
+			"<leader>db",
+			function() require("dapui").float_element("breakpoints", { enter = true }) end, ---@diagnostic disable-line: missing-fields
+			desc = " List breakpoints",
 		},
 		{
 			"<leader>de",
-			function() require("dapui").eval() end, 
+			function() require("dapui").eval() end,
 			mode = { "n", "x" },
-			desc = " Eval",
+			desc = " Eval", -- value under cursor
 		},
 	},
-	config = function(_, opts)
-		local dapui = require("dapui")
-		dapui.setup(opts)
-
-		-- AUTO-CLOSE THE DAP-UI
-		local listeners = require("dap").listeners.after
-		listeners.disconnect.dapui = dapui.close
-		listeners.event_terminated.dapui = dapui.close
-		listeners.event_exited.dapui = dapui.close
-	end,
 	opts = {
 		controls = {
 			enabled = true,
@@ -42,10 +32,20 @@ return {
 				position = "right",
 				size = 40, -- = width
 				elements = {
-					{ id = "scopes", size = 0.8 }, 
-					{ id = "stacks", size = 0.2 }, 
+					{ id = "scopes", size = 0.8 },
+					{ id = "stacks", size = 0.2 },
 				},
 			},
 		},
 	},
+	config = function(_, opts)
+		local dapui = require("dapui")
+		dapui.setup(opts)
+
+		-- AUTO-CLOSE THE DAP-UI
+		local listeners = require("dap").listeners.after
+		listeners.disconnect.dapui = dapui.close
+		listeners.event_terminated.dapui = dapui.close
+		listeners.event_exited.dapui = dapui.close
+	end,
 }
