@@ -186,7 +186,8 @@ function remote_info {
 
 # Github Url: open & copy url
 function gu {
-	url=$(git remote get-url origin | sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
+	url=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
+		sed -Ee 's|git@github.com:|https://github.com/|' -Ee 's|\.git$||')
 	echo "$url" | pbcopy
 	open "$url"
 }
@@ -261,7 +262,8 @@ function gli {
 		echo -n "$hash" | pbcopy
 		print "\e[1;33m$hash\e[0m copied."
 	elif [[ "$key_pressed" == "ctrl-g" ]]; then
-		repo=$(git remote get-url origin | sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
+		repo=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
+			sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
 		local url="https://github.com/$repo/commit/$hash"
 		if [[ "$OSTYPE" =~ "darwin" ]]; then
 			open "$url"

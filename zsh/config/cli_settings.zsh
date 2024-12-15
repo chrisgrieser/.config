@@ -31,6 +31,8 @@ export EZA_ICON_SPACING=1
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR='01;35' # matches in bold & magenta (macOS' `grep` doesn't support `GREP_COLORS`)
 
+export JUST_COMMAND_COLOR="blue"
+
 #───────────────────────────────────────────────────────────────────────────────
 
 # INFO multi-select `alt-enter` mapping consistent with the one for telescope

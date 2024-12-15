@@ -18,7 +18,8 @@ function _separator {
 }
 
 function _gitlog {
-	repo=$(git remote get-url origin | sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
+	repo=$(git remote --verbose | head -n1 | cut -f2 | cut -d' ' -f1 |
+		sed -Ee 's/git@github.com://' -Ee 's/\.git$//')
 
 	# pseudo-option to suppress graph
 	local graph
