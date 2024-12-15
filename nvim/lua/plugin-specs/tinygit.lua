@@ -16,6 +16,7 @@ return {
 			{ "<leader>gh", function() require("tinygit").fileHistory() end, mode = { "n", "x" }, desc = "󰋚 File history" },
 			{ "<leader>gu", function() require("tinygit").githubUrl("file") end, mode = { "n", "x" }, desc = " GitHub line URL" },
 			{ "<leader>gU", function() require("tinygit").githubUrl("repo") end, mode = { "n", "x" }, desc = " GitHub repo URL" },
+			{ "<leader>g!", function() require("tinygit").githubUrl("blame") end, mode = { "n", "x" }, desc = "󰆽 GitHub blame" },
 			{ "<leader>gt", function() require("tinygit").stashPush() end, desc = "󰜦 Stash" },
 			{ "<leader>gT", function() require("tinygit").stashPop() end, desc = "󰜦 Stash pop" },
 
@@ -55,7 +56,7 @@ return {
 		require("tinygit").setup(opts)
 
 		vim.g.lualineAdd("tabline", "lualine_x", require("tinygit.statusline").blame)
-			-- stylua: ignore
-			vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
+		-- stylua: ignore
+		vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 	end,
 }
