@@ -10,3 +10,12 @@ for _, num in ipairs(numbers) do
 	temp = vim.inspect(usedNumbers)
 	print(temp)
 end
+
+local g = {
+	{ { line = 4 }, { line = 8 } },
+}
+
+local ff = {
+	{ { line = 4 }, { line = 8 } },
+	{ { line = 37 } },
+}
