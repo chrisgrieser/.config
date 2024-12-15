@@ -92,6 +92,14 @@ function M.camelSnakeLspRename()
 	end
 end
 
+function M.toggleTitleCase()
+	local prevCursor = vim.api.nvim_win_get_cursor(0)
+	local cword = vim.fn.expand("<cword>")
+	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
+	vim.cmd.normal { cmd, bang = true }
+	vim.api.nvim_win_set_cursor(0, prevCursor)
+end
+
 -- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
 function M.toggleOrIncrement()
 	local toggles = {
@@ -100,27 +108,16 @@ function M.toggleOrIncrement()
 		["const"] = "let", -- js
 	}
 	local cword = vim.fn.expand("<cword>")
+	local newWord
 	for word, opposite in pairs(toggles) do
-		if cword == word then
-			vim.cmd.normal { '"_ciw' .. opposite, bang = true }
-			return
-		end
-		if cword == opposite then
-			vim.cmd.normal { '"_ciw' .. word, bang = true }
-			return
-		end
+		if cword == word then newWord = opposite end
+		if cword == opposite then newWord = word end
 	end
-	-- fallback to `<C-a>`
-	local key = vim.api.nvim_replace_termcodes("<C-a>", true, true, true)
-	vim.api.nvim_feedkeys(key, "n", true)
-end
-
-function M.toggleTitleCase()
-	local prevCursor = vim.api.nvim_win_get_cursor(0)
-	local cword = vim.fn.expand("<cword>")
-	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
-	vim.cmd.normal { cmd, bang = true }
-	vim.api.nvim_win_set_cursor(0, prevCursor)
+	if newWord then
+		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
+	else
+		vim.cmd.execute('"normal! \\<C-a>"') -- needs :execute to escape `<C-a>`
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -165,18 +162,20 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.spellSuggest()
+---@param limit number
+function M.spellSuggest(limit)
 	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
-	suggestions = vim.list_slice(suggestions, 1, 9)
+	suggestions = vim.list_slice(suggestions, 1, limit)
 
-	vim.ui.select(suggestions, {
-		prompt = "󰓆 Spelling suggestions",
-		kind = "spell",
-	}, function(selection)
-		if not selection then return end
-		vim.cmd.normal { '"_ciw' .. selection, bang = true }
-		vim.cmd.stopinsert()
-	end)
+	vim.ui.select(
+		suggestions,
+		{ prompt = "󰓆 Spelling suggestions", kind = "spell" },
+		function(selection)
+			if not selection then return end
+			vim.cmd.normal { '"_ciw' .. selection, bang = true }
+			vim.cmd.stopinsert()
+		end
+	)
 end
 
 --------------------------------------------------------------------------------

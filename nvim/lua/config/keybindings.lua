@@ -82,7 +82,7 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
--- Increment/Decrement, or toggle true/false
+-- Increment/Decrement, or toggle true/false  23
 -- stylua: ignore
 keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
@@ -113,10 +113,10 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
--- Spelling (works even with `spell=false`)
+-- Spelling (these work even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 -- stylua: ignore
-keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
+keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest(9) end, { desc = "󰓆 Spell suggestions" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
