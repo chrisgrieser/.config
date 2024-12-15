@@ -10,7 +10,7 @@ return {
 		{
 			"<leader>dv",
 			function() require("nvim-dap-virtual-text").toggle() end,
-			desc = "󱂬 Toggle virtual text",
+			desc = "󱂬 Toggle virt text",
 		},
 	},
 	config = function(_, opts)

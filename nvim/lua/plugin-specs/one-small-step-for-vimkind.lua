@@ -23,7 +23,7 @@ return {
 			"<leader>dl",
 			function() require("osv").launch { port = 8086 } end,
 			ft = "lua",
-			desc = " Use this nvim instance as debuggee",
+			desc = " set as debuggee",
 		},
 		-- 2. One nvim instance, runs current file via * `require("osv").run_this`
 		-- less flexible, but quicker to start. Useful just to check code samples.
