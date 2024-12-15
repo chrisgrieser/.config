@@ -92,22 +92,27 @@ function M.camelSnakeLspRename()
 	end
 end
 
--- Increment or toggle if cursorword is true/false.
--- + Simplified implementation of dial.nvim.
--- + REQUIRED `expr = true` for the keybinding
+-- Increment or toggle if cursorword is true/false (Simplified version of dial.nvim)
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
 		["True"] = "False", -- python
 		["const"] = "let", -- js
 	}
-	-- cannot use vim.cmd.normal, because it changes cursor position
 	local cword = vim.fn.expand("<cword>")
 	for word, opposite in pairs(toggles) do
-		if cword == word then return '"_ciw' .. opposite .. "<Esc>" end
-		if cword == opposite then return '"_ciw' .. word .. "<Esc>" end
+		if cword == word then
+			vim.cmd.normal { '"_ciw' .. opposite, bang = true }
+			return
+		end
+		if cword == opposite then
+			vim.cmd.normal { '"_ciw' .. word, bang = true }
+			return
+		end
 	end
-	return "<C-a>"
+	-- fallback to `<C-a>`
+	local key = vim.api.nvim_replace_termcodes("<C-a>", true, true, true)
+	vim.api.nvim_feedkeys(key, "n", true)
 end
 
 function M.toggleTitleCase()
@@ -156,6 +161,22 @@ function M.smartDuplicate()
 	local newCol = luadocFieldPos or valuePos
 	local targetCol = newCol and newCol - 1 or col
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })
+end
+
+--------------------------------------------------------------------------------
+
+function M.spellSuggest()
+	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
+	suggestions = vim.list_slice(suggestions, 1, 9)
+
+	vim.ui.select(suggestions, {
+		prompt = "󰓆 Spelling suggestions",
+		kind = "spell",
+	}, function(selection)
+		if not selection then return end
+		vim.cmd.normal { '"_ciw' .. selection, bang = true }
+		vim.cmd.stopinsert()
+	end)
 end
 
 --------------------------------------------------------------------------------

@@ -83,12 +83,8 @@ keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() e
 keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
 -- Increment/Decrement, or toggle true/false
-keymap(
-	{ "n", "x" },
-	"+",
-	function() return require("personal-plugins.misc").toggleOrIncrement() end,
-	{ desc = "󰐖 Increment/toggle", expr = true }
-)
+-- stylua: ignore
+keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
 
 -- Delete trailing character
@@ -100,7 +96,7 @@ end, { desc = "󱎘 Delete char at EoL" })
 -- Append to EoL: `<leader>` + `char`
 local trailChars = { ",", " {", ")", ";", ".", " \\" }
 for _, key in pairs(trailChars) do
-	keymap("n", "<leader>" .. vim.trim(key), function ()
+	keymap("n", "<leader>" .. vim.trim(key), function()
 		local updatedLine = vim.api.nvim_get_current_line() .. key
 		vim.api.nvim_set_current_line(updatedLine)
 	end)
@@ -119,6 +115,8 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- Spelling (works even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
+-- stylua: ignore
+keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
