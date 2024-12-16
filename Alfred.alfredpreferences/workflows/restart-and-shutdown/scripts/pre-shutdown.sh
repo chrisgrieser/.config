@@ -4,6 +4,9 @@ set -e
 
 alfred_dir="$PWD" # stored, since cd'ing later
 
+# So Obsidian isn't re-opened on startup, preventing sync issues
+killall "Obsidian"
+
 function notify() {
 	name=$1
 	icon=$2
@@ -17,13 +20,13 @@ while read -r line; do
 	cd "$repo_path"
 	if [[ -n "$(git status --porcelain)" ]]; then
 		notify "$name" "$icon"
-		zsh ".sync-this-repo.sh" &>/dev/null
+		zsh ".sync-this-repo.sh" &> /dev/null
 	fi
 	if [[ -n "$(git status --porcelain)" ]]; then
 		notify "⚠️ $icon $name not synced."
 		return 1
 	fi
-done <"$HOME/.config/perma-repos.csv"
+done < "$HOME/.config/perma-repos.csv"
 
 # for Alfred conditional to prompt shutdown
 echo -n "success"
