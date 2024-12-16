@@ -303,15 +303,18 @@ function openNextLink(where) {
 
 /** For use with the rephraser-action from the "Writing Assistant" Alfred
  * workflow, which sends text to OpenAI, and returns the diff as
- * highlights (additions) and strikethroughs (deletions). */
-function acceptHighlightsAndStrikethrus() {
+ * highlights (additions) and strikethroughs (deletions).
+ * @param {"accept"|"reject"} mode
+ */
+function highlightsAndStrikethrus(mode) {
 	const { line: lnum, ch: col } = editor.getCursor();
 
 	const lineText = editor.getLine(lnum);
-	const updatedLine = lineText
-		.replace(/==/g, "") // keep highlights
-		.replace(/~~.*?~~/g, "") // remove strikethroughs
-		.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
+	const updatedLine =
+		mode === "accept"
+			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
+			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
+	updatedLine.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
 	editor.setLine(lnum, updatedLine);
 
 	const charsLess = lineText.length - updatedLine.length;
