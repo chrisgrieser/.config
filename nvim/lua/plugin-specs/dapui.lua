@@ -1,6 +1,6 @@
 return {
 	"rcarriga/nvim-dap-ui",
-	dependencies = "nvim-neotest/nvim-nio",
+	dependencies = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap" },
 	keys = {
 		{ "<leader>du", function() require("dapui").toggle() end, desc = "󱂬 Toggle UI" },
 		{
@@ -12,7 +12,7 @@ return {
 			"<leader>de",
 			function() require("dapui").eval() end,
 			mode = { "n", "x" },
-			desc = " Eval", -- value under cursor
+			desc = " Eval under cursor",
 		},
 	},
 	opts = {

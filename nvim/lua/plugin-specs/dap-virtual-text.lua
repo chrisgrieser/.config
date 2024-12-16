@@ -1,5 +1,6 @@
 return {
 	"theHamsta/nvim-dap-virtual-text",
+	dependencies = "mfussenegger/nvim-dap",
 	opts = {
 		highlight_changed_variables = true,
 		highlight_new_as_changed = false,
@@ -10,20 +11,20 @@ return {
 		{
 			"<leader>dv",
 			function() require("nvim-dap-virtual-text").toggle() end,
-			desc = "󱂬 Toggle virt text",
+			desc = "󱂬 Toggle virtual text",
 		},
 	},
 	config = function(_, opts)
-		local dapvt = require("nvim-dap-virtual-text")
-		dapvt.setup(opts)
+		local dapVirtText = require("nvim-dap-virtual-text")
+		dapVirtText.setup(opts)
 
 		-- auto-disable/enable
 		local listeners = require("dap").listeners.after
-		listeners.attach.dapvt = dapvt.enable
-		listeners.launch.dapvt = dapvt.enable
-		listeners.disconnect.dapvt = dapvt.disable
-		listeners.event_terminated.dapvt = dapvt.disable
-		listeners.event_exited.dapvt = dapvt.disable
+		listeners.attach.dapvt = dapVirtText.enable
+		listeners.launch.dapvt = dapVirtText.enable
+		listeners.disconnect.dapvt = dapVirtText.disable
+		listeners.event_terminated.dapvt = dapVirtText.disable
+		listeners.event_exited.dapvt = dapVirtText.disable
 	end,
 	init = function()
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
