@@ -6,9 +6,9 @@ local function gotoBreakpoint(dir)
 		return
 	end
 	local points = {}
-	for bufnr, buffer in pairs(breakpoints) do
-		for _, point in ipairs(buffer) do
-			table.insert(points, { bufnr = bufnr, line = point.line })
+	for bufnr, bpData in pairs(breakpoints) do
+		for _, bp in ipairs(bpData) do
+			table.insert(points, { bufnr = bufnr, line = bp.line })
 		end
 	end
 
@@ -36,16 +36,20 @@ end
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
+		{ "6", function() require("dap").step_over() end, desc = " Step over" },
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 
 		{ "gb", function() gotoBreakpoint("next") end, desc = " Goto next breakpoint" },
 		{ "gB", function() gotoBreakpoint("prev") end, desc = " Goto previous breakpoint" },
 
-		-- stylua: ignore
-		{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = "󰅗 Clear breakpoints" },
+		{ "<leader>do", function() require("dap").step_out() end, desc = "󰆸 Step out" },
+		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
+		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰇀 Run to cursor" },
 		{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
+		-- stylua: ignore
+		{ "<leader>dd", function() require("dap").clear_breakpoints() end, desc = "󰅗 Delete breakpoints" },
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
