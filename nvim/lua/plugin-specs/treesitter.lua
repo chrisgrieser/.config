@@ -27,10 +27,11 @@ return {
 		vim.treesitter.language.register("bash", "zsh")
 
 		-- fixes/improvements for the comments parser
-		vim.api.nvim_create_autocmd("ColorScheme", {
+		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 			desc = "User: Highlights for the Treesitter `comments` parser",
 			callback = function()
 				-- FIX lua todo-comments https://github.com/stsewd/tree-sitter-comment/issues/22
+				-- https://github.com/LuaLS/lua-language-server/issues/1809
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
 
 				-- Define `@comment.bold` for `queries/comment/highlights.scm`

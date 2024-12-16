@@ -140,12 +140,19 @@ M.serverConfigs.lua_ls = {
 			completion = {
 				callSnippet = "Disable", -- functions -> no replace snippet
 				keywordSnippet = "Replace", -- keywords -> replace
-				showWord = "Disable", -- already done completion plugin
-				workspaceWord = false, -- already done completion plugin
+				showWord = "Disable", -- already done by completion plugin
+				workspaceWord = false, -- already done by completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
 			},
 			diagnostics = {
-				disable = { "trailing-space" }, -- formatter already handles that
+				disable = {
+					-- formatter already handles that
+					"trailing-space", 
+					-- don't dim content of unused functions
+					-- (no loss of diagnostic, used `unused-local` will still inform
+					-- us about these functions)
+					"unused-function", 
+				},
 			},
 			hint = { -- inlay hints
 				enable = true,
