@@ -3,8 +3,7 @@
 " LEADER
 
 " Can't set leaders in Obsidian vim, so the key just has to be used consistently.
-" However, it needs to be unmapped, to not trigger default behavior:
-" https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
+" However, it needs to be unmapped, to not trigger default behavior: https://github.com/esm7/obsidian-vimrc-support#some-help-with-binding-space-chords-doom-and-spacemacs-fans
 unmap ,
 
 "───────────────────────────────────────────────────────────────────────────────
@@ -193,8 +192,8 @@ exmap liveGrep obcommand obsidian-another-quick-switcher:grep
 noremap gl :liveGrep<CR>
 
 " same mappings as search-and-replace or variable renaming in nvim
-nnoremap ,ff :%s///g
-nnoremap ,fs :%s///g
+nnoremap ,v :%s///g
+nnoremap ,rs :%s///g
 
 "───────────────────────────────────────────────────────────────────────────────
 " EDITING
@@ -213,7 +212,7 @@ nnoremap <Right> dlp
 nnoremap <Left> dlhhp
 
 " h1 -> h2, h2 -> h3, etc.
-" <M-h> == cmd+h
+" <M-h> = cmd+h
 exmap headingIncrement jsfile Meta/vimrc-jsfile.js { headingIncrementor(1) }
 nnoremap <M-h> :headingIncrement<CR>
 inoremap <M-h> <Esc>:headingIncrement<CR>a
@@ -317,7 +316,7 @@ nnoremap ,cc :enhanceUrlWithTitle<CR>
 
 " Freeze Interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
-nnoremap ,F :freezeInterface<CR>
+nnoremap ,if :freezeInterface<CR>
 
 " Rephraser/Language Tools: accept suggestion
 exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { acceptHighlightsAndStrikethrus() }
@@ -560,5 +559,5 @@ nnoremap <M-s> :lint<CR>
 
 " BUG https://github.com/j0rd1smit/obsidian-copilot-auto-completion/issues/45
 " insert mode: accept suggestion
-exmap acceptGhostText obcommand copilot-auto-completion:accept
-inoremap <M-s> <Esc>:acceptGhostText<CR>a
+" exmap acceptGhostText obcommand copilot-auto-completion:accept
+" inoremap <M-s> <Esc>:acceptGhostText<CR>a
