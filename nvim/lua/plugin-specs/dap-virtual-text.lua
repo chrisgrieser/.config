@@ -20,11 +20,9 @@ return {
 
 		-- auto-disable/enable
 		local listeners = require("dap").listeners.after
-		listeners.attach.dapvt = dapVirtText.enable
-		listeners.launch.dapvt = dapVirtText.enable
-		listeners.disconnect.dapvt = dapVirtText.disable
-		listeners.event_terminated.dapvt = dapVirtText.disable
-		listeners.event_exited.dapvt = dapVirtText.disable
+		listeners.disconnect.dapVirtText = dapVirtText.disable
+		listeners.event_terminated.dapVirtText = dapVirtText.disable
+		listeners.event_exited.dapVirtText = dapVirtText.disable
 	end,
 	init = function()
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {

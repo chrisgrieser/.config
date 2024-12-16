@@ -10,15 +10,22 @@ return {
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
-		-- use this one by default
-		require("lazy").load { plugins = { "nvim-dap-virtual-text" } }
+		local listeners = require("dap").listeners.after
+
+		-- auto-enable nvim-dap-virtual-text
+		local installed, dapVirtText = pcall(require, "nvim-dap-virtual-text")
+		if installed then
+			listeners.attach.dapVirtText = dapVirtText.enable
+			listeners.launch.dapVirtText = dapVirtText.enable
+		else
+			vim.notify("dap-virtual-text not installed", vim.log.levels.WARN, { title = "nvim-dap" })
+		end
 
 		-- auto-disable line numbers
-		local stop = function() vim.opt.number = false end
-		local listeners = require("dap").listeners.after
-		listeners.disconnect.dapItself = stop
-		listeners.event_terminated.dapItself = stop
-		listeners.event_exited.dapItself = stop
+		local noLineNumbers = function() vim.opt.number = false end
+		listeners.disconnect.dapItself = noLineNumbers
+		listeners.event_terminated.dapItself = noLineNumbers
+		listeners.event_exited.dapItself = noLineNumbers
 
 		-- sign-icons & highlights
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
