@@ -359,14 +359,6 @@
     }
   ],
   "markdown:add-metadata-property": [],
-  "obsidian-linter:lint-file-unless-ignored": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "S"
-    }
-  ],
   "copilot-auto-completion:accept": [
     {
       "modifiers": [
