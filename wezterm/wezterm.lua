@@ -8,11 +8,11 @@ local darkThemes = {
 	"cyberpunk",
 }
 local lightThemes = {
-	"seoulbones_light",
-	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
-	"Paraiso (light) (terminal.sexy)",
 	"Silk Light (base16)",
+	"Solar Flare Light (base16)",
+	"Paraiso (light) (terminal.sexy)",
+	"seoulbones_light",
 }
 
 local lightOpacity = 0.90
