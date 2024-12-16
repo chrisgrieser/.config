@@ -16,10 +16,7 @@ return {
 		},
 	},
 	opts = {
-		controls = {
-			enabled = true,
-			element = "scopes",
-		},
+		controls = { enabled = false },
 		mappings = {
 			expand = { "<Tab>", "<2-LeftMouse>" }, -- 2-LeftMouse = Double Click
 			open = "<CR>",
