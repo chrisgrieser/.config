@@ -26,8 +26,11 @@ M.keys = {
 	-- ability to scroll back
 	{ key = "k", mods = "CMD", action = act.SendKey { key = "l", mods = "CTRL" } },
 
-	-- remap from `terminal_keybindings.zsh` (cannot use `bindkey` for `<D-CR>`)
+	-- REMAP from `terminal_keybindings.zsh` (cannot use `bindkey` for `<D-CR>`)
 	{ key = "Enter", mods = "CMD", action = act.SendKey { key = "o", mods = "CTRL" } },
+
+	-- REMAP VI MODE (cannot use `bindkey` for `<S-Space>`)
+	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
