@@ -306,7 +306,7 @@ nnoremap [ @0
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
-" [L]og Variable
+" [L]og variable
 exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
 nnoremap ,ll :consoleLogFromWordUnderCursor<CR>
 
@@ -314,18 +314,22 @@ nnoremap ,ll :consoleLogFromWordUnderCursor<CR>
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
 nnoremap ,cc :enhanceUrlWithTitle<CR>
 
-" Freeze Interface
+" Freeze interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
-" Rephraser/Language Tools: accept suggestion
-exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { acceptHighlightsAndStrikethrus() }
+" Rephraser/Language Tools: accept
+exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("accept") }
 exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
 noremap ga :acceptHighlightsAndStrikethrus<CR>:acceptLtSuggestion<CR>
 
+" Rephraser: reject
+exmap rejectHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("reject") }
+noremap gA :rejectHighlightsAndStrikethrus<CR>
+
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
-nnoremap ,r :markAsRead<CR>
+nnoremap ,rr :markAsRead<CR>
 
 " [i]nspect chrome [v]ersion
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
