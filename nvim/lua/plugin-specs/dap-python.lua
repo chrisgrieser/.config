@@ -1,6 +1,7 @@
 -- INFO also needs to add `debugpy` to `mason`
 return {
 	"mfussenegger/nvim-dap-python",
+	dependencies = "mfussenegger/nvim-dap",
 	keys = {
 		-- so it's loaded here
 		{ "7", function() require("dap").continue() end, ft = "python", desc = " Continue (py)" },

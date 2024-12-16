@@ -1,19 +1,18 @@
 return {
 	"mfussenegger/nvim-dap",
-
-	-- as dependency, since this one we want to auto-load via listeners
-	dependencies = "theHamsta/nvim-dap-virtual-text",
-
 	keys = {
 		{ "7", function() require("dap").continue() end, desc = " Continue" },
 		{ "8", function() require("dap").toggle_breakpoint() end, desc = " Toggle breakpoint" },
 		-- stylua: ignore
-		{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = " Clear breakpoints" },
+		{ "<leader>dc", function() require("dap").clear_breakpoints() end, desc = "󰅗 Clear breakpoints" },
 		{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 	},
 	init = function() vim.g.whichkeyAddSpec { "<leader>d", group = "󰃤 Debugger" } end,
 	config = function()
+		-- use this one by default
+		require("lazy").load { plugins = { "nvim-dap-virtual-text" } }
+
 		-- auto-disable line numbers
 		local stop = function() vim.opt.number = false end
 		local listeners = require("dap").listeners.after

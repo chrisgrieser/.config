@@ -23,7 +23,9 @@ bindkey '^F' edit-command-line
 # remappings
 bindkey '…' insert-last-word    # `alt+.` on macOS
 bindkey "^[[1;3D" backward-word # `alt+arrow` to move between words (emulating macOS default behavior)
-bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3C" forward-word  
+bindkey "^A" beginning-of-line  # also bound to `cmd+left` via wezterm
+bindkey "^E" end-of-line        # also bound to `cmd+right` via wezterm
 
 #───────────────────────────────────────────────────────────────────────────────
 # VI MODE

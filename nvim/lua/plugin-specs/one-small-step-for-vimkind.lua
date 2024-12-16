@@ -21,9 +21,9 @@ return {
 		--   b) breakpoints must be set in debugger-instance
 		{
 			"<leader>dl",
-			function() require("osv").launch { port = 8086 } end,
+			function() require("osv").launch() end,
 			ft = "lua",
-			desc = " set as debuggee",
+			desc = " Use instance as debuggee",
 		},
 		-- 2. One nvim instance, runs current file via * `require("osv").run_this`
 		-- less flexible, but quicker to start. Useful just to check code samples.
