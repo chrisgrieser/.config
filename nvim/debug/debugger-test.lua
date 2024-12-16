@@ -8,5 +8,4 @@ for _, num in ipairs(numbers) do
 	table.insert(usedNumbers, num * 2)
 
 	temp = vim.inspect(usedNumbers)
-	print(temp)
 end

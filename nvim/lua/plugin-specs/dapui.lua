@@ -39,13 +39,9 @@ return {
 		},
 	},
 	config = function(_, opts)
-		local dapui = require("dapui")
-		dapui.setup(opts)
+		require("dapui").setup(opts)
 
 		-- AUTO-CLOSE THE DAP-UI
-		local listeners = require("dap").listeners.after
-		listeners.disconnect.dapui = dapui.close
-		listeners.event_terminated.dapui = dapui.close
-		listeners.event_exited.dapui = dapui.close
+		require("dap").listeners.after.disconnect.dapui = require("dapui").close
 	end,
 }
