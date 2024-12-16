@@ -8,10 +8,9 @@ local darkThemes = {
 	"cyberpunk",
 }
 local lightThemes = {
-	"Bluloco Zsh Light (Gogh)",
+	"seoulbones_light",
 	"Solar Flare Light (base16)",
 	"Ivory Light (terminal.sexy)",
-	"seoulbones_light",
 	"Paraiso (light) (terminal.sexy)",
 	"Silk Light (base16)",
 }
@@ -19,7 +18,7 @@ local lightThemes = {
 local lightOpacity = 0.90
 local darkOpacity = 0.87
 
-local deviceSpecificConfig = {
+local deviceSpecific = {
 	home = {
 		fontSize = 26.3,
 		maxFps = 120,
@@ -51,7 +50,7 @@ if host:find("Mother") then device = "mother" end
 -- set window position on startup
 wt.on("gui-startup", function(cmd)
 	-- on start, move window to the side ("pseudo-maximized")
-	local pos = deviceSpecificConfig[device].winPos
+	local pos = deviceSpecific[device].winPos
 	local _, _, window = wt.mux.spawn_window(cmd or {})
 
 	window:gui_window():set_position(pos.x, pos.y)
@@ -93,7 +92,7 @@ local config = {
 	check_for_updates = false, -- done via homebrew already
 	automatically_reload_config = true,
 
-	-- Start/Close
+	-- Start/close
 	default_cwd = wt.home_dir .. "/Desktop",
 	window_close_confirmation = "NeverPrompt",
 	quit_when_all_windows_are_closed = true,
@@ -114,15 +113,15 @@ local config = {
 	},
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = 0.9, -- effectively like letter-spacing
-	font_size = deviceSpecificConfig[device].fontSize,
-	command_palette_font_size = deviceSpecificConfig[device].fontSize,
+	font_size = deviceSpecific[device].fontSize,
+	command_palette_font_size = deviceSpecific[device].fontSize,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- Appearance
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
 	bold_brightens_ansi_colors = "BrightAndBold",
-	max_fps = deviceSpecificConfig[device].maxFps,
+	max_fps = deviceSpecific[device].maxFps,
 	adjust_window_size_when_changing_font_size = false,
 
 	-- remove titlebar, but keep macOS traffic lights. Doing so enables some
