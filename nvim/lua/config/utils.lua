@@ -12,7 +12,7 @@ M.extraTextobjMaps = {
 ---@param mode string|string[]
 ---@param lhs string
 ---@param rhs string|function
----@param opts? vim.keymap.set.Opts
+---@param opts? {unique?: boolean, buffer?: number|boolean, remap: boolean, silent:boolean, nowait: boolean}
 function M.uniqueKeymap(mode, lhs, rhs, opts)
 	if not opts then opts = {} end
 	if opts.unique == nil then opts.unique = true end -- allows to disable with `unique=false`

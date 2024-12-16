@@ -289,7 +289,8 @@ do
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User: restore default behavior of `<CR>` for quickfix buffers.",
 		pattern = "qf",
-		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
+		---@diagnostic disable-next-line: missing-fields
+		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end, 
 	})
 end
 
