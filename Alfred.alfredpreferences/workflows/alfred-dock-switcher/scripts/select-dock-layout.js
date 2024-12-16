@@ -15,11 +15,11 @@ function alfredMatcher(str) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const dockSwitcherDir = $.getenv("dock_layout_storage");
-	const stdout = app.doShellScript(`ls -1 "${dockSwitcherDir}/"*.plist`).trim();
+	const stdout = app.doShellScript(`ls -1 "${dockSwitcherDir}/"*.plist || true`).trim();
 
 	// GUARD 
 	if (stdout === "") {
-		const item = { title: "No layouts found.", subtitle: 'Create a layout via ":dock_newlayout"' };
+		const item = { title: "No layouts found.", subtitle: 'Create a layout via ":dock new"' };
 		return JSON.stringify({ items: [item] });
 	}
 

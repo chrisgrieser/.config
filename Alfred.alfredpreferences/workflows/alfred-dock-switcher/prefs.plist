@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>dock_layout_storage</key>
-	<string>~/.config/+ dock-layouts</string>
+	<string>~/.config/alfred-dock-switchers</string>
 </dict>
 </plist>
