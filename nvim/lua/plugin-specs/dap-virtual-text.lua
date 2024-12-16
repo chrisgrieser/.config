@@ -19,10 +19,7 @@ return {
 		dapVirtText.setup(opts)
 
 		-- auto-disable/enable
-		local listeners = require("dap").listeners.after
-		listeners.disconnect.dapVirtText = dapVirtText.disable
-		listeners.event_terminated.dapVirtText = dapVirtText.disable
-		listeners.event_exited.dapVirtText = dapVirtText.disable
+		require("dap").listeners.after.disconnect.dapVirtText = dapVirtText.disable
 	end,
 	init = function()
 		vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
@@ -33,4 +30,3 @@ return {
 		})
 	end,
 }
-
