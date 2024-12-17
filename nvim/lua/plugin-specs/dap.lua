@@ -57,16 +57,13 @@ return {
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapLogPoint", { text = "󰍩" })
-		vim.fn.sign_define("DapLogRejected", { text = "" })
+		vim.fn.sign_define("DapLogRejected", { text = "" })
 		vim.fn.sign_define("DapStopped", {
-			text = "",
+			text = "󰳟",
 			texthl = "DiagnosticHint",
 			linehl = "DiagnosticVirtualTextHint",
 			numhl = "DiagnosticVirtualTextHint",
 		})
--- - `DapBreakpointCondition` for conditional breakpoints (default: `C`)
--- - `DapLogPoint` for log points (default: `L`)
--- - `DapBreakpointRejected` to indicate breakpoints rejected by the debug
 
 		-- LISTENERS
 		local listeners = require("dap").listeners.after
