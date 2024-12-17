@@ -147,11 +147,11 @@ M.serverConfigs.lua_ls = {
 			diagnostics = {
 				disable = {
 					-- formatter already handles that
-					"trailing-space", 
+					"trailing-space",
 					-- don't dim content of unused functions
 					-- (no loss of diagnostic, used `unused-local` will still inform
 					-- us about these functions)
-					"unused-function", 
+					"unused-function",
 				},
 			},
 			hint = { -- inlay hints
@@ -297,7 +297,7 @@ M.serverConfigs.ltex_plus = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
 			dictionary = {
 				-- HACK since reading external file does not work https://github.com/ltex-plus/ltex-ls-plus/issues/56
-				["en-US"] = vim.iter(io.lines(vim.o.spellfile)):totable()
+				["en-US"] = vim.iter(io.lines(vim.o.spellfile)):totable(),
 			},
 
 			diagnosticSeverity = { default = "info" },

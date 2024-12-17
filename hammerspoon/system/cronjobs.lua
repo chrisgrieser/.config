@@ -68,7 +68,7 @@ M.timer_nightlyCronjobs = hs.timer
 			if file:find("%.sh$") then
 				M["cronjob_" .. file] = hs.task
 					.new(cronjobDir .. "/" .. file, function(code)
-						if (code == 0) then
+						if code == 0 then
 							print("✅ Cronjob: " .. file)
 						else
 							u.notify("❌ Cronjob failed: " .. file)

@@ -3,7 +3,8 @@ local usedNumbers = {}
 local sum = 10
 local temp
 
-for _, num in ipairs(numbers) do sum = sum + num
+for _, num in ipairs(numbers) do
+	sum = sum + num
 	table.insert(usedNumbers, num * 2)
 
 	temp = vim.inspect(usedNumbers)

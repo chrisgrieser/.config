@@ -12,3 +12,7 @@ count-lines:
         sort --reverse |
         cut -c5- |
         sed 's|\./||'
+
+format-all-lua-files:
+    export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+    stylua .

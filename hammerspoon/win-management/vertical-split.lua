@@ -1,4 +1,4 @@
--- INFO 
+-- INFO
 -- This module uses macOS' builtin full-screen tiling functionality and its
 -- spacing functionality to quickly create a vertical split of two paired apps
 -- apps via one hotkey.

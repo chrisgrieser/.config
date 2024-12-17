@@ -20,8 +20,7 @@ return {
 			if vim.bo.ft == "lua" then
 				local col = vim.api.nvim_win_get_cursor(0)[2]
 				local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
-				local commentButNotLuadocs = charsBefore:find("^%-%-?$")
-					or charsBefore:find("%s%-%-?")
+				local commentButNotLuadocs = charsBefore:find("^%-%-?$") or charsBefore:find("%s%-%-?")
 				if commentButNotLuadocs then return false end
 			end
 

@@ -85,8 +85,7 @@ return {
 		filter = function(map)
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
-			local nvimBultins =
-				{ "gc", "gcc", "]d", "zf", "g~", "gu", "gU", "<C-W><C-D>", "<C-W>d" }
+			local nvimBultins = { "gc", "gcc", "]d", "zf", "g~", "gu", "gU", "<C-W><C-D>", "<C-W>d" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
 			return map.desc ~= nil

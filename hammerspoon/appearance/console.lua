@@ -101,9 +101,7 @@ M.wf_hsConsole = wf.new("Hammerspoon")
 	:subscribe(wf.windowFocused, function() u.defer(0.2, cleanupConsole) end)
 
 M.aw_hsConsole = aw.new(function(appName, eventType)
-	if eventType == aw.activated and appName == "Hammerspoon" then
-		u.defer(0.2, cleanupConsole)
-	end
+	if eventType == aw.activated and appName == "Hammerspoon" then u.defer(0.2, cleanupConsole) end
 end):start()
 
 --------------------------------------------------------------------------------

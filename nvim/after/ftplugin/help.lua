@@ -1,6 +1,5 @@
 vim.diagnostic.enable(false, { bufnr = 0 })
 
-
 --------------------------------------------------------------------------------
 local bkeymap = require("config.utils").bufKeymap
 

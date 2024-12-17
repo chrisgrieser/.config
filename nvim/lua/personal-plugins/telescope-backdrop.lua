@@ -1,8 +1,8 @@
--- PENDING 
+-- PENDING
 -- https://github.com/nvim-telescope/telescope.nvim/issues/3020
 
 -- CONFIG
-local blend = 50 
+local blend = 50
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {

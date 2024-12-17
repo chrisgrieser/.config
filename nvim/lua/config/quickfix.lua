@@ -42,7 +42,12 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Set keymaps for quickfix window",
 	pattern = "qf",
 	callback = function(ctx)
-		vim.keymap.set("n", "q", vim.cmd.close, { desc = " Close", buffer = ctx.buf, nowait = true })
+		vim.keymap.set(
+			"n",
+			"q",
+			vim.cmd.close,
+			{ desc = " Close", buffer = ctx.buf, nowait = true }
+		)
 		vim.keymap.set("n", "dd", function()
 			local qfItems = vim.fn.getqflist()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]

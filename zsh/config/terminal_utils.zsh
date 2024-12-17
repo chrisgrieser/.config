@@ -77,7 +77,7 @@ _esc_on_empty_buffer() {
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
 
-	echo "$selected" | cut -c3- | xargs open # `cut`to remove the nerdfont icons
+	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
 }
 zle -N _esc_on_empty_buffer
 bindkey '\e' _esc_on_empty_buffer
