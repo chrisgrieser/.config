@@ -23,6 +23,5 @@ M.aw_spotify = aw.new(function(appName, eventType)
 	M.spotify_task = hs.task.new(binary, nil, { "playback", action }):start()
 end):start() --[[@as hs.application.watcher]]
 
-
 --------------------------------------------------------------------------------
 return M

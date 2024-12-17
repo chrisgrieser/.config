@@ -22,4 +22,3 @@ return {
 		editingBehavior = { autoCaptureGroups = true },
 	},
 }
-

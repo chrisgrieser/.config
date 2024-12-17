@@ -399,7 +399,11 @@ return {
 
 		-- QUICKFIX
 		{ "<leader>qf", function() vim.cmd.Telescope("quickfix") end, desc = "󰭎 Find in list" },
-		{ "<leader>qh", function() vim.cmd.Telescope("quickfixhistroy") end, desc = "󰋚 Previous lists" },
+		{
+			"<leader>qh",
+			function() vim.cmd.Telescope("quickfixhistroy") end,
+			desc = "󰋚 Previous lists",
+		},
 
 		-- GIT
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },

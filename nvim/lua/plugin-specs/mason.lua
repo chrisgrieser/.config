@@ -65,7 +65,7 @@ return {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
 	init = function()
-		-- Make mason packages available before loading mason itself. 
+		-- Make mason packages available before loading mason itself.
 		-- This allows us to lazy-load of mason.
 		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 	end,

@@ -22,4 +22,5 @@ debug-instance:
         -c'sleep 300ms|bdelete|edit' &>/dev/null
 
 format-all-lua-files:
-    
+    export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+    stylua .

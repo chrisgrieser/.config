@@ -1,4 +1,4 @@
-return { 
+return {
 	"echasnovski/mini.icons",
 	opts = {
 		file = {
@@ -24,4 +24,3 @@ return {
 		require("mini.icons").mock_nvim_web_devicons()
 	end,
 }
-

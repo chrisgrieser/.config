@@ -20,7 +20,7 @@ local config = {
 	statusbar = {
 		maxLength = 30,
 		showIcon = true, -- requires `nvim-devicons` or `mini-icons`
-	}
+	},
 }
 
 --------------------------------------------------------------------------------

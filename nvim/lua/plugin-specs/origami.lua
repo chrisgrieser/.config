@@ -3,4 +3,3 @@ return {
 	event = "VeryLazy",
 	opts = true,
 }
-
