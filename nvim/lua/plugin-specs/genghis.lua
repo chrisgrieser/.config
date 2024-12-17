@@ -9,6 +9,8 @@ return {
 		{"<leader>yf", function() require("genghis").copyFileItself() end, desc = "󰈔 File (macOS)" },
 		-- stylua: ignore end
 
+		-- stylua: ignore
+		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },
 		{ "<C-r>", function() require("genghis").renameFile() end, desc = "󰑕 Rename file" },
 		{ "<D-n>", function() require("genghis").createNewFile() end, desc = " New file" },
 		{ "<C-d>", function() require("genghis").duplicateFile() end, desc = " Duplicate file" },

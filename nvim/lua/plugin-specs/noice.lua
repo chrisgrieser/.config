@@ -28,13 +28,6 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	{ -- mason.nvim
-		filter = {
-			event = "notify",
-			cond = function(msg) return msg.opts and (msg.opts.title or ""):find("mason") end,
-		},
-		view = "mini",
-	},
 	-- word added to spellfile via `zg`
 	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 	--------------------------------------------------------------------
