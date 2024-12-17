@@ -1,21 +1,19 @@
 -- these helper functions are a simplified version of `mason-tool-installer.nvim`
 
-local notifyOpts = { title = "Mason", icon = "", style = "minimal" }
-
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
 	local msg = version and ("Updating [%s] to %s"):format(pack.name, version)
 		or ("Installing [%s]"):format(pack.name)
-	vim.notify(msg, nil, notifyOpts)
+	vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
 
 	pack:once("install:success", function()
-		local type = version and "update" or "install"
-		vim.notify(("Successfully %s [%s]"):format(type, pack.name), nil, notifyOpts)
+		local msg2 = ("Successfully %s [%s]"):format(version and "updated" or "installed", pack.name)
+		vim.notify(msg2, nil, { title = "Mason", icon = "", style = "minimal" })
 	end)
 	pack:once("install:failed", function()
 		local error = "Failed to install [" .. pack.name .. "]"
-		vim.notify(error, vim.log.levels.ERROR, notifyOpts)
+		vim.notify(error, vim.log.levels.ERROR, { title = "Mason" })
 	end)
 
 	pack:install { version = version }
@@ -28,7 +26,7 @@ end
 local function syncPackages(ensurePack)
 	local masonReg = require("mason-registry")
 
-	-- ensure registry, relevant when using personal registry
+	-- ensure registry is up-to-date, relevant when using extra personal registry
 	masonReg.refresh()
 
 	-- auto-install missing packages & auto-update installed ones
@@ -51,7 +49,8 @@ local function syncPackages(ensurePack)
 	vim.iter(installedPackages):each(function(packName)
 		if not vim.tbl_contains(ensurePack, packName) then
 			masonReg.get_package(packName):uninstall()
-			vim.notify(("Uninstalled [%s]"):format(packName), nil, notifyOpts)
+			local msg = ("Uninstalled [%s]"):format(packName)
+			vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
 		end
 	end)
 end

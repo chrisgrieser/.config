@@ -56,8 +56,8 @@ return {
 		-- ICONS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
-		vim.fn.sign_define("DapLogPoint", { text = "󰍩" })
-		vim.fn.sign_define("DapLogRejected", { text = "" })
+		vim.fn.sign_define("DapLogPoint", { text = "󰍩", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapLogRejected", { text = "", texthl = "DiagnosticInfo" })
 		vim.fn.sign_define("DapStopped", {
 			text = "󰳟",
 			texthl = "DiagnosticHint",
@@ -94,7 +94,6 @@ return {
 					allBufs = allBufs + #bp
 				end
 				local thisBuf = #(breakpoints[vim.api.nvim_get_current_buf()] or {})
-
 				local countStr = (thisBuf == allBufs) and thisBuf or thisBuf .. "/" .. allBufs
 				local icon = vim.fn.sign_getdefined("DapBreakpoint")[1].text
 				return icon .. countStr
