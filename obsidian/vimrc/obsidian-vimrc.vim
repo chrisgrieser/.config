@@ -369,10 +369,6 @@ nnoremap ,pl :openCommunityPluginsSettings<CR>
 exmap installPlugins jscommand { view.app.workspace.protocolHandlers.get("show-plugin")({ id: ' ' }); }
 nnoremap ,pi :installPlugins<CR>
 
-" open trash
-exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
-nnoremap ,t :openTrash<CR>
-
 " dynamic [h]ighlights settings
 exmap openDynamicHighlightsSettings jsfile Meta/vimrc-jsfile.js { openDynamicHighlightsSettings() }
 nnoremap ,ih :openDynamicHighlightsSettings<CR>
@@ -386,6 +382,26 @@ exmap loadWorkspace jsfile Meta/vimrc-jsfile.js { workspace("load", "Basic") }
 nnoremap ,w :loadWorkspace<CR>
 exmap saveWorkspace jsfile Meta/vimrc-jsfile.js { workspace("save", "Basic") }
 nnoremap ,W :saveWorkspace<CR>
+
+"───────────────────────────────────────────────────────────────────────────────
+" Filesystem
+
+exmap new obcommand pseudometa-startup-actions:new-file-in-folder
+exmap rename obcommand pseudometa-startup-actions:new-file-in-folder
+exmap move obcommand pseudometa-startup-actions:new-file-in-folder
+exmap duplicate obcommand pseudometa-startup-actions:new-file-in-folder
+
+nnoremap ,fr :rename<CR>
+nnoremap ,fn :new<CR>
+nnoremap ,fd :duplicate<CR>
+nnoremap ,fm :move<CR>
+nnoremap ,f<BS> :trash<CR>
+file-explorer:move-file
+file-explorer:duplicate-file
+
+" open trash
+exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
+nnoremap ,t :openTrash<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
