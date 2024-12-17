@@ -86,12 +86,6 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			icon = "󰔟"
 		end
 
-		-- FIX spacing for snacks.nvim
-		if package.loaded["snacks"] then
-			icon = icon .. "  "
-			msg = msg .. " "
-		end
-
 		local opts =
 			{ id = "LspProgress", icon = icon, style = "minimal", timeout = 2500, history = false }
 		vim.notify(msg, vim.log.levels.TRACE, opts)
