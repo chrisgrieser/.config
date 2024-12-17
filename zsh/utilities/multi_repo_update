@@ -10,11 +10,13 @@ repo_names="nvim"
 # repo_names="." # all repos
 
 function actions_in_repo {
-	rm -f ./.github/workflows/nvim-typecheck.yml
-	cp -f "$HOME/Desktop/nvim-type-check.yml" ./.github/workflows/nvim-type-check.yml
+	rm -f ./.github/workflows/semantic-pr-title.yml
+	cp -f "$HOME/Desktop/stale-bot.yml" ./.github/workflows/stale-bot.yml
+	cp -f "$HOME/Desktop/pr-title.yml" ./.github/workflows/pr-title.yml
+	cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
 }
 
-commit_msg="ci: trigger nvim-type-check only when lua files are pushed"
+commit_msg="ci: stylua check instead of formatting; tweak pr title and stale bot"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────

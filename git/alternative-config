@@ -1,0 +1,3 @@
+; vim: ft=gitconfig
+[user]
+	name = Other Name
