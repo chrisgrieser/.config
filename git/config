@@ -2,12 +2,21 @@
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 
-; conditionally change author https://git-scm.com/docs/git-config#_conditional_includes
-; [includeIf "gitdir:~/.config/.git"]
-	; path = "~/.config/git/other-config"
+[core]
+	; 1. Motivation: version control & sync of hooks across devices
+	; 2. By setting them in the global git config, there is no more need to run
+	; `git config core.hooksPath .git-hooks` after every `git clone`
+	; 3. This trick only works on repos solely managed by the user of
+	; this dotfile-repo, it does not work to enforce hooks on other people's clones
+	hooksPath = .git-hooks
+
+;───────────────────────────────────────────────────────────────────────────────
+; INFO
+; 1. needs to come AFTER the config they intend to overwrite
+; 2. test via `git config --get --show-origin core.hooksPath`
 
 [includeIf "gitdir:**/*nvim*/"]
-	path = "~/.config/git/nvim-hook/config"
+	path = "./nvim-hook/config"
 
 ;───────────────────────────────────────────────────────────────────────────────
 
@@ -15,12 +24,6 @@
 	editor = nvim
 	quotePath = false
 
-	; 1. Motivation: version control & sync of hooks across devices
-	; 2. By setting them in the global git config, there is no more need to run
-	; `git config core.hooksPath .git-hooks` after every `git clone`
-	; 3. This trick only works on repos solely managed by the user of
-	; this dotfile-repo, it does not work to enforce hooks on other people's clones
-	hooksPath = .git-hooks
 [status]
 	showUntrackedFiles = all
 	short = true
