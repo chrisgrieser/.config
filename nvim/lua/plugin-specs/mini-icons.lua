@@ -17,6 +17,7 @@ return {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
+			["oil"] = { glyph = "󰁴" },
 		},
 	},
 	config = function(_, opts)
