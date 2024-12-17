@@ -26,11 +26,6 @@ return {
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "", right = "" },
 			always_show_tabs = true, -- this refers to the tabline
-			-- stylua: ignore
-			ignore_focus = {
-				"DressingSelect", "ccc-ui", "TelescopePrompt", "checkhealth",
-				"mason", "lazy", "snacks_input", "snacks_win", "noice", "qf"
-			},
 		},
 		tabline = {
 			lualine_a = {

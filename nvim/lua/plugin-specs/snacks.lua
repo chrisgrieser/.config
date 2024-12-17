@@ -64,6 +64,7 @@ local function openNotif(idx)
 			winfixbuf = true,
 		},
 		bo = {
+			ft = "snacks_notif",
 			modifiable = false,
 		},
 		keys = {
