@@ -5,6 +5,7 @@
 [default.extend-words]
 noice = "noice" # plugin name
 ot = "ot" # keymap
+fo = "fo" # keymap
 iy = "iy" # keymap
 caf = "caf" # `.caf` file extension
 nore = "nore" # keymap desc

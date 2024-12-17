@@ -73,11 +73,9 @@ return {
 						local displayName = #name < maxLength and name
 							or vim.trim(name:sub(1, maxLength)) .. "…"
 
-						local ok, devicons = pcall(require, "nvim-web-devicons")
+						local ok, devicons = pcall(require, "mini.icons")
 						if not ok then return displayName end
-						local ext = name:match("%w+$")
-						local icon = devicons.get_icon(name, ext)
-							or devicons.get_icon(name, vim.bo.ft, { default = true })
+						local icon = devicons.get("filetype", vim.bo.ft) or devicons.get("file", name)
 						if vim.bo.buftype == "help" then icon = "󰋖" end
 
 						return icon .. " " .. displayName

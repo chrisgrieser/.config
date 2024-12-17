@@ -77,6 +77,7 @@ function run() {
 			const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || noDueDate;
 		})
+		// on top of creation date, also sort by priority
 		.sort((a, b) => prioIntToOrder[b.priority] - prioIntToOrder[a.priority]);
 	const remindersLeftLater = remindersFiltered.length - 1;
 

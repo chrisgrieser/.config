@@ -100,12 +100,9 @@ function M.altFileStatusbar()
 		local altFile = vim.fs.basename(altPath)
 		name = altFile ~= "" and altFile or "[no name]"
 		-- icon
-		local ok, devicons = pcall(require, "nvim-web-devicons")
+		local ok, devicons = pcall(require, "mini.icons")
 		if ok and devicons then
-			local ext = altFile:match("%w+$")
-			local ft = vim.bo[altBufNr].filetype -- for extensionless files
-			icon = devicons.get_icon(altFile, ext)
-				or devicons.get_icon(altFile, ft, { default = true })
+			icon = devicons.get("filetype", vim.bo[altBufNr].filetype) or devicons.get("file", altFile)
 		end
 
 		-- name: consider if alt and current file have same basename
