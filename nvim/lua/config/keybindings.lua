@@ -195,7 +195,7 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 -- LSP
 keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>cc", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
-keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰒕 :LspRestart" })
+keymap({ "n", "x" }, "<leader>ol", vim.cmd.LspRestart, { desc = "󰑓 Lsp restart" })
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
@@ -317,7 +317,7 @@ keymap({ "n", "x" }, "<leader>es", function()
 	local path = location .. "/scratch." .. currentExt
 	vim.cmd.edit(path)
 	vim.cmd.write(path)
-end, { desc = " Scratch file" })
+end, { desc = "󰈮 Scratch file" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openAlfredPref() end, { desc = "󰮤 Reveal in Alfred" })
@@ -379,7 +379,7 @@ keymap("n", "<leader>ow", "<cmd>set wrap!<CR>", { desc = "󰖶 Wrap" })
 keymap("n", "<leader>od", function()
 	local isEnabled = vim.diagnostic.is_enabled { bufnr = 0 }
 	vim.diagnostic.enable(not isEnabled, { bufnr = 0 })
-end, { desc = " Diagnostics" })
+end, { desc = "󰋽 Diagnostics" })
 
 -- stylua: ignore
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
