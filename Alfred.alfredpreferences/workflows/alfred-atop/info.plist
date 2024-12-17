@@ -1905,7 +1905,7 @@ Display mounted volumes directly via `vol`.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.4</string>
+	<string>1.4.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
