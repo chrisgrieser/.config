@@ -2,9 +2,12 @@
 	name = Chris Grieser
 	email = 73286100+chrisgrieser@users.noreply.github.com
 
-; conditionally change author https://git-scm.com/docs/git-config;_conditional_includes
+; conditionally change author https://git-scm.com/docs/git-config#_conditional_includes
 ; [includeIf "gitdir:~/.config/.git"]
-	; path = "~/.config/.gitconfig"
+	; path = "~/.config/git/other-config"
+
+[includeIf "gitdir:**/*nvim*/"]
+	path = "~/.config/git/nvim-hook/config"
 
 ;───────────────────────────────────────────────────────────────────────────────
 
