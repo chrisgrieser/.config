@@ -45,7 +45,7 @@ return {
 
 		{ "<leader>do", function() require("dap").step_out() end, desc = "󰆸 Step out" },
 		{ "<leader>di", function() require("dap").step_in() end, desc = "󰆹 Step in" },
-		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰇀 Run to cursor" },
+		{ "<leader>dc", function() require("dap").run_to_cursor() end, desc = "󰆿 Run to cursor" },
 		{ "<leader>dr", function() require("dap").restart() end, desc = " Restart" },
 		{ "<leader>dt", function() require("dap").terminate() end, desc = " Terminate" },
 		-- stylua: ignore
@@ -55,12 +55,18 @@ return {
 	config = function()
 		-- ICONS & HIGHLIGHTS
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "󰇽", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapLogPoint", { text = "󰍩" })
+		vim.fn.sign_define("DapLogRejected", { text = "" })
 		vim.fn.sign_define("DapStopped", {
 			text = "",
 			texthl = "DiagnosticHint",
 			linehl = "DiagnosticVirtualTextHint",
 			numhl = "DiagnosticVirtualTextHint",
 		})
+-- - `DapBreakpointCondition` for conditional breakpoints (default: `C`)
+-- - `DapLogPoint` for log points (default: `L`)
+-- - `DapBreakpointRejected` to indicate breakpoints rejected by the debug
 
 		-- LISTENERS
 		local listeners = require("dap").listeners.after
