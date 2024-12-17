@@ -1,7 +1,28 @@
 #!/usr/bin/env zsh
+#───────────────────────────────────────────────────────────────────────────────
+# INFO pre-commit hook for nvim plugin development
+#───────────────────────────────────────────────────────────────────────────────
 
-if git grep --fixed-strings --line-number "🪚" . && [[ "$PWD" != *"nvim-chainsaw"* ]]; then
+# 1. stylua formatting is correct
+export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+report=$(stylua --check --output-format="summary" .)
+has_issue=$?
+if [[ $has_issue -ne 0 ]]; then
+	echo "⚠️ stylua formatting issues found. Aborting commit."
 	echo
-	echo "nvim-chainsaw marker found. Aborting commit."
+	echo "$report" | sed '1d' # first line only progress info
+	exit 1
+fi
+echo
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# 2. `nvim-chainsaw` marker is NOT present
+chainsaw_marker="🪚"
+markers_found=$(git grep --fixed-strings --line-number "$chainsaw_marker" .)
+if [[ -n "$markers_found" && "$PWD" != *"nvim-chainsaw"* ]]; then
+	echo "⚠️ nvim-chainsaw marker found. Aborting commit."
+	echo
+	echo "$markers_found"
 	exit 1
 fi
