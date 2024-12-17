@@ -116,7 +116,7 @@ end):start()
 
 M.aw_mastoLaunched = aw.new(function(appName, event)
 	if not (appName == "Ivory" and event == aw.launched) then return end
-	u.defer(1, function()
+	u.defer(5, function()
 		moveToSide()
 		scrollUp()
 	end)
