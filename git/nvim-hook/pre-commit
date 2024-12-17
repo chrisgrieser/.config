@@ -1,3 +1,7 @@
 #!/usr/bin/env zsh
 
-echo "test"
+if git grep --fixed-strings --line-number "🪚" . && [[ "$PWD" != *"nvim-chainsaw"* ]]; then
+	echo
+	echo "nvim-chainsaw marker found. Aborting commit."
+	exit 1
+fi

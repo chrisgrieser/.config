@@ -1,9 +1,4 @@
 ; vim: ft=gitconfig
 
-[user]
-	name = foobar
-
 [core]
-	; hooksPath = "/Users/chrisgrieser/.config/git/nvim-hook"
-	hooksPath = ffff
-	editor = ffff
+	hooksPath = "~/.config/git/nvim-hook"
