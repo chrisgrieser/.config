@@ -6,8 +6,8 @@ return {
 	opts = {
 		recipes = {
 			ignore = {
-				name = { "release", "^_" },
-				comment = { "interactive" },
+				name = {},
+				comment = {},
 			},
 			streaming = {
 				name = { "download" },
@@ -16,6 +16,10 @@ return {
 			quickfix = {
 				name = { "%-qf$" },
 				comment = { "quickfix" },
+			},
+			terminal = {
+				name = { "release" },
+				comment = { "in the terminal" },
 			},
 		},
 		window = { border = vim.g.borderStyle },
