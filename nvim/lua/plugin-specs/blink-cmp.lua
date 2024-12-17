@@ -1,6 +1,7 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
 ---@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
+-- enable treesitter-LSP highlighting
 --------------------------------------------------------------------------------
 
 -- TODO next release: re-enable `completion.menu.draw.treesitter`
@@ -81,9 +82,6 @@ return {
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 			},
-			accept = {
-				auto_brackets = { enabled = true }, -- experimental
-			},
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
@@ -96,6 +94,7 @@ return {
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
+					-- treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},

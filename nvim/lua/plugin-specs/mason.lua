@@ -1,6 +1,7 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		event = "VeryLazy",
 		keys = {
 			{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 		},
@@ -33,24 +34,44 @@ return {
 				},
 			},
 		},
-	},
-	{ -- auto-install lsps & formatters
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		event = "VeryLazy",
-		dependencies = "williamboman/mason.nvim",
-		config = function()
+		config = function(_, opts)
+			require("mason").setup(opts)
+
 			local packages = require("config.lsp-servers").masonDependencies
 			local debuggers = { "debugpy" }
 			vim.list_extend(packages, debuggers)
 			assert(#packages > 10, "Warning: in mason config, many packages would be uninstalled.")
 
-			-- Manually run `MasonToolsUpdate`, since `run_on_start` doesn't work with lazy-loading
-			require("mason-tool-installer").setup { ensure_installed = packages }
-			vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
-			vim.defer_fn(vim.cmd.MasonToolsUpdate, 4000)
-			vim.defer_fn(vim.cmd.MasonToolsClean, 8000)
+			local mr = require("mason-registry")
+
+			mr:on("package:install:success", function(payload)
+				Chainsaw(payload) -- 🪚
+				vim.notify("🪚 payload: type is " .. type(payload))
+			end)
+
+			for _, tool in ipairs(packages) do
+				local hasPackage, p = pcall(mr.get_package, tool)
+				if hasPackage and not p:is_installed() then p:install() end
+			end
 		end,
 	},
+	-- { -- auto-install lsps & formatters
+	-- 	"WhoIsSethDaniel/mason-tool-installer.nvim",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = "williamboman/mason.nvim",
+	-- 	config = function()
+	-- 		local packages = require("config.lsp-servers").masonDependencies
+	-- 		local debuggers = { "debugpy" }
+	-- 		vim.list_extend(packages, debuggers)
+	-- 		assert(#packages > 10, "Warning: in mason config, many packages would be uninstalled.")
+	--
+	-- 		-- Manually run `MasonToolsUpdate`, since `run_on_start` doesn't work with lazy-loading
+	-- 		require("mason-tool-installer").setup { ensure_installed = packages }
+	-- 		vim.defer_fn(vim.cmd.MasonToolsInstall, 500)
+	-- 		vim.defer_fn(vim.cmd.MasonToolsUpdate, 4000)
+	-- 		vim.defer_fn(vim.cmd.MasonToolsClean, 8000)
+	-- 	end,
+	-- },
 	{
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
