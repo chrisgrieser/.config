@@ -11,8 +11,8 @@ function run() {
 	const volumes = app
 		.doShellScript("df -HY") // -H: human readable sizes (base10), -Y: filesystem format
 		.split("\r")
-		.filter((line) => line.includes(" /Volumes/"))
-		.map((vol) => {
+		.reduce((volumes, line) => line.includes(" /Volumes/"))
+			if (!line.includes(" /Volumes/")
 			// quicker reruns when volume stats unavailable
 			if (vol.includes("unavailable")) rerunSecs = 0.5;
 
@@ -25,13 +25,13 @@ function run() {
 			const name = path.replace("/Volumes/", "");
 
 			const subtitle = `『${format}』   Total: ${total}   Available: ${available}   Used: ${used} (${share})`;
-			return {
+			volumes.push({
 				title: name,
 				uid: path, // during rerun remembers selection, but does not affect sorting
 				subtitle: subtitle,
 				arg: path,
-			};
-		});
+			});
+		}, {});
 
 	// No Volume found
 	if (volumes.length === 0) {

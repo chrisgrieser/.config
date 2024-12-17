@@ -11,7 +11,7 @@
 	<key>csl_folder</key>
 	<string>~/.config/pandoc/csl</string>
 	<key>literature_note_folder</key>
-	<string>~/vaults/main-vault/Literature Notes</string>
+	<string>~/Vaults/main-vault/Literature Notes</string>
 	<key>match_year_type</key>
 	<string>short+full</string>
 	<key>open_entries_in</key>
