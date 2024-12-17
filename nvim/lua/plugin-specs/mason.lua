@@ -1,87 +1,50 @@
-local check_install = function()
-  local sync or false
-  local installed = false -- reset for triggered events
-  installed_packages = {} -- reset
-  local completed = 0
-  local total = vim.tbl_count(SETTINGS.ensure_installed)
-  local all_completed = false
-  local on_close = function()
-    completed = completed + 1
-    if completed >= total then
-      local event = {
-        pattern = 'MasonToolsUpdateCompleted',
-      }
-      if vim.fn.has 'nvim-0.8' == 1 then
-        event.data = installed_packages
-      end
-      vim.api.nvim_exec_autocmds('User', event)
-      all_completed = true
-    end
-  end
-  local ensure_installed = function()
-    for _, item in ipairs(SETTINGS.ensure_installed or {}) do
-      local name, version, auto_update
-      if type(item) == 'table' then
-        name = item[1]
-        version = item.version
-        auto_update = item.auto_update
-      else
-        name = item
-      end
-      if mlsp then
-        name = mlsp.get_mappings().lspconfig_to_mason[name] or name
-      end
-      if mnls then
-        name = mnls.getPackageFromNullLs(name) or name
-      end
-      if mdap then
-        name = mdap.nvim_dap_to_package[name] or name
-      end
-      local p = mr.get_package(name)
-      if p:is_installed() then
-        if version ~= nil then
-          p:get_installed_version(function(ok, installed_version)
-            if ok and installed_version ~= version then
-              do_install(p, version, on_close)
-            else
-              vim.schedule(on_close)
-            end
-          end)
-        elseif
-          force_update or (force_update == nil and (auto_update or (auto_update == nil and SETTINGS.auto_update)))
-        then
-          p:check_new_version(function(ok, version)
-            if ok then
-              do_install(p, version.latest_version, on_close)
-            else
-              vim.schedule(on_close)
-            end
-          end)
-        else
-          vim.schedule(on_close)
-        end
-      else
-        do_install(p, version, on_close)
-      end
-    end
-  end
-  if mr.refresh then
-    mr.refresh(ensure_installed)
-  else
-    ensure_installed()
-  end
-  if sync then
-    while true do
-      vim.wait(10000, function()
-        return all_completed
-      end)
-      if all_completed then
-        break
-      end
-    end
-  end
+---@param pack Package
+---@param version? string
+local function install(pack, version)
+	local opts = { title = "Mason", icon = "" }
+
+	local msg = version and ("Updating [%s] to %s"):format(pack.name, version)
+		or ("Installing [%s]"):format(pack.name)
+	vim.notify(msg, nil, opts)
+
+	
+	-- stylua: ignore
+	pack:once("install:success", function() vim.notify("Successfully installed [" .. pack.name .. "]", nil, opts) end)
+	-- stylua: ignore
+	pack:once("install:failed", function() vim.notify("Failed to install [" .. pack.name .. "]", vim.log.levels.ERROR, opts) end)
+
+	pack:install { version = version }
 end
 
+---@param ensurePackages string[]
+local function ensureInstall(ensurePackages)
+	local mr = require("mason-registry")
+
+	-- auto-install missing packages
+	vim.iter(ensurePackages):each(function(packageName)
+		if not mr.has_package(packageName) then return end
+		local pack = mr.get_package(packageName)
+		if pack:is_installed() then
+			pack:check_new_version(function(hasNewVersion, version)
+				if hasNewVersion then install(pack, version.latest_version) end
+			end)
+		else
+			install(pack)
+		end
+	end)
+
+	vim.iter(ensurePackages)
+
+	-- local installedPackages = mr.get_installed_package_names()
+end
+local function ensureUpdate()
+	local mr = require("mason-registry")
+	local pack = mr.get_package("biome")
+	pack:check_new_version(function(hasNewVersion, version)
+		if not hasNewVersion then return end
+		pack:install { version = version.latest_version }
+	end)
+end
 
 return {
 	{
@@ -122,22 +85,12 @@ return {
 		config = function(_, opts)
 			require("mason").setup(opts)
 
-			local ensurePackages = require("config.lsp-servers").masonDependencies
+			-- get packages from my lsp server config
+			local ensurePackages = require("config.lsp-servers").masonDependencies or {}
 			local debuggers = { "debugpy" }
 			vim.list_extend(ensurePackages, debuggers)
-			assert(#ensurePackages > 10, "Warning: in mason config, many packages would be uninstalled.")
 
-			local mr = require("mason-registry")
-			local installedPackages = mr.get_installed_package_names()
-
-			mr:on("package:install:success", function(tool)
-				local msg = ("Installed [%s]"):format(tool.name)
-				vim.notify(msg, nil, { title = "Mason", icon = "" })
-			end)
-			for _, tool in ipairs(ensurePackages) do
-				local hasPackage, p = pcall(mr.get_package, tool)
-				if hasPackage and not p:is_installed() then p:install() end
-			end
+			vim.defer_fn(function() ensureInstall(ensurePackages) end, 1000)
 		end,
 	},
 	-- { -- auto-install lsps & formatters
