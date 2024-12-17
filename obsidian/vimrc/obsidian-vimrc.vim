@@ -387,21 +387,16 @@ nnoremap ,W :saveWorkspace<CR>
 " Filesystem
 
 exmap new obcommand pseudometa-startup-actions:new-file-in-folder
-exmap rename obcommand pseudometa-startup-actions:new-file-in-folder
-exmap move obcommand pseudometa-startup-actions:new-file-in-folder
-exmap duplicate obcommand pseudometa-startup-actions:new-file-in-folder
+exmap rename obcommand workspace:edit-file-title
+exmap move obcommand obsidian-another-quick-switcher:move
+exmap duplicate obcommand file-explorer:duplicate-file
+exmap delete obcommand app:delete-file
 
 nnoremap ,fr :rename<CR>
 nnoremap ,fn :new<CR>
-nnoremap ,fd :duplicate<CR>
+nnoremap ,fw :duplicate<CR>
 nnoremap ,fm :move<CR>
-nnoremap ,f<BS> :trash<CR>
-file-explorer:move-file
-file-explorer:duplicate-file
-
-" open trash
-exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
-nnoremap ,t :openTrash<CR>
+nnoremap ,fd :delete<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE

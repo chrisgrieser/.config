@@ -24,14 +24,6 @@
     }
   ],
   "file-explorer:new-file-in-new-pane": [],
-  "app:delete-file": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "Backspace"
-    }
-  ],
   "editor:delete-paragraph": [],
   "editor:follow-link": [],
   "workspace:next-tab": [],
@@ -119,14 +111,6 @@
   "editor:open-link-in-new-leaf": [],
   "editor:open-link-in-new-window": [],
   "editor:open-link-in-new-split": [],
-  "workspace:edit-file-title": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "R"
-    }
-  ],
   "open-with-default-app:show": [
     {
       "modifiers": [
@@ -216,14 +200,6 @@
       "key": "D"
     }
   ],
-  "file-explorer:duplicate-file": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "D"
-    }
-  ],
   "quadro:unassign-code": [
     {
       "modifiers": [
@@ -279,21 +255,7 @@
       "key": "P"
     }
   ],
-  "obsidian-another-quick-switcher:move": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "m"
-    },
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "M"
-    }
-  ],
+  "obsidian-another-quick-switcher:move": [],
   "workspace:close-others": [
     {
       "modifiers": [
@@ -367,5 +329,6 @@
       ],
       "key": "S"
     }
-  ]
+  ],
+  "workspace:edit-file-title": []
 }

@@ -11,13 +11,12 @@ return {
 	opts = {
 		delete_to_trash = true,
 		skip_confirm_for_simple_edits = false,
-		prompt_save_on_select_new_entry = true,
+		use_default_keymaps = false,
 		keymaps = {
 			["?"] = { "actions.show_help", mode = "n" },
 			["<CR>"] = "actions.select",
 			["q"] = { "actions.close", mode = "n", nowait = true },
 			["<Tab>"] = { "actions.parent", mode = "n" },
-			["-"] = { "/", mode = "n" }, -- use my own mapping
 			["<D-r>"] = { "actions.refresh" },
 			["<D-s>"] = {
 				function()
@@ -27,6 +26,7 @@ return {
 				desc = "Save & close",
 			},
 		},
+		columns = { "icon" }, -- mtime,size
 		win_options = { statuscolumn = " " }, -- adds paddings
 		float = {
 			border = vim.g.borderStyle,
