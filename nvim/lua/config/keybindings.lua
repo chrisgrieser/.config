@@ -319,17 +319,6 @@ keymap({ "n", "x" }, "<leader>es", function()
 	vim.cmd.write(path)
 end, { desc = " Scratch file" })
 
---------------------------------------------------------------------------------
-
--- MAC-SPECIFIC FUNCTIONS
-keymap({ "n", "x", "i" }, "<D-l>", function()
-	if jit.os ~= "OSX" then return end
-	local out = vim.system({ "open", "-R", vim.api.nvim_buf_get_name(0) }):wait()
-	if out.code ~= 0 then
-		vim.notify("Failed: " .. out.stderr, vim.log.levels.ERROR, { title = "󰀶 Finder" })
-	end
-end, { desc = "󰀶 Reveal in macOS Finder" })
-
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openAlfredPref() end, { desc = "󰮤 Reveal in Alfred" })
 
