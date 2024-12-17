@@ -54,13 +54,15 @@ const prioIntToOrder = {
 function run() {
 	// parameters
 	const list = $.getenv("reminder_list");
+	const sortOrder = $.getenv("sort_order") === "oldest_first" ? "ascending" : "descending";
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 
 	// RUN CMD
 	// PERF query filters directly for completed reminders
 	const completedArg = showCompleted ? "--include-completed" : "";
-	const shellCmd = `reminders show "${list}" ${completedArg} --format="json"`;
+	const shellCmd = `reminders show "${list}" ${completedArg} --sort=creation-date \
+		--sort-order=${sortOrder} --format="json"`;
 
 	const today = new Date();
 	today.setHours(23, 59, 59, 0); // to include reminders later that day
