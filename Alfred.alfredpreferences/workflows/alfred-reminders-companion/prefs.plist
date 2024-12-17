@@ -12,6 +12,8 @@
 	<string>|</string>
 	<key>sketchybar_trigger_name</key>
 	<string>update_reminder_count</string>
+	<key>sort_order</key>
+	<string>newest_first</string>
 	<key>timed_reminder_keyword</key>
 	<string>,,</string>
 </dict>
