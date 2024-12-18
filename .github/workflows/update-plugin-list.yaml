@@ -8,8 +8,6 @@ on:
     branches: [main]
     paths: [.github/workflows/update-plugin-list.yaml]
 
-  workflow_dispatch: {} # allow triggering manually
-
 permissions:
   contents: write
 
@@ -27,7 +25,7 @@ jobs:
           last_line_before_plugins="## All installed plugins"
           nvim_readme="./nvim/README.md"
           lazy_lock="./nvim/.lazy-lock.json"
-          lazy_specs_path="./nvim/lua/plugin-configs"
+          lazy_specs_path="./nvim/lua/plugin-specs"
 
           if [[ ! -f "$nvim_readme" || ! -f "$lazy_lock" || ! -d "$lazy_specs_path" ]]; then
             echo "ERROR: missing files"
