@@ -3,9 +3,7 @@ return {
 	ft = "lua", -- in lua, load directly for `Chainsaw` global
 	opts = {
 		visuals = {
-			sign = "󰹡",
-			statuslineIcon = "󰹡",
-			notificationIcon = "󰹡",
+			icon = "󰹡",
 		},
 		preCommitHook = {
 			enabled = true,
@@ -45,7 +43,7 @@ return {
 		})
 	end,
 	init = function(spec)
-		local icon = spec.opts.visuals.sign
+		local icon = spec.opts.visuals.icon
 		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,
 	keys = {
