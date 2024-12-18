@@ -20,7 +20,7 @@ return {
 		},
 	},
 	opts = {
-		delay = 333,
+		delay = 444,
 
 		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
 		preset = "helix",

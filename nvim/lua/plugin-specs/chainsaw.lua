@@ -1,16 +1,20 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
 	ft = "lua", -- in lua, load directly for `Chainsaw` global
-	init = function() vim.g.whichkeyAddSpec { "<leader>l", group = "󰐪 Log" } end,
 	opts = {
+		visuals = {
+			sign = "󰹡",
+			statuslineIcon = "󰹡",
+			notificationIcon = "󰹡",
+		},
 		preCommitHook = {
 			enabled = true,
 			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir has marker
 		},
 		logStatements = {
 			variableLog = {
-				nvim_lua = "Chainsaw({{var}}) -- {{marker}}",
-				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))',
+				nvim_lua = "Chainsaw({{var}}) -- {{marker}}", -- nvim lua debug
+				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- hammerspoon
 			},
 
 			-- not using any marker
@@ -21,7 +25,7 @@ return {
 				-- Obsidian Notice
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
-				zsh = [[osascript -e "display notification \"{{marker}}} ${{var}}\" with title \"{{var}}\""]],
+				zsh = 'osascript -e "display notification \"{{marker}}} ${{var}}\" with title \"{{var}}\""',
 			},
 
 			-- Hammerspoon
@@ -36,9 +40,13 @@ return {
 
 		vim.g.lualineAdd("sections", "lualine_x", {
 			require("chainsaw.visuals.statusline").countInBuffer,
-			color = "lualine_x_diagnostics_info_normal", -- only lualine item has also correct bg-color
+			color = "lualine_x_diagnostics_info_normal", -- only lualine hlgroups have also correct bg-color
 			padding = { left = 0, right = 1 },
 		})
+	end,
+	init = function(spec)
+		local icon = spec.opts.visuals.sign
+		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,
 	keys = {
 		-- stylua: ignore start
@@ -47,6 +55,7 @@ return {
 		{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
 		{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" },
 		{ "<leader>lt", function() require("chainsaw").typeLog() end, mode = { "n", "x" }, desc = "󰜀 type" },
+		-- stylua: ignore end
 		{ "<leader>lm", function() require("chainsaw").messageLog() end, desc = "󰍩 message" },
 		{ "<leader>le", function() require("chainsaw").emojiLog() end, desc = "󰞅 emoji" },
 		{ "<leader>ls", function() require("chainsaw").sound() end, desc = "󰂚 sound" },
@@ -54,6 +63,5 @@ return {
 		{ "<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 		{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
-		-- stylua: ignore end
 	},
 }
