@@ -3,13 +3,13 @@
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
-	local msg = version and ("[%s]: updating to %s"):format(pack.name, version)
-		or ("[%s]: installing"):format(pack.name)
+	local msg = version and ("[%s] updating to %s…"):format(pack.name, version)
+		or ("[%s] installing…"):format(pack.name)
 	vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
 
 	pack:once("install:success", function()
-		local msg2 = ("[%s]: %s"):format(pack.name, version and "updated" or "installed")
-		vim.notify(msg2, nil, { title = "Mason", icon = "", style = "minimal" })
+		local msg2 = ("[%s] %s"):format(pack.name, version and "updated" or "installed")
+		vim.notify(msg2, nil, { title = "Mason", icon = " ", style = "minimal" })
 	end)
 	pack:once("install:failed", function()
 		local error = "Failed to install [" .. pack.name .. "]"
@@ -26,9 +26,7 @@ end
 local function syncPackages(ensurePack)
 	local masonReg = require("mason-registry")
 
-	-- ensure registry is up-to-date, relevant when using extra personal registry
-	-- refresh is async when callback is passed
-	masonReg.refresh(function()
+	local function refreshCallback()
 		-- auto-install missing packages & auto-update installed ones
 		vim.iter(ensurePack):each(function(packName)
 			if not masonReg.has_package(packName) then return end
@@ -42,8 +40,6 @@ local function syncPackages(ensurePack)
 			end
 		end)
 
-		vim.iter(ensurePack)
-
 		-- auto-clean unused packages
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
@@ -53,7 +49,11 @@ local function syncPackages(ensurePack)
 				vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
 			end
 		end)
-	end)
+	end
+
+	-- ensure registry is up-to-date, relevant when using extra personal registry
+	-- refresh is async when callback is passed
+	masonReg.refresh(refreshCallback)
 end
 
 --------------------------------------------------------------------------------
@@ -65,16 +65,15 @@ return {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
 	init = function()
-		-- Make mason packages available before loading mason itself.
-		-- This allows us to lazy-load of mason.
+		-- Make mason packages available before loading it; allows to lazy-load mason.
 		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 	end,
 	opts = {
 		-- PENDING https://github.com/mason-org/mason-registry/pull/7957
-		-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
-		-- also requires `yq` being available in the system
 		registries = {
 			-- local one must come first to take priority
+			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
+			-- also requires `yq` being available in the system
 			("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
 			"github:mason-org/mason-registry",
 		},
@@ -102,6 +101,6 @@ return {
 		local ensurePackages = require("config.lsp-servers").masonDependencies or {}
 		table.insert(ensurePackages, "debugpy")
 
-		vim.defer_fn(function() syncPackages(ensurePackages) end, 2000)
+		vim.defer_fn(function() syncPackages(ensurePackages) end, 3000)
 	end,
 }
