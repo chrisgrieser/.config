@@ -596,11 +596,15 @@ rules:
       - type: basic
         from: { key_code: comma }
         to:
-          - { key_code: "c", modifiers: [option, command] }
           - shell_command: |
-              sleep 0.1 # wait for clipboard
+              # not using `cmd+opt+c`, since it adds quotes
+              filepath=$(osascript -e 'tell application "Finder"
+                set sel to (item 1 of (get selection) as text)
+                return POSIX path of sel
+              end tell')
+              printf "$filepath" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Filepath copied" --message "$(pbpaste)"
+                  --title "✅ Filename copied" --message "$filepath"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # shift-comma: copy filename
       - type: basic
