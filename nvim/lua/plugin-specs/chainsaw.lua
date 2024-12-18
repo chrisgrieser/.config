@@ -42,6 +42,7 @@ return {
 	end,
 	keys = {
 		-- stylua: ignore start
+		{ "<leader>lr", function() require("chainsaw").removeLogs() end, mode = { "n", "x" }, desc = "󰅗 remove logs" },
 		{ "<leader>ll", function() require("chainsaw").variableLog() end, mode = { "n", "x" }, desc = "󰀫 variable" },
 		{ "<leader>lo", function() require("chainsaw").objectLog() end, mode = { "n", "x" }, desc = "⬟ object" },
 		{ "<leader>la", function() require("chainsaw").assertLog() end, mode = { "n", "x" }, desc = "󱈸 assert" },
@@ -53,7 +54,6 @@ return {
 		{ "<leader>ld", function() require("chainsaw").debugLog() end, desc = "󰃤 debugger" },
 		{ "<leader>lS", function() require("chainsaw").stacktraceLog() end, desc = " stacktrace" },
 		{ "<leader>lc", function() require("chainsaw").clearLog() end, desc = "󰃢 clear console" },
-		{ "<leader>lr", function() require("chainsaw").removeLogs() end, desc = "󰅗 remove logs" },
 		-- stylua: ignore end
 	},
 }
