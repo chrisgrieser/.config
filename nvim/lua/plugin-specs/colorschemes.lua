@@ -109,6 +109,9 @@ local themes = {
 				-- FIX hlgroup not set when starting in different color scheme
 				hl.TelescopeSelection = { link = "Visual" }
 
+				-- FIX wrong background color for icons of the source `path`
+				hl.BlinkCmpKindFile = { link = "LspKindText" }
+
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
 				hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg }
@@ -116,7 +119,7 @@ local themes = {
 				hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
 				-- mini.icons
-				hl.MiniIconsGreen = { fg = "#9de88d" }
+				hl.MiniIconsGreen = { fg = "#9de88d" } -- better green tone
 				hl.MiniIconsGrey = { fg = colors.fg_dark }
 
 				-- cursorword
