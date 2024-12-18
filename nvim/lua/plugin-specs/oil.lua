@@ -52,9 +52,10 @@ return {
 			-- FIX display relative path of directory, not absolute one
 			get_win_title = function(winid)
 				local bufnr = vim.api.nvim_win_get_buf(winid)
-				local bufname = vim.api.nvim_buf_get_name(bufnr)
-				local cwd = vim.uv.cwd() or math.huge
-				local title = bufname:gsub("^oil://", ""):sub(#cwd + 2)
+				local absPath = vim.api.nvim_buf_get_name(bufnr):gsub("^oil://", "")
+				local cwd = vim.uv.cwd() or ""
+				local relPath = "." .. absPath:gsub("^oil://", ""):sub(#cwd + 1)
+				local title = relPath ~= "" and relPath or absPath:gsub(vim.env.HOME, "~")
 				return " " .. title .. " "
 			end,
 		},

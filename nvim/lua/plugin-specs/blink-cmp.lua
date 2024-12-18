@@ -109,7 +109,7 @@ return {
 
 								-- use source-specific icons, and `kind_icon` only for items from LSPs
 								local sourceIcons =
-									{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "" }
+									{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "" }
 								return sourceIcons[source] or ctx.kind_icon
 							end,
 						},
@@ -121,6 +121,8 @@ return {
 			-- supported: tokyonight
 			-- not supported: nightfox, gruvbox-material
 			use_nvim_cmp_as_default = true,
+
+			nerd_font_variant = "normal",
 			kind_icons = {
 				-- different icons of the corresponding source
 				Text = "󰦨", -- `buffer`
