@@ -18,10 +18,11 @@ alias reset='git reset'
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
-alias sync_repo='"$(git rev-parse --show-toplevel)/.sync-this-repo.sh"'
 
 alias mark_commit="git tag 'mark' && echo $'Added tag \'mark\' to current commit.'"
 alias unmark_commit="git tag --delete 'mark'"
+
+function sync_repo { "$(git rev-parse --show-toplevel)/.sync-this-repo.sh"; }
 
 #───────────────────────────────────────────────────────────────────────────────
 
