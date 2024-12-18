@@ -1,4 +1,4 @@
----Set up plugin-specific groups cleanly with the plugin config.
+---Set up plugin-specific groups cleanly with the plugin config
 ---@param spec wk.Spec
 vim.g.whichkeyAddSpec = function(spec)
 	if not spec.mode then spec.mode = { "n", "x" } end
@@ -20,7 +20,7 @@ return {
 		},
 	},
 	opts = {
-		delay = 666,
+		delay = 333,
 
 		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
 		preset = "helix",
@@ -43,7 +43,6 @@ return {
 				{ "<leader>p", group = "󰏗 Packages" },
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>u", group = "󰕌 Undo" },
-				{ "<leader>y", group = "󰅍 Yank" },
 			},
 			{ -- not using `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },

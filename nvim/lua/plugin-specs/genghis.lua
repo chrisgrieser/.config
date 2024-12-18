@@ -1,6 +1,9 @@
 return {
 	"chrisgrieser/nvim-genghis",
-	init = function() vim.g.whichkeyAddSpec { "<leader>f", group = "󰈔 Files" } end,
+	init = function()
+		vim.g.whichkeyAddSpec { "<leader>f", group = "󰈔 File" }
+		vim.g.whichkeyAddSpec { "<leader>y", group = "󰅍 Yank" }
+	end,
 	keys = {
 		-- stylua: ignore start
 		{"<leader>ya", function() require("genghis").copyFilepathWithTilde() end, desc = "󰝰 Absolute path" },
@@ -17,13 +20,14 @@ return {
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󰪹 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 
-		-- stylua: ignore
-		{ "<leader>rx", function() require("genghis").moveSelectionToNewFile() end, mode = "x", desc = " Selection to new file" },
 		{
-			"<D-l>",
-			function() require("genghis").showInSystemExplorer() end,
-			desc = "󰀶 Reveal in Finder",
+			"<leader>rx",
+			function() require("genghis").moveSelectionToNewFile() end,
+			mode = "x",
+			desc = " Selection to new file",
 		},
+		-- stylua: ignore
+		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },
 		{ "<leader>ex", function() require("genghis").chmodx() end, desc = "󰒃 chmod +x" },
 	},
 }
