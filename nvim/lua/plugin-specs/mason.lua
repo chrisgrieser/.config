@@ -3,12 +3,12 @@
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
-	local msg = version and ("Updating [%s] to %s"):format(pack.name, version)
-		or ("Installing [%s]"):format(pack.name)
+	local msg = version and ("[%s]: updating to %s"):format(pack.name, version)
+		or ("[%s]: installing"):format(pack.name)
 	vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
 
 	pack:once("install:success", function()
-		local msg2 = ("Successfully %s [%s]"):format(version and "updated" or "installed", pack.name)
+		local msg2 = ("[%s]: %s"):format(pack.name, version and "updated" or "installed")
 		vim.notify(msg2, nil, { title = "Mason", icon = "", style = "minimal" })
 	end)
 	pack:once("install:failed", function()
@@ -27,31 +27,32 @@ local function syncPackages(ensurePack)
 	local masonReg = require("mason-registry")
 
 	-- ensure registry is up-to-date, relevant when using extra personal registry
-	masonReg.refresh()
+	-- refresh is async when callback is passed
+	masonReg.refresh(function()
+		-- auto-install missing packages & auto-update installed ones
+		vim.iter(ensurePack):each(function(packName)
+			if not masonReg.has_package(packName) then return end
+			local pack = masonReg.get_package(packName)
+			if pack:is_installed() then
+				pack:check_new_version(function(hasNewVersion, version)
+					if hasNewVersion then install(pack, version.latest_version) end
+				end)
+			else
+				install(pack)
+			end
+		end)
 
-	-- auto-install missing packages & auto-update installed ones
-	vim.iter(ensurePack):each(function(packName)
-		if not masonReg.has_package(packName) then return end
-		local pack = masonReg.get_package(packName)
-		if pack:is_installed() then
-			pack:check_new_version(function(hasNewVersion, version)
-				if hasNewVersion then install(pack, version.latest_version) end
-			end)
-		else
-			install(pack)
-		end
-	end)
+		vim.iter(ensurePack)
 
-	vim.iter(ensurePack)
-
-	-- auto-clean unused packages
-	local installedPackages = masonReg.get_installed_package_names()
-	vim.iter(installedPackages):each(function(packName)
-		if not vim.tbl_contains(ensurePack, packName) then
-			masonReg.get_package(packName):uninstall()
-			local msg = ("Uninstalled [%s]"):format(packName)
-			vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
-		end
+		-- auto-clean unused packages
+		local installedPackages = masonReg.get_installed_package_names()
+		vim.iter(installedPackages):each(function(packName)
+			if not vim.tbl_contains(ensurePack, packName) then
+				masonReg.get_package(packName):uninstall()
+				local msg = ("Uninstalled [%s]"):format(packName)
+				vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
+			end
+		end)
 	end)
 end
 
@@ -101,6 +102,6 @@ return {
 		local ensurePackages = require("config.lsp-servers").masonDependencies or {}
 		table.insert(ensurePackages, "debugpy")
 
-		vim.defer_fn(function() syncPackages(ensurePackages) end, 5000)
+		vim.defer_fn(function() syncPackages(ensurePackages) end, 2000)
 	end,
 }
