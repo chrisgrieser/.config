@@ -16,7 +16,6 @@ return {
 			["?"] = { "actions.show_help", mode = "n" },
 			["q"] = { "actions.close", mode = "n", nowait = true },
 			["gs"] = { "actions.change_sort", mode = "n" },
-			["C"] = { "actions.cd", mode = "n" },
 			["<CR>"] = "actions.select",
 			["<Tab>"] = { "actions.parent" },
 			["<D-r>"] = { "actions.refresh" },

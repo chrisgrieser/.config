@@ -1,6 +1,10 @@
+-- OPTIONS
 vim.diagnostic.enable(false, { bufnr = 0 })
+vim.opt_local.colorcolumn = ""
+vim.opt_local.wrap = true
 
 --------------------------------------------------------------------------------
+-- KEYMAPS
 local bkeymap = require("config.utils").bufKeymap
 
 -- `:bwipeout` so it isn't saved in oldfiles
