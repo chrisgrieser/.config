@@ -238,6 +238,22 @@ rules:
           - *insert-notice
           - *enter-insert-mode
         conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+        # Find and Goto menu: Passthrough & enter insert mode
+        # see https://github.com/chrisgrieser/finder-vim-mode/issues/7
+      - type: basic
+        from: { key_code: f, modifiers: { mandatory: [command] } }
+        to:
+          - {key_code: f, modifiers: [command] }
+          - *insert-notice
+          - *enter-insert-mode
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      - type: basic
+        from: { key_code: g, modifiers: { mandatory: [command, shift] } }
+        to:
+          - {key_code: g, modifiers: [command, shift] }
+          - *insert-notice
+          - *enter-insert-mode
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
       # LEAVE INSERT MODE
       # Confirm Insert Mode
       - type: basic

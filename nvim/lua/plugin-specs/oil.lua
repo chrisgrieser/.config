@@ -15,20 +15,24 @@ return {
 		keymaps = {
 			["?"] = { "actions.show_help", mode = "n" },
 			["<CR>"] = "actions.select",
-			["q"] = { "actions.close", mode = "n", nowait = true },
 			["<Tab>"] = { "actions.parent", mode = "n" },
 			["<D-r>"] = { "actions.refresh" },
-			["<D-s>"] = {
+			["q"] = {
 				function()
 					require("oil").save()
 					require("oil").close()
 				end,
 				desc = "Save & close",
+				nowait = true,
 			},
 		},
 		columns = { "icon" }, -- mtime,size
 		win_options = { statuscolumn = " " }, -- adds paddings
 		float = {
+			get_win_title = function (winid)
+				local bufnr = vim.api.nvim_win_get_buf(winid)
+				return vim.api.nvim_buf_get_name(bufnr) local title = 
+			end,
 			border = vim.g.borderStyle,
 			override = function(conf)
 				local height = 0.8
