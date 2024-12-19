@@ -125,8 +125,8 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `
 --------------------------------------------------------------------------------
 -- SURROUND & ARROW
 
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' " Surround cword' })
-keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " ' Surround cword" })
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' Surround cword' })
+keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
 keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
