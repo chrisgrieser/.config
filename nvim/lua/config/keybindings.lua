@@ -82,7 +82,7 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
--- Increment/Decrement, or toggle true/false  23
+-- Increment/Decrement, or toggle true/false
 -- stylua: ignore
 keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
@@ -153,7 +153,6 @@ for _, value in pairs(textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
 
--- special remaps
 keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
