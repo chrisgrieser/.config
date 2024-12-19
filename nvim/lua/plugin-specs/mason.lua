@@ -3,24 +3,27 @@
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
+	local notifyOpts = { title = "Mason", icon = " ", id = "mason.install", style = "minimal" }
+
 	local msg = version and ("[%s] updating to `%s`…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
-	vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
+	vim.notify(msg, nil, notifyOpts)
 
 	pack:once("install:success", function()
 		local msg2 = ("[%s] %s"):format(pack.name, version and "updated" or "installed")
-		vim.notify(msg2, nil, { title = "Mason", icon = " ", style = "minimal" })
+		notifyOpts.icon = " "
+		vim.notify(msg2, nil, notifyOpts)
 	end)
 	pack:once("install:failed", function()
 		local error = "Failed to install [" .. pack.name .. "]"
-		vim.notify(error, vim.log.levels.ERROR, { title = "Mason" })
+		vim.notify(error, vim.log.levels.ERROR, notifyOpts)
 	end)
 
 	pack:install { version = version }
 end
 
 -- 1. install missing packages
--- 2. updates installed ones
+-- 2. update installed ones
 -- 3. uninstall unused packages
 ---@param ensurePack string[]
 local function syncPackages(ensurePack)
@@ -33,7 +36,8 @@ local function syncPackages(ensurePack)
 			local pack = masonReg.get_package(packName)
 			if pack:is_installed() then
 				pack:check_new_version(function(hasNewVersion, version)
-					if hasNewVersion then install(pack, version.latest_version) end
+					if not hasNewVersion then return end
+					install(pack, version.latest_version)
 				end)
 			else
 				install(pack)
@@ -45,8 +49,8 @@ local function syncPackages(ensurePack)
 		vim.iter(installedPackages):each(function(packName)
 			if not vim.tbl_contains(ensurePack, packName) then
 				masonReg.get_package(packName):uninstall()
-				local msg = ("Uninstalled [%s]"):format(packName)
-				vim.notify(msg, nil, { title = "Mason", icon = " ", style = "minimal" })
+				local msg = ("[%s] uninstalled"):format(packName)
+				vim.notify(msg, nil, { title = "Mason", icon = "󰅗 ", style = "minimal" })
 			end
 		end)
 	end
@@ -56,6 +60,22 @@ local function syncPackages(ensurePack)
 	masonReg.refresh(refreshCallback)
 end
 
+local function reinstall()
+	local masonReg = require("mason-registry")
+	local installedPackages = masonReg.get_installed_package_names()
+
+	vim.ui.select(installedPackages, { prompt = " Package to reinstall: " }, function(packName)
+		if not packName then return end
+		local pack = masonReg.get_package(packName)
+
+		pack:uninstall()
+		local msg = ("[%s] uninstalled"):format(packName)
+		vim.notify(msg, nil, { title = "Mason", icon = "󰅗 ", style = "minimal" })
+
+		install(pack)
+	end)
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -63,6 +83,7 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
+		{ "<leader>pr", reinstall, desc = "󰑓 Mason reinstall" },
 	},
 	init = function()
 		-- Make mason packages available before loading it; allows to lazy-load mason.
@@ -85,7 +106,6 @@ return {
 			icons = {
 				package_installed = "✓",
 				package_pending = "󰔟",
-				package_uninstalled = "󰅗",
 			},
 			keymaps = { -- consistent with keymaps for lazy.nvim
 				uninstall_package = "x",
@@ -97,7 +117,7 @@ return {
 	config = function(_, opts)
 		require("mason").setup(opts)
 
-		-- get packages from my lsp server config
+		-- get packages from my lsp-server-config
 		local ensurePackages = require("config.lsp-servers").masonDependencies or {}
 		table.insert(ensurePackages, "debugpy")
 
