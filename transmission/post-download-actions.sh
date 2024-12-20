@@ -18,12 +18,7 @@ find . -mindepth 1 -type d | while read -r folder; do
 done
 
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
-# REQUIRED enabled remote access in transmission settings
-export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
-if [[ ! -x "$(command -v transmission-remote)" ]]; then
-	touch "./transmission-cli not installed (brew install transmission-cli)"
-	return 1
-fi
 sleep 3 # time for new torrents to be initialized
-torrent_active=$(transmission-remote --list | sed '1d;$d' | grep -v " Done")
-[[ -z "$torrent_active" ]] && killall "Transmission"
+incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
+in_progress=$(find "$incomplete_dir" -mindepth 1 -type directory -not -path "**/TV**")
+[[ -z "$in_progress" ]] && killall "Transmission"
