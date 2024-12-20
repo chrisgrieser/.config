@@ -171,7 +171,10 @@ return {
 			mode = "o",
 			function()
 				local charwise = require("various-textobjs.textobjs.charwise.core")
-				local pattern = "(%.?/[%w_%-./]+/)[%w_%-.]+()"
+				local pattern = {
+					twoSlashes = "(%.?/[%w_%-./]+/)[%w_%-.]+[%d:]*()", 
+					oneSlashRelPath = "(%./)[%w_%-.]+()",
+				}
 				charwise.selectClosestTextobj(pattern, "outer", 5)
 			end,
 			desc = " outer path",
@@ -181,7 +184,10 @@ return {
 			mode = "o",
 			function()
 				local charwise = require("various-textobjs.textobjs.charwise.core")
-				local pattern = "(%.?/[%w_%-./]+/)[%w_%-.]+()"
+				local pattern = {
+					twoSlashes = "(%.?/[%w_%-./]+/)[%w_%-.]+[%d:]*()", 
+					oneSlashRelPath = "(%./)[%w_%-.]+()",
+				}
 				charwise.selectClosestTextobj(pattern, "inner", 5)
 			end,
 			desc = " inner path",
