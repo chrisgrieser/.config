@@ -361,11 +361,8 @@ keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").in
 -- MULTI-EDIT
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<D-j>", function()
-	local chunks = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })
-	local selection = vim.iter(chunks)
-		:map(function(chunk) return vim.fn.escape(chunk, [[/\]]) end)
-		:join("\\n")
-	vim.fn.setreg("/", "\\V" .. selection)
+	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
 end, { desc = "󰆿 Multi-edit selection", expr = true })
 
