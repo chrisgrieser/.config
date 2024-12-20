@@ -1,22 +1,20 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-# set -e
 github_username="chrisgrieser"
+# set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
-# repo_names="." # all repos
 
 function actions_in_repo {
 	rm -f ./.github/workflows/semantic-pr-title.yml
 	cp -f "$HOME/Desktop/stale-bot.yml" ./.github/workflows/stale-bot.yml
 	cp -f "$HOME/Desktop/pr-title.yml" ./.github/workflows/pr-title.yml
-	cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
 }
 
-commit_msg="ci: stylua check instead of formatting; tweak pr title and stale bot"
+commit_msg="ci: tweak pr title check and stale bot"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -25,8 +23,8 @@ commit_msg="ci: stylua check instead of formatting; tweak pr title and stale bot
 if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
 
 # only non-forked, non-archived repos
-repos_to_update=$(gh repo list --limit=100 --no-archived --source --json="name" \
-	--jq=".[].name | select(test(\"$repo_names\"))")
+repos_to_update=$(gh repo list --limit=100 --no-archived --source --visibility=public \
+	--json="name" --jq=".[].name | select(test(\"$repo_names\"))")
 repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
 
 # confirmation that everything is correct
