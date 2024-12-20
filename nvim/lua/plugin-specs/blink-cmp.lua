@@ -1,10 +1,13 @@
 -- DOCS https://github.com/saghen/blink.cmp#configuration
 --------------------------------------------------------------------------------
----@diagnostic disable: missing-fields -- pending https://github.com/Saghen/blink.cmp/issues/427
--- enable treesitter-LSP highlighting
+---@diagnostic disable: missing-fields
 --------------------------------------------------------------------------------
 
--- TODO next release: re-enable `completion.menu.draw.treesitter`
+-- TODO next release: 
+-- * re-enable `completion.menu.draw.treesitter`
+-- * cmdline completion
+-- * enable treesitter-LSP highlighting
+-- * remove missing-fields ignore comment
 
 return {
 	"saghen/blink.cmp",
