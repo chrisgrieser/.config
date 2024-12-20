@@ -135,37 +135,12 @@ format = """\
 #───────────────────────────────────────────────────────────────────────────────
 # RIGHT SIDE
 
-[jobs]
-symbol = " "
-format = "[+$number $symbol]($style)"
-style = "fg:bold purple"
-symbol_threshold = 1
-number_threshold = 1
-
 [cmd_duration]
 min_time = 3000
 format = "[󰔟 $duration](bold cyan)"
-
-[custom.alfred]
-os = "macos"
-description = "Version number of Alfred Workflow"
-when = "[[ -f info.plist ]] || [[ -f ../info.plist ]]"
-command = "if [[ -f ../info.plist ]] ; then ; plist=$(plutil -extract version xml1 -o - ../info.plist) ; else ; plist=$(plutil -extract version xml1 -o - info.plist) ; fi ; echo \"$plist\" | sed -n 4p | cut -d'>' -f2 | cut -d'<' -f1"
-format = ' [󰮤 $output]($style)'
-style = "bold yellow"
 
 [python]
 format = ' [${symbol}${pyenv_prefix}($version)]($style)'
 version_format = "$major.$minor"
 symbol = " "
 style = "bold yellow"
-
-[nodejs]
-style = "bold yellow"
-format = ' [$symbol$version]($style)'
-version_format = "$major.$minor"
-symbol = "󰎙 "
-# disabled detecting via extensions; detect only via `package.json` or
-# `node_modules` to avoid false positives for stuff like Alfred workflows
-detect_extensions = []
-not_capable_style = "ft:white bg:red"
