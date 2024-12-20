@@ -60,22 +60,6 @@ local function syncPackages(ensurePack)
 	masonReg.refresh(refreshCallback)
 end
 
-local function reinstall()
-	local masonReg = require("mason-registry")
-	local installedPackages = masonReg.get_installed_package_names()
-
-	vim.ui.select(installedPackages, { prompt = " Package to reinstall: " }, function(packName)
-		if not packName then return end
-		local pack = masonReg.get_package(packName)
-
-		pack:uninstall()
-		local msg = ("[%s] uninstalled"):format(packName)
-		vim.notify(msg, nil, { title = "Mason", icon = "󰅗 ", style = "minimal" })
-
-		install(pack)
-	end)
-end
-
 --------------------------------------------------------------------------------
 
 return {
@@ -83,11 +67,13 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
-		{ "<leader>pr", reinstall, desc = "󰑓 Mason reinstall" },
 	},
 	init = function()
 		-- Make mason packages available before loading it; allows to lazy-load mason.
 		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+
+		-- do not crowd home directory with npm cache folder
+		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm"
 	end,
 	opts = {
 		-- PENDING https://github.com/mason-org/mason-registry/pull/7957

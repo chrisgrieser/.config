@@ -57,4 +57,7 @@ export NODE_REPL_HISTORY=""
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 
+# do not crowd `$HOME` (set in .zshenv, so it's also applied to Neovide)
+export npm_config_cache="$HOME/.cache/npm"
+
 #───────────────────────────────────────────────────────────────────────────────
