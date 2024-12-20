@@ -343,7 +343,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
+				<string>D2728240-0953-42A8-A1AF-5289F6230277</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -815,17 +815,15 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string></string>
-				<key>sourcefile</key>
+				<key>path</key>
 				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.browseinterminal</string>
 			<key>uid</key>
-			<string>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</string>
+			<string>D2728240-0953-42A8-A1AF-5289F6230277</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1515,15 +1513,6 @@
 			<key>ypos</key>
 			<real>35</real>
 		</dict>
-		<key>158FC0D8-5F6E-4AFE-BC6E-9406B6343527</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>725</real>
-			<key>ypos</key>
-			<real>385</real>
-		</dict>
 		<key>1B2789C4-ACE9-46F2-A786-B83B045166B2</key>
 		<dict>
 			<key>colorindex</key>
@@ -1765,6 +1754,15 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>470</real>
+		</dict>
+		<key>D2728240-0953-42A8-A1AF-5289F6230277</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>725</real>
+			<key>ypos</key>
+			<real>385</real>
 		</dict>
 		<key>F1A38BE0-D312-40D9-B5FE-09C6D51AEDA3</key>
 		<dict>
