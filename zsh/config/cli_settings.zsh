@@ -5,8 +5,7 @@
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
 # macOS currently ships less v.581, which lacks the ability to read lesskey
-# source files. Therefore for this to work, the version of less provided by
-# homebrew is needed.
+# files. Thus we need to use the version of less provided by homebrew.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$HOME/.config/less/lesskey"
 
@@ -54,7 +53,7 @@ export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 export NODE_REPL_HISTORY=""
 
 # Instead of writing npm config to `.npmrc`, can also be set via shell
-# environment variables. Has to be lower-case though. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
+# environment variables. Has to be lower-case. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 
