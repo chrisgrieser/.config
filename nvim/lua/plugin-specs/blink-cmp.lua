@@ -1,13 +1,8 @@
--- DOCS https://github.com/saghen/blink.cmp#configuration
---------------------------------------------------------------------------------
----@diagnostic disable: missing-fields
+-- DOCS https://cmp.saghen.dev/configuration/general.html
 --------------------------------------------------------------------------------
 
--- TODO next release: 
--- * re-enable `completion.menu.draw.treesitter`
+-- TODO next release:
 -- * cmdline completion
--- * enable treesitter-LSP highlighting
--- * remove missing-fields ignore comment
 
 return {
 	"saghen/blink.cmp",
@@ -33,6 +28,9 @@ return {
 		end,
 		sources = {
 			providers = {
+				lsp = {
+					fallbacks = {}, -- do not use `buffer` as fallback
+				},
 				snippets = {
 					-- don't show when triggered manually (= length 0), useful
 					-- when manually showing completions to see available JSON keys
@@ -43,9 +41,6 @@ return {
 					opts = { get_cwd = vim.uv.cwd },
 				},
 				buffer = {
-					-- disable being fallback for LSP, but limit its display via
-					-- the other settings
-					fallback_for = {},
 					max_items = 4,
 					min_keyword_length = 4,
 					score_offset = -3,
@@ -96,7 +91,7 @@ return {
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
-					-- treesitter = { "lsp" },
+					treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
