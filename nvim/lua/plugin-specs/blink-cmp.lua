@@ -69,15 +69,27 @@ return {
 		},
 		keymap = {
 			preset = "none",
+			["<CR>"] = {
+				function(cmp)
+					-- when in cmdline, do not auto-select suggestion, which blocks `enter`
+					local action = vim.fn.getcmdtype():find("[/?]") and "select" or "select_and_accept"
+					cmp[action]()
+				end,
+				"fallback",
+			},
+			["<Tab>"] = { function (cmp)
+				-- when in cmdline, do not auto-select suggestion, which blocks
+				local action = vim.fn.getcmdtype():find("[/?]") and "select" or "select_and_accept"
+				cmp[action]()
+				-- `enter`
+			end, "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
 			["<D-c>"] = { "show" },
 			["<S-CR>"] = { "cancel" },
-			["<CR>"] = { "select_and_accept", "fallback" },
-			["<Tab>"] = { "select_next", "fallback" },
-			["<S-Tab>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
-			["<PageDown>"] = { "scroll_documentation_down" },
-			["<PageUp>"] = { "scroll_documentation_up" },
+			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
+			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 		},
 		completion = {
 			list = {
