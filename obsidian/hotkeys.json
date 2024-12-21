@@ -128,14 +128,6 @@
       "key": ";"
     }
   ],
-  "obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "I"
-    }
-  ],
   "templater-obsidian:jump-to-next-cursor-location": [],
   "templater-obsidian:insert-templater": [],
   "templater-obsidian:replace-in-file-templater": [],

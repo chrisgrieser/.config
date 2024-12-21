@@ -16,7 +16,7 @@ return {
 			per_filetype = {
 				snacks_input = {},
 				["rip-substitute"] = { "buffer" },
-				["gitcommti"] = {},
+				["gitcommit"] = {},
 			},
 			providers = {
 				lsp = {
