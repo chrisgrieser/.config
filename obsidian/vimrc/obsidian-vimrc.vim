@@ -565,6 +565,14 @@ nnoremap ,oa :toggleAiCompletion<CR>
 exmap sourceModeLivePreview obcommand editor:toggle-source
 nnoremap ,oc :sourceModeLivePreview<CR>
 
+" [O]ption: readable line length (i.e. soft wrap)
+exmap lineLength obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-readable-line-length-toggle
+nnoremap ,ow :lineLength<CR>
+
+" [O]ption: [i]mage size
+exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle
+nnoremap ,oi :maxImageSize<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 
 " <M-s> = cmd+s

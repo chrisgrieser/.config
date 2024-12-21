@@ -12,6 +12,7 @@ return {
 			trim_prompt = true,
 			border = vim.g.borderStyle,
 			relative = "editor",
+			win_options = { statuscolumn = " " },
 			mappings = {
 				n = {
 					["q"] = "Close",
