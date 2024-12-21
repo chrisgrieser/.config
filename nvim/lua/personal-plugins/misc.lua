@@ -27,11 +27,14 @@ end
 
 --------------------------------------------------------------------------------
 
+
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 
+---@param toggleKey any
+---@param reg any
 function M.startOrStopRecording(toggleKey, reg)
 	if not reg:find("^%l$") then
 		vim.notify("Register must be single lowercase letter.", vim.log.levels.ERROR)

@@ -1,38 +1,23 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
--- TODO next release:
--- * cmdline completion
-
 return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
-	version = "*", -- REQUIRED `version` needed to download pre-built binary
+	version = "*", -- REQUIRED needed to download pre-built binary
 
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
 	opts = {
 		sources = {
 			per_filetype = {
-				snacks_input = {},
 				["rip-substitute"] = { "buffer" },
-				["gitcommit"] = {},
+				snacks_input = {},
+				gitcommit = {},
 			},
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
-					enabled = function()
-						-- prevent useless suggestions when typing `--` in lua, but keep the
-						-- `---@param;@return` suggestion
-						if vim.bo.ft == "lua" then
-							local col = vim.api.nvim_win_get_cursor(0)[2]
-							local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
-							local commentButNotLuadocs = charsBefore:find("^%-%-?$")
-								or charsBefore:find("%s%-%-?")
-							if commentButNotLuadocs then return false end
-						end
-						return true
-					end,
 				},
 				snippets = {
 					-- don't show when triggered manually (= length 0), useful
@@ -84,6 +69,10 @@ return {
 			},
 		},
 		completion = {
+			keyword = {
+				-- only letters and `_`, do not trigger on `-` (default is '[-_]\\|\\k')
+				regex = [[\a\|_]],
+			},
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				selection = "auto_insert",
