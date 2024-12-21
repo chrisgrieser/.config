@@ -1,4 +1,4 @@
--- DOCS https://cmp.saghen.dev/configuration/general.html
+-- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
 -- TODO next release:
@@ -12,24 +12,27 @@ return {
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
 	opts = {
-		enabled = function()
-			-- prevent useless suggestions when typing `--` in lua, but keep the
-			-- `---@param;@return` suggestion
-			if vim.bo.ft == "lua" then
-				local col = vim.api.nvim_win_get_cursor(0)[2]
-				local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
-				local commentButNotLuadocs = charsBefore:find("^%-%-?$") or charsBefore:find("%s%-%-?")
-				if commentButNotLuadocs then return false end
-			end
-
-			if vim.bo.buftype == "prompt" then return false end
-			local ignoredFts = { "DressingInput", "snacks_input", "rip-substitute", "gitcommit" }
-			return not vim.tbl_contains(ignoredFts, vim.bo.filetype)
-		end,
 		sources = {
+			per_filetype = {
+				snacks_input = {},
+				["rip-substitute"] = { "buffer" },
+				["gitcommti"] = {},
+			},
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
+					enabled = function()
+						-- prevent useless suggestions when typing `--` in lua, but keep the
+						-- `---@param;@return` suggestion
+						if vim.bo.ft == "lua" then
+							local col = vim.api.nvim_win_get_cursor(0)[2]
+							local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
+							local commentButNotLuadocs = charsBefore:find("^%-%-?$")
+								or charsBefore:find("%s%-%-?")
+							if commentButNotLuadocs then return false end
+						end
+						return true
+					end,
 				},
 				snippets = {
 					-- don't show when triggered manually (= length 0), useful
@@ -45,8 +48,8 @@ return {
 					min_keyword_length = 4,
 					score_offset = -3,
 
-					-- show completions from all buffers used within the last x minutes
 					opts = {
+						-- show completions from all buffers used within the last x minutes
 						get_bufnrs = function()
 							local mins = 15
 							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
@@ -65,6 +68,7 @@ return {
 			},
 		},
 		keymap = {
+			preset = "none",
 			["<D-c>"] = { "show" },
 			["<S-CR>"] = { "cancel" },
 			["<CR>"] = { "select_and_accept", "fallback" },
@@ -78,6 +82,7 @@ return {
 		completion = {
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
+				selection = "auto_insert",
 			},
 			documentation = {
 				auto_show = true,
@@ -85,13 +90,13 @@ return {
 				window = {
 					border = vim.g.borderStyle,
 					max_width = 50,
-					max_height = 15,
+					max_height = 20,
 				},
 			},
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
-					treesitter = { "lsp" },
+					treesitter = { "lsp", "cmdline" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
@@ -106,8 +111,13 @@ return {
 								if lspName == "emmet_language_server" then source = "emmet" end
 
 								-- use source-specific icons, and `kind_icon` only for items from LSPs
-								local sourceIcons =
-									{ snippets = "󰩫", buffer = "󰦨", emmet = "", path = "" }
+								local sourceIcons = {
+									snippets = "󰩫",
+									buffer = "󰦨",
+									emmet = "",
+									path = "",
+									cmdline = "󰘳",
+								}
 								return sourceIcons[source] or ctx.kind_icon
 							end,
 						},
