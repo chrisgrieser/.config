@@ -67,6 +67,10 @@ local themes = {
 					-- FIX missing highlights for `snacks`
 					SnacksNormal = { link = "NotifyBackground" },
 
+					-- make matches stand out more
+					BlinkCmpLabelMatch = { fg = "palette.orange" },
+					TelescopeMatching = { fg = "palette.orange" },
+
 					-- use grey for debug
 					SnacksNotifierTitleDebug = { fg = "palette.comment" },
 					SnacksNotifierIconDebug = { fg = "palette.comment" },
@@ -111,6 +115,10 @@ local themes = {
 
 				-- FIX wrong background color for icons of the source `path`
 				hl.BlinkCmpKindFile = { link = "LspKindText" }
+
+				-- make matches stand out more
+				hl.BlinkCmpLabelMatch = { fg = colors.yellow }
+				hl.TelescopeMatching = { fg = colors.yellow }
 
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
