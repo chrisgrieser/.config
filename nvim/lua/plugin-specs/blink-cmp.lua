@@ -69,27 +69,19 @@ return {
 		},
 		keymap = {
 			preset = "none",
-			["<CR>"] = {
-				function(cmp)
-					-- when in cmdline, do not auto-select suggestion, which blocks `enter`
-					local action = vim.fn.getcmdtype():find("[/?]") and "select" or "select_and_accept"
-					cmp[action]()
-				end,
-				"fallback",
-			},
-			["<Tab>"] = { function (cmp)
-				-- when in cmdline, do not auto-select suggestion, which blocks
-				local action = vim.fn.getcmdtype():find("[/?]") and "select" or "select_and_accept"
-				cmp[action]()
-				-- `enter`
-			end, "fallback" },
-			["<S-Tab>"] = { "select_prev", "fallback" },
-			["<D-c>"] = { "show" },
+			["<CR>"] = { "select_and_accept", "fallback" },
 			["<S-CR>"] = { "cancel" },
+			["<Tab>"] = { "show", "select_next", "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
+			cmdline = {
+				["<CR>"] = { "accept", "fallback" }, -- see https://github.com/Saghen/blink.cmp/issues/702
+				["<Tab>"] = { "show", "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+			},
 		},
 		completion = {
 			list = {
