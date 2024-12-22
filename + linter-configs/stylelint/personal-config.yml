@@ -12,7 +12,6 @@ defaultSeverity: warning
 #───────────────────────────────────────────────────────────────────────────────
 rules:
   color-function-notation: [modern, { ignore: [with-var-inside] }]
-  color-named: never
   color-no-hex: true
   comment-empty-line-before: null
   custom-property-empty-line-before: never
@@ -21,8 +20,6 @@ rules:
   font-weight-notation: numeric
   hue-degree-notation: number # compatible with ccc.nvim output
   max-nesting-depth: 3
-  selector-nested-pattern:
-    ["&", { splitList: true, message: "Nested selectors should include a &." }]
   # Obsidian theme development
   selector-class-pattern: null # class names usually not defined by me
   selector-id-pattern: null # id names usually not defined by me
