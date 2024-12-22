@@ -18,10 +18,21 @@ return {
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
+					enabled = function()
+						if vim.bo.ft ~= "lua" then return true end
+
+						-- prevent useless suggestions when typing `--` in lua, but
+						-- keep the useful `---@param;@return` suggestion
+						local col = vim.api.nvim_win_get_cursor(0)[2]
+						local charsBefore = vim.api.nvim_get_current_line():sub(col - 2, col)
+						local luadocButNotComment = not charsBefore:find("^%-%-?$")
+							and not charsBefore:find("%s%-%-?")
+						return luadocButNotComment
+					end,
 				},
 				snippets = {
 					-- don't show when triggered manually (= length 0), useful
-					-- when manually showing completions to see available JSON keys
+					-- when manually showing completions to see available fields
 					min_keyword_length = 1,
 					score_offset = -1,
 				},
@@ -69,6 +80,11 @@ return {
 			},
 		},
 		completion = {
+			keyword = {
+				-- only letters and `_`, do not trigger on `` (default is '[-_]\\|\\k')
+				-- does not seem to affect LSP, who still trigger on `-`
+				regex = [[\a\|_]],
+			},
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				selection = "auto_insert",

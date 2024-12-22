@@ -14,7 +14,12 @@ return {
 				-- disable on large files
 				local maxFilesizeKb = 100
 				local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-				if ok and stats and stats.size > maxFilesizeKb * 1024 then return true end
+				if not (ok and stats) then return false end
+				if stats.size > maxFilesizeKb * 1024 then
+					local msg = "Disabled since file is larger than " .. maxFilesizeKb .. "kb"
+					vim.notify(msg, nil, { title = "Treesitter", icon = "" })
+					return true
+				end
 			end,
 		},
 		indent = {

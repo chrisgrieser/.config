@@ -29,6 +29,9 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
+	-- word added to spellfile via `zg`
+	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+
 	-- search
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
