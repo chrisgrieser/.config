@@ -22,18 +22,18 @@ keymap("n", "gq", function()
 			{ title = "Quickfix", icon = "" }
 		)
 	end
-end, { desc = " Next quickfix" })
+end, { desc = "󰒭 Next quickfix" })
 
-keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = " Prev quickfix" })
+keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = "󰒮 Prev quickfix" })
 
-keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = " Delete list" })
-keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st item" })
+keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete list" })
+keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st item" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
 	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
 	vim.cmd[hasQuickfix and "cclose" or "copen"]()
-end, { desc = " Toggle window" })
+end, { desc = " Toggle window" })
 
 --------------------------------------------------------------------------------
 -- KEYMAPS in quickfix window
@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		local ns = vim.api.nvim_create_namespace("quickfix-signs")
 
 		local function setSigns(qf)
-			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, qf.col - 1, {
+			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
 				sign_text = "󱘹▶",
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- Gitsigns uses 6 by default, we want to be above
