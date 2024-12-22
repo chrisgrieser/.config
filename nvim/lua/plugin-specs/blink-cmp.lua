@@ -69,10 +69,6 @@ return {
 			},
 		},
 		completion = {
-			keyword = {
-				-- only letters and `_`, do not trigger on `-` (default is '[-_]\\|\\k')
-				regex = [[\a\|_]],
-			},
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				selection = "auto_insert",

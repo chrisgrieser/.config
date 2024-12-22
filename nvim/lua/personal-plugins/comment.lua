@@ -83,7 +83,7 @@ function M.docstring()
 			filter = function(action) return action.title == "Infer parameter types from usage" end,
 			apply = true,
 		}
-		-- goto docstring (delayed, so code action can finish first)
+		-- goto docstring (deferred, so code action can finish first)
 		vim.defer_fn(function()
 			vim.api.nvim_win_set_cursor(0, { ln + 1, 0 })
 			vim.cmd.normal { "t)", bang = true }
@@ -93,8 +93,19 @@ function M.docstring()
 		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, { indent .. "/**  */" })
 		vim.api.nvim_win_set_cursor(0, { ln, #indent + 4 })
 		vim.cmd.startinsert()
+	elseif ft == "lua" then
+		local params = vim.api.nvim_get_current_line():match("function.*%((.*)%)$")
+		if not params then return end
+		local luadoc = vim.tbl_map(
+			function(param) return ("%s---@param %s any"):format(indent, param) end,
+			vim.split(params, ", ?")
+		)
+		vim.api.nvim_buf_set_lines(0, ln - 1, ln - 1, false, luadoc)
+		-- goto 1st param type & edit it
+		vim.api.nvim_win_set_cursor(0, { ln, #luadoc[1] })
+		vim.cmd.normal { '"_ciw', bang = true }
 	else
-		vim.notify("Unsupported filetype.", vim.log.levels.WARN, { title = "Docstring" })
+		vim.notify(ft .. " is not supported.", vim.log.levels.WARN, { title = "docstring" })
 	end
 end
 
