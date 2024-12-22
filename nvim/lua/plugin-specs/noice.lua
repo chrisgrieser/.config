@@ -29,26 +29,13 @@ local routes = {
 	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
 
-	-- word added to spellfile via `zg`
-	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-	--------------------------------------------------------------------
-
 	-- search
 	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 
+	--------------------------------------------------------------------
+
 	-- FIX https://github.com/artempyanykh/marksman/issues/348
 	{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
-
-	-- PENDING vim 0.10.3 https://github.com/neovim/neovim/issues/30675#issuecomment-2481386623
-	{
-		filter = { event = "msg_show", find = "semantic_tokens.lua:149: index out of range" },
-		skip = true,
-	},
-
-	{ -- FIX
-		filter = { event = "msg_show", find = "util.lua:1825: index out of range" },
-		skip = true,
-	},
 
 	-- code actions
 	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
