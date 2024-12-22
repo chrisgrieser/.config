@@ -16,11 +16,8 @@ keymap("n", "gq", function()
 	local deletedIdx = response:match("%((%d+) of %d+%) %(line deleted%):")
 	if deletedIdx then table.insert(msg, ("Item #%d already deleted."):format(deletedIdx)) end
 	if #msg > 0 then
-		vim.notify(
-			table.concat(msg, "\n"),
-			vim.log.levels.TRACE,
-			{ title = "Quickfix", icon = "" }
-		)
+		local out = table.concat(msg, "\n")
+		vim.notify(out, vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
 	end
 end, { desc = "󰒭 Next quickfix" })
 
