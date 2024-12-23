@@ -21,25 +21,6 @@ rules:
       # (CleanShot) (mapping done in `finder-vim-alfred-addon.yaml` to consider
       # Finder vim mode properly)
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "⇪ Dismiss Notification"
-    manipulators:
-      # dismiss notifications
-      - type: basic
-        from: { key_code: "9", modifiers: *hyper }
-        to:
-          - shell_command: | # https://github.com/alfredapp/banner-be-gone-workflow/
-              osascript -l JavaScript -e '
-                Application("System Events")
-                  .applicationProcesses.byName("NotificationCenter")
-                  .windows[0]
-                  .groups[0]
-                  .groups[0]
-                  .scrollAreas[0]
-                  .uiElements()
-                  .map(banner => banner.actions().slice(-1)[0])
-                  .reverse()
-                  .forEach(banner => banner.perform())
-              '
       # show notifications
       - type: basic
         from: { key_code: "0", modifiers: *hyper }
