@@ -66,28 +66,26 @@ return {
 		keymap = {
 			preset = "none",
 			["<CR>"] = { "select_and_accept", "fallback" },
-			["<S-CR>"] = { "cancel" },
-			["<Tab>"] = {
-				"show",
-				"snippet_forward",
-				"select_next",
-				"fallback",
-			},
-			["<S-Tab>"] = { "select_prev", "fallback" },
+			["<S-CR>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
+			["<Tab>"] = { "snippet_forward", "select_next", "show", "fallback" },
+			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			cmdline = {
-				["<CR>"] = { "accept", "fallback" }, -- see https://github.com/Saghen/blink.cmp/issues/702
-				["<Tab>"] = { "show", "select_next", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+				["<Tab>"] = { "select_next", "show" },
+				["<S-Tab>"] = { "select_prev" },
 			},
 		},
 		completion = {
+			trigger = {
+				show_in_snippet = false, -- since we overload `<Tab>` with jumping & selection
+			},
 			keyword = {
 				-- only letters and `_`, do not trigger on `` (default is '[-_]\\|\\k')
-				-- does not seem to affect LSP, who still trigger on `-`
+				-- does not affect LSP, who still trigger on `-` due to trigger chars
 				regex = [[\a\|_]],
 			},
 			list = {

@@ -4,6 +4,17 @@
 <dict>
 	<key>customSites</key>
 	<dict>
+		<key>00A6B9F9-3AA3-46FE-91BC-4D009DF1AA6E</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>utf</string>
+			<key>text</key>
+			<string>UTF characters: '{query}'</string>
+			<key>url</key>
+			<string>https://www.compart.com/en/unicode/search?q={query}</string>
+		</dict>
 		<key>0501B994-1E9B-4FE5-8595-BDBFA4B72AD6</key>
 		<dict>
 			<key>enabled</key>
