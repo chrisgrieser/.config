@@ -33,11 +33,8 @@ end
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
-	if not reg:find("^%l$") then
-		vim.notify("Register must be single lowercase letter.", vim.log.levels.ERROR)
-		return
-	end
 	local notRecording = vim.fn.reg_recording() == ""
+
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true }
 	else
@@ -174,7 +171,6 @@ function M.spellSuggest(limit)
 		function(selection)
 			if not selection then return end
 			vim.cmd.normal { '"_ciw' .. selection, bang = true }
-			vim.cmd.stopinsert()
 		end
 	)
 end
