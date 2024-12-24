@@ -20,10 +20,14 @@ return { -- treesitter-based textobjs
 		},
 	},
 	keys = {
-		-- MOVE & SWAP
+		-- MOVE
 		-- stylua: ignore start
 		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
 		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
+		-- stylua: ignore end
+
+		-- SWAP
+		-- stylua: ignore start
 		{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
 		{ "Ä", "<cmd>TSTextobjectSwapPrevious @parameter.inner<CR>", desc = " Swap prev arg" },
 		-- stylua: ignore end
@@ -44,12 +48,27 @@ return { -- treesitter-based textobjs
 		{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner c[o]ndition" },
 		{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer ca[l]l" },
 		{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner ca[l]l" },
-		-- only operator-pending to not conflict with selection-commenting
-		{ "q", "<cmd>TSTextobjectSelect @comment.outer<CR>", mode = "o", desc = "󰆈 single comment" },
 
 		-- CUSTOM TEXTOBJECTS
 		{"g" .. textObj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 ca[l]ler" },
-
 		-- stylua: ignore end
+
+		-- COMMENTS
+
+		-- only operator-pending to not conflict with selection-commenting
+		-- stylua: ignore
+		{ "q", "<cmd>TSTextobjectSelect @comment.outer<CR>", mode = "o", desc = "󰆈 single comment" },
+		{
+			"dq",
+			function()
+				local cursorBefore = vim.api.nvim_win_get_cursor(0)
+				vim.cmd.TSTextobjectSelect("@comment.outer")
+				vim.cmd.normal { "d", bang = true }
+				local trimmedLine = vim.api.nvim_get_current_line():gsub("%s+$", "")
+				vim.api.nvim_set_current_line(trimmedLine)
+				vim.api.nvim_win_set_cursor(0, cursorBefore)
+			end,
+			desc = "󰆈 Sticky delete comment",
+		},
 	},
 }
