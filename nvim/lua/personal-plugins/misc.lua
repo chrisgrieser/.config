@@ -27,7 +27,6 @@ end
 
 --------------------------------------------------------------------------------
 
-
 ---1. start/stop with just one keypress
 ---2. add notification & sound for recording
 ---@param toggleKey string key used to trigger this function
@@ -121,40 +120,33 @@ end
 --------------------------------------------------------------------------------
 
 function M.smartDuplicate()
-	local originalLine = vim.api.nvim_get_current_line()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local line = originalLine
+	local line = vim.api.nvim_get_current_line()
+	local newLine = line
 
 	-- FILETYPE-SPECIFIC TWEAKS
 	if vim.bo.ft == "css" then
-		if line:find("top:") then
-			line = line:gsub("top:", "bottom:")
-		elseif line:find("bottom:") then
-			line = line:gsub("bottom:", "top:")
-		end
-		if line:find("right:") then
-			line = line:gsub("right:", "left:")
-		elseif line:find("left:") then
-			line = line:gsub("left:", "right:")
-		end
+		if line:find("top:") then newLine = line:gsub("top:", "bottom:") end
+		if line:find("bottom:") then newLine = line:gsub("bottom:", "top:") end
+		if line:find("right:") then newLine = line:gsub("right:", "left:") end
+		if line:find("left:") then newLine = line:gsub("left:", "right:") end
 	elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
-		if line:find("^%s*if.+{$") then line = line:gsub("^(%s*)if", "%1} else if") end
+		if line:find("^%s*if.+{$") then newLine = line:gsub("^(%s*)if", "%1} else if") end
 	elseif vim.bo.ft == "lua" then
-		if line:find("^%s*if.+then%s*$") then line = line:gsub("^(%s*)if", "%1elseif") end
+		if line:find("^%s*if .* then$") then newLine = line:gsub("^(%s*)if", "%1elseif") end
 	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" then
-		if line:find("^%s*if.+then$") then line = line:gsub("^(%s*)if", "%1elif") end
+		if line:find("^%s*if .* then$") then newLine = line:gsub("^(%s*)if", "%1elif") end
 	elseif vim.bo.ft == "python" then
-		if line:find("^%s*if.+:$") then line = line:gsub("^(%s*)if", "%1elif") end
+		if line:find("^%s*if .*:$") then newLine = line:gsub("^(%s*)if", "%1elif") end
 	end
 
 	-- INSERT DUPLICATED LINE
-	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
+	vim.api.nvim_buf_set_lines(0, row, row, false, { newLine })
 
 	-- MOVE CURSOR DOWN, AND POTENTIALLY TO VALUE/FIELD
-	local luadocFieldPos = vim.bo.ft == "lua" and select(3, line:find("%-%-%-@%w+ ()")) or nil
-	local _, valuePos = line:find("[:=] %S")
-	local newCol = luadocFieldPos or valuePos
-	local targetCol = newCol and newCol - 1 or col
+	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
+	local _, valuePos = line:find("[:=]?[:=] ")
+	local targetCol = luadocFieldPos or valuePos or col
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })
 end
 
@@ -221,10 +213,12 @@ end
 ---If snacks.nvim is installed, adds cycling notification.
 ---@param direction "next"|"prev"
 function M.nextFileInFolder(direction)
+	-- CONFIG
+	local ignoreExt = { "png", "svg", "webp", "jpg", "jpeg", "gif", "pdf", "zip" }
+
 	local curPath = vim.api.nvim_buf_get_name(0)
 	local curFile = vim.fs.basename(curPath)
 	local curFolder = vim.fs.dirname(curPath)
-	local ignoreExt = { "png", "svg", "webp", "jpg", "jpeg", "gif", "pdf", "zip" }
 
 	local notifyOpts = {
 		title = direction:sub(1, 1):upper() .. direction:sub(2) .. " file",
@@ -242,8 +236,7 @@ function M.nextFileInFolder(direction)
 		return acc
 	end)
 
-	-- GUARD edge cases like if currently at a hidden file and there are only
-	-- hidden files in the directory
+	-- GUARD if currently at a hidden file and there are only hidden files in the dir
 	if #filesInFolder == 0 then
 		vim.notify("No valid files found in folder.", vim.log.levels.ERROR, notifyOpts)
 		return
