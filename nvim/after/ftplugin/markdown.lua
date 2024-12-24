@@ -94,51 +94,24 @@ bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
 bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
--- MARKDOWN PREVIEW
--- (replaces markdown-preview.nvim)
+
+-- MARKDOWN PREVIEW (simplified version of markdown-preview.nvim)
 bkeymap("n", "<leader>er", function()
-	-- CONFIG
 	local outputPath = "/tmp/markdown-preview.html"
-	local browser = "Brave Browser"
 	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
 
 	-- create github-html via pandoc
-	vim.cmd.update { mods = { silent = true } }
-	local input = vim.api.nvim_buf_get_name(0)
+	vim.cmd("silent update")
 	vim.system({
 		"pandoc",
 		-- rebasing paths, so images are available at output location
 		"--from=gfm+rebase_relative_paths",
-		input,
+		vim.api.nvim_buf_get_name(0),
 		"--output=" .. outputPath,
 		"--standalone",
 		"--css=" .. css,
 	}):wait()
 
-	-- determine the heading above cursor, to scroll to it
-	local heading
-	local curLine = vim.api.nvim_win_get_cursor(0)[1]
-	for i = curLine - 1, 1, -1 do
-		local line = vim.api.nvim_buf_get_lines(0, i, i + 1, false)[1]
-		heading = line:match("^#+ (.*)")
-		if heading then break end
-	end
-	local anchor = heading and "#" .. heading:lower():gsub(" ", "-") or ""
-	local url = "file://" .. outputPath .. anchor
-
-	-- macOS-specific part: open file and refresh
-	-- * cannot use shell's `open` as it does not work with anchors
-	-- * closing tab to ensure it's correctly refreshed
-	local applescript = ([[
-		tell application %q
-		if (front window exists) then
-		repeat with the_tab in (every tab in front window)
-		set the_url to the url of the_tab
-		if the_url contains (%q) then close the_tab
-		end repeat
-		end if
-		open location %q
-		end tell
-	]]):format(browser, outputPath, url)
-	vim.system { "osascript", "-e", applescript }
+	local uri = "file://" .. outputPath
+	vim.ui.open(uri)
 end, { desc = " Preview" })
