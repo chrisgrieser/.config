@@ -26,6 +26,7 @@ return {
 			["mason"] = { glyph = "" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
+			["rip-substitute"] = { glyph = "" },
 		},
 	},
 	config = function(_, opts)

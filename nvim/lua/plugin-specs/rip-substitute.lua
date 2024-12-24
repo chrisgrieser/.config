@@ -17,8 +17,13 @@ return {
 		popupWin = {
 			border = vim.g.borderStyle,
 			hideSearchReplaceLabels = true,
+			hideKeymapHints = true,
 		},
-		keymaps = { insertModeConfirm = "<CR>" },
-		editingBehavior = { autoCaptureGroups = true },
+		keymaps = {
+			insertModeConfirm = "<CR>",
+		},
+		editingBehavior = {
+			autoCaptureGroups = true,
+		},
 	},
 }
