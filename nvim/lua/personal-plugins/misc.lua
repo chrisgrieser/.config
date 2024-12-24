@@ -144,7 +144,7 @@ function M.smartDuplicate()
 	-- INSERT DUPLICATED LINE
 	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
 
-	-- MOVE CURSOR DOWN, AND POTENTIALLY TO VALUE/FIELD
+	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF EXISTS)
 	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
 	local _, valuePos = line:find("[:=][:=]? ")
 	local targetCol = luadocFieldPos or valuePos or col
@@ -191,7 +191,7 @@ function M.gotoMostChangedFile()
 	local mostChanges = 0
 	vim.iter(changedFiles):each(function(line)
 		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not (added and deleted and relPath) then return end -- exclude changed binaries
+		if not (added and deleted and relPath) then return end -- in case of changed binary files
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
 		if not vim.uv.fs_stat(absPath) then return end
@@ -202,7 +202,8 @@ function M.gotoMostChangedFile()
 			targetFile = absPath
 		end
 	end)
-	if targetFile == vim.api.nvim_buf_get_name(0) then
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	if targetFile == currentFile then
 		vim.notify("Already at only changed file.", nil, notifyOpts)
 		return
 	end
