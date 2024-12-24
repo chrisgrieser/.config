@@ -267,10 +267,6 @@ keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
 --------------------------------------------------------------------------------
 -- SNIPPETS
 
-keymap({ "n", "i", "s" }, "<D-p>", function()
-	if vim.snippet.active() then vim.snippet.jump(1) end
-end, { desc = "󰩫 Next placeholder" })
-
 -- exit snippet https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
 keymap({ "i", "s" }, "<Esc>", function()
 	vim.snippet.stop()
