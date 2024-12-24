@@ -67,7 +67,12 @@ return {
 			preset = "none",
 			["<CR>"] = { "select_and_accept", "fallback" },
 			["<S-CR>"] = { "cancel" },
-			["<Tab>"] = { "show", "select_next", "fallback" },
+			["<Tab>"] = {
+				"show",
+				"snippet_forward",
+				"select_next",
+				"fallback",
+			},
 			["<S-Tab>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },
