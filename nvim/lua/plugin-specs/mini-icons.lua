@@ -25,6 +25,7 @@ return {
 			["noice"] = { glyph = "󰎟" },
 			["mason"] = { glyph = "" },
 			["ccc-ui"] = { glyph = "" },
+			["scissors-snippet"] = { glyph = "󰩫" },
 		},
 	},
 	config = function(_, opts)
