@@ -18,7 +18,7 @@ return {
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
 
-			-- plugins
+			-- plugin-filetypes
 			["oil"] = { glyph = "󰁴" },
 			["snacks_input"] = { glyph = "󰏫" },
 			["snacks_notif"] = { glyph = "󰎟" },
@@ -32,7 +32,7 @@ return {
 	config = function(_, opts)
 		require("mini.icons").setup(opts)
 
-		-- plugin still needing the mock: telescope & lualine
+		-- plugin still needing the devicons mock: telescope & lualine
 		require("mini.icons").mock_nvim_web_devicons()
 	end,
 }
