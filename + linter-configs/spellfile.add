@@ -68,3 +68,6 @@ biome
 jsonc
 popup
 blink
+Filetype
+cursorword
+lookaheads
