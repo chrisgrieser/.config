@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 --------------------------------------------------------------------------------
--- STICKY YANK/DELETE
+-- STICKY YANK
 
 do
 	local cursorBefore
@@ -22,35 +22,13 @@ do
 		cursorBefore = vim.api.nvim_win_get_cursor(0)
 		return "y$"
 	end, { expr = true, unique = false }) -- `unique`, since it's a nvim-builtin
-	keymap({ "n", "x" }, "d", function()
-		cursorBefore = vim.api.nvim_win_get_cursor(0)
-		return "d"
-	end, { expr = true })
-	keymap("n", "dd", function()
-		cursorBefore = vim.api.nvim_win_get_cursor(0)
-		local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
-		return (lineEmpty and [["_dd]] or "dd")
-	end, { expr = true })
-	keymap("n", "D", function()
-		cursorBefore = vim.api.nvim_win_get_cursor(0)
-		return "D"
-	end, { expr = true })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Sticky yank/delete",
 		callback = function()
 			if vim.v.event.regname ~= "" or not cursorBefore then return end
 
-			if vim.v.event.operator == "y" then
-				vim.api.nvim_win_set_cursor(0, cursorBefore)
-			elseif vim.v.event.operator == "d" then
-				local cursorNow = vim.api.nvim_win_get_cursor(0)
-				local cursorWasInFront = cursorNow[1] > cursorBefore[1]
-					or (cursorNow[1] == cursorBefore[1] and cursorNow[2] > cursorBefore[2])
-				if not cursorWasInFront then return end
-
-				vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursorBefore) end, 1)
-			end
+			if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorBefore) end
 		end,
 	})
 end
@@ -62,6 +40,10 @@ keymap({ "n", "x" }, "x", '"_x')
 keymap({ "n", "x" }, "c", '"_c')
 keymap("n", "C", '"_C')
 keymap("x", "p", "P")
+keymap("n", "dd", function()
+	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
+	return (lineEmpty and '"_dd' or "dd")
+end, { expr = true })
 
 -- PASTING
 keymap("n", "P", function()
