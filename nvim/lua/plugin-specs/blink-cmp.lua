@@ -67,7 +67,8 @@ return {
 			preset = "none",
 			["<CR>"] = { "select_and_accept", "fallback" },
 			["<S-CR>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
-			["<Tab>"] = { "snippet_forward", "select_next", "show", "fallback" },
+			["<D-c>"] = { "show" },
+			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
 			["<Up>"] = { "select_prev", "fallback" },

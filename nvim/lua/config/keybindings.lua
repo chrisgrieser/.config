@@ -108,8 +108,10 @@ keymap("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 -- Spelling (these work even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
