@@ -278,11 +278,18 @@ end
 --------------------------------------------------------------------------------
 
 function M.formatWithFallback()
-	local formattingLsps = #vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
+	local formattingLsps = vim.tbl_map(
+		function(client) return client.name end,
+		vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
+	)
 
-	if formattingLsps > 0 then
+	if #formattingLsps > 0 then
 		-- save for efm-formatters that don't use stdin
-		if vim.bo.ft == "markdown" then vim.cmd("silent! update") end
+		if vim.bo.ft == "markdown" then
+			-- saving with explicit name prevents issues when changing `cwd`
+			local vimCmd = ("silent update %q"):format(vim.api.nvim_buf_get_name(0))
+			vim.cmd(vimCmd)
+		end
 		vim.lsp.buf.format()
 	else
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
