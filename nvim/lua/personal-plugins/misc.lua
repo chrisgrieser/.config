@@ -282,7 +282,7 @@ function M.formatWithFallback(opts)
 
 	if formattingLsps > 0 then
 		-- save for efm-formatters that don't use stdin
-		if vim.bo.ft == "markdown" then vim.cmd("silent update") end
+		if vim.bo.ft == "markdown" then vim.cmd("silent! update") end
 		vim.lsp.buf.format(opts)
 	else
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
