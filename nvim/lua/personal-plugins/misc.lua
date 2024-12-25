@@ -17,12 +17,9 @@ function M.openAlfredPref()
 		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
 		return
 	end
-	-- redundancy: using JXA and URI, as both are not 100% reliable
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local jxa = 'Application("com.runningwithcrayons.Alfred").revealWorkflow(' .. workflowUid .. ")"
+	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(workflowUid)
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
-	local uri = "alfredpreferences://navigateto/workflows>workflow>" .. workflowUid
-	vim.ui.open(uri)
 end
 
 --------------------------------------------------------------------------------
@@ -261,33 +258,32 @@ function M.nextFileInFolder(direction)
 	vim.cmd.edit(nextFile)
 
 	-- notification
-	if not package.loaded["snacks"] then return end
-	local msg = vim
-		.iter(filesInFolder)
-		:map(function(file)
-			-- mark current, using markdown h1
-			local prefix = file == filesInFolder[nextIdx] and "#" or "-"
-			return prefix .. " " .. file
-		end)
-		:slice(nextIdx - 5, nextIdx + 5) -- display ~5 files before/after
-		:join("\n")
-	notifyOpts.title = notifyOpts.title .. (" (%d/%d)"):format(nextIdx, #filesInFolder)
-	vim.notify(msg, nil, notifyOpts)
+	if package.loaded["snacks"] then
+		local msg = vim
+			.iter(filesInFolder)
+			:map(function(file)
+				-- mark current, using markdown h1
+				local prefix = file == filesInFolder[nextIdx] and "#" or "-"
+				return prefix .. " " .. file
+			end)
+			:slice(nextIdx - 5, nextIdx + 5) -- display ~5 files before/after
+			:join("\n")
+		notifyOpts.title = notifyOpts.title .. (" (%d/%d)"):format(nextIdx, #filesInFolder)
+		vim.notify(msg, nil, notifyOpts)
+	end
 end
 
 --------------------------------------------------------------------------------
 
 function M.formatWithFallback()
-	local formattingLsps = vim.tbl_map(
-		function(client) return client.name end,
-		vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
-	)
+	local formattingLsps = vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
 
 	if #formattingLsps > 0 then
 		-- save for efm-formatters that don't use stdin
 		if vim.bo.ft == "markdown" then
 			-- saving with explicit name prevents issues when changing `cwd`
-			local vimCmd = ("silent update %q"):format(vim.api.nvim_buf_get_name(0))
+			-- `:update!` suppresses "The file has been changed since reading it!!!"
+			local vimCmd = ("silent update! %q"):format(vim.api.nvim_buf_get_name(0))
 			vim.cmd(vimCmd)
 		end
 		vim.lsp.buf.format()

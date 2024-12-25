@@ -69,13 +69,6 @@ return {
 			cmdline_popup = {
 				border = { style = vim.g.borderStyle },
 			},
-			cmdline_popupmenu = { -- the completions window
-				size = { max_height = 12 },
-				border = { padding = { 0, 1 } }, -- setting border style messes up automatic positioning
-				win_options = {
-					winhighlight = { Normal = "NormalFloat", FloatBorder = "NoicePopupmenuBorder" },
-				},
-			},
 			mini = {
 				timeout = 3000,
 				zindex = 45, -- lower than nvim-notify (50), higher than satellite-scrollbar (40)
@@ -91,7 +84,17 @@ return {
 		commands = {
 			history = {
 				filter_opts = { reverse = true }, -- show newest entries first
-				opts = { format = { "{title} ", "{message}" } }, -- https://github.com/folke/noice.nvim#-formatting
+				opts = {
+					-- https://github.com/folke/noice.nvim#-formatting
+					format = {
+						"{event}",
+						{ "{kind}", before = { ".", hl_group = "NoiceFormatKind" } },
+						" ",
+						"{title} ",
+						"{cmdline} ",
+						"{message}",
+					},
+				},
 				filter = {
 					["not"] = {
 						any = {
