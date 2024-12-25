@@ -11,6 +11,7 @@ keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
 
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
 keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
+
 keymap("n", "<leader>pv", function() vim.ui.open(vim.o.viewdir) end, { desc = "󰝰 View dir" })
 
 --------------------------------------------------------------------------------
@@ -342,6 +343,7 @@ end
 -- REFACTORING
 
 keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
+
 keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 -- stylua: ignore
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
