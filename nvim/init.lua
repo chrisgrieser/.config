@@ -37,11 +37,11 @@ if not vim.env.NO_PLUGINS then
 	-- INFO only load plugins when `NO_PLUGINS` is not set.
 	-- This is for security reasons, e.g., when editing a password with `pass`.
 	safeRequire("config.lazy")
-	vim.g.setColorscheme("init")
+	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 
 safeRequire("config.neovide-gui-settings")
-safeRequire("config.autocmds")
+-- safeRequire("config.autocmds")
 safeRequire("config.lsp-and-diagnostics")
 
 safeRequire("config.keybindings")
