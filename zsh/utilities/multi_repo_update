@@ -7,14 +7,14 @@ github_username="chrisgrieser"
 # repo_names="alfred|shimmering-obsidian|gitfred"
 repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
+repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	rm -f ./.github/workflows/semantic-pr-title.yml
-	cp -f "$HOME/Desktop/stale-bot.yml" ./.github/workflows/stale-bot.yml
-	cp -f "$HOME/Desktop/pr-title.yml" ./.github/workflows/pr-title.yml
+	cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
+	cp -f "$HOME/Desktop/.markdownlint.yaml" ./.markdownlint.yaml
 }
 
-commit_msg="ci: tweak pr title check and stale bot"
+commit_msg="ci: add markdownlint check"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
