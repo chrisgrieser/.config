@@ -46,6 +46,7 @@ local extraDependencies = {
 	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
+	-- "markdownlint-cli2", -- efm
 }
 
 -- for auto-installation via `mason-tool-installer`
@@ -78,15 +79,21 @@ local efmConfig = {
 		},
 	},
 	markdown = {
-		-- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
-		{
+		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
 			formatStdin = false,
 		},
-		{
+		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdownlint --fix '${INPUT}' && cat '${INPUT}'",
 			rootMarkers = { ".markdownlint.yaml" },
 			formatStdin = false,
+		},
+		{
+			lintSource = "markdownlint",
+			lintCommand = "markdownlint --stdin",
+			lintIgnoreExitCode = true,
+			lintStdin = true,
+			lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
 		},
 	},
 	zsh = {
