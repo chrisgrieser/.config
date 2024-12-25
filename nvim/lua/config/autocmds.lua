@@ -54,9 +54,8 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 			if not vim.api.nvim_buf_is_valid(bufnr) then return end
 
 			vim.api.nvim_buf_call(bufnr, function()
-				-- `noautocmd` prevents weird cursor movement
 				-- saving with explicit name prevents issues when changing `cwd`
-				local vimCmd = ("silent noautocmd lockmarks update! %q"):format(bufname)
+				local vimCmd = ("silent noautocmd lockmarks update %q"):format(bufname)
 				vim.cmd(vimCmd)
 			end)
 			b.saveQueued = false

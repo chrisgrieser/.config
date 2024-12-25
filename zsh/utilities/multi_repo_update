@@ -5,16 +5,18 @@ github_username="chrisgrieser"
 # set -e
 
 # repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
+# repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
-	cp -f "$HOME/Desktop/.markdownlint.yaml" ./.markdownlint.yaml
+	if [[ ! -f ./.github/workflows/markdownlint.yml ]]; then
+		cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
+	fi
 }
 
-commit_msg="ci: add markdownlint check"
+commit_msg="ci: adjust path triggers"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
