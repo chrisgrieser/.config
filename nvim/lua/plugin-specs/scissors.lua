@@ -17,8 +17,9 @@ return {
 			width = 0.75,
 			border = vim.g.borderStyle,
 			keymaps = {
-				deleteSnippet = "<D-BS>",
-				insertNextPlaceholder = "<D-t>",
+				deleteSnippet = "<leader>fd", -- same as `genghis` mapping for deleting file
+				duplicateSnippet = "<leader>fw", -- same as `genghis` mapping for duplicating file
+				insertNextPlaceholder = "<D-t>", -- same as inserting template string
 			},
 		},
 		telescope = { alsoSearchSnippetBody = true },
