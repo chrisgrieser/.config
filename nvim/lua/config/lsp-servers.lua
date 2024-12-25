@@ -93,6 +93,7 @@ local efmConfig = {
 			lintCommand = "markdownlint --stdin",
 			lintIgnoreExitCode = true,
 			lintStdin = true,
+			lintSeverity = 3, -- 3: info, 2: warning
 			lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
 		},
 	},
