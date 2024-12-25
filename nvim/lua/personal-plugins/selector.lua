@@ -26,7 +26,7 @@ local config = {
 
 	-- automatically direct to telescope under certain conditions
 	telescopeRedirect = {
-		ifKindMatchesPattern = { "^tinygit" },
+		ifKindMatchesPattern = { "^tinygit", "telescope" },
 		ifMoreItemsThan = 10,
 		opts = { -- accepts the common telescope picker config
 			layout_config = {
