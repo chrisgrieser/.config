@@ -2,12 +2,20 @@ return {
 	"neovim/nvim-lspconfig",
 	event = "BufReadPre",
 	config = function()
-		-- Enable completion-related capabilities (blink.cmp)
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-		-- enabled folding (nvim-ufo)
-		capabilities.textDocument.foldingRange =
-			{ dynamicRegistration = false, lineFoldingOnly = true }
+		-- completion capabilities (blink.cmp)
+		local blinkInstalled, blink = pcall(require, "blink.cmp")
+		if blinkInstalled then
+			capabilities = blink.get_lsp_capabilities()
+		end
+
+		-- folding capabilities (nvim-ufo)
+		local ufoInstalled = pcall(require, "ufo")
+		if ufoInstalled then
+			capabilities.textDocument.foldingRange =
+				{ dynamicRegistration = false, lineFoldingOnly = true }
+		end
 
 		local myServerConfigs = require("config.lsp-servers").serverConfigs
 		for lsp, config in pairs(myServerConfigs) do
