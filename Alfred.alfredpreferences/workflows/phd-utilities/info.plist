@@ -8,29 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CE244078-4A21-445D-9C22-C75F66AB2237</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<array>
 			<dict>
@@ -56,16 +33,6 @@
 		</array>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>D37D24AA-2684-4983-94DF-C099102D3C28</string>
@@ -183,63 +150,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://web.archive.org/web/*/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CE244078-4A21-445D-9C22-C75F66AB2237</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>wayback||archive</string>
+				<string>paywall</string>
 				<key>subtext</key>
-				<string>Wayback Machine &amp; archive.is</string>
+				<string>Current Browser Tab</string>
 				<key>text</key>
-				<string>Search Archives: {query}</string>
+				<string>Skip Paywall</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>87415244-9890-4029-96CC-7E577B4387E9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://archive.is/{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>5F0950F7-E1AC-422C-8F2E-82518BF9F068</string>
+			<string>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -282,27 +207,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>paywall</string>
-				<key>subtext</key>
-				<string>Current Browser Tab</string>
-				<key>text</key>
-				<string>Skip Paywall</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -326,15 +230,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>5F0950F7-E1AC-422C-8F2E-82518BF9F068</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>390</real>
-			<key>ypos</key>
-			<real>360</real>
-		</dict>
 		<key>6935998C-ACB6-4719-94AE-24E7616DB283</key>
 		<dict>
 			<key>colorindex</key>
@@ -342,18 +237,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>595</real>
-		</dict>
-		<key>87415244-9890-4029-96CC-7E577B4387E9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>note</key>
-			<string>tech news search</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>295</real>
+			<real>415</real>
 		</dict>
 		<key>987036EF-F86D-4C0F-8BF9-CD1E3A24B5E8</key>
 		<dict>
@@ -375,15 +259,6 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>CE244078-4A21-445D-9C22-C75F66AB2237</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>390</real>
-			<key>ypos</key>
-			<real>240</real>
-		</dict>
 		<key>D1B98F8C-2C7D-49B6-A1C7-F964D5FC9183</key>
 		<dict>
 			<key>colorindex</key>
@@ -391,7 +266,7 @@
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>305</real>
 		</dict>
 		<key>D37D24AA-2684-4983-94DF-C099102D3C28</key>
 		<dict>
@@ -400,7 +275,7 @@
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>480</real>
+			<real>300</real>
 		</dict>
 		<key>EF2DD7C4-DFD8-481D-9AEC-F9F8E4869643</key>
 		<dict>
@@ -411,7 +286,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>485</real>
+			<real>300</real>
 		</dict>
 		<key>FBB878E7-4A08-4C93-9C56-C996CBF6B8C0</key>
 		<dict>
