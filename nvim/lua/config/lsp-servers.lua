@@ -46,7 +46,6 @@ local extraDependencies = {
 	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
-	-- "markdownlint-cli2", -- efm
 }
 
 -- for auto-installation via `mason-tool-installer`
