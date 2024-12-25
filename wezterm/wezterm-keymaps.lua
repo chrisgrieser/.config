@@ -32,6 +32,9 @@ M.keys = {
 	-- REMAP VI MODE (cannot use `bindkey` for `<S-Space>`)
 	{ key = "Space", mods = "SHIFT", action = act.SendString("daw") },
 
+	-- REMAP accept & execute suggestion
+	{ key = "s", mods = "CMD", action = act.SendKey { key = "y", mods = "CTRL" } },
+
 	{ -- cycles panes, then tabs, then windows
 		key = "Enter",
 		mods = "CTRL",
