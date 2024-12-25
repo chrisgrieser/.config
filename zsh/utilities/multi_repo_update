@@ -11,8 +11,11 @@ repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|
 
 function actions_in_repo {
 	cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
-	if [[ ! -f ./.github/workflows/markdownlint.yml ]]; then
-		cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
+	if [[ -f ./.github/workflows/stylua.yml ]]; then
+		cp -f "$HOME/Desktop/stylua.yml" ./.github/workflows/stylua.yml
+	fi
+	if [[ -f ./.github/workflows/nvim-type-check.yml ]]; then
+		cp -f "$HOME/Desktop/nvim-type-check.yml" ./.github/workflows/nvim-type-check.yml
 	fi
 }
 
