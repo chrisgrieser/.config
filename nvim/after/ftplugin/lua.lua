@@ -86,7 +86,7 @@ bkeymap("n", "<leader>ci", function()
 		end,
 	})
 
-	vim.ui.select(uniqMatches, { prompt = " require" }, function(selection)
+	vim.ui.select(uniqMatches, { prompt = " require", kind = "telescope" }, function(selection)
 		if not selection then return end
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		if isAtBlank then
