@@ -1,6 +1,6 @@
 -- highlighting of filepaths and error codes
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "noice", "snacks_notif", "snacks_win" },
+	pattern = { "noice", "snacks_notif" },
 	callback = function(ctx)
 		vim.defer_fn(function()
 			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
@@ -62,6 +62,7 @@ return {
 		cmdline = {
 			format = {
 				search_down = { icon = "  ", view = "cmdline" },
+				search_up = { icon = "  ", view = "cmdline" },
 			},
 		},
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
