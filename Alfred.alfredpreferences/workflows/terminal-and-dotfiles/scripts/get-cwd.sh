@@ -7,13 +7,6 @@ if [[ "$focusedapp" == "com.apple.finder" ]]; then
 elif [[ "$focusedapp" == "com.neovide.neovide" ]]; then
 	# INFO requires something like `vim.opt.titlestring = "%{getcwd()}"`
 	dir_to_open=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
-elif [[ "$focusedapp" == "md.obsidian" ]]; then
-	# INFO `<C-p>` mapped to `Copy Absolute Path`
-	prev_clipboard=$(pbpaste)
-	osascript -e 'tell application "System Events" to keystroke "p" using {control down}'
-	sleep 0.1 # wait for clipboard
-	dir_to_open=$(dirname "$(pbpaste)")
-	echo -n "$prev_clipboard" | pbcopy
 elif [[ "$focusedapp" == "com.runningwithcrayons.Alfred-Preferences" ]]; then
 	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
 	workflow_id=$(sed -n "4p" "$HOME/Library/Application Support/Alfred/history.json" | cut -d'"' -f2)
