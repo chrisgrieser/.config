@@ -19,10 +19,6 @@
       "details & summary"
     ]
   },
-  "ignore file (ltex)": {
-    "body": "<!-- LTeX: enabled=false -->",
-    "prefix": "ignore file (ltex)"
-  },
   "image": {
     "body": "<img src=\"${1:image_path}\" alt=\"${2:alt text}\" width=\"${3:50%}\">",
     "description": "HTML syntax for images used to display images with reduced size",
