@@ -1,13 +1,15 @@
-nerdfonts.com##.subtlecircle
-nerdfonts.com##h1.center
+amazon.de###nav-logo-sprites
 amazon.de###spc-container
 breezewiki.com##div.bw-top-banner:first-child
+devdocs.io##._notice
 docs.google.com###kix-appview > div.docs-explore-widget.docs-ui-unprintable:last-child > div.docs-explore-widget-button.goog-inline-block.goog-flat-button > div.docs-explore-widget-button-outer-box.goog-inline-block > div.docs-explore-widget-button-inner-box.goog-inline-block
 docs.google.com###kix-appview > div.docs-explore-widget.docs-ui-unprintable:last-child > div.docs-explore-widget-button.goog-inline-block.goog-flat-button.goog-flat-button-hover
 duden.de###aab-overlay
 excalidraw.com###root > div.excalidraw-app > div.excalidraw.excalidraw-container > div.layer-ui__wrapper:first-child > div.FixedSideContainer.FixedSideContainer_side_top:first-child > div.App-menu.App-menu_top > div.layer-ui__wrapper__top-right.zen-mode-transition:last-child > div:last-child
 flaticon.com###layer_coupon
 flaticon.com###open_panel
+google.com###grepper_add_answer_button
+google.com###search > a.grepper_ad_holder:nth-child(2)
 inoreader.com###article_comment_bar_34517642316
 inoreader.com###article_social_bar_34517642316
 inoreader.com###consent_payment_expired
@@ -17,31 +19,18 @@ journals.sagepub.com###bookshelf-opener
 ko-fi.com###body-content > div:last-child > div.row:nth-child(5)
 linguee.com###dictionary > div.l_deepl_ad_container.wide_in_main:nth-child(3)
 linkedin.com###global-nav > div.global-nav__content:last-child > nav.global-nav__nav:last-child > ul.global-nav__primary-items > li.global-nav__primary-item.global-nav__spotlight:last-child
-macosicons.com###app > main.announcement-top-banner:first-child > a > article.Box
-macosicons.com###hero > div.PH-badge:first-child
-macosicons.com###hero > div.hero-text-area:last-child > h1.main-heading.m-t-0.coral-Heading--XL.coral-Heading--regular:nth-child(4)
-macosicons.com###hero > div.hero-text-area:last-child > p.coral-Body--S.m-b-0.p-b-8:nth-child(3)
-mankier.com##footer:nth-child(4)
-medium.com###root > div.a.b.c > div.l.c:last-child > div.m.n.l > div.o.p.q.r.s.t.u > main.dn.do.dp.dq.dr.ds.l.dt:nth-child(2) > div.l > div.ev.ew.ex.ey.ez.l:nth-child(2) > div.cf.ol.o.dd.om.on:nth-child(4) > div.oo.df.op.oq.or.o.ao.c
-medium.com###root > div.a.b.c > div.l.c:last-child > div.m.n.l > div.o.p.q.r.s.t.u > main.ej.ek.el.em.en.eo.l.ep:nth-child(2) > div.l > div.ev.ew.ex.ey.ez.l:nth-child(2) > div.dc.lr.o.dz.ls.lt:nth-child(3) > div.lu.eb.lv.lw.lx.o.ao.c
-medium.com###root > div.a.b.c > div.l.c:last-child > div.m.n.l > div.o.p.q.r.s.t.u > main.ej.ek.el.em.en.eo.l.ep:nth-child(2) > div.l > div.gd.ge.gf.gg.gh.l:nth-child(3) > div.dc.lz.o.dz.ma.mb:nth-child(3) > div.mc.eb.md.me.mf.o.ao.c
-medium.com###root > div.a.b.c > div.l.c:last-child > div.m.n.l > div.o.p.q.r.s.t.u > main.ej.ek.el.em.en.eo.l.ep:nth-child(2) > div.l > div.gd.ge.gf.gg.gh.l:nth-child(3) > div.dc.mf.o.dz.mg.mh:nth-child(3)
-medium.com##div:has(> div > div > .pw-multi-vote-icon)
-regex101.com###regex-app > div.HPRlT > div.MPQtP:nth-child(2) > div.jyUE5.XNbml:last-child
+messenger.com##[aria-label="Inbox switcher"]
+messenger.com##[aria-label="Thread list"] > div > div:last-child
+nerdfonts.com##.subtlecircle
+nerdfonts.com##h1.center
+nyaa.si##a[href$=".torrent"]
 regex101.com##div:last-child > div.cek5f > div.MPQtP > div.jyUE5.XNbml:last-child
 rewe.de##.qa-feefs-visual-popup
 shop.rewe.de##div.ReactModalPortal:nth-child(43) > div.ReactModal__Overlay.ReactModal__Overlay--after-open > div.ReactModal__Content.ReactModal__Content--after-open.feefs-popup > div.qa-feefs-visual-popup.feefs-visual-popup
 stackoverflow.com###announcement-banner
 stackoverflow.com##header.s-topbar.ps-fixed.t0.l0.js-top-bar:nth-child(3)
-google.com###grepper_add_answer_button
-devdocs.io##._notice
-nyaa.si##a[href$=".torrent"]
-messenger.com##[aria-label="Inbox switcher"]
-messenger.com##[aria-label="Thread list"] > div > div:last-child
-new.reddit.com###reddit-chat > div.fixed.bottom-0.right-xl:last-child > reddit-chat-host.block.min-w-0
-old.reddit.com##div.side:nth-child(4)
-google.com###search > a.grepper_ad_holder:nth-child(2)
-wikiwand.com###ww-main > article:nth-child(7) > div.extensions_wrapper__bELIb:last-child
-amazon.de###nav-logo-sprites
 www.crunchyroll.com##.avatar-badge
+www.netflix.com##.mobile-games-row
+www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
+www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
