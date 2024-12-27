@@ -7,11 +7,12 @@ app.includeStandardAdditions = true;
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const finder = Application("Finder");
 	const se = Application("System Events");
 
 	try {
-		const finderWin = decodeURIComponent(finder.insertionLocation().url().slice(7));
+		const finderWin = decodeURIComponent(
+			Application("Finder").insertionLocation().url().slice(7),
+		);
 		app.setTheClipboardTo(finderWin);
 
 		se.keystroke("g", { using: ["command down", "shift down"] });
