@@ -8,6 +8,19 @@ local spec = {
 			input = { enabled = true },
 		},
 	},
+	{
+		"nvim-lualine/lualine.nvim",
+		opts = {
+			options = {
+				always_show_tabs = true,
+			},
+			tabline = {
+				lualine_a = {
+					{ "datetime", style = "%H:%M:%S" },
+				},
+			},
+		},
+	},
 }
 
 --------------------------------------------------------------------------------
