@@ -18,7 +18,8 @@ alias zip='zip --recurse-paths --symlinks'
 #───────────────────────────────────────────────────────────────────────────────
 
 # EZA
-alias e='eza --all --long --time-style=relative --no-user --total-size \
+alias ls='eza --all --sort=newest --hyperlink'
+alias ll='eza --all --long --time-style=relative --no-user --total-size \
 	--smart-group --no-quotes --sort=newest --hyperlink'
 
 # JUST
