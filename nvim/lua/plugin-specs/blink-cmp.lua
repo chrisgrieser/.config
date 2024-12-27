@@ -6,6 +6,13 @@ return {
 	event = "InsertEnter",
 	version = "*", -- REQUIRED needed to download pre-built binary
 
+	init = function()
+		vim.api.nvim_create_autocmd("FocusGained", {
+			desc = "User: copy system clipboard to nvim",
+			callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
+		})
+	end,
+
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
 	opts = {
