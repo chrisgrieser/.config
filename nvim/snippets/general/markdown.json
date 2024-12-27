@@ -1,4 +1,12 @@
 {
+  "Codeblock": {
+    "body": [
+      "```${1:lang}",
+      "$CLIPBOARD$0",
+      "```"
+    ],
+    "prefix": "Codeblock"
+  },
   "caution (callout)": {
     "body": [
       "> [!CAUTION]",
@@ -79,13 +87,5 @@
     ],
     "description": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts",
     "prefix": "warning (callout)"
-  },
-  "Codeblock": {
-    "body": [
-      "```$0",
-      "$CLIPBOARD",
-      "```"
-    ],
-    "prefix": "Codeblock"
   }
 }

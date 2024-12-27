@@ -283,14 +283,13 @@ do
 	vim.api.nvim_create_autocmd("FileType", {
 		desc = "User: restore default behavior of `<CR>` for quickfix buffers.",
 		pattern = "qf",
-		---@diagnostic disable-next-line: missing-fields
 		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
 	})
 end
 
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
 keymap("n", "<BS>", function()
-	if vim.bo.buftype ~= "" then return end -- prevent accidental triggering
+	if vim.bo.buftype ~= "" then return end -- prevent accidental triggering in special buffers
 	vim.cmd.bprevious()
 end, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })

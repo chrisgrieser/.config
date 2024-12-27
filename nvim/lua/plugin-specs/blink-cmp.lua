@@ -6,6 +6,7 @@ return {
 	event = "InsertEnter",
 	version = "*", -- REQUIRED needed to download pre-built binary
 
+	-- PENDING https://github.com/Saghen/blink.cmp/issues/800
 	init = function()
 		vim.api.nvim_create_autocmd("FocusGained", {
 			desc = "User: copy system clipboard to nvim",
@@ -81,7 +82,8 @@ return {
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			cmdline = {
-				["<CR>"] = { "fallback" }, -- CR = execute (no need for accept since using `auto_insert`)
+				-- CR = execute cmd (no need for accept since using `auto_insert`)
+				["<CR>"] = { "fallback" },
 				["<Tab>"] = { "select_next", "show" },
 				["<S-Tab>"] = { "select_prev" },
 			},
