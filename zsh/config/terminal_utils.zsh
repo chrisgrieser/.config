@@ -69,7 +69,7 @@ _esc_on_empty_buffer() {
 	# shellcheck disable=2016
 
 	selected=$(
-		zsh -c "$rg_cmd" | sed -Ee '$color' |
+		zsh -c "$rg_cmd" | sed -Ee "$color" |
 			fzf --ansi --info=inline --height="50%" \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
 				--scheme=path --tiebreak=length,end

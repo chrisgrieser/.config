@@ -5,7 +5,14 @@ local spec = {
 	{
 		"folke/snacks.nvim",
 		opts = {
-			input = { enabled = true },
+			input = {
+				enabled = true,
+			},
+			styles = {
+				input = {
+					backdrop = true,
+				}
+			}
 		},
 	},
 	{
@@ -27,3 +34,5 @@ local spec = {
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"
 load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 require("lazy.minit").repro { spec = spec }
+
+vim.cmd.colorscheme("tokyonight-day")
