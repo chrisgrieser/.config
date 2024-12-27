@@ -55,7 +55,8 @@ return {
 				local absPath = vim.api.nvim_buf_get_name(bufnr):gsub("^oil://", "")
 				local cwd = vim.uv.cwd() or ""
 				local relPath = "." .. absPath:sub(#cwd + 1)
-				local title = vim.startswith(absPath, cwd) and relPath or absPath:gsub(vim.env.HOME, "~")
+				local title = vim.startswith(absPath, cwd) and relPath
+					or absPath:gsub(vim.env.HOME, "~")
 				return " " .. title .. " "
 			end,
 		},

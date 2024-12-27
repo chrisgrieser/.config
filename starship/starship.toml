@@ -110,7 +110,7 @@ stashed = '[ 󰜦 $count](fg:cyan bg:black)'
 untracked = '[ +$count](fg:green bg:black)'
 # `deleted` -> unstaged as well as staged deletion
 deleted = '[ -$count](fg:red bg:black)'
-modified = '[ ~$count](fg:#f1800e bg:black)'
+modified = '[ ~$count](fg:#fa881e bg:black)'
 renamed = '[ 󰑕 $count](fg:blue bg:black)'
 staged = '[ 󰐖 $count](fg:green bg:black)'
 conflicted = '[  $count](fg:red bg:black)'

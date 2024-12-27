@@ -17,14 +17,14 @@ return {
 		{ "<leader>fr", function() require("genghis").renameFile() end, desc = "󰑕 Rename" },
 		{ "<leader>fn", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 		{ "<leader>fw", function() require("genghis").duplicateFile() end, desc = " Duplicate" },
-		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󰪹 Move" },
+		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 
 		{
 			"<leader>rx",
 			function() require("genghis").moveSelectionToNewFile() end,
 			mode = "x",
-			desc = " Selection to new file",
+			desc = "󰝒 Selection to new file",
 		},
 		-- stylua: ignore
 		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },

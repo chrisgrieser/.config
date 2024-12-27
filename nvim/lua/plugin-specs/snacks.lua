@@ -91,8 +91,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "snacks_win_backdrop",
 	callback = function(ctx)
 		vim.defer_fn(function()
-		local winid = vim.iter(vim.api.nvim_list_wins())
-			:find(function(winid) return vim.api.nvim_win_get_buf(winid) == ctx.buf end)
+			local winid = vim.iter(vim.api.nvim_list_wins())
+				:find(function(winid) return vim.api.nvim_win_get_buf(winid) == ctx.buf end)
 			vim.wo[winid].colorcolumn = ""
 		end, 1)
 	end,
