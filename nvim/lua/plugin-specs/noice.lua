@@ -14,41 +14,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 
--- DOCS https://github.com/folke/noice.nvim#-routes
-local routes = {
-	-- write/deletion messages
-	{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
-
-	-- gitsigns.nvim
-	{ filter = { event = "msg_show", find = "^Hunk %d+ of %d+" }, view = "mini" },
-	{ filter = { event = "msg_show", find = "^No hunks$" }, view = "mini" },
-
-	-- nvim-treesitter
-	{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-	{ filter = { event = "notify", find = "All parsers are up%-to%-date" }, view = "mini" },
-
-	-- word added to spellfile via `zg`
-	{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
-
-	-- search
-	{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
-
-	--------------------------------------------------------------------
-
-	-- FIX https://github.com/artempyanykh/marksman/issues/348
-	{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
-
-	-- code actions
-	{ filter = { event = "notify", find = "No code actions available" }, skip = true },
-
-	-- unneeded info on search patterns when pattern not found
-	{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
-}
-
---------------------------------------------------------------------------------
-
 return {
 	"folke/noice.nvim",
 	event = "BufReadPre",
@@ -58,11 +23,32 @@ return {
 		{ "<D-0>", vim.cmd.NoiceHistory, mode = { "n", "v", "i" }, desc = "󰎟 All notifications" },
 	},
 	opts = {
-		routes = routes,
+		routes = {
+			-- DOCS https://github.com/folke/noice.nvim#-routes
+			-- write/deletion messages
+			{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
+			{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+			{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
+
+			-- search
+			{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
+			{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+
+			-- nvim-treesitter
+			{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
+
+			-- word added to spellfile via `zg`
+			{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
+
+			-- FIX https://github.com/artempyanykh/marksman/issues/348
+			{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
+
+			-- code actions
+			{ filter = { event = "notify", find = "No code actions available" }, skip = true },
+		},
 		cmdline = {
 			format = {
 				search_down = { icon = "  ", view = "cmdline" },
-				search_up = { icon = "  ", view = "cmdline" },
 			},
 		},
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
@@ -113,10 +99,6 @@ return {
 			progress = { enabled = false }, -- using my own
 			signature = { enabled = false }, -- using lsp_signature.nvim
 			hover = { enabled = false },
-			override = {
-				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-				["vim.lsp.util.stylize_markdown"] = true,
-			},
 		},
 	},
 }

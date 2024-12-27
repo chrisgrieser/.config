@@ -43,8 +43,8 @@ function line_count() {
 # file finder
 # `fd` replacement using just `rg`
 function fd {
-	rg --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
-		rg --color=always "$1"
+	rg --hidden --no-config --files --binary --ignore-file="$HOME/.config/ripgrep/ignore" |
+		rg "$1"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -60,24 +60,23 @@ _esc_on_empty_buffer() {
 
 	local selected
 	local rg_cmd="rg --no-config --files --sortr=modified --ignore-file='$HOME/.config/ripgrep/ignore'"
+	local color=$'s|([^/+]*)(/)|\e[0;36m\\1\e[0;33m\\2\e[0m|g'
 
 	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
 	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
 		--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-		eza --stdin --color=always --icons=always)"
+		sed -Ee '$color')"
 	# shellcheck disable=2016
 
 	selected=$(
-		zsh -c "$rg_cmd" |
-			eza --stdin --color=always --icons=always |
+		zsh -c "$rg_cmd" | sed -Ee '$color' |
 			fzf --ansi --info=inline --height="50%" \
 				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
 				--scheme=path --tiebreak=length,end
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
-
-	echo "$selected" | cut -c3- | xargs open # `cut` to remove the nerdfont icons
+	open "$selected"
 }
 zle -N _esc_on_empty_buffer
 bindkey '\e' _esc_on_empty_buffer
