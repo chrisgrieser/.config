@@ -124,7 +124,7 @@ return {
 	},
 	opts = {
 		dim = {
-			scope = { min_size = 4, max_size = 20 },
+			scope = { min_size = 4, max_size = math.floor(vim.o.lines * 0.8) },
 		},
 		indent = {
 			char = "│",
@@ -139,10 +139,6 @@ return {
 			modes = { "n" },
 			debounce = 300,
 		},
-		win = {
-			border = vim.g.borderStyle,
-			keys = { q = "close", ["<Esc>"] = "close" },
-		},
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time
@@ -153,6 +149,10 @@ return {
 		},
 		input = {
 			icon = false,
+		},
+		win = {
+			border = vim.g.borderStyle,
+			keys = { q = "close", ["<Esc>"] = "close" },
 		},
 		styles = {
 			input = {
@@ -171,6 +171,7 @@ return {
 				wo = { winblend = 0, wrap = true },
 			},
 			blame_line = {
+				backdrop = true,
 				width = 0.6,
 				height = 0.6,
 				border = vim.g.borderStyle,

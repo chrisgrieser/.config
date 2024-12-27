@@ -6,9 +6,6 @@ local themes = {
 		colorscheme = "dawnfox",
 		opacity = 0.92,
 		opts = {
-			options = {
-				styles = { comments = "italic" },
-			},
 			specs = {
 				dawnfox = {
 					-- add more contrast, especially for `lualine`
@@ -17,8 +14,7 @@ local themes = {
 			},
 			groups = {
 				dawnfox = {
-					-- indent-blank-line: less contrast
-					SnacksIndent = { fg = "#e0cfbd" },
+					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
@@ -87,12 +83,16 @@ local themes = {
 		},
 	},
 	{ --- TOKYONIGHT
-		-- config: https://github.com/folke/tokyonight.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+		-- config: https://github.com/folke/tokyonight.nvim#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
 		opacity = 0.91,
 		opts = {
 			style = "moon",
+			styles = {
+				comments = { italic = false },
+			},
+			day_brightness = 0.2,
 			lualine_bold = true,
 			on_colors = function(colors)
 				colors.git.change = colors.yellow -- yellow, not blue
@@ -105,6 +105,7 @@ local themes = {
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["diffAdded"] = { fg = colors.green }
 				hl["@string.documentation.python"] = { link = "Comment" }
+				hl["Comment"] = { fg = colors.comment, italic = false }
 
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
