@@ -150,8 +150,6 @@ return {
 				row = math.ceil(vim.o.lines / 2) - 3,
 				wo = { colorcolumn = "" },
 				keys = {
-					i_esc = { "<Esc>", { "cmp_close", "stopinsert" }, mode = "i" },
-					BS = { "<BS>", "<Nop>", mode = "n" }, -- prevent accidental closing (<BS> -> :bprev)
 					CR = { "<CR>", "confirm", mode = "n" },
 				},
 			},

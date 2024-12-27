@@ -19,7 +19,7 @@ debug-instance:
     # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
     # PENDING release after 0.13.3 fixes this
     neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} \
-        -c'sleep 300ms|bdelete|edit' &>/dev/null
+        -c'sleep 300ms|bprevious' &>/dev/null
 
 format-all-lua-files:
     export PATH="$HOME/.local/share/nvim/mason/bin":$PATH

@@ -124,7 +124,7 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `
 --------------------------------------------------------------------------------
 -- SURROUND & ARROW
 
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = ' Surround cword' })
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
 keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
@@ -289,7 +289,10 @@ do
 end
 
 keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
-keymap("n", "<BS>", vim.cmd.bprevious, { desc = "󰽙 Prev buffer" })
+keymap("n", "<BS>", function()
+	if vim.bo.buftype ~= "" then return end -- prevent accidental triggering
+	vim.cmd.bprevious()
+end, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 -- stylua: ignore start

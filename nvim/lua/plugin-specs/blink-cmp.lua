@@ -12,7 +12,6 @@ return {
 		sources = {
 			per_filetype = {
 				["rip-substitute"] = { "buffer" },
-				snacks_input = {},
 				gitcommit = {},
 			},
 			providers = {
