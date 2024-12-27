@@ -18,7 +18,9 @@ function M.openAlfredPref()
 		return
 	end
 	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(workflowUid)
+	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(
+		workflowUid
+	)
 	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
 end
 

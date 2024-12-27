@@ -23,7 +23,7 @@ return {
 				-- Obsidian Notice
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
-				zsh = 'osascript -e "display notification \"{{marker}}} ${{var}}\" with title \"{{var}}\""',
+				zsh = 'osascript -e "display notification "{{marker}}} ${{var}}" with title "{{var}}""',
 			},
 
 			-- Hammerspoon

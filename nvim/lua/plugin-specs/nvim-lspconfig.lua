@@ -6,9 +6,7 @@ return {
 
 		-- completion capabilities (blink.cmp)
 		local blinkInstalled, blink = pcall(require, "blink.cmp")
-		if blinkInstalled then
-			capabilities = blink.get_lsp_capabilities()
-		end
+		if blinkInstalled then capabilities = blink.get_lsp_capabilities() end
 
 		-- folding capabilities (nvim-ufo)
 		local ufoInstalled = pcall(require, "ufo")

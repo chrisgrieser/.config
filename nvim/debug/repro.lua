@@ -11,8 +11,8 @@ local spec = {
 			styles = {
 				input = {
 					backdrop = true,
-				}
-			}
+				},
+			},
 		},
 	},
 	{

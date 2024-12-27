@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "FocusLo
 
 			vim.api.nvim_buf_call(bufnr, function()
 				-- saving with explicit name prevents issues when changing `cwd`
-				-- `:update!` suppresses "The file has been changed since reading it!!!" 
+				-- `:update!` suppresses "The file has been changed since reading it!!!"
 				local vimCmd = ("silent! noautocmd lockmarks update! %q"):format(bufname)
 				vim.cmd(vimCmd)
 			end)
