@@ -164,7 +164,7 @@ declare const Application: {
 		delete(path: PathObj): void; // can delete folders, even non-empty ones
 		// accepts arrays only for *files*?! https://github.com/chrisgrieser/finder-vim-mode/issues/3
 		select(path: PathObj | PathObj[]): void;
-		selection(): PathObj[];
+		selection(): FinderItem[];
 		finderWindows: { target: FinderItem };
 		insertionLocation(): FinderItem;
 		// https://medium.com/hackernoon/javascript-for-automation-in-macos-3b499da40da1

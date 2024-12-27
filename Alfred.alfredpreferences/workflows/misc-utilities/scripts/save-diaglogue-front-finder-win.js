@@ -10,10 +10,8 @@ function run() {
 	const se = Application("System Events");
 
 	try {
-		const finderWin = decodeURIComponent(
-			Application("Finder").insertionLocation().url().slice(7),
-		);
-		app.setTheClipboardTo(finderWin);
+		const finderSel = decodeURIComponent(Application("Finder").selection()[0].url().slice(7));
+		app.setTheClipboardTo(finderSel);
 
 		se.keystroke("g", { using: ["command down", "shift down"] });
 		delay(0.2);
