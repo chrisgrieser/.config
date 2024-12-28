@@ -1,6 +1,7 @@
 return {
 	"chrisgrieser/nvim-tinygit",
 	event = "VeryLazy", -- load for status line component
+	branch = "dev",
 	keys = {
 			-- stylua: ignore start
 			{ "<leader>gg", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
@@ -35,7 +36,6 @@ return {
 			conventionalCommits = { enforce = true },
 			spellcheck = true,
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
-			insertIssuesOnHashSign = { enabled = true, next = "#" },
 		},
 		push = {
 			openReferencedIssues = true,
