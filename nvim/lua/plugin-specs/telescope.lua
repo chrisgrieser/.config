@@ -425,6 +425,25 @@ return {
 			desc = "󰭎 Local plugin code",
 		},
 		{
+			"gP",
+			function()
+				local projects = vim.iter(vim.fs.dir(vim.g.localRepos))
+					:fold({}, function(acc, item, type)
+						if type == "directory" then table.insert(acc, item) end
+						return acc
+					end)
+				vim.ui.select(projects, { prompt = " Select project: " }, function(selection)
+					if not selection then return end
+					local path = vim.fs.joinpath(vim.g.localRepos, selection)
+					require("telescope.builtin").find_files {
+						prompt_title = "󰉋 " .. selection,
+						cwd = path,
+					}
+				end)
+			end,
+			desc = " Project",
+		},
+		{
 			"g,",
 			function()
 				require("telescope.builtin").find_files {
@@ -472,9 +491,11 @@ return {
 					return out, highlights
 				end
 
+				local project = vim.fs.basename(vim.uv.cwd() or "n/a")
 				require("telescope.builtin").find_files {
 					file_ignore_patterns = ignore,
 					path_display = highlightChangedFiles,
+					prompt_title = "󰉋 " .. project,
 				}
 			end,
 			desc = "󰭎 Open file",
