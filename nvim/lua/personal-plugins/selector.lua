@@ -195,11 +195,13 @@ function M.selector(items, opts, on_choice)
 
 	-- UNMOUNT
 	vim.api.nvim_create_autocmd("WinLeave", {
-		desc = "Selector: Close window",
-		once = true,
+		desc = "Selector: Unmount",
 		callback = function()
 			local curWin = vim.api.nvim_get_current_win()
-			if curWin == winid then vim.api.nvim_buf_delete(bufnr, { force = true }) end
+			if curWin == winid then
+				vim.api.nvim_buf_delete(bufnr, { force = true })
+				return true -- deletes this autocmd
+			end
 		end,
 	})
 end
