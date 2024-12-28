@@ -253,15 +253,9 @@ return {
 				},
 				git_branches = {
 					prompt_title = "󰘬 Git branches",
-					show_remote_tracking_branches = true,
+					show_remote_tracking_branches = false,
 					previewer = false,
 					layout_config = { horizontal = { height = 0.4, width = 0.7 } },
-					mappings = {
-						i = {
-							["<D-n>"] = "git_create_branch",
-							["<C-r>"] = "git_rename_branch",
-						},
-					},
 				},
 				highlights = {
 					prompt_title = " Highlight groups",
