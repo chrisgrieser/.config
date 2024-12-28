@@ -1,6 +1,5 @@
 return {
 	"chrisgrieser/nvim-tinygit",
-	dependencies = "nvim-telescope/telescope.nvim",
 	event = "VeryLazy", -- load for status line component
 	branch = "dev",
 	keys = {
