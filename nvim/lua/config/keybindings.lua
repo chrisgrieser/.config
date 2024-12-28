@@ -39,6 +39,7 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
+
 -- Diagnostics
 keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
 keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })

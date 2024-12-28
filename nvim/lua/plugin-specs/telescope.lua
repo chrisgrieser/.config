@@ -231,9 +231,6 @@ return {
 						horizontal = { preview_width = 0.4 },
 					},
 
-					-- add `--all`
-					git_command = { "git", "log", "--all", "--format=%h %s", "--", "." },
-
 					-- show diffstats instead of simple status in the previewer
 					previewer = require("telescope.previewers").new_termopen_previewer {
 						dyn_title = function(_, entry) return entry.value end, -- hash as title
