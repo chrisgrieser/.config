@@ -1,18 +1,20 @@
 [
   {
     "settings": {
-      "openEditInWindow": false,
-      "openEditInWindow.popup": false,
-      "windowPosition": {},
-      "show-badge": false,
       "disableAll": false,
       "exposeIframes": false,
       "exposeStyleName": false,
+      "keepAlive": 0,
+      "keepAliveIdle": false,
       "newStyleAsUsercss": false,
+      "openEditInWindow": false,
+      "openEditInWindow.popup": false,
+      "patchCsp": false,
+      "show-badge": false,
       "styleViaASS": false,
       "styleViaXhr": false,
-      "patchCsp": false,
       "urlInstaller": true,
+      "windowPosition": {},
       "config.autosave": true,
       "schemeSwitcher.enabled": "system",
       "schemeSwitcher.nightStart": "18:00",
@@ -31,6 +33,7 @@
       "manage.actions.expanded": true,
       "manage.backup.expanded": true,
       "manage.filters.expanded": true,
+      "manage.links.expanded": true,
       "manage.minColumnWidth": 750,
       "manage.newUI": true,
       "manage.newUI.favicons": true,
@@ -40,7 +43,8 @@
       "manage.searchMode": "meta",
       "editor.options": {},
       "editor.toc.expanded": true,
-      "editor.options.expanded": true,
+      "editor.options.expanded": false,
+      "editor.options.style.expanded": false,
       "editor.lint.expanded": true,
       "editor.publish.expanded": true,
       "editor.lineWrapping": true,
@@ -152,7 +156,7 @@
     ],
     "updateDate": 1714737982050,
     "_id": "4742ee85-8386-46b2-8137-bfa85a272d1b",
-    "_rev": 1714737982051,
+    "_rev": 1733011285020,
     "id": 3
   },
   {
@@ -172,5 +176,22 @@
     "_id": "8f85b535-fc91-4e26-a07e-cfc4c8d6d061",
     "_rev": 1725445083547,
     "id": 4
+  },
+  {
+    "enabled": true,
+    "installDate": 1735385266309,
+    "name": "Optisearch",
+    "sections": [
+      {
+        "code": ".optisearch-box {\n    min-width: 400px;\n    margin-left: 20px;\n}",
+        "urlPrefixes": [
+          "https://www.google.com/search"
+        ]
+      }
+    ],
+    "updateDate": 1735385536249,
+    "_id": "f4b954dd-32e6-4f42-9656-d158cce0c53a",
+    "_rev": 1735385536250,
+    "id": 7
   }
 ]
