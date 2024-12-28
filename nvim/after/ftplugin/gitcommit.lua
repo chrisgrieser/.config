@@ -13,8 +13,8 @@ bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 bkeymap("i", "<Tab>", "<End>", { desc = " Goto EoL" })
 bkeymap("n", "<Tab>", "A", { desc = " Goto EoL" })
 
-local notDressingOrTinygit = vim.bo.buftype ~= "nofile"
-if notDressingOrTinygit then -- already has its own mappings
+local tinygitBuffer = vim.bo.buftype ~= "nofile"
+if tinygitBuffer then -- already has its own mappings
 	bkeymap("n", "<CR>", "ZZ", { desc = " Confirm" }) -- quitting with saving = committing
 	bkeymap("n", "q", vim.cmd.cquit, { desc = " Abort" }) -- quitting with error = aborting commit
 end
