@@ -35,13 +35,18 @@ return {
 		commit = {
 			conventionalCommits = { enforce = true },
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
+			border = vim.g.borderStyle,
 		},
 		push = {
 			openReferencedIssues = true,
 		},
 		history = {
 			autoUnshallowIfNeeded = true,
-			diffPopup = { width = 0.9, height = 0.9, border = vim.g.borderStyle },
+			diffPopup = {
+				width = 0.9,
+				height = 0.9,
+				border = vim.g.borderStyle,
+			},
 		},
 		statusline = {
 			blame = {
