@@ -1,13 +1,13 @@
 ## Configurations of interest
 People tell me they find the following configurations most useful:
-
-- [neovim config](/nvim) (~7000 LoC)
-- [hammerspoon config](/hammerspoon) (~2500 LoC)
-- [zshrc](/zsh) (~1500 LoC)
-- [Pandoc configs & pointers on how to use pandoc](/pandoc)
-- [Complex modifications for Karabiner Elements](/karabiner)
-- [obsidian-vimrc.vim](obsidian/vimrc/obsidian-vimrc.vim) via the [vimrc Support Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
-- [starship prompt](/starship/starship.toml) ⬇️
+- [neovim config](./nvim) (~7500 LoC)
+- [hammerspoon config](./hammerspoon) (~2500 LoC)
+- [zshrc](./zsh) (~1500 LoC)
+- [Pandoc configs & pointers on how to use pandoc](./pandoc)
+- [Complex modifications for Karabiner Elements](./karabiner)
+- [obsidian-vimrc.vim](./obsidian/vimrc/obsidian-vimrc.vim) via the [vimrc Support
+  Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
+- [starship prompt](./starship/starship.toml) ⬇️
 
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
