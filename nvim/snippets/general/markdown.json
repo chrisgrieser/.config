@@ -41,9 +41,9 @@
   },
   "insert table 2x2": {
     "body": [
-      "| ${1:Column1}   | ${2:Column2}   |",
+      "| Column1        | Column2        |",
       "|--------------- | -------------- |",
-      "| ${3:Item1.1}   | ${4:Item2.1}   |"
+      "| Item           | Item           |"
     ],
     "prefix": "table (2x2)"
   },
