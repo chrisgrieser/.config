@@ -113,7 +113,7 @@ return {
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
-					treesitter = { "lsp", "cmdline" },
+					treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},

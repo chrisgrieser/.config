@@ -9,15 +9,19 @@ vim.opt_local.spelloptions = "camel"
 bkeymap("n", "ge", "]s", { desc = "󰓆 Next misspelling" })
 bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 
+--------------------------------------------------------------------------------
+
 -- UTILITY KEYMAPS
 bkeymap("i", "<Tab>", "<End>", { desc = " Goto EoL" })
 bkeymap("n", "<Tab>", "A", { desc = " Goto EoL" })
 
-local tinygitBuffer = vim.bo.buftype ~= "nofile"
-if tinygitBuffer then -- already has its own mappings
+local tinygitBuffer = vim.bo.buftype == "nofile"
+if not tinygitBuffer then -- already has its own mappings
 	bkeymap("n", "<CR>", "ZZ", { desc = " Confirm" }) -- quitting with saving = committing
 	bkeymap("n", "q", vim.cmd.cquit, { desc = " Abort" }) -- quitting with error = aborting commit
 end
+
+--------------------------------------------------------------------------------
 
 -- REVERT
 -- replace first line of `git revert` with Conventional Commit keyword `revert`

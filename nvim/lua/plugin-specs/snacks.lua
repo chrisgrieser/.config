@@ -142,8 +142,8 @@ return {
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time
-			width = { min = 12, max = 0.5 },
-			height = { min = 1, max = 0.5 },
+			width = { min = 12, max = 0.45 },
+			height = { min = 1, max = 0.45 },
 			icons = { error = "󰅚", warn = "", info = "󰋽", debug = "󰃤", trace = "󰓗" },
 			top_down = false,
 		},
