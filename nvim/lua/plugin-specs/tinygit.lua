@@ -32,9 +32,7 @@ return {
 			moveToNextHunkOnStagingToggle = true,
 		},
 		commit = {
-			preview = true,
 			conventionalCommits = { enforce = true },
-			spellcheck = true,
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 		},
 		push = {
