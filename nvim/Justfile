@@ -22,5 +22,6 @@ debug-instance:
         -c'sleep 300ms|bprevious' &>/dev/null
 
 format-all-lua-files:
+    #!/usr/bin/env zsh
     export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
     stylua .
