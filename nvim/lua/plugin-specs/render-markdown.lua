@@ -10,6 +10,8 @@ return {
 			desc = " Markdown render",
 		},
 	},
+	---@module "render-markdown"
+	---@type render.md.UserConfig
 	opts = {
 		render_modes = { "n", "c", "i", "v", "V" },
 		sign = {
