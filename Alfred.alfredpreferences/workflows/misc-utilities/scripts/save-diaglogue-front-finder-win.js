@@ -10,8 +10,10 @@ function run() {
 	const se = Application("System Events");
 
 	try {
-		const finderSel = decodeURIComponent(Application("Finder").selection()[0].url().slice(7));
-		app.setTheClipboardTo(finderSel);
+		const selection = Application("Finder").selection()[0];
+		const frontWin = Application("Finder").insertionLocation();
+		const path = decodeURIComponent((selection || frontWin).url().slice(7));
+		app.setTheClipboardTo(path);
 
 		se.keystroke("g", { using: ["command down", "shift down"] });
 		delay(0.2);
@@ -19,6 +21,6 @@ function run() {
 		se.keystroke("v", { using: ["command down"] });
 		se.keyCode(36); // return-key
 	} catch (_error) {
-		return "No Finder window open.";
+		return "No Finder window open or no selection.";
 	}
 }
