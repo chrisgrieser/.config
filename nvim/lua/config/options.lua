@@ -7,6 +7,7 @@ vim.opt.swapfile = false -- doesn't help and only creates useless files and noti
 vim.opt.spell = false
 vim.opt.spellfile = vim.fs.normalize("~/.config/+ linter-configs/spellfile.add") -- needs `.add` ext
 vim.opt.spelllang = "en_us" -- even with spellcheck disabled, still relevant for `z=`
+vim.opt.spelloptions = "camel"
 
 vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
@@ -16,7 +17,6 @@ vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:2" -- too many potential signs for just 1
 
 vim.opt.wrap = false
-vim.opt.breakindent = true -- indent wrapped lines
 
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
