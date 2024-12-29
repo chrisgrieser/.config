@@ -19,7 +19,6 @@ bkeymap("x", "<Up>", [[:move '<-2<CR>gv]], { desc = "󰜷 Move selection up" })
 
 -- HIGHLIGHTING
 -- applies to whole window, but since that window is closed anyway, it's not a problem
-local ok, tinygit = pcall(require, "tinygit.shared.highlights")
-if ok and tinygit then tinygit.inlineCodeAndIssues() end
-
+vim.fn.matchadd("Number", [[#\d\+]])
+vim.fn.matchadd("@markup.raw.markdown_inline", [[`.\{-}`]]) -- .\{-} = non-greedy quantifier
 vim.fn.matchadd("NonText", [[^drop .*]])

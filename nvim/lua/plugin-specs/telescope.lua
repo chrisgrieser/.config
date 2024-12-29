@@ -398,7 +398,24 @@ return {
 
 		-- GIT
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
-		{ "<leader>gl", function() vim.cmd.Telescope("git_commits") end, desc = "󰭎 Log" },
+		{
+			"<leader>gl",
+			function()
+				-- add highlights for commit type
+				vim.api.nvim_create_autocmd("FileType", {
+					desc = "User: Telescope results commit type highlight",
+					pattern = "TelescopeResults",
+					callback = function(ctx)
+						vim.api.nvim_buf_call(ctx.buf, function()
+							vim.fn.matchadd("Title", [[\v\w+(\(.{-}\))?!?\ze: ]]) -- `\ze`: end of match
+						end)
+					end,
+				})
+
+				vim.cmd.Telescope("git_commits")
+			end,
+			desc = "󰭎 Log",
+		},
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
 
