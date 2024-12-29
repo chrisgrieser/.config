@@ -3,9 +3,9 @@ return {
 	keys = {
 		{ "<leader>cl", function() require("rulebook").lookupRule() end, desc = " Lookup rule" },
 		{
-			"<leader>cg",
+			"<leader>cc",
 			function() require("rulebook").ignoreRule() end,
-			desc = "󰅜 I[g]nore rule",
+			desc = " Comment ignore",
 		},
 		{
 			"<leader>cy",
@@ -16,7 +16,7 @@ return {
 			"<leader>cf",
 			function() require("rulebook").suppressFormatter() end,
 			mode = { "n", "x" },
-			desc = "󰉿 Suppress formatter",
+			desc = "󰉿 Formatter suppress",
 		},
 	},
 	opts = {
