@@ -5,7 +5,6 @@ vim.opt_local.listchars:remove("multispace") -- spacing in comments
 
 -- SPELLING
 vim.opt_local.spell = true
-vim.opt_local.spelloptions = "camel"
 bkeymap("n", "ge", "]s", { desc = "󰓆 Next misspelling" })
 bkeymap("n", "gE", "[s", { desc = "󰓆 Previous misspelling" })
 
