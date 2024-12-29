@@ -4,15 +4,7 @@
 return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
-	version = "*", -- REQUIRED needed to download pre-built binary
-
-	-- PENDING https://github.com/Saghen/blink.cmp/issues/800
-	init = function()
-		vim.api.nvim_create_autocmd("FocusGained", {
-			desc = "User: copy system clipboard to nvim",
-			callback = function() vim.fn.setreg('"', vim.fn.getreg("+")) end,
-		})
-	end,
+	version = "*", -- REQUIRED to download pre-built binary
 
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
@@ -42,6 +34,7 @@ return {
 					-- when manually showing completions to see available fields
 					min_keyword_length = 1,
 					score_offset = -1,
+					opts = { clipboard_register = "+" },
 				},
 				path = {
 					opts = { get_cwd = vim.uv.cwd },
@@ -82,8 +75,7 @@ return {
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			cmdline = {
-				-- CR = execute cmd (no need for accept since using `auto_insert`)
-				["<CR>"] = { "fallback" },
+				["<CR>"] = { "fallback" }, -- CR = execute (no need for accept since using `auto_insert`)
 				["<Tab>"] = { "select_next", "show" },
 				["<S-Tab>"] = { "select_prev" },
 			},
