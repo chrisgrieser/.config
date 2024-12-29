@@ -260,10 +260,10 @@ keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = "
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
 local delta = 5
-keymap("n", "<C-up>", "<C-w>" .. delta .. "-")
-keymap("n", "<C-down>", "<C-w>" .. delta .. "+")
-keymap("n", "<C-left>", "<C-w>" .. delta .. "<")
-keymap("n", "<C-right>", "<C-w>" .. delta .. ">")
+keymap("n", "<C-Up>", "<C-w>" .. delta .. "-")
+keymap("n", "<C-Down>", "<C-w>" .. delta .. "+")
+keymap("n", "<C-Left>", "<C-w>" .. delta .. "<")
+keymap("n", "<C-Right>", "<C-w>" .. delta .. ">")
 
 --------------------------------------------------------------------------------
 -- SNIPPETS

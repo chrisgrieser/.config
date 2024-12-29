@@ -1,7 +1,7 @@
 -- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
 --------------------------------------------------------------------------------
 
----Adds a component to the lualine after lualine was already set up.
+---Adds a component lualine was already set up.
 ---This enables lazy-loading plugins that add statusline components.
 ---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
@@ -28,7 +28,6 @@ return {
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "│", right = "│" },
-			always_show_tabs = true, -- this refers to the tabline
 		},
 		tabline = {
 			lualine_a = {
@@ -47,7 +46,8 @@ return {
 			},
 			lualine_y = {
 				{ -- recording status
-					function() return ("󰑊 Recording [%s]…"):format(vim.fn.reg_recording()) end,
+					function() return ("Recording [%s]…"):format(vim.fn.reg_recording()) end,
+					icon = "󰑊",
 					cond = function() return vim.fn.reg_recording() ~= "" end,
 					color = "lualine_y_diff_removed_normal", -- so it has correct bg from lualine
 				},
@@ -92,8 +92,8 @@ return {
 			lualine_x = {
 				{
 					"fileformat",
-					cond = function() return vim.bo.fileformat ~= "unix" end,
 					icon = "󰌑",
+					cond = function() return vim.bo.fileformat ~= "unix" end,
 				},
 				{
 					"diagnostics",

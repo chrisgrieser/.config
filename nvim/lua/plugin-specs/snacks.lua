@@ -123,9 +123,6 @@ return {
 		},
 	},
 	opts = {
-		dim = {
-			scope = { min_size = 4, max_size = math.floor(vim.o.lines * 0.8) },
-		},
 		indent = {
 			char = "│",
 			scope = { hl = "Comment" },
@@ -168,6 +165,7 @@ return {
 			},
 			notification = {
 				border = vim.g.borderStyle,
+				focusable = false,
 				wo = { winblend = 0, wrap = true },
 			},
 			blame_line = {
