@@ -20,5 +20,6 @@ done
 # QUIT TRANSMISSION, IF NO OTHER ACTIVE TORRENTS
 sleep 4 # time for new torrents to be initialized
 incomplete_dir=$(defaults read org.m0k.transmission IncompleteDownloadFolder)
-active_torrents=$(find "$incomplete_dir" -mindepth 1 -type directory -not -path "**/TV**")
+# exclude `TV`, cause it's a re-appearing special folder in the `Movies` folder
+active_torrents=$(find "$incomplete_dir" -mindepth 1 -not -path "**/TV**" -not -name ".DS_Store" -not -name ".localized")
 [[ -z "$active_torrents" ]] && killall "Transmission"
