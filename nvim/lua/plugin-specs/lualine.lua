@@ -1,3 +1,6 @@
+-- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
+--------------------------------------------------------------------------------
+
 ---Adds a component to the lualine after lualine was already set up.
 ---This enables lazy-loading plugins that add statusline components.
 ---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
@@ -25,7 +28,6 @@ return {
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "│", right = "│" },
-			-- component_separators = { left = "", right = "" },
 			always_show_tabs = true, -- this refers to the tabline
 		},
 		tabline = {
@@ -41,7 +43,7 @@ return {
 			lualine_b = {},
 			lualine_c = {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
-				{ function() return " " end, padding = 0 },
+				{ function() return " " end },
 			},
 			lualine_y = {
 				{ -- recording status
@@ -55,6 +57,7 @@ return {
 			lualine_a = {
 				{
 					"branch",
+					icon = "",
 					cond = function() -- only if not on main or master
 						local curBranch = require("lualine.components.branch.git_branch").get_branch()
 						return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
@@ -69,9 +72,11 @@ return {
 						local displayName = #name < maxLength and name
 							or vim.trim(name:sub(1, maxLength)) .. "…"
 
-						local ok, devicons = pcall(require, "mini.icons")
+						local ok, icons = pcall(require, "mini.icons")
 						if not ok then return displayName end
-						local icon = devicons.get("filetype", vim.bo.ft) or devicons.get("file", name)
+						local icon = icons.get("extension", name)
+							or icons.get("filetype", vim.bo.ft)
+							or icons.get("file", name)
 						if vim.bo.buftype == "help" then icon = "󰋖" end
 
 						return icon .. " " .. displayName
@@ -88,7 +93,7 @@ return {
 				{
 					"fileformat",
 					cond = function() return vim.bo.fileformat ~= "unix" end,
-					fmt = function(icon) return "󰌑 " .. icon end,
+					icon = "󰌑",
 				},
 				{
 					"diagnostics",
@@ -103,11 +108,7 @@ return {
 				},
 			},
 			lualine_z = {
-				{
-					"selectioncount",
-					cond = function() return vim.fn.mode():find("[Vv]") ~= nil end,
-					fmt = function(count) return "礪" .. count end,
-				},
+				{ "selectioncount", icon = "󰒆" },
 				{ "location" },
 			},
 		},
