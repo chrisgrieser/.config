@@ -86,6 +86,6 @@ if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 	fi
 
 	if [[ -n "$on_fork_branch" ]]; then
-		git switch --create "$on_fork_branch"
+		git switch --create "$on_fork_branch" &> /dev/null
 	fi
 fi
