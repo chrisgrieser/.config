@@ -31,13 +31,20 @@ return {
 	},
 	opts = {
 		stage = {
-			contextSize = 1,
 			moveToNextHunkOnStagingToggle = true,
 		},
 		commit = {
-			conventionalCommits = { enforce = true },
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			border = vim.g.borderStyle,
+			spellcheck = true,
+			conventionalCommits = {
+				enforce = true,
+				-- stylua: ignore
+				keywords = { -- add `improv`
+					"fix", "feat", "chore", "docs", "refactor", "build", "test",
+					"perf", "style", "revert", "ci", "break", "improv"
+				},
+			},
 		},
 		push = {
 			openReferencedIssues = true,
