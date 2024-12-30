@@ -2,7 +2,7 @@
 -- https://github.com/nvim-telescope/telescope.nvim/issues/3020
 
 -- CONFIG
-local blend = 50
+local blend = 40
 --------------------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd("FileType", {
