@@ -102,7 +102,9 @@ function M.altFileStatusbar()
 		-- icon
 		local ok, icons = pcall(require, "mini.icons")
 		if ok and icons then
-			icon = icons.get("extension", name) or icons.get("filetype", vim.bo[altBufNr].ft) or "#"
+			local isDefault = false
+			icon, _, isDefault = icons.get("file", altPath)
+			if isDefault then icon = icons.get("filetype", vim.bo[altBufNr].ft) end
 		end
 
 		-- name: consider if alt and current file have same basename

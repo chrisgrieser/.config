@@ -63,7 +63,7 @@ return {
 						return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
 					end,
 				},
-				{ -- file name & icon (my own variant)
+				{ -- file name & icon
 					function()
 						local maxLength = 30
 						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -74,9 +74,8 @@ return {
 
 						local ok, icons = pcall(require, "mini.icons")
 						if not ok then return displayName end
-						local icon = icons.get("extension", name)
-							or icons.get("filetype", vim.bo.ft)
-							or icons.get("file", name)
+						local icon, _, isDefault = icons.get("file", name)
+						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
 						if vim.bo.buftype == "help" then icon = "󰋖" end
 
 						return icon .. " " .. displayName

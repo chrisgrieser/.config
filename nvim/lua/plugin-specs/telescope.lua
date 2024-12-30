@@ -449,14 +449,20 @@ return {
 						if type == "directory" then table.insert(acc, item) end
 						return acc
 					end)
-				vim.ui.select(projects, { prompt = " Select project: " }, function(selection)
-					if not selection then return end
-					local path = vim.fs.joinpath(vim.g.localRepos, selection)
+
+				local function browseProject(project)
+					if not project then return end
+					local path = vim.fs.joinpath(vim.g.localRepos, project)
 					require("telescope.builtin").find_files {
-						prompt_title = "󰉋 " .. selection,
+						prompt_title = "󰉋 " .. project,
 						cwd = path,
 					}
-				end)
+				end
+				if #projects == 1 then
+					browseProject(projects[1])
+				else
+					vim.ui.select(projects, { prompt = " Select project: " }, browseProject)
+				end
 			end,
 			desc = " Project",
 		},
