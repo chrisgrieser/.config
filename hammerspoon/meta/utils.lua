@@ -258,9 +258,9 @@ function M.closeAllTheThings()
 	-- close all tabs instead of closing all windows to avoid confirmation prompt
 	-- "do you really want to x tabs?"
 	M.closeBrowserTabsWith(".")
-	M.closeAllWindows("Finder")
-
 	M.quitApps(M.videoAndAudioApps)
+
+	M.defer(3, function() M.closeAllWindows("Finder") end)
 end
 
 --------------------------------------------------------------------------------
