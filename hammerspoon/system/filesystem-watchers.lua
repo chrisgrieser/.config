@@ -81,9 +81,8 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			local year = name:match("^%d%d%d%d")
 			local bankPath = ("%s/Documents/Finanzen/%s/%s"):format(home, folder, year)
 			hs.fs.mkdir(bankPath)
-			-- delay ensures folder is created
-			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end)
-			hs.open(bankPath)
+			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
+			u.openUrlInBg(bankPath)
 
 		-- 5. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
