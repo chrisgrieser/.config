@@ -32,7 +32,7 @@ return {
 	config = function(_, opts)
 		require("mini.icons").setup(opts)
 
-		-- plugin still needing the devicons mock: telescope & lualine
+		-- plugin still needing the devicons mock: telescope
 		require("mini.icons").mock_nvim_web_devicons()
 	end,
 }
