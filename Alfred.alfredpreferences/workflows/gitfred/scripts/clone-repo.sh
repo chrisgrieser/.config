@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
+# shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
+# VARIABLES
 https_url="$1"
 source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
@@ -53,7 +55,7 @@ cd "$clone_dir" || return 1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# POST-CLONE ACTIONS
+# BRANCH ON CLONE
 if [[ -n "$branch_on_clone" ]]; then
 	# `git switch` fails silently if the branch does not exist
 	git switch "$branch_on_clone" &> /dev/null
@@ -76,7 +78,8 @@ if [[ "$restore_mtime" == "quick-partial" || $clone_depth -ne 0 ]]; then
 	git ls-tree -t -r --name-only HEAD | xargs touch -t "$old_timestamp"
 
 	# set mtime for all files touched in last x commits
-	last_commits=$(git log --format="%h" --max-count="$how_far")
+	# (reverse with `tail -r` so most recent commit comes last)
+	last_commits=$(git log --format="%h" --max-count="$how_far" | tail -r)
 	echo "$last_commits" | while read -r hash; do
 		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
 		changed_files=$(git log -1 --name-only --format="" "$hash")
