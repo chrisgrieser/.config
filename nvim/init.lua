@@ -48,9 +48,9 @@ safeRequire("config.keybindings")
 safeRequire("config.quickfix")
 safeRequire("config.yanking-and-pasting")
 
-safeRequire("config.backdrop-underline-fix")
 safeRequire("personal-plugins.selector")
-safeRequire("personal-plugins.git-conflict")
+-- safeRequire("personal-plugins.git-conflict")
+safeRequire("config.backdrop-underline-fix")
 
 -- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {

@@ -2,6 +2,8 @@
 # SOURCE https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts
 
 # initialize new repo
+cd "$HOME/Developer/" || return 1
+[[ -d "git-merge-test" ]] && rm -rf git-merge-test
 mkdir git-merge-test
 cd git-merge-test || return 1
 git init .
