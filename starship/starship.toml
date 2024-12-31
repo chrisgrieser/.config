@@ -13,7 +13,7 @@ $character\
 right_format = """\
 $jobs\
 $cmd_duration\
-${custom.alfred}$python$nodejs\
+${custom.alfred}$python\
 """
 
 add_newline = false

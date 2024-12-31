@@ -8,8 +8,6 @@
 	<integer>15</integer>
 	<key>fork_on_clone</key>
 	<true/>
-	<key>fork_on_hotkey_clone</key>
-	<true/>
 	<key>github_username</key>
 	<string>chrisgrieser</string>
 	<key>keyword_personal_repos</key>
@@ -19,7 +17,7 @@
 	<key>on_fork_branch</key>
 	<string>dev</string>
 	<key>restore_mtime</key>
-	<true/>
+	<string>quick-partial</string>
 	<key>setup_remotes_on_fork</key>
 	<true/>
 </dict>

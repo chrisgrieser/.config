@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# shellcheck disable=2154
 #───────────────────────────────────────────────────────────────────────────────
 
 https_url="$1"
@@ -60,11 +59,15 @@ if [[ -n "$branch_on_clone" ]]; then
 	git switch "$branch_on_clone" &> /dev/null
 fi
 
-# RESTORE MTIME, based on https://stackoverflow.com/a/36243002/22114136
-# PERF not checking the commit date of every file like in to SO snippet, but
-# only the last cloned (or last 50) commits to increase performance on large
-# repos
-if [[ "$restore_mtime" == "1" ]]; then
+# RESTORE MTIME
+# PERF `partial` checks only files touched in the last x commits (with x being clone
+# depth or 50), while `full` checks every single file. `partial` is magnitudes
+# quicker, but does not restore the mtime for all files correctly, since only
+# some commits are considered. If using shallow clones (`clone_depth` > 0), will
+# automatically use `partial`, since there is not enough git history for correct
+# mtime restoring, so `partial` and `full` have the same result, and using
+# `partial` is then always preferable due to being quicker.
+if [[ "$restore_mtime" == "quick-partial" || $clone_depth -ne 0 ]]; then
 	how_far=$([[ $clone_depth -eq 0 ]] && echo 50 || echo $((clone_depth - 1)))
 
 	# set date for all files to x+1 commits ago
@@ -78,8 +81,15 @@ if [[ "$restore_mtime" == "1" ]]; then
 		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
 		changed_files=$(git log -1 --name-only --format="" "$hash")
 		echo "$changed_files" | while read -r file; do
-			touch -t "$timestamp" "$file"
+			# check for file existence, since a file could have been deleted/moved
+			[[ -f "$file" ]] && touch -t "$timestamp" "$file"
 		done
+	done
+elif [[ "$restore_mtime" == "slow-full" ]]; then
+	# https://stackoverflow.com/a/36243002/22114136
+	git ls-tree -t -r --name-only HEAD | while read -r file; do
+		timestamp=$(git log --format="%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
+		touch -t "$timestamp" "$file"
 	done
 fi
 
