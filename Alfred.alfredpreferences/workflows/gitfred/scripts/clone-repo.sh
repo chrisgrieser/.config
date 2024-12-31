@@ -66,8 +66,23 @@ if [[ "$restore_mtime" == "full" ]]; then
 		timestamp=$(git log --format="%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
 		touch -t "$timestamp" "$file"
 	done
-elif [[ "$restore_mtime" == "minimal" ]]; then
-	echo
+elif [[ "$restore_mtime" == "simple" ]]; then
+	how_far=$((clone_depth - 1))
+	# set date for all files to x+1 commits ago
+	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far"^)
+	old_timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$oldest_commit")
+	git ls-tree -r --name-only HEAD | xargs touch -t "$old_timestamp"
+
+	# set mtime for all files touched in last x commits
+	last_commits=$(git log --format="%h" --max-count="$how_far")
+	for hash in $last_commits; do
+		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
+		files=$(git log -1 --name-only --format="" "$hash")
+		for file in $files; do
+			touch -t "$timestamp" "$file"
+		done
+	done
+
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
