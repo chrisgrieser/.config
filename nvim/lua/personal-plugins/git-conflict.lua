@@ -7,7 +7,7 @@ local config = {
 	whenConflict = {
 		disableDiagnostics = true,
 		moveToFirst = true,
-		detachGitsigns = true,
+		detachGitsigns = false,
 	},
 	keys = {
 		leader = "<leader>m",
@@ -140,7 +140,7 @@ local function setupConflictMarkers(out, bufnr)
 		table.insert(toggles, "Gitsigns")
 	end
 	if #toggles > 0 then
-		local msg = "*" .. table.concat(toggles, " and ") .. " disabled for this buffer.*"
+		local msg = "*" .. table.concat(toggles, " and ") .. " disabled in buffer.*"
 		table.insert(info, msg)
 	end
 
