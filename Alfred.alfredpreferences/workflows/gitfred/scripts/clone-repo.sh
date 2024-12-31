@@ -60,12 +60,14 @@ if [[ -n "$branch_on_clone" ]]; then
 	git switch "$branch_on_clone" &> /dev/null
 fi
 
-if [[ "$restore_mtime" == "1" ]]; then
+if [[ "$restore_mtime" == "full" ]]; then
 	# https://stackoverflow.com/a/36243002/22114136
-	git ls-tree -r -t --full-name --name-only HEAD | while read -r file; do
-		timestamp=$(git log --pretty="format:%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
+	git ls-tree -r --name-only HEAD | while read -r file; do
+		timestamp=$(git log --format="%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
 		touch -t "$timestamp" "$file"
 	done
+elif [[ "$restore_mtime" == "minimal" ]]; then
+	echo
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
