@@ -1944,7 +1944,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<string>restore mtime</string>
 			</dict>
 			<key>description</key>
-			<string>Git erases the modification time of all files when cloning. Enabling this will restore the modification time from the commit log. (Note that the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
+			<string>Git erases the modification time of all files when cloning. Enabling this will restore the modification time from the commit log. It is, however, slow on large repos. (Note that the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>

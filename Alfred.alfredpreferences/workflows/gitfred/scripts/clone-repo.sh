@@ -63,7 +63,7 @@ fi
 if [[ "$restore_mtime" == "1" ]]; then
 	# https://stackoverflow.com/a/36243002/22114136
 	git ls-tree -r -t --full-name --name-only HEAD | while read -r file; do
-		timestamp=$(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 HEAD -- "$file")
+		timestamp=$(git log --pretty="format:%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
 		touch -t "$timestamp" "$file"
 	done
 fi
