@@ -1425,7 +1425,12 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
+	<string>## Info
+`restore mtime` has been reworked to be magnitudes quicker. 
+If you have enabled it in past versions, please check your workflow configuration, 
+since there are no different options for it.
+
+## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
@@ -1937,18 +1942,29 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>restore mtime</string>
+				<string>disabled</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>disabled</string>
+						<string>disabled</string>
+					</array>
+					<array>
+						<string>partial (quick)</string>
+						<string>quick-partial</string>
+					</array>
+					<array>
+						<string>full (slow)</string>
+						<string>slow-full</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Git erases the modification time of all files when cloning. Enabling this will restore the modification time from the commit log. It is, however, slow on large repos. (Note that the modification time only goes as far back as the oldest commit, so you might want to increase clone depth.)</string>
+			<string>Restores the modification time of files that git erases when cloning. "full" restores the mtime for every file, but is very slow on large repos. "partial" is magnitudes quicker, but restores the mtime only for files touched in the last x commits. When using cloning shallowly (clone depth &gt; 0), will always use "partial".</string>
 			<key>label</key>
-			<string></string>
+			<string>restore mtime</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>restore_mtime</string>
 		</dict>
@@ -2034,7 +2050,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.5</string>
+	<string>1.7.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
