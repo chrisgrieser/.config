@@ -166,8 +166,8 @@ local function searchCountIndicator(mode)
 end
 
 -- without the `searchCountIndicator`, this `on_key` simply does `auto-nohl`
-vim.on_key(function(char)
-	local key = vim.fn.keytrans(char)
+vim.on_key(function(key, _typed)
+	key = vim.fn.keytrans(key)
 	local isCmdlineSearch = vim.fn.getcmdtype():find("[/?]") ~= nil
 	local isNormalMode = vim.api.nvim_get_mode().mode == "n"
 	local searchStarted = (key == "/" or key == "?") and isNormalMode
@@ -177,7 +177,7 @@ vim.on_key(function(char)
 
 	-- works for RHS, therefore no need to consider remaps
 	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
-	local shortPattern = vim.fn.getreg("/"):gsub([[\V\C]], ""):len() <= 1 -- for `fF`
+	local shortPattern = vim.fn.getreg("/"):gsub([[\V\C]], ""):len() <= 1 -- for `fF` function
 
 	if searchCancelled or (not searchMovement and not searchConfirmed) then
 		vim.opt.hlsearch = false
