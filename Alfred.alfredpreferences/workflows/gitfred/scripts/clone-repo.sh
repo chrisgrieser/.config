@@ -32,12 +32,12 @@ elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]]; then
 fi
 
 # clone with depth
-if [[ $clone_depth == "0" ]]; then
+if [[ $clone_depth -eq 0 ]]; then
 	msg=$(git clone "$ssh_url" --no-single-branch --no-tags "$clone_dir" 2>&1)
 else
 	# WARN depth=1 is dangerous, as amending such a commit does result in a
 	# new commit without parent, effectively destroying git history (!!)
-	[[ $clone_depth == "1" ]] && clone_depth=2
+	[[ $clone_depth -eq 1 ]] && clone_depth=2
 	msg=$(git clone "$ssh_url" --depth="$clone_depth" --no-single-branch --no-tags "$clone_dir" 2>&1)
 fi
 
@@ -60,29 +60,27 @@ if [[ -n "$branch_on_clone" ]]; then
 	git switch "$branch_on_clone" &> /dev/null
 fi
 
-if [[ "$restore_mtime" == "full" ]]; then
-	# https://stackoverflow.com/a/36243002/22114136
-	git ls-tree -r --name-only HEAD | while read -r file; do
-		timestamp=$(git log --format="%cd" --date="format:%Y%m%d%H%M.%S" -1 HEAD -- "$file")
-		touch -t "$timestamp" "$file"
-	done
-elif [[ "$restore_mtime" == "simple" ]]; then
-	how_far=$((clone_depth - 1))
+# RESTORE MTIME, based on https://stackoverflow.com/a/36243002/22114136
+# PERF not checking the commit date of every file like in to SO snippet, but
+# only the last cloned (or last 50) commits to increase performance on large
+# repos
+if [[ "$restore_mtime" == "1" ]]; then
+	how_far=$([[ $clone_depth -eq 0 ]] && echo 50 || echo $((clone_depth - 1)))
+
 	# set date for all files to x+1 commits ago
 	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far"^)
 	old_timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$oldest_commit")
-	git ls-tree -r --name-only HEAD | xargs touch -t "$old_timestamp"
+	git ls-tree -t -r --name-only HEAD | xargs touch -t "$old_timestamp"
 
 	# set mtime for all files touched in last x commits
 	last_commits=$(git log --format="%h" --max-count="$how_far")
-	for hash in $last_commits; do
+	echo "$last_commits" | while read -r hash; do
 		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
-		files=$(git log -1 --name-only --format="" "$hash")
-		for file in $files; do
+		changed_files=$(git log -1 --name-only --format="" "$hash")
+		echo "$changed_files" | while read -r file; do
 			touch -t "$timestamp" "$file"
 		done
 	done
-
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
