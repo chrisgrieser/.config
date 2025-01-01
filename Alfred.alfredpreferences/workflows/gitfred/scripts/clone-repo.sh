@@ -75,7 +75,7 @@ if [[ "$restore_mtime" == "quick-partial" || $clone_depth -ne 0 ]]; then
 	# set date for all files to x+1 commits ago
 	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far")
 	old_timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$oldest_commit")
-	git ls-tree -t -r --name-only HEAD | xargs touch -t "$old_timestamp"
+	git ls-tree -z -t -r --name-only HEAD | xargs -0 touch -t "$old_timestamp"
 
 	# set mtime for all files touched in last x commits
 	# (reverse with `tail -r` so most recent commit comes last)
