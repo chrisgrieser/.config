@@ -105,6 +105,7 @@ return {
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
+					align_to = "none",
 					treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
