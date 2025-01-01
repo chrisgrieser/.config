@@ -81,7 +81,7 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
--- Increment/Decrement, or toggle true/false
+-- Increment/decrement, or toggle true/false
 -- stylua: ignore
 keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
 keymap({ "n", "x" }, "ü", "<C-x>", { desc = "󰍵 Decrement" })
