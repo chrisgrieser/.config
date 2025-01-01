@@ -36,7 +36,7 @@ function line_count() {
 		-not -path "./tests/**" \
 		-not -path "./.git/**" -not -path "./node_modules/**" -not -path "./doc/**" \
 		-not -path "**/__pycache__/**" -not -path "./.venv/**" -not -name ".DS_Store" \
-		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|json|ya?ml|md|toml|editorconfig)$" \
+		-not -name "LICENSE" -not -iregex ".*\.(webp|png|svg|jpe?g|json|ya?ml|md|toml|editorconfig)$" \
 		-print0 | xargs -0 wc -l
 }
 
@@ -59,20 +59,17 @@ _esc_on_empty_buffer() {
 	fi
 
 	local selected
-	local rg_cmd="rg --no-config --files --sortr=modified --ignore-file='$HOME/.config/ripgrep/ignore'"
-
-	# reloads on ctrl-h (`--bind=ctrl-h`) OR when no result found (`--bind=zero`)
-	local reload="reload($rg_cmd --hidden --no-ignore --no-ignore-files \
-		--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
-		eza --stdin --color=always --icons=always --sort=oldest)"
-	# shellcheck disable=2016
+	## no need for `--sortr=modified`, since using `eza --sort=oldest` afterwards
+	local rg_cmd="rg --no-config --files --ignore-file='$HOME/.config/ripgrep/ignore'"
 
 	selected=$(
 		zsh -c "$rg_cmd" |
 			eza --stdin --color=always --icons=always --sort=oldest |
 			fzf --ansi --info=inline --height="50%" \
-				--header="^H: --hidden" --bind="ctrl-h:$reload" --bind="zero:$reload" \
-				--scheme=path --tiebreak=length,end
+				--header="^H: --hidden" --scheme=path --tiebreak=length,end \
+				--bind="ctrl-h:reload($rg_cmd --hidden --no-ignore --no-ignore-files \
+					--glob='!/.git/' --glob='!node_modules' --glob='!__pycache__' --glob='!.DS_Store' |
+					eza --stdin --color=always --icons=always --sort=oldest)"
 	)
 	zle reset-prompt
 	[[ -z "$selected" ]] && return 0
@@ -154,7 +151,7 @@ function hs() {
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# copy [l]ast [c]ommand
+# copy Last Command
 function lc() {
 	local to_copy cmd
 	if [[ $# -gt 0 ]]; then
