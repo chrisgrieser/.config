@@ -73,13 +73,13 @@ if [[ "$restore_mtime" == "quick-partial" || $clone_depth -ne 0 ]]; then
 	how_far=$([[ $clone_depth -eq 0 ]] && echo 50 || echo $((clone_depth - 1)))
 
 	# set date for all files to x+1 commits ago
-	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far"^)
+	oldest_commit=$(git log -1 --format="%h" HEAD~"$how_far")
 	old_timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$oldest_commit")
 	git ls-tree -t -r --name-only HEAD | xargs touch -t "$old_timestamp"
 
 	# set mtime for all files touched in last x commits
 	# (reverse with `tail -r` so most recent commit comes last)
-	last_commits=$(git log --format="%h" --max-count="$how_far" | tail -r)
+	last_commits=$(git log --format="%h" --max-count="$((how_far - 1))" | tail -r)
 	echo "$last_commits" | while read -r hash; do
 		timestamp=$(git log -1 --format="%cd" --date="format:%Y%m%d%H%M.%S" "$hash")
 		changed_files=$(git log -1 --name-only --format="" "$hash")
