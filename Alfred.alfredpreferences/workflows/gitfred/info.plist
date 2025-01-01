@@ -1437,12 +1437,10 @@ since there are no different options for it.
 	  releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
-	  Optionally, creates a fork on GitHub with the `gh` cli and prepares the
-	  repo for a PR.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Search the repo for a query via GitHub Code Search.
 - Access public repositories you own via `gmy`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
-	  Finder. Otherwise, open the repo's GitHub page.
+	  the terminal. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
@@ -2050,7 +2048,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.2</string>
+	<string>1.7.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
