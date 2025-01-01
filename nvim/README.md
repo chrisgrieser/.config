@@ -61,7 +61,6 @@
 - [rcarriga/nvim-dap](https://github.com/rcarriga/nvim-dap)
 - [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
 - [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
-- [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
 - [theHamsta/nvim-dap](https://github.com/theHamsta/nvim-dap)
 - [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
