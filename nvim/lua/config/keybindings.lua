@@ -266,15 +266,6 @@ keymap("n", "<C-Left>", "<C-w>" .. delta .. "<")
 keymap("n", "<C-Right>", "<C-w>" .. delta .. ">")
 
 --------------------------------------------------------------------------------
--- SNIPPETS
-
--- exit snippet https://github.com/neovim/neovim/issues/26449#issuecomment-1845293096
-keymap({ "i", "s" }, "<Esc>", function()
-	vim.snippet.stop()
-	return "<Esc>"
-end, { desc = "󰩫 Exit snippet", expr = true })
-
---------------------------------------------------------------------------------
 -- BUFFERS & FILES
 
 do
