@@ -37,6 +37,17 @@
 			<key>url</key>
 			<string>https://macosicons.com/#/{query}</string>
 		</dict>
+		<key>2F9523F0-81B2-425B-A6DE-2E3CA2582212</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>gif</string>
+			<key>text</key>
+			<string>Tenor gifs: '{query}'</string>
+			<key>url</key>
+			<string>https://tenor.com/search/{query}-gifs</string>
+		</dict>
 		<key>33661F1E-FC5A-4DF3-9BFD-DC3174B096B3</key>
 		<dict>
 			<key>enabled</key>
