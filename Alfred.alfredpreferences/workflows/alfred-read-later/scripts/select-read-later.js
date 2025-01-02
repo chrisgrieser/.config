@@ -63,7 +63,7 @@ function run() {
 	// "Add current browser tab" item
 	readLaterItems.unshift({
 		title: "🔖 Add current browser tab",
-		subtitle: "",
+		subtitle: "The browser needs to be the frontmost app.",
 		variables: { mode: "add" },
 		mods: {
 			cmd: { valid: false, subtitle: "❌ Not possible." },

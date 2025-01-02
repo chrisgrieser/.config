@@ -36,6 +36,7 @@ function run(argv) {
 
 	// append
 	const filepath = $.getenv("read_later_file");
+	// `readFile` does not fail but only returns empty string if file doesn't exist
 	const currentFile = readFile(filepath);
 	const newFile = currentFile.trim() + "\n" + mdLinkTask;
 	writeToFile(filepath, newFile);
