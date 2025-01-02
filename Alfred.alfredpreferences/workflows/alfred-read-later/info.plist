@@ -181,7 +181,7 @@
 				<key>text</key>
 				<string></string>
 				<key>title</key>
-				<string>⚠️ No supported browser open</string>
+				<string>⚠️ Frontmost app is not a supported browser.</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -504,8 +504,8 @@ for previews of the items.
 	+ No dependency on any read-later service.
 	+ The reading list is available offline.
 	+ Since Markdown is a widely supported format, you can access your items in
-	  many other apps as well, such as [Obsidian](https://obsidian.md/).
-	  (Interoperability)
+	  many other apps as well, such as [Obsidian](https://obsidian.md/)
+	  (interoperability).
 	+ Easy backup: Just copypaste the file.
 	+ Easy sync: Just save the file in a cloud drive like iCloud.
 	+ By saving in a cloud drive, you can also access the reading list on mobile
@@ -651,7 +651,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>Markdown file where the items should be saved.</string>
 			<key>label</key>
-			<string>Read Later File</string>
+			<string>Read-later file</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -698,7 +698,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>description</key>
 			<string>when saving new entries</string>
 			<key>label</key>
-			<string>Add Date</string>
+			<string>Add date</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -725,7 +725,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.0</string>
+	<string>1.5.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
