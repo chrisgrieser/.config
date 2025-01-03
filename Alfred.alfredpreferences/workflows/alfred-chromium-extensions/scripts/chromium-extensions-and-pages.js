@@ -24,8 +24,6 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 /** @type {Record<string, string>} */
 const specialAnchors = {
-	"uBlock Origin": "#1p-filters.html",
-	"AdGuard AdBlocker": "#user-filter",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	Violentmonkey: "#scripts",
 };
@@ -54,11 +52,9 @@ function run() {
 
 	// SETTINGS
 	const settings = JSON.parse(readFile("./scripts/all-chromium-browser-settings.json"));
-	settings.push(...browserVars.settingsPages[browser]);
+	settings.push(...browserVars.extraSettingsPages[browser]);
 	const iconPath = browserVars.appIcon[browser];
-	const uri = browserVars.uri[browser];
 	for (const page of settings) {
-		page.arg = page.arg.replace(/^chrome:\/\//, uri);
 		page.uid = page.arg;
 		page.icon = { path: iconPath };
 		page.mods = {

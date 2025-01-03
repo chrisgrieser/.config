@@ -3,6 +3,9 @@ local bkeymap = require("config.utils").bufKeymap
 
 vim.opt_local.listchars:remove("multispace") -- spacing in comments
 
+-- auto-break on textwidth
+vim.defer_fn(function() vim.opt_local.formatoptions:append("t") end, 1)
+
 -- SPELLING
 vim.opt_local.spell = true
 bkeymap("n", "ge", "]s", { desc = "󰓆 Next misspelling" })

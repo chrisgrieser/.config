@@ -117,17 +117,17 @@ rules:
         to:
           - shell_command: |
               osascript -e '
-                set theDesktop to POSIX path of (path to desktop folder as string) 
-                set dotfiles to (POSIX path of (path to home folder as string) & ".config/") 
+                set theDesktop to POSIX path of (path to desktop folder as string)
+                set dotfiles to (POSIX path of (path to home folder as string) & ".config/")
                 
-                tell application "Finder" 
-                  -- `Finder window` instead of win ensures regular window, not QuickLook or prompt 
-                  if not (front Finder window exists) then return 
-                  
-                  set currentPath to POSIX path of (target of front Finder window as alias) 
-                  set toGoto to theDesktop 
-                  if (currentPath is theDesktop) then set toGoto to dotfiles 
-                  set target of front Finder window to (toGoto as POSIX file) 
+                tell application "Finder"
+                  -- `Finder window` instead of win ensures regular window, not QuickLook or prompt
+                  if not (front Finder window exists) then return
+
+                  set currentPath to POSIX path of (target of front Finder window as alias)
+                  set toGoto to theDesktop
+                  if (currentPath is theDesktop) then set toGoto to dotfiles
+                  set target of front Finder window to (toGoto as POSIX file)
                 end tell 
               '
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
@@ -426,7 +426,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 50 }
           - shell_command: pbpaste -pboard ruler | pbcopy
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
-      # scroll to bottom (mnenonic: vim's G)
+      # scroll to bottom (mnemonic: vim's G)
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [command] } }
         to:
@@ -472,7 +472,7 @@ rules:
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           # needs UI element, since name of the menu items changes
-          # howto inpect UI-elements https://www.sudoade.com/gui-scripting-with-applescript/
+          # howto inspect UI-elements https://www.sudoade.com/gui-scripting-with-applescript/
           - shell_command: |
               osascript -e '
                 tell application "System Events" to tell process "Calendar"
@@ -491,6 +491,13 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
+      # toggle side bar
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, control] }
+        conditions:
+          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
       # toggle search bar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
