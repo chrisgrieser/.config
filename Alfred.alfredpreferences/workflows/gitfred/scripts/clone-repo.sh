@@ -12,6 +12,8 @@ ssh_url="git@github.com:$source_repo"
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
 
+cat "bla" | grep "a"
+
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
 
