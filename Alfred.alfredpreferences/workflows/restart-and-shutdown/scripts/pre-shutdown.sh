@@ -4,8 +4,10 @@ set -e
 
 alfred_dir="$PWD" # stored, since cd'ing later
 
-# So Obsidian isn't re-opened on startup, preventing sync issues
-killall "Obsidian"
+# So Obsidian isn't re-opened on startup causing sync issues
+if pgrep -xq "Obsidian"; then
+	killall "Obsidian"
+fi
 
 function notify() {
 	name=$1
