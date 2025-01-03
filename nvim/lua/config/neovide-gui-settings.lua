@@ -26,6 +26,10 @@ else
 	vim.g.neovide_padding_left = 7
 end
 
+vim.opt.linespace = -2 -- less line height
+
+--------------------------------------------------------------------------------
+
 -- cmd+ / cmd- to change zoom
 local function changeScaleFactor(delta)
 	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
@@ -48,7 +52,7 @@ vim.g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml`
 vim.g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_hide_mouse_when_typing = true
-vim.opt.linespace = -2 -- less line height
+vim.g.neovide_scroll_animation_length = 0
 
 --------------------------------------------------------------------------------
 -- CURSOR

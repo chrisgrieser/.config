@@ -30,6 +30,7 @@ return {
 			default = { "imports", "comment" },
 			json = { "array" },
 			markdown = {}, -- avoid everything becoming folded
+			toml = {},
 			-- use `:UfoInspect` to get see available fold kinds
 		},
 		open_fold_hl_timeout = 800,

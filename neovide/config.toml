@@ -1,10 +1,11 @@
 # DOCS https://neovide.dev/config-file.html#available-settings
 
 frame = "buttonless"
-no-multigrid = true
+no-multigrid = false
 title-hidden = true
 tabs = false
-theme = "auto" # BUG currently (v.0.13.3) ignored, needs to be set via `vim.g.neovide_theme`
+mouse-cursor-icon = "i-beam"
+theme = "auto" # BUG currently (v.0.14) ignored, needs to be set via `vim.g.neovide_theme`
 
 [font]
 normal = ["JetBrainsMonoNL NF", "Monaco"]
