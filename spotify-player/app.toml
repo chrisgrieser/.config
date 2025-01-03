@@ -1,1 +1,14 @@
-/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_app_toml.txt
+# DOCS https://github.com/aome510/spotify-player/blob/master/docs/config.md
+#───────────────────────────────────────────────────────────────────────────────
+
+# DOCS Enable Spotify Connect https://github.com/aome510/spotify-player#spotify-connect
+# Set up new client: https://developer.spotify.com/dashboard/
+client_id_cmd = 'cat "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles/spotify_client_id.txt"'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+default_device = "Wohnzimmer Echo"
+
+# only works when the TUI is open. Using the shell commands via the
+# Karabiner config instead, so the media keys always work.
+enable_media_control = false
