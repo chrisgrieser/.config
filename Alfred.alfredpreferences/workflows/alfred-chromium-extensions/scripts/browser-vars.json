@@ -11,25 +11,19 @@
 		"Arc": "/Applications/Arc.app/Contents/Resources/AppIcon.icns",
 		"Thorium": "/Applications/Thorium.app/Contents/Resources/app.icns"
 	},
-	"settingsPages": {
+	"extraSettingsPages": {
 		"Google Chrome": [],
 		"Brave Browser": [
-			{ "title": "⌨️ Brave Shortcuts", "arg": "brave://settings/system/shortcuts" },
-			{ "title": "🔰 Brave Shields", "arg": "brave://settings/shields" },
-			{ "title": "🔰 Brave Shields Filters", "arg": "brave://settings/shields/filters" },
-			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "brave://settings/leo-assistant" },
-			{ "title": "📖 Brave Help & Tips", "arg": "brave://settings/braveHelpTips" },
-			{ "title": "📝 Brave Content", "arg": "brave://settings/braveContent" },
-			{ "title": "🔁 Brave Sync", "arg": "brave://settings/braveSync/setup" },
-			{ "title": "🛠️ Brave Sync Internals", "arg": "brave://sync-internals" }
+			{ "title": "⌨️ Brave Shortcuts", "arg": "chrome://settings/system/shortcuts" },
+			{ "title": "🔰 Brave Shields", "arg": "chrome://settings/shields" },
+			{ "title": "🔰 Brave Shields Filters", "arg": "chrome://settings/shields/filters" },
+			{ "title": "🤖 Brave Leo Assistant (AI)", "arg": "chrome://settings/leo-assistant" },
+			{ "title": "📖 Brave Help & Tips", "arg": "chrome://settings/braveHelpTips" },
+			{ "title": "📝 Brave Content", "arg": "chrome://settings/braveContent" },
+			{ "title": "🔁 Brave Sync", "arg": "chrome://settings/braveSync/setup" },
+			{ "title": "🛠️ Brave Sync Internals", "arg": "chrome://sync-internals" }
 		],
 		"Arc": [],
 		"Thorium": []
-	},
-	"uri": {
-		"Google Chrome": "chrome://",
-		"Brave Browser": "brave://",
-		"Arc": "arc://",
-		"Thorium": "chrome://"
 	}
 }

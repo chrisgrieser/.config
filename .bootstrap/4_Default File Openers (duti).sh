@@ -21,7 +21,6 @@ duti -s "org.m0k.transmission" torrent all
 
 # Browser & Mail
 browserID=$(osascript -e 'id of app "Brave Browser"')
-duti -s "$editorID" brave all # brave URI scheme
 duti -s "$browserID" chrome
 duti -s "$browserID" chrome-extension
 duti -s "$browserID" svg all
