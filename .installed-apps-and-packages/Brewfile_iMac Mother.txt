@@ -62,4 +62,5 @@ cask "transmission"
 cask "wezterm"
 cask "zoom"
 mas "Highlights", id: 1498912833
+mas "Ivory", id: 6444602274
 mas "Peek", id: 1554235898
