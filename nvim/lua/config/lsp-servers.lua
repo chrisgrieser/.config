@@ -42,7 +42,7 @@ end
 
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
-	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"shellcheck", -- used by bashls for diagnostics
 	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
@@ -60,8 +60,7 @@ M.serverConfigs.bashls = {
 	settings = {
 		bashIde = {
 			shfmt = { spaceRedirects = true },
-			shellcheckPath = "", -- disable while using efm
-			shellcheckArguments = "--shell=bash", -- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
+			shellcheckArguments = "--shell=bash",
 		},
 	},
 }
