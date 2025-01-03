@@ -10,8 +10,8 @@ M.middleHalf = { x = 0.184, y = 0, w = 0.6, h = 1 }
 
 -- negative x to hide useless sidebar
 M.toTheSide = hs.geometry.rect(-90, 54, 444, 1026)
-if env.isAtMother then M.toTheSide = hs.geometry.rect(-78, 54, 387, 890) end
 if env.isAtOffice then M.toTheSide = hs.geometry.rect(-90, 54, 466, 1100) end
+if env.isAtMother then M.toTheSide = hs.geometry.rect(-90, 54, 399, 890) end
 
 --------------------------------------------------------------------------------
 
