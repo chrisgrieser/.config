@@ -1,10 +1,43 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
+-- https://github.com/xzbdmw/colorful-menu.nvim#or-call-it-on-blinkcmp
+local colorfulMenuLabel = {
+	width = { max = 35 },
+	text = function(ctx)
+		local highlights_info = require("colorful-menu").highlights(ctx.item, vim.bo.ft)
+		return highlights_info and highlights_info.text or (ctx.label .. ctx.label_detail)
+	end,
+	highlight = function(ctx)
+		local highlights_info = require("colorful-menu").highlights(ctx.item, vim.bo.ft)
+		local highlights = {}
+		if highlights_info then
+			for _, info in ipairs(highlights_info.highlights) do
+				table.insert(highlights, {
+					info.range[1],
+					info.range[2],
+					group = ctx.deprecated and "BlinkCmpLabelDeprecated" or info[1],
+				})
+			end
+		end
+		for _, idx in ipairs(ctx.label_matched_indices) do
+			table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+		end
+		return highlights
+	end,
+}
+
+--------------------------------------------------------------------------------
+
 return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
 	version = "*", -- REQUIRED to download pre-built binary
+
+	dependencies = {
+		"xzbdmw/colorful-menu.nvim",
+		opts = { fallback_highlight = "@variable" },
+	},
 
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
@@ -103,13 +136,13 @@ return {
 			menu = {
 				border = vim.g.borderStyle,
 				draw = {
-					align_to = "none",
+					align_to = "none", -- keep in place
 					treesitter = { "lsp" },
 					columns = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
 					components = {
-						label = { width = { max = 30 } }, -- more space for doc-win
+						-- label = colorfulMenuLabel,
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
