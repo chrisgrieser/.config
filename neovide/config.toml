@@ -5,7 +5,6 @@ no-multigrid = false
 title-hidden = true
 tabs = false
 mouse-cursor-icon = "i-beam"
-theme = "auto" # BUG currently (v0.14) ignored, needs to be set via `vim.g.neovide_theme`
 
 [font]
 normal = ["JetBrainsMonoNL NF", "Monaco"]
