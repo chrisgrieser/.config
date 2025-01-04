@@ -87,11 +87,6 @@ return {
 			trigger = {
 				show_in_snippet = false, -- since we overload `<Tab>` with jumping & selection
 			},
-			keyword = {
-				-- only numbers, letters, and `_`. Do not trigger on `` (default is '[-_]\\|\\k')
-				-- does not affect LSP, who still trigger on `-` due to trigger chars
-				regex = [[\a\|\d\|_]],
-			},
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
 				selection = "auto_insert",
