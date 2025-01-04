@@ -31,7 +31,7 @@ local deviceSpecific = {
 	},
 	mother = {
 		fontSize = 24,
-		maxFps = 60,
+		maxFps = 30,
 		winPos = { x = 620, y = 0, w = 2745 },
 	},
 }

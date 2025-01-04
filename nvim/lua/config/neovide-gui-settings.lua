@@ -1,10 +1,10 @@
 -- DOCS https://neovide.dev/configuration.html
---------------------------------------------------------------------------------
 if not vim.g.neovide then return end
-
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
+vim.opt.linespace = -2 -- less line height
+
 local host = vim.uv.os_gethostname()
 local isAtOffice = host:find("eduroam") or host:find("mini")
 local isAtMother = host:find("Mother")
@@ -25,10 +25,6 @@ else
 	vim.g.neovide_padding_top = 15
 	vim.g.neovide_padding_left = 7
 end
-
-vim.opt.linespace = -2 -- less line height
-
---------------------------------------------------------------------------------
 
 -- cmd+ / cmd- to change zoom
 local function changeScaleFactor(delta)
