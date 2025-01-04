@@ -9866,14 +9866,22 @@
                             "to": [{ "key_code": "left_control" }]
                         },
                         {
-                            "from": { "key_code": "left_control" },
-                            "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
-                        },
-                        {
                             "from": { "consumer_key_code": "eject" },
                             "to": [{ "key_code": "delete_forward" }]
+                        },
+                        {
+                            "from": { "key_code": "left_control" },
+                            "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 49299,
+                        "vendor_id": 1130
+                    },
+                    "ignore": false
                 }
             ],
             "fn_function_keys": [
