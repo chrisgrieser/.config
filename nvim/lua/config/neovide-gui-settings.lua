@@ -52,7 +52,14 @@ vim.g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml`
 vim.g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_hide_mouse_when_typing = true
+
+-- only active when `multigrid` is enabled in `neovide/config.toml`
 vim.g.neovide_scroll_animation_length = 0
+vim.g.neovide_floating_corner_radius = 0.1
+vim.g.neovide_floating_shadow = false -- shadow looks weird with nvim-satellite
+vim.g.neovide_floating_blur_amount_x = 2.0
+vim.g.neovide_floating_blur_amount_y = 2.0
+vim.g.neovide_position_animation_length = 0.2 -- e.g. when creating splits
 
 --------------------------------------------------------------------------------
 -- CURSOR

@@ -263,6 +263,7 @@ local delta = 5
 keymap("n", "<C-Up>", "<C-w>" .. delta .. "-")
 keymap("n", "<C-Down>", "<C-w>" .. delta .. "+")
 keymap("n", "<C-Left>", "<C-w>" .. delta .. "<")
+
 keymap("n", "<C-Right>", "<C-w>" .. delta .. ">")
 
 --------------------------------------------------------------------------------
