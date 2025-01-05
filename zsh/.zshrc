@@ -1,5 +1,5 @@
 CONFIG_FILES=(
-	keybindings_and_vim_mode # must be loaded before starship, so vi-prompt is set correctly
+	keybindings_and_vim_mode # loaded before starship, so vi-prompt is set correctly
 	plugins
 	cli_settings
 
@@ -12,7 +12,7 @@ CONFIG_FILES=(
 
 	git_github
 	homebrew
-	python_pip
+	python
 )
 [[ "$OSTYPE" =~ "darwin" ]] && CONFIG_FILES+=(mac_specific)
 
