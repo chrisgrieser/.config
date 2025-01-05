@@ -3,8 +3,6 @@
 
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
-#───────────────────────────────────────────────────────────────────────────────
-
 alias pu="pip uninstall"
 alias pi="pip install"
 alias pl="pip list --not-required"
@@ -15,6 +13,11 @@ alias v="toggle_venv"
 
 function new_venv {
 	local python="python3.13" # CONFIG
+
+	if [[ ! -x "$(command -v $python)" ]]; then
+		print "\e[0;33m\`$python\` not installed.\e[0m" 
+		return 1
+	fi
 	[[ -d ./.venv ]] && rm -rf ./.venv
 	"$python" -m venv ./.venv
 	source ./.venv/bin/activate

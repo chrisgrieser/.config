@@ -17,6 +17,9 @@ if [[ -z "$url" ]]; then
 elif [[ ! -d "$download_location" ]]; then
 	notify "❌ Invalid Download Location."
 	return 1
+elif [[ ! -x "$(command -v yt-dlp)" ]]; then 
+	notify "❌ yt-dlp not installed."
+	return 1
 fi
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -28,7 +31,7 @@ success=$?
 if [[ $success -eq 0 ]]; then
 	notify "✅ Download finished."
 elif ! [[ "$(yt-dlp --update)" =~ "up to date" ]]; then
-	notify "ℹ️  yt-dlp not up to date."
+	notify "ℹ️ yt-dlp not up to date."
 	echo -n "brew update && brew upgrade yt-dlp" | pbcopy
 else
 	notify "❌ $msg"

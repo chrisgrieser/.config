@@ -224,8 +224,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
-			<key>note</key>
-			<string>chromium extension search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
