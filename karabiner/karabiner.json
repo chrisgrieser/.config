@@ -9872,6 +9872,10 @@
                         {
                             "from": { "key_code": "left_control" },
                             "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
+                        },
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
                         }
                     ]
                 },
