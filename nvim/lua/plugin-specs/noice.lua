@@ -34,14 +34,8 @@ return {
 			{ filter = { event = "msg_show", find = "^E486: Pattern not found" }, view = "mini" },
 			{ filter = { event = "msg_show", find = "^[/?]." }, skip = true },
 
-			-- nvim-treesitter
-			{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
-
 			-- output from `:Inspect` for easier copying
 			{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
-
-			-- word added to spellfile via `zg`
-			{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 
 			-- FIX https://github.com/artempyanykh/marksman/issues/348
 			{ filter = { event = "notify", find = "^Client marksman quit with" }, skip = true },
