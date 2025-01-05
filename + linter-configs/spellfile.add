@@ -89,3 +89,6 @@ built-ins
 #tatusline
 Justfile
 todos
+dependabot
+markdownlint
+cli
