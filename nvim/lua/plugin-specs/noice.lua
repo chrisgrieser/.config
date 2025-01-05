@@ -70,6 +70,13 @@ return {
 				win_options = { scrolloff = 6 },
 				close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 			},
+			popup = {
+				border = { style = vim.g.borderStyle },
+				size = {
+					width = "80%",
+					height = "50%",
+				},
+			},
 		},
 		commands = {
 			history = {
