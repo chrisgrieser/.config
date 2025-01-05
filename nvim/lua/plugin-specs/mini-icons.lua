@@ -19,7 +19,6 @@ return {
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
 
 			-- plugin-filetypes
-			["oil"] = { glyph = "󰁴" },
 			["snacks_input"] = { glyph = "󰏫" },
 			["snacks_notif"] = { glyph = "󰎟" },
 			["noice"] = { glyph = "󰎟" },
