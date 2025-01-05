@@ -37,6 +37,9 @@ return {
 			-- nvim-treesitter
 			{ filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" }, view = "mini" },
 
+			-- output from `:Inspect` for easier copying
+			{ filter = { event = "msg_show", find = "Treesitter.*- @" }, view = "popup" },
+
 			-- word added to spellfile via `zg`
 			{ filter = { event = "msg_show", find = "^Word .*%.add$" }, view = "mini" },
 

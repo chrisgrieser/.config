@@ -9,5 +9,5 @@ elif [[ "$input_source_info" == *"Japanese"* ]]; then
 elif [[ "$input_source_info" == *"U.S."* ]]; then
 	sketchybar --set "$NAME" drawing=true icon="US"
 else
-	sketchybar --set "$NAME" drawing=true icon="unknown input source"
+	sketchybar --set "$NAME" drawing=true icon="input source?"
 fi
