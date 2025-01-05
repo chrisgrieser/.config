@@ -18,6 +18,7 @@ return {
 			border = vim.g.borderStyle,
 			hideSearchReplaceLabels = true,
 			hideKeymapHints = false,
+			position = "top",
 		},
 		keymaps = {
 			insertModeConfirm = "<CR>",
