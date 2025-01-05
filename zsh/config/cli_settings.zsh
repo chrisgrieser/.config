@@ -61,7 +61,7 @@ export npm_config_update_notifier=false    # no need for updating prompts, since
 # do not crowd `$HOME`
 export npm_config_cache="$HOME/.cache/npm"
 
-# INFO in case of indefinite spinner on npm commands
+# INFO in case of indefinite spinner on npm commands:
 # brew uninstall --ignore-dependencies openssl@3 ca-certificates
 # rm -rf "/usr/local/etc/openssl@3"
 # brew install openssl@3 ca-certificates
