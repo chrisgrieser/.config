@@ -24,7 +24,9 @@ function ,ya {
 export PATH="$ZDOTDIR/utilities/":$PATH
 
 # mason things only made available, but not loaded directly
-function export_mason_path { export PATH="$HOME/.local/share/nvim/mason/bin":$PATH; }
+function export_mason_path {
+	export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
+}
 
 function p {
 	qlmanage -p "$1" &> /dev/null
