@@ -48,16 +48,22 @@ export FZF_DEFAULT_OPTS='
 export GH_NO_UPDATE_NOTIFIER=1 # updates managed via homebrew
 
 #───────────────────────────────────────────────────────────────────────────────
-# NPM
+# NPM & NODE
+
 # Don't clutter home directory with useless `.node_repl_history` https://nodejs.org/api/repl.html#repl_environment_variable_options
 export NODE_REPL_HISTORY=""
 
 # Instead of writing npm config to `.npmrc`, can also be set via shell
-# environment variables. Has to be lower-case. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
+# environment variables. Has to be lower-case then. https://docs.npmjs.com/cli/v10/using-npm/config#environment-variables
 export npm_config_fund=false               # disable funding nags
 export npm_config_update_notifier=false    # no need for updating prompts, since done via homebrew
 
-# do not crowd `$HOME` (set in .zshenv, so it's also applied to Neovide)
+# do not crowd `$HOME`
 export npm_config_cache="$HOME/.cache/npm"
+
+# INFO in case of indefinite spinner on npm commands
+# brew uninstall --ignore-dependencies openssl@3 ca-certificates
+# rm -rf "/usr/local/etc/openssl@3"
+# brew install openssl@3 ca-certificates
 
 #───────────────────────────────────────────────────────────────────────────────

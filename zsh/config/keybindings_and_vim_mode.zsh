@@ -8,7 +8,7 @@
 
 # ctrl+u -> cut whole buffer
 function _cut-buffer {
-	echo -n -- "$BUFFER" | pbcopy
+	print -n -- "$BUFFER" | pbcopy
 	BUFFER="" # clears whole buffer, rather than just the line via `kill-whole-line`
 }
 zle -N _cut-buffer
