@@ -14,7 +14,7 @@ if ! command -v yq &> /dev/null; then
 	return 1
 elif [[ -z "$GITHUB_TOKEN" ]]; then
 	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
-	sketchybar --set "$NAME" label="GITHUB_TOKEN not set" drawing=true
+	sketchybar --set "$NAME" label="TOKEN?" drawing=true
 	return 1
 fi
 
