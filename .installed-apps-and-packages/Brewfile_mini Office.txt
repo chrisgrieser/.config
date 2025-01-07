@@ -12,7 +12,7 @@ brew "gh"
 brew "git-delta"
 brew "just"
 brew "less"
-brew "macos-trash"
+brew "macos-trash", link: true
 brew "mas"
 brew "tree-sitter"
 brew "neovim"
