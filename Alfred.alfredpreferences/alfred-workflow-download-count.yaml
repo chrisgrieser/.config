@@ -1,18 +1,23 @@
-# last update: 2024-10-14
-# https://www.alfredforum.com/messenger/2169/?page=2&tab=comments#comment-7623
+# last update: 2025-01-08
+# https://www.alfredforum.com/messenger/2169/?page=2&tab=comments#comment-7757
 #───────────────────────────────────────────────────────────────────────────────
-shimmering-obsidian: 9570
-alfred-homebrew: 5491
-alfred-atop: 5133
-alfred-docs-searches: 3612
-alfred-reddit-browser: 3451
-alfred-neovim-utilities: 1942
-pdf-summarizer-alfred: 1829
-alfred-bibtex-citation-picker: 1597
-gitfred: 1357
-tot-alfred: 1236
-alfred-read-later: 1161
-alfred-writing-assistant: 1160
-alfred-pass: 1048
-alfred-wikipedia-suggest: 995
-alfred-anime-search: 253
+shimmering-obsidian: 11045
+alfred-homebrew: 6834
+alfred-atop: 6540
+alfred-docs-searches: 4413
+alfred-reddit-browser: 4379
+alfred-neovim-utilities: 2264
+pdf-summarizer-alfred: 2161
+gitfred: 2084
+alfred-bibtex-citation-picker: 1884
+alfred-read-later: 1616
+tot-alfred: 1517
+alfred-writing-assistant: 1581
+alfred-wikipedia-suggest: 1304
+alfred-pass: 1297
+alfred-quick-file-access: 872
+alfred-anime-search: 538
+alfred-dock-switcher: 417
+alfred-workflow-devtools: 319
+alfred-chromium-extensions: 300
+alfred-japanese-dictionary: 242
