@@ -1291,20 +1291,20 @@ disown</string>
 	+ Go to the last workflow in the Alfred Preferences.
 	+ Reload the current workflow, and flush all caches related to it.
 	+ Reveal the current workflow in the macOS Finder.
-	+ Another hotkey does the opposite and reveals the workflow corresponding to
+	+ Reveal the workflow corresponding to
 	  the current Finder window in the Alfred Preferences.
 	+ Copy the workflows absolute path to the clipboard.
 	+ Copy the name of an Alfred workflow variable for the current workflow.
-- Searching the Alfred workflow development docs via the keyword `adoc`.
+- Search the Alfred workflow development docs via the keyword `adoc`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt; Open in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy URL.
 - Show a menu of some more utilities via the keyword `awd`. Those include:
-	+ Restarting Alfred (and Alfred Preferences).
 	+ Check for unused files of current workflow, and remove unused UID `.png`
 	  files.
-	+ Updating the Alfred Preferences.app icon to use an icon using the macOS
+	+ Restart Alfred (and Alfred Preferences).
+	+ Update Alfred Preferences.app to use an icon with the macOS
 	  Big Sur icon shape.
-	+ Open the Alfred data folder, or the Alfred cache folder.
+	+ Open the Alfred data or cache folder.
 	+ Change the font size of the Alfred debugger window.
 
 ---

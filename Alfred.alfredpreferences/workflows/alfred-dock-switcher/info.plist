@@ -383,8 +383,8 @@
 - Save the current dock as a layout for this workflow via the keyword `:dock
   new`.
 - Select a dock layout via the keyword `dock`:
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Switch to the layout (load the layout).
-	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Overwrite the layout with the layout of the current dock.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Switch to the layout (i.e., load the layout).
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Overwrite with the layout of the current dock.
 
 ⚠️ This workflow saves **all** information related to the current dock. This 
 includes dock sizes, dock position, animation settings, or hot corners.
