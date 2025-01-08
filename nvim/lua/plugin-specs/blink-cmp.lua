@@ -89,7 +89,6 @@ return {
 			},
 			list = {
 				cycle = { from_top = false }, -- cycle at bottom, but not at the top
-				selection = "auto_insert",
 			},
 			documentation = {
 				auto_show = true,

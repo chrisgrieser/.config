@@ -299,7 +299,7 @@ M.serverConfigs.yamlls = {
 -- DOCS of the original https://valentjn.github.io/ltex/settings.html
 -- DOCS of the fork https://ltex-plus.github.io/ltex-plus/settings.html
 M.serverConfigs.ltex_plus = {
-	filetypes = { "markdown", "text" },
+	filetypes = { "markdown" },
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)

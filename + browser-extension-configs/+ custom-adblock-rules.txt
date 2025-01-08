@@ -1,36 +1,20 @@
 amazon.de###nav-logo-sprites
 amazon.de###spc-container
-breezewiki.com##div.bw-top-banner:first-child
 devdocs.io##._notice
-docs.google.com###kix-appview > div.docs-explore-widget.docs-ui-unprintable:last-child > div.docs-explore-widget-button.goog-inline-block.goog-flat-button > div.docs-explore-widget-button-outer-box.goog-inline-block > div.docs-explore-widget-button-inner-box.goog-inline-block
-docs.google.com###kix-appview > div.docs-explore-widget.docs-ui-unprintable:last-child > div.docs-explore-widget-button.goog-inline-block.goog-flat-button.goog-flat-button-hover
-duden.de###aab-overlay
-excalidraw.com###root > div.excalidraw-app > div.excalidraw.excalidraw-container > div.layer-ui__wrapper:first-child > div.FixedSideContainer.FixedSideContainer_side_top:first-child > div.App-menu.App-menu_top > div.layer-ui__wrapper__top-right.zen-mode-transition:last-child > div:last-child
 flaticon.com###layer_coupon
 flaticon.com###open_panel
 google.com###grepper_add_answer_button
 google.com###search > a.grepper_ad_holder:nth-child(2)
-inoreader.com###article_comment_bar_34517642316
-inoreader.com###article_social_bar_34517642316
-inoreader.com###consent_payment_expired
-inoreader.com###kickstart_hint_dialog_wrapper
-inoreader.com###sb_rp_upgrade
 journals.sagepub.com###bookshelf-opener
-ko-fi.com###body-content > div:last-child > div.row:nth-child(5)
-linguee.com###dictionary > div.l_deepl_ad_container.wide_in_main:nth-child(3)
-linkedin.com###global-nav > div.global-nav__content:last-child > nav.global-nav__nav:last-child > ul.global-nav__primary-items > li.global-nav__primary-item.global-nav__spotlight:last-child
 messenger.com##[aria-label="Inbox switcher"]
 messenger.com##[aria-label="Thread list"] > div > div:last-child
 nerdfonts.com##.subtlecircle
 nerdfonts.com##h1.center
 nyaa.si##a[href$=".torrent"]
-regex101.com##div:last-child > div.cek5f > div.MPQtP > div.jyUE5.XNbml:last-child
 rewe.de##.qa-feefs-visual-popup
-shop.rewe.de##div.ReactModalPortal:nth-child(43) > div.ReactModal__Overlay.ReactModal__Overlay--after-open > div.ReactModal__Content.ReactModal__Content--after-open.feefs-popup > div.qa-feefs-visual-popup.feefs-visual-popup
 stackoverflow.com###announcement-banner
-stackoverflow.com##header.s-topbar.ps-fixed.t0.l0.js-top-bar:nth-child(3)
-www.crunchyroll.com##.avatar-badge
 www.netflix.com##.mobile-games-row
 www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
+www.reddit.com###right-sidebar-container
