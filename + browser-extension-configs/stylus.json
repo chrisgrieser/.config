@@ -30,7 +30,7 @@
       "manage.onlyEnabled.invert": false,
       "manage.onlyLocal.invert": false,
       "manage.onlyUsercss.invert": false,
-      "manage.actions.expanded": true,
+      "manage.actions.expanded": false,
       "manage.backup.expanded": true,
       "manage.filters.expanded": true,
       "manage.links.expanded": true,
@@ -144,23 +144,6 @@
   },
   {
     "enabled": true,
-    "installDate": 1714737982050,
-    "name": "reddit.com - May 2024",
-    "sections": [
-      {
-        "code": "#change-username-tooltip-id > span:has(.icon-topic_activism),\n#right-sidebar-container,\n[author=\"AutoModerator\"],\n.scrollerItem[data-testid=\"post-container\"]:has(.RichTextJSON-root),\nbutton:has([id^=\"View--GiveAward\"]),\nbutton[data-click-id=\"expando_open\"],\nbutton[data-click-id=\"share\"],\ndiv:has(+ div > [data-click-id=\"comments\"]),\ndiv:has(> span > button#COIN_PURCHASE_DROPDOWN_ID) {\n   display: none;\n}",
-        "domains": [
-          "reddit.com"
-        ]
-      }
-    ],
-    "updateDate": 1714737982050,
-    "_id": "4742ee85-8386-46b2-8137-bfa85a272d1b",
-    "_rev": 1733011285020,
-    "id": 3
-  },
-  {
-    "enabled": true,
     "installDate": 1714486578670,
     "name": "Obsidian developer docs & help",
     "sections": [
@@ -191,7 +174,7 @@
     ],
     "updateDate": 1735385536249,
     "_id": "f4b954dd-32e6-4f42-9656-d158cce0c53a",
-    "_rev": 1735385536250,
+    "_rev": 1736109655482,
     "id": 7
   }
 ]
