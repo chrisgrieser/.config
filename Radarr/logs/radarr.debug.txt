@@ -1,0 +1,186 @@
+2025-01-09 14:54:07.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = ReadOnly (8), message = System.Data.SQLite.SQLiteException (0x800017FF): attempt to write a readonly database
+attempt to write a readonly database
+   at System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:54:37.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = ReadOnly (8), message = System.Data.SQLite.SQLiteException (0x800017FF): attempt to write a readonly database
+attempt to write a readonly database
+   at System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:55:07.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = ReadOnly (8), message = System.Data.SQLite.SQLiteException (0x800017FF): attempt to write a readonly database
+attempt to write a readonly database
+   at System.Data.SQLite.SQLite3.Reset(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLite3.Step(SQLiteStatement stmt)
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:55:37.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = Error (1), message = System.Data.SQLite.SQLiteException (0x800007BF): SQL logic error
+no such table: Commands
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:56:07.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = Error (1), message = System.Data.SQLite.SQLiteException (0x800007BF): SQL logic error
+no such table: Commands
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:56:37.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = Error (1), message = System.Data.SQLite.SQLiteException (0x800007BF): SQL logic error
+no such table: Commands
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
+2025-01-09 14:57:07.1|Error|TaskExtensions|Task Error
+
+[v5.17.2.9580] code = Error (1), message = System.Data.SQLite.SQLiteException (0x800007BF): SQL logic error
+no such table: Commands
+   at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, String strSql, SQLiteStatement previous, UInt32 timeoutMS, String& strRemain)
+   at System.Data.SQLite.SQLiteCommand.BuildNextCommand()
+   at System.Data.SQLite.SQLiteDataReader.NextResult()
+   at System.Data.SQLite.SQLiteDataReader..ctor(SQLiteCommand cmd, CommandBehavior behave)
+   at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SQLite.SQLiteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   at Dapper.SqlMapper.QueryMultipleImpl(IDbConnection cnn, CommandDefinition& command)
+   at Dapper.SqlMapper.QueryMultiple(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(IDbConnection connection, IDbTransaction transaction, TModel model)
+   at NzbDrone.Core.Datastore.BasicRepository`1.Insert(TModel model)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push[TCommand](TCommand command, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Messaging.Commands.CommandQueueManager.Push(String commandName, Nullable`1 lastExecutionTime, Nullable`1 lastStartTime, CommandPriority priority, CommandTrigger trigger)
+   at NzbDrone.Core.Jobs.Scheduler.ExecuteCommands()
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+
+
