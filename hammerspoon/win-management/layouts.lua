@@ -133,7 +133,10 @@ local function autoSetLayout()
 end
 
 -- 1. Change of screen numbers
-M.displayCountWatcher = hs.screen.watcher.new(autoSetLayout):start()
+M.displayCountWatcher = hs.screen.watcher.new(function ()
+	print("🪚 ⭐")
+	autoSetLayout()
+end):start()
 
 -- 2. Hotkey
 hs.hotkey.bind(u.hyper, "home", autoSetLayout)
