@@ -133,10 +133,18 @@ local function autoSetLayout()
 end
 
 -- 1. Change of screen numbers
-M.displayCountWatcher = hs.screen.watcher.new(function ()
-	print("🪚 ⭐")
-	autoSetLayout()
-end):start()
+
+local prevScreenCount = #hs.screen.allScreens()
+-- check needed, as things such as Dock settings changes also trigger the screen watcher
+M.displayCountWatcher = hs.screen.watcher
+	.new(function()
+		local currentScreenCount = #hs.screen.allScreens()
+		if currentScreenCount == prevScreenCount then return end
+
+		autoSetLayout()
+		prevScreenCount = currentScreenCount
+	end)
+	:start()
 
 -- 2. Hotkey
 hs.hotkey.bind(u.hyper, "home", autoSetLayout)
