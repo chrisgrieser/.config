@@ -35,6 +35,7 @@ local config = {
 		"zoom.us",
 		"CleanShot X",
 		"Ivory",
+		"Catch",
 		"Alfred",
 		"Karabiner-EventViewer",
 		"pinentry-mac",
