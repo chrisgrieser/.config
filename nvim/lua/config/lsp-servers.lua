@@ -14,19 +14,20 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- linter/formatter integration
 	emmet_language_server = "emmet-language-server", -- css/html snippets
+	gh_actions_ls = "gh-actions-language-server",
 	html = "html-lsp",
 	jsonls = "json-lsp",
+	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	ruff = "ruff", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
+	stylua3p_ls = "lua-3p-language-servers", -- stylua wrapper
 	taplo = "taplo", -- toml lsp
 	ts_ls = "typescript-language-server", -- also used for javascript
-	typos_lsp = "typos-lsp", -- spellchecker for code
 	ts_query_ls = "ts_query_ls", -- tree-sitter queries
+	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
-	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
-	stylua3p_ls = "lua-3p-language-servers", -- stylua wrapper
 }
 
 ---@module "lspconfig"
