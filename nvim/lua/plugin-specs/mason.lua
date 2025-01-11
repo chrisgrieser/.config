@@ -25,13 +25,13 @@ end
 -- 1. install missing packages
 -- 2. update installed ones
 -- 3. uninstall unused packages
----@param ensurePack string[]
-local function syncPackages(ensurePack)
+---@param ensurePacks string[]
+local function syncPackages(ensurePacks)
 	local masonReg = require("mason-registry")
 
 	local function refreshCallback()
 		-- auto-install missing packages & auto-update installed ones
-		vim.iter(ensurePack):each(function(packName)
+		vim.iter(ensurePacks):each(function(packName)
 			if not masonReg.has_package(packName) then return end
 			local pack = masonReg.get_package(packName)
 			if pack:is_installed() then
@@ -47,7 +47,7 @@ local function syncPackages(ensurePack)
 		-- auto-clean unused packages
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
-			if not vim.tbl_contains(ensurePack, packName) then
+			if not vim.tbl_contains(ensurePacks, packName) then
 				masonReg.get_package(packName):uninstall()
 				local msg = ("[%s] uninstalled"):format(packName)
 				vim.notify(msg, nil, { title = "Mason", icon = "󰅗 ", style = "minimal" })

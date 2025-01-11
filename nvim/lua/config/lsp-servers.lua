@@ -26,6 +26,7 @@ local lspToMasonMap = {
 	ts_query_ls = "ts_query_ls", -- tree-sitter queries
 	yamlls = "yaml-language-server",
 	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
+	stylua3p_ls = "lua-3p-language-servers", -- stylua wrapper
 }
 
 ---@module "lspconfig"
@@ -43,7 +44,7 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"stylua", -- efm
+	"stylua", -- lua-3p-ls
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
 }
@@ -71,13 +72,13 @@ M.serverConfigs.bashls = {
 
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 local efmConfig = {
-	lua = {
-		{
-			formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
-			formatStdin = true,
-			rootMarkers = { "stylua.toml", ".stylua.toml" },
-		},
-	},
+	-- lua = {
+	-- 	{
+	-- 		formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
+	-- 		formatStdin = true,
+	-- 		rootMarkers = { "stylua.toml", ".stylua.toml" },
+	-- 	},
+	-- },
 	markdown = {
 		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
