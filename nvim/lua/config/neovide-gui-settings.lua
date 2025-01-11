@@ -16,12 +16,12 @@ if isAtMother then
 	vim.g.neovide_padding_left = 6
 elseif isAtOffice then
 	vim.g.neovide_scale_factor = 1.05
-	vim.g.neovide_refresh_rate = 90
+	vim.g.neovide_refresh_rate = 75
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_left = 2
 else
 	vim.g.neovide_scale_factor = 1
-	vim.g.neovide_refresh_rate = 120
+	vim.g.neovide_refresh_rate = 90
 	vim.g.neovide_padding_top = 15
 	vim.g.neovide_padding_left = 7
 end
