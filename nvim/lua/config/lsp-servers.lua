@@ -54,6 +54,14 @@ local extraDependencies = {
 M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
+-- needed for GitHub Actions LSP https://github.com/neovim/nvim-lspconfig/pull/3551#issuecomment-2585464445
+vim.filetype.add {
+	pattern = {
+		[".*/%.github/workflows/.+%.ya?ml"] = "yaml.github",
+	},
+}
+
+--------------------------------------------------------------------------------
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
