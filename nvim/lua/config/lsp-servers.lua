@@ -45,7 +45,7 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"stylua", -- lua-3p-ls
+	"stylua", -- used lua-3p-ls
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
 }
@@ -81,13 +81,6 @@ M.serverConfigs.bashls = {
 
 -- DOCS https://github.com/mattn/efm-langserver#configuration-for-neovim-builtin-lsp-with-nvim-lspconfig
 local efmConfig = {
-	-- lua = {
-	-- 	{
-	-- 		formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
-	-- 		formatStdin = true,
-	-- 		rootMarkers = { "stylua.toml", ".stylua.toml" },
-	-- 	},
-	-- },
 	markdown = {
 		{ -- HACK use `cat` due to https://github.com/mattn/efm-langserver/issues/258
 			formatCommand = "markdown-toc --indent=$'\t' -i '${INPUT}' && cat '${INPUT}'",
@@ -284,21 +277,14 @@ M.serverConfigs.ts_ls.settings.javascript = M.serverConfigs.ts_ls.settings.types
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
 M.serverConfigs.jsonls = {
 	-- Disable formatting in favor of biome
-	init_options = {
-		provideFormatter = false,
-		documentRangeFormattingProvider = false,
-	},
+	init_options = { provideFormatter = false, documentRangeFormattingProvider = false },
 }
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
 M.serverConfigs.yamlls = {
 	settings = {
 		yaml = {
-			format = {
-				enable = true,
-				printWidth = 100,
-				proseWrap = "always",
-			},
+			format = { enable = true, printWidth = 100, proseWrap = "always" },
 		},
 	},
 }
