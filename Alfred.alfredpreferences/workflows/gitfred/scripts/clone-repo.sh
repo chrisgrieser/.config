@@ -5,14 +5,15 @@
 # VARIABLES
 https_url="$1"
 source_repo=$(echo "$https_url" | sed -E 's_.*github.com/([^/?]*/[^/?]*).*_\1_')
+echo "🪚 source_repo: $source_repo" >&2
 reponame=$(echo "$source_repo" | cut -d '/' -f2)
+echo "🪚 reponame: $reponame" >&2
 owner=$(echo "$source_repo" | cut -d '/' -f1)
+echo "🪚 owner: $owner" >&2
 ssh_url="git@github.com:$source_repo"
 
 [[ ! -e "$local_repo_folder" ]] && mkdir -p "$local_repo_folder"
 cd "$local_repo_folder" || return 1
-
-cat "bla" | grep "a"
 
 #───────────────────────────────────────────────────────────────────────────────
 # CLONE
@@ -21,6 +22,7 @@ cat "bla" | grep "a"
 # existing and the to-be-cloned repo (see https://github.com/chrisgrieser/gitfred/issues/5)
 # (uses `__` as separator, since that string normally does not occur in reponames)
 clone_dir="$reponame"
+echo "🪚 clone_dir: $clone_dir" >&2
 if [[ -d "$reponame" ]]; then
 	clone_dir="${owner}__$reponame"
 	# rename existing repo
@@ -33,6 +35,7 @@ if [[ -d "$reponame" ]]; then
 elif [[ -n $(find . -type directory -maxdepth 1 -name "*__$reponame") ]]; then
 	clone_dir="${owner}__$reponame"
 fi
+echo "🪚 clone_dir: $clone_dir" >&2
 
 # clone with depth
 if [[ $clone_depth -eq 0 ]]; then
@@ -51,7 +54,9 @@ if [[ $success -ne 0 ]]; then
 fi
 
 # Open in terminal via Alfred
-echo -n "$local_repo_folder/$clone_dir"
+abs_path="$local_repo_folder/$clone_dir"
+echo "🪚 abs_path: $abs_path" >&2
+echo -n "$abs_path"
 
 cd "$clone_dir" || return 1
 
@@ -105,6 +110,7 @@ fi
 if [[ "$ownerOfRepo" != "true" && "$fork_on_clone" == "1" ]]; then
 
 	if [[ -x "$(command -v gh)" ]]; then
+		echo "🪚 ⭕" >&2
 		gh repo fork --remote=false
 	else
 		echo "ERROR: Cannot fork, \`gh\` not installed."

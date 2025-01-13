@@ -55,10 +55,13 @@ M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMas
 
 --------------------------------------------------------------------------------
 -- needed for GitHub Actions LSP https://github.com/neovim/nvim-lspconfig/pull/3551#issuecomment-2585464445
-vim.filetype.add {
-	pattern = {
-		[".*/%.github/workflows/.+%.ya?ml"] = "yaml.github",
-	},
+M.serverConfigs.gh_actions_ls = {
+	filetypes = { "yaml" },
+	single_file_support = false,
+	root_dir = function (filename, bufnr)
+		if not filename:find("/%.github/workflows/.+%.ya?ml") then return end
+		return vim.fs.root(bufnr, ".github")
+	end
 }
 
 --------------------------------------------------------------------------------
