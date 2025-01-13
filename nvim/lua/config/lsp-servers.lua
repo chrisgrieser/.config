@@ -54,17 +54,6 @@ local extraDependencies = {
 M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
--- PENDING https://github.com/neovim/nvim-lspconfig/pull/3558
-M.serverConfigs.gh_actions_ls = {
-	filetypes = { "yaml" },
-	single_file_support = false,
-	root_dir = function(filename, bufnr)
-		if not filename:find("/%.github/workflows/.+%.ya?ml") then return end
-		return vim.fs.root(bufnr, ".github")
-	end,
-}
-
---------------------------------------------------------------------------------
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
