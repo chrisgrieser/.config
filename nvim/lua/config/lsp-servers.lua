@@ -54,7 +54,7 @@ local extraDependencies = {
 M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
--- needed for GitHub Actions LSP https://github.com/neovim/nvim-lspconfig/pull/3551#issuecomment-2585464445
+-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3558
 M.serverConfigs.gh_actions_ls = {
 	filetypes = { "yaml" },
 	single_file_support = false,
