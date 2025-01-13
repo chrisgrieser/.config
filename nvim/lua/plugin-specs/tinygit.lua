@@ -37,11 +37,11 @@ return {
 			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			border = vim.g.borderStyle,
 			spellcheck = true,
-			subject = { noSentenceCase = true },
-			conventionalCommits = {
-				enforce = true,
+			subject = {
+				noSentenceCase = true,
+				enforceType = true,
 				-- stylua: ignore
-				keywords = { -- add `improv`
+				types = { -- add `improv`
 					"fix", "feat", "chore", "docs", "refactor", "build", "test",
 					"perf", "style", "revert", "ci", "break", "improv"
 				},

@@ -58,10 +58,10 @@ M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMas
 M.serverConfigs.gh_actions_ls = {
 	filetypes = { "yaml" },
 	single_file_support = false,
-	root_dir = function (filename, bufnr)
+	root_dir = function(filename, bufnr)
 		if not filename:find("/%.github/workflows/.+%.ya?ml") then return end
 		return vim.fs.root(bufnr, ".github")
-	end
+	end,
 }
 
 --------------------------------------------------------------------------------
@@ -128,13 +128,17 @@ local efmConfig = {
 }
 
 M.serverConfigs.efm = {
-	-- cleanup useless empty folder `efm` creates on startup
-	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
-
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
-	root_dir = function()
+
+	-- Do not attach to markdown files when in Obsidian vault
+	-- (A nil root_dir and no single_file_support results in the LSP not attaching.)
+	single_file_support = false,
+	root_dir = function(filename, bufnr)
+		if filename:find("%.md$") and vim.fs.root(bufnr, ".obsidian") then return end
+
+		-- use root marker from efm config
 		local allRootMarkers = vim.iter(vim.tbl_values(efmConfig))
 			:flatten()
 			:map(function(config) return config.rootMarkers end)
@@ -142,6 +146,9 @@ M.serverConfigs.efm = {
 			:totable()
 		return vim.fs.root(0, allRootMarkers)
 	end,
+
+	-- cleanup useless empty folder `efm` creates on startup
+	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
 }
 
 --------------------------------------------------------------------------------
@@ -323,7 +330,6 @@ M.serverConfigs.ltex_plus = {
 			},
 		},
 	},
-	---@type fun(client: vim.lsp.Client, bufnr: number)
 	on_attach = function(client, bufnr)
 		-- have `zg` update ltex' dictionary file as well as vim's spellfile
 		vim.keymap.set({ "n", "x" }, "zg", function()
@@ -340,6 +346,14 @@ M.serverConfigs.ltex_plus = {
 			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
 		end, { desc = "󰓆 Add Word", buffer = bufnr })
 	end,
+
+	-- Only attach to files outside of Obsidian vaults.
+	-- (A nil root_dir and no single_file_support results in the LSP not attaching.)
+	root_dir = function(_filename, bufnr)
+		if vim.fs.root(bufnr, ".obsidian") then return end
+		return vim.fs.root(bufnr, ".git")
+	end,
+	single_file_support = false,
 }
 
 -- TYPOS
