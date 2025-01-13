@@ -16,8 +16,9 @@ return {
 		show_label = false, -- signcolumn label for number of suggestions
 
 		filetypes = {
-			DressingInput = false,
+			snacks_input = false,
 			TelescopePrompt = false,
+			bib = false,
 			-- extra safeguard: `pass` passwords editing filetype is plaintext,
 			-- also this is the filetype of critical files
 			text = false,
