@@ -34,9 +34,10 @@ return {
 			moveToNextHunkOnStagingToggle = true,
 		},
 		commit = {
-			-- keepAbortedMsgSecs = 60 * 10, -- 10 mins
+			keepAbortedMsgSecs = 60 * 10, -- 10 mins
 			border = vim.g.borderStyle,
 			spellcheck = true,
+			subject = { noSentenceCase = true },
 			conventionalCommits = {
 				enforce = true,
 				-- stylua: ignore
