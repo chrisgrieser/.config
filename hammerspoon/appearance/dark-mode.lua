@@ -37,7 +37,7 @@ function M.setDarkMode(toMode)
 
 	-- Highlights PDF background
 	if u.appRunning("Highlights") then
-		local pdfBg = toMode == "light" and "Sepia" or "Night"
+		local pdfBg = toMode == "light" and "Default" or "Night"
 		u.app("Highlights"):selectMenuItem { "View", "PDF Appearance", pdfBg }
 	end
 
@@ -63,8 +63,8 @@ function M.autoSwitch()
 	local lightThreshold = 70 -- CONFIG
 	local ambient = hs.brightness.ambient()
 	local hasBrightnessSensor = ambient > -1
-	local targetMode
 
+	local targetMode
 	if hasBrightnessSensor then
 		targetMode = ambient > lightThreshold and "light" or "dark"
 	else
