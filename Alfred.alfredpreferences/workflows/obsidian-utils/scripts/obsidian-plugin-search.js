@@ -28,6 +28,7 @@ function run() {
 	const downloadsFile = "community-plugin-stats.json";
 	const pluginJson = JSON.parse(httpRequest(baseUrl + pluginsFile));
 	const downloadsJson = JSON.parse(httpRequest(baseUrl + downloadsFile));
+	const vaultName = $.getenv("vault_path").replace(/^.*\/(.*)$/, "$1");
 
 	// add PLUGINS to the JSON
 	const plugins = pluginJson
@@ -38,7 +39,7 @@ function run() {
 				const { id, name, description, author, repo } = plugin;
 
 				const githubUrl = "https://github.com/" + repo;
-				const obsidianPluginUri = `obsidian://show-plugin?id=${id}`;
+				const obsidianPluginUri = `obsidian://show-plugin?vault=${vaultName}&id=${id}`;
 				// enclosing link in `<>` remove to the Discord preview
 				const discordUrl = `> [${name}](<https://obsidian.md/plugins?id=${id}>): ${description}`;
 
