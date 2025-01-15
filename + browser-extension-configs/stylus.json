@@ -6,6 +6,7 @@
       "exposeStyleName": false,
       "keepAlive": 0,
       "keepAliveIdle": false,
+      "keepAliveCache": false,
       "newStyleAsUsercss": false,
       "openEditInWindow": false,
       "openEditInWindow.popup": false,
@@ -163,18 +164,18 @@
   {
     "enabled": true,
     "installDate": 1735385266309,
-    "name": "Optisearch",
+    "name": "Optisearch & ublacklist",
     "sections": [
       {
-        "code": ".optisearch-box {\n    min-width: 400px;\n    margin-left: 20px;\n}",
+        "code": ".optisearch-box {\n    min-width: 400px;\n    margin-left: 20px;\n}\n\n\n/* ublacklist */\n#slim_appbar {\n    margin-left: 4vw;\n}",
         "urlPrefixes": [
           "https://www.google.com/search"
         ]
       }
     ],
-    "updateDate": 1735385536249,
+    "updateDate": 1736947239411,
     "_id": "f4b954dd-32e6-4f42-9656-d158cce0c53a",
-    "_rev": 1736109655482,
+    "_rev": 1736947239412,
     "id": 7
   }
 ]
