@@ -25,6 +25,12 @@ elif [[ "$pdf_path" == "no-file" ]]; then
 elif [[ "$pdf_path" == "more-than-one-file" ]]; then
 	notify "⚠️ More than one file selected."
 	exit 1
+elif [[ "$pdf_path" == "not-in-pdf-folder" ]]; then
+	notify "⚠️ When using Highlights, the PDF must be located in the PDF folder."
+	exit 1
+elif [[ "$pdf_path" != *.pdf ]]; then
+	notify "⚠️ Not a .pdf file."
+	exit 1
 elif [[ "$extraction_engine" == "pdfannots" ]] && ! command -v pdfannots &> /dev/null; then
 	notify "⚠️ pdfannots not installed."
 	exit 1
@@ -42,10 +48,6 @@ citekey=$(basename "$pdf_path" .pdf | sed -E 's/_.*//')
 
 # with citekey
 if [[ -n "$entry" && -n "$bibtex_library_path" ]]; then
-	if [[ "$pdf_path" == "not-in-pdf-folder" ]]; then
-		notify "⚠️ When using Highlights, the PDF must be located in the PDF folder."
-		exit 1
-	fi
 	notify "⏳ Running Extraction for $citekey…"
 	filename="$citekey"
 	[[ -z "$output_path" ]] && output_path="$(dirname "$pdf_path")"

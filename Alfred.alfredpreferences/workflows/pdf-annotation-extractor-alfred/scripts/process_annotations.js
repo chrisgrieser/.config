@@ -185,8 +185,6 @@ function insertPageNumber(annotations, pageNo) {
  * @returns {Annotation[]}
  */
 function processUnderlines(annotations, filename, citekey) {
-	let totInstalled;
-
 	// Annotations with leading "_": collected & removal of the "_"
 	const underscoreAnnos = [];
 	for (const anno of annotations) {
@@ -197,24 +195,22 @@ function processUnderlines(annotations, filename, citekey) {
 	}
 
 	// Underline annotations
-	if (totInstalled) {
-		const underlineAnnos = annotations.filter((a) => a.type === "Underline");
+	const underlineAnnos = annotations.filter((a) => a.type === "Underline");
 
-		const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
-		if (annosToSplitOff.length > 0) {
-			const text = jsonToMd(annosToSplitOff, citekey);
+	const annosToSplitOff = [...underlineAnnos, ...underscoreAnnos];
+	if (annosToSplitOff.length > 0) {
+		const text = jsonToMd(annosToSplitOff, citekey);
 
-			// create new reminder due today
-			const rem = Application("Reminders");
-			const today = new Date();
-			const newReminder = rem.Reminder({
-				name: `Underline Annotations for ${filename}`,
-				body: text,
-				alldayDueDate: today,
-			});
-			rem.defaultList().reminders.push(newReminder);
-			rem.quit();
-		}
+		// create new reminder due today
+		const rem = Application("Reminders");
+		const today = new Date();
+		const newReminder = rem.Reminder({
+			name: `Underline Annotations for "${filename}"`,
+			body: text,
+			alldayDueDate: today,
+		});
+		rem.defaultList().reminders.push(newReminder);
+		rem.quit();
 	}
 
 	// return only annotations that are not underlines
