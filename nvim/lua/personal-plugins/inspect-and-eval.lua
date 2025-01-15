@@ -131,16 +131,27 @@ end
 
 function M.runFile()
 	vim.cmd("silent update")
-	local hasShebang = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]:find("^#!")
 	local filepath = vim.api.nvim_buf_get_name(0)
-	if vim.bo.filetype == "lua" and filepath:find("nvim") then
+	local ft = vim.bo.filetype
+	if ft == "lua" and filepath:find("nvim") then
 		vim.cmd.source()
-	elseif hasShebang then
-		vim.cmd("! chmod +x %")
-		vim.cmd("! %")
-	else
-		vim.notify("File has no shebang.", vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
+		return
 	end
+
+	local cmd
+	if ft == "zsh" or ft == "bash" or ft == "sh" then
+		cmd = ft
+	else
+		local msg = ("Filetype %q not supported."):format(ft)
+		vim.notify(msg, vim.log.levels.WARN, { title = "Run", icon = "󰜎" })
+		return
+	end
+
+	vim.system({ cmd, filepath }, {}, function(out)
+		local msg = vim.trim(out.stdout .. "\n" .. out.stderr)
+		local lvl = out.code == 0 and "INFO" or "ERROR"
+		vim.notify(msg, vim.log.levels[lvl], { title = "Run", icon = "󰜎" })
+	end)
 end
 
 --------------------------------------------------------------------------------
