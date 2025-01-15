@@ -150,6 +150,20 @@ function cleanQuoteKey(annotations) {
 	});
 }
 
+/** FIX for https://github.com/mgmeyers/pdfannots2json/issues/25
+ * @param {Annotation[]} annotations
+ * @returns {Annotation[]}
+ */
+function fixFreeComments(annotations) {
+	return annotations.map((a) => {
+		if (a.type !== "Free Comment" || !a.comment) return a;
+		a.comment = a.comment
+			.replace(/(.)(\d\. )/g, "$1\n$2") // ordered list
+			.replace(/(.)- /g, "$1\n- "); // unordered list
+		return a;
+	});
+}
+
 /**
  * @param {Annotation[]} annotations
  * @param {number} pageNo
@@ -165,8 +179,6 @@ function insertPageNumber(annotations, pageNo) {
 }
 
 /** code: "_" or annotation type "Underline" -> split off and send to Reminders.app
- * when tots is not installed, Underlines are ignored and annotations with
- * leading "_" are still extracted (though the "_" is removed)
  * @param {Annotation[]} annotations
  * @param {string} filename
  * @param {string=} citekey - only to be passed to jsonToMd of the underlines
@@ -600,6 +612,7 @@ function run(argv) {
 	annos = usePdfannots ? pdfAnnotsAdapter(annos) : pdfAnnots2JsonAdapter(annos);
 	annos = insertPageNumber(annos, metadata?.firstPage || 1);
 	annos = cleanQuoteKey(annos);
+	annos = fixFreeComments(annos);
 
 	// process annotation codes & images
 	annos = mergeQuotes(annos);
