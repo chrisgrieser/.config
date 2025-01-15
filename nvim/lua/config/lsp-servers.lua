@@ -121,13 +121,8 @@ M.serverConfigs.efm = {
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
 
-	-- Do not attach to markdown files when in Obsidian vault
-	-- (A nil root_dir and no single_file_support results in the LSP not attaching.)
-	single_file_support = false,
-	root_dir = function(filename, bufnr)
-		if filename:find("%.md$") and vim.fs.root(bufnr, ".obsidian") then return end
-
-		-- use root marker from efm config
+	-- use root marker from efm config
+	root_dir = function()
 		local allRootMarkers = vim.iter(vim.tbl_values(efmConfig))
 			:flatten()
 			:map(function(config) return config.rootMarkers end)
