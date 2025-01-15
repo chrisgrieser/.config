@@ -1,10 +1,10 @@
 {
-  "blacklist": "*://*.shecodes.io/*\n*://*.quora.com/*",
+  "blacklist": "",
   "blockColor": "default",
   "blockWholeSite": true,
   "dialogTheme": "default",
   "enablePathDepth": false,
-  "hideBlockLinks": false,
+  "hideBlockLinks": true,
   "hideControl": false,
   "highlightColors": [
     "#ddeeff"
@@ -30,6 +30,16 @@
     {
       "name": "AI content farm",
       "url": "https://raw.githubusercontent.com/wdmpa/content-farm-list/main/uBlacklist.txt",
+      "enabled": true
+    },
+    {
+      "name": "Main AI Blocklist",
+      "url": "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt",
+      "enabled": true
+    },
+    {
+      "name": "BadWebsiteBlocklist",
+      "url": "https://raw.githubusercontent.com/popcar2/BadWebsiteBlocklist/refs/heads/main/uBlacklist.txt",
       "enabled": true
     }
   ],
