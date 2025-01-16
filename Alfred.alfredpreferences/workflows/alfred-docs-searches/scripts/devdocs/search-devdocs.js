@@ -76,9 +76,10 @@ function readFile(path) {
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const keyword = $.getenv("alfred_workflow_keyword");
-	// biome-ignore lint/suspicious/noConsole: <explanation>
-	// biome-ignore lint/suspicious/noConsoleLog: <explanation>
+	const prefix = $.getenv("shared_devdocs_prefix");
+	const keyword = $.getenv("alfred_workflow_keyword").substring(prefix.length);
+
+	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("keyword:", keyword);
 
 	ensureCacheFolderExists();
