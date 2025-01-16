@@ -61,6 +61,27 @@ const aliases = {
 const extraWorkflowConfig = [
 	"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>required</key> <false/> <key>trim</key> <true/> <key>verticalsize</key> <integer>3</integer> </dict> <key>description</key> <string>one per line; see to the right for explanations</string> <key>label</key> <string>pinned devdocs versions</string> <key>type</key> <string>textarea</string> <key>variable</key> <string>select_versions</string> </dict>",
 	"<dict> <key>config</key> <dict> <key>default</key> <false/> <key>required</key> <false/> <key>text</key> <string></string> </dict> <key>description</key> <string>Only available for a few sites. PRs welcome.</string> <key>label</key> <string>open at original</string> <key>type</key> <string>checkbox</string> <key>variable</key> <string>use_source_page_if_available</string> </dict>",
+	'<dict>
+		<key>config</key>
+		<dict>
+			<key>default</key>
+			<string></string>
+			<key>placeholder</key>
+			<string></string>
+			<key>required</key>
+			<false/>
+			<key>trim</key>
+			<true/>
+		</dict>
+		<key>description</key>
+		<string>Shared keyword prefix for DevDocs searches. If set to "dd" , will search the bash documentation via "ddbash" instead of "bash". Leave empty to not use any such prefix.</string>
+		<key>label</key>
+		<string>DevDocs prefix</string>
+		<key>type</key>
+		<string>textfield</string>
+		<key>variable</key>
+		<string>shared_devdocs_prefix</string>
+	</dict>'
 ];
 
 async function run() {
