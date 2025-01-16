@@ -47,14 +47,14 @@ rules:
         to_if_held_down:
           - shell_command: open "cleanshot://open-history"
       # overwrite `-` search with my own Alfred-based search
-      # - type: basic
-      #   from: { key_code: slash }
-      #   to_if_alone:
-      #     - key_code: f
-      #       modifiers: [control, command]
-      #     - *leave-insert-mode # on Alfred focus loss, renaming is aborted automatically
-      #     - *remove-insert-notice
-      #   conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
+      - type: basic
+        from: { key_code: slash }
+        to_if_alone:
+          - key_code: f
+            modifiers: [control, command]
+          - *leave-insert-mode # on Alfred focus loss, renaming is aborted automatically
+          - *remove-insert-notice
+        conditions: [*finder-app, *not-insert-mode, *not-find-mode, *no-menu-open]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "Finder Vim Extra keys"
     manipulators:

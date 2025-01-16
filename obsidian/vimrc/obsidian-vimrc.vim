@@ -398,6 +398,10 @@ nnoremap ,fw :duplicate<CR>
 nnoremap ,fm :move<CR>
 nnoremap ,fd :delete<CR>
 
+" open trash
+exmap openTrash jscommand { view.app.openWithDefaultApp("/.trash"); }
+nnoremap ,t :openTrash<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " VISUAL MODE
 
