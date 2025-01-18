@@ -8,19 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>301E30A3-C8CD-4742-BA4E-286DB95895C5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C2687DC5-4A10-4037-932E-482E8BC59D78</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EBEACBC3-A729-4144-8A12-B89AE9EC9049</key>
 		<array>
 			<dict>
@@ -30,16 +17,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>301E30A3-C8CD-4742-BA4E-286DB95895C5</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -55,27 +32,6 @@
 	<string>nyaa search</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>4ADF2887-8DA1-4429-8F96-3F31B8E58A2C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -128,42 +84,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>C2687DC5-4A10-4037-932E-482E8BC59D78</string>
+			<string>4ADF2887-8DA1-4429-8F96-3F31B8E58A2C</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>301E30A3-C8CD-4742-BA4E-286DB95895C5</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -174,33 +111,19 @@
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>301E30A3-C8CD-4742-BA4E-286DB95895C5</key>
-		<dict>
-			<key>xpos</key>
-			<real>370</real>
-			<key>ypos</key>
-			<real>315</real>
-		</dict>
 		<key>4ADF2887-8DA1-4429-8F96-3F31B8E58A2C</key>
 		<dict>
 			<key>xpos</key>
-			<real>370</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>200</real>
-		</dict>
-		<key>C2687DC5-4A10-4037-932E-482E8BC59D78</key>
-		<dict>
-			<key>xpos</key>
-			<real>520</real>
-			<key>ypos</key>
-			<real>315</real>
+			<real>115</real>
 		</dict>
 		<key>EBEACBC3-A729-4144-8A12-B89AE9EC9049</key>
 		<dict>
 			<key>xpos</key>
-			<real>135</real>
+			<real>65</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>115</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

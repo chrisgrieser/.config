@@ -168,11 +168,11 @@
   "relative date": {
     "body": [
       "/**",
-      " * @param {string} absoluteDate string to be converted to a date",
+      " * @param {string} absDateStr string to be converted to a date",
       " * @return {string} relative date",
       " */",
-      "function relativeDate(absoluteDate) {",
-      "\tconst deltaSecs = (+new Date() - +new Date(absoluteDate)) / 1000;",
+      "function relativeDate(absDateStr) {",
+      "\tconst deltaSecs = (Date.now() - +new Date(absDateStr)) / 1000;",
       "\t/** @type {\"year\"|\"month\"|\"week\"|\"day\"|\"hour\"|\"minute\"|\"second\"} */",
       "\tlet unit;",
       "\tlet delta;",
