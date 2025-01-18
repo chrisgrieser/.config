@@ -11,6 +11,41 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
+/**
+ * @param {string} absoluteDateStr string to be converted to a date
+ * @return {string} relative date
+ */
+function relativeDate(absoluteDateStr) {
+	const deltaSecs = (Date.now() - +new Date(absoluteDateStr)) / 1000;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	let unit;
+	let delta;
+	if (deltaSecs < 60) {
+		unit = "second";
+		delta = deltaSecs;
+	} else if (deltaSecs < 60 * 60) {
+		unit = "minute";
+		delta = Math.ceil(deltaSecs / 60);
+	} else if (deltaSecs < 60 * 60 * 24) {
+		unit = "hour";
+		delta = Math.ceil(deltaSecs / 60 / 60);
+	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+	} else {
+		unit = "year";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	return formatter.format(-delta, unit);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @typedef {object} NyaaapiResponse
@@ -35,9 +70,7 @@ function run(argv) {
 
 	// DOCS https://github.com/Vivek-Kolhe/Nyaa-API
 	const apiURL = "https://nyaaapi.onrender.com/nyaa?category=anime&q=" + encodeURIComponent(query);
-	console.log("🪚 apiURL:", apiURL);
 	const response = JSON.parse(httpRequest(apiURL));
-	console.log("🪚 response:", JSON.stringify(response, null, 2))
 
 	/** @type {AlfredItem[]} */
 	const items = response.data.map((/** @type {NyaaapiResponse} */ item) => {
@@ -48,15 +81,19 @@ function run(argv) {
 		if (category !== "Anime - English-translated") return {};
 
 		const subtitle = [
-			seeders + "⬆️",
+			seeders + "↑",
 			leechers + "↓",
-			size,
-			time,
-		].join(" · ");
+			size, // GiB
+			"(" + relativeDate(time) + ")",
+		].join("   ");
+
+		const cleanTitle = title
+			.replace(/\.mkv$/, "") // extension
+			.replace(/ ?\[[0-9A-F]+\]$/, ""); // hashes
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: title,
+			title: cleanTitle,
 			subtitle: subtitle,
 			arg: magnet,
 			quicklookurl: link,
