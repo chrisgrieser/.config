@@ -148,9 +148,9 @@
 				<key>runningsubtext</key>
 				<string>Getting Gallery data…</string>
 				<key>script</key>
-				<string>readonly cache_file="${alfred_workflow_cache}/gallery.json"
-readonly release_id_file="${alfred_workflow_cache}/release_id.txt"
-readonly cache_repo='alfredapp/gallery-cache'
+				<string>readonly cache_repo='alfredapp/gallery-cache'
+readonly cache_file="${alfred_workflow_cache}/cache.json"
+readonly state_file="${alfred_workflow_cache}/state.txt"
 
 # Helper to show results and exit
 function show_data {
@@ -158,19 +158,18 @@ function show_data {
   exit 0
 }
 
-# Get latest release info
-mkdir -p "${alfred_workflow_cache}"
-
+# Get latest state
 readonly latest_release="$(curl --silent "https://api.github.com/repos/${cache_repo}/releases/latest")"
-readonly release_id="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["id"] }' "${latest_release}")"
 readonly download_url="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["assets"][0]["browser_download_url"] }' "${latest_release}")"
+readonly state="$(osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["id"] }' "${latest_release}")"
 
-# Exit early if release has not changed
-[[ "${release_id}" == "$(&lt; "${release_id_file}")" ]] &amp;&amp; show_data
+# Exit early if state has not changed
+[[ "${state}" == "$(&lt; "${state_file}")" ]] &amp;&amp; show_data
 
-# Download and update cache
+# Update cache and state
+mkdir -p "${alfred_workflow_cache}"
 curl --silent --location "${download_url}" | tar --directory "${alfred_workflow_cache}" --extract
-echo "${release_id}" &gt; "${release_id_file}"
+echo "${state}" &gt; "${state_file}"
 show_data</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -315,7 +314,7 @@ Search workflows in the [Alfred Gallery](https://alfred.app/) via the `gallery` 
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2024.1</string>
+	<string>2025.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/alfredapp/alfred-gallery-workflow/</string>
 </dict>
