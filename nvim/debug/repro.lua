@@ -3,30 +3,8 @@
 --------------------------------------------------------------------------------
 local spec = {
 	{
-		"folke/snacks.nvim",
-		opts = {
-			input = {
-				enabled = true,
-			},
-			styles = {
-				input = {
-					backdrop = true,
-				},
-			},
-		},
-	},
-	{
-		"nvim-lualine/lualine.nvim",
-		opts = {
-			options = {
-				always_show_tabs = true,
-			},
-			tabline = {
-				lualine_a = {
-					{ "datetime", style = "%H:%M:%S" },
-				},
-			},
-		},
+		"chrisgrieser/nvim-origami",
+		opts = {},
 	},
 }
 

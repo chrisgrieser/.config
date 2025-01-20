@@ -5,7 +5,10 @@
 %% ----------------------------------------------------------- %%
 
 %% Tables %%
-Pandoc Table Caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
+Pandoc table caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
+
+%% References %%
+Pandoc references>>>::: {#refs}\n:::
 
 %% dataview %%
 moc-assistant>>>```dataviewjs\nawait dv.view("Meta/dataview/moc-assistant")\n```
