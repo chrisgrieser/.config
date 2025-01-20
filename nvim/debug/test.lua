@@ -1,1 +1,9 @@
-vim.ui.input({}, function(input) print(input) end)
+
+foobar
+foobar
+foobar
+ffffffffff
+ffffffffff
+ffffffffff
+foobar
+foobar
