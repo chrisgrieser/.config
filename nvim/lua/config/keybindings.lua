@@ -322,7 +322,7 @@ do
 		{ desc = "󰃽 Start/stop recording" }
 	)
 	-- stylua: ignore
-	keymap("n", "c0", function() require("personal-plugins.misc").editMacro(reg) end, { desc = "󰃽 Edit recording" })
+	keymap("n", "c" .. toggleKey, function() require("personal-plugins.misc").editMacro(reg) end, { desc = "󰃽 Edit recording" })
 	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
 end
 
