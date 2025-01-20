@@ -1,0 +1,96 @@
+# vim: filetype=zsh
+# shellcheck disable=all
+# INFO not real bash file, just want the syntax highlighting
+#───────────────────────────────────────────────────────────────────────────────
+# DOCS https://linux.die.net/man/1/lesskey
+#───────────────────────────────────────────────────────────────────────────────
+
+#command
+
+# search via `-` (= allows quickly typing `---option` to search for `--option`)
+- forw-search
+
+# map `esc` to `nohlsearch`
+\e undo-hilite
+
+# toggle line numbers (keys consistent with binding in nvim)
+,on toggle-option N
+
+# toggle line wrap (keys consistent with binding in nvim)
+,ow toggle-option S
+
+# grep lines for a pattern
+f filter
+
+# use mark with one keystroke
+8 set-mark m
+m goto-mark m
+
+# more vim-like movements
+h left-scroll
+l right-scroll
+J forw-scroll
+K back-scroll
+
+# :help
+? help
+
+#───────────────────────────────────────────────────────────────────────────────
+
+#env
+
+# options
+# (`lesskey` does not accepts quotes, and unescaped leading spaces are ignored)
+
+# initialize variable
+LESS=
+
+# process colors correctly
+LESS+=\ --RAW-CONTROL-CHARS
+
+# line number column width
+LESS+=\ --line-num-width=4
+
+# ignore-case is actually like smart-case in other tools
+LESS+=\ --ignore-case
+LESS+=\ --incsearch
+
+# no tilde at start of line at the end of file
+LESS+=\ --tilde
+
+# shows how far we are into the file in pages and total pages (if known)
+LESS+=\ --long-prompt
+LESS+=\ --prompt=mpage %dm?B/%D.?Pm (%Pm\\%).$
+
+# if using short prompt, make it completely invisible
+LESS+=\ --prompt=s$
+
+# highlight lines with a mark
+LESS+=\ --status-line
+
+# quicker leaving & do not clear the screen when doing so
+LESS+=\ --quit-if-one-screen
+LESS+=\ --no-init
+
+# wrap lines
+LESS+=\ --chop-long-lines
+
+# amount of side-scrolling (percentage of screen width)
+LESS+=\ --shift=.2
+
+# wrap searches
+LESS+=\ --search-option=W
+
+# (cannot disable it, since it's needed for delta's `navigate` feature)
+# LESSHISTFILE=/tmp/lesshst
+
+# colorize man pages
+# (`;` needs to be escaped to prevent shfmt from formatting this)
+LESS_TERMCAP_mb=\033[1\;31m
+LESS_TERMCAP_md=\033[1\;33m
+LESS_TERMCAP_me=\033[0m
+LESS_TERMCAP_us=\033[1\;36m
+LESS_TERMCAP_ue=\033[0m
+
+# FIX nerdfont display https://github.com/ryanoasis/nerd-fonts/issues/1337
+LESSUTFCHARDEF=23fb-23fe:w,2665:w,2b58:w,e000-e00a:w,e0a0-e0a3:p,e0b0-e0bf:p,e0c0-e0c8:w,e0ca:w,e0cc-e0d7:w,e200-e2a9:w,e300-e3e3:w,e5fa-e6b5:w,e700-e7c5:w,ea60-ec1e:w,ed00-efce:w,f000-f2ff:w,f300-f375:w,f400-f533:w,f0001-f1af0:w
