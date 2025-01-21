@@ -38129,9 +38129,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string>Open on the original site instead of the DevDocs site. Only available for a few sites. (PRs welcome.)</string>
+			<string>Only available for a few sites. PRs welcome.</string>
 			<key>label</key>
-			<string>original sites</string>
+			<string>open at original</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
