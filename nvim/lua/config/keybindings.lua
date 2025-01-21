@@ -15,7 +15,7 @@ keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 
 --------------------------------------------------------------------------------
 -- NAVIGATION
 
--- j/k should on wrapped lines
+-- make j/k on wrapped lines
 keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
@@ -34,7 +34,7 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
 keymap("n", "-", "/")
-keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN sel" })
+keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
