@@ -322,13 +322,5 @@
       "key": "S"
     }
   ],
-  "workspace:edit-file-title": [],
-  "workspace:copy-path": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "P"
-    }
-  ]
+  "workspace:edit-file-title": []
 }
