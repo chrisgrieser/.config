@@ -331,7 +331,7 @@ nnoremap ,iv :inspectChromeVersion<CR>
 exmap updatePlugins jsfile Meta/vimrc-jsfile.js { updatePlugins() }
 nnoremap ,pp :updatePlugins<CR>
 
-" open [p]lugin [d]irectory
+" open [p]lugin Directory
 exmap openPluginDir jscommand { view.app.openWithDefaultApp(view.app.vault.configDir + '/plugins'); }
 nnoremap ,pd :openPluginDir<CR>
 
