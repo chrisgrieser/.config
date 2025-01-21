@@ -294,16 +294,6 @@ exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
 nnoremap X :deleteLastChar<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
-" MACROS
-
-" Start recording: `00`
-" Stop recording: `0`
-nnoremap 0 q
-
-" Play
-nnoremap [ @0
-
-"───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
 " [L]og variable
