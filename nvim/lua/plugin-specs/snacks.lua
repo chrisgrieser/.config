@@ -136,7 +136,6 @@ return {
 		},
 		win = {
 			border = vim.g.borderStyle,
-			keys = { q = "close", ["<esc>"] = "close" },
 		},
 		styles = {
 			input = {

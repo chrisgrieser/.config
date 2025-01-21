@@ -183,8 +183,8 @@ function smartOpenLine(where) {
 	}
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
-	const atEof = editor.lastLine() === lnum && where === "below";
-	const extra = atEof ? "\n" : "";
+	const atEndOfFile = editor.lastLine() === lnum && where === "below";
+	const extra = atEndOfFile ? "\n" : "";
 	editor.replaceRange(extra + indentAndText + "\n", { line: targetLine, ch: 0 });
 
 	editor.setCursor(targetLine, indentAndText.length);
