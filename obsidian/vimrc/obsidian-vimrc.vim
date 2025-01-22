@@ -253,7 +253,7 @@ nnoremap m :smartMerge<CR>
 " split line
 nnoremap ,s i<CR><CR><Esc>
 
-" o and O (respecting list or blockquote)
+" make `o` and `O` respect list and blockquotes
 exmap openBelow jsfile Meta/vimrc-jsfile.js { smartOpenLine("below") }
 nnoremap o :openBelow<CR>
 exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
