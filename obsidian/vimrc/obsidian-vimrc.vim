@@ -285,6 +285,10 @@ nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
 exmap toggleBlockquote obcommand editor:toggle-blockquote
 nnoremap ,< :toggleBlockquote<CR>
 
+" append dot/comma
+nnoremap ,, mzA,<Esc>`z
+nnoremap ,. mzA.<Esc>`z
+
 " hr
 exmap insertHr jscommand { editor.replaceSelection("\n---\n"); }
 nnoremap qw :insertHr<CR>
