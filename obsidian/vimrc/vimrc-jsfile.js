@@ -310,11 +310,11 @@ function highlightsAndStrikethrus(mode) {
 	const { line: lnum, ch: col } = editor.getCursor();
 
 	const lineText = editor.getLine(lnum);
-	const updatedLine =
+	let updatedLine =
 		mode === "accept"
 			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
 			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
-	updatedLine.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
+	updatedLine = updatedLine.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
 	editor.setLine(lnum, updatedLine);
 
 	const charsLess = lineText.length - updatedLine.length;
