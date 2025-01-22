@@ -15,6 +15,7 @@ local lspToMasonMap = {
 	efm = "efm", -- linter/formatter integration
 	emmet_language_server = "emmet-language-server", -- css/html snippets
 	gh_actions_ls = "gh-actions-language-server",
+	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
 	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
@@ -48,6 +49,7 @@ local extraDependencies = {
 	"stylua", -- used lua-3p-ls
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
+	-- Treesitter ms
 }
 
 -- for auto-installation via `mason-tool-installer`
@@ -286,6 +288,45 @@ M.serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
+
+---Helper function, as ltex etc lack ignore files
+---@param client vim.lsp.Client
+---@param bufnr number
+local function detachIfObsidianOrIcloud(client, bufnr)
+	local path = vim.api.nvim_buf_get_name(bufnr)
+	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
+	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
+	if obsiDir or iCloudDocs then
+		vim.diagnostic.enable(false, { bufnr = 0 })
+		-- defer to ensure client is already attached
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
+	end
+end
+
+-- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
+M.serverConfigs.harper_ls = {
+	-- filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
+	settings = {
+		["harper-ls"] = {
+			userDictPath = vim.o.spellfile,
+			diagnosticSeverity = "hint",
+			linters = {
+				spell_check = true,
+				-- an_a = false, -- too many false positives
+			},
+		},
+	},
+	on_attach = function(harper, bufnr)
+		detachIfObsidianOrIcloud(harper, bufnr)
+		vim.keymap.set("n", "zg", function()
+			vim.lsp.buf.code_action {
+				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
+				apply = true,
+			}
+		end, { desc = "󰓆 Add Word to spellfile", buffer = bufnr })
+	end,
+}
+
 -- DOCS of the original https://valentjn.github.io/ltex/settings.html
 -- DOCS of the fork https://ltex-plus.github.io/ltex-plus/settings.html
 M.serverConfigs.ltex_plus = {
@@ -303,6 +344,7 @@ M.serverConfigs.ltex_plus = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
+					"M"
 				},
 			},
 			additionalRules = {
@@ -314,30 +356,7 @@ M.serverConfigs.ltex_plus = {
 			},
 		},
 	},
-	on_attach = function(client, bufnr)
-		-- have `zg` update ltex' dictionary file as well as vim's spellfile
-		vim.keymap.set({ "n", "x" }, "zg", function()
-			local word
-			if vim.fn.mode() == "n" then
-				word = vim.fn.expand("<cword>")
-				vim.cmd.normal { "zg", bang = true } -- do regular `zg` from vim
-			else
-				vim.cmd.normal { 'zggv"zy', bang = true }
-				word = vim.fn.getreg("z")
-			end
-			local ltexSettings = client.config.settings or {}
-			table.insert(ltexSettings.ltex.dictionary["en-US"], word)
-			vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = ltexSettings })
-		end, { desc = "󰓆 Add Word", buffer = bufnr })
-	end,
-
-	-- Only attach to files outside of Obsidian vaults.
-	-- (A nil root_dir and no single_file_support results in the LSP not attaching.)
-	root_dir = function(_filename, bufnr)
-		if vim.fs.root(bufnr, ".obsidian") then return end
-		return vim.fs.root(bufnr, ".git")
-	end,
-	single_file_support = false,
+	on_attach = detachIfObsidianOrIcloud,
 }
 
 -- TYPOS
