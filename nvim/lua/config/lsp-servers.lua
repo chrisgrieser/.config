@@ -49,7 +49,6 @@ local extraDependencies = {
 	"stylua", -- used lua-3p-ls
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
-	-- Treesitter ms
 }
 
 -- for auto-installation via `mason-tool-installer`
@@ -305,14 +304,14 @@ end
 
 -- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
 M.serverConfigs.harper_ls = {
-	-- filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
+	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
 	settings = {
 		["harper-ls"] = {
 			userDictPath = vim.o.spellfile,
 			diagnosticSeverity = "hint",
 			linters = {
 				spell_check = true,
-				-- an_a = false, -- too many false positives
+				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
 			},
 		},
 	},
@@ -334,17 +333,12 @@ M.serverConfigs.ltex_plus = {
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
-			dictionary = {
-				-- HACK since reading external file does not work https://github.com/ltex-plus/ltex-ls-plus/issues/56
-				["en-US"] = vim.o.spellfile and vim.iter(io.lines(vim.o.spellfile)):totable() or {},
-			},
-
 			diagnosticSeverity = { default = "info" },
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"M"
+					"MORFOLOGIK_RULE_EN_US" -- spellcheck done via Harper instead
 				},
 			},
 			additionalRules = {

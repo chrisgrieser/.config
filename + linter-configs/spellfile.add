@@ -3,6 +3,7 @@ yq
 md
 fn
 Fn
+js
 fzf
 lua
 pre
@@ -11,6 +12,9 @@ zsh
 cmd
 url
 cli
+QDA
+APA
+CSV
 ltex
 json
 nvim
@@ -18,6 +22,7 @@ adfh
 repo
 CLIs
 Goto
+toml
 fixup
 Fixup
 utils
@@ -27,6 +32,7 @@ popup
 blink
 repos
 todos
+param
 keymap
 config
 fixups
@@ -37,6 +43,8 @@ README
 Romaji
 improv
 stylua
+Quadro
+MAXQDA
 keymaps
 Gruvbox
 builtin
@@ -51,6 +59,8 @@ Axelrod
 DevDocs
 devdocs
 WezTerm
+pyright
+OneNote
 superset
 basename
 longform
@@ -68,6 +78,9 @@ Filetype
 wikilink
 Justfile
 dotfiles
+LinkedIn
+backlink
+Evernote
 dedenting
 Filetypes
 permalink
@@ -79,6 +92,10 @@ Powerpack
 QuickLook
 copypaste
 built-ins
+formatter
+lspconfig
+backlinks
+occurrent
 unindented
 Treesitter
 signcolumn
@@ -93,13 +110,18 @@ docstrings
 #tatusline
 dependabot
 cheatsheet
+templating
 colorscheme
 habitualize
 Automagical
 frontmatter
 cheatsheets
+myLspConfig
 Colorschemes
 VSCode-style
 markdownlint
+ResearchGate
 un-shallowing
 nvim-scissors
+operationalize
+Customizability
