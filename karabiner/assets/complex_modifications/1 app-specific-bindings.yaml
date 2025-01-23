@@ -119,7 +119,7 @@ rules:
               osascript -e '
                 set theDesktop to POSIX path of (path to desktop folder as string)
                 set dotfiles to (POSIX path of (path to home folder as string) & ".config/")
-                
+
                 tell application "Finder"
                   -- `Finder window` instead of win ensures regular window, not QuickLook or prompt
                   if not (front Finder window exists) then return
@@ -128,7 +128,7 @@ rules:
                   set toGoto to theDesktop
                   if (currentPath is theDesktop) then set toGoto to dotfiles
                   set target of front Finder window to (toGoto as POSIX file)
-                end tell 
+                end tell
               '
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
       # cmd+shift+v -> goto [V]aults
@@ -388,6 +388,11 @@ rules:
         to:
           - { key_code: down_arrow, modifiers: [command, option] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
+      - type: basic
+        from: { key_code: return_or_enter, modifiers: { mandatory: [command, shift] } }
+        to:
+          - { key_code: up_arrow, modifiers: [command, option] }
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.hnc\.Discord$] }]
       # goto next/prev unread channel
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [control] } }
@@ -479,6 +484,7 @@ rules:
                   click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.iCal$] }]
+  #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Reminder"
     manipulators:
       # Toggle sidebar
