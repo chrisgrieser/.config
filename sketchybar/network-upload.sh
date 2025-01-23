@@ -14,10 +14,14 @@ if [[ $upload -lt $threshold_kb ]]; then
 	return 0
 fi
 
-# switch to Mb when more than 1024kb
-if [[ $upload -gt 1024 ]]; then
-	upload=$((upload / 1024))
+# switch to Mb when more than 1024kb, Gb when more than 1024kb, etc.
+if [[ $download -gt 1024 ]]; then
+	download=$((download / 1024))
 	unit="M"
+fi
+if [[ $download -gt 1024 ]]; then
+	download=$((download / 1024))
+	unit="G"
 fi
 
 sketchybar --set "$NAME" label="${upload}${unit}" drawing=true
