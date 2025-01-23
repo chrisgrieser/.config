@@ -51,7 +51,7 @@ function M.nodeAtCursor()
 
 	-- node info
 	local parent = node:parent() and node:parent():type() or "."
-	local tree = { parent, "└── " .. node:type() }
+	local tree = { parent, "└── " .. node:type() .. " (this node)" }
 	for childIdx = 1, config.maxChildren do
 		local child = node:child(childIdx)
 		if not child then break end
