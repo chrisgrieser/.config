@@ -216,7 +216,7 @@ end
 -- INSERT MODE
 keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
-	return (lineEmpty and [["_cc]] or "i")
+	return lineEmpty and [["_cc]] or "i"
 end, { expr = true, desc = "indented i on empty line" })
 
 -- VISUAL MODE
