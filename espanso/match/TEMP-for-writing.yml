@@ -1,7 +1,0 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
-#───────────────────────────────────────────────────────────────────────────────
-matches:
-  - trigger: ininn
-    replace: interdependent innovation
-  - trigger: intec
-    replace: interdependent technologies
