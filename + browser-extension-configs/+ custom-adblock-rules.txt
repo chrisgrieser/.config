@@ -13,7 +13,8 @@ nerdfonts.com##h1.center
 nyaa.si##a[href$=".torrent"]
 rewe.de##.qa-feefs-visual-popup
 stackoverflow.com###announcement-banner
-www.crunchyroll.com##.avatar-badge
+www.crunchyroll.com##.avatar-badge.avatar-badge.avatar-badge
+www.crunchyroll.com##[data-t="red-notification-sign"]
 www.netflix.com##.mobile-games-row
 www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
