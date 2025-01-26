@@ -57,10 +57,6 @@ keymap("n", "<D-U>", function()
 	end
 end, { desc = " Open first URL in file" })
 
--- make `fF` use `nN` instead of `;,`
-keymap("n", "f", function() require("personal-plugins.misc").fF("f") end, { desc = "f" })
-keymap("n", "F", function() require("personal-plugins.misc").fF("F") end, { desc = "F" })
-
 --------------------------------------------------------------------------------
 -- EDITING
 
@@ -319,8 +315,6 @@ do
 		function() require("personal-plugins.misc").startOrStopRecording(toggleKey, reg) end,
 		{ desc = "󰃽 Start/stop recording" }
 	)
-	-- stylua: ignore
-	keymap("n", "c" .. toggleKey, function() require("personal-plugins.misc").editMacro(reg) end, { desc = "󰃽 Edit recording" })
 	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
 end
 

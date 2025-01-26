@@ -1,6 +1,5 @@
--- INFO
--- A bunch of commands that are too small to be published as plugins, but too
--- big to put in the main config, where they would crowd the actual config.
+-- INFO A bunch of commands that are too small to be published as plugins, but
+-- too big to put in the main config, where they would crowd the actual config.
 -- Every function is self-contained and should be bound to a keymap.
 local M = {}
 --------------------------------------------------------------------------------
@@ -52,18 +51,6 @@ function M.startOrStopRecording(toggleKey, reg)
 			.. (notRecording and "begin_record.caf" or "end_record.caf")
 		vim.system { "afplay", sound } -- async
 	end
-end
-
-function M.editMacro(reg)
-	local macroContent = vim.fn.getreg(reg)
-	local title = ("Edit macro [%s]"):format(reg)
-	local icon = "󰃽"
-
-	vim.ui.input({ prompt = icon .. " " .. title, default = macroContent }, function(input)
-		if not input then return end
-		vim.fn.setreg(reg, input)
-		vim.notify(input, nil, { title = title, icon = icon })
-	end)
 end
 
 --------------------------------------------------------------------------------
@@ -230,18 +217,6 @@ function M.formatWithFallback()
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
 	end
-end
-
---------------------------------------------------------------------------------
-
--- `fF` work with `nN` instead of `;,` (inspired by tT.nvim)
----@param char "f"|"F"
-function M.fF(char)
-	local target = vim.fn.getcharstr() -- awaits user input for a char
-	local pattern = [[\V\C]] .. target
-	vim.fn.setreg("/", pattern)
-	vim.fn.search(pattern, char == "f" and "" or "b") -- move cursor
-	vim.v.searchforward = 1 -- `n` always forward, `N` always backward
 end
 
 --------------------------------------------------------------------------------
