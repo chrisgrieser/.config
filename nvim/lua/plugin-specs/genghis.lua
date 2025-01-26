@@ -20,8 +20,10 @@ return {
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 
-		{ "<M-CR>", function() require("genghis").nevigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
-		{ "<S-M-CR>", function() require("genghis").nevigateToFileInFolder("prev") end, desc = "󰖽 Prev file in folder" },
+		-- stylua: ignore
+		{ "<M-CR>", function() require("genghis").navigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
+		-- stylua: ignore
+		{ "<S-M-CR>", function() require("genghis").navigateToFileInFolder("prev") end, desc = "󰖿 Prev file in folder" },
 
 		{
 			"<leader>rx",
