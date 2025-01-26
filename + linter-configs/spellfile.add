@@ -15,6 +15,7 @@ cli
 QDA
 APA
 CSV
+PRs
 ltex
 json
 nvim
@@ -81,6 +82,7 @@ dotfiles
 LinkedIn
 backlink
 Evernote
+linewise
 dedenting
 Filetypes
 permalink
@@ -121,6 +123,7 @@ Colorschemes
 VSCode-style
 markdownlint
 ResearchGate
+subdirectory
 un-shallowing
 nvim-scissors
 operationalize

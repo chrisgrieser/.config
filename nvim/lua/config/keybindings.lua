@@ -287,8 +287,6 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 -- stylua: ignore start
 keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.misc").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
-keymap({ "n", "x" }, "<M-CR>", function() require("personal-plugins.misc").nextFileInFolder("next") end, { desc = "󰖽 Next file in folder" })
-keymap({ "n", "x" }, "<S-M-CR>", function() require("personal-plugins.misc").nextFileInFolder("prev") end, { desc = "󰖿 Prev file in folder" })
 -- stylua: ignore end
 
 -- close window or buffer
