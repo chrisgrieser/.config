@@ -20,6 +20,9 @@ return {
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
 
+		{ "<M-CR>", function() require("genghis").nevigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
+		{ "<S-M-CR>", function() require("genghis").nevigateToFileInFolder("prev") end, desc = "󰖽 Prev file in folder" },
+
 		{
 			"<leader>rx",
 			function() require("genghis").moveSelectionToNewFile() end,

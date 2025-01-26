@@ -22,7 +22,6 @@ vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
-vim.opt.iskeyword:append(".") -- treat `-` as word character, same as `_`
 
 -- treat all numbers as positive, ignoring dashes
 -- this also makes `<C-x>` stop at `0`
