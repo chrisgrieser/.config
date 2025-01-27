@@ -381,8 +381,10 @@ function hiraganafyCword() {
 		return;
 	}
 
-	let hiragana = cword;
-	// sort by length, to replace the longer romaji first, ensures correct resolving
+	// CONVERSION
+	let hiragana = cword.toLowerCase();
+	hiragana = hiragana.replace(/([kstnhmyrwngzdbpkschmrgjbp])\1/, "っ$1"); // small tsu
+	// sort by length, to replace the longer romaji first
 	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
 	for (const romaji of romajiByLength) {
 		hiragana = hiragana.replaceAll(romaji, romajiToHiraganaMap[romaji]);
