@@ -196,14 +196,14 @@ function smartMerge() {
 	const lnum = editor.getCursor().line;
 	const curLine = editor.getLine(lnum);
 	const nextLine = editor.getLine(lnum + 1);
-	const curLineCleaned = curLine.replace(/ +$/, ""); // trim trailing spaces
 
+	const curLineCleaned = curLine.replace(/ +$/, ""); // trim trailing spaces
 	const nextLineCleaned = nextLine
 		.replace(/^\s*- \[[x ]\] /, "") // task
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
-		.trim(); // justIndent
+		.trim(); // removed indentation
 	const mergedLine = curLineCleaned + " " + nextLineCleaned;
 
 	const prevCursor = editor.getCursor(); // prevent cursor from moving
@@ -275,7 +275,8 @@ function openNextLink(where) {
 	let cursorIsOnLink = false;
 	while (true) {
 		const { start, end } = rangeOfFirstLink(fullLine.slice(posInLine));
-		if (start === -1) break; // no link left
+		const noLinkLeft = start === -1 && end === -1;
+		if (noLinkLeft) break;
 		linkStart = posInLine + start;
 		linkEnd = posInLine + end;
 		cursorIsOnLink = linkStart <= cursor.ch && linkEnd >= cursor.ch;
@@ -446,7 +447,7 @@ function consoleLogFromWordUnderCursor() {
 	const logLine = indent + `console.log(${cursorWord});`;
 
 	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
-	editor.setCursor(cursor); // restore, as `replaceRange` moves cursor
+	editor.setCursor(cursor); // restore position as `replaceRange` moves cursor
 }
 
 //──────────────────────────────────────────────────────────────────────────────
