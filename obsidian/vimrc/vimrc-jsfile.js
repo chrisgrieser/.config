@@ -203,7 +203,7 @@ function smartMerge() {
 		.replace(/^\s*[-*+] /, "") // unordered list
 		.replace(/^\s*>+ /, "") // blockquote
 		.replace(/^\s*\d+[.)] /, "") // ordered list
-		.trim(); // removed indentation
+		.trim(); // remove indentation
 	const mergedLine = curLineCleaned + " " + nextLineCleaned;
 
 	const prevCursor = editor.getCursor(); // prevent cursor from moving
@@ -384,7 +384,7 @@ function hiraganafyCword() {
 
 	// CONVERSION
 	let hiragana = cword.toLowerCase();
-	hiragana = hiragana.replace(/([kstnhmyrwngzdbpkschmrgjbp])\1/, "っ$1"); // small tsu
+	hiragana = hiragana.replace(/([kstnhmyrwgzdbp])\1/, "っ$1"); // small tsu
 	// sort by length, to replace the longer romaji first
 	const romajiByLength = Object.keys(romajiToHiraganaMap).sort((a, b) => b.length - a.length);
 	for (const romaji of romajiByLength) {
@@ -431,11 +431,11 @@ function toggleJsLineComment() {
 }
 
 function appendJsComment() {
-	const cursor = editor.getCursor();
-	const text = editor.getLine(cursor.line);
+	const lnum = editor.getCursor().line;
+	const text = editor.getLine(lnum);
 	const updatedText = text + " // ";
-	editor.setLine(cursor.line, updatedText);
-	editor.setCursor(cursor.line, updatedText.length);
+	editor.setLine(lnum, updatedText);
+	editor.setCursor(lnum, updatedText.length);
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
 }
 
