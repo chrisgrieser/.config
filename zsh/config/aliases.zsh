@@ -18,7 +18,7 @@ alias zip='zip --recurse-paths --symlinks'
 #───────────────────────────────────────────────────────────────────────────────
 
 # EZA
-alias ls='eza --all --sort=newest --hyperlink --no-quotes --ignore-glob==".DS_Store" \
+alias ls='eza --all --sort=newest --hyperlink --no-quotes --ignore-glob=".DS_Store" \
 	--time-style=relative --no-user'
 
 # JUST
