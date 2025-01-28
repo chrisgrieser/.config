@@ -121,7 +121,9 @@ function run() {
 						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and mark as completed"),
 				},
 				// edit content
-				alt: { arg: content },
+				alt: {
+					arg: content,
+				},
 				// toggle completed
 				ctrl: {
 					variables: { showCompleted: (!showCompleted).toString() },
