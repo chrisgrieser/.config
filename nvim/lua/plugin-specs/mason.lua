@@ -5,7 +5,7 @@
 local function install(pack, version)
 	local notifyOpts = { title = "Mason", icon = " ", id = "mason.install", style = "minimal" }
 
-	local msg = version and ("[%s] updating to `%s`…"):format(pack.name, version)
+	local msg = version and ("[%s] updating to %s…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
 	vim.notify(msg, nil, notifyOpts)
 
