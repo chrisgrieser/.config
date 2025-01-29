@@ -304,7 +304,7 @@ end
 
 -- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
 M.serverConfigs.harper_ls = {
-	-- filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
+	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
 	settings = {
 		["harper-ls"] = {
 			userDictPath = vim.o.spellfile,
