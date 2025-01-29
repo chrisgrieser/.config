@@ -1,12 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
-  - { regex: "\\Bsich\\b", replace: "isch" }
+  - { regex: "\\Bsich ", replace: "isch " }
   - { trigger: Cafe, replace: Café, propagate_case: true }
   - { trigger: weider, replace: wieder }
   - { trigger: Diesntag, replace: Dienstag, propagate_case: true, word: true }
   - { trigger: Leibe, replace: Liebe, propagate_case: true, word: true }
-  - { trigger: algorithmsich, replace: algorithmisch }
   - { trigger: auhc, replace: auch, propagate_case: true, word: true }
   - { trigger: dei, replace: die, word: true, propagate_case: true }
   - { trigger: eien, replace: eine, word: true, propagate_case: true }
