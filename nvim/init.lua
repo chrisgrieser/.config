@@ -1,9 +1,3 @@
--- FIX broken `:Inspect` https://github.com/neovim/neovim/issues/31675
--- can be removed on the version after 0.10.3
-vim.hl = vim.highlight
-
---------------------------------------------------------------------------------
-
 -- If nvim was opened w/o argument, re-open the first oldfile that exists
 vim.defer_fn(function()
 	if vim.fn.argc() > 0 then return end -- BUG https://github.com/neovide/neovide/issues/2629
