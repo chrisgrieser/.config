@@ -174,7 +174,7 @@
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>tel</string>
+			<string>tel||call</string>
 			<key>text</key>
 			<string>Call with Facetime</string>
 			<key>url</key>
