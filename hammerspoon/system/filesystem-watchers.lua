@@ -87,10 +87,12 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		-- 5. STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
-			os.rename(path, gameFolder .. name)
-			-- open folders to copy icon
-			hs.open(gameFolder)
-			hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
+			success = os.rename(path, gameFolder .. name)
+			if success then
+				-- open folders to copy icon
+				hs.open(gameFolder)
+				hs.open(home .. "/Library/Application Support/Steam/steamapps/common")
+			end
 
 		-- 6. AUTO-INSTALL OBSIDIAN ALPHA
 		elseif name:find("%.asar%.gz$") and isDownloaded then
