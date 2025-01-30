@@ -1,3 +1,4 @@
+s
 fn
 yq
 md
@@ -17,6 +18,7 @@ APA
 CSV
 PRs
 baz
+LoC
 ltex
 json
 nvim
@@ -25,6 +27,7 @@ repo
 CLIs
 Goto
 toml
+Nano
 fixup
 Fixup
 utils
@@ -35,6 +38,7 @@ blink
 repos
 todos
 param
+langs
 keymap
 config
 fixups
@@ -99,6 +103,7 @@ formatter
 lspconfig
 backlinks
 occurrent
+supersets
 unindented
 Treesitter
 signcolumn
@@ -114,12 +119,17 @@ docstrings
 dependabot
 cheatsheet
 templating
+formatters
+treesitter
+statusline
 colorscheme
 habitualize
 Automagical
 frontmatter
 cheatsheets
 myLspConfig
+AppleScript
+insertation
 Colorschemes
 VSCode-style
 markdownlint

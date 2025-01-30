@@ -311,7 +311,7 @@ M.serverConfigs.harper_ls = {
 			diagnosticSeverity = "hint",
 			linters = {
 				spell_check = true,
-				sentence_capitalization = true, -- PENDING https://github.com/elijah-potter/harper/issues/228
+				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
 			},
 		},
 	},
