@@ -124,3 +124,4 @@ matches:
   - { trigger: cuase, replace: cause, propagate_case: true, word: true }
   - { trigger: shuold, replace: should, propagate_case: true, word: true }
   - { trigger: theri, replace: their, propagate_case: true, word: true }
+  - { trigger: itnerview, replace: interview, propagate_case: true, word: true }
