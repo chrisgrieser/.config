@@ -1,8 +1,8 @@
 {
   "Codeblock": {
     "body": [
-      "```${1:lang}",
-      "$CLIPBOARD$0",
+      "```$1",
+      "$0",
       "```"
     ],
     "prefix": "Codeblock"
