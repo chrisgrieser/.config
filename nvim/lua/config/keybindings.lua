@@ -49,7 +49,7 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 -- Open first URL in file
 keymap("n", "<D-U>", function()
 	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-	local url = text:match([[%l%l%l-://[^%s)%]}"'`]+]])
+	local url = text:match([[%l%l%l+://[^%s)%]}"'`]+]])
 	if url then
 		vim.ui.open(url)
 	else
