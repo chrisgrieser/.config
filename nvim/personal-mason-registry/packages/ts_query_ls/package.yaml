@@ -1,3 +1,4 @@
+# PENDING https://github.com/mason-org/mason-registry/pull/7849
 ---
 name: ts_query_ls
 description: An LSP implementation for Tree-sitter's query files
