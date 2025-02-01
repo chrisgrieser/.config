@@ -287,7 +287,6 @@ M.serverConfigs.yamlls = {
 --------------------------------------------------------------------------------
 -- LTEX (LanguageTool LSP)
 
-
 ---Helper function, as ltex etc lack ignore files
 ---@param client vim.lsp.Client
 ---@param bufnr number
@@ -302,16 +301,22 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	end
 end
 
--- DOCS https://github.com/elijah-potter/harper/blob/master/harper-ls/README.md#configuration
+-- DOCS https://writewithharper.com/docs/integrations/neovim
 M.serverConfigs.harper_ls = {
 	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
 	settings = {
 		["harper-ls"] = {
-			userDictPath = vim.o.spellfile,
 			diagnosticSeverity = "hint",
+			userDictPath = vim.o.spellfile,
+			markdown = { ignore_link_title = true },
+			codeActions = { forceStable = true },
 			linters = {
 				spell_check = true,
 				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
+				linking_verbs = true,
+				boring_words = true,
+				use_genitive = true,
+				plural_conjugate = true,
 			},
 		},
 	},
@@ -338,7 +343,7 @@ M.serverConfigs.ltex_plus = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"MORFOLOGIK_RULE_EN_US" -- spellcheck done via Harper instead
+					"MORFOLOGIK_RULE_EN_US", -- spellcheck done via Harper instead
 				},
 			},
 			additionalRules = {
