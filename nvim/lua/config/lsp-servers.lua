@@ -312,10 +312,6 @@ M.serverConfigs.harper_ls = {
 			linters = {
 				spell_check = true,
 				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
-				linking_verbs = true,
-				boring_words = true,
-				use_genitive = true,
-				plural_conjugate = true,
 			},
 		},
 	},
