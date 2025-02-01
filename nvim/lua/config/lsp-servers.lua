@@ -86,11 +86,11 @@ local efmConfig = {
 		},
 		{
 			lintSource = "markdownlint",
-			lintCommand = "markdownlint --stdin",
+			lintCommand = "markdownlint $'{INPUT}'",
+			lintStdin = false, -- not using stdin, so `.markdownlintignore` applies
 			lintIgnoreExitCode = true,
-			lintStdin = true,
 			lintSeverity = 3, -- 3: info, 2: warning
-			lintFormats = { "%f:%l:%c %m", "%f:%l %m", "%f: %l: %m" },
+			lintFormats = { "%f:%l:%c MD%n/%m", "%f:%l MD%n/%m" },
 		},
 	},
 	zsh = {
@@ -309,7 +309,6 @@ M.serverConfigs.harper_ls = {
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile,
 			markdown = { ignore_link_title = true },
-			codeActions = { forceStable = true },
 			linters = {
 				spell_check = true,
 				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
@@ -343,7 +342,7 @@ M.serverConfigs.ltex_plus = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"MORFOLOGIK_RULE_EN_US", -- spellcheck done via Harper instead
+					"MORFOLOGIK_RULE_EN_US", -- spellcheck; done via Harper instead
 				},
 			},
 			additionalRules = {
