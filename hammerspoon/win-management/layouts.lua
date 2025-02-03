@@ -63,15 +63,15 @@ if not env.isAtOffice then
 		end)
 end
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- LAYOUTS
 
 local function workLayout()
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
-	dockSwitcher("work")
 	holeCover.update()
 	darkmode.autoSwitch()
+	dockSwitcher("work")
 
 	-- prevent the automatic quitting of audio-apps from triggering starting spotify
 	videoAppWatcherForSpotify:stop()
