@@ -77,12 +77,6 @@ sketchybar \
 	background.color=$bg graph.color=$fg graph.fill_color=$graph_fill \
 	script="./cpu.sh" \
 	\
-	--add item sync-indicator $row_2 \
-	--set sync-indicator icon="󰓦" update_freq=180 \
-	script="./git-sync-bar-icon.sh" \
-	--add event repo-files-update \
-	--subscribe sync-indicator system_woke repo-files-update \
-	\
 	--add item network-download $row_2 \
 	--set network-download icon="" update_freq="3" \
 	script="./network-download.sh" \
@@ -94,6 +88,12 @@ sketchybar \
 	--add item package-updates $row_2 \
 	--set package-updates icon="" update_freq=86400 \
 	script="./homebrew-update-tracker.sh" \
+	\
+	--add item sync-indicator $row_2 \
+	--set sync-indicator icon="󰓦" update_freq=180 \
+	script="./git-sync-bar-icon.sh" \
+	--add event repo-files-update \
+	--subscribe sync-indicator system_woke repo-files-update \
 	\
 	`#─── END ─────────────────────────────────────────────────────────────────` \
 	--update # needs to run at the end of config and should not be run in an item script
