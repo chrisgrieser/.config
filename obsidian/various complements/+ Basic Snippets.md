@@ -7,6 +7,9 @@
 %% Tables %%
 Pandoc table caption>>>::: {custom-style="Table Caption"}\nTable 1: $0\n:::
 
+%% Figure Caption %%
+Pandoc figure caption>>>::: {custom-style="Figure Caption"}\nFigure 1: $0\n:::||caption|image
+
 %% References %%
 Pandoc references>>>::: {#refs}\n:::
 
