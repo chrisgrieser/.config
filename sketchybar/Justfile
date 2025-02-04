@@ -1,7 +1,7 @@
 set quiet := true
 
-# alternatively, use `sketchybar --hotload`
 reload:
+    # alternatively, use `sketchybar --hotload` for constant reloading when developing
     sketchybar --reload
 
 docs:
