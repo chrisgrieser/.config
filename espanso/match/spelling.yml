@@ -125,3 +125,4 @@ matches:
   - { trigger: shuold, replace: should, propagate_case: true, word: true }
   - { trigger: theri, replace: their, propagate_case: true, word: true }
   - { trigger: itnerview, replace: interview, propagate_case: true, word: true }
+  - { trigger: tehre, replace: there, propagate_case: true, word: true }
