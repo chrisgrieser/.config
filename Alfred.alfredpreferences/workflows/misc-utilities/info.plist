@@ -580,7 +580,7 @@
 				<key>subtext</key>
 				<string>{var:scratchpad_path}</string>
 				<key>text</key>
-				<string>Append to scratchpad:</string>
+				<string>Append to scratchpad: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>

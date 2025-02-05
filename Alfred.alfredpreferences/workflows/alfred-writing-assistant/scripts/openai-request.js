@@ -15,9 +15,7 @@ function writeToFile(filepath, text) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const selection = argv[0]?.trim();
-	if (!selection) return "ERROR: No selection.";
-
+	const selection = argv[0]; // do not trim, so rephrased text has same whitespace
 	const apiKey =
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_apikey").js ||
 		app.doShellScript('source "$HOME/.zshenv"; echo "$OPENAI_API_KEY"').trim();
