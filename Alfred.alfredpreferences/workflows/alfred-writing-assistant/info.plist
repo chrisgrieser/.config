@@ -704,21 +704,33 @@ DOUBLE CLICK TO EDIT</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>gpt-3.5-turbo</string>
+				<string>gpt-4o-mini</string>
 				<key>pairs</key>
 				<array>
 					<array>
-						<string>GPT-3.5 Turbo</string>
-						<string>gpt-3.5-turbo</string>
+						<string>o1</string>
+						<string>o1</string>
 					</array>
 					<array>
 						<string>GPT-4o</string>
 						<string>gpt-4o</string>
 					</array>
+					<array>
+						<string>o1 mini</string>
+						<string>o1-mini</string>
+					</array>
+					<array>
+						<string>GPT-4o mini</string>
+						<string>gpt-4o-mini</string>
+					</array>
+					<array>
+						<string>GPT-3.5 Turbo (deprecated)</string>
+						<string>gpt-3.5-turbo</string>
+					</array>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>OpenAI Model. "GPT-4o" is better, but also more expensive. See https://platform.openai.com/docs/models/gpt-3</string>
+			<string>OpenAI model. The list is roughly sorted by price/capability, meaning the most expensive but also most capable model is at the top. For prices and more information, see https://platform.openai.com/docs/models</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -729,33 +741,37 @@ DOUBLE CLICK TO EDIT</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>100</string>
-				<key>placeholder</key>
-				<string>1337</string>
-				<key>required</key>
+				<key>defaultvalue</key>
+				<integer>0</integer>
+				<key>markercount</key>
+				<integer>41</integer>
+				<key>maxvalue</key>
+				<integer>20</integer>
+				<key>minvalue</key>
+				<integer>-20</integer>
+				<key>onlystoponmarkers</key>
 				<true/>
-				<key>trim</key>
+				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Max token usage (between 1 and 4000)</string>
+			<string>Frequency Penalty. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>slider</string>
 			<key>variable</key>
-			<string>maxTokens</string>
+			<string>frequency_penalty</string>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>3</integer>
+				<integer>5</integer>
 				<key>markercount</key>
-				<integer>11</integer>
+				<integer>21</integer>
 				<key>maxvalue</key>
-				<integer>10</integer>
+				<integer>20</integer>
 				<key>minvalue</key>
 				<integer>0</integer>
 				<key>onlystoponmarkers</key>
@@ -764,7 +780,7 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Temperature ("Creativity"). Value between 0 (more predictable) and 10 (more random).</string>
+			<string>Temperature. Higher values like 8 will make the output more random, while lower values like 2 will make it more focused and deterministic.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -795,7 +811,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.1</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
