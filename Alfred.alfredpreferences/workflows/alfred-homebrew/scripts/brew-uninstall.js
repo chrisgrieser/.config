@@ -12,7 +12,7 @@ const alfredMatcher = (/** @type {string} */ str) => str.replaceAll("-", " ") + 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const isBrewReinstall = Boolean(argv[0]);
-	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1";
+	const includeMacAppStoreSetting = $.getenv("list_mac_app_store") === "1" && !isBrewReinstall;
 	const useZap = $.getenv("use_zap") === "1";
 
 	/** @type{AlfredItem[]} */

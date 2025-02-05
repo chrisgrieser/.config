@@ -97,19 +97,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>26468F48-BF5B-400E-ABD5-C3269AF53746</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>3CC16E2B-1B69-403D-890E-52F869AD6AE7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<array>
 			<dict>
@@ -140,19 +127,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>3CC16E2B-1B69-403D-890E-52F869AD6AE7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>91350A6C-9C24-4365-9F59-039F1A8F06DB</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -212,16 +186,6 @@
 				<string>⇧: Snooze to tomorrow</string>
 				<key>vitoclose</key>
 				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>26468F48-BF5B-400E-ABD5-C3269AF53746</string>
-				<key>modifiers</key>
-				<integer>8388608</integer>
-				<key>modifiersubtext</key>
-				<string>fn: Cycle priority</string>
-				<key>vitoclose</key>
-				<true/>
 			</dict>
 		</array>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
@@ -1107,69 +1071,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>reminder-today</string>
-				<key>passinputasargument</key>
-				<false/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>91350A6C-9C24-4365-9F59-039F1A8F06DB</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>❗️Priority changed to</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>3CC16E2B-1B69-403D-890E-52F869AD6AE7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/increase-priority.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>26468F48-BF5B-400E-ABD5-C3269AF53746</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1185,27 +1086,6 @@ fi</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:quickadd_reminder_keyword}</string>
-				<key>subtext</key>
-				<string>today</string>
-				<key>text</key>
-				<string>➕ Add Reminder: {query}</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1231,6 +1111,27 @@ fi</string>
 			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_reminder_keyword}</string>
+				<key>subtext</key>
+				<string>today</string>
+				<key>text</key>
+				<string>➕ Add Reminder: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1288,6 +1189,29 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-reminder-at-date.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1337,29 +1261,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-reminder-at-date.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1395,8 +1296,6 @@ fi</string>
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  again to hide completed reminders again.
-	+ &lt;kbd&gt;Fn⏎&lt;/kbd&gt;: Increase the reminder's priority by one level (or reset it
-	  to "none," if already at the highest priority).
 - Quickly add a new reminder due today with the keyword `qq`. Alternatively, you
   can also use a
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to add
@@ -1424,9 +1323,9 @@ brew install keith/formulae/reminders-cli
 			<key>note</key>
 			<string>add reminder</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>865</real>
 		</dict>
 		<key>1486415C-BA88-4276-A021-3773113CAF94</key>
 		<dict>
@@ -1442,9 +1341,9 @@ brew install keith/formulae/reminders-cli
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>880</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1484,17 +1383,6 @@ brew install keith/formulae/reminders-cli
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
-		<key>26468F48-BF5B-400E-ABD5-C3269AF53746</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>increase priority</string>
-			<key>xpos</key>
-			<real>485</real>
-			<key>ypos</key>
-			<real>735</real>
-		</dict>
 		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
 		<dict>
 			<key>colorindex</key>
@@ -1509,18 +1397,9 @@ brew install keith/formulae/reminders-cli
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>645</real>
+			<real>630</real>
 			<key>ypos</key>
-			<real>1045</real>
-		</dict>
-		<key>3CC16E2B-1B69-403D-890E-52F869AD6AE7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>640</real>
-			<key>ypos</key>
-			<real>735</real>
+			<real>885</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
@@ -1567,9 +1446,9 @@ brew install keith/formulae/reminders-cli
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>755</real>
 		</dict>
 		<key>63FD13B2-4520-4BF7-B444-C84531F947E1</key>
 		<dict>
@@ -1620,18 +1499,9 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>740</real>
+			<real>725</real>
 			<key>ypos</key>
-			<real>1160</real>
-		</dict>
-		<key>91350A6C-9C24-4365-9F59-039F1A8F06DB</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>790</real>
-			<key>ypos</key>
-			<real>735</real>
+			<real>1000</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
@@ -1640,9 +1510,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>quick add today at future date</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>1155</real>
+			<real>1000</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1691,9 +1561,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>quick add today</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>265</real>
 			<key>ypos</key>
-			<real>1020</real>
+			<real>865</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
@@ -1702,9 +1572,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>add at date</string>
 			<key>xpos</key>
-			<real>495</real>
+			<real>480</real>
 			<key>ypos</key>
-			<real>1160</real>
+			<real>1000</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1865,25 +1735,6 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>simplified</string>
-			</dict>
-			<key>description</key>
-			<string>When cycling priority levels via `fn`, only use `none` and `low`.</string>
-			<key>label</key>
-			<string>Priorities</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>only_low_prio</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
 				<string></string>
@@ -1903,7 +1754,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

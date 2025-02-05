@@ -179,7 +179,7 @@ function run() {
 			subtitle: [formulaIcon, caveats, downloads, sep, desc].join(""),
 			arg: `--formula ${name}`,
 			quicklookurl: formula.homepage,
-			downloads: Number.parseInt(downloads.replace(/,/g, "")), // only for sorting
+			downloads: Number.parseInt(downloads.replaceAll(",", "")), // only for sorting
 			text: {
 				largetype: caveatText,
 				copy: caveatText,
@@ -200,8 +200,9 @@ function run() {
 	});
 
 	// 6. MERGE & SORT BOTH LISTS
-	// & move shorter package names top (short names like `sd` are ranked further down otherwise)
-	// & sort by download count as secondary criteria
+	// a. move shorter package names top, since short names like `sd` are otherwise ranked
+	//    further down, making them often hard to find
+	// b. sort by download count as secondary criteria
 	const allPackages = [...casks, ...formulas].sort((/** @type{any} */ a, /** @type{any} */ b) => {
 		const titleLengthDiff = a.title.length - b.title.length;
 		if (titleLengthDiff !== 0) return titleLengthDiff;

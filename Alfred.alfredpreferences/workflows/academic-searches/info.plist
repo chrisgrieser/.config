@@ -120,6 +120,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>60A52DCE-CE88-442B-868B-37C0D5C694A5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F363C42D-DB6F-49D2-A314-51F7883033EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D1458EC8-DC4C-4FDC-B444-3255C5C82CF5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>B97893FA-B5CA-46C3-9712-35A82208E1BD</key>
 		<array>
 			<dict>
@@ -370,12 +393,54 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com+OR+site%3Atheverge.com)&amp;tbm=nws</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F363C42D-DB6F-49D2-A314-51F7883033EA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>https://elicit.org/search?q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>885E52AE-9E54-4319-A19C-E6201F89E6D0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>tn</string>
+				<key>subtext</key>
+				<string>for PhD data collection</string>
+				<key>text</key>
+				<string>Technews: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>60A52DCE-CE88-442B-868B-37C0D5C694A5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -397,6 +462,33 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:search_logfile}</string>
+				<key>filetext</key>
+				<string>- {isodate:yyyy-MM-dd HH:mm} – {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>D1458EC8-DC4C-4FDC-B444-3255C5C82CF5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -491,6 +583,17 @@
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>60A52DCE-CE88-442B-868B-37C0D5C694A5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>tech news search</string>
+			<key>xpos</key>
+			<real>445</real>
+			<key>ypos</key>
+			<real>405</real>
+		</dict>
 		<key>6442AC22-6F2F-49B6-ACBA-D5FD8F7F78E7</key>
 		<dict>
 			<key>colorindex</key>
@@ -547,9 +650,51 @@
 			<key>ypos</key>
 			<real>600</real>
 		</dict>
+		<key>D1458EC8-DC4C-4FDC-B444-3255C5C82CF5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>log the search</string>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>490</real>
+		</dict>
+		<key>F363C42D-DB6F-49D2-A314-51F7883033EA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>355</real>
+		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string>search-log.md</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>log file</string>
+			<key>label</key>
+			<string>Tech News Search</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>search_logfile</string>
+		</dict>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
