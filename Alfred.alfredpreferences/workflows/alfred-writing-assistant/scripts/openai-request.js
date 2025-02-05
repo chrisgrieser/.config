@@ -45,16 +45,20 @@ function run(argv) {
 		messages: [{ role: "user", content: prompt }],
 		temperature: temperature,
 	};
-	// write to file as send request via `--data-binary` to avoid more escaping issues
-	writeToFile(dataCache, JSON.stringify(data));
 
+	// write to file as send request via `--data-binary` to avoid more escaping issues
+	// DOCS https://platform.openai.com/docs/api-reference/chat
+	writeToFile(dataCache, JSON.stringify(data));
 	const response = app.doShellScript(
 		`curl --max-time 15 https://api.openai.com/v1/chat/completions \
 		-H 'Content-Type: application/json' \
 		-H 'Authorization: Bearer ${apiKey}' \
 		--data-binary @'${dataCache}' `,
 	);
+
 	if (!response) return "ERROR: No response from OpenAI API.";
 	const obj = JSON.parse(response);
-	return obj?.choices?.[0].message?.content || obj?.error?.message || "ERROR: Unknown error.";
+	return obj.error
+		? `ERROR ${obj.error.code}: ${obj.error.message}`
+		: obj?.choices?.[0].message?.content;
 }

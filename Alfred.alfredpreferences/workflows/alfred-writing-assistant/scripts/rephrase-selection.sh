@@ -12,6 +12,7 @@ rephrased=$(osascript -l JavaScript "./scripts/openai-request.js" "$selection")
 [[ -z "$rephrased" ]] && rephrased="ERROR: Unknown error."
 if [[ "$rephrased" =~ ^ERROR ]]; then
 	echo "$rephrased"
+	echo "$selection" # keep selection
 	return 1
 fi
 
