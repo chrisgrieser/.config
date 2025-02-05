@@ -15,16 +15,16 @@
 			<key>url</key>
 			<string>https://www.compart.com/en/unicode/search?q={query}</string>
 		</dict>
-		<key>0501B994-1E9B-4FE5-8595-BDBFA4B72AD6</key>
+		<key>01B6F235-3466-4ACA-9EF1-12A595817B41</key>
 		<dict>
 			<key>enabled</key>
 			<true/>
 			<key>keyword</key>
-			<string>lucid</string>
+			<string>ud</string>
 			<key>text</key>
-			<string>Lucid Icons: {query}</string>
+			<string>Urban Dictionary:</string>
 			<key>url</key>
-			<string>https://lucide.dev/icons/?search={query}</string>
+			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
 		<key>295774FE-716A-4B62-87C6-F36AB22838CC</key>
 		<dict>
@@ -47,17 +47,6 @@
 			<string>Tenor gifs: '{query}'</string>
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
-		</dict>
-		<key>33661F1E-FC5A-4DF3-9BFD-DC3174B096B3</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>sch</string>
-			<key>text</key>
-			<string>Google Scholar: '{query}'</string>
-			<key>url</key>
-			<string>https://scholar.google.com/scholar?q={query}</string>
 		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
@@ -114,17 +103,6 @@
 			<key>url</key>
 			<string>https://findxkcd.com/?xkcd%5Bquery%5D={query}</string>
 		</dict>
-		<key>89A5DDD7-8916-4511-A505-56A0272CDF25</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>ai</string>
-			<key>text</key>
-			<string>ChatGPT: '{query}'</string>
-			<key>url</key>
-			<string>https://chatgpt.com?q={query}</string>
-		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>
 			<key>enabled</key>
@@ -135,17 +113,6 @@
 			<string>Kickass Torrents: {query}</string>
 			<key>url</key>
 			<string>https://kickasstorrents.to/usearch/{query}</string>
-		</dict>
-		<key>A60A3A72-DF83-430C-9ED0-4FF026EC0E5F</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>nf</string>
-			<key>text</key>
-			<string>Nerdfont: '{query}'</string>
-			<key>url</key>
-			<string>https://www.nerdfonts.com/cheat-sheet?q={query}</string>
 		</dict>
 		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
 		<dict>
@@ -179,17 +146,6 @@
 			<string>Call with Facetime</string>
 			<key>url</key>
 			<string>tel://{query}</string>
-		</dict>
-		<key>D6C57494-6E24-4217-8918-2AE2DAA091A0</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>pip</string>
-			<key>text</key>
-			<string>PyPI: '{query}'</string>
-			<key>url</key>
-			<string>https://pypi.org/search/?q={query}</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>

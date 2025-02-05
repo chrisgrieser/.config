@@ -22,32 +22,6 @@ const isToday = (/** @type {Date} */ aDate) => {
 const urlRegex =
 	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
-//──────────────────────────────────────────────────────────────────────────────
-
-// SIC `reminders show` return priority as number, `reminders add` requires string…
-const prioIntToStr = {
-	0: "none",
-	9: "low",
-	5: "medium",
-	1: "high",
-};
-
-// mimic the display of priorities in the Reminders app
-const prioIntToEmoji = {
-	0: "",
-	9: "❇️",
-	5: "❇️❇️",
-	1: "❇️❇️❇️",
-};
-
-// SIC numbers do not comply with order of priorities…
-const prioIntToOrder = {
-	0: 0,
-	9: 1,
-	5: 2,
-	1: 3,
-};
-
 //───────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -77,17 +51,14 @@ function run() {
 			const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || noDueDate;
 		})
-		// on top of creation date, also sort by priority
-		.sort((a, b) => prioIntToOrder[b.priority] - prioIntToOrder[a.priority]);
 	const remindersLeftLater = remindersFiltered.length - 1;
 
 	/** @type {AlfredItem[]} */
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, externalId, isCompleted, dueDate, priority } = rem;
+		const { title, notes, externalId, isCompleted, dueDate } = rem;
 		const body = notes || "";
 		const displayBody = body.trim().replace(/\n+/g, " · ");
 		const content = title + "\n" + body;
-		const prioDisplay = prioIntToEmoji[priority] ? prioIntToEmoji[priority] + "  " : "";
 
 		const [url] = content.match(urlRegex) || [];
 		let emoji = isCompleted ? "☑️ " : "";
@@ -98,13 +69,12 @@ function run() {
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: emoji + title,
-			subtitle: prioDisplay + displayBody,
+			subtitle: displayBody,
 			text: { copy: content, largetype: content },
 			variables: {
 				id: externalId,
 				title: title,
 				body: body,
-				priority: prioIntToStr[priority],
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				mode: isCompleted ? "uncomplete" : "complete",
 				cmdMode: url ? "open-url" : "copy", // only for cmd
@@ -153,6 +123,6 @@ function run() {
 
 	return JSON.stringify({
 		items: reminders,
-		skipknowledge: true, // keep sorting by priority, not by usage
+		skipknowledge: true, // keep sorting order
 	});
 }
