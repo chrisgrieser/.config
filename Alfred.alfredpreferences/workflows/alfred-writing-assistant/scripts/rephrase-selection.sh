@@ -3,7 +3,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 # CALL OPENAI API via JXA, since it properly handles JSON without needing a dependency
 
-selection="$*"
+selection="$*" # already checked via Alfred that selection is non-empty
 cache="$alfred_workflow_cache"
 mkdir -p "$cache"
 rephrased=$(osascript -l JavaScript "./scripts/openai-request.js" "$selection")
