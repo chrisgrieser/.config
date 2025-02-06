@@ -218,8 +218,8 @@ local blinkGitOpts = {
 					module = "blink-cmp-git",
 					name = "Git",
 
-					--- @module 'blink-cmp-git'
-					--- @type blink-cmp-git.Options
+					---@module 'blink-cmp-git'
+					---@type blink-cmp-git.Options
 					opts = {
 						enabled = true, -- pre-cache
 
