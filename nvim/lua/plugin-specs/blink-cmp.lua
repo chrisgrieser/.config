@@ -155,10 +155,10 @@ local blinkConfig = {
 			nerd_font_variant = "normal",
 			kind_icons = {
 				-- different icons of the corresponding source
-
 				Text = "󰉿", -- `buffer`
 				Snippet = "󰞘", -- `snippets`
 				File = "", -- `path`
+
 				Folder = "󰉋",
 				Method = "󰊕",
 				Function = "󰡱",
@@ -188,6 +188,7 @@ local blinkConfig = {
 
 --------------------------------------------------------------------------------
 -- BLINK.CMP.GIT
+-- options related to this plugin separated out so they are more clearly visible
 
 local blinkGitOpts = {
 	init = function()
