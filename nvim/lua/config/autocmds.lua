@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		end)
 		if root and root ~= "" then
 			vim.uv.chdir(root)
-			pcall(vim.cmd.BlinkCmpGitReloadCache)
+			-- pcall(vim.cmd.BlinkCmpGitReloadCache) -- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/issues/12
 		end
 	end,
 })

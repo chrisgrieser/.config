@@ -133,6 +133,7 @@ local blinkConfig = {
 
 								-- use source-specific icons, and `kind_icon` only for items from LSPs
 								local sourceIcons = {
+									git = "󰊢",
 									snippets = "󰩫",
 									buffer = "󰦨",
 									emmet = "",
@@ -154,10 +155,10 @@ local blinkConfig = {
 			nerd_font_variant = "normal",
 			kind_icons = {
 				-- different icons of the corresponding source
+
 				Text = "󰉿", -- `buffer`
 				Snippet = "󰞘", -- `snippets`
 				File = "", -- `path`
-
 				Folder = "󰉋",
 				Method = "󰊕",
 				Function = "󰡱",
@@ -189,6 +190,18 @@ local blinkConfig = {
 -- BLINK.CMP.GIT
 
 local blinkGitOpts = {
+	init = function()
+		local lastCwd = vim.uv.cwd()
+		vim.api.nvim_create_autocmd("BufEnter", {
+			desc = "User: blink-cmp-git reload",
+			callback = function()
+				if vim.uv.cwd() ~= lastCwd then
+					lastCwd = vim.uv.cwd()
+					pcall(vim.cmd.BlinkCmpGitReloadCache)
+				end
+			end,
+		})
+	end,
 	dependencies = {
 		"Kaiser-Yang/blink-cmp-git",
 		dependencies = "nvim-lua/plenary.nvim",
@@ -203,10 +216,14 @@ local blinkGitOpts = {
 				git = {
 					module = "blink-cmp-git",
 					name = "Git",
+
+					--- @module 'blink-cmp-git'
+					--- @type blink-cmp-git.Options
 					opts = {
-						score_offset = 100,
-						enabled = true,
+						enabled = true, -- pre-cache
 						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
+
+						commit = { enable = false }, -- annoying and useless completions on `:`
 					},
 				},
 			},
