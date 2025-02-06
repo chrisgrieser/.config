@@ -1,5 +1,5 @@
 {
-  "blink-cmp-git": { "branch": "master", "commit": "599580d33b4034db4fb071615f7c6777da9a5b25" },
+  "blink-cmp-git": { "branch": "master", "commit": "720a58634eb5e3089216ac64f9c9f5980d3f598a" },
   "blink.cmp": { "branch": "main", "commit": "b6f11a0aa33e601c469a126e3ed6e35208fe3ea3" },
   "ccc.nvim": { "branch": "main", "commit": "b57cbaf8db3ac43c56c9e2c7f3812944638260ed" },
   "gitsigns.nvim": { "branch": "main", "commit": "fc56fc25cfc3dc3f24266508aa4a7096102eb6a6" },
@@ -25,7 +25,6 @@
   "nvim-lspconfig": { "branch": "master", "commit": "00dae9f5f4ad215d4561f2fd2f26478c48b0ca7f" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
   "nvim-origami": { "branch": "main", "commit": "d46d552ffe117739e4a7ce4207966c163db96ea0" },
-  "nvim-rip-substitute": { "branch": "main", "commit": "7be26ea5ebb0fe38fbfc3c69c22d535d02c9ab1e" },
   "nvim-rulebook": { "branch": "main", "commit": "daeb662a331af495a0ff98ca8bd6bc66b5f97db8" },
   "nvim-scissors": { "branch": "main", "commit": "12d9f282b67525bb766c6fe33317caf25a19c86a" },
   "nvim-spider": { "branch": "main", "commit": "2b38e3e95e143313d78ca098eeecda7aebfce925" },
