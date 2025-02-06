@@ -1,7 +1,7 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
-return {
+local blinkConfig = {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
 	version = "*", -- REQUIRED to download pre-built binary
@@ -14,7 +14,21 @@ return {
 				["rip-substitute"] = { "buffer" },
 				gitcommit = {},
 			},
+
 			providers = {
+				--------------------------------------------------------------------
+				-- BLINK.CMP.GIT
+				git = {
+					module = "blink-cmp-git",
+					name = "Git",
+					opts = {
+						score_offset = 100,
+						enabled = true,
+						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
+					},
+				},
+				--------------------------------------------------------------------
+
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
 					enabled = function()
@@ -170,3 +184,34 @@ return {
 		},
 	},
 }
+
+--------------------------------------------------------------------------------
+-- BLINK.CMP.GIT
+
+local blinkGitOpts = {
+	dependencies = {
+		"Kaiser-Yang/blink-cmp-git",
+		dependencies = "nvim-lua/plenary.nvim",
+		cmd = { "BlinkCmpGitReloadCache" },
+	},
+	opts = {
+		sources = {
+			per_filetype = {
+				gitcommit = { "git" },
+			},
+			providers = {
+				git = {
+					module = "blink-cmp-git",
+					name = "Git",
+					opts = {
+						score_offset = 100,
+						enabled = true,
+						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
+					},
+				},
+			},
+		},
+	},
+}
+
+return vim.tbl_deep_extend("force", blinkConfig, blinkGitOpts)

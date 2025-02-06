@@ -90,7 +90,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
-		if root and root ~= "" then vim.uv.chdir(root) end
+		if root and root ~= "" then
+			vim.uv.chdir(root)
+			pcall(vim.cmd.BlinkCmpGitReloadCache)
+		end
 	end,
 })
 

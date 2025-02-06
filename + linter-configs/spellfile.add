@@ -5,6 +5,7 @@ md
 fn
 Fn
 js
+un
 fzf
 lua
 pre
@@ -52,6 +53,7 @@ stylua
 Quadro
 MAXQDA
 nvim's
+rebase
 keymaps
 Gruvbox
 builtin
@@ -68,6 +70,8 @@ devdocs
 WezTerm
 pyright
 OneNote
+pickaxe
+tinygit
 superset
 basename
 longform
@@ -136,6 +140,8 @@ VSCode-style
 markdownlint
 ResearchGate
 subdirectory
+unshallowing
+customizable
 un-shallowing
 nvim-scissors
 operationalize
