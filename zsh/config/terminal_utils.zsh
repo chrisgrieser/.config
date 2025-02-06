@@ -14,12 +14,6 @@ function tree {
 	eza --tree --level="$level" --no-quotes --color=always | less
 }
 
-# copy `PWD` to clipboard
-function ,ya {
-	echo -n "$PWD" | pbcopy
-	echo "Copied: $PWD"
-}
-
 # utility scripts only made available, but not loaded directly (= lazy-loading)
 export PATH="$ZDOTDIR/utilities/":$PATH
 
@@ -208,7 +202,7 @@ function d {
 function ..d() {
 	# GUARD accidental deletions of folders
 	if [[ ! "$PWD" =~ /Developer/ ]]; then
-		print '\e[0;33mCan only delete inside subfolder of "Developer".\e[0m'
+		print '\e[0;33mCan only delete inside subfolder of "~/Developer".\e[0m'
 		return 1
 	fi
 
