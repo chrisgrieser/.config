@@ -222,7 +222,6 @@ local blinkGitOpts = {
 					--- @type blink-cmp-git.Options
 					opts = {
 						enabled = true, -- pre-cache
-						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
 
 						-- only use `#` for issues, the rest I do not need
 						commit = { enable = false },
