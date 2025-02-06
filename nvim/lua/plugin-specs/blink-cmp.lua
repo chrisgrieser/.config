@@ -224,7 +224,14 @@ local blinkGitOpts = {
 						enabled = true, -- pre-cache
 						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
 
-						commit = { enable = false }, -- annoying and useless completions on `:`
+						-- only use `#` for issues, the rest I do not need
+						commit = { enable = false },
+						git_centers = {
+							github = {
+								pull_request = { enable = false },
+								mention = { enable = false },
+							},
+						},
 					},
 				},
 			},
