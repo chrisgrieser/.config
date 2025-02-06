@@ -44,7 +44,7 @@ return {
 			{ filter = { event = "notify", find = "No code actions available" }, skip = true },
 
 			-- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/issues/11
-			-- { filter = { event = "notify", find = "repository has disabled issues" }, skip = true },
+			{ filter = { event = "notify", find = "repository has disabled issues" }, skip = true },
 		},
 		cmdline = {
 			format = {
