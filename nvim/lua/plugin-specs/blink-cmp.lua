@@ -205,7 +205,30 @@ local blinkGitOpts = {
 							github = {
 								pull_request = { enable = false },
 								mention = { enable = false },
-								issue = { insert_text_trailing = "" }, -- no trailing space after `#123`
+								issue = {
+									separate_output = function(output)
+										local suggestions = vim.iter(vim.json.decode(output))
+											:map(function(issue)
+												--- @type blink-cmp-git.CompletionItem
+												local suggestion = {
+													label = "#" .. issue.number .. " " .. issue.title,
+													insert_text = "#" .. issue.number,
+													documentation = tostring(issue.title)
+														.. "\n"
+														.. "Author: "
+														.. tostring(issue.author.login)
+														.. "\n"
+														.. "Created at: "
+														.. tostring(issue.createdAt)
+														.. "\n\n"
+														.. tostring(issue.body),
+												}
+												return suggestion
+											end)
+										return suggestions
+									end,
+									insert_text_trailing = "", -- no trailing space after `#123`
+								},
 							},
 						},
 					},
