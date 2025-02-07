@@ -209,21 +209,16 @@ local blinkGitOpts = {
 									separate_output = function(output)
 										local suggestions = vim.iter(vim.json.decode(output))
 											:map(function(issue)
-												--- @type blink-cmp-git.CompletionItem
-												local suggestion = {
+												return {
 													label = "#" .. issue.number .. " " .. issue.title,
 													insert_text = "#" .. issue.number,
-													documentation = tostring(issue.title)
-														.. "\n"
-														.. "Author: "
-														.. tostring(issue.author.login)
-														.. "\n"
-														.. "Created at: "
-														.. tostring(issue.createdAt)
-														.. "\n\n"
-														.. tostring(issue.body),
+													documentation = ("# %s\n*by %s at %s*\n \n%s"):format(
+														issue.title,
+														issue.author.login,
+														issue.createdAt,
+														issue.body
+													),
 												}
-												return suggestion
 											end)
 										return suggestions
 									end,
