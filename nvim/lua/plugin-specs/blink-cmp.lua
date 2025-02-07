@@ -12,23 +12,10 @@ local blinkConfig = {
 		sources = {
 			per_filetype = {
 				["rip-substitute"] = { "buffer" },
-				gitcommit = {},
+				gitcommit = { "buffer" },
 			},
 
 			providers = {
-				--------------------------------------------------------------------
-				-- BLINK.CMP.GIT
-				git = {
-					module = "blink-cmp-git",
-					name = "Git",
-					opts = {
-						score_offset = 100,
-						enabled = true,
-						should_show_items = function() return vim.bo.filetype == "gitcommit" end,
-					},
-				},
-				--------------------------------------------------------------------
-
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
 					enabled = function()
@@ -48,7 +35,7 @@ local blinkConfig = {
 					-- when manually showing completions to see available fields
 					min_keyword_length = 1,
 					score_offset = -1,
-					opts = { clipboard_register = "+" },
+					opts = { clipboard_register = "+" }, -- register to use for `$CLIPBOARD`
 				},
 				path = {
 					opts = { get_cwd = vim.uv.cwd },
@@ -191,27 +178,17 @@ local blinkConfig = {
 -- options related to this plugin separated out so they are more clearly visible
 
 local blinkGitOpts = {
-	init = function()
-		local lastCwd = vim.uv.cwd()
-		vim.api.nvim_create_autocmd("BufEnter", {
-			desc = "User: blink-cmp-git reload",
-			callback = function()
-				if vim.uv.cwd() ~= lastCwd then
-					lastCwd = vim.uv.cwd()
-					pcall(vim.cmd.BlinkCmpGitReloadCache)
-				end
-			end,
-		})
-	end,
 	dependencies = {
 		"Kaiser-Yang/blink-cmp-git",
 		dependencies = "nvim-lua/plenary.nvim",
-		cmd = { "BlinkCmpGitReloadCache" },
+
+		-- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/pull/17
+		branch = "enhancement-user-experience",
 	},
 	opts = {
 		sources = {
 			per_filetype = {
-				gitcommit = { "git" },
+				gitcommit = { "git", "buffer" },
 			},
 			providers = {
 				git = {
@@ -223,12 +200,12 @@ local blinkGitOpts = {
 					opts = {
 						enabled = true, -- pre-cache
 
-						-- only use `#` for issues, the rest I do not need
 						commit = { enable = false },
 						git_centers = {
 							github = {
 								pull_request = { enable = false },
 								mention = { enable = false },
+								issue = { insert_text_trailing = "" }, -- no trailing space after `#123`
 							},
 						},
 					},
