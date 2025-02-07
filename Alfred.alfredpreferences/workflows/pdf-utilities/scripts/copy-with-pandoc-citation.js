@@ -19,6 +19,11 @@ function run(argv) {
 	const [_, citekey, currentPage] = pdfWinTitle.match(/(.*?)_.* Page (\d+) of \d+/) || [];
 	const pageInPdf = Number.parseInt(currentPage || "0");
 
+	if (!citekey || !currentPage) {
+		app.setTheClipboardTo(selection);
+		return "Selection without citekey." // for Alfred notification
+	}
+
 	const libraryPath = $.getenv("bibtex_library_path");
 	const entry = app.doShellScript(
 		`grep --after-context=20 --max-count=1 "{${citekey}," "${libraryPath}" || true`,
