@@ -181,9 +181,6 @@ local blinkGitOpts = {
 	dependencies = {
 		"Kaiser-Yang/blink-cmp-git",
 		dependencies = "nvim-lua/plenary.nvim",
-
-		-- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/pull/17
-		branch = "enhancement-user-experience",
 	},
 	opts = {
 		sources = {
