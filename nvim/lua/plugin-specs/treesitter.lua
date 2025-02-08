@@ -72,7 +72,7 @@ return {
 		require("nvim-treesitter.configs").setup(opts)
 
 		local function codeContext()
-			local maxLen = 80
+			local maxLen = vim.o.columns * 0.75
 			local text = require("nvim-treesitter").statusline {
 				indicator_size = math.huge, -- shortening ourselves later
 				separator = "  ",

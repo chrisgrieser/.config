@@ -12,7 +12,7 @@ local blinkConfig = {
 		sources = {
 			per_filetype = {
 				["rip-substitute"] = { "buffer" },
-				gitcommit = { "buffer" },
+				gitcommit = {},
 			},
 
 			providers = {
@@ -185,7 +185,7 @@ local blinkGitOpts = {
 	opts = {
 		sources = {
 			per_filetype = {
-				gitcommit = { "git", "buffer" },
+				gitcommit = { "git" },
 			},
 			providers = {
 				git = {
@@ -203,6 +203,7 @@ local blinkGitOpts = {
 								pull_request = { enable = false },
 								mention = { enable = false },
 								issue = {
+									insert_text_trailing = "", -- no trailing space after `#123`
 									separate_output = function(output)
 										local suggestions = vim.iter(vim.json.decode(output))
 											:map(function(issue)
@@ -219,7 +220,6 @@ local blinkGitOpts = {
 											end)
 										return suggestions
 									end,
-									insert_text_trailing = "", -- no trailing space after `#123`
 								},
 							},
 						},
