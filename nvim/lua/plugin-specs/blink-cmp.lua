@@ -135,9 +135,9 @@ local blinkConfig = {
 			},
 		},
 		appearance = {
-			-- supported: tokyonight
-			-- not supported: nightfox, gruvbox-material
-			use_nvim_cmp_as_default = true,
+			-- supported: tokyonight, nightfox
+			-- not supported: gruvbox-material
+			use_nvim_cmp_as_default = false,
 
 			nerd_font_variant = "normal",
 			kind_icons = {
