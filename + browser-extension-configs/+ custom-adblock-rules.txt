@@ -20,3 +20,5 @@ www.netflix.com##div[data-list-context="configbased_cloudpersonalizedgames"]
 www.netflix.com##div[data-list-context="configbased_mobilepersonalizedgames"]
 www.netflix.com##div[data-list-context="popularGames"]
 www.reddit.com###right-sidebar-container
+github.com##.AppHeader-CopilotChat
+github.com##.react-code-size-details-in-header:last-child
