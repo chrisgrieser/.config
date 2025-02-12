@@ -109,8 +109,9 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			callback: () => new NewFileInFolder(this.app).open(),
 		});
 
-		// OPACITY, depending on dark/light mode
+		// APPEARANCE
 		if (!this.app.isMobile) {
+			// opacity, depending on dark/light mode
 			function setOpacity() {
 				const isDarkMode = document.body.hasClass("theme-dark");
 				const opacityValue = opacity[isDarkMode ? "dark" : "light"];
@@ -118,6 +119,9 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			}
 			setOpacity();
 			this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
+
+			// hide window buttons
+			electronWindow.setWindowButtonVisibility(false);
 		}
 
 		this.app.workspace.onLayoutReady(() => {
