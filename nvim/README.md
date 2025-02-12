@@ -40,6 +40,7 @@
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 - [jbyuki/one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)
+- [Kaiser-Yang/blink-cmp-git](https://github.com/Kaiser-Yang/blink-cmp-git)
 - [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
 - [kevinhwang91/promise-async](https://github.com/kevinhwang91/promise-async)
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
