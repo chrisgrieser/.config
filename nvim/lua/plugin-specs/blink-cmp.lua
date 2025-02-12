@@ -180,6 +180,7 @@ local blinkConfig = {
 local blinkGitOpts = {
 	dependencies = {
 		"Kaiser-Yang/blink-cmp-git",
+		commit = "a96409b0b30e7672c7c6baf420808ce28e646660",
 		dependencies = "nvim-lua/plenary.nvim",
 	},
 	opts = {
@@ -195,32 +196,30 @@ local blinkGitOpts = {
 					---@module 'blink-cmp-git'
 					---@type blink-cmp-git.Options
 					opts = {
-						enabled = true, -- pre-cache
-
 						commit = { enable = false },
 						git_centers = {
 							github = {
 								pull_request = { enable = false },
 								mention = { enable = false },
-								issue = {
-									insert_text_trailing = "", -- no trailing space after `#123`
-									separate_output = function(output)
-										local suggestions = vim.iter(vim.json.decode(output))
-											:map(function(issue)
-												return {
-													label = "#" .. issue.number .. " " .. issue.title,
-													insert_text = "#" .. issue.number,
-													documentation = ("# %s\n*by %s at %s*\n \n%s"):format(
-														issue.title,
-														issue.author.login,
-														issue.createdAt,
-														issue.body
-													),
-												}
-											end)
-										return suggestions
-									end,
-								},
+								-- issue = {
+								-- 	insert_text_trailing = "", -- no trailing space after `#123`
+								-- 	separate_output = function(output)
+								-- 		local suggestions = vim.iter(vim.json.decode(output))
+								-- 			:map(function(issue)
+								-- 				return {
+								-- 					label = "#" .. issue.number .. " " .. issue.title,
+								-- 					insert_text = "#" .. issue.number,
+								-- 					documentation = ("# %s\n*by %s at %s*\n \n%s"):format(
+								-- 						issue.title,
+								-- 						issue.author.login,
+								-- 						issue.createdAt,
+								-- 						issue.body
+								-- 					),
+								-- 				}
+								-- 			end)
+								-- 		return suggestions
+								-- 	end,
+								-- },
 							},
 						},
 					},
