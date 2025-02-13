@@ -38,7 +38,7 @@ rules:
                 end tell'
         conditions:
           [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
-      # Toggle Sidebar
+      # Toggle sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:

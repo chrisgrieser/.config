@@ -2,22 +2,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 matches:
-  # cencorship for carl
-  - trigger: "roadmap"
-    replace: "nopemap"
-  - trigger: "legacy editor"
-    replace: "legacy edit0r (carl, no!)"
-  - trigger: "getting started"
-    replace: "getting start3d (carl, no!)"
-
-  # Carl
-  - trigger: "!carl"
-    replace: all features of obsidian
-    label: "Meme: All Features of Obsidian"
-  - triggers: ["!carl", "!xkcd"]
-    replace: sudo xkcd automation
-    label: "xkcd: automation"
-
   # sed for fixing messages
   - trigger: "sss"
     replace: "s/$|$/"
@@ -30,4 +14,3 @@ matches:
   # gif
   - trigger: "ggg"
     replace: "/gif "
-
