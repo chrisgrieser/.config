@@ -22,7 +22,7 @@
 			<key>keyword</key>
 			<string>ud</string>
 			<key>text</key>
-			<string>Urban Dictionary:</string>
+			<string>Urban Dictionary: {query}</string>
 			<key>url</key>
 			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
