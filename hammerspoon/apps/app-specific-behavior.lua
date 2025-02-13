@@ -104,7 +104,7 @@ M.aw_discord = aw.new(function(appName, event)
 
 	-- on launch, open a specific channel rather than the friends view
 	if event == aw.launched or event == aw.launching then
-		local channelUri = "discord://discord.com/channels/1231936600204902481/1231936600674668604"
+		local channelUri = "discord://discord.com/channels/170278487775510528/724117196363661392"
 		u.openUrlInBg(channelUri)
 		return
 	end
