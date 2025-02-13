@@ -182,7 +182,7 @@ local blinkGitOpts = {
 		"Kaiser-Yang/blink-cmp-git",
 
 		-- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/issues/44
-		commit = "341e3fff1e2846436d3db8fffac778a5f8f877db",
+		-- commit = "341e3fff1e2846436d3db8fffac778a5f8f877db",
 
 		dependencies = "nvim-lua/plenary.nvim",
 	},
