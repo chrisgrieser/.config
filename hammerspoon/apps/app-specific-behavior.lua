@@ -114,9 +114,7 @@ M.aw_discord = aw.new(function(appName, event)
 	local clipb = hs.pasteboard.getContents()
 	if clipb and event == aw.activated then
 		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
-		-- for tweets/mastodon, the previews are actually useful since they show the full content
-		local tweetOrMastodon = clipb:find("^https?://x%.com") or clipb:find("^https://.*/@%w+/%d+$")
-		if hasURL and not tweetOrMastodon then hs.pasteboard.setContents("<" .. clipb .. ">") end
+		if hasURL then hs.pasteboard.setContents("<" .. clipb .. ">") end
 	elseif clipb and event == aw.deactivated then
 		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
 		if hasEnclosedURL then
