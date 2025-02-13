@@ -78,7 +78,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Zoom"
     manipulators:
-      # Toggle Sidebar
+      # Toggle sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
