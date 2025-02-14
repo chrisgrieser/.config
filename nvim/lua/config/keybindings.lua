@@ -20,7 +20,7 @@ keymap({ "n", "x" }, "j", "gj")
 keymap({ "n", "x" }, "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
--- (not mapping in op-pending, since using custom textobjects for most of those)
+-- (not mapping in op-pending, since using custom textobjects for those)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
 keymap({ "n", "x" }, "L", "$zv", { desc = "󰬓 char" }) -- zv: unfold under cursor
