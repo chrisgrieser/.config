@@ -1,5 +1,5 @@
 function eject {
-	volumes=$(df -ih | grep -io "\s/Volumes/.*" | cut -c2-)
+	volumes=$(df -ih | grep -io "\s/Volumes/.*" | grep -v "/Volumes/Recovery" | cut -c2-)
 	if [[ -z "$volumes" ]]; then
 		print "\e[1;33mNo volume mounted.\e[0m"
 		return 1

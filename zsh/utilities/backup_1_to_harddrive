@@ -8,7 +8,8 @@ logpath_on_mac="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/backu
 
 spinner="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 for i in {1..200}; do
-	volume_name="$(df | grep --only-matching "\s/Volumes/.*" | cut -c2-)"
+	volume_name="$(df | grep --only-matching " /Volumes/.*" |
+		grep -v "/Volumes/Recovery" | cut -c2-)"
 	if [[ $(echo "$volume_name" | wc -l) -gt 1 ]]; then
 		print "\e[1;33mMore than one volume connected.\e[0m"
 		return 1
