@@ -21,7 +21,6 @@ local config = {
 		Slack = 30,
 		Highlights = 90,
 		Obsidian = 180,
-		Discord = 180,
 		["WezTerm"] = 120,
 		["wezterm-gui"] = 120,
 		["Alfred Preferences"] = 30,

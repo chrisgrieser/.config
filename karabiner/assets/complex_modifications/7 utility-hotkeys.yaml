@@ -22,7 +22,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
-              - ^com\.hnc\.Discord$
               - ^com\.tinyspeck\.slackmacgap$
               - ^com\.brave\.Browser$ # useful for reddit
               - ^com\.runningwithcrayons\.Alfred-Preferences$

@@ -14,7 +14,6 @@ M.wf_pseudoMax = wf.new({
 	"Safari",
 	"WezTerm",
 	"Neovide",
-	"Discord",
 	"Slack",
 	"Obsidian",
 	"zoom.us",
