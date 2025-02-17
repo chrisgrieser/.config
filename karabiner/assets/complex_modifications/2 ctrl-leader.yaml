@@ -108,7 +108,7 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[Ö] Mastodon Website"
+      - description: "[Ö] Mastodon website"
         type: basic
         from: { key_code: semicolon, modifiers: { mandatory: [shift] } } # ö on German keyboard
         conditions:
@@ -156,15 +156,6 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[d]iscord"
-        type: basic
-        from: { key_code: d }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Discord'
-          - *deactivate-leader
-          - *remove-notice
-
       - description: "[z]oom"
         type: basic
         from: { key_code: "y" } # switched y and z due to German Keyboard
@@ -180,15 +171,6 @@ rules:
         conditions: [*leader-active]
         to:
           - shell_command: open -a 'WezTerm'
-          - *deactivate-leader
-          - *remove-notice
-
-      - description: "[A]nki"
-        type: basic
-        from: { key_code: a, modifiers: { mandatory: [shift] } }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'Anki'
           - *deactivate-leader
           - *remove-notice
 
