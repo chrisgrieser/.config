@@ -7,6 +7,3 @@ matches:
   - { trigger: "hhh", replace: "+:grey_heart:\n" } # 🩶
   - { trigger: "yyy", replace: "+:+1:\n" } # 👍
   - { trigger: "lll", replace: "+:eyes:\n" } # 👀
-
-  # Discord only
-  - { trigger: "ttt", replace: "+:this:\n" }

@@ -356,15 +356,6 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
-      - description: "[M]acWhisper"
-        type: basic
-        from: { key_code: m, modifiers: { mandatory: [shift] } }
-        conditions: [*leader-active]
-        to:
-          - shell_command: open -a 'MacWhisper'
-          - *deactivate-leader
-          - *remove-notice
-
       - description: "[w]hatsApp"
         type: basic
         from: { key_code: w }
