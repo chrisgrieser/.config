@@ -108,10 +108,6 @@ rules:
         from: { pointing_button: button5 }
         to_if_alone:
           - { key_code: w, modifiers: [command] }
-        conditions:
-          # Discord already uses button5 for going forward in the history, and
-          # we want to keep that behavior, since there is now window to close
-          - { type: frontmost_application_unless, bundle_identifiers: [^com\.hnc\.Discord$] }
   #─────────────────────────────────────────────────────────────────────────────
   # some MX Master Models have this builtin, others do not
   - description: "(Mouse) 6: Cmd+Tab"
