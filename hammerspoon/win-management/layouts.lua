@@ -80,13 +80,11 @@ local function workLayout()
 	require("win-management.auto-tile").resetWinCount("Brave Browser")
 
 	u.openApps {
-		"Discord",
 		"Mimestream",
 		isWorkweek() and "Slack" or nil,
 		"Ivory",
 		"AlfredExtraPane",
 	}
-	u.whenAppWinAvailable("Discord", function() app("Mimestream"):activate() end)
 
 	print("🔲 Loaded WorkLayout")
 end
@@ -104,7 +102,6 @@ local function movieLayout()
 	u.openApps { "YouTube", env.isAtHome and "BetterTouchTool" or nil }
 	u.quitApps {
 		"Slack",
-		"Discord",
 		"Calendar",
 		"Alfred Preferences",
 		"Highlights",

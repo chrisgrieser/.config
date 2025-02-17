@@ -97,32 +97,4 @@ M.wf_mimestream = wf.new("Mimestream")
 	end)
 
 --------------------------------------------------------------------------------
--- DISCORD
-
-M.aw_discord = aw.new(function(appName, event)
-	if appName ~= "Discord" then return end
-
-	-- on launch, open a specific channel rather than the friends view
-	if event == aw.launched or event == aw.launching then
-		local channelUri = "discord://discord.com/channels/170278487775510528/724117196363661392"
-		u.openUrlInBg(channelUri)
-		return
-	end
-
-	-- when focused, enclose URL in clipboard with <>
-	-- when unfocused, removes <> from URL in clipboard
-	local clipb = hs.pasteboard.getContents()
-	if clipb and event == aw.activated then
-		local hasURL = clipb:find("^https?:%S+$") or clipb:find("^obsidian://%S+$")
-		if hasURL then hs.pasteboard.setContents("<" .. clipb .. ">") end
-	elseif clipb and event == aw.deactivated then
-		local hasEnclosedURL = clipb:find("^<https?:%S+>$") or clipb:find("^<obsidian:%S+>$")
-		if hasEnclosedURL then
-			clipb = clipb:sub(2, -2) -- remove first & last character
-			hs.pasteboard.setContents(clipb)
-		end
-	end
-end):start()
-
---------------------------------------------------------------------------------
 return M

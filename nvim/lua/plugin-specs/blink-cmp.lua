@@ -78,7 +78,9 @@ local blinkConfig = {
 			["<Up>"] = { "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
-			cmdline = {
+		},
+		cmdline = {
+			keymap = {
 				["<CR>"] = { "fallback" }, -- CR = execute (no need for accept since using `auto_insert`)
 				["<Tab>"] = { "select_next", "show" },
 				["<S-Tab>"] = { "select_prev" },
