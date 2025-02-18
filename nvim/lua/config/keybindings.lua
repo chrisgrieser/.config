@@ -132,6 +132,7 @@ keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
 --------------------------------------------------------------------------------
 -- TEXTOBJECTS
 
+
 local textobjRemaps = {
 	{ "c", "}", "", "curly" }, -- [c]urly brace
 	{ "r", "]", "󰅪", "rectangular" }, -- [r]ectangular bracket

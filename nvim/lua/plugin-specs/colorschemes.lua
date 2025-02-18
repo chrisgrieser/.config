@@ -55,17 +55,15 @@ local themes = {
 					-- `mini.icons`
 					MiniIconsGrey = { fg = "#767676" },
 
-					-- `telescope`: increase contrast
+					-- Telescope: increase contrast
 					TelescopeBorder = { link = "FloatBorder" },
 					TelescopeTitle = { fg = "palette.comment" },
 					TelescopeResultsComment = { fg = "palette.comment" },
+					TelescopeMatching = { fg = "palette.orange" }, -- make matches stand out more
 
-					-- FIX missing highlights for `snacks`
-					SnacksNormal = { link = "NotifyBackground" },
-
-					-- make matches stand out more
-					BlinkCmpLabelMatch = { fg = "palette.orange" },
-					TelescopeMatching = { fg = "palette.orange" },
+					-- blink.cmp
+					BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
+					BlinkCmpDocBorder = { link = "FloatBorder" },
 
 					-- use grey for debug
 					SnacksNotifierTitleDebug = { fg = "palette.comment" },
