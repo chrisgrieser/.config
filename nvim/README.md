@@ -25,7 +25,6 @@
 - [chrisgrieser/nvim-justice](https://github.com/chrisgrieser/nvim-justice)
 - [chrisgrieser/nvim-lsp-endhints](https://github.com/chrisgrieser/nvim-lsp-endhints)
 - [chrisgrieser/nvim-origami](https://github.com/chrisgrieser/nvim-origami)
-- [chrisgrieser/nvim-rip-substitute](https://github.com/chrisgrieser/nvim-rip-substitute)
 - [chrisgrieser/nvim-rulebook](https://github.com/chrisgrieser/nvim-rulebook)
 - [chrisgrieser/nvim-scissors](https://github.com/chrisgrieser/nvim-scissors)
 - [chrisgrieser/nvim-spider](https://github.com/chrisgrieser/nvim-spider)
