@@ -8,19 +8,6 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
-		<key>211D58FC-50A6-4DD8-AE76-29A78841FE7E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<array>
 			<dict>
@@ -129,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>211D58FC-50A6-4DD8-AE76-29A78841FE7E</string>
+				<string>B34DBBCE-C220-4020-BDB7-DFAB47719F7A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -531,27 +518,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>211D58FC-50A6-4DD8-AE76-29A78841FE7E</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -569,17 +535,6 @@ The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/tri
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
-		<key>211D58FC-50A6-4DD8-AE76-29A78841FE7E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>note</key>
-			<string>remove \n</string>
-			<key>xpos</key>
-			<real>585</real>
-			<key>ypos</key>
-			<real>460</real>
-		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
 			<key>colorindex</key>
