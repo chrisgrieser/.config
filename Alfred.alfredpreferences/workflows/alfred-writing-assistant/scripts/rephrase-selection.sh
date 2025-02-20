@@ -41,8 +41,12 @@ elif [[ "$output_type" == "critic-markup" ]]; then
 fi
 
 # ensure output has same amount of leading/trailing spaces
-[[ "$selection" =~ \ $ ]] && output="$output "
-[[ "$selection" =~ ^\  ]] && output=" $output"
+trailing_spaces=$(echo "$selection" | grep --only-matching --basic-regexp "\s*$")
+leading_spaces=$(echo "$selection" | grep --only-matching --basic-regexp "^\s*")
+output="$leading_spaces$output$trailing_spaces"
+if [[ $(echo "$selection" | tail -n1) == "" ]]; then
+	output="$output\n"
+fi
 
 # paste via Alfred
-echo "$output"
+echo -n "$output"
