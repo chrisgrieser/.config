@@ -156,6 +156,17 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      - description: "[d]iscord"
+        type: basic
+        from: { key_code: d }
+        conditions: [*leader-active]
+        to:
+          - shell_command:
+              open -a 'Discord' || open
+              "https://discord.com/channels/170278487775510528/724117196363661392"
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[z]oom"
         type: basic
         from: { key_code: "y" } # switched y and z due to German Keyboard
