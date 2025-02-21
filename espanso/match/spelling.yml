@@ -127,3 +127,4 @@ matches:
   - { trigger: itnerview, replace: interview, propagate_case: true, word: true }
   - { trigger: tehre, replace: there, propagate_case: true, word: true }
   - { trigger: lsit, replace: list, propagate_case: true, word: true }
+  - { trigger: publically, replace: publicly, propagate_case: true, word: true }
