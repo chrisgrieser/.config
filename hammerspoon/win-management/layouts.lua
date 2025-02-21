@@ -83,7 +83,6 @@ local function workLayout()
 		"Mimestream",
 		isWorkweek() and "Slack" or nil,
 		"Ivory",
-		"AlfredExtraPane",
 	}
 
 	print("🔲 Loaded WorkLayout")

@@ -80,6 +80,12 @@ M.wf_scripteditor = wf
 	end)
 
 --------------------------------------------------------------------------------
+-- ALFRED
+M.aw_alfred = aw.new(function(appName, event, _)
+	if event == aw.launched and appName == "Alfred" then u.openApps("AlfredExtraPane") end
+end):start()
+
+--------------------------------------------------------------------------------
 -- MIMESTREAM
 
 -- 1st window = mail-list window => pseudo-maximized for more space
