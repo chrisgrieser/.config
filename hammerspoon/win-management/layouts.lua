@@ -5,7 +5,6 @@ local env = require("meta.environment")
 local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
-local app = require("meta.utils").app
 local c = hs.caffeinate.watcher
 local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
 --------------------------------------------------------------------------------
@@ -79,11 +78,7 @@ local function workLayout()
 	videoAppWatcherForSpotify:start()
 	require("win-management.auto-tile").resetWinCount("Brave Browser")
 
-	u.openApps {
-		"Mimestream",
-		isWorkweek() and "Slack" or nil,
-		"Ivory",
-	}
+	u.openApps { "Slack", "Ivory", "Mimestream" }
 
 	print("🔲 Loaded WorkLayout")
 end
