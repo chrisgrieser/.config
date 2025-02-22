@@ -40,11 +40,6 @@ end
 
 local function darkenDisplay() wu.iMacDisplay:setBrightness(0) end
 
-local function isWorkweek()
-	local weekday = tostring(os.date("%a"))
-	return weekday ~= "Sat" and weekday ~= "Sun"
-end
-
 --------------------------------------------------------------------------------
 -- menu item: move windows to projector screen
 if not env.isAtOffice then
