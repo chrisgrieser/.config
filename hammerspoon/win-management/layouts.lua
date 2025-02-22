@@ -7,6 +7,7 @@ local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local c = hs.caffeinate.watcher
 local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
+
 --------------------------------------------------------------------------------
 -- HELPERS
 
@@ -75,7 +76,7 @@ local function workLayout()
 
 	u.openApps { "Slack", "Ivory", "Mimestream" }
 
-	print("🔲 Loaded WorkLayout")
+	print("🔲 Loaded work layout")
 end
 
 local function movieLayout()
@@ -101,34 +102,31 @@ local function movieLayout()
 		"Ivory",
 		"Reminders",
 	}
-	print("🔲 Loaded MovieModeLayout")
+	print("🔲 Loaded movie layout")
 end
 
 --------------------------------------------------------------------------------
 -- WHEN TO SET LAYOUT
 
 -- Select layout depending on number of screens, and prevent concurrent runs
+local isLayouting = false
 local function autoSetLayout()
-	if M.isLayouting then return end
-	M.isLayouting = true
-
+	if isLayouting then return end
+	isLayouting = true
 	local layoutFunc = env.isProjector() and movieLayout or workLayout
 	layoutFunc()
-
-	u.defer(4, function() M.isLayouting = false end)
+	u.defer(4, function() isLayouting = false end)
 end
 
 -- 1. Change of screen numbers
-
 local prevScreenCount = #hs.screen.allScreens()
--- check needed, as things such as Dock settings changes also trigger the screen watcher
 M.displayCountWatcher = hs.screen.watcher
 	.new(function()
 		local currentScreenCount = #hs.screen.allScreens()
-		if currentScreenCount == prevScreenCount then return end
-
-		autoSetLayout()
-		prevScreenCount = currentScreenCount
+		if prevScreenCount ~= currentScreenCount then -- Dock changes also trigger the screenwatcher
+			autoSetLayout()
+			prevScreenCount = currentScreenCount
+		end
 	end)
 	:start()
 
