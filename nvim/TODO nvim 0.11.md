@@ -9,5 +9,3 @@
 > The 0.11 version will have built-in snippet engine (`vim.snippet`)
   automatically map `<Tab>/<S-Tab>` to jump forward/backward. May require
   adjusting your config if you have those keys mapped in Insert mode.
-- Remove `vim.hl = vim.highlight` from `init.lua`
-- `arglist` on next neovim version <https://github.com/neovide/neovide/issues/2629>
