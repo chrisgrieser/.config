@@ -140,8 +140,8 @@ end
 
 --------------------------------------------------------------------------------
 
----@param limit number
-function M.spellSuggest(limit)
+function M.spellSuggest()
+	local limit = 9
 	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
 	suggestions = vim.list_slice(suggestions, 1, limit)
 

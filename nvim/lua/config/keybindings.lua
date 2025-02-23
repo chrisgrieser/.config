@@ -111,7 +111,7 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 -- Spelling (these work even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
 -- stylua: ignore
-keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest(9) end, { desc = "󰓆 Spell suggestions" })
+keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
@@ -239,10 +239,8 @@ keymap("n", "<leader>iq", vim.treesitter.query.edit, { desc = " TS query" })
 
 -- stylua: ignore start
 keymap("n", "<leader>il", function() require("personal-plugins.inspect-and-eval").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
-keymap("n", "<leader>in", function() require("personal-plugins.inspect-and-eval").nodeAtCursor() end, { desc = " Node at cursor" })
 keymap("n", "<leader>ib", function() require("personal-plugins.inspect-and-eval").bufferInfo() end, { desc = "󰽙 Buffer info" })
 keymap({ "n", "x" }, "<leader>ee", function() require("personal-plugins.inspect-and-eval").evalNvimLua() end, { desc = " Eval" })
-keymap("n", "<leader>er", function() require("personal-plugins.inspect-and-eval").runFile() end, { desc = "󰜎 Run file" })
 -- stylua: ignore end
 
 --------------------------------------------------------------------------------
