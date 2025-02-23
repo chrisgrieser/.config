@@ -1,19 +1,16 @@
--- If nvim was opened w/o argument, re-open the first oldfile that exists
+-- re-open last file, if nvim was opened without arguments
 vim.defer_fn(function()
-	if vim.fn.argc() > 0 then return end -- BUG https://github.com/neovide/neovide/issues/2629
-	for _, file in ipairs(vim.v.oldfiles) do
-		if vim.uv.fs_stat(file) and vim.fs.basename(file) ~= "COMMIT_EDITMSG" then
-			vim.cmd.edit(file)
-			return
-		end
-	end
+	local lastFile = vim.iter(vim.v.oldfiles):find(
+		function(f) return vim.uv.fs_stat(f) and vim.fs.basename(f) ~= "COMMIT_EDITMSG" end
+	)
+	if lastFile and vim.fn.argc() == 0 then vim.cmd.edit(lastFile) end
 end, 1)
+
 --------------------------------------------------------------------------------
 
--- CONFIG
 vim.g.mapleader = ","
-vim.g.maplocalleader = "<Nop>" -- disable `\` being default local leader
-vim.g.borderStyle = "rounded" ---@type "single"|"double"|"rounded"
+vim.g.maplocalleader = "<Nop>"
+vim.g.borderStyle = "rounded"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------
@@ -30,11 +27,12 @@ local function safeRequire(module)
 	end
 end
 
-safeRequire("config.options") -- before lazy, so opts are active during plugin install
+-- before lazy, so opts are active during plugin install
+safeRequire("config.options")
 
+-- only load plugins when `NO_PLUGINS` is not set.
+-- (This is for security reasons, e.g., when editing a password with `pass`.)
 if not vim.env.NO_PLUGINS then
-	-- INFO only load plugins when `NO_PLUGINS` is not set.
-	-- This is for security reasons, e.g., when editing a password with `pass`.
 	safeRequire("config.lazy")
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
@@ -51,9 +49,8 @@ safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.backdrop-underline-fix")
 
--- lazy-load spellfixes
 vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "User(once): Load spellfixes",
+	desc = "User(once): Lazyload spellfixes",
 	once = true,
 	callback = function() safeRequire("config.spellfixes") end,
 })
