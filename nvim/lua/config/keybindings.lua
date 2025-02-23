@@ -118,7 +118,7 @@ keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
 
 --------------------------------------------------------------------------------
--- SURROUND & ARROW
+-- SURROUND
 
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
 keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
