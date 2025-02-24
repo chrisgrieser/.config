@@ -305,7 +305,7 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	if obsiDir or iCloudDocs then
 		vim.diagnostic.enable(false, { bufnr = 0 })
 		-- defer to ensure client is already attached
-		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 1000)
 	end
 end
 
@@ -341,7 +341,7 @@ M.serverConfigs.ltex_plus = {
 	settings = {
 		ltex = {
 			language = "en-US", -- can also be set per file via markdown yaml header (e.g. `de-DE`)
-			diagnosticSeverity = { default = "info" },
+			diagnosticSeverity = { default = "warning" },
 			disabledRules = {
 				["en-US"] = {
 					"EN_QUOTES", -- don't expect smart quotes
