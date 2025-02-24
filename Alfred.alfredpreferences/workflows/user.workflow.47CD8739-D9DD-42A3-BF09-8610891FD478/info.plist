@@ -156,11 +156,6 @@
 				<key>titlesinfooter</key>
 				<false/>
 			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>listSettings</string>
-			</dict>
 			<key>type</key>
 			<string>alfred.workflow.userinterface.grid</string>
 			<key>uid</key>
@@ -269,18 +264,22 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>submenu</key>
-					<string>main.sh</string>
-				</dict>
+				<key>json</key>
+				<string>{
+  "alfredworkflow" : {
+    "config" : {
+      "columncount" : "{var:gridCols}"
+    }
+  }
+}</string>
+			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>listSettings</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
+			<string>alfred.workflow.utility.json</string>
 			<key>uid</key>
 			<string>9446739A-E0C3-4EDE-A0C9-8476EBAE9927</string>
 			<key>version</key>
@@ -507,6 +506,36 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>7</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Small</string>
+						<string>8</string>
+					</array>
+					<array>
+						<string>Medium</string>
+						<string>7</string>
+					</array>
+					<array>
+						<string>Large</string>
+						<string>6</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Change the cell size within the grid</string>
+			<key>label</key>
+			<string>Icon Size</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>gridCols</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<false/>
 				<key>required</key>
 				<false/>
@@ -569,7 +598,7 @@ Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2025.1</string>
+	<string>2025.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/FireFingers21/alfred-system-settings-explorer</string>
 </dict>

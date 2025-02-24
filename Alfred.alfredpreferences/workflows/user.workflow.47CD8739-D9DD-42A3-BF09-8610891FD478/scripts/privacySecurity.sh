@@ -1,5 +1,7 @@
 #!/bin/zsh --no-rcs
 
+# Apple Intelligence Report, Local Network currently have no URL
+
 spacer='{
 		"title": "",
 		"subtitle": "System Settings → Privacy & Security",
@@ -13,6 +15,8 @@ goBack='{
 		"arg": "main.sh",
 		"icon": { "path": "images/Settings.png" }
 	},'
+
+gap=$((${gridCols}-6))
 [[ "${submenu}" != "main.sh" ]] && itemOpen='{"items": [' && itemClose=']}' || goBack="${spacer}"
 
 cat << EOB
@@ -24,11 +28,7 @@ $itemOpen
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((5+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Calendars",
 		"subtitle": "System Settings → Privacy & Security → Calendars",
@@ -93,9 +93,7 @@ $itemOpen
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}*2))}; do echo $spacer; done)
 	{
 		"title": "Accessibility",
 		"subtitle": "System Settings → Privacy & Security → Accessibility",
@@ -155,7 +153,7 @@ $itemOpen
 	{
 		"title": "Local Network",
 		"subtitle": "System Settings → Privacy & Security → Local Network",
-		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_LocalNetwork",
+		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension",
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
@@ -191,15 +189,12 @@ $itemOpen
 	},
 	{
 		"title": "Speech Recognition",
-		"subtitle": "System Settings → Privacy & Security → About",
+		"subtitle": "System Settings → Privacy & Security → Speech Recognition",
 		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_SpeechRecognition",
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
-	$spacer
+	$([[ ${gridCols} != 7 ]] && for i in {1..$((4+${gap}*3 < ${gridCols} ? 4:2))}; do echo $spacer; done)
 	{
 		"title": "Sensitive Content Warning",
 		"subtitle": "System Settings → Privacy & Security → Sensitive Content Warning",
@@ -210,7 +205,7 @@ $itemOpen
 	{
 		"title": "Analytics & Improvements",
 		"subtitle": "System Settings → Privacy & Security → Analytics & Improvements",
-		"arg": "x-apple.systempreferences:com.apple.Profiles-Settings.extension?Privacy_Analytics",
+		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_Analytics",
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } },
 		"match": "Analytics & and Improvements"
@@ -218,13 +213,18 @@ $itemOpen
 	{
 		"title": "Apple Advertising",
 		"subtitle": "System Settings → Privacy & Security → Apple Advertising",
-		"arg": "x-apple.systempreferences:com.apple.Profiles-Settings.extension?Privacy_Advertising",
+		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_Advertising",
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	{
+		"title": "Apple Intelligence Report",
+		"subtitle": "System Settings → Privacy & Security → Apple Intelligence Report",
+		"arg": "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Security",
+		"icon": { "path": "images/Privacy & Security.png" },
+		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
+	},
+	$(for i in {1..$((2+${gap}))}; do echo $spacer; done)
 	{
 		"title": "FileVault",
 		"subtitle": "System Settings → Privacy & Security → FileVault",
@@ -239,9 +239,7 @@ $itemOpen
 		"icon": { "path": "images/Privacy & Security.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}))}; do echo $spacer; done)
 	$goBack
 $itemClose
 EOB

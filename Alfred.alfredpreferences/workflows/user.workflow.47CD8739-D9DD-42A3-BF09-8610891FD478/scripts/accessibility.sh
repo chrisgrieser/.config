@@ -13,6 +13,8 @@ goBack='{
 		"arg": "main.sh",
 		"icon": { "path": "images/Settings.png" }
 	},'
+
+gap=$((${gridCols}-6))
 [[ "${submenu}" != "main.sh" ]] && itemOpen='{"items": [' && itemClose=']}' || goBack="${spacer}"
 
 cat << EOB
@@ -94,7 +96,7 @@ $itemOpen
 		"icon": { "path": "images/Accessibility.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
+	$(for i in {1..$((1+${gap}*2))}; do echo $spacer; done)
 	{
 		"title": "Voice Control",
 		"subtitle": "System Settings → Accessibility → Voice Control",
@@ -123,8 +125,7 @@ $itemOpen
 		"icon": { "path": "images/Accessibility.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
+	$(for i in {1..$((2+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Live Speech",
 		"subtitle": "System Settings → Accessibility → Live Speech",
@@ -146,9 +147,7 @@ $itemOpen
 		"icon": { "path": "images/Accessibility.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Siri",
 		"subtitle": "System Settings → Accessibility → Siri",
@@ -163,9 +162,7 @@ $itemOpen
 		"icon": { "path": "images/Accessibility.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}))}; do echo $spacer; done)
 	$goBack
 $itemClose
 EOB
