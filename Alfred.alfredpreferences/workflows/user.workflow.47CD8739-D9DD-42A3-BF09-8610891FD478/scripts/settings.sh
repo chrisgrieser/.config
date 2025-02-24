@@ -13,6 +13,7 @@ vpn='{
 		"icon": { "path": "images/VPN.png" }
 	},'
 
+gap=$((${gridCols}-6))
 [[ $(bioutil -r) == *"Biometrics"* ]] && loginPassword="Touch ID & Password" || loginPassword="Login Password"
 [[ $(sysctl -n machdep.cpu.brand_string) == *"Apple"* ]] && siri="Apple Intelligence & Siri" || siri="Siri"
 [[ $(pmset -g ps) == *"InternalBattery"* ]] && battery="Battery" || battery="Energy"
@@ -46,9 +47,7 @@ cat << EOB
 		"icon": { "path": "images/Media & Purchases.png" },
 		"match": "Media & and Purchases Subscriptions"
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Wi-Fi",
 		"subtitle": "System Settings → Wi-Fi",
@@ -71,14 +70,14 @@ cat << EOB
 	},
 	$showVPN
 	{
-		"title": "Battery",
-		"subtitle": "System Settings → Battery",
+		"title": "${battery}",
+		"subtitle": "System Settings → ${battery}",
 		"arg": "x-apple.systempreferences:com.apple.Battery-Settings.extension*BatteryPreferences",
-		"icon": { "path": "images/Battery.png" },
+		"icon": { "path": "images/${battery}.png" },
 		"match": "Battery Energy Saver"
 	},
 	$spacerVPN
-	$spacer
+	$(for i in {1..$((1+${gap}))}; do echo $spacer; done)
 	{
 		"title": "General",
 		"subtitle": "System Settings → General",
@@ -139,9 +138,7 @@ cat << EOB
 		"arg": "x-apple.systempreferences:com.apple.Wallpaper-Settings.extension",
 		"icon": { "path": "images/Wallpaper.png" }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}*2))}; do echo $spacer; done)
 	{
 		"title": "Notifications",
 		"subtitle": "System Settings → Notifications",
@@ -166,8 +163,7 @@ cat << EOB
 		"arg": "x-apple.systempreferences:com.apple.Screen-Time-Settings.extension",
 		"icon": { "path": "images/Screen Time.png" }
 	},
-	$spacer
-	$spacer
+	$(for i in {1..$((2+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Lock Screen",
 		"subtitle": "System Settings → Lock Screen",
@@ -196,8 +192,7 @@ cat << EOB
 		"icon": { "path": "images/Users & Groups.png" },
 		"match": "Users & and Groups"
 	},
-	$spacer
-	$spacer
+	$(for i in {1..$((2+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Internet Accounts",
 		"subtitle": "System Settings → Internet Accounts",
@@ -230,7 +225,7 @@ cat << EOB
 		"icon": { "path": "images/Wallet & Apple Pay.png" },
 		"match": "Wallet & and Apple Pay Payment"
 	},
-	$spacer
+	$(for i in {1..$((1+${gap}))}; do echo $spacer; done)
 	{
 		"title": "Keyboard",
 		"subtitle": "System Settings → Keyboard",
@@ -263,5 +258,5 @@ cat << EOB
 		"icon": { "path": "images/Printers & Scanners.png" },
 		"match": "Printers & and Scanners"
 	},
-	$spacer
+	$(for i in {1..$((1+${gap}))}; do echo $spacer; done)
 EOB

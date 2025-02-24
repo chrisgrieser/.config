@@ -13,6 +13,8 @@ goBack='{
 		"arg": "main.sh",
 		"icon": { "path": "images/Settings.png" }
 	},'
+
+gap=$((${gridCols}-6))
 [[ "${submenu}" != "main.sh" ]] && itemOpen='{"items": [' && itemClose=']}' || goBack="${spacer}"
 
 cat << EOB
@@ -38,9 +40,7 @@ $itemOpen
 		"icon": { "path": "images/Storage.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((1+${gap}))}; do echo $spacer; done)
 	{
 		"title": "AppleCare & Warranty",
 		"subtitle": "System Settings → General → AppleCare & Warranty",
@@ -94,7 +94,8 @@ $itemOpen
 		"subtitle": "System Settings → General → Storage",
 		"arg": "x-apple.systempreferences:com.apple.Sharing-Settings.extension",
 		"icon": { "path": "images/Storage.png" },
-		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
+		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } },
+		"match": "Sharing SSH SFTP SMB Samba AFP"
 	},
 	{
 		"title": "Startup Disk",
@@ -111,9 +112,7 @@ $itemOpen
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } },
 		"match": "Time Machine Backup"
 	},
-	$spacer
-	$spacer
-	$spacer
+	$([[ ${gridCols} != 7 ]] && for i in {1..$((5+${gap}*2 < ${gridCols} ? 5:1))}; do echo $spacer; done)
 	{
 		"title": "Device Management",
 		"subtitle": "System Settings → General → Device Management",
@@ -129,9 +128,7 @@ $itemOpen
 		"icon": { "path": "images/Transfer or Reset.png" },
 		"mods": { "shift": { "subtitle": "System Settings", "arg": "main.sh" } }
 	},
-	$spacer
-	$spacer
-	$spacer
+	$(for i in {1..$((3+${gap}))}; do echo $spacer; done)
 	$goBack
 $itemClose
 EOB
