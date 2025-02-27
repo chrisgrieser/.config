@@ -80,8 +80,13 @@ local blinkConfig = {
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 		},
 		cmdline = {
+			completion = {
+				menu = {
+					auto_show = function() return vim.fn.getcmdtype() == ":" end,
+				},
+			},
 			keymap = {
-				["<CR>"] = { "fallback" }, -- CR = execute (no need for accept since using `auto_insert`)
+				["<CR>"] = { "accept_and_enter", "fallback" },
 				["<Tab>"] = { "select_next", "show" },
 				["<S-Tab>"] = { "select_prev" },
 			},
