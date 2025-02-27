@@ -81,9 +81,7 @@ local blinkConfig = {
 		},
 		cmdline = {
 			completion = {
-				menu = {
-					auto_show = function() return vim.fn.getcmdtype() == ":" end,
-				},
+				menu = { auto_show = true },
 			},
 			keymap = {
 				["<CR>"] = { "accept_and_enter", "fallback" },
@@ -142,8 +140,7 @@ local blinkConfig = {
 			},
 		},
 		appearance = {
-			-- supported: tokyonight, nightfox
-			-- not supported: gruvbox-material
+			-- supported: tokyonight, nightfox // not supported: gruvbox-material
 			use_nvim_cmp_as_default = false,
 
 			nerd_font_variant = "normal",
@@ -207,10 +204,7 @@ local blinkGitOpts = {
 						git_centers = {
 							github = {
 								pull_request = { enable = false },
-								mention = { enable = false },
-								issue = {
-									insert_text_trailing = "", -- no trailing space after `#123`
-								},
+								issue = { insert_text_trailing = "" }, -- no trailing space after `#123`
 							},
 						},
 					},
