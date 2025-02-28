@@ -318,7 +318,6 @@ end
 
 keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
-keymap("n", "<leader>rd", ":global //d<Left><Left>", { desc = " Delete matching lines" })
 -- stylua: ignore
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })
 
