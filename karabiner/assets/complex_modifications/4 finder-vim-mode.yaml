@@ -649,30 +649,39 @@ rules:
         to_if_alone:
           - shell_command: |
               error=$(osascript -e'
-                tell application "Finder"
-                	activate
-                	if (number of Finder windows is not 2) then
-                		beep
-                		return "⚠️ Not exactly two windows"
-                	else if (the selection is {}) then
-                		beep
-                		return "⚠️ No selection"
-                	else
-                		set otherWin to (target of Finder window 2 as alias)
-                		repeat with aFile in (selection as list)
-                      # AppleScript does not allow the "ask for confirmation" prompt if replacing,
-                      # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
-                			try
-                				move aFile to otherWin without replacing
-                			on error
-                				set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location."
-                				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
-                				if response is "Replace" then move aFile to otherWin with replacing
-                			end try
-                		end repeat
-                		return ""
-                	end if
-                end tell
+                tell application "Finder" 
+                	activate 
+
+                	if (number of Finder windows is not 2) then 
+                		beep 
+                		return "⚠️ Not exactly two windows" 
+                	else if (the selection is {}) then 
+                		beep 
+                		return "⚠️ No selection" 
+                	end if 
+                	repeat with anItem in (selection as list) 
+                		set theName to quoted form of (name of anItem as string) 
+                		if kind of anItem is "Folder" then 
+                			return "The item " & theName & " is a folder. Folders cannot be cross-moved." 
+                		else if (anItem is package folder) or (kind of anItem is "Volume") then 
+                			return "The item " & theName & " is a not a regular file, thus it cannot be cross-moved." 
+                		end if 
+                	end repeat 
+
+                	set otherWin to (target of Finder window 2 as alias) 
+                	repeat with aFile in (selection as list) 
+                		# AppleScript does not allow the "ask for confirmation" prompt if replacing, 
+                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13 
+                		try 
+                			move aFile to otherWin without replacing 
+                		on error 
+                			set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location." 
+                			set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution) 
+                			if response is "Replace" then move aFile to otherWin with replacing 
+                		end try 
+                	end repeat 
+                	return "" 
+                end tell 
               ')
               [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
@@ -683,30 +692,39 @@ rules:
         to_if_alone:
           - shell_command: |
               error=$(osascript -e'
-                tell application "Finder"
-                	activate
-                	if (number of Finder windows is not 2) then
-                		beep
-                		return "⚠️ Not exactly two windows"
-                	else if (the selection is {}) then
-                		beep
-                		return "⚠️ No selection"
-                	else
-                		set otherWin to (target of Finder window 2 as alias)
-                		repeat with aFile in (selection as list)
-                      # AppleScript does not allow the "ask for confirmation" prompt if replacing,
-                      # thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13
-                			try
-                				duplicate aFile to otherWin without replacing
-                			on error
-                				set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location."
-                				set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution)
-                				if response is "Replace" then duplicate aFile to otherWin with replacing
-                			end try
-                		end repeat
-                		return ""
-                	end if
-                end tell
+                tell application "Finder" 
+                	activate 
+
+                	if (number of Finder windows is not 2) then 
+                		beep 
+                		return "⚠️ Not exactly two windows" 
+                	else if (the selection is {}) then 
+                		beep 
+                		return "⚠️ No selection" 
+                	end if 
+                	repeat with anItem in (selection as list) 
+                		set theName to quoted form of (name of anItem as string) 
+                		if kind of anItem is "Folder" then 
+                			return "The item " & theName & " is a folder. Folders cannot be cross-moved." 
+                		else if (anItem is package folder) or (kind of anItem is "Volume") then 
+                			return "The item " & theName & " is a not a regular file, thus it cannot be cross-moved." 
+                		end if 
+                	end repeat 
+
+                	set otherWin to (target of Finder window 2 as alias) 
+                	repeat with aFile in (selection as list) 
+                		# AppleScript does not allow the "ask for confirmation" prompt if replacing, 
+                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13 
+                		try 
+                			move aFile to otherWin without replacing 
+                		on error 
+                			set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location." 
+                			set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution) 
+                			if response is "Replace" then move aFile to otherWin with replacing 
+                		end try 
+                	end repeat 
+                	return "" 
+                end tell 
               ')
               [[ -n "$error" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "$error"
@@ -818,7 +836,8 @@ rules:
               fi
 
               echo "$selectedFiles" | while read -r file; do
-                # bash expansion does not work in karabiner
+                # bash expansion does not work in karabiner, thus using `rev`
+                # and `cut` instead
                 lastFourChars=$(echo "$file" | rev | cut -c-4 | rev)
                 if [[ "$lastFourChars" == "-bkp" ]]; then
                   newName=$(echo "$file" | rev | cut -c5- | rev)
