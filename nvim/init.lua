@@ -43,7 +43,6 @@ safeRequire("config.lsp-and-diagnostics")
 
 safeRequire("config.keybindings")
 safeRequire("config.quickfix")
-safeRequire("config.yanking-and-pasting")
 
 safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")

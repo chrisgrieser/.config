@@ -54,6 +54,15 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --------------------------------------------------------------------------------
+-- CLIPBOARD
+vim.opt.clipboard = "unnamedplus"
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "User: Highlighted Yank",
+	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
+})
+
+--------------------------------------------------------------------------------
 -- EDITORCONFIG
 
 -- By default, nvim automatically sets `textwidth` to follow the
