@@ -60,25 +60,3 @@ end, { desc = " Paste charwise", expr = true })
 
 -- for compatibility with macOS clipboard managers
 keymap("n", "<D-v>", "p", { desc = " Paste" })
-
---------------------------------------------------------------------------------
--- SPECIAL YANK OPERATIONS
-
-keymap("n", "<leader>yl", function()
-	-- not using `:glocal // yank` because it yanks lines one after the other
-	vim.ui.input({ prompt = "󰅍 Yank lines matching:" }, function(input)
-		if not input then return end
-		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-		local matchLines = vim.tbl_filter(function(l) return l:find(input, nil, true) end, lines)
-		vim.fn.setreg("+", table.concat(matchLines, "\n"))
-		local pluralS = #matchLines == 1 and "" or "s"
-		local msg = ("%d line%s"):format(#matchLines, pluralS)
-		vim.notify(msg, nil, { title = "Copied", icon = "󰅍" })
-	end)
-end, { desc = "󰦨 Lines matching pattern" })
-
-keymap("n", "<leader>y:", function()
-	local lastCmd = vim.fn.getreg(":"):gsub("^lua ?", "")
-	vim.fn.setreg("+", lastCmd)
-	vim.notify(lastCmd, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰘳 Last :excmd" })

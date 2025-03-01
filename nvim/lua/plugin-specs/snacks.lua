@@ -100,14 +100,6 @@ return {
 			mode = { "n", "v", "i" },
 			desc = "󰎟 Last notification",
 		},
-		{
-			"<leader>om",
-			function()
-				local enabled = require("snacks").dim.enabled
-				require("snacks").dim[enabled and "disable" or "enable"]()
-			end,
-			desc = "󰝟 Mute code",
-		},
 	},
 	opts = {
 		indent = {
@@ -144,10 +136,6 @@ return {
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
-				wo = { colorcolumn = "" },
-				keys = {
-					CR = { "<CR>", "confirm", mode = "n" },
-				},
 			},
 			notification = {
 				border = vim.g.borderStyle,

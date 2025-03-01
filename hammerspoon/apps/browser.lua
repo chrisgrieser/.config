@@ -11,7 +11,7 @@ local aw = hs.application.watcher
 ---when Browser activates and j or k is pressed for the first time, hide cursor
 ---@param key string character that triggers cursor hiding
 local function hideCurAndPassThrough(key)
-	-- disable to it works only once
+	-- disable so it works only once
 	M.hotkey_jHidesCursor:disable()
 	M.hotkey_kHidesCursor:disable()
 
@@ -34,6 +34,10 @@ M.aw_jkHotkeys = aw.new(function(appName, eventType)
 	if appName == "Brave Browser" then
 		M.hotkey_jHidesCursor:enable()
 		M.hotkey_kHidesCursor:enable()
+
+		-- FIX vimium not working until other browser hotkeys were used
+		hs.eventtap.keyStroke({ "cmd" }, "t")
+		hs.eventtap.keyStroke({ "cmd" }, "w")
 	else
 		M.hotkey_jHidesCursor:disable()
 		M.hotkey_kHidesCursor:disable()
