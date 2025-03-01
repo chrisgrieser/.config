@@ -1,9 +1,8 @@
--- INFO
--- These functions all use the log level `DEBUG`. To be able to see them with
--- `nvim-notify`, you need to set the minimum level in the nvim-notify config:
--- `require("notify").setup { level = "2" }`.
---------------------------------------------------------------------------------
 local M = {}
+
+-- INFO by default, `nvim-notify` does not display notifications of the level `DEBUG`
+local lvl = "DEBUG"
+
 --------------------------------------------------------------------------------
 
 function M.bufferInfo()
@@ -37,7 +36,7 @@ function M.bufferInfo()
 		vim.list_extend(out, { "*No LSPs attached.*" })
 	end
 	local opts = { title = "Inspect buffer", icon = "󰽙", timeout = 10000 }
-	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
+	vim.notify(table.concat(out, "\n"), vim.log.levels[lvl], opts)
 end
 
 function M.lspCapabilities()
@@ -60,7 +59,7 @@ function M.lspCapabilities()
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
 		local header = "-- for a full view, open in notification history\n"
 		local text = header .. vim.inspect(info)
-		vim.notify(text, vim.log.levels.DEBUG, opts)
+		vim.notify(text, vim.log.levels[lvl], opts)
 	end)
 end
 
@@ -72,7 +71,7 @@ function M.evalNvimLua()
 		if not input or input == "" then return end
 		local out = vim.fn.luaeval(input)
 		local opts = { title = "Eval", icon = "", ft = "lua" }
-		vim.notify(vim.inspect(out), vim.log.levels.DEBUG, opts)
+		vim.notify(vim.inspect(out), vim.log.levels[lvl], opts)
 	end
 
 	if vim.fn.mode() == "n" then
