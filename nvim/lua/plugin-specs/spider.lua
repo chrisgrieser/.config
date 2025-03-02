@@ -13,5 +13,6 @@ return {
 			mode = { "n", "x" }, -- not `o`, since mapped as textobj
 			desc = "󱇫 beginning of subword",
 		},
+		{ "1", "<cmd>lua require('spider').motion('w')<CR>" },
 	},
 }
