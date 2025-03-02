@@ -44,6 +44,7 @@ vim.g.neovide_input_use_logo = true -- enable, so `cmd` on macOS can be used
 vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. can be used
 
 -- Appearance
+vim.g.neovide_transparency = 1
 vim.g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
 vim.g.neovide_underline_stroke_scale = 2.0 -- fix underline thickness
 vim.g.neovide_remember_window_size = true

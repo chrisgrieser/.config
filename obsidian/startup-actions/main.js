@@ -1,11 +1,5 @@
 // @ts-nocheck // using pure javascript without the whole toolchain here
 
-// CONFIG
-const opacity = {
-	light: 0.95,
-	dark: 0.94,
-};
-
 //──────────────────────────────────────────────────────────────────────────────
 
 const obsidian = require("obsidian");
@@ -109,20 +103,8 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			callback: () => new NewFileInFolder(this.app).open(),
 		});
 
-		// APPEARANCE
-		if (!this.app.isMobile) {
-			// opacity, depending on dark/light mode
-			function setOpacity() {
-				const isDarkMode = document.body.hasClass("theme-dark");
-				const opacityValue = opacity[isDarkMode ? "dark" : "light"];
-				electronWindow.setOpacity(opacityValue);
-			}
-			setOpacity();
-			this.registerEvent(this.app.workspace.on("css-change", () => setOpacity()));
-
-			// hide window buttons
-			electronWindow.setWindowButtonVisibility(false);
-		}
+		// hide window buttons
+		if (!this.app.isMobile) electronWindow.setWindowButtonVisibility(false);
 
 		this.app.workspace.onLayoutReady(() => {
 			// URI to reload a plugin

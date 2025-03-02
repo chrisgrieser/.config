@@ -27,7 +27,7 @@ safeRequire("appearance.dark-mode")
 
 safeRequire("win-management.win-mover")
 safeRequire("win-management.layouts")
-safeRequire("win-management.app-hider")
+safeRequire("win-management.sketchybar")
 safeRequire("win-management.auto-quitter")
 safeRequire("win-management.auto-tile")
 safeRequire("win-management.vertical-split")

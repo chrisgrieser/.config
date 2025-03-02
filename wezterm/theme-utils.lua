@@ -13,17 +13,6 @@ function M.autoScheme(darkTheme, lightTheme)
 	return colorscheme
 end
 
----selects the opacity depending on Dark/Light Mode
----@param lightOpacity number
----@param darkOpacity number
----@nodiscard
----@return integer Opacity to use
-function M.autoOpacity(darkOpacity, lightOpacity)
-	local isDarkMode = wt.gui.get_appearance():find("Dark")
-	local opacity = isDarkMode and darkOpacity or lightOpacity
-	return opacity
-end
-
 ---cycle through builtin dark schemes in dark mode, and through light schemes in
 ---light mode
 function M.cycle(window, _)
