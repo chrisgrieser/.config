@@ -1,9 +1,9 @@
 -- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
 --------------------------------------------------------------------------------
 
----Adds a component lualine was already set up.
----This enables lazy-loading plugins that add statusline components.
----(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
+---Adds a component lualine was already set up. This enables lazy-loading
+---plugins that add statusline components. (Accessed via `vim.g`, as this file's
+---exports are used by `lazy.nvim`.)
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
@@ -86,7 +86,7 @@ return {
 				{ require("personal-plugins.alt-alt").altFileStatusbar },
 			},
 			lualine_c = {
-				{ require("config.quickfix").quickfixCounterStatusbar },
+				{ require("personal-plugins.quickfix").quickfixCounterStatusbar },
 			},
 			lualine_x = {
 				{

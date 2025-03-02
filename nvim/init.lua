@@ -1,9 +1,12 @@
 -- re-open last file, if nvim was opened without arguments
 vim.defer_fn(function()
-	local lastFile = vim.iter(vim.v.oldfiles):find(
-		function(f) return vim.uv.fs_stat(f) and vim.fs.basename(f) ~= "COMMIT_EDITMSG" end
-	)
-	if lastFile and vim.fn.argc() == 0 then vim.cmd.edit(lastFile) end
+	if vim.fn.argc() > 0 then return end
+	local lastFile = vim.iter(vim.v.oldfiles):find(function(file)
+		local notGitCommit = vim.fs.basename(file) ~= "COMMIT_EDITMSG"
+		local exists = vim.uv.fs_stat(file)
+		return exists and notGitCommit
+	end)
+	if lastFile then vim.cmd.edit(lastFile) end
 end, 1)
 
 --------------------------------------------------------------------------------
@@ -42,7 +45,7 @@ safeRequire("config.autocmds")
 safeRequire("config.lsp-and-diagnostics")
 
 safeRequire("config.keybindings")
-safeRequire("config.quickfix")
+safeRequire("personal-plugins.quickfix")
 
 safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")
