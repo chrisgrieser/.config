@@ -1,9 +1,1 @@
-
-foobar
-foobar
-foobar
-ffffffffff
-ffffffffff
-ffffffffff
-foobar
-foobar
+local myVariableName = FOO_BAR_BAZ
