@@ -4,7 +4,6 @@ local themes = {
 		-- palette: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md#palette
 		"EdenEast/nightfox.nvim",
 		colorscheme = "dawnfox",
-		opacity = 0.92,
 		opts = {
 			specs = {
 				dawnfox = {
@@ -84,7 +83,6 @@ local themes = {
 		-- config: https://github.com/folke/tokyonight.nvim#%EF%B8%8F-configuration
 		-- palette: https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_moon.lua
 		"folke/tokyonight.nvim",
-		opacity = 0.91,
 		opts = {
 			style = "moon",
 			styles = {
@@ -149,7 +147,6 @@ local themes = {
 	{ --- GRUVBOX-MATERIAL
 		-- https://github.com/sainnhe/gruvbox-material/blob/master/doc/gruvbox-material.txt#L144
 		"sainnhe/gruvbox-material",
-		opacity = 0.92,
 		init = function(spec)
 			vim.g.gruvbox_material_background = "medium" -- soft|medium|hard
 			vim.g.gruvbox_material_foreground = "material" -- material|mix|original
@@ -228,12 +225,11 @@ themes = vim.iter(themes)
 	:filter(function(theme) return theme.enabled ~= false end)
 	:map(function(theme)
 		theme.priority = 1000 -- see https://lazy.folke.io/spec/lazy_loading#-colorschemes
-		-- `colorscheme` and `opacity` are not part of the lazy.nvim spec, but
+		-- `colorscheme` is not part of the lazy.nvim spec, but
 		-- only helpers for the light-dark-mode toggling below
 		if not theme.colorscheme then
 			theme.colorscheme = vim.fs.basename(theme[1]):gsub("%.?nvim%-?", "")
 		end
-		if not theme.opacity then theme.opacity = 0.9 end
 		return theme
 	end)
 	:take(2)
@@ -253,7 +249,6 @@ vim.g.setColorscheme = function(init)
 	end
 	local nextTheme = (vim.o.background == "light" and themes[1] or themes[2])
 	vim.cmd.colorscheme(nextTheme.colorscheme)
-	vim.g.neovide_transparency = nextTheme.opacity
 end
 
 --------------------------------------------------------------------------------

@@ -1,22 +1,16 @@
 -- CONFIG the first theme in the list is used
 local darkThemes = {
-	"MaterialDesignColors",
-	"duckbones",
 	"Kanagawa (Gogh)",
+	"MaterialDesignColors",
 	"ChallengerDeep",
 	"Afterglow (Gogh)",
 	"cyberpunk",
 }
 local lightThemes = {
-	"Ivory Light (terminal.sexy)",
-	"Silk Light (base16)",
-	"Solar Flare Light (base16)",
 	"Paraiso (light) (terminal.sexy)",
-	"seoulbones_light",
+	"Ivory Light (terminal.sexy)",
+	"Solar Flare Light (base16)",
 }
-
-local lightOpacity = 0.90
-local darkOpacity = 0.87
 
 local deviceSpecific = {
 	home = {
@@ -37,8 +31,6 @@ local deviceSpecific = {
 }
 
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
--- wezterm API
 local wt = require("wezterm")
 
 -- device specific config
@@ -107,19 +99,16 @@ local config = {
 	force_reverse_video_cursor = true, -- `true` = color is reverse, `false` = color by color scheme
 
 	-- FONT
-	font = wt.font {
-		family = "JetBrainsMonoNL Nerd Font",
-		weight = "Medium",
-	},
+	font = wt.font { family = "JetBrainsMonoNL Nerd Font", weight = "Medium" },
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" }, -- disable ligatures
 	cell_width = 0.9, -- effectively like letter-spacing
 	font_size = deviceSpecific[device].fontSize,
 	command_palette_font_size = deviceSpecific[device].fontSize,
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
-	-- Appearance
+	-- APPEARANCE
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
-	window_background_opacity = theme.autoOpacity(darkOpacity, lightOpacity),
+	window_background_opacity = 1,
 	bold_brightens_ansi_colors = "BrightAndBold",
 	max_fps = deviceSpecific[device].maxFps,
 	adjust_window_size_when_changing_font_size = false,
