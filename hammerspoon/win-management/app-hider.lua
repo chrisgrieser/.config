@@ -30,6 +30,7 @@ local config = {
 		"Catch",
 	},
 	appsNotToHide = {
+		"Brave Browser", -- FIX bug that disables vimium after unhiding
 		"Espanso",
 		"IINA",
 		"zoom.us",

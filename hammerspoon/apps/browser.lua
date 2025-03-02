@@ -15,10 +15,6 @@ local function hideCurAndPassThrough(key)
 	M.hotkey_jHidesCursor:disable()
 	M.hotkey_kHidesCursor:disable()
 
-	-- FIX vimium not working until other browser hotkeys were used
-	hs.eventtap.keyStroke({ "cmd" }, "t")
-	hs.eventtap.keyStroke({ "cmd" }, "w")
-
 	-- hide the cursor
 	local screen = hs.mouse.getCurrentScreen() or hs.screen.mainScreen()
 	local bottomLeftPos = { x = 0, y = screen:frame().h * 0.9 }
