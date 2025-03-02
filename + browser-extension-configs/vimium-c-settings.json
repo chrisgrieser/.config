@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "12/15/2024, 1:46:04 PM",
-	"time": 1734266764681,
+	"@time": "3/2/2025, 12:46:09 PM",
+	"time": 1740915969998,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
-		"chromium": 131
+		"chromium": 133
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -49,6 +49,10 @@
 		{
 			"passKeys": "s ",
 			"pattern": ":https://www.netflix.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://app.diagrams.net/"
 		}
 	],
 	"extAllowList": [
@@ -171,28 +175,6 @@
 		"map ym copyCurrentUrl format=\"[${title}](${url})\" # copy as markdown link",
 		"map yw copyWindowInfo format=\"${url}\" # copy links of all tabs",
 		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
-		"",
-		"# NUMBERS",
-		"unmap 1",
-		"unmap 2",
-		"unmap 3",
-		"unmap 4",
-		"unmap 5",
-		"unmap 6",
-		"unmap 7",
-		"unmap 8",
-		"unmap 9",
-		"unmap 0",
-		"map 1 firstTab count=1",
-		"map 2 firstTab count=2",
-		"map 3 firstTab count=3",
-		"map 4 firstTab count=4",
-		"map 5 firstTab count=5",
-		"map 6 firstTab count=6",
-		"map 7 firstTab count=7",
-		"map 8 firstTab count=8",
-		"map 9 firstTab count=9",
-		"map 0 lastTab",
 		""
 	],
 	"regexFindMode": true,
