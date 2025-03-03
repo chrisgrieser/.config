@@ -61,6 +61,12 @@ return {
 			desc = "󰚩 Accept full suggestion",
 		},
 		{
+			"<D-S>", -- since accepting autocomplete in Obsidian is done via cmd-shift-s
+			function() require("neocodeium").accept() end,
+			mode = "i",
+			desc = "󰚩 Accept full suggestion",
+		},
+		{
 			"<D-d>",
 			function() require("neocodeium").cycle(1) end,
 			mode = "i",
