@@ -12,23 +12,21 @@ return {
 		logStatements = {
 			variableLog = {
 				nvim_lua = "Chainsaw({{var}}) -- {{marker}}", -- nvim lua debug
-				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- hammerspoon
+				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
 			},
-
-			-- not using any marker
-			assertLog = { lua = 'assert({{var}}, "")' },
-
-			-- re-purposing `objectLog` for alternative log statements for these
-			objectLog = {
+			assertLog = {
+				lua = 'assert({{var}}, "")', -- not using any marker
+			},
+			objectLog = { -- re-purposing `objectLog` for alternative log statements for these
 				-- Obsidian Notice
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
 				zsh = 'osascript -e "display notification "{{marker}}} ${{var}}" with title "{{var}}""',
 			},
-
-			-- Hammerspoon
-			clearLog = { lua = "hs.console.clearConsole() -- {{marker}}" },
-			sound = {
+			clearLog = { -- Hammerspoon
+				lua = "hs.console.clearConsole() -- {{marker}}",
+			},
+			sound = { -- Hammerspoon
 				lua = 'hs.sound.getByName("Sosumi"):play() ---@diagnostic disable-line: undefined-field -- {{marker}}',
 			},
 		},

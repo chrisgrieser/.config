@@ -1,7 +1,7 @@
 ---@param dir "next"|"prev"
 local function gotoBreakpoint(dir)
 	local breakpoints = require("dap.breakpoints").get()
-	if #breakpoints == 0 then
+	if #vim.iter(breakpoints):totable() == 0 then -- needs iter-wrap since sparse list
 		vim.notify("No breakpoints set", vim.log.levels.WARN)
 		return
 	end
@@ -88,7 +88,7 @@ return {
 			color = vim.fn.sign_getdefined("DapBreakpoint")[1].texthl,
 			function()
 				local breakpoints = require("dap.breakpoints").get()
-				if #breakpoints == 0 then return "" end
+				if #vim.iter(breakpoints):totable() == 0 then return "" end -- needs iter-wrap since sparse list
 				local allBufs = 0
 				for _, bp in pairs(breakpoints) do
 					allBufs = allBufs + #bp
