@@ -75,7 +75,6 @@ keymap("n", "ww", function() require("personal-plugins.misc").smartDuplicate() e
 keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 -- stylua: ignore
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
-keymap("n", ">", "gUiw", { desc = "󰬴 Toggle UPPER case" })
 
 -- Increment/decrement, or toggle true/false
 -- stylua: ignore
