@@ -81,7 +81,9 @@ local blinkConfig = {
 		},
 		cmdline = {
 			completion = {
-				menu = { auto_show = true },
+				menu = {
+					auto_show = function() return vim.fn.getcmdtype() == ":" end,
+				},
 			},
 			keymap = {
 				["<CR>"] = { "accept_and_enter", "fallback" },
