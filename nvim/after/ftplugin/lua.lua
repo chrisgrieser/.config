@@ -1,5 +1,8 @@
 local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
+--------------------------------------------------------------------------------
+
+bkeymap("n", "<leader>er", vim.cmd.source, { desc = "󰢱 :source" })
 
 --------------------------------------------------------------------------------
 -- FIXES HABITS FROM WRITING TOO MUCH IN OTHER LANGUAGES

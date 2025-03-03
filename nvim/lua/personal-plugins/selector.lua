@@ -41,16 +41,16 @@ vim.ui.select = function(items, opts, on_choice)
 	end
 
 	-- PARAMETERS
-	local choicesDisplay = vim.tbl_map(opts.format_item, items)
-	assert(type(choicesDisplay[1]) == "string", "`opts.format_item` must return a string.")
-	local longestChoice = vim.iter(choicesDisplay):fold(0, function(acc, c) return math.max(acc, #c) end)
-	local width = math.max(longestChoice, #opts.prompt, #opts.kind) + 2
-	local height = #choicesDisplay
+	local formattedItems = vim.tbl_map(opts.format_item, items)
+	assert(type(formattedItems[1]) == "string", "`opts.format_item` must return a string.")
+	local longestItemLen = vim.iter(formattedItems):fold(0, function(acc, c) return math.max(acc, #c) end)
+	local width = math.max(longestItemLen, #opts.prompt, #opts.kind) + 2
+	local height = #formattedItems
 	local footer = opts.kind ~= "" and " " .. opts.kind .. " " or ""
 
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, choicesDisplay)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, formattedItems)
 	local winid = vim.api.nvim_open_win(bufnr, true, {
 		relative = "win",
 		row = vim.o.lines / 2 - height / 2 - 1,
@@ -64,7 +64,7 @@ vim.ui.select = function(items, opts, on_choice)
 		style = "minimal",
 	})
 	vim.wo[winid].statuscolumn = " " -- = left-padding
-	vim.wo[winid].cursorline = height > 1
+	vim.wo[winid].cursorline = true
 	vim.wo[winid].colorcolumn = ""
 	vim.wo[winid].winfixbuf = true
 	vim.bo[bufnr].modifiable = false

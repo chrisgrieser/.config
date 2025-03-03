@@ -70,7 +70,7 @@ local blinkConfig = {
 		keymap = {
 			preset = "none",
 			["<CR>"] = { "select_and_accept", "fallback" },
-			["<S-CR>"] = { "hide" }, -- `hide` keeps `auto_insert`, `cancel` does not
+			["<S-CR>"] = { "hide" },
 			["<D-c>"] = { "show" },
 			["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
 			["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
@@ -78,18 +78,6 @@ local blinkConfig = {
 			["<Up>"] = { "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
-		},
-		cmdline = {
-			completion = {
-				menu = {
-					auto_show = function() return vim.fn.getcmdtype() == ":" end,
-				},
-			},
-			keymap = {
-				["<CR>"] = { "accept_and_enter", "fallback" },
-				["<Tab>"] = { "select_next", "show" },
-				["<S-Tab>"] = { "select_prev" },
-			},
 		},
 		completion = {
 			trigger = {
