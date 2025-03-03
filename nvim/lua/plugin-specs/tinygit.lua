@@ -1,9 +1,5 @@
 return {
 	"chrisgrieser/nvim-tinygit",
-	branch = "dev", -- TEMP
-
-	-----------------------------------------------------------------------------
-
 	event = "VeryLazy", -- load for status line component
 	keys = {
 		-- stylua: ignore start
