@@ -23,7 +23,7 @@ function appid() {
 
 # open first ejectable volume
 function vvv {
-	first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+	first_volume=$(df | grep " /Volumes/" | grep -v "/Volumes/Recovery" | awk -F '   ' '{print $NF}' | head -n1)
 	if [[ -d "$first_volume" ]]; then
 		open "$first_volume"
 	else
