@@ -85,9 +85,9 @@ local function telescopeRedirect(items, opts, on_choice)
 
 			finder = finders.new_table {
 				results = items,
-				entry_maker = function(entry)
-					local display = opts.format_item and opts.format_item(entry) or entry
-					return { value = entry, display = display, ordinal = display }
+				entry_maker = function(item)
+					local display = opts.format_item and opts.format_item(item) or item
+					return { value = item, display = display, ordinal = display }
 				end,
 			},
 			attach_mappings = function(promptBufnr, _map)
