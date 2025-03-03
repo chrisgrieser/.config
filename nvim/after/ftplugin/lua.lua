@@ -74,19 +74,15 @@ bkeymap("n", "<leader>ci", function()
 	end)
 
 	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User (buffer-specific): Set filetype to `lua` for `TelescopeResults`",
-		pattern = "TelescopeResults",
+		desc = "User (buffer-specific): Lua highlighting for selector",
+		pattern = "selector",
 		once = true,
 		callback = function(ctx)
-			vim.bo[ctx.buf].filetype = "lua"
-			-- make discernible as the results are now colored
-			local ns = vim.api.nvim_create_namespace("telescope-import")
-			vim.api.nvim_win_set_hl_ns(0, ns)
-			vim.api.nvim_set_hl(ns, "TelescopeMatching", { reverse = true })
+			vim.defer_fn(function() vim.treesitter.start(ctx.buf, "lua") end, 1)
 		end,
 	})
 
-	vim.ui.select(uniqMatches, { prompt = " require", kind = "telescope" }, function(selection)
+	vim.ui.select(uniqMatches, { prompt = " require" }, function(selection)
 		if not selection then return end
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		if isAtBlank then
