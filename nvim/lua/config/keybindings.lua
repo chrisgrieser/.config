@@ -204,7 +204,7 @@ keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })
 
 --------------------------------------------------------------------------------
 -- COMMENTS
--- require `remap` or method from: https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
+-- requires `remap` or method from: https://www.reddit.com/r/neovim/comments/1ctc1zd/comment/l4c29rx/
 keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true })
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
