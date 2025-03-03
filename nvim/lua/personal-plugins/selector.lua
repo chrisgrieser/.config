@@ -1,61 +1,29 @@
--- INFO
--- simple UI for `vim.ui.select`
---------------------------------------------------------------------------------
+-- INFO A simple UI for `vim.ui.select`.
 
 local config = {
-	win = {
-		relative = "cursor",
-		row = 2,
-		col = 0,
-		border = vim.g.borderStyle,
-		showKindInFooter = true,
-	},
+	border = vim.g.borderStyle,
 	keymaps = {
 		confirm = "<CR>",
 		abort = { "<Esc>", "q" },
 		next = "<Tab>",
 		prev = "<S-Tab>",
-		inspect = "?",
-	},
-
-	-- extra customization of `vim.lsp.buf.code_action`
-	codeaction = {
-		icon = "󱐋",
-		format_item = function(item) return ("%s [%s]"):format(item.action.title, item.action.kind) end,
+		inspectItem = "?",
 	},
 }
-
-local pluginName = "Selector"
 --------------------------------------------------------------------------------
-
-local M = {}
-
----@param msg string
----@param level? "info"|"trace"|"debug"|"warn"|"error"
----@param opts? table
-local function notify(msg, level, opts)
-	if not level then level = "info" end
-	local defaultOpts = { title = pluginName }
-	opts = vim.tbl_deep_extend("force", defaultOpts, opts or {})
-	vim.notify(msg, vim.log.levels[level:upper()], opts)
-end
-
-local function lnum() return vim.api.nvim_win_get_cursor(0)[1] end
 
 ---@class (exact) SelectorOpts
 ---@field prompt? string nvim spec
 ---@field kind? string nvim spec
 ---@field format_item? fun(item: any): string nvim spec
----@field footer? string specific to this plugin
-
---------------------------------------------------------------------------------
 
 ---@param items any[]
 ---@param opts SelectorOpts
 ---@param on_choice fun(item: any, idx?: integer)
-function M.selector(items, opts, on_choice)
+---@diagnostic disable-next-line: duplicate-set-field -- intentional overwrite
+vim.ui.select = function(items, opts, on_choice)
 	if #items == 0 then
-		notify("No items to select from.", "warn")
+		vim.notify("No items to select from.", vim.log.levels.INFO, { title = "Selector" })
 		return
 	end
 
@@ -64,34 +32,35 @@ function M.selector(items, opts, on_choice)
 	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = "" }
 	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
 	opts.prompt = opts.prompt:gsub(":%s*$", "")
-
 	if opts.kind == "codeaction" then
-		opts.prompt = vim.trim(config.codeaction.icon .. " " .. opts.prompt)
-		opts.format_item = config.codeaction.format_item or function(i) return i.action.title end
+		opts.prompt = "󱐋 " .. opts.prompt
+		opts.kind = ""
+		opts.format_item = function(item)
+			return ("%s [%s]"):format(item.action.title, item.action.kind)
+		end
 	end
 
 	-- PARAMETERS
-	local choices = vim.tbl_map(opts.format_item, items)
-	assert(type(choices[1]) == "string", "`opts.format_item` must return a string.")
-	local longestChoice = vim.iter(choices):fold(0, function(acc, c) return math.max(acc, #c) end)
+	local choicesDisplay = vim.tbl_map(opts.format_item, items)
+	assert(type(choicesDisplay[1]) == "string", "`opts.format_item` must return a string.")
+	local longestChoice = vim.iter(choicesDisplay):fold(0, function(acc, c) return math.max(acc, #c) end)
 	local width = math.max(longestChoice, #opts.prompt, #opts.kind) + 2
-	local height = #choices
-	local footer = (config.win.showKindInFooter and opts.kind ~= "") and " " .. opts.kind .. " "
-		or nil
+	local height = #choicesDisplay
+	local footer = opts.kind ~= "" and " " .. opts.kind .. " " or ""
 
 	-- CREATE WINDOW
 	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, choices)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, choicesDisplay)
 	local winid = vim.api.nvim_open_win(bufnr, true, {
-		relative = config.win.relative,
-		row = config.win.row,
-		col = config.win.col,
+		relative = "win",
+		row = vim.o.lines / 2 - height / 2 - 1,
+		col = vim.o.columns / 2 - width / 2,
 		width = width,
 		height = height,
 		title = " " .. opts.prompt .. " ",
-		footer = footer and { { footer, "NonText" } } or nil,
-		footer_pos = footer and "right" or nil,
-		border = config.win.border,
+		footer = { { footer, "NonText" } },
+		footer_pos = "right",
+		border = config.border,
 		style = "minimal",
 	})
 	vim.wo[winid].statuscolumn = " " -- = left-padding
@@ -99,7 +68,7 @@ function M.selector(items, opts, on_choice)
 	vim.wo[winid].colorcolumn = ""
 	vim.wo[winid].winfixbuf = true
 	vim.bo[bufnr].modifiable = false
-	vim.bo[bufnr].filetype = pluginName
+	vim.bo[bufnr].filetype = "selector"
 	vim.wo[winid].sidescrolloff = 0
 
 	-- highlighting
@@ -112,20 +81,15 @@ function M.selector(items, opts, on_choice)
 	for _, key in ipairs(config.keymaps.abort) do
 		map(key, vim.cmd.bwipeout)
 	end
-	map(config.keymaps.next, function()
-		local cmd = lnum() == height and "gg" or "j"
-		vim.cmd.normal { cmd, bang = true }
-	end)
-	map(config.keymaps.prev, function()
-		local cmd = lnum() == 1 and "G" or "k"
-		vim.cmd.normal { cmd, bang = true }
-	end)
-	map(config.keymaps.inspect, function()
-		local out = vim.inspect(items[lnum()])
-		notify(out, "debug", { title = "Inspect", ft = "lua" })
+	map(config.keymaps.next, function() vim.cmd.normal { "j", bang = true } end)
+	map(config.keymaps.prev, function() vim.cmd.normal { "k", bang = true } end)
+	map(config.keymaps.inspectItem, function()
+		local ln = vim.api.nvim_win_get_cursor(0)[1]
+		local out = vim.inspect(items[ln])
+		vim.notify(out, vim.log.levels.INFO, { title = "Inspect", ft = "lua" })
 	end)
 	map(config.keymaps.confirm, function()
-		local ln = lnum() -- needs to be saved before deleting buffersele
+		local ln = vim.api.nvim_win_get_cursor(0)[1]
 		vim.cmd.bwipeout()
 		on_choice(items[ln], ln)
 	end)
@@ -142,8 +106,3 @@ function M.selector(items, opts, on_choice)
 		end,
 	})
 end
-
-vim.ui.select = M.selector
-
---------------------------------------------------------------------------------
-return M
