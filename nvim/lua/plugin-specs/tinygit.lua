@@ -34,7 +34,16 @@ return {
 			border = vim.g.borderStyle,
 			spellcheck = true,
 			subject = {
-				noSentenceCase = true,
+				autoFormat = function(subject)
+					-- remove trailing dot https://commitlint.js.org/reference/rules.html#body-full-stop
+					subject = subject:gsub("%.$", "")
+
+					-- sentence case of title after the type
+					subject = subject
+						:gsub("^(%w+: )(.)", function(c1, c2) return c1 .. c2:lower() end) -- no scope
+						:gsub("^(%w+%b(): )(.)", function(c1, c2) return c1 .. c2:lower() end) -- with scope
+					return subject
+				end,
 				enforceType = true,
 				-- stylua: ignore
 				types = { -- add `improv`
