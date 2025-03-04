@@ -21,14 +21,17 @@ function run(argv) {
 
 	if (!citekey || !currentPage) {
 		app.setTheClipboardTo(selection);
-		return "Selection without citekey." // for Alfred notification
+		return "Just selection copied: file without citekey";
 	}
 
 	const libraryPath = $.getenv("bibtex_library_path");
 	const entry = app.doShellScript(
 		`grep --after-context=20 --max-count=1 "{${citekey}," "${libraryPath}" || true`,
 	);
-	if (!entry) return `"${citekey}" not found in BibTeX library.`;
+	if (!entry) {
+		app.setTheClipboardTo(selection);
+		return `Just selection copied: "${citekey}" not found in BibTeX library.`;
+	}
 
 	// e.g.: pages = {55--78},
 	const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
