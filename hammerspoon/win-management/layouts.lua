@@ -72,9 +72,12 @@ local function workLayout()
 	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
 	videoAppWatcherForSpotify:start()
-	require("win-management.auto-tile").resetWinCount("Brave Browser")
 
 	u.openApps { "Slack", "Ivory", "Mimestream" }
+	hs.layout.apply {
+		{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
+		{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
+	}
 
 	print("🔲 Loaded work layout")
 end
