@@ -21,19 +21,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>79188346-1263-4CBC-A288-6058196272DA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>265E7447-7ADD-448F-A2F1-77AD81329EB5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<array>
 			<dict>
@@ -280,84 +267,11 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>man</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/local-man-pages.js</string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Local man pages</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>79188346-1263-4CBC-A288-6058196272DA</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>man {query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.terminalcommand</string>
-			<key>uid</key>
-			<string>265E7447-7ADD-448F-A2F1-77AD81329EB5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>265E7447-7ADD-448F-A2F1-77AD81329EB5</key>
-		<dict>
-			<key>note</key>
-			<string>open man page in Terminal</string>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>350</real>
-		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -366,13 +280,6 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>79188346-1263-4CBC-A288-6058196272DA</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>350</real>
 		</dict>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
