@@ -128,3 +128,4 @@ matches:
   - { trigger: tehre, replace: there, propagate_case: true, word: true }
   - { trigger: lsit, replace: list, propagate_case: true, word: true }
   - { trigger: publically, replace: publicly, propagate_case: true, word: true }
+  - { trigger: chroe, replace: chore, propagate_case: true, word: true }
