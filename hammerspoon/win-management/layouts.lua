@@ -75,6 +75,7 @@ local function workLayout()
 
 	u.openApps { "Slack", "Ivory", "Mimestream" }
 	hs.layout.apply {
+		-- Ivory layout already managed by `mastodon.lua`
 		{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
 		{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
 	}
