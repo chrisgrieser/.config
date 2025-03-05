@@ -151,7 +151,7 @@ keymap("n", "dd", function()
 	return (lineEmpty and '"_dd' or "dd")
 end, { expr = true })
 
--- pasting
+-- PASTING
 keymap("n", "P", function()
 	local curLine = vim.api.nvim_get_current_line():gsub("%s*$", "")
 	local reg = vim.trim(vim.fn.getreg("+"))
