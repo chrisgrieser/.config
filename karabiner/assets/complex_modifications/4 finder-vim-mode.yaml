@@ -661,17 +661,15 @@ rules:
                 	end if 
                 	repeat with anItem in (selection as list) 
                 		set theName to quoted form of (name of anItem as string) 
-                		if kind of anItem is "Folder" then 
-                			return "The item " & theName & " is a folder. Folders cannot be cross-moved." 
-                		else if (anItem is package folder) or (kind of anItem is "Volume") then 
-                			return "The item " & theName & " is a not a regular file, thus it cannot be cross-moved." 
+                		if (kind of anItem is "Folder") or (kind of anItem is "Volume") then 
+                			return "The item " & theName & " is a folder or volume. Only regular files can be cross-moved." 
                 		end if 
                 	end repeat 
 
                 	set otherWin to (target of Finder window 2 as alias) 
                 	repeat with aFile in (selection as list) 
-                		# AppleScript does not allow the "ask for confirmation" prompt if replacing, 
-                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13 
+                		# AppleScript does not allow the "ask for confirmation" prompt if replacing,  
+                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13  
                 		try 
                 			move aFile to otherWin without replacing 
                 		on error 
@@ -704,23 +702,21 @@ rules:
                 	end if 
                 	repeat with anItem in (selection as list) 
                 		set theName to quoted form of (name of anItem as string) 
-                		if kind of anItem is "Folder" then 
-                			return "The item " & theName & " is a folder. Folders cannot be cross-moved." 
-                		else if (anItem is package folder) or (kind of anItem is "Volume") then 
-                			return "The item " & theName & " is a not a regular file, thus it cannot be cross-moved." 
+                		if (kind of anItem is "Folder") or (kind of anItem is "Volume") then 
+                			return "The item " & theName & " is a folder or volume. Only regular files can be cross-moved." 
                 		end if 
                 	end repeat 
 
                 	set otherWin to (target of Finder window 2 as alias) 
                 	repeat with aFile in (selection as list) 
-                		# AppleScript does not allow the "ask for confirmation" prompt if replacing, 
-                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13 
+                		# AppleScript does not allow the "ask for confirmation" prompt if replacing,  
+                		# thus implementing it manually https://www.macscripter.net/t/mac-finder-native-copy-dialog/54200/13  
                 		try 
-                			move aFile to otherWin without replacing 
+                			duplicate aFile to otherWin without replacing 
                 		on error 
                 			set promptText to "An item named " & quoted form of (name of aFile as string) & " already exists in this location." 
                 			set response to button returned of (display dialog promptText buttons {"Skip", "Replace"} default button "Replace" cancel button "Skip" with icon caution) 
-                			if response is "Replace" then move aFile to otherWin with replacing 
+                			if response is "Replace" then duplicate aFile to otherWin with replacing 
                 		end try 
                 	end repeat 
                 	return "" 
