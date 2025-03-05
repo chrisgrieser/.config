@@ -604,7 +604,7 @@ rules:
               end tell')
               printf "$filepath" | pbcopy
               "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
-                  --title "✅ Filename copied" --message "$filepath"
+                  --title "✅ Filepath copied" --message "$filepath"
         conditions: [*finder-app, *not-insert-mode, *not-find-mode]
       # shift-comma: copy filename
       - type: basic

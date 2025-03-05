@@ -8,9 +8,8 @@ local pathw = hs.pathwatcher.new
 
 -- CONFIG
 local browserConfigs = home .. "/.config/+ browser-extension-configs/"
-local desktop = home .. "/Desktop/"
 
-M.pathw_desktop = pathw(desktop, function(paths, _)
+M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 	if not u.screenIsUnlocked() then return end -- prevent iCloud sync triggering in standby
 
 	for _, path in pairs(paths) do
@@ -22,13 +21,13 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		local isDownloaded = exists and msg ~= nil
 		local success
 
-		-- 1. REMOVE ALFREDWORKFLOWS & ICAL
+		-- REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			-- delay, so auto-open from the browser is triggered first, and since
 			-- Apple Calendar needs the file to exist before adding it
 			u.defer(30, function() os.remove(path) end)
 
-		-- 2. ADD BIBTEX ENTRIES TO LIBRARY
+		-- ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
 			local bibEntry = u.readFile(path)
 			if bibEntry then
@@ -39,7 +38,7 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 				os.remove(path)
 			end
 
-		-- 3. BACKUP BROWSER SETTINGS
+		-- BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
 			success = os.rename(path, browserConfigs .. "violentmonkey")
 			if success then
@@ -53,16 +52,10 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			end
 		elseif name == "ublacklist-settings.json" then
 			success = os.rename(path, browserConfigs .. name)
-		elseif name:find("my%-ublock%-backup_.*%.txt") then
-			success = os.rename(path, browserConfigs .. "ublock-settings.json")
-		elseif name:find("adg_ext_settings_.*%.json") then
-			success = os.rename(path, browserConfigs .. "adguard-settings.json")
 		elseif name:find("stylus%-.*%.json") then
 			success = os.rename(path, browserConfigs .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then
 			success = os.rename(path, browserConfigs .. "vimium-c-settings.json")
-		elseif name == "vimium-options.json" then
-			success = os.rename(path, browserConfigs .. name)
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
@@ -70,14 +63,14 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 		elseif name == "obsidian-web-clipper-settings.json" then
 			success = os.rename(path, browserConfigs .. name)
 
-		-- 4. BANKING
+		-- BANKING
 		elseif
 			name:find("[%d-]_Kontoauszug_.*%.pdf$")
 			or name:find("[%d-]_Kosteninformation_.*%.pdf$")
 			or name:find("[%d-]_Abrechnung_.*%.pdf$")
 			or name:find("[%d-]_Ertragsabrechnung_.*%.pdf$")
 			or name:find("[%d-]_Depotauszug_.*%.pdf$")
-			or name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$") -- SIC missing `i` typo from DKB
+			or name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$") -- SIC sometimes missing `i` typo from DKB
 		then
 			local folder = name:find("Kontoauszug") and "DKB Girokonto & Kreditkarte" or "DKB Depot"
 			local year = name:match("^%d%d%d%d")
@@ -86,7 +79,12 @@ M.pathw_desktop = pathw(desktop, function(paths, _)
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
 
-		-- 5. STEAM GAME SHORTCUTS
+		-- CALENDAR BACKUPS
+		elseif ext == "icbu" then
+			local folder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
+			success = os.rename(path, folder .. name)
+
+		-- STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
 			success = os.rename(path, gameFolder .. name)
