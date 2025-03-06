@@ -74,11 +74,13 @@ local function workLayout()
 	videoAppWatcherForSpotify:start()
 
 	u.openApps { "Slack", "Ivory", "Mimestream" }
-	hs.layout.apply {
-		-- Ivory layout already managed by `mastodon.lua`
-		{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
-		{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
-	}
+	u.defer(1, function()
+		hs.layout.apply {
+			-- Ivory layout already managed by `mastodon.lua`
+			{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
+			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
+		}
+	end)
 
 	print("🔲 Loaded work layout")
 end
