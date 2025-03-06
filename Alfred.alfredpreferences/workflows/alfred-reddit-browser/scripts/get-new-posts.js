@@ -78,6 +78,7 @@ function getHackernewsPosts(oldItems) {
 			const visitationIcon = postIsVisited ? "🟪 " : "";
 
 			// subtitle
+			/** @type {string|undefined} */
 			let category = item._tags.find((tag) => tag === "show_hn" || tag === "ask_hn");
 			category = (category ? `[${category}]` : "")
 				.replace("show_hn", "Show HN")
@@ -146,16 +147,24 @@ function getRedditPosts(subredditName, oldItems) {
 	const opts = getSettings();
 
 	// DOCS https://www.reddit.com/dev/api#GET_new
-	// HACK changing user agent because reddit API does not like curl (lol)
-	const curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" \\
-		"https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}"`;
-	let response;
+	// INFO previously, adding a user agent via `-H "User-Agent: Chrome/115.0.0.0"`
+	// was necessary, now (2025-03-06) this results in a network security error
+	// by reddit, but using `curl` without changed user agent works fine.
+	const curlCommand = `curl -sL "https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}"`;
 	const apiResponse = app.doShellScript(curlCommand);
+	let response;
 	try {
 		response = JSON.parse(apiResponse);
 	} catch (_error) {
-		// biome-ignore lint/suspicious/noConsole: intentional
-		console.log(`Error parsing JSON. curl response was: ${apiResponse}`);
+		if (apiResponse.includes("blocked by network security")) {
+			const msg = "Blocked by reddit's network security. See debugging log.";
+			app.displayNotification(msg, { withTitle: "Reddit Alfred workflow" });
+			// biome-ignore lint/suspicious/noConsole: intentional
+			console.log("Blocked by reddit's network security. curl-command was:\n\n" + curlCommand);
+		} else {
+			// biome-ignore lint/suspicious/noConsole: intentional
+			console.log(`Error parsing JSON. curl response was: \n\n${apiResponse}`);
+		}
 	}
 	if (response.error) {
 		// biome-ignore lint/suspicious/noConsole: intentional
