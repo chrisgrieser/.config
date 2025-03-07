@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>37526382-D72A-4923-92C2-DA8502E293C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D73C316D-320A-4D1C-8966-F446AE9B64F5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<array>
 			<dict>
@@ -155,6 +168,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>932AEE6C-291D-43C3-87CC-D2E54FA12721</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D73C316D-320A-4D1C-8966-F446AE9B64F5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8EB7D79A-1412-4D22-A80A-6134582A6B4B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -518,6 +544,85 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>13</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>W</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>37526382-D72A-4923-92C2-DA8502E293C2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"Proofread","arg":"Proofread"},{"title":"Rewrite","arg":"Rewrite"},{"title":"Make Friendly","arg":"Make Friendly"},{"title":"Make Concise","arg":"Make Concise"},{"title":"Make Professional","arg":"Make Professional"},{"title":"Summarize","arg":"Summarize"},{"title":"Create Key Points","arg":"Create Key Points"},{"title":"Make List","arg":"Make List"},{"title":"Make Table","arg":"Make Table"},{"title":"Compose…","arg":"Compose…"}]</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>D73C316D-320A-4D1C-8966-F446AE9B64F5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+	tell application "System Events" to tell (first process where it is frontmost) 
+		click menu item q of menu of menu item "Writing Tools" of menu "Edit" of menu bar 1 
+	end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>8EB7D79A-1412-4D22-A80A-6134582A6B4B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -529,6 +634,9 @@ The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/tri
 	+ Plain: just output the changed text.
 	+ Markdown: Additions are displayed as `==highlights==`, deletions are displayed as `~~strikethroughs~~`.
 	+ [Critic Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
+4. Apple Intelligence Writing Tools
+	+ This is just a convenience hotkey to trigger the Writing Tools selection via keyboard, it works the same as if you click the item in `Edit` → `Writing Tools`.
+	+ Note that Apple Intelligence availability depends on your country, your macOS version, and the app.
 
 ---
 
@@ -543,6 +651,20 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>195</real>
+		</dict>
+		<key>37526382-D72A-4923-92C2-DA8502E293C2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>note</key>
+			<string>Apple Intelligence 
+Writing Tools
+
+DOUBLE CLICK TO EDIT</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>605</real>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
@@ -610,6 +732,15 @@ DOUBLE CLICK TO EDIT</string>
 			<key>ypos</key>
 			<real>225</real>
 		</dict>
+		<key>8EB7D79A-1412-4D22-A80A-6134582A6B4B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>605</real>
+		</dict>
 		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
 		<dict>
 			<key>colorindex</key>
@@ -671,6 +802,15 @@ DOUBLE CLICK TO EDIT</string>
 			<real>180</real>
 			<key>ypos</key>
 			<real>395</real>
+		</dict>
+		<key>D73C316D-320A-4D1C-8966-F446AE9B64F5</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>605</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
