@@ -57,6 +57,8 @@ MAXQDA
 nvim's
 rebase
 neovim
+reddit
+OpenAI
 keymaps
 Gruvbox
 builtin
@@ -140,6 +142,7 @@ cheatsheets
 myLspConfig
 AppleScript
 insertation
+Autocorrect
 Colorschemes
 VSCode-style
 markdownlint
@@ -150,5 +153,5 @@ customizable
 un-shallowing
 nvim-scissors
 operationalize
+Autocorrection
 Customizability
-reddit
