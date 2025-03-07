@@ -59,11 +59,8 @@ M.wf_scripteditor = wf
 		-- auto-paste, format, and resize window
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.middleHalf)
-			local clipb = hs.pasteboard.getContents()
-			hs.osascript.javascript(([[
-				Application("Script Editor").documents()[0].text = %q;
-				Application("Script Editor").documents()[0].checkSyntax();
-			]]):format(clipb))
+			hs.eventtap.keyStroke({ "cmd" }, "v")
+			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
 
 		-- just resize window if it's an AppleScript Dictionary
 		elseif newWin:title():find("%.sdef$") then
@@ -78,6 +75,13 @@ M.wf_scripteditor = wf
 			hs.pasteboard.setContents(clipb)
 		end
 	end)
+
+--------------------------------------------------------------------------------
+-- TEXTEDIT
+M.wf_textedit = wf.new("Script Editor"):subscribe(
+	wf.windowCreated,
+	function(newWin) wu.moveResize(newWin, wu.middleHalf) end
+)
 
 --------------------------------------------------------------------------------
 -- ALFRED
