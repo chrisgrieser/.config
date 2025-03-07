@@ -129,3 +129,4 @@ matches:
   - { trigger: lsit, replace: list, propagate_case: true, word: true }
   - { trigger: publically, replace: publicly, propagate_case: true, word: true }
   - { trigger: chroe, replace: chore, propagate_case: true, word: true }
+  - { trigger: htokey, replace: hotkey, propagate_case: true, word: true }

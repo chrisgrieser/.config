@@ -630,13 +630,17 @@ The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/tri
 
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
-3. Rephrase the selected text via ChatGPT, improving its language (requires OpenAI API key). There are 3 formatting options:
-	+ Plain: just output the changed text.
-	+ Markdown: Additions are displayed as `==highlights==`, deletions are displayed as `~~strikethroughs~~`.
-	+ [Critic Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
+3. Rephrase the selected text via ChatGPT, improving its language
+	+ Requires OpenAI API key.
+	+ There are 3 formatting options: Plain, Additions are displayed as
+	  `==highlights==`, deletions are, and [Critic
+	  Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
 4. Apple Intelligence Writing Tools
-	+ This is just a convenience hotkey to trigger the Writing Tools selection via keyboard, it works the same as if you click the item in `Edit` → `Writing Tools`.
-	+ Note that Apple Intelligence availability depends on your country, your macOS version, and the app.
+	+ This is just a convenience hotkey to trigger the Writing Tools selection
+	  via keyboard, it works the same as if you click the item in `Edit` →
+	  `Writing Tools`.
+	+ Note that Apple Intelligence availability depends on your country, your
+	  macOS version, and the app.
 
 ---
 
@@ -650,7 +654,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>200</real>
 		</dict>
 		<key>37526382-D72A-4923-92C2-DA8502E293C2</key>
 		<dict>
@@ -664,7 +668,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>575</real>
 		</dict>
 		<key>3D656B72-508C-472A-89A5-17C81D76BE04</key>
 		<dict>
@@ -673,7 +677,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>200</real>
 		</dict>
 		<key>527810E3-7675-48C8-ABF2-D21274E22579</key>
 		<dict>
@@ -686,7 +690,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>200</real>
 		</dict>
 		<key>569CD060-42E6-43E7-A18B-724E9B7D8357</key>
 		<dict>
@@ -699,7 +703,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>375</real>
+			<real>380</real>
 		</dict>
 		<key>76A3BBE1-A98B-4D93-A191-A6C85E4376DD</key>
 		<dict>
@@ -708,7 +712,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>320</real>
+			<real>340</real>
 			<key>ypos</key>
 			<real>60</real>
 		</dict>
@@ -728,9 +732,9 @@ DOUBLE CLICK TO EDIT</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>335</real>
+			<real>340</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>230</real>
 		</dict>
 		<key>8EB7D79A-1412-4D22-A80A-6134582A6B4B</key>
 		<dict>
@@ -739,7 +743,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>575</real>
 		</dict>
 		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
 		<dict>
@@ -748,7 +752,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>435</real>
 		</dict>
 		<key>A2A06CF6-C0FD-4680-B7D3-44BB15153491</key>
 		<dict>
@@ -759,7 +763,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>435</real>
 		</dict>
 		<key>A79508C6-9D50-47FC-8E75-B8142611461C</key>
 		<dict>
@@ -783,7 +787,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>680</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>200</real>
 		</dict>
 		<key>CCE767C4-80B8-4E6D-B5B9-B733E7305B91</key>
 		<dict>
@@ -792,7 +796,7 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>270</real>
 			<key>ypos</key>
-			<real>315</real>
+			<real>320</real>
 		</dict>
 		<key>D1DDD036-4747-47FE-B251-0E02B2734FEA</key>
 		<dict>
@@ -801,16 +805,16 @@ DOUBLE CLICK TO EDIT</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>400</real>
 		</dict>
 		<key>D73C316D-320A-4D1C-8966-F446AE9B64F5</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>xpos</key>
-			<real>265</real>
+			<real>180</real>
 			<key>ypos</key>
-			<real>605</real>
+			<real>575</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1002,7 +1006,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.1</string>
+	<string>1.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
