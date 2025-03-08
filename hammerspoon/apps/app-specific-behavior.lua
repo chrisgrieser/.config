@@ -78,7 +78,7 @@ M.wf_scripteditor = wf
 
 --------------------------------------------------------------------------------
 -- TEXTEDIT
-M.wf_textedit = wf.new("Script Editor"):subscribe(
+M.wf_textedit = wf.new("TextEdit"):subscribe(
 	wf.windowCreated,
 	function(newWin) wu.moveResize(newWin, wu.middleHalf) end
 )
