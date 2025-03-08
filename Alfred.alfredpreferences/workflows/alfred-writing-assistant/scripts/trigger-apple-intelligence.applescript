@@ -12,7 +12,7 @@ on run argv
 			-- items. Thus empty return is needed.
 			return
 		on error
-			return "Writing tools not available in your country, or macOS version."
+			return "Writing tools not available in your country or macOS version."
 		end try
 	end tell
 end run
