@@ -8,6 +8,19 @@
 	<string>⭐️</string>
 	<key>connections</key>
 	<dict>
+		<key>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<array>
 			<dict>
@@ -180,7 +193,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8EB7D79A-1412-4D22-A80A-6134582A6B4B</string>
+				<string>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -547,6 +560,50 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/trigger-apple-intelligence.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Apple Intelligence</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BF4EBC7E-B09A-4709-8132-D893A585F49C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -604,25 +661,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-	tell application "System Events" to tell (first process where it is frontmost) 
-		click menu item q of menu of menu item "Writing Tools" of menu "Edit" of menu bar 1 
-	end tell
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>8EB7D79A-1412-4D22-A80A-6134582A6B4B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -647,6 +685,15 @@ The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/tri
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>16C4AEFA-0A32-4B8B-8C80-7DC517AFCA22</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>340</real>
+			<key>ypos</key>
+			<real>575</real>
+		</dict>
 		<key>322E5C7E-0088-48C7-8510-ABB6F13FAF6B</key>
 		<dict>
 			<key>colorindex</key>
@@ -736,15 +783,6 @@ DOUBLE CLICK TO EDIT</string>
 			<key>ypos</key>
 			<real>230</real>
 		</dict>
-		<key>8EB7D79A-1412-4D22-A80A-6134582A6B4B</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>10</integer>
-			<key>xpos</key>
-			<real>420</real>
-			<key>ypos</key>
-			<real>575</real>
-		</dict>
 		<key>932AEE6C-291D-43C3-87CC-D2E54FA12721</key>
 		<dict>
 			<key>colorindex</key>
@@ -788,6 +826,15 @@ DOUBLE CLICK TO EDIT</string>
 			<real>680</real>
 			<key>ypos</key>
 			<real>200</real>
+		</dict>
+		<key>BF4EBC7E-B09A-4709-8132-D893A585F49C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>10</integer>
+			<key>xpos</key>
+			<real>500</real>
+			<key>ypos</key>
+			<real>575</real>
 		</dict>
 		<key>CCE767C4-80B8-4E6D-B5B9-B733E7305B91</key>
 		<dict>
