@@ -90,10 +90,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			local dirHasChildMarker = vim.tbl_contains(autoCdConfig.childOfRoot, name)
 			return dirHasChildMarker or dirHasParentMarker
 		end)
-		if root and root ~= "" then
-			vim.uv.chdir(root)
-			-- pcall(vim.cmd.BlinkCmpGitReloadCache) -- PENDING https://github.com/Kaiser-Yang/blink-cmp-git/issues/12
-		end
+		if root and root ~= "" then vim.uv.chdir(root) end
 	end,
 })
 
@@ -281,18 +278,22 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 
 -- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
 local originalScrolloff = vim.o.scrolloff
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-	desc = "User: FIX scrolloff on entering new buffer",
-	callback = function(ctx)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
-			if vim.o.scrolloff == 0 then
-				vim.o.scrolloff = originalScrolloff
-				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
-			end
-		end, 150)
-	end,
-})
+vim.defer_fn(function() -- defer to prevent unneeded trigger on startup
+	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
+		desc = "User: FIX scrolloff on entering new buffer",
+		callback = function(ctx)
+			vim.defer_fn(function()
+				if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then
+					return
+				end
+				if vim.o.scrolloff == 0 then
+					vim.o.scrolloff = originalScrolloff
+					vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
+				end
+			end, 150)
+		end,
+	})
+end, 1)
 
 --------------------------------------------------------------------------------
 -- FAVICON PREFIXES FOR URLS
