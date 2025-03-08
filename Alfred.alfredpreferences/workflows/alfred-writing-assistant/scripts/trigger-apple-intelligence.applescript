@@ -1,13 +1,14 @@
 #!/usr/bin/env osascript
 on run argv
 	set selectedTool to item 1 of argv
-	try
-		tell application "System Events" to tell (first process where it is frontmost) 
-			click menu item selectedTool of menu of menu item "Writing Tools" of menu "Edit" of menu bar 1 
-		end tell
-	on error errorText
-		-- log "Apple Intelligence error: " & errorText
-		-- for Alfred notification
-		return "Apple Intelligence writing tools not available in the country, macOS version, or app."
-	end try
+	tell application "System Events" to set frontApp to (name of first process where it is frontmost)
+	tell application "System Events" to tell process frontApp
+		try
+			set isEnabled to enabled of (menu item selectedTool of menu of menu item "Writing Tools" of menu "Edit" of menu bar 1)
+			if not isEnabled then return "Writing tools not available for " & quoted form of frontApp & "."
+			click (menu item selectedTool of menu of menu item "Writing Tools" of menu "Edit" of menu bar 1)
+		on error
+			return "Writing tools not available in your country, or macOS version."
+		end try
+	end tell
 end run
