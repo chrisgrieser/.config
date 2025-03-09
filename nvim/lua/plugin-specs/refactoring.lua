@@ -5,28 +5,32 @@ return {
 	keys = {
 		{
 			"<leader>ri",
-			function() require("refactoring").refactor("Inline Variable") end,
+			function() return require("refactoring").refactor("Inline Variable") end,
 			mode = { "n", "x" },
+			expr = true,
 			desc = "󰫧 Inline variable",
 		},
 		{
 			"<leader>re",
 			function()
 				vim.cmd.normal { "viW", bang = true }
-				require("refactoring").refactor("Extract Variable")
+				return require("refactoring").refactor("Extract Variable")
 			end,
+			expr = true,
 			desc = "󰫧 Extract cursorWORD as variable",
 		},
 		{
 			"<leader>re",
-			function() require("refactoring").refactor("Extract Variable") end,
+			function() return require("refactoring").refactor("Extract Variable") end,
 			mode = "x",
+			expr = true,
 			desc = "󰫧 Extract selection as variable",
 		},
 		{
 			"<leader>rf",
-			function() require("refactoring").refactor("Extract Function") end,
+			function() return require("refactoring").refactor("Extract Function") end,
 			mode = "x",
+			expr = true,
 			desc = " Extract function",
 		},
 	},
