@@ -77,13 +77,13 @@ function listall() {
 	_print-section "brew taps"
 	brew tap | rs
 
-	_print-section "brew leaves --installed-on-request"
-	brew leaves --installed-on-request | rs
+	_print-section "brew leaves"
+	brew leaves | rs
 
 	_print-section "brew list --casks"
 	brew list --casks
 
-	_print-section "Mac App Store"
+	_print-section "mas list"
 	mas list
 
 	brew bundle dump --force &> /dev/null && 

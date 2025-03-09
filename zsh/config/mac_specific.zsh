@@ -13,14 +13,6 @@ function eject {
 		print "If \e[1;33mmds_stores\e[0m is blocking, try \e[1;33msudo mdutil -i off -d /Volumes/<volume_name>\e[0m to stop Spotlight from indexing."
 }
 
-# app-id of macOS apps
-function appid() {
-	local id
-	id=$(osascript -e "id of app \"$1\"")
-	print "\e[1;32mCopied appid:\e[0m $id"
-	echo -n "$id" | pbcopy
-}
-
 # open first ejectable volume
 function vvv {
 	first_volume=$(df | grep " /Volumes/" | grep -v "/Volumes/Recovery" | awk -F '   ' '{print $NF}' | head -n1)
