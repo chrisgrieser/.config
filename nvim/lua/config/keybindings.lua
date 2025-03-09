@@ -138,14 +138,14 @@ do
 	keymap("n", "Y", function()
 		cursorBefore = vim.api.nvim_win_get_cursor(0)
 		return "y$"
-	end, { expr = true, unique = false }) -- `unique` since it's a nvim-builtin
+	end, { expr = true, unique = false }) -- non-unique since it's a nvim-builtin
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Sticky yank/delete",
 		callback = function()
-			if vim.v.event.regname ~= "" or not cursorBefore then return end
-
-			if vim.v.event.operator == "y" then vim.api.nvim_win_set_cursor(0, cursorBefore) end
+			if vim.v.event.operator == "y" and vim.v.event.regname == "" and cursorBefore then
+				vim.api.nvim_win_set_cursor(0, cursorBefore)
+			end
 		end,
 	})
 end
@@ -217,7 +217,7 @@ keymap({ "n", "x" }, "q", "gc", { desc = "󰆈 Comment operator", remap = true }
 keymap("n", "qq", "gcc", { desc = "󰆈 Comment line", remap = true })
 do
 	keymap("o", "u", "gc", { desc = "󰆈 Multiline comment", remap = true })
-	keymap("n", "guu", "guu") -- prevent `omap u` above from overwriting `guu`
+	keymap("n", "guu", "guu") -- prevent mapping above from overwriting `guu`
 end
 
 -- stylua: ignore start
@@ -249,6 +249,7 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
+-- hover mappings
 do
 	keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
 
