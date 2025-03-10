@@ -4,82 +4,45 @@
 // - needs to be run from repo root: `node ./scripts/devdocs/update-devdocs.mjs`
 // - updates which devdocs are available, and also the versions of devdocs
 //   (automatically switches to the latest version)
-// - WARN this overwrites all available workflow configuration, so changes need
-//   to be added here manually, such as the field for using specific devdocs
-//   versions.
+// - WARN this overwrites all available workflow configuration, so changes to
+//   the workflow configuration need to be added here manually, such as the
+//   field for using specific devdocs versions.
 //──────────────────────────────────────────────────────────────────────────────
-// biome-ignore lint/correctness/noNodejsModules: unsure how to fix this
 import fs from "node:fs";
-//──────────────────────────────────────────────────────────────────────────────
 
 /** @type {Record<string, string>} */
-const aliases = {
-	// ALIASES ADDED/CHANGED BY ME on top of the ones from devdocs
+const customAliases = {
 	hammerspoon: "hs",
 	// biome-ignore lint/style/useNamingConvention: not set by me
 	browser_support_tables: "cani",
-	matplotlib: "plt", // conventional abbreviation: https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
-
-	// update this once this PR is merged active: https://github.com/freeCodeCamp/devdocs/pull/2344
-	// check via: curl -sL "https://devdocs.io/docs.json" | grep "alias" | grep -v "null" ; curl -sL "https://documents.devdocs.io/docs.json" | grep "alias" | grep -v "null"
-	angular: "ng",
-	angularjs: "ng", // removed `.`
-	backbone: "bb", // removed `.js`
-	coffeescript: "cs",
-	crystal: "cr",
-	elixir: "ex",
-	javascript: "js",
-	julia: "jl",
-	jquery: "$",
-	knockout: "ko", // removed `.js`
-	kubernetes: "k8s",
-	less: "ls",
-	lodash: "_",
-	marionette: "mn",
-	markdown: "md",
-	modernizr: "mdr",
-	moment: "mt", // removed `.js`
-	openjdk: "java",
-	nginx: "ngx",
-	numpy: "np",
-	pandas: "pd",
-	postgresql: "pg",
-	python: "py",
-	rails: "ror", // ruby.on.rails -> tails
-	ruby: "rb",
-	rust: "rs",
-	sass: "scss",
-	tensorflow: "tf",
-	typescript: "ts",
-	underscore: "_", // removed `.js`
+	matplotlib: "plt", // preferring the conventional `plt` over `mlp` https://docs.astral.sh/ruff/settings/#lint_flake8-import-conventions_aliases
 };
 
-//──────────────────────────────────────────────────────────────────────────────
-
-// IMPORTANT extra lines for pinned workflow versions and opening at original page,
-// since it's overridden otherwise
+// IMPORTANT extra lines for pinned workflow versions and opening at original
+// page, since it's overridden otherwise
 const extraWorkflowConfig = [
 	"<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>required</key> <false/> <key>trim</key> <true/> <key>verticalsize</key> <integer>3</integer> </dict> <key>description</key> <string>one per line; see to the right for explanations</string> <key>label</key> <string>pinned devdocs versions</string> <key>type</key> <string>textarea</string> <key>variable</key> <string>select_versions</string> </dict>",
 	"<dict> <key>config</key> <dict> <key>default</key> <false/> <key>required</key> <false/> <key>text</key> <string></string> </dict> <key>description</key> <string>Only available for a few sites. PRs welcome.</string> <key>label</key> <string>open at original</string> <key>type</key> <string>checkbox</string> <key>variable</key> <string>use_source_page_if_available</string> </dict>",
 	'<dict> <key>config</key> <dict> <key>default</key> <string></string> <key>placeholder</key> <string></string> <key>required</key> <false/> <key>trim</key> <true/> </dict> <key>description</key> <string>Shared keyword prefix for DevDocs searches. If set to "dd" , will search the bash documentation via "ddbash" instead of "bash". Leave empty to not use any such prefix.</string> <key>label</key> <string>DevDocs prefix</string> <key>type</key> <string>textfield</string> <key>variable</key> <string>shared_devdocs_prefix</string> </dict>',
 ];
 
+//──────────────────────────────────────────────────────────────────────────────
+
 async function run() {
 	// alternative: https://documents.devdocs.io/docs.json
 	const response = await fetch("https://devdocs.io/docs.json");
 	const json = await response.json();
 
-	// convert to hashmap to remove duplicates
 	/** @type {Record<string, string>} */
 	const allLangs = {};
 	const noneItem = "<array> <string>-----</string> <string></string> </array>";
 	const infoPlistPopup = [noneItem];
 	for (const lang of json) {
-		// allLangs json -> keyword-slug-map
 		const id = lang.slug.replace(/~.*/, ""); // remove version suffix
-		const keyword = aliases[id] || id;
+		const keyword = customAliases[id] || lang.alias || id; // custom -> devdocs -> id
 
-		// assuming the JSON puts newer version on top, skip older versions
+		// skip duplicates
+		// (assuming the JSON puts newer version on top, skips older versions)
 		if (allLangs[keyword]) continue;
 		allLangs[keyword] = lang.slug;
 
