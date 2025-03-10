@@ -114,7 +114,7 @@ keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end
 
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
-keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- `:move` preserves marks
+keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- using `:move` preserves marks
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
