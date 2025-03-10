@@ -14,9 +14,9 @@ body=$(echo "$*" | tail -n +2)
 # deleting and then re-creating the reminder
 reminders delete "$reminder_list" "$id" >&2
 if [[ -n "$body" ]]; then # empty body causes error
-	reminders add "$reminder_list" --notes="$body" --due-date="today"
+	reminders add "$reminder_list" --notes="$body" --due-date="today" -- "$title" >&2
 else
-	reminders add "$reminder_list" --due-date="today"
+	reminders add "$reminder_list" --due-date="today" -- "$title" >&2
 fi
 
 echo -n "$title" # pass for notification
