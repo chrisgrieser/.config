@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<array>
 			<dict>
@@ -64,6 +77,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3AB74DE6-F287-423D-A08E-245F8D3177B7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -267,11 +293,92 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Applications/TextEdit.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open with TextEdit</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Open in Neovide</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>openwith</key>
+				<string>/System/Volumes/Data/Applications/neovide.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>3AB74DE6-F287-423D-A08E-245F8D3177B7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>3AB74DE6-F287-423D-A08E-245F8D3177B7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>525</real>
+		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
 			<key>note</key>
@@ -280,6 +387,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
@@ -326,6 +442,15 @@
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
+		<key>DEC20578-C2C9-42E4-A921-6C4B3CEAB995</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>525</real>
+		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
 			<key>colorindex</key>
@@ -334,6 +459,15 @@
 			<real>465</real>
 			<key>ypos</key>
 			<real>120</real>
+		</dict>
+		<key>EC8EA4E1-1FE9-4EC2-BDAE-0CB164238CA9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>415</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
