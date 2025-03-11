@@ -77,9 +77,11 @@ end
 
 function M.toggleTitleCase()
 	local prevCursor = vim.api.nvim_win_get_cursor(0)
+
 	local cword = vim.fn.expand("<cword>")
 	local cmd = cword == cword:lower() and "guiwgUl" or "guiw"
 	vim.cmd.normal { cmd, bang = true }
+
 	vim.api.nvim_win_set_cursor(0, prevCursor)
 end
 
@@ -109,22 +111,23 @@ end
 function M.smartDuplicate()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local line = vim.api.nvim_get_current_line()
+	local ft = vim.bo.filetype
 
 	-- FILETYPE-SPECIFIC TWEAKS
-	if vim.bo.ft == "css" then
+	if ft == "css" then
 		local newLine = line
 		if line:find("top:") then newLine = line:gsub("top:", "bottom:") end
 		if line:find("bottom:") then newLine = line:gsub("bottom:", "top:") end
 		if line:find("right:") then newLine = line:gsub("right:", "left:") end
 		if line:find("left:") then newLine = line:gsub("left:", "right:") end
 		line = newLine
-	elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+	elseif ft == "javascript" or ft == "typescript" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
-	elseif vim.bo.ft == "lua" then
+	elseif ft == "lua" then
 		line = line:gsub("^(%s*)if( .* then)$", "%1elseif%2")
-	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" then
+	elseif ft == "zsh" or ft == "bash" then
 		line = line:gsub("^(%s*)if( .* then)$", "%1elif%2")
-	elseif vim.bo.ft == "python" then
+	elseif ft == "python" then
 		line = line:gsub("^(%s*)if( .*:)$", "%1elif%2")
 	end
 
