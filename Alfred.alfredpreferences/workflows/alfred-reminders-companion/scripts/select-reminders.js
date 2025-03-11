@@ -57,7 +57,7 @@ function run() {
 	const reminders = remindersFiltered.map((rem) => {
 		const { title, notes, externalId, isCompleted, dueDate } = rem;
 		const body = notes || "";
-		const displayBody = body.trim().replace(/\n+/g, " · ");
+		const displayBody = body.trim().replace(/\n+/g, " ");
 		const content = title + "\n" + body;
 
 		const [url] = content.match(urlRegex) || [];
