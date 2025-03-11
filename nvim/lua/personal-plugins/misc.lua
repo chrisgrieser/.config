@@ -4,10 +4,10 @@
 local M = {}
 --------------------------------------------------------------------------------
 
---- open the current workflow for the Alfred app
+--- open the current workflow for in the Alfred workflow preferences
 function M.openAlfredPref()
 	if jit.os ~= "OSX" then
-		vim.notify("Not on macOS.", vim.log.levels.WARN)
+		vim.notify("Alfred is only available on macOS.", vim.log.levels.WARN)
 		return
 	end
 	local workflowUid =
