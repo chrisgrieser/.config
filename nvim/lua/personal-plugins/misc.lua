@@ -101,7 +101,7 @@ function M.toggleOrIncrement()
 	if newWord then
 		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
 	else
-		-- needs :execute to escape `<C-a>`
+		-- needs `:execute` to escape `<C-a>`
 		vim.cmd.execute('"normal! ' .. vim.v.count1 .. '\\<C-a>"')
 	end
 end
