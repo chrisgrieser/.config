@@ -36,7 +36,7 @@ function run(argv) {
 	// e.g.: pages = {55--78},
 	const firstTruePage = Number.parseInt(entry.match(/pages ?= ?\{(\d+)-+\d+\},/)?.[1] || "0");
 	const trueCurrentPage = pageInPdf + firstTruePage - 1;
-	const citation = `${citekey}, p. ${trueCurrentPage}`;
+	const citation = `@${citekey}, p. ${trueCurrentPage}`;
 
 	const toCopy = selection ? `"${selection}" [${citation}]` : `[${citation}]`;
 	app.setTheClipboardTo(toCopy);
