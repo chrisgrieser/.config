@@ -376,7 +376,7 @@
 				<key>filename</key>
 				<string>{var:scratchpad_path}</string>
 				<key>filetext</key>
-				<string>- {isodate:yyyy-MM-dd}: {query}</string>
+				<string>- {isodate:yyyy-MM-dd HH:MM}: {query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>relativepathmode</key>

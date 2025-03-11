@@ -375,9 +375,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>455</real>
 		</dict>
 		<key>4694D7EB-2482-44FA-881E-2597A9A90F9C</key>
 		<dict>
@@ -393,9 +393,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>345</real>
 		</dict>
 		<key>8239AB55-5756-4F08-AF47-3E6EEE64514E</key>
 		<dict>
@@ -447,9 +447,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>525</real>
+			<real>455</real>
 		</dict>
 		<key>E118FF31-5A15-4BE3-AF18-16A037503F55</key>
 		<dict>
@@ -465,9 +465,9 @@
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>xpos</key>
-			<real>195</real>
+			<real>190</real>
 			<key>ypos</key>
-			<real>415</real>
+			<real>345</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
