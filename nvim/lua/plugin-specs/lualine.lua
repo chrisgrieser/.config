@@ -2,8 +2,8 @@
 --------------------------------------------------------------------------------
 
 ---Adds a component lualine was already set up. This enables lazy-loading
----plugins that add statusline components. (Accessed via `vim.g`, as this file's
----exports are used by `lazy.nvim`.)
+---plugins that add statusline components. 
+---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
 ---@param component function|table the component forming the lualine
@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	desc = "User: LSP progress",
 	callback = function()
 		lspActive = true
-		vim.defer_fn(function () lspActive = false end, 2000)
+		vim.defer_fn(function() lspActive = false end, 2000)
 	end,
 })
 
