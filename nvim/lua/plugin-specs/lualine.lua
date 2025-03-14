@@ -99,6 +99,15 @@ return {
 					symbols = { error = "󰅚 ", warn = " ", info = "󰋽 ", hint = "󰘥 " },
 					cond = function() return vim.diagnostic.is_enabled { bufnr = 0 } end,
 				},
+				{
+					"lsp_status",
+					symbols = {
+						spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+						done = "",
+						separator = " ",
+					},
+					ignore_lsp = { "typos_lsp", "efm" },
+				},
 			},
 			lualine_y = {
 				{ -- line count
