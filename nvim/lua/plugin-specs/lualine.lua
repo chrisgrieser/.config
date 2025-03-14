@@ -16,6 +16,16 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where)
 	require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
 
+-- helper for `lsp_spinner` component
+local lspActive
+vim.api.nvim_create_autocmd("LspProgress", {
+	desc = "User: LSP progress",
+	callback = function()
+		lspActive = true
+		vim.defer_fn(function () lspActive = false end, 2000)
+	end,
+})
+
 --------------------------------------------------------------------------------
 
 return {
@@ -34,9 +44,10 @@ return {
 				{
 					"datetime",
 					style = "%H:%M:%S",
-					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 					-- make the `:` blink
 					fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
+					-- only if window is maximized
+					cond = function() return vim.o.columns > 120 end,
 				},
 			},
 			lualine_b = {},
@@ -101,12 +112,9 @@ return {
 				},
 				{
 					"lsp_status",
-					symbols = {
-						spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-						done = "",
-						separator = " ",
-					},
+					icon = "",
 					ignore_lsp = { "typos_lsp", "efm" },
+					cond = function() return lspActive end,
 				},
 			},
 			lualine_y = {
