@@ -24,7 +24,10 @@ return {
 		},
 		indent = {
 			enable = true,
-			disable = { "markdown" }, -- indentation at bullet points is worse
+			disable = {
+				"javascript", -- sometimes indentation wrong
+				"markdown", -- indentation at bullet points is worse
+			},
 		},
 	},
 	init = function()

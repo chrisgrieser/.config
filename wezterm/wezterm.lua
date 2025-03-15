@@ -7,7 +7,6 @@ local darkThemes = {
 	"cyberpunk",
 }
 local lightThemes = {
-	"Paraiso (light) (terminal.sexy)",
 	"Ivory Light (terminal.sexy)",
 	"Solar Flare Light (base16)",
 }
