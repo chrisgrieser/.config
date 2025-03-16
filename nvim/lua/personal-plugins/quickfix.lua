@@ -24,7 +24,7 @@ end, { desc = "󰒭 Next quickfix" })
 keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = "󰒮 Prev quickfix" })
 
 keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete list" })
-keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " 1st item" })
+keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st item" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
 				sign_text = "󱘹▶",
 				sign_hl_group = "DiagnosticSignInfo",
-				priority = 200, -- Gitsigns uses 6 by default, we want to be above
+				priority = 200, -- above most signs
 				invalidate = true, -- deletes the extmark if the line is deleted
 				undo_restore = true, -- makes undo restore those
 			})

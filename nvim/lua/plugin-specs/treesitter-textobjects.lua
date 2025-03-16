@@ -44,13 +44,13 @@ return { -- treesitter-based textobjs
 		{ "au", "<cmd>TSTextobjectSelect @loop.outer<CR>", mode = {"x","o"}, desc = "󰛤 outer loop" },
 		{ "a" .. textObj.func, "<cmd>TSTextobjectSelect @function.outer<CR>", mode = {"x","o"},desc = " outer function" },
 		{ "i" .. textObj.func, "<cmd>TSTextobjectSelect @function.inner<CR>", mode = {"x","o"},desc = " inner function" },
-		{ "a" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱕆 outer c[o]ndition" },
-		{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner c[o]ndition" },
-		{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer ca[l]l" },
-		{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner ca[l]l" },
+		{ "a" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.outer<CR>", mode = {"x","o"},desc = "󱕆 outer condition" },
+		{ "i" .. textObj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner condition" },
+		{ "a" .. textObj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer call" },
+		{ "i" .. textObj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner call" },
 
-		-- CUSTOM TEXTOBJECTS
-		{"g" .. textObj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 ca[l]ler" },
+		-- CUSTOM TEXTOBJECTS (defined via .scm files)
+		{ "g" .. textObj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 caller" },
 		-- stylua: ignore end
 
 		-- COMMENTS
@@ -58,6 +58,19 @@ return { -- treesitter-based textobjs
 		-- only operator-pending to not conflict with selection-commenting
 		-- stylua: ignore
 		{ "q", "<cmd>TSTextobjectSelect @comment.outer<CR>", mode = "o", desc = "󰆈 single comment" },
+
+		{
+			"cq",
+			function()
+				-- not using `@comment.inner`, since not yet supported for many languages
+				vim.cmd.TSTextobjectSelect("@comment.outer")
+				local comStr = vim.bo.commentstring:format("")
+				vim.cmd.normal { "c" .. comStr, bang = true }
+				vim.cmd.startinsert { bang = true }
+			end,
+			desc = "󰆈 change single comment",
+		},
+
 		{
 			"dq",
 			function()
@@ -68,7 +81,7 @@ return { -- treesitter-based textobjs
 				vim.api.nvim_set_current_line(trimmedLine)
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
-			desc = "󰆈 Sticky delete comment",
+			desc = "󰆈 sticky single delete comment",
 		},
 	},
 }
