@@ -1,6 +1,5 @@
 tap "felixkratz/formulae"
 tap "homebrew/bundle"
-tap "homebrew/services"
 tap "keith/formulae"
 tap "mgmeyers/pdfannots2json"
 brew "ca-certificates"
