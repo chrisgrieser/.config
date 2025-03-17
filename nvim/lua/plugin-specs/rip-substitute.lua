@@ -25,5 +25,6 @@ return {
 		editingBehavior = {
 			autoCaptureGroups = true,
 		},
+		debug = false,
 	},
 }
