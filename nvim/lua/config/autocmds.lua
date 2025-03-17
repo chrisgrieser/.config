@@ -287,7 +287,7 @@ vim.defer_fn(function() -- defer to prevent unneeded trigger on startup
 				if vim.o.scrolloff > 0 then return end
 				vim.o.scrolloff = originalScrolloff
 				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
-			end, 250)
+			end, 500)
 		end,
 	})
 end, 1)
