@@ -64,6 +64,17 @@ local themes = {
 					BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
 					BlinkCmpDocBorder = { link = "FloatBorder" },
 
+					-- blink.cmp.git
+					BlinkCmpGitKindPR = { fg = "palette.orange" },
+					BlinkCmpGitKindIssue = { fg = "palette.orange" },
+					BlinkCmpGitLabelPRId = { fg = "palette.orange" },
+					BlinkCmpGitKindIconPR = { fg = "palette.orange" },
+					BlinkCmpGitKindMention = { fg = "palette.orange" },
+					BlinkCmpGitLabelIssueId = { fg = "palette.orange" },
+					BlinkCmpGitKindIconIssue = { fg = "palette.orange" },
+					BlinkCmpGitLabelMentionId = { fg = "palette.orange" },
+					BlinkCmpGitKindIconMention = { fg = "palette.orange" },
+
 					-- use grey for debug
 					SnacksNotifierTitleDebug = { fg = "palette.comment" },
 					SnacksNotifierIconDebug = { fg = "palette.comment" },

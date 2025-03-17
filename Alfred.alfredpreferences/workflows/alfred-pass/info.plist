@@ -713,7 +713,7 @@
 				<key>keyword</key>
 				<string>pw gen</string>
 				<key>subtext</key>
-				<string>Copy WITHOUT creating new entry</string>
+				<string>Generate &amp; copy it WITHOUT creating new entry</string>
 				<key>text</key>
 				<string>✴️ New password</string>
 				<key>withspace</key>
