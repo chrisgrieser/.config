@@ -282,15 +282,12 @@ vim.defer_fn(function() -- defer to prevent unneeded trigger on startup
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 		desc = "User: FIX scrolloff on entering new buffer",
 		callback = function(ctx)
+			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
 			vim.defer_fn(function()
-				if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then
-					return
-				end
-				if vim.o.scrolloff == 0 then
-					vim.o.scrolloff = originalScrolloff
-					vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
-				end
-			end, 150)
+				if vim.o.scrolloff > 0 then return end
+				vim.o.scrolloff = originalScrolloff
+				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
+			end, 250)
 		end,
 	})
 end, 1)
