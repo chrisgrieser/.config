@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 
 ---Adds a component lualine was already set up. This enables lazy-loading
----plugins that add statusline components. 
+---plugins that add statusline components.
 ---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param whichBar "tabline"|"winbar"|"inactive_winbar"|"sections"
 ---@param whichSection "lualine_a"|"lualine_b"|"lualine_c"|"lualine_x"|"lualine_y"|"lualine_z"
@@ -114,6 +114,10 @@ return {
 					"lsp_status",
 					icon = "",
 					ignore_lsp = { "typos_lsp", "efm" },
+					symbols = {
+						-- stylua: ignore
+						spinner = { "󰄰", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" },
+					},
 					cond = function() return lspActive end,
 				},
 			},
