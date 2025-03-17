@@ -43,7 +43,8 @@ vim.ui.select = function(items, opts, on_choice)
 	-- PARAMETERS
 	local formattedItems = vim.tbl_map(opts.format_item, items)
 	assert(type(formattedItems[1]) == "string", "`opts.format_item` must return a string.")
-	local longestItemLen = vim.iter(formattedItems):fold(0, function(acc, c) return math.max(acc, #c) end)
+	local longestItemLen = vim.iter(formattedItems)
+		:fold(0, function(acc, c) return math.max(acc, #c) end)
 	local width = math.max(longestItemLen, #opts.prompt, #opts.kind) + 2
 	local height = #formattedItems
 	local footer = opts.kind ~= "" and " " .. opts.kind .. " " or ""
