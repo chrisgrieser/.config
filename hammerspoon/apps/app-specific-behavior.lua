@@ -56,13 +56,13 @@ M.wf_scripteditor = wf
 		if newWin:title() == "Open" then
 			hs.osascript.applescript('tell application "Script Editor" to make new document')
 
-		-- auto-paste, format, and resize window
+		-- resize window, paste, and format
 		elseif newWin:title() == "Untitled" then
 			wu.moveResize(newWin, wu.middleHalf)
 			hs.eventtap.keyStroke({ "cmd" }, "v")
 			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
 
-		-- just resize window if it's an AppleScript Dictionary
+		-- if it's an AppleScript Dictionary, just resize window
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.middleHalf)
 		end
@@ -70,18 +70,23 @@ M.wf_scripteditor = wf
 	-- fix copypasting line breaks into other apps
 	:subscribe(wf.windowUnfocused, function()
 		local clipb = hs.pasteboard.getContents()
-		if clipb then
-			clipb = clipb:gsub("\r", " \n")
-			hs.pasteboard.setContents(clipb)
-		end
+		if not clipb then return end
+		clipb = clipb:gsub("\r", " \n")
+		hs.pasteboard.setContents(clipb)
 	end)
 
 --------------------------------------------------------------------------------
 -- TEXTEDIT
-M.wf_textedit = wf.new("TextEdit"):subscribe(
-	wf.windowCreated,
-	function(newWin) wu.moveResize(newWin, wu.middleHalf) end
-)
+M.wf_textedit = wf.new("TextEdit"):subscribe(wf.windowCreated, function(newWin)
+	-- skip new file creation dialog
+	if newWin:title() == "Open" then
+		hs.osascript.applescript('tell application "TextEdit" to make new document')
+
+	-- resize window
+	else
+		wu.moveResize(newWin, wu.middleHalf)
+	end
+end)
 
 --------------------------------------------------------------------------------
 -- ALFRED

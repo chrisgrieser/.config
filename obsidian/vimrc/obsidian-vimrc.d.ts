@@ -62,7 +62,7 @@ declare type View = {
 			): Promise<void>;
 		};
 		commands: {
-			executeCommandById(id: string): void;
+			executeCommandById(commandId: string): void;
 		};
 		metadataCache: {
 			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;

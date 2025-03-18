@@ -9,21 +9,22 @@ local u = require("meta.utils")
 M.usb_externalDrive = hs.usb.watcher
 	.new(function(device)
 		local name = device.productName
+		u.notify("Mounted: " .. name)
+
 		local ignore = {
 			"CHERRY Wireless Device", -- Mouse at mother
-			"SP 150", -- RICOH printer
-			"Integrated RGB Camera", -- Docking Station in the office
-			"USB 10/100/1000 LAN", -- ^
-			"T27hv-20", -- ^
+			"Keychron K3", ------------- Keyboard at home & office
+			"SP 150", ------------------ RICOH printer
+			"Integrated RGB Camera", --- Docking Station in the office
+			"USB 10/100/1000 LAN", ----- ^
+			"T27hv-20", ---------------- ^
 		}
 		if hs.fnutils.contains(ignore, name) or device.eventType ~= "added" then return end
 
-		u.notify("Mounted: " .. name)
-
 		local harddriveNames = {
 			"ZY603 USB3.0 Device", -- Externe A
-			"External Disk 3.0", -- Externe B
-			"Elements 2621", -- Externe C
+			"External Disk 3.0", ---- Externe B
+			"Elements 2621", -------- Externe C
 		}
 
 		if hs.fnutils.contains(harddriveNames, name) then
@@ -31,25 +32,14 @@ M.usb_externalDrive = hs.usb.watcher
 		else
 			-- search for mounted volumes, since the usb-watcher does not report it to us
 			local cmd =
-				"df | grep --max-count=1 ' /Volumes/' | awk -F '   ' '{print $NF}' | xargs open"
+				'df | grep " /Volumes/" | grep -v "/Volumes/Recovery" | awk -F "   " "{print $NF}" | head -n1 | xargs open'
 			u.defer({ 1, 3 }, function() hs.execute(cmd) end)
 		end
 	end)
 	:start()
 
 --------------------------------------------------------------------------------
--- BLUETOOTH/BATTERY
-
----@param msg string
-local function createReminder(msg)
-	hs.osascript.javascript(([[
-		const rem = Application("Reminders");
-		const today = new Date();
-		const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
-		rem.defaultList().reminders.push(newReminder);
-		rem.quit();
-	]]):format(msg))
-end
+-- BATTERY
 
 M.timer_dailyBatteryCheck = hs.timer
 	.doAt("14:30", "01d", function()
@@ -67,7 +57,15 @@ M.timer_dailyBatteryCheck = hs.timer
 			if d.BatteryPercent < warnBelowPercent then
 				local msg = ("🔋 %s Battery low (%s)"):format(d.Product, d.BatteryPercent)
 				u.notify(msg)
-				createReminder(msg)
+
+				-- create reminder
+				hs.osascript.javascript(([[
+					const rem = Application("Reminders");
+					const today = new Date();
+					const newReminder = rem.Reminder({ name: %q, alldayDueDate: today });
+					rem.defaultList().reminders.push(newReminder);
+					rem.quit();
+				]]):format(msg))
 				hs.execute(u.exportPath .. "sketchybar --trigger update_reminder_count")
 			end
 		end

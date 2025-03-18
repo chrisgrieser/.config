@@ -123,7 +123,7 @@ exmap openNextLinkInNewTab jsfile Meta/vimrc-jsfile.js { openNextLink("new-tab")
 nnoremap gX :openNextLinkInNewTab<CR>
 
 " [f]ootnotes (requires Footnotes Shortcut Plugin)
-exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
+exmap gotoFootnote jsfile Meta/vimrc-jsfile.js { gotoFootnote() }
 nnoremap gf :gotoFootnote<CR>
 
 " last change (HACK, only works once to jump to the last location)

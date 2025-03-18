@@ -4,7 +4,7 @@
 	"version": "0.1",
 	"minAppVersion": "1.17.0",
 	"description": "Personal plugin to be able to register a few action on Obsidian's startup.",
-	"author": "pseudometa aka Chris Grieser",
+	"author": "pseudometa (Chris Grieser)",
 	"authorUrl": "https://github.com/chrisgrieser",
 	"isDesktopOnly": false
 }

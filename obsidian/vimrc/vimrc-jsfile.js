@@ -146,6 +146,15 @@ function gotoLastLinkInFile() {
 	_setCursorAndAddToJumplist(editor, prevCursor, newCursor);
 }
 
+/** Wrapper just to set jump point for vim */
+function gotoFootnote() {
+	const oldCursor = editor.getCursor();
+	view.app.commands.executeCommandById("obsidian-footnotes:insert-autonumbered-footnote");
+	_setCursorAndAddToJumplist(editor, oldCursor, editor.getCursor());
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+
 /** h1 -> h2, h2 -> h3, etc. */
 /** @param {1|-1} dir */
 function headingIncrementor(dir) {
@@ -190,6 +199,8 @@ function smartOpenLine(where) {
 	editor.setCursor(targetLine, indentAndText.length);
 	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
 }
+
+//──────────────────────────────────────────────────────────────────────────────
 
 // merge lines, but remove indentation, lists, and blockquotes
 function smartMerge() {
