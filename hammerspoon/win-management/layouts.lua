@@ -79,6 +79,7 @@ local function workLayout()
 			-- Ivory layout already managed by `mastodon.lua`
 			{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
 			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
+			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
 		}
 	end)
 
