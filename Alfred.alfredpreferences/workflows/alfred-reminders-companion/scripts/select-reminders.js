@@ -85,8 +85,8 @@ function run() {
 				body: body,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				mode: isCompleted ? "uncomplete" : "complete",
-				cmdMode: url ? "open-url" : "copy", // only for cmd
-				isCompleted: isCompleted.toString(), // only for cmd
+				cmdMode: url ? "open-url" : "copy", // only for `cmd`
+				isCompleted: isCompleted.toString(), // only for `cmd`
 				showCompleted: showCompleted.toString(),
 				remindersLeftNow: true.toString(),
 				remindersLeftLater: remindersLeftLater, // for deciding whether to loop back
