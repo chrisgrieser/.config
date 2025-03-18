@@ -1709,32 +1709,6 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>oldest_first</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>oldest first</string>
-						<string>oldest_first</string>
-					</array>
-					<array>
-						<string>newest first</string>
-						<string>newest_first</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>items of higher priority are always displayed further at the top than ones of lower priority</string>
-			<key>label</key>
-			<string>sort order</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>sort_order</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
 				<string></string>
@@ -1754,7 +1728,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.4.1</string>
+	<string>1.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -148,6 +148,7 @@ myLspConfig
 AppleScript
 insertation
 Autocorrect
+textobjects
 Colorschemes
 VSCode-style
 markdownlint
@@ -157,6 +158,7 @@ unshallowing
 customizable
 un-shallowing
 nvim-scissors
+characterwise
 operationalize
 Autocorrection
 Customizability

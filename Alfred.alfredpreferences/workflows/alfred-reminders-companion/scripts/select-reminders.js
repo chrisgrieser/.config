@@ -12,6 +12,7 @@ app.includeStandardAdditions = true;
  * @property {string} externalId
  * @property {boolean} isCompleted
  * @property {string} dueDate
+ * @property {string} startDate
  */
 
 const isToday = (/** @type {Date} */ aDate) => {
@@ -28,37 +29,42 @@ const urlRegex =
 function run() {
 	// parameters
 	const list = $.getenv("reminder_list");
-	const sortOrder = $.getenv("sort_order") === "oldest_first" ? "ascending" : "descending";
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 
 	// RUN CMD
 	// PERF query filters directly for completed reminders
 	const completedArg = showCompleted ? "--include-completed" : "";
-	const shellCmd = `reminders show "${list}" ${completedArg} --sort=creation-date \
-		--sort-order=${sortOrder} --format="json"`;
+	const shellCmd = `reminders show "${list}" ${completedArg} --sort=due-date --format=json`;
 
 	const today = new Date();
 	today.setHours(23, 59, 59, 0); // to include reminders later that day
 
 	/** @type {reminderObj[]} */
 	const responseJson = JSON.parse(app.doShellScript(shellCmd));
-	const remindersFiltered = responseJson
-		.filter((rem) => {
-			const dueDate = rem.dueDate && new Date(rem.dueDate);
-			const noDueDate = rem.dueDate === undefined;
-			const openAndDueBeforeToday = !rem.isCompleted && dueDate < today;
-			const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
-			return openAndDueBeforeToday || completedAndDueToday || noDueDate;
-		})
+	const remindersFiltered = responseJson.filter((rem) => {
+		const dueDate = rem.dueDate && new Date(rem.dueDate);
+		const noDueDate = rem.dueDate === undefined;
+		const openAndDueBeforeToday = !rem.isCompleted && dueDate < today;
+		const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
+		return openAndDueBeforeToday || completedAndDueToday || noDueDate;
+	});
 	const remindersLeftLater = remindersFiltered.length - 1;
 
 	/** @type {AlfredItem[]} */
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, externalId, isCompleted, dueDate } = rem;
+		const { title, notes, externalId, isCompleted, dueDate, startDate } = rem;
 		const body = notes || "";
-		const displayBody = body.trim().replace(/\n+/g, " ");
 		const content = title + "\n" + body;
+
+		const dueTime =
+			startDate && // reminder only has a due time if the JSON object has a start date
+			new Date(dueDate).toLocaleTimeString([], {
+				hour: "2-digit",
+				minute: "2-digit",
+				hour12: false,
+			});
+		const subtitle = [body.replace(/\n+/g, " "), dueTime].filter(Boolean).join(" · ");
 
 		const [url] = content.match(urlRegex) || [];
 		let emoji = isCompleted ? "☑️ " : "";
@@ -69,7 +75,7 @@ function run() {
 		/** @type {AlfredItem} */
 		const alfredItem = {
 			title: emoji + title,
-			subtitle: displayBody,
+			subtitle: subtitle,
 			text: { copy: content, largetype: content },
 			variables: {
 				id: externalId,
