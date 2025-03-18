@@ -34,6 +34,8 @@ function run() {
 
 	// RUN CMD
 	// PERF query filters directly for completed reminders
+	// INFO not filtering for reminders due today, since the filtering should
+	// include reminders with due date in the past or with missing due date.
 	const completedArg = showCompleted ? "--include-completed" : "";
 	const shellCmd = `reminders show "${list}" ${completedArg} --sort=due-date --format=json`;
 
