@@ -114,10 +114,6 @@ return {
 					"lsp_status",
 					icon = "",
 					ignore_lsp = { "typos_lsp", "efm" },
-					symbols = {
-						-- stylua: ignore
-						spinner = { "󰄰", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" },
-					},
 					cond = function() return lspActive end,
 				},
 			},
