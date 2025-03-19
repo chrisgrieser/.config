@@ -42,6 +42,7 @@ repos
 todos
 param
 langs
+vsnip
 keymap
 config
 fixups
@@ -139,6 +140,7 @@ templating
 formatters
 treesitter
 statusline
+Quickstart
 colorscheme
 habitualize
 Automagical
@@ -156,9 +158,11 @@ ResearchGate
 subdirectory
 unshallowing
 customizable
+minification
 un-shallowing
 nvim-scissors
 characterwise
+automagically
 operationalize
 Autocorrection
 Customizability
