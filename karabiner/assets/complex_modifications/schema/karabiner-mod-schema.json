@@ -163,6 +163,9 @@
 				},
 				"product_id": {
 					"type": "integer"
+				},
+				"location_id": {
+					"type": "integer"
 				}
 			},
 			"required": [],
@@ -476,6 +479,9 @@
 								"type": "integer"
 							},
 							"product_id": {
+								"type": "integer"
+							},
+							"location_id": {
 								"type": "integer"
 							}
 						}

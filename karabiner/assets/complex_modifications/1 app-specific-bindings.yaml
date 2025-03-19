@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=./schema/karabiner-mod-schema.json
-title: "App-specific bindings"
+title: App-specific bindings
 rules:
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Microsoft Office"
+  - description: (Apps) Microsoft Office
     manipulators:
       # export as PDF
       - type: basic
@@ -76,7 +76,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$, ^com\.apple\.Preview$]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Zoom"
+  - description: (Apps) Zoom
     manipulators:
       # Toggle sidebar
       - type: basic
@@ -85,7 +85,7 @@ rules:
           - { key_code: h, modifiers: [command, shift] }
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Finder"
+  - description: (Apps) Finder
     manipulators:
       # cmd+1 -> right left sidebar
       - type: basic
@@ -143,7 +143,7 @@ rules:
                 end tell'
         conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Highlights"
+  - description: (Apps) Highlights
     manipulators:
       # cmd+l = Show in Finder
       - type: basic
@@ -201,7 +201,7 @@ rules:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
   #─────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Neovide"
+  - description: (Apps) Neovide
     manipulators:
       # cmd+q -> ZZ: quit with saving, PENDING https://github.com/neovide/neovide/issues/2558
       - type: basic
@@ -219,7 +219,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Brave"
+  - description: (Apps) Brave
     manipulators:
       # Toggle Vertical Tab Sidebar
       # REQUIRED custom shortcuts set via brave://settings/system/shortcuts?search=vertical
@@ -267,7 +267,7 @@ rules:
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
   #─────────────────────────────────────────────────────────────────────────────
-  - description: "(Apps) Obsidian"
+  - description: (Apps) Obsidian
     manipulators:
       # Dev Tools & Element Picker
       - type: basic
@@ -280,7 +280,7 @@ rules:
           - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
   #─────────────────────────────────────────────────────────────────────────────
   # DOCS https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
-  - description: "(Apps) Slack"
+  - description: (Apps) Slack
     manipulators:
       # go to next unread message
       - type: basic
@@ -342,24 +342,15 @@ rules:
         to:
           - { key_code: up_arrow }
         conditions:
-          [
-            {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com\.runningwithcrayons\.Alfred$],
-            },
-          ]
-      # Open Sidebar
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.runningwithcrayons\.Alfred$]
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: "9", modifiers: [command] }
         conditions:
-          [
-            {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$],
-            },
-          ]
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$]
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
@@ -421,8 +412,12 @@ rules:
         to:
           - { key_code: s, modifiers: [command, control] }
         conditions:
-          -
-        type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$
+          - type: frontmost_application_if
+            bundle_identifiers: [^com\.mimestream\.Mimestream$]
+          # HACK only apply to installation in office, since the hotkey is
+          # somehow only active here?!
+          - type: device_if
+            identifiers: [{ location_id: 17825792 }]
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
@@ -445,17 +440,13 @@ rules:
         to:
           - { key_code: return_or_enter }
         conditions:
-          [
-            {
-              type: frontmost_application_if,
-              bundle_identifiers: [^org\.giorgiocalderolla\.Catch$],
-            },
-          ]
+          - type: frontmost_application_if
+            bundle_identifiers: [^org\.giorgiocalderolla\.Catch$]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) CleanShot X"
     manipulators:
-      # INFO https://cleanshot.com/docs/api
-      # ⌘⇧4 (screenshot button): tap to screenshot, hold to annotate last screenshot
+      # DOCS https://cleanshot.com/docs/api
+      # ⌘⇧4 (screenshot button): tap to screenshot, hold to record screen
       - type: basic
         from: { key_code: "4", modifiers: { mandatory: [shift, command] } }
         to_if_alone:
