@@ -24,6 +24,41 @@ const isAllDayReminder = (/** @type {Date} */ dueDate) => {
 	return dueDate.getHours() === 0 && dueDate.getMinutes() === 0;
 };
 
+/**
+ * @param {Date} absDate
+ * @return {string} relative date
+ */
+function relativeDate(absDate) {
+	const deltaSecs = (Date.now() - +absDate) / 1000;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	let unit;
+	let delta;
+	if (deltaSecs < 60) {
+		unit = "second";
+		delta = deltaSecs;
+	} else if (deltaSecs < 60 * 60) {
+		unit = "minute";
+		delta = Math.ceil(deltaSecs / 60);
+	} else if (deltaSecs < 60 * 60 * 24) {
+		unit = "hour";
+		delta = Math.ceil(deltaSecs / 60 / 60);
+	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
+	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+	} else {
+		unit = "year";
+		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
+	return formatter.format(-delta, unit);
+}
+
 const urlRegex =
 	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
@@ -65,6 +100,7 @@ function run() {
 		const content = title + "\n" + body;
 		const dueDateObj = new Date(dueDate);
 
+		// SUBTITLE: display due time, past due dates, missing due dates, and body
 		const dueTime =
 			!isAllDayReminder(dueDateObj) &&
 			new Date(dueDate).toLocaleTimeString([], {
@@ -72,14 +108,15 @@ function run() {
 				minute: "2-digit",
 				hour12: false,
 			});
-		const pastDueDate = dueDateObj < startOfToday && dueDateObj.toLocaleDateString();
-		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate]
+		const pastDueDate =
+			dueDateObj < startOfToday && relativeDate(dueDateObj)
+		const missingDueDate = !dueDate && "no due date";
+		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
 			.filter(Boolean)
 			.join(" · ");
 
 		const [url] = content.match(urlRegex) || [];
-		let emoji = isCompleted ? "☑️ " : "";
-		if (!dueDate) emoji += "[no due date] "; // indicator for missing due date
+		const emoji = isCompleted ? "☑️ " : "";
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"

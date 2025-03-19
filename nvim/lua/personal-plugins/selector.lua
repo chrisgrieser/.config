@@ -1,7 +1,7 @@
--- INFO A simple UI for `vim.ui.select`.
+-- INFO A simple UI for `vim.ui.select`. Requires nvim 0.10+
 
 local config = {
-	border = vim.g.borderStyle,
+	border = vim.fn.has("nvim-0.11") == 1 and vim.o.winborder or "rounded",
 	keymaps = {
 		confirm = "<CR>",
 		abort = { "<Esc>", "q" },
@@ -12,14 +12,14 @@ local config = {
 }
 --------------------------------------------------------------------------------
 
----@class (exact) SelectorOpts
----@field prompt? string nvim spec
----@field kind? string nvim spec
----@field format_item? fun(item: any): string nvim spec
+---@class (exact) NvimUiSelectOpts
+---@field prompt? string
+---@field kind? string
+---@field format_item? fun(item: any): string
 
 ---@param items any[]
----@param opts SelectorOpts
----@param on_choice fun(item: any, idx?: integer)
+---@param opts NvimUiSelectOpts
+---@param on_choice fun(item: any|nil, idx: integer|nil)
 ---@diagnostic disable-next-line: duplicate-set-field -- intentional overwrite
 vim.ui.select = function(items, opts, on_choice)
 	if #items == 0 then
@@ -29,9 +29,15 @@ vim.ui.select = function(items, opts, on_choice)
 
 	-- OPTIONS
 	assert(type(on_choice) == "function", "`on_choice` must be a function.")
-	local defaultOpts = { format_item = function(i) return i end, prompt = "Select", kind = "" }
-	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type SelectorOpts
-	opts.prompt = opts.prompt:gsub(":%s*$", "")
+	local defaultOpts = {
+		format_item = function(item) return item end,
+		prompt = "Select",
+		kind = "",
+	}
+	opts = vim.tbl_deep_extend("force", defaultOpts, opts) ---@type NvimUiSelectOpts
+	opts.prompt = opts.prompt:gsub(":%s*$", "") -- strip trailing `:`
+
+	-- special consideration for code actions
 	if opts.kind == "codeaction" then
 		opts.prompt = "󱐋 " .. opts.prompt
 		opts.kind = ""
