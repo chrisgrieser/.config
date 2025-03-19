@@ -26,9 +26,9 @@ vim.ui.select = function(items, opts, on_choice)
 		vim.notify("No items to select from.", vim.log.levels.INFO, { title = "Selector" })
 		return
 	end
+	assert(type(on_choice) == "function", "`on_choice` must be a function.")
 
 	-- OPTIONS
-	assert(type(on_choice) == "function", "`on_choice` must be a function.")
 	local defaultOpts = {
 		format_item = function(item) return item end,
 		prompt = "Select",
@@ -90,15 +90,15 @@ vim.ui.select = function(items, opts, on_choice)
 	end
 	map(config.keymaps.next, function() vim.cmd.normal { "j", bang = true } end)
 	map(config.keymaps.prev, function() vim.cmd.normal { "k", bang = true } end)
-	map(config.keymaps.inspectItem, function()
-		local ln = vim.api.nvim_win_get_cursor(0)[1]
-		local out = vim.inspect(items[ln])
-		vim.notify(out, vim.log.levels.INFO, { title = "Inspect", ft = "lua" })
-	end)
 	map(config.keymaps.confirm, function()
-		local ln = vim.api.nvim_win_get_cursor(0)[1]
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		vim.cmd.bwipeout()
-		on_choice(items[ln], ln)
+		on_choice(items[lnum], lnum)
+	end)
+	map(config.keymaps.inspectItem, function()
+		local lnum = vim.api.nvim_win_get_cursor(0)[1]
+		local out = vim.inspect(items[lnum])
+		vim.notify(out, nil, { title = "Inspect", ft = "lua" })
 	end)
 
 	-- UNMOUNT
