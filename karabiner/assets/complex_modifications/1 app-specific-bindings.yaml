@@ -416,13 +416,13 @@ rules:
   - description: "(Apps) Mimestream"
     manipulators:
       # toggle side bar
-      # - type: basic
-      #   from: { key_code: "1", modifiers: { mandatory: [command] } }
-      #   to:
-      #     - { key_code: s, modifiers: [command, control] }
-      #   conditions:
-      #     [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
-      # toggle search bar
+      - type: basic
+        from: { key_code: "1", modifiers: { mandatory: [command] } }
+        to:
+          - { key_code: s, modifiers: [command, control] }
+        conditions:
+          -
+        type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
