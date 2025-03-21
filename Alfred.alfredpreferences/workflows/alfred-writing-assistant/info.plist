@@ -772,14 +772,14 @@
 	</array>
 	<key>readme</key>
 	<string>## Usage
-The workflow offers three [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
+The workflow offers four [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
 
 1. Autocorrect the word under the cursor.
 2. Suggest synonyms for the word under the cursor.
 3. Rephrase the selected text via ChatGPT, improving its language
 	+ Requires OpenAI API key.
-	+ There are 3 formatting options: Plain, Additions are displayed as
-	  `==highlights==`, deletions are, and [Critic
+	+ There are 3 formatting options: Simply overwrite selection, changes as
+	  Markdown ==highlights== and ~~strikethroughs~~, and [Critic
 	  Markup](https://github.com/CriticMarkup/CriticMarkup-toolkit).
 4. Apple Intelligence Writing Tools
 	+ This is just a convenience hotkey to trigger the Writing Tools selection
@@ -1041,7 +1041,7 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>OpenAI API Key. If empty, will use $OPENAI_API_KEY exported in .zshenv.</string>
+			<string>OpenAI API key. If empty, will use $OPENAI_API_KEY exported in .zshenv.</string>
 			<key>label</key>
 			<string>Rephrasing</string>
 			<key>type</key>
@@ -1071,13 +1071,39 @@ DOUBLE CLICK TO EDIT</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Markup type of the output</string>
+			<string>Markup type of the output.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
 			<string>output_type</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>word</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>word-based diff</string>
+						<string>word</string>
+					</array>
+					<array>
+						<string>character-based diff</string>
+						<string>character</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Base unit of the diff output. Only relevant when the "Output type" is not set to "plain".</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>diff_type</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1134,7 +1160,7 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Frequency Penalty. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</string>
+			<string>↑ Frequency penalty. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1159,7 +1185,7 @@ DOUBLE CLICK TO EDIT</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Temperature. Higher values like 8 will make the output more random, while lower values like 2 will make it more focused and deterministic.</string>
+			<string>↑ Temperature. Higher values like 8 will make the output more random, while lower values like 2 will make it more focused and deterministic.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
@@ -1190,7 +1216,7 @@ DOUBLE CLICK TO EDIT</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.1</string>
+	<string>1.7.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
