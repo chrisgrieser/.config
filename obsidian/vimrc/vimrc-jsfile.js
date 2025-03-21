@@ -146,13 +146,6 @@ function gotoLastLinkInFile() {
 	_setCursorAndAddToJumplist(editor, prevCursor, newCursor);
 }
 
-/** Wrapper just to set jump point for vim */
-function gotoFootnote() {
-	const oldCursor = editor.getCursor();
-	view.app.commands.executeCommandById("obsidian-footnotes:insert-autonumbered-footnote");
-	_setCursorAndAddToJumplist(editor, oldCursor, editor.getCursor());
-}
-
 //──────────────────────────────────────────────────────────────────────────────
 
 /** h1 -> h2, h2 -> h3, etc. */
