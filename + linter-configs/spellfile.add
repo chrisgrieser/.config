@@ -22,6 +22,7 @@ baz
 LoC
 UTI
 UTF
+DOI
 ltex
 json
 nvim
@@ -60,6 +61,7 @@ rebase
 neovim
 reddit
 OpenAI
+BibTeX
 keymaps
 Gruvbox
 builtin
@@ -105,6 +107,7 @@ linewise
 dropdown
 regex101
 prefills
+citekeys
 dedenting
 Filetypes
 permalink
