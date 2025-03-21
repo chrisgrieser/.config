@@ -1,6 +1,4 @@
 s
-citekey
-citekeys
 fn
 yq
 md
@@ -64,6 +62,7 @@ neovim
 reddit
 OpenAI
 BibTeX
+citekey
 keymaps
 Gruvbox
 builtin
@@ -85,6 +84,7 @@ tinygit
 genghis
 ripgrep
 prefill
+citekeys
 superset
 basename
 longform
@@ -170,4 +170,5 @@ characterwise
 automagically
 operationalize
 Autocorrection
+strikethroughs
 Customizability
