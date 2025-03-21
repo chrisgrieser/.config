@@ -86,6 +86,5 @@ function listall() {
 	_print-section "mas list"
 	mas list | rs
 
-	brew bundle dump --force &> /dev/null && 
-		print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
+	brew bundle dump --force && print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
 }

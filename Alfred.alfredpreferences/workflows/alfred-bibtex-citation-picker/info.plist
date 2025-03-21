@@ -754,7 +754,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Citation picker for `.bib` files</string>
+	<string>Citation picker and lightweight references manager for `.bib` files</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -2951,7 +2951,7 @@ to set a hotkey for adding DOI/ISBN</string>
 		<string></string>
 	</dict>
 	<key>version</key>
-	<string>11.18.0</string>
+	<string>11.18.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
