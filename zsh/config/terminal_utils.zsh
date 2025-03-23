@@ -200,9 +200,12 @@ function d {
 
 # go up and delete current dir
 function ..d() {
-	# GUARD accidental deletions of folders
+	# GUARD
 	if [[ ! "$PWD" =~ /Developer/ ]]; then
 		print '\e[0;33mCan only delete inside subfolder of "~/Developer".\e[0m'
+		return 1
+	elif [[ -n $(git status) ]]; then
+		print '\e[0;33mRepo still dirty.\e[0m'
 		return 1
 	fi
 

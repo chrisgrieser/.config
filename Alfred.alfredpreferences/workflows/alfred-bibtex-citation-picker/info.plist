@@ -878,29 +878,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/page-number-inserter.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -915,6 +892,21 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>DD59F90F-8FD2-486D-A8A8-2FFA47DE45F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>E1D3B211-1CE6-4A09-B45E-7C55A61CDC06</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -977,29 +969,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/page-number-inserter.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>1C0964D1-AA81-478A-B406-28E96DDD9E82</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -1027,6 +996,21 @@
 			<string>3E40FE4A-DAEF-4583-AE6B-8638CCD6BEE0</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>1C0964D1-AA81-478A-B406-28E96DDD9E82</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2195,9 +2179,9 @@ file](https://github.com/chrisgrieser/alfred-bibtex-citation-picker/blob/main/CI
 			<key>note</key>
 			<string>add page number</string>
 			<key>xpos</key>
-			<real>1180</real>
+			<real>1225</real>
 			<key>ypos</key>
-			<real>185</real>
+			<real>225</real>
 		</dict>
 		<key>1D828BA0-497E-4524-9E2E-06552154CAA0</key>
 		<dict>
@@ -2605,9 +2589,9 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add page number</string>
 			<key>xpos</key>
-			<real>1180</real>
+			<real>1220</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>50</real>
 		</dict>
 		<key>E451F6F1-8CE4-44B5-90E2-8B457B48C81C</key>
 		<dict>
@@ -2936,20 +2920,22 @@ to set a hotkey for adding DOI/ISBN</string>
 		<key>_format_citation_start</key>
 		<string>[</string>
 		<key>_format_citekey_delimiter</key>
-		<string>; </string>
+		<string>;</string>
 		<key>_format_citekey_prefix</key>
-		<string>@</string>
+		<string>#</string>
 		<key>_format_citekey_suffix</key>
 		<string></string>
 		<key>_format_current_citation_style</key>
-		<string>pandoc</string>
+		<string>multi-markdown</string>
 		<key>_format_page_before_citekey</key>
-		<string>false</string>
+		<string>true</string>
 		<key>_format_page_prefix</key>
-		<string>, p. </string>
+		<string></string>
 		<key>_format_page_suffix</key>
 		<string></string>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>11.18.1</string>
 	<key>webaddress</key>
