@@ -818,9 +818,9 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>subtext</key>
-				<string>⌘ or ⌥: add another citation afterwards</string>
+				<string></string>
 				<key>text</key>
-				<string>Enter page bumber(s)</string>
+				<string>Enter page number(s)</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1022,7 +1022,7 @@
 				<key>subtext</key>
 				<string>⌘ or ⌥: add another citation afterwards</string>
 				<key>text</key>
-				<string>Enter page bumber(s)</string>
+				<string>Enter page number(s)</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1785,7 +1785,7 @@ echo "$*"</string>
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"title":"Pandoc","arg":"pandoc","subtitle":"[@citekey, p. 42]"},{"title":"Formatted single entry","arg":"formatted single entry","subtitle":"in APA or the custom .csl style      ℹ️ page numbers and multiple entries not supported"},{"title":"Org Mode","arg":"org","subtitle":"[cite:@citekey, p. 42]"},{"title":"Multi-Markdown (MMD)","arg":"multi-markdown","subtitle":"[42][#citekey]      ℹ️ page numbers and multiple entries not supported"},{"title":"Latex","arg":"latex","subtitle":"\\cite{citekey}      ℹ️ page numbers and multiple entries not supported"},{"title":"Wikilink","arg":"wikilink","subtitle":"[[citekey]]      ℹ️ page number will become alias"},{"title":"Eta template","arg":"eta","subtitle":"{% cite citekey %}"},{"title":"iA Writer","arg":"iA Writer","subtitle":"[^citekey, p. 42]"},{"title":"Tag","arg":"tag","subtitle":"#citekey"},{"title":"Bare citekey","arg":"bare citekey","subtitle":"citekey"},{"title":"Bracketed citekey","arg":"bracketed citekey","subtitle":"(citekey)"}]</string>
+				<string>[{"title":"Pandoc","arg":"pandoc","subtitle":"[@citekey, p. 42]"},{"title":"Latex","arg":"latex","subtitle":"\\autocite[p. 42]{citekey}      ℹ️ page numbers and multiple entries not supported"},{"title":"Org Mode","arg":"org","subtitle":"[cite:@citekey, p. 42]"},{"title":"Multi-Markdown (MMD)","arg":"multi-markdown","subtitle":"[p. 42][#citekey]      ℹ️ page numbers and multiple entries not supported"},{"title":"Eta template","arg":"eta","subtitle":"{% cite citekey %}"},{"title":"Formatted single entry","arg":"formatted single entry","subtitle":"in APA or the custom .csl style      ℹ️ page numbers and multiple entries not supported"},{"title":"Wikilink","arg":"wikilink","subtitle":"[[citekey]]      ℹ️ page number will become alias"},{"title":"iA Writer","arg":"iA Writer","subtitle":"[^citekey, p. 42]"},{"title":"Tag","arg":"tag","subtitle":"#citekey"},{"title":"Bare citekey","arg":"bare citekey","subtitle":"citekey"},{"title":"Bracketed citekey","arg":"bracketed citekey","subtitle":"(citekey)"}]</string>
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>runningsubtext</key>
@@ -1837,7 +1837,7 @@ echo "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/toggle-citation-format.js</string>
+				<string>scripts/set-citation-style-formatting-vars.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -2168,16 +2168,21 @@ echo -n $dummyBib | pandoc --citeproc --read=markdown --write=plain --csl $csl -
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Workflow setup
+	<string>## ℹ️ Latex and MMD** citation formats were updated in v11.19
+You need to set them once again via `scp` and Change citation format` for the changes to take effect.
+
+---
+
+## Workflow setup
 1. Add the path to your `.bib` to the right.
-2. Set the [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/).
+2. Select your citation format. The default is *Pandoc Citations*. To switch to
+   another format like LaTeX, Multi-Markdown, org mode, eta, \[\[wikilinks\]\],
+   or #tags use the keyword `scp` in Alfred and select `Change citation format`.
+3. Use the citation picker via the Alfred keyword `cc`, or set a
+   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for the
+   citation picker by double-clicking the respective field in the workflow
+   window.
 
-### Set citation style
-The default citation style is *Pandoc Citations*. To switch it to LaTeX, Multi-Markdown, Org Mode, eta, [[wikilinks]], #tags, or bare citkeys use the keyword `scp` in Alfred and select `Change Citation Format`.
-
-&gt; ℹ️ 
-&gt; Due to technical restrictions, you may need to set the citation style once
-&gt; more after updates to this workflow.
 
 ---
 
@@ -2270,7 +2275,7 @@ file](https://github.com/chrisgrieser/alfred-bibtex-citation-picker/blob/main/CI
 			<key>note</key>
 			<string>enclose page numbers in brackets &amp; add citation</string>
 			<key>xpos</key>
-			<real>1270</real>
+			<real>1255</real>
 			<key>ypos</key>
 			<real>540</real>
 		</dict>
@@ -2538,7 +2543,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>xpos</key>
 			<real>1275</real>
 			<key>ypos</key>
-			<real>1160</real>
+			<real>1165</real>
 		</dict>
 		<key>8200BEAE-A1E0-48D6-85CF-AA561B6CD603</key>
 		<dict>
@@ -2638,7 +2643,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>enclose citekey</string>
 			<key>xpos</key>
-			<real>1270</real>
+			<real>1255</real>
 			<key>ypos</key>
 			<real>635</real>
 		</dict>
@@ -2671,14 +2676,16 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>xpos</key>
 			<real>1275</real>
 			<key>ypos</key>
-			<real>1025</real>
+			<real>1030</real>
 		</dict>
 		<key>B15FCEB3-D411-49F9-BD12-2B4F4E63AC39</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>add page number AFTER citekey &amp; add citation-enclosed citekey</string>
+			<string>1. add page number AFTER citekey
+2. add citekey
+3. enclose citation</string>
 			<key>xpos</key>
 			<real>1255</real>
 			<key>ypos</key>
@@ -2731,7 +2738,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>save as previous citation</string>
 			<key>xpos</key>
-			<real>1495</real>
+			<real>1490</real>
 			<key>ypos</key>
 			<real>295</real>
 		</dict>
@@ -2775,7 +2782,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>note</key>
 			<string>add page number AFTER citekey &amp; add citekey</string>
 			<key>xpos</key>
-			<real>1370</real>
+			<real>1375</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
@@ -2854,9 +2861,9 @@ to set a hotkey for adding DOI/ISBN</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>An optional, second .bib file.</string>
+			<string>An optional, 2nd library file.</string>
 			<key>label</key>
-			<string>2nd library path</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -2896,9 +2903,9 @@ to set a hotkey for adding DOI/ISBN</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Folder containing your PDFs. Only required for indicating PDFs via icons, opening them via `Hyper↵`, or auto-filing PDFs via  with `fn↵`. When left empty, `Hyper↵` tries to fall back to the PDF listed in the bibtex file under the key `file`.</string>
+			<string>PDF Folder. Only required for indicating PDFs via icons, opening them via `Hyper↵`, or auto-filing PDFs via  with `fn↵`. When left empty, `Hyper↵` tries to fall back to the PDF listed in the bibtex file under the key `file`.</string>
 			<key>label</key>
-			<string>PDF Folder</string>
+			<string>Folders</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -2917,9 +2924,9 @@ to set a hotkey for adding DOI/ISBN</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Folder containing your literature notes (as markdown files). Only required for indicating literature notes via icon, and for creating/opening literature notes with `⌥⌃↵`.</string>
+			<string>Literature note folder. Literature notes need to be saves als `.md` files. Only required for indicating literature notes via icon, and for creating/opening literature notes with `⌥⌃↵`.</string>
 			<key>label</key>
-			<string>Literature note folder</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -2938,9 +2945,9 @@ to set a hotkey for adding DOI/ISBN</string>
 				<false/>
 			</dict>
 			<key>description</key>
-			<string>Folder where downloaded citation styles will be saved. Only required for downloading citation styles via `scp` → `Citation styles` or via `csl`.</string>
+			<string>Citation styles folder where downloaded citation styles will be saved. Only required for downloading citation styles via `scp` → `Citation styles` or via the keyword `csl`.</string>
 			<key>label</key>
-			<string>Citation styles folder</string>
+			<string></string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
@@ -2978,7 +2985,7 @@ to set a hotkey for adding DOI/ISBN</string>
 			<key>description</key>
 			<string>App to open entries in when using `⇧↵`. Reference managers will reveal the entry, while text editors will open the .bib file at the line containing the entry. ("default app" does not support opening at a specific line.)</string>
 			<key>label</key>
-			<string>Open entries in…</string>
+			<string>Open entries in</string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -3057,25 +3064,6 @@ to set a hotkey for adding DOI/ISBN</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>Copy citation</string>
-			</dict>
-			<key>description</key>
-			<string>Copy the Pandoc citation to the clipboard.</string>
-			<key>label</key>
-			<string>On adding new entries</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>copy_citation_on_adding_entry</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>defaultvalue</key>
 				<integer>70</integer>
 				<key>markercount</key>
@@ -3102,30 +3090,28 @@ to set a hotkey for adding DOI/ISBN</string>
 	<key>variables</key>
 	<dict>
 		<key>_format_citation_end</key>
-		<string>}</string>
+		<string>]</string>
 		<key>_format_citation_start</key>
-		<string>{</string>
+		<string>[</string>
 		<key>_format_citation_super_prefix</key>
-		<string>\autocite</string>
-		<key>_format_citekey_delimiter</key>
-		<string>, </string>
-		<key>_format_citekey_prefix</key>
 		<string></string>
+		<key>_format_citekey_delimiter</key>
+		<string>; </string>
+		<key>_format_citekey_prefix</key>
+		<string>@</string>
 		<key>_format_citekey_suffix</key>
 		<string></string>
 		<key>_format_current_citation_style</key>
-		<string>latex</string>
+		<string>pandoc</string>
 		<key>_format_page_before_citekey</key>
-		<string>true</string>
+		<string>false</string>
 		<key>_format_page_prefix</key>
-		<string>[p. </string>
+		<string>, p. </string>
 		<key>_format_page_suffix</key>
-		<string>]</string>
+		<string></string>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>11.18.1</string>
+	<string>11.19.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
