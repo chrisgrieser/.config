@@ -58,7 +58,7 @@ function run(argv) {
 			setFormat("citekey_delimiter", ";");
 			setFormat("citekey_prefix", "#");
 			setFormat("citekey_suffix", "");
-			setFormat("page_before_citekey", "true");
+			setFormat("page_before_citekey", "true"); // `true` also disallows multi-citations
 			setFormat("page_prefix", "[p. ");
 			setFormat("page_suffix", "]");
 			break;
@@ -66,13 +66,14 @@ function run(argv) {
 		case "latex": {
 			// https://www.citedrive.com/en/docs/guides/biblatex/
 			// https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/62
+			// `citation_super_prefix` is needed, as page numbers need to come after this
 			setFormat("citation_super_prefix", "\\autocite");
 			setFormat("citation_start", "{");
 			setFormat("citation_end", "}");
 			setFormat("citekey_delimiter", ", ");
 			setFormat("citekey_prefix", "");
 			setFormat("citekey_suffix", "");
-			setFormat("page_before_citekey", "true");
+			setFormat("page_before_citekey", "true"); // `true` also disallows multi-citations
 			setFormat("page_prefix", "[p. ");
 			setFormat("page_suffix", "]");
 			break;
@@ -167,5 +168,5 @@ function run(argv) {
 	}
 
 	// for Alfred notification
-	return citationFormat
+	return citationFormat;
 }

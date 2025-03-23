@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			height = vim.o.lines,
 			focusable = false,
 			style = "minimal",
+			border = "none", -- needs to be explicitly set due to `vim.o.winborder`
 			zindex = telescopeZindex - 1, -- ensure it's below the reference window
 		})
 
