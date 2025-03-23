@@ -40,8 +40,10 @@ nnoremap P mzA<Space><Esc>p`z
 noremap <M-k> :pasteinto<CR>
 
 " FIX missing undopoint when pasting by using `<Esc>ix<Esc>x` to insert a
-" character and then delete it. (This is relevant for example for Alfred
-" workflows that change selected text.)
+" character and then delete it. This is relevant for Alfred workflows that
+" change selected text. (`vnoremap <M-v> p` sets an undopoint, but does not does
+" not correctly use the system register; using the builtin paste via `<M-v>`
+" ignores trailing new lines.)
 vnoremap <M-v> <Esc>ix<Esc>xgv"+p
 
 "───────────────────────────────────────────────────────────────────────────────
