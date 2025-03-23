@@ -128,23 +128,23 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 --------------------------------------------------------------------------------
 -- CLIPBOARD
 
--- sticky yank
+-- Sticky yank
 do
-	local cursorBefore
 	keymap({ "n", "x" }, "y", function()
-		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 		return "y"
 	end, { expr = true })
 	keymap("n", "Y", function()
-		cursorBefore = vim.api.nvim_win_get_cursor(0)
+		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 		return "y$"
 	end, { expr = true, unique = false }) -- non-unique since it's a nvim-builtin
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "User: Sticky yank/delete",
 		callback = function()
-			if vim.v.event.operator == "y" and vim.v.event.regname == "" and cursorBefore then
-				vim.api.nvim_win_set_cursor(0, cursorBefore)
+			if vim.v.event.operator == "y" and vim.v.event.regname == "" and vim.b.cursorPreYank then
+				vim.api.nvim_win_set_cursor(0, vim.b.cursorPreYank)
+				vim.b.cursorPreYank = nil
 			end
 		end,
 	})
