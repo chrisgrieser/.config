@@ -1083,32 +1083,6 @@ DOUBLE CLICK TO EDIT</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>word</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>word-based diff</string>
-						<string>word</string>
-					</array>
-					<array>
-						<string>character-based diff</string>
-						<string>character</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>Base unit of the diff output. Only relevant when the "Output type" is not set to "plain".</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>diff_type</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string>gpt-4o-mini</string>
 				<key>pairs</key>
 				<array>

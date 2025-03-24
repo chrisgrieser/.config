@@ -28,14 +28,14 @@ fi
 echo "$selection" > "$cache/selection.txt"
 echo "$rephrased" > "$cache/rephrased.txt"
 
-# https://unix.stackexchange.com/questions/677764/show-differences-in-strings
-if [[ "$diff_type" == "word" ]] ; then
-	diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
-		sed -e "1,5d")
-elif [[ "$diff_type" == "character" ]] ; then
-	diff=$(git diff --word-diff-regex="[,.:;]|[a-zA-Z0-9]+" "$cache/selection.txt" "$cache/rephrased.txt" |
-		sed -e "1,5d")
-fi
+# INFO word regex works treats non-white-space characters as words
+# (`[\xc0-\xff][\x80-\xbf]+`, the default git word regex[1]), except for
+# punctuation, which is considered individually. This makes diffs for natural
+# language more readable, since a changed punctuation does not trigger the
+# preceding word to be marked as well.
+# [1]: https://stackoverflow.com/questions/39789921/what-flavor-of-regex-does-git-use
+diff=$(git diff --word-diff-regex="[,.:;]|[\xc0-\xff][\x80-\xbf]+" \
+	"$cache/selection.txt" "$cache/rephrased.txt" | sed -e "1,5d")
 
 if [[ "$output_type" == "markdown" ]]; then
 	output=$(echo "$diff" |
