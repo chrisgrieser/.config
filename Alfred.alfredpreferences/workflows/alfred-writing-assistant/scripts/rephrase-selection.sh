@@ -28,13 +28,11 @@ fi
 echo "$selection" > "$cache/selection.txt"
 echo "$rephrased" > "$cache/rephrased.txt"
 
-# INFO word regex works treats non-white-space characters as words
-# (`[\xc0-\xff][\x80-\xbf]+`, the default git word regex[1]), except for
+# INFO word regex works treats non-white-space characters as words, except for
 # punctuation, which is considered individually. This makes diffs for natural
 # language more readable, since a changed punctuation does not trigger the
 # preceding word to be marked as well.
-# [1]: https://stackoverflow.com/questions/39789921/what-flavor-of-regex-does-git-use
-diff=$(git diff --word-diff-regex="[,.:;]|[\xc0-\xff][\x80-\xbf]+" \
+diff=$(git diff --word-diff-regex='[[:punct:]]|[^[[:space:]][[:punct:]]]+' \
 	"$cache/selection.txt" "$cache/rephrased.txt" | sed -e "1,5d")
 
 if [[ "$output_type" == "markdown" ]]; then
