@@ -33,7 +33,7 @@ if [[ "$diff_type" == "word" ]] ; then
 	diff=$(git diff --word-diff "$cache/selection.txt" "$cache/rephrased.txt" |
 		sed -e "1,5d")
 elif [[ "$diff_type" == "character" ]] ; then
-	diff=$(git diff --word-diff-regex=. "$cache/selection.txt" "$cache/rephrased.txt" |
+	diff=$(git diff --word-diff-regex="[,.:;]|[a-zA-Z0-9]+" "$cache/selection.txt" "$cache/rephrased.txt" |
 		sed -e "1,5d")
 fi
 
