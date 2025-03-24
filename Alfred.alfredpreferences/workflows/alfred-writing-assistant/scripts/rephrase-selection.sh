@@ -28,15 +28,8 @@ fi
 echo "$selection" > "$cache/selection.txt"
 echo "$rephrased" > "$cache/rephrased.txt"
 
-
-# https://unix.stackexchange.com/questions/677764/show-differences-in-strings
 diff=$(git diff --word-diff-regex='[[:punct:]]|[^[:space:][:punct:]]+' \
- 	"$cache/selection.txt" "$cache/rephrased.txt" | sed -e "1,5d")
-
-# shellcheck disable=2001
-# FIX faulty `git diff` output, where a word is replaced with itself when it
-# contains diacritics
-diff=$(echo "$diff" | sed 's/\[-\(.*\)-\]{+\1+}/\1/g')
+	"$cache/selection.txt" "$cache/rephrased.txt" | sed -e "1,5d")
 
 if [[ "$output_type" == "markdown" ]]; then
 	output=$(echo "$diff" |
