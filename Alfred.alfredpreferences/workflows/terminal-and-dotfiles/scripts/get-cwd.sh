@@ -5,7 +5,7 @@
 if [[ "$focusedapp" == "com.apple.finder" ]]; then
 	dir_to_open=$(osascript -e 'tell application "Finder" to return POSIX path of (target of window 1 as alias)' | sed -E 's|/$||')
 elif [[ "$focusedapp" == "com.neovide.neovide" ]]; then
-	# INFO requires something like `vim.opt.titlestring = "%{getcwd()}"`
+	# # REQUIRED `vim.opt.titlestring = "%{getcwd()}"` im nvim config
 	dir_to_open=$(osascript -e 'tell application "System Events" to tell process "neovide" to return name of front window')
 elif [[ "$focusedapp" == "com.runningwithcrayons.Alfred-Preferences" ]]; then
 	# https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
