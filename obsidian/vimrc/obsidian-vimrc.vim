@@ -39,13 +39,6 @@ nnoremap P mzA<Space><Esc>p`z
 " INFO on macOS, as opposed to nvim, cmd-key mappings are <M-*>, not <D-*>
 noremap <M-k> :pasteinto<CR>
 
-" FIX missing undopoint when pasting by using `<Esc>ix<Esc>x` to insert a
-" character and then delete it. This is relevant for Alfred workflows that
-" change selected text. (`vnoremap <M-v> p` sets an undopoint, but does not does
-" not correctly use the system register; using the builtin paste via `<M-v>`
-" ignores trailing new lines.)
-vnoremap <M-v> <Esc>ix<Esc>xgv"+p
-
 "───────────────────────────────────────────────────────────────────────────────
 
 " Copy Path segments
@@ -321,9 +314,9 @@ exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
 " Rephraser/Language Tools: accept
-exmap acceptHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("accept") }
+exmap acceptProofread obcommand proofreader:accept-suggestions
 exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-noremap ga :acceptHighlightsAndStrikethrus<CR>:acceptLtSuggestion<CR>
+noremap ga :acceptProofread<CR>:acceptLtSuggestion<CR>
 
 " Rephraser: reject
 exmap rejectHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("reject") }

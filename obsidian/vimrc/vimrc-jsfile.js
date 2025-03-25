@@ -306,26 +306,6 @@ function openNextLink(where) {
 	view.app.commands.executeCommandById("editor:" + commandId);
 }
 
-/** For use with the rephraser-action from the "Writing Assistant" Alfred
- * workflow, which sends text to OpenAI, and returns the diff as
- * highlights (additions) and strikethroughs (deletions).
- * @param {"accept"|"reject"} mode
- */
-function highlightsAndStrikethrus(mode) {
-	const { line: lnum, ch: col } = editor.getCursor();
-
-	const lineText = editor.getLine(lnum);
-	let updatedLine =
-		mode === "accept"
-			? lineText.replace(/==/g, "").replace(/~~.*?~~/g, "")
-			: lineText.replace(/~~/g, "").replace(/==.*?==/g, "");
-	updatedLine = updatedLine.replaceAll("  ", " "); // fix leftover double-spaces from removing markup
-	editor.setLine(lnum, updatedLine);
-
-	const charsLess = lineText.length - updatedLine.length;
-	editor.setCursor({ line: lnum, ch: col - charsLess });
-}
-
 async function fixWordUnderCursor() {
 	const cursor = editor.getCursor();
 	const wordRange = editor.wordAt(cursor);
