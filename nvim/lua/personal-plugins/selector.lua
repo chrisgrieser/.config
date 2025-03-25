@@ -23,7 +23,7 @@ local config = {
 ---@diagnostic disable-next-line: duplicate-set-field -- intentional overwrite
 vim.ui.select = function(items, opts, on_choice)
 	if #items == 0 then
-		vim.notify("No items to select from.", vim.log.levels.INFO, { title = "Selector" })
+		vim.notify("No items to select from.", nil, { title = "Selector", icon = "" })
 		return
 	end
 	assert(type(on_choice) == "function", "`on_choice` must be a function.")
@@ -97,8 +97,8 @@ vim.ui.select = function(items, opts, on_choice)
 	end)
 	map(config.keymaps.inspectItem, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
-		local out = vim.inspect(items[lnum])
-		vim.notify(out, nil, { title = "Inspect", ft = "lua" })
+		local infoOnItem = vim.inspect(items[lnum])
+		vim.notify(infoOnItem, nil, { title = "Selector: inspect", icon = "", ft = "lua" })
 	end)
 
 	-- UNMOUNT

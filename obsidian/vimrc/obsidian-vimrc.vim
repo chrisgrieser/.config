@@ -228,6 +228,10 @@ inoremap <M-S-h> <Esc>:headingDecrement<CR>a
 exmap contextMenu obcommand editor:context-menu
 noremap zl :contextMenu<CR>
 
+" fix word under cursor
+exmap fixWordUnderCursor jsfile Meta/vimrc-jsfile.js { fixWordUnderCursor() }
+nnoremap z. :fixWordUnderCursor<CR>
+
 " undo/redo consistently on one key
 nnoremap U <C-r>
 

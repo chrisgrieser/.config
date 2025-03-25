@@ -326,6 +326,24 @@ function highlightsAndStrikethrus(mode) {
 	editor.setCursor({ line: lnum, ch: col - charsLess });
 }
 
+async function fixWordUnderCursor() {
+	const wordRange = editor.wordAt(editor.getCursor());
+	const wordUnderCursor = editor.getRange(wordRange.from, wordRange.to);
+
+	const url = "https://suggestqueries.google.com/complete/search?output=chrome&oe=utf8&q=";
+	const response = await request(url + encodeURI(wordUnderCursor));
+	const firstSuggestion = JSON.parse(response)[1][0];
+	// using first word, since sometimes google suggests multiple words, but we
+	// only want the first as the spellfix
+	let fixedWord = firstSuggestion.match(/^\S+/)[0];
+
+	// capitalize, if original word was also capitalized
+	if (wordUnderCursor.charAt(0) === wordUnderCursor.charAt(0).toUpperCase()) {
+		fixedWord = fixedWord.charAt(0).toUpperCase() + fixedWord.slice(1);
+	}
+	editor.replaceRange(fixedWord, wordRange.from, wordRange.to);
+}
+
 /** Save/Load a workspace using the Workspaces Core Plugin.
  * Enables the plugin before, and disables it afterward.
  * @param {"load"|"save"} action
