@@ -40,7 +40,7 @@
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "refactoring.nvim": { "branch": "master", "commit": "36bd14ddd7ebf0546c15e6088e8bc93f8a98787d" },
-  "render-markdown.nvim": { "branch": "main", "commit": "6c5081c2fdc62ff20b109ec7c12c7b675dd339ee" },
+  "render-markdown.nvim": { "branch": "main", "commit": "84d413b0c432adaeaf3dcaac646638bd99d06aa6" },
   "satellite.nvim": { "branch": "main", "commit": "253bf5215a7329e0e24f7b0ec27c06eae13a6b79" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },

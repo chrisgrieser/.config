@@ -13,9 +13,11 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
-		completions = {
-			-- only checkboxes and callouts (by pressing `-`/`>`)
+		completions = { -- only checkboxes and callouts (by pressing `-`/`>`)
 			lsp = { enabled = true },
+			filter = {
+				callout = function(value) return value.category == "github" end,
+			},
 		},
 		render_modes = { "n", "c", "i", "v", "V" },
 		sign = {

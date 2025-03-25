@@ -28,6 +28,9 @@ __pycache__
 *.key
 .*_history
 
+# secrets
+.env
+
 # prevent accidental inclusion of big files or partial downloads
 *.part
 *.crdownload
