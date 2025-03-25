@@ -91,13 +91,6 @@ nnoremap l :origamiL<CR>
 " [g]oto [m]atch parenthesis, useful to go to next pandoc citations
 nnoremap gm %
 
-" Language tools: next/prev suggestion
-exmap nextSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-next-suggestion
-noremap ge :nextSuggestion<CR>
-
-exmap prevSuggestion obcommand obsidian-languagetool-plugin:ltjump-to-previous-suggestion
-noremap gE :prevSuggestion<CR>
-
 " next/prev heading
 " (ignoring H1 in pattern since they could also be comments in code blocks, and
 " are not only used at the top of the document, where you can get to via `gg`.)
@@ -313,10 +306,9 @@ nnoremap ,cc :enhanceUrlWithTitle<CR>
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
-" Rephraser/Language Tools: accept
+" Proofreader accept
 exmap acceptProofread obcommand proofreader:accept-suggestions
-exmap acceptLtSuggestion obcommand obsidian-languagetool-plugin:ltaccept-suggestion-1
-noremap ga :acceptProofread<CR>:acceptLtSuggestion<CR>
+noremap ga :acceptProofread<CR>
 
 " Rephraser: reject
 exmap rejectHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("reject") }
@@ -549,12 +541,6 @@ nnoremap ,os :spellcheck<CR>
 " [O]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers<CR>
-
-" [O]ption: [d]iagnostics
-exmap enableDiagnostics obcommand obsidian-languagetool-plugin:ltcheck-text
-nnoremap ,od :enableDiagnostics<CR>
-exmap disableDiagnostics obcommand obsidian-languagetool-plugin:ltclear
-nnoremap ,oD :disableDiagnostics<CR>
 
 " [O]ption: [a]i-completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
