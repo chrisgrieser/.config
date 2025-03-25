@@ -55,9 +55,8 @@ local function syncPackages(ensurePacks)
 		end)
 	end
 
-	-- ensure registry is up-to-date, relevant when using extra personal registry
-	-- refresh is async when callback is passed
-	masonReg.refresh(refreshCallback)
+	-- ensure registry is up-to-date (relevant when using extra personal registry)
+	masonReg.refresh(refreshCallback) -- refresh is async when callback is passed
 end
 
 --------------------------------------------------------------------------------
@@ -104,7 +103,8 @@ return {
 
 		-- get packages from my lsp-server-config
 		local ensurePackages = require("config.lsp-servers").masonDependencies or {}
-		table.insert(ensurePackages, "debugpy")
+		local extraPackages = { "debugpy" }
+		vim.list_extend(ensurePackages, extraPackages)
 
 		vim.defer_fn(function() syncPackages(ensurePackages) end, 3000)
 	end,
