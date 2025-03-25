@@ -327,7 +327,8 @@ function highlightsAndStrikethrus(mode) {
 }
 
 async function fixWordUnderCursor() {
-	const wordRange = editor.wordAt(editor.getCursor());
+	const cursor = editor.getCursor();
+	const wordRange = editor.wordAt(cursor);
 	const wordUnderCursor = editor.getRange(wordRange.from, wordRange.to);
 
 	const url = "https://suggestqueries.google.com/complete/search?output=chrome&oe=utf8&q=";
@@ -342,6 +343,7 @@ async function fixWordUnderCursor() {
 		fixedWord = fixedWord.charAt(0).toUpperCase() + fixedWord.slice(1);
 	}
 	editor.replaceRange(fixedWord, wordRange.from, wordRange.to);
+	editor.setCursor(cursor);
 }
 
 /** Save/Load a workspace using the Workspaces Core Plugin.
