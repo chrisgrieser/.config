@@ -13,6 +13,10 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
+		completions = {
+			-- only checkboxes and callouts (by pressing `-`/`>`)
+			lsp = { enabled = true },
+		},
 		render_modes = { "n", "c", "i", "v", "V" },
 		sign = {
 			enabled = false,
@@ -26,6 +30,7 @@ return {
 		},
 		bullet = {
 			icons = { "▪️", "▫️", "•", "◦" },
+			ordered_icons = "", -- empty string = disable
 		},
 		code = {
 			border = "thick",

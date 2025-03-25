@@ -1043,6 +1043,15 @@ The following actions are available for all searches:
 brew install ripgrep
 ```
 
+## Ignore folder for recent files search
+1. Go to the folder you want to ignore.
+2. Press `cmd+shift+.`, to show hidden files.
+3. In that folder, create a file named `.ignore`, the file content should just
+   be `*`. This ignores every file in that folder. (If you want more
+   fine-grained control, the file uses the [gitignore
+   syntax](https://git-scm.com/docs/gitignore).)
+4. Press `cmd+shift+.` once more, to conceal hidden files again.
+
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -1492,7 +1501,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
