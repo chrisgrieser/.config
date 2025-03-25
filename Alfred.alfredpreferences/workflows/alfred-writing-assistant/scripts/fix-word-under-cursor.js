@@ -33,7 +33,10 @@ function run() {
 
 	// using first word, since sometimes google suggests multiple words, but we
 	// only want the first as the spellfix
-	const firstWord = firstSuggestion.match(/^\S+/)[0];
+	let fixedWord = firstSuggestion.match(/^\S+/)[0];
+	if (wordUnderCursor.charAt(0) === wordUnderCursor.charAt(0).toUpperCase()) {
+		fixedWord = fixedWord.charAt(0).toUpperCase() + fixedWord.slice(1);
+	}
 
-	return firstWord; // paste via Alfred
+	return fixedWord; // paste via Alfred
 }
