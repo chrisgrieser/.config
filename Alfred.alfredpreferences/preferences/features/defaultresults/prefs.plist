@@ -4,9 +4,7 @@
 <dict>
 	<key>fallbacks</key>
 	<array>
-		<string>ddgr-stuff.C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
-		<string>ai-searches.0BCB75C6-A09E-462A-A007-48C1F6C7C745</string>
-		<string>features.websearch.custom.3C0737F9-12F8-416B-B85E-84617699AF0F.fallback</string>
+		<string>google-utilss.C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
 	</array>
 	<key>showContacts</key>
 	<false/>
