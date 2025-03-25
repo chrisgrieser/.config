@@ -202,7 +202,7 @@ function getRedditPosts(subredditName, oldItems) {
 	// SIC try `curl` with and without user agent, since sometimes one is
 	// blocked, sometimes the other?
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
-	let curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "${apiUrl}"`;
+	let curlCommand = `curl -sL -H "User-Agent: Chrome/117.0.0.0" "${apiUrl}"`;
 	let response;
 	try {
 		response = JSON.parse(app.doShellScript(curlCommand));
@@ -215,11 +215,15 @@ function getRedditPosts(subredditName, oldItems) {
 			}
 		}
 	} catch (_error) {
+		// biome-ignore lint/suspicious/noConsole: intentional
+		console.log("Failed curl command: " + curlCommand);
 		const apiResponse = app.doShellScript(curlCommand);
 		try {
 			curlCommand = `curl -sL "${apiUrl}"`;
 			response = JSON.parse(apiResponse);
 		} catch (_error) {
+			// biome-ignore lint/suspicious/noConsole: intentional
+			console.log("Failed curl command: " + curlCommand);
 			const errorMsg = `Error parsing JSON. curl response was: ${apiResponse}`;
 			// biome-ignore lint/suspicious/noConsole: intentional
 			console.log(errorMsg);
