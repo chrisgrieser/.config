@@ -37,6 +37,17 @@
 			<key>url</key>
 			<string>https://macosicons.com/#/{query}</string>
 		</dict>
+		<key>2BEB9BDB-D3FA-4EF8-A812-4A8DD4919129</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sci|anna</string>
+			<key>text</key>
+			<string>Anna's Archive: '{query}'</string>
+			<key>url</key>
+			<string>https://annas-archive.org/search?q={query}</string>
+		</dict>
 		<key>2F9523F0-81B2-425B-A6DE-2E3CA2582212</key>
 		<dict>
 			<key>enabled</key>
@@ -47,6 +58,17 @@
 			<string>Tenor gifs: '{query}'</string>
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
+		</dict>
+		<key>4B503F11-129C-4B20-9C7A-1EA272592316</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sch</string>
+			<key>text</key>
+			<string>Google Scholar: '{query}'</string>
+			<key>url</key>
+			<string>https://scholar.google.com/scholar?hl=en&amp;q={query}</string>
 		</dict>
 		<key>4D6D1B09-18D7-48A8-AE60-25F748E25BE0</key>
 		<dict>
@@ -168,6 +190,17 @@
 			<string>PirateBay: {query}</string>
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
+		</dict>
+		<key>E969FF1C-6627-4902-B08A-EA6DBB2199D5</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sci</string>
+			<key>text</key>
+			<string>Sci-hub: '{query}'</string>
+			<key>url</key>
+			<string>https://sci-hub.st/{query}</string>
 		</dict>
 		<key>EC5F4CCF-649C-4315-A860-F35489FA94F1</key>
 		<dict>

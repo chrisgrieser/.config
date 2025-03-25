@@ -34,6 +34,29 @@
 				<false/>
 			</dict>
 		</array>
+		<key>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D272D1A3-9CA0-40B1-BB24-FDC428E10728</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>72B66895-6978-456A-9556-C77F4EBC15BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<array>
 			<dict>
@@ -69,29 +92,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>FEEDB102-49DB-4F54-88FA-D54C378729DA</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy first link</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
@@ -101,40 +101,9 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>DuckDuckGo (DDG)</string>
+	<string>Google Utils</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>1</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>40</integer>
-				<key>hotmod</key>
-				<integer>1179648</integer>
-				<key>hotstring</key>
-				<string>K</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -181,15 +150,35 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string></string>
+				<string>#!/usr/bin/env zsh
+# INFO this scripts basically replaces https://brettterpstra.com/projects/searchlink/
+#───────────────────────────────────────────────────────────────────────────────
+
+query="$1"
+query_enc=$(osascript -l JavaScript -e "encodeURIComponent('$query')")
+region=${region:-"us-en"} # Alfred variable
+ddgr_html_url="https://html.duckduckgo.com/html?q=$query_enc&amp;kl=$region"
+
+first_result=$(
+	curl --silent "$ddgr_html_url" |
+		grep --after-context=1 --max-count=1 "result__url" |
+		tail -n1 |
+		sed -E 's/^ *| *$//g'
+)
+
+if [[ -z "$first_result" ]]; then
+	echo -n "No response from DuckDuckGo."
+else
+	echo -n "[$query](http://$first_result)" # paste via Alfred
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/searchlink.sh</string>
+				<string></string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>5</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -201,15 +190,33 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>text</key>
-				<string>Google: {query}</string>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>40</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>K</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.fallback</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
+			<string>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -223,6 +230,19 @@
 			<string>alfred.workflow.action.systemwebsearch</string>
 			<key>uid</key>
 			<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>text</key>
+				<string>Google: {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.fallback</string>
+			<key>uid</key>
+			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -250,46 +270,71 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://www.google.com/search?q={query}+(site%3Awired.com+OR+site%3Atechcrunch.com+OR+site%3Abloomberg.com+OR+site%3Atheverge.com)&amp;tbm=nws</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</string>
+			<string>D272D1A3-9CA0-40B1-BB24-FDC428E10728</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-first-ddg-page.sh</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>keyword</key>
+				<string>tn</string>
+				<key>subtext</key>
+				<string>for PhD data collection</string>
+				<key>text</key>
+				<string>Technews: {query}</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>FEEDB102-49DB-4F54-88FA-D54C378729DA</string>
+			<string>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>adduuid</key>
+				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>{var:search_logfile}</string>
+				<key>filetext</key>
+				<string>- {isodate:yyyy-MM-dd HH:mm} – {query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>2</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>72B66895-6978-456A-9556-C77F4EBC15BA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -316,6 +361,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>tech news search</string>
+			<key>xpos</key>
+			<real>35</real>
+			<key>ypos</key>
+			<real>465</real>
+		</dict>
+		<key>72B66895-6978-456A-9556-C77F4EBC15BA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>6</integer>
+			<key>note</key>
+			<string>log the search</string>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>535</real>
+		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
 			<key>colorindex</key>
@@ -336,14 +403,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
-		<key>D43E8A7B-48B4-4004-A798-0C9D544EAD7F</key>
+		<key>D272D1A3-9CA0-40B1-BB24-FDC428E10728</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>6</integer>
 			<key>xpos</key>
-			<real>390</real>
+			<real>245</real>
 			<key>ypos</key>
-			<real>410</real>
+			<real>415</real>
 		</dict>
 		<key>E0294F25-25E9-4D75-A042-047FE2AF1D91</key>
 		<dict>
@@ -376,17 +443,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
-		<key>FEEDB102-49DB-4F54-88FA-D54C378729DA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>Copy first link</string>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>410</real>
-		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
@@ -394,27 +450,22 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>us-en</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>United States</string>
-						<string>us-en</string>
-					</array>
-					<array>
-						<string>Germany</string>
-						<string>de-de</string>
-					</array>
-				</array>
+				<string></string>
+				<key>filtermode</key>
+				<integer>0</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
 			</dict>
 			<key>description</key>
-			<string>Region</string>
+			<string>log file</string>
 			<key>label</key>
-			<string>options</string>
+			<string>Tech News Search</string>
 			<key>type</key>
-			<string>popupbutton</string>
+			<string>filepicker</string>
 			<key>variable</key>
-			<string>region</string>
+			<string>search_logfile</string>
 		</dict>
 	</array>
 	<key>version</key>

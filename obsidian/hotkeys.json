@@ -322,5 +322,14 @@
       "key": "S"
     }
   ],
-  "workspace:edit-file-title": []
+  "workspace:edit-file-title": [],
+  "proofreader:proofread-paragraph": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "P"
+    }
+  ]
 }
