@@ -203,22 +203,28 @@ function getRedditPosts(subredditName, oldItems) {
 	// blocked, sometimes the other?
 	const apiUrl = `https://www.reddit.com/r/${subredditName}/${opts.sortType}.json?limit=${opts.pagesToRequest}`;
 	let curlCommand = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "${apiUrl}"`;
-	const apiResponse = app.doShellScript(curlCommand);
 	let response;
 	try {
-		response = JSON.parse(apiResponse);
+		response = JSON.parse(app.doShellScript(curlCommand));
 		if (response.error) {
 			curlCommand = `curl -sL "${apiUrl}"`;
 			response = JSON.parse(app.doShellScript(curlCommand));
 			if (response.error) {
 				const errorMsg = `Error ${response.error}: ${response.message}`;
-				// biome-ignore lint/suspicious/noConsole: intentional
-				console.log(errorMsg + "\ncurl command: " + curlCommand);
 				return errorMsg;
 			}
 		}
 	} catch (_error) {
-		return `Error parsing JSON. curl response was: \n\n${apiResponse}`;
+		const apiResponse = app.doShellScript(curlCommand);
+		try {
+			curlCommand = `curl -sL "${apiUrl}"`;
+			response = JSON.parse(apiResponse);
+		} catch (_error) {
+			const errorMsg = `Error parsing JSON. curl response was: ${apiResponse}`;
+			// biome-ignore lint/suspicious/noConsole: intentional
+			console.log(errorMsg);
+			return errorMsg;
+		}
 	}
 
 	const oldUrls = oldItems.map((item) => item.arg);
@@ -341,10 +347,15 @@ function run() {
 			: getRedditPosts(subredditName, cachedItems);
 
 	// GUARD Error or no posts left after filtering
-	let errorMsg;
-	if (typeof posts === "string") errorMsg = posts;
-	if (posts.length === 0) errorMsg = "No posts higher than minimum upvote count.";
-	if (errorMsg) return JSON.stringify({ items: [{ title: errorMsg, valid: false }] });
+	if (typeof posts === "string") {
+		const errorMsg = posts;
+		const info = "See debugging console for details.";
+		return JSON.stringify({ items: [{ title: errorMsg, subtitle: info, valid: false }] });
+	}
+	if (posts.length === 0) {
+		const msg = "No posts higher than minimum upvote count.";
+		return JSON.stringify({ items: [{ title: msg, valid: false }] });
+	}
 
 	// WRITE CACHE & RETURN POSTS
 	writeToFile(subredditCache, JSON.stringify(posts));
