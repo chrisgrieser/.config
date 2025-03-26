@@ -1,3 +1,6 @@
+-- `:h vim.lsp.foldexpr()` also allows to use folds with LSP, however, the folds
+-- look nicer with ufo still, so still using it
+
 return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
