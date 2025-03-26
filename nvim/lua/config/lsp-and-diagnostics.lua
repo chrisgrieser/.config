@@ -33,17 +33,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 
--- `vim.lsp.buf.signature_help`
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	border = vim.g.borderStyle,
-})
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = vim.g.borderStyle,
-	title = " LSP hover ",
-	max_width = 75,
-})
-
 --------------------------------------------------------------------------------
 
 -- pause inlay hints in insert mode
@@ -69,7 +58,9 @@ local function addCodeAndSourceAsSuffix(diag)
 end
 
 vim.diagnostic.config {
-	jump = { float = true }, -- (nvim 0.11)
+	jump = {
+		float = true,
+	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
