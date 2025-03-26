@@ -246,14 +246,24 @@ keymap("x", "<left>", [["zxhh"zpgvhoho]], { desc = "⬅ Move selection left" })
 --------------------------------------------------------------------------------
 
 -- LSP
-keymap({ "n", "i", "v" }, "<D-g>", vim.lsp.buf.signature_help, { desc = "󰏪 LSP signature" })
 keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code action" })
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
--- hover mappings
 do
-	keymap({ "n", "x" }, "<leader>h", vim.lsp.buf.hover, { desc = "󰋽 LSP hover" })
+	-- hover mappings
+	local lspWinOpts = {
+		border = vim.g.borderStyle,
+		max_width = 70,
+		silent = true,
+		title_pos = "right",
+	}
+
+	-- stylua: ignore
+	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help(lspWinOpts) end, { desc = "󰏪 LSP signature" })
+
+	-- stylua: ignore
+	keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover(lspWinOpts) end, { desc = "󰋽 LSP hover" })
 
 	local function scrollLspWin(lines)
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win

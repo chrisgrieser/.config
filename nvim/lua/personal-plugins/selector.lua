@@ -1,7 +1,7 @@
 -- INFO A simple UI for `vim.ui.select`. Requires nvim 0.10+
 
 local config = {
-	border = vim.fn.has("nvim-0.11") == 1 and vim.o.winborder or "rounded",
+	border = vim.g.borderStyle,
 	keymaps = {
 		confirm = "<CR>",
 		abort = { "<Esc>", "q" },
