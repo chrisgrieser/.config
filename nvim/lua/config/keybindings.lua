@@ -40,8 +40,10 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Diagnostics
-keymap("n", "ge", vim.diagnostic.goto_next, { desc = "󰒕 Next diagnostic" })
-keymap("n", "gE", vim.diagnostic.goto_prev, { desc = "󰒕 Previous diagnostic" })
+-- stylua: ignore
+keymap("n", "ge", function() vim.diagnostic.jump { count = 1 } end, { desc = "󰒕 Next diagnostic" })
+-- stylua: ignore
+keymap("n", "gE", function() vim.diagnostic.jump { count = -1 } end, { desc = "󰒕 Prev diagnostic" })
 
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
@@ -97,15 +99,15 @@ for _, chars in pairs(trailChars) do
 end
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "mzO<Esc>`z", { desc = " Blank above" })
-keymap("n", "_", "mzo<Esc>`z", { desc = " Blank below" })
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
+keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
 keymap("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
+keymap("i", "<Tab>", "<C-t>", { desc = "󰉶 indent", unique = false })
 keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
+keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
 -- Spelling (these work even with `spell=false`)
 keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })

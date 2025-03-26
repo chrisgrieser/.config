@@ -34,11 +34,23 @@ vim.opt.startofline = true -- motions like "G" also move to the first char
 
 vim.opt.timeoutlen = 666
 
+--------------------------------------------------------------------------------
+-- APPEARANCE
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 12
 
+
+-- PENDING breaks too many plugins
+-- * Telescope
+-- * satellite
+-- * snacks
+-- vim.opt.winborder = "single"
+vim.g.borderStyle = "single"
+
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
+
+--------------------------------------------------------------------------------
 
 -- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
 -- overwritten by ftplugins having the `o` option (which many do). Therefore

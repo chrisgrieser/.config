@@ -35,7 +35,6 @@ require("lazy").setup {
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
-		border = vim.g.borderStyle,
 		pills = false,
 		backdrop = 40,
 		size = { width = 0.85, height = 0.85 },

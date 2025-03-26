@@ -84,7 +84,7 @@ function listall() {
 	brew list --casks
 
 	_print-section "mas list"
-	mas list | rs
+	mas list
 
 	brew bundle dump --force && print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
 }

@@ -13,7 +13,6 @@ end, 1)
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
-vim.g.borderStyle = "rounded"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------
