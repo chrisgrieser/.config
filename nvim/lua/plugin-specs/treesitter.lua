@@ -25,7 +25,8 @@ return {
 		indent = {
 			enable = true,
 			disable = {
-				"javascript", -- sometimes indentation wrong
+				"typescript", -- sometimes indentation wrong
+				"javascript", -- ^
 				"markdown", -- indentation at bullet points is worse
 			},
 		},
