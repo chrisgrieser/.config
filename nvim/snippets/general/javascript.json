@@ -52,7 +52,7 @@
     "prefix": "ef (export function)"
   },
   "filter ( => )": {
-    "body": "filter(${1:item} => ${1:item}$0)",
+    "body": "filter((${1:item}) => ${1:item}$0)",
     "prefix": "filter ( => )"
   },
   "for (i++)": {
@@ -150,10 +150,10 @@
       "\treturn;",
       "})"
     ],
-    "prefix": "map ( () => {} )"
+    "prefix": "map ( => {})"
   },
   "map ( => )": {
-    "body": "map(${1:item} => ${1:item}$0)",
+    "body": "map((${1:item}) => ${1:item}$0)",
     "prefix": "map ( => )"
   },
   "reduce()": {
