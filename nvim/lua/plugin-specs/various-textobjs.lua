@@ -15,6 +15,12 @@ return {
 			mode = "o",
 			desc = "󰬞 subword",
 		},
+		{
+			"g<Space>",
+			function() require("various-textobjs").subword("inner") end,
+			mode = "x",
+			desc = "󰬞 subword",
+		},
 
 		-- stylua: ignore start
 		{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = {"x","o"}, desc = " inner value" },
