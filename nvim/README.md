@@ -51,6 +51,7 @@
 - [mfussenegger/nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
 - [monkoose/neocodeium](https://github.com/monkoose/neocodeium)
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [nmac427/guess-indent.nvim](https://github.com/nmac427/guess-indent.nvim)
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [nvim-neotest/nvim-nio](https://github.com/nvim-neotest/nvim-nio)
