@@ -11,7 +11,9 @@ repo_names="nvim"
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/pull_request_template.md
+	cp -f "$HOME/Desktop/biome.jsonc" ./biome.jsonc
+	cp -f "$HOME/Desktop/pre-commit" ./.githooks/pre-commit
+	cp -f "$HOME/Desktop/pre-commit" ./.githooks/pre-commit
 }
 
 commit_msg="ci: improve PR template"
