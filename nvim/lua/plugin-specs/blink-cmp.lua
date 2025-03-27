@@ -78,6 +78,17 @@ local blinkConfig = {
 			["<Up>"] = { "select_prev", "fallback" },
 			["<PageDown>"] = { "scroll_documentation_down", "fallback" },
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
+			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature
+		},
+		signature = {
+			enabled = true,
+			window = {
+				-- have a minimal window only, show larger documentation on explicit
+				-- signature help command
+				border = "none",
+				show_documentation = false,
+				winhighlight = 'Normal:BlinkCmpScrollBarThumb', -- = darker
+			}
 		},
 		completion = {
 			trigger = {
