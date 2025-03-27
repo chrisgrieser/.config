@@ -4,7 +4,7 @@ return {
 	-- broken since nvim 0.11 PENDING https://github.com/ray-x/lsp_signature.nvim/issues/354
 	enabled = false,
 
-	event = "BufReadPre",
+	event = "InsertEnter",
 	opts = {
 		hint_prefix = " 󰏪 ",
 		hint_scheme = "Todo",

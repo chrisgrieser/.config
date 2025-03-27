@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 return {
 	"folke/noice.nvim",
-	event = "VeryLazy",
+	event = "BufReadPre",
 	keys = {
 		{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear notifications" },
 		-- stylua: ignore
