@@ -65,6 +65,11 @@ return {
 				win_options = { scrolloff = 6 },
 				close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 			},
+			popup = {
+				-- FIX https://github.com/folke/noice.nvim/issues/1082
+				border = { style = "none" },
+				size = { width = "80%", height = "50%" },
+			},
 		},
 		commands = {
 			history = {
