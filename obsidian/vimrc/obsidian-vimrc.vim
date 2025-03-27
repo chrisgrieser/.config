@@ -307,10 +307,10 @@ exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
 " Proofreader accept
-exmap acceptProofread obcommand proofreader:accept-next-suggestion
-noremap ga :acceptProofread<CR>
-exmap acceptProofread obcommand proofreader:accept-suggestions-in-text
-noremap gA :acceptProofread<CR>
+exmap acceptNexPtroofread obcommand proofreader:accept-next-suggestion
+noremap ga :acceptNextProofread<CR>
+exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
+noremap gA :acceptProofreadInText<CR>
 
 " Rephraser: reject
 exmap rejectHighlightsAndStrikethrus jsfile Meta/vimrc-jsfile.js { highlightsAndStrikethrus("reject") }

@@ -29,7 +29,7 @@ local function safeRequire(module)
 	end
 end
 
--- before lazy, so opts are active during plugin install
+-- before lazy, so they are active during plugin install and available for plugin configs
 safeRequire("config.options")
 
 -- only load plugins when `NO_PLUGINS` is not set.

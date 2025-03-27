@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 return {
 	"folke/noice.nvim",
-	event = "BufReadPre",
+	event = "VeryLazy",
 	keys = {
 		{ "<Esc>", vim.cmd.NoiceDismiss, desc = "󰎟 Clear notifications" },
 		-- stylua: ignore
@@ -51,9 +51,7 @@ return {
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 		views = {
 			cmdline_popup = {
-				border = { style = "none" },
-			},
-			cmdline = {
+				-- FIX https://github.com/folke/noice.nvim/issues/1082
 				border = { style = "none" },
 			},
 			mini = {
@@ -66,13 +64,6 @@ return {
 				size = "70%",
 				win_options = { scrolloff = 6 },
 				close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
-			},
-			popup = {
-				border = { style = vim.o.winborder },
-				size = {
-					width = "80%",
-					height = "50%",
-				},
 			},
 		},
 		commands = {
