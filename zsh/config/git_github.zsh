@@ -201,7 +201,9 @@ function my_commits_today {
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
 		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
-		cut -c12-16,26-) # select only HH:MM
+		cut -c12-16,26- | # select only HH:MM
+		grep --rege
+	)
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed \
