@@ -46,6 +46,7 @@ ZSH_HIGHLIGHT_REGEXP+=(
 
 alias gaa='git add --all'
 alias unadd='git restore --staged'
+alias unstage='git restore --staged'
 
 # using functions instead of aliases, so overriding completions works
 function ga { git add "$@"; }
@@ -201,9 +202,8 @@ function my_commits_today {
 	commits=$(gh search commits --limit=200 --author="$username" --committer="$username" \
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
 		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
-		cut -c12-16,26- | # select only HH:MM
-		grep --rege
-	)
+		grep "^\d\d\d\d" | # keep only subjects, skip the body text of commits which is are new lines
+		cut -c12-16,26-) # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed \
