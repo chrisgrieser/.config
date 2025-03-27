@@ -340,9 +340,9 @@
 				<key>keyword</key>
 				<string>icon</string>
 				<key>subtext</key>
-				<string>multiple icon sites at once</string>
+				<string>multiple icon sites</string>
 				<key>text</key>
-				<string>Search Icon: "{query}"</string>
+				<string>Search Icon: '{query}'</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
