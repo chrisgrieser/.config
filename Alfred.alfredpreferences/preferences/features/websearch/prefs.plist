@@ -136,6 +136,17 @@
 			<key>url</key>
 			<string>https://kickasstorrents.to/usearch/{query}</string>
 		</dict>
+		<key>97974E2F-27A2-48E4-88F3-339C26BEDA6B</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>icon</string>
+			<key>text</key>
+			<string>Google Images: '{query}'</string>
+			<key>url</key>
+			<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
+		</dict>
 		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
 		<dict>
 			<key>enabled</key>
