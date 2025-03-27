@@ -178,6 +178,12 @@ end, { desc = " Paste charwise", expr = true })
 -- for compatibility with macOS clipboard managers
 keymap("n", "<D-v>", "p", { desc = " Paste" })
 
+keymap("n", "<leader>y:", function()
+	local lastExcmd = vim.fn.getreg(":")
+	vim.fn.setreg("+", lastExcmd)
+	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
+end, { desc = "󰓗 Copy last ex-cmd" })
+
 --------------------------------------------------------------------------------
 -- SURROUND
 

@@ -28,6 +28,8 @@ end, { desc = "󰛦 Organize Imports & Format" })
 
 
 -- BUG with TS Textobjects currently breaks this
+-- PENDING https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/744
+
 -- When typing `await`, automatically add `async` to the function declaration
 -- bkeymap("i", "t", function()
 -- 	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
