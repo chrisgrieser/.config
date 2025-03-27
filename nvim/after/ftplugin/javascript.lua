@@ -9,10 +9,10 @@ vim.bo.commentstring = "// %s" -- add space
 -- ABBREVIATIONS
 abbr("cosnt", "const")
 abbr("local", "const")
+abbr("elseif", "else if")
 abbr("--", "//")
 abbr("~=", "!==")
-abbr("elseif", "else if")
-abbr("()", "() =>") -- quicker arrow function
+abbr("()", "() =>")
 
 --------------------------------------------------------------------------------
 
