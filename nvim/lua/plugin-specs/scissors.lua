@@ -15,7 +15,6 @@ return {
 		editSnippetPopup = {
 			height = 0.55, -- between 0-1
 			width = 0.75,
-			border = vim.g.borderStyle,
 			keymaps = {
 				deleteSnippet = "<leader>fd", -- same as `genghis` mapping for deleting file
 				duplicateSnippet = "<leader>fw", -- same as `genghis` mapping for duplicating file

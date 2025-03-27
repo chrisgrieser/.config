@@ -1,7 +1,6 @@
 -- INFO A simple UI for `vim.ui.select`. Requires nvim 0.10+
 
 local config = {
-	border = vim.g.borderStyle,
 	keymaps = {
 		confirm = "<CR>",
 		abort = { "<Esc>", "q" },

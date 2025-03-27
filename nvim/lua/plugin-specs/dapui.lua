@@ -21,9 +21,6 @@ return {
 			expand = { "<Tab>", "<2-LeftMouse>" }, -- 2-LeftMouse = Double Click
 			open = "<CR>",
 		},
-		floating = {
-			border = vim.g.borderStyle,
-		},
 		layouts = {
 			{
 				position = "right",

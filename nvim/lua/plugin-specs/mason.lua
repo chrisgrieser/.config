@@ -84,7 +84,7 @@ return {
 		-- },
 
 		ui = {
-			border = vim.g.borderStyle,
+			border = vim.o.winborder,
 			height = 0.85,
 			width = 0.8,
 			icons = {

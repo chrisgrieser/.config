@@ -25,7 +25,6 @@ return {
 		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
 		preset = "helix",
 		win = {
-			border = vim.g.borderStyle,
 			height = { min = 1, max = 0.99 },
 			no_overlap = false, -- `false` = allow popup over the cursor
 		},

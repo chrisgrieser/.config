@@ -252,7 +252,6 @@ keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").format
 
 do
 	local signatureOpts = {
-		border = vim.g.borderStyle,
 		max_width = 70,
 		focusable = false,
 	}
@@ -262,9 +261,9 @@ end
 
 do
 	local hoverOpts = {
-		border = vim.g.borderStyle,
 		max_width = 70,
 		silent = true,
+		title = " LSP hover ",
 	}
 	-- stylua: ignore
 	keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover(hoverOpts) end, { desc = "󰋽 LSP hover" })

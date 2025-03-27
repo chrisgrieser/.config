@@ -101,13 +101,11 @@ local blinkConfig = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
 				window = {
-					border = vim.g.borderStyle,
 					max_width = 50,
 					max_height = 20,
 				},
 			},
 			menu = {
-				border = vim.g.borderStyle,
 				draw = {
 					align_to = "none", -- keep in place
 					treesitter = { "lsp" },

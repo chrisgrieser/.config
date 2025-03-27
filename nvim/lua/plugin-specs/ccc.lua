@@ -9,7 +9,7 @@ return {
 	config = function(spec)
 		local ccc = require("ccc")
 		ccc.setup {
-			win_opts = { border = vim.g.borderStyle },
+			win_opts = { border = vim.o.winborder }, ---@diagnostic disable-line: assign-type-mismatch
 			highlight_mode = "bg",
 			highlighter = {
 				auto_enable = true,
