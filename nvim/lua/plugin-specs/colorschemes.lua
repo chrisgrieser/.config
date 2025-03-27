@@ -17,6 +17,7 @@ local themes = {
 
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
+					["@keyword.break"] = { fg = "#9f2e69", style = "bold" },
 					["LspSignatureActiveParameter"] = { link = "Visual" },
 					["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 					["@character.printf"] = { link = "SpecialChar" },
@@ -109,6 +110,7 @@ local themes = {
 			on_highlights = function(hl, colors)
 				-- general
 				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
+				hl["@keyword.break"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["diffAdded"] = { fg = colors.green }
 				hl["@string.documentation.python"] = { link = "Comment" }
