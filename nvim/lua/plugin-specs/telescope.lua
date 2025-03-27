@@ -1,11 +1,12 @@
 -- FIX / PENDING https://github.com/nvim-telescope/telescope.nvim/issues/3436
+local initialWinborder = vim.o.winborder
 vim.api.nvim_create_autocmd("User", {
 	pattern = "TelescopeFindPre",
 	callback = function()
-		vim.opt_local.winborder = "none"
+		vim.opt.winborder = "none"
 		vim.api.nvim_create_autocmd("WinLeave", {
 			once = true,
-			callback = function() vim.opt_local.winborder = vim.o.winborder end,
+			callback = function() vim.opt.winborder = initialWinborder end,
 		})
 	end,
 })

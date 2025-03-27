@@ -259,13 +259,12 @@ keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").format
 do
 	local signatureOpts = {
 		max_width = 70,
+		max_height = 10,
 		focusable = false,
 	}
 	-- stylua: ignore
 	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help(signatureOpts) end, { desc = "󰏪 LSP signature" })
-end
 
-do
 	local hoverOpts = {
 		max_width = 70,
 		silent = true,
