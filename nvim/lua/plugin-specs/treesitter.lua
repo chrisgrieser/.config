@@ -8,20 +8,7 @@ return {
 		-- auto-installed on entering a buffer (e.g., regex, luadocs, comments)
 		ensure_installed = "all",
 
-		highlight = {
-			enable = true,
-			disable = function(_, bufnr)
-				-- disable on large files
-				local maxFilesizeKb = 100
-				local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
-				if not (ok and stats) then return false end
-				if stats.size > maxFilesizeKb * 1024 then
-					local msg = "Disabled since file is larger than " .. maxFilesizeKb .. "kb"
-					vim.notify(msg, nil, { title = "Treesitter", icon = "" })
-					return true
-				end
-			end,
-		},
+		highlight = { enable = true },
 		indent = {
 			enable = true,
 			disable = {
@@ -50,8 +37,6 @@ return {
 	end,
 
 	keys = {
-		-- stylua: ignore
-		{ "<leader>ot", function() vim.cmd.TSBufToggle("highlight") end, desc = " Treesitter highlights" },
 		{ -- copy code context
 			"<leader>yb",
 			function()
@@ -96,7 +81,7 @@ return {
 				end,
 			}
 			if not text then return "" end
-			if vim.str_utfindex(text) > maxLen then return text:sub(1, maxLen - 1) .. "…" end
+			if vim.str_utfindex(text, "utf-8") > maxLen then return text:sub(1, maxLen - 1) .. "…" end
 			return text
 		end
 
