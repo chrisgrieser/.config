@@ -309,7 +309,7 @@ nnoremap ,if :freezeInterface<CR>
 " Proofreader accept
 exmap acceptProofread obcommand proofreader:accept-next-suggestion
 noremap ga :acceptProofread<CR>
-exmap acceptProofread obcommand proofreader:accept-suggestions-in-selection-paragraph
+exmap acceptProofread obcommand proofreader:accept-suggestions-in-text
 noremap gA :acceptProofread<CR>
 
 " Rephraser: reject
