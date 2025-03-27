@@ -1,8 +1,21 @@
+-- FIX / PENDING https://github.com/nvim-telescope/telescope.nvim/issues/3436
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TelescopeFindPre",
+	callback = function()
+		vim.opt_local.winborder = "none"
+		vim.api.nvim_create_autocmd("WinLeave", {
+			once = true,
+			callback = function() vim.opt_local.winborder = vim.o.winborder end,
+		})
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 local borderChars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-if vim.g.borderStyle == "double" then
+if vim.o.winborder == "double" then
 	borderChars = { "═", "║", "═", "║", "╔", "╗", "╝", "╚" }
-end
-if vim.g.borderStyle == "rounded" then
+elseif vim.o.winborder == "rounded" then
 	borderChars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 end
 
@@ -417,7 +430,12 @@ return {
 			desc = "󰭎 Log",
 		},
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
-		{ "gr", function() vim.cmd.Telescope("oldfiles") end, desc = "󰭎 Recent files" },
+		{
+			"gr",
+			function() vim.cmd.Telescope("oldfiles") end,
+			desc = "󰭎 Recent files",
+			nowait = true, -- due to various nvim default mappings starting with `gr`
+		},
 
 		-- GREP
 		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },

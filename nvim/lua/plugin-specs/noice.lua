@@ -51,7 +51,10 @@ return {
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 		views = {
 			cmdline_popup = {
-				border = { style = vim.g.borderStyle },
+				border = { style = vim.o.winborder },
+			},
+			cmdline = {
+				border = { style = vim.o.winborder },
 			},
 			mini = {
 				timeout = 3000,
@@ -65,7 +68,7 @@ return {
 				close = { keys = { "q", "<D-w>", "<D-9>", "<D-0>" } },
 			},
 			popup = {
-				border = { style = vim.g.borderStyle },
+				border = { style = vim.o.winborder },
 				size = {
 					width = "80%",
 					height = "50%",

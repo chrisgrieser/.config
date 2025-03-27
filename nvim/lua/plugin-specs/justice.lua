@@ -22,7 +22,6 @@ return {
 				comment = { "in the terminal" },
 			},
 		},
-		window = { border = vim.g.borderStyle },
 		keymaps = {
 			closeWin = { "q", "<Esc>", "<D-w>" },
 			quickSelect = { "j", "f", "d", "s", "a" },

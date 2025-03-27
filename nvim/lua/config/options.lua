@@ -41,11 +41,11 @@ vim.opt.scrolloff = 12
 
 
 -- PENDING breaks too many plugins
--- * Telescope
--- * satellite
+-- * Telescope https://github.com/nvim-telescope/telescope.nvim/issues/3436
 -- * snacks
 -- * noice
--- vim.opt.winborder = "single"
+-- * lazy https://github.com/folke/lazy.nvim/issues/1951
+vim.opt.winborder = "single"
 vim.g.borderStyle = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)

@@ -35,6 +35,7 @@ require("lazy").setup {
 	ui = {
 		title = " 󰒲 lazy.nvim ",
 		wrap = true,
+		border = vim.o.winborder, -- PENDING -- https://github.com/folke/lazy.nvim/issues/1951
 		pills = false,
 		backdrop = 40,
 		size = { width = 0.85, height = 0.85 },

@@ -204,8 +204,8 @@ function ..d() {
 	if [[ ! "$PWD" =~ /Developer/ ]]; then
 		print '\e[0;33mCan only delete inside subfolder of "~/Developer".\e[0m'
 		return 1
-	elif [[ -n $(git status) ]]; then
-		print '\e[0;33mRepo still dirty.\e[0m'
+	elif [[ -n $(git log --branches --not --remotes) ]]; then
+		print '\e[0;33mRepo has unpushed commits.\e[0m'
 		return 1
 	fi
 

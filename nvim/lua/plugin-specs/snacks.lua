@@ -126,19 +126,14 @@ return {
 		input = {
 			icon = false,
 		},
-		win = {
-			border = vim.g.borderStyle,
-		},
 		styles = {
 			input = {
 				backdrop = true,
-				border = vim.g.borderStyle,
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
 			},
 			notification = {
-				border = vim.g.borderStyle,
 				focusable = false,
 				wo = { winblend = 0, wrap = true },
 			},
@@ -146,7 +141,6 @@ return {
 				backdrop = true,
 				width = 0.6,
 				height = 0.6,
-				border = vim.g.borderStyle,
 				title = " 󰆽 Git blame ",
 			},
 		},
