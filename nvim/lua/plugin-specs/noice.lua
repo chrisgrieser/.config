@@ -51,10 +51,10 @@ return {
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 		views = {
 			cmdline_popup = {
-				border = { style = vim.o.winborder },
+				border = { style = "none" },
 			},
 			cmdline = {
-				border = { style = vim.o.winborder },
+				border = { style = "none" },
 			},
 			mini = {
 				timeout = 3000,
