@@ -58,9 +58,6 @@ local function addCodeAndSourceAsSuffix(diag)
 end
 
 vim.diagnostic.config {
-	jump = {
-		float = true,
-	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
