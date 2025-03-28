@@ -1,6 +1,4 @@
--- HANDLERS
-
--- `vim.lsp.buf.rename`: add notification & writeall to renaming
+-- RENAMING add notification & writeall to renaming
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -35,45 +33,72 @@ end
 
 --------------------------------------------------------------------------------
 
--- pause inlay hints in insert mode
-vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "User: Disable LSP inlay hints",
-	callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
-})
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "User: Enable LSP inlay hints",
-	callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
-})
+-- INLAY HINTS pause in insert mode
+do
+	vim.api.nvim_create_autocmd("InsertEnter", {
+		desc = "User: Disable LSP inlay hints",
+		callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
+	})
+	vim.api.nvim_create_autocmd("InsertLeave", {
+		desc = "User: Enable LSP inlay hints",
+		callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
+	})
+end
 
 --------------------------------------------------------------------------------
--- DIAGNOSTICS
+-- DIAGNOSTICS display
 
 ---@param diag vim.Diagnostic
 ---@return string displayedText
-local function addCodeAndSourceAsSuffix(diag)
-	if not diag.source then return "" end
+local function formatDiagnostic(diag)
+	if not diag.source then return diag.message end
+
 	local source = diag.source:gsub(" ?%.$", "") -- remove trailing dot for `lua_ls`
-	local code = diag.code and ": " .. diag.code or ""
-	return (" (%s%s)"):format(source, code)
+	local msg = diag.message:gsub("%.%s*$", "")
+
+	if not diag.code then return ("%s (%s)"):format(msg, source, diag.code) end
+	return ("%s (%s: %s)"):format(msg, source, diag.code)
 end
 
 vim.diagnostic.config {
 	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "▲",
-			[vim.diagnostic.severity.INFO] = "●",
-			[vim.diagnostic.severity.HINT] = "",
-		},
+		text = { "", "▲", "●", "" }, -- Error, Warn, Info, Hint
 	},
 	virtual_text = {
 		severity = { min = vim.diagnostic.severity.WARN }, -- leave out `HINT` & `INFO`
-		suffix = addCodeAndSourceAsSuffix,
+		format = formatDiagnostic,
 	},
-	float = {
-		max_width = 70,
-		header = "",
-		prefix = function(_, _, total) return (total > 1 and "• " or ""), "Comment" end,
-		suffix = function(diag) return addCodeAndSourceAsSuffix(diag), "Comment" end,
-	},
+	virtual_lines = false,
 }
+
+--------------------------------------------------------------------------------
+-- DIAGNOSTICS as virtual lines when jumping
+local function diagnosticsAsVirtualLines()
+	local initialVirtTextConf = vim.diagnostic.config().virtual_text
+	vim.diagnostic.config {
+		virtual_text = false,
+		virtual_lines = { current_line = true, format = formatDiagnostic },
+	}
+	vim.defer_fn(function()
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			group = vim.api.nvim_create_augroup("line-diagnostics", {}),
+			once = true,
+			callback = function()
+				vim.diagnostic.config {
+					virtual_lines = false,
+					virtual_text = initialVirtTextConf,
+				}
+			end,
+		})
+	end, 1)
+end
+
+local keymap = require("config.utils").uniqueKeymap
+keymap("n", "ge", function()
+	vim.diagnostic.jump { count = 1 }
+	diagnosticsAsVirtualLines()
+end, { desc = "󰒕 Next diagnostic" })
+keymap("n", "gE", function()
+	vim.diagnostic.jump { count = -1 }
+	diagnosticsAsVirtualLines()
+end, { desc = "󰒕 Prev diagnostic" })

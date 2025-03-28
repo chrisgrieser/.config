@@ -39,34 +39,6 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
--- Diagnostics
-do
-	local function diagnosticsAsVirtualLines()
-		vim.diagnostic.config {
-			virtual_lines = { current_line = true },
-			virtual_text = false,
-		}
-		vim.defer_fn(function()
-			vim.api.nvim_create_autocmd("CursorMoved", {
-				desc = "User(once): Disable virtual lines on cursor move",
-				group = vim.api.nvim_create_augroup("line-diagnostics", {}),
-				callback = function()
-					vim.diagnostic.config { virtual_lines = false, virtual_text = true }
-					return true
-				end,
-			})
-		end, 1)
-	end
-	keymap("n", "ge", function()
-		vim.diagnostic.jump { count = 1, float = false }
-		diagnosticsAsVirtualLines()
-	end, { desc = "󰒕 Next diagnostic" })
-	keymap("n", "gE", function()
-		vim.diagnostic.jump { count = -1 }
-		diagnosticsAsVirtualLines()
-	end, { desc = "󰒕 Prev diagnostic" })
-end
-
 -- Close all top-level folds
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
