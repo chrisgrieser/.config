@@ -309,6 +309,8 @@ nnoremap ,if :freezeInterface<CR>
 " Proofreader accept
 exmap acceptNextProofread obcommand proofreader:accept-next-suggestion
 noremap ga :acceptNextProofread<CR>
+exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
+noremap gb :rejectNextProofread<CR>
 exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
 noremap gA :acceptProofreadInText<CR>
 
