@@ -44,7 +44,7 @@ local blinkConfig = {
 					max_items = 4,
 					min_keyword_length = 4,
 
-					-- with `-7`, typing `then` in lua prioritize the `then .. end`
+					-- with `-7`, typing `then` in lua prioritizes the `then .. end`
 					-- snippet, effectively acting as `nvim-endwise`
 					score_offset = -7,
 
@@ -135,22 +135,14 @@ local blinkConfig = {
 						kind_icon = {
 							text = function(ctx)
 								local source, client = ctx.item.source_id, ctx.item.client_id
-								if source == "cmdline" then return "" end
-
-								-- detect emmet-ls
 								local lspName = client and vim.lsp.get_client_by_id(client).name
-								if lspName == "emmet_language_server" then source = "emmet" end
 
-								-- use source-specific icons, and `kind_icon` only for items from LSPs
-								local sourceIcons = {
-									git = "󰊢",
-									snippets = "󰩫",
-									buffer = "󰦨",
-									emmet = "",
-									path = "",
-									cmdline = "",
-								}
-								return sourceIcons[source] or ctx.kind_icon
+								if source == "cmdline" then return "" end
+								if source == "snippets" then return "󰩫" end
+								if source == "buffer" then return "󰦨" end
+								if source == "path" then return "" end
+								if lspName == "emmet_language_server" then return "" end
+								return ctx.kind_icon
 							end,
 							-- use highlights from mini.icons
 							highlight = function(ctx)
@@ -194,7 +186,7 @@ local blinkGitOpts = {
 					module = "blink-cmp-git",
 					name = "Git",
 
-					---@module 'blink-cmp-git'
+					---@module "blink-cmp-git"
 					---@type blink-cmp-git.Options
 					opts = {
 						before_reload_cache = function() end, -- to silence cache-reload notification
