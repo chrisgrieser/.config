@@ -28,10 +28,6 @@ end, { desc = "󰛦 Organize Imports & Format" })
 
 
 -- When typing `await`, automatically add `async` to the function declaration
-
--- BUG with TS Textobjects currently breaks this
--- PENDING https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/744
-
 bkeymap("i", "t", function()
 	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char
 	local col = vim.api.nvim_win_get_cursor(0)[2]
@@ -39,17 +35,16 @@ bkeymap("i", "t", function()
 	if textBeforeCursor ~= "awai" then return end
 	-----------------------------------------------------------------------------
 
-	local funcNode
+	local funcNode = vim.treesitter.get_node()
 	local functionNodes = { "arrow_function", "function_declaration", "function" }
+
 	repeat -- loop trough ancestors till function node found
-		funcNode = vim.treesitter.get_node()
 		funcNode = funcNode and funcNode:parent()
 		if not funcNode then return end
 	until vim.tbl_contains(functionNodes, funcNode:type())
+
 	local functionText = vim.treesitter.get_node_text(funcNode, 0)
-
 	if vim.startswith(functionText, "async") then return end -- already async
-
 	local startRow, startCol = funcNode:start()
 	vim.api.nvim_buf_set_text(0, startRow, startCol, startRow, startCol, { "async " })
 end, { desc = "󰛦 Auto-add `async`" })
