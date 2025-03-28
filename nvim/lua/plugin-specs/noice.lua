@@ -11,6 +11,18 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, 1)
 	end,
 })
+--------------------------------------------------------------------------------
+
+-- FIX https://github.com/folke/noice.nvim/issues/1082
+local initialWinborder = vim.o.winborder
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+	desc = "User: FIX border for cmdline",
+	callback = function() vim.o.winborder = "none" end,
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+	desc = "User: FIX border for cmdline",
+	callback = function() vim.o.winborder = initialWinborder end,
+})
 
 --------------------------------------------------------------------------------
 
@@ -51,8 +63,7 @@ return {
 		-- DOCS https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
 		views = {
 			cmdline_popup = {
-				-- FIX https://github.com/folke/noice.nvim/issues/1082
-				border = { style = "none" },
+				border = { style = vim.o.winborder },
 			},
 			mini = {
 				timeout = 3000,
