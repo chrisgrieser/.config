@@ -95,12 +95,16 @@ local blinkConfig = {
 		},
 		signature = {
 			enabled = true,
+			trigger = { show_on_insert = true },
 			window = {
 				-- have a minimal window only, show larger documentation on explicit
 				-- signature help command
-				border = "none",
-				show_documentation = false,
-				winhighlight = "Normal:BlinkCmpScrollBarThumb", -- = darker bg in most themes
+				border = "none", -- save space
+				show_documentation = false, -- save space
+				winhighlight = "Normal:ColorColumn", -- = darker bg in most themes
+				max_width = 70,
+				max_height = 5,
+				direction_priority = { "s", "n" }, -- south first, to not block existing code
 			},
 		},
 		completion = {
@@ -130,8 +134,10 @@ local blinkConfig = {
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
-								-- detect emmet-ls
 								local source, client = ctx.item.source_id, ctx.item.client_id
+								if source == "cmdline" then return "" end
+
+								-- detect emmet-ls
 								local lspName = client and vim.lsp.get_client_by_id(client).name
 								if lspName == "emmet_language_server" then source = "emmet" end
 
@@ -142,7 +148,7 @@ local blinkConfig = {
 									buffer = "󰦨",
 									emmet = "",
 									path = "",
-									cmdline = "󰘳",
+									cmdline = "",
 								}
 								return sourceIcons[source] or ctx.kind_icon
 							end,
@@ -159,35 +165,11 @@ local blinkConfig = {
 			},
 		},
 		appearance = {
-			nerd_font_variant = "normal",
+			-- make lsp icons different from the corresponding similar blink sources
 			kind_icons = {
-				-- different icons of the corresponding source
 				Text = "󰉿", -- `buffer`
 				Snippet = "󰞘", -- `snippets`
 				File = "", -- `path`
-
-				Folder = "󰉋",
-				Method = "󰊕",
-				Function = "󰡱",
-				Constructor = "",
-				Field = "󰇽",
-				Variable = "󰀫",
-				Class = "󰜁",
-				Interface = "",
-				Module = "",
-				Property = "󰜢",
-				Unit = "",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Color = "󰏘",
-				Reference = "",
-				EnumMember = "",
-				Constant = "󰏿",
-				Struct = "󰙅",
-				Event = "",
-				Operator = "󰆕",
-				TypeParameter = "󰅲",
 			},
 		},
 	},
