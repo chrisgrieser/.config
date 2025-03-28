@@ -259,7 +259,7 @@ keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").format
 do
 	local signatureOpts = {
 		max_width = 70,
-		max_height = 10,
+		max_height = 12,
 		focusable = false,
 	}
 	-- stylua: ignore
