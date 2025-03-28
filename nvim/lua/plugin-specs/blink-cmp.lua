@@ -80,6 +80,19 @@ local blinkConfig = {
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature
 		},
+		cmdline = {
+			keymap = {
+				-- makes the ghost-text accepting behave like `zsh-autosuggestions`
+				["<Right>"] = {
+					function(cmp)
+						if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then
+							return cmp.accept()
+						end
+					end,
+					"fallback",
+				},
+			},
+		},
 		signature = {
 			enabled = true,
 			window = {
@@ -87,8 +100,8 @@ local blinkConfig = {
 				-- signature help command
 				border = "none",
 				show_documentation = false,
-				winhighlight = 'Normal:BlinkCmpScrollBarThumb', -- = darker
-			}
+				winhighlight = "Normal:BlinkCmpScrollBarThumb", -- = darker bg in most themes
+			},
 		},
 		completion = {
 			trigger = {
@@ -133,15 +146,19 @@ local blinkConfig = {
 								}
 								return sourceIcons[source] or ctx.kind_icon
 							end,
+							-- use highlights from mini.icons
+							highlight = function(ctx)
+								local installed, miniIcons = pcall(require, "mini.icons")
+								if not installed then return ctx.kind_hl end
+								local _, hl, _ = miniIcons.get("lsp", ctx.kind)
+								return hl
+							end,
 						},
 					},
 				},
 			},
 		},
 		appearance = {
-			-- supported: tokyonight, nightfox // not supported: gruvbox-material
-			use_nvim_cmp_as_default = false,
-
 			nerd_font_variant = "normal",
 			kind_icons = {
 				-- different icons of the corresponding source
