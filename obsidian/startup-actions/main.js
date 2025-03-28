@@ -22,7 +22,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 
 	getItems() {
 		const folders = this.app.vault
-			.getAllLoadedFiles()
+			.getAllFolders()
 			// filter out folders, rootDir, and excluded dirs
 			.filter((item) => {
 				if (item.extension) return false; // not folder
@@ -93,9 +93,12 @@ class StartupActionsPlugin extends obsidian.Plugin {
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 
-		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
+		// 1. statusbar
 		this.app.workspace.onLayoutReady(() => updateStatusbar(this));
+		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
+		this.registerInterval(window.setInterval(() => this.updateStatusBar(), 3000));
 
+		// 2. commands
 		this.addCommand({
 			id: "new-file-in-folder",
 			name: "New file in folder",
@@ -103,28 +106,27 @@ class StartupActionsPlugin extends obsidian.Plugin {
 			callback: () => new NewFileInFolder(this.app).open(),
 		});
 
-		// hide window buttons
+		// 3. hide window buttons
 		if (!this.app.isMobile) electronWindow.setWindowButtonVisibility(false);
 
+		// 4. register URIs
 		this.app.workspace.onLayoutReady(() => {
-			// URI to reload a plugin
 			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
 				const pluginId = uriParams?.id;
 				if (!pluginId) {
 					new Notice("No plugin ID provided.");
 					return;
 				}
+				// reload plugin
 				await this.app.plugins.disablePlugin(pluginId);
 				await this.app.plugins.enablePlugin(pluginId);
-				const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
 
-				// biome-ignore lint/suspicious/noConsole: intentional here
 				console.clear();
 
-				// clear current notices
+				// clear current notices & post new notification
 				const allNotices = activeDocument.body.getElementsByClassName("notice");
 				for (const el of allNotices) el.hide();
-
+				const pluginName = this.app.plugins.getPlugin(pluginId).manifest.name;
 				new Notice(`"${pluginName}" reloaded.`);
 			});
 

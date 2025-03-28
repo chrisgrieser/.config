@@ -1,4 +1,7 @@
-// DOCS https://biomejs.dev/reference/configuration/
+// INFO This biome config is mostly used for JXA-Javascript in my dotfiles, and
+// for Alfred workflows.
+//──────────────────────────────────────────────────────────────────────────────
+// https://biomejs.dev/reference/configuration/
 //──────────────────────────────────────────────────────────────────────────────
 {
 	"linter": {
@@ -9,10 +12,9 @@
 				"noSecrets": "off" // buggy
 			},
 			"suspicious": {
-				"noConsole": {
-					"level": "info",
-					"options": { "allow": ["assert", "error", "info", "warn"] } // disallow only `.log`
-				},
+				// JXA only allows `console.log`, and logging in general is fine
+				// intentional and fine my dotfiles or in Alfred workflows
+				"noConsole": "off",
 				"noConsoleLog": "off"
 			},
 			"performance": {
