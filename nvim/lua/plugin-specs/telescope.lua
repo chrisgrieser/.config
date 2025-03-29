@@ -30,7 +30,7 @@ local specialDirs = {
 }
 
 vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("TelescopeFix", { clear = true }),
+	group = vim.api.nvim_create_augroup("TelescopeFix", {}),
 	desc = "User: FIX `sidescrolloff` for Telescope",
 	pattern = "TelescopePrompt",
 	command = "setlocal sidescrolloff=1",
@@ -106,11 +106,16 @@ return {
 						["<D-s>"] = "smart_send_to_qflist",
 						["<D-f>"] = "to_fuzzy_refine", -- only live grep & workspace symbols
 
-						["<D-c>"] = function(promptBufnr) -- copy value
+						["<D-c>"] = function(promptBufnr) -- copy_value
 							local value = require("telescope.actions.state").get_selected_entry().value
 							require("telescope.actions").close(promptBufnr)
 							vim.fn.setreg("+", value)
 							vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
+						end,
+						["<D-l>"] = function(prompt_bufnr) -- reveal_file_in_Finder
+							local path = require("telescope.actions.state").get_selected_entry().value
+							require("telescope.actions").close(prompt_bufnr)
+							if jit.os == "OSX" then vim.system { "open", "-R", path } end
 						end,
 						-- mapping consistent with fzf-multi-select
 						["<M-CR>"] = function(promptBufnr) -- multi-select
@@ -528,7 +533,7 @@ return {
 						{ { #tail, #out }, "TelescopeResultsComment" },
 					}
 					if vim.tbl_contains(changedFilesInCwd, path) then
-						table.insert(highlights, { { 0, #tail }, "diffChanged" })
+						table.insert(highlights, { { 0, #tail }, "Changed" })
 					end
 					return out, highlights
 				end
@@ -591,8 +596,8 @@ return {
 		{
 			"gs",
 			function()
-				-- using treesitter symbols instead, since the LSP symbols are crowded
-				-- with anonymous functions
+				-- lua files: using treesitter symbols instead, since the LSP
+				-- symbols are crowded with anonymous functions
 				if vim.bo.filetype == "lua" then
 					vim.cmd.Telescope("treesitter")
 					return

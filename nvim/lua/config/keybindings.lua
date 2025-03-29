@@ -2,9 +2,10 @@ local keymap = require("config.utils").uniqueKeymap
 --------------------------------------------------------------------------------
 -- META
 
-local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
-local desc = "⌨️ Edit " .. vim.fs.basename(pathOfThisFile)
-keymap("n", "<D-,>", function() vim.cmd.edit(pathOfThisFile) end, { desc = desc })
+keymap("n", "<D-,>", function()
+	local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
+	vim.cmd.edit(pathOfThisFile)
+end, { desc = "⌨️ Edit keybindings" })
 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
@@ -29,7 +30,6 @@ keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
 keymap("n", "<C-h>", "<C-o>", { desc = "󱋿 Jump back" })
--- non-unique, since it overwrites nvim default: https://neovim.io/doc/user/vim_diff.html#default-mappings
 keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 
 -- Search
