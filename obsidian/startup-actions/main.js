@@ -102,23 +102,25 @@ async function reloadPlugin(app, pluginId) {
 
 function scrollIfNeeded(editor) {
 	// biome-ignore lint/style/useNamingConvention: constant
-	const DISTANCE_PERCENT = 30;
+	const DISTANCE_PERCENT = 0.3;
 
 	if (!editor?.hasFocus()) return;
 	const cursor = editor.getCursor();
 	if (!cursor) return;
 	const cursorOffSet = editor.posToOffset(cursor);
 	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
+	console.log("🪚 cursorCoord:", cursorCoord.top);
 	if (!cursorCoord) return; // no coord = outside viewport
 
 	const editorHeight = editor.getScrollInfo().clientHeight;
 	const editorTop = editor.getScrollInfo().top;
-	const relativeCursorTop = Math.round((cursorCoord.top / editorHeight) * 100);
-	const scrollDistance = editorHeight * 0.06;
+	const relativeCursorTop = cursorCoord.top / editorHeight;
+	const relativeCursorBottom = cursorCoord.bottom / editorHeight;
+	const scrollDistance = cursorCoord.bottom - cursorCoord.top + 3.86;
 	if (relativeCursorTop < DISTANCE_PERCENT) {
 		// `y` is referring to the top of `.cm-scroller` and can be retrieved from `editor.getScrollInfo().top`
 		editor.scrollTo(null, editorTop - scrollDistance);
-	} else if (relativeCursorTop > 100 - DISTANCE_PERCENT) {
+	} else if (relativeCursorBottom > (1 - DISTANCE_PERCENT)) {
 		editor.scrollTo(null, editorTop + scrollDistance);
 	}
 }
