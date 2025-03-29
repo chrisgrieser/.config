@@ -78,7 +78,7 @@ local function diagnosticsAsVirtualLines()
 		virtual_text = false,
 		virtual_lines = { current_line = true, format = formatDiagnostic },
 	}
-	vim.defer_fn(function()
+	vim.defer_fn(function() -- deferred to not trigger by jump itself
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			desc = "User(once): Reset diagnostics virtual lines",
 			once = true,

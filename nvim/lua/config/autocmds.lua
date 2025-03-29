@@ -81,7 +81,8 @@ local autoCdConfig = {
 		"Cellar", -- homebrew stuff
 	},
 }
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
 		local root = vim.fs.root(ctx.buf, function(name, path)
@@ -95,13 +96,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 --------------------------------------------------------------------------------
-
-vim.api.nvim_create_autocmd("FocusGained", {
-	desc = "User: FIX `cwd` being not available when it is deleted outside nvim.",
-	callback = function()
-		if not vim.uv.cwd() then vim.uv.chdir("/") end
-	end,
-})
 
 vim.api.nvim_create_autocmd("FocusGained", {
 	desc = "User: Close all non-existing buffers on `FocusGained`.",
@@ -248,7 +242,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 
 			-- adjust filetype if needed (e.g. when applying a zsh template to .sh files)
 			local newFt = vim.filetype.match { buf = bufnr }
-			if vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
+			if newFt and vim.bo[bufnr].ft ~= newFt then vim.bo[bufnr].ft = newFt end
 		end, 100)
 	end,
 })
@@ -301,16 +295,13 @@ end, 1)
 -- buffer (e.g., in a lua buffer, the lua parser is required)
 -- 2. Nerdfont icons
 
-local faviconConfig = {
-	hlGroup = "Comment",
-	icons = {
-		github = "",
-		neovim = "",
-		stackoverflow = "󰓌",
-		discord = "󰙯",
-		slack = "",
-		reddit = "",
-	},
+local favicon = {
+	github = "",
+	neovim = "",
+	stackoverflow = "󰓌",
+	discord = "󰙯",
+	slack = "",
+	reddit = "",
 }
 
 local function addFavicons(bufnr)
@@ -327,17 +318,18 @@ local function addFavicons(bufnr)
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 
 	local langTree = vim.treesitter.get_parser(bufnr)
+	if not langTree then return end
 	langTree:for_each_tree(function(tree, _)
 		local commentUrlNodes = urlQuery:iter_captures(tree:root(), bufnr)
 		vim.iter(commentUrlNodes):each(function(_, node)
 			local nodeText = vim.treesitter.get_node_text(node, bufnr)
 			local sitename = nodeText:match("(%w+)%.com") or nodeText:match("(%w+)%.io")
-			local icon = faviconConfig.icons[sitename]
+			local icon = favicon[sitename]
 			if not icon then return end
 
 			local row, col = node:start()
 			vim.api.nvim_buf_set_extmark(bufnr, ns, row, col, {
-				virt_text = { { icon .. " ", faviconConfig.hlGroup } },
+				virt_text = { { icon .. " ", "Comment" } },
 				virt_text_pos = "inline",
 			})
 		end)
