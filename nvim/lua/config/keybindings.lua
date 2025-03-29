@@ -95,7 +95,8 @@ for _, chars in pairs(trailChars) do
 end
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since nvim default
+-- remap, since using nvim default
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true })
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
@@ -269,8 +270,8 @@ do
 			vim.fn.winrestview { topline = topline + lines }
 		end)
 	end
-	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP window" })
-	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP window" })
+	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP win" })
+	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP win" })
 end
 
 --------------------------------------------------------------------------------
@@ -300,9 +301,9 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ip", vim.show_pos, { desc = " Position at cursor" })
-keymap("n", "<leader>it", vim.treesitter.inspect_tree, { desc = " TS tree" })
-keymap("n", "<leader>iq", vim.treesitter.query.edit, { desc = " TS query" })
+keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
 
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })

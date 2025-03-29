@@ -110,9 +110,9 @@ return {
 			},
 		},
 		lsp = {
-			progress = { enabled = false }, -- using my own
-			signature = { enabled = false }, -- using lsp_signature.nvim
-			hover = { enabled = false },
+			progress = { enabled = false }, -- using lualine
+			signature = { enabled = false }, -- using blink.cmp
+			hover = { enabled = true }, -- looks better than
 		},
 	},
 }

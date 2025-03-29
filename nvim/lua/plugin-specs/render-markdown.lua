@@ -46,12 +46,11 @@ return {
 		win_options = {
 			conceallevel = { default = 0, rendered = 2 },
 		},
-		-- Disable code blocks in LSP hovers, so it keeps concealing lines there
-		-- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/383
+		-- Hide code block lines in LSP hovers
 		overrides = {
 			buftype = {
 				nofile = {
-					enabled = false,
+					code = { border = "hide", style = "normal" }
 				},
 			},
 		},
