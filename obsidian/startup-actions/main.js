@@ -100,26 +100,28 @@ async function reloadPlugin(app, pluginId) {
 	new Notice(`"${pluginName}" reloaded.`);
 }
 
-function scrollIfNeeded(editor) {
+function ensureScrolloffset(editor) {
 	// biome-ignore lint/style/useNamingConvention: constant
-	const DISTANCE_PERCENT = 0.3;
+	const DISTANCE_PERCENT = 0.35; // CONFIG
 
-	if (!editor?.hasFocus()) return;
+	if (!editor.hasFocus()) return;
 	const cursor = editor.getCursor();
-	if (!cursor) return;
 	const cursorOffSet = editor.posToOffset(cursor);
 	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
-	if (!cursorCoord) return; // no coord = outside viewport
+	if (!cursorCoord) return; // no coord = cursor is outside viewport?
 
-	const editorHeight = editor.getScrollInfo().clientHeight;
-	const editorTop = editor.getScrollInfo().top;
-	const excessAtTop = editorHeight * DISTANCE_PERCENT - cursorCoord.top;
-	const excessAtBottom = editorHeight * (1 - DISTANCE_PERCENT) - cursorCoord.bottom;
-	if (excessAtTop < 0) {
-		// `y` is referring to the top of `.cm-scroller` and can be retrieved from `editor.getScrollInfo().top`
-		editor.scrollTo(null, editorTop - excessAtTop);
-	} else if (excessAtBottom > 0) {
-		editor.scrollTo(null, editorTop + excessAtBottom);
+	const viewportHeight = editor.getScrollInfo().clientHeight;
+	const viewportTop = editor.getScrollInfo().top;
+	const excessAtTop = viewportHeight * DISTANCE_PERCENT - cursorCoord.top;
+	const excessAtBottom = cursorCoord.bottom - viewportHeight * (1 - DISTANCE_PERCENT);
+	if (excessAtTop > 0) {
+		// INFO editor.scrollTo()'s y is referring to the top of `.cm-scroller`
+		// which can be retrieved from editor.getScrollInfo().top. It's an
+		// absolute value marking the top of the file (beyond the viewport).
+		editor.scrollTo(null, viewportTop - excessAtTop);
+	} 
+	if (excessAtBottom > 0) {
+		editor.scrollTo(null, viewportTop + excessAtBottom);
 	}
 }
 
@@ -135,7 +137,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 1. statusbar
 		this.app.workspace.onLayoutReady(() => updateStatusbar(this));
 		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
-		this.registerInterval(window.setInterval(() => updateStatusbar(this), 3000));
+		this.registerInterval(window.setInterval(() => updateStatusbar(this), 5000));
 
 		// 2. "New file in folder" command
 		this.addCommand({
@@ -162,7 +164,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 
 		// 5. scroll offset
 		this.registerEvent(
-			this.app.workspace.on("editor-selection-change", (editor) => scrollIfNeeded(editor)),
+			this.app.workspace.on("editor-selection-change", (editor) => ensureScrolloffset(editor)),
 		);
 	}
 }
