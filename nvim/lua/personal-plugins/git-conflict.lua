@@ -92,9 +92,9 @@ local function setupConflictMarkers(out, bufnr)
 
 		-- borders
 		local gitMarkerLength = 7
-		vim.api.nvim_buf_add_highlight(bufnr, ns, config.hlgroups.borders, lnum, 0, gitMarkerLength)
+		vim.hl.range(bufnr, ns, config.hlgroups.borders, { lnum, 0 }, { lnum, gitMarkerLength })
 		local typeHl = config.hlgroups[type] or config.hlgroups.stashed -- stashed on 4th border
-		vim.api.nvim_buf_add_highlight(bufnr, ns, typeHl, lnum, gitMarkerLength + 1, -1)
+		vim.hl.range(bufnr, ns, config.hlgroups.borders, { lnum, gitMarkerLength + 1 }, { lnum, -1 })
 
 		-- sign column
 		if type then

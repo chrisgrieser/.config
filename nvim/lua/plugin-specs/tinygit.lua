@@ -3,9 +3,9 @@ return {
 	event = "VeryLazy", -- load for status line component
 	keys = {
 		-- stylua: ignore start
+		{ "<leader>ga", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
 		{ "<leader>gg", function() require("tinygit").smartCommit { pushIfClean = true } end, desc = "󰊢 Smart-commit & push", nowait = true },
 		{ "<leader>gc", function() require("tinygit").smartCommit { pushIfClean = false } end, desc = "󰊢 Smart-commit" },
-		{ "<leader>gn", function() require("tinygit").interactiveStaging() end, desc = "󰊢 Interactive staging" },
 		{ "<leader>gp", function() require("tinygit").push { pullBefore = true } end, desc = "󰊢 Pull & push" },
 		{ "<leader>gP", function() require("tinygit").createGitHubPr() end, desc = " Create PR" },
 		{ "<leader>gf", function() require("tinygit").fixupCommit { autoRebase = true } end, desc = "󰊢 Fixup-commit & rebase" },
