@@ -29,9 +29,3 @@ matches:
           # only pastes clipboard content if it's a URL
           cmd: |
             [[ "$(pbpaste)" =~ ^\<?http.* ]] && pbpaste || echo ""
-  - trigger: "!table"
-    replace: |
-      ::: {custom-style="Table Caption"}
-      Table $|$:
-      :::
-    label: Pandoc Table Caption

@@ -2,7 +2,6 @@ return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
 
-
 	ft = "markdown",
 	keys = {
 		{
@@ -43,9 +42,18 @@ return {
 				researchgate = { pattern = "researchgate%.net", icon = "󰙨 " },
 			},
 		},
+		-- makes toggling this plugin also toggle conceallevel
 		win_options = {
-			-- makes toggling this plugin also toggle conceallevel
 			conceallevel = { default = 0, rendered = 2 },
+		},
+		-- Disable code blocks in LSP hovers, so it keeps concealing lines there
+		-- PENDING https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/383
+		overrides = {
+			buftype = {
+				nofile = {
+					enabled = false,
+				},
+			},
 		},
 	},
 }
