@@ -105,7 +105,7 @@ function scrollIfNeeded(editor) {
 	const DISTANCE_PERCENT = 30;
 
 	if (!editor?.hasFocus()) return;
-	const cursor = editor.getCursor()
+	const cursor = editor.getCursor();
 	if (!cursor) return;
 	const cursorOffSet = editor.posToOffset(cursor);
 	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
@@ -114,8 +114,7 @@ function scrollIfNeeded(editor) {
 	const editorHeight = editor.getScrollInfo().clientHeight;
 	const relativeCursorTop = Math.round((cursorCoord.top / editorHeight) * 100);
 	if (relativeCursorTop < DISTANCE_PERCENT || relativeCursorTop > 100 - DISTANCE_PERCENT) {
-		console.log("🪚 relativeCursorTop:", relativeCursorTop);
-		editor.scrollIntoView({ from: cursor, to: cursor }, true);
+		editor.scrollTo(null, cursorCoord.y);
 	}
 }
 
@@ -123,6 +122,7 @@ function scrollIfNeeded(editor) {
 
 class StartupActionsPlugin extends obsidian.Plugin {
 	statusbar = this.addStatusBarItem();
+	scrollRef = null;
 
 	onload() {
 		console.info(this.manifest.name + " loaded.");
@@ -156,8 +156,9 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		});
 
 		// 5. scroll offset
-		// "editor-selection-change" triggers on cursor movement
-		this.app.workspace.on("editor-selection-change", (editor) => scrollIfNeeded(editor));
+		this.registerEvent(
+			this.app.workspace.on("editor-selection-change", (editor) => scrollIfNeeded(editor)),
+		);
 	}
 }
 
