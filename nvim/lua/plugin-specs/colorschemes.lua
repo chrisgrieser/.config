@@ -27,6 +27,8 @@ local themes = {
 					["@string.special.url.comment"] = { style = "underline" },
 					["@markup.link.label.markdown_inline"] = { fg = "palette.orange.dim" }, -- for md in notifications
 					["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
+					["Added"] = { link = "diffAdded" },
+					["Removed"] = { link = "diffRemoved" },
 
 					-- 1. `inline` code in comments
 					-- 2. italic removed only in markdown, (still inherited from comments elsewhere)
@@ -112,8 +114,10 @@ local themes = {
 				hl["@keyword.break"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
-				hl["Comment"] = { fg = colors.comment, italic = false }
+				hl.Comment = { fg = colors.comment, italic = false }
 				hl.LspSignatureActiveParameter = { link = "Visual" }
+				hl.Added = { fg = colors.green2 }
+				hl.Removed = { fg = colors.red }
 
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
