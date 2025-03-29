@@ -13,7 +13,6 @@ return {
 		{"<leader>yf", function() require("genghis").copyFileItself() end, desc = "󱉥 File (macOS)" },
 		-- stylua: ignore end
 
-		-- stylua: ignore
 		{ "<leader>fr", function() require("genghis").renameFile() end, desc = "󰑕 Rename" },
 		{ "<leader>fn", function() require("genghis").createNewFile() end, desc = "󰝒 New" },
 		{ "<leader>fw", function() require("genghis").duplicateFile() end, desc = " Duplicate" },

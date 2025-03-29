@@ -5,13 +5,13 @@ local keymap = require("config.utils").uniqueKeymap
 keymap("n", "<D-,>", function()
 	local pathOfThisFile = debug.getinfo(1, "S").source:sub(2)
 	vim.cmd.edit(pathOfThisFile)
-end, { desc = "⌨️ Edit keybindings" })
+end, { desc = "󰌌 Edit keybindings" })
 
 -- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
 keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
 
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
-kymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
+keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -22,10 +22,10 @@ keymap({ "n", "x" }, "k", "gk")
 
 -- HJKL behaves like hjkl, but bigger distance
 -- (not mapping in op-pending, since using custom textobjects for those)
-kymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
+keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
 keymap({ "n", "x" }, "L", "$zv", { desc = "󰬓 char" }) -- zv: unfold under cursor
-kymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
+keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
 -- Jump history
