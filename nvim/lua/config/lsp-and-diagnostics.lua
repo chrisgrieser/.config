@@ -31,19 +31,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 
 --------------------------------------------------------------------------------
--- INLAY HINTS pause in insert mode
-do
-	vim.api.nvim_create_autocmd("InsertEnter", {
-		desc = "User: Disable LSP inlay hints",
-		callback = function(ctx) vim.lsp.inlay_hint.enable(false, { bufnr = ctx.buf }) end,
-	})
-	vim.api.nvim_create_autocmd("InsertLeave", {
-		desc = "User: Enable LSP inlay hints",
-		callback = function(ctx) vim.lsp.inlay_hint.enable(true, { bufnr = ctx.buf }) end,
-	})
-end
-
---------------------------------------------------------------------------------
 -- DIAGNOSTICS display
 
 ---@param diag vim.Diagnostic

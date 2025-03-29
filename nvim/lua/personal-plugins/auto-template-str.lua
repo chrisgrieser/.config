@@ -92,15 +92,14 @@ function M.insertTemplateStr()
 		javascript = jsStr,
 		typescript = jsStr,
 	}
-	local updateFunc = availableFiletypes[vim.bo.filetype]
+	local updateFunc = availableFiletypes[vim.bo.ft]
 	if not updateFunc then
 		warn("Not configured for " .. vim.bo.ft)
 		return
 	end
 
 	local nodeAtCursor = vim.treesitter.get_node()
-	if not nodeAtCursor then return end
-	updateFunc(nodeAtCursor)
+	if nodeAtCursor then updateFunc(nodeAtCursor) end
 end
 
 --------------------------------------------------------------------------------

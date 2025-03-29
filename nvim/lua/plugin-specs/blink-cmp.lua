@@ -99,11 +99,12 @@ local blinkConfig = {
 			enabled = true,
 			trigger = { show_on_insert = true },
 			window = {
-				border = "solid",
-				show_documentation = false, -- show larger documentation regular signature help
 				max_width = 65,
-				max_height = 5,
+				max_height = 4,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
+				show_documentation = false, -- show larger documentation regular signature help
+				winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
+				border = "none",
 			},
 		},
 		completion = {
