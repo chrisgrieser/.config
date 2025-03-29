@@ -22,16 +22,11 @@ return {
 	},
 	keys = {
 		-- stylua: ignore start
-		{ "<leader>ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 Stage hunk" },
-		{ "<leader>ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 Stage selection" },
+		{ "ga", "<cmd>Gitsigns stage_hunk<CR>", desc = "󰊢 (Un-)Stage hunk" },
+		{ "ga", ":Gitsigns stage_hunk<CR>", mode = "x", silent = true, desc = "󰊢 (Un-)Stage selection" },
 		{ "<leader>gA", "<cmd>Gitsigns stage_buffer<CR>", desc = "󰊢 Stage file" },
 
-		{ "gh", function() require("gitsigns").nav_hunk("next", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Next hunk" },
-		{ "gH", function() require("gitsigns").nav_hunk("prev", { foldopen = true, navigation_message = true }) end, desc = "󰊢 Previous hunk" },
-		{ "gh", "<cmd>Gitsigns select_hunk<CR>", mode = { "o", "x" }, desc = "󰊢 Hunk textobj" },
-
 		-- UNDO
-		{ "<leader>ua", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "󰍵 Unstage last stage" },
 		{ "<leader>uA", "<cmd>Gitsigns reset_buffer_index<CR>", desc = "󰍵 Unstage file" },
 		{ "<leader>uh", "<cmd>Gitsigns reset_hunk<CR>", mode = { "n", "x" }, desc = "󰊢 Reset hunk" },
 		{ "<leader>uf", "<cmd>Gitsigns reset_buffer<CR>", desc = "󰊢 Reset file" },
@@ -40,15 +35,6 @@ return {
 			"<leader>o?",
 			function() require("gitsigns").toggle_current_line_blame() end,
 			desc = "󰆽 Line blame",
-		},
-		{
-			"<leader>oi",
-			function()
-				require("gitsigns").toggle_deleted()
-				require("gitsigns").toggle_word_diff()
-				require("gitsigns").toggle_linehl()
-			end,
-			desc = "󰊢 Inline diff",
 		},
 		{
 			"<leader>op",
