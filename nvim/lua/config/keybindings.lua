@@ -166,9 +166,10 @@ keymap("n", "P", function()
 	vim.api.nvim_set_current_line(curLine .. " " .. reg)
 end, { desc = " Sticky paste at EoL" })
 
+
 keymap("i", "<D-v>", function()
-	local reg = vim.trim(vim.fn.getreg("+")):gsub("\n%s*$", "\n") -- remove indentation if multi-line
-	vim.fn.setreg("+", reg, "v")
+	local reg = vim.trim(vim.fn.getreg("+"))
+	vim.fn.setreg("+", reg, "v") -- force charwise
 	return "<C-g>u<C-r><C-o>+" -- `<C-g>u` adds undopoint before the paste
 end, { desc = " Paste charwise", expr = true })
 
