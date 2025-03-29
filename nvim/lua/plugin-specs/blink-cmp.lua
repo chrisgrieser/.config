@@ -1,5 +1,7 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
+-- INFO has a small config block at `nvim-lspconfig`
+--------------------------------------------------------------------------------
 
 local blinkConfig = {
 	"saghen/blink.cmp",
@@ -97,12 +99,9 @@ local blinkConfig = {
 			enabled = true,
 			trigger = { show_on_insert = true },
 			window = {
-				-- have a minimal window only, show larger documentation on explicit
-				-- signature help command
-				border = "none", -- save space
-				show_documentation = false, -- save space
-				winhighlight = "Normal:ColorColumn", -- = darker bg in most themes
-				max_width = 70,
+				border = "solid",
+				show_documentation = false, -- show larger documentation regular signature help
+				max_width = 65,
 				max_height = 5,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
 			},

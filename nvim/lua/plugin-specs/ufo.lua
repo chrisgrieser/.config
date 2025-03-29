@@ -1,5 +1,9 @@
--- `:h vim.lsp.foldexpr()` also allows to use folds with LSP, however, the folds
--- look nicer with ufo still, so still using it
+--------------------------------------------------------------------------------
+-- INFO has a small config block at `nvim-lspconfig`
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
 
 return {
 	"kevinhwang91/nvim-ufo",

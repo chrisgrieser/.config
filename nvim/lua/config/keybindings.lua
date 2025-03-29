@@ -312,11 +312,21 @@ keymap("n", "<leader>ip", vim.show_pos, { desc = " Position at cursor" })
 keymap("n", "<leader>it", vim.treesitter.inspect_tree, { desc = " TS tree" })
 keymap("n", "<leader>iq", vim.treesitter.query.edit, { desc = " TS query" })
 
--- stylua: ignore start
-keymap("n", "<leader>il", function() require("personal-plugins.inspect-and-eval").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
-keymap("n", "<leader>ib", function() require("personal-plugins.inspect-and-eval").bufferInfo() end, { desc = "󰽙 Buffer info" })
-keymap({ "n", "x" }, "<leader>ee", function() require("personal-plugins.inspect-and-eval").evalNvimLua() end, { desc = " Eval" })
--- stylua: ignore end
+-- stylua: ignore
+keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
+-- stylua: ignore
+keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
+
+keymap({ "n", "x" }, "<leader>es", function()
+	local location = vim.fn.stdpath("config") .. "/debug"
+	vim.fn.mkdir(location, "p")
+	local currentExt = vim.fn.expand("%:e")
+	local path = location .. "/scratch." .. currentExt
+	vim.cmd.edit(path)
+	vim.cmd.write(path)
+end, { desc = "󰈮 Scratch file" })
+
+keymap({ "n", "x" }, "<leader>ee", ":lua = ", { desc = " Eval" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
@@ -360,15 +370,6 @@ keymap({ "n", "x", "i" }, "<D-w>", function()
 	local winClosed = pcall(vim.cmd.close)
 	if not winClosed then require("personal-plugins.alt-alt").deleteBuffer() end
 end, { desc = "󰽙 Close window/buffer" })
-
-keymap({ "n", "x" }, "<leader>es", function()
-	local location = vim.fn.stdpath("config") .. "/debug"
-	vim.fn.mkdir(location, "p")
-	local currentExt = vim.fn.expand("%:e")
-	local path = location .. "/scratch." .. currentExt
-	vim.cmd.edit(path)
-	vim.cmd.write(path)
-end, { desc = "󰈮 Scratch file" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openAlfredPref() end, { desc = "󰮤 Reveal in Alfred" })
