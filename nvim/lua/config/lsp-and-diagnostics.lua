@@ -1,4 +1,6 @@
+--------------------------------------------------------------------------------
 -- RENAMING add notification & writeall to renaming
+
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -32,7 +34,6 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 
 --------------------------------------------------------------------------------
-
 -- INLAY HINTS pause in insert mode
 do
 	vim.api.nvim_create_autocmd("InsertEnter", {
@@ -57,7 +58,7 @@ local function formatDiagnostic(diag)
 	local msg = diag.message:gsub("%.%s*$", "")
 
 	if not diag.code then return ("%s (%s)"):format(msg, source, diag.code) end
-	return ("%s (%s: %s)"):format(msg, source, diag.code)
+	return ("%s [%s: %s]"):format(msg, source, diag.code)
 end
 
 vim.diagnostic.config {
@@ -73,6 +74,7 @@ vim.diagnostic.config {
 
 --------------------------------------------------------------------------------
 -- DIAGNOSTICS as virtual lines when jumping
+
 local function diagnosticsAsVirtualLines()
 	local initialVirtTextConf = vim.diagnostic.config().virtual_text
 	vim.diagnostic.config {
@@ -81,7 +83,7 @@ local function diagnosticsAsVirtualLines()
 	}
 	vim.defer_fn(function()
 		vim.api.nvim_create_autocmd("CursorMoved", {
-			group = vim.api.nvim_create_augroup("line-diagnostics", {}),
+			desc = "User(once): Reset diagnostics virtual lines",
 			once = true,
 			callback = function()
 				vim.diagnostic.config {
