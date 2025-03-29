@@ -331,5 +331,13 @@
       ],
       "key": "P"
     }
+  ],
+  "obsidian-wordy:wordy-syn": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "["
+    }
   ]
 }
