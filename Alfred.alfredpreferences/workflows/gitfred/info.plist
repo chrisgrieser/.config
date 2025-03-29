@@ -1425,10 +1425,10 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Info
+	<string>## ℹ️ Recent change
 `restore mtime` has been reworked to be magnitudes quicker. 
 If you have enabled it in past versions, please check your workflow configuration, 
-since there are no different options for it.
+since there are now different options for it.
 
 ## Usage
 - Search all public GitHub repositories via the keyword `gh`.
@@ -2048,7 +2048,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.7.4</string>
+	<string>1.7.5</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

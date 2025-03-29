@@ -253,18 +253,11 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
 do
-	local signatureOpts = {
-		max_width = 70,
-		max_height = 12,
-	}
+	local signatureOpts = { max_width = 70, max_height = 12 }
 	-- stylua: ignore
 	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help(signatureOpts) end, { desc = "󰏪 LSP signature" })
 
-	local hoverOpts = {
-		max_width = 70,
-		silent = true,
-		title = " LSP hover ",
-	}
+	local hoverOpts = { max_width = 70, silent = true }
 	-- stylua: ignore
 	keymap({ "n", "x" }, "<leader>h", function() vim.lsp.buf.hover(hoverOpts) end, { desc = "󰋽 LSP hover" })
 
