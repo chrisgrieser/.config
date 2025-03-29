@@ -100,6 +100,24 @@ async function reloadPlugin(app, pluginId) {
 	new Notice(`"${pluginName}" reloaded.`);
 }
 
+function scrollIfNeeded(editor) {
+	// biome-ignore lint/style/useNamingConvention: constant
+	const DISTANCE_PERCENT = 30;
+	if (!editor?.hasFocus()) return;
+	const cursorOffSet = editor.posToOffset(editor.getCursor());
+	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
+	if (!cursorCoord) return; // no coord = outside viewport
+
+	const editorHeight = editor.getScrollInfo().clientHeight;
+	const relativeCursorTop = Math.round((cursorCoord.top / editorHeight) * 100);
+	if (relativeCursorTop < DISTANCE_PERCENT || relativeCursorTop > 100 - DISTANCE_PERCENT) {
+		const scrollNeeded = (DISTANCE_PERCENT / 100) * editorHeight;
+		const scrollAmount = Math.min(scrollNeeded, editorHeight / 2);
+		// editor.cm.scrollIntoView(null, scrollAmount);
+		console.log("🪚 editor.cm:", editor.cm);
+	}
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
@@ -127,13 +145,18 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 4. register URIs
 		this.app.workspace.onLayoutReady(() => {
 			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
-				await reloadPlugin(this.app, uriParams?.id);
+				const pluginId = uriParams?.id;
+				await reloadPlugin(this.app, pluginId);
 			});
 
 			this.registerObsidianProtocolHandler("reload-vault", () => {
 				this.app.commands.executeCommandById("app:reload");
 			});
 		});
+
+		// 5. scroll offset
+		// "editor-selection-change" triggers on cursor movement
+		this.app.workspace.on("editor-selection-change", (editor) => scrollIfNeeded(editor));
 	}
 }
 
