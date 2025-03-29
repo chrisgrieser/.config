@@ -112,9 +112,11 @@ local themes = {
 				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 				hl["@keyword.break"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
-				hl["diffAdded"] = { fg = colors.green }
 				hl["@string.documentation.python"] = { link = "Comment" }
 				hl["Comment"] = { fg = colors.comment, italic = false }
+
+				hl["diffAdded"].bg = nil -- e.g., tinygit commit preview
+				hl["diffRemoved"].bg = nil
 
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
