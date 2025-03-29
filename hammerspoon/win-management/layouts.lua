@@ -49,8 +49,13 @@ if not env.isAtOffice then
 		.new(true, "moveAllWinsToProjectorScreen")
 		:setTitle("Ⱅ ") ---@diagnostic disable-line: undefined-field
 		:setClickCallback(function()
-			if #hs.screen.allScreens() < 2 then return end
+			if #hs.screen.allScreens() < 2 then
+				hs.alert.show("This function is only intended for multi-monitor setups.")
+				return
+			end
+
 			wu.iMacDisplay:setBrightness(0)
+			darkmode.setDarkMode("dark")
 			local projectorScreen = hs.screen.primaryScreen()
 			for _, win in pairs(hs.window:orderedWindows()) do
 				win:moveToScreen(projectorScreen, true)
