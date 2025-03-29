@@ -44,6 +44,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			if success then
 				-- needs to be zipped again, since browser auto-opens all zip files
 				hs.execute(([[
+					rm -rf ../violentmonkey.zip # remove existing archive
 					cd "%s/violentmonkey" || exit 1
 					zip --recurse-paths ../violentmonkey.zip .
 					cd .. && rm -rf ./violentmonkey
