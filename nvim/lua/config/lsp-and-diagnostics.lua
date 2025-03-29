@@ -21,11 +21,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	local pluralS = changeCount > 1 and "s" or ""
 	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
 	if #changedFiles > 1 then
-		msg = ("**%s in [%d] files**\n%s"):format(
-			msg,
-			#changedFiles,
-			table.concat(changedFiles, "\n")
-		)
+		local fileList = table.concat(changedFiles, "\n")
+		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, fileList)
 	end
 	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
@@ -96,10 +93,12 @@ local function diagnosticsAsVirtualLines()
 end
 
 local keymap = require("config.utils").uniqueKeymap
+
 keymap("n", "ge", function()
 	vim.diagnostic.jump { count = 1 }
 	diagnosticsAsVirtualLines()
 end, { desc = "󰒕 Next diagnostic" })
+
 keymap("n", "gE", function()
 	vim.diagnostic.jump { count = -1 }
 	diagnosticsAsVirtualLines()
