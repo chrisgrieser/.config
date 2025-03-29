@@ -293,7 +293,7 @@ end, 1)
 -- inspired by the Obsidian favicon plugin: https://github.com/joethei/obsidian-link-favicon
 
 -- REQUIRED
--- 1. `comment` parser (`:TSInstall comment`) and active parser for the current
+-- 1. `comment` parser (`:TSInstall comment`) & active parser for the current
 -- buffer (e.g., in a lua buffer, the lua parser is required)
 -- 2. Nerdfont icons
 

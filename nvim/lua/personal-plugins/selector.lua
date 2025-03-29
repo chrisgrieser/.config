@@ -19,10 +19,6 @@ local keymaps = {
 ---@param on_choice fun(item: any|nil, idx: integer|nil)
 ---@diagnostic disable-next-line: duplicate-set-field -- intentional overwrite
 vim.ui.select = function(items, opts, on_choice)
-	if #items == 0 then
-		vim.notify("No items to select from.", nil, { title = "Selector", icon = "" })
-		return
-	end
 	assert(type(on_choice) == "function", "`on_choice` must be a function.")
 
 	-- OPTIONS
@@ -41,6 +37,11 @@ vim.ui.select = function(items, opts, on_choice)
 		opts.format_item = function(item)
 			return ("%s [%s]"):format(item.action.title, item.action.kind)
 		end
+	end
+
+	if #items == 0 then
+		vim.notify("No items to select from.", nil, { title = opts.prompt, icon = "" })
+		return
 	end
 
 	-- PARAMETERS

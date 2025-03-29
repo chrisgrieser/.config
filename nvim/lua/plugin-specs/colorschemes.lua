@@ -100,7 +100,6 @@ local themes = {
 			styles = {
 				comments = { italic = false },
 			},
-			day_brightness = 0.2,
 			lualine_bold = true,
 			on_colors = function(colors)
 				colors.git.change = colors.yellow -- yellow, not blue
@@ -114,9 +113,7 @@ local themes = {
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
 				hl["Comment"] = { fg = colors.comment, italic = false }
-
-				hl["diffAdded"].bg = nil -- e.g., tinygit commit preview
-				hl["diffRemoved"].bg = nil
+				hl.LspSignatureActiveParameter = { link = "Visual" }
 
 				-- FIX bold/italic being white in lazy.nvim window
 				hl.Bold = { bold = true }
@@ -139,7 +136,7 @@ local themes = {
 				hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
 				-- mini.icons
-				hl.MiniIconsGreen = { fg = "#9de88d" } -- better green tone
+				hl.MiniIconsGreen = { fg = "#9de88d" }
 				hl.MiniIconsGrey = { fg = colors.fg_dark }
 
 				-- cursorword
