@@ -12,22 +12,16 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	keys = {
-		{
-			"<leader>iK",
-			-- alternative: `:Telescope keymaps` with `only_buf = true`
-			function() require("which-key").show { global = false } end,
-			desc = "⌨️ Keymaps (buffer)",
-		},
+		-- alternative: `:Telescope keymaps` with `only_buf = true`
+		-- stylua: ignore
+		{ "<leader>iK", function() require("which-key").show { global = false } end, desc = "󰌌 Keymaps (buffer)" },
 	},
 	opts = {
-		delay = 444,
-
-		-- https://github.com/folke/which-key.nvim/blob/main/lua/which-key/presets.lua
+		delay = 400,
 		preset = "helix",
 		win = {
 			border = vim.o.winborder,
 			height = { min = 1, max = 0.99 },
-			no_overlap = false, -- `false` = allow popup over the cursor
 		},
 
 		spec = {
@@ -44,7 +38,7 @@ return {
 				{ "<leader>q", group = " Quickfix" },
 				{ "<leader>u", group = "󰕌 Undo" },
 			},
-			{ -- not using `text_objects` preset, since it's too crowded
+			{ -- using my list instead of `text_objects` preset, since it's too crowded
 				mode = { "o", "x" },
 				{ "r", group = "rest of" },
 				{ "i", group = "inner" },
@@ -84,7 +78,8 @@ return {
 		filter = function(map)
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
-			local nvimBultins = { "gc", "gcc", "]d", "zf", "g~", "gu", "gU", "<C-W><C-D>", "<C-W>d" }
+			-- stylua: ignore
+			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gO", "gU", "gc", "gcc", "gra", "gri", "grn", "grr", "gu", "g~", "zf" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
 			return map.desc ~= nil

@@ -403,7 +403,7 @@ return {
 			desc = "󰋖 Vim help",
 		},
 		-- stylua: ignore
-		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "⌨️ Keymaps (global)" },
+		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore
 		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
 
