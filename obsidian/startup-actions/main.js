@@ -112,15 +112,14 @@ function scrollIfNeeded(editor) {
 	if (!cursorCoord) return; // no coord = outside viewport
 
 	const editorHeight = editor.getScrollInfo().clientHeight;
+	const editorTop = editor.getScrollInfo().top;
 	const relativeCursorTop = Math.round((cursorCoord.top / editorHeight) * 100);
-	// if (relativeCursorTop < DISTANCE_PERCENT || relativeCursorTop > 100 - DISTANCE_PERCENT) {
-	if (relativeCursorTop > 100 - DISTANCE_PERCENT) {
-		// NOTE unclear what the `x` and `y` are referring to, making it
-		// impossible to use this correctly https://docs.obsidian.md/Reference/TypeScript+API/Editor/scrollTo
-		// editor.scrollTo(null, 100);
-		const aboveCursor = cursorCoord.top - 2 * editorHeight * (DISTANCE_PERCENT / 100);
-		const offSetOfAboveCursor = editor.cm.posAtCoords({ x: 0, y: aboveCursor });
-		editor.scrollIntoView({ from: { line: 1, ch: 1 }, to: { line: 1, ch: 1 } }, true);
+	const scrollDistance = editorHeight * 0.06;
+	if (relativeCursorTop < DISTANCE_PERCENT) {
+		// `y` is referring to the top of `.cm-scroller` and can be retrieved from `editor.getScrollInfo().top`
+		editor.scrollTo(null, editorTop - scrollDistance);
+	} else if (relativeCursorTop > 100 - DISTANCE_PERCENT) {
+		editor.scrollTo(null, editorTop + scrollDistance);
 	}
 }
 
