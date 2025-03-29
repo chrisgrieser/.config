@@ -85,6 +85,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
+		if not vim.uv.cwd() then vim.uv.chdir("/") end -- FIX error when no cwd
+
 		local root = vim.fs.root(ctx.buf, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
 			local dirHasParentMarker = vim.tbl_contains(autoCdConfig.parentOfRoot, parentName)
