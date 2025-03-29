@@ -110,9 +110,9 @@ return {
 			},
 		},
 		lsp = {
-			progress = { enabled = false }, -- using lualine
-			signature = { enabled = false }, -- using blink.cmp
-			hover = { enabled = true }, -- looks better than
+			progress = { enabled = false }, -- using `lualine`
+			signature = { enabled = false }, -- using `blink.cmp`
+			hover = { enabled = true }, -- looks better than `render-markdown`
 		},
 	},
 }
