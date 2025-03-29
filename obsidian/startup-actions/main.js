@@ -58,7 +58,7 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 		// create, open, and rename
 		const newFile = await this.app.vault.create(`${folder.path}/${name}.md`, "");
 		await this.app.workspace.getLeaf().openFile(newFile);
-		this.app.commands.executeCommandById("editor:save-file"); // trigger linter for frontmatter
+		this.app.commands.executeCommandById("editor:save-file"); // triggers linter for frontmatter
 		this.app.commands.executeCommandById("workspace:edit-file-title"); // rename
 	}
 }
@@ -108,7 +108,7 @@ function ensureScrolloffset(editor) {
 	const cursor = editor.getCursor();
 	const cursorOffSet = editor.posToOffset(cursor);
 	const cursorCoord = editor.cm.coordsAtPos(cursorOffSet);
-	if (!cursorCoord) return; // no coord = cursor is outside viewport?
+	if (!cursorCoord) return; // cursor is outside viewport, e.g., due to mouse-scrolling
 
 	const viewportHeight = editor.getScrollInfo().clientHeight;
 	const viewportTop = editor.getScrollInfo().top;
@@ -151,6 +151,7 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		if (!this.app.isMobile) electronWindow.setWindowButtonVisibility(false);
 
 		// 4. register URIs
+		// use via: obsidian://reload-plugin?id=plugin_id&vault=vault_name
 		this.app.workspace.onLayoutReady(() => {
 			this.registerObsidianProtocolHandler("reload-plugin", async (uriParams) => {
 				const pluginId = uriParams?.id;
