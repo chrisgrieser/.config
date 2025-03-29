@@ -144,7 +144,7 @@ end
 --------------------------------------------------------------------------------
 
 function M.spellSuggest()
-	local limit = 9 -- CONFIG
+	local limit = 9
 	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
 	suggestions = vim.list_slice(suggestions, 1, limit)
 
@@ -188,13 +188,14 @@ function M.gotoMostChangedFile()
 			targetFile = absPath
 		end
 	end)
+
+	-- goto file
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then
 		vim.notify("Already at only changed file.", nil, notifyOpts)
-		return
+	else
+		vim.cmd.edit(targetFile)
 	end
-
-	vim.cmd.edit(targetFile)
 end
 
 --------------------------------------------------------------------------------
@@ -254,6 +255,8 @@ function M.formatWithFallback()
 	end
 end
 
+--------------------------------------------------------------------------------
+
 function M.lspCapabilities()
 	local clients = vim.lsp.get_clients { bufnr = 0 }
 	if #clients == 0 then
@@ -262,7 +265,6 @@ function M.lspCapabilities()
 	end
 	vim.ui.select(clients, {
 		prompt = "󱈄 Select LSP:",
-		kind = "plain",
 		format_item = function(client) return client.name end,
 	}, function(client)
 		if not client then return end

@@ -1,13 +1,11 @@
 -- INFO A simple UI for `vim.ui.select`. Requires nvim 0.10+
 
-local config = {
-	keymaps = {
-		confirm = "<CR>",
-		abort = { "<Esc>", "q" },
-		next = "<Tab>",
-		prev = "<S-Tab>",
-		inspectItem = "?",
-	},
+local keymaps = {
+	confirm = "<CR>",
+	abort = { "<Esc>", "q" },
+	next = "<Tab>",
+	prev = "<S-Tab>",
+	inspectItem = "?",
 }
 --------------------------------------------------------------------------------
 
@@ -66,7 +64,6 @@ vim.ui.select = function(items, opts, on_choice)
 		title = " " .. opts.prompt .. " ",
 		footer = { { footer, "NonText" } },
 		footer_pos = "right",
-		border = config.border,
 		style = "minimal",
 	})
 	vim.wo[winid].statuscolumn = " " -- = left-padding
@@ -84,17 +81,17 @@ vim.ui.select = function(items, opts, on_choice)
 
 	-- KEYMAPS
 	local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = bufnr, nowait = true }) end
-	for _, key in ipairs(config.keymaps.abort) do
+	for _, key in ipairs(keymaps.abort) do
 		map(key, vim.cmd.bwipeout)
 	end
-	map(config.keymaps.next, function() vim.cmd.normal { "j", bang = true } end)
-	map(config.keymaps.prev, function() vim.cmd.normal { "k", bang = true } end)
-	map(config.keymaps.confirm, function()
+	map(keymaps.next, function() vim.cmd.normal { "j", bang = true } end)
+	map(keymaps.prev, function() vim.cmd.normal { "k", bang = true } end)
+	map(keymaps.confirm, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		vim.cmd.bwipeout()
 		on_choice(items[lnum], lnum)
 	end)
-	map(config.keymaps.inspectItem, function()
+	map(keymaps.inspectItem, function()
 		local lnum = vim.api.nvim_win_get_cursor(0)[1]
 		local infoOnItem = vim.inspect(items[lnum])
 		vim.notify(infoOnItem, nil, { title = "Selector: inspect", icon = "", ft = "lua" })
