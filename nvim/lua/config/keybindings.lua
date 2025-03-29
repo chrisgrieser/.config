@@ -256,7 +256,6 @@ do
 	local signatureOpts = {
 		max_width = 70,
 		max_height = 12,
-		focusable = false,
 	}
 	-- stylua: ignore
 	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help(signatureOpts) end, { desc = "󰏪 LSP signature" })

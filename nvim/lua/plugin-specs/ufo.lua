@@ -1,9 +1,6 @@
 --------------------------------------------------------------------------------
 -- INFO has a small config block at `nvim-lspconfig`
 --------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-
 
 return {
 	"kevinhwang91/nvim-ufo",
@@ -42,6 +39,9 @@ return {
 		},
 		open_fold_hl_timeout = 800,
 		provider_selector = function(_bufnr, ft, _buftype)
+			-- `:h vim.lsp.foldexpr()` also allows to use folds with LSP, however, the folds
+			-- look nicer with `ufo` still, so still using it
+
 			-- ufo accepts only two kinds as priority, see https://github.com/kevinhwang91/nvim-ufo/issues/256
 			local lspWithOutFolding = { "markdown", "zsh", "bash", "css", "python", "json" }
 			if vim.tbl_contains(lspWithOutFolding, ft) then return { "treesitter", "indent" } end

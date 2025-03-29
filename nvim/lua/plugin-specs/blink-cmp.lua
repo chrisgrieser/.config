@@ -116,10 +116,7 @@ local blinkConfig = {
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
-				window = {
-					max_width = 50,
-					max_height = 20,
-				},
+				window = { max_width = 50, max_height = 20 },
 			},
 			menu = {
 				draw = {
