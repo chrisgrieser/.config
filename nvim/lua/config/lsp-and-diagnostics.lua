@@ -82,6 +82,7 @@ local function diagnosticsAsVirtualLines()
 		vim.api.nvim_create_autocmd("CursorMoved", {
 			desc = "User(once): Reset diagnostics virtual lines",
 			once = true,
+			group = vim.api.nvim_create_augroup("jump-virtual-lines", {}),
 			callback = function()
 				vim.diagnostic.config {
 					virtual_lines = false,
