@@ -112,7 +112,10 @@ return {
 		lsp = {
 			progress = { enabled = false }, -- using `lualine`
 			signature = { enabled = false }, -- using `blink.cmp`
-			hover = { enabled = true }, -- looks better than `render-markdown`
+
+			-- BUG looks better than `render-markdown`, but due to winborder bug
+			-- not using it yet
+			hover = { enabled = false }, 
 		},
 	},
 }

@@ -104,7 +104,7 @@ local blinkConfig = {
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
 				show_documentation = false, -- show larger documentation regular signature help
 				winhighlight = "Normal:ColorColumn", -- usually darker, so more contrast
-				border = "none",
+				border = "none", -- should be small since it appears so often
 			},
 		},
 		completion = {
@@ -140,13 +140,6 @@ local blinkConfig = {
 								if source == "path" then return "" end
 								if lspName == "emmet_language_server" then return "" end
 								return ctx.kind_icon
-							end,
-							-- use highlights from mini.icons
-							highlight = function(ctx)
-								local installed, miniIcons = pcall(require, "mini.icons")
-								if not installed then return ctx.kind_hl end
-								local _, hl, _ = miniIcons.get("lsp", ctx.kind)
-								return hl
 							end,
 						},
 					},
