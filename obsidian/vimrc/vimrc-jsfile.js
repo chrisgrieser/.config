@@ -178,11 +178,7 @@ function smartOpenLine(where) {
 		curLine.match(/^\s*/) || [""]; // just indent
 
 	// increment ordered list
-	const orderedList = indentAndText.match(/\d+/)?.[0];
-	if (orderedList) {
-		const inrecremented = (Number.parseInt(orderedList) + 1).toString();
-		indentAndText = indentAndText.replace(/\d+/, inrecremented);
-	}
+	indentAndText = indentAndText.replace(/\d+/, (n) => (Number.parseInt(n) + 1).toString());
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
 	const atEndOfFile = editor.lastLine() === lnum && where === "below";
