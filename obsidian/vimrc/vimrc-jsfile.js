@@ -177,8 +177,9 @@ function smartOpenLine(where) {
 		curLine.match(/^\s*\d+[.)] /) || // ordered list
 		curLine.match(/^\s*/) || [""]; // just indent
 
-	// increment ordered list
-	indentAndText = indentAndText.replace(/\d+/, (n) => (Number.parseInt(n) + 1).toString());
+	indentAndText = indentAndText
+		.replace(/\d+/, (n) => (Number.parseInt(n) + 1).toString()) // increment ordered list
+		.replace(/\[x\]/, "[ ]"); // new tasks should be open
 
 	const targetLine = where === "above" ? lnum : lnum + 1;
 	const atEndOfFile = editor.lastLine() === lnum && where === "below";
