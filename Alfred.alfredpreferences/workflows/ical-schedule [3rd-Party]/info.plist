@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.thetinygoat.alfred-schedule</string>
+	<key>category</key>
+	<string>⬇️</string>
+	<key>connections</key>
+	<dict>
+		<key>492E21D0-FD64-4ED2-8CF0-DA6D54822C06</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AECDD8B8-0BC7-417A-BE38-3E608E7ADAF2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>thetinygoat</string>
+	<key>description</key>
+	<string>Shows events from apple calendar. Can also open meeting links present in the event</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Schedule</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>AECDD8B8-0BC7-417A-BE38-3E608E7ADAF2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>cal</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>ical2json.swift</string>
+				<key>subtext</key>
+				<string>View upcoming events and meetings</string>
+				<key>title</key>
+				<string>View your schedule</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>492E21D0-FD64-4ED2-8CF0-DA6D54822C06</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Calendar Events Alfred Workflow
+
+A fast and lightweight Alfred workflow to view your upcoming calendar events directly from Alfred.
+
+## Features
+- View upcoming calendar events with a simple command
+- Quickly join meetings by selecting an event with a URL
+- Specify how many days of events to display
+- Built with Swift using Apple's EventKit for optimal performance
+
+## Usage
+
+Basic command structure:
+```
+sch [number of days]
+```
+
+### Examples
+
+- `sch` - Show events for the next 1 day (default)
+- `sch 3` - Show events for the next 3 days
+- `sch 7` - Show events for the next week
+
+Press Enter on any event with a meeting URL to open it in your default browser.
+
+## Installation
+
+1. Download the workflow file
+2. Double-click to install in Alfred
+3. First run may require calendar access permissions
+
+## Links
+- [thetinygoat](https://x.com/thetinygoat)
+- [GitHub](https://github.com/thetinygoat/alfred-schedule)</string>
+	<key>uidata</key>
+	<dict>
+		<key>492E21D0-FD64-4ED2-8CF0-DA6D54822C06</key>
+		<dict>
+			<key>xpos</key>
+			<real>90</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>AECDD8B8-0BC7-417A-BE38-3E608E7ADAF2</key>
+		<dict>
+			<key>xpos</key>
+			<real>315</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.2.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/thetinygoat/alfred-schedule</string>
+</dict>
+</plist>
