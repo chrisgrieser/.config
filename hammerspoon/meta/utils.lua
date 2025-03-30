@@ -259,7 +259,11 @@ function M.closeAllTheThings()
 	-- "do you really want to x tabs?"
 	M.closeBrowserTabsWith(".")
 	require("win-management.auto-tile").resetWinCount("Brave Browser")
+
+	-- prevent the automatic quitting of audio-apps from triggering starting spotify
+	require("apps.spotify").aw_spotify:stop()
 	M.quitApps(M.videoAndAudioApps)
+	require("apps.spotify").aw_spotify:start()
 
 	M.defer(3, function() M.closeAllWindows("Finder") end)
 end

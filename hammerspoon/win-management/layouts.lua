@@ -6,7 +6,6 @@ local holeCover = require("appearance.hole-cover")
 local u = require("meta.utils")
 local wu = require("win-management.window-utils")
 local c = hs.caffeinate.watcher
-local videoAppWatcherForSpotify = require("apps.spotify").aw_spotify
 
 --------------------------------------------------------------------------------
 -- HELPERS
@@ -73,13 +72,10 @@ local function workLayout()
 	darkmode.autoSwitch()
 	dockSwitcher("work")
 
-	-- prevent the automatic quitting of audio-apps from triggering starting spotify
-	videoAppWatcherForSpotify:stop()
 	u.closeAllTheThings()
-	videoAppWatcherForSpotify:start()
 
 	u.openApps { "Slack", "Ivory", "Mimestream" }
-	u.defer(1, function()
+	u.whenAppWinAvailable("Mimestream", function()
 		hs.layout.apply {
 			-- Ivory layout already managed by `mastodon.lua`
 			{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
