@@ -34,6 +34,19 @@ vim.opt.startofline = true -- motions like "G" also move to the first char
 
 vim.opt.timeoutlen = 666
 
+-- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
+-- overwritten by ftplugins having the `o` option (which many do). Therefore
+-- needs to be set via autocommand.
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Remove `o` from `formatoptions`",
+	callback = function(ctx)
+		if ctx.match ~= "markdown" then
+			vim.opt_local.formatoptions:remove("o")
+			vim.opt_local.formatoptions:remove("t")
+		end
+	end,
+})
+
 --------------------------------------------------------------------------------
 -- APPEARANCE
 vim.opt.sidescrolloff = 15
@@ -46,16 +59,25 @@ vim.opt.pumheight = 12
 
 --------------------------------------------------------------------------------
 
--- Formatting `vim.opt.formatoptions:remove("o")` would not work, since it's
--- overwritten by ftplugins having the `o` option (which many do). Therefore
--- needs to be set via autocommand.
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Remove `o` from `formatoptions`",
-	callback = function(ctx)
-		if ctx.match ~= "markdown" then
-			vim.opt_local.formatoptions:remove("o")
-			vim.opt_local.formatoptions:remove("t")
-		end
+-- FOLDING
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99 -- do not auto-fold
+vim.opt.foldlevelstart = 99
+vim.opt.foldtext = "" -- empty string = display text with highlighting
+vim.opt.foldcolumn = "0" -- 0 = disable
+vim.opt.fillchars:append { fold = " " }
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "User: Set LSP folding if client supports it",
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not (client and client:supports_method("textDocument/foldingRange")) then return end
+
+		local win = vim.api.nvim_get_current_win()
+		vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
 	end,
 })
 
@@ -145,6 +167,7 @@ vim.opt.listchars = {
 vim.opt.fillchars:append {
 	eob = " ",
 	lastline = "↓",
+	diff = "▄",
 	-- thick window separators
 	horiz = "▄",
 	vert = "█",
@@ -153,28 +176,39 @@ vim.opt.fillchars:append {
 	vertleft = "█",
 	vertright = "█",
 	verthoriz = "█",
-	diff = "▄",
 }
-
 --------------------------------------------------------------------------------
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldmethod = "expr"
-vim.o.foldtext = " "
-vim.opt.foldcolumn = "0"
-vim.opt.fillchars:append { fold = " " }
-
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "User: Set LSP folding if client supports it",
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if not client then return end
-		if client:supports_method("textDocument/foldingRange") then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+local function fold_virt_text(result, s, lnum, coloff)
+	if not coloff then coloff = 0 end
+	local text = ""
+	local hl
+	for i = 1, #s do
+		local char = s:sub(i, i)
+		local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
+		local _hl = hls[#hls]
+		if _hl then
+			local new_hl = "@" .. _hl.capture
+			if new_hl ~= hl then
+				table.insert(result, { text, hl })
+				text = ""
+				hl = nil
+			end
+			text = text .. char
+			hl = new_hl
+		else
+			text = text .. char
 		end
-	end,
-})
+	end
+	table.insert(result, { text, hl })
+end
 
+function _G.custom_foldtext()
+	local foldLength = vim.v.foldend - vim.v.foldstart
+	local start = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
+	local result = {}
+	fold_virt_text(result, start, vim.v.foldstart - 1)
+	table.insert(result, { (" (%s lines)"):format(foldLength), "Delimiter" })
+	return result
+end
+
+vim.opt.foldtext = "v:lua.custom_foldtext()"
