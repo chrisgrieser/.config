@@ -3,7 +3,7 @@ return {
 	lazy = false,
 	opts = {
 		foldtextWithLineCount = {
-			enabled = true,
+			enabled = false,
 			template = "  󰘖 %s",
 		},
 	},

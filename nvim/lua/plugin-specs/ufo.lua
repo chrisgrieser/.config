@@ -2,7 +2,7 @@ return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
 
-	enabled = false, -- TEMP
+	-- enabled = false, -- TEMP
 
 	event = "UIEnter", -- needed for folds to load in time and comments being closed
 	keys = {
