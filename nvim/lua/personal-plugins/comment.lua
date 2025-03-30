@@ -104,6 +104,7 @@ function M.docstring()
 		-- goto 1st param type & edit it
 		vim.api.nvim_win_set_cursor(0, { ln, #luadoc[1] })
 		vim.cmd.normal { '"_ciw', bang = true }
+		vim.cmd.startinsert { bang = true }
 	else
 		vim.notify(ft .. " is not supported.", vim.log.levels.WARN, { title = "docstring" })
 	end

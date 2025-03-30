@@ -16,27 +16,23 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 --------------------------------------------------------------------------------
 
--- make bullets auto-continue (replaces bullets.vim)
--- INFO cannot set opt.comments permanently, since it disturbs the
--- correctly indented continuation of bullet lists when hitting opt.textwidth
-optl.formatoptions:append("r") -- `<CR>` in insert mode
-optl.formatoptions:append("o") -- `o` in normal mode
+-- Simplified implementation of `bullets.vim`
+local function autoBullet()
+	local line = vim.api.nvim_get_current_line()
+	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 
-local function autocontinue(key)
-	local comBefore = optl.comments:get()
-	-- stylua: ignore
-	optl.comments = {
-		"b:- [ ]", "b:- [x]", "b:\t* [ ]", "b:\t* [x]", -- tasks
-		"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
-		"b:1.", "b:\t1.", -- ordered list
-		"n:>", -- blockquotes
-	}
-	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
-	return key
+	local indentAndPrefix = line:match("^%s*[-*+] ") -- unordered list
+		or line:match("^%s*%d+[.)] ") -- ordered list
+		or line:match("^%s>+ ") -- blockquote
+		or line:match("^%s*%- %[[x ]%] ") -- task
+		or line:match("^%s") -- just indent
+		or ""
+
+	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix })
 end
 
-bkeymap("n", "o", function() return autocontinue("o") end, { expr = true })
-bkeymap("i", "<CR>", function() return autocontinue("<CR>") end, { expr = true })
+bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = "󰉹 Auto-bullet" })
+bkeymap("n", "o", function() autoBullet("o") end, { desc = "󰉹 Auto-bullet" })
 
 --------------------------------------------------------------------------------
 -- HEADINGS

@@ -1,5 +1,6 @@
 local spellfixes = {
 	Brwoser = "Browser",
+	Markdwon = "Markdown",
 	THe = "The",
 	ahve = "have",
 	awiat = "await",
