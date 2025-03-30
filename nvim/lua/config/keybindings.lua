@@ -118,8 +118,8 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- u
 --------------------------------------------------------------------------------
 -- FOLDING
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
-keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
-keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
+-- keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
+-- keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
