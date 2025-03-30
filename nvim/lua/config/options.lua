@@ -162,48 +162,20 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = "0" -- 0 = disable
 vim.opt.fillchars:append { fold = " " }
 
-vim.opt.foldmethod = "expr"
+do
+	vim.opt.foldmethod = "expr"
+	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
--- default: tressitter
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "User: Set LSP folding if client supports it",
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client:supports_method("textDocument/foldingRange") then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Restore cursor",
-	callback = function(ctx)
-		if ctx.match == "gitcommit" then return end
-		vim.cmd.normal { "g:", bang = true }
-
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufWinLeave", {
-	callback = function() pcall(vim.cmd.mkview) end,
-})
-
-vim.api.nvim_create_autocmd("LspNotify", {
-	desc = "User: Close imports and comments on load",
-	callback = function(ctx)
-		if ctx.data.method ~= "textDocument/didOpen" then return end
-
-		vim.defer_fn(function()
-			vim.lsp.foldclose("imports", vim.fn.bufwinid(ctx.buf))
-			vim.lsp.foldclose("comment", vim.fn.bufwinid(ctx.buf))
-			pcall(vim.cmd.loadview)
-		end, 1)
-
-		vim.defer_fn(function() pcall(vim.cmd.loadview) end, 1500)
-	end,
-})
+	vim.api.nvim_create_autocmd("LspAttach", {
+		desc = "User: Set LSP folding if client supports it",
+		callback = function(args)
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			if client and client:supports_method("textDocument/foldingRange") then
+				local win = vim.api.nvim_get_current_win()
+				vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+			end
+		end,
+	})
+end
 
 --------------------------------------------------------------------------------

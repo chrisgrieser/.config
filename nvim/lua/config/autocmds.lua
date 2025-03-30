@@ -23,6 +23,16 @@ if vim.fn.has("gui_running") == 0 then
 end
 
 --------------------------------------------------------------------------------
+-- RESTORE CURSOR
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Restore cursor position",
+	callback = function(ctx)
+		if ctx.match == "gitcommit" or vim.bo[ctx.buf].buftype ~= "" then return end
+		vim.cmd.normal { 'g`"', bang = true }
+	end,
+})
+
+--------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
 vim.api.nvim_create_autocmd("FocusLost", {
