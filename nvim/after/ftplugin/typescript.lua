@@ -26,7 +26,6 @@ bkeymap("n", "<D-s>", function()
 	vim.defer_fn(vim.lsp.buf.format, (#actions + 1) * 60)
 end, { desc = "󰛦 Organize Imports & Format" })
 
-
 -- When typing `await`, automatically add `async` to the function declaration
 bkeymap("i", "t", function()
 	vim.api.nvim_feedkeys("t", "n", true) -- pass through the trigger char

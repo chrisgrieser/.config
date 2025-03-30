@@ -81,7 +81,9 @@ return {
 				end,
 			}
 			if not text then return "" end
-			if vim.str_utfindex(text, "utf-8") > maxLen then return text:sub(1, maxLen - 1) .. "…" end
+			if vim.str_utfindex(text, "utf-8") > maxLen then
+				return text:sub(1, maxLen - 1) .. "…"
+			end
 			return text
 		end
 

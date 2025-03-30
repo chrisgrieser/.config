@@ -115,7 +115,7 @@ return {
 
 			-- BUG looks better than `render-markdown`, but due to winborder bug
 			-- not using it yet
-			hover = { enabled = false }, 
+			hover = { enabled = false },
 		},
 	},
 }

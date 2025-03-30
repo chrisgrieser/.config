@@ -309,7 +309,7 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	end
 end
 
--- DOCS 
+-- DOCS
 -- https://writewithharper.com/docs/integrations/neovim
 -- https://writewithharper.com/docs/integrations/language-server#Configuration
 M.serverConfigs.harper_ls = {
@@ -326,7 +326,7 @@ M.serverConfigs.harper_ls = {
 				sentenceCapitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
-			dialect = "American"
+			dialect = "American",
 		},
 	},
 	on_attach = function(harper, bufnr)

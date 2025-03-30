@@ -97,7 +97,15 @@ return {
 				{ require("personal-plugins.alt-alt").altFileStatusbar },
 			},
 			lualine_c = {
-				{ require("personal-plugins.quickfix").quickfixCounterStatusbar },
+				{ -- Quickfix counter
+					function()
+						local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
+						if #qf.items == 0 then return "" end
+						-- remove empty brackets and/or flags from `makeprg`
+						local title = qf.title:gsub(" %(%)", ""):gsub("%-%-[%w-_]+ ?", "")
+						return (" %d/%d %q"):format(qf.idx, #qf.items, title)
+					end,
+				},
 			},
 			lualine_x = {
 				{

@@ -40,7 +40,6 @@ vim.api.nvim_create_autocmd("FocusLost", {
 	once = true,
 	callback = function()
 		if os.date("%a") ~= "Mon" or jit.os == "windows" then return end
-		vim.system { "find", vim.o.viewdir, "-mtime", "+30d", "-delete" }
 		vim.system { "find", vim.o.undodir, "-mtime", "+15d", "-delete" }
 		vim.system { "find", vim.lsp.log.get_filename(), "-size", "+50M", "-delete" }
 	end,
@@ -219,7 +218,8 @@ local globToTemplateMap = {
 }
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
-	desc = "User: Apply templates (`BufReadPost` for files created outside of nvim.)",
+	-- `BufReadPost` for files created outside of nvim.
+	desc = "User: Apply templates",
 	callback = function(ctx)
 		vim.defer_fn(function() -- defer, to ensure new files are written
 			local stats = vim.uv.fs_stat(ctx.file)
@@ -282,18 +282,14 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 	end,
 })
 
--- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers
+-- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers!?
 local originalScrolloff = vim.o.scrolloff
 vim.defer_fn(function() -- defer to prevent unneeded trigger on startup
 	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
 		desc = "User: FIX scrolloff on entering new buffer",
 		callback = function(ctx)
-			if not vim.api.nvim_buf_is_valid(ctx.buf) or vim.bo[ctx.buf].buftype ~= "" then return end
-			vim.defer_fn(function()
-				if vim.o.scrolloff > 0 then return end
-				vim.o.scrolloff = originalScrolloff
-				vim.notify("Triggered by [" .. ctx.event .. "]", nil, { title = "Scrolloff fix" })
-			end, 500)
+			if vim.bo[ctx.buf].buftype ~= "" then return end
+			vim.opt.scrolloff = originalScrolloff
 		end,
 	})
 end, 1)
@@ -397,8 +393,57 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: lucky indent",
 	callback = function(ctx) luckyIndent(ctx.buf) end,
 })
---------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+-- QUICKFIX ADD SIGNS
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	desc = "User: Add signs to quickfix (1/2)",
+	callback = function()
+		local ns = vim.api.nvim_create_namespace("quickfix-signs")
+
+		local function setSigns(qf)
+			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
+				sign_text = "󱘹▶",
+				sign_hl_group = "DiagnosticSignInfo",
+				priority = 200, -- above most signs
+				invalidate = true, -- deletes the extmark if the line is deleted
+				undo_restore = true, -- makes undo restore those
+			})
+		end
+
+		-- clear existing signs/autocmds
+		local group = vim.api.nvim_create_augroup("quickfix-signs", { clear = true })
+		vim.iter(vim.api.nvim_list_bufs())
+			:each(function(bufnr) vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end)
+
+		-- set signs
+		for _, qf in pairs(vim.fn.getqflist()) do
+			if vim.api.nvim_buf_is_loaded(qf.bufnr) then
+				setSigns(qf)
+			else
+				vim.api.nvim_create_autocmd("BufReadPost", {
+					desc = "User(once): Add signs to quickfix (2/2)",
+					group = group,
+					once = true,
+					buffer = qf.bufnr,
+					callback = function() setSigns(qf) end,
+				})
+			end
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	desc = "User: Automatically goto 1st quickfix item",
+	callback = function()
+		-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
+		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
+	end,
+})
+
+--------------------------------------------------------------------------------
+-- LSP RENAME – ADD NOTIFICATION
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -427,4 +472,3 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
-

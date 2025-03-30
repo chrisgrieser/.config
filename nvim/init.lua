@@ -11,25 +11,20 @@ end, 1)
 
 --------------------------------------------------------------------------------
 
-vim.g.mapleader = ","
-vim.g.maplocalleader = "<Nop>"
-vim.g.localRepos = vim.fs.normalize("~/Developer")
-
---------------------------------------------------------------------------------
-
 ---Try to require the module, but do not throw error when one of them cannot be
 ---loaded. This prevents the entire remaining config from not being loaded if
 ---just one module has an error.
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
-	if not success then
-		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 1000)
-	end
+	if success then return end
+
+	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+	vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 500)
 end
 
--- before lazy, so they are active during plugin install and available for plugin configs
+-- before `lazy`, so the options are active during plugin install, and available
+-- for plugin configs
 safeRequire("config.options")
 
 -- only load plugins when `NO_PLUGINS` is not set.
@@ -41,9 +36,9 @@ end
 
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
-
 safeRequire("config.keybindings")
-safeRequire("personal-plugins.quickfix")
+
+--------------------------------------------------------------------------------
 
 safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")
