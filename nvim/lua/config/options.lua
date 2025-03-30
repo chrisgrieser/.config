@@ -58,30 +58,6 @@ vim.opt.winborder = "single"
 vim.opt.pumheight = 12
 
 --------------------------------------------------------------------------------
-
--- FOLDING
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99 -- do not auto-fold
-vim.opt.foldlevelstart = 99
-vim.opt.foldtext = "" -- empty string = display text with highlighting
-vim.opt.foldcolumn = "0" -- 0 = disable
-vim.opt.fillchars:append { fold = " " }
-
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	desc = "User: Set LSP folding if client supports it",
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if not (client and client:supports_method("textDocument/foldingRange")) then return end
-
-		local win = vim.api.nvim_get_current_win()
-		vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-	end,
-})
-
---------------------------------------------------------------------------------
 -- CLIPBOARD
 vim.opt.clipboard = "unnamedplus"
 
@@ -178,6 +154,62 @@ vim.opt.fillchars:append {
 	verthoriz = "█",
 }
 --------------------------------------------------------------------------------
+
+-- FOLDING
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99 -- do not auto-fold
+vim.opt.foldlevelstart = 99
+vim.opt.foldcolumn = "0" -- 0 = disable
+vim.opt.fillchars:append { fold = " " }
+vim.opt.foldtext = "v:lua.FoldtextWithLineCount()" -- see func below
+vim.opt.foldmethod = "expr"
+
+-- default: tressitter
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "User: Set LSP folding if client supports it",
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not (client and client:supports_method("textDocument/foldingRange")) then return end
+
+		local win = vim.api.nvim_get_current_win()
+		vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+	end,
+})
+
+--------------------------------------------------------------------------------
+
+-- based on https://www.reddit.com/r/neovim/comments/1fzn1zt/custom_fold_text_function_with_treesitter_syntax/
+-- function _G.FoldtextWithLineCount()
+-- 	local start, end_ = vim.v.foldstart, vim.v.foldend
+-- 	local firstLine = vim.api.nvim_buf_get_lines(0, start - 1, start, false)[1]
+-- 	firstLine = firstLine:gsub("\t", (" "):rep(vim.o.tabstop))
+--
+-- 	local result = {}
+-- 	local text, hl = "", nil
+-- 	for i = 1, #firstLine do
+-- 		local char = firstLine:sub(i, i)
+-- 		local hls = vim.treesitter.get_captures_at_pos(0, start - 1, i - 1)
+-- 		local _hl = hls[#hls]
+-- 		if _hl then
+-- 			local newHl = "@" .. _hl.capture
+-- 			if newHl ~= hl then
+-- 				table.insert(result, { text, hl })
+-- 				text, hl = "", nil
+-- 			end
+-- 			hl = newHl
+-- 		end
+-- 		text = text .. char
+-- 	end
+-- 	table.insert(result, { text, hl })
+--
+-- 	local lineCountStr = ("   %s lines"):format(end_ - start)
+-- 	table.insert(result, { lineCountStr, "Comment" })
+-- 	return result
+-- end
+--
+
 local function fold_virt_text(result, s, lnum, coloff)
 	if not coloff then coloff = 0 end
 	local text = ""
@@ -203,11 +235,13 @@ local function fold_virt_text(result, s, lnum, coloff)
 end
 
 function _G.custom_foldtext()
-	local foldLength = vim.v.foldend - vim.v.foldstart
 	local start = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
+	local end_str = vim.fn.getline(vim.v.foldend)
+	local end_ = vim.trim(end_str)
 	local result = {}
 	fold_virt_text(result, start, vim.v.foldstart - 1)
-	table.insert(result, { (" (%s lines)"):format(foldLength), "Delimiter" })
+	table.insert(result, { " ... ", "Delimiter" })
+	fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
 	return result
 end
 
