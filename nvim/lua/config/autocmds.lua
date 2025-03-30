@@ -397,3 +397,34 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: lucky indent",
 	callback = function(ctx) luckyIndent(ctx.buf) end,
 })
+--------------------------------------------------------------------------------
+
+local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
+vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
+	originalRenameHandler(err, result, ctx, config)
+	if err or not result then return end
+
+	-- count changes
+	local changes = result.changes or result.documentChanges or {}
+	local changedFiles = vim.iter(vim.tbl_keys(changes))
+		:filter(function(file) return #changes[file] > 0 end)
+		:map(function(file) return "- " .. vim.fs.basename(file) end)
+		:totable()
+	local changeCount = 0
+	for _, change in pairs(changes) do
+		changeCount = changeCount + #(change.edits or change)
+	end
+
+	-- notification
+	local pluralS = changeCount > 1 and "s" or ""
+	local msg = ("[%d] instance%s"):format(changeCount, pluralS)
+	if #changedFiles > 1 then
+		local fileList = table.concat(changedFiles, "\n")
+		msg = ("**%s in [%d] files**\n%s"):format(msg, #changedFiles, fileList)
+	end
+	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
+
+	-- save all
+	if #changedFiles > 1 then vim.cmd.wall() end
+end
+

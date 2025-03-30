@@ -3,28 +3,11 @@ local keymap = require("config.utils").uniqueKeymap
 -- KEYMAPS in regular window
 
 -- `:cnext`, but wrapping, not throwing errors, and notifying if an item was deleted
-keymap("n", "gq", function()
-	local qf = vim.fn.getqflist { idx = 0, items = true }
-	if #qf.items == 0 then return end
-	local msg = {}
-	local atEnd = qf.idx == #qf.items
-	if atEnd then table.insert(msg, "Wrapped.") end
+keymap("n", "gq", "]q", { desc = "󰒭 Next quickfix" })
 
-	-- `vim.fn.execute` captures the output of a comment
-	local response = vim.fn.execute(atEnd and "cfirst" or "cnext")
-	vim.cmd.normal { "zv", bang = true } -- open fold at cursor
-	local deletedIdx = response:match("%((%d+) of %d+%) %(line deleted%):")
-	if deletedIdx then table.insert(msg, ("Item #%d already deleted."):format(deletedIdx)) end
-	if #msg > 0 then
-		local out = table.concat(msg, "\n")
-		vim.notify(out, vim.log.levels.TRACE, { title = "Quickfix", icon = "" })
-	end
-end, { desc = "󰒭 Next quickfix" })
-
-keymap("n", "gQ", function() vim.cmd("silent! cprev") end, { desc = "󰒮 Prev quickfix" })
+keymap("n", "gQ", "[q", { desc = "󰒮 Prev quickfix", remap = true })
 
 keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete list" })
-keymap("n", "<leader>q1", vim.cmd.cfirst, { desc = " Goto 1st item" })
 
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()

@@ -41,7 +41,6 @@ end
 
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
-safeRequire("config.lsp-and-diagnostics")
 
 safeRequire("config.keybindings")
 safeRequire("personal-plugins.quickfix")
