@@ -40,7 +40,7 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Close all top-level folds
-keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
+-- keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 
 -- Open first URL in file
 keymap("n", "<D-U>", function()
@@ -114,6 +114,12 @@ keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end
 -- Merging
 keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
 keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- using `:move` preserves marks
+
+--------------------------------------------------------------------------------
+-- FOLDING
+keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
+keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
+keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
