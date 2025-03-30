@@ -106,14 +106,14 @@ vim.opt.viewdir = dir .. "/view"
 vim.opt.shadafile = dir .. "/main.shada"
 
 --------------------------------------------------------------------------------
--- AUTOMATION (external control)
+-- AUTOMATION
 
--- enable reading cwd via window title
+-- read: access cwd via window title
 vim.opt.title = true
 vim.opt.titlelen = 0 -- 0 = do not shorten title
 vim.opt.titlestring = "%{getcwd()}"
 
--- issue commands via nvim server
+-- write: issue commands via nvim server
 if vim.g.neovide then
 	pcall(os.remove, "/tmp/nvim_server.pipe") -- in case of crash, the server is still there
 	vim.fn.serverstart("/tmp/nvim_server.pipe")
@@ -124,7 +124,7 @@ end
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 0 -- overwritten by noice.nvim setting it 0
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
@@ -160,8 +160,10 @@ vim.opt.foldenable = true
 vim.opt.foldlevel = 99 -- do not auto-fold
 vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = "0" -- 0 = disable
+vim.opt.foldtext = "" -- empty string keeps text (overwritten by nvim-origami)
 vim.opt.fillchars:append { fold = " " }
 
+-- fold with LSP/Treesitter
 do
 	vim.opt.foldmethod = "expr"
 	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
