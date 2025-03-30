@@ -17,9 +17,10 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 --------------------------------------------------------------------------------
 -- AUTO BULLETS
 -- (simplified implementation of `bullets.vim`)
-local function autoBullet()
+---@param key "o" | "<CR>"
+local function autoBullet(key)
 	local line = vim.api.nvim_get_current_line()
-	local lnum = vim.api.nvim_win_get_cursor(0)[1]
+	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local indentAndPrefix = ""
 	local pointTo = lnum
 
@@ -42,13 +43,17 @@ local function autoBullet()
 		:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) -- increment ordered list
 		:gsub("%[x%]", "[ ]") -- new tasks should be open
 
-	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix })
+	-- for `<CR>`, move the line content down
+	local restOfLine = key == "<CR>" and line:sub(col) or ""
+	if key == "<CR>" then vim.api.nvim_set_current_line(line:sub(1, col)) end
+
+	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix .. restOfLine })
 	vim.api.nvim_win_set_cursor(0, { lnum + 1, #indentAndPrefix })
-	vim.cmd.startinsert { bang = true }
+	vim.cmd.startinsert()
 end
 
-bkeymap("i", "<CR>", function() autoBullet() end, { desc = "󰉹 Auto-bullet" })
-bkeymap("n", "o", function() autoBullet() end, { desc = "󰉹 Auto-bullet" })
+bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = "󰉹 Auto-bullet" })
+bkeymap("n", "o", function() autoBullet("o") end, { desc = "󰉹 Auto-bullet" })
 
 --------------------------------------------------------------------------------
 -- HEADINGS
