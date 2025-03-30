@@ -8,7 +8,6 @@
 │  ├── config
 │  ├── personal-plugins
 │  └── plugin-specs
-├── personal-mason-registry
 ├── after
 │  └── ftplugin
 ├── queries

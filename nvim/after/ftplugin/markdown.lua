@@ -3,7 +3,7 @@ local optl = vim.opt_local
 --------------------------------------------------------------------------------
 
 optl.expandtab = false
-optl.tabstop = 4 -- less nesting in md
+optl.tabstop = 4 -- less nesting in md, so we can afford larger tabstop
 vim.bo.commentstring = "<--! %s -->" -- add spaces
 
 -- so two trailing spaces highlighted, but not a single trailing space
@@ -20,19 +20,33 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 local function autoBullet()
 	local line = vim.api.nvim_get_current_line()
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
+	local indentAndPrefix = ""
+	local pointerLine = lnum
 
-	local indentAndPrefix = line:match("^%s*[-*+] ") -- unordered list
-		or line:match("^%s*%d+[.)] ") -- ordered list
-		or line:match("^%s>+ ") -- blockquote
-		or line:match("^%s*%- %[[x ]%] ") -- task
-		or line:match("^%s") -- just indent
-		or ""
+	while true do
+		indentAndPrefix = line:match("^%s*[-*+] ") -- unordered list
+			or line:match("^%s*%d+[.)] ") -- ordered list
+			or line:match("^%s*>+ ") -- blockquotes & callouts
+			or line:match("^%s*%- %[[x ]%] ") -- task
+			or line:match("^%s*") -- just indent
+
+		-- in case of hardwrap, the prefix is further up
+		if not vim.endswith(indentAndPrefix, "  ") then break end
+		pointerLine = pointerLine - 1
+		line = vim.api.nvim_buf_get_lines(0, 0, -1, false)[pointerLine]
+	end
+
+	indentAndPrefix = indentAndPrefix
+		:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) -- incremented number in ordered list
+		:gsub("%[x%]", "[ ]") -- new tasks should be open
 
 	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix })
+	vim.api.nvim_win_set_cursor(0, { lnum + 1, #indentAndPrefix })
+	vim.cmd.startinsert { bang = true }
 end
 
-bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = "󰉹 Auto-bullet" })
-bkeymap("n", "o", function() autoBullet("o") end, { desc = "󰉹 Auto-bullet" })
+bkeymap("i", "<CR>", function() autoBullet() end, { desc = "󰉹 Auto-bullet" })
+bkeymap("n", "o", function() autoBullet() end, { desc = "󰉹 Auto-bullet" })
 
 --------------------------------------------------------------------------------
 -- HEADINGS

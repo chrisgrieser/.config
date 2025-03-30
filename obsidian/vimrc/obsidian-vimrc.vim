@@ -558,6 +558,10 @@ nnoremap ,ow :lineLength<CR>
 exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle
 nnoremap ,oi :maxImageSize<CR>
 
+" [O]ption: [d]iagnostics
+exmap toggleHarper obcommand harper:harper-toggle-auto-lint
+nnoremap ,od :toggleHarper<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 
 " <M-s> = cmd+s
@@ -565,7 +569,5 @@ nnoremap ,oi :maxImageSize<CR>
 exmap lint obcommand obsidian-linter:lint-file-unless-ignored
 nnoremap <M-s> :lint<CR>
 
-" BUG https://github.com/j0rd1smit/obsidian-copilot-auto-completion/issues/45
-" insert mode: accept suggestion
-" exmap acceptGhostText obcommand copilot-auto-completion:accept
-" inoremap <M-s> <Esc>:acceptGhostText<CR>a
+" cmd+shift+s is mapped to accepting copilot
+" PENDING https://github.com/j0rd1smit/obsidian-copilot-auto-completion/issues/45
