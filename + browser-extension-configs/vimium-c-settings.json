@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "3/2/2025, 12:46:09 PM",
-	"time": 1740915969998,
+	"@time": "3/30/2025, 10:55:08 AM",
+	"time": 1743324908221,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
-		"chromium": 133
+		"chromium": 134
 	},
 	"allBrowserUrls": true,
 	"exclusionListenHash": false,
@@ -167,14 +167,14 @@
 		"# https://github.com/gdh1995/vimium-c/wiki/Substitute-URLs-and-text-during-commands",
 		"# https://github.com/gdh1995/vimium-c/discussions/996#discussioncomment-6752943",
 		"# `sed` parameter uses `,` as delimiter (allow are: `/@#,`)",
-		"map ga openUrl url=\"$S\" url_mask sed=\"s,(https://github.com/.+?/.[^/?]+).*,$1/issues?q=author:@me,\"",
+		"map ga openUrl url=\"$S\" url_mask sed=\"s,(https://github.com/.+?/.[^/?]+).*,$1/issues?q=involves:@me,\"",
 		"",
 		"# COPY URLS",
 		"map yy copyCurrentUrl",
 		"map yg copyCurrentUrl sed=\"s=https://github.com/(.+?/.[^/?]+).*=$1=\" # copy github part of an url https://github.com/gdh1995/vimium-c/wiki/Substitute-URLs-and-text-during-commands",
 		"map ym copyCurrentUrl format=\"[${title}](${url})\" # copy as markdown link",
 		"map yw copyWindowInfo format=\"${url}\" # copy links of all tabs",
-		"map ya copyWindowInfo format=\"${title}\\u0020${url}\"",
+		"map ya copyWindowInfo format=\"${title}\\u0020${url}\" # copy links of all tabs with title",
 		""
 	],
 	"regexFindMode": true,
