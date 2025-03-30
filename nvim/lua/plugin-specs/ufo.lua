@@ -1,10 +1,9 @@
---------------------------------------------------------------------------------
--- INFO has a small config block at `nvim-lspconfig`
---------------------------------------------------------------------------------
-
 return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
+
+	enabled = false, -- TEMP
+
 	event = "UIEnter", -- needed for folds to load in time and comments being closed
 	keys = {
 		{ "<leader>if", vim.cmd.UfoInspect, desc = " Fold info" },

@@ -153,5 +153,28 @@ vim.opt.fillchars:append {
 	vertleft = "█",
 	vertright = "█",
 	verthoriz = "█",
-	diff = "▄", -- used for gitsigns' file blame: https://github.com/lewis6991/gitsigns.nvim/issues/1153
+	diff = "▄",
 }
+
+--------------------------------------------------------------------------------
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldmethod = "expr"
+vim.o.foldtext = " "
+vim.opt.foldcolumn = "0"
+vim.opt.fillchars:append { fold = " " }
+
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "User: Set LSP folding if client supports it",
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client then return end
+		if client:supports_method("textDocument/foldingRange") then
+			local win = vim.api.nvim_get_current_win()
+			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+		end
+	end,
+})
+
