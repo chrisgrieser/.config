@@ -346,3 +346,38 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "Inse
 	end,
 })
 vim.defer_fn(addFavicons, 200)
+
+--------------------------------------------------------------------------------
+
+-- GUESS INDENT
+-- (simplified implementation of the plugin with the same name)
+local function guessIndent(bufnr)
+	-- do not apply indent if there is an `.editorconfig` file
+	local ec = vim.b[bufnr].editorconfig
+	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
+
+	-- guess indent from first indented line
+	local indent
+	local lnum = 1
+	local maxToCheck = math.min(100, vim.api.nvim_buf_line_count(bufnr))
+	repeat
+		local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
+		indent = line:match("^%s*")
+		lnum = lnum + 1
+		if lnum > maxToCheck then return end
+	until #indent > 0
+	local spaces = indent:match(" +")
+
+	-- apply
+	vim.bo.expandtab = spaces and true or false
+	vim.bo.tabstop = #spaces
+	vim.bo.shiftwidth = #spaces
+
+	local msg = spaces and ("%s spaces"):format(#spaces) or "tabs"
+	vim.notify(msg, nil, { title = "Guess indent", icon = "󰉶" })
+end
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "User: guess indent",
+	callback = function(ctx) guessIndent(ctx.buf) end,
+})
