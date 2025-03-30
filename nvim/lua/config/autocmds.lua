@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
-		if not vim.uv.cwd() then vim.uv.chdir("/") end -- FIX error when no cwd
+		if not vim.uv.cwd() then vim.uv.chdir("/") end -- prevent error when no cwd
 
 		local root = vim.fs.root(ctx.buf, function(name, path)
 			local parentName = vim.fs.basename(vim.fs.dirname(path))
@@ -293,11 +293,12 @@ end, 1)
 -- inspired by the Obsidian favicon plugin: https://github.com/joethei/obsidian-link-favicon
 
 -- REQUIRED
--- 1. `comment` parser (`:TSInstall comment`) & active parser for the current
--- buffer (e.g., in a lua buffer, the lua parser is required)
--- 2. Nerdfont icons
+-- 1. nvim 0.10+
+-- 2. `comment` Tresitter parser (`:TSInstall comment`) & active parser for the
+-- current buffer (e.g., in a lua buffer, the lua parser is required)
+-- 3. Nerdfont icons
 
-local favicon = {
+local favicons = {
 	github = "",
 	neovim = "",
 	stackoverflow = "󰓌",
@@ -326,7 +327,7 @@ local function addFavicons(bufnr)
 		vim.iter(commentUrlNodes):each(function(_, node)
 			local nodeText = vim.treesitter.get_node_text(node, bufnr)
 			local sitename = nodeText:match("(%w+)%.com") or nodeText:match("(%w+)%.io")
-			local icon = favicon[sitename]
+			local icon = favicons[sitename]
 			if not icon then return end
 
 			local row, col = node:start()
@@ -349,9 +350,10 @@ vim.defer_fn(addFavicons, 200)
 
 --------------------------------------------------------------------------------
 
--- GUESS INDENT
--- (simplified implementation of the plugin with the same name)
-local function guessIndent(bufnr)
+-- LUCKY INDENT
+-- Auto-set indent based on first indented line. Ignores files when an
+-- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
+local function luckyIndent(bufnr)
 	-- do not apply indent if there is an `.editorconfig` file
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
@@ -369,15 +371,19 @@ local function guessIndent(bufnr)
 	local spaces = indent:match(" +")
 
 	-- apply
-	vim.bo.expandtab = spaces and true or false
-	vim.bo.tabstop = #spaces
-	vim.bo.shiftwidth = #spaces
+	if spaces then
+		vim.bo.expandtab = true
+		vim.bo.tabstop = #spaces
+		vim.bo.shiftwidth = #spaces
+	else
+		vim.bo.expandtab = false
+	end
 
 	local msg = spaces and ("%s spaces"):format(#spaces) or "tabs"
-	vim.notify(msg, nil, { title = "Guess indent", icon = "󰉶" })
+	vim.notify("Set to " .. msg, nil, { title = "Lucky indent", icon = "󰉶" })
 end
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-	desc = "User: guess indent",
-	callback = function(ctx) guessIndent(ctx.buf) end,
+	desc = "User: lucky indent",
+	callback = function(ctx) luckyIndent(ctx.buf) end,
 })

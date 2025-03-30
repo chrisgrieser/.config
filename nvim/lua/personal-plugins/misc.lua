@@ -222,6 +222,7 @@ function M.bufferInfo()
 		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
 		("[indent]    %s (%s)"):format(indentType, indentAmount),
+		"[foldexpr]  " .. vim.wo.foldexpr,
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
 		"",
 	}
