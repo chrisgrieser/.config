@@ -41,12 +41,10 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
-keymap("n", "ge", function()
-		vim.diagnostic.jump { count = 1, float = false }
-	end, { desc = "󰒕 Next diagnostic" })
-	keymap("n", "gE", function()
-		vim.diagnostic.jump { count = -1 }
-	end, { desc = "󰒕 Prev diagnostic" })
+-- stylua: ignore
+keymap("n", "ge", function() vim.diagnostic.jump { count = 1 } end, { desc = "󰒕 Next diagnostic" })
+-- stylua: ignore
+keymap("n", "gE", function() vim.diagnostic.jump { count = -1 } end, { desc = "󰒕 Prev diagnostic" })
 
 -- Open first URL in file
 keymap("n", "<D-U>", function()
