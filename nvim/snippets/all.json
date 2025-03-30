@@ -145,6 +145,10 @@
     "body": "$LINE_COMMENT vim: ft=${1:filetype}",
     "prefix": "vim modeline (filetype)"
   },
+  "vim modeline (foldlevel)": {
+    "body": "$LINE_COMMENT vim: foldlevel=${1:1}",
+    "prefix": "vim modeline (foldlevel)"
+  },
   "yes (✅)": {
     "body": "✅ ",
     "prefix": "yes (✅)"
