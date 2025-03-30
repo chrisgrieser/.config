@@ -182,12 +182,11 @@ vim.on_key(function(key, _typed)
 
 	-- works for RHS, therefore no need to consider remaps
 	local searchMovement = vim.tbl_contains({ "n", "N", "*", "#" }, key)
-	local shortPattern = vim.fn.getreg("/"):gsub([[\V\C]], ""):len() <= 1 -- for `fF` function
 
 	if searchCancelled or (not searchMovement and not searchConfirmed) then
 		vim.opt.hlsearch = false
 		searchCountIndicator("clear")
-	elseif (searchMovement and not shortPattern) or searchConfirmed or searchStarted then
+	elseif searchMovement or searchConfirmed or searchStarted then
 		vim.opt.hlsearch = true
 		vim.defer_fn(searchCountIndicator, 1)
 	end
@@ -360,9 +359,9 @@ vim.defer_fn(addFavicons, 200)
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
-	-- do not apply indent if there is an `.editorconfig` file
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
+	if vim.bo[bufnr].buftype ~= "" then return end
 
 	-- guess indent from first indented line
 	local indent
@@ -384,7 +383,6 @@ local function luckyIndent(bufnr)
 	else
 		vim.bo.expandtab = false
 	end
-
 	local msg = spaces and ("%s spaces"):format(#spaces) or "tabs"
 	vim.notify("Set to " .. msg, nil, { title = "Lucky indent", icon = "󰉶" })
 end
@@ -404,11 +402,11 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
-				sign_text = "󱘹▶",
+				sign_text = "󱘹▶", -- actually two chars
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- above most signs
 				invalidate = true, -- deletes the extmark if the line is deleted
-				undo_restore = true, -- makes undo restore those
+				undo_restore = true, -- makes undo restore them
 			})
 		end
 

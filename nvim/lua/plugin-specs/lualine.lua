@@ -19,7 +19,7 @@ end
 -- helper for `lsp_spinner` component
 local lspActive
 vim.api.nvim_create_autocmd("LspProgress", {
-	desc = "User: LSP progress",
+	desc = "User: Hide LSP progress component after 2s",
 	callback = function()
 		lspActive = true
 		vim.defer_fn(function() lspActive = false end, 2000)
@@ -38,6 +38,7 @@ return {
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" },
 			component_separators = { left = "│", right = "│" },
+			ignore_focus = { "snacks_input" }, -- so file name is still visible when renaming
 		},
 		tabline = {
 			lualine_a = {
