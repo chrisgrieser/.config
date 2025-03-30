@@ -98,6 +98,17 @@ for _, chars in pairs(trailChars) do
 	end)
 end
 
+-- Spelling (these work even with `spell=false`)
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
+-- stylua: ignore
+keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
+
+-- Merging
+keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
+keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- using `:move` preserves marks
+
+--------------------------------------------------------------------------------
+
 -- WHITESPACE & INDENTATION
 -- remap, since using nvim default
 keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true })
@@ -110,14 +121,16 @@ keymap("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
 keymap("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
 keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
--- Spelling (these work even with `spell=false`)
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
--- stylua: ignore
-keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
-
--- Merging
-keymap("n", "m", "J", { desc = "󰽜 Merge line up" })
-keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- using `:move` preserves marks
+--------------------------------------------------------------------------------
+-- QUICKFIX
+keymap("n", "gq", "]q", { desc = "󰒭 Next quickfix", remap = true })
+keymap("n", "gQ", "[q", { desc = "󰒮 Prev quickfix", remap = true })
+keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete list" })
+keymap("n", "<leader>qq", function()
+	local windows = vim.fn.getwininfo()
+	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
+	vim.cmd[hasQuickfix and "cclose" or "copen"]()
+end, { desc = " Toggle window" })
 
 --------------------------------------------------------------------------------
 -- FOLDING

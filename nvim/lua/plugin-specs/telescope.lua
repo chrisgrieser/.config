@@ -440,7 +440,7 @@ return {
 			"gr",
 			function() vim.cmd.Telescope("oldfiles") end,
 			desc = "󰭎 Recent files",
-			nowait = true, -- due to various nvim default mappings starting with `gr`
+			nowait = true, -- various nvim default mappings starting with `gr`
 		},
 
 		-- GREP
@@ -623,7 +623,7 @@ return {
 			"<leader>pc",
 			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
 			function() vim.cmd("noautocmd Telescope colorscheme") end,
-			desc = " Preview colorschemes",
+			desc = " Colorschemes",
 		},
 	},
 }

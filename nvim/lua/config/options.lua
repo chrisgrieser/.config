@@ -1,3 +1,10 @@
+-- GLOBALS
+vim.g.mapleader = ","
+vim.g.maplocalleader = "<Nop>"
+vim.g.localRepos = vim.fs.normalize("~/Developer")
+
+--------------------------------------------------------------------------------
+
 -- GENERAL
 
 vim.opt.undofile = true -- enables persistent undo history
@@ -102,7 +109,6 @@ vim.filetype.add {
 -- move to custom location where they are synced independently from the dotfiles
 local dir = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
 vim.opt.undodir = dir .. "/undo"
-vim.opt.viewdir = dir .. "/view"
 vim.opt.shadafile = dir .. "/main.shada"
 
 --------------------------------------------------------------------------------
@@ -220,4 +226,3 @@ vim.diagnostic.config {
 }
 
 --------------------------------------------------------------------------------
-

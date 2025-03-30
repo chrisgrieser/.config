@@ -17,15 +17,15 @@ return {
 	-- debuggers start with `continue` by themselves
 	keys = {
 		-- 1. Two nvim instances, one for debuggee and one for debugger
-		--   a) `require("osv").launch` must be used on debuggee-instance
-		--   b) breakpoints must be set in debugger-instance
+		---- a) `require("osv").launch` must be used on debuggee-instance
+		---- b) breakpoints must be set in debugger-instance
 		{
 			"<leader>dl",
 			function() require("osv").launch() end,
 			ft = "lua",
 			desc = " Use instance as debuggee",
 		},
-		-- 2. One nvim instance, runs current file via * `require("osv").run_this`
+		-- 2. One nvim instance, runs current file via `require("osv").run_this`
 		-- less flexible, but quicker to start. Useful just to check code samples.
 		{
 			"7",
@@ -37,7 +37,7 @@ return {
 				end
 			end,
 			ft = "lua",
-			desc = " Continue (lua)",
+			desc = " Continue (lua version)",
 		},
 	},
 }
