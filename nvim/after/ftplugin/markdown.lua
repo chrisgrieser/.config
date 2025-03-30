@@ -22,21 +22,21 @@ local function autoBullet(key)
 	local line = vim.api.nvim_get_current_line()
 	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local indentAndPrefix = ""
-	local pointTo = lnum
 
+	local ln, content = lnum, line
 	while true do
-		indentAndPrefix = line:match("^%s*>+ ") -- blockquotes & callouts
-			or line:match("^%s*%d+[.)] ") --------- ordered list
-			or line:match("^%s*[-*+] ") ----------- unordered list
-			or line:match("^%s*%- %[[x ]%] ") ----- task
-			or line:match("^%s*") ----------------- just indent
+		indentAndPrefix = content:match("^%s*>+ ") -- blockquotes & callouts
+			or content:match("^%s*%d+[.)] ") --------- ordered list
+			or content:match("^%s*[-*+] ") ----------- unordered list
+			or content:match("^%s*%- %[[x ]%] ") ----- task
+			or content:match("^%s*") ----------------- just indent
 
 		-- in case of multi-line bullets in hardwrapped text, the prefix we
 		-- actually want to use is further up
 		if not vim.endswith(indentAndPrefix, "  ") then break end
-		pointTo = pointTo - 1
-		if pointTo < 1 then break end
-		line = vim.api.nvim_buf_get_lines(0, pointTo, pointTo + 1, false)[1]
+		ln = ln - 1
+		if ln < 1 then break end
+		content = vim.api.nvim_buf_get_lines(0, ln, ln + 1, false)[1]
 	end
 
 	indentAndPrefix = indentAndPrefix
