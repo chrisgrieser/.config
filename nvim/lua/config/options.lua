@@ -178,5 +178,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
---------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("LspNotify", {
+	desc = "User: Close imports and comments on load",
+	callback = function(args)
+		if args.data.method == "textDocument/didOpen" then
+			vim.lsp.foldclose("imports", vim.fn.bufwinid(args.buf))
+			vim.lsp.foldclose("comment", vim.fn.bufwinid(args.buf))
+		end
+	end,
+})
 
+--------------------------------------------------------------------------------
