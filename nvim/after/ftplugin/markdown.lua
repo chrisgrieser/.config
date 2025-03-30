@@ -35,7 +35,7 @@ local function autoBullet()
 		if not vim.endswith(indentAndPrefix, "  ") then break end
 		pointTo = pointTo - 1
 		if pointTo < 1 then break end
-		line = vim.api.nvim_buf_get_lines(0, 0, -1, false)[pointTo]
+		line = vim.api.nvim_buf_get_lines(0, pointTo, pointTo + 1, false)[1]
 	end
 
 	indentAndPrefix = indentAndPrefix
