@@ -136,7 +136,7 @@ local blinkConfig = {
 
 								if source == "cmdline" then return "" end
 								if source == "snippets" then return "󰩫" end
-								if source == "buffer" then return "󰦨" end
+								if source == "buffer" then return "﬘" end
 								if source == "path" then return "" end
 								if lspName == "emmet_language_server" then return "" end
 								return ctx.kind_icon
