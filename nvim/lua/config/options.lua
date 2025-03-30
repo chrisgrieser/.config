@@ -4,7 +4,6 @@ vim.g.maplocalleader = "<Nop>"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 
 --------------------------------------------------------------------------------
-
 -- GENERAL
 
 vim.opt.undofile = true -- enables persistent undo history
@@ -150,6 +149,8 @@ vim.opt.fillchars:append {
 	eob = " ",
 	lastline = "↓",
 	diff = "▄",
+	fold = " ", -- overwritten by nvim-origami
+
 	-- thick window separators
 	horiz = "▄",
 	vert = "█",
@@ -162,11 +163,7 @@ vim.opt.fillchars:append {
 --------------------------------------------------------------------------------
 
 -- FOLDING
-vim.opt.foldenable = true
 vim.opt.foldlevel = 99 -- do not auto-fold
-vim.opt.foldlevelstart = 99
-vim.opt.foldcolumn = "0" -- 0 = disable
--- vim.opt.fillchars:append { fold = " " }
 vim.opt.foldtext = "" -- empty string keeps text (overwritten by nvim-origami)
 
 -- fold with LSP/Treesitter
@@ -187,6 +184,7 @@ do
 end
 
 --------------------------------------------------------------------------------
+-- DIAGNOSTICS
 
 vim.diagnostic.config {
 	jump = {
@@ -196,6 +194,7 @@ vim.diagnostic.config {
 		text = { "", "▲", "●", "" }, -- Error, Warn, Info, Hint
 	},
 	virtual_text = {
+		spacing = 2,
 		severity = {
 			min = vim.diagnostic.severity.WARN, -- leave out Info & Hint
 		},
@@ -225,4 +224,3 @@ vim.diagnostic.config {
 	},
 }
 
---------------------------------------------------------------------------------
