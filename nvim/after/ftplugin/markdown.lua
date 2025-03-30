@@ -15,29 +15,31 @@ optl.listchars:append { multispace = "·" }
 if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 
 --------------------------------------------------------------------------------
-
--- Simplified implementation of `bullets.vim`
+-- AUTO BULLETS
+-- (simplified implementation of `bullets.vim`)
 local function autoBullet()
 	local line = vim.api.nvim_get_current_line()
 	local lnum = vim.api.nvim_win_get_cursor(0)[1]
 	local indentAndPrefix = ""
-	local pointerLine = lnum
+	local pointTo = lnum
 
 	while true do
-		indentAndPrefix = line:match("^%s*[-*+] ") -- unordered list
-			or line:match("^%s*%d+[.)] ") -- ordered list
-			or line:match("^%s*>+ ") -- blockquotes & callouts
-			or line:match("^%s*%- %[[x ]%] ") -- task
-			or line:match("^%s*") -- just indent
+		indentAndPrefix = line:match("^%s*>+ ") -- blockquotes & callouts
+			or line:match("^%s*%d+[.)] ") --------- ordered list
+			or line:match("^%s*[-*+] ") ----------- unordered list
+			or line:match("^%s*%- %[[x ]%] ") ----- task
+			or line:match("^%s*") ----------------- just indent
 
-		-- in case of hardwrap, the prefix is further up
+		-- in case of multi-line bullets in hardwrapped text, the prefix we
+		-- actually want to use is further up
 		if not vim.endswith(indentAndPrefix, "  ") then break end
-		pointerLine = pointerLine - 1
-		line = vim.api.nvim_buf_get_lines(0, 0, -1, false)[pointerLine]
+		pointTo = pointTo - 1
+		if pointTo < 1 then break end
+		line = vim.api.nvim_buf_get_lines(0, 0, -1, false)[pointTo]
 	end
 
 	indentAndPrefix = indentAndPrefix
-		:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) -- incremented number in ordered list
+		:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) -- increment ordered list
 		:gsub("%[x%]", "[ ]") -- new tasks should be open
 
 	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix })
