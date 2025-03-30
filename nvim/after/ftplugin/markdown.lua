@@ -17,43 +17,27 @@ if vim.bo.buftype == "" then optl.signcolumn = "yes:4" end
 --------------------------------------------------------------------------------
 -- AUTO BULLETS
 -- (simplified implementation of `bullets.vim`)
----@param key "o" | "<CR>"
+
+-- INFO cannot set opt.comments permanently, since it disturbs the
+-- correctly indented continuation of bullet lists when hitting `opt.textwidth`
+optl.formatoptions:append("r") -- `<CR>` in insert mode
+optl.formatoptions:append("o") -- `o` in normal mode
+
 local function autoBullet(key)
-	local line = vim.api.nvim_get_current_line()
-	local lnum, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local indentAndPrefix = ""
-
-	local ln, content = lnum, line
-	while true do
-		indentAndPrefix = content:match("^%s*>+ ") -- blockquotes & callouts
-			or content:match("^%s*%d+[.)] ") --------- ordered list
-			or content:match("^%s*[-*+] ") ----------- unordered list
-			or content:match("^%s*%- %[[x ]%] ") ----- task
-			or content:match("^%s*") ----------------- just indent
-
-		-- in case of multi-line bullets in hardwrapped text, the prefix we
-		-- actually want to use is further up
-		if not vim.endswith(indentAndPrefix, "  ") then break end
-		ln = ln - 1
-		if ln < 1 then break end
-		content = vim.api.nvim_buf_get_lines(0, ln, ln + 1, false)[1]
-	end
-
-	indentAndPrefix = indentAndPrefix
-		:gsub("%d+", function(n) return tostring(tonumber(n) + 1) end) -- increment ordered list
-		:gsub("%[x%]", "[ ]") -- new tasks should be open
-
-	-- for `<CR>`, move the line content down
-	local restOfLine = key == "<CR>" and line:sub(col) or ""
-	if key == "<CR>" then vim.api.nvim_set_current_line(line:sub(1, col)) end
-
-	vim.api.nvim_buf_set_lines(0, lnum, lnum, true, { indentAndPrefix .. restOfLine })
-	vim.api.nvim_win_set_cursor(0, { lnum + 1, #indentAndPrefix })
-	vim.cmd.startinsert()
+	local comBefore = optl.comments:get()
+	-- stylua: ignore
+	optl.comments = {
+		"b:- [ ]", "b:- [x]", "b:\t* [ ]", "b:\t* [x]", -- tasks
+		"b:*", "b:-", "b:+", "b:\t*", "b:\t-", "b:\t+", -- unordered list
+		"b:1.", "b:\t1.", -- ordered list
+		"n:>", -- blockquotes
+	}
+	vim.defer_fn(function() optl.comments = comBefore end, 1) -- deferred to restore only after return
+	return key
 end
 
-bkeymap("i", "<CR>", function() autoBullet("<CR>") end, { desc = "󰉹 Auto-bullet" })
-bkeymap("n", "o", function() autoBullet("o") end, { desc = "󰉹 Auto-bullet" })
+bkeymap("n", "o", function() return autoBullet("o") end, { expr = true })
+bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
 
 --------------------------------------------------------------------------------
 -- HEADINGS

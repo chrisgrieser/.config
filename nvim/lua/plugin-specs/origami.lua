@@ -2,10 +2,12 @@ return {
 	"chrisgrieser/nvim-origami",
 	event = "VeryLazy",
 	opts = {
-		keepFoldsAcrossSessions = false, -- would require `nvim-ufo`
 		foldtextWithLineCount = {
-			enabled = true,
 			template = "  󰘖 %s",
+		},
+		autoFold = {
+			enabled = true,
+			kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
 		},
 	},
 }
