@@ -309,18 +309,24 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	end
 end
 
--- DOCS https://writewithharper.com/docs/integrations/neovim
+-- DOCS 
+-- https://writewithharper.com/docs/integrations/neovim
+-- https://writewithharper.com/docs/integrations/language-server#Configuration
 M.serverConfigs.harper_ls = {
 	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
 	settings = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile,
-			markdown = { ignore_link_title = true },
-			linters = {
-				spell_check = true,
-				sentence_capitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
+			markdown = {
+				IgnoreLinkTitle = true,
 			},
+			linters = {
+				spellCheck = true,
+				sentenceCapitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
+			},
+			isolateEnglish = true, -- experimental; in mixed-language doc only check English
+			dialect = "American"
 		},
 	},
 	on_attach = function(harper, bufnr)
@@ -330,7 +336,7 @@ M.serverConfigs.harper_ls = {
 				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
 				apply = true,
 			}
-		end, { desc = "󰓆 Add Word to spellfile", buffer = bufnr })
+		end, { desc = "󰓆 Add word to spellfile", buffer = bufnr })
 	end,
 }
 
