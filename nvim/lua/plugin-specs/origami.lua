@@ -1,6 +1,6 @@
 return {
 	"chrisgrieser/nvim-origami",
-	event = "VeryLazy",
+	lazy = false,
 	opts = {
 		foldtextWithLineCount = {
 			enabled = true,
