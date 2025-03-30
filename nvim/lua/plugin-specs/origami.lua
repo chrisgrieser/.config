@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		foldtextWithLineCount = {
+			enabled = false, -- TEMP
 			template = "  󰘖 %s",
 		},
 		autoFold = {
