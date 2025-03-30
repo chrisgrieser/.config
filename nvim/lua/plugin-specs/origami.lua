@@ -1,9 +1,9 @@
 return {
 	"chrisgrieser/nvim-origami",
-	lazy = false,
+	event = "VeryLazy",
 	opts = {
 		foldtextWithLineCount = {
-			enabled = false,
+			enabled = true,
 			template = "  󰘖 %s",
 		},
 	},

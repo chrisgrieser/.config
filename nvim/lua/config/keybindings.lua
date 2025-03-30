@@ -39,9 +39,6 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
--- Close all top-level folds
--- keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
-
 -- Open first URL in file
 keymap("n", "<D-U>", function()
 	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
