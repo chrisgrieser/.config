@@ -2,11 +2,8 @@ local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
-bkeymap("n", "<leader>er", vim.cmd.source, { desc = "󰢱 :source" })
-
---------------------------------------------------------------------------------
--- FIXES HABITS FROM WRITING TOO MUCH IN OTHER LANGUAGES
-
+-- FIXES HABITS 
+-- from writing too much in other languages
 abbr("//", "--")
 abbr("const", "local")
 abbr("let", "local")
@@ -30,27 +27,8 @@ local function plusPlusMinusMinus(sign)
 		vim.api.nvim_win_set_cursor(0, { row, col + diff })
 	end
 end
-bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i + 1" })
-bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i - 1" })
-
---------------------------------------------------------------------------------
--- AUTO-COMMA FOR TABLES
-
-vim.api.nvim_create_autocmd("TextChangedI", {
-	desc = "User (buffer-specific): auto-comma for tables",
-	buffer = 0,
-	group = vim.api.nvim_create_augroup("lua-autocomma", { clear = true }),
-	callback = function()
-		local node = vim.treesitter.get_node()
-		local parent = node and node:parent()
-		if not (node and parent) then return end
-
-		if node:type() == "table_constructor" or parent:type() == "table_constructor" then
-			local line = vim.api.nvim_get_current_line()
-			if line:find("^%s*[^,%s%-]$") then vim.api.nvim_set_current_line(line .. ",") end
-		end
-	end,
-})
+bkeymap("i", "+", function() plusPlusMinusMinus("+") end, { desc = "i++  i = i+1" })
+bkeymap("i", "-", function() plusPlusMinusMinus("-") end, { desc = "i--  i = i-1" })
 
 --------------------------------------------------------------------------------
 -- YANK MODULE NAME

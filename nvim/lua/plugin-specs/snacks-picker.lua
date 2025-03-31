@@ -89,13 +89,13 @@ return {
 		{
 			"<leader>ci",
 			function()
-				local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 				Snacks.picker.grep_word {
 					cmd = "rg",
-					search = regex,
+					search = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]],
 					regex = true,
 					ft = "lua",
 					live = false,
+					formatters = { file = { filename_only = true } },
 					args = { "--only-matching" },
 					confirm = function(picker, item)
 						picker:close()
@@ -104,9 +104,6 @@ return {
 						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import })
 						vim.cmd.normal { "j==", bang = true }
 					end,
-					formatters = {
-						file = { filename_only = true },
-					},
 					layout = {
 						preset = "small_no_preview",
 						layout = { width = 0.8 },
@@ -128,12 +125,13 @@ return {
 		-- LSP
 
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
+		{ "gF", function() Snacks.picker.lsp_implementations() end, desc = "󰈿 Implementations" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
-		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter Symbols" },
-		-- stylua: ignore
-		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+
 		-- `lsp_symbols` tends to too much clutter like anonymous function
+		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter Symbols" },
+		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symb." },
 		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
 
 		--------------------------------------------------------------------------
@@ -148,13 +146,12 @@ return {
 
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = "󰗲 Highlights" },
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
+		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
+		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
-		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-
-		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		{
@@ -180,6 +177,7 @@ return {
 				},
 				grep = {
 					cmd = "rg",
+					formatters = { file = { filename_only = true } },
 					args = {
 						"--trim",
 						"--sortr=modified", -- sort by recency

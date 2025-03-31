@@ -113,7 +113,12 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 -- QUICKFIX
 keymap("n", "gq", "]q", { desc = "󰒭 Next quickfix", remap = true })
 keymap("n", "gQ", "[q", { desc = "󰒮 Prev quickfix", remap = true })
-keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete quickfix list" })
+keymap(
+	"n",
+	"<leader>qd",
+	function() vim.cmd.cexpr("[]") end,
+	{ desc = "󰚃 Delete quickfix list" }
+)
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
 	local quickfixWinOpen = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
@@ -342,6 +347,9 @@ keymap({ "n", "x" }, "<leader>es", function()
 	local path = location .. "/scratch." .. currentExt
 	vim.cmd.edit(path)
 	vim.cmd.write(path)
+	if currentExt == "lua" then
+		vim.keymap.set("n", "<leader>er", vim.cmd.source, { desc = "󰢱 :source", buffer = true })
+	end
 end, { desc = "󰈮 Scratch file" })
 
 keymap({ "n", "x" }, "<leader>ee", ":lua = ", { desc = " Eval" })
