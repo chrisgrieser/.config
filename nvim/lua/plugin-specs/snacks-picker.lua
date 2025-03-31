@@ -13,8 +13,8 @@ return {
 				Snacks.picker.files {
 					title = " " .. vim.fs.basename(vim.uv.cwd()),
 					transform = function(item, _ctx)
-						local path = Snacks.picker.util.path(item)
-						if path == currentFile then return false end
+						local itemPath = Snacks.picker.util.path(item)
+						if itemPath == currentFile then return false end
 					end,
 				}
 			end,
@@ -91,7 +91,7 @@ return {
 			function()
 				Snacks.picker.grep_word {
 					cmd = "rg",
-					search = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]],
+					search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 					regex = true,
 					ft = "lua",
 					live = false,
@@ -108,7 +108,7 @@ return {
 						preset = "small_no_preview",
 						layout = { width = 0.8 },
 					},
-					-- ensure imports are unique
+					-- ensure items are unique
 					transform = function(item, ctx)
 						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
 						local import = vim.trim(item.text:gsub(".-:", ""))
