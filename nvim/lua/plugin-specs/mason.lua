@@ -3,14 +3,14 @@
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
-	local notifyOpts = { title = "Mason", icon = " ", id = "mason.install", style = "minimal" }
+	local notifyOpts = { title = "Mason", icon = "", id = "mason.install" }
 
 	local msg = version and ("[%s] updating to %s…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
 	vim.notify(msg, nil, notifyOpts)
 
 	pack:once("install:success", function()
-		local msg2 = ("[%s] %s"):format(pack.name, version and "updated" or "installed")
+		local msg2 = ("[%s] %s"):format(pack.name, version and "updated." or "installed.")
 		notifyOpts.icon = " "
 		vim.notify(msg2, nil, notifyOpts)
 	end)
@@ -49,8 +49,8 @@ local function syncPackages(ensurePacks)
 		vim.iter(installedPackages):each(function(packName)
 			if not vim.tbl_contains(ensurePacks, packName) then
 				masonReg.get_package(packName):uninstall()
-				local msg = ("[%s] uninstalled"):format(packName)
-				vim.notify(msg, nil, { title = "Mason", icon = "󰅗 ", style = "minimal" })
+				local msg = ("[%s] uninstalled."):format(packName)
+				vim.notify(msg, nil, { title = "Mason", icon = "󰅗" })
 			end
 		end)
 	end
@@ -87,6 +87,7 @@ return {
 			border = vim.o.winborder,
 			height = 0.85,
 			width = 0.8,
+			backdrop = 100, -- disable PENDING https://github.com/williamboman/mason.nvim/pull/1900
 			icons = {
 				package_installed = "✓",
 				package_pending = "󰔟",
