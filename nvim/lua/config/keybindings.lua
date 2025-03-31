@@ -41,21 +41,9 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
--- stylua: ignore
-keymap("n", "ge", function() vim.diagnostic.jump { count = 1 } end, { desc = "󰒕 Next diagnostic" })
--- stylua: ignore
-keymap("n", "gE", function() vim.diagnostic.jump { count = -1 } end, { desc = "󰒕 Prev diagnostic" })
-
--- Open first URL in file
-keymap("n", "<D-U>", function()
-	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-	local url = text:match([[%l%l%l+://[^%s)%]}"'`>]+]])
-	if url then
-		vim.ui.open(url)
-	else
-		vim.notify("No URL found in file.", vim.log.levels.WARN)
-	end
-end, { desc = " Open first URL in file" })
+-- Diagnostics
+keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
+keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
 
 --------------------------------------------------------------------------------
 -- EDITING
@@ -131,6 +119,7 @@ keymap("n", "<leader>qq", function()
 	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
 	vim.cmd[hasQuickfix and "cclose" or "copen"]()
 end, { desc = " Toggle window" })
+
 
 --------------------------------------------------------------------------------
 -- FOLDING
@@ -297,6 +286,19 @@ do
 	keymap("n", "<PageDown>", function() scrollLspWin(5) end, { desc = "↓ Scroll LSP win" })
 	keymap("n", "<PageUp>", function() scrollLspWin(-5) end, { desc = "↑ Scroll LSP win" })
 end
+
+--------------------------------------------------------------------------------
+
+-- Open first URL in file
+keymap("n", "<D-U>", function()
+	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+	local url = text:match([[%l%l%l+://[^%s)%]}"'`>]+]])
+	if url then
+		vim.ui.open(url)
+	else
+		vim.notify("No URL found in file.", vim.log.levels.WARN)
+	end
+end, { desc = " Open first URL in file" })
 
 --------------------------------------------------------------------------------
 

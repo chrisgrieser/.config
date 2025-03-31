@@ -471,7 +471,9 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 --------------------------------------------------------------------------------
--- KEEP automatically
+-- SPLITS
 vim.api.nvim_create_autocmd("VimResized", {
+	desc = "User: keep splits equally sized on window resize",
 	command = "wincmd =",
 })
+
