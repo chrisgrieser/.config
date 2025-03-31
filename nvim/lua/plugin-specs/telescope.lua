@@ -359,17 +359,6 @@ return {
 
 		-- FILES
 		{
-			"gp",
-			function()
-				require("telescope.builtin").find_files {
-					prompt_title = "󰈮 Local plugins",
-					cwd = vim.fn.stdpath("data") .. "/lazy",
-					file_ignore_patterns = { "/tests/", "/doc/", "%.toml$" },
-				}
-			end,
-			desc = "󰭎 Local plugin code",
-		},
-		{
 			"gP",
 			function()
 				local projects = vim.iter(vim.fs.dir(vim.g.localRepos))
@@ -394,21 +383,7 @@ return {
 			end,
 			desc = " Project",
 		},
-		{
-			"g,",
-			function()
-				require("telescope.builtin").find_files {
-					prompt_title = " nvim config",
-					cwd = vim.fn.stdpath("config"),
-				}
-			end,
-			desc = " nvim config",
-		},
 		-- LSP
-		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
-		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
-		-- stylua: ignore
-		{ "gD", function() vim.cmd.Telescope("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
 		{
 			"g!",
 			function()
@@ -474,7 +449,6 @@ return {
 		},
 
 		-- MISC
-		{ "g.", function() vim.cmd.Telescope("resume") end, desc = "󰭎 Resume" },
 		{
 			"<leader>pc",
 			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
