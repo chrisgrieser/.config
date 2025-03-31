@@ -7,14 +7,14 @@ return {
 	keys = {
 		-- FILES
 		{
-			"gO",
-			function() Snacks.picker.files { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
-			desc = " Open files",
-		},
-		{
 			"go",
 			function() Snacks.picker.smart { title = "󰧑 " .. vim.fs.basename(vim.uv.cwd()) } end,
 			desc = "󰧑 Smart open files",
+		},
+		{
+			"gO",
+			function() Snacks.picker.files { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
+			desc = " Open files",
 		},
 		{
 			"g,",
@@ -60,6 +60,16 @@ return {
 			nowait = true, -- nvim default mappings starting with `gr`
 		},
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
+		{
+			"<leader>ci",
+			function()
+				Snacks.picker.grep{
+
+				}
+			end,
+			ft = "lua",
+			desc = "󰛢 Import",
+		},
 
 		--------------------------------------------------------------------------
 		-- LSP
@@ -74,6 +84,7 @@ return {
 
 		--------------------------------------------------------------------------
 		-- GIT
+
 		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰭎 Branches" },
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰭎 Log" },
@@ -99,6 +110,7 @@ return {
 		},
 	},
 	opts = {
+		---@class snacks.picker.Config
 		picker = {
 			ui_select = true, -- use `vim.ui.select`
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
@@ -110,9 +122,14 @@ return {
 						"--sortr=modified", -- sort by recency
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
+					layout = "small_no_preview",
 				},
 				recent = {
 					filter = { paths = {} },
+					layout = "small_no_preview",
+				},
+				smart = {
+					layout = "small_no_preview",
 				},
 				grep = {
 					cmd = "rg",
@@ -140,9 +157,8 @@ return {
 				},
 				icons = {
 					layout = {
-						preset = "vertical", -- BUG cannot disable the preset to have it use my default
-						preview = false,
-						layout = { height = 0.5, min_height = 10, min_width = 70 },
+						preset = "small_no_preview",
+						layout = { width = 0.7 },
 					},
 				},
 				highlights = {
@@ -151,11 +167,6 @@ return {
 						vim.notify(item.hl_group, nil, { title = "Copied", icon = "󰅍" })
 						picker:close()
 					end,
-				},
-				lsp_workspace_symbols = {
-					matcher = {
-						cwd_bonus = true, -- since it can search outside the cwd, e.g., due to lazydev
-					},
 				},
 				git_status = {
 					win = {
@@ -180,8 +191,9 @@ return {
 				diff = { builtin = false }, -- use delta automatically
 				git = { builtin = false },
 			},
-			layout = function(source)
-				local small = {
+			layout = "wide_with_preview", -- use this as default layout
+			layouts = { -- define available layouts
+				small_no_preview = {
 					layout = {
 						box = "horizontal",
 						width = 0.6,
@@ -189,26 +201,27 @@ return {
 						border = "none",
 						{
 							box = "vertical",
-							border = vim.o.winborder,
+							border = vim.o.winborder, ---@diagnostic disable-line: assign-type-mismatch faulty annotation
 							title = "{title} {live} {flags}",
 							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
 						},
 					},
-				}
-				local large = vim.deepcopy(small)
-				large.layout.width = 0.99
-				large.layout[2] = {
-					win = "preview",
-					title = "{preview}",
-					border = vim.o.winborder,
-					width = 0.5,
-					wo = { number = false, statuscolumn = " ", signcolumn = "no" },
-				}
-
-				if vim.list_contains({ "files", "recent", "smart" }, source) then return small end
-				return large
-			end,
+				},
+				wide_with_preview = {
+					preset = "small_no_preview", -- inherit from above
+					layout = {
+						width = 0.99,
+						[2] = { -- as second column
+							win = "preview",
+							title = "{preview}",
+							border = vim.o.winborder, ---@diagnostic disable-line: assign-type-mismatch faulty annotation
+							width = 0.5,
+							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
+						},
+					},
+				},
+			},
 			win = {
 				input = {
 					keys = {
@@ -216,6 +229,7 @@ return {
 						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
+						["<D-Up>"] = { "list_top", "jump", mode = "i" },
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
 						["<Down>"] = { "history_forward", mode = "i" },
@@ -238,14 +252,14 @@ return {
 					picker:action(action)
 				end,
 				toggle_hidden_and_ignored = function(picker)
-					picker.opts.hidden = not picker.opts.hidden
-					picker.opts.ignored = not picker.opts.ignored
-					picker.opts.exclude = { ".DS_Store" }
+					picker.opts["hidden"] = not picker.opts.hidden
+					picker.opts["ignored"] = not picker.opts.ignored
+					picker.opts["exclude"] = { ".DS_Store" }
 					picker:find()
 				end,
 				reveal_in_macOS_Finder = function(picker)
-					if jit.os ~= "OSX" then return end
 					local item = picker:current()
+					if jit.os ~= "OSX" or not item then return end
 					local absPath = item.cwd .. "/" .. item.file
 					vim.system { "open", "-R", absPath }
 					picker:close()
@@ -263,7 +277,7 @@ return {
 				end,
 			},
 			prompt = " ", -- slightly to the left
-			icons = {
+			icons = { ---@diagnostic disable-line: missing-fields -- faulty annotation
 				ui = { selected = "󰒆 ", unselected = "  " },
 				git = { staged = "󰐖" }, -- consistent with tinygit
 				undo = { saved = "" }, -- useless, since I have auto-saving

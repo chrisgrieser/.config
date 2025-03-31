@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd("TextChangedI", {
 
 -- lightweight version of `telescope-import.nvim` import (just for lua)
 -- REQUIRED `ripgrep` (optionally `telescope` for selector & syntax highlighting)
-bkeymap("n", "<leader>ci", function()
+bkeymap("n", "<leader>cI", function()
 	local isAtBlank = vim.api.nvim_get_current_line():match("^%s*$")
 
 	local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
