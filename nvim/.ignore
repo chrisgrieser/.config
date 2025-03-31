@@ -5,6 +5,7 @@ after/ftplugin/github-markdown.css
 
 # snippets files (already using nvim-scissors for that)
 snippets/**
+!snippets/package.json
 
 # skeletons rarely touched
 templates/**

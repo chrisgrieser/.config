@@ -5,8 +5,7 @@
 		"unusedLocalExclude": ["_*"]
 	},
 	"workspace": {
-		"ignoreDir": ["debug", "templates", "TEMP*"],
-		"library": ["/opt/homebrew/Cellar/neovim/0.11.0/share/nvim/runtime/lua"]
+		"ignoreDir": ["debug", "templates", "TEMP*"]
 	},
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }

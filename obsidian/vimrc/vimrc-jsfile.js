@@ -20,7 +20,6 @@ function deleteLastChar() {
 
 async function updatePlugins() {
 	const app = view.app;
-
 	new Notice("Checking for updates…");
 	await app.plugins.checkForUpdates();
 
