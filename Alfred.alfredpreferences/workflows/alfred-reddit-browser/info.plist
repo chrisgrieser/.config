@@ -552,7 +552,12 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
+	<string>## Info
+Sometimes, there will be the error message "You have been blocked by network 
+security." Unfortunately, I am not certain what exactly causes this. Usually, 
+the workflow will work again in a few hours. 
+
+## Usage
 - `sub`: Select subreddit to browse.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Browse subreddit in Alfred.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open subreddit in browser. 
@@ -565,10 +570,6 @@
 	+ &lt;kbd&gt;⇧&lt;/kbd&gt; or &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Preview the result. Works with [Alfred Extra
 	  Pane](https://github.com/mr-pennyworth/alfred-extra-pane).
 - `:reddit-reload`: Force reload the cache. Only needed for debugging purposes.
-
-
-## Info
-- No reddit account is needed. 
 
 ---
 
@@ -1033,7 +1034,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.11</string>
+	<string>1.6.12</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

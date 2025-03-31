@@ -1,9 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = "BufReadPre",
-	keys = {
-		{ "<leader>ol", vim.cmd.LspRestart, desc = "󰑓 LSP restart" },
-	},
 	config = function()
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 

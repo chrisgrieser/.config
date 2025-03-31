@@ -14,3 +14,4 @@ strikethroughs
 config
 LSP
 deprecations
+lspconfig

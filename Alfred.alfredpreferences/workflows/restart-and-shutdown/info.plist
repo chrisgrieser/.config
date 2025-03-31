@@ -211,21 +211,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>command</key>
-				<integer>8</integer>
-				<key>confirm</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.systemcommand</string>
-			<key>uid</key>
-			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -243,6 +228,21 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>6594A058-1046-48E9-82E3-FE0574D679D5</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>command</key>
+				<integer>8</integer>
+				<key>confirm</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.systemcommand</string>
+			<key>uid</key>
+			<string>96BEB152-706D-407E-882B-113E7E4821F5</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -288,7 +288,7 @@
 				<key>fixedorder</key>
 				<false/>
 				<key>items</key>
-				<string>[{"imagefile":"51f5cfbde3c354791b5ab96575dbdfd0c0480876.png","title":"Neovide &amp; Neovim","arg":"Neovide","subtitle":"❗️restart"},{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":"❗️restart"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":"❗️restart"},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":"❗️restart"}]</string>
+				<string>[{"imagefile":"51f5cfbde3c354791b5ab96575dbdfd0c0480876.png","title":"Neovide &amp; Neovim","arg":"Neovide","subtitle":""},{"imagefile":"efb8cca57e4d67981a976010a2d2953e2aec83c5.png","title":"AltTab","arg":"AltTab","subtitle":""},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"hammerspoon_reload","subtitle":"🔁 reload"},{"imagefile":"31e8e84684405b35c7896380a515cd49fc250b5e.png","title":"Hammerspoon","arg":"Hammerspoon","subtitle":""},{"imagefile":"91a15ef6185b87dc073439ce4b7f2b120c5bfdca.png","title":"sketchybar","arg":"sketchybar","subtitle":"🔁 reload"},{"imagefile":"80cebc78d376b7946a2ab63288812da45a1764b3.png","title":"espanso","arg":"espanso","subtitle":""}]</string>
 				<key>keyword</key>
 				<string>restart</string>
 				<key>matchmode</key>
@@ -374,7 +374,7 @@
 			<key>colorindex</key>
 			<integer>10</integer>
 			<key>note</key>
-			<string>Restart front app</string>
+			<string>restart front app</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>

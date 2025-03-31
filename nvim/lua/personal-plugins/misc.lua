@@ -273,7 +273,6 @@ function M.lspCapabilities()
 		local info = {
 			capabilities = client.capabilities,
 			server_capabilities = client.server_capabilities,
-			config = client.config,
 		}
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
 		local header = "-- for a full view, open in notification history\n"
