@@ -8,13 +8,37 @@ return {
 		-- FILES
 		{
 			"go",
-			function() Snacks.picker.smart { title = "󰧑 " .. vim.fs.basename(vim.uv.cwd()) } end,
-			desc = "󰧑 Smart open files",
-		},
-		{
-			"gO",
-			function() Snacks.picker.files { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
+			function()
+				local currentFile = vim.api.nvim_buf_get_name(0)
+				Snacks.picker.files {
+					title = " " .. vim.fs.basename(vim.uv.cwd()),
+					transform = function(item, _ctx)
+						local path = Snacks.picker.util.path(item)
+						if path == currentFile then return false end
+					end,
+				}
+			end,
 			desc = " Open files",
+		},
+		-- {
+		-- 	"gr",
+		-- 	function() Snacks.picker.recent() end,
+		-- 	desc = " Recent files",
+		-- 	nowait = true, -- nvim default mappings starting with `gr`
+		-- },
+		{
+			"gr",
+			function()
+				local currentFile = vim.api.nvim_buf_get_name(0)
+				Snacks.picker.smart {
+					transform = function(item, _ctx)
+						local path = Snacks.picker.util.path(item)
+						if path == currentFile then return false end
+					end,
+				}
+			end,
+			desc = "󰧑 Recent & open files",
+			nowait = true, -- nvim default mappings starting with `gr`
 		},
 		{
 			"g,",
@@ -48,21 +72,15 @@ return {
 				vim.ui.select(projects, { prompt = " Select project: " }, function(project)
 					if not project then return end
 					local path = vim.fs.joinpath(vim.g.localRepos, project)
-					Snacks.picker.projects { title = " " .. project, cwd = path }
+					Snacks.picker.files { title = " " .. project, cwd = path }
 				end)
 			end,
 			desc = " Project",
 		},
-		{
-			"gr",
-			function() Snacks.picker.recent() end,
-			desc = " Recent files",
-			nowait = true, -- nvim default mappings starting with `gr`
-		},
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-		{
+		{ -- lightweight version of `telescope-import.nvim`
 			"<leader>ci",
-			function() -- lightweight version of `telescope-import.nvim`
+			function()
 				local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
 				Snacks.picker.grep_word {
 					cmd = "rg",
@@ -73,7 +91,7 @@ return {
 					args = { "--only-matching" },
 					confirm = function(picker, item)
 						picker:close()
-						local import = item.text:gsub(".-:", "")
+						local import = vim.trim(item.text:gsub(".-:", ""))
 						local lnum = vim.api.nvim_win_get_cursor(0)[1]
 						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import })
 						vim.cmd.normal { "j==", bang = true }
@@ -88,7 +106,7 @@ return {
 					-- ensure imports are unique
 					transform = function(item, ctx)
 						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
-						local import = item.text:gsub(".-:", "")
+						local import = vim.trim(item.text:gsub(".-:", ""))
 						if ctx.meta.done[import] then return false end
 						ctx.meta.done[import] = true
 					end,
@@ -137,8 +155,6 @@ return {
 		},
 	},
 	opts = {
-		---@class snacks.picker.transform
-
 		---@class snacks.picker.Config
 		picker = {
 			sources = {
@@ -154,8 +170,10 @@ return {
 					filter = { paths = {} },
 					layout = "small_no_preview",
 				},
-				smart = {
+				smart = { -- use this as improved recent file search
 					layout = "small_no_preview",
+					multi = { "buffer", "recent" },
+					matcher = { cwd_bonus = false }
 				},
 				grep = {
 					cmd = "rg",
@@ -264,7 +282,7 @@ return {
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
-						["<D-c>"] = { "yank_display_text", mode = "i" },
+						["<D-c>"] = { "yank", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 						["?"] = { "inspect", mode = "i" },
@@ -293,12 +311,6 @@ return {
 					picker:action("qflist")
 					vim.cmd.cclose()
 					vim.cmd.cfirst()
-				end,
-				yank_text = function(picker)
-					local value = picker:current().file or picker:current().text
-					vim.fn.setreg("+", value)
-					vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
-					picker:close()
 				end,
 			},
 			prompt = " ", -- slightly to the left

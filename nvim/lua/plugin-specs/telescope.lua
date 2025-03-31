@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("User", {
 return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
+	cmd = "Telescope",
 	opts = {
 		defaults = {
 			path_display = { "tail" },
