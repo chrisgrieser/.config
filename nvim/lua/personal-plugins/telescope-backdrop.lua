@@ -1,5 +1,4 @@
--- PENDING
--- https://github.com/nvim-telescope/telescope.nvim/issues/3020
+-- PENDING https://github.com/nvim-telescope/telescope.nvim/issues/3020
 
 -- CONFIG
 local blend = 40
