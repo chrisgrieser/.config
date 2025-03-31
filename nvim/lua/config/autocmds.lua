@@ -470,3 +470,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
+--------------------------------------------------------------------------------
+-- KEEP automatically
+vim.api.nvim_create_autocmd("VimResized", {
+	command = "wincmd =",
+})

@@ -10,7 +10,7 @@
 	"WARN": [
 		"Do not add `workspace.library` for the EmmyLua Docs here,",
 		"since they break some LSP features. They are already automatically recognized",
-		"since they are included in the workspace."
+		"since the EmmyLua Spoon is located in the workspace."
 	],
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
