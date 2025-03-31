@@ -8,20 +8,13 @@ return {
 		-- FILES
 		{
 			"go",
-			function()
-				Snacks.picker.files {
-					title = " " .. vim.fs.basename(vim.uv.cwd() or "n/a"),
-				}
-			end,
+			function() Snacks.picker.files { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
 			desc = " Open files",
 		},
 		{
 			"g,",
 			function()
-				Snacks.picker.files {
-					cwd = vim.fn.stdpath("config"),
-					title = " nvim config",
-				}
+				Snacks.picker.files { cwd = vim.fn.stdpath("config"), title = " nvim config" }
 			end,
 			desc = " nvim config",
 		},
@@ -66,39 +59,13 @@ return {
 		--------------------------------------------------------------------------
 		-- LSP
 
-		-- stylua: ignore
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
-		-- stylua: ignore
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
-		{
-			"gw",
-			function() Snacks.picker.lsp_workspace_symbols() end,
-			desc = "󰒕 Workspace symbols",
-		},
-		{
-			"gs",
-			function()
-				-- lua files: using treesitter symbols instead, since the LSP
-				-- symbols are crowded with anonymous functions
-				if vim.bo.filetype == "lua" then
-					Snacks.picker.treesitter()
-					return
-				end
-				local symbolFilter = {
-					yaml = { "object", "array" },
-					json = "module",
-					toml = "object",
-					markdown = "string", -- string -> markdown headings
-				}
-				-- stylua: ignore
-				local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
-				local filter = symbolFilter[vim.bo.filetype]
-				local opts = filter and { symbols = filter } or { ignore_symbols = ignoreSymbols }
-				require("telescope.builtin").lsp_symbols(opts)
-			end,
-			desc = "󰒕 Symbols",
-		},
+		-- stylua: ignore
+		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
+		{ "gs", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 symbols" },
+		{ "g!", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 symbols" },
 
 		--------------------------------------------------------------------------
 		-- MISC
@@ -113,12 +80,8 @@ return {
 			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
 			desc = "󰌌 Keymaps (buffer)",
 		},
-		{
-			"<C-.>",
-			function() Snacks.picker.icons() end,
-			mode = { "n", "i" },
-			desc = "󱗿 Icon picker",
-		},
+		-- stylua: ignore
+		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 	},
 	opts = {
 		picker = {
@@ -157,6 +120,9 @@ return {
 				recent = {
 					filter = { paths = {} },
 				},
+				colorschemes = {
+					layout = { preset = "ivy" }, -- at the bottom, so there is more space to preview
+				},
 				icons = {
 					layout = {
 						preset = "vertical", -- BUG cannot disable the preset to have it use my default
@@ -171,10 +137,16 @@ return {
 						picker:close()
 					end,
 				},
+				lsp_workspace_symbols = {
+					filter = {
+						default = { "Class", "Function", "Interface", "Method" },
+					},
+				},
+				diagnostics = { },
 			},
 
 			formatters = {
-				file = { filename_first = true, truncate = math.huge },
+				file = { filename_first = true, truncate = 70 },
 			},
 			layout = function(source)
 				local small = {
@@ -253,6 +225,10 @@ return {
 					vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
 					picker:close()
 				end,
+			},
+			icons = {
+				ui = { selected = "󰒆", unselected = "" },
+				git = { staged = "󰐖" }, -- consistent with tinygit
 			},
 		},
 	},

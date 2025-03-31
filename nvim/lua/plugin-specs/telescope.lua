@@ -359,52 +359,5 @@ return {
 			end,
 			desc = "󰋼 Workspace diagnostics",
 		},
-		{
-			"gw",
-			function()
-				-- Due to `lazydev`, the whole nvim runtime is added to the
-				-- workspace, making this picker much too crowded.
-				-- `file_ignore_patterns` is thus set to ignore symbols from plugins
-				-- and nvim core. However, the nvim config itself should only be
-				-- ignored when not in the nvim config directory (e.g., in a plugin
-				-- dir). To achieve that, we have to dynamically decide here whether
-				-- to ignore it.
-				local isInNvimConfig = vim.uv.cwd() == vim.fn.stdpath("config")
-				local ignore = nil
-				if not isInNvimConfig then
-					local pickerIgnore =
-						require("telescope.config").pickers.lsp_dynamic_workspace_symbols.file_ignore_patterns
-					ignore = vim.deepcopy(pickerIgnore or {})
-					table.insert(ignore, vim.fn.stdpath("config"))
-				end
-				require("telescope.builtin").lsp_dynamic_workspace_symbols {
-					file_ignore_patterns = ignore,
-				}
-			end,
-			desc = "󰒕 Workspace symbols",
-		},
-		{
-			"gs",
-			function()
-				-- lua files: using treesitter symbols instead, since the LSP
-				-- symbols are crowded with anonymous functions
-				if vim.bo.filetype == "lua" then
-					vim.cmd.Telescope("treesitter")
-					return
-				end
-				local symbolFilter = {
-					yaml = { "object", "array" },
-					json = "module",
-					toml = "object",
-					markdown = "string", -- string -> markdown headings
-				}
-				-- stylua: ignore
-				local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
-				local filter = symbolFilter[vim.bo.filetype]
-				local opts = filter and { symbols = filter } or { ignore_symbols = ignoreSymbols }
-				require("telescope.builtin").lsp_document_symbols(opts)
-			end,
-			desc = "󰒕 Symbols",
-		},
 	},
 }
