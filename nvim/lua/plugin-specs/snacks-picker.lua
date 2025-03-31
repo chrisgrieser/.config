@@ -130,9 +130,10 @@ return {
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter Symbols" },
 		-- stylua: ignore
 		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "gs", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 Symbols" },
+		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
 
 		--------------------------------------------------------------------------
@@ -180,6 +181,7 @@ return {
 				grep = {
 					cmd = "rg",
 					args = {
+						"--trim",
 						"--sortr=modified", -- sort by recency
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
