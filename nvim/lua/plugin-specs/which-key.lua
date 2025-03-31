@@ -11,11 +11,6 @@ end
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	keys = {
-		-- alternative: `:Telescope keymaps` with `only_buf = true`
-		-- stylua: ignore
-		{ "<leader>iK", function() require("which-key").show { global = false } end, desc = "󰌌 Keymaps (buffer)" },
-	},
 	opts = {
 		delay = 400,
 		preset = "helix",
