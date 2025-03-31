@@ -45,11 +45,7 @@ vim.api.nvim_create_autocmd("TextChangedI", {
 		local parent = node and node:parent()
 		if not (node and parent) then return end
 
-		if
-			node:type() == "table_constructor"
-			or parent:type() == "table_constructor"
-			or parent:parent() and parent:parent():type() == "table_constructor"
-		then
+		if node:type() == "table_constructor" or parent:type() == "table_constructor" then
 			local line = vim.api.nvim_get_current_line()
 			if line:find("^%s*[^,%s%-]$") then vim.api.nvim_set_current_line(line .. ",") end
 		end
