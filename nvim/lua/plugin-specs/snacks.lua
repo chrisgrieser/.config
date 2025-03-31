@@ -107,26 +107,51 @@ return {
 			mode = "i",
 			desc = "󱗿 Icon picker",
 		},
+		{
+			"gO",
+			function()
+				require("snacks").picker.files {
+					cmd = "rg",
+					args = {
+						"--sortr=modified",
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
+					win = {
+						input = {
+							keys = {
+								["<C-h>"] = { "toggle_ignored", mode = "i" }, -- consistent with `fzf`
+							},
+						},
+					},
+				}
+			end,
+			desc = "󱗿 Files",
+		},
 	},
 	opts = {
 		picker = {
 			ui_select = true,
 			layout = { -- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
 				---@diagnostic disable: assign-type-mismatch
-				preset = "default",
 				layout = {
 					box = "horizontal",
 					width = 0.9,
-					height = 0.8,
+					height = 0.6,
 					border = "none",
 					{
 						box = "vertical",
-						border = "none",
+						border = vim.o.winborder,
 						title = "{title} {live} {flags}",
-						{ win = "input", height = 1, border = vim.o.winborder },
-						{ win = "list", border = vim.o.winborder },
+						{ win = "input", height = 1, border = "bottom" },
+						{ win = "list", border = "none" },
 					},
-					{ win = "preview", title = "{preview}", border = vim.o.winborder, width = 0.5 },
+					{
+						win = "preview",
+						title = "{preview}",
+						border = vim.o.winborder,
+						width = 0.5,
+						wo = { number = false, statuscolumn = " ", signcolumn = "no" },
+					},
 				},
 				---@diagnostic enable: assign-type-mismatch
 			},
@@ -134,18 +159,19 @@ return {
 				file = {
 					filename_first = true,
 					truncate = 40, -- truncate the file path to (roughly) this length
-					filename_only = false,
 					icon_width = 2,
-					git_status_hl = true, -- use the git status highlight group for the filename
+					git_status_hl = false, -- use the git status highlight group for the filename
 				},
 			},
 			win = {
 				input = {
 					keys = {
 						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
-						["<Tab>"] = { "list_down", mode = { "i", "n" } },
-						["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
-						["<M-CR>"] = { "select_and_next", mode = { "i", "n" } }, -- consistent with `fzf`
+						["<Tab>"] = { "list_down", mode = "i" },
+						["<S-Tab>"] = { "list_up", mode = "i" },
+						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
+						["<Up>"] = { "history_back", mode = "i" },
+						["<Down>"] = { "history_forward", mode = "i" },
 					},
 				},
 			},
