@@ -432,14 +432,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	desc = "User: Automatically goto 1st quickfix item",
-	callback = function()
-		-- `pcall` as event also triggered on empty quickfix, where `:cfirst` fails
-		vim.defer_fn(function() pcall(vim.cmd.cfirst) end, 100)
-	end,
-})
-
 --------------------------------------------------------------------------------
 -- LSP RENAME – ADD NOTIFICATION
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
