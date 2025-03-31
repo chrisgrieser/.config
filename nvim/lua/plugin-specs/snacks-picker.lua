@@ -30,7 +30,8 @@ return {
 			"gR",
 			function()
 				-- FIX it is not possible to override the default path filter for
-				-- the data directory
+				-- the data directory, since `true` means include, and `false` makes
+				-- it an exclusion
 				Snacks.picker.recent {
 					title = "󰋚 Recent (only nvim data)",
 					filter = { paths = { [vim.fn.stdpath("data")] = true } },
@@ -51,7 +52,7 @@ return {
 				Snacks.picker.files {
 					title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
-					exclude = { "tests/*", "doc/*", "*.toml" },
+					exclude = { "*/tests/*", "*/doc/*", "*.toml" },
 					matcher = { filename_bonus = false },
 					formatters = { file = { filename_first = false } },
 				}
@@ -75,8 +76,17 @@ return {
 			end,
 			desc = " Project",
 		},
+
+		--------------------------------------------------------------------------
+		-- GREP
+
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-		{ -- lightweight version of `telescope-import.nvim`
+		-- stylua: ignore
+		{ "gL", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "󰛢 Grep word" },
+
+		-- IMPORT LUA MODULE
+		-- lightweight version of `telescope-import.nvim`
+		{
 			"<leader>ci",
 			function()
 				local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
