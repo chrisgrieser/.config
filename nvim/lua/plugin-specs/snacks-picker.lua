@@ -20,25 +20,23 @@ return {
 			end,
 			desc = " Open files",
 		},
-		-- {
-		-- 	"gr",
-		-- 	function() Snacks.picker.recent() end,
-		-- 	desc = " Recent files",
-		-- 	nowait = true, -- nvim default mappings starting with `gr`
-		-- },
 		{
 			"gr",
+			function() Snacks.picker.recent {} end,
+			desc = "󰋚 Recent files",
+			nowait = true, -- nvim default mappings starting with `gr`
+		},
+		{
+			"gR",
 			function()
-				local currentFile = vim.api.nvim_buf_get_name(0)
-				Snacks.picker.smart {
-					transform = function(item, _ctx)
-						local path = Snacks.picker.util.path(item)
-						if path == currentFile then return false end
-					end,
+				-- FIX it is not possible to override the default path filter for
+				-- the data directory
+				Snacks.picker.recent {
+					title = "󰋚 Recent (only nvim data)",
+					filter = { paths = { [vim.fn.stdpath("data")] = true } },
 				}
 			end,
-			desc = "󰧑 Recent & open files",
-			nowait = true, -- nvim default mappings starting with `gr`
+			desc = "󰋚 Recent (only nvim data)",
 		},
 		{
 			"g,",
@@ -167,13 +165,7 @@ return {
 					layout = "small_no_preview",
 				},
 				recent = {
-					filter = { paths = {} },
 					layout = "small_no_preview",
-				},
-				smart = { -- use this as improved recent file search
-					layout = "small_no_preview",
-					multi = { "buffer", "recent" },
-					matcher = { cwd_bonus = false }
 				},
 				grep = {
 					cmd = "rg",
