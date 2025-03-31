@@ -77,14 +77,14 @@ function M.deleteBuffer()
 	-- prevent alt-buffer pointing to deleted buffer
 	-- (Using `:bwipeout` prevents this, but would also removes the file from the
 	-- list of oldfiles which we don't want.)
-	-- local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
-	-- if not altFileOpen then
-	-- 	table.sort(openBuffers, function(a, b) return a.lastused > b.lastused end)
-	-- 	if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
-	-- 		local newAltFile = openBuffers[3].name
-	-- 		vim.fn.setreg("#", newAltFile)
-	-- 	end
-	-- end
+	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
+	if not altFileOpen then
+		table.sort(openBuffers, function(a, b) return a.lastused > b.lastused end)
+		if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
+			local newAltFile = openBuffers[3].name
+			vim.fn.setreg("#", newAltFile)
+		end
+	end
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
