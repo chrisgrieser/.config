@@ -7,9 +7,14 @@ return {
 	keys = {
 		-- FILES
 		{
-			"go",
+			"gO",
 			function() Snacks.picker.files { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
 			desc = " Open files",
+		},
+		{
+			"go",
+			function() Snacks.picker.smart { title = "󰧑 " .. vim.fs.basename(vim.uv.cwd()) } end,
+			desc = "󰧑 Smart open files",
 		},
 		{
 			"g,",
@@ -106,6 +111,9 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 				},
+				recent = {
+					filter = { paths = {} },
+				},
 				grep = {
 					cmd = "rg",
 					args = {
@@ -126,9 +134,6 @@ return {
 						picker:close()
 						vim.cmd(("edit +%d %s"):format(item.pos[1], item.file))
 					end,
-				},
-				recent = {
-					filter = { paths = {} },
 				},
 				colorschemes = {
 					layout = { preset = "ivy" }, -- at the bottom, so there is more space to preview
@@ -201,7 +206,7 @@ return {
 					wo = { number = false, statuscolumn = " ", signcolumn = "no" },
 				}
 
-				if source == "files" or source == "recent" then return small end
+				if vim.list_contains({ "files", "recent", "smart" }, source) then return small end
 				return large
 			end,
 			win = {
@@ -227,7 +232,9 @@ return {
 			},
 			actions = {
 				list_down_wrapping = function(picker)
-					local action = picker:count() == picker:current().idx and "list_top" or "list_down"
+					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
+					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
+					local action = current == allVisible and "list_top" or "list_down"
 					picker:action(action)
 				end,
 				toggle_hidden_and_ignored = function(picker)
