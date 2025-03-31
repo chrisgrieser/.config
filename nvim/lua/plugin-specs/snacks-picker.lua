@@ -12,11 +12,6 @@ return {
 			desc = " Open files",
 		},
 		{
-			"gO",
-			function() Snacks.picker.explorer { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
-			desc = " Open files",
-		},
-		{
 			"g,",
 			function()
 				Snacks.picker.files { cwd = vim.fn.stdpath("config"), title = " nvim config" }
@@ -77,7 +72,6 @@ return {
 		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰭎 Branches" },
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰭎 Status" },
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰭎 Log" },
-		{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "󰭎 Diff" },
 
 		--------------------------------------------------------------------------
 		-- MISC
@@ -153,33 +147,33 @@ return {
 						picker:close()
 					end,
 				},
+				lsp_workspace_symbols = {
+					matcher = {
+						cwd_bonus = true, -- since it can search outside the cwd, e.g., due to lazydev
+					},
+				},
 				git_status = {
 					win = {
 						input = {
 							keys = {
 								["<Tab>"] = { "list_down_wrapping", mode = "i" },
 								["<Space>"] = { "git_stage", mode = "i" },
+								-- <CR> opens the file as usual
 							},
 						},
 					},
 				},
 				git_branches = {
 					all = true, -- = include remotes
-				}
+				},
 			},
 
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
 			},
-			previewer = {
-				diff = {
-					builtin = false, -- use Neovim for previewing diffs (true) or use external tool (false)
-					cmd = { "delta" },
-				},
-				git = {
-					builtin = true, -- use Neovim for previewing git output (true) or use git (false)
-					args = {},
-				},
+			previewers = {
+				diff = { builtin = false }, -- use delta automatically
+				git = { builtin = false },
 			},
 			layout = function(source)
 				local small = {
@@ -198,8 +192,7 @@ return {
 					},
 				}
 				local large = vim.deepcopy(small)
-				large.layout.width = 0.9
-				large.layout.height = 0.7
+				large.layout.width = 0.99
 				large.layout[2] = {
 					win = "preview",
 					title = "{preview}",
@@ -228,8 +221,7 @@ return {
 						["<D-c>"] = { "yank_display_text", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
-						["?"] = { "toggle_help_input", mode = "i" },
-						["!"] = { "inspect", mode = "i" },
+						["?"] = { "inspect", mode = "i" },
 					},
 				},
 			},
