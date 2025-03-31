@@ -313,17 +313,9 @@ return {
 			desc = "󰋖 Vim help",
 		},
 		-- stylua: ignore
-		{ "<leader>ik", function() vim.cmd.Telescope("keymaps") end, desc = "󰌌 Keymaps (global)" },
 		-- stylua: ignore
-		{ "<leader>ih", function() vim.cmd.Telescope("highlights") end, desc = " Highlights" },
 
 		-- QUICKFIX
-		{ "<leader>qf", function() vim.cmd.Telescope("quickfix") end, desc = "󰭎 Find in list" },
-		{
-			"<leader>qh",
-			function() vim.cmd.Telescope("quickfixhistroy") end,
-			desc = "󰋚 Previous lists",
-		},
 
 		-- GIT
 		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
@@ -348,41 +340,8 @@ return {
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 
 		-- GREP
-		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },
-		{
-			"gL",
-			function()
-				require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") }
-			end,
-			desc = "󰭎 Live grep cword",
-		},
 
 		-- FILES
-		{
-			"gP",
-			function()
-				local projects = vim.iter(vim.fs.dir(vim.g.localRepos))
-					:fold({}, function(acc, item, type)
-						if type == "directory" then table.insert(acc, item) end
-						return acc
-					end)
-
-				local function browseProject(project)
-					if not project then return end
-					local path = vim.fs.joinpath(vim.g.localRepos, project)
-					require("telescope.builtin").find_files {
-						prompt_title = "󰉋 " .. project,
-						cwd = path,
-					}
-				end
-				if #projects == 1 then
-					browseProject(projects[1])
-				else
-					vim.ui.select(projects, { prompt = " Select project: " }, browseProject)
-				end
-			end,
-			desc = " Project",
-		},
 		-- LSP
 		{
 			"g!",
@@ -446,14 +405,6 @@ return {
 				require("telescope.builtin").lsp_document_symbols(opts)
 			end,
 			desc = "󰒕 Symbols",
-		},
-
-		-- MISC
-		{
-			"<leader>pc",
-			-- `noautocmds` to leave out the backdrop, so the colorscheme is previewable
-			function() vim.cmd("noautocmd Telescope colorscheme") end,
-			desc = " Colorschemes",
 		},
 	},
 }

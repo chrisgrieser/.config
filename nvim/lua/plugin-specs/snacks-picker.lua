@@ -39,29 +39,82 @@ return {
 			desc = "󰈮 Local plugins",
 		},
 		{
+			"gP",
+			function()
+				local projects = vim.iter(vim.fs.dir(vim.g.localRepos))
+					:fold({}, function(acc, item, type)
+						if type == "directory" then table.insert(acc, item) end
+						return acc
+					end)
+
+				vim.ui.select(projects, { prompt = " Select project: " }, function(project)
+					if not project then return end
+					local path = vim.fs.joinpath(vim.g.localRepos, project)
+					Snacks.picker.projects { title = " " .. project, cwd = path }
+				end)
+			end,
+			desc = " Project",
+		},
+		{
 			"gr",
 			function() Snacks.picker.recent() end,
 			desc = " Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
 		},
-		-- LSP
 		{
-			"<C-.>",
-			function() Snacks.picker.icons() end,
-			mode = { "n", "i" },
-			desc = "󱗿 Icon picker",
+			"gl",
+			function() Snacks.picker.grep() end,
+			desc = "󰛢 Grep",
 		},
+		-- LSP
+		-- stylua: ignore
+		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 		{ "gf", function() Snacks.picker("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() Snacks.picker("lsp_definitions") end, desc = "󰈿 Definitions" },
 		-- stylua: ignore
 		{ "gD", function() Snacks.picker("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
 		--------------------------------------------------------------------------
-		{ "g.", function() Snacks.picker("resume") end, desc = "󰭎 Resume" },
+		-- MISC
+		{ "g.", function() Snacks.picker("resume") end, desc = "󰗲 Resume" },
+		{ "<leader>ih", function() Snacks.picker("highlights") end, desc = "󰗲 Highlights" },
+		{ "<leader>pc", function() Snacks.picker("colorschemes") end, desc = "󰗲 Colorschemes" },
+		{ "<leader>ik", function() Snacks.picker("keymaps") end, desc = "󰌌 Keymaps (global)" },
 	},
 	opts = {
 		picker = {
 			ui_select = true, -- use `vim.ui.select`
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
+
+			sources = {
+				files = {
+					cmd = "rg",
+					args = {
+						"--sortr=modified", -- sort by recency
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
+				},
+				recent = {
+					filter = { paths = {} },
+				},
+				icons = {
+					layout = {
+						preset = "vertical", -- BUG cannot disable the preset to have it use my default
+						preview = false,
+						layout = { height = 0.5, min_height = 10, min_width = 70 },
+					},
+				},
+				highlights = {
+					confirm = "yank_display_text",
+				},
+				---@type snacks.picker.lsp.Config
+				lsp_references = {
+
+				}
+			},
+
+			formatters = {
+				file = { filename_first = true, truncate = math.huge },
+			},
 			layout = function(source)
 				local small = {
 					layout = {
@@ -92,33 +145,6 @@ return {
 				if source == "files" or source == "recent" or source == "icons" then return small end
 				return large
 			end,
-
-			sources = {
-				files = {
-					cmd = "rg",
-					args = {
-						"--sortr=modified", -- sort by recency
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
-					},
-				},
-				recent = {
-					filter = { paths = {} },
-				},
-				icons = {
-					layout = {
-						preset = "vertical", -- BUG cannot disable the preset to have it use my default
-						preview = false,
-						layout = { height = 0.5, min_height = 10, min_width = 70 },
-					},
-				},
-			},
-
-			formatters = {
-				file = {
-					filename_first = true,
-					truncate = math.huge,
-				},
-			},
 			win = {
 				input = {
 					keys = {
@@ -133,7 +159,7 @@ return {
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
-						["<D-c>"] = { "copy_value", mode = "i" },
+						["<D-c>"] = { "yank_display_text", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "list_scroll_down", mode = "i" },
 						["?"] = { "toggle_help_input", mode = "i" },
@@ -160,7 +186,7 @@ return {
 					vim.cmd.cclose()
 					vim.cmd.cfirst()
 				end,
-				copy_value = function(picker)
+				yank_display_text = function(picker)
 					local value = picker:current().text
 					vim.fn.setreg("+", value)
 					vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
