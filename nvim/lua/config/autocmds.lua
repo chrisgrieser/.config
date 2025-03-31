@@ -359,6 +359,7 @@ vim.defer_fn(addFavicons, 200)
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
+	if not vim.api.nvim_buf_is_valid(bufnr) then return end
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
 	if vim.bo[bufnr].buftype ~= "" then return end
@@ -389,7 +390,9 @@ end
 
 vim.api.nvim_create_autocmd("BufReadPost", {
 	desc = "User: lucky indent",
-	callback = function(ctx) luckyIndent(ctx.buf) end,
+	callback = function(ctx)
+		vim.defer_fn(function() luckyIndent(ctx.buf) end, 100)
+	end,
 })
 
 --------------------------------------------------------------------------------

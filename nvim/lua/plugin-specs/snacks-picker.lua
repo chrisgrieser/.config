@@ -12,6 +12,11 @@ return {
 			desc = " Open files",
 		},
 		{
+			"gO",
+			function() Snacks.picker.explorer { title = " " .. vim.fs.basename(vim.uv.cwd()) } end,
+			desc = " Open files",
+		},
+		{
 			"g,",
 			function()
 				Snacks.picker.files { cwd = vim.fn.stdpath("config"), title = " nvim config" }
@@ -64,24 +69,35 @@ return {
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 		-- stylua: ignore
 		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
-		{ "gs", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 symbols" },
-		{ "g!", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 symbols" },
+		{ "gs", function() Snacks.picker.lsp_symbols() end, desc = "󰒕 Symbols" },
+		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
+
+		--------------------------------------------------------------------------
+		-- GIT
+		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰭎 Branches" },
+		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰭎 Status" },
+		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰭎 Log" },
+		{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "󰭎 Diff" },
 
 		--------------------------------------------------------------------------
 		-- MISC
 
-		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = "󰗲 Highlights" },
-		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
+		-- stylua: ignore
+		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
+
+		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
+		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
+
+		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
+
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		{
 			"<leader>iK",
 			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
 			desc = "󰌌 Keymaps (buffer)",
 		},
-		-- stylua: ignore
-		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 	},
 	opts = {
 		picker = {
@@ -137,16 +153,33 @@ return {
 						picker:close()
 					end,
 				},
-				lsp_workspace_symbols = {
-					filter = {
-						default = { "Class", "Function", "Interface", "Method" },
+				git_status = {
+					win = {
+						input = {
+							keys = {
+								["<Tab>"] = { "list_down_wrapping", mode = "i" },
+								["<Space>"] = { "git_stage", mode = "i" },
+							},
+						},
 					},
 				},
-				diagnostics = { },
+				git_branches = {
+					all = true, -- = include remotes
+				}
 			},
 
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
+			},
+			previewer = {
+				diff = {
+					builtin = false, -- use Neovim for previewing diffs (true) or use external tool (false)
+					cmd = { "delta" },
+				},
+				git = {
+					builtin = true, -- use Neovim for previewing git output (true) or use git (false)
+					args = {},
+				},
 			},
 			layout = function(source)
 				local small = {
@@ -175,7 +208,7 @@ return {
 					wo = { number = false, statuscolumn = " ", signcolumn = "no" },
 				}
 
-				if source == "files" or source == "recent" or source == "icons" then return small end
+				if source == "files" or source == "recent" then return small end
 				return large
 			end,
 			win = {
@@ -183,7 +216,7 @@ return {
 					keys = {
 						["<CR>"] = { "confirm", mode = "i" },
 						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
-						["<Tab>"] = { "list_down", mode = "i" },
+						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
@@ -194,13 +227,17 @@ return {
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
 						["<D-c>"] = { "yank_display_text", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
-						["<PageDown>"] = { "list_scroll_down", mode = "i" },
+						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 						["?"] = { "toggle_help_input", mode = "i" },
 						["!"] = { "inspect", mode = "i" },
 					},
 				},
 			},
 			actions = {
+				list_down_wrapping = function(picker)
+					local action = picker:count() == picker:current().idx and "list_top" or "list_down"
+					picker:action(action)
+				end,
 				toggle_hidden_and_ignored = function(picker)
 					picker.opts.hidden = not picker.opts.hidden
 					picker.opts.ignored = not picker.opts.ignored
@@ -226,9 +263,11 @@ return {
 					picker:close()
 				end,
 			},
+			prompt = " ", -- slightly to the left
 			icons = {
-				ui = { selected = "󰒆", unselected = "" },
+				ui = { selected = "󰒆 ", unselected = "  " },
 				git = { staged = "󰐖" }, -- consistent with tinygit
+				undo = { saved = "" }, -- useless, since I have auto-saving
 			},
 		},
 	},

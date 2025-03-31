@@ -299,65 +299,16 @@ return {
 	end,
 	keys = {
 		-- INSPECT
-		{
-			"<leader>iv",
-			function()
-				local prefill = nil
-				if vim.fn.mode():find("[Vv]") then
-					vim.cmd.normal { '"zy"', bang = true }
-					prefill = vim.fn.getreg("z")
-				end
-				require("telescope.builtin").help_tags { default_text = prefill }
-			end,
-			mode = { "n", "x" },
-			desc = "󰋖 Vim help",
-		},
 		-- stylua: ignore
 		-- stylua: ignore
 
 		-- QUICKFIX
 
 		-- GIT
-		{ "<leader>gs", function() vim.cmd.Telescope("git_status") end, desc = "󰭎 Status" },
-		{
-			"<leader>gl",
-			function()
-				-- add highlights for commit type
-				vim.api.nvim_create_autocmd("FileType", {
-					desc = "User: Telescope results commit type highlight",
-					pattern = "TelescopeResults",
-					callback = function(ctx)
-						vim.api.nvim_buf_call(ctx.buf, function()
-							vim.fn.matchadd("Title", [[\v\w+(\(.{-}\))?!?\ze: ]]) -- `\ze`: end of match
-						end)
-					end,
-				})
-
-				vim.cmd.Telescope("git_commits")
-			end,
-			desc = "󰭎 Log",
-		},
-		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
 
 		-- GREP
 
 		-- FILES
 		-- LSP
-		{
-			"g!",
-			function()
-				-- open all files in cwd of same ft, ensures workspace
-				-- diagnostics are exhaustive
-				local currentFile = vim.api.nvim_buf_get_name(0)
-				local ext = currentFile:match("%w+$")
-				vim.cmd.args("**/*." .. ext) -- opens files matching glob
-				vim.cmd.buffer(currentFile) -- stay at original buffer
-				local msg = ("Opened %d %s files."):format(vim.fn.argc(), ext)
-				vim.notify(msg, nil, { title = "Workspace diagnostics", icon = "󰋽" })
-
-				vim.cmd.Telescope("diagnostics")
-			end,
-			desc = "󰋼 Workspace diagnostics",
-		},
 	},
 }
