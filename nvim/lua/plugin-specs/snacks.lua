@@ -111,12 +111,35 @@ return {
 	opts = {
 		picker = {
 			ui_select = true,
-			layout = {
-				cycle = true,
-				preset = function() return "default" end,
+			layout = { -- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
+				---@diagnostic disable: assign-type-mismatch
+				preset = "default",
+				layout = {
+					box = "horizontal",
+					width = 0.9,
+					height = 0.8,
+					border = "none",
+					{
+						box = "vertical",
+						border = "none",
+						title = "{title} {live} {flags}",
+						{ win = "input", height = 1, border = vim.o.winborder },
+						{ win = "list", border = vim.o.winborder },
+					},
+					{ win = "preview", title = "{preview}", border = vim.o.winborder, width = 0.5 },
+				},
+				---@diagnostic enable: assign-type-mismatch
+			},
+			formatters = {
+				file = {
+					filename_first = true,
+					truncate = 40, -- truncate the file path to (roughly) this length
+					filename_only = false,
+					icon_width = 2,
+					git_status_hl = true, -- use the git status highlight group for the filename
+				},
 			},
 			win = {
-				border = "none",
 				input = {
 					keys = {
 						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
