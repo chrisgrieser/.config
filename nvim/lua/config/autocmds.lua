@@ -262,7 +262,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 -- ENFORCE SCROLLOFF AT EOF
 -- simplified version of https://github.com/Aasim-A/scrollEOF.nvim
 
-vim.api.nvim_create_autocmd("CursorMoved", {
+vim.api.nvim_create_autocmd({ "CursorMoved", "BufReadPost" }, {
 	desc = "User: Enforce scrolloff at EoF",
 	callback = function(ctx)
 		if vim.bo[ctx.buf].buftype ~= "" then return end
