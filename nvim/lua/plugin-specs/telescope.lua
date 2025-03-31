@@ -36,40 +36,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal sidescrolloff=1",
 })
 
-local function toggleHiddenFileSearch(promptBufnr)
-	local currentPicker = require("telescope.actions.state").get_current_picker(promptBufnr)
-	local cwd = tostring(currentPicker.cwd or vim.uv.cwd()) -- cwd only set if passed as opt
-
-	local prevTitle = currentPicker.prompt_title
-	local currentQuery = require("telescope.actions.state").get_current_line()
-	local ignore = vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
-	local findCommand = vim.deepcopy(require("telescope.config").pickers.find_files.find_command)
-
-	-- hidden status not stored, but title is, so using it to determine previous state
-	local title
-	local includeIgnoreHidden = not prevTitle:find("hidden")
-	if includeIgnoreHidden then
-		vim.list_extend(ignore, { "node_modules", ".venv", "typings", "%.DS_Store$", "%.git/" })
-		-- cannot simply toggle `hidden` since we are using `rg` as custom find command
-		vim.list_extend(findCommand, { "--hidden", "--no-ignore", "--no-ignore-files" })
-		title = prevTitle .. " (--hidden --no-ignore)"
-	else
-		title = prevTitle:gsub(" ?%b()$", "")
-	end
-
-	-- ignore the existing current path due to using `rg --sortr=modified`
-	local relPathCurrent = currentPicker.file_ignore_patterns[#currentPicker.file_ignore_patterns]
-	table.insert(ignore, relPathCurrent)
-
-	require("telescope.actions").close(promptBufnr)
-	require("telescope.builtin").find_files {
-		default_text = currentQuery,
-		prompt_title = title,
-		find_command = findCommand,
-		cwd = cwd,
-		file_ignore_patterns = ignore,
-	}
-end
 
 --------------------------------------------------------------------------------
 
@@ -78,8 +44,6 @@ return {
 	cmd = "Telescope",
 	dependencies = { "nvim-lua/plenary.nvim", "echasnovski/mini.icons" },
 	config = function()
-		require("personal-plugins.telescope-backdrop")
-
 		require("telescope").setup {
 			defaults = {
 				path_display = { "tail" },
@@ -162,27 +126,6 @@ return {
 				},
 			},
 			pickers = {
-				find_files = {
-					-- INFO using `rg` instead of `fd` ensures that initially, the list
-					-- of files is sorted by recently modified files. (`fd` does not
-					-- have a `--sort` flag.) alternative approach: https://github.com/nvim-telescope/telescope.nvim/issues/2905
-					find_command = {
-						"rg",
-						"--no-config",
-						"--follow",
-						"--files",
-						"--sortr=modified",
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
-					},
-					prompt_title = "󰝰 Files in cwd",
-					path_display = { "filename_first" },
-					layout_config = { horizontal = { width = 0.6, height = 0.6 } },
-					previewer = false,
-					follow = true,
-					mappings = {
-						i = { ["<C-h>"] = toggleHiddenFileSearch },
-					},
-				},
 				oldfiles = {
 					prompt_title = "󰋚 Recent files",
 
@@ -500,54 +443,6 @@ return {
 			end,
 			desc = " nvim config",
 		},
-		{
-			"go",
-			function()
-				-- ignore current file, since using the `rg` workaround puts it on top
-				local ignore =
-					vim.deepcopy(require("telescope.config").values.file_ignore_patterns or {})
-				local relPathCurrent = vim.api.nvim_buf_get_name(0):sub(#vim.uv.cwd() + 2)
-				local relPathPattern = ("^%s$"):format(vim.pesc(relPathCurrent))
-				table.insert(ignore, relPathPattern)
-
-				-- get list of changed files
-				local changedFilesInCwd = {}
-				local gitDir = vim.system({ "git", "rev-parse", "--show-toplevel" }):wait()
-				local inGitRepo = gitDir.code == 0
-				if inGitRepo then
-					local rootLen = #vim.uv.cwd() - #vim.trim(gitDir.stdout) -- for cwd != git root
-					local gitResult = vim.system({ "git", "status", "--short", "." }):wait().stdout
-					local changes = vim.split(gitResult or "", "\n", { trimempty = true })
-					vim.iter(changes):each(function(change)
-						local gitChangeTypeLen = 3
-						local relPath = change:sub(rootLen + gitChangeTypeLen + 1)
-						table.insert(changedFilesInCwd, relPath)
-					end)
-				end
-
-				local function highlightChangedFiles(_, path)
-					local tail = vim.fs.basename(path)
-					local parent = vim.fs.dirname(path) == "." and "" or vim.fs.dirname(path)
-					local out = tail .. "  " .. parent
-					local highlights = {
-						{ { #tail, #out }, "TelescopeResultsComment" },
-					}
-					if vim.tbl_contains(changedFilesInCwd, path) then
-						table.insert(highlights, { { 0, #tail }, "Changed" })
-					end
-					return out, highlights
-				end
-
-				local project = vim.fs.basename(vim.uv.cwd() or "n/a")
-				require("telescope.builtin").find_files {
-					file_ignore_patterns = ignore,
-					path_display = highlightChangedFiles,
-					prompt_title = "󰉋 " .. project,
-				}
-			end,
-			desc = "󰭎 Open file",
-		},
-
 		-- LSP
 		{ "gf", function() vim.cmd.Telescope("lsp_references") end, desc = "󰈿 References" },
 		{ "gd", function() vim.cmd.Telescope("lsp_definitions") end, desc = "󰈿 Definitions" },
