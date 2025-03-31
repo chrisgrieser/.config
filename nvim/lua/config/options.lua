@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 12
 
--- vim.opt.winborder = "single"
+vim.opt.winborder = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
