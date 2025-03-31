@@ -61,24 +61,64 @@ return {
 			desc = " Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
 		},
-		{
-			"gl",
-			function() Snacks.picker.grep() end,
-			desc = "󰛢 Grep",
-		},
+		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
+
+		--------------------------------------------------------------------------
 		-- LSP
+
 		-- stylua: ignore
-		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-		{ "gf", function() Snacks.picker("lsp_references") end, desc = "󰈿 References" },
-		{ "gd", function() Snacks.picker("lsp_definitions") end, desc = "󰈿 Definitions" },
+		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
+		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		-- stylua: ignore
-		{ "gD", function() Snacks.picker("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
+		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
+		{
+			"gw",
+			function() Snacks.picker.lsp_workspace_symbols() end,
+			desc = "󰒕 Workspace symbols",
+		},
+		{
+			"gs",
+			function()
+				-- lua files: using treesitter symbols instead, since the LSP
+				-- symbols are crowded with anonymous functions
+				if vim.bo.filetype == "lua" then
+					Snacks.picker.treesitter()
+					return
+				end
+				local symbolFilter = {
+					yaml = { "object", "array" },
+					json = "module",
+					toml = "object",
+					markdown = "string", -- string -> markdown headings
+				}
+				-- stylua: ignore
+				local ignoreSymbols = { "variable", "constant", "number", "package", "string", "object", "array", "boolean", "property" }
+				local filter = symbolFilter[vim.bo.filetype]
+				local opts = filter and { symbols = filter } or { ignore_symbols = ignoreSymbols }
+				require("telescope.builtin").lsp_symbols(opts)
+			end,
+			desc = "󰒕 Symbols",
+		},
+
 		--------------------------------------------------------------------------
 		-- MISC
-		{ "g.", function() Snacks.picker("resume") end, desc = "󰗲 Resume" },
-		{ "<leader>ih", function() Snacks.picker("highlights") end, desc = "󰗲 Highlights" },
-		{ "<leader>pc", function() Snacks.picker("colorschemes") end, desc = "󰗲 Colorschemes" },
-		{ "<leader>ik", function() Snacks.picker("keymaps") end, desc = "󰌌 Keymaps (global)" },
+
+		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
+		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = "󰗲 Highlights" },
+		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
+		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
+		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+		{
+			"<leader>iK",
+			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
+			desc = "󰌌 Keymaps (buffer)",
+		},
+		{
+			"<C-.>",
+			function() Snacks.picker.icons() end,
+			mode = { "n", "i" },
+			desc = "󱗿 Icon picker",
+		},
 	},
 	opts = {
 		picker = {
@@ -93,6 +133,27 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 				},
+				grep = {
+					cmd = "rg",
+					args = {
+						"--sortr=modified", -- sort by recency
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
+				},
+				help = {
+					confirm = function(picker)
+						picker:action("help")
+						vim.cmd.only() -- so help is full window
+					end,
+				},
+				keymaps = {
+					-- open keymap definition
+					confirm = function(picker, item)
+						if not item.file then return end
+						picker:close()
+						vim.cmd(("edit +%d %s"):format(item.pos[1], item.file))
+					end,
+				},
 				recent = {
 					filter = { paths = {} },
 				},
@@ -104,12 +165,12 @@ return {
 					},
 				},
 				highlights = {
-					confirm = "yank_display_text",
+					confirm = function(picker, item)
+						vim.fn.setreg("+", item.hl_group)
+						vim.notify(item.hl_group, nil, { title = "Copied", icon = "󰅍" })
+						picker:close()
+					end,
 				},
-				---@type snacks.picker.lsp.Config
-				lsp_references = {
-
-				}
 			},
 
 			formatters = {
