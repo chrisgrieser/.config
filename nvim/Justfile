@@ -21,7 +21,7 @@ debug-instance:
     neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} \
         -c'sleep 300ms|bprevious' &>/dev/null
 
-format-all-lua-files:
+stylua-on-all:
     #!/usr/bin/env zsh
     export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
     stylua .

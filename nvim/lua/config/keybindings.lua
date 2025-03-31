@@ -113,21 +113,20 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 -- QUICKFIX
 keymap("n", "gq", "]q", { desc = "󰒭 Next quickfix", remap = true })
 keymap("n", "gQ", "[q", { desc = "󰒮 Prev quickfix", remap = true })
-keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete list" })
+keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete quickfix list" })
 keymap("n", "<leader>qq", function()
 	local windows = vim.fn.getwininfo()
-	local hasQuickfix = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
-	vim.cmd[hasQuickfix and "cclose" or "copen"]()
-end, { desc = " Toggle window" })
-
+	local quickfixWinOpen = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
+	vim.cmd[quickfixWinOpen and "cclose" or "copen"]()
+end, { desc = " Toggle quickfix window" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
-for i = 1, 6 do
-	keymap("n", "z" .. i, function() vim.opt.foldlevel = i end, { desc = "󰘖 Folds Level" .. i })
+for i = 0, 6 do
+	keymap("n", "z" .. i, function() vim.opt.foldlevel = i end, { desc = "󰘖 Folds Level " .. i })
 end
 
 --------------------------------------------------------------------------------

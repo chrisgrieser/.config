@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 12
 
-vim.opt.winborder = "single"
+-- vim.opt.winborder = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
@@ -120,7 +120,7 @@ vim.opt.titlestring = "%{getcwd()}"
 
 -- write: issue commands via nvim server
 if vim.g.neovide then
-	pcall(os.remove, "/tmp/nvim_server.pipe") -- in case of crash, the server is still there
+	pcall(os.remove, "/tmp/nvim_server.pipe") -- b/c after a crash, the server is still there
 	vim.fn.serverstart("/tmp/nvim_server.pipe")
 end
 
@@ -129,7 +129,7 @@ end
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.cmdheight = 0 -- overwritten by noice.nvim setting it 0
+vim.opt.cmdheight = 0 -- overwritten by `noice.nvim` setting it 0
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
@@ -141,7 +141,7 @@ vim.opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	tab = "│ ", -- mostly overridden by indent-blankline
+	tab = "│ ", -- usually overridden by `snacks.indent`
 	lead = " ",
 	trail = " ",
 }
@@ -164,6 +164,7 @@ vim.opt.fillchars:append {
 
 -- FOLDING
 vim.opt.foldlevel = 99 -- do not auto-fold
+vim.opt.foldlevelstart = 99
 vim.opt.foldtext = "" -- empty string keeps text (overwritten by nvim-origami)
 
 -- fold with LSP/Treesitter
@@ -223,4 +224,3 @@ vim.diagnostic.config {
 		end,
 	},
 }
-
