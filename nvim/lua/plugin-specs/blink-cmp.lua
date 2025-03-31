@@ -115,7 +115,12 @@ local blinkConfig = {
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
-				window = { max_width = 50, max_height = 20 },
+				window = {
+					max_width = 50,
+					max_height = 20,
+					---@diagnostic disable-next-line: assign-type-mismatch
+					border = vim.o.winborder, -- FIX sometimes border not being drawn otherwiese
+				},
 			},
 			menu = {
 				draw = {

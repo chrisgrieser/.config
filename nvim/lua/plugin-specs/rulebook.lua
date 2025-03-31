@@ -20,6 +20,13 @@ return {
 		},
 	},
 	opts = {
+		ignoreComments = {
+			["Lua Diagnostics."] = { -- Lua LSP
+				comment = "---@diagnostic disable-next-line: %s",
+				location = "prevLine",
+				multiRuleIgnore = true,
+			},
+		},
 		suppressFormatter = {
 			-- use `biome` instead of `prettier`
 			javascript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
