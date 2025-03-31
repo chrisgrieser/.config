@@ -66,10 +66,7 @@ local function openNotif(idx)
 			colorcolumn = "",
 			winfixbuf = true,
 		},
-		bo = {
-			ft = "snacks_notif",
-			modifiable = false,
-		},
+		bo = { ft = "snacks_notif", modifiable = false },
 		keys = {
 			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()
@@ -99,6 +96,7 @@ return {
 		},
 	},
 	opts = {
+		---@class snacks.notifier.Config
 		notifier = {
 			timeout = 7500,
 			sort = { "added" }, -- sort only by time
