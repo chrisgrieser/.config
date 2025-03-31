@@ -59,7 +59,7 @@ return {
 			{ -- base groups
 				mode = { "n", "x" },
 				{ "g", group = "Goto" },
-				{ "z", group = "Fold & spelling" },
+				{ "z", group = "Folds & spelling" },
 			},
 		},
 		plugins = {

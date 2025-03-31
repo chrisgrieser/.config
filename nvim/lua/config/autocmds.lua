@@ -476,4 +476,3 @@ vim.api.nvim_create_autocmd("VimResized", {
 	desc = "User: keep splits equally sized on window resize",
 	command = "wincmd =",
 })
-

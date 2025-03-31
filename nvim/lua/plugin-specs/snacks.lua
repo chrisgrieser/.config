@@ -100,8 +100,33 @@ return {
 			mode = { "n", "v", "i" },
 			desc = "󰎟 Last notification",
 		},
+		-- PICKERS
+		{
+			"<C-.>",
+			function() require("snacks").picker.icons() end,
+			mode = "i",
+			desc = "󱗿 Icon picker",
+		},
 	},
 	opts = {
+		picker = {
+			ui_select = true,
+			layout = {
+				cycle = true,
+				preset = function() return "default" end,
+			},
+			win = {
+				border = "none",
+				input = {
+					keys = {
+						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
+						["<Tab>"] = { "list_down", mode = { "i", "n" } },
+						["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+						["<M-CR>"] = { "select_and_next", mode = { "i", "n" } }, -- consistent with `fzf`
+					},
+				},
+			},
+		},
 		indent = {
 			char = "│",
 			scope = { hl = "Comment" },
