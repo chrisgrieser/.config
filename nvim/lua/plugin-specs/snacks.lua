@@ -108,7 +108,7 @@ return {
 			desc = "󱗿 Icon picker",
 		},
 		{
-			"gO",
+			"go",
 			function()
 				require("snacks").picker.files {
 					cmd = "rg",
@@ -116,10 +116,19 @@ return {
 						"--sortr=modified",
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					win = {
-						input = {
-							keys = {
-								["<C-h>"] = { "toggle_ignored", mode = "i" }, -- consistent with `fzf`
+					exclude = { ".DS_Store" },
+					layout = {
+						layout = {
+							box = "horizontal",
+							width = 0.6,
+							height = 0.6,
+							border = "none",
+							{
+								box = "vertical",
+								border = vim.o.winborder, ---@diagnostic disable-line: assign-type-mismatch
+								title = "{title} {live} {flags}",
+								{ win = "input", height = 1, border = "bottom" },
+								{ win = "list", border = "none" },
 							},
 						},
 					},
@@ -160,8 +169,11 @@ return {
 					filename_first = true,
 					truncate = 40, -- truncate the file path to (roughly) this length
 					icon_width = 2,
-					git_status_hl = false, -- use the git status highlight group for the filename
 				},
+			},
+			toggles = {
+				follow = "", -- don't use an icon, since always on
+				ignored = "", -- don't use an icon, since always used with `hidden`
 			},
 			win = {
 				input = {
@@ -172,8 +184,30 @@ return {
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
 						["<Down>"] = { "history_forward", mode = "i" },
+						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+						["?"] = {"toggle_help_input", mode = "i" },
+						["!"] = {"inspect", mode = "i" },
+						["<D-s>"] = { "qflist", mode = "i" },
+						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
+						["<P>"] = "preview_scroll_up",
+						["<PageDown>"] = "list_scroll_down",
+						["<D-a>"] = "select_all",
 					},
 				},
+			},
+			actions = {
+				toggle_hidden_and_ignored = function(picker)
+					picker.opts.hidden = not picker.opts.hidden
+					picker.opts.ignored = not picker.opts.ignored
+					picker:find()
+				end,
+				reveal_in_macOS_Finder = function(picker)
+					if jit.os ~= "OSX" then return end
+					local item = picker:current()
+					local path = item.cwd .. "/" .. item.file
+					vim.system { "open", "-R", path }
+					picker:close()
+				end,
 			},
 		},
 		indent = {
