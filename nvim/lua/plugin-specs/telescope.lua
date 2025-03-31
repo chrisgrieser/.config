@@ -68,7 +68,6 @@ return {
 						["<Up>"] = "cycle_history_prev",
 						["<Down>"] = "cycle_history_next",
 						["<D-s>"] = "smart_send_to_qflist",
-						["<D-f>"] = "to_fuzzy_refine", -- only live grep & workspace symbols
 
 						["<D-c>"] = function(promptBufnr) -- copy_value
 							local value = require("telescope.actions.state").get_selected_entry().value
@@ -126,38 +125,6 @@ return {
 				},
 			},
 			pickers = {
-				oldfiles = {
-					prompt_title = "󰋚 Recent files",
-
-					-- heuristic to just display the relevant part of the file's path
-					path_display = function(_, path)
-						local parentOfRoots = {
-							vim.g.localRepos,
-							vim.fs.normalize("~/Vaults"),
-							vim.fn.stdpath("data") .. "/lazy",
-							vim.env.HOMEBREW_PREFIX,
-							vim.env.HOME,
-						}
-						vim.iter(parentOfRoots)
-							:each(function(root) path = path:gsub(vim.pesc(root), "") end)
-
-						-- project = highest parent
-						local project = path:match("/(%.config/.-)/") or path:match("/(.-)/") or ""
-						local tail = vim.fs.basename(path)
-						local out = tail .. "  " .. project
-
-						local highlights = { { { #tail, #out }, "TelescopeResultsComment" } }
-						return out, highlights
-					end,
-					file_ignore_patterns = {
-						"COMMIT_EDITMSG",
-						"/doc/.*.txt$", -- vim help docs
-						vim.fn.stdpath("state") .. "/lazy/readme/doc", -- lazy.nvim-generated help
-					},
-
-					layout_config = { horizontal = { width = 0.6, height = 0.6 } },
-					previewer = false,
-				},
 				live_grep = {
 					prompt_title = " Live grep",
 					disable_coordinates = true,
@@ -379,12 +346,6 @@ return {
 			desc = "󰭎 Log",
 		},
 		{ "<leader>gb", function() vim.cmd.Telescope("git_branches") end, desc = "󰭎 Branches" },
-		{
-			"gr",
-			function() vim.cmd.Telescope("oldfiles") end,
-			desc = "󰭎 Recent files",
-			nowait = true, -- various nvim default mappings starting with `gr`
-		},
 
 		-- GREP
 		{ "gl", function() vim.cmd.Telescope("live_grep") end, desc = "󰭎 Live grep" },
