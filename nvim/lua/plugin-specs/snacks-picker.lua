@@ -1,49 +1,62 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
+---@module "snacks"
 
 return {
 	"folke/snacks.nvim",
 	keys = {
+		-- FILES
 		{
 			"go",
 			function()
-				require("snacks").picker.files {
-					cmd = "rg",
-					args = {
-						"--sortr=modified", -- sort by recency
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
-					},
+				Snacks.picker.files {
+					title = " " .. vim.fs.basename(vim.uv.cwd() or "n/a"),
 				}
 			end,
 			desc = " Open files",
 		},
 		{
-			"gr",
+			"g,",
 			function()
-				require("snacks").picker.recent {
-					filter = {
-						paths = {
-							[vim.fn.stdpath("data")] = true,
-						},
-					},
+				Snacks.picker.files {
+					cwd = vim.fn.stdpath("config"),
+					title = " nvim config",
 				}
 			end,
+			desc = " nvim config",
+		},
+		{
+			"gp",
+			function()
+				Snacks.picker.files {
+					title = "󰈮 Local plugins",
+					cwd = vim.fn.stdpath("data") .. "/lazy",
+					exclude = { "tests/*", "doc/*", "*.toml" },
+					matcher = { filename_bonus = false },
+					formatters = { file = { filename_first = false } },
+				}
+			end,
+			desc = "󰈮 Local plugins",
+		},
+		{
+			"gr",
+			function() Snacks.picker.recent() end,
 			desc = " Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
 		},
+		-- LSP
 		{
 			"<C-.>",
-			function()
-				-- BUG cannot disable the preset to have it use my default
-				require("snacks").picker.icons {
-					layout = {
-						preset = "right",
-					},
-				}
-			end,
-			mode = "i",
+			function() Snacks.picker.icons() end,
+			mode = { "n", "i" },
 			desc = "󱗿 Icon picker",
 		},
+		{ "gf", function() Snacks.picker("lsp_references") end, desc = "󰈿 References" },
+		{ "gd", function() Snacks.picker("lsp_definitions") end, desc = "󰈿 Definitions" },
+		-- stylua: ignore
+		{ "gD", function() Snacks.picker("lsp_type_definitions") end, desc = "󰜁 Type definitions" },
+		--------------------------------------------------------------------------
+		{ "g.", function() Snacks.picker("resume") end, desc = "󰭎 Resume" },
 	},
 	opts = {
 		picker = {
@@ -79,6 +92,26 @@ return {
 				if source == "files" or source == "recent" or source == "icons" then return small end
 				return large
 			end,
+
+			sources = {
+				files = {
+					cmd = "rg",
+					args = {
+						"--sortr=modified", -- sort by recency
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
+				},
+				recent = {
+					filter = { paths = {} },
+				},
+				icons = {
+					layout = {
+						preset = "vertical", -- BUG cannot disable the preset to have it use my default
+						preview = false,
+						layout = { height = 0.5, min_height = 10, min_width = 70 },
+					},
+				},
+			},
 
 			formatters = {
 				file = {

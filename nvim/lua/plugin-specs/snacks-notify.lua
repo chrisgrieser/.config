@@ -1,5 +1,6 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------------
+---@module "snacks"
 
 ---@param idx number|"last"
 local function openNotif(idx)
@@ -9,7 +10,7 @@ local function openNotif(idx)
 
 	-- get notification
 	if idx == "last" then idx = 1 end
-	local history = require("snacks").notifier.get_history {
+	local history = Snacks.notifier.get_history {
 		filter = function(notif) return notif.level ~= "trace" end,
 		reverse = true,
 	}
@@ -19,7 +20,7 @@ local function openNotif(idx)
 		vim.notify(msg, vim.log.levels.TRACE, { title = "Last notification", icon = "󰎟" })
 		return
 	end
-	require("snacks").notifier.hide(notif.id)
+	Snacks.notifier.hide(notif.id)
 
 	-- win properties
 	local bufnr = vim.api.nvim_create_buf(false, true)
@@ -47,7 +48,7 @@ local function openNotif(idx)
 	}
 
 	-- create win with snacks API
-	require("snacks").win {
+	Snacks.win {
 		relative = "editor",
 		position = "float",
 		ft = notif.ft or "markdown",
