@@ -5,12 +5,6 @@ return {
 	"folke/snacks.nvim",
 	keys = {
 		{
-			"<C-.>",
-			function() require("snacks").picker.icons() end,
-			mode = "i",
-			desc = "󱗿 Icon picker",
-		},
-		{
 			"go",
 			function()
 				require("snacks").picker.files {
@@ -21,18 +15,43 @@ return {
 					},
 				}
 			end,
-			desc = "󱗿 Files",
+			desc = " Open files",
+		},
+		{
+			"gr",
+			function()
+				require("snacks").picker.recent {
+					filter = {
+						paths = {
+							[vim.fn.stdpath("data")] = true,
+						},
+					},
+				}
+			end,
+			desc = " Recent files",
+			nowait = true, -- nvim default mappings starting with `gr`
+		},
+		{
+			"<C-.>",
+			function()
+				-- BUG cannot disable the preset to have it use my default
+				require("snacks").picker.icons {
+					layout = {
+						preset = "right",
+					},
+				}
+			end,
+			mode = "i",
+			desc = "󱗿 Icon picker",
 		},
 	},
 	opts = {
 		picker = {
 			ui_select = true, -- use `vim.ui.select`
-
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
 			layout = function(source)
-				local lll = {}
-				if source == "files" or source == "recent" then
-					lll.layout = {
+				local small = {
+					layout = {
 						box = "horizontal",
 						width = 0.6,
 						height = 0.6,
@@ -44,34 +63,28 @@ return {
 							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
 						},
-					}
-				else
-					lll.layout = {
-						box = "horizontal",
-						width = 0.8,
-						height = 0.6,
-						border = "none",
-						{
-							box = "vertical",
-							border = vim.o.winborder,
-							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "bottom" },
-							{ win = "list", border = "none" },
-						},
-						{
-							win = "preview",
-							title = "{preview}",
-							border = vim.o.winborder,
-							width = 0.5,
-							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
-						},
-					}
-				end
-				return lll
+					},
+				}
+				local large = vim.deepcopy(small)
+				large.layout.width = 0.9
+				large.layout.height = 0.7
+				large.layout[2] = {
+					win = "preview",
+					title = "{preview}",
+					border = vim.o.winborder,
+					width = 0.5,
+					wo = { number = false, statuscolumn = " ", signcolumn = "no" },
+				}
+
+				if source == "files" or source == "recent" or source == "icons" then return small end
+				return large
 			end,
 
 			formatters = {
-				file = { filename_first = true, truncate = 40 },
+				file = {
+					filename_first = true,
+					truncate = math.huge,
+				},
 			},
 			win = {
 				input = {

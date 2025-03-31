@@ -13,8 +13,6 @@ local themes = {
 			},
 			groups = {
 				dawnfox = {
-					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
-
 					-- general
 					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
 					["@keyword.break"] = { fg = "#9f2e69", style = "bold" },
@@ -56,6 +54,10 @@ local themes = {
 
 					-- `mini.icons`
 					MiniIconsGrey = { fg = "#767676" },
+
+					-- Snacks
+					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
+					SnacksPicker = { link = "Normal" },
 
 					-- Telescope: increase contrast
 					TelescopeBorder = { link = "FloatBorder" },
