@@ -62,13 +62,40 @@ return {
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
 		{
 			"<leader>ci",
-			function()
-				Snacks.picker.grep{
-
+			function() -- lightweight version of `telescope-import.nvim`
+				local regex = [[local (\w+) = require\(["'](.*?)["']\)(\.[\w.]*)?]]
+				Snacks.picker.grep_word {
+					cmd = "rg",
+					search = regex,
+					regex = true,
+					ft = "lua",
+					live = false,
+					args = { "--only-matching" },
+					confirm = function(picker, item)
+						picker:close()
+						local import = item.text:gsub(".-:", "")
+						local lnum = vim.api.nvim_win_get_cursor(0)[1]
+						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import })
+						vim.cmd.normal { "j==", bang = true }
+					end,
+					formatters = {
+						file = { filename_only = true },
+					},
+					layout = {
+						preset = "small_no_preview",
+						layout = { width = 0.8 },
+					},
+					-- ensure imports are unique
+					transform = function(item, ctx)
+						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
+						local import = item.text:gsub(".-:", "")
+						if ctx.meta.done[import] then return false end
+						ctx.meta.done[import] = true
+					end,
 				}
 			end,
 			ft = "lua",
-			desc = "󰛢 Import",
+			desc = "󰢱 Import module",
 		},
 
 		--------------------------------------------------------------------------
@@ -110,11 +137,10 @@ return {
 		},
 	},
 	opts = {
+		---@class snacks.picker.transform
+
 		---@class snacks.picker.Config
 		picker = {
-			ui_select = true, -- use `vim.ui.select`
-			-- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
-
 			sources = {
 				files = {
 					cmd = "rg",
@@ -183,14 +209,15 @@ return {
 					all = true, -- = include remotes
 				},
 			},
-
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
+				selected = { unselected = false }, -- don't show unselected
 			},
 			previewers = {
 				diff = { builtin = false }, -- use delta automatically
 				git = { builtin = false },
 			},
+			ui_select = true, -- use `vim.ui.select`
 			layout = "wide_with_preview", -- use this as default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
@@ -258,10 +285,8 @@ return {
 					picker:find()
 				end,
 				reveal_in_macOS_Finder = function(picker)
-					local item = picker:current()
-					if jit.os ~= "OSX" or not item then return end
-					local absPath = item.cwd .. "/" .. item.file
-					vim.system { "open", "-R", absPath }
+					if jit.os ~= "OSX" then return end
+					vim.system { "open", "-R", picker:current().file }
 					picker:close()
 				end,
 				qflist_and_go = function(picker)
@@ -269,8 +294,8 @@ return {
 					vim.cmd.cclose()
 					vim.cmd.cfirst()
 				end,
-				yank_display_text = function(picker)
-					local value = picker:current().text
+				yank_text = function(picker)
+					local value = picker:current().file or picker:current().text
 					vim.fn.setreg("+", value)
 					vim.notify(value, nil, { title = "Copied", icon = "󰅍" })
 					picker:close()
@@ -278,8 +303,7 @@ return {
 			},
 			prompt = " ", -- slightly to the left
 			icons = { ---@diagnostic disable-line: missing-fields -- faulty annotation
-				ui = { selected = "󰒆 ", unselected = "  " },
-				git = { staged = "󰐖" }, -- consistent with tinygit
+				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 			},
 		},
