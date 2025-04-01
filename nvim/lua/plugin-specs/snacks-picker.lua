@@ -150,6 +150,7 @@ return {
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
+		{ "<leader>ml", function() Snacks.picker.marks() end, desc = "󰃃 List marks" },
 		{
 			"<leader>iK",
 			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
@@ -160,6 +161,12 @@ return {
 		---@class snacks.picker.Config
 		picker = {
 			sources = {
+				marks = { -- only global letters
+					["local"] = false,
+					transform = function(item, _ctx)
+						if item.label:find("%d") then return false end
+					end,
+				},
 				files = {
 					cmd = "rg",
 					args = {
@@ -174,12 +181,20 @@ return {
 				grep = {
 					cmd = "rg",
 					formatters = { file = { filename_only = true } },
-					format = "grep_format",
+					format = function(item, picker)
+						item.line = nil
+						return require("snacks.picker.format").file(item, picker)
+					end,
 					args = {
 						"--trim",
 						"--sortr=modified", -- sort by recency
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
+					layout = {
+						preset = "wide_with_preview",
+						layout = { [2] = { width = 0.6 }
+						},
+					}
 				},
 				help = {
 					confirm = function(picker)

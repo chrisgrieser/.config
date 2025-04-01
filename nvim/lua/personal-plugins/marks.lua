@@ -20,12 +20,12 @@ end
 local function setSignForMark(markName)
 	clearSignForMark(markName)
 	local ns = vim.api.nvim_create_namespace("mark-signs")
-	local mRow, mCol, mBufnr = unpack(vim.api.nvim_get_mark(markName, {}))
+	local mRow, _, mBufnr = unpack(vim.api.nvim_get_mark(markName, {}))
 
 	if markExtmarks[markName] then
 		vim.api.nvim_buf_del_extmark(mBufnr, ns, markExtmarks[markName])
 	end
-	markExtmarks[markName] = vim.api.nvim_buf_set_extmark(mBufnr, ns, mRow - 1, mCol, {
+	markExtmarks[markName] = vim.api.nvim_buf_set_extmark(mBufnr, ns, mRow - 1, 1, {
 		sign_text = "󰃃" .. markName,
 		sign_hl_group = "Todo",
 	})
@@ -41,10 +41,10 @@ function M.cycleMarks(marks)
 
 	local nextMark = marks[1]
 	local marksSet = 0
-	for i, name in pairs(marks) do
-		local mRow, mCol, mBufnr = unpack(vim.api.nvim_get_mark(name, {}))
+	for i, name in ipairs(marks) do
+		local mRow, _, mBufnr = unpack(vim.api.nvim_get_mark(name, {}))
 		if mBufnr ~= 0 then marksSet = marksSet + 1 end
-		local isAtMark = mRow == row and mCol == col and mBufnr == bufnr
+		local isAtMark = mRow == row and mBufnr == bufnr
 		if isAtMark then
 			nextMark = marks[i == #marks and 1 or i + 1]
 			break
@@ -59,7 +59,7 @@ function M.cycleMarks(marks)
 	else
 		vim.api.nvim_set_current_buf(nextBufnr)
 		vim.api.nvim_win_set_cursor(0, { nextRow, nextCol })
-		setSignForMark(nextMark) -- simpler than setting it on bufenter
+		setSignForMark(nextMark) -- simpler than setting it on `BufEnter`
 	end
 end
 
