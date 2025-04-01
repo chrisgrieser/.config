@@ -305,7 +305,7 @@ return {
 						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
-						["<D-Up>"] = { "list_top", "jump", mode = "i" },
+						["<D-Up>"] = { "list_top", mode = "i" },
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
 						["<Down>"] = { "history_forward", mode = "i" },
