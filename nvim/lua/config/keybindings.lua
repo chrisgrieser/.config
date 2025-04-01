@@ -47,11 +47,23 @@ keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
 
 --------------------------------------------------------------------------------
 -- MARKS
+do
+	vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
+	local marks = { "A", "B" } -- CONFIG
 
-vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
-keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃃 Cycle marks" })
-keymap("n", "<leader>ms", function() require("personal-plugins.marks").setMark() end, { desc = "󰃄 Set mark" })
-keymap("n", "<leader>md", function() require("personal-plugins.marks").deleteMarks() end, { desc = "󰧍 Delete marks" })
+	-- stylua: ignore
+	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃃 Cycle marks" })
+	-- stylua: ignore
+	keymap("n", "<leader>md", function() require("personal-plugins.marks").deleteMarks(marks) end, { desc = "󰧍 Delete marks" })
+	for _, mark in pairs(marks) do
+		keymap(
+			"n",
+			"<leader>m" .. mark:lower(),
+			function() require("personal-plugins.marks").setMark(mark) end,
+			{ desc = "󰃄 Set mark " .. mark }
+		)
+	end
+end
 
 --------------------------------------------------------------------------------
 -- EDITING
