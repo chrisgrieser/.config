@@ -82,28 +82,34 @@ return {
 		{
 			"<leader>ci",
 			function()
+				local function import(text) return vim.trim(text:gsub(".-:", "")) end
+
 				Snacks.picker.grep_word {
 					cmd = "rg",
-					search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
+					args = { "--only-matching" },
 					regex = true,
+					search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 					ft = "lua",
 					live = false,
-					formatters = { file = { filename_only = true } },
-					args = { "--only-matching" },
-					confirm = function(picker, item)
-						picker:close()
-						local import = vim.trim(item.text:gsub(".-:", ""))
-						local lnum = vim.api.nvim_win_get_cursor(0)[1]
-						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import })
-						vim.cmd.normal { "j==", bang = true }
-					end,
-					layout = { preset = "small_no_preview", layout = { width = 0.8 } },
+					layout = { preset = "small_no_preview", layout = { width = 0.75 } },
 					-- ensure items are unique
 					transform = function(item, ctx)
 						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
-						local import = vim.trim(item.text:gsub(".-:", ""))
-						if ctx.meta.done[import] then return false end
-						ctx.meta.done[import] = true
+						local imp = import(item.text)
+						if ctx.meta.done[imp] then return false end
+						ctx.meta.done[imp] = true
+					end,
+					format = function(item, _picker)
+						local out = {}
+						Snacks.picker.highlight.format(item, item.line, out)
+						table.insert(out, { " " })
+						return out
+					end,
+					confirm = function(picker, item)
+						picker:close()
+						local lnum = vim.api.nvim_win_get_cursor(0)[1]
+						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
+						vim.cmd.normal { "j==", bang = true }
 					end,
 				}
 			end,
