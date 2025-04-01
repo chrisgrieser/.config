@@ -108,14 +108,5 @@ function M.setUnsetMark(name)
 	end
 end
 
----@param marks string[]
-function M.deleteMarks(marks)
-	for _, name in pairs(marks) do
-		clearSignForMark(getMark(name))
-		vim.api.nvim_del_mark(name)
-	end
-	notify("Marks deleted.")
-end
-
 --------------------------------------------------------------------------------
 return M

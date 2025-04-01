@@ -293,7 +293,7 @@ M.serverConfigs.yamlls = {
 }
 
 --------------------------------------------------------------------------------
--- LTEX (LanguageTool LSP)
+-- LTEX-PLUS, HARPER & TYPOS
 
 ---Helper function, as ltex etc lack ignore files
 ---@param client vim.lsp.Client
@@ -372,6 +372,13 @@ M.serverConfigs.ltex_plus = {
 M.serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Hint" },
 }
+
+--------------------------------------------------------------------------------
+-- SOURCEKIT
+
+if jit.os == "OSX" then
+	M.serverConfigs.sourcekit = { }
+end
 
 --------------------------------------------------------------------------------
 return M

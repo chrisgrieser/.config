@@ -43,7 +43,7 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Diagnostics
 keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
-keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
+keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 
 --------------------------------------------------------------------------------
 -- MARKS
@@ -53,8 +53,6 @@ do
 
 	-- stylua: ignore
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
-	-- stylua: ignore
-	keymap("n", "<leader>md", function() require("personal-plugins.marks").deleteMarks(marks) end, { desc = "󰧍 Delete marks" })
 
 	for _, mark in pairs(marks) do
 		keymap(

@@ -69,6 +69,11 @@ local function betterFileOpen()
 	}
 end
 
+local file_without_line = function(item, picker)
+	item.line = nil
+	return require("snacks.picker.format").file(item, picker)
+end
+
 --------------------------------------------------------------------------------
 
 return {
@@ -136,7 +141,6 @@ return {
 		-- LSP
 
 		{ "gf", function() Snacks.picker.lsp_references() end, desc = "󰈿 References" },
-		{ "gF", function() Snacks.picker.lsp_implementations() end, desc = "󰈿 Implementations" },
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "󰈿 Definitions" },
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 
@@ -183,6 +187,10 @@ return {
 					transform = function(item, _ctx)
 						if not item.label:find("%u") then return false end
 					end,
+					layout = {
+						preset = "small_no_preview",
+						layout = { height = 0.4 },
+					}
 				},
 				files = {
 					cmd = "rg",
@@ -198,10 +206,7 @@ return {
 				},
 				grep = {
 					cmd = "rg",
-					format = function(item, picker)
-						item.line = nil -- `file` formatter, but do not display line
-						return require("snacks.picker.format").file(item, picker)
-					end,
+					format = file_without_line,
 					layout = {
 						preset = "wide_with_preview",
 						layout = { [2] = { width = 0.6 } }, -- sets preview wider
@@ -254,6 +259,9 @@ return {
 						},
 					},
 				},
+				lsp_definitions = { format = file_without_line },
+				lsp_references = { format = file_without_line },
+				lsp_type_definitions = { format = file_without_line },
 				git_branches = {
 					all = true, -- = include remotes
 				},
