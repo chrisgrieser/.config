@@ -45,9 +45,13 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
 
-keymap("n", "g<Space>", function ()
-	require("personal-plugins.misc").gotoNextMark()
-end, { desc = " Goto next mark" })
+--------------------------------------------------------------------------------
+-- MARKS
+
+vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
+keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃃 Cycle marks" })
+keymap("n", "<leader>ms", function() require("personal-plugins.marks").setMark() end, { desc = "󰃄 Set mark" })
+keymap("n", "<leader>md", function() require("personal-plugins.marks").deleteMarks() end, { desc = "󰧍 Delete marks" })
 
 --------------------------------------------------------------------------------
 -- EDITING
