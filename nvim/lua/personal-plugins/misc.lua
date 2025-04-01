@@ -282,11 +282,4 @@ function M.lspCapabilities()
 end
 
 --------------------------------------------------------------------------------
-
-function M.gotoNextMark()
-	local globalMarks = vim.api.nvim_buf_get_marks(0, true)
-	Chainsaw(globalMarks) -- 🪚
-end
-
---------------------------------------------------------------------------------
 return M
