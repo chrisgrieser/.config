@@ -52,6 +52,7 @@ do
 
 	-- stylua: ignore
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
+	keymap("n", "<leader>m<BS>", function() require("personal-plugins.marks").deleteMarks() end, { desc = "󰃆 Delete marks" })
 
 	for _, mark in pairs(marks) do
 		keymap(
@@ -216,7 +217,7 @@ keymap("n", "<leader>y:", function()
 	local lastExcmd = vim.fn.getreg(":")
 	vim.fn.setreg("+", lastExcmd)
 	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰓗 Copy last ex-cmd" })
+end, { desc = "󰘳 Copy last ex-cmd" })
 
 --------------------------------------------------------------------------------
 -- SURROUND
@@ -349,9 +350,9 @@ end, { expr = true, desc = "<BS> does not leave cmdline" })
 --------------------------------------------------------------------------------
 -- INSPECT & EVAL
 
-keymap("n", "<leader>ip", vim.cmd.Inspect, { desc = " Position at cursor" })
-keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " TS tree" })
-keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " TS query" })
+keymap("n", "<leader>ii", vim.cmd.Inspect, { desc = "󱈄 :Inspect" })
+keymap("n", "<leader>it", vim.cmd.InspectTree, { desc = " :InspectTree" })
+keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
 
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })

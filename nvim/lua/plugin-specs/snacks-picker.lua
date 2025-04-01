@@ -145,8 +145,9 @@ return {
 		{ "gD", function() Snacks.picker.lsp_type_definitions() end, desc = "󰜁 Type definitions" },
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
-		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter Symbols" },
-		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symb." },
+		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		-- stylua: ignore
+		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
 
 		--------------------------------------------------------------------------
@@ -187,10 +188,7 @@ return {
 					transform = function(item, _ctx)
 						if not item.label:find("%u") then return false end
 					end,
-					layout = {
-						preset = "small_no_preview",
-						layout = { height = 0.4 },
-					}
+					layout = { preset = "small_no_preview", layout = { height = 0.4 } }
 				},
 				files = {
 					cmd = "rg",
@@ -233,13 +231,19 @@ return {
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
-					layout = { max_height = 9, preset = "ivy" },
+					layout = { max_height = 8, preset = "ivy" },
 				},
 				icons = {
 					layout = {
 						preset = "small_no_preview",
 						layout = { width = 0.7 },
 					},
+					confirm = function(picker, item)
+						-- as opposed to snacks's default `nvim_put`, `nvim_paste`
+						-- inserts at correct pos in insert mode & is also dot-repeatable
+						picker:close()
+						vim.api.nvim_paste(item.icon, false, -1)
+					end,
 				},
 				highlights = {
 					confirm = function(picker, item)
