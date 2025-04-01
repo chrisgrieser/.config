@@ -1,12 +1,23 @@
+---@module "snacks"
+
+local border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"|"shadow"]]
+
 return {
 	"folke/snacks.nvim",
 	event = "BufReadPre",
 	keys = {
-		{ "ö", function() require("snacks").words.jump(1, true) end, desc = "󰉚 Next reference" },
-		{ "Ö", function() require("snacks").words.jump(-1, true) end, desc = "󰉚 Prev reference" },
-		{ "<leader>g?", function() require("snacks").git.blame_line() end, desc = "󰆽 Blame line" },
+		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰉚 Next reference" },
+		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
+		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
+		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
+		{ "<leader>es", function() Snacks.scratch.select() end, desc = " Select scratch buffer" },
 	},
+	---@type snacks.Config
 	opts = {
+		scratch = {
+			root = vim.fn.stdpath("cache") .. "/scratch",
+			filekey = { cwd = false, branch = false, count = false },
+		},
 		indent = {
 			char = "│",
 			scope = { hl = "Comment" },
@@ -21,24 +32,35 @@ return {
 			debounce = 300,
 		},
 		input = {
-			icon = false,
+			icon = "",
 		},
 		win = {
-			border = vim.o.winborder,
+			border = border,
 		},
 		styles = {
+			scratch = {
+				relative = "editor",
+				width = 75,
+				height = 20,
+				-- position = "right",
+				zindex = 20,
+				wo = { winhighlight = "NormalFloat:Normal" },
+				border = border,
+				footer_pos = "right",
+			},
 			input = {
-				backdrop = true,
-				border = vim.o.winborder,
+				relative = "editor",
+				backdrop = 60,
+				border = border,
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
 			},
 			blame_line = {
-				backdrop = true,
+				relative = "cursor",
 				width = 0.6,
 				height = 0.6,
-				border = vim.o.winborder,
+				border = border,
 				title = " 󰆽 Git blame ",
 			},
 		},

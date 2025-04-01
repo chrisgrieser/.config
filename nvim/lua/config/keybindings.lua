@@ -340,18 +340,6 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 -- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 
-keymap({ "n", "x" }, "<leader>es", function()
-	local location = vim.fn.stdpath("config") .. "/debug"
-	vim.fn.mkdir(location, "p")
-	local currentExt = vim.fn.expand("%:e")
-	local path = location .. "/scratch." .. currentExt
-	vim.cmd.edit(path)
-	vim.cmd.write(path)
-	if currentExt == "lua" then
-		vim.keymap.set("n", "<leader>er", vim.cmd.source, { desc = "󰢱 :source", buffer = true })
-	end
-end, { desc = "󰈮 Scratch file" })
-
 keymap({ "n", "x" }, "<leader>ee", ":lua = ", { desc = " Eval" })
 
 --------------------------------------------------------------------------------
