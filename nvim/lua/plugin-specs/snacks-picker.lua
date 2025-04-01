@@ -90,6 +90,7 @@ return {
 					regex = true,
 					search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 					ft = "lua",
+
 					live = false,
 					layout = { preset = "small_no_preview", layout = { width = 0.75 } },
 					-- ensure items are unique
@@ -102,7 +103,6 @@ return {
 					format = function(item, _picker)
 						local out = {}
 						Snacks.picker.highlight.format(item, item.line, out)
-						table.insert(out, { " " })
 						return out
 					end,
 					confirm = function(picker, item)

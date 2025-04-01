@@ -45,6 +45,10 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
 
+keymap("n", "g<Space>", function ()
+	require("personal-plugins.misc").gotoNextMark()
+end, { desc = " Goto next mark" })
+
 --------------------------------------------------------------------------------
 -- EDITING
 

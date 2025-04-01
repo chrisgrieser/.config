@@ -275,10 +275,17 @@ function M.lspCapabilities()
 			server_capabilities = client.server_capabilities,
 		}
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
-		local header = "-- for a full view, open in notification history\n"
+		local header = "-- For a full view, open in notification history.\n"
 		local text = header .. vim.inspect(info)
 		vim.notify(text, vim.log.levels.DEBUG, opts)
 	end)
+end
+
+--------------------------------------------------------------------------------
+
+function M.gotoNextMark()
+	local globalMarks = vim.api.nvim_buf_get_marks(0, true)
+	Chainsaw(globalMarks) -- 🪚
 end
 
 --------------------------------------------------------------------------------
