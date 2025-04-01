@@ -15,8 +15,9 @@ return {
 	---@type snacks.Config
 	opts = {
 		scratch = {
+			-- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 			root = vim.fn.stdpath("cache") .. "/scratch",
-			filekey = { cwd = false, branch = false, count = false },
+			filekey = { cwd = true, branch = false, count = false },
 		},
 		indent = {
 			char = "│",
