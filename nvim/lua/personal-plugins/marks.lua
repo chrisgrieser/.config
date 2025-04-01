@@ -59,39 +59,51 @@ end
 
 ---@param marks string[]
 function M.cycleMarks(marks)
-	-- determine next mark
-	local marksSet = 0
-	local next = marks[1]
-	for i, name in ipairs(marks) do
-		local m = getMark(name)
-		if m then marksSet = marksSet + 1 end
-		if m and cursorIsAtMark(m) then
-			local nextMarkName = marks[i == #marks and 1 or i + 1]
-			next = getMark(nextMarkName)
-			if next then break end
-		end
+	for _, name in pairs(marks) do
+		assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
 	end
-	if not next then
-		notify(marksSet == 0 and "No mark has been set." or "Already at the only mark set.")
+
+	-- get set marks
+	local marksSet = vim
+		.iter(marks)
+		:map(function(name) return getMark(name) end) -- name -> Markobj
+		:filter(function(m) return m ~= nil end) -- only marks that are set
+		:totable()
+	if #marksSet == 0 then
+		notify("No mark has been set.")
+		return
+	end
+	if #marksSet == 1 and cursorIsAtMark(marksSet[1]) then
+		notify("Already at the only mark set.")
 		return
 	end
 
-	-- goto next mark
-	if next.bufnr > 0 then
-		vim.api.nvim_set_current_buf(next.bufnr)
-	else
-		vim.cmd.edit(next.path)
+	-- determine next mark
+	local nextMark = marksSet[1] -- default to first one, if at no mark
+	for i, m in ipairs(marksSet) do
+		if cursorIsAtMark(m) then
+			nextMark = marksSet[i == #marksSet and 1 or i + 1]
+			break
+		end
 	end
-	vim.api.nvim_win_set_cursor(0, { next.row, next.col })
-	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
 
-	-- set sign (simpler than setting it on `BufEnter`)
-	setSignForMark(next.name)
+	-- goto next mark
+	local markInUnopenedFile = nextMark.bufnr == 0
+	if markInUnopenedFile then
+		vim.cmd.edit(nextMark.path)
+	else
+		vim.api.nvim_set_current_buf(nextMark.bufnr)
+	end
+	vim.api.nvim_win_set_cursor(0, { nextMark.row, nextMark.col })
+	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+	setSignForMark(nextMark.name) -- setting here simpler than on `BufEnter`
 end
 
 ---Set a mark, or unsets it if the cursor is on the same line as the mark
 ---@param name string
 function M.setUnsetMark(name)
+	assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
+
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local m = getMark(name)
 	if m and cursorIsAtMark(m) then
@@ -108,10 +120,19 @@ end
 function M.deleteMarks()
 	local allMarks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	for i = 1, #allMarks do
-		clearSignForMark(getMark(allMarks[i]))
-		vim.api.nvim_del_mark(allMarks[i])
+		local name = allMarks:sub(i, i)
+		clearSignForMark(getMark(name))
+		vim.api.nvim_del_mark(name)
 	end
 	notify("All marks deleted.")
+end
+
+function M.selectMarks()
+	---@param marks string[]
+function M.cycleMarks(marks)
+	for _, name in pairs(marks) do
+		assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
+	end
 end
 
 --------------------------------------------------------------------------------

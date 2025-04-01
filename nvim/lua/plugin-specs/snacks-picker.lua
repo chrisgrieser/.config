@@ -177,19 +177,12 @@ return {
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-		{ "<leader>ml", function() Snacks.picker.marks() end, desc = "󰃃 List marks" },
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 	},
 	opts = {
 		---@class snacks.picker.Config
 		picker = {
 			sources = {
-				marks = { -- only global letters marks
-					transform = function(item, _ctx)
-						if not item.label:find("%u") then return false end
-					end,
-					layout = { preset = "small_no_preview", layout = { height = 0.4 } }
-				},
 				files = {
 					cmd = "rg",
 					args = {
