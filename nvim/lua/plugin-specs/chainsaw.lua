@@ -15,14 +15,14 @@ return {
 				lua = 'print("{{marker}} {{var}}: " .. hs.inspect({{var}}))', -- Hammerspoon
 			},
 			assertLog = {
-				lua = 'assert({{var}}, "")', -- not using any marker
+				lua = 'assert({{var}}, "")', -- no marker, since intended to be permanent
 			},
 			objectLog = { -- re-purposing `objectLog` for alternative log statements for these
 				-- Obsidian Notice
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
 				zsh = 'osascript -e "display notification "{{marker}}} ${{var}}" with title "{{var}}""',
-				-- for snacks.scratch buffer
+				-- simple print statements for `snacks`' scratch buffer
 				nvim_lua = "print({{var}}) -- {{marker}}",
 			},
 			clearLog = { -- Hammerspoon
