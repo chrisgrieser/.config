@@ -10,7 +10,7 @@ return {
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
-		{ "<leader>es", function() Snacks.scratch.select() end, desc = " Select scratch buffer" },
+		{ "<leader>el", function() Snacks.scratch.select() end, desc = " Select scratch buffer" },
 	},
 	---@type snacks.Config
 	opts = {
@@ -43,8 +43,7 @@ return {
 				width = 75,
 				height = 20,
 				-- position = "right",
-				zindex = 20,
-				wo = { winhighlight = "NormalFloat:Normal" },
+				wo = { signcolumn = "yes:1" },
 				border = border,
 				footer_pos = "right",
 			},
