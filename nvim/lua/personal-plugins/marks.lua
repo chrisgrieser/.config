@@ -6,7 +6,7 @@ local M = {}
 local markExtmarks = {}
 
 ---@param msg string
-local function notify(msg) vim.notify(msg, nil, { title = "Marks", icon = "󰃃" }) end
+local function notify(msg) vim.notify(msg, nil, { title = "Marks", icon = "󰃀" }) end
 
 --------------------------------------------------------------------------------
 
@@ -34,26 +34,25 @@ local function cursorIsAtMark(m)
 	return m.row == row and m.bufnr == bufnr
 end
 
----@param markName string
-local function clearSignForMark(markName)
-	local ns = vim.api.nvim_create_namespace("mark-signs")
-	local m = getMark(markName)
+---@param m Markobj?
+local function clearSignForMark(m)
 	if not m then return end
-	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row, m.row + 1)
+	local ns = vim.api.nvim_create_namespace("mark-signs")
+	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row - 1, m.row)
 end
 
----@param markName string
-local function setSignForMark(markName)
-	clearSignForMark(markName)
+---@param name string
+local function setSignForMark(name)
 	local ns = vim.api.nvim_create_namespace("mark-signs")
-	local m = getMark(markName)
+	local m = getMark(name)
 	if not m then return end
 
-	if markExtmarks[markName] then
-		vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[markName])
+	clearSignForMark(m)
+	if markExtmarks[name] then
+		vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name])
 	end
-	markExtmarks[markName] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
-		sign_text = "󰃀" .. markName,
+	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
+		sign_text = "󰃃" .. name,
 		sign_hl_group = "Todo",
 	})
 end
@@ -74,8 +73,6 @@ function M.cycleMarks(marks)
 			end
 		end
 	end
-
-	-- goto next mark
 	local next = getMark(nextMark)
 	if not next then
 		local msg = marksSet == 0 and "No mark has been set." or "Already at the only mark set."
@@ -83,35 +80,39 @@ function M.cycleMarks(marks)
 		return
 	end
 
+	-- goto next mark
 	if next.bufnr > 0 then
 		vim.api.nvim_set_current_buf(next.bufnr)
 	else
 		vim.cmd.edit(next.path)
 	end
 	vim.api.nvim_win_set_cursor(0, { next.row, next.col })
-	setSignForMark(next.name) -- simpler than setting it on `BufEnter`
+	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+
+	-- set sign (simpler than setting it on `BufEnter`)
+	setSignForMark(next.name)
 end
 
----@param mark string
-function M.setUnsetMark(mark)
+---@param name string
+function M.setUnsetMark(name)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local m = getMark(mark)
-	if cursorIsAtMark(m) then
-		clearSignForMark(mark)
-		vim.api.nvim_del_mark(mark)
-		notify(("Mark [%s] set."):format(mark))
+	local m = getMark(name)
+	if m and cursorIsAtMark(m) then
+		clearSignForMark(m)
+		vim.api.nvim_del_mark(name)
+		notify(("Mark [%s] cleared."):format(name))
 	else
-		vim.api.nvim_buf_set_mark(0, mark, row, col, {})
-		setSignForMark(mark)
-		notify(("Mark [%s] set."):format(mark))
+		vim.api.nvim_buf_set_mark(0, name, row, col, {})
+		setSignForMark(name)
+		notify(("Mark [%s] set."):format(name))
 	end
 end
 
 ---@param marks string[]
 function M.deleteMarks(marks)
-	for _, mark in pairs(marks) do
-		clearSignForMark(mark)
-		vim.api.nvim_del_mark(mark)
+	for _, name in pairs(marks) do
+		clearSignForMark(getMark(name))
+		vim.api.nvim_del_mark(name)
 	end
 	notify("Marks deleted.")
 end
