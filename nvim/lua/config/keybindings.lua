@@ -467,7 +467,7 @@ end, { desc = "󰋽 Diagnostics" })
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
 keymap("n", "<leader>ol", function()
-	vim.notify("Restarting…", nil, { title = "LSP", icon = "󰑓" })
+	vim.notify("Restarting…", vim.log.levels.TRACE, { title = "LSP", icon = "󰑓" })
 	vim.lsp.stop_client(vim.lsp.get_clients())
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reloads -> re-attach LSPs
 end, { desc = "󰑓 LSPs restart" })

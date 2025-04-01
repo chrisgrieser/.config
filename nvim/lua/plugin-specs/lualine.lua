@@ -36,12 +36,11 @@ return {
 		options = {
 			globalstatus = true,
 			always_divide_middle = false,
-			section_separators = { left = "", right = "" },
+			section_separators = { left = "", right = "" },
 			component_separators = { left = "│", right = "│" },
-			ignore_focus = { -- so file name is still visible when renaming
-				"snacks_input",
-				"snacks_picker_input",
-			},
+
+			-- so file name is still visible when renaming
+			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
 		tabline = {
 			lualine_a = {
