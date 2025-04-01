@@ -215,15 +215,15 @@ function M.bufferInfo()
 
 	local indentType = vim.bo.expandtab and "spaces" or "tabs"
 	local indentAmount = vim.bo.expandtab and vim.bo.tabstop or vim.bo.shiftwidth
+	local foldexpr = vim.wo.foldexpr:find("lsp") and "LSP" or "TS"
 
 	local out = {
 		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
 		"[winid]     " .. vim.api.nvim_get_current_win(),
 		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
 		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		("[indent]    %s (%s)"):format(indentType, indentAmount),
-		"[foldexpr]  " .. (vim.wo.foldexpr:find("lsp") and "LSP" or "Treesitter"),
-		"[foldlvl]   " .. vim.wo.foldlevel,
+		"[indent]    " .. ("%s (%d)"):format(indentType, indentAmount),
+		"[folds]     " .. ("%s (%d)"):format(foldexpr, vim.wo.foldlevel),
 		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
 		"",
 	}
