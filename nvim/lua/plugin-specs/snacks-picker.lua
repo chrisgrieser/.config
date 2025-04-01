@@ -2,43 +2,79 @@
 --------------------------------------------------------------------------------
 ---@module "snacks"
 
+-- lightweight version of `telescope-import.nvim`
+local function importLuaModule()
+	local function import(text) return vim.trim(text:gsub(".-:", "")) end
+
+	Snacks.picker.grep_word {
+		cmd = "rg",
+		args = { "--only-matching" },
+		regex = true,
+		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
+		ft = "lua",
+
+		live = false,
+		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
+		transform = function(item, ctx)
+			-- ensure items are unique
+			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
+			local imp = import(item.text)
+			if ctx.meta.done[imp] then return false end
+			ctx.meta.done[imp] = true
+		end,
+		format = function(item, _picker)
+			-- only display the grepped line
+			local out = {}
+			Snacks.picker.highlight.format(item, item.line, out)
+			return out
+		end,
+		confirm = function(picker, item)
+			-- insert the grepped line below the current one
+			picker:close()
+			local lnum = vim.api.nvim_win_get_cursor(0)[1]
+			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
+			vim.cmd.normal { "j==", bang = true }
+		end,
+	}
+end
+
+local function betterFileOpen()
+	-- get list of changed files
+	local changedInfo = {}
+	local gitDir = Snacks.git.get_root()
+	if gitDir then
+		local gitStatus = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
+		local changes = vim.split(gitStatus or "", "\n", { trimempty = true })
+		vim.iter(changes):each(function(line)
+			local relPath = line:sub(4)
+			local absPath = gitDir .. "/" .. relPath
+			local change = line:sub(1, 2)
+			changedInfo[absPath] = change
+		end)
+	end
+
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	Snacks.picker.files {
+		title = " " .. vim.fs.basename(vim.uv.cwd()),
+		transform = function(item, _ctx)
+			local itemPath = Snacks.picker.util.path(item)
+			if itemPath == currentFile then return false end
+		end,
+		format = function(item, picker)
+			local itemPath = Snacks.picker.util.path(item)
+			item.status = changedInfo[itemPath]
+			return require("snacks.picker.format").file(item, picker)
+		end,
+	}
+end
+
+--------------------------------------------------------------------------------
+
 return {
 	"folke/snacks.nvim",
 	keys = {
 		-- FILES
-		{
-			"go",
-			function()
-				-- get list of changed files
-				local changedInfo = {}
-				local gitDir = Snacks.git.get_root()
-				if gitDir then
-					local gitStatus = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
-					local changes = vim.split(gitStatus or "", "\n", { trimempty = true })
-					vim.iter(changes):each(function(line)
-						local relPath = line:sub(4)
-						local absPath = gitDir .. "/" .. relPath
-						local change = line:sub(1, 2)
-						changedInfo[absPath] = change
-					end)
-				end
-
-				local currentFile = vim.api.nvim_buf_get_name(0)
-				Snacks.picker.files {
-					title = " " .. vim.fs.basename(vim.uv.cwd()),
-					transform = function(item, _ctx)
-						local itemPath = Snacks.picker.util.path(item)
-						if itemPath == currentFile then return false end
-					end,
-					format = function(item, picker)
-						local itemPath = Snacks.picker.util.path(item)
-						item.status = changedInfo[itemPath]
-						return require("snacks.picker.format").file(item, picker)
-					end,
-				}
-			end,
-			desc = " Open files",
-		},
+		{ "go", betterFileOpen, desc = " Open files" },
 		{
 			"gr",
 			function()
@@ -91,47 +127,9 @@ return {
 
 		--------------------------------------------------------------------------
 		-- GREP
+
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-
-		-- IMPORT LUA MODULE
-		-- lightweight version of `telescope-import.nvim`
-		{
-			"<leader>ci",
-			function()
-				local function import(text) return vim.trim(text:gsub(".-:", "")) end
-
-				Snacks.picker.grep_word {
-					cmd = "rg",
-					args = { "--only-matching" },
-					regex = true,
-					search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
-					ft = "lua",
-
-					live = false,
-					layout = { preset = "small_no_preview", layout = { width = 0.75 } },
-					-- ensure items are unique
-					transform = function(item, ctx)
-						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
-						local imp = import(item.text)
-						if ctx.meta.done[imp] then return false end
-						ctx.meta.done[imp] = true
-					end,
-					format = function(item, _picker)
-						local out = {}
-						Snacks.picker.highlight.format(item, item.line, out)
-						return out
-					end,
-					confirm = function(picker, item)
-						picker:close()
-						local lnum = vim.api.nvim_win_get_cursor(0)[1]
-						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
-						vim.cmd.normal { "j==", bang = true }
-					end,
-				}
-			end,
-			ft = "lua",
-			desc = "󰢱 Import module",
-		},
+		{ "<leader>ci", importLuaModule, ft = "lua", desc = "󰢱 Import module" },
 
 		--------------------------------------------------------------------------
 		-- LSP
@@ -352,7 +350,7 @@ return {
 					commit = "",
 					staged = "󰐖", -- consistent with tiyngit
 					added = "",
-					modified = "", -- ○
+					modified = "󰄯",
 					renamed = "󰏫",
 					untracked = "?",
 				},
