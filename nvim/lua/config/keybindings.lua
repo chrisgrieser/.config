@@ -60,7 +60,7 @@ do
 			"n",
 			"<leader>m" .. mark:lower(),
 			function() require("personal-plugins.marks").setUnsetMark(mark) end,
-			{ desc = "󰃄 Set mark " .. mark }
+			{ desc = "󰃄 Set/unset mark " .. mark }
 		)
 	end
 end

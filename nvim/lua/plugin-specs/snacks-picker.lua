@@ -130,38 +130,40 @@ return {
 		--------------------------------------------------------------------------
 		-- GIT
 
-		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰭎 Branches" },
-		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰭎 Status" },
-		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰭎 Log" },
+		{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "󰗲 Branches" },
+		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
+		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 
 		--------------------------------------------------------------------------
-		-- MISC
+		-- INSPECT
 
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = "󰗲 Highlights" },
-		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
-		-- stylua: ignore
-		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
-
-		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
-
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
-		{ "<leader>ml", function() Snacks.picker.marks() end, desc = "󰃃 List marks" },
+		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
 		{
 			"<leader>iK",
 			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
 			desc = "󰌌 Keymaps (buffer)",
 		},
+
+		--------------------------------------------------------------------------
+		-- MISC
+
+		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
+		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
+		-- stylua: ignore
+		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
+		{ "<leader>ml", function() Snacks.picker.marks() end, desc = "󰃃 List marks" },
+		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 	},
 	opts = {
 		---@class snacks.picker.Config
 		picker = {
 			sources = {
-				marks = { -- only global letters
-					["local"] = false,
+				marks = { -- only global letters marks
 					transform = function(item, _ctx)
-						if item.label:find("%d") then return false end
+						if not item.label:find("%u") then return false end
 					end,
 				},
 				files = {
@@ -171,6 +173,22 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					layout = "small_no_preview",
+					format = function(item, picker)
+						-- get list of changed files
+						local changedFilesInCwd = {}
+						local gitDir = Snacks.git.get_root()
+						if gitDir then
+							local rootLen = #vim.uv.cwd() - #gitDir -- when cwd is not git root
+							local gitResult = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
+							local changes = vim.split(gitResult or "", "\n", { trimempty = true })
+							vim.iter(changes):each(function(change)
+								local gitChangeTypeLen = 3
+								local relPath = change:sub(rootLen + gitChangeTypeLen + 1)
+								table.insert(changedFilesInCwd, relPath)
+							end)
+						end
+						return require("snacks.picker.format").file(item, picker)
+					end,
 				},
 				recent = {
 					layout = "small_no_preview",
@@ -178,12 +196,12 @@ return {
 				grep = {
 					cmd = "rg",
 					format = function(item, picker)
-						item.line = nil
+						item.line = nil -- `file` formatter, but do not display line
 						return require("snacks.picker.format").file(item, picker)
 					end,
 					layout = {
 						preset = "wide_with_preview",
-						layout = { [2] = { width = 0.6 } }, -- sets preview wieder
+						layout = { [2] = { width = 0.6 } }, -- sets preview wider
 					},
 					args = {
 						"--sortr=modified", -- sort by recency
