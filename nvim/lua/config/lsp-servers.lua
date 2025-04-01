@@ -92,17 +92,17 @@ local efmConfig = {
 		},
 		{
 			lintSource = "markdownlint",
-			lintCommand = "markdownlint $'{INPUT}'",
-			lintStdin = false, -- not using stdin, so `.markdownlintignore` applies
+			lintCommand = "markdownlint --stdin",
+			lintStdin = true, -- caveat: linting from stdin does not support `.markdownlintignore`
 			lintIgnoreExitCode = true,
-			lintSeverity = 3, -- 3: info, 2: warning
+			lintSeverity = vim.diagnostic.severity.INFO,
 			lintFormats = { "%f:%l:%c MD%n/%m", "%f:%l MD%n/%m" },
 		},
 	},
 	zsh = {
 		-- HACK use efm to force shellcheck to work with zsh files via `--shell=bash`,
 		-- since doing so with bash-lsp does not work
-		-- PENDING https://github.com/bash-lsp/bash-language-server/pull/1133
+		-- PENDING https://github.com/bash-lsp/bash-language-server/issues/1064
 		{
 			lintSource = "shellcheck",
 			lintCommand = "shellcheck --format=gcc --external-sources --shell=bash -",
@@ -150,7 +150,7 @@ M.serverConfigs.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
-				callSnippet = "Replace",
+				callSnippet = "Disable",
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin
