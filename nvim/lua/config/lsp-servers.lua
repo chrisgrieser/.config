@@ -375,9 +375,16 @@ M.serverConfigs.typos_lsp = {
 
 --------------------------------------------------------------------------------
 -- SOURCEKIT
-
+-- Not installed via `mason`, since already available via the Xcode Command Line
+-- Tools (which is installed for `homebrew`).
+-- DOCS https://github.com/swiftlang/sourcekit-lsp/tree/main/Documentation
 if jit.os == "OSX" then
-	M.serverConfigs.sourcekit = { }
+	M.serverConfigs.sourcekit = {
+		capabilities = {
+			-- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
+			workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+		},
+	}
 end
 
 --------------------------------------------------------------------------------
