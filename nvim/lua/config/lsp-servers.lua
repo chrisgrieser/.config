@@ -23,11 +23,9 @@ local lspToMasonMap = {
 	marksman = "marksman", -- markdown lsp
 	ruff = "ruff", -- python linter & formatter
 	stylelint_lsp = "stylelint-lsp", -- css linter
-	-- stylua3p_ls = "lua-3p-language-servers", -- stylua wrapper
-
 	taplo = "taplo", -- toml lsp
-	ts_ls = "typescript-language-server", -- also used for javascript
-	ts_query_ls = "ts_query_ls", -- tree-sitter queries
+	ts_ls = "typescript-language-server",
+	ts_query_ls = "ts_query_ls", -- tree-sitter query files
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
 }
@@ -313,7 +311,7 @@ end
 -- https://writewithharper.com/docs/integrations/neovim
 -- https://writewithharper.com/docs/integrations/language-server#Configuration
 M.serverConfigs.harper_ls = {
-	filetypes = { "markdown" }, -- not using in all filetypes, since too many false positives
+	filetypes = { "markdown" },  -- PENDING https://github.com/elijah-potter/harper/issues/228
 	settings = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
@@ -322,8 +320,7 @@ M.serverConfigs.harper_ls = {
 				IgnoreLinkTitle = true,
 			},
 			linters = {
-				spellCheck = true,
-				sentenceCapitalization = false, -- PENDING https://github.com/elijah-potter/harper/issues/228
+				sentenceCapitalization = true,
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
@@ -331,6 +328,8 @@ M.serverConfigs.harper_ls = {
 	},
 	on_attach = function(harper, bufnr)
 		detachIfObsidianOrIcloud(harper, bufnr)
+		-- Using `harper` to write to the spellfile affectively does the same as
+		-- the builtin `zg`, but has the advantage that `harper` is hot-reloaded.
 		vim.keymap.set("n", "zg", function()
 			vim.lsp.buf.code_action {
 				filter = function(a) return a.title:find("^Add .* to the global dictionary%.") ~= nil end,
@@ -374,15 +373,17 @@ M.serverConfigs.typos_lsp = {
 }
 
 --------------------------------------------------------------------------------
--- SOURCEKIT
--- Not installed via `mason`, since already available via the Xcode Command Line
--- Tools (which is installed for `homebrew`).
--- DOCS https://github.com/swiftlang/sourcekit-lsp/tree/main/Documentation
+-- SOURCEKIT & CLANG
+-- Not installed via `mason`, but already available via Xcode Command Line
+-- Tools (which are usually installed on macOS-dev devices for `homebrew`).
 if jit.os == "OSX" then
-	M.serverConfigs.sourcekit = {
-		capabilities = {
-			-- https://www.swift.org/documentation/articles/zero-to-swift-nvim.html
-			workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+	M.serverConfigs.sourcekit = {}
+	M.serverConfigs.clangd = {}
+
+	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3681
+	M.serverConfigs.sourcekit.capabilities = {
+		workspace = {
+			didChangeWatchedFiles = { dynamicRegistration = true },
 		},
 	}
 end
