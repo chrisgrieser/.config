@@ -1,8 +1,3 @@
--- INFO potential other AI plugins:
--- https://github.com/huggingface/llm-ls
--- https://github.com/SilasMarvin/lsp-ai
--- https://github.com/Bryley/neoai.nvim
--- https://github.com/supermaven-inc/supermaven-nvim/
 -- https://github.com/monkoose/neocodeium
 --------------------------------------------------------------------------------
 
@@ -70,15 +65,9 @@ return {
 		},
 		{
 			"<D-d>",
-			function() require("neocodeium").cycle(1) end,
+			function() require("neocodeium").cycle_or_complete(1) end,
 			mode = "i",
 			desc = "󰚩 Next suggestion",
-		},
-		{
-			"<D-D>",
-			function() require("neocodeium").cycle(-1) end,
-			mode = "i",
-			desc = "󰚩 Previous suggestion",
 		},
 		{
 			"<leader>oa",

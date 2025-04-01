@@ -3,7 +3,6 @@
 --------------------------------------------------------------------------------
 
 local M = {}
-local markExtmarks = {}
 
 ---@param msg string
 local function notify(msg) vim.notify(msg, nil, { title = "Marks", icon = "󰃀" }) end
@@ -41,6 +40,7 @@ local function clearSignForMark(m)
 	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row - 1, m.row)
 end
 
+local markExtmarks = {}
 ---@param name string
 local function setSignForMark(name)
 	local ns = vim.api.nvim_create_namespace("mark-signs")
@@ -48,9 +48,7 @@ local function setSignForMark(name)
 	if not m then return end
 
 	clearSignForMark(m)
-	if markExtmarks[name] then
-		vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name])
-	end
+	if markExtmarks[name] then vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name]) end
 	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
 		sign_text = "󰃃" .. name,
 		sign_hl_group = "Todo",
@@ -62,21 +60,19 @@ end
 ---@param marks string[]
 function M.cycleMarks(marks)
 	-- determine next mark
-	local nextMark, marksSet = marks[1], 0
+	local marksSet = 0
+	local next = marks[1]
 	for i, name in ipairs(marks) do
 		local m = getMark(name)
-		if m then
-			marksSet = marksSet + 1
-			if cursorIsAtMark(m) then
-				nextMark = marks[i == #marks and 1 or i + 1]
-				break
-			end
+		if m then marksSet = marksSet + 1 end
+		if m and cursorIsAtMark(m) then
+			local nextMarkName = marks[i == #marks and 1 or i + 1]
+			next = getMark(nextMarkName)
+			if next then break end
 		end
 	end
-	local next = getMark(nextMark)
 	if not next then
-		local msg = marksSet == 0 and "No mark has been set." or "Already at the only mark set."
-		notify(msg)
+		notify(marksSet == 0 and "No mark has been set." or "Already at the only mark set.")
 		return
 	end
 
@@ -93,6 +89,7 @@ function M.cycleMarks(marks)
 	setSignForMark(next.name)
 end
 
+---Set a mark, or unsets it if the cursor is on the same line as the mark
 ---@param name string
 function M.setUnsetMark(name)
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -106,6 +103,15 @@ function M.setUnsetMark(name)
 		setSignForMark(name)
 		notify(("Mark [%s] set."):format(name))
 	end
+end
+
+function M.deleteMarks()
+	local allMarks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	for i = 1, #allMarks do
+		clearSignForMark(getMark(allMarks[i]))
+		vim.api.nvim_del_mark(allMarks[i])
+	end
+	notify("All marks deleted.")
 end
 
 --------------------------------------------------------------------------------
