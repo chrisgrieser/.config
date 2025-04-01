@@ -116,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
+				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,7 +129,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
+				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -156,6 +156,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>95517F52-43E2-482D-A969-E08A902241D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>31863275-806D-4825-9F48-93BCCEA389E7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2B84625B-5C46-44F6-BFEE-B191D844A7AE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -207,7 +220,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
+				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -234,19 +247,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>721DA358-715D-4B08-8010-3E2F1B169499</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>05249526-F215-42BC-A913-9810F8222128</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -399,7 +399,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
+				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -438,7 +438,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
+				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -465,6 +465,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E69AF42F-75A2-4F34-8579-EE15867A7D4E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1451,50 +1464,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>⚠️ Apple Intelligence</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>05249526-F215-42BC-A913-9810F8222128</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/trigger-apple-intelligence.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>721DA358-715D-4B08-8010-3E2F1B169499</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -1517,11 +1486,14 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>Proofread</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>instruction</key>
+					<string>Proofread</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1555,16 +1527,63 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>Make Professional</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>instruction</key>
+					<string>Make Professional</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>D0EF821D-6ECB-4384-924A-0FAADEDAF32F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/trigger-apple-intelligence.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>⚠️ Apple Intelligence</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>2B84625B-5C46-44F6-BFEE-B191D844A7AE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1592,12 +1611,30 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/app.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
-				<string>Make Friendly</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>instruction</key>
+					<string>Make Friendly</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1631,11 +1668,14 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>Make List</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>instruction</key>
+					<string>Make List</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1669,11 +1709,14 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string>Show Writing Tools</string>
+				<string></string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict/>
+				<dict>
+					<key>instruction</key>
+					<string>Show Writing Tools</string>
+				</dict>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1697,15 +1740,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>550</real>
 			<key>ypos</key>
 			<real>160</real>
-		</dict>
-		<key>05249526-F215-42BC-A913-9810F8222128</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>1075</real>
 		</dict>
 		<key>0AC03754-13D8-4231-A82E-CCA1581406FA</key>
 		<dict>
@@ -1821,11 +1855,20 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
+			<string>FIX App loosing focus when using universal actions with Alfred's Compatibility mode</string>
 			<key>xpos</key>
 			<real>470</real>
 			<key>ypos</key>
 			<real>890</real>
+		</dict>
+		<key>2B84625B-5C46-44F6-BFEE-B191D844A7AE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>1320</real>
 		</dict>
 		<key>2BA2E52E-6876-4A61-A185-652BA211060B</key>
 		<dict>
@@ -1835,6 +1878,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>720</real>
 			<key>ypos</key>
 			<real>585</real>
+		</dict>
+		<key>31863275-806D-4825-9F48-93BCCEA389E7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>trigger Apple Intelligence menu item</string>
+			<key>xpos</key>
+			<real>480</real>
+			<key>ypos</key>
+			<real>1320</real>
 		</dict>
 		<key>3512A462-2B85-41D9-84EB-A78922ED365E</key>
 		<dict>
@@ -1922,17 +1976,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>885</real>
 			<key>ypos</key>
 			<real>455</real>
-		</dict>
-		<key>721DA358-715D-4B08-8010-3E2F1B169499</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>trigger Apple Intelligence menu item</string>
-			<key>xpos</key>
-			<real>310</real>
-			<key>ypos</key>
-			<real>1075</real>
 		</dict>
 		<key>80E8BB26-5DE7-454C-8F56-591DDBFCD775</key>
 		<dict>
@@ -2152,6 +2195,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>E69AF42F-75A2-4F34-8579-EE15867A7D4E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
+			<key>xpos</key>
+			<real>330</real>
+			<key>ypos</key>
+			<real>1320</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>

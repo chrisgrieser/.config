@@ -48,7 +48,6 @@ keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 --------------------------------------------------------------------------------
 -- MARKS
 do
-	vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
 	local marks = { "A", "B", "C" } -- CONFIG
 
 	-- stylua: ignore
