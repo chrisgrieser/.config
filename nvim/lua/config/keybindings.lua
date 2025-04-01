@@ -55,6 +55,7 @@ do
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
 	-- stylua: ignore
 	keymap("n", "<leader>md", function() require("personal-plugins.marks").deleteMarks(marks) end, { desc = "󰧍 Delete marks" })
+
 	for _, mark in pairs(marks) do
 		keymap(
 			"n",
