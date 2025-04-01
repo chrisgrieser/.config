@@ -72,10 +72,7 @@ return {
 
 		--------------------------------------------------------------------------
 		-- GREP
-
 		{ "gl", function() Snacks.picker.grep() end, desc = "󰛢 Grep" },
-		-- stylua: ignore
-		{ "gL", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "󰛢 Grep word" },
 
 		-- IMPORT LUA MODULE
 		-- lightweight version of `telescope-import.nvim`
@@ -180,21 +177,18 @@ return {
 				},
 				grep = {
 					cmd = "rg",
-					formatters = { file = { filename_only = true } },
 					format = function(item, picker)
 						item.line = nil
 						return require("snacks.picker.format").file(item, picker)
 					end,
+					layout = {
+						preset = "wide_with_preview",
+						layout = { [2] = { width = 0.6 } }, -- sets preview wieder
+					},
 					args = {
-						"--trim",
 						"--sortr=modified", -- sort by recency
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					layout = {
-						preset = "wide_with_preview",
-						layout = { [2] = { width = 0.6 }
-						},
-					}
 				},
 				help = {
 					confirm = function(picker)
@@ -207,7 +201,8 @@ return {
 					confirm = function(picker, item)
 						if not item.file then return end
 						picker:close()
-						vim.cmd(("edit +%d %s"):format(item.pos[1], item.file))
+						local lnum = item.pos[1]
+						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
 				},
 				colorschemes = {
