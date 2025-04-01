@@ -276,8 +276,7 @@ function M.lspCapabilities()
 		}
 		local opts = { icon = "󱈄", title = client.name .. " capabilities", ft = "lua" }
 		local header = "-- For a full view, open in notification history.\n"
-		local text = header .. vim.inspect(info)
-		vim.notify(text, vim.log.levels.DEBUG, opts)
+		vim.notify(header .. vim.inspect(info), vim.log.levels.DEBUG, opts)
 	end)
 end
 

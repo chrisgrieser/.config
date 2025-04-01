@@ -67,7 +67,7 @@ return {
 			"<D-d>",
 			function() require("neocodeium").cycle_or_complete(1) end,
 			mode = "i",
-			desc = "󰚩 Next suggestion",
+			desc = "󰚩 Show/next suggestion",
 		},
 		{
 			"<leader>oa",
