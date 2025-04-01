@@ -9,12 +9,31 @@ return {
 		{
 			"go",
 			function()
+				-- get list of changed files
+				local changedInfo = {}
+				local gitDir = Snacks.git.get_root()
+				if gitDir then
+					local gitStatus = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
+					local changes = vim.split(gitStatus or "", "\n", { trimempty = true })
+					vim.iter(changes):each(function(line)
+						local relPath = line:sub(4)
+						local absPath = gitDir .. "/" .. relPath
+						local change = line:sub(1, 2)
+						changedInfo[absPath] = change
+					end)
+				end
+
 				local currentFile = vim.api.nvim_buf_get_name(0)
 				Snacks.picker.files {
 					title = " " .. vim.fs.basename(vim.uv.cwd()),
 					transform = function(item, _ctx)
 						local itemPath = Snacks.picker.util.path(item)
 						if itemPath == currentFile then return false end
+					end,
+					format = function(item, picker)
+						local itemPath = Snacks.picker.util.path(item)
+						item.status = changedInfo[itemPath]
+						return require("snacks.picker.format").file(item, picker)
 					end,
 				}
 			end,
@@ -173,22 +192,7 @@ return {
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					layout = "small_no_preview",
-					format = function(item, picker)
-						-- get list of changed files
-						local changedFilesInCwd = {}
-						local gitDir = Snacks.git.get_root()
-						if gitDir then
-							local rootLen = #vim.uv.cwd() - #gitDir -- when cwd is not git root
-							local gitResult = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
-							local changes = vim.split(gitResult or "", "\n", { trimempty = true })
-							vim.iter(changes):each(function(change)
-								local gitChangeTypeLen = 3
-								local relPath = change:sub(rootLen + gitChangeTypeLen + 1)
-								table.insert(changedFilesInCwd, relPath)
-							end)
-						end
-						return require("snacks.picker.format").file(item, picker)
-					end,
+					exclude = { ".DS_Store" },
 				},
 				recent = {
 					layout = "small_no_preview",
@@ -327,7 +331,6 @@ return {
 				toggle_hidden_and_ignored = function(picker)
 					picker.opts["hidden"] = not picker.opts.hidden
 					picker.opts["ignored"] = not picker.opts.ignored
-					picker.opts["exclude"] = { ".DS_Store" }
 					picker:find()
 				end,
 				reveal_in_macOS_Finder = function(picker)
@@ -342,9 +345,17 @@ return {
 				end,
 			},
 			prompt = " ", -- slightly to the left
-			icons = { ---@diagnostic disable-line: missing-fields -- faulty annotation
+			icons = {
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
+				git = {
+					commit = "",
+					staged = "󰐖", -- consistent with tiyngit
+					added = "",
+					modified = "", -- ○
+					renamed = "󰏫",
+					untracked = "?",
+				},
 			},
 		},
 	},

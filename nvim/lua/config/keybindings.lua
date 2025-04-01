@@ -49,7 +49,7 @@ keymap("n", "gE", "[d", { desc = "󰒕 Prev diagnostic", remap = true })
 -- MARKS
 do
 	vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
-	local marks = { "A", "B" } -- CONFIG
+	local marks = { "A", "B", "C" } -- CONFIG
 
 	-- stylua: ignore
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })

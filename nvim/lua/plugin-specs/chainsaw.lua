@@ -22,6 +22,8 @@ return {
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
 				zsh = 'osascript -e "display notification "{{marker}}} ${{var}}" with title "{{var}}""',
+				-- for snacks.scratch buffer
+				nvim_lua = "print({{var}}) -- {{marker}}",
 			},
 			clearLog = { -- Hammerspoon
 				lua = "hs.console.clearConsole() -- {{marker}}",
