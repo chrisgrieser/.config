@@ -7,6 +7,7 @@ local function importLuaModule()
 	local function import(text) return vim.trim(text:gsub(".-:", "")) end
 
 	Snacks.picker.grep_word {
+		title = "󰢱 Import module",
 		cmd = "rg",
 		args = { "--only-matching" },
 		regex = true,

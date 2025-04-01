@@ -1504,7 +1504,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Proofread (Apple Intelligence)</string>
+				<string>Proofread</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1542,7 +1542,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Make Professional (Apple Intelligence)</string>
+				<string>Make Professional</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1580,7 +1580,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Make Friendly (Apple Intelligence)</string>
+				<string>Make Friendly</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1618,7 +1618,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Make List (Apple Intelligence)</string>
+				<string>Make List</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -1656,7 +1656,7 @@ open -g "hammerspoon://sync-repos"</string>
 				<key>acceptsurls</key>
 				<false/>
 				<key>name</key>
-				<string>Show Writing Tools (Apple Intelligence)</string>
+				<string>Show Writing Tools</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>

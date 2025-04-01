@@ -64,11 +64,6 @@ return {
 		views = {
 			cmdline_popup = {
 				border = { style = vim.o.winborder },
-
-
-
-
-
 			},
 			mini = {
 				timeout = 3000,
