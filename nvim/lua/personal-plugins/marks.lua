@@ -4,30 +4,54 @@
 
 local M = {}
 
----@param msg string
-local function notify(msg) vim.notify(msg, nil, { title = "Marks", icon = "󰃀" }) end
-
---------------------------------------------------------------------------------
-
 ---@class (exact) Markobj
 ---@field name string
 ---@field row integer
 ---@field col integer
 ---@field bufnr integer
 ---@field path integer
+--------------------------------------------------------------------------------
+
+---@param msg string
+---@param level? "info"|"trace"|"debug"|"warn"|"error"
+local function notify(msg, level)
+	vim.notify(msg, vim.log.levels[(level or "info"):upper()], { title = "Marks", icon = "󰃀" })
+end
+
+---@param names string|string[]
+---@return boolean
+local function isValidMarkName(names)
+	if type(names) == "string" then names = { names } end
+	for _, name in pairs(names) do
+		local valid = name:find("^%u$") ~= nil
+		if not valid then
+			notify(("[%s] is not an uppercase letter."):format(names), "error")
+			return false
+		end
+	end
+	return true
+end
 
 ---@param name string
----@return Markobj|nil
+---@return Markobj|nil -- nil if mark is not set
 local function getMark(name)
 	local mRow, mCol, mBufnr, mPath = unpack(vim.api.nvim_get_mark(name, {}))
 	local mark = { name = name, row = mRow, col = mCol, bufnr = mBufnr, path = mPath }
 	if mRow ~= 0 then return mark end
 end
 
----@param m Markobj?
+---@param names string[]
+local function getMarksSet(names)
+	return vim
+		.iter(names)
+		:map(function(name) return getMark(name) end) -- name -> Markobj
+		:filter(function(m) return m ~= nil end) -- only marks that are set
+		:totable()
+end
+
+---@param m Markobj
 ---@return boolean
 local function cursorIsAtMark(m)
-	if not m then return false end
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local bufnr = vim.api.nvim_get_current_buf()
 	return m.row == row and m.bufnr == bufnr
@@ -55,20 +79,26 @@ local function setSignForMark(name)
 	})
 end
 
+---@param m Markobj
+local function gotoMark(m)
+	local markInUnopenedFile = m.bufnr == 0
+	if markInUnopenedFile then
+		vim.cmd.edit(m.path)
+	else
+		vim.api.nvim_set_current_buf(m.bufnr)
+	end
+	vim.api.nvim_win_set_cursor(0, { m.row, m.col })
+	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+	setSignForMark(m.name) -- setting here simpler than on `BufEnter`
+end
+
 --------------------------------------------------------------------------------
 
----@param marks string[]
-function M.cycleMarks(marks)
-	for _, name in pairs(marks) do
-		assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
-	end
+---@param names string[]
+function M.cycleMarks(names)
+	if not isValidMarkName(names) then return end
 
-	-- get set marks
-	local marksSet = vim
-		.iter(marks)
-		:map(function(name) return getMark(name) end) -- name -> Markobj
-		:filter(function(m) return m ~= nil end) -- only marks that are set
-		:totable()
+	local marksSet = getMarksSet(names)
 	if #marksSet == 0 then
 		notify("No mark has been set.")
 		return
@@ -88,21 +118,13 @@ function M.cycleMarks(marks)
 	end
 
 	-- goto next mark
-	local markInUnopenedFile = nextMark.bufnr == 0
-	if markInUnopenedFile then
-		vim.cmd.edit(nextMark.path)
-	else
-		vim.api.nvim_set_current_buf(nextMark.bufnr)
-	end
-	vim.api.nvim_win_set_cursor(0, { nextMark.row, nextMark.col })
-	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
-	setSignForMark(nextMark.name) -- setting here simpler than on `BufEnter`
+	gotoMark(nextMark)
 end
 
 ---Set a mark, or unsets it if the cursor is on the same line as the mark
 ---@param name string
 function M.setUnsetMark(name)
-	assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
+	if not isValidMarkName(name) then return end
 
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local m = getMark(name)
@@ -117,7 +139,7 @@ function M.setUnsetMark(name)
 	end
 end
 
-function M.deleteMarks()
+function M.deleteAllMarks()
 	local allMarks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	for i = 1, #allMarks do
 		local name = allMarks:sub(i, i)
@@ -127,12 +149,19 @@ function M.deleteMarks()
 	notify("All marks deleted.")
 end
 
-function M.selectMarks()
-	---@param marks string[]
-function M.cycleMarks(marks)
-	for _, name in pairs(marks) do
-		assert(name:find("^%u$"), ("%s is not an uppercase letter."):format(name))
-	end
+---@param names string[]
+function M.selectMarks(names)
+	if not isValidMarkName(names) then return end
+
+	vim.ui.select(getMarksSet(names), {
+		prompt = "󰃁 Select mark",
+		format_item = function(m)
+			local filename = vim.fs.basename(m.path)
+			return ("[%s] %s"):format(m.name, filename)
+		end,
+	}, function(m)
+		if m then gotoMark(m) end
+	end)
 end
 
 --------------------------------------------------------------------------------

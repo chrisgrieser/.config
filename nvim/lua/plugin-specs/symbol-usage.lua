@@ -23,6 +23,7 @@ return {
 		-- available kinds: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
 		kinds = {
 			vim.lsp.protocol.SymbolKind.File,
+			vim.lsp.protocol.SymbolKind.Module,
 			vim.lsp.protocol.SymbolKind.Function,
 			vim.lsp.protocol.SymbolKind.Method,
 			vim.lsp.protocol.SymbolKind.Class,
