@@ -22,22 +22,15 @@ return {
 		},
 		{
 			"gr",
-			function() Snacks.picker.recent {} end,
+			function()
+				-- HACK since `.stdpath("data")` cannot be overridden with nil, we
+				-- need to remove it from the default settings itself
+				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
+					nil
+				Snacks.picker.recent()
+			end,
 			desc = "󰋚 Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
-		},
-		{
-			"gR",
-			function()
-				-- FIX it is not possible to override the default path filter for
-				-- the data directory, since `true` means include, and `false` makes
-				-- it an exclusion
-				Snacks.picker.recent {
-					title = "󰋚 Recent (only nvim data)",
-					filter = { paths = { [vim.fn.stdpath("data")] = true } },
-				}
-			end,
-			desc = "󰋚 Recent (only nvim data)",
 		},
 		{
 			"g,",
@@ -104,10 +97,7 @@ return {
 						vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import })
 						vim.cmd.normal { "j==", bang = true }
 					end,
-					layout = {
-						preset = "small_no_preview",
-						layout = { width = 0.8 },
-					},
+					layout = { preset = "small_no_preview", layout = { width = 0.8 } },
 					-- ensure items are unique
 					transform = function(item, ctx)
 						ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
@@ -199,7 +189,8 @@ return {
 					end,
 				},
 				colorschemes = {
-					layout = { preset = "ivy" }, -- at the bottom, so there is more space to preview
+					-- at the bottom, so there is more space to preview
+					layout = { max_height = 9, preset = "ivy" },
 				},
 				icons = {
 					layout = {
@@ -237,7 +228,7 @@ return {
 				diff = { builtin = false }, -- use delta automatically
 				git = { builtin = false },
 			},
-			ui_select = true, -- use `vim.ui.select`
+			ui_select = false, -- using my own version `vim.ui.select`
 			layout = "wide_with_preview", -- use this as default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
