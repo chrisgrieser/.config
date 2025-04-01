@@ -1,60 +1,83 @@
-local M = {}
+-- INFO
+-- A simple wrapper around vim's builtin mark functionality for quick navigation.
 --------------------------------------------------------------------------------
 
-local MARKS = { "A", "B" }
+local M = {}
+local markExtmarks = {}
 
 ---@param msg string
 local function notify(msg) vim.notify(msg, nil, { title = "Marks", icon = "󰃃" }) end
 
-function M.cycleMarks()
+--------------------------------------------------------------------------------
+
+local function clearSignForMark(markName)
+	local ns = vim.api.nvim_create_namespace("mark-signs")
+	local mRow, _, mBufnr = unpack(vim.api.nvim_get_mark(markName, {}))
+	vim.api.nvim_buf_clear_namespace(mBufnr, ns, mRow, mRow + 1)
+end
+
+---@param markName string
+local function setSignForMark(markName)
+	clearSignForMark(markName)
+	local ns = vim.api.nvim_create_namespace("mark-signs")
+	local mRow, mCol, mBufnr = unpack(vim.api.nvim_get_mark(markName, {}))
+
+	if markExtmarks[markName] then
+		vim.api.nvim_buf_del_extmark(mBufnr, ns, markExtmarks[markName])
+	end
+	markExtmarks[markName] = vim.api.nvim_buf_set_extmark(mBufnr, ns, mRow - 1, mCol, {
+		sign_text = "󰃃" .. markName,
+		sign_hl_group = "Todo",
+	})
+end
+
+--------------------------------------------------------------------------------
+
+---@param marks string[]
+function M.cycleMarks(marks)
+	-- determine next mark
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local bufnr = vim.api.nvim_get_current_buf()
 
-	local nextMark
-	for i, name in pairs(MARKS) do
+	local nextMark = marks[1]
+	local marksSet = 0
+	for i, name in pairs(marks) do
 		local mRow, mCol, mBufnr = unpack(vim.api.nvim_get_mark(name, {}))
+		if mBufnr ~= 0 then marksSet = marksSet + 1 end
 		local isAtMark = mRow == row and mCol == col and mBufnr == bufnr
 		if isAtMark then
-			nextMark = MARKS[i == #MARKS and 1 or i + 1]
+			nextMark = marks[i == #marks and 1 or i + 1]
 			break
 		end
 	end
-	if not nextMark then
-		notify("No mark has been set.")
-		return
-	end
 
+	-- goto next mark
 	local nextRow, nextCol, nextBufnr = unpack(vim.api.nvim_get_mark(nextMark, {}))
-	vim.api.nvim_buf_set_mark(bufnr, nextMark, row, col, {})
-	vim.api.nvim_set_current_buf(mBufnr)
-	vim.api.nvim_win_set_cursor(0, { mRow, mCol })
-	return
-	vim.api.nvim_buf_set_mark(bufnr, MARKS[1], nextRow, nextCol, {})
-
-	local mark = vim.api.nvim_get_mark(MARKS[1], {})
-	mark["name"] = MARKS[1]
-	Chainsaw(mark) -- 🪚
-end
-
-function M.setMark()
-	local newMark = MARKS[1]
-	for _, mark in pairs(MARKS) do
-		if vim.api.nvim_get_mark(mark, {}) == 0 then
-			newMark = mark
-			break
-		end
+	if nextBufnr == 0 then
+		local msg = marksSet == 0 and "No mark has been set." or "Already at the only mark set."
+		notify(msg)
+	else
+		vim.api.nvim_set_current_buf(nextBufnr)
+		vim.api.nvim_win_set_cursor(0, { nextRow, nextCol })
+		setSignForMark(nextMark) -- simpler than setting it on bufenter
 	end
-
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	vim.api.nvim_buf_set_mark(0, newMark, row, col, {})
-	notify(("Mark [%s] set."):format(newMark))
 end
 
-function M.deleteMarks()
-	for _, mark in pairs(MARKS) do
+---@param mark string
+function M.setMark(mark)
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	vim.api.nvim_buf_set_mark(0, mark, row, col, {})
+	setSignForMark(mark)
+	notify(("Mark [%s] set."):format(mark))
+end
+
+---@param marks string[]
+function M.deleteMarks(marks)
+	for _, mark in pairs(marks) do
+		clearSignForMark(mark)
 		vim.api.nvim_del_mark(mark)
 	end
-	notify("All marks deleted.")
+	notify("Marks deleted.")
 end
 
 --------------------------------------------------------------------------------

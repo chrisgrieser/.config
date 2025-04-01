@@ -174,6 +174,7 @@ return {
 				grep = {
 					cmd = "rg",
 					formatters = { file = { filename_only = true } },
+					format = "grep_format",
 					args = {
 						"--trim",
 						"--sortr=modified", -- sort by recency
