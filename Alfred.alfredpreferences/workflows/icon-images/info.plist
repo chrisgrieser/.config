@@ -8,32 +8,6 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
-		<key>4A98864F-4F8E-4DBA-87AB-7DD794C40137</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4F1D5FC7-8ACD-4847-8236-D567E0EE3CDE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5F2319EE-9D1E-42FC-AF77-0C2C3A717231</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4A98864F-4F8E-4DBA-87AB-7DD794C40137</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6481CF6B-7D93-4373-AE49-E7247AA9E094</key>
 		<array/>
 		<key>6952AF82-81C6-4EA3-850D-BAC02934B45E</key>
@@ -59,7 +33,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</key>
@@ -131,24 +105,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D43C2EC5-43A4-45AA-A976-E6BFBA86ED06</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5F2319EE-9D1E-42FC-AF77-0C2C3A717231</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D43C2EC5-43A4-45AA-A976-E6BFBA86ED06</string>
+				<string>2BA8EB9F-E5C5-440C-AFB0-8AA181EC2871</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -529,25 +490,10 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>5F2319EE-9D1E-42FC-AF77-0C2C3A717231</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
-				<string>{var:to_paste}</string>
+				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -556,32 +502,9 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>4F1D5FC7-8ACD-4847-8236-D567E0EE3CDE</string>
+			<string>2BA8EB9F-E5C5-440C-AFB0-8AA181EC2871</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -a "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4A98864F-4F8E-4DBA-87AB-7DD794C40137</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -655,26 +578,6 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>to_paste</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>D43C2EC5-43A4-45AA-A976-E6BFBA86ED06</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -698,36 +601,14 @@
 			<key>ypos</key>
 			<real>345</real>
 		</dict>
-		<key>4A98864F-4F8E-4DBA-87AB-7DD794C40137</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>focus app</string>
-			<key>xpos</key>
-			<real>695</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>4F1D5FC7-8ACD-4847-8236-D567E0EE3CDE</key>
+		<key>2BA8EB9F-E5C5-440C-AFB0-8AA181EC2871</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>835</real>
-			<key>ypos</key>
-			<real>525</real>
-		</dict>
-		<key>5F2319EE-9D1E-42FC-AF77-0C2C3A717231</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>FIX front app loosing focus on when using universal actions with Compatibility mode</string>
-			<key>xpos</key>
-			<real>550</real>
+			<real>435</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>
@@ -824,17 +705,6 @@
 			<real>935</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>D43C2EC5-43A4-45AA-A976-E6BFBA86ED06</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>5</integer>
-			<key>note</key>
-			<string>save `to_paste`</string>
-			<key>xpos</key>
-			<real>460</real>
-			<key>ypos</key>
-			<real>555</real>
 		</dict>
 		<key>E07E04C5-C1AE-4930-BC19-FDC37F166624</key>
 		<dict>
