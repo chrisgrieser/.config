@@ -281,34 +281,4 @@ function M.lspCapabilities()
 end
 
 --------------------------------------------------------------------------------
-
-function M.inspectFolds()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local foldingLsp =
-		vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/foldingRange" })[1]
-	if not foldingLsp then return end
-
-	local params = { textDocument = { uri = vim.uri_from_bufnr(bufnr) } }
-	foldingLsp:request("textDocument/foldingRange", params, function(err, result, _)
-		if err or not result then
-			local msg = "Failed to get folding ranges. "
-			if err then msg = msg .. err.message end
-			vim.notify(msg, vim.log.levels.ERROR, { title = foldingLsp.name, icon = "" })
-			return
-		end
-		local commentFolds = vim.iter(result)
-			:filter(function(fold) return fold.kind ~= nil end)
-			:map(function(fold)
-				local range = fold.startLine + 1
-				if fold.endLine > fold.startLine then range = range .. "-" .. (fold.endLine + 1) end
-				return ("- %s %s"):format(range, fold.kind)
-			end)
-			:join("\n")
-		vim.notify(commentFolds, nil, { title = "Special folds", icon = "" })
-	end)
-end
-
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
 return M
