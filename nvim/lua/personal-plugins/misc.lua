@@ -297,7 +297,7 @@ function M.inspectFolds()
 			return
 		end
 		local commentFolds = vim.iter(result)
-			:filter(function(fold) return fold.kind end)
+			:filter(function(fold) return fold.kind ~= nil end)
 			:map(function(fold)
 				local range = fold.startLine + 1
 				if fold.endLine > fold.startLine then range = range .. "-" .. (fold.endLine + 1) end
@@ -307,5 +307,8 @@ function M.inspectFolds()
 		vim.notify(commentFolds, nil, { title = "Special folds", icon = "" })
 	end)
 end
+
+--------------------------------------------------------------------------------
+
 --------------------------------------------------------------------------------
 return M

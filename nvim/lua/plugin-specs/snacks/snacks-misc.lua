@@ -1,6 +1,7 @@
+-- DOCS https://github.com/folke/snacks.nvim#-features
+--------------------------------------------------------------------------------
 ---@module "snacks"
-
-local border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"|"shadow"]]
+--------------------------------------------------------------------------------
 
 return {
 	"folke/snacks.nvim",
@@ -12,25 +13,6 @@ return {
 	},
 	---@type snacks.Config
 	opts = {
-		scratch = {
-			-- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
-			root = vim.g.icloudSync .. "/scratch",
-			filekey = {
-				count = true, -- allows count to create multiple scratch buffers
-				cwd = false, -- otherwise only one scratch per filetype
-				branch = false,
-			},
-			win = {
-				relative = "editor",
-				position = "float", -- or "right"
-				width = 80,
-				height = 25,
-				wo = { signcolumn = "yes:1" },
-				border = border,
-				footer_pos = "right",
-				keys = { q = false, ["<D-w>"] = "close" }, -- so we can comment with `q`
-			},
-		},
 		words = {
 			notify_jump = true,
 			modes = { "n" },
@@ -41,7 +23,7 @@ return {
 			win = {
 				relative = "editor",
 				backdrop = 60,
-				border = border,
+				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				title_pos = "left",
 				width = 50,
 				row = math.ceil(vim.o.lines / 2) - 3,
@@ -55,7 +37,7 @@ return {
 				hl = "Comment",
 			},
 			animate = {
-				-- slower for more dramatic effect
+				-- slower for more dramatic effect :D
 				duration = { steps = 200, total = 1000 }
 			}
 		},
@@ -64,7 +46,7 @@ return {
 				relative = "cursor",
 				width = 0.6,
 				height = 0.6,
-				border = border,
+				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				title = " 󰆽 Git blame ",
 			},
 		},
