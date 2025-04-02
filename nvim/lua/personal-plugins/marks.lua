@@ -153,8 +153,13 @@ end
 ---@param names string[]
 function M.selectMarks(names)
 	if not isValidMarkName(names) then return end
+	local setMarks = getMarksSet(names)
+	if #setMarks == 0 then
+		notify("No marks have been set.")
+		return
+	end
 
-	vim.ui.select(getMarksSet(names), {
+	vim.ui.select(setMarks, {
 		prompt = "󰃁 Select mark",
 		format_item = function(m)
 			local filename = vim.fs.basename(m.path)

@@ -1,18 +1,3 @@
--- highlighting of filepaths and error codes
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "noice", "snacks_notif" },
-	callback = function(ctx)
-		vim.defer_fn(function()
-			if not vim.api.nvim_buf_is_valid(ctx.buf) then return end
-			vim.api.nvim_buf_call(ctx.buf, function()
-				vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-				vim.fn.matchadd("WarningMsg", [[E\d\+]])
-			end)
-		end, 1)
-	end,
-})
---------------------------------------------------------------------------------
-
 -- FIX https://github.com/folke/noice.nvim/issues/1082
 local initialWinborder = vim.o.winborder
 vim.api.nvim_create_autocmd("CmdlineEnter", {

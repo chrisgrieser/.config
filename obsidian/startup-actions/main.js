@@ -119,10 +119,26 @@ function ensureScrolloffset(editor) {
 		// which can be retrieved from editor.getScrollInfo().top. It's an
 		// absolute value marking the top of the file (beyond the viewport).
 		editor.scrollTo(null, viewportTop - excessAtTop);
-	} 
+	}
 	if (excessAtBottom > 0) {
 		editor.scrollTo(null, viewportTop + excessAtBottom);
 	}
+}
+
+let active = false;
+function autoSentenceCasing(editor) {
+	if (active) return; // prevents infinite recursion
+	active = true;
+	const { line, ch } = editor.getCursor();
+	const text = editor.getLine(line);
+
+	console.log("🪚 line:", line);
+	const updatedText = text.replace(/\.(\)/g, String.toUpperCase);
+
+
+	editor.setLine(line, updatedText);
+	editor.setCursor(line, ch);
+	active = false;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -166,6 +182,11 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		// 5. scroll offset
 		this.registerEvent(
 			this.app.workspace.on("editor-selection-change", (editor) => ensureScrolloffset(editor)),
+		);
+
+		// 6. auto sentence casing
+		this.registerEvent(
+			this.app.workspace.on("editor-change", (editor) => autoSentenceCasing(editor)),
 		);
 	}
 }

@@ -205,6 +205,7 @@ vim.diagnostic.config {
 			return msg
 		end,
 		suffix = function(diag)
+			if not diag then return "" end
 			local extra = (diag.code or diag.source or ""):gsub("%.$", "")
 			if extra == "" then return "" end
 			return (" [%s]"):format(extra)

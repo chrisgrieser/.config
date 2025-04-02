@@ -46,7 +46,8 @@ keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 
 -- stylua: ignore
-keymap("n", "gk", function() require("personal-plugins.misc").indentationUp() end, { desc = "󰸇 up to parent" })
+keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })
+keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
 
 --------------------------------------------------------------------------------
 -- MARKS
