@@ -705,7 +705,7 @@
 			<key>note</key>
 			<string>focus app</string>
 			<key>xpos</key>
-			<real>705</real>
+			<real>695</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>
@@ -716,7 +716,7 @@
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>845</real>
+			<real>835</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>
@@ -725,9 +725,9 @@
 			<key>colorindex</key>
 			<integer>5</integer>
 			<key>note</key>
-			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
+			<string>FIX front app loosing focus on when using universal actions with Compatibility mode</string>
 			<key>xpos</key>
-			<real>560</real>
+			<real>550</real>
 			<key>ypos</key>
 			<real>525</real>
 		</dict>
@@ -832,7 +832,7 @@
 			<key>note</key>
 			<string>save `to_paste`</string>
 			<key>xpos</key>
-			<real>470</real>
+			<real>460</real>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
@@ -843,7 +843,7 @@
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>355</real>
+			<real>345</real>
 			<key>ypos</key>
 			<real>555</real>
 		</dict>
