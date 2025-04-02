@@ -11,6 +11,7 @@ local function importLuaModule()
 		cmd = "rg",
 		args = { "--only-matching" },
 		regex = true,
+		supports_live = false,
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 		ft = "lua",
 
@@ -323,16 +324,21 @@ return {
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
+
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
 						["<Down>"] = { "history_forward", mode = "i" },
+
 						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-						["<D-s>"] = { "qflist_and_go", mode = "i" },
+						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- mnemonic: "fullscreen"
 						["<D-p>"] = { "toggle_preview", mode = "i" },
-						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
-						["<D-c>"] = { "yank", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
+
+						["<D-s>"] = { "qflist_and_go", mode = "i" },
+						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
+						["<D-c>"] = { "yank", mode = "i" },
+
 						["?"] = { "inspect", mode = "i" },
 					},
 				},
