@@ -213,7 +213,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
@@ -239,7 +239,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>93776F8A-CF4E-4A33-A222-621DFF193536</key>
@@ -301,7 +301,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>A51066A2-90E9-43BC-A689-373B76D3219F</key>
@@ -327,7 +327,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</key>
@@ -379,7 +379,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 		<key>C6E77CFC-EC75-4DC2-8B4B-BD9E21B34C98</key>
@@ -483,7 +483,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 		</array>
 	</dict>
@@ -1677,7 +1677,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>165</real>
+			<real>180</real>
 			<key>ypos</key>
 			<real>875</real>
 		</dict>
@@ -1898,7 +1898,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>310</real>
+			<real>330</real>
 			<key>ypos</key>
 			<real>905</real>
 		</dict>
