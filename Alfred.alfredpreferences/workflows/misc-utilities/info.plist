@@ -2201,7 +2201,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>note</key>
-			<string>FIX Alfred loosing focus on when using universal actions with Compatibility mode</string>
+			<string>FIX front app loosing focus on when using universal actions with Compatibility mode</string>
 			<key>xpos</key>
 			<real>330</real>
 			<key>ypos</key>
