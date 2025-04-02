@@ -76,6 +76,7 @@ local function setSignForMark(name)
 	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
 		sign_text = "󰃃" .. name,
 		sign_hl_group = "Todo",
+		priority = 19, -- below gitsigns of 20
 	})
 end
 
@@ -157,7 +158,7 @@ function M.selectMarks(names)
 		prompt = "󰃁 Select mark",
 		format_item = function(m)
 			local filename = vim.fs.basename(m.path)
-			return ("[%s] %s"):format(m.name, filename)
+			return (" **%s** %s:[%d]"):format(m.name, filename, m.row)
 		end,
 	}, function(m)
 		if m then gotoMark(m) end

@@ -51,14 +51,13 @@ local function openNotif(idx)
 	Snacks.win {
 		relative = "editor",
 		position = "float",
-		ft = notif.ft or "markdown",
 		buf = bufnr,
 		height = height,
 		width = width,
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
-		border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"|"shadow"]],
+		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 		wo = {
 			winhighlight = table.concat(highlights, ","),
 			wrap = true,
@@ -66,9 +65,12 @@ local function openNotif(idx)
 			cursorline = true,
 			colorcolumn = "",
 			winfixbuf = true,
-			foldexpr = "indent",
+			fillchars = "fold: ",
 		},
-		bo = { ft = "snacks_notif", modifiable = false },
+		bo = {
+			ft = notif.ft or "markdown",
+			modifiable = false,
+		},
 		keys = {
 			["<D-9>"] = "close", -- same key that was used to open it
 			["<Tab>"] = function()

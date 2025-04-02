@@ -10,23 +10,27 @@ return {
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
-		{ "<leader>el", function() Snacks.scratch.select() end, desc = " Select scratch buffer" },
+		{ "<leader>eS", function() Snacks.scratch.select() end, desc = " Select scratch" },
 	},
 	---@type snacks.Config
 	opts = {
 		scratch = {
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 			root = vim.g.icloudSync .. "/scratch",
-			filekey = { cwd = false, branch = false, count = false }, -- one scratch per filetype
+			filekey = {
+				count = true, -- allows count to create multiple scratch buffers
+				cwd = false, -- otherwise only one scratch per filetype
+				branch = false,
+			},
 			win = {
 				relative = "editor",
-				-- position = "right",
-				width = 75,
-				height = 20,
+				position = "float", -- or "right"
+				width = 80,
+				height = 25,
 				wo = { signcolumn = "yes:1" },
 				border = border,
 				footer_pos = "right",
-				keys = {},
+				keys = { q = false, ["<D-w>"] = "close" }, -- so we can comment with `q`
 			},
 		},
 		words = {
@@ -52,6 +56,10 @@ return {
 				enabled = false,
 				hl = "Comment",
 			},
+			animate = {
+				-- slower for more dramatic effect
+				duration = { steps = 200, total = 1000 }
+			}
 		},
 		blame_line = {
 			win = {
