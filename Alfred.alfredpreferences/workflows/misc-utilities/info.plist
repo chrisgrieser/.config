@@ -116,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,33 +129,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>27557398-A1CF-44B2-B193-BB0A7D654EDA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>27F1C6B6-1370-44D2-AB37-F1B5D980AFF4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>27F1C6B6-1370-44D2-AB37-F1B5D980AFF4</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>95517F52-43E2-482D-A969-E08A902241D2</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -220,7 +194,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -273,19 +247,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>95517F52-43E2-482D-A969-E08A902241D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>37AE0BE6-DE2D-4A7D-8A96-784C4A613849</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -347,7 +308,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>27557398-A1CF-44B2-B193-BB0A7D654EDA</string>
+				<string>37AE0BE6-DE2D-4A7D-8A96-784C4A613849</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -399,7 +360,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -438,7 +399,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -465,19 +426,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E69AF42F-75A2-4F34-8579-EE15867A7D4E</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1322,33 +1270,10 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>open -a "$*"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>95517F52-43E2-482D-A969-E08A902241D2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>autopaste</key>
 				<true/>
 				<key>clipboardtext</key>
-				<string>{var:to_paste}</string>
+				<string>{query}</string>
 				<key>ignoredynamicplaceholders</key>
 				<false/>
 				<key>transient</key>
@@ -1379,21 +1304,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>alfred.workflow.trigger.universalaction</string>
 			<key>uid</key>
 			<string>FB019AF9-329B-44E0-924B-5F968806155C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>27F1C6B6-1370-44D2-AB37-F1B5D980AFF4</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1444,26 +1354,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>to_paste</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>27557398-A1CF-44B2-B193-BB0A7D654EDA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -1486,14 +1376,11 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Proofread</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>instruction</key>
-					<string>Proofread</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1527,14 +1414,11 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Make Professional</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>instruction</key>
-					<string>Make Professional</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1611,30 +1495,12 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>E69AF42F-75A2-4F34-8579-EE15867A7D4E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Make Friendly</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>instruction</key>
-					<string>Make Friendly</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1668,14 +1534,11 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Make List</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>instruction</key>
-					<string>Make List</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1709,14 +1572,11 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Show Writing Tools</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
-				<dict>
-					<key>instruction</key>
-					<string>Show Writing Tools</string>
-				</dict>
+				<dict/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
@@ -1819,7 +1679,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>165</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>875</real>
 		</dict>
 		<key>205F27D4-ED20-459F-9BD5-5F0BDB43EAB9</key>
 		<dict>
@@ -1828,7 +1688,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>1595</real>
+			<real>1525</real>
 		</dict>
 		<key>24102BFB-F7BC-4FA4-8E66-11134380E9A5</key>
 		<dict>
@@ -1837,38 +1697,16 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>1475</real>
-		</dict>
-		<key>27557398-A1CF-44B2-B193-BB0A7D654EDA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>save `to_paste`</string>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>920</real>
-		</dict>
-		<key>27F1C6B6-1370-44D2-AB37-F1B5D980AFF4</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>FIX App loosing focus when using universal actions with Alfred's Compatibility mode</string>
-			<key>xpos</key>
-			<real>470</real>
-			<key>ypos</key>
-			<real>890</real>
+			<real>1405</real>
 		</dict>
 		<key>2B84625B-5C46-44F6-BFEE-B191D844A7AE</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>630</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>1320</real>
+			<real>1250</real>
 		</dict>
 		<key>2BA2E52E-6876-4A61-A185-652BA211060B</key>
 		<dict>
@@ -1886,9 +1724,9 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>trigger Apple Intelligence menu item</string>
 			<key>xpos</key>
-			<real>480</real>
+			<real>320</real>
 			<key>ypos</key>
-			<real>1320</real>
+			<real>1250</real>
 		</dict>
 		<key>3512A462-2B85-41D9-84EB-A78922ED365E</key>
 		<dict>
@@ -1915,9 +1753,9 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>note</key>
 			<string>paste</string>
 			<key>xpos</key>
-			<real>755</real>
+			<real>400</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>875</real>
 		</dict>
 		<key>43E23DEE-9CD4-4887-A9EE-796131D55BBA</key>
 		<dict>
@@ -1946,7 +1784,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1035</real>
 		</dict>
 		<key>56D5599C-2210-4D28-8F60-B7F32A00F012</key>
 		<dict>
@@ -1955,7 +1793,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1075</real>
+			<real>1005</real>
 		</dict>
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
 		<dict>
@@ -1984,7 +1822,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1445</real>
+			<real>1375</real>
 		</dict>
 		<key>89B87E1B-141D-4F20-A450-01A53B8A1009</key>
 		<dict>
@@ -2014,17 +1852,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>550</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>95517F52-43E2-482D-A969-E08A902241D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>focus app</string>
-			<key>xpos</key>
-			<real>615</real>
-			<key>ypos</key>
-			<real>890</real>
 		</dict>
 		<key>9C423BD7-E972-413B-8783-5B9CDCDD5647</key>
 		<dict>
@@ -2062,7 +1889,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1565</real>
+			<real>1495</real>
 		</dict>
 		<key>A51066A2-90E9-43BC-A689-373B76D3219F</key>
 		<dict>
@@ -2073,7 +1900,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>310</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>905</real>
 		</dict>
 		<key>AAA1CAF0-2C8F-451F-AA21-E2BC2107E590</key>
 		<dict>
@@ -2082,7 +1909,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1320</real>
+			<real>1250</real>
 		</dict>
 		<key>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</key>
 		<dict>
@@ -2120,7 +1947,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>1350</real>
+			<real>1280</real>
 		</dict>
 		<key>B7C92074-83A2-4839-8432-03A59A607415</key>
 		<dict>
@@ -2138,7 +1965,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1195</real>
+			<real>1125</real>
 		</dict>
 		<key>C120F733-C46F-44AC-ADAA-504E11D52028</key>
 		<dict>
@@ -2167,7 +1994,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>205</real>
 			<key>ypos</key>
-			<real>1225</real>
+			<real>1155</real>
 		</dict>
 		<key>D6CC91E7-0821-44EC-BAE8-E1C0567E4FAC</key>
 		<dict>
@@ -2195,17 +2022,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>E69AF42F-75A2-4F34-8579-EE15867A7D4E</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>FIX front app loosing focus on when using universal actions with Compatibility mode</string>
-			<key>xpos</key>
-			<real>330</real>
-			<key>ypos</key>
-			<real>1320</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>
@@ -2255,7 +2071,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>890</real>
+			<real>875</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
