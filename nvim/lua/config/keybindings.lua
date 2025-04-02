@@ -55,20 +55,11 @@ do
 	vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
 	local marks = { "A", "B", "C" } -- CONFIG
 
-	-- stylua: ignore
+	-- stylua: ignore start
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
-	keymap(
-		"n",
-		"<leader>ms",
-		function() require("personal-plugins.marks").selectMarks(marks) end,
-		{ desc = "󰃁 Select mark" }
-	)
-	keymap(
-		"n",
-		"<leader>m<BS>",
-		function() require("personal-plugins.marks").deleteAllMarks() end,
-		{ desc = "󰃆 Delete marks" }
-	)
+	keymap("n", "<leader>ms", function() require("personal-plugins.marks").selectMarks(marks) end, { desc = "󰃁 Select mark" })
+	keymap("n", "<leader>m<BS>", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	-- stylua: ignore end
 
 	for _, mark in pairs(marks) do
 		keymap(

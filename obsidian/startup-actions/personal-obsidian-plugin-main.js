@@ -136,6 +136,7 @@ function autoSentenceCasing(editor) {
 	if (updatedText !== text) {
 		editor.setLine(line, updatedText);
 		editor.setCursor(line, ch); // restore, since `setLine` moves the cursor
+		new Notice("Sentence fixed.", 1200)
 	}
 	active = false;
 }

@@ -194,8 +194,8 @@ return {
 						"--sortr=modified", -- sort by recency
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					layout = "small_no_preview",
 					exclude = { ".DS_Store" },
+					layout = "small_no_preview",
 				},
 				recent = {
 					layout = "small_no_preview",
@@ -205,14 +205,14 @@ return {
 				},
 				grep = {
 					cmd = "rg",
+					args = {
+						"--sortr=modified", -- sort by recency
+						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
+					},
 					format = file_without_line,
 					layout = {
 						preset = "wide_with_preview",
 						layout = { [2] = { width = 0.6 } }, -- sets preview wider
-					},
-					args = {
-						"--sortr=modified", -- sort by recency
-						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 				},
 				help = {
@@ -229,6 +229,10 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
+					layout = {
+						preset = "wide_with_preview",
+						preview = false, ---@diagnostic disable-line: assign-type-mismatch
+					}
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -276,7 +280,7 @@ return {
 				selected = { unselected = false }, -- don't show unselected
 			},
 			previewers = {
-				diff = { builtin = false }, -- use delta automatically
+				diff = { builtin = false }, -- use `delta` automatically
 				git = { builtin = false },
 			},
 			ui_select = false, -- using my own version `vim.ui.select`
@@ -290,7 +294,7 @@ return {
 						border = "none",
 						{
 							box = "vertical",
-							border = vim.o.winborder, ---@diagnostic disable-line: assign-type-mismatch faulty annotation
+							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 							title = "{title} {live} {flags}",
 							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
@@ -298,13 +302,13 @@ return {
 					},
 				},
 				wide_with_preview = {
-					preset = "small_no_preview", -- inherit from above
+					preset = "small_no_preview", -- inherit from this preset
 					layout = {
 						width = 0.99,
 						[2] = { -- as second column
 							win = "preview",
 							title = "{preview}",
-							border = vim.o.winborder, ---@diagnostic disable-line: assign-type-mismatch faulty annotation
+							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 							width = 0.5,
 							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
 						},

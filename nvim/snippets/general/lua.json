@@ -23,7 +23,7 @@
       "\tend,",
       "}"
     ],
-    "prefix": "Class"
+    "prefix": "Class (metatable)"
   },
   "Record (type)": {
     "body": "---@type table<string, string>",
