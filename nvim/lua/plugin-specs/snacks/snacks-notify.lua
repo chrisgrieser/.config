@@ -1,6 +1,25 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#%EF%B8%8F-config
 --------------------------------------------------------------------------------
 ---@module "snacks"
+--------------------------------------------------------------------------------
+
+local function highlightErrorsAndPaths(bufnr)
+	vim.defer_fn(function()
+		if not vim.api.nvim_buf_is_valid(bufnr) then return end
+		vim.api.nvim_buf_call(bufnr, function()
+			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
+			vim.fn.matchadd("WarningMsg", [[E\d\+]])
+		end)
+	end, 1)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Highlight filepaths and error codes in notification buffers",
+	pattern = { "noice", "snacks_notif" },
+	callback = function(ctx) highlightErrorsAndPaths(ctx.buf) end,
+})
+
+--------------------------------------------------------------------------------
 
 ---@param idx number|"last"
 local function openNotif(idx)
@@ -58,6 +77,7 @@ local function openNotif(idx)
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
+		on_buf = function(win) highlightErrorsAndPaths(win.buf) end,
 		wo = {
 			winhighlight = table.concat(highlights, ","),
 			wrap = true,
@@ -68,7 +88,7 @@ local function openNotif(idx)
 			fillchars = "fold: ",
 		},
 		bo = {
-			ft = notif.ft or "markdown",
+			ft = notif.ft or "markdown", -- not using `snacks_notif` so treesitter attached
 			modifiable = false,
 		},
 		keys = {
