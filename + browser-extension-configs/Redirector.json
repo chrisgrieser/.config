@@ -1,0 +1,57 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2025-04-02T10:06:37.159Z",
+    "redirects": [
+        {
+            "description": "Netflix redirect from \"Home\" to \"TV Shows\"",
+            "exampleUrl": "https://www.netflix.com/browse",
+            "exampleResult": "https://www.netflix.com/browse/genre/83",
+            "error": null,
+            "includePattern": "https://www.netflix.com/browse",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://www.netflix.com/browse/genre/83",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "GitHub: remove `?tab=readme-ov-file` from URL",
+            "exampleUrl": "https://github.com/chrisgrieser/nvim-origami?tab=readme-ov-file#nvim-origami-",
+            "exampleResult": "https://github.com/chrisgrieser/nvim-origami#nvim-origami-",
+            "error": null,
+            "includePattern": "https://github.com/(.*)\\?tab=readme-ov-file(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://github.com/$1$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "Redirect x to readable frontend",
+            "exampleUrl": "https://x.com/tweet/status/1465053672593784834",
+            "exampleResult": "https://xcancel.com/tweet/status/1465053672593784834",
+            "error": null,
+            "includePattern": "https://x.com/(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://xcancel.com/$1",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}

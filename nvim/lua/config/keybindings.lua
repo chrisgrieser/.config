@@ -358,6 +358,7 @@ keymap("n", "<leader>iq", vim.cmd.EditQuery, { desc = " :EditQuery" })
 
 -- stylua: ignore
 keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabilities() end, { desc = "󱈄 LSP capabilities" })
+keymap("n", "<leader>if", function() require("personal-plugins.misc").inspectFolds() end, { desc = " LSP Folds" })
 -- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 

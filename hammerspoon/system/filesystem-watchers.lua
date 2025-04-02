@@ -53,6 +53,8 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			end
 		elseif name == "ublacklist-settings.json" then
 			success = os.rename(path, browserConfigs .. name)
+		elseif name == "Redirector.json" then
+			success = os.rename(path, browserConfigs .. name)
 		elseif name:find("stylus%-.*%.json") then
 			success = os.rename(path, browserConfigs .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then

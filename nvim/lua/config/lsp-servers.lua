@@ -150,8 +150,8 @@ M.serverConfigs.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
-				callSnippet = "Disable",
-				keywordSnippet = "Replace",
+				callSnippet = "Disable", -- signature help more useful here
+				keywordSnippet = "Disable", -- using my own snippets
 				showWord = "Disable", -- already done by completion plugin
 				workspaceWord = false, -- already done by completion plugin
 				postfix = ".", -- useful for `table.insert` and the like
@@ -379,13 +379,6 @@ M.serverConfigs.typos_lsp = {
 if jit.os == "OSX" then
 	M.serverConfigs.sourcekit = {}
 	M.serverConfigs.clangd = {}
-
-	-- PENDING https://github.com/neovim/nvim-lspconfig/pull/3681
-	M.serverConfigs.sourcekit.capabilities = {
-		workspace = {
-			didChangeWatchedFiles = { dynamicRegistration = true },
-		},
-	}
 end
 
 --------------------------------------------------------------------------------

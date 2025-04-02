@@ -17,7 +17,12 @@ return {
 		scratch = {
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 			root = vim.fn.stdpath("cache") .. "/scratch",
-			filekey = { cwd = false, branch = false, count = false },
+			filekey = { cwd = false, branch = false, count = false }, -- one scratch per filetype
+		},
+		statuscolumn = {
+			left = { "sign" }, -- priority of signs on the left (high to low)
+			right = { "fold", "git" },
+			folds = { open = false, git_hl = true },
 		},
 		indent = {
 			char = "│",
