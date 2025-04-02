@@ -127,25 +127,30 @@ function ensureScrolloffset(editor) {
 // automatically ensures that the first letter of a sentence is capitalized
 let active = false;
 function autoSentenceCasing(editor) {
-	if (active) return; // prevents triggering recursion due to the editor change itself
+	if (active) return; // prevents recursion due to the editor change itself
 	active = true;
+
 	const cur = editor.getCursor();
 	const text = editor.getLine(cur.line);
-
 	const file = editor.editorComponent.view.file;
-	const sections = editor.editorComponent.app.metadataCache.getFileCache(file)?.sections;
-	const lineIsParagraph = sections.some((sect) => {
-		const isParagraph = sect.type === "paragraph";
-		const hasCursor = sect.position.start.line <= cur.line && cur.line <= sect.position.end.line;
-		return isParagraph && hasCursor;
-	});
-	if (!lineIsParagraph) return;
 
-	const updatedText = text.replace(/(?:^|[.?!] )([a-z])/, (match) => match.toUpperCase());
-	if (updatedText !== text) {
+	// check abstract syntax tree for whether we are in a paragraph, to avoid
+	// false positives, e.g. in the frontmatter or in code blocks
+	const sections = editor.editorComponent.app.metadataCache.getFileCache(file)?.sections;
+	const sectWithCur = sections.find(
+		(s) => s.position.start.line <= cur.line && cur.line <= s.position.end.line,
+	);
+	// when starting a new paragraph, the cache is not yet updated, so check
+	// either if the cursor is in a paragraph or if there is no section yet
+	const isInParagraphOrUncached = !sectWithCur || sectWithCur.type === "paragraph";
+
+	const startOfParaOrAfterSentenceEnd = /(?:^|[.?!] )([a-z])/;
+	const updatedText = text.replace(startOfParaOrAfterSentenceEnd, (match) => match.toUpperCase());
+
+	if (updatedText !== text && isInParagraphOrUncached) {
 		editor.setLine(cur.line, updatedText);
 		editor.setCursor(cur); // restore, since `setLine` moves the cursor
-		new Notice("Sentence fixed.", 1500);
+		new Notice("Sentence fixed.");
 	}
 	active = false;
 }
