@@ -134,9 +134,9 @@ function autoSentenceCasing(editor) {
 
 	const file = editor.editorComponent.view.file;
 	const sections = editor.editorComponent.app.metadataCache.getFileCache(file)?.sections;
-	const lineIsParagraph = sections.some((section) => {
-		const isParagraph = section.type === "paragraph"
-		const hasCursor = section.start <= cur.line && cur.line <= section.end;
+	const lineIsParagraph = sections.some((sect) => {
+		const isParagraph = sect.type === "paragraph";
+		const hasCursor = sect.position.start.line <= cur.line && cur.line <= sect.position.end.line;
 		return isParagraph && hasCursor;
 	});
 	if (!lineIsParagraph) return;
@@ -145,7 +145,7 @@ function autoSentenceCasing(editor) {
 	if (updatedText !== text) {
 		editor.setLine(cur.line, updatedText);
 		editor.setCursor(cur); // restore, since `setLine` moves the cursor
-		new Notice("Sentence fixed.", 1200)
+		new Notice("Sentence fixed.", 1500);
 	}
 	active = false;
 }

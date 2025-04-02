@@ -12,7 +12,7 @@ return {
 			topdelete = { show_count = true },
 			changedelete = { show_count = true },
 		},
-		sign_priority = 20,
+		sign_priority = 51, -- above most, so all are aligned to the right
 		current_line_blame_formatter = "<author> (<author_time:%R>): <summary>",
 		current_line_blame_formatter_nc = "+++ uncommitted",
 		current_line_blame = false, -- toggle with `:Gitsigns toggle_current_line_blame`

@@ -13,7 +13,7 @@ keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
 keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
 
-keymap("n", "<leader>pv", function() vim.ui.open(vim.o.viewdir) end, { desc = "󰝰 View dir" })
+keymap("n", "<leader>ps", function() vim.ui.open(vim.g.icloudSync) end, { desc = "󰝰 Sync dir" })
 
 --------------------------------------------------------------------------------
 -- NAVIGATION
@@ -38,6 +38,9 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
+-- repeat
+keymap("n", "#", ";", { desc = "󰑖 Repeat last fFtT" })
+
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
@@ -48,6 +51,7 @@ keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 -- stylua: ignore
 keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })
 keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
+
 
 --------------------------------------------------------------------------------
 -- MARKS

@@ -1,9 +1,10 @@
 return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
+	init = function() vim.g.whichkeyAddSpec { "<leader>l", group = " Color" } end,
 	keys = {
-		{ "#", vim.cmd.CccPick, desc = " Color Picker" },
-		{ "g#", vim.cmd.CccConvert, desc = " Convert to hsl" },
+		{ "<leader>##", vim.cmd.CccPick, desc = " Color Picker" },
+		{ "<leade>#c", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	ft = { "css", "zsh", "lua", "toml" },
 	config = function(spec)
@@ -19,10 +20,10 @@ return {
 				ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
 				ccc.picker.css_rgb,
 				ccc.picker.css_hsl,
-				ccc.picker.ansi_escape({
-					black = "#767676",
-					blue = "#3165ff",
-				}, { meaning1 = "bright" }),
+				ccc.picker.ansi_escape(
+					{ black = "#767676", blue = "#3165ff" },
+					{ meaning1 = "bright" }
+				),
 			},
 			alpha_show = "hide", -- hide by default
 			recognize = { output = true }, -- automatically recognize color format under cursor
