@@ -101,8 +101,7 @@ async function reloadPlugin(app, pluginId) {
 }
 
 function ensureScrolloffset(editor) {
-	// biome-ignore lint/style/useNamingConvention: constant
-	const DISTANCE_PERCENT = 0.35; // CONFIG
+	const distancePercent = 0.35; // CONFIG
 
 	if (!editor.hasFocus()) return;
 	const cursor = editor.getCursor();
@@ -112,8 +111,8 @@ function ensureScrolloffset(editor) {
 
 	const viewportHeight = editor.getScrollInfo().clientHeight;
 	const viewportTop = editor.getScrollInfo().top;
-	const excessAtTop = viewportHeight * DISTANCE_PERCENT - cursorCoord.top;
-	const excessAtBottom = cursorCoord.bottom - viewportHeight * (1 - DISTANCE_PERCENT);
+	const excessAtTop = viewportHeight * distancePercent - cursorCoord.top;
+	const excessAtBottom = cursorCoord.bottom - viewportHeight * (1 - distancePercent);
 	if (excessAtTop > 0) {
 		// INFO editor.scrollTo()'s y is referring to the top of `.cm-scroller`
 		// which can be retrieved from editor.getScrollInfo().top. It's an
@@ -125,19 +124,19 @@ function ensureScrolloffset(editor) {
 	}
 }
 
+// automatically ensures that the first letter of a sentence is capitalized
 let active = false;
 function autoSentenceCasing(editor) {
-	if (active) return; // prevents infinite recursion
+	if (active) return; // prevents triggering recursion due to the editor change itself
 	active = true;
 	const { line, ch } = editor.getCursor();
 	const text = editor.getLine(line);
 
-	console.log("🪚 line:", line);
-	const updatedText = text.replace(/\.(\)/g, String.toUpperCase);
-
-
-	editor.setLine(line, updatedText);
-	editor.setCursor(line, ch);
+	const updatedText = text.replace(/(?:^|[.?!] )([a-z])/, (match) => match.toUpperCase());
+	if (updatedText !== text) {
+		editor.setLine(line, updatedText);
+		editor.setCursor(line, ch); // restore, since `setLine` moves the cursor
+	}
 	active = false;
 }
 
@@ -180,14 +179,10 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		});
 
 		// 5. scroll offset
-		this.registerEvent(
-			this.app.workspace.on("editor-selection-change", (editor) => ensureScrolloffset(editor)),
-		);
+		this.registerEvent(this.app.workspace.on("editor-selection-change", ensureScrolloffset));
 
 		// 6. auto sentence casing
-		this.registerEvent(
-			this.app.workspace.on("editor-change", (editor) => autoSentenceCasing(editor)),
-		);
+		this.registerEvent(this.app.workspace.on("editor-change", autoSentenceCasing));
 	}
 }
 
