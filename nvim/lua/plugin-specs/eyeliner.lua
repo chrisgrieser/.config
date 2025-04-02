@@ -4,8 +4,7 @@ return {
 	opts = {
 		highlight_on_key = true,
 		dim = true,
-		max_length = 9999,
-		disabled_filetypes = {},
+		max_length = 500,
 		disabled_buftypes = {},
 	},
 }
