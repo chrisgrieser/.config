@@ -17,7 +17,7 @@ return {
 		scratch = {
 			-- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 			root = vim.fn.stdpath("cache") .. "/scratch",
-			filekey = { cwd = true, branch = false, count = false },
+			filekey = { cwd = false, branch = false, count = false },
 		},
 		indent = {
 			char = "│",
