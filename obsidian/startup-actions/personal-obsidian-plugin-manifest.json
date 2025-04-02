@@ -1,7 +1,7 @@
 {
 	"id": "pseudometa-startup-actions",
-	"name": "Pseudometa Startup Actions",
-	"version": "0.1",
+	"name": "Personal plugin",
+	"version": "0.2",
 	"minAppVersion": "1.17.0",
 	"description": "Personal plugin to be able to register a few action on Obsidian's startup.",
 	"author": "pseudometa (Chris Grieser)",

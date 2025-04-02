@@ -33,10 +33,6 @@
     "body": "jit.os == \"OSX\"",
     "prefix": "check if on macOS"
   },
-  "colorize ansi codes": {
-    "body": "vim.api.nvim_chan_send(vim.api.nvim_open_term(bufnr, {}), table.concat(lines, \"\\r\\n\"))",
-    "prefix": "colorize ansi codes"
-  },
   "create new window": {
     "body": [
       "local content = {}",
