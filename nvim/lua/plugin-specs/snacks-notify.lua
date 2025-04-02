@@ -58,6 +58,7 @@ local function openNotif(idx)
 		title = vim.trim(title) ~= "" and " " .. title .. " " or nil,
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
+		border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"|"shadow"]],
 		wo = {
 			winhighlight = table.concat(highlights, ","),
 			wrap = true,
@@ -65,6 +66,7 @@ local function openNotif(idx)
 			cursorline = true,
 			colorcolumn = "",
 			winfixbuf = true,
+			foldexpr = "indent",
 		},
 		bo = { ft = "snacks_notif", modifiable = false },
 		keys = {

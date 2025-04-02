@@ -2,6 +2,7 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
 vim.g.localRepos = vim.fs.normalize("~/Developer")
+vim.g.icloudSync = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
 
 --------------------------------------------------------------------------------
 -- GENERAL
@@ -106,9 +107,8 @@ vim.filetype.add {
 -- DIRECTORIES
 
 -- move to custom location where they are synced independently from the dotfiles
-local dir = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
-vim.opt.undodir = dir .. "/undo"
-vim.opt.shadafile = dir .. "/main.shada"
+vim.opt.undodir = vim.g.icloudSync .. "/undo"
+vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
 
 --------------------------------------------------------------------------------
 -- AUTOMATION
@@ -147,6 +147,7 @@ vim.opt.listchars = {
 }
 vim.opt.fillchars:append {
 	eob = " ",
+	msgsep = ".",
 	lastline = "↓",
 	diff = "▄",
 	fold = " ", -- overwritten by nvim-origami
