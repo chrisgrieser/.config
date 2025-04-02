@@ -10,7 +10,7 @@ return {
 	---@type snacks.Config
 	opts = {
 		scratch = {
-			root = vim.g.icloudSync .. "/scratch",
+			root = vim.g.icloudSync .. "/picker-scratch",
 			filekey = {
 				count = true, -- allows count to create multiple scratch buffers
 				cwd = false, -- otherwise only one scratch per filetype
