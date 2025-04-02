@@ -6,12 +6,12 @@ return {
 		definition = { enabled = false },
 		implementation = { enabled = false },
 		vt_position = "signcolumn",
-		vt_priority = 7, -- gitsigns have priority of 6
+		vt_priority = 5, -- gitsigns have 6, below so gitsigns are not broken up
 		hl = { link = "Comment" },
 		request_pending_text = false, -- disable "loading…"
 		text_format = function(symbol)
-			if not symbol.references or symbol.references == 0 then return "" end
-			if symbol.references < 2 and vim.bo.filetype == "css" then return "" end
+			if not symbol.references or symbol.references == 0 then return end
+			if symbol.references < 2 and vim.bo.filetype == "css" then return end
 			if symbol.references > 99 then return "󰐗" end
 
 			local digits =
