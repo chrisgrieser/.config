@@ -281,4 +281,27 @@ function M.lspCapabilities()
 end
 
 --------------------------------------------------------------------------------
+
+function M.indentationUp()
+	local function getLine(lnum) return vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, false)[1] end
+
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	local curIndent = vim.fn.indent(row)
+	if curIndent == 0 then return end
+
+	-- find next row above with lower indent
+	local upIndent
+	local upLineText
+	repeat
+		row = row - 1
+		if row == 0 then return end -- start of file
+		upIndent = vim.fn.indent(row)
+	until upIndent < curIndent
+
+	local targetLine = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+	local col = targetLine:find("%S") - 1
+	vim.api.nvim_win_set_cursor(0, { row, col })
+end
+
+--------------------------------------------------------------------------------
 return M
