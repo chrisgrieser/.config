@@ -40,31 +40,35 @@ local function importLuaModule()
 end
 
 local function betterFileOpen()
-	-- get list of changed files
-	local changedInfo = {}
+	local changedFiles = {}
 	local gitDir = Snacks.git.get_root()
 	if gitDir then
-		local gitStatus = vim.system({ "git", "status", "--porcelain", "." }):wait().stdout
+		local args = { "git", "status", "--porcelain", "--ignored", "." }
+		local gitStatus = vim.system(args):wait().stdout
 		local changes = vim.split(gitStatus or "", "\n", { trimempty = true })
 		vim.iter(changes):each(function(line)
 			local relPath = line:sub(4)
-			local absPath = gitDir .. "/" .. relPath
 			local change = line:sub(1, 2)
-			if change == "??" then change = "A " end -- just nicer highlights
-			changedInfo[absPath] = change
+			if change == "??" then change = "A " end -- just nicer highlights for untracked
+			if change:find("R") then relPath = relPath:gsub(".+ -> ", "") end -- renamed
+			local absPath = gitDir .. "/" .. relPath
+			changedFiles[absPath] = change
 		end)
 	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	Snacks.picker.files {
 		title = " " .. vim.fs.basename(vim.uv.cwd()),
+		-- exclude the current file
 		transform = function(item, _ctx)
 			local itemPath = Snacks.picker.util.path(item)
 			if itemPath == currentFile then return false end
 		end,
+		-- add git status and hidden status as highlights
 		format = function(item, picker)
 			local itemPath = Snacks.picker.util.path(item)
-			item.status = changedInfo[itemPath]
+			item.status = changedFiles[itemPath]
+			if vim.startswith(item.file, ".") then item.status = "!!" end -- hidden files
 			return require("snacks.picker.format").file(item, picker)
 		end,
 	}
@@ -196,7 +200,7 @@ return {
 				recent = {
 					layout = "small_no_preview",
 					filter = {
-						paths = { [vim.g.icloudSync] = false } -- e.g., scratch buffers
+						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
 					},
 				},
 				grep = {
@@ -357,12 +361,11 @@ return {
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
-					commit = "",
+					commit = "", -- save some space
 					staged = "󰐖", -- consistent with tiyngit
-					added = "",
+					added = "󰎔",
 					modified = "󰄯",
-					renamed = "󰏫",
-					untracked = "?",
+					renamed = "󰏬",
 				},
 			},
 		},
