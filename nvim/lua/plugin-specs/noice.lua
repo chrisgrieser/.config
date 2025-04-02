@@ -38,8 +38,8 @@ return {
 		routes = {
 			-- DOCS https://github.com/folke/noice.nvim#-routes
 			-- write/deletion messages
-			{ filter = { event = "msg_show", find = "%d+B written$" }, view = "mini" },
-			{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, view = "mini" },
+			{ filter = { event = "msg_show", find = "%d+B written$" }, skip = true },
+			{ filter = { event = "msg_show", find = "%d+L, %d+B$" }, skip = true },
 			{ filter = { event = "msg_show", find = "%-%-No lines in buffer%-%-" }, view = "mini" },
 
 			-- search

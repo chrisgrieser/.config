@@ -96,6 +96,7 @@ function run() {
 
 			// INFO EXCEPTIONS
 			if (name === "Stylus") optionsPath = "manage.html";
+			if (name === "Redirector") optionsPath = "redirector.html";
 			if (id === "bbojmeobdaicehcopocnfhaagefleiae") name = "OptiSearch";
 			const anchor = specialAnchors[name] || "";
 
