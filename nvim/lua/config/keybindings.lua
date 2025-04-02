@@ -45,6 +45,9 @@ keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
 keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 
+-- stylua: ignore
+keymap("n", "gk", function() require("personal-plugins.misc").indentationUp() end, { desc = "󰸇 up to parent" })
+
 --------------------------------------------------------------------------------
 -- MARKS
 do
@@ -53,8 +56,18 @@ do
 
 	-- stylua: ignore
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
-	keymap("n", "<leader>ms", function() require("personal-plugins.marks").selectMarks(marks) end, { desc = "󰃁 Select mark" })
-	keymap("n", "<leader>m<BS>", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	keymap(
+		"n",
+		"<leader>ms",
+		function() require("personal-plugins.marks").selectMarks(marks) end,
+		{ desc = "󰃁 Select mark" }
+	)
+	keymap(
+		"n",
+		"<leader>m<BS>",
+		function() require("personal-plugins.marks").deleteAllMarks() end,
+		{ desc = "󰃆 Delete marks" }
+	)
 
 	for _, mark in pairs(marks) do
 		keymap(
@@ -390,7 +403,12 @@ do
 	})
 end
 
-keymap("n", "<D-r>", vim.cmd.edit, { desc = "󰽙 Reload buffer" })
+-- close window or buffer
+keymap({ "n", "x", "i" }, "<D-w>", function()
+	local winClosed = pcall(vim.cmd.close)
+	if not winClosed then require("personal-plugins.alt-alt").deleteBuffer() end
+end, { desc = "󰽙 Close window/buffer" })
+
 keymap("n", "<BS>", function()
 	if vim.bo.buftype ~= "" then return end -- prevent accidental triggering in special buffers
 	vim.cmd.bprevious()
@@ -399,12 +417,6 @@ keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.misc").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
-
--- close window or buffer
-keymap({ "n", "x", "i" }, "<D-w>", function()
-	local winClosed = pcall(vim.cmd.close)
-	if not winClosed then require("personal-plugins.alt-alt").deleteBuffer() end
-end, { desc = "󰽙 Close window/buffer" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openAlfredPref() end, { desc = "󰮤 Reveal in Alfred" })
