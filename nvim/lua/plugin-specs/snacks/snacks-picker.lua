@@ -50,6 +50,7 @@ local function betterFileOpen()
 			local relPath = line:sub(4)
 			local absPath = gitDir .. "/" .. relPath
 			local change = line:sub(1, 2)
+			if change == "??" then change = "A " end -- just nicer highlights
 			changedInfo[absPath] = change
 		end)
 	end
