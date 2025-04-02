@@ -129,13 +129,22 @@ let active = false;
 function autoSentenceCasing(editor) {
 	if (active) return; // prevents triggering recursion due to the editor change itself
 	active = true;
-	const { line, ch } = editor.getCursor();
-	const text = editor.getLine(line);
+	const cur = editor.getCursor();
+	const text = editor.getLine(cur.line);
+
+	const file = editor.editorComponent.view.file;
+	const sections = editor.editorComponent.app.metadataCache.getFileCache(file)?.sections;
+	const lineIsParagraph = sections.some((section) => {
+		const isParagraph = section.type === "paragraph"
+		const hasCursor = section.start <= cur.line && cur.line <= section.end;
+		return isParagraph && hasCursor;
+	});
+	if (!lineIsParagraph) return;
 
 	const updatedText = text.replace(/(?:^|[.?!] )([a-z])/, (match) => match.toUpperCase());
 	if (updatedText !== text) {
-		editor.setLine(line, updatedText);
-		editor.setCursor(line, ch); // restore, since `setLine` moves the cursor
+		editor.setLine(cur.line, updatedText);
+		editor.setCursor(cur); // restore, since `setLine` moves the cursor
 		new Notice("Sentence fixed.", 1200)
 	}
 	active = false;
