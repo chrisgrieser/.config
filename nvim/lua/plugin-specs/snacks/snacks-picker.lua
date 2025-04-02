@@ -165,7 +165,7 @@ return {
 		--------------------------------------------------------------------------
 		-- INSPECT
 
-		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = "󰗲 Highlights" },
+		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
 		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
@@ -178,7 +178,7 @@ return {
 		--------------------------------------------------------------------------
 		-- MISC
 
-		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = "󰗲 Colorschemes" },
+		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
@@ -318,8 +318,8 @@ return {
 			win = {
 				input = {
 					keys = {
+						["<Esc>"] = { "cancel", mode = "i" }, --> disable normal mode
 						["<CR>"] = { "confirm", mode = "i" },
-						["<Esc>"] = { "cancel", mode = "i" }, -- = disable normal mode
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
