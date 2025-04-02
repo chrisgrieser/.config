@@ -15,10 +15,8 @@ return {
 		sign_priority = 20,
 		current_line_blame_formatter = "<author> (<author_time:%R>): <summary>",
 		current_line_blame_formatter_nc = "+++ uncommitted",
-		current_line_blame_opts = {
-			virt_text = true, -- can be disabled, and the blame shown via "vim.b.gitsigns_blame_line"
-			delay = 500,
-		},
+		current_line_blame = false, -- toggle with `:Gitsigns toggle_current_line_blame`
+		current_line_blame_opts = { delay = 500 },
 	},
 	keys = {
 		-- stylua: ignore start

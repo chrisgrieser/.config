@@ -9,8 +9,6 @@ return {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰉚 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
-		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
-		{ "<leader>eS", function() Snacks.scratch.select() end, desc = " Select scratch" },
 	},
 	---@type snacks.Config
 	opts = {

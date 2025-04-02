@@ -147,7 +147,7 @@ vim.opt.listchars = {
 }
 vim.opt.fillchars:append {
 	eob = " ",
-	msgsep = ".",
+	msgsep = "═",
 	lastline = "↓",
 	diff = "▄",
 	fold = " ", -- overwritten by nvim-origami
