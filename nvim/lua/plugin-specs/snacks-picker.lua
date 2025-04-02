@@ -194,6 +194,9 @@ return {
 				},
 				recent = {
 					layout = "small_no_preview",
+					filter = {
+						paths = { [vim.g.icloudSync] = false } -- e.g., scratch buffers
+					},
 				},
 				grep = {
 					cmd = "rg",

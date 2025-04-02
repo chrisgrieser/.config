@@ -12,7 +12,7 @@ return {
 			topdelete = { show_count = true },
 			changedelete = { show_count = true },
 		},
-
+		sign_priority = 20,
 		current_line_blame_formatter = "<author> (<author_time:%R>): <summary>",
 		current_line_blame_formatter_nc = "+++ uncommitted",
 		current_line_blame_opts = {
