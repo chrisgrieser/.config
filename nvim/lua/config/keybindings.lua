@@ -7,8 +7,8 @@ keymap("n", "<D-,>", function()
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
--- `cmd-q` remapped to `ZZ` via Karabiner, PENDING https://github.com/neovide/neovide/issues/2558
-keymap("n", "ZZ", function() vim.cmd.wqall { bang = true } end)
+-- save before quitting (non-unique, since also set by neovide)
+keymap("n", "<D-q>", vim.cmd.wqall, { desc = "󰑓 Save & quit", unique = false })
 
 local pluginDir = vim.fn.stdpath("data") --[[@as string]]
 keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
@@ -47,8 +47,12 @@ keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 
 -- stylua: ignore
 keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })
-keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
-
+keymap(
+	"n",
+	"gk",
+	function() require("personal-plugins.misc").goIndent("up") end,
+	{ desc = "󰛃 indent up" }
+)
 
 --------------------------------------------------------------------------------
 -- MARKS
