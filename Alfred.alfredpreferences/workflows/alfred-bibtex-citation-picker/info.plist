@@ -1959,7 +1959,7 @@ echo "$*"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>scripts/fuzzy-open-pdf.sh</string>
+				<string>scripts/open-pdf.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -3111,7 +3111,7 @@ to set a hotkey for adding DOI/ISBN</string>
 		<string></string>
 	</dict>
 	<key>version</key>
-	<string>11.19.0</string>
+	<string>11.19.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/chrisgrieser/alfred-bibtex-citation-picker</string>
 </dict>
