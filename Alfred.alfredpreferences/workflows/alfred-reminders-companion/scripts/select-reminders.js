@@ -6,7 +6,6 @@ app.includeStandardAdditions = true;
 
 /** @typedef {Object} reminderObj
  * @property {string} title
- * @property {0|1|5|9} priority 0 = None, 9 = Low, 5 = Medium, 1 = High
  * @property {string} list
  * @property {string} notes
  * @property {string} externalId
@@ -60,7 +59,7 @@ function relativeDate(absDate) {
 }
 
 const urlRegex =
-	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
+	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
 //───────────────────────────────────────────────────────────────────────────
 
