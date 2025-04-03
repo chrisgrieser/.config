@@ -109,6 +109,7 @@ vim.filetype.add {
 -- move to custom location where they are synced independently from the dotfiles
 vim.opt.undodir = vim.g.icloudSync .. "/undo"
 vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
+vim.opt.viewdir = vim.g.icloudSync .. "/views"
 
 --------------------------------------------------------------------------------
 -- AUTOMATION
