@@ -4,8 +4,14 @@ local textObj = require("config.utils").extraTextobjMaps
 return { -- treesitter-based textobjs
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-	-- stylua: ignore
-	cmd = { "TSTextobjectSelect", "TSTextobjectSwapNext", "TSTextobjectSwapPrevious", "TSTextobjectGotoNextStart", "TSTextobjectGotoPreviousStart" },
+	cmd = {
+		"TSTextobjectSelect",
+		"TSTextobjectSwapNext",
+		"TSTextobjectSwapPrevious",
+		"TSTextobjectGotoNextStart",
+		"TSTextobjectGotoPreviousStart",
+		"TSTextobjectPeekDefinitionCode",
+	},
 	-- SIC yes, configured via treesitter, not this plugin. Also, calling
 	-- treesitter's `setup` a second time is apparently not a problem.
 	main = "nvim-treesitter.configs",
@@ -17,23 +23,26 @@ return { -- treesitter-based textobjs
 				-- thus staying with `false`
 				include_surrounding_whitespace = false,
 			},
+			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
+				floating_preview_opts = { title = "  Peek " },
+			},
 		},
 	},
 	keys = {
-		-- MOVE
 		-- stylua: ignore start
+
+		-- MOVE
 		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
 		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
-		-- stylua: ignore end
+
+		-- PEEK HOVER
+		{ "<leader>H", "<cmd>TSTextobjectPeekDefinitionCode @class.outer<CR>", desc = " LSP Peek" },
 
 		-- SWAP
-		-- stylua: ignore start
 		{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
 		{ "Ä", "<cmd>TSTextobjectSwapPrevious @parameter.inner<CR>", desc = " Swap prev arg" },
-		-- stylua: ignore end
 
 		-- TEXT OBJECTS
-		-- stylua: ignore start
 		{ "a<CR>", "<cmd>TSTextobjectSelect @return.outer<CR>", mode = {"x","o"}, desc = "↩ outer return" },
 		{ "i<CR>", "<cmd>TSTextobjectSelect @return.inner<CR>", mode = {"x","o"}, desc = "↩ inner return" },
 		{ "a/", "<cmd>TSTextobjectSelect @regex.outer<CR>", mode = {"x","o"}, desc = " outer regex" },
@@ -51,13 +60,12 @@ return { -- treesitter-based textobjs
 
 		-- CUSTOM TEXTOBJECTS (defined via .scm files)
 		{ "g" .. textObj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 caller" },
-		-- stylua: ignore end
 
 		-- COMMENTS
-
 		-- only operator-pending to not conflict with selection-commenting
-		-- stylua: ignore
 		{ "q", "<cmd>TSTextobjectSelect @comment.outer<CR>", mode = "o", desc = "󰆈 single comment" },
+
+		-- stylua: ignore end
 
 		{
 			"cq",
