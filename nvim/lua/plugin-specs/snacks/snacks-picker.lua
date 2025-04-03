@@ -304,7 +304,7 @@ return {
 							box = "vertical",
 							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "bottom" },
+							{ win = "input", height = 1, border = "double" },
 							{ win = "list", border = "none" },
 						},
 					},
