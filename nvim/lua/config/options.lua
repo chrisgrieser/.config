@@ -1,6 +1,9 @@
+--------------------------------------------------------------------------------
 -- GLOBALS
+
 vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
+
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 vim.g.icloudSync = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
 
@@ -93,15 +96,6 @@ vim.opt.shiftwidth = 3
 
 vim.opt.shiftround = true
 vim.opt.smartindent = true
-
---------------------------------------------------------------------------------
--- FILETYPES
-
-vim.filetype.add {
-	filename = {
-		[".ignore"] = "gitignore", -- ignore files for fd/rg
-	},
-}
 
 --------------------------------------------------------------------------------
 -- DIRECTORIES

@@ -3,9 +3,7 @@ if not vim.g.neovide then return end
 
 --------------------------------------------------------------------------------
 
--- SIZE & FONT
-vim.opt.linespace = -2 -- less line height
-
+-- SIZES
 local host = vim.uv.os_gethostname()
 local isAtOffice = host:find("eduroam") or host:find("mini")
 local isAtMother = host:find("Mother")
@@ -26,6 +24,7 @@ else
 	vim.g.neovide_padding_top = 15
 	vim.g.neovide_padding_left = 7
 end
+vim.opt.linespace = -2 -- less line height
 
 -- cmd+ / cmd- to change zoom
 local function changeScaleFactor(delta)
@@ -48,6 +47,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "none" -- disable, so `{@~` etc. 
 vim.g.neovide_opacity = 1
 vim.g.neovide_theme = "auto" -- needs to be set, as the setting in `config.toml` is ignored
 vim.g.neovide_underline_stroke_scale = 2.5 -- fix underline thickness
+vim.g.neovide_show_border = true
 
 -- behavior
 vim.g.neovide_remember_window_size = true
@@ -57,9 +57,9 @@ vim.g.neovide_cursor_animate_command_line = false -- does not affect noice-cmdli
 
 do -- only active when `multigrid` is enabled in `neovide/config.toml`
 	vim.g.neovide_scroll_animation_length = 0 -- scroll instantly
-	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some windows
-	vim.g.neovide_floating_shadow = false -- shadow looks weird with many plugin windows
-	vim.g.neovide_position_animation_length = 0.1 -- i.e., speed windows move
+	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some plugin windows
+	vim.g.neovide_floating_shadow = false -- looks weird with some plugin windows
+	vim.g.neovide_position_animation_length = 0.15 -- windows movement speed
 end
 
 --------------------------------------------------------------------------------
