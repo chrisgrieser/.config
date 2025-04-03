@@ -162,7 +162,7 @@ keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 for i = 0, 6 do
-	keymap("n", "z" .. i, function() vim.opt.foldlevel = i end, { desc = "󰘖 Folds Level " .. i })
+	keymap("n", "z" .. i, function() vim.opt.foldlevel = i end, { desc = "󰘖 Folds level " .. i })
 end
 
 --------------------------------------------------------------------------------

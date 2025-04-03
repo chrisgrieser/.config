@@ -36,7 +36,7 @@ local blinkConfig = {
 					-- don't show when triggered manually (= length 0), useful
 					-- when manually showing completions to see available fields
 					min_keyword_length = 1,
-					score_offset = -1,
+					score_offset = 1,
 					opts = { clipboard_register = "+" }, -- register to use for `$CLIPBOARD`
 				},
 				path = {
