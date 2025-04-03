@@ -23,7 +23,6 @@ return {
 	cmd = "Telescope",
 	opts = {
 		defaults = {
-			path_display = { "tail" },
 			selection_caret = " ",
 			prompt_prefix = " ",
 			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },

@@ -10,7 +10,7 @@ export EDITOR='nvim'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# PANDOC 
+# PANDOC
 # does not have an environment var for this, so using `--data-dir` alias
 alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
 
