@@ -86,8 +86,9 @@ return {
 	"folke/snacks.nvim",
 	config = function(_, opts)
 		require("snacks").setup(opts)
-		-- disable default keymaps
+		-- disable default keymaps to make the `?` help overview less cluttered
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
 	end,
 	keys = {
 		-- FILES
@@ -118,7 +119,7 @@ return {
 					title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
 					exclude = { "*/tests/*", "*/doc/*", "*.toml" },
-					matcher = { filename_bonus = false },
+					matcher = { filename_bonus = false }, -- folder more important here
 					formatters = { file = { filename_first = false } },
 				}
 			end,
@@ -173,8 +174,8 @@ return {
 
 		{ "<leader>ih", function() Snacks.picker.highlights() end, desc = " Highlights" },
 		{ "<leader>iv", function() Snacks.picker.help() end, desc = "󰋖 Vim help" },
-		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		{ "<leader>is", function() Snacks.picker.pickers() end, desc = "󰗲 Snacks pickers" },
+		{ "<leader>ik", function() Snacks.picker.keymaps() end, desc = "󰌌 Keymaps (global)" },
 		{
 			"<leader>iK",
 			function() Snacks.picker.keymaps { global = false, title = "󰌌 Keymaps (buffer)" } end,
@@ -304,7 +305,7 @@ return {
 							box = "vertical",
 							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "double" },
+							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
 						},
 					},
