@@ -233,7 +233,7 @@ return {
 					layout = {
 						preset = "wide_with_preview",
 						preview = false, ---@diagnostic disable-line: assign-type-mismatch
-					}
+					},
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -330,20 +330,42 @@ return {
 						["<Down>"] = { "history_forward", mode = "i" },
 
 						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
-						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- mnemonic: "fullscreen"
+						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- [f]ullscreen
 						["<D-p>"] = { "toggle_preview", mode = "i" },
+						["<C-CR>"] = { "cycle_win", mode = "i" },
 						["<PageUp>"] = { "preview_scroll_up", mode = "i" },
 						["<PageDown>"] = { "preview_scroll_down", mode = "i" },
 
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
 						["<D-c>"] = { "yank", mode = "i" },
+						[":"] = { "complete_and_add_colon", mode = "i" },
 
-						["?"] = { "inspect", mode = "i" },
+						["!"] = { "inspect", mode = "i" },
+						["?"] = { "toggle_help_input", mode = "i" },
 					},
+				},
+				list = {
+					keys = { ["<C-CR>"] = { "cycle_win" } },
+				},
+				preview = {
+					keys = { ["<C-CR>"] = { "cycle_win" } },
 				},
 			},
 			actions = {
+				complete_and_add_colon = function(picker)
+					-- snacks allows opening files with `file:lnum`, but it only
+					-- matches if the filename is complete. With this action, we
+					-- complete the filename if using the 1st colon in the query.
+					local query = vim.api.nvim_get_current_line()
+					local file = picker:current().file
+					if not file or query:find(":") then
+						vim.fn.feedkeys(":", "n")
+						return
+					end
+					vim.api.nvim_set_current_line(file .. ":")
+					vim.cmd.startinsert { bang = true }
+				end,
 				list_down_wrapping = function(picker)
 					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
 					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source

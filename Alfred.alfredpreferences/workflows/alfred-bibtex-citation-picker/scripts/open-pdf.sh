@@ -8,7 +8,7 @@ if [[ -d "$PDF_FOLDER" ]]; then
 	cd "$PDF_FOLDER" || return 1
 	# opening only requires pdf named with citekey, so PDFs with a method other
 	# than this workflow can also be opened.
-	FILE_PATH=$(find . -maxdepth 3 -type f -iname "$CITEKEY*.pdf" | head -n1)
+	FILE_PATH=$(find . -type f -iname "$CITEKEY*.pdf" | head -n1)
 fi
 
 if [[ -f "$FILE_PATH" ]]; then 
