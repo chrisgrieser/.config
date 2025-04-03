@@ -1,7 +1,7 @@
 # DOCS https://neovide.dev/config-file.html#available-settings
 
 frame = "buttonless"
-no-multigrid = true # looks a bit off with `nvim-satellite`
+no-multigrid = false # looks a bit off with `nvim-satellite`
 title-hidden = true
 tabs = false
 mouse-cursor-icon = "i-beam"
@@ -9,3 +9,9 @@ mouse-cursor-icon = "i-beam"
 [font]
 normal = ["JetBrainsMonoNL NF", "Monaco"]
 size = 24.5
+
+[box-drawing]
+mode = "font-glyph" # "font-glyph", "native" or "selected-native"
+
+[box-drawing.sizes]
+default = [2, 4]
