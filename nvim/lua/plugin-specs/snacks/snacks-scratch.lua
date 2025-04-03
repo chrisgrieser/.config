@@ -29,6 +29,7 @@ return {
 					["<D-w>"] = "close",
 				},
 			},
+			win
 		},
 	},
 }

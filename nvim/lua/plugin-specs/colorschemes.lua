@@ -58,6 +58,7 @@ local themes = {
 					-- Snacks
 					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 					SnacksPicker = { link = "Normal" },
+					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
 
 					-- Telescope: increase contrast
 					TelescopeBorder = { link = "FloatBorder" },
