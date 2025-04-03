@@ -84,6 +84,11 @@ end
 
 return {
 	"folke/snacks.nvim",
+	config = function(_, opts)
+		require("snacks").setup(opts)
+		-- disable default keymaps
+		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+	end,
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
@@ -192,11 +197,12 @@ return {
 				files = {
 					cmd = "rg",
 					args = {
-						"--sortr=modified", -- sort by recency
+						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					exclude = { ".DS_Store" },
 					layout = "small_no_preview",
+					matcher = { frecency = true }, -- slight performance impact
 				},
 				recent = {
 					layout = "small_no_preview",
@@ -207,7 +213,7 @@ return {
 				grep = {
 					cmd = "rg",
 					args = {
-						"--sortr=modified", -- sort by recency
+						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
 					format = file_without_line,
@@ -244,6 +250,7 @@ return {
 						preset = "small_no_preview",
 						layout = { width = 0.7 },
 					},
+					matcher = { frecency = true }, -- slight performance impact
 					confirm = function(picker, item)
 						-- as opposed to snacks's default `nvim_put`, `nvim_paste`
 						-- inserts at correct pos in insert mode & is also dot-repeatable

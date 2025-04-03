@@ -1,5 +1,6 @@
 -- DOCS https://neovide.dev/configuration.html
 if not vim.g.neovide then return end
+
 --------------------------------------------------------------------------------
 
 -- SIZE & FONT
@@ -11,17 +12,17 @@ local isAtMother = host:find("Mother")
 
 if isAtMother then
 	vim.g.neovide_scale_factor = 0.9
-	vim.g.neovide_refresh_rate = 60
+	vim.g.neovide_refresh_rate = 30
 	vim.g.neovide_padding_top = 4
 	vim.g.neovide_padding_left = 6
 elseif isAtOffice then
 	vim.g.neovide_scale_factor = 1.05
-	vim.g.neovide_refresh_rate = 75
+	vim.g.neovide_refresh_rate = 45
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_left = 2
 else
 	vim.g.neovide_scale_factor = 1
-	vim.g.neovide_refresh_rate = 90
+	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_padding_top = 15
 	vim.g.neovide_padding_left = 7
 end
@@ -56,8 +57,8 @@ vim.g.neovide_cursor_animate_command_line = false -- does not affect noice-cmdli
 
 do -- only active when `multigrid` is enabled in `neovide/config.toml`
 	vim.g.neovide_scroll_animation_length = 0 -- scroll instantly
-	vim.g.neovide_floating_corner_radius = 0 -- off since looks weird with some windows
-	vim.g.neovide_floating_shadow = false -- shadow looks weird with nvim-satellite
+	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some windows
+	vim.g.neovide_floating_shadow = false -- shadow looks weird with many plugin windows
 	vim.g.neovide_position_animation_length = 0.1 -- i.e., speed windows move
 end
 
