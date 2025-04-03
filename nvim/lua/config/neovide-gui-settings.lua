@@ -72,7 +72,7 @@ vim.opt.guicursor = {
 }
 vim.g.neovide_cursor_smooth_blink = true
 
-vim.g.neovide_cursor_animation_length = 0.1
+vim.g.neovide_cursor_animation_length = 0.03
 vim.g.neovide_cursor_trail_size = 1.0 -- 0-1, long trail
 vim.g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
 
