@@ -63,7 +63,8 @@ local function headingsIncremantor(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
 end
 
-bkeymap("n", "<D-h>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
+-- <D-h> remapped to <D-ö>, since used by macOS
+bkeymap("n", "<D-ö>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
 bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
 --------------------------------------------------------------------------------
