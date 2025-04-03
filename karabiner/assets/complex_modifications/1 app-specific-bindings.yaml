@@ -200,24 +200,6 @@ rules:
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
-  #─────────────────────────────────────────────────────────────────────
-  - description: (Apps) Neovide
-    manipulators:
-      # cmd+q -> ZZ: quit with saving, PENDING https://github.com/neovide/neovide/issues/2558
-      - type: basic
-        from: { key_code: q, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: "y", modifiers: [shift] } # German keyboard: y & z swapped
-          - { key_code: "y", modifiers: [shift] }
-        conditions:
-          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
-      # cmd+h -> cmd+ö for the heading incrementor
-      - type: basic
-        from: { key_code: h, modifiers: { mandatory: [command] } }
-        to:
-          - { key_code: semicolon, modifiers: [command] } # = ö in German keyboard
-        conditions:
-          - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Brave
     manipulators:
