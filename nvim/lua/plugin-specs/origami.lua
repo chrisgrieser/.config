@@ -9,10 +9,7 @@ return {
 		},
 	},
 	opts = {
-		foldtextWithLineCount = {
-			enabled = true,
-			template = "  󰘖 %s",
-		},
+		foldtextWithLineCount = { enabled = true, template = "  󰘖 %s" },
 		autoFold = {
 			enabled = true,
 			kinds = { "comment", "imports" }, ---@type lsp.FoldingRangeKind[]
