@@ -28,6 +28,11 @@ return {
 	},
 	---@type snacks.Config
 	opts = {
+		ft = function()
+			if vim.bo.buftype ~= "" or vim.bo.filetype == "" then return "markdown" end
+			if 
+			return vim.bo.filetype
+		end,
 		scratch = {
 			root = vim.g.icloudSync .. "/picker-scratch",
 			filekey = {
