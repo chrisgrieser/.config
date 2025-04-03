@@ -2,13 +2,6 @@
 -- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
 local spec = {
-	"chrisgrieser/nvim-spider",
-	opts = {
-		skipInsignificantPunctuation = true,
-	},
-	keys = {
-		{ "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
-	},
 }
 
 --------------------------------------------------------------------------------

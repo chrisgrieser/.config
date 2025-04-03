@@ -16,10 +16,7 @@ count-lines:
 
 # runs minimal config with neovide
 debug-instance:
-    # `-c` commands to FIX https://github.com/neovide/neovide/issues/2609
-    # PENDING release after 0.13.3 fixes this
-    neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} \
-        -c'sleep 300ms|bprevious' &>/dev/null
+    neovide --no-tabs {{ debugFile }} -- -u {{ debugConfig }} &>/dev/null
 
 stylua-on-all:
     #!/usr/bin/env zsh

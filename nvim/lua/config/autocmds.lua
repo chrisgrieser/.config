@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Restore cursor position",
 	callback = function(ctx)
 		if ctx.match == "gitcommit" or vim.bo[ctx.buf].buftype ~= "" then return end
-		vim.cmd.normal { 'g`"', bang = true }
+		vim.cmd([[silent! normal! g`"]])
 	end,
 })
 
