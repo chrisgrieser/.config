@@ -158,6 +158,9 @@ return {
 
 		-- `lsp_symbols` tends to too much clutter like anonymous function
 		{ "gs", function() Snacks.picker.treesitter() end, desc = "󰐅 Treesitter symbols" },
+		-- treesitter does not work for markdown, so using LSP symbols here
+		{ "gs", function() Snacks.picker.lsp_symbols() end, ft = "markdown", desc = "󰽛 Headings" },
+
 		-- stylua: ignore
 		{ "gw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "󰒕 Workspace symbols" },
 		{ "g!", function() Snacks.picker.diagnostics() end, desc = "󰋼 Workspace diagnostics" },
@@ -266,6 +269,9 @@ return {
 						picker:close()
 					end,
 				},
+				git_branches = {
+					all = true, -- = include remotes
+				},
 				git_status = {
 					win = {
 						input = {
@@ -280,9 +286,6 @@ return {
 				lsp_definitions = { format = file_without_line },
 				lsp_references = { format = file_without_line },
 				lsp_type_definitions = { format = file_without_line },
-				git_branches = {
-					all = true, -- = include remotes
-				},
 			},
 			formatters = {
 				file = { filename_first = true, truncate = 70 },

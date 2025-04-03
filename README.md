@@ -9,7 +9,6 @@ People tell me they find the following configurations most useful:
   Plugin](https://obsidian.md/plugins?id=obsidian-vimrc-support)
 - [starship prompt](./starship/starship.toml) ⬇️
 
-
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
 ## My blog on Neovim
