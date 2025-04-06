@@ -243,7 +243,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 				local placeholderPos = line:find("%$0")
 				if placeholderPos then
 					line = line:gsub("%$0", "")
-					cursor = { row, placeholderPos - 1 }
+					cursor = { row, placeholderPos - 2 }
 				end
 				table.insert(content, line)
 				row = row + 1

@@ -27,10 +27,6 @@ vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:2" -- too many potential signs for just `1`
 
 vim.opt.wrap = false
-
-vim.opt.shortmess:append("ISs") -- no intro message, disable search count
-vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
-
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 
 -- treat all numbers as positive, ignoring dashes
@@ -124,6 +120,9 @@ end
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
+vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0 -- overwritten by `noice.nvim` setting it 0
 
 --------------------------------------------------------------------------------

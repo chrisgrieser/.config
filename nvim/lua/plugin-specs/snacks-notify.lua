@@ -112,11 +112,12 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
+		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
+		{ "<D-9>", function() openNotif("last") end, desc = "󰎟 Last notification" },
 		{
-			"<D-9>",
-			function() openNotif("last") end,
-			mode = { "n", "v", "i" },
-			desc = "󰎟 Last notification",
+			"<D-0>",
+			function() Snacks.notifier.show_history() end,
+			desc = "󰎟 Notification history",
 		},
 	},
 	opts = {
@@ -134,6 +135,11 @@ return {
 				border = vim.o.winborder,
 				focusable = false,
 				wo = { winblend = 0, wrap = true },
+			},
+			notification_history = {
+				border = vim.o.winborder,
+				position = "bottom",
+				height = 0.8,
 			},
 		},
 	},
