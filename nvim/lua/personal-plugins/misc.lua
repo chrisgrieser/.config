@@ -236,6 +236,17 @@ function M.bufferInfo()
 	vim.notify(table.concat(out, "\n"), vim.log.levels.DEBUG, opts)
 end
 
+function M.quickEval()
+	vim.ui.input({
+		prompt = " Eval: ",
+		win = { ft = "lua" }, -- highlighting for snacks.nvim
+	}, function(expr)
+		if not expr then return end
+		local result = vim.inspect(vim.fn.luaeval(expr))
+		vim.notify(result, vim.log.levels.DEBUG, { title = "Eval", icon = "", ft = "lua" })
+	end)
+end
+
 --------------------------------------------------------------------------------
 
 function M.formatWithFallback()
@@ -304,6 +315,18 @@ function M.goIndent(direction)
 
 	local col = upLineText:find("%S") - 1
 	vim.api.nvim_win_set_cursor(0, { row, col })
+end
+
+--------------------------------------------------------------------------------
+
+---@param key "n"|"N"
+function M.silentNn(key)
+	local forward = key == "n" 
+	local searchQuery = vim.fn.getreg("/")
+	local found = vim.fn.search(searchQuery, forward and "n" or "N")
+	if found == 0 then return end
+	local dir = forward and "nzz" or "Nzz"
+	vim.api.nvim_feedkeys(dir, "n", true)
 end
 
 --------------------------------------------------------------------------------

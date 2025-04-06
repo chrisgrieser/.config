@@ -37,6 +37,7 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
+keymap("x", "#", ";", { desc = " Repeat fFtT" })
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
@@ -371,8 +372,8 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 -- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 
-keymap({ "n", "x" }, "<leader>ee", ":lua = ", { desc = " Eval" })
-keymap({ "n", "x" }, "<leader>er", "<cmd>source<CR>", { desc = " Eval" })
+-- stylua: ignore
+keymap({ "n", "x" }, "<leader>ee", function() require("personal-plugins.misc").quickEval() end, { desc = " Eval" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS
