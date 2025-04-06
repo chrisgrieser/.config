@@ -52,6 +52,9 @@ local themes = {
 					SpellRare = { style = "underdotted" },
 					SpellLocal = { style = "underdotted" },
 
+					-- eyeliner.nvim
+					EyelinerSecondary = { fg = "palette.blue" },
+
 					-- `mini.icons`
 					MiniIconsGrey = { fg = "#767676" },
 
@@ -86,8 +89,6 @@ local themes = {
 					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 					SnacksPicker = { link = "Normal" },
 					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
-
-					EyeLinerSecondary = 
 				},
 			},
 		},
