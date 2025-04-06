@@ -55,17 +55,6 @@ local themes = {
 					-- `mini.icons`
 					MiniIconsGrey = { fg = "#767676" },
 
-					-- Snacks
-					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
-					SnacksPicker = { link = "Normal" },
-					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
-
-					-- Telescope: increase contrast
-					TelescopeBorder = { link = "FloatBorder" },
-					TelescopeTitle = { fg = "palette.comment" },
-					TelescopeResultsComment = { fg = "palette.comment" },
-					TelescopeMatching = { fg = "palette.orange" }, -- make matches stand out more
-
 					-- blink.cmp
 					BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
 					BlinkCmpDocBorder = { link = "FloatBorder" },
@@ -92,6 +81,13 @@ local themes = {
 					SnacksNotifierIconTrace = { link = "NotifyDEBUGIcon" },
 					SnacksNotifierBorderTrace = { link = "NotifyDEBUGBorder" },
 					SnacksNotifierFooterTrace = { link = "NotifyDEBUGBorder" },
+
+					-- Snacks
+					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
+					SnacksPicker = { link = "Normal" },
+					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
+
+					EyeLinerSecondary = 
 				},
 			},
 		},
