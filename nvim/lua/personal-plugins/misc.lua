@@ -320,25 +320,46 @@ end
 
 --------------------------------------------------------------------------------
 
----@param key "n"|"N"
-function M.silentN(key)
-	local searchQuery = key == "<CR>" and vim.fn.getcmdline() or vim.fn.getreg("/")
-	local notFound = vim.fn.search(searchQuery, "n") == 0 -- `n` = no movement
-	if notFound then
-		if key == "<CR>" then feedkey("<C-c>") end -- leave cmdline
-		local msg = ("[%s] not found."):format(searchQuery)
+---silence `E486: pattern not found` when pressing `CR` in cmdline
+do
+	local function notFoundMsg(query)
+		local msg = ("[%s] not found."):format(query)
 		vim.notify(msg, vim.log.levels.TRACE, { icon = " ", style = "minimal" })
-		return
 	end
 
-	if key == "<CR>" then
-		feedkey("<CR>")
-	elseif key ~= "<CR>" then
-		vim.cmd.normal { key, bang = true }
+	---@param key "n"|"N"
+	function M.silentN(key)
+		local searchQuery = vim.fn.getreg("/")
+		local found = vim.fn.search(searchQuery, "n") > 0 -- `n` = no movement
+		if found then
+			vim.cmd.normal { key, bang = true }
+		else
+			notFoundMsg(searchQuery)
+		end
+	end
+
+	---needs to be bound to `cmap`
+	function M.silentCR()
+		local function feedkey(k)
+			local esc = vim.api.nvim_replace_termcodes(k, true, true, true)
+			vim.api.nvim_feedkeys(esc, "n", false)
+		end
+		if vim.fn.getcmdtype() ~= "/" then
+			feedkey("<CR>")
+			return
+		end
+
+		local searchQuery = vim.fn.getcmdline()
+		local found = vim.fn.search(searchQuery, "n") > 0 -- `n` = no movement
+
+		if found then
+			feedkey("<CR>")
+		else
+			feedkey("<C-c>") -- leaving cmdline via `Esc` somehow does not work
+			notFoundMsg(searchQuery)
+		end
 	end
 end
-
-
 
 --------------------------------------------------------------------------------
 return M
