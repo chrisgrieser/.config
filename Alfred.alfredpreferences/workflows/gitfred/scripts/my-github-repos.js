@@ -56,7 +56,8 @@ function run() {
 	// FETCH REMOTE REPOS
 
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-	const response = httpRequest(`https://api.github.com/users/${username}/repos?per_page=100`);
+	// `type=all` includes owned repos and member repos
+	const response = httpRequest(`https://api.github.com/users/${username}/repos?type=all&per_page=100`);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -85,6 +86,7 @@ function run() {
 			let type = "";
 			let subtitle = "";
 			repo.local = localRepos[repo.name];
+			const memberRepo = repo.owner.login !== username;
 			const mainArg = repo.local?.path || repo.html_url;
 
 			// open in terminal when local, clone when not
@@ -97,6 +99,7 @@ function run() {
 				matcher += "local ";
 			}
 
+
 			// extra info
 			if (repo.fork) type += "🍴 ";
 			if (repo.fork) matcher += "fork ";
@@ -105,10 +108,12 @@ function run() {
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
+			if (memberRepo) subtitle += `👤 ${repo.owner.login}  `;
+			if (memberRepo) matcher += "member ";
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
-				title: `${type}${repo.name}`,
+				title: `${type}${displayName}`,
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
