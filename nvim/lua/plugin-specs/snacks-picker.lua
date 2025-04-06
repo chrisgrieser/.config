@@ -84,12 +84,6 @@ end
 
 return {
 	"folke/snacks.nvim",
-	config = function(_, opts)
-		require("snacks").setup(opts)
-		-- disable default keymaps to make the `?` help overview less cluttered
-		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
-		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
-	end,
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
