@@ -4,7 +4,6 @@ local M = {}
 --------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
----mappings from https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 ---@type table<string, string>
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (fork of pyright)
@@ -18,6 +17,7 @@ local lspToMasonMap = {
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
+	just = "just-lsp",
 	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
@@ -28,7 +28,6 @@ local lspToMasonMap = {
 	ts_query_ls = "ts_query_ls", -- tree-sitter query files
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
-	just = "just-lsp",
 }
 
 ---@module "lspconfig"
@@ -115,13 +114,13 @@ local efmConfig = {
 			},
 		},
 	},
-	just = {
-		{
-			formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
-			formatStdin = false,
-			rootMarkers = { "Justfile", ".justfile" },
-		},
-	},
+	-- just = {
+	-- 	{
+	-- 		formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
+	-- 		formatStdin = false,
+	-- 		rootMarkers = { "Justfile", ".justfile" },
+	-- 	},
+	-- },
 }
 
 M.serverConfigs.efm = {

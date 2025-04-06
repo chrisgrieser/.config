@@ -12,3 +12,5 @@ templates/**
 
 # lazy.nvim
 .lazy-lock.json
+
+.gitkeep

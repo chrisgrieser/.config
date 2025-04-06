@@ -11,7 +11,7 @@ local function install(pack, version)
 
 	pack:once("install:success", function()
 		local msg2 = ("[%s] %s"):format(pack.name, version and "updated." or "installed.")
-		notifyOpts.icon = " "
+		notifyOpts.icon = ""
 		vim.notify(msg2, nil, notifyOpts)
 	end)
 	pack:once("install:failed", function()
