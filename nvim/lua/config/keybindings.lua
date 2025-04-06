@@ -372,6 +372,7 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 
 keymap({ "n", "x" }, "<leader>ee", ":lua = ", { desc = " Eval" })
+keymap({ "n", "x" }, "<leader>er", "<cmd>source<CR>", { desc = " Eval" })
 
 --------------------------------------------------------------------------------
 -- WINDOWS

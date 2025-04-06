@@ -62,7 +62,7 @@ return {
 				wo = { signcolumn = "yes:1" },
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				footer_pos = "right",
-				keys = { q = false }, -- so `q` is available as my comment operator
+				-- keys = { q = false }, -- so `q` is available as my comment operator
 			},
 			win_by_ft = {
 				javascript = {

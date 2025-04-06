@@ -45,7 +45,7 @@ end
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"stylua", -- used lua-3p-ls/efm
+	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
 }
@@ -112,13 +112,6 @@ local efmConfig = {
 				"-:%l:%c: %tarning: %m [SC%n]",
 				"-:%l:%c: %tote: %m [SC%n]",
 			},
-		},
-	},
-	just = {
-		{ -- PENDING https://github.com/terror/just-lsp/issues/49
-			formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
-			formatStdin = false,
-			rootMarkers = { "Justfile", ".justfile" },
 		},
 	},
 }

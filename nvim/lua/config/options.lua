@@ -5,7 +5,8 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "<Nop>"
 
 vim.g.localRepos = vim.fs.normalize("~/Developer")
-vim.g.icloudSync = vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
+vim.g.icloudSync =
+	vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
 
 --------------------------------------------------------------------------------
 -- GENERAL
@@ -22,11 +23,6 @@ vim.opt.spelloptions = "camel"
 vim.opt.splitright = true -- split right instead of left
 vim.opt.splitbelow = true -- split down instead of up
 
-vim.opt.cursorline = true
-vim.opt.colorcolumn = "+1" -- = one more than textwidth
-vim.opt.signcolumn = "yes:2" -- too many potential signs for just `1`
-
-vim.opt.wrap = false
 vim.opt.iskeyword:append("-") -- treat `-` as word character, same as `_`
 
 -- treat all numbers as positive, ignoring dashes
@@ -55,6 +51,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 -- APPEARANCE
+vim.opt.cursorline = true
+vim.opt.colorcolumn = "+1" -- = one more than textwidth
+vim.opt.signcolumn = "yes:2" -- too many potential signs for just `1`
+
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 12
 
@@ -62,6 +62,13 @@ vim.opt.winborder = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
+
+--------------------------------------------------------------------------------
+
+-- SEARCH
+vim.opt.wrap = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 --------------------------------------------------------------------------------
 -- CLIPBOARD
@@ -116,14 +123,12 @@ if vim.g.neovide then
 end
 
 --------------------------------------------------------------------------------
--- SEARCH & CMDLINE
-
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+-- MESSAGES & CMDLINE
 
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
-vim.opt.cmdheight = 0 -- overwritten by `noice.nvim` setting it 0
+vim.opt.cmdheight = 0
+vim.opt.messagesopt = { "hit-enter", "history:1000" }
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
