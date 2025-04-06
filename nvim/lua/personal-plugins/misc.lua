@@ -321,22 +321,24 @@ end
 --------------------------------------------------------------------------------
 
 ---@param key "n"|"N"
-function M.silentNn(key)
-	local searchQuery = vim.fn.getreg("/")
-	local count = vim.fn.searchcount()
-	if vim.tbl_isempty(count) then return end -- e.g. new shada file
-	local found = count.total > 0
-	if found then
-		vim.cmd.normal { key, bang = true }
+function M.silentN(key)
+	local searchQuery = key == "<CR>" and vim.fn.getcmdline() or vim.fn.getreg("/")
+	local notFound = vim.fn.search(searchQuery, "n") == 0 -- `n` = no movement
+	if notFound then
+		if key == "<CR>" then feedkey("<C-c>") end -- leave cmdline
+		local msg = ("[%s] not found."):format(searchQuery)
+		vim.notify(msg, vim.log.levels.TRACE, { icon = " ", style = "minimal" })
 		return
 	end
 
-	vim.notify(
-		("[%s] not found."):format(searchQuery),
-		vim.log.levels.TRACE,
-		{ icon = " ", style = "minimal" }
-	)
+	if key == "<CR>" then
+		feedkey("<CR>")
+	elseif key ~= "<CR>" then
+		vim.cmd.normal { key, bang = true }
+	end
 end
+
+
 
 --------------------------------------------------------------------------------
 return M

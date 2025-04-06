@@ -40,12 +40,24 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 keymap("n", "#", ";", { desc = " Repeat fFtT" })
 keymap("n", "'", ",", { desc = " Repeat fFtT backwards" })
 
-for _, key in pairs { "n", "N" } do
+do
+	keymap(
+		"c",
+		"<CR>",
+		function() require("personal-plugins.misc").silentSearch("<CR>") end,
+		{ desc = " Silent <CR>" }
+	)
 	keymap(
 		"n",
-		key,
-		function() require("personal-plugins.misc").silentNn(key) end,
-		{ desc = " Silent n/N" }
+		"n",
+		function() require("personal-plugins.misc").silentSearch("n") end,
+		{ desc = " Silent n" }
+	)
+	keymap(
+		"n",
+		"N",
+		function() require("personal-plugins.misc").silentSearch("N") end,
+		{ desc = " Silent N" }
 	)
 end
 
@@ -153,8 +165,8 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
 --------------------------------------------------------------------------------
 -- QUICKFIX
-keymap("n", "gq", function () vim.cmd("silent cnext") end, { desc = "󰒭 Next quickfix" })
-keymap("n", "gQ", function () vim.cmd("silent cprev") end, { desc = "󰒮 Prev quickfix" })
+keymap("n", "gq", function() vim.cmd("silent cnext") end, { desc = "󰒭 Next quickfix" })
+keymap("n", "gQ", function() vim.cmd("silent cprev") end, { desc = "󰒮 Prev quickfix" })
 keymap(
 	"n",
 	"<leader>qd",
