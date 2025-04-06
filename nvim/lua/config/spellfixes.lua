@@ -1,4 +1,5 @@
 local spellfixes = {
+	iocn = "icon",
 	Brwoser = "Browser",
 	Markdwon = "Markdown",
 	THe = "The",

@@ -265,6 +265,7 @@ function M.formatWithFallback()
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
+		vim.notify("Formatting with fallback.", nil, { title = "Format", icon = "󱉯" })
 	end
 end
 
@@ -321,12 +322,20 @@ end
 
 ---@param key "n"|"N"
 function M.silentNn(key)
-	local forward = key == "n" 
 	local searchQuery = vim.fn.getreg("/")
-	local found = vim.fn.search(searchQuery, forward and "n" or "N")
-	if found == 0 then return end
-	local dir = forward and "nzz" or "Nzz"
-	vim.api.nvim_feedkeys(dir, "n", true)
+	local count = vim.fn.searchcount()
+	if vim.tbl_isempty(count) then return end -- e.g. new shada file
+	local found = count.total > 0
+	if found then
+		vim.cmd.normal { key, bang = true }
+		return
+	end
+
+	vim.notify(
+		("[%s] not found."):format(searchQuery),
+		vim.log.levels.TRACE,
+		{ icon = " ", style = "minimal" }
+	)
 end
 
 --------------------------------------------------------------------------------

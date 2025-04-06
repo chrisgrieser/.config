@@ -37,7 +37,17 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
-keymap("x", "#", ";", { desc = " Repeat fFtT" })
+keymap("n", "#", ";", { desc = " Repeat fFtT" })
+keymap("n", "'", ",", { desc = " Repeat fFtT backwards" })
+
+for _, key in pairs { "n", "N" } do
+	keymap(
+		"n",
+		key,
+		function() require("personal-plugins.misc").silentNn(key) end,
+		{ desc = " Silent n/N" }
+	)
+end
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
@@ -236,7 +246,6 @@ end, { desc = "󰘳 Copy last ex-cmd" })
 -- SURROUND
 
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
-keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
 keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
