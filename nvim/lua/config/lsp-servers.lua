@@ -114,13 +114,13 @@ local efmConfig = {
 			},
 		},
 	},
-	-- just = {
-	-- 	{
-	-- 		formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
-	-- 		formatStdin = false,
-	-- 		rootMarkers = { "Justfile", ".justfile" },
-	-- 	},
-	-- },
+	just = {
+		{ -- PENDING https://github.com/terror/just-lsp/issues/49
+			formatCommand = 'just --fmt --unstable --justfile="${INPUT}" ; cat "${INPUT}"',
+			formatStdin = false,
+			rootMarkers = { "Justfile", ".justfile" },
+		},
+	},
 }
 
 M.serverConfigs.efm = {
