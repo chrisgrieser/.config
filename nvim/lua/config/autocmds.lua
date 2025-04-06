@@ -157,7 +157,7 @@ local function searchCountIndicator(mode)
 
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local count = vim.fn.searchcount()
-	if count.total == 0 then return end
+	if vim.tbl_isempty(count) or count.total == 0 then return end
 	local text = (" %d/%d "):format(count.current, count.total)
 	local line = vim.api.nvim_get_current_line():gsub("\t", (" "):rep(vim.bo.shiftwidth))
 	local lineFull = #line + signColumnPlusScrollbarWidth >= vim.api.nvim_win_get_width(0)
