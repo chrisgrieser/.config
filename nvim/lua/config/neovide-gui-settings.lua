@@ -20,7 +20,7 @@ elseif isAtOffice then
 	vim.g.neovide_padding_left = 2
 else
 	vim.g.neovide_scale_factor = 1
-	vim.g.neovide_refresh_rate = 60
+	vim.g.neovide_refresh_rate = 45
 	vim.g.neovide_padding_top = 15
 	vim.g.neovide_padding_left = 7
 end
@@ -60,6 +60,8 @@ do -- only active when `multigrid` is enabled in `neovide/config.toml`
 	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some plugin windows
 	vim.g.neovide_floating_shadow = false -- looks weird with some plugin windows
 	vim.g.neovide_position_animation_length = 0.15 -- windows movement speed
+	vim.g.neovide_floating_blur_amount_x = 4.0
+	vim.g.neovide_floating_blur_amount_y = 4.0
 end
 
 --------------------------------------------------------------------------------

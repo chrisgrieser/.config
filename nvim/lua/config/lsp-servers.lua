@@ -28,6 +28,7 @@ local lspToMasonMap = {
 	ts_query_ls = "ts_query_ls", -- tree-sitter query files
 	typos_lsp = "typos-lsp", -- spellchecker for code
 	yamlls = "yaml-language-server",
+	just = "just-lsp",
 }
 
 ---@module "lspconfig"
