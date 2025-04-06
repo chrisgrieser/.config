@@ -153,8 +153,8 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
 --------------------------------------------------------------------------------
 -- QUICKFIX
-keymap("n", "gq", "]q", { desc = "󰒭 Next quickfix", remap = true })
-keymap("n", "gQ", "[q", { desc = "󰒮 Prev quickfix", remap = true })
+keymap("n", "gq", function () vim.cmd("silent cnext") end, { desc = "󰒭 Next quickfix" })
+keymap("n", "gQ", function () vim.cmd("silent cprev") end, { desc = "󰒮 Prev quickfix" })
 keymap(
 	"n",
 	"<leader>qd",

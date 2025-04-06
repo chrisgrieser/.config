@@ -390,7 +390,7 @@ return {
 				qflist_and_go = function(picker)
 					picker:action("qflist")
 					vim.cmd.cclose()
-					vim.cmd.cfirst()
+					vim.cmd("silent cfirst")
 				end,
 			},
 			prompt = " ", -- slightly to the left
