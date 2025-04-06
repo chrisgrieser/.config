@@ -78,6 +78,6 @@ vim.g.neovide_cursor_animation_length = 0.03
 vim.g.neovide_cursor_trail_size = 1.0 -- 0-1, long trail
 vim.g.neovide_cursor_vfx_mode = "railgun" -- railgun|torpedo|pixiedust|sonicboom|ripple|wireframe
 
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
-vim.g.neovide_cursor_vfx_particle_density = 1.0
-vim.g.neovide_cursor_vfx_particle_speed = 5
+vim.g.neovide_cursor_vfx_particle_lifetime = 1.5
+vim.g.neovide_cursor_vfx_particle_density = 1.5
+vim.g.neovide_cursor_vfx_particle_speed = 20

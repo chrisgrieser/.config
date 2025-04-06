@@ -44,19 +44,19 @@ do
 	keymap(
 		"c",
 		"<CR>",
-		function() require("personal-plugins.misc").silentSearch("<CR>") end,
+		function() require("personal-plugins.misc").silentCR() end,
 		{ desc = " Silent <CR>" }
 	)
 	keymap(
 		"n",
 		"n",
-		function() require("personal-plugins.misc").silentSearch("n") end,
+		function() require("personal-plugins.misc").silentN("n") end,
 		{ desc = " Silent n" }
 	)
 	keymap(
 		"n",
 		"N",
-		function() require("personal-plugins.misc").silentSearch("N") end,
+		function() require("personal-plugins.misc").silentN("N") end,
 		{ desc = " Silent N" }
 	)
 end
