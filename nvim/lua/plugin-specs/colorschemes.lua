@@ -52,9 +52,6 @@ local themes = {
 					SpellRare = { style = "underdotted" },
 					SpellLocal = { style = "underdotted" },
 
-					-- eyeliner.nvim
-					EyelinerSecondary = { fg = "palette.blue" },
-
 					-- `mini.icons`
 					MiniIconsGrey = { fg = "#767676" },
 
@@ -123,15 +120,11 @@ local themes = {
 				hl.Bold = { bold = true }
 				hl.Italic = { italic = true }
 
-				-- FIX hlgroup not set when starting in different color scheme
-				hl.TelescopeSelection = { link = "Visual" }
-
 				-- FIX wrong background color for icons of the source `path`
 				hl.BlinkCmpKindFile = { link = "LspKindText" }
 
 				-- make matches stand out more
 				hl.BlinkCmpLabelMatch = { fg = colors.yellow }
-				hl.TelescopeMatching = { fg = colors.yellow }
 
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }

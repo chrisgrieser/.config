@@ -3,24 +3,6 @@
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
-local function highlightErrorsAndPaths(bufnr)
-	vim.defer_fn(function()
-		if not vim.api.nvim_buf_is_valid(bufnr) then return end
-		vim.api.nvim_buf_call(bufnr, function()
-			vim.fn.matchadd("WarningMsg", [[[^/]\+\.lua:\d\+\ze:]])
-			vim.fn.matchadd("WarningMsg", [[E\d\+]])
-		end)
-	end, 1)
-end
-
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Highlight filepaths and error codes in notification buffers",
-	pattern = { "noice", "snacks_notif" },
-	callback = function(ctx) highlightErrorsAndPaths(ctx.buf) end,
-})
-
---------------------------------------------------------------------------------
-
 ---@param idx number|"last"
 local function openNotif(idx)
 	-- CONFIG
@@ -77,7 +59,6 @@ local function openNotif(idx)
 		footer = footer and " " .. footer .. " " or nil,
 		footer_pos = footer and "right" or nil,
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
-		on_buf = function(win) highlightErrorsAndPaths(win.buf) end,
 		wo = {
 			winhighlight = table.concat(highlights, ","),
 			wrap = true,
@@ -111,6 +92,20 @@ end
 
 return {
 	"folke/snacks.nvim",
+	config = function(_, opts)
+		require("snacks").setup(opts)
+
+		-- ignore certain notifications
+		---@diagnostic disable-next-line: duplicate-set-field intentional overwrite
+		vim.notify = function(msg, ...)
+			local ignore = "No code actions available"
+			if msg == ignore then return end
+			Snacks.notifier(msg, ...)
+		end
+
+		-- disable default keymaps to make the `?` help overview less cluttered
+		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+	end,
 	keys = {
 		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
 		{ "<D-9>", function() openNotif("last") end, desc = "󰎟 Last notification" },
