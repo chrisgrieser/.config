@@ -22,7 +22,7 @@ function httpRequest(url) {
  * @return {string} relative date
  */
 function humanRelativeDate(isoDateStr) {
-	const deltaSecs = (+new Date() - +new Date(isoDateStr)) / 1000;
+	const deltaSecs = (Date.now() - +new Date(isoDateStr)) / 1000;
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;

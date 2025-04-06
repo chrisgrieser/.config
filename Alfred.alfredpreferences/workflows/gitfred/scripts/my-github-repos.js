@@ -57,7 +57,7 @@ function run() {
 
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	// `type=all` includes owned repos and member repos
-	const response = httpRequest(`https://api.github.com/users/${username}/repos?type=all&per_page=100`);
+	const response = httpRequest(`https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -77,7 +77,7 @@ function run() {
 				if (!a.isLocal && b.isLocal) return 1;
 				if (a.fork && !b.fork) return 1;
 				if (!a.fork && b.fork) return -1;
-				return b.stargazers_count - a.stargazers_count;
+				return 0; // use sorting from GitHub (updated status)
 			},
 		)
 		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: fine here
@@ -113,7 +113,7 @@ function run() {
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
-				title: `${type}${displayName}`,
+				title: `${type}${repo.name}`,
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
