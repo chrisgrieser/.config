@@ -9,9 +9,9 @@ count-lines:
     #!/usr/bin/env zsh
     find -E . -iregex ".*\.(lua|scm)$" \
         -not -path "./debug/*" -not -path "./templates/*" -print0 |
-        xargs -0 wc -l | 
-        sort --reverse | 
-        cut -c5- | 
+        xargs -0 wc -l |
+        sort --reverse |
+        cut -c5- |
         sed 's|\./||'
 
 # runs minimal config with neovide
