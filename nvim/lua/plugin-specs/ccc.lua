@@ -4,7 +4,7 @@ return {
 	init = function() vim.g.whichkeyAddSpec { "<leader>l", group = " Color" } end,
 	keys = {
 		{ "<leader>##", vim.cmd.CccPick, desc = " Color Picker" },
-		{ "<leade>#c", vim.cmd.CccConvert, desc = " Convert to hsl" },
+		{ "<leader>#c", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	ft = { "css", "zsh", "lua", "toml" },
 	config = function(spec)
