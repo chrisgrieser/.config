@@ -13,6 +13,9 @@ vim.g.icloudSync =
 
 vim.opt.undofile = true -- enables persistent undo history
 vim.opt.undolevels = 1337 -- too high results in increased buffer loading time
+vim.opt.undodir = vim.g.icloudSync .. "/undo"
+
+vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
 vim.opt.swapfile = false -- doesn't help and only creates useless files and notifications
 
 vim.opt.spell = false
@@ -101,14 +104,6 @@ vim.opt.shiftround = true
 vim.opt.smartindent = true
 
 --------------------------------------------------------------------------------
--- DIRECTORIES
-
--- move to custom location where they are synced independently from the dotfiles
-vim.opt.undodir = vim.g.icloudSync .. "/undo"
-vim.opt.shadafile = vim.g.icloudSync .. "/main.shada"
-vim.opt.viewdir = vim.g.icloudSync .. "/views"
-
---------------------------------------------------------------------------------
 -- AUTOMATION
 
 -- read: access cwd via window title
@@ -128,7 +123,6 @@ end
 vim.opt.report = 9001 -- disable most "x more/fewer lines" messages
 vim.opt.shortmess:append("ISs") -- no intro message, disable search count
 vim.opt.cmdheight = 0
-vim.opt.messagesopt = { "hit-enter", "history:1000" }
 
 --------------------------------------------------------------------------------
 -- INVISIBLE CHARS
