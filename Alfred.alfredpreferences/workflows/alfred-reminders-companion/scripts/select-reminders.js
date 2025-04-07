@@ -5,13 +5,13 @@ app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @typedef {Object} reminderObj
+ * @property {string} id
  * @property {string} title
- * @property {string} list
- * @property {string} notes
- * @property {string} externalId
+ * @property {string} notes aka body
  * @property {boolean} isCompleted
  * @property {string} dueDate
- * @property {string} startDate
+ * @property {string} creationDate
+ * @property {string} isAllDay
  */
 
 const isToday = (/** @type {Date} */ aDate) => {
@@ -63,23 +63,9 @@ const urlRegex =
 
 //───────────────────────────────────────────────────────────────────────────
 
+/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	const args = $.NSProcessInfo.processInfo.arguments; // NSArray
-	const argv = [];
-	const argc = args.count;
-	for (let i = 4; i < argc; i++) {
-		// skip 3-word run command at top and this file's name
-		console.log($(args.objectAtIndex(i)).js); // print each argument
-		argv.push(ObjC.unwrap(args.objectAtIndex(i))); // collect arguments
-	}
-	console.log(argv); // print arguments
-	// @ts-expect-error
-	$.exit(0);
-
-	//───────────────────────────────────────────────────────────────────────────
-
-
+function run(argv) {
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 
@@ -87,13 +73,13 @@ function run() {
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
 	/** @type {reminderObj[]} */
-	// const responseJson = JSON.parse(app.doShellScript(shellCmd));
-	const remindersFiltered = responseJson.filter((rem) => {
+	const remindersJson = JSON.parse(argv[0]);
+	const remindersFiltered = remindersJson.filter((rem) => {
 		const dueDate = rem.dueDate && new Date(rem.dueDate);
 		const noDueDate = rem.dueDate === undefined;
 		const openAndDueBeforeToday = !rem.isCompleted && dueDate < endOfToday;
 		const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
-		return openAndDueBeforeToday || completedAndDueToday || noDueDate;
+		return openAndDueBeforeToday || (completedAndDueToday && showCompleted) || noDueDate;
 	});
 
 	const remindersLeftLater = remindersFiltered.length - 1;
@@ -102,7 +88,7 @@ function run() {
 
 	/** @type {AlfredItem[]} */
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, externalId, isCompleted, dueDate } = rem;
+		const { title, notes, id, isCompleted, dueDate } = rem;
 		const body = notes || "";
 		const content = title + "\n" + body;
 		const dueDateObj = new Date(dueDate);
@@ -132,7 +118,7 @@ function run() {
 			subtitle: subtitle,
 			text: { copy: content, largetype: content },
 			variables: {
-				id: externalId,
+				id: id,
 				title: title,
 				body: body,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
