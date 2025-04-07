@@ -35,7 +35,7 @@ func snoozeToTomorrow(reminder: EKReminder) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToEvents { granted, error in
+eventStore.requestFullAccessToReminders { granted, error in
 	if let reminder = eventStore.calendarItem(withIdentifier: reminderId) as? EKReminder {
 
 		// modify

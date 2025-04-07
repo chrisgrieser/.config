@@ -8,11 +8,10 @@ keymap("n", "<D-,>", function()
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by neovide)
-keymap("n", "<D-q>", vim.cmd.wqall, { desc = "󰑓 Save & quit", unique = false })
+keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
-local pluginDir = vim.fn.stdpath("data") --[[@as string]]
-keymap("n", "<leader>pd", function() vim.ui.open(pluginDir) end, { desc = "󰝰 Plugin dir" })
-
+-- stylua: ignore
+keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir" })
 keymap("n", "<leader>ps", function() vim.ui.open(vim.g.icloudSync) end, { desc = "󰝰 Sync dir" })
 
 --------------------------------------------------------------------------------
@@ -37,28 +36,13 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 -- Search
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
-keymap("n", "#", ";", { desc = " Repeat fFtT" })
-keymap("n", "'", ",", { desc = " Repeat fFtT backwards" })
 
 do
-	keymap(
-		"c",
-		"<CR>",
-		function() require("personal-plugins.misc").silentCR() end,
-		{ desc = " Silent <CR>" }
-	)
-	keymap(
-		"n",
-		"n",
-		function() require("personal-plugins.misc").silentN("n") end,
-		{ desc = " Silent n" }
-	)
-	keymap(
-		"n",
-		"N",
-		function() require("personal-plugins.misc").silentN("N") end,
-		{ desc = " Silent N" }
-	)
+	-- stylua: ignore start
+	keymap("c", "<CR>", function() require("personal-plugins.misc").silentCR() end, { desc = " Silent <CR>" })
+	keymap("n", "n", function() require("personal-plugins.misc").silentN("n") end, { desc = " Silent n" })
+	keymap("n", "N", function() require("personal-plugins.misc").silentN("N") end, { desc = " Silent N" })
+	-- stylua: ignore end
 end
 
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
@@ -70,12 +54,8 @@ keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
 
 -- stylua: ignore
 keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })
-keymap(
-	"n",
-	"gk",
-	function() require("personal-plugins.misc").goIndent("up") end,
-	{ desc = "󰛃 indent up" }
-)
+-- stylua: ignore
+keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
 
 --------------------------------------------------------------------------------
 -- MARKS
@@ -90,12 +70,8 @@ do
 	-- stylua: ignore end
 
 	for _, mark in pairs(marks) do
-		keymap(
-			"n",
-			"<leader>m" .. mark:lower(),
-			function() require("personal-plugins.marks").setUnsetMark(mark) end,
-			{ desc = "󰃃 Set " .. mark }
-		)
+		-- stylua: ignore
+		keymap("n", "<leader>m" .. mark:lower(), function() require("personal-plugins.marks").setUnsetMark(mark) end, { desc = "󰃃 Set " .. mark })
 	end
 end
 
@@ -494,7 +470,7 @@ keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel =
 keymap("n", "<leader>ol", function()
 	vim.notify("Restarting…", vim.log.levels.TRACE, { title = "LSP", icon = "󰑓" })
 	vim.lsp.stop_client(vim.lsp.get_clients())
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reloads -> re-attach LSPs
+	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload by `:edit` -> re-attach LSPs
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------

@@ -895,6 +895,14 @@ brew uninstall keith/formulae/reminders-cli
 brew untap keith/formulae
 ```
 
+### Permissions
+For this workflow to work, Alfred requires permissions to control Reminders.app. 
+If you are not prompted to add them, try:
+- `System Settings` → `Privacy` → `Reminders`
+- `Preferences` → `Privacy` → `Automation` → `Alfred 5`
+- Restarting Alfred. You can quit Alfred from the `Alfred Preferences` → `General` 
+  → `Quit Alfred`, and then start Alfred again from your `Applications` folder.
+
 ---
 
 ## Usage
@@ -1251,7 +1259,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

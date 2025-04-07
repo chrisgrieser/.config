@@ -17,7 +17,7 @@ let semaphore = DispatchSemaphore(value: 0)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToEvents { granted, error in
+eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
 		print("❌ Error requesting access: \(error.localizedDescription)")
 		semaphore.signal()
