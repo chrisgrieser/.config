@@ -388,8 +388,10 @@ return {
 					picker:close()
 				end,
 				qflist_and_go = function(picker)
+					Chainsaw(picker) -- 🪚
 					picker:action("qflist")
 					vim.cmd.cclose()
+					vim.fn.setqflist({}, "a", { title = "xx" })
 					vim.cmd("silent cfirst")
 					vim.cmd.normal { "zv", bang = true } -- open folds
 				end,
