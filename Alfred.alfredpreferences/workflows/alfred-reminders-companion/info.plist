@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</string>
+				<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -70,31 +70,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>DAC3E3E8-676A-424E-9B1A-33408AA272C9</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<array>
 			<dict>
@@ -115,7 +90,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -183,7 +158,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -305,6 +280,16 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -482,6 +467,38 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
+						<string>{var:keepOpen}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>true</string>
+						<key>outputlabel</key>
+						<string>true</string>
+						<key>uid</key>
+						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>false</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
 						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
@@ -510,32 +527,13 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:isCompleted}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>false</string>
-						<key>outputlabel</key>
-						<string></string>
-						<key>uid</key>
-						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>&gt; 0</string>
-				<key>hideelse</key>
-				<true/>
+				<key>unstackview</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
+			<string>alfred.workflow.utility.hidealfred</string>
 			<key>uid</key>
-			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
+			<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -643,13 +641,13 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:isCompleted}</string>
+						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>false</string>
+						<string>toggle-completed</string>
 						<key>outputlabel</key>
 						<string></string>
 						<key>uid</key>
@@ -743,29 +741,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
 				<string>./scripts/quick-add-reminder.js</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -822,38 +797,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>\S</string>
-						<key>outputlabel</key>
-						<string>valid</string>
-						<key>uid</key>
-						<string>DAC3E3E8-676A-424E-9B1A-33408AA272C9</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>no sel</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -861,14 +804,14 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string></string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>⚠️ No text to append.</string>
+				<string>✅ Added Reminder ({var:selectedDate})</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</string>
+			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -933,6 +876,29 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>./scripts/sketchybar-update.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>./scripts/add-reminder-at-date.js</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -943,27 +909,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder ({var:selectedDate})</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -996,7 +941,6 @@ brew untap keith/formulae
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  again to hide completed reminders again.
 - Quickly add a new reminder due today with the keyword `qq`.
-- Add a reminder due at a future date with the keyword `atdate`.
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -1023,15 +967,6 @@ brew untap keith/formulae
 			<key>ypos</key>
 			<real>325</real>
 		</dict>
-		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>510</real>
-			<key>ypos</key>
-			<real>745</real>
-		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
 			<key>colorindex</key>
@@ -1051,15 +986,6 @@ brew untap keith/formulae
 			<real>545</real>
 			<key>ypos</key>
 			<real>210</real>
-		</dict>
-		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>405</real>
-			<key>ypos</key>
-			<real>640</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
@@ -1088,9 +1014,9 @@ brew untap keith/formulae
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>680</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>40</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1106,7 +1032,7 @@ brew untap keith/formulae
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>515</real>
 			<key>ypos</key>
 			<real>620</real>
 		</dict>
@@ -1117,16 +1043,16 @@ brew untap keith/formulae
 			<key>note</key>
 			<string>show completed</string>
 			<key>xpos</key>
-			<real>683</real>
+			<real>583</real>
 			<key>ypos</key>
-			<real>130</real>
+			<real>125</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1050</real>
+			<real>1020</real>
 			<key>ypos</key>
 			<real>275</real>
 		</dict>
@@ -1157,9 +1083,9 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>510</real>
+			<real>515</real>
 			<key>ypos</key>
-			<real>865</real>
+			<real>755</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
@@ -1186,11 +1112,11 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>only if task is not completed already</string>
+			<string>keep open?</string>
 			<key>xpos</key>
-			<real>1000</real>
+			<real>978</real>
 			<key>ypos</key>
-			<real>145</real>
+			<real>120</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1221,9 +1147,18 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>1125</real>
+			<real>1075</real>
 			<key>ypos</key>
-			<real>530</real>
+			<real>755</real>
+		</dict>
+		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>xpos</key>
+			<real>1065</real>
+			<key>ypos</key>
+			<real>145</real>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>
@@ -1301,27 +1236,6 @@ to set a hotkey to show reminders due today</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>quickadd_reminder_keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>atdate</string>
-				<key>placeholder</key>
-				<string>qqq</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>quick add new reminder due at future date</string>
-			<key>label</key>
-			<string></string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>timed_reminder_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>

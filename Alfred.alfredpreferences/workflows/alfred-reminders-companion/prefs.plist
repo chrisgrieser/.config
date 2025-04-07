@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>only_low_prio</key>
-	<true/>
 	<key>quickadd_reminder_keyword</key>
 	<string>,</string>
 	<key>reminder_list</key>
@@ -12,9 +10,5 @@
 	<string>|</string>
 	<key>sketchybar_trigger_name</key>
 	<string>update_reminder_count</string>
-	<key>sort_order</key>
-	<string>newest_first</string>
-	<key>timed_reminder_keyword</key>
-	<string>,,</string>
 </dict>
 </plist>

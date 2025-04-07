@@ -5,7 +5,7 @@ import Foundation
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 let reminderId = ProcessInfo.processInfo.environment["id"]!
-let modification = ProcessInfo.processInfo.environment["modification"]!
+let mode = ProcessInfo.processInfo.environment["mode"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
 func toggleCompleted(reminder: EKReminder) {
@@ -36,9 +36,9 @@ eventStore.requestFullAccessToEvents { granted, error in
 	if let reminder = eventStore.calendarItem(withIdentifier: reminderId) as? EKReminder {
 
 		// modify
-		if modification == "toggle-completed" {
+		if mode == "toggle-completed" {
 			toggleCompleted(reminder: reminder)
-		} else if modification == "snooze" {
+		} else if mode == "snooze" {
 			snoozeToTomorrow(reminder: reminder)
 		}
 
