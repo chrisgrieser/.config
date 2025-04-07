@@ -39,6 +39,7 @@ return {
 		vim.g.lualineAdd("sections", "lualine_x", {
 			require("chainsaw.visuals.statusline").countInBuffer,
 			color = "lualine_x_diagnostics_info_normal", -- only lualine hlgroups have correct bg
+			padding = { left = 0, right = 1 }
 		})
 	end,
 	init = function(spec)

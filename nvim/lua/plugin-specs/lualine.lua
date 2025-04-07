@@ -36,10 +36,10 @@ return {
 		options = {
 			globalstatus = true,
 			always_divide_middle = false,
-			section_separators = { left = "", right = "" },
-			component_separators = { left = "│", right = "│" },
+			section_separators = { left = "", right = "" }, -- save space
+			component_separators = { left = "", right = "" },
 
-			-- so file name is still visible when renaming
+			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
 		tabline = {

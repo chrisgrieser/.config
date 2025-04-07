@@ -86,19 +86,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1C308170-31CE-473C-8E0C-877B332592E9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DD4D7D4A-A634-4749-9FF3-0B30C457728F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1DF97820-45AE-401B-8A39-175A6F0EB9BC</key>
 		<array>
 			<dict>
@@ -129,7 +116,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -142,7 +129,20 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>31863275-806D-4825-9F48-93BCCEA389E7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2B84625B-5C46-44F6-BFEE-B191D844A7AE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,7 +194,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -213,7 +213,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>57C2099D-D6D6-486C-B9E6-A9005C4253DF</key>
@@ -239,7 +239,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>93776F8A-CF4E-4A33-A222-621DFF193536</key>
@@ -301,7 +301,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>A51066A2-90E9-43BC-A689-373B76D3219F</key>
@@ -327,7 +327,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>ACE9CB62-2940-4F36-B8CB-8A5FF6776480</key>
@@ -360,7 +360,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -379,7 +379,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 		<key>C6E77CFC-EC75-4DC2-8B4B-BD9E21B34C98</key>
@@ -399,7 +399,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
+				<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -426,19 +426,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>89B87E1B-141D-4F20-A450-01A53B8A1009</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>DD4D7D4A-A634-4749-9FF3-0B30C457728F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>2B84625B-5C46-44F6-BFEE-B191D844A7AE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -514,6 +501,50 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>ein</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Add to shopping list: "{query}"</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>93776F8A-CF4E-4A33-A222-621DFF193536</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/add-to-shopping-list.applescript</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>43E23DEE-9CD4-4887-A9EE-796131D55BBA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
 				<string>sync</string>
@@ -579,50 +610,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>ein</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Add to shopping list: "{query}"</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>93776F8A-CF4E-4A33-A222-621DFF193536</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-to-shopping-list.applescript</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>43E23DEE-9CD4-4887-A9EE-796131D55BBA</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>type</key>
 				<integer>3</integer>
 			</dict>
@@ -672,6 +659,29 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/create-link-file.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>keyword</key>
@@ -711,25 +721,23 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>karabiner</string>
+				<key>subtext</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/create-link-file.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>text</key>
+				<string>🔁 Toggle Karabiner Elements</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>B3D6F6A7-7A87-4747-BAD3-E56EA6466ACB</string>
+			<string>1DF97820-45AE-401B-8A39-175A6F0EB9BC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -778,21 +786,21 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>karabiner</string>
-				<key>subtext</key>
+				<key>browser</key>
+				<string>com.apple.Safari</string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
 				<string></string>
-				<key>text</key>
-				<string>🔁 Toggle Karabiner Elements</string>
-				<key>withspace</key>
-				<false/>
+				<key>url</key>
+				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>1DF97820-45AE-401B-8A39-175A6F0EB9BC</string>
+			<string>8D0538B5-46D7-4A6B-B800-3C208CB8971B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -838,21 +846,21 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string>com.apple.Safari</string>
-				<key>skipqueryencode</key>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>spell</string>
+				<key>subtext</key>
+				<string>$1: Misspelling     $2: Correct Spelling</string>
+				<key>text</key>
+				<string>Spelling: {query}</string>
+				<key>withspace</key>
 				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>8D0538B5-46D7-4A6B-B800-3C208CB8971B</string>
+			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -883,20 +891,20 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>keyword</key>
-				<string>spell</string>
+				<string>catch</string>
 				<key>subtext</key>
-				<string>$1: Misspelling     $2: Correct Spelling</string>
+				<string>from browser tab</string>
 				<key>text</key>
-				<string>Spelling: {query}</string>
+				<string>❇️ Catch: Add new feed</string>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>A2960A81-02AB-485E-AF91-AEF7B502D533</string>
+			<string>365F15E7-7819-4CA4-BAFF-C616400856DF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -944,27 +952,6 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>catch</string>
-				<key>subtext</key>
-				<string>from browser tab</string>
-				<key>text</key>
-				<string>❇️ Catch: Add new feed</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>365F15E7-7819-4CA4-BAFF-C616400856DF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>passthroughargument</key>
@@ -981,6 +968,25 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>0DF397E6-7179-4A9B-A07A-B32165613998</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>4F88A48E-A6DF-4C8C-922E-0A936051A9B2</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1035,25 +1041,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>C6E77CFC-EC75-4DC2-8B4B-BD9E21B34C98</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>4F88A48E-A6DF-4C8C-922E-0A936051A9B2</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1123,33 +1110,23 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>focusedappvariablename</key>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string></string>
-				<key>hotkey</key>
-				<integer>5</integer>
-				<key>hotmod</key>
-				<integer>1835008</integer>
-				<key>hotstring</key>
-				<string>G</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>2</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<key>title</key>
+				<string>⚠️ No Finder window</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>0AC03754-13D8-4231-A82E-CCA1581406FA</string>
+			<string>9C423BD7-E972-413B-8783-5B9CDCDD5647</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1177,23 +1154,33 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>title</key>
-				<string>⚠️ No Finder window</string>
+				<key>hotkey</key>
+				<integer>5</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>G</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>9C423BD7-E972-413B-8783-5B9CDCDD5647</string>
+			<string>0AC03754-13D8-4231-A82E-CCA1581406FA</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1283,6 +1270,25 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>37AE0BE6-DE2D-4A7D-8A96-784C4A613849</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>acceptsfiles</key>
 				<false/>
 				<key>acceptsmulti</key>
@@ -1323,25 +1329,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<string>1F393412-6A91-43CA-8572-616896667E87</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>37AE0BE6-DE2D-4A7D-8A96-784C4A613849</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1389,7 +1376,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>Proofread</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -1465,24 +1452,9 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>DD4D7D4A-A634-4749-9FF3-0B30C457728F</string>
+			<string>31863275-806D-4825-9F48-93BCCEA389E7</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict/>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/macOS/app.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>1C308170-31CE-473C-8E0C-877B332592E9</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1704,15 +1676,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>585</real>
 		</dict>
-		<key>1C308170-31CE-473C-8E0C-877B332592E9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>335</real>
-			<key>ypos</key>
-			<real>1250</real>
-		</dict>
 		<key>1DF97820-45AE-401B-8A39-175A6F0EB9BC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1756,7 +1719,7 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>colorindex</key>
 			<integer>3</integer>
 			<key>xpos</key>
-			<real>650</real>
+			<real>470</real>
 			<key>ypos</key>
 			<real>1250</real>
 		</dict>
@@ -1768,6 +1731,17 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>720</real>
 			<key>ypos</key>
 			<real>585</real>
+		</dict>
+		<key>31863275-806D-4825-9F48-93BCCEA389E7</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>trigger Apple Intelligence menu item</string>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>1250</real>
 		</dict>
 		<key>3512A462-2B85-41D9-84EB-A78922ED365E</key>
 		<dict>
@@ -2063,17 +2037,6 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>190</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>DD4D7D4A-A634-4749-9FF3-0B30C457728F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>trigger Apple Intelligence menu item</string>
-			<key>xpos</key>
-			<real>490</real>
-			<key>ypos</key>
-			<real>1250</real>
 		</dict>
 		<key>E6C4554F-2198-42E7-9B8F-FCD645DD3FCC</key>
 		<dict>

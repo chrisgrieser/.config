@@ -30,7 +30,7 @@ return {
 		bigfile = {
 			notify = true,
 			size = 1024 * 1024, -- 1.0MB
-			line_length = 1000, -- useful for minified files
+			line_length = math.huge, -- disable, since buggy with Alfred's `info.plist`
 		},
 		quickfile = {
 			enabled = true,
