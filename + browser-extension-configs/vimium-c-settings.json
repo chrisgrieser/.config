@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "3/30/2025, 10:55:08 AM",
-	"time": 1743324908221,
+	"@time": "4/7/2025, 10:14:03 AM",
+	"time": 1744013643695,
 	"environment": {
 		"extension": "2.11.3",
 		"platform": "mac",
@@ -130,8 +130,9 @@
 		"map <c-v> moveTabToNewWindow # due to my window tiling, this is creating a split, thus same mapping as in nvim",
 		"",
 		"# SCROLLING",
-		"map j scrollDown",
-		"map k scrollUp",
+		"# `keepHover=false` hides the cursor, but has minor performance impact https://github.com/gdh1995/vimium-c/issues/133",
+		"map j scrollDown keepHover=false",
+		"map k scrollUp keepHover=false",
 		"map J scrollDown count=3",
 		"map K scrollUp count=3",
 		"map gg scrollToTop",
