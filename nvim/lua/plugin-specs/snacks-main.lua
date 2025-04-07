@@ -8,8 +8,8 @@ return {
 	lazy = false, -- for quickfile and bigfile
 
 	keys = {
-		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰉚 Next reference" },
-		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
+		{ "#", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
+		{ "'", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<leader>ee",
