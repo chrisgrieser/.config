@@ -376,16 +376,16 @@ local function luckyIndent(bufnr)
 	until #indent > 0
 	local spaces = indent:match(" +")
 
-	-- apply
-	if spaces then
+	-- apply if needed
+	local opts = { title = "Lucky indent", icon = "󰉶" }
+	if spaces and not vim.bo.expandtab then
 		vim.bo.expandtab = true
-		vim.bo.tabstop = #spaces
 		vim.bo.shiftwidth = #spaces
-	else
+		vim.notify(("Set to %d spaces"):format(#spaces), nil, opts)
+	elseif not spaces and vim.bo.expandtab then
 		vim.bo.expandtab = false
+		vim.notify("Set to tabs", nil, opts)
 	end
-	local msg = spaces and ("%s spaces"):format(#spaces) or "tabs"
-	vim.notify("Set to " .. msg, nil, { title = "Lucky indent", icon = "󰉶" })
 end
 
 vim.api.nvim_create_autocmd("BufReadPost", {

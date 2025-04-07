@@ -39,7 +39,6 @@
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
 - [jbyuki/one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)
-- [jinh0/eyeliner.nvim](https://github.com/jinh0/eyeliner.nvim)
 - [Kaiser-Yang/blink-cmp-git](https://github.com/Kaiser-Yang/blink-cmp-git)
 - [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
