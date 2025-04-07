@@ -13,10 +13,8 @@ guard args.count > 1 else {
 }
 
 let reminderTitle = args[1]
-print("args ", args)
 
-// let reminderList = ProcessInfo.processInfo.environment["reminder-list"]!
-let reminderList = "Tasks"
+let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in

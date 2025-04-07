@@ -5,8 +5,10 @@ import Foundation
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
+
 let reminderId = ProcessInfo.processInfo.environment["id"]!
 let mode = ProcessInfo.processInfo.environment["mode"]!
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 func toggleCompleted(reminder: EKReminder) {

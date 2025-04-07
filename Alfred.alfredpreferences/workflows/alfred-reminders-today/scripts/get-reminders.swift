@@ -13,18 +13,8 @@ struct ReminderOutput: Codable {
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
-// ─────────────────────────────────────────────────────────────────────────────
 
-let args = CommandLine.arguments
-
-guard args.count > 1 else {
-	print("❗ Please provide the name of the Reminder list as an argument.")
-	print("Usage: swift main.swift \"List Name\"")
-	exit(1)
-}
-
-let reminderList = args[1]
-
+let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
