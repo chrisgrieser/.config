@@ -65,21 +65,29 @@ const urlRegex =
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	// parameters
-	const list = $.getenv("reminder_list");
+	const args = $.NSProcessInfo.processInfo.arguments; // NSArray
+	const argv = [];
+	const argc = args.count;
+	for (let i = 4; i < argc; i++) {
+		// skip 3-word run command at top and this file's name
+		console.log($(args.objectAtIndex(i)).js); // print each argument
+		argv.push(ObjC.unwrap(args.objectAtIndex(i))); // collect arguments
+	}
+	console.log(argv); // print arguments
+	// @ts-expect-error
+	$.exit(0);
+
+	//───────────────────────────────────────────────────────────────────────────
+
+
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 
-	// RUN CMD
-	// INFO not filtering for reminders due today, since the filtering should
-	// include reminders with due date in the past or with missing due date.
-	const completedArg = showCompleted ? "--include-completed" : "";
-	const shellCmd = `reminders show "${list}" ${completedArg} --sort=due-date --format=json`;
-
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
+
 	/** @type {reminderObj[]} */
-	const responseJson = JSON.parse(app.doShellScript(shellCmd));
+	// const responseJson = JSON.parse(app.doShellScript(shellCmd));
 	const remindersFiltered = responseJson.filter((rem) => {
 		const dueDate = rem.dueDate && new Date(rem.dueDate);
 		const noDueDate = rem.dueDate === undefined;
@@ -107,8 +115,7 @@ function run() {
 				minute: "2-digit",
 				hour12: false,
 			});
-		const pastDueDate =
-			dueDateObj < startOfToday && relativeDate(dueDateObj)
+		const pastDueDate = dueDateObj < startOfToday && relativeDate(dueDateObj);
 		const missingDueDate = !dueDate && "no due date";
 		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
 			.filter(Boolean)

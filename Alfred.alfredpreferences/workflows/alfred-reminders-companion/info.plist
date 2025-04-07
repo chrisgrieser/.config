@@ -578,17 +578,17 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string></string>
+				<string>swift ./scripts/get-reminders.swift "{var:reminder_list}" | osascript -l JavaScript ./scripts/select-reminders.js</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/select-reminders.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string>Show reminders due today</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
