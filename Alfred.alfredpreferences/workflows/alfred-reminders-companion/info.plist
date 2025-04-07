@@ -38,6 +38,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -47,61 +57,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
-		<array/>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>24171BD8-30B6-4DB8-B641-21B03AAE49EA</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>B1F02C82-A01B-454C-BA1C-075E68FEB824</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -139,16 +99,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>30829801-BAFD-447E-BA3D-5D6AB864A2F7</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Edit Reminder</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
@@ -159,13 +109,13 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>24171BD8-30B6-4DB8-B641-21B03AAE49EA</string>
+				<string>62BBC8B8-CAF7-4036-9E0A-5CDB14399501</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -221,6 +171,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>62BBC8B8-CAF7-4036-9E0A-5CDB14399501</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -319,40 +294,17 @@
 				<false/>
 			</dict>
 		</array>
-		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
+		<key>A915081B-4FBF-46B4-8B5E-AF3C2282A034</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>233B90F3-D8E0-48FC-A81A-89764B3AAC09</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B1F02C82-A01B-454C-BA1C-075E68FEB824</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -384,31 +336,7 @@
 			</dict>
 		</array>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E72DB7E6-B107-4EBF-9EA1-917ECDD0CBE6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E0980533-D7F3-4E31-94E7-3AF042478577</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<array>
 			<dict>
@@ -433,83 +361,6 @@
 	<string>Reminders Companion</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>"{query}"</string>
-				<key>title</key>
-				<string>💾 Updated to</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>233B90F3-D8E0-48FC-A81A-89764B3AAC09</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/edit-reminder.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>behaviour</key>
-				<integer>1</integer>
-				<key>fontmode</key>
-				<integer>1</integer>
-				<key>fontsizing</key>
-				<integer>0</integer>
-				<key>footertext</key>
-				<string>⎋: Cancel       ⏎: Saves Changes       ⇧⏎: Insert Line Break       1st line: title, remaining lines: notes</string>
-				<key>inputfile</key>
-				<string></string>
-				<key>inputtype</key>
-				<integer>0</integer>
-				<key>loadingtext</key>
-				<string></string>
-				<key>outputmode</key>
-				<integer>0</integer>
-				<key>scriptinput</key>
-				<integer>0</integer>
-				<key>spellchecking</key>
-				<integer>1</integer>
-				<key>stackview</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.userinterface.text</string>
-			<key>uid</key>
-			<string>30829801-BAFD-447E-BA3D-5D6AB864A2F7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -627,45 +478,32 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>A78C646D-79C5-477B-965A-11872AC60D39</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:remindersLeftLater}</string>
+						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>0</string>
+						<string>show-completed</string>
 						<key>outputlabel</key>
-						<string>0</string>
+						<string>true</string>
 						<key>uid</key>
 						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>&gt; 0</string>
+				<string>false</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>B1F02C82-A01B-454C-BA1C-075E68FEB824</string>
+			<string>62BBC8B8-CAF7-4036-9E0A-5CDB14399501</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -676,7 +514,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:remindersLeftNow}</string>
+						<string>{var:isCompleted}</string>
 						<key>matchcasesensitive</key>
 						<false/>
 						<key>matchmode</key>
@@ -684,33 +522,20 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 						<key>matchstring</key>
 						<string>false</string>
 						<key>outputlabel</key>
-						<string>no-tasks-left</string>
+						<string></string>
 						<key>uid</key>
-						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>tasks-left-today</string>
+				<string>&gt; 0</string>
 				<key>hideelse</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>24171BD8-30B6-4DB8-B641-21B03AAE49EA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>seconds</key>
-				<string>.1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.delay</string>
-			<key>uid</key>
-			<string>E0980533-D7F3-4E31-94E7-3AF042478577</string>
+			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -779,7 +604,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/complete-reminder.swift</string>
+				<string>./scripts/edit-reminder.swift</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -895,7 +720,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/snooze-reminder.swift</string>
+				<string>./scripts/edit-reminder.swift</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -928,124 +753,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string># THESE VARIABLES MUST BE SET. SEE THE ONEUPDATER README FOR AN EXPLANATION OF EACH.
-readonly remote_info_plist='https://raw.githubusercontent.com/chrisgrieser/alfred-reminders-companion/main/info.plist'
-readonly workflow_url='chrisgrieser/alfred-reminders-companion'
-readonly download_type='github_release'
-readonly frequency_check='3'
-
-# FROM HERE ON, CODE SHOULD BE LEFT UNTOUCHED!
-function abort {
-  echo "${1}" &gt;&amp;2
-  exit 1
-}
-
-function url_exists {
-  curl --silent --location --output /dev/null --fail --range 0-0 "${1}"
-}
-
-function notification {
-  local -r notificator="$(find . -type f -name 'notificator')"
-
-  if [[ -f "${notificator}" &amp;&amp; "$(/usr/bin/file --brief --mime-type "${notificator}")" == 'text/x-shellscript' ]]; then
-    "${notificator}" --message "${1}" --title "${alfred_workflow_name}" --subtitle 'A new version is available'
-    return
-  fi
-
-  osascript -e "display notification \"${1}\" with title \"${alfred_workflow_name}\" subtitle \"A new version is available\""
-}
-
-# Local sanity checks
-readonly local_info_plist='info.plist'
-readonly local_version="$(/usr/libexec/PlistBuddy -c 'print version' "${local_info_plist}")"
-
-[[ -n "${local_version}" ]] || abort 'You need to set a workflow version in the configuration sheet.'
-[[ "${download_type}" =~ ^(direct|page|github_release)$ ]] || abort "'download_type' (${download_type}) needs to be one of 'direct', 'page', or 'github_release'."
-[[ "${frequency_check}" =~ ^[0-9]+$ ]] || abort "'frequency_check' (${frequency_check}) needs to be a number."
-
-# Check for updates
-if [[ $(find "${local_info_plist}" -mtime +"${frequency_check}"d) ]]; then
-  # Remote sanity check
-  if ! url_exists "${remote_info_plist}"; then
-    abort "'remote_info_plist' (${remote_info_plist}) appears to not be reachable."
-  fi
-
-  readonly tmp_file="$(mktemp)"
-  curl --silent --location --output "${tmp_file}" "${remote_info_plist}"
-  readonly remote_version="$(/usr/libexec/PlistBuddy -c 'print version' "${tmp_file}")"
-  rm "${tmp_file}"
-
-  if [[ "${local_version}" == "${remote_version}" ]]; then
-    touch "${local_info_plist}" # Reset timer by touching local file
-    exit 0
-  fi
-
-  if [[ "${download_type}" == 'page' ]]; then
-    notification 'Opening download page…'
-    open "${workflow_url}"
-    exit 0
-  fi
-
-  readonly download_url="$(
-    if [[ "${download_type}" == 'github_release' ]]; then
-      osascript -l JavaScript -e 'function run(argv) { return JSON.parse(argv[0])["assets"].find(asset =&gt; asset["browser_download_url"].endsWith(".alfredworkflow"))["browser_download_url"] }' "$(curl --silent "https://api.github.com/repos/${workflow_url}/releases/latest")"
-    else
-      echo "${workflow_url}"
-    fi
-  )"
-
-  if url_exists "${download_url}"; then
-    notification 'Downloading and installing…'
-    readonly download_name="$(basename "${download_url}")"
-    curl --silent --location --output "${HOME}/Downloads/${download_name}" "${download_url}"
-    open "${HOME}/Downloads/${download_name}"
-  else
-    abort "'workflow_url' (${download_url}) appears to not be reachable."
-  fi
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E72DB7E6-B107-4EBF-9EA1-917ECDD0CBE6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder (today)</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1088,6 +795,27 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>✅ Added Reminder (today)</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1239,7 +967,22 @@ fi</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Usage
+	<string>## Info
+Due to the underlying tool (`reminder-cli`) being abandoned, I rewrote this workflow
+to work fully standalone. This has the drawback, that adding selections/browser tabs 
+and editing reminders had to be removed for now. 
+
+On the upside, this workflow now does not require `reminders-cli` anymore, so you can
+uninstall it: 
+
+```bash
+brew uninstall keith/formulae/reminders-cli
+brew untap keith/formulae
+```
+
+---
+
+## Usage
 - Display reminders due today (or overdue) via the keyword `rem`. Alternatively,
   you can also use a
   [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for that.
@@ -1247,27 +990,13 @@ fi</string>
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: If the reminder has a URL, open it in the default browser,
 	  otherwise, copy the reminder's text to the clipboard. Afterward, complete
 	  the reminder.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Edit the reminder in Alfred. (The first line is the
-	  reminder title, the rest is the reminder body.)
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: "Snooze" the reminder by changing its due date to tomorrow.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Display completed reminders due today as well. Using
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  again to hide completed reminders again.
-- Quickly add a new reminder due today with the keyword `qq`. Alternatively, you
-  can also use a
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to add
-  the currently selected text or current browser tab as a reminder.
+- Quickly add a new reminder due today with the keyword `qq`.
 - Add a reminder due at a future date with the keyword `atdate`.
-
-
-## Installation
-This workflow requires the [reminders-cli](https://github.com/keith/reminders-cli):
-
-```bash
-brew install keith/formulae/reminders-cli
-```
-
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -1283,7 +1012,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>620</real>
 		</dict>
 		<key>1486415C-BA88-4276-A021-3773113CAF94</key>
 		<dict>
@@ -1292,7 +1021,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
-			<real>475</real>
+			<real>325</real>
 		</dict>
 		<key>1A97EC3B-9181-4DED-8694-6AC9B3CD04E7</key>
 		<dict>
@@ -1301,7 +1030,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>895</real>
+			<real>745</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1310,18 +1039,9 @@ brew install keith/formulae/reminders-cli
 			<key>note</key>
 			<string>Toggle completed status</string>
 			<key>xpos</key>
-			<real>865</real>
+			<real>850</real>
 			<key>ypos</key>
-			<real>425</real>
-		</dict>
-		<key>233B90F3-D8E0-48FC-A81A-89764B3AAC09</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>925</real>
-			<key>ypos</key>
-			<real>30</real>
+			<real>275</real>
 		</dict>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<dict>
@@ -1330,25 +1050,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
-			<real>360</real>
-		</dict>
-		<key>24171BD8-30B6-4DB8-B641-21B03AAE49EA</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>550</real>
-			<key>ypos</key>
-			<real>280</real>
-		</dict>
-		<key>30829801-BAFD-447E-BA3D-5D6AB864A2F7</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>480</real>
-			<key>ypos</key>
-			<real>30</real>
+			<real>210</real>
 		</dict>
 		<key>3C4A820D-7CF3-4098-9406-6DD4CA028F3D</key>
 		<dict>
@@ -1357,7 +1059,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>405</real>
 			<key>ypos</key>
-			<real>790</real>
+			<real>640</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
@@ -1368,7 +1070,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>110</real>
 		</dict>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
 		<dict>
@@ -1379,25 +1081,25 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>745</real>
 			<key>ypos</key>
-			<real>455</real>
+			<real>305</real>
 		</dict>
 		<key>519B050E-E040-4E66-ADFC-D2784865F13B</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>670</real>
+			<real>680</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>45</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>925</real>
+			<real>1080</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>15</real>
 		</dict>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<dict>
@@ -1406,16 +1108,27 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>620</real>
+		</dict>
+		<key>62BBC8B8-CAF7-4036-9E0A-5CDB14399501</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>show completed</string>
+			<key>xpos</key>
+			<real>683</real>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1000</real>
+			<real>1050</real>
 			<key>ypos</key>
-			<real>425</real>
+			<real>275</real>
 		</dict>
 		<key>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</key>
 		<dict>
@@ -1424,7 +1137,7 @@ brew install keith/formulae/reminders-cli
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>395</real>
+			<real>245</real>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
@@ -1437,7 +1150,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>110</real>
 		</dict>
 		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
 		<dict>
@@ -1446,7 +1159,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>510</real>
 			<key>ypos</key>
-			<real>1015</real>
+			<real>865</real>
 		</dict>
 		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
 		<dict>
@@ -1457,7 +1170,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>755</real>
 		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
@@ -1466,38 +1179,18 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>640</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>450</real>
 		</dict>
-		<key>A78C646D-79C5-477B-965A-11872AC60D39</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>835</real>
-			<key>ypos</key>
-			<real>265</real>
-		</dict>
-		<key>AE66EC2F-3383-4BB5-8AB3-0C28C6ACCC11</key>
+		<key>A915081B-4FBF-46B4-8B5E-AF3C2282A034</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>edit reminder</string>
+			<string>only if task is not completed already</string>
 			<key>xpos</key>
-			<real>755</real>
+			<real>1000</real>
 			<key>ypos</key>
-			<real>30</real>
-		</dict>
-		<key>B1F02C82-A01B-454C-BA1C-075E68FEB824</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>reminders left</string>
-			<key>xpos</key>
-			<real>757</real>
-			<key>ypos</key>
-			<real>275</real>
+			<real>145</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1508,7 +1201,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>770</real>
+			<real>620</real>
 		</dict>
 		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
 		<dict>
@@ -1519,7 +1212,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>245</real>
 			<key>ypos</key>
-			<real>905</real>
+			<real>755</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1530,27 +1223,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>1125</real>
 			<key>ypos</key>
-			<real>680</real>
-		</dict>
-		<key>E0980533-D7F3-4E31-94E7-3AF042478577</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>835</real>
-			<key>ypos</key>
-			<real>320</real>
-		</dict>
-		<key>E72DB7E6-B107-4EBF-9EA1-917ECDD0CBE6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>OneUpdater</string>
-			<key>xpos</key>
-			<real>1295</real>
-			<key>ypos</key>
-			<real>680</real>
+			<real>530</real>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>
@@ -1561,7 +1234,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>600</real>
+			<real>450</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

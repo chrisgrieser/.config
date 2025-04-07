@@ -82,7 +82,6 @@ function run(argv) {
 		return openAndDueBeforeToday || (completedAndDueToday && showCompleted) || noDueDate;
 	});
 
-	const remindersLeftLater = remindersFiltered.length - 1;
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
 
@@ -116,38 +115,39 @@ function run(argv) {
 		const alfredItem = {
 			title: emoji + title,
 			subtitle: subtitle,
-			text: { copy: content, largetype: content },
+			text: { copy: content },
 			variables: {
 				id: id,
 				title: title,
-				body: body,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				showCompleted: showCompleted.toString(),
-				remindersLeftNow: true.toString(),
-				remindersLeftLater: remindersLeftLater, // for deciding whether to loop back
-				modification: "toggle-completed",
+				keepOpen: (remindersFiltered.length > 1).toString(),
+				mode: "toggle-completed",
 			},
 			mods: {
-				// open URL/copy
 				cmd: {
 					arg: url || content,
-					subtitle:
-						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and mark as completed"),
+					subtitle: (url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and complete"),
 					variables: {
+						id: id,
+						title: title,
 						cmdMode: url ? "open-url" : "copy",
 						isCompleted: isCompleted.toString(),
+						mode: "toggle-completed",
 					},
 				},
 				shift: {
-					variables: { modification: "snooze" },
+					variables: {
+						id: id,
+						title: title,
+						mode: "snooze",
+					},
 				},
-				alt: {
-					arg: content,
-					variables: { modification: "edit-content" },
-				},
-				// toggle completed
 				ctrl: {
-					variables: { showCompleted: (!showCompleted).toString() },
+					variables: {
+						showCompleted: (!showCompleted).toString(),
+						mode: "show-completed",
+					},
 				},
 			},
 		};

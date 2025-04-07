@@ -12,19 +12,37 @@ func toggleCompleted(reminder: EKReminder) {
 	reminder.isCompleted = !reminder.isCompleted
 }
 
+func snoozeToTomorrow(reminder: EKReminder) {
+	// Get tomorrow's date
+	let calendar = Calendar.current
+	let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())!
+	var tomorrowComponents = calendar.dateComponents(
+		[.year, .month, .day, .hour, .minute], from: tomorrow)
+
+	// If an all-day reminder, preserve it as all-day
+	let isAllDay =
+		reminder.dueDateComponents?.hour == nil && reminder.dueDateComponents?.minute == nil
+	if isAllDay {
+		tomorrowComponents.hour = nil
+		tomorrowComponents.minute = nil
+	}
+
+	reminder.dueDateComponents = tomorrowComponents
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
 	if let reminder = eventStore.calendarItem(withIdentifier: reminderId) as? EKReminder {
-		// ─────────────────────────────────────────────────────────────────────────────
+
+		// modify
 		if modification == "toggle-completed" {
 			toggleCompleted(reminder: reminder)
 		} else if modification == "snooze" {
-		} else {
-
+			snoozeToTomorrow(reminder: reminder)
 		}
-		// ─────────────────────────────────────────────────────────────────────────────
 
+		// save
 		do {
 			try eventStore.save(reminder, commit: true)
 		} catch {
