@@ -391,6 +391,7 @@ return {
 					picker:action("qflist")
 					vim.cmd.cclose()
 					vim.cmd("silent cfirst")
+					vim.cmd.normal { "zv", bang = true } -- open folds
 				end,
 			},
 			prompt = " ", -- slightly to the left
