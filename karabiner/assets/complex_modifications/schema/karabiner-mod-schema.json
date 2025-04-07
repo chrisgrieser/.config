@@ -78,36 +78,26 @@
 				},
 				"to": {
 					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ToIfAloneElement"
-					}
+					"items": { "$ref": "#/definitions/ToElement" }
 				},
 				"conditions": {
 					"type": "array",
-					"items": {
-						"$ref": "#/definitions/PurpleCondition"
-					}
+					"items": { "$ref": "#/definitions/PurpleCondition" }
 				},
 				"to_if_alone": {
 					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ToIfAloneElement"
-					}
+					"items": { "$ref": "#/definitions/ToElement" }
 				},
 				"to_if_held_down": {
 					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ToIfHeldDown"
-					}
+					"items": { "$ref": "#/definitions/ToElement" }
 				},
 				"parameters": {
 					"$ref": "#/definitions/Parameters"
 				},
 				"to_after_key_up": {
 					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ToAfterKeyUp"
-					}
+					"items": { "$ref": "#/definitions/ToElement" }
 				}
 			},
 			"required": [],
@@ -250,7 +240,7 @@
 			"required": [],
 			"title": "Parameters"
 		},
-		"ToIfAloneElement": {
+		"ToElement": {
 			"type": "object",
 			"additionalProperties": false,
 			"properties": {
@@ -280,10 +270,16 @@
 				},
 				"select_input_source": {
 					"$ref": "#/definitions/SelectInputSource"
+				},
+				"lazy": {
+					"type": "boolean"
+				},
+				"software_function": {
+					"$ref": "#/definitions/SoftwareFunction"
 				}
 			},
 			"required": [],
-			"title": "ToIfAloneElement"
+			"title": "ToElement"
 		},
 		"SelectInputSource": {
 			"type": "object",
@@ -329,40 +325,6 @@
 			},
 			"required": [],
 			"title": "SetVariable"
-		},
-		"ToAfterKeyUp": {
-			"type": "object",
-			"additionalProperties": false,
-			"properties": {
-				"select_input_source": {
-					"$ref": "#/definitions/SelectInputSource"
-				}
-			},
-			"required": [],
-			"title": "ToAfterKeyUp"
-		},
-		"ToIfHeldDown": {
-			"type": "object",
-			"additionalProperties": false,
-			"properties": {
-				"shell_command": {
-					"type": "string"
-				},
-				"pointing_button": {
-					"type": "string"
-				},
-				"key_code": {
-					"type": "string"
-				},
-				"modifiers": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Mandatory"
-					}
-				}
-			},
-			"required": [],
-			"title": "ToIfHeldDown"
 		},
 		"AnchorTo": {
 			"type": "object",
@@ -411,7 +373,7 @@
 				"to": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/PurpleTo"
+						"$ref": "#/definitions/ToElement"
 					}
 				},
 				"parameters": {
@@ -428,19 +390,32 @@
 				"to_if_alone": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/PurpleTo"
+						"$ref": "#/definitions/ToElement"
 					}
 				},
 				"to_after_key_up": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/PurpleTo"
+						"$ref": "#/definitions/ToElement"
 					}
 				},
 				"to_if_held_down": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/PurpleTo"
+						"$ref": "#/definitions/ToElement"
+					}
+				},
+				"to_delayed_action": {
+					"type": "object",
+					"properties": {
+						"to_if_invoked": {
+							"type": "array",
+							"items": { "$ref": "#/definitions/ToElement" }
+						},
+						"to_if_canceled": {
+							"type": "array",
+							"items": { "$ref": "#/definitions/ToElement" }
+						}
 					}
 				}
 			},
@@ -519,50 +494,6 @@
 			},
 			"required": [],
 			"title": "FluffyFrom"
-		},
-		"PurpleTo": {
-			"type": "object",
-			"additionalProperties": false,
-			"properties": {
-				"select_input_source": {
-					"$ref": "#/definitions/SelectInputSource"
-				},
-				"set_variable": {
-					"name": {
-						"type": "string"
-					},
-					"value": {}
-				},
-				"set_notification_message": {
-					"$ref": "#/definitions/SetNotificationMessage"
-				},
-				"key_code": {
-					"type": "string"
-				},
-				"modifiers": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Mandatory"
-					}
-				},
-				"shell_command": {
-					"type": "string"
-				},
-				"lazy": {
-					"type": "boolean"
-				},
-				"software_function": {
-					"$ref": "#/definitions/SoftwareFunction"
-				},
-				"pointing_button": {
-					"type": "string"
-				},
-				"hold_down_milliseconds": {
-					"type": "integer"
-				}
-			},
-			"required": [],
-			"title": "PurpleTo"
 		},
 		"SoftwareFunction": {
 			"type": "object",

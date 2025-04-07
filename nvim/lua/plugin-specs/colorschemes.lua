@@ -58,6 +58,9 @@ local themes = {
 					-- blink.cmp
 					BlinkCmpLabelMatch = { fg = "palette.orange" }, -- make matches stand out more
 					BlinkCmpDocBorder = { link = "FloatBorder" },
+					-- FIX wrong background color for icons of the source `buffer`
+					BlinkCmpKindText = { link = "LspKindText" },
+					Pmenu = { bg = "#e9e2dc" },
 
 					-- blink.cmp.git
 					BlinkCmpGitKindPR = { fg = "palette.orange" },
