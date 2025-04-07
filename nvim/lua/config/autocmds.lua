@@ -204,6 +204,7 @@ local globToTemplateMap = {
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
 
 	["**/*.py"] = "template.py",
+	["**/*.swift"] = "template.swift",
 	["**/*.sh"] = "template.zsh",
 	["**/*.*sh"] = "template.zsh",
 	["**/*.applescript"] = "template.applescript",
