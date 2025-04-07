@@ -14,6 +14,8 @@ struct ReminderOutput: Codable {
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
+// ─────────────────────────────────────────────────────────────────────────────
+
 let args = CommandLine.arguments
 
 guard args.count > 1 else {
@@ -23,6 +25,8 @@ guard args.count > 1 else {
 }
 
 let targetListName = args[1]
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents() { granted, error in
     if let error = error {
