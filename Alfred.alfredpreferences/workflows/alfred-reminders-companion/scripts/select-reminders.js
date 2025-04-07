@@ -120,7 +120,7 @@ function run(argv) {
 				id: id,
 				title: title,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
-				showCompleted: showCompleted.toString(),
+				showCompleted: showCompleted.toString(), // keep "show completed" state
 				keepOpen: (remindersFiltered.length > 1).toString(),
 				mode: "toggle-completed",
 			},
@@ -132,8 +132,7 @@ function run(argv) {
 						id: id,
 						title: title,
 						cmdMode: url ? "open-url" : "copy",
-						isCompleted: isCompleted.toString(),
-						mode: "toggle-completed",
+						mode: isCompleted ? "stop-after" : "toggle-completed",
 					},
 				},
 				shift: {
@@ -163,10 +162,10 @@ function run(argv) {
 					title: "No open tasks for today.",
 					subtitle: "⏎: Show completed tasks.",
 					variables: {
-						remindersLeftNow: false.toString(),
 						showCompleted: true.toString(),
+						mode: "show-completed",
 					},
-					mods: { cmd: invalid, shift: invalid, alt: invalid },
+					mods: { cmd: invalid, shift: invalid },
 				},
 			],
 		});
