@@ -214,11 +214,11 @@ rules:
   #─────────────────────────────────────────────────────────────────────
   - description: (Apps) Neovide
     manipulators:
-      # cmd+h -> cmd+ö for the heading incrementor
+      # cmd+h -> cmd+5 for the heading incrementor
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [command] } }
         to:
-          - { key_code: semicolon, modifiers: [command] } # = ö in German keyboard
+          - { key_code: "5", modifiers: [command] }
         conditions:
           - { type: frontmost_application_if, file_paths: ["[Nn]eovide"] }
   #─────────────────────────────────────────────────────────────────────────────

@@ -34,7 +34,6 @@
 - [echasnovski/mini.operators](https://github.com/echasnovski/mini.operators)
 - [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)
 - [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim)
-- [folke/noice.nvim](https://github.com/folke/noice.nvim)
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
 - [folke/which-key.nvim](https://github.com/folke/which-key.nvim)
