@@ -10,7 +10,6 @@ return { -- treesitter-based textobjs
 		"TSTextobjectSwapPrevious",
 		"TSTextobjectGotoNextStart",
 		"TSTextobjectGotoPreviousStart",
-		"TSTextobjectPeekDefinitionCode",
 	},
 	-- SIC yes, configured via treesitter, not this plugin. Also, calling
 	-- treesitter's `setup` a second time is apparently not a problem.
@@ -23,9 +22,6 @@ return { -- treesitter-based textobjs
 				-- thus staying with `false`
 				include_surrounding_whitespace = false,
 			},
-			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
-				floating_preview_opts = { title = "  Peek " },
-			},
 		},
 	},
 	keys = {
@@ -34,9 +30,6 @@ return { -- treesitter-based textobjs
 		-- MOVE
 		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
 		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
-
-		-- PEEK HOVER
-		{ "<leader>H", "<cmd>TSTextobjectPeekDefinitionCode @class.outer<CR>", desc = " LSP Peek" },
 
 		-- SWAP
 		{ "ä", "<cmd>TSTextobjectSwapNext @parameter.inner<CR>", desc = " Swap next arg" },
