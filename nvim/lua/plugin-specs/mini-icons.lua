@@ -19,19 +19,9 @@ return {
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
 
 			-- plugin-filetypes
-			["snacks_input"] = { glyph = "󰏫" },
-			["snacks_notif"] = { glyph = "󰎟" },
-			["noice"] = { glyph = "󰎟" },
-			["mason"] = { glyph = "" },
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
 		},
 	},
-	config = function(_, opts)
-		require("mini.icons").setup(opts)
-
-		-- plugin still needing the devicons mock: telescope
-		require("mini.icons").mock_nvim_web_devicons()
-	end,
 }

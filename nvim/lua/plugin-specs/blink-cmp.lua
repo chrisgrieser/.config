@@ -80,19 +80,6 @@ local blinkConfig = {
 			["<PageUp>"] = { "scroll_documentation_up", "fallback" },
 			["<D-g>"] = { "hide_signature", "fallback" }, -- fallback shows full signature
 		},
-		cmdline = {
-			keymap = {
-				-- makes the ghost-text accepting behave like `zsh-autosuggestions`
-				["<Right>"] = {
-					function(cmp)
-						if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then
-							return cmp.accept()
-						end
-					end,
-					"fallback",
-				},
-			},
-		},
 		signature = {
 			enabled = true,
 			trigger = { show_on_insert = true },
