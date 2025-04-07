@@ -1,6 +1,7 @@
 #!/usr/bin/env osascript
 on run argv
-	set frontapp to item 1 of instruction
+	set frontapp to item 1 of argv
+	set instruction to (system attribute "task")
 
 	tell application "System Events" to tell process frontapp
 		set frontmost to true -- FIX app loosing focus due to Alfred's compatibility mode

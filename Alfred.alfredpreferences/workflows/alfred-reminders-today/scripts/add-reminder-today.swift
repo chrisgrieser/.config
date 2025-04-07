@@ -18,7 +18,7 @@ let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let when = ProcessInfo.processInfo.environment["when_to_add"]!
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToEvents { granted, error in
+eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
 		print("❌ Error requesting access: \(error.localizedDescription)\n")
 		semaphore.signal()
