@@ -388,10 +388,11 @@ return {
 					picker:close()
 				end,
 				qflist_and_go = function(picker)
-					Chainsaw(picker) -- 🪚
+					local query = vim.api.nvim_get_current_line()
 					picker:action("qflist")
+					vim.fn.setqflist({}, "a", { title = query }) -- add missing title to qflist
+
 					vim.cmd.cclose()
-					vim.fn.setqflist({}, "a", { title = "xx" })
 					vim.cmd("silent cfirst")
 					vim.cmd.normal { "zv", bang = true } -- open folds
 				end,
