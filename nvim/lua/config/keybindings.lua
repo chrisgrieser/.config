@@ -165,8 +165,14 @@ keymap("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent", unique = false })
 
 --------------------------------------------------------------------------------
 -- QUICKFIX
-keymap("n", "gq", function() vim.cmd("silent cnext") end, { desc = "󰒭 Next quickfix" })
-keymap("n", "gQ", function() vim.cmd("silent cprev") end, { desc = "󰒮 Prev quickfix" })
+keymap("n", "gq", function()
+	vim.cmd("silent cnext")
+	vim.cmd.normal { "zv", bang = true } -- open folds
+end, { desc = "󰒭 Next quickfix" })
+keymap("n", "gQ", function()
+	vim.cmd("silent cprev")
+	vim.cmd.normal { "zv", bang = true }
+end, { desc = "󰒮 Prev quickfix" })
 keymap(
 	"n",
 	"<leader>qd",
