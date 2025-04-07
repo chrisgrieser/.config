@@ -33,13 +33,6 @@ return {
 					format_tree = function(tsj) tsj:wrap { left = "{", right = "}" } end,
 				},
 			},
-			return_statement = {
-				join = { enable = false },
-				split = {
-					enable = function(tsn) return tsn:parent():type() == "if_statement" end,
-					format_tree = function(tsj) tsj:wrap { left = "{", right = "}" } end,
-				},
-			},
 		}
 		opts.langs = {
 			comment = { source = gww, element = gww }, -- comments in any language
