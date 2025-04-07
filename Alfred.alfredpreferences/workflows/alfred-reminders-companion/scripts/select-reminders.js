@@ -122,12 +122,10 @@ function run(argv) {
 				title: title,
 				body: body,
 				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
-				mode: isCompleted ? "uncomplete" : "complete",
-				cmdMode: url ? "open-url" : "copy", // only for `cmd`
-				isCompleted: isCompleted.toString(), // only for `cmd`
 				showCompleted: showCompleted.toString(),
 				remindersLeftNow: true.toString(),
 				remindersLeftLater: remindersLeftLater, // for deciding whether to loop back
+				modification: "toggle-completed",
 			},
 			mods: {
 				// open URL/copy
@@ -135,10 +133,17 @@ function run(argv) {
 					arg: url || content,
 					subtitle:
 						(url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and mark as completed"),
+					variables: {
+						cmdMode: url ? "open-url" : "copy",
+						isCompleted: isCompleted.toString(),
+					},
 				},
-				// edit content
+				shift: {
+					variables: { modification: "snooze" },
+				},
 				alt: {
 					arg: content,
+					variables: { modification: "edit-content" },
 				},
 				// toggle completed
 				ctrl: {
