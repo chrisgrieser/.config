@@ -1,16 +1,17 @@
 return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
-	init = function() vim.g.whichkeyAddSpec { "<leader>l", group = " Color" } end,
 	keys = {
-		{ "<leader>##", vim.cmd.CccPick, desc = " Color Picker" },
-		{ "<leader>#c", vim.cmd.CccConvert, desc = " Convert to hsl" },
+		{ "#", vim.cmd.CccPick, desc = " Color picker" },
+		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	ft = { "css", "zsh", "lua", "toml" },
 	config = function(spec)
 		local ccc = require("ccc")
 		ccc.setup {
-			win_opts = { border = vim.o.winborder }, ---@diagnostic disable-line: assign-type-mismatch
+			win_opts = {
+				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+			},
 			highlight_mode = "bg",
 			highlighter = {
 				auto_enable = true,

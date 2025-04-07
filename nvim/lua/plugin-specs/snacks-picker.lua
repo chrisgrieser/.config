@@ -189,7 +189,7 @@ return {
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
 	},
 	opts = {
-		---@class snacks.picker.Config
+		---@type snacks.picker.Config
 		picker = {
 			sources = {
 				files = {

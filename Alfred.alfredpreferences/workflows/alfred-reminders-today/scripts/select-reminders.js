@@ -19,10 +19,6 @@ const isToday = (/** @type {Date} */ aDate) => {
 	return today.toDateString() === aDate.toDateString();
 };
 
-const isAllDayReminder = (/** @type {Date} */ dueDate) => {
-	return dueDate.getHours() === 0 && dueDate.getMinutes() === 0;
-};
-
 /**
  * @param {Date} absDate
  * @return {string} relative date
@@ -76,32 +72,34 @@ function run(argv) {
 	const remindersJson = JSON.parse(argv[0]);
 	const remindersFiltered = remindersJson.filter((rem) => {
 		const dueDate = rem.dueDate && new Date(rem.dueDate);
-		const noDueDate = rem.dueDate === undefined;
+		const openNoDueDate = rem.dueDate === undefined && !rem.isCompleted;
 		const openAndDueBeforeToday = !rem.isCompleted && dueDate < endOfToday;
 		const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
-		return openAndDueBeforeToday || (completedAndDueToday && showCompleted) || noDueDate;
+		return openAndDueBeforeToday || (completedAndDueToday && showCompleted) || openNoDueDate;
 	});
 
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
 
 	/** @type {AlfredItem[]} */
+	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, id, isCompleted, dueDate } = rem;
+		const { title, notes, id, isCompleted, dueDate, isAllDay } = rem;
 		const body = notes || "";
 		const content = title + "\n" + body;
 		const dueDateObj = new Date(dueDate);
 
 		// SUBTITLE: display due time, past due dates, missing due dates, and body
-		const dueTime =
-			!isAllDayReminder(dueDateObj) &&
-			new Date(dueDate).toLocaleTimeString([], {
-				hour: "2-digit",
-				minute: "2-digit",
-				hour12: false,
-			});
-		const pastDueDate = dueDateObj < startOfToday && relativeDate(dueDateObj);
-		const missingDueDate = !dueDate && "no due date";
+		const dueTime = isAllDayReminder(dueDateObj)
+			? ""
+			: new Date(dueDate).toLocaleTimeString([], {
+					hour: "2-digit",
+					minute: "2-digit",
+					hour12: false,
+				});
+		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
+		const missingDueDate = dueDate ? "" : "no due date";
+		console.log("🪚 missingDueDate:", missingDueDate);
 		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
 			.filter(Boolean)
 			.join(" · ");
