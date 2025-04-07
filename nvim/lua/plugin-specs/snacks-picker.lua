@@ -50,7 +50,7 @@ local function betterFileOpen()
 		vim.iter(changes):each(function(line)
 			local relPath = line:sub(4)
 			local change = line:sub(1, 2)
-			if change == "??" then change = "A " end -- just nicer highlights for untracked
+			if change == "??" then change = " A" end -- just nicer highlights for untracked
 			if change:find("R") then relPath = relPath:gsub(".+ -> ", "") end -- renamed
 			local absPath = gitDir .. "/" .. relPath
 			changedFiles[absPath] = change
@@ -404,7 +404,7 @@ return {
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
 					commit = "", -- save some space
-					staged = "󰐖", -- consistent with tiyngit
+					staged = "󰐖", -- consistent with tinygit
 					added = "󰎔",
 					modified = "󰄯",
 					renamed = "󰏬",

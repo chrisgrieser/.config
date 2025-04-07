@@ -230,32 +230,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<array>
 			<dict>
@@ -298,7 +272,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+				<string>CF5F8B8F-25B8-4C59-B9B3-B2D6D44B5F0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -307,11 +281,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
+		<key>CF5F8B8F-25B8-4C59-B9B3-B2D6D44B5F0D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
+				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -343,7 +317,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Reminders Companion</string>
+	<string>Reminders Today</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -401,9 +375,9 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string># "$reminder_list" via Alfred env var
-reminders=$(swift ./scripts/get-reminders.swift "$reminder_list")
-osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
+				<string># "$reminder_list" set by Alfred as environment var
+reminders_json=$(swift ./scripts/get-reminders.swift "$reminder_list")
+osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -688,6 +662,23 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string>'{query}', {variables}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>CF5F8B8F-25B8-4C59-B9B3-B2D6D44B5F0D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -741,7 +732,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/quick-add-reminder.js</string>
+				<string>./scripts/add-reminder-today.swift</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
@@ -749,6 +740,29 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/sketchybar-update.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -794,128 +808,14 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>✅ Added Reminder ({var:selectedDate})</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>83927C8F-D55B-4E36-B93D-23927B1808D5</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:timed_reminder_keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>loading…</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/select-date-for-reminder.js</string>
-				<key>subtext</key>
-				<string>🗓️ Add Reminder at…</string>
-				<key>title</key>
-				<string>{const:alfred_workflow_name}</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>91C4C097-7401-4742-A061-9BF771AD2D00</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/sketchybar-update.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/add-reminder-at-date.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CD1F34B1-A599-4F46-928B-198B877B88A8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Info
 Due to the underlying tool (`reminder-cli`) being abandoned, I rewrote this workflow
-to work fully standalone. This has the drawback, that adding selections/browser tabs 
-and editing reminders had to be removed for now. 
+to work fully standalone. This has the drawback some features had to be removed for now:
+- adding from selection/browser tabs 
+- editing reminders
+- add at a future date
 
 On the upside, this workflow now does not require `reminders-cli` anymore, so you can
 uninstall it: 
@@ -954,9 +854,9 @@ brew untap keith/formulae
 			<key>note</key>
 			<string>add reminder</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>335</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>630</real>
 		</dict>
 		<key>1486415C-BA88-4276-A021-3773113CAF94</key>
 		<dict>
@@ -1016,7 +916,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>690</real>
 			<key>ypos</key>
-			<real>40</real>
+			<real>45</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1032,9 +932,9 @@ brew untap keith/formulae
 			<key>colorindex</key>
 			<integer>2</integer>
 			<key>xpos</key>
-			<real>515</real>
+			<real>490</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>630</real>
 		</dict>
 		<key>62BBC8B8-CAF7-4036-9E0A-5CDB14399501</key>
 		<dict>
@@ -1078,26 +978,6 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>110</real>
 		</dict>
-		<key>83927C8F-D55B-4E36-B93D-23927B1808D5</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>515</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
-		<key>91C4C097-7401-4742-A061-9BF771AD2D00</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>quick add today at future date</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>755</real>
-		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1127,18 +1007,14 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>630</real>
 		</dict>
-		<key>CD1F34B1-A599-4F46-928B-198B877B88A8</key>
+		<key>CF5F8B8F-25B8-4C59-B9B3-B2D6D44B5F0D</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>add at date</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>145</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>430</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1147,9 +1023,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>1075</real>
+			<real>1080</real>
 			<key>ypos</key>
-			<real>755</real>
+			<real>630</real>
 		</dict>
 		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
 		<dict>
