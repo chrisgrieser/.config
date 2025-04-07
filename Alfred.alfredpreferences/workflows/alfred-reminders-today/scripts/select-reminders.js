@@ -140,7 +140,7 @@ function run(argv) {
 				},
 				ctrl: {
 					variables: {
-						showCompleted: (!showCompleted).toString(),
+						showCompleted: (!showCompleted).toString(), // toggle "show completed" state
 						mode: "show-completed",
 					},
 				},

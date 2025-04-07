@@ -229,7 +229,6 @@ end, { desc = "󰘳 Copy last ex-cmd" })
 --------------------------------------------------------------------------------
 -- SURROUND
 
-keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
@@ -471,7 +470,7 @@ keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel =
 keymap("n", "<leader>ol", function()
 	vim.notify("Restarting…", vim.log.levels.TRACE, { title = "LSP", icon = "󰑓" })
 	vim.lsp.stop_client(vim.lsp.get_clients())
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload by `:edit` -> re-attach LSPs
+	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
