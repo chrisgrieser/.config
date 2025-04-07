@@ -393,9 +393,6 @@ keymap("n", "<leader>il", function() require("personal-plugins.misc").lspCapabil
 -- stylua: ignore
 keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo() end, { desc = "󰽙 Buffer info" })
 
--- stylua: ignore
-keymap({ "n", "x" }, "<leader>ee", function() require("personal-plugins.misc").quickEval() end, { desc = " Eval" })
-
 --------------------------------------------------------------------------------
 -- WINDOWS
 

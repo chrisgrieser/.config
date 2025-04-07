@@ -5,14 +5,36 @@
 
 return {
 	"folke/snacks.nvim",
-	event = "BufReadPre",
+	lazy = false, -- for quickfile and bigfile
+
 	keys = {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰉚 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰉚 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
+		{
+			"<leader>ee",
+			function()
+				-- `win.ft = lua` requires Snacks.nvim
+				vim.ui.input({ prompt = " Eval: ", win = { ft = "lua" } }, function(expr)
+					if not expr then return end
+					local result = vim.inspect(vim.fn.luaeval(expr))
+					local opts = { title = "Eval", icon = "", ft = "lua" }
+					vim.notify(result, vim.log.levels.DEBUG, opts)
+				end)
+			end,
+			desc = " Eval",
+		},
 	},
 	---@type snacks.Config
 	opts = {
+		bigfile = {
+			notify = true,
+			size = 1024 * 1024, -- 1.0MB
+			line_length = 1000, -- useful for minified files
+		},
+		quickfile = {
+			enabled = true,
+		},
 		words = {
 			notify_jump = true,
 			modes = { "n" },
@@ -38,8 +60,8 @@ return {
 			},
 			animate = {
 				-- slower for more dramatic effect :D
-				duration = { steps = 200, total = 1000 }
-			}
+				duration = { steps = 200, total = 1000 },
+			},
 		},
 		blame_line = {
 			win = {
