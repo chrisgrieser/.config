@@ -738,7 +738,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<key>subtext</key>
 				<string>today</string>
 				<key>text</key>
-				<string>⊕ Add Reminder: {query}</string>
+				<string>❇️ Add Reminder: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -802,7 +802,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<key>subtext</key>
 				<string>tomorrow</string>
 				<key>text</key>
-				<string>⊕ Add Reminder: {query}</string>
+				<string>✴️ Add Reminder: {query}</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -886,7 +886,6 @@ for now:
 
 - adding from selection/browser tabs
 - editing reminders
-- add at a future date
 
 On the upside, this workflow now does not require `reminders-cli` anymore, so
 you can uninstall it:
@@ -911,7 +910,9 @@ brew untap keith/formulae
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  again to hide completed reminders again.
-- Quickly add a new reminder due today with the keyword `qq`.
+- Quickly add a new reminder
+	+ …due today with the keyword `qq`.
+	+ …due tomorrow with the keyword `qqq`.
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -1250,7 +1251,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
