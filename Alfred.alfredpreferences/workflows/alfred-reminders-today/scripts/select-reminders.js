@@ -14,7 +14,8 @@ app.includeStandardAdditions = true;
  * @property {string} isAllDay
  */
 
-const isToday = (/** @type {Date} */ aDate) => {
+const isToday = (/** @type {Date?} */ aDate) => {
+	if (!aDate) return false;
 	const today = new Date();
 	return today.toDateString() === aDate.toDateString();
 };
@@ -64,22 +65,23 @@ const urlRegex =
 function run(argv) {
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
-
+	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
+	const startOfToday = new Date();
+	startOfToday.setHours(0, 0, 0, 0);
 
 	/** @type {reminderObj[]} */
 	const remindersJson = JSON.parse(argv[0]);
-	const remindersFiltered = remindersJson.filter((rem) => {
-		const dueDate = rem.dueDate && new Date(rem.dueDate);
-		const openNoDueDate = rem.dueDate === undefined && !rem.isCompleted;
-		const openAndDueBeforeToday = !rem.isCompleted && dueDate < endOfToday;
-		const completedAndDueToday = rem.isCompleted && dueDate && isToday(dueDate);
-		return openAndDueBeforeToday || (completedAndDueToday && showCompleted) || openNoDueDate;
-	});
-
-	const startOfToday = new Date();
-	startOfToday.setHours(0, 0, 0, 0);
+	const remindersFiltered = remindersJson
+		.filter((rem) => {
+			const dueDate = rem.dueDate ? new Date(rem.dueDate) : null;
+			const openNoDueDate = includeNoDuedate && rem.dueDate === undefined && !rem.isCompleted;
+			const openAndDueBeforeToday = dueDate && !rem.isCompleted && dueDate < endOfToday;
+			const completedAndDueToday = showCompleted && rem.isCompleted && isToday(dueDate);
+			return openAndDueBeforeToday || completedAndDueToday|| openNoDueDate;
+		})
+		.sort((a, b) => +new Date(a.creationDate) - +new Date(b.creationDate));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -90,16 +92,12 @@ function run(argv) {
 		const dueDateObj = new Date(dueDate);
 
 		// SUBTITLE: display due time, past due dates, missing due dates, and body
-		const dueTime = isAllDayReminder(dueDateObj)
-			? ""
-			: new Date(dueDate).toLocaleTimeString([], {
-					hour: "2-digit",
-					minute: "2-digit",
-					hour12: false,
-				});
+		/** @type {Intl.DateTimeFormatOptions} */
+		const format = { hour: "2-digit", minute: "2-digit", hour12: false };
+		const dueTime = isAllDay ? "" : new Date(dueDate).toLocaleTimeString([], format);
+
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
 		const missingDueDate = dueDate ? "" : "no due date";
-		console.log("🪚 missingDueDate:", missingDueDate);
 		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
 			.filter(Boolean)
 			.join(" · ");
