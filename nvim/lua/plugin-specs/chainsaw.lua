@@ -21,7 +21,7 @@ return {
 				-- Obsidian Notice
 				typescript = "new Notice(`{{marker}} {{var}}: ${{{var}}}`, 0)",
 				-- AppleScript notification
-				zsh = 'osascript -e "display notification "{{marker}}} ${{var}}" with title "{{var}}""',
+				zsh = 'osascript -e "display notification \\"{{marker}} ${{var}}\\" with title \\"{{var}}\\""',
 				-- simple print statements for `snacks`' scratch buffer
 				nvim_lua = "print({{var}}) -- {{marker}}",
 			},

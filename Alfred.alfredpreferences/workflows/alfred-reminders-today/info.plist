@@ -141,6 +141,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5B4E3523-E2C7-4E39-87C0-D157AC551A91</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
 		<array>
 			<dict>
@@ -272,6 +285,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>5B4E3523-E2C7-4E39-87C0-D157AC551A91</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -288,6 +314,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -333,37 +372,6 @@
 			<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<true/>
-				<key>focusedappvariablename</key>
-				<string>focusedapp</string>
-				<key>hotkey</key>
-				<integer>-1</integer>
-				<key>hotmod</key>
-				<integer>262144</integer>
-				<key>hotstring</key>
-				<string>double tap</string>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -419,6 +427,37 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>45E222F3-9910-4038-AA60-1ABC01E95D81</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
+				<string>focusedapp</string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>76767F1C-52B8-425C-8621-F7E67C523434</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -553,27 +592,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{var:title}</string>
-				<key>title</key>
-				<string>{var:notificationTitle}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -593,6 +611,27 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:title}</string>
+				<key>title</key>
+				<string>{var:notificationTitle}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -648,29 +687,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/edit-reminder.swift</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -701,6 +717,70 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>./scripts/edit-reminder.swift</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_today_keyword}</string>
+				<key>subtext</key>
+				<string>today</string>
+				<key>text</key>
+				<string>⊕ Add Reminder: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>when_to_add</key>
+					<string>today</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5B4E3523-E2C7-4E39-87C0-D157AC551A91</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>./scripts/add-reminder-today.swift</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -711,6 +791,27 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>0F93036F-D158-49BB-97AF-DE600B8A3300</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>{var:quickadd_tomorrow_keyword}</string>
+				<key>subtext</key>
+				<string>tomorrow</string>
+				<key>text</key>
+				<string>⊕ Add Reminder: {query}</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -747,7 +848,7 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>✅ Added Reminder (today)</string>
+				<string>✅ Added Reminder ({var:when_to_add})</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -759,21 +860,20 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>{var:quickadd_reminder_keyword}</string>
-				<key>subtext</key>
-				<string>today</string>
-				<key>text</key>
-				<string>➕ Add Reminder: {query}</string>
-				<key>withspace</key>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
 				<true/>
+				<key>variables</key>
+				<dict>
+					<key>when_to_add</key>
+					<string>tomorrow</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>BD7716E2-05C1-4CD2-9B1C-5FD044289103</string>
+			<string>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -889,6 +989,15 @@ brew untap keith/formulae
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
+		<key>5B4E3523-E2C7-4E39-87C0-D157AC551A91</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>510</real>
+		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
 			<key>colorindex</key>
@@ -978,7 +1087,16 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>480</real>
+		</dict>
+		<key>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>660</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1010,6 +1128,17 @@ to set a hotkey to show reminders due today</string>
 			<real>485</real>
 			<key>ypos</key>
 			<real>450</real>
+		</dict>
+		<key>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>quick add tomorrow</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>630</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1060,7 +1189,7 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>today</string>
+				<string>qq</string>
 				<key>placeholder</key>
 				<string>qq</string>
 				<key>required</key>
@@ -1075,7 +1204,28 @@ to set a hotkey to show reminders due today</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>quickadd_reminder_keyword</string>
+			<string>quickadd_today_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>qqq</string>
+				<key>placeholder</key>
+				<string>qqq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>quick add new reminder due tomorrow</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>quickadd_tomorrow_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>

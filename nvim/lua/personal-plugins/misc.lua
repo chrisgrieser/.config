@@ -121,7 +121,7 @@ function M.smartDuplicate()
 		if line:find("right:") then newLine = line:gsub("right:", "left:") end
 		if line:find("left:") then newLine = line:gsub("left:", "right:") end
 		line = newLine
-	elseif ft == "javascript" or ft == "typescript" then
+	elseif ft == "javascript" or ft == "typescript" or ft == "swift" then
 		line = line:gsub("^(%s*)if(.+{)$", "%1} else if%2")
 	elseif ft == "lua" then
 		line = line:gsub("^(%s*)if( .* then)$", "%1elseif%2")

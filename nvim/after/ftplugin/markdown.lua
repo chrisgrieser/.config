@@ -63,7 +63,7 @@ local function headingsIncremantor(dir)
 	vim.api.nvim_win_set_cursor(0, { lnum, col + diff })
 end
 
--- <D-h> remapped to <D-5>, since used by macOS
+-- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
 bkeymap("n", "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
 bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
