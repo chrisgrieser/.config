@@ -389,8 +389,9 @@ return {
 				end,
 				qflist_and_go = function(picker)
 					local query = vim.api.nvim_get_current_line()
+					local title = ("%s: %s"):format(picker.title, query)
 					picker:action("qflist")
-					vim.fn.setqflist({}, "a", { title = query }) -- add missing title to qflist
+					vim.fn.setqflist({}, "a", { title = title }) -- add missing title to qflist
 
 					vim.cmd.cclose()
 					vim.cmd("silent cfirst")

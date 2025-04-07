@@ -52,7 +52,7 @@ return {
 				nofile = {
 					code = { border = "hide", style = "normal" },
 					win_options = {
-						concealcursor = { rendered = "n" },
+						concealcursor = { rendered = "nvic" },
 					},
 				},
 			},
