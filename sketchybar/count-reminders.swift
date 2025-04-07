@@ -16,7 +16,7 @@ let listName = args[1]  // First argument is the name of the list (calendar)
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToEvents() { granted, error in
+eventStore.requestFullAccessToEvents { granted, error in
 	if let error = error {
 		print("❌ Error requesting access: \(error.localizedDescription)\n")
 		semaphore.signal()
@@ -47,16 +47,22 @@ eventStore.requestFullAccessToEvents() { granted, error in
 			return
 		}
 
-		// Filter reminders: Not completed and due today or past
+		// Filter reminders: Not completed, due today or past
+		let calendar = Calendar.current
+		let today = calendar.startOfDay(for: Date())
+
 		let filteredReminders = reminders.filter { reminder in
 			guard !reminder.isCompleted else { return false }
+
 			if let dueDate = reminder.dueDateComponents?.date {
-				return dueDate <= Date()
+				// Compare only the date part (ignoring time)
+				let dueDateStartOfDay = calendar.startOfDay(for: dueDate)
+				return dueDateStartOfDay <= today
 			}
 			return false
 		}
 
-		print("✅ Total reminders: \(filteredReminders.count)")
+		print(filteredReminders.count)
 		semaphore.signal()
 	}
 }

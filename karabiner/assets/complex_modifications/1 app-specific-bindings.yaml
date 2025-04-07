@@ -214,7 +214,8 @@ rules:
   #─────────────────────────────────────────────────────────────────────
   - description: (Apps) Neovide
     manipulators:
-      # cmd+h -> cmd+5 for the heading incrementor
+      # cmd+h -> cmd+5 for the heading incrementor 
+      # PENDING https://github.com/neovide/neovide/issues/3099
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [command] } }
         to:

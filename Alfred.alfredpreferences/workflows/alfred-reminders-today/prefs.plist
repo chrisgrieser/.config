@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>quickadd_reminder_keyword</key>
+	<key>quickadd_today_keyword</key>
 	<string>,</string>
+	<key>quickadd_tomorrow_keyword</key>
+	<string>,,</string>
 	<key>reminder_list</key>
 	<string>Tasks</string>
 	<key>select_reminder_keyword</key>
