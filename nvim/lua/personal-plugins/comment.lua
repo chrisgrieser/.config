@@ -40,7 +40,7 @@ function M.commentHr()
 	local hrWithComment = comStr:format(hr)
 
 	-- filetype-specific considerations
-	local formatterWantPadding = { "python", "css", "scss" }
+	local formatterWantPadding = { "python", "css", "scss", "swift" }
 	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
 		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end

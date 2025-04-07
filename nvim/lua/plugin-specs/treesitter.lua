@@ -29,6 +29,7 @@ return {
 				-- FIX lua todo-comments https://github.com/stsewd/tree-sitter-comment/issues/22
 				-- https://github.com/LuaLS/lua-language-server/issues/1809
 				vim.api.nvim_set_hl(0, "@lsp.type.comment.lua", {})
+				vim.api.nvim_set_hl(0, "@lsp.type.comment.swift", {})
 
 				-- Define `@comment.bold` for `queries/comment/highlights.scm`
 				vim.api.nvim_set_hl(0, "@comment.bold", { bold = true })

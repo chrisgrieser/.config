@@ -214,7 +214,7 @@ function M.bufferInfo()
 	end, clients)
 
 	local indentType = vim.bo.expandtab and "spaces" or "tabs"
-	local indentAmount = vim.bo.expandtab and vim.bo.tabstop or vim.bo.shiftwidth
+	local indentAmount = vim.bo.expandtab and vim.bo.shiftwidth or vim.bo.tabstop
 	local foldexpr = vim.wo.foldexpr:find("lsp") and "LSP" or "TS"
 
 	local out = {
