@@ -17,6 +17,7 @@ struct ReminderOutput: Codable {
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
+// Alfred environment variable, empty means using all lists
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"] ?? ""
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -75,6 +76,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 			)
 		}
 
+		// output as stringified JSON
 		do {
 			let jsonData = try JSONEncoder().encode(reminderData)
 			if let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -83,7 +85,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 		} catch {
 			print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
 		}
-
 		semaphore.signal()
 	}
 }

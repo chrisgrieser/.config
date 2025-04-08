@@ -48,7 +48,6 @@ local extraDependencies = {
 	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
-	"swiftlint", -- efm
 }
 
 -- for auto-installation via `mason-tool-installer`
@@ -79,16 +78,6 @@ local efmConfig = {
 			formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
 			formatStdin = true,
 			rootMarkers = { "stylua.toml", ".stylua.toml" },
-		},
-	},
-	swift = {
-		{
-			lintSource = "swiftlint",
-			lintCommand = "swiftlint lint --use-stdin --quiet",
-			lintStdin = true,
-			lintIgnoreExitCode = true,
-			lintFormats = { "%.%#:%l:%c: %trror: %m", "%.%#:%l:%c: %tarning: %m" },
-			rootMarkers = { ".swiftlint.yml", ".git" },
 		},
 	},
 	markdown = {
