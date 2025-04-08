@@ -21,6 +21,10 @@ local config = {
 		maxLength = 30,
 		showIcon = true, -- requires `nvim-devicons` or `mini-icons`
 	},
+	ignoreOldfiles = {
+		"/COMMIT_EDITMSG",
+		"/snacks_scratch/",
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -53,9 +57,12 @@ end
 local function altOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
-		local exists = vim.uv.fs_stat(path)
-		local ignored = path:find("/COMMIT_EDITMSG$")
+		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
+		-- local ignored = vim.iter(config.ignoreOldfiles)
+		-- 	:any(function(p) return path:find(p) ~= nil end)
+		local ignored = vim.iter(config.ignoreOldfiles)
+			:any(function(p) return path:find(p) ~= nil end)
 		if exists and not ignored and not sameFile then return path end
 	end
 	return nil
