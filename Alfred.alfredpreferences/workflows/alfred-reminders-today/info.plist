@@ -339,7 +339,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Display and edit reminders due today.</string>
+	<string>Display and add reminders due today.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -370,6 +370,38 @@
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>519B050E-E040-4E66-ADFC-D2784865F13B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:keepOpen}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>true</string>
+						<key>outputlabel</key>
+						<string>true</string>
+						<key>uid</key>
+						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>false</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -466,38 +498,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 				<array>
 					<dict>
 						<key>inputstring</key>
-						<string>{var:keepOpen}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>true</string>
-						<key>outputlabel</key>
-						<string>true</string>
-						<key>uid</key>
-						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>false</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
 						<string>{var:mode}</string>
 						<key>matchcasesensitive</key>
 						<false/>
@@ -560,6 +560,38 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:cmdMode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>open-url</string>
+						<key>outputlabel</key>
+						<string>open URL</string>
+						<key>uid</key>
+						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>copy</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -598,38 +630,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:cmdMode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>open-url</string>
-						<key>outputlabel</key>
-						<string>open URL</string>
-						<key>uid</key>
-						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>copy</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -905,9 +905,9 @@ If you are not prompted to add them, try:
 ---
 
 ## Usage
-- Display reminders due today (or overdue) via the keyword `rem`. Configure the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for faster
-  triggering.
+- Display reminders due today (or overdue) via the keyword `rem`. Alternatively,
+  you can also use a
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for that.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Complete the reminder.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: If the reminder has a URL, open it in the default browser,
 	  otherwise, copy the reminder's text to the clipboard. Afterward, complete
@@ -916,9 +916,10 @@ If you are not prompted to add them, try:
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Display completed reminders due today as well. Using
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
-	  once more to hide completed reminders again.
-- Quickly add a new reminder due today or tomorrow with the keywords `qq` and
-  `qqq`, respectively.
+	  again to hide completed reminders again.
+- Quickly add a new reminder
+	+ …due today with the keyword `qq`.
+	+ …due tomorrow with the keyword `qqq`.
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -932,7 +933,7 @@ If you are not prompted to add them, try:
 			<key>note</key>
 			<string>add reminder</string>
 			<key>xpos</key>
-			<real>265</real>
+			<real>295</real>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
@@ -972,7 +973,7 @@ If you are not prompted to add them, try:
 			<key>note</key>
 			<string>select reminder</string>
 			<key>xpos</key>
-			<real>240</real>
+			<real>220</real>
 			<key>ypos</key>
 			<real>110</real>
 		</dict>
@@ -983,7 +984,7 @@ If you are not prompted to add them, try:
 			<key>note</key>
 			<string>only if task is not completed already</string>
 			<key>xpos</key>
-			<real>745</real>
+			<real>730</real>
 			<key>ypos</key>
 			<real>305</real>
 		</dict>
@@ -991,8 +992,10 @@ If you are not prompted to add them, try:
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
+			<key>note</key>
+			<string>→ show again, toggling whether to show completed reminders</string>
 			<key>xpos</key>
-			<real>690</real>
+			<real>705</real>
 			<key>ypos</key>
 			<real>45</real>
 		</dict>
@@ -1028,7 +1031,7 @@ If you are not prompted to add them, try:
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>show completed</string>
+			<string>show completed?</string>
 			<key>xpos</key>
 			<real>583</real>
 			<key>ypos</key>
@@ -1048,9 +1051,9 @@ If you are not prompted to add them, try:
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>450</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>290</real>
+			<real>245</real>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
@@ -1070,7 +1073,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>640</real>
+			<real>580</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
@@ -1081,9 +1084,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>keep open?</string>
 			<key>xpos</key>
-			<real>978</real>
+			<real>988</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>95</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1121,7 +1124,7 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1065</real>
+			<real>1080</real>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
@@ -1132,7 +1135,7 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>Snooze</string>
 			<key>xpos</key>
-			<real>485</real>
+			<real>430</real>
 			<key>ypos</key>
 			<real>450</real>
 		</dict>
@@ -1276,7 +1279,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.1</string>
+	<string>2.4.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
