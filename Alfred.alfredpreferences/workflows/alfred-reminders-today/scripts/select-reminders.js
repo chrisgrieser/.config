@@ -12,7 +12,7 @@ app.includeStandardAdditions = true;
  * @property {string} dueDate
  * @property {string} creationDate
  * @property {string} isAllDay
- * @property {boolean} isFlagged
+ * @property {boolean} hasRecurrenceRules
  */
 
 const isToday = (/** @type {Date?} */ aDate) => {
@@ -103,14 +103,14 @@ function run(argv) {
 			.join(" · ");
 
 		const [url] = content.match(urlRegex) || [];
-		const emoji = rem.isCompleted ? "☑️ " : "";
-		const flags = rem.isFlagged ? "🚩 " : "";
+		let emoji = rem.isCompleted ? "☑️ " : "";
+		if (rem.hasRecurrenceRules) emoji += "🔁 ";
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: flags + emoji + rem.title,
+			title: emoji + rem.title,
 			subtitle: subtitle,
 			text: { copy: content },
 			variables: {
@@ -131,6 +131,10 @@ function run(argv) {
 						cmdMode: url ? "open-url" : "copy",
 						mode: rem.isCompleted ? "stop-after" : "toggle-completed",
 					},
+				},
+				alt: {
+					arg: rem.id,
+					variables: { mode: "reveal-in-Reminder" },
 				},
 				shift: {
 					variables: {
@@ -162,7 +166,7 @@ function run(argv) {
 						showCompleted: true.toString(),
 						mode: "show-completed",
 					},
-					mods: { cmd: invalid, shift: invalid },
+					mods: { cmd: invalid, shift: invalid, alt: invalid },
 				},
 			],
 		});

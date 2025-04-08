@@ -9,6 +9,7 @@ struct ReminderOutput: Codable {
 	let creationDate: String?
 	let isAllDay: Bool
 	let isCompleted: Bool
+	let hasRecurrenceRules: Bool
 }
 
 let eventStore = EKEventStore()
@@ -57,7 +58,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
 				isAllDay: isAllDay,
-				isCompleted: reminder.isCompleted
+				isCompleted: reminder.isCompleted,
+				hasRecurrenceRules: reminder.hasRecurrenceRules
 			)
 		}
 
