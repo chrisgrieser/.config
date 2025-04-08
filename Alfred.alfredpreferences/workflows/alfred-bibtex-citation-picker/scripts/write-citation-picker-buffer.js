@@ -202,10 +202,6 @@ function bibtexParse(rawBibtexStr) {
 						if (yearDigits) entry.year = yearDigits[0]; // edge case of BibTeX files with wrong years
 						break;
 					}
-					case "origyear": {
-						entry.origyear = value;
-						break;
-					}
 					case "keywords": {
 						entry.keywords = value.split(/ *, */);
 						break;
@@ -215,11 +211,12 @@ function bibtexParse(rawBibtexStr) {
 					case "attachment": {
 						entry.attachment = decodeURIComponent(value)
 							.replace(/;\/Users\/.*/, "") // multiple attachments https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
-							.replace(/^file:\/\//, "");
+							.replace(/^file:\/\//, "") // `file://` makes the later existence check invalid
+							.replace(/^~/, app.pathTo("home folder")); // expand ~
 						break;
 					}
 					default:
-						// @ts-expect-error
+						// @ts-expect-error more performant not to check for all the remaining cases
 						entry[field] = value;
 				}
 			}

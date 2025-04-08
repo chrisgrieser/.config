@@ -4,7 +4,7 @@
 ---@param self { buf: number } passed by snacks
 ---@param cli string|string[]
 ---@param name string
-local function run(self, cli, name)
+local function runner(self, cli, name)
 	local args = type(cli) == "table" and cli or { cli }
 	local file = vim.api.nvim_buf_get_name(self.buf)
 	vim.list_extend(args, { file })
@@ -16,20 +16,26 @@ local function run(self, cli, name)
 	local icon = ok and icons.get("filetype", vim.bo[self.buf].ft) or "󰜎"
 	icon = icons.get("filetype", vim.bo[self.buf].ft)
 
-	vim.notify(out, nil, { title = name, icon = icon })
+	vim.notify(out, nil, { title = name, icon = icon, ft = "text" })
 end
 
----@param cli string|string[]
----@param key string
+---@param cli1 string|string[]
+---@param cli2 string|string[]
 ---@return snacks.win.Keys keymap
-local function createRunKeymap(cli, key)
-	local name = type(cli) =="string" and cli or cli[1]
-	local keymap = {
-		key,
-		function(self) run(self, cli, name) end,
-		desc = ("Run (%s)"):format(name),
-	}
-	return keymap
+local function createRunKeymap(cli1, cli2)
+	local config = { keys = {} }
+	local first = true
+	for _, cli in pairs { cli1, cli2 } do
+		local name = type(cli) == "string" and cli or cli[1]
+		local key = first and "<CR>" or "<S-CR>"
+		first = false
+		config.keys[name] = {
+			key,
+			function(self) runner(self, cli, name) end,
+			desc = ("Run (%s)"):format(name),
+		}
+	end
+	return config
 end
 
 --------------------------------------------------------------------------------
@@ -45,7 +51,6 @@ return {
 		scratch = {
 			ft = function()
 				if vim.bo.buftype ~= "" or vim.bo.ft == "" then return "markdown" end
-				if vim.bo.ft == "typescript" then return "javascript" end
 				return vim.bo.ft
 			end,
 			root = vim.g.icloudSync .. "/picker-scratch",
@@ -57,39 +62,21 @@ return {
 			win = {
 				relative = "editor",
 				position = "float", -- "right" also makes sense
-				width = 80,
-				height = 25,
+				width = 0.8,
+				height = 0.8,
 				wo = { signcolumn = "yes:1" },
+				zindex = 50, -- put above nvim-satellite
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				footer_pos = "right",
-				keys = {
-					["<D-w>"] = "close",
-					q = false, -- so `q` is available as my comment operator
-				},
+				keys = { q = false }, -- so `q` is available as my comment operator
 			},
 			win_by_ft = {
-				javascript = {
-					keys = {
-						["run"] = createRunKeymap("node", "<CR>"),
-						["run2"] = createRunKeymap({ "osascript", "-l", "JavaScript" }, "<S-CR>"),
-					},
-				},
-				python = {
-					keys = {
-						["run"] = createRunKeymap("python3", "<CR>"),
-					},
-				},
-				zsh = {
-					keys = {
-						["run"] = createRunKeymap("zsh", "<CR>"),
-						["run2"] = createRunKeymap("bash", "<S-CR>"),
-					},
-				},
-				applescript = {
-					keys = {
-						["run"] = createRunKeymap("osascript", "<CR>"),
-					},
-				},
+				javascript = createRunKeymap("node", { "osascript", "-l", "JavaScript" }),
+				typescript = createRunKeymap("node"),
+				python = createRunKeymap("python3"),
+				applescript = createRunKeymap("osascript"),
+				swift = createRunKeymap("swift"),
+				zsh = createRunKeymap("zsh", "bash"),
 			},
 		},
 	},
