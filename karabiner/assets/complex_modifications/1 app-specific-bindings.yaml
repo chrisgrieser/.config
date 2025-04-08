@@ -8,7 +8,7 @@ rules:
       - type: basic
         from: { key_code: j }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.brave\.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
         to:
           - key_code: j
           - software_function: { set_mouse_cursor_position: { x: 0%, "y": 90%, screen: 0 } }
@@ -27,7 +27,7 @@ rules:
                   click menu item "PDF" of menu 1 of pop up button 2 of sheet 1 of window 1
                 end tell'
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [command] } }
         to:
@@ -36,8 +36,7 @@ rules:
                 tell application "System Events" to tell process "Microsoft Word"
                     click menu item "Comment" of menu "Insert" of menu bar 1
                 end tell'
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
       # toggle tracked changes
       - type: basic
         from: { key_code: t, modifiers: { mandatory: [command] } }
@@ -47,8 +46,7 @@ rules:
                 tell application "System Events" to tell process "Microsoft Word"
                     click menu item "Markup" of menu "View" of menu bar 1
                 end tell'
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
       # Toggle sidebar
       - type: basic
         from: { key_code: "1", modifiers: { mandatory: [command] } }
@@ -58,9 +56,10 @@ rules:
                 tell application "System Events" to tell process "Microsoft Word"
                   click menu item "Thumbnail" of menu of menu item "Sidebar" of menu "View" of menu bar 1
                 end tell'
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
-      # cmd+l = Show in Finder
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.microsoft.Word] }]
+  #─────────────────────────────────────────────────────────────────────────────
+  - description: "cmd+l: Reveal in Finder"
+    manipulators:
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
@@ -71,7 +70,18 @@ rules:
           - key_code: down_arrow
           - key_code: return_or_enter
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.microsoft\.Word$] }]
+          - type: frontmost_application_if
+            bundle_identifiers: [ com.microsoft.Word, net.highlightsapp.universal ]
+      - type: basic
+        from: { key_code: l, modifiers: { mandatory: [command] } }
+        to:
+          # only 50%, since usually in the middle
+          - software_function: { set_mouse_cursor_position: { x: 50%, y: 1%, screen: 0 } }
+          - pointing_button: button2
+          - key_code: down_arrow
+          - key_code: return_or_enter
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.TextEdit] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Pixelmator/Preview: Export"
     manipulators:
@@ -85,7 +95,7 @@ rules:
                 end tell'
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^com\.pixelmatorteam\.pixelmator\.x$, ^com\.apple\.Preview$]
+            bundle_identifiers: [com.pixelmatorteam.pixelmator.x, com.apple.Preview]
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Zoom
     manipulators:
@@ -94,7 +104,7 @@ rules:
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: h, modifiers: [command, shift] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^us\.zoom\.xos$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [us.zoom.xos] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Finder
     manipulators:
@@ -103,25 +113,25 @@ rules:
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [control, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+0 -> toggle right sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: p, modifiers: [shift, command] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+q -> close all windows
       - type: basic
         from: { key_code: q, modifiers: { mandatory: [command] } }
         to:
           - shell_command: osascript -e 'tell application "Finder" to close every window'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+shift+d -> goto [D]ownloads
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
         to:
           - { key_code: l, modifiers: [command, option] }
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+enter -> goto Desktop/dotfiles
       - type: basic
         from: { key_code: return_or_enter, modifiers: { mandatory: [command] } }
@@ -141,7 +151,7 @@ rules:
                   set target of front Finder window to (toGoto as POSIX file)
                 end tell
               '
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
       # cmd+shift+v -> goto [V]aults
       - type: basic
         from: { key_code: v, modifiers: { mandatory: [command, shift] } }
@@ -152,53 +162,24 @@ rules:
                   set vaultFolder to (path to home folder as string) & "Vaults"
                   set target of front Finder window to vaultFolder
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com\.apple\.finder] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Highlights
     manipulators:
-      # cmd+l = Show in Finder
-      - type: basic
-        from: { key_code: l, modifiers: { mandatory: [command] } }
-        to:
-          # 1% height assuming hidden menubar, otherwise 3-4%
-          # 60% assuming my usual window size of pseudo-maximized
-          - software_function: { set_mouse_cursor_position: { x: 60%, y: 1%, screen: 0 } }
-          - pointing_button: button2
-          - key_code: down_arrow
-          - key_code: return_or_enter
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
       # Right Sidebar
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
-          - key_code: "2"
-            modifiers: [command]
+          - { key_code: "2", modifiers: [command] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
+          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Toolbar
       - type: basic
         from: { key_code: "9", modifiers: { mandatory: [command] } }
         to:
           - { key_code: t, modifiers: [command, option] }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
-      # Rename
-      - type: basic
-        from: { key_code: r, modifiers: { mandatory: [control] } }
-        to:
-          - shell_command: |
-              osascript -e '
-                tell application "System Events" to tell (first process where it is frontmost)
-                  click menu item "Show Toolbar" of menu "View" of menu bar 1
-                  click menu item "Rename…" of menu "File" of menu bar 1
-                end tell'
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$, ^com\.apple\.Preview$]
+          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Image Tool
       - type: basic
         from: { key_code: i, modifiers: { mandatory: [command] } }
@@ -210,11 +191,11 @@ rules:
                   --title "Highlights" --message "Image 🖼️"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
+            bundle_identifiers: [net.highlightsapp.universal]
   #─────────────────────────────────────────────────────────────────────
   - description: (Apps) Neovide
     manipulators:
-      # cmd+h -> cmd+5 for the heading incrementor 
+      # cmd+h -> cmd+5 for the heading incrementor
       # PENDING https://github.com/neovide/neovide/issues/3099
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [command] } }
@@ -232,20 +213,20 @@ rules:
         to:
           - { key_code: "1", modifiers: [option] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       - type: basic
         from: { key_code: "2", modifiers: { mandatory: [command] } }
         to:
           - { key_code: "2", modifiers: [option] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Toggle Right Sidebar (Leo)
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: "0", modifiers: [option] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # Remove bookmark
       - type: basic
         from: { key_code: d, modifiers: { mandatory: [command, shift] } }
@@ -255,21 +236,21 @@ rules:
           - key_code: tab
           - key_code: spacebar
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # shift+cmd+,: extension settings
       - type: basic
         from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
         to:
           - shell_command: open 'chrome://extensions/'
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # dev tools -> element picker
       - type: basic
         from: { key_code: escape, modifiers: { mandatory: [control] } }
         to:
           - { key_code: c, modifiers: [option, command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.brave.Browser$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: (Apps) Obsidian
     manipulators:
@@ -281,7 +262,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 400 }
           - { key_code: c, modifiers: [shift, command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^md\.obsidian$] }
+          - { type: frontmost_application_if, bundle_identifiers: [md.obsidian] }
   #─────────────────────────────────────────────────────────────────────────────
   # DOCS https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts
   - description: (Apps) Slack
@@ -290,42 +271,37 @@ rules:
       - type: basic
         from: { key_code: u, modifiers: { mandatory: [command] } }
         to:
-          - key_code: down_arrow
-            modifiers: [option, shift]
+          - { key_code: down_arrow, modifiers: [option, shift] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
       # back in history
       - type: basic
         from: { key_code: h, modifiers: { mandatory: [control] } }
         to:
-          - key_code: semicolon
-            modifiers: [command]
+          - { key_code: semicolon, modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
       # forward in history
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [control] } }
         to:
-          - key_code: quote
-            modifiers: [command]
+          - { key_code: quote, modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
       # next channel
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [control] } }
         to:
-          - key_code: down_arrow
-            modifiers: [option]
+          - { key_code: down_arrow, modifiers: [option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
       # prev channel
       - type: basic
         from: { key_code: k, modifiers: { mandatory: [control] } }
         to:
-          - key_code: up_arrow
-            modifiers: [option]
+          - { key_code: up_arrow, modifiers: [option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.tinyspeck\.slackmacgap$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.tinyspeck.slackmacgap] }]
   #─────────────────────────────────────────────────────────────────────────────
   # REQUIRED compatibility mode to recognize Alfred as frontmost app
   - description: "(Apps) Alfred: Select with <Tab>"
@@ -335,26 +311,20 @@ rules:
         to:
           - { key_code: down_arrow }
         conditions:
-          [
-            {
-              type: frontmost_application_if,
-              bundle_identifiers: [^com\.runningwithcrayons\.Alfred$],
-            },
-          ]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.runningwithcrayons.Alfred] }]
       - type: basic
         from: { key_code: tab, modifiers: { mandatory: [shift] } }
         to:
           - { key_code: up_arrow }
         conditions:
-          - type: frontmost_application_if
-            bundle_identifiers: [^com\.runningwithcrayons\.Alfred$]
+          - { type: frontmost_application_if, bundle_identifiers: [com.runningwithcrayons.Alfred] }
       - type: basic
         from: { key_code: "0", modifiers: { mandatory: [command] } }
         to:
           - { key_code: "9", modifiers: [command] }
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^com\.runningwithcrayons\.Alfred-Preferences$]
+            bundle_identifiers: [com.runningwithcrayons.Alfred-Preferences]
   #───────────────────────────────────────────────────────────────────────
   - description: "(Apps) Script Editor"
     manipulators:
@@ -366,7 +336,7 @@ rules:
           - { key_code: vk_none, hold_down_milliseconds: 400 }
           - { key_code: delete_or_backspace, modifiers: [command] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
       # toggle syntax (Javascript <-> Applescript)
       - type: basic
         from: { key_code: s, modifiers: { mandatory: [option] } }
@@ -381,7 +351,7 @@ rules:
                 currentDoc.checkSyntax();
               '
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.ScriptEditor] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.apple.ScriptEditor] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Calendar"
     manipulators:
@@ -396,7 +366,7 @@ rules:
                 tell application "System Events" to tell process "Calendar"
                   click radio button 1 of radio group 1 of group 1 of toolbar 1 of window 1
                 end tell'
-        conditions: [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.iCal$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Reminder"
     manipulators:
@@ -405,8 +375,7 @@ rules:
         from: { key_code: "1", modifiers: { mandatory: [command] } }
         to:
           - { key_code: s, modifiers: [command, option] }
-        conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.apple\.reminders$] }]
+        conditions: [{ type: frontmost_application_if, bundle_identifiers: [com.apple.reminders] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Mimestream"
     manipulators:
@@ -417,7 +386,7 @@ rules:
           - { key_code: s, modifiers: [command, control] }
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^com\.mimestream\.Mimestream$]
+            bundle_identifiers: [com.mimestream.Mimestream]
           # HACK only apply to installation in office, since the hotkey is
           # somehow only active here?!
           - type: device_if
@@ -427,14 +396,14 @@ rules:
         to:
           - { key_code: t, modifiers: [command, option] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
       # Open in Gmail
       - type: basic
         from: { key_code: g, modifiers: { mandatory: [control] } }
         to:
           - { key_code: g, modifiers: [command, control] }
         conditions:
-          [{ type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }]
+          [{ type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) Catch"
     manipulators:
@@ -445,7 +414,7 @@ rules:
           - { key_code: return_or_enter }
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^org\.giorgiocalderolla\.Catch$]
+            bundle_identifiers: [org.giorgiocalderolla.Catch]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Apps) CleanShot X"
     manipulators:
