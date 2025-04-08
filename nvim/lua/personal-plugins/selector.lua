@@ -50,7 +50,7 @@ vim.ui.select = function(items, opts, on_choice)
 	local longestItemLen = vim.iter(formattedItems)
 		:fold(0, function(acc, c) return math.max(acc, #c) end)
 	local width = math.max(longestItemLen, #opts.prompt, #opts.kind) + 2
-	local height = #formattedItems
+	local height = math.min(#formattedItems, vim.o.lines - 3)
 	local footer = opts.kind ~= "" and " " .. opts.kind .. " " or ""
 
 	-- CREATE WINDOW

@@ -1,5 +1,6 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 --------------------------------------------------------------------------------
+---@module "snacks"
 
 ---@param self { buf: number } passed by snacks
 ---@param cli string|string[]
@@ -46,7 +47,7 @@ end
 return {
 	"folke/snacks.nvim",
 	keys = {
-		{ "<leader>es", function() require("snacks").scratch() end, desc = " Scratch buffer" },
+		{ "<leader>es", function() Snacks.scratch() end, desc = " Scratch buffer" },
 		{ "<leader>el", function() Snacks.scratch.select() end, desc = " List scratches" },
 	},
 	opts = {
