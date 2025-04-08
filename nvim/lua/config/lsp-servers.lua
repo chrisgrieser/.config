@@ -48,6 +48,7 @@ local extraDependencies = {
 	"stylua", -- efm
 	"markdown-toc", -- efm
 	"markdownlint", -- efm
+	"swiftlint", -- efm
 }
 
 -- for auto-installation via `mason-tool-installer`
@@ -78,6 +79,16 @@ local efmConfig = {
 			formatCommand = "stylua --search-parent-directories --stdin-filepath='${INPUT}' --respect-ignores -",
 			formatStdin = true,
 			rootMarkers = { "stylua.toml", ".stylua.toml" },
+		},
+	},
+	swift = {
+		{
+			lintSource = "swiftlint",
+			lintCommand = "swiftlint lint --use-stdin --quiet",
+			lintStdin = true,
+			lintIgnoreExitCode = true,
+			lintFormats = { "%.%#:%l:%c: %trror: %m", "%.%#:%l:%c: %tarning: %m" },
+			rootMarkers = { ".swiftlint.yml" },
 		},
 	},
 	markdown = {
@@ -304,7 +315,7 @@ end
 -- https://writewithharper.com/docs/integrations/neovim
 -- https://writewithharper.com/docs/integrations/language-server#Configuration
 M.serverConfigs.harper_ls = {
-	filetypes = { "markdown" },  -- PENDING https://github.com/elijah-potter/harper/issues/228
+	filetypes = { "markdown" }, -- PENDING https://github.com/elijah-potter/harper/issues/228
 	settings = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
