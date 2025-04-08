@@ -12,6 +12,7 @@ app.includeStandardAdditions = true;
  * @property {string} dueDate
  * @property {string} creationDate
  * @property {string} isAllDay
+ * @property {boolean} isFlagged
  */
 
 const isToday = (/** @type {Date?} */ aDate) => {
@@ -86,36 +87,36 @@ function run(argv) {
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const reminders = remindersFiltered.map((rem) => {
-		const { title, notes, id, isCompleted, dueDate, isAllDay } = rem;
-		const body = notes || "";
-		const content = title + "\n" + body;
-		const dueDateObj = new Date(dueDate);
+		const body = rem.notes || "";
+		const content = rem.title + "\n" + body;
+		const dueDateObj = new Date(rem.dueDate);
 
 		// SUBTITLE: display due time, past due dates, missing due dates, and body
 		/** @type {Intl.DateTimeFormatOptions} */
 		const format = { hour: "2-digit", minute: "2-digit", hour12: false };
-		const dueTime = isAllDay ? "" : new Date(dueDate).toLocaleTimeString([], format);
+		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], format);
 
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
-		const missingDueDate = dueDate ? "" : "no due date";
+		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
 			.filter(Boolean)
 			.join(" · ");
 
 		const [url] = content.match(urlRegex) || [];
-		const emoji = isCompleted ? "☑️ " : "";
+		const emoji = rem.isCompleted ? "☑️ " : "";
+		const flags = rem.isFlagged ? "🚩 " : "";
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: emoji + title,
+			title: flags + emoji + rem.title,
 			subtitle: subtitle,
 			text: { copy: content },
 			variables: {
-				id: id,
-				title: title,
-				notificationTitle: isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
+				id: rem.id,
+				title: rem.title,
+				notificationTitle: rem.isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				showCompleted: showCompleted.toString(), // keep "show completed" state
 				keepOpen: (remindersFiltered.length > 1).toString(),
 				mode: "toggle-completed",
@@ -123,18 +124,18 @@ function run(argv) {
 			mods: {
 				cmd: {
 					arg: url || content,
-					subtitle: (url ? "⌘: Open URL" : "⌘: Copy") + (isCompleted ? "" : " and complete"),
+					subtitle: (url ? "⌘: Open URL" : "⌘: Copy") + (rem.isCompleted ? "" : " and complete"),
 					variables: {
-						id: id,
-						title: title,
+						id: rem.id,
+						title: rem.title,
 						cmdMode: url ? "open-url" : "copy",
-						mode: isCompleted ? "stop-after" : "toggle-completed",
+						mode: rem.isCompleted ? "stop-after" : "toggle-completed",
 					},
 				},
 				shift: {
 					variables: {
-						id: id,
-						title: title,
+						id: rem.id,
+						title: rem.title,
 						mode: "snooze",
 					},
 				},

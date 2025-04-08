@@ -21,7 +21,10 @@ return {
 				insertNextPlaceholder = "<D-t>", -- same as inserting template string
 			},
 		},
-		telescope = { alsoSearchSnippetBody = true },
+		snippetSelection = {
+			picker = "snacks",
+			telescope = { alsoSearchSnippetBody = true },
+		},
 		jsonFormatter = "yq",
 	},
 }
