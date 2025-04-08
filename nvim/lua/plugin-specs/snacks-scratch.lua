@@ -20,21 +20,24 @@ local function runner(self, cli, name)
 end
 
 ---@param cli1 string|string[]
----@param cli2 string|string[]
+---@param cli2 string|string[]|nil
 ---@return snacks.win.Keys keymap
 local function createRunKeymap(cli1, cli2)
 	local config = { keys = {} }
-	local first = true
-	for _, cli in pairs { cli1, cli2 } do
-		local name = type(cli) == "string" and cli or cli[1]
-		local key = first and "<CR>" or "<S-CR>"
-		first = false
-		config.keys[name] = {
-			key,
-			function(self) runner(self, cli, name) end,
-			desc = ("Run (%s)"):format(name),
-		}
-	end
+	local name1 = type(cli1) == "string" and cli1 or cli1[1]
+	config.keys[name1] = {
+		"<CR>",
+		function(self) runner(self, cli1, name1) end,
+		desc = ("Run (%s)"):format(name1),
+	}
+	if not cli2 then return config end
+
+	local name2 = type(cli2) == "string" and cli2 or cli2[1]
+	config.keys[name2] = {
+		"<S-CR>",
+		function(self) runner(self, cli2, name2) end,
+		desc = ("Run (%s)"):format(name2),
+	}
 	return config
 end
 
@@ -53,7 +56,7 @@ return {
 				if vim.bo.buftype ~= "" or vim.bo.ft == "" then return "markdown" end
 				return vim.bo.ft
 			end,
-			root = vim.g.icloudSync .. "/picker-scratch",
+			root = vim.g.icloudSync .. "/snacks_scratch",
 			filekey = {
 				count = true, -- allows count to create multiple scratch buffers
 				cwd = false, -- otherwise only one scratch per filetype
