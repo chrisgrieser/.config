@@ -88,7 +88,7 @@ local efmConfig = {
 			lintStdin = true,
 			lintIgnoreExitCode = true,
 			lintFormats = { "%.%#:%l:%c: %trror: %m", "%.%#:%l:%c: %tarning: %m" },
-			rootMarkers = { ".swiftlint.yml" },
+			rootMarkers = { ".swiftlint.yml", ".git" },
 		},
 	},
 	markdown = {

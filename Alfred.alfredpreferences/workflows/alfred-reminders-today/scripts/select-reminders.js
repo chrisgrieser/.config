@@ -7,7 +7,9 @@ app.includeStandardAdditions = true;
 /** @typedef {Object} reminderObj
  * @property {string} id
  * @property {string} title
- * @property {string} notes aka body
+ * @property {string?} notes aka body
+ * @property {string?} url
+ * @property {string} list
  * @property {boolean} isCompleted
  * @property {string} dueDate
  * @property {string} creationDate
@@ -82,13 +84,16 @@ function run(argv) {
 			const completedAndDueToday = showCompleted && rem.isCompleted && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
 		})
-		.sort((a, b) => +new Date(a.creationDate) - +new Date(b.creationDate));
+		.sort((a, b) => {
+			return +new Date(a.creationDate) - +new Date(b.creationDate)
+		});
+	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2))
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const reminders = remindersFiltered.map((rem) => {
 		const body = rem.notes || "";
-		const content = rem.title + "\n" + body;
+		const content = rem.title + "\n" + body + "\n" + rem.url;
 		const dueDateObj = new Date(rem.dueDate);
 
 		// SUBTITLE: display due time, past due dates, missing due dates, and body
@@ -102,7 +107,7 @@ function run(argv) {
 			.filter(Boolean)
 			.join(" · ");
 
-		const [url] = content.match(urlRegex) || [];
+		const [url] = rem.url || content.match(urlRegex) || [];
 		let emoji = rem.isCompleted ? "☑️ " : "";
 		if (rem.hasRecurrenceRules) emoji += "🔁 ";
 

@@ -12,8 +12,6 @@ guard args.count > 1 else {
 	exit(1)
 }
 
-private (set) var foo: Bool = false
-
 let listName = args[1]  // First argument is the name of the list (calendar)
 
 // ─────────────────────────────────────────────────────────────────────────────
