@@ -905,9 +905,9 @@ If you are not prompted to add them, try:
 ---
 
 ## Usage
-- Display reminders due today (or overdue) via the keyword `rem`. Alternatively,
-  you can also use a
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for that.
+- Display reminders due today (or overdue) via the keyword `rem`. Configure the
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) for faster
+  triggering.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Complete the reminder.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: If the reminder has a URL, open it in the default browser,
 	  otherwise, copy the reminder's text to the clipboard. Afterward, complete
@@ -916,10 +916,9 @@ If you are not prompted to add them, try:
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Display completed reminders due today as well. Using
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
-	  again to hide completed reminders again.
-- Quickly add a new reminder
-	+ …due today with the keyword `qq`.
-	+ …due tomorrow with the keyword `qqq`.
+	  once more to hide completed reminders again.
+- Quickly add a new reminder due today or tomorrow with the keywords `qq` and
+  `qqq`, respectively.
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -1277,7 +1276,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.0</string>
+	<string>2.4.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

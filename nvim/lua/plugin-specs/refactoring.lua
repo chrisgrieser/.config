@@ -12,15 +12,6 @@ return {
 		},
 		{
 			"<leader>re",
-			function()
-				vim.cmd.normal { "viW", bang = true }
-				return require("refactoring").refactor("Extract Variable")
-			end,
-			expr = true,
-			desc = "󰫧 Extract cursorWORD as variable",
-		},
-		{
-			"<leader>re",
 			function() return require("refactoring").refactor("Extract Variable") end,
 			mode = "x",
 			expr = true,
