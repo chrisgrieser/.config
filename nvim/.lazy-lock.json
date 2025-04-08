@@ -1,7 +1,8 @@
 {
   "blink-cmp-git": { "branch": "master", "commit": "863e0670217d0dffb9edc6ab41b676a4128f813b" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
-  "ccc.nvim": { "branch": "main", "commit": "9abb22d5d47460852a935129b4feff39fd8033e3" },
+  "ccc.nvim": { "branch": "main", "commit": "af2cf5a963f401aad868c065222ee13d4bbc9050" },
+  "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
   "gitsigns.nvim": { "branch": "main", "commit": "17ab794b6fce6fce768430ebc925347e349e1d60" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
@@ -34,7 +35,7 @@
   "one-small-step-for-vimkind": { "branch": "main", "commit": "b9def31568d20b16f7da9479a4174d165046fe8a" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "refactoring.nvim": { "branch": "master", "commit": "b00a68cebad6baa5eb5fb058b4ecf6e660b67c3d" },
-  "render-markdown.nvim": { "branch": "main", "commit": "a615baed85137a8c6fc8e95f5545f64d33f5f384" },
+  "render-markdown.nvim": { "branch": "main", "commit": "d7462eb34ff55106707ea6c4005256dcac57a556" },
   "satellite.nvim": { "branch": "main", "commit": "3379561c794a93c546c5c45f9d60e78a01a31d31" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "symbol-usage.nvim": { "branch": "main", "commit": "0f9b3da014b7e41559b643e7461fcabb2a7dc83a" },

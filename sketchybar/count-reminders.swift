@@ -16,7 +16,7 @@ let listName = args[1]  // First argument is the name of the list (calendar)
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-eventStore.requestFullAccessToEvents { granted, error in
+eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
 		print("❌ Error requesting access: \(error.localizedDescription)\n")
 		semaphore.signal()
