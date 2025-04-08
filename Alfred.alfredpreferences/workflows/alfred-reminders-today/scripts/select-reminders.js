@@ -69,6 +69,7 @@ function run(argv) {
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
+	const usesSpecificList = $.getenv("reminder_list") !== "";
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 	const startOfToday = new Date();
@@ -84,10 +85,8 @@ function run(argv) {
 			const completedAndDueToday = showCompleted && rem.isCompleted && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
 		})
-		.sort((a, b) => {
-			return +new Date(a.creationDate) - +new Date(b.creationDate)
-		});
-	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2))
+		.sort((a, b) => +new Date(a.creationDate) - +new Date(b.creationDate));
+	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -96,16 +95,21 @@ function run(argv) {
 		const content = rem.title + "\n" + body + "\n" + rem.url;
 		const dueDateObj = new Date(rem.dueDate);
 
-		// SUBTITLE: display due time, past due dates, missing due dates, and body
+		// SUBTITLE: display due time, past due dates, missing due dates, list (if
+		// multiple), and  body
 		/** @type {Intl.DateTimeFormatOptions} */
-		const format = { hour: "2-digit", minute: "2-digit", hour12: false };
-		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], format);
-
+		const timeFormat = { hour: "2-digit", minute: "2-digit", hour12: false };
+		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFormat);
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
-		const missingDueDate = rem.dueDate ? "" : "no due date";
-		const subtitle = [body.replace(/\n+/g, " "), dueTime || pastDueDate || missingDueDate]
+		const missingDueDate = rem.dueDate ? "" : "(no due date)";
+		const listName = usesSpecificList ? "" : rem.list; // only display when more than 1
+		const subtitle = [
+			listName,
+			dueTime || pastDueDate || missingDueDate,
+			body.replace(/\n+/g, " "),
+		]
 			.filter(Boolean)
-			.join(" · ");
+			.join("  ·  ");
 
 		const [url] = rem.url || content.match(urlRegex) || [];
 		let emoji = rem.isCompleted ? "☑️ " : "";

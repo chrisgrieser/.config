@@ -1159,18 +1159,37 @@ to set a hotkey to show reminders due today</string>
 				<key>placeholder</key>
 				<string>MyList</string>
 				<key>required</key>
-				<true/>
+				<false/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>List name in Reminders.app. Leave empty to fetch reminders from all lists.</string>
+			<string>List name in Reminders.app. Leave empty to show reminders from all lists.</string>
 			<key>label</key>
 			<string>List to use</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>reminder_list</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>include reminders with no due date</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_no_duedate</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1239,25 +1258,6 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>include</string>
-			</dict>
-			<key>description</key>
-			<string>include open reminders with no due date</string>
-			<key>label</key>
-			<string>No due date</string>
-			<key>type</key>
-			<string>checkbox</string>
-			<key>variable</key>
-			<string>include_no_duedate</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
 				<string></string>
 				<key>placeholder</key>
 				<string></string>
@@ -1269,7 +1269,7 @@ to set a hotkey to show reminders due today</string>
 			<key>description</key>
 			<string>Sketchybar users: name of the trigger to update a menubar component. Leave empty to disable.</string>
 			<key>label</key>
-			<string>Sketchybar trigger name</string>
+			<string>Sketchybar trigger</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -1277,7 +1277,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.3.0</string>
+	<string>2.4.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
