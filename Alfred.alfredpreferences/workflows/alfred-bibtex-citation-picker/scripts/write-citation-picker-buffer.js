@@ -159,7 +159,6 @@ function bibtexParse(rawBibtexStr) {
 	const bibtexEntryArray = bibtexDecode(rawBibtexStr)
 		.split(/^@/m) // split by `@` from citekeys
 		.slice(1) // first element is other stuff before first entry
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: TODO
 		.reduce((/** @type {BibtexEntry[]} */ acc, rawEntryStr) => {
 			const [_, category, citekey, propertyStr] =
 				rawEntryStr.trim().match(/^(.*?){(.*?),(.*)}$/s) || [];
@@ -214,9 +213,9 @@ function bibtexParse(rawBibtexStr) {
 					case "file":
 					case "local-url":
 					case "attachment": {
-						// see https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
-						const multipleAttachments = value.includes(";/Users/");
-						entry.attachment = multipleAttachments ? value.split(";/Users/")[0] : value;
+						entry.attachment = decodeURIComponent(value)
+							.replace(/;\/Users\/.*/, "") // multiple attachments https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
+							.replace(/^file:\/\//, "");
 						break;
 					}
 					default:
@@ -286,7 +285,7 @@ function run() {
 			.doShellScript(`find "${litNoteFolder}" -type f -name "*.md"`)
 			.split("\r")
 			.map((/** @type {string} */ filepath) => {
-				return filepath.replace(/.*\/(.*)\.md/, "$1") // only basename w/o ext
+				return filepath.replace(/.*\/(.*)\.md/, "$1"); // only basename w/o ext
 			});
 	}
 
