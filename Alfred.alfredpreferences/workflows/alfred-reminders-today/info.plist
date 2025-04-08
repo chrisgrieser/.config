@@ -1164,7 +1164,7 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>list name in Reminders.app</string>
+			<string>List name in Reminders.app. Leave empty to fetch reminders from all lists.</string>
 			<key>label</key>
 			<string>List to use</string>
 			<key>type</key>

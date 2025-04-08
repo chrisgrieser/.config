@@ -5,6 +5,8 @@ struct ReminderOutput: Codable {
 	let id: String
 	let title: String
 	let notes: String?
+	let url: String?
+	let list: String
 	let dueDate: String?
 	let creationDate: String?
 	let isAllDay: Bool
@@ -15,7 +17,7 @@ struct ReminderOutput: Codable {
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
-let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
+let reminderList = ProcessInfo.processInfo.environment["reminder_list"] ?? ""
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -30,15 +32,23 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	let calendars = eventStore.calendars(for: .reminder)
+	// ──────────────────────────────────────────────────────────────────────────
 
-	guard let targetCalendar = calendars.first(where: { $0.title == reminderList }) else {
+	// Get list specified or use all lists
+	let calendars = eventStore.calendars(for: .reminder)
+	let selectedCalendars: [EKCalendar]
+	if reminderList.isEmpty {
+		selectedCalendars = calendars
+	} else if let target = calendars.first(where: { $0.title == reminderList }) {
+		selectedCalendars = [target]
+	} else {
 		print("⚠️ No list found with name '\(reminderList)'")
 		semaphore.signal()
 		return
 	}
 
-	let predicate = eventStore.predicateForReminders(in: [targetCalendar])
+	// Get reminders from the list and format them
+	let predicate = eventStore.predicateForReminders(in: selectedCalendars)
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
 			print("[]")
@@ -55,6 +65,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 				id: reminder.calendarItemIdentifier,
 				title: reminder.title ?? "(No Title)",
 				notes: reminder.notes,
+				url: reminder.url?.absoluteString,
+				list: reminder.calendar.title,
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
 				isAllDay: isAllDay,
