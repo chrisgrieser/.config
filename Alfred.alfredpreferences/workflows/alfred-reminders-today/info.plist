@@ -560,38 +560,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:cmdMode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>open-url</string>
-						<key>outputlabel</key>
-						<string>open URL</string>
-						<key>uid</key>
-						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>copy</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -630,6 +598,38 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:cmdMode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>open-url</string>
+						<key>outputlabel</key>
+						<string>open URL</string>
+						<key>uid</key>
+						<string>0FC40472-5309-400D-937A-A779E5B73B20</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>copy</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -683,23 +683,6 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 			<string>1486415C-BA88-4276-A021-3773113CAF94</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>x-apple-reminder://{query}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>2B36FE00-1EB9-4EB4-A320-A0750C9C5613</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -983,13 +966,6 @@ If you are not prompted to add them, try:
 			<key>ypos</key>
 			<real>210</real>
 		</dict>
-		<key>2B36FE00-1EB9-4EB4-A320-A0750C9C5613</key>
-		<dict>
-			<key>xpos</key>
-			<real>200</real>
-			<key>ypos</key>
-			<real>340</real>
-		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
 			<key>colorindex</key>
@@ -1075,7 +1051,7 @@ If you are not prompted to add them, try:
 			<key>xpos</key>
 			<real>450</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>290</real>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
@@ -1301,7 +1277,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.2.0</string>
+	<string>2.3.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
