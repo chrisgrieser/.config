@@ -30,7 +30,11 @@ return {
 			vim.lsp.protocol.SymbolKind.Interface,
 			vim.lsp.protocol.SymbolKind.Object,
 			vim.lsp.protocol.SymbolKind.Array,
+
 			vim.lsp.protocol.SymbolKind.Property,
+			vim.lsp.protocol.SymbolKind.Key,
+			vim.lsp.protocol.SymbolKind.Constant,
+			vim.lsp.protocol.SymbolKind.Variable,
 		},
 	},
 }
