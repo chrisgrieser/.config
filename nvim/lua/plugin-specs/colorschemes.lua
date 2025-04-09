@@ -255,8 +255,8 @@ themes = vim.iter(themes)
 vim.g.setColorscheme = function(init)
 	if init then
 		-- needs to be set manually, since `Neovide` does not set it in time on startup
-		-- local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
-		-- vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
+		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
+		vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
 	else
 		-- reset so next theme isn't affected by previous one
 		vim.cmd.highlight("clear")
