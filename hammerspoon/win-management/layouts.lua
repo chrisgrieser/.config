@@ -74,7 +74,7 @@ local function workLayout()
 
 	u.closeAllTheThings()
 
-	u.openApps { "Slack", "Ivory", "Mimestream" }
+	u.openApps { "Slack", "Ivory", "Mimestream", "AlfredExtraPane" }
 	u.whenAppWinAvailable("Mimestream", function()
 		hs.layout.apply {
 			-- Ivory layout already managed by `mastodon.lua`
