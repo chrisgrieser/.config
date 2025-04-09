@@ -215,17 +215,14 @@ function getRedditPosts(subredditName, oldItems) {
 			}
 		}
 	} catch (_error) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("Failed curl command: " + curlCommand);
 		const apiResponse = app.doShellScript(curlCommand);
 		try {
 			curlCommand = `curl -sL "${apiUrl}"`;
 			response = JSON.parse(apiResponse);
 		} catch (_error) {
-			// biome-ignore lint/suspicious/noConsole: intentional
 			console.log("Failed curl command: " + curlCommand);
 			const errorMsg = `Error parsing JSON. curl response was: ${apiResponse}`;
-			// biome-ignore lint/suspicious/noConsole: intentional
 			console.log(errorMsg);
 			return errorMsg;
 		}
@@ -343,7 +340,6 @@ function run() {
 	}
 
 	// REQUEST NEW POSTS FROM API
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log(`Writing new cache for "${subredditName}"`);
 	const posts =
 		subredditName === "hackernews"
@@ -352,9 +348,14 @@ function run() {
 
 	// GUARD Error or no posts left after filtering
 	if (typeof posts === "string") {
-		const errorMsg = posts;
+		const errorMsg = posts.replace(/<\w+>/g, ""); // remove html
 		const info = "See debugging console for details.";
-		return JSON.stringify({ items: [{ title: errorMsg, subtitle: info, valid: false }] });
+		return JSON.stringify({
+			items: [
+				{ title: errorMsg, subtitle: info, valid: false },
+				{ title: "Open in the browser", subtitle: "r/" + subredditName, arg: `https://reddit.com/r/${subredditName}` },
+			],
+		});
 	}
 	if (posts.length === 0) {
 		const msg = "No posts higher than minimum upvote count.";

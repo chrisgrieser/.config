@@ -89,26 +89,33 @@ end
 function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
+		["=="] = "!=",
+		["||"] = "&&"
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 		toggles["const"] = "let"
 		toggles["==="] = "!=="
-	end
-	if vim.bo.ft == "python" then
+	elseif vim.bo.ft == "python" then
 		toggles["True"] = "False"
-		toggles["=="] = "!="
-	end
-	if vim.bo.ft == "swift" then
+		toggles["true"] = nil
+		toggles["and"] = "or"
+	elseif vim.bo.ft == "swift" then
 		toggles["var"] = "let"
+	elseif vim.bo.ft == "lua" then
+		toggles["=="] = "~="
+		toggles["and"] = "or"
 	end
 
-	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
+	-- cword does not include punctuation-only words, so checking `cWORD` for that
+	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>")
+		or vim.fn.expand("<cword>")
 	local newWord
 	for word, opposite in pairs(toggles) do
 		if cword == word then newWord = opposite end
 		if cword == opposite then newWord = word end
 	end
 	if newWord then
+		-- `iw` textobj does also work on punctuation only
 		vim.cmd.normal { '"_ciw' .. newWord, bang = true }
 	else
 		-- needs `:execute` to escape `<C-a>`
