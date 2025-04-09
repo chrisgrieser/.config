@@ -1161,18 +1161,37 @@ to set a hotkey to show reminders due today</string>
 				<key>placeholder</key>
 				<string>MyList</string>
 				<key>required</key>
-				<false/>
+				<true/>
 				<key>trim</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>List name in Reminders.app. Leave empty to show reminders from all lists.</string>
+			<string>List name in Reminders.app. The workflow only displays reminders from this list, and new reminders are added to this list.</string>
 			<key>label</key>
-			<string>List to use</string>
+			<string>Main list</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>reminder_list</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>include reminders from all lists</string>
+			</dict>
+			<key>description</key>
+			<string>If enabled, the main list is only used for adding new reminders.</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>include_all_lists</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1269,7 +1288,7 @@ to set a hotkey to show reminders due today</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Sketchybar users: name of the trigger to update a menubar component. Leave empty to disable.</string>
+			<string>Sketchybar users: Name of the trigger to update a menubar component. Leave empty to disable.</string>
 			<key>label</key>
 			<string>Sketchybar trigger</string>
 			<key>type</key>
@@ -1279,7 +1298,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.2</string>
+	<string>2.4.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

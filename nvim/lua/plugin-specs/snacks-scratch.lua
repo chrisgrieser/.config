@@ -58,11 +58,7 @@ return {
 				return vim.bo.ft
 			end,
 			root = vim.g.icloudSync .. "/snacks_scratch",
-			filekey = {
-				count = true, -- allows count to create multiple scratch buffers
-				cwd = false, -- otherwise only one scratch per filetype
-				branch = false,
-			},
+			filekey = { count = false, cwd = false, branch = false }, -- just use one scratch
 			win = {
 				relative = "editor",
 				position = "float", -- "right" also makes sense
@@ -73,6 +69,12 @@ return {
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				footer_pos = "right",
 				keys = { q = false }, -- so `q` is available as my comment operator
+				on_win = function(win)
+					-- FIX display of scratchpad title (partially hardcoded, when setting icon, etc.)
+					local icon = Snacks.util.icon(vim.bo[win.buf].ft, "filetype")
+					local title = (" %s Scratch "):format(icon)
+					vim.api.nvim_win_set_config(win.win, { title = title })
+				end,
 			},
 			win_by_ft = {
 				javascript = createRunKeymap("node", { "osascript", "-l", "JavaScript" }),
