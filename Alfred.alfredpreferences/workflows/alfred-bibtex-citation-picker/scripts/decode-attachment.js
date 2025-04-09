@@ -2,11 +2,10 @@
 ObjC.import("stdlib");
 const app = Application.currentApplication();
 app.includeStandardAdditions = true;
+
 //──────────────────────────────────────────────────────────────────────────────
 
 const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
-
-const openFile = (/** @type {string} */ path) => Application("Finder").open(Path(path));
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -20,13 +19,18 @@ function run(argv) {
 	try {
 		path = decodeURIComponent(path);
 	} catch (_error) {
-		console.log(`Malformed path : ${path}`);
+		return (`Malformed path : ${path}`); // Alfred notification
 	}
 	path = path
 		.replace(/;\/Users\/.*/, "") // multiple attachments https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
 		.replace(/^file:\/\//, "")
 		.replace(/^~/, app.pathTo("home folder")); // expand ~
 
-	console.log("🪚 path:", path);
-	app.openLocation(path);
+	if (!fileExists(path)) {
+		return (`File does not exist : ${path}`); // Alfred notification
+	}
+
+	console.log("attachment path:", path);
+	// shell `open` appears to be the only reliable way for opening files
+	app.doShellScript(`open '${path}'`);
 }
