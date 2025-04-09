@@ -213,9 +213,10 @@ declare const ObjC: {
 declare function delay(seconds: number): void;
 
 declare const $: {
-	// REQUIRES `ObjC.import("AppKit")`
 	// biome-ignore lint: not set by me
-	NSPasteboard: any;
+	NSWorkspace: any; // REQUIRED `ObjC.import("Foundaton")`
+	// biome-ignore lint: not set by me
+	NSPasteboard: any; // REQUIRED `ObjC.import("AppKit")`
 	// biome-ignore lint: not set by me
 	NSFilenamesPboardType: any;
 	// biome-ignore lint: not set by me
