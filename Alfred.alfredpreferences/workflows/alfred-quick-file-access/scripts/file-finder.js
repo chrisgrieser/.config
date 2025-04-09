@@ -105,7 +105,7 @@ const searchConfig = {
 		shallowOutput: true,
 	},
 	[$.getenv("tag_keyword")]: {
-		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
+		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}" -attr kMDItemContentModificationDate`,
 		absPathOutput: true,
 		prefix: $.getenv("tag_prefix"),
 	},
@@ -126,7 +126,6 @@ function run() {
 	const keyword = // `alfred_workflow_keyword` is not set when triggered via hotkey
 		$.NSProcessInfo.processInfo.environment.objectForKey("alfred_workflow_keyword").js ||
 		$.NSProcessInfo.processInfo.environment.objectForKey("keyword_from_hotkey").js;
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("KEYWORD:", keyword);
 
 	// PARAMETERS
@@ -140,10 +139,8 @@ function run() {
 		if (directory === "") return errorItem("⚠️ No Finder window found.");
 	}
 	if (directory) shellCmd = shellCmd.replace("%s", directory);
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("SHELL COMMAND\n" + shellCmd);
 	const stdout = app.doShellScript(shellCmd).trim();
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("\nSTDOUT (shortened)\n" + stdout.slice(0, 300));
 	if (stdout === "") return errorItem("No files found.");
 
@@ -152,6 +149,10 @@ function run() {
 		.split("\r")
 		.slice(0, maxFiles)
 		.map((line) => {
+			let mdate
+			if (keyword === $.getenv("tag_keyword")) {
+				[line, mdate] = line.split("   kMDItemContentModificationDate = ");
+			}
 			const parts = line.split("/");
 			const name = parts.pop() || "";
 			const absPath = absPathOutput ? line : directory + "/" + line;
@@ -177,7 +178,12 @@ function run() {
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
 				icon: icon,
+				mdate: mdate // only for tag keyword sorting
 			};
+		})
+		.sort((a, b) => {
+			if (!a.mdate) return 0; // do not sort if no mdate data
+			return a.mdate > b.mdate ? -1 : 1
 		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
