@@ -348,12 +348,18 @@ function run() {
 
 	// GUARD Error or no posts left after filtering
 	if (typeof posts === "string") {
-		const errorMsg = posts.replace(/<\w+>/g, ""); // remove html
+		const errorMsg = posts.includes("blocked by network security")
+			? "You have been blocked by network security."
+			: posts;
 		const info = "See debugging console for details.";
 		return JSON.stringify({
 			items: [
 				{ title: errorMsg, subtitle: info, valid: false },
-				{ title: "Open in the browser", subtitle: "r/" + subredditName, arg: `https://reddit.com/r/${subredditName}` },
+				{
+					title: "Open subreddit in the browser",
+					subtitle: "r/" + subredditName,
+					arg: `https://reddit.com/r/${subredditName}`,
+				},
 			],
 		});
 	}
