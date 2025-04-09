@@ -79,7 +79,7 @@ return {
 			-- local one must come first to take priority
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
 			-- also requires `yq` being available in the system
-			("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
+			-- ("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
 			"github:mason-org/mason-registry",
 		},
 
