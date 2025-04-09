@@ -36,18 +36,18 @@ rules:
       # Highlights: Free Comment (held down: red underline)
       - type: basic
         from: { pointing_button: button4 }
-        to_if_alone:
+        to:
           - { key_code: "u", modifiers: [control, command] }
           - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Underline 🖍️"
         to_if_held_down:
-          - { key_code: "s", modifiers: [control, command] }
-          - { key_code: "1", modifiers: [control, command] }
+          - { key_code: n, modifiers: [command, control] }
+          - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Strikethrough ❌"
+                  --title "Highlights" --message "Comment ✏️"
         conditions:
           - type: frontmost_application_if
             bundle_identifiers: [^net\.highlightsapp\.universal$]
@@ -79,7 +79,7 @@ rules:
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
-      # Highlights: Yellow Highlight
+      # Highlights: Yellow Highlight (held down: red underline)
       - type: basic
         from: { pointing_button: button5 }
         to_if_alone:
@@ -89,11 +89,11 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Highlight 🟨"
         to_if_held_down:
-          - { key_code: n, modifiers: [command, control] }
-          - { key_code: "3", modifiers: [command, control] }
+          - { key_code: "u", modifiers: [control, command] }
+          - { key_code: "1", modifiers: [control, command] }
           - shell_command: |
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Comment ✏️"
+                  --title "Highlights" --message "Underline 🖍️"
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^net.highlightsapp.universal$] }
       # Mimestream: Archive
