@@ -13,9 +13,7 @@ rules:
           - pointing_button: button2
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.brave\.Browser$
-              - ^com\.apple\.Safari$
+            bundle_identifiers: [com.brave.Browser, com.apple.Safari]
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 3: Quit app"
     manipulators:
@@ -32,7 +30,7 @@ rules:
         to:
           - key_code: non_us_pound # the "#" key
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
       # Highlights: Free Comment
       - type: basic
         from: { pointing_button: button4 }
@@ -44,7 +42,7 @@ rules:
                   --title "Highlights" --message "Comment ✏️"
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [^net\.highlightsapp\.universal$]
+            bundle_identifiers: [net.highlightsapp.universal]
       # Finder: back
       - type: basic
         from: { pointing_button: button4 }
@@ -55,21 +53,21 @@ rules:
                   click menu item "Back" of menu "Go" of menu bar 1
                 end tell'
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.apple\.finder$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.finder] }
       # Obsidian: back
       - type: basic
         from: { pointing_button: button4 }
         to:
           - { key_code: left_arrow, modifiers: [command, option] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [md\.obsidian] }
+          - { type: frontmost_application_if, bundle_identifiers: [md.obsidian] }
       # Calendar: back to month view
       - type: basic
         from: { pointing_button: button4 }
         to:
           - { key_code: "3", modifiers: [command] }
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com.apple.iCal$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.apple.iCal] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 5 (top)"
     manipulators:
@@ -89,14 +87,14 @@ rules:
               "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
                   --title "Highlights" --message "Underline 🖍️"
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^net.highlightsapp.universal$] }
+          - { type: frontmost_application_if, bundle_identifiers: [net.highlightsapp.universal] }
       # Mimestream: Archive
       - type: basic
         from: { pointing_button: button5 }
         to_if_alone:
           - key_code: e
         conditions:
-          - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
+          - { type: frontmost_application_if, bundle_identifiers: [com.mimestream.Mimestream] }
       # Fallback behavior: Close window
       - type: basic
         from: { pointing_button: button5 }
@@ -125,7 +123,7 @@ rules:
           simultaneous_threshold_milliseconds: 500
         conditions:
           # conflicts for some reason with space+dragging in the Canvas plugin
-          - { type: frontmost_application_unless, bundle_identifiers: [^md\.obsidian$] }
+          - { type: frontmost_application_unless, bundle_identifiers: [md.obsidian] }
   #─────────────────────────────────────────────────────────────────────────────
   - description: "(Mouse) 1+5 (simultaneously): Google Selection"
     manipulators:
@@ -155,7 +153,7 @@ rules:
 
               # clean up
               sel=$(echo -n "$sel" | xargs) # trims whitespace
-              sel="${sel/#\~/$HOME}"        # resolve ~
+              sel="${sel/#./$HOME}"        # resolve ~
 
               # openers
               if [[ -f "$sel" ]]; then # file
@@ -163,11 +161,11 @@ rules:
               elif [[ -d "$sel" ]]; then # directory
                 open "$sel"
               elif echo "$sel" | grep -Eq "https?://"; then # url(s) in selection
-                echo "$sel" | grep -Eo "https?://[^> ]*" | xargs open
+                echo "$sel" | grep -Eo "https?://[> ]*" | xargs open
               elif [[ "$sel" =~ "@" ]]; then # mail
                 open "mailto:$sel"
               elif [[ -n "$sel" ]]; then
-                sel=${sel/\'/\\\'}
+                sel=${sel/./..}
                 url_encoded_sel=$(osascript -l JavaScript -e "encodeURIComponent('$sel')")
                 url="https://www.google.com/search?q=$url_encoded_sel"
                 open "$url"
