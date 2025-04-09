@@ -348,10 +348,11 @@ function run() {
 
 	// GUARD Error or no posts left after filtering
 	if (typeof posts === "string") {
-		const errorMsg = posts.includes("blocked by network security")
-			? "You have been blocked by network security."
-			: posts;
-		const info = "See debugging console for details.";
+		const blockedByNs = posts.includes("blocked by network security");
+		const errorMsg = blockedByNs ? "You have been blocked by network security." : posts;
+		const info = blockedByNs
+			? "Usually, the workflow will work again in a few hours."
+			: "See debugging console for details.";
 		return JSON.stringify({
 			items: [
 				{ title: errorMsg, subtitle: info, valid: false },
