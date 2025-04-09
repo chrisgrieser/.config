@@ -33,16 +33,10 @@ rules:
           - key_code: non_us_pound # the "#" key
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [^com\.mimestream\.Mimestream$] }
-      # Highlights: Free Comment (held down: red underline)
+      # Highlights: Free Comment
       - type: basic
         from: { pointing_button: button4 }
         to:
-          - { key_code: "u", modifiers: [control, command] }
-          - { key_code: "1", modifiers: [control, command] }
-          - shell_command: |
-              "$HOME/.config/karabiner/assets/notificators/highlights-notificator" \
-                  --title "Highlights" --message "Underline 🖍️"
-        to_if_held_down:
           - { key_code: n, modifiers: [command, control] }
           - { key_code: "3", modifiers: [command, control] }
           - shell_command: |
