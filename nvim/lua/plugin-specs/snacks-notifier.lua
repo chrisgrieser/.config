@@ -96,11 +96,8 @@ return {
 	keys = {
 		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
 		{ "<D-9>", function() openNotif("last") end, desc = "󰎟 Last notification" },
-		{
-			"<D-0>",
-			function() Snacks.notifier.show_history() end,
-			desc = "󰎟 Notification history",
-		},
+		-- stylua: ignore
+		{ "<D-0>", function() Snacks.notifier.show_history() end, desc = "󰎟 Notification history" },
 	},
 	opts = {
 		---@class snacks.notifier.Config
