@@ -5,7 +5,26 @@
 
 return {
 	"folke/snacks.nvim",
-	lazy = false, -- for quickfile and bigfile
+
+	-- for quickfile and bigfile
+	priority = 1000,
+	lazy = false,
+
+	config = function(_, opts)
+		require("snacks").setup(opts)
+
+		-- ignore certain notifications
+		---@diagnostic disable-next-line: duplicate-set-field intentional overwrite
+		vim.notify = function(msg, ...)
+			local ignore = msg == "No code actions available"
+				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
+			if ignore then return end
+			Snacks.notifier(msg, ...)
+		end
+
+		-- disable default keymaps to make the `?` help overview less cluttered
+		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+	end,
 
 	keys = {
 		{ "#", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },

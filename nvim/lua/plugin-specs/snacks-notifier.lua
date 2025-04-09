@@ -69,7 +69,8 @@ local function openNotif(idx)
 			fillchars = "fold: ",
 		},
 		bo = {
-			ft = notif.ft or "markdown", -- not using `snacks_notif` so treesitter attached
+			-- not using `snacks_notif` so treesitter attaches (relevant for folding)
+			ft = notif.ft or "markdown",
 			modifiable = false,
 		},
 		keys = {
@@ -92,21 +93,6 @@ end
 
 return {
 	"folke/snacks.nvim",
-	config = function(_, opts)
-		require("snacks").setup(opts)
-
-		-- ignore certain notifications
-		---@diagnostic disable-next-line: duplicate-set-field intentional overwrite
-		vim.notify = function(msg, ...)
-			local ignore = msg == "No code actions available"
-				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
-			if ignore then return end
-			Snacks.notifier(msg, ...)
-		end
-
-		-- disable default keymaps to make the `?` help overview less cluttered
-		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
-	end,
 	keys = {
 		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
 		{ "<D-9>", function() openNotif("last") end, desc = "󰎟 Last notification" },
