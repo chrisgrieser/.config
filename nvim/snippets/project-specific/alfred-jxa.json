@@ -15,11 +15,11 @@
   },
   "Get Alfred Env": {
     "body": "\\$.getenv(\"${1:envVar}\");",
-    "prefix": "Get Alfred Env"
+    "prefix": "get Alfred env var"
   },
   "Get Alfred Env (Safe)": {
     "body": "\\$.NSProcessInfo.processInfo.environment.objectForKey(\"${1:envVar}\").js;",
-    "prefix": "Get Alfred Env (Safe)"
+    "prefix": "get alfred env var (safe)"
   },
   "Modifiers (Script Filter)": {
     "body": [

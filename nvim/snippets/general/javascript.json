@@ -217,15 +217,6 @@
     "description": "Sort Array with basic a-b-comparator function",
     "prefix": "sort ( () => {} )"
   },
-  "split by \\n": {
-    "body": ".split(\"\\n\")",
-    "prefix": ".split by \\n"
-  },
-  "split by \\r": {
-    "body": ".split(\"\\r\")",
-    "description": "required for output from app.doShellScript()",
-    "prefix": ".split by \\r"
-  },
   "switch .. case": {
     "body": [
       "switch (${1:key}) {",

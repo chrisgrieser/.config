@@ -55,11 +55,11 @@
   },
   "check if app is frontmost": {
     "body": "Application(\"${1:appName}\").frontmost();",
-    "prefix": "check if app is frontmost"
+    "prefix": "check if app is frontmost (jxa)"
   },
   "check if app is running": {
     "body": "Application(\"${1:appName}\").running()",
-    "prefix": "check if app is running"
+    "prefix": "check if app is running (jxa)"
   },
   "file exists": {
     "body": "const fileExists = (/** @type {string} */ filePath) => Application(\"Finder\").exists(Path(filePath));",
