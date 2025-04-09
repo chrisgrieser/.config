@@ -110,7 +110,7 @@ local blinkConfig = {
 				},
 			},
 			menu = {
-				max_height = 15,
+				max_height = 12,
 				draw = {
 					align_to = "none", -- keep in place
 					treesitter = { "lsp" },

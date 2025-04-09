@@ -58,12 +58,14 @@ function run() {
 
 			const [_, repo, stars, url, desc] = line.match(mdLinkRegex) || [];
 			if (!repo || !url) return {};
-			const [author, name] = repo.split("/") || [];
+			const [author, name] = repo.split("/");
+			if (!name) return {};
+			const displayName = name.replaceAll("\\_", "_");
 			const installedIcon = installedPlugins.includes(repo) ? " ✅" : "";
 			const subtitle = ["⭐ " + stars, author, desc].join("  ·  ");
 
 			return {
-				title: name + installedIcon,
+				title: displayName + installedIcon,
 				match: alfredMatcher(repo),
 				subtitle: subtitle,
 				arg: url,
