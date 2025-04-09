@@ -50,8 +50,8 @@ function getTrashPathQuoted() {
 	if (macosVersion < 15) trashLocation += "com~apple~CloudDocs/";
 	const trashPath = trashLocation + ".Trash";
 
-	// Checking via `Application("Finder").exists()` sometimes has persmisson
-	// issues as path is in iCloud. Thus checking via `test -d` instead.
+	// Checking via `Application("Finder").exists()` sometimes has permission
+	// issues because the path is in iCloud. Thus checking via `test -d` instead.
 	const userHasIcloudDrive = app.doShellScript(`test -d "${trashPath}" || echo "no"`) !== "no";
 
 	if (userHasIcloudDrive) return `"${trashPath}"`;
@@ -105,7 +105,7 @@ const searchConfig = {
 		shallowOutput: true,
 	},
 	[$.getenv("tag_keyword")]: {
-		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}" -attr kMDItemContentModificationDate`,
+		shellCmd: `mdfind "kMDItemUserTags == ${$.getenv("tag_to_search")}"`,
 		absPathOutput: true,
 		prefix: $.getenv("tag_prefix"),
 	},
@@ -149,10 +149,6 @@ function run() {
 		.split("\r")
 		.slice(0, maxFiles)
 		.map((line) => {
-			let mdate
-			if (keyword === $.getenv("tag_keyword")) {
-				[line, mdate] = line.split("   kMDItemContentModificationDate = ");
-			}
 			const parts = line.split("/");
 			const name = parts.pop() || "";
 			const absPath = absPathOutput ? line : directory + "/" + line;
@@ -178,13 +174,8 @@ function run() {
 				type: "file:skipcheck",
 				match: alfredMatcher(name),
 				icon: icon,
-				mdate: mdate // only for tag keyword sorting
 			};
 		})
-		.sort((a, b) => {
-			if (!a.mdate) return 0; // do not sort if no mdate data
-			return a.mdate > b.mdate ? -1 : 1
-		});
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with
 	// the `alfred_workflow_keyword` environment variable https://www.alfredforum.com/topic/21754-wrong-alfred-55-cache-used-when-using-alternate-keywords-like-foobar/#comment-113358
