@@ -17,8 +17,9 @@ struct ReminderOutput: Codable {
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
-// Alfred environment variable, empty means using all lists
-let reminderList = ProcessInfo.processInfo.environment["reminder_list"] ?? ""
+// Alfred environment variables
+let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
+let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -38,7 +39,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Get list specified or use all lists
 	let calendars = eventStore.calendars(for: .reminder)
 	let selectedCalendars: [EKCalendar]
-	if reminderList.isEmpty {
+	if includeAllLists {
 		selectedCalendars = calendars
 	} else if let target = calendars.first(where: { $0.title == reminderList }) {
 		selectedCalendars = [target]
