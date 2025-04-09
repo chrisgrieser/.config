@@ -552,10 +552,11 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Info
-Sometimes, there will be the error message "You have been blocked by network 
-security." Unfortunately, I am not certain what exactly causes this. Usually, 
-the workflow will work again in a few hours. 
+	<string>## "Blocked by network security"
+Sometimes, there will be the error message "You have been blocked by network
+security." Unfortunately, I am not certain what exactly causes this. Usually,
+the workflow will work again after a few hours. If you are a developer, help
+solving this is welcome.
 
 ## Usage
 - `sub`: Select subreddit to browse.
@@ -1034,7 +1035,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6.13</string>
+	<string>1.6.14</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
