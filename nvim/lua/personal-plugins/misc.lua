@@ -90,11 +90,19 @@ function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
 	}
-	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then toggles["const"] = "let" end
-	if vim.bo.ft == "python" then toggles["True"] = "False" end
-	if vim.bo.ft == "swift" then toggles["var"] = "let" end
+	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+		toggles["const"] = "let"
+		toggles["==="] = "!=="
+	end
+	if vim.bo.ft == "python" then
+		toggles["True"] = "False"
+		toggles["=="] = "!="
+	end
+	if vim.bo.ft == "swift" then
+		toggles["var"] = "let"
+	end
 
-	local cword = vim.fn.expand("<cword>")
+	local cword = vim.fn.expand("<cWORD>"):find("^%p+$") and vim.fn.expand("<cWORD>") or vim.fn.expand("<cword>")
 	local newWord
 	for word, opposite in pairs(toggles) do
 		if cword == word then newWord = opposite end

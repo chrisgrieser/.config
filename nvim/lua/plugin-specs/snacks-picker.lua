@@ -94,7 +94,7 @@ return {
 				-- need to remove it from the default settings itself
 				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
 					nil
-				Snacks.picker.recent()
+				Snacks.picker.smart()
 			end,
 			desc = "󰋚 Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
@@ -202,10 +202,23 @@ return {
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 				},
-				recent = {
+				recent = { -- used for `smart` picker
 					layout = "small_no_preview",
 					filter = {
 						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
+					},
+				},
+				buffers = { -- used for `smart` picker
+					current = false,
+				},
+				smart = {
+					layout = "small_no_preview",
+					multi = { "buffers", "recent" },
+					matcher = { cwd_bonus = false },
+					win = {
+						input = {
+							keys = { ["<D-w>"] = { "bufdelete", mode = "i" } },
+						},
 					},
 				},
 				grep = {
@@ -399,7 +412,7 @@ return {
 				end,
 			},
 			prompt = " ", -- slightly to the left
-			icons = {
+			icons = { ---@diagnostic disable-line: missing-fields faulty annotation
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
 				git = {
