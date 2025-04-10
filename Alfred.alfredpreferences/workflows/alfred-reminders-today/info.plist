@@ -546,18 +546,17 @@
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
-				<string>reminders_json=$(swift ./scripts/get-reminders.swift)
-osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/select-reminders.js</string>
 				<key>subtext</key>
 				<string>Show reminders due today {var:reminder_list}</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
-				<integer>11</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -1440,7 +1439,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.4</string>
+	<string>2.5.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

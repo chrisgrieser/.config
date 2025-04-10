@@ -63,9 +63,8 @@ const urlRegex =
 
 //───────────────────────────────────────────────────────────────────────────
 
-/** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run(argv) {
+function run() {
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
@@ -76,7 +75,7 @@ function run(argv) {
 	startOfToday.setHours(0, 0, 0, 0);
 
 	/** @type {reminderObj[]} */
-	const remindersJson = JSON.parse(argv[0]);
+	const remindersJson = JSON.parse(app.doShellScript("swift ./scripts/get-reminders.swift"));
 	const remindersFiltered = remindersJson
 		.filter((rem) => {
 			const dueDate = rem.dueDate ? new Date(rem.dueDate) : null;
@@ -145,12 +144,12 @@ function run(argv) {
 							(url ? "🔗 Open URL" : "📋 Copy") + (rem.isCompleted ? "" : " and completed"),
 					},
 				},
-				alt : {
+				alt: {
 					arg: content,
 					variables: {
 						id: rem.id,
 						mode: "edit-reminder",
-					}
+					},
 				},
 				shift: {
 					variables: {
