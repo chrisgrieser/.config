@@ -254,7 +254,8 @@ themes = vim.iter(themes)
 -- 2. and via Hammerspoon on manual mode change (`OptionSet` autocmd doesn't work reliably)
 vim.g.setColorscheme = function(init)
 	if init then
-		-- needs to be set manually, since `Neovide` does not set it in time on startup
+		-- needs to be set manually, since `Neovide` does not set correctly
+		-- https://github.com/neovide/neovide/issues/3066
 		local macOSMode = vim.system({ "defaults", "read", "-g", "AppleInterfaceStyle" }):wait()
 		vim.o.background = macOSMode.stdout:find("Dark") and "dark" or "light"
 	else

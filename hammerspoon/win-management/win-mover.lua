@@ -49,6 +49,7 @@ local function toggleMaximized()
 	local baseSize = wu.pseudoMax
 	if u.isFront(smallerWins) then baseSize = wu.middleHalf end
 	if env.isProjector() then baseSize = hs.layout.maximized end
+
 	local newSize = wu.winHasSize(currentWin, baseSize) and hs.layout.maximized or baseSize
 
 	wu.moveResize(currentWin, newSize)

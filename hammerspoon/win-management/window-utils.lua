@@ -40,17 +40,7 @@ end
 ---@param win hs.window
 ---@param pos hs.geometry
 function M.moveResize(win, pos)
-	-- GUARD
-	local appsToIgnore = { "Transmission", "Hammerspoon", "Ivory" }
-	if
-		not win
-		or not (win:application())
-		or hs.fnutils.contains(appsToIgnore, win:application():name()) ---@diagnostic disable-line: undefined-field
-		or not win:isMaximizable()
-		or not win:isStandard()
-	then
-		return
-	end
+	if not (win and win:isMaximizable() and win:isStandard()) then return end
 
 	-- resize with safety redundancy
 	u.defer({ 0, 0.4, 0.8 }, function()

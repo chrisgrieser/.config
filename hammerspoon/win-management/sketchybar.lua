@@ -10,9 +10,11 @@ local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
+-- CONFIG
 local dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch" }
 
-M.aw_maxWindows = aw.new(function(_appName, event, app)
+M.aw_maxWindows = aw.new(function(appName, event, app)
+	if appName == "Hammerspoon" then return end -- lots of dummy windows
 	if event ~= aw.deactivated or env.isProjector() or u.isFront(dontTriggerHidingOtherApps) then
 		return
 	end

@@ -2,7 +2,7 @@ return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
 	keys = {
-		{ "<leader>#", vim.cmd.CccPick, desc = " Color picker" },
+		{ "#", vim.cmd.CccPick, desc = " Color picker" },
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	ft = { "css", "zsh", "lua", "toml" },
