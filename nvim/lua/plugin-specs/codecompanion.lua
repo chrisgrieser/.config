@@ -1,4 +1,6 @@
 -- DOCS https://codecompanion.olimorris.dev/
+--------------------------------------------------------------------------------
+
 return {
 	"olimorris/codecompanion.nvim",
 	dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
@@ -24,6 +26,7 @@ return {
 		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = " Chat" },
 	},
 	opts = {
+		-- CodeCompanion settings
 		display = {
 			chat = {
 				start_in_insert_mode = true,
@@ -38,6 +41,8 @@ return {
 				enabled = true,
 			},
 		},
+
+		-- LLM settings
 		strategies = {
 			chat = { adapter = "openai" },
 			inline = { adapter = "openai" },
@@ -46,9 +51,7 @@ return {
 		adapters = {
 			openai = function()
 				return require("codecompanion.adapters").extend("openai", {
-					env = {
-						api_key = vim.env.OPENAI_API_KEY,
-					},
+					env = { api_key = vim.env.OPENAI_API_KEY }, -- via .zshenv
 					schema = {
 						model = {
 							default = "gpt-4o-mini",
