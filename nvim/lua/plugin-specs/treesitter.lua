@@ -78,6 +78,7 @@ return {
 						:gsub(" extends .-$", "") -- js/ts: classes
 						:gsub("(%w)%(%)$", "%1") -- remove empty `()`
 						:gsub("^function", "")
+						:gsub("^func", "") -- swift
 						:gsub("^def", "") -- python
 				end,
 			}

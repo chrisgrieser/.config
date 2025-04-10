@@ -1,3 +1,3 @@
-#!/usr/bin/swift
+#!/usr/bin/env swift
 
 $0

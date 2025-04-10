@@ -6,16 +6,10 @@ let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
-let args = CommandLine.arguments
-guard args.count > 1 else {
-	print("❗ Please provide the title of the reminder as an argument.\n")
-	exit(1)
-}
-
-let reminderTitle = args[1]
-
+let reminderTitle = CommandLine.arguments[1]
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let when = ProcessInfo.processInfo.environment["when_to_add"]!
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
