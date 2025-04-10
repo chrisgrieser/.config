@@ -37,7 +37,7 @@ return {
 			globalstatus = true,
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
-			component_separators = { left = "", right = "" },
+			component_separators = { left = "│", right = "│" },
 
 			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
@@ -98,6 +98,7 @@ return {
 			},
 			lualine_b = {
 				{ require("personal-plugins.alt-alt").altFileStatusbar },
+				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
 			},
 			lualine_c = {
 				{ -- Quickfix counter
@@ -106,7 +107,7 @@ return {
 						if #qf.items == 0 then return "" end
 						-- remove empty brackets and/or flags from `makeprg`
 						local title = qf.title:gsub(" %(%)", ""):gsub("%-%-[%w-_]+ ?", "")
-						return (" %d/%d %q"):format(qf.idx, #qf.items, title)
+						return (" %d/%d %s"):format(qf.idx, #qf.items, title)
 					end,
 				},
 			},
