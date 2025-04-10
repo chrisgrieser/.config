@@ -2,7 +2,7 @@ return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = "echasnovski/mini.icons",
 
-	ft = "markdown",
+	ft = { "markdown", "codecompanion" },
 	keys = {
 		{
 			"<leader>oc",

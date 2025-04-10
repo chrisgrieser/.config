@@ -22,6 +22,7 @@ return {
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
+			["codecompanion"] = { glyph = "" },
 		},
 	},
 }
