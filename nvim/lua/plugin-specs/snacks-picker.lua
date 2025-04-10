@@ -94,7 +94,7 @@ return {
 				-- need to remove it from the default settings itself
 				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
 					nil
-				Snacks.picker.smart()
+				Snacks.picker.recent()
 			end,
 			desc = "󰋚 Recent files",
 			nowait = true, -- nvim default mappings starting with `gr`
@@ -202,23 +202,10 @@ return {
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 				},
-				recent = { -- used for `smart` picker
+				recent = {
 					layout = "small_no_preview",
 					filter = {
 						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
-					},
-				},
-				buffers = { -- used for `smart` picker
-					current = false,
-				},
-				smart = {
-					layout = "small_no_preview",
-					multi = { "buffers", "recent" },
-					matcher = { cwd_bonus = false },
-					win = {
-						input = {
-							keys = { ["<D-w>"] = { "bufdelete", mode = "i" } },
-						},
 					},
 				},
 				grep = {
