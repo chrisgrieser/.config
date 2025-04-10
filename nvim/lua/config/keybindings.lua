@@ -428,7 +428,7 @@ end
 --------------------------------------------------------------------------------
 -- REFACTORING
 
-keymap("n", "<leader>v", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
+keymap("n", "<leader>rr", vim.lsp.buf.rename, { desc = "󰑕 LSP rename" })
 
 -- stylua: ignore
 keymap("n", "<leader>rc", function() require("personal-plugins.misc").camelSnakeLspRename() end, { desc = "󰑕 LSP rename: camel/snake" })

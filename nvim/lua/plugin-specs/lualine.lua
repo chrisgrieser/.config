@@ -16,16 +16,6 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where)
 	require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
 
--- helper for `lsp_spinner` component
-local lspActive
-vim.api.nvim_create_autocmd("LspProgress", {
-	desc = "User: Hide LSP progress component after 2s",
-	callback = function()
-		lspActive = true
-		vim.defer_fn(function() lspActive = false end, 2000)
-	end,
-})
-
 --------------------------------------------------------------------------------
 
 return {
@@ -37,7 +27,7 @@ return {
 			globalstatus = true,
 			always_divide_middle = false,
 			section_separators = { left = "", right = "" }, -- save space
-			component_separators = { left = "│", right = "│" },
+			component_separators = { left = "", right = "" }, -- │
 
 			-- so current file name is still visible when renaming/selecting
 			ignore_focus = { "snacks_input", "snacks_picker_input" },
@@ -98,9 +88,11 @@ return {
 			},
 			lualine_b = {
 				{ require("personal-plugins.alt-alt").altFileStatusbar },
-				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
 			},
 			lualine_c = {
+				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
+			},
+			lualine_x = {
 				{ -- Quickfix counter
 					function()
 						local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
@@ -110,8 +102,6 @@ return {
 						return (" %d/%d %s"):format(qf.idx, #qf.items, title)
 					end,
 				},
-			},
-			lualine_x = {
 				{
 					"fileformat",
 					icon = "󰌑",
@@ -126,7 +116,19 @@ return {
 					"lsp_status",
 					icon = "",
 					ignore_lsp = { "typos_lsp", "efm" },
-					cond = function() return lspActive end,
+					-- only show component if LSP is active
+					cond = function()
+						if vim.g.lualine_lsp_active == nil then
+							vim.api.nvim_create_autocmd("LspProgress", {
+								desc = "User: Hide LSP progress component after 2s",
+								callback = function()
+									vim.g.lualine_lsp_active = true
+									vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
+								end,
+							})
+						end
+						return vim.g.lualine_lsp_active
+					end,
 				},
 			},
 			lualine_y = {
