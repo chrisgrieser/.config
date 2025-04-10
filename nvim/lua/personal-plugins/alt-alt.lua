@@ -4,8 +4,8 @@ Alternative to vim's "alternative file" that improves its functionality.
 1.`require("alt-alt").gotoAltFile()` as an improved version of `:buffer #` that
   avoids special buffers, deleted buffers, non-existent files etc. and falls back
   to the first oldfile, if there is currently only one buffer.
-2.`require("alt-alt").deleteBuffer()` removes the buffer as alt-file, but keepts
-  it in the list of oldfiles.
+2.`require("alt-alt").deleteBuffer()` also removes the buffer as alt-file, but
+  keeps it in the list of oldfiles.
 3.`require("alt-alt").altFileStatusbar()` to display the alt-file in the
   statusbar, including an icon (if `nvim-devicons` or `mini-icons` is installed).
 ]]
@@ -70,6 +70,8 @@ end
 
 --------------------------------------------------------------------------------
 
+---As opposed to the regular `:bdelete`, this function closes the buffer
+---without it being the alt-file.
 function M.deleteBuffer()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 
@@ -93,6 +95,72 @@ function M.deleteBuffer()
 		end
 	end
 end
+
+
+---switch to alternate buffer/oldfile (in that priority)
+function M.gotoAltFile()
+	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
+		notify("Cannot do that in special buffer.", "warn")
+		return
+	end
+	local altOld = altOldfile()
+
+	if hasAltBuffer() then
+		vim.cmd.buffer("#")
+	elseif altOld then
+		vim.cmd.edit(altOld)
+	else
+		notify("No alt buffer or oldfile available.", "error")
+	end
+end
+
+
+function M.gotoMostChangedFile()
+	-- get list of changed files
+	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
+	if gitResponse.code ~= 0 then
+		notify("Not in git repo.", "warn")
+		return
+	end
+	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
+	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
+	if #changedFiles == 0 then
+		notify("No files with changes found.")
+		return
+	end
+
+	-- identify file with most changes
+	local targetFile
+	local mostChanges = 0
+	vim.iter(changedFiles):each(function(line)
+		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if not (added and deleted and relPath) then return end -- in case of changed binary files
+
+		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
+		if not vim.uv.fs_stat(absPath) then return end
+
+		local changes = tonumber(added) + tonumber(deleted)
+		if changes > mostChanges then
+			mostChanges = changes
+			targetFile = absPath
+		end
+	end)
+
+	-- goto file
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	if targetFile == currentFile then
+		notify("Already at only changed file.")
+	else
+		vim.cmd.edit(targetFile)
+	end
+end
+
+function M.mostChangedFileStatusbar()
+	
+end
+
+--------------------------------------------------------------------------------
+-- STATUSBAR
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
@@ -131,23 +199,6 @@ function M.altFileStatusbar()
 
 	if not config.statusbar.showIcon then return name end
 	return icon .. " " .. name
-end
-
----switch to alternate buffer/oldfile (in that priority)
-function M.gotoAltFile()
-	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
-		notify("Cannot do that in special buffer.", "warn")
-		return
-	end
-	local altOld = altOldfile()
-
-	if hasAltBuffer() then
-		vim.cmd.buffer("#")
-	elseif altOld then
-		vim.cmd.edit(altOld)
-	else
-		notify("No alt buffer or oldfile available.", "error")
-	end
 end
 
 --------------------------------------------------------------------------------
