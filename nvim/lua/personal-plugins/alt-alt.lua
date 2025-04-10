@@ -1,4 +1,4 @@
---[[ INFO: ALT-ALT
+--[[ INFO ALT-ALT
 Alternative to vim's "alternative file" that improves its functionality.
 
 1.`.gotoAltFile()` as an improved version of `:buffer #` that avoids special
@@ -16,13 +16,11 @@ Alternative to vim's "alternative file" that improves its functionality.
 
 local config = {
 	icons = {
-		notification = "󰬈",
-		oldfile = "󰋚",
+		oldFile = "󰋚",
+		altFile = "󰬈", -- set to nil to use filetype icon from mini.icons
+		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
 	},
-	statusbar = {
-		maxLength = 30,
-		showFiletypeIcon = true, -- requires `mini-icons`
-	},
+	statusbarMaxLength = 30,
 	ignoreOldfiles = { -- patterns for `string.find`
 		"/COMMIT_EDITMSG",
 		"/snacks_scratch/",
@@ -34,10 +32,11 @@ local M = {}
 
 ---@param msg string
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
-local function notify(msg, level)
+---@param icon string
+local function notify(msg, level, icon)
 	if not level then level = "info" end
 	local lvl = vim.log.levels[level:upper()]
-	vim.notify(msg, lvl, { title = "Alt-alt", icon = config.icons.notification })
+	vim.notify(msg, lvl, { title = "Alt-alt", icon = icon })
 end
 
 ---@nodiscard
@@ -101,22 +100,19 @@ end
 ---@param filepath string
 ---@param bufnr? number
 ---@return string? icon
-local function getIcon(filepath, bufnr)
-	local icon
+local function getFiletypeIcon(filepath, bufnr)
 	local ok, miniIcons = pcall(require, "mini.icons")
 	if not (ok and miniIcons) then return end
 
-	local isDefault = false
-	icon, _, isDefault = miniIcons.get("file", filepath)
-	if not (isDefault and bufnr) then return icon end
+	local icon, _, isDefault = miniIcons.get("file", filepath)
+	if isDefault and bufnr then icon = miniIcons.get("filetype", vim.bo[bufnr].ft) end
 
-	icon = miniIcons.get("filetype", vim.bo[bufnr].ft)
 	return icon
 end
 
 ---@param path string
 ---@return string
-local function getNameForStatusbar(path)
+local function nameForStatusbar(path)
 	local displayName = vim.fs.basename(path)
 
 	-- add parent if displayname is same as basename of current file
@@ -127,7 +123,7 @@ local function getNameForStatusbar(path)
 	end
 
 	-- truncate
-	local maxLength = config.statusbar.maxLength
+	local maxLength = config.statusbarMaxLength
 	if #displayName > maxLength then
 		displayName = displayName:sub(1, maxLength)
 		displayName = vim.trim(displayName) .. "…"
@@ -145,7 +141,7 @@ function M.deleteBuffer()
 
 	-- close buffer
 	if #openBuffers < 2 then
-		notify("Only one buffer open.", "trace")
+		notify("Only one buffer open.", "trace", config.icons.altFile)
 		return
 	end
 	vim.cmd("silent! update")
@@ -167,7 +163,7 @@ end
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
-		notify("Cannot do that in special buffer.", "warn")
+		notify("Cannot do that in special buffer.", "warn", config.icons.altFile)
 		return
 	end
 	local altOld = altOldfile()
@@ -177,20 +173,20 @@ function M.gotoAltFile()
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		notify("No alt buffer or oldfile available.", "error")
+		notify("No alt buffer or oldfile available.", "error", config.icons.altFile)
 	end
 end
 
 function M.gotoMostChangedFile()
 	local targetFile, errmsg = getMostChangedFile()
 	if errmsg then
-		notify(errmsg, "warn")
+		notify(errmsg, "warn", config.icons.mostChangedFile)
 		return
 	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then
-		notify("Already at the most changed file.")
+		notify("Already at the most changed file.", "trace", config.icons.mostChangedFile)
 	else
 		vim.cmd.edit(targetFile)
 	end
@@ -202,7 +198,10 @@ end
 local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Alt-alt: update most changed file statusbar",
-	callback = function() mostChangedFile = getMostChangedFile() end,
+	group = vim.api.nvim_create_augroup("AltAltStatusbar", { clear = true }),
+	callback = function()
+		vim.defer_fn(function() mostChangedFile = getMostChangedFile() end, 1)
+	end,
 })
 
 function M.mostChangedFileStatusbar()
@@ -213,11 +212,8 @@ function M.mostChangedFileStatusbar()
 	local altFile = vim.api.nvim_buf_get_name(vim.fn.bufnr("#"))
 	if targetFile == currentFile or targetFile == altFile then return "" end
 
-	local name = getNameForStatusbar(targetFile)
-	if not config.statusbar.showFiletypeIcon then return name end
-
-	local ftIcon = getIcon(targetFile) or ""
-	return vim.trim(ftIcon .. " " .. name)
+	local icon = config.icons.mostChangedFile or getFiletypeIcon(targetFile) or "M"
+	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
@@ -230,16 +226,13 @@ function M.altFileStatusbar()
 	if hasAltBuffer() then
 		local altBufNr = vim.fn.bufnr("#")
 		path = vim.api.nvim_buf_get_name(altBufNr)
-		icon = getIcon(path, altBufNr) or "#"
+		icon = config.icons.altFile or getFiletypeIcon(path, altBufNr) or "#"
 	elseif altOld then
-		icon = config.icons.oldfile or ""
+		icon = config.icons.oldFile or ""
 		path = altOld
 	end
 
-	local name = getNameForStatusbar(path)
-	if not config.statusbar.showFiletypeIcon then return name end
-
-	return vim.trim(icon .. " " .. name)
+	return vim.trim(icon .. " " .. nameForStatusbar(path))
 end
 
 --------------------------------------------------------------------------------

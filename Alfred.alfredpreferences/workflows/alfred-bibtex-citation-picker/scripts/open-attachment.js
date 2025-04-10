@@ -25,7 +25,7 @@ function run(argv) {
 	}
 	path = path
 		.replace(/;\/Users\/.*/, "") // multiple attachments https://github.com/chrisgrieser/alfred-bibtex-citation-picker/issues/45
-		.replace(/^file:\/\//, "") // makes opening via `open` and file existence check work
+		.replace(/^file:\/\/(localhost)?/, "") // prefix breaks file existence check
 		.replace(/^~/, app.pathTo("home folder")); // expand ~
 
 	// GUARD file existence

@@ -27,8 +27,8 @@ return {
 	end,
 
 	keys = {
-		{ "#", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
-		{ "'", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
+		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
+		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
 		{
 			"<leader>ee",

@@ -39,7 +39,7 @@ end
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
-hs.consoleOnTop(true)
+hs.consoleOnTop(true) -- buggy?
 
 -- suppress unnecessary log messages
 hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
