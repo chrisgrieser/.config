@@ -16,10 +16,11 @@ local config = {
 	icons = {
 		main = "󰬈",
 		oldfile = "󰋚",
+		mostChangedFile = "",
 	},
 	statusbar = {
 		maxLength = 30,
-		showIcon = true, -- requires `nvim-devicons` or `mini-icons`
+		showFiletypeIcon = true, -- requires `nvim-devicons` or `mini-icons`
 	},
 	ignoreOldfiles = {
 		"/COMMIT_EDITMSG",
@@ -96,7 +97,6 @@ function M.deleteBuffer()
 	end
 end
 
-
 ---switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
@@ -114,8 +114,8 @@ function M.gotoAltFile()
 	end
 end
 
-
-function M.gotoMostChangedFile()
+---@return string?
+local function getMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
 	if gitResponse.code ~= 0 then
@@ -145,18 +145,32 @@ function M.gotoMostChangedFile()
 			targetFile = absPath
 		end
 	end)
+	return targetFile
+end
 
-	-- goto file
+function M.gotoMostChangedFile()
+	local targetFile = getMostChangedFile()
+	if not targetFile then return end
+
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then
-		notify("Already at only changed file.")
+		notify("Already at the most changed file.")
 	else
 		vim.cmd.edit(targetFile)
 	end
 end
 
+-- TODO only update on bufchange
 function M.mostChangedFileStatusbar()
-	
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	local targetFile = getMostChangedFile()
+
+	if targetFile == currentFile then return "" end
+	if not targetFile then return "" end
+
+	local targetBasename = vim.fs.basename(targetFile)
+	local icon = config.icons.mostChangedFile or ""
+	return vim.trim(icon .. " " .. targetBasename)
 end
 
 --------------------------------------------------------------------------------
@@ -166,7 +180,7 @@ end
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local icon, name = "#", "[unknown]"
+	local icon, name = config.icons.main, "[unknown]"
 	local altOld = altOldfile()
 
 	if hasAltBuffer() then
@@ -197,7 +211,7 @@ function M.altFileStatusbar()
 	local maxLength = config.statusbar.maxLength
 	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
 
-	if not config.statusbar.showIcon then return name end
+	if not config.statusbar.showFiletypeIcon then return name end
 	return icon .. " " .. name
 end
 
