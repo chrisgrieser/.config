@@ -119,6 +119,7 @@ return {
 					-- only show component if LSP is active
 					cond = function()
 						if vim.g.lualine_lsp_active == nil then
+							vim.g.lualine_lsp_active = false -- default
 							vim.api.nvim_create_autocmd("LspProgress", {
 								desc = "User: Hide LSP progress component after 2s",
 								callback = function()

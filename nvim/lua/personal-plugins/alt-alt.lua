@@ -1,13 +1,15 @@
---[[ ALT-ALT
+--[[ INFO: ALT-ALT
 Alternative to vim's "alternative file" that improves its functionality.
 
-1.`require("alt-alt").gotoAltFile()` as an improved version of `:buffer #` that
-  avoids special buffers, deleted buffers, non-existent files etc. and falls back
+1.`.gotoAltFile()` as an improved version of `:buffer #` that avoids special
+  buffers, deleted buffers, non-existent files etc. and falls back
   to the first oldfile, if there is currently only one buffer.
-2.`require("alt-alt").deleteBuffer()` also removes the buffer as alt-file, but
-  keeps it in the list of oldfiles.
-3.`require("alt-alt").altFileStatusbar()` to display the alt-file in the
-  statusbar, including an icon (if `nvim-devicons` or `mini-icons` is installed).
+2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes
+3.`.deleteBuffer()` also removes the buffer as alt-file, but keeps it in the
+  list of oldfiles.
+4.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
+  respective file in the statusbar. If there is no alt-file, the first oldfile
+  is shown. If there is not changed file, nothing is shown.
 ]]
 
 --------------------------------------------------------------------------------
@@ -19,7 +21,7 @@ local config = {
 	},
 	statusbar = {
 		maxLength = 30,
-		showFiletypeIcon = true, -- requires `nvim-devicons` or `mini-icons`
+		showFiletypeIcon = true, -- requires `mini-icons`
 	},
 	ignoreOldfiles = { -- patterns for `string.find`
 		"/COMMIT_EDITMSG",
@@ -102,7 +104,7 @@ end
 local function getIcon(filepath, bufnr)
 	local icon
 	local ok, miniIcons = pcall(require, "mini.icons")
-	if (ok and miniIcons) then return end
+	if not (ok and miniIcons) then return end
 
 	local isDefault = false
 	icon, _, isDefault = miniIcons.get("file", filepath)
@@ -112,13 +114,26 @@ local function getIcon(filepath, bufnr)
 	return icon
 end
 
-local function truncateName(name)
-	local maxLength = config.statusbar.maxLength
-	if #name > maxLength then
-		name = name:sub(1, maxLength)
-		name = vim.trim(name) .. "…"
+---@param path string
+---@return string
+local function getNameForStatusbar(path)
+	local displayName = vim.fs.basename(path)
+
+	-- add parent if displayname is same as basename of current file
+	local currentBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+	if currentBasename == displayName then
+		local parent = vim.fs.basename(vim.fs.dirname(path))
+		displayName = parent .. "/" .. displayName
 	end
-	return name
+
+	-- truncate
+	local maxLength = config.statusbar.maxLength
+	if #displayName > maxLength then
+		displayName = displayName:sub(1, maxLength)
+		displayName = vim.trim(displayName) .. "…"
+	end
+
+	return displayName
 end
 
 --------------------------------------------------------------------------------
@@ -197,42 +212,33 @@ function M.mostChangedFileStatusbar()
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then return "" end
 
-	local targetBasename = vim.fs.basename(targetFile)
-	local ftIcon = getIcon(targetFile)
-	if not ftIcon then return targetBasename end
-	return ftIcon .. " " .. targetBasename
+	local name = getNameForStatusbar(targetFile)
+	if not config.statusbar.showFiletypeIcon then return name end
+
+	local ftIcon = getIcon(targetFile) or ""
+	return vim.trim(ftIcon .. " " .. name)
 end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local icon, name = "#", "[unknown]"
+	local icon, path
 	local altOld = altOldfile()
 
 	if hasAltBuffer() then
 		local altBufNr = vim.fn.bufnr("#")
-		local altPath = vim.api.nvim_buf_get_name(altBufNr)
-		local altFile = vim.fs.basename(altPath)
-		name = altFile ~= "" and altFile or "[no name]"
-		local ftIcon = getIcon(altPath, altBufNr)
-		if ftIcon then icon = ftIcon end
-
-		-- name: consider if alt and current file have same basename
-		local curBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-		if curBasename == altFile then
-			local altParent = vim.fs.basename(vim.fs.dirname(altPath))
-			name = altParent .. "/" .. altFile
-		end
+		path = vim.api.nvim_buf_get_name(altBufNr)
+		icon = getIcon(path, altBufNr) or "#"
 	elseif altOld then
-		icon = config.icons.oldfile
-		name = vim.fs.basename(altOld)
+		icon = config.icons.oldfile or ""
+		path = altOld
 	end
 
-	name = truncateName(name)
-
+	local name = getNameForStatusbar(path)
 	if not config.statusbar.showFiletypeIcon then return name end
-	return icon .. " " .. name
+
+	return vim.trim(icon .. " " .. name)
 end
 
 --------------------------------------------------------------------------------
