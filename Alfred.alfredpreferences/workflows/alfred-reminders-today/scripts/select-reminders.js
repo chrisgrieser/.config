@@ -92,11 +92,12 @@ function run(argv) {
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const reminders = remindersFiltered.map((rem) => {
 		const body = rem.notes || "";
-		const content = (rem.title + "\n" + body + "\n" + (rem.url || "")).trim();
-		const dueDateObj = new Date(rem.dueDate);
+		const content = (rem.title + "\n" + body).trim();
+		const [url] = rem.url || content.match(urlRegex) || [];
 
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body
+		const dueDateObj = new Date(rem.dueDate);
 		/** @type {Intl.DateTimeFormatOptions} */
 		const timeFormat = { hour: "2-digit", minute: "2-digit", hour12: false };
 		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFormat);
@@ -111,7 +112,6 @@ function run(argv) {
 			.filter(Boolean)
 			.join("  ·  ");
 
-		const [url] = rem.url || content.match(urlRegex) || [];
 		let emoji = rem.isCompleted ? "☑️ " : "";
 		if (rem.hasRecurrenceRules) emoji += "🔁 ";
 
@@ -141,7 +141,15 @@ function run(argv) {
 						cmdMode: url ? "open-url" : "copy",
 						mode: rem.isCompleted ? "stop-after" : "toggle-completed",
 						keepOpen: false.toString(),
+						notificationTitle:
+							(url ? "🔗 Open URL" : "📋 Copy") + (rem.isCompleted ? "" : " and completed"),
 					},
+				},
+				alt : {
+					arg: content,
+					variables: {
+						mode: "edit-reminder",
+					}
 				},
 				shift: {
 					variables: {
