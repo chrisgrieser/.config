@@ -7,60 +7,6 @@ local aw = hs.application.watcher
 local wf = hs.window.filter
 
 --------------------------------------------------------------------------------
--- MOVE TO THE SIDE
-
-local function moveToSide()
-	local masto = u.app("Ivory")
-	if not masto then return end
-
-	local mastoWin = masto:mainWindow()
-	if not mastoWin then return end
-	if masto:isHidden() then masto:unhide() end
-	mastoWin:setFrame(wu.toTheSide)
-	mastoWin:raise()
-end
-
-if u.isSystemStart() then moveToSide() end
-
---------------------------------------------------------------------------------
--- SHOW/HIDE APP
-
----@param win? hs.window
-local function showAndMoveOrHide(win)
-	-- GUARD
-	local masto = u.app("Ivory")
-	local frontWin = hs.window.focusedWindow()
-	if not (masto and win and frontWin) then return end
-	local winNotFrontmost = win:id() ~= frontWin:id()
-	if winNotFrontmost then return end
-
-	-- SHOW & MOVE TO SIDE if other window is pseudo-maximized or centered
-	if wu.winHasSize(win, wu.pseudoMax) or wu.winHasSize(win, wu.middleHalf) then
-		moveToSide()
-		return
-	end
-
-	-- HIDE when transparent app is maximized
-	local transBgApps = { "Neovide", "neovide", "Obsidian", "wezterm-gui", "WezTerm" }
-	local winApp = win:application() and win:application():name() ---@diagnostic disable-line: undefined-field
-	if wu.winHasSize(win, hs.layout.maximized) and (hs.fnutils.contains(transBgApps, winApp)) then
-		masto:hide()
-	end
-end
-
-M.wf_someWindowActivity = wf
-	.new(true) -- `true` -> all windows
-	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
-	:subscribe(wf.windowMoved, showAndMoveOrHide)
-	:subscribe(wf.windowFocused, showAndMoveOrHide)
-	:subscribe(wf.windowCreated, showAndMoveOrHide)
-
--- redundancy to `windowFocused`, which is for some reason not always triggered
-M.aw_windowActivation = aw.new(function(appName, event, _appObj)
-	if appName ~= "Ivory" and event == aw.activated then
-		showAndMoveOrHide(hs.window.focusedWindow())
-	end
-end):start()
 
 --------------------------------------------------------------------------------,
 -- FALLTHROUGH
@@ -80,6 +26,7 @@ M.wf_fallthrough = wf
 	.new(true) -- `true` -> all windows
 	:setOverrideFilter({ allowRoles = "AXStandardWindow", rejectTitles = { "^Login$", "^$" } })
 	:subscribe(wf.windowDestroyed, fallthrough)
+
 M.aw_fallthrough = aw.new(function(appName, event, _)
 	if event == aw.terminated and appName ~= "Ivory" then fallthrough() end
 end):start()
@@ -112,7 +59,18 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 end):start()
 
 --------------------------------------------------------------------------------
--- TRIGGER SCROLLING AND MOVE TO SIDE ON LAUNCH
+-- MOVE TO THE SIDE
+
+local function moveToSide()
+	local masto = u.app("Ivory")
+	if not masto then return end
+
+	local mastoWin = masto:mainWindow()
+	if not mastoWin then return end
+	if masto:isHidden() then masto:unhide() end
+	mastoWin:setFrame(wu.toTheSide)
+	mastoWin:raise()
+end
 
 M.aw_mastoLaunched = aw.new(function(appName, event)
 	if not (appName == "Ivory" and event == aw.launched) then return end

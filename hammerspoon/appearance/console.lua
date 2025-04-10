@@ -32,11 +32,14 @@ local function blue(isDark)
 	if isDark then return { red = 0, green = 0.7, blue = 1 } end
 	return { red = 0, green = 0.1, blue = 0.5 }
 end
+
+--------------------------------------------------------------------------------
+
 -- CONSOLE SETTINGS
 cons.titleVisibility("hidden")
 cons.toolbar(nil)
 cons.consoleFont(baseFont)
-hs.consoleOnTop(false)
+hs.consoleOnTop(true)
 
 -- suppress unnecessary log messages
 hs.hotkey.setLogLevel(0) ---@diagnostic disable-line: undefined-field https://github.com/Hammerspoon/hammerspoon/issues/3491
