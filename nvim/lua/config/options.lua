@@ -142,7 +142,7 @@ vim.opt.fillchars:append {
 	eob = " ",
 	msgsep = "═",
 	lastline = "↓",
-	diff = "▄",
+	-- diff = "▄",
 	fold = " ", -- overwritten by nvim-origami
 
 	-- thick window separators
