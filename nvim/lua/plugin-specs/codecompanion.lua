@@ -6,7 +6,7 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function()
-		vim.g.whichkeyAddSpec { "<leader>a", group = " Code Companion" }
+		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
 		-- add notifications
 		vim.api.nvim_create_autocmd("User", {
@@ -22,7 +22,7 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>aa", ":CodeCompanion ", mode = { "n", "x" }, desc = " Inline Assistant" },
+		{ "<leader>aa", ":CodeCompanion ", mode = { "n", "x" }, desc = " Inline assistant" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = " Chat" },
 	},
 	opts = {
