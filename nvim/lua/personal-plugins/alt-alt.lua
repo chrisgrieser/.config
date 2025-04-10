@@ -21,9 +21,11 @@ local config = {
 		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
 	},
 	statusbarMaxLength = 30,
-	ignoreOldfiles = { -- patterns for `string.find`
-		"/COMMIT_EDITMSG",
-		"/snacks_scratch/",
+
+	-- patterns for `string.find`; applied to the whole file path
+	ignore = {
+		oldfiles = { "/COMMIT_EDITMSG", "/snacks_scratch/" },
+		mostChangedFiles = { "info.plist" },
 	},
 }
 
@@ -61,7 +63,7 @@ local function altOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		local ignored = vim.iter(config.ignoreOldfiles)
+		local ignored = vim.iter(config.ignore.oldfiles)
 			:any(function(p) return path:find(p) ~= nil end)
 		if exists and not ignored and not sameFile then return path end
 	end
@@ -86,7 +88,10 @@ local function getMostChangedFile()
 		if not (added and deleted and relPath) then return end -- in case of changed binary files
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
-		if not vim.uv.fs_stat(absPath) then return end
+		local ignored = vim.iter(config.ignore.oldfiles)
+			:any(function(p) return absPath:find(p) ~= nil end)
+		local nonExistent = vim.uv.fs_stat(absPath) == nil
+		if ignored or nonExistent then return end
 
 		local changes = tonumber(added) + tonumber(deleted)
 		if changes > mostChanges then
@@ -94,6 +99,10 @@ local function getMostChangedFile()
 			targetFile = absPath
 		end
 	end)
+
+	-- e.g., when all changed files are binaries, ignored, or non-existent
+	if not targetFile then return nil, "No valid changed files found." end
+
 	return targetFile, nil
 end
 
@@ -135,7 +144,7 @@ end
 --------------------------------------------------------------------------------
 
 ---As opposed to the regular `:bdelete`, this function closes the buffer
----without it being the alt-file.
+---without it staying as the alt-file.
 function M.deleteBuffer()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
 
@@ -148,7 +157,7 @@ function M.deleteBuffer()
 	vim.cmd.bdelete()
 
 	-- prevent alt-buffer pointing to deleted buffer
-	-- (Using `:bwipeout` prevents this, but would also removes the file from the
+	-- (Using `:bwipeout` prevents this, but would also remove the file from the
 	-- list of oldfiles which we don't want.)
 	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
 	if not altFileOpen then
@@ -195,6 +204,7 @@ end
 --------------------------------------------------------------------------------
 -- STATUSBAR
 
+-- PERF only update on BufEnter or FocusGained
 local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Alt-alt: update most changed file statusbar",
