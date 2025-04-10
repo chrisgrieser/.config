@@ -210,7 +210,8 @@ function M.mostChangedFileStatusbar()
 	if not targetFile then return "" end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	if targetFile == currentFile then return "" end
+	local altFile = vim.api.nvim_buf_get_name(vim.fn.bufnr("#"))
+	if targetFile == currentFile or targetFile == altFile then return "" end
 
 	local name = getNameForStatusbar(targetFile)
 	if not config.statusbar.showFiletypeIcon then return name end
