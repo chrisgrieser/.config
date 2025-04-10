@@ -14,15 +14,14 @@ Alternative to vim's "alternative file" that improves its functionality.
 
 local config = {
 	icons = {
-		main = "󰬈",
+		notification = "󰬈",
 		oldfile = "󰋚",
-		mostChangedFile = "",
 	},
 	statusbar = {
 		maxLength = 30,
 		showFiletypeIcon = true, -- requires `nvim-devicons` or `mini-icons`
 	},
-	ignoreOldfiles = {
+	ignoreOldfiles = { -- patterns for `string.find`
 		"/COMMIT_EDITMSG",
 		"/snacks_scratch/",
 	},
@@ -35,7 +34,8 @@ local M = {}
 ---@param level? "info"|"trace"|"debug"|"warn"|"error"
 local function notify(msg, level)
 	if not level then level = "info" end
-	vim.notify(msg, vim.log.levels[level:upper()], { title = "Alt-alt", icon = config.icons.main })
+	local lvl = vim.log.levels[level:upper()]
+	vim.notify(msg, lvl, { title = "Alt-alt", icon = config.icons.notification })
 end
 
 ---@nodiscard
@@ -60,13 +60,65 @@ local function altOldfile()
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
-		-- local ignored = vim.iter(config.ignoreOldfiles)
-		-- 	:any(function(p) return path:find(p) ~= nil end)
 		local ignored = vim.iter(config.ignoreOldfiles)
 			:any(function(p) return path:find(p) ~= nil end)
 		if exists and not ignored and not sameFile then return path end
 	end
 	return nil
+end
+
+---@return string? filepath
+---@return string? errmsg
+local function getMostChangedFile()
+	-- get list of changed files
+	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
+	if gitResponse.code ~= 0 then return nil, "Not in git repo." end
+	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
+	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
+	if #changedFiles == 0 then return nil, "No files with changes found." end
+
+	-- identify file with most changes
+	local targetFile
+	local mostChanges = 0
+	vim.iter(changedFiles):each(function(line)
+		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
+		if not (added and deleted and relPath) then return end -- in case of changed binary files
+
+		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
+		if not vim.uv.fs_stat(absPath) then return end
+
+		local changes = tonumber(added) + tonumber(deleted)
+		if changes > mostChanges then
+			mostChanges = changes
+			targetFile = absPath
+		end
+	end)
+	return targetFile, nil
+end
+
+---@param filepath string
+---@param bufnr? number
+---@return string? icon
+local function getIcon(filepath, bufnr)
+	local icon
+	local ok, miniIcons = pcall(require, "mini.icons")
+	if (ok and miniIcons) then return end
+
+	local isDefault = false
+	icon, _, isDefault = miniIcons.get("file", filepath)
+	if not (isDefault and bufnr) then return icon end
+
+	icon = miniIcons.get("filetype", vim.bo[bufnr].ft)
+	return icon
+end
+
+local function truncateName(name)
+	local maxLength = config.statusbar.maxLength
+	if #name > maxLength then
+		name = name:sub(1, maxLength)
+		name = vim.trim(name) .. "…"
+	end
+	return name
 end
 
 --------------------------------------------------------------------------------
@@ -114,43 +166,12 @@ function M.gotoAltFile()
 	end
 end
 
----@return string?
-local function getMostChangedFile()
-	-- get list of changed files
-	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
-	if gitResponse.code ~= 0 then
-		notify("Not in git repo.", "warn")
-		return
-	end
-	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
-	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
-	if #changedFiles == 0 then
-		notify("No files with changes found.")
-		return
-	end
-
-	-- identify file with most changes
-	local targetFile
-	local mostChanges = 0
-	vim.iter(changedFiles):each(function(line)
-		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not (added and deleted and relPath) then return end -- in case of changed binary files
-
-		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
-		if not vim.uv.fs_stat(absPath) then return end
-
-		local changes = tonumber(added) + tonumber(deleted)
-		if changes > mostChanges then
-			mostChanges = changes
-			targetFile = absPath
-		end
-	end)
-	return targetFile
-end
-
 function M.gotoMostChangedFile()
-	local targetFile = getMostChangedFile()
-	if not targetFile then return end
+	local targetFile, errmsg = getMostChangedFile()
+	if errmsg then
+		notify(errmsg, "warn")
+		return
+	end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	if targetFile == currentFile then
@@ -160,27 +181,33 @@ function M.gotoMostChangedFile()
 	end
 end
 
--- TODO only update on bufchange
-function M.mostChangedFileStatusbar()
-	local currentFile = vim.api.nvim_buf_get_name(0)
-	local targetFile = getMostChangedFile()
-
-	if targetFile == currentFile then return "" end
-	if not targetFile then return "" end
-
-	local targetBasename = vim.fs.basename(targetFile)
-	local icon = config.icons.mostChangedFile or ""
-	return vim.trim(icon .. " " .. targetBasename)
-end
-
 --------------------------------------------------------------------------------
 -- STATUSBAR
+
+local mostChangedFile
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+	desc = "Alt-alt: update most changed file statusbar",
+	callback = function() mostChangedFile = getMostChangedFile() end,
+})
+
+function M.mostChangedFileStatusbar()
+	local targetFile = mostChangedFile
+	if not targetFile then return "" end
+
+	local currentFile = vim.api.nvim_buf_get_name(0)
+	if targetFile == currentFile then return "" end
+
+	local targetBasename = vim.fs.basename(targetFile)
+	local ftIcon = getIcon(targetFile)
+	if not ftIcon then return targetBasename end
+	return ftIcon .. " " .. targetBasename
+end
 
 ---shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local icon, name = config.icons.main, "[unknown]"
+	local icon, name = "#", "[unknown]"
 	local altOld = altOldfile()
 
 	if hasAltBuffer() then
@@ -188,13 +215,8 @@ function M.altFileStatusbar()
 		local altPath = vim.api.nvim_buf_get_name(altBufNr)
 		local altFile = vim.fs.basename(altPath)
 		name = altFile ~= "" and altFile or "[no name]"
-		-- icon
-		local ok, icons = pcall(require, "mini.icons")
-		if ok and icons then
-			local isDefault = false
-			icon, _, isDefault = icons.get("file", altPath)
-			if isDefault then icon = icons.get("filetype", vim.bo[altBufNr].ft) end
-		end
+		local ftIcon = getIcon(altPath, altBufNr)
+		if ftIcon then icon = ftIcon end
 
 		-- name: consider if alt and current file have same basename
 		local curBasename = vim.fs.basename(vim.api.nvim_buf_get_name(0))
@@ -207,9 +229,7 @@ function M.altFileStatusbar()
 		name = vim.fs.basename(altOld)
 	end
 
-	-- truncate
-	local maxLength = config.statusbar.maxLength
-	if #name > maxLength then name = vim.trim(name:sub(1, maxLength)) .. "…" end
+	name = truncateName(name)
 
 	if not config.statusbar.showFiletypeIcon then return name end
 	return icon .. " " .. name
