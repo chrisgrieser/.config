@@ -405,7 +405,7 @@ end, { desc = "󰽙 Prev buffer" })
 keymap("n", "<S-BS>", vim.cmd.bnext, { desc = "󰽙 Next buffer" })
 
 -- stylua: ignore
-keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.misc").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
+keymap({ "n", "x" }, "<D-CR>", function() require("personal-plugins.alt-alt").gotoMostChangedFile() end, { desc = "󰊢 Goto most changed file" })
 
 -- stylua: ignore
 keymap({ "n", "x", "i" }, "<D-L>", function() require("personal-plugins.misc").openAlfredPref() end, { desc = "󰮤 Reveal in Alfred" })

@@ -173,47 +173,7 @@ end
 
 --------------------------------------------------------------------------------
 
-function M.gotoMostChangedFile()
-	local notifyOpts = { title = "Most changed file", icon = "󰊢" }
 
-	-- get list of changed files
-	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
-	if gitResponse.code ~= 0 then
-		vim.notify("Not in git repo.", vim.log.levels.WARN, notifyOpts)
-		return
-	end
-	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
-	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
-	if #changedFiles == 0 then
-		vim.notify("No files with changes found.", nil, notifyOpts)
-		return
-	end
-
-	-- identify file with most changes
-	local targetFile
-	local mostChanges = 0
-	vim.iter(changedFiles):each(function(line)
-		local added, deleted, relPath = line:match("(%d+)%s+(%d+)%s+(.+)")
-		if not (added and deleted and relPath) then return end -- in case of changed binary files
-
-		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
-		if not vim.uv.fs_stat(absPath) then return end
-
-		local changes = tonumber(added) + tonumber(deleted)
-		if changes > mostChanges then
-			mostChanges = changes
-			targetFile = absPath
-		end
-	end)
-
-	-- goto file
-	local currentFile = vim.api.nvim_buf_get_name(0)
-	if targetFile == currentFile then
-		vim.notify("Already at only changed file.", nil, notifyOpts)
-	else
-		vim.cmd.edit(targetFile)
-	end
-end
 
 --------------------------------------------------------------------------------
 
