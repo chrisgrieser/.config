@@ -11,10 +11,6 @@ let mode = ProcessInfo.processInfo.environment["mode"]!
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-func toggleCompleted(reminder: EKReminder) {
-	reminder.isCompleted = !reminder.isCompleted
-}
-
 func snoozeToTomorrow(reminder: EKReminder) {
 	// Get tomorrow's date
 	let calendar = Calendar.current
@@ -40,9 +36,25 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 		// modify
 		if mode == "toggle-completed" {
-			toggleCompleted(reminder: reminder)
+			reminder.isCompleted = !reminder.isCompleted
 		} else if mode == "snooze" {
 			snoozeToTomorrow(reminder: reminder)
+		} else if mode == "edit-reminder" {
+			let stdin = "test\nfoobar"
+			let lines = stdin.components(separatedBy: "\n")
+			let newTitle = lines.first ?? ""
+			if newTitle == "" {
+				print("❌")
+				return
+			}
+			let newBody = lines.dropFirst()
+				.joined(separator: "\n")
+				.trimmingCharacters(in: .whitespaces)
+
+			reminder.notes = newBody == "" ? nil : newBody
+
+			reminder.title = newTitle
+			print(newTitle)  // for Alfred notification
 		}
 
 		// save
