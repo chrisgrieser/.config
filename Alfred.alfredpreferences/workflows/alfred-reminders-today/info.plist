@@ -392,7 +392,7 @@
 				<key>fontsizing</key>
 				<integer>0</integer>
 				<key>footertext</key>
-				<string>⌥⏎: Save   ⎋: Cancel</string>
+				<string>First line: title, remaining lines: notes     ·     ⌥⏎: Save     ·     ⎋: Cancel</string>
 				<key>inputfile</key>
 				<string></string>
 				<key>inputtype</key>
@@ -1023,13 +1023,15 @@ If you are not prompted to add them, try:
 	  otherwise, copy the reminder's title &amp; notes to the clipboard. Afterward,
 	  complete the reminder.
 	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: "Snooze" the reminder by changing its due date to tomorrow.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Edit the reminders title and body.
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Edit the reminders title and body in Alfred's Text View.
+	  The first line is the reminder's title, the remaining lines the notes.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Display completed reminders due today as well. Using
 	  &lt;kbd&gt;⏎&lt;/kbd&gt; on a completed reminder marks it as uncompleted. The other
 	  modifiers work the same as with uncompleted reminders. Use &lt;kbd&gt;⌃⏎&lt;/kbd&gt;
 	  once more to hide completed reminders again.
 	+ &lt;kbd&gt;⌘C&lt;/kbd&gt;: Copy the reminder title &amp; notes.
 	+ &lt;kbd&gt;⌘L&lt;/kbd&gt;: Display the reminder details in Large Type.
+	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the URL (if there is one).
 - Quickly add a new reminder due today or tomorrow with the keywords `qq` and
   `qqq`, respectively.
 
@@ -1439,7 +1441,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.5.0</string>
+	<string>2.6.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -121,6 +121,7 @@ function run() {
 			title: emoji + rem.title,
 			subtitle: subtitle,
 			text: { copy: content, largetype: content },
+			quicklookurl: url,
 			variables: {
 				id: rem.id,
 				title: rem.title,

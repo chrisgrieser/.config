@@ -184,5 +184,10 @@ local blinkGitOpts = {
 		},
 	},
 }
+--------------------------------------------------------------------------------
 
+-- codecompanion.nvim https://codecompanion.olimorris.dev/installation.html#completion
+blinkConfig.opts.sources.per_filetype["codecompanion"] = { "codecompanion" }
+
+--------------------------------------------------------------------------------
 return vim.tbl_deep_extend("force", blinkConfig, blinkGitOpts)
