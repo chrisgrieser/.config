@@ -106,4 +106,15 @@ M.wf_mimestream = wf.new("Mimestream")
 	end)
 
 --------------------------------------------------------------------------------
+
+M.aw_neovide = aw.new(function(appName, event, _)
+	if event == aw.activated and appName == "Neovide" then
+		print("Neovide activated")
+	elseif event == aw.deactivated and appName == "Neovide" then
+		print("Neovide deactivated")
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+
 return M

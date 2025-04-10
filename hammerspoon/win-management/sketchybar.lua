@@ -1,3 +1,6 @@
+-- INFO prevent maximized window from covering sketchybar if they are unfocused
+--------------------------------------------------------------------------------
+
 local M = {} -- persist from garbage collector
 
 local env = require("meta.environment")
@@ -7,7 +10,6 @@ local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
--- prevent maximized window from covering sketchybar if they are unfocused
 local dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch" }
 
 M.aw_maxWindows = aw.new(function(_appName, event, app)

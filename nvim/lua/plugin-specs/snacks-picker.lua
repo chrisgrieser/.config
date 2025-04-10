@@ -59,6 +59,7 @@ local function betterFileOpen()
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
 	Snacks.picker.files {
+
 		title = " " .. vim.fs.basename(vim.uv.cwd()),
 		-- exclude the current file
 		transform = function(item, _ctx)
@@ -398,7 +399,7 @@ return {
 					vim.cmd.normal { "zv", bang = true } -- open folds
 				end,
 			},
-			prompt = " ", -- slightly to the left
+			prompt = "  ", -- 
 			icons = { ---@diagnostic disable-line: missing-fields faulty annotation
 				ui = { selected = "󰒆 " },
 				undo = { saved = "" }, -- useless, since I have auto-saving
