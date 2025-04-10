@@ -994,10 +994,8 @@ osascript -l JavaScript ./scripts/select-reminders.js "$reminders_json"</string>
 	<key>readme</key>
 	<string>## Info on version 2.0
 Due to the underlying tool (`reminder-cli`) being abandoned, I rewrote this
-workflow to work fully standalone. This has the drawback that adding from
-selection/browser tabs and editing reminders features had to be removed.
-
-Note that this workflow now **requires at least macOS 14**.
+workflow to work fully standalone. Note that this workflow now **requires at
+least macOS 14**.
 
 On the upside, this workflow now does not require `reminders-cli` anymore, so
 you can uninstall it:
@@ -1046,9 +1044,9 @@ If you are not prompted to add them, try:
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>385</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
@@ -1106,9 +1104,9 @@ If you are not prompted to add them, try:
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>725</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
 		<dict>
@@ -1228,9 +1226,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>edit title &amp; notes</string>
 			<key>xpos</key>
-			<real>565</real>
+			<real>610</real>
 			<key>ypos</key>
-			<real>20</real>
+			<real>15</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>

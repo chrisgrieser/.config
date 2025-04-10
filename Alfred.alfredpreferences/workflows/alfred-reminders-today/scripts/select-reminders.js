@@ -148,6 +148,7 @@ function run(argv) {
 				alt : {
 					arg: content,
 					variables: {
+						id: rem.id,
 						mode: "edit-reminder",
 					}
 				},
