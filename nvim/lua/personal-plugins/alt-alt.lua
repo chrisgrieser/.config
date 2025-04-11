@@ -27,8 +27,8 @@ local config = {
 			"/snacks_scratch/",
 		},
 		mostChangedFiles = {
-			"info.plist", -- Alfred
-			".lazy-lock.json", -- lazy.nvim
+			"/info.plist", -- Alfred
+			"/.lazy%-lock.json", -- lazy.nvim
 		},
 	},
 }
