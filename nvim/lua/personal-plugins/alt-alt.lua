@@ -15,17 +15,21 @@ Alternative to vim's "alternative file" that improves its functionality.
 --------------------------------------------------------------------------------
 
 local config = {
+	statusbarMaxLength = 30,
 	icons = {
 		oldFile = "󰋚",
 		altFile = "󰐤", -- set to nil to use filetype icon from mini.icons
 		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
 	},
-	statusbarMaxLength = 30,
-
-	-- patterns for `string.find`; applied to the whole file path
-	ignore = {
-		oldfiles = { "/COMMIT_EDITMSG", "/snacks_scratch/" },
-		mostChangedFiles = { "info.plist" },
+	ignore = { -- patterns for `string.find`; applied to the whole file path
+		oldfiles = {
+			"/COMMIT_EDITMSG",
+			"/snacks_scratch/",
+		},
+		mostChangedFiles = {
+			"info.plist", -- Alfred
+			".lazy-lock.json", -- lazy.nvim
+		},
 	},
 }
 

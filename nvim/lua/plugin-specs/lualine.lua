@@ -163,6 +163,11 @@ return {
 					function() return vim.api.nvim_buf_line_count(0) .. " " end,
 					cond = function() return vim.bo.buftype == "" end,
 				},
+				{ -- foldlevel
+					function() return vim.o.foldlevel end,
+					icon = "󰘖",
+					cond = function() return vim.o.foldlevel > 0 and vim.o.foldlevel ~= 99 end,
+				},
 			},
 			lualine_z = {
 				{ "selectioncount", icon = "󰒆" },
