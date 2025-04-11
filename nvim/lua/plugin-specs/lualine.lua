@@ -1,5 +1,4 @@
--- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration
---------------------------------------------------------------------------------
+-- DOCS https://github.com/nvim-lualine/lualine.nvim#default-configuration-----------------------------------------------------------------------------
 
 ---Adds a component lualine was already set up. This enables lazy-loading
 ---plugins that add statusline components.
@@ -14,6 +13,32 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where)
 	local pos = where == "before" and 1 or #sectionConfig + 1
 	table.insert(sectionConfig, pos, componentObj)
 	require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
+end
+
+local function countLspRefs()
+	local icon = "󰈿" -- CONFIG
+	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
+	if not client then
+		vim.b.lspReferenceCount = nil
+		return
+	end
+	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+	params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
+	local thisFile = params.textDocument.uri
+	client:request("textDocument/references", params, function(error, refs)
+		if error or not refs then
+			vim.b.lspReferenceCount = nil
+			return
+		end
+		local inWorkspace = #refs
+		local inFile = #vim.iter(refs):filter(function(ref) return thisFile == ref.uri end):totable()
+		local out = icon .. " " .. inFile
+		if inFile ~= inWorkspace then out = out .. "(" .. inWorkspace .. ")" end
+		vim.b.lspReferenceCount = vim.trim(out)
+	end)
+
+	-- returns empty string at first and later the updated count
+	return vim.b.lspReferenceCount or ""
 end
 
 --------------------------------------------------------------------------------
@@ -91,6 +116,7 @@ return {
 			},
 			lualine_c = {
 				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
+				{ countLspRefs },
 			},
 			lualine_x = {
 				{ -- Quickfix counter
