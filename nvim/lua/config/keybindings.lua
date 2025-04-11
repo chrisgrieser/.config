@@ -299,6 +299,7 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
 keymap("n", "#", function() require("personal-plugins.misc").countLspRefs() end, { desc = "󰈿 LSP References count" })
+vim.lsp.buf.references()
 
 do
 	-- stylua: ignore
