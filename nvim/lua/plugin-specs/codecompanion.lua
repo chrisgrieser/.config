@@ -28,17 +28,14 @@ return {
 	opts = {
 		-- CodeCompanion settings
 		display = {
+			diff = { enabled = true },
 			chat = {
 				start_in_insert_mode = true,
 				intro_message = "Press ? for options",
 				show_header_separator = false,
 				window = {
-					layout = "vertical", -- also "float"
 					opts = { statuscolumn = " " }, -- just for padding
 				},
-			},
-			diff = {
-				enabled = true,
 			},
 		},
 
@@ -53,9 +50,7 @@ return {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = vim.env.OPENAI_API_KEY }, -- via .zshenv
 					schema = {
-						model = {
-							default = "gpt-4o-mini",
-						},
+						model = { default = "gpt-4o-mini" }, -- cheaper
 					},
 				})
 			end,
