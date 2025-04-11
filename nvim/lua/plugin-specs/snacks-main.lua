@@ -35,8 +35,10 @@ return {
 		{
 			"<leader>ee",
 			function()
-				-- `win.ft = lua` requires Snacks.nvim
-				vim.ui.input({ prompt = " Eval", win = { ft = "lua" } }, function(expr)
+				vim.ui.input({
+					prompt = " Eval",
+					win = { ft = "lua", b = { completion = true } },
+				}, function(expr)
 					if not expr then return end
 					local result = vim.inspect(vim.fn.luaeval(expr))
 					local opts = { title = "Eval", icon = "", ft = "lua" }

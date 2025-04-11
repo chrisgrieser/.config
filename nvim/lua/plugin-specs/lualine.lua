@@ -20,11 +20,10 @@ end
 ---brackets the number of references in the workspace (if that number is
 ---different from the references in the current file).
 local function countLspRefs()
+	local icon = "󰈿" -- CONFIG
+
 	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
-	if not client then
-		vim.b.lspReference_count = nil
-		return
-	end
+	if not client then return "" end
 
 	-- prevent multiple requests on still cursor without the need of autocmds
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -44,8 +43,8 @@ local function countLspRefs()
 			end
 			local inWorkspace = #refs
 			local inFile = #vim.iter(refs):filter(function(r) return thisFile == r.uri end):totable()
-			vim.b.lspReference_count = inFile == inWorkspace and inFile
-				or inFile .. "(" .. inWorkspace .. ")"
+			local text = inFile == inWorkspace and inFile or inFile .. "(" .. inWorkspace .. ")"
+			vim.b.lspReference_count = vim.trim(icon .. " " .. text)
 		end)
 	end
 
@@ -126,7 +125,7 @@ return {
 			},
 			lualine_c = {
 				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
-				{ countLspRefs, icon = "󰈿" },
+				{ countLspRefs },
 			},
 			lualine_x = {
 				{ -- Quickfix counter

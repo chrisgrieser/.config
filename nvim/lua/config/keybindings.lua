@@ -237,6 +237,7 @@ end, { desc = "󰘳 Copy last ex-cmd" })
 --------------------------------------------------------------------------------
 -- SURROUND
 
+keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
 keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
 keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
@@ -311,7 +312,6 @@ keymap(
 	function() require("personal-plugins.misc").countLspRefs() end,
 	{ desc = "󰈿 LSP References count" }
 )
-vim.lsp.buf.references()
 
 do
 	-- stylua: ignore

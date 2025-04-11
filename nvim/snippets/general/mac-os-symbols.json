@@ -1,0 +1,43 @@
+{
+	"backspace": {
+		"body": "⌫",
+		"prefix": "backspace"
+	},
+	"capslock": {
+		"body": "⇪",
+		"prefix": ["capslock", "hyper"]
+	},
+	"cmd": {
+		"body": "⌘",
+		"prefix": "cmd"
+	},
+	"ctrl": {
+		"body": "⌃",
+		"prefix": ["control", "ctrl"]
+	},
+	"opt": {
+		"body": "⌥",
+		"prefix": ["opt", "alt"]
+	},
+	"shift": {
+		"body": "⇧",
+		"prefix": "shift"
+	},
+	"space (underbracket)": {
+		"body": "⎵",
+		"prefix": "space (underbracket)"
+	},
+	"tab": {
+		"body": "↹ ",
+		"prefix": "tab"
+	},
+	"enter": {
+		"body": "⏎",
+		"description": "The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.",
+		"prefix": "enter"
+	},
+	"escape": {
+		"body": "⎋",
+		"prefix": "escape"
+	}
+}
