@@ -6,7 +6,7 @@ vim.g.maplocalleader = "<Nop>"
 
 vim.g.localRepos = vim.fs.normalize("~/Developer")
 vim.g.icloudSync =
-	vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/vim-data")
+	vim.fs.normalize("~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/nvim-data")
 
 --------------------------------------------------------------------------------
 -- GENERAL

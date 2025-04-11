@@ -276,7 +276,7 @@ return {
 					-- start with preview off
 					---@diagnostic disable-next-line: assign-type-mismatch
 					layout = { preset = "wide_with_preview", preview = false },
-				}
+				},
 			},
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
@@ -326,6 +326,7 @@ return {
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
 						["<D-Up>"] = { "list_top", mode = "i" },
+						["<D-Down>"] = { "list_bottom", mode = "i" },
 
 						["<M-CR>"] = { "select_and_next", mode = "i" }, -- consistent with `fzf`
 						["<Up>"] = { "history_back", mode = "i" },
