@@ -1,3 +1,4 @@
+-- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 ---@module "snacks"
@@ -74,11 +75,6 @@ local function betterFileOpen()
 			return require("snacks.picker.format").file(item, picker)
 		end,
 	}
-end
-
-local file_without_line = function(item, picker)
-	item.line = nil
-	return require("snacks.picker.format").file(item, picker)
 end
 
 --------------------------------------------------------------------------------
@@ -215,7 +211,6 @@ return {
 						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					format = file_without_line,
 					layout = {
 						preset = "wide_with_preview",
 						layout = { [2] = { width = 0.6 } }, -- sets preview wider
@@ -235,10 +230,9 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
-					layout = {
-						preset = "wide_with_preview",
-						preview = false, ---@diagnostic disable-line: assign-type-mismatch
-					},
+					-- start with preview off
+					---@diagnostic disable-next-line: assign-type-mismatch
+					layout = { preset = "wide_with_preview", preview = false },
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -278,9 +272,11 @@ return {
 						},
 					},
 				},
-				lsp_definitions = { format = file_without_line },
-				lsp_references = { format = file_without_line },
-				lsp_type_definitions = { format = file_without_line },
+				git_log = {
+					-- start with preview off
+					---@diagnostic disable-next-line: assign-type-mismatch
+					layout = { preset = "wide_with_preview", preview = false },
+				}
 			},
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
