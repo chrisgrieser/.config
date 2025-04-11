@@ -1,17 +1,5 @@
 {
-  "BUG": {
-    "body": "$LINE_COMMENT BUG",
-    "prefix": "BUG"
-  },
-  "CAVEAT": {
-    "body": "$LINE_COMMENT CAVEAT $0",
-    "prefix": "CAVEAT"
-  },
-  "CONFIG": {
-    "body": "$LINE_COMMENT CONFIG ",
-    "prefix": "CONFIG"
-  },
-  "DEPRECATION": {
+  "DEPRECATION (+date)": {
     "body": "$LINE_COMMENT DEPRECATION (${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE})",
     "prefix": "DEPRECATION"
   },
@@ -19,88 +7,9 @@
     "body": "$LINE_COMMENT DOCS $0$CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
-  "EXAMPLE": {
-    "body": "$LINE_COMMENT EXAMPLE ",
-    "prefix": "EXAMPLE"
-  },
-  "FIX": {
-    "body": "$LINE_COMMENT FIX",
-    "prefix": "FIX"
-  },
-  "GUARD": {
-    "body": "$LINE_COMMENT GUARD $0",
-    "prefix": "GUARD"
-  },
-  "HACK": {
-    "body": "$LINE_COMMENT HACK",
-    "prefix": "HACK"
-  },
-  "INFO": {
-    "body": "$LINE_COMMENT INFO",
-    "prefix": "INFO"
-  },
-  "Lorem Ipsum Sentence": {
-    "body": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
-    "prefix": "lorem sentence"
-  },
   "PENDING (+url)": {
     "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
-  },
-  "PERF": {
-    "body": "$LINE_COMMENT PERF",
-    "prefix": "PERF"
-  },
-  "REQUIRED": {
-    "body": "$LINE_COMMENT REQUIRED ",
-    "prefix": "REQUIRED"
-  },
-  "SOURCE": {
-    "body": "$LINE_COMMENT SOURCE $0$CLIPBOARD",
-    "prefix": "SOURCE"
-  },
-  "TEST": {
-    "body": "$LINE_COMMENT TEST",
-    "prefix": "TEST"
-  },
-  "TODO": {
-    "body": "$LINE_COMMENT TODO ",
-    "prefix": "TODO"
-  },
-  "VALIDATE": {
-    "body": "$LINE_COMMENT VALIDATE",
-    "prefix": "VALIDATE"
-  },
-  "backspace": {
-    "body": "⌫",
-    "prefix": "backspace"
-  },
-  "capslock": {
-    "body": "⇪",
-    "prefix": [
-      "capslock",
-      "hyper"
-    ]
-  },
-  "cmd": {
-    "body": "⌘",
-    "prefix": "cmd"
-  },
-  "ctrl": {
-    "body": "⌃",
-    "prefix": [
-      "control",
-      "ctrl"
-    ]
-  },
-  "enter": {
-    "body": "⏎",
-    "description": "The other return-like symbols either have an accessibility problem (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.",
-    "prefix": "enter"
-  },
-  "escape": {
-    "body": "⎋",
-    "prefix": "escape"
   },
   "middle dot": {
     "body": "·",
@@ -110,38 +19,15 @@
     "body": "❌ ",
     "prefix": "no (❌)"
   },
-  "nonbreaking space": {
-    "body": "&nbsp;",
-    "prefix": "nonbreaking space"
-  },
-  "opt": {
-    "body": "⌥",
-    "prefix": [
-      "opt",
-      "alt"
-    ]
-  },
-  "shift": {
-    "body": "⇧",
-    "prefix": "shift"
-  },
-  "space (underbracket)": {
-    "body": "⎵",
-    "prefix": "space (underbracket)"
-  },
   "square (■)": {
     "body": "■",
     "prefix": "square (■)"
   },
-  "tab": {
-    "body": "↹ ",
-    "prefix": "tab"
-  },
-  "today (ISO date) *insert*": {
+  "insert ISO datestamp (today)": {
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
-    "prefix": "insert datestamp"
+    "prefix": "insert ISO datestamp (today)"
   },
-  "vim modeline": {
+  "vim modeline (filetype)": {
     "body": "$LINE_COMMENT vim: ft=${1:filetype}",
     "prefix": "vim modeline (filetype)"
   },
