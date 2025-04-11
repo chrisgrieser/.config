@@ -16,9 +16,11 @@ return {
 		-- ignore certain notifications
 		---@diagnostic disable-next-line: duplicate-set-field intentional overwrite
 		vim.notify = function(msg, ...)
-			local ignore = msg == "No code actions available"
-				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
-			if ignore then return end
+			if type(msg) == "string" then
+				local ignore = msg == "No code actions available"
+					or msg:find("^Client marksman quit with exit code 1 and signal 0.")
+				if ignore then return end
+			end
 			Snacks.notifier(msg, ...)
 		end
 

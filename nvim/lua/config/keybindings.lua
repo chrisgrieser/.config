@@ -298,6 +298,8 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
+keymap("n", "#", function() require("personal-plugins.misc").countLspRefs() end, { desc = "󰈿 LSP References count" })
+
 do
 	-- stylua: ignore
 	keymap({ "n", "i", "v" }, "<D-g>", function() vim.lsp.buf.signature_help { max_width = 70 } end, { desc = "󰏪 LSP signature" })
