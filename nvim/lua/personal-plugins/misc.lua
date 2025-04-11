@@ -324,34 +324,25 @@ do
 end
 
 function M.countLspRefs()
-	local count = { file = {}, workspace = {} }
-	local params = vim.lsp.util.make_position_params(0, "utf-32")
+	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
+	if not client then
+		vim.notify("No client found that supports references", vim.log.levels.ERROR)
+		return
+	end
+	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+	params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
 	local thisFileUri = params.textDocument.uri
 
-	local ids = vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
+	client:request("textDocument/references", params, function(error, refs)
 		if error then
 			vim.notify(error.message, vim.log.levels.ERROR)
 			return
 		end
-		if not refs then return end
-		count.workspace.references = #refs
-		count.file.references = vim.iter(refs):fold(0, function(acc, ref)
-			if thisFileUri == ref.uri then acc = acc + 1 end
-			return thisFileUri == ref.uri and acc or acc + 1
-		end)
+		local count = {
+			workspace = #refs,
+			file = #vim.iter(refs):filter(function(ref) return thisFileUri == ref.uri end):totable(),
+		}
 	end)
-	Chainsaw(ids) -- 🪚
-	-- vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
-	-- 	if error then
-	-- 		vim.notify(error.message, vim.log.levels.ERROR)
-	-- 		return
-	-- 	end
-	-- 	if not defs then return end
-	-- 	count.file.definitions = vim.iter(defs):fold(0, function(acc, def)
-	-- 		if thisFileUri == def.uri then acc = acc + 1 end
-	-- 		return thisFileUri == def.uri and acc or acc + 1
-	-- 	end)
-	-- end)
 end
 
 --------------------------------------------------------------------------------
