@@ -15,38 +15,41 @@ vim.g.lualineAdd = function(whichBar, whichSection, component, where)
 	require("lualine").setup { [whichBar] = { [whichSection] = sectionConfig } }
 end
 
+---Asynchronously count LSP references, returns empty string until async is
+---done. When done, returns the number of references in the current file, and in
+---brackets the number of references in the workspace (if that number is
+---different from the references in the current file).
 local function countLspRefs()
-	local icon = "󰈿" -- CONFIG
 	local client = vim.lsp.get_clients({ method = "textDocument/references", bufnr = 0 })[1]
 	if not client then
-		vim.b.lspReferenceCount = nil
+		vim.b.lspReference_count = nil
 		return
 	end
-	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
-	params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
-	local thisFile = params.textDocument.uri
 
+	-- prevent multiple requests on still cursor without the need of autocmds
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local sameCursorPos = row == vim.b.lspReferenceLastPos[1] and col == vim.b.lspReferenceLastPos[2]
+	local sameCursorPos = row == vim.b.lspReference_lastRow and col == vim.b.lspReference_lastCol
 
 	if not sameCursorPos then
-		vim.b.lspReferenceLastRow = row
+		vim.b.lspReference_lastRow, vim.b.lspReference_lastCol = row, col
+
+		local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+		params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
+		local thisFile = params.textDocument.uri
+
 		client:request("textDocument/references", params, function(error, refs)
-			if error or not refs then
-				vim.b.lspReferenceCount = nil
+			if error or not refs then -- not on a valid symbol, etc.
+				vim.b.lspReference_count = nil
 				return
 			end
 			local inWorkspace = #refs
-			local inFile =
-				#vim.iter(refs):filter(function(ref) return thisFile == ref.uri end):totable()
-			local out = icon .. " " .. inFile
-			if inFile ~= inWorkspace then out = out .. "(" .. inWorkspace .. ")" end
-			vim.b.lspReferenceCount = out
+			local inFile = #vim.iter(refs):filter(function(r) return thisFile == r.uri end):totable()
+			vim.b.lspReference_count = inFile == inWorkspace and inFile
+				or inFile .. "(" .. inWorkspace .. ")"
 		end)
 	end
 
-	-- returns empty string at first and later the updated count
-	return vim.b.lspReferenceCount or ""
+	return vim.b.lspReference_count or "" -- returns empty string at first and later the count
 end
 
 --------------------------------------------------------------------------------
@@ -72,8 +75,7 @@ return {
 					style = "%H:%M:%S",
 					-- make the `:` blink
 					fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
-					-- only if window is maximized
-					cond = function() return vim.o.columns > 120 end,
+					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
 			lualine_b = {},
@@ -86,7 +88,7 @@ return {
 					function() return ("Recording [%s]…"):format(vim.fn.reg_recording()) end,
 					icon = "󰑊",
 					cond = function() return vim.fn.reg_recording() ~= "" end,
-					color = "lualine_y_diff_removed_normal", -- so it has correct bg from lualine
+					color = "ErrorMsg",
 				},
 			},
 		},
@@ -124,7 +126,7 @@ return {
 			},
 			lualine_c = {
 				{ require("personal-plugins.alt-alt").mostChangedFileStatusbar },
-				{ countLspRefs },
+				{ countLspRefs, icon = "󰈿" },
 			},
 			lualine_x = {
 				{ -- Quickfix counter
@@ -152,17 +154,17 @@ return {
 					ignore_lsp = { "typos_lsp", "efm" },
 					-- only show component if LSP is active
 					cond = function()
-						if vim.g.lualine_lsp_active == nil then
-							vim.g.lualine_lsp_active = false -- default
-							vim.api.nvim_create_autocmd("LspProgress", {
-								desc = "User: Hide LSP progress component after 2s",
-								callback = function()
-									vim.g.lualine_lsp_active = true
-									vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
-								end,
-							})
-						end
-						return vim.g.lualine_lsp_active
+						if vim.g.lualine_lsp_active ~= nil then return vim.g.lualine_lsp_active end
+						vim.g.lualine_lsp_active = false
+						-- ^ so autocmd is only created once
+
+						vim.api.nvim_create_autocmd("LspProgress", {
+							desc = "User: Hide LSP progress component after 2s",
+							callback = function()
+								vim.g.lualine_lsp_active = true
+								vim.defer_fn(function() vim.g.lualine_lsp_active = false end, 2000)
+							end,
+						})
 					end,
 				},
 			},
