@@ -90,7 +90,7 @@ function M.toggleOrIncrement()
 	local toggles = {
 		["true"] = "false",
 		["=="] = "!=",
-		["||"] = "&&"
+		["||"] = "&&",
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 		toggles["const"] = "let"
@@ -321,6 +321,37 @@ do
 			notFoundMsg(searchQuery)
 		end
 	end
+end
+
+function M.countLspRefs()
+	local count = { file = {}, workspace = {} }
+	local params = vim.lsp.util.make_position_params(0, "utf-32")
+	local thisFileUri = params.textDocument.uri
+
+	local ids = vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
+		if error then
+			vim.notify(error.message, vim.log.levels.ERROR)
+			return
+		end
+		if not refs then return end
+		count.workspace.references = #refs
+		count.file.references = vim.iter(refs):fold(0, function(acc, ref)
+			if thisFileUri == ref.uri then acc = acc + 1 end
+			return thisFileUri == ref.uri and acc or acc + 1
+		end)
+	end)
+	Chainsaw(ids) -- 🪚
+	-- vim.lsp.buf_request(0, "textDocument/definition", params, function(error, defs)
+	-- 	if error then
+	-- 		vim.notify(error.message, vim.log.levels.ERROR)
+	-- 		return
+	-- 	end
+	-- 	if not defs then return end
+	-- 	count.file.definitions = vim.iter(defs):fold(0, function(acc, def)
+	-- 		if thisFileUri == def.uri then acc = acc + 1 end
+	-- 		return thisFileUri == def.uri and acc or acc + 1
+	-- 	end)
+	-- end)
 end
 
 --------------------------------------------------------------------------------
