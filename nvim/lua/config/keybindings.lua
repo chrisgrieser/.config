@@ -57,6 +57,15 @@ keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") e
 -- stylua: ignore
 keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
 
+keymap(
+	"n",
+	"1",
+	function() require("personal-plugins.emoji-textobj").emojiTextobj() end,
+	{ desc = " emoji textobj" }
+)
+
+-- 🪚
+
 --------------------------------------------------------------------------------
 -- MARKS
 do
@@ -298,7 +307,12 @@ keymap({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "󱐋 Code 
 -- stylua: ignore
 keymap({ "n", "x" }, "<D-s>", function() require("personal-plugins.misc").formatWithFallback() end, { desc = "󱉯 Save & Format" })
 
-keymap("n", "#", function() require("personal-plugins.misc").countLspRefs() end, { desc = "󰈿 LSP References count" })
+keymap(
+	"n",
+	"#",
+	function() require("personal-plugins.misc").countLspRefs() end,
+	{ desc = "󰈿 LSP References count" }
+)
 vim.lsp.buf.references()
 
 do

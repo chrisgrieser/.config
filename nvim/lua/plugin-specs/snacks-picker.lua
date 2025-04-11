@@ -230,9 +230,7 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
-					-- start with preview off
-					---@diagnostic disable-next-line: assign-type-mismatch
-					layout = { preset = "wide_with_preview", preview = false },
+					layout = { preset = "wide_with_toggled_preview"}
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -273,9 +271,7 @@ return {
 					},
 				},
 				git_log = {
-					-- start with preview off
-					---@diagnostic disable-next-line: assign-type-mismatch
-					layout = { preset = "wide_with_preview", preview = false },
+					layout = { preset = "wide_with_toggled_preview"}
 				},
 			},
 			formatters = {
@@ -316,6 +312,10 @@ return {
 							wo = { number = false, statuscolumn = " ", signcolumn = "no" },
 						},
 					},
+				},
+				wide_with_toggled_preview = { ---@diagnostic disable-line: missing-fields
+					preset = "wide_with_preview",
+					preview = false, ---@diagnostic disable-line: assign-type-mismatch wrong annotation
 				},
 			},
 			win = {
