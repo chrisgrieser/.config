@@ -58,13 +58,11 @@ keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") e
 keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
 
 keymap(
-	"n",
-	"1",
+	{ "o", "x" },
+	".",
 	function() require("personal-plugins.emoji-textobj").emojiTextobj() end,
 	{ desc = " emoji textobj" }
 )
-
--- 🪚
 
 --------------------------------------------------------------------------------
 -- MARKS
