@@ -219,7 +219,7 @@ function M.mostChangedFileStatusbar()
 	if not targetFile then return "" end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	local altFile = vim.api.nvim_buf_get_name(vim.fn.bufnr("#"))
+	local altFile = hasAltBuffer() and vim.api.nvim_buf_get_name(vim.fn.bufnr("#")) or altOldfile()
 	if targetFile == currentFile or targetFile == altFile then return "" end
 
 	local icon = config.icons.mostChangedFile or getFiletypeIcon(targetFile) or "M"

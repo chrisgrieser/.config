@@ -40,21 +40,17 @@ return {
 		{
 			"<leader>op",
 			function()
-				local notifyOpts = { title = "Gitsigns", icon = "󰊢" }
 				if vim.b.gitsignsPrevChanges then
 					require("gitsigns").reset_base()
-					vim.notify("Base was reset.", nil, notifyOpts)
 					vim.b.gitsignsPrevChanges = false
-					return
+				else
+					local filepath = vim.api.nvim_buf_get_name(0)
+					local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
+					local out = vim.system(gitArgs):wait()
+					local lastCommitToFile = vim.trim(out.stdout) .. "^"
+					require("gitsigns").change_base(lastCommitToFile)
+					vim.b.gitsignsPrevChanges = true
 				end
-
-				local filepath = vim.api.nvim_buf_get_name(0)
-				local gitArgs = { "git", "log", "--max-count=1", "--format=%h", "--", filepath }
-				local out = vim.system(gitArgs):wait()
-				local lastCommitToFile = vim.trim(out.stdout) .. "^"
-				require("gitsigns").change_base(lastCommitToFile)
-				vim.b.gitsignsPrevChanges = true
-				vim.notify("Changed base to " .. lastCommitToFile, nil, notifyOpts)
 			end,
 			desc = "󰊢 Prev/present hunks",
 		},
