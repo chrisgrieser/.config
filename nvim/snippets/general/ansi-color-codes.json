@@ -1,32 +1,4 @@
 {
-  "reset color": {
-    "body": "\\e[0m",
-    "prefix": " reset color"
-  },
-  "bold": {
-    "body": "\\e[1m",
-    "prefix": " bold (ansi)"
-  },
-  "italic": {
-    "body": "\\e[3m",
-    "prefix": " italic (ansi)"
-  },
-  "underline": {
-    "body": "\\e[4m",
-    "prefix": " underline (ansi)"
-  },
-  "revert colors": {
-    "body": "\\e[7m",
-    "prefix": " revert colors"
-  },
-  "yellow": {
-    "body": "\\e[0;33m",
-    "prefix": " yellow"
-  },
-  "white": {
-    "body": "\\e[0;37m",
-    "prefix": " white"
-  },
   "ansi": {
     "body": "\\e[0;38;5;${1:code}m",
     "prefix": " ansi"
@@ -39,24 +11,13 @@
     "body": "\\e[0;34m",
     "prefix": " blue"
   },
+  "bold": {
+    "body": "\\e[1m",
+    "prefix": " bold (ansi)"
+  },
   "cyan": {
     "body": "\\e[0;36m",
     "prefix": " cyan"
-  },
-  "green": {
-    "body": "\\e[0;32m",
-    "prefix": " green"
-  },
-  "red": {
-    "body": "\\e[0;31m",
-    "prefix": " red"
-  },
-  "magenta": {
-    "body": "\\e[0;35m",
-    "prefix": [
-      " magenta",
-      " purple"
-    ]
   },
   "gray + grey": {
     "body": "\\e[0;38;5;247m",
@@ -65,5 +26,44 @@
       " gray",
       " grey"
     ]
+  },
+  "green": {
+    "body": "\\e[0;32m",
+    "prefix": " green"
+  },
+  "italic": {
+    "body": "\\e[3m",
+    "prefix": " italic (ansi)"
+  },
+  "magenta": {
+    "body": "\\e[0;35m",
+    "prefix": [
+      " magenta",
+      " purple"
+    ]
+  },
+  "red": {
+    "body": "\\e[0;31m",
+    "prefix": " red"
+  },
+  "reset color": {
+    "body": "\\e[0m",
+    "prefix": " reset color"
+  },
+  "revert colors": {
+    "body": "\\e[7m",
+    "prefix": " revert colors"
+  },
+  "underline": {
+    "body": "\\e[4m",
+    "prefix": " underline (ansi)"
+  },
+  "white": {
+    "body": "\\e[0;37m",
+    "prefix": " white"
+  },
+  "yellow": {
+    "body": "\\e[0;33m",
+    "prefix": " yellow"
   }
 }

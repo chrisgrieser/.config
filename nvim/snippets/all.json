@@ -11,6 +11,10 @@
     "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
   },
+  "insert ISO datestamp (today)": {
+    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+    "prefix": "insert ISO datestamp (today)"
+  },
   "middle dot": {
     "body": "·",
     "prefix": "middle dot"
@@ -22,10 +26,6 @@
   "square (■)": {
     "body": "■",
     "prefix": "square (■)"
-  },
-  "insert ISO datestamp (today)": {
-    "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
-    "prefix": "insert ISO datestamp (today)"
   },
   "vim modeline (filetype)": {
     "body": "$LINE_COMMENT vim: ft=${1:filetype}",

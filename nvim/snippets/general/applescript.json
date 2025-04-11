@@ -1,113 +1,123 @@
 {
-	"check if running": {
-		"body": "tell application \"System Events\" to (name of processes) contains \"${1:processName}\"",
-		"prefix": "check if running"
-	},
-	"contituation": {
-		"body": "¬\n$0",
-		"description": "continues applescript on the next line",
-		"prefix": "contituation"
-	},
-	"function": {
-		"body": ["on ${1:func} (${2:argv})", "\t$0", "end ${1:func}"],
-		"prefix": "function"
-	},
-	"get current window path (Finder)": {
-		"body": [
-			"tell application \"Finder\"",
-			"activate",
-			"\tif ((count Finder windows) is 0) then return",
-			"\treturn POSIX path of (insertion location as alias)",
-			"end tell"
-		],
-		"description": "`insertion location` seems to be more reliable: https://apple.stackexchange.com/a/68901",
-		"prefix": "get current window (Finder)"
-	},
-	"get front process": {
-		"body": "tell application \"System Events\" to set frontApp to (name of first process where it is frontmost)",
-		"prefix": "get front process"
-	},
-	"get selection (Finder)": {
-		"body": "tell application \"Finder\" to return POSIX path of (selection as alias)",
-		"prefix": "get selection (Finder)"
-	},
-	"hide app": {
-		"body": "tell application \"System Events\" to tell process \"${1:appName}\" to set visible to false",
-		"prefix": "hide app"
-	},
-	"home": {
-		"body": "POSIX path of (path to home folder as string)",
-		"prefix": "home"
-	},
-	"key code": {
-		"body": "tell application \"System Events\" to key code ${1:num} using {${2:command} down}",
-		"prefix": "key code"
-	},
-	"keystroke": {
-		"body": "tell application \"System Events\" to keystroke \"${1:key}\" using {${2:command} down}",
-		"prefix": "keystroke"
-	},
-	"linefeed": {
-		"body": "linefeed",
-		"description": "Equivalent to `\\n` in Applescript.",
-		"prefix": ["linefeed", "\\n"]
-	},
-	"menu item": {
-		"body": [
-			"tell application \"System Events\" to tell process \"${1:process}\"",
-			"\tset frontmost to true",
-			"\tclick menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1",
-			"end tell"
-		],
-		"prefix": "menu item"
-	},
-	"notify": {
-		"body": "display notification \"${2:subtitle}\" with title \"${1:title}\"",
-		"prefix": ["notify", "notification"]
-	},
-	"pwd": {
-		"body": "set pwd to POSIX path of ((path to me as text) & \"::\")",
-		"prefix": "pwd"
-	},
-	"resolve home": {
-		"body": [
-			"set unresolved_path to \"~/Documents\"",
-			"set AppleScript's text item delimiters to \"~/\"",
-			"set theTextItems to every text item of unresolved_path",
-			"set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))",
-			"set resolved_path to theTextItems as string"
-		],
-		"prefix": "resolve home"
-	},
-	"shebang": {
-		"body": "#!/usr/bin/env osascript",
-		"prefix": "shebang"
-	},
-	"sub-menu item": {
-		"body": [
-			"tell application \"System Events\" to tell process \"${1:process}\"",
-			"\tset frontmost to true",
-			"\tclick menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
-			"end tell"
-		],
-		"prefix": "sub-menu item"
-	},
-	"wait until browser tab is loaded": {
-		"body": [
-			"tell application \"Brave Browser\"",
-			"\trepeat until (loading of active tab of front window is false)",
-			"\t\tdelay 0.1",
-			"\tend repeat",
-			"end tell"
-		],
-		"prefix": "wait until browser tab is loaded"
-	},
-	"get environment variable": {
-		"body": "set ${1:envvar} to (system attribute \"${1:envvar}\")",
-		"prefix": "Get environment variable"
-	},
-	"argv": {
-		"body": "set input to argv as string",
-		"prefix": "argv"
-	}
+  "argv": {
+    "body": "set input to argv as string",
+    "prefix": "argv"
+  },
+  "check if running": {
+    "body": "tell application \"System Events\" to (name of processes) contains \"${1:processName}\"",
+    "prefix": "check if running"
+  },
+  "contituation": {
+    "body": "¬\n$0",
+    "description": "continues applescript on the next line",
+    "prefix": "contituation"
+  },
+  "function": {
+    "body": [
+      "on ${1:func} (${2:argv})",
+      "\t$0",
+      "end ${1:func}"
+    ],
+    "prefix": "function"
+  },
+  "get current window path (Finder)": {
+    "body": [
+      "tell application \"Finder\"",
+      "activate",
+      "\tif ((count Finder windows) is 0) then return",
+      "\treturn POSIX path of (insertion location as alias)",
+      "end tell"
+    ],
+    "description": "`insertion location` seems to be more reliable: https://apple.stackexchange.com/a/68901",
+    "prefix": "get current window (Finder)"
+  },
+  "get environment variable": {
+    "body": "set ${1:envvar} to (system attribute \"${1:envvar}\")",
+    "prefix": "Get environment variable"
+  },
+  "get front process": {
+    "body": "tell application \"System Events\" to set frontApp to (name of first process where it is frontmost)",
+    "prefix": "get front process"
+  },
+  "get selection (Finder)": {
+    "body": "tell application \"Finder\" to return POSIX path of (selection as alias)",
+    "prefix": "get selection (Finder)"
+  },
+  "hide app": {
+    "body": "tell application \"System Events\" to tell process \"${1:appName}\" to set visible to false",
+    "prefix": "hide app"
+  },
+  "home": {
+    "body": "POSIX path of (path to home folder as string)",
+    "prefix": "home"
+  },
+  "key code": {
+    "body": "tell application \"System Events\" to key code ${1:num} using {${2:command} down}",
+    "prefix": "key code"
+  },
+  "keystroke": {
+    "body": "tell application \"System Events\" to keystroke \"${1:key}\" using {${2:command} down}",
+    "prefix": "keystroke"
+  },
+  "linefeed": {
+    "body": "linefeed",
+    "description": "Equivalent to `\\n` in Applescript.",
+    "prefix": [
+      "linefeed",
+      "\\n"
+    ]
+  },
+  "menu item": {
+    "body": [
+      "tell application \"System Events\" to tell process \"${1:process}\"",
+      "\tset frontmost to true",
+      "\tclick menu item \"${2:item}\" of menu \"${3:menu}\" of menu bar 1",
+      "end tell"
+    ],
+    "prefix": "menu item"
+  },
+  "notify": {
+    "body": "display notification \"${2:subtitle}\" with title \"${1:title}\"",
+    "prefix": [
+      "notify",
+      "notification"
+    ]
+  },
+  "pwd": {
+    "body": "set pwd to POSIX path of ((path to me as text) & \"::\")",
+    "prefix": "pwd"
+  },
+  "resolve home": {
+    "body": [
+      "set unresolved_path to \"~/Documents\"",
+      "set AppleScript's text item delimiters to \"~/\"",
+      "set theTextItems to every text item of unresolved_path",
+      "set AppleScript's text item delimiters to (POSIX path of (path to home folder as string))",
+      "set resolved_path to theTextItems as string"
+    ],
+    "prefix": "resolve home"
+  },
+  "shebang": {
+    "body": "#!/usr/bin/env osascript",
+    "prefix": "shebang"
+  },
+  "sub-menu item": {
+    "body": [
+      "tell application \"System Events\" to tell process \"${1:process}\"",
+      "\tset frontmost to true",
+      "\tclick menu item \"${2:item}\" of menu of menu item \"${3:submenu}\" of menu \"${4:menu}\" of menu bar 1",
+      "end tell"
+    ],
+    "prefix": "sub-menu item"
+  },
+  "wait until browser tab is loaded": {
+    "body": [
+      "tell application \"Brave Browser\"",
+      "\trepeat until (loading of active tab of front window is false)",
+      "\t\tdelay 0.1",
+      "\tend repeat",
+      "end tell"
+    ],
+    "prefix": "wait until browser tab is loaded"
+  }
 }
