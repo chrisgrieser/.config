@@ -57,23 +57,11 @@ function man() {
 # aggregates stackoverflow, tl;dr and many other help pages
 # DOCS https://cht.sh/:help
 function cht() {
-	if ! [[ "$TERM_PROGRAM" == "WezTerm" ]]; then echo "Not using WezTerm." && return 1; fi
-
-	local style pane_id
-	local query="$*"
-
 	# `curl cht.sh/:styles-demo`
 	style=$(defaults read -g AppleInterfaceStyle &> /dev/null && echo "monokai" || echo "trac")
 
-	query=${query// /-} # dash as separator for subcommands, e.g. git-rebase
-	curl -s "https://cht.sh/$query?style=$style" > "/tmp/$query"
-
-	# -+S = override `--chop-long-lines` from default less config
-	# -+F = override `--quit-if-one-screen`
-	# -+m = override `--long-prompt`
-	wezterm cli split-pane --right --percent=40 -- \
-		less -+F -+S -+m "/tmp/$query" \
-		&> /dev/null
+	query=${*// /-} # dash as separator for subcommands, e.g. git-rebase
+	curl -s "https://cht.sh/$query?style=$style"
 }
 
 #───────────────────────────────────────────────────────────────────────────────

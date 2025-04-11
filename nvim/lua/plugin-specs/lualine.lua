@@ -25,17 +25,25 @@ local function countLspRefs()
 	local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
 	params.context = { includeDeclaration = true } ---@diagnostic disable-line: inject-field
 	local thisFile = params.textDocument.uri
-	client:request("textDocument/references", params, function(error, refs)
-		if error or not refs then
-			vim.b.lspReferenceCount = nil
-			return
-		end
-		local inWorkspace = #refs
-		local inFile = #vim.iter(refs):filter(function(ref) return thisFile == ref.uri end):totable()
-		local out = icon .. " " .. inFile
-		if inFile ~= inWorkspace then out = out .. "(" .. inWorkspace .. ")" end
-		vim.b.lspReferenceCount = vim.trim(out)
-	end)
+
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local sameCursorPos = row == vim.b.lspReferenceLastPos[1] and col == vim.b.lspReferenceLastPos[2]
+
+	if not sameCursorPos then
+		vim.b.lspReferenceLastRow = row
+		client:request("textDocument/references", params, function(error, refs)
+			if error or not refs then
+				vim.b.lspReferenceCount = nil
+				return
+			end
+			local inWorkspace = #refs
+			local inFile =
+				#vim.iter(refs):filter(function(ref) return thisFile == ref.uri end):totable()
+			local out = icon .. " " .. inFile
+			if inFile ~= inWorkspace then out = out .. "(" .. inWorkspace .. ")" end
+			vim.b.lspReferenceCount = out
+		end)
+	end
 
 	-- returns empty string at first and later the updated count
 	return vim.b.lspReferenceCount or ""
