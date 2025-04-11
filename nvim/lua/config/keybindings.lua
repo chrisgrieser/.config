@@ -153,6 +153,7 @@ end, { desc = " Toggle quickfix window" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
+keymap("n", "za", "zA", { desc = "󰘖 Toggle folds recursively" })
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })

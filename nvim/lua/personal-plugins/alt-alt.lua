@@ -17,7 +17,7 @@ Alternative to vim's "alternative file" that improves its functionality.
 local config = {
 	icons = {
 		oldFile = "󰋚",
-		altFile = "󰬈", -- set to nil to use filetype icon from mini.icons
+		altFile = "󰐤", -- set to nil to use filetype icon from mini.icons
 		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
 	},
 	statusbarMaxLength = 30,
