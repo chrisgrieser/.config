@@ -18,8 +18,8 @@ let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
 // Alfred environment variables
-let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
-let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
+let reminderList = "Tasks"
+let includeAllLists = false
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -50,16 +50,21 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 
 	// Get reminders from the list and format them
-	let predicate = eventStore.predicateForReminders(in: selectedCalendars)
+	let today = Date()
+	let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+
+	let predicate = eventStore.predicateForIncompleteReminders(
+		withDueDateStarting: Date(), ending: tomorrow, calendars: selectedCalendars)
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
 			print("[]")
 			semaphore.signal()
 			return
 		}
+		dump(reminders)
 
 		let formatter = ISO8601DateFormatter()
-		let reminderData = reminders.map { reminder in
+		let _ = reminders.map { reminder in
 			let components = reminder.dueDateComponents
 			let isAllDay = components?.hour == nil && components?.minute == nil
 
@@ -77,15 +82,15 @@ eventStore.requestFullAccessToReminders { granted, error in
 			)
 		}
 
-		// output as stringified JSON
-		do {
-			let jsonData = try JSONEncoder().encode(reminderData)
-			if let jsonString = String(data: jsonData, encoding: .utf8) {
-				print(jsonString)
-			}
-		} catch {
-			print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
-		}
+		// // output as stringified JSON
+		// do {
+		// 	let jsonData = try JSONEncoder().encode(reminderData)
+		// 	if let jsonString = String(data: jsonData, encoding: .utf8) {
+		// 		// print(jsonString)
+		// 	}
+		// } catch {
+		// 	print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
+		// }
 		semaphore.signal()
 	}
 }
