@@ -25,7 +25,7 @@ git commit --message="edited the content of foobar.txt to cause a conflict"
 git checkout main
 echo "content to append" >> foobar.txt
 git add --all
-git commit --message="appended content to foobar.txt"
+git commit --message="appended content to foobar.txt"
 
 # merge `alt_branch` into `main`, creating a conflict
 git merge alt_branch
