@@ -161,12 +161,11 @@ end
 --------------------------------------------------------------------------------
 
 function M.spellSuggest()
-	local limit = 9
 	local suggestions = vim.fn.spellsuggest(vim.fn.expand("<cword>"))
-	suggestions = vim.list_slice(suggestions, 1, limit)
+	suggestions = vim.list_slice(suggestions, 1, 9)
 
 	vim.ui.select(suggestions, { prompt = "󰓆 Spelling suggestions" }, function(selection)
-		if selection then return end
+		if not selection then return end
 		vim.cmd.normal { '"_ciw' .. selection, bang = true }
 	end)
 end

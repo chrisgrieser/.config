@@ -61,6 +61,7 @@ const urlRegex =
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const timelogStart1 = Date.now(); // 🪚
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
@@ -184,6 +185,7 @@ function run() {
 		});
 	}
 
+	console.log(`#1 🪚: ${(Date.now() - timelogStart1) / 1000}s`);
 	return JSON.stringify({
 		items: reminders,
 		skipknowledge: true, // keep sorting order
