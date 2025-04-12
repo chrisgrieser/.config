@@ -164,9 +164,14 @@ keymap("n", "za", "zA", { desc = "󰘖 Toggle folds recursively" })
 keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
 keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
-for i = 1, 5 do
-	keymap("n", "z" .. i, function() vim.opt.foldlevel = i end, { desc = "󰘖 Folds level " .. i })
-end
+-- stylua: ignore
+keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = "󰘖 Set fold level to count" })
+
+keymap("n", "zs", function()
+	local modeline = vim.bo.commentstring:format("vim foldlevel=" .. vim.o.foldlevel)
+	vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
+	vim.api.nvim_win_set_cursor(0, { 1, #modeline })
+end, { desc = "󰘖 Save foldlevel in modeline" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS

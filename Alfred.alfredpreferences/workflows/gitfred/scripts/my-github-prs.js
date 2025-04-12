@@ -11,47 +11,44 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/**
- * @param {string} isoDateStr string to be converted to a date
- * @return {string} relative date
- */
-function humanRelativeDate(isoDateStr) {
-	const deltaSecs = (Date.now() - +new Date(isoDateStr)) / 1000;
-	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
-	let unit;
-	let delta;
-	if (deltaSecs < 60) {
-		unit = "second";
-		delta = Math.ceil(deltaSecs);
-	} else if (deltaSecs < 60 * 60) {
-		unit = "minute";
-		delta = Math.ceil(deltaSecs / 60);
-	} else if (deltaSecs < 60 * 60 * 24) {
-		unit = "hour";
-		delta = Math.ceil(deltaSecs / 60 / 60);
-	} else if (deltaSecs < 60 * 60 * 24 * 7) {
-		unit = "day";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
-		unit = "week";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
-		unit = "month";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
-	} else {
-		unit = "year";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
-	}
-	const formatter = new Intl.RelativeTimeFormat("en", { style: "long", numeric: "auto" });
-	const str = formatter.format(-delta, unit);
-	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
-}
-
 /** @param {string} url @return {string} */
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const data = $.NSData.dataWithContentsOfURL(queryURL);
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+}
+
+/**
+ * @param {string} isoDateStr string to be converted to a date
+ * @return {string} relative date
+ */
+function humanRelativeDate(isoDateStr) {
+	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
+	let unit;
+	let delta;
+	if (deltaMins < 60) {
+		unit = "minute";
+		delta = deltaMins
+	} else if (deltaMins < 60 * 24) {
+		unit = "hour";
+		delta = Math.floor(deltaMins / 60);
+	} else if (deltaMins < 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.floor(deltaMins / 60 / 24);
+	} else if (deltaMins < 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.floor(deltaMins / 60 / 24 / 7);
+	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
+	} else {
+		unit = "year";
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
+	const str = formatter.format(-delta, unit);
+	return str.replace(/m(?= ago$)/, "min"); // "m" -> "min" (more distinguishable from "month")
 }
 
 //──────────────────────────────────────────────────────────────────────────────
