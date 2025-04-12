@@ -153,18 +153,19 @@ end, { desc = " Toggle quickfix window" })
 
 --------------------------------------------------------------------------------
 -- FOLDING
-keymap("n", "za", "zA", { desc = "󰘖 Toggle folds recursively" })
-keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = "󰘖 Close toplevel folds" })
-keymap("n", "zm", "zM", { desc = "󰘖 Close all folds" })
+keymap("n", "zz", "<cmd>%foldclose<CR>", { desc = " Close toplevel folds" })
+keymap("n", "zm", "zM", { desc = " Close all folds" })
+keymap("n", "zv", "zv", { desc = "󰘖 Open until cursor visible" }) -- just for which-key
 keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
+keymap("n", "zo", "zO", { desc = "󰘖 Open fold recursively" })
 -- stylua: ignore
-keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = "󰘖 Set fold level to count" })
+keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to count" })
 
 keymap("n", "zs", function()
 	local modeline = vim.bo.commentstring:format("vim foldlevel=" .. vim.o.foldlevel)
 	vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
 	vim.api.nvim_win_set_cursor(0, { 1, #modeline })
-end, { desc = "󰘖 Save foldlevel in modeline" })
+end, { desc = "󰆓 Save foldlevel in modeline" })
 
 --------------------------------------------------------------------------------
 -- SNIPPETS
