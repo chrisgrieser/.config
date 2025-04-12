@@ -12,7 +12,7 @@ return { -- treesitter-based textobjs
 		"TSTextobjectGotoPreviousStart",
 	},
 	-- SIC yes, configured via treesitter, not this plugin. Also, calling
-	-- treesitter's `setup` a second time is apparently not a problem.
+	-- treesitter's `setup` a second time is not a problem.
 	main = "nvim-treesitter.configs",
 	opts = {
 		textobjects = {
@@ -26,7 +26,6 @@ return { -- treesitter-based textobjs
 	},
 	keys = {
 		-- stylua: ignore start
-
 		-- MOVE
 		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
 		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
