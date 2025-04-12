@@ -108,7 +108,7 @@ keymap("n", "X", function()
 end, { desc = "󱎘 Delete char at EoL" })
 
 -- Append to EoL: `<leader>` + `char`
-local trailChars = { ",", ")", ";", ".", '"', " \\", " {" }
+local trailChars = { ",", ")", ";", ".", '"', " \\", " {", "?" }
 for _, chars in pairs(trailChars) do
 	keymap("n", "<leader>" .. vim.trim(chars), function()
 		local updatedLine = vim.api.nvim_get_current_line() .. chars
