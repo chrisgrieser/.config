@@ -163,10 +163,10 @@ return {
 			"N",
 			mode = "o",
 			function()
-				local charwise = require("various-textobjs.textobjs.charwise.core")
+				local core = require("various-textobjs.charwise-core")
 				local pattern = "().( then)"
-				local row, _, endCol = charwise.getTextobjPos(pattern, "inner", 5)
-				charwise.selectFromCursorTo({ row, endCol }, 5)
+				local row, _, endCol = core.getTextobjPos(pattern, "inner", 5)
+				core.selectFromCursorTo({ row, endCol }, 5)
 			end,
 			ft = "lua",
 			desc = "󰬞 to next `then`",

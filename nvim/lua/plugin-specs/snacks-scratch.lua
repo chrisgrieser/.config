@@ -1,6 +1,7 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
 --------------------------------------------------------------------------------
 ---@module "snacks"
+--------------------------------------------------------------------------------
 
 ---@param self { buf: number } passed by snacks
 ---@param cli string|string[]
@@ -10,6 +11,7 @@ local function runner(self, cli, name)
 	local file = vim.api.nvim_buf_get_name(self.buf)
 	vim.list_extend(args, { file })
 
+	vim.cmd("silent! update") -- ensure changes are saved
 	local result = vim.system(args):wait()
 	local out = vim.trim((result.stdout or "") .. "\n" .. (result.stderr or ""))
 
@@ -71,8 +73,9 @@ return {
 				keys = { q = false }, -- so `q` is available as my comment operator
 				on_win = function(win)
 					-- FIX display of scratchpad title (partially hardcoded, when setting icon, etc.)
-					local icon = Snacks.util.icon(vim.bo[win.buf].ft, "filetype")
-					local title = (" %s Scratch "):format(icon)
+					local ft = vim.bo[win.buf].ft
+					local icon = Snacks.util.icon(ft, "filetype")
+					local title = (" %s %s scratch "):format(icon, ft)
 					vim.api.nvim_win_set_config(win.win, { title = title })
 				end,
 			},
