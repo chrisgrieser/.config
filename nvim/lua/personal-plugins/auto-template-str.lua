@@ -78,6 +78,18 @@ local function jsStr(node)
 	updateNode(strNode, "${}", transformer, nil, 2)
 end
 
+---@param node TSNode
+local function swiftStr(node)
+	local strNode
+	if node:type() == "line_str_text" then
+		strNode = node
+	elseif node:type() == "line_string_literal" then
+		strNode = node:parent()
+	end
+	local transformer = function(nodeText) return nodeText end
+	updateNode(strNode, "\\()", transformer, nil, 2)
+end
+
 --------------------------------------------------------------------------------
 
 function M.insertTemplateStr()
@@ -91,6 +103,7 @@ function M.insertTemplateStr()
 		python = pyStr,
 		javascript = jsStr,
 		typescript = jsStr,
+		swift = swiftStr,
 	}
 	local updateFunc = availableFiletypes[vim.bo.ft]
 	if not updateFunc then

@@ -18,7 +18,7 @@ local lspToMasonMap = {
 	html = "html-lsp",
 	jsonls = "json-lsp",
 	just = "just-lsp",
-	ltex_plus = "ltex-ls-plus", -- ltex-fork, languagetool (natural language linter)
+	ltex_plus = "ltex-ls-plus", -- ltex-fork -> languagetool (natural language linter)
 	lua_ls = "lua-language-server",
 	marksman = "marksman", -- markdown lsp
 	ruff = "ruff", -- python linter & formatter
@@ -154,8 +154,7 @@ M.serverConfigs.lua_ls = {
 					-- formatter already handles that
 					"trailing-space",
 					-- don't dim content of unused functions
-					-- (no loss of diagnostic, used `unused-local` will still inform
-					-- us about these functions)
+					-- (no loss of diagnostic, `unused-local` still informs about these functions)
 					"unused-function",
 				},
 			},
@@ -309,9 +308,7 @@ M.serverConfigs.harper_ls = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
 			userDictPath = vim.o.spellfile,
-			markdown = {
-				IgnoreLinkTitle = true,
-			},
+			markdown = { IgnoreLinkTitle = true },
 			linters = {
 				SentenceCapitalization = false, -- false positives: https://github.com/Automattic/harper/issues/1056
 			},
@@ -332,8 +329,7 @@ M.serverConfigs.harper_ls = {
 	end,
 }
 
--- DOCS of the original https://valentjn.github.io/ltex/settings.html
--- DOCS of the fork https://ltex-plus.github.io/ltex-plus/settings.html
+-- DOCS https://ltex-plus.github.io/ltex-plus/settings.html
 M.serverConfigs.ltex_plus = {
 	filetypes = { "markdown" },
 	settings = {
