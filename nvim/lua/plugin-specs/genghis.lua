@@ -18,6 +18,7 @@ return {
 		{ "<leader>fw", function() require("genghis").duplicateFile() end, desc = " Duplicate" },
 		{ "<leader>fm", function() require("genghis").moveToFolderInCwd() end, desc = "󱀱 Move" },
 		{ "<leader>fd", function() require("genghis").trashFile() end, desc = "󰩹 Delete" },
+		{ "<leader>fx", function() require("genghis").chmodx() end, desc = "󰒃 chmod +x" },
 
 		-- stylua: ignore
 		{ "<M-CR>", function() require("genghis").navigateToFileInFolder("next") end, desc = "󰖽 Next file in folder" },
@@ -32,6 +33,5 @@ return {
 		},
 		-- stylua: ignore
 		{ "<D-l>", function() require("genghis").showInSystemExplorer() end, desc = "󰀶 Reveal in Finder" },
-		{ "<leader>ex", function() require("genghis").chmodx() end, desc = "󰒃 chmod +x" },
 	},
 }

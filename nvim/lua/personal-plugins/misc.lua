@@ -31,9 +31,13 @@ end
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
 	local notRecording = vim.fn.reg_recording() == ""
+	local soundDir =
+		"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+	local soundFile
 
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true }
+		soundFile = "begin_record.caf"
 	else
 		vim.cmd.normal { "q", bang = true }
 		local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
@@ -41,16 +45,14 @@ function M.startOrStopRecording(toggleKey, reg)
 			vim.fn.setreg(reg, macro)
 			local msg = vim.fn.keytrans(macro)
 			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
+			soundFile = "end_record.caf"
 		else
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
+			soundFile = "media_paused.caf"
 		end
 	end
-	-- sound if on macOS
-	if jit.os == "OSX" then
-		local sound = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-			.. (notRecording and "begin_record.caf" or "end_record.caf")
-		vim.system { "afplay", sound } -- async
-	end
+
+	if jit.os == "OSX" then vim.system { "afplay", soundDir .. soundFile } end
 end
 
 --------------------------------------------------------------------------------
