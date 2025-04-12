@@ -36,3 +36,4 @@ PRs
 lspconfig
 automagically
 runtime
+Justfile

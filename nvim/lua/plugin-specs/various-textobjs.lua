@@ -7,7 +7,7 @@ return {
 		debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-various-textobjs"),
 	},
 	keys = {
-		{
+		{ -- subword
 			"<Space>",
 			function()
 				-- for deletions use the outer subword, otherwise the inner
@@ -17,6 +17,15 @@ return {
 			mode = "o",
 			desc = "󰬞 subword",
 		},
+
+		keymap(
+	{ "o", "x" },
+	".",
+	function() require("personal-plugins.emoji-textobj").emojiTextobj() end,
+	{ desc = " emoji textobj" }
+)
+
+		{ "iv", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji textobj" },
 
 		-- stylua: ignore start
 		{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = {"x","o"}, desc = " inner value" },

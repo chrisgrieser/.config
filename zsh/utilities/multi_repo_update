@@ -4,17 +4,17 @@
 github_username="chrisgrieser"
 # set -e
 
-repo_names="alfred|shimmering-obsidian|gitfred"
-# repo_names="nvim"
+# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="nvim"
 # repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/.build-and-release.sh" ./.build-and-release.sh
+	cp "$HOME/Desktop/Justfile" ./Justfile
 }
 
-commit_msg="build: guard against local workflow not being found"
+commit_msg="build: add Justfile"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -59,12 +59,14 @@ i=1
 not_updated=0
 while read -r repo; do
 	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
+	# WARN depth 2 relevant for prevent history loss when amending
 	git clone --no-progress --depth=2 "git@github.com:$github_username/$repo"
 	cd "$repo" || return 1
 
 	actions_in_repo
 
 	git add --all && git commit -m "$commit_msg" && git push --no-progress
+	# git add --all && git commit --amend --no-edit && git push --no-progress --force
 	success=$?
 	if [[ $success -ne 0 ]]; then
 		print "\e[1;33mDid not update $repo.\e[0m"
@@ -73,7 +75,7 @@ while read -r repo; do
 
 	echo
 	cd ..
-	rm -rf "$repo"
+	trash "$repo"
 	((i++))
 done <<< "$repos_to_update"
 
