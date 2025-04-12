@@ -18,7 +18,7 @@ local config = {
 	statusbarMaxLength = 30,
 	icons = {
 		oldFile = "󰋚",
-		altFile = "󰐤", -- set to nil to use filetype icon from mini.icons
+		altFile = "󰬈", -- set to nil to use filetype icon from mini.icons
 		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
 	},
 	ignore = { -- patterns for `string.find`; applied to the whole file path
@@ -46,23 +46,26 @@ local function notify(msg, level, icon)
 end
 
 ---@nodiscard
----@return boolean
-local function hasAltBuffer()
+---@return string|nil altBufferName, nil if no alt buffer
+local function getAltBuffer()
 	local altBufnr = vim.fn.bufnr("#")
-	if altBufnr < 0 then return false end
+	if altBufnr < 0 then return end
 	local valid = vim.api.nvim_buf_is_valid(altBufnr)
 	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird vim bug
 	local altBufExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(altBufnr)) ~= nil
 
-	return valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altBufExists
+	if valid and nonSpecial and moreThanOneBuffer and currentBufNotAlt and altBufExists then
+		local altBufferName = vim.api.nvim_buf_get_name(vim.fn.bufnr("#"))
+		return altBufferName
+	end
 end
 
 ---get the alternate oldfile, accounting for non-existing files
 ---@nodiscard
 ---@return string|nil path of oldfile, nil if none exists in all oldfiles
-local function altOldfile()
+local function getAltOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
 		local exists = vim.uv.fs_stat(path) ~= nil
@@ -173,20 +176,19 @@ function M.deleteBuffer()
 	end
 end
 
----switch to alternate buffer/oldfile (in that priority)
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
 		notify("Cannot do that in special buffer.", "warn", config.icons.altFile)
 		return
 	end
-	local altOld = altOldfile()
+	local altBuf, altOld = getAltBuffer(), getAltOldfile()
 
-	if hasAltBuffer() then
+	if altBuf then
 		vim.cmd.buffer("#")
 	elseif altOld then
 		vim.cmd.edit(altOld)
 	else
-		notify("No alt buffer or oldfile available.", "error", config.icons.altFile)
+		notify("No alt file or oldfile available.", "error", config.icons.altFile)
 	end
 end
 
@@ -208,7 +210,6 @@ end
 --------------------------------------------------------------------------------
 -- STATUSBAR
 
--- PERF only update on BufEnter or FocusGained
 local mostChangedFile
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	desc = "Alt-alt: update most changed file statusbar",
@@ -223,28 +224,21 @@ function M.mostChangedFileStatusbar()
 	if not targetFile then return "" end
 
 	local currentFile = vim.api.nvim_buf_get_name(0)
-	local altFile = hasAltBuffer() and vim.api.nvim_buf_get_name(vim.fn.bufnr("#")) or altOldfile()
+	local altFile = getAltBuffer() or getAltOldfile()
 	if targetFile == currentFile or targetFile == altFile then return "" end
 
 	local icon = config.icons.mostChangedFile or getFiletypeIcon(targetFile) or "M"
 	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
 end
 
----shows name & icon of alt buffer. If there is none, show first alt-oldfile.
 ---@return string
 ---@nodiscard
 function M.altFileStatusbar()
-	local icon, path
-	local altOld = altOldfile()
+	local altBuf, altOld = getAltBuffer(), getAltOldfile()
 
-	if hasAltBuffer() then
-		local altBufNr = vim.fn.bufnr("#")
-		path = vim.api.nvim_buf_get_name(altBufNr)
-		icon = config.icons.altFile or getFiletypeIcon(path, altBufNr) or "#"
-	elseif altOld then
-		icon = config.icons.oldFile or ""
-		path = altOld
-	end
+	local path = altBuf or altOld or "[unknown]"
+	local icon = (altBuf and getFiletypeIcon(altBuf, vim.fn.bufnr("#")) or config.icons.oldFile)
+		or ""
 
 	return vim.trim(icon .. " " .. nameForStatusbar(path))
 end
