@@ -23,23 +23,14 @@ return {
 
 		-- formatting for the diff mode
 		vim.opt.fillchars:append {
-			diff = "-", -- removed lines
+			diff = " ", -- removed lines
 			foldopen = "",
 			foldclose = "",
 		}
 	end,
 	keys = {
-		{
-			"<leader>aa",
-			function()
-				vim.ui.input( { prompt = " CodeCompanion" }, function(input)
-					vim.cmd.CodeCompanion(input)
-				end
-				)
-			end,
-			mode = { "n", "x" },
-			desc = " Inline assistant",
-		},
+		-- `:` so context gets passed via `<>` marks
+		{ "<leader>aa", ":CodeCompanion<CR>", mode = { "n", "x" }, desc = " Inline assistant" },
 		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = " Chat" },
 	},
 	opts = {
