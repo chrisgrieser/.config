@@ -24,6 +24,7 @@ let semaphore = DispatchSemaphore(value: 0)
 // Alfred environment variables
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
+let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -52,10 +53,15 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	// Get Reminders DOCS https://developer.apple.com/documentation/eventkit/retrieving-events-and-reminders#Fetch-Reminders
-	// (using `predicateForIncompleteReminders` has no performance benefit, so
-	// skipping logic to conditionally use it instead.)
-	let predicate = eventStore.predicateForReminders(in: selectedCalendars)
+	// Get reminders from the list and format them. https://developer.apple.com/documentation/eventkit/retrieving-events-and-reminders#Fetch-Reminders
+	// PERF using `predicateForIncompleteReminders` has no noticeable performance
+	// benefit, however, it does reduce the number of items the JXA script later
+	// has to process, resulting in ~0.1s speedup.
+	let predicate =
+		showCompleted
+		? eventStore.predicateForReminders(in: selectedCalendars)
+		: eventStore.predicateForIncompleteReminders(
+			withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
 
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {

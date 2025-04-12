@@ -40,7 +40,6 @@ safeRequire("config.keybindings")
 
 --------------------------------------------------------------------------------
 
-safeRequire("personal-plugins.selector")
 safeRequire("personal-plugins.git-conflict")
 safeRequire("config.backdrop-underline-fix")
 
