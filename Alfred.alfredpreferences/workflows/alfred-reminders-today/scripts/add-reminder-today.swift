@@ -23,6 +23,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		semaphore.signal()
 		return
 	}
+	// ──────────────────────────────────────────────────────────────────────────
 
 	// Create a new reminder
 	let reminder = EKReminder(eventStore: eventStore)

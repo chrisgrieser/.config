@@ -29,7 +29,17 @@ return {
 		}
 	end,
 	keys = {
-		{ "<leader>aa", ":CodeCompanion ", mode = { "n", "x" }, desc = " Inline assistant" },
+		{
+			"<leader>aa",
+			function()
+				vim.ui.input( { prompt = " CodeCompanion" }, function(input)
+					vim.cmd.CodeCompanion(input)
+				end
+				)
+			end,
+			mode = { "n", "x" },
+			desc = " Inline assistant",
+		},
 		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = " Chat" },
 	},
 	opts = {
