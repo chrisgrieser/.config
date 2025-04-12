@@ -1,8 +1,7 @@
 -- save as `minimal-config.lua`
 -- run via: `nvim -u minimal-config.lua`
 --------------------------------------------------------------------------------
-local spec = {
-}
+local spec = {}
 
 --------------------------------------------------------------------------------
 vim.env.LAZY_STDPATH = "/tmp/nvim-repro"

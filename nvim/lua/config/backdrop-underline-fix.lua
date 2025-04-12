@@ -20,8 +20,6 @@ vim.api.nvim_create_autocmd({ "WinEnter", "FileType" }, {
 	callback = function(ctx)
 		-- Dressing/snacks need to be detected separately, as they use `noautocmd`
 		local ft = ctx.match
-		if ctx.event == "WinEnter" or ft == "snacks_input" then
-			vim.defer_fn(toggleUnderlines, 1)
-		end
+		if ctx.event == "WinEnter" or ft == "snacks_input" then vim.defer_fn(toggleUnderlines, 1) end
 	end,
 })

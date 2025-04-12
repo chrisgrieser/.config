@@ -2,7 +2,7 @@ local bkeymap = require("config.utils").bufKeymap
 local abbr = require("config.utils").bufAbbrev
 --------------------------------------------------------------------------------
 
--- FIXES HABITS 
+-- FIXES HABITS
 -- from writing too much in other languages
 abbr("//", "--")
 abbr("const", "local")

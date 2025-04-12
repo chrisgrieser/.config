@@ -57,13 +57,6 @@ keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") e
 -- stylua: ignore
 keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end, { desc = "󰛃 indent up" })
 
-keymap(
-	{ "o", "x" },
-	".",
-	function() require("personal-plugins.emoji-textobj").emojiTextobj() end,
-	{ desc = " emoji textobj" }
-)
-
 --------------------------------------------------------------------------------
 -- MARKS
 do

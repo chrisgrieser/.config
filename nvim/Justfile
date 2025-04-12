@@ -2,6 +2,7 @@ set quiet := true
 
 debugFile := "./debug/test.lua"
 debugConfig := "./debug/repro.lua"
+masonPath := "$HOME/.local/share/nvim/mason/bin/"
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -20,5 +21,6 @@ debug-instance:
 
 stylua-on-all:
     #!/usr/bin/env zsh
-    export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-    stylua .
+    {{ masonPath }}/stylua --check --output-format=summary . && return 0
+    {{ masonPath }}/stylua .
+    echo "\nFiles formatted."

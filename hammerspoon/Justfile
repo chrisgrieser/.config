@@ -1,5 +1,9 @@
 set quiet := true
 
+masonPath := "$HOME/.local/share/nvim/mason/bin/"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 [macos]
 reload:
     open -g "hammerspoon://hs-reload"
@@ -14,5 +18,7 @@ count-lines:
         sed 's|\./||'
 
 stylua-on-all:
-    export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-    stylua .
+    #!/usr/bin/env zsh
+    {{ masonPath }}/stylua --check --output-format=summary . && return 0
+    {{ masonPath }}/stylua .
+    echo "\nFiles formatted."
