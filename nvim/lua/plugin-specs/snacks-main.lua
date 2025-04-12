@@ -14,8 +14,7 @@ return {
 		require("snacks").setup(opts)
 
 		-- ignore certain notifications
-		---@diagnostic disable-next-line: duplicate-set-field intentional overwrite
-		vim.notify = function(msg, ...)
+		vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
 			if type(msg) == "string" then
 				local ignore = msg == "No code actions available"
 					or msg:find("^Client marksman quit with exit code 1 and signal 0.")
@@ -26,6 +25,13 @@ return {
 
 		-- disable default keymaps to make the `?` help overview less cluttered
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+
+		-- cleaner vim.ui.select
+		require("snacks.picker.format").ui_select = function(_kind)
+			return function(item)
+				return { { item.formatted } }
+			end
+		end
 	end,
 
 	keys = {
@@ -37,7 +43,7 @@ return {
 			function()
 				vim.ui.input({
 					prompt = " Eval",
-					win = { ft = "lua", b = { completion = true } },
+					win = { ft = "lua" }, --> this part is snacks-specific
 				}, function(expr)
 					if not expr then return end
 					local result = vim.inspect(vim.fn.luaeval(expr))

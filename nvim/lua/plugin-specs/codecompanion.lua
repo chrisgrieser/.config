@@ -3,7 +3,7 @@
 
 return {
 	"olimorris/codecompanion.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+	dependencies = "nvim-lua/plenary.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
