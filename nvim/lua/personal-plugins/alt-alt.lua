@@ -16,10 +16,10 @@ Alternative to vim's "alternative file" that improves its functionality.
 
 local config = {
 	statusbarMaxLength = 30,
-	icons = {
+	icons = { -- set to nil to use `mini.icons` filetype icon, set to "" to disable
 		oldFile = "󰋚",
-		altFile = "󰬈", -- set to nil to use filetype icon from mini.icons
-		mostChangedFile = "", -- set to nil to use filetype icon from mini.icons
+		altBuf = "󰯬",
+		mostChangedFile = "",
 	},
 	ignore = { -- patterns for `string.find`; applied to the whole file path
 		oldfiles = {
@@ -64,7 +64,7 @@ end
 
 ---get the alternate oldfile, accounting for non-existing files
 ---@nodiscard
----@return string|nil path of oldfile, nil if none exists in all oldfiles
+---@return string|nil oldfile; nil if none exists in all oldfiles
 local function getAltOldfile()
 	local curPath = vim.api.nvim_buf_get_name(0)
 	for _, path in ipairs(vim.v.oldfiles) do
@@ -74,7 +74,6 @@ local function getAltOldfile()
 			:any(function(p) return path:find(p) ~= nil end)
 		if exists and not ignored and not sameFile then return path end
 	end
-	return nil
 end
 
 ---@return string? filepath
@@ -113,11 +112,16 @@ local function getMostChangedFile()
 	return targetFile, nil
 end
 
----@param filepath string
+---@param default "oldFile"|"altBuf"|"mostChangedFile"
+---@param filepath? string
 ---@param bufnr? number
 ---@return string? icon
-local function getFiletypeIcon(filepath, bufnr)
-	local ok, miniIcons = pcall(require, "mini.icons")
+local function getIcon(default, filepath, bufnr)
+	-- if default icon, use it
+	if config.icons[default] then return config.icons[default] end
+	if not filepath then return end
+
+	local ok, miniIcons = pcall(require, "")
 	if not (ok and miniIcons) then return end
 
 	local icon, _, isDefault = miniIcons.get("file", filepath)
@@ -157,7 +161,7 @@ function M.deleteBuffer()
 
 	-- close buffer
 	if #openBuffers < 2 then
-		notify("Only one buffer open.", "trace", config.icons.altFile)
+		notify("Only one buffer open.", "trace", config.icons.altBuf)
 		return
 	end
 	vim.cmd("silent! update")
@@ -177,8 +181,8 @@ function M.deleteBuffer()
 end
 
 function M.gotoAltFile()
-	if vim.bo.buftype ~= "" and vim.bo.buftype ~= "help" then
-		notify("Cannot do that in special buffer.", "warn", config.icons.altFile)
+	if vim.bo.buftype ~= "" then
+		notify("Cannot do that in special buffer.", "warn", config.icons.altBuf)
 		return
 	end
 	local altBuf, altOld = getAltBuffer(), getAltOldfile()
@@ -227,7 +231,7 @@ function M.mostChangedFileStatusbar()
 	local altFile = getAltBuffer() or getAltOldfile()
 	if targetFile == currentFile or targetFile == altFile then return "" end
 
-	local icon = config.icons.mostChangedFile or getFiletypeIcon(targetFile) or "M"
+	local icon = getIcon("mostChangedFile", targetFile)
 	return vim.trim(icon .. " " .. nameForStatusbar(targetFile))
 end
 
@@ -237,8 +241,8 @@ function M.altFileStatusbar()
 	local altBuf, altOld = getAltBuffer(), getAltOldfile()
 
 	local path = altBuf or altOld or "[unknown]"
-	local icon = (altBuf and getFiletypeIcon(altBuf, vim.fn.bufnr("#")) or config.icons.oldFile)
-		or ""
+	local icon = altBuf and getIcon("altBuf", altBuf, vim.fn.bufnr("#"))
+		or getIcon("oldFile", altOld)
 
 	return vim.trim(icon .. " " .. nameForStatusbar(path))
 end
