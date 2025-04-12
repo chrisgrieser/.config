@@ -2,6 +2,7 @@
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 ---@module "snacks"
+--------------------------------------------------------------------------------
 
 -- lightweight version of `telescope-import.nvim`
 local function importLuaModule()

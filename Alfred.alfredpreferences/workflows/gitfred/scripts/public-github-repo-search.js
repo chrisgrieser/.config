@@ -13,8 +13,7 @@ function alfredMatcher(str) {
 function httpRequest(url) {
 	const queryURL = $.NSURL.URLWithString(url);
 	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	const requestStr = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
-	return requestStr;
+	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
 }
 
 /**
@@ -22,31 +21,28 @@ function httpRequest(url) {
  * @return {string} relative date
  */
 function humanRelativeDate(isoDateStr) {
-	const deltaSecs = (Date.now() - +new Date(isoDateStr)) / 1000;
-	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
+	const deltaMins = (Date.now() - +new Date(isoDateStr)) / 1000 / 60;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
 	let unit;
 	let delta;
-	if (deltaSecs < 60) {
-		unit = "second";
-		delta = Math.ceil(deltaSecs);
-	} else if (deltaSecs < 60 * 60) {
+	if (deltaMins < 60) {
 		unit = "minute";
-		delta = Math.ceil(deltaSecs / 60);
-	} else if (deltaSecs < 60 * 60 * 24) {
+		delta = deltaMins
+	} else if (deltaMins < 60 * 24) {
 		unit = "hour";
-		delta = Math.ceil(deltaSecs / 60 / 60);
-	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+		delta = Math.floor(deltaMins / 60);
+	} else if (deltaMins < 60 * 24 * 7) {
 		unit = "day";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+		delta = Math.floor(deltaMins / 60 / 24);
+	} else if (deltaMins < 60 * 24 * 7 * 4) {
 		unit = "week";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+		delta = Math.floor(deltaMins / 60 / 24 / 7);
+	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
 		unit = "month";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
 	} else {
 		unit = "year";
-		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4 / 12);
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
 	}
 	const formatter = new Intl.RelativeTimeFormat("en", { style: "narrow", numeric: "auto" });
 	const str = formatter.format(-delta, unit);
