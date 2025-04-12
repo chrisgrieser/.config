@@ -13,7 +13,6 @@ local blinkConfig = {
 	opts = {
 		sources = {
 			per_filetype = {
-				["rip-substitute"] = { "buffer" },
 				gitcommit = {},
 			},
 

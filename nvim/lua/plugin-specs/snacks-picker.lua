@@ -231,7 +231,7 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
-					layout = { preset = "wide_with_toggled_preview"}
+					layout = { preset = "wide_with_toggled_preview" },
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -272,7 +272,7 @@ return {
 					},
 				},
 				git_log = {
-					layout = { preset = "wide_with_toggled_preview"}
+					layout = { preset = "wide_with_toggled_preview" },
 				},
 			},
 			formatters = {
@@ -379,6 +379,15 @@ return {
 				toggle_hidden_and_ignored = function(picker)
 					picker.opts["hidden"] = not picker.opts.hidden
 					picker.opts["ignored"] = not picker.opts.ignored
+
+					-- remove `--ignore-file` extra args
+					picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
+					local noIgnoreFileArgs = vim.iter(picker.opts.args)
+						:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
+						:totable()
+					picker.opts["args"] = picker.opts.hidden and picker.opts["_originalArgs"]
+						or noIgnoreFileArgs
+
 					picker:find()
 				end,
 				reveal_in_macOS_Finder = function(picker)
