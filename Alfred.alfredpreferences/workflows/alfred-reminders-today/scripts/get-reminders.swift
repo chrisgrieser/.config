@@ -5,7 +5,7 @@ struct ReminderOutput: Codable {
 	let id: String
 	let title: String
 	let notes: String?
-	let url: URL?
+	let url: String?
 	let list: String
 	let dueDate: String?
 	let creationDate: String?
@@ -18,8 +18,8 @@ let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 
 // Alfred environment variables
-let reminderList = "Tasks"
-let includeAllLists = false
+let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
+let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -49,22 +49,18 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
+	// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
 	// Get reminders from the list and format them
-	let today = Date()
-	let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-
-	let predicate = eventStore.predicateForIncompleteReminders(
-		withDueDateStarting: Date(), ending: tomorrow, calendars: selectedCalendars)
+	let predicate = eventStore.predicateForReminders(in: selectedCalendars)
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
 			print("[]")
 			semaphore.signal()
 			return
 		}
-		dump(reminders)
 
 		let formatter = ISO8601DateFormatter()
-		let _ = reminders.map { reminder in
+		let reminderData = reminders.map { reminder in
 			let components = reminder.dueDateComponents
 			let isAllDay = components?.hour == nil && components?.minute == nil
 
@@ -72,7 +68,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 				id: reminder.calendarItemIdentifier,
 				title: reminder.title ?? "(No Title)",
 				notes: reminder.notes,
-				url: reminder.url?.absoluteURL,
+				url: reminder.url?.absoluteString, // CAVEAT Reminders.app itself does not store URL there
 				list: reminder.calendar.title,
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
@@ -82,15 +78,15 @@ eventStore.requestFullAccessToReminders { granted, error in
 			)
 		}
 
-		// // output as stringified JSON
-		// do {
-		// 	let jsonData = try JSONEncoder().encode(reminderData)
-		// 	if let jsonString = String(data: jsonData, encoding: .utf8) {
-		// 		// print(jsonString)
-		// 	}
-		// } catch {
-		// 	print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
-		// }
+		// output as stringified JSON
+		do {
+			let jsonData = try JSONEncoder().encode(reminderData)
+			if let jsonString = String(data: jsonData, encoding: .utf8) {
+				print(jsonString)
+			}
+		} catch {
+			print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
+		}
 		semaphore.signal()
 	}
 }
