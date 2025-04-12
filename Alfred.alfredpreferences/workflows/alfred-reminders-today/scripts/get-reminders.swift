@@ -1,11 +1,15 @@
+// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
+// ─────────────────────────────────────────────────────────────────────────────
+
 import EventKit
 import Foundation
 
 struct ReminderOutput: Codable {
+	// CAVEAT Reminders.app itself does not store URLs in the `url` field, so
+	// retrieving that is pointless
 	let id: String
 	let title: String
 	let notes: String?
-	let url: String?
 	let list: String
 	let dueDate: String?
 	let creationDate: String?
@@ -33,7 +37,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 		semaphore.signal()
 		return
 	}
-
 	// ──────────────────────────────────────────────────────────────────────────
 
 	// Get list specified or use all lists
@@ -49,9 +52,11 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
-	// Get reminders from the list and format them
+	// Get Reminders DOCS https://developer.apple.com/documentation/eventkit/retrieving-events-and-reminders#Fetch-Reminders
+	// (using `predicateForIncompleteReminders` has no performance benefit, so
+	// skipping logic to conditionally use it instead.)
 	let predicate = eventStore.predicateForReminders(in: selectedCalendars)
+
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
 			print("[]")
@@ -68,7 +73,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 				id: reminder.calendarItemIdentifier,
 				title: reminder.title ?? "(No Title)",
 				notes: reminder.notes,
-				url: reminder.url?.absoluteString, // CAVEAT Reminders.app itself does not store URL there
 				list: reminder.calendar.title,
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },

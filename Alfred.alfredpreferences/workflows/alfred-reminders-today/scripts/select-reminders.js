@@ -8,7 +8,6 @@ app.includeStandardAdditions = true;
  * @property {string} id
  * @property {string} title
  * @property {string?} notes aka body
- * @property {string?} url
  * @property {string} list
  * @property {boolean} isCompleted
  * @property {string} dueDate
@@ -89,7 +88,7 @@ function run() {
 	const reminders = remindersFiltered.map((rem) => {
 		const body = rem.notes || "";
 		const content = (rem.title + "\n" + body).trim();
-		const [url] = rem.url || content.match(urlRegex) || [];
+		const [url] = content.match(urlRegex) || [];
 
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body

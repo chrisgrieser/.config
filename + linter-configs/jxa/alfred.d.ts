@@ -34,7 +34,7 @@ declare class AlfredItem {
 	match?: string;
 	uid?: string;
 	autocomplete?: string;
-	quicklookurl?: string;
+	quicklookurl?: string|undefined;
 	// biome-ignore lint/suspicious/noExplicitAny: that's the type
 	variables?: Record<string, any>;
 	icon?: AlfredIcon;
