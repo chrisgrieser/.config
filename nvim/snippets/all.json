@@ -15,18 +15,6 @@
     "body": "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
     "prefix": "insert ISO datestamp (today)"
   },
-  "middle dot": {
-    "body": "·",
-    "prefix": "middle dot"
-  },
-  "no (❌)": {
-    "body": "❌ ",
-    "prefix": "no (❌)"
-  },
-  "square (■)": {
-    "body": "■",
-    "prefix": "square (■)"
-  },
   "vim modeline (filetype)": {
     "body": "$LINE_COMMENT vim: ft=${1:filetype}",
     "prefix": "vim modeline (filetype)"
@@ -34,9 +22,5 @@
   "vim modeline (foldlevel)": {
     "body": "$LINE_COMMENT vim: foldlevel=${1:1}",
     "prefix": "vim modeline (foldlevel)"
-  },
-  "yes (✅)": {
-    "body": "✅ ",
-    "prefix": "yes (✅)"
   }
 }
