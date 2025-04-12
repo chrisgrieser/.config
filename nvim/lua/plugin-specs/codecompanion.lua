@@ -20,6 +20,13 @@ return {
 				vim.notify("Request " .. type .. ".", nil, opts)
 			end,
 		})
+
+		-- formatting for the diff mode
+		vim.opt.fillchars:append {
+			diff = "-", -- removed lines
+			foldopen = "",
+			foldclose = "",
+		}
 	end,
 	keys = {
 		{ "<leader>aa", ":CodeCompanion ", mode = { "n", "x" }, desc = " Inline assistant" },
