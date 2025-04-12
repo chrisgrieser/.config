@@ -92,7 +92,7 @@ local function getMostChangedFile()
 		if not (added and deleted and relPath) then return end -- in case of changed binary files
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
-		local ignored = vim.iter(config.ignore.oldfiles)
+		local ignored = vim.iter(config.ignore.mostChangedFiles)
 			:any(function(p) return absPath:find(p) ~= nil end)
 		local nonExistent = vim.uv.fs_stat(absPath) == nil
 		if ignored or nonExistent then return end

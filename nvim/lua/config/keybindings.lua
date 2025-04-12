@@ -8,7 +8,7 @@ keymap("n", "<D-,>", function()
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by neovide)
-keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
+keymap("n", "<D-q>", vim.cmd.wq, { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir" })
