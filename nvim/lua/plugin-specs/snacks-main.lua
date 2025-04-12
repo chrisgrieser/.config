@@ -27,6 +27,7 @@ return {
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 
 		-- cleaner vim.ui.select
+		---@type fun(_kind?: string): snacks.picker.format
 		require("snacks.picker.format").ui_select = function(_kind)
 			return function(item)
 				return { { item.formatted } }
