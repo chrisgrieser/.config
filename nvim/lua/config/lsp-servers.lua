@@ -313,7 +313,7 @@ M.serverConfigs.harper_ls = {
 				IgnoreLinkTitle = true,
 			},
 			linters = {
-				sentenceCapitalization = false, -- false positives: https://github.com/Automattic/harper/issues/1056
+				SentenceCapitalization = false, -- false positives: https://github.com/Automattic/harper/issues/1056
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
