@@ -1,9 +1,8 @@
+-- vim: foldlevel=3
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
--- INFO has a small config block at `nvim-lspconfig`
---------------------------------------------------------------------------------
 
-local blinkConfig = {
+return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
 	version = "*", -- REQUIRED to download pre-built binary
@@ -12,10 +11,6 @@ local blinkConfig = {
 	---@type blink.cmp.Config
 	opts = {
 		sources = {
-			per_filetype = {
-				gitcommit = {},
-			},
-
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback
@@ -83,7 +78,7 @@ local blinkConfig = {
 			enabled = true,
 			trigger = { show_on_insert = true },
 			window = {
-				max_width = 65,
+				max_width = 60,
 				max_height = 4,
 				direction_priority = { "s", "n" }, -- south first, to not block existing code
 				show_documentation = false, -- show larger documentation regular signature help
@@ -104,8 +99,6 @@ local blinkConfig = {
 				window = {
 					max_width = 50,
 					max_height = 20,
-					---@diagnostic disable-next-line: assign-type-mismatch
-					border = vim.o.winborder, -- FIX sometimes border not being drawn otherwiese
 				},
 			},
 			menu = {
@@ -117,7 +110,7 @@ local blinkConfig = {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
 					components = {
-						label = { width = { max = 35 } },
+						label = { width = { max = 50 } },
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
@@ -146,47 +139,3 @@ local blinkConfig = {
 		},
 	},
 }
-
---------------------------------------------------------------------------------
--- BLINK.CMP.GIT
--- options related to this plugin separated out so they are more clearly visible
-
-local blinkGitOpts = {
-	dependencies = {
-		"Kaiser-Yang/blink-cmp-git",
-		dependencies = "nvim-lua/plenary.nvim",
-	},
-	opts = {
-		sources = {
-			per_filetype = {
-				gitcommit = { "git" },
-			},
-			providers = {
-				git = {
-					module = "blink-cmp-git",
-					name = "Git",
-
-					---@module "blink-cmp-git"
-					---@type blink-cmp-git.Options
-					opts = {
-						before_reload_cache = function() end, -- to silence cache-reload notification
-						commit = { enable = false },
-						git_centers = {
-							github = {
-								pull_request = { enable = false },
-								issue = { insert_text_trailing = "" }, -- no trailing space after `#123`
-							},
-						},
-					},
-				},
-			},
-		},
-	},
-}
---------------------------------------------------------------------------------
-
--- codecompanion.nvim https://codecompanion.olimorris.dev/installation.html#completion
-blinkConfig.opts.sources.per_filetype["codecompanion"] = { "codecompanion" }
-
---------------------------------------------------------------------------------
-return vim.tbl_deep_extend("force", blinkConfig, blinkGitOpts)

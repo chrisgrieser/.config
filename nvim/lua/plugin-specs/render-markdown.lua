@@ -14,6 +14,7 @@ return {
 	---@module "render-markdown"
 	---@type render.md.UserConfig
 	opts = {
+		file_types = { "markdown", "codecompanion" },
 		render_modes = { "n", "c", "i", "v", "V" },
 		sign = {
 			enabled = false,
