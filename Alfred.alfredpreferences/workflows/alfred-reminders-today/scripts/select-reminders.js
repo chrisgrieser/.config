@@ -70,12 +70,20 @@ function run() {
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
 
-	/** @type {reminderObj[]} */
-	const remindersJson = JSON.parse(app.doShellScript("swift ./scripts/get-reminders.swift"));
+	const swiftOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
+	let /** @type {reminderObj[]} */ remindersJson;
+
+	try {
+		remindersJson = JSON.parse(swiftOutput);
+	} catch (_error) {
+		const errmsg = "❌ " + swiftOutput; // if not parsable, it's a message
+		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
+	}
+
 	const remindersFiltered = remindersJson
 		.filter((rem) => {
 			const dueDate = rem.dueDate ? new Date(rem.dueDate) : null;
-			const openNoDueDate = includeNoDuedate && rem.dueDate === undefined && !rem.isCompleted;
+			const openNoDueDate = includeNoDuedate && !rem.dueDate && !rem.isCompleted;
 			const openAndDueBeforeToday = dueDate && !rem.isCompleted && dueDate < endOfToday;
 			const completedAndDueToday = showCompleted && rem.isCompleted && isToday(dueDate);
 			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
@@ -178,7 +186,7 @@ function run() {
 						showCompleted: true.toString(),
 						mode: "show-completed",
 					},
-					mods: { cmd: invalid, shift: invalid },
+					mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
 				},
 			],
 		});
