@@ -196,7 +196,7 @@ return {
 						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					exclude = { ".DS_Store", "*.docx", "*.zip", "*.pptx" },
+					exclude = { ".DS_Store", "*.docx", "*.zip", "*.pptx", "*.svg" },
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
 				},
@@ -380,13 +380,13 @@ return {
 					picker.opts["hidden"] = not picker.opts.hidden
 					picker.opts["ignored"] = not picker.opts.ignored
 
-					-- remove `--ignore-file` extra args
+					-- remove `--ignore-file` extra arg
 					picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
 					local noIgnoreFileArgs = vim.iter(picker.opts.args)
 						:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
 						:totable()
-					picker.opts["args"] = picker.opts.hidden and picker.opts["_originalArgs"]
-						or noIgnoreFileArgs
+					picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
+						or picker.opts["_originalArgs"]
 
 					picker:find()
 				end,
