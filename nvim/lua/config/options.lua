@@ -79,7 +79,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
-	callback = function() vim.highlight.on_yank { timeout = 1000 } end,
+	callback = function() vim.highlight.on_yank { timeout = 2000 } end,
 })
 
 --------------------------------------------------------------------------------

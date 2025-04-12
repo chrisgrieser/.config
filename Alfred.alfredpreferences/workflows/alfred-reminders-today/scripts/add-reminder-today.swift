@@ -14,12 +14,12 @@ let when = ProcessInfo.processInfo.environment["when_to_add"]!
 
 eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
-		print("❌ Error requesting access: \(error.localizedDescription)\n")
+		print("❌ Error requesting access: \(error.localizedDescription)")
 		semaphore.signal()
 		return
 	}
 	guard granted else {
-		print("❌ Access to Reminders not granted.\n")
+		print("❌ Access to Reminders not granted.")
 		semaphore.signal()
 		return
 	}
@@ -40,7 +40,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		let tomorrow = calendar.date(byAdding: .day, value: 1, to: today)!
 		dayToUse = tomorrow
 	} else {
-		print("❌ Invalid value for 'when_to_add' environment variable.\n")
+		print("❌ Invalid value for 'when_to_add' environment variable.")
 		semaphore.signal()
 		return
 	}
@@ -57,7 +57,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}) {
 		reminder.calendar = calendarList
 	} else {
-		print("❌ No calendar found with the name '\(reminderList)'.\n")
+		print("❌ No calendar found with the name \"\(reminderList)\".")
 		semaphore.signal()
 		return
 	}
@@ -67,7 +67,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		try eventStore.save(reminder, commit: true)
 		print(reminderTitle)  // for Alfred notification
 	} catch {
-		print("❌ Failed to create reminder: \(error.localizedDescription)\n")
+		print("❌ Failed to create reminder: \(error.localizedDescription)")
 	}
 
 	semaphore.signal()
