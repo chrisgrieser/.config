@@ -274,15 +274,7 @@ return {
 				git_log = {
 					layout = { preset = "wide_with_toggled_preview" },
 				},
-				select = { -- vim.ui.select
-					layout = {
-						layout = { width = 0.5 },
-					},
-					-- no count; LSP and action type can be inspected
-					format = function(item) return { item.formatted } end,
-				},
 			},
-			ui_select = true,
 			formatters = {
 				file = { filename_first = true, truncate = 70 },
 				selected = { unselected = false }, -- don't show unselected
@@ -291,6 +283,7 @@ return {
 				diff = { builtin = false }, -- use `delta` automatically
 				git = { builtin = false },
 			},
+			ui_select = true,
 			layout = "wide_with_preview", -- use this as default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
