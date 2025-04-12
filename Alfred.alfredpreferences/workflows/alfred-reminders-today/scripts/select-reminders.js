@@ -32,22 +32,22 @@ function relativeDate(absDate) {
 	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"|"second"} */
 	let unit;
 	let delta;
-	if (deltaSecs < 60) {
+	if (deltaSecs <= 60) {
 		unit = "second";
 		delta = deltaSecs;
-	} else if (deltaSecs < 60 * 60) {
+	} else if (deltaSecs <= 60 * 60) {
 		unit = "minute";
 		delta = Math.ceil(deltaSecs / 60);
-	} else if (deltaSecs < 60 * 60 * 24) {
+	} else if (deltaSecs <= 60 * 60 * 24) {
 		unit = "hour";
 		delta = Math.ceil(deltaSecs / 60 / 60);
-	} else if (deltaSecs < 60 * 60 * 24 * 7) {
+	} else if (deltaSecs <= 60 * 60 * 24 * 7) {
 		unit = "day";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4) {
+	} else if (deltaSecs <= 60 * 60 * 24 * 7 * 4) {
 		unit = "week";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7);
-	} else if (deltaSecs < 60 * 60 * 24 * 7 * 4 * 12) {
+	} else if (deltaSecs <= 60 * 60 * 24 * 7 * 4 * 12) {
 		unit = "month";
 		delta = Math.ceil(deltaSecs / 60 / 60 / 24 / 7 / 4);
 	} else {
@@ -97,6 +97,8 @@ function run() {
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body
 		const dueDateObj = new Date(rem.dueDate);
+		console.log("🪚 rem.dueDate:", rem.dueDate);
+		console.log("🪚 dueDateObj:", dueDateObj);
 		/** @type {Intl.DateTimeFormatOptions} */
 		const timeFormat = { hour: "2-digit", minute: "2-digit", hour12: false };
 		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFormat);
