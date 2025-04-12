@@ -72,10 +72,9 @@ return {
 				footer_pos = "right",
 				keys = { q = false }, -- so `q` is available as my comment operator
 				on_win = function(win)
-					-- FIX display of scratchpad title (partially hardcoded, when setting icon, etc.)
-					local ft = vim.bo[win.buf].ft
-					local icon = Snacks.util.icon(ft, "filetype")
-					local title = (" %s %s scratch "):format(icon, ft)
+					-- FIX display of scratchpad title (partially hardcoded when setting icon, etc.)
+					local icon = Snacks.util.icon(vim.bo[win.buf].ft, "filetype")
+					local title = (" %s Scratch "):format(icon)
 					vim.api.nvim_win_set_config(win.win, { title = title })
 				end,
 			},
