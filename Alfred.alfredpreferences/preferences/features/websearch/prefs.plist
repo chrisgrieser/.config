@@ -147,17 +147,6 @@
 			<key>url</key>
 			<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
 		</dict>
-		<key>A9C67902-1630-4ECF-8415-20B6C1AE9DE8</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>us</string>
-			<key>text</key>
-			<string>User Scripts: {query}</string>
-			<key>url</key>
-			<string>https://www.userscript.zone/search?source=index&amp;q={query}</string>
-		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
 			<key>enabled</key>
@@ -179,6 +168,17 @@
 			<string>Call with Facetime</string>
 			<key>url</key>
 			<string>tel://{query}</string>
+		</dict>
+		<key>E5FD4F72-0366-49A4-A5B9-3228D75B543E</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>swift</string>
+			<key>text</key>
+			<string>Swift: '{query}'</string>
+			<key>url</key>
+			<string>https://developer.apple.com/search/?q={query}&amp;type=documentation</string>
 		</dict>
 		<key>E6EBE234-58DF-42AE-B019-B2941D2B424F</key>
 		<dict>
