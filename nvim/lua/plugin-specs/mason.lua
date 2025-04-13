@@ -68,13 +68,14 @@ return {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
 	init = function()
-		-- Make mason packages available before loading it; allows to lazy-load mason.
+		-- make packages available before loading mason; allows to lazy-load mason
 		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 
 		-- do not crowd home directory with npm cache folder
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm"
 	end,
 	opts = {
+		PATH = "skip", -- no need to modify PATH, since we do it ourselves in `init`
 		registries = {
 			-- local one must come first to take priority
 			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705

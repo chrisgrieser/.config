@@ -37,13 +37,13 @@ local function countLspRefs()
 		local thisFile = params.textDocument.uri
 
 		client:request("textDocument/references", params, function(error, refs)
-			if error or not refs then -- not on a valid symbol, etc.
+			if error or not refs or #refs == 0 then -- not on a valid symbol, etc.
 				vim.b.lspReference_count = nil
 				return
 			end
 			local inWorkspace = #refs
 			local inFile = #vim.iter(refs):filter(function(r) return thisFile == r.uri end):totable()
-			local text = inFile == inWorkspace and inFile or inFile .. "(" .. inWorkspace .. ")"
+			local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
 			vim.b.lspReference_count = vim.trim(icon .. " " .. text)
 		end)
 	end
@@ -65,7 +65,7 @@ return {
 			component_separators = { left = "", right = "" }, -- │
 
 			-- so current file name is still visible when renaming/selecting
-			-- ignore_focus = { "snacks_input", "snacks_picker_input" },
+			ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
 		tabline = {
 			lualine_a = {
@@ -114,7 +114,6 @@ return {
 						if not ok then return displayName end
 						local icon, _, isDefault = icons.get("file", name)
 						if isDefault then icon = icons.get("filetype", vim.bo.ft) end
-						if vim.bo.buftype == "help" then icon = "󰋖" end
 
 						return icon .. " " .. displayName
 					end,
@@ -132,9 +131,7 @@ return {
 					function()
 						local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
 						if #qf.items == 0 then return "" end
-						-- remove empty brackets and/or flags from `makeprg`
-						local title = qf.title:gsub(" %(%)", ""):gsub("%-%-[%w-_]+ ?", "")
-						return (" %d/%d %s"):format(qf.idx, #qf.items, title)
+						return (" %d/%d (%s)"):format(qf.idx, #qf.items, qf.title)
 					end,
 				},
 				{
