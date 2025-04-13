@@ -27,7 +27,7 @@ map [noremap] c "_c
 map [noremap] C "_C
 
 map [noremap] ww yyp
-map <enter> ZZ
+map <c-enter> ZZ
 
 map _ mzo<Esc>k`z
 map = mzO<Esc>j`z
