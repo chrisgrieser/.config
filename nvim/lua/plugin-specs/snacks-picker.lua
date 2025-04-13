@@ -349,12 +349,8 @@ return {
 						["?"] = { "toggle_help_input", mode = "i" },
 					},
 				},
-				list = {
-					keys = { ["<C-CR>"] = { "cycle_win" } },
-				},
-				preview = {
-					keys = { ["<C-CR>"] = { "cycle_win" } },
-				},
+				list = { keys = { ["<C-CR>"] = { "cycle_win" } } },
+				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
 				complete_and_add_colon = function(picker)
