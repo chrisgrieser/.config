@@ -38,6 +38,16 @@ return {
 			desc = "󰆽 Line blame",
 		},
 		{
+			"<leader>oi",
+			function()
+				require("gitsigns").toggle_linehl()
+				require("gitsigns").toggle_word_diff()
+				local conf = require("gitsigns.config").config
+				conf.show_deleted = not conf.show_deleted
+			end,
+			desc = " Inline diff view",
+		},
+		{
 			"<leader>op",
 			function()
 				if vim.b.gitsignsPrevChanges then
