@@ -31,7 +31,7 @@ safeRequire("config.options")
 -- (This is for security reasons, e.g., when editing a password with `pass`.)
 if not vim.env.NO_PLUGINS then
 	safeRequire("config.lazy")
-	safeRequire("config.lsp-servers")
+	safeRequire("config.lsp-servers") -- after lazy, so mason/blink/lspconfig are available
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 

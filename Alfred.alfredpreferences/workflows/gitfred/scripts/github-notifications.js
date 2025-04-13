@@ -31,7 +31,7 @@ function humanRelativeDate(isoDateStr) {
 	let delta;
 	if (deltaMins < 60) {
 		unit = "minute";
-		delta = deltaMins
+		delta = Math.floor(deltaMins);
 	} else if (deltaMins < 60 * 24) {
 		unit = "hour";
 		delta = Math.floor(deltaMins / 60);
