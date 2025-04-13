@@ -66,9 +66,8 @@ function run() {
 		if (name.startsWith(".z")) type = "zsh";
 		else if (name === "Justfile") type = "justfile";
 		else if (name === ".ignore" || name === ".gitignore") type = "ignore";
-		else if (!name.slice(1).includes(".")) type = "blank";
-		else if (name === "obsidian-vimrc.vim") type = "obsidian";
-		else type = name.split(".").pop() || ""; // default: extension
+		else if (name.slice(1).includes(".")) type = name.split(".").pop() || ""; // default: extension
+		else type = "blank" // if no extension
 
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
