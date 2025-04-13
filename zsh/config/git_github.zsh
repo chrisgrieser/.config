@@ -178,6 +178,10 @@ function unshallow {
 	git fetch origin
 }
 
+function delete_git_tag {
+	git tag --delete "$1" && git push origin --delete "$1"
+}
+
 function remote_info {
 	git --no-pager branch --all --verbose --verbose # 2x verbose shows tracked remote branches
 	echo
@@ -203,7 +207,7 @@ function my_commits_today {
 		--json="repository,commit" --author-date="$the_day" --sort=author-date --order=asc |
 		yq --prettyPrint $'.[] | .commit.committer.date + " " + .repository.name + " " + .commit.message' |
 		grep "^\d\d\d\d" | # keep only subjects, skip the body text of commits which is are new lines
-		cut -c12-16,26-) # select only HH:MM
+		cut -c12-16,26-)   # select only HH:MM
 	count=$(echo "$commits" | wc -l | tr -d ' ')
 
 	echo "$commits" | sed \
@@ -215,7 +219,7 @@ function my_commits_today {
 	print "\e[1;38;5;245m───── \e[1;32mTotal: $count commits\e[1;38;5;245m ─────\e[0m"
 }
 
-#───────────────────────────────────────────────────────────────────────────────
+#─────────────────────────────────────��─────────────────────────────────────────
 # GIT LOG
 
 # uses `_gitlog` from `magic-dashboard.zsh`
