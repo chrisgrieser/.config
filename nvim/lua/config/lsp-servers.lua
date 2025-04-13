@@ -1,5 +1,3 @@
-local M = {}
---------------------------------------------------------------------------------
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 --------------------------------------------------------------------------------
 
@@ -31,13 +29,13 @@ local lspToMasonMap = {
 }
 
 ---@type table<string, vim.lsp.Config>
-M.serverConfigs = {}
+local serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
-	M.serverConfigs[lspName] = {}
+	serverConfigs[lspName] = {}
 end
 
 --------------------------------------------------------------------------------
-
+-- MASON
 local extraDependencies = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
@@ -47,12 +45,12 @@ local extraDependencies = {
 }
 
 -- for auto-installation via `mason-tool-installer`
-M.masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
+local masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
 -- DOCS https://github.com/lttb/gh-actions-language-server
 -- PENDING https://github.com/neovim/nvim-lspconfig/pull/3713
-M.serverConfigs.gh_actions_ls = {
+serverConfigs.gh_actions_ls = {
 	cmd = { "gh-actions-language-server", "--stdio" },
 	filetypes = { "yaml" },
 	root_markers = { ".github/workflows" },
@@ -62,7 +60,7 @@ M.serverConfigs.gh_actions_ls = {
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts
-M.serverConfigs.bashls = {
+serverConfigs.bashls = {
 	filetypes = { "bash", "sh", "zsh" }, -- force it to work in zsh as well
 	settings = {
 		bashIde = {
@@ -121,14 +119,15 @@ local efmConfig = {
 	},
 }
 
-M.serverConfigs.efm = {
+serverConfigs.efm = {
+	cmd = { "efm-langserver" }, -- PENDING efm being added https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 	filetypes = vim.tbl_keys(efmConfig),
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
 
 	root_markers = vim.iter(vim.tbl_values(efmConfig))
 		:flatten()
-		:map(function(config) return config.rootMarkers end)
+		:map(function(tool) return tool.rootMarkers end)
 		:flatten()
 		:totable(),
 
@@ -140,7 +139,7 @@ M.serverConfigs.efm = {
 -- LUA
 
 -- DOCS https://luals.github.io/wiki/settings/
-M.serverConfigs.lua_ls = {
+serverConfigs.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
@@ -178,7 +177,7 @@ M.serverConfigs.lua_ls = {
 -- PYTHON
 
 -- DOCS https://docs.astral.sh/ruff/editors/settings/
-M.serverConfigs.ruff = {
+serverConfigs.ruff = {
 	init_options = {
 		settings = {
 			organizeImports = false, -- if "I" ruleset is added, already included in "fixAll"
@@ -197,7 +196,7 @@ vim.lsp.config("ruff", {})
 -- DOCS
 -- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
 -- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
-M.serverConfigs.cssls = {
+serverConfigs.cssls = {
 	-- using `biome` instead (this key overrides `settings.format.enable = true`)
 	init_options = { provideFormatter = false },
 
@@ -212,20 +211,20 @@ M.serverConfigs.cssls = {
 	},
 }
 
-M.serverConfigs.css_variables = {
+serverConfigs.css_variables = {
 	-- Add `biome.jsonc` as root marker for Obsidian snippet folders
 	root_markers = { "biome.jsonc", ".git" },
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
-M.serverConfigs.stylelint_lsp = {
+serverConfigs.stylelint_lsp = {
 	settings = {
 		stylelintplus = { autoFixOnFormat = true },
 	},
 }
 
 -- DOCS https://github.com/olrtg/emmet-language-server#neovim
-M.serverConfigs.emmet_language_server = {
+serverConfigs.emmet_language_server = {
 	init_options = {
 		showSuggestionsAsSnippets = true,
 	},
@@ -235,7 +234,7 @@ M.serverConfigs.emmet_language_server = {
 -- JS/TS
 
 -- DOCS https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-M.serverConfigs.ts_ls = {
+serverConfigs.ts_ls = {
 	settings = {
 		-- "Cannot re-declare block-scoped variable" -> not useful for single-file-JXA
 		-- (biome works only on single-file and so already check for unintended re-declarations.)
@@ -266,18 +265,18 @@ M.serverConfigs.ts_ls = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-M.serverConfigs.ts_ls.settings.javascript = M.serverConfigs.ts_ls.settings.typescript
+serverConfigs.ts_ls.settings.javascript = serverConfigs.ts_ls.settings.typescript
 
 --------------------------------------------------------------------------------
 -- JSON & YAML
 -- DOCS https://github.com/Microsoft/vscode/tree/main/extensions/json-language-features/server#configuration
-M.serverConfigs.jsonls = {
+serverConfigs.jsonls = {
 	-- Disable formatting in favor of biome
 	init_options = { provideFormatter = false, documentRangeFormattingProvider = false },
 }
 
 -- DOCS https://github.com/redhat-developer/yaml-language-server/tree/main#language-server-settings
-M.serverConfigs.yamlls = {
+serverConfigs.yamlls = {
 	settings = {
 		yaml = {
 			format = { enable = true, printWidth = 100, proseWrap = "always" },
@@ -305,7 +304,7 @@ end
 -- DOCS
 -- https://writewithharper.com/docs/integrations/neovim
 -- https://writewithharper.com/docs/integrations/language-server#Configuration
-M.serverConfigs.harper_ls = {
+serverConfigs.harper_ls = {
 	filetypes = { "markdown" }, -- PENDING https://github.com/elijah-potter/harper/issues/228
 	settings = {
 		["harper-ls"] = {
@@ -333,7 +332,7 @@ M.serverConfigs.harper_ls = {
 }
 
 -- DOCS https://ltex-plus.github.io/ltex-plus/settings.html
-M.serverConfigs.ltex_plus = {
+serverConfigs.ltex_plus = {
 	filetypes = { "markdown" },
 	settings = {
 		ltex = {
@@ -360,7 +359,7 @@ M.serverConfigs.ltex_plus = {
 
 -- TYPOS
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
-M.serverConfigs.typos_lsp = {
+serverConfigs.typos_lsp = {
 	init_options = { diagnosticSeverity = "Hint" },
 }
 
@@ -369,21 +368,24 @@ M.serverConfigs.typos_lsp = {
 -- Not installed via `mason`, but already available via Xcode Command Line
 -- Tools (which are usually installed on macOS-dev devices for `homebrew`).
 if jit.os == "OSX" then
-	M.serverConfigs.sourcekit = {
+	serverConfigs.sourcekit = {
 		root_markers = {
 			".git",
 			"info.plist", -- Alfred dirs
 			vim.fs.basename(vim.g.icloudSync), -- snacks scratch buffers
 		},
 	}
-	M.serverConfigs.clangd = {}
+	serverConfigs.clangd = {}
 end
 
 --------------------------------------------------------------------------------
-Chainsaw(M.myServerConfigs) -- 🪚
--- for server, config in pairs(M.myServerConfigs) do
--- 	vim.lsp.config(server, config)
--- 	-- require("lspconfig")[server].setup(config)
--- end
 --------------------------------------------------------------------------------
-return M
+
+-- for when loaded from `init.lua`, enable LSPs
+for server, config in pairs(serverConfigs) do
+	vim.lsp.config(server, config)
+	vim.lsp.enable(server)
+end
+
+-- for when loaded from `mason` config, return list of mason packages
+return masonDependencies

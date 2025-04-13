@@ -24,11 +24,11 @@ local config = {
 	ignore = { -- patterns for `string.find`; applied to the whole file path
 		oldfiles = {
 			"/COMMIT_EDITMSG",
-			"/snacks_scratch/",
+			require("plugin-specs.snacks-scratch").opts.scratch.root, ---@diagnostic disable-line: undefined-field
 		},
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
-			"/.lazy%-lock.json", -- lazy.nvim
+			require("lazy.core.config").options.lockfile,
 		},
 	},
 }
