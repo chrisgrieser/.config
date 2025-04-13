@@ -103,7 +103,8 @@ return {
 		require("mason").setup(opts)
 
 		-- get packages from my lsp-server-config
-		local ensurePackages = require("config.lsp-servers").masonDependencies or {}
+		local ensurePackages = assert(require("config.lsp-servers"), "No mason packages, aborting uninstalls.")
+		assert (#ensurePackages > 10, "Less than 10 mason packages, aborting uninstalls.")
 		local extraPackages = { "debugpy" }
 		vim.list_extend(ensurePackages, extraPackages)
 

@@ -27,10 +27,11 @@ end
 -- for plugin configs
 safeRequire("config.options")
 
--- only load plugins when `NO_PLUGINS` is not set.
+-- only load plugins & LSPs when `NO_PLUGINS` is not set.
 -- (This is for security reasons, e.g., when editing a password with `pass`.)
 if not vim.env.NO_PLUGINS then
 	safeRequire("config.lazy")
+	safeRequire("config.lsp-servers")
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 
