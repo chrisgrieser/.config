@@ -15,12 +15,12 @@ local function openNotif(idx)
 		filter = function(notif) return notif.level ~= "trace" end,
 		reverse = true,
 	}
-	local notif = history[idx]
-	if not notif then
+	if #history == 0 then
 		local msg = "No notifications yet."
 		vim.notify(msg, vim.log.levels.TRACE, { title = "Last notification", icon = "󰎟" })
 		return
 	end
+	local notif = assert(history[idx], "Notification not found.")
 	Snacks.notifier.hide(notif.id)
 
 	-- win properties
@@ -61,12 +61,12 @@ local function openNotif(idx)
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 		wo = {
 			winhighlight = table.concat(highlights, ","),
-			wrap = true,
+			wrap = false,
 			statuscolumn = " ", -- adds padding
 			cursorline = true,
 			colorcolumn = "",
 			winfixbuf = true,
-			fillchars = "fold: ",
+			fillchars = "fold: ,eob: ",
 		},
 		bo = {
 			-- not using `snacks_notif` so treesitter attaches (relevant for folding)
@@ -95,11 +95,23 @@ return {
 	"folke/snacks.nvim",
 	keys = {
 		{ "<Esc>", function() Snacks.notifier.hide() end, desc = "󰎟 Dismiss notification" },
-		{ "<D-9>", function() openNotif("last") end, desc = "󰎟 Last notification" },
+		{ "<leader>in", function() openNotif("last") end, desc = "󰎟 Last notification" },
 		-- stylua: ignore
-		{ "<D-0>", function() Snacks.notifier.show_history() end, desc = "󰎟 Notification history" },
+		{ "<leader>iN", function() Snacks.picker.notifications() end, desc = "󰎟 Notification history" },
 	},
 	opts = {
+		picker = {
+			sources = {
+				notifications = {
+					formatters = { severity = { level = false } },
+					confirm = function(picker)
+						local pickerIdx = picker:current().idx
+						picker:close()
+						openNotif(pickerIdx)
+					end,
+				},
+			},
+		},
 		---@class snacks.notifier.Config
 		notifier = {
 			timeout = 7500,
@@ -114,11 +126,6 @@ return {
 				border = vim.o.winborder,
 				focusable = false,
 				wo = { winblend = 0, wrap = true },
-			},
-			notification_history = {
-				border = vim.o.winborder,
-				position = "bottom",
-				height = 0.8,
 			},
 		},
 	},
