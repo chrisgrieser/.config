@@ -51,7 +51,7 @@ local function getAltBuffer()
 	local altBufnr = vim.fn.bufnr("#")
 	if altBufnr < 0 then return end
 	local valid = vim.api.nvim_buf_is_valid(altBufnr)
-	local nonSpecial = vim.api.nvim_get_option_value("buftype", { buf = altBufnr }) == ""
+	local nonSpecial = vim.bo[altBufnr].buftype == "" or vim.bo[altBufnr].buftype == "help"
 	local moreThanOneBuffer = #(vim.fn.getbufinfo { buflisted = 1 }) > 1
 	local currentBufNotAlt = vim.api.nvim_get_current_buf() ~= altBufnr -- fixes weird vim bug
 	local altBufExists = vim.uv.fs_stat(vim.api.nvim_buf_get_name(altBufnr)) ~= nil
