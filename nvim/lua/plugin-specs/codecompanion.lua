@@ -3,7 +3,7 @@
 
 return {
 	"olimorris/codecompanion.nvim",
-	dependencies = "nvim-lua/plenary.nvim",
+	dependencies = { "nvim-lua/plenary.nvim", "echasnovski/mini.diff", opts = true },
 	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
@@ -36,7 +36,10 @@ return {
 	opts = {
 		-- CodeCompanion settings
 		display = {
-			diff = { enabled = true },
+			diff = {
+				enabled = true,
+				provider = "mini_diff",
+			},
 			chat = {
 				start_in_insert_mode = true,
 				intro_message = "Press ? for options",

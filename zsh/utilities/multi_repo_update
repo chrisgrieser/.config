@@ -4,17 +4,17 @@
 github_username="chrisgrieser"
 # set -e
 
-# repo_names="alfred|shimmering-obsidian|gitfred"
-repo_names="nvim"
-# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+repo_names="alfred|shimmering-obsidian|gitfred"
+# repo_names="nvim"
+# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 # ALL
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp "$HOME/Desktop/Justfile" ./Justfile
+	cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 }
 
-commit_msg="build: add Justfile"
+commit_msg="ci: generate release notes from commit history"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
@@ -65,8 +65,12 @@ while read -r repo; do
 
 	actions_in_repo
 
+	# COMMIT
 	git add --all && git commit -m "$commit_msg" && git push --no-progress
+
+	# WARN AMEND
 	# git add --all && git commit --amend --no-edit && git push --no-progress --force
+
 	success=$?
 	if [[ $success -ne 0 ]]; then
 		print "\e[1;33mDid not update $repo.\e[0m"
