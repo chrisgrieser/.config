@@ -1,6 +1,6 @@
 local M = {}
 --------------------------------------------------------------------------------
--- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
+-- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 --------------------------------------------------------------------------------
 
 ---since nvim-lspconfig and mason.nvim use different package names
@@ -30,11 +30,7 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 }
 
----@module "lspconfig"
----@class myLspConfig : lspconfig.Config
----@field cmd? string -- make this optional
-
----@type table<string, myLspConfig>
+---@type table<string, vim.lsp.Config>
 M.serverConfigs = {}
 for lspName, _ in pairs(lspToMasonMap) do
 	M.serverConfigs[lspName] = {}
@@ -121,15 +117,11 @@ M.serverConfigs.efm = {
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
 
-	-- use root marker from efm config
-	root_dir = function()
-		local allRootMarkers = vim.iter(vim.tbl_values(efmConfig))
-			:flatten()
-			:map(function(config) return config.rootMarkers end)
-			:flatten()
-			:totable()
-		return vim.fs.root(0, allRootMarkers)
-	end,
+	root_markers = vim.iter(vim.tbl_values(efmConfig))
+		:flatten()
+		:map(function(config) return config.rootMarkers end)
+		:flatten()
+		:totable(),
 
 	-- cleanup useless empty folder `efm` creates on startup
 	on_attach = function() os.remove(vim.fs.normalize("~/.config/efm-langserver")) end,
@@ -188,6 +180,8 @@ M.serverConfigs.ruff = {
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
+vim.lsp.config("ruff", {})
+
 --------------------------------------------------------------------------------
 -- CSS
 
@@ -211,7 +205,7 @@ M.serverConfigs.cssls = {
 
 M.serverConfigs.css_variables = {
 	-- Add `biome.jsonc` as root marker for Obsidian snippet folders
-	root_dir = function() return vim.fs.root(0, { "biome.jsonc", ".git" }) end,
+	root_markers = { "biome.jsonc", ".git" },
 }
 
 -- DOCS https://github.com/bmatcuk/stylelint-lsp#settings
@@ -366,7 +360,13 @@ M.serverConfigs.typos_lsp = {
 -- Not installed via `mason`, but already available via Xcode Command Line
 -- Tools (which are usually installed on macOS-dev devices for `homebrew`).
 if jit.os == "OSX" then
-	M.serverConfigs.sourcekit = {}
+	M.serverConfigs.sourcekit = {
+		root_markers = {
+			".git",
+			"info.plist", -- Alfred dirs
+			vim.fs.basename(vim.g.icloudSync), -- snacks scratch buffers
+		},
+	}
 	M.serverConfigs.clangd = {}
 end
 
