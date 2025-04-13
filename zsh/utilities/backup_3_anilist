@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 # CONFIG
-python="python3.13"
 username="pseudometa"
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anilist/"
 
@@ -9,28 +8,36 @@ bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/anil
 
 clone_and_venv() {
 	cd /tmp/ || return 1
-	git clone --depth=2 "$1"
+	git clone --no-progress --depth=2 "$1"
 
 	exporter_dir="$(basename "$1" .git)"
 	cd "$exporter_dir" || return 1
 
 	[[ -d ./.venv ]] && rm -rf ./.venv
-	"$python" -m venv ./.venv
+	python3 -m venv ./.venv
 	# shellcheck disable=1091
 	source ./.venv/bin/activate
-
-	py_path="$(command which python3 | sed "s|^$HOME/|~/|")"
-	print "Now using: \e[1;36m$py_path\e[0m"
-
-	python3 -m pip install -r requirements.txt
+	python3 -m pip install --quiet -r requirements.txt
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# alternative (requiring more setup though) https://github.com/Jacekun/AniPy
-exporter_mal_xml="https://github.com/staticaron/AnilistToMalExporter"
+exporter_mal_xml="https://github.com/Jacekun/AniPy"
 clone_and_venv "$exporter_mal_xml"
-python3 convertor.py "$username"
-cp -vf ./*.xml "$bkp_destination"
+
+# sending empty line to stdin to skip "press enter to exit" prompt at the end
+echo | python3 anipy.py -user="$username"
+
+cp -f ./output/anime*.json "$bkp_destination"
+rm -rf /tmp/"$(basename "$exporter_mal_xml")"
 
 open "$bkp_destination"
+
+#───────────────────────────────────────────────────────────────────────────────
+# ALTERNATIVE 
+# less pretty data, mostly intended for import to MAL
+
+# exporter_mal_xml="https://github.com/staticaron/AnilistToMalExporter"
+# clone_and_venv "$exporter_mal_xml"
+# python3 convertor.py "$username" > "anilist-plain.txt"
+# cp -vf ./*.{xml,txt} "$bkp_destination"

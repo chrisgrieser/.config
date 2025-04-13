@@ -73,12 +73,12 @@ when = '[[ $PWD == $HOME/Developer/* ]]'
 style = "fg:cyan bold bg:black"
 
 [custom.venv_on]
-format = '[󱥒 ]($style)'
+format = '[ 󱥒 ]($style)'
 when = '[[ -n "$VIRTUAL_ENV" ]]'
 style = "fg:yellow bold bg:black"
 
 [custom.venv_off]
-format = '[󱥓 ]($style)'
+format = '[ 󱥓 ]($style)'
 when = '[[ -z "$VIRTUAL_ENV" ]] && [[ -d ".venv" ]]'
 style = "fg:red bold bg:black"
 
