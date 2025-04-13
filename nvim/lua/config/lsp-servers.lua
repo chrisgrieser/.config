@@ -48,15 +48,6 @@ local extraDependencies = {
 local masonDependencies = vim.list_extend(extraDependencies, vim.tbl_values(lspToMasonMap))
 
 --------------------------------------------------------------------------------
--- DOCS https://github.com/lttb/gh-actions-language-server
--- PENDING https://github.com/neovim/nvim-lspconfig/pull/3713
-serverConfigs.gh_actions_ls = {
-	cmd = { "gh-actions-language-server", "--stdio" },
-	filetypes = { "yaml" },
-	root_markers = { ".github/workflows" },
-}
-
---------------------------------------------------------------------------------
 -- BASH / ZSH
 
 -- DOCS https://github.com/bash-lsp/bash-language-server/blob/main/server/src/config.ts

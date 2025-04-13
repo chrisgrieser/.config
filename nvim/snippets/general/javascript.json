@@ -178,7 +178,7 @@
       "\tlet delta;",
       "\tif (deltaMins < 60) {",
       "\t\tunit = \"minute\";",
-      "\t\tdelta = deltaMins;",
+      "\t\tdelta = Math.floor(deltaMins);",
       "\t} else if (deltaMins < 60 * 24) {",
       "\t\tunit = \"hour\";",
       "\t\tdelta = Math.floor(deltaMins / 60);",

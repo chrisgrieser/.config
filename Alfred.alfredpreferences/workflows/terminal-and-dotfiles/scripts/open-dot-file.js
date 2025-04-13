@@ -42,7 +42,7 @@ function run() {
 			const relPath = brokenLink.slice(dotfileFolder.length + 1);
 			const alfredItem = {
 				title: relPath,
-				subtitle: "⚠️ Broken Symlink",
+				subtitle: "⚠️ Broken symlink",
 				type: "file:skipcheck", // so `alt+return` reveals it in Finder
 				arg: brokenLink,
 			};
