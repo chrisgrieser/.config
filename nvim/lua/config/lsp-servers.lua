@@ -11,7 +11,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- integration of external linter/formatter
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	gh_actions_ls = "gh-actions-language-server",
+	-- gh_actions_ls = "gh-actions-language-server", PENDING https://github.com/neovim/nvim-lspconfig/pull/3713
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
@@ -375,8 +375,8 @@ end
 -- for when loaded from `init.lua`, enable LSPs
 for server, config in pairs(serverConfigs) do
 	vim.lsp.config(server, config)
-	vim.lsp.enable(server)
 end
+vim.lsp.enable(vim.tbl_keys(serverConfigs))
 
 -- for when loaded from `mason` config, return list of mason packages
 return masonDependencies
