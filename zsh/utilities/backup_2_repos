@@ -2,7 +2,7 @@
 
 # CONFIG
 bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/My Repos"
-max_number_of_bkps=5
+max_number_of_bkps=3
 
 # IGNORES PERMA-REPOS (since they are already locally backed up)
 ignore_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" |
