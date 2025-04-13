@@ -22,8 +22,6 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
 
 //──────────────────────────────────────────────────────────────────────────────
 
-//──────────────────────────────────────────────────────────────────────────────
-
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const browser = $.getenv("browser");
@@ -59,8 +57,9 @@ function run() {
 
 	// EXTENSIONS
 	const extensions = app
-		.doShellScript(`find "${extensionPath}" -name "manifest.json" -depth 3`)
+		.doShellScript(`find "${extensionPath}" -name "manifest.json" -maxdepth 3 -mindepth 3`)
 		.split("\r")
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		.reduce((/** @type {AlfredItem[]} */ acc, manifestPath) => {
 			const root = manifestPath.slice(0, -13);
 			const id = root.replace(/.*Extensions\/(\w+)\/.*/, "$1");
@@ -72,19 +71,22 @@ function run() {
 
 			const manifest = JSON.parse(readFile(manifestPath));
 
-			// determine name (SIC can be in one of these many locations)
+			// determine name
 			let name = manifest.name;
-			if (name.startsWith("__MSG_") && manifest.short_name) name = manifest.short_name;
-			const msgsFile = root + "_locales/en/messages.json";
-			if (name.startsWith("__MSG_") && fileExists(msgsFile)) {
-				const msg = JSON.parse(readFile(msgsFile));
-				name =
-					msg.extensionName?.message ||
-					msg.name?.message ||
-					msg.extName?.message ||
-					msg.appName?.message ||
-					manifest.short_name ||
-					manifest.name;
+			const hasPrettierShortname =
+				name.startsWith("__MSG_") &&
+				manifest.short_name &&
+				!manifest.short_name.startsWith("__MSG_");
+			if (hasPrettierShortname) {
+				name = manifest.short_name;
+			} else if (name.startsWith("__MSG_")) {
+				let msgsFile = root + "_locales/en/messages.json";
+				if (!fileExists(msgsFile)) msgsFile = root + "_locales/en_US/messages.json";
+				if (fileExists(msgsFile)) {
+					const msg = JSON.parse(readFile(msgsFile));
+					const nameKey = name.replace(/__MSG_(.*)__/, "$1");
+					name = msg[nameKey]?.message || manifest.name;
+				}
 			}
 
 			// determine options or popup path
@@ -98,18 +100,11 @@ function run() {
 			// EXCEPTIONS where a different page/name is more convenient or more correct
 			if (name === "Stylus") optionsPath = "manage.html";
 			if (name === "Redirector") optionsPath = "redirector.html";
-			if (id === "bbojmeobdaicehcopocnfhaagefleiae") name = "OptiSearch";
-			if (name === "Violentmonkey") name = "OptiSearch";
-			const anchor = specialAnchors[name] || "";
-			/** @type {Record<string, string>} */
-const specialAnchors = {
-	// biome-ignore lint/style/useNamingConvention: not set by me
-	Violentmonkey: "#scripts",
-};
+			if (name === "Violentmonkey") optionsPath += "#scripts";
 
 			// URLs
-			const optionsUrl = `chrome-extension://${id}/${optionsPath}${anchor}`;
-			const webstoreUrl = `https://chrome.google.com/webstore/detail/${id}`;
+			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
+			const webstoreUrl = "https://chrome.google.com/webstore/detail/" + id;
 			const localFolder = extensionPath + "/" + id;
 
 			// emoji/icon
