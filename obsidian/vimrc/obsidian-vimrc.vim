@@ -306,13 +306,15 @@ nnoremap ,cc :enhanceUrlWithTitle<CR>
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
 
-" Proofreader accept
+" Proofreader accept/reject
 exmap acceptNextProofread obcommand proofreader:accept-next-suggestion
 noremap ga :acceptNextProofread<CR>
 exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
 noremap gb :rejectNextProofread<CR>
 exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
 noremap gA :acceptProofreadInText<CR>
+exmap acceptProofreadInText obcommand proofreader:reject-suggestions-in-text
+noremap gB :acceptProofreadInText<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
