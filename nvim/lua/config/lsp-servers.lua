@@ -46,11 +46,12 @@ local masonDependencies = vim.list_extend(masonLsps, extraDependencies)
 
 --------------------------------------------------------------------------------
 
--- PENDING https://github.com/neovim/nvim-lspconfig/pull/3716
+-- PENDING `workspace_required` on nightly, see https://github.com/neovim/nvim-lspconfig/pull/3716#issuecomment-2800006283
 extraServerConfig.biome = {
 	cmd = { "biome", "lsp-proxy" },
 	filetypes = { "css", "javascript", "json", "jsonc", "typescript" },
 	root_markers = { "biome.json", "biome.jsonc" },
+	workspace_required = true,
 }
 
 --------------------------------------------------------------------------------
