@@ -123,6 +123,7 @@ extraServerConfig.efm = {
 	settings = { languages = efmConfig },
 	init_options = { documentFormatting = true },
 
+	workspace_required = true,
 	root_markers = vim.iter(vim.tbl_values(efmConfig))
 		:flatten()
 		:map(function(tool) return tool.rootMarkers end)
