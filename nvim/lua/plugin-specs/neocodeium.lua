@@ -8,22 +8,20 @@ return {
 	cmd = "NeoCodeium",
 	opts = {
 		silent = true,
-		show_label = false, -- signcolumn label for number of suggestions
+		show_label = true, -- signcolumn label for number of suggestions
 
 		filetypes = {
-			snacks_input = false,
 			bib = false,
-			-- extra safeguard: `pass` passwords editing filetype is plaintext,
-			-- also this is the filetype of critical files
-			text = false,
+			text = false, -- `pass` passwords editing ft (extra safeguard)
 		},
 		filter = function(bufnr)
+			local specialBuf = vim.bo[bufnr].buftype ~= ""
 			local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
 			local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 			local ignoreBuffer = parent:find("private dotfiles")
 				or name:lower():find("recovery")
 				or name == ".env"
-			return not ignoreBuffer -- `false` -> disable in that buffer
+			return not specialBuf and not ignoreBuffer -- `false` -> disable in that buffer
 		end,
 	},
 	config = function(_, opts)
@@ -35,7 +33,6 @@ return {
 
 		-- lualine indicator
 		vim.g.lualineAdd("sections", "lualine_x", function()
-			if vim.bo.buftype ~= "" then return "" end
 			-- don't need info that it's disabled during a recording
 			if vim.fn.reg_recording() ~= "" then return "" end
 

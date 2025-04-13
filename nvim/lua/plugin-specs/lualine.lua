@@ -65,7 +65,7 @@ return {
 			component_separators = { left = "", right = "" }, -- │
 
 			-- so current file name is still visible when renaming/selecting
-			ignore_focus = { "snacks_input", "snacks_picker_input" },
+			-- ignore_focus = { "snacks_input", "snacks_picker_input" },
 		},
 		tabline = {
 			lualine_a = {
