@@ -4,7 +4,7 @@
 
 return {
 	"saghen/blink.cmp",
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	version = "*", -- REQUIRED to download pre-built binary
 
 	---@module "blink.cmp"

@@ -11,7 +11,6 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- integration of external linter/formatter
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	-- gh_actions_ls = "gh-actions-language-server", -- PENDING https://github.com/neovim/nvim-lspconfig/pull/3713
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
