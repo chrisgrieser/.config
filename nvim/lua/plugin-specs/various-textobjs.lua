@@ -171,5 +171,29 @@ return {
 			ft = "lua",
 			desc = "󰬞 to next `then`",
 		},
+		{ -- filepath textobj
+			"a-",
+			mode = "o",
+			function()
+				local pattern = {
+					unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()",
+				}
+				local core = require("various-textobjs.charwise-core")
+				core.selectClosestTextobj(pattern, "outer", 5)
+			end,
+			desc = " outer path",
+		},
+		{
+			"i-",
+			mode = "o",
+			function()
+				local pattern = {
+					unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()",
+				}
+				local core = require("various-textobjs.charwise-core")
+				core.selectClosestTextobj(pattern, "inner", 5)
+			end,
+			desc = " inner path",
+		},
 	},
 }
