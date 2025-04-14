@@ -48,14 +48,6 @@
     ],
     "prefix": "important (callout)"
   },
-  "insert table 2x2": {
-    "body": [
-      "| Column1        | Column2        |",
-      "|--------------- | -------------- |",
-      "| Item           | Item           |"
-    ],
-    "prefix": "table (2x2)"
-  },
   "insert toc": {
     "body": [
       "## Table of contents",
