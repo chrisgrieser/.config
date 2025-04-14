@@ -945,6 +945,25 @@ via `as`.
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use ongoing week</string>
+			</dict>
+			<key>description</key>
+			<string>the ranking incomplete, but "live", since it will only include shows that aired since last Monday</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>seasonal_ongoing_week</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>mal</string>
 				<key>pairs</key>
 				<array>

@@ -228,8 +228,11 @@ end, { desc = " Paste charwise", expr = true })
 keymap("n", "<D-v>", "p", { desc = " Paste" })
 
 --------------------------------------------------------------------------------
--- INELINE CODE
+-- SURROUND
 
+keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
+keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
+keymap("n", ")", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })

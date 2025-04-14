@@ -32,6 +32,7 @@ function httpRequest(url) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const useJapTitle = $.getenv("seasonal_jap_title") === "1";
+	const usePreviousWeek = $.getenv("seasonal_ongoing_week") === "0";
 
 	// get year/season/weekNum based on files available
 	const year = new Date().getFullYear();
@@ -42,9 +43,10 @@ function run() {
 	const tree = JSON.parse(httpRequest(treeUrl))?.tree;
 	for (const file of tree) {
 		if (!file.path.startsWith("docs/static/data/" + year)) continue;
-		const [_, seas, week] = file.path.match(/\/(\w+)\/week_(\d+)\.json/) || [];
+		const [_, seas, week] = file.path.match(/\/(\w+)\/week_(\d+)\.json$/) || [];
 		if (!seas || !week) continue;
-		seasons[seas] = Math.max(seasons[seas], Number(week));
+		const weekCount = Number(week) + (usePreviousWeek ? -1 : 0);
+		seasons[seas] = Math.max(seasons[seas], weekCount);
 	}
 	let season = "fall";
 	if (seasons.fall === 0) season = "summer";
@@ -64,18 +66,25 @@ function run() {
 	const response = JSON.parse(httpRequest(weeklyURL));
 	/** @type {AlfredItem[]} */
 	const items = response.map((/** @type {rAnimeRanking} */ show) => {
-		totalKarma += show.karma; // NOTE side effect, buf simpler this way
-		let rankChange = "";
-		if (typeof show.rank_change === "number" && show.rank_change !== 0) {
-			rankChange = (show.rank_change > 0 ? "📈" : "📉") + " " + show.rank_change.toString();
-		} else if (show.rank_change === 0) {
+		totalKarma += show.karma; // NOTE side effect, but simpler this way
+		let rankChange;
+		if (show.rank_change === 0) {
 			rankChange = "🟰";
+		} else if (typeof show.rank_change === "number") {
+			rankChange = (show.rank_change > 0 ? "📈 +" : "📉 ") + show.rank_change;
 		} else if (show.rank_change === "returning") {
 			rankChange = "🔁";
 		} else if (show.rank_change === "new") {
 			rankChange = "❇️";
+		} else {
+			rankChange = show.rank_change;
 		}
-		const karmaChange = show.karma_change ? ` (${show.karma_change})` : "";
+		let karmaChange = "";
+		if (show.karma_change && show.karma_change > 0) {
+			karmaChange = ` (+${show.karma_change})`;
+		} else if (show.karma_change) {
+			karmaChange = ` (${show.karma_change})`;
+		}
 
 		const ranking = (show.current_rank + ")").padEnd(3, " ");
 		const title = (useJapTitle ? show.title : show.title_english).replace(
