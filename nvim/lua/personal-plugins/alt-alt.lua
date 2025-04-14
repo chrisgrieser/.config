@@ -21,7 +21,7 @@ local config = {
 		altBuf = "󰯬",
 		mostChangedFile = "",
 	},
-	ignore = { -- patterns for `string.find`; applied to the whole file path
+	ignore = { -- literal match in whole string
 		oldfiles = {
 			"/COMMIT_EDITMSG",
 			require("plugin-specs.snacks-scratch").opts.scratch.root, ---@diagnostic disable-line: undefined-field
@@ -71,7 +71,7 @@ local function getAltOldfile()
 		local exists = vim.uv.fs_stat(path) ~= nil
 		local sameFile = path == curPath
 		local ignored = vim.iter(config.ignore.oldfiles)
-			:any(function(p) return path:find(p) ~= nil end)
+			:any(function(p) return path:find(p, nil, true) ~= nil end)
 		if exists and not ignored and not sameFile then return path end
 	end
 end
@@ -95,7 +95,7 @@ local function getMostChangedFile()
 
 		local absPath = vim.fs.normalize(gitroot .. "/" .. relPath)
 		local ignored = vim.iter(config.ignore.mostChangedFiles)
-			:any(function(p) return absPath:find(p) ~= nil end)
+			:any(function(p) return absPath:find(p, nil, true) ~= nil end)
 		local nonExistent = vim.uv.fs_stat(absPath) == nil
 		if ignored or nonExistent then return end
 

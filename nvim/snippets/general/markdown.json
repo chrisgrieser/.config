@@ -7,6 +7,15 @@
     ],
     "prefix": "Codeblock"
   },
+  "German language frontmatter (for ltex)": {
+    "body": [
+      "---",
+      "lang: de-DE",
+      "---",
+      "$0"
+    ],
+    "prefix": "German language frontmatter (for ltex)"
+  },
   "caution (callout)": {
     "body": [
       "> [!CAUTION]",
