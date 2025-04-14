@@ -4,6 +4,8 @@
 <dict>
 	<key>exclude_nonshows</key>
 	<true/>
+	<key>keyword_seasonal</key>
+	<string>sr</string>
 	<key>open_at</key>
 	<string>anilist</string>
 	<key>sorting</key>
