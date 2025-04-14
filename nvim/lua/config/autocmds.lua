@@ -23,6 +23,13 @@ if vim.fn.has("gui_running") == 0 then
 end
 
 --------------------------------------------------------------------------------
+-- SPLITS
+vim.api.nvim_create_autocmd("VimResized", {
+	desc = "User: keep splits equally sized on window resize",
+	command = "wincmd =",
+})
+
+--------------------------------------------------------------------------------
 -- RESTORE CURSOR
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: Restore cursor position",
@@ -285,15 +292,12 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufReadPost" }, {
 
 -- FIX for some reason `scrolloff` sometimes being set to `0` on new buffers!?
 local originalScrolloff = vim.o.scrolloff
-vim.defer_fn(function() -- defer to prevent unneeded trigger on startup
-	vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
-		desc = "User: FIX scrolloff on entering new buffer",
-		callback = function(ctx)
-			if vim.bo[ctx.buf].buftype ~= "" then return end
-			vim.opt.scrolloff = originalScrolloff
-		end,
-	})
-end, 1)
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNew" }, {
+	desc = "User: FIX scrolloff on entering new buffer",
+	callback = function(ctx)
+		if vim.bo[ctx.buf].buftype == "" then vim.opt.scrolloff = originalScrolloff end
+	end,
+})
 
 --------------------------------------------------------------------------------
 -- FAVICON PREFIXES FOR URLS
@@ -361,10 +365,9 @@ vim.defer_fn(addFavicons, 200)
 -- Auto-set indent based on first indented line. Ignores files when an
 -- `.editorconfig` is in effect. Simplified version of `guess-indent.nvim`.
 local function luckyIndent(bufnr)
-	if not vim.api.nvim_buf_is_valid(bufnr) then return end
+	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local ec = vim.b[bufnr].editorconfig
 	if ec and (ec.indent_style or ec.indent_size or ec.tab_width) then return end
-	if vim.bo[bufnr].buftype ~= "" then return end
 
 	-- guess indent from first indented line
 	local indent
@@ -378,15 +381,19 @@ local function luckyIndent(bufnr)
 	until #indent > 0
 	local spaces = indent:match(" +")
 
+	-- in markdown, 2 space indents can come from hardwrap and indented second
+	-- lines of lists, those are not real indentations though.
+	if vim.bo[bufnr].ft == "markdown" and #spaces == 2 then return end
+
 	-- apply if needed
 	local opts = { title = "Lucky indent", icon = "󰉶" }
 	if spaces and not vim.bo.expandtab then
-		vim.bo.expandtab = true
-		vim.bo.shiftwidth = #spaces
-		vim.notify(("Set to %d spaces"):format(#spaces), nil, opts)
+		vim.bo[bufnr].expandtab = true
+		vim.bo[bufnr].shiftwidth = #spaces
+		vim.notify(("Set to %d spaces."):format(#spaces), nil, opts)
 	elseif not spaces and vim.bo.expandtab then
-		vim.bo.expandtab = false
-		vim.notify("Set to tabs", nil, opts)
+		vim.bo[bufnr].expandtab = false
+		vim.notify("Set to tabs.", nil, opts)
 	end
 end
 
@@ -407,7 +414,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 
 		local function setSigns(qf)
 			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
-				sign_text = "󱘹▶", -- actually two chars
+				sign_text = "󱘹▶", -- (this arrow is actually two chars)
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- above most signs
 				invalidate = true, -- deletes the extmark if the line is deleted
@@ -467,9 +474,3 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
---------------------------------------------------------------------------------
--- SPLITS
-vim.api.nvim_create_autocmd("VimResized", {
-	desc = "User: keep splits equally sized on window resize",
-	command = "wincmd =",
-})
