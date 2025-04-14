@@ -69,8 +69,8 @@ local function workLayout()
 	local displayFunc = u.betweenTime(22, 5) and darkenDisplay or autoSetBrightness
 	displayFunc()
 	holeCover.update()
-	darkmode.autoSwitch()
 	dockSwitcher("work")
+	darkmode.autoSwitch()
 
 	u.closeAllTheThings()
 
