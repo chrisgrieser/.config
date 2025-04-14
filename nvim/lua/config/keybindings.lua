@@ -227,20 +227,9 @@ end, { desc = " Paste charwise", expr = true })
 -- for compatibility with macOS clipboard managers
 keymap("n", "<D-v>", "p", { desc = " Paste" })
 
-keymap("n", "<leader>y:", function()
-	local lastExcmd = vim.fn.getreg(":")
-	vim.fn.setreg("+", lastExcmd)
-	vim.notify(lastExcmd, nil, { title = "Copied", icon = "󰅍" })
-end, { desc = "󰘳 Copy last ex-cmd" })
-
 --------------------------------------------------------------------------------
--- SURROUND
+-- INELINE CODE
 
-keymap("n", "'", "bi'<Esc>ea'<Esc>", { desc = " Surround cword" })
-keymap("n", '"', 'bi"<Esc>ea"<Esc>', { desc = " Surround cword" })
-keymap("n", "(", "bi(<Esc>ea)<Esc>", { desc = "󰅲 Surround cword" })
-keymap("n", "[", "bi[<Esc>ea]<Esc>", { desc = "󰅪 Surround cword", nowait = true })
-keymap("n", "{", "bi{<Esc>ea}<Esc>", { desc = " Surround cword" })
 keymap("n", "<D-e>", "bi`<Esc>ea`<Esc>", { desc = " Inline code cword" })
 keymap("x", "<D-e>", "<Esc>`<i`<Esc>`>la`<Esc>", { desc = " Inline code selection" })
 keymap("i", "<D-e>", "``<Left>", { desc = " Inline code" })
