@@ -11,6 +11,9 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		sources = {
+			per_filetype = {
+				pseudo_cmdline = { "cmdline" },
+			},
 			providers = {
 				lsp = {
 					fallbacks = {}, -- do not use `buffer` as fallback

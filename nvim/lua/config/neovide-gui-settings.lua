@@ -26,17 +26,6 @@ else
 end
 vim.opt.linespace = -2 -- less line height
 
--- cmd+ / cmd- to change zoom
-local function changeScaleFactor(delta)
-	vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
-	local icon = delta > 0 and "" or ""
-	local opts = { id = "scale_factor", icon = icon, title = "Scale factor" }
-	vim.notify(tostring(vim.g.neovide_scale_factor), nil, opts)
-end
-local keymap = require("config.utils").uniqueKeymap
-keymap({ "n", "x", "i" }, "<D-+>", function() changeScaleFactor(0.01) end, { desc = " Zoom" })
-keymap({ "n", "x", "i" }, "<D-->", function() changeScaleFactor(-0.01) end, { desc = " Zoom" })
-
 --------------------------------------------------------------------------------
 
 -- CMD & ALT Keys
@@ -60,8 +49,8 @@ do -- only active when `multigrid` is enabled in `neovide/config.toml`
 	vim.g.neovide_floating_corner_radius = 0 -- looks weird with some plugin windows
 	vim.g.neovide_floating_shadow = false -- looks weird with some plugin windows
 	vim.g.neovide_position_animation_length = 0.15 -- windows movement speed
-	vim.g.neovide_floating_blur_amount_x = 4.0
-	vim.g.neovide_floating_blur_amount_y = 4.0
+	vim.g.neovide_floating_blur_amount_x = 3.0
+	vim.g.neovide_floating_blur_amount_y = 3.0
 end
 
 --------------------------------------------------------------------------------
