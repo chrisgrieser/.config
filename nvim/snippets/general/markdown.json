@@ -49,12 +49,12 @@
   },
   "insert toc": {
     "body": [
-      "## Table of Content",
+      "## Table of contents",
       "",
       "<!-- toc -->"
     ],
     "description": "https://github.com/jonschlinkert/markdown-toc#tocinsert",
-    "prefix": "insert toc"
+    "prefix": "insert toc (Table of contents)"
   },
   "kbd": {
     "body": "<kbd>$0</kbd>",
