@@ -75,7 +75,6 @@ function run(argv) {
 	/** @type {{data: MalEntry[]}} */
 	const response = JSON.parse(httpRequest(apiURL));
 	if (!response.data) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(JSON.stringify(response));
 		return errorItem("Unknown error.", "See debugging log.");
 	}

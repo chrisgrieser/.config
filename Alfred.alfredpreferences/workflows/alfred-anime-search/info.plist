@@ -12,21 +12,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
+				<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>131072</integer>
 				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
-				<key>modifiers</key>
-				<integer>524288</integer>
-				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string>⇧: Open at alternative site</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -42,20 +32,17 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
+				<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
 				<key>modifiers</key>
-				<integer>131072</integer>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⇧: Open at alternative site</string>
+				<string>⌥: Copy URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
+				<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -63,6 +50,9 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>399FFA57-165B-472A-AE9A-87BFF27728F8</string>
@@ -72,6 +62,16 @@
 				<string></string>
 				<key>sourceoutputuid</key>
 				<string>30875780-C895-4BDC-8A07-CC2CFAE3429F</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -93,7 +93,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
+				<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -105,7 +105,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+				<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -119,6 +119,39 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>226C1914-C9E3-4AF8-855D-C0ABA204805E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5BAACB80-93A4-4D8F-A88F-782637547810</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open at {var:open_at}</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F977FA44-8C72-4311-91CA-C5EB0721DCA4</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Open at streaming site</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9CA6150-107C-47E5-9DF5-C2BADB8059DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -179,6 +212,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>F977FA44-8C72-4311-91CA-C5EB0721DCA4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9CA6150-107C-47E5-9DF5-C2BADB8059DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Chris Grieser</string>
@@ -193,6 +239,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -202,67 +267,12 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>⚠️ Error</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-url-from-mal_id.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>^http</string>
-						<key>outputlabel</key>
-						<string>url</string>
-						<key>uid</key>
-						<string>30875780-C895-4BDC-8A07-CC2CFAE3429F</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>not found</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>226C1914-C9E3-4AF8-855D-C0ABA204805E</string>
+			<string>7E098A04-2A6D-4C5A-9968-3A4364A36654</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -270,49 +280,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>\n$</string>
-				<key>regexcaseinsensitive</key>
-				<false/>
-				<key>regexmultiline</key>
-				<false/>
-				<key>replacestring</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.replace</string>
-			<key>uid</key>
-			<string>3B71FB6E-C62F-4C61-A3ED-F4653A5F2D22</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
-				<true/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
+			<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -378,15 +346,15 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>open</string>
+						<string>copy</string>
 						<key>outputlabel</key>
-						<string>open</string>
+						<string>copy</string>
 						<key>uid</key>
 						<string>1F19551C-19DF-41B6-BB36-D3BED80FC88A</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>copy</string>
+				<string>open</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -408,21 +376,54 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>8AABF91D-1E70-4809-955F-8DBAE86E3107</string>
+			<string>CD83D622-02FC-4979-A30A-993E3F86605A</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>AC45C071-007E-491D-805B-4F6EC6B05E28</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-url-from-mal_id.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>675222A8-3740-4E18-B754-C2E21EDC1631</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -436,20 +437,94 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>📋 Copied</string>
+				<string>⚠️ Error</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>7E098A04-2A6D-4C5A-9968-3A4364A36654</string>
+			<string>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>^http</string>
+						<key>outputlabel</key>
+						<string>url</string>
+						<key>uid</key>
+						<string>30875780-C895-4BDC-8A07-CC2CFAE3429F</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>not found</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>226C1914-C9E3-4AF8-855D-C0ABA204805E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>3B71FB6E-C62F-4C61-A3ED-F4653A5F2D22</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</string>
+			<string>F977FA44-8C72-4311-91CA-C5EB0721DCA4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D9CA6150-107C-47E5-9DF5-C2BADB8059DD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -513,6 +588,12 @@ Search all anime listed in the `myanimelist` database via the keyword `an`.
   streaming website.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quicklook the hero image or `myanimelist` page of the entry.
 
+Access the r/anime weekly seasonal rankings via `as`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open weekly episode discussion thread at reddit.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the show at myanimelist.net or AniList.
+- &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open the episode at the streaming site, if available.
+- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quicklook the hero image of the show/episode.
+
 ---
 
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
@@ -521,29 +602,31 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>715</real>
+			<real>645</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>420</real>
 		</dict>
 		<key>1CD7085D-65B2-4B4F-835E-C2DB96C708F1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
+			<key>note</key>
+			<string>anime search</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>210</real>
 		</dict>
 		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>xpos</key>
-			<real>485</real>
+			<real>525</real>
 			<key>ypos</key>
-			<real>215</real>
+			<real>425</real>
 		</dict>
 		<key>2C1A3437-69DE-4AEE-AA72-81371A8748C3</key>
 		<dict>
@@ -552,7 +635,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>240</real>
 		</dict>
 		<key>399FFA57-165B-472A-AE9A-87BFF27728F8</key>
 		<dict>
@@ -563,65 +646,67 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>617</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>230</real>
 		</dict>
 		<key>3B71FB6E-C62F-4C61-A3ED-F4653A5F2D22</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>remove \n</string>
 			<key>xpos</key>
-			<real>410</real>
+			<real>450</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>435</real>
 		</dict>
 		<key>5BAACB80-93A4-4D8F-A88F-782637547810</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>8</integer>
+			<key>note</key>
+			<string>seasonal rankings</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>560</real>
+			<real>660</real>
 		</dict>
 		<key>675222A8-3740-4E18-B754-C2E21EDC1631</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>6</integer>
+			<integer>2</integer>
 			<key>note</key>
 			<string>get URL from mal_id</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>195</real>
+			<real>405</real>
 		</dict>
 		<key>7E098A04-2A6D-4C5A-9968-3A4364A36654</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>860</real>
+			<real>900</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>120</real>
 		</dict>
 		<key>8AABF91D-1E70-4809-955F-8DBAE86E3107</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>750</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>120</real>
 		</dict>
 		<key>AC45C071-007E-491D-805B-4F6EC6B05E28</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>190</real>
+			<real>315</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>300</real>
 		</dict>
 		<key>C41A7A4B-3896-4C3A-A0C2-FC70158BB624</key>
 		<dict>
@@ -630,16 +715,34 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>185</real>
 		</dict>
 		<key>CD83D622-02FC-4979-A30A-993E3F86605A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>710</real>
+			<real>750</real>
 			<key>ypos</key>
 			<real>250</real>
+		</dict>
+		<key>D9CA6150-107C-47E5-9DF5-C2BADB8059DD</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>315</real>
+			<key>ypos</key>
+			<real>660</real>
+		</dict>
+		<key>F977FA44-8C72-4311-91CA-C5EB0721DCA4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>235</real>
+			<key>ypos</key>
+			<real>650</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -657,39 +760,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
-			<key>label</key>
 			<string>Keyword</string>
+			<key>label</key>
+			<string>Anime search</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>mal</string>
-				<key>pairs</key>
-				<array>
-					<array>
-						<string>myanimelist</string>
-						<string>mal</string>
-					</array>
-					<array>
-						<string>AniList</string>
-						<string>anilist</string>
-					</array>
-				</array>
-			</dict>
-			<key>description</key>
-			<string>This setting only determines where to open the result, the search uses the myanimelist database regardless.</string>
-			<key>label</key>
-			<string>⏎ opens</string>
-			<key>type</key>
-			<string>popupbutton</string>
-			<key>variable</key>
-			<string>open_at</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -709,9 +786,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string></string>
-			<key>label</key>
 			<string>Sorting</string>
+			<key>label</key>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -735,9 +812,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>If installed, this also affects what is previewed with AlfredExtraPane.</string>
+			<string>QuickLook (If installed, this also affects what is previewed with AlfredExtraPane.)</string>
 			<key>label</key>
-			<string>QuickLook</string>
+			<string></string>
 			<key>type</key>
 			<string>popupbutton</string>
 			<key>variable</key>
@@ -751,12 +828,12 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>non-shows (OVAs, movies, special)</string>
+				<string>exclude non-shows (OVAs, movies, specials)</string>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Exclude</string>
+			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
@@ -770,7 +847,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>adult entries</string>
+				<string>exclude adult entries</string>
 			</dict>
 			<key>description</key>
 			<string></string>
@@ -794,9 +871,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>the full title is inserted at the end of the URL</string>
+			<string>Alternative search site. The full title is inserted at the end of the URL</string>
 			<key>label</key>
-			<string>Alternative search site</string>
+			<string></string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -810,7 +887,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>insert Japanese title</string>
+				<string>insert Japanese title at alternative search site</string>
 			</dict>
 			<key>description</key>
 			<string></string>
@@ -820,6 +897,72 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<string>checkbox</string>
 			<key>variable</key>
 			<string>alt_search_jap</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>as</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Seasonal rankings</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword_seasonal</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use Jpanaese titles</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>seasonal_jap_title</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>mal</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>myanimelist</string>
+						<string>mal</string>
+					</array>
+					<array>
+						<string>AniList</string>
+						<string>anilist</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Database where to open entries. (This setting only determines where to open the result, the search uses the myanimelist database regardless.)</string>
+			<key>label</key>
+			<string>Open entries at</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>open_at</string>
 		</dict>
 	</array>
 	<key>version</key>
