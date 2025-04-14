@@ -290,9 +290,8 @@ extraServerConfig.yamlls = {
 local function detachIfObsidianOrIcloud(client, bufnr)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
-	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Documents/")
-	if obsiDir or iCloudDocs then
-		vim.diagnostic.enable(false, { bufnr = 0 })
+	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Library/Mobile Documents/")
+	if obsiDir or (iCloudDocs and client.name ~= "ltex_plus") then
 		-- defer to ensure client is already attached
 		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 1000)
 	end
@@ -337,9 +336,14 @@ extraServerConfig.ltex_plus = {
 			diagnosticSeverity = { default = "warning" },
 			disabledRules = {
 				["en-US"] = {
+					"MORFOLOGIK_RULE_EN_US", -- spellcheck done via Harper instead
 					"EN_QUOTES", -- don't expect smart quotes
 					"WHITESPACE_RULE", -- too many false positives
-					"MORFOLOGIK_RULE_EN_US", -- spellcheck; done via Harper instead
+				},
+				["de-DE"] = {
+					"GERMAN_SPELLER_RULE", -- too many false positives
+					"ABKUERZUNG_LEERZEICHEN", -- not needed
+					"TYPOGRAFISCHE_ANFUEHRUNGSZEICHEN", -- don't expect smart quotes
 				},
 			},
 			additionalRules = {
@@ -358,6 +362,7 @@ extraServerConfig.ltex_plus = {
 -- DOCS https://github.com/tekumara/typos-lsp/blob/main/docs/neovim-lsp-config.md
 extraServerConfig.typos_lsp = {
 	init_options = { diagnosticSeverity = "Hint" },
+	on_attach = detachIfObsidianOrIcloud,
 }
 
 --------------------------------------------------------------------------------
