@@ -594,9 +594,10 @@ Access the [r/anime](https://www.reddit.com/r/anime/) weekly seasonal rankings v
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open the episode at the streaming site, if available.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quicklook the hero image of the show/episode.
 
----
-
-Created by [Chris Grieser](https://chris-grieser.de/).</string>
+## Credits
+- Anime data by [Jikan](https://docs.api.jikan.moe/)
+- r/anime seasonal rankings by [abysswatcherbel](https://github.com/abysswatcherbel/abysswatcherbel.github.io)
+- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>0FE2DDE7-BAB8-4D62-894F-EEA431A354C2</key>

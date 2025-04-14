@@ -33,13 +33,24 @@ function httpRequest(url) {
 function run() {
 	const useJapTitle = $.getenv("seasonal_jap_title") === "1";
 
-	// TODO get correct week
-	const baseURL =
-		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/static/data/";
-	const year = 2025;
+	// calculate current week
+	const year = new Date().getFullYear();
+
+	const treeUrl =
+		"https://api.github.com/repos/abysswatcherbel/abysswatcherbel.github.io/git/trees/main?recursive=1";
+	const tree = JSON.parse(httpRequest(treeUrl))?.tree;
+	const seasons = []
+	const latestRanking = tree.find((/** @type {{ path: string; }} */ file) =>
+		file.path.startsWith(`docs/static/data/${year}/`),
+	);
+	console.log("🪚 latestRanking:", JSON.stringify(latestRanking, null, 2))
 	const season = "spring";
 	const weekNum = 2;
+
+	const baseURL =
+		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/docs/static/data/";
 	const weeklyURL = `${baseURL}${year}/${season}/week_${weekNum}.json`;
+	console.log("Weekly seasonal ranking URL:", weeklyURL);
 
 	let totalKarma = 0;
 
@@ -60,7 +71,10 @@ function run() {
 		const karmaChange = show.karma_change ? ` (${show.karma_change})` : "";
 
 		const ranking = (show.current_rank + ")").padEnd(3, " ");
-		const title = useJapTitle ? show.title : show.title_english;
+		const title = (useJapTitle ? show.title : show.title_english).replace(
+			/ Season (\d+)$/,
+			" S$1",
+		);
 
 		const subtitle = [
 			"E" + show.episode.toString().padEnd(2, " "),
