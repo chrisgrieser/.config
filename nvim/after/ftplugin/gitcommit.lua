@@ -24,13 +24,3 @@ if not tinygitBuffer then -- already has its own mappings
 end
 
 --------------------------------------------------------------------------------
-
--- REVERT
--- replace first line of `git revert` with Conventional Commit keyword `revert`
--- (assumes `git config --global revert.reference false`)
-local firstLine = vim.api.nvim_get_current_line()
-if firstLine == "# *** SAY WHY WE ARE REVERTING ON THE TITLE LINE ***" then
-	vim.api.nvim_set_current_line("revert: ")
-	vim.cmd.startinsert { bang = true }
-	vim.cmd.normal { "3gww", bang = true } -- reflow description line for readability
-end
