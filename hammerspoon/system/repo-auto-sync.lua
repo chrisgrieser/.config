@@ -108,7 +108,10 @@ M.timer_repoSync = hs.timer
 	:start()
 
 -- 3. manually via Alfred: `hammerspoon://sync-repos`
-hs.urlevent.bind("sync-repos", function() syncAllGitRepos(true) end)
+hs.urlevent.bind("sync-repos", function()
+	u.notify("🔁 Starting sync…")
+	syncAllGitRepos(true)
+end)
 
 -- 4. when going to sleep or when unlocking
 local c = hs.caffeinate.watcher
