@@ -27,9 +27,16 @@ return {
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 
 		-- cleaner vim.ui.select
-		---@type fun(_kind?: string): snacks.picker.format
-		require("snacks.picker.format").ui_select = function(_kind)
+		---@type fun(kind?: string): snacks.picker.format
+		require("snacks.picker.format").ui_select = function(kind)
 			return function(item)
+				if kind == "codeaction" then
+					local action = item.item.action ---@type lsp.CodeAction
+					return {
+						{ action.title .. " " },
+						{ action.kind or "", "SnacksPickerSpecial" },
+					}
+				end
 				return { { item.formatted } }
 			end
 		end
@@ -53,6 +60,15 @@ return {
 				end)
 			end,
 			desc = " Eval",
+		},
+		{
+			"<leader>er",
+			function()
+				vim.ui.input({ prompt = " Run", win = { ft = "vim" } }, function(expr)
+					if expr then vim.cmd(expr) end
+				end)
+			end,
+			desc = " Run",
 		},
 	},
 	---@type snacks.Config
