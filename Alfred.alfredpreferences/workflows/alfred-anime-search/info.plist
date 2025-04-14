@@ -586,17 +586,19 @@ Search all anime listed in the `myanimelist` database via the keyword `an`.
 - &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the myanimelist.net or AniList URL.
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Search for the title on an alternative site, such as a
   streaming website.
-- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quicklook the hero image or `myanimelist` page of the entry.
+- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the hero image or `myanimelist` page of the entry.
 
-Access the [r/anime](https://www.reddit.com/r/anime/) weekly seasonal rankings via `as`.
+Access the [r/anime](https://www.reddit.com/r/anime/) weekly seasonal rankings
+via `as`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open weekly episode discussion thread at reddit.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the show at myanimelist.net or AniList.
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open the episode at the streaming site, if available.
-- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quicklook the hero image of the show/episode.
+- &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the hero image of the show/episode.
 
 ## Credits
-- Anime data by [Jikan](https://docs.api.jikan.moe/)
-- r/anime seasonal rankings by [abysswatcherbel](https://github.com/abysswatcherbel/abysswatcherbel.github.io)
+- Anime data by [Jikan](https://docs.api.jikan.moe/).
+- `r/anime` seasonal rankings by
+  [abysswatcherbel](https://github.com/abysswatcherbel/abysswatcherbel.github.io).
 - Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>

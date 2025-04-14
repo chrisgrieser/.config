@@ -33,25 +33,31 @@ function httpRequest(url) {
 function run() {
 	const useJapTitle = $.getenv("seasonal_jap_title") === "1";
 
-	// calculate current week
+	// get year/season/weekNum based on files available
 	const year = new Date().getFullYear();
-
+	/** @type {Record<string, number>} */
+	const seasons = { winter: 0, spring: 0, summer: 0, fall: 0 };
 	const treeUrl =
 		"https://api.github.com/repos/abysswatcherbel/abysswatcherbel.github.io/git/trees/main?recursive=1";
 	const tree = JSON.parse(httpRequest(treeUrl))?.tree;
-	const seasons = []
-	const latestRanking = tree.find((/** @type {{ path: string; }} */ file) =>
-		file.path.startsWith(`docs/static/data/${year}/`),
-	);
-	console.log("🪚 latestRanking:", JSON.stringify(latestRanking, null, 2))
-	const season = "spring";
-	const weekNum = 2;
+	for (const file of tree) {
+		const [_, seas, week] = file.path.match(/docs\/static\/data\/(\w+)\/week_(\d+)\.json/) || [];
+		if (!seas || !week) continue;
+		seasons[seas] = Math.max(seasons[seas], Number(week));
+	}
+	let season = "fall";
+	if (seasons.fall === 0) season = "summer";
+	if (seasons.summer === 0) season = "spring";
+	if (seasons.spring === 0) season = "winter";
+	const weekNum = seasons[season];
 
+	// get weekly seasonal ranking
 	const baseURL =
 		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/docs/static/data/";
 	const weeklyURL = `${baseURL}${year}/${season}/week_${weekNum}.json`;
 	console.log("Weekly seasonal ranking URL:", weeklyURL);
 
+	// construct alfred items
 	let totalKarma = 0;
 
 	const response = JSON.parse(httpRequest(weeklyURL));
