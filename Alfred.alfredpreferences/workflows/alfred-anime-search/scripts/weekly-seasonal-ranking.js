@@ -36,11 +36,17 @@ function run() {
 	// TODO get correct week
 	const baseURL =
 		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/static/data/";
-	const weeklyURL = baseURL + "2025/spring/week_2.json";
+	const year = 2025;
+	const season = "spring";
+	const weekNum = 2;
+	const weeklyURL = `${baseURL}${year}/${season}/week_${weekNum}.json`;
+
+	let totalKarma = 0;
 
 	const response = JSON.parse(httpRequest(weeklyURL));
 	/** @type {AlfredItem[]} */
 	const items = response.map((/** @type {rAnimeRanking} */ show) => {
+		totalKarma += show.karma; // NOTE side effect, buf simpler this way
 		let rankChange = "";
 		if (typeof show.rank_change === "number" && show.rank_change !== 0) {
 			rankChange = (show.rank_change > 0 ? "📈" : "📉") + " " + show.rank_change.toString();
@@ -87,8 +93,25 @@ function run() {
 		return alfredItem;
 	});
 
+	// add info as first item
+	const seasonCapitalized = season.charAt(0).toUpperCase() + season.slice(1);
+	const totalKarmaInfo = "Total karma: " + totalKarma.toLocaleString();
+	items.unshift({
+		title: `r/anime: ${seasonCapitalized} ${year}, week #${weekNum}`,
+		subtitle: totalKarmaInfo,
+		valid: false,
+		mods: {
+			shift: { subtitle: totalKarmaInfo, valid: false },
+			cmd: { subtitle: totalKarmaInfo, valid: false },
+		},
+	});
+
 	return JSON.stringify({
 		items: items,
 		skipknowledge: true, // keep ranking order
+		cache: {
+			seconds: 3600 * 3, // 3 hours
+			loosereload: true,
+		},
 	});
 }
