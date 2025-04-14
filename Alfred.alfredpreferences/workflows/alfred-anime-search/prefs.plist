@@ -8,6 +8,8 @@
 	<string>sr</string>
 	<key>open_at</key>
 	<string>anilist</string>
+	<key>quicklook_at</key>
+	<string>mal</string>
 	<key>sorting</key>
 	<string>prioritize airing</string>
 </dict>

@@ -17,7 +17,8 @@ function httpRequest(url) {
  * @property {string} url // reddit url
  * @property {number} karma
  * @property {number} karma_change
- * @property {number} rank_change
+ * @property {number} current_rank
+ * @property {number|string} rank_change // string for "returning" and such
  * @property {number} mal_id
  * @property {number} episode
  * @property {number} comments
@@ -30,26 +31,41 @@ function httpRequest(url) {
 // SOURCE https://github.com/abysswatcherbel/abysswatcherbel.github.io
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const useJapTitle = $.getenv("seasonal_jap_title");
+	const useJapTitle = $.getenv("seasonal_jap_title") === "1";
 
+	// TODO get correct week
 	const baseURL =
 		"https://raw.githubusercontent.com/abysswatcherbel/abysswatcherbel.github.io/refs/heads/main/static/data/";
-	const weeklyURL = baseURL + "2025/spring/week_3.json";
+	const weeklyURL = baseURL + "2025/spring/week_2.json";
 
 	const response = JSON.parse(httpRequest(weeklyURL));
 	/** @type {AlfredItem[]} */
 	const items = response.map((/** @type {rAnimeRanking} */ show) => {
+		let rankChange = "";
+		if (typeof show.rank_change === "number" && show.rank_change !== 0) {
+			rankChange = (show.rank_change > 0 ? "📈" : "📉") + " " + show.rank_change.toString();
+		} else if (show.rank_change === 0) {
+			rankChange = "🟰";
+		} else if (show.rank_change === "returning") {
+			rankChange = "🔁";
+		} else if (show.rank_change === "new") {
+			rankChange = "🆕";
+		}
+		const karmaChange = show.karma_change ? ` (${show.karma_change})` : "";
+
+		const ranking = (show.current_rank + ")").padEnd(3, " ");
+		const title = useJapTitle ? show.title : show.title_english;
+
 		const subtitle = [
 			"E" + show.episode.toString().padEnd(2, " "),
-			"🔼 " + show.karma,
+			"🔼 " + show.karma + karmaChange,
 			"💬 " + show.comments,
-			"",
-			`(${show.rank_change > 0 ? "+" : "-"}${show.rank_change})`,
-		].join("   ");
+			rankChange,
+		].join("    ");
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: useJapTitle ? show.title : show.title_english,
+			title: ranking + " " + title,
 			subtitle: subtitle,
 			arg: show.url, // reddit URL
 			mods: {
@@ -71,5 +87,8 @@ function run() {
 		return alfredItem;
 	});
 
-	return JSON.stringify({ items: items });
+	return JSON.stringify({
+		items: items,
+		skipknowledge: true, // keep ranking order
+	});
 }
