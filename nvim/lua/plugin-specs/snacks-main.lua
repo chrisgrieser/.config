@@ -46,30 +46,6 @@ return {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
-		{
-			"<leader>ee",
-			function()
-				vim.ui.input({
-					prompt = " Eval",
-					win = { ft = "lua" }, --> this part is snacks-specific
-				}, function(expr)
-					if not expr then return end
-					local result = vim.inspect(vim.fn.luaeval(expr))
-					local opts = { title = "Eval", icon = "", ft = "lua" }
-					vim.notify(result, vim.log.levels.DEBUG, opts)
-				end)
-			end,
-			desc = " Eval",
-		},
-		{
-			"<leader>er",
-			function()
-				vim.ui.input({ prompt = " Run", win = { ft = "vim" } }, function(expr)
-					if expr then vim.cmd(expr) end
-				end)
-			end,
-			desc = " Run",
-		},
 	},
 	---@type snacks.Config
 	opts = {
@@ -86,17 +62,6 @@ return {
 			modes = { "n" },
 			debounce = 300,
 		},
-		input = {
-			icon = "",
-			win = {
-				relative = "editor",
-				backdrop = 60,
-				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
-				title_pos = "left",
-				width = 50,
-				row = math.ceil(vim.o.lines / 2) - 3,
-			},
-		},
 		indent = {
 			char = "│",
 			scope = { hl = "Comment" },
@@ -105,15 +70,15 @@ return {
 				hl = "Comment",
 			},
 			animate = {
-				-- slower for more dramatic effect :D
+				-- slower for more dramatic effect :o
 				duration = { steps = 200, total = 1000 },
 			},
 		},
-		blame_line = {
-			win = {
-				relative = "cursor",
-				width = 0.6,
-				height = 0.6,
+		styles = {
+			blame_line = {
+				relative = "editor",
+				width = 0.65,
+				height = 0.8,
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 				title = " 󰆽 Git blame ",
 			},
