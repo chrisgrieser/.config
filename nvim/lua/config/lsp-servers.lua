@@ -97,7 +97,7 @@ local efmConfig = {
 			lintStdin = true, -- caveat: linting from stdin does not support `.markdownlintignore`
 			lintIgnoreExitCode = true,
 			lintSeverity = vim.diagnostic.severity.INFO,
-			lintFormats = { "-:%l:%c MD%n/%m", "-:%l MD%n/%m" },
+			lintFormats = { "%f:%l:%c MD%n/%m", "%f:%l MD%n/%m" },
 		},
 	},
 	zsh = {
