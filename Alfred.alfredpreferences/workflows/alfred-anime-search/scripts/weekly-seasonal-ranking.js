@@ -140,7 +140,7 @@ function run() {
 		items: items,
 		skipknowledge: true, // keep ranking order
 		cache: {
-			seconds: 3600 * 3, // 3 hours
+			seconds: usePreviousWeek ? 3600 * 24 : 3600, // daily/hourly
 			loosereload: true,
 		},
 	});
