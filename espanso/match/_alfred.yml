@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
+  #─────────────────────────────────────────────────────────────────────────────
+  # ALFRED TOKENS
   - trigger: qqq
     replace: '{query}'
     label: "🎩 {query}"
@@ -10,3 +12,30 @@ matches:
   - trigger: "!kkk"
     replace: '<kbd>$|$</kbd>'
     label: "🎩 <kbd>"
+  #─────────────────────────────────────────────────────────────────────────────
+  # EMOJI & SYMBOLS
+  - { trigger: "!yes", replace: "✅ ", label: "✅ yes" }
+  - { trigger: "!no", replace: "❌ ", label: ❌ no }
+  - { trigger: "!wait", replace: "⏳ ", label: ⏳ wait }
+  - { trigger: "!info", replace: "ℹ️ ", label: ℹ️ info }
+  - { triggers: ["!clip", "!copy"], replace: "📋 ", label: 📋 clip }
+  - { trigger: "!warn", replace: "⚠️ ", label: ⚠️ warn } # is actually an emoji outside of nvim
+  - { trigger: "->>", replace: "➡️ " } # emoji arrow (outside nvim becomes emoji)
+  #─────────────────────────────────────────────────────────────────────────────
+  # MACOS SYMBOLS
+  - { triggers: ["!ctrl", "!control"], replace: ⌃ }
+  - { trigger: "!up", replace: ↑ }
+  - { trigger: "!down", replace: ↓ }
+  - { trigger: "!left", replace: ← }
+  - { trigger: "!right", replace: → }
+  - { trigger: "!space", replace: ␣ }
+  - { trigger: "!shift", replace: ⇧ }
+  - { trigger: "!cmd", replace: ⌘ }
+  - { triggers: ["!alt", "!opt"], replace: ⌥ }
+  - { triggers: ["!caps", "!hyper"], replace: ⇪ }
+  - { trigger: "!esc", replace: ⎋ }
+  - { trigger: "!tab", replace: ↹ }
+  - { trigger: "!backspace", replace: ⌫ }
+  # INFO The other return-like symbols either have an accessibility problem
+  # (VoiceOver reads them as arrow shape) or are displayed as emoji on GitHub.
+  - { triggers: ["!return", "!enter"], replace: ⏎ }

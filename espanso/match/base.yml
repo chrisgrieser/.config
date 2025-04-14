@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 matches:
+  # EMOJI & SYMBOLS
+  - { trigger: "->", replace: →, word: true } # unicode arrow
+  - { trigger: " mm", replace: " 🙈", label: 🙈 monkey }
+  - { trigger: "<3", replace: "🩶" } # do not use red heart by default
+  #─────────────────────────────────────────────────────────────────────────────
   # PROFILES
   - { trigger: "!web", replace: https://chris-grieser.de/ }
   - { trigger: "!masto", replace: https://pkm.social/@pseudometa }

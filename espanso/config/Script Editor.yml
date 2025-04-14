@@ -1,7 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
 #───────────────────────────────────────────────────────────────────────────────
 
-filter_exec: WezTerm
+# DOCS https://espanso.org/docs/configuration/app-specific-configurations/#advanced-use-cases-for-filter_title
+# only activates code snippets when a file of the right language is open
 
-extra_excludes:
-  - "../match/emojis-symbols.yml"
+filter_class: com.apple.ScriptEditor2
+
+extra_includes:
+  - "../match/_applescript.yml"
