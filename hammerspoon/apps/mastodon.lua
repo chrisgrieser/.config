@@ -6,8 +6,6 @@ local wu = require("win-management.window-utils")
 local aw = hs.application.watcher
 local wf = hs.window.filter
 
---------------------------------------------------------------------------------
-
 --------------------------------------------------------------------------------,
 -- FALLTHROUGH
 
@@ -72,8 +70,10 @@ local function moveToSide()
 	mastoWin:raise()
 end
 
+moveToSide() -- reloads & system start
+
 M.aw_mastoLaunched = aw.new(function(appName, event)
-	if not (appName == "Ivory" and event == aw.launched) then return end
+	if not (appName == "Ivory" and (event == aw.launched or event == aw.activated)) then return end
 	u.defer({ 3, 5, 10 }, function()
 		moveToSide()
 		scrollUp()
