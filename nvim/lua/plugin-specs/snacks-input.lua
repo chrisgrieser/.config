@@ -1,16 +1,18 @@
+-- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/input.md
+--------------------------------------------------------------------------------
+
 return {
 	"folke/snacks.nvim",
 
 	keys = {
 		{
+			-- PROS: vim motions, highlighting, history via `<Up>`, results as via `vim.notify`
+			-- CONS: no completions, no incremental previews
 			":",
 			function()
 				vim.ui.input({
 					prompt = "Cmdline",
-					win = {
-						ft = "vim",
-						bo = { ft = "pseudo-cmdline" },
-					},
+					win = { ft = "vim" }, --> this part is snacks-specific
 				}, function(expr)
 					if not expr then return end
 					local output = vim.trim(vim.fn.execute(expr))
@@ -18,7 +20,7 @@ return {
 					vim.notify(output, vim.log.levels.DEBUG, { title = ":" .. expr, icon = "" })
 				end)
 			end,
-			desc = "󰘳 Cmdline with vim motions",
+			desc = "󰘳 Better cmdline",
 		},
 		{
 			"<leader>ee",

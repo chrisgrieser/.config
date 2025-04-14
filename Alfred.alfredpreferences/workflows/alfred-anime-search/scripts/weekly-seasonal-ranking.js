@@ -41,7 +41,8 @@ function run() {
 		"https://api.github.com/repos/abysswatcherbel/abysswatcherbel.github.io/git/trees/main?recursive=1";
 	const tree = JSON.parse(httpRequest(treeUrl))?.tree;
 	for (const file of tree) {
-		const [_, seas, week] = file.path.match(/docs\/static\/data\/(\w+)\/week_(\d+)\.json/) || [];
+		if (!file.path.startsWith("docs/static/data/" + year)) continue;
+		const [_, seas, week] = file.path.match(/\/(\w+)\/week_(\d+)\.json/) || [];
 		if (!seas || !week) continue;
 		seasons[seas] = Math.max(seasons[seas], Number(week));
 	}
@@ -72,7 +73,7 @@ function run() {
 		} else if (show.rank_change === "returning") {
 			rankChange = "🔁";
 		} else if (show.rank_change === "new") {
-			rankChange = "🆕";
+			rankChange = "❇️";
 		}
 		const karmaChange = show.karma_change ? ` (${show.karma_change})` : "";
 
