@@ -97,14 +97,6 @@
     ],
     "prefix": "for .. of (array)"
   },
-  "forEach": {
-    "body": [
-      "forEach(${1:item} => {",
-      "\t$0",
-      "});"
-    ],
-    "prefix": "forEach =>"
-  },
   "function": {
     "body": [
       "function ${1:name}() {",
