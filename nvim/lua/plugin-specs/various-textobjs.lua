@@ -18,10 +18,12 @@ return {
 			desc = "󰬞 subword",
 		},
 
-		-- stylua: ignore
+		-- stylua: ignore start
 		{ ".", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji textobj" },
 
-		-- stylua: ignore start
+		{ "a,", "<cmd>lua require('various-textobjs').argument('outer')<CR>", mode = {"x","o"}, desc = "󰏪 outer argument" },
+		{ "i,", "<cmd>lua require('various-textobjs').argument('inner')<CR>", mode = {"x","o"}, desc = "󰏪 inner argument" },
+
 		{ "iv", "<cmd>lua require('various-textobjs').value('inner')<CR>", mode = {"x","o"}, desc = " inner value" },
 		{ "av", "<cmd>lua require('various-textobjs').value('outer')<CR>", mode = {"x","o"}, desc = " outer value" },
 		{ "ak", "<cmd>lua require('various-textobjs').key('outer')<CR>", mode = {"x","o"}, desc = "󰌆 outer key" },
