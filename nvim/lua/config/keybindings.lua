@@ -60,7 +60,7 @@ keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end
 --------------------------------------------------------------------------------
 -- MARKS
 do
-	vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" }
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" } end
 	local marks = { "A", "B", "C" } -- CONFIG
 
 	-- stylua: ignore start
