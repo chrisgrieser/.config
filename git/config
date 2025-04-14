@@ -30,8 +30,6 @@
 	relativePaths = false ; false = show path relative to git root, not relative to cwd
 [stash]
 	showIncludeUntracked = true
-[revert]
-	reference = true
 
 [init]
 	defaultBranch = main
