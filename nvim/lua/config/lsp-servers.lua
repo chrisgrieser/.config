@@ -242,8 +242,7 @@ extraServerConfig.ts_ls = {
 			format = { convertTabsToSpaces = false },
 		},
 
-		-- enable checking javascript without a `jsconfig.json`
-		-- DOCS https://www.typescriptlang.org/tsconfig
+		-- enable checking javascript without a `jsconfig.json` https://www.typescriptlang.org/tsconfig
 		implicitProjectConfiguration = { checkJs = true, target = "ES2022" },
 	},
 	on_attach = function(client)
