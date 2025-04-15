@@ -4,11 +4,49 @@ import Foundation
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
-// ─────────────────────────────────────────────────────────────────────────────
 
 let input = CommandLine.arguments[1]
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let when = ProcessInfo.processInfo.environment["when_to_add"]!
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+struct ParsedResult {
+	let hour: Int?
+	let minute: Int?
+	let message: String
+}
+
+func parseTimeAndMessage(from input: String) -> ParsedResult? {
+	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
+	let pattern = #"(?<!\d)(\d{1,2}):(\d{1,2})(?!\d)"#
+	let regex = try! NSRegularExpression(pattern: pattern)
+
+	guard
+		let match = regex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg))
+	else {
+		// No time found — use entire input as message if not empty
+		return msg.isEmpty
+			? nil : ParsedResult(hour: nil, minute: nil, message: msg)
+	}
+
+	guard
+		let hrRange = Range(match.range(at: 1), in: msg),
+		let minRange = Range(match.range(at: 2), in: msg),
+		let timeRange = Range(match.range, in: msg),
+		let hour = Int(msg[hrRange]),
+		let minute = Int(msg[minRange]),
+		(0..<24).contains(hour),
+		(0..<60).contains(minute)
+	else {
+		return nil  // Invalid time
+	}
+
+	msg.removeSubrange(timeRange)
+	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
+
+	return msg.isEmpty ? nil : ParsedResult(hour: hour, minute: minute, message: msg)
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -25,17 +63,19 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 	// ──────────────────────────────────────────────────────────────────────────
 
-	// Determine hh:mm from input, if existent
-	let timeRegex = #"^([0-9]{2}):?([0-9]{2})?$"#
-	let timeMatch = input.range(of: timeRegex, options: .regularExpression)
-
-
 	// Create a new reminder
+	let parsed = parseTimeAndMessage(from: input)
+	guard parsed != nil else {
+		print("❌ Invalid input: '\(input)'")
+		semaphore.signal()
+		return
+	}
+	let (title, hh, mm) = (parsed!.message, parsed!.hour, parsed?.minute)
 	let reminder = EKReminder(eventStore: eventStore)
-	reminder.title = reminderTitle
+	reminder.title = title
 	reminder.isCompleted = false
 
-	// determine when to add
+	// determine day when to add
 	let calendar = Calendar.current
 	let today = Date()
 	var dayToUse: Date
@@ -50,10 +90,10 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	// Set the reminder as an all-day reminder (no hour or minute)
+	// If hour and minute are nil, it is an all-day reminder
 	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
-	dateComponents.hour = nil
-	dateComponents.minute = nil
+	dateComponents.hour = parsed!.hour
+	dateComponents.minute = parsed!.minute
 	reminder.dueDateComponents = dateComponents
 
 	// Find the calendar (list) by name
@@ -70,7 +110,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Save
 	do {
 		try eventStore.save(reminder, commit: true)
-		print(reminderTitle)  // for Alfred notification
+		print(title)  // for Alfred notification
 	} catch {
 		print("❌ Failed to create reminder: \(error.localizedDescription)")
 	}
