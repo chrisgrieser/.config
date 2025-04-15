@@ -7,16 +7,11 @@ return {
 			mode = { "n", "x" },
 			desc = " rip-substitute",
 		},
-		{
-			"<leader>rS",
-			function() require("rip-substitute").rememberCursorWord() end,
-			desc = " remember cword (rip-sub)",
-		},
 	},
 	opts = {
 		popupWin = {
 			hideSearchReplaceLabels = true,
-			hideKeymapHints = false,
+			hideKeymapHints = true,
 		},
 		keymaps = {
 			insertModeConfirm = "<CR>",
@@ -24,6 +19,6 @@ return {
 		editingBehavior = {
 			autoCaptureGroups = true,
 		},
-		debug = false,
+		debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-rip-substitute"),
 	},
 }
