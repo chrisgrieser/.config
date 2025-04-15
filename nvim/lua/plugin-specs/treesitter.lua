@@ -58,8 +58,8 @@ return {
 		},
 	},
 	-- context as statusline component
-	config = function(_, opts)
-		require("nvim-treesitter.configs").setup(opts)
+	config = function(spec)
+		require(spec.main).setup(spec.opts)
 
 		local function codeContext()
 			local maxLen = vim.o.columns * 0.75
@@ -89,6 +89,6 @@ return {
 			return text
 		end
 
-		vim.g.lualineAdd("tabline", "lualine_b", codeContext)
+		-- vim.g.lualineAdd("tabline", "lualine_b", codeContext)
 	end,
 }
