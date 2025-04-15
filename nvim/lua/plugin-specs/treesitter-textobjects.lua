@@ -30,7 +30,10 @@ return { -- treesitter-based textobjs
 	},
 	keys = {
 		-- stylua: ignore start
+
 		-- PEEK HOVER
+		-- (useful e.g. for typescript types/interfaces, where regular hover does
+		-- not show the fields.)
 		{ "<leader>H", "<cmd>TSTextobjectPeekDefinitionCode @class.outer<CR>", desc = " LSP Peek" },
 
 		-- MOVE

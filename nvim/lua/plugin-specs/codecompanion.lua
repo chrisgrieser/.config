@@ -15,9 +15,7 @@ return {
 			callback = function(ctx)
 				local type = (ctx.match:match("CodeCompanionRequest(%a+)") or ""):lower()
 				if type ~= "started" and type ~= "finished" then return end
-
-				local opts = { title = "CodeCompanion", icon = "" }
-				vim.notify("Request " .. type .. ".", nil, opts)
+				vim.notify("Request " .. type .. ".", nil, { title = "CodeCompanion", icon = "" })
 			end,
 		})
 	end,
@@ -49,7 +47,7 @@ return {
 		adapters = {
 			openai = function()
 				return require("codecompanion.adapters").extend("openai", {
-					env = { api_key = vim.env.OPENAI_API_KEY }, -- via .zshenv
+					env = { api_key = vim.env.OPENAI_API_KEY }, -- exported in .zshenv
 					schema = {
 						-- much cheaper than the flagship models, but still good enough
 						-- https://platform.openai.com/docs/models
