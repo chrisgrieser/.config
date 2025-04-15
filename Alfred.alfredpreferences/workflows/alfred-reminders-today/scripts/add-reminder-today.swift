@@ -70,7 +70,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		semaphore.signal()
 		return
 	}
-	let (title, hh, mm) = (parsed!.message, parsed!.hour, parsed?.minute)
+	let (title, hh, mm) = (parsed!.message, parsed!.hour, parsed!.minute)
 	let reminder = EKReminder(eventStore: eventStore)
 	reminder.title = title
 	reminder.isCompleted = false
@@ -90,10 +90,10 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 
-	// If hour and minute are nil, it is an all-day reminder
+	// Set due date (If hour and minute are nil, it is an all-day reminder)
 	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
-	dateComponents.hour = parsed!.hour
-	dateComponents.minute = parsed!.minute
+	dateComponents.hour = hh
+	dateComponents.minute = mm
 	reminder.dueDateComponents = dateComponents
 
 	// Find the calendar (list) by name
@@ -110,7 +110,12 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Save
 	do {
 		try eventStore.save(reminder, commit: true)
-		print(title)  // for Alfred notification
+		var alfredNotif = title
+		if hh != nil {
+			let minutePadded = String(format: "%02d", mm!)
+			alfredNotif = "\(hh!):\(minutePadded) — \(title)"
+		}
+		print(alfredNotif)
 	} catch {
 		print("❌ Failed to create reminder: \(error.localizedDescription)")
 	}
