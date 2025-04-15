@@ -162,11 +162,13 @@ function run() {
 
 			const ext = name.split(".").pop() || "";
 			const imageExt = ["png", "jpg", "jpeg", "gif", "icns", "tiff", "heic"];
+			/** @type {AlfredIcon} */
 			const icon = imageExt.includes(ext)
 				? { path: absPath }
 				: { path: absPath, type: "fileicon" };
 
-			return {
+			/** @type {AlfredItem} */
+			const item = {
 				title: prefix + name,
 				subtitle: subtitle,
 				arg: absPath,
@@ -175,6 +177,12 @@ function run() {
 				match: alfredMatcher(name),
 				icon: icon,
 			};
+			if (keyword === $.getenv("frontwin_keyword")) {
+				item.mods = {
+					cmd: { subtitle: "⛔ Already front window", valid: false }
+				}
+			}
+			return item;
 		})
 
 	// INFO do not use Alfred's caching mechanism, since it does not work with

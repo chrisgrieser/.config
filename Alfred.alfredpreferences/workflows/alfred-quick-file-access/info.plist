@@ -50,6 +50,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>85BA17FF-F81C-4558-A3DD-A06ED76BB023</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>⇧: Remove the tag {var:tag_prefix} {var:tag_to_search}</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>046A7EDC-4CFB-42C9-B7FD-7ECB4FD32442</key>
 		<array>
@@ -223,6 +233,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F51A014F-1ABC-49D4-ADA8-0B83A691533F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>85BA17FF-F81C-4558-A3DD-A06ED76BB023</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>089E6397-029E-4743-8700-45C4860B2C92</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -805,6 +828,11 @@
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -1016,6 +1044,47 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<true/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>{var:tag_prefix} {var:tag_to_search} removed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>089E6397-029E-4743-8700-45C4860B2C92</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>new_tags</key>
+					<string>{var:tag_to_search}</string>
+					<key>recursive</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.tags.remove</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>85BA17FF-F81C-4558-A3DD-A06ED76BB023</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -1036,6 +1105,8 @@ The following actions are available for all searches:
 - &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Move the file to your front Finder window.
 - &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Reveal the file in Finder.
 - &lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the file to the clipboard.
+- &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;Y&lt;/kbd&gt;: Quick Look the file.
+- &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: *(only tag search)* Remove the tag from the file.
 
 ## Requirements
 
@@ -1043,7 +1114,7 @@ The following actions are available for all searches:
 brew install ripgrep
 ```
 
-## Ignore folder for recent files search
+## Howto: Ignore folder for recent files search
 1. Go to the folder you want to ignore.
 2. Press `cmd+shift+.`, to show hidden files.
 3. In that folder, create a file named `.ignore`, the file content should just
@@ -1078,6 +1149,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>265</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>089E6397-029E-4743-8700-45C4860B2C92</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>890</real>
+			<key>ypos</key>
+			<real>760</real>
 		</dict>
 		<key>0AF282F1-E1F5-47C6-B70B-F25E00EA5015</key>
 		<dict>
@@ -1171,6 +1251,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
+		<key>85BA17FF-F81C-4558-A3DD-A06ED76BB023</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>735</real>
+			<key>ypos</key>
+			<real>760</real>
+		</dict>
 		<key>89AAC152-1A79-4CBF-9BDD-DBBAF712F72C</key>
 		<dict>
 			<key>colorindex</key>
@@ -1237,7 +1326,7 @@ to modify the respective hotkey</string>
 		<key>D2B2FCCA-99A2-437E-94C0-AA67800FAAE0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>12</integer>
+			<integer>9</integer>
 			<key>note</key>
 			<string>open if folder, reveal if file</string>
 			<key>xpos</key>
@@ -1501,7 +1590,7 @@ to modify the respective hotkey</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.8</string>
+	<string>1.1.1</string>
 	<key>webaddress</key>
 	<string>chris-grieser.de</string>
 </dict>
