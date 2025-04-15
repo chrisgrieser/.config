@@ -6,7 +6,7 @@ let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
-let reminderTitle = CommandLine.arguments[1]
+let input = CommandLine.arguments[1]
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let when = ProcessInfo.processInfo.environment["when_to_add"]!
 
@@ -24,6 +24,11 @@ eventStore.requestFullAccessToReminders { granted, error in
 		return
 	}
 	// ──────────────────────────────────────────────────────────────────────────
+
+	// Determine hh:mm from input, if existent
+	let timeRegex = #"^([0-9]{2}):?([0-9]{2})?$"#
+	let timeMatch = input.range(of: timeRegex, options: .regularExpression)
+
 
 	// Create a new reminder
 	let reminder = EKReminder(eventStore: eventStore)
