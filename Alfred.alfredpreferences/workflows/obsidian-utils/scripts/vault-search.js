@@ -118,7 +118,9 @@ function run() {
 			}
 
 			// matcher
-			const matcher = aMatcher(name) + aMatcher(aliases.join(" ")) + " #" + tags.join(" #");
+			let matcher = aMatcher(name) + aMatcher(aliases.join(" ")) + " #" + tags.join(" #");
+			if (bookmarks.includes(relPath)) matcher += " bookmarks";
+			if (recentItems.includes(relPath)) matcher += " recent";
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
