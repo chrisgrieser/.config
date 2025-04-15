@@ -1,4 +1,5 @@
 {
+  "better-type-hover": { "branch": "master", "commit": "9771b8c3a98cc9cc33aaa9f562871d982b2d1e03" },
   "blink-cmp-git": { "branch": "master", "commit": "863e0670217d0dffb9edc6ab41b676a4128f813b" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "ccc.nvim": { "branch": "main", "commit": "af2cf5a963f401aad868c065222ee13d4bbc9050" },

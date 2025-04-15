@@ -10,6 +10,7 @@ return { -- treesitter-based textobjs
 		"TSTextobjectSwapPrevious",
 		"TSTextobjectGotoNextStart",
 		"TSTextobjectGotoPreviousStart",
+		"TSTextobjectPeekDefinitionCode",
 	},
 	-- SIC yes, configured via treesitter, not this plugin. Also, calling
 	-- treesitter's `setup` a second time is not a problem.
@@ -22,10 +23,16 @@ return { -- treesitter-based textobjs
 				-- thus staying with `false`
 				include_surrounding_whitespace = false,
 			},
+			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
+				floating_preview_opts = { title = " LSP Peek " },
+			},
 		},
 	},
 	keys = {
 		-- stylua: ignore start
+		-- PEEK HOVER
+		{ "<leader>H", "<cmd>TSTextobjectPeekDefinitionCode @class.outer<CR>", desc = " LSP Peek" },
+
 		-- MOVE
 		{ "<C-j>", "<cmd>TSTextobjectGotoNextStart @function.outer<CR>", desc = " Goto next function" },
 		{ "<C-k>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<CR>", desc = " Goto prev function" },
