@@ -31,7 +31,7 @@ async function updatePlugins() {
 			app.setting.openTabById("community-plugins");
 			app.setting.activeTab.containerEl.findAll(".mod-cta").last().click();
 		}
-	}, 1200); // timeout to avoid race condition still happening somehow
+	}, 1500); // timeout to avoid race condition still happening somehow
 }
 
 function freezeInterface() {
