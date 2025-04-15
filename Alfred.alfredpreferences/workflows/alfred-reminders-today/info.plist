@@ -991,7 +991,7 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## Info on version 2.0
+	<string>## Info when upgrading from version 1.x to version 2.x
 Due to the underlying tool (`reminder-cli`) being abandoned, I rewrote this
 workflow to work fully standalone. Note that this workflow now **requires at
 least macOS 14**.
@@ -1035,6 +1035,9 @@ If you are not prompted to add them, try:
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the URL, if there is one.
 - Quickly add a new reminder due today or tomorrow with the keywords `qq` and
   `qqq`, respectively.
+	+ The command supports simple parsing of a due time with the format
+	  `hh:mm`. For instance, `19:00 buy milk` or `buy milk 19:00` will set the
+	  due time to `19:00` and the reminder title to `buy milk`.
 
 ## Credits
 - Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
@@ -1442,7 +1445,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.6.6</string>
+	<string>2.7.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
