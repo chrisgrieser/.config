@@ -16,17 +16,10 @@ return {
 				local type = (ctx.match:match("CodeCompanionRequest(%a+)") or ""):lower()
 				if type ~= "started" and type ~= "finished" then return end
 
-				local opts = { title = "CodeCompanion", icon = "", id = "codecompanion" }
+				local opts = { title = "CodeCompanion", icon = "" }
 				vim.notify("Request " .. type .. ".", nil, opts)
 			end,
 		})
-
-		-- formatting for the diff mode
-		vim.opt.fillchars:append {
-			diff = " ", -- removed lines
-			foldopen = "",
-			foldclose = "",
-		}
 	end,
 	keys = {
 		-- `:` so context gets passed via `<>` marks
@@ -58,7 +51,9 @@ return {
 				return require("codecompanion.adapters").extend("openai", {
 					env = { api_key = vim.env.OPENAI_API_KEY }, -- via .zshenv
 					schema = {
-						model = { default = "gpt-4o-mini" }, -- cheaper
+						-- much cheaper than the flagship models, but still good enough
+						-- https://platform.openai.com/docs/models
+						model = { default = "gpt-4.1-mini" },
 					},
 				})
 			end,
