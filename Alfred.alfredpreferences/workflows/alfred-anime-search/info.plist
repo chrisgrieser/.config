@@ -159,6 +159,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1E50968A-7B6D-4F3F-8DCE-6CEB7F659924</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>⌃: Toggle between previous and ongoing week</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
 		</array>
 		<key>675222A8-3740-4E18-B754-C2E21EDC1631</key>
 		<array>
@@ -570,12 +580,38 @@
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>seasonal-ranking-loop</string>
+				<key>inputmode</key>
+				<integer>1</integer>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>5BAACB80-93A4-4D8F-A88F-782637547810</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>seasonal-ranking-loop</string>
+				<key>passinputasargument</key>
+				<false/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>1E50968A-7B6D-4F3F-8DCE-6CEB7F659924</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -593,6 +629,8 @@ via `as`.
 - &lt;kbd&gt;⏎&lt;/kbd&gt;: Open weekly episode discussion thread at reddit.
 - &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the show at myanimelist.net or AniList.
 - &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Open the episode at the streaming site, if available.
+- &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Toggle between showing the previous and the ongoing week. (The
+  chart for the ongoing is "live" and as such incomplete.)
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the hero image of the show/episode.
 
 ## Credits
@@ -621,6 +659,15 @@ via `as`.
 			<real>30</real>
 			<key>ypos</key>
 			<real>210</real>
+		</dict>
+		<key>1E50968A-7B6D-4F3F-8DCE-6CEB7F659924</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>320</real>
+			<key>ypos</key>
+			<real>795</real>
 		</dict>
 		<key>226C1914-C9E3-4AF8-855D-C0ABA204805E</key>
 		<dict>
@@ -949,16 +996,16 @@ via `as`.
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>use ongoing week</string>
+				<string>start with the ongoing week</string>
 			</dict>
 			<key>description</key>
-			<string>the ranking incomplete, but "live", since it will only include shows that aired since last Monday</string>
+			<string>Use ⌃⏎ to toggle between the previous and ongoing week. Note that the ranking of the ongoing week is "live" and thus still incomplete.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>
-			<string>seasonal_ongoing_week</string>
+			<string>seasonal_start_with_ongoing</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -988,7 +1035,7 @@ via `as`.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.0.0</string>
+	<string>3.1.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
