@@ -99,6 +99,21 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		end
 
 		if success == false then u.notify("⚠️ Failed to move file: " .. name) end
+
+		-- AUTO-INSTALL OBSIDIAN ALPHA
+		if name:find("%.asar%.gz$") and isDownloaded then
+			hs.execute(([[
+				cd %q || exit 1
+				mv obsidian-*.*.*.asar.gz "$HOME/Library/Application Support/obsidian/"
+				cd "$HOME/Library/Application Support/obsidian/"
+				rm obsidian-*.*.*.asar
+				gunzip obsidian-*.*.*.asar.gz
+				killall Obsidian
+				while pgrep -xq "Obsidian" ; do sleep 0.1; done
+				open -a "Obsidian"
+			]]):format(home .. "/Desktop/"))
+			u.closeBrowserTabsWith("https://cdn.discordapp.com/attachments")
+		end
 	end
 end):start()
 

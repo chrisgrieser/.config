@@ -125,6 +125,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>226AC357-DFF5-4248-A96F-6659B2ED55AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8BCA1757-79A5-464D-85EE-B3FE7077A1B4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>24102BFB-F7BC-4FA4-8E66-11134380E9A5</key>
 		<array>
 			<dict>
@@ -143,6 +156,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2B84625B-5C46-44F6-BFEE-B191D844A7AE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>34D80934-1F03-4771-953A-359FACF82441</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>226AC357-DFF5-4248-A96F-6659B2ED55AC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1333,6 +1359,71 @@ open -g "hammerspoon://sync-repos"</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8BCA1757-79A5-464D-85EE-B3FE7077A1B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/toggle-obsidian-alpha.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>226AC357-DFF5-4248-A96F-6659B2ED55AC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>alpha</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Toggle Obsidian Alpha</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>34D80934-1F03-4771-953A-359FACF82441</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -1705,6 +1796,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<key>ypos</key>
 			<real>1525</real>
 		</dict>
+		<key>226AC357-DFF5-4248-A96F-6659B2ED55AC</key>
+		<dict>
+			<key>xpos</key>
+			<real>720</real>
+			<key>ypos</key>
+			<real>900</real>
+		</dict>
 		<key>24102BFB-F7BC-4FA4-8E66-11134380E9A5</key>
 		<dict>
 			<key>colorindex</key>
@@ -1742,6 +1840,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>320</real>
 			<key>ypos</key>
 			<real>1250</real>
+		</dict>
+		<key>34D80934-1F03-4771-953A-359FACF82441</key>
+		<dict>
+			<key>xpos</key>
+			<real>550</real>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>3512A462-2B85-41D9-84EB-A78922ED365E</key>
 		<dict>
@@ -1847,6 +1952,13 @@ open -g "hammerspoon://sync-repos"</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>270</real>
+		</dict>
+		<key>8BCA1757-79A5-464D-85EE-B3FE7077A1B4</key>
+		<dict>
+			<key>xpos</key>
+			<real>890</real>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>8D0538B5-46D7-4A6B-B800-3C208CB8971B</key>
 		<dict>

@@ -16,6 +16,9 @@ return {
 			text = false, -- `pass` passwords editing ft (extra safeguard)
 		},
 		filter = function(bufnr)
+			-- not when recording
+			if vim.fn.reg_recording() ~= "" then return false end
+
 			local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr))
 			local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
 			local ignoreBuffer = parent:find("private dotfiles")
@@ -26,10 +29,6 @@ return {
 	},
 	config = function(_, opts)
 		require("neocodeium").setup(opts)
-
-		-- disable while recording
-		vim.api.nvim_create_autocmd("RecordingEnter", { command = "NeoCodeium disable" })
-		vim.api.nvim_create_autocmd("RecordingLeave", { command = "NeoCodeium enable" })
 
 		-- lualine indicator
 		vim.g.lualineAdd("sections", "lualine_x", function()
