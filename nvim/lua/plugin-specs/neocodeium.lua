@@ -3,6 +3,9 @@
 
 return {
 	"monkoose/neocodeium",
+
+	enabled = false,
+
 	event = "InsertEnter",
 	cmd = "NeoCodeium",
 	opts = {
