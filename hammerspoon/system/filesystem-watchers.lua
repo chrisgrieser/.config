@@ -25,7 +25,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
 			-- delay, so auto-open from the browser is triggered first, and since
 			-- Apple Calendar needs the file to exist before adding it
-			u.defer(30, function() os.remove(path) end)
+			u.defer(60, function() os.remove(path) end)
 
 		-- ADD BIBTEX ENTRIES TO LIBRARY
 		elseif ext == "bib" and isDownloaded then
