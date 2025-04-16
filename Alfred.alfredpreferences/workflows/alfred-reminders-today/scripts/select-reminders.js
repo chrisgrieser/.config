@@ -90,7 +90,9 @@ function run() {
 			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
 		})
 		.sort((a, b) => {
-			// first sort by due date, then by creation date
+			// 1. by priority, 2. by due date, 3. by creation date
+			const prioDiff = b.priority - a.priority;
+			if (prioDiff !== 0) return prioDiff;
 			const dueTimeDiff = +new Date(a.dueDate) - +new Date(b.dueDate);
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
@@ -104,15 +106,6 @@ function run() {
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
 
-		// normalize Prio
-		const prioNormalized = rem.priority
-
-			if (prio > 5) return 3
-			if (prio === 5) return 2
-			if (prio < 5 && prio > 0) return 1
-			return 0
-		})
-
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body
 		const dueDateObj = new Date(rem.dueDate);
@@ -123,8 +116,8 @@ function run() {
 		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const listName = includeAllLists ? rem.list : ""; // only display when more than 1
 		const subtitle = [
-			(rem.hasRecurrenceRules ? "🔁" : ""),
-			("!").repeat(rem.priority),
+			rem.hasRecurrenceRules ? "🔁" : "",
+			"!".repeat(rem.priority),
 			listName,
 			dueTime || pastDueDate || missingDueDate,
 			body.replace(/\n+/g, " "),
