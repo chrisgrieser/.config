@@ -19,7 +19,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 		-- HACK only downloaded files get quarantined, thus this detects downloads
 		local exists, msg = pcall(hs.fs.xattr.get, path, "com.apple.quarantine")
 		local isDownloaded = exists and msg ~= nil
-		local success
+		local success, errmsg
 
 		-- REMOVE ALFREDWORKFLOWS & ICAL
 		if (ext == "alfredworkflow" or ext == "ics") and isDownloaded then
@@ -40,7 +40,7 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 
 		-- BACKUP BROWSER SETTINGS
 		elseif name == "violentmonkey" then
-			success = os.rename(path, browserConfigs .. "violentmonkey")
+			success, errmsg = os.rename(path, browserConfigs .. "violentmonkey")
 			if success then
 				-- needs to be zipped again, since browser auto-opens all zip files
 				hs.execute(([[
@@ -52,19 +52,19 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 				u.app("Brave Browser"):activate()
 			end
 		elseif name == "ublacklist-settings.json" then
-			success = os.rename(path, browserConfigs .. name)
+			success, errmsg = os.rename(path, browserConfigs .. name)
 		elseif name == "Redirector.json" then
-			success = os.rename(path, browserConfigs .. name)
+			success, errmsg = os.rename(path, browserConfigs .. name)
 		elseif name:find("stylus%-.*%.json") then
-			success = os.rename(path, browserConfigs .. "stylus.json")
+			success, errmsg = os.rename(path, browserConfigs .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then
-			success = os.rename(path, browserConfigs .. "vimium-c-settings.json")
+			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then
 			local backupPath = home
 				.. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Inoreader Feeds.opml"
-			success = os.rename(path, backupPath)
+			success, errmsg = os.rename(path, backupPath)
 		elseif name == "obsidian-web-clipper-settings.json" then
-			success = os.rename(path, browserConfigs .. name)
+			success, errmsg = os.rename(path, browserConfigs .. name)
 
 		-- BANKING
 		elseif
@@ -75,22 +75,22 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			or name:find("[%d-]_Depotauszug_.*%.pdf$")
 			or name:find("[%d-]_Kapi?talmaßnahme_.*%.pdf$") -- SIC sometimes missing `i` typo from DKB
 		then
-			local folder = name:find("Kontoauszug") and "DKB Girokonto & Kreditkarte" or "DKB Depot"
+			local folder = name:find("Kontoauszug") and "DKB Girokonto" or "DKB Depot"
 			local year = name:match("^%d%d%d%d")
 			local bankPath = ("%s/Documents/Finanzen/%s/%s"):format(home, folder, year)
-			hs.fs.mkdir(bankPath)
+			success, errmsg = hs.fs.mkdir(bankPath)
 			u.defer(1, function() os.rename(path, bankPath .. "/" .. name) end) -- delay ensures folder is created
 			u.openUrlInBg(bankPath)
 
 		-- CALENDAR BACKUPS
 		elseif ext == "icbu" then
 			local folder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Backups/Calendar/"
-			success = os.rename(path, folder .. name)
+			success, errmsg = os.rename(path, folder .. name)
 
 		-- STEAM GAME SHORTCUTS
 		elseif name:find("%.app$") and not isDownloaded then
 			local gameFolder = home .. "/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/Games/"
-			success = os.rename(path, gameFolder .. name)
+			success, errmsg = os.rename(path, gameFolder .. name)
 			if success then
 				-- open folders to copy icon
 				hs.open(gameFolder)
@@ -98,7 +98,9 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			end
 		end
 
-		if success == false then u.notify("⚠️ Failed to move file: " .. name) end
+		if success == false then
+			u.notify(("⚠️ Failed to move: %q; %s"):format(name, errmsg or ""))
+		end
 
 		-- AUTO-INSTALL OBSIDIAN ALPHA
 		if name:find("%.asar%.gz$") and isDownloaded then
