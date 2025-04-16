@@ -14,6 +14,7 @@ app.includeStandardAdditions = true;
  * @property {string} creationDate
  * @property {string} isAllDay
  * @property {boolean} hasRecurrenceRules
+ * @property {number} priority
  */
 
 const isToday = (/** @type {Date?} */ aDate) => {
@@ -103,6 +104,15 @@ function run() {
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
 
+		// normalize Prio
+		const prioNormalized = rem.priority
+
+			if (prio > 5) return 3
+			if (prio === 5) return 2
+			if (prio < 5 && prio > 0) return 1
+			return 0
+		})
+
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body
 		const dueDateObj = new Date(rem.dueDate);
@@ -113,6 +123,8 @@ function run() {
 		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const listName = includeAllLists ? rem.list : ""; // only display when more than 1
 		const subtitle = [
+			(rem.hasRecurrenceRules ? "🔁" : ""),
+			("!").repeat(rem.priority),
 			listName,
 			dueTime || pastDueDate || missingDueDate,
 			body.replace(/\n+/g, " "),
@@ -120,8 +132,7 @@ function run() {
 			.filter(Boolean)
 			.join("  ·  ");
 
-		let emoji = rem.isCompleted ? "☑️ " : "";
-		if (rem.hasRecurrenceRules) emoji += "🔁 ";
+		const emoji = rem.isCompleted ? "☑️ " : "";
 
 		// INFO the boolean are all stringified, so they are available as "true"
 		// and "false" after stringification, instead of the less clear "1" and "0"
