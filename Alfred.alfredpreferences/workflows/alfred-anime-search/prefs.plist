@@ -10,6 +10,8 @@
 	<string>anilist</string>
 	<key>quicklook_at</key>
 	<string>mal</string>
+	<key>seasonal_start_with_ongoing</key>
+	<true/>
 	<key>sorting</key>
 	<string>prioritize airing</string>
 </dict>

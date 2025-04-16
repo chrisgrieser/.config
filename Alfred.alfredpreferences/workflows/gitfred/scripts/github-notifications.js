@@ -59,8 +59,10 @@ function humanRelativeDate(isoDateStr) {
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
 	const githubToken =
-		$.getenv("github_token_from_alfred_prefs") ||
-		app.doShellScript("source $HOME/.zshenv && echo $GITHUB_TOKEN").trim();
+		$.getenv("github_token_from_alfred_prefs").trim() ||
+		app
+			.doShellScript("test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN")
+			.trim();
 	const showReadNotifs =
 		$.NSProcessInfo.processInfo.environment.objectForKey("mode").js === "show-read-notifications";
 

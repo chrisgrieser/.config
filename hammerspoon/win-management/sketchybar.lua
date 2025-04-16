@@ -10,19 +10,18 @@ local aw = hs.application.watcher
 --------------------------------------------------------------------------------
 
 -- CONFIG
-local dontTriggerHidingOtherApps = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch" }
+local neverHide = { "Alfred", "CleanShot X", "IINA", "pinentry-mac", "Catch", "Hammerspoon" }
 
 M.aw_maxWindows = aw.new(function(appName, event, app)
-	if appName == "Hammerspoon" then return end -- never hide the hammerspoon console
-	if event ~= aw.deactivated or env.isProjector() or u.isFront(dontTriggerHidingOtherApps) then
-		return
-	end
+	-- never hide these apps when they deactivate, never hide these other apps
+	-- when these apps become activated.
+	if hs.fnutils.contains(neverHide, appName) or u.isFront(neverHide) then return end
+	if env.isProjector() then return end
 
-	for _, win in pairs(app:allWindows()) do
-		local coversLeftTopCorner = win:frame().x == 0 and win:frame().y == 0
-		if coversLeftTopCorner then
-			app:hide()
-			return
+	if event == aw.deactivated then
+		for _, win in pairs(app:allWindows()) do
+			local coversLeftTopCorner = win:frame().x == 0 and win:frame().y == 0
+			if coversLeftTopCorner then app:hide() end
 		end
 	end
 end):start()
