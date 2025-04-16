@@ -76,6 +76,16 @@ eventStore.requestFullAccessToReminders { granted, error in
 			let components = reminder.dueDateComponents
 			let isAllDay = components?.hour == nil && components?.minute == nil
 
+			// normalize priority based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
+			var prioNormalized = 0
+			if reminder.priority > 5 {
+				prioNormalized = 1
+			} else if reminder.priority == 5 {
+				prioNormalized = 2
+			} else if reminder.priority < 5 && reminder.priority > 0 {
+				prioNormalized = 3
+			}
+
 			return ReminderOutput(
 				id: reminder.calendarItemIdentifier,
 				title: reminder.title ?? "(No Title)",
@@ -86,7 +96,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 				isAllDay: isAllDay,
 				isCompleted: reminder.isCompleted,
 				hasRecurrenceRules: reminder.hasRecurrenceRules,
-				priority: reminder.priority
+				priority: prioNormalized
 			)
 		}
 
