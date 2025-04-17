@@ -1,3 +1,6 @@
+-- vim: foldlevel=2
+--------------------------------------------------------------------------------
+
 local themes = {
 	{ --- DAWNFOX
 		-- config: https://github.com/EdenEast/nightfox.nvim/blob/main/usage.md
@@ -93,6 +96,20 @@ local themes = {
 					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
 				},
 			},
+		},
+	},
+	{ --- ONE NORD
+		-- config https://github.com/rmehri01/onenord.nvim?tab=readme-ov-file#configuration
+		"rmehri01/onenord.nvim",
+		opts = {
+			custom_highlights = {
+				Folded = { style = "NONE", bg = "#373d4c" },
+				LspReferenceWrite = { style = "underdashed", sp = "NONE" },
+				LspReferenceRead = { style = "underdotted", sp = "NONE" },
+				LspReferenceText = { style = "NONE" }, -- too much noise, as it underlines e.g. strings
+				IncSearch = { style = "NONE" },
+			},
+			custom_colors = {},
 		},
 	},
 	{ --- TOKYONIGHT
