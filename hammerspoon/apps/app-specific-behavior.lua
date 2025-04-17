@@ -16,14 +16,6 @@ M.aw_finder = aw.new(function(appName, event, finder)
 end):start()
 
 --------------------------------------------------------------------------------
--- OBSIDIAN
--- prevent keeping focus when closing last vault
-M.wf_obsi = wf.new("Obsidian"):subscribe(wf.windowDestroyed, function()
-	local obsi = u.app("Obsidian")
-	if obsi and #obsi:allWindows() == 0 then obsi:hide() end
-end)
-
---------------------------------------------------------------------------------
 -- ZOOM
 
 M.wf_zoom = wf.new("zoom.us"):subscribe(wf.windowCreated, function(newWin)

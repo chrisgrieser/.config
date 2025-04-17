@@ -31,6 +31,7 @@ safeRequire("win-management.sketchybar")
 safeRequire("win-management.auto-quitter")
 safeRequire("win-management.auto-tile")
 safeRequire("win-management.vertical-split")
+safeRequire("win-management.fallthrough")
 
 safeRequire("system.cronjobs")
 safeRequire("system.filesystem-watchers")
