@@ -10,13 +10,6 @@ local config = {
 		Finder = { "^Move$", "^Copy$", "^Delete$", "^Finder Settings$", " Info$" },
 		["Brave Browser"] = { "^Picture in Picture$", "^Task Manager$", "^DevTools" },
 	},
-	---@type fun(appName: string)
-	zeroWindowAction = function(appName)
-		-- hide to prevent focussing windowless app
-		-- not on projector, since weird interaction with IINA
-		local autoTileApp = hs.application.find(appName, true, true)
-		if autoTileApp and not env.isProjector() then autoTileApp:hide() end
-	end,
 	---@type fun(appName: string): hs.geometry
 	oneWindowSize = function(appName)
 		if env.isProjector() then return hs.layout.maximized end
@@ -39,14 +32,12 @@ local function autoTile(appName)
 		return not ignored and win:isStandard()
 	end) ---@cast wins hs.window[] -- fix wrong annotation
 
-	-- GUARD prevent unnecessary runs or duplicate triggers
+	-- GUARD idempotent
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
 	local pos = {}
-	if #wins == 0 then
-		config.zeroWindowAction(appName)
-	elseif #wins == 1 then
+	if #wins == 1 then
 		pos[1] = config.oneWindowSize(appName)
 	elseif #wins == 2 then
 		pos = { hs.layout.left50, hs.layout.right50 }
