@@ -2,6 +2,15 @@
 -- A simple wrapper around vim's builtin mark functionality for quick navigation.
 --------------------------------------------------------------------------------
 
+local config = {
+	sign = {
+		hlgroup = "@keyword.return",
+		priority = 21, -- gitsigns use 20
+	}
+}
+
+--------------------------------------------------------------------------------
+
 local M = {}
 
 ---@class (exact) Markobj
@@ -13,9 +22,10 @@ local M = {}
 --------------------------------------------------------------------------------
 
 ---@param msg string
----@param level? "info"|"trace"|"debug"|"warn"|"error"
+---@param level? "warn" | "error"
 local function notify(msg, level)
-	vim.notify(msg, vim.log.levels[(level or "info"):upper()], { title = "Marks", icon = "󰃀" })
+	local lvl = level and level:upper() or "INFO"
+	vim.notify(msg, vim.log.levels[lvl], { title = "Marks", icon = "󰃀" })
 end
 
 ---@param names string|string[]
@@ -37,7 +47,7 @@ end
 local function getMark(name)
 	local mRow, mCol, mBufnr, mPath = unpack(vim.api.nvim_get_mark(name, {}))
 	local mark = { name = name, row = mRow, col = mCol, bufnr = mBufnr, path = mPath }
-	if mRow ~= 0 then return mark end
+	if mRow ~= 0 then return mark --[[@as Markobj]] end
 end
 
 ---@param names string[]
@@ -78,8 +88,8 @@ local function setSignForMark(name)
 	if markExtmarks[name] then vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name]) end
 	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
 		sign_text = icon,
-		sign_hl_group = "WarningMsg",
-		priority = 21, -- gitsigns use 20
+		sign_hl_group = config.sign.hlgroup,
+		priority = config.sign.priority,
 	})
 end
 

@@ -187,7 +187,7 @@ extraServerConfig.emmylua_ls = {
 			signature = { detailSignatureHelper = true },
 			diagnostics = {
 				disable = {
-					"unbalanced-assignments", -- too many false positives rn
+					"unbalanced-assignments", -- PENDING too many false positives right now
 				},
 			},
 		},
