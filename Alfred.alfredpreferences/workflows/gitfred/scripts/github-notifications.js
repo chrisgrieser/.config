@@ -16,7 +16,7 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 		allHeaders += `-H "${line}" `;
 	}
 	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
 	return app.doShellScript(curlRequest);
 }
 
@@ -81,9 +81,9 @@ function run() {
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 	const parameter = showReadNotifs ? "?all=true" : "";
 	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
-		"Accept: application/vnd.github.v3+json",
-		`Authorization: BEARER ${githubToken}`,
+		"Accept: application/vnd.github.json",
 		"X-GitHub-Api-Version: 2022-11-28",
+		`Authorization: BEARER ${githubToken}`,
 	]);
 	if (!response) {
 		return JSON.stringify({

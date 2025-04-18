@@ -1440,6 +1440,8 @@
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
+	+ To include private repos, requires a [GitHub
+	  Token](https://github.com/settings/tokens) with the respective access.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
@@ -1447,8 +1449,7 @@
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
 	+ To include private PRs, requires a [GitHub
-	  Token](https://github.com/settings/tokens) with access the respective
-	  access.
+	  Token](https://github.com/settings/tokens) with the respective access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
 	  to notifications.

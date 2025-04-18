@@ -23,10 +23,9 @@ function httpRequestWithHeaders(url, header, extraOpts) {
 		allHeaders += `-H "${line}" `;
 	}
 	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
 	return app.doShellScript(curlRequest);
 }
-
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -67,11 +66,14 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 	// FETCH REMOTE REPOS
 
-	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
-	// `type=all` includes owned repos and member repos
-	const apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
-	const headers = ["Accept: application/vnd.github.v3+json", "X-GitHub-Api-Version: 2022-11-28"];
-	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
+	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
+	let apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
+	if (githubToken) {
+		headers.push(`Authorization: BEARER ${githubToken}`);
+		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
+		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated"
+	}
 
 	const response = httpRequestWithHeaders(apiURL, headers);
 	if (!response) {
@@ -120,6 +122,8 @@ function run() {
 			if (repo.fork) matcher += "fork ";
 			if (repo.is_template) type += "📄 ";
 			if (repo.is_template) matcher += "template ";
+			if (repo.private) type += "🔒 ";
+			if (repo.private) matcher += "private ";
 			if (repo.stargazers_count > 0) subtitle += `⭐ ${repo.stargazers_count}  `;
 			if (repo.open_issues > 0) subtitle += `🟢 ${repo.open_issues}  `;
 			if (repo.forks_count > 0) subtitle += `🍴 ${repo.forks_count}  `;
@@ -132,25 +136,13 @@ function run() {
 				subtitle: subtitle,
 				match: matcher,
 				arg: mainArg,
-				quicklookurl: mainArg,
+				quicklookurl: repo.private ? undefined : mainArg,
 				uid: repo.name,
 				mods: {
-					ctrl: {
-						subtitle: "⌃: " + termAct,
-						arg: terminalArg,
-					},
-					alt: {
-						subtitle: "⌥: Copy GitHub URL",
-						arg: repo.html_url,
-					},
-					cmd: {
-						subtitle: "⌘: Open at GitHub",
-						arg: repo.html_url,
-					},
-					shift: {
-						arg: "", // empty for next input
-						variables: { repo: repo.full_name },
-					},
+					ctrl: { subtitle: "⌃: " + termAct, arg: terminalArg },
+					alt: { subtitle: "⌥: Copy GitHub URL", arg: repo.html_url },
+					cmd: { subtitle: "⌘: Open at GitHub", arg: repo.html_url },
+					shift: { arg: "", variables: { repo: repo.full_name } }, // arg empty for next input
 				},
 			};
 			return alfredItem;
@@ -159,9 +151,6 @@ function run() {
 	return JSON.stringify({
 		items: scriptFilterArr,
 		variables: { ownerOfRepo: "true" },
-		cache: {
-			seconds: 15, // short, since cloned repos should be available immediately
-			loosereload: true,
-		},
+		cache: { seconds: 15, loosereload: true }, // short, since cloned repos should be available immediately
 	});
 }
