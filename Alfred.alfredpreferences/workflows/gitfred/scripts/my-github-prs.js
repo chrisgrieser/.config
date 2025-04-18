@@ -11,11 +11,20 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url @return {string} */
-function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const data = $.NSData.dataWithContentsOfURL(queryURL);
-	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
+/**
+ * @param {string} url
+ * @param {string[]} header
+ * @param {string=} extraOpts
+ * @return {string} response
+ */
+function httpRequestWithHeaders(url, header, extraOpts) {
+	let allHeaders = "";
+	for (const line of header) {
+		allHeaders += `-H "${line}" `;
+	}
+	extraOpts = extraOpts || "";
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
+	return app.doShellScript(curlRequest);
 }
 
 /**
@@ -56,8 +65,15 @@ function humanRelativeDate(isoDateStr) {
 // biome-ignore lint/correctness/noUnusedVariables: alfred_run
 function run() {
 	const username = $.getenv("github_username");
+	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	const githubToken =
+		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
+
 	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
-	const response = httpRequest(apiURL);
+	const headers = ["Accept: application/vnd.github.v3+json", "X-GitHub-Api-Version: 2022-11-28"];
+	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
+
+	const response = httpRequestWithHeaders(apiURL, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
