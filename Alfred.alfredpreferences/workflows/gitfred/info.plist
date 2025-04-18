@@ -1425,20 +1425,14 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## ℹ️ Recent change
-`restore mtime` has been reworked to be magnitudes quicker. 
-If you have enabled it in past versions, please check your workflow configuration, 
-since there are now different options for it.
-
-## Usage
+	<string>## Usage
 - Search all public GitHub repositories via the keyword `gh`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's homepage. If it has none, opens the
 	  releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Search the repo for a query via GitHub Code Search.
-- Access public repositories you own via `gmy`.
+- Access your repositories via `gmy`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
@@ -1446,13 +1440,15 @@ since there are now different options for it.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Search the repo for a query via GitHub Code Search.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
 - Access Pull Requests (PRs) you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
+	+ To include private PRs, requires a [GitHub
+	  Token](https://github.com/settings/tokens) with access the respective
+	  access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
 	  to notifications.
@@ -1460,8 +1456,8 @@ since there are now different options for it.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
 - Additionally, you can press the
-  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone a
-  GitHub repo from the current browser tab. ([Note that Firefox is not
+  [hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) to clone
+  a GitHub repo from the current browser tab. ([Note that Firefox is not
   supported.](https://www.alfredforum.com/topic/16748-how-to-do-x-in-firefox-from-alfred/))
 
 ---
@@ -1739,7 +1735,7 @@ since there are now different options for it.
 			<key>colorindex</key>
 			<integer>8</integer>
 			<key>note</key>
-			<string>DOUBLE-CLICK THIS 
+			<string>DOUBLE-CLICK THIS
 
 to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
@@ -1826,6 +1822,27 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>github_username</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>ghp_…</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Optional. Only required for showing notifications, private PRs, and private repos. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`.</string>
+			<key>label</key>
+			<string>GitHub Token</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>github_token_from_alfred_prefs</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2024,27 +2041,6 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<string>textfield</string>
 			<key>variable</key>
 			<string>on_fork_branch</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string></string>
-				<key>placeholder</key>
-				<string>ghp_…</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-			</dict>
-			<key>description</key>
-			<string>GitHub Token. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. (Only needed for showing notifications via `ghn`.)</string>
-			<key>label</key>
-			<string>Notifications</string>
-			<key>type</key>
-			<string>textfield</string>
-			<key>variable</key>
-			<string>github_token_from_alfred_prefs</string>
 		</dict>
 	</array>
 	<key>version</key>

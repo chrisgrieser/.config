@@ -11,12 +11,22 @@ function alfredMatcher(str) {
 	return [clean, camelCaseSeparated, str].join(" ") + " ";
 }
 
-/** @param {string} url */
-function httpRequest(url) {
-	const queryURL = $.NSURL.URLWithString(url);
-	const requestData = $.NSData.dataWithContentsOfURL(queryURL);
-	return $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js;
+/**
+ * @param {string} url
+ * @param {string[]} header
+ * @param {string=} extraOpts
+ * @return {string} response
+ */
+function httpRequestWithHeaders(url, header, extraOpts) {
+	let allHeaders = "";
+	for (const line of header) {
+		allHeaders += `-H "${line}" `;
+	}
+	extraOpts = extraOpts || "";
+	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts}`;
+	return app.doShellScript(curlRequest);
 }
+
 
 //──────────────────────────────────────────────────────────────────────────────
 
@@ -28,6 +38,9 @@ function run() {
 	const localRepoFolder = $.getenv("local_repo_folder");
 	const cloneDepth = Number.parseInt($.getenv("clone_depth"));
 	const shallowClone = cloneDepth > 0;
+	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
+	const githubToken =
+		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -56,7 +69,11 @@ function run() {
 
 	// DOCS https://docs.github.com/en/free-pro-team@latest/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	// `type=all` includes owned repos and member repos
-	const response = httpRequest(`https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`);
+	const apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
+	const headers = ["Accept: application/vnd.github.v3+json", "X-GitHub-Api-Version: 2022-11-28"];
+	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
+
+	const response = httpRequestWithHeaders(apiURL, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
@@ -97,7 +114,6 @@ function run() {
 				type += "📂 ";
 				matcher += "local ";
 			}
-
 
 			// extra info
 			if (repo.fork) type += "🍴 ";
