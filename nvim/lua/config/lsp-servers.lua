@@ -169,8 +169,14 @@ extraServerConfig.emmylua_ls = {
 		-- disable formatting in favor of stylua
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+		client.server_capabilities.semanticTokensProvider = {} ---@diagnostic disable-line: missing-fields
 	end,
-	capabilities = {},
+	settings = {
+		Lua = {
+			completion = { postfix = "." }, -- useful for `table.insert` and the like
+			signature = { detailSignatureHelper = true },
+		},
+	},
 }
 
 --------------------------------------------------------------------------------
