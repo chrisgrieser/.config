@@ -11,7 +11,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- integration of external linter/formatter
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	emmylua_ls = "emmylua_ls", -- lua type checking
+	emmylua_ls = "emmylua_ls", -- improved lua LSP
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
@@ -162,6 +162,11 @@ extraServerConfig.lua_ls = {
 			workspace = { checkThirdParty = "Disable" },
 		},
 	},
+	on_attach = function(client)
+		if vim.list_contains(masonDependencies, "emmylua_ls") then
+			client.server_capabilities.foldingRangeProvider = false
+		end
+	end,
 }
 
 -- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
@@ -170,9 +175,6 @@ extraServerConfig.emmylua_ls = {
 		-- disable formatting in favor of stylua
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
-
-		-- annoying overrides of my `return` highlighting
-		client.server_capabilities.semanticTokensProvider = {} ---@diagnostic disable-line: missing-fields
 	end,
 	settings = {
 		Lua = {
@@ -381,8 +383,8 @@ extraServerConfig.typos_lsp = {
 -- Not installed via `mason`, but included in Xcode Command Line Tools (which
 -- are usually installed on macOS-dev devices as they are needed for `homebrew`)
 if jit.os == "OSX" then
-	---@diagnostic disable-next-line: param-type-not-match
 	vim.lsp.config("sourcekit", {
+		cmd = { "sourcekit-lsp" }, -- needed for `emmylua`
 		root_markers = {
 			".git",
 			"info.plist", -- Alfred dirs
