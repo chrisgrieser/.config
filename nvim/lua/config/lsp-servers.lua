@@ -150,7 +150,7 @@ extraServerConfig.lua_ls = {
 				},
 			},
 			hint = { -- inlay hints
-				enable = true,
+				enable = not vim.list_contains(masonDependencies, "emmylua_ls"),
 				setType = true,
 				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
@@ -163,8 +163,10 @@ extraServerConfig.lua_ls = {
 		},
 	},
 	on_attach = function(client)
+		-- disable redundant LSP functionalities
 		if vim.list_contains(masonDependencies, "emmylua_ls") then
 			client.server_capabilities.renameProvider = false
+			client.server_capabilities.referencesProvider = false
 		end
 	end,
 }
@@ -185,7 +187,7 @@ extraServerConfig.emmylua_ls = {
 			signature = { detailSignatureHelper = true },
 			diagnostics = {
 				disable = {
-					"unbalanced-assignments", -- too many fale positives rn
+					"unbalanced-assignments", -- too many false positives rn
 				},
 			},
 		},

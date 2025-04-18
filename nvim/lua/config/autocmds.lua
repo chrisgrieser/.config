@@ -476,15 +476,3 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 --------------------------------------------------------------------------------
-
--- SOURCE https://github.com/OXY2DEV/ui.nvim/wiki/Guide:-UI
--- local ns = vim.api.nvim_create_namespace("ui");
---
--- vim.ui_attach(ns, {
--- 	ext_messages = true,
--- 	ext_cmdline = false,
--- }, function (event, ...) ---@diagnostic disable-line: redundant-parameter
--- 	if vim.startswith(event, "win_") then return end
--- 	local args = { ... }
--- 	vim.notify(event)
--- end);

@@ -18,8 +18,8 @@ local config = {
 	statusbarMaxLength = 30,
 	icons = { -- set to nil to use `mini.icons` filetype icon, set to "" to disable
 		oldFile = "󰋚",
-		altBuf = "󰯬",
-		mostChangedFile = "",
+		altBuf = "󰐤", -- 󰯬
+		mostChangedFile = "󰓏",
 	},
 	ignore = { -- literal match in whole string
 		oldfiles = {
@@ -81,9 +81,9 @@ end
 local function getMostChangedFile()
 	-- get list of changed files
 	local gitResponse = vim.system({ "git", "diff", "--numstat", "." }):wait()
-	if gitResponse.code ~= 0 then return nil, "Not in git repo." end
+	if gitResponse.code ~= 0 or not gitResponse.stdout then return nil, "Not in git repo." end
 	local changedFiles = vim.split(gitResponse.stdout, "\n", { trimempty = true })
-	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout)
+	local gitroot = vim.trim(vim.system({ "git", "rev-parse", "--show-toplevel" }):wait().stdout or "")
 	if #changedFiles == 0 then return nil, "No files with changes found." end
 
 	-- identify file with most changes
@@ -99,7 +99,7 @@ local function getMostChangedFile()
 		local nonExistent = vim.uv.fs_stat(absPath) == nil
 		if ignored or nonExistent then return end
 
-		local changes = tonumber(added) + tonumber(deleted)
+		local changes = assert(tonumber(added)) + assert(tonumber(deleted))
 		if changes > mostChanges then
 			mostChanges = changes
 			targetFile = absPath
