@@ -114,11 +114,8 @@ local themes = {
 				colors.comment = "#767fb1" -- bit more contrast (original: #636da6)
 			end,
 			on_highlights = function(hl, colors)
-				-- emphasize `return`
-				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
-
 				-- general
-				hl["@keyword.break"] = { fg = colors.magenta2, bold = true }
+				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
 				hl.Comment = { fg = colors.comment, italic = false }
@@ -130,11 +127,10 @@ local themes = {
 				hl.Bold = { bold = true }
 				hl.Italic = { italic = true }
 
-				-- FIX wrong background color for icons of the source `path`
-				hl.BlinkCmpKindFile = { link = "LspKindText" }
-
-				-- make matches stand out more
-				hl.BlinkCmpLabelMatch = { fg = colors.yellow }
+				-- blink.cmp
+				hl.BlinkCmpKindFile = { link = "LspKindText" } -- FIX wrong bg for icons with source `path`
+				hl.BlinkCmpLabelDetail = { link = "Comment" } -- FIX wrong color
+				hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
 				-- color bg, not fg (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }

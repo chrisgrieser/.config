@@ -61,7 +61,7 @@ local function openNotif(idx)
 		border = vim.o.winborder --[[@as "rounded"|"single"|"double"]],
 		wo = {
 			winhighlight = table.concat(highlights, ","),
-			wrap = false,
+			wrap = notif.ft ~= "lua",
 			statuscolumn = " ", -- adds padding
 			cursorline = true,
 			colorcolumn = "",

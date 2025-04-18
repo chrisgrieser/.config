@@ -1,7 +1,7 @@
 {
 	"runtime.version": "LuaJIT",
 	"diagnostics": {
-		"globals": ["vim", "Snacks"],
+		"globals": ["vim", "Snacks", "Chainsaw"],
 		"unusedLocalExclude": ["_*"]
 	},
 	"workspace": {
