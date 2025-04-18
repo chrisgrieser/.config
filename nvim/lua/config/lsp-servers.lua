@@ -162,11 +162,6 @@ extraServerConfig.lua_ls = {
 			workspace = { checkThirdParty = "Disable" },
 		},
 	},
-	on_attach = function(client)
-		if vim.list_contains(masonDependencies, "emmylua_ls") then
-			client.server_capabilities.foldingRangeProvider = false
-		end
-	end,
 }
 
 -- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
@@ -175,6 +170,9 @@ extraServerConfig.emmylua_ls = {
 		-- disable formatting in favor of stylua
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+
+		-- folds too much on kind `comment`
+		client.server_capabilities.foldingRangeProvider = false
 	end,
 	settings = {
 		Lua = {
@@ -306,7 +304,7 @@ local function detachIfObsidianOrIcloud(client, bufnr)
 	local iCloudDocs = vim.startswith(path, os.getenv("HOME") .. "/Library/Mobile Documents/")
 	if obsiDir or (iCloudDocs and client.name ~= "ltex_plus") then
 		-- defer to ensure client is already attached
-		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 1000)
+		vim.defer_fn(function() vim.lsp.buf_detach_client(bufnr, client.id) end, 500)
 	end
 end
 
