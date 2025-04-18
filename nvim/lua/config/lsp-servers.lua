@@ -133,6 +133,7 @@ extraServerConfig.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
+				enable = not vim.list_contains(masonDependencies, "emmylua_ls"),
 				callSnippet = "Disable", -- signature help more useful here
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
@@ -169,6 +170,8 @@ extraServerConfig.emmylua_ls = {
 		-- disable formatting in favor of stylua
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
+
+		-- annoying overrides of my `return` highlighting
 		client.server_capabilities.semanticTokensProvider = {} ---@diagnostic disable-line: missing-fields
 	end,
 	settings = {
