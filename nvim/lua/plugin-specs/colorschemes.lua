@@ -131,6 +131,7 @@ local themes = {
 				-- blink.cmp
 				hl.BlinkCmpKindFile = { link = "LspKindText" } -- FIX wrong bg for icons with source `path`
 				hl.BlinkCmpLabelDetail = { link = "Comment" } -- FIX wrong color
+				hl.BlinkCmpLabelDescription = { link = "NonText" } -- FIX wrong color
 				hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
 				-- color bg, not fg (TODO INFO ERROR WARN)

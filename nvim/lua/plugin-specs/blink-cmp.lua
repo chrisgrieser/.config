@@ -110,8 +110,8 @@ return {
 						{ "label", "label_description", "kind_icon", gap = 1 },
 					},
 					components = {
-						label = { width = { max = 50 } },
-						label_description = { width = { max = 20 } },
+						label = { width = { max = 45 } },
+						label_description = { width = { max = 15 } },
 						kind_icon = {
 							text = function(ctx)
 								local source, client = ctx.item.source_id, vim.lsp.get_client_by_id(ctx.item.client_id)
