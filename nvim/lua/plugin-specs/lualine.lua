@@ -41,7 +41,9 @@ local function countLspRefs()
 				vim.b.lspReference_count = nil
 				return
 			end
-			local refsInFile = vim.iter(refs):filter(function(r) return thisFile == r.uri end):totable()
+			local refsInFile = vim.iter(refs)
+				:filter(function(r) return thisFile == r.uri end)
+				:totable()
 			local inFile, inWorkspace = #refsInFile - 1, #refs - 1 -- -1 for current occurrence
 			local text = inFile == inWorkspace and inFile or (inFile .. "(" .. inWorkspace .. ")")
 
@@ -74,7 +76,7 @@ return {
 					"datetime",
 					style = "%H:%M:%S",
 					-- make the `:` blink
-					fmt = function(time) return os.time() % 2 == 0 and time or (time or ""):gsub(":", " ") end,
+					fmt = function(time) return os.time() % 2 == 0 and time or time:gsub(":", " ") end,
 					cond = function() return vim.o.columns > 120 end, -- only if window is maximized
 				},
 			},
@@ -105,9 +107,9 @@ return {
 				{ -- file name & icon
 					function()
 						local maxLength = 30
-						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0)) or ""
-						-- if name == "" then name = vim.bo.ft or "" end
-						-- if name == "" then name = "---" end
+						local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+						if name == "" then name = vim.bo.ft end
+						if name == "" then name = "---" end
 						local displayName = #name < maxLength and name
 							or vim.trim(name:sub(1, maxLength)) .. "…"
 
