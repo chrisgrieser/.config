@@ -1,0 +1,15 @@
+{
+	"runtime.version": "LuaJIT",
+	"diagnostics": {
+		"globals": ["vim"],
+		"unusedLocalExclude": ["_*"]
+	},
+	"workspace": {
+		"ignoreDir": ["debug", "templates"],
+		"library": [
+			"/opt/homebrew/Cellar/neovim/0.11.0/share/nvim/runtime",
+			"$HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/3rd/luv/"
+		]
+	},
+	"$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/refs/heads/main/crates/emmylua_code_analysis/resources/schema.json"
+}

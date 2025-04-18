@@ -1,4 +1,5 @@
 local spellfixes = {
+	cleint = "client",
 	iocn = "icon",
 	Brwoser = "Browser",
 	Markdwon = "Markdown",

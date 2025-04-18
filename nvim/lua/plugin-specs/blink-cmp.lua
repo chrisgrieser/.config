@@ -114,14 +114,13 @@ return {
 						label_description = { width = { max = 20 } },
 						kind_icon = {
 							text = function(ctx)
-								local source, client = ctx.item.source_id, ctx.item.client_id
-								local lspName = client and vim.lsp.get_client_by_id(client).name
+								local source, client = ctx.item.source_id, vim.lsp.get_client_by_id(ctx.item.client_id)
 
 								if source == "cmdline" then return "" end
 								if source == "snippets" then return "󰩫" end
 								if source == "buffer" then return "﬘" end
 								if source == "path" then return "" end
-								if lspName == "emmet_language_server" then return "" end
+								if client and client.name == "emmet_language_server" then return "" end
 								return ctx.kind_icon
 							end,
 						},

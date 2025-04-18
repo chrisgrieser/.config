@@ -1432,7 +1432,7 @@
 	  releases page instead.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the repo URL.
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
-- Access your repositories via `gmy`.
+- Access your repositories via `gmy`. (Limited to the 100 repos last updated.)
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: If the repo is available locally on your device, open it in
 	  the terminal. Otherwise, open the repo's GitHub page.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the repo's GitHub page.
@@ -1440,15 +1440,15 @@
 	+ &lt;kbd&gt;⌃⏎&lt;/kbd&gt;: Clone the repo to a local folder and open in the Terminal.
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
-	+ To include private repos, requires a [GitHub
+	+ To include private repos, requires [GitHub
 	  Token](https://github.com/settings/tokens) with the respective access.
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
-- Access Pull Requests (PRs) you have opened with the keyword `gpr`.
+- Access PRs you have opened with the keyword `gpr`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
-	+ To include private PRs, requires a [GitHub
+	+ To include private PRs, requires [GitHub
 	  Token](https://github.com/settings/tokens) with the respective access.
 - Directly open your GitHub notification via `ghn`.
 	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
@@ -2045,7 +2045,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.8.3</string>
+	<string>1.9.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -11,6 +11,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- integration of external linter/formatter
 	emmet_language_server = "emmet-language-server", -- css/html snippets
+	emmylua_ls = "emmylua_ls", -- lua type checking
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
@@ -161,6 +162,9 @@ extraServerConfig.lua_ls = {
 		},
 	},
 }
+
+-- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
+extraServerConfig.emmylua_ls = {}
 
 --------------------------------------------------------------------------------
 -- PYTHON
