@@ -1,12 +1,13 @@
 -- CONFIG the first theme in the list is used
 local darkThemes = {
+	"cyberpunk",
+	"Afterglow (Gogh)",
 	"Kanagawa (Gogh)",
 	"MaterialDesignColors",
 	"ChallengerDeep",
-	"Afterglow (Gogh)",
-	"cyberpunk",
 }
 local lightThemes = {
+	"Ef-Light",
 	"Ivory Light (terminal.sexy)",
 	"Solar Flare Light (base16)",
 }
