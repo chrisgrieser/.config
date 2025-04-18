@@ -164,7 +164,14 @@ extraServerConfig.lua_ls = {
 }
 
 -- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
-extraServerConfig.emmylua_ls = {}
+extraServerConfig.emmylua_ls = {
+	on_attach = function(client)
+		-- disable formatting in favor of stylua
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end,
+	capabilities = {},
+}
 
 --------------------------------------------------------------------------------
 -- PYTHON
@@ -255,7 +262,9 @@ extraServerConfig.ts_ls = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-extraServerConfig.ts_ls.settings.javascript = extraServerConfig.ts_ls.settings.typescript
+if extraServerConfig.ts_ls.settings then
+	extraServerConfig.ts_ls.settings.javascript = extraServerConfig.ts_ls.settings.typescript
+end
 
 --------------------------------------------------------------------------------
 -- JSON & YAML
@@ -279,7 +288,7 @@ extraServerConfig.yamlls = {
 
 ---Helper function, as ltex etc lack ignore files
 ---@param client vim.lsp.Client
----@param bufnr number
+---@param bufnr integer
 local function detachIfObsidianOrIcloud(client, bufnr)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local obsiDir = #vim.fs.find(".obsidian", { path = path, upward = true, type = "directory" }) > 0
@@ -363,6 +372,7 @@ extraServerConfig.typos_lsp = {
 -- Not installed via `mason`, but included in Xcode Command Line Tools (which
 -- are usually installed on macOS-dev devices as they are needed for `homebrew`)
 if jit.os == "OSX" then
+	---@diagnostic disable-next-line: param-type-not-match
 	vim.lsp.config("sourcekit", {
 		root_markers = {
 			".git",

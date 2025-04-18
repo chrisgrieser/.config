@@ -249,7 +249,7 @@ local textobjRemaps = {
 	{ "e", "`", "", "backtick" }, ----- t[e]mplate string / inline cod[e]
 }
 for _, value in pairs(textobjRemaps) do
-	local remap, original, icon, label = unpack(value)
+	local remap, original, icon, label = unpack(value) ---@diagnostic disable-line: unbalanced-assignments
 	keymap({ "o", "x" }, "i" .. remap, "i" .. original, { desc = icon .. " inner " .. label })
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
