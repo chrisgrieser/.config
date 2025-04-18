@@ -324,7 +324,7 @@ local function addFavicons(bufnr)
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local hasParser, urlQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-	if not hasParser then return end
+	if not hasParser or not urlQuery then return end
 	local hasParserForFt, _ = pcall(vim.treesitter.get_parser, bufnr)
 	if not hasParserForFt then return end
 
@@ -474,3 +474,5 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	-- save all
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
+--------------------------------------------------------------------------------
+
