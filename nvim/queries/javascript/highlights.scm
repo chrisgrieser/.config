@@ -1,6 +1,6 @@
 ; extends
 
-; `break` statements should get same styling as return statements
-; (though for some reason, the highlight group is combined instead of getting
-; higher priority, as is the case with lua :/)
-(break_statement) @keyword.return
+; `break` and `return` statements with custom highlight, higher priority than
+; LSP semantic tokens (using 125) https://neovim.io/doc/user/treesitter.html#treesitter-highlight-priority
+((break_statement) @keyword.return (#set! priority 130))
+("return" @keyword.return (#set! priority 130))
