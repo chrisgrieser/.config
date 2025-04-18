@@ -1,4 +1,4 @@
--- vim: foldlevel=1
+-- vim: foldlevel=2
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 ---@module "snacks"
@@ -199,6 +199,35 @@ return {
 					exclude = { ".DS_Store", "*.docx", "*.zip", "*.pptx", "*.svg" },
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
+					actions = {
+						complete_and_add_colon = function(picker)
+							-- snacks allows opening files with `file:lnum`, but it only
+							-- matches if the filename is complete. With this action, we
+							-- complete the filename if using the 1st colon in the query.
+							local query = vim.api.nvim_get_current_line()
+							local file = picker:current().file
+							if not file or query:find(":") then
+								vim.fn.feedkeys(":", "n")
+								return
+							end
+							vim.api.nvim_set_current_line(file .. ":")
+							vim.cmd.startinsert { bang = true }
+						end,
+						toggle_hidden_and_ignored = function(picker)
+							picker.opts["hidden"] = not picker.opts.hidden
+							picker.opts["ignored"] = not picker.opts.ignored
+
+							-- remove `--ignore-file` extra arg
+							picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
+							local noIgnoreFileArgs = vim.iter(picker.opts.args)
+								:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
+								:totable()
+							picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
+								or picker.opts["_originalArgs"]
+
+							picker:find()
+						end,
+					},
 				},
 				recent = {
 					layout = "small_no_preview",
@@ -353,38 +382,11 @@ return {
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
-				complete_and_add_colon = function(picker)
-					-- snacks allows opening files with `file:lnum`, but it only
-					-- matches if the filename is complete. With this action, we
-					-- complete the filename if using the 1st colon in the query.
-					local query = vim.api.nvim_get_current_line()
-					local file = picker:current().file
-					if not file or query:find(":") then
-						vim.fn.feedkeys(":", "n")
-						return
-					end
-					vim.api.nvim_set_current_line(file .. ":")
-					vim.cmd.startinsert { bang = true }
-				end,
 				list_down_wrapping = function(picker)
 					local allVisible = #picker.list.items -- picker:count() only counts unfiltered
 					local current = picker.list.cursor -- picker:current().idx incorrect for `smart` source
 					local action = current == allVisible and "list_top" or "list_down"
 					picker:action(action)
-				end,
-				toggle_hidden_and_ignored = function(picker)
-					picker.opts["hidden"] = not picker.opts.hidden
-					picker.opts["ignored"] = not picker.opts.ignored
-
-					-- remove `--ignore-file` extra arg
-					picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
-					local noIgnoreFileArgs = vim.iter(picker.opts.args)
-						:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
-						:totable()
-					picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
-						or picker.opts["_originalArgs"]
-
-					picker:find()
 				end,
 				reveal_in_macOS_Finder = function(picker)
 					if jit.os ~= "OSX" then return end
