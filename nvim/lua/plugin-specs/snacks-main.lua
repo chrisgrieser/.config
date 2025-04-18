@@ -49,9 +49,35 @@ return {
 		{ "ö", function() Snacks.words.jump(1, true) end, desc = "󰗲 Next reference" },
 		{ "Ö", function() Snacks.words.jump(-1, true) end, desc = "󰗲 Prev reference" },
 		{ "<leader>g?", function() Snacks.git.blame_line() end, desc = "󰆽 Blame line" },
+		{
+			"<leader>ee",
+			function()
+				vim.ui.input({
+					prompt = "󰢱 Eval",
+					win = { ft = "lua" }, --> this part is snacks-specific
+				}, function(expr)
+					if not expr then return end
+					local result = vim.inspect(vim.fn.luaeval(expr))
+					local opts = { title = "Eval", icon = "󰢱", ft = "lua" }
+					vim.notify(result, vim.log.levels.DEBUG, opts)
+				end)
+			end,
+			desc = "󰢱 Eval lua expr",
+		},
 	},
 	---@type snacks.Config
 	opts = {
+		input = {
+			icon = "",
+			win = {
+				relative = "editor",
+				backdrop = 60,
+				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+				title_pos = "left",
+				width = 50,
+				row = math.ceil(vim.o.lines / 2) - 3,
+			},
+		},
 		bigfile = {
 			notify = true,
 			size = 1024 * 1024, -- 1.0MB

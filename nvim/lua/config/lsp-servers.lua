@@ -162,6 +162,11 @@ extraServerConfig.lua_ls = {
 			workspace = { checkThirdParty = "Disable" },
 		},
 	},
+	on_attach = function(client)
+		if vim.list_contains(masonDependencies, "emmylua_ls") then
+			client.server_capabilities.renameProvider = false
+		end
+	end,
 }
 
 -- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
@@ -171,13 +176,18 @@ extraServerConfig.emmylua_ls = {
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 
-		-- folds too much on kind `comment`
+		-- FIX folds too much on kind `comment`
 		client.server_capabilities.foldingRangeProvider = false
 	end,
 	settings = {
 		Lua = {
 			completion = { postfix = "." }, -- useful for `table.insert` and the like
 			signature = { detailSignatureHelper = true },
+			diagnostics = {
+				disable = {
+					"unbalanced-assignments", -- too many fale positives rn
+				},
+			},
 		},
 	},
 }

@@ -324,7 +324,7 @@ local function addFavicons(bufnr)
 	if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then return end
 	local hasParser, urlQuery =
 		pcall(vim.treesitter.query.parse, "comment", "(uri) @string.special.url")
-	if not hasParser or not urlQuery then return end
+	if not hasParser then return end
 	local hasParserForFt, _ = pcall(vim.treesitter.get_parser, bufnr)
 	if not hasParserForFt then return end
 
@@ -334,6 +334,7 @@ local function addFavicons(bufnr)
 	local langTree = vim.treesitter.get_parser(bufnr)
 	if not langTree then return end
 	langTree:for_each_tree(function(tree, _)
+		if not urlQuery.iter_captures then return end
 		local commentUrlNodes = urlQuery:iter_captures(tree:root(), bufnr)
 		vim.iter(commentUrlNodes):each(function(_, node)
 			local nodeText = vim.treesitter.get_node_text(node, bufnr)
@@ -341,7 +342,7 @@ local function addFavicons(bufnr)
 			local icon = favicons[sitename]
 			if not icon then return end
 
-			local row, col = node:start()
+			local row, col = node:start() ---@cast col integer
 			vim.api.nvim_buf_set_extmark(bufnr, ns, row, col, {
 				virt_text = { { icon .. " ", "Comment" } },
 				virt_text_pos = "inline",
@@ -476,3 +477,14 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 end
 --------------------------------------------------------------------------------
 
+-- SOURCE https://github.com/OXY2DEV/ui.nvim/wiki/Guide:-UI
+-- local ns = vim.api.nvim_create_namespace("ui");
+--
+-- vim.ui_attach(ns, {
+-- 	ext_messages = true,
+-- 	ext_cmdline = false,
+-- }, function (event, ...) ---@diagnostic disable-line: redundant-parameter
+-- 	if vim.startswith(event, "win_") then return end
+-- 	local args = { ... }
+-- 	vim.notify(event)
+-- end);
