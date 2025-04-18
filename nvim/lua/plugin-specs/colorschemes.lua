@@ -116,9 +116,10 @@ local themes = {
 			on_highlights = function(hl, colors)
 				-- general
 				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
+				hl["@keyword"].italic = false
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
-				hl.Comment = { fg = colors.comment, italic = false }
+				hl.Comment.italic = false
 				hl.LspSignatureActiveParameter = { link = "Visual" }
 				hl.Added = { fg = colors.green2 }
 				hl.Removed = { fg = colors.red }
