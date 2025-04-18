@@ -5,7 +5,7 @@
 		"unusedLocalExclude": ["_*"]
 	},
 	"workspace": {
-		"ignoreDir": ["debug", "templates", "TEMP*"]
+		"ignoreDir": ["debug", "templates"]
 	},
 	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json"
 }
