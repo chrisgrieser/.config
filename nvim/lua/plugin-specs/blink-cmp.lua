@@ -122,8 +122,6 @@ return {
 								if source == "buffer" then return "﬘" end
 								if source == "path" then return "" end
 								if clientName == "emmet_language_server" then return "" end
-								if clientName == "lua_ls" then return " " .. ctx.kind_icon end
-								if clientName == "emmylua_ls" then return "󰬌 " .. ctx.kind_icon end
 								return ctx.kind_icon
 							end,
 						},
