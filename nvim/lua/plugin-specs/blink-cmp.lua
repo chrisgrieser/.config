@@ -115,12 +115,15 @@ return {
 						kind_icon = {
 							text = function(ctx)
 								local source, client = ctx.item.source_id, vim.lsp.get_client_by_id(ctx.item.client_id)
+								local clientName = client and client.name
 
 								if source == "cmdline" then return "" end
 								if source == "snippets" then return "󰩫" end
 								if source == "buffer" then return "﬘" end
 								if source == "path" then return "" end
-								if client and client.name == "emmet_language_server" then return "" end
+								if clientName == "emmet_language_server" then return "" end
+								if clientName == "lua_ls" then return " " .. ctx.kind_icon end
+								if clientName == "emmylua_ls" then return "󰬌 " .. ctx.kind_icon end
 								return ctx.kind_icon
 							end,
 						},
