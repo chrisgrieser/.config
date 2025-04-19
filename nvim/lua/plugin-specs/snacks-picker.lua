@@ -1,4 +1,4 @@
--- vim: foldlevel=2
+-- vim: foldlevel=3
 -- DOCS https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
 --------------------------------------------------------------------------------
 ---@module "snacks"
@@ -110,7 +110,7 @@ return {
 				Snacks.picker.files {
 					title = "󰈮 Local plugins",
 					cwd = vim.fn.stdpath("data") .. "/lazy",
-					exclude = { "*/tests/*", "*/doc/*", "*.toml" },
+					exclude = { "*/tests/*", "*.toml", "*.tmux", "*.txt" },
 					matcher = { filename_bonus = false }, -- folder more important here
 					formatters = { file = { filename_first = false } },
 				}

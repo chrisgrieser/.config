@@ -41,5 +41,20 @@ return {
 				or name == ".env"
 			return not ignoreBuffer -- `false` -> disable in that buffer
 		end,
+		config = function(_, opts)
+			require("supermaven-nvim").setup(opts)
+
+			-- disable while recording
+			vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
+			vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
+
+			-- lualine indicator
+			vim.g.lualineAdd(
+				"sections",
+				"lualine_x",
+				function() return require("supermaven-nvim.api").is_running() and "" or "󱚧" end,
+				"before"
+			)
+		end,
 	},
 }

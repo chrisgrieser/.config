@@ -1,4 +1,8 @@
 {
+  "CONFIG": {
+    "body": "$LINE_COMMENT CONFIG",
+    "prefix": "CONFIG"
+  },
   "DEPRECATION (+date)": {
     "body": "$LINE_COMMENT DEPRECATION (${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE})",
     "prefix": "DEPRECATION"
