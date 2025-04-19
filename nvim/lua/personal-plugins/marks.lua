@@ -174,7 +174,7 @@ function M.selectMarks(names)
 		prompt = "󰃁 Select mark",
 		format_item = function(m)
 			local filename = vim.fs.basename(m.path)
-			return (" **%s** %s:[%d]"):format(m.name, filename, m.row)
+			return ("[%s] %s:%d"):format(m.name, filename, m.row)
 		end,
 	}, function(m)
 		if m then gotoMark(m) end

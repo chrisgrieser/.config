@@ -29,6 +29,10 @@
     "body": "---@type table<string, string>",
     "prefix": "Record (type)"
   },
+  "cast (@cast)": {
+    "body": "---@cast col ${1:string}",
+    "prefix": "cast (@cast)"
+  },
   "count occurrences in string": {
     "body": "local _, count = ${1:str}:gsub(\"${2:find}\", \"\")",
     "prefix": "count occurrences in string"
