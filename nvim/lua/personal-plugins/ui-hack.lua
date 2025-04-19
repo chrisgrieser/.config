@@ -1,5 +1,5 @@
 -- INFO redirects cmdline messages to `vim.notify`, silencing `Press Enter to
--- cotninue` prompts.
+-- continue` prompts even with `cmdheight=0`.
 -- REQUIRED a plugin that shows `vim.notify` outside of the cmdline, such as
 -- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
 --------------------------------------------------------------------------------
@@ -26,23 +26,20 @@ local ns = vim.api.nvim_create_namespace("ui-hack")
 local function attach()
 	---@diagnostic disable-next-line: redundant-parameter
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
-		if event ~= "msg_history_show" and event ~= "msg_show" then
-			return
-		elseif event == "msg_history_show" then
-			local messages = ...
-			vim.notify(vim.inspect(messages)) -- 🪚
-			local text = vim.iter(messages):fold("", function(acc, chunk) return acc .. chunk[2][2] end)
-			return
+		if event == "msg_history_show" then
+			local msg = "`:messages` is neither supported nor needed anymore. "
+				.. "Just use your notification plugin's history to see past messages."
+			vim.notify(msg, vim.log.levels.WARN)
 		end
+		if event ~= "msg_show" then return end
 
-		local kind, content, _, _ = ...
-		if vim.list_contains(config.msgKind.ignore, kind) then return end
-
+		local kind, content, _replaceLast, _history = ...
 		if kind == "return_prompt" then
 			local esc = vim.api.nvim_replace_termcodes("<CR>", true, true, true)
 			vim.api.nvim_feedkeys(esc, "n", false)
 			return
 		end
+		if vim.list_contains(config.msgKind.ignore, kind) then return end
 
 		local text = vim.iter(content):fold("", function(acc, chunk) return acc .. chunk[2] end)
 		local notifOpts = { title = kind, icon = config.notification.icon, ft = "text" }
