@@ -6,7 +6,8 @@ local config = {
 	sign = {
 		hlgroup = "@keyword.return",
 		priority = 21, -- gitsigns use 20
-	}
+		icons = { A = "󰬈", B = "󰬉", C = "󰬊" }
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -81,13 +82,10 @@ local function setSignForMark(name)
 	local m = getMark(name)
 	if not m then return end
 
-	local icons = { A = "󰬈", B = "󰬉", C = "󰬊" }
-	local icon = icons[name] or name
-
 	clearSignForMark(m)
 	if markExtmarks[name] then vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name]) end
 	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
-		sign_text = icon,
+		sign_text = config.sign.icons[name] or name,
 		sign_hl_group = config.sign.hlgroup,
 		priority = config.sign.priority,
 	})
