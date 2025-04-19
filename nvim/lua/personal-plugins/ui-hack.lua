@@ -2,7 +2,7 @@
 -- `Press Enter to continue` prompts, even with `cmdheight=0`.
 
 -- REQUIRED 1. a plugin that shows `vim.notify` outside of the cmdline, such as
--- `nvim-notify`, `snacks.notifier`, or `mini.notify`. 
+-- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
 -- 2. a plugin accepts input from outside of the cmdline, such as `snacks.input`.
 -- CAVEAT This does not work with confirmation prompts, such as `conform()`
 --------------------------------------------------------------------------------
@@ -35,9 +35,6 @@ local function attach()
 			local msg = "`:messages` is not supported, but it is also not needed anymore. "
 				.. "Just use the history command of your notification plugin to see past messages."
 			vim.notify(msg, vim.log.levels.WARN)
-		elseif event == "confirm" then
-			local msg = "A confirmation or input prompt was sent, but is not supported and is thus skipped."
-			vim.notify(msg, vim.log.levels.ERROR)
 		end
 		if event ~= "msg_show" then return end
 
@@ -52,6 +49,10 @@ local function attach()
 		-- notification text and options
 		local text = vim.iter(content):fold("", function(acc, chunk) return acc .. chunk[2] end)
 		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- colorize error code when using `snacks`
+		if kind == "confirm" then
+			text = "[NOTE] Confirmation/input prompts are not supported, this text is purely informational.\n\n"
+				.. text
+		end
 
 		local level = vim.log.levels.INFO
 		if kind == "emsg" or vim.endswith(kind, "error") or vim.endswith(kind, "err") then
