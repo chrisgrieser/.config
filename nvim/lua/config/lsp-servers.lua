@@ -193,7 +193,7 @@ extraServerConfig.emmylua_ls = {
 			strict = {
 				requirePath = true,
 				typeCall = true,
-				arrayIndex = false,
+				arrayIndex = false, -- too strict, checks for sparse arrays everywhere
 			},
 		},
 	},
