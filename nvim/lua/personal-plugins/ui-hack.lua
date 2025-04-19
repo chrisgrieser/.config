@@ -1,8 +1,10 @@
 -- INFO This snippet redirects cmdline messages to `vim.notify`, silencing
 -- `Press Enter to continue` prompts, even with `cmdheight=0`.
 
--- REQUIRED a plugin that shows `vim.notify` outside of the cmdline, such as
--- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
+-- REQUIRED 1. a plugin that shows `vim.notify` outside of the cmdline, such as
+-- `nvim-notify`, `snacks.notifier`, or `mini.notify`. 
+-- 2. a plugin accepts input from outside of the cmdline, such as `snacks.input`.
+-- CAVEAT This does not work with confirmation prompts, such as `conform()`
 --------------------------------------------------------------------------------
 
 local config = {
@@ -30,15 +32,18 @@ local function attach()
 	vim.ui_attach(ns, { ext_messages = true }, function(event, ...)
 		-- only affect `msg_show` events
 		if event == "msg_history_show" then
-			local msg = "`:messages` is not, supported but t is also not needed anymore. "
-				.. "Simply use the history command of your notification plugin to see past messages."
+			local msg = "`:messages` is not supported, but it is also not needed anymore. "
+				.. "Just use the history command of your notification plugin to see past messages."
 			vim.notify(msg, vim.log.levels.WARN)
+		elseif event == "confirm" then
+			local msg = "A confirmation or input prompt was sent, but is not supported and is thus skipped."
+			vim.notify(msg, vim.log.levels.ERROR)
 		end
 		if event ~= "msg_show" then return end
 
 		-- ignore & deal with "press enter to continue" prompts
 		local kind, content, _replace, _history = ... -- for `msg_show` only https://neovim.io/doc/user/ui.html#ui-messages
-		if kind == "return_prompt" then -- we're still being blocked, so we need to feedkey `<CR>`
+		if kind == "return_prompt" then -- SIC we're still being blocked, thus need to feedkey `<CR>`
 			local esc = vim.api.nvim_replace_termcodes("<CR>", true, true, true)
 			vim.api.nvim_feedkeys(esc, "n", false)
 		end
@@ -56,11 +61,11 @@ local function attach()
 		end
 
 		local opts = { title = kind, icon = config.notification.icon }
+		if vim.startswith(kind, "lua_") then opts.ft = "lua" end
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
 			if opts.icon then opts.icon = " " .. opts.icon .. " " end
 		end
-		if vim.startswith(kind, "lua_") then opts.ft = "lua" end
 
 		vim.schedule(function() vim.notify(text, level, opts) end)
 	end)
