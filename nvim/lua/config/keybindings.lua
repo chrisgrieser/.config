@@ -37,14 +37,6 @@ keymap("n", "<C-l>", "<C-i>", { desc = "󱋿 Jump forward", unique = false })
 keymap("n", "-", "/")
 keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 
-do
-	-- stylua: ignore start
-	keymap("c", "<CR>", function() require("personal-plugins.misc").silentCR() end, { desc = " Silent <CR>" })
-	keymap("n", "n", function() require("personal-plugins.misc").silentN("n") end, { desc = " Silent n" })
-	keymap("n", "N", function() require("personal-plugins.misc").silentN("N") end, { desc = " Silent N" })
-	-- stylua: ignore end
-end
-
 -- Goto matching parenthesis (`remap` needed to use builtin `MatchIt` plugin)
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
@@ -308,7 +300,7 @@ do
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then return end
 		vim.api.nvim_win_call(winid, function()
-			local topline = vim.fn.winsaveview().topline
+			local topline = vim.fn.winsaveview().topline --[[@as integer]]
 			vim.fn.winrestview { topline = topline + lines }
 		end)
 	end

@@ -181,7 +181,7 @@ function M.bufferInfo()
 	local longestName = vim.iter(clients)
 		:fold(0, function(acc, client) return math.max(acc, #client.name) end)
 	local lsps = vim.tbl_map(function(client)
-		local pad = (" "):rep(math.min(longestName - #client.name)) .. " "
+		local pad = (" "):rep(math.min(longestName - #client.name) --[[@as integer]]) .. " "
 		local root = client.root_dir and client.root_dir:gsub("/Users/%w+", pseudoTilde)
 			or "*Single file mode*"
 		return ("[%s]%s%s"):format(client.name, pad, root)
@@ -278,51 +278,8 @@ function M.goIndent(direction)
 		local notBlank = upLineText:find("%S")
 	until upIndent < curIndent and notBlank
 
-	local col = upLineText:find("%S") - 1
+	local col = upLineText:find("%S") - 1 ---@cast col integer
 	vim.api.nvim_win_set_cursor(0, { row, col })
-end
-
---------------------------------------------------------------------------------
-
----silence `E486: pattern not found` when pressing `CR` in cmdline
-do
-	local function notFoundMsg(query)
-		local msg = ("[%s] not found."):format(query)
-		vim.notify(msg, vim.log.levels.TRACE, { icon = " ", style = "minimal" })
-	end
-
-	---@param key "n"|"N"
-	function M.silentN(key)
-		local searchQuery = vim.fn.getreg("/")
-		local found = vim.fn.search(searchQuery, "n") > 0 -- `n` = no movement
-		if found then
-			vim.cmd.normal { key, bang = true }
-		else
-			notFoundMsg(searchQuery)
-		end
-	end
-
-	---needs to be bound to `cmap`
-	function M.silentCR()
-		local function feedkey(k)
-			local esc = vim.api.nvim_replace_termcodes(k, true, true, true)
-			vim.api.nvim_feedkeys(esc, "n", false)
-		end
-		if vim.fn.getcmdtype() ~= "/" then
-			feedkey("<CR>")
-			return
-		end
-
-		local searchQuery = vim.fn.getcmdline()
-		local found = vim.fn.search(searchQuery, "n") > 0 -- `n` = no movement
-
-		if found then
-			feedkey("<CR>")
-		else
-			feedkey("<C-c>") -- leaving cmdline via `Esc` somehow does not work
-			notFoundMsg(searchQuery)
-		end
-	end
 end
 
 --------------------------------------------------------------------------------
