@@ -27,6 +27,8 @@ return {
 		},
 		log_level = "off",
 		ignore_filetypes = {
+			"snacks_picker_input",
+			"snacks_input",
 			"gitcommit",
 			"gitrebase",
 			"bib",
@@ -35,18 +37,15 @@ return {
 			-- the filetype of critical files (e.g. zsh files with API keys)
 			"text",
 		},
-		condition = function()
-			-- not when recording or in a special buffer
-			if vim.fn.reg_recording() ~= "" then return false end
-			if vim.bo.buftype ~= "" then return false end
-
-			-- file based
-			local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-			local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
-			local ignoreBuffer = parent:find("private dotfiles")
-				or name:lower():find("recovery")
-				or name == ".env"
-			return not ignoreBuffer -- `false` -> disable in that buffer
-		end,
+		-- BUG once false, permanently shuts down supermaven https://github.com/supermaven-inc/supermaven-nvim/pull/130
+		-- condition = function()
+		-- 	if vim.bo.buftype ~= "" then return false end
+		-- 	local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+		-- 	local name = vim.fs.basename(vim.api.nvim_buf_get_name(0))
+		-- 	local ignoreBuffer = parent:find("private dotfiles")
+		-- 		or name:lower():find("recovery")
+		-- 		or name == ".env"
+		-- 	return not ignoreBuffer -- `false` -> disable in that buffer
+		-- end,
 	},
 }
