@@ -6,7 +6,7 @@ local config = {
 	sign = {
 		hlgroup = "@keyword.return",
 		priority = 21, -- gitsigns use 20
-		icons = { A = "󰬈", B = "󰬉", C = "󰬊" }
+		icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋" },
 	},
 }
 
@@ -19,7 +19,7 @@ local M = {}
 ---@field row integer
 ---@field col integer
 ---@field bufnr integer
----@field path integer
+---@field path string
 --------------------------------------------------------------------------------
 
 ---@param msg string
@@ -46,9 +46,9 @@ end
 ---@param name string
 ---@return Markobj|nil -- nil if mark is not set
 local function getMark(name)
-	local mRow, mCol, mBufnr, mPath = unpack(vim.api.nvim_get_mark(name, {}))
-	local mark = { name = name, row = mRow, col = mCol, bufnr = mBufnr, path = mPath }
-	if mRow ~= 0 then return mark --[[@as Markobj]] end
+	local m = vim.api.nvim_get_mark(name, {})
+	local mark = { name = name, row = m[1], col = m[2], bufnr = m[3], path = m[4] } --[[@as Markobj]]
+	if m[1] ~= 0 then return mark end
 end
 
 ---@param names string[]
@@ -84,7 +84,7 @@ local function setSignForMark(name)
 
 	clearSignForMark(m)
 	if markExtmarks[name] then vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name]) end
-	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 1, {
+	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 0, {
 		sign_text = config.sign.icons[name] or name,
 		sign_hl_group = config.sign.hlgroup,
 		priority = config.sign.priority,
