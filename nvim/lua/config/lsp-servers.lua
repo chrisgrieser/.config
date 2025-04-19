@@ -187,8 +187,13 @@ extraServerConfig.emmylua_ls = {
 			signature = { detailSignatureHelper = true },
 			diagnostics = {
 				disable = {
-					"unbalanced-assignments", -- PENDING too many false positives right now
+					"type-not-found", -- PENDING https://github.com/folke/lazydev.nvim/issues/86
 				},
+			},
+			strict = {
+				requirePath = true,
+				typeCall = true,
+				arrayIndex = true,
 			},
 		},
 	},
