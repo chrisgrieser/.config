@@ -4,15 +4,7 @@ return {
 	event = "InsertEnter",
 	keys = {
 		{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
-		{
-			"<leader>oa",
-			function()
-				vim.cmd.SupermavenToggle()
-				local text = require("supermaven-nvim.api").is_running() and "enabled" or "disabled"
-				vim.notify(text, nil, { title = "Supermaven", icon = "󰚩" })
-			end,
-			desc = "󰚩 Supermaven",
-		},
+		{ "<leader>oa", vim.cmd.SupermavenToggle, desc = "󰚩 Supermaven" },
 	},
 	config = function(_, opts)
 		require("supermaven-nvim").setup(opts)
@@ -20,11 +12,13 @@ return {
 		vim.api.nvim_create_autocmd("RecordingEnter", { command = "SupermavenStop" })
 		vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
 
+		-- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
+      require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
+
 		vim.g.lualineAdd(
 			"sections",
 			"lualine_x",
-			function() return require("supermaven-nvim.api").is_running() and "" or "󱚧 " end,
-			"before"
+			function() return require("supermaven-nvim.api").is_running() and "" or "󱚧 " end
 		)
 	end,
 	opts = {
