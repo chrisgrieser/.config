@@ -135,6 +135,7 @@ return {
 				Text = "󰉿", -- `buffer`
 				Snippet = "󰞘", -- `snippets`
 				File = "", -- `path`
+				Module = "", -- prettier braces
 			},
 		},
 	},

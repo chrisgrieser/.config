@@ -25,6 +25,21 @@ return {
 
 		-- disable default keymaps to make the `?` help overview less cluttered
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+
+		-- cleaner vim.ui.select
+		---@type fun(kind?: string): snacks.picker.format
+		require("snacks.picker.format").ui_select = function(kind)
+			return function(item)
+				if kind == "codeaction" then
+					local action = item.item.action ---@type lsp.CodeAction
+					return {
+						{ action.title .. " " },
+						{ action.kind or "", "SnacksPickerSpecial" },
+					}
+				end
+				return { { item.formatted } }
+			end
+		end
 	end,
 
 	keys = {

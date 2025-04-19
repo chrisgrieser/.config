@@ -42,6 +42,7 @@ safeRequire("config.keybindings")
 --------------------------------------------------------------------------------
 
 safeRequire("personal-plugins.git-conflict")
+safeRequire("personal-plugins.ui-hack")
 safeRequire("config.backdrop-underline-fix")
 
 vim.api.nvim_create_autocmd("InsertEnter", {
