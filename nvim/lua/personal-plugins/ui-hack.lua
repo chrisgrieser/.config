@@ -13,18 +13,10 @@
 
 local config = {
 	msgKind = { -- existing kinds: https://neovim.io/doc/user/ui.html#ui-messages
-		ignore = {
-			"search_cmd",
-			"return_prompt",
-		},
-		mini = { -- more minimal style when `snacks.notifier` is used
-			"bufwrite",
-			"undo",
-		},
+		ignore = { "search_cmd", "return_prompt" },
+		mini = { "bufwrite", "undo" }, -- more minimal style when `snacks.notifier` is used
 	},
-	notification = {
-		icon = "󰍩",
-	},
+	notification = { icon = "󰍩" },
 }
 
 --------------------------------------------------------------------------------
