@@ -2,25 +2,13 @@ return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
 	keys = {
-		{
-			"#",
-			function()
-				if not package.loaded["ccc"] then
-					vim.cmd.Lazy("load ccc.nvim")
-				else
-					vim.cmd.CccPick()
-				end
-			end,
-			desc = " Color picker",
-		},
+		{ "#", "<cmd>CccHighlighterEnable<CR><cmd>CccPick<CR>", desc = " Highlights & Color picker" },
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
-	ft = "css",
 	config = function()
 		local ccc = require("ccc")
 		ccc.setup {
-			point_char = "●",
-			point_color = "",
+			point_char = "󰣏",
 			win_opts = {
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 			},

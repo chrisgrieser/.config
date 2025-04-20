@@ -68,23 +68,24 @@ return {
 	config = function(_, opts)
 		require("gitsigns").setup(opts)
 
-		-- STATUSLINE CHANGE COUNT
+		-- STATUSLINE COMPONENTS
 		-- INFO Using gitsigns.nvim's data since lualine's builtin component
 		-- is updated much less frequently and is thus often out of sync
 		-- with the gitsigns in the signcolumn.
-		vim.g.lualineAdd("sections", "lualine_y", {
-			"diff",
-			source = function()
-				local gs = vim.b.gitsigns_status_dict
-				if not gs then return end
-				return { added = gs.added, modified = gs.changed, removed = gs.removed }
-			end,
-		}, "before")
+		vim.defer_fn(function()
+			vim.g.lualineAdd("sections", "lualine_y", {
+				"diff",
+				source = function()
+					local gs = vim.b.gitsigns_status_dict
+					if not gs then return end
+					return { added = gs.added, modified = gs.changed, removed = gs.removed }
+				end,
+			}, "before")
 
-		-- STATUSLINE SIGN BASE
-		vim.g.lualineAdd("sections", "lualine_y", {
-			function() return "" end,
-			cond = function() return vim.b.gitsignsPrevChanges end,
-		}, "before")
+			vim.g.lualineAdd("sections", "lualine_y", {
+				function() return "" end,
+				cond = function() return vim.b.gitsignsPrevChanges end,
+			}, "before")
+		end, 1000)
 	end,
 }

@@ -12,9 +12,7 @@ return { -- treesitter-based textobjs
 		"TSTextobjectGotoPreviousStart",
 		"TSTextobjectPeekDefinitionCode",
 	},
-	-- SIC yes, configured via treesitter, not this plugin. Also, calling
-	-- treesitter's `setup` a second time is not a problem.
-	main = "nvim-treesitter.configs",
+	main = "nvim-treesitter.configs", -- SIC configured via treesitter, not this plugin
 	opts = {
 		textobjects = {
 			select = {
@@ -22,9 +20,6 @@ return { -- treesitter-based textobjs
 				-- `true` would even remove line breaks from charwise objects,
 				-- thus staying with `false`
 				include_surrounding_whitespace = false,
-			},
-			lsp_interop = { -- for `:TSTextobjectPeekDefinitionCode`
-				floating_preview_opts = { title = " LSP Peek " },
 			},
 		},
 	},
@@ -78,12 +73,14 @@ return { -- treesitter-based textobjs
 				vim.cmd.normal { "c" .. comStr, bang = true }
 				vim.cmd.startinsert { bang = true }
 			end,
-			desc = "󰆈 change single comment",
+			desc = "󰆈 Change single comment",
 		},
 
 		{
 			"dq",
 			function()
+				-- as opposed to regular usage of the textobj, also trims the line
+				-- and preserves the cursor position
 				local cursorBefore = vim.api.nvim_win_get_cursor(0)
 				vim.cmd.TSTextobjectSelect("@comment.outer")
 				vim.cmd.normal { "d", bang = true }
@@ -91,7 +88,7 @@ return { -- treesitter-based textobjs
 				vim.api.nvim_set_current_line(trimmedLine)
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
-			desc = "󰆈 sticky single delete comment",
+			desc = "󰆈 Delete single comment",
 		},
 	},
 }
