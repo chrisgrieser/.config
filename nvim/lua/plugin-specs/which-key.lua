@@ -74,13 +74,13 @@ return {
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
 			-- stylua: ignore
-			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "g~" }
+			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "g~", "gO" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
-			return map.desc ~= nil
+			return map.desc ~= nil -- only include mappings that have a description
 		end,
 		replace = {
-			desc = { -- redundant info for when displayed in which-key
+			desc = { -- remove redundant info when displayed in which-key
 				{ " outer ", " " },
 				{ " inner ", " " },
 				{ " rest of ", " " },

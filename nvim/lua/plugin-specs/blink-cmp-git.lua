@@ -2,14 +2,14 @@
 --------------------------------------------------------------------------------
 
 return {
-	"saghen/blink.cmp",
+	"saghen/blink.cmp", -- lazy.nvim will merge this config with the `blink.cmp` config
 	dependencies = {
 		{ "Kaiser-Yang/blink-cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 	},
 
 	opts = {
 		sources = {
-			default = { "git", "lsp", "path", "luasnip", "buffer" }, -- add `git` to the list
+			default = { "git", "lsp", "path", "snippets", "buffer" }, -- add `git` to the list
 			per_filetype = { gitcommit = { "git" } },
 
 			providers = {

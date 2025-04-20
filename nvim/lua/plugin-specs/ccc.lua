@@ -6,6 +6,7 @@ return {
 			"#",
 			function()
 				vim.cmd.CccHighlighterEnable()
+				vim.notify("Highlights enabled.", nil, { title = "ccc.nvim", icon = "" })
 				vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
 			end,
 			desc = " Color highlights/picker",
@@ -25,7 +26,7 @@ return {
 				filetypes = { "css", "zsh", "lua", "toml" },
 			},
 			pickers = { -- = what colors are highlighted
-				ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
+				ccc.picker.hex_long, -- only long hex to not pick up issue numbers like `#123`
 				ccc.picker.css_rgb,
 				ccc.picker.css_hsl,
 				ccc.picker.ansi_escape(

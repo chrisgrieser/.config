@@ -10,9 +10,9 @@ local config = {
 		detachGitsigns = true,
 	},
 	keys = {
-		leader = "<leader>m",
-		gotoMarker = "m", --> `<leader>mm`
-		upstream = "u", --> `<leader>mu`, …
+		leader = "<leader>t",
+		gotoMarker = "t", --> `<leader>tt`
+		upstream = "u", --> `<leader>tu`, …
 		base = "b",
 		stashed = "s",
 	},
