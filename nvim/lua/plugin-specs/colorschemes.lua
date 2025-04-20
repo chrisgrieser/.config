@@ -1,4 +1,4 @@
--- vim: foldlevel=2
+-- vim: foldlevel=3
 --------------------------------------------------------------------------------
 
 local themes = {
@@ -64,9 +64,8 @@ local themes = {
 					BlinkCmpDocBorder = { link = "FloatBorder" },
 					Pmenu = { bg = "#eadfd6" }, -- more in theme color
 
-					-- FIX wrong background color for icons of the source `buffer`
-					BlinkCmpKindText = { link = "LspKindText" },
-					BlinkCmpKindFile = { link = "LspKindText" },
+					BlinkCmpKindText = { link = "LspKindText" }, -- FIX wrong bg for icons of source `buffer`
+					BlinkCmpKindFile = { link = "LspKindText" }, -- FIX wrong bg for icons of source `buffer`
 
 					-- blink.cmp.git
 					BlinkCmpGitKindPR = { fg = "palette.orange" },
@@ -79,19 +78,17 @@ local themes = {
 					BlinkCmpGitLabelMentionId = { fg = "palette.orange" },
 					BlinkCmpGitKindIconMention = { fg = "palette.orange" },
 
-					-- use grey for debug
-					SnacksNotifierTitleDebug = { fg = "palette.comment" },
+					-- snacks notifier
+					SnacksNotifierTitleDebug = { fg = "palette.comment" }, -- use grey for debug
 					SnacksNotifierIconDebug = { fg = "palette.comment" },
 					SnacksNotifierBorderDebug = { link = "FloatBorder" },
 					SnacksNotifierFooterDebug = { fg = "palette.comment" },
-
-					-- use now unused debug-color for trace to they aren't both grey
-					SnacksNotifierTitleTrace = { link = "NotifyDEBUGTitle" },
+					SnacksNotifierTitleTrace = { link = "NotifyDEBUGTitle" }, -- now unused debug-color for trace so not both grey
 					SnacksNotifierIconTrace = { link = "NotifyDEBUGIcon" },
 					SnacksNotifierBorderTrace = { link = "NotifyDEBUGBorder" },
 					SnacksNotifierFooterTrace = { link = "NotifyDEBUGBorder" },
 
-					-- Snacks
+					-- Snacks picker
 					SnacksIndent = { fg = "#e0cfbd" }, -- less contrast
 					SnacksPicker = { link = "Normal" },
 					SnacksPickerMatch = { fg = "palette.orange" }, -- make matches stand out more
@@ -116,18 +113,20 @@ local themes = {
 			end,
 			on_highlights = function(hl, colors)
 				-- general
-				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 				hl["@keyword"].italic = false
+				hl.Comment.italic = false
+				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
-				hl.Comment.italic = false
 				hl.LspSignatureActiveParameter = { link = "Visual" }
 				hl.Added = { fg = colors.green2 }
 				hl.Removed = { fg = colors.red }
+				hl.Bold = { bold = true } -- FIX missing color in lazy.nvim window
+				hl.Italic = { italic = true } -- FIX missing color in lazy.nvim window
 
-				-- FIX bold/italic being white in lazy.nvim window
-				hl.Bold = { bold = true }
-				hl.Italic = { italic = true }
+				-- Snacks
+				hl.SnacksPickerMatch = { fg = colors.yellow } -- make matches stand out more
+				hl.SnacksPickerGitStatusModified = { fg = colors.blue2 } -- differentiate from match color
 
 				-- blink.cmp
 				hl.BlinkCmpKindFile = { link = "LspKindText" } -- FIX wrong bg for icons with source `path`
@@ -135,14 +134,14 @@ local themes = {
 				hl.BlinkCmpLabelDescription = { link = "NonText" } -- FIX wrong color
 				hl.BlinkCmpLabelMatch = { fg = colors.yellow } -- make matches stand out more
 
-				-- color bg, not fg (TODO INFO ERROR WARN)
+				-- apply color to `bg`, not `fg` (TODO INFO ERROR WARN)
 				hl["@comment.todo"] = { fg = colors.black, bg = hl["@comment.todo"].fg }
 				hl["@comment.error"] = { fg = colors.black, bg = hl["@comment.error"].fg }
 				hl["@comment.warning"] = { fg = colors.black, bg = hl["@comment.warning"].fg }
 				hl["@comment.note"] = { fg = colors.black, bg = hl["@comment.note"].fg }
 
 				-- mini.icons
-				hl.MiniIconsGreen = { fg = "#9de88d" }
+				hl.MiniIconsGreen = { fg = "#86f080" }
 				hl.MiniIconsGrey = { fg = colors.fg_dark }
 
 				-- cursorword

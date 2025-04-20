@@ -2,7 +2,14 @@ return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
 	keys = {
-		{ "#", "<cmd>CccHighlighterEnable<CR><cmd>CccPick<CR>", desc = " Highlights & Color picker" },
+		{ -- enable color highlights, then override to activate picker
+			"#",
+			function()
+				vim.cmd.CccHighlighterEnable()
+				vim.keymap.set("n", "#", vim.cmd.CccPick, { desc = " Color picker" })
+			end,
+			desc = " Color highlights/picker",
+		},
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
 	config = function()
