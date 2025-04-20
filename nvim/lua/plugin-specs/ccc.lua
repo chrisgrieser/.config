@@ -2,20 +2,32 @@ return {
 	"uga-rosa/ccc.nvim",
 	cmd = { "CccPick", "CccConvert" },
 	keys = {
-		{ "#", vim.cmd.CccPick, desc = " Color picker" },
+		{
+			"#",
+			function()
+				if not package.loaded["ccc"] then
+					vim.cmd.Lazy("load ccc.nvim")
+				else
+					vim.cmd.CccPick()
+				end
+			end,
+			desc = " Color picker",
+		},
 		{ "<leader>r#", vim.cmd.CccConvert, desc = " Convert to hsl" },
 	},
-	ft = { "css", "zsh", "lua", "toml" },
-	config = function(spec)
+	ft = "css",
+	config = function()
 		local ccc = require("ccc")
 		ccc.setup {
+			point_char = "●",
+			point_color = "",
 			win_opts = {
 				border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
 			},
 			highlight_mode = "bg",
 			highlighter = {
 				auto_enable = true,
-				filetypes = spec.ft, -- uses lazy.nvim's ft spec
+				filetypes = { "css", "zsh", "lua", "toml" },
 			},
 			pickers = { -- = what colors are highlighted
 				ccc.picker.hex_long, -- only long hex to not pick issue numbers like #123
