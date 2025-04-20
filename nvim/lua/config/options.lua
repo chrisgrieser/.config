@@ -79,7 +79,25 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
-	callback = function() vim.highlight.on_yank { timeout = 2000 } end,
+	callback = function()
+		if vim.fn.reg_executing() ~= '' then return end
+		local event = vim.v.event
+
+
+		if event.operator ~= 'y' or event.regtype == '' then return end
+		local ns = vim.api.nvim_create_namespace('nvim.hlyank2')
+		---@diagnostic disable-next-line: undefined-field
+		vim.hl.range(
+			0,
+			ns,
+			"IncSearch",
+			event.line1,
+			event.line2, ---@diagnostic disable-line: undefined-field
+			{ fg = "#00ff00", underline = true }
+		)
+
+		-- vim.hl.on_yank { timeout = 8000 }
+	end,
 })
 
 --------------------------------------------------------------------------------
