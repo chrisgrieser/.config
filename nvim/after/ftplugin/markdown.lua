@@ -102,6 +102,7 @@ bkeymap("n", "<leader>ep", function()
 	-- (replace `.markdown-body` with `body` and copypaste the first block)
 	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
 	local outputPath = "/tmp/markdown-preview.html"
+	vim.cmd("silent update")
 
 	-- create github-html via pandoc
 	-- (alternative: github API https://docs.github.com/en/rest/markdown/markdown)

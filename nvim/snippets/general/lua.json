@@ -30,7 +30,7 @@
     "prefix": "Record (type)"
   },
   "cast (@cast)": {
-    "body": "---@cast col ${1:string}",
+    "body": "---@cast ${1:varName} ${2:string}",
     "prefix": "cast (@cast)"
   },
   "count occurrences in string": {

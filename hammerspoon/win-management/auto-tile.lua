@@ -1,4 +1,4 @@
-local M = {}
+local M = {} ---@cast M table<string, any>
 local env = require("meta.environment")
 local wu = require("win-management.window-utils")
 --------------------------------------------------------------------------------
@@ -29,16 +29,18 @@ local function autoTile(appName)
 	local ignoredWins = config.appsToAutoTile[appName]
 	local wins = hs.fnutils.filter(app:allWindows(), function(win)
 		local ignored = hs.fnutils.some(ignoredWins, function(name) return win:title():find(name) end)
-		return not ignored and win:isStandard()
-	end) ---@cast wins hs.window[] -- fix wrong annotation
+		local mouseScreen = hs.mouse.getCurrentScreen()
+		local onMouseScreen = mouseScreen and mouseScreen:id() == win:screen():id()
+		return not ignored and win:isStandard() and onMouseScreen
+	end) --[[@as hs.window[] ]]
 
 	-- GUARD idempotent
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
-	local pos = {}
+	local pos = {} ---@cast pos hs.geometry[]
 	if #wins == 1 then
-		pos[1] = config.oneWindowSize(appName)
+		pos = { config.oneWindowSize(appName) }  
 	elseif #wins == 2 then
 		pos = { hs.layout.left50, hs.layout.right50 }
 	elseif #wins == 3 then
@@ -61,12 +63,14 @@ local function autoTile(appName)
 			{ h = 0.5, w = 0.34, x = 0.33, y = 0 },
 			{ h = 0.5, w = 0.34, x = 0.33, y = 0.5 },
 			{ h = 0.5, w = 0.33, x = 0.67, y = 0 },
-			#wins == 6 and { h = 0.5, w = 0.33, x = 0.67, y = 0.5 } or nil,
 		}
+		if #wins == 6 then
+			table.insert(pos, { h = 0.5, w = 0.33, x = 0.67, y = 0.5 })
+		end
 	end
 
 	for i = 1, #pos do
-		wu.moveResize(wins[i], pos[i])
+		wu.moveResize(wins[i], pos[i] --[[@as hs.geometry]])
 	end
 end
 

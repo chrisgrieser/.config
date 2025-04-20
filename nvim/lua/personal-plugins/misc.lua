@@ -260,12 +260,13 @@ end
 
 ---@param direction "up"|"down"
 function M.goIndent(direction)
-	local function getLine(lnum) return vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, false)[1] end
-
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local curIndent = vim.fn.indent(row)
 	local lastLine = vim.api.nvim_buf_line_count(0)
-	if curIndent == 0 then return end
+	if curIndent == 0 then
+		vim.notify("No indent ar current line.", vim.log.levels.WARN, { title = "Indent" })
+		return
+	end
 
 	-- find next row above with lower indent
 	local upIndent
@@ -274,7 +275,7 @@ function M.goIndent(direction)
 		row = row + (direction == "up" and -1 or 1)
 		if row == 0 or row > lastLine then return end
 		upIndent = vim.fn.indent(row)
-		upLineText = getLine(row)
+		upLineText = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
 		local notBlank = upLineText:find("%S")
 	until upIndent < curIndent and notBlank
 

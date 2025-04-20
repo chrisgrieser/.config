@@ -4,6 +4,7 @@ local textObj = require("config.utils").extraTextobjMaps
 return {
 	"chrisgrieser/nvim-various-textobjs",
 	opts = {
+		-- enable debug when repo is locally present (i.e., being worked on)
 		debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-various-textobjs"),
 	},
 	keys = {
@@ -137,12 +138,15 @@ return {
 				vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
 
 				-- highlight yanked text
-				local duration = 2000
+				local duration = 1500 -- CONFIG
 				local ns = vim.api.nvim_create_namespace("ysii")
 				local bufnr = vim.api.nvim_get_current_buf()
 				vim.hl.range(bufnr, ns, "IncSearch", { startLn, 0 }, { startLn, -1 })
 				vim.hl.range(bufnr, ns, "IncSearch", { endLn, 0 }, { endLn, -1 })
-				vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end, duration)
+				vim.defer_fn(
+					function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end,
+					duration
+				)
 			end,
 			desc = "󰅍 Yank surrounding indent",
 		},
@@ -155,8 +159,7 @@ return {
 				local foundURL = vim.fn.mode() == "v"
 				if not foundURL then return end
 
-				vim.cmd.normal { '"zy', bang = true }
-				local url = vim.fn.getreg("z")
+				local url = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
 				vim.ui.open(url)
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
@@ -178,9 +181,7 @@ return {
 			"a-",
 			mode = "o",
 			function()
-				local pattern = {
-					unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()",
-				}
+				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
 				local core = require("various-textobjs.charwise-core")
 				core.selectClosestTextobj(pattern, "outer", 5)
 			end,
@@ -190,13 +191,25 @@ return {
 			"i-",
 			mode = "o",
 			function()
-				local pattern = {
-					unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()",
-				}
+				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
 				local core = require("various-textobjs.charwise-core")
 				core.selectClosestTextobj(pattern, "inner", 5)
 			end,
 			desc = " inner path",
+		},
+		{
+			"g-",
+			function()
+				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
+				local core = require("various-textobjs.charwise-core")
+				core.selectClosestTextobj(pattern, "inner", 5)
+				local foundPath = vim.fn.mode() == "v"
+				if foundPath then return end
+
+				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+				vim.ui.open(path)
+			end,
+			desc = " Open next path",
 		},
 	},
 }
