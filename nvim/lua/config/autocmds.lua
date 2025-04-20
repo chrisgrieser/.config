@@ -1,3 +1,37 @@
+-- HIGHLIGHTED YANK
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "User: Highlighted Yank",
+	callback = function()
+		-- FIX timeout for `hl.on_yank` not working, thus implementing manually
+		-- vim.hl.on_yank { timeout = 2000 }
+
+		if vim.fn.reg_executing() ~= "" then return end
+		if vim.v.event.operator ~= "y" or vim.v.event.regtype == "" then return end
+		local ns = vim.api.nvim_create_namespace("nvim.hlyank2")
+		vim.hl.range(0, ns, "IncSearch", "'[", "']")
+		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 2000)
+	end,
+})
+
+--------------------------------------------------------------------------------
+-- WINDOW SPLITS
+vim.api.nvim_create_autocmd("VimResized", {
+	desc = "User: keep splits equally sized on window resize",
+	command = "wincmd =",
+})
+
+--------------------------------------------------------------------------------
+-- RESTORE CURSOR
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: Restore cursor position",
+	callback = function(ctx)
+		if ctx.match == "gitcommit" or vim.bo[ctx.buf].buftype ~= "" then return end
+		vim.cmd([[silent! normal! g`"]])
+	end,
+})
+
+--------------------------------------------------------------------------------
+
 -- SYNC TERMINAL BACKGROUND
 -- https://github.com/neovim/neovim/issues/16572#issuecomment-1954420136
 -- https://new.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/
@@ -21,24 +55,6 @@ if vim.fn.has("gui_running") == 0 then
 		end,
 	})
 end
-
---------------------------------------------------------------------------------
--- SPLITS
-vim.api.nvim_create_autocmd("VimResized", {
-	desc = "User: keep splits equally sized on window resize",
-	command = "wincmd =",
-})
-
---------------------------------------------------------------------------------
--- RESTORE CURSOR
-vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Restore cursor position",
-	callback = function(ctx)
-		if ctx.match == "gitcommit" or vim.bo[ctx.buf].buftype ~= "" then return end
-		vim.cmd([[silent! normal! g`"]])
-	end,
-})
-
 --------------------------------------------------------------------------------
 
 -- AUTO-CLEANUP
