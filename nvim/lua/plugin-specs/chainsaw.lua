@@ -1,13 +1,12 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
-	ft = "lua", -- in lua, load directly for `Chainsaw` global
 	opts = {
 		visuals = {
-			icon = "󰹡",
+			icon = "󰹈",
 		},
 		preCommitHook = {
 			enabled = true,
-			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir has marker
+			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir itself, when developing it
 		},
 		logStatements = {
 			variableLog = {
@@ -43,6 +42,8 @@ return {
 		})
 	end,
 	init = function(spec)
+		require("chainsaw.nvim-debug") -- activates `Chainsaw` global var
+
 		local icon = spec.opts.visuals.icon
 		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,

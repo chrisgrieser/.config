@@ -4,7 +4,7 @@ return {
 	event = "InsertEnter",
 	keys = {
 		{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
-		{ "<leader>oa", vim.cmd.SupermavenToggle, desc = "󰚩 Supermaven" },
+		{ "<leader>oa", vim.cmd.SupermavenToggle, desc = "󰚩 AI completion" },
 	},
 	config = function(_, opts)
 		require("supermaven-nvim").setup(opts)
