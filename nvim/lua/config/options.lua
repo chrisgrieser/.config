@@ -10,6 +10,10 @@ vim.g.icloudSync =
 
 --------------------------------------------------------------------------------
 -- GENERAL
+vim.opt.clipboard = "unnamedplus"
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.undofile = true -- enables persistent undo history
 vim.opt.undolevels = 1337 -- too high results in increased buffer loading time
@@ -54,6 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --------------------------------------------------------------------------------
 -- APPEARANCE
+vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "+1" -- = one more than textwidth
 vim.opt.signcolumn = "yes:1"
@@ -65,40 +70,6 @@ vim.opt.winborder = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12
-
---------------------------------------------------------------------------------
-
--- SEARCH
-vim.opt.wrap = false
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
---------------------------------------------------------------------------------
--- CLIPBOARD
-vim.opt.clipboard = "unnamedplus"
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "User: Highlighted Yank",
-	callback = function()
-		if vim.fn.reg_executing() ~= '' then return end
-		local event = vim.v.event
-
-
-		if event.operator ~= 'y' or event.regtype == '' then return end
-		local ns = vim.api.nvim_create_namespace('nvim.hlyank2')
-		---@diagnostic disable-next-line: undefined-field
-		vim.hl.range(
-			0,
-			ns,
-			"IncSearch",
-			event.line1,
-			event.line2, ---@diagnostic disable-line: undefined-field
-			{ fg = "#00ff00", underline = true }
-		)
-
-		-- vim.hl.on_yank { timeout = 8000 }
-	end,
-})
 
 --------------------------------------------------------------------------------
 -- EDITORCONFIG
