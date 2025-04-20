@@ -12,7 +12,11 @@ return { -- treesitter-based textobjs
 		"TSTextobjectGotoPreviousStart",
 		"TSTextobjectPeekDefinitionCode",
 	},
-	main = "nvim-treesitter.configs", -- SIC configured via treesitter, not this plugin
+
+	-- SIC configured via treesitter, not this plugin. 
+	-- Running config twice is also not a problem.
+	main = "nvim-treesitter.configs",
+
 	opts = {
 		textobjects = {
 			select = {

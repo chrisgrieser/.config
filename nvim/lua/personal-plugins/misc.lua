@@ -93,6 +93,8 @@ function M.toggleOrIncrement()
 		["true"] = "false",
 		["=="] = "!=",
 		["||"] = "&&",
+		[">"] = "<",
+		[">="] = "<=",
 	}
 	if vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
 		toggles["const"] = "let"
