@@ -42,7 +42,11 @@ return {
 		})
 	end,
 	init = function(spec)
-		require("chainsaw.nvim-debug") -- activates `Chainsaw` global var
+		-- lazyload chainsaw only when `Chainsaw` function is called
+		_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field
+			require("chainsaw") -- load nvim-chainsaw, will override `_G.Chainsaw`
+			Chainsaw(name) -- call original function
+		end
 
 		local icon = spec.opts.visuals.icon
 		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }

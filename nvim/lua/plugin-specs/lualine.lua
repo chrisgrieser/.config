@@ -58,7 +58,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "UIEnter", -- not `VeryLazy` so UI does not flicker
+	event = "VeryLazy",
 	dependencies = "echasnovski/mini.icons",
 	opts = {
 		options = {
