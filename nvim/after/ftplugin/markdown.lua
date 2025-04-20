@@ -96,23 +96,23 @@ bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
 
--- MARKDOWN PREVIEW (simplified version of markdown-preview.nvim)
-bkeymap("n", "<leader>er", function()
-	local outputPath = "/tmp/markdown-preview.html"
+-- MARKDOWN PREVIEW
+bkeymap("n", "<leader>ep", function()
+	-- SOURCE https://github.com/sindresorhus/github-markdown-css
+	-- (replace `.markdown-body` with `body` and copypaste the first block)
 	local css = vim.fn.stdpath("config") .. "/after/ftplugin/github-markdown.css"
+	local outputPath = "/tmp/markdown-preview.html"
 
 	-- create github-html via pandoc
-	vim.cmd("silent update")
+	-- (alternative: github API https://docs.github.com/en/rest/markdown/markdown)
 	vim.system({
 		"pandoc",
-		-- rebasing paths, so images are available at output location
-		"--from=gfm+rebase_relative_paths",
+		"--from=gfm+rebase_relative_paths", -- rebasing, so images are available at output location
 		vim.api.nvim_buf_get_name(0),
 		"--output=" .. outputPath,
 		"--standalone",
 		"--css=" .. css,
 	}):wait()
 
-	local uri = "file://" .. outputPath
-	vim.ui.open(uri)
+	vim.ui.open(outputPath)
 end, { desc = " Preview" })
