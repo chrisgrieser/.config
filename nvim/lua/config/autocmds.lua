@@ -8,8 +8,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		if vim.fn.reg_executing() ~= "" then return end
 		if vim.v.event.operator ~= "y" or vim.v.event.regtype == "" then return end
 		local ns = vim.api.nvim_create_namespace("nvim.hlyank2")
-		vim.hl.range(0, ns, "IncSearch", "'[", "']")
-		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(0, ns, 0, -1) end, 2000)
+		local opts = { inclusive = true, regtype = vim.v.event.regtype }
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.hl.range(bufnr, ns, "IncSearch", "'[", "']", opts)
+		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end, 2000)
 	end,
 })
 

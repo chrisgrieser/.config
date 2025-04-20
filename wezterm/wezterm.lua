@@ -7,7 +7,7 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Ef-Light",
+	"Ayu Light (Gogh)",
 	"Ivory Light (terminal.sexy)",
 	"Solar Flare Light (base16)",
 }
