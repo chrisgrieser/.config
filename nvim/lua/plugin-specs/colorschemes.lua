@@ -30,6 +30,7 @@ local themes = {
 					["@markup.strong"] = { fg = "palette.magenta", style = "bold" },
 					["Added"] = { link = "diffAdded" },
 					["Removed"] = { link = "diffRemoved" },
+					["Whitespace"] = { fg = "#dfccd4" }, -- bit darker
 
 					-- 1. `inline` code in comments
 					-- 2. italic removed only in markdown, (still inherited from comments elsewhere)

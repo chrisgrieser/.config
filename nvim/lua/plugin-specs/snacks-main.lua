@@ -64,10 +64,15 @@ return {
 		{
 			"<leader>oi",
 			function()
-				local mode = Snacks.indent.enabled and "disable" or "enable"
-				Snacks.indent[mode]()
+				if Snacks.indent.enabled then
+					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
+					Snacks.indent.disable()
+				else
+					vim.opt_local.listchars:append { tab = "  ", space = " ", trail = " ", lead = " " }   
+					Snacks.indent.enable()
+				end
 			end,
-			desc = "󰆽 Invisible Chars",
+			desc = " Invisible chars",
 		},
 	},
 	---@type snacks.Config
