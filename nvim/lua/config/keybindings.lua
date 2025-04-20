@@ -298,7 +298,7 @@ do
 		local winid = vim.b.lsp_floating_preview --> stores id of last `vim.lsp`-generated win
 		if not winid or not vim.api.nvim_win_is_valid(winid) then return end
 		vim.api.nvim_win_call(winid, function()
-			local topline = vim.fn.winsaveview().topline --[[@as integer]]
+			local topline = vim.fn.winsaveview().topline
 			vim.fn.winrestview { topline = topline + lines }
 		end)
 	end
@@ -439,7 +439,6 @@ keymap("i", "<D-t>", function() require("personal-plugins.auto-template-str").in
 keymap("n", "<D-j>", '*N"_cgn', { desc = "󰆿 Multi-edit cword" })
 keymap("x", "<D-j>", function()
 	local selection = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-	if not selection then return end
 	vim.fn.setreg("/", "\\V" .. vim.fn.escape(selection, [[/\]]))
 	return '<Esc>"_cgn'
 end, { desc = "󰆿 Multi-edit selection", expr = true })
@@ -459,9 +458,11 @@ end, { desc = "󰋽 Diagnostics" })
 keymap("n", "<leader>oc", function() vim.wo.conceallevel = vim.wo.conceallevel == 0 and 2 or 0 end, { desc = "󰈉 Conceal" })
 
 keymap("n", "<leader>ol", function()
-	vim.notify("Restarting…", vim.log.levels.TRACE, { title = "LSP", icon = "󰑓" })
-	vim.lsp.stop_client(vim.lsp.get_clients())
-	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attach LSPs
+	local clients = vim.lsp.get_clients { bufnr = 0 }
+	local names = vim.iter(clients):map(function(client) return "- " .. client.name end):join("\n")
+	vim.notify(names, vim.log.levels.TRACE, { title = "Restarting LSPs", icon = "󰑓" })
+	vim.lsp.stop_client(clients)
+	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
 end, { desc = "󰑓 LSPs restart" })
 
 --------------------------------------------------------------------------------
