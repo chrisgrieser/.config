@@ -3,13 +3,15 @@
 
 return {
 	"saghen/blink.cmp",
-	dependencies = {"Kaiser-Yang/blink-cmp-git", dependencies = "nvim-lua/plenary.nvim",},
+	dependencies = {
+		{ "Kaiser-Yang/blink-cmp-git", dependencies = "nvim-lua/plenary.nvim" },
+	},
 
 	opts = {
 		sources = {
-			per_filetype = {
-				gitcommit = { "git" }, -- use only in gitcommits, and there as only source
-			},
+			default = { "git", "lsp", "path", "luasnip", "buffer" }, -- add `git` to the list
+			per_filetype = { gitcommit = { "git" } },
+
 			providers = {
 				git = {
 					module = "blink-cmp-git",

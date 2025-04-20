@@ -131,11 +131,12 @@ extraServerConfig.efm = {
 -- LUA
 
 -- DOCS https://luals.github.io/wiki/settings/
+local emmyluaInUse = vim.list_contains(masonDependencies, "emmylua_ls")
 extraServerConfig.lua_ls = {
 	settings = {
 		Lua = {
 			completion = {
-				enable = not vim.list_contains(masonDependencies, "emmylua_ls"),
+				enable = not emmyluaInUse,
 				callSnippet = "Disable", -- signature help more useful here
 				keywordSnippet = "Replace",
 				showWord = "Disable", -- already done by completion plugin
@@ -152,7 +153,7 @@ extraServerConfig.lua_ls = {
 				},
 			},
 			hint = { -- inlay hints
-				enable = not vim.list_contains(masonDependencies, "emmylua_ls"),
+				enable = not emmyluaInUse,
 				setType = true,
 				arrayIndex = "Disable", -- too noisy
 				semicolon = "Disable", -- mostly wrong on invalid code
@@ -165,8 +166,7 @@ extraServerConfig.lua_ls = {
 		},
 	},
 	on_attach = function(client)
-		-- disable redundant LSP functionalities
-		if vim.list_contains(masonDependencies, "emmylua_ls") then
+		if emmyluaInUse then -- disable redundant LSP functionalities
 			client.server_capabilities.renameProvider = false
 			client.server_capabilities.referencesProvider = false
 		end
@@ -176,7 +176,7 @@ extraServerConfig.lua_ls = {
 -- DOCS https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md
 extraServerConfig.emmylua_ls = {
 	on_attach = function(client)
-		-- disable formatting in favor of stylua
+		-- disable formatting in favor of `stylua`
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -212,7 +212,7 @@ extraServerConfig.ruff = {
 			codeAction = { disableRuleComment = { enable = false } }, -- using nvim-rulebook instead
 		},
 	},
-	-- disable in favor of basedpyright's hover info
+	-- disable in favor of `basedpyright`'s hover info
 	on_attach = function(ruff) ruff.server_capabilities.hoverProvider = false end,
 }
 
@@ -290,9 +290,7 @@ extraServerConfig.ts_ls = {
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 }
-if extraServerConfig.ts_ls.settings then
-	extraServerConfig.ts_ls.settings.javascript = extraServerConfig.ts_ls.settings.typescript
-end
+extraServerConfig.ts_ls.settings.javascript = extraServerConfig.ts_ls.settings.typescript
 
 --------------------------------------------------------------------------------
 -- JSON & YAML
@@ -401,11 +399,10 @@ extraServerConfig.typos_lsp = {
 -- are usually installed on macOS-dev devices as they are needed for `homebrew`)
 if jit.os == "OSX" then
 	vim.lsp.config("sourcekit", {
-		cmd = { "sourcekit-lsp" }, -- needed for `emmylua`
 		root_markers = {
 			".git",
 			"info.plist", -- Alfred dirs
-			vim.fs.basename(vim.g.icloudSync), -- snacks scratch buffers
+			require("plugin-specs.snacks-scratch").opts.scratch.root, ---@diagnostic disable-line: undefined-field
 		},
 	})
 	vim.lsp.enable("sourcekit")
