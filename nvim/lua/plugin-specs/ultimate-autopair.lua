@@ -24,8 +24,8 @@ return {
 		space2 = { enable = true },
 
 		config_internal_pairs = {
-			{ "'", "'", nft = { "markdown" } }, -- since used as apostroph
-			{ '"', '"', nft = { "vim" } }, -- vimscript uses quotes as comments
+			{ "'", "'", nft = { "markdown", "snacks_picker_input" } },
+			{ '"', '"', nft = { "vim", "snacks_picker_input" } }, -- vimscript uses quotes as comments
 		},
 		-- INFO custom keys need to be "appended" to the opts as a list
 		{ "**", "**", ft = { "markdown" } }, -- bold

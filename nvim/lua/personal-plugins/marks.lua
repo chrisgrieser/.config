@@ -51,15 +51,6 @@ local function getMark(name)
 	if m[1] ~= 0 then return mark end
 end
 
----@param names string[]
-local function getMarksSet(names)
-	return vim
-		.iter(names)
-		:map(function(name) return getMark(name) end) -- name -> Markobj
-		:filter(function(m) return m ~= nil end) -- only marks that are set
-		:totable()
-end
-
 ---@param m Markobj
 ---@return boolean
 local function cursorIsAtMark(m)
@@ -91,26 +82,18 @@ local function setSignForMark(name)
 	})
 end
 
----@param m Markobj
-local function gotoMark(m)
-	local markInUnopenedFile = m.bufnr == 0
-	if markInUnopenedFile then
-		vim.cmd.edit(m.path)
-	else
-		vim.api.nvim_set_current_buf(m.bufnr)
-	end
-	vim.api.nvim_win_set_cursor(0, { m.row, m.col })
-	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
-	setSignForMark(m.name) -- setting here simpler than on `BufEnter`
-end
-
 --------------------------------------------------------------------------------
 
 ---@param names string[]
 function M.cycleMarks(names)
 	if not isValidMarkName(names) then return end
 
-	local marksSet = getMarksSet(names)
+	local marksSet = vim
+		.iter(names)
+		:map(function(name) return getMark(name) end) -- name -> Markobj
+		:filter(function(m) return m ~= nil end) -- only marks that are set
+		:totable()
+
 	if #marksSet == 0 then
 		notify("No mark has been set.")
 		return
@@ -130,7 +113,15 @@ function M.cycleMarks(names)
 	end
 
 	-- goto next mark
-	gotoMark(nextMark)
+	local markInUnopenedFile = nextMark.bufnr == 0
+	if markInUnopenedFile then
+		vim.cmd.edit(nextMark.path)
+	else
+		vim.api.nvim_set_current_buf(nextMark.bufnr)
+	end
+	vim.api.nvim_win_set_cursor(0, { nextMark.row, nextMark.col })
+	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
+	setSignForMark(nextMark.name) -- setting here simpler than on `BufEnter`
 end
 
 ---Set a mark, or unsets it if the cursor is on the same line as the mark
@@ -159,26 +150,6 @@ function M.deleteAllMarks()
 		vim.api.nvim_del_mark(name)
 	end
 	notify("All marks deleted.")
-end
-
----@param names string[]
-function M.selectMarks(names)
-	if not isValidMarkName(names) then return end
-	local setMarks = getMarksSet(names)
-	if #setMarks == 0 then
-		notify("No marks have been set.")
-		return
-	end
-
-	vim.ui.select(setMarks, {
-		prompt = "󰃁 Select mark",
-		format_item = function(m)
-			local filename = vim.fs.basename(m.path)
-			return ("[%s] %s:%d"):format(m.name, filename, m.row)
-		end,
-	}, function(m)
-		if m then gotoMark(m) end
-	end)
 end
 
 --------------------------------------------------------------------------------

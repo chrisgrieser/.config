@@ -17,19 +17,16 @@ end, 1)
 ---@param module string
 local function safeRequire(module)
 	local success, errmsg = pcall(require, module)
-	if success then return end
-
-	local msg = ("Error loading `%s`: %s"):format(module, errmsg)
-	vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 500)
+	if not success then
+		local msg = ("Error loading `%s`: %s"):format(module, errmsg)
+		vim.defer_fn(function() vim.notify(msg, vim.log.levels.ERROR) end, 500)
+	end
 end
 
--- before `lazy`, so the options are active during plugin install, and available
--- for plugin configs
-safeRequire("config.options")
+safeRequire("personal-plugins.ui-hack") -- early for errors
+safeRequire("config.options") -- early, so available for plugins configs
 
--- only load plugins & LSPs when `NO_PLUGINS` is not set.
--- (This is for security reasons, e.g., when editing a password with `pass`.)
-if not vim.env.NO_PLUGINS then
+if not vim.env.NO_PLUGINS then -- for security, e.g. when editing a password with `pass`
 	safeRequire("config.lazy")
 	safeRequire("config.lsp-servers") -- after lazy, so mason/blink/lspconfig are available
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
@@ -42,7 +39,6 @@ safeRequire("config.keybindings")
 --------------------------------------------------------------------------------
 
 safeRequire("personal-plugins.git-conflict")
-safeRequire("personal-plugins.ui-hack")
 safeRequire("config.backdrop-underline-fix")
 
 vim.api.nvim_create_autocmd("InsertEnter", {

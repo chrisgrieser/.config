@@ -7,13 +7,14 @@ front_app=$(osascript -e 'tell application "System Events" to return name of fir
 if [[ "$front_app" == "neovide" ]]; then
 	# kill
 	nvim --server "/tmp/nvim_server.pipe" --remote-send "<cmd>wqall!<CR>"
+	killall "emmylua_ls" # FIX emmylua process surviving
 
 	# wait
-	while pgrep -xq "nvim" || pgrep -xq "neovide"; do
+	while pgrep -xq "nvim" || pgrep -xq "neovide" || pgrep -xq "emmylua_ls"; do
 		i=$((i + 1))
 		sleep 0.1
 		if [[ $i -gt 20 ]]; then
-			echo -n "Could not quit nvim/neovide" # Alfred notification
+			echo -n "Could not quit nvim/neovide/emmylua" # Alfred notification
 			return 1
 		fi
 	done

@@ -181,6 +181,14 @@ return {
 		-- MISC
 
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
+		{
+			"<leader>ms",
+			function()
+				local function onlyGlobalMarks(item) return item.label:find("%u") ~= nil end
+				Snacks.picker.marks { transform = onlyGlobalMarks }
+			end,
+			desc = "󰃁 Select mark",
+		},
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
@@ -199,6 +207,14 @@ return {
 					exclude = { ".DS_Store", "*.docx", "*.zip", "*.pptx", "*.svg" },
 					layout = "small_no_preview",
 					matcher = { frecency = true }, -- slight performance impact
+					win = {
+						input = {
+							keys = {
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								[":"] = { "complete_and_add_colon", mode = "i" },
+							},
+						},
+					},
 					actions = {
 						complete_and_add_colon = function(picker)
 							-- snacks allows opening files with `file:lnum`, but it only
@@ -212,20 +228,6 @@ return {
 							end
 							vim.api.nvim_set_current_line(file .. ":")
 							vim.cmd.startinsert { bang = true }
-						end,
-						toggle_hidden_and_ignored = function(picker)
-							picker.opts["hidden"] = not picker.opts.hidden
-							picker.opts["ignored"] = not picker.opts.ignored
-
-							-- remove `--ignore-file` extra arg
-							picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
-							local noIgnoreFileArgs = vim.iter(picker.opts.args)
-								:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
-								:totable()
-							picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
-								or picker.opts["_originalArgs"]
-
-							picker:find()
 						end,
 					},
 				},
@@ -244,6 +246,13 @@ return {
 					layout = {
 						preset = "wide_with_preview",
 						layout = { [2] = { width = 0.6 } }, -- sets preview wider
+					},
+					win = {
+						input = {
+							keys = {
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+							},
+						},
 					},
 				},
 				help = {
@@ -362,7 +371,6 @@ return {
 						["<Up>"] = { "history_back", mode = "i" },
 						["<Down>"] = { "history_forward", mode = "i" },
 
-						["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 						["<D-f>"] = { "toggle_maximize", mode = "i" }, -- [f]ullscreen
 						["<D-p>"] = { "toggle_preview", mode = "i" },
 						["<C-CR>"] = { "cycle_win", mode = "i" },
@@ -372,7 +380,6 @@ return {
 						["<D-s>"] = { "qflist_and_go", mode = "i" },
 						["<D-l>"] = { "reveal_in_macOS_Finder", mode = "i" },
 						["<D-c>"] = { "yank", mode = "i" },
-						[":"] = { "complete_and_add_colon", mode = "i" },
 
 						["!"] = { "inspect", mode = "i" },
 						["?"] = { "toggle_help_input", mode = "i" },
@@ -402,6 +409,20 @@ return {
 					vim.cmd.cclose()
 					vim.cmd("silent cfirst")
 					vim.cmd.normal { "zv", bang = true } -- open folds
+				end,
+				toggle_hidden_and_ignored = function(picker)
+					picker.opts["hidden"] = not picker.opts.hidden
+					picker.opts["ignored"] = not picker.opts.ignored
+
+					-- remove `--ignore-file` extra arg
+					picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
+					local noIgnoreFileArgs = vim.iter(picker.opts.args)
+						:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
+						:totable()
+					picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
+						or picker.opts["_originalArgs"]
+
+					picker:find()
 				end,
 			},
 			prompt = "  ", -- 
