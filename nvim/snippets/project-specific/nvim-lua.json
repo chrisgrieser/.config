@@ -24,7 +24,10 @@
   },
   "cast (LuaDoc)": {
     "body": "--[[@as ${1:string}]]",
-    "prefix": "cast (@as)"
+    "prefix": [
+      "as",
+      "cast (@as)"
+    ]
   },
   "check if on macOS": {
     "body": "jit.os == \"OSX\"",

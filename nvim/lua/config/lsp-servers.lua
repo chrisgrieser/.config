@@ -11,7 +11,7 @@ local lspToMasonMap = {
 	cssls = "css-lsp",
 	efm = "efm", -- integration of external linter/formatter
 	emmet_language_server = "emmet-language-server", -- css/html snippets
-	emmylua_ls = "emmylua_ls", -- improved lua LSP, TEMP still bit buggy
+	-- emmylua_ls = "emmylua_ls", -- improved lua LSP, TEMP still bit buggy
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
@@ -109,12 +109,14 @@ local efmConfig = {
 }
 
 extraServerConfig.efm = {
-	cmd = { "efm-langserver" }, -- PENDING efm being added https://github.com/neovim/nvim-lspconfig/tree/master/lsp
-	filetypes = vim.tbl_keys(efmConfig),
-	settings = { languages = efmConfig },
+	-- PENDING efm being added https://github.com/neovim/nvim-lspconfig/tree/master/lsp
+	cmd = { "efm-langserver" },
+	workspace_required = true,
 	init_options = { documentFormatting = true },
 
-	workspace_required = true,
+	filetypes = vim.tbl_keys(efmConfig),
+	settings = { languages = efmConfig },
+
 	root_markers = vim.iter(vim.tbl_values(efmConfig))
 		:flatten()
 		:map(function(tool) return tool.rootMarkers end)

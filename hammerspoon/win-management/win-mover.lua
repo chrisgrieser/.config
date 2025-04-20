@@ -36,7 +36,7 @@ M.wf_appsOnMouseScreen = wf.new(true)
 		if #hs.screen.allScreens() < 2 then return end
 		local mouseScreen = hs.mouse.getCurrentScreen()
 		if not mouseScreen then return end
-		if newWin:screen():name() ~= mouseScreen:name() then newWin:moveToScreen(mouseScreen) end
+		if newWin:screen():id() ~= mouseScreen:id() then newWin:moveToScreen(mouseScreen) end
 	end)
 
 --------------------------------------------------------------------------------

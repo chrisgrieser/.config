@@ -3,15 +3,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
 	callback = function()
 		-- FIX timeout for `hl.on_yank` not working, thus implementing manually
-		-- vim.hl.on_yank { timeout = 2000 }
+		-- vim.hl.on_yank { timeout = 1500 }
 
 		if vim.fn.reg_executing() ~= "" then return end
 		if vim.v.event.operator ~= "y" or vim.v.event.regtype == "" then return end
+
+		local duration = 1500 -- CONFIG
 		local ns = vim.api.nvim_create_namespace("nvim.hlyank2")
-		local opts = { inclusive = true, regtype = vim.v.event.regtype }
 		local bufnr = vim.api.nvim_get_current_buf()
-		vim.hl.range(bufnr, ns, "IncSearch", "'[", "']", opts)
-		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end, 2000)
+		vim.hl.range(bufnr, ns, "IncSearch", "'[", "']", { inclusive = true })
+		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end, duration)
 	end,
 })
 
@@ -464,7 +465,7 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 })
 
 --------------------------------------------------------------------------------
--- LSP RENAME – ADD NOTIFICATION
+-- ADD NOTIFICATION TO LSP RENAME
 local originalRenameHandler = vim.lsp.handlers["textDocument/rename"]
 vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	originalRenameHandler(err, result, ctx, config)
@@ -476,10 +477,8 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 		:filter(function(file) return #changes[file] > 0 end)
 		:map(function(file) return "- " .. vim.fs.basename(file) end)
 		:totable()
-	local changeCount = 0
-	for _, change in pairs(changes) do
-		changeCount = changeCount + #(change.edits or change)
-	end
+	local changeCount = vim.iter(changes)
+		:fold(0, function(sum, _, change) return sum + #(change.edits or change) end)
 
 	-- notification
 	local pluralS = changeCount > 1 and "s" or ""

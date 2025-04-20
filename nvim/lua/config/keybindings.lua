@@ -107,8 +107,8 @@ for _, chars in pairs(trailChars) do
 	end)
 end
 
--- Spelling (these work even with `spell=false`)
-keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" })
+-- Spelling
+keymap("n", "z.", "1z=", { desc = "󰓆 Fix spelling" }) -- works even with `spell=false`
 -- stylua: ignore
 keymap("n", "zl", function() require("personal-plugins.misc").spellSuggest() end, { desc = "󰓆 Spell suggestions" })
 
@@ -119,8 +119,7 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- u
 --------------------------------------------------------------------------------
 
 -- WHITESPACE & INDENTATION
--- remap, since using nvim default
-keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true })
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since using nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
