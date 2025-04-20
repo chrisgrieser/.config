@@ -1,10 +1,14 @@
--- INFO This snippet redirects cmdline messages to `vim.notify`, silencing
--- `Press Enter to continue` prompts, even with `cmdheight=0`.
+-- INFO 
+-- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
+-- Enter to continue` prompts, even with `cmdheight=0`.
 
--- REQUIRED 1. a plugin that shows `vim.notify` outside of the cmdline, such as
+-- REQUIRED 
+-- 1. a plugin that shows `vim.notify` outside of the cmdline, such as
 -- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
 -- 2. a plugin accepts input from outside of the cmdline, such as `snacks.input`.
--- CAVEAT This does not work with confirmation prompts, such as `conform()`
+
+-- CAVEAT 
+-- This does not work well with confirmation prompts, such as `fn.conform()`
 --------------------------------------------------------------------------------
 
 local config = {
@@ -50,7 +54,7 @@ local function attach()
 		local text = vim.iter(content):fold("", function(acc, chunk) return acc .. chunk[2] end)
 		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- colorize error code when using `snacks`
 		if kind == "confirm" then
-			text = "[NOTE] Confirmation/input prompts are not supported, this text is purely informational.\n\n"
+			text = "[NOTE] Confirmation/input prompts. The next key you enter will affect this prompt.\n\n"
 				.. text
 		end
 
