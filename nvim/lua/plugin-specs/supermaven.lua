@@ -13,7 +13,7 @@ return {
 		vim.api.nvim_create_autocmd("RecordingLeave", { command = "SupermavenStart" })
 
 		-- PENDING https://github.com/supermaven-inc/supermaven-nvim/issues/49
-      require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
+		require("supermaven-nvim.completion_preview").suggestion_group = "NonText"
 
 		vim.g.lualineAdd(
 			"sections",

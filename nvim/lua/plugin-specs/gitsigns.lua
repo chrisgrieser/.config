@@ -38,7 +38,7 @@ return {
 			desc = "󰆽 Line blame",
 		},
 		{
-			"<leader>oi",
+			"<leader>ov",
 			function()
 				require("gitsigns").toggle_linehl()
 				require("gitsigns").toggle_word_diff()

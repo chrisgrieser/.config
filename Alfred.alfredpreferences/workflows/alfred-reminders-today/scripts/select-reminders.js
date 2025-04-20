@@ -204,6 +204,5 @@ function run() {
 	return JSON.stringify({
 		items: reminders,
 		skipknowledge: true, // keep sorting order
-		cache: { seconds: 60, loosereload: true }, // short, also flush on change later
 	});
 }

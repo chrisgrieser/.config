@@ -134,9 +134,9 @@ vim.opt.listchars = {
 	precedes = "…",
 	extends = "…",
 	multispace = "·",
-	tab = "│ ", -- usually overridden by `snacks.indent`
-	lead = " ",
 	trail = " ",
+	tab = " ", -- only when `snacks.indent` is disabled,,
+	lead = "·", -- only when `snacks.indent` is disabled
 }
 vim.opt.fillchars:append {
 	eob = " ",

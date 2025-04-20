@@ -61,6 +61,14 @@ return {
 			end,
 			desc = "󰢱 Eval lua expr",
 		},
+		{
+			"<leader>oi",
+			function()
+				local mode = Snacks.indent.enabled and "disable" or "enable"
+				Snacks.indent[mode]()
+			end,
+			desc = "󰆽 Invisible Chars",
+		},
 	},
 	---@type snacks.Config
 	opts = {
