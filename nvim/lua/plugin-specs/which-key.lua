@@ -74,7 +74,7 @@ return {
 			-- need to remove comment mapping shere, since they are nvim-builtins
 			-- that do still show up with disabled whichkey-preset
 			-- stylua: ignore
-			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gO", "gU", "gc", "gcc", "gra", "gri", "grn", "grr", "gu", "g~", "zf" }
+			local nvimBultins = { "<C-W><C-D>", "<C-W>d", "gc", "gcc", "gra", "gri", "grn", "grr", "g~" }
 			if vim.tbl_contains(nvimBultins, map.lhs) then return false end
 
 			return map.desc ~= nil

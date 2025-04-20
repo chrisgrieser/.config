@@ -332,8 +332,6 @@ local favicons = {
 	github = "",
 	neovim = "",
 	stackoverflow = "󰓌",
-	discord = "󰙯",
-	slack = "",
 	reddit = "",
 }
 

@@ -155,9 +155,10 @@ end
 --------------------------------------------------------------------------------
 
 ---As opposed to the regular `:bdelete`, this function closes the buffer
----without it staying as the alt-file.
+---without it staying as alt-file.
 function M.deleteBuffer()
 	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
+	local curPath = vim.api.nvim_buf_get_name(0)
 
 	-- close buffer
 	if #openBuffers < 2 then
@@ -165,19 +166,9 @@ function M.deleteBuffer()
 		return
 	end
 	vim.cmd("silent! update")
-	vim.cmd.bdelete()
 
-	-- prevent alt-buffer pointing to deleted buffer
-	-- (Using `:bwipeout` prevents this, but would also remove the file from the
-	-- list of oldfiles which we don't want.)
-	local altFileOpen = vim.b[vim.fn.bufnr("#")].buflisted
-	if not altFileOpen then
-		table.sort(openBuffers, function(a, b) return a.lastused > b.lastused end)
-		if openBuffers[3] then -- 1st = closed buffer, 2nd = new current buffer
-			local newAltFile = openBuffers[3].name
-			vim.fn.setreg("#", newAltFile)
-		end
-	end
+	vim.cmd.bwipeout() -- prevents alt-buffer pointing to deleted buffer
+	table.insert(vim.v.oldfiles, curPath) -- add current file to oldfiles
 end
 
 function M.gotoAltFile()

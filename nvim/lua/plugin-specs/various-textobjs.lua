@@ -202,12 +202,12 @@ return {
 			function()
 				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
 				local core = require("various-textobjs.charwise-core")
-				core.selectClosestTextobj(pattern, "inner", 5)
+				core.selectClosestTextobj(pattern, "outer", 5)
 				local foundPath = vim.fn.mode() == "v"
 				if foundPath then return end
 
 				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				vim.ui.open(path)
+				vim.ui.open(vim.fs.normalize(path))
 			end,
 			desc = " Open next path",
 		},
