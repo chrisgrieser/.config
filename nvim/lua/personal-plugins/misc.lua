@@ -216,8 +216,9 @@ end
 
 function M.formatWithFallback()
 	local formattingLsps = vim.lsp.get_clients { method = "textDocument/formatting", bufnr = 0 }
+	local notifyOpts = { title = "Format", icon = "󱉯" }
 
-	if #formattingLsps > 0 then
+	if #formattingLsps == 1 then
 		-- save for efm-formatters that don't use stdin
 		if vim.bo.ft == "markdown" then
 			-- saving with explicit name prevents issues when changing `cwd`
@@ -226,11 +227,16 @@ function M.formatWithFallback()
 			vim.cmd(vimCmd)
 		end
 		vim.lsp.buf.format()
-	else
+	elseif #formattingLsps == 0 then
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
-		vim.notify("Formatting with fallback.", nil, { title = "Format", icon = "󱉯" })
+		vim.notify("Formatting with fallback.", nil, notifyOpts)
+	else
+		local names = vim.iter(formattingLsps)
+			:map(function(client) return "- " .. client.name end)
+			:join("\n")
+		vim.notify("Multiple formatters attached. Aborting.\n" .. names, vim.log.levels.WARN, notifyOpts)
 	end
 end
 
