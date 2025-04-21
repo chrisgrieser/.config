@@ -7,16 +7,15 @@ app.includeStandardAdditions = true;
 /**
  * @param {string} url
  * @param {string[]} header
- * @param {string=} extraOpts
  * @return {string} response
  */
-function httpRequestWithHeaders(url, header, extraOpts) {
+function httpRequestWithHeaders(url, header) {
 	let allHeaders = "";
 	for (const line of header) {
-		allHeaders += `-H "${line}" `;
+		allHeaders += ` -H "${line}"`;
 	}
-	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
+	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log("curl command:", curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -79,12 +78,13 @@ function run() {
 
 	// CALL GITHUB API
 	// DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
-	const parameter = showReadNotifs ? "?all=true" : "";
-	const response = httpRequestWithHeaders("https://api.github.com/notifications" + parameter, [
+	const apiUrl = "https://api.github.com/notifications?all=" + showReadNotifs.toString();
+	const headers = [
 		"Accept: application/vnd.github.json",
 		"X-GitHub-Api-Version: 2022-11-28",
 		`Authorization: BEARER ${githubToken}`,
-	]);
+	];
+	const response = httpRequestWithHeaders(apiUrl, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],

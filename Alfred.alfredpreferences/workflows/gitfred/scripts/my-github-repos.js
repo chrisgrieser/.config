@@ -14,16 +14,15 @@ function alfredMatcher(str) {
 /**
  * @param {string} url
  * @param {string[]} header
- * @param {string=} extraOpts
  * @return {string} response
  */
-function httpRequestWithHeaders(url, header, extraOpts) {
+function httpRequestWithHeaders(url, header) {
 	let allHeaders = "";
 	for (const line of header) {
-		allHeaders += `-H "${line}" `;
+		allHeaders += ` -H "${line}"`;
 	}
-	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
+	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log("curl command:", curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -68,11 +67,14 @@ function run() {
 
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	let apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
-	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
+	const headers = [
+		"Accept: application/vnd.github.json",
+		"X-GitHub-Api-Version: 2022-11-28",
+	];
 	if (githubToken) {
-		headers.push(`Authorization: BEARER ${githubToken}`);
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
 		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated"
+		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
 	const response = httpRequestWithHeaders(apiURL, headers);
