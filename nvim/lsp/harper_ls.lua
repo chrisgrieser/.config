@@ -4,10 +4,8 @@
 -- https://writewithharper.com/docs/rules
 --------------------------------------------------------------------------------
 
--- needs to be set separately, so it takes priority over nvim-lspconfig 
-vim.lsp.config.harper_ls = { filetypes = { "markdown" } }
-
 return {
+	filetypes = { "markdown" }, -- too many false positives elsewhere
 	settings = {
 		["harper-ls"] = {
 			diagnosticSeverity = "hint",
@@ -16,11 +14,11 @@ return {
 			linters = {
 				-- disable buggy rules
 				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
-				CommaFixes = true, -- https://github.com/Automattic/harper/issues/1097
+				CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
 
 				-- enable extra rules
-				BoringWords = true,
-				LinkingVerbs = true,
+				BoringWords = false,
+				LinkingVerbs = false,
 				UseGenitive = true,
 				SpelledNumbers = true,
 			},

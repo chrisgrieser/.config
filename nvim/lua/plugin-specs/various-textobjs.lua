@@ -155,15 +155,39 @@ return {
 			function()
 				local cursorBefore = vim.api.nvim_win_get_cursor(0)
 
-				require("various-textobjs").url()
-				local foundURL = vim.fn.mode() == "v"
+				require("various-textobjs").url() -- select URL
+				local foundURL = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
 				if not foundURL then return end
 
 				local url = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				vim.ui.open(url)
+				vim.ui.open(url) -- requires nvim 0.10
+				vim.cmd.normal { "v", bang = true } -- leave visual mode
+
 				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
 			desc = " Open next URL",
+		},
+		{
+			"g-",
+			function()
+				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
+				local core = require("various-textobjs.charwise-core")
+				core.selectClosestTextobj(pattern, "outer", 5)
+
+				local foundPath = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
+				if not foundPath then return end
+
+				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
+				vim.cmd.normal { "v", bang = true } -- leave visual mode
+
+				local exists = vim.uv.fs_stat(vim.fs.normalize(path)) ~= nil
+				if exists then
+					vim.ui.open(path)
+				else
+					vim.notify("Path does not exist.", vim.log.levels.WARN)
+				end
+			end,
+			desc = " Open next path",
 		},
 		{ -- to next `then` in lua
 			"N",
@@ -196,20 +220,6 @@ return {
 				core.selectClosestTextobj(pattern, "inner", 5)
 			end,
 			desc = " inner path",
-		},
-		{
-			"g-",
-			function()
-				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
-				local core = require("various-textobjs.charwise-core")
-				core.selectClosestTextobj(pattern, "outer", 5)
-				local foundPath = vim.fn.mode() == "v"
-				if foundPath then return end
-
-				local path = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
-				vim.ui.open(vim.fs.normalize(path))
-			end,
-			desc = " Open next path",
 		},
 	},
 }
