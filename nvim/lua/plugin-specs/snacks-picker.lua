@@ -181,14 +181,7 @@ return {
 		-- MISC
 
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
-		{
-			"<leader>ms",
-			function()
-				local function onlyGlobalMarks(item) return item.label:find("%u") ~= nil end
-				Snacks.picker.marks { transform = onlyGlobalMarks }
-			end,
-			desc = "󰃁 Select mark",
-		},
+		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
@@ -198,6 +191,23 @@ return {
 		---@type snacks.picker.Config
 		picker = {
 			sources = {
+				marks = {
+					-- only global marks
+					transform = function(item) return item.label:find("%u") ~= nil end,
+					win = {
+						input = {
+							keys = { ["<D-d>"] = { "delete_mark", mode = "i" } },
+						},
+					},
+					actions = {
+						delete_mark = function(picker)
+							local mark = picker:current().label
+							vim.api.nvim_del_mark(mark)
+							vim.notify(("Deleted mark [%s]"):format(mark))
+							picker:find() -- reload
+						end,
+					},
+				},
 				files = {
 					cmd = "rg",
 					args = {
