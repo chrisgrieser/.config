@@ -7,7 +7,7 @@ keymap("n", "<D-,>", function()
 	vim.cmd.edit(pathOfThisFile)
 end, { desc = "󰌌 Edit keybindings" })
 
--- save before quitting (non-unique, since also set by neovide)
+-- save before quitting (non-unique, since also set by Neovide)
 keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
@@ -25,7 +25,7 @@ keymap({ "n", "x" }, "k", "gk")
 -- (not mapping in op-pending, since using custom textobjects for those)
 keymap({ "n", "x" }, "H", "0^", { desc = "󰲠 char" }) -- scroll fully to the left
 keymap("o", "H", "^", { desc = "󰲠 char" })
-keymap({ "n", "x" }, "L", "$zv", { desc = "󰬓 char" }) -- zv: unfold under cursor
+keymap({ "n", "x" }, "L", "$zv", { desc = "󰬓 char" }) -- `zv`: unfold under cursor
 keymap({ "n", "x" }, "J", "6gj", { desc = "6j" })
 keymap({ "n", "x" }, "K", "6gk", { desc = "6k" })
 
@@ -244,7 +244,7 @@ for _, value in pairs(textobjRemaps) do
 	keymap({ "o", "x" }, "a" .. remap, "a" .. original, { desc = icon .. " outer " .. label })
 end
 
-keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, dJ = 3 lines
+keymap("o", "J", "2j") -- dd = 1 line, dj = 2 lines, `dJ` = 3 lines
 keymap("n", "<Space>", '"_ciw', { desc = "󰬞 Change word" })
 keymap("x", "<Space>", '"_c', { desc = "󰒅 Change selection" })
 keymap("n", "<S-Space>", '"_daw', { desc = "󰬞 Delete word" })

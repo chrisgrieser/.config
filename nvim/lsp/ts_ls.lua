@@ -32,7 +32,7 @@ local config = {
 	end,
 }
 
-config.ts_ls.settings.javascript = config.ts_ls.settings.typescript
+config.settings.javascript = config.settings.typescript
 
 --------------------------------------------------------------------------------
 return config

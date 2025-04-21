@@ -108,6 +108,7 @@ function M.toggleOrIncrement()
 	elseif vim.bo.ft == "lua" then
 		toggles["=="] = "~="
 		toggles["and"] = "or"
+		toggles["elseif"] = "if"
 	end
 
 	-- cword does not include punctuation-only words, so checking `cWORD` for that
