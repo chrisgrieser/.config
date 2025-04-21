@@ -20,7 +20,9 @@ return {
 		},
 
 		-- stylua: ignore start
-		{ ".", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji textobj" },
+		{ ".", "<cmd>lua require('various-textobjs').emoji()<CR>", mode = {"x","o"}, desc = " emoji" },
+		{ "a-", "<cmd>lua require('various-textobjs').filepath('outer')<CR>", mode = {"x","o"}, desc = " outer filepath" },
+		{ "i-", "<cmd>lua require('various-textobjs').filepath('inner')<CR>", mode = {"x","o"}, desc = " inner filepath" },
 
 		{ "a,", "<cmd>lua require('various-textobjs').argument('outer')<CR>", mode = {"x","o"}, desc = "󰏪 outer argument" },
 		{ "i,", "<cmd>lua require('various-textobjs').argument('inner')<CR>", mode = {"x","o"}, desc = "󰏪 inner argument" },
@@ -153,8 +155,6 @@ return {
 		{ -- open URL (forward seeking)
 			"gx",
 			function()
-				local cursorBefore = vim.api.nvim_win_get_cursor(0)
-
 				require("various-textobjs").url() -- select URL
 				local foundURL = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
 				if not foundURL then return end
@@ -162,17 +162,13 @@ return {
 				local url = vim.fn.getregion(vim.fn.getpos("."), vim.fn.getpos("v"), { type = "v" })[1]
 				vim.ui.open(url) -- requires nvim 0.10
 				vim.cmd.normal { "v", bang = true } -- leave visual mode
-
-				vim.api.nvim_win_set_cursor(0, cursorBefore)
 			end,
 			desc = " Open next URL",
 		},
 		{
 			"g-",
 			function()
-				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
-				local core = require("various-textobjs.charwise-core")
-				core.selectClosestTextobj(pattern, "outer", 5)
+				require("various-textobjs").filepath("outer")
 
 				local foundPath = vim.fn.mode() == "v" -- only switches to visual mode when textobj found
 				if not foundPath then return end
@@ -200,26 +196,6 @@ return {
 			end,
 			ft = "lua",
 			desc = "󰬞 to next `then`",
-		},
-		{ -- filepath textobj
-			"a-",
-			mode = "o",
-			function()
-				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
-				local core = require("various-textobjs.charwise-core")
-				core.selectClosestTextobj(pattern, "outer", 5)
-			end,
-			desc = " outer path",
-		},
-		{
-			"i-",
-			mode = "o",
-			function()
-				local pattern = { unixPath = "([.~]?/?[%w_%-.$/]+/)[%w_%-.]+()" }
-				local core = require("various-textobjs.charwise-core")
-				core.selectClosestTextobj(pattern, "inner", 5)
-			end,
-			desc = " inner path",
 		},
 	},
 }
