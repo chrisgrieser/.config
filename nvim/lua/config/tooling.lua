@@ -28,7 +28,7 @@ local lspToMasonMap = {
 	yamlls = "yaml-language-server",
 }
 
-local extraDependencies = {
+local extraMasonPackages = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"stylua", -- efm
@@ -38,20 +38,19 @@ local extraDependencies = {
 }
 
 --------------------------------------------------------------------------------
-
-local masonPackages = vim.tbl_values(lspToMasonMap)
-vim.list_extend(masonPackages, extraDependencies)
-
-local lsps = vim.tbl_keys(lspToMasonMap)
+-- LSP
 
 -- Not installed via `mason`, but included in Xcode Command Line Tools (which
 -- are usually installed on macOS-dev devices as they are needed for `homebrew`)
-if jit.os == "OSX" then table.insert(lsps, "sourcekit") end
+if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
 
---------------------------------------------------------------------------------
-
--- for when loaded from `init.lua`, enable LSPs
+-- when loaded from `init.lua`, enable LSPs
+local lsps = vim.tbl_keys(lspToMasonMap)
 vim.lsp.enable(lsps)
 
--- for when loaded from `mason` config, return list of mason packages
+--------------------------------------------------------------------------------
+-- MSON
+-- when loaded from `mason` config, return list of mason packages
+local masonPackages = vim.tbl_values(lspToMasonMap)
+vim.list_extend(masonPackages, extraMasonPackages)
 return masonPackages

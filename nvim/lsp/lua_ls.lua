@@ -33,7 +33,7 @@ return {
 				enable = false, -- using `stylua` instead
 			},
 			-- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
-			workspace = { checkThirdParty = "Disable" },
+			-- workspace = { checkThirdParty = "Disable" },
 		},
 	},
 	on_attach = function(client)
