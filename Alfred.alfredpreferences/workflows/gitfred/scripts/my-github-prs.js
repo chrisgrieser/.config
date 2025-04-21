@@ -14,16 +14,15 @@ function alfredMatcher(str) {
 /**
  * @param {string} url
  * @param {string[]} header
- * @param {string=} extraOpts
  * @return {string} response
  */
-function httpRequestWithHeaders(url, header, extraOpts) {
+function httpRequestWithHeaders(url, header) {
 	let allHeaders = "";
 	for (const line of header) {
-		allHeaders += `-H "${line}" `;
+		allHeaders += ` -H "${line}"`;
 	}
-	extraOpts = extraOpts || "";
-	const curlRequest = `curl -L ${allHeaders} "${url}" ${extraOpts} || true`;
+	const curlRequest = `curl --silent --location ${allHeaders} "${url}" || true`;
+	console.log("curl command:", curlRequest);
 	return app.doShellScript(curlRequest);
 }
 
@@ -69,11 +68,11 @@ function run() {
 	const githubToken =
 		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
 
-	const apiURL = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
+	const apiUrl = `https://api.github.com/search/issues?q=author:${username}+is:pr+is:open&per_page=100`;
 	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken) headers.push(`Authorization: BEARER ${githubToken}`);
 
-	const response = httpRequestWithHeaders(apiURL, headers);
+	const response = httpRequestWithHeaders(apiUrl, headers);
 	if (!response) {
 		return JSON.stringify({
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
