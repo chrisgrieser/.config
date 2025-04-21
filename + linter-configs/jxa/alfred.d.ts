@@ -32,7 +32,7 @@ declare class AlfredItem {
 	valid?: boolean;
 	type?: "default" | "file" | "file:skipcheck";
 	match?: string;
-	uid?: string;
+	uid?: string|undefined;
 	autocomplete?: string;
 	quicklookurl?: string|undefined;
 	// biome-ignore lint/suspicious/noExplicitAny: that's the type

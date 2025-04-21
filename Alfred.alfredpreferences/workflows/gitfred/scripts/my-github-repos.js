@@ -39,6 +39,7 @@ function run() {
 	const tokenShellCmd = "test -e $HOME/.zshenv && source $HOME/.zshenv ; echo $GITHUB_TOKEN";
 	const githubToken =
 		$.getenv("github_token_from_alfred_prefs").trim() || app.doShellScript(tokenShellCmd).trim();
+	const useAlfredFrecency = $.getenv("use_alfred_frecency") === "1";
 
 	// determine local repos
 	/** @type {Record<string, {path: string; dirty: boolean|undefined}>} */
@@ -67,13 +68,10 @@ function run() {
 
 	// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user
 	let apiURL = `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=updated`;
-	const headers = [
-		"Accept: application/vnd.github.json",
-		"X-GitHub-Api-Version: 2022-11-28",
-	];
+	const headers = ["Accept: application/vnd.github.json", "X-GitHub-Api-Version: 2022-11-28"];
 	if (githubToken) {
 		// DOCS https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user--parameters
-		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated"
+		apiURL = "https://api.github.com/user/repos?per_page=100&sort=updated";
 		headers.push(`Authorization: BEARER ${githubToken}`);
 	}
 
@@ -85,7 +83,7 @@ function run() {
 	}
 
 	const scriptFilterArr = JSON.parse(response)
-		.filter((/** @type {GithubRepo} */ repo) => !repo.archived)
+		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
 		.sort(
 			(
 				/** @type {GithubRepo&{isLocal: boolean}} */ a,
@@ -95,8 +93,6 @@ function run() {
 				b.isLocal = Boolean(localRepos[b.name]);
 				if (a.isLocal && !b.isLocal) return -1;
 				if (!a.isLocal && b.isLocal) return 1;
-				if (a.fork && !b.fork) return 1;
-				if (!a.fork && b.fork) return -1;
 				return 0; // use sorting from GitHub (updated status)
 			},
 		)
@@ -139,12 +135,11 @@ function run() {
 				match: matcher,
 				arg: mainArg,
 				quicklookurl: repo.private ? undefined : mainArg,
-				uid: repo.name,
+				uid: useAlfredFrecency ? repo.full_name : undefined,
 				mods: {
 					ctrl: { subtitle: "⌃: " + termAct, arg: terminalArg },
 					alt: { subtitle: "⌥: Copy GitHub URL", arg: repo.html_url },
 					cmd: { subtitle: "⌘: Open at GitHub", arg: repo.html_url },
-					shift: { arg: "", variables: { repo: repo.full_name } }, // arg empty for next input
 				},
 			};
 			return alfredItem;
