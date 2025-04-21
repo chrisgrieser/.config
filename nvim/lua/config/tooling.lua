@@ -1,7 +1,7 @@
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 --------------------------------------------------------------------------------
 
----since nvim-lspconfig and mason.nvim use different package names
+---since `nvim-lspconfig` and `mason` use different package names
 ---@type table<string, string>
 local lspToMasonMap = {
 	basedpyright = "basedpyright", -- python lsp (pyright fork)
@@ -16,11 +16,11 @@ local lspToMasonMap = {
 	html = "html-lsp",
 	jsonls = "json-lsp",
 	just = "just-lsp",
-	ltex_plus = "ltex-ls-plus", -- languagetool: natural language linter (ltex fork)
+	ltex_plus = "ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
 	lua_ls = "lua-language-server",
-	marksman = "marksman", -- markdown lsp
+	marksman = "marksman", -- Markdown lsp
 	ruff = "ruff", -- python linter & formatter
-	stylelint_lsp = "stylelint-lsp", -- css linter
+	stylelint_lsp = "stylelint-lsp", -- CSS linter
 	taplo = "taplo", -- toml lsp
 	ts_ls = "typescript-language-server",
 	ts_query_ls = "ts_query_ls", -- Treesitter query files
