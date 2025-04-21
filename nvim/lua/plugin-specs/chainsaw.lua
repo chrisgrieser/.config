@@ -23,6 +23,8 @@ return {
 				zsh = 'osascript -e "display notification \\"{{marker}} ${{var}}\\" with title \\"{{var}}\\""',
 				-- simple print statements for `snacks`' scratch buffer
 				nvim_lua = "print({{var}}) -- {{marker}}",
+				-- Hammerspoon: alert
+				lua = 'hs.alert.show("{{marker}} {{var}}: " .. hs.inspect({{var}}))',
 			},
 			clearLog = { -- Hammerspoon
 				lua = "hs.console.clearConsole() -- {{marker}}",

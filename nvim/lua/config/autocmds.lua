@@ -226,8 +226,9 @@ local templateDir = vim.fn.stdpath("config") .. "/templates"
 local globToTemplateMap = {
 	[vim.g.localRepos .. "/**/*.lua"] = "module.lua",
 	[vim.fn.stdpath("config") .. "/lua/personal-plugins/*.lua"] = "module.lua",
-	[vim.fn.stdpath("config") .. "/lua/plugin-specs/**/*.lua"] = "plugin-spec.lua",
 	["**/hammerspoon/modules/*.lua"] = "module.lua",
+	[vim.fn.stdpath("config") .. "/lua/plugin-specs/*.lua"] = "plugin-spec.lua",
+	[vim.fn.stdpath("config") .. "/lsp/*.lua"] = "lsp.lua",
 
 	["**/*.py"] = "template.py",
 	["**/*.swift"] = "template.swift",
