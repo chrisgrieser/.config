@@ -693,6 +693,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -710,25 +729,6 @@
 			<string>504CECC9-A64D-4F2A-A0E5-664B355EB529</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1192,29 +1192,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>scripts/resolve-notification.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1267,6 +1244,29 @@
 			<string>B35052FF-0027-40CC-BC59-EA7D442A57EA</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>scripts/resolve-notification.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>BFABA717-A81E-4D69-A8C2-4ED2042B4588</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1409,7 +1409,7 @@
 			<key>xpos</key>
 			<real>810</real>
 			<key>ypos</key>
-			<real>1105</real>
+			<real>1005</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1420,7 +1420,7 @@
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>985</real>
+			<real>885</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1449,7 +1449,7 @@
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>900</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1500,7 +1500,7 @@
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1065</real>
+			<real>965</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
@@ -1547,7 +1547,7 @@
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>955</real>
+			<real>855</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1578,7 +1578,7 @@
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>820</real>
 		</dict>
 		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
 		<dict>
@@ -1618,7 +1618,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>900</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1629,7 +1629,7 @@
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>1000</real>
+			<real>900</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
@@ -1698,7 +1698,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>1075</real>
+			<real>975</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1707,7 +1707,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1115</real>
+			<real>1015</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
