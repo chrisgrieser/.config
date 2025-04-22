@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @typedef {Object} reminderObj
+/** @typedef {Object} Reminder
  * @property {string} id
  * @property {string} title
  * @property {string?} notes aka body
@@ -12,9 +12,19 @@ app.includeStandardAdditions = true;
  * @property {boolean} isCompleted
  * @property {string} dueDate
  * @property {string} creationDate
- * @property {string} isAllDay
+ * @property {boolean} isAllDay
  * @property {boolean} hasRecurrenceRules
  * @property {number} priority
+ */
+
+/** @typedef {Object} EventObj
+ * @property {string} title
+ * @property {string} calendar
+ * @property {string} startTime
+ * @property {string} endTime
+ * @property {boolean} isAllDay
+ * @property {string} location
+ * @property {boolean} hasRecurrenceRules
  */
 
 const isToday = (/** @type {Date?} */ aDate) => {
@@ -58,32 +68,35 @@ function relativeDate(absDate) {
 const urlRegex =
 	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
+/** @type {Intl.DateTimeFormatOptions} */
+const timeFmt = { hour: "2-digit", minute: "2-digit", hour12: false };
+
 //───────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
-	const timelogStart1 = Date.now(); // 🪚
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
 	const includeAllLists = $.getenv("include_all_lists") === "1";
-	const endOfToday = new Date();
-	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
-	const startOfToday = new Date();
-	startOfToday.setHours(0, 0, 0, 0);
+	const showEvents = $.getenv("show_events") === "1";
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	// REMINDERS
-	console.log(`#1 🪚: ${(Date.now() - timelogStart1) / 1000}s`);
+	const startOfToday = new Date();
+	startOfToday.setHours(0, 0, 0, 0);
+	const endOfToday = new Date();
+	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
+
 	const swiftReminderOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
-	let /** @type {reminderObj[]} */ remindersJson;
+	let /** @type {Reminder[]} */ remindersJson;
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
 		const errmsg = "❌ " + swiftReminderOutput; // if not parsable, it's a message
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
-	// EVENTS
-	console.log(`#2 🪚: ${(Date.now() - timelogStart2) / 1000}s`);
 
 	const remindersFiltered = remindersJson
 		.filter((rem) => {
@@ -101,7 +114,7 @@ function run() {
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
 		});
-	// console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
+	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -113,9 +126,7 @@ function run() {
 		// SUBTITLE: display due time, past due dates, missing due dates, list (if
 		// multiple), and body
 		const dueDateObj = new Date(rem.dueDate);
-		/** @type {Intl.DateTimeFormatOptions} */
-		const timeFormat = { hour: "2-digit", minute: "2-digit", hour12: false };
-		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFormat);
+		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFmt);
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
 		const missingDueDate = rem.dueDate ? "" : "no due date";
 		const listName = includeAllLists ? rem.list : ""; // only display when more than 1
@@ -164,17 +175,10 @@ function run() {
 				},
 				alt: {
 					arg: content,
-					variables: {
-						id: rem.id,
-						mode: "edit-reminder",
-					},
+					variables: { id: rem.id, mode: "edit-reminder" },
 				},
 				shift: {
-					variables: {
-						id: rem.id,
-						title: rem.title,
-						mode: "snooze",
-					},
+					variables: { id: rem.id, title: rem.title, mode: "snooze" },
 				},
 				ctrl: {
 					variables: {
@@ -187,26 +191,64 @@ function run() {
 		return alfredItem;
 	});
 
-	// GUARD
+	// GUARD no reminders
 	if (reminders.length === 0) {
 		const invalid = { valid: false, subtitle: "⛔ No reminders" };
-		return JSON.stringify({
-			items: [
-				{
-					title: "No open tasks for today.",
-					subtitle: "⏎: Show completed tasks.",
-					variables: {
-						showCompleted: true.toString(),
-						mode: "show-completed",
-					},
-					mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
-				},
-			],
+		reminders.push({
+			title: "No open tasks for today.",
+			subtitle: "⏎: Show completed tasks.",
+			variables: { showCompleted: true.toString(), mode: "show-completed" },
+			mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
 		});
 	}
 
+	//───────────────────────────────────────────────────────────────────────────
+
+	// EVENTS
+	let events = [];
+
+	if (showEvents) {
+	const swiftEventsOutput = app.doShellScript("swift ./scripts/events-today.swift");
+	let /** @type {EventObj[]} */ eventsJson;
+	try {
+		eventsJson = JSON.parse(swiftEventsOutput);
+	} catch (_error) {
+		const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
+		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
+	}
+
+	events = eventsJson.map((event) => {
+		let time = "";
+		if (!event.isAllDay) {
+			const start = event.startTime
+				? new Date(event.startTime).toLocaleTimeString([], timeFmt)
+				: "";
+			const end = event.endTime ? new Date(event.endTime).toLocaleTimeString([], timeFmt) : "";
+			time = start + " – " + end;
+		}
+
+		const subtitle = [
+			event.hasRecurrenceRules ? "🔁" : "",
+			time,
+			event.location ? "📍 " + event.location : "",
+			"📅 " + event.calendar,
+		]
+			.filter(Boolean)
+			.join("   ");
+
+		return {
+			title: event.title,
+			subtitle: subtitle,
+			valid: false, // read-only
+		};
+	});
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
+
+	// OUTPUT
 	return JSON.stringify({
-		items: reminders,
+		items: [...reminders, ...events],
 		skipknowledge: true, // keep sorting order
 	});
 }
