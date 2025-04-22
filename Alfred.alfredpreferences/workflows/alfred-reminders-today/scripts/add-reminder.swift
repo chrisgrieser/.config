@@ -66,7 +66,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Create a new reminder
 	let parsed = parseTimeAndMessage(from: input)
 	guard parsed != nil else {
-		print("❌ Invalid input: '\(input)'")
+		print("❌ Invalid time: \"\(input)\"")
 		semaphore.signal()
 		return
 	}
