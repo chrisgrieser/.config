@@ -91,10 +91,30 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 
 	// Set due date (If hour and minute are nil, it is an all-day reminder)
-	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
+	var dateComponents = calendar.dateComponents([], from: dayToUse)
 	dateComponents.hour = hh
 	dateComponents.minute = mm
 	reminder.dueDateComponents = dateComponents
+
+	// Add an alarm to trigger a notification. Even though the reminder created
+	// without an alarm looks the same as one with an alarm, an
+	// alarm is needed to trigger the notification (see #2).
+	if hh != nil && mm == nil {
+		// let alarm = EKAlarm(relativeOffset: 0) // Fire at due date
+		// reminder.addAlarm(alarm)
+		// let alarm = EKAlarm(absoluteDate: calendar.date(from: dateComponents)!)
+		// reminder.addAlarm(alarm)
+		if let dueDate = calendar.date(from: dateComponents) {
+			reminder.dueDateComponents = calendar.dateComponents(
+				[.year, .month, .day, .hour, .minute], from: dueDate)
+			let alarm = EKAlarm(absoluteDate: dueDate)
+			reminder.addAlarm(alarm)
+		} else {
+			print("❌ Failed to construct due date.")
+			semaphore.signal()
+			return
+		}
+	}
 
 	// Find the calendar (list) by name
 	if let calendarList = eventStore.calendars(for: .reminder).first(where: {

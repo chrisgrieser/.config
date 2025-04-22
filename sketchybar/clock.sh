@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-date=$(date +'%a %e. %b %H:%M')
+date=$(date +'%a %e. %b %H:%M:%S')
 
 # blinking ":"
 # INFO got using punctuation space from https://aresluna.org/spaces/ for exact
