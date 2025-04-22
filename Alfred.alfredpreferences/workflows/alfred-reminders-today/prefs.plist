@@ -4,6 +4,8 @@
 <dict>
 	<key>event_cache_duration</key>
 	<integer>30</integer>
+	<key>include_all_lists</key>
+	<true/>
 	<key>include_no_duedate</key>
 	<true/>
 	<key>quickadd_today_keyword</key>
@@ -14,8 +16,6 @@
 	<string>Tasks</string>
 	<key>select_reminder_keyword</key>
 	<string>|</string>
-	<key>show_events</key>
-	<true/>
 	<key>sketchybar_trigger_name</key>
 	<string>update_reminder_count</string>
 </dict>
