@@ -12,7 +12,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		local ns = vim.api.nvim_create_namespace("nvim.hlyank2")
 		local bufnr = vim.api.nvim_get_current_buf()
 		vim.hl.range(bufnr, ns, "IncSearch", "'[", "']", { inclusive = true })
-		vim.defer_fn(function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end, duration)
+		vim.defer_fn(
+			function() pcall(vim.api.nvim_buf_clear_namespace, bufnr, ns, 0, -1) end,
+			duration
+		)
 	end,
 })
 
