@@ -88,7 +88,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThresholdMins = 5; // CONFIG
+	const cacheAgeThresholdMins = Number.parseInt($.getenv("event_cache_duration"));
 	const cacheObj = Application("System Events").aliases[path];
 	ensureCacheFolderExists();
 	if (!cacheObj.exists()) return true;
@@ -152,6 +152,7 @@ function run() {
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
 		});
+	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -274,16 +275,18 @@ function run() {
 				event.hasRecurrenceRules ? "🔁" : "",
 				time,
 				event.location ? "📍 " + event.location : "",
-				"📅 " + event.calendar,
+				`(${event.calendar})`,
 			]
 				.filter(Boolean)
-				.join("   ");
+				.join("    ");
 
+			const invalid = { valid: false, subtitle: "⛔ Not available for events." };
 			return {
 				title: event.title,
 				subtitle: subtitle,
 				icon: { path: "./calendar.png" },
-				valid: false, // read-only
+				valid: false, // events are read-only
+				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
 			};
 		});
 		writeToFile(eventCachePath, JSON.stringify(events));

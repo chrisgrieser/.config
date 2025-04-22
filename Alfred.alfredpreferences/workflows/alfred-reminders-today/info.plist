@@ -1455,9 +1455,9 @@ to set a hotkey to show reminders due today</string>
 				<key>defaultvalue</key>
 				<integer>20</integer>
 				<key>markercount</key>
-				<integer>59</integer>
+				<integer>29</integer>
 				<key>maxvalue</key>
-				<integer>120</integer>
+				<integer>60</integer>
 				<key>minvalue</key>
 				<integer>4</integer>
 				<key>onlystoponmarkers</key>
@@ -1560,7 +1560,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.8.0</string>
+	<string>3.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -26,17 +26,23 @@ eventStore.requestFullAccessToEvents { granted, error in
 	}
 
 	let calendars = eventStore.calendars(for: .event)
-	let startOfDay = Calendar.current.startOfDay(for: Date())
+	let now = Date()
+	let startOfDay = Calendar.current.startOfDay(for: now)
 	let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
 
 	let predicate = eventStore.predicateForEvents(
 		withStart: startOfDay, end: endOfDay, calendars: calendars)
 	let events = eventStore.events(matching: predicate)
 
+	// Include events that start after now or are ongoing
+	let filteredEvents = events.filter { event in
+		return event.endDate > now
+	}
+
 	let formatter = ISO8601DateFormatter()
 	formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
-	let outputEvents = events.sorted(by: { $0.startDate < $1.startDate }).map { event in
+	let outputEvents = filteredEvents.sorted(by: { $0.startDate < $1.startDate }).map { event in
 		EventOutput(
 			title: event.title ?? "No Title",
 			startTime: formatter.string(from: event.startDate),
