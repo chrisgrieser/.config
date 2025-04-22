@@ -71,6 +71,44 @@ const urlRegex =
 /** @type {Intl.DateTimeFormatOptions} */
 const timeFmt = { hour: "2-digit", minute: "2-digit", hour12: false };
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache dir does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
+/** @param {string} path */
+function cacheIsOutdated(path) {
+	const cacheAgeThresholdMins = 5; // CONFIG
+	const cacheObj = Application("System Events").aliases[path];
+	ensureCacheFolderExists();
+	if (!cacheObj.exists()) return true;
+	const cacheAgeMins = (Date.now() - +cacheObj.creationDate()) / 1000 / 60;
+	return cacheAgeMins > cacheAgeThresholdMins;
+}
+
+/** @param {string} path */
+function readFile(path) {
+	const data = $.NSFileManager.defaultManager.contentsAtPath(path);
+	const str = $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding);
+	return ObjC.unwrap(str);
+}
+
+/** @param {string} filepath @param {string} text */
+function writeToFile(filepath, text) {
+	const str = $.NSString.alloc.initWithUTF8String(text);
+	str.writeToFileAtomicallyEncodingError(filepath, true, $.NSUTF8StringEncoding, null);
+}
+
 //───────────────────────────────────────────────────────────────────────────
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
@@ -114,7 +152,6 @@ function run() {
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
 		});
-	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -205,43 +242,53 @@ function run() {
 	//───────────────────────────────────────────────────────────────────────────
 
 	// EVENTS
-	let events = [];
+	let /** @type {AlfredItem[]} */ events = [];
+	const eventCachePath = $.getenv("alfred_workflow_cache") + "/events.json";
+	const cacheOutdated = cacheIsOutdated(eventCachePath);
 
-	if (showEvents) {
-	const swiftEventsOutput = app.doShellScript("swift ./scripts/events-today.swift");
-	let /** @type {EventObj[]} */ eventsJson;
-	try {
-		eventsJson = JSON.parse(swiftEventsOutput);
-	} catch (_error) {
-		const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
-		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
-	}
+	if (showEvents && cacheOutdated) {
+		console.log("Writing new cache for events…");
 
-	events = eventsJson.map((event) => {
-		let time = "";
-		if (!event.isAllDay) {
-			const start = event.startTime
-				? new Date(event.startTime).toLocaleTimeString([], timeFmt)
-				: "";
-			const end = event.endTime ? new Date(event.endTime).toLocaleTimeString([], timeFmt) : "";
-			time = start + " – " + end;
+		let /** @type {EventObj[]} */ eventsJson;
+		const swiftEventsOutput = app.doShellScript("swift ./scripts/events-today.swift");
+		try {
+			eventsJson = JSON.parse(swiftEventsOutput);
+		} catch (_error) {
+			const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
+			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 		}
 
-		const subtitle = [
-			event.hasRecurrenceRules ? "🔁" : "",
-			time,
-			event.location ? "📍 " + event.location : "",
-			"📅 " + event.calendar,
-		]
-			.filter(Boolean)
-			.join("   ");
+		events = eventsJson.map((event) => {
+			let time = "";
+			if (!event.isAllDay) {
+				const start = event.startTime
+					? new Date(event.startTime).toLocaleTimeString([], timeFmt)
+					: "";
+				const end = event.endTime
+					? new Date(event.endTime).toLocaleTimeString([], timeFmt)
+					: "";
+				time = start + " – " + end;
+			}
 
-		return {
-			title: event.title,
-			subtitle: subtitle,
-			valid: false, // read-only
-		};
-	});
+			const subtitle = [
+				event.hasRecurrenceRules ? "🔁" : "",
+				time,
+				event.location ? "📍 " + event.location : "",
+				"📅 " + event.calendar,
+			]
+				.filter(Boolean)
+				.join("   ");
+
+			return {
+				title: event.title,
+				subtitle: subtitle,
+				icon: { path: "./calendar.png" },
+				valid: false, // read-only
+			};
+		});
+		writeToFile(eventCachePath, JSON.stringify(events));
+	} else if (showEvents && !cacheOutdated) {
+		events = JSON.parse(readFile(eventCachePath));
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
