@@ -113,4 +113,4 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 }
 
-_ = semaphore.wait(timeout: .distantFuture)
+ _ = semaphore.wait(timeout: .distantFuture)

@@ -7,9 +7,11 @@ local darkThemes = {
 	"ChallengerDeep",
 }
 local lightThemes = {
-	"Ayu Light (Gogh)",
+	"Nord Light (Gogh)",
 	"Ivory Light (terminal.sexy)",
-	"Solar Flare Light (base16)",
+	"Railscasts (light) (terminal.sexy)",
+	"GoogleLight (Gogh)",
+	"BlulocoZshLight (Gogh)",
 }
 
 local deviceSpecific = {
@@ -65,7 +67,7 @@ wt.on("format-tab-title", function(tab)
 		title = pwdBasefolder
 		icon = "󰉋"
 	elseif title:find("^docs") then
-		icon = "󰂺"
+		icon = ""
 	else
 		icon = ""
 	end

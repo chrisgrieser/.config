@@ -62,6 +62,7 @@ const urlRegex =
 
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run() {
+	const timelogStart1 = Date.now(); // 🪚
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
@@ -71,15 +72,18 @@ function run() {
 	const startOfToday = new Date();
 	startOfToday.setHours(0, 0, 0, 0);
 
-	const swiftOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
+	// REMINDERS
+	console.log(`#1 🪚: ${(Date.now() - timelogStart1) / 1000}s`);
+	const swiftReminderOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
 	let /** @type {reminderObj[]} */ remindersJson;
-
 	try {
-		remindersJson = JSON.parse(swiftOutput);
+		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
-		const errmsg = "❌ " + swiftOutput; // if not parsable, it's a message
+		const errmsg = "❌ " + swiftReminderOutput; // if not parsable, it's a message
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
+	// EVENTS
+	console.log(`#2 🪚: ${(Date.now() - timelogStart2) / 1000}s`);
 
 	const remindersFiltered = remindersJson
 		.filter((rem) => {
@@ -97,7 +101,7 @@ function run() {
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
 		});
-	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
+	// console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
