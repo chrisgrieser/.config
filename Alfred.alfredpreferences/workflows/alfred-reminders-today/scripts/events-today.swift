@@ -7,6 +7,7 @@ struct EventOutput: Codable {
 	let title: String
 	let startTime: String
 	let endTime: String
+	let isAllDay: Bool
 	let calendar: String
 	let location: String
 	let hasRecurrenceRules: Bool
@@ -40,6 +41,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 			title: event.title ?? "No Title",
 			startTime: formatter.string(from: event.startDate),
 			endTime: formatter.string(from: event.endDate),
+			isAllDay: event.isAllDay,
 			calendar: event.calendar.title,
 			location: event.location ?? "",
 			hasRecurrenceRules: event.hasRecurrenceRules
