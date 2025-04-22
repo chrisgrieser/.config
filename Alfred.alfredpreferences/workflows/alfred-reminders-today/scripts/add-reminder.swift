@@ -19,13 +19,13 @@ struct ParsedResult {
 
 func parseTimeAndMessage(from input: String) -> ParsedResult? {
 	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
-	let pattern = #"(?<!\d)(\d{1,2}):(\d{1,2})(?!\d)"#
+	let pattern = #"(?<!\d)(\d{1,2}):(\d{2})(?!\d)"#
 	let regex = try! NSRegularExpression(pattern: pattern)
 
 	guard
 		let match = regex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg))
 	else {
-		// No time found — use entire input as message if not empty
+		// no time found -> use entire input as message
 		return msg.isEmpty
 			? nil : ParsedResult(hour: nil, minute: nil, message: msg)
 	}
@@ -91,7 +91,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 
 	// Set due date
-	var dateComponents = calendar.dateComponents([.year, .month, .day, .timeZone], from: dayToUse)
+	var dateComponents = calendar.dateComponents([.year, .month, .day], from: dayToUse)
 	dateComponents.hour = hh  // hour & minute are nil -> all-day reminder
 	dateComponents.minute = mm
 	reminder.dueDateComponents = dateComponents
@@ -105,10 +105,9 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 
 	// Find the calendar (list) by name
-	if let calendarList = eventStore.calendars(for: .reminder).first(where: {
-		$0.title == reminderList
-	}) {
-		reminder.calendar = calendarList
+	let listToUse = eventStore.calendars(for: .reminder).first(where: { $0.title == reminderList })
+	if listToUse != nil {
+		reminder.calendar = listToUse
 	} else {
 		print("❌ No calendar found with the name \"\(reminderList)\".")
 		semaphore.signal()
@@ -119,7 +118,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	do {
 		try eventStore.save(reminder, commit: true)
 		var alfredNotif = title
-		if hh != nil {
+		if hh != nil && mm != nil {
 			let minutePadded = String(format: "%02d", mm!)
 			alfredNotif = "\(hh!):\(minutePadded) — \(title)"
 		}

@@ -1,4 +1,5 @@
 ---Set up plugin-specific groups cleanly with the plugin config
+---(Accessed via `vim.g`, as this file's exports are used by `lazy.nvim`.)
 ---@param spec { [1]: string, mode?: string[], group: string }
 vim.g.whichkeyAddSpec = function(spec)
 	if not spec.mode then spec.mode = { "n", "x" } end
@@ -90,9 +91,8 @@ return {
 			group = "", -- different color for groups already distinguishable enough
 			separator = "│",
 			mappings = false, -- disable icons for keymaps.
-			-- NOTE unfortuenately, we cannot get icons from the keymap
-			-- descriptions, so we just use the icons from there and disable
-			-- whickey's icon features
+			-- NOTE we cannot get icons from the keymap descriptions, so we just
+			-- use the icons from there and disable whickey's icon features
 		},
 		keys = {
 			scroll_down = "<PageDown>",
