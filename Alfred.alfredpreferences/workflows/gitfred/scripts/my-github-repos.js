@@ -81,8 +81,10 @@ function run() {
 			items: [{ title: "No response from GitHub.", subtitle: "Try again later.", valid: false }],
 		});
 	}
+	const parsedRepos = JSON.parse(response)
+	console.log("Repo count:", parsedRepos.length);
 
-	const scriptFilterArr = JSON.parse(response)
+	const repos = parsedRepos
 		.filter((/** @type {GithubRepo} */ repo) => !repo.archived) // github API does now allow filtering when requesting
 		.sort(
 			(
@@ -146,7 +148,7 @@ function run() {
 		});
 
 	return JSON.stringify({
-		items: scriptFilterArr,
+		items: repos,
 		variables: { ownerOfRepo: "true" },
 		cache: { seconds: 15, loosereload: true }, // short, since cloned repos should be available immediately
 	});

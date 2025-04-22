@@ -413,6 +413,7 @@ do
 		{ desc = "󰃽 Start/stop recording" }
 	)
 	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
+	vim.fn.setreg(reg, "") -- clear register on start
 end
 
 --------------------------------------------------------------------------------
