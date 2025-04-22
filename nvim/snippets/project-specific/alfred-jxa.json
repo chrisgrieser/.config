@@ -107,7 +107,7 @@
       "\tconst finder = Application(\"Finder\");",
       "\tconst cacheDir = \\$.getenv(\"alfred_workflow_cache\");",
       "\tif (!finder.exists(Path(cacheDir))) {",
-      "\t\tconsole.log(\"Cache Dir does not exist and is created.\");",
+      "\t\tconsole.log(\"Cache directory does not exist and is created.\");",
       "\t\tconst cacheDirBasename = \\$.getenv(\"alfred_workflow_bundleid\");",
       "\t\tconst cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);",
       "\t\tfinder.make({",
