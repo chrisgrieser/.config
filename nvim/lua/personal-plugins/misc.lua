@@ -39,6 +39,7 @@ function M.startOrStopRecording(toggleKey, reg)
 		vim.cmd.normal { "q" .. reg, bang = true }
 		soundFile = "begin_record.caf"
 	else
+		local prevMacro = vim.fn.getreg(reg)
 		vim.cmd.normal { "q", bang = true }
 		local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
 		if macro ~= "" then
@@ -47,6 +48,7 @@ function M.startOrStopRecording(toggleKey, reg)
 			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
 			soundFile = "end_record.caf"
 		else
+			vim.fn.setreg(reg, prevMacro) -- prevent `toggleKey` filling the register
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
 			soundFile = "media_paused.caf"
 		end
