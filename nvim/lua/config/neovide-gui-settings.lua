@@ -59,7 +59,7 @@ vim.opt.guicursor = {
 	"i-ci-c:ver25",
 	"n-sm:block",
 	"r-cr-o-v:hor10",
-	"a:blinkwait100-blinkoff500-blinkon500",
+	"a:blinkwait200-blinkoff800-blinkon1000",
 }
 vim.g.neovide_cursor_smooth_blink = true
 
