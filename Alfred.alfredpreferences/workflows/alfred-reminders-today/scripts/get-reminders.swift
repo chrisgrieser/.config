@@ -29,12 +29,12 @@ let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "tru
 
 eventStore.requestFullAccessToReminders { granted, error in
 	if let error = error {
-		print("Error requesting access: \(error.localizedDescription)")
+		print("❌ Error requesting access: \(error.localizedDescription)")
 		semaphore.signal()
 		return
 	}
 	guard granted else {
-		print("Access to Reminders not granted.")
+		print("❌ Access to Reminders not granted.")
 		semaphore.signal()
 		return
 	}
@@ -48,7 +48,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	} else if let target = calendars.first(where: { $0.title == reminderList }) {
 		selectedCalendars = [target]
 	} else {
-		print("No list found with name \"\(reminderList)\"")
+		print("⚠️ No list found with name \"\(reminderList)\"")
 		semaphore.signal()
 		return
 	}
@@ -107,7 +107,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 				print(jsonString)
 			}
 		} catch {
-			print("Failed to encode reminders as JSON: \(error.localizedDescription)")
+			print("❌ Failed to encode reminders as JSON: \(error.localizedDescription)")
 		}
 		semaphore.signal()
 	}
