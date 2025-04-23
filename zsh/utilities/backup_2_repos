@@ -5,7 +5,7 @@ bkp_destination="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Backups/My R
 max_number_of_bkps=3
 
 # IGNORES PERMA-REPOS (since they are already locally backed up)
-ignore_repos=$(cut -d, -f2 "$HOME/.config/perma-repos.csv" |
+ignore_repos=$(cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 	xargs basename |
 	tr "\n" "|" |
 	sed -e "s/.$//") # construct regex pattern for `grep`

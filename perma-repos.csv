@@ -1,5 +1,5 @@
-Dotfiles,~/.config,🔵,d
-Main Vault,~/Vaults/main-vault,🟪,v
-PhD Vault,~/Vaults/phd-data-analysis,📗,a
-Writing Vault,~/Vaults/writing-vault,🖊️,w
-Passwords,~/.password-store,🔑,p
+~/.config,🔵,d
+~/Vaults/main-vault,🟪,v
+~/Vaults/phd-data-analysis,📗,a
+~/Vaults/writing-vault,🖊️,w
+~/.password-store,🔑,p

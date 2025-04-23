@@ -16,8 +16,8 @@ all_changes=""
 
 # UNCOMMITTED CHANGES
 while read -r line; do
-	letter=$(echo "$line" | cut -d, -f4)
-	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
+	letter=$(echo "$line" | cut -d, -f3)
+	repo_path=$(echo "$line" | cut -d, -f1 | sed "s|^~|$HOME|")
 	changes=$(git -C "$repo_path" status --porcelain)
 	change_count=0 # to account for empty changes adding one blank line
 	[[ -n "$changes" ]] && change_count=$(echo "$changes" | wc -l | tr -d " ")
