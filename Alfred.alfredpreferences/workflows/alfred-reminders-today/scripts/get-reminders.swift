@@ -1,5 +1,4 @@
-// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
-// ─────────────────────────────────────────────────────────────────────────────
+#!/usr/bin/env swift
 
 import EventKit
 import Foundation
@@ -25,7 +24,7 @@ let semaphore = DispatchSemaphore(value: 0)
 // Alfred environment variables
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
-let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"
+let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"  // no `!`, since not always set
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -66,17 +65,18 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
-			print("[]")
+			print("[]")  // empty json array
 			semaphore.signal()
 			return
 		}
 
 		let formatter = ISO8601DateFormatter()
+
+		// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
 		let reminderData = reminders.map { reminder in
 			let components = reminder.dueDateComponents
-			let isAllDay = components?.hour == nil && components?.minute == nil
 
-			// normalize priority based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
+			// normalize based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
 			var prioNormalized = 0
 			if reminder.priority > 5 {
 				prioNormalized = 1
@@ -88,12 +88,12 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 			return ReminderOutput(
 				id: reminder.calendarItemIdentifier,
-				title: reminder.title ?? "(No Title)",
+				title: reminder.title,
 				notes: reminder.notes,
 				list: reminder.calendar.title,
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
-				isAllDay: isAllDay,
+				isAllDay: components?.hour == nil && components?.minute == nil,
 				isCompleted: reminder.isCompleted,
 				hasRecurrenceRules: reminder.hasRecurrenceRules,
 				priority: prioNormalized
@@ -113,4 +113,4 @@ eventStore.requestFullAccessToReminders { granted, error in
 	}
 }
 
- _ = semaphore.wait(timeout: .distantFuture)
+_ = semaphore.wait(timeout: .distantFuture)

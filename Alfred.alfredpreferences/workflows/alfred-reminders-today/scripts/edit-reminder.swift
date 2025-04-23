@@ -65,7 +65,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 			let success = editReminderFromStdin(reminder: reminder)
 			if !success { return }
 		} else {
-			print("Unknown mode: ", mode)
+			print("❌ Unknown mode: ", mode)
 			return
 		}
 
