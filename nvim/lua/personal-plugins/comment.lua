@@ -10,6 +10,8 @@ local function getCommentstr()
 	return comStr
 end
 
+local formatterWantPadding = { "python", "css", "scss", "swift" }
+
 --------------------------------------------------------------------------------
 
 -- appends a horizontal line, with the language's comment syntax,
@@ -40,8 +42,7 @@ function M.commentHr()
 	local hrWithComment = comStr:format(hr)
 
 	-- filetype-specific considerations
-	local formatterWantPadding = { "python", "css", "scss", "swift" }
-	if not vim.tbl_contains(formatterWantPadding, vim.bo.ft) then
+	if not vim.list_contains(formatterWantPadding, vim.bo.ft) then
 		hrWithComment = hrWithComment:gsub(" ", hrChar)
 	end
 	local fullLine = indent .. hrWithComment
@@ -141,7 +142,7 @@ function M.addComment(where)
 		end
 		indent = vim.fn.getline(i):match("^%s*")
 	end
-	local spacing = vim.bo.ft == "python" and "  " or " " -- black/ruff demand two spaces
+	local spacing = vim.list_contains(formatterWantPadding, vim.bo.ft) and "  " or " "
 	local newLine = emptyLine and indent or line .. spacing
 
 	-- write line

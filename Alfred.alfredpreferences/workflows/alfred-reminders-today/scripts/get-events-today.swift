@@ -32,9 +32,9 @@ func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
 	let orangeDiff = abs(r - 1.0) + abs(g - 0.6) + b
 
 	// Adjust the ranges by reducing weights for differences
-	let brownDiff = 1.3 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
+	let brownDiff = 2.0 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
 	let whiteDiff = 0.7 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
-	let blackDiff = 0.7 * (r + g + b) // more range
+	let blackDiff = 0.7 * (r + g + b)  // more range
 
 	let diffs = [
 		(redDiff, "🔴"),
@@ -49,7 +49,7 @@ func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
 	]
 
 	let closest = diffs.min { $0.0 < $1.0 }
-	return closest?.1 ?? "unknown"
+	return closest?.1 ?? "?"
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
