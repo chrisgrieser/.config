@@ -87,7 +87,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>97CDF7FA-9466-4BBF-80EB-FED7FFF8C657</string>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -228,19 +228,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>97CDF7FA-9466-4BBF-80EB-FED7FFF8C657</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<array>
 			<dict>
@@ -322,18 +309,6 @@
 		<array/>
 		<key>E5DECF0A-F7E7-4C15-BF46-AD547A831F40</key>
 		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>97CDF7FA-9466-4BBF-80EB-FED7FFF8C657</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>24FCBA11-ED83-442C-8BD7-7C7D9DE084B6</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>32A761BD-C231-44E7-88CB-7590C87A6BA6</string>
@@ -499,14 +474,6 @@
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>97CDF7FA-9466-4BBF-80EB-FED7FFF8C657</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>browser</key>
@@ -532,20 +499,6 @@
 			<dict>
 				<key>conditions</key>
 				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:mode}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>show-completed</string>
-						<key>outputlabel</key>
-						<string>show completed rem.</string>
-						<key>uid</key>
-						<string>24FCBA11-ED83-442C-8BD7-7C7D9DE084B6</string>
-					</dict>
 					<dict>
 						<key>inputstring</key>
 						<string>{var:mode}</string>
@@ -1092,7 +1045,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>445</real>
 		</dict>
 		<key>0F93036F-D158-49BB-97AF-DE600B8A3300</key>
 		<dict>
@@ -1103,7 +1056,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>295</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>750</real>
 		</dict>
 		<key>1486415C-BA88-4276-A021-3773113CAF94</key>
 		<dict>
@@ -1112,7 +1065,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>320</real>
 		</dict>
 		<key>1F28B1D0-95DD-4F7F-BB2A-018A98C5743B</key>
 		<dict>
@@ -1123,7 +1076,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>850</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>270</real>
 		</dict>
 		<key>23ED3685-8AA0-4314-A16F-F7D8A0D01A70</key>
 		<dict>
@@ -1132,7 +1085,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>545</real>
 			<key>ypos</key>
-			<real>260</real>
+			<real>210</real>
 		</dict>
 		<key>32A761BD-C231-44E7-88CB-7590C87A6BA6</key>
 		<dict>
@@ -1141,9 +1094,9 @@ brew untap keith/formulae
 			<key>note</key>
 			<string>open event</string>
 			<key>xpos</key>
-			<real>770</real>
+			<real>690</real>
 			<key>ypos</key>
-			<real>120</real>
+			<real>85</real>
 		</dict>
 		<key>45E222F3-9910-4038-AA60-1ABC01E95D81</key>
 		<dict>
@@ -1163,7 +1116,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>445</real>
 		</dict>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
 		<dict>
@@ -1174,7 +1127,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>730</real>
 			<key>ypos</key>
-			<real>350</real>
+			<real>300</real>
 		</dict>
 		<key>5B4E3523-E2C7-4E39-87C0-D157AC551A91</key>
 		<dict>
@@ -1183,7 +1136,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>680</real>
+			<real>630</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1203,7 +1156,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>485</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>750</real>
 		</dict>
 		<key>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</key>
 		<dict>
@@ -1212,7 +1165,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>1020</real>
 			<key>ypos</key>
-			<real>320</real>
+			<real>270</real>
 		</dict>
 		<key>7620DB33-1A59-45FB-9FE1-CF7502A1EE80</key>
 		<dict>
@@ -1221,7 +1174,7 @@ brew untap keith/formulae
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>325</real>
+			<real>275</real>
 		</dict>
 		<key>76767F1C-52B8-425C-8621-F7E67C523434</key>
 		<dict>
@@ -1236,15 +1189,6 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>97CDF7FA-9466-4BBF-80EB-FED7FFF8C657</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>700</real>
-			<key>ypos</key>
-			<real>45</real>
-		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1252,7 +1196,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>580</real>
 		</dict>
 		<key>A915081B-4FBF-46B4-8B5E-AF3C2282A034</key>
 		<dict>
@@ -1274,7 +1218,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>495</real>
+			<real>445</real>
 		</dict>
 		<key>BD7716E2-05C1-4CD2-9B1C-5FD044289103</key>
 		<dict>
@@ -1285,7 +1229,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>650</real>
+			<real>600</real>
 		</dict>
 		<key>D39A1AFE-3A07-40A3-BCD6-FE4A721D8959</key>
 		<dict>
@@ -1294,7 +1238,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>830</real>
+			<real>780</real>
 		</dict>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<dict>
@@ -1305,7 +1249,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>1090</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>750</real>
 		</dict>
 		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
 		<dict>
@@ -1321,9 +1265,9 @@ to set a hotkey to show reminders due today</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>500</real>
+			<real>430</real>
 			<key>ypos</key>
-			<real>125</real>
+			<real>120</real>
 		</dict>
 		<key>E9FBABB7-D7D0-4EF6-A0F8-BC9B2124CB77</key>
 		<dict>
@@ -1334,7 +1278,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>430</real>
 			<key>ypos</key>
-			<real>630</real>
+			<real>580</real>
 		</dict>
 		<key>F282F9C0-5F8C-4504-889D-6F7B1B1A0CFA</key>
 		<dict>
@@ -1345,7 +1289,7 @@ to set a hotkey to show reminders due today</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>800</real>
+			<real>750</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

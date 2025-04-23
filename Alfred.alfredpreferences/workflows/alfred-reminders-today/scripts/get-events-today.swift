@@ -20,12 +20,12 @@ let semaphore = DispatchSemaphore(value: 0)
 
 eventStore.requestFullAccessToEvents { granted, error in
 	if let error = error {
-		print("Error requesting access: \(error.localizedDescription)")
+		print("Error requesting access to Calendar events: \(error.localizedDescription)")
 		semaphore.signal()
 		return
 	}
 	guard granted else {
-		print("Access to Reminders not granted.")
+		print("Access to Calendar events not granted.")
 		semaphore.signal()
 		return
 	}
@@ -55,7 +55,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 			endTime: formatter.string(from: event.endDate),
 			isAllDay: event.isAllDay,
 			calendar: event.calendar.title,
-			location: event.location,
+			location: event.location ?? event.url?.absoluteString, // fallback to URL
 			hasRecurrenceRules: event.hasRecurrenceRules
 		)
 	}
