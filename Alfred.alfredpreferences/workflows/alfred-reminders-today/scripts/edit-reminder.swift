@@ -54,7 +54,7 @@ func editReminderFromStdin(reminder: EKReminder) -> Bool {
 eventStore.requestFullAccessToReminders { granted, error in
 	guard error == nil && granted else {
 		let msg =
-			granted
+			error != nil
 			? "Error requesting access: \(error!.localizedDescription)"
 			: "Access to Calendar events not granted."
 		print("❌ " + msg)
