@@ -93,7 +93,7 @@ declare function Path(filepath: string): PathObj;
 declare type ReminderList = {
 	make(any);
 	reminders: {
-		push(newReminder: ReminderObj): void;
+		push(newReminder: Reminder): void;
 		whose(options: {
 			dueDate?: {
 				// https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW10
@@ -102,7 +102,7 @@ declare type ReminderList = {
 			};
 			completed?: boolean;
 		});
-		(): ReminderObj[];
+		(): Reminder[];
 	};
 };
 
@@ -120,7 +120,7 @@ declare type ReminderProperties = {
 	creationDate?: Date;
 };
 
-declare type ReminderObj = {
+declare type Reminder = {
 	name(): string;
 	body(): string;
 	delete(): void;
@@ -152,7 +152,7 @@ declare const Application: {
 			byName(name: string): ReminderList;
 		};
 		// biome-ignore lint/style/useNamingConvention: not set by me
-		Reminder(options: ReminderProperties): ReminderObj;
+		Reminder(options: ReminderProperties): Reminder;
 	};
 	(
 		name: "Finder",
