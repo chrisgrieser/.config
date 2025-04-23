@@ -56,12 +56,12 @@ func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
 
 eventStore.requestFullAccessToEvents { granted, error in
 	if let error = error {
-		print("Error requesting access to Calendar events: \(error.localizedDescription)")
+		print("❌ Error requesting access to Calendar events: \(error.localizedDescription)")
 		semaphore.signal()
 		return
 	}
 	guard granted else {
-		print("Access to Calendar events not granted.")
+		print("❌ Access to Calendar events not granted.")
 		semaphore.signal()
 		return
 	}
@@ -101,7 +101,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 			print(jsonString)
 		}
 	} catch {
-		print("Failed to encode JSON: \(error.localizedDescription)")
+		print("❌ Failed to encode JSON: \(error.localizedDescription)")
 	}
 
 	semaphore.signal()

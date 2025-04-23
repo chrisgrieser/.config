@@ -134,7 +134,7 @@ function run() {
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
-		const errmsg = "❌ " + swiftReminderOutput; // if not parsable, it's a message
+		const errmsg = swiftReminderOutput; // if not parsable, it's a message
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
 
@@ -162,8 +162,7 @@ function run() {
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
 
-		// SUBTITLE: display due time, past due dates, missing due dates, list (if
-		// multiple), and body
+		// SUBTITLE: display due time, past & missing due dates, list, and notes
 		const dueDateObj = new Date(rem.dueDate);
 		const dueTime = rem.isAllDay ? "" : new Date(rem.dueDate).toLocaleTimeString([], timeFmt);
 		const pastDueDate = dueDateObj < startOfToday ? relativeDate(dueDateObj) : "";
@@ -232,8 +231,8 @@ function run() {
 	if (reminders.length === 0) {
 		const invalid = { valid: false, subtitle: "⛔ No reminders" };
 		reminders.push({
-			title: `No ${showCompleted ? "open " : ""} reminders for today.`,
-			subtitle: `⌃⏎: Show ${showCompleted ? "only open" : "open and completed"} reminders.`,
+			title: `No ${showCompleted ? "" : "open "}reminders for today.`,
+			subtitle: `⌃⏎: Show ${showCompleted ? "only open" : "completed"} reminders`,
 			valid: false,
 			mods: {
 				cmd: invalid,
@@ -260,7 +259,7 @@ function run() {
 		try {
 			eventsJson = JSON.parse(swiftEventsOutput);
 		} catch (_error) {
-			const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
+			const errmsg = swiftEventsOutput; // if not parsable, it's a message
 			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 		}
 
