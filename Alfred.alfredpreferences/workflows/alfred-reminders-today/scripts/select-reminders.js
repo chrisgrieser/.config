@@ -4,7 +4,7 @@ const app = Application.currentApplication();
 app.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
-/** @typedef {Object} Reminder
+/** @typedef {Object} ReminderObj
  * @property {string} id
  * @property {string} title
  * @property {string?} notes aka body
@@ -23,7 +23,7 @@ app.includeStandardAdditions = true;
  * @property {string} startTime
  * @property {string} endTime
  * @property {boolean} isAllDay
- * @property {string} location
+ * @property {string?} location
  * @property {boolean} hasRecurrenceRules
  */
 
@@ -65,8 +65,9 @@ function relativeDate(absDate) {
 	return formatter.format(-delta, unit);
 }
 
+// must accept any letters before the colon to match video call URIs for events
 const urlRegex =
-	/(https?|obsidian):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
+	/\w{3,}:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
 /** @type {Intl.DateTimeFormatOptions} */
 const timeFmt = { hour: "2-digit", minute: "2-digit", hour12: false };
@@ -128,7 +129,7 @@ function run() {
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
 	const swiftReminderOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
-	let /** @type {Reminder[]} */ remindersJson;
+	let /** @type {ReminderObj[]} */ remindersJson;
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
@@ -251,7 +252,7 @@ function run() {
 		console.log("Writing new cache for events…");
 
 		let /** @type {EventObj[]} */ eventsJson;
-		const swiftEventsOutput = app.doShellScript("swift ./scripts/events-today.swift");
+		const swiftEventsOutput = app.doShellScript("swift ./scripts/get-events-today.swift");
 		try {
 			eventsJson = JSON.parse(swiftEventsOutput);
 		} catch (_error) {
@@ -259,7 +260,9 @@ function run() {
 			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 		}
 
+		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		events = eventsJson.map((event) => {
+			// time
 			let time = "";
 			if (!event.isAllDay) {
 				const start = event.startTime
@@ -271,11 +274,20 @@ function run() {
 				time = start + " – " + end;
 			}
 
+			// location
+			const maxLen = 30;
+			const url = event.location?.match(urlRegex);
+			const icon = url ? "🎦" : "📍";
+			let location = event.location || "";
+			if (location.length > maxLen) location = location.slice(0, maxLen) + "…";
+			const openUrl =
+				url || "https://www.google.com/maps/search/" + encodeURIComponent(event.location || "");
+
 			const subtitle = [
 				event.hasRecurrenceRules ? "🔁" : "",
 				time,
-				event.location ? "📍 " + event.location : "",
-				`(${event.calendar})`,
+				event.location ? `${icon} ${location}` : "",
+				`[${event.calendar}]`,
 			]
 				.filter(Boolean)
 				.join("    ");
@@ -285,7 +297,8 @@ function run() {
 				title: event.title,
 				subtitle: subtitle,
 				icon: { path: "./calendar.png" },
-				valid: false, // events are read-only
+				valid: Boolean(event.location), // only actionable if there is a location
+				arg: openUrl,
 				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
 			};
 		});

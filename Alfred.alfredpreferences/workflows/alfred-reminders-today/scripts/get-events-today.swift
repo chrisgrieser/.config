@@ -9,7 +9,7 @@ struct EventOutput: Codable {
 	let endTime: String
 	let isAllDay: Bool
 	let calendar: String
-	let location: String
+	let location: String?
 	let hasRecurrenceRules: Bool
 }
 
@@ -19,11 +19,17 @@ let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
-	guard granted, error == nil else {
-		print("❌ Access denied or error: \(error?.localizedDescription ?? "Unknown error")")
+	if let error = error {
+		print("Error requesting access: \(error.localizedDescription)")
 		semaphore.signal()
 		return
 	}
+	guard granted else {
+		print("Access to Reminders not granted.")
+		semaphore.signal()
+		return
+	}
+	// ──────────────────────────────────────────────────────────────────────────
 
 	let calendars = eventStore.calendars(for: .event)
 	let now = Date()
@@ -44,12 +50,12 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 	let outputEvents = filteredEvents.sorted(by: { $0.startDate < $1.startDate }).map { event in
 		EventOutput(
-			title: event.title ?? "No Title",
+			title: event.title,
 			startTime: formatter.string(from: event.startDate),
 			endTime: formatter.string(from: event.endDate),
 			isAllDay: event.isAllDay,
 			calendar: event.calendar.title,
-			location: event.location ?? "",
+			location: event.location,
 			hasRecurrenceRules: event.hasRecurrenceRules
 		)
 	}
