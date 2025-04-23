@@ -219,10 +219,7 @@ function run() {
 					variables: { id: rem.id, title: rem.title, mode: "snooze" },
 				},
 				ctrl: {
-					variables: {
-						showCompleted: (!showCompleted).toString(), // toggle "show completed" state
-						mode: "show-completed",
-					},
+					variables: { showCompleted: (!showCompleted).toString() },
 				},
 			},
 		};
@@ -233,10 +230,16 @@ function run() {
 	if (reminders.length === 0) {
 		const invalid = { valid: false, subtitle: "⛔ No reminders" };
 		reminders.push({
-			title: "No open tasks for today.",
-			subtitle: "⏎: Show completed tasks.",
-			variables: { showCompleted: true.toString(), mode: "show-completed" },
-			mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
+			title: `No ${showCompleted ? "open " : ""} reminders for today.`,
+			subtitle: `⌃⏎: Show ${showCompleted ? "only open" : "open and completed"} reminders.`,
+			valid: false,
+			mods: {
+				cmd: invalid,
+				shift: invalid,
+				alt: invalid,
+				fn: invalid,
+				ctrl: { variables: { showCompleted: true.toString() }, valid: true },
+			},
 		});
 	}
 
@@ -262,7 +265,7 @@ function run() {
 		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		events = eventsJson.map((event) => {
 			// time
-			let time = "";
+			let timeDisplay = "";
 			if (!event.isAllDay) {
 				const start = event.startTime
 					? new Date(event.startTime).toLocaleTimeString([], timeFmt)
@@ -270,22 +273,23 @@ function run() {
 				const end = event.endTime
 					? new Date(event.endTime).toLocaleTimeString([], timeFmt)
 					: "";
-				time = start + " – " + end;
+				timeDisplay = start + " – " + end;
 			}
 
 			// location
 			const maxLen = 40;
 			const url = event.location?.match(urlRegex);
 			const icon = url ? "🎦" : "📍";
-			let location = event.location?.replaceAll("\n", " ") || "";
-			if (location.length > maxLen) location = location.slice(0, maxLen) + "…";
-			const openUrl =
-				url || "https://www.google.com/maps/search/" + encodeURIComponent(event.location || "");
+			let locationDisplay = event.location?.replaceAll("\n", " ") || "";
+			if (locationDisplay.length > maxLen)
+				locationDisplay = locationDisplay.slice(0, maxLen) + "…";
+			locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
+			const openUrl = url || "https://www.google.com/maps/search/" + event.location;
 
 			const subtitle = [
 				event.hasRecurrenceRules ? "🔁" : "",
-				time,
-				event.location ? `${icon} ${location}` : "",
+				timeDisplay,
+				locationDisplay,
 				`[${event.calendar}]`,
 			]
 				.filter(Boolean)
