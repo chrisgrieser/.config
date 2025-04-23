@@ -20,31 +20,36 @@ let semaphore = DispatchSemaphore(value: 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
 func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
-	guard let components = cgColor.components else { return "⚫" }
-	let r = components[0]
-	let g = components.count >= 3 ? components[1] : r
-	let b = components.count >= 3 ? components[2] : r
+	let components = cgColor.components!
+	let (r, g, b) = (components[0], components[1], components[2])
 
 	// Simple thresholds for mapping RGB to base colors
-	if r > 0.8 && g < 0.2 && b < 0.2 {
-		return "🔴"
-	} else if r < 0.2 && g > 0.8 && b < 0.2 {
-		return "🟢"
-	} else if r < 0.2 && g < 0.2 && b > 0.8 {
-		return "🔵"
-	} else if r > 0.8 && g > 0.8 && b < 0.2 {
-		return "🟡"
-	} else if r > 0.5 && g < 0.2 && b > 0.5 {
-		return "🟣"
-	} else if r > 0.8 && g > 0.4 && b < 0.2 {
-		return "🟠"
-	} else if r > 0.9 && g > 0.9 && b > 0.9 {
-		return "⚪"
-	} else if r < 0.2 && g < 0.2 && b < 0.2 {
-		return "⚫"
-	} else {
-		return "⚫"
-	}
+	let redDiff = abs(r - 1.0) + g + b
+	let greenDiff = r + abs(g - 1.0) + b
+	let blueDiff = r + g + abs(b - 1.0)
+	let yellowDiff = abs(r - 1.0) + abs(g - 1.0) + b
+	let purpleDiff = abs(r - 1.0) + g + abs(b - 1.0)
+	let orangeDiff = abs(r - 1.0) + abs(g - 0.6) + b
+
+	// Adjust the ranges by reducing weights for differences
+	let brownDiff = 1.3 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
+	let whiteDiff = 0.7 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
+	let blackDiff = 0.7 * (r + g + b) // more range
+
+	let diffs = [
+		(redDiff, "🔴"),
+		(greenDiff, "🟢"),
+		(blueDiff, "🔵"),
+		(yellowDiff, "🟡"),
+		(purpleDiff, "🟣"),
+		(orangeDiff, "🟠"),
+		(brownDiff, "🟤"),
+		(whiteDiff, "⚪"),
+		(blackDiff, "⚫"),
+	]
+
+	let closest = diffs.min { $0.0 < $1.0 }
+	return closest?.1 ?? "unknown"
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -76,8 +81,8 @@ eventStore.requestFullAccessToEvents { granted, error in
 		.filter { event in return event.endDate > now }  // only future or ongoing events
 		.sorted(by: { $0.startDate < $1.startDate })
 		.map { event in
-			// let baseColor = mapCGColorToBaseColor(event.calendar.cgColor)
-			let baseColor = 
+			let baseColor = mapCGColorToBaseColor(event.calendar.cgColor)
+			// let baseColor = event.calendar.cgColor.hashValue
 			return EventOutput(
 				title: event.title,
 				startTime: formatter.string(from: event.startDate),
