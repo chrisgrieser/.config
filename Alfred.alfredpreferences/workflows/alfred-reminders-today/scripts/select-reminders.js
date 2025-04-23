@@ -302,7 +302,7 @@ function run() {
 				title: event.title,
 				subtitle: subtitle,
 				icon: { path: "./calendar.png" },
-				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
+				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid, ctrl: invalid },
 
 				valid: Boolean(event.location), // only actionable if there is a location
 				arg: openUrl,
