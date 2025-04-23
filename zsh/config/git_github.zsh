@@ -16,7 +16,7 @@ alias pull='git pull'
 alias reset='git reset'
 
 alias gaa='git add --all'
-alias unadd='git restore --staged'
+alias ga='git add'
 alias unstage='git restore --staged'
 alias restore='git restore'
 
