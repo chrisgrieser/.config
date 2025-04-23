@@ -226,6 +226,7 @@ function run() {
 		};
 		return alfredItem;
 	});
+	console.log("Reminders:", reminders.length);
 
 	// GUARD no reminders
 	if (reminders.length === 0) {
@@ -249,7 +250,7 @@ function run() {
 	// EVENTS
 	let /** @type {AlfredItem[]} */ events = [];
 	const eventCachePath = $.getenv("alfred_workflow_cache") + "/events.json";
-	const cacheOutdated = cacheIsOutdated(eventCachePath);
+	const cacheOutdated = showEvents && cacheIsOutdated(eventCachePath);
 
 	if (showEvents && cacheOutdated) {
 		console.log("Writing new cache for events…");
@@ -312,6 +313,7 @@ function run() {
 	} else if (showEvents && !cacheOutdated) {
 		events = JSON.parse(readFile(eventCachePath));
 	}
+	console.log("Events:", showEvents ? events.length : "not shown");
 
 	//───────────────────────────────────────────────────────────────────────────
 
