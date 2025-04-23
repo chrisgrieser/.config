@@ -73,7 +73,7 @@ backup "$HOME/Library/Preferences/" ./Homefolder/Library/Preferences
 
 # also backup all PERMA-REPOS
 while read -r line; do
-	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
+	repo_path=$(echo "$line" | cut -d, -f1 | sed "s|^~|$HOME|")
 	basename="$(basename "$repo_path")"
 	backup "$repo_path/" "./perma-repos/$basename"
 done < "$HOME/.config/perma-repos.csv"

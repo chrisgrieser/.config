@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-cut -d, -f2 "$HOME/.config/perma-repos.csv" |
+cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 	grep -vE ".config|.password-store" | # already cloned in previous step
 	sed "s|^~|$HOME|" |
 	while read -r repo; do

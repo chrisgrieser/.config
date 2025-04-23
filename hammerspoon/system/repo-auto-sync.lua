@@ -1,7 +1,6 @@
 local config = {
 	syncIntervalMins = 30,
 	permaReposPath = os.getenv("HOME") .. "/.config/perma-repos.csv",
-	reposToSync = {},
 }
 
 --------------------------------------------------------------------------------
@@ -16,39 +15,35 @@ local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 
 --------------------------------------------------------------------------------
 
+M.reposToSync = {}
+
 -- get repos from perma-repos.csv
 for line in io.lines(config.permaReposPath) do
-	local name, location, icon, _ = line:match("^(.-),(.-),(.-),(.-)$")
-	if not (name and location and icon) then return end
-	table.insert(config.reposToSync, {
-		name = name,
-		location = location,
-		icon = icon,
-	})
+	local location, icon, _ = line:match("^(.-),(.-),(.-)$")
+	if not (location and icon) then return end
+	table.insert(M.reposToSync, { location = location, icon = icon })
 end
 
 --------------------------------------------------------------------------------
 -- SYNC IMPLEMENTATION
 
----@alias Repo { name: string, icon: string, location: string }
-
----@type Repo[]
+---@type { icon: string, location: string }[]
 M.syncedRepos = {}
 
 ---@type table<string, hs.task>
 M.task_sync = {}
 
 ---@async
----@param repo Repo
+---@param repo { icon: string, location: string }
 local function syncOneRepo(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
-	M.task_sync[repo.name] = hs.task
+	M.task_sync[repo.location] = hs.task
 		.new(syncScriptPath, function(exitCode, stdout, stderr)
 			if exitCode == 0 then
 				table.insert(M.syncedRepos, repo)
 			else
 				local output = (stdout .. "\n" .. stderr):gsub("^%s+", ""):gsub("%s+$", "")
-				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.name, output)
+				local msg = ("⚠️️ %s %s Sync: %s"):format(repo.icon, repo.location, output)
 				print(msg)
 				hs.alert(msg, 5)
 				notify(msg)
@@ -61,8 +56,8 @@ end
 ---@return string stillSyncingIcons
 local function repoSyncsInProgress()
 	local stillSyncingIcons = ""
-	for _, repo in pairs(config.reposToSync) do
-		local isStillSyncing = M.task_sync[repo.name] and M.task_sync[repo.name]:isRunning()
+	for _, repo in pairs(M.reposToSync) do
+		local isStillSyncing = M.task_sync[repo.location] and M.task_sync[repo.location]:isRunning()
 		if isStillSyncing then stillSyncingIcons = stillSyncingIcons .. repo.icon end
 	end
 	return stillSyncingIcons
@@ -76,7 +71,7 @@ local function syncAllGitRepos(notifyOnSuccess)
 		return
 	end
 
-	for _, repo in pairs(config.reposToSync) do
+	for _, repo in pairs(M.reposToSync) do
 		syncOneRepo(repo)
 	end
 

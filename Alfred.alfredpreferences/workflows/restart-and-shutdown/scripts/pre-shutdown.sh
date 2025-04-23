@@ -16,9 +16,9 @@ function notify() {
 }
 
 while read -r line; do
-	name=$(echo "$line" | cut -d, -f1)
-	repo_path=$(echo "$line" | cut -d, -f2 | sed "s|^~|$HOME|")
-	icon=$(echo "$line" | cut -d, -f3)
+	repo_path=$(echo "$line" | cut -d, -f1 | sed "s|^~|$HOME|")
+	icon=$(echo "$line" | cut -d, -f2)
+	name=$(basename "$repo_path")
 	cd "$repo_path"
 	if [[ -n "$(git status --porcelain)" ]]; then
 		notify "$name" "$icon"
