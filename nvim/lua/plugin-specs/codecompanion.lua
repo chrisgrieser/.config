@@ -40,7 +40,14 @@ return {
 
 		-- LLM settings
 		strategies = {
-			chat = { adapter = "openai" },
+			chat = {
+				adapter = "openai",
+				keymaps = {
+					close = {
+						modes = { n = "q", i = "<D-w>" },
+					},
+				},
+			},
 			inline = { adapter = "openai" },
 			cmd = { adapter = "openai" },
 		},
