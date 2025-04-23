@@ -19,7 +19,7 @@ let semaphore = DispatchSemaphore(value: 0)
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
+func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 	let components = cgColor.components!
 	let (r, g, b) = (components[0], components[1], components[2])
 
@@ -55,13 +55,9 @@ func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToEvents { granted, error in
-	if let error = error {
-		print("❌ Error requesting access to Calendar events: \(error.localizedDescription)")
-		semaphore.signal()
-		return
-	}
-	guard granted else {
-		print("❌ Access to Calendar events not granted.")
+	guard error == nil && granted else {
+		let msg = granted ? "Error requesting access: \(error!.localizedDescription)" : "Access to Calendar events not granted."
+		print("❌ " + msg)
 		semaphore.signal()
 		return
 	}
@@ -78,18 +74,16 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 	let outputEvents =
 		eventStore.events(matching: predicate)
-		.filter { event in return event.endDate > now }  // only future or ongoing events
+		.filter { event in event.endDate > now }  // only future or ongoing events
 		.sorted(by: { $0.startDate < $1.startDate })
 		.map { event in
-			let baseColor = mapCGColorToBaseColor(event.calendar.cgColor)
-			// let baseColor = event.calendar.cgColor.hashValue
-			return EventOutput(
+			EventOutput(
 				title: event.title,
 				startTime: formatter.string(from: event.startDate),
 				endTime: formatter.string(from: event.endDate),
 				isAllDay: event.isAllDay,
 				calendar: event.calendar.title,
-				calendarColor: baseColor,
+				calendarColor: mapCGColorToEmoji(event.calendar.cgColor),
 				location: event.location ?? event.url?.absoluteString,  // fallback to URL
 				hasRecurrenceRules: event.hasRecurrenceRules
 			)

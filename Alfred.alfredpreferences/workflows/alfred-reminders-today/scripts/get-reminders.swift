@@ -28,13 +28,9 @@ let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "tru
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
-	if let error = error {
-		print("❌ Error requesting access: \(error.localizedDescription)")
-		semaphore.signal()
-		return
-	}
-	guard granted else {
-		print("❌ Access to Reminders not granted.")
+	guard error == nil && granted else {
+		let msg = granted ? "Error requesting access: \(error!.localizedDescription)" : "Access to Calendar events not granted."
+		print("❌ " + msg)
 		semaphore.signal()
 		return
 	}
