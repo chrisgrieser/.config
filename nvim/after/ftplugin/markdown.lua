@@ -43,8 +43,8 @@ bkeymap("i", "<CR>", function() return autoBullet("<CR>") end, { expr = true })
 -- HEADINGS
 
 -- Jump to next/prev heading (`##` to skip level 1 and comments in code-blocks)
-bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
-bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
+bkeymap("n", "<C-j>", [[/^##\+ .*<CR>]], { desc = " Next heading" })
+bkeymap("n", "<C-k>", [[?^##\+ .*<CR>]], { desc = " Prev heading" })
 
 ---@param dir 1|-1
 local function headingsIncremantor(dir)
@@ -64,35 +64,35 @@ local function headingsIncremantor(dir)
 end
 
 -- <D-h> remapped to <D-5>, since used by macOS PENDING https://github.com/neovide/neovide/issues/3099
-bkeymap("n", "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
-bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
+bkeymap("n", "<D-5>", function() headingsIncremantor(1) end, { desc = " Increment heading" })
+bkeymap("n", "<D-H>", function() headingsIncremantor(-1) end, { desc = " Decrement heading" })
 
 --------------------------------------------------------------------------------
 -- MARKDOWN-SPECIFIC KEYMAPS
 
 -- Tasks
-bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add Task" })
+bkeymap("n", "<leader>x", "mzI- [ ] <Esc>`z", { desc = " Add task/checkbox" })
 
 -- Format Table
-bkeymap("n", "<leader>ft", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
+bkeymap("n", "<leader>rt", "vip:!pandoc --to=gfm<CR>", { desc = " Format table under cursor" })
 
 -- cmd+u: markdown bullet
 bkeymap("n", "<D-u>", "mzI- <Esc>`z", { desc = "• Bullet list" })
 
 -- cmd+k: markdown link
-bkeymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
-bkeymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
-bkeymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
+bkeymap("n", "<D-k>", "bi[<Esc>ea]()<Esc>hp", { desc = " Link" })
+bkeymap("x", "<D-k>", "<Esc>`<i[<Esc>`>la]()<Esc>hp", { desc = " Link" })
+bkeymap("i", "<D-k>", "[]()<Left><Left><Left>", { desc = " Link" })
 
 -- cmd+b: bold
-bkeymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
-bkeymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
-bkeymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
+bkeymap("n", "<D-b>", "bi**<Esc>ea**<Esc>", { desc = " Bold" })
+bkeymap("i", "<D-b>", "****<Left><Left>", { desc = " Bold" })
+bkeymap("x", "<D-b>", "<Esc>`<i**<Esc>`>lla**<Esc>", { desc = " Bold" })
 
 -- cmd+i: italics
-bkeymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
-bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
-bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
+bkeymap("n", "<D-i>", "bi*<Esc>ea*<Esc>", { desc = " Italics" })
+bkeymap("i", "<D-i>", "**<Left>", { desc = " Italics" })
+bkeymap("x", "<D-i>", "<Esc>`<i*<Esc>`>la*<Esc>", { desc = " Italics" })
 
 --------------------------------------------------------------------------------
 
