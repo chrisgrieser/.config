@@ -108,13 +108,8 @@ function run() {
 		return JSON.stringify({
 			items: [
 				{
-					title: "Show Read Notifications",
+					title: "Show read notifications",
 					variables: { mode: "show-read-notifications" },
-					mods: deactivatedMods,
-				},
-				{
-					title: "Open Notification Inbox",
-					variables: { mode: "open-inbox" },
 					mods: deactivatedMods,
 				},
 			],
