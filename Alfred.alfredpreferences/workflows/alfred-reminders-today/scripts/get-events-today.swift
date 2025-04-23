@@ -57,7 +57,7 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 eventStore.requestFullAccessToEvents { granted, error in
 	guard error == nil && granted else {
 		let msg =
-			granted
+			error != nil
 			? "Error requesting access: \(error!.localizedDescription)"
 			: "Access to Calendar events not granted."
 		print("❌ " + msg)
