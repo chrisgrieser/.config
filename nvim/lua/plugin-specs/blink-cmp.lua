@@ -76,7 +76,9 @@ return {
 		},
 		signature = {
 			enabled = true,
-			trigger = { show_on_insert = true },
+			trigger = {
+				show_on_insert = false, -- PENDING https://github.com/Saghen/blink.cmp/issues/1670
+			},
 			window = {
 				max_width = 60,
 				max_height = 4,
