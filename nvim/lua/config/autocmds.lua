@@ -435,8 +435,8 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		local ns = vim.api.nvim_create_namespace("quickfix-signs")
 
 		local function setSigns(qf)
-			vim.api.nvim_buf_set_extmark(qf.bufnr, ns, qf.lnum - 1, 0, {
-				sign_text = "󱘹▶", -- (this arrow is actually two chars)
+			pcall(vim.api.nvim_buf_set_extmark, qf.bufnr, ns, qf.lnum - 1, 0, {
+				sign_text = "▶",
 				sign_hl_group = "DiagnosticSignInfo",
 				priority = 200, -- above most signs
 				invalidate = true, -- deletes the extmark if the line is deleted

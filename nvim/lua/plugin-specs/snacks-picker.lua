@@ -419,6 +419,8 @@ return {
 					vim.cmd.cclose()
 					vim.cmd("silent cfirst")
 					vim.cmd.normal { "zv", bang = true } -- open folds
+
+					vim.api.nvim_exec_autocmds("QuickFixCmdPost", {})
 				end,
 				toggle_hidden_and_ignored = function(picker)
 					picker.opts["hidden"] = not picker.opts.hidden
