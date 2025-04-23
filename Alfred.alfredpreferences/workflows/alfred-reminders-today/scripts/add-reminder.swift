@@ -1,4 +1,4 @@
-#!/usr/bin/swift
+#!/usr/bin/env swift
 import EventKit
 import Foundation
 

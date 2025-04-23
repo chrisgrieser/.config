@@ -9,12 +9,43 @@ struct EventOutput: Codable {
 	let endTime: String
 	let isAllDay: Bool
 	let calendar: String
+	let calendarColor: String
 	let location: String?
 	let hasRecurrenceRules: Bool
 }
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+func mapCGColorToBaseColor(_ cgColor: CGColor) -> String {
+	guard let components = cgColor.components else { return "⚫" }
+	let r = components[0]
+	let g = components.count >= 3 ? components[1] : r
+	let b = components.count >= 3 ? components[2] : r
+
+	// Simple thresholds for mapping RGB to base colors
+	if r > 0.8 && g < 0.2 && b < 0.2 {
+		return "🔴"
+	} else if r < 0.2 && g > 0.8 && b < 0.2 {
+		return "🟢"
+	} else if r < 0.2 && g < 0.2 && b > 0.8 {
+		return "🔵"
+	} else if r > 0.8 && g > 0.8 && b < 0.2 {
+		return "🟡"
+	} else if r > 0.5 && g < 0.2 && b > 0.5 {
+		return "🟣"
+	} else if r > 0.8 && g > 0.4 && b < 0.2 {
+		return "🟠"
+	} else if r > 0.9 && g > 0.9 && b > 0.9 {
+		return "⚪"
+	} else if r < 0.2 && g < 0.2 && b < 0.2 {
+		return "⚫"
+	} else {
+		return "⚫"
+	}
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -35,30 +66,29 @@ eventStore.requestFullAccessToEvents { granted, error in
 	let now = Date()
 	let startOfDay = Calendar.current.startOfDay(for: now)
 	let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
-
 	let predicate = eventStore.predicateForEvents(
 		withStart: startOfDay, end: endOfDay, calendars: calendars)
-	let events = eventStore.events(matching: predicate)
-
-	// Include events that start after now or are ongoing
-	let filteredEvents = events.filter { event in
-		return event.endDate > now
-	}
 
 	let formatter = ISO8601DateFormatter()
-	formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
-	let outputEvents = filteredEvents.sorted(by: { $0.startDate < $1.startDate }).map { event in
-		EventOutput(
-			title: event.title,
-			startTime: formatter.string(from: event.startDate),
-			endTime: formatter.string(from: event.endDate),
-			isAllDay: event.isAllDay,
-			calendar: event.calendar.title,
-			location: event.location ?? event.url?.absoluteString, // fallback to URL
-			hasRecurrenceRules: event.hasRecurrenceRules
-		)
-	}
+	let outputEvents =
+		eventStore.events(matching: predicate)
+		.filter { event in return event.endDate > now }  // only future or ongoing events
+		.sorted(by: { $0.startDate < $1.startDate })
+		.map { event in
+			// let baseColor = mapCGColorToBaseColor(event.calendar.cgColor)
+			let baseColor = 
+			return EventOutput(
+				title: event.title,
+				startTime: formatter.string(from: event.startDate),
+				endTime: formatter.string(from: event.endDate),
+				isAllDay: event.isAllDay,
+				calendar: event.calendar.title,
+				calendarColor: baseColor,
+				location: event.location ?? event.url?.absoluteString,  // fallback to URL
+				hasRecurrenceRules: event.hasRecurrenceRules
+			)
+		}
 
 	do {
 		let jsonData = try JSONEncoder().encode(outputEvents)
@@ -66,7 +96,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 			print(jsonString)
 		}
 	} catch {
-		print("❌ Failed to encode JSON: \(error.localizedDescription)")
+		print("Failed to encode JSON: \(error.localizedDescription)")
 	}
 
 	semaphore.signal()

@@ -128,7 +128,7 @@ function run() {
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
-	const swiftReminderOutput = app.doShellScript("swift ./scripts/get-reminders.swift");
+	const swiftReminderOutput = app.doShellScript("./scripts/get-reminders.swift");
 	let /** @type {ReminderObj[]} */ remindersJson;
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
@@ -254,13 +254,14 @@ function run() {
 		console.log("Writing new cache for events…");
 
 		let /** @type {EventObj[]} */ eventsJson;
-		const swiftEventsOutput = app.doShellScript("swift ./scripts/get-events-today.swift");
+		const swiftEventsOutput = app.doShellScript("./scripts/get-events-today.swift");
 		try {
 			eventsJson = JSON.parse(swiftEventsOutput);
 		} catch (_error) {
 			const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
 			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 		}
+		console.log("🪚 eventsJson:", JSON.stringify(eventsJson, null, 2))
 
 		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		events = eventsJson.map((event) => {
