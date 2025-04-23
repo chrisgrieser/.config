@@ -15,6 +15,11 @@ alias push='git push'
 alias pull='git pull'
 alias reset='git reset'
 
+alias gaa='git add --all'
+alias unadd='git restore --staged'
+alias unstage='git restore --staged'
+alias restore='git restore'
+
 alias gundo='git reset --mixed HEAD@{1}'
 alias unlock='rm -v "$(git rev-parse --git-dir)/index.lock"'
 alias conflict_file='open "$(git diff --name-only --diff-filter=U --relative | head -n1)"'
@@ -40,30 +45,6 @@ ZSH_HIGHLIGHT_REGEXP+=(
 	'(feat|fix|test|perf|build|ci|revert|refactor|chore|docs|break|style|improv)(\(.+\))?(\\?\!)?:'
 	'fg=magenta,bold'
 )
-
-#───────────────────────────────────────────────────────────────────────────────
-# STAGING
-
-alias gaa='git add --all'
-alias unadd='git restore --staged'
-alias unstage='git restore --staged'
-
-# using functions instead of aliases, so overriding completions works
-function ga { git add "$@"; }
-function restore { git restore "$@"; }
-
-# custom completions
-_changed_git_files() {
-	local -a changed_files=()
-	while IFS='' read -r file; do # turn lines into array
-		changed_files+=("$file")
-	done < <(git -c status.relativePaths=true status --porcelain --untracked-files | cut -c4-)
-
-	local expl && _description -V git-changed-files expl 'Changed & Untracked Files'
-	compadd "${expl[@]}" -Q -- "${changed_files[@]}"
-}
-compdef _changed_git_files ga
-compdef _changed_git_files restore
 
 #───────────────────────────────────────────────────────────────────────────────
 # SMART COMMIT
