@@ -1,9 +1,7 @@
 #!/usr/bin/env zsh
 
 # shellcheck disable=2154
-if [[ "$mode" == "open-inbox" ]]; then
-	open "https://github.com/notifications"
-elif [[ "$mode" == "mark-as-read" ]]; then
+if [[ "$mode" == "mark-as-read" ]]; then
 	# DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#mark-a-thread-as-read
 	thread_id="$1"
 	curl -sL \
