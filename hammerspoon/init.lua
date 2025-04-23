@@ -41,8 +41,6 @@ safeRequire("system.pageup-pagedown-scroll")
 safeRequire("system.japanese")
 
 safeRequire("apps.app-specific-behavior")
-safeRequire("apps.browser")
 safeRequire("apps.spotify")
-safeRequire("apps.mastodon")
 
 safeRequire("meta.reload")

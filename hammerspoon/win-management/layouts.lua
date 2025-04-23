@@ -82,6 +82,8 @@ local function workLayout()
 			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
 			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
 		}
+		local mastoWin = u.app("Ivory"):mainWindow()
+		wu.moveResize(mastoWin, wu.toTheSide)
 	end)
 
 	print("🔲 Loaded work layout")

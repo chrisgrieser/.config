@@ -53,7 +53,7 @@ keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end
 -- MARKS
 do
 	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { "<leader>m", group = "󰃃 Marks" } end
-	local marks = { "A", "B", "C", "D" } -- CONFIG
+	local marks = { "A", "B", "C" } -- CONFIG
 
 	-- stylua: ignore
 	keymap("n", "<leader>mm", function() require("personal-plugins.marks").cycleMarks(marks) end, { desc = "󰃀 Cycle marks" })
