@@ -313,8 +313,8 @@ exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
 noremap gb :rejectNextProofread<CR>
 exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
 noremap gA :acceptProofreadInText<CR>
-exmap acceptProofreadInText obcommand proofreader:reject-suggestions-in-text
-noremap gB :acceptProofreadInText<CR>
+exmap rejectProofreadInText obcommand proofreader:reject-suggestions-in-text
+noremap gB :rejectProofreadInText<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
