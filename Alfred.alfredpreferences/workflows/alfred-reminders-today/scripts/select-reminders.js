@@ -153,7 +153,6 @@ function run() {
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);
 		});
-	console.log("Filtered reminders:", JSON.stringify(remindersFiltered, null, 2));
 
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
@@ -275,10 +274,10 @@ function run() {
 			}
 
 			// location
-			const maxLen = 30;
+			const maxLen = 40;
 			const url = event.location?.match(urlRegex);
 			const icon = url ? "🎦" : "📍";
-			let location = event.location || "";
+			let location = event.location?.replaceAll("\n", " ") || "";
 			if (location.length > maxLen) location = location.slice(0, maxLen) + "…";
 			const openUrl =
 				url || "https://www.google.com/maps/search/" + encodeURIComponent(event.location || "");
@@ -297,9 +296,11 @@ function run() {
 				title: event.title,
 				subtitle: subtitle,
 				icon: { path: "./calendar.png" },
+				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
+
 				valid: Boolean(event.location), // only actionable if there is a location
 				arg: openUrl,
-				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid },
+				variables: { mode: "open-event" },
 			};
 		});
 		writeToFile(eventCachePath, JSON.stringify(events));

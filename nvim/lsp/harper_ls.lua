@@ -16,11 +16,11 @@ return {
 				SentenceCapitalization = false, -- https://github.com/Automattic/harper/issues/1056
 				CommaFixes = false, -- https://github.com/Automattic/harper/issues/1097
 
-				-- enable extra rules
+				-- enable extra rules?
 				BoringWords = false,
 				LinkingVerbs = false,
 				UseGenitive = true,
-				SpelledNumbers = true,
+				SpelledNumbers = false,
 			},
 			isolateEnglish = true, -- experimental; in mixed-language doc only check English
 			dialect = "American",
