@@ -114,6 +114,10 @@ nnoremap gX :openNextLinkInNewTab<CR>
 exmap gotoFootnote obcommand obsidian-footnotes:insert-autonumbered-footnote
 nnoremap gf :gotoFootnote<CR>
 
+" [g]oto [w]riting
+exmap gotoScene obcommand longform:longform-jump-to-scene
+nnoremap gw :gotoScene<CR>
+
 " last change (HACK, only works once to jump to the last location)
 nnoremap g; u<C-r>
 
