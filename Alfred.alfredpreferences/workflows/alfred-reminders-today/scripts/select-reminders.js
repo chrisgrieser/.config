@@ -135,6 +135,7 @@ function run() {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
 		const errmsg = swiftReminderOutput; // if not parsable, it's a message
+		console.log(errmsg);
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
 
