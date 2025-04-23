@@ -106,5 +106,44 @@ M.wf_mimestream = wf.new("Mimestream")
 	end)
 
 --------------------------------------------------------------------------------
+-- MASTODON (IVORY)
+
+M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
+	if appName == "Ivory" and event == aw.deactivated then
+		-- close any media windows
+		local mediaWin = masto:findWindow("Ivory")
+		local frontApp = hs.application.frontmostApplication():name()
+		if mediaWin and frontApp ~= "Alfred" then hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) end
+
+		-- back to home & scroll up 
+		if #masto:allWindows() == 1 then
+			u.defer(1, function ()
+				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+			end)
+		end
+	end
+end):start()
+
+--------------------------------------------------------------------------------
+-- BRAVE BROWSER
+
+-- BOOKMARKS SYNCED TO CHROME BOOKMARKS
+-- so Alfred can pick up the Bookmarks without extra keyword
+
+local chromeBookmarks = os.getenv("HOME")
+	.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
+
+-- The pathwatcher is triggered by changes of the *target*, while this function
+-- touches the *symlink itself* due to `-h`. Thus, there is no need to configure
+-- the symlink target here.
+local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
+
+-- sync on system start & when bookmarks are changed
+if require("meta.utils").isSystemStart() then touchSymlink() end
+M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
+
+--------------------------------------------------------------------------------
 
 return M

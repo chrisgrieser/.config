@@ -13,11 +13,11 @@ local u = require("meta.utils")
 ---@param msg string
 local function notify(msg) hs.notify.show("Hammerspoon", "", msg) end
 
+---@alias Repo { icon: string, location: string }
 --------------------------------------------------------------------------------
 
-M.reposToSync = {}
-
 -- get repos from perma-repos.csv
+M.reposToSync = {} ---@type Repo[]
 for line in io.lines(config.permaReposPath) do
 	local location, icon, _ = line:match("^(.-),(.-),(.-)$")
 	if not (location and icon) then return end
@@ -27,14 +27,11 @@ end
 --------------------------------------------------------------------------------
 -- SYNC IMPLEMENTATION
 
----@type { icon: string, location: string }[]
-M.syncedRepos = {}
-
----@type table<string, hs.task>
-M.task_sync = {}
+M.syncedRepos = {} ---@type Repo[]
+M.task_sync = {} ---@type table<string, hs.task>
 
 ---@async
----@param repo { icon: string, location: string }
+---@param repo Repo
 local function syncOneRepo(repo)
 	local syncScriptPath = repo.location .. "/.sync-this-repo.sh"
 	M.task_sync[repo.location] = hs.task
