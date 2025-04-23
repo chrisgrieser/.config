@@ -20,6 +20,7 @@ app.includeStandardAdditions = true;
 /** @typedef {Object} EventObj
  * @property {string} title
  * @property {string} calendar
+ * @property {string} calendarColor
  * @property {string} startTime
  * @property {string} endTime
  * @property {boolean} isAllDay
@@ -261,7 +262,6 @@ function run() {
 			const errmsg = "❌ " + swiftEventsOutput; // if not parsable, it's a message
 			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 		}
-		console.log("🪚 eventsJson:", JSON.stringify(eventsJson, null, 2))
 
 		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 		events = eventsJson.map((event) => {
@@ -280,7 +280,7 @@ function run() {
 			// location
 			const maxLen = 40;
 			const url = event.location?.match(urlRegex);
-			const icon = url ? "🎦" : "📍";
+			const icon = url ? "🌐" : "📍";
 			let locationDisplay = event.location?.replaceAll("\n", " ") || "";
 			if (locationDisplay.length > maxLen)
 				locationDisplay = locationDisplay.slice(0, maxLen) + "…";
@@ -291,7 +291,7 @@ function run() {
 				event.hasRecurrenceRules ? "🔁" : "",
 				timeDisplay,
 				locationDisplay,
-				`[${event.calendar}]`,
+				event.calendarColor + " " + event.calendar,
 			]
 				.filter(Boolean)
 				.join("    ");
