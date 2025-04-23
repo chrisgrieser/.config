@@ -86,7 +86,6 @@ keymap("n", "~", "v~", { desc = "󰬴 Toggle char case (w/o moving)" })
 keymap("n", "<", function() require("personal-plugins.misc").toggleTitleCase() end, { desc = "󰬴 Toggle lower/Title case" })
 keymap("n", ">", "gUiw", { desc = "󰬴 Uppercase cword" })
 
-
 -- Increment/decrement, or toggle true/false
 -- stylua: ignore
 keymap({ "n", "x" }, "+", function() require("personal-plugins.misc").toggleOrIncrement() end, { desc = "󰐖 Increment/toggle" })
@@ -414,7 +413,7 @@ do
 		{ desc = "󰃽 Start/stop recording" }
 	)
 	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
-	keymap("n", "<leader>ir", function ()
+	keymap("n", "<leader>ir", function()
 		local macro = vim.fn.getreg(reg)
 		vim.notify(macro, nil, { title = "Recorded macro", icon = "󰃽" })
 	end, { desc = "󰃽 Recorded macro" })
