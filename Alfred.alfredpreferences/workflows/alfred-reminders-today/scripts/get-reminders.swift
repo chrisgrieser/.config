@@ -29,7 +29,10 @@ let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "tru
 
 eventStore.requestFullAccessToReminders { granted, error in
 	guard error == nil && granted else {
-		let msg = granted ? "Error requesting access: \(error!.localizedDescription)" : "Access to Calendar events not granted."
+		let msg =
+			granted
+			? "Error requesting access: \(error!.localizedDescription)"
+			: "Access to Calendar events not granted."
 		print("❌ " + msg)
 		semaphore.signal()
 		return
@@ -71,6 +74,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
 		let reminderData = reminders.map { reminder in
 			let components = reminder.dueDateComponents
+			dump(reminder.alarms)  // 🪚
 
 			// normalize based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
 			var prioNormalized = 0
