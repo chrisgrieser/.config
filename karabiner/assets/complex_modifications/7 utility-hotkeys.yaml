@@ -4,6 +4,16 @@ title: 🔘 Utility Shortcuts
 rules:
   - description: 🔘 Utility Shortcuts
     manipulators:
+      # alt-jk: page up/down
+      - type: basic
+        from: { key_code: j, modifiers: { mandatory: [option] } }
+        to:
+          - { key_code: page_down }
+      - type: basic
+        from: { key_code: k, modifiers: { mandatory: [option] } }
+        to:
+          - { key_code: page_up }
+
       # ctrl+.: emoji-picker
       - type: basic
         from: { key_code: period, modifiers: { mandatory: [control] } }
@@ -12,6 +22,7 @@ rules:
         conditions:
           # using separate emoji picker plugin in Neovide
           - { type: frontmost_application_unless, bundle_identifiers: [^com\.neovide\.neovide$] }
+
       # cmd+e: inline cod[e] (backticks)
       - type: basic
         from: { key_code: e, modifiers: { mandatory: [command] } }
