@@ -31,7 +31,7 @@ function _gitlog {
 	fi
 
 	# INFO inserting ansi colors via `sed` requires $'string'
-	git log --all --color $graph \
+	git log --color $graph \
 		--format="%C(yellow)%h%C(red)%d%C(reset) %s %C(green)(%cr) %C(blue)%an%C(reset)" "$@" |
 		sed -e 's/ seconds* ago)/s)/' \
 			-e 's/ minutes* ago)/m)/' \
