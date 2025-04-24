@@ -96,6 +96,15 @@ rules:
           - *deactivate-leader
           - *remove-notice
 
+      - description: "[⎵] ChatGPT"
+        type: basic
+        from: { key_code: "spacebar" }
+        conditions: [*leader-active]
+        to:
+          - shell_command: open 'https://chatgpt.com/'
+          - *deactivate-leader
+          - *remove-notice
+
       - description: "[ö] Mastodon (Ivory)"
         type: basic
         from: { key_code: semicolon } # ö on German keyboard

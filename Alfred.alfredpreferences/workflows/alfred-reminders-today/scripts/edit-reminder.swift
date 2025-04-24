@@ -4,29 +4,20 @@ import Foundation
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
-// ─────────────────────────────────────────────────────────────────────────────
 
 let reminderId = ProcessInfo.processInfo.environment["id"]!
 let mode = ProcessInfo.processInfo.environment["mode"]!
-
 // ─────────────────────────────────────────────────────────────────────────────
 
 func snoozeToTomorrow(reminder: EKReminder) {
-	// Get tomorrow's date
 	let calendar = Calendar.current
 	let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())!
-	var tomorrowComponents = calendar.dateComponents(
-		[.year, .month, .day, .hour, .minute], from: tomorrow)
+	let tomorrowComponents = calendar.dateComponents([.year, .month, .day], from: tomorrow)
 
-	// If an all-day reminder, preserve it as all-day
-	let isAllDay =
-		reminder.dueDateComponents?.hour == nil && reminder.dueDateComponents?.minute == nil
-	if isAllDay {
-		tomorrowComponents.hour = nil
-		tomorrowComponents.minute = nil
-	}
-
-	reminder.dueDateComponents = tomorrowComponents
+	// Only change the YYYY-MM-DD, since the HH:MM should be preserved. 
+	reminder.dueDateComponents?.year = tomorrowComponents.year
+	reminder.dueDateComponents?.month = tomorrowComponents.month
+	reminder.dueDateComponents?.day = tomorrowComponents.day
 }
 
 func editReminderFromStdin(reminder: EKReminder) -> Bool {
