@@ -1,8 +1,7 @@
 ; extends
 
-; custom text object for `nvim-treesitter-textobjects`
-; INFO to not inheit from `javascript` alone, since this breaks ts text objects
+; INFO do not inherit from `javascript` alone, since this breaks ts text objects
 ;───────────────────────────────────────────────────────────────────────────────
-
-; just the caller of a function
-(call_expression function: (_) @call.caller)
+; custom text object for `nvim-treesitter-textobjects`
+(call_expression
+  function: (_) @call.justCaller)

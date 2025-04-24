@@ -25,6 +25,7 @@ return {
 						git_centers = {
 							github = {
 								pull_request = { enable = false },
+								mention = { enable = false },
 								issue = {
 									insert_text_trailing = "", -- no trailing space after `#123`
 									get_documentation = function() return "" end, -- disable
