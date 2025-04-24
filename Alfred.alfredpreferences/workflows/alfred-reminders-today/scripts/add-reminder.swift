@@ -96,10 +96,12 @@ eventStore.requestFullAccessToReminders { granted, error in
 	dateComponents.minute = mm
 	reminder.dueDateComponents = dateComponents
 
-	// Add an alarm to trigger a notification. Even though the reminder created
-	// without an alarm looks the same as one with an alarm, an alarm is needed
-	// to trigger the notification (see #2).
-	if hasDueTime { reminder.addAlarm(EKAlarm()) }
+	// * Add an alarm to trigger a notification. Even though the reminder created
+	//   without an alarm looks the same as one with an alarm, an alarm is needed
+	//   to trigger the notification (see #2).
+	// * The alarm is always added, whether all-day reminders do get a
+	//   notification or not is determined by the user's reminder settings.
+	reminder.addAlarm(EKAlarm())
 
 	// Find the calendar (list) by name
 	let listToUse = eventStore.calendars(for: .reminder).first(where: { $0.title == reminderList })
