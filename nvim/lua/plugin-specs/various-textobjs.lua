@@ -3,10 +3,7 @@ local textObj = require("config.utils").extraTextobjMaps
 
 return {
 	"chrisgrieser/nvim-various-textobjs",
-	opts = {
-		-- enable debug when repo is locally present (i.e., being worked on)
-		debug = vim.uv.fs_stat(vim.g.localRepos .. "/nvim-various-textobjs"),
-	},
+	opts = { debug = false },
 	keys = {
 		{ -- subword
 			"<Space>",
