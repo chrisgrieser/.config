@@ -1376,20 +1376,20 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>20</integer>
+				<integer>30</integer>
 				<key>markercount</key>
-				<integer>29</integer>
+				<integer>36</integer>
 				<key>maxvalue</key>
-				<integer>60</integer>
+				<integer>180</integer>
 				<key>minvalue</key>
-				<integer>4</integer>
+				<integer>5</integer>
 				<key>onlystoponmarkers</key>
 				<true/>
 				<key>showmarkers</key>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Duration calendar events will be cached in minutes. If your events are out of date often, decrease this value.</string>
+			<string>Frequency with with calendar events will be refreshed, in minutes. If your events are out of date often, decrease this value.</string>
 			<key>label</key>
 			<string></string>
 			<key>type</key>

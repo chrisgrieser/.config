@@ -147,10 +147,15 @@ M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 --------------------------------------------------------------------------------
 
 -- ALFRED Reminders Today workflow
-local cachePath = os.getenv("HOME")
-	.. "/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/de.chris-grieser.reminders-companion/events.json"
 
-
+-- clear cache on deactivation of Calendar, since the vents have likely changed
+M.aw_calendar = aw.new(function(appName, event, _app)
+	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
+		local cachePath = os.getenv("HOME")
+			.. "/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/de.chris-grieser.reminders-companion/events.json"
+		os.remove(cachePath)
+	end
+end):start()
 
 --------------------------------------------------------------------------------
 
