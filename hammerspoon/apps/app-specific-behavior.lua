@@ -115,9 +115,9 @@ M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
 		local frontApp = hs.application.frontmostApplication():name()
 		if mediaWin and frontApp ~= "Alfred" then hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) end
 
-		-- back to home & scroll up 
+		-- back to home & scroll up
 		if #masto:allWindows() == 1 then
-			u.defer(1, function ()
+			u.defer(1, function()
 				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
 				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
 				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
@@ -143,6 +143,14 @@ local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)
 -- sync on system start & when bookmarks are changed
 if require("meta.utils").isSystemStart() then touchSymlink() end
 M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
+
+--------------------------------------------------------------------------------
+
+-- ALFRED Reminders Today workflow
+local cachePath = os.getenv("HOME")
+	.. "/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/de.chris-grieser.reminders-companion/events.json"
+
+
 
 --------------------------------------------------------------------------------
 
