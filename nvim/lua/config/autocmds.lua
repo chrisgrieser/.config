@@ -337,6 +337,8 @@ local favicons = {
 	neovim = "",
 	stackoverflow = "󰓌",
 	reddit = "",
+	apple = "",
+	microsoft = "",
 }
 
 local function addFavicons(bufnr)

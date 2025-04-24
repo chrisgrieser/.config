@@ -101,7 +101,9 @@ eventStore.requestFullAccessToReminders { granted, error in
 	//   to trigger the notification (see #2).
 	// * The alarm is always added, whether all-day reminders do get a
 	//   notification or not is determined by the user's reminder settings.
-	reminder.addAlarm(EKAlarm())
+	// * `relativeOffset` means relative to the start date of the reminder 
+	//   https://developer.apple.com/documentation/eventkit/ekalarm/relativeoffset
+	reminder.addAlarm(EKAlarm(relativeOffset: 0))
 
 	// Find the calendar (list) by name
 	let listToUse = eventStore.calendars(for: .reminder).first(where: { $0.title == reminderList })
