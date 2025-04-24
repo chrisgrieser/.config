@@ -13,7 +13,7 @@ return { -- treesitter-based textobjs
 		"TSTextobjectPeekDefinitionCode",
 	},
 
-	-- SIC configured via treesitter, not this plugin. 
+	-- SIC configured via treesitter, not this plugin.
 	-- Running config twice is also not a problem.
 	main = "nvim-treesitter.configs",
 
@@ -58,16 +58,38 @@ return { -- treesitter-based textobjs
 		{ "i" .. textobj.condition, "<cmd>TSTextobjectSelect @conditional.inner<CR>", mode = {"x","o"},desc = "󱕆 inner condition" },
 		{ "a" .. textobj.call, "<cmd>TSTextobjectSelect @call.outer<CR>", mode = {"x","o"},desc = "󰡱 outer call" },
 		{ "i" .. textobj.call, "<cmd>TSTextobjectSelect @call.inner<CR>", mode = {"x","o"},desc = "󰡱 inner call" },
+		-- stylua: ignore end
 
 		-- CUSTOM TEXTOBJECTS (defined via .scm files)
-		{ "g" .. textobj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 caller" },
-		{ "i" .. textobj.call, "<cmd>TSTextobjectSelect @string.inner<CR>", mode = {"x", "o"}, desc = "󰌠 inner string" },
+		{
+			"g" .. textobj.call,
+			"<cmd>TSTextobjectSelect @call.justCaller<CR>",
+			mode = "o",
+			desc = "󰡱 caller",
+		},
+		{
+			"ad",
+			"<cmd>TSTextobjectSelect @docstring.outer<CR>",
+			mode = { "x", "o" },
+			desc = "󰌠 outer docstring",
+			ft = "python",
+		},
+		{
+			"id",
+			"<cmd>TSTextobjectSelect @docstring.inner<CR>",
+			mode = { "x", "o" },
+			desc = "󰌠 inner docstring",
+			ft = "python",
+		},
 
 		-- COMMENTS
 		-- only operator-pending to not conflict with selection-commenting
-		{ "q", "<cmd>TSTextobjectSelect @comment.outer<CR>", mode = "o", desc = "󰆈 single comment" },
-
-		-- stylua: ignore end
+		{
+			"q",
+			"<cmd>TSTextobjectSelect @comment.outer<CR>",
+			mode = "o",
+			desc = "󰆈 single comment",
+		},
 
 		{
 			"cq",
