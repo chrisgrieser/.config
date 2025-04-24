@@ -21,7 +21,7 @@ require("lazy").setup {
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
 
 	dev = { ---@diagnostic disable-line: assign-type-mismatch
-		patterns = { "nvim" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
+		patterns = { "nvim", "blink.cmp" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
 	},
