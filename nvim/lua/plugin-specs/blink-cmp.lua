@@ -10,6 +10,9 @@ return {
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
 	opts = {
+		-- TEMP
+		fuzzy = { prebuilt_binaries = { force_version = "v1.1.1" } },
+
 		sources = {
 			providers = {
 				lsp = {
