@@ -148,11 +148,9 @@ function run() {
 			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
 		})
 		.sort((a, b) => {
-
 			// 1. by priority, 2. by due date, 3. by creation date
 			const prioDiff = b.priority - a.priority;
 			if (prioDiff !== 0) return prioDiff;
-
 			const dueTimeDiff = +new Date(a.dueDate) - +new Date(b.dueDate);
 			if (dueTimeDiff !== 0) return dueTimeDiff;
 			return +new Date(a.creationDate) - +new Date(b.creationDate);

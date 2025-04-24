@@ -1025,17 +1025,16 @@ brew untap keith/formulae
 	+ &lt;kbd&gt;⌘C&lt;/kbd&gt;: Copy the reminder title &amp; notes.
 	+ &lt;kbd&gt;⌘L&lt;/kbd&gt;: Display the reminder details in Large Type.
 	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt;: Quick Look the URL, if there is one.
-	+ *(if the item is an event)* &lt;kbd&gt;⏎&lt;/kbd&gt;: If the location is a URL, open
-	  the URL. Otherwise, open Google Maps with the location.
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt; *(on an event)*: If the location is a URL, open the URL.
+	  Otherwise, open Google Maps with the location.
 - Quickly add a new reminder due today or tomorrow with the keywords `qq` and
   `qqq`, respectively.
-	+ The command supports simple parsing of a due time with the format
-	  `hh:mm`. For instance, `19:00 buy milk` or `buy milk 19:00` will set the
-	  due time to `19:00` and the reminder title to `buy milk`.
+	+ The command supports simple parsing of a due time with the format `hh:mm`.
+	  For instance, `19:00 buy milk` or `buy milk 19:00` will set the due time
+	  to `19:00` and the reminder title to `buy milk`.
 
-## Credits
-- Icon by [Emoopo-Design](https://macosicons.com/#/u/Emoopo-Design).
-- Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
+---
+Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>048725A0-DB75-4146-B66B-8947B03863C8</key>
