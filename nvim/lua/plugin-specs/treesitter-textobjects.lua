@@ -61,6 +61,7 @@ return { -- treesitter-based textobjs
 
 		-- CUSTOM TEXTOBJECTS (defined via .scm files)
 		{ "g" .. textobj.call, "<cmd>TSTextobjectSelect @call.caller<CR>", mode = "o", desc = "󰡱 caller" },
+		{ "i" .. textobj.call, "<cmd>TSTextobjectSelect @string.inner<CR>", mode = {"x", "o"}, desc = "󰌠 inner string" },
 
 		-- COMMENTS
 		-- only operator-pending to not conflict with selection-commenting
