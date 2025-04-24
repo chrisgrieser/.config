@@ -2,6 +2,9 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
+local developing = vim.uv.fs_stat(vim.g.localRepos .. "/blink.cmp") ~= nil
+
+
 return {
 	"saghen/blink.cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -11,7 +14,9 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		-- TEMP
-		fuzzy = { prebuilt_binaries = { force_version = "v1.1.1" } },
+		fuzzy = {
+			prebuilt_binaries = { force_version = developing and "v1.1.1" or nil },
+		},
 
 		sources = {
 			providers = {
@@ -80,7 +85,7 @@ return {
 		signature = {
 			enabled = true,
 			trigger = {
-				show_on_insert = true, -- PENDING https://github.com/Saghen/blink.cmp/issues/1670
+				show_on_insert = false, -- PENDING https://github.com/Saghen/blink.cmp/issues/1670
 			},
 			window = {
 				max_width = 60,
