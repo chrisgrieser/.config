@@ -13,19 +13,25 @@ return {
 	config = function(_, opts)
 		require("snacks").setup(opts)
 
-		-- ignore certain notifications
-		vim.notify = function(msg, ...) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
-			if type(msg) == "string" then
-				local ignore = msg == "No code actions available"
-					or msg:find("^Client marksman quit with exit code 1 and signal 0.")
-				if ignore then return end
+		-- modify certain notifications
+		vim.notify = function(msg, lvl, notifOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
+			local ignore = msg == "No code actions available"
+				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
+			if ignore then return end
+
+			if msg:find("Hunk %d+ of %d+") then -- gitsigns.nvim
+				notifOpts = notifOpts or {}
+				notifOpts.style = "minimal"
+				msg = msg .. "  "
+				notifOpts.icon = "󰊢"
 			end
-			Snacks.notifier(msg, ...)
+			Snacks.notifier(msg, lvl, notifOpts)
 		end
 
 		-- disable default keymaps to make the `?` help overview less cluttered
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
 		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
+		require("snacks.picker.config.sources").explorer.win.list.keys = {}
 
 		-- cleaner vim.ui.select
 		---@type fun(kind?: string): snacks.picker.format
@@ -69,7 +75,7 @@ return {
 					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
 					Snacks.indent.disable()
 				else
-					vim.opt_local.listchars:append { tab = "  ", space = " ", trail = " ", lead = " " }   
+					vim.opt_local.listchars:append { tab = "  ", space = " ", trail = " ", lead = " " }
 					Snacks.indent.enable()
 				end
 			end,
