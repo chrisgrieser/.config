@@ -4,6 +4,12 @@ title: 🔘 Utility Shortcuts
 rules:
   - description: 🔘 Utility Shortcuts
     manipulators:
+      # show desktop
+      - type: basic
+        from: { key_code: "9", modifiers: { mandatory: [command, control, option] } }
+        to:
+          - { key_code: f3, modifiers: [command] }
+
       # alt-jk: page up/down
       - type: basic
         from: { key_code: j, modifiers: { mandatory: [option] } }
