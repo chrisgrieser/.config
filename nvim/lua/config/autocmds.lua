@@ -375,7 +375,7 @@ local function addFavicons(bufnr)
 end
 -- deferred so treesitter is ready
 vim.api.nvim_create_autocmd({ "FocusGained", "BufReadPost", "TextChanged", "InsertLeave" }, {
-	desc = "User: Add favicons to urls",
+	desc = "User: Add favicons to URLs",
 	callback = function(ctx)
 		local delay = ctx.event == "BufReadPost" and 200 or 0
 		vim.defer_fn(function() addFavicons(ctx.buf) end, delay)
@@ -414,10 +414,10 @@ local function luckyIndent(bufnr)
 	if spaces and not vim.bo.expandtab then
 		vim.bo[bufnr].expandtab = true
 		vim.bo[bufnr].shiftwidth = #spaces
-		vim.notify(("Set to %d spaces."):format(#spaces), nil, opts)
+		vim.notify_once(("Set to %d spaces."):format(#spaces), nil, opts)
 	elseif not spaces and vim.bo.expandtab then
 		vim.bo[bufnr].expandtab = false
-		vim.notify("Set to tabs.", nil, opts)
+		vim.notify_once("Set to tabs.", nil, opts)
 	end
 end
 

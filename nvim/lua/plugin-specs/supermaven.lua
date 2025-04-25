@@ -3,7 +3,8 @@ return {
 	build = ":SupermavenUseFree", -- needs to be run once to set the API key
 	event = "InsertEnter",
 	keys = {
-		{ "<D-s>", mode = "i", desc = "󰚩 Accept Suggestion" },
+		{ "<D-s>", mode = "i", desc = "󰚩 Accept suggestion" },
+		{ "<D-S>", mode = "i", desc = "󰚩 Accept word" },
 		{ "<leader>oa", vim.cmd.SupermavenToggle, desc = "󰚩 AI completion" },
 	},
 	config = function(_, opts)
@@ -24,6 +25,7 @@ return {
 	opts = {
 		keymaps = {
 			accept_suggestion = "<D-s>",
+			accept_word = "<D-S>",
 		},
 		log_level = "off",
 		ignore_filetypes = {
