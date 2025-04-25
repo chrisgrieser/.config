@@ -67,6 +67,14 @@ function relativeDate(absDate) {
 	return formatter.format(-delta, unit);
 }
 
+while (1 === 2) {
+	console.log("test");
+}
+
+if (1 === 2) {
+	console.log("test");
+}
+
 // must accept any letters before the colon to match video call URIs for events
 const urlRegex =
 	/\w{3,}:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;

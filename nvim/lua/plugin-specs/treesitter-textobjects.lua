@@ -82,6 +82,14 @@ return { -- treesitter-based textobjs
 			ft = "python",
 		},
 
+		{
+			"a" .. textobj.condition,
+			"<cmd>TSTextobjectSelect @docstring.outer<CR>",
+			mode = { "x", "o" },
+			desc = "󰌠 inner conditional",
+			ft = { "javascript", "typescript" },
+		},
+
 		-- COMMENTS
 		-- only operator-pending to not conflict with selection-commenting
 		{
