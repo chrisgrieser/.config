@@ -66,16 +66,13 @@ local function clearSignForMark(m)
 	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row - 1, m.row)
 end
 
-local markExtmarks = {}
 ---@param name string
 local function setSignForMark(name)
 	local ns = vim.api.nvim_create_namespace("mark-signs")
 	local m = getMark(name)
 	if not m then return end
 
-	clearSignForMark(m)
-	if markExtmarks[name] then vim.api.nvim_buf_del_extmark(m.bufnr, ns, markExtmarks[name]) end
-	markExtmarks[name] = vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 0, {
+	vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 0, {
 		sign_text = config.sign.icons[name] or name,
 		sign_hl_group = config.sign.hlgroup,
 		priority = config.sign.priority,
@@ -136,6 +133,7 @@ function M.setUnsetMark(name)
 		vim.api.nvim_del_mark(name)
 		notify(("Mark [%s] cleared."):format(name))
 	else
+		clearSignForMark(m)
 		vim.api.nvim_buf_set_mark(0, name, row, col, {})
 		setSignForMark(name)
 		notify(("Mark [%s] set."):format(name))

@@ -203,8 +203,7 @@ return {
 					},
 				},
 				marks = {
-					-- only global marks
-					transform = function(item) return item.label:find("%u") ~= nil end,
+					transform = function(item) return item.label:find("%u") ~= nil end, -- only global marks
 					win = {
 						input = {
 							keys = { ["<D-d>"] = { "delete_mark", mode = "i" } },
@@ -230,7 +229,6 @@ return {
 								["h"] = "explorer_close", -- go up folder
 								["l"] = "confirm", -- enter folder / open file
 								["zz"] = "explorer_close_all",
-								["c"] = "explorer_close_all",
 								["y"] = "explorer_copy",
 								["n"] = "explorer_add",
 								["d"] = "explorer_del",
@@ -240,9 +238,11 @@ return {
 								["-"] = "focus_input", -- i.e. search
 								["."] = "toggle_hidden_and_ignored",
 
-								-- consistent with `gh` to go to next hunk
+								-- consistent with `gh` for next hunk and `ge` for next diagnostic
 								["gh"] = "explorer_git_next",
 								["gH"] = "explorer_git_prev",
+								["ge"] = "explorer_diagnostic_next",
+								["gE"] = "explorer_diagnostic_prev",
 							},
 						},
 					},
@@ -453,6 +453,7 @@ return {
 				list = {
 					keys = {
 						["<C-CR>"] = "cycle_win",
+						["<D-p>"] = "toggle_preview",
 						["G"] = "list_bottom",
 						["gg"] = "list_top",
 						["j"] = "list_down",
