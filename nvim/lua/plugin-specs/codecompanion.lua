@@ -27,7 +27,9 @@ return {
 	opts = {
 		-- CodeCompanion settings
 		display = {
-			diff = { enabled = true },
+			diff = {
+				enabled = false, -- not helpful anyway, just using gitsigns word-diff afterwards instead
+			},
 			chat = {
 				start_in_insert_mode = true,
 				intro_message = "Press ? for options",

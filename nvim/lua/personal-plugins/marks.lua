@@ -4,7 +4,7 @@
 
 local config = {
 	sign = {
-		hlgroup = "@keyword.return",
+		hlgroup = "StandingOut",
 		priority = 21, -- gitsigns use 20
 		icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋" },
 	},
@@ -13,6 +13,7 @@ local config = {
 --------------------------------------------------------------------------------
 
 local M = {}
+local ns = vim.api.nvim_create_namespace("mark-signs")
 
 ---@class (exact) Markobj
 ---@field name string
@@ -51,24 +52,17 @@ local function getMark(name)
 	if m[1] ~= 0 then return mark end
 end
 
----@param m Markobj
+---@param m Markobj?
 ---@return boolean
 local function cursorIsAtMark(m)
+	if not m then return false end
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local bufnr = vim.api.nvim_get_current_buf()
 	return m.row == row and m.bufnr == bufnr
 end
 
----@param m Markobj?
-local function clearSignForMark(m)
-	if not m then return end
-	local ns = vim.api.nvim_create_namespace("mark-signs")
-	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row - 1, m.row)
-end
-
 ---@param name string
 local function setSignForMark(name)
-	local ns = vim.api.nvim_create_namespace("mark-signs")
 	local m = getMark(name)
 	if not m then return end
 
@@ -121,31 +115,37 @@ function M.cycleMarks(names)
 	setSignForMark(nextMark.name) -- setting here simpler than on `BufEnter`
 end
 
----Set a mark, or unsets it if the cursor is on the same line as the mark
 ---@param name string
-function M.setUnsetMark(name)
+function M.setMark(name)
 	if not isValidMarkName(name) then return end
 
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	M.deleteMark(name, "silent") -- silent, since this func notifies itself
+
+	vim.api.nvim_buf_set_mark(0, name, row, col, {})
+	setSignForMark(name)
+	notify(("Mark [%s] set."):format(name))
+end
+
+---@param name string
+---@param silent? "silent"
+function M.deleteMark(name, silent)
+	if not isValidMarkName(name) then return end
 	local m = getMark(name)
-	if m and cursorIsAtMark(m) then
-		clearSignForMark(m)
-		vim.api.nvim_del_mark(name)
-		notify(("Mark [%s] cleared."):format(name))
-	else
-		clearSignForMark(m)
-		vim.api.nvim_buf_set_mark(0, name, row, col, {})
-		setSignForMark(name)
-		notify(("Mark [%s] set."):format(name))
-	end
+	if not m then return end
+
+	vim.api.nvim_del_mark(m.name)
+	if not silent then notify(("Mark [%s] deleted."):format(name)) end
+
+	-- clear sign
+	vim.api.nvim_buf_clear_namespace(m.bufnr, ns, m.row - 1, m.row)
 end
 
 function M.deleteAllMarks()
 	local allMarks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	for i = 1, #allMarks do
 		local name = allMarks:sub(i, i)
-		clearSignForMark(getMark(name))
-		vim.api.nvim_del_mark(name)
+		M.deleteMark(name, "silent") -- silent, since this func notifies itself
 	end
 	notify("All marks deleted.")
 end
