@@ -20,8 +20,6 @@
 		<string>MacPass</string>
 		<string>KeeWeb</string>
 	</array>
-	<key>fastAppend</key>
-	<true/>
 	<key>fastAppendBackToClipboard</key>
 	<true/>
 	<key>fastAppendSeparator</key>

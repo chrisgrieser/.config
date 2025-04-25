@@ -106,12 +106,7 @@ return {
 		},
 		{
 			"gt",
-			function()
-				Snacks.picker.explorer {
-					auto_close = true,
-					layout = { preset = "very_vertical" },
-				}
-			end,
+			function() Snacks.picker.explorer() end,
 			desc = "󰙅 File tree",
 		},
 		{
@@ -219,14 +214,26 @@ return {
 					},
 				},
 				explorer = {
+					auto_close = true,
+					layout = { preset = "very_vertical" },
 					win = {
-						input = {
+						list = {
 							keys = {
-								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								-- consistent with Finder vim mode bindings
+								["."] = "toggle_hidden_and_ignored",
+								["zz"] = "explorer_close_all",
+								["<D-l>"] = "explorer_open", -- open with system application
+								["y"] = "explorer_copy",
+								["n"] = "explorer_add",
+								["<CR>"] = "explorer_rename",
+
+								-- consistent with `gh` to go to next hunk
+								["gh"] = "explorer_git_next",
+								["gH"] = "explorer_git_prev",
 							},
 						},
-					}
-				}
+					},
+				},
 				files = {
 					cmd = "rg",
 					args = {
@@ -460,13 +467,15 @@ return {
 					picker.opts["hidden"] = not picker.opts.hidden
 					picker.opts["ignored"] = not picker.opts.ignored
 
-					-- remove `--ignore-file` extra arg
-					picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
-					local noIgnoreFileArgs = vim.iter(picker.opts.args)
-						:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
-						:totable()
-					picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
-						or picker.opts["_originalArgs"]
+					if picker.opts.finder ~= "explorer" then
+						-- remove `--ignore-file` extra arg
+						picker.opts["_originalArgs"] = picker.opts["_originalArgs"] or picker.opts.args
+						local noIgnoreFileArgs = vim.iter(picker.opts.args)
+							:filter(function(arg) return not vim.startswith(arg, "--ignore-file=") end)
+							:totable()
+						picker.opts["args"] = picker.opts.hidden and noIgnoreFileArgs
+							or picker.opts["_originalArgs"]
+					end
 
 					picker:find()
 				end,

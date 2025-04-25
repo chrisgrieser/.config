@@ -322,10 +322,10 @@ end, { desc = " Open first URL in file" })
 --------------------------------------------------------------------------------
 
 -- INSERT MODE
--- keymap("n", "i", function()
--- 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
--- 	return lineEmpty and '"_cc' or "i"
--- end, { expr = true, desc = "indented i on empty line" })
+keymap("n", "i", function()
+	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
+	return lineEmpty and '"_cc' or "i"
+end, { expr = true, desc = "indented i on empty line" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
