@@ -19,6 +19,7 @@ local lightThemes = {
 
 local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
 nordLight.ansi[4] = "#c19a29" -- https://github.com/Gogh-Co/Gogh/blob/master/themes/Nord%20Light.yml
+nordLight.brights[3] = "#7eb87c"
 nordLight.brights[4] = "#DAB752"
 
 local builtinSchemeOverrides = {

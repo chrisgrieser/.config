@@ -196,6 +196,16 @@ return {
 		---@type snacks.picker.Config
 		picker = {
 			sources = {
+				undo = {
+					win = {
+						input = {
+							keys = {
+								["<CR>"] = { "yank_add", mode = "i" },
+								["<D-c>"] = { "yank_del", mode = "i" },
+							},
+						},
+					},
+				},
 				marks = {
 					-- only global marks
 					transform = function(item) return item.label:find("%u") ~= nil end,
