@@ -6,7 +6,7 @@ return {
 			desc = "User: Change `SatelliteQuickfix` color",
 			callback = function()
 				vim.api.nvim_set_hl(0, "SatelliteQuickfix", { link = "DiagnosticSignInfo" })
-				vim.api.nvim_set_hl(0, "SatelliteMark", { link = "@keyword.return" })
+				vim.api.nvim_set_hl(0, "SatelliteMark", { link = "StandingOut" })
 			end,
 		})
 	end,

@@ -17,8 +17,8 @@ local themes = {
 			groups = {
 				dawnfox = {
 					-- general
-					["@keyword.return"] = { fg = "#9f2e69", style = "bold" },
-					["@keyword.break"] = { fg = "#9f2e69", style = "bold" },
+					["StandingOut"] = { fg = "#9f2e69", style = "bold" },
+					["@keyword.return"] = { link = "StandingOut" },
 					["LspSignatureActiveParameter"] = { link = "Visual" },
 					["@namespace.builtin.lua"] = { link = "@variable.builtin" }, -- `vim` and `hs`
 					["@character.printf"] = { link = "SpecialChar" },
@@ -115,7 +115,8 @@ local themes = {
 				-- general
 				hl["@keyword"].italic = false
 				hl.Comment.italic = false
-				hl["@keyword.return"] = { fg = colors.magenta2, bold = true }
+				hl.StandingOut = { fg = colors.magenta2, bold = true }
+				hl["@keyword.return"] = { link = "StandingOut" }
 				hl["@markup.strong"] = { fg = colors.fg_dark, bold = true }
 				hl["@string.documentation.python"] = { link = "Comment" }
 				hl.LspSignatureActiveParameter = { link = "Visual" }

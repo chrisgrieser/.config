@@ -211,9 +211,8 @@ return {
 					},
 					actions = {
 						delete_mark = function(picker)
-							local mark = picker:current().label
-							vim.api.nvim_del_mark(mark)
-							vim.notify(("Deleted mark [%s]"):format(mark))
+							local markName = picker:current().label
+							require("personal-plugins.marks").deleteMark(markName)
 							picker:find() -- reload
 						end,
 					},
