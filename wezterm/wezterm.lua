@@ -1,3 +1,6 @@
+local wt = require("wezterm")
+--------------------------------------------------------------------------------
+
 -- CONFIG the first theme in the list is used
 local darkThemes = {
 	"cyberpunk",
@@ -13,6 +16,16 @@ local lightThemes = {
 	"GoogleLight (Gogh)",
 	"BlulocoZshLight (Gogh)",
 }
+
+local nordLight = wt.get_builtin_color_schemes()["Nord Light (Gogh)"]
+nordLight.ansi[4] = "#c19a29" -- https://github.com/Gogh-Co/Gogh/blob/master/themes/Nord%20Light.yml
+nordLight.brights[4] = "#DAB752"
+
+local builtinSchemeOverrides = {
+	["Nord Light (Gogh)"] = nordLight,
+}
+
+--------------------------------------------------------------------------------
 
 local deviceSpecific = {
 	home = {
@@ -33,7 +46,6 @@ local deviceSpecific = {
 }
 
 --------------------------------------------------------------------------------
-local wt = require("wezterm")
 
 -- device specific config
 local host = wt.hostname()
@@ -109,6 +121,7 @@ local config = {
 	custom_block_glyphs = false, -- don't use wezterm's box-char replacements since too thin
 
 	-- APPEARANCE
+	color_schemes = builtinSchemeOverrides,
 	color_scheme = theme.autoScheme(darkThemes[1], lightThemes[1]),
 	window_background_opacity = 1,
 	bold_brightens_ansi_colors = "BrightAndBold",
