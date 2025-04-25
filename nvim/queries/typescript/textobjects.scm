@@ -6,7 +6,7 @@
 (call_expression
   function: (_) @call.justCaller)
 
-; regard only loop and if conditions also as inner conditionals
+; only loop and if conditions
 (while_statement
   condition: (_) @conditional.conditionOnly)
 
