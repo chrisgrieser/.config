@@ -500,8 +500,11 @@ end
 
 -- RECORDING
 do
-	local soundDir =
-		"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+	local function play(soundFile)
+		local soundDir =
+			"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+		if jit.os == "OSX" then vim.system { "afplay", soundDir .. soundFile } end
+	end
 	local cursorlineBg
 
 	vim.api.nvim_create_autocmd("RecordingEnter", {
@@ -509,8 +512,7 @@ do
 		callback = function()
 			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
 			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
-
-			if jit.os == "OSX" then vim.system { "afplay", soundDir .. "begin_record.caf" } end
+			play("begin_record.caf")
 		end,
 	})
 
@@ -518,8 +520,7 @@ do
 		desc = "User: Macro recording utilities",
 		callback = function()
 			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
-
-			if jit.os == "OSX" then vim.system { "afplay", soundDir .. "end_record.caf" } end
+			play("end_record.caf")
 		end,
 	})
 end

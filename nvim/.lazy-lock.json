@@ -20,7 +20,7 @@
   "nvim-genghis": { "branch": "main", "commit": "d106bbaf6e14d0a16688a254ed4e59fa64d3dee6" },
   "nvim-justice": { "branch": "main", "commit": "9be48e4113b48d2c3b747292f31f71bece97a55c" },
   "nvim-lsp-endhints": { "branch": "main", "commit": "c4365f82d9aeb19c9464eed398331460eeaf5cfc" },
-  "nvim-lspconfig": { "branch": "master", "commit": "8b0f47d851ee5343d38fe194a06ad16b9b9bd086" },
+  "nvim-lspconfig": { "branch": "master", "commit": "7d32353d99fa24c9c2fac993b8378afbc92df94b" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
   "nvim-origami": { "branch": "main", "commit": "c84428e4d8d7b5ea0288225b042b7827c4b446af" },
   "nvim-rip-substitute": { "branch": "main", "commit": "fcc4f03f2260208f49ab9b7c374dff477d4698d5" },
