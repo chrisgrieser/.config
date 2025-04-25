@@ -15,7 +15,7 @@ function actions_in_repo {
 	# cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
 }
 
-commit_msg="ci: fix scope identification for release notes"
+commit_msg="ci: fix edge cases of release label identification"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
