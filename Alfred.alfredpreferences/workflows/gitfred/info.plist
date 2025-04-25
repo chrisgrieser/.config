@@ -25,6 +25,28 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>968A454B-B9EE-46DD-8156-3630F678E31C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>122C2D04-00F3-4F54-9132-9DE395C2194A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>06CC5118-3CAE-427B-928D-48B78C81B6B6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -1116,27 +1138,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>B1E7F5EB-3260-47E1-8A6A-797722766DE9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -1310,6 +1311,27 @@
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>☑️ Marked as read</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>122C2D04-00F3-4F54-9132-9DE395C2194A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1416,9 +1438,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>810</real>
+			<real>805</real>
 			<key>ypos</key>
-			<real>1070</real>
+			<real>1005</real>
 		</dict>
 		<key>08B7842B-16DA-4BFC-8F35-AE680AF1E07B</key>
 		<dict>
@@ -1429,7 +1451,7 @@
 			<key>xpos</key>
 			<real>671</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>885</real>
 		</dict>
 		<key>0C28AAE6-A080-48A7-A6F0-0BB05070161D</key>
 		<dict>
@@ -1439,6 +1461,15 @@
 			<real>290</real>
 			<key>ypos</key>
 			<real>500</real>
+		</dict>
+		<key>122C2D04-00F3-4F54-9132-9DE395C2194A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>890</real>
+			<key>ypos</key>
+			<real>940</real>
 		</dict>
 		<key>129ABCE4-E5CC-4547-98BB-9A4BC845CFFA</key>
 		<dict>
@@ -1458,7 +1489,7 @@
 			<key>xpos</key>
 			<real>500</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>900</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1509,7 +1540,7 @@
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>965</real>
 		</dict>
 		<key>462691DA-0319-4F31-B297-CC4A75FD1DFE</key>
 		<dict>
@@ -1556,7 +1587,7 @@
 			<key>xpos</key>
 			<real>211</real>
 			<key>ypos</key>
-			<real>920</real>
+			<real>855</real>
 		</dict>
 		<key>76991846-250A-4BDC-9CE6-01A8D691D6C1</key>
 		<dict>
@@ -1583,9 +1614,9 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>310</real>
+			<real>890</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>820</real>
 		</dict>
 		<key>996236DC-1621-432A-8AA2-7B4B6C6FE2A9</key>
 		<dict>
@@ -1616,15 +1647,6 @@
 			<key>ypos</key>
 			<real>390</real>
 		</dict>
-		<key>B1E7F5EB-3260-47E1-8A6A-797722766DE9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>xpos</key>
-			<real>650</real>
-			<key>ypos</key>
-			<real>840</real>
-		</dict>
 		<key>B35052FF-0027-40CC-BC59-EA7D442A57EA</key>
 		<dict>
 			<key>colorindex</key>
@@ -1634,7 +1656,7 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>900</real>
 		</dict>
 		<key>BFABA717-A81E-4D69-A8C2-4ED2042B4588</key>
 		<dict>
@@ -1645,7 +1667,7 @@
 			<key>xpos</key>
 			<real>305</real>
 			<key>ypos</key>
-			<real>965</real>
+			<real>900</real>
 		</dict>
 		<key>C0F5A902-C58A-4DEC-AF82-9EDD83CDFC6D</key>
 		<dict>
@@ -1714,7 +1736,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>635</real>
 			<key>ypos</key>
-			<real>1040</real>
+			<real>975</real>
 		</dict>
 		<key>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</key>
 		<dict>
@@ -1723,7 +1745,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>1080</real>
+			<real>1015</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -1989,7 +2011,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.10.1</string>
+	<string>1.10.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
