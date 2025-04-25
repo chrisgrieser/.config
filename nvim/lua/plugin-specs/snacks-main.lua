@@ -25,6 +25,7 @@ return {
 
 		-- disable default keymaps to make the `?` help overview less cluttered
 		require("snacks.picker.config.defaults").defaults.win.input.keys = {}
+		require("snacks.picker.config.defaults").defaults.win.list.keys = {}
 
 		-- cleaner vim.ui.select
 		---@type fun(kind?: string): snacks.picker.format

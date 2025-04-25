@@ -221,21 +221,24 @@ return {
 				},
 				explorer = {
 					auto_close = true,
-					diagnostics_open = true,
-					git_status_open = true,
 					layout = { preset = "very_vertical" },
 					win = {
 						list = {
 							keys = {
-								["<D-up>"] = "explorer_up",
 								-- consistent with Finder vim mode bindings
-								["."] = "toggle_hidden_and_ignored",
+								["<D-up>"] = "explorer_up",
+								["h"] = "explorer_close", -- go up folder
+								["l"] = "confirm", -- enter folder / open file
 								["zz"] = "explorer_close_all",
-								["<D-l>"] = "explorer_open", -- open with system application
+								["c"] = "explorer_close_all",
 								["y"] = "explorer_copy",
 								["n"] = "explorer_add",
+								["d"] = "explorer_del",
+								["m"] = "explorer_move",
+								["o"] = "explorer_open", -- open with system application
 								["<CR>"] = "explorer_rename",
-								["-"] = "focus input", -- i.e. search
+								["-"] = "focus_input", -- i.e. search
+								["."] = "toggle_hidden_and_ignored",
 
 								-- consistent with `gh` to go to next hunk
 								["gh"] = "explorer_git_next",
@@ -258,6 +261,7 @@ return {
 							keys = {
 								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								[":"] = { "complete_and_add_colon", mode = "i" },
+								["<C-r>"] = { "explorer_rename", mode = "i" },
 							},
 						},
 					},
@@ -421,7 +425,7 @@ return {
 			win = {
 				input = {
 					keys = {
-						["<Esc>"] = { "cancel", mode = "i" }, --> disable normal mode
+						["<Esc>"] = { "close", mode = "i" }, --> disable normal mode
 						["<CR>"] = { "confirm", mode = "i" },
 						["<Tab>"] = { "list_down_wrapping", mode = "i" },
 						["<S-Tab>"] = { "list_up", mode = "i" },
@@ -446,7 +450,25 @@ return {
 						["?"] = { "toggle_help_input", mode = "i" },
 					},
 				},
-				list = { keys = { ["<C-CR>"] = { "cycle_win" } } },
+				list = {
+					keys = {
+						["<C-CR>"] = "cycle_win",
+						["G"] = "list_bottom",
+						["gg"] = "list_top",
+						["j"] = "list_down",
+						["k"] = "list_up",
+						["<Tab>"] = "list_down",
+						["<S-Tab>"] = "list_up",
+						["q"] = "close",
+						["<Esc>"] = "close",
+
+						["<D-l>"] = "reveal_in_macOS_Finder",
+						["<D-c>"] = "yank",
+
+						["!"] = "inspect",
+						["?"] = "toggle_help_list",
+					},
+				},
 				preview = { keys = { ["<C-CR>"] = { "cycle_win" } } },
 			},
 			actions = {
@@ -459,6 +481,7 @@ return {
 				reveal_in_macOS_Finder = function(picker)
 					if jit.os ~= "OSX" then return end
 					vim.system { "open", "-R", picker:current().file }
+					Chainsaw(picker:current().file) -- 🪚
 					picker:close()
 				end,
 				qflist_and_go = function(picker)
