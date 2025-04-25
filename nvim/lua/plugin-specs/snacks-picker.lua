@@ -85,6 +85,7 @@ return {
 	keys = {
 		-- FILES
 		{ "go", betterFileOpen, desc = " Open files" },
+		{ "gt", function() Snacks.picker.explorer() end, desc = "󰙅 File tree" },
 		{
 			"gr",
 			function()
@@ -103,11 +104,6 @@ return {
 				Snacks.picker.files { cwd = vim.fn.stdpath("config"), title = " nvim config" }
 			end,
 			desc = " nvim config",
-		},
-		{
-			"gt",
-			function() Snacks.picker.explorer() end,
-			desc = "󰙅 File tree",
 		},
 		{
 			"gp",
@@ -225,10 +221,13 @@ return {
 				},
 				explorer = {
 					auto_close = true,
+					diagnostics_open = true,
+					git_status_open = true,
 					layout = { preset = "very_vertical" },
 					win = {
 						list = {
 							keys = {
+								["<D-up>"] = "explorer_up",
 								-- consistent with Finder vim mode bindings
 								["."] = "toggle_hidden_and_ignored",
 								["zz"] = "explorer_close_all",
@@ -236,6 +235,7 @@ return {
 								["y"] = "explorer_copy",
 								["n"] = "explorer_add",
 								["<CR>"] = "explorer_rename",
+								["-"] = "focus input", -- i.e. search
 
 								-- consistent with `gh` to go to next hunk
 								["gh"] = "explorer_git_next",
