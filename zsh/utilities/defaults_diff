@@ -7,10 +7,9 @@ if [[ ! -f "/tmp/defaults-before" ]]; then
 	defaults read > /tmp/defaults-before
 	echo "Saved current \`defaults\` state. "
 	echo "1. Make changes."
-	echo "2. Then run \`prefs\` again for a diff of the changes."
+	echo "2. Then run again for a diff of the changes."
 else
-	defaults read > /tmp/after
-	readonly changes
+	defaults read > /tmp/defaults-after
 	changes=$(
 		command diff /tmp/defaults-before /tmp/defaults-after |
 			grep -v "_DKThrottledActivityLast" |

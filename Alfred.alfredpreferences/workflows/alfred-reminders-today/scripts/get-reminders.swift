@@ -28,7 +28,15 @@ let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! 
 let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"  // no `!`, since not always set
 // ─────────────────────────────────────────────────────────────────────────────
 
-func mapRgbToBasecolor(_ r: Double, _ g: Double, _ b: Double) -> String {
+var colorMap: [String: String] = [:]
+func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
+	let components = cgColor.components!
+	let (r, g, b) = (components[0], components[1], components[2])
+
+	// cache results to avoid recalculating the same colors
+	let rgbString = String(format: "rgb(%.2f, %.2f, %.2f)", r, g, b)
+	if let emoji = colorMap[rgbString] { return emoji }
+
 	// Simple thresholds for mapping RGB to base colors
 	let redDiff = abs(r - 1.0) + g + b
 	let greenDiff = r + abs(g - 1.0) + b
@@ -43,20 +51,21 @@ func mapRgbToBasecolor(_ r: Double, _ g: Double, _ b: Double) -> String {
 	let blackDiff = 0.7 * (r + g + b)  // more range
 
 	let diffs = [
-		(redDiff, "red"),
-		(greenDiff, "green"),
-		(blueDiff, "blue"),
-		(yellowDiff, "yellow"),
-		(purpleDiff, "purple"),
-		(orangeDiff, "orange"),
-		(brownDiff, "brown"),
-		(whiteDiff, "white"),
-		(blackDiff, "black"),
+		(redDiff, "🔴"),
+		(greenDiff, "🟢"),
+		(blueDiff, "🔵"),
+		(yellowDiff, "🟡"),
+		(purpleDiff, "🟣"),
+		(orangeDiff, "🟠"),
+		(brownDiff, "🟤"),
+		(whiteDiff, "⚪"),
+		(blackDiff, "⚫"),
 	]
 
 	let closest = diffs.min { $0.0 < $1.0 }
-	let baseColor = closest?.1 ?? "?"
-	return baseColor
+	let emoji = closest?.1 ?? "?"
+	colorMap[rgbString] = emoji
+	return emoji
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
