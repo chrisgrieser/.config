@@ -497,3 +497,29 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	if #changedFiles > 1 then vim.cmd.wall() end
 end
 --------------------------------------------------------------------------------
+
+-- RECORDING
+do
+	local soundDir =
+		"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
+	local cursorlineBg
+
+	vim.api.nvim_create_autocmd("RecordingEnter", {
+		desc = "User: Macro recording utilities (1)",
+		callback = function()
+			cursorlineBg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg
+			vim.api.nvim_set_hl(0, "CursorLine", { link = "DiffDelete" })
+
+			if jit.os == "OSX" then vim.system { "afplay", soundDir .. "begin_record.caf" } end
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("RecordingLeave", {
+		desc = "User: Macro recording utilities",
+		callback = function()
+			vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorlineBg })
+
+			if jit.os == "OSX" then vim.system { "afplay", soundDir .. "end_record.caf" } end
+		end,
+	})
+end

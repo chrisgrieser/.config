@@ -25,19 +25,14 @@ end
 
 --------------------------------------------------------------------------------
 
----1. start/stop with just one keypress
----2. add notification & sound for recording
+---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
 	local notRecording = vim.fn.reg_recording() == ""
-	local soundDir =
-		"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/"
-	local soundFile
 
 	if notRecording then
 		vim.cmd.normal { "q" .. reg, bang = true }
-		soundFile = "begin_record.caf"
 	else
 		local prevMacro = vim.fn.getreg(reg)
 		vim.cmd.normal { "q", bang = true }
@@ -46,15 +41,11 @@ function M.startOrStopRecording(toggleKey, reg)
 			vim.fn.setreg(reg, macro)
 			local msg = vim.fn.keytrans(macro)
 			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
-			soundFile = "end_record.caf"
 		else
 			vim.fn.setreg(reg, prevMacro) -- prevent `toggleKey` filling the register
 			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
-			soundFile = "media_paused.caf"
 		end
 	end
-
-	if jit.os == "OSX" then vim.system { "afplay", soundDir .. soundFile } end
 end
 
 --------------------------------------------------------------------------------

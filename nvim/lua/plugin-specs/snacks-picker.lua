@@ -105,6 +105,16 @@ return {
 			desc = " nvim config",
 		},
 		{
+			"gt",
+			function()
+				Snacks.picker.explorer {
+					auto_close = true,
+					layout = { preset = "very_vertical" },
+				}
+			end,
+			desc = "󰙅 File tree",
+		},
+		{
 			"gp",
 			function()
 				Snacks.picker.files {
@@ -208,6 +218,15 @@ return {
 						end,
 					},
 				},
+				explorer = {
+					win = {
+						input = {
+							keys = {
+								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+							},
+						},
+					}
+				}
 				files = {
 					cmd = "rg",
 					args = {
@@ -334,6 +353,21 @@ return {
 			ui_select = true,
 			layout = "wide_with_preview", -- use this as default layout
 			layouts = { -- define available layouts
+				very_vertical = {
+					layout = {
+						box = "horizontal",
+						width = 0.5,
+						height = 0.95,
+						border = "none",
+						{
+							box = "vertical",
+							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+						},
+					},
+				},
 				small_no_preview = {
 					layout = {
 						box = "horizontal",
