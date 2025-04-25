@@ -359,7 +359,7 @@ keymap("n", "<leader>ib", function() require("personal-plugins.misc").bufferInfo
 -- WINDOWS
 
 -- stylua: ignore
-keymap({ "n", "v", "i" }, "<C-CR>", function() vim.cmd.wincmd("w") end, { desc = " Cycle windows" })
+keymap({ "n", "v", "i" }, "<C-CR>", "<C-w>w", { desc = " Cycle windows" })
 keymap({ "n", "x" }, "<C-v>", "<cmd>vertical leftabove split<CR>", { desc = " Vertical split" })
 keymap({ "n", "x" }, "<D-W>", vim.cmd.only, { desc = " Close other windows" })
 
