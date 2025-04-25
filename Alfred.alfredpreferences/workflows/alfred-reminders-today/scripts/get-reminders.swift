@@ -10,6 +10,7 @@ struct ReminderOutput: Codable {
 	let title: String
 	let notes: String?
 	let list: String
+	let listColor: String
 	let dueDate: String?
 	let creationDate: String?
 	let isAllDay: Bool
@@ -25,6 +26,48 @@ let semaphore = DispatchSemaphore(value: 0)
 let reminderList = ProcessInfo.processInfo.environment["reminder_list"]!
 let includeAllLists = ProcessInfo.processInfo.environment["include_all_lists"]! == "1"
 let showCompleted = ProcessInfo.processInfo.environment["showCompleted"] == "true"  // no `!`, since not always set
+// ─────────────────────────────────────────────────────────────────────────────
+
+var colorMap: [String: String] = [:]
+func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
+	let components = cgColor.components!
+	let (r, g, b) = (components[0], components[1], components[2])
+
+	// cache results to avoid recalculating the same colors
+	let rgbString = String(format: "rgb(%.2f, %.2f, %.2f)", r, g, b)
+	if let emoji = colorMap[rgbString] { return emoji }
+
+	// Simple thresholds for mapping RGB to base colors
+	let redDiff = abs(r - 1.0) + g + b
+	let greenDiff = r + abs(g - 1.0) + b
+	let blueDiff = r + g + abs(b - 1.0)
+	let yellowDiff = abs(r - 1.0) + abs(g - 1.0) + b
+	let purpleDiff = abs(r - 1.0) + g + abs(b - 1.0)
+	let orangeDiff = abs(r - 1.0) + abs(g - 0.6) + b
+
+	// Adjust the ranges by reducing weights for differences
+	let brownDiff = 2.0 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
+	let whiteDiff = 0.7 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
+	let blackDiff = 0.7 * (r + g + b)  // more range
+
+	let diffs = [
+		(redDiff, "🔴"),
+		(greenDiff, "🟢"),
+		(blueDiff, "🔵"),
+		(yellowDiff, "🟡"),
+		(purpleDiff, "🟣"),
+		(orangeDiff, "🟠"),
+		(brownDiff, "🟤"),
+		(whiteDiff, "⚪"),
+		(blackDiff, "⚫"),
+	]
+
+	let closest = diffs.min { $0.0 < $1.0 }
+	let emoji = closest?.1 ?? "?"
+	colorMap[rgbString] = emoji
+	return emoji
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 eventStore.requestFullAccessToReminders { granted, error in
@@ -90,6 +133,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 				title: reminder.title,
 				notes: reminder.notes,
 				list: reminder.calendar.title,
+				listColor: mapCGColorToEmoji(reminder.calendar.cgColor),
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
 				isAllDay: components?.hour == nil && components?.minute == nil,

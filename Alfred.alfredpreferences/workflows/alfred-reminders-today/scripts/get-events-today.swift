@@ -19,9 +19,14 @@ let semaphore = DispatchSemaphore(value: 0)
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+var colorMap: [String: String] = [:]
 func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 	let components = cgColor.components!
 	let (r, g, b) = (components[0], components[1], components[2])
+
+	// cache results to avoid recalculating the same colors
+	let rgbString = String(format: "rgb(%.2f, %.2f, %.2f)", r, g, b)
+	if let emoji = colorMap[rgbString] { return emoji }
 
 	// Simple thresholds for mapping RGB to base colors
 	let redDiff = abs(r - 1.0) + g + b
@@ -49,7 +54,9 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 	]
 
 	let closest = diffs.min { $0.0 < $1.0 }
-	return closest?.1 ?? "?"
+	let emoji = closest?.1 ?? "?"
+	colorMap[rgbString] = emoji
+	return emoji
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
