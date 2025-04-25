@@ -82,6 +82,8 @@ local function workLayout()
 			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
 			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
 		}
+	end)
+	u.whenAppWinAvailable("Mimestream", function()
 		local mastoWin = u.app("Ivory"):mainWindow()
 		mastoWin:setFrame(wu.toTheSide)
 	end)
