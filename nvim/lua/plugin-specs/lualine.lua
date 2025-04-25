@@ -85,14 +85,7 @@ return {
 				-- HACK dummy, so tabline is never empty (in which case vim adds its ugly tabline)
 				{ function() return " " end },
 			},
-			lualine_y = {
-				{ -- recording status
-					function() return ("Recording [%s]…"):format(vim.fn.reg_recording()) end,
-					icon = "󰑊",
-					cond = function() return vim.fn.reg_recording() ~= "" end,
-					color = "ErrorMsg",
-				},
-			},
+			lualine_y = {},
 		},
 		sections = {
 			lualine_a = {
