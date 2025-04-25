@@ -178,17 +178,5 @@ return {
 			end,
 			desc = " Open next path",
 		},
-		{ -- to next `then` in lua
-			"N",
-			mode = "o",
-			function()
-				local pattern = "().( then)"
-				local core = require("various-textobjs.charwise-core")
-				local row, _, endCol = core.getTextobjPos(pattern, "inner", 5)
-				core.selectFromCursorTo({ row, endCol }, 5)
-			end,
-			ft = "lua",
-			desc = "󰬞 to next `then`",
-		},
 	},
 }

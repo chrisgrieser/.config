@@ -62,10 +62,10 @@ return { -- treesitter-based textobjs
 
 		-- CUSTOM TEXTOBJECTS (defined via .scm files)
 		{
-			"g" .. textobj.call,
+			"r" .. textobj.call,
 			"<cmd>TSTextobjectSelect @call.justCaller<CR>",
 			mode = "o",
-			desc = "󰡱 caller",
+			desc = "󰡱 rest of caller",
 		},
 		{
 			"ad",
@@ -81,13 +81,12 @@ return { -- treesitter-based textobjs
 			desc = "󰌠 inner docstring",
 			ft = "python",
 		},
-
-		{
-			"a" .. textobj.condition,
-			"<cmd>TSTextobjectSelect @docstring.outer<CR>",
+		{ -- override default inner conditional for some languages
+			"i" .. textobj.condition,
+			"<cmd>TSTextobjectSelect @conditional.conditionOnly<CR>",
 			mode = { "x", "o" },
-			desc = "󰌠 inner conditional",
-			ft = { "javascript", "typescript" },
+			desc = "󱕆 inner conditional",
+			ft = { "javascript", "typescript", "lua", "swift", "python", "bash", "zsh" },
 		},
 
 		-- COMMENTS
