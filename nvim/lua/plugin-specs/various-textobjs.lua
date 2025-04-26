@@ -133,15 +133,11 @@ return {
 				vim.fn.setreg("+", startLine .. "\n" .. endLine .. "\n")
 
 				-- highlight yanked text
-				local duration = 1500 -- CONFIG
+				local dur = 1500 -- CONFIG
 				local ns = vim.api.nvim_create_namespace("ysii")
 				local bufnr = vim.api.nvim_get_current_buf()
-				vim.hl.range(bufnr, ns, "IncSearch", { startLn, 0 }, { startLn, -1 })
-				vim.hl.range(bufnr, ns, "IncSearch", { endLn, 0 }, { endLn, -1 })
-				vim.defer_fn(
-					function() vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1) end,
-					duration
-				)
+				vim.hl.range(bufnr, ns, "IncSearch", { startLn, 0 }, { startLn, -1 }, { timeout = dur })
+				vim.hl.range(bufnr, ns, "IncSearch", { endLn, 0 }, { endLn, -1 }, { timeout = dur })
 			end,
 			desc = "󰅍 Yank surrounding indent",
 		},

@@ -1,4 +1,4 @@
-# DOCS https://github.com/philocalyst/infat?tab=readme-ov-file#4-configuration
+# DOCS https://github.com/philocalyst/infat#4-configuration
 
 [extensions]
 txt = "TextEdit"
@@ -7,8 +7,8 @@ ics = "Calendar"
 svg = "neovide"
 url = "Brave Browser" # link files
 webloc = "Brave Browser" # link files
-# md = "Obsidian Helper" # PENDING https://github.com/philocalyst/infat/issues/8
-# html = "Brave Browser" # PENDING https://github.com/philocalyst/infat/issues/7
+md = "Obsidian Helper"
+html = "Brave Browser"
 
 [schemes]
 mailto = "Mimestream"
@@ -20,4 +20,4 @@ plain-text = "neovide"
 video = "IINA"
 movie = "IINA"
 mp4-movie = "IINA"
-# archive = "Archive Utility" # PENDING https://github.com/philocalyst/infat/issues/8
+archive = "Archive Utility"
