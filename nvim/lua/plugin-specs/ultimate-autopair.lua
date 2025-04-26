@@ -1,3 +1,6 @@
+-- DOCS https://github.com/altermo/ultimate-autopair.nvim/blob/v0.6/doc/ultimate-autopair.txt
+--------------------------------------------------------------------------------
+
 return {
 	"altermo/ultimate-autopair.nvim",
 	branch = "v0.6", -- recommended as each new version will have breaking changes
@@ -6,7 +9,21 @@ return {
 		-- Open new scope (`remap` to trigger auto-pairing)
 		{ "<D-o>", "a{<CR>", desc = " Open new scope", remap = true },
 		{ "<D-o>", "{<CR>", mode = "i", desc = " Open new scope", remap = true },
+		{
+			"<leader>o2",
+			function() require("ultimate-autopair").toggle() end,
+			mode = "i",
+			desc = " autopairing",
+		},
 	},
+	init = function()
+		vim.api.nvim_create_autocmd("RecordingEnter", {
+			callback = function() require("ultimate-autopair").disable() end,
+		})
+		vim.api.nvim_create_autocmd("RecordingEnter", {
+			callback = function() require("ultimate-autopair").disable() end,
+		})
+	end,
 	opts = {
 		bs = {
 			space = "balance",
@@ -16,7 +33,7 @@ return {
 			map = "<D-f>",
 			rmap = "<D-F>", -- backwards
 			hopout = true,
-			nocursormove = true,
+			nocursormove = false,
 			multiline = false,
 		},
 		cr = { autoclose = true },
@@ -24,7 +41,7 @@ return {
 		space2 = { enable = true },
 
 		config_internal_pairs = {
-			{ "'", "'", nft = { "markdown", "snacks_picker_input" } },
+			{ "'", "'", nft = { "markdown", "snacks_picker_input", "gitcommit" } }, -- used as apostrophe
 			{ '"', '"', nft = { "vim", "snacks_picker_input" } }, -- vimscript uses quotes as comments
 		},
 		-- INFO custom keys need to be "appended" to the opts as a list

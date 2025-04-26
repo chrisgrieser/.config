@@ -26,14 +26,12 @@ function camelCaseMatch(str) {
 
 // DOCS https://www.alfredapp.com/help/workflows/script-environment-variables/
 const scriptEnvironment = [
-	"alfred_preferences",
-	"alfred_preferences_localhash",
-	"alfred_version",
-	"alfred_version_build",
+	{title: "alfred_workflow_cache", subtitle: ""},
+	{title: "alfred_workflow_data", subtitle: ""},
+	{title: "alfred_workflow_name", subtitle: ""},
+	{title: "alfred_preferences", subtitle: ""},
+	{title: "alfred_version", subtitle: ""},
 	"alfred_workflow_bundleid",
-	"alfred_workflow_cache",
-	"alfred_workflow_data",
-	"alfred_workflow_name",
 	"alfred_workflow_version",
 	"alfred_workflow_uid",
 ];
