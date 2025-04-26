@@ -6,8 +6,9 @@ local config = {
 	sign = {
 		hlgroup = "StandingOut",
 		priority = 21, -- gitsigns use 20
-		icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋" },
+		icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋", E = "󰬌" },
 	},
+	marks = { "A", "B", "C", "D", "E" },
 }
 
 --------------------------------------------------------------------------------
@@ -65,22 +66,39 @@ end
 local function setSignForMark(name)
 	local m = getMark(name)
 	if not m then return end
+	Chainsaw(m) -- 🪚
 
-	vim.api.nvim_buf_set_extmark(m.bufnr, ns, m.row - 1, 0, {
-		sign_text = config.sign.icons[name] or name,
-		sign_hl_group = config.sign.hlgroup,
-		priority = config.sign.priority,
-	})
+	local function setExtmark(bufnr, row)
+		vim.api.nvim_buf_set_extmark(bufnr, ns, row - 1, 0, {
+			sign_text = config.sign.icons[name] or name,
+			sign_hl_group = config.sign.hlgroup,
+			priority = config.sign.priority,
+		})
+	end
+
+	if m.bufnr ~= 0 then
+		setExtmark(m.bufnr, m.row)
+	else
+		-- setup setting signs for marks that are in files that are not opened yet
+		vim.api.nvim_create_autocmd("BufReadPost", {
+			desc = "User(once): Add signs for mark " .. name,
+			group = vim.api.nvim_create_augroup("marks-signs", { clear = true }),
+			callback = function(ctx)
+				if ctx.file == m.path then return end
+				setExtmark(ctx.buf, m.row)
+				return true -- delete this autocmd
+			end,
+		})
+	end
 end
 
 --------------------------------------------------------------------------------
 
----@param names string[]
-function M.cycleMarks(names)
-	if not isValidMarkName(names) then return end
+function M.cycleMarks()
+	if not isValidMarkName(config.marks) then return end
 
 	local marksSet = vim
-		.iter(names)
+		.iter(config.marks)
 		:map(function(name) return getMark(name) end) -- name -> Markobj
 		:filter(function(m) return m ~= nil end) -- only marks that are set
 		:totable()
@@ -112,7 +130,6 @@ function M.cycleMarks(names)
 	end
 	vim.api.nvim_win_set_cursor(0, { nextMark.row, nextMark.col })
 	vim.cmd.normal { "zv", bang = true } -- open folds at cursor
-	setSignForMark(nextMark.name) -- setting here simpler than on `BufEnter`
 end
 
 ---@param name string
@@ -142,12 +159,29 @@ function M.deleteMark(name, silent)
 end
 
 function M.deleteAllMarks()
-	local allMarks = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	for i = 1, #allMarks do
-		local name = allMarks:sub(i, i)
+	if not isValidMarkName(config.marks) then return end
+	for _, name in pairs(config.marks) do
 		M.deleteMark(name, "silent") -- silent, since this func notifies itself
 	end
 	notify("All marks deleted.")
+end
+
+--------------------------------------------------------------------------------
+
+---@param marksLeader string
+function M.setup(marksLeader)
+	if not isValidMarkName(config.marks) then return end
+
+	for _, name in pairs(config.marks) do
+		setSignForMark(name)
+
+		vim.keymap.set(
+			"n",
+			marksLeader .. name:lower(),
+			function() M.setMark(name) end,
+			{ desc = "󰃃 Set " .. name }
+		)
+	end
 end
 
 --------------------------------------------------------------------------------

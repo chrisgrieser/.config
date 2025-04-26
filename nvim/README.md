@@ -4,12 +4,16 @@
 <a href="https://dotfyle.com/chrisgrieser/config-nvim"><img alt="badge 3" src="https://dotfyle.com/chrisgrieser/config-nvim/badges/plugin-manager?style=flat"/></a>
 
 ```bash
+├── lsp
 ├── lua
 │  ├── config
 │  ├── personal-plugins
 │  └── plugin-specs
 ├── after
-│  └── ftplugin
+│  ├── ftplugin
+│  ├── ftdetect
+│  ├── indent
+│  └── syntax
 ├── queries
 ├── snippets
 │  ├── basic
