@@ -90,6 +90,6 @@ return {
 		end
 
 		-- to prevent triggering early load of lualine
-		vim.defer_fn(function() vim.g.lualineAdd("tabline", "lualine_b", codeContext) end, 1000)
+		vim.g.lualineAdd("tabline", "lualine_b", codeContext)
 	end,
 }

@@ -72,10 +72,7 @@ return {
 	config = function(_, opts)
 		require("tinygit").setup(opts)
 
-		vim.defer_fn(function()
-			vim.g.lualineAdd("tabline", "lualine_x", require("tinygit.statusline").blame)
-			-- stylua: ignore
-			vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
-		end, 1000)
+		vim.g.lualineAdd("tabline", "lualine_x", require("tinygit.statusline").blame)
+		vim.g.lualineAdd("sections", "lualine_y", require("tinygit.statusline").branchState, "before")
 	end,
 }

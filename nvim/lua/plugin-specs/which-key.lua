@@ -4,7 +4,7 @@
 vim.g.whichkeyAddSpec = function(spec)
 	if not spec.mode then spec.mode = { "n", "x" } end
 	-- Deferred to ensure spec is loaded after whichkey itself
-	vim.defer_fn(function() require("which-key").add(spec) end, 1500)
+	vim.defer_fn(function() require("which-key").add(spec) end, 1000)
 end
 
 --------------------------------------------------------------------------------
