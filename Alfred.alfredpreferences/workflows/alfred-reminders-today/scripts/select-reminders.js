@@ -67,14 +67,6 @@ function relativeDate(absDate) {
 	return formatter.format(-delta, unit);
 }
 
-while (1 === 2) {
-	console.log("test");
-}
-
-if (1 === 2) {
-	console.log("test");
-}
-
 // must accept any letters before the colon to match video call URIs for events
 const urlRegex =
 	/\w{3,}:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
@@ -138,8 +130,10 @@ function run() {
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
+	const timelogStart1 = Date.now(); // 🪚
 	const swiftReminderOutput = app.doShellScript("./scripts/get-reminders.swift");
 	let /** @type {ReminderObj[]} */ remindersJson;
+	console.log(`#1 🪚: ${(Date.now() - timelogStart1) / 1000}s`);
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
