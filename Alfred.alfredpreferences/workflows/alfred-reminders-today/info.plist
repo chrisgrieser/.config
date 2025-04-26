@@ -87,7 +87,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -245,7 +245,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
+				<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -258,6 +258,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AB977CE7-1D10-44F7-AFF8-0018203097F6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -369,6 +382,26 @@
 	<string>Reminders Today</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>{const:alfred_workflow_cache}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -1207,6 +1240,17 @@ to set a hotkey to show reminders due today</string>
 			<real>973</real>
 			<key>ypos</key>
 			<real>145</real>
+		</dict>
+		<key>AB977CE7-1D10-44F7-AFF8-0018203097F6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete custom workflow cache (devdocs)</string>
+			<key>xpos</key>
+			<real>875</real>
+			<key>ypos</key>
+			<real>15</real>
 		</dict>
 		<key>BC59BB81-9433-4E89-8ACA-3C201EB676F6</key>
 		<dict>
