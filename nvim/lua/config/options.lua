@@ -66,7 +66,7 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.sidescrolloff = 15
 vim.opt.scrolloff = 12
 
-vim.opt.winborder = "bold"
+vim.opt.winborder = "single"
 
 -- max height of completion menu (even with completion plugin still relevant for native cmdline-popup)
 vim.opt.pumheight = 12

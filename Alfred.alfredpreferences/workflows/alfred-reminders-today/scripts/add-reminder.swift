@@ -107,8 +107,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	//   would enforce a notification, regardless of the setting, so we add the
 	//   alarm only if the reminder is not all-day.
 	if !isAllDayReminder {
-		// Apple reminders use absolute dates as alarm, not relative offset; so we
-		// mimic that here.
+		// Apple Reminders use absolute dates as alarm, not relative offset; we mimic that
 		let dueDate = calendar.date(from: dateComponents)!
 		reminder.addAlarm(EKAlarm(absoluteDate: dueDate))
 	}
