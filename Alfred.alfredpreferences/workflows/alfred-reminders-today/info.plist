@@ -245,11 +245,13 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
+				<string>5E6BB902-56B8-4291-8181-8D015E7F0A0D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -260,8 +262,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
