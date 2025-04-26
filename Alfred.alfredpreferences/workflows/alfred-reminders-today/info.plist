@@ -136,6 +136,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>49BE57F4-670B-4713-B036-981025E334C9</key>
+		<array/>
 		<key>4B7ABAED-E5E5-4949-A518-B14FDEAE9F6E</key>
 		<array>
 			<dict>
@@ -232,6 +234,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -320,6 +332,19 @@
 		</array>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<array/>
+		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E5DECF0A-F7E7-4C15-BF46-AD547A831F40</key>
 		<array>
 			<dict>
@@ -388,7 +413,7 @@
 				<key>tasksettings</key>
 				<dict>
 					<key>target_path</key>
-					<string>{const:alfred_workflow_cache}</string>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
 					<key>use_finder</key>
 					<false/>
 				</dict>
@@ -832,6 +857,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1177,7 +1222,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>→ show again, toggling whether to show completed reminders</string>
 			<key>xpos</key>
-			<real>1090</real>
+			<real>1250</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
@@ -1241,14 +1286,25 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>145</real>
 		</dict>
+		<key>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete Alfred cache, since updating reminders</string>
+			<key>xpos</key>
+			<real>1255</real>
+			<key>ypos</key>
+			<real>485</real>
+		</dict>
 		<key>AB977CE7-1D10-44F7-AFF8-0018203097F6</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>note</key>
-			<string>delete custom workflow cache (devdocs)</string>
+			<string>delete Alfred cache, since updating reminders</string>
 			<key>xpos</key>
-			<real>875</real>
+			<real>1090</real>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>

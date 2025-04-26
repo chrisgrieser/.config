@@ -322,6 +322,12 @@ function run() {
 	return JSON.stringify({
 		items: [...reminders, ...events],
 		skipknowledge: true, // keep sorting order
+
+		// PERF cache only used for loose reload, however there is a hard-coded
+		// minimum of 5 seconds, so every workflow action will trigger a cache
+		// deletion https://www.alfredforum.com/topic/23042-alfred-script-filter-caching-appears-to-have-a-hard-coded-minimum-of-5-seconds/
+		// -> the performance benefit is only for when the user peeks at the
+		// reminders without actioning them. 
 		cache: { seconds: 0, loosereload: true },
 	});
 }
