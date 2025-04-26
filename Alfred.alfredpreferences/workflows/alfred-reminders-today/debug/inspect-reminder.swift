@@ -41,14 +41,14 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 func prettyPrintReminder(_ reminder: EKReminder) {
 	print("=== Reminder Details ===")
-	print("Title: \(reminder.title ?? "None")")
-	print("Notes: \(reminder.notes ?? "None")")
+	print("Title: \(reminder.title ?? "nil")")
+	print("Notes: \(reminder.notes ?? "nil")")
+	print("List: \(reminder.calendar.title)")
 	print("Completed: \(reminder.isCompleted)")
-	print("Completion Date: \(reminder.completionDate?.description ?? "None")")
-	print("Due Date: \(reminder.dueDateComponents?.date?.description ?? "None")")
-	print("Start Date: \(reminder.startDateComponents?.date?.description ?? "None")")
+	print("Completion Date: \(reminder.completionDate?.description ?? "nil")")
+	print("Due Date: \(reminder.dueDateComponents?.date?.description ?? "nil")")
+	print("Start Date: \(reminder.startDateComponents?.date?.description ?? "nil")")
 	print("Priority: \(reminder.priority)")
-	print("Calendar: \(reminder.calendar.title)")
 	print("Has Alarms: \(reminder.hasAlarms)")
 	if let alarms = reminder.alarms {
 		for (index, alarm) in alarms.enumerated() {
