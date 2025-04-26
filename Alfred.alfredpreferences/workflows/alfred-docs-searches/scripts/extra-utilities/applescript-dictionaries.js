@@ -30,6 +30,9 @@ function run() {
 		});
 	return JSON.stringify({
 		items: appsWithDict,
-		cache: { seconds: 1800, loosereload: true },
+		cache: {
+			seconds: 300, // low, in case user installs new apps
+			loosereload: true,
+		},
 	});
 }

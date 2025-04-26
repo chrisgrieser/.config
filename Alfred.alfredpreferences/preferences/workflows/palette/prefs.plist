@@ -4,30 +4,17 @@
 <dict>
 	<key>favourites</key>
 	<array>
-		<string>Running Apps</string>
-		<string>Junction</string>
-		<string>Universal Action</string>
-		<string>Copy to Clipboard</string>
-		<string>Hotkey</string>
-		<string>Text View</string>
-		<string>Arg and Vars</string>
-		<string>Grid View</string>
-		<string>Open URL</string>
-		<string>Script Filter</string>
-		<string>Open File</string>
-		<string>Split Arg</string>
-		<string>External</string>
 		<string>Keyword</string>
-		<string>Replace</string>
-		<string>Post Notification</string>
-		<string>Conditional</string>
-		<string>Large Type</string>
-		<string>Write Text File</string>
-		<string>Call External Trigger</string>
+		<string>External</string>
+		<string>Arg and Vars</string>
+		<string>Open URL</string>
+		<string>Junction</string>
+		<string>Running Apps</string>
+		<string>Universal Action</string>
 		<string>Run Script</string>
-		<string>PDF View</string>
-		<string>Image View</string>
-		<string>Dispatch Key Combo</string>
+		<string>Open File</string>
+		<string>Conditional</string>
+		<string>Hotkey</string>
 	</array>
 </dict>
 </plist>

@@ -57,8 +57,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</key>
-		<array/>
 		<key>321BD266-1E62-4C75-A792-85239F1268B0</key>
 		<array>
 			<dict>
@@ -352,7 +350,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
+				<string>433CB993-C7E2-4EEF-A04F-DF5942FDBB25</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1725,25 +1723,22 @@ curl -sL "https://raw.githubusercontent.com/chrisgrieser/alfred-docs-searches/ma
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/extra-utilities/reload-cache.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</string>
+			<string>433CB993-C7E2-4EEF-A04F-DF5942FDBB25</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -1858,17 +1853,6 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>565</real>
 		</dict>
-		<key>14C8CAEE-9B36-494B-8F0B-ECCF215CBD44</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>delete Alfred cache (non-devdocs)</string>
-			<key>xpos</key>
-			<real>1110</real>
-			<key>ypos</key>
-			<real>1145</real>
-		</dict>
 		<key>2A6112DC-2A8A-447E-AE39-41898C4C5F8F</key>
 		<dict>
 			<key>colorindex</key>
@@ -1932,6 +1916,17 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>730</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>433CB993-C7E2-4EEF-A04F-DF5942FDBB25</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete Alfred cache (non-devdocs)</string>
+			<key>xpos</key>
+			<real>1115</real>
+			<key>ypos</key>
+			<real>1145</real>
 		</dict>
 		<key>44939B35-A816-45E0-9F11-15719C16E886</key>
 		<dict>
@@ -38800,7 +38795,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.19.1</string>
+	<string>2.19.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

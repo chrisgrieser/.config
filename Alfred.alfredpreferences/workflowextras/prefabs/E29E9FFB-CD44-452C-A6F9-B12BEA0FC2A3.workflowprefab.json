@@ -1,0 +1,26 @@
+{
+  "name" : "Delete Alfred cache",
+  "data" : {
+    "items" : [
+      {
+        "workflowobjecttype" : "alfred.workflow.automation.task",
+        "uid" : "49526008-7AE7-422D-8780-ACA056376F04",
+        "note" : "delete Alfred cache",
+        "workflowobjectconfig" : {
+          "taskuid" : "com.alfredapp.automation.core\/files-and-folders\/path.trash",
+          "tasksettings" : {
+            "use_finder" : false,
+            "target_path" : "~\/Library\/Application Support\/Alfred\/Caches\/workflows\/{const:alfred_workflow_uid}"
+          }
+        },
+        "colorindex" : 11,
+        "ypos" : 5,
+        "xpos" : 20
+      }
+    ],
+    "connections" : [
+
+    ]
+  },
+  "description" : ""
+}

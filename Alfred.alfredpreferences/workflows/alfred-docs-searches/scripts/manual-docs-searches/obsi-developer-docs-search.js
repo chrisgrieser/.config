@@ -89,7 +89,7 @@ function run() {
 	return JSON.stringify({
 		items: [...obsiDocs, ...codeMirrorDocs],
 		cache: {
-			seconds: 3600 * 24 * 7,
+			seconds: 3600 * 24 * 7, // 7 days
 			loosereload: true,
 		},
 	});
