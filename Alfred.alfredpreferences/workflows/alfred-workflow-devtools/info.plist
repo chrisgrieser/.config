@@ -255,6 +255,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>94B1260C-F775-488F-9649-84BE5EB0A9B2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>699138F8-878B-4713-AC92-803CB451F33E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<array>
 			<dict>
@@ -324,7 +337,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</string>
+				<string>77ABCFDA-2150-4704-B51F-AE78F0467797</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -350,8 +363,34 @@
 		</array>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<array/>
+		<key>E28855AB-7B4D-488D-B2C3-B46DAF68AB16</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>94B1260C-F775-488F-9649-84BE5EB0A9B2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<array/>
+		<key>EC40B312-B9EE-49EF-AE37-8A58ACC196CA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E28855AB-7B4D-488D-B2C3-B46DAF68AB16</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
 		<array>
 			<dict>
@@ -376,6 +415,29 @@
 	<string>Alfred Workflow Devtools</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/open-last-workflow.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -423,14 +485,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/open-last-workflow.js</string>
+				<string>./scripts/reload-workflow-and-delete-cache.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</string>
+			<string>C00ED073-C78C-482B-9067-D93E55EBE562</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -454,29 +516,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/reload-workflow-and-delete-cache.js</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C00ED073-C78C-482B-9067-D93E55EBE562</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -620,21 +659,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
-				<string>/System/Library/CoreServices/Finder.app</string>
-				<key>sourcefile</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
-			<key>uid</key>
-			<string>E596A969-3C93-41FA-B182-71849E89E62A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -670,6 +694,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>openwith</key>
+				<string>/System/Library/CoreServices/Finder.app</string>
+				<key>sourcefile</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openfile</string>
+			<key>uid</key>
+			<string>E596A969-3C93-41FA-B182-71849E89E62A</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
@@ -691,31 +730,115 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinterminal</string>
+			<key>uid</key>
+			<string>699138F8-878B-4713-AC92-803CB451F33E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>9</integer>
+				<integer>17</integer>
 				<key>hotmod</key>
-				<integer>524288</integer>
+				<integer>1835008</integer>
 				<key>hotstring</key>
-				<string>V</string>
+				<string>T</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
 				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>8CF1EA47-581D-4A4D-928B-EDB01125E0E3</string>
+			<string>EC40B312-B9EE-49EF-AE37-8A58ACC196CA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-current-workflow-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E28855AB-7B4D-488D-B2C3-B46DAF68AB16</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>\n$</string>
+				<key>regexcaseinsensitive</key>
+				<false/>
+				<key>regexmultiline</key>
+				<false/>
+				<key>replacestring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.replace</string>
+			<key>uid</key>
+			<string>94B1260C-F775-488F-9649-84BE5EB0A9B2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/get-current-workflow-path.js</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2D3116FB-2035-479F-8AD2-E4298E8F46EF</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -769,25 +892,52 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
+				<key>action</key>
 				<integer>0</integer>
-				<key>script</key>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<true/>
+				<key>focusedappvariablename</key>
 				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>./scripts/get-current-workflow-path.js</string>
-				<key>type</key>
-				<integer>8</integer>
+				<key>hotkey</key>
+				<integer>9</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>V</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>2</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>2D3116FB-2035-479F-8AD2-E4298E8F46EF</string>
+			<string>8CF1EA47-581D-4A4D-928B-EDB01125E0E3</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>77ABCFDA-2150-4704-B51F-AE78F0467797</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -806,6 +956,27 @@
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>DEC3B0ED-2710-4ECD-9AE8-77B073DF7879</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>📋 Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -850,27 +1021,6 @@
 			<string>7B265954-3202-4ECE-A9CC-FE23D2ADB407</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>📋 Copied</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1047,14 +1197,14 @@ disown</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/get-current-workflow-path.js</string>
+				<string>./scripts/unused-files.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8A90F5AA-D1A4-4128-A301-1B60D86388E2</string>
+			<string>863E22BA-DAEB-463A-9BBF-C34BA32AEE99</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1070,14 +1220,14 @@ disown</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>./scripts/unused-files.sh</string>
+				<string>./scripts/get-current-workflow-path.js</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>863E22BA-DAEB-463A-9BBF-C34BA32AEE99</string>
+			<string>8A90F5AA-D1A4-4128-A301-1B60D86388E2</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1290,11 +1440,14 @@ disown</string>
   [hotkeys](https://www.alfredapp.com/help/workflows/triggers/hotkey/):
 	+ Go to the last workflow in the Alfred Preferences.
 	+ Reload the current workflow, and flush all caches related to it.
-	+ Reveal the current workflow in the macOS Finder.
+	+ Reveal the current workflow in macOS Finder.
 	+ Reveal the workflow corresponding to
 	  the current Finder window in the Alfred Preferences.
+	+ Go to the workflow's directory in the terminal. (Uses the terminal app you
+	  have [configured in Alfred
+	  Preferences](https://www.alfredapp.com/help/features/terminal/).)
+	+ Paste the name of an Alfred workflow variable for the current workflow.
 	+ Copy the workflows absolute path to the clipboard.
-	+ Copy the name of an Alfred workflow variable for the current workflow.
 - Search the Alfred workflow development docs via the keyword `adoc`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt; Open in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy URL.
@@ -1302,8 +1455,8 @@ disown</string>
 	+ Check for unused files of current workflow, and remove unused UID `.png`
 	  files.
 	+ Restart Alfred (and Alfred Preferences).
-	+ Update Alfred Preferences.app to use an icon with the macOS
-	  Big Sur icon shape.
+	+ Update Alfred Preferences.app to use an icon with the macOS Big Sur icon
+	  shape.
 	+ Open the Alfred data or cache folder.
 	+ Change the font size of the Alfred debugger window.
 
@@ -1343,7 +1496,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>685</real>
 		</dict>
 		<key>2DADFA85-C59F-4D17-A85F-5BC10246EA83</key>
 		<dict>
@@ -1352,7 +1505,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1395</real>
+			<real>1535</real>
 		</dict>
 		<key>39D1BEBE-CB2C-48C2-ADA7-40A307BF7DA5</key>
 		<dict>
@@ -1372,7 +1525,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1285</real>
+			<real>1425</real>
 		</dict>
 		<key>4A3A8C19-51DD-4007-9302-1B8EA64BE9A6</key>
 		<dict>
@@ -1381,7 +1534,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>770</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>825</real>
 		</dict>
 		<key>4D3E285F-7A6E-48E9-B895-F861C8E1FDF2</key>
 		<dict>
@@ -1390,7 +1543,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>825</real>
 		</dict>
 		<key>54C6EE1A-837D-4418-893C-4A301235A660</key>
 		<dict>
@@ -1399,7 +1552,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1055</real>
 		</dict>
 		<key>6496340C-2FAA-42F9-B626-A6E48D173091</key>
 		<dict>
@@ -1410,7 +1563,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>825</real>
 		</dict>
 		<key>6552DA50-7058-4101-A2EF-78E87D7C5FF9</key>
 		<dict>
@@ -1419,7 +1572,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1035</real>
+			<real>1175</real>
+		</dict>
+		<key>699138F8-878B-4713-AC92-803CB451F33E</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>420</real>
+			<key>ypos</key>
+			<real>550</real>
 		</dict>
 		<key>76D33A90-C184-4A3E-B409-1496DF0C1008</key>
 		<dict>
@@ -1428,7 +1590,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>675</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1290</real>
 		</dict>
 		<key>7792FA5D-64AB-40EB-AE6C-EE433C5FC0CA</key>
 		<dict>
@@ -1437,7 +1599,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>915</real>
+			<real>1055</real>
+		</dict>
+		<key>77ABCFDA-2150-4704-B51F-AE78F0467797</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>paste</string>
+			<key>xpos</key>
+			<real>610</real>
+			<key>ypos</key>
+			<real>685</real>
 		</dict>
 		<key>7B265954-3202-4ECE-A9CC-FE23D2ADB407</key>
 		<dict>
@@ -1448,7 +1621,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>195</real>
 			<key>ypos</key>
-			<real>685</real>
+			<real>825</real>
 		</dict>
 		<key>7F55AD62-8636-4D88-8A53-E61A24FC96E4</key>
 		<dict>
@@ -1466,7 +1639,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>535</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1290</real>
 		</dict>
 		<key>8A90F5AA-D1A4-4128-A301-1B60D86388E2</key>
 		<dict>
@@ -1477,7 +1650,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1150</real>
+			<real>1290</real>
 		</dict>
 		<key>8CE91420-4683-4D16-BD51-2D1D510E744C</key>
 		<dict>
@@ -1486,18 +1659,29 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>200</real>
 			<key>ypos</key>
-			<real>1225</real>
+			<real>1365</real>
 		</dict>
 		<key>8CF1EA47-581D-4A4D-928B-EDB01125E0E3</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>note</key>
-			<string>copy workflow variable</string>
+			<string>paste workflow variable</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>685</real>
+		</dict>
+		<key>94B1260C-F775-488F-9649-84BE5EB0A9B2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>remove \n</string>
+			<key>xpos</key>
+			<real>345</real>
+			<key>ypos</key>
+			<real>580</real>
 		</dict>
 		<key>A1E33BB2-038D-4375-B0D8-FD9D71095631</key>
 		<dict>
@@ -1506,7 +1690,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>610</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>290</real>
 		</dict>
 		<key>A586AF1E-8A0F-4B14-886F-07F7EA4AFDBA</key>
 		<dict>
@@ -1526,7 +1710,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>1265</real>
+			<real>1405</real>
 		</dict>
 		<key>C00ED073-C78C-482B-9067-D93E55EBE562</key>
 		<dict>
@@ -1568,7 +1752,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>420</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>685</real>
 		</dict>
 		<key>D8EF3F5D-DC9B-418F-9A1E-2D44427F7F4D</key>
 		<dict>
@@ -1588,7 +1772,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>345</real>
 			<key>ypos</key>
-			<real>580</real>
+			<real>700</real>
 		</dict>
 		<key>E0074CBE-558E-4BBB-81FD-52090611ED44</key>
 		<dict>
@@ -1597,7 +1781,18 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>390</real>
 			<key>ypos</key>
-			<real>1505</real>
+			<real>1645</real>
+		</dict>
+		<key>E28855AB-7B4D-488D-B2C3-B46DAF68AB16</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>get current workflow</string>
+			<key>xpos</key>
+			<real>195</real>
+			<key>ypos</key>
+			<real>550</real>
 		</dict>
 		<key>E596A969-3C93-41FA-B182-71849E89E62A</key>
 		<dict>
@@ -1607,6 +1802,17 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>420</real>
 			<key>ypos</key>
 			<real>420</real>
+		</dict>
+		<key>EC40B312-B9EE-49EF-AE37-8A58ACC196CA</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Alfred Prefs → Terminal</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>550</real>
 		</dict>
 		<key>EDCE4E29-F536-4EDD-8F18-9ED9480004B8</key>
 		<dict>

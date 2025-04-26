@@ -27,7 +27,8 @@ function run() {
 			const [name, hex] = line.split(",") || ["", ""];
 
 			// so searching for a base color name also matches the color
-			const baseColor = name.match(/blue|green|red|yellow|orange|white|gr[ae]y|black|purple/) || "";
+			const baseColor =
+				name.match(/blue|green|red|yellow|orange|white|gr[ae]y|black|purple/) || "";
 			return {
 				title: name,
 				subtitle: hex,
@@ -37,5 +38,11 @@ function run() {
 			};
 		});
 
-	return JSON.stringify({ items: colors });
+	return JSON.stringify({
+		items: colors,
+		cache: {
+			seconds: 3600 * 24 * 7, // 7 days
+			loosereload: true,
+		},
+	});
 }

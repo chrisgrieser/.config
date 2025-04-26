@@ -21,6 +21,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>60F3C199-F637-4C1B-9D15-7B8E16957561</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
 		<array>
 			<dict>
@@ -64,19 +77,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>B6137047-A967-4328-9B9B-2B004A88ACD9</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>8239AB55-5756-4F08-AF47-3E6EEE64514E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -194,7 +194,7 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<true/>
+				<false/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
@@ -206,14 +206,18 @@
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
+				<key>relatedApps</key>
+				<array>
+					<string>com.runningwithcrayons.Alfred-Preferences</string>
+				</array>
 				<key>relatedAppsMode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>B6137047-A967-4328-9B9B-2B004A88ACD9</string>
+			<string>60F3C199-F637-4C1B-9D15-7B8E16957561</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -388,6 +392,17 @@
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
+		<key>60F3C199-F637-4C1B-9D15-7B8E16957561</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>open cwd in terminal</string>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>175</real>
+		</dict>
 		<key>7E61C1B7-0FA8-4D1C-A56F-A7D3405ABEEC</key>
 		<dict>
 			<key>colorindex</key>
@@ -421,17 +436,6 @@
 			<real>190</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>B6137047-A967-4328-9B9B-2B004A88ACD9</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>open cwd in terminal</string>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>175</real>
 		</dict>
 		<key>C69FCE38-9396-4B8E-955C-DCEBFCA8D585</key>
 		<dict>

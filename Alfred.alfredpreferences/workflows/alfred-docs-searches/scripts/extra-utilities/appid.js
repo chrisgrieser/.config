@@ -27,6 +27,9 @@ function run() {
 
 	return JSON.stringify({
 		items: apps,
-		cache: { seconds: 1800 },
+		cache: {
+			seconds: 300, // low, in case user installs new apps
+			loosereload: true,
+		},
 	});
 }
