@@ -11,6 +11,10 @@
     "body": "$LINE_COMMENT DOCS $0$CLIPBOARD",
     "prefix": "DOCS (+url)"
   },
+  "GUARD": {
+    "body": "-- GUARD",
+    "prefix": "GUARD"
+  },
   "PENDING (+url)": {
     "body": "$LINE_COMMENT PENDING $0$CLIPBOARD",
     "prefix": "PENDING (+url)"
