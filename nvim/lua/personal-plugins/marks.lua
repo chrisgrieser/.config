@@ -104,7 +104,7 @@ function M.cycleMarks()
 	end
 
 	-- determine next mark
-	local nextMark = marksSet[1] -- default to first one, if at no mark
+	local nextMark = marksSet[1] -- default to first one, if not at mark
 	for i, m in ipairs(marksSet) do
 		if cursorIsAtMark(m) then
 			nextMark = marksSet[i == #marksSet and 1 or i + 1]
