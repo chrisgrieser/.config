@@ -10,7 +10,6 @@ struct ReminderOutput: Codable {
 	let title: String
 	let notes: String?
 	let list: String
-	let listColor: String
 	let dueDate: String?
 	let creationDate: String?
 	let isAllDay: Bool
@@ -99,11 +98,12 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// PERF using `predicateForIncompleteReminders` has no noticeable performance
 	// benefit, however, it does reduce the number of items the JXA script later
 	// has to process, resulting in ~0.1s speedup.
+	let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
 	let predicate =
 		showCompleted
 		? eventStore.predicateForReminders(in: selectedCalendars)
 		: eventStore.predicateForIncompleteReminders(
-			withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
+			withDueDateStarting: nil, ending: tomorrow, calendars: selectedCalendars)
 
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
@@ -133,7 +133,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 				title: reminder.title,
 				notes: reminder.notes,
 				list: reminder.calendar.title,
-				listColor: mapCGColorToEmoji(reminder.calendar.cgColor),
 				dueDate: components?.date.flatMap { formatter.string(from: $0) },
 				creationDate: reminder.creationDate.flatMap { formatter.string(from: $0) },
 				isAllDay: components?.hour == nil && components?.minute == nil,
