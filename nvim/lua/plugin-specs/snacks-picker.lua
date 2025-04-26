@@ -201,15 +201,13 @@ return {
 					},
 					actions = {
 						delete_qf_entry = function(picker)
-							local entry = picker:current()
-							if not entry then return end
+							local idx = picker:current().idx
 
-							local qfItems = vim.fn.getqflist({ title = false })
-							table.remove(qfItems, entry.idx)
-							vim.fn.setqflist(qfItems, "r") -- "r" = replace = overwrite
+							local qf = vim.fn.getqflist({ title = true, items = true })
+							table.remove(qf.items, idx)
+							vim.fn.setqflist(qf.items, "r") -- "r" = replace = overwrite
+							vim.fn.setqflist({}, "a", { title = qf.title }) -- preserve title of qflist
 
-							local msg = ("Removed %q"):format(entry.line)
-							vim.notify(msg, nil, { title = "Quickfix", icon = "󰴩" })
 							picker:find() -- reload
 						end,
 					},
