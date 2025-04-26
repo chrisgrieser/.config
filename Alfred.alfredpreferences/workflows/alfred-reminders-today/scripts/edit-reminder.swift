@@ -14,15 +14,13 @@ func snoozeToTomorrow(reminder: EKReminder) {
 	let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())!
 	let tomorrowComponents = calendar.dateComponents([.year, .month, .day], from: tomorrow)
 
-	// Only change the YYYY-MM-DD, since the HH:MM should be preserved. 
-	reminder.dueDateComponents?.year = tomorrowComponents.year
-	reminder.dueDateComponents?.month = tomorrowComponents.month
-	reminder.dueDateComponents?.day = tomorrowComponents.day
+	// reminders with no due date need to a due date component 
+	if reminder.dueDateComponents == nil { reminder.dueDateComponents = tomorrowComponents }
 
-	// need to set startDate as well, since the alarm is relative to it https://developer.apple.com/documentation/eventkit/ekalarm/relativeoffset
-	reminder.startDateComponents?.year = tomorrowComponents.year
-	reminder.startDateComponents?.month = tomorrowComponents.month
-	reminder.startDateComponents?.day = tomorrowComponents.day
+	// Only change the YYYY-MM-DD, since the HH:MM should be preserved.
+	reminder.dueDateComponents!.year = tomorrowComponents.year
+	reminder.dueDateComponents!.month = tomorrowComponents.month
+	reminder.dueDateComponents!.day = tomorrowComponents.day
 }
 
 func editReminderFromStdin(reminder: EKReminder) -> Bool {
