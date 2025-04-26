@@ -130,10 +130,8 @@ function run() {
 	const endOfToday = new Date();
 	endOfToday.setHours(23, 59, 59, 0); // to include reminders later that day
 
-	const timelogStart1 = Date.now(); // 🪚
 	const swiftReminderOutput = app.doShellScript("./scripts/get-reminders.swift");
 	let /** @type {ReminderObj[]} */ remindersJson;
-	console.log(`#1 🪚: ${(Date.now() - timelogStart1) / 1000}s`);
 	try {
 		remindersJson = JSON.parse(swiftReminderOutput);
 	} catch (_error) {
@@ -324,5 +322,6 @@ function run() {
 	return JSON.stringify({
 		items: [...reminders, ...events],
 		skipknowledge: true, // keep sorting order
+		cache: { seconds: 1, loosereload: true },
 	});
 }
