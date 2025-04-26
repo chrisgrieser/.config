@@ -2,14 +2,13 @@
 
 [extensions]
 txt = "TextEdit"
-# html = "Brave Browser"
 pdf = "Highlights"
-torrent = "Transmission"
 ics = "Calendar"
-md = "Obsidian Helper"
-svg = "Neovide"
+svg = "neovide"
 url = "Brave Browser" # link files
 webloc = "Brave Browser" # link files
+# md = "Obsidian Helper" # PENDING https://github.com/philocalyst/infat/issues/8
+# html = "Brave Browser" # PENDING https://github.com/philocalyst/infat/issues/7
 
 [schemes]
 mailto = "Mimestream"
@@ -17,8 +16,8 @@ web = "Brave Browser"
 magnet = "Transmission"
 
 [types] # fallbacks
-plain-text = "Neovide"
-archive = "Archive Utility"
+plain-text = "neovide"
 video = "IINA"
 movie = "IINA"
-audio = "IINA"
+mp4-movie = "IINA"
+# archive = "Archive Utility" # PENDING https://github.com/philocalyst/infat/issues/8

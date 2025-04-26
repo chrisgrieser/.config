@@ -1,14 +1,12 @@
-# shellcheck disable=1091
-#───────────────────────────────────────────────────────────────────────────────
-
+# GENERAL
+export XDG_CONFIG_HOME="$HOME/.config"
 export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
-
-private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
-[[ -f "$private_dots/api-keys.txt" ]] && source "$private_dots/api-keys.txt"
-
 export EDITOR='nvim'
 
-#───────────────────────────────────────────────────────────────────────────────
+# API KEYS
+private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"
+# shellcheck disable=1091
+[[ -f "$private_dots/api-keys.txt" ]] && source "$private_dots/api-keys.txt"
 
 # PANDOC
 # does not have an environment var for this, so using `--data-dir` alias
