@@ -69,7 +69,6 @@ function backup() {
 backup "$HOME/Library/Mobile Documents/com~apple~CloudDocs/" ./iCloud-Folder
 backup "$HOME/RomComs/" ./Homefolder/RomComs
 backup "$HOME/Documents/" ./Homefolder/Documents # backed up from home as iCloud only has symlinks
-backup "$HOME/Library/Preferences/" ./Homefolder/Library/Preferences
 
 # also backup all PERMA-REPOS
 while read -r line; do

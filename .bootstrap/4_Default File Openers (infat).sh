@@ -3,5 +3,7 @@
 
 [[ -x "$(command -v infat)" ]] || brew install philocalyst/tap/infat
 
-brew un
+infat # without arg, applies `~/.config/infat/config.toml`
+
 brew uninstall infat
+brew untap philocalyst/tap
