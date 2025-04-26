@@ -1,16 +1,8 @@
 -- INFO
--- A simple wrapper around vim's builtin mark functionality for quick navigation.
---------------------------------------------------------------------------------
-
-local config = {
-	sign = {
-		hlgroup = "StandingOut",
-		priority = 21, -- gitsigns use 20
-		icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋", E = "󰬌" },
-	},
-	marks = { "A", "B", "C", "D", "E" },
-}
-
+-- A simple wrapper around vim's builtin mark functionality.
+-- * marks in the signcolumn
+-- * cycles through marks
+-- * set/unset with the same command
 --------------------------------------------------------------------------------
 
 local M = {}
@@ -25,7 +17,7 @@ local ns = vim.api.nvim_create_namespace("mark-signs")
 --------------------------------------------------------------------------------
 
 ---@param msg string
----@param level? "warn" | "error"
+---@param level? "info"|"warn"|"error"
 local function notify(msg, level)
 	local lvl = level and level:upper() or "INFO"
 	vim.notify(msg, vim.log.levels[lvl], { title = "Marks", icon = "󰃀" })
@@ -66,13 +58,12 @@ end
 local function setSignForMark(name)
 	local m = getMark(name)
 	if not m then return end
-	Chainsaw(m) -- 🪚
 
 	local function setExtmark(bufnr, row)
 		vim.api.nvim_buf_set_extmark(bufnr, ns, row - 1, 0, {
-			sign_text = config.sign.icons[name] or name,
-			sign_hl_group = config.sign.hlgroup,
-			priority = config.sign.priority,
+			sign_text = M.config.signs.icons[name] or name,
+			sign_hl_group = M.config.signs.hlgroup,
+			priority = M.config.signs.priority,
 		})
 	end
 
@@ -84,7 +75,7 @@ local function setSignForMark(name)
 			desc = "User(once): Add signs for mark " .. name,
 			group = vim.api.nvim_create_augroup("marks-signs", { clear = true }),
 			callback = function(ctx)
-				if ctx.file == m.path then return end
+				if ctx.file ~= m.path then return end
 				setExtmark(ctx.buf, m.row)
 				return true -- delete this autocmd
 			end,
@@ -95,10 +86,10 @@ end
 --------------------------------------------------------------------------------
 
 function M.cycleMarks()
-	if not isValidMarkName(config.marks) then return end
+	if not isValidMarkName(M.config.marks) then return end
 
 	local marksSet = vim
-		.iter(config.marks)
+		.iter(M.config.marks)
 		:map(function(name) return getMark(name) end) -- name -> Markobj
 		:filter(function(m) return m ~= nil end) -- only marks that are set
 		:totable()
@@ -133,15 +124,19 @@ function M.cycleMarks()
 end
 
 ---@param name string
-function M.setMark(name)
+function M.setUnsetMark(name)
 	if not isValidMarkName(name) then return end
 
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	M.deleteMark(name, "silent") -- silent, since this func notifies itself
-
-	vim.api.nvim_buf_set_mark(0, name, row, col, {})
-	setSignForMark(name)
-	notify(("Mark [%s] set."):format(name))
+	local m = getMark(name)
+	if cursorIsAtMark(m) then
+		M.deleteMark(name)
+	else
+		M.deleteMark(name, "silent") -- silent, since this func itself notifies
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		vim.api.nvim_buf_set_mark(0, name, row, col, {})
+		setSignForMark(name)
+		notify(("Mark [%s] set."):format(name))
+	end
 end
 
 ---@param name string
@@ -159,29 +154,37 @@ function M.deleteMark(name, silent)
 end
 
 function M.deleteAllMarks()
-	if not isValidMarkName(config.marks) then return end
-	for _, name in pairs(config.marks) do
-		M.deleteMark(name, "silent") -- silent, since this func notifies itself
+	if not isValidMarkName(M.config.marks) then return end
+	for _, name in pairs(M.config.marks) do
+		M.deleteMark(name, "silent") -- silent, since this func itself notifies
 	end
 	notify("All marks deleted.")
 end
 
 --------------------------------------------------------------------------------
 
----@param marksLeader string
-function M.setup(marksLeader)
-	if not isValidMarkName(config.marks) then return end
+---@class Marks.Config
+local defaultConfig = {
+	signs = {
+		hlgroup = "IncSearch",
+		priority = 30, -- gitsigns.nvim use 20
+		icons = { A = "A", B = "B", C = "C" },
+	},
+	marks = { "A", "B", "C" },
+}
+M.config = defaultConfig
 
-	for _, name in pairs(config.marks) do
-		setSignForMark(name)
+---@param userOpts table?
+function M.setup(userOpts)
+	if not userOpts then userOpts = {} end
+	M.config = vim.tbl_deep_extend("force", defaultConfig, userOpts)
+	if not isValidMarkName(M.config.marks) then return end
 
-		vim.keymap.set(
-			"n",
-			marksLeader .. name:lower(),
-			function() M.setMark(name) end,
-			{ desc = "󰃃 Set " .. name }
-		)
-	end
+	vim.defer_fn(function()
+		for _, name in pairs(M.config.marks) do
+			setSignForMark(name)
+		end
+	end, 250) -- deferred to ensure shadafile is loaded
 end
 
 --------------------------------------------------------------------------------
