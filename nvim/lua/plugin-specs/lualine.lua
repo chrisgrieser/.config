@@ -125,9 +125,9 @@ return {
 			lualine_x = {
 				{ -- Quickfix counter
 					function()
-						local qf = vim.fn.getqflist { idx = 0, title = true, items = true }
-						if #qf.items == 0 then return "" end
-						return (" %d/%d (%s)"):format(qf.idx, #qf.items, qf.title)
+						local qf = vim.fn.getqflist { idx = 0, title = true, size = true }
+						if qf.size == 0 then return "" end
+						return (" %d/%d (%s)"):format(qf.idx, qf.size, qf.title)
 					end,
 				},
 				{

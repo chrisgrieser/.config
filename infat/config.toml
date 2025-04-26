@@ -1,0 +1,24 @@
+# DOCS https://github.com/philocalyst/infat?tab=readme-ov-file#4-configuration
+
+[extensions]
+txt = "TextEdit"
+# html = "Brave Browser"
+pdf = "Highlights"
+torrent = "Transmission"
+ics = "Calendar"
+md = "Obsidian Helper"
+svg = "Neovide"
+url = "Brave Browser" # link files
+webloc = "Brave Browser" # link files
+
+[schemes]
+mailto = "Mimestream"
+web = "Brave Browser"
+magnet = "Transmission"
+
+[types] # fallbacks
+plain-text = "Neovide"
+archive = "Archive Utility"
+video = "IINA"
+movie = "IINA"
+audio = "IINA"
