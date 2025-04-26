@@ -8,7 +8,7 @@ function eject {
 	selected=$(echo "$volumes" | fzf --exit-0 --select-1 --no-info --height=10%)
 	[[ -z "$selected" ]] && return 0 # fzf aborted
 
-	diskutil eject "$selected" || 
+	diskutil eject "$selected" ||
 		diskutil unmount "$selected" || # if unejectable, `unmount` says which process is blocking
 		print "If \e[1;33mmds_stores\e[0m is blocking, try \e[1;33msudo mdutil -i off -d /Volumes/<volume_name>\e[0m to stop Spotlight from indexing."
 }
@@ -21,4 +21,10 @@ function vvv {
 	else
 		print "\e[1;33mNo ejectable volumes found.\e[0m"
 	fi
+}
+
+function run_infat {
+	[[ -x "$(command -v infat)" ]] || brew install philocalyst/tap/infat
+	infat # without arg, applies `~/.config/infat/config.toml`
+	brew uninstall infat && brew untap philocalyst/tap
 }

@@ -1,22 +1,7 @@
 -- HIGHLIGHTED YANK
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "User: Highlighted Yank",
-	callback = function()
-		-- FIX timeout for `hl.on_yank` not working, thus implementing manually
-		-- vim.hl.on_yank { timeout = 1500 }
-
-		if vim.fn.reg_executing() ~= "" then return end
-		if vim.v.event.operator ~= "y" or vim.v.event.regtype == "" then return end
-
-		local duration = 1500 -- CONFIG
-		local ns = vim.api.nvim_create_namespace("nvim.hlyank2")
-		local bufnr = vim.api.nvim_get_current_buf()
-		vim.hl.range(bufnr, ns, "IncSearch", "'[", "']", { inclusive = true })
-		vim.defer_fn(
-			function() pcall(vim.api.nvim_buf_clear_namespace, bufnr, ns, 0, -1) end,
-			duration
-		)
-	end,
+	callback = function() vim.hl.on_yank { timeout = 1500 } end,
 })
 
 --------------------------------------------------------------------------------
