@@ -166,11 +166,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
+		<key>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5FF59D05-FE74-43DD-9589-1CFF471C8A6A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD183BF0-ACE1-499D-B06B-CB54899394D1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -234,17 +247,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+				<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -332,11 +335,23 @@
 		</array>
 		<key>DA53DB8C-C97B-4594-A26E-0875AB96D262</key>
 		<array/>
-		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
+		<key>DD183BF0-ACE1-499D-B06B-CB54899394D1</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
+				<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -345,6 +360,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
+		<array/>
 		<key>E5DECF0A-F7E7-4C15-BF46-AD547A831F40</key>
 		<array>
 			<dict>
@@ -780,6 +797,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>76BF609E-B98F-4D34-9CAB-1AA18567FE33</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>behaviour</key>
 				<integer>1</integer>
 				<key>fontmode</key>
@@ -851,26 +888,6 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>49BE57F4-670B-4713-B036-981025E334C9</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
-					<key>use_finder</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -962,6 +979,26 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>target_path</key>
+					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
+					<key>use_finder</key>
+					<false/>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1046,6 +1083,38 @@
 			<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:when_to_add}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>tomorrow</string>
+						<key>outputlabel</key>
+						<string>today</string>
+						<key>uid</key>
+						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>tomorrow</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>DD183BF0-ACE1-499D-B06B-CB54899394D1</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1215,6 +1284,17 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>630</real>
 		</dict>
+		<key>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete Alfred cache</string>
+			<key>xpos</key>
+			<real>990</real>
+			<key>ypos</key>
+			<real>675</real>
+		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
 			<key>colorindex</key>
@@ -1240,7 +1320,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1020</real>
+			<real>1035</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1266,6 +1346,17 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>76BF609E-B98F-4D34-9CAB-1AA18567FE33</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>note</key>
+			<string>delete Alfred cache</string>
+			<key>xpos</key>
+			<real>1250</real>
+			<key>ypos</key>
+			<real>395</real>
+		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1282,20 +1373,9 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>keep open?</string>
 			<key>xpos</key>
-			<real>973</real>
+			<real>1013</real>
 			<key>ypos</key>
-			<real>145</real>
-		</dict>
-		<key>AA0FD0C4-BA25-4F5F-83A3-54E4C0015B77</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>delete Alfred cache, since updating reminders</string>
-			<key>xpos</key>
-			<real>1255</real>
-			<key>ypos</key>
-			<real>485</real>
+			<real>175</real>
 		</dict>
 		<key>AB977CE7-1D10-44F7-AFF8-0018203097F6</key>
 		<dict>
@@ -1346,18 +1426,29 @@ to set a hotkey to show reminders due today</string>
 			<key>note</key>
 			<string>update sketchybar reminders count</string>
 			<key>xpos</key>
-			<real>1090</real>
+			<real>1250</real>
 			<key>ypos</key>
-			<real>750</real>
+			<real>765</real>
+		</dict>
+		<key>DD183BF0-ACE1-499D-B06B-CB54899394D1</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>reminder affected</string>
+			<key>xpos</key>
+			<real>845</real>
+			<key>ypos</key>
+			<real>770</real>
 		</dict>
 		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1075</real>
+			<real>1110</real>
 			<key>ypos</key>
-			<real>170</real>
+			<real>200</real>
 		</dict>
 		<key>E5DECF0A-F7E7-4C15-BF46-AD547A831F40</key>
 		<dict>
