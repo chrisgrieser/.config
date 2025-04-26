@@ -322,5 +322,6 @@ function run() {
 	return JSON.stringify({
 		items: [...reminders, ...events],
 		skipknowledge: true, // keep sorting order
+		cache: { seconds: 0, loosereload: true },
 	});
 }
