@@ -184,6 +184,7 @@ return {
 		{ "<leader>pc", function() Snacks.picker.colorschemes() end, desc = " Colorschemes" },
 		{ "<leader>ms", function() Snacks.picker.marks() end, desc = "󰃁 Select mark" },
 		{ "<leader>ut", function() Snacks.picker.undo() end, desc = "󰋚 Undo tree" },
+		{ "<leader>ql", function() Snacks.picker.qflist() end, desc = " Search qflist" },
 		-- stylua: ignore
 		{ "<C-.>", function() Snacks.picker.icons() end, mode = { "n", "i" }, desc = "󱗿 Icon picker" },
 		{ "g.", function() Snacks.picker.resume() end, desc = "󰗲 Resume" },
@@ -192,6 +193,27 @@ return {
 		---@type snacks.picker.Config
 		picker = {
 			sources = {
+				qflist = {
+					win = {
+						input = {
+							keys = { ["<D-d>"] = { "delete_qf_entry", mode = "i" } },
+						},
+					},
+					actions = {
+						delete_qf_entry = function(picker)
+							local entry = picker:current()
+							if not entry then return end
+
+							local qfItems = vim.fn.getqflist({ title = false })
+							table.remove(qfItems, entry.idx)
+							vim.fn.setqflist(qfItems, "r") -- "r" = replace = overwrite
+
+							local msg = ("Removed %q"):format(entry.line)
+							vim.notify(msg, nil, { title = "Quickfix", icon = "󰴩" })
+							picker:find() -- reload
+						end,
+					},
+				},
 				undo = {
 					win = {
 						input = {
