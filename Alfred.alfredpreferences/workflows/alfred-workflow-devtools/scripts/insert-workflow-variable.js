@@ -26,14 +26,22 @@ function camelCaseMatch(str) {
 
 // DOCS https://www.alfredapp.com/help/workflows/script-environment-variables/
 const scriptEnvironment = [
-	{title: "alfred_workflow_cache", subtitle: ""},
-	{title: "alfred_workflow_data", subtitle: ""},
-	{title: "alfred_workflow_name", subtitle: ""},
-	{title: "alfred_preferences", subtitle: ""},
-	{title: "alfred_version", subtitle: ""},
-	"alfred_workflow_bundleid",
-	"alfred_workflow_version",
-	"alfred_workflow_uid",
+	{ name: "alfred_workflow_cache" },
+	{ name: "alfred_workflow_data" },
+	{ name: "alfred_workflow_name" },
+	{ name: "alfred_theme" },
+	{ name: "alfred_theme_background" },
+	// biome-ignore format: not needed
+	{ name: "alfred_theme_subtext", desc: "The subtext mode the user has selected in the Appearance preferences." },
+	{ name: "alfred_workflow_description" },
+	{ name: "alfred_preferences", desc: "The location of Alfred.alfredpreferences" },
+	// biome-ignore format: not needed
+	{ name: "alfred_preferences_localhash", desc: "Local (Mac-specific) preferences under [Alfred.alfredpreferences]/preferences/local/[localhash]" },
+	{ name: "alfred_version" },
+	{ name: "alfred_workflow_bundleid" },
+	{ name: "alfred_workflow_uid", desc: "i.e. the name of the workflow folder" },
+	{ name: "alfred_workflow_version" },
+	{ name: "alfred_workflow_keyword", desc: "The keyword the script filter was triggered with." },
 ];
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -47,13 +55,21 @@ function run() {
 
 	const workflowVars = JSON.parse(app.doShellScript(shellCmd)).map(
 		(/** @type {WorkflowVariable} */ item) => {
-			const { type, variable } = item;
+			const { type, variable, config } = item;
 			const output = alfredPrefsFront ? `{var:${variable}}` : variable;
+
+			const subtitle = [
+				type,
+				config.required ? "[required]" : "",
+				config.default ? `default: ${config.default}` : "",
+			]
+				.filter(Boolean)
+				.join("    ");
 
 			/** @type {AlfredItem} */
 			const alfredItem = {
 				title: variable,
-				subtitle: type,
+				subtitle: subtitle,
 				arg: output,
 				uid: variable, // only remember these
 				match: camelCaseMatch(variable),
@@ -62,15 +78,16 @@ function run() {
 		},
 	);
 
-	const scriptEnvVars = scriptEnvironment.map((varname) => {
-		const output = alfredPrefsFront ? `{var:${varname}}` : varname;
+	const scriptEnvVars = scriptEnvironment.map((varr) => {
+		const output = alfredPrefsFront ? `{const:${varr.name}}` : varr.name;
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: varname,
+			title: varr.name,
+			subtitle: varr.desc || "",
 			arg: output,
 			icon: { path: "Alfred.icns" }, // differentiate script env vars from workflow vars
-			match: camelCaseMatch(varname),
+			match: camelCaseMatch(varr.name),
 		};
 		return alfredItem;
 	});
