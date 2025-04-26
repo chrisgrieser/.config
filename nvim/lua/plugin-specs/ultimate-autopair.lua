@@ -20,8 +20,8 @@ return {
 		vim.api.nvim_create_autocmd("RecordingEnter", {
 			callback = function() require("ultimate-autopair").disable() end,
 		})
-		vim.api.nvim_create_autocmd("RecordingEnter", {
-			callback = function() require("ultimate-autopair").disable() end,
+		vim.api.nvim_create_autocmd("RecordingLeave", {
+			callback = function() require("ultimate-autopair").enable() end,
 		})
 	end,
 	opts = {

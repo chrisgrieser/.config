@@ -96,6 +96,9 @@ eventStore.requestFullAccessToReminders { granted, error in
 	dateComponents.minute = mm
 	reminder.dueDateComponents = dateComponents
 
+	// prevents alarm for all-day reminders, if user has deactivated the setting
+	if hh == nil && mm == nil { reminder.startDateComponents = nil }
+
 	// * Add an alarm to trigger a notification. Even though the reminder created
 	//   without an alarm looks the same as one with an alarm, an alarm is needed
 	//   to trigger the notification (see #2).
