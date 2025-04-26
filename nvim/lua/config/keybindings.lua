@@ -52,15 +52,26 @@ keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end
 --------------------------------------------------------------------------------
 -- MARKS
 do
-	local marksLeader = "<leader>m"
+	require("personal-plugins.marks").setup {
+		marks = { "A", "B", "C", "D", "E" },
+		signs = {
+			hlgroup = "StandingOut",
+			icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋", E = "󰬌" },
+		},
+	}
+	local leader = "<leader>m"
 
-	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { marksLeader, group = "󰃃 Marks" } end
-	require("personal-plugins.marks").setup(marksLeader)
+	if vim.g.whichkeyAddSpec then vim.g.whichkeyAddSpec { leader, group = "󰃃 Marks" } end
 
 	-- stylua: ignore
-	keymap("n", marksLeader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
+	keymap("n", leader .. "m", function() require("personal-plugins.marks").cycleMarks() end, { desc = "󰃀 Cycle marks" })
 	-- stylua: ignore
-	keymap("n", marksLeader .. "<BS>", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+	keymap("n", leader .. "<BS>", function() require("personal-plugins.marks").deleteAllMarks() end, { desc = "󰃆 Delete marks" })
+
+	for _, mark in pairs(require("personal-plugins.marks").config.marks) do
+		-- stylua: ignore
+		keymap("n", leader .. mark:lower(), function() require("personal-plugins.marks").setUnsetMark(mark) end, { desc = "󰃃 Set " .. mark })
+	end
 end
 
 --------------------------------------------------------------------------------
