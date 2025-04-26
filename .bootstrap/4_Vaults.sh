@@ -10,7 +10,3 @@ cut -d, -f1 "$HOME/.config/perma-repos.csv" |
 		git clone --depth=1 git@github.com:chrisgrieser/"$(basename "$repo")"
 		echo
 	done
-
-# contains info on all the vaults, so they do not have to be added manually
-mkdir -p "$HOME/Library/Application Support/obsidian/"
-cp -f ./obsidian.json "$HOME/Library/Application Support/obsidian/obsidian.json"

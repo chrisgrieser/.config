@@ -77,9 +77,6 @@ while read -r line; do
 	backup "$repo_path/" "./perma-repos/$basename"
 done < "$HOME/.config/perma-repos.csv"
 
-# contains info on all the vaults, so they do not have to be added manually
-cp -f "$HOME/Library/Application Support/obsidian/obsidian.json" ./perma-repos/obsidian.json
-
 #───────────────────────────────────────────────────────────────────────────────
 # LOG & NOTIFY
 

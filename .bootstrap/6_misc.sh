@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 set -e
+#───────────────────────────────────────────────────────────────────────────────
 
-# Preferences
+# plist preferences
 defaults import com.apple.notificationcenterui ~/.config/.bootstrap/plist/com.apple.notificationcenterui.plist
-
 
 #───────────────────────────────────────────────────────────────────────────────
 # Default File Openers (infat) https://github.com/philocalyst/infat
@@ -14,8 +14,6 @@ brew uninstall infat && brew untap philocalyst/tap
 #───────────────────────────────────────────────────────────────────────────────
 
 # Browser Symlinks for Alfred
-# - Bookmarks need to be at the location for Chrome, so Alfred can pick them up.
-# - Updated for Alfred via Hammerspoon
 browser_setting="$HOME/Library/Application Support/BraveSoftware/Brave-Browser"
 
 my_bookmarks="$browser_setting/Default/Bookmarks"
