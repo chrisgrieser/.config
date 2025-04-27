@@ -51,7 +51,7 @@ local function cursorIsAtMark(m)
 	if not m then return false end
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local bufnr = vim.api.nvim_get_current_buf()
-	return m.row == row and m.bufnr == bufnr
+	return m.row == row and m.bufnr == bufnr -- do not check for col
 end
 
 ---@param name string
