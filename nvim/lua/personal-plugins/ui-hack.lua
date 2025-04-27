@@ -1,14 +1,10 @@
--- INFO 
+-- INFO
 -- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
 -- Enter to continue` prompts, even with `cmdheight=0`.
 
--- REQUIRED 
--- 1. a plugin that shows `vim.notify` outside of the cmdline, such as
+-- REQUIRED
+-- a plugin that shows `vim.notify` outside of the cmdline, such as
 -- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
--- 2. a plugin accepts input from outside of the cmdline, such as `snacks.input`.
-
--- CAVEAT 
--- This does not work well with confirmation prompts, such as `fn.conform()`
 --------------------------------------------------------------------------------
 
 local config = {
@@ -45,10 +41,6 @@ local function attach()
 		-- notification text and options
 		local text = vim.iter(content):fold("", function(acc, chunk) return acc .. chunk[2] end)
 		text = vim.trim(text):gsub("^(E%d+):", "[%1]") -- colorize error code when using `snacks`
-		if kind == "confirm" then
-			text = "[NOTE] Confirmation/input prompts. The next key you enter will affect this prompt.\n\n"
-				.. text
-		end
 
 		local level = vim.log.levels.INFO
 		if kind == "emsg" or vim.endswith(kind, "error") or vim.endswith(kind, "err") then
@@ -58,7 +50,7 @@ local function attach()
 		end
 
 		local opts = { title = kind, icon = config.notification.icon }
-		if vim.startswith(kind, "lua_") then opts.ft = "lua" end
+		if kind == "lua_print" then opts.ft = "lua" end
 		if vim.list_contains(config.msgKind.mini, kind) and package.loaded["snacks"] then
 			opts.style = "minimal"
 			if opts.icon then opts.icon = " " .. opts.icon .. " " end
@@ -72,7 +64,7 @@ local function detach() vim.ui_detach(ns) end
 
 --------------------------------------------------------------------------------
 
-attach() -- initialize
+-- attach() -- initialize
 local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
-vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
-vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
+-- vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
+-- vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
