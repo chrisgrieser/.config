@@ -1,5 +1,4 @@
 -- DOCS https://github.com/folke/snacks.nvim#-features
---------------------------------------------------------------------------------
 ---@module "snacks"
 --------------------------------------------------------------------------------
 
@@ -16,7 +15,7 @@ return {
 		-- modify certain notifications
 		vim.notify = function(msg, lvl, notifOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
 			local ignore = msg == "No code actions available"
-				-- or msg:find("^Client marksman quit with exit code 1 and signal 0.")
+				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
 			if ignore then return end
 
 			if msg:find("Hunk %d+ of %d+") then -- gitsigns.nvim
