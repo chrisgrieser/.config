@@ -165,7 +165,7 @@ local config = {
 	},
 
 	-- Bell
-	audible_bell = "Disabled",
+	-- audible_bell = "Disabled",
 	visual_bell = { -- briefly flash cursor on visual bell
 		fade_in_duration_ms = 500,
 		fade_out_duration_ms = 500,
