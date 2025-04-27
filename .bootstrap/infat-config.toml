@@ -8,7 +8,7 @@
 txt = "TextEdit"
 csv = "neovide"
 svg = "neovide"
-md = "/Users/chrisgrieser/.config/obsidian/opener/Obsidian Helper.app"
+md = "~/.config/obsidian/opener/Obsidian Helper.app"
 
 pdf = "Highlights"
 ics = "Calendar"
