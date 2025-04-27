@@ -1,13 +1,15 @@
 # DOCS https://github.com/philocalyst/infat#4-configuration
+# Apps outside of `/Applications/` require an absolute path or path relative to
+# the home directory https://github.com/philocalyst/infat/blob/main/README.md#5-configuration
 
 [extensions]
 txt = "TextEdit"
 pdf = "Highlights"
 ics = "Calendar"
 svg = "neovide"
-url = "Brave Browser" # link files
+url = "Brave Browser"    # link files
 webloc = "Brave Browser" # link files
-md = "Obsidian Helper"
+md = "../../obsidian/opener/Obsidian Helper.app"
 html = "Brave Browser"
 
 [schemes]
@@ -20,4 +22,4 @@ plain-text = "neovide"
 video = "IINA"
 movie = "IINA"
 mp4-movie = "IINA"
-archive = "Archive Utility"
+archive = "/System/Library/CoreServices/Applications/Archive Utility.app"
