@@ -1,3 +1,6 @@
+-- DOCS https://github.com/Wansmer/treesj?tab=readme-ov-file#basic-node
+--------------------------------------------------------------------------------
+
 return {
 	"Wansmer/treesj",
 	keys = {
@@ -30,7 +33,7 @@ return {
 					end,
 				},
 			},
-			-- one-line-if-statement can be split into multi-line https://github.com/Wansmer/treesj/issues/150
+			-- one-line if-statement can be split into multi-line https://github.com/Wansmer/treesj/issues/150
 			expression_statement = {
 				join = { enable = false },
 				split = {
@@ -39,6 +42,7 @@ return {
 				},
 			},
 		}
+
 		local swiftConfig = {
 			if_statement = {
 				join = {
@@ -46,7 +50,8 @@ return {
 					force_insert = "",
 				},
 				split = {
-					shrink_node = { from = "{", to = "}" },
+					-- shrink_node = { from = "{", to = "}" },
+					omit = { "condition" } 
 				},
 			},
 		}
