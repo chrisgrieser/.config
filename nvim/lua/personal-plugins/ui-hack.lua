@@ -10,7 +10,7 @@
 local config = {
 	msgKind = { -- existing kinds: https://neovim.io/doc/user/ui.html#ui-messages
 		ignore = { "search_cmd", "return_prompt" },
-		mini = { "bufwrite", "undo" }, -- more minimal style when `snacks.notifier` is used
+		mini = { "bufwrite", "undo" }, -- more minimal style when using `snacks.notifier`
 	},
 	notification = { icon = "󰍩" },
 }
@@ -64,7 +64,7 @@ local function detach() vim.ui_detach(ns) end
 
 --------------------------------------------------------------------------------
 
--- attach() -- initialize
+attach() -- initialize
 local group = vim.api.nvim_create_augroup("ui-hack", { clear = true })
--- vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
--- vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
+vim.api.nvim_create_autocmd("CmdlineEnter", { group = group, callback = detach })
+vim.api.nvim_create_autocmd("CmdlineLeave", { group = group, callback = attach })
