@@ -119,11 +119,11 @@
     "w\ndouble (duplicate)",
     "e\nclose other wins",
     "r\nre-open last win",
-    "t\nto recent folder\n\n\n^t rela",
+    "t\nto recent folder",
     "z\nzip selection",
     "u (U)\nundo (redo)",
-    "i (I)\nclose folds  (recursive)",
-    "o (O)\nopen folds (recursive)",
+    "i (I)\nclose folds  (recurs.)",
+    "o (O)\nopen folds (recurs.)",
     "p (P)\npaste (into file)",
     {
       "c": "#CCCCCC",
@@ -144,7 +144,7 @@
       "h2": 1,
       "x2": -0.25
     },
-    "↵ rename<br><br><br>⇧↵ batch rename\ninsert mode: confirm & goto normal mode",
+    "↵ rename<br><br>⇧↵ batch rename\n↵ (insert mode): confirm & goto&nbspnormal mode",
     {
       "c": "#999999",
       "a": 7,
@@ -172,16 +172,16 @@
     },
     "a (A)\nselect all (only files)",
     "s (S)\nfollow (create) symlink",
-    "d (D)\ntrash file (open trash)",
-    "f\nfind (like in vim)",
+    "d (D)\ntrash&nbspfile (open trash)",
+    "f\nfind",
     "gg (G)\nto top (bottom)",
     {
       "sm": "cherry"
     },
-    "h (H)\nparent dir (new win)\n\n\n⌃h back",
+    "h (H)\nparent dir (+&nbspwin)\n\n\n⌃h back",
     "j (J)\ndown (6x)",
     "k (K)\nup <br>(6x)",
-    "l (L)\nopen file (new win)\n\n\n⌃l forw",
+    "l (L)\nopen&nbspfile (+&nbspwin)\n\n\n⌃l forw",
     {
       "c": "#CCCCCC",
       "f": 2,
@@ -222,11 +222,11 @@
         3
       ]
     },
-    "y (Y)\ncopy file (content)",
+    "y (Y)\ncopy&nbspfile (content)",
     "x (X)\ncross-move (copy)",
     "c (C)\ncontext menu",
-    "v\ngoto 1st remo- vable vol.",
-    "b\ntoggle  \"bkp\" suffix",
+    "v\ngoto 1st ejectable volune",
+    "b\ntoggle  \"-bkp\" suffix",
     "n (N)\nnew file (dir)",
     "m (M)\nmove (to new dir)",
     ", (⇧,)\nyank path (name)",
