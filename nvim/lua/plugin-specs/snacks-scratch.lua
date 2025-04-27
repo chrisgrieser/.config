@@ -18,8 +18,9 @@ local function runner(self, cli, name)
 	local ok, icons = pcall(require, "mini.icons")
 	local icon = ok and icons.get("filetype", vim.bo[self.buf].ft) or "󰜎"
 	icon = icons.get("filetype", vim.bo[self.buf].ft)
+	local level = vim.log.levels[result.code == 0 and "INFO" or "WARN"]
 
-	vim.notify(out, nil, { title = name, icon = icon, ft = "text" })
+	vim.notify(out, level, { title = name, icon = icon, ft = "text" })
 end
 
 ---@param cli1 string|string[]
