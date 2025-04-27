@@ -46,7 +46,7 @@ return {
 					force_insert = "",
 				},
 				split = {
-					recursive_ignore = { "tuple_expression", "condition", "if_statement", "value" },
+					shrink_node = { from = "{", to = "}" },
 				},
 			},
 		}
