@@ -1,7 +1,8 @@
 # GENERAL
-export XDG_CONFIG_HOME="$HOME/.config"
 export ZDOTDIR="$HOME/.config/zsh" # location of this zsh configuration
 export EDITOR='nvim'
+
+#───────────────────────────────────────────────────────────────────────────────
 
 # API KEYS
 private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/private dotfiles"

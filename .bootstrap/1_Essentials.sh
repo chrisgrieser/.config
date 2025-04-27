@@ -13,7 +13,7 @@ dotfolder="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 xcode-select --install # install core CLIs like `git` for homebrew
 
-# Install Essential Apps
+# Install Essential Apps first
 brew install --no-quarantine alfred hammerspoon neovim wezterm karabiner-elements
 brew install --no-quarantine --cask neovide
 

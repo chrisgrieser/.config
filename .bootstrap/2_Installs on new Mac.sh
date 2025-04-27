@@ -1,16 +1,11 @@
 #!/usr/bin/env zsh
-# INSTALLS
 sudo -v
 
-# Uninstall unneeded macOS default apps
-cd "/Applications" || return 1
-open -a "Appcleaner" \
-	"Numbers.app" "Pages.app" "Keynote.app" "GarageBand.app" "iMovie.app"
-
-# BUG MAS sign in broken https://github.com/mas-cli/mas#-sign-in
+# BUG MAS sign in broken https://github.com/mas-cli/mas#mas-signin
 # ➞ sign in manually to start download
 open '/System/Applications/App Store.app'
 
-# Homebrew & MAS
-brew bundle install --no-quarantine --verbose --no-lock --file "$HOME/Desktop/Brewfile"
+brew bundle install --no-quarantine --verbose --no-lock \
+	--file "$HOME/.config/.installed-apps-and-packages/Brewfile_iMac Home.txt"
+
 brew services start felixkratz/formulae/sketchybar
