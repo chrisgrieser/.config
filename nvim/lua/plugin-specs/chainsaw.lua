@@ -15,7 +15,7 @@ return {
 				swift = 'fputs("{{marker}} {{var}}: \\({{var}})", stderr)', -- to STDERR, requires `import Foundation`
 			},
 			assertLog = {
-				-- lua = 'assert({{var}}, "")', -- no marker, since intended to be permanent
+				lua = 'assert({{var}}, "")', -- no marker, since intended to be permanent
 			},
 			objectLog = { -- re-purposing `objectLog` for alternative log statements for these
 				-- Obsidian Notice

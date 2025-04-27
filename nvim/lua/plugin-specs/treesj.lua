@@ -39,12 +39,24 @@ return {
 				},
 			},
 		}
+		local swiftConfig = {
+			if_statement = {
+				join = {
+					space_in_brackets = true,
+					force_insert = "",
+				},
+				split = {
+					recursive_ignore = { "tuple_expression", "condition", "if_statement", "value" },
+				},
+			},
+		}
 		opts.langs = {
 			comment = { source = gww, element = gww }, -- comments in any language
 			lua = { comment = gww },
 			jsdoc = { source = gww, description = gww },
 			javascript = joinWithoutCurly,
 			typescript = joinWithoutCurly,
+			swift = swiftConfig,
 		}
 		require("treesj").setup(opts)
 	end,
