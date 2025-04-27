@@ -46,8 +46,6 @@ local efmConfig = {
 }
 
 return {
-	-- PENDING efm being added https://github.com/neovim/nvim-lspconfig/tree/master/lsp
-	cmd = { "efm-langserver" },
 	workspace_required = true,
 	init_options = { documentFormatting = true },
 
