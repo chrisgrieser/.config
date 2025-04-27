@@ -129,9 +129,8 @@ eventStore.requestFullAccessToReminders { granted, error in
 		var alfredNotif = title
 		if !isAllDayReminder {
 			let minutePadded = String(format: "%02d", mm!)
-			alfredNotif = "\(hh!):\(minutePadded) — " + alfredNotif
+			alfredNotif = "\(hh!):\(minutePadded) — \(title)"
 		}
-		WidgetCenter.shared.reloadAllTimelines()  // force reload widgets
 		print(alfredNotif)
 	} catch {
 		print("❌ Failed to create reminder: \(error.localizedDescription)")
