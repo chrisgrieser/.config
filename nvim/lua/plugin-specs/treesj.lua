@@ -50,8 +50,7 @@ return {
 					force_insert = "",
 				},
 				split = {
-					-- shrink_node = { from = "{", to = "}" },
-					omit = { "condition" } 
+					omit = { "tuple_expression", "equality_expression", "{" },
 				},
 			},
 		}
