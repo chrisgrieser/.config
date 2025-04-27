@@ -143,8 +143,7 @@ keymap("n", "gQ", "<cmd>silent cprev<CR>zv", { desc = "󰴩 Prev quickfix" })
 keymap("n", "<leader>qd", function() vim.cmd.cexpr("[]") end, { desc = "󰚃 Delete qf-list" })
 
 keymap("n", "<leader>qq", function()
-	local windows = vim.fn.getwininfo()
-	local quickfixWinOpen = vim.iter(windows):any(function(win) return win.quickfix == 1 end)
+	local quickfixWinOpen = vim.fn.getqflist({ winid = true }).winid ~= 0
 	vim.cmd[quickfixWinOpen and "cclose" or "copen"]()
 end, { desc = " Toggle quickfix window" })
 
