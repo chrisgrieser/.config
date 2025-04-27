@@ -23,8 +23,10 @@ function vvv {
 	fi
 }
 
-function run_infat {
+function run-infat {
 	[[ -x "$(command -v infat)" ]] || brew install philocalyst/tap/infat
-	infat # without arg, applies `~/.config/infat/config.toml`
+	echo
+	infat --config="$HOME/.config/.bootstrap/infat-config.toml"
+	echo
 	brew uninstall infat && brew untap philocalyst/tap
 }
