@@ -16,14 +16,14 @@ return {
 		-- modify certain notifications
 		vim.notify = function(msg, lvl, notifOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
 			local ignore = msg == "No code actions available"
-				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
+				-- or msg:find("^Client marksman quit with exit code 1 and signal 0.")
 			if ignore then return end
 
 			if msg:find("Hunk %d+ of %d+") then -- gitsigns.nvim
 				notifOpts = notifOpts or {}
 				notifOpts.style = "minimal"
 				msg = msg .. "  "
-				notifOpts.icon = "󰊢"
+				notifOpts.icon = "󰊢 "
 			end
 			Snacks.notifier(msg, lvl, notifOpts)
 		end
@@ -72,10 +72,11 @@ return {
 			"<leader>oi",
 			function()
 				if Snacks.indent.enabled then
+					vim.g.prev_listchars = vim.opt_local.listchars:get()
 					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
 					Snacks.indent.disable()
 				else
-					vim.opt_local.listchars:append { tab = "  ", space = " ", trail = " ", lead = " " }
+					vim.opt_local.listchars = vim.g.prev_listchars
 					Snacks.indent.enable()
 				end
 			end,

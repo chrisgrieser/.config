@@ -126,6 +126,7 @@ vim.opt.listchars = {
 	trail = " ",
 	tab = "  ",
 	lead = " ",
+	space = " ",
 }
 vim.opt.fillchars:append {
 	eob = " ",
