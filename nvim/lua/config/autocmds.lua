@@ -479,7 +479,7 @@ vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
 	vim.notify(msg, nil, { title = "Renamed with LSP", icon = "󰑕" })
 
 	-- save all
-	if #changedFiles > 1 then vim.cmd.wall() end
+	if #changedFiles > 1 then vim.cmd("silent! wall") end
 end
 --------------------------------------------------------------------------------
 
