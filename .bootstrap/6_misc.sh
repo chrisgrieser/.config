@@ -3,7 +3,12 @@ set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 # plist preferences
-defaults import com.apple.notificationcenterui ~/.config/.bootstrap/plist/com.apple.notificationcenterui.plist
+backup_path="$HOME/.config/.plist"
+
+for plist in "$backup_path"/*.plist; do
+	name="$(basename "$plist" .plist)"
+	defaults import "$name" "$backup_path/$name.plist"
+done
 
 #───────────────────────────────────────────────────────────────────────────────
 # Default File Openers (infat) https://github.com/philocalyst/infat
@@ -30,3 +35,10 @@ ln -sf "$my_bookmarks" "$chrome_bookmarks"
 ln -sf "$my_localstate" "$chrome_localstate"
 
 echo "Symlinks created."
+
+#───────────────────────────────────────────────────────────────────────────────
+
+# Uninstall unneeded macOS default apps
+cd "/Applications" || return 1
+open -a "Appcleaner" \
+	"Numbers.app" "Pages.app" "Keynote.app" "GarageBand.app" "iMovie.app"
