@@ -20,11 +20,14 @@ return {
 		},
 	},
 	opts = {
+		ruleDocs = {
+			fallback = "https://chatgpt.com/?q=Explain%20the%20following%20diagnostic%20error%3A%20%s"
+		},
 		suppressFormatter = {
 			-- use `biome` instead of `prettier`
-			javascript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
-			typescript = { location = "prevLine", ignoreBlock = "// biome-ignore format: expl" },
-			css = { location = "prevLine", ignoreBlock = "/* biome-ignore format: expl */" },
+			javascript = { ignoreBlock = "// biome-ignore format: expl" },
+			typescript = { ignoreBlock = "// biome-ignore format: expl" },
+			css = { ignoreBlock = "/* biome-ignore format: expl */" },
 		},
 	},
 }

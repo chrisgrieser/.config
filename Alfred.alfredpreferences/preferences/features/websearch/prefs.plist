@@ -88,7 +88,7 @@
 			<key>keyword</key>
 			<string>st</string>
 			<key>text</key>
-			<string>🖥 Steam (App)</string>
+			<string>🖥 Steam (App): "{query}"</string>
 			<key>url</key>
 			<string>steam://openurl/https://store.steampowered.com/search/?term={query}</string>
 		</dict>
@@ -143,7 +143,7 @@
 			<key>keyword</key>
 			<string>ce</string>
 			<key>text</key>
-			<string>Chrome Extension Store</string>
+			<string>Chrome Extension Store: "{query}"</string>
 			<key>url</key>
 			<string>https://chromewebstore.google.com/search/{query}</string>
 		</dict>
@@ -154,7 +154,7 @@
 			<key>keyword</key>
 			<string>tel||call</string>
 			<key>text</key>
-			<string>Call with Facetime</string>
+			<string>Call with Facetime: {query}</string>
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
@@ -187,7 +187,7 @@
 			<key>keyword</key>
 			<string>st</string>
 			<key>text</key>
-			<string>🌐 Steam (Browser)</string>
+			<string>🌐 Steam (Browser): "{query}"</string>
 			<key>url</key>
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
@@ -220,7 +220,7 @@
 			<key>keyword</key>
 			<string>code</string>
 			<key>text</key>
-			<string>GitHub Code Search</string>
+			<string>GitHub Code Search: "{query}"</string>
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q={query}</string>
 		</dict>
