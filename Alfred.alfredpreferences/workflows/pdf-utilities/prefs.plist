@@ -4,6 +4,8 @@
 <dict>
 	<key>bibtex_library_path</key>
 	<string>~/.config/pandoc/main-bibliography.bib</string>
+	<key>copy_without_citation</key>
+	<true/>
 	<key>pdf_folder</key>
 	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Academia/PDFs</string>
 </dict>

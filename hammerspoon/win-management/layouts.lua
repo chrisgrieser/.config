@@ -77,13 +77,12 @@ local function workLayout()
 	u.openApps { "Slack", "Ivory", "Mimestream", "AlfredExtraPane" }
 	u.whenAppWinAvailable("Mimestream", function()
 		hs.layout.apply {
-			-- Ivory layout already managed by `mastodon.lua`
 			{ "Slack", nil, wu.iMacDisplay, wu.pseudoMax },
 			{ "Mimestream", nil, wu.iMacDisplay, wu.pseudoMax },
 			{ "Brave Browser", nil, wu.iMacDisplay, wu.pseudoMax },
 		}
 	end)
-	u.whenAppWinAvailable("Mimestream", function()
+	u.whenAppWinAvailable("Ivory", function()
 		local mastoWin = u.app("Ivory"):mainWindow()
 		mastoWin:setFrame(wu.toTheSide)
 	end)
