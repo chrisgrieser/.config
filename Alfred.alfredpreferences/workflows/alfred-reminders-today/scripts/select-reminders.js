@@ -250,69 +250,76 @@ function run() {
 
 	// EVENTS
 	let /** @type {AlfredItem[]} */ events = [];
-	const eventCachePath = $.getenv("alfred_workflow_cache") + "/events.json";
-	const cacheOutdated = showEvents && cacheIsOutdated(eventCachePath);
 
-	if (showEvents && cacheOutdated) {
-		console.log("Writing new cache for events…");
-
+	if (showEvents) {
+		// CACHE
+		// Only swift output, since it is the most expensive part. Not caching the
+		// final object, so that display decisions, such as filtering events
+		// earlier today, can be made without needing to re-write the cache.
+		const eventCachePath = $.getenv("alfred_workflow_cache") + "/events-from-swift.json";
+		const cacheOutdated = showEvents && cacheIsOutdated(eventCachePath);
 		let /** @type {EventObj[]} */ eventsJson;
-		const swiftEventsOutput = app.doShellScript("./scripts/get-events-today.swift");
-		try {
-			eventsJson = JSON.parse(swiftEventsOutput);
-		} catch (_error) {
-			const errmsg = swiftEventsOutput; // if not parsable, it's a message
-			return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
+		if (cacheOutdated) {
+			console.log("Writing new cache for events…");
+			const swiftEventsOutput = app.doShellScript("./scripts/get-events-today.swift");
+			try {
+				eventsJson = JSON.parse(swiftEventsOutput);
+			} catch (_error) {
+				const errmsg = swiftEventsOutput; // if not parsable, it's a message
+				return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
+			}
+			writeToFile(eventCachePath, swiftEventsOutput);
+		} else {
+			eventsJson = JSON.parse(readFile(eventCachePath));
 		}
 
-		// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
-		events = eventsJson.map((event) => {
-			// time
-			let timeDisplay = "";
-			if (!event.isAllDay) {
-				const start = event.startTime
-					? new Date(event.startTime).toLocaleTimeString([], timeFmt)
-					: "";
-				const end = event.endTime
-					? new Date(event.endTime).toLocaleTimeString([], timeFmt)
-					: "";
-				timeDisplay = start + " – " + end;
-			}
+		// Format events for Alfred
+		events = eventsJson
+			.filter((event) => +new Date(event.endTime) > Date.now()) // only future or ongoing events
+			.map((event) => {
+				// time
+				let timeDisplay = "";
+				if (!event.isAllDay) {
+					const start = event.startTime
+						? new Date(event.startTime).toLocaleTimeString([], timeFmt)
+						: "";
+					const end = event.endTime
+						? new Date(event.endTime).toLocaleTimeString([], timeFmt)
+						: "";
+					timeDisplay = start + " – " + end;
+				}
 
-			// location
-			const maxLen = 40;
-			const url = event.location?.match(urlRegex);
-			const icon = url ? "🌐" : "📍";
-			let locationDisplay = event.location?.replaceAll("\n", " ") || "";
-			if (locationDisplay.length > maxLen)
-				locationDisplay = locationDisplay.slice(0, maxLen) + "…";
-			locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
-			const openUrl = url || "https://www.google.com/maps/search/" + event.location;
+				// location
+				const maxLen = 40;
+				const url = event.location?.match(urlRegex);
+				const icon = url ? "🌐" : "📍";
+				let locationDisplay = event.location?.replaceAll("\n", " ") || "";
+				if (locationDisplay.length > maxLen)
+					locationDisplay = locationDisplay.slice(0, maxLen) + "…";
+				locationDisplay = event.location ? `${icon} ${locationDisplay}` : "";
+				const openUrl = url || "https://www.google.com/maps/search/" + event.location;
 
-			const subtitle = [
-				event.hasRecurrenceRules ? "🔁" : "",
-				timeDisplay,
-				locationDisplay,
-				event.calendarColor + " " + event.calendar,
-			]
-				.filter(Boolean)
-				.join("    ");
+				const subtitle = [
+					event.hasRecurrenceRules ? "🔁" : "",
+					timeDisplay,
+					locationDisplay,
+					event.calendarColor + " " + event.calendar,
+				]
+					.filter(Boolean)
+					.join("    ");
 
-			const invalid = { valid: false, subtitle: "⛔ Not available for events." };
-			return {
-				title: event.title,
-				subtitle: subtitle,
-				icon: { path: "./calendar.png" },
-				mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid, ctrl: invalid },
+				const invalid = { valid: false, subtitle: "⛔ Not available for events." };
+				return {
+					title: event.title,
+					subtitle: subtitle,
+					icon: { path: "./calendar.png" },
+					mods: { cmd: invalid, shift: invalid, alt: invalid, fn: invalid, ctrl: invalid },
 
-				valid: Boolean(event.location), // only actionable if there is a location
-				arg: openUrl,
-				variables: { mode: "open-event" },
-			};
-		});
-		writeToFile(eventCachePath, JSON.stringify(events));
-	} else if (showEvents && !cacheOutdated) {
-		events = JSON.parse(readFile(eventCachePath));
+					valid: Boolean(event.location), // only actionable if there is a location
+					arg: openUrl,
+					variables: { mode: "open-event" },
+				};
+			});
 	}
 	console.log("Events:", showEvents ? events.length : "not shown");
 

@@ -106,8 +106,8 @@ end
 ---@return boolean
 function M.isDarkMode() return hs.execute("defaults read -g AppleInterfaceStyle") == "Dark\n" end
 
----Repeat a function multiple times Catching timers in table to avoid garbage
----collection. To avoid collecting too many, only a certain number are kept.
+---Repeat a function multiple times, catching timers in table to avoid garbage
+---collection. To avoid accumulating too many, only a certain number are kept.
 ---@param delaySecs number|number[]
 ---@param callbackFn function
 ---@async

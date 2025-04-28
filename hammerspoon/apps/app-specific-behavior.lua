@@ -121,13 +121,12 @@ M.aw_masto = aw.new(function(appName, event, masto)
 		end
 
 		-- back to home & scroll up
-		if #masto:allWindows() == 1 then
-			u.defer(1, function()
-				hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-				hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-				hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-			end)
-		end
+		u.defer(2, function() -- deferred to wait for potential media win to be closed
+			if #masto:allWindows() ~= 1 then return end
+			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+		end)
 	end
 end):start()
 
@@ -141,19 +140,19 @@ local chromeBookmarks = os.getenv("HOME")
 	.. "/Library/Application Support/Google/Chrome/Default/Bookmarks"
 
 -- The pathwatcher is triggered by changes of the *target*, while this function
--- touches the *symlink itself* due to `-h`. Thus, there is no need to configure
+-- touches the *symlink itself* due to `-h`. Thus, there is no need to affect
 -- the symlink target here.
 local function touchSymlink() hs.execute(("touch -h %q"):format(chromeBookmarks)) end
 
 -- sync on system start & when bookmarks are changed
-if require("meta.utils").isSystemStart() then touchSymlink() end
+if u.isSystemStart() then touchSymlink() end
 M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 
 --------------------------------------------------------------------------------
 
 -- ALFRED Reminders Today workflow
 
--- clear cache on deactivation of Calendar, since the vents have likely changed
+-- clear cache on deactivation of Calendar, since the events have potentially changed
 M.aw_calendar = aw.new(function(appName, event, _app)
 	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
 		local cachePath = os.getenv("HOME")
