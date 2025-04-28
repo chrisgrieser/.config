@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>event_cache_duration</key>
-	<integer>180</integer>
+	<integer>12</integer>
 	<key>include_no_duedate</key>
 	<true/>
 	<key>quickadd_today_keyword</key>
