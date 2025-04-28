@@ -46,6 +46,7 @@ return {
 			"else", -- for guard statements
 			"{",
 			"equality_expression",
+			"prefix_expression",
 			"tuple_expression",
 			"navigation_expression",
 			"boolean_literal", -- `true` and `false` only, mostly debugging
