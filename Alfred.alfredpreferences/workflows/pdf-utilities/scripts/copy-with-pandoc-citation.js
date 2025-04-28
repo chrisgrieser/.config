@@ -13,10 +13,10 @@ function run(argv) {
 		.replace(/["’]/g, "'") // consistent single quotes
 		.trim();
 	if (!selection) return "No selection";
-	const withoutCitation = $.getenv("without_citation") === "true";
+	const withoutCitation = $.getenv("copy_without_citation") === "1";
 	if (withoutCitation) {
 		app.setTheClipboardTo(selection);
-		return "Copied."; // Alfred notification
+		return "Without citation."; // Alfred notification
 	}
 
 	//───────────────────────────────────────────────────────────────────────────
