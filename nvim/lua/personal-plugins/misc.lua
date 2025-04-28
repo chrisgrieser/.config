@@ -4,47 +4,26 @@
 local M = {}
 --------------------------------------------------------------------------------
 
---- open the current workflow for in the Alfred workflow preferences
-function M.openAlfredPref()
-	if jit.os ~= "OSX" then
-		vim.notify("Alfred is only available on macOS.", vim.log.levels.WARN)
-		return
-	end
-	local workflowUid =
-		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
-	if not workflowUid then
-		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
-		return
-	end
-	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
-	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(
-		workflowUid
-	)
-	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
-end
-
---------------------------------------------------------------------------------
-
 ---start/stop with just one keypress & add notifications
 ---@param toggleKey string key used to trigger this function
 ---@param reg string vim register (single letter)
 function M.startOrStopRecording(toggleKey, reg)
 	local notRecording = vim.fn.reg_recording() == ""
-
 	if notRecording then
-		vim.cmd.normal { "q" .. reg, bang = true }
+		vim.cmd.normal { "q" .. reg, bang = true } -- start recording to register
+		return
+	end
+
+	local prevMacro = vim.fn.getreg(reg)
+	vim.cmd.normal { "q", bang = true }
+	local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- since the key itself is recorded, too
+	if macro ~= "" then
+		vim.fn.setreg(reg, macro)
+		local msg = vim.fn.keytrans(macro)
+		vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
 	else
-		local prevMacro = vim.fn.getreg(reg)
-		vim.cmd.normal { "q", bang = true }
-		local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- as the key itself is recorded
-		if macro ~= "" then
-			vim.fn.setreg(reg, macro)
-			local msg = vim.fn.keytrans(macro)
-			vim.notify(msg, vim.log.levels.TRACE, { title = "Recorded", icon = "󰃽" })
-		else
-			vim.fn.setreg(reg, prevMacro) -- prevent `toggleKey` filling the register
-			vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰜺" })
-		end
+		vim.fn.setreg(reg, prevMacro) -- prevent `toggleKey` filling the register
+		vim.notify("Aborted.", vim.log.levels.TRACE, { title = "Recording", icon = "󰃾" })
 	end
 end
 
@@ -153,7 +132,7 @@ function M.smartDuplicate()
 
 	-- MOVE CURSOR DOWN, AND TO VALUE/FIELD (IF EXISTS)
 	local _, luadocFieldPos = line:find("%-%-%-@%w+ ")
-	local _, valuePos = line:find("[:=][:=]? ")
+	local _, valuePos = line:find("[:=] ")
 	local targetCol = luadocFieldPos or valuePos or col
 	vim.api.nvim_win_set_cursor(0, { row + 1, targetCol })
 end
@@ -168,6 +147,26 @@ function M.spellSuggest()
 		if not selection then return end
 		vim.cmd.normal { '"_ciw' .. selection, bang = true }
 	end)
+end
+
+--------------------------------------------------------------------------------
+
+function M.openWorkflowInAlfredPrefs()
+	if jit.os ~= "OSX" then
+		vim.notify("Alfred is only available on macOS.", vim.log.levels.WARN)
+		return
+	end
+	local workflowUid =
+		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
+	if not workflowUid then
+		vim.notify("Not in an Alfred directory.", vim.log.levels.WARN)
+		return
+	end
+	-- https://www.alfredforum.com/topic/18390-get-currently-edited-workflow-uri/
+	local jxa = ('Application("com.runningwithcrayons.Alfred").revealWorkflow(%q)'):format(
+		workflowUid
+	)
+	vim.system { "osascript", "-l", "JavaScript", "-e", jxa }
 end
 
 --------------------------------------------------------------------------------
