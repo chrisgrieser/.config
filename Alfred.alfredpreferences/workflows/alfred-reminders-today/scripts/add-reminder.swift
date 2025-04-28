@@ -12,47 +12,74 @@ let when = ProcessInfo.processInfo.environment["when_to_add"]!
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+enum Priority: Int {
+	case none = 0
+	case low = 1
+	case medium = 2
+	case high = 3
+}
+
 struct ParsedResult {
 	let hour: Int?
 	let minute: Int?
 	let message: String
-	enum Priority: Int {
-		case high = 9
-		case mediumHigh = 5
-		case mediumLow = 1
-		case low = 0
-	}
+	let priority: Priority
 }
 
 func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
-	let pattern = #"(?<!\d)(\d{1,2}):(\d{2})(?!\d)"#
-	let regex = try! NSRegularExpression(pattern: pattern)
 
-	guard
-		let match = regex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg))
-	else {
-		// no time found -> use entire input as message
-		return msg.isEmpty
-			? nil : ParsedResult(hour: nil, minute: nil, message: msg)
+	if 2 == 2 {
+		print(msg)
 	}
 
-	guard
-		let hrRange = Range(match.range(at: 1), in: msg),
-		let minRange = Range(match.range(at: 2), in: msg),
-		let timeRange = Range(match.range, in: msg),
-		let hour = Int(msg[hrRange]),
-		let minute = Int(msg[minRange]),
-		(0..<24).contains(hour),
-		(0..<60).contains(minute)
-	else {
-		return nil  // Invalid time
+	guard !msg.isEmpty else { return nil }
+
+	// parse trailing exclamations for priority
+	var priority: Priority = .none
+	let exclamationPattern = #"!+$"#
+	let exclamationRegex = try! NSRegularExpression(pattern: exclamationPattern)
+
+	if let match = exclamationRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)),
+		let matchRange = Range(match.range, in: msg)
+	{
+		let bangs = msg[matchRange]
+		let bangCount = bangs.count
+
+		switch bangCount {
+		case 1: priority = .low
+		case 2: priority = .medium
+		default: priority = .high
+		}
+
+		msg.removeSubrange(matchRange)
 	}
 
-	msg.removeSubrange(timeRange)
+	// parse HH:MM for due time
+	var hour: Int? = nil
+	var minute: Int? = nil
+	let timePattern = #"(?<!\d)(\d{1,2}):(\d{2})(?!\d)"#
+	let timeRegex = try! NSRegularExpression(pattern: timePattern)
+
+	if let match = timeRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)) {
+		if let hrRange = Range(match.range(at: 1), in: msg),
+			let minRange = Range(match.range(at: 2), in: msg),
+			let timeRange = Range(match.range, in: msg),
+			let parsedHour = Int(msg[hrRange]),
+			let parsedMinute = Int(msg[minRange]),
+			(0..<24).contains(parsedHour),
+			(0..<60).contains(parsedMinute)
+		{
+			hour = parsedHour
+			minute = parsedMinute
+			msg.removeSubrange(timeRange)
+		} else {
+			return nil  // Invalid time
+		}
+	}
+
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
-
-	return msg.isEmpty ? nil : ParsedResult(hour: hour, minute: minute, message: msg)
+	return ParsedResult(hour: hour, minute: minute, message: msg, priority: priority)
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

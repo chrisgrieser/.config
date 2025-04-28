@@ -42,16 +42,17 @@ return {
 				},
 			},
 		}
-
+		local u = require("treesj.langs.utils")
+		local conditionNodes =
+			{ "tuple_expression", "equality_expression", "boolean_literal", "{" }
 		local swiftConfig = {
-			if_statement = {
-				join = {
-					space_in_brackets = true,
-					force_insert = "",
-				},
-				split = {
-					omit = { "tuple_expression", "equality_expression", "{" },
-				},
+			if_statement = u.set_preset_for_statement {
+				join = { no_insert_if = conditionNodes },
+				split = { omit = conditionNodes },
+			},
+			guard_statement = u.set_preset_for_statement {
+				join = { no_insert_if = conditionNodes },
+				split = { omit = conditionNodes },
 			},
 		}
 		opts.langs = {
