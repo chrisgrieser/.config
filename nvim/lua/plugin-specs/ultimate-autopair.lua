@@ -46,17 +46,18 @@ return {
 		config_internal_pairs = {
 			{ "'", "'", nft = { "markdown", "snacks_picker_input", "gitcommit" } }, -- used as apostrophe
 			{ '"', '"', nft = { "vim", "snacks_picker_input" } }, -- vimscript uses quotes as comments
+
+			-- disable codeblocks, see https://github.com/Saghen/blink.cmp/issues/1692
 			{
 				"`",
 				"`",
 				cond = function(_fn)
-					-- see also https://github.com/Saghen/blink.cmp/issues/1692
 					local mdCodeblock = vim.bo.ft == "markdown"
 						and vim.api.nvim_get_current_line():find("^[%s`]*$")
 					return not mdCodeblock
 				end,
 			},
-			{ "```", "```", enable = false },
+			{ "```", "```", nft = { "markdown" } },
 		},
 		-- INFO custom keys need to be "appended" to the opts as a list
 		{ "**", "**", ft = { "markdown" } }, -- bold
