@@ -30,7 +30,7 @@ local function isValidMarkName(names)
 	for _, name in pairs(names) do
 		local valid = name:find("^%u$") ~= nil
 		if not valid then
-			notify(("[%s] is not an uppercase letter."):format(names), "error")
+			notify(('"[%s]" is not an uppercase letter.'):format(names), "error")
 			return false
 		end
 	end
