@@ -148,6 +148,19 @@
     "filetype": "lua",
     "prefix": "split (gmatch)"
   },
+  "url-encode": {
+    "body": [
+      "---@param unencoded string",
+      "local function urlEncode(unencoded)",
+      "\tlocal encoded = unencoded:gsub(",
+      "\t\t\"([^%w%-_.~])\",",
+      "\t\tfunction(c) return string.format(\"%%%02X\", string.byte(c)) end",
+      "\t)",
+      "\treturn encoded",
+      "end"
+    ],
+    "prefix": "url-encode"
+  },
   "write file": {
     "body": [
       "---@param path string",

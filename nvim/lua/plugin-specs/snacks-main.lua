@@ -14,7 +14,7 @@ return {
 
 		-- modify certain notifications
 		vim.notify = function(msg, lvl, notifOpts) ---@diagnostic disable-line: duplicate-set-field intentional overwrite
-			local ignore = msg == "No code actions available"
+			local ignore = (msg == "No code actions available" and vim.bo.ft == "typescript")
 				or msg:find("^Client marksman quit with exit code 1 and signal 0.")
 			if ignore then return end
 
@@ -72,7 +72,12 @@ return {
 			function()
 				if Snacks.indent.enabled then
 					vim.g.prev_listchars = vim.opt_local.listchars:get()
-					vim.opt_local.listchars:append { tab = " ", space = "·", trail = "·", lead = "·" }
+					vim.opt_local.listchars:append {
+						tab = " ",
+						space = "·",
+						trail = "·",
+						lead = "·",
+					}
 					Snacks.indent.disable()
 				else
 					vim.opt_local.listchars = vim.g.prev_listchars
