@@ -1607,7 +1607,7 @@ to set a hotkey to show reminders due today</string>
 			<key>type</key>
 			<string>slider</string>
 			<key>variable</key>
-			<string>event_cache_duration</string>
+			<string>event_cache_duration_hours</string>
 		</dict>
 		<dict>
 			<key>config</key>

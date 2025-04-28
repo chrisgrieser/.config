@@ -190,13 +190,14 @@ function M.bufferInfo()
 	local foldexpr = vim.wo.foldexpr:find("lsp") and "LSP" or "TS"
 
 	local out = {
-		"[bufnr]     " .. vim.api.nvim_get_current_buf(),
-		"[winid]     " .. vim.api.nvim_get_current_win(),
-		"[filetype]  " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
-		"[buftype]   " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
-		"[indent]    " .. ("%s (%d)"):format(indentType, indentAmount),
-		"[folds]     " .. ("%s (%d)"):format(foldexpr, vim.wo.foldlevel),
-		"[cwd]       " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
+		"[node at pos] " .. (vim.treesitter.get_node() and vim.treesitter.get_node():type() or "n/a"),
+		"[bufnr]       " .. vim.api.nvim_get_current_buf(),
+		"[winid]       " .. vim.api.nvim_get_current_win(),
+		"[filetype]    " .. (vim.bo.filetype == "" and '""' or vim.bo.filetype),
+		"[buftype]     " .. (vim.bo.buftype == "" and '""' or vim.bo.buftype),
+		"[indent]      " .. ("%s (%d)"):format(indentType, indentAmount),
+		"[folds]       " .. ("%s (%d)"):format(foldexpr, vim.wo.foldlevel),
+		"[cwd]         " .. (vim.uv.cwd() or "nil"):gsub("/Users/%w+", pseudoTilde),
 		"",
 	}
 	if #lsps > 0 then
@@ -223,6 +224,9 @@ function M.formatWithFallback()
 			vim.cmd(vimCmd)
 		end
 		vim.lsp.buf.format()
+
+		-- FIX some LSPs trigger folding after formatting?
+		vim.defer_fn(function() vim.cmd.normal { "zv", bang = true } end, 1)
 	else
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines

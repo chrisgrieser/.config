@@ -393,21 +393,6 @@ return {
 			ui_select = true,
 			layout = "wide_with_preview", -- use this as default layout
 			layouts = { -- define available layouts
-				very_vertical = {
-					layout = {
-						box = "horizontal",
-						width = 0.5,
-						height = 0.95,
-						border = "none",
-						{
-							box = "vertical",
-							border = vim.o.winborder --[[@as "rounded"|"single"|"double"|"solid"]],
-							title = "{title} {live} {flags}",
-							{ win = "input", height = 1, border = "bottom" },
-							{ win = "list", border = "none" },
-						},
-					},
-				},
 				small_no_preview = {
 					layout = {
 						box = "horizontal",
@@ -423,8 +408,15 @@ return {
 						},
 					},
 				},
+				very_vertical = {
+					preset = "small_no_preview",
+					layout = {
+						height = 0.95,
+						width = 0.45,
+					},
+				},
 				wide_with_preview = {
-					preset = "small_no_preview", -- inherit from this preset
+					preset = "small_no_preview",
 					layout = {
 						width = 0.99,
 						[2] = { -- as second column
