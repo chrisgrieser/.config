@@ -1,7 +1,7 @@
 #!/usr/bin/env swift
 import EventKit
-import WidgetKit
 import Foundation
+import WidgetKit
 
 let eventStore = EKEventStore()
 let semaphore = DispatchSemaphore(value: 0)
@@ -16,9 +16,15 @@ struct ParsedResult {
 	let hour: Int?
 	let minute: Int?
 	let message: String
+	enum Priority: Int {
+		case high = 9
+		case mediumHigh = 5
+		case mediumLow = 1
+		case low = 0
+	}
 }
 
-func parseTimeAndMessage(from input: String) -> ParsedResult? {
+func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
 	let pattern = #"(?<!\d)(\d{1,2}):(\d{2})(?!\d)"#
 	let regex = try! NSRegularExpression(pattern: pattern)
@@ -64,7 +70,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// ──────────────────────────────────────────────────────────────────────────
 
 	// Create a new reminder
-	let parsed = parseTimeAndMessage(from: input)
+	let parsed = parseTimeAndPriorityAndMessage(from: input)
 	guard parsed != nil else {
 		print("❌ Invalid time: \"\(input)\"")
 		semaphore.signal()
