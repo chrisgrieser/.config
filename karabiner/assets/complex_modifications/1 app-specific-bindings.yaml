@@ -71,7 +71,7 @@ rules:
           - key_code: return_or_enter
         conditions:
           - type: frontmost_application_if
-            bundle_identifiers: [ com.microsoft.Word, net.highlightsapp.universal ]
+            bundle_identifiers: [com.microsoft.Word, net.highlightsapp.universal]
       - type: basic
         from: { key_code: l, modifiers: { mandatory: [command] } }
         to:
@@ -236,6 +236,13 @@ rules:
         from: { key_code: comma, modifiers: { mandatory: [command, shift] } }
         to:
           - shell_command: open 'chrome://extensions/'
+        conditions:
+          - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
+      # ctrl+c: Copy last code block (for ChatGPT)
+      - type: basic
+        from: { key_code: c, modifiers: { mandatory: [control] } }
+        to:
+          - { key_code: comma, modifiers: [command, shift] }
         conditions:
           - { type: frontmost_application_if, bundle_identifiers: [com.brave.Browser] }
       # dev tools -> element picker
