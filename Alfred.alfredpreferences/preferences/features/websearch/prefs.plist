@@ -22,7 +22,7 @@
 			<key>keyword</key>
 			<string>ud</string>
 			<key>text</key>
-			<string>Urban Dictionary: {query}</string>
+			<string>Urban Dictionary: "{query}"</string>
 			<key>url</key>
 			<string>https://www.urbandictionary.com/define.php?term={query}</string>
 		</dict>
@@ -33,7 +33,7 @@
 			<key>keyword</key>
 			<string>icon</string>
 			<key>text</key>
-			<string>macOS icons: '{query}'</string>
+			<string>macOS icons: "{query}"</string>
 			<key>url</key>
 			<string>https://macosicons.com/#/{query}</string>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>keyword</key>
 			<string>sci|anna</string>
 			<key>text</key>
-			<string>Anna's Archive: '{query}'</string>
+			<string>Anna's Archive: "{query}"</string>
 			<key>url</key>
 			<string>https://annas-archive.org/search?q={query}</string>
 		</dict>
@@ -55,7 +55,7 @@
 			<key>keyword</key>
 			<string>gif</string>
 			<key>text</key>
-			<string>Tenor gifs: '{query}'</string>
+			<string>Tenor gifs: "{query}"</string>
 			<key>url</key>
 			<string>https://tenor.com/search/{query}-gifs</string>
 		</dict>
@@ -77,7 +77,7 @@
 			<key>keyword</key>
 			<string>to</string>
 			<key>text</key>
-			<string>nyaa: {query}</string>
+			<string>nyaa: "{query}"</string>
 			<key>url</key>
 			<string>https://nyaa.si/?f=1&amp;c=1_2&amp;q={query}</string>
 		</dict>
@@ -110,20 +110,9 @@
 			<key>keyword</key>
 			<string>tt</string>
 			<key>text</key>
-			<string>Linguee: {query}</string>
+			<string>Linguee: "{query}"</string>
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
-		</dict>
-		<key>7EEFE3C6-241D-4A58-B54F-876A851BDC32</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>xkcd</string>
-			<key>text</key>
-			<string>xkcd: {query}</string>
-			<key>url</key>
-			<string>https://findxkcd.com/?xkcd%5Bquery%5D={query}</string>
 		</dict>
 		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
 		<dict>
@@ -132,7 +121,7 @@
 			<key>keyword</key>
 			<string>to</string>
 			<key>text</key>
-			<string>Kickass Torrents: {query}</string>
+			<string>Kickass Torrents: "{query}"</string>
 			<key>url</key>
 			<string>https://kickasstorrents.to/usearch/{query}</string>
 		</dict>
@@ -143,7 +132,7 @@
 			<key>keyword</key>
 			<string>icon</string>
 			<key>text</key>
-			<string>Google Images: '{query}'</string>
+			<string>Google Images: "{query}"</string>
 			<key>url</key>
 			<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
 		</dict>
@@ -169,6 +158,17 @@
 			<key>url</key>
 			<string>tel://{query}</string>
 		</dict>
+		<key>D7CDCB7A-4555-4539-AA20-55DD73693D69</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>ChatGPT: "{query}"</string>
+			<key>url</key>
+			<string>https://chatgpt.com/?q={query}</string>
+		</dict>
 		<key>E5FD4F72-0366-49A4-A5B9-3228D75B543E</key>
 		<dict>
 			<key>enabled</key>
@@ -176,7 +176,7 @@
 			<key>keyword</key>
 			<string>swift</string>
 			<key>text</key>
-			<string>Swift: '{query}'</string>
+			<string>Swift docs: "{query}"</string>
 			<key>url</key>
 			<string>https://developer.apple.com/search/?q={query}&amp;type=documentation</string>
 		</dict>
@@ -198,7 +198,7 @@
 			<key>keyword</key>
 			<string>to</string>
 			<key>text</key>
-			<string>PirateBay: {query}</string>
+			<string>PirateBay: "{query}"</string>
 			<key>url</key>
 			<string>https://thepiratebay.org/search.php?q={query}</string>
 		</dict>
@@ -209,7 +209,7 @@
 			<key>keyword</key>
 			<string>sci</string>
 			<key>text</key>
-			<string>Sci-hub: '{query}'</string>
+			<string>Sci-hub: "{query}"</string>
 			<key>url</key>
 			<string>https://sci-hub.st/{query}</string>
 		</dict>
