@@ -91,7 +91,7 @@ function ensureCacheFolderExists() {
 
 /** @param {string} path */
 function cacheIsOutdated(path) {
-	const cacheAgeThresholdMins = Number.parseInt($.getenv("event_cache_duration"));
+	const cacheAgeThresholdMins = Number.parseInt($.getenv("event_cache_duration_hours")) * 60;
 	const cacheObj = Application("System Events").aliases[path];
 	ensureCacheFolderExists();
 	if (!cacheObj.exists()) return true;
@@ -327,7 +327,7 @@ function run() {
 		// minimum of 5 seconds, so every workflow action will trigger a cache
 		// deletion https://www.alfredforum.com/topic/23042-alfred-script-filter-caching-appears-to-have-a-hard-coded-minimum-of-5-seconds/
 		// -> the performance benefit is only for when the user peeks at the
-		// reminders without actioning them. 
+		// reminders without actioning them.
 		cache: { seconds: 0, loosereload: true },
 	});
 }

@@ -37,3 +37,7 @@ plists=(
 for name in "${plists[@]}"; do
 	defaults export "$name" "$backup_path/$name.plist"
 done
+
+killall NotificationCenter
+killall Dock
+killall Finder
