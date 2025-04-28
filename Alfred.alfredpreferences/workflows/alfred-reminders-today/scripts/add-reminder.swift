@@ -12,46 +12,26 @@ let when = ProcessInfo.processInfo.environment["when_to_add"]!
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-enum Priority: Int {
-	case none = 0
-	case low = 1
-	case medium = 2
-	case high = 3
-}
-
 struct ParsedResult {
 	let hour: Int?
 	let minute: Int?
 	let message: String
-	let priority: Priority
+	let bangs: String  // string with the number of exclamation marks
 }
 
 func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
-
-	if 2 == 2 {
-		print(msg)
-	}
-
 	guard !msg.isEmpty else { return nil }
 
 	// parse trailing exclamations for priority
-	var priority: Priority = .none
-	let exclamationPattern = #"!+$"#
-	let exclamationRegex = try! NSRegularExpression(pattern: exclamationPattern)
+	var bangs = ""  // default: no priority
+	let bangPattern = #"!+$"#
+	let bangRegex = try! NSRegularExpression(pattern: bangPattern)
 
-	if let match = exclamationRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)),
+	if let match = bangRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)),
 		let matchRange = Range(match.range, in: msg)
 	{
-		let bangs = msg[matchRange]
-		let bangCount = bangs.count
-
-		switch bangCount {
-		case 1: priority = .low
-		case 2: priority = .medium
-		default: priority = .high
-		}
-
+		bangs = String(msg[matchRange])
 		msg.removeSubrange(matchRange)
 	}
 
@@ -74,12 +54,12 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 			minute = parsedMinute
 			msg.removeSubrange(timeRange)
 		} else {
-			return nil  // Invalid time
+			return nil  // invalid time
 		}
 	}
 
 	msg = msg.trimmingCharacters(in: .whitespacesAndNewlines)
-	return ParsedResult(hour: hour, minute: minute, message: msg, priority: priority)
+	return ParsedResult(hour: hour, minute: minute, message: msg, bangs: bangs)
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -103,11 +83,19 @@ eventStore.requestFullAccessToReminders { granted, error in
 		semaphore.signal()
 		return
 	}
-	let (title, hh, mm) = (parsed!.message, parsed!.hour, parsed!.minute)
+	let (title, hh, mm, bangs) = (parsed!.message, parsed!.hour, parsed!.minute, parsed!.bangs)
 	let isAllDayReminder = (hh == nil && hh == nil)
 	let reminder = EKReminder(eventStore: eventStore)
 	reminder.title = title
 	reminder.isCompleted = false
+
+	// priority
+	reminder.priority = 0  // default: no priority
+	switch bangs.count {  // values based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
+	case 1: reminder.priority = 9
+	case 2: reminder.priority = 5
+	default: reminder.priority = 1
+	}
 
 	// determine day when to add
 	let calendar = Calendar.current
@@ -159,10 +147,11 @@ eventStore.requestFullAccessToReminders { granted, error in
 	// Save
 	do {
 		try eventStore.save(reminder, commit: true)
+		var msgComponents = [title]
 		var alfredNotif = title
 		if !isAllDayReminder {
 			let minutePadded = String(format: "%02d", mm!)
-			alfredNotif = "\(hh!):\(minutePadded) — \(title)"
+			msgComponents.insert("\(hh!):\(minutePadded)", at: 0)
 		}
 		print(alfredNotif)
 	} catch {
