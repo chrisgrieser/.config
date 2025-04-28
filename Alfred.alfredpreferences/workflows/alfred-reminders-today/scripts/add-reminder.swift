@@ -23,9 +23,9 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 	var msg = input.trimmingCharacters(in: .whitespacesAndNewlines)
 	guard !msg.isEmpty else { return nil }
 
-	// parse trailing exclamations for priority
+	// parse leading/trailing bangs for priority
 	var bangs = ""  // default: no priority
-	let bangPattern = #"!+$"#
+	let bangPattern = #"^!+|!+$"#
 	let bangRegex = try! NSRegularExpression(pattern: bangPattern)
 
 	if let match = bangRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)),
