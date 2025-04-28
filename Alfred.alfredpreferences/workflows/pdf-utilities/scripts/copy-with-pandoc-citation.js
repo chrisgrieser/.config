@@ -9,9 +9,17 @@ app.includeStandardAdditions = true;
 function run(argv) {
 	const selection = (argv[0] || "")
 		.replace(/[\n\r]/g, " ") // remove line breaks
-		.replaceAll("- ", "") // remove hyphenation
+		.replace(/(\w)- /g, "$1") // remove hyphenation
 		.replace(/["’]/g, "'") // consistent single quotes
 		.trim();
+	if (!selection) return "No selection";
+	const withoutCitation = $.getenv("without_citation") === "true";
+	if (withoutCitation) {
+		app.setTheClipboardTo(selection);
+		return "Copied."; // Alfred notification
+	}
+
+	//───────────────────────────────────────────────────────────────────────────
 
 	const pdfWinTitle = Application("System Events").processes.Highlights?.windows[0]?.name();
 	// e.g.: "YlijokiMantyla2003_Conflicting Time Perspectives in Academic Work.pdf – Page 1 of 24"
@@ -21,7 +29,7 @@ function run(argv) {
 
 	if (!citekey || !currentPage) {
 		app.setTheClipboardTo(selection);
-		return "Just selection copied: file without citekey";
+		return "Copied just selection: file without citekey";
 	}
 
 	const libraryPath = $.getenv("bibtex_library_path");
@@ -30,7 +38,7 @@ function run(argv) {
 	);
 	if (!entry) {
 		app.setTheClipboardTo(selection);
-		return `Just selection copied: "${citekey}" not found in BibTeX library.`;
+		return `Copied just selection: "${citekey}" not found in BibTeX library.`;
 	}
 
 	// e.g.: pages = {55--78},
@@ -38,8 +46,6 @@ function run(argv) {
 	const trueCurrentPage = pageInPdf + firstTruePage - 1;
 	const citation = `@${citekey}, p. ${trueCurrentPage}`;
 
-	const toCopy = selection ? `"${selection}" [${citation}]` : `[${citation}]`;
-	app.setTheClipboardTo(toCopy);
-
+	app.setTheClipboardTo(`"${selection}" [${citation}]`);
 	return citation; // for Alfred notification
 }

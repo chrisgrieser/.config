@@ -62,7 +62,7 @@ M.wf_scripteditor = wf
 			hs.eventtap.keyStroke({ "cmd" }, "v")
 			hs.osascript.javascript('Application("Script Editor").documents()[0].checkSyntax()')
 
-		-- if it's an AppleScript Dictionary, just resize window
+		--if it's an AppleScript Dictionary, just resize window
 		elseif newWin:title():find("%.sdef$") then
 			wu.moveResize(newWin, wu.middleHalf)
 		end
@@ -108,12 +108,17 @@ M.wf_mimestream = wf.new("Mimestream")
 --------------------------------------------------------------------------------
 -- MASTODON (IVORY)
 
-M.aw_mastoDeavtivated = aw.new(function(appName, event, masto)
-	if appName == "Ivory" and event == aw.deactivated then
+M.aw_masto = aw.new(function(appName, event, masto)
+	if appName ~= "Ivory" then return end
+
+	if event == aw.deactivated then
 		-- close any media windows
-		local mediaWin = masto:findWindow("Ivory")
-		local frontApp = hs.application.frontmostApplication():name()
-		if mediaWin and frontApp ~= "Alfred" then hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) end
+		local mediaWinName = "Ivory"
+		local isMediaWin = masto:mainWindow():title() == mediaWinName
+		local frontNotAlfred = hs.application.frontmostApplication():name() ~= "Alfred"
+		if #masto:allWindows() > 1 and isMediaWin and frontNotAlfred then
+			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- hotkey, since `:close()` doesn't work
+		end
 
 		-- back to home & scroll up
 		if #masto:allWindows() == 1 then

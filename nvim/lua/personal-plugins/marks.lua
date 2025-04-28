@@ -92,13 +92,12 @@ function M.cycleMarks()
 		.iter(M.config.marks)
 		:map(function(name) return getMark(name) end) -- name -> Markobj
 		:filter(function(m) return m ~= nil end) -- only marks that are set
-		:totable()
+		:totable() --[[@as Markobj[] ]]
 
 	if #marksSet == 0 then
 		notify("No mark has been set.")
 		return
-	end
-	if #marksSet == 1 and cursorIsAtMark(marksSet[1]) then
+	elseif #marksSet == 1 and cursorIsAtMark(marksSet[1]) then
 		notify("Already at the only mark set.")
 		return
 	end
