@@ -104,7 +104,7 @@ function run() {
 
 			// URLs
 			const optionsUrl = `chrome-extension://${id}/${optionsPath}`;
-			const webstoreUrl = "https://chrome.google.com/webstore/detail/" + id;
+			const webstoreUrl = "https://chromewebstore.google.com/detail/" + id;
 			const localFolder = extensionPath + "/" + id;
 
 			// emoji/icon
