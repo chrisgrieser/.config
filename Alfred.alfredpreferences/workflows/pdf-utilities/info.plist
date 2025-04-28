@@ -504,7 +504,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>📋 Copied citation</string>
+				<string>📋 Copied</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
