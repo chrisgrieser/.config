@@ -160,6 +160,7 @@ function unshallow {
 }
 
 function delete_git_tag {
+	git fetch --tags # fetch tags, in case clone is shallow
 	git tag --delete "$1" && git push origin --delete "$1"
 }
 
