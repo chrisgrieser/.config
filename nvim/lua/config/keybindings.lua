@@ -53,10 +53,10 @@ keymap("n", "gk", function() require("personal-plugins.misc").goIndent("up") end
 -- MARKS
 do
 	require("personal-plugins.marks").setup {
-		marks = { "A", "B", "C", "D", "E" },
+		marks = { "A", "B", "C", "D" },
 		signs = {
 			hlgroup = "StandingOut",
-			icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋", E = "󰬌" },
+			icons = { A = "󰬈", B = "󰬉", C = "󰬊", D = "󰬋" },
 		},
 	}
 	local leader = "<leader>m"
