@@ -28,6 +28,7 @@ local config = {
 		},
 		mostChangedFiles = {
 			"/info.plist", -- Alfred
+			"/prefs.plist", -- Alfred
 			require("lazy.core.config").options.lockfile,
 		},
 	},
