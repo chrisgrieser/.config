@@ -12,7 +12,6 @@ app.includeStandardAdditions = true;
  * @property {string} listColor
  * @property {boolean} isCompleted
  * @property {string} dueDate
- * @property {string} creationDate
  * @property {boolean} isAllDay
  * @property {boolean} hasRecurrenceRules
  * @property {number} priority
