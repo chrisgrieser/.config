@@ -150,17 +150,17 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 		// notification for Alfred
 		var msgComponents: [String] = []
-		if !isAllDayReminder {
-			let minutesPadded = String(format: "%02d", mm!)
-			msgComponents.append("\(hh!):\(minutesPadded)")
-		}
 		if !bangs.isEmpty {
 			let shortBangs = String(bangs.prefix(3))  // max 3 is valid as priority
 			msgComponents.append(shortBangs)
 		}
+		if !isAllDayReminder {
+			let minutesPadded = String(format: "%02d", mm!)
+			msgComponents.append("\(hh!):\(minutesPadded)")
+		}
 		msgComponents.append("\"\(title)\"")
 
-		let alfredNotif = msgComponents.joined(separator: "   ·   ")
+		let alfredNotif = msgComponents.joined(separator: "     ")
 		print(alfredNotif)
 	} catch {
 		print("❌ Failed to create reminder: \(error.localizedDescription)")
