@@ -13,6 +13,12 @@ export HOMEBREW_NO_ENV_HINTS=1
 device_name=$(scutil --get ComputerName | cut -d" " -f2-)
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/.installed-apps-and-packages/Brewfile_$device_name.txt"
 
+# extra update for the Obsidian, installer version, cause brew won't update as
+# the main app is self-upgrading
+export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian"
+
+#───────────────────────────────────────────────────────────────────────────────
+
 alias bh='brew home'
 alias bi='brew install'
 alias br='brew reinstall'
@@ -45,11 +51,6 @@ function update() {
 	brew update
 	brew upgrade
 	brew cleanup
-
-	# manually update for installer version, cause brew won't update as the main
-	# app is self-upgrading
-	echo
-	brew upgrade obsidian
 
 	_print-section "Mac App Store"
 	if [[ -n $(mas outdated) ]] ; then
