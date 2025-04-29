@@ -10,8 +10,7 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-device_name=$(scutil --get ComputerName | cut -d" " -f2-)
-export HOMEBREW_BUNDLE_FILE="$HOME/.config/.installed-apps-and-packages/Brewfile_$device_name.txt"
+export HOMEBREW_BUNDLE_FILE="$HOME/.config/.Brewfile"
 
 # extra update for the Obsidian, installer version, cause brew won't update as
 # the main app is self-upgrading
@@ -47,10 +46,13 @@ function _print-section() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	_print-section "Homebrew" 1
-	brew update
-	brew upgrade
-	brew cleanup
+	# DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
+	_print-section "Homebrew Bundle" 1
+	brew bundle check || brew bundle install # install missing packages
+
+	_print-section "Homebrew Updates"
+	brew update # update homebrew itself
+	brew upgrade # update all packages
 
 	_print-section "Mac App Store"
 	if [[ -n $(mas outdated) ]] ; then
@@ -86,6 +88,4 @@ function listall() {
 
 	_print-section "mas list"
 	mas list
-
-	brew bundle dump --force && print "\n\e[0;38;5;247mBrewfile saved.\e[0m"
 }
