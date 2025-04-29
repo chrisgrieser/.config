@@ -74,7 +74,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+				<string>018BB8E9-5550-4143-94C4-73F82AB1C970</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -84,11 +84,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</string>
+				<string>A1836C85-7289-432C-873E-7FA391786595</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>⌘: Lucky Search</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -150,35 +150,15 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>102</integer>
+				<integer>0</integer>
 				<key>script</key>
-				<string>#!/usr/bin/env zsh
-# INFO this scripts basically replaces https://brettterpstra.com/projects/searchlink/
-#───────────────────────────────────────────────────────────────────────────────
-
-query="$1"
-query_enc=$(osascript -l JavaScript -e "encodeURIComponent('$query')")
-region=${region:-"us-en"} # Alfred variable
-ddgr_html_url="https://html.duckduckgo.com/html?q=$query_enc&amp;kl=$region"
-
-first_result=$(
-	curl --silent "$ddgr_html_url" |
-		grep --after-context=1 --max-count=1 "result__url" |
-		tail -n1 |
-		sed -E 's/^ *| *$//g'
-)
-
-if [[ -z "$first_result" ]]; then
-	echo -n "No response from DuckDuckGo."
-else
-	echo -n "[$query](http://$first_result)" # paste via Alfred
-fi</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>./scripts/searchlink.sh</string>
 				<key>type</key>
-				<integer>5</integer>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -221,23 +201,31 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
 				<string></string>
-				<key>searcher</key>
-				<integer>1635215215</integer>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./scripts/calculate-search-frequency.sh</string>
+				<key>type</key>
+				<integer>8</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.systemwebsearch</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E0294F25-25E9-4D75-A042-047FE2AF1D91</string>
+			<string>018BB8E9-5550-4143-94C4-73F82AB1C970</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>text</key>
-				<string>Google: {query}</string>
+				<string>Google Web: {query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
@@ -258,12 +246,12 @@ fi</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://duckduckgo.com/?q={query}+!ducky&amp;kl=$region</string>
+				<string>https://www.google.com/search?udm=14&amp;q={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</string>
+			<string>A1836C85-7289-432C-873E-7FA391786595</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -319,7 +307,7 @@ fi</string>
 				<key>createintermediatefolders</key>
 				<true/>
 				<key>filename</key>
-				<string>{var:search_logfile}</string>
+				<string>{var:technews_search_logfile}</string>
 				<key>filetext</key>
 				<string>- {isodate:yyyy-MM-dd HH:mm} – {query}</string>
 				<key>ignoredynamicplaceholders</key>
@@ -343,6 +331,15 @@ fi</string>
 Created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
+		<key>018BB8E9-5550-4143-94C4-73F82AB1C970</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>165</real>
+		</dict>
 		<key>0AD1A926-80B8-4274-9DFF-10183BF36867</key>
 		<dict>
 			<key>colorindex</key>
@@ -368,9 +365,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>tech news search</string>
 			<key>xpos</key>
-			<real>35</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>465</real>
+			<real>550</real>
 		</dict>
 		<key>72B66895-6978-456A-9556-C77F4EBC15BA</key>
 		<dict>
@@ -379,9 +376,9 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>log the search</string>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>535</real>
+			<real>620</real>
 		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
@@ -394,32 +391,36 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>A1836C85-7289-432C-873E-7FA391786595</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>google with udm=14
+
+https://udm14.com/</string>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>295</real>
+		</dict>
 		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>230</real>
 		</dict>
 		<key>D272D1A3-9CA0-40B1-BB24-FDC428E10728</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>6</integer>
 			<key>xpos</key>
-			<real>245</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>415</real>
-		</dict>
-		<key>E0294F25-25E9-4D75-A042-047FE2AF1D91</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>160</real>
+			<real>500</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
@@ -431,17 +432,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>475</real>
 			<key>ypos</key>
 			<real>15</real>
-		</dict>
-		<key>FCCFADF4-51AA-4D3C-A46C-96B5B1379397</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
-			<key>note</key>
-			<string>ducky search</string>
-			<key>xpos</key>
-			<real>245</real>
-			<key>ypos</key>
-			<real>275</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -465,7 +455,28 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>type</key>
 			<string>filepicker</string>
 			<key>variable</key>
-			<string>search_logfile</string>
+			<string>technews_search_logfile</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string>logfolder</string>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search log folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>search_log_folder</string>
 		</dict>
 	</array>
 	<key>version</key>
