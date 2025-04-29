@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "4/25/2025, 3:43:24 PM",
-	"time": 1745588604877,
+	"@time": "4/29/2025, 11:37:10 AM",
+	"time": 1745919430922,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -53,6 +53,10 @@
 		{
 			"passKeys": "",
 			"pattern": ":https://app.diagrams.net/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://chatgpt.com/"
 		}
 	],
 	"extAllowList": [

@@ -47,7 +47,7 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 
 	// Adjust the ranges by reducing weights for differences
 	let brownDiff = 2.0 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
-	let whiteDiff = 0.7 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
+	let whiteDiff = 0.9 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
 	let blackDiff = 0.7 * (r + g + b)  // more range
 
 	let diffs = [
@@ -107,6 +107,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		: eventStore.predicateForIncompleteReminders(
 			withDueDateStarting: nil, ending: nil, calendars: selectedCalendars)
 
+
 	eventStore.fetchReminders(matching: predicate) { reminders in
 		guard let reminders = reminders else {
 			print("[]")  // empty json array
@@ -116,8 +117,25 @@ eventStore.requestFullAccessToReminders { granted, error in
 
 		let formatter = ISO8601DateFormatter()
 
+		let calendar = Calendar.current
+		let now = Date()
+		guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now)) else {
+			print("[]")
+			semaphore.signal()
+			return
+		}
+
 		// DOCS https://developer.apple.com/documentation/eventkit/ekreminder/
-		let reminderData = reminders.map { reminder in
+		let reminderData = reminders
+			.filter { reminder in
+				// Filter reminders with due date tomorrow or later
+				if let components = reminder.dueDateComponents,
+				   let dueDate = calendar.date(from: components) {
+					return dueDate >= tomorrow
+				}
+				return false
+			}
+			.map { reminder in
 			let components = reminder.dueDateComponents
 
 			// normalize based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
@@ -156,6 +174,7 @@ eventStore.requestFullAccessToReminders { granted, error in
 		}
 		semaphore.signal()
 	}
+  
 }
 
 _ = semaphore.wait(timeout: .distantFuture)
