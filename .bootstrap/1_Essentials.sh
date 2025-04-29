@@ -1,13 +1,18 @@
-# INFO 
-# this file assumes that the iCloud folder is already in place
-#───────────────────────────────────────────────────────────────────────────────
+sudo -v # ask for credentials upfront
+setopt INTERACTIVE_COMMENTS # for copy-pasting
 
-# ask for credentials upfront
-sudo -v
-setopt INTERACTIVE_COMMENTS
 dotfolder="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder"
+if [[ ! -d "$dotfolder" ]]; then
+	echo "No folder named 'Dotfolder' found in iCloud."
+	return 1
+fi
 
 #───────────────────────────────────────────────────────────────────────────────
+
+echo "Enter a name for this device such as 'Chris iMac Home'. It is also used for the Brewfile."
+echo "Name: "
+read -r new_name
+sudo scutil --set ComputerName "$new_name"
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

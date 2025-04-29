@@ -65,6 +65,7 @@ function run() {
 		let type = "";
 		if (name.startsWith(".z")) type = "zsh";
 		else if (name === "Justfile") type = "justfile";
+		else if (name === "Brewfile") type = "brewfile";
 		else if (name === ".ignore" || name === ".gitignore") type = "ignore";
 		else if (name.slice(1).includes(".")) type = name.split(".").pop() || ""; // default: extension
 		else type = "blank" // if no extension
