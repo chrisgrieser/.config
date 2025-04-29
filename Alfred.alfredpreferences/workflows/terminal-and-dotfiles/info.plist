@@ -194,7 +194,7 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>focusedappvariable</key>
-				<false/>
+				<true/>
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
