@@ -6,6 +6,7 @@ return {
 			["README.md"] = { glyph = "" },
 			[".ignore"] = { glyph = "󰈉", hl = "MiniIconsGrey" },
 			["pre-commit"] = { glyph = "󰊢" },
+			["Brewfile"] = { glyph = "", hl = "MiniIconsYellow" },
 		},
 		extension = {
 			["d.ts"] = { hl = "MiniIconsRed" }, -- distinguish `.d.ts` from `.ts`
