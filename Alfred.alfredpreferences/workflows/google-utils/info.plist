@@ -8,6 +8,19 @@
 	<string>❇️</string>
 	<key>connections</key>
 	<dict>
+		<key>018BB8E9-5550-4143-94C4-73F82AB1C970</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5A99BB0E-CA2A-4589-B787-531546EBFE12</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0AD1A926-80B8-4274-9DFF-10183BF36867</key>
 		<array>
 			<dict>
@@ -201,6 +214,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>🔍 Searches done</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5A99BB0E-CA2A-4589-B787-531546EBFE12</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -368,6 +402,13 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<real>30</real>
 			<key>ypos</key>
 			<real>550</real>
+		</dict>
+		<key>5A99BB0E-CA2A-4589-B787-531546EBFE12</key>
+		<dict>
+			<key>xpos</key>
+			<real>395</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>72B66895-6978-456A-9556-C77F4EBC15BA</key>
 		<dict>
