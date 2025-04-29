@@ -10,7 +10,7 @@ export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-export HOMEBREW_BUNDLE_FILE="$HOME/.config/.Brewfile"
+export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
 
 # extra update for the Obsidian, installer version, cause brew won't update as
 # the main app is self-upgrading
@@ -47,15 +47,14 @@ function _print-section() {
 
 function update() {
 	# DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
-	_print-section "Homebrew Bundle" 1
-	brew bundle check || brew bundle install # install missing packages
-
-	_print-section "Homebrew Updates"
-	brew update # update homebrew itself
-	brew upgrade # update all packages
+	_print-section "Homebrew" 1
+	brew bundle check || brew bundle install --no-upgrade # install missing packages
+	brew bundle cleanup --force                           # remove unused packages
+	brew update                                           # update homebrew itself
+	brew upgrade                                          # update all packages
 
 	_print-section "Mac App Store"
-	if [[ -n $(mas outdated) ]] ; then
+	if [[ -n $(mas outdated) ]]; then
 		mas upgrade
 	else
 		echo "No Mac App Store updates available."
@@ -80,8 +79,11 @@ function listall() {
 	_print-section "brew taps"
 	brew tap | rs
 
-	_print-section "brew leaves"
-	brew leaves | rs
+	_print-section "brew leaves --installed-as-dependency"
+	brew leaves --installed-as-dependency | rs
+
+	_print-section "brew leaves --installed-on-request"
+	brew leaves --installed-on-request | rs
 
 	_print-section "brew list --casks"
 	brew list --casks
