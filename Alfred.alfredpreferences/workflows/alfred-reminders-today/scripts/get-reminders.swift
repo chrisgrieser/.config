@@ -140,14 +140,14 @@ eventStore.requestFullAccessToReminders { granted, error in
 			.filter { rem in
 				// 1. not completed & due before tomorrow 
 				// 2. completed & due today (filtered above via predicate)
-				// 3. no due date & not completed & user enabled showing no due date reminders
+				// 3. no due date & not completed (if user enabled showing no due date reminders)
 				let dueDate = rem.dueDateComponents?.date
 				if dueDate == nil { return includeNoDueDate && !rem.isCompleted }
 				if rem.isCompleted { return dueDate! >= today && dueDate! < tomorrow }
 				return dueDate! < tomorrow
 			}
 			.sorted { a, b in
-				// by priority, then due date
+				// 1. by priority, 2. by due time, (3. by cdate, but that's default sorting)
 				let aPrio = normalizePriority(a)
 				let bPrio = normalizePriority(b)
 				if aPrio != bPrio { return aPrio > bPrio }
@@ -155,7 +155,6 @@ eventStore.requestFullAccessToReminders { granted, error in
 				let rhsDate = b.dueDateComponents?.date ?? Date.distantFuture
 				return lhsDate < rhsDate
 			}
-
 			.map { rem in
 				let components = rem.dueDateComponents
 
