@@ -29,12 +29,6 @@ app.includeStandardAdditions = true;
  * @property {boolean} hasRecurrenceRules
  */
 
-const isToday = (/** @type {Date?} */ aDate) => {
-	if (!aDate) return false;
-	const today = new Date();
-	return today.toDateString() === aDate.toDateString();
-};
-
 /**
  * @param {Date} absDate
  * @return {string} relative date
@@ -118,7 +112,6 @@ function writeToFile(filepath, text) {
 function run() {
 	const showCompleted =
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
-	const includeNoDuedate = $.getenv("include_no_duedate") === "1";
 	const includeAllLists = $.getenv("include_all_lists") === "1";
 	const showEvents = $.getenv("show_events") === "1";
 
@@ -140,26 +133,9 @@ function run() {
 		return JSON.stringify({ items: [{ title: errmsg, valid: false }] });
 	}
 
-	const remindersFiltered = remindersJson
-		.filter((rem) => {
-			const dueDate = rem.dueDate ? new Date(rem.dueDate) : null;
-			const openNoDueDate = includeNoDuedate && !rem.dueDate && !rem.isCompleted;
-			const openAndDueBeforeToday = dueDate && !rem.isCompleted && dueDate < endOfToday;
-			const completedAndDueToday = showCompleted && rem.isCompleted && isToday(dueDate);
-			return openAndDueBeforeToday || completedAndDueToday || openNoDueDate;
-		})
-		.sort((a, b) => {
-			// 1. by priority, 2. by due date, 3. by creation date
-			const prioDiff = b.priority - a.priority;
-			if (prioDiff !== 0) return prioDiff;
-			const dueTimeDiff = +new Date(a.dueDate) - +new Date(b.dueDate);
-			if (dueTimeDiff !== 0) return dueTimeDiff;
-			return +new Date(a.creationDate) - +new Date(b.creationDate);
-		});
-
 	/** @type {AlfredItem[]} */
 	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
-	const reminders = remindersFiltered.map((rem) => {
+	const reminders = remindersJson.map((rem) => {
 		const body = rem.notes || "";
 		const content = (rem.title + "\n" + body).trim();
 		const [url] = content.match(urlRegex) || [];
@@ -195,7 +171,7 @@ function run() {
 				title: rem.title,
 				notificationTitle: rem.isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				showCompleted: showCompleted.toString(), // keep "show completed" state
-				keepOpen: (remindersFiltered.length > 1).toString(),
+				keepOpen: (remindersJson.length > 1).toString(),
 				mode: "toggle-completed",
 			},
 			mods: {

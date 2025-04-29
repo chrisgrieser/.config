@@ -90,11 +90,11 @@ eventStore.requestFullAccessToReminders { granted, error in
 	reminder.isCompleted = false
 
 	// priority
-	reminder.priority = 0  // default: no priority
 	switch bangs.count {  // values based on RFC 5545, which Apple uses https://www.rfc-editor.org/rfc/rfc5545.html#section-3.8.1.9
 	case 1: reminder.priority = 9
 	case 2: reminder.priority = 5
-	default: reminder.priority = 1
+	case 3: reminder.priority = 1
+	default: reminder.priority = 0
 	}
 
 	// determine day when to add
