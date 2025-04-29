@@ -38,7 +38,7 @@ func mapCGColorToEmoji(_ cgColor: CGColor) -> String {
 
 	// Adjust the ranges by reducing weights for differences
 	let brownDiff = 2.0 * (abs(r - 0.6) + abs(g - 0.4) + abs(b - 0.2))  // less range
-	let whiteDiff = 0.7 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
+	let whiteDiff = 0.9 * (abs(r - 1.0) + abs(g - 1.0) + abs(b - 1.0))  // more range
 	let blackDiff = 0.7 * (r + g + b)  // more range
 
 	let diffs = [
