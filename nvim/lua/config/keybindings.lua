@@ -126,7 +126,7 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- u
 --------------------------------------------------------------------------------
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since using nvim default
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = nil }) -- remap, since using nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })
@@ -442,6 +442,17 @@ keymap("n", "<leader>rq", function()
 	local updatedLine = line:gsub("[\"']", function(q) return (q == [["]] and [[']] or [["]]) end)
 	vim.api.nvim_set_current_line(updatedLine)
 end, { desc = " Switch quotes in line" })
+
+---@param use "spaces"|"tabs"
+local function retabber(use)
+	vim.bo.expandtab = use == "spaces"
+	vim.bo.shiftwidth = 2
+	vim.bo.tabstop = 3
+	vim.cmd.retab { bang = true }
+	vim.notify("Now using " .. use, nil, { title = ":retab", icon = "󰌒" })
+end
+keymap("n", "<leader>r<Tab>", function() retabber("tabs") end, { desc = "󰌒 Use tabs" })
+keymap("n", "<leader>r<Space>", function() retabber("spaces") end, { desc = "󱁐 Use spaces" })
 
 --------------------------------------------------------------------------------
 

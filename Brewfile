@@ -23,8 +23,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-brew "felixkratz/formulae/sketchybar"
-tap "felixkratz/formulae"
+brew "felixkratz/formulae/sketchybar", restart_service: true
 
 cask "alfred"
 cask "alt-tab"
@@ -41,6 +40,7 @@ cask "obsidian", greedy: true
 cask "replacicon"
 cask "slack"
 cask "wezterm"
+cask "zoom"
 
 mas "Folder Preview", id: 6698876601
 mas "Highlights", id: 1498912833
@@ -49,15 +49,20 @@ mas "Peek", id: 1554235898
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# device-specific
-# brew "hyperfine" if system "scutil", "--get", "ComputerName", "|", "grep", "Home"
-brew "hyperfine" if system "false"
-brew "spotify_player"
-cask "anki"
-cask "bettertouchtool"
-cask "catch"
-cask "cleanshot"
-cask "iina"
-cask "steam"
-cask "transmission"
-cask "zoom"
+# DEVICE-SPECIFIC INSTALLS
+if system("scutil --get ComputerName | grep -q 'Home'")
+  cask "anki"
+  cask "bettertouchtool"
+  cask "catch"
+  brew "spotify_player"
+  cask "iina"
+  cask "steam"
+	cask "transmission"
+	cask "cleanshot"
+elsif system("scutil --get ComputerName | grep -q 'Office'")
+	cask "cleanshot"
+elsif system("scutil --get ComputerName | grep -q 'Mother'")
+	cask "iina"
+	cask "steam"
+	cask "transmission"
+end
