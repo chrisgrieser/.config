@@ -64,9 +64,6 @@ function relativeDate(absDate) {
 const urlRegex =
 	/\w{3,}:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=?/&]{1,256}?\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/;
 
-/** @type {Intl.DateTimeFormatOptions} */
-const timeFmt = { hour: "2-digit", minute: "2-digit", hour12: false };
-
 function ensureCacheFolderExists() {
 	const finder = Application("Finder");
 	const cacheDir = $.getenv("alfred_workflow_cache");
@@ -113,6 +110,9 @@ function run() {
 		$.NSProcessInfo.processInfo.environment.objectForKey("showCompleted").js === "true";
 	const includeAllLists = $.getenv("include_all_lists") === "1";
 	const showEvents = $.getenv("show_events") === "1";
+	const hour12 = $.getenv("hour_12_format") === "1";
+	/** @type {Intl.DateTimeFormatOptions} */
+	const timeFmt = { hour: "numeric", minute: "numeric", hour12: hour12 };
 
 	//───────────────────────────────────────────────────────────────────────────
 

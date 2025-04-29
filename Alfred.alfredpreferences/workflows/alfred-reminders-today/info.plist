@@ -519,7 +519,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/select-reminders.js</string>
 				<key>subtext</key>
-				<string>Show reminders due today {var:reminder_list}</string>
+				<string>Show reminders due today</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -1617,6 +1617,25 @@ to set a hotkey to show reminders due today</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>use 12 hour time</string>
+			</dict>
+			<key>description</key>
+			<string>displays "8:00 PM" instead of "20:00"</string>
+			<key>label</key>
+			<string>Time format</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>hour_12_format</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>rem</string>
 				<key>placeholder</key>
 				<string>rem</string>
@@ -1699,7 +1718,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.4.1</string>
+	<string>3.4.2</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
