@@ -30,10 +30,10 @@ alias depending_on='brew uses --installed --recursive'
 # $1: count of formulae/casks to list, defaults to 6
 function recent_updates() {
 	local count=${1:-10}
-	_print-section "Recently updated Formulae"
+	_print-section "Recently updated formulae"
 	brew list -t --formulae | head -n"$count" | rs
 
-	_print-section "Recently updated Casks"
+	_print-section "Recently updated casks"
 	brew list -t --casks | head -n"$count" | rs
 }
 
@@ -46,15 +46,13 @@ function _print-section() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	# DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
-	_print-section "brew update" "first"
-	brew update                                        # update homebrew itself
+	brew update # update homebrew itself
 	_print-section "brew bundle install"
 	brew bundle check --verbose || brew bundle install # install missing packages
 	_print-section "brew bundle cleanup"
-	brew bundle cleanup --force --zap                  # remove unused packages
+	brew bundle cleanup --force --zap # remove unused packages
 	_print-section "brew upgrade"
-	brew upgrade                                       # update all packages
+	brew upgrade
 	_print-section "Mac App Store"
 	mas upgrade
 

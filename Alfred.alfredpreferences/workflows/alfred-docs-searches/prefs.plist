@@ -36,6 +36,8 @@
 	<string>lua</string>
 	<key>keyword_21</key>
 	<string>hs</string>
+	<key>keyword_23</key>
+	<string>jq</string>
 	<key>use_source_page_if_available</key>
 	<true/>
 </dict>

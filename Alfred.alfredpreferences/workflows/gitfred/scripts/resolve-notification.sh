@@ -38,6 +38,10 @@ fi
 
 if [[ "$mode" == "open" ]]; then
 	open "$github_url"
+	if [[ "$github_url" == "https://github.com/notifications" ]]; then
+		echo "Opening notification inbox at GitHub instead."
+		return 1
+	fi
 elif [[ "$mode" == "copy" ]]; then
 	if [[ -z "$github_url" ]]; then
 		echo "Error: No URL found for notification."

@@ -1,4 +1,0 @@
-set quiet := true
-
-compile:
-    zsh ./create_stylelint_config.sh
