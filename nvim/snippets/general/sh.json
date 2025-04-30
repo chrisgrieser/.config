@@ -14,7 +14,7 @@
     "prefix": "device name"
   },
   "check if dark mode (macOS)": {
-    "body": "defaults read -g AppleInterfaceStyle &>/dev/null; && echo 'isDark'",
+    "body": "defaults read -g AppleInterfaceStyle &> /dev/null && echo 'isDark'",
     "prefix": "check if dark mode (macOS)"
   },
   "check if in git repo": {

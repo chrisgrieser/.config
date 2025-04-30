@@ -14,8 +14,9 @@ export HOMEBREW_BUNDLE_NO_UPGRADE=1 # brew bundle install does not upgrade
 # the main app is self-upgrading
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian"
 
+export HOMEBREW_COLOR=1 # force color output even for tty
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ENV_HINTS=""
+export HOMEBREW_NO_ENV_HINTS=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -27,19 +28,10 @@ alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-# $1: count of formulae/casks to list, defaults to 6
-function recent_updates() {
-	local count=${1:-10}
-	_print-section "Recently updated formulae"
-	brew list -t --formulae | head -n"$count" | rs
-
-	_print-section "Recently updated casks"
-	brew list -t --casks | head -n"$count" | rs
-}
-
 function _print-section() {
 	[[ "$2" != "first" ]] && echo
-	print "\e[1;30m\e[1;44m$1\e[0m"
+	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
+	print "$fg\e[1;44m $1 \e[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -64,14 +56,14 @@ function update() {
 	if ! brew outdated; then
 		brew upgrade
 	else
-		echo "All packages already up to date."
+		echo "All packages already up-to-date."
 	fi
 
 	_print-section "mas upgrade"
 	if ! mas outdated; then
 		mas upgrade
 	else
-		echo "All packages already up to date."
+		echo "All packages already up-to-date."
 	fi
 
 	# sketchybar restart for new permissions
@@ -102,4 +94,14 @@ function listall() {
 
 	_print-section "mas list"
 	mas list
+}
+
+# $1: count of formulae/casks to list
+function recent_updates() {
+	local default_count=10
+	local count=${1:-$default_count}
+	_print-section "Recently updated formulae"
+	brew list -t --formulae | head -n"$count" | rs
+	_print-section "Recently updated casks"
+	brew list -t --casks | head -n"$count" | rs
 }
