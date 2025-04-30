@@ -46,17 +46,21 @@ function _print-section() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
+	_print-section "brew update" "first"
 	brew update # update homebrew itself
+
 	_print-section "brew bundle install"
 	brew bundle check --verbose || brew bundle install # install missing packages
+
 	_print-section "brew bundle cleanup"
 	brew bundle cleanup --force --zap # remove unused packages
+
 	_print-section "brew upgrade"
 	brew upgrade
-	_print-section "Mac App Store"
+
+	_print-section "mas upgrade"
 	mas upgrade
 
-	# FINISH
 	# sketchybar restart for new permissions
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
@@ -65,7 +69,7 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info & doctor" 1
+	_print-section "brew info & doctor" "first"
 	brew info
 	brew doctor
 
@@ -74,9 +78,6 @@ function listall() {
 
 	_print-section "brew taps"
 	brew tap | rs
-
-	_print-section "brew leaves --installed-as-dependency"
-	brew leaves --installed-as-dependency | rs
 
 	_print-section "brew leaves --installed-on-request"
 	brew leaves --installed-on-request | rs

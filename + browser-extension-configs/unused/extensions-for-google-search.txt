@@ -9,6 +9,3 @@ https://chromewebstore.google.com/detail/cohamjploocgoejdfanacfgkhjkhdkek
 
 ublacklist 
 https://chromewebstore.google.com/detail/pncfbmialoiaghdehhbnbhkkgmjanfhe
-
-violentmonkey 
-https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag

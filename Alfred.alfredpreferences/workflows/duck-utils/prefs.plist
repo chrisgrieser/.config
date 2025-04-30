@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>search_log_folder</key>
-	<string>/Users/chrisgrieser/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/google-search-log/</string>
+	<string>~/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/search-log</string>
 	<key>technews_search_logfile</key>
 	<string>/Users/chrisgrieser/Vaults/phd-data-analysis/Method/🔍 Technews Search Log.md</string>
 </dict>

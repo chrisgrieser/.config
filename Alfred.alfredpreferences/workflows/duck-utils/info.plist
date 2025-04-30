@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.chris-grieser.ddgr</string>
+	<string>de.chris-grieser.duck-utils</string>
 	<key>category</key>
 	<string>❇️</string>
 	<key>connections</key>
@@ -70,20 +70,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
+		<key>598523D6-79B7-427B-8F31-6EB86246AFF8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -97,7 +84,20 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>A1836C85-7289-432C-873E-7FA391786595</string>
+				<string>13D65F50-507B-45AA-81A1-F05AEF9C2CDC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0AD1A926-80B8-4274-9DFF-10183BF36867</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -114,7 +114,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Google Utils</string>
+	<string>Duck Utils</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -259,12 +259,12 @@
 			<key>config</key>
 			<dict>
 				<key>text</key>
-				<string>Google Web: {query}</string>
+				<string>DuckDuckGo: "{query}"</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.fallback</string>
 			<key>uid</key>
-			<string>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</string>
+			<string>598523D6-79B7-427B-8F31-6EB86246AFF8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -273,19 +273,13 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.google.com/search?udm=14&amp;q={query}</string>
+				<key>searcher</key>
+				<integer>1635214453</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.systemwebsearch</string>
 			<key>uid</key>
-			<string>A1836C85-7289-432C-873E-7FA391786595</string>
+			<string>13D65F50-507B-45AA-81A1-F05AEF9C2CDC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -392,6 +386,15 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
+		<key>13D65F50-507B-45AA-81A1-F05AEF9C2CDC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>215</real>
+			<key>ypos</key>
+			<real>300</real>
+		</dict>
 		<key>2D90CF5E-78C3-4E3C-8038-E0F3B730BCF9</key>
 		<dict>
 			<key>colorindex</key>
@@ -401,7 +404,16 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>555</real>
+			<real>535</real>
+		</dict>
+		<key>598523D6-79B7-427B-8F31-6EB86246AFF8</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>250</real>
 		</dict>
 		<key>5A99BB0E-CA2A-4589-B787-531546EBFE12</key>
 		<dict>
@@ -421,7 +433,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>620</real>
+			<real>600</real>
 		</dict>
 		<key>76AAB3AC-6FFB-4BD3-8A66-7FF66A8F7C77</key>
 		<dict>
@@ -434,28 +446,6 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>A1836C85-7289-432C-873E-7FA391786595</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>google with udm=14
-
-https://udm14.com/</string>
-			<key>xpos</key>
-			<real>215</real>
-			<key>ypos</key>
-			<real>295</real>
-		</dict>
-		<key>C16E37C8-CCD7-4E12-8580-F48FEE5112C0</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>230</real>
-		</dict>
 		<key>D272D1A3-9CA0-40B1-BB24-FDC428E10728</key>
 		<dict>
 			<key>colorindex</key>
@@ -463,7 +453,7 @@ https://udm14.com/</string>
 			<key>xpos</key>
 			<real>215</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>480</real>
 		</dict>
 		<key>E6BFAD6E-029F-480F-AD49-21705DD25C3D</key>
 		<dict>
