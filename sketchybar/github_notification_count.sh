@@ -9,10 +9,7 @@ if [[ $(system_profiler SPDisplaysDataType | grep -c Resolution) -gt 1 ]]; then
 fi
 
 # GUARD dependencies or API key missing
-if ! command -v yq &> /dev/null; then
-	sketchybar --set "$NAME" label="yq not found" drawing=true
-	return 1
-elif [[ -z "$GITHUB_TOKEN" ]]; then
+if [[ -z "$GITHUB_TOKEN" ]]; then
 	# $GITHUB_TOKEN is saved in .zshenv and therefore available here
 	sketchybar --set "$NAME" label="TOKEN?" drawing=true
 	return 1

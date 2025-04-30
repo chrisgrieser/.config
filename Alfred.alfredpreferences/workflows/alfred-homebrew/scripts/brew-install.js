@@ -101,7 +101,6 @@ function run() {
 	const cask90d = $.getenv("alfred_workflow_cache") + "/caskDownloads90d.json";
 	const formula90d = $.getenv("alfred_workflow_cache") + "/formulaDownloads90d.json";
 	if (cacheIsOutdated(cask90d)) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log("Updating download count cache.");
 		const caskDownloads = httpRequest(
 			"https://formulae.brew.sh/api/analytics/cask-install/homebrew-cask/90d.json",
@@ -122,7 +121,6 @@ function run() {
 	const installedIcon = "✅ ";
 	const deprecatedIcon = "⚠️ ";
 
-	// biome-ignore lint/suspicious/noConsole: intentional
 	console.log("Caches ready.");
 
 	// 5. CREATE ALFRED ITEMS

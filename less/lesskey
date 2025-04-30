@@ -1,6 +1,5 @@
-# vim: filetype=zsh
+# vim: filetype=bash
 # shellcheck disable=all
-# INFO not real bash file, just want the syntax highlighting
 #───────────────────────────────────────────────────────────────────────────────
 # DOCS https://linux.die.net/man/1/lesskey
 #───────────────────────────────────────────────────────────────────────────────

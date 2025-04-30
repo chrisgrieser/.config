@@ -19,7 +19,6 @@ brew "pinentry-mac"
 brew "ripgrep"
 brew "starship"
 brew "yq"
-brew "yt-dlp"
 brew "zsh-autocomplete"
 brew "zsh-autopair"
 brew "zsh-autosuggestions"
@@ -53,19 +52,20 @@ mas "Peek", id: 1554235898
 #───────────────────────────────────────────────────────────────────────────────
 
 # DEVICE-SPECIFIC INSTALLS
-if system("scutil --get ComputerName | grep Home")
-	 cask "anki"
-	 cask "bettertouchtool"
-	 cask "catch"
-	 brew "spotify_player"
-	 cask "iina"
-	 cask "steam"
-	 cask "transmission"
-	 cask "cleanshot"
-elsif system("scutil --get ComputerName | grep Office")
-	 cask "cleanshot"
-elsif system("scutil --get ComputerName | grep Mother")
-	 cask "iina"
-	 cask "steam"
-	 cask "transmission"
+if system("scutil --get ComputerName | grep -q Home")
+	brew "spotify_player"
+	brew "yt-dlp"
+	cask "anki"
+	cask "bettertouchtool"
+	cask "catch"
+	cask "cleanshot"
+	cask "iina"
+	cask "steam"
+	cask "transmission"
+elsif system("scutil --get ComputerName | grep -q Office")
+	cask "cleanshot"
+elsif system("scutil --get ComputerName | grep -q Mother")
+	cask "iina"
+	cask "steam"
+	cask "transmission"
 end

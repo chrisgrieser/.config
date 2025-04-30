@@ -2,19 +2,21 @@
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
-export HOMEBREW_AUTO_UPDATE_SECS=86400 # only once per day
+export HOMEBREW_ASK=1 # ask for confirmation before installing
 
+export HOMEBREW_AUTO_UPDATE_SECS=86400 # once per day
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ENV_HINTS=1
-
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
+export HOMEBREW_BUNDLE_NO_UPGRADE=1 # brew bundle install does not upgrade
 
 # extra update for the Obsidian, installer version, cause brew won't update as
 # the main app is self-upgrading
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian"
+
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=""
 
 #───────────────────────────────────────────────────────────────────────────────
 
@@ -48,10 +50,13 @@ function _print-section() {
 function update() {
 	# DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
 	_print-section "Homebrew" 1
-	brew bundle check || brew bundle install --no-upgrade # install missing packages
-	brew bundle cleanup --force                           # remove unused packages
-	brew update                                           # update homebrew itself
-	brew upgrade                                          # update all packages
+	HOMEBREW_ASK="" # FIX brew bundle install failing
+	brew bundle check --verbose || brew bundle install # install missing packages
+	echo
+	brew bundle cleanup --force --zap                  # remove unused packages
+	brew update                                        # update homebrew itself
+	brew upgrade                                       # update all packages
+	HOMEBREW_ASK=1
 
 	_print-section "Mac App Store"
 	if [[ -n $(mas outdated) ]]; then

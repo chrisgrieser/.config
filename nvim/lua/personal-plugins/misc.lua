@@ -77,7 +77,11 @@ function M.toggleOrIncrement()
 		toggles["and"] = "or"
 	elseif vim.bo.ft == "swift" then
 		toggles["var"] = "let"
+	elseif vim.bo.ft == "zsh" or vim.bo.ft == "bash" or vim.bo.ft == "sh" then
+		toggles["if"] = "elif"
+		toggles["echo"] = "print"
 	elseif vim.bo.ft == "lua" then
+		toggles["if"] = "elseif"
 		toggles["=="] = "~="
 		toggles["and"] = "or"
 		toggles["elseif"] = "if"
