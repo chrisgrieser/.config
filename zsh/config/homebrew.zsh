@@ -46,7 +46,7 @@ function update() {
 	fi
 
 	_print-section "brew bundle cleanup" # remove unused packages
-	if ! brew bundle cleanup; then
+	if ! brew bundle cleanup &> /dev/null; then
 		brew bundle cleanup --force --zap
 	else
 		echo "No unused packages found."
