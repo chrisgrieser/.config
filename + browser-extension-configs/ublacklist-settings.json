@@ -3,8 +3,9 @@
   "blockColor": "default",
   "blockWholeSite": true,
   "dialogTheme": "default",
+  "enableMatchingRules": false,
   "enablePathDepth": false,
-  "hideBlockLinks": true,
+  "hideBlockLinks": false,
   "hideControl": false,
   "highlightColors": [
     "#ddeeff"
@@ -49,5 +50,5 @@
   "syncInterval": 120,
   "syncSubscriptions": true,
   "updateInterval": 1440,
-  "version": "8.9.2"
+  "version": "8.10.2"
 }

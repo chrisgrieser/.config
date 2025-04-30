@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "4/29/2025, 11:37:10 AM",
-	"time": 1745919430922,
+	"@time": "4/30/2025, 2:56:08 PM",
+	"time": 1746017768789,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -32,7 +32,7 @@
 		},
 		{
 			"passKeys": "c j k ",
-			"pattern": ":https://www.google.com/"
+			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
 		},
 		{
 			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
@@ -49,10 +49,6 @@
 		{
 			"passKeys": "s ",
 			"pattern": ":https://www.netflix.com/"
-		},
-		{
-			"passKeys": "",
-			"pattern": ":https://app.diagrams.net/"
 		},
 		{
 			"passKeys": "",
@@ -82,9 +78,10 @@
 	"keyMappings": [
 		"#!no-check",
 		"# INFO",
-		"# combine commands: https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
-		"# Info on Vimium-C mapping Syntax: https://github.com/gdh1995/vimium-c/issues/873",
-		"# Google excludes `c` (cycle/copy) for Grepper https://www.grepper.com/documentation.php#using_keyboard_shortcuts",
+		"# - combine commands: https://github.com/gdh1995/vimium-c/wiki/Auto-run-a-tree-of-commands#open-vomnibar-after-creating-a-new-tab",
+		"# - Vimium-C mapping Syntax: https://github.com/gdh1995/vimium-c/issues/873",
+		"# - Google excludes `c` (cycle/copy) for Grepper https://www.grepper.com/documentation.php#using_keyboard_shortcuts",
+		"# - Google excludes regex disables it only at image search",
 		"#───────────────────────────────────────────────────────────────────────────────",
 		"",
 		"unmapAll",
