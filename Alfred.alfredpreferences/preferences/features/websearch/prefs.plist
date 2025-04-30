@@ -66,7 +66,7 @@
 			<key>keyword</key>
 			<string>ducky</string>
 			<key>text</key>
-			<string>DuckDuckGo Lucky: "{query}"</string>
+			<string>🍀 Lucky: "{query}"</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}+!ducky&amp;kl=$region</string>
 		</dict>
