@@ -412,10 +412,7 @@ return {
 				},
 				very_vertical = {
 					preset = "small_no_preview",
-					layout = {
-						height = 0.95,
-						width = 0.45,
-					},
+					layout = { height = 0.95, width = 0.45 },
 				},
 				wide_with_preview = {
 					preset = "small_no_preview",
