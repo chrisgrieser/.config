@@ -10,7 +10,7 @@ function run(argv) {
 	const selection = (argv[0] || "")
 		.replace(/[\n\r](?!\s)/g, " ") // remove single breaks
 		.replace(/(\w)- /g, "$1") // remove hyphenation
-		.replace(/["‘’“”]/g, "'") // consistent single quotes
+		.replace(/["‘’“”]/g, "'") // ensure consistent single quotes
 		.trim();
 	if (!selection) return "No selection";
 	const withoutCitation = $.getenv("copy_without_citation") === "1";
