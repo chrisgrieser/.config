@@ -37,10 +37,9 @@ function recent_updates() {
 	brew list -t --casks | head -n"$count" | rs
 }
 
-# $1: title $2: no leading newline
 function _print-section() {
 	[[ "$2" != "first" ]] && echo
-	print "\e[1;34m$1\e[0m"
+	print "\e[1;30m\e[1;44m$1\e[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -49,17 +48,31 @@ function update() {
 	_print-section "brew update" "first"
 	brew update # update homebrew itself
 
-	_print-section "brew bundle install"
-	brew bundle check --verbose || brew bundle install # install missing packages
+	_print-section "brew bundle install" # install missing packages
+	if ! brew bundle check; then
+		brew bundle install | grep -v "^Using"
+	fi
 
-	_print-section "brew bundle cleanup"
-	brew bundle cleanup --force --zap # remove unused packages
+	_print-section "brew bundle cleanup" # remove unused packages
+	if ! brew bundle cleanup; then
+		brew bundle cleanup --force --zap
+	else
+		echo "No unused packages found."
+	fi
 
 	_print-section "brew upgrade"
-	brew upgrade
+	if ! brew outdated; then
+		brew upgrade
+	else
+		echo "All packages already up to date."
+	fi
 
 	_print-section "mas upgrade"
-	mas upgrade
+	if ! mas outdated; then
+		mas upgrade
+	else
+		echo "All packages already up to date."
+	fi
 
 	# sketchybar restart for new permissions
 	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
@@ -69,8 +82,10 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info & doctor" "first"
+	_print-section "brew info" "first"
 	brew info
+
+	_print-section "brew doctor"
 	brew doctor
 
 	_print-section "brew services list"
