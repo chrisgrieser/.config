@@ -10,7 +10,6 @@ brew "gh"
 brew "git-delta"
 brew "just"
 brew "less"
-brew "mas"
 brew "neovim"
 brew "node"
 brew "pandoc"
@@ -44,6 +43,7 @@ cask "wezterm"
 cask "zoom"
 
 # MAC APP STORE
+brew "mas"
 mas "Folder Preview", id: 6698876601
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274

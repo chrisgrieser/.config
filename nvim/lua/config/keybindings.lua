@@ -156,7 +156,6 @@ keymap("n", "zr", "zR", { desc = "󰘖 Open all folds" })
 keymap("n", "zo", "zO", { desc = "󰘖 Open fold recursively" })
 -- stylua: ignore
 keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = " Set fold level to {count}" })
-keymap("n", "zj", "zczjzo", { desc = "󰇚 Cycle next fold" })
 
 keymap("n", "zs", function()
 	local modeline = vim.bo.commentstring:format("vim foldlevel=" .. vim.o.foldlevel)

@@ -1,5 +1,16 @@
+
+# LONG ALIASES
 alias sizes_in_cwd="du -sh . ./* | sort -rh | sed 's|\./||'"
-alias delete_empty_folders="find . -type d -empty && find . -type d -empty -delete"
+
+# mason things only made available, but not loaded directly
+alias export_mason_path='export PATH="$HOME/.local/share/nvim/mason/bin":$PATH'
+
+#───────────────────────────────────────────────────────────────────────────────
+
+function delete_empty_folders {
+	find . -type d -not -path "**/.git/**" -empty 
+	find . -type d -not -path "**/.git/**" -empty -delete
+}
 
 function cake {
 	mkdir -p "$1" && cd "$1" || return 1
@@ -17,10 +28,6 @@ function tree {
 # utility scripts only made available, but not loaded directly (= lazy-loading)
 export PATH="$ZDOTDIR/utilities/":$PATH
 
-# mason things only made available, but not loaded directly
-function export_mason_path {
-	export PATH="$HOME/.local/share/nvim/mason/bin":$PATH
-}
 
 function p {
 	qlmanage -p "$1" &> /dev/null
@@ -189,7 +196,7 @@ function lr() {
 # TRASH
 # requires a `trash` command
 
-# no arg = all files in folder will be deleted
+# no arg = all files in folder will be trashed
 function d {
 	if [[ $# == 0 ]]; then
 		trash ./*(D) # (D) makes the glob include dotfiles (zsh-specific)
