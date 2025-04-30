@@ -50,7 +50,8 @@ mas "Ivory", id: 6444602274
 
 # BUG Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 # mas "Peek", id: 1554235898
-cask "syntax-highlight", postinstall: "qlmanage -r"
+cask "syntax-highlight"
+cask "qlmarkdown"
 
 #───────────────────────────────────────────────────────────────────────────────
 
