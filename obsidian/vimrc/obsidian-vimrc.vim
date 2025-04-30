@@ -295,6 +295,16 @@ nnoremap qw :insertHr<CR>
 exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
 nnoremap X :deleteLastChar<CR>
 
+" Proofreader accept/reject
+exmap acceptNextProofread obcommand proofreader:accept-next-suggestion
+noremap gA :acceptNextProofread<CR>
+exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
+noremap gB :rejectNextProofread<CR>
+exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
+noremap ga :acceptProofreadInText<CR>
+exmap rejectProofreadInText obcommand proofreader:reject-suggestions-in-text
+noremap gb :rejectProofreadInText<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
 
@@ -309,16 +319,6 @@ nnoremap ,cc :enhanceUrlWithTitle<CR>
 " Freeze interface
 exmap freezeInterface jsfile Meta/vimrc-jsfile.js { freezeInterface() }
 nnoremap ,if :freezeInterface<CR>
-
-" Proofreader accept/reject
-exmap acceptNextProofread obcommand proofreader:accept-next-suggestion
-noremap ga :acceptNextProofread<CR>
-exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
-noremap gb :rejectNextProofread<CR>
-exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
-noremap gA :acceptProofreadInText<CR>
-exmap rejectProofreadInText obcommand proofreader:reject-suggestions-in-text
-noremap gB :rejectProofreadInText<CR>
 
 " set "[r]ead: true" property
 exmap markAsRead obcommand quadro:mark-datafile-as-read
