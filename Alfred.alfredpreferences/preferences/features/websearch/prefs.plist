@@ -180,6 +180,17 @@
 			<key>url</key>
 			<string>https://chatgpt.com/?q={query}</string>
 		</dict>
+		<key>DB17ABEC-DD58-4433-9513-C2D4D6C59B4B</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ai</string>
+			<key>text</key>
+			<string>Perplexity: "{query}"</string>
+			<key>url</key>
+			<string>https://www.perplexity.ai/?q={query}</string>
+		</dict>
 		<key>E5FD4F72-0366-49A4-A5B9-3228D75B543E</key>
 		<dict>
 			<key>enabled</key>
