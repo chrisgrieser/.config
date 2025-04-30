@@ -15,6 +15,7 @@ local lspToMasonMap = {
 	harper_ls = "harper-ls", -- natural language linter
 	html = "html-lsp",
 	jsonls = "json-lsp",
+	gh_actions_ls = "gh-actions-language-server",
 	just = "just-lsp",
 	ltex_plus = "ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
 	lua_ls = "lua-language-server",

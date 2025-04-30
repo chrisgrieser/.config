@@ -4,7 +4,7 @@
 # point config paths to `.config`
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
-# macOS currently ships less v.581, which lacks the ability to read lesskey
+# macOS currently ships less v.581.2, which lacks the ability to read lesskey
 # files. Thus we need to use the version of less provided by homebrew.
 export PAGER="$HOMEBREW_PREFIX/bin/less"
 export LESSKEYIN="$HOME/.config/less/lesskey"

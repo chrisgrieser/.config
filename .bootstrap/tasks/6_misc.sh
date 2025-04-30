@@ -3,7 +3,11 @@ set -e
 #───────────────────────────────────────────────────────────────────────────────
 
 # plist preferences
-backup_path="$HOME/.config/.plist"
+backup_path="$HOME/.config/.bootstrap/.plist/"
+if [[ ! -d "$backup_path" ]]; then
+	print "\e[0;33mplist backup directory not found: $backup_path\e[0m"
+	return 1
+fi
 
 for plist in "$backup_path"/*.plist; do
 	name="$(basename "$plist" .plist)"

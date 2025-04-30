@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-backup_path="$HOME/.config/.plist"
+backup_path="$HOME/.config/.bootstrap/.plist/"
 
 plists=(
 	com.apple.Preferences
