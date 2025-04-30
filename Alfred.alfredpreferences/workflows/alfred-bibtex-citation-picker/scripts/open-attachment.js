@@ -29,9 +29,11 @@ function run(argv) {
 		.replace(/^~/, app.pathTo("home folder")); // expand ~
 
 	// GUARD file existence
-	const msg = "File does not exist: " + path;
-	console.log("msg:", msg);
-	if (!fileExists(path)) return msg; // Alfred notification
+	if (!fileExists(path)) {
+		const msg = "File does not exist: " + path;
+		console.log("msg:", msg);
+		return msg; // Alfred notification
+	}
 
 	// shell `open` appears to be the only reliable way for opening files
 	app.doShellScript(`open '${path}'`);

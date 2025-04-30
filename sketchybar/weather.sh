@@ -18,24 +18,23 @@ readonly longitude=13
 # there yet on system startup
 i=0
 while true; do
-	weather=$(curl -sL "https://api.brightsky.dev/current_weather?lat=$latitude&lon=$longitude" | jq ".weather")
+	weather=$(curl -sL "https://api.brightsky.dev/current_weather?lat=$latitude&lon=$longitude" |
+		jq ".weather")
 	temperature="$(echo "$weather" | jq ".temperature" | cut -d. -f1 | sed 's/-0/0/')"
 	# replace icon-string with nerdfont icon
-	icon=$(
-		echo "$weather" | jq ".icon" | sed \
-			-e 's/partly-cloudy-day//' \
-			-e 's/partly-cloudy-night//' \
-			-e 's/rain//' \
-			-e 's/cloudy//' \
-			-e 's/wind//' \
-			-e 's/fog/󰖑/' \
-			-e 's/hail/󰖒/' \
-			-e 's/snow//' \
-			-e 's/clear-day//' \
-			-e 's/clear-night//' \
-			-e 's/thunderstorm//' \
-			-e 's/sleet//'
-	)
+	icon=$(echo "$weather" | jq ".icon" | sed \
+		-e 's/"partly-cloudy-day"//' \
+		-e 's/"partly-cloudy-night"//' \
+		-e 's/"rain"//' \
+		-e 's/"cloudy"//' \
+		-e 's/"wind"//' \
+		-e 's/"fog"/󰖑/' \
+		-e 's/"hail"/󰖒/' \
+		-e 's/"snow"//' \
+		-e 's/"clear-day"//' \
+		-e 's/"clear-night"//' \
+		-e 's/"thunderstorm"//' \
+		-e 's/"sleet"//')
 	[[ -n "$icon" || $i -gt 3 ]] && break
 	i=$((i + 1))
 	sleep 3
