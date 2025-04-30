@@ -23,7 +23,6 @@ local function safeRequire(module)
 	end
 end
 
-safeRequire("personal-plugins.ui-hack") -- early for errors
 safeRequire("config.options") -- early, so available for plugins configs
 
 if not vim.env.NO_PLUGINS then -- for security, e.g. when editing a password with `pass`
@@ -32,6 +31,7 @@ if not vim.env.NO_PLUGINS then -- for security, e.g. when editing a password wit
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 
+safeRequire("personal-plugins.ui-hack") -- requires notification plugin to be already loaded
 safeRequire("config.neovide-gui-settings")
 safeRequire("config.autocmds")
 safeRequire("config.keybindings")

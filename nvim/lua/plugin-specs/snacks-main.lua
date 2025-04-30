@@ -101,7 +101,7 @@ return {
 			},
 		},
 		bigfile = {
-			notify = true,
+			notify = false,
 			size = 1024 * 1024, -- 1.0MB
 			line_length = math.huge, -- disable, since buggy with Alfred's `info.plist`
 		},
