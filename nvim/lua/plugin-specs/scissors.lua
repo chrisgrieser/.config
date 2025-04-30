@@ -25,6 +25,6 @@ return {
 			picker = "snacks",
 			telescope = { alsoSearchSnippetBody = true },
 		},
-		jsonFormatter = "yq",
+		jsonFormatter = "jq", -- `jq` pre-installed on newer macOS versions
 	},
 }

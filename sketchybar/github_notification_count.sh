@@ -37,7 +37,7 @@ notification_count=$(curl -sL \
 	-H "Authorization: Bearer $GITHUB_TOKEN" \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
 	"https://api.github.com/notifications" |
-	yq ". | length")
+	jq ". | length")
 
 if [[ $notification_count -eq 0 ]]; then
 	sketchybar --set "$NAME" drawing=false

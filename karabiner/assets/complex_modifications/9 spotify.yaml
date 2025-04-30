@@ -15,10 +15,9 @@ rules:
         from: { key_code: f4 }
         to:
           - shell_command: |
-              export PATH=/usr/local/lib:/usr/local/bin:/opt/homebrew/bin/:$PATH
               info=$(spotify_player get key playback)
-              artist=$(echo "$info" | yq ".item.artists[0].name")
-              song=$(echo "$info" | yq ".item.name")
+              artist=$(echo "$info" | jq ".item.artists[0].name")
+              song=$(echo "$info" | jq ".item.name")
               "$HOME/.config/karabiner/assets/notificators/spotify-notificator" \
                 --title "Spotify" --message "💚 $artist – $song"
               spotify_player like

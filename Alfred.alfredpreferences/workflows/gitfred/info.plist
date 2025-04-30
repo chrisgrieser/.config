@@ -1417,7 +1417,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>Opening notification inbox at GitHub instead.</string>
+				<string>{query}</string>
 				<key>title</key>
 				<string>⚠️ URL not found</string>
 			</dict>
@@ -1446,7 +1446,7 @@
 	  If the repo is already locally available on your device, just open the
 	  repository in the Terminal.
 	+ To include private repos, requires [GitHub
-	  Token](https://github.com/settings/tokens) with the respective access.
+	  Token](https://github.com/settings/tokens).
 - Open recent GitHub issues you are involved in with `ghi`.
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the issue in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the issue URL.
@@ -1454,11 +1454,12 @@
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the PR in the browser.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the link to the PR.
 	+ To include private PRs, requires [GitHub
-	  Token](https://github.com/settings/tokens) with the respective access.
+	  Token](https://github.com/settings/tokens).
 - Directly open your GitHub notification via `ghn`.
-	+ Requires [GitHub Token](https://github.com/settings/tokens) with access
-	  to notifications.
-	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser.
+	+ Requires [GitHub Token](https://github.com/settings/tokens).
+	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the notification in the browser. In cases where no URL
+	  is available, such as deleted comments or CI activity, opens the GitHub
+	  notification inbox instead.
 	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Mark the notification as read.
 	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL of the notification target.
 - Additionally, you can press the
@@ -1840,7 +1841,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Optional. Only required for showing notifications, private PRs, and private repos. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`.</string>
+			<string>Optional. Only required for showing notifications, private PRs, and private repos. If empty, will fallback to `$GITHUB_TOKEN` exported in `.zshenv`. The token requires accesses to private repos and to notifications.</string>
 			<key>label</key>
 			<string>GitHub Token</string>
 			<key>type</key>
@@ -2067,7 +2068,7 @@ to set a hotkey to clone the repo in the frontmost browser tab</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.10.2</string>
+	<string>1.10.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
