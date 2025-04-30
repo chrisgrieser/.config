@@ -130,6 +130,16 @@ M.aw_masto = aw.new(function(appName, event, masto)
 	end
 end):start()
 
+local c = hs.caffeinate.watcher
+M.systemw_mastodon = c.new(function(event)
+	if event == c.screensaverDidStop or event == c.screensDidWake or event == c.systemDidWake then
+		local masto = u.app("Ivory")
+		local mastoWin = masto and u.app("Ivory"):mainWindow()
+		if not mastoWin then return end
+		mastoWin:setFrame(wu.toTheSide) -- needs setFrame to hide part to the side
+	end
+end):start()
+
 --------------------------------------------------------------------------------
 -- BRAVE BROWSER
 
