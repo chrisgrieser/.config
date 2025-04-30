@@ -55,13 +55,8 @@ function update() {
 	brew bundle cleanup --force --zap                  # remove unused packages
 	_print-section "brew upgrade"
 	brew upgrade                                       # update all packages
-
 	_print-section "Mac App Store"
-	if [[ -n $(mas outdated) ]]; then
-		mas upgrade
-	else
-		echo "No Mac App Store updates available."
-	fi
+	mas upgrade
 
 	# FINISH
 	# sketchybar restart for new permissions

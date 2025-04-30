@@ -126,7 +126,7 @@ keymap("n", "M", "<cmd>. move +1<CR>kJ", { desc = "󰽜 Merge line down" }) -- u
 --------------------------------------------------------------------------------
 
 -- WHITESPACE & INDENTATION
-keymap("n", "=", "[<Space>", { desc = " Blank above", remap = nil }) -- remap, since using nvim default
+keymap("n", "=", "[<Space>", { desc = " Blank above", remap = true }) -- remap, since using nvim default
 keymap("n", "_", "]<Space>", { desc = " Blank below", remap = true })
 
 keymap("n", "<Tab>", ">>", { desc = "󰉶 indent" })

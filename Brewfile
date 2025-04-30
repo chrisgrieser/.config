@@ -32,12 +32,12 @@ cask "appcleaner"
 cask "brave-browser"
 cask "espanso"
 cask "font-jetbrains-mono-nerd-font"
-cask "hammerspoon"
+cask "hammerspoon", postinstall: "defaults write org.hammerspoon.Hammerspoon MJConfigFile \"$HOME/.config/hammerspoon/init.lua\""
 cask "karabiner-elements"
 cask "microsoft-word"
 cask "mimestream"
 cask "neovide"
-cask "obsidian", greedy: true
+cask "obsidian", greedy: true # greedy for installer version
 cask "replacicon"
 cask "slack"
 cask "wezterm"
@@ -50,7 +50,7 @@ mas "Ivory", id: 6444602274
 
 # BUG Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 # mas "Peek", id: 1554235898
-brew "syntax-highlight"
+cask "syntax-highlight", postinstall: "qlmanage -r"
 
 #───────────────────────────────────────────────────────────────────────────────
 

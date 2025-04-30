@@ -115,6 +115,18 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>D4409822-4D36-4A47-AE65-97902F001379</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7B955092-9044-4895-864C-3532731DEDBE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1297,9 +1309,23 @@
 						<key>uid</key>
 						<string>256FC39B-A43F-4DB1-A4E2-01DAFE87554A</string>
 					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:mode}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>copy</string>
+						<key>outputlabel</key>
+						<string>copy</string>
+						<key>uid</key>
+						<string>D4409822-4D36-4A47-AE65-97902F001379</string>
+					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>copy</string>
+				<string>open</string>
 				<key>hideelse</key>
 				<false/>
 			</dict>
@@ -1378,6 +1404,27 @@
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>FA2DA973-F996-4FDC-8058-22F7CCAE04A6</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Opening notification inbox at GitHub instead.</string>
+				<key>title</key>
+				<string>⚠️ URL not found</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7B955092-9044-4895-864C-3532731DEDBE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1485,11 +1532,11 @@
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>note</key>
-			<string>mode: mark-as-read</string>
+			<string>mode</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>470</real>
 			<key>ypos</key>
-			<real>900</real>
+			<real>905</real>
 		</dict>
 		<key>32D387DE-B4F9-41E5-8F1C-A71E3C5644AA</key>
 		<dict>
@@ -1599,6 +1646,15 @@
 			<real>30</real>
 			<key>ypos</key>
 			<real>335</real>
+		</dict>
+		<key>7B955092-9044-4895-864C-3532731DEDBE</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>1095</real>
 		</dict>
 		<key>7CE3F725-5F4E-4A4B-B16B-94871083E6A2</key>
 		<dict>
