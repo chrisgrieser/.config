@@ -202,12 +202,10 @@ return {
 					actions = {
 						delete_qf_entry = function(picker)
 							local idx = picker:current().idx
-
 							local qf = vim.fn.getqflist({ title = true, items = true })
 							table.remove(qf.items, idx)
 							vim.fn.setqflist(qf.items, "r") -- "r" = replace = overwrite
 							vim.fn.setqflist({}, "a", { title = qf.title }) -- preserve title of qflist
-
 							picker:find() -- reload
 						end,
 					},
@@ -286,9 +284,10 @@ return {
 					},
 					actions = {
 						complete_and_add_colon = function(picker)
-							-- snacks allows opening files with `file:lnum`, but it only
-							-- matches if the filename is complete. With this action, we
-							-- complete the filename if using the 1st colon in the query.
+							-- snacks allows opening files with `file:lnum`, but it
+							-- only matches if the filename is complete. With this
+							-- action, we complete the filename if using the 1st colon
+							-- in the query.
 							local query = vim.api.nvim_get_current_line()
 							local file = picker:current().file
 							if not file or query:find(":") then
@@ -303,7 +302,10 @@ return {
 				recent = {
 					layout = "small_no_preview",
 					filter = {
-						paths = { [vim.g.icloudSync] = false }, -- e.g., scratch buffers
+						paths = {
+							[vim.g.icloudSync] = false, -- e.g., scratch buffers
+							["/private/var/folders"] = false, -- temp locations for `pass`
+						},
 					},
 				},
 				grep = {
