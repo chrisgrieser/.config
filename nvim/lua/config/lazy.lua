@@ -84,19 +84,14 @@ require("lazy").setup {
 	},
 }
 
---------------------------------------------------------------------------------
-
--- KEYMAPS FOR LAZY-GENERATED HELP FILES IN MARKDOWN
 vim.api.nvim_create_autocmd("FileType", {
-	desc = "User: Setup for lazy-generated help in markdown",
-	pattern = "markdown",
-	callback = function(ctx)
-		if vim.bo[ctx.buf].buftype == "help" then
-			-- inerihit the config of help files
-			vim.cmd.source(vim.fn.stdpath("config") .. "/after/ftplugin/help.lua")
-		end
-	end,
+	desc = "User: winfixbuf for lazy window",
+	group = vim.api.nvim_create_augroup("lazywin-winfixbuf", { clear = true }),
+	pattern = "lazy",
+	callback = function() vim.wo.winfixbuf = true end,
 })
+
+--------------------------------------------------------------------------------
 
 -- KEYMAPS FOR LAZY UI
 -- https://github.com/folke/lazy.nvim/blob/main/lua/lazy/view/config.lua
