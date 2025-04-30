@@ -125,17 +125,6 @@
 			<key>url</key>
 			<string>https://www.linguee.com/english-german/search?query={query}</string>
 		</dict>
-		<key>8C706788-4EB2-4B38-A8C8-D03C7DEA8A1F</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>to</string>
-			<key>text</key>
-			<string>Kickass Torrents: "{query}"</string>
-			<key>url</key>
-			<string>https://kickasstorrents.to/usearch/{query}</string>
-		</dict>
 		<key>97974E2F-27A2-48E4-88F3-339C26BEDA6B</key>
 		<dict>
 			<key>enabled</key>
@@ -143,9 +132,9 @@
 			<key>keyword</key>
 			<string>icon</string>
 			<key>text</key>
-			<string>Google Images: "{query}"</string>
+			<string>DcukDuckGo Images: "{query}"</string>
 			<key>url</key>
-			<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
+			<string>https://duckduckgo.com/?q={query}%20icon&amp;iar=images</string>
 		</dict>
 		<key>B0E74EF5-D489-4FA0-9F57-0B056365432B</key>
 		<dict>
@@ -213,17 +202,6 @@
 			<key>url</key>
 			<string>https://store.steampowered.com/search/?term={query}</string>
 		</dict>
-		<key>E8A30F68-E070-4821-AC07-198240CC2ECC</key>
-		<dict>
-			<key>enabled</key>
-			<true/>
-			<key>keyword</key>
-			<string>to</string>
-			<key>text</key>
-			<string>PirateBay: "{query}"</string>
-			<key>url</key>
-			<string>https://thepiratebay.org/search.php?q={query}</string>
-		</dict>
 		<key>E969FF1C-6627-4902-B08A-EA6DBB2199D5</key>
 		<dict>
 			<key>enabled</key>
@@ -245,6 +223,17 @@
 			<string>GitHub Code Search: "{query}"</string>
 			<key>url</key>
 			<string>https://github.com/search?type=code&amp;q={query}</string>
+		</dict>
+		<key>F016A737-CBF2-42BF-BBB9-9F08D18FE8C7</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>i</string>
+			<key>text</key>
+			<string>DuckDuckGo Images: "{query}"</string>
+			<key>url</key>
+			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
 	</dict>
 	<key>onlyShowEnabledInPrefs</key>

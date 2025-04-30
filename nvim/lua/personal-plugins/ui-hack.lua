@@ -1,10 +1,13 @@
 -- INFO
 -- This snippet redirects cmdline messages to `vim.notify`, silencing `Press
 -- Enter to continue` prompts, even with `cmdheight=0`.
-
--- REQUIRED
--- a plugin that shows `vim.notify` outside of the cmdline, such as
--- `nvim-notify`, `snacks.notifier`, or `mini.notify`.
+--------------------------------------------------------------------------------
+local hasNotificationPlugin = (
+	package.loaded["nvim-notify"]
+	or package.loaded["snacks"]
+	or package.loaded["mini.notify"]
+)
+if not hasNotificationPlugin then return end
 --------------------------------------------------------------------------------
 
 local config = {
