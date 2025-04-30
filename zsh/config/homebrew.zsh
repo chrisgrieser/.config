@@ -2,7 +2,6 @@
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
-export HOMEBREW_ASK=1 # ask for confirmation before installing
 
 export HOMEBREW_AUTO_UPDATE_SECS=86400 # once per day
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
@@ -40,23 +39,22 @@ function recent_updates() {
 
 # $1: title $2: no leading newline
 function _print-section() {
-	[[ -z "$2" ]] && echo
+	[[ "$2" != "first" ]] && echo
 	print "\e[1;34m$1\e[0m"
-	_separator
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
 	# DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
-	_print-section "Homebrew" 1
-	HOMEBREW_ASK="" # FIX brew bundle install failing
-	brew bundle check --verbose || brew bundle install # install missing packages
-	echo
-	brew bundle cleanup --force --zap                  # remove unused packages
+	_print-section "brew update" "first"
 	brew update                                        # update homebrew itself
+	_print-section "brew bundle install"
+	brew bundle check --verbose || brew bundle install # install missing packages
+	_print-section "brew bundle cleanup"
+	brew bundle cleanup --force --zap                  # remove unused packages
+	_print-section "brew upgrade"
 	brew upgrade                                       # update all packages
-	HOMEBREW_ASK=1
 
 	_print-section "Mac App Store"
 	if [[ -n $(mas outdated) ]]; then
