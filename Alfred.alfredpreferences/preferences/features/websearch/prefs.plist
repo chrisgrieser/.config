@@ -66,7 +66,7 @@
 			<key>keyword</key>
 			<string>ducky</string>
 			<key>text</key>
-			<string>🍀 Lucky: "{query}"</string>
+			<string>🍀 Lucky</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}+!ducky&amp;kl=$region</string>
 		</dict>
@@ -176,7 +176,7 @@
 			<key>keyword</key>
 			<string>ai</string>
 			<key>text</key>
-			<string>Perplexity: "{query}"</string>
+			<string>Perplexity</string>
 			<key>url</key>
 			<string>https://www.perplexity.ai/?q={query}</string>
 		</dict>

@@ -1789,6 +1789,7 @@ the directory `./devdocs/icons/{keyword}.png`. PRs are welcome.
 - `yq`: yq docs
 - `oh`: Obsidian help
 - `odd`: Obsidian developer docs
+- `ddg`: DuckDuckGo help pages
 
 ### Utilities
 - `color`: named CSS colors
@@ -38795,7 +38796,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.19.2</string>
+	<string>2.20.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
