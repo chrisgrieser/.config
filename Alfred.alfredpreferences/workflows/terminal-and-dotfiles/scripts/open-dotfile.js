@@ -63,25 +63,17 @@ function run() {
 
 		// type-icon
 		let type = "";
+		// type = name.split(".").pop() || "blank";
 		if (name.startsWith(".z")) type = "zsh";
 		else if (name === "Justfile") type = "justfile";
 		else if (name === "Brewfile") type = "brewfile";
-		else if (name === ".ignore" || name === ".gitignore") type = "ignore";
-		else if (name.slice(1).includes(".")) type = name.split(".").pop() || ""; // default: extension
-		else type = "blank" // if no extension
+		else type = name.split(".").pop() || ""; // default: extension
+		// else type = "blank"; // if no extension
 
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
-		const useFileicon = ["webloc", "url", "ini", "mjs"].includes(type);
 		const isImageFile = ["png", "icns", "webp"].includes(type);
-		if (useFileicon) {
-			iconObj.type = "fileicon";
-			iconObj.path = absPath;
-		} else if (isImageFile) {
-			iconObj.path = absPath;
-		} else {
-			iconObj.path = `./custom-filetype-icons/${type}.png`; // use {ext}.png in icon folder
-		}
+		iconObj.path = isImageFile ? absPath : `./custom-filetype-icons/${type}.png`;
 
 		/** @type {AlfredItem} */
 		const item = {

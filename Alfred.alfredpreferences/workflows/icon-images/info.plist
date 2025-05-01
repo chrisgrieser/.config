@@ -171,66 +171,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>7CF8B97A-6865-489C-8B65-3C892683D59E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Convert png to icns</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-				</array>
-				<key>name</key>
-				<string>Annotate in Cleanshot</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>FD04A914-81DF-43CD-97F2-872228411EED</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -263,12 +203,93 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>https://www.google.com/search?tbs=ic%3Atrans&amp;tbm=isch&amp;q={query}+icon</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7CF8B97A-6865-489C-8B65-3C892683D59E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Annotate in Cleanshot</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>FD04A914-81DF-43CD-97F2-872228411EED</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>public.png</string>
+				</array>
+				<key>name</key>
+				<string>Convert png to icns</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>95CF671F-9E2F-4CE9-92A0-BACEF07C97C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
 				<string>cleanshot://open-annotate?filepath={query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>BE518E10-A76F-4A39-BF2F-9A54BFA63DF7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>icon</string>
+				<key>subtext</key>
+				<string>multiple icon sites</string>
+				<key>text</key>
+				<string>Search icon: '{query}'</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -297,20 +318,20 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>icon</string>
+				<string>ocr</string>
 				<key>subtext</key>
-				<string>multiple icon sites</string>
+				<string></string>
 				<key>text</key>
-				<string>Search Icon: '{query}'</string>
+				<string>OCR Screenshot</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>BCDE5A63-BF29-4CD2-B482-D2A56CD510A1</string>
+			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -338,21 +359,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
+				<key>acceptsmulti</key>
 				<integer>1</integer>
-				<key>keyword</key>
-				<string>ocr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>OCR Screenshot</string>
-				<key>withspace</key>
-				<true/>
+				<key>filetypes</key>
+				<array>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+					<string>public.tiff</string>
+				</array>
+				<key>name</key>
+				<string>Shrink Image to 70%</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.trigger.action</string>
 			<key>uid</key>
-			<string>E61BAA5C-B8EC-4B90-BE73-0E4711326107</string>
+			<string>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -382,27 +403,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-					<string>public.tiff</string>
-				</array>
-				<key>name</key>
-				<string>Shrink Image to 70%</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>FF1B8F7A-4E33-4A50-A895-F3B34197EB14</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -418,6 +418,28 @@
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>68F706E8-BDA8-44E3-8973-752C6B0FC50D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.compuserve.gif</string>
+					<string>public.jpeg</string>
+					<string>public.png</string>
+					<string>public.tiff</string>
+				</array>
+				<key>name</key>
+				<string>Convert to webp</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -443,28 +465,6 @@
 			<string>00C473A5-2045-4409-841A-1BE884B037BE</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsmulti</key>
-				<integer>1</integer>
-				<key>filetypes</key>
-				<array>
-					<string>com.compuserve.gif</string>
-					<string>public.jpeg</string>
-					<string>public.png</string>
-					<string>public.tiff</string>
-				</array>
-				<key>name</key>
-				<string>Convert to webp</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.action</string>
-			<key>uid</key>
-			<string>A127DB2B-430B-415F-9B6D-9A9EE315AD8E</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -509,27 +509,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<true/>
-				<key>acceptsurls</key>
-				<false/>
-				<key>name</key>
-				<string>MD Image Link → &lt;img&gt;</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>82376FBD-B944-47F0-B0F6-14D0E3B22537</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -556,6 +535,27 @@
 			<string>6952AF82-81C6-4EA3-850D-BAC02934B45E</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>MD Image Link → &lt;img&gt;</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>82376FBD-B944-47F0-B0F6-14D0E3B22537</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>

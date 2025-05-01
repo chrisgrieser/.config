@@ -38,6 +38,8 @@
 	<string>hs</string>
 	<key>keyword_23</key>
 	<string>jq</string>
+	<key>keyword_25</key>
+	<string>homebrew</string>
 	<key>use_source_page_if_available</key>
 	<true/>
 </dict>
