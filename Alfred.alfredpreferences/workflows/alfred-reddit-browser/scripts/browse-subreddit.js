@@ -355,7 +355,12 @@ function run() {
 			: "See debugging console for details.";
 		return JSON.stringify({
 			items: [
-				{ title: errorMsg, subtitle: info, valid: false },
+				{
+					title: errorMsg,
+					subtitle: info,
+					valid: false,
+					mods: { cmd: { valid: true } },
+				},
 				{
 					title: "Open subreddit in the browser",
 					subtitle: "r/" + subredditName,

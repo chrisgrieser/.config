@@ -44,7 +44,6 @@ function cacheAndReturnSubIcon(iconPath, subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return false;
 	}
@@ -64,7 +63,6 @@ function cacheAndReturnSubCount(subredditName) {
 	const redditApiCall = `curl -sL -H "User-Agent: Chrome/115.0.0.0" "https://www.reddit.com/r/${subredditName}/about.json"`;
 	const subredditInfo = JSON.parse(app.doShellScript(redditApiCall));
 	if (subredditInfo.error) {
-		// biome-ignore lint/suspicious/noConsole: intentional
 		console.log(`${subredditInfo.error}: ${subredditInfo.message}`);
 		return undefined;
 	}
@@ -92,7 +90,7 @@ function run() {
 	const iconFolder = $.getenv("custom_subreddit_icons") || $.getenv("alfred_workflow_data");
 	const subredditConfig = $.getenv("subreddits")
 		.trim()
-		.replace(/^\/?r\//gm, ""); // can be r/ or /r/ https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
+		.replace(/^\/?r\//gm, ""); // can be `r/` or `/r/` https://www.alfredforum.com/topic/20813-reddit-browser/page/2/#comment-114645
 
 	const subreddits = subredditConfig.split("\n").map((subredditName) => {
 		let subtitle = "";
@@ -120,9 +118,7 @@ function run() {
 			arg: subredditName,
 			icon: { path: iconPath },
 			mods: {
-				cmd: {
-					arg: `https://www.reddit.com/r/${subredditName}/`,
-				},
+				cmd: { arg: `https://www.reddit.com/r/${subredditName}/` },
 			},
 		};
 		return alfredItem;
@@ -136,9 +132,7 @@ function run() {
 			arg: "hackernews",
 			icon: { path: "hackernews.png" },
 			mods: {
-				cmd: {
-					arg: "https://news.ycombinator.com/",
-				},
+				cmd: { arg: "https://news.ycombinator.com/" },
 			},
 		});
 	}
