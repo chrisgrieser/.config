@@ -132,7 +132,7 @@
 			<key>keyword</key>
 			<string>icon</string>
 			<key>text</key>
-			<string>DcukDuckGo Images: "{query}"</string>
+			<string>DuckDuckGo images: "{query}"</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}%20icon&amp;iar=images</string>
 		</dict>
@@ -231,7 +231,7 @@
 			<key>keyword</key>
 			<string>i</string>
 			<key>text</key>
-			<string>DuckDuckGo Images: "{query}"</string>
+			<string>DuckDuckGo images: "{query}"</string>
 			<key>url</key>
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
