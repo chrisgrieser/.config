@@ -37,7 +37,7 @@ require("lazy").setup {
 		wrap = true,
 		border = vim.o.winborder, -- PENDING https://github.com/folke/lazy.nvim/issues/1951
 		pills = false,
-		backdrop = 100, -- skip until bugfix, PENDING https://github.com/folke/lazy.nvim/issues/1951
+		backdrop = 60,
 		size = { width = 0.85, height = 0.85 },
 		custom_keys = {
 			["<localleader>l"] = false,
@@ -84,11 +84,26 @@ require("lazy").setup {
 	},
 }
 
+--------------------------------------------------------------------------------
+-- FIXES
+local group = vim.api.nvim_create_augroup("lazynvim-fixes", { clear = true })
+
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: winfixbuf for lazy window",
-	group = vim.api.nvim_create_augroup("lazywin-winfixbuf", { clear = true }),
+	group = group,
 	pattern = "lazy",
 	callback = function() vim.wo.winfixbuf = true end,
+})
+
+-- PENDING https://github.com/folke/lazy.nvim/issues/1951
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "User: fix backdrop for lazy window",
+	pattern = "lazy_backdrop",
+	group = group,
+	callback = function(ctx)
+		local win = vim.fn.win_findbuf(ctx.buf)[1]
+		vim.api.nvim_win_set_config(win, { border = "none" })
+	end,
 })
 
 --------------------------------------------------------------------------------

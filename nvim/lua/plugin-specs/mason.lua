@@ -88,7 +88,7 @@ return {
 			border = vim.o.winborder,
 			height = 0.85,
 			width = 0.8,
-			backdrop = 100, -- disable PENDING https://github.com/williamboman/mason.nvim/pull/1900
+			backdrop = 60,
 			icons = {
 				package_installed = "✓",
 				package_pending = "󰔟",
@@ -104,9 +104,18 @@ return {
 		require("mason").setup(opts)
 
 		-- get packages from my lsp-server-config
-		local packages = assert(require("config.tooling"), "No packages, aborting uninstalls.")
+		local packages = require("config.tooling")
 		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
-
 		vim.defer_fn(function() syncPackages(packages) end, 3000)
+
+		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User: fix backdrop for mason window",
+			pattern = "mason_backdrop",
+			callback = function(ctx)
+				local win = vim.fn.win_findbuf(ctx.buf)[1]
+				vim.api.nvim_win_set_config(win, { border = "none" })
+			end,
+		})
 	end,
 }
