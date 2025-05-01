@@ -41,8 +41,8 @@ keymap("x", "-", "<Esc>/\\%V", { desc = " Search IN selection" })
 keymap("n", "gm", "%", { desc = "󰅪 Goto match", remap = true })
 
 -- Diagnostics
-keymap("n", "ge", "]d", { desc = "󰒕 Next diagnostic", remap = true })
-keymap("n", "gE", "[d", { desc = "󰒕 Previous diagnostic", remap = true })
+keymap("n", "ge", "]d", { desc = "󰋼 Next diagnostic", remap = true })
+keymap("n", "gE", "[d", { desc = "󰋼 Previous diagnostic", remap = true })
 
 -- stylua: ignore
 keymap("n", "gj", function() require("personal-plugins.misc").goIndent("down") end, { desc = "󰛀 indent down" })

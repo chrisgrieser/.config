@@ -95,6 +95,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function() vim.wo.winfixbuf = true end,
 })
 
+-- FIX Backdrop
 -- PENDING https://github.com/folke/lazy.nvim/issues/1951
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "User: fix backdrop for lazy window",
