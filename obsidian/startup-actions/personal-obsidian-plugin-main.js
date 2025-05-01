@@ -63,8 +63,8 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 }
 
-async function updateStatusbar(plugin) {
-	const { app, statusbar } = plugin;
+async function updateTaskStatusbar(plugin) {
+	const { app, taskStatusbar } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
 		statusbar.style.setProperty("display", "none");
@@ -73,14 +73,25 @@ async function updateStatusbar(plugin) {
 
 	const text = await app.vault.cachedRead(activeFile);
 	const openTasks = text.match(/- \[ \] |TODO/g);
-	if (!openTasks) {
-		statusbar.style.setProperty("display", "none");
-		return;
+	if (openTasks) {
+		taskStatusbar.style.setProperty("display", "block");
+		taskStatusbar.style.setProperty("order", -1); // move to the left
+		taskStatusbar.setText(`${openTasks.length} t`);
+	} else {
+		taskStatusbar.style.setProperty("display", "none");
 	}
+}
 
-	statusbar.style.setProperty("display", "block");
-	statusbar.style.setProperty("order", -1); // move to the very left
-	statusbar.setText(`${openTasks.length} t`);
+function updateSpellStatusbar(plugin) {
+	const { app, spellStatusbar } = plugin;
+	
+	if (app.vault.getConfig("spellcheck")) {
+		spellStatusbar.style.setProperty("display", "block");
+		spellStatusbar.style.setProperty("order", -2); // move to the *very* left
+		spellStatusbar.setText("✓"); // utf checkmarks: ✓
+	} else {
+		spellStatusbar.style.setProperty("display", "none");
+	}
 }
 
 async function reloadPlugin(app, pluginId) {
@@ -127,16 +138,21 @@ function ensureScrolloffset(editor) {
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
-	statusbar = this.addStatusBarItem();
+	taskStatusbar = this.addStatusBarItem();
+	spellStatusbar = this.addStatusBarItem();
 	scrollRef = null;
 
 	onload() {
 		console.info(this.manifest.name + " loaded.");
 
-		// 1. statusbar
-		this.app.workspace.onLayoutReady(() => updateStatusbar(this));
-		this.registerEvent(this.app.workspace.on("file-open", () => updateStatusbar(this)));
-		this.registerInterval(window.setInterval(() => updateStatusbar(this), 5000));
+		// 1a. statusbar: tasks
+		this.app.workspace.onLayoutReady(() => updateTaskStatusbar(this));
+		this.registerEvent(this.app.workspace.on("file-open", () => updateTaskStatusbar(this)));
+		this.registerInterval(window.setInterval(() => updateTaskStatusbar(this), 5000));
+
+		// 1b. statusbar: spellcheck
+		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));
+		this.registerEvent(this.app.vault.on("config-changed", () => updateSpellStatusbar(this)));
 
 		// 2. "New file in folder" command
 		this.addCommand({
