@@ -319,13 +319,15 @@ end
 
 -- Open first URL in file
 keymap("n", "<D-U>", function()
-	local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
-	local url = text:match([[%l%l%l+://[^%s)%]}"'`>]+]])
-	if url then
-		vim.ui.open(url)
-	else
-		vim.notify("No URL found in file.", vim.log.levels.WARN)
+	local bufLines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in pairs(bufLines) do
+		local url = line:match([[%l%l%l+://[^%s)%]}"'`>]+]])
+		if url then
+			vim.ui.open(url)
+			return
+		end
 	end
+	vim.notify("No URL found in file.", vim.log.levels.WARN)
 end, { desc = " Open first URL in file" })
 
 --------------------------------------------------------------------------------

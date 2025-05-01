@@ -55,14 +55,14 @@ function update() {
 	if ! brew outdated; then
 		brew upgrade
 	else
-		echo "All packages already up-to-date."
+		echo "Already up-to-date."
 	fi
 
 	pretty_header "mas upgrade"
 	if [[ -n $(mas outdated) ]]; then
 		mas upgrade
 	else
-		echo "All packages already up-to-date."
+		echo "Already up-to-date."
 	fi
 
 	# sketchybar restart for new permissions
