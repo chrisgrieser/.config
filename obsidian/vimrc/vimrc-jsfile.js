@@ -313,13 +313,17 @@ async function fixWordUnderCursor() {
 	// using first word, since sometimes google suggests multiple words, but we
 	// only want the first as the spellfix
 	let fixedWord = firstSuggestion.match(/^\S+/)[0];
-
 	// capitalize, if original word was also capitalized
 	if (wordUnderCursor.charAt(0) === wordUnderCursor.charAt(0).toUpperCase()) {
 		fixedWord = fixedWord.charAt(0).toUpperCase() + fixedWord.slice(1);
 	}
-	editor.replaceRange(fixedWord, wordRange.from, wordRange.to);
-	editor.setCursor(cursor);
+
+	if (fixedWord === wordUnderCursor) {
+		new Notice("Already correct.");
+	} else {
+		editor.replaceRange(fixedWord, wordRange.from, wordRange.to);
+		editor.setCursor(cursor);
+	}
 }
 
 /** Save/Load a workspace using the Workspaces Core Plugin.
