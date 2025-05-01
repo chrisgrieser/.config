@@ -34,7 +34,6 @@ function run() {
 		.split("\r");
 
 	/** @type{AlfredItem|{}[]} */
-	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 	const fileArray = rgOutput.map((absPath) => {
 		// GUARD check for broken symlinks
 		if (absPath.startsWith("rg: ")) {
@@ -63,12 +62,9 @@ function run() {
 
 		// type-icon
 		let type = "";
-		// type = name.split(".").pop() || "blank";
-		if (name.startsWith(".z")) type = "zsh";
-		else if (name === "Justfile") type = "justfile";
-		else if (name === "Brewfile") type = "brewfile";
-		else type = name.split(".").pop() || ""; // default: extension
-		// else type = "blank"; // if no extension
+		if (name.includes(".")) type = name.split(".").pop() || "";
+		else if (name === "Justfile" || name === "Brewfile") type = name;
+		else type = "blank"; // if no extension
 
 		/** @type {{type: "" | "fileicon"; path: string}} */
 		const iconObj = { type: "", path: "" };
