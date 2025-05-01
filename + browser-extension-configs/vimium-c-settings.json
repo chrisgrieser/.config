@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "4/30/2025, 3:35:23 PM",
-	"time": 1746020123893,
+	"@time": "5/1/2025, 5:09:16 PM",
+	"time": 1746112156589,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -11,8 +11,20 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
+			"passKeys": "c j k ",
+			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://chatgpt.com/"
+		},
+		{
 			"passKeys": "0 N f ",
 			"pattern": "^https://.*.crunchyroll.com"
+		},
+		{
+			"passKeys": "/ j k ",
+			"pattern": ":https://duckduckgo.com/?q="
 		},
 		{
 			"passKeys": "",
@@ -31,18 +43,6 @@
 			"pattern": ":https://mail.google.com/"
 		},
 		{
-			"passKeys": "c j k ",
-			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
-		},
-		{
-			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
-			"pattern": ":https://www.youtube.com/"
-		},
-		{
-			"passKeys": "? ",
-			"pattern": ":https://devdocs.io/"
-		},
-		{
 			"passKeys": "1 ? a g ",
 			"pattern": ":https://www.inoreader.com/"
 		},
@@ -51,8 +51,12 @@
 			"pattern": ":https://www.netflix.com/"
 		},
 		{
-			"passKeys": "",
-			"pattern": ":https://chatgpt.com/"
+			"passKeys": "0 1 2 3 4 5 6 7 8 9 ? N f j k l n ",
+			"pattern": ":https://www.youtube.com/"
+		},
+		{
+			"passKeys": "? ",
+			"pattern": ":https://devdocs.io/"
 		}
 	],
 	"extAllowList": [

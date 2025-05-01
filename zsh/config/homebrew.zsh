@@ -21,7 +21,6 @@ alias depending_on='brew uses --installed --recursive'
 
 function pretty_header() {
 	[[ "$2" != "no-line-break" ]] && echo
-	local fg bg
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
 	bg="\e[1;44m"
 	print "$fg$bg $1 \e[0m"
@@ -73,7 +72,7 @@ function update() {
 }
 
 function listall() {
-	pretty_header "brew info" "first"
+	pretty_header "brew info" "no-line-break"
 	brew info
 
 	pretty_header "brew doctor"
@@ -97,9 +96,8 @@ function listall() {
 
 # $1: count of formulae/casks to list
 function recent_updates() {
-	local default_count=10
-	local count=${1:-$default_count}
-	pretty_header "Recently updated formulae"
+	local count=10
+	pretty_header "Recently updated formulae" "no-line-break"
 	brew list -t --formulae | head -n"$count" | rs
 	pretty_header "Recently updated casks"
 	brew list -t --casks | head -n"$count" | rs
