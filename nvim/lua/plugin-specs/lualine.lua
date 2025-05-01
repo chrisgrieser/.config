@@ -8,8 +8,7 @@
 ---@param component function|table the component forming the lualine
 ---@param where "after"|"before"? defaults to "after"
 vim.g.lualineAdd = function(whichBar, whichSection, component, where)
-	-- Deferred to not load lualine by other plugins
-	vim.defer_fn(function()
+	vim.defer_fn(function() -- deferred so other plugins do not load lualine too early
 		local componentObj = type(component) == "table" and component or { component }
 		local sectionConfig = require("lualine").get_config()[whichBar][whichSection] or {}
 		local pos = where == "before" and 1 or #sectionConfig + 1

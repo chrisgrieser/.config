@@ -108,6 +108,7 @@ return {
 		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
 		vim.defer_fn(function() syncPackages(packages) end, 3000)
 
+		-- FIX Backdrop
 		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
 		vim.api.nvim_create_autocmd("FileType", {
 			desc = "User: fix backdrop for mason window",
