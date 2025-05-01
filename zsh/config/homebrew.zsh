@@ -1,17 +1,11 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_DISPLAY_INSTALL_TIMES=1
-
-export HOMEBREW_AUTO_UPDATE_SECS=86400 # once per day
-export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
-export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-export HOMEBREW_BUNDLE_NO_UPGRADE=1 # brew bundle install does not upgrade
+export HOMEBREW_BUNDLE_NO_UPGRADE=1 # `brew bundle install` should not upgrade
 
-# extra update for the Obsidian, installer version, cause brew won't update as
-# the main app is self-upgrading
+# only the main app is self-upgrading, not the installer version. 
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian"
 
 export HOMEBREW_NO_ANALYTICS=1
@@ -19,9 +13,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 #───────────────────────────────────────────────────────────────────────────────
 
-alias bh='brew home'
 alias bi='brew install'
-alias br='brew reinstall'
 alias bu='brew uninstall --zap'
 alias depending_on='brew uses --installed --recursive'
 
@@ -63,11 +55,11 @@ function update() {
 	if ! brew outdated; then
 		brew upgrade
 	else
-		echo "No unused packages found."
+		echo "All packages already up-to-date."
 	fi
 
 	pretty_header "mas upgrade"
-	if ! mas outdated; then
+	if [[ -n $(mas outdated) ]]; then
 		mas upgrade
 	else
 		echo "All packages already up-to-date."
