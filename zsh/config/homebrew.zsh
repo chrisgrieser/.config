@@ -8,7 +8,6 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
-export HOMEBREW_BUNDLE_NO_UPGRADE=1 # brew bundle install does not upgrade
 
 # extra update for the Obsidian, installer version, cause brew won't update as
 # the main app is self-upgrading
@@ -42,7 +41,7 @@ function update() {
 
 	_print-section "brew bundle install" # install missing packages
 	if ! brew bundle check; then
-		brew bundle install | grep -v "^Using"
+		brew bundle install --no-upgrade | grep -v "^Using"
 	fi
 
 	_print-section "brew bundle cleanup" # remove unused packages
