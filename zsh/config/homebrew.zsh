@@ -36,29 +36,23 @@ function _print-section() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	_print-section "brew update" "first"
+	_print-section "Homebrew: Update" "first"
 	brew update # update homebrew itself
 
-	_print-section "brew bundle install" # install missing packages
+	_print-section "Homebrew: Installs & Upgrades" # install missing packages
 	if ! brew bundle check; then
-		brew bundle install --no-upgrade | grep -v "^Using"
+		brew bundle install --verbose |
+			grep --invert-match --extended-regexp "^Using|^Skipping install of"
 	fi
 
-	_print-section "brew bundle cleanup" # remove unused packages
-	if ! brew bundle cleanup &> /dev/null; then
+	_print-section "Homebrew: Cleanup" # remove unused packages
+	if ! brew bundle cleanup &> /dev/null; then # separate, since `bundle check` does only check for missing installs, not excess installs
 		brew bundle cleanup --force --zap
 	else
 		echo "No unused packages found."
 	fi
 
-	_print-section "brew upgrade"
-	if ! brew outdated; then
-		brew upgrade
-	else
-		echo "All packages already up-to-date."
-	fi
-
-	_print-section "mas upgrade"
+	_print-section "Mac App Store: Upgrades"
 	if ! mas outdated; then
 		mas upgrade
 	else
