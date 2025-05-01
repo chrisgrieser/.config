@@ -84,11 +84,10 @@ async function updateTaskStatusbar(plugin) {
 
 function updateSpellStatusbar(plugin) {
 	const { app, spellStatusbar } = plugin;
-	
 	if (app.vault.getConfig("spellcheck")) {
 		spellStatusbar.style.setProperty("display", "block");
 		spellStatusbar.style.setProperty("order", -2); // move to the *very* left
-		spellStatusbar.setText("✓"); // utf checkmarks: ✓
+		spellStatusbar.setText("✓"); // utf checkmarks
 	} else {
 		spellStatusbar.style.setProperty("display", "none");
 	}
