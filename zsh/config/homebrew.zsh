@@ -8,12 +8,12 @@ export HOMEBREW_CLEANUP_MAX_AGE_DAYS=60
 export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=30
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
+export HOMEBREW_BUNDLE_NO_UPGRADE=1 # brew bundle install does not upgrade
 
 # extra update for the Obsidian, installer version, cause brew won't update as
 # the main app is self-upgrading
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian"
 
-export HOMEBREW_COLOR=1 # force color output even for tty
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
@@ -27,32 +27,46 @@ alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function _print-section() {
-	[[ "$2" != "first" ]] && echo
+function pretty_header() {
+	[[ "$2" != "no-line-break" ]] && echo
+	local fg bg
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
-	print "$fg\e[1;44m $1 \e[0m"
+	bg="\e[1;44m"
+	print "$fg$bg $1 \e[0m"
 }
 
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	_print-section "Homebrew: Update" "first"
-	brew update # update homebrew itself
+	pretty_header "brew update" "no-line-break"
+	brew update # update homebrew itself, based on HOMEBREW_AUTO_UPDATE_SECS
 
-	_print-section "Homebrew: Installs & Upgrades" # install missing packages
+	pretty_header "brew bundle install"
 	if ! brew bundle check; then
-		brew bundle install --verbose |
-			grep --invert-match --extended-regexp "^Using|^Skipping install of"
+		export HOMEBREW_COLOR=1                      # force color when piping output
+		brew bundle install --verbose --no-upgrade | # `--verbose` shows installn progress
+			grep --invert-match --extended-regexp "^Using |^Skipping install of "
 	fi
 
-	_print-section "Homebrew: Cleanup" # remove unused packages
-	if ! brew bundle cleanup &> /dev/null; then # separate, since `bundle check` does only check for missing installs, not excess installs
+	pretty_header "brew bundle cleanup"
+	# not using `brew bundle install --cleanup`, since `brew bundle check` does
+	# only check for missing installs, not excess installs
+	if ! brew bundle cleanup &> /dev/null; then
 		brew bundle cleanup --force --zap
 	else
 		echo "No unused packages found."
 	fi
 
-	_print-section "Mac App Store: Upgrades"
+	pretty_header "brew upgrade"
+	# not using `brew bundle install --upgrade`, simply to separate upgrades from
+	# installs only visually
+	if ! brew outdated; then
+		brew upgrade
+	else
+		echo "No unused packages found."
+	fi
+
+	pretty_header "mas upgrade"
 	if ! mas outdated; then
 		mas upgrade
 	else
@@ -67,25 +81,25 @@ function update() {
 }
 
 function listall() {
-	_print-section "brew info" "first"
+	pretty_header "brew info" "first"
 	brew info
 
-	_print-section "brew doctor"
+	pretty_header "brew doctor"
 	brew doctor
 
-	_print-section "brew services list"
+	pretty_header "brew services list"
 	brew services list
 
-	_print-section "brew taps"
+	pretty_header "brew taps"
 	brew tap | rs
 
-	_print-section "brew leaves --installed-on-request"
-	brew leaves --installed-on-request | rs
+	pretty_header "brew leaves"
+	brew leaves | rs
 
-	_print-section "brew list --casks"
+	pretty_header "brew list --casks"
 	brew list --casks
 
-	_print-section "mas list"
+	pretty_header "mas list"
 	mas list
 }
 
@@ -93,8 +107,8 @@ function listall() {
 function recent_updates() {
 	local default_count=10
 	local count=${1:-$default_count}
-	_print-section "Recently updated formulae"
+	pretty_header "Recently updated formulae"
 	brew list -t --formulae | head -n"$count" | rs
-	_print-section "Recently updated casks"
+	pretty_header "Recently updated casks"
 	brew list -t --casks | head -n"$count" | rs
 }

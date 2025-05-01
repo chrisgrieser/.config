@@ -58,7 +58,6 @@ cask "qlmarkdown"
 # DEVICE-SPECIFIC INSTALLS
 if system("scutil --get ComputerName | grep -q Home")
 	brew "spotify_player"
-	brew "hyperfine"
 	brew "yt-dlp"
 	cask "anki"
 	cask "bettertouchtool"
