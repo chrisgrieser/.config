@@ -23,6 +23,8 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+cask "syntax-highlight" # mas "Peek", id: 1554235898 # Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
+cask "qlmarkdown"
 
 # CASKS
 cask "alfred"
@@ -47,11 +49,6 @@ brew "mas"
 mas "Folder Preview", id: 6698876601
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
-
-# BUG Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-# mas "Peek", id: 1554235898
-cask "syntax-highlight"
-cask "qlmarkdown"
 
 #───────────────────────────────────────────────────────────────────────────────
 
