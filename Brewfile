@@ -23,6 +23,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+
 cask "syntax-highlight" # Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "qlmarkdown"
 
