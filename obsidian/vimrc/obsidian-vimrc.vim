@@ -324,6 +324,10 @@ nnoremap ,if :freezeInterface<CR>
 exmap markAsRead obcommand quadro:mark-datafile-as-read
 nnoremap ,rr :markAsRead<CR>
 
+" set "[r]ead: true" property
+exmap switchQuotes jsfile Meta/vimrc-jsfile.js { switchQuotes() }
+nnoremap ,rq :switchQuotes<CR>
+
 " [i]nspect chrome [v]ersion
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
 nnoremap ,iv :inspectChromeVersion<CR>
