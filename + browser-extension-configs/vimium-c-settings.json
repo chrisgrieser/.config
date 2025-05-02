@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/1/2025, 5:09:16 PM",
-	"time": 1746112156589,
+	"@time": "5/2/2025, 12:09:45 PM",
+	"time": 1746180585377,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -23,7 +23,7 @@
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
-			"passKeys": "/ j k ",
+			"passKeys": "/ h j k l ",
 			"pattern": ":https://duckduckgo.com/?q="
 		},
 		{

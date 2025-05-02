@@ -35,7 +35,7 @@ function update() {
 	pretty_header "brew bundle install"
 	if ! brew bundle check; then
 		export HOMEBREW_COLOR=1                      # force color when piping output
-		brew bundle install --verbose --no-upgrade | # `--verbose` shows installn progress
+		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
 	fi
 
@@ -49,9 +49,8 @@ function update() {
 	fi
 
 	pretty_header "brew upgrade"
-	# not using `brew bundle install --upgrade`, simply to separate upgrades from
-	# installs only visually
-	if ! brew outdated; then
+	# not using `brew bundle install --upgrade`, to visually separate upgrades from installs
+	if [[ -n $(brew outdated) ]]; then
 		brew upgrade
 	else
 		echo "Already up-to-date."
