@@ -18,6 +18,14 @@ function deleteLastChar() {
 	editor.setCursor(cursor);
 }
 
+function switchQuotes() {
+	const cursor = editor.getCursor();
+	const line = editor.getLine(cursor.line);
+	const updatedText = line.replace(/["']/g, (q) => (q === '"' ? "'" : '"'));
+	editor.setLine(cursor.line, updatedText);
+	editor.setCursor(cursor);
+}
+
 async function updatePlugins() {
 	const app = view.app;
 	new Notice("Checking for updates…");
