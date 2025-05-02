@@ -117,8 +117,9 @@ function _setCursorAndAddToJumplist(editor, oldCursor, newCursor) {
 /**
  * @param {"next"|"prev"} direction
  * @param {RegExp} pattern
+ * @param {"wrap"=} wrap
  */
-function gotoLineWithPattern(direction, pattern) {
+function gotoLineWithPattern(direction, pattern, wrap) {
 	const reverseLnum = (/** @type {number} */ line) => editor.lineCount() - line - 1;
 
 	const prevCursor = editor.getCursor();
@@ -130,6 +131,12 @@ function gotoLineWithPattern(direction, pattern) {
 
 	let lnumWithPattern = linesBelow.findIndex((line) => line.match(pattern));
 	if (lnumWithPattern > -1) lnumWithPattern += currentLnum + 1; // account for previous slicing
+
+	// wrap around if not found
+	if (wrap && lnumWithPattern === -1) {
+		const linesAbove = allLines.slice(0, currentLnum);
+		lnumWithPattern = linesAbove.findIndex((line) => line.match(pattern));
+	}
 
 	if (lnumWithPattern === -1) {
 		new Notice(`No line found with pattern ${pattern}`);

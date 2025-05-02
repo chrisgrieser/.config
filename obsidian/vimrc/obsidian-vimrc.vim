@@ -127,15 +127,15 @@ nnoremap g. :gotoLastLinkInFile<CR>
 
 " next/prev paragraph with link
 " (`zt<C-y><C-y>` so long lines are fully visible in the editor)
-exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/) }
+exmap gotoNextLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /\[\[/, "wrap") }
 nnoremap gj :gotoNextLinkInFile<CR>zt<C-y><C-y>
-exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/) }
+exmap gotoPrevLinkInFile jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /\[\[/, "wrap") }
 nnoremap gk :gotoPrevLinkInFile<CR>zt<C-y><C-y>
 
 " Tasks
-exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /- \[[x ]\]|TODO/) }
+exmap gotoNextTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("next", /- \[[x ]\]|TODO/, "wrap") }
 nnoremap gt :gotoNextTask<CR>
-exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/) }
+exmap gotoPrevTask jsfile Meta/vimrc-jsfile.js { gotoLineWithPattern("prev", /- \[[x ]\]|TODO/, "wrap") }
 nnoremap gT :gotoPrevTask<CR>
 
 "───────────────────────────────────────────────────────────────────────────────

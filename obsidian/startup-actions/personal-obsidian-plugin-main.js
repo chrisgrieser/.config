@@ -111,7 +111,7 @@ async function reloadPlugin(app, pluginId) {
 }
 
 function ensureScrolloffset(editor) {
-	const distancePercent = 0.35; // CONFIG
+	const distancePercent = 0.4; // CONFIG
 
 	if (!editor.hasFocus()) return;
 	const cursor = editor.getCursor();
