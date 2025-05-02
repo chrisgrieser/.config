@@ -127,15 +127,9 @@ function gotoLineWithPattern(direction, pattern) {
 	const allLines = editor.getValue().split("\n");
 	if (direction === "prev") allLines.reverse();
 	const linesBelow = allLines.slice(currentLnum + 1);
-	const linesAbove = allLines.slice(0, currentLnum);
 
 	let lnumWithPattern = linesBelow.findIndex((line) => line.match(pattern));
 	if (lnumWithPattern > -1) lnumWithPattern += currentLnum + 1; // account for previous slicing
-
-	// wrap around if not found
-	if (lnumWithPattern === -1) {
-		lnumWithPattern = linesAbove.findIndex((line) => line.match(pattern));
-	}
 
 	if (lnumWithPattern === -1) {
 		new Notice(`No line found with pattern ${pattern}`);
