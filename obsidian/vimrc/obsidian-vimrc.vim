@@ -296,14 +296,10 @@ exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
 nnoremap X :deleteLastChar<CR>
 
 " Proofreader accept/reject
-exmap acceptNextProofread obcommand proofreader:accept-next-suggestion
-noremap gA :acceptNextProofread<CR>
-exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
-noremap gB :rejectNextProofread<CR>
 exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
 noremap ga :acceptProofreadInText<CR>
-exmap rejectProofreadInText obcommand proofreader:reject-suggestions-in-text
-noremap gb :rejectProofreadInText<CR>
+exmap rejectNextProofread obcommand proofreader:reject-next-suggestion
+noremap gb :rejectNextProofread<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
