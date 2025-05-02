@@ -23,7 +23,7 @@ brew "zsh-autopair"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-cask "syntax-highlight" # mas "Peek", id: 1554235898 # Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
+cask "syntax-highlight" # Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "qlmarkdown"
 
 # CASKS
@@ -53,7 +53,10 @@ mas "Ivory", id: 6444602274
 #───────────────────────────────────────────────────────────────────────────────
 
 # DEVICE-SPECIFIC INSTALLS
-if system("scutil --get ComputerName | grep -q Home")
+
+computer_name = `scutil --get ComputerName`
+
+if computer_name.include?("Home")
 	brew "spotify_player"
 	brew "yt-dlp"
 	cask "anki"
@@ -63,9 +66,9 @@ if system("scutil --get ComputerName | grep -q Home")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-elsif system("scutil --get ComputerName | grep -q Office")
+elsif computer_name.include?("Office")
 	cask "cleanshot"
-elsif system("scutil --get ComputerName | grep -q Mother")
+elsif computer_name.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
