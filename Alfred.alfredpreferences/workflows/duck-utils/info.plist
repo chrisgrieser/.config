@@ -356,7 +356,7 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string></string>
+				<string>https://www.google.com/search?q={query}&amp;udm=14</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -371,13 +371,13 @@
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
-				<string>https:\/\/duckduckgo.com\/\?q=([^&amp;]*)</string>
+				<string>https:\/\/duckduckgo.com\/\?q=([^&amp;]*).*</string>
 				<key>regexcaseinsensitive</key>
 				<false/>
 				<key>regexmultiline</key>
 				<false/>
 				<key>replacestring</key>
-				<string>https://google.com/search?q=$1</string>
+				<string>$1</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.replace</string>
@@ -690,7 +690,7 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>1</integer>
 			<key>note</key>
-			<string>DDG → Google</string>
+			<string>extract search query</string>
 			<key>xpos</key>
 			<real>415</real>
 			<key>ypos</key>
@@ -709,8 +709,10 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>Google with `&amp;udm=14`</string>
 			<key>xpos</key>
-			<real>500</real>
+			<real>515</real>
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
