@@ -29,10 +29,7 @@ function pretty_header() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	pretty_header "brew update" "no-line-break"
-	brew update # update homebrew itself
-
-	pretty_header "brew bundle install"
+	pretty_header "brew bundle install" "no-line-break"
 	if ! brew bundle check; then
 		export HOMEBREW_COLOR=1                      # force color when piping output
 		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
