@@ -74,7 +74,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EA91E774-B49F-4168-A209-3A4384118490</string>
+				<string>EC823824-A89D-4970-A3D9-6DF1EBA6296A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -157,7 +157,7 @@
 				<false/>
 			</dict>
 		</array>
-		<key>EA91E774-B49F-4168-A209-3A4384118490</key>
+		<key>EC823824-A89D-4970-A3D9-6DF1EBA6296A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -410,7 +410,6 @@
 				<key>relatedApps</key>
 				<array>
 					<string>com.brave.Browser</string>
-					<string>com.apple.Safari</string>
 				</array>
 				<key>relatedAppsMode</key>
 				<integer>1</integer>
@@ -426,14 +425,17 @@
 			<key>config</key>
 			<dict>
 				<key>tasksettings</key>
-				<dict/>
+				<dict>
+					<key>popup_browser</key>
+					<string>Brave Browser</string>
+				</dict>
 				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+				<string>com.alfredapp.automation.extras/web-browsers/chromium-browsers/chromium.tabs.current</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>EA91E774-B49F-4168-A209-3A4384118490</string>
+			<string>EC823824-A89D-4970-A3D9-6DF1EBA6296A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -727,12 +729,14 @@ Created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>EA91E774-B49F-4168-A209-3A4384118490</key>
+		<key>EC823824-A89D-4970-A3D9-6DF1EBA6296A</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>1</integer>
+			<key>note</key>
+			<string>get Brave Tab</string>
 			<key>xpos</key>
-			<real>170</real>
+			<real>175</real>
 			<key>ypos</key>
 			<real>210</real>
 		</dict>

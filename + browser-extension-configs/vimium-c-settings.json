@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/2/2025, 4:51:26 PM",
-	"time": 1746197486551,
+	"@time": "5/2/2025, 7:26:41 PM",
+	"time": 1746206801791,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -11,7 +11,7 @@
 	"exclusionListenHash": false,
 	"exclusionRules": [
 		{
-			"passKeys": "c ",
+			"passKeys": "/ ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
 		},
 		{
@@ -23,7 +23,7 @@
 			"pattern": "^https://.*.crunchyroll.com"
 		},
 		{
-			"passKeys": "/ h j k l ",
+			"passKeys": "/ j k ",
 			"pattern": "^https://duckduckgo.com/.*ia=web"
 		},
 		{
