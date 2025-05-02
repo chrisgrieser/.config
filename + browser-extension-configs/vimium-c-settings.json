@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/2/2025, 12:09:45 PM",
-	"time": 1746180585377,
+	"@time": "5/2/2025, 1:15:51 PM",
+	"time": 1746184551405,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -24,7 +24,7 @@
 		},
 		{
 			"passKeys": "/ h j k l ",
-			"pattern": ":https://duckduckgo.com/?q="
+			"pattern": "^https://duckduckgo.com/.*ia=web"
 		},
 		{
 			"passKeys": "",
