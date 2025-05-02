@@ -30,7 +30,7 @@ function pretty_header() {
 
 function update() {
 	pretty_header "brew update" "no-line-break"
-	brew update # update homebrew itself, based on HOMEBREW_AUTO_UPDATE_SECS
+	brew update # update homebrew itself
 
 	pretty_header "brew bundle install"
 	if ! brew bundle check; then
@@ -49,7 +49,7 @@ function update() {
 	fi
 
 	pretty_header "brew upgrade"
-	# not using `brew bundle install --upgrade`, to visually separate upgrades from installs
+	# not `brew bundle install --upgrade` to visually separate upgrades from installs
 	if [[ -n $(brew outdated) ]]; then
 		brew upgrade
 	else
