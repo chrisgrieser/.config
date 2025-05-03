@@ -51,16 +51,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>6DBE7C33-DE4C-4B1D-8831-E8F02E6FB3D6</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -103,7 +93,7 @@
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>destinationuid</key>
@@ -140,7 +130,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>76BF609E-B98F-4D34-9CAB-1AA18567FE33</string>
+				<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -207,7 +197,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
+				<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -259,31 +249,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>5BFAE6DA-5C37-4CC8-BC28-9EEE8194E757</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A915081B-4FBF-46B4-8B5E-AF3C2282A034</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>AB977CE7-1D10-44F7-AFF8-0018203097F6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -363,19 +328,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>DA53DB8C-C97B-4594-A26E-0875AB96D262</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>76BF609E-B98F-4D34-9CAB-1AA18567FE33</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -626,51 +578,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:keepOpen}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>true</string>
-						<key>outputlabel</key>
-						<string>true</string>
-						<key>uid</key>
-						<string>478E95B7-88CA-4DFE-BB8F-2F13E8C97F30</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>false</string>
-				<key>hideelse</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>A915081B-4FBF-46B4-8B5E-AF3C2282A034</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>unstackview</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.hidealfred</string>
-			<key>uid</key>
-			<string>E4273F65-2A88-4E80-A7A9-4828E475C54F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -846,26 +753,6 @@
 			<string>alfred.workflow.userinterface.text</string>
 			<key>uid</key>
 			<string>048725A0-DB75-4146-B66B-8947B03863C8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>~/Library/Application Support/Alfred/Caches/workflows/{const:alfred_workflow_uid}</string>
-					<key>use_finder</key>
-					<false/>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>76BF609E-B98F-4D34-9CAB-1AA18567FE33</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1317,9 +1204,9 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>note</key>
 			<string>delete Alfred cache</string>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>1070</real>
 			<key>ypos</key>
-			<real>675</real>
+			<real>670</real>
 		</dict>
 		<key>5E6BB902-56B8-4291-8181-8D015E7F0A0D</key>
 		<dict>
@@ -1346,7 +1233,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 			<key>colorindex</key>
 			<integer>7</integer>
 			<key>xpos</key>
-			<real>1035</real>
+			<real>995</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -1372,17 +1259,6 @@ to set a hotkey to show reminders due today</string>
 			<key>ypos</key>
 			<real>15</real>
 		</dict>
-		<key>76BF609E-B98F-4D34-9CAB-1AA18567FE33</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>11</integer>
-			<key>note</key>
-			<string>delete Alfred cache</string>
-			<key>xpos</key>
-			<real>1255</real>
-			<key>ypos</key>
-			<real>445</real>
-		</dict>
 		<key>A6117B6C-7738-4FC1-8297-B72F0FEEB9CC</key>
 		<dict>
 			<key>colorindex</key>
@@ -1391,17 +1267,6 @@ to set a hotkey to show reminders due today</string>
 			<real>770</real>
 			<key>ypos</key>
 			<real>580</real>
-		</dict>
-		<key>A915081B-4FBF-46B4-8B5E-AF3C2282A034</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>note</key>
-			<string>keep open?</string>
-			<key>xpos</key>
-			<real>1013</real>
-			<key>ypos</key>
-			<real>175</real>
 		</dict>
 		<key>AB977CE7-1D10-44F7-AFF8-0018203097F6</key>
 		<dict>
@@ -1466,15 +1331,6 @@ to set a hotkey to show reminders due today</string>
 			<real>845</real>
 			<key>ypos</key>
 			<real>770</real>
-		</dict>
-		<key>E4273F65-2A88-4E80-A7A9-4828E475C54F</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>7</integer>
-			<key>xpos</key>
-			<real>1110</real>
-			<key>ypos</key>
-			<real>200</real>
 		</dict>
 		<key>E5DECF0A-F7E7-4C15-BF46-AD547A831F40</key>
 		<dict>
@@ -1718,7 +1574,7 @@ to set a hotkey to show reminders due today</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>3.4.2</string>
+	<string>3.4.3</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

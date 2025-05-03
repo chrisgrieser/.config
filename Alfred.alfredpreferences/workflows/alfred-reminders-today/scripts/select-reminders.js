@@ -171,7 +171,6 @@ function run() {
 				notificationTitle: rem.isCompleted ? "🔲 Uncompleted" : "☑️ Completed",
 				showCompleted: showCompleted.toString(), // keep "show completed" state
 				mode: "toggle-completed",
-				keepOpen: (remindersJson.length > 1).toString(),
 			},
 			mods: {
 				cmd: {
@@ -185,7 +184,6 @@ function run() {
 							(url ? "🔗 Open URL" : "📋 Copy") + (rem.isCompleted ? "" : " and completed"),
 						mode: rem.isCompleted ? "stop-after" : "toggle-completed",
 						cmdMode: url ? "open-url" : "copy",
-						keepOpen: false.toString(),
 					},
 				},
 				alt: {
