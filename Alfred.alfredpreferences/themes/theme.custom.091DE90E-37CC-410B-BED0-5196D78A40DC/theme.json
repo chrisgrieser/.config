@@ -31,24 +31,24 @@
       "paddingHorizontal" : 14,
       "spacing" : 6,
       "text" : {
-        "size" : 57,
+        "size" : 45,
         "colorSelected" : "#FFFFFFFF",
         "font" : "Lucida Grande",
         "color" : "#FEFFFFFF"
       },
       "background" : "#424242FF",
       "roundness" : 15,
-      "paddingVertical" : 5
+      "paddingVertical" : 12
     },
     "window" : {
       "color" : "#212121FF",
       "paddingHorizontal" : 10,
       "width" : 1009,
-      "borderPadding" : 5,
-      "borderColor" : "#0000007F",
+      "borderPadding" : 3,
+      "borderColor" : "#5E5E5E78",
       "blur" : 10,
       "roundness" : 17,
-      "paddingVertical" : 11
+      "paddingVertical" : 10
     },
     "credit" : "pseudometa",
     "separator" : {
