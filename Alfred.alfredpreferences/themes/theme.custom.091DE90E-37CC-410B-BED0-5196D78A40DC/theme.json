@@ -4,22 +4,22 @@
       "textSpacing" : 7,
       "subtext" : {
         "size" : 19,
-        "colorSelected" : "#FFFFFFC4",
+        "colorSelected" : "#424242FF",
         "font" : "Lucida Grande",
-        "color" : "#00000065"
+        "color" : "#A9A9A9FF"
       },
       "shortcut" : {
         "size" : 25,
-        "colorSelected" : "#FFFFFFFF",
+        "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
-        "color" : "#005392FF"
+        "color" : "#009192FF"
       },
-      "backgroundSelected" : "#016BDEFF",
+      "backgroundSelected" : "#0096FFFF",
       "text" : {
         "size" : 26,
-        "colorSelected" : "#FFFFFFFF",
+        "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
-        "color" : "#000000E5"
+        "color" : "#FEFFFFFF"
       },
       "iconPaddingHorizontal" : 9,
       "roundness" : 7,
@@ -34,14 +34,14 @@
         "size" : 57,
         "colorSelected" : "#FFFFFFFF",
         "font" : "Lucida Grande",
-        "color" : "#000000FF"
+        "color" : "#FEFFFFFF"
       },
-      "background" : "#C0C0C0FF",
+      "background" : "#424242FF",
       "roundness" : 15,
       "paddingVertical" : 5
     },
     "window" : {
-      "color" : "#FFFFFFE5",
+      "color" : "#212121FF",
       "paddingHorizontal" : 10,
       "width" : 1009,
       "borderPadding" : 5,
@@ -52,13 +52,13 @@
     },
     "credit" : "pseudometa",
     "separator" : {
-      "color" : "#CBCBCBF3",
+      "color" : "#424242FF",
       "thickness" : 2
     },
     "scrollbar" : {
       "color" : "#A9A9A9FF",
       "thickness" : 10
     },
-    "name" : "macOS light"
+    "name" : "macOS dark"
   }
 }
