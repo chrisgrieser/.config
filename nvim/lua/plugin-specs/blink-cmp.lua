@@ -2,9 +2,6 @@
 -- DOCS https://cmp.saghen.dev/configuration/reference
 --------------------------------------------------------------------------------
 
-local developing = vim.uv.fs_stat(vim.g.localRepos .. "/blink.cmp") ~= nil
-
-
 return {
 	"saghen/blink.cmp",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -13,11 +10,6 @@ return {
 	---@module "blink.cmp"
 	---@type blink.cmp.Config
 	opts = {
-		-- TEMP
-		fuzzy = {
-			prebuilt_binaries = { force_version = developing and "v1.1.1" or nil },
-		},
-
 		sources = {
 			providers = {
 				lsp = {

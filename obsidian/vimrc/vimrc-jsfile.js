@@ -429,6 +429,21 @@ function origamiL() {
 }
 
 //──────────────────────────────────────────────────────────────────────────────
+
+function inspectUnresolvedLinks() {
+	const unresolvedCache = view.app.metadataCache.unresolvedLinks;
+	const filesWithUnresolved = [];
+	for (const [filepath, unresolvedLinks] of Object.entries(unresolvedCache)) {
+		const unresolvedTargets = Object.keys(unresolvedLinks);
+		if (unresolvedTargets.length === 0) break; 
+		if (unresolvedTargets.length === 0) continue; 
+
+		const wikilink = `[[${filepath.slice(0, -3)}]]`;
+		filesWithUnresolved.push([wikilink, unresolvedTargets]);
+	}
+}
+
+//──────────────────────────────────────────────────────────────────────────────
 // STUFF FOR DATAVIEW-JS
 
 function toggleJsLineComment() {
