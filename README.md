@@ -11,9 +11,6 @@ People tell me they find the following configurations most useful:
 
 <img width=60% alt="starship prompt" src="https://user-images.githubusercontent.com/73286100/229211019-e763d775-d89f-43da-99ef-06c57fd1e485.png">
 
-## My blog on Neovim
-- [Nanotips for Vim](https://nanotipsforvim.prose.sh/)
-
 ## About me
 In my day job, I am a sociologist studying the social mechanisms underlying the
 digital economy. For my PhD project, I investigate the governance of the app

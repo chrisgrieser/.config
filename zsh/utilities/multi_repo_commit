@@ -1,0 +1,93 @@
+#!/usr/bin/env zsh
+
+# CONFIG
+github_username="chrisgrieser"
+set -e
+
+# repo_names="alfred|shimmering-obsidian|gitfred"
+repo_names="nvim"
+# repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|obsidian-proofreader"
+# ALL
+# repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
+
+function actions_in_repo {
+	cp -f "$HOME/Desktop/obsidian-plugin-release.yml" ./.github/workflows/obsidian-plugin-release.yml
+	# cp -f "$HOME/Desktop/alfred-workflow-release.yml" ./.github/workflows/alfred-workflow-release.yml
+}
+
+commit_msg="ci: fix edge cases of release label identification"
+
+#───────────────────────────────────────────────────────────────────────────────
+#───────────────────────────────────────────────────────────────────────────────
+
+# GUARD
+if [[ ! -x "$(command -v gh)" ]]; then print "\e[1;33mgh not installed.\e[0m" && return 1; fi
+
+# only non-forked, non-archived repos
+repos_to_update=$(gh repo list --limit=100 --no-archived --source --visibility=public \
+	--json="name" --jq=".[].name | select(test(\"$repo_names\"))")
+repo_count=$(echo "$repos_to_update" | wc -l | tr -d " ")
+
+# confirmation that everything is correct
+print "\e[1;34mRepos to update ($repo_count):\e[0m"
+echo "$repos_to_update" | rs
+echo
+
+print "\e[1;34mCommit message:\e[0m"
+echo "$commit_msg"
+
+echo
+print "\e[1;34mActions:\e[0m"
+declare -f actions_in_repo | sed '1d;$d;s/^\t//' | bat --language=sh --no-pager
+echo
+print "\e[1;34mProceed? (y/n)\e[0m"
+read -r pressed
+if [[ "$pressed" != "y" ]]; then
+	echo
+	echo "Aborted."
+	return 1
+fi
+echo
+echo "────────────────────────"
+echo
+
+#───────────────────────────────────────────────────────────────────────────────
+
+cd /tmp || return 1
+
+# clone each repo, do the replacements, and git add/commit/push
+i=1
+not_updated=0
+while read -r repo; do
+	print "\e[1;34mUpdating $repo… ($i/$repo_count)\e[0m"
+	# WARN depth 2 relevant for prevent history loss when amending
+	git clone --no-progress --depth=2 "git@github.com:$github_username/$repo"
+	cd "$repo" || return 1
+
+	actions_in_repo
+
+	# COMMIT
+	git add --all && git commit -m "$commit_msg" && git push --no-progress
+
+	# WARN AMEND
+	# git add --all && git commit --amend --no-edit && git push --no-progress --force
+
+	success=$?
+	if [[ $success -ne 0 ]]; then
+		print "\e[1;33mDid not update $repo.\e[0m"
+		((not_updated++))
+	fi
+
+	echo
+	cd ..
+	trash "$repo"
+	((i++))
+done <<< "$repos_to_update"
+
+#───────────────────────────────────────────────────────────────────────────────
+
+if [[ $not_updated -gt 0 ]]; then
+	echo "────────────────────────"
+	print "\e[1;33m$not_updated repo(s) not updated.\e[0m"
+fi
+"$ZDOTDIR/notificator" --title "🌐Multi-repo commit" --message "Update finished." --sound "Blow"
