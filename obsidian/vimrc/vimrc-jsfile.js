@@ -431,51 +431,42 @@ function origamiL() {
 //──────────────────────────────────────────────────────────────────────────────
 
 function inspectUnresolvedLinks() {
-	const unresolvedCache = view.app.metadataCache.unresolvedLinks;
+	const app = view.app;
+
+	// UNRESOLVED
+	const unresolvedCache = app.metadataCache.unresolvedLinks;
 	const filesWithUnresolved = [];
 	for (const [filepath, unresolvedLinks] of Object.entries(unresolvedCache)) {
 		const unresolvedTargets = Object.keys(unresolvedLinks);
-		if (unresolvedTargets.length === 0) break; 
-		if (unresolvedTargets.length === 0) continue; 
-
-		const wikilink = `[[${filepath.slice(0, -3)}]]`;
-		filesWithUnresolved.push([wikilink, unresolvedTargets]);
+		if (unresolvedTargets.length === 0) continue;
+		const basename = filepath.slice(0, -3);
+		filesWithUnresolved.push(basename + ": " + unresolvedTargets.join(", "));
 	}
+	const msg1 =
+		filesWithUnresolved.length > 0
+			? "Unresolved links:\n- " + filesWithUnresolved.join("\n- ")
+			: "No unresolved links.";
+	new Notice(msg1, 0);
+
+	// ORPHANS
+	const ignoredFolders = ["Meta"]; // CONFIG
+	const ignoredExtensions = ["md"]; // CONFIG
+	const resolvedLinkCache = app.metadataCache.resolvedLinks;
+	const /** @type {Record<string, boolean>} */ allLinks = {};
+	for (const [_, resolvedLinks] of Object.entries(resolvedLinkCache)) {
+		for (const link of Object.keys(resolvedLinks)) {
+			allLinks[link] = true;
+		}
+	}
+	const orphans = app.vault
+		.getFiles()
+		.filter((f) => {
+			const isOrphan = !allLinks[f.path];
+			const nonMarkdown = !ignoredExtensions.includes(f.extension);
+			const notInIgnoredFolder = ignoredFolders.every((folder) => !f.path.startsWith(folder));
+			return isOrphan && nonMarkdown && notInIgnoredFolder;
+		})
+		.map((file) => "- " + file.path);
+	const msg2 = orphans.length > 0 ? "Orphans:\n" + orphans.join("\n") : "No orphans.";
+	new Notice(msg2, 0);
 }
-
-//──────────────────────────────────────────────────────────────────────────────
-// STUFF FOR DATAVIEW-JS
-
-function toggleJsLineComment() {
-	const cursor = editor.getCursor();
-	const lineText = editor.getLine(cursor.line);
-
-	const [_, indent, hasComment, textWithoutComment] = lineText.match(/^(\s*)(\/\/ )?(.*)/) || [];
-	const updatedText = indent + (hasComment ? "" : "// ") + textWithoutComment;
-	cursor.ch += hasComment ? -3 : 3;
-
-	editor.setLine(cursor.line, updatedText);
-	editor.setCursor(cursor);
-}
-
-function appendJsComment() {
-	const lnum = editor.getCursor().line;
-	const text = editor.getLine(lnum);
-	const updatedText = text + " // ";
-	editor.setLine(lnum, updatedText);
-	editor.setCursor(lnum, updatedText.length);
-	activeWindow.CodeMirrorAdapter.Vim.enterInsertMode(editor.cm.cm); // = vim's `a`
-}
-
-function consoleLogFromWordUnderCursor() {
-	const cursor = editor.getCursor();
-	const cursorWordRange = editor.wordAt(cursor);
-	const cursorWord = editor.getRange(cursorWordRange.from, cursorWordRange.to);
-	const indent = editor.getLine(cursor.line).match(/^\s*/)?.[0] || "";
-	const logLine = indent + `console.log(${cursorWord});`;
-
-	editor.replaceRange(logLine + "\n", { line: cursor.line + 1, ch: 0 });
-	editor.setCursor(cursor); // restore position as `replaceRange` moves cursor
-}
-
-//──────────────────────────────────────────────────────────────────────────────
