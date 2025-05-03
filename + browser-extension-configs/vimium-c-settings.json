@@ -1,7 +1,7 @@
 {
 	"name": "Vimium C",
-	"@time": "5/2/2025, 7:26:41 PM",
-	"time": 1746206801791,
+	"@time": "5/3/2025, 12:33:46 PM",
+	"time": 1746268426579,
 	"environment": {
 		"extension": "2.12.2",
 		"platform": "mac",
@@ -13,10 +13,6 @@
 		{
 			"passKeys": "/ ",
 			"pattern": "^https:\\/\\/www\\.google(.(?!udm=2))*$"
-		},
-		{
-			"passKeys": "",
-			"pattern": ":https://chatgpt.com/"
 		},
 		{
 			"passKeys": "0 N f ",
@@ -77,7 +73,6 @@
 		"idghocbbahafpfhjnfhpbfbmpegphmmp",
 		""
 	],
-	"grabBackFocus": true,
 	"keyLayout": 154,
 	"keyMappings": [
 		"#!no-check",

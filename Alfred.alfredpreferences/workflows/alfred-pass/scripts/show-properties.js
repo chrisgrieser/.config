@@ -21,7 +21,10 @@ function run() {
 			const value = valid
 				? property.slice(property.indexOf(":") + 1).trim()
 				: property.toUpperCase();
-			const isUrl = key.toLowerCase() === "url" || value.startsWith("https?://");
+			const isUrl =
+				key.toLowerCase() === "url" ||
+				key.toLowerCase() === "website" ||
+				Boolean(value.match(/^https?:\/\//));
 
 			return {
 				title: value,

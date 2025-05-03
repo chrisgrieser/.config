@@ -15,6 +15,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 alias bi='brew install'
 alias bu='brew uninstall --zap'
+alias br='brew reinstall'
 alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -29,7 +30,10 @@ function pretty_header() {
 #───────────────────────────────────────────────────────────────────────────────
 
 function update() {
-	pretty_header "brew bundle install" "no-line-break"
+	pretty_header "brew update" "no-line-break"
+	brew update # update homebrew itself
+
+	pretty_header "brew bundle install"
 	if ! brew bundle check; then
 		export HOMEBREW_COLOR=1                      # force color when piping output
 		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
