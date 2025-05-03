@@ -39,24 +39,10 @@ M.pathw_desktop = pathw(home .. "/Desktop/", function(paths, _)
 			end
 
 		-- BACKUP BROWSER SETTINGS
-		elseif name == "violentmonkey" then
-			success, errmsg = os.rename(path, browserConfigs .. "violentmonkey")
-			if success then
-				-- needs to be zipped again, since browser auto-opens all zip files
-				hs.execute(([[
-					rm -rf ../violentmonkey.zip # remove existing archive
-					cd "%s/violentmonkey" || exit 1
-					zip --recurse-paths ../violentmonkey.zip .
-					cd .. && rm -rf ./violentmonkey
-				]]):format(browserConfigs))
-				u.app("Brave Browser"):activate()
-			end
 		elseif name == "ublacklist-settings.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
 		elseif name == "Redirector.json" then
 			success, errmsg = os.rename(path, browserConfigs .. name)
-		elseif name:find("stylus%-.*%.json") then
-			success, errmsg = os.rename(path, browserConfigs .. "stylus.json")
 		elseif name:find("vimium_c.*%.json") then
 			success, errmsg = os.rename(path, browserConfigs .. "vimium-c-settings.json")
 		elseif name:find("Inoreader Feeds .*%.xml") then

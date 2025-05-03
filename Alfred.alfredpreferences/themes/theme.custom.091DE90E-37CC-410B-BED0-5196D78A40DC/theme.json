@@ -9,10 +9,10 @@
         "color" : "#A9A9A9FF"
       },
       "shortcut" : {
-        "size" : 25,
+        "size" : 20,
         "colorSelected" : "#000000FF",
         "font" : "Lucida Grande",
-        "color" : "#009192FF"
+        "color" : "#005EA7FF"
       },
       "backgroundSelected" : "#0096FFFF",
       "text" : {

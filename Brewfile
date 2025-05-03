@@ -60,7 +60,6 @@ computer_name = `scutil --get ComputerName`
 if computer_name.include?("Home")
 	brew "spotify_player"
 	brew "yt-dlp"
-	cask "anki"
 	cask "bettertouchtool"
 	cask "catch"
 	cask "cleanshot"

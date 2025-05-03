@@ -1,11 +1,11 @@
 {
   "blacklist": "",
   "blockColor": "default",
-  "blockWholeSite": true,
+  "blockWholeSite": false,
   "dialogTheme": "default",
-  "enableMatchingRules": false,
+  "enableMatchingRules": true,
   "enablePathDepth": false,
-  "hideBlockLinks": false,
+  "hideBlockLinks": true,
   "hideControl": false,
   "highlightColors": [
     "#ddeeff"
@@ -47,8 +47,8 @@
   "syncAppearance": true,
   "syncBlocklist": true,
   "syncGeneral": true,
-  "syncInterval": 120,
+  "syncInterval": 60,
   "syncSubscriptions": true,
-  "updateInterval": 1440,
+  "updateInterval": 120,
   "version": "8.10.2"
 }
