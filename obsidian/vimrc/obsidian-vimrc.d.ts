@@ -68,6 +68,7 @@ declare type View = {
 			executeCommandById(commandId: string): void;
 		};
 		metadataCache: {
+			unresolvedLinks: Record<string, Record<string, number>>;
 			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
 			getFileCache(file: TFile): {
 				headings: {

@@ -84,6 +84,7 @@ eventStore.requestFullAccessToEvents { granted, error in
 
 	let outputEvents =
 		eventStore.events(matching: predicate)
+		.filter { $0.endDate >= now }  // only ongoing or future events
 		.sorted(by: { $0.startDate < $1.startDate })
 		.map { event in
 			EventOutput(

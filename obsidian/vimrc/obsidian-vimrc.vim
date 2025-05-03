@@ -328,6 +328,10 @@ nnoremap ,rq :switchQuotes<CR>
 exmap inspectChromeVersion jscommand { new Notice ('Chrome version: ' + process.versions.chrome.split('.')[0], 4000) }
 nnoremap ,iv :inspectChromeVersion<CR>
 
+" [i]nspect unresolved links & orphans
+exmap inspectUnresolvedLinks jsfile Meta/vimrc-jsfile.js { inspectUnresolvedLinks() }
+nnoremap ,iu :inspectUnresolvedLinks<CR>
+
 "───────────────────────────────────────────────────────────────────────────────
 " META: PLUGIN- AND SETTING-RELATED BINDINGS
 

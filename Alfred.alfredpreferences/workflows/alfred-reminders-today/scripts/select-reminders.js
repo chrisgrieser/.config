@@ -250,7 +250,6 @@ function run() {
 
 		// Format events for Alfred
 		events = eventsJson
-			.filter((event) => +new Date(event.endTime) > Date.now()) // only future or ongoing events
 			.map((event) => {
 				// time
 				let timeDisplay = "";

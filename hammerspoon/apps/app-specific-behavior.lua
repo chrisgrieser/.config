@@ -171,7 +171,7 @@ M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 M.aw_calendar = aw.new(function(appName, event, _app)
 	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
 		local cachePath = os.getenv("HOME")
-			.. "/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/de.chris-grieser.reminders-companion/events.json"
+			.. "/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/de.chris-grieser.reminders-companion/events-from-swift.json"
 		os.remove(cachePath)
 	end
 end):start()

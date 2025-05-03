@@ -479,5 +479,3 @@ keymap("n", "<leader>ol", function()
 	vim.lsp.stop_client(clients)
 	vim.defer_fn(vim.cmd.edit, 1000) -- wait for shutdown -> reload via `:edit` -> re-attaches LSPs
 end, { desc = "󰑓 LSPs restart" })
-
---------------------------------------------------------------------------------
