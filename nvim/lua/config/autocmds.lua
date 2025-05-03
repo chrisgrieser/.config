@@ -108,6 +108,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
+		-- GUARD pass buffers
+		if vim.startswith(ctx.file, "/private/var/") then return end
+
 		if not vim.uv.cwd() then vim.uv.chdir("/") end -- prevent error when no cwd
 
 		local root = vim.fs.root(ctx.buf, function(name, path)
