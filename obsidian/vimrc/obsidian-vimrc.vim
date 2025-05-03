@@ -265,18 +265,11 @@ nnoremap _ mzo<Esc>`z
 nnoremap + <C-a>
 nnoremap ü <C-x>
 
-" JS Comments
-nunmap q
-exmap toggleJsLineComment jsfile Meta/vimrc-jsfile.js { toggleJsLineComment() }
-nnoremap qq :toggleJsLineComment<CR>
-exmap appendJsComment jsfile Meta/vimrc-jsfile.js { appendJsComment() }
-nnoremap Q :appendJsComment<CR>
-
 " markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList<CR>
 
-" Uncheck markdown tasks
+" uncheck markdown tasks
 nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
 
 " blockquote
