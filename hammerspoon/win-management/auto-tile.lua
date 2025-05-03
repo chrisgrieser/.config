@@ -38,6 +38,9 @@ local function autoTile(appName)
 	if M["winCount_" .. appName] == #wins then return end
 	M["winCount_" .. appName] = #wins
 
+	-- GUARD not with multiple windows
+	if #wins > 1 and env.isProjector() then return end
+
 	local pos = {} ---@cast pos hs.geometry[]
 	if #wins == 1 then
 		pos = { config.oneWindowSize(appName) }  
