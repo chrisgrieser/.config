@@ -257,19 +257,19 @@ nnoremap o :openBelow<CR>
 exmap openAbove jsfile Meta/vimrc-jsfile.js { smartOpenLine("above") }
 nnoremap O :openAbove<CR>
 
-" Add blank line above/below
+" add blank line above/below
 nnoremap = mzO<Esc>`z
 nnoremap _ mzo<Esc>`z
 
-" Increment/decrement
+" increment/decrement
 nnoremap + <C-a>
 nnoremap ü <C-x>
 
-" markdown tasks
+" Markdown tasks
 exmap checkList obcommand editor:toggle-checklist-status
 nnoremap ,x :checkList<CR>
 
-" uncheck markdown tasks
+" uncheck all Markdown tasks
 nnoremap ,X :%s/-<Space>\[x\]<Space>/-<Space>[<Space>]<Space>/<CR>
 
 " blockquote
@@ -296,10 +296,6 @@ noremap gb :rejectNextProofread<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 " LEADER MAPPINGS
-
-" [L]og variable
-exmap consoleLogFromWordUnderCursor jsfile Meta/vimrc-jsfile.js { consoleLogFromWordUnderCursor() }
-nnoremap ,ll :consoleLogFromWordUnderCursor<CR>
 
 " Enhance URL with title (same hotkey as [c]ode action in nvim)
 exmap enhanceUrlWithTitle obcommand obsidian-auto-link-title:enhance-url-with-title
@@ -537,31 +533,31 @@ nnoremap zr :unfoldall<CR>
 "───────────────────────────────────────────────────────────────────────────────
 " OPTION TOGGLING
 
-" [O]ption: [s]pellcheck
+" [o]ption: [s]pellcheck
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck<CR>
 
-" [O]ption: [n]umbers
+" [o]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers<CR>
 
-" [O]ption: [a]i-completion
+" [o]ption: [a]i-completion
 exmap toggleAiCompletion obcommand copilot-auto-completion:toggle
 nnoremap ,oa :toggleAiCompletion<CR>
 
-" [O]ption: [c]onceal
+" [o]ption: [c]onceal
 exmap sourceModeLivePreview obcommand editor:toggle-source
 nnoremap ,oc :sourceModeLivePreview<CR>
 
-" [O]ption: readable line length (i.e. soft wrap)
+" [o]ption: readable line length (i.e. soft wrap)
 exmap lineLength obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-readable-line-length-toggle
 nnoremap ,ow :lineLength<CR>
 
-" [O]ption: [i]mage size
+" [o]ption: [i]mage size
 exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle
 nnoremap ,oi :maxImageSize<CR>
 
-" [O]ption: [d]iagnostics
+" [o]ption: [d]iagnostics
 exmap toggleHarper obcommand harper:harper-toggle-auto-lint
 nnoremap ,od :toggleHarper<CR>
 
