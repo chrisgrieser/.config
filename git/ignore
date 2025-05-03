@@ -27,8 +27,6 @@ __pycache__
 *.pfx
 *.key
 .*_history
-
-# secrets
 .env
 
 # prevent accidental inclusion of big files or partial downloads
