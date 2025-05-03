@@ -41,14 +41,14 @@
       "paddingVertical" : 5
     },
     "window" : {
-      "color" : "#FFFFFFE5",
+      "color" : "#EAEAEAFF",
       "paddingHorizontal" : 10,
       "width" : 1009,
       "borderPadding" : 5,
       "borderColor" : "#0000007F",
       "blur" : 10,
       "roundness" : 17,
-      "paddingVertical" : 13
+      "paddingVertical" : 11
     },
     "credit" : "pseudometa",
     "separator" : {
