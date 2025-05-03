@@ -18,7 +18,6 @@ declare const activeDocument: any;
 // biome-ignore lint/suspicious/noExplicitAny: Electron window
 declare const activeWindow: any;
 
-
 //──────────────────────────────────────────────────────────────────────────────
 
 // INFO importing `obsidian.d.ts` somehow breaks the typings, thus manually
@@ -26,7 +25,13 @@ declare const activeWindow: any;
 declare type EditorPosition = { ch: number; line: number };
 declare type EditorRange = { from: EditorPosition; to: EditorPosition };
 declare type EditorSelection = { head: EditorPosition; anchor: EditorPosition };
-declare type TFile = { path: string; name: string; basename: string, parent: TFile };
+declare type TFile = {
+	path: string;
+	name: string;
+	basename: string;
+	parent: TFile;
+	extension: string;
+};
 
 declare const request: (url: string) => Promise<string>; // https://docs.obsidian.md/Reference/TypeScript+API/request
 
@@ -69,6 +74,7 @@ declare type View = {
 		};
 		metadataCache: {
 			unresolvedLinks: Record<string, Record<string, number>>;
+			resolvedLinks: Record<string, Record<string, number>>;
 			getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
 			getFileCache(file: TFile): {
 				headings: {
@@ -105,6 +111,7 @@ declare type View = {
 			};
 			getFileByPath(path: string): TFile;
 			getMarkdownFiles(): TFile[];
+			getFiles(): TFile[];
 		};
 		plugins: {
 			checkForUpdates(): Promise<void>;

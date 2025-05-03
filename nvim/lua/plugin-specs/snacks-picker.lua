@@ -93,6 +93,12 @@ return {
 				-- need to remove it from the default settings itself
 				require("snacks.picker.config.sources").recent.filter.paths[vim.fn.stdpath("data")] =
 					nil
+
+				-- HACK add open buffers to oldfiles
+				local openBufs = vim.iter(vim.fn.getbufinfo { buflisted = 1 })
+					:map(function(buf) return buf.name end)
+					:totable()
+				vim.list_extend(vim.v.oldfiles, openBufs)
 				Snacks.picker.recent()
 			end,
 			desc = "󰋚 Recent files",
@@ -202,7 +208,7 @@ return {
 					actions = {
 						delete_qf_entry = function(picker)
 							local idx = picker:current().idx
-							local qf = vim.fn.getqflist({ title = true, items = true })
+							local qf = vim.fn.getqflist { title = true, items = true }
 							table.remove(qf.items, idx)
 							vim.fn.setqflist(qf.items, "r") -- "r" = replace = overwrite
 							vim.fn.setqflist({}, "a", { title = qf.title }) -- preserve title of qflist

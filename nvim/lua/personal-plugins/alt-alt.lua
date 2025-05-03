@@ -5,9 +5,7 @@ Alternative to vim's "alternative file" that improves its functionality.
   buffers, deleted buffers, non-existent files etc. and falls back
   to the first oldfile, if there is currently only one buffer.
 2.`.gotoMostChangedFile` to go to the file in the cwd with the most git changes
-3.`.deleteBuffer()` also removes the buffer as alt-file, but keeps it in the
-  list of oldfiles.
-4.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
+3.`.altFileStatusbar()` and `.mostChangedFileStatusbar()` to display the
   respective file in the statusbar. If there is no alt-file, the first oldfile
   is shown. If there is not changed file, nothing is shown.
 ]]
@@ -154,23 +152,6 @@ local function nameForStatusbar(path)
 end
 
 --------------------------------------------------------------------------------
-
----As opposed to the regular `:bdelete`, this function closes the buffer
----without it staying as alt-file.
-function M.deleteBuffer()
-	local openBuffers = vim.fn.getbufinfo { buflisted = 1 }
-	local curPath = vim.api.nvim_buf_get_name(0)
-
-	-- close buffer
-	if #openBuffers < 2 then
-		notify("Only one buffer open.", "trace", config.icons.altBuf)
-		return
-	end
-	vim.cmd("silent! update")
-
-	vim.cmd.bwipeout() -- prevents alt-buffer pointing to deleted buffer
-	table.insert(vim.v.oldfiles, curPath) -- add current file to oldfiles
-end
 
 function M.gotoAltFile()
 	if vim.bo.buftype ~= "" then

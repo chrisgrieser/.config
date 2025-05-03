@@ -396,7 +396,13 @@ end
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
 	local winClosed = pcall(vim.cmd.close)
-	if not winClosed then require("personal-plugins.alt-alt").deleteBuffer() end
+	if winClosed then return end
+	if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
+		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
+	else
+		vim.cmd("silent! update")
+		vim.cmd.bwipeout() -- prevents alt-buffer pointing to deleted buffer
+	end
 end, { desc = "󰽙 Close window/buffer" })
 
 keymap("n", "<BS>", function()
