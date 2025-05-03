@@ -86,7 +86,7 @@ sketchybar \
 	script="./network-upload.sh" \
 	\
 	--add item package-updates $row_2 \
-	--set package-updates icon="" update_freq=86400 \
+	--set package-updates icon="󱄖" update_freq=86400 \
 	script="./homebrew-update-tracker.sh" \
 	\
 	--add item sync-indicator $row_2 \

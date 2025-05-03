@@ -395,13 +395,17 @@ end
 
 -- close window or buffer
 keymap({ "n", "x", "i" }, "<D-w>", function()
+	vim.cmd("silent! update")
 	local winClosed = pcall(vim.cmd.close)
 	if winClosed then return end
-	if #vim.fn.getbufinfo { buflisted = 1 } > 1 then
+
+	local bufCount = #vim.fn.getbufinfo { buflisted = 1 }
+	if bufCount == 1 then
 		vim.notify("Only one buffer open.", vim.log.levels.TRACE)
-	else
-		vim.cmd("silent! update")
+	elseif bufCount == 2 then
 		vim.cmd.bwipeout() -- prevents alt-buffer pointing to deleted buffer
+	else
+		vim.cmd.bdelete()
 	end
 end, { desc = "󰽙 Close window/buffer" })
 
@@ -430,10 +434,6 @@ do
 		{ desc = "󰃽 Start/stop recording" }
 	)
 	keymap("n", "9", "@" .. reg, { desc = "󰃽 Play recording" })
-	keymap("n", "<leader>ir", function()
-		local macro = vim.fn.getreg(reg)
-		vim.notify(macro, nil, { title = "Recorded macro", icon = "󰃽" })
-	end, { desc = "󰃽 Recorded macro" })
 end
 
 --------------------------------------------------------------------------------
