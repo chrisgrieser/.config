@@ -131,3 +131,4 @@ matches:
   - { trigger: chroe, replace: chore, propagate_case: true, word: true }
   - { trigger: htokey, replace: hotkey, propagate_case: true, word: true }
   - { trigger: tehm, replace: them, propagate_case: true, word: true }
+  - { trigger: ohter, replace: other, propagate_case: true, word: true }
