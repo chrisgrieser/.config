@@ -38,7 +38,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
+				<string>6A86F168-9DE3-49F8-9816-27CDFC39162B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -64,7 +64,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F4515410-11F8-4E8D-8176-9499BC0098AE</string>
+				<string>DADA8D4D-08C5-4660-AFEE-881C98BA1842</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -77,11 +77,26 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>6A86F168-9DE3-49F8-9816-27CDFC39162B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6A86F168-9DE3-49F8-9816-27CDFC39162B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>33F1E2F9-4ACC-4B5C-9014-9C201CBAEBE4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>41C570A0-B4FD-4CB4-B79B-47A65D28F927</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -247,31 +262,67 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
+				<key>behaviour</key>
 				<integer>0</integer>
-				<key>backgroundcolor</key>
+				<key>fontmode</key>
+				<integer>0</integer>
+				<key>fontsizing</key>
+				<integer>0</integer>
+				<key>footertext</key>
 				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
+				<key>inputfile</key>
 				<string></string>
-				<key>ignoredynamicplaceholders</key>
+				<key>inputtype</key>
+				<integer>0</integer>
+				<key>loadingtext</key>
+				<string></string>
+				<key>outputmode</key>
+				<integer>0</integer>
+				<key>scriptinput</key>
+				<integer>0</integer>
+				<key>spellchecking</key>
+				<integer>0</integer>
+				<key>stackview</key>
 				<false/>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.userinterface.text</string>
 			<key>uid</key>
-			<string>F4515410-11F8-4E8D-8176-9499BC0098AE</string>
+			<string>DADA8D4D-08C5-4660-AFEE-881C98BA1842</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string></string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>.*\w.*</string>
+						<key>outputlabel</key>
+						<string></string>
+						<key>uid</key>
+						<string>41C570A0-B4FD-4CB4-B79B-47A65D28F927</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>6A86F168-9DE3-49F8-9816-27CDFC39162B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -568,9 +619,9 @@
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>copy &amp; display error</string>
+			<string>copy error</string>
 			<key>xpos</key>
-			<real>515</real>
+			<real>585</real>
 			<key>ypos</key>
 			<real>70</real>
 		</dict>
@@ -582,6 +633,17 @@
 			<real>330</real>
 			<key>ypos</key>
 			<real>15</real>
+		</dict>
+		<key>6A86F168-9DE3-49F8-9816-27CDFC39162B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>not empty = error</string>
+			<key>xpos</key>
+			<real>505</real>
+			<key>ypos</key>
+			<real>100</real>
 		</dict>
 		<key>6F602257-6038-4A72-A19A-02734217B0ED</key>
 		<dict>
@@ -632,6 +694,17 @@
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
+		<key>DADA8D4D-08C5-4660-AFEE-881C98BA1842</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>display as electable text</string>
+			<key>xpos</key>
+			<real>740</real>
+			<key>ypos</key>
+			<real>70</real>
+		</dict>
 		<key>E5453C5A-74EB-4057-82E5-1DFA868353C0</key>
 		<dict>
 			<key>colorindex</key>
@@ -649,15 +722,6 @@
 			<real>330</real>
 			<key>ypos</key>
 			<real>535</real>
-		</dict>
-		<key>F4515410-11F8-4E8D-8176-9499BC0098AE</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>9</integer>
-			<key>xpos</key>
-			<real>660</real>
-			<key>ypos</key>
-			<real>70</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

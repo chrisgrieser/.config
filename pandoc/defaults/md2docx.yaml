@@ -3,7 +3,7 @@
 # DOCS https://pandoc.org/MANUAL.html#defaults-files
 #───────────────────────────────────────────────────────────────────────────────
 
-shift-heading-level-by: -1 # since usually using `h2` in markdwon
+shift-heading-level-by: -1 # if using `only` h2 headings
 number-sections: true
 
 reference-doc: ${USERDATA}/templates/academic-paper.docx
@@ -22,6 +22,5 @@ writer: docx # add `+native_numbering` for automatic "Figure 1" etc.
 reader: "markdown\
   +lists_without_preceding_blankline\
   +mark\
-  +wikilinks_title_after_pipe\
-  +rebase_relative_paths"
-resource-path: [./attachments, .]
+  +wikilinks_title_after_pipe"
+resource-path: [./attachments, .] # where to look for images with relative paths
