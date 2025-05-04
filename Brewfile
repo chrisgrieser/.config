@@ -44,6 +44,7 @@ cask "replacicon"
 cask "slack"
 cask "wezterm"
 cask "zoom"
+cask "sioyek"
 
 # MAC APP STORE
 brew "mas"
