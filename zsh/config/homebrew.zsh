@@ -11,6 +11,7 @@ alias bi='brew install'
 alias bu='brew uninstall --zap'
 alias br='brew reinstall'
 alias bf='brew bundle edit' # opens Brewfile in $HOMEBREW_EDITOR
+alias bh='brew home'
 alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
@@ -38,7 +39,7 @@ function update() {
 	_pretty_header "brew upgrade"
 	# not combined with `brew bundle install` to visually separate them
 	if [[ -n $(brew outdated) ]]; then
-		rewb upgrade
+		brew upgrade
 	else
 		echo "✅ Already up-to-date."
 	fi
