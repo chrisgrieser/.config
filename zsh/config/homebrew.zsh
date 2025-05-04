@@ -10,7 +10,7 @@ export HOMEBREW_EDITOR="open" # open in default macOS text editor
 alias bi='brew install'
 alias bu='brew uninstall --zap'
 alias br='brew reinstall'
-alias bf='brew bundle edit' # opens Brewfile in $HOMEBREW_EDITOR
+alias bf='brew bundle edit' # opens [b]rew[f]ile with $HOMEBREW_EDITOR
 alias bh='brew home'
 alias depending_on='brew uses --installed --recursive'
 
