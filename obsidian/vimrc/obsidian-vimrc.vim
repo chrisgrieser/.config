@@ -284,6 +284,9 @@ nnoremap qw :insertHr<CR>
 exmap deleteLastChar jsfile Meta/vimrc-jsfile.js { deleteLastChar() }
 nnoremap X :deleteLastChar<CR>
 
+" prevent accidents
+nunmap q
+
 " Proofreader accept/reject
 exmap acceptProofreadInText obcommand proofreader:accept-suggestions-in-text
 noremap ga :acceptProofreadInText<CR>
