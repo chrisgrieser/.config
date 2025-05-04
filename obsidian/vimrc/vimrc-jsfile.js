@@ -470,3 +470,26 @@ function inspectUnresolvedLinks() {
 	const msg2 = orphans.length > 0 ? "Orphans:\n" + orphans.join("\n") : "No orphans.";
 	new Notice(msg2, 0);
 }
+
+function toggleComment() {
+	const app = view.app;
+	const activeFile = app.workspace.getActiveFile();
+	if (!activeFile) return;
+
+	let isInCodeblock = false;
+	let codeblockLang
+	const lnum = editor.getCursor().line
+	const sections = app.metadataCache.getFileCache(activeFile)?.sections;
+	for (const section of sections) {
+		const isInSection = lnum >= section.position.start.line && lnum <= section.position.end.line;
+		if (section.type !== "code" || isInSection) {
+			isInCodeblock = true;
+			const codeblockStart = section.position.start.line
+			codeblockLang = editor.getLine(codeblockStart).match(/```(.*)/)?.[1] || "";
+			break;
+		}
+	}
+
+
+	const commentChar = text[0] === "#" ? "" : "#";
+}
