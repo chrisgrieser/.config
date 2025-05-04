@@ -9,7 +9,7 @@ brew "fzf"
 brew "gh"
 brew "git-delta"
 brew "just"
-brew "less"
+brew "less" # higher version than builtin one -> enables use of `lesskey` file
 brew "neovim"
 brew "node"
 brew "pandoc"
@@ -24,9 +24,6 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
-cask "syntax-highlight" # Peek not available anymore? https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
-cask "qlmarkdown"
-
 # CASKS
 cask "alfred"
 cask "alt-tab"
@@ -40,8 +37,10 @@ cask "microsoft-word"
 cask "mimestream"
 cask "neovide"
 cask "obsidian", greedy: true # greedy for installer version
+cask "qlmarkdown"
 cask "replacicon"
 cask "slack"
+cask "syntax-highlight" # Peek not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "wezterm"
 cask "zoom"
 
