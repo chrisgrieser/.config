@@ -30,6 +30,7 @@ plists=(
 	org.giorgiocalderolla.Catch
 	org.m0k.transmission
 	us.zoom.xos
+	org.sbarex.SourceCodeSyntaxHighlight.plist
 )
 
 #───────────────────────────────────────────────────────────────────────────────
