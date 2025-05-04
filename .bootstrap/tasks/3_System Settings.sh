@@ -27,6 +27,8 @@ networksetup -listallnetworkservices |
 
 #───────────────────────────────────────────────────────────────────────────────
 # FINDER
+defaults write com.apple.finder CreateDesktop false     # disable desktop icons & make desktop unfocussable
+defaults write com.apple.finder QuitMenuItem -bool true # Finder quitable
 
 # Set the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget 'PfHm'
