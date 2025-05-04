@@ -6,18 +6,17 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
-
-#───────────────────────────────────────────────────────────────────────────────
+export HOMEBREW_EDITOR="open" # open in default macOS text editor
 
 alias bi='brew install'
 alias bu='brew uninstall --zap'
 alias br='brew reinstall'
-alias dr='brew doctor'
+alias bf='brew bundle edit' # opens Brewfile in $HOMEBREW_EDITOR
 alias depending_on='brew uses --installed --recursive'
 
 #───────────────────────────────────────────────────────────────────────────────
 
-function pretty_header() {
+function _pretty_header() {
 	[[ "$2" != "no-line-break" ]] && echo
 	defaults read -g AppleInterfaceStyle &> /dev/null && fg="\e[1;30m" || fg="\e[1;37m"
 	bg="\e[1;44m"
@@ -25,17 +24,25 @@ function pretty_header() {
 }
 
 function update() {
-	pretty_header "brew update" "no-line-break"
+	_pretty_header "brew update" "no-line-break"
 	brew update # update homebrew itself
 
-	pretty_header "brew bundle"
+	_pretty_header "brew bundle install/cleanup"
 	if ! brew bundle check || brew bundle cleanup &> /dev/null; then
-		export HOMEBREW_COLOR=1                      # force color when piping output
-		brew bundle install --verbose --cleanup --upgrade --zap | # `--verbose` shows progress
+		export HOMEBREW_COLOR=1 # force color when piping output
+		brew bundle install --verbose --no-upgrade --cleanup --zap |
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
 	fi
 
-	pretty_header "mas upgrade"
+	_pretty_header "brew upgrade"
+	# not combined with `brew bundle install` to visually separate them
+	if [[ -n $(brew outdated) ]]; then
+		rewb upgrade
+	else
+		echo "Already up-to-date."
+	fi
+
+	_pretty_header "mas upgrade"
 	if [[ -n $(mas outdated) ]]; then
 		mas upgrade
 	else
