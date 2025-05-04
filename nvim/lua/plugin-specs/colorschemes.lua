@@ -64,8 +64,10 @@ local themes = {
 					BlinkCmpDocBorder = { link = "FloatBorder" },
 					Pmenu = { bg = "#eadfd6" }, -- more in theme color
 
-					BlinkCmpKindText = { link = "LspKindText" }, -- FIX wrong bg for icons of source `buffer`
-					BlinkCmpKindFile = { link = "LspKindText" }, -- FIX wrong bg for icons of source `buffer`
+					-- FIX wrong bg for icons of source `buffer` and `path`
+					BlinkCmpKindText = { link = "LspKindText" },
+					BlinkCmpKindFile = { link = "LspKindText" },
+					BlinkCmpKindFolder = { link = "LspKindText" },
 
 					-- blink.cmp.git
 					BlinkCmpGitKindPR = { fg = "palette.orange" },
