@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
-# not using `echo -n` due to #2
+# DEBUG
+gpgconf --kill gpg-agent
+
+# ensure gpg key is unlocked, then passing the entry
 entry="$*"
-pass show "$entry" | head -n1
+pass show "$entry" &> /dev/null
+echo -n "$entry"
