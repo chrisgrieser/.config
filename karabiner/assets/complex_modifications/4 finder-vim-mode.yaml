@@ -730,7 +730,12 @@ rules:
         from: { key_code: v }
         to_if_alone:
           - shell_command: |
-              first_volume=$(df | grep --max-count=1 " /Volumes/" | awk -F '   ' '{print $NF}')
+              first_volume=$(
+                df | 
+                grep " /Volumes/" | 
+                grep --invert-match --max-count=1 "/Volumes/Recovery" | 
+                awk -F '   ' '{print $NF}'
+              )
               [[ -z "$first_volume" ]] && "$HOME/.config/karabiner/assets/finder-vim-mode/notificator" \
                 --title "Finder Vim Mode" --message "No ejectable volume found."
               error=$(osascript -e "
