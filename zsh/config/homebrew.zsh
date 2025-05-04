@@ -1,7 +1,6 @@
 # DOCS https://docs.brew.sh/Manpage#environment
 #───────────────────────────────────────────────────────────────────────────────
 export HOMEBREW_CASK_OPTS="--no-quarantine"
-export HOMEBREW_INSTALL_BADGE="󱄖 "
 export HOMEBREW_BUNDLE_FILE="$HOME/.config/Brewfile"
 export HOMEBREW_UPGRADE_GREEDY_CASKS="obsidian" # to also update installer version
 export HOMEBREW_NO_ANALYTICS=1
@@ -27,11 +26,13 @@ function update() {
 	_pretty_header "brew update" "no-line-break"
 	brew update # update homebrew itself
 
-	_pretty_header "brew bundle install/cleanup"
-	if ! brew bundle check || brew bundle cleanup &> /dev/null; then
+	_pretty_header "brew bundle install & cleanup"
+	if ! brew bundle check &> /dev/null || ! brew bundle cleanup &> /dev/null; then
 		export HOMEBREW_COLOR=1 # force color when piping output
 		brew bundle install --verbose --no-upgrade --cleanup --zap |
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
+	else
+		echo "✅ Brewfile satisfied."
 	fi
 
 	_pretty_header "brew upgrade"
@@ -39,14 +40,14 @@ function update() {
 	if [[ -n $(brew outdated) ]]; then
 		rewb upgrade
 	else
-		echo "Already up-to-date."
+		echo "✅ Already up-to-date."
 	fi
 
 	_pretty_header "mas upgrade"
 	if [[ -n $(mas outdated) ]]; then
 		mas upgrade
 	else
-		echo "Already up-to-date."
+		echo "✅ Already up-to-date."
 	fi
 
 	# sketchybar restart for new permissions
