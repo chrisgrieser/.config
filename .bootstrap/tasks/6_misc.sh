@@ -15,12 +15,12 @@ for plist in "$backup_path"/*.plist; do
 done
 
 #───────────────────────────────────────────────────────────────────────────────
-# Default File Openers (infat) https://github.com/philocalyst/infat
-[[ -x "$(command -v infat)" ]] || brew install philocalyst/tap/infat
+# Default File Openers
+[[ -x "$(command -v infat)" ]] || brew install infat
 echo
 infat --config="$HOME/.config/.bootstrap/infat-config.toml"
 echo
-brew uninstall infat && brew untap philocalyst/tap
+brew uninstall infat
 
 #───────────────────────────────────────────────────────────────────────────────
 
