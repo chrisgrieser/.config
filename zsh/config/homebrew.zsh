@@ -27,13 +27,22 @@ function update() {
 	_pretty_header "brew update" "no-line-break"
 	brew update # update homebrew itself
 
-	_pretty_header "brew bundle install & cleanup"
-	if ! brew bundle check &> /dev/null || ! brew bundle cleanup &> /dev/null; then
-		export HOMEBREW_COLOR=1 # force color when piping output
-		brew bundle install --verbose --no-upgrade --cleanup --zap |
+	_pretty_header "brew bundle install"
+	if ! brew bundle check &> /dev/null; then
+		export HOMEBREW_COLOR=1                      # force color when piping output
+		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
 	else
 		echo "✅ Brewfile satisfied."
+	fi
+
+	_pretty_header "brew bundle cleanup"
+	# not using `brew bundle install --cleanup`, since `brew bundle check` does
+	# only check for missing installs, not excess installs
+	if ! brew bundle cleanup &> /dev/null; then
+		brew bundle cleanup --force --zap
+	else
+		echo "✅ No unused packages."
 	fi
 
 	_pretty_header "brew upgrade"

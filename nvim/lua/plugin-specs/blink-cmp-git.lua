@@ -3,14 +3,14 @@
 
 return {
 	"saghen/blink.cmp", -- lazy.nvim will merge this config with the `blink.cmp` config
-	dependencies = {
-		{ "Kaiser-Yang/blink-cmp-git", dependencies = "nvim-lua/plenary.nvim" },
-	},
+	dependencies = "Kaiser-Yang/blink-cmp-git",
 
 	opts = {
 		sources = {
-			default = { "git", "lsp", "path", "snippets", "buffer" }, -- add `git` to the list
-			per_filetype = { gitcommit = { "git" } },
+			default = { "lsp", "path", "snippets", "buffer", "git" }, -- add `git` to the list
+			per_filetype = {
+				gitcommit = { "git" },
+			},
 
 			providers = {
 				git = {
@@ -27,8 +27,8 @@ return {
 								pull_request = { enable = false },
 								mention = { enable = false },
 								issue = {
+									get_documentation = function() end, ---@diagnostic disable-line: missing-return wrong annotation
 									insert_text_trailing = "", -- no trailing space after `#123`
-									get_documentation = function() return "" end, -- disable
 								},
 							},
 						},
