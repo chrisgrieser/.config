@@ -4,6 +4,18 @@
 # the home directory https://github.com/philocalyst/infat/blob/main/README.md#5-configuration
 #───────────────────────────────────────────────────────────────────────────────
 
+[types] # fallbacks
+# plain-text = "neovide"
+video = "IINA"
+movie = "IINA"
+mp4-movie = "IINA"
+archive = "/System/Library/CoreServices/Applications/Archive Utility.app"
+
+[schemes]
+mailto = "Mimestream"
+web = "Brave Browser"
+magnet = "Transmission"
+
 [extensions]
 txt = "TextEdit"
 csv = "neovide"
@@ -16,15 +28,3 @@ torrent = "Transmission"
 html = "Brave Browser"
 url = "Brave Browser"    # link files
 webloc = "Brave Browser" # link files
-
-[schemes]
-mailto = "Mimestream"
-web = "Brave Browser"
-magnet = "Transmission"
-
-[types] # fallbacks
-plain-text = "neovide"
-video = "IINA"
-movie = "IINA"
-mp4-movie = "IINA"
-archive = "/System/Library/CoreServices/Applications/Archive Utility.app"

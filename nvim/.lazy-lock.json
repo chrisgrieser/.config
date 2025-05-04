@@ -2,7 +2,7 @@
   "blink-cmp-git": { "branch": "master", "commit": "59c19ac2c26cf32ae05362b4b85e14370f83bf80" },
   "blink.cmp": { "branch": "main", "commit": "4f38ce99a472932d5776337f08f7a8180f1f571a" },
   "ccc.nvim": { "branch": "main", "commit": "af2cf5a963f401aad868c065222ee13d4bbc9050" },
-  "codecompanion.nvim": { "branch": "main", "commit": "1235b1f2f64082ad4bc988d02f6b61d55067d379" },
+  "codecompanion.nvim": { "branch": "main", "commit": "58fbf6f395201a655266a1144b684b5aafb5092d" },
   "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
   "gitsigns.nvim": { "branch": "main", "commit": "1796c7cedfe7e5dd20096c5d7b8b753d8f8d22eb" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
