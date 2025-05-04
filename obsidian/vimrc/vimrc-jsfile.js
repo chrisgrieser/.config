@@ -316,7 +316,7 @@ async function fixWordUnderCursor() {
 	const wordRange = editor.wordAt(cursor);
 	const wordUnderCursor = editor.getRange(wordRange.from, wordRange.to);
 
-	const url = "https://suggestqueries.google.com/complete/search?output=chrome&oe=utf8&q=";
+	const url = "https://suggestqueries.google.com/complete/search?output=chrome&q=";
 	const response = await request(url + encodeURI(wordUnderCursor));
 	const firstSuggestion = JSON.parse(response)[1][0];
 	// using first word, since sometimes google suggests multiple words, but we
@@ -450,7 +450,7 @@ function inspectUnresolvedLinks() {
 
 	// ORPHANS
 	const ignoredFolders = ["Meta"]; // CONFIG
-	const ignoredExtensions = ["md"]; // CONFIG
+	const ignoredExtensions = ["md"];
 	const resolvedLinkCache = app.metadataCache.resolvedLinks;
 	const /** @type {Record<string, boolean>} */ allLinks = {};
 	for (const [_, resolvedLinks] of Object.entries(resolvedLinkCache)) {
@@ -471,11 +471,13 @@ function inspectUnresolvedLinks() {
 	new Notice(msg2, 0);
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 function toggleComment() {
 	// CONFIG
 	/** @type {Record<string, string|string[]>} */
 	const commentChars = {
 		md: ["<!--", "-->"],
+		html: ["<!--", "-->"],
 		js: "//",
 		json: "//",
 		ts: "//",
@@ -490,40 +492,45 @@ function toggleComment() {
 	const app = view.app;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) return;
+	const cursor = editor.getCursor();
+	const lnum = cursor.line;
 
 	// determine if in codeblock
 	let codeblockLang = "md"; // default: not in codeblock and thus markdown
-	const lnum = editor.getCursor().line;
 	const sections = app.metadataCache.getFileCache(activeFile).sections;
 	for (const section of sections) {
 		const isInSection = lnum > section.position.start.line && lnum < section.position.end.line;
 		if ((section.type === "code" || section.type === "yaml") && isInSection) {
-			codeblockLang = "yaml"
+			codeblockLang = "yaml";
 			if (section.type === "code") {
 				const codeblockStart = section.position.start.line;
-
+				codeblockLang = editor.getLine(codeblockStart).match(/(?:```|~~~)(.*)/)?.[1] || "";
 			}
-				section.type === "yaml"
-					? "yaml"
-					: editor.getLine(codeblockStart).match(/```(.*)/)?.[1] || "";
 			break;
 		}
 	}
 
 	// toggle comment
 	const line = editor.getLine(lnum);
-	const commentChar = commentChars[codeblockLang || ""] || commentChars.fallback;
+	const commentStr = commentChars[codeblockLang || ""] || commentChars.fallback;
 	let updatedLine = "";
+	let columnShift = 0;
 
-	if (typeof commentChar === "string") {
-		updatedLine = line.startsWith(commentChar)
-			? line.slice(commentChar.length).trim()
-			: `${commentChar} ${line}`;
+	if (typeof commentStr === "string") {
+		updatedLine = line.startsWith(commentStr)
+			? line.slice(commentStr.length).trim()
+			: `${commentStr} ${line}`;
+		columnShift = updatedLine.length - line.length;
 	} else {
-		updatedLine =
-			line.startsWith(commentChar[0]) && line.endsWith(commentChar[1])
-				? line.slice(commentChar[0].length, -commentChar[1].length).trim()
-				: `${commentChar[0]} ${line} ${commentChar[1]}`;
+		const isCommented = line.startsWith(commentStr[0]) && line.endsWith(commentStr[1]);
+		updatedLine = isCommented
+			? line.slice(commentStr[0].length, -commentStr[1].length).trim()
+			: `${commentStr[0]} ${line} ${commentStr[1]}`;
+		columnShift = (commentStr[0].length + 1) * (isCommented ? -1 : 1)
 	}
 	editor.setLine(lnum, updatedLine);
+
+	// keep cursor in same place
+	cursor.ch += columnShift;
+	editor.setCursor(cursor);
 }
