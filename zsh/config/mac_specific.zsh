@@ -23,10 +23,7 @@ function vvv {
 	fi
 }
 
-function run_infat {
-	if [[ ! -x "$(command -v infat)" ]]; then
-		brew install infat
-		echo
-	fi
-	infat --config="$HOME/.config/.bootstrap/infat-config.toml" "$@"
+function run-infat {
+	[[ -x "$(command -v infat)" ]] || brew install infat
+	infat --config="$HOME/.config/.bootstrap/infat-config.toml"
 }

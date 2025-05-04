@@ -5,7 +5,7 @@
 #───────────────────────────────────────────────────────────────────────────────
 
 [types] # fallbacks
-# plain-text = "neovide"
+text = "neovide"
 video = "IINA"
 movie = "IINA"
 mp4-movie = "IINA"
