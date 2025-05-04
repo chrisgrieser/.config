@@ -472,24 +472,58 @@ function inspectUnresolvedLinks() {
 }
 
 function toggleComment() {
+	// CONFIG
+	/** @type {Record<string, string|string[]>} */
+	const commentChars = {
+		md: ["<!--", "-->"],
+		js: "//",
+		json: "//",
+		ts: "//",
+		swift: "//",
+		css: ["/*", "*/"],
+		lua: "--",
+		applescript: "--",
+		fallback: "#",
+	};
+	//───────────────────────────────────────────────────────────────────────────
+
 	const app = view.app;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) return;
 
-	let isInCodeblock = false;
-	let codeblockLang
-	const lnum = editor.getCursor().line
-	const sections = app.metadataCache.getFileCache(activeFile)?.sections;
+	// determine if in codeblock
+	let codeblockLang = "md"; // default: not in codeblock and thus markdown
+	const lnum = editor.getCursor().line;
+	const sections = app.metadataCache.getFileCache(activeFile).sections;
 	for (const section of sections) {
-		const isInSection = lnum >= section.position.start.line && lnum <= section.position.end.line;
-		if (section.type !== "code" || isInSection) {
-			isInCodeblock = true;
-			const codeblockStart = section.position.start.line
-			codeblockLang = editor.getLine(codeblockStart).match(/```(.*)/)?.[1] || "";
+		const isInSection = lnum > section.position.start.line && lnum < section.position.end.line;
+		if ((section.type === "code" || section.type === "yaml") && isInSection) {
+			codeblockLang = "yaml"
+			if (section.type === "code") {
+				const codeblockStart = section.position.start.line;
+
+			}
+				section.type === "yaml"
+					? "yaml"
+					: editor.getLine(codeblockStart).match(/```(.*)/)?.[1] || "";
 			break;
 		}
 	}
 
+	// toggle comment
+	const line = editor.getLine(lnum);
+	const commentChar = commentChars[codeblockLang || ""] || commentChars.fallback;
+	let updatedLine = "";
 
-	const commentChar = text[0] === "#" ? "" : "#";
+	if (typeof commentChar === "string") {
+		updatedLine = line.startsWith(commentChar)
+			? line.slice(commentChar.length).trim()
+			: `${commentChar} ${line}`;
+	} else {
+		updatedLine =
+			line.startsWith(commentChar[0]) && line.endsWith(commentChar[1])
+				? line.slice(commentChar[0].length, -commentChar[1].length).trim()
+				: `${commentChar[0]} ${line} ${commentChar[1]}`;
+	}
+	editor.setLine(lnum, updatedLine);
 }
