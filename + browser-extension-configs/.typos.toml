@@ -1,2 +1,2 @@
 [files]
-extend-exclude = ["+ custom-adblock-rules.txt"]
+extend-exclude = ["personal-adblock-filter"]
