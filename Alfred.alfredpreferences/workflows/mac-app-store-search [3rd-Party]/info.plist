@@ -50,7 +50,7 @@
 	<key>description</key>
 	<string>Search the Mac App Store</string>
 	<key>disabled</key>
-	<false/>
+	<true/>
 	<key>name</key>
 	<string>Mac App Store Search</string>
 	<key>objects</key>
