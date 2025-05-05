@@ -1,7 +1,7 @@
 #!/usr/bin/env osascript -l JavaScript
 ObjC.import("stdlib");
-const app = Application.currentApplication();
-app.includeStandardAdditions = true;
+const standardApp = Application.currentApplication();
+standardApp.includeStandardAdditions = true;
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @param {string} url @return {string} */
@@ -19,6 +19,7 @@ function httpRequest(url) {
  * @property {string} trackViewUrl - URL to the app's page in the Mac App Store.
  * @property {string} description
  * @property {string} sellerName - Developer or company name.
+ * @property {string} sellerUrl - website of developer
  * @property {string} currentVersionReleaseDate - date string
  * @property {number} averageUserRating - Average user rating (0–5 scale).
  * @property {number} userRatingCount - Total number of user ratings.
@@ -88,7 +89,7 @@ function downloadImageOrGetCached(theApp) {
 	if (!arkwork) return;
 	const imageCache = $.getenv("alfred_workflow_cache");
 	const path = `${imageCache}/${theApp.bundleId}.png`;
-	if (!fileExists(path)) app.doShellScript(`curl --silent '${arkwork}' > '${path}'`);
+	if (!fileExists(path)) standardApp.doShellScript(`curl --silent '${arkwork}' > '${path}'`);
 	return path;
 }
 
@@ -100,16 +101,23 @@ function run(argv) {
 	const query = argv[0];
 	if (!query) return;
 
-	const limit = 10; // CONFIG
-
+	// CAVEAT this assumes that the device locale is also the app store locale.
+	// This is not always the case, but 99% of the time, so the best we can do.
 	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
 	// DOCS https://itunes.apple.com/search?term=notion&entity=macSoftware
+	const limit = $.getenv("result_number");
 	const apiURL = `https://itunes.apple.com/search?entity=macSoftware&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
 	const result = JSON.parse(httpRequest(apiURL))?.results;
 	if (!result) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
 	ensureCacheFolderExists();
+
+	const installedApps = standardApp
+		.doShellScript("mdfind 'kMDItemAppStoreHasReceipt == 1 && kMDItemKind == Application'")
+		.split("\r")
+		.map((line) => line.replace(/.*\/(.*)\.app$/, "$1"));
+		console.log("🪚 installedApps:", JSON.stringify(installedApps, null, 2))
 
 	/** @type {AlfredItem[]} */
 	const apps = result.map((/** @type {MacAppStoreResult} */ app) => {
@@ -124,13 +132,22 @@ function run(argv) {
 			.filter(Boolean)
 			.join("  ·  ");
 
+		const emoji = installedApps.includes(app.bundleId) ? "✅ " : "";
+
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: app.trackName,
+			title: emoji + app.trackName,
 			subtitle: subtitle,
 			arg: app.trackViewUrl,
 			icon: { path: imagePath || "" },
 			quicklookurl: app.screenshotUrls[0] || "",
+			mods: {
+				cmd: {
+					arg: app.sellerUrl || "",
+					valid: Boolean(app.sellerUrl),
+					subtitle: app.sellerUrl ? "⌘: Open " + app.sellerUrl : "⛔ No website found.",
+				},
+			},
 		};
 		return alfredItem;
 	});

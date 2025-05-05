@@ -21,8 +21,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open developer website</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</string>
@@ -39,7 +62,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>⌥: Copy URL</string>
+				<string>⌥: App Store URL</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -56,6 +79,14 @@
 	<key>objects</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
@@ -71,7 +102,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>mas||bi</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -89,7 +120,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/mas-search.js</string>
 				<key>subtext</key>
-				<string></string>
+				<string>{const:alfred_workflow_name}</string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -167,42 +198,122 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+Search the Mac App Store for apps via the keyword `mas`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt; Open the result in `App Store.app`.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt; Open the developer's website, if available.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt; Copy the App Store URL to your clipboard.
+- &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
+
+## Homebrew packages
+If you use homebrew, you might also be interested in [this workflow to search 
+homebrew packges](https://alfred.app/workflows/chrisgrieser/homebrew-search/).
+
+💡 Tip: You can set both of them to the same keyword to simultaneously search 
+homebrew as well as the Mac App Store.
+
+---
 
 Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 	<key>uidata</key>
 	<dict>
 		<key>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>285</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>235</real>
 		</dict>
 		<key>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>285</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>115</real>
+		</dict>
+		<key>4765DAC1-3059-4B3F-9EE9-9A53AE02B4BC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>xpos</key>
+			<real>250</real>
+			<key>ypos</key>
+			<real>95</real>
 		</dict>
 		<key>4C0A319F-FC03-4A32-B2B8-9C9242048318</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>430</real>
+			<real>375</real>
 			<key>ypos</key>
-			<real>295</real>
+			<real>235</real>
 		</dict>
 		<key>A8B4F6B2-C13E-44E1-879C-6C87BC33DF9D</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
 			<key>xpos</key>
-			<real>95</real>
+			<real>40</real>
 			<key>ypos</key>
-			<real>175</real>
+			<real>115</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>mas</string>
+				<key>placeholder</key>
+				<string>mas</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>9</integer>
+				<key>markercount</key>
+				<integer>26</integer>
+				<key>maxvalue</key>
+				<integer>30</integer>
+				<key>minvalue</key>
+				<integer>5</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Note that with a higher number, it takes longer before the results are displayed.</string>
+			<key>label</key>
+			<string>Number of results</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>result_number</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
