@@ -538,6 +538,10 @@ nnoremap zr :unfoldall<CR>
 exmap spellcheck obcommand editor:toggle-spellcheck
 nnoremap ,os :spellcheck<CR>
 
+" language syntax highlighting
+exmap toggleLanguageSyntaxHl obcommand nl-syntax-highlighting:toggle-enabled
+nnoremap ,ol :toggleLanguageSyntaxHl<CR>
+
 " [o]ption: [n]umbers
 exmap toggleLineNumbers jsfile Meta/vimrc-jsfile.js { toggleLineNumbers() }
 nnoremap ,on :toggleLineNumbers<CR>
@@ -557,10 +561,6 @@ nnoremap ,ow :lineLength<CR>
 " [o]ption: [i]mage size
 exmap maxImageSize obcommand obsidian-style-settings:style-settings-class-toggle-shimmering-focus-max-image-size-toggle
 nnoremap ,oi :maxImageSize<CR>
-
-" [o]ption: [d]iagnostics
-exmap toggleHarper obcommand harper:harper-toggle-auto-lint
-nnoremap ,od :toggleHarper<CR>
 
 "───────────────────────────────────────────────────────────────────────────────
 
