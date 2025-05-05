@@ -1,3 +1,5 @@
+chatgpt.com##nav[aria-label="Chat history"] > div:last-child
+chatgpt.com###thread-bottom-container > div:last-child
 amazon.de###nav-logo-sprites
 amazon.de###spc-container
 devdocs.io##._notice

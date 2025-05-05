@@ -180,6 +180,17 @@
 			<key>url</key>
 			<string>https://www.perplexity.ai/?q={query}</string>
 		</dict>
+		<key>E4054817-5F89-4E38-A2CA-D1911A9A4D8E</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>d</string>
+			<key>text</key>
+			<string>Duden.de: "{query}"</string>
+			<key>url</key>
+			<string>https://www.duden.de/suchen/dudenonline/{query}</string>
+		</dict>
 		<key>E5FD4F72-0366-49A4-A5B9-3228D75B543E</key>
 		<dict>
 			<key>enabled</key>
@@ -236,5 +247,7 @@
 			<string>https://duckduckgo.com/?q={query}&amp;iar=images</string>
 		</dict>
 	</dict>
+	<key>onlyShowEnabledInPrefs</key>
+	<true/>
 </dict>
 </plist>
