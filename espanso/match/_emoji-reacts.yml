@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+#───────────────────────────────────────────────────────────────────────────────
+
+# INFO https://www.reddit.com/r/espanso/comments/1h7ajx8/use_espanso_for_mousefree_emojireacts_in_discord/
+matches:
+  - { trigger: "eee", replace: "+:" } # open selection
+  - { trigger: "hhh", replace: "+:grey_heart:\n" } # 🩶
+  - { trigger: "yyy", replace: "+:+1:\n" } # 👍
+  - { trigger: "lll", replace: "+:eyes:\n" } # 👀
