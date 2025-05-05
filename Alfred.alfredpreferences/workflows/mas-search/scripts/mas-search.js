@@ -11,28 +11,89 @@ function httpRequest(url) {
 	return $.NSString.alloc.initWithDataEncoding(data, $.NSUTF8StringEncoding).js;
 }
 
+/**
+ * @typedef {Object} MacAppStoreResult
+ * @property {string} trackName - Name of the app.
+ * @property {string} version
+ * @property {string} trackViewUrl - URL to the app's page in the Mac App Store.
+ * @property {string} description
+ * @property {string} sellerName - Developer or company name.
+ * @property {string} currentVersionReleaseDate - date string
+ * @property {number} averageUserRating - Average user rating (0–5 scale).
+ * @property {number} userRatingCount - Total number of user ratings.
+ * @property {string[]} screenshotUrls - List of screenshot image URLs.
+ * @property {string} artworkUrl100 - URL to 100x100 app icon image.
+ * @property {string} artworkUrl60
+ * @property {string} formattedPrice - App price as a formatted string (e.g. "$4.99").
+ * @property {string} currency - Currency code (e.g. "USD").
+ */
+
+/**
+ * @param {Date} absDate
+ * @return {string} relative date
+ */
+function relativeDate(absDate) {
+	const deltaMins = (Date.now() - +absDate) / 1000 / 60;
+	/** @type {"year"|"month"|"week"|"day"|"hour"|"minute"} */
+	let unit;
+	let delta;
+	if (deltaMins < 60) {
+		unit = "minute";
+		delta = Math.floor(deltaMins);
+	} else if (deltaMins < 60 * 24) {
+		unit = "hour";
+		delta = Math.floor(deltaMins / 60);
+	} else if (deltaMins < 60 * 24 * 7) {
+		unit = "day";
+		delta = Math.floor(deltaMins / 60 / 24);
+	} else if (deltaMins < 60 * 24 * 7 * 4) {
+		unit = "week";
+		delta = Math.floor(deltaMins / 60 / 24 / 7);
+	} else if (deltaMins < 60 * 24 * 7 * 4 * 12) {
+		unit = "month";
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4);
+	} else {
+		unit = "year";
+		delta = Math.floor(deltaMins / 60 / 24 / 7 / 4 / 12);
+	}
+	const formatter = new Intl.RelativeTimeFormat("en", { style: "short", numeric: "auto" });
+	return formatter.format(-delta, unit);
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
 	const query = argv[0];
+	if (!query) return;
 
-	// DOCS docsurls
-	const apiURL = "URL" + encodeURIComponent(query);
-	const response = JSON.parse(httpRequest(apiURL));
+	// DOCS https://itunes.apple.com/search?term=notion&entity=macSoftware
+	const apiURL =
+		"https://itunes.apple.com/search?entity=macSoftware&term=" + encodeURIComponent(query);
+	const response = JSON.parse(httpRequest(apiURL))?.results;
+	if (!response) {
+		return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
+	}
 
 	/** @type {AlfredItem[]} */
-	const items = response.data.map((/** @type {{name: string}} */ item) => {
-		const { name } = item;
-		
+	const items = response.results.map((/** @type {MacAppStoreResult} */ app) => {
+		const subtitle = [
+			app.formattedPrice !== "Free" ? app.formattedPrice : "",
+			app.averageUserRating ? `★ ${app.averageUserRating.toFixed(1)}` : null,
+			relativeDate(new Date(app.currentVersionReleaseDate)),
+			app.description,
+		]
+			.filter(Boolean)
+			.join("  ·  ");
 
 		/** @type {AlfredItem} */
 		const alfredItem = {
-			title: name,
-			subtitle: name,
-			arg: name,
-			quicklookurl: name,
+			title: app.trackName,
+			subtitle: subtitle,
+			arg: app.trackViewUrl,
+			icon: { path: app.artworkUrl100 },
+			quicklookurl: app.screenshotUrls[0] || "",
 		};
 		return alfredItem;
 	});

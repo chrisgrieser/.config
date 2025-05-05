@@ -59,7 +59,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -79,7 +79,7 @@
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>loading…</string>
 				<key>script</key>
@@ -182,7 +182,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		<key>0B80BB59-9309-4CA7-A9F7-54C10F560BC7</key>
 		<dict>
 			<key>xpos</key>
-			<real>290</real>
+			<real>285</real>
 			<key>ypos</key>
 			<real>175</real>
 		</dict>
