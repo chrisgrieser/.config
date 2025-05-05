@@ -86,7 +86,7 @@ const fileExists = (/** @type {string} */ filePath) => Application("Finder").exi
  */
 function downloadImageOrGetCached(theApp) {
 	const arkwork = theApp.artworkUrl60 || theApp.artworkUrl100;
-	if (!arkwork) return;
+	if (!arkwork) return "./icon.png"; // use default image of this workflow
 	const imageCache = $.getenv("alfred_workflow_cache");
 	const path = `${imageCache}/${theApp.bundleId}.png`;
 	if (!fileExists(path)) standardApp.doShellScript(`curl --silent '${arkwork}' > '${path}'`);
@@ -117,7 +117,6 @@ function run(argv) {
 		.doShellScript("mdfind 'kMDItemAppStoreHasReceipt == 1 && kMDItemKind == Application'")
 		.split("\r")
 		.map((line) => line.replace(/.*\/(.*)\.app$/, "$1"));
-		console.log("🪚 installedApps:", JSON.stringify(installedApps, null, 2))
 
 	/** @type {AlfredItem[]} */
 	const apps = result.map((/** @type {MacAppStoreResult} */ app) => {
@@ -132,7 +131,7 @@ function run(argv) {
 			.filter(Boolean)
 			.join("  ·  ");
 
-		const emoji = installedApps.includes(app.bundleId) ? "✅ " : "";
+		const emoji = installedApps.includes(app.trackName) ? "✅ " : "";
 
 		/** @type {AlfredItem} */
 		const alfredItem = {

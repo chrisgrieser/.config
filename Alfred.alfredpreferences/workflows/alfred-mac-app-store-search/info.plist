@@ -71,7 +71,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string>Search apps in the Mac App Store</string>
+	<string>Search apps available in the Mac App Store.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -159,25 +159,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -196,6 +177,25 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>06CBB88B-60DC-48E1-97D8-9A63B099DDA2</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Usage
@@ -206,11 +206,12 @@ Search the Mac App Store for apps via the keyword `mas`.
 - &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
 
 ## Homebrew packages
-If you use homebrew, you might also be interested in [this workflow to search 
-homebrew packges](https://alfred.app/workflows/chrisgrieser/homebrew-search/).
+If you use homebrew, you might also be interested in [this workflow to search
+homebrew packages](https://alfred.app/workflows/chrisgrieser/homebrew-search/).
 
-💡 Tip: You can set both of them to the same keyword to simultaneously search 
-homebrew as well as the Mac App Store.
+&gt; [!TIP]
+&gt; You can set both of them to the same keyword to simultaneously search homebrew
+&gt; and the Mac App Store.
 
 ---
 
@@ -313,7 +314,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.9</string>
+	<string>0.10.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
