@@ -32,13 +32,23 @@ fi
 #───────────────────────────────────────────────────────────────────────────────
 
 # DOCS https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28
-notification_count=$(curl -sL \
+response=$(curl -sL \
 	-H "Accept: application/vnd.github+json" \
 	-H "Authorization: Bearer $GITHUB_TOKEN" \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
-	"https://api.github.com/notifications" |
-	jq ". | length")
+	"https://api.github.com/notifications")
 
+if [[ -z "$response" ]]; then
+	sketchybar --set "$NAME" label="?" drawing=true
+	return 1
+fi
+error=$(echo "$response" | jq --raw-output ".message")
+if [[ -n "$error" ]] ; then
+	sketchybar --set "$NAME" label="$error" drawing=true
+	return 1
+fi
+
+notification_count=$(echo "$response" | jq ". | length")
 if [[ $notification_count -eq 0 ]]; then
 	sketchybar --set "$NAME" drawing=false
 else
