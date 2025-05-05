@@ -81,8 +81,8 @@ return {
 			end,
 		}, "before")
 
-		vim.g.lualineAdd("sections", "lualine_y", {
-			function() return "" end,
+		vim.g.lualineAdd("tabline", "lualine_y", {
+			function() return " previous commit" end,
 			cond = function() return vim.b.gitsignsPrevChanges end,
 		}, "before")
 	end,
