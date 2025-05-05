@@ -14,6 +14,7 @@ function httpRequest(url) {
 /**
  * @typedef {Object} MacAppStoreResult
  * @property {string} trackName - Name of the app.
+ * @property {string} bundleId
  * @property {string} version
  * @property {string} trackViewUrl - URL to the app's page in the Mac App Store.
  * @property {string} description
@@ -26,6 +27,7 @@ function httpRequest(url) {
  * @property {string} artworkUrl60
  * @property {string} formattedPrice - App price as a formatted string (e.g. "$4.99").
  * @property {string} currency - Currency code (e.g. "USD").
+ * @property {number} price
  */
 
 /**
@@ -60,6 +62,36 @@ function relativeDate(absDate) {
 	return formatter.format(-delta, unit);
 }
 
+function ensureCacheFolderExists() {
+	const finder = Application("Finder");
+	const cacheDir = $.getenv("alfred_workflow_cache");
+	if (!finder.exists(Path(cacheDir))) {
+		console.log("Cache directory does not exist and is created.");
+		const cacheDirBasename = $.getenv("alfred_workflow_bundleid");
+		const cacheDirParent = cacheDir.slice(0, -cacheDirBasename.length);
+		finder.make({
+			new: "folder",
+			at: Path(cacheDirParent),
+			withProperties: { name: cacheDirBasename },
+		});
+	}
+}
+
+const fileExists = (/** @type {string} */ filePath) => Application("Finder").exists(Path(filePath));
+
+/**
+ * @param {MacAppStoreResult} theApp
+ * @return {string=} cached path
+ */
+function downloadImageOrGetCached(theApp) {
+	const arkwork = theApp.artworkUrl60 || theApp.artworkUrl100;
+	if (!arkwork) return;
+	const imageCache = $.getenv("alfred_workflow_cache");
+	const path = `${imageCache}/${theApp.bundleId}.png`;
+	if (!fileExists(path)) app.doShellScript(`curl --silent '${arkwork}' > '${path}'`);
+	return path;
+}
+
 //──────────────────────────────────────────────────────────────────────────────
 
 /** @type {AlfredRun} */
@@ -68,18 +100,23 @@ function run(argv) {
 	const query = argv[0];
 	if (!query) return;
 
+	const limit = 10; // CONFIG
+
+	const regionCode = ObjC.unwrap($.NSLocale.currentLocale.objectForKey($.NSLocaleCountryCode));
+	console.log("Region Code:", regionCode); // e.g., "DE", "US"
+
 	// DOCS https://itunes.apple.com/search?term=notion&entity=macSoftware
-	const apiURL =
-		"https://itunes.apple.com/search?entity=macSoftware&term=" + encodeURIComponent(query);
-	const response = JSON.parse(httpRequest(apiURL))?.results;
-	if (!response) {
-		return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
-	}
+	const apiURL = `https://itunes.apple.com/search?entity=macSoftware&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
+	const result = JSON.parse(httpRequest(apiURL))?.results;
+	if (!result) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
+	ensureCacheFolderExists();
 
 	/** @type {AlfredItem[]} */
-	const items = response.results.map((/** @type {MacAppStoreResult} */ app) => {
+	const apps = result.map((/** @type {MacAppStoreResult} */ app) => {
+		const imagePath = downloadImageOrGetCached(app);
+
 		const subtitle = [
-			app.formattedPrice !== "Free" ? app.formattedPrice : "",
+			app.price > 0 ? app.formattedPrice : "",
 			app.averageUserRating ? `★ ${app.averageUserRating.toFixed(1)}` : null,
 			relativeDate(new Date(app.currentVersionReleaseDate)),
 			app.description,
@@ -92,11 +129,11 @@ function run(argv) {
 			title: app.trackName,
 			subtitle: subtitle,
 			arg: app.trackViewUrl,
-			icon: { path: app.artworkUrl100 },
+			icon: { path: imagePath || "" },
 			quicklookurl: app.screenshotUrls[0] || "",
 		};
 		return alfredItem;
 	});
 
-	return JSON.stringify({ items: items });
+	return JSON.stringify({ items: apps });
 }

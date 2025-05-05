@@ -238,4 +238,8 @@ declare const $: {
 	NSString: any;
 	// biome-ignore lint: not set by me
 	NSData: any;
+	// biome-ignore lint: not set by me
+	NSLocale: any;
+	// biome-ignore lint: not set by me
+	NSLocaleCountryCode: any;
 };
