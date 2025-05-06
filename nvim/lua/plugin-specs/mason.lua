@@ -24,30 +24,28 @@ local ensureInstalled = {
 	},
 
 	linters = {
-		"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 		"markdownlint", -- efm
+		"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	},
 
 	formatters = {
-		"shfmt", -- used by bashls for formatting
-		"stylua", -- efm
-		"markdown-toc", -- efm
+		"markdown-toc", -- auto-table-of-contents, used by efm
+		"shfmt", -- shell formatter, used by bashls
+		"stylua", -- lua formatter, used by efm
 	},
 
 	debuggers = {
-		"debugpy", -- nvim-dap-python
+		"debugpy", -- python debugger, used by nvim-dap-python
 	},
 }
 
---------------------------------------------------------------------------------
+local enableNonMasonLsp = {}
 
--- PENDING https://github.com/mason-org/mason-registry/pull/9952
-local masonToLspMap = {
-	["just-lsp"] = "just",
-	["ts_query_ls"] = "ts_query_ls",
-	["emmylua_ls"] = "emmylua_ls",
-	["ltex-ls-plus"] = "ltex_plus",
-}
+-- Not installed via `mason`, but included in Xcode Command Line Tools (which
+-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
+if jit.os == "OSX" then table.insert(enableNonMasonLsp, "sourcekit") end
+
+--------------------------------------------------------------------------------
 
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
@@ -55,7 +53,6 @@ local function enableLsps()
 		:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
 		:map(function(pack)
 			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
-			if not lspConfigName then lspConfigName = masonToLspMap[pack.name] end
 			if not lspConfigName then
 				local msg = pack.name .. " has no `neovim` entry"
 				vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
@@ -65,6 +62,7 @@ local function enableLsps()
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
+	vim.lsp.enable(enableNonMasonLsp)
 end
 
 -- these helper functions are a simplified version of `mason-tool-installer.nvim`
@@ -93,8 +91,10 @@ end
 -- 1. install missing packages
 -- 2. update installed ones
 -- 3. uninstall unused packages
----@param ensurePacks string[]
-local function syncPackages(ensurePacks)
+local function syncPackages()
+	local ensurePacks = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
+	assert(#ensurePacks > 10, "Less than 10 mason packages, aborting uninstalls.")
+
 	local masonReg = require("mason-registry")
 
 	local function refreshCallback()
@@ -135,25 +135,13 @@ return {
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
-	init = function()
-		-- make packages available before loading mason; allows to lazy-load mason
-		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-
-		-- don't crowd home directory with cache folder
-		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm"
-	end,
 	config = function(_, opts)
+		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
+
 		require("mason").setup(opts)
 
 		enableLsps()
-		-- Not installed via `mason`, but included in Xcode Command Line Tools (which
-		-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
-		if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
-
-		assert(#ensureInstalled > 10, "Less than 10 mason packages, aborting uninstalls.")
-		vim.defer_fn(function() syncPackages(ensureInstalled) end, 3000)
-
-		--------------------------------------------------------------------------
+		vim.defer_fn(syncPackages, 3000)
 
 		-- FIX Backdrop
 		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
@@ -167,24 +155,12 @@ return {
 		})
 	end,
 	opts = {
-		PATH = "skip", -- no need to modify PATH, since we do it ourselves in `init`
-		registries = {
-			-- local one must come first to take priority
-			-- add my own local registry: https://github.com/mason-org/mason-registry/pull/3671#issuecomment-1851976705
-			-- also requires `yq` being available in the system
-			-- ("file:%s/personal-mason-registry"):format(vim.fn.stdpath("config")),
-			"github:mason-org/mason-registry",
-		},
-
 		ui = {
 			border = vim.o.winborder,
 			height = 0.85,
 			width = 0.8,
 			backdrop = 60,
-			icons = {
-				package_installed = "✓",
-				package_pending = "󰔟",
-			},
+			icons = { package_installed = "✓", package_pending = "󰔟" },
 			keymaps = { -- consistent with keymaps for lazy.nvim
 				uninstall_package = "x",
 				toggle_help = "?",
