@@ -63,16 +63,18 @@ class NewFileInFolder extends obsidian.FuzzySuggestModal {
 	}
 }
 
-async function updateTaskStatusbar(plugin) {
+async function updateTaskStatusbarAndFrontmatter(plugin) {
 	const { app, taskStatusbar } = plugin;
 	const activeFile = app.workspace.getActiveFile();
 	if (!activeFile) {
-		statusbar.style.setProperty("display", "none");
+		taskStatusbar.style.setProperty("display", "none");
 		return;
 	}
+	const openTasks = app.metadataCache.getFileCache(activeFile).listItems;
 
-	const text = await app.vault.cachedRead(activeFile);
-	const openTasks = text.match(/- \[ \] |TODO/g);
+	app.fileManager.processFrontMatter(activeFile, (fm) => {
+		fm["open tasks"] = openTasks ? openTasks.length : undefined;
+	});
 	if (openTasks) {
 		taskStatusbar.style.setProperty("display", "block");
 		taskStatusbar.style.setProperty("order", -1); // move to the left
@@ -145,9 +147,13 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		console.info(this.manifest.name + " loaded.");
 
 		// 1a. statusbar: tasks
-		this.app.workspace.onLayoutReady(() => updateTaskStatusbar(this));
-		this.registerEvent(this.app.workspace.on("file-open", () => updateTaskStatusbar(this)));
-		this.registerInterval(window.setInterval(() => updateTaskStatusbar(this), 5000));
+		this.app.workspace.onLayoutReady(() => updateTaskStatusbarAndFrontmatter(this));
+		this.registerEvent(
+			this.app.workspace.on("file-open", () => updateTaskStatusbarAndFrontmatter(this)),
+		);
+		this.registerInterval(
+			window.setInterval(() => updateTaskStatusbarAndFrontmatter(this), 10_000),
+		);
 
 		// 1b. statusbar: spellcheck
 		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));

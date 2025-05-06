@@ -1,5 +1,4 @@
----@type string[]
-local lspsAsMasonNames = {
+local ensureInstalled = {
 	"basedpyright", -- python lsp (pyright fork)
 	"bash-language-server", -- also used for zsh
 	"biome", -- ts/js/json/css linter/formatter
@@ -7,7 +6,7 @@ local lspsAsMasonNames = {
 	"css-lsp",
 	"efm", -- integration of external linter/formatter
 	"emmet-language-server", -- css/html snippets
-	-- "emmylua_ls", -- improved lua LSP, TEMP still bit buggy
+	-- "emmylua_ls", -- improved lua LSP, BUG disabled since LSP still has bugs
 	"harper-ls", -- natural language linter
 	"html-lsp",
 	"json-lsp",
@@ -21,9 +20,7 @@ local lspsAsMasonNames = {
 	"ts_query_ls", -- Treesitter query files
 	"typos-lsp", -- spellchecker for code
 	"yaml-language-server",
-}
 
-local extraMasonPackages = {
 	"shfmt", -- used by bashls for formatting
 	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
 	"stylua", -- efm
@@ -32,7 +29,7 @@ local extraMasonPackages = {
 	"debugpy", -- nvim-dap-python
 }
 
--- TEMP
+-- PENDING https://github.com/mason-org/mason-registry/pull/9952
 local masonToLspMap = {
 	["just-lsp"] = "just",
 	["ts_query_ls"] = "ts_query_ls",
@@ -106,8 +103,7 @@ end
 
 return {
 	"williamboman/mason.nvim",
-	-- event = "BufReadPre",
-	lazy = false,
+	event = "BufReadPre",
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
@@ -122,14 +118,14 @@ return {
 		require("mason").setup(opts)
 
 		-- ENABLE LSPS
-		local lspConfigNames = vim.iter(lspsAsMasonNames)
-			:map(function(masonName)
-				local pack = require("mason-registry").get_package(masonName)
+		local installedPacks = require("mason-registry").get_installed_packages()
+		local lspConfigNames = vim.iter(installedPacks)
+			:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
+			:map(function(pack)
 				local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
-
-				if not lspConfigName then lspConfigName = masonToLspMap[masonName] end
+				if not lspConfigName then lspConfigName = masonToLspMap[pack.name] end
 				if not lspConfigName then
-					local msg = masonName .. " has no `neovim` entry"
+					local msg = pack.name .. " has no `neovim` entry"
 					vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
 					return
 				end
@@ -143,10 +139,8 @@ return {
 		if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
 
 		-- AUTO-INSTALL missing packages
-		local packages = lspsAsMasonNames
-		vim.list_extend(packages, extraMasonPackages)
-		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
-		vim.defer_fn(function() syncPackages(packages) end, 3000)
+		assert(#ensureInstalled > 10, "Less than 10 mason packages, aborting uninstalls.")
+		vim.defer_fn(function() syncPackages(ensureInstalled) end, 3000)
 
 		-- FIX Backdrop
 		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
