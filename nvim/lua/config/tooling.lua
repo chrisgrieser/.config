@@ -1,30 +1,29 @@
 -- DOCS https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 --------------------------------------------------------------------------------
 
----since `nvim-lspconfig` and `mason` use different package names
----@type table<string, string>
-local lspToMasonMap = {
-	basedpyright = "basedpyright", -- python lsp (pyright fork)
-	bashls = "bash-language-server", -- also used for zsh
-	biome = "biome", -- ts/js/json/css linter/formatter
-	css_variables = "css-variables-language-server", -- support css variables across multiple files
-	cssls = "css-lsp",
-	efm = "efm", -- integration of external linter/formatter
-	emmet_language_server = "emmet-language-server", -- css/html snippets
-	-- emmylua_ls = "emmylua_ls", -- improved lua LSP, TEMP still bit buggy
-	harper_ls = "harper-ls", -- natural language linter
-	html = "html-lsp",
-	jsonls = "json-lsp",
-	just = "just-lsp",
-	ltex_plus = "ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
-	lua_ls = "lua-language-server",
-	marksman = "marksman", -- Markdown lsp
-	ruff = "ruff", -- python linter & formatter
-	taplo = "taplo", -- toml lsp
-	ts_ls = "typescript-language-server",
-	ts_query_ls = "ts_query_ls", -- Treesitter query files
-	typos_lsp = "typos-lsp", -- spellchecker for code
-	yamlls = "yaml-language-server",
+---@type string[]
+local lspsAsMasonNames = {
+	"basedpyright", -- python lsp (pyright fork)
+	"bash-language-server", -- also used for zsh
+	"biome", -- ts/js/json/css linter/formatter
+	"css-variables-language-server", -- support css variables across multiple files
+	"css-lsp",
+	"efm", -- integration of external linter/formatter
+	"emmet-language-server", -- css/html snippets
+	"emmylua_ls", -- improved lua LSP, TEMP still bit buggy
+	"harper-ls", -- natural language linter
+	"html-lsp",
+	"json-lsp",
+	"just-lsp",
+	"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
+	"lua-language-server",
+	"marksman", -- Markdown lsp
+	"ruff", -- python linter & formatter
+	"taplo", -- toml lsp
+	"typescript-language-server",
+	"ts_query_ls", -- Treesitter query files
+	"typos-lsp", -- spellchecker for code
+	"yaml-language-server",
 }
 
 local extraMasonPackages = {
@@ -44,12 +43,19 @@ local extraMasonPackages = {
 if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
 
 -- when loaded from `init.lua`, enable LSPs
-local lsps = vim.tbl_keys(lspToMasonMap)
-vim.lsp.enable(lsps)
+local masonPath = require("lazy.core.config").options.root .. "/mason.nvim"
+vim.opt.runtimepath:prepend(masonPath)
+local lspConfigNames = vim.iter(lspsAsMasonNames)
+	:map(function(masonName)
+		local pack = require("mason-registry").get_package(masonName)
+		return pack.neovim.lspconfig ---@diagnostic disable-line: undefined-field
+	end)
+	:totable()
+vim.lsp.enable(lspConfigNames)
 
 --------------------------------------------------------------------------------
--- MSON
+-- MASON
 -- when loaded from `mason` config, return list of mason packages
-local masonPackages = vim.tbl_values(lspToMasonMap)
+local masonPackages = vim.tbl_values(lspsAsMasonNames)
 vim.list_extend(masonPackages, extraMasonPackages)
 return masonPackages
