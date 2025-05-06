@@ -171,6 +171,14 @@ return {
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "󰗲 Status" },
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 
+		-- TEMP replacement for tinygit's `interactiveStaging`
+		-- (disable its confirm, since it's buggy)
+		{
+			"<leader>ga",
+			function() Snacks.picker.git_diff { confirm = "" } end,
+			desc = "󰐖 View hunks",
+		},
+
 		--------------------------------------------------------------------------
 		-- INSPECT
 
