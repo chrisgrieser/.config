@@ -74,6 +74,25 @@ return {
 		-- do not crowd home directory with npm cache folder
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm"
 	end,
+	config = function(_, opts)
+		require("mason").setup(opts)
+
+		-- get packages from my lsp-server-config
+		local packages = require("config.tooling")
+		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
+		vim.defer_fn(function() syncPackages(packages) end, 3000)
+
+		-- FIX Backdrop
+		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "User: fix backdrop for mason window",
+			pattern = "mason_backdrop",
+			callback = function(ctx)
+				local win = vim.fn.win_findbuf(ctx.buf)[1]
+				vim.api.nvim_win_set_config(win, { border = "none" })
+			end,
+		})
+	end,
 	opts = {
 		PATH = "skip", -- no need to modify PATH, since we do it ourselves in `init`
 		registries = {
@@ -100,23 +119,4 @@ return {
 			},
 		},
 	},
-	config = function(_, opts)
-		require("mason").setup(opts)
-
-		-- get packages from my lsp-server-config
-		local packages = require("config.tooling")
-		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
-		vim.defer_fn(function() syncPackages(packages) end, 3000)
-
-		-- FIX Backdrop
-		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
-		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User: fix backdrop for mason window",
-			pattern = "mason_backdrop",
-			callback = function(ctx)
-				local win = vim.fn.win_findbuf(ctx.buf)[1]
-				vim.api.nvim_win_set_config(win, { border = "none" })
-			end,
-		})
-	end,
 }
