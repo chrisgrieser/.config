@@ -35,8 +35,8 @@ end)
 --------------------------------------------------------------------------------
 -- HIGHLIGHTS / PDF READER
 
--- - Sync Dark & Light Mode
--- - Start with Highlight Tool enabled
+-- 1. Sync Dark & Light Mode
+-- 2. Start with Highlight Tool enabled
 M.aw_highlights = aw.new(function(appName, event, app)
 	if event == aw.launched and appName == "Highlights" then
 		app:selectMenuItem { "View", "PDF Appearance", u.isDarkMode() and "Night" or "Default" }
@@ -107,6 +107,12 @@ M.wf_mimestream = wf.new("Mimestream")
 
 --------------------------------------------------------------------------------
 -- MASTODON (IVORY)
+local function scrollUp()
+	local masto = u.app("Ivory")
+	hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
+	hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
+	hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
+end
 
 M.aw_masto = aw.new(function(appName, event, masto)
 	if appName ~= "Ivory" then return end
@@ -120,13 +126,7 @@ M.aw_masto = aw.new(function(appName, event, masto)
 			hs.eventtap.keyStroke({ "cmd" }, "w", 1, masto) -- hotkey, since `:close()` doesn't work
 		end
 
-		-- back to home & scroll up
-		u.defer(2, function() -- deferred to wait for potential media win to be closed
-			if #masto:allWindows() ~= 1 then return end
-			hs.eventtap.keyStroke({}, "left", 1, masto) -- go back
-			hs.eventtap.keyStroke({ "cmd" }, "1", 1, masto) -- go to home tab
-			hs.eventtap.keyStroke({ "cmd" }, "up", 1, masto) -- scroll up
-		end)
+		u.defer(2, scrollUp) -- deferred to wait for potential media win to be closed
 	end
 end):start()
 
@@ -143,6 +143,7 @@ M.systemw_mastodon = c.new(function(event)
 	if not mastoWin then return end
 
 	u.defer(1, function() mastoWin:setFrame(wu.toTheSide) end) -- needs setFrame to hide part to the side
+	u.defer(2, scrollUp)
 end):start()
 
 --------------------------------------------------------------------------------
@@ -166,7 +167,6 @@ M.pathw_bookmarks = hs.pathwatcher.new(chromeBookmarks, touchSymlink):start()
 --------------------------------------------------------------------------------
 
 -- ALFRED Reminders Today workflow
-
 -- clear cache on deactivation of Calendar, since the events have potentially changed
 M.aw_calendar = aw.new(function(appName, event, _app)
 	if (event == aw.deactivated or event == aw.terminated) and appName == "Calendar" then
