@@ -27,7 +27,6 @@ safeRequire("config.options") -- early, so available for plugins configs
 
 if not vim.env.NO_PLUGINS then -- for security, e.g. when editing a password with `pass`
 	safeRequire("config.lazy")
-	safeRequire("config.tooling") -- after lazy, so mason/lspconfig are available
 	if vim.g.setColorscheme then vim.g.setColorscheme("init") end
 end
 

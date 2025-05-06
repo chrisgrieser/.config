@@ -1,5 +1,48 @@
--- these helper functions are a simplified version of `mason-tool-installer.nvim`
+---@type string[]
+local lspsAsMasonNames = {
+	"basedpyright", -- python lsp (pyright fork)
+	"bash-language-server", -- also used for zsh
+	"biome", -- ts/js/json/css linter/formatter
+	"css-variables-language-server", -- support css variables across multiple files
+	"css-lsp",
+	"efm", -- integration of external linter/formatter
+	"emmet-language-server", -- css/html snippets
+	-- "emmylua_ls", -- improved lua LSP, TEMP still bit buggy
+	"harper-ls", -- natural language linter
+	"html-lsp",
+	"json-lsp",
+	"just-lsp",
+	"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
+	"lua-language-server",
+	"marksman", -- Markdown lsp
+	"ruff", -- python linter & formatter
+	"taplo", -- toml lsp
+	"typescript-language-server",
+	"ts_query_ls", -- Treesitter query files
+	"typos-lsp", -- spellchecker for code
+	"yaml-language-server",
+}
 
+local extraMasonPackages = {
+	"shfmt", -- used by bashls for formatting
+	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+	"stylua", -- efm
+	"markdown-toc", -- efm
+	"markdownlint", -- efm
+	"debugpy", -- nvim-dap-python
+}
+
+-- TEMP
+local masonToLspMap = {
+	["just-lsp"] = "just",
+	["ts_query_ls"] = "ts_query_ls",
+	["emmylua_ls"] = "emmylua_ls",
+	["ltex-ls-plus"] = "ltex_plus",
+}
+
+--------------------------------------------------------------------------------
+
+-- these helper functions are a simplified version of `mason-tool-installer.nvim`
 ---@param pack Package
 ---@param version? string
 local function install(pack, version)
@@ -63,7 +106,8 @@ end
 
 return {
 	"williamboman/mason.nvim",
-	event = "VeryLazy",
+	-- event = "BufReadPre",
+	lazy = false,
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
@@ -77,8 +121,30 @@ return {
 	config = function(_, opts)
 		require("mason").setup(opts)
 
-		-- get packages from my lsp-server-config
-		local packages = require("config.tooling")
+		-- ENABLE LSPS
+		local lspConfigNames = vim.iter(lspsAsMasonNames)
+			:map(function(masonName)
+				local pack = require("mason-registry").get_package(masonName)
+				local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
+
+				if not lspConfigName then lspConfigName = masonToLspMap[masonName] end
+				if not lspConfigName then
+					local msg = masonName .. " has no `neovim` entry"
+					vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
+					return
+				end
+				return lspConfigName
+			end)
+			:totable()
+		vim.lsp.enable(lspConfigNames)
+
+		-- Not installed via `mason`, but included in Xcode Command Line Tools (which
+		-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
+		if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
+
+		-- AUTO-INSTALL missing packages
+		local packages = lspsAsMasonNames
+		vim.list_extend(packages, extraMasonPackages)
 		assert(#packages > 10, "Less than 10 mason packages, aborting uninstalls.")
 		vim.defer_fn(function() syncPackages(packages) end, 3000)
 
