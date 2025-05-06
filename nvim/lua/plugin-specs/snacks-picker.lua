@@ -498,7 +498,6 @@ return {
 				reveal_in_macOS_Finder = function(picker)
 					if jit.os ~= "OSX" then return end
 					vim.system { "open", "-R", picker:current().file }
-					Chainsaw(picker:current().file) -- 🪚
 					picker:close()
 				end,
 				qflist_and_go = function(picker)
