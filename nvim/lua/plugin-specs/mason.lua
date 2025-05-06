@@ -1,33 +1,45 @@
 local ensureInstalled = {
-	"basedpyright", -- python lsp (pyright fork)
-	"bash-language-server", -- also used for zsh
-	"biome", -- ts/js/json/css linter/formatter
-	"css-variables-language-server", -- support css variables across multiple files
-	"css-lsp",
-	"efm", -- integration of external linter/formatter
-	"emmet-language-server", -- css/html snippets
-	-- "emmylua_ls", -- improved lua LSP, BUG disabled since LSP still has bugs
-	"harper-ls", -- natural language linter
-	"html-lsp",
-	"json-lsp",
-	"just-lsp",
-	"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
-	"lua-language-server",
-	"marksman", -- Markdown lsp
-	"ruff", -- python linter & formatter
-	"taplo", -- toml lsp
-	"typescript-language-server",
-	"ts_query_ls", -- Treesitter query files
-	"typos-lsp", -- spellchecker for code
-	"yaml-language-server",
+	lsps = {
+		"basedpyright", -- python lsp (pyright fork)
+		"bash-language-server", -- also used for zsh
+		"biome", -- ts/js/json/css linter/formatter
+		"css-variables-language-server", -- support css variables across multiple files
+		"css-lsp",
+		"efm", -- integration of external linter/formatter
+		"emmet-language-server", -- css/html snippets
+		-- "emmylua_ls", -- improved lua LSP, BUG disabled since LSP still has bugs
+		"harper-ls", -- natural language linter
+		"html-lsp",
+		"json-lsp",
+		"just-lsp",
+		"ltex-ls-plus", -- LanguageTool: natural language linter (ltex fork)
+		"lua-language-server",
+		"marksman", -- Markdown lsp
+		"ruff", -- python linter & formatter
+		"taplo", -- toml lsp
+		"typescript-language-server",
+		"ts_query_ls", -- Treesitter query files
+		"typos-lsp", -- spellchecker for code
+		"yaml-language-server",
+	},
 
-	"shfmt", -- used by bashls for formatting
-	"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
-	"stylua", -- efm
-	"markdown-toc", -- efm
-	"markdownlint", -- efm
-	"debugpy", -- nvim-dap-python
+	linters = {
+		"shellcheck", -- used by bashls/efm for diagnostics, PENDING https://github.com/bash-lsp/bash-language-server/issues/663
+		"markdownlint", -- efm
+	},
+
+	formatters = {
+		"shfmt", -- used by bashls for formatting
+		"stylua", -- efm
+		"markdown-toc", -- efm
+	},
+
+	debuggers = {
+		"debugpy", -- nvim-dap-python
+	},
 }
+
+--------------------------------------------------------------------------------
 
 -- PENDING https://github.com/mason-org/mason-registry/pull/9952
 local masonToLspMap = {
@@ -37,7 +49,23 @@ local masonToLspMap = {
 	["ltex-ls-plus"] = "ltex_plus",
 }
 
---------------------------------------------------------------------------------
+local function enableLsps()
+	local installedPacks = require("mason-registry").get_installed_packages()
+	local lspConfigNames = vim.iter(installedPacks)
+		:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
+		:map(function(pack)
+			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
+			if not lspConfigName then lspConfigName = masonToLspMap[pack.name] end
+			if not lspConfigName then
+				local msg = pack.name .. " has no `neovim` entry"
+				vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
+				return
+			end
+			return lspConfigName
+		end)
+		:totable()
+	vim.lsp.enable(lspConfigNames)
+end
 
 -- these helper functions are a simplified version of `mason-tool-installer.nvim`
 ---@param pack Package
@@ -111,36 +139,21 @@ return {
 		-- make packages available before loading mason; allows to lazy-load mason
 		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 
-		-- do not crowd home directory with npm cache folder
+		-- don't crowd home directory with cache folder
 		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm"
 	end,
 	config = function(_, opts)
 		require("mason").setup(opts)
 
-		-- ENABLE LSPS
-		local installedPacks = require("mason-registry").get_installed_packages()
-		local lspConfigNames = vim.iter(installedPacks)
-			:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
-			:map(function(pack)
-				local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
-				if not lspConfigName then lspConfigName = masonToLspMap[pack.name] end
-				if not lspConfigName then
-					local msg = pack.name .. " has no `neovim` entry"
-					vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
-					return
-				end
-				return lspConfigName
-			end)
-			:totable()
-		vim.lsp.enable(lspConfigNames)
-
+		enableLsps()
 		-- Not installed via `mason`, but included in Xcode Command Line Tools (which
 		-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
 		if jit.os == "OSX" then vim.lsp.enable("sourcekit") end
 
-		-- AUTO-INSTALL missing packages
 		assert(#ensureInstalled > 10, "Less than 10 mason packages, aborting uninstalls.")
 		vim.defer_fn(function() syncPackages(ensureInstalled) end, 3000)
+
+		--------------------------------------------------------------------------
 
 		-- FIX Backdrop
 		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
