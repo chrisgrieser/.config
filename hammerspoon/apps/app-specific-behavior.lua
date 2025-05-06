@@ -142,7 +142,7 @@ M.systemw_mastodon = c.new(function(event)
 	local mastoWin = masto and u.app("Ivory"):mainWindow()
 	if not mastoWin then return end
 
-	vim.defer_fn(function() mastoWin:setFrame(wu.toTheSide) end, 1) -- needs setFrame to hide part to the side
+	u.defer(1, function() mastoWin:setFrame(wu.toTheSide) end) -- needs setFrame to hide part to the side
 end):start()
 
 --------------------------------------------------------------------------------
