@@ -70,10 +70,12 @@ async function updateTaskStatusbarAndFrontmatter(plugin) {
 		taskStatusbar.style.setProperty("display", "none");
 		return;
 	}
-	const openTasks = app.metadataCache.getFileCache(activeFile).listItems;
+
+	const listItems = app.metadataCache.getFileCache(activeFile).listItems;
+	const openTasks = listItems.filter((item) => item.task === " ");
 
 	app.fileManager.processFrontMatter(activeFile, (fm) => {
-		fm["open tasks"] = openTasks ? openTasks.length : undefined;
+		fm["open-tasks"] = openTasks.length > 0 ? openTasks.length : undefined;
 	});
 	if (openTasks) {
 		taskStatusbar.style.setProperty("display", "block");
@@ -139,6 +141,7 @@ function ensureScrolloffset(editor) {
 //──────────────────────────────────────────────────────────────────────────────
 
 class StartupActionsPlugin extends obsidian.Plugin {
+	tasksAreUpdating = false;
 	taskStatusbar = this.addStatusBarItem();
 	spellStatusbar = this.addStatusBarItem();
 	scrollRef = null;
@@ -151,9 +154,12 @@ class StartupActionsPlugin extends obsidian.Plugin {
 		this.registerEvent(
 			this.app.workspace.on("file-open", () => updateTaskStatusbarAndFrontmatter(this)),
 		);
-		this.registerInterval(
-			window.setInterval(() => updateTaskStatusbarAndFrontmatter(this), 10_000),
+		this.registerEvent(
+			this.app.metadataCache.on("resolved", () => updateTaskStatusbarAndFrontmatter(this)),
 		);
+		// this.registerInterval(
+		// 	window.setInterval(() => updateTaskStatusbarAndFrontmatter(this), 10_000),
+		// );
 
 		// 1b. statusbar: spellcheck
 		this.app.workspace.onLayoutReady(() => updateSpellStatusbar(this));
