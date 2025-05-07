@@ -1,10 +1,8 @@
-local icon = "󰹈"
-
 return {
 	"chrisgrieser/nvim-chainsaw",
 	opts = {
 		visuals = {
-			icon = icon,
+			icon = "󰹈",
 		},
 		preCommitHook = {
 			enabled = true,
@@ -46,13 +44,14 @@ return {
 			padding = { left = 0, right = 1 },
 		})
 	end,
-	init = function()
+	init = function(spec)
 		-- lazyload chainsaw only when `Chainsaw` function is called
 		_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field
 			require("chainsaw") -- load nvim-chainsaw, will override `_G.Chainsaw`
 			Chainsaw(name) -- call original function
 		end
 
+		local icon = spec.opts.visuals.icon
 		vim.g.whichkeyAddSpec { "<leader>l", group = icon .. " Log" }
 	end,
 	keys = {
@@ -75,11 +74,20 @@ return {
 		{
 			"<leader>lg",
 			function()
+				local marker = require("chainsaw.config.config").config.marker
 				require("snacks").picker.grep_word {
-					title = icon .. " log statements",
+					title = marker .. " log statements",
 					cmd = "rg",
+					args = { "--trim" },
+					search = marker,
+
 					regex = false,
-					search = icon,
+					live = false,
+					format = function(item, _picker) -- only display the grepped line
+						local out = {}
+						Snacks.picker.highlight.format(item, item.line, out)
+						return out
+					end,
 				}
 			end,
 			desc = "󰉹 grep log statements",
