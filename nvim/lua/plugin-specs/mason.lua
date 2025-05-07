@@ -41,7 +41,7 @@ local ensureInstalled = {
 
 local nonMasonLsps = {
 	-- Not installed via `mason`, but included in Xcode Command Line Tools (which
-	-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
+	-- are installed on macOS-dev devices as they are needed for `homebrew`)
 	jit.os == "OSX" and "sourcekit" or nil,
 }
 
