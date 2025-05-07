@@ -326,7 +326,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Loading...</string>
+				<string>loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -411,7 +411,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -419,7 +419,7 @@
 				<key>scriptfile</key>
 				<string>scripts/search-nvim-plugins.js</string>
 				<key>subtext</key>
-				<string>Loading...</string>
+				<string></string>
 				<key>title</key>
 				<string>Search Neovim Plugin</string>
 				<key>type</key>
@@ -460,7 +460,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -468,7 +468,7 @@
 				<key>scriptfile</key>
 				<string>scripts/search-mason-tools.js</string>
 				<key>subtext</key>
-				<string>Loading...</string>
+				<string></string>
 				<key>title</key>
 				<string>Search Mason Tools Plugin</string>
 				<key>type</key>
@@ -528,7 +528,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading...</string>
 				<key>script</key>
 				<string></string>
 				<key>scriptargtype</key>
@@ -536,7 +536,7 @@
 				<key>scriptfile</key>
 				<string>scripts/search-installed-plugins.js</string>
 				<key>subtext</key>
-				<string>Loading...</string>
+				<string></string>
 				<key>title</key>
 				<string>Search Installed Plugin</string>
 				<key>type</key>
@@ -947,7 +947,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2.4.3</string>
+	<string>2.4.4</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

@@ -98,8 +98,12 @@ function downloadImageOrGetCached(theApp) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
-	const query = argv[0];
-	if (!query) return;
+	const query = argv[0] || "";
+	if (query === "") {
+		return JSON.stringify({
+			items: [{ title: "Mac App Store Search", subtitle: "Enter a search term…", valid: false }],
+		});
+	}
 
 	// CAVEAT this assumes that the device locale is also the app store locale.
 	// This is not always the case, but 99% of the time, so the best we can do.
