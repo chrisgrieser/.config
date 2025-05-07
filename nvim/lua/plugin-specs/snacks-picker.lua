@@ -19,21 +19,18 @@ local function importLuaModule()
 
 		live = false,
 		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
-		transform = function(item, ctx)
-			-- ensure items are unique
+		transform = function(item, ctx) -- ensure items are unique
 			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
 			local imp = import(item.text)
 			if ctx.meta.done[imp] then return false end
 			ctx.meta.done[imp] = true
 		end,
-		format = function(item, _picker)
-			-- only display the grepped line
+		format = function(item, _picker) -- only display the grepped line
 			local out = {}
 			Snacks.picker.highlight.format(item, item.line, out)
 			return out
 		end,
-		confirm = function(picker, item)
-			-- insert the grepped line below the current one
+		confirm = function(picker, item) -- insert the grepped line below the current one
 			picker:close()
 			local lnum = vim.api.nvim_win_get_cursor(0)[1]
 			vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { import(item.text) })
