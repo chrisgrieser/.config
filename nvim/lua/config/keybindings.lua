@@ -187,7 +187,7 @@ do
 	end, { expr = true, unique = false })
 
 	vim.api.nvim_create_autocmd("TextYankPost", {
-		desc = "User: Sticky yank/delete",
+		desc = "User: Sticky yank",
 		callback = function()
 			if vim.v.event.operator == "y" and vim.v.event.regname == "" and vim.b.cursorPreYank then
 				vim.api.nvim_win_set_cursor(0, vim.b.cursorPreYank)
