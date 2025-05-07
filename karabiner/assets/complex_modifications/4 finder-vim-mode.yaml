@@ -411,7 +411,11 @@ rules:
       - type: basic
         from: { key_code: delete_or_backspace }
         to_if_alone:
-          - { key_code: non_us_backslash, modifiers: [command] }
+          - shell_command: |
+              osascript -e '
+                tell application "System Events" to tell process "Finder"
+                  click menu item "Cycle Through Windows" of menu "Window" of menu bar 1
+                end tell'
           - *end-menu
           - *remove-menu-notice
           - *leave-find-mode
