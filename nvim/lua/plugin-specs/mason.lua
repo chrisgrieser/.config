@@ -29,21 +29,21 @@ local ensureInstalled = {
 	},
 
 	formatters = {
-		"markdown-toc", -- auto-table-of-contents, used by efm
-		"shfmt", -- shell formatter, used by bashls
-		"stylua", -- lua formatter, used by efm
+		"markdown-toc", -- automatic table-of-contents (via efm)
+		"shfmt", -- shell formatter (via bashls)
+		"stylua", -- lua formatter (via efm)
 	},
 
 	debuggers = {
-		"debugpy", -- python debugger, used by nvim-dap-python
+		"debugpy", -- python debugger (via nvim-dap-python)
 	},
 }
 
-local enableNonMasonLsp = {}
-
--- Not installed via `mason`, but included in Xcode Command Line Tools (which
--- are usually installed on macOS-dev devices as they are needed for `homebrew`)
-if jit.os == "OSX" then table.insert(enableNonMasonLsp, "sourcekit") end
+local nonMasonLsps = {
+	-- Not installed via `mason`, but included in Xcode Command Line Tools (which
+	-- are usually installed on macOS-dev devices as they are needed for `homebrew`)
+	jit.os == "OSX" and "sourcekit" or nil,
+}
 
 --------------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ local function enableLsps()
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
-	vim.lsp.enable(enableNonMasonLsp)
+	vim.lsp.enable(nonMasonLsps)
 end
 
 -- these helper functions are a simplified version of `mason-tool-installer.nvim`
@@ -75,7 +75,7 @@ local function installOrUpdate(pack, version)
 		or ("[%s] installing…"):format(pack.name)
 	vim.notify(preMsg, nil, notifyOpts)
 
-	pack:install ({ version = version }, function (success, result)
+	pack:install({ version = version }, function(success, result)
 		if success then
 			notifyOpts.icon = ""
 			local mode = version and "updated" or "installed"
@@ -94,11 +94,14 @@ end
 -- 3. uninstall unused packages
 local function syncPackages()
 	local ensurePacks = vim.iter(vim.tbl_values(ensureInstalled)):flatten():totable()
-	assert(#ensurePacks > 10, "Less than 10 mason packages, aborting uninstalls.")
+	assert(#ensurePacks > 10, "< 10 mason packages, aborting uninstalls.") -- safety net
 
 	local masonReg = require("mason-registry")
-
-	local function refreshCallback()
+	masonReg.refresh(function(ok, _)
+		if not ok then
+			vim.notify("Could not update mason registries.", vim.log.levels.ERROR, { title = "Mason" })
+			return
+		end
 		-- auto-install missing packages & auto-update installed ones
 		vim.iter(ensurePacks):each(function(packName)
 			if not masonReg.has_package(packName) then return end
@@ -123,10 +126,7 @@ local function syncPackages()
 				vim.notify(msg, lvl, { title = "Mason", icon = "󰅗" })
 			end)
 		end)
-	end
-
-	-- ensure registry is up-to-date (relevant when using extra personal registry)
-	masonReg.refresh(refreshCallback) -- refresh is async when callback is passed
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -138,10 +138,8 @@ return {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
 	},
 	config = function(_, opts)
-		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `.npm` folder
-
+		vim.env.npm_config_cache = vim.env.HOME .. "/.cache/npm" -- don't crowd $HOME with `/.npm`
 		require("mason").setup(opts)
-
 		enableLsps()
 		vim.defer_fn(syncPackages, 3000)
 	end,
@@ -154,7 +152,6 @@ return {
 			"github:mason-org/mason-registry",
 		},
 		ui = {
-			border = vim.o.winborder,
 			height = 0.85,
 			width = 0.8,
 			backdrop = 60,
