@@ -343,7 +343,6 @@ keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
 
 -- TERMINAL MODE
--- (also relevant for REPLs such as iron.nvim)
 keymap("t", "<C-CR>", [[<C-\><C-n><C-w>w]], { desc = " Goto next window" })
 keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = " Esc" })
 keymap("t", "<D-v>", [[<C-\><C-n>pi]], { desc = " Paste" })
