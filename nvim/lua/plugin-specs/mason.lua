@@ -47,25 +47,26 @@ local nonMasonLsps = {
 
 --------------------------------------------------------------------------------
 
+local function notify(msg, level, opts)
+	i
+	vim.notf
+end
+
 local function enableLsps()
 	local installedPacks = require("mason-registry").get_installed_packages()
 	local lspConfigNames = vim.iter(installedPacks)
 		:filter(function(pack) return vim.list_contains(pack.spec.categories, "LSP") end)
 		:map(function(pack)
-			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig ---@diagnostic disable-line: undefined-field
-			if not lspConfigName then
-				local msg = pack.name .. " has no `neovim` entry"
-				vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
-				return
-			end
-			return lspConfigName
+			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig
+			if lspConfigName then return lspConfigName end
+			local msg = pack.name .. " has no `neovim` entry"
+			vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
 	vim.lsp.enable(nonMasonLsps)
 end
 
--- these helper functions are a simplified version of `mason-tool-installer.nvim`
 ---@param pack Package
 ---@param version? string
 local function installOrUpdate(pack, version)
@@ -99,7 +100,7 @@ local function syncPackages()
 	local masonReg = require("mason-registry")
 	masonReg.refresh(function(ok, _)
 		if not ok then
-			vim.notify("Could not update mason registries.", vim.log.levels.ERROR, { title = "Mason" })
+			vim.notify("Could not update mason registry.", vim.log.levels.ERROR, { title = "Mason" })
 			return
 		end
 		-- auto-install missing packages & auto-update installed ones
