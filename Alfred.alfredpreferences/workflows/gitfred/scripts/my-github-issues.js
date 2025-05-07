@@ -33,7 +33,7 @@ function run() {
 		});
 	}
 
-	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
+	// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: okay here
 	const issues = JSON.parse(response).items.map((/** @type {GithubIssue} */ item) => {
 		const issueAuthor = item.user.login;
 		const repo = (item.repository_url.match(/[^/]+$/) || "")[0];
