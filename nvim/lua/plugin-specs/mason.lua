@@ -47,9 +47,14 @@ local nonMasonLsps = {
 
 --------------------------------------------------------------------------------
 
+---@param msg string
+---@param level "info"|"warn"|"error"|"debug"|"trace"
+---@param opts? table
 local function notify(msg, level, opts)
-	i
-	vim.notf
+	if not opts then opts = {} end
+	opts.title = "Mason"
+	if not opts.icon then opts.icon = "" end
+	vim.notify(msg, vim.log.levels[level:upper()], opts)
 end
 
 local function enableLsps()
@@ -59,8 +64,7 @@ local function enableLsps()
 		:map(function(pack)
 			local lspConfigName = pack.spec.neovim and pack.spec.neovim.lspconfig
 			if lspConfigName then return lspConfigName end
-			local msg = pack.name .. " has no `neovim` entry"
-			vim.notify(msg, vim.log.levels.WARN, { title = "Mason" })
+			notify(pack.name .. " has no `neovim` entry", "warn")
 		end)
 		:totable()
 	vim.lsp.enable(lspConfigNames)
@@ -70,22 +74,19 @@ end
 ---@param pack Package
 ---@param version? string
 local function installOrUpdate(pack, version)
-	local notifyOpts = { title = "Mason", icon = "", id = "mason.install" }
-
 	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
-	vim.notify(preMsg, nil, notifyOpts)
+	notify(preMsg, "info", { id = "mason.install" })
 
 	pack:install({ version = version }, function(success, result)
 		if success then
-			notifyOpts.icon = ""
 			local mode = version and "updated" or "installed"
 			local postMsg = ("[%s] %s."):format(pack.name, mode)
-			vim.notify(postMsg, nil, notifyOpts)
+			notify(postMsg, "info", { id = "mason.install", icon = "" })
 		else
 			local mode = version and "update" or "install"
 			local postMsg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
-			vim.notify(postMsg, vim.log.levels.ERROR, notifyOpts)
+			notify(postMsg, "error", { id = "mason.install" })
 		end
 	end)
 end
@@ -100,7 +101,7 @@ local function syncPackages()
 	local masonReg = require("mason-registry")
 	masonReg.refresh(function(ok, _)
 		if not ok then
-			vim.notify("Could not update mason registry.", vim.log.levels.ERROR, { title = "Mason" })
+			notify("Could not update mason registry.", "error")
 			return
 		end
 		-- auto-install missing packages & auto-update installed ones
@@ -121,10 +122,10 @@ local function syncPackages()
 		vim.iter(installedPackages):each(function(packName)
 			if vim.tbl_contains(ensurePacks, packName) then return end
 			masonReg.get_package(packName):uninstall({}, function(success, result)
-				local lvl = success and vim.log.levels.INFO or vim.log.levels.ERROR
+				local lvl = success and "info" or "error"
 				local msg = success and ("[%s] uninstalled."):format(packName)
 					or ("[%s] failed to uninstall: %s"):format(packName, result)
-				vim.notify(msg, lvl, { title = "Mason", icon = "󰅗" })
+				notify(msg, lvl)
 			end)
 		end)
 	end)
