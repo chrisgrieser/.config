@@ -71,9 +71,9 @@ end
 local function install(pack, version)
 	local notifyOpts = { title = "Mason", icon = "", id = "mason.install" }
 
-	local msg = version and ("[%s] updating to %s…"):format(pack.name, version)
+	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
-	vim.notify(msg, nil, notifyOpts)
+	vim.notify(preMsg, nil, notifyOpts)
 
 	pack:once("install:success", function()
 		local msg2 = ("[%s] %s"):format(pack.name, version and "updated." or "installed.")
@@ -85,7 +85,19 @@ local function install(pack, version)
 		vim.notify(error, vim.log.levels.ERROR, notifyOpts)
 	end)
 
-	pack:install { version = version }
+	pack:install ({ version = version }, function (success, result)
+		local lvl, 
+		if success then
+			lvl = success and vim.log.levels.INFO or vim.log.levels.ERROR
+			local mode = version and "update" or "install"
+			postMsg = ("[%s] %s."):format(pack.name, mode)
+		else
+			lvl = vim.log.levels.ERROR
+		end
+		local msg2 = success and ("[%s] %s."):format(pack.name, mode) or ("[%s] failed to install: %s"):format(pack.name, result)
+		vim.notify(postMsg, lvl, notifyOpts)
+		
+	end)
 end
 
 -- 1. install missing packages
@@ -103,10 +115,9 @@ local function syncPackages()
 			if not masonReg.has_package(packName) then return end
 			local pack = masonReg.get_package(packName)
 			if pack:is_installed() then
-				pack:check_new_version(function(hasNewVersion, version)
-					if not hasNewVersion then return end
-					install(pack, version.latest_version)
-				end)
+				local latestVersion = pack:get_latest_version()
+				local version = pack:get_installed_version()
+				if latestVersion ~= version then install(pack, latestVersion) end
 			else
 				install(pack)
 			end
@@ -115,11 +126,13 @@ local function syncPackages()
 		-- auto-clean unused packages
 		local installedPackages = masonReg.get_installed_package_names()
 		vim.iter(installedPackages):each(function(packName)
-			if not vim.tbl_contains(ensurePacks, packName) then
-				masonReg.get_package(packName):uninstall()
-				local msg = ("[%s] uninstalled."):format(packName)
-				vim.notify(msg, nil, { title = "Mason", icon = "󰅗" })
-			end
+			if vim.tbl_contains(ensurePacks, packName) then return end
+			masonReg.get_package(packName):uninstall({}, function(success, result)
+				local lvl = success and vim.log.levels.INFO or vim.log.levels.ERROR
+				local msg = success and ("[%s] uninstalled."):format(packName)
+					or ("[%s] failed to uninstall: %s"):format(packName, result)
+				vim.notify(msg, lvl, { title = "Mason", icon = "󰅗" })
+			end)
 		end)
 	end
 
