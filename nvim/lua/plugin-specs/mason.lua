@@ -144,17 +144,6 @@ return {
 
 		enableLsps()
 		vim.defer_fn(syncPackages, 3000)
-
-		-- FIX Backdrop
-		-- PENDING https://github.com/williamboman/mason.nvim/pull/1900
-		vim.api.nvim_create_autocmd("FileType", {
-			desc = "User: fix backdrop for mason window",
-			pattern = "mason_backdrop",
-			callback = function(ctx)
-				local win = vim.fn.win_findbuf(ctx.buf)[1]
-				vim.api.nvim_win_set_config(win, { border = "none" })
-			end,
-		})
 	end,
 	opts = {
 		registries = {
