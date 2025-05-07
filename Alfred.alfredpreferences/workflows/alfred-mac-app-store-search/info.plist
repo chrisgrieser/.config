@@ -75,7 +75,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Mac App Store</string>
+	<string>Mac App Store Search</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -120,7 +120,7 @@
 				<key>scriptfile</key>
 				<string>./scripts/mas-search.js</string>
 				<key>subtext</key>
-				<string>{const:alfred_workflow_name}</string>
+				<string></string>
 				<key>title</key>
 				<string>{const:alfred_workflow_name}</string>
 				<key>type</key>
@@ -314,7 +314,7 @@ Workflow created by [Chris Grieser](https://chris-grieser.de/).</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.10.0</string>
+	<string>0.10.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>

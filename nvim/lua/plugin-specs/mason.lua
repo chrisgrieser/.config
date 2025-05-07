@@ -68,7 +68,7 @@ end
 -- these helper functions are a simplified version of `mason-tool-installer.nvim`
 ---@param pack Package
 ---@param version? string
-local function install(pack, version)
+local function installOrUpdate(pack, version)
 	local notifyOpts = { title = "Mason", icon = "", id = "mason.install" }
 
 	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
@@ -106,9 +106,9 @@ local function syncPackages()
 			if pack:is_installed() then
 				local latestVersion = pack:get_latest_version()
 				local version = pack:get_installed_version()
-				if latestVersion ~= version then install(pack, latestVersion) end
+				if latestVersion ~= version then installOrUpdate(pack, latestVersion) end
 			else
-				install(pack)
+				installOrUpdate(pack)
 			end
 		end)
 
@@ -132,7 +132,7 @@ end
 --------------------------------------------------------------------------------
 
 return {
-	"williamboman/mason.nvim",
+	"mason-org/mason.nvim",
 	event = "BufReadPre",
 	keys = {
 		{ "<leader>pm", vim.cmd.Mason, desc = " Mason home" },
