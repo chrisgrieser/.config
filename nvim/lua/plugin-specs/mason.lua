@@ -75,28 +75,17 @@ local function install(pack, version)
 		or ("[%s] installing…"):format(pack.name)
 	vim.notify(preMsg, nil, notifyOpts)
 
-	pack:once("install:success", function()
-		local msg2 = ("[%s] %s"):format(pack.name, version and "updated." or "installed.")
-		notifyOpts.icon = ""
-		vim.notify(msg2, nil, notifyOpts)
-	end)
-	pack:once("install:failed", function()
-		local error = "Failed to install [" .. pack.name .. "]"
-		vim.notify(error, vim.log.levels.ERROR, notifyOpts)
-	end)
-
 	pack:install ({ version = version }, function (success, result)
-		local lvl, 
 		if success then
-			lvl = success and vim.log.levels.INFO or vim.log.levels.ERROR
-			local mode = version and "update" or "install"
-			postMsg = ("[%s] %s."):format(pack.name, mode)
+			notifyOpts.icon = ""
+			local mode = version and "updated" or "installed"
+			local postMsg = ("[%s] %s."):format(pack.name, mode)
+			vim.notify(postMsg, nil, notifyOpts)
 		else
-			lvl = vim.log.levels.ERROR
+			local mode = version and "update" or "install"
+			local postMsg = ("[%s] failed to %s: %s"):format(pack.name, mode, result)
+			vim.notify(postMsg, vim.log.levels.ERROR, notifyOpts)
 		end
-		local msg2 = success and ("[%s] %s."):format(pack.name, mode) or ("[%s] failed to install: %s"):format(pack.name, result)
-		vim.notify(postMsg, lvl, notifyOpts)
-		
 	end)
 end
 
