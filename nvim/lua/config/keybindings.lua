@@ -159,6 +159,7 @@ keymap("n", "zf", function() vim.opt.foldlevel = vim.v.count1 end, { desc = "
 
 keymap("n", "zs", function()
 	local modeline = vim.bo.commentstring:format("vim foldlevel=" .. vim.o.foldlevel)
+	Chainsaw(modeline) -- 🪚
 	vim.api.nvim_buf_set_lines(0, 0, 0, false, { modeline })
 	vim.api.nvim_win_set_cursor(0, { 1, #modeline })
 end, { desc = "󰆓 Save foldlevel in modeline" })
@@ -179,6 +180,7 @@ end, { desc = "󰩫 Exit snippet", expr = true })
 do
 	keymap({ "n", "x" }, "y", function()
 		vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
+		Chainsaw(vim.b.cursorPreYank) -- 🪚
 		return "y"
 	end, { expr = true })
 	keymap("n", "Y", function()
