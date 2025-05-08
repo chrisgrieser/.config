@@ -18,6 +18,7 @@ return {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
 			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
+			["abp"] = { glyph = "" },
 
 			-- plugin-filetypes
 			["ccc-ui"] = { glyph = "" },
