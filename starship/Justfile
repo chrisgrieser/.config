@@ -1,5 +1,0 @@
-set quiet := true
-
-[macos]
-open_docs:
-    open "https://starship.rs/config/"

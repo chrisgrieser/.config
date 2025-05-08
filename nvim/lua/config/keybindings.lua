@@ -8,7 +8,7 @@ keymap("n", "<D-,>", function()
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by Neovide)
-keymap("n", "<D-q>", vim.cmd.wqall, { desc = " Save & quit", unique = false })
+keymap("n", "<D-q>", vim.cmd.wq, { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir" })
@@ -388,7 +388,7 @@ do
 	-- stylua: ignore
 	keymap({ "n", "x" }, "<CR>", function() require("personal-plugins.alt-alt").gotoAltFile() end, { desc = "󰬈 Goto alt-file" })
 	vim.api.nvim_create_autocmd("FileType", {
-		desc = "User: restore default behavior of `<CR>` for quickfix buffers.",
+		desc = "User: keep default behavior of `<CR>` for quickfix buffers.",
 		pattern = "qf",
 		callback = function(ctx) vim.keymap.set("n", "<CR>", "<CR>", { buffer = ctx.buf }) end,
 	})

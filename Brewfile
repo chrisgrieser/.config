@@ -1,15 +1,15 @@
 # DOCS https://docs.brew.sh/Brew-Bundle-and-Brewfile
 #───────────────────────────────────────────────────────────────────────────────
 
-# FORMULAE
+# CLI
 brew "bat"
 brew "eza"
-brew "felixkratz/formulae/sketchybar"
 brew "fzf"
 brew "gh"
 brew "git-delta"
 brew "just"
 brew "less" # higher version than builtin one -> enables use of `lesskey` file
+brew "mas"
 brew "neovim"
 brew "node"
 brew "pandoc"
@@ -24,7 +24,11 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
-# CASKS
+# restart needed for new permissions 
+# (not `restart_service = true`, since it triggers even on `brew bundle check`)
+brew "felixkratz/formulae/sketchybar", postinstall: "brew services restart sketchybar"
+
+# APPS
 cask "alfred"
 cask "alt-tab"
 cask "appcleaner"
@@ -37,26 +41,25 @@ cask "microsoft-word"
 cask "mimestream"
 cask "neovide"
 cask "obsidian", greedy: true # greedy for installer version
-cask "qlmarkdown"
 cask "replacicon"
 cask "slack"
-cask "syntax-highlight" # Peek not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
 cask "wezterm"
 cask "zoom"
-
-# MAC APP STORE
-brew "mas"
-mas "Folder Preview", id: 6698876601
 mas "Highlights", id: 1498912833
 mas "Ivory", id: 6444602274
+
+# QUICK LOOK
+cask "syntax-highlight" # `Peek` not available anymore https://apps.apple.com/us/app/peek-a-quick-look-extension/id1554235898?mt=12
+cask "qlmarkdown"
+mas "Folder Preview", id: 6698876601
 
 #───────────────────────────────────────────────────────────────────────────────
 
 # DEVICE-SPECIFIC INSTALLS
 
-computer_name = `scutil --get ComputerName`
+computerName = `scutil --get ComputerName`
 
-if computer_name.include?("Home")
+if computerName.include?("Home")
 	brew "spotify_player"
 	brew "yt-dlp"
 	cask "bettertouchtool"
@@ -65,9 +68,9 @@ if computer_name.include?("Home")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
-elsif computer_name.include?("Office")
-	cask "cleanshot"
-elsif computer_name.include?("Mother")
+elsif computerName.include?("Office")
+	cask "cleanshot" # only license for 2 devices
+elsif computerName.include?("Mother")
 	cask "iina"
 	cask "steam"
 	cask "transmission"
