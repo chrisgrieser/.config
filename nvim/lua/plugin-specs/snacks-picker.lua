@@ -502,7 +502,8 @@ return {
 				end,
 				reveal_in_macOS_Finder = function(picker)
 					if jit.os ~= "OSX" then return end
-					vim.system { "open", "-R", picker:current().file }
+					local path = picker:current().cwd .. "/" .. picker:current().file
+					vim.system { "open", "-R", path }
 					picker:close()
 				end,
 				qflist_and_go = function(picker)

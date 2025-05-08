@@ -1,6 +1,4 @@
--- DOCS
--- https://github.com/sublimelsp/LSP-css/blob/master/LSP-css.sublime-settings
--- https://github.com/microsoft/vscode-css-languageservice/blob/main/src/services/lintRules.ts
+-- DOCS https://github.com/neoclide/coc-css#configuration-options
 --------------------------------------------------------------------------------
 
 return {

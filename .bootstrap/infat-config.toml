@@ -6,7 +6,7 @@
 
 [types] # fallbacks
 text = "neovide"
-# plain-text = "neovide" # PENDING https://github.com/philocalyst/infat/issues/22
+plain-text = "neovide"
 video = "IINA"
 movie = "IINA"
 mp4-movie = "IINA"
@@ -19,8 +19,9 @@ magnet = "Transmission"
 
 [extensions]
 txt = "TextEdit"
-csv = "neovide"
 svg = "neovide"
+jsonc = "neovide"
+adblock = "neovide"
 md = "~/.config/obsidian/opener/Obsidian Helper.app"
 
 pdf = "Highlights"

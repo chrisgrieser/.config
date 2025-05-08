@@ -1,9 +1,6 @@
 # vim spell files
 *.add.spl
 
-# vale styles
-vale/styles
-
 # these are usually ignored as boileterplate in the global `.ignore`, but these
 # one's here I actually change sometimes
 !pyproject.toml
