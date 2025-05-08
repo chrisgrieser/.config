@@ -40,8 +40,9 @@ return {
 			multiline = false,
 		},
 		cr = { autoclose = true },
-		space = { enable = true },
-		space2 = { enable = true },
+		tabout = { enable = false, map = "<A-tab>" },
+		space = { enable = false }, -- conflicts with setting undopoint via space
+		space2 = { enable = false },
 
 		config_internal_pairs = {
 			{ "'", "'", nft = { "markdown", "snacks_picker_input", "gitcommit" } }, -- used as apostrophe

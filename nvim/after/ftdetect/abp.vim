@@ -1,1 +1,1 @@
-au BufNewFile,BufRead *.abp,*.adblock set filetype=abp
+au BufNewFile,BufRead *.abp,*.adblock set filetype=abp commentstring=!\ %s

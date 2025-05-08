@@ -12,6 +12,10 @@ return {
 
 		-- TODO change to share dir, PENDING https://github.com/mason-org/mason-registry/issues/9981
 		local debugpyPythonPath = vim.env.MASON .. "/packages/debugpy/venv/bin/python3"
+		if not vim.uv.fs_stat(debugpyPythonPath) then
+			vim.notify("`debugpy` is not installed", vim.log.levels.WARN)
+			return
+		end
 		require("dap-python").setup(debugpyPythonPath, { console = "internalConsole" })
 	end,
 }
