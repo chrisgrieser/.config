@@ -264,7 +264,6 @@ end
 
 --------------------------------------------------------------------------------
 
----@param direction "up"|"down"
 function M.goIndent(direction)
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 	local curIndent = vim.fn.indent(row)
