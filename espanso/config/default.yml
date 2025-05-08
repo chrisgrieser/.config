@@ -7,7 +7,7 @@ search_shortcut: ""
 
 show_icon: false
 show_notifications: true
-auto_restart: true # alternatively via Makefile, but is slower and annoying to sync
+auto_restart: true
 
 undo_backspace: false # backspace undos expansion
 backend: auto
