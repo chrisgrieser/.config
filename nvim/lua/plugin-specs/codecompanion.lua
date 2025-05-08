@@ -7,13 +7,11 @@ return {
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
-		-- add notifications
 		vim.api.nvim_create_autocmd("User", {
-			desc = "User: notifications for codecompanion",
-			pattern = "CodeCompanionRequest*",
+			desc = "User: add notifications for codecompanion",
+			pattern = "CodeCompanionRequest*InlineStarted",
 			callback = function(ctx)
-				local type = (ctx.match:match("CodeCompanionRequest(%a+)") or ""):lower()
-				if type ~= "started" and type ~= "finished" then return end
+				local type = ctx.match:match("CodeCompanionRequest(%a+)InlineStarted"):lower()
 				vim.notify("Request " .. type .. ".", nil, { title = "CodeCompanion", icon = "" })
 			end,
 		})
