@@ -43,13 +43,13 @@ hi link abpCommentKey Comment
 hi link abpCommentValue Special
 
 hi link abpBlocking String
-hi link abpBlockingSeparator Delimiter
-hi link abpBlockingExceptionSeparator Delimiter
-hi link abpBlockingOption Keyword
+hi link abpBlockingSeparator Operator
+hi link abpBlockingExceptionSeparator Operator
+hi link abpBlockingOption Function
 hi link abpBlockingException WarningMsg
 
 hi link abpHiding String
-hi link abpHidingSeparator Delimiter
-hi link abpHidingExceptionSeparator Delimiter
-hi link abpHidingOption Keyword
+hi link abpHidingSeparator Operator
+hi link abpHidingExceptionSeparator Operator
+hi link abpHidingOption Function
 hi link abpHidingException WarningMsg

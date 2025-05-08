@@ -4,14 +4,11 @@ chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
 amazon.de###nav-logo-sprites
 amazon.de###spc-container
-devdocs.io##._notice
 flaticon.com###layer_coupon
 flaticon.com###open_panel
 journals.sagepub.com###bookshelf-opener
 messenger.com##[aria-label="Inbox switcher"]
 messenger.com##[aria-label="Thread list"] > div > div:last-child
-nerdfonts.com##.subtlecircle
-nerdfonts.com##h1.center
 nyaa.si##a[href$=".torrent"]
 rewe.de##.qa-feefs-visual-popup
 stackoverflow.com###announcement-banner
