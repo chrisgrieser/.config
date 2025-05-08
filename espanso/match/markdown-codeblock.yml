@@ -19,13 +19,3 @@ matches:
             pbpaste |
               awk "NF {p=1} p" | # remove trailing blank lines
               python3 -c "import textwrap,sys; print(textwrap.dedent(sys.stdin.read()))" # dedent
-  - trigger: LLL
-    replace: "[$|$]({{url}})"
-    label: Markdown Link
-    vars:
-      - name: url
-        type: shell
-        params:
-          # only pastes clipboard content if it's a URL
-          cmd: |
-            [[ "$(pbpaste)" =~ ^\<?http.* ]] && pbpaste || echo ""
