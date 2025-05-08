@@ -2,6 +2,10 @@
 "      Language: Adblock Plus Filter Lists
 "    Maintainer: Thomas Greiner <https://www.greinr.com/>
 "       Version: 0.1
+" https://github.com/ThomasGreiner/abp-syntax
+"───────────────────────────────────────────────────────────────────────────────
+" Highlights modified by Chris Grieser
+"───────────────────────────────────────────────────────────────────────────────
 
 if exists("b:current_syntax")
   finish
@@ -29,26 +33,23 @@ syntax match abpHidingExceptionSeparator "#@#" contained nextgroup=abpHidingExce
 syntax match abpHiding ".*" contained
 syntax match abpHidingException ".*" contained
 
+"───────────────────────────────────────────────────────────────────────────────
+" below here, highlights are modified
+
 " Highlights
 hi link abpHeader Comment
 hi link abpComment Comment
 hi link abpCommentKey Comment
 hi link abpCommentValue Special
+
 hi link abpBlocking String
 hi link abpBlockingSeparator Delimiter
+hi link abpBlockingExceptionSeparator Delimiter
 hi link abpBlockingOption Keyword
 hi link abpBlockingException WarningMsg
-hi link abpBlockingExceptionSeparator Delimiter
 
 hi link abpHiding String
 hi link abpHidingSeparator Delimiter
 hi link abpHidingExceptionSeparator Delimiter
 hi link abpHidingOption Keyword
 hi link abpHidingException WarningMsg
-
-" Colors
-hi ABPBlock ctermfg=Red guifg=Red
-hi ABPBlockException ctermfg=Green guifg=Green
-hi ABPElemhide ctermfg=DarkRed guifg=DarkRed
-hi ABPOption ctermfg=DarkBlue guifg=DarkBlue
-hi ABPElemhideException ctermfg=DarkGreen guifg=DarkGreen
