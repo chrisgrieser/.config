@@ -61,7 +61,7 @@ function update() {
 	fi
 
 	# sketchybar restart for new permissions
-	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -1h)
+	sketchybar_was_updated=$(find "$HOMEBREW_PREFIX/bin/sketchybar" -mtime -10m)
 	[[ -n "$sketchybar_was_updated" ]] && brew services restart sketchybar
 
 	"$ZDOTDIR/notificator" --title "🍺 Homebrew" --message "Update finished." --sound "Blow"
