@@ -338,6 +338,8 @@ keymap("n", "i", function()
 	return lineEmpty and '"_cc' or "i"
 end, { expr = true, desc = "indented i on empty line" })
 
+keymap("i", "<Space>", "<C-g>u<Space>", { desc = "󱁐 Add undopoint to space" })
+
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })
 keymap("x", "v", "<C-v>", { desc = "`vv` starts visual block" })
