@@ -3,8 +3,7 @@
 
 return {
 	"olimorris/codecompanion.nvim",
-	dependencies = "nvim-lua/plenary.nvim",
-	cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
+	cmd = { "CodeCompanion" },
 	init = function()
 		vim.g.whichkeyAddSpec { "<leader>a", group = " AI" }
 
@@ -22,46 +21,21 @@ return {
 	keys = {
 		-- `:` so context gets passed via `<>` marks
 		{ "<leader>aa", ":CodeCompanion<CR>", mode = { "n", "x" }, desc = " Inline assistant" },
-		{ "<leader>ac", "<cmd>CodeCompanionChat<CR>", desc = " Chat" },
 	},
 	opts = {
-		-- CodeCompanion settings
 		display = {
-			diff = {
-				enabled = false, -- not helpful anyway, just using gitsigns word-diff afterwards instead
-			},
-			chat = {
-				start_in_insert_mode = true,
-				intro_message = "Press ? for options",
-				show_header_separator = false,
-				window = {
-					opts = { statuscolumn = " " }, -- just for padding
-				},
-			},
+			diff = { enabled = false }, -- not helpful anyway, just using gitsigns word-diff afterwards instead
 		},
-
-		-- LLM settings
 		strategies = {
-			chat = {
-				adapter = "openai",
-				keymaps = {
-					close = {
-						modes = { n = "q", i = "<D-w>" },
-					},
-				},
-			},
 			inline = { adapter = "openai" },
 			cmd = { adapter = "openai" },
 		},
 		adapters = {
 			openai = function()
+				local model = "gpt-4.1-mini" -- https://platform.openai.com/docs/models
+
 				return require("codecompanion.adapters").extend("openai", {
-					env = { api_key = vim.env.OPENAI_API_KEY }, -- exported in .zshenv
-					schema = {
-						-- much cheaper than the flagship models, but still good enough
-						-- https://platform.openai.com/docs/models
-						model = { default = "gpt-4.1-mini" },
-					},
+					schema = { model = { default = model } },
 				})
 			end,
 		},
