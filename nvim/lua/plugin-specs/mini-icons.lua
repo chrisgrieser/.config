@@ -13,18 +13,17 @@ return {
 			["applescript"] = { glyph = "󰀵", hl = "MiniIconsGrey" },
 			["log"] = { glyph = "󱂅", hl = "MiniIconsGrey" },
 			["gitignore"] = { glyph = "" },
+			["adblock"] = { glyph = "", hl = "MiniIconsRed" },
 		},
 		filetype = {
 			["css"] = { glyph = "", hl = "MiniIconsRed" },
 			["typescript"] = { hl = "MiniIconsCyan" },
-			["vim"] = { glyph = "" }, -- used for `obsidian.vimrc`
-			["abp"] = { glyph = "" },
+			["vim"] = { glyph = "" }, -- used for `obsidian-vimrc`
 
 			-- plugin-filetypes
 			["ccc-ui"] = { glyph = "" },
 			["scissors-snippet"] = { glyph = "󰩫" },
 			["rip-substitute"] = { glyph = "" },
-			["codecompanion"] = { glyph = "" },
 		},
 	},
 }
