@@ -43,7 +43,6 @@ local nonMasonLsps = {
 	-- Not installed via `mason`, but included in Xcode Command Line Tools (which
 	-- are installed on macOS-dev devices as they are needed for `homebrew`)
 	jit.os == "OSX" and "sourcekit" or nil,
-	"lsp-ai-aarch64-apple-darwin"
 }
 
 --------------------------------------------------------------------------------
@@ -73,7 +72,7 @@ local function enableLsps()
 end
 
 ---@param pack Package
----@param version? string
+---@param version? string if provided, updates to that version
 local function installOrUpdate(pack, version)
 	local preMsg = version and ("[%s] updating to %s…"):format(pack.name, version)
 		or ("[%s] installing…"):format(pack.name)
