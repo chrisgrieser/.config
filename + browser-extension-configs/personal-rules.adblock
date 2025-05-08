@@ -1,3 +1,5 @@
+! brave://settings/shields/filters
+!───────────────────────────────────────────────────────────────────────────────
 chatgpt.com##nav[aria-label="Chat history"] > div:last-child
 chatgpt.com###thread-bottom-container > div:last-child
 amazon.de###nav-logo-sprites
