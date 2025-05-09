@@ -44,9 +44,13 @@ return {
 		space = { enable = false }, -- conflicts with setting undopoint via space
 		space2 = { enable = false },
 
+		extensions = { -- disable in these filetypes
+			filetype = { nft = { "TelescopePrompt", "snacks_picker_input" } },
+		},
+
 		config_internal_pairs = {
-			{ "'", "'", nft = { "markdown", "snacks_picker_input", "gitcommit" } }, -- used as apostrophe
-			{ '"', '"', nft = { "vim", "snacks_picker_input" } }, -- vimscript uses quotes as comments
+			{ "'", "'", nft = { "markdown", "gitcommit" } }, -- used as apostrophe
+			{ '"', '"', nft = { "vim" } }, -- uses as comments in vimscript
 
 			-- disable codeblocks, see https://github.com/Saghen/blink.cmp/issues/1692
 			{
@@ -60,6 +64,7 @@ return {
 			},
 			{ "```", "```", nft = { "markdown" } },
 		},
+		--------------------------------------------------------------------------
 		-- INFO custom keys need to be "appended" to the opts as a list
 		{ "**", "**", ft = { "markdown" } }, -- bold
 		{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
