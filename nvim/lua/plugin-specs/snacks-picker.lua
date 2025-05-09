@@ -169,10 +169,14 @@ return {
 		{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "󰗲 Log" },
 
 		-- TEMP replacement for tinygit's `interactiveStaging`
-		-- (disable its confirm, since it's buggy)
 		{
 			"<leader>ga",
-			function() Snacks.picker.git_diff { confirm = "" } end,
+			function()
+				Snacks.picker.git_diff {
+					confirm = "", -- disable, since buggy
+					layout = "big_preview",
+				}
+			end,
 			desc = "󰐖 View hunks",
 		},
 
@@ -230,6 +234,7 @@ return {
 							},
 						},
 					},
+					layout = "big_preview",
 				},
 				marks = {
 					transform = function(item) return item.label:find("%u") ~= nil end, -- only global marks
@@ -325,10 +330,7 @@ return {
 						"--sortr=modified", -- sort by recency, slight performance impact
 						("--ignore-file=" .. vim.fs.normalize("~/.config/ripgrep/ignore")),
 					},
-					layout = {
-						preset = "wide_with_preview",
-						layout = { [2] = { width = 0.6 } }, -- sets preview wider
-					},
+					layout = "big_preview",
 					win = {
 						input = {
 							keys = {
@@ -351,7 +353,7 @@ return {
 						local lnum = item.pos[1]
 						vim.cmd(("edit +%d %s"):format(lnum, item.file))
 					end,
-					layout = { preset = "wide_with_toggled_preview" },
+					layout = "toggled_preview",
 				},
 				colorschemes = {
 					-- at the bottom, so there is more space to preview
@@ -392,7 +394,7 @@ return {
 					},
 				},
 				git_log = {
-					layout = { preset = "wide_with_toggled_preview" },
+					layout = "toggled_preview",
 				},
 			},
 			formatters = {
@@ -404,7 +406,7 @@ return {
 				git = { builtin = false },
 			},
 			ui_select = true,
-			layout = "wide_with_preview", -- use this as default layout
+			layout = "wide_with_preview", -- = default layout
 			layouts = { -- define available layouts
 				small_no_preview = {
 					layout = {
@@ -438,10 +440,17 @@ return {
 						},
 					},
 				},
-				wide_with_toggled_preview = { ---@diagnostic disable-line: missing-fields
+				toggled_preview = { ---@diagnostic disable-line: missing-fields
 					preset = "wide_with_preview",
 					preview = false, ---@diagnostic disable-line: assign-type-mismatch wrong annotation
 				},
+				big_preview = {
+					preset = "wide_with_preview",
+					layout = {
+						height = 0.7,
+						[2] = { width = 0.6 }, -- second win is the preview
+					},
+				}
 			},
 			win = {
 				input = {
