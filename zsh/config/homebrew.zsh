@@ -28,12 +28,10 @@ function update() {
 	brew update # update homebrew itself
 
 	_pretty_header "brew bundle install"
-	if ! brew bundle check &> /dev/null; then
+	if ! brew bundle check ; then
 		export HOMEBREW_COLOR=1                      # force color when piping output
 		brew bundle install --verbose --no-upgrade | # `--verbose` shows progress
 			grep --invert-match --extended-regexp "^Using |^Skipping install of "
-	else
-		echo "✅ Brewfile satisfied."
 	fi
 
 	_pretty_header "brew bundle cleanup"

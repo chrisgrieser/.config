@@ -1,6 +1,7 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
 	opts = {
+		visuals = { icon = "󰹈" },
 		preCommitHook = {
 			enabled = true,
 			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir itself, when developing it
@@ -77,6 +78,7 @@ return {
 					cmd = "rg",
 					args = { "--trim" },
 					search = marker,
+					regex = false,
 					live = false,
 					format = function(item, _picker) -- only display the grepped line
 						local out = {}

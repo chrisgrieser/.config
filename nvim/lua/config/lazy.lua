@@ -8,7 +8,7 @@ if not vim.uv.fs_stat(lazypath) then
 	local out = vim.system(args):wait()
 	if out.code ~= 0 then
 		vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. out.stderr, "ErrorMsg" } }, true, {})
-		vim.fn.getchar()
+		vim.fn.getchar() -- wait for keypress
 		os.exit(1)
 	end
 end
@@ -19,8 +19,7 @@ require("lazy").setup {
 	spec = { import = "plugin-specs" },
 	defaults = { lazy = true },
 	lockfile = vim.fn.stdpath("config") .. "/.lazy-lock.json", -- make lockfile hidden
-
-	dev = { ---@diagnostic disable-line: assign-type-mismatch
+	dev = {
 		patterns = { "nvim", "blink.cmp" }, -- for repos matching `patterns`… (`nvim` = all nvim repos)
 		path = vim.g.localRepos, -- …use local repo, if one exists in `path`…
 		fallback = true, -- …and if not, fallback to fetching from GitHub
@@ -40,22 +39,24 @@ require("lazy").setup {
 		backdrop = 60,
 		size = { width = 0.85, height = 0.85 },
 		custom_keys = {
-			["<localleader>l"] = false,
-			["<localleader>t"] = false,
-			["<localleader>i"] = false,
 			["gi"] = {
-				function(plug)
-					local url = plug.url:gsub("%.git$", "")
+				function(plugin)
+					local repo = plugin.url:gsub("%.git$", "")
 					local line = vim.api.nvim_get_current_line()
 					local issue = line:match("#(%d+)")
 					local commit = line:match(("%x"):rep(6) .. "+") -- `%x` = hex/hash char
-					if issue then
-						vim.ui.open(url .. "/issues/" .. issue)
-					elseif commit then
-						vim.ui.open(url .. "/commit/" .. commit)
-					end
+					if not issue and not commit then return end
+					local url = repo .. (issue and "/issues/" .. issue or "/commit/" .. commit)
+					vim.ui.open(url)
 				end,
 				desc = " Open issue/commit",
+			},
+			["!"] = {
+				function(plugin)
+					local msg = vim.inspect(plugin)
+					vim.notify(msg, nil, { title = plugin.name, ft = "lua", icon = "󱈄" })
+				end,
+				desc = "󱈄 Inspect plugin",
 			},
 		},
 	},
@@ -63,7 +64,7 @@ require("lazy").setup {
 		enabled = true, -- automatically check for plugin updates
 		frequency = 60 * 60 * 24 * 7, -- = 7 days
 	},
-	diff = { cmd = "browser" }, -- view diffs in the browser with `d`
+	diff = { cmd = "terminal_git" }, -- view diffs with `delta` (cursor needs to be on hash)
 	change_detection = { notify = false },
 	readme = {
 		-- needed to make helpdocs of lazy-loaded plugins available:

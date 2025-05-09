@@ -13,6 +13,7 @@ local function importLuaModule()
 		cmd = "rg",
 		args = { "--only-matching" },
 		live = false,
+		regex = false,
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 		ft = "lua",
 
