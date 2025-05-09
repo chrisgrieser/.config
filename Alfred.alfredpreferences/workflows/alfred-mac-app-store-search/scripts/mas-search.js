@@ -29,6 +29,8 @@ function httpRequest(url) {
  * @property {string} formattedPrice - App price as a formatted string (e.g. "$4.99").
  * @property {string} currency - Currency code (e.g. "USD").
  * @property {number} price
+ * @property {number} fileSizeBytes
+ * @property {number} trackId - id also used by `mas` cli
  */
 
 /**
@@ -130,6 +132,7 @@ function run(argv) {
 			app.price > 0 ? app.formattedPrice : "",
 			app.averageUserRating ? `★ ${app.averageUserRating.toFixed(1)}` : null,
 			relativeDate(new Date(app.currentVersionReleaseDate)),
+			`${(app.fileSizeBytes / 1024 / 1024).toFixed(1)}Mb`,
 			app.description,
 		]
 			.filter(Boolean)

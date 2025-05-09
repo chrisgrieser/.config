@@ -8,7 +8,7 @@ keymap("n", "<D-,>", function()
 end, { desc = "󰌌 Edit keybindings" })
 
 -- save before quitting (non-unique, since also set by Neovide)
-keymap("n", "<D-q>", vim.cmd.wq, { desc = " Save & quit", unique = false })
+keymap("n", "<D-q>", "ZZ", { desc = " Save & quit", unique = false })
 
 -- stylua: ignore
 keymap("n", "<leader>pd", function() vim.ui.open(vim.fn.stdpath("data") --[[@as string]]) end, { desc = "󰝰 Data dir" })
@@ -337,8 +337,6 @@ keymap("n", "i", function()
 	local lineEmpty = vim.trim(vim.api.nvim_get_current_line()) == ""
 	return lineEmpty and '"_cc' or "i"
 end, { expr = true, desc = "indented i on empty line" })
-
-keymap("i", "<Space>", "<C-g>u<Space>", { desc = "󱁐 Add undopoint to space" })
 
 -- VISUAL MODE
 keymap("x", "V", "j", { desc = "repeated `V` selects more lines" })

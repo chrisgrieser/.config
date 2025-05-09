@@ -122,6 +122,7 @@ function run() {
 	const deprecatedIcon = "⚠️ ";
 
 	console.log("Caches ready.");
+	const first = true
 
 	// 5. CREATE ALFRED ITEMS
 	/** @type{AlfredItem&{downloads:number}[]} */

@@ -51,13 +51,6 @@ require("lazy").setup {
 				end,
 				desc = " Open issue/commit",
 			},
-			["!"] = {
-				function(plugin)
-					local msg = vim.inspect(plugin)
-					vim.notify(msg, nil, { title = plugin.name, ft = "lua", icon = "󱈄" })
-				end,
-				desc = "󱈄 Inspect plugin",
-			},
 		},
 	},
 	checker = {
