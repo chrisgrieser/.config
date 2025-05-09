@@ -327,6 +327,7 @@ local favicons = {
 	reddit = "",
 	apple = "",
 	microsoft = "",
+	openai = "",
 }
 
 local function addFavicons(bufnr)
