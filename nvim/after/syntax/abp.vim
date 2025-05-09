@@ -4,7 +4,7 @@
 "       Version: 0.1
 " https://github.com/ThomasGreiner/abp-syntax
 "───────────────────────────────────────────────────────────────────────────────
-" Highlights modified by Chris Grieser
+" Modified by Chris Grieser
 "───────────────────────────────────────────────────────────────────────────────
 
 if exists("b:current_syntax")
@@ -36,20 +36,29 @@ syntax match abpHidingException ".*" contained
 "───────────────────────────────────────────────────────────────────────────────
 " below here, highlights are modified
 
-" Highlights
-hi link abpHeader Comment
-hi link abpComment Comment
-hi link abpCommentKey Comment
-hi link abpCommentValue Special
+function! s:AbpSetHighlights() abort
+  hi link abpHeader Comment
+  hi link abpComment Comment
+  hi link abpCommentKey Comment
+  hi link abpCommentValue Special
 
-hi link abpBlocking String
-hi link abpBlockingSeparator Operator
-hi link abpBlockingExceptionSeparator Operator
-hi link abpBlockingOption Function
-hi link abpBlockingException WarningMsg
+  hi link abpBlocking String
+  hi link abpBlockingSeparator Operator
+  hi link abpBlockingExceptionSeparator Operator
+  hi link abpBlockingOption Function
+  hi link abpBlockingException WarningMsg
 
-hi link abpHiding String
-hi link abpHidingSeparator Operator
-hi link abpHidingExceptionSeparator Operator
-hi link abpHidingOption Function
-hi link abpHidingException WarningMsg
+  hi link abpHiding String
+  hi link abpHidingSeparator Operator
+  hi link abpHidingExceptionSeparator Operator
+  hi link abpHidingOption Function
+  hi link abpHidingException WarningMsg
+endfunction
+
+" so changes to the colorscheme are reflected
+augroup AbpHighlights
+  autocmd!
+  autocmd ColorScheme * call s:AbpSetHighlights()
+augroup END
+
+call s:AbpSetHighlights() " initialize
