@@ -96,7 +96,7 @@ return {
 					icon = "",
 					cond = function() -- only if not on main or master
 						local curBranch = require("lualine.components.branch.git_branch").get_branch()
-						return curBranch ~= "main" and curBranch ~= "master" and vim.bo.buftype == ""
+						return curBranch ~= "main" and curBranch ~= "master"
 					end,
 				},
 				{ -- file name & icon

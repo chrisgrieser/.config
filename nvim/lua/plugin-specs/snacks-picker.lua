@@ -173,15 +173,16 @@ return {
 			"<leader>ga",
 			function()
 				Snacks.picker.git_diff {
-					confirm = function (picker, item)
-						-- FIX confirm not working when cwd != git root
+					layout = "big_preview",
+					-- FIX snacks' `confirm` not working when cwd != git root
+					confirm = function(picker, item)
+						picker:close()
 						local gitDir = Snacks.git.get_root()
 						local path = (gitDir .. "/" .. item.file):gsub("/", "\\/") -- escape slashes for `:edit`
-						local lnum = item.pos[1]
-						picker:close()
-						vim.cmd(("edit %d %s"):format(lnum, path))
+						local lnum = item.pos[1] + 3 -- +3 since pos is start of diff, not hunk
+						vim.cmd(("edit +%d %s"):format(lnum, path))
+						vim.cmd.normal { "zv", bang = true } -- open folds
 					end,
-					layout = "big_preview",
 				}
 			end,
 			desc = "󰐖 View hunks",
@@ -457,7 +458,7 @@ return {
 						height = 0.7,
 						[2] = { width = 0.6 }, -- second win is the preview
 					},
-				}
+				},
 			},
 			win = {
 				input = {
