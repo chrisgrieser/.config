@@ -101,14 +101,14 @@ local autoCdConfig = {
 		".config", -- my dotfiles
 		"com~apple~CloudDocs", -- macOS iCloud
 		vim.fs.basename(vim.env.HOME), -- $HOME
-		"Cellar", -- homebrew stuff
+		"Cellar", -- homebrew
 	},
 }
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 	-- also trigger on `FocusGained` to account for deletions of file outside nvim
 	desc = "User: Auto-cd to project root",
 	callback = function(ctx)
-		-- GUARD pass buffers
+		-- GUARD `pass` cli buffers
 		if vim.startswith(ctx.file, "/private/var/") then return end
 
 		if not vim.uv.cwd() then vim.uv.chdir("/") end -- prevent error when no cwd
