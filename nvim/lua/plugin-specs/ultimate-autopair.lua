@@ -52,8 +52,7 @@ return {
 			{ "'", "'", nft = { "markdown", "gitcommit" } }, -- used as apostrophe
 			{ '"', '"', nft = { "vim" } }, -- uses as comments in vimscript
 
-			-- disable codeblocks, see https://github.com/Saghen/blink.cmp/issues/1692
-			{
+			{ -- disable codeblocks, see https://github.com/Saghen/blink.cmp/issues/1692
 				"`",
 				"`",
 				cond = function(_fn)
@@ -65,7 +64,7 @@ return {
 			{ "```", "```", nft = { "markdown" } },
 		},
 		--------------------------------------------------------------------------
-		-- INFO custom keys need to be "appended" to the opts as a list
+		-- INFO custom pairs need to be "appended" to the opts as a list
 		{ "**", "**", ft = { "markdown" } }, -- bold
 		{ [[\"]], [[\"]], ft = { "zsh", "json", "applescript" } }, -- escaped quote
 
