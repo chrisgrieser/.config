@@ -35,16 +35,18 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 		msg.removeSubrange(matchRange)
 	}
 
-	// parse HH:MM for due time
+	// parse HH:MM for due time, if at start or end of input
 	var hour: Int? = nil
 	var minute: Int? = nil
-	let timePattern = #"(?<!\d)(\d{1,2}):(\d{2})(?!\d)"#
+	let timePattern = #"^(\d{1,2}):(\d{2})(?!\d)|(?<!\d)(\d{1,2}):(\d{2})$"#
 	let timeRegex = try! NSRegularExpression(pattern: timePattern)
 
 	if let match = timeRegex.firstMatch(in: msg, range: NSRange(msg.startIndex..., in: msg)) {
-		if let hrRange = Range(match.range(at: 1), in: msg),
-			let minRange = Range(match.range(at: 2), in: msg),
-			let timeRange = Range(match.range, in: msg),
+		// Extract the first or second pair of captured groups
+		let hrRange = Range(match.range(at: 1), in: msg) ?? Range(match.range(at: 3), in: msg)
+		let minRange = Range(match.range(at: 2), in: msg) ?? Range(match.range(at: 4), in: msg)
+
+		if let hrRange = hrRange, let minRange = minRange,
 			let parsedHour = Int(msg[hrRange]),
 			let parsedMinute = Int(msg[minRange]),
 			(0..<24).contains(parsedHour),
@@ -52,7 +54,7 @@ func parseTimeAndPriorityAndMessage(from input: String) -> ParsedResult? {
 		{
 			hour = parsedHour
 			minute = parsedMinute
-			msg.removeSubrange(timeRange)
+			if let timeRange = Range(match.range, in: msg) { msg.removeSubrange(timeRange) }
 		} else {
 			return nil  // invalid time
 		}
