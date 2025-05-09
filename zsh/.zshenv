@@ -9,6 +9,14 @@ private_dots="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Dotfolder/priva
 # shellcheck disable=1091
 [[ -f "$private_dots/api-keys.txt" ]] && source "$private_dots/api-keys.txt"
 
+# https://github.com/settings/tokens
+# needed permissions:
+# - notifications (Alfred workflow & Sketchybar)
+# - deleting repos (`delete_forks_with_no_open_prs`)
+# - repos (forking, creating, etc.)
+GITHUB_TOKEN="$(cat "$private_dots/github-token.txt")"
+export GITHUB_TOKEN
+
 # PANDOC
 # does not have an environment var for this, so using `--data-dir` alias
 alias pandoc='pandoc --data-dir="$HOME/.config/pandoc"'
