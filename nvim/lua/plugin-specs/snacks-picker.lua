@@ -173,7 +173,14 @@ return {
 			"<leader>ga",
 			function()
 				Snacks.picker.git_diff {
-					confirm = "", -- disable, since buggy
+					confirm = function (picker, item)
+						-- FIX confirm not working when cwd != git root
+						local gitDir = Snacks.git.get_root()
+						local path = (gitDir .. "/" .. item.file):gsub("/", "\\/") -- escape slashes for `:edit`
+						local lnum = item.pos[1]
+						picker:close()
+						vim.cmd(("edit %d %s"):format(lnum, path))
+					end,
 					layout = "big_preview",
 				}
 			end,

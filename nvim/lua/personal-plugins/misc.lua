@@ -16,7 +16,7 @@ function M.startOrStopRecording(toggleKey, reg)
 
 	local prevMacro = vim.fn.getreg(reg)
 	vim.cmd.normal { "q", bang = true }
-	local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- since the key itself is recorded, too
+	local macro = vim.fn.getreg(reg):sub(1, -(#toggleKey + 1)) -- since the key itself is also recorded
 	if macro ~= "" then
 		vim.fn.setreg(reg, macro)
 		local msg = vim.fn.keytrans(macro)
@@ -156,10 +156,6 @@ end
 --------------------------------------------------------------------------------
 
 function M.openWorkflowInAlfredPrefs()
-	if jit.os ~= "OSX" then
-		vim.notify("Alfred is only available on macOS.", vim.log.levels.WARN)
-		return
-	end
 	local workflowUid =
 		vim.api.nvim_buf_get_name(0):match("Alfred%.alfredpreferences/workflows/(.-)/")
 	if not workflowUid then
@@ -234,6 +230,7 @@ function M.formatWithFallback()
 		vim.cmd([[% substitute_\s\+$__e]]) -- remove trailing spaces
 		vim.cmd([[% substitute _\(\n\n\)\n\+_\1_e]]) -- remove duplicate blank lines
 		vim.cmd([[silent! /^\%(\n*.\)\@!/,$ delete]]) -- remove blanks at end of file
+
 		vim.notify("Formatting with fallback.", nil, notifyOpts)
 	end
 end
