@@ -1,9 +1,6 @@
 return {
 	"chrisgrieser/nvim-chainsaw",
 	opts = {
-		visuals = {
-			icon = "󰹈",
-		},
 		preCommitHook = {
 			enabled = true,
 			dontInstallInDirs = { "**/nvim-chainsaw" }, -- plugin dir itself, when developing it
@@ -45,9 +42,9 @@ return {
 		})
 	end,
 	init = function(spec)
-		-- lazyload chainsaw only when `Chainsaw` function is called
+		-- lazyload `nvim-chainsaw` only when `Chainsaw` function is called
 		_G.Chainsaw = function(name) ---@diagnostic disable-line: duplicate-set-field
-			require("chainsaw") -- load nvim-chainsaw, will override `_G.Chainsaw`
+			require("chainsaw") -- loading nvim-chainsaw will override `_G.Chainsaw`
 			Chainsaw(name) -- call original function
 		end
 
@@ -80,8 +77,6 @@ return {
 					cmd = "rg",
 					args = { "--trim" },
 					search = marker,
-
-					regex = false,
 					live = false,
 					format = function(item, _picker) -- only display the grepped line
 						local out = {}

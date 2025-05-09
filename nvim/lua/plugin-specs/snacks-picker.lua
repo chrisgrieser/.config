@@ -12,12 +12,10 @@ local function importLuaModule()
 		title = "󰢱 Import module",
 		cmd = "rg",
 		args = { "--only-matching" },
-		regex = true,
-		supports_live = false,
+		live = false,
 		search = [[local (\w+) ?= ?require\(["'](.*?)["']\)(\.[\w.]*)?]],
 		ft = "lua",
 
-		live = false,
 		layout = { preset = "small_no_preview", layout = { width = 0.75 } },
 		transform = function(item, ctx) -- ensure items are unique
 			ctx.meta.done = ctx.meta.done or {} ---@type table<string, boolean>
@@ -302,7 +300,6 @@ return {
 							keys = {
 								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
 								[":"] = { "complete_and_add_colon", mode = "i" },
-								["<C-r>"] = { "explorer_rename", mode = "i" },
 							},
 						},
 					},
@@ -333,6 +330,7 @@ return {
 					},
 				},
 				grep = {
+					regex = false, -- use fixed strings by default
 					cmd = "rg",
 					args = {
 						"--sortr=modified", -- sort by recency, slight performance impact
@@ -343,6 +341,7 @@ return {
 						input = {
 							keys = {
 								["<C-h>"] = { "toggle_hidden_and_ignored", mode = "i" }, -- consistent with `fzf`
+								["<C-r>"] = { "toggle_regex", mode = "i" },
 							},
 						},
 					},
@@ -412,6 +411,9 @@ return {
 			previewers = {
 				diff = { builtin = false }, -- use `delta` automatically
 				git = { builtin = false },
+			},
+			toggles = {
+				regex = { icon = "r", value = true }, -- invert
 			},
 			ui_select = true,
 			layout = "wide_with_preview", -- = default layout
