@@ -58,7 +58,7 @@
 	<key>createdby</key>
 	<string>Chris Grieser</string>
 	<key>description</key>
-	<string></string>
+	<string>Search for games available in the Steam Store.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -198,7 +198,13 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>---
+	<string>## Usage
+Search games available in the the Steam Store via `st`.
+- &lt;kbd&gt;⏎&lt;/kbd&gt;: Open the store page in the browser.
+- &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the store page in `Steam.app`.
+- &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the URL to the store page.
+
+---
 
 #### Created by [Chris Grieser](https://chris-grieser.de/)</string>
 	<key>uidata</key>
@@ -275,6 +281,31 @@
 			<string>textfield</string>
 			<key>variable</key>
 			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>3</integer>
+				<key>markercount</key>
+				<integer>7</integer>
+				<key>maxvalue</key>
+				<integer>7</integer>
+				<key>minvalue</key>
+				<integer>1</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Frequency with which the list of games will be updated, in days.</string>
+			<key>label</key>
+			<string>Update game list</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>cache_refresh_days</string>
 		</dict>
 	</array>
 	<key>version</key>
