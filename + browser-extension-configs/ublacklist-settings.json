@@ -1,7 +1,7 @@
 {
-  "blacklist": "",
+  "blacklist": "*://www.instagram.com/*",
   "blockColor": "default",
-  "blockWholeSite": false,
+  "blockWholeSite": true,
   "dialogTheme": "default",
   "enableMatchingRules": true,
   "enablePathDepth": false,
@@ -34,11 +34,6 @@
       "enabled": true
     },
     {
-      "name": "Main AI Blocklist",
-      "url": "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt",
-      "enabled": true
-    },
-    {
       "name": "BadWebsiteBlocklist",
       "url": "https://raw.githubusercontent.com/popcar2/BadWebsiteBlocklist/refs/heads/main/uBlacklist.txt",
       "enabled": true
@@ -47,8 +42,8 @@
   "syncAppearance": true,
   "syncBlocklist": true,
   "syncGeneral": true,
-  "syncInterval": 60,
+  "syncInterval": 120,
   "syncSubscriptions": true,
-  "updateInterval": 120,
+  "updateInterval": 720,
   "version": "8.10.2"
 }
