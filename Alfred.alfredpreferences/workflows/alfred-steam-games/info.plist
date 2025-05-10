@@ -25,6 +25,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>720F8E84-DC88-46AC-AE34-8493076D62BB</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>⌘: Open in Steam.app</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>FD0EA102-BE68-41B5-A899-C22E2CBF1BC7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -67,7 +77,28 @@
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
+				<string>steam://store/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>720F8E84-DC88-46AC-AE34-8493076D62BB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://store.steampowered.com/app/{query}</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -80,7 +111,7 @@
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
-				<true/>
+				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -92,7 +123,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>stt</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -174,35 +205,80 @@
 	<dict>
 		<key>00D36B9B-9987-4DF0-8C8B-0FF2C3E0E877</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>505</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>305</real>
+		</dict>
+		<key>720F8E84-DC88-46AC-AE34-8493076D62BB</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>open in Steam.app</string>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>20</real>
 		</dict>
 		<key>9F90ED26-489D-4561-80D2-21373BBFF319</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>275</real>
+			<real>305</real>
 		</dict>
 		<key>F83E2464-485B-4A8D-AB3E-E4A157F6C195</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
 			<key>xpos</key>
-			<real>140</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>155</real>
 		</dict>
 		<key>FD0EA102-BE68-41B5-A899-C22E2CBF1BC7</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>open steam store in browser</string>
 			<key>xpos</key>
 			<real>360</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>155</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>st</string>
+				<key>placeholder</key>
+				<string>st</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>0.9</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
