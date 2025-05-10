@@ -61,7 +61,7 @@
       "\t\tconst alfredItem = {",
       "\t\t\ttitle: item.name,",
       "\t\t\tsubtitle: \"\",",
-      "\t\t\targ: item.arg,",
+      "\t\t\targ: item.name,",
       "\t\t};",
       "\t\treturn alfredItem;",
       "\t});",
