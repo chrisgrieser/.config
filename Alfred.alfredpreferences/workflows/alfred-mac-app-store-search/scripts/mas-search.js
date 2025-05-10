@@ -100,6 +100,9 @@ function downloadImageOrGetCached(theApp) {
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
 function run(argv) {
+	const useAppLogos = $.getenv("use_app_logos") === "1"
+	const limit = $.getenv("result_number");
+
 	const query = argv[0] || "";
 	if (query === "") {
 		return JSON.stringify({
@@ -113,7 +116,6 @@ function run(argv) {
 	console.log("Region Code:", regionCode); // e.g., "DE", "US"
 
 	// DOCS https://itunes.apple.com/search?term=notion&entity=macSoftware
-	const limit = $.getenv("result_number");
 	const apiURL = `https://itunes.apple.com/search?entity=macSoftware&country=${regionCode}&limit=${limit}&term=${encodeURIComponent(query)}`;
 	const result = JSON.parse(httpRequest(apiURL))?.results;
 	if (!result) return JSON.stringify({ items: [{ title: "Error: No results", valid: false }] });
@@ -126,7 +128,7 @@ function run(argv) {
 
 	/** @type {AlfredItem[]} */
 	const apps = result.map((/** @type {MacAppStoreResult} */ app) => {
-		const imagePath = downloadImageOrGetCached(app);
+		const imagePath = useAppLogos ? downloadImageOrGetCached(app) : "./icon.png";
 
 		const subtitle = [
 			app.price > 0 ? app.formattedPrice : "",
