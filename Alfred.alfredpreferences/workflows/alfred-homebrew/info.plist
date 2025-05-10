@@ -575,15 +575,17 @@
 	+ &lt;kbd&gt;⏎&lt;/kbd&gt;: Install the package (`brew install`) in the Terminal. (Uses
 	  the terminal app you have configured [in your Alfred
 	  settings](https://www.alfredapp.com/help/features/terminal/).)
-	+ &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
-	+ &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
-	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
+	+ &lt;kbd&gt;⌘⏎&lt;/kbd&gt;: Open the package's homepage (`brew home`).
+	+ &lt;kbd&gt;⌥⏎&lt;/kbd&gt;: Copy the package's homepage to the clipboard.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
+	+ &lt;kbd&gt;⌘Y&lt;/kbd&gt; Quick Look a screenshot of the app, if available.
 	+ The download counts refer to the number of downloads per 90 days.
-- Reinstall a package already installed on your system via the `br` keyword (`brew reinstall`).
-	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
-- Uninstall a package via the `bu` keyword (`brew uninstall`). 
+- Reinstall a package already installed on your system via the `br` keyword
+  (`brew reinstall`).
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
+- Uninstall a package via the `bu` keyword (`brew uninstall`).
 	+ Optionally use the `--zap` option for a clean uninstallation.
-	+ &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
+	+ &lt;kbd&gt;⇧⏎&lt;/kbd&gt;: Show package information (`brew info`) in Text View.
 
 ## Mac App Store apps
 You might also be interested in [this workflow to search the Mac App
@@ -839,7 +841,7 @@ and the Mac App Store.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5.0</string>
+	<string>1.5.1</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
