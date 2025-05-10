@@ -58,10 +58,21 @@ function readFile(path) {
 
 /** @type {AlfredRun} */
 // biome-ignore lint/correctness/noUnusedVariables: Alfred run
-function run() {
-	// CACHE
+function run(argv) {
+	const query = argv[0] || "";
+
+	// PERF since Alfred cannot handle too many items.
+	const minLength = 4;
+	if (query.length < minLength) {
+		return JSON.stringify({
+			items: [
+				{ title: "Query must be at least " + minLength + " characters long", valid: false },
+			],
+		});
+	}
+
+	// PERF CACHE (game is 12+ Mb)
 	const gameListCachePath = $.getenv("alfred_workflow_cache") + "/games.json";
-	console.log("🪚 gameListCachePath:", gameListCachePath);
 	let response;
 	if (cacheIsOutdated(gameListCachePath)) {
 		const apiURL = "https://api.steampowered.com/ISteamApps/GetAppList/v2/";
@@ -75,18 +86,14 @@ function run() {
 	}
 
 	// ITEMS
-	const baseUrl = "https://store.steampowered.com/app/";
-	/** @type {AlfredItem[]} */
-	const games = JSON.parse(response).map((/** @type {SteamGame} */ item) => {
-		const url = baseUrl + item.appid;
+	const list = JSON.parse(response).applist.apps;
 
-		/** @type {AlfredItem} */
-		const alfredItem = {
-			title: item.name,
-			arg: url,
-		};
-		return alfredItem;
-	});
+	const games = list.reduce((/** @type {AlfredItem[]} */ acc, /** @type {SteamGame} */ game) => {
+		if (game.name.toLowerCase().includes(query)) {
+			acc.push({ title: game.name, arg: game.appid });
+		}
+		return acc;
+	}, []);
 
 	return JSON.stringify({ items: games });
 }
