@@ -290,13 +290,13 @@ and the Mac App Store.
 			<key>config</key>
 			<dict>
 				<key>defaultvalue</key>
-				<integer>9</integer>
-				<key>markercount</key>
-				<integer>26</integer>
-				<key>maxvalue</key>
-				<integer>30</integer>
-				<key>minvalue</key>
 				<integer>5</integer>
+				<key>markercount</key>
+				<integer>19</integer>
+				<key>maxvalue</key>
+				<integer>20</integer>
+				<key>minvalue</key>
+				<integer>2</integer>
 				<key>onlystoponmarkers</key>
 				<true/>
 				<key>showmarkers</key>
@@ -311,9 +311,28 @@ and the Mac App Store.
 			<key>variable</key>
 			<string>result_number</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string>Disabling this speeds up the search.</string>
+			<key>label</key>
+			<string>Show app logos</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>use_app_logos</string>
+		</dict>
 	</array>
 	<key>version</key>
-	<string>0.10.3</string>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://chris-grieser.de/</string>
 </dict>
