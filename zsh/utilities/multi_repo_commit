@@ -11,11 +11,10 @@ repo_names="obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook|o
 # repo_names="finder-vim-mode|zsh-magic-dashboard|nvim|alfred|shimmering-obsidian|gitfred|obsidian-quadro|pseudometa-obsidian-plugin-template|grappling-hook"
 
 function actions_in_repo {
-	cp -f "$HOME/Desktop/biome.yml" ./.github/workflows/biome.yml
-	cp -f "$HOME/Desktop/markdownlint.yml" ./.github/workflows/markdownlint.yml
+	cp -f "$HOME/Desktop/pull_request_template.md" ./.github/pull_request_template.md
 }
 
-commit_msg="ci: add \`biome\` check, tweak \`markdownlint\` check"
+commit_msg="ci: update pull_request_template"
 
 #───────────────────────────────────────────────────────────────────────────────
 #───────────────────────────────────────────────────────────────────────────────
